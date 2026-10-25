@@ -40,3 +40,25 @@ kaggle.json
 # Local editor / OS files
 .DS_Store
 Thumbs.db
+
+# Recreated joint Lean assemblies and experimental work
+/linear_input/lean_check/All.lean
+/linear_input/lean_check/MainResult.lean
+/linear_input/lean_check/work*
+
+# Historical copies are retained in the original source ZIP
+/linear_input/lean_check/before/
+/linear_input/provenance/before*
+
+# Verification outputs are recreated; retain the existing archive audit metadata
+/verification/*
+!/verification/before-unification.json
+/linear_input/lean_results.json
+/linear_input/checks.json
+/linear_input/delivery.json
+/linear_input/render.json
+/linear_input/lean_check/*.log
+/manifest.json
+
+# Rendered root documents
+/*.html

@@ -1,39 +1,57 @@
-# 転送状況
+# 登録状況と残る検証条件
 
 2026-10-25（日本時間）
 
-## 確認した事実
+## 完了した登録
 
-- 初回登録前：GitHub の repository size は 0。コミット取得は `Git Repository is empty`（409）。
-- 初回コミット：`04863df1363f04a0b8195c32b0e826bedfd4c5e0`。
-- 初回コミット後：README.md の内容を GitHub から読み返し、コミット履歴にも初回コミットがあることを確認。
-- 初回以後、この初期整備で追加する対象は README.md、.gitignore、docs/MOBILE_UPLOAD.md、docs/TRANSFER_STATUS.md の4ファイルのみ。
-- 今回は Lean ソース、依存設定、GitHub Actions のワークフローを登録していない。
+初回登録前は size=0、コミット取得は `Git Repository is empty`（409）でした。
+初回コミット `04863df1363f04a0b8195c32b0e826bedfd4c5e0` を作成した後、今回の添付ZIPから現行ソースを登録しました。
 
-## 元ファイルの取得状況
-
-既存の「検証と再実行.md」は読めた。記載された構成・再実行方法は参考情報であり、ソースの実物や今回のビルド記録の代わりにしない。
-
-取得して調べた「私.zip」（2026-10-20、9,897,641 bytes、105エントリ）は別の統合Webアプリであり、今回必要な Lean 設定・MainResult.inc を収録していなかった。今回の転送元には採用していない。
-
-Kaggle 側の約5.2 MB / 585ファイルはユーザー報告のみ。実体・全パス・ハッシュ・最新版との一致は未確認。Kaggle 環境には今回アクセスしていない。
-
-## 未転送・未照合
-
-| 候補 | 状態 |
+| 区分 | 今回の状態 |
 |---|---|
-| lean/lean-toolchain | 原本未取得・未転送 |
-| lean/lakefile.toml | ファイル名は対話で報告。原本未取得・未転送 |
-| lean/lake-manifest.json | 原本未取得・未転送 |
-| lean/Elastica/*.lean と入口モジュール | 原本未取得・未転送 |
-| linear_input/lean_check の既存原稿 | 原本未取得・未転送 |
-| MainResult.inc / GeneralMinimum.inc / SupportComposition.inc / QuarticClassification.inc / CurvatureRigidity.inc | 原本未取得・未転送 |
-| tools/verify.py / tools/verify_main_result.py / linear_input/verify_lean.py | 原本未取得・未転送 |
-| 上記スクリプトが読む補助ソース・監査データ | 原本取得後に依存を調べる |
+| 添付 archive.zip | 5,469,476 bytes、585ファイル、展開後22,654,971 bytes |
+| 登録対象 | 116ファイル、988,501 bytes |
+| 設定 | lean/lean-toolchain、lakefile.toml、lake-manifest.json を原本どおり登録 |
+| Elastica | 24モジュール、Elastica.lean、Audit.lean、説明文を登録 |
+| 線形入力 | 既存36原稿と追補5原稿、READMEを登録 |
+| 検証入口 | tools/verify.py、tools/verify_main_result.py、linear_input/verify_lean.py を含む既存スクリプトを登録 |
+| 本文・出典 | 2つの本文Markdown、現行の出典記録・抜粋を登録 |
+| 内容の照合 | 各段階で全対象をGitHubから取得し、Git blob SHAを原本と比較。116件すべて一致 |
+| 元のmanifestとの照合 | 登録対象116件すべてSHA-256一致 |
+| Python文法 | 登録対象のPythonスクリプトを構文解析。構文エラーなし |
+| Leanビルド・公理監査 | 今回は未実行 |
 
-## 検査の状態
+[添付全ファイルの区分・SHA-256](import/archive_inventory.json)と[7段階の登録コミット・GitHub照合](import/registered_commits.json)が詳細記録です。
+証明原稿・既存検証器・Lean設定の内容と改行は変更していません。
 
-- このリポジトリの Lean ビルド：未実行。
-- このリポジトリの公理監査・証明検査：未実行。
-- 過去の文書にある定理数・合格記述を、このコミットの合格結果として扱わない。
-- ソース取得後は、小さい単位ごとに元のパス・内容と GitHub の実ファイルを照合し、コミットSHAを記録する。
+## 登録から外したもの
+
+469ファイルは意図して登録していません。元ZIPは変更していません。
+
+- 過去版の複製、before ディレクトリ、過去provenance保存版。
+- 検証器が生成する All.lean / MainResult.lean、実験用workファイル。
+- 過去の検証ログ・結果JSON、スクリーンショット、描画済みHTML等。
+- Lean検査に不要なvendor描画依存物・Web UI。
+- 元のREADMEと配布物全体のmanifest。現在のREADMEはこのリポジトリの状態を示すため別途更新。
+
+原本全585ファイルのパス・サイズ・ハッシュ・各除外理由は inventory に残しています。
+履歴や生成物を除外したことを、証明ソースの欠落や転送失敗とは扱いません。
+
+## 実行前に必要な確認
+
+この実行環境には lean / lake / elan がなく、今回のLeanコンパイルや公理監査はまだ行っていません。
+文書や元ZIPの過去記録は、新しいGitHubコミットのビルド成功の証拠ではありません。
+
+元の統合検証入口 tools/verify.py を保持しています。ただし、この入口は保存版のバイト照合も行い、
+verification/before-unification.json に指定された
+`archive/before_unification_2026-10-20.zip` を必要とします。この保存ZIPは添付にありません。
+期待されるSHA-256は `56869910154e94de5f98705d77e14f87ed64c88bfbe74c01e32a0c0b0b14d287` です。
+記録だけから保存ZIPを捏造したり、照合を無言で省略したりしません。
+
+全体の配送・描画検査には追加の描画依存物・過去資材も必要です。Leanの核検査と、過去版保存・配送監査は別の結果として記録します。
+GitHub Actionsのワークフローは今回追加していません。
+
+## 今後の追加
+
+[スマホ用手順](MOBILE_UPLOAD.md)から変更したファイルだけを追加できます。
+この対話への小さなZIP添付からGitHub連携で追加する経路も、今回の7段階の登録で動作確認できました。

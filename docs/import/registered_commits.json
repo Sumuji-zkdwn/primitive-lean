@@ -1,0 +1,646 @@
+{
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "archive_sha256": "970f0ab260bcf2543cf1fbd981e829cdb7a3510793b047543c5afa026d0ba7cd",
+  "proof_source_head": "79425cc1f3b55babb4bb1ed5887e5daa67da6c34",
+  "verification_method": "Fetch every selected file from its committed GitHub ref and compare Git blob SHA with the original bytes, including original line endings.",
+  "verified_imported_files": 116,
+  "lean_build_status": "not_run",
+  "batches": [
+    {
+      "index": 0,
+      "message": "Import pinned Lean configuration",
+      "commit_sha": "ba60d194768c8dcd99113936e95dff778fc43b40",
+      "tree_sha": "7215dcf264b5fcae1983de0713ffd24be5480083",
+      "verified_files": [
+        {
+          "path": "AGENTS.md",
+          "blob_sha": "a768f6853bc7ae928159a3adb9784af59192ce0c",
+          "verified": true
+        },
+        {
+          "path": "lean/lake-manifest.json",
+          "blob_sha": "f7d41700dee9708c852e370541840dbdb1851545",
+          "verified": true
+        },
+        {
+          "path": "lean/lakefile.toml",
+          "blob_sha": "a3ea89a2d27fd70247a0f582b8c3329268f4259f",
+          "verified": true
+        },
+        {
+          "path": "lean/lean-toolchain",
+          "blob_sha": "6c7e31fffe3e03be3e0d7021acd9cd848e44db26",
+          "verified": true
+        },
+        {
+          "path": "requirements.txt",
+          "blob_sha": "d3b6b3afa3db381d96fb0ebbcf3cf7ceb6295f1f",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "message": "Import unchanged Elastica library sources",
+      "commit_sha": "eaa535b70add828c32fc93f8c2595171242e031b",
+      "tree_sha": "75a0356f1a363f0515f7e17385b05c92a17a6869",
+      "verified_files": [
+        {
+          "path": "lean/Audit.lean",
+          "blob_sha": "c06fe11d06a8491f316d9eae972104e7f109fa75",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica.lean",
+          "blob_sha": "f1983c37795c2f93b19d6461d5f913a8f973b7d4",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/AffineEquivalence.lean",
+          "blob_sha": "c62deba1b0752f5f3c3f9e5c8c4262f5a386a3a8",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/CombinedConsequences.lean",
+          "blob_sha": "9722c6bd4b539b01544f883b9f079886a364f6da",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Composition.lean",
+          "blob_sha": "1fed69324880b153f9276252653140587227eabf",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ConstrainedSecondVariation.lean",
+          "blob_sha": "b4d52cf15ad1b3013bc2d6471d52a10ce2abcbe7",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ConstraintRegularity.lean",
+          "blob_sha": "2d6ee539f0bdd775a678eed8773dc615c227a890",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Derivation.lean",
+          "blob_sha": "5d49acf42ddb2bec46bd1e573a82a1cebe433c0b",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Equations.lean",
+          "blob_sha": "ad94ffd23eda631fb7f91c220e2a44bb28de7da7",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ExactVariation.lean",
+          "blob_sha": "65ca77e840f790d01c37b965af071212c8b75442",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Examples.lean",
+          "blob_sha": "fddd89658886f49e73f4ca54babc974ece190362",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ExponentialWeight.lean",
+          "blob_sha": "e2fff09c829fee583b495b93fa8d2e2be48f8490",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Geometry.lean",
+          "blob_sha": "a16ef67ad6ad699a738fcded18b99858d39b013c",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/LocalMinimum.lean",
+          "blob_sha": "71fa52eabf772955f02f934f42b17871fcfd876b",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/MinimumConditions.lean",
+          "blob_sha": "56fd1f15077fa135c54c873846c9ee5d2a5057bd",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/PowerLogResponse.lean",
+          "blob_sha": "e63f34a8717b3d8f13990454581b6a1d0b84e7f1",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Reconstruction.lean",
+          "blob_sha": "0ee722ffa7f042bb11ce62c84d07db9906dbd114",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ReplacementConsequences.lean",
+          "blob_sha": "b707a59756d7099786e9f5852587a4f8248968ed",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ScalarMinimum.lean",
+          "blob_sha": "469233688893c11dc0d1e6c3f411667a9a46a574",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Scaling.lean",
+          "blob_sha": "62e15e948978f944cdcd2e7afb257260e92e000e",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/ScalingMinima.lean",
+          "blob_sha": "c068ffd685345e5a8b1055ce34a4f8e62fab00de",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/SecondVariation.lean",
+          "blob_sha": "35c47942ea382c3441b048c3ff0f4f0b00f3584b",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Stationary.lean",
+          "blob_sha": "3e0c460a308e25e5fb9a0b108051beceb02fb4cc",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/StraightConstraint.lean",
+          "blob_sha": "18b11a59c7586c48b8bf42d364af65222d1f19a5",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/Variation.lean",
+          "blob_sha": "f4e5faaad829a008dfeb891d2256e6b35f1f77aa",
+          "verified": true
+        },
+        {
+          "path": "lean/Elastica/WeightResponse.lean",
+          "blob_sha": "118a269a81f9315fa67f739d85288b7fb0cc4485",
+          "verified": true
+        },
+        {
+          "path": "lean/README.md",
+          "blob_sha": "f634e877cae8f8146a48a4a596d0bd340edbc4b3",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "message": "Import linear-input proof sources (1 of 2)",
+      "commit_sha": "acda8a1331d507e62ce33ae9b056c5d21fa1fe65",
+      "tree_sha": "351bf542f77a54cab8c2ef01beb44a527dda8137",
+      "verified_files": [
+        {
+          "path": "linear_input/lean_check/AreaExactVariation.inc",
+          "blob_sha": "3abec39ad60296cd2c02ed20b5bc03fc7e1d35cd",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/AreaFamily.inc",
+          "blob_sha": "2c276f7a4235d7c2bd0d960002cf16ed3718d881",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/AreaMinimum.inc",
+          "blob_sha": "e4f841c19ecb0847de7790a4578f55dd992c40a7",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/AreaParameters.inc",
+          "blob_sha": "2ea54877b8d1fd29f632e595be0e0cfee462d2fd",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/AreaRegularity.inc",
+          "blob_sha": "b16f1b9c36272df51098d0d11727b264d59a6536",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/AreaVariation.inc",
+          "blob_sha": "b08221f2b6f3d18f3eb0283e88f0f4b4164cbbef",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Calculus.lean",
+          "blob_sha": "762f76ac2e941f8b12528559a3f474270c6a7fc7",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Coercivity.inc",
+          "blob_sha": "729ca284576761cb741d6b5f6af704038fd22da0",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/CompactLocalExistence.inc",
+          "blob_sha": "44fb90f4d34b0c7789b97ba27bd416a64a306a7d",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Consequences.inc",
+          "blob_sha": "21a4449ee8e7486feb3c15bda09afc6bd73149bc",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Constraints.inc",
+          "blob_sha": "0c4b6cd321436039928af0f2a3b0015ab0be7751",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/CoupledConsequences.inc",
+          "blob_sha": "02503ec20e343bc0a4957fb402a6c1b3e19eaba0",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/CoupledTrajectory.inc",
+          "blob_sha": "2f8ff0846d54ff3884c6230d84fd3662c99e841e",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/CurvatureBridge.inc",
+          "blob_sha": "dce67a4ec483f332d1a8b06b1e7fab707fc4f133",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/CurvatureRigidity.inc",
+          "blob_sha": "4dffd2804ceab45aaabbf0db96c9a026ed33789e",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Design.lean",
+          "blob_sha": "970ad9794b7061d0436a9c71a84b68344175f18a",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Dissipation.lean",
+          "blob_sha": "994a6e6f292ee603a5dc39d9d1e89923f131bfb0",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Feedback.inc",
+          "blob_sha": "704c7cf2aea3b28b973972ea3f9cb3dc7aa02637",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/FiniteBand.inc",
+          "blob_sha": "a84e0306848e2eeeb76f34fa9fcb2bd3b798ad35",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/FiniteInternalUpdate.inc",
+          "blob_sha": "76ab28bbc9a940c1e0179b1b17bbf97d27cbbbec",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/ForwardUniqueness.inc",
+          "blob_sha": "e9cceb3641d82933f90041d7574e4d05ab05dddb",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "message": "Import linear-input proof sources (2 of 2)",
+      "commit_sha": "486f3af2052c07f40e936ecc08d24c7d408dfce7",
+      "tree_sha": "197f5aa957b136db063f9589efb08b1829258fc9",
+      "verified_files": [
+        {
+          "path": "linear_input/lean_check/GeneralMinimum.inc",
+          "blob_sha": "b29d499d8953672d433d856ec156a5423b3fd87c",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/GlobalConsequences.inc",
+          "blob_sha": "c35dc033707e60773f2d317d17efba544e668d0f",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/GlobalContinuation.inc",
+          "blob_sha": "365741261a5d2876796ff879fae7ad61e3b7f01c",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/GlobalTrajectory.inc",
+          "blob_sha": "7a0e3f286baf3a78a3b8d76f1cc7174acadc9a68",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Gradient.inc",
+          "blob_sha": "01f13a2a33efed1cac62cae0518938b7f7f4bd00",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/GradientBound.inc",
+          "blob_sha": "9676e1ef2ea1f44ceef16f48704ccfeddd6b9f21",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/InternalUpdate.inc",
+          "blob_sha": "12a8f107b348dd6380f385779137a37969a9a708",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Invariance.inc",
+          "blob_sha": "9d22ace2768b109d24eeab7b29991c91fd3473de",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/LevelConvergence.inc",
+          "blob_sha": "8800169a044d219f65dbc66b332ff9fb3bab7c4a",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/LevelGeometry.inc",
+          "blob_sha": "e2f5c3c48096eeef6304412dbe702cd27a5c5912",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/MainResult.inc",
+          "blob_sha": "e71a463a221fc47f78a0c472550ad89c01eff74f",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/Observation.lean",
+          "blob_sha": "de1884be6ababdbd51ed82b7ebc4f6acfd504c0b",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/PressureCurvature.inc",
+          "blob_sha": "ad08a82c0261704f42fb675c447d06e6bd2545f1",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/PressureStationary.inc",
+          "blob_sha": "8b3a6f92db0761150a0724e6630e741f6b0da2a2",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/QuarticClassification.inc",
+          "blob_sha": "276cd3ea958eb80d60cdb0803039f1495efc5fbb",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/README.md",
+          "blob_sha": "901eeba6e9a02c1d3eb4d969a341ab0bc09ff05d",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/RegularBand.inc",
+          "blob_sha": "a1b7d050f623764ddde8e8dee7716efb234d16ad",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/StrictEnergy.inc",
+          "blob_sha": "cf494837e9493e474b7af9107feb97d4a079696f",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/SupportComposition.inc",
+          "blob_sha": "31e5a38aa87c255cf8dbea5a08e9806e59781de4",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/TrajectoryExistence.inc",
+          "blob_sha": "87be6814bc3776d5fb58b5e3331e6c3c02be36a3",
+          "verified": true
+        },
+        {
+          "path": "linear_input/lean_check/VariationalBridge.inc",
+          "blob_sha": "18799ee716016397796a116a7735f97c973d3e52",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "message": "Import existing verification and numerical tools",
+      "commit_sha": "30b9b74c5cd52036a79a5e76e897b2c398be0a36",
+      "tree_sha": "d9bbaf42621980d2b27a57497fc0755608b5c3ba",
+      "verified_files": [
+        {
+          "path": "linear_input/capture_sources.py",
+          "blob_sha": "671f808aa00ef4c3631db4e56bf4e2b7bacf80f9",
+          "verified": true
+        },
+        {
+          "path": "linear_input/check_delivery.py",
+          "blob_sha": "b34c341a15d39d913630449e25c1a7cc6fa62f7f",
+          "verified": true
+        },
+        {
+          "path": "linear_input/linear_input.py",
+          "blob_sha": "f5d0420f5e9744b03bab5d6f02563b401a5145d0",
+          "verified": true
+        },
+        {
+          "path": "linear_input/pressure_sources.json",
+          "blob_sha": "0047baa4728c24fb0e5690d3421a3c3eb672ceea",
+          "verified": true
+        },
+        {
+          "path": "linear_input/render.py",
+          "blob_sha": "9a32d0c36230608b93132acd99a323fc217cc069",
+          "verified": true
+        },
+        {
+          "path": "linear_input/sources.json",
+          "blob_sha": "e3336641fb54dcd21fcd17be762d8585fab0980a",
+          "verified": true
+        },
+        {
+          "path": "linear_input/verify.py",
+          "blob_sha": "f8ecec687a6aac41b0d748d5767430d38ead58df",
+          "verified": true
+        },
+        {
+          "path": "linear_input/verify_lean.py",
+          "blob_sha": "7523d6b2bb6e36f77e968ca23be56d5f48bce8a5",
+          "verified": true
+        },
+        {
+          "path": "linear_input/線形入力の使い方.md",
+          "blob_sha": "0b94d6f2f780aa1fd834978f54c3015e03353977",
+          "verified": true
+        },
+        {
+          "path": "tools/capture_additions.py",
+          "blob_sha": "d9fa98758ca6de0d0ac864edcdd354bd5da5dca4",
+          "verified": true
+        },
+        {
+          "path": "tools/capture_sources.py",
+          "blob_sha": "8976b2a10fcdfca88e84d85bf4e74e3cca2b6198",
+          "verified": true
+        },
+        {
+          "path": "tools/check_combinations.py",
+          "blob_sha": "e27530aec1e510d19f59bfecc77643dd02049123",
+          "verified": true
+        },
+        {
+          "path": "tools/check_delivery.py",
+          "blob_sha": "408ca23b468ae8b4ae89268a2b23eacf1f31079a",
+          "verified": true
+        },
+        {
+          "path": "tools/check_examples.py",
+          "blob_sha": "51bc428b90b419ecd64a2d08f7fe3b5170155b50",
+          "verified": true
+        },
+        {
+          "path": "tools/check_scale_response.py",
+          "blob_sha": "8ac3cb6da683cd1e6d10d9c170aa4226b7641874",
+          "verified": true
+        },
+        {
+          "path": "tools/render.py",
+          "blob_sha": "d159aadcc9d979d84155d673cd6448400cdb9e09",
+          "verified": true
+        },
+        {
+          "path": "tools/render_math.cjs",
+          "blob_sha": "1a7793c8b55b9738c25cacc12b126aa64b03c463",
+          "verified": true
+        },
+        {
+          "path": "tools/verify.py",
+          "blob_sha": "c8a08eb5b74686048ce8d0a676e2116e1b9528d7",
+          "verified": true
+        },
+        {
+          "path": "tools/verify_main_result.py",
+          "blob_sha": "313cafec246e35dd478a056c0f0f290b5c4bddd4",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "message": "Import canonical mathematical manuscript",
+      "commit_sha": "82bd3b3293fe0c28befbe577617fe04b3d6e0e45",
+      "tree_sha": "e06585b4312f76296a2d484c795d6c7105fe204f",
+      "verified_files": [
+        {
+          "path": "原始の形式化.md",
+          "blob_sha": "2acd2cf16687f065d39173f79856585b797a5b0d",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "message": "Import verification guide and source provenance",
+      "commit_sha": "79425cc1f3b55babb4bb1ed5887e5daa67da6c34",
+      "tree_sha": "54e4e44a8e76742299a8967abe70f882740c7921",
+      "verified_files": [
+        {
+          "path": "linear_input/provenance/affine_equivalence_excerpt.txt",
+          "blob_sha": "70483736254c0d50fee277bedc71fcf044ce45db",
+          "verified": true
+        },
+        {
+          "path": "linear_input/provenance/energy_findings_excerpt.txt",
+          "blob_sha": "9d85e21c1e308603ceb7630169c70b686e815983",
+          "verified": true
+        },
+        {
+          "path": "linear_input/provenance/power_log_excerpt.txt",
+          "blob_sha": "fa612a1d4b76c02c4fc4b5f0578afd3507a3b3dd",
+          "verified": true
+        },
+        {
+          "path": "linear_input/provenance/primitive_operations_excerpt.txt",
+          "blob_sha": "d63ae3748711cbd512831587e0d7b032e395520d",
+          "verified": true
+        },
+        {
+          "path": "sources/general_minimum_2026-10-21.json",
+          "blob_sha": "2569ab715bc607dac5af2a0f4723e7e618f2b32c",
+          "verified": true
+        },
+        {
+          "path": "sources/provenance.json",
+          "blob_sha": "df95c8e97ef7df3b2fd5aefacbb90df7bcdeded9",
+          "verified": true
+        },
+        {
+          "path": "sources/research_01.txt",
+          "blob_sha": "beb592babfcd10c7e05ff11bb57c31b663a92b36",
+          "verified": true
+        },
+        {
+          "path": "sources/research_02.txt",
+          "blob_sha": "79fb4171cf0fa93f644f6764a856c81ad77edcce",
+          "verified": true
+        },
+        {
+          "path": "sources/research_03.txt",
+          "blob_sha": "dc7300864ec187114dd29d5319edbca85d4ffc06",
+          "verified": true
+        },
+        {
+          "path": "sources/research_04.txt",
+          "blob_sha": "3148796bca7b6b191e58034ba6fd3658be7b11b4",
+          "verified": true
+        },
+        {
+          "path": "sources/research_04_2026-10-21.txt",
+          "blob_sha": "c3e2fc25cb088bc33bf292b4af6d77f11c6dd5f3",
+          "verified": true
+        },
+        {
+          "path": "sources/research_05.txt",
+          "blob_sha": "9e2c9eb4b8f4d6de5a9e9d7b4240f643d11606df",
+          "verified": true
+        },
+        {
+          "path": "sources/research_06.txt",
+          "blob_sha": "e3e7cea0315219c51fcea75f5dc5e8efd1b84b77",
+          "verified": true
+        },
+        {
+          "path": "sources/research_07.txt",
+          "blob_sha": "f855360e5ee7b29a39d0c66ce8a0866b6da7a6ae",
+          "verified": true
+        },
+        {
+          "path": "sources/research_08.txt",
+          "blob_sha": "69d64abf45bd2569461ee0fe49d402903bdd098b",
+          "verified": true
+        },
+        {
+          "path": "sources/research_09.txt",
+          "blob_sha": "d8ccfc0c4b7643235728e703a4dca3b0d84c754c",
+          "verified": true
+        },
+        {
+          "path": "sources/research_10.txt",
+          "blob_sha": "cdfadee73e0facea74c2c4c38b6d7aff945d2686",
+          "verified": true
+        },
+        {
+          "path": "sources/research_11.txt",
+          "blob_sha": "32533d8e8a2ec46e03bf3a2ef1589cda6c12c091",
+          "verified": true
+        },
+        {
+          "path": "sources/theorem_composition_2026-10-21.json",
+          "blob_sha": "1df07c2f17883b1eb2ad566b9eba2bef58a9c984",
+          "verified": true
+        },
+        {
+          "path": "sources/採用方針.txt",
+          "blob_sha": "5a121c200adee45676e36da2c5ae44116059ef64",
+          "verified": true
+        },
+        {
+          "path": "verification/before-unification.json",
+          "blob_sha": "fb6b50a8cf5425d8cab80d7fe63bb0c55f20c8cd",
+          "verified": true
+        },
+        {
+          "path": "検証と再実行.md",
+          "blob_sha": "21846019ad78b553aea375f7ee3401c9b2dc010a",
+          "verified": true
+        }
+      ]
+    }
+  ]
+}
