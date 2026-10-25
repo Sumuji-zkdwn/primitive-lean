@@ -1,0 +1,42 @@
+# Lean dependency caches and compiled outputs
+.lake/
+*.olean
+*.ilean
+*.olean.*
+*.ir
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Python / Node caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+.pytest_cache/
+
+# Archives and transfer staging: keep outside Git history
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+upload-batches/
+
+# Local credentials
+.env
+.env.*
+!.env.example
+.kaggle/
+kaggle.json
+.netrc
+*.pem
+*.key
+
+# Local editor / OS files
+.DS_Store
+Thumbs.db
