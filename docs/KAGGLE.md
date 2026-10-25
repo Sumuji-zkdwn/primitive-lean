@@ -1,5 +1,13 @@
 # Kaggle Notebookとの対応
 
+## 環境準備を1セルで実行する版
+
+`STATE is not defined` が出る場合は、初期化セルが現在のカーネルで実行されていません。[環境準備・1セル版](../notebooks/primitive_lean_setup_one_cell.ipynb)なら、初期化、原本照合、環境準備を一つのセルで実行できます。同じ原本ZIPをInputに用意し、InternetをOnにして、唯一のコードセルの▶を押してください。初期設定は `RUN_SETUP=True`、`RUN_PROOFS=False` です。
+
+この版は、空のPython名前空間からの初期化・117ファイルの照合・結果保存をローカルで確認しました（ネットワーク環境準備を無効化した確認）。Kaggleでの環境準備成功やLean検査成功を確認したものではありません。
+
+再生成は `python scripts/build_kaggle_notebook.py --source-ref 2e058f2d76e7c7d1fb0f811bcb26a990c47b10d9 --setup-one-cell` です。
+
 [primitive_lean_kaggle.ipynb](../notebooks/primitive_lean_kaggle.ipynb)をKaggleのImport Notebookで読み込んでください。CPUで使うNotebookです。GPUは不要です。
 
 ## 最初の実行
