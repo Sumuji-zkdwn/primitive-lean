@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-ref", required=True, help="GitHub commit containing both proof-only adapter files")
+    parser.add_argument("--setup-one-cell", action="store_true", help="Combine initialization and setup into one executable cell")
     args = parser.parse_args()
     if len(args.source_ref) != 40 or any(c not in "0123456789abcdef" for c in args.source_ref):
         parser.error("source-ref must be a full commit SHA")
@@ -123,11 +124,29 @@ else:
 print(json.dumps({name: STATE[name]["status"] for name in ("source", "setup", "proofs")}, ensure_ascii=False, indent=2))
 show_output(output)
 """)
+    if args.setup_one_cell:
+        combined = "\n\n".join("".join(c["source"]) for c in cells if c["cell_type"] == "code")
+        combined = combined.replace('RUN_SETUP = False', 'RUN_SETUP = True', 1)
+        cells = []
+        cell("markdown", """# primitive-lean：環境準備・1セル版
+
+この版は初期化・原本の照合・Lean環境の準備を**1つのコードセル**で順番に実行します。前のセルや前のセッションの変数は不要です。
+
+1. 同じ `archive.zip` をInputに追加するか、原本フォルダのあるKaggle環境で使います。
+2. Notebookの **InternetをOn** にします。
+3. 下のコードセルの **▶** を押します。設定変更は不要です。
+
+この版の初期設定は `RUN_SETUP=True`、`RUN_PROOFS=False` です。今回の目標は `source: passed`、`setup: passed`、`proofs: not_run`。Lean証明検査の合格を意味しません。
+
+原本が見つからない場合だけ、コード冒頭の `SOURCE_PATH` を指定してください。初回のツール・依存取得には時間がかかります。実行結果ZIPへのリンクは末尾または失敗時に表示します。
+""")
+        cell("code", combined)
     notebook = {"nbformat": 4, "nbformat_minor": 5, "metadata": {
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3.11"},
         "primitive_lean": snapshot}, "cells": cells}
-    path = ROOT / "notebooks/primitive_lean_kaggle.ipynb"
+    filename = "primitive_lean_setup_one_cell.ipynb" if args.setup_one_cell else "primitive_lean_kaggle.ipynb"
+    path = ROOT / "notebooks" / filename
     path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + "\n", "utf-8")
     print(path)
 
