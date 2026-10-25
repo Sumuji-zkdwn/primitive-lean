@@ -54,3 +54,8 @@ GitHub 公式のブラウザ追加上限は1回100ファイル、1ファイル25
 
 - [新しいファイルの作成](https://docs.github.com/en/repositories/working-with-files/managing-files/creating-new-files)
 - [ファイルのアップロード](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)
+
+
+## Kaggleで実行する
+
+[Kaggle Notebook](../notebooks/primitive_lean_kaggle.ipynb)と[段階別の実行手順](KAGGLE.md)を追加しました。原本をInputに用意すればGitHubトークンなしで対応確認を始められます。
