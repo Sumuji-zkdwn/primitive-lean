@@ -1,7 +1,8 @@
 """Verify retained proof groups and additive compositions through one entry point.
 
-Usage: python -X utf8 tools/verify.py [--rebuild] [--lean-only]
+Usage: python -X utf8 tools/verify.py [--rebuild] [--lean-only | --proof-only]
 --rebuild removes only lean/.lake/build; pinned dependency caches are retained.
+--proof-only checks fresh proofs without requiring the separate historical archive audit.
 --lean-only runs the unchanged joint checker, then audits all registered
 supplements together with all original declarations.
 """
@@ -165,9 +166,16 @@ def refresh_manifest():
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--rebuild", action="store_true")
-    parser.add_argument("--lean-only", action="store_true")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--lean-only", action="store_true")
+    modes.add_argument("--proof-only", action="store_true")
     args = parser.parse_args(argv)
     OUT.mkdir(exist_ok=True)
+    if args.proof_only:
+        from proof_only import run_proof_only
+        proof = run_proof_only(ROOT, command, args.rebuild)
+        print(json.dumps(proof, ensure_ascii=False, indent=2))
+        return 0 if proof["passed"] else 1
     lean = verify_lean(args.rebuild)
     summary = {k: lean[k] for k in ("passed", "proof_layout", "version", "clean_project_build",
         "theorem_count", "declaration_count", "proof_groups", "unexpected", "warnings", "forbidden_tokens")}
