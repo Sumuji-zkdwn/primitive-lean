@@ -1,0 +1,53 @@
+Source: C:\Users\Dalcia\Documents\Codex\2026-10-20\primitive\lean\Elastica\AffineEquivalence.lean
+SHA256: 5c1b4b92292a98200c5fda9e010e3b9083990523011f70c2de93977f5bad8d6b
+
+--- original lines 1-49 ---
+1: import Elastica.Examples
+2: import Elastica.PowerLogResponse
+3: import Elastica.MinimumConditions
+4: 
+5: /-!
+6: # Affine density changes and the exponent-one classical problem
+7: 
+8: The existing boundary-energy identity transports the actual C¹ constrained
+9: local-minimum predicate and actual first-variation stationarity.  Applying these
+10: transports to exponent one connects the optional power/log response to the
+11: classical elastica equations.  Fixed real-valued endpoint angles are essential.
+12: No existence, sign of curvature, or sufficiency claim is made.
+13: -/
+14: 
+15: noncomputable section
+16: open Real Set MeasureTheory
+17: namespace Elastica
+18: 
+19: /-- Adding an affine function of signed curvature preserves the same C¹
+20: constrained local minima, including the same neighborhood radius. -/
+21: theorem locallyMinimizing_affine_density_iff {ε θ : ℝ → ℝ} {ℓ : ℝ}
+22:     (hε : Continuous ε) (hθ : ContDiff ℝ 1 θ) (a b : ℝ) :
+23:     LocallyMinimizing (fun q => ε q + a * q + b) θ ℓ ↔
+24:       LocallyMinimizing ε θ ℓ := by
+25:   have he (ψ : ℝ → ℝ) (hψ : ContDiff ℝ 1 ψ)
+26:       (h0 : ψ 0 = θ 0) (hend : ψ ℓ = θ ℓ) :
+27:       energy (fun q => ε q + a * q + b) θ ℓ ≤
+28:           energy (fun q => ε q + a * q + b) ψ ℓ ↔
+29:         energy ε θ ℓ ≤ energy ε ψ ℓ := by
+30:     rw [energy_affine_density hε hθ, energy_affine_density hε hψ, h0, hend]
+31:     exact (add_le_add_iff_right _).trans (add_le_add_iff_right _)
+32:   constructor <;> rintro ⟨r, hr, hm⟩ <;> refine ⟨r, hr, ?_⟩ <;>
+33:     intro ψ hψ h0 hend hx hy hclose
+34:   · exact (he ψ hψ h0 hend).mp (hm ψ hψ h0 hend hx hy hclose)
+35:   · exact (he ψ hψ h0 hend).mpr (hm ψ hψ h0 hend hx hy hclose)
+36: 
+37: /-- Along every fixed-angle variation the actual energy functions differ by a
+38: constant.  Thus affine density changes preserve actual derivative stationarity;
+39: no first-variation formula is introduced as a hypothesis. -/
+40: theorem stationary_affine_density_iff {ε θ : ℝ → ℝ} {ℓ : ℝ}
+41:     (hε : Continuous ε) (hθ : ContDiff ℝ 1 θ) (a b : ℝ) :
+42:     Stationary (fun q => ε q + a * q + b) θ ℓ ↔ Stationary ε θ ℓ := by
+43:   have he (η : variationSpace ℓ) :
+44:       (fun t => energy (fun q => ε q + a * q + b) (angleVariation θ η.val t) ℓ) =
+45:         (fun t => energy ε (angleVariation θ η.val t) ℓ +
+46:           (a * (θ ℓ - θ 0) + b * ℓ)) := by
+47:     funext t
+48:     have hvar : ContDiff ℝ 1 (angleVariation θ η.val t) :=
+49:       hθ.add (contDiff_const.mul η.property.1)

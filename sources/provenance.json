@@ -1,0 +1,206 @@
+{
+  "research": [
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\primitive_operations_2026-10-20\\原始の操作と忘却の導出.md",
+      "source_sha256": "7f42fc5d5f4ac664cb84c54ba67e7aab635b7c0611856fbe769644444e09d9b1",
+      "line_ranges": [
+        [
+          1,
+          22
+        ],
+        [
+          133,
+          200
+        ],
+        [
+          420,
+          432
+        ]
+      ],
+      "excerpt": "sources/research_01.txt",
+      "role": "命名と助手による模型、操作と観測の参照。曲線エネルギーの定義には採用しない。",
+      "excerpt_sha256": "f92ddad8f38b49a5f876588610f572c82fa670ec5b1194d667dc18e8b84f97a4"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\sources\\ブラウザ回収メモ.md",
+      "source_sha256": "7c4e40903ebd4199b0e3a130e4205ecfcc18888c4dc24129030c7c8f23d3d06f",
+      "line_ranges": [
+        [
+          5,
+          38
+        ]
+      ],
+      "excerpt": "sources/research_02.txt",
+      "role": "古典エラスティカ記法への要求と、曲線・密度・汎関数の既存表記。",
+      "excerpt_sha256": "0a4ffc9a7ef5ba5492564c42ab712aa834a1709f75f3abd9b87d1420ea4b9bc8"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\classical_combo_2026-10-19\\古典的な事実による構成.md",
+      "source_sha256": "f8790330932f900c4988740ec1c423cb0e1ee9724a2bb1cbd1bb077be654d1d3",
+      "line_ranges": [
+        [
+          253,
+          307
+        ]
+      ],
+      "excerpt": "sources/research_03.txt",
+      "role": "二次密度の条件付き簡約、幾何的拘束、静的消去と運動の違い。",
+      "excerpt_sha256": "3d4c154f3a49d0de88b12720771cc6734ce0a696fa417f09cd6f3fb29feeae49"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\抽象エラスティカ.md",
+      "source_sha256": "fdcf6d47d7154100ac41321a8594b47e367eb94da99854e70c311a285181076f",
+      "line_ranges": [
+        [
+          71,
+          88
+        ]
+      ],
+      "excerpt": "sources/research_04_2026-10-21.txt",
+      "role": "具体的四次密度は追加模型であり、エネルギーだけで更新法則は決まらない。",
+      "excerpt_sha256": "8ea8b36c40435f0a93990101f59e4edfcb95c18a1d40f43f82411757f1eecf3d",
+      "previous_capture": {
+        "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\抽象エラスティカ.md",
+        "source_sha256": "dff24e06282d047c299c3c994edf9f575992f16547c52aa76f0dff8c3d4ff461",
+        "line_ranges": [
+          [
+            69,
+            86
+          ]
+        ],
+        "excerpt": "sources/research_04.txt",
+        "role": "具体的四次密度は追加模型であり、エネルギーだけで更新法則は決まらない。",
+        "excerpt_sha256": "1ac7d6eb10a1d51cebaf485f5e8d668828c0851703948c8c83174824d402091b"
+      },
+      "source_reconciliation": "verification/general-minimum-source-reconciliation.json"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\combo_forgetting_2026-10-19\\一般コンボと忘却の導出.md",
+      "source_sha256": "41d9f9b35b7a45f8e7a94c85b0a56be1faee8cfbda54577c90381960d65b9156",
+      "line_ranges": [
+        [
+          270,
+          282
+        ],
+        [
+          292,
+          323
+        ]
+      ],
+      "excerpt": "sources/research_05.txt",
+      "excerpt_sha256": "a4b1a5971fe06e72d481460bc8c08d56b40a5a16d3e7d11c4f6e1f133e97502f",
+      "role": "採用: 曲率からの再構成、接合に必要な位置と接線、共通継ぎ口。現在の滑らかな曲線と積分の定義で再証明する。一般の忘却・内部変数の消去は採用しない。"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\議論の整理.md",
+      "source_sha256": "b587ef0b817f1dd44eff80df31cfbe088c2325028d48a12940324d840ddac7ba",
+      "line_ranges": [
+        [
+          199,
+          231
+        ]
+      ],
+      "excerpt": "sources/research_06.txt",
+      "excerpt_sha256": "2e43ab064c2f21cd560d0f9d1268324f7148974caf6b86a79bd2ee538cbcae02",
+      "role": "第9節の積分加法性と第17節の指数重みへ接続。指数重みはβを選んだ表示、経路の和・Bellman最適化は別の構成。"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\hysteresis_interpretations_2026-10-19\\FORMALIZATION.txt",
+      "source_sha256": "f86b2f8f18a6e12bcadc1f42b42eceff2590433c92c48a846c7d6f70dc2aee54",
+      "line_ranges": [
+        [
+          144,
+          170
+        ]
+      ],
+      "excerpt": "sources/research_07.txt",
+      "excerpt_sha256": "0e4c47e39a2a685ac45aacf2f5043860007972ef8b694da1dc41fc9d62d36d01",
+      "role": "採用: 二階微分と極値・履歴を区別する問い。一般の曲線汎関数の第二変分は今回の新規導出。四次密度、内部変数、Galois群、枝選択は採用しない。"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\variable_pairs_2026-10-20\\二変数の選び方の比較.md",
+      "source_sha256": "abab1cba6feb64ece63b21b987c58f9a92ca18b618c5ed7faf905a394f543a91",
+      "line_ranges": [
+        [
+          1,
+          27
+        ]
+      ],
+      "excerpt": "sources/research_08.txt",
+      "excerpt_sha256": "eb69ab3fdef48fda428429fe58ee8431a83535f0491152ca9b14c14adb9b5234",
+      "role": "採用境界の確認: 特定の二変数多項式と係数の選択を前提とするため、現在の一般密度からの帰結には含めない。"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\power_log_bridge_2026-10-20\\べき対数とEの簡約.md",
+      "source_sha256": "41698d5912ffe177c72b04fc9cf3b3510e5ca8e8956658153749ad813c78a81b",
+      "line_ranges": [
+        [
+          1,
+          47
+        ],
+        [
+          49,
+          99
+        ],
+        [
+          152,
+          205
+        ]
+      ],
+      "excerpt": "sources/research_09.txt",
+      "excerpt_sha256": "468531a01f71542d37e73975398ebca815662bb12df79d4d03331a565ecb2a4e",
+      "role": "第16–19節の接続: 正規化べき・対数、指数重み、固定入力を保つ座標変換。一般の相似変換則は現在の曲線の定義から新規導出。曲率応答は条件付きの密度例。"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\artifacts\\continuous_field_energy_lab_v2_7\\MODEL.md",
+      "line_ranges": [
+        [
+          93,
+          125
+        ]
+      ],
+      "excerpt": "sources/research_10.txt",
+      "role": "保存模型ではべき・対数応答を入力へ先に採用する。指数.55と下限クリップは模型の選択であり、原始の定義へ継承しない。",
+      "source_sha256": "18a12348ccaa8c2ef852455301b30b24c59bab07090e37b6253ff732c8954cbc",
+      "excerpt_sha256": "c64ce1f75d808d752986873465d20f70deadd4c840e7a5f94a5b8916bede7804"
+    },
+    {
+      "source": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\artifacts\\continuous_field_energy_lab_v2_7\\RESEARCH.md",
+      "line_ranges": [
+        [
+          155,
+          178
+        ]
+      ],
+      "excerpt": "sources/research_11.txt",
+      "role": "採用済みの応答関数と集団応答の導出を区別する参照。原著の機構と現模型の差、一次資料の書誌を保持。",
+      "source_sha256": "41af544ed98b7469915621c4b9304956647909ce1786344e523a44735ffb3d0e",
+      "excerpt_sha256": "9f2215533e6d626998eb88499c4e38193b5cb3d8dc7f0b8aafb6754e0c6375b3"
+    }
+  ],
+  "vendor_sources": [
+    "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\vendor",
+    "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\vendor\\katex"
+  ],
+  "licenses": [
+    "vendor/katex/LICENSE",
+    "vendor/markdown-3.11.1.dist-info/licenses/LICENSE.md"
+  ],
+  "external": [
+    {
+      "title": "Euler Methodus E65, Appendix I",
+      "url": "https://scholarlycommons.pacific.edu/euler-works/65/",
+      "role": "古典的な変分問題の原典参照。今回の一般密度全体を歴史的に帰属させない。"
+    },
+    {
+      "title": "mathlib pinned source",
+      "url": "https://github.com/leanprover-community/mathlib4/tree/5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "role": "解析・線形代数・積分の機械証明ライブラリ。"
+    },
+    {
+      "title": "S. S. Stevens (1961), To Honor Fechner and Repeal His Law",
+      "url": "https://languagelog.ldc.upenn.edu/myl/Science-1961-Stevens-80-6.pdf",
+      "role": "弁別段階と主観量の尺度の区別。曲率応答の提案を心理物理の実証結果と同一視しない。"
+    }
+  ]
+}

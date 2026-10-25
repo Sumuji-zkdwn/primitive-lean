@@ -1,0 +1,28 @@
+原本: C:\Users\Dalcia\Research\05_Notes\recent_discussions_2026-10-19\artifacts\continuous_field_energy_lab_v2_7\RESEARCH.md
+採用用途: 採用済みの応答関数と集団応答の導出を区別する参照。原著の機構と現模型の差、一次資料の書誌を保持。
+
+155: | 項目 | 計画 |
+156: |---|---|
+157: | 最小系 | 空間一様、付加駆動なし、外部から指定する \(u(t)\)。複素場・重みからの入力は停止する。まず \(\dot x=x-\lambda x^3+u(t)\) の縮約模型を使う。 |
+158: | 操作 | \(\lambda=1\)、入力範囲 \([-0.8,0.8]\) の三角波。周期 \(T=100,400,1600\) を比較し、初回の過渡を除いて往復を記録する。 |
+159: | 比較対象 | 各入力で \(F(x)-ux\) の大域最小を選ぶ枝と、初期状態を引き継いで局所緩和する枝。大域最小の同値点では2つの解があることを保存する。 |
+160: | 測定 | 左右の切替入力、閉路積分 \(\oint u\,dx\)、速度依存性。平均の積 \(\bar u\bar x\) は閉路積分の代用にしない。 |
+161: | 理論基準 | 大域最小の切替は \(u=0\)。無雑音の局所緩和で速度をゼロへ近づけると切替は \(u=\pm2/(3\sqrt3)\approx\pm0.384900\) に近づく。有限速度では分岐通過の遅れがありうる。 |
+162: | 数値確認 | 時間刻みを半分にしたときの切替入力・閉路積分の変化を報告する。全場で同じ実験を行う場合は、固定領域上で格子幅を変え、空間一様性と結果の一致を確認する。 |
+163: | 停止条件 | 3周期の比較と時間刻み半減を終え、切替位置と閉路積分の表が一つ得られたところで止める。全モデルのパラメータ探索へ自動的に広げない。 |
+164: | 結果の意味 | 差が出れば、凸共役という忘却操作が、局所緩和の記憶を消すことを、この有限模型で定量化できる。差が収束しなければ、既知現象の発見とせず離散化・測定を再点検する。 |
+165: 
+166: [5]への次の接続は、この検証を終えた後の候補である。対数・べき変換を先に入力へ入れる代わりに、単純な入力から集団応答を測り、どの条件でそれらに近い形が現れるか調べる。その際は興奮性・不応期など原著の機構との違いを明示する。現版の配色や地形状の模様だけから感覚則が導出されたとはいえない。
+167: 
+168: ## 5. 参照資料
+169: 
+170: 1. **Allen, S. M. & Cahn, J. W. (1979).** “A microscopic theory for antiphase boundary motion and its application to antiphase domain coarsening.” *Acta Metallurgica*, 27, 1085–1095. [DOI: 10.1016/0001-6160(79)90196-2](https://doi.org/10.1016/0001-6160(79)90196-2)。[著者のNIST業績一覧](https://www.ctcms.nist.gov/~cahn/publications.html)でも書誌を確認。今回、出版社の抄録・書誌を確認できたが、原著本文の取得には制限があった。
+171: 2. **Aranson, I. S. & Kramer, L. (2002).** “The world of the complex Ginzburg–Landau equation.” *Reviews of Modern Physics*, 74, 99–143. [DOI: 10.1103/RevModPhys.74.99](https://doi.org/10.1103/RevModPhys.74.99)／[著者公開稿・全文](https://arxiv.org/abs/cond-mat/0106115)。特にI.1の式(1)、(5)、(6)と適用条件を参照。これは包括的な研究レビューである。
+172: 3. **Galteland, O., Bering, E., Kristiansen, K., Bedeaux, D. & Kjelstrup, S. (2022).** “Legendre–Fenchel transforms capture layering transitions in porous media.” *Nanoscale Advances*. [DOI: 10.1039/D1NA00846C](https://doi.org/10.1039/D1NA00846C)／[著者公開稿・全文](https://arxiv.org/abs/2111.15253)。2.1節の変換と4節の制御条件比較を参照。本資料の凸共役はsupの符号規約で統一している。
+173: 4. **Box, G. E. P. & Cox, D. R. (1964).** “An Analysis of Transformations.” *Journal of the Royal Statistical Society: Series B*, 26(2), 211–243. [DOI: 10.1111/j.2517-6161.1964.tb00553.x](https://doi.org/10.1111/j.2517-6161.1964.tb00553.x)／[原著PDF・大学掲載](https://nd.psychstat.org/_media/lab/papers/box_cox_1964.pdf)。
+174: 5. **Copelli, M., Roque, A. C., Oliveira, R. F. & Kinouchi, O. (2002).** “Physics of psychophysics: Stevens and Weber–Fechner laws are transfer functions of excitable media.” *Physical Review E*, 65, 060901. [DOI: 10.1103/PhysRevE.65.060901](https://doi.org/10.1103/PhysRevE.65.060901)／[著者公開稿](https://arxiv.org/abs/cond-mat/0112395)。
+175: 6. **CIE / ISO (2019).** ISO/CIE 11664-4:2019, *Colorimetry — Part 4: CIE 1976 L\*a\*b\* colour space*. [CIE公式の規格・適用範囲](https://cie.co.at/publications/colorimetry-part-4-cie-1976-lab-colour-space-1)。規格全文の購入は行っていない。公式概要は適用範囲の確認に用いた。
+176: 7. **W3C (2026-10-09版).** *CSS Color Module Level 4*. [固定版の公式仕様](https://www.w3.org/TR/2026/CRD-css-color-4-20261009/)／[現行公開版](https://www.w3.org/TR/css-color-4/)。9節、10.10–10.11節、19節の変換例を参照。閲覧時の状態はCandidate Recommendation Draft。CSSのlab()はD50を用いるため、D65のLabを直接計算する表示方式とは白色点の扱いを区別する。
+177: 
+178: この対応づけは、既存結果を再利用できる部分と、独自に定義した結合規則を調べる部分を整理するためのものである。物理的な統一理論、既存研究を超える新規性、感覚科学の実証結果の再現を示したものではない。
+

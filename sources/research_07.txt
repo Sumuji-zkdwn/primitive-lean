@@ -1,0 +1,30 @@
+原本: C:\Users\Dalcia\Research\05_Notes\abstract_elastica_reference_2026-10-19\hysteresis_interpretations_2026-10-19\FORMALIZATION.txt
+採用用途: 採用: 二階微分と極値・履歴を区別する問い。一般の曲線汎関数の第二変分は今回の新規導出。四次密度、内部変数、Galois群、枝選択は採用しない。
+
+144: 過去助手案A01のEについてa>0なら平方完成により
+145:  E(x,y)=a/2 (y-cx/a)^2 + lambda*x^4/4 + (k-c^2/a)*x^2/2-u*x。
+146: 静的にyを最小化すると、lambda>0のとき定常式は
+147:  x^3-alpha*x-beta=0,
+148:  alpha=(c^2/a-k)/lambda, beta=u/lambda。
+149: これは静的消去の恒等式であり、元の全時間発展を保存する近似だとは言っていない。
+150: この一族を正規化したV(z)=z^4/4-alpha*z^2/2-beta*zには、
+151:  Delta=4*alpha^3-27*beta^2、V''=3*z^2-alpha が対応する。
+152: alpha>0,Delta>0なら三実根（局所極小二つ、極大一つ）。Delta=0の原点以外は通常のfoldで、(alpha,beta)=(0,0)は三重根を持つcusp点。
+153: alpha=3の候補ではbeta=±2でfoldが生じ、局所安定枝を保持する準静的規則なら異なる上下閾値が出る。
+154: 毎回大域最小だけを選ぶなら対称例の切替はbeta=0であり、同じポテンシャルだけで履歴則は決まらない。
+155: 現行PC population既定k=a=c=lambda=1はalpha=0。この二安定候補を現行PCの既定挙動と混同しない。
+156: 
+157: alpha,betaを代数的独立としK=Q(alpha,beta)を固定する。f=z^3-alpha*z-betaはK上既約。
+158: Q[alpha,z,beta]ではbetaに関する一次式で、その商はQ[alpha,z]の整域になる。Gaussの補題でK[z]でも既約。
+159: DeltaはQ(beta)(alpha)でalphaの無限遠位数が-3と奇数なので平方でない。
+160: 従って分解体LのGal(L/K)はS3。[G cubic criterion]
+161: 根差積deltaはdelta^2=Delta、g(delta)=sign(g)*deltaを満たす。
+162: ここに係数を保つ対応替えと符号反転の厳密な例がある。
+163: 
+164: ただし根の代数的置換、実順序、安定性、履歴による枝選択は別。
+165: 三実根領域の安定二根／不安定一根を全て反転する置換は、個数が違うので存在しない。
+166: S3の三根作用の安定化群には奇置換があり、§6のsign-equivariant Boolean着色条件を満たさない。
+167: 根の順序付きframeや根差積の向きにはsign反転を表せる。安定／不安定反転ではない。
+168: 実数に特殊化した係数のGalois群は、既約性や判別式の平方性により小さくなり得る。
+169: (z,beta)→(-z,-beta)は係数も動かすtransportであり、一般にはK固定のGalois作用ではない。
+170: 複素パラメータのmonodromyと、実駆動でfoldを越える散逸的jumpも同一視しない。

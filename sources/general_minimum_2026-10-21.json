@@ -1,0 +1,166 @@
+{
+  "schema": "primitive-general-minimum-provenance-v1",
+  "recorded_utc": "2026-10-20T15:12:44.798009+00:00",
+  "research_policy": "Research is the read-only source of record. The new general claim comes from the current user message; established quartic definitions come from retained project sources.",
+  "user_source": {
+    "location": "Current conversation, user formalization instruction before the final はい approval",
+    "transcript_id": null,
+    "exact_excerpts": [
+      "大切なのは、数学を勝手に補完させないことです。",
+      "私は線形入力の必要十分条件を推します。",
+      "E_u(x)=V(x)-ux",
+      "V(x)-V(a)\\geq u(x-a)",
+      "新たな仮定を補って命題を証明できた場合、その仮定を明示し、元の主張が証明されたとは扱わないこと。"
+    ],
+    "approval": "はい",
+    "source_note": "引用は指定箇所のみ。会話全体の保存を意味しない。原文中の空欄を引用内で補完しない。"
+  },
+  "formalization_choices": [
+    "比較領域を ℝ 全体とし、V : ℝ → ℝ と固定した a,u : ℝ を明記する。",
+    "既存 energy V id u を再利用し、新定義を追加しない。",
+    "唯一最小性は a の最小性と全最小点の a への一致の連言。",
+    "一般の支持入力の存在は主張せず、四次の存在条件は λ > 0 のもとで既存定理へ接続する。"
+  ],
+  "research_sources": [
+    {
+      "id": "energy_findings",
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\energy_findings.md",
+      "line_ranges": [
+        [
+          27,
+          75
+        ]
+      ],
+      "sha256": "52a65a6ba9275e534191fc5a3cebbec67c14ab4ff2488ba8f8611707c52f3336",
+      "matches_prior_capture": true,
+      "prior_record": "linear_input/sources.json",
+      "role": "既存模型・操作の出典。今回の一般二同値を原文へ遡及帰属させない。"
+    },
+    {
+      "id": "primitive_operations",
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\primitive_operations_2026-10-20\\原始の操作と忘却の導出.md",
+      "line_ranges": [
+        [
+          133,
+          183
+        ],
+        [
+          308,
+          308
+        ]
+      ],
+      "sha256": "7f42fc5d5f4ac664cb84c54ba67e7aab635b7c0611856fbe769644444e09d9b1",
+      "matches_prior_capture": true,
+      "prior_record": "linear_input/sources.json",
+      "role": "既存模型・操作の出典。今回の一般二同値を原文へ遡及帰属させない。"
+    }
+  ],
+  "reused_project_sources": [
+    {
+      "path": "linear_input/lean_check/Observation.lean",
+      "sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6"
+    },
+    {
+      "path": "linear_input/lean_check/Design.lean",
+      "sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549"
+    },
+    {
+      "path": "linear_input/lean_check/Consequences.inc",
+      "sha256": "b63d8fc479da5ae18bc0efa84bc4b99737f5e64ca64c7e733e82c566fe531ef6"
+    }
+  ],
+  "supplemental_source": {
+    "path": "linear_input/lean_check/GeneralMinimum.inc",
+    "sha256": "ce31350415300a6f772521c13d89f61808e4ed4911d7c37f39ac2bafde1987ca",
+    "theorems": 6,
+    "new_definitions": 0
+  },
+  "claims": [
+    {
+      "name": "LinearInputMinimum.minimum_iff_support",
+      "source": "linear_input/lean_check/GeneralMinimum.inc",
+      "line": 13,
+      "claim": "一般の最小性と支持不等式の同値",
+      "assumptions": "任意の V : ℝ → ℝ、固定した a,u : ℝ。追加の解析的仮定なし。",
+      "direct_project_references": [
+        "LinearInputObservation.energy"
+      ],
+      "proof_evidence": "verification/main-result.json; verification/lean.json"
+    },
+    {
+      "name": "LinearInputMinimum.unique_minimum_iff_strict_support",
+      "source": "linear_input/lean_check/GeneralMinimum.inc",
+      "line": 20,
+      "claim": "唯一大域最小性と x ≠ a での厳密支持の同値",
+      "assumptions": "同上。唯一最小性は a が大域最小点であることを含む。",
+      "direct_project_references": [
+        "LinearInputMinimum.minimum_iff_support"
+      ],
+      "proof_evidence": "verification/main-result.json; verification/lean.json"
+    },
+    {
+      "name": "LinearInputMinimum.quartic_minimum_iff_full",
+      "source": "linear_input/lean_check/GeneralMinimum.inc",
+      "line": 54,
+      "claim": "スカラー四次と横断平方を持つ全平面模型の最小性の同値",
+      "assumptions": "λ,r,u,a : ℝ。λ の符号仮定なし。",
+      "direct_project_references": [
+        "LinearInputDesign.f",
+        "LinearInputDesign.E"
+      ],
+      "proof_evidence": "verification/main-result.json; verification/lean.json"
+    },
+    {
+      "name": "LinearInputMinimum.quartic_support_iff_input_and_margin",
+      "source": "linear_input/lean_check/GeneralMinimum.inc",
+      "line": 68,
+      "claim": "四次の支持条件と指定入力・非負余裕の同値",
+      "assumptions": "λ > 0。",
+      "direct_project_references": [
+        "LinearInputMinimum.minimum_iff_support",
+        "LinearInputMinimum.quartic_minimum_iff_full",
+        "LinearInputConsequences.global_minimum_iff_input_and_margin"
+      ],
+      "proof_evidence": "verification/main-result.json; verification/lean.json"
+    },
+    {
+      "name": "LinearInputMinimum.exists_quartic_support_iff",
+      "source": "linear_input/lean_check/GeneralMinimum.inc",
+      "line": 79,
+      "claim": "一つの支持入力の存在と非負余裕の同値",
+      "assumptions": "λ > 0。",
+      "direct_project_references": [
+        "LinearInputMinimum.quartic_support_iff_input_and_margin"
+      ],
+      "proof_evidence": "verification/main-result.json; verification/lean.json"
+    },
+    {
+      "name": "LinearInputMinimum.strict_quartic_support_of_margin_pos",
+      "source": "linear_input/lean_check/GeneralMinimum.inc",
+      "line": 93,
+      "claim": "正余裕からの厳密支持の十分条件",
+      "assumptions": "λ ≥ 0 かつ λ*a^2+r > 0。必要条件とは主張しない。",
+      "direct_project_references": [
+        "LinearInputMinimum.unique_minimum_iff_strict_support",
+        "LinearInputMinimum.quartic_minimum_iff_full",
+        "LinearInputDesign.globalMin_of_margin",
+        "LinearInputDesign.unique_of_margin_pos"
+      ],
+      "proof_evidence": "verification/main-result.json; verification/lean.json"
+    }
+  ],
+  "scope_exclusions": [
+    "General existence of supporting input for arbitrary V,a",
+    "Input uniqueness for arbitrary V",
+    "Necessary positive margin for quartic uniqueness",
+    "Hysteresis dynamics or a bridge to operations/forgetting",
+    "New puzzle game, orb, self-growth or learning implementation"
+  ],
+  "before_snapshot": "archive/before_general_minimum_2026-10-21/manifest.json",
+  "final_evidence": [
+    "verification/main-result.json",
+    "verification/lean.json",
+    "verification/results.json"
+  ],
+  "code_review": "Independent read-only reviews found no required mathematical changes; this is separate from the kernel run."
+}

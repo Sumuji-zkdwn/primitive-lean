@@ -1,0 +1,230 @@
+{
+  "schema": "primitive-theorem-composition-provenance-v1",
+  "recorded_utc": "2026-10-20T15:33:33.658542+00:00",
+  "user_source": {
+    "location": "Current conversation after the 481-theorem delivery",
+    "exact_text": "とりあえず今整合している定理で組めるものは組んでしまってください"
+  },
+  "policy": "Research remains the source of record and is read-only. These are new derivations from retained formalized results, not retroactively attributed research claims.",
+  "baseline": {
+    "theorems": 481,
+    "declarations": 525,
+    "snapshot": "archive/before_theorem_composition_2026-10-21/manifest.json",
+    "proof_sources": 62,
+    "byte_identical_proof_sources": 62,
+    "baseline_checker_byte_identical": true
+  },
+  "added_theorems": 13,
+  "new_definitions": 0,
+  "expected_total_theorems": 494,
+  "expected_total_declarations": 538,
+  "sources": [
+    {
+      "path": "linear_input/lean_check/SupportComposition.inc",
+      "namespace": "LinearInputSupportComposition",
+      "sha256": "0ed4c127f19fcb5eaa9512013a9ead4bcb723455d831c1a371dc62893b04392c",
+      "theorems": 5,
+      "new_definitions": 0
+    },
+    {
+      "path": "linear_input/lean_check/QuarticClassification.inc",
+      "namespace": "LinearInputQuarticClassification",
+      "sha256": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d",
+      "theorems": 5,
+      "new_definitions": 0
+    },
+    {
+      "path": "linear_input/lean_check/CurvatureRigidity.inc",
+      "namespace": "LinearInputCurvatureRigidity",
+      "sha256": "b89461438d07ecdfd95c97e1a8f2a61dc6ecf05840808756f04d674d4640d0d5",
+      "theorems": 3,
+      "new_definitions": 0
+    }
+  ],
+  "claims": [
+    {
+      "name": "LinearInputSupportComposition.support_targets_monotone",
+      "source": "linear_input/lean_check/SupportComposition.inc",
+      "line": 13,
+      "claim": "任意の V、u<v、u が a を支持し v が b を支持すると a≤b。",
+      "exact_lean_statement": "theorem support_targets_monotone (V : ℝ → ℝ) (u v a b : ℝ) (huv : u < v)\n    (hu : ∀ x : ℝ, u * (x - a) ≤ V x - V a)\n    (hv : ∀ x : ℝ, v * (x - b) ≤ V x - V b) :\n    a ≤ b",
+      "reviewed_source_references": [
+        "LinearInputMinimum.minimum_iff_support",
+        "LinearInputObservation.minimizer_monotone"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputSupportComposition.support_input_eq_derivative",
+      "source": "linear_input/lean_check/SupportComposition.inc",
+      "line": 23,
+      "claim": "HasDerivAt V d a と a における支持入力 u から u=d。逆向きは主張しない。",
+      "exact_lean_statement": "theorem support_input_eq_derivative {V : ℝ → ℝ} {a u d : ℝ}\n    (hderiv : HasDerivAt V d a)\n    (hs : ∀ x : ℝ, u * (x - a) ≤ V x - V a) :\n    u = d",
+      "reviewed_source_references": [
+        "LinearInputMinimum.minimum_iff_support",
+        "IsMinOn.isLocalMin",
+        "IsLocalMin.hasDerivAt_eq_zero"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputSupportComposition.support_input_interpolation",
+      "source": "linear_input/lean_check/SupportComposition.inc",
+      "line": 36,
+      "claim": "同じ a を支持する二入力 u,v の凸結合 (1-t)u+tv も a を支持する。0≤t≤1。",
+      "exact_lean_statement": "theorem support_input_interpolation {V : ℝ → ℝ} {a u v t : ℝ}\n    (ht0 : 0 ≤ t) (ht1 : t ≤ 1)\n    (hu : ∀ x : ℝ, u * (x - a) ≤ V x - V a)\n    (hv : ∀ x : ℝ, v * (x - a) ≤ V x - V a) :\n    ∀ x : ℝ, ((1 - t) * u + t * v) * (x - a) ≤ V x - V a",
+      "reviewed_source_references": [
+        "Ordered real multiplication and addition",
+        "ring"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputSupportComposition.unique_minimum_of_strict_support_interpolation",
+      "source": "linear_input/lean_check/SupportComposition.inc",
+      "line": 53,
+      "claim": "u が a を厳密に支持し v が非厳密に支持すると、0≤t<1 で凸結合入力の唯一の大域最小点は a。",
+      "exact_lean_statement": "theorem unique_minimum_of_strict_support_interpolation {V : ℝ → ℝ} {a u v t : ℝ}\n    (ht0 : 0 ≤ t) (ht1 : t < 1)\n    (hu : ∀ x : ℝ, x ≠ a → u * (x - a) < V x - V a)\n    (hv : ∀ x : ℝ, v * (x - a) ≤ V x - V a) :\n    (∀ x : ℝ, energy V id ((1 - t) * u + t * v) a ≤\n      energy V id ((1 - t) * u + t * v) x) ∧\n    ∀ b : ℝ, (∀ x : ℝ, energy V id ((1 - t) * u + t * v) b ≤\n      energy V id ((1 - t) * u + t * v) x) → b = a",
+      "reviewed_source_references": [
+        "LinearInputMinimum.unique_minimum_iff_strict_support",
+        "ordered real multiplication and addition"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputSupportComposition.common_support_targets_eq",
+      "source": "linear_input/lean_check/SupportComposition.inc",
+      "line": 73,
+      "claim": "u≠v で a,b がどちらも両入力に支持されるなら a=b。",
+      "exact_lean_statement": "theorem common_support_targets_eq {V : ℝ → ℝ} {a b u v : ℝ} (huv : u ≠ v)\n    (hua : ∀ x : ℝ, u * (x - a) ≤ V x - V a)\n    (hub : ∀ x : ℝ, u * (x - b) ≤ V x - V b)\n    (hva : ∀ x : ℝ, v * (x - a) ≤ V x - V a)\n    (hvb : ∀ x : ℝ, v * (x - b) ≤ V x - V b) :\n    a = b",
+      "reviewed_source_references": [
+        "LinearInputMinimum.minimum_iff_support",
+        "LinearInputObservation.two_inputs_iff_pair"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputQuarticClassification.global_minimizer_iff_of_margin_zero",
+      "source": "linear_input/lean_check/QuarticClassification.inc",
+      "line": 15,
+      "claim": "λ>0、余裕0、設計入力のときの全平面大域最小点集合は正確に反射する二点（原点では一致）。",
+      "exact_lean_statement": "theorem global_minimizer_iff_of_margin_zero {lam r a : ℝ} (hlam : 0 < lam)\n    (hmargin : lam * a ^ 2 + r = 0) (x y : ℝ) :\n    (∀ z w : ℝ, E lam r (input lam r a) x y ≤ E lam r (input lam r a) z w) ↔\n      (x = a ∨ x = -a) ∧ y = Real.sqrt 2 * x",
+      "reviewed_source_references": [
+        "LinearInputDesign.globalMin_of_margin",
+        "LinearInputDesign.equal_energy_iff_of_margin_zero"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputQuarticClassification.strict_support_iff_input_and_unique_margin",
+      "source": "linear_input/lean_check/QuarticClassification.inc",
+      "line": 32,
+      "claim": "λ>0。厳密支持 iff 設計入力かつ (正余裕 または a=r=0)。",
+      "exact_lean_statement": "theorem strict_support_iff_input_and_unique_margin {lam r u a : ℝ}\n    (hlam : 0 < lam) :\n    (∀ x : ℝ, x ≠ a → u * (x - a) <\n      (lam * x ^ 4 / 4 + r * x ^ 2 / 2) -\n      (lam * a ^ 4 / 4 + r * a ^ 2 / 2)) ↔\n    u = input lam r a ∧ (0 < lam * a ^ 2 + r ∨ (a = 0 ∧ r = 0))",
+      "reviewed_source_references": [
+        "LinearInputMinimum.unique_minimum_iff_strict_support",
+        "LinearInputMinimum.quartic_minimum_iff_full",
+        "LinearInputConsequences.global_minimum_iff_input_and_margin",
+        "LinearInputDesign.equal_energy_iff_of_margin_zero",
+        "LinearInputMinimum.strict_quartic_support_of_margin_pos",
+        "LinearInputDesign.globalMin_of_margin"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputQuarticClassification.unique_global_minimum_iff",
+      "source": "linear_input/lean_check/QuarticClassification.inc",
+      "line": 86,
+      "claim": "λ>0。谷上指定点の全平面唯一最小性 iff 設計入力かつ (正余裕 または a=r=0)。",
+      "exact_lean_statement": "theorem unique_global_minimum_iff {lam r u a : ℝ} (hlam : 0 < lam) :\n    ((∀ x y : ℝ, E lam r u a (Real.sqrt 2 * a) ≤ E lam r u x y) ∧\n      ∀ x y : ℝ, (∀ z w : ℝ, E lam r u x y ≤ E lam r u z w) →\n        x = a ∧ y = Real.sqrt 2 * a) ↔\n    u = input lam r a ∧ (0 < lam * a ^ 2 + r ∨ (a = 0 ∧ r = 0))",
+      "reviewed_source_references": [
+        "LinearInputQuarticClassification.strict_support_iff_input_and_unique_margin",
+        "LinearInputMinimum.unique_minimum_iff_strict_support",
+        "LinearInputMinimum.quartic_minimum_iff_full"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputQuarticClassification.existsUnique_support_input_iff",
+      "source": "linear_input/lean_check/QuarticClassification.inc",
+      "line": 119,
+      "claim": "λ>0。支持入力の一意存在 iff 非負余裕。点の一意性と別の主張。",
+      "exact_lean_statement": "theorem existsUnique_support_input_iff {lam r a : ℝ} (hlam : 0 < lam) :\n    (∃! u : ℝ, ∀ x : ℝ, u * (x - a) ≤\n      (lam * x ^ 4 / 4 + r * x ^ 2 / 2) -\n      (lam * a ^ 4 / 4 + r * a ^ 2 / 2)) ↔\n    0 ≤ lam * a ^ 2 + r",
+      "reviewed_source_references": [
+        "LinearInputMinimum.quartic_support_iff_input_and_margin"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputQuarticClassification.existsUnique_strict_support_input_iff",
+      "source": "linear_input/lean_check/QuarticClassification.inc",
+      "line": 135,
+      "claim": "λ>0。厳密支持入力の一意存在 iff 正余裕 または a=r=0。",
+      "exact_lean_statement": "theorem existsUnique_strict_support_input_iff {lam r a : ℝ} (hlam : 0 < lam) :\n    (∃! u : ℝ, ∀ x : ℝ, x ≠ a → u * (x - a) <\n      (lam * x ^ 4 / 4 + r * x ^ 2 / 2) -\n      (lam * a ^ 4 / 4 + r * a ^ 2 / 2)) ↔\n    0 < lam * a ^ 2 + r ∨ (a = 0 ∧ r = 0)",
+      "reviewed_source_references": [
+        "LinearInputQuarticClassification.strict_support_iff_input_and_unique_margin"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputCurvatureRigidity.forced_phase_minimum_rigidity",
+      "source": "linear_input/lean_check/CurvatureRigidity.inc",
+      "line": 19,
+      "claim": "k≠0、C²曲率、開区間上の実際の強制曲率方程式、一つの内点の相状態が全平面で大域最小なら、区間全体で曲率一定かつκ′=0。入力0を含む。",
+      "exact_lean_statement": "theorem forced_phase_minimum_rigidity {k sigma u a b s₀ : ℝ}\n    {kappa : ℝ → ℝ} (hk : k ≠ 0)\n    (hκ : ContDiff ℝ 2 kappa)\n    (heq : ∀ s ∈ Ioo a b,\n      k * deriv (deriv kappa) s + k * (kappa s) ^ 3 / 2 -\n        sigma * kappa s = k * u)\n    (hs₀ : s₀ ∈ Ioo a b)\n    (hmin : ∀ x y : ℝ,\n      E (1 / 2) (-sigma / k) u (kappa s₀)\n        (deriv kappa s₀ + sqrt 2 * kappa s₀) ≤\n      E (1 / 2) (-sigma / k) u x y) :\n    ∀ s ∈ Ioo a b, kappa s = kappa s₀ ∧ deriv kappa s = 0",
+      "reviewed_source_references": [
+        "LinearInputCurvatureBridge.forced_energy_constant",
+        "LinearInputDesign.E",
+        "IsOpen.exists_is_const_of_deriv_eq_zero"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputCurvatureRigidity.forced_phase_not_minimum_of_nonconstant",
+      "source": "linear_input/lean_check/CurvatureRigidity.inc",
+      "line": 53,
+      "claim": "同じ曲率方程式・正則性・k≠0で、曲率が区間上非一定なら、全内点の相状態は大域最小ではない。",
+      "exact_lean_statement": "theorem forced_phase_not_minimum_of_nonconstant {k sigma u a b : ℝ}\n    {kappa : ℝ → ℝ} (hk : k ≠ 0)\n    (hκ : ContDiff ℝ 2 kappa)\n    (heq : ∀ s ∈ Ioo a b,\n      k * deriv (deriv kappa) s + k * (kappa s) ^ 3 / 2 -\n        sigma * kappa s = k * u)\n    (hnonconst : ¬ ∃ K : ℝ, ∀ s ∈ Ioo a b, kappa s = K) :\n    ∀ s ∈ Ioo a b, ¬ ∀ x y : ℝ,\n      E (1 / 2) (-sigma / k) u (kappa s)\n        (deriv kappa s + sqrt 2 * kappa s) ≤\n      E (1 / 2) (-sigma / k) u x y",
+      "reviewed_source_references": [
+        "LinearInputCurvatureRigidity.forced_phase_minimum_rigidity"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "name": "LinearInputCurvatureRigidity.locallyMinimizing_phase_minimum_exclusion",
+      "source": "linear_input/lean_check/CurvatureRigidity.inc",
+      "line": 71,
+      "claim": "ℓ>0,k>0,C³接線角、実際の面積拘束付き局所最小性、非一定曲率のもと、同じp,σ,cで曲率方程式・相エネルギー保存・全相状態の大域最小性の排除を得る。圧力0を含む。",
+      "exact_lean_statement": "theorem locallyMinimizing_phase_minimum_exclusion {θ : ℝ → ℝ} {k ℓ : ℝ}\n    (hℓ : 0 < ℓ) (hk : 0 < k) (hθ : ContDiff ℝ 3 θ)\n    (hmin : LinearInputAreaMinimum.LocallyMinimizing k θ ℓ)\n    (hnonconst : ¬ ∃ K : ℝ, ∀ s ∈ Ioo 0 ℓ, deriv θ s = K) :\n    ∃ p sigma c : ℝ,\n      LinearInputPressureStationary.Stationary k p θ ℓ ∧\n      ∀ s ∈ Ioo 0 ℓ,\n        (k * deriv (deriv (deriv θ)) s + k * (deriv θ s) ^ 3 / 2 -\n          sigma * deriv θ s = p) ∧\n        E (1 / 2) (-sigma / k) (p / k) (deriv θ s)\n          (deriv (deriv θ) s + sqrt 2 * deriv θ s) = c ∧\n        (¬ ∀ x y : ℝ,\n          E (1 / 2) (-sigma / k) (p / k) (deriv θ s)\n            (deriv (deriv θ) s + sqrt 2 * deriv θ s) ≤\n          E (1 / 2) (-sigma / k) (p / k) x y)",
+      "reviewed_source_references": [
+        "LinearInputMainResult.locallyMinimizing_pressure_curvature_phase",
+        "LinearInputCurvatureRigidity.forced_phase_not_minimum_of_nonconstant"
+      ],
+      "reference_scope": "Reviewed direct theorem/method references and algebraic ingredients; not an exhaustive proof-term dependency graph."
+    }
+  ],
+  "proof_term_dependencies": "verification/composition-dependencies.json",
+  "dependency_distinction": "The claim mapping records hypotheses and the intended applications. The separate Lean expression report records actual direct constants in theorem types and proof terms, filtered to the project inventory. Neither implies unconditional applicability.",
+  "boundary_example": {
+    "file": "linear_input/lean_check/work_composition/support/Boundary.lean",
+    "sha256": "6f90dc3d4fa51369c89415038e3ffbee182f1ae3e759d5bbb5cf2980160ed76e",
+    "observed_command": [
+      "lake",
+      "env",
+      "lean",
+      "--trust=0",
+      "../linear_input/lean_check/work_composition/support/Boundary.lean"
+    ],
+    "observed_exit_code": 0,
+    "observation": "Direct tool execution returned exit 0 and no stdout. The example proves strict support of abs(x) at 0 for both inputs -1/2 and 1/2."
+  },
+  "not_claimed": [
+    "Strict increase of targets for arbitrary V",
+    "Supporting input existence for arbitrary V,a",
+    "Differentiability without an explicit hypothesis",
+    "Dynamics derived solely from a static energy",
+    "Existence of nonconstant area-constrained minimizing curves",
+    "Constructed equivalence with operations/forgetting, ether or Doppler-chain models"
+  ],
+  "verification": "verification/results.json"
+}
