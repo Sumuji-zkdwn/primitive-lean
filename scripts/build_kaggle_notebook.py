@@ -72,11 +72,12 @@ STATE = {"run_id": RUN_ID, "source_commit": SNAPSHOT["source_commit"],
          "historical_preservation": "not_checked", "delivery_and_rendering": "not_checked"}
 
 def show_output(path):
-    try:
-        from IPython.display import display, FileLink
-        display(FileLink(str(path)))
-    except ImportError:
-        print("結果ファイル:", path)
+    path = Path(path)
+    download = Path(WORKSPACE).parent / "primitive_lean_result.zip"
+    if path.resolve() != download.resolve():
+        shutil.copy2(path, download)
+    print("結果ZIP:", download, "(", download.stat().st_size, "bytes)")
+    print("KaggleのOutput欄を更新し、primitive_lean_result.zipのメニューからDownloadしてください。")
 
 def notebook_stage(name, action):
     STATE[name] = {"status": "running"}
@@ -119,7 +120,7 @@ else:
 else:
     print("証明検査: 未実行（RUN_PROOFS=False）")
 """)
-    cell("markdown", "## 結果を保存\n段階別の成否、ソースハッシュ、実際の実行ログをZIPにまとめます。ソースZIP、キャッシュ、認証情報は含めません。失敗時にも、その時点の記録を保存します。")
+    cell("markdown", "## 結果を保存\n段階別の成否、ソースハッシュ、実際の実行ログをZIPにまとめます。ソースZIP、キャッシュ、認証情報は含めません。失敗時にも、その時点の記録を保存します。結果は `/kaggle/working/primitive_lean_result.zip` をOutput欄からダウンロードします。")
     cell("code", """output = export_results(WORKSPACE, REPORT_DIR, STATE)
 print(json.dumps({name: STATE[name]["status"] for name in ("source", "setup", "proofs")}, ensure_ascii=False, indent=2))
 show_output(output)
@@ -138,7 +139,7 @@ show_output(output)
 
 この版の初期設定は `RUN_SETUP=True`、`RUN_PROOFS=False` です。今回の目標は `source: passed`、`setup: passed`、`proofs: not_run`。Lean証明検査の合格を意味しません。
 
-原本が見つからない場合だけ、コード冒頭の `SOURCE_PATH` を指定してください。初回のツール・依存取得には時間がかかります。実行結果ZIPへのリンクは末尾または失敗時に表示します。
+原本が見つからない場合だけ、コード冒頭の `SOURCE_PATH` を指定してください。初回のツール・依存取得には時間がかかります。実行結果ZIPは末尾または失敗時に `/kaggle/working/primitive_lean_result.zip` に保存します。Output欄からダウンロードしてください。
 """)
         cell("code", combined)
     notebook = {"nbformat": 4, "nbformat_minor": 5, "metadata": {
