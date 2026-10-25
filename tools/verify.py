@@ -1,0 +1,198 @@
+"""Verify retained proof groups and additive compositions through one entry point.
+
+Usage: python -X utf8 tools/verify.py [--rebuild] [--lean-only]
+--rebuild removes only lean/.lake/build; pinned dependency caches are retained.
+--lean-only runs the unchanged joint checker, then audits all registered
+supplements together with all original declarations.
+"""
+from pathlib import Path
+from datetime import datetime, timezone
+import argparse, hashlib, json, re, shutil, subprocess, sys, time, zipfile
+
+ROOT = Path(__file__).resolve().parents[1]
+LEAN = ROOT / "lean"
+OUT = ROOT / "verification"
+ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def write_json(path, value):
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+def strip_comments_strings(source):
+    """Keep source line offsets while excluding nested comments and strings."""
+    result=[]; i=0; depth=0; string=False
+    while i<len(source):
+        c=source[i]; pair=source[i:i+2]
+        if depth:
+            if pair=='/-':depth+=1;result.extend('  ');i+=2;continue
+            if pair=='-/':depth-=1;result.extend('  ');i+=2;continue
+            result.append('\n' if c=='\n' else ' ');i+=1;continue
+        if string:
+            if c=='\\':result.extend('  ');i+=2;continue
+            if c=='"':string=False
+            result.append('\n' if c=='\n' else ' ');i+=1;continue
+        if pair=='/-':depth=1;result.extend('  ');i+=2;continue
+        if pair=='--':
+            end=source.find('\n',i);end=len(source) if end<0 else end
+            result.extend(' '*(end-i));i=end;continue
+        if c=='"':string=True;result.append(' ');i+=1;continue
+        result.append(c);i+=1
+    return ''.join(result)
+
+def command(args, name, cwd=ROOT):
+    started=time.monotonic()
+    proc=subprocess.run(args,cwd=cwd,text=True,encoding="utf-8",errors="replace",capture_output=True)
+    output=proc.stdout+proc.stderr
+    (OUT/(name+".log")).write_text(output,encoding="utf-8")
+    warnings=[line for line in output.splitlines() if re.search(r"\bwarning:",line)]
+    return dict(command=args,working_directory=str(cwd),exit_code=proc.returncode,
+                seconds=round(time.monotonic()-started,3),log="verification/"+name+".log",
+                warnings=warnings)
+
+def canonical_path(relative):
+    return (ROOT / "linear_input" / relative).resolve().relative_to(ROOT).as_posix()
+
+
+def verify_lean(rebuild):
+    if rebuild:
+        target = (LEAN / ".lake/build").resolve()
+        if target != LEAN.resolve() / ".lake/build":
+            raise RuntimeError("Unsafe project build path")
+        if target.exists():
+            shutil.rmtree(target)
+    # The proof files and their existing checker retain their separate roles.
+    run = command([sys.executable, "-X", "utf8", "linear_input/verify_lean.py"], "joint-lean-run")
+    current = json.loads((ROOT / "linear_input/lean_results.json").read_text("utf-8"))
+    original_declarations = [{**d, "file": canonical_path(d["file"])}
+                    for d in current["parent_declarations"] + current["declarations"]]
+    before = json.loads((OUT / "before-unification.json").read_text("utf-8"))
+    archive_path = ROOT / before["archive"]
+    assert sha(archive_path) == before["archive_sha256"]
+    with zipfile.ZipFile(archive_path) as archive:
+        old = json.loads(archive.read("linear_input/lean_results.json"))
+        old_names = {d["name"]: d["kind"] for d in old["parent_declarations"] + old["declarations"]}
+        new_names = {d["name"]: d["kind"] for d in original_declarations}
+        proof_files = sorted(set(d["file"] for d in original_declarations))
+        unchanged = [rel for rel in proof_files if (ROOT / rel).read_bytes() == archive.read(rel)]
+    preservation = dict(passed=len(unchanged) == len(proof_files) and old_names == new_names,
+        proof_files=len(proof_files), byte_identical_proof_files=len(unchanged),
+        same_public_names_and_kinds=old_names == new_names,
+        missing=sorted(old_names.keys() - new_names.keys()), added=sorted(new_names.keys() - old_names.keys()),
+        archive=before["archive"])
+    warnings = []
+    for rel in (current["compile"]["log"], current["parent_library_build"]["log"]):
+        warnings += [line for line in (ROOT / "linear_input" / rel).read_text("utf-8").splitlines()
+                     if re.search(r"\bwarning:", line)]
+    supplement_run = command([sys.executable, "-X", "utf8", "tools/verify_main_result.py"], "main-result-run")
+    supplement_path = OUT / "main-result.json"
+    supplement = json.loads(supplement_path.read_text("utf-8"))
+    declarations = original_declarations + supplement["declarations"]
+    axioms = supplement["axioms"]
+    hashes = {canonical_path(rel): digest for rel, digest in current["source_sha256"].items()}
+    hashes.update(supplement["source_hashes"])
+    hashes["tools/verify.py"] = sha(Path(__file__))
+    hashes["verification/main-result.json"] = sha(supplement_path)
+    warnings += supplement["warnings"]
+    changed = [rel for rel, digest in hashes.items() if not (ROOT / rel).is_file() or sha(ROOT / rel) != digest]
+    passed = (run["exit_code"] == 0 and current["passed"] and preservation["passed"]
+              and supplement_run["exit_code"] == 0 and supplement["passed"]
+              and supplement["all_declarations"] == declarations
+              and len(axioms) == len(declarations) and not warnings and not changed)
+    supplemental_scopes = {
+        "MainResult": "Additive connection and worked example",
+        "GeneralMinimum": "General fixed-input minimum and strict-support criteria, with quartic bridges",
+        "SupportComposition": "Support interpolation, ordering, derivative identification and shared-minimizer restrictions",
+        "QuarticClassification": "Exact quartic minimum uniqueness and supporting-input classification",
+        "CurvatureRigidity": "Conserved phase energy and the transverse square force constant curvature at a phase minimum",
+    }
+    supplemental_groups = {
+        Path(group["source"]).stem: dict(
+            theorem_count=group["theorem_count"], declaration_count=group["declaration_count"],
+            path=group["source"], scope=supplemental_scopes[Path(group["source"]).stem])
+        for group in supplement["supplemental_groups"]
+    }
+    result = dict(timestamp_utc=datetime.now(timezone.utc).isoformat(), passed=passed,
+        proof_layout="Existing Elastica and linear-input proofs retained; registered additions and theorem compositions audited together",
+        entry_point="tools/verify.py", detailed_joint_report="linear_input/lean_results.json",
+        supplemental_report="verification/main-result.json", supplemental_run=supplement_run,
+        version=current["version"], clean_project_build=rebuild, dependency_cache_retained=True,
+        run=run, build=current["parent_library_build"], baseline_audit=current["compile"], audit=supplement["compile"],
+        declarations=declarations, theorem_count=current["theorem_count"] + current["parent_theorem_count"] + supplement["theorem_count"],
+        declaration_count=len(declarations), axioms=axioms, joint_axiom_audit=supplement["joint_axiom_audit"],
+        proof_groups=dict(Elastica=dict(theorem_count=current["parent_theorem_count"],
+            declaration_count=current["parent_declaration_count"], path="lean/Elastica"),
+            LinearInput=dict(theorem_count=current["theorem_count"], declaration_count=current["declaration_count"],
+            path="linear_input/lean_check", scope="Unchanged original 36 proof parts"),
+            **supplemental_groups),
+        added_declarations=supplement["declarations"],
+        dependencies=current["dependencies"], source_hashes=hashes,
+        unexpected=current["unexpected"] + supplement["unexpected"] + supplement["errors"],
+        forbidden_tokens=current["forbidden_tokens"] + supplement["forbidden_tokens"],
+        warnings=warnings, changed_during_verification=changed,
+        pre_unification_preservation=preservation,
+        scope="The unchanged linear-input verifier builds Elastica, generates All.lean from the original 36 parts and audits the original 509 declarations. The additive checker then compiles the exact All.lean followed by every registered supplement with --trust=0 and audits all original and additional public declarations in one session. Supplements retain separate source groups and counts. Original proof files, names and configuration are preserved.",
+        not_covered=[
+            ("existence for arbitrary prescribed boundary/area data and regularity of weak "
+             "area-constrained minimizers; the explicit circle comparison minimum is covered")
+            if item == "existence and regularity of area-constrained minimizing curves" else item
+            for item in current["not_covered"]])
+    write_json(OUT / "lean.json", result)
+    # Keep familiar top-level log links, copying actual outputs rather than relabelling old runs.
+    shutil.copyfile(ROOT / "linear_input" / current["parent_library_build"]["log"], OUT / "lean-build.log")
+    shutil.copyfile(OUT / "main-result.log", OUT / "lean-axioms.log")
+    if rebuild and passed:
+        shutil.copyfile(OUT / "lean-build.log", OUT / "clean-rebuild.log")
+        write_json(OUT / "clean-rebuild.json", dict(timestamp_utc=result["timestamp_utc"],
+            clean_project_build=True, dependency_cache_retained=True,
+            build=current["parent_library_build"], cleaned_by="tools/verify.py --rebuild before the joint checker",
+            build_log="verification/clean-rebuild.log", build_log_sha256=sha(OUT / "clean-rebuild.log"),
+            source_hashes=hashes, dependencies=current["dependencies"]))
+    return result
+
+
+def refresh_manifest():
+    files = {}
+    for path in sorted(ROOT.rglob("*")):
+        rel = path.relative_to(ROOT)
+        if not path.is_file() or ".lake" in rel.parts or "__pycache__" in rel.parts or path.name == "manifest.json":
+            continue
+        files[rel.as_posix()] = sha(path)
+    write_json(ROOT / "manifest.json", dict(algorithm="SHA256", files=files))
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--rebuild", action="store_true")
+    parser.add_argument("--lean-only", action="store_true")
+    args = parser.parse_args(argv)
+    OUT.mkdir(exist_ok=True)
+    lean = verify_lean(args.rebuild)
+    summary = {k: lean[k] for k in ("passed", "proof_layout", "version", "clean_project_build",
+        "theorem_count", "declaration_count", "proof_groups", "unexpected", "warnings", "forbidden_tokens")}
+    if args.lean_only:
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+        return 0 if lean["passed"] else 1
+    checks = {}
+    for key, script in (("examples", "tools/check_examples.py"), ("scale_response", "tools/check_scale_response.py"),
+                       ("combinations", "tools/check_combinations.py"), ("linear_input", "linear_input/verify.py"),
+                       ("rendering", "tools/render.py")):
+        checks[key] = command([sys.executable, "-X", "utf8", script], key.replace("_", "-") + "-run")
+    write_json(OUT / "results.json", dict(passed=False, status="delivery validation pending"))
+    write_json(ROOT / "manifest.json", dict(algorithm="SHA256", status="validation pending", files={}))
+    delivery_run = command([sys.executable, "-X", "utf8", "tools/check_delivery.py"], "delivery-run")
+    delivery = json.loads((OUT / "delivery.json").read_text("utf-8"))
+    passed = lean["passed"] and all(check["exit_code"] == 0 for check in checks.values()) and delivery_run["exit_code"] == 0 and delivery["passed"]
+    result = dict(timestamp_utc=datetime.now(timezone.utc).isoformat(), passed=passed, lean_passed=lean["passed"],
+        theorem_count=lean["theorem_count"], declaration_count=lean["declaration_count"],
+        clean_project_build=args.rebuild, **checks, delivery_run=delivery_run, delivery=delivery,
+        source_hashes=lean["source_hashes"])
+    write_json(OUT / "results.json", result)
+    refresh_manifest()
+    print(json.dumps({**summary, "passed": passed, "checks": checks, "delivery_passed": delivery["passed"]}, ensure_ascii=False, indent=2))
+    return 0 if passed else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

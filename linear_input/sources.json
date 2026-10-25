@@ -1,0 +1,82 @@
+{
+  "captured_utc": "2026-10-19T20:40:59.571221+00:00",
+  "research_policy": "Read-only; passages are copied with original line numbers.",
+  "local_sources": [
+    {
+      "id": "energy_findings",
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\energy_findings.md",
+      "sha256": "52a65a6ba9275e534191fc5a3cebbec67c14ab4ff2488ba8f8611707c52f3336",
+      "line_ranges": [
+        [
+          27,
+          75
+        ]
+      ],
+      "excerpt": "provenance/energy_findings_excerpt.txt",
+      "excerpt_sha256": "17e1933472e7407b916d1bea6cf517065e8936fa265a5f0a134b6d99aee20d75",
+      "use": "General quartic family, completing the square, distinction between static and dynamic elimination.",
+      "source_unmodified_during_capture": true
+    },
+    {
+      "id": "power_log",
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\power_log_bridge_2026-10-20\\べき対数とEの簡約.md",
+      "sha256": "41698d5912ffe177c72b04fc9cf3b3510e5ca8e8956658153749ad813c78a81b",
+      "line_ranges": [
+        [
+          49,
+          99
+        ]
+      ],
+      "excerpt": "provenance/power_log_excerpt.txt",
+      "excerpt_sha256": "a8fe681da590fe8681a54eee0d6e44696a7ec9b98352eac98a280abbd44d69c1",
+      "use": "Original power/log coordinate simplification and its domain.",
+      "source_unmodified_during_capture": true
+    },
+    {
+      "id": "primitive_operations",
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\primitive_operations_2026-10-20\\原始の操作と忘却の導出.md",
+      "sha256": "7f42fc5d5f4ac664cb84c54ba67e7aab635b7c0611856fbe769644444e09d9b1",
+      "line_ranges": [
+        [
+          133,
+          183
+        ],
+        [
+          308,
+          308
+        ]
+      ],
+      "excerpt": "provenance/primitive_operations_excerpt.txt",
+      "excerpt_sha256": "c6472e938b449ea4ddd436fd006d80f3edc2feb1b592298864aafc6b0231359c",
+      "use": "Observation equivalence and the distinction between frozen input and feedback differentiation.",
+      "source_unmodified_during_capture": true
+    },
+    {
+      "id": "affine_equivalence",
+      "path": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-20\\primitive\\lean\\Elastica\\AffineEquivalence.lean",
+      "sha256": "5c1b4b92292a98200c5fda9e010e3b9083990523011f70c2de93977f5bad8d6b",
+      "line_ranges": [
+        [
+          1,
+          49
+        ]
+      ],
+      "excerpt": "provenance/affine_equivalence_excerpt.txt",
+      "excerpt_sha256": "9b085b45d587318d97070dafe91823c76891e52c4cd385ecd4612dcbc5ff7550",
+      "use": "Existing Lean declarations for affine density changes; source read, no new Lean build.",
+      "source_unmodified_during_capture": true
+    }
+  ],
+  "web_source": {
+    "url": "https://github.com/ryantibs/convexopt-book1/blob/main/convex_conjugates.tex",
+    "author": "Ryan Tibshirani",
+    "access_date_local": "2026-10-20",
+    "used_for": "Definition of convex conjugate and double conjugate as greatest closed convex minorant. Specific quartic formulas are derived in the companion.",
+    "verified_passages": [
+      "eq:conjugate",
+      "eq:double_conjugate",
+      "eq:double_conjugate_affine_minorant"
+    ]
+  },
+  "derivation_scope": "Inverse design, exact gap certificate and the practical consequences are derived in this companion, not attributed as quotations from Research."
+}

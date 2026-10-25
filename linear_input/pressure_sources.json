@@ -1,0 +1,28 @@
+{
+  "access_date_local": "2026-10-20",
+  "purpose": "Primary-source context for the explicit area term. The Lean proof computes the actual first variation from the local definitions; it does not assume a shape equation quoted from this source.",
+  "primary_sources": [
+    {
+      "title": "Area-Constrained Planar Elastica",
+      "authors": ["Guillermo Arreaga", "Riccardo Capovilla", "C. Chryssomalakos", "Jemal Guven"],
+      "arxiv": "cond-mat/0103262v2",
+      "url": "https://arxiv.org/abs/cond-mat/0103262",
+      "verified_pdf_url": "https://arxiv.org/pdf/cond-mat/0103262",
+      "doi": "10.1103/PhysRevE.65.031801",
+      "published": "2002-02-13",
+      "verified_passages": ["Section 2.1, equation (4): length and area constraints", "Section 2.2, equations (7)-(9): shape equation, quartic potential with linear term, conserved phase energy", "Section 2.5: force and pressure conventions"],
+      "use": "Established area-constrained elastica context; compare the normal orientation and coefficient names before transporting formulas.",
+      "scope_difference": "The source treats closed loops. Our current formalization uses the actual tangent-angle reconstruction starting at the origin, with fixed endpoint data and the oriented area line integral closed by the endpoint chord. Closed curves are included, but curve closure, embedding, and equality with a positive geometric region area are not inferred."
+    }
+  ],
+  "local_conventions": {
+    "tangent": "T=(cos(theta),sin(theta))",
+    "normal": "N=(-sin(theta),cos(theta))",
+    "curvature": "kappa=theta'",
+    "area": "A=(1/2) integral (X sin(theta)-Y cos(theta)) ds",
+    "pressure_energy": "F=integral (k/2) kappa^2 ds + p A",
+    "curvature_equation": "k kappa''+(k/2)kappa^3-sigma kappa=p",
+    "phase_parameters": "lambda=1/2, r=-sigma/k, u=p/k"
+  },
+  "not_claimed": ["The area constraint follows from the original unconstrained primitive definition", "A prescribed nonzero pressure is forced by every boundary problem", "Static pressure equilibrium determines a physical-time feedback or internal update law"]
+}
