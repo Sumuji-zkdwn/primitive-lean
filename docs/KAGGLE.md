@@ -59,7 +59,7 @@ python scripts/build_kaggle_notebook.py --source-ref <アダプターを含む�
 
 ## 結果の受け渡し
 
-Notebookの最後に表示される結果ZIPを保存して、この対話へ添付できます。失敗時にも今回のログ・段階別状態を保存します。古い成功記録、依存キャッシュ、ソースZIP、認証情報は結果ZIPに含めません。NotebookからGitHubへの書き戻しやKaggleコンペへの提出は行いません。
+Notebookが `/kaggle/working/primitive_lean_result.zip` に保存する結果ZIPをOutput欄からダウンロードして、この対話へ添付できます。失敗時にも今回のログ・段階別状態を保存します。古い成功記録、依存キャッシュ、ソースZIP、認証情報は結果ZIPに含めません。NotebookからGitHubへの書き戻しやKaggleコンペへの提出は行いません。
 
 ## 今回確認した範囲
 
@@ -73,3 +73,9 @@ Notebookの最後に表示される結果ZIPを保存して、この対話へ添
 - [Kaggle公式のSecretsクライアント](https://github.com/Kaggle/docker-python/blob/main/patches/kaggle_secrets.py)
 - [Lean公式の環境構築手順](https://lean-lang.org/install/manual/)
 - [固定したElanインストーラー](https://github.com/leanprover/elan/blob/9605b24b08cf68b78dce0014b6fa01be1f8e2cee/elan-init.sh)
+
+## 結果リンクが404になる場合
+
+Kaggleでは絶対ファイルパスを使ったIPython FileLinkが正しく解決されないことがありました。Notebookはその形式のリンクを使わず、結果ZIPのコピーを作業フォルダ直下の `primitive_lean_result.zip` に作成するよう修正しました。右側のOutput欄を更新し、このファイルのメニューからDownloadします。
+
+既に完了した検査の結果を取り出す際は、元のタイムスタンプ付きZIPを `primitive_lean_result.zip` にコピーすればよく、証明検査の再実行は不要です。元のZIPが残っていることを確認してからコピーしてください。
