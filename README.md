@@ -11,6 +11,7 @@
 - [Elastica の入口](lean/Elastica.lean)
 - [線形入力の原稿構成](linear_input/lean_check/README.md)
 - [登録状況と残る検証条件](docs/TRANSFER_STATUS.md)
+- [ARC試作との接続・共通実行手順](experiments/arc3/README.md)（実験。公開3ゲームの構造版は突破0。Lean検査とは別）
 - [スマートフォンからの追加手順](docs/MOBILE_UPLOAD.md)
 
 ## 登録したもの
