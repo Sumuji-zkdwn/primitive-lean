@@ -41,6 +41,7 @@ class Observation:
     available: tuple[int, ...]
     levels: int = 0
     status: str = "NOT_FINISHED"
+    animation_count: int = 1
 
     def __post_init__(self) -> None:
         if not self.grid or not self.grid[0]:
@@ -64,6 +65,7 @@ class Observation:
             tuple(sorted(set(map(int, raw.available_actions)))),
             int(raw.levels_completed),
             raw.state.name,
+            len(raw.frame),
         )
 
     @property

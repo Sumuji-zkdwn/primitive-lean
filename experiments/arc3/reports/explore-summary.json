@@ -1,0 +1,96 @@
+[
+  {
+    "game": "ls20-9607627b",
+    "agent": "explore",
+    "seed": 3,
+    "budget": 500,
+    "calls_including_initial_reset": 500,
+    "gameplay_actions": 496,
+    "resets_after_initial": 3,
+    "best_levels_completed": 0,
+    "final_levels_completed": 0,
+    "win": false,
+    "final_status": "NOT_FINISHED",
+    "local_sdk_score": 0.0,
+    "seconds": 4.143,
+    "error": null,
+    "policy_source": "dolphin-in-a-coma/arc-agi-3-just-explore",
+    "policy_ref": "c2d98318ecca38c8ee9fb49b5af159e51770bad7",
+    "upstream_graph_nodes": 473,
+    "policy_recoveries": {
+      "KeyError": 3
+    },
+    "evidence_monitor": {
+      "history_depth": 0,
+      "refinements": 0,
+      "records": 496,
+      "observation_tokens": 480,
+      "state_action_pairs": 496,
+      "unresolved_conflicts": 0,
+      "prediction_trials": 0,
+      "prediction_accuracy_including_ties": null
+    }
+  },
+  {
+    "game": "ft09-0d8bbf25",
+    "agent": "explore",
+    "seed": 3,
+    "budget": 500,
+    "calls_including_initial_reset": 500,
+    "gameplay_actions": 496,
+    "resets_after_initial": 3,
+    "best_levels_completed": 0,
+    "final_levels_completed": 0,
+    "win": false,
+    "final_status": "NOT_FINISHED",
+    "local_sdk_score": 0.0,
+    "seconds": 4.2,
+    "error": null,
+    "policy_source": "dolphin-in-a-coma/arc-agi-3-just-explore",
+    "policy_ref": "c2d98318ecca38c8ee9fb49b5af159e51770bad7",
+    "upstream_graph_nodes": 84,
+    "policy_recoveries": {},
+    "evidence_monitor": {
+      "history_depth": 0,
+      "refinements": 0,
+      "records": 496,
+      "observation_tokens": 119,
+      "state_action_pairs": 495,
+      "unresolved_conflicts": 0,
+      "prediction_trials": 1,
+      "prediction_accuracy_including_ties": 1.0
+    }
+  },
+  {
+    "game": "vc33-5430563c",
+    "agent": "explore",
+    "seed": 3,
+    "budget": 500,
+    "calls_including_initial_reset": 500,
+    "gameplay_actions": 492,
+    "resets_after_initial": 7,
+    "best_levels_completed": 2,
+    "final_levels_completed": 2,
+    "win": false,
+    "final_status": "NOT_FINISHED",
+    "local_sdk_score": 0.33990531544013564,
+    "seconds": 3.424,
+    "error": null,
+    "policy_source": "dolphin-in-a-coma/arc-agi-3-just-explore",
+    "policy_ref": "c2d98318ecca38c8ee9fb49b5af159e51770bad7",
+    "upstream_graph_nodes": 146,
+    "policy_recoveries": {
+      "KeyError": 3
+    },
+    "evidence_monitor": {
+      "history_depth": 0,
+      "refinements": 0,
+      "records": 492,
+      "observation_tokens": 478,
+      "state_action_pairs": 492,
+      "unresolved_conflicts": 0,
+      "prediction_trials": 0,
+      "prediction_accuracy_including_ties": null
+    }
+  }
+]

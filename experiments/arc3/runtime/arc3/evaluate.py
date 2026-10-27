@@ -54,7 +54,10 @@ def run(game: str, kind: str, seed: int, budget: int, max_resets: int,
     arc = Arcade(operation_mode=OperationMode.OFFLINE,
                  environments_dir=str(environments), logger=logger)
     started = time.perf_counter()
-    if kind == "structure":
+    if kind == "explore":
+        from explore_agent import ExploreAgent
+        agent = ExploreAgent(seed)
+    elif kind == "structure":
         from arc_agent import StructuralAgent
         agent = StructuralAgent(seed)
     else:
@@ -76,6 +79,7 @@ def run(game: str, kind: str, seed: int, budget: int, max_resets: int,
                 "call": calls, "action": action.token() if action else None,
                 "levels": obs.levels, "status": obs.status, "grid": obs.grid,
                 "available": obs.available,
+                "animation_count": obs.animation_count,
                 "reason": getattr(agent, "reason", "random"),
             }) + "\n")
 
@@ -125,7 +129,7 @@ def run(game: str, kind: str, seed: int, budget: int, max_resets: int,
 def main() -> None:
     parser = argparse.ArgumentParser(description="Offline public ARC-AGI-3 evaluation")
     parser.add_argument("--games", nargs="+", default=["ls20", "ft09", "vc33"])
-    parser.add_argument("--agents", nargs="+", choices=["model", "random", "structure"], default=["model", "random"])
+    parser.add_argument("--agents", nargs="+", choices=["model", "random", "structure", "explore"], default=["model", "random"])
     parser.add_argument("--seeds", nargs="+", type=int, default=[0, 1, 2])
     parser.add_argument("--budget", type=int, default=500)
     parser.add_argument("--max-resets", type=int, default=8)
@@ -149,6 +153,14 @@ def main() -> None:
         metadata["structural_source_sha256"] = {
             Path(m.__file__).name: hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest()
             for m in (arc_agent, online)}
+    if "explore" in args.agents:
+        import explore_agent
+        import online
+        from vendor.explore import compat, heuristic_agent, graph_explorer
+        metadata["explore_source_sha256"] = {
+            str(Path(m.__file__).relative_to(Path(explore_agent.__file__).parent)):
+                hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest()
+            for m in (explore_agent, online, compat, heuristic_agent, graph_explorer)}
     (args.output / "metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     results = []
     for game in args.games:
