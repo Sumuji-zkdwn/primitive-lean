@@ -88,11 +88,12 @@ Kaggleでは絶対ファイルパスを使ったIPython FileLinkが正しく解�
 
 `.github/workflows/lean-kaggle-validation.yml` は push、`main` 向けPull Request、手動起動で動きます。1回のActions実行はイベントのソースコミットをcheckoutし、Pythonテスト、固定Lean toolchainとMathlibキャッシュの準備、`python -X utf8 tools/verify.py --proof-only` の順に実行します。Lean検査ログは成功・失敗どちらでもActions artifact `lean-proof-evidence-<run id>-<attempt>` に保存されます。
 
-証明検査が成功したときだけ、同じcheckoutから次の2ファイルと `handoff.json` を含む `kaggle-handoff-<run id>-<attempt>` artifactを作ります。
+証明検査が成功したときだけ、同じcheckoutから2つのNotebook、結果ZIP監査器、`handoff.json` を含む `kaggle-handoff-<run id>-<attempt>` artifactを作ります。
 
 - `primitive_lean_proof_check.ipynb`: 原本照合、環境準備、証明検査を一セルで実行
 - `primitive_lean_setup_one_cell.ipynb`: 原本照合と環境準備までを一セルで実行
 - `handoff.json`: ソースコミット、NotebookのSHA-256、Actions run URLと権限範囲
+- `audit_kaggle_result.py`: Kaggle結果ZIPを固定ソースコミットに照合する標準ライブラリだけのCLI
 
 proof-check Notebookは非公開GitHubリポジトリからそのコミットを読みます。Kaggle NotebookでInternetをOnにし、Kaggle Secret `GITHUB_TOKEN` に対象repoのContents読み取り権限を設定して実行します。SecretはNotebook本文にもActionsにも渡しません。NotebookはGitHubへ書き戻さず、Kaggleコンペにも提出しません。
 

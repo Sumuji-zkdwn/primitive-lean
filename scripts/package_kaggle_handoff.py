@@ -81,7 +81,12 @@ def main(argv=None):
 
     read_notebook(setup_path, args.source_ref, "True", "False")
     read_notebook(proof_path, args.source_ref, "True", "True")
-    files = {
+    auditor_path = out / "audit_kaggle_result.py"
+    auditor_path.write_bytes(subprocess.check_output(
+        ["git", "show", f"{args.source_ref}:scripts/audit_kaggle_result.py"],
+        cwd=ROOT,
+    ))
+    notebooks = {
         path.name: {"bytes": path.stat().st_size, "sha256": sha256(path)}
         for path in (setup_path, proof_path)
     }
@@ -97,7 +102,12 @@ def main(argv=None):
                         + "/actions/runs/" + args.run_id)
                        if args.server_url and args.repository and args.run_id else None,
         },
-        "notebooks": files,
+        "notebooks": notebooks,
+        "result_auditor": {
+            "path": auditor_path.name,
+            "bytes": auditor_path.stat().st_size,
+            "sha256": sha256(auditor_path),
+        },
         "claims": {
             "notebook_cells_have_saved_outputs": False,
             "notebook_source_is_commit_pinned": True,
@@ -120,7 +130,9 @@ def main(argv=None):
         "result ZIP at /kaggle/working/primitive_lean_result.zip.\n\n"
         "The notebook only reads GitHub source. It does not write to GitHub or submit "
         "anything to the competition. Keep handoff.json with the notebook so a returned "
-        "result ZIP can be checked against source_commit.\n",
+        "result ZIP can be checked against source_commit. Run the included auditor with "
+        "python -X utf8 audit_kaggle_result.py primitive_lean_result.zip "
+        "--expected-source <source_commit from handoff.json>.\n",
         "utf-8",
     )
     print(json.dumps(manifest, ensure_ascii=False, indent=2))

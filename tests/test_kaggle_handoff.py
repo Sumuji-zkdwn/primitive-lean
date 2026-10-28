@@ -32,6 +32,9 @@ class KaggleHandoff(unittest.TestCase):
             manifest = json.loads((output / "handoff.json").read_text("utf-8"))
             self.assertEqual(manifest["source_commit"], source)
             self.assertFalse(manifest["claims"]["github_writeback"])
+            auditor = output / "audit_kaggle_result.py"
+            self.assertEqual(hashlib.sha256(auditor.read_bytes()).hexdigest(), manifest["result_auditor"]["sha256"])
+            self.assertIn("--expected-source", (output / "README.txt").read_text("utf-8"))
             for name, settings in (
                 ("primitive_lean_setup_one_cell.ipynb", ("RUN_SETUP = True", "RUN_PROOFS = False")),
                 ("primitive_lean_proof_check.ipynb", ("RUN_SETUP = True", "RUN_PROOFS = True")),
