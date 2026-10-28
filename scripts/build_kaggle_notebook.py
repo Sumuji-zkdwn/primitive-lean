@@ -8,6 +8,17 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def committed_bytes(source_ref, relative_path):
+    """Return Git's canonical committed bytes, independent of checkout newlines."""
+    try:
+        return subprocess.check_output(
+            ["git", "show", f"{source_ref}:{relative_path}"], cwd=ROOT,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return (ROOT / relative_path).read_bytes()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-ref", required=True, help="GitHub commit containing both proof-only adapter files")
@@ -29,11 +40,12 @@ def main():
         parser.error(f"source-ref must match the checked-out source commit ({head})")
     inventory = json.loads((ROOT / "docs/import/archive_inventory.json").read_text("utf-8"))
     rows = [r for r in inventory["files"] if r["imported"]]
-    expected = {r["path"]: hashlib.sha256((ROOT / r["path"]).read_bytes()).hexdigest() for r in rows}
+    expected = {r["path"]: hashlib.sha256(committed_bytes(args.source_ref, r["path"])).hexdigest() for r in rows}
     # Accept the original verifier in the uploaded ZIP, then apply the exact
     # adapter from the selected GitHub snapshot. Proof sources are not overlaid.
     expected["tools/verify.py"] = next(r["sha256"] for r in rows if r["path"] == "tools/verify.py")
-    overlays = {p: (ROOT / p).read_bytes().decode("utf-8") for p in ["tools/verify.py", "tools/proof_only.py"]}
+    overlays = {p: committed_bytes(args.source_ref, p).decode("utf-8")
+                for p in ["tools/verify.py", "tools/proof_only.py"]}
     support = (ROOT / "notebooks/kaggle_support.py").read_text("utf-8")
     snapshot = {"repository": "Sumuji-zkdwn/primitive-lean", "source_commit": args.source_ref,
                 "original_import_commit": "b358f1a2753637992cdcfbaa5f354db3562ecc46",

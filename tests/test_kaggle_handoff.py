@@ -47,6 +47,8 @@ class KaggleHandoff(unittest.TestCase):
                 text = "".join(code[0]["source"])
                 for setting in settings:
                     self.assertIn(setting, text)
+                self.assertNotIn("\r", text)
+                self.assertIn("\\n", text)
 
     def make_result(self, path, source):
         state = {
