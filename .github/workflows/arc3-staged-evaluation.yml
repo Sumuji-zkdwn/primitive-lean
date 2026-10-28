@@ -2,7 +2,7 @@ name: ARC3 staged evaluation (no Kaggle submissions)
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'codex/arc3-public-smoke-*', 'codex/arc3-multi-seed-*']
     paths:
       - 'experiments/arc3/**'
       - 'tools/verify.py'
@@ -44,12 +44,16 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: arc3-staged-evaluation-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: false
+
 jobs:
   evaluate:
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     env:
-      ARC3_STAGE: ${{ inputs.stage || 'unit' }}
+      ARC3_STAGE: ${{ inputs.stage || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-public-smoke-') && 'public-smoke') || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-multi-seed-') && 'multi-seed') || 'unit' }}
       ARC3_GAMES: ${{ inputs.games || 'ls20 ft09 vc33' }}
       ARC3_SEEDS: ${{ inputs.seeds || '0 1 2 3 4' }}
       ARC3_BUDGET: ${{ inputs.budget || '500' }}

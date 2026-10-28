@@ -19,3 +19,14 @@ The default game list (`ls20 ft09 vc33`) reproduces the original public comparis
 For either public evaluation stage, add the API key as a repository Actions secret named `ARC_API_KEY` under **Settings → Secrets and variables → Actions**. Keep the key in the secret store; do not paste it into workflow inputs or source files. The workflow fails with a short setup message if the secret is missing.
 
 The workflow passes the key to the existing SDK download utility, which saves the selected public game environments under a temporary directory. The comparison then runs offline against those files. The artifact contains evaluation reports, traces, and environment file hashes, not the downloaded game source. It contains no Kaggle submission command.
+
+## Running before the default-branch merge
+
+The same workflow can run from an execution branch while the integration PR is
+still a draft. A relevant push to `codex/arc3-public-smoke-*` selects
+`public-smoke`; a relevant push to `codex/arc3-multi-seed-*` selects `multi-seed`.
+Both retain the default games, budgets and seeds above. Ordinary main-branch
+pushes and pull requests still select `unit`. A separate queue per branch/event
+prevents an independent evaluation or PR check from replacing a pending run.
+These execution branches use the repository `ARC_API_KEY` secret and do not
+require copying it into a different repository or any local file.
