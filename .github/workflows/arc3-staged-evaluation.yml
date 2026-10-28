@@ -1,8 +1,8 @@
-name: ARC3 staged evaluation (no Kaggle submissions)
+name: ARC3 Public Demo diagnostics (no Kaggle submissions)
 
 on:
   push:
-    branches: [main, 'codex/arc3-public-smoke-*', 'codex/arc3-multi-seed-*']
+    branches: [main, 'codex/arc3-catalog-*', 'codex/arc3-public-smoke-*', 'codex/arc3-multi-seed-*']
     paths:
       - 'experiments/arc3/**'
       - 'tools/verify.py'
@@ -23,13 +23,14 @@ on:
         default: unit
         options:
           - unit
+          - catalog
           - public-smoke
           - multi-seed
       games:
-        description: 'Space-separated public game IDs (default: the original three)'
+        description: 'all = API-visible demo catalog; or explicit IDs for a development check'
         required: false
         type: string
-        default: 'ls20 ft09 vc33'
+        default: 'all'
       seeds:
         description: 'Space-separated integer seeds for multi-seed (default: 0 through 4)'
         required: false
@@ -53,8 +54,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     env:
-      ARC3_STAGE: ${{ inputs.stage || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-public-smoke-') && 'public-smoke') || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-multi-seed-') && 'multi-seed') || 'unit' }}
-      ARC3_GAMES: ${{ inputs.games || 'ls20 ft09 vc33' }}
+      ARC3_STAGE: ${{ inputs.stage || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-catalog-') && 'catalog') || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-public-smoke-') && 'public-smoke') || (github.event_name == 'push' && startsWith(github.ref, 'refs/heads/codex/arc3-multi-seed-') && 'multi-seed') || 'unit' }}
+      ARC3_GAMES: ${{ inputs.games || 'all' }}
       ARC3_SEEDS: ${{ inputs.seeds || '0 1 2 3 4' }}
       ARC3_BUDGET: ${{ inputs.budget || '500' }}
     steps:
@@ -72,8 +73,20 @@ jobs:
       - name: Run ARC integration checks
         run: python -X utf8 tools/verify.py --arc3-only
 
-      - name: Download public ARC environments with the toolkit
+      - name: Resolve API-visible Public Demo catalog
         if: env.ARC3_STAGE != 'unit'
+        env:
+          ARC_API_KEY: ${{ secrets.ARC_API_KEY }}
+          ENVIRONMENTS_DIR: build/arc3-environments
+        run: |
+          if [[ -z "${ARC_API_KEY:-}" ]]; then
+            echo '::error::Add repository Actions secret ARC_API_KEY.'
+            exit 2
+          fi
+          python experiments/arc3/catalog.py --selection "$ARC3_GAMES" --out build/arc3-demo-catalog.json
+
+      - name: Download public ARC environments with the toolkit
+        if: env.ARC3_STAGE != 'unit' && env.ARC3_STAGE != 'catalog'
         env:
           ARC_API_KEY: ${{ secrets.ARC_API_KEY }}
           ENVIRONMENTS_DIR: build/arc3-environments
@@ -95,8 +108,8 @@ jobs:
           import sys
 
           games = os.environ["ARC3_GAMES"].split()
-          if not games or len(games) > 25 or any(not re.fullmatch(r"[a-z0-9_]+", game) for game in games):
-              raise SystemExit("games must contain 1-25 space-separated lowercase game IDs")
+          if not games or len(games) > 1000 or any(not re.fullmatch(r"[a-z0-9_]+(?:-[a-z0-9_]+)?", game) for game in games):
+              raise SystemExit("games must contain valid catalog IDs")
 
           env_dir = Path(os.environ["ENVIRONMENTS_DIR"]).resolve()
           env_dir.mkdir(parents=True, exist_ok=True)
@@ -106,7 +119,11 @@ jobs:
               *games,
           ], check=True, env=os.environ.copy())
 
-          missing = [game for game in games if not list((env_dir / game).rglob("metadata.json"))]
+          saved_ids = {
+              json.loads(path.read_text(encoding="utf-8"))["game_id"]
+              for path in env_dir.rglob("metadata.json")
+          }
+          missing = [game for game in games if game not in saved_ids]
           if missing:
               raise SystemExit(f"ARC Toolkit did not save local metadata for requested games: {missing}")
 
@@ -141,7 +158,7 @@ jobs:
           PY
 
       - name: Run comparable public-agent evaluation
-        if: env.ARC3_STAGE != 'unit'
+        if: env.ARC3_STAGE != 'unit' && env.ARC3_STAGE != 'catalog'
         shell: bash
         run: |
           set -euo pipefail
@@ -161,8 +178,8 @@ jobs:
           else:
               raise SystemExit(f"Unsupported evaluation stage: {stage}")
 
-          if not games or len(games) > 25 or any(not re.fullmatch(r"[a-z0-9_]+", game) for game in games):
-              raise SystemExit("games must contain 1-25 space-separated lowercase game IDs")
+          if not games or len(games) > 1000 or any(not re.fullmatch(r"[a-z0-9_]+(?:-[a-z0-9_]+)?", game) for game in games):
+              raise SystemExit("games must contain valid catalog IDs")
           if not seeds or len(seeds) > 10 or any(not re.fullmatch(r"\d+", seed) for seed in seeds):
               raise SystemExit("seeds must contain 1-10 nonnegative integers")
           if not re.fullmatch(r"\d+", budget_text) or not 1 <= int(budget_text) <= 5000:
@@ -184,7 +201,7 @@ jobs:
           PY
 
       - name: Summarize comparison metrics
-        if: always() && env.ARC3_STAGE != 'unit'
+        if: always() && env.ARC3_STAGE != 'unit' && env.ARC3_STAGE != 'catalog'
         shell: bash
         run: |
           set -euo pipefail
@@ -222,7 +239,9 @@ jobs:
               })
 
           report = {
-              "scope": "Downloaded public ARC environment files only",
+              "scope": "Public Demo diagnostics; not a representative or hidden test set",
+              "dataset_role": "demonstration / regression",
+              "hybrid_role": "example-specific game-ID routing diagnostic, not a general-policy improvement",
               "hidden_game_generalization": "not measured",
               "stage": os.environ["ARC3_STAGE"],
               "requested_games": os.environ["ARC3_GAMES"].split(),
@@ -235,9 +254,9 @@ jobs:
           out.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
           md = [
-              "### ARC3 public evaluation (no official score)",
+              "### ARC3 Public Demo diagnostics (no official score)",
               "",
-              "Per-game results; means are across the requested seeds. Hidden-game generalization was not measured.",
+              "Demo/regression measurements only. The game-ID routing hybrid is a diagnostic. Hidden-game generalization was not measured.",
               "",
               "| Game | Agent | Runs | Levels mean / median | Calls mean | Gameplay actions mean | Resets mean | Seconds mean | Wins | Errors |",
               "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
@@ -261,5 +280,6 @@ jobs:
           path: |
             build/arc3-results/
             build/arc3-environment-manifest.json
+            build/arc3-demo-catalog.json
           if-no-files-found: warn
           retention-days: 30
