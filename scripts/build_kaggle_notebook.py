@@ -193,7 +193,8 @@ show_output(output)
         filename = "primitive_lean_kaggle.ipynb"
     path = args.output or (ROOT / "notebooks" / filename)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + "\n", "utf-8")
+    path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + "\n",
+                    encoding="utf-8", newline="\n")
     print(path)
 
 

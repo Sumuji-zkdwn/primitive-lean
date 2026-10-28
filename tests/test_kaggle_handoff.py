@@ -37,6 +37,7 @@ class KaggleHandoff(unittest.TestCase):
                 ("primitive_lean_proof_check.ipynb", ("RUN_SETUP = True", "RUN_PROOFS = True")),
             ):
                 path = output / name
+                self.assertNotIn(b"\r", path.read_bytes())
                 self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), manifest["notebooks"][name]["sha256"])
                 notebook = json.loads(path.read_text("utf-8"))
                 self.assertEqual(notebook["metadata"]["primitive_lean"]["source_commit"], source)
