@@ -30,3 +30,10 @@ pushes and pull requests still select `unit`. A separate queue per branch/event
 prevents an independent evaluation or PR check from replacing a pending run.
 These execution branches use the repository `ARC_API_KEY` secret and do not
 require copying it into a different repository or any local file.
+
+The authorized seed-3 public smoke on 2026-10-29 completed successfully in
+[run 40745544075](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/40745544075),
+including the toolkit download, all three agents and the result artifact.
+The follow-up execution branch requests the existing five-seed defaults on the
+same three games and 500-call budget. These are public development measurements,
+not official competition scores or measurements on the other 22 public games.
