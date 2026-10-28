@@ -7,7 +7,7 @@ are conditional on these finite deterministic models and their observation API.
 from __future__ import annotations
 
 from collections import defaultdict, deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from hashlib import sha256
 import json
 from types import MappingProxyType
@@ -216,13 +216,31 @@ class _Limit(Exception):
     pass
 
 
+@dataclass
+class _SearchFrame:
+    belief: Belief
+    remaining: int
+    entered: bool = False
+    key: tuple[Belief, int] | None = None
+    legal: tuple[str, ...] = ()
+    action_index: int = 0
+    action: str | None = None
+    events: tuple[tuple[Event, Belief], ...] = ()
+    branch_index: int = 0
+    branches: dict[Event, Policy] = field(default_factory=dict)
+    child_ready: bool = False
+    child_result: Policy | None = None
+
+
 def solve(space: VersionSpace, budget: int, max_nodes: int = 20000) -> Result:
     """Find one observation-contingent policy winning in every surviving world.
 
     Searches the given finite deterministic class exactly unless max_nodes is hit.
-    Positive action costs make budget recursion well founded. No model can be
-    chosen separately for each branch or each action. The first feasible policy
-    is returned; this is not an optimal-cost or probabilistic-risk solver.
+    Positive action costs make the budget decrease along every branch. An
+    explicit stack keeps that search independent of Python's call-stack limit.
+    No model can be chosen separately for each branch or each action. The first
+    feasible policy is returned; this is not an optimal-cost or probabilistic-risk
+    solver.
     """
     if budget < 0 or max_nodes < 1:
         raise ValueError("Invalid planning limits")
@@ -231,41 +249,107 @@ def solve(space: VersionSpace, budget: int, max_nodes: int = 20000) -> Result:
     memo: dict[tuple[Belief, int], Policy | None] = {}
     expanded = 0
 
-    def visit(belief: Belief, remaining: int) -> Policy | None:
-        nonlocal expanded
-        key = (belief, remaining)
-        if key in memo:
-            return memo[key]
-        if expanded >= max_nodes:
-            raise _Limit
-        expanded += 1
-        statuses = {space.models[w.model].nodes[w.state].status for w in belief}
-        if statuses == {"win"}:
-            return Policy(None, {})
-        if "fail" in statuses or remaining <= 0:
-            return None
-        legal = set.intersection(*(set(space.models[w.model].view(w.state).actions)
-                                   for w in belief))
-        for action in sorted(legal):
-            branches = {}
-            for event, next_belief in successors(space.models, belief, action).items():
-                if event.cost > remaining:
-                    break
-                policy = visit(next_belief, remaining-event.cost)
-                if policy is None:
-                    break
-                branches[event] = policy
-            else:
-                policy = Policy(action, branches)
-                memo[key] = policy
-                return policy
-        memo[key] = None
-        return None
+    stack = [_SearchFrame(space.belief, budget)]
+    root_policy: Policy | None = None
+
+    def complete(policy: Policy | None) -> None:
+        """Return one frame's result to its parent without recursive calls."""
+        nonlocal root_policy
+        stack.pop()
+        if stack:
+            parent = stack[-1]
+            parent.child_result = policy
+            parent.child_ready = True
+        else:
+            root_policy = policy
 
     try:
-        policy = visit(space.belief, budget)
+        while stack:
+            frame = stack[-1]
+
+            if not frame.entered:
+                frame.key = (frame.belief, frame.remaining)
+                if frame.key in memo:
+                    complete(memo[frame.key])
+                    continue
+                if expanded >= max_nodes:
+                    raise _Limit
+                expanded += 1
+                statuses = {space.models[w.model].nodes[w.state].status
+                            for w in frame.belief}
+                if statuses == {"win"}:
+                    complete(Policy(None, {}))
+                    continue
+                if "fail" in statuses or frame.remaining <= 0:
+                    complete(None)
+                    continue
+                legal = set.intersection(*(
+                    set(space.models[w.model].view(w.state).actions)
+                    for w in frame.belief
+                ))
+                frame.legal = tuple(sorted(legal))
+                frame.entered = True
+                continue
+
+            if frame.child_ready:
+                child_policy = frame.child_result
+                frame.child_ready = False
+                frame.child_result = None
+                if child_policy is None:
+                    # Match the recursive DFS: a failed observation branch
+                    # rejects this action before trying the next sorted action.
+                    frame.action_index += 1
+                    frame.action = None
+                    frame.events = ()
+                    frame.branch_index = 0
+                    frame.branches.clear()
+                    continue
+
+                event, _ = frame.events[frame.branch_index]
+                frame.branches[event] = child_policy
+                frame.branch_index += 1
+                if frame.branch_index == len(frame.events):
+                    assert frame.key is not None and frame.action is not None
+                    policy = Policy(frame.action, frame.branches)
+                    memo[frame.key] = policy
+                    complete(policy)
+                continue
+
+            if frame.action is None:
+                if frame.action_index >= len(frame.legal):
+                    assert frame.key is not None
+                    memo[frame.key] = None
+                    complete(None)
+                    continue
+                frame.action = frame.legal[frame.action_index]
+                frame.events = tuple(successors(
+                    space.models, frame.belief, frame.action
+                ).items())
+                frame.branch_index = 0
+                frame.branches = {}
+                if not frame.events:
+                    # Preserve the recursive for/else behavior for an action
+                    # with no observation branches.
+                    assert frame.key is not None
+                    policy = Policy(frame.action, {})
+                    memo[frame.key] = policy
+                    complete(policy)
+                    continue
+
+            event, next_belief = frame.events[frame.branch_index]
+            if event.cost > frame.remaining:
+                frame.action_index += 1
+                frame.action = None
+                frame.events = ()
+                frame.branch_index = 0
+                frame.branches.clear()
+                continue
+
+            stack.append(_SearchFrame(next_belief, frame.remaining - event.cost))
     except _Limit:
         return Result("search-exhausted", expanded)
+
+    policy = root_policy
     if policy is None:
         return Result("infeasible-in-class", expanded)
     cert = Certificate(space.fingerprint(), budget, policy)
@@ -277,18 +361,23 @@ def verify(space: VersionSpace, certificate: Certificate) -> bool:
     if not space.belief or certificate.fingerprint != space.fingerprint():
         return False
 
-    def visit(belief: Belief, remaining: int, policy: Policy) -> bool:
+    pending = [(space.belief, certificate.budget, certificate.policy)]
+    while pending:
+        belief, remaining, policy = pending.pop()
         if not belief or remaining < 0:
             return False
         if policy.action is None:
-            return (not policy.branches and
-                    all(space.models[w.model].nodes[w.state].status == "win" for w in belief))
+            if (policy.branches or
+                    not all(space.models[w.model].nodes[w.state].status == "win"
+                            for w in belief)):
+                return False
+            continue
         if any((w.state, policy.action) not in space.models[w.model].edges for w in belief):
             return False
         branches = successors(space.models, belief, policy.action)
         if branches.keys() != policy.branches.keys():
             return False
-        return all(visit(next_belief, remaining-event.cost, policy.branches[event])
-                   for event, next_belief in branches.items())
+        pending.extend((next_belief, remaining-event.cost, policy.branches[event])
+                       for event, next_belief in branches.items())
 
-    return visit(space.belief, certificate.budget, certificate.policy)
+    return True

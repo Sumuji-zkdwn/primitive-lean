@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-28",
+  "base_commit": "67855a9d1aaf5c8434c28e0573c22646801f7ee4",
+  "review": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/1#discussion_r4390078160",
+  "reproduction": {
+    "states": [
+      {"id": "start", "status": "active"},
+      {"id": "win", "status": "win"}
+    ],
+    "transitions": [
+      {"from": "start", "action": "a-loop", "to": "start", "cost": 1},
+      {"from": "start", "action": "b-win", "to": "win", "cost": 1}
+    ],
+    "call": "solve(space, 1000)",
+    "before_fix": "RecursionError: maximum recursion depth exceeded",
+    "after_fix": {
+      "status": "solved",
+      "expanded": 1002,
+      "certificate_verified": true
+    }
+  },
+  "implementation": {
+    "solve": "Depth-first traversal with an explicit frame stack; sorted action order, observation branch order, memo keys, and max_nodes accounting are retained.",
+    "verify": "Certificate branches are checked with an explicit pending stack, preserving legality, coverage, terminal-win, budget, and fingerprint checks.",
+    "regression_test": "test_long_cyclic_search_and_certificate_verification_are_stack_safe"
+  },
+  "validation": {
+    "python": "3.12.14",
+    "requirements": "experiments/arc3/runtime/requirements.lock",
+    "pytest": "9.1.1",
+    "focused": {
+      "command": "python -m pytest -q tests/test_core.py",
+      "result": "97 passed"
+    },
+    "full_arc3": {
+      "command": "python -m pytest -q -rs",
+      "result": "163 passed"
+    },
+    "compileall": {
+      "command": "python -m compileall -q core.py tests tests_sdk runtime/arc3",
+      "result": "passed"
+    },
+    "status_cases": {
+      "solved": "Long cyclic regression returns a verifiable certificate.",
+      "infeasible-in-class": "test_each_model_solvable_does_not_supply_a_common_policy",
+      "search-exhausted": "test_search_limit_is_not_an_impossibility_proof with max_nodes=1"
+    }
+  }
+}

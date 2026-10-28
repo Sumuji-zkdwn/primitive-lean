@@ -81,6 +81,29 @@ def test_search_limit_is_not_an_impossibility_proof():
     assert solve(space, 2, max_nodes=50).status == "solved"
 
 
+def test_long_cyclic_search_and_certificate_verification_are_stack_safe():
+    model = Model(
+        "two-state-loop",
+        {"start": Node("start"), "win": Node("win", "win")},
+        {
+            ("start", "a-loop"): Step("start"),
+            ("start", "b-win"): Step("win"),
+        },
+        frozenset({"start"}),
+    )
+    space = VersionSpace(model.view("start"))
+    assert space.add(model)
+
+    result = solve(space, 1000)
+
+    assert result.status == "solved"
+    assert result.expanded < 20000
+    assert result.certificate and result.certificate.budget == 1000
+    # Sorted DFS keeps exploring the cheaper-name self-loop before b-win.
+    assert result.certificate.policy.action == "a-loop"
+    assert verify(space, result.certificate)
+
+
 def test_illegal_action_and_missing_observation_branch_fail_verification():
     space = version_space(doors("m0", "left", True), doors("m1", "right", True))
     cert = solve(space, 2).certificate
