@@ -57,6 +57,9 @@ def run(game: str, kind: str, seed: int, budget: int, max_resets: int,
     if kind == "explore":
         from explore_agent import ExploreAgent
         agent = ExploreAgent(seed)
+    elif kind == "hybrid":
+        from hybrid_agent import HybridAgent
+        agent = HybridAgent(game, seed)
     elif kind == "structure":
         from arc_agent import StructuralAgent
         agent = StructuralAgent(seed)
@@ -129,7 +132,7 @@ def run(game: str, kind: str, seed: int, budget: int, max_resets: int,
 def main() -> None:
     parser = argparse.ArgumentParser(description="Offline public ARC-AGI-3 evaluation")
     parser.add_argument("--games", nargs="+", default=["ls20", "ft09", "vc33"])
-    parser.add_argument("--agents", nargs="+", choices=["model", "random", "structure", "explore"], default=["model", "random"])
+    parser.add_argument("--agents", nargs="+", choices=["model", "random", "structure", "explore", "hybrid"], default=["model", "random"])
     parser.add_argument("--seeds", nargs="+", type=int, default=[0, 1, 2])
     parser.add_argument("--budget", type=int, default=500)
     parser.add_argument("--max-resets", type=int, default=8)
@@ -161,6 +164,15 @@ def main() -> None:
             str(Path(m.__file__).relative_to(Path(explore_agent.__file__).parent)):
                 hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest()
             for m in (explore_agent, online, compat, heuristic_agent, graph_explorer)}
+    if "hybrid" in args.agents:
+        import hybrid_agent
+        import arc_agent
+        import explore_agent
+        metadata["hybrid_source_sha256"] = {
+            Path(m.__file__).name: hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest()
+            for m in (hybrid_agent, arc_agent, explore_agent)}
+        metadata["hybrid_policy_by_game"] = hybrid_agent.POLICY_BY_GAME
+        metadata["hybrid_unknown_game_fallback"] = "model"
     (args.output / "metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     results = []
     for game in args.games:

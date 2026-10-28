@@ -1,0 +1,52 @@
+{
+  "purpose": "Candidate-selection evidence for the independent hybrid switcher; not an official score",
+  "source_commit": "67855a9d1aaf5c8434c28e0573c22646801f7ee4",
+  "source_records": [
+    "experiments/arc3/reports/explore-summary.json",
+    "experiments/arc3/reports/integrated-summary.json"
+  ],
+  "comparison_conditions": {
+    "seeds": [3],
+    "budget_calls_including_initial_reset": 500,
+    "max_resets_after_initial": 8,
+    "games": ["ls20", "ft09", "vc33"],
+    "fully_cleared_by_either_policy": false
+  },
+  "contract": {
+    "observation_input": "arc3.perception.Observation",
+    "observe": "observe(obs)",
+    "reset": "after_reset(obs)",
+    "action_output": "arc3.perception.Action from act()",
+    "switching_granularity": "one policy selected at game initialization and retained across resets",
+    "original_agent_files_changed": false
+  },
+  "policy_by_game": {"ls20": "model", "ft09": "model", "vc33": "explore"},
+  "unknown_game_fallback": "model",
+  "measured_seed_3": [
+    {"game": "ls20", "policy": "explore", "best_levels_completed": 0, "gameplay_actions": 496, "resets_after_initial": 3, "seconds": 4.143, "win": false},
+    {"game": "ls20", "policy": "model", "best_levels_completed": 1, "gameplay_actions": 495, "resets_after_initial": 4, "seconds": 1.312, "win": false},
+    {"game": "ls20", "policy": "hybrid", "best_levels_completed": null, "gameplay_actions": null, "resets_after_initial": null, "seconds": null, "win": null},
+    {"game": "ft09", "policy": "explore", "best_levels_completed": 0, "gameplay_actions": 496, "resets_after_initial": 3, "seconds": 4.2, "win": false},
+    {"game": "ft09", "policy": "model", "best_levels_completed": 1, "gameplay_actions": 493, "resets_after_initial": 6, "seconds": 6.169, "win": false},
+    {"game": "ft09", "policy": "hybrid", "best_levels_completed": null, "gameplay_actions": null, "resets_after_initial": null, "seconds": null, "win": null},
+    {"game": "vc33", "policy": "explore", "best_levels_completed": 2, "gameplay_actions": 492, "resets_after_initial": 7, "seconds": 3.424, "win": false},
+    {"game": "vc33", "policy": "model", "best_levels_completed": 1, "gameplay_actions": 460, "resets_after_initial": 8, "seconds": 3.984, "win": false},
+    {"game": "vc33", "policy": "hybrid", "best_levels_completed": null, "gameplay_actions": null, "resets_after_initial": null, "seconds": null, "win": null}
+  ],
+  "hybrid_games_executed": false,
+  "multi_seed_executed": false,
+  "runtime_availability": {
+    "environment_files_directory_present": false,
+    "arc_agi_dependency_installed": true,
+    "arcengine_dependency_installed": true,
+    "isolated_python_version": "3.14.5",
+    "game_download_attempted": false,
+    "reason_game_download_not_attempted": "No local public game files were present, and this report records no SDK or Kaggle download attempt. The staged GitHub Actions workflow downloads the public competition bundle with KAGGLE_API_TOKEN."
+  },
+  "interpretation": {
+    "seed_3_component_winners": "model on ls20 and ft09; explore on vc33",
+    "hybrid_expected_from_selection_rule": "would select the seed-3 component winner on each of these three rows; this is a rule implication, not a measured hybrid result",
+    "overfitting": "The policy table is directly selected from the same three public games and single seed used in the reported comparison.",
+    "generalization": "Other seeds and unlisted games are unverified; fallback performance is not measured."
+  }
+}

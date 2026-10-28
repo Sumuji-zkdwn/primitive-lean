@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent
 CORE = ('VERSION', 'run.py', 'check_release.py', 'make_release.py', 'QUICKSTART.md', 'pytest.ini',
         'core.py', 'learner.py', 'experiments.py', 'affine_belief.py',
         'parity_probe.py', 'trace_structure.py', 'online.py', 'arc_agent.py',
-        'explore_agent.py', 'EXISTING_AGENTS.md', 'public-agent-sources.json')
+        'explore_agent.py', 'hybrid_agent.py', 'EXISTING_AGENTS.md', 'public-agent-sources.json')
 
 
 def build(root, output):
@@ -25,7 +25,7 @@ def build(root, output):
     # Only named measurement files belong in a release, never caches or raw runs.
     for name in ('integrated-summary.json', 'integrated-metadata.json',
                  'explore-summary.json', 'explore-metadata.json',
-                 'integration-public-20261027.json'):
+                 'integration-public-20261027.json', 'hybrid-comparison.json'):
         files['reports/'+name] = (root/'reports'/name).read_bytes()
     manifest = {'name': 'ARC3 Explorer', 'version': version,
                 'sha256': {name: hashlib.sha256(data).hexdigest()

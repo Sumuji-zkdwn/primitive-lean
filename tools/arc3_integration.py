@@ -8,7 +8,7 @@ import sys
 
 
 def source_audit(root):
-    index = json.loads((root/'experiments/arc3/theorems475/index.json').read_text())
+    index = json.loads((root/'experiments/arc3/theorems475/index.json').read_text(encoding='utf-8'))
     errors = []
     if len(index['theorems']) != 475 or index['groups'] != dict(elastica=214, linear=251, main=10):
         errors.append('Unexpected theorem inventory counts')

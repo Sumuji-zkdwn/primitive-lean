@@ -1,4 +1,4 @@
-# ARC3 Explorer 0.1.0
+# ARC3 Explorer 0.1.1
 
 公開の探索エージェント「Explore It Till You Solve It」を現在のARC SDKに接続した、
 CPUで動くオフライン版です。比較用の自作モデル、記録モデル、ランダム版も含みます。
@@ -6,7 +6,7 @@ GPUと外部LLMのAPIキーは不要です。Python 3.12で動作確認してい
 
 ## 起動
 
-ZIPを展開して、`arc3-explorer-0.1.0` を作業ディレクトリにします。
+ZIPを展開して、`arc3-explorer-0.1.1` を作業ディレクトリにします。
 Python仮想環境を作成・有効化した上で実行してください。
 
 ```bash
@@ -29,7 +29,7 @@ python run.py --games vc33 --seeds 3 --budget 500 --environments /path/to/enviro
 ## 比較
 
 ```bash
-python run.py --agents explore model structure random --games ls20 ft09 vc33 --seeds 3 --budget 500 --environments /path/to/environment_files --output runs/comparison
+python run.py --agents explore model hybrid structure random --games ls20 ft09 vc33 --seeds 3 --budget 500 --environments /path/to/environment_files --output runs/comparison
 ```
 
 既存探索器は `explore`、自作の観測グラフ型モデルは `model`、
@@ -67,5 +67,16 @@ MIT LICENSEと導入ファイルのハッシュを `vendor/explore/` に同梱�
 ビルダーを使う場合は既存リポジトリ内で実行してください。
 
 ```bash
-python experiments/arc3/make_release.py --output /path/to/arc3-explorer-0.1.0.zip
+python experiments/arc3/make_release.py --output /path/to/arc3-explorer-0.1.1.zip
 ```
+
+## 混成方策の比較
+
+`--agents hybrid` はseed=3の公開比較に基づき、ls20/ft09で旧モデル、vc33で公開探索器を選びます。
+未登録ゲームでは旧モデルにフォールバックします。これは公開3ゲームへの当てはめであり、
+未知ゲームの汎化を示すものではありません。切替器は元のエージェントを変更せず、
+`observe`、`after_reset`、`act`を委譲します。
+
+`reports/hybrid-comparison.json` に既存実測値と今回の実行可否を分けて記録しています。
+この作業環境には公開ゲーム環境ファイルがないため、混成方策と複数seedのゲーム実測は未実施です。
+Kaggle公開環境を取得して比較する手順は [ACTIONS.md](ACTIONS.md) を参照してください。
