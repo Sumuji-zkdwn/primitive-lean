@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: 'Unit checks need no Kaggle token; public runs download the competition bundle'
+        description: 'Unit checks need no API key; public runs download environments with the ARC toolkit'
         type: choice
         required: true
         default: unit
@@ -68,47 +68,44 @@ jobs:
       - name: Run ARC integration checks
         run: python -X utf8 tools/verify.py --arc3-only
 
-      - name: Install KaggleHub downloader
-        if: env.ARC3_STAGE != 'unit'
-        run: python -m pip install --disable-pip-version-check 'kagglehub==1.0.3'
-
-      - name: Download public ARC environments from Kaggle
+      - name: Download public ARC environments with the toolkit
         if: env.ARC3_STAGE != 'unit'
         env:
-          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
-          KAGGLEHUB_CACHE: ${{ runner.temp }}/kagglehub-cache
+          ARC_API_KEY: ${{ secrets.ARC_API_KEY }}
+          ENVIRONMENTS_DIR: build/arc3-environments
         shell: bash
         run: |
           set -euo pipefail
-          if [[ -z "${KAGGLE_API_TOKEN:-}" ]]; then
-            echo '::error::Add KAGGLE_API_TOKEN under repository Settings > Secrets and variables > Actions.'
+          if [[ -z "${ARC_API_KEY:-}" ]]; then
+            echo '::error::Add ARC_API_KEY under repository Settings > Secrets and variables > Actions.'
             exit 2
           fi
           python - <<'PY'
           import os
           import hashlib
           import json
+          import re
+          import subprocess
           from datetime import datetime, timezone
           from pathlib import Path
+          import sys
 
-          import kagglehub
+          games = os.environ["ARC3_GAMES"].split()
+          if not games or len(games) > 25 or any(not re.fullmatch(r"[a-z0-9_]+", game) for game in games):
+              raise SystemExit("games must contain 1-25 space-separated lowercase game IDs")
 
-          root = Path(kagglehub.competition_download(
-              "arc-prize-2026-arc-agi-3",
-              output_dir="build/kaggle",
-          )).resolve()
-          candidates = sorted({
-              item.resolve()
-              for item in root.rglob("environment_files")
-              if item.is_dir()
-          })
-          if len(candidates) != 1:
-              sample = [str(p.relative_to(root)) for p in list(root.rglob("*"))[:40]]
-              raise SystemExit(
-                  "Expected exactly one environment_files directory in the Kaggle bundle; "
-                  f"found {len(candidates)}. Bundle root={root}; sample entries={sample}"
-              )
-          env_dir = candidates[0]
+          env_dir = Path(os.environ["ENVIRONMENTS_DIR"]).resolve()
+          env_dir.mkdir(parents=True, exist_ok=True)
+          subprocess.run([
+              sys.executable,
+              "experiments/arc3/runtime/arc3/download.py",
+              *games,
+          ], check=True, env=os.environ.copy())
+
+          missing = [game for game in games if not list((env_dir / game).rglob("metadata.json"))]
+          if missing:
+              raise SystemExit(f"ARC Toolkit did not save local metadata for requested games: {missing}")
+
           manifest_files = []
           digest = hashlib.sha256
           for file_path in sorted(p for p in env_dir.rglob("*") if p.is_file()):
@@ -122,19 +119,19 @@ jobs:
                   "sha256": file_digest.hexdigest(),
               })
           manifest = {
-              "competition": "arc-prize-2026-arc-agi-3",
+              "source": "ARC-AGI-3 Toolkit Arcade NORMAL local environment download",
+              "requested_games": games,
               "downloaded_at_utc": datetime.now(timezone.utc).isoformat(),
-              "environment_root_relative_to_bundle": env_dir.relative_to(root).as_posix(),
               "environment_file_count": len(manifest_files),
               "files": manifest_files,
           }
-          Path("build/arc3-kaggle-data-manifest.json").write_text(
+          Path("build/arc3-environment-manifest.json").write_text(
               json.dumps(manifest, indent=2), encoding="utf-8"
           )
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as stream:
               stream.write(f"ARC3_ENVIRONMENTS={env_dir}\n")
           print(
-              f"Public ARC environment directory located: {env_dir}; "
+              f"Public ARC environments downloaded to: {env_dir}; "
               f"hashed {len(manifest_files)} files"
           )
           PY
@@ -259,6 +256,6 @@ jobs:
           name: arc3-${{ env.ARC3_STAGE }}-${{ github.run_id }}
           path: |
             build/arc3-results/
-            build/arc3-kaggle-data-manifest.json
+            build/arc3-environment-manifest.json
           if-no-files-found: warn
           retention-days: 30

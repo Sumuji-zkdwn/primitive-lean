@@ -79,4 +79,4 @@ python experiments/arc3/make_release.py --output /path/to/arc3-explorer-0.1.1.zi
 
 `reports/hybrid-comparison.json` に既存実測値と今回の実行可否を分けて記録しています。
 この作業環境には公開ゲーム環境ファイルがないため、混成方策と複数seedのゲーム実測は未実施です。
-Kaggle公開環境を取得して比較する手順は [ACTIONS.md](ACTIONS.md) を参照してください。
+ARC APIから公開ゲーム環境を取得して比較する手順は [ACTIONS.md](ACTIONS.md) を参照してください。

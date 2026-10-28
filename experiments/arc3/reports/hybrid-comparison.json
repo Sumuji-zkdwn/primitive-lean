@@ -41,7 +41,7 @@
     "arcengine_dependency_installed": true,
     "isolated_python_version": "3.14.5",
     "game_download_attempted": false,
-    "reason_game_download_not_attempted": "No local public game files were present, and this report records no SDK or Kaggle download attempt. The staged GitHub Actions workflow downloads the public competition bundle with KAGGLE_API_TOKEN."
+    "reason_game_download_not_attempted": "No local public game files were present, and this report records no SDK or Kaggle download attempt. The staged GitHub Actions workflow retrieves selected public environments with the ARC Toolkit using the ARC_API_KEY secret."
   },
   "interpretation": {
     "seed_3_component_winners": "model on ls20 and ft09; explore on vc33",
