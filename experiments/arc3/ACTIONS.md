@@ -9,7 +9,7 @@ examples. More seeds on those games do not create new held-out environments.
 The `hybrid` game-ID lookup is retained as an example-specific diagnostic, not as
 a general-policy improvement. Generic candidate promotion belongs to the separate
 frozen-policy Kaggle rerun path, with public and final private scores distinguished.
-Source: [ARC-AGI-3 technical report, Table 1 and Section 3.2](https://arcprize.org/media/ARC_AGI_3_Technical_Report.pdf).
+Source: [ARC-AGI-3 technical report, Table 1 and Section 3.6](https://arcprize.org/media/ARC_AGI_3_Technical_Report.pdf).
 
 `.github/workflows/arc3-staged-evaluation.yml` follows the staged validation pattern used by `kb-ndtjm`. It keeps routine repository checks separate from public environment downloads and does not submit anything to Kaggle.
 

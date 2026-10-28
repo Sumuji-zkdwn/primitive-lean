@@ -5,7 +5,7 @@
 以下の既知3本の結果は接続・回帰確認です。`hybrid` のゲームID別の切替は
 例示上の診断用に残し、未知環境向けの汎用方策の改善として採用しません。
 汎化性能の確認は、方策を固定して競技の未知環境で測る段階に分けます。
-出典: [公式技術報告 Table 1 / Section 3.2](https://arcprize.org/media/ARC_AGI_3_Technical_Report.pdf)。
+出典: [公式技術報告 Table 1 / Section 3.6](https://arcprize.org/media/ARC_AGI_3_Technical_Report.pdf)。
 
 **配布版0.1.1の使い方は [QUICKSTART.md](QUICKSTART.md) を参照してください。**
 `run.py` の既定エージェントは公開の既存探索器 `explore` です。
