@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -10,10 +11,22 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-ref", required=True, help="GitHub commit containing both proof-only adapter files")
-    parser.add_argument("--setup-one-cell", action="store_true", help="Combine initialization and setup into one executable cell")
+    parser.add_argument("--source-mode", choices=("auto", "path", "github"), default="auto")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--setup-one-cell", action="store_true", help="Combine initialization and setup into one executable cell")
+    modes.add_argument("--proof-check-one-cell", action="store_true", help="Combine initialization, setup and proof checks into one executable cell")
+    parser.add_argument("--output", type=Path, help="Write the notebook to this path instead of the tracked notebooks directory")
     args = parser.parse_args()
     if len(args.source_ref) != 40 or any(c not in "0123456789abcdef" for c in args.source_ref):
         parser.error("source-ref must be a full commit SHA")
+    try:
+        head = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+    except Exception:
+        head = None
+    if head is not None and head != args.source_ref:
+        parser.error(f"source-ref must match the checked-out source commit ({head})")
     inventory = json.loads((ROOT / "docs/import/archive_inventory.json").read_text("utf-8"))
     rows = [r for r in inventory["files"] if r["imported"]]
     expected = {r["path"]: hashlib.sha256((ROOT / r["path"]).read_bytes()).hexdigest() for r in rows}
@@ -49,8 +62,8 @@ GitHubの固定コミットと、Kaggle側の原本をハッシュで対応さ�
 
 検査結果の `passed` は今回のLean証明・公理検査の範囲だけを表します。過去ZIPの保存監査・本文描画・配送監査は別です。NotebookはKaggleコンペへの提出やGitHubへの書き戻しを行いません。
 """)
-    cell("code", """# ここだけ必要に応じて変更します
-SOURCE_MODE = "auto"       # auto / path / github
+    cell("code", f"""# ここだけ必要に応じて変更します
+SOURCE_MODE = {json.dumps(args.source_mode)}       # auto / path / github
 SOURCE_PATH = ""           # 例: /kaggle/input/your-data/archive.zip または原本フォルダ
 RUN_SETUP = False           # 初回はFalseのままファイル対応だけ確認
 RUN_PROOFS = False          # 実ビルドする段階でTrue（RUN_SETUPもTrue）
@@ -125,11 +138,25 @@ else:
 print(json.dumps({name: STATE[name]["status"] for name in ("source", "setup", "proofs")}, ensure_ascii=False, indent=2))
 show_output(output)
 """)
-    if args.setup_one_cell:
+    if args.setup_one_cell or args.proof_check_one_cell:
         combined = "\n\n".join("".join(c["source"]) for c in cells if c["cell_type"] == "code")
         combined = combined.replace('RUN_SETUP = False', 'RUN_SETUP = True', 1)
+        if args.proof_check_one_cell:
+            combined = combined.replace('RUN_PROOFS = False', 'RUN_PROOFS = True', 1)
         cells = []
-        cell("markdown", """# primitive-lean：環境準備・1セル版
+        if args.proof_check_one_cell:
+            cell("markdown", """# primitive-lean：証明検査・1セル版
+
+原本照合、Lean環境準備、証明・公理検査を一つのコードセルで順番に実行します。前のセルや前セッションの変数には依存しません。
+
+生成時に固定されたGitHubコミットを読み取り、そのコミットと今回の実行ログを結果ZIPに記録します。原本ZIPをNotebook Inputから使う場合は、コード冒頭のSOURCE_MODEをautoに変更してください。
+
+初期設定はRUN_SETUP=True、RUN_PROOFS=Trueです。Kaggle SecretsにContents読み取り専用のGITHUB_TOKENを登録し、InternetをOnにして唯一のコードセルを実行します。トークンをコードへ貼り付けないでください。
+
+成功・失敗どちらの場合も、今回の段階別状態とログを /kaggle/working/primitive_lean_result.zip に保存します。KaggleのOutput欄からダウンロードしてください。NotebookはGitHubへ書き戻さず、コンペへ提出しません。
+""")
+        else:
+            cell("markdown", """# primitive-lean：環境準備・1セル版
 
 この版は初期化・原本の照合・Lean環境の準備を**1つのコードセル**で順番に実行します。前のセルや前のセッションの変数は不要です。
 
@@ -146,8 +173,14 @@ show_output(output)
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3.11"},
         "primitive_lean": snapshot}, "cells": cells}
-    filename = "primitive_lean_setup_one_cell.ipynb" if args.setup_one_cell else "primitive_lean_kaggle.ipynb"
-    path = ROOT / "notebooks" / filename
+    if args.proof_check_one_cell:
+        filename = "primitive_lean_proof_check.ipynb"
+    elif args.setup_one_cell:
+        filename = "primitive_lean_setup_one_cell.ipynb"
+    else:
+        filename = "primitive_lean_kaggle.ipynb"
+    path = args.output or (ROOT / "notebooks" / filename)
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + "\n", "utf-8")
     print(path)
 

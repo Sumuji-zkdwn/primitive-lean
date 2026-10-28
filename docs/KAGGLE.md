@@ -83,3 +83,23 @@ Notebookが `/kaggle/working/primitive_lean_result.zip` に保存する結果ZIP
 Kaggleでは絶対ファイルパスを使ったIPython FileLinkが正しく解決されないことがありました。Notebookはその形式のリンクを使わず、結果ZIPのコピーを作業フォルダ直下の `primitive_lean_result.zip` に作成するよう修正しました。右側のOutput欄を更新し、このファイルのメニューからDownloadします。
 
 既に完了した検査の結果を取り出す際は、元のタイムスタンプ付きZIPを `primitive_lean_result.zip` にコピーすればよく、証明検査の再実行は不要です。元のZIPが残っていることを確認してからコピーしてください。
+
+## GitHub ActionsからKaggleへ固定版を渡す
+
+`.github/workflows/lean-kaggle-validation.yml` は push、`main` 向けPull Request、手動起動で動きます。1回のActions実行はイベントのソースコミットをcheckoutし、Pythonテスト、固定Lean toolchainとMathlibキャッシュの準備、`python -X utf8 tools/verify.py --proof-only` の順に実行します。Lean検査ログは成功・失敗どちらでもActions artifact `lean-proof-evidence-<run id>-<attempt>` に保存されます。
+
+証明検査が成功したときだけ、同じcheckoutから次の2ファイルと `handoff.json` を含む `kaggle-handoff-<run id>-<attempt>` artifactを作ります。
+
+- `primitive_lean_proof_check.ipynb`: 原本照合、環境準備、証明検査を一セルで実行
+- `primitive_lean_setup_one_cell.ipynb`: 原本照合と環境準備までを一セルで実行
+- `handoff.json`: ソースコミット、NotebookのSHA-256、Actions run URLと権限範囲
+
+proof-check Notebookは非公開GitHubリポジトリからそのコミットを読みます。Kaggle NotebookでInternetをOnにし、Kaggle Secret `GITHUB_TOKEN` に対象repoのContents読み取り権限を設定して実行します。SecretはNotebook本文にもActionsにも渡しません。NotebookはGitHubへ書き戻さず、Kaggleコンペにも提出しません。
+
+Kaggle実行後、Outputから `primitive_lean_result.zip` を取得します。Actions artifact内の `handoff.json` に記録された `source_commit` と照合して結果を監査します。
+
+```bash
+python -X utf8 scripts/audit_kaggle_result.py primitive_lean_result.zip --expected-source <handoff.jsonのsource_commit>
+```
+
+監査器はZIPのパスとCRC、ソースコミット、ファイルハッシュ記録、source/setup/proofs各段階、proof-onlyの新規レポートと終了コードを確認します。Actionsの合格はGitHub runnerでの証明検査、監査合格は当該コミットに対するKaggle Notebookの実行結果です。片方をもう片方の代わりにはしません。2026-10-25の保存済みKaggle記録も、新規実行として扱いません。

@@ -6,6 +6,7 @@
 
 - [2026-10-25の検証結果と証拠](docs/verification/2026-10-25-kaggle.md)
 - [Kaggle Notebook](notebooks/primitive_lean_kaggle.ipynb)・[実行手順](docs/KAGGLE.md)
+- [GitHub Actions検証とKaggle handoff](.github/workflows/lean-kaggle-validation.yml)
 - [統合本文の原稿](原始の形式化.md)
 - [全定理の対応・条件・再実行](検証と再実行.md)
 - [Elastica の入口](lean/Elastica.lean)
@@ -27,6 +28,8 @@
 ユーザーのKaggle Notebookで `python -X utf8 tools/verify.py --proof-only` が終了コード0で完了しました。Elasticaビルド、`--trust=0` でのjoint検査と追補検査、全538宣言の公理監査をログで確認しています。所要235.365秒。警告・エラー・許可外公理はいずれも0件です。
 
 対象は固定ソースコミット `2e058f2d76e7c7d1fb0f811bcb26a990c47b10d9`。こちらでは提供された実行結果ZIPを照合しており、別環境でビルドを再実行したものではありません。過去版保存・配送・描画監査は今回の結果に含めません。詳細は[検証記録](docs/verification/2026-10-25-kaggle.md)を参照してください。
+
+GitHub ActionsのLean検査とKaggle用Notebook handoffは `.github/workflows/lean-kaggle-validation.yml` で実行します。Kaggle artifactはCIのproof-only検査成功後に限って作成されます。Kaggle実行結果はActions結果と分けて保存し、[監査手順](docs/KAGGLE.md#github-actionsからkaggleへ固定版を渡す)でNotebook実行のコミットと段階別結果を確認します。workflowがGitHubへpushしたりKaggleへ投稿したりはしません。
 
 統合入口 `tools/verify.py` の `--proof-only` で、保存版監査を別扱いにして今回の証明検査だけを実行できます。元の全体検査・`--lean-only` の保存版照合で必要な
 `archive/before_unification_2026-10-20.zip` は添付に含まれていません。
