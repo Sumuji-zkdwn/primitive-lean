@@ -31,10 +31,14 @@ class KaggleHandoff(unittest.TestCase):
             )
             manifest = json.loads((output / "handoff.json").read_text("utf-8"))
             self.assertEqual(manifest["source_commit"], source)
+            self.assertEqual(manifest["source_mode"], "auto")
             self.assertFalse(manifest["claims"]["github_writeback"])
             auditor = output / "audit_kaggle_result.py"
             self.assertEqual(hashlib.sha256(auditor.read_bytes()).hexdigest(), manifest["result_auditor"]["sha256"])
-            self.assertIn("--expected-source", (output / "README.txt").read_text("utf-8"))
+            readme = (output / "README.txt").read_text("utf-8")
+            self.assertIn("--expected-source", readme)
+            self.assertIn("Attach the existing archive.zip Kaggle Dataset", readme)
+            self.assertNotIn("GITHUB_TOKEN", readme)
             for name, settings in (
                 ("primitive_lean_setup_one_cell.ipynb", ("RUN_SETUP = True", "RUN_PROOFS = False")),
                 ("primitive_lean_proof_check.ipynb", ("RUN_SETUP = True", "RUN_PROOFS = True")),
@@ -53,6 +57,12 @@ class KaggleHandoff(unittest.TestCase):
                     self.assertIn(setting, text)
                 self.assertNotIn("\r", text)
                 self.assertIn("\\n", text)
+                markdown = "\n".join(
+                    "".join(cell["source"])
+                    for cell in notebook["cells"] if cell["cell_type"] == "markdown"
+                )
+                self.assertIn("archive.zip", markdown)
+                self.assertIn("GitHub Secretは不要", markdown)
 
     def make_result(self, path, source):
         state = {

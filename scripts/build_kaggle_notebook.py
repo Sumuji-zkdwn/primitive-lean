@@ -156,25 +156,31 @@ show_output(output)
         if args.proof_check_one_cell:
             combined = combined.replace('RUN_PROOFS = False', 'RUN_PROOFS = True', 1)
         cells = []
+        if args.source_mode == "auto":
+            source_instructions = "同じ `archive.zip` をNotebook Inputへ追加します。原本は固定コミットのSHA-256一覧と照合し、不一致なら停止します。このモードではGitHub Secretは不要です。"
+        elif args.source_mode == "path":
+            source_instructions = "コード冒頭の `SOURCE_PATH` に検査対象の原本ZIPまたはフォルダを指定します。原本は固定コミットのSHA-256一覧と照合し、不一致なら停止します。"
+        else:
+            source_instructions = "Kaggle SecretsにContents読み取り用の `GITHUB_TOKEN` を登録します。固定コミットだけを読み取ります。トークンをコードへ貼り付けません。"
         if args.proof_check_one_cell:
-            cell("markdown", """# primitive-lean：証明検査・1セル版
+            cell("markdown", f"""# primitive-lean：証明検査・1セル版
 
 原本照合、Lean環境準備、証明・公理検査を一つのコードセルで順番に実行します。前のセルや前セッションの変数には依存しません。
 
-生成時に固定されたGitHubコミットを読み取り、そのコミットと今回の実行ログを結果ZIPに記録します。原本ZIPをNotebook Inputから使う場合は、コード冒頭のSOURCE_MODEをautoに変更してください。
+生成時に固定されたGitHubコミットを読み取り、今回の実行ログと照合結果を出力ZIPに記録します。{source_instructions}
 
-初期設定はRUN_SETUP=True、RUN_PROOFS=Trueです。Kaggle SecretsにContents読み取り専用のGITHUB_TOKENを登録し、InternetをOnにして唯一のコードセルを実行します。トークンをコードへ貼り付けないでください。
+初期設定は `RUN_SETUP=True`、`RUN_PROOFS=True` です。InternetをOnにして唯一のコードセルを実行します。
 
-成功・失敗どちらの場合も、今回の段階別状態とログを /kaggle/working/primitive_lean_result.zip に保存します。KaggleのOutput欄からダウンロードしてください。NotebookはGitHubへ書き戻さず、コンペへ提出しません。
+成功・失敗どちらの場合も、今回の段階別状態とログを `/kaggle/working/primitive_lean_result.zip` に保存します。KaggleのOutput欄からダウンロードしてください。NotebookはGitHubへ書き戻さず、コンペへ提出しません。
 """)
         else:
-            cell("markdown", """# primitive-lean：環境準備・1セル版
+            cell("markdown", f"""# primitive-lean：環境準備・1セル版
 
 この版は初期化・原本の照合・Lean環境の準備を**1つのコードセル**で順番に実行します。前のセルや前のセッションの変数は不要です。
 
-1. 同じ `archive.zip` をInputに追加するか、原本フォルダのあるKaggle環境で使います。
-2. Notebookの **InternetをOn** にします。
-3. 下のコードセルの **▶** を押します。設定変更は不要です。
+{source_instructions}
+
+Notebookの **InternetをOn** にして、下のコードセルの **▶** を押します。
 
 この版の初期設定は `RUN_SETUP=True`、`RUN_PROOFS=False` です。今回の目標は `source: passed`、`setup: passed`、`proofs: not_run`。Lean証明検査の合格を意味しません。
 
