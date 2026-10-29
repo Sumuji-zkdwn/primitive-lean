@@ -1,0 +1,54 @@
+{
+  "timestamp_utc": "2026-10-29T11:37:24.866013+00:00",
+  "passed": true,
+  "scope": "Fresh Elastica build and joint Lean proof/axiom checks only",
+  "historical_preservation": "not_checked",
+  "delivery_and_rendering": "not_checked",
+  "build_requested": true,
+  "clean_project_build": false,
+  "stages": [
+    {
+      "name": "joint",
+      "run": {
+        "command": [
+          "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\arc3-autonomous-20261029\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "linear_input/verify_lean.py"
+        ],
+        "working_directory": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\primitive-signature-20261029",
+        "exit_code": 0,
+        "seconds": 59.204,
+        "log": "verification/proof-only-joint.log",
+        "warnings": []
+      },
+      "fresh_report": true,
+      "passed": true,
+      "report": "linear_input/lean_results.json",
+      "warnings": []
+    },
+    {
+      "name": "supplement",
+      "run": {
+        "command": [
+          "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\arc3-autonomous-20261029\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "tools/verify_main_result.py"
+        ],
+        "working_directory": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\primitive-signature-20261029",
+        "exit_code": 0,
+        "seconds": 64.473,
+        "log": "verification/proof-only-supplement.log",
+        "warnings": []
+      },
+      "fresh_report": true,
+      "passed": true,
+      "report": "verification/main-result.json",
+      "warnings": []
+    }
+  ],
+  "errors": [],
+  "theorem_count": 520,
+  "declaration_count": 572
+}
