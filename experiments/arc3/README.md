@@ -8,6 +8,8 @@
 出典: [公式技術報告 Table 1 / Section 3.6](https://arcprize.org/media/ARC_AGI_3_Technical_Report.pdf)。
 
 **配布版0.1.1の使い方は [QUICKSTART.md](QUICKSTART.md) を参照してください。**
+ft09 の seed 0・2・4 の RESET 後の停止については、
+[原因・接続側の修正・回帰検査と再実行](FT09_REGRESSION.md) を参照してください。
 `run.py` の既定エージェントは公開の既存探索器 `explore` です。
 
 既存のLeanライブラリを原本として参照し、操作・観測を記号として学ぶ試作と、

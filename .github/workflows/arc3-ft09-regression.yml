@@ -1,0 +1,104 @@
+name: ARC3 ft09 before-after regression
+
+on:
+  push:
+    branches: ['codex/arc3-ft09-regression-*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: experiments/arc3/runtime/requirements.lock
+      - name: Install pinned dependencies
+        run: python -m pip install --disable-pip-version-check -r experiments/arc3/runtime/requirements.lock
+      - name: Verify ARC integration
+        run: python -X utf8 tools/verify.py --arc3-only
+      - name: Resolve current public catalog
+        env:
+          ARC_API_KEY: ${{ secrets.ARC_API_KEY }}
+          ENVIRONMENTS_DIR: build/arc3-environments
+        run: |
+          test -n "$ARC_API_KEY"
+          python experiments/arc3/catalog.py --selection 'ls20 ft09 vc33' --out build/catalog.json
+      - name: Download one shared set of public environments
+        env:
+          ARC_API_KEY: ${{ secrets.ARC_API_KEY }}
+          ENVIRONMENTS_DIR: build/arc3-environments
+        run: |
+          python experiments/arc3/runtime/arc3/download.py $ARC3_GAMES
+          python - <<'PY'
+          import hashlib, importlib.metadata, json, platform, subprocess
+          from pathlib import Path
+          root = Path('build/arc3-environments')
+          manifest = {
+              'python': platform.python_version(), 'platform': platform.platform(),
+              'baseline_commit': '7e53dc5212ddb6d5fc444762203fbc78b26b0ec4',
+              'candidate_commit': subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip(),
+              'packages': {p: importlib.metadata.version(p) for p in ['arc-agi','arcengine','numpy']},
+              'files': [{'path': p.relative_to(root).as_posix(),
+                         'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
+                        for p in sorted(root.rglob('*')) if p.is_file()],
+          }
+          Path('build/environment-manifest.json').write_text(json.dumps(manifest, indent=2))
+          PY
+      - name: Reproduce original 45 trials
+        run: |
+          git worktree add --detach build/baseline-source 7e53dc5212ddb6d5fc444762203fbc78b26b0ec4
+          set +e
+          python build/baseline-source/experiments/arc3/run.py --games ls20 ft09 vc33 --agents explore model hybrid --seeds 0 1 2 3 4 --budget 500 --max-resets 8 --environments build/arc3-environments --output build/before > build/before.log 2>&1
+          rc=$?
+          set -e
+          echo "$rc" > build/before-exit-code.txt
+          test "$rc" = 1
+      - name: Run corrected 45 trials
+        run: python experiments/arc3/run.py --games ls20 ft09 vc33 --agents explore model hybrid --seeds 0 1 2 3 4 --budget 500 --max-resets 8 --environments build/arc3-environments --output build/after > build/after.log 2>&1
+      - name: Compare results and validate the failure set
+        run: |
+          python tools/arc3_compare_results.py --before build/before --after build/after --output build/comparison.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          before = json.loads(Path('build/before/summary.json').read_text())
+          after = json.loads(Path('build/after/summary.json').read_text())
+          expected = {('ft09-0d8bbf25', 'explore', s) for s in (0, 2, 4)}
+          assert len(before) == len(after) == 45
+          assert {(r['game'],r['agent'],r['seed']) for r in before if r['error']} == expected
+          assert all(r['error'] is None for r in after)
+          PY
+      - name: Trace original and corrected edge transitions
+        run: |
+          set +e
+          python tools/arc3_edge_diagnosis.py --source-root build/baseline-source --environments build/arc3-environments --output build/diagnosis-before > build/diagnosis-before.log 2>&1
+          rc=$?
+          set -e
+          test "$rc" = 1
+          python tools/arc3_edge_diagnosis.py --environments build/arc3-environments --output build/diagnosis-after > build/diagnosis-after.log 2>&1
+      - name: Upload evidence even if validation fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc3-ft09-regression-${{ github.run_id }}
+          path: |
+            build/catalog.json
+            build/environment-manifest.json
+            build/comparison.json
+            build/*exit-code.txt
+            build/*.log
+            build/before/
+            build/after/
+            build/diagnosis-before/
+            build/diagnosis-after/
+            experiments/arc3/reports/integration-check.json
+          retention-days: 30
