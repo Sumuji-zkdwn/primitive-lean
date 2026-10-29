@@ -27,6 +27,10 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/HistorySignature.inc", "LinearInputHistorySignature"),
     ("linear_input/lean_check/BranchForgetting.inc", "LinearInputBranchForgetting"),
     ("linear_input/lean_check/VariablePairObservations.inc", "LinearInputVariablePairs"),
+    ("linear_input/lean_check/BranchFibers.inc", "LinearInputBranchFibers"),
+    ("linear_input/lean_check/F0Retractions.inc", "LinearInputF0"),
+    ("linear_input/lean_check/F0Counting.inc", "LinearInputF0Counting"),
+    ("linear_input/lean_check/F0MergeChains.inc", "LinearInputF0Merge"),
 )
 
 

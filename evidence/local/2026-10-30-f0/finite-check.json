@@ -1,0 +1,298 @@
+{
+  "timestamp_utc": "2026-10-29T15:27:25.080305+00:00",
+  "passed": true,
+  "source_directory": "sources/f0_math_chat_2026-10-29",
+  "archive_sha256": "7c0d514bf1267c258f5a3f4b23f1c2856b3993137989a263e271fde0adefa8f1",
+  "verification_script_sha256": "0851e6f5c40bb7393e56b6e05401c40441197d7eb483077a8b6615d863e7049e",
+  "runner_sha256": "c7b5b7598e024ef7142361d7306ff565b842a1d60a2dc2f46840eec5f692cd77",
+  "normalized_newlines": true,
+  "generated_outputs": [
+    {
+      "path": "02_partitions_and_chains.md",
+      "match": true,
+      "source_sha256": "4c9da44ceb2e7f6057a1d6dcd0144687aa84ae2e4c6f5c32615adc44705c080c",
+      "fresh_sha256": "924cb68708df6af4af26a8890b1141eff1439b5be43bdebf54e271419602daec"
+    },
+    {
+      "path": "data/idempotents_by_rank.csv",
+      "match": true,
+      "source_sha256": "d23930defc5131b52e1a8e3f43f66d3daa05cb54eeb10342b796e0997cf58e45",
+      "fresh_sha256": "d23930defc5131b52e1a8e3f43f66d3daa05cb54eeb10342b796e0997cf58e45"
+    },
+    {
+      "path": "data/merge_edges_N07.csv",
+      "match": true,
+      "source_sha256": "b0fdc7ca0dcb1526ba0655c2d14f5d10b05915479134b8110d877f8f546cb8e9",
+      "fresh_sha256": "b0fdc7ca0dcb1526ba0655c2d14f5d10b05915479134b8110d877f8f546cb8e9"
+    },
+    {
+      "path": "data/merge_edges_N08.csv",
+      "match": true,
+      "source_sha256": "b3e282b8c73c5a7151f8e15af8101fdf0b90a84588480e389b4178d8e01f0c2b",
+      "fresh_sha256": "b3e282b8c73c5a7151f8e15af8101fdf0b90a84588480e389b4178d8e01f0c2b"
+    },
+    {
+      "path": "data/partition_counts_N01_to_N12.csv",
+      "match": true,
+      "source_sha256": "87c73c86a3c66de6267494a5d5e9aee1a0a0c0d787d167d0383e27c08ab92a4b",
+      "fresh_sha256": "87c73c86a3c66de6267494a5d5e9aee1a0a0c0d787d167d0383e27c08ab92a4b"
+    },
+    {
+      "path": "data/verification.json",
+      "match": true,
+      "source_sha256": "f2cb8d4e8654ed3cefb4b2d6358838852941dd225ce33f7b8b4c797c32064bb5",
+      "fresh_sha256": "1b57db399b67241c7cc6952aba42314aa2017b63ff904d64ed10041a27d31fa6"
+    }
+  ],
+  "errors": [],
+  "source_members_checked": 13,
+  "command": [
+    "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\arc3-autonomous-20261029\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "verify.py"
+  ],
+  "exit_code": 0,
+  "finite_results": {
+    "scope": {
+      "N_min": 1,
+      "N_max": 12,
+      "partition_rows": 271,
+      "S_output_arities": [
+        1,
+        2
+      ]
+    },
+    "idempotents": [
+      {
+        "N": 1,
+        "partition_types": 1,
+        "K_total": 1
+      },
+      {
+        "N": 2,
+        "partition_types": 2,
+        "K_total": 3
+      },
+      {
+        "N": 3,
+        "partition_types": 3,
+        "K_total": 10
+      },
+      {
+        "N": 4,
+        "partition_types": 5,
+        "K_total": 41
+      },
+      {
+        "N": 5,
+        "partition_types": 7,
+        "K_total": 196
+      },
+      {
+        "N": 6,
+        "partition_types": 11,
+        "K_total": 1057
+      },
+      {
+        "N": 7,
+        "partition_types": 15,
+        "K_total": 6322
+      },
+      {
+        "N": 8,
+        "partition_types": 22,
+        "K_total": 41393
+      },
+      {
+        "N": 9,
+        "partition_types": 30,
+        "K_total": 293608
+      },
+      {
+        "N": 10,
+        "partition_types": 42,
+        "K_total": 2237921
+      },
+      {
+        "N": 11,
+        "partition_types": 56,
+        "K_total": 18210094
+      },
+      {
+        "N": 12,
+        "partition_types": 77,
+        "K_total": 157329097
+      }
+    ],
+    "graphs": [
+      {
+        "N": 7,
+        "vertices": 15,
+        "distinct_edges": 28
+      },
+      {
+        "N": 8,
+        "vertices": 22,
+        "distinct_edges": 47
+      }
+    ],
+    "direct_B_formula_checks": [
+      {
+        "N": 1,
+        "idempotents_checked": 1,
+        "candidate_maps_per_K": 1,
+        "passed": true
+      },
+      {
+        "N": 2,
+        "idempotents_checked": 3,
+        "candidate_maps_per_K": 4,
+        "passed": true
+      },
+      {
+        "N": 3,
+        "idempotents_checked": 10,
+        "candidate_maps_per_K": 27,
+        "passed": true
+      },
+      {
+        "N": 4,
+        "idempotents_checked": 41,
+        "candidate_maps_per_K": 256,
+        "passed": true
+      }
+    ],
+    "imbalance_conjecture": {
+      "index_pair_checks": 528,
+      "note": "Checks include separate index pairs that induce the same type transition.",
+      "violations": [],
+      "general_proof_included": false
+    },
+    "integer_search": {
+      "34634": {
+        "factorization": [
+          2,
+          17317
+        ],
+        "exact_type_hits": [],
+        "exact_total_K_hits": [],
+        "nearest": [
+          {
+            "N": 11,
+            "partition": "(5,5,1)",
+            "quantity": "K_type",
+            "value": 34650,
+            "distance": 16
+          },
+          {
+            "N": 9,
+            "partition": "(2,2,2,2,1)",
+            "quantity": "S_B_d1",
+            "value": 32805,
+            "distance": 1829
+          },
+          {
+            "N": 10,
+            "partition": "(5,3,1,1)",
+            "quantity": "K_type",
+            "value": 37800,
+            "distance": 3166
+          },
+          {
+            "N": 9,
+            "partition": "(3,2,2,1,1)",
+            "quantity": "S_B_d1",
+            "value": 38475,
+            "distance": 3841
+          },
+          {
+            "N": 9,
+            "partition": "(3,2,2,2)",
+            "quantity": "K_type",
+            "value": 30240,
+            "distance": 4394
+          },
+          {
+            "N": 9,
+            "partition": "(4,2,2,1)",
+            "quantity": "K_type",
+            "value": 30240,
+            "distance": 4394
+          }
+        ]
+      },
+      "34643": {
+        "factorization": [
+          7,
+          7,
+          7,
+          101
+        ],
+        "exact_type_hits": [],
+        "exact_total_K_hits": [],
+        "nearest": [
+          {
+            "N": 11,
+            "partition": "(5,5,1)",
+            "quantity": "K_type",
+            "value": 34650,
+            "distance": 7
+          },
+          {
+            "N": 9,
+            "partition": "(2,2,2,2,1)",
+            "quantity": "S_B_d1",
+            "value": 32805,
+            "distance": 1838
+          },
+          {
+            "N": 10,
+            "partition": "(5,3,1,1)",
+            "quantity": "K_type",
+            "value": 37800,
+            "distance": 3157
+          },
+          {
+            "N": 9,
+            "partition": "(3,2,2,1,1)",
+            "quantity": "S_B_d1",
+            "value": 38475,
+            "distance": 3832
+          },
+          {
+            "N": 9,
+            "partition": "(3,2,2,2)",
+            "quantity": "K_type",
+            "value": 30240,
+            "distance": 4403
+          },
+          {
+            "N": 9,
+            "partition": "(4,2,2,1)",
+            "quantity": "K_type",
+            "value": 30240,
+            "distance": 4403
+          }
+        ]
+      }
+    },
+    "A322725_coefficients_0_to_9": [
+      1,
+      2,
+      5,
+      14,
+      50,
+      220,
+      1107,
+      6030,
+      34643,
+      207704
+    ],
+    "lean_verification_performed": false
+  },
+  "source_preserved": true,
+  "seconds": 0.219,
+  "scope": "Finite checks from the supplied archive, rerun without editing that archive. The embedded lean_verification_performed=false belongs to the supplied Python verifier; new Lean results are recorded separately by tools/verify.py --proof-only."
+}

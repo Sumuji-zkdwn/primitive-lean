@@ -1,0 +1,71 @@
+{
+  "archive_sha256": "7c0d514bf1267c258f5a3f4b23f1c2856b3993137989a263e271fde0adefa8f1",
+  "member_hashes_verified": 12,
+  "members": [
+    {
+      "path": "01_definitions_and_theorems.md",
+      "bytes": 5088,
+      "sha256": "adab8265427dff76066a60ee6f0ad92afe4fb228b867652346d7a9e86bb2ca0b"
+    },
+    {
+      "path": "02_partitions_and_chains.md",
+      "bytes": 4420,
+      "sha256": "4c9da44ceb2e7f6057a1d6dcd0144687aa84ae2e4c6f5c32615adc44705c080c"
+    },
+    {
+      "path": "03_conjecture_and_cautions.md",
+      "bytes": 4415,
+      "sha256": "66e821b1f27fd210a4a9bd3f960babf367993c06cfbf7311a24ac2829de2f70a"
+    },
+    {
+      "path": "04_numbers_34634_34643.md",
+      "bytes": 2494,
+      "sha256": "4c1219bbd1f3b5dc6df6958123aceb9f643db8c4be1349da83ff4f901105d592"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3043,
+      "sha256": "af5a1a6fd1948b13eef82ebae26be128ab7d5c2dc3ff590766c9e45ae99cea8c"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "bytes": 1077,
+      "sha256": "ace531a1912c1073124efa7dcc7c7523cc926acf086246440daf8d8bb5f9cfb9"
+    },
+    {
+      "path": "data/idempotents_by_rank.csv",
+      "bytes": 794,
+      "sha256": "d23930defc5131b52e1a8e3f43f66d3daa05cb54eeb10342b796e0997cf58e45"
+    },
+    {
+      "path": "data/merge_edges_N07.csv",
+      "bytes": 641,
+      "sha256": "b0fdc7ca0dcb1526ba0655c2d14f5d10b05915479134b8110d877f8f546cb8e9"
+    },
+    {
+      "path": "data/merge_edges_N08.csv",
+      "bytes": 1124,
+      "sha256": "b3e282b8c73c5a7151f8e15af8101fdf0b90a84588480e389b4178d8e01f0c2b"
+    },
+    {
+      "path": "data/partition_counts_N01_to_N12.csv",
+      "bytes": 12301,
+      "sha256": "87c73c86a3c66de6267494a5d5e9aee1a0a0c0d787d167d0383e27c08ab92a4b"
+    },
+    {
+      "path": "data/verification.json",
+      "bytes": 4436,
+      "sha256": "f2cb8d4e8654ed3cefb4b2d6358838852941dd225ce33f7b8b4c797c32064bb5"
+    },
+    {
+      "path": "sources.md",
+      "bytes": 2136,
+      "sha256": "d070d7da2dc6e92a732f2aa58917c389fbe789c15846f98b2dcf48fc34ef2002"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 10998,
+      "sha256": "0851e6f5c40bb7393e56b6e05401c40441197d7eb483077a8b6615d863e7049e"
+    }
+  ]
+}

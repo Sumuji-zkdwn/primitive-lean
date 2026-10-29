@@ -110,6 +110,10 @@ def verify_lean(rebuild):
         "HistorySignature": "Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy",
         "BranchForgetting": "Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion",
         "VariablePairObservations": "Actual partial derivatives, explicit inverses, sign changes and transport of observation hierarchies in the primitive energy family",
+        "BranchFibers": "Cosine candidate equality, explicit critical fibers and retractions, and exhaustive counts of the real inverse images of the ternary iterate",
+        "F0Retractions": "Idempotent retractions, K-S-C composition, compatible-map counting by an explicit equivalence, finite orbit bounds, and bridges to the critical branch representatives",
+        "F0Counting": "Actual labelled idempotent maps counted by fixed-point rank, with exact seven- and eight-point totals",
+        "F0MergeChains": "Positive integer-partition merge chains, mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

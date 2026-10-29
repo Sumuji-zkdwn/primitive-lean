@@ -1,10 +1,14 @@
 # 線形入力と接続のLean証明
 
+[F0Retractions.inc](F0Retractions.inc)、[F0Counting.inc](F0Counting.inc)、[F0MergeChains.inc](F0MergeChains.inc) を第10〜12追補として登録した。追加は61定理・30定義/略記、全体は664定理・766宣言である。F0の実際の写像の計数を全単射から導き、チェビシェフ代表元の核とA+B縮退へ接続し、合流チェインの一般定理を証明する。[検証記録](../../docs/verification/2026-10-30-f0.md)・[宣言と条件](../../sources/f0_formalization_2026-10-30.json)。共通入口は `python -B -X utf8 tools/verify.py --proof-only`、原本を保つ同梱有限検算の入口は `python -B -X utf8 tools/verify_f0_archive.py`（いずれもリポジトリ直下から実行）。
+
+[BranchFibers.inc](BranchFibers.inc) に40定理・7定義を追加し、全体の検証対象は603定理・675宣言となる。候補の等値条件、通常値での単射性、臨界値の明示代表元・冪等写像・1要素/2要素ファイバー、実逆像の網羅性と個数を証明する。通常値は3^n、±1は(3^n+1)/2。既存8追補の後に第9追補として結合する。[実行記録](../../docs/verification/2026-10-29-branch-fibers.md)・[宣言と条件](../../sources/branch_fibers_2026-10-29.json)。以下の件数は各追加段階の記録である。
+
 同日の続く追補 [VariablePairObservations.inc](VariablePairObservations.inc) は、実エネルギーと実偏微分から変数対・符号・観測の選択を形式化する。43定理・13定義を加え、全体は563定理・628宣言。原式との代入関係、(x,u)の明示逆と非零入力係数の必要十分条件、全32符号、(x,y)の符号変更例、観測階層の輸送と最小値での忘却を含む。[実行証拠](../../docs/verification/2026-10-29-variable-pairs.md)・[宣言と仮定](../../sources/variable_pairs_2026-10-29.json)。Researchの15組全分類は未移植である。
 
 2026年10月29日に [HistorySignature.inc](HistorySignature.inc) と [BranchForgetting.inc](BranchForgetting.inc) を追補した。実際の座標・面積積分から二次の履歴観測と面積分割を導き、実微分の停留入力からチェビシェフの正規化を導く。既存の線形入力エネルギーから最小値だけでは見えなくなる状態の条件も証明する。17+9定理と6+2定義を追加し、全体の検証対象は520定理・572宣言となる。全次数のsignature一意性や人間予測の検証は含めない。[検証記録](../../docs/verification/2026-10-29-history-branch.md)と[宣言・条件・依存の台帳](../../sources/history_branch_2026-10-29.json)に範囲を記載する。
 
-現在のGitHub版の再実行入口は `python -X utf8 tools/verify.py --proof-only`。従来の5追補の後に履歴・分岐の2追補、続いて変数対の1追補を結合して、元の全宣言とともに `--trust=0` と公理監査で検査する。以下の旧件数と保存版へのリンクは以前の追加段階の記録として保持する。
+現在のGitHub版の再実行入口は `python -X utf8 tools/verify.py --proof-only`。従来の5追補の後に履歴・分岐の2追補、続いて変数対の1追補とファイバーの1追補を結合して、元の全宣言とともに `--trust=0` と公理監査で検査する。以下の旧件数と保存版へのリンクは以前の追加段階の記録として保持する。
 
 本文と利用・検証入口は [原始の形式化](../../原始の形式化.html) に統合しました。証明原稿の配置と分担は従来どおりです。このフォルダーの36原稿が線形入力・面積拘束・帰還系の251定理を担当し、エラスティカ側の214定理を実際にimportして接続します。
 
