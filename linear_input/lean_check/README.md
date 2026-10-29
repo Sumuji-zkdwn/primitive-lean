@@ -1,5 +1,7 @@
 # 線形入力と接続のLean証明
 
+[FiniteBayes.inc](FiniteBayes.inc) と [FourBayes.inc](FourBayes.inc) を第13・14追補として登録した。53定理・17定義を追加し、全体は717定理・836宣言となる。有限確率の正規化と逐次更新、既存エラスティカ重みの分割、F0観測への押し出し、指数傾斜の相殺、支持削除の順序差、二値分配関数の実微分を証明する。[検証記録](../../docs/verification/2026-10-30-bayes.md)・[宣言と条件](../../sources/bayes_formalization_2026-10-30.json)。以下は各追加段階の記録。
+
 [F0Retractions.inc](F0Retractions.inc)、[F0Counting.inc](F0Counting.inc)、[F0MergeChains.inc](F0MergeChains.inc) を第10〜12追補として登録した。追加は61定理・30定義/略記、全体は664定理・766宣言である。F0の実際の写像の計数を全単射から導き、チェビシェフ代表元の核とA+B縮退へ接続し、合流チェインの一般定理を証明する。[検証記録](../../docs/verification/2026-10-30-f0.md)・[宣言と条件](../../sources/f0_formalization_2026-10-30.json)。共通入口は `python -B -X utf8 tools/verify.py --proof-only`、原本を保つ同梱有限検算の入口は `python -B -X utf8 tools/verify_f0_archive.py`（いずれもリポジトリ直下から実行）。
 
 [BranchFibers.inc](BranchFibers.inc) に40定理・7定義を追加し、全体の検証対象は603定理・675宣言となる。候補の等値条件、通常値での単射性、臨界値の明示代表元・冪等写像・1要素/2要素ファイバー、実逆像の網羅性と個数を証明する。通常値は3^n、±1は(3^n+1)/2。既存8追補の後に第9追補として結合する。[実行記録](../../docs/verification/2026-10-29-branch-fibers.md)・[宣言と条件](../../sources/branch_fibers_2026-10-29.json)。以下の件数は各追加段階の記録である。

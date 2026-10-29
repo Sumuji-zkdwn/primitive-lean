@@ -31,6 +31,8 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/F0Retractions.inc", "LinearInputF0"),
     ("linear_input/lean_check/F0Counting.inc", "LinearInputF0Counting"),
     ("linear_input/lean_check/F0MergeChains.inc", "LinearInputF0Merge"),
+    ("linear_input/lean_check/FiniteBayes.inc", "LinearInputBayes"),
+    ("linear_input/lean_check/FourBayes.inc", "LinearInputFourBayes"),
 )
 
 

@@ -114,6 +114,8 @@ def verify_lean(rebuild):
         "F0Retractions": "Idempotent retractions, K-S-C composition, compatible-map counting by an explicit equivalence, finite orbit bounds, and bridges to the critical branch representatives",
         "F0Counting": "Actual labelled idempotent maps counted by fixed-point rank, with exact seven- and eight-point totals",
         "F0MergeChains": "Positive integer-partition merge chains, mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton",
+        "FiniteBayes": "Finite normalization and posterior composition, support constraints, log-loss comparison, observation pushforwards, and actual Elastica exponential-weight bridges",
+        "FourBayes": "Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
