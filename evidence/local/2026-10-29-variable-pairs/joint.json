@@ -1,0 +1,5783 @@
+{
+  "passed": true,
+  "timestamp_utc": "2026-10-29T12:11:12.245984+00:00",
+  "version": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "compile": {
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "--trust=0",
+      "../linear_input/lean_check/All.lean"
+    ],
+    "working_directory": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\primitive-signature-20261029\\lean",
+    "exit_code": 0,
+    "seconds": 85.202,
+    "log": "lean_check/build.log"
+  },
+  "parent_library_build": {
+    "command": [
+      "lake",
+      "build",
+      "Elastica"
+    ],
+    "working_directory": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-29\\ar\\work\\primitive-signature-20261029\\lean",
+    "exit_code": 0,
+    "seconds": 6.95,
+    "log": "lean_check/elastica-build.log",
+    "clean_build": false
+  },
+  "theorem_count": 251,
+  "declaration_count": 280,
+  "declarations": [
+    {
+      "name": "LinearInputDesign.f",
+      "kind": "def",
+      "file": "lean_check/Design.lean",
+      "line": 18
+    },
+    {
+      "name": "LinearInputDesign.E",
+      "kind": "def",
+      "file": "lean_check/Design.lean",
+      "line": 20
+    },
+    {
+      "name": "LinearInputDesign.input",
+      "kind": "def",
+      "file": "lean_check/Design.lean",
+      "line": 23
+    },
+    {
+      "name": "LinearInputDesign.GlobalMin",
+      "kind": "def",
+      "file": "lean_check/Design.lean",
+      "line": 26
+    },
+    {
+      "name": "LinearInputDesign.scalar_gap",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 30
+    },
+    {
+      "name": "LinearInputDesign.energy_gap",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 36
+    },
+    {
+      "name": "LinearInputDesign.globalMin_of_margin",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 45
+    },
+    {
+      "name": "LinearInputDesign.margin_of_globalMin",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 55
+    },
+    {
+      "name": "LinearInputDesign.globalMin_iff_margin",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 87
+    },
+    {
+      "name": "LinearInputDesign.quadratic_gap_bound",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 92
+    },
+    {
+      "name": "LinearInputDesign.unique_of_margin_pos",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 100
+    },
+    {
+      "name": "LinearInputDesign.equal_energy_iff_of_margin_zero",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 119
+    },
+    {
+      "name": "LinearInputDesign.squared_position_error",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 152
+    },
+    {
+      "name": "LinearInputDesign.position_error",
+      "kind": "theorem",
+      "file": "lean_check/Design.lean",
+      "line": 162
+    },
+    {
+      "name": "LinearInputObservation.energy",
+      "kind": "def",
+      "file": "lean_check/Observation.lean",
+      "line": 16
+    },
+    {
+      "name": "LinearInputObservation.input_shift",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 19
+    },
+    {
+      "name": "LinearInputObservation.recover_coordinate",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 24
+    },
+    {
+      "name": "LinearInputObservation.recover_zero_input_energy",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 31
+    },
+    {
+      "name": "LinearInputObservation.pair_suffices",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 38
+    },
+    {
+      "name": "LinearInputObservation.all_inputs_iff_pair",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 43
+    },
+    {
+      "name": "LinearInputObservation.two_inputs_iff_pair",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 55
+    },
+    {
+      "name": "LinearInputObservation.summary_decodes_pair",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 75
+    },
+    {
+      "name": "LinearInputObservation.pair_decodes_all",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 84
+    },
+    {
+      "name": "LinearInputObservation.recovery_error_identity",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 93
+    },
+    {
+      "name": "LinearInputObservation.recovery_error_bound",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 102
+    },
+    {
+      "name": "LinearInputObservation.minimizer_monotone",
+      "kind": "theorem",
+      "file": "lean_check/Observation.lean",
+      "line": 111
+    },
+    {
+      "name": "LinearInputCalculus.potential",
+      "kind": "def",
+      "file": "lean_check/Calculus.lean",
+      "line": 16
+    },
+    {
+      "name": "LinearInputCalculus.hasDerivAt_potential",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 19
+    },
+    {
+      "name": "LinearInputCalculus.deriv_potential",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 27
+    },
+    {
+      "name": "LinearInputCalculus.stationary_iff_input",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 31
+    },
+    {
+      "name": "LinearInputCalculus.global_minimum_forces_input",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 36
+    },
+    {
+      "name": "LinearInputCalculus.critical_value",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 44
+    },
+    {
+      "name": "LinearInputCalculus.critical_value_le",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 50
+    },
+    {
+      "name": "LinearInputCalculus.critical_value_below_target",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 64
+    },
+    {
+      "name": "LinearInputCalculus.positive_target_counterexample",
+      "kind": "theorem",
+      "file": "lean_check/Calculus.lean",
+      "line": 70
+    },
+    {
+      "name": "LinearInputConsequences.global_minimum_forces_design",
+      "kind": "theorem",
+      "file": "lean_check/Consequences.inc",
+      "line": 9
+    },
+    {
+      "name": "LinearInputConsequences.global_minimum_iff_input_and_margin",
+      "kind": "theorem",
+      "file": "lean_check/Consequences.inc",
+      "line": 19
+    },
+    {
+      "name": "LinearInputConsequences.exists_input_global_minimum_iff",
+      "kind": "theorem",
+      "file": "lean_check/Consequences.inc",
+      "line": 33
+    },
+    {
+      "name": "LinearInputCoercivity.lowerBoundConstant",
+      "kind": "def",
+      "file": "lean_check/Coercivity.inc",
+      "line": 17
+    },
+    {
+      "name": "LinearInputCoercivity.continuous_energy",
+      "kind": "theorem",
+      "file": "lean_check/Coercivity.inc",
+      "line": 19
+    },
+    {
+      "name": "LinearInputCoercivity.coercive_identity",
+      "kind": "theorem",
+      "file": "lean_check/Coercivity.inc",
+      "line": 25
+    },
+    {
+      "name": "LinearInputCoercivity.coercive_lower_bound",
+      "kind": "theorem",
+      "file": "lean_check/Coercivity.inc",
+      "line": 33
+    },
+    {
+      "name": "LinearInputCoercivity.isCompact_sublevel",
+      "kind": "theorem",
+      "file": "lean_check/Coercivity.inc",
+      "line": 41
+    },
+    {
+      "name": "LinearInputCoercivity.isCompact_band",
+      "kind": "theorem",
+      "file": "lean_check/Coercivity.inc",
+      "line": 82
+    },
+    {
+      "name": "LinearInputCoercivity.exists_global_minimum",
+      "kind": "theorem",
+      "file": "lean_check/Coercivity.inc",
+      "line": 89
+    },
+    {
+      "name": "LinearInputGradient.gx",
+      "kind": "def",
+      "file": "lean_check/Gradient.inc",
+      "line": 10
+    },
+    {
+      "name": "LinearInputGradient.gy",
+      "kind": "def",
+      "file": "lean_check/Gradient.inc",
+      "line": 13
+    },
+    {
+      "name": "LinearInputGradient.gSq",
+      "kind": "def",
+      "file": "lean_check/Gradient.inc",
+      "line": 15
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_E_x",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_E_y",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 29
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_E_input",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 36
+    },
+    {
+      "name": "LinearInputGradient.deriv_E_x",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputGradient.deriv_E_y",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 47
+    },
+    {
+      "name": "LinearInputGradient.stationary_iff",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 51
+    },
+    {
+      "name": "LinearInputGradient.partials_zero_iff",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 68
+    },
+    {
+      "name": "LinearInputGradient.stationary_value_le",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 74
+    },
+    {
+      "name": "LinearInputGradient.no_stationary_on_band",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 82
+    },
+    {
+      "name": "LinearInputGradient.gSq_nonneg",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 89
+    },
+    {
+      "name": "LinearInputGradient.gSq_eq_zero_iff",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 93
+    },
+    {
+      "name": "LinearInputGradient.gSq_pos_on_band",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 103
+    },
+    {
+      "name": "LinearInputGradient.continuous_E",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 113
+    },
+    {
+      "name": "LinearInputGradient.continuous_gSq",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 120
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_energy_curve",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 128
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_energy_of_velocity",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 143
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_energy_fixed_input",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 160
+    },
+    {
+      "name": "LinearInputGradient.hasDerivAt_squared_gap_fixed_input",
+      "kind": "theorem",
+      "file": "lean_check/Gradient.inc",
+      "line": 176
+    },
+    {
+      "name": "LinearInputDissipation.exponential_bound",
+      "kind": "theorem",
+      "file": "lean_check/Dissipation.lean",
+      "line": 17
+    },
+    {
+      "name": "LinearInputDissipation.squared_error_exponential",
+      "kind": "theorem",
+      "file": "lean_check/Dissipation.lean",
+      "line": 48
+    },
+    {
+      "name": "LinearInputDissipation.squared_error_tendsto_zero",
+      "kind": "theorem",
+      "file": "lean_check/Dissipation.lean",
+      "line": 68
+    },
+    {
+      "name": "LinearInputDissipation.error_tendsto_zero",
+      "kind": "theorem",
+      "file": "lean_check/Dissipation.lean",
+      "line": 86
+    },
+    {
+      "name": "LinearInputRegularBand.band_nonempty",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 10
+    },
+    {
+      "name": "LinearInputRegularBand.exists_positive_gradient_bound",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 23
+    },
+    {
+      "name": "LinearInputRegularBand.exists_valley_global_minimum",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 33
+    },
+    {
+      "name": "LinearInputRegularBand.exists_minimizing_stationary_root",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputRegularBand.exists_unique_global_minimum_of_input_ne_zero",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 51
+    },
+    {
+      "name": "LinearInputRegularBand.IsTrajectory",
+      "kind": "def",
+      "file": "lean_check/RegularBand.inc",
+      "line": 73
+    },
+    {
+      "name": "LinearInputRegularBand.hasDerivAt_gap_of_trajectory",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 82
+    },
+    {
+      "name": "LinearInputRegularBand.energy_convergence_in_band",
+      "kind": "theorem",
+      "file": "lean_check/RegularBand.inc",
+      "line": 91
+    },
+    {
+      "name": "LinearInputInvariance.squared_error_antitone",
+      "kind": "theorem",
+      "file": "lean_check/Invariance.inc",
+      "line": 11
+    },
+    {
+      "name": "LinearInputInvariance.error_nonneg",
+      "kind": "theorem",
+      "file": "lean_check/Invariance.inc",
+      "line": 31
+    },
+    {
+      "name": "LinearInputInvariance.error_le_initial",
+      "kind": "theorem",
+      "file": "lean_check/Invariance.inc",
+      "line": 47
+    },
+    {
+      "name": "LinearInputInvariance.energy_band_of_trajectory",
+      "kind": "theorem",
+      "file": "lean_check/Invariance.inc",
+      "line": 58
+    },
+    {
+      "name": "LinearInputInvariance.energy_convergence_of_initial",
+      "kind": "theorem",
+      "file": "lean_check/Invariance.inc",
+      "line": 78
+    },
+    {
+      "name": "LinearInputCurvatureBridge.energy_shear",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 14
+    },
+    {
+      "name": "LinearInputCurvatureBridge.gy_shear",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 20
+    },
+    {
+      "name": "LinearInputCurvatureBridge.gx_shear",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 24
+    },
+    {
+      "name": "LinearInputCurvatureBridge.forced_phase_hasDerivAt",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 34
+    },
+    {
+      "name": "LinearInputCurvatureBridge.phase_hasDerivAt",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 54
+    },
+    {
+      "name": "LinearInputCurvatureBridge.forced_curvature_of_phase",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 65
+    },
+    {
+      "name": "LinearInputCurvatureBridge.forced_energy_hasDerivAt_zero",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 80
+    },
+    {
+      "name": "LinearInputCurvatureBridge.energy_hasDerivAt_zero",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 89
+    },
+    {
+      "name": "LinearInputCurvatureBridge.forced_energy_constant",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 97
+    },
+    {
+      "name": "LinearInputCurvatureBridge.energy_constant",
+      "kind": "theorem",
+      "file": "lean_check/CurvatureBridge.inc",
+      "line": 110
+    },
+    {
+      "name": "LinearInputVariationalBridge.energy_linear_density",
+      "kind": "theorem",
+      "file": "lean_check/VariationalBridge.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputVariationalBridge.stationary_linear_density_iff",
+      "kind": "theorem",
+      "file": "lean_check/VariationalBridge.inc",
+      "line": 27
+    },
+    {
+      "name": "LinearInputVariationalBridge.locallyMinimizing_linear_density_iff",
+      "kind": "theorem",
+      "file": "lean_check/VariationalBridge.inc",
+      "line": 35
+    },
+    {
+      "name": "LinearInputVariationalBridge.stationary_quadratic_curvature",
+      "kind": "theorem",
+      "file": "lean_check/VariationalBridge.inc",
+      "line": 44
+    },
+    {
+      "name": "LinearInputVariationalBridge.stationary_quadratic_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/VariationalBridge.inc",
+      "line": 57
+    },
+    {
+      "name": "LinearInputVariationalBridge.locallyMinimizing_linear_quadratic_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/VariationalBridge.inc",
+      "line": 78
+    },
+    {
+      "name": "LinearInputFeedback.feedback_rate",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 12
+    },
+    {
+      "name": "LinearInputFeedback.feedback_coefficient",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 19
+    },
+    {
+      "name": "LinearInputFeedback.decomposition_of_rate",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 27
+    },
+    {
+      "name": "LinearInputFeedback.rate_iff_exists_unique_feedback",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputFeedback.zero_gradient_rate",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 61
+    },
+    {
+      "name": "LinearInputFeedback.zero_gradient_feedback_iff",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 66
+    },
+    {
+      "name": "LinearInputFeedback.zero_gradient_counterexample",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 73
+    },
+    {
+      "name": "LinearInputFeedback.energy_rate_iff_exists_unique_feedback",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 81
+    },
+    {
+      "name": "LinearInputFeedback.hasDerivAt_energy_iff_exists_unique_feedback",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 92
+    },
+    {
+      "name": "LinearInputFeedback.energy_rate_iff_exists_unique_feedback_on_band",
+      "kind": "theorem",
+      "file": "lean_check/Feedback.inc",
+      "line": 116
+    },
+    {
+      "name": "LinearInputConstraints.exists_three_multipliers_of_kernel",
+      "kind": "theorem",
+      "file": "lean_check/Constraints.inc",
+      "line": 10
+    },
+    {
+      "name": "LinearInputAreaVariation.area",
+      "kind": "def",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 16
+    },
+    {
+      "name": "LinearInputAreaVariation.hasDerivAt_parameter_integral",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 21
+    },
+    {
+      "name": "LinearInputAreaVariation.continuous_primitive_parameter",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputAreaVariation.hasDerivAt_xCoord_variation",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 51
+    },
+    {
+      "name": "LinearInputAreaVariation.hasDerivAt_yCoord_variation",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 66
+    },
+    {
+      "name": "LinearInputAreaVariation.continuous_moment",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 81
+    },
+    {
+      "name": "LinearInputAreaVariation.hasDerivAt_area_variation_raw",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 90
+    },
+    {
+      "name": "LinearInputAreaVariation.area_variation_integral_eq",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 138
+    },
+    {
+      "name": "LinearInputAreaVariation.hasDerivAt_area_variation",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 211
+    },
+    {
+      "name": "LinearInputAreaVariation.hasDerivAt_area_variation_feasible",
+      "kind": "theorem",
+      "file": "lean_check/AreaVariation.inc",
+      "line": 221
+    },
+    {
+      "name": "LinearInputPressureCurvature.pressure_firstIntegral_hasDerivAt",
+      "kind": "theorem",
+      "file": "lean_check/PressureCurvature.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputPressureCurvature.pressure_angleForce_hasDerivAt",
+      "kind": "theorem",
+      "file": "lean_check/PressureCurvature.inc",
+      "line": 41
+    },
+    {
+      "name": "LinearInputPressureCurvature.pressure_angle_firstIntegral_curvature",
+      "kind": "theorem",
+      "file": "lean_check/PressureCurvature.inc",
+      "line": 57
+    },
+    {
+      "name": "LinearInputPressureCurvature.pressure_angle_curvature",
+      "kind": "theorem",
+      "file": "lean_check/PressureCurvature.inc",
+      "line": 95
+    },
+    {
+      "name": "LinearInputPressureCurvature.pressure_angle_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/PressureCurvature.inc",
+      "line": 108
+    },
+    {
+      "name": "LinearInputPressureCurvature.pressure_angle_eq_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/PressureCurvature.inc",
+      "line": 135
+    },
+    {
+      "name": "LinearInputPressureStationary.contDiff_xCoord",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 15
+    },
+    {
+      "name": "LinearInputPressureStationary.contDiff_yCoord",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 24
+    },
+    {
+      "name": "LinearInputPressureStationary.contDiff_area_weight",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 34
+    },
+    {
+      "name": "LinearInputPressureStationary.weighted_angleEquation_of_stationary",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 42
+    },
+    {
+      "name": "LinearInputPressureStationary.pressureEnergy",
+      "kind": "def",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 103
+    },
+    {
+      "name": "LinearInputPressureStationary.Stationary",
+      "kind": "def",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 109
+    },
+    {
+      "name": "LinearInputPressureStationary.hasDerivAt_pressureEnergy_variation_feasible",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 117
+    },
+    {
+      "name": "LinearInputPressureStationary.stationary_iff_firstVariation",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 135
+    },
+    {
+      "name": "LinearInputPressureStationary.stationary_angleEquation",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 166
+    },
+    {
+      "name": "LinearInputPressureStationary.stationary_curvature",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 180
+    },
+    {
+      "name": "LinearInputPressureStationary.stationary_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 194
+    },
+    {
+      "name": "LinearInputPressureStationary.AreaStationary",
+      "kind": "def",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 212
+    },
+    {
+      "name": "LinearInputPressureStationary.areaStationary_exists_pressure",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 222
+    },
+    {
+      "name": "LinearInputPressureStationary.areaStationary_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/PressureStationary.inc",
+      "line": 263
+    },
+    {
+      "name": "LinearInputAreaRegularity.constraint_coefficients_zero",
+      "kind": "theorem",
+      "file": "lean_check/AreaRegularity.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputAreaRegularity.exists_normalized_constraint_directions",
+      "kind": "theorem",
+      "file": "lean_check/AreaRegularity.inc",
+      "line": 121
+    },
+    {
+      "name": "LinearInputAreaRegularity.pressure_coefficient_unique",
+      "kind": "theorem",
+      "file": "lean_check/AreaRegularity.inc",
+      "line": 179
+    },
+    {
+      "name": "LinearInputAreaRegularity.areaStationary_of_constant_curvature",
+      "kind": "theorem",
+      "file": "lean_check/AreaRegularity.inc",
+      "line": 197
+    },
+    {
+      "name": "LinearInputAreaParameters.Parameters",
+      "kind": "abbrev",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 13
+    },
+    {
+      "name": "LinearInputAreaParameters.continuous_parameter_intervalIntegral",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 21
+    },
+    {
+      "name": "LinearInputAreaParameters.continuous_parameter_primitive",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 28
+    },
+    {
+      "name": "LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral_any",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 36
+    },
+    {
+      "name": "LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 59
+    },
+    {
+      "name": "LinearInputAreaParameters.contDiff_two_parameter_intervalIntegral",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 68
+    },
+    {
+      "name": "LinearInputAreaParameters.hasFDerivAt_integral_linear_parameters",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 91
+    },
+    {
+      "name": "LinearInputAreaParameters.contDiff_two_integral_linear_parameters",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 107
+    },
+    {
+      "name": "LinearInputAreaParameters.continuous_smulRight_parameter",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 135
+    },
+    {
+      "name": "LinearInputAreaParameters.contDiff_two_integral_mul",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 144
+    },
+    {
+      "name": "LinearInputAreaParameters.contDiff_two_integral_primitive_mul",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 172
+    },
+    {
+      "name": "LinearInputAreaParameters.parameterLinear",
+      "kind": "def",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 229
+    },
+    {
+      "name": "LinearInputAreaParameters.parameterLinear_apply",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 240
+    },
+    {
+      "name": "LinearInputAreaParameters.continuous_parameterLinear",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 246
+    },
+    {
+      "name": "LinearInputAreaParameters.areaParameters",
+      "kind": "def",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 253
+    },
+    {
+      "name": "LinearInputAreaParameters.contDiff_area_linear_parameters",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 257
+    },
+    {
+      "name": "LinearInputAreaParameters.contDiff_areaParameters",
+      "kind": "theorem",
+      "file": "lean_check/AreaParameters.inc",
+      "line": 283
+    },
+    {
+      "name": "LinearInputAreaFamily.corrected_family_C1_close",
+      "kind": "theorem",
+      "file": "lean_check/AreaFamily.inc",
+      "line": 28
+    },
+    {
+      "name": "LinearInputAreaFamily.hasDerivAt_corrected_energy_feasible",
+      "kind": "theorem",
+      "file": "lean_check/AreaFamily.inc",
+      "line": 92
+    },
+    {
+      "name": "LinearInputAreaExactVariation.constraintParameters",
+      "kind": "def",
+      "file": "lean_check/AreaExactVariation.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputAreaExactVariation.contDiff_constraintParameters",
+      "kind": "theorem",
+      "file": "lean_check/AreaExactVariation.inc",
+      "line": 25
+    },
+    {
+      "name": "LinearInputAreaExactVariation.fderiv_constraintParameters_zero",
+      "kind": "theorem",
+      "file": "lean_check/AreaExactVariation.inc",
+      "line": 39
+    },
+    {
+      "name": "LinearInputAreaExactVariation.integral_parameterLinear",
+      "kind": "theorem",
+      "file": "lean_check/AreaExactVariation.inc",
+      "line": 83
+    },
+    {
+      "name": "LinearInputAreaExactVariation.exists_implicit_correction",
+      "kind": "theorem",
+      "file": "lean_check/AreaExactVariation.inc",
+      "line": 114
+    },
+    {
+      "name": "LinearInputAreaExactVariation.exists_exact_area_variation",
+      "kind": "theorem",
+      "file": "lean_check/AreaExactVariation.inc",
+      "line": 137
+    },
+    {
+      "name": "LinearInputAreaMinimum.LocallyMinimizing",
+      "kind": "def",
+      "file": "lean_check/AreaMinimum.inc",
+      "line": 17
+    },
+    {
+      "name": "LinearInputAreaMinimum.locallyMinimizing_isLocalMin_corrected_family",
+      "kind": "theorem",
+      "file": "lean_check/AreaMinimum.inc",
+      "line": 29
+    },
+    {
+      "name": "LinearInputAreaMinimum.locallyMinimizing_areaStationary",
+      "kind": "theorem",
+      "file": "lean_check/AreaMinimum.inc",
+      "line": 71
+    },
+    {
+      "name": "LinearInputAreaMinimum.locallyMinimizing_existsUnique_pressure",
+      "kind": "theorem",
+      "file": "lean_check/AreaMinimum.inc",
+      "line": 102
+    },
+    {
+      "name": "LinearInputAreaMinimum.locallyMinimizing_curvature",
+      "kind": "theorem",
+      "file": "lean_check/AreaMinimum.inc",
+      "line": 114
+    },
+    {
+      "name": "LinearInputAreaMinimum.locallyMinimizing_phase_energy",
+      "kind": "theorem",
+      "file": "lean_check/AreaMinimum.inc",
+      "line": 127
+    },
+    {
+      "name": "LinearInputStrictEnergy.error_eq_initial_mul_exp_integral",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputStrictEnergy.error_pos",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 62
+    },
+    {
+      "name": "LinearInputStrictEnergy.continuousOn_gradient_coefficient",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 71
+    },
+    {
+      "name": "LinearInputStrictEnergy.energy_gap_exact",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 82
+    },
+    {
+      "name": "LinearInputStrictEnergy.energy_eq_target_iff",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 93
+    },
+    {
+      "name": "LinearInputStrictEnergy.energy_strictly_above_target",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 102
+    },
+    {
+      "name": "LinearInputStrictEnergy.energy_deriv_neg",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 112
+    },
+    {
+      "name": "LinearInputStrictEnergy.energy_strictAntiOn",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 128
+    },
+    {
+      "name": "LinearInputStrictEnergy.trajectory_injOn",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 142
+    },
+    {
+      "name": "LinearInputStrictEnergy.trajectory_no_return",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 155
+    },
+    {
+      "name": "LinearInputStrictEnergy.trajectory_not_periodic",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 168
+    },
+    {
+      "name": "LinearInputStrictEnergy.error_eq_initial_mul_exp_integral_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 180
+    },
+    {
+      "name": "LinearInputStrictEnergy.energy_gap_exact_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/StrictEnergy.inc",
+      "line": 226
+    },
+    {
+      "name": "LinearInputGradientBound.reduced_energy_bound",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 14
+    },
+    {
+      "name": "LinearInputGradientBound.energy_gradient_identity",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 22
+    },
+    {
+      "name": "LinearInputGradientBound.gradient_linear_term_sq",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 31
+    },
+    {
+      "name": "LinearInputGradientBound.gradientLowerBound",
+      "kind": "def",
+      "file": "lean_check/GradientBound.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputGradientBound.explicit_gradient_bound_pos",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 47
+    },
+    {
+      "name": "LinearInputGradientBound.explicit_gradient_bound",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 56
+    },
+    {
+      "name": "LinearInputGradientBound.gradient_bound_of_initial",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 96
+    },
+    {
+      "name": "LinearInputGradientBound.energy_error_exponential_of_initial",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 110
+    },
+    {
+      "name": "LinearInputGradientBound.squared_error_exponential_of_initial",
+      "kind": "theorem",
+      "file": "lean_check/GradientBound.inc",
+      "line": 136
+    },
+    {
+      "name": "LinearInputInternalUpdate.square_bound",
+      "kind": "theorem",
+      "file": "lean_check/InternalUpdate.inc",
+      "line": 13
+    },
+    {
+      "name": "LinearInputInternalUpdate.square_le_max",
+      "kind": "theorem",
+      "file": "lean_check/InternalUpdate.inc",
+      "line": 44
+    },
+    {
+      "name": "LinearInputInternalUpdate.exists_forcing_bound",
+      "kind": "theorem",
+      "file": "lean_check/InternalUpdate.inc",
+      "line": 61
+    },
+    {
+      "name": "LinearInputInternalUpdate.internal_update_bounded",
+      "kind": "theorem",
+      "file": "lean_check/InternalUpdate.inc",
+      "line": 78
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.vectorField",
+      "kind": "def",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 19
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.contDiff_vectorField",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 23
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.exists_local_solution",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 30
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.local_solution_unique",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 39
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.solution_unique_on_interval",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 53
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.exists_local_unique_solution",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 89
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.exists_local_solution_one_add_sq",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 105
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.hasDerivAt_vectorField_iff",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 113
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.exists_local_coordinate_solution",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 130
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.hasDerivAt_energy_of_solution",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 147
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.exists_local_solution_energy_formula",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 157
+    },
+    {
+      "name": "LinearInputTrajectoryExistence.isTrajectory_of_global_solution",
+      "kind": "theorem",
+      "file": "lean_check/TrajectoryExistence.inc",
+      "line": 183
+    },
+    {
+      "name": "LinearInputFiniteBand.error_band_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/FiniteBand.inc",
+      "line": 8
+    },
+    {
+      "name": "LinearInputFiniteBand.energy_band_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/FiniteBand.inc",
+      "line": 23
+    },
+    {
+      "name": "LinearInputFiniteBand.energy_band_on_Ioo",
+      "kind": "theorem",
+      "file": "lean_check/FiniteBand.inc",
+      "line": 40
+    },
+    {
+      "name": "LinearInputCompactLocalExistence.exists_uniform_local_time",
+      "kind": "theorem",
+      "file": "lean_check/CompactLocalExistence.inc",
+      "line": 18
+    },
+    {
+      "name": "LinearInputGlobalContinuation.local_unique",
+      "kind": "theorem",
+      "file": "lean_check/GlobalContinuation.inc",
+      "line": 15
+    },
+    {
+      "name": "LinearInputGlobalContinuation.unique_on_Ioo",
+      "kind": "theorem",
+      "file": "lean_check/GlobalContinuation.inc",
+      "line": 26
+    },
+    {
+      "name": "LinearInputGlobalContinuation.piecewise_eqOn",
+      "kind": "theorem",
+      "file": "lean_check/GlobalContinuation.inc",
+      "line": 62
+    },
+    {
+      "name": "LinearInputGlobalContinuation.hasDerivAt_piecewise",
+      "kind": "theorem",
+      "file": "lean_check/GlobalContinuation.inc",
+      "line": 82
+    },
+    {
+      "name": "LinearInputGlobalContinuation.exists_arbitrarily_long_solution",
+      "kind": "theorem",
+      "file": "lean_check/GlobalContinuation.inc",
+      "line": 107
+    },
+    {
+      "name": "LinearInputGlobalContinuation.exists_forward_solution",
+      "kind": "theorem",
+      "file": "lean_check/GlobalContinuation.inc",
+      "line": 168
+    },
+    {
+      "name": "LinearInputGlobalTrajectory.exists_global_solution",
+      "kind": "theorem",
+      "file": "lean_check/GlobalTrajectory.inc",
+      "line": 11
+    },
+    {
+      "name": "LinearInputGlobalTrajectory.exists_global_coordinate_trajectory",
+      "kind": "theorem",
+      "file": "lean_check/GlobalTrajectory.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputGlobalTrajectory.exists_global_solution_one_add_sq",
+      "kind": "theorem",
+      "file": "lean_check/GlobalTrajectory.inc",
+      "line": 56
+    },
+    {
+      "name": "LinearInputForwardUniqueness.solution_unique_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/ForwardUniqueness.inc",
+      "line": 22
+    },
+    {
+      "name": "LinearInputForwardUniqueness.solution_unique_on_Ici",
+      "kind": "theorem",
+      "file": "lean_check/ForwardUniqueness.inc",
+      "line": 48
+    },
+    {
+      "name": "LinearInputForwardUniqueness.feedback_solution_unique_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/ForwardUniqueness.inc",
+      "line": 59
+    },
+    {
+      "name": "LinearInputForwardUniqueness.feedback_solution_unique_on_Ici",
+      "kind": "theorem",
+      "file": "lean_check/ForwardUniqueness.inc",
+      "line": 70
+    },
+    {
+      "name": "LinearInputForwardUniqueness.coordinate_solution_unique_on_Ici",
+      "kind": "theorem",
+      "file": "lean_check/ForwardUniqueness.inc",
+      "line": 81
+    },
+    {
+      "name": "LinearInputGlobalConsequences.exists_global_convergent_solution",
+      "kind": "theorem",
+      "file": "lean_check/GlobalConsequences.inc",
+      "line": 10
+    },
+    {
+      "name": "LinearInputGlobalConsequences.exists_global_injective_convergent_solution",
+      "kind": "theorem",
+      "file": "lean_check/GlobalConsequences.inc",
+      "line": 35
+    },
+    {
+      "name": "LinearInputLevelGeometry.radial_gradient_lower_bound",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 14
+    },
+    {
+      "name": "LinearInputLevelGeometry.radial_gradient_pos",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 25
+    },
+    {
+      "name": "LinearInputLevelGeometry.quadratic_remainder_bound",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 30
+    },
+    {
+      "name": "LinearInputLevelGeometry.energy_outward_scaling",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 39
+    },
+    {
+      "name": "LinearInputLevelGeometry.energy_outward_strict",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 59
+    },
+    {
+      "name": "LinearInputLevelGeometry.existsUnique_positive_radius",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 67
+    },
+    {
+      "name": "LinearInputLevelGeometry.radius",
+      "kind": "def",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 120
+    },
+    {
+      "name": "LinearInputLevelGeometry.direction",
+      "kind": "def",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 122
+    },
+    {
+      "name": "LinearInputLevelGeometry.radius_pos",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 124
+    },
+    {
+      "name": "LinearInputLevelGeometry.radius_pos_of_energy",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 130
+    },
+    {
+      "name": "LinearInputLevelGeometry.direction_mem_circle",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 139
+    },
+    {
+      "name": "LinearInputLevelGeometry.radius_mul_direction",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 146
+    },
+    {
+      "name": "LinearInputLevelGeometry.direction_positive_scale",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 150
+    },
+    {
+      "name": "LinearInputLevelGeometry.direction_of_circle",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 159
+    },
+    {
+      "name": "LinearInputLevelGeometry.continuous_radius",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 163
+    },
+    {
+      "name": "LinearInputLevelGeometry.continuous_direction_subtype",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 165
+    },
+    {
+      "name": "LinearInputLevelGeometry.eq_of_direction_energy_eq",
+      "kind": "theorem",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 174
+    },
+    {
+      "name": "LinearInputLevelGeometry.levelHomeomorphCircle",
+      "kind": "def",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 222
+    },
+    {
+      "name": "LinearInputLevelGeometry.bandHomeomorphCylinder",
+      "kind": "def",
+      "file": "lean_check/LevelGeometry.inc",
+      "line": 258
+    },
+    {
+      "name": "LinearInputFiniteInternalUpdate.exponential_bound_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/FiniteInternalUpdate.inc",
+      "line": 7
+    },
+    {
+      "name": "LinearInputFiniteInternalUpdate.square_bound_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/FiniteInternalUpdate.inc",
+      "line": 37
+    },
+    {
+      "name": "LinearInputFiniteInternalUpdate.abs_le_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/FiniteInternalUpdate.inc",
+      "line": 68
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.State",
+      "kind": "abbrev",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 16
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.vectorField",
+      "kind": "def",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 20
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.contDiff_vectorField",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 25
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.hasDerivAt_internal",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 33
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.hasDerivAt_energy",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 43
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.energy_band_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 54
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.isTrajectory_of_global_solution",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 75
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.exists_internal_bounds",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 86
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.band_box_on_Icc",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 107
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.exists_global_solution",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 130
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.solution_unique_on_Ici",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 190
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.contDiff_finite_expansion",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 203
+    },
+    {
+      "name": "LinearInputCoupledTrajectory.exists_global_solution_one_add_sq",
+      "kind": "theorem",
+      "file": "lean_check/CoupledTrajectory.inc",
+      "line": 212
+    },
+    {
+      "name": "LinearInputLevelConvergence.bandRadius",
+      "kind": "def",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 17
+    },
+    {
+      "name": "LinearInputLevelConvergence.bandRadius_nonneg",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 20
+    },
+    {
+      "name": "LinearInputLevelConvergence.norm_le_bandRadius",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 24
+    },
+    {
+      "name": "LinearInputLevelConvergence.target_level_nonempty",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 51
+    },
+    {
+      "name": "LinearInputLevelConvergence.exists_radial_target_point",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 60
+    },
+    {
+      "name": "LinearInputLevelConvergence.dist_radial_multiple",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 91
+    },
+    {
+      "name": "LinearInputLevelConvergence.exists_level_point_distance_bound",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 98
+    },
+    {
+      "name": "LinearInputLevelConvergence.infDist_level_bound",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 122
+    },
+    {
+      "name": "LinearInputLevelConvergence.spatial_error_exponential_of_initial",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 134
+    },
+    {
+      "name": "LinearInputLevelConvergence.spatial_convergence_of_initial",
+      "kind": "theorem",
+      "file": "lean_check/LevelConvergence.inc",
+      "line": 159
+    },
+    {
+      "name": "LinearInputCoupledConsequences.exists_global_convergent_solution",
+      "kind": "theorem",
+      "file": "lean_check/CoupledConsequences.inc",
+      "line": 11
+    },
+    {
+      "name": "LinearInputCoupledConsequences.exists_global_injective_convergent_solution",
+      "kind": "theorem",
+      "file": "lean_check/CoupledConsequences.inc",
+      "line": 53
+    }
+  ],
+  "parent_theorem_count": 214,
+  "parent_declaration_count": 229,
+  "parent_declarations": [
+    {
+      "name": "Elastica.locallyMinimizing_affine_density_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/AffineEquivalence.lean",
+      "line": 21
+    },
+    {
+      "name": "Elastica.stationary_affine_density_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/AffineEquivalence.lean",
+      "line": 40
+    },
+    {
+      "name": "Elastica.locallyMinimizing_powerLogDensity_one_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/AffineEquivalence.lean",
+      "line": 58
+    },
+    {
+      "name": "Elastica.stationary_powerLogDensity_one_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/AffineEquivalence.lean",
+      "line": 72
+    },
+    {
+      "name": "Elastica.locallyMinimizing_powerLogDensity_one_classical_equations",
+      "kind": "theorem",
+      "file": "../lean/Elastica/AffineEquivalence.lean",
+      "line": 88
+    },
+    {
+      "name": "Elastica.locallyMinimizing_powerLogDensity_one_scaling_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/CombinedConsequences.lean",
+      "line": 14
+    },
+    {
+      "name": "Elastica.energy_powerLogDensity_one_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/CombinedConsequences.lean",
+      "line": 25
+    },
+    {
+      "name": "Elastica.integral_split_three",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 24
+    },
+    {
+      "name": "Elastica.energy_split_three",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 33
+    },
+    {
+      "name": "Elastica.xCoord_sub_eq_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 42
+    },
+    {
+      "name": "Elastica.yCoord_sub_eq_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 53
+    },
+    {
+      "name": "Elastica.xCoord_split_three",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 64
+    },
+    {
+      "name": "Elastica.yCoord_split_three",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 72
+    },
+    {
+      "name": "Elastica.density_integral_eq_of_angle_eqOn",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 83
+    },
+    {
+      "name": "Elastica.boundary_eq_of_middle_integrals",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 107
+    },
+    {
+      "name": "Elastica.energy_sub_eq_middle_of_outer_angle_eq",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 144
+    },
+    {
+      "name": "Elastica.energy_le_iff_middle_integral_le",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Composition.lean",
+      "line": 157
+    },
+    {
+      "name": "Elastica.augmentedEnergy",
+      "kind": "def",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 18
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_integral_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 23
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_add",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 39
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_const_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 49
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_augmentedEnergy_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 58
+    },
+    {
+      "name": "Elastica.secondVariation_augmentedEnergy",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 117
+    },
+    {
+      "name": "Elastica.hasDerivAt_integral_of_continuousOn_rectangle",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 127
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_integral_of_continuousOn_rectangle",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 161
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_density_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 175
+    },
+    {
+      "name": "Elastica.exists_correction_radius",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 204
+    },
+    {
+      "name": "Elastica.hasDerivAt_corrected_integral_and_deriv",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 217
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_corrected_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 284
+    },
+    {
+      "name": "Elastica.deriv_corrected_angle",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 297
+    },
+    {
+      "name": "Elastica.hasDerivAt_corrected_energy_and_deriv",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 308
+    },
+    {
+      "name": "Elastica.second_deriv_zero_of_eventually_const",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 330
+    },
+    {
+      "name": "Elastica.constrained_secondVariation_corrected",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstrainedSecondVariation.lean",
+      "line": 337
+    },
+    {
+      "name": "Elastica.exists_nonzero_curvature_of_nonconstant",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstraintRegularity.lean",
+      "line": 16
+    },
+    {
+      "name": "Elastica.constraint_coefficients_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstraintRegularity.lean",
+      "line": 28
+    },
+    {
+      "name": "Elastica.exists_normalized_constraint_directions",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ConstraintRegularity.lean",
+      "line": 77
+    },
+    {
+      "name": "Elastica.Stationary",
+      "kind": "def",
+      "file": "../lean/Elastica/Derivation.lean",
+      "line": 17
+    },
+    {
+      "name": "Elastica.stationary_iff_firstVariation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Derivation.lean",
+      "line": 24
+    },
+    {
+      "name": "Elastica.stationary_angle_firstIntegral_curvature",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Derivation.lean",
+      "line": 47
+    },
+    {
+      "name": "Elastica.firstIntegral_hasDerivAt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 19
+    },
+    {
+      "name": "Elastica.firstIntegral_constant",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 31
+    },
+    {
+      "name": "Elastica.angleForce_hasDerivAt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 48
+    },
+    {
+      "name": "Elastica.curvature_equation_of_firstIntegral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 56
+    },
+    {
+      "name": "Elastica.curvature_equation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 65
+    },
+    {
+      "name": "Elastica.second_derivative_of_angle_equation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 77
+    },
+    {
+      "name": "Elastica.firstIntegral_and_curvature_of_angle",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 89
+    },
+    {
+      "name": "Elastica.smooth_angle_firstIntegral_and_curvature",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 105
+    },
+    {
+      "name": "Elastica.quadratic_density_hasDerivAt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 128
+    },
+    {
+      "name": "Elastica.quadratic_moment_second_derivative",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 135
+    },
+    {
+      "name": "Elastica.quadratic_curvature_equation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 151
+    },
+    {
+      "name": "Elastica.quadratic_curvature_expression",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 162
+    },
+    {
+      "name": "Elastica.affine_density_curvature_expression",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Equations.lean",
+      "line": 167
+    },
+    {
+      "name": "Elastica.continuous_parameter_intervalIntegral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 17
+    },
+    {
+      "name": "Elastica.hasFDerivAt_parameter_intervalIntegral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 28
+    },
+    {
+      "name": "Elastica.contDiff_two_parameter_intervalIntegral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 53
+    },
+    {
+      "name": "Elastica.hasFDerivAt_integral_linear_parameters",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 76
+    },
+    {
+      "name": "Elastica.contDiff_two_integral_linear_parameters",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 92
+    },
+    {
+      "name": "Elastica.endpointParameters",
+      "kind": "def",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 137
+    },
+    {
+      "name": "Elastica.contDiff_endpointParameters",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 141
+    },
+    {
+      "name": "Elastica.fderiv_endpointParameters_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 176
+    },
+    {
+      "name": "Elastica.exists_implicit_correction",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 210
+    },
+    {
+      "name": "Elastica.exists_exact_endpoint_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 232
+    },
+    {
+      "name": "Elastica.corrected_angle_hasDerivAt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 278
+    },
+    {
+      "name": "Elastica.corrected_angle_endpoints",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExactVariation.lean",
+      "line": 286
+    },
+    {
+      "name": "Elastica.energy_const",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 17
+    },
+    {
+      "name": "Elastica.energy_affine",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 22
+    },
+    {
+      "name": "Elastica.integral_curvature",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 30
+    },
+    {
+      "name": "Elastica.hasDerivAt_energy_affine_fixed_end_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 38
+    },
+    {
+      "name": "Elastica.energy_affine_density",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 53
+    },
+    {
+      "name": "Elastica.affine_density_shift_same_end_angles",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 69
+    },
+    {
+      "name": "Elastica.reflection_counterexample",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 78
+    },
+    {
+      "name": "Elastica.energy_reflection_of_even",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 84
+    },
+    {
+      "name": "Elastica.energy_rotation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Examples.lean",
+      "line": 95
+    },
+    {
+      "name": "Elastica.exponentialWeight",
+      "kind": "def",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 28
+    },
+    {
+      "name": "Elastica.exponentialWeight_pos",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 31
+    },
+    {
+      "name": "Elastica.log_exponentialWeight",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 34
+    },
+    {
+      "name": "Elastica.energy_eq_neg_log_exponentialWeight",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 38
+    },
+    {
+      "name": "Elastica.exponentialWeight_split",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 46
+    },
+    {
+      "name": "Elastica.exponentialWeight_split_three",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 58
+    },
+    {
+      "name": "Elastica.exp_neg_mul_le_exp_neg_mul_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 67
+    },
+    {
+      "name": "Elastica.exp_neg_mul_lt_exp_neg_mul_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 72
+    },
+    {
+      "name": "Elastica.energy_le_iff_exponentialWeight_le",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 78
+    },
+    {
+      "name": "Elastica.energy_lt_iff_exponentialWeight_lt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 84
+    },
+    {
+      "name": "Elastica.energy_minimum_iff_exponentialWeight_maximum",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 91
+    },
+    {
+      "name": "Elastica.isLocalMinOn_iff_isLocalMaxOn_exp_neg_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 98
+    },
+    {
+      "name": "Elastica.locallyMinimizing_iff_exponentialWeight_local_maximum",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 107
+    },
+    {
+      "name": "Elastica.hasDerivAt_exp_neg_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 120
+    },
+    {
+      "name": "Elastica.differentiableAt_exp_neg_mul_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 127
+    },
+    {
+      "name": "Elastica.hasDerivAt_exp_neg_mul_zero_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 138
+    },
+    {
+      "name": "Elastica.deriv_exp_neg_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 155
+    },
+    {
+      "name": "Elastica.deriv_exp_neg_mul_eq_zero_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 164
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_exp_neg_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 172
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_exp_neg_mul_of_stationary",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 186
+    },
+    {
+      "name": "Elastica.hasDerivAt_exponentialWeight_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 194
+    },
+    {
+      "name": "Elastica.exponentialWeight_variation_stationary_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 207
+    },
+    {
+      "name": "Elastica.stationary_iff_exponentialWeight_stationary",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 215
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_exponentialWeight_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 226
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_exponentialWeight_family_of_stationary",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 245
+    },
+    {
+      "name": "Elastica.constrained_secondVariation_exponentialWeight_corrected",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ExponentialWeight.lean",
+      "line": 258
+    },
+    {
+      "name": "Elastica.xCoord",
+      "kind": "def",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 24
+    },
+    {
+      "name": "Elastica.yCoord",
+      "kind": "def",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 28
+    },
+    {
+      "name": "Elastica.curvature",
+      "kind": "def",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 32
+    },
+    {
+      "name": "Elastica.xCoord_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 34
+    },
+    {
+      "name": "Elastica.yCoord_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 37
+    },
+    {
+      "name": "Elastica.hasDerivAt_xCoord",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 40
+    },
+    {
+      "name": "Elastica.hasDerivAt_yCoord",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 44
+    },
+    {
+      "name": "Elastica.deriv_xCoord",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 48
+    },
+    {
+      "name": "Elastica.deriv_yCoord",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 52
+    },
+    {
+      "name": "Elastica.unit_speed_squared",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 57
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_xCoord",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 62
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_yCoord",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 70
+    },
+    {
+      "name": "Elastica.signed_curvature_determinant",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 79
+    },
+    {
+      "name": "Elastica.signed_curvature_eq_deriv",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 90
+    },
+    {
+      "name": "Elastica.xCoord_const",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 97
+    },
+    {
+      "name": "Elastica.yCoord_const",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 101
+    },
+    {
+      "name": "Elastica.curvature_const",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 105
+    },
+    {
+      "name": "Elastica.curvature_affine",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 109
+    },
+    {
+      "name": "Elastica.xCoord_affine",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 114
+    },
+    {
+      "name": "Elastica.yCoord_affine",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 131
+    },
+    {
+      "name": "Elastica.abs_x_displacement_le",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 150
+    },
+    {
+      "name": "Elastica.abs_y_displacement_le",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 158
+    },
+    {
+      "name": "Elastica.impossible_x_endpoint",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Geometry.lean",
+      "line": 166
+    },
+    {
+      "name": "Elastica.LocallyMinimizing",
+      "kind": "def",
+      "file": "../lean/Elastica/LocalMinimum.lean",
+      "line": 23
+    },
+    {
+      "name": "Elastica.corrected_family_C1_close",
+      "kind": "theorem",
+      "file": "../lean/Elastica/LocalMinimum.lean",
+      "line": 48
+    },
+    {
+      "name": "Elastica.locallyMinimizing_isLocalMin_corrected_family",
+      "kind": "theorem",
+      "file": "../lean/Elastica/LocalMinimum.lean",
+      "line": 107
+    },
+    {
+      "name": "Elastica.locallyMinimizing_stationary_of_nonstraight",
+      "kind": "theorem",
+      "file": "../lean/Elastica/MinimumConditions.lean",
+      "line": 18
+    },
+    {
+      "name": "Elastica.locallyMinimizing_angle_firstIntegral_curvature",
+      "kind": "theorem",
+      "file": "../lean/Elastica/MinimumConditions.lean",
+      "line": 34
+    },
+    {
+      "name": "Elastica.locallyMinimizing_secondVariation_nonneg",
+      "kind": "theorem",
+      "file": "../lean/Elastica/MinimumConditions.lean",
+      "line": 54
+    },
+    {
+      "name": "Elastica.locallyMinimizing_necessary_conditions",
+      "kind": "theorem",
+      "file": "../lean/Elastica/MinimumConditions.lean",
+      "line": 83
+    },
+    {
+      "name": "Elastica.powerLog",
+      "kind": "def",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 24
+    },
+    {
+      "name": "Elastica.powerLog_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 27
+    },
+    {
+      "name": "Elastica.powerLog_one",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 30
+    },
+    {
+      "name": "Elastica.hasDerivAt_powerLog",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 34
+    },
+    {
+      "name": "Elastica.deriv_powerLog",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 45
+    },
+    {
+      "name": "Elastica.deriv_powerLog_pos",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 49
+    },
+    {
+      "name": "Elastica.powerLog_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 56
+    },
+    {
+      "name": "Elastica.continuousAt_powerLog_exponent_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 68
+    },
+    {
+      "name": "Elastica.tendsto_powerLog_exponent_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 79
+    },
+    {
+      "name": "Elastica.powerLogDensity",
+      "kind": "def",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 86
+    },
+    {
+      "name": "Elastica.powerLogDensity_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 91
+    },
+    {
+      "name": "Elastica.powerLogDensity_neg_one",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 95
+    },
+    {
+      "name": "Elastica.powerLogDensity_reference",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 99
+    },
+    {
+      "name": "Elastica.hasDerivAt_powerLogDensity",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 113
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_powerLogDensity",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 145
+    },
+    {
+      "name": "Elastica.second_deriv_powerLogDensity_pos",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 161
+    },
+    {
+      "name": "Elastica.powerLogDensity_one",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 169
+    },
+    {
+      "name": "Elastica.energy_powerLogDensity_one",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 176
+    },
+    {
+      "name": "Elastica.energy_powerLogDensity_one_le_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/PowerLogResponse.lean",
+      "line": 191
+    },
+    {
+      "name": "Elastica.angle_sub_eq_initial_of_curvature_eq",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 23
+    },
+    {
+      "name": "Elastica.angle_eq_of_curvature_eq_initial",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 45
+    },
+    {
+      "name": "Elastica.xCoord_eq_of_angle_eq",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 56
+    },
+    {
+      "name": "Elastica.yCoord_eq_of_angle_eq",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 67
+    },
+    {
+      "name": "Elastica.reconstruction_eq_of_curvature_eq_initial",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 79
+    },
+    {
+      "name": "Elastica.xCoord_add_angle",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 90
+    },
+    {
+      "name": "Elastica.yCoord_add_angle",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 104
+    },
+    {
+      "name": "Elastica.reconstruction_rotation_of_curvature_eq",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 120
+    },
+    {
+      "name": "Elastica.energy_eq_of_curvature_eq",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Reconstruction.lean",
+      "line": 141
+    },
+    {
+      "name": "Elastica.middle_replacement_boundary_and_weight_ratio",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ReplacementConsequences.lean",
+      "line": 51
+    },
+    {
+      "name": "Elastica.middle_energy_lt_iff_exponentialWeight_lt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ReplacementConsequences.lean",
+      "line": 73
+    },
+    {
+      "name": "Elastica.locallyMinimizing_middle_replacement_comparison",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ReplacementConsequences.lean",
+      "line": 89
+    },
+    {
+      "name": "Elastica.not_locallyMinimizing_of_arbitrarily_close_middle_improvements",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ReplacementConsequences.lean",
+      "line": 119
+    },
+    {
+      "name": "Elastica.second_derivative_nonneg_of_local_min",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalarMinimum.lean",
+      "line": 16
+    },
+    {
+      "name": "Elastica.contDiff_angle_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 23
+    },
+    {
+      "name": "Elastica.hasDerivAt_angle_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 29
+    },
+    {
+      "name": "Elastica.deriv_angle_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 35
+    },
+    {
+      "name": "Elastica.curvature_angle_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 41
+    },
+    {
+      "name": "Elastica.angle_scaling_endpoints",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 47
+    },
+    {
+      "name": "Elastica.xCoord_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 53
+    },
+    {
+      "name": "Elastica.yCoord_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 60
+    },
+    {
+      "name": "Elastica.scaled_boundary_data",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 68
+    },
+    {
+      "name": "Elastica.energy_scaling",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 85
+    },
+    {
+      "name": "Elastica.energy_scaling_of_density_factor",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 97
+    },
+    {
+      "name": "Elastica.energy_scaling_of_homogeneous",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 109
+    },
+    {
+      "name": "Elastica.energy_scaling_quadratic",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Scaling.lean",
+      "line": 122
+    },
+    {
+      "name": "Elastica.locallyMinimizing_scaling_of_density_factor",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalingMinima.lean",
+      "line": 22
+    },
+    {
+      "name": "Elastica.locallyMinimizing_scaling_iff_of_density_factor",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalingMinima.lean",
+      "line": 93
+    },
+    {
+      "name": "Elastica.locallyMinimizing_scaling_iff_of_homogeneous",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalingMinima.lean",
+      "line": 115
+    },
+    {
+      "name": "Elastica.locallyMinimizing_scaling_iff_quadratic",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalingMinima.lean",
+      "line": 127
+    },
+    {
+      "name": "Elastica.exponentialWeight_scaling_of_density_factor",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalingMinima.lean",
+      "line": 139
+    },
+    {
+      "name": "Elastica.exponentialWeight_scaling_rescaled_parameter",
+      "kind": "theorem",
+      "file": "../lean/Elastica/ScalingMinima.lean",
+      "line": 151
+    },
+    {
+      "name": "Elastica.hasDerivAt_weighted_integral_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/SecondVariation.lean",
+      "line": 21
+    },
+    {
+      "name": "Elastica.hasDerivAt_energy_variation_at",
+      "kind": "theorem",
+      "file": "../lean/Elastica/SecondVariation.lean",
+      "line": 66
+    },
+    {
+      "name": "Elastica.hasDerivAt_deriv_energy_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/SecondVariation.lean",
+      "line": 78
+    },
+    {
+      "name": "Elastica.secondVariation_energy",
+      "kind": "theorem",
+      "file": "../lean/Elastica/SecondVariation.lean",
+      "line": 94
+    },
+    {
+      "name": "Elastica.mixedVariation_energy",
+      "kind": "theorem",
+      "file": "../lean/Elastica/SecondVariation.lean",
+      "line": 102
+    },
+    {
+      "name": "Elastica.mixedVariation_energy_symmetric",
+      "kind": "theorem",
+      "file": "../lean/Elastica/SecondVariation.lean",
+      "line": 123
+    },
+    {
+      "name": "Elastica.exists_multipliers_of_kernel",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 20
+    },
+    {
+      "name": "Elastica.variationSpace",
+      "kind": "def",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 44
+    },
+    {
+      "name": "Elastica.constraintLinear",
+      "kind": "def",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 55
+    },
+    {
+      "name": "Elastica.firstVariationLinear",
+      "kind": "def",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 70
+    },
+    {
+      "name": "Elastica.stationary_multipliers",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 94
+    },
+    {
+      "name": "Elastica.residual_zero_of_weighted_square_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 109
+    },
+    {
+      "name": "Elastica.firstVariation_by_parts",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 125
+    },
+    {
+      "name": "Elastica.augmented_integral_eq_residual",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 137
+    },
+    {
+      "name": "Elastica.residual_zero_of_augmented_stationary",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 152
+    },
+    {
+      "name": "Elastica.augmented_stationary_of_residual_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 178
+    },
+    {
+      "name": "Elastica.augmented_stationary_iff_residual_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 200
+    },
+    {
+      "name": "Elastica.force_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 209
+    },
+    {
+      "name": "Elastica.angleEquation_of_stationary",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 228
+    },
+    {
+      "name": "Elastica.stationary_of_angleEquation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 244
+    },
+    {
+      "name": "Elastica.stationary_iff_exists_angleEquation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Stationary.lean",
+      "line": 262
+    },
+    {
+      "name": "Elastica.cos_eq_one_of_xCoord_eq_length",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 24
+    },
+    {
+      "name": "Elastica.sin_eq_zero_of_xCoord_eq_length",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 41
+    },
+    {
+      "name": "Elastica.curvature_zero_of_xCoord_eq_length",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 52
+    },
+    {
+      "name": "Elastica.angle_eq_initial_of_xCoord_eq_length",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 71
+    },
+    {
+      "name": "Elastica.energy_eq_straight_of_xCoord_eq_length",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 82
+    },
+    {
+      "name": "Elastica.straight_is_global_minimum_on_horizontal_constraint",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 98
+    },
+    {
+      "name": "Elastica.straight_polynomial_hasDerivAt",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 106
+    },
+    {
+      "name": "Elastica.straight_polynomial_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 116
+    },
+    {
+      "name": "Elastica.straight_polynomial_deriv_square_integral",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 133
+    },
+    {
+      "name": "Elastica.negative_quadratic_second_deriv",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 154
+    },
+    {
+      "name": "Elastica.straight_polynomial_variation_not_exactly_feasible",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 168
+    },
+    {
+      "name": "Elastica.straight_negative_secondVariation_counterexample",
+      "kind": "theorem",
+      "file": "../lean/Elastica/StraightConstraint.lean",
+      "line": 190
+    },
+    {
+      "name": "Elastica.energy",
+      "kind": "def",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 24
+    },
+    {
+      "name": "Elastica.angleVariation",
+      "kind": "def",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 28
+    },
+    {
+      "name": "Elastica.deriv_angleVariation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 32
+    },
+    {
+      "name": "Elastica.hasDerivAt_integral_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 41
+    },
+    {
+      "name": "Elastica.hasDerivAt_energy_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 83
+    },
+    {
+      "name": "Elastica.hasDerivAt_horizontal_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 94
+    },
+    {
+      "name": "Elastica.hasDerivAt_vertical_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/Variation.lean",
+      "line": 102
+    },
+    {
+      "name": "Elastica.powerLog_zero_exponentialWeight",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 15
+    },
+    {
+      "name": "Elastica.tendsto_powerLog_exponentialWeight_zero",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 21
+    },
+    {
+      "name": "Elastica.hasDerivAt_powerLog_exp_neg_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 28
+    },
+    {
+      "name": "Elastica.strictAnti_powerLog_exp_neg_mul",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 45
+    },
+    {
+      "name": "Elastica.energy_le_iff_powerLog_exponentialWeight_le",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 57
+    },
+    {
+      "name": "Elastica.locallyMinimizing_iff_powerLog_weight_local_maximum",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 66
+    },
+    {
+      "name": "Elastica.hasDerivAt_powerLog_weight_variation",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 80
+    },
+    {
+      "name": "Elastica.powerLog_weight_variation_stationary_iff",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 94
+    },
+    {
+      "name": "Elastica.powerLog_exponentialWeight_split",
+      "kind": "theorem",
+      "file": "../lean/Elastica/WeightResponse.lean",
+      "line": 106
+    }
+  ],
+  "joint_axiom_audit": true,
+  "axioms": {
+    "LinearInputDesign.f": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.E": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.input": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.GlobalMin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.scalar_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.energy_gap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.globalMin_of_margin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.margin_of_globalMin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.globalMin_iff_margin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.quadratic_gap_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.unique_of_margin_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.equal_energy_iff_of_margin_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.squared_position_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDesign.position_error": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.input_shift": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.recover_coordinate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.recover_zero_input_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.pair_suffices": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.all_inputs_iff_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.two_inputs_iff_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.summary_decodes_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.pair_decodes_all": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.recovery_error_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.recovery_error_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputObservation.minimizer_monotone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.potential": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.hasDerivAt_potential": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.deriv_potential": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.stationary_iff_input": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.global_minimum_forces_input": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.critical_value": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.critical_value_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.critical_value_below_target": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCalculus.positive_target_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputConsequences.global_minimum_forces_design": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputConsequences.global_minimum_iff_input_and_margin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputConsequences.exists_input_global_minimum_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.lowerBoundConstant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.continuous_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.coercive_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.coercive_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.isCompact_sublevel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.isCompact_band": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoercivity.exists_global_minimum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.gx": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.gy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.gSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_E_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_E_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_E_input": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.deriv_E_x": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.deriv_E_y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.stationary_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.partials_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.stationary_value_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.no_stationary_on_band": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.gSq_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.gSq_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.gSq_pos_on_band": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.continuous_E": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.continuous_gSq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_energy_curve": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_energy_of_velocity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_energy_fixed_input": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradient.hasDerivAt_squared_gap_fixed_input": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDissipation.exponential_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDissipation.squared_error_exponential": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDissipation.squared_error_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputDissipation.error_tendsto_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.band_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.exists_positive_gradient_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.exists_valley_global_minimum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.exists_minimizing_stationary_root": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.exists_unique_global_minimum_of_input_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.IsTrajectory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.hasDerivAt_gap_of_trajectory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputRegularBand.energy_convergence_in_band": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInvariance.squared_error_antitone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInvariance.error_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInvariance.error_le_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInvariance.energy_band_of_trajectory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInvariance.energy_convergence_of_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.energy_shear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.gy_shear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.gx_shear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.forced_phase_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.phase_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.forced_curvature_of_phase": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.forced_energy_hasDerivAt_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.energy_hasDerivAt_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.forced_energy_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCurvatureBridge.energy_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputVariationalBridge.energy_linear_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputVariationalBridge.stationary_linear_density_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputVariationalBridge.locallyMinimizing_linear_density_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputVariationalBridge.stationary_quadratic_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputVariationalBridge.stationary_quadratic_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputVariationalBridge.locallyMinimizing_linear_quadratic_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.feedback_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.feedback_coefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.decomposition_of_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.rate_iff_exists_unique_feedback": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.zero_gradient_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.zero_gradient_feedback_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.zero_gradient_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.energy_rate_iff_exists_unique_feedback": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.hasDerivAt_energy_iff_exists_unique_feedback": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFeedback.energy_rate_iff_exists_unique_feedback_on_band": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputConstraints.exists_three_multipliers_of_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.area": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.hasDerivAt_parameter_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.continuous_primitive_parameter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.hasDerivAt_xCoord_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.hasDerivAt_yCoord_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.continuous_moment": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.hasDerivAt_area_variation_raw": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.area_variation_integral_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.hasDerivAt_area_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaVariation.hasDerivAt_area_variation_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureCurvature.pressure_firstIntegral_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureCurvature.pressure_angleForce_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureCurvature.pressure_angle_firstIntegral_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureCurvature.pressure_angle_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureCurvature.pressure_angle_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureCurvature.pressure_angle_eq_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.contDiff_xCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.contDiff_yCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.contDiff_area_weight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.weighted_angleEquation_of_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.pressureEnergy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.Stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.hasDerivAt_pressureEnergy_variation_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.stationary_iff_firstVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.stationary_angleEquation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.stationary_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.stationary_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.AreaStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.areaStationary_exists_pressure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputPressureStationary.areaStationary_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaRegularity.constraint_coefficients_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaRegularity.exists_normalized_constraint_directions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaRegularity.pressure_coefficient_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaRegularity.areaStationary_of_constant_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.Parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.continuous_parameter_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.continuous_parameter_primitive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral_any": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.contDiff_two_parameter_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.hasFDerivAt_integral_linear_parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.contDiff_two_integral_linear_parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.continuous_smulRight_parameter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.contDiff_two_integral_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.contDiff_two_integral_primitive_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.parameterLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.parameterLinear_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.continuous_parameterLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.areaParameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.contDiff_area_linear_parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaParameters.contDiff_areaParameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaFamily.corrected_family_C1_close": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaFamily.hasDerivAt_corrected_energy_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaExactVariation.constraintParameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaExactVariation.contDiff_constraintParameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaExactVariation.fderiv_constraintParameters_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaExactVariation.integral_parameterLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaExactVariation.exists_implicit_correction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaExactVariation.exists_exact_area_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaMinimum.LocallyMinimizing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaMinimum.locallyMinimizing_isLocalMin_corrected_family": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaMinimum.locallyMinimizing_areaStationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaMinimum.locallyMinimizing_existsUnique_pressure": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaMinimum.locallyMinimizing_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputAreaMinimum.locallyMinimizing_phase_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.error_eq_initial_mul_exp_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.error_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.continuousOn_gradient_coefficient": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.energy_gap_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.energy_eq_target_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.energy_strictly_above_target": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.energy_deriv_neg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.energy_strictAntiOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.trajectory_injOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.trajectory_no_return": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.trajectory_not_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.error_eq_initial_mul_exp_integral_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputStrictEnergy.energy_gap_exact_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.reduced_energy_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.energy_gradient_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.gradient_linear_term_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.gradientLowerBound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.explicit_gradient_bound_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.explicit_gradient_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.gradient_bound_of_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.energy_error_exponential_of_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGradientBound.squared_error_exponential_of_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInternalUpdate.square_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInternalUpdate.square_le_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInternalUpdate.exists_forcing_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputInternalUpdate.internal_update_bounded": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.vectorField": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.contDiff_vectorField": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.exists_local_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.local_solution_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.solution_unique_on_interval": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.exists_local_unique_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.exists_local_solution_one_add_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.hasDerivAt_vectorField_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.exists_local_coordinate_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.hasDerivAt_energy_of_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.exists_local_solution_energy_formula": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputTrajectoryExistence.isTrajectory_of_global_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFiniteBand.error_band_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFiniteBand.energy_band_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFiniteBand.energy_band_on_Ioo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCompactLocalExistence.exists_uniform_local_time": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalContinuation.local_unique": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalContinuation.unique_on_Ioo": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalContinuation.piecewise_eqOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalContinuation.hasDerivAt_piecewise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalContinuation.exists_arbitrarily_long_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalContinuation.exists_forward_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalTrajectory.exists_global_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalTrajectory.exists_global_coordinate_trajectory": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalTrajectory.exists_global_solution_one_add_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputForwardUniqueness.solution_unique_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputForwardUniqueness.solution_unique_on_Ici": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputForwardUniqueness.feedback_solution_unique_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputForwardUniqueness.feedback_solution_unique_on_Ici": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputForwardUniqueness.coordinate_solution_unique_on_Ici": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalConsequences.exists_global_convergent_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputGlobalConsequences.exists_global_injective_convergent_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.radial_gradient_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.radial_gradient_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.quadratic_remainder_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.energy_outward_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.energy_outward_strict": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.existsUnique_positive_radius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.radius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.direction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.radius_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.radius_pos_of_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.direction_mem_circle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.radius_mul_direction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.direction_positive_scale": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.direction_of_circle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.continuous_radius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.continuous_direction_subtype": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.eq_of_direction_energy_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.levelHomeomorphCircle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelGeometry.bandHomeomorphCylinder": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFiniteInternalUpdate.exponential_bound_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFiniteInternalUpdate.square_bound_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputFiniteInternalUpdate.abs_le_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.State": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.vectorField": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.contDiff_vectorField": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.hasDerivAt_internal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.hasDerivAt_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.energy_band_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.isTrajectory_of_global_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.exists_internal_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.band_box_on_Icc": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.exists_global_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.solution_unique_on_Ici": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.contDiff_finite_expansion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledTrajectory.exists_global_solution_one_add_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.bandRadius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.bandRadius_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.norm_le_bandRadius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.target_level_nonempty": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.exists_radial_target_point": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.dist_radial_multiple": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.exists_level_point_distance_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.infDist_level_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.spatial_error_exponential_of_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputLevelConvergence.spatial_convergence_of_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledConsequences.exists_global_convergent_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputCoupledConsequences.exists_global_injective_convergent_solution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "parent_axioms": {
+    "Elastica.locallyMinimizing_affine_density_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_affine_density_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_powerLogDensity_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_powerLogDensity_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_powerLogDensity_one_classical_equations": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_powerLogDensity_one_scaling_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_powerLogDensity_one_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.integral_split_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_split_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_sub_eq_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_sub_eq_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_split_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_split_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.density_integral_eq_of_angle_eqOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.boundary_eq_of_middle_integrals": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_sub_eq_middle_of_outer_angle_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_le_iff_middle_integral_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.augmentedEnergy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_integral_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_add": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_const_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_augmentedEnergy_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.secondVariation_augmentedEnergy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_integral_of_continuousOn_rectangle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_integral_of_continuousOn_rectangle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_density_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exists_correction_radius": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_corrected_integral_and_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_corrected_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_corrected_angle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_corrected_energy_and_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.second_deriv_zero_of_eventually_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.constrained_secondVariation_corrected": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exists_nonzero_curvature_of_nonconstant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.constraint_coefficients_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exists_normalized_constraint_directions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.Stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_iff_firstVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_angle_firstIntegral_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.firstIntegral_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.firstIntegral_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angleForce_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature_equation_of_firstIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.second_derivative_of_angle_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.firstIntegral_and_curvature_of_angle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.smooth_angle_firstIntegral_and_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.quadratic_density_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.quadratic_moment_second_derivative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.quadratic_curvature_equation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.quadratic_curvature_expression": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.affine_density_curvature_expression": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.continuous_parameter_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasFDerivAt_parameter_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.contDiff_two_parameter_intervalIntegral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasFDerivAt_integral_linear_parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.contDiff_two_integral_linear_parameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.endpointParameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.contDiff_endpointParameters": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.fderiv_endpointParameters_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exists_implicit_correction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exists_exact_endpoint_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.corrected_angle_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.corrected_angle_endpoints": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.integral_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_energy_affine_fixed_end_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_affine_density": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.affine_density_shift_same_end_angles": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.reflection_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_reflection_of_even": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_rotation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.log_exponentialWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_eq_neg_log_exponentialWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight_split_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exp_neg_mul_le_exp_neg_mul_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exp_neg_mul_lt_exp_neg_mul_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_le_iff_exponentialWeight_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_lt_iff_exponentialWeight_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_minimum_iff_exponentialWeight_maximum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.isLocalMinOn_iff_isLocalMaxOn_exp_neg_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_iff_exponentialWeight_local_maximum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_exp_neg_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.differentiableAt_exp_neg_mul_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_exp_neg_mul_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_exp_neg_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_exp_neg_mul_eq_zero_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_exp_neg_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_exp_neg_mul_of_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_exponentialWeight_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight_variation_stationary_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_iff_exponentialWeight_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_exponentialWeight_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_exponentialWeight_family_of_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.constrained_secondVariation_exponentialWeight_corrected": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_xCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_yCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_xCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_yCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.unit_speed_squared": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_xCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_yCoord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.signed_curvature_determinant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.signed_curvature_eq_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature_const": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_affine": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.abs_x_displacement_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.abs_y_displacement_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.impossible_x_endpoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.LocallyMinimizing": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.corrected_family_C1_close": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_isLocalMin_corrected_family": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_stationary_of_nonstraight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_angle_firstIntegral_curvature": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_secondVariation_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_necessary_conditions": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_powerLog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_powerLog": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_powerLog_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.continuousAt_powerLog_exponent_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.tendsto_powerLog_exponent_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLogDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLogDensity_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLogDensity_neg_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLogDensity_reference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_powerLogDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_powerLogDensity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.second_deriv_powerLogDensity_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLogDensity_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_powerLogDensity_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_powerLogDensity_one_le_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angle_sub_eq_initial_of_curvature_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angle_eq_of_curvature_eq_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_eq_of_angle_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_eq_of_angle_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.reconstruction_eq_of_curvature_eq_initial": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_add_angle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_add_angle": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.reconstruction_rotation_of_curvature_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_eq_of_curvature_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.middle_replacement_boundary_and_weight_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.middle_energy_lt_iff_exponentialWeight_lt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_middle_replacement_comparison": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.not_locallyMinimizing_of_arbitrarily_close_middle_improvements": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.second_derivative_nonneg_of_local_min": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.contDiff_angle_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_angle_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_angle_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature_angle_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angle_scaling_endpoints": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.xCoord_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.yCoord_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.scaled_boundary_data": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_scaling": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_scaling_of_density_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_scaling_of_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_scaling_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_scaling_of_density_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_scaling_iff_of_density_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_scaling_iff_of_homogeneous": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_scaling_iff_quadratic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight_scaling_of_density_factor": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exponentialWeight_scaling_rescaled_parameter": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_weighted_integral_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_energy_variation_at": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_deriv_energy_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.secondVariation_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.mixedVariation_energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.mixedVariation_energy_symmetric": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.exists_multipliers_of_kernel": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.variationSpace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.constraintLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.firstVariationLinear": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_multipliers": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.residual_zero_of_weighted_square_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.firstVariation_by_parts": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.augmented_integral_eq_residual": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.residual_zero_of_augmented_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.augmented_stationary_of_residual_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.augmented_stationary_iff_residual_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.force_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angleEquation_of_stationary": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_of_angleEquation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.stationary_iff_exists_angleEquation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.cos_eq_one_of_xCoord_eq_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.sin_eq_zero_of_xCoord_eq_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.curvature_zero_of_xCoord_eq_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angle_eq_initial_of_xCoord_eq_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_eq_straight_of_xCoord_eq_length": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.straight_is_global_minimum_on_horizontal_constraint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.straight_polynomial_hasDerivAt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.straight_polynomial_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.straight_polynomial_deriv_square_integral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.negative_quadratic_second_deriv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.straight_polynomial_variation_not_exactly_feasible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.straight_negative_secondVariation_counterexample": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.angleVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.deriv_angleVariation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_integral_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_energy_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_horizontal_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_vertical_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog_zero_exponentialWeight": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.tendsto_powerLog_exponentialWeight_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_powerLog_exp_neg_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.strictAnti_powerLog_exp_neg_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.energy_le_iff_powerLog_exponentialWeight_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.locallyMinimizing_iff_powerLog_weight_local_maximum": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.hasDerivAt_powerLog_weight_variation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog_weight_variation_stationary_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.powerLog_exponentialWeight_split": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "unexpected": [],
+  "forbidden_tokens": [],
+  "dependencies": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "source_sha256": {
+    "../lean/Elastica/AffineEquivalence.lean": "bf9c45a6164843a908678e81820c452cbe93f2d46051b6044d3638ee63fb0e11",
+    "../lean/Elastica/CombinedConsequences.lean": "b53b1f54e1a31762240dfa90a4410ee48f9fd16ee9598fa1d73e514032b975dd",
+    "../lean/Elastica/Composition.lean": "3ecc1a200d2e89dd9f9cd850d558a8b1165a5033485f71093651b592f0de27c1",
+    "../lean/Elastica/ConstrainedSecondVariation.lean": "579f2cfb2fc5ce4f976e1c3e7d9fc335d2dcf056b5fae027374404106e46d105",
+    "../lean/Elastica/ConstraintRegularity.lean": "a62148952a14db35def7c5d7d9d262301d5e517bed3b8733d6f7d37b6140cdfa",
+    "../lean/Elastica/Derivation.lean": "6ad48113be3fc0527137e7caa1cfc631f8a32f8090e016cb938d583d9f3c4573",
+    "../lean/Elastica/Equations.lean": "3344aad3d6a65b3d9d91196f3060edfd0c4f62c0a7b9e6d451acd2cbb27ab683",
+    "../lean/Elastica/ExactVariation.lean": "9d0990c527af046453fc3562503b7b38830b6e093e0fcc6c65b1df74876069f1",
+    "../lean/Elastica/Examples.lean": "a87da02f2de48b431737370d1b77248a56727505538a6b9d17948f66ea9327e0",
+    "../lean/Elastica/ExponentialWeight.lean": "e1c680b27dd1b887a3cc784348f918e5543623795acd90a60c15ae65e46a9b6b",
+    "../lean/Elastica/Geometry.lean": "3a59ad97c777e7735640f635827d04cfe92d4ca47b9b34e84cc83de95846a4ee",
+    "../lean/Elastica/LocalMinimum.lean": "8cc4c34a2ba43a59703e88bcf2e43e93e370a7c5ec9e41c105de236752f7c5f1",
+    "../lean/Elastica/MinimumConditions.lean": "be9e3c77486395bbffcdf728f4375b45767e93a9c79a75b654153dcee562ae7c",
+    "../lean/Elastica/PowerLogResponse.lean": "d92b4d9ff29b1f6e272a37f8b81a4146886a59fcf053f05a14c765e4aa758801",
+    "../lean/Elastica/Reconstruction.lean": "0c5bb97cf3386c7175132768a955ac62f2e665d35de2ba6b43372f9dc81b882b",
+    "../lean/Elastica/ReplacementConsequences.lean": "7005ace260ad5d84219540434d568826e17bbc7afa40bbe55b30d73b6ab65f16",
+    "../lean/Elastica/ScalarMinimum.lean": "5f5f641c0d720b8a5255fd233b4c7a6392dfe7f04fde49c2d4250038a66ee80f",
+    "../lean/Elastica/Scaling.lean": "c8e152f23de6af8292056ef31291cec1bbc757fbe93da8db27b293e2e6e82bf7",
+    "../lean/Elastica/ScalingMinima.lean": "522b0e670949f738b99bfd42b544c73477a4c77decb556c24de4d553f9552560",
+    "../lean/Elastica/SecondVariation.lean": "32273f21f4375786b617f2d7d56ed34694aa2b9637f02ff8075ff08a6a49ea55",
+    "../lean/Elastica/Stationary.lean": "8c2603f38147b09e82893184f1c72dadd1af3ff770c880963733b2e711fc7ba6",
+    "../lean/Elastica/StraightConstraint.lean": "a0084d7fdd3031de1ec86b871a94da7b23605282376c9b2e003eef68571e1c37",
+    "../lean/Elastica/Variation.lean": "7a2a130d5d5ad211ef120744dc410a83321497b3c546a8dc998d5a5ea1b36d48",
+    "../lean/Elastica/WeightResponse.lean": "b22bfc10f08dff4740b98a3d0ab9a8b32ba20fb43969248cecd59932fa017dcf",
+    "lean_check/Design.lean": "135b8ab0a827ac94e6bb47d8f96280ddb04de5159123c37354300a6a2e968e5e",
+    "lean_check/Observation.lean": "137ad99b65363b1249a949d65895ab7a3c9e8b3c72bcf2d1b0852d6493a522cf",
+    "lean_check/Calculus.lean": "d901f0e4d4f191a0c594eb71e10325a5f2d16294eb802071d8df2e11f3207417",
+    "lean_check/Consequences.inc": "4a7ad55a8f200a76e95f6a1ff57470b82624ad131520ad9208cc26ab3a60b3b7",
+    "lean_check/Coercivity.inc": "eb9741ca6451447fc4acd3fa2dc958c7c0b323e1e5322b78b59ed382d8a7487a",
+    "lean_check/Gradient.inc": "9a2734469dcf1fccf95c075f30d7b60f345f0094226b60c080e3fa8329b06357",
+    "lean_check/Dissipation.lean": "57cd5592be128d7194b517074f6b8ed390b382c9e3fc7f6bfdd870a41e8c91d6",
+    "lean_check/RegularBand.inc": "2daec56dda1b2d2546b1a12ab9cc6f060ccc2069741f7ee752c65fe687b8b1b9",
+    "lean_check/Invariance.inc": "d45c1f89978a5a9ad6e72691e37a80119deb28233ad492534d8cd5895df3452f",
+    "lean_check/CurvatureBridge.inc": "71bdd60077c5e6fb8bf4354ab55889b37579c56fadc8ee18636f6cb33ee96f6f",
+    "lean_check/VariationalBridge.inc": "43372cd11cd244ba9312e6e0583552c0be68964ddf3b131103b0003ce277aac9",
+    "lean_check/Feedback.inc": "67ed48dfc1005f925736f1bb91d79013ef8ad70714edf70ea06fb41fa9e87990",
+    "lean_check/Constraints.inc": "3df2ac7191b192435081880cc846bdf6699aa9ea1a9a5f2da48c443d0e578299",
+    "lean_check/AreaVariation.inc": "3fc2544d624d1fe2f6808f2613196cd4345558561fe3447578256fa75b95c8c9",
+    "lean_check/PressureCurvature.inc": "cfaae4ec4789b566e7510c67a172aae341b48fea7a90a611721c366d69c289c6",
+    "lean_check/PressureStationary.inc": "9c52cbfc3d30dd26f5012eceed481ba145c1a5a09e0d95bdfaa97ddc05c65ac7",
+    "lean_check/AreaRegularity.inc": "a9f5ef622b17782ee94334bbe24333b424c9af780aca4e1c6707818a1ffa88b1",
+    "lean_check/AreaParameters.inc": "39f3d5aa510ceb227efca3353c4fc3d6521913f16f3de325bf6975076eddf73c",
+    "lean_check/AreaFamily.inc": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+    "lean_check/AreaExactVariation.inc": "6ca6c4136b3105e5676aa0b69b52411b1ebd3c828936cb6eb971d9f5a5e043b4",
+    "lean_check/AreaMinimum.inc": "04e23d908b7b44cb25cd7cdd4bb645a74b8f7df5ed33a2c50cc1467411be6ded",
+    "lean_check/StrictEnergy.inc": "2eebbe1949955d724ead0b502e0e63fd9d1bb6e73b982dfd75486977ca8bf725",
+    "lean_check/GradientBound.inc": "88dcb96b399f980cff2dda62bc6df318c5cfdc1d97ba7af23a750fdaee7ffdad",
+    "lean_check/InternalUpdate.inc": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+    "lean_check/TrajectoryExistence.inc": "5cdd32624bb58856c8d0d879fc9e42edbaf5f0130c41b55761bf1368dc55e225",
+    "lean_check/FiniteBand.inc": "172831bc32245db02bc250aa6a8d6e5909fa22c9397b6aa85c45d516a2a7043e",
+    "lean_check/CompactLocalExistence.inc": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+    "lean_check/GlobalContinuation.inc": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+    "lean_check/GlobalTrajectory.inc": "cae42a0105454fad1a1fb22f3459540104742e0f75c010638e1457e2c690cce0",
+    "lean_check/ForwardUniqueness.inc": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+    "lean_check/GlobalConsequences.inc": "f4220ef9638d825f53d6809158481e080f862fd166a5201e5c965ab0726b89d4",
+    "lean_check/LevelGeometry.inc": "219d5c08b9b776156086d489dfc68ce5127d7f3c5c903ee9fa12620f3dcf96fe",
+    "lean_check/FiniteInternalUpdate.inc": "c93294ced77816ff3a379e4a99e1212879278d9065825e5d979b7a3d109777a3",
+    "lean_check/CoupledTrajectory.inc": "5f2ade9f13470ed39bac60a105bb4c5e594805ee82f6b2fa7a434ded8cb18f18",
+    "lean_check/LevelConvergence.inc": "cccf9fde2109c0d84707c52f2433b822fc587f85b4152e577a7bb2c18a6720c1",
+    "lean_check/CoupledConsequences.inc": "0b60dd162314e4e707132d108bf474e8ea2073d03e6ed168ceecdc628aa4bcbf",
+    "lean_check/All.lean": "0a6e24be5624cdb3df5f6009e463de55d76896b39b1b7c82d44b8fdef1a31962",
+    "../lean/Elastica.lean": "53c3bf443e011e10d2b06947e224101439c19a553c872d9e03d6ebce07122533",
+    "../lean/lean-toolchain": "4ffb62ce8c8f7ebaff1c1e98c5d36fd60956fb6c9a55d66d8c75ceaae9e96507",
+    "../lean/lakefile.toml": "edbf2635f45ad75671a20a5cdf7f722204d9dd16287f5bfb0b77b7d16f5aca28",
+    "../lean/lake-manifest.json": "83c95e6e42dd72a65bf1e23405a5217801cdb3ad322d2fa464b86e7da6a3ea85",
+    "verify_lean.py": "44e8c100639d3b40b2c3580fc6125667fd2ade35d04fb4a28bdd78c9584f4ec1"
+  },
+  "scope": "Current Elastica library build followed by fresh --trust=0 checking of linear-input proofs and actual variational/curvature bridges, including exact-area constrained C1 local minima, constructed correction families, pressure uniqueness, exact energy-gap evolution, and explicit gradient bounds. Generic local existence on complete real normed spaces, compact continuation, and forward uniqueness support actual forward-global coupled solutions with any finite number of positively damped internal coordinates, C1 full-state tangential feedback, and C1 spatial-only forcing. Finite-interval internal bounds establish compact box confinement before continuation; b=1+Q^2 and finite coefficient expansions are connected. Actual level and band homeomorphisms support a constructive radial target-point distance estimate in the product maximum metric. The explicit exponential distance bound and distance-to-level limit, energy convergence, and strict-gap spatial nonreturn are applied to the constructed coupled solution from initial data. Public declarations from both groups and dependencies of private helpers are axiom-audited in the same Lean session. Parent Elastica source and its historical report remain unchanged; its current source hashes are included here.",
+  "not_covered": [
+    "JavaScript or Python floating-point execution",
+    "cubic root-count classification",
+    "convex-conjugate and envelope theorems",
+    "smooth level parametrizations and diffeomorphisms of energy bands",
+    "global existence for arbitrary time-dependent feedback or unrestricted internal-state-dependent forcing",
+    "optimal gradient lower bounds or optimal convergence rates",
+    "boundedness and continuation of arbitrary or infinite-dimensional internal-state updates",
+    "convergence to a spatial point, convergence of the internal state, periodic limiting trajectories or asymptotic phase",
+    "existence and regularity of area-constrained minimizing curves",
+    "unconditional uniqueness or nonzero pressure multiplier for every area-constrained stationary curve",
+    "local minima of prescribed-pressure functionals at singular straight endpoint constraints",
+    "unique physical-time dynamics or internal update law from static elastica"
+  ]
+}

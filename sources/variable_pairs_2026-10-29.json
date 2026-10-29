@@ -1,0 +1,463 @@
+{
+  "schema": "primitive-variable-pairs-provenance-v1",
+  "recorded_utc": "2026-10-29T12:15:47.705739+00:00",
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "base_commit": "a53100f2cb25f74c6b4a4d421b493d43e186b7c6",
+  "user_instruction": "いったんここまでを形式化してしまいましょう",
+  "reference_files": [
+    {
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\variable_pairs_2026-10-20\\読む.html",
+      "sha256": "065da46d0908aee479fad08a7763a13e3d32ac4878a74474b528dacb0878eb99",
+      "role": "Read-only mathematical source, not Lean axioms or execution instructions"
+    },
+    {
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\variable_pairs_2026-10-20\\二変数の選び方の比較.md",
+      "sha256": "abab1cba6feb64ece63b21b987c58f9a92ca18b618c5ed7faf905a394f543a91",
+      "role": "Read-only mathematical source, not Lean axioms or execution instructions"
+    },
+    {
+      "path": "C:\\Users\\Dalcia\\Research\\05_Notes\\abstract_elastica_reference_2026-10-19\\variable_pairs_2026-10-20\\provenance.txt",
+      "sha256": "6b4f97657c3ae2b398d0686bdf3c8ef5decc5ac5bab1a530183124b0fd2731ac",
+      "role": "Read-only mathematical source, not Lean axioms or execution instructions"
+    }
+  ],
+  "added_theorems": 43,
+  "added_definitions": 13,
+  "total_theorems": 563,
+  "total_declarations": 628,
+  "source": {
+    "source": "linear_input/lean_check/VariablePairObservations.inc",
+    "namespace": "LinearInputVariablePairs",
+    "declarations": [
+      {
+        "name": "LinearInputVariablePairs.energy",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 12,
+        "exact_lean_statement": "def energy (k lam a c x y u : ℝ) : ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.energy_eq_primitive",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 15,
+        "exact_lean_statement": "theorem energy_eq_primitive (lam r u x y : ℝ) :\n    energy (r + 2) lam 1 (sqrt 2) x y u = LinearInputDesign.E lam r u x y"
+      },
+      {
+        "name": "LinearInputVariablePairs.energy_complete_square",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 23,
+        "exact_lean_statement": "theorem energy_complete_square (k lam a c x y u : ℝ) (ha : a ≠ 0) :\n    energy k lam a c x y u =\n      lam * x ^ 4 / 4 + (k - c ^ 2 / a) * x ^ 2 / 2 - u * x +\n        a / 2 * (y - c * x / a) ^ 2"
+      },
+      {
+        "name": "LinearInputVariablePairs.energy_eq_linear_observation",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 31,
+        "exact_lean_statement": "theorem energy_eq_linear_observation (k lam a c u : ℝ) (z : ℝ × ℝ) :\n    energy k lam a c z.1 z.2 u =\n      LinearInputObservation.energy\n        (fun w : ℝ × ℝ => energy k lam a c w.1 w.2 0) Prod.fst u z"
+      },
+      {
+        "name": "LinearInputVariablePairs.hasDerivAt_energy_x",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 39,
+        "exact_lean_statement": "theorem hasDerivAt_energy_x (k lam a c x y u : ℝ) :\n    HasDerivAt (fun t => energy k lam a c t y u)\n      (k * x + lam * x ^ 3 - c * y - u) x"
+      },
+      {
+        "name": "LinearInputVariablePairs.hasDerivAt_energy_y",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 50,
+        "exact_lean_statement": "theorem hasDerivAt_energy_y (k lam a c x y u : ℝ) :\n    HasDerivAt (fun t => energy k lam a c x t u) (a * y - c * x) y"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 60,
+        "exact_lean_statement": "def gradXu (k lam a c s y : ℝ) (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.hasDerivAt_signed_input",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 64,
+        "exact_lean_statement": "theorem hasDerivAt_signed_input (k lam a c s x y u : ℝ) :\n    HasDerivAt (fun t => energy k lam a c x y (-s * t)) (s * x) u"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_formula",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 76,
+        "exact_lean_statement": "theorem gradXu_formula (k lam a c s y : ℝ) (z : ℝ × ℝ) :\n    gradXu k lam a c s y z =\n      (k * z.1 + lam * z.1 ^ 3 - c * y + s * z.2, s * z.1)"
+      },
+      {
+        "name": "LinearInputVariablePairs.inverseXu",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 85,
+        "exact_lean_statement": "def inverseXu (k lam c s y : ℝ) (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.inverseXu_gradXu",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 88,
+        "exact_lean_statement": "theorem inverseXu_gradXu (k lam a c s y : ℝ) (hs : s ≠ 0) (z : ℝ × ℝ) :\n    inverseXu k lam c s y (gradXu k lam a c s y z) = z"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_inverseXu",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 96,
+        "exact_lean_statement": "theorem gradXu_inverseXu (k lam a c s y : ℝ) (hs : s ≠ 0) (z : ℝ × ℝ) :\n    gradXu k lam a c s y (inverseXu k lam c s y z) = z"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_injective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 104,
+        "exact_lean_statement": "theorem gradXu_injective (k lam a c s y : ℝ) (hs : s ≠ 0) :\n    Function.Injective (gradXu k lam a c s y)"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_bijective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 110,
+        "exact_lean_statement": "theorem gradXu_bijective (k lam a c s y : ℝ) (hs : s ≠ 0) :\n    Function.Bijective (gradXu k lam a c s y)"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_zero_not_injective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 116,
+        "exact_lean_statement": "theorem gradXu_zero_not_injective (k lam a c y : ℝ) :\n    ¬ Function.Injective (gradXu k lam a c 0 y)"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_bijective_iff",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 124,
+        "exact_lean_statement": "theorem gradXu_bijective_iff (k lam a c s y : ℝ) :\n    Function.Bijective (gradXu k lam a c s y) ↔ s ≠ 0"
+      },
+      {
+        "name": "LinearInputVariablePairs.jacobianPair",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 133,
+        "exact_lean_statement": "def jacobianPair (f g : ℝ → ℝ → ℝ) (x y : ℝ) : ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXu_jacobian",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 137,
+        "exact_lean_statement": "theorem gradXu_jacobian (k lam a c s y x u : ℝ) :\n    jacobianPair\n      (fun v w => (gradXu k lam a c s y (v, w)).1)\n      (fun v w => (gradXu k lam a c s y (v, w)).2) x u = -s ^ 2"
+      },
+      {
+        "name": "LinearInputVariablePairs.signValue",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 157,
+        "exact_lean_statement": "def signValue (b : Bool) : ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.signValue_sq",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 159,
+        "exact_lean_statement": "theorem signValue_sq (b : Bool) : signValue b ^ 2 = 1"
+      },
+      {
+        "name": "LinearInputVariablePairs.signValue_ne_zero",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 162,
+        "exact_lean_statement": "theorem signValue_ne_zero (b : Bool) : signValue b ≠ 0"
+      },
+      {
+        "name": "LinearInputVariablePairs.sign_pattern_count",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 165,
+        "exact_lean_statement": "theorem sign_pattern_count : Fintype.card (Fin 5 → Bool) = 32"
+      },
+      {
+        "name": "LinearInputVariablePairs.signedEnergy",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 169,
+        "exact_lean_statement": "def signedEnergy (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) : ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.signedEnergy_expansion",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 173,
+        "exact_lean_statement": "theorem signedEnergy_expansion (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :\n    signedEnergy σ k lam a c x y u =\n      signValue (σ 0) * k * x ^ 2 / 2 + signValue (σ 1) * lam * x ^ 4 / 4 +\n      signValue (σ 2) * a * y ^ 2 / 2 + signValue (σ 3) * c * x * y +\n      signValue (σ 4) * u * x"
+      },
+      {
+        "name": "LinearInputVariablePairs.signedGradXu",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 181,
+        "exact_lean_statement": "def signedGradXu (σ : Fin 5 → Bool) (k lam a c y : ℝ) (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.signedGradXu_eq",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 185,
+        "exact_lean_statement": "theorem signedGradXu_eq (σ : Fin 5 → Bool) (k lam a c y : ℝ) (z : ℝ × ℝ) :\n    signedGradXu σ k lam a c y z =\n      gradXu (signValue (σ 0) * k) (signValue (σ 1) * lam)\n        (signValue (σ 2) * a) (-signValue (σ 3) * c) (signValue (σ 4)) y z"
+      },
+      {
+        "name": "LinearInputVariablePairs.signedGradXu_bijective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 191,
+        "exact_lean_statement": "theorem signedGradXu_bijective (σ : Fin 5 → Bool) (k lam a c y : ℝ) :\n    Function.Bijective (signedGradXu σ k lam a c y)"
+      },
+      {
+        "name": "LinearInputVariablePairs.signedGradXu_jacobian",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 198,
+        "exact_lean_statement": "theorem signedGradXu_jacobian (σ : Fin 5 → Bool) (k lam a c y x u : ℝ) :\n    jacobianPair (fun v w => (signedGradXu σ k lam a c y (v, w)).1)\n      (fun v w => (signedGradXu σ k lam a c y (v, w)).2) x u = -1"
+      },
+      {
+        "name": "LinearInputVariablePairs.chebyshev_energy",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 203,
+        "exact_lean_statement": "theorem chebyshev_energy (x u : ℝ) :\n    energy (-3) 4 0 0 x 0 u = LinearInputCalculus.potential 4 (-3) u x"
+      },
+      {
+        "name": "LinearInputVariablePairs.chebyshev_gradient",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 208,
+        "exact_lean_statement": "theorem chebyshev_gradient (x u : ℝ) :\n    gradXu (-3) 4 0 0 (-1) 0 (x, u) =\n      (LinearInputBranchForgetting.chebyshevThree x - u, -x)"
+      },
+      {
+        "name": "LinearInputVariablePairs.chebyshev_stationary_fiber",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 215,
+        "exact_lean_statement": "theorem chebyshev_stationary_fiber (x u : ℝ) :\n    (gradXu (-3) 4 0 0 (-1) 0 (x, u)).1 = 0 ↔\n      u = LinearInputBranchForgetting.chebyshevThree x"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradient_preserves_observation_hierarchy",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 223,
+        "exact_lean_statement": "theorem gradient_preserves_observation_hierarchy {S : Type*}\n    (obs : ℕ → S → ℝ × ℝ) (m : ℕ) (z w : S)\n    (k lam a c s y : ℝ) (hs : s ≠ 0) :\n    LinearInputHistorySignature.agreeThrough\n      (fun n t => gradXu k lam a c s y (obs n t)) m z w ↔\n      LinearInputHistorySignature.agreeThrough obs m z w"
+      },
+      {
+        "name": "LinearInputVariablePairs.actual_energy_minimum_forgets",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 236,
+        "exact_lean_statement": "theorem actual_energy_minimum_forgets (k lam a c : ℝ) (p q r : ℝ × ℝ)\n    (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1)\n    (hx : q.1 = (1 - t) * p.1 + t * r.1)\n    (hE : (1 - t) * energy k lam a c p.1 p.2 0 +\n      t * energy k lam a c r.1 r.2 0 ≤ energy k lam a c q.1 q.2 0) :\n    (fun u => min (min (energy k lam a c p.1 p.2 u) (energy k lam a c r.1 r.2 u))\n      (energy k lam a c q.1 q.2 u)) =\n    (fun u => min (energy k lam a c p.1 p.2 u) (energy k lam a c r.1 r.2 u))"
+      },
+      {
+        "name": "LinearInputVariablePairs.chebyshev_minimum_forgets_zero",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 249,
+        "exact_lean_statement": "theorem chebyshev_minimum_forgets_zero :\n    (fun u => min (min (energy (-3) 4 0 0 (-1) 0 u) (energy (-3) 4 0 0 1 0 u))\n      (energy (-3) 4 0 0 0 0 u)) =\n    (fun u => min (energy (-3) 4 0 0 (-1) 0 u) (energy (-3) 4 0 0 1 0 u))"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXY",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 256,
+        "exact_lean_statement": "def gradXY (k lam a c u : ℝ) (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXY_formula",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 260,
+        "exact_lean_statement": "theorem gradXY_formula (k lam a c u : ℝ) (z : ℝ × ℝ) :\n    gradXY k lam a c u z =\n      (k * z.1 + lam * z.1 ^ 3 - c * z.2 - u, a * z.2 - c * z.1)"
+      },
+      {
+        "name": "LinearInputVariablePairs.gradXY_jacobian",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 266,
+        "exact_lean_statement": "theorem gradXY_jacobian (k lam a c u x y : ℝ) :\n    jacobianPair (fun v w => (gradXY k lam a c u (v, w)).1)\n      (fun v w => (gradXY k lam a c u (v, w)).2) x y =\n        a * (k + 3 * lam * x ^ 2) - c ^ 2"
+      },
+      {
+        "name": "LinearInputVariablePairs.signed_xy_jacobian",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 287,
+        "exact_lean_statement": "theorem signed_xy_jacobian (σ : Fin 5 → Bool) (k lam a c u x y : ℝ) :\n    jacobianPair\n      (fun v w => deriv (fun t => signedEnergy σ k lam a c t w u) v)\n      (fun v w => deriv (fun t => signedEnergy σ k lam a c v t u) w) x y =\n      signValue (σ 2) * a * (signValue (σ 0) * k +\n        3 * signValue (σ 1) * lam * x ^ 2) - c ^ 2"
+      },
+      {
+        "name": "LinearInputVariablePairs.plusEnergy",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 304,
+        "exact_lean_statement": "def plusEnergy (x y : ℝ) : ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.minusEnergy",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 306,
+        "exact_lean_statement": "def minusEnergy (x y : ℝ) : ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.plusCoordinates",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 308,
+        "exact_lean_statement": "def plusCoordinates (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.inversePlusCoordinates",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 310,
+        "exact_lean_statement": "def inversePlusCoordinates (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.inverse_plus_coordinates",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 313,
+        "exact_lean_statement": "theorem inverse_plus_coordinates (z : ℝ × ℝ) :\n    inversePlusCoordinates (plusCoordinates z) = z"
+      },
+      {
+        "name": "LinearInputVariablePairs.plus_coordinates_inverse",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 317,
+        "exact_lean_statement": "theorem plus_coordinates_inverse (z : ℝ × ℝ) :\n    plusCoordinates (inversePlusCoordinates z) = z"
+      },
+      {
+        "name": "LinearInputVariablePairs.plus_coordinates_bijective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 321,
+        "exact_lean_statement": "theorem plus_coordinates_bijective : Function.Bijective plusCoordinates"
+      },
+      {
+        "name": "LinearInputVariablePairs.plus_unit_jacobian_mate",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 329,
+        "exact_lean_statement": "theorem plus_unit_jacobian_mate (x y : ℝ) :\n    jacobianPair plusEnergy (fun v w => v - w) x y = 1"
+      },
+      {
+        "name": "LinearInputVariablePairs.plus_gradient_not_injective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 338,
+        "exact_lean_statement": "theorem plus_gradient_not_injective : ¬ Function.Injective (gradXY 1 0 1 1 1)"
+      },
+      {
+        "name": "LinearInputVariablePairs.plus_gradient_jacobian",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 345,
+        "exact_lean_statement": "theorem plus_gradient_jacobian (x y : ℝ) :\n    jacobianPair (fun v w => (gradXY 1 0 1 1 1 (v, w)).1)\n      (fun v w => (gradXY 1 0 1 1 1 (v, w)).2) x y = 0"
+      },
+      {
+        "name": "LinearInputVariablePairs.no_mate_at_critical_point",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 352,
+        "exact_lean_statement": "theorem no_mate_at_critical_point (f : ℝ → ℝ → ℝ) (x y : ℝ)\n    (hx : deriv (fun t => f t y) x = 0) (hy : deriv (fun t => f x t) y = 0) :\n    ¬ ∃ g : ℝ → ℝ → ℝ, ∀ v w, jacobianPair f g v w = 1"
+      },
+      {
+        "name": "LinearInputVariablePairs.minus_critical_point",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 360,
+        "exact_lean_statement": "theorem minus_critical_point : gradXY 1 0 (-1) 1 1 (1 / 2, -1 / 2) = (0, 0)"
+      },
+      {
+        "name": "LinearInputVariablePairs.minus_no_unit_jacobian_mate",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 363,
+        "exact_lean_statement": "theorem minus_no_unit_jacobian_mate :\n    ¬ ∃ g : ℝ → ℝ → ℝ, ∀ x y, jacobianPair minusEnergy g x y = 1"
+      },
+      {
+        "name": "LinearInputVariablePairs.inverseMinusGradient",
+        "kind": "def",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 373,
+        "exact_lean_statement": "def inverseMinusGradient (z : ℝ × ℝ) : ℝ × ℝ"
+      },
+      {
+        "name": "LinearInputVariablePairs.inverse_minus_gradient",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 376,
+        "exact_lean_statement": "theorem inverse_minus_gradient (z : ℝ × ℝ) :\n    inverseMinusGradient (gradXY 1 0 (-1) 1 1 z) = z"
+      },
+      {
+        "name": "LinearInputVariablePairs.minus_gradient_inverse",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 381,
+        "exact_lean_statement": "theorem minus_gradient_inverse (z : ℝ × ℝ) :\n    gradXY 1 0 (-1) 1 1 (inverseMinusGradient z) = z"
+      },
+      {
+        "name": "LinearInputVariablePairs.minus_gradient_bijective",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 386,
+        "exact_lean_statement": "theorem minus_gradient_bijective : Function.Bijective (gradXY 1 0 (-1) 1 1)"
+      },
+      {
+        "name": "LinearInputVariablePairs.minus_gradient_jacobian",
+        "kind": "theorem",
+        "file": "linear_input/lean_check/VariablePairObservations.inc",
+        "line": 394,
+        "exact_lean_statement": "theorem minus_gradient_jacobian (x y : ℝ) :\n    jacobianPair (fun v w => (gradXY 1 0 (-1) 1 1 (v, w)).1)\n      (fun v w => (gradXY 1 0 (-1) 1 1 (v, w)).2) x y = -2"
+      }
+    ],
+    "theorem_count": 43,
+    "declaration_count": 56,
+    "sha256": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35",
+    "reviewed_source_references": [
+      "LinearInputBranchForgetting.chebyshevThree",
+      "LinearInputBranchForgetting.minimum_forgets_hidden_state",
+      "LinearInputCalculus.potential",
+      "LinearInputDesign.E",
+      "LinearInputDesign.f",
+      "LinearInputHistorySignature.agreeThrough",
+      "LinearInputObservation.energy"
+    ],
+    "reference_scope": "Reviewed qualified references in source, not an exhaustive proof-term dependency graph"
+  },
+  "formal_scope": [
+    "Real polynomial energy specialization and square completion",
+    "Actual partial derivatives and two-sided inverse of the (x,u) observation",
+    "Exact bijectivity condition for arbitrary real input coefficient",
+    "All five-sign patterns quantified as Fin 5 to Bool, plus their cardinality 32",
+    "Actual determinant formulas for (x,u) and (x,y)",
+    "Sign-switch example with explicit inverses, collision and critical-point obstruction",
+    "Transport of paired observation hierarchies and actual-energy minimum-only forgetting"
+  ],
+  "explicit_conditions": [
+    "Real scalar coefficients; nonselected variables remain fixed",
+    "a is nonzero for square completion",
+    "s is nonzero for the (x,u) inverse",
+    "The same fixed invertible observation transform is used at every compared level",
+    "Chord and base-energy inequalities for minimum-only forgetting"
+  ],
+  "not_formalized": [
+    "All-15-pair polynomial mate existence and nonexistence classification over arbitrary characteristic-zero fields",
+    "A general theorem deducing polynomial invertibility from constant Jacobian",
+    "All-degree Chen identity or Hambly-Lyons uniqueness",
+    "Recovery of unobserved history or derivatives from minimum-value-only logs",
+    "Human replay calibration or ARC policy performance"
+  ],
+  "verification": "evidence/local/2026-10-29-variable-pairs/audit.json"
+}

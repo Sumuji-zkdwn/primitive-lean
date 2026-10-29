@@ -1,8 +1,10 @@
 # 線形入力と接続のLean証明
 
+同日の続く追補 [VariablePairObservations.inc](VariablePairObservations.inc) は、実エネルギーと実偏微分から変数対・符号・観測の選択を形式化する。43定理・13定義を加え、全体は563定理・628宣言。原式との代入関係、(x,u)の明示逆と非零入力係数の必要十分条件、全32符号、(x,y)の符号変更例、観測階層の輸送と最小値での忘却を含む。[実行証拠](../../docs/verification/2026-10-29-variable-pairs.md)・[宣言と仮定](../../sources/variable_pairs_2026-10-29.json)。Researchの15組全分類は未移植である。
+
 2026年10月29日に [HistorySignature.inc](HistorySignature.inc) と [BranchForgetting.inc](BranchForgetting.inc) を追補した。実際の座標・面積積分から二次の履歴観測と面積分割を導き、実微分の停留入力からチェビシェフの正規化を導く。既存の線形入力エネルギーから最小値だけでは見えなくなる状態の条件も証明する。17+9定理と6+2定義を追加し、全体の検証対象は520定理・572宣言となる。全次数のsignature一意性や人間予測の検証は含めない。[検証記録](../../docs/verification/2026-10-29-history-branch.md)と[宣言・条件・依存の台帳](../../sources/history_branch_2026-10-29.json)に範囲を記載する。
 
-現在のGitHub版の再実行入口は `python -X utf8 tools/verify.py --proof-only`。従来の5追補の後に上記2追補を結合して、元の全宣言とともに `--trust=0` と公理監査で検査する。以下の旧件数と保存版へのリンクは以前の追加段階の記録として保持する。
+現在のGitHub版の再実行入口は `python -X utf8 tools/verify.py --proof-only`。従来の5追補の後に履歴・分岐の2追補、続いて変数対の1追補を結合して、元の全宣言とともに `--trust=0` と公理監査で検査する。以下の旧件数と保存版へのリンクは以前の追加段階の記録として保持する。
 
 本文と利用・検証入口は [原始の形式化](../../原始の形式化.html) に統合しました。証明原稿の配置と分担は従来どおりです。このフォルダーの36原稿が線形入力・面積拘束・帰還系の251定理を担当し、エラスティカ側の214定理を実際にimportして接続します。
 

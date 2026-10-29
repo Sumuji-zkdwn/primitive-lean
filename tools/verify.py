@@ -109,6 +109,7 @@ def verify_lean(rebuild):
         "CurvatureRigidity": "Conserved phase energy and the transverse square force constant curvature at a phase minimum",
         "HistorySignature": "Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy",
         "BranchForgetting": "Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion",
+        "VariablePairObservations": "Actual partial derivatives, explicit inverses, sign changes and transport of observation hierarchies in the primitive energy family",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
