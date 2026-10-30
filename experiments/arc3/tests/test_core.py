@@ -146,3 +146,19 @@ def test_partition_refinement_matches_independent_pair_search(targets):
     blocks = quotient(model)
     for x,y in product(nodes, repeat=2):
         assert (blocks[x] == blocks[y]) == (distinguishing_word(model,x,model,y) is None)
+
+
+def test_large_budget_cycle_and_certificate_are_depth_safe():
+    model = Model("cycle", {"s": Node("active"), "w": Node("won", "win")},
+                  {("s", "a-loop"): Step("s"), ("s", "b-win"): Step("w")},
+                  frozenset({"s"}))
+    space = version_space(model)
+    result = solve(space, 1200, max_nodes=1300)
+    assert result.status == "solved"
+    assert result.certificate and verify(space, result.certificate)
+    # A budget-exhausted terminal in an otherwise deep policy must be rejected.
+    assert not verify(space, Certificate(result.certificate.fingerprint, 1199,
+                                         result.certificate.policy))
+    limited = solve(space, 1200, max_nodes=1000)
+    assert limited.status == "search-exhausted"
+    assert limited.expanded == 1000

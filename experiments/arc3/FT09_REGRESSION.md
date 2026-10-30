@@ -2,7 +2,7 @@
 
 対象は PR #1 の `7e53dc5212ddb6d5fc444762203fbc78b26b0ec4` と
 [失敗した45試行](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/40745980582)。
-`core.py` の `solve()` の再帰深度問題とは別件で、同ファイルは変更していません。
+このft09修正は `core.py` の `solve()` の再帰深度問題とは別件です。ft09修正時点では同ファイルを変更していません。後続で `solve()` と証明書検査を深い方策に対応させました。
 
 ## 原因と状態不変条件
 

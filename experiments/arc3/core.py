@@ -220,7 +220,7 @@ def solve(space: VersionSpace, budget: int, max_nodes: int = 20000) -> Result:
     """Find one observation-contingent policy winning in every surviving world.
 
     Searches the given finite deterministic class exactly unless max_nodes is hit.
-    Positive action costs make budget recursion well founded. No model can be
+    Positive action costs make the budget-limited search well founded. No model can be
     chosen separately for each branch or each action. The first feasible policy
     is returned; this is not an optimal-cost or probabilistic-risk solver.
     """
@@ -251,7 +251,7 @@ def solve(space: VersionSpace, budget: int, max_nodes: int = 20000) -> Result:
             for event, next_belief in successors(space.models, belief, action).items():
                 if event.cost > remaining:
                     break
-                policy = visit(next_belief, remaining-event.cost)
+                policy = yield (next_belief, remaining-event.cost)
                 if policy is None:
                     break
                 branches[event] = policy
@@ -262,8 +262,24 @@ def solve(space: VersionSpace, budget: int, max_nodes: int = 20000) -> Result:
         memo[key] = None
         return None
 
+    # Drive the same depth-first traversal explicitly: each generator holds one
+    # search frame, without consuming a Python call stack frame per action.
     try:
-        policy = visit(space.belief, budget)
+        stack = [visit(space.belief, budget)]
+        policy = None
+        while stack:
+            try:
+                belief, remaining = stack[-1].send(policy)
+                policy = None
+            except StopIteration as finished:
+                stack.pop()
+                policy = finished.value
+                continue
+            key = (belief, remaining)
+            if key in memo:
+                policy = memo[key]
+            else:
+                stack.append(visit(belief, remaining))
     except _Limit:
         return Result("search-exhausted", expanded)
     if policy is None:
@@ -277,18 +293,22 @@ def verify(space: VersionSpace, certificate: Certificate) -> bool:
     if not space.belief or certificate.fingerprint != space.fingerprint():
         return False
 
-    def visit(belief: Belief, remaining: int, policy: Policy) -> bool:
+    stack = [(space.belief, certificate.budget, certificate.policy)]
+    while stack:
+        belief, remaining, policy = stack.pop()
         if not belief or remaining < 0:
             return False
         if policy.action is None:
-            return (not policy.branches and
-                    all(space.models[w.model].nodes[w.state].status == "win" for w in belief))
+            if policy.branches or not all(
+                space.models[w.model].nodes[w.state].status == "win" for w in belief
+            ):
+                return False
+            continue
         if any((w.state, policy.action) not in space.models[w.model].edges for w in belief):
             return False
         branches = successors(space.models, belief, policy.action)
         if branches.keys() != policy.branches.keys():
             return False
-        return all(visit(next_belief, remaining-event.cost, policy.branches[event])
-                   for event, next_belief in branches.items())
-
-    return visit(space.belief, certificate.budget, certificate.policy)
+        stack.extend((next_belief, remaining-event.cost, policy.branches[event])
+                     for event, next_belief in branches.items())
+    return True
