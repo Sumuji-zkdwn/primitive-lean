@@ -59,9 +59,9 @@ jobs:
       ARC3_SEEDS: ${{ inputs.seeds || '0 1 2 3 4' }}
       ARC3_BUDGET: ${{ inputs.budget || '500' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -274,7 +274,7 @@ jobs:
 
       - name: Upload evaluation reports and traces
         if: always() && env.ARC3_STAGE != 'unit'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: arc3-${{ env.ARC3_STAGE }}-${{ github.run_id }}
           path: |

@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -87,7 +87,7 @@ jobs:
           python tools/arc3_edge_diagnosis.py --environments build/arc3-environments --output build/diagnosis-after > build/diagnosis-after.log 2>&1
       - name: Upload evidence even if validation fails
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: arc3-ft09-regression-${{ github.run_id }}
           path: |
