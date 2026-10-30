@@ -12,10 +12,19 @@ ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY = "Sumuji-zkdwn/primitive-lean"
 SOURCE_COMMIT = "185a1713f2fca219e5f9fb1c5aa11955925cb97f"
 LEGACY_SOURCE_COMMIT = "5d23c590398680aa7a67919a54fc2bdd915614b4"
-UPDATED_BASE_PATHS = {"tools/verify.py", "tools/verify_main_result.py"}
+UPDATED_BASE_PATHS = {
+    "tools/verify.py",
+    "tools/verify_main_result.py",
+    "linear_input/lean_check/README.md",
+    "原始の形式化.md",
+    "検証と再実行.md",
+}
 OVERLAY_PATHS = [
     "tools/verify.py",
     "tools/verify_main_result.py",
+    "linear_input/lean_check/README.md",
+    "原始の形式化.md",
+    "検証と再実行.md",
     "tools/proof_only.py",
     "linear_input/lean_check/BranchFibers.inc",
     "linear_input/lean_check/BranchForgetting.inc",
