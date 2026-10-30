@@ -21,13 +21,13 @@ jobs:
       PROOF_SOURCE_COMMIT: 185a1713f2fca219e5f9fb1c5aa11955925cb97f
     steps:
       - name: Checkout exact validation commit and history
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload Lean proof evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lean-proof-evidence-717-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
@@ -88,7 +88,7 @@ jobs:
 
       - name: Upload Kaggle handoff package
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: kaggle-handoff-717-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/kaggle-handoff-717/
