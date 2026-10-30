@@ -47,6 +47,9 @@ jobs:
           scripts/audit_kaggle_result_717.py
           notebooks/kaggle_support_717.py
 
+      - name: Test result auditor evidence checks
+        run: python -m unittest discover -s tests -p test_audit_kaggle_result_717.py -v
+
       - name: Install pinned Lean toolchain and Mathlib cache
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:

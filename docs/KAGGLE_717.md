@@ -37,3 +37,5 @@ GitHub Actions Run `41048557250` は検証コミット `dd2dd7bb4fa2a8099335dc4f
 - Actions artifact `kaggle-handoff-717-41048557250-1`（artifact ID `12974595335`、ZIP SHA-256 `8886a204b422ad94ed3df7c420cd17fe8a37dbcdbc7b26512337d79bcd95857b`）にNotebook 2種、handoff manifest、結果監査器を保存した。生成物のNotebookハッシュはproof-check `653d6be0c82801a7c0c7fe2e7633704be53d9aedfc3362a75cd8f57d4d715adc`、setup `2d2e625b8349a3fbd028d522908bcc09ba9438b66faad88d4bdc98f2ce8f5c36`。監査器は `c028e79aa88a8534a1bb433d1f4c1274d9d6d7a7313c1abadb4925bdcf94765e`。
 
 この環境ではKaggleへのサインイン済みセッションがなく、717定理版のSaved Version実行と結果ZIP監査は未実施。したがって新しいscriptVersionIdと結果ZIPハッシュはまだ存在しない。PR #2の494/538 Saved Version成功およびZIP監査記録は上表のとおり独立して保持する。競技用Kaggle提出枠は使用していない。
+
+監査器は結果ZIP内のproof-onlyレポートとNotebookの記録の一致、jointレポート・ログの存在、宣言名と公理監査名の対応を確認する。監査器の回帰試験は `python -m unittest discover -s tests -p test_audit_kaggle_result_717.py -v` で実行する。これらは記録の整合性検査であり、Leanの再実行やKaggle Saved Versionでの実行元の認証ではない。`--notebook` を指定した場合は、そのファイルのハッシュを受け渡しマニフェストと照合するが、実行時のNotebookの同一性は別途確認する。

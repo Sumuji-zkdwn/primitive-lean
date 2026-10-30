@@ -30,7 +30,8 @@ def _read_json(archive, name):
 def audit(result_zip, expected_source, handoff_path, notebook_path=None):
     if len(expected_source) != 40 or any(c not in "0123456789abcdef" for c in expected_source):
         raise ValueError("expected-source must be a full lowercase commit SHA")
-    handoff = json.loads(open(handoff_path, encoding="utf-8").read())
+    with open(handoff_path, encoding="utf-8") as stream:
+        handoff = json.load(stream)
     if handoff.get("schema") != "primitive-lean-kaggle-handoff-717-v1":
         raise ValueError("Unexpected handoff manifest schema")
     if handoff.get("proof_source_commit") != expected_source:
@@ -65,6 +66,17 @@ def audit(result_zip, expected_source, handoff_path, notebook_path=None):
             raise ValueError("Result archive CRC failure: " + corrupt)
         state = _read_json(archive, "notebook_run.json")
         main = _read_json(archive, "proofs/verification/main-result.json")
+        stored_proof = _read_json(archive, "proofs/verification/proof-only.json")
+        joint = _read_json(archive, "proofs/linear_input/lean_results.json")
+        for name in (
+            "proof-run.log", "proofs/verification/main-result.log",
+            "proofs/verification/proof-only-joint.log",
+            "proofs/verification/proof-only-supplement.log",
+            "proofs/linear_input/lean_check/build.log",
+            "proofs/linear_input/lean_check/elastica-build.log",
+        ):
+            if name not in names:
+                raise ValueError("Result archive lacks " + name)
 
     source = state.get("source", {})
     setup = state.get("setup", {})
@@ -87,6 +99,10 @@ def audit(result_zip, expected_source, handoff_path, notebook_path=None):
     if proofs.get("status") != "passed" or proofs.get("run", {}).get("exit_code") != 0:
         raise ValueError("Notebook did not record a fresh passing Lean run")
     proof_result = proofs.get("result", {})
+    if stored_proof != proof_result:
+        raise ValueError("Stored proof-only report differs from the notebook record")
+    if joint.get("passed") is not True:
+        raise ValueError("Stored joint Lean report did not pass")
     if (proof_result.get("passed") is not True
             or proof_result.get("theorem_count") != EXPECTED_THEOREMS
             or proof_result.get("declaration_count") != EXPECTED_DECLARATIONS):
@@ -94,19 +110,27 @@ def audit(result_zip, expected_source, handoff_path, notebook_path=None):
     stages = proof_result.get("stages", [])
     if len(stages) != 2 or any(
         stage.get("passed") is not True or stage.get("run", {}).get("exit_code") != 0
-        or stage.get("run", {}).get("warnings") for stage in stages
+        or stage.get("fresh_report") is not True
+        or stage.get("warnings") or stage.get("run", {}).get("warnings") for stage in stages
     ):
         raise ValueError("Both Lean proof stages must have fresh zero-exit runs without warnings")
+    if [stage.get("name") for stage in stages] != ["joint", "supplement"]:
+        raise ValueError("Unexpected Lean proof stages")
     if (main.get("passed") is not True
             or main.get("total_theorem_count") != EXPECTED_THEOREMS
             or main.get("total_declaration_count") != EXPECTED_DECLARATIONS
             or main.get("joint_axiom_audit") is not True
             or main.get("baseline_axioms_match") is not True):
         raise ValueError("Fresh joint axiom report does not show all 836 declarations passing")
+    if main.get("compile", {}).get("exit_code") != 0:
+        raise ValueError("Joint axiom compilation did not pass")
     declarations = main.get("all_declarations", [])
     axioms = main.get("axioms", {})
     if len(declarations) != EXPECTED_DECLARATIONS or len(axioms) != EXPECTED_DECLARATIONS:
         raise ValueError("Axiom audit is incomplete")
+    names = [row.get("name") for row in declarations]
+    if len(set(names)) != EXPECTED_DECLARATIONS or set(names) != set(axioms):
+        raise ValueError("Axiom audit names do not match the declarations")
     if main.get("errors") or main.get("unexpected") or main.get("warnings") or main.get("forbidden_tokens"):
         raise ValueError("Axiom report contains errors, warnings, or unexpected axioms")
     if any(not set(value).issubset(ALLOWED_AXIOMS) for value in axioms.values()):
