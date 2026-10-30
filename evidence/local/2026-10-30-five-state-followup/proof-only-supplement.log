@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "theorem_count": 268,
+  "declaration_count": 352,
+  "total_theorem_count": 733,
+  "total_declaration_count": 861,
+  "compile": {
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "--trust=0",
+      "../linear_input/lean_check/MainResult.lean"
+    ],
+    "working_directory": "<workspace>\\lean",
+    "exit_code": 0,
+    "seconds": 60.666,
+    "log": "verification/main-result.log"
+  },
+  "errors": [],
+  "unexpected": [],
+  "warnings": [],
+  "forbidden_tokens": [],
+  "changed_during_verification": []
+}

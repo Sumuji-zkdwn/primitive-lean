@@ -90,8 +90,6 @@ theorem all_ones_to_singleton {N : ℕ} (hN : 0 < N) :
     omega
   simpa using reaches_singleton hne hp
 
-end LinearInputF0Merge
-
 /-!
 A concrete five-state realization of the merge chain.  The multiset of
 fiber cardinalities records the integer partition represented by each map.
@@ -219,3 +217,5 @@ theorem fiveQ4_no_left_inverse (D : Fin 5 → Fin 5) :
   have h01 : (0 : Fin 5) = 1 := h0.symm.trans h1
   have hv := congrArg Fin.val h01
   norm_num at hv
+
+end LinearInputF0Merge
