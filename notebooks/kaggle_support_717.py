@@ -58,12 +58,15 @@ def read_candidate(path, expected):
 
 
 def source_matches(files, expected, overlays):
-    return [p for p, digest in expected.items()
-            if ((p not in files and p not in overlays)
-                or (p not in files and p in overlays
-                    and sha_bytes(overlays[p].encode("utf-8")) != digest)
-                or (p in files and sha_bytes(files[p]) not in
-                    {digest, sha_bytes(overlays[p].encode("utf-8")) if p in overlays else digest}))]
+    mismatches = []
+    for path, digest in expected.items():
+        if path in overlays:
+            # The exact commit-pinned overlay replaces any archive copy before execution.
+            if sha_bytes(overlays[path].encode("utf-8")) != digest:
+                mismatches.append(path)
+        elif path not in files or sha_bytes(files[path]) != digest:
+            mismatches.append(path)
+    return mismatches
 
 
 def find_candidates(roots):
