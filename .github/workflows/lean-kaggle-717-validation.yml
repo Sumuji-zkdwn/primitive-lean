@@ -1,0 +1,93 @@
+name: Lean and Kaggle handoff 717 validation
+
+on:
+  pull_request:
+    branches:
+      - codex/primitive-history-derivation-20261029
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-kaggle-717-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PROOF_SOURCE_COMMIT: 185a1713f2fca219e5f9fb1c5aa11955925cb97f
+    steps:
+      - name: Checkout exact validation commit and history
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Confirm proof inputs still match the pinned PR #3 source
+        run: |
+          git merge-base --is-ancestor "$PROOF_SOURCE_COMMIT" "$(git rev-parse HEAD)"
+          git diff --exit-code "$PROOF_SOURCE_COMMIT" HEAD -- \
+            lean/Elastica lean/lean-toolchain lean/lakefile.toml lean/lake-manifest.json \
+            linear_input/verify_lean.py linear_input/lean_check \
+            tools/verify.py tools/verify_main_result.py tools/proof_only.py
+
+      - name: Check handoff scripts and notebook builder syntax
+        run: >-
+          python -m py_compile
+          scripts/build_kaggle_notebook_717.py
+          scripts/package_kaggle_handoff_717.py
+          scripts/audit_kaggle_result_717.py
+          notebooks/kaggle_support_717.py
+
+      - name: Install pinned Lean toolchain and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Run fresh 717-theorem proof and axiom checks
+        run: python -X utf8 tools/verify.py --proof-only
+
+      - name: Package commit-pinned Kaggle handoff
+        if: success()
+        run: >-
+          python -X utf8 scripts/package_kaggle_handoff_717.py
+          --source-ref "$PROOF_SOURCE_COMMIT"
+          --output-dir artifacts/kaggle-handoff-717
+
+      - name: Upload Lean proof evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-proof-evidence-717-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            verification/proof-only.json
+            verification/main-result.json
+            verification/proof-only-*.log
+            verification/main-result.log
+            linear_input/lean_results.json
+            linear_input/lean_check/build.log
+            linear_input/lean_check/elastica-build.log
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload Kaggle handoff package
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kaggle-handoff-717-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/kaggle-handoff-717/
+          if-no-files-found: error
+          retention-days: 30
