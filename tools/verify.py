@@ -113,7 +113,7 @@ def verify_lean(rebuild):
         "BranchFibers": "Cosine candidate equality, explicit critical fibers and retractions, and exhaustive counts of the real inverse images of the ternary iterate",
         "F0Retractions": "Idempotent retractions, K-S-C composition, compatible-map counting by an explicit equivalence, finite orbit bounds, and bridges to the critical branch representatives",
         "F0Counting": "Actual labelled idempotent maps counted by fixed-point rank, with exact seven- and eight-point totals",
-        "F0MergeChains": "Positive integer-partition merge chains, mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton",
+        "F0MergeChains": "Positive integer-partition merge chains and an explicit Fin 5 fiber-mass chain realized by sequential idempotent K-S-C steps, with mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton",
         "FiniteBayes": "Finite normalization and posterior composition, support constraints, log-loss comparison, observation pushforwards, and actual Elastica exponential-weight bridges",
         "FourBayes": "Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples",
     }
