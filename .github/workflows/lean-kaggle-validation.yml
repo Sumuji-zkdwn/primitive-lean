@@ -20,12 +20,12 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: Checkout exact event commit
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -54,7 +54,7 @@ jobs:
 
       - name: Upload proof evidence, including failures
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lean-proof-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
@@ -71,7 +71,7 @@ jobs:
 
       - name: Upload Kaggle handoff notebooks
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: kaggle-handoff-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/kaggle-handoff/
