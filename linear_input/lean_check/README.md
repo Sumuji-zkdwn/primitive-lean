@@ -1,6 +1,6 @@
 # 線形入力と接続のLean証明
 
-**状態追記（2026-10-30、PR #3）:** `F0MergeChains.inc` に、Fin 5 上の `q₀…q₄)、その非空ファイバーサイズ、各段階のK/S/C実現を追加しました（16定理・9定義）。既存717定理・836宣言の検証はコミット `185a1713f2fca219e5f9fb1c5aa11955925cb97f` までの状態を対象とし、この追補は含みません。今回の実行環境には `lake` / `lean` がなく、追加分のLean検査は未実施です。現ブランチの全体検証結果としては扱わず、Windowsで `python -B -X utf8 tools/verify.py --proof-only` を再実行してください。
+**状態追記（2026-10-30、PR #3）:** `F0MergeChains.inc` に、Fin 5 上の `q₀…q₄、その非空ファイバーサイズ、各段階のK/S/C実現を追加しました（16定理・9定義）。既存717定理・836宣言の検証はコミット `185a1713f2fca219e5f9fb1c5aa11955925cb97f` までの状態を対象とし、この追補は含みません。今回の実行環境には `lake` / `lean` がなく、追加分のLean検査は未実施です。現ブランチの全体検証結果としては扱わず、Windowsで `python -B -X utf8 tools/verify.py --proof-only` を再実行してください。
 
 [FiniteBayes.inc](FiniteBayes.inc) と [FourBayes.inc](FourBayes.inc) を第13・14追補として登録した。53定理・17定義を追加し、全体は717定理・836宣言となる。有限確率の正規化と逐次更新、既存エラスティカ重みの分割、F0観測への押し出し、指数傾斜の相殺、支持削除の順序差、二値分配関数の実微分を証明する。[検証記録](../../docs/verification/2026-10-30-bayes.md)・[宣言と条件](../../sources/bayes_formalization_2026-10-30.json)。以下は各追加段階の記録。
 
