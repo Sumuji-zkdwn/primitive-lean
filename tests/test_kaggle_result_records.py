@@ -94,6 +94,22 @@ class RecordAuditTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "hashes disagree"):
             self.audit()
 
+    def test_dependencies_must_agree_across_reports(self):
+        path = "proofs/linear_input/lean_results.json"
+        joint = json.loads(self.files[path])
+        joint["dependencies"][0]["actual"] = "different"
+        self.files[path] = json.dumps(joint)
+        with self.assertRaisesRegex(ValueError, "Dependency"):
+            self.audit()
+
+    def test_unknown_axiom_is_rejected(self):
+        path = "proofs/verification/main-result.json"
+        main = json.loads(self.files[path])
+        main["axioms"]["declaration0"] = ["unapproved.axiom"]
+        self.files[path] = json.dumps(main)
+        with self.assertRaisesRegex(ValueError, "allowed axioms"):
+            self.audit()
+
 
 if __name__ == "__main__":
     unittest.main()
