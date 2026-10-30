@@ -44,6 +44,7 @@ def main():
     rows = [r for r in inventory["files"] if r["imported"]]
     overlay_paths = [
         "tools/verify.py", "tools/verify_main_result.py", "tools/proof_only.py",
+        "linear_input/lean_check/README.md", "原始の形式化.md", "検証と再実行.md",
         "linear_input/lean_check/BranchFibers.inc",
         "linear_input/lean_check/BranchForgetting.inc",
         "linear_input/lean_check/F0Counting.inc",
@@ -61,8 +62,7 @@ def main():
         if path not in expected:
             raise ValueError("Base Kaggle archive inventory is missing " + path)
     for path, data in overlay_bytes.items():
-        if path not in expected:
-            expected[path] = hashlib.sha256(data).hexdigest()
+        expected[path] = hashlib.sha256(data).hexdigest()
     source_hashes = {r["path"]: r["sha256"] for r in rows}
     source_hashes.update({p: hashlib.sha256(data).hexdigest() for p, data in overlay_bytes.items()})
     support = (ROOT / "notebooks/kaggle_support_717.py").read_text("utf-8")
