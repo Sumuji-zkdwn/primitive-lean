@@ -34,6 +34,9 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/FiniteBayes.inc", "LinearInputBayes"),
     ("linear_input/lean_check/FourBayes.inc", "LinearInputFourBayes"),
     ("linear_input/lean_check/GaloisChebyshev.inc", "LinearInputGaloisChebyshev"),
+    ("linear_input/lean_check/F0UpdateDescent.inc", "LinearInputF0Descent"),
+    ("linear_input/lean_check/Rule481Symmetry.inc", "LinearInputRule481"),
+    ("linear_input/lean_check/HannaJetCorrection.inc", "LinearInputHannaJets"),
 )
 
 
