@@ -1,5 +1,7 @@
 # 多項式Eの変数対：三次判別式・ヘッセ退化・符号の8分類
 
+**後続の形式化（2026-11-01 PR #10）:** 当初は `signShape` 不変性と像が8種類であることまでの証明だったが、[後続記録](2026-11-01-sign-orbits-complete.md)のLean追加では、反転群の4操作による軌道と `signShape` のファイバーが必要十分条件で一致し、商集合そのものが8要素であることを証明した。統合検査は782定理・939宣言（[Actions #41218537964](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41218537964)）。以下の「今回含まない」は元のPR #8スナップショットに関する歴史的記録として読むこと。
+
 ## Lean統合検証結果（2026-11-01 JST）
 
 GitHub Actions [#41216334895](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41216334895)（対象ソースコミット `55c39a38ac3a40361f9956d27f9963d48b271d4f`）で **completed / success**。
