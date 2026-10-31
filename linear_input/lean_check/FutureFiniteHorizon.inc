@@ -37,7 +37,7 @@ theorem horizon_shift {α ω : Type*} {K : α → ω} {U : α → α}
     {x y : α} {n : ℕ} (h : HorizonEq K U (n + 1) x y) :
     HorizonEq K U n (U x) (U y) := by
   intro t ht
-  simpa only [Function.iterate_succ_apply'] using h (t + 1) (by omega)
+  simpa only [Function.iterate_succ_apply] using h (t + 1) (by omega)
 
 /-- Once a horizon partition is update-stable, no future observation
 can distinguish any pair it has merged. -/
@@ -54,7 +54,7 @@ theorem stable_implies_future {α ω : Type*} {K : α → ω} {U : α → α}
     induction t with
     | zero => simpa only [Function.iterate_zero, id_eq] using hxy
     | succ t ih =>
-        simpa only [Function.iterate_succ_apply] using hstep _ _ ih
+        simpa only [Function.iterate_succ_apply'] using hstep _ _ ih
   intro t
   have ht := hiter t 0 (Nat.zero_le n)
   simpa only [Function.iterate_zero, id_eq] using ht
