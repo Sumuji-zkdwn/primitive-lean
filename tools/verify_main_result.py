@@ -36,6 +36,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/GaloisChebyshev.inc", "LinearInputGaloisChebyshev"),
     ("linear_input/lean_check/KummerDihedral.inc", "LinearInputKummerDihedral"),
     ("linear_input/lean_check/FutureObservations.inc", "LinearInputFutureObservation"),
+    ("linear_input/lean_check/FutureFiniteHorizon.inc", "LinearInputFutureHorizon"),
 )
 
 
