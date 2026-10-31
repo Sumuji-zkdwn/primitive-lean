@@ -43,6 +43,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/WFSCanonicalLift.inc", "LinearInputWFSCanonical"),
     ("linear_input/lean_check/EWFSFutureBridge.inc", "LinearInputEWFSFuture"),
     ("linear_input/lean_check/F16RecoverySpectrum.inc", "LinearInputF16Recovery"),
+    ("linear_input/lean_check/TemporalSampling.inc", "LinearInputTemporalSampling"),
 )
 
 
