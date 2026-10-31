@@ -104,4 +104,37 @@ theorem dihedral_nat_card (n : ℕ) :
     Nat.card (DihedralGroup n) = 2 * n :=
   DihedralGroup.nat_card
 
+
+/-- The quadratic resolvent w² - 2 y w + 1 which precedes the Kummer step. -/
+def quadraticResolvent {K : Type*} [Field K] (y : K) : Polynomial K :=
+  X ^ 2 - C (2 * y) * X + 1
+
+/-- The first, quadratic stage; the irreducibility is made explicit. -/
+abbrev quadraticField {K : Type*} [Field K] (y : K)
+    [Fact (Irreducible (quadraticResolvent y))] : Type _ :=
+  AdjoinRoot (quadraticResolvent y)
+
+/-- The specified quadratic generator w. -/
+def quadraticGenerator {K : Type*} [Field K] (y : K)
+    [Fact (Irreducible (quadraticResolvent y))] : quadraticField y :=
+  AdjoinRoot.root (quadraticResolvent y)
+
+/-- The *actual* two-step radical field:
+  K -> K[w]/(w²-2yw+1) -> splittingField(X^n - w).
+The possible dihedral action on the whole tower is NOT asserted here. -/
+abbrev chebyshevKummerTower {K : Type*} [Field K] (n : ℕ) (y : K)
+    [Fact (Irreducible (quadraticResolvent y))] : Type _ :=
+  kummerField n (quadraticGenerator y)
+
+/-- The upper step of the tower is cyclic Galois when its Kummer binomial is
+irreducible and the quadratic field contains a primitive n-th root of unity. -/
+noncomputable def chebyshevUpperGalEquiv {K : Type*} [Field K]
+    {n : ℕ} [NeZero n] {y : K}
+    [Fact (Irreducible (quadraticResolvent y))]
+    {ζ : quadraticField y}
+    (hζ : IsPrimitiveRoot ζ n)
+    (hirr : Irreducible (kummerPoly n (quadraticGenerator y))) :
+    (kummerPoly n (quadraticGenerator y)).Gal ≃* Multiplicative (ZMod n) :=
+  kummerGaloisEquiv hζ hirr
+
 end LinearInputKummerDihedral
