@@ -137,6 +137,6 @@ theorem realPencilAll_det (t : ℝ) :
     _ = ∏ a : Fin 8, (block a t).det := Matrix.det_blockDiagonal _
     _ = (1 - t ^ 2) ^ 4 * (1 + t ^ 2) ^ 4 := by
       simp_rw [block_det]
-      simp [Fin.prod_univ_succ] <;> ring
+      simp [Fin.prod_univ_succ]; ring
 
 end LinearInputF16Determinant
