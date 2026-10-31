@@ -119,6 +119,7 @@ def verify_lean(rebuild):
         "GaloisChebyshev": "Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)",
         "KummerDihedral": "Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)",
         "FutureObservations": "Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries",
+        "FutureFiniteHorizon": "Finite observation signatures, monotone trace rank, and stabilization after at most N-r refinement steps",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
