@@ -1,5 +1,7 @@
 # 線形入力と接続のLean証明
 
+**2026-11-01 新しい統合検証:** `F16RecoverySpectrum.inc` に、失われた1ビットの探針による完全復元／F0非両立との必要十分条件、左乗法の8個の2×2ブロック係数、t=±1での零ベクトルを追加。新規15定理・11定義／略記。GitHub Actions [#41227143919](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41227143919) の固定Lean `--trust=0` で**804定理・982宣言**の全監査成功、警告・許可外公理0。[検証記録](../../docs/verification/2026-11-01-f16-recovery-degeneracy.md)。全16×16の行列式・階数公式は数学的に得られているが独立のLean定理は未登録。以下の旧件数は各過去版の記録。
+
 **2026-11-01 最新検証:** F16の有限観測ホロノミーとF0忘却への降下条件を `F16Holonomy.inc` に追加（7定理・17宣言）。固定Leanでの[Actions #41224405790](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41224405790)で **789定理・956宣言**の `--trust=0` と全公理監査が成功。旧証明原稿は変更しない。 [検証記録](../../docs/verification/2026-11-01-f16-holonomy.md)。以下の782定理・939宣言およびそれ以前の件数は旧段階の記録。
 
 **2026-10-31 最新の統合検証:** 円分根・クンマー型冪根ラベル・チェビシェフ逆像の `GaloisChebyshev.inc`（6定義・13定理）を第15追補として登録。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Leanの `--trust=0` と全880宣言の公理監査が成功、**746定理・880宣言**、許可外公理・警告なし。PR #5からPR #3ブランチへマージ済み。詳細・SHA-256は[今回の検証記録](../../docs/verification/2026-10-31-galois-chebyshev.md)。以下の733定理・861宣言などは旧段階の記録です。
