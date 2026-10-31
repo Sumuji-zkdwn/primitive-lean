@@ -1,5 +1,22 @@
 # F16の一手復元と十六元数の左乗法ブロック
 
+
+## Lean統合検証結果（2026-11-01）
+
+**[GitHub Actions #41227143919](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41227143919) — completed / success.** 証明ソースコミット `0b2e32d4755d45f5871b6e82b069f86e80959e75`。固定Lean `4.30.0-rc2` と固定mathlib `5450b53e5ddc75d46418fabb605edbf36bd0beb6` で実行した。
+
+- `python -B -X utf8 tools/verify.py --proof-only`: `passed=true`、joint/supplementとも終了コード0。
+- `lake env lean --trust=0 ../linear_input/lean_check/MainResult.lean`: 終了コード0、**804定理・982宣言**。
+- 新規 `F16RecoverySpectrum.inc`: 15定理・26宣言（略記・定義11）。全982宣言の公理監査成功（`joint_axiom_audit=true`）、旧宣言の公理依存一致（`baseline_axioms_match=true`）。
+- `warnings`、`errors`、`unexpected`、`forbidden_tokens`、`changed_during_verification` は全て空。許可公理は `propext`・`Classical.choice`・`Quot.sound` のみ。
+- 新原稿のSHA-256: `fa96ebb4fa9b05e41c77771fb386c1af0e851bec1fd59b556cafa1cf7f62f0fc`。
+- [生ログ・公理監査アーティファクト](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41227143919/artifacts/13052048324)、artifact ID `13052048324`、91,671 bytes、ZIP SHA-256 `a5c018fa15068643104497746aa8b4e8709598196684d20d2252183f9de1adb3`。
+
+元の789定理・956宣言を維持し、**新しい15定理と11定義・略記の実際のLean検査が成功**した。依存キャッシュ利用の実行で、完全クリーンビルドではない。歴史保存物・HTML再描画・Kaggle実機の検証ではない。
+
+**特に重要な境界:** `blockDet_formula` は各2×2ブロックの**整数係数に関する**恒等式をLeanで証明した。全16×16作用素の実数パラメータに関する行列式公式と階数12は、本ノートのブロック分解に基づく数学的証明とPython検算の対象で、独立したLeanの`Matrix.det`・`rank`定理としてはまだ登録していない。
+
+
 2026-11-01。PR #11の `F16Holonomy.inc` を加法的に拡張する追補。
 出典はユーザー提供の `E_atlas_F16_smooth_v4_2026-10-22.zip`。
 元のF16を有限体 `GF(16)` と同一視せず、**実16次元の十六元数（sedenion）**の符号付き基底乗法として扱う。
@@ -103,6 +120,6 @@ python -B -X utf8 tools/verify.py --proof-only
 ```
 
 Lean 4.30.0-rc2 / 固定mathlib `5450b53e5ddc75d46418fabb605edbf36bd0beb6` を維持し、`--trust=0`、全公理監査、警告・禁止トークン・ソース変更0を成功条件とする。
-PRはCIの結果に応じて検証済みと未検証を区別し、`main` へは直接マージしない。
+本追補のCIは成功。統合先はPR #3の研究用ブランチとし、`main` へは直接マージしない。
 
 なお非結合な十六元数の演算とクンマー拡大体のガロア群は同じ代数構造ではない。ここに構成したのはF0の観測/未来識別および有限の線形代数との厳密な接続である。
