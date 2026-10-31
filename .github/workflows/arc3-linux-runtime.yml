@@ -1,0 +1,45 @@
+name: ARC3 offline Linux runtime
+on:
+  push:
+    branches: [chatgpt/arc3-linux-runtime-20261031]
+    paths:
+      - .github/workflows/arc3-linux-runtime.yml
+      - tools/arc3_runtime/**
+permissions:
+  contents: read
+concurrency:
+  group: arc3-linux-runtime-build
+  cancel-in-progress: false
+jobs:
+  build-runtime:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Assemble and verify actual Lean runtime
+        run: bash tools/arc3_runtime/build.sh
+      - name: Save built runtime
+        uses: actions/upload-artifact@v6
+        with:
+          name: arc3-lean-runtime-linux-x86_64
+          path: |
+            runtime-output/arc3-lean-runtime-linux-x86_64.tar.gz
+            runtime-output/arc3-lean-runtime-linux-x86_64.tar.gz.sha256
+            runtime-output/runtime-validation.json
+            runtime-output/PROVENANCE.json
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: error
+      - name: Save diagnostic evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: arc3-runtime-evidence
+          path: runtime-output/arc3-lean-runtime/verification
+          if-no-files-found: ignore
+          retention-days: 14
