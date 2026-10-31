@@ -38,22 +38,22 @@
 ## 固定版Leanでの統合検査成功（2026-10-31 追記）
 
 - GitHub Actions: [Primitive Lean integration verification #41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344)。
-- 対象: PR #5 head \`0ee952740d35d0307c4eb382684d429f9517dba5\`。2026-10-31 13:50 UTC に成功成果物が保存され、同日 13:53 UTC にPR #5を \`codex/primitive-history-derivation-20261029\`（PR #3）へマージ。
-- GitHub Actions 結果: \`completed / success\`。job \`Lean proofs and axiom audit\`、job ID \`124554050396\`。該当ジョブのPython有限検算・Lean統合・証拠アップロードは全て成功。
-- 検証成果物: \`primitive-galois-lean-41207011344\`（artifact ID \`13045131208\`、84,741 bytes、アーカイブ SHA-256 \`36f7413ad73d1e855d6e3d8939105ea1e7fa896b93dbffa041b8b07241b9cd7b\`）。
-- 実行環境: \`Lean 4.30.0-rc2\`（Linux x86_64）、mathlib commit \`5450b53e5ddc75d46418fabb605edbf36bd0beb6\`。固定した9依存リビジョンが検査前後とも全件一致。依存キャッシュ利用、クリーンビルドではない。
-- \`python -B -X utf8 tools/verify.py --proof-only\`: \`passed = true\`、jointとsupplementalの終了コードはともに0。
-- \`lake env lean --trust=0 ../linear_input/lean_check/MainResult.lean\`: 終了コード0。全746定理・880宣言、880宣言すべての公理監査が完了。\`propext\` / \`Classical.choice\` / \`Quot.sound\` 以外の公理0、未処理 \`sorryAx\` 0、警告0、エラー0、禁止トークン0、検査中のソース変更0。既存基線の公理依存も一致。
+- 対象: PR #5 head `0ee952740d35d0307c4eb382684d429f9517dba5`。2026-10-31 13:50 UTC に成功成果物が保存され、同日 13:53 UTC にPR #5を `codex/primitive-history-derivation-20261029`（PR #3）へマージ。
+- GitHub Actions 結果: `completed / success`。job `Lean proofs and axiom audit`、job ID `124554050396`。該当ジョブのPython有限検算・Lean統合・証拠アップロードは全て成功。
+- 検証成果物: `primitive-galois-lean-41207011344`（artifact ID `13045131208`、84,741 bytes、アーカイブ SHA-256 `36f7413ad73d1e855d6e3d8939105ea1e7fa896b93dbffa041b8b07241b9cd7b`）。
+- 実行環境: `Lean 4.30.0-rc2`（Linux x86_64）、mathlib commit `5450b53e5ddc75d46418fabb605edbf36bd0beb6`。固定した9依存リビジョンが検査前後とも全件一致。依存キャッシュ利用、クリーンビルドではない。
+- `python -B -X utf8 tools/verify.py --proof-only`: `passed = true`、jointとsupplementalの終了コードはともに0。
+- `lake env lean --trust=0 ../linear_input/lean_check/MainResult.lean`: 終了コード0。全746定理・880宣言、880宣言すべての公理監査が完了。`propext` / `Classical.choice` / `Quot.sound` 以外の公理0、未処理 `sorryAx` 0、警告0、エラー0、禁止トークン0、検査中のソース変更0。既存基線の公理依存も一致。
 - 主要ファイルの保存ハッシュとマージ先ブランチの現行内容を再計算して一致を確認した（以下を参照）。旧Lean原稿・既存追補の本文を再定義していない。
 
-\`\`\`text
+```text
 GaloisChebyshev.inc     SHA-256 93d474a84e788001a23b26e16ba81e2417406a7b5cc08822ce573e09426c1f9d
 F0MergeChains.inc       SHA-256 93a9fda3dd419f6e70c68c1cb99c8448b07a635c30264c146fa43f3201440f59
 BranchFibers.inc        SHA-256 35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a
 verify_lean.py          SHA-256 cad63bbe60118974c3e5f92ba53ecb09fd25ea517e9a22f2417ac9f72d644f8c
 verify_main_result.py   SHA-256 9dbcf6e6fbb9147e2e7ff8333c50f23d0c35d614f77139814d4b9ee1cfd8d93b
 verify.py               SHA-256 2985cde8a513e4b1fcd28fdef781b6b3f7729dae28b453a7541af1e76a94c6dc
-\`\`\`
+```
 
 これは保存ログ・GitHub Actionsメタデータ・ソースハッシュの照合であり、この対話の実行コンテナにLeanを新規インストールして再度フルビルドした結果ではない。歴史保存ZIP・描画・Kaggle実機の検査もこの範囲外である。
 
