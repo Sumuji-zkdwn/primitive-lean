@@ -1,5 +1,8 @@
 # primitive-lean
 
+**2026-10-31 クンマー分解体・二面体作用の追加検証成功:** 新しい `KummerDihedral.inc` で実際の分解体・根添加体と二次→クンマー拡大塔を構成し、既約性・原始根の存在を仮定して巡回ガロア群同型と拡大次数を証明。二面体群のラベル作用も検証。GitHub Actions [#41212071155](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41212071155) による固定Lean・`--trust=0` 全監査に成功し、**755定理・899宣言**、警告・許可外公理0。[検証詳細](docs/verification/2026-10-31-kummer-dihedral.md) / [PR #6](https://github.com/Sumuji-zkdwn/primitive-lean/pull/6)。**注：一般のチェビシェフ分解体のガロア群が二面体群になる完全な同型は未証明**。以下の746定理・880宣言は前段階の実行記録です。
+
+
 **2026-10-31 円分根・クンマー型冪根・チェビシェフ逆像接続（Lean統合検証成功）:** Joukowski写像の衝突因数分解、原始根の円分多項式への接続、冪根ラベルの保存、ZMod上の反転、F0核への橋渡しを6定義・13定理で追加。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Lean 4.30.0-rc2 + mathlibの `--trust=0` 統合検査・全公理監査に成功し、**746定理・880宣言**（エラー・警告・許可外公理なし）。検証成果物・ソースハッシュも照合済み。PR #5 はPR #3作業ブランチへマージ済み、`main` は未マージ。[検証記録](docs/verification/2026-10-31-galois-chebyshev.md) / [ソース](linear_input/lean_check/GaloisChebyshev.inc)。
 
 

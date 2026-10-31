@@ -34,6 +34,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/FiniteBayes.inc", "LinearInputBayes"),
     ("linear_input/lean_check/FourBayes.inc", "LinearInputFourBayes"),
     ("linear_input/lean_check/GaloisChebyshev.inc", "LinearInputGaloisChebyshev"),
+    ("linear_input/lean_check/KummerDihedral.inc", "LinearInputKummerDihedral"),
 )
 
 
