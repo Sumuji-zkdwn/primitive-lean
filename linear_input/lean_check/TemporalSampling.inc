@@ -149,15 +149,13 @@ theorem block_iterate {α : Type*} (U : α → α)
         _ = U^[m] (U^[m * n] x) := by rw [ih]
         _ = U^[m + m * n] x := by rw [Function.iterate_add_apply]
         _ = U^[m * (n + 1)] x := by
-          congr 1
-          omega
+          rw [Nat.mul_succ, Nat.add_comm]
 
 theorem sampled_iff_block_future {α ω : Type*}
     (K : α → ω) (U : α → α) (m : ℕ) (x y : α) :
     SampledEq K U m x y ↔ FutureEq K (U^[m]) x y := by
   constructor
   · intro h n
-    change K ((U^[m])^[n] x) = K ((U^[m])^[n] y)
     rw [block_iterate U m n x, block_iterate U m n y]
     exact h n
   · intro h n
@@ -225,8 +223,8 @@ theorem spin_even_merges_but_full_distinguishes :
   constructor
   · exact (spin_even_iff_same_x _ _).2 rfl
   · intro h
-    have he : ((0 : ℝ), 0) = (0, 1) :=
-      (spin_full_iff_equal _ _).1 h
+    have he := (spin_full_iff_equal
+      ((0 : ℝ), (0 : ℝ)) ((0 : ℝ), (1 : ℝ))).1 h
     have hu := congrArg Prod.snd he
     norm_num at hu
 
