@@ -33,6 +33,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/F0MergeChains.inc", "LinearInputF0Merge"),
     ("linear_input/lean_check/FiniteBayes.inc", "LinearInputBayes"),
     ("linear_input/lean_check/FourBayes.inc", "LinearInputFourBayes"),
+    ("linear_input/lean_check/GaloisChebyshev.inc", "LinearInputGaloisChebyshev"),
 )
 
 
