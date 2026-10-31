@@ -52,7 +52,7 @@ theorem cubic_joukowski (z : ℂ) (hz : z ≠ 0) :
     cubic (joukowski z) = joukowski (z ^ 3) := by
   unfold cubic joukowski
   field_simp [hz]
-  <;> ring
+  ring
 
 /-- Clearing denominators exposes the exact collision factorization. -/
 theorem collision_identity (a b : ℂ) (ha : a ≠ 0) (hb : b ≠ 0) :
@@ -60,7 +60,7 @@ theorem collision_identity (a b : ℂ) (ha : a ≠ 0) (hb : b ≠ 0) :
       (a - b) * (a * b - 1) := by
   unfold joukowski
   field_simp [ha, hb]
-  <;> ring
+  ring
 
 /-- Distinct nonzero multiplicative labels collide iff they are inverses. -/
 theorem joukowski_eq_iff (a b : ℂ) (ha : a ≠ 0) (hb : b ≠ 0) :
@@ -115,7 +115,8 @@ theorem piReflection_involutive (m : ℕ) (j : ZMod m) :
 theorem zeroReflection_shift (m : ℕ) (a j : ZMod m) :
     zeroReflection m (shiftLabel m a j) =
       shiftLabel m (-a) (zeroReflection m j) := by
-  simp [zeroReflection, shiftLabel, neg_add]
+  dsimp [zeroReflection, shiftLabel]
+  ring
 
 /-- Direct bridge to the existing idempotent critical-fiber kernel (+1). -/
 theorem branchZero_kernel_iff (m : ℕ) (j k : Fin (2 * m + 1)) :
