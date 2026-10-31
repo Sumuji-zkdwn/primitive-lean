@@ -1,0 +1,58 @@
+name: ARC3 verified runtime delivery
+on:
+  push:
+    branches: [chatgpt/arc3-linux-runtime-20261031]
+    paths: [.github/workflows/arc3-runtime-delivery.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  split-verified-runtime:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Retrieve already verified build, without rebuilding or modifying binaries
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir delivery
+          gh run download 41166841892 --repo "$GITHUB_REPOSITORY" --name arc3-lean-runtime-linux-x86_64 --dir delivery
+          cd delivery
+          sha256sum -c arc3-lean-runtime-linux-x86_64.tar.gz.sha256
+          split -b 440M --numeric-suffixes=1 -a 2 arc3-lean-runtime-linux-x86_64.tar.gz arc3-lean-runtime-linux-x86_64.tar.gz.part
+          sha256sum *.part* > PARTS_SHA256.txt
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          p=pathlib.Path('.')
+          def sha(f):
+              h=hashlib.sha256()
+              with f.open('rb') as x:
+                  for b in iter(lambda:x.read(8*1024*1024),b''):h.update(b)
+              return h.hexdigest()
+          files=sorted(p.glob('*.part*'))
+          assert len(files)==2
+          archive=p/'arc3-lean-runtime-linux-x86_64.tar.gz'
+          report={'schema':'arc3-runtime-delivery-v1','source_run':41166841892,
+            'source_artifact':13029920147,'archive_sha256':sha(archive),
+            'parts':[{'name':f.name,'size':f.stat().st_size,'sha256':sha(f)} for f in files]}
+          (p/'DELIVERY.json').write_text(json.dumps(report,indent=2)+'\n')
+          print(json.dumps(report,indent=2))
+          PY
+      - uses: actions/upload-artifact@v6
+        with:
+          name: arc3-runtime-part01
+          path: |
+            delivery/*.part01
+            delivery/DELIVERY.json
+            delivery/PARTS_SHA256.txt
+            delivery/runtime-validation.json
+            delivery/PROVENANCE.json
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v6
+        with:
+          name: arc3-runtime-part02
+          path: delivery/*.part02
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: error
