@@ -121,6 +121,7 @@ def verify_lean(rebuild):
         "VariablePairGaloisBridge": "Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections",
         "F16Holonomy": "Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification",
         "EWFSFenchel": "Existing polynomial E gradient as a reversible two-coordinate map, scalar-forgetting obstruction, WFS positive gauge invariance, and exact Legendre-Fenchel pairing distinction",
+        "WFSCanonicalLift": "WFS p=2 positive-intensity cotangent lift, physical pairing and differential one-form preservation, plus Fechner p=0 momentum factor",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
