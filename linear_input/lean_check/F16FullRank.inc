@@ -29,7 +29,7 @@ def gamma (a : Fin 8) (t : ℝ) : ℝ :=
   t * (eps (10 : Fin 16) (low a) : ℝ)
 
 theorem alpha_sq (a : Fin 8) : alpha a ^ 2 = 1 := by
-  fin_cases a <;> norm_num [alpha, eps, epsTable]
+  fin_cases a <;> norm_num [alpha, low, eps, epsTable]
 
 /-- Normalize the first pivot and eliminate the lower-left entry. -/
 def localLeft (a : Fin 8) (t : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
@@ -64,7 +64,8 @@ theorem local_diagonalization (a : Fin 8) (t : ℝ) :
   fin_cases a <;> fin_cases i <;> fin_cases j <;>
     norm_num [localLeft, localRight, localBlock, localDiagonal,
       Matrix.mul_apply, Matrix.det_fin_two, Matrix.diagonal_apply,
-      Fin.sum_univ_two, alpha, beta, gamma, colOrder, eps, epsTable] <;> ring
+      Fin.sum_univ_two, alpha, beta, gamma, colOrder, low, partnerIndex,
+      rightIndex, eps, epsTable] <;> ring
 
 /-- The global elementary operations are block diagonal, hence invertible. -/
 def globalLeft (t : ℝ) : Matrix BlockIndex BlockIndex ℝ :=
@@ -82,7 +83,7 @@ def globalDiagonal (t : ℝ) (p : BlockIndex) : ℝ :=
 theorem globalLeft_det (t : ℝ) : (globalLeft t).det = 1 := by
   rw [globalLeft, Matrix.det_blockDiagonal]
   simp_rw [localLeft_det]
-  norm_num [Fin.prod_univ_succ, alpha, eps, epsTable]
+  norm_num [Fin.prod_univ_succ, alpha, low, eps, epsTable]
 
 theorem globalRight_det (t : ℝ) : (globalRight t).det = 1 := by
   rw [globalRight, Matrix.det_blockDiagonal]
@@ -116,10 +117,12 @@ theorem globalDiagonal_nonzero_iff (t : ℝ) (ht : t = 1 ∨ t = -1) (p : BlockI
   rcases ht with rfl | rfl
   · rcases p with ⟨i,a⟩
     fin_cases i <;> fin_cases a <;>
-      norm_num [globalDiagonal, localDiagonal, localBlock_det, alpha, eps, epsTable]
+      norm_num [globalDiagonal, localDiagonal, localBlock_det, alpha, low,
+        eps, epsTable]
   · rcases p with ⟨i,a⟩
     fin_cases i <;> fin_cases a <;>
-      norm_num [globalDiagonal, localDiagonal, localBlock_det, alpha, eps, epsTable]
+      norm_num [globalDiagonal, localDiagonal, localBlock_det, alpha, low,
+        eps, epsTable]
 
 theorem globalDiagonal_rank_twelve (t : ℝ) (ht : t = 1 ∨ t = -1) :
     (Matrix.diagonal (globalDiagonal t)).rank = 12 := by
