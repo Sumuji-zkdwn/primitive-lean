@@ -55,6 +55,8 @@ def main():
         "import Mathlib.Data.Complex.Basic",
         "import Mathlib.Data.ZMod.Basic",
         "import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots",
+        "import Mathlib.FieldTheory.KummerExtension",
+        "import Mathlib.GroupTheory.SpecificGroups.Dihedral",
     ], [], [], {}, []
     parent_declarations = []
     for path in sorted((PROJECT / "Elastica").glob("*.lean")):
