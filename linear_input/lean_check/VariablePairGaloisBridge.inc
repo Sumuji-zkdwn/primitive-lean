@@ -359,7 +359,7 @@ theorem sameReflectionOrbit_energy (σ τ : Fin 5 → Bool)
   rcases h with h | h | h | h
   · refine ⟨false, false, ?_⟩
     intro k lam a c x y u
-    simpa [h]
+    simp [h]
   · refine ⟨false, true, ?_⟩
     intro k lam a c x y u
     simpa [h] using signedEnergy_flipY σ k lam a c x y u
