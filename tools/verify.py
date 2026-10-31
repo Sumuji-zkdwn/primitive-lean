@@ -118,6 +118,7 @@ def verify_lean(rebuild):
         "FourBayes": "Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples",
         "GaloisChebyshev": "Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)",
         "KummerDihedral": "Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)",
+        "FutureObservations": "Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
