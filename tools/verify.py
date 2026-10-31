@@ -116,6 +116,7 @@ def verify_lean(rebuild):
         "F0MergeChains": "Positive integer-partition merge chains and an explicit Fin 5 fiber-mass chain realized by sequential idempotent K-S-C steps, with mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton",
         "FiniteBayes": "Finite normalization and posterior composition, support constraints, log-loss comparison, observation pushforwards, and actual Elastica exponential-weight bridges",
         "FourBayes": "Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples",
+        "GaloisChebyshev": "Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
