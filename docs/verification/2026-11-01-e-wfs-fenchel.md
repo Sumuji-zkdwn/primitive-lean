@@ -24,7 +24,8 @@ This is a special polynomial automorphism; it does **not** settle JC2.
 2. Observing x alone is *not* a deterministic closed update under H:
    (0,0) and (0,1) have identical current x but different next x.
    The obstruction is proved for arbitrary parameters.
-3. The stationary equation for k=-3,λ=4,cy=0 reads u=4x³-3x.
+3. Explicit `forgetU(x,u)=(x,0)` is a genuine `LinearInputF0.Idempotent`, but it fails `K H K = K H` on input (0,1) for every parameter choice. This makes the forgotten conjugate coordinate operationally visible in one step.
+4. The stationary equation for k=-3,λ=4,cy=0 reads u=4x³-3x.
    Both x=-1 and x=1/2 yield u=-1, but the full pair H distinguishes them.
    In the quartic E at u=-1, x=1/2 is not a global minimizer:
    E(-1,-1)=-3/2 versus E(1/2,-1)=3/16.
@@ -45,7 +46,7 @@ globally well-defined.
 
 ## Fenchel: two distinct pairings
 
-A physical Fenchel score is u*r-V(r), here V(r)=r²/2 over r>0. Rewriting
+A physical Fenchel score is u*r-V(r), here V(r)=r²/2 over r>0. This is proved to equal `-E(r,0;u,1,0,0,0)`, rather than an unrelated toy function. Rewriting
 r=exp(z) is a plain reindexing with the *original* ur pairing, so the
 supremum is unchanged (\`physicalLogDual_eq_physicalDual\`).
 
