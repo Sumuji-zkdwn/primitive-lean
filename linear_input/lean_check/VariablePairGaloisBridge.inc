@@ -317,7 +317,7 @@ def signOrbitSetoid : Setoid (Fin 5 → Bool) where
   }
 
 theorem sameReflectionOrbit_iff_setoid (σ τ : Fin 5 → Bool) :
-    sameReflectionOrbit σ τ ↔ signOrbitSetoid.Rel σ τ := by
+    sameReflectionOrbit σ τ ↔ signOrbitSetoid.r σ τ := by
   constructor
   · intro h
     exact ((sameReflectionOrbit_iff_signShape σ τ).mp h).symm
@@ -352,10 +352,10 @@ theorem reflectionOrbit_count_eight :
 coordinate reflections; this does not keep fixed numerical coordinates. -/
 theorem sameReflectionOrbit_energy (σ τ : Fin 5 → Bool)
     (h : sameReflectionOrbit σ τ) :
-    ∃ bx by : Bool, ∀ k lam a c x y u : ℝ,
+    ∃ bx byFlag : Bool, ∀ k lam a c x y u : ℝ,
       signedEnergy τ k lam a c x y u =
         signedEnergy σ k lam a c
-          (if bx then -x else x) (if by then -y else y) u := by
+          (if bx then -x else x) (if byFlag then -y else y) u := by
   rcases h with h | h | h | h
   · refine ⟨false, false, ?_⟩
     intro k lam a c x y u
