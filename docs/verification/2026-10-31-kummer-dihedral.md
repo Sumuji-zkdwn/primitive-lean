@@ -1,5 +1,22 @@
 # クンマー拡大体と二面体ガロア作用の段階的実装
 
+## 検証確定（2026-10-31）
+
+GitHub Actions [#41212071155](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41212071155) は **completed / success**。対象コミット `f93118dd67afdd0188b04d7cd96b2c64b9592c32`。固定Lean 4.30.0-rc2、固定mathlib `5450b53e5ddc75d46418fabb605edbf36bd0beb6` を使用。
+
+- `python -B -X utf8 tools/verify.py --proof-only`: `passed=true`。joint / supplement の終了コード0。
+- `lake env lean --trust=0 ../linear_input/lean_check/MainResult.lean`: 終了コード0。755定理・899宣言の統合証明を検査。
+- 新規 `KummerDihedral.inc`: 9定理・19宣言（定義・略記10件）。新規19宣言を含む全899宣言について公理監査成功（`joint_axiom_audit=true`）。従来宣言の公理依存一致（`baseline_axioms_match=true`）。
+- `warnings`、`errors`、`unexpected`、`forbidden_tokens`、`changed_during_verification`：すべて空。承認公理は `propext`、`Classical.choice`、`Quot.sound` のみ。`sorryAx` なし。
+- [証拠ZIP](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41212071155/artifacts/13047455212)、アーティファクトID `13047455212`（86,090 bytes）。
+- `linear_input/lean_check/KummerDihedral.inc` SHA-256: `8b522f412c683f56b4cfe5cda75cc4b81a32368af46c09e977b90e5dc116876e`。
+- `linear_input/verify_lean.py` SHA-256: `f57b26d0002ea3413612def7b1724ba938d266b8a5f9c195e6124cff280e6aa9`。
+- `tools/verify_main_result.py` SHA-256: `84e997a94eb75143d77e1b3eaa754826e38a7c5a3ce9ae447371c8afd2ff9ca6`。
+- `tools/verify.py` SHA-256: `4ddb70a16e6ae3dc38494c8c3112af89e044a78d05ae77e65c6b476a21e20d7d`。
+
+**数学的範囲に関する注意:** 成功した定理は、実際のクンマー分解体の構成・既約性を仮定した巡回ガロア群同型・拡大次数・二面体群のラベル作用と合成則、明示的な二次→クンマー拡大塔まで。一般の `Gal(C(y)(T_n^{-1}(y))/C(y)) ≃ D_n` という *体のガロア群の同型*、および二段階の拡大塔がそのチェビシェフ分解体と一致する命題は **まだLean証明していない**。
+
+
 作成日: 2026-10-31
 PR #6 / ブランチ: `chatgpt/kummer-dihedral-20261031`（PR #3へ積み重ねる）。
 
