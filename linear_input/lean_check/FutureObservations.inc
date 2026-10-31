@@ -47,8 +47,8 @@ theorem future_step {α ω : Type*} {K : α → ω} {U : α → α}
 def futureSetoid {α ω : Type*} (K : α → ω) (U : α → α) : Setoid α where
   r := FutureEq K U
   iseqv := ⟨(fun x => future_refl K U x),
-    (fun _ _ h => future_symm h),
-    (fun _ _ _ hxy hyz => future_trans hxy hyz)⟩
+    (fun h => future_symm h),
+    (fun hxy hyz => future_trans hxy hyz)⟩
 
 /-- Minimal predictive states, defined as future-observation classes. -/
 abbrev State {α ω : Type*} (K : α → ω) (U : α → α) :=
