@@ -100,8 +100,6 @@ theorem profiles_succ_image {α ω : Type*} [Fintype α]
   unfold profiles
   rw [Finset.image_image]
   congr 1
-  funext x i
-  rfl
 
 theorem rank_le_card {α ω : Type*} [Fintype α]
     (K : α → ω) (U : α → α) (n : ℕ) :
@@ -132,8 +130,7 @@ theorem rank_eq_refines {α ω : Type*} [Fintype α]
         (profiles K U (n + 1)).card := by
     rw [profiles_succ_image]
     exact heq
-  have hinj : Set.InjOn (truncate n) ↑(profiles K U (n + 1)) :=
-    Finset.injOn_of_card_image_eq hcard
+  have hinj := Finset.injOn_of_card_image_eq hcard
   have hx : profile K U (n + 1) x ∈ profiles K U (n + 1) := by
     unfold profiles
     exact Finset.mem_image.mpr ⟨x, Finset.mem_univ x, rfl⟩
