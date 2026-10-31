@@ -24,6 +24,7 @@ Injective (pairedObservation b)
   ↔ 1 ≤ b.val ∧ b.val ≤ 8
 ```
 
+さらに `pairedObservation_injective_iff_noncompatible` で、**この一手観測が単射であることと、既存 `LinearInputF0.Compatible` が成立しないことが必要十分**で一致する定理も追加した。
 逆方向の非単射は `(true,e0)` と `(true,e8)` のペアで全ての降下する8探針について具体化できる。
 両者は現在のK観測が等しいが、e1探針で後続観測が区別される。
 
