@@ -1,6 +1,6 @@
 # primitive-lean
 
-**2026-10-31 ガロア・円分・クンマー接続（別ブランチ・Lean未検査）:** 既存の逆像/忘却定理に、Joukowski写像の衝突因数分解、原始根の円分多項式への接続、冪根ラベルの保存、ZMod上の反転、およびF0核への橋渡しを6定義・13定理の原稿として追加。検証器登録と有限Python検算を付属。**新追補のLeanコンパイル成功は未確認であり、過去の検証済み定理数には加算しない。** [詳細・再実行](docs/verification/2026-10-31-galois-chebyshev.md) / [ソース](linear_input/lean_check/GaloisChebyshev.inc)。
+**2026-10-31 円分根・クンマー型冪根・チェビシェフ逆像接続（Lean統合検証成功）:** Joukowski写像の衝突因数分解、原始根の円分多項式への接続、冪根ラベルの保存、ZMod上の反転、F0核への橋渡しを6定義・13定理で追加。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Lean 4.30.0-rc2 + mathlibの `--trust=0` 統合検査・全公理監査に成功し、**746定理・880宣言**（エラー・警告・許可外公理なし）。検証成果物・ソースハッシュも照合済み。PR #5 はPR #3作業ブランチへマージ済み、`main` は未マージ。[検証記録](docs/verification/2026-10-31-galois-chebyshev.md) / [ソース](linear_input/lean_check/GaloisChebyshev.inc)。
 
 
 原始の形式化に関する Lean ソースと検証入口を管理する非公開リポジトリ。
