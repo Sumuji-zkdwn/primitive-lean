@@ -121,6 +121,7 @@ def verify_lean(rebuild):
         "VariablePairGaloisBridge": "Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections",
         "F16Holonomy": "Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification",
         "F16RecoverySpectrum": "Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input",
+        "F16RankCertificate": "Exact integer factor and 12-by-12 pivot certificates imply real Matrix.rank 12 at t = +1 and -1",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
