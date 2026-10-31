@@ -1,5 +1,7 @@
 # 線形入力と接続のLean証明
 
+**2026-11-01 F16実16×16行列式の形式証明（最新）:** `F16RealDeterminant.inc` で、任意の `t : ℝ` について十六元数の左作用 `L_(e3)+t L_(e10)` の実際の `Matrix.det` が `(1-t²)^4(1+t²)^4` と一致することをLean証明。8個の2×2ブロックへの行列の正確な並べ替えと置換符号+1、元符号表からの有限整数係数照合を含む。新規5定理・17宣言、全体**819定理・1,017宣言**。固定Lean `--trust=0` [CI #41233416093](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41233416093) は警告・許可外公理0で全宣言監査成功。[PR #20](https://github.com/Sumuji-zkdwn/primitive-lean/pull/20) から研究ブランチPR #3に統合済み。[検証記録](../../docs/verification/2026-11-01-f16-real-determinant.md)。階数12の814定理版は下の前段階記録。
+
 **2026-11-01 F16階数12の独立Lean証明（最新）:** `F16RankCertificate.inc` に、十六元数の実16×16左作用行列 `realPencil` が `t=+1,-1` で厳密に階数12となる定理を追加。16×12因数分解および12×12左逆証明書 `U·B=2I` を整数行列で証明した。新規10定理・18宣言を追加し、GitHub Actions [#41231121631](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41231121631) の固定Lean `--trust=0` で **814定理・1,000宣言**の全監査に成功。研究ブランチPR #3に[PR #18](https://github.com/Sumuji-zkdwn/primitive-lean/pull/18)で統合済み。一般実数パラメータの16次行列式のLean証明はまだ未登録。[検証記録](../../docs/verification/2026-11-01-f16-rank-certificate.md)。以下の804定理・982宣言は前段階の記録。
 
 **2026-11-01 新しい統合検証:** `F16RecoverySpectrum.inc` に、失われた1ビットの探針による完全復元／F0非両立との必要十分条件、左乗法の8個の2×2ブロック係数、t=±1での零ベクトルを追加。新規15定理・11定義／略記。GitHub Actions [#41227143919](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41227143919) の固定Lean `--trust=0` で**804定理・982宣言**の全監査成功、警告・許可外公理0。[検証記録](../../docs/verification/2026-11-01-f16-recovery-degeneracy.md)。全16×16の行列式・階数公式は数学的に得られているが独立のLean定理は未登録。以下の旧件数は各過去版の記録。
