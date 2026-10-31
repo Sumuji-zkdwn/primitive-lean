@@ -70,11 +70,24 @@ def rowEquiv : BlockIndex ≃ Fin 16 where
   left_inv := by decide
   right_inv := by decide
 
+/-- XOR with three is the product of eight disjoint swaps. -/
+def xorThreeSwaps : Equiv.Perm (Fin 16) :=
+  Equiv.swap 0 3 * Equiv.swap 1 2 * Equiv.swap 4 7 *
+    Equiv.swap 5 6 * Equiv.swap 8 11 * Equiv.swap 9 10 *
+      Equiv.swap 12 15 * Equiv.swap 13 14
+
+/-- The relative row/column permutation is exactly XOR with three. -/
+theorem relative_permutation_eq_swaps :
+    colEquiv.symm.trans rowEquiv = xorThreeSwaps := by
+  apply Equiv.ext
+  intro k
+  fin_cases k <;> decide
+
 /-- The row/column reordering is even, hence leaves the full determinant unchanged. -/
 theorem reindex_sign_one :
     Equiv.Perm.sign (colEquiv.symm.trans rowEquiv) = 1 := by
-  rw [Equiv.Perm.sign_eq_prod_prod_Iio]
-  decide
+  rw [relative_permutation_eq_swaps]
+  simp [xorThreeSwaps, Equiv.Perm.sign_mul, Equiv.Perm.sign_swap']
 
 /-- Entry of left multiplication by a single signed basis vector. -/
 def leftEntry (e row col : Fin 16) : ℤ :=
