@@ -8,8 +8,8 @@ This supplement joins two previously independently certified facts:
 The real matrix realPencilAll t is the actual signed-basis left action
 L_(e3) + t L_(e10), with the original Cayley-Dickson table.
 
-For every real parameter t, its rank is exactly 12 at t = +/-1 and
-exactly 16 everywhere else. The comparison at t = +/-1 is a matrix
+For every real parameter t, its rank is exactly 12 at t = plus or minus one and
+exactly 16 everywhere else. The comparison at t = plus or minus one is a matrix
 equality with the existing integer-parameter realPencil after casting
 to the reals, so the conclusion does not depend on an unproved
 identification of two differently defined matrix families.
