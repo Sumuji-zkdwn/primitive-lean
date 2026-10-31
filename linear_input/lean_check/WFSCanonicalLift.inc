@@ -32,18 +32,14 @@ theorem wfs2_physical_coupling (r : Positive) (u : ℝ) :
     u * r.val = (u / r.val) * (2 * wfs2 r.val + 1) := by
   have hr : r.val ≠ 0 := ne_of_gt r.property
   rw [wfs2_coordinate_identity]
-  field_simp [hr]
-  ring
+  field_simp [hr] <;> ring
 
 /-- WFS G_2 has differential dz = r dr. -/
 theorem wfs2_derivative (r : ℝ) :
     deriv wfs2 r = r := by
   have hd : HasDerivAt wfs2 r r := by
-    convert (((hasDerivAt_id r).pow 2).sub_const 1).div_const 2 using 1
-    · funext x
-      dsimp [wfs2]
-      ring
-    · ring
+    convert (((hasDerivAt_id r).pow 2).sub_const 1).div_const 2 using 1 <;>
+      simp [wfs2] <;> ring
   exact hd.deriv
 
 /-- The *complete* lift satisfies xi dz = u dr (in differential coefficients). -/
@@ -59,7 +55,7 @@ Here ∂z/∂r=r and ∂xi/∂u=1/r; the off-diagonal term is killed by ∂z/∂
 theorem wfs2_lift_jacobian_algebraic (r : Positive) (u : ℝ) :
     r.val * (1 / r.val) - (0 : ℝ) * (-(u / r.val ^ 2)) = 1 := by
   have hr : r.val ≠ 0 := ne_of_gt r.property
-  field_simp [hr]
+  field_simp [hr] <;> ring
 
 /-- For Fechner p=0, dz = dr/r, and momentum must become xi=r*u. -/
 def logMomentum (r : Positive) (u : ℝ) : ℝ := r.val * u
@@ -68,8 +64,7 @@ theorem log_oneform_coefficient (r : Positive) (u : ℝ) :
     logMomentum r u * (1 / r.val) = u := by
   have hr : r.val ≠ 0 := ne_of_gt r.property
   dsimp [logMomentum]
-  field_simp [hr]
-  ring
+  field_simp [hr] <;> ring
 
 /-- A naive dual term xi*z cannot replace the original ur coupling. -/
 theorem naive_wfs_pairing_not_physical :
