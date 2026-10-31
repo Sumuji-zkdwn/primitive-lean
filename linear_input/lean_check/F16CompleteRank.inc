@@ -28,7 +28,7 @@ theorem realPencilAll_of_int (t : ℤ) :
   ext i j
   simp only [realPencilAll, LinearInputF16Rank.realPencil,
     LinearInputF16Rank.intPencil, Matrix.of_apply, Matrix.map_apply,
-    entryThree, entryTen, map_add, map_mul, Int.coe_castRingHom]
+    entryThree, entryTen, Int.coe_castRingHom, Int.cast_add, Int.cast_mul]
 
 /-- Transport the previous rank-12 certificate to the real pencil at +1. -/
 theorem rank_at_plus_one : (realPencilAll 1).rank = 12 := by
