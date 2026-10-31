@@ -1,14 +1,10 @@
 /-!
-# The real 16 by 16 left-pencil determinant
+# The full real determinant of the 16-dimensional sedenion left pencil
 
-The full determinant of the explicitly tabulated sedenion left action
-L_(e3) + t L_(e10), for an arbitrary real parameter t, is calculated
-using two explicit bijections that reorder the rows and the columns
-into eight 2 by 2 blocks.
-
-All calculations use the original integer Cayley-Dickson sign table.
-This is an actual Matrix.det identity, not a statement about a
-separate polynomial or a list of numerical sample values.
+The determinant of L_(e3) + t L_(e10) is obtained from eight 2 by 2
+blocks. The crucial support equalities are proved over the integers
+by exhaustive checking of the original finite Cayley-Dickson table,
+rather than repeatedly normalizing real-valued expressions.
 -/
 
 noncomputable section
@@ -17,28 +13,32 @@ namespace LinearInputF16Determinant
 
 open LinearInputF16Holonomy LinearInputF16Recovery
 
-/-- The same signed-basis left pencil as intPencil, with a real parameter. -/
-def realPencilAll (t : ℝ) : Matrix (Fin 16) (Fin 16) ℝ :=
-  Matrix.of fun k j =>
-    (if rightIndex (3 : Fin 16) j = k then (eps (3 : Fin 16) j : ℝ) else 0) +
-    t * (if rightIndex (10 : Fin 16) j = k then (eps (10 : Fin 16) j : ℝ) else 0)
+/-- The integer coefficient of left multiplication by e3 at row k, column j. -/
+def entryThree (k j : Fin 16) : ℤ :=
+  if rightIndex (3 : Fin 16) j = k then eps (3 : Fin 16) j else 0
 
-/-- Local block-row 0 is row e3*ea, block-row 1 is row e10*ea. -/
+/-- The integer coefficient of left multiplication by e10. -/
+def entryTen (k j : Fin 16) : ℤ :=
+  if rightIndex (10 : Fin 16) j = k then eps (10 : Fin 16) j else 0
+
+/-- The signed-basis left pencil with an arbitrary real parameter t. -/
+def realPencilAll (t : ℝ) : Matrix (Fin 16) (Fin 16) ℝ :=
+  Matrix.of fun k j => (entryThree k j : ℝ) + t * (entryTen k j : ℝ)
+
+/-- First block coordinate chooses left e3 or e10; second is a low index. -/
 def rowCoord (p : Fin 2 × Fin 8) : Fin 16 :=
   if p.1 = 0 then rightIndex (3 : Fin 16) (low p.2)
   else rightIndex (10 : Fin 16) (low p.2)
 
-/-- Local block-column 0 is ea, block-column 1 is e_(a xor 9). -/
+/-- First block coordinate chooses the low basis or its xor-9 partner. -/
 def colCoord (p : Fin 2 × Fin 8) : Fin 16 :=
   if p.1 = 0 then low p.2 else partnerIndex p.2
 
-/-- Explicit inverse for the row permutation (no choice is used). -/
 def rowDecode (k : Fin 16) : Fin 2 × Fin 8 :=
   (if k.val < 8 then 0 else 1,
    ⟨(Nat.xor k.val (if k.val < 8 then 3 else 10)) % 8,
     Nat.mod_lt _ (by decide)⟩)
 
-/-- Explicit inverse for the column permutation. -/
 def colDecode (k : Fin 16) : Fin 2 × Fin 8 :=
   (if k.val < 8 then 0 else 1,
    ⟨(if k.val < 8 then k.val else Nat.xor k.val 9) % 8,
@@ -56,46 +56,75 @@ def colEquiv : (Fin 2 × Fin 8) ≃ Fin 16 where
   left_inv := by decide
   right_inv := by decide
 
-/-- The combined row/column permutation is even. -/
 theorem reindex_sign :
     Equiv.Perm.sign (colEquiv.symm.trans rowEquiv) = 1 := by
   rw [Equiv.Perm.sign_eq_prod_prod_Iio]
   decide
 
-/-- An explicit 2 by 2 block of the left pencil. -/
-def block (a : Fin 8) (t : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
+/-- The t-independent component of the local 2 by 2 block. -/
+def blockThree (a : Fin 8) : Matrix (Fin 2) (Fin 2) ℤ :=
   Matrix.of fun i j =>
     if i = 0 then
-      if j = 0 then (eps (3 : Fin 16) (low a) : ℝ)
-      else t * (eps (10 : Fin 16) (partnerIndex a) : ℝ)
-    else
-      if j = 0 then t * (eps (10 : Fin 16) (low a) : ℝ)
-      else (eps (3 : Fin 16) (partnerIndex a) : ℝ)
+      if j = 0 then eps (3 : Fin 16) (low a) else 0
+    else if j = 0 then 0 else eps (3 : Fin 16) (partnerIndex a)
 
-/-- The actual real left pencil, after the two explicit reindexings,
-is exactly the direct sum of eight 2 by 2 blocks. -/
+/-- The coefficient of t in the local 2 by 2 block. -/
+def blockTen (a : Fin 8) : Matrix (Fin 2) (Fin 2) ℤ :=
+  Matrix.of fun i j =>
+    if i = 0 then
+      if j = 0 then 0 else eps (10 : Fin 16) (partnerIndex a)
+    else if j = 0 then eps (10 : Fin 16) (low a) else 0
+
+/-- The entire 256-entry support calculation is performed over integers.
+Each integer coefficient vanishes between distinct blocks. -/
+theorem block_entry_coefficients (i j : Fin 2) (a b : Fin 8) :
+    entryThree (rowCoord (i, a)) (colCoord (j, b)) =
+        (if a = b then blockThree a i j else 0) ∧
+      entryTen (rowCoord (i, a)) (colCoord (j, b)) =
+        (if a = b then blockTen a i j else 0) := by
+  fin_cases i <;> fin_cases j <;> fin_cases a <;> fin_cases b <;> decide
+
+/-- The real 2 by 2 block, with exactly the original integer coefficients. -/
+def block (a : Fin 8) (t : ℝ) : Matrix (Fin 2) (Fin 2) ℝ :=
+  Matrix.of fun i j => (blockThree a i j : ℝ) + t * (blockTen a i j : ℝ)
+
+/-- Explicit row/column reindexing gives an exact block diagonal matrix. -/
 theorem reindexed_blocks (t : ℝ) :
     (Matrix.reindex rowEquiv.symm colEquiv.symm) (realPencilAll t) =
       Matrix.blockDiagonal (fun a : Fin 8 => block a t) := by
   ext ⟨i, a⟩ ⟨j, b⟩
-  change realPencilAll t (rowCoord (i, a)) (colCoord (j, b)) =
+  change (entryThree (rowCoord (i, a)) (colCoord (j, b)) : ℝ) +
+      t * (entryTen (rowCoord (i, a)) (colCoord (j, b)) : ℝ) =
     (if a = b then block a t i j else 0)
-  fin_cases i <;> fin_cases j <;> fin_cases a <;> fin_cases b <;>
-    norm_num [realPencilAll, rowCoord, colCoord, block,
-      rightIndex, low, partnerIndex, eps, epsTable] <;> ring
+  obtain ⟨h3, h10⟩ := block_entry_coefficients i j a b
+  rw [h3, h10]
+  by_cases h : a = b
+  · simp [h, block]
+  · simp [h]
 
-/-- Four blocks contribute a signed (1+t^2), and four contribute
-(1-t^2), for arbitrary real t. -/
+/-- Four block determinants are signed (1+t^2); the other four
+are 1-t^2, as exact identities for any real t. -/
 theorem block_det (a : Fin 8) (t : ℝ) :
     (block a t).det =
       (if a.val < 4 then
         (if a.val = 0 ∨ a.val = 3 then -(1 + t ^ 2) else (1 + t ^ 2))
        else 1 - t ^ 2) := by
-  rw [Matrix.det_fin_two]
-  fin_cases a <;>
-    norm_num [block, low, partnerIndex, eps, epsTable] <;> ring
+  obtain ⟨ha, hb⟩ := block_coefficients a
+  calc
+    (block a t).det =
+      ((eps (3 : Fin 16) (low a) * eps (3 : Fin 16) (partnerIndex a) : ℤ) : ℝ) -
+        ((eps (10 : Fin 16) (low a) * eps (10 : Fin 16) (partnerIndex a) : ℤ) : ℝ)
+          * t ^ 2 := by
+      rw [Matrix.det_fin_two]
+      simp [block, blockThree, blockTen]
+      ring
+    _ = (if a.val < 4 then
+           (if a.val = 0 ∨ a.val = 3 then -(1 + t ^ 2) else (1 + t ^ 2))
+         else 1 - t ^ 2) := by
+      rw [ha, hb]
+      fin_cases a <;> norm_num <;> ring
 
-/-- The complete 16 dimensional real left pencil determinant. -/
+/-- Exact determinant of the actual real 16 by 16 left pencil. -/
 theorem realPencilAll_det (t : ℝ) :
     (realPencilAll t).det = (1 - t ^ 2) ^ 4 * (1 + t ^ 2) ^ 4 := by
   calc
