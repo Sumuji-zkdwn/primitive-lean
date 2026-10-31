@@ -5,6 +5,7 @@ on:
     branches:
       - chatgpt/galois-chebyshev-20261031
       - chatgpt/future-observation-minimal-20261101
+      - chatgpt/energy-wfs-fenchel-forgetting-20261101
   pull_request:
     branches:
       - codex/primitive-history-derivation-20261029
