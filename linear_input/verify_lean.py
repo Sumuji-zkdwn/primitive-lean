@@ -55,6 +55,9 @@ def main():
         "import Mathlib.Data.Complex.Basic",
         "import Mathlib.Data.ZMod.Basic",
         "import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots",
+        "import Mathlib.LinearAlgebra.Matrix.Rank",
+        "import Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
+        "import Mathlib.Algebra.BigOperators.Fin",
         "import Mathlib.FieldTheory.KummerExtension",
         "import Mathlib.GroupTheory.SpecificGroups.Dihedral",
     ], [], [], {}, []
