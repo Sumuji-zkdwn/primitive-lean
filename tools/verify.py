@@ -126,6 +126,7 @@ def verify_lean(rebuild):
         "WFSCanonicalLift": "Positive-intensity WFS p=2 cotangent lift and p=0 momentum identity under explicit domain conditions",
         "EWFSFutureBridge": "Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient",
         "F16RecoverySpectrum": "Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input",
+        "TemporalSampling": "General observation schedules, exact stride-sampling iff one-step congruence, phase reconstruction, and E-rotation even-time aliasing with positive WFS gauge",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
