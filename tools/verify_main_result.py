@@ -39,6 +39,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/F16Holonomy.inc", "LinearInputF16Holonomy"),
     ("linear_input/lean_check/F16RecoverySpectrum.inc", "LinearInputF16Recovery"),
     ("linear_input/lean_check/F16RankCertificate.inc", "LinearInputF16Rank"),
+    ("linear_input/lean_check/F16RealDeterminant.inc", "LinearInputF16Determinant"),
 )
 
 
