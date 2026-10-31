@@ -84,9 +84,9 @@ theorem joukowski_eq_iff (a b : ℂ) (ha : a ≠ 0) (hb : b ≠ 0) :
 
 /-- A primitive m-th root is a root of the m-th cyclotomic polynomial. -/
 theorem primitive_cyclotomic_root {m : ℕ} {ζ : ℂ}
-    (hζ : IsPrimitiveRoot ζ m) :
+    (hm : 0 < m) (hζ : IsPrimitiveRoot ζ m) :
     (Polynomial.cyclotomic m ℂ).IsRoot ζ :=
-  hζ.isRoot_cyclotomic
+  hζ.isRoot_cyclotomic hm
 
 /-- Kummer label rotation preserves the equation z^m = w. -/
 theorem kummer_candidate_pow {m j : ℕ} {ζ z w : ℂ}
