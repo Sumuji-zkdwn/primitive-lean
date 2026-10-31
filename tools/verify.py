@@ -120,6 +120,7 @@ def verify_lean(rebuild):
         "KummerDihedral": "Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)",
         "VariablePairGaloisBridge": "Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections",
         "F16Holonomy": "Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification",
+        "EWFSFenchel": "Existing polynomial E gradient as a reversible two-coordinate map, scalar-forgetting obstruction, WFS positive gauge invariance, and exact Legendre-Fenchel pairing distinction",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
