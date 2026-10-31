@@ -48,9 +48,9 @@ noncomputable def kummerGaloisEquiv {K : Type*} [Field K]
     {n : ℕ} [NeZero n] {a ζ : K}
     (hζ : IsPrimitiveRoot ζ n) (hirr : Irreducible (kummerPoly n a)) :
     (kummerField n a ≃ₐ[K] kummerField n a) ≃* Multiplicative (ZMod n) := by
-  letI : Polynomial.IsSplittingField K (kummerField n a) (kummerPoly n a) :=
-    Polynomial.IsSplittingField.splittingField (kummerPoly n a)
-  exact autEquivZmod hirr (kummerField n a) hζ
+  have hsplit : Polynomial.IsSplittingField K (kummerField n a) (X ^ n - C a) :=
+    Polynomial.IsSplittingField.splittingField (X ^ n - C a)
+  exact @autEquivZmod K _ n a hirr (kummerField n a) _ _ hsplit _ ζ hζ
 
 /-- A Kummer extension with primitive roots in the base is Galois. -/
 theorem kummer_isGalois {K : Type*} [Field K]
@@ -58,11 +58,11 @@ theorem kummer_isGalois {K : Type*} [Field K]
     (hζ : IsPrimitiveRoot ζ n) (hirr : Irreducible (kummerPoly n a)) :
     IsGalois K (kummerField n a) := by
   have hn : 0 < n := Nat.pos_of_ne_zero (NeZero.ne n)
-  letI : Polynomial.IsSplittingField K (kummerField n a) (kummerPoly n a) :=
-    Polynomial.IsSplittingField.splittingField (kummerPoly n a)
-  exact isGalois_of_isSplittingField_X_pow_sub_C
+  have hsplit : Polynomial.IsSplittingField K (kummerField n a) (X ^ n - C a) :=
+    Polynomial.IsSplittingField.splittingField (X ^ n - C a)
+  exact @isGalois_of_isSplittingField_X_pow_sub_C K _ n
     (show (primitiveRoots n K).Nonempty from
-      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) hirr (kummerField n a)
+      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) a hirr (kummerField n a) _ _ hsplit
 
 /-- The degree of this actual extension equals n. -/
 theorem kummer_finrank {K : Type*} [Field K]
@@ -70,11 +70,11 @@ theorem kummer_finrank {K : Type*} [Field K]
     (hζ : IsPrimitiveRoot ζ n) (hirr : Irreducible (kummerPoly n a)) :
     Module.finrank K (kummerField n a) = n := by
   have hn : 0 < n := Nat.pos_of_ne_zero (NeZero.ne n)
-  letI : Polynomial.IsSplittingField K (kummerField n a) (kummerPoly n a) :=
-    Polynomial.IsSplittingField.splittingField (kummerPoly n a)
-  exact finrank_of_isSplittingField_X_pow_sub_C
+  have hsplit : Polynomial.IsSplittingField K (kummerField n a) (X ^ n - C a) :=
+    Polynomial.IsSplittingField.splittingField (X ^ n - C a)
+  exact @finrank_of_isSplittingField_X_pow_sub_C K _ n
     (show (primitiveRoots n K).Nonempty from
-      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) hirr (kummerField n a)
+      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) a hirr (kummerField n a) _ _ hsplit
 
 /-- The action on root indices by rotations and reflections. The sign
 convention matches mathlib's DihedralGroup.r/sr multiplication rules. -/
