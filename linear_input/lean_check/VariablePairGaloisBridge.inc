@@ -180,7 +180,7 @@ theorem signedEnergy_flipX (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :
       signedEnergy σ k lam a c (-x) y u := by
   rw [signedEnergy_expansion, signedEnergy_expansion]
   simp [flipX, signValue_not]
-  tauto
+  exact Or.inl (by ring)
 
 theorem signedEnergy_flipY (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :
     signedEnergy (flipY σ) k lam a c x y u =
