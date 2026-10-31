@@ -160,8 +160,11 @@ theorem full_determinant (t : ℝ) :
       (t ^ 2 - 1) ^ 4 * (t ^ 2 + 1) ^ 4 := by
   have hs := Matrix.det_reindex rowEquiv.symm colEquiv.symm (leftMatrix t)
   have he : ((leftMatrix t).submatrix rowOrder colOrder).det = (leftMatrix t).det := by
-    simpa only [Matrix.reindex_apply, Equiv.symm_symm, reindex_sign_one,
-      Int.cast_one, one_mul, rowEquiv, colEquiv, Equiv.coe_fn_mk] using hs
+    simp only [Equiv.symm_symm, reindex_sign_one, Units.val_one,
+      Int.cast_one, one_mul, Matrix.reindex_apply] at hs
+    change ((leftMatrix t).submatrix rowOrder colOrder).det =
+      (leftMatrix t).det at hs
+    exact hs
   calc
     (leftMatrix t).det =
         ((leftMatrix t).submatrix rowOrder colOrder).det := he.symm
@@ -178,10 +181,10 @@ theorem full_determinant_zero_iff (t : ℝ) :
   constructor
   · intro h
     have hmul : t ^ 2 - 1 = 0 := by
-      rcases mul_eq_zero.mp h with h1 | h2
-      · exact pow_eq_zero h1
-      · have : (0 : ℝ) < (t ^ 2 + 1) ^ 4 := by positivity
-        exact False.elim ((ne_of_gt this) h2)
+      by_contra hneq
+      have hleft : (t ^ 2 - 1) ^ 4 ≠ 0 := pow_ne_zero 4 hneq
+      have hright : (t ^ 2 + 1) ^ 4 ≠ 0 := pow_ne_zero 4 (by positivity)
+      exact (mul_ne_zero hleft hright) h
     have hh : (t - 1) * (t + 1) = 0 := by nlinarith
     rcases mul_eq_zero.mp hh with h1 | h2
     · exact Or.inl (by linarith)
