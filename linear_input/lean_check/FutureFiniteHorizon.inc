@@ -14,6 +14,7 @@ noncomputable section
 namespace LinearInputFutureHorizon
 
 open LinearInputFutureObservation
+attribute [local instance] Classical.decEq
 
 /-- The same observations through every instant 0,...,n. -/
 def HorizonEq {α ω : Type*} (K : α → ω) (U : α → α)
