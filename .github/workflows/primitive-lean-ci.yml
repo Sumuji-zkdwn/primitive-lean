@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - codex/primitive-history-derivation-20261029
+      - chatgpt/e-wfs-future-bridge-20261101
     paths:
       - 'linear_input/**'
       - 'lean/**'
@@ -56,6 +57,7 @@ jobs:
           python -B -X utf8 tools/check_future_observation.py
           python -B -X utf8 tools/check_e_wfs_fenchel.py
           python -B -X utf8 tools/check_e_wfs_future_bridge.py
+          python -B -X utf8 tools/check_temporal_sampling.py
 
       - name: Run full proof-only Lean integration and axiom audit
         shell: bash
