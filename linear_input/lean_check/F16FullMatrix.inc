@@ -33,11 +33,26 @@ theorem colOrder_bijective : Function.Bijective colOrder := by decide
 
 theorem rowOrder_bijective : Function.Bijective rowOrder := by decide
 
-def colEquiv : BlockIndex ≃ Fin 16 :=
-  Equiv.ofBijective colOrder colOrder_bijective
+/-- A computational inverse; no choice-based inverse occurs in the sign test. -/
+def colInverse (k : Fin 16) : BlockIndex :=
+  if h : k.val < 8 then (0, ⟨k.val, h⟩)
+  else (1, ⟨(Nat.xor k.val 9) % 8, Nat.mod_lt _ (by decide)⟩)
 
-def rowEquiv : BlockIndex ≃ Fin 16 :=
-  Equiv.ofBijective rowOrder rowOrder_bijective
+/-- Since XOR with 3 is its own inverse, the second order is explicit too. -/
+def rowInverse (k : Fin 16) : BlockIndex :=
+  colInverse (rightIndex (3 : Fin 16) k)
+
+def colEquiv : BlockIndex ≃ Fin 16 where
+  toFun := colOrder
+  invFun := colInverse
+  left_inv := by decide
+  right_inv := by decide
+
+def rowEquiv : BlockIndex ≃ Fin 16 where
+  toFun := rowOrder
+  invFun := rowInverse
+  left_inv := by decide
+  right_inv := by decide
 
 /-- The row/column reordering is even, hence leaves the full determinant unchanged. -/
 theorem reindex_sign_one :
@@ -110,7 +125,7 @@ theorem localBlock_det (a : Fin 8) (t : ℝ) :
         (if a.val = 0 ∨ a.val = 3 then -(1 + t ^ 2) else 1 + t ^ 2)
        else 1 - t ^ 2) := by
   rw [Matrix.det_fin_two]
-  fin_cases a <;> norm_num [localBlock, colOrder, eps, epsTable] <;> ring
+  fin_cases a <;> norm_num [localBlock, colOrder, low, partnerIndex, rightIndex, eps, epsTable] <;> ring
 
 /-- Four factors of either quadratic, with the two negative factors cancelling. -/
 theorem eight_block_product (t : ℝ) :
@@ -126,8 +141,8 @@ theorem full_determinant (t : ℝ) :
       (t ^ 2 - 1) ^ 4 * (t ^ 2 + 1) ^ 4 := by
   have hs := Matrix.det_reindex rowEquiv.symm colEquiv.symm (leftMatrix t)
   have he : ((leftMatrix t).submatrix rowOrder colOrder).det = (leftMatrix t).det := by
-    simpa only [Matrix.reindex_apply, reindex_sign_one, Int.cast_one, one_mul,
-      rowEquiv, colEquiv] using hs
+    simpa only [Matrix.reindex_apply, Equiv.symm_symm, reindex_sign_one,
+      Int.cast_one, one_mul, rowEquiv, colEquiv, Equiv.coe_fn_mk] using hs
   calc
     (leftMatrix t).det =
         ((leftMatrix t).submatrix rowOrder colOrder).det := he.symm
@@ -137,7 +152,7 @@ theorem full_determinant (t : ℝ) :
       rw [eight_block_product]
       ring
 
-/-- In real parameters, the pencil is singular precisely at +/-1. -/
+/-- In real parameters, the pencil is singular precisely at plus or minus one. -/
 theorem full_determinant_zero_iff (t : ℝ) :
     (leftMatrix t).det = 0 ↔ t = 1 ∨ t = -1 := by
   rw [full_determinant]
