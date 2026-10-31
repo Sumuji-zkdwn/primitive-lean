@@ -76,7 +76,7 @@ Bézout 等式から復元できる。ここで未知数は軌道の初期位相
 **Lean原稿上の境界:** `sampleKernel_iff_gcd_zero` は
 「核に属する ⇔ `g` 倍して0」を一般の `m,D` で示すコードとして登録。
 `sampleKernelCard_six_two_three` と `sampleKernelCard_eight_two_four` は
-要素数に関する数値例として登録。ただし `|K_D|=g` の一般計数自体は
+有限集合上で不一致サンプルを除外する計算可能な定義を使う数値例として登録。ただし `|K_D|=g` の一般計数自体は
 まだLeanの定理として登録しておらず、上の手証明と混同しない。
 
 ## 擬距離の証明と零距離の正確な意味
@@ -114,11 +114,11 @@ Python標準ライブラリだけを用いて以下の検算を行った。
 既存の固定環境：`lean/lean-toolchain` = `leanprover/lean4:v4.30.0-rc2`、
 `lean/lakefile.toml` の mathlib revision `5450b53e5ddc75d46418fabb605edbf36bd0beb6`。
 
-個別検証コマンド（リポジトリの `lean/` から）:
+依存関係込みの検証コマンド（リポジトリの `lean/` から）:
 
 ```sh
-lake env lean Elastica/WFSObservation.lean
-lake env lean Elastica/WFSObservationGeometry.lean
+# Lake が依存する WFSObservation も一緒にビルドする
+lake build Elastica.WFSObservationGeometry
 ```
 
 重要：この記録時点では実行環境に Lean／Lake がなく、**上のコマンドを実行していない**。
