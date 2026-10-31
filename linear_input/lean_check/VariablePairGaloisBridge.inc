@@ -46,10 +46,10 @@ theorem gradient_at_stationaryY (k lam a c u x : ℝ) (ha : a ≠ 0) :
   apply Prod.ext
   · dsimp [stationaryY, reducedCubic, reducedB]
     field_simp [ha]
-    <;> ring
+    ring
   · dsimp [stationaryY]
     field_simp [ha]
-    <;> ring
+    ring
 
 /-- Every and only stationary point is a root of the reduced cubic, with its
 unique stationary y-coordinate. -/
@@ -80,7 +80,7 @@ theorem hessian_eq_reduced_derivative (k lam a c u x y : ℝ) (ha : a ≠ 0) :
   rw [gradXY_jacobian]
   unfold cubicDerivative reducedB
   field_simp [ha]
-  <;> ring
+  ring
 
 theorem hessian_zero_iff_cubic_derivative_zero
     (k lam a c u x y : ℝ) (ha : a ≠ 0) :
@@ -179,15 +179,13 @@ theorem signedEnergy_flipX (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :
     signedEnergy (flipX σ) k lam a c x y u =
       signedEnergy σ k lam a c (-x) y u := by
   rw [signedEnergy_expansion, signedEnergy_expansion]
-  simp [flipX, signValue_not]
-  ring
+  simp [flipX, signValue_not] <;> first | ring | tauto
 
 theorem signedEnergy_flipY (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :
     signedEnergy (flipY σ) k lam a c x y u =
       signedEnergy σ k lam a c x (-y) u := by
   rw [signedEnergy_expansion, signedEnergy_expansion]
-  simp [flipY, signValue_not]
-  ring
+  simp [flipY, signValue_not] <;> ring
 
 theorem flipX_involutive (σ : Fin 5 → Bool) : flipX (flipX σ) = σ := by
   funext i
