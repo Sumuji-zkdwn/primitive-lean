@@ -64,8 +64,8 @@ theorem local_diagonalization (a : Fin 8) (t : ℝ) :
   fin_cases a <;> fin_cases i <;> fin_cases j <;>
     norm_num [localLeft, localRight, localBlock, localDiagonal,
       Matrix.mul_apply, Matrix.det_fin_two, Matrix.diagonal_apply,
-      Fin.sum_univ_two, alpha, beta, gamma, colOrder, low, partnerIndex,
-      rightIndex, eps, epsTable] <;> ring
+      Fin.sum_univ_two, alpha, beta, gamma, colOrder, low,
+      partnerIndex_eq_partnerTable, partnerTable, eps, epsTable] <;> ring
 
 /-- The global elementary operations are block diagonal, hence invertible. -/
 def globalLeft (t : ℝ) : Matrix BlockIndex BlockIndex ℝ :=
