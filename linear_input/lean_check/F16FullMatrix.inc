@@ -126,8 +126,25 @@ theorem localBlock_det (a : Fin 8) (t : ℝ) :
       (if a.val < 4 then
         (if a.val = 0 ∨ a.val = 3 then -(1 + t ^ 2) else 1 + t ^ 2)
        else 1 - t ^ 2) := by
-  rw [Matrix.det_fin_two]
-  fin_cases a <;> norm_num [localBlock, colOrder, low, partnerIndex, rightIndex, eps, epsTable] <;> ring
+  have hformula : (localBlock a t).det =
+      (((eps (3 : Fin 16) (low a) *
+          eps (3 : Fin 16) (partnerIndex a) : ℤ) : ℝ)) -
+      (((eps (10 : Fin 16) (low a) *
+          eps (10 : Fin 16) (partnerIndex a) : ℤ) : ℝ)) * t ^ 2 := by
+    rw [Matrix.det_fin_two]
+    simp [localBlock, colOrder, Int.cast_mul]
+    ring
+  rw [hformula]
+  obtain ⟨h3, h10⟩ := block_coefficients a
+  have hp := congrArg (fun x : ℤ => (x : ℝ)) h3
+  have hq := congrArg (fun x : ℤ => (x : ℝ)) h10
+  rw [hp, hq]
+  by_cases hlo : a.val < 4
+  · by_cases h03 : a.val = 0 ∨ a.val = 3
+    · simp [hlo, h03] <;> ring
+    · simp [hlo, h03] <;> ring
+  · have h03 : ¬(a.val = 0 ∨ a.val = 3) := by omega
+    simp [hlo, h03] <;> ring
 
 /-- Four factors of either quadratic, with the two negative factors cancelling. -/
 theorem eight_block_product (t : ℝ) :
