@@ -19,6 +19,22 @@ open LinearInputF16Holonomy LinearInputF16Recovery
 /-- Each group of two columns/rows is indexed by a low-three-bit label. -/
 abbrev BlockIndex := Fin 2 × Fin 8
 
+/-- Eight explicit XOR-with-nine results; a finite lookup speeds symbolic proofs. -/
+def partnerTable (a : Fin 8) : Fin 16 :=
+  if a.val = 0 then 9
+  else if a.val = 1 then 8
+  else if a.val = 2 then 11
+  else if a.val = 3 then 10
+  else if a.val = 4 then 13
+  else if a.val = 5 then 12
+  else if a.val = 6 then 15
+  else 14
+
+/-- The table agrees with the original XOR-based construction, exactly. -/
+theorem partnerIndex_eq_partnerTable (a : Fin 8) :
+    partnerIndex a = partnerTable a := by
+  fin_cases a <;> decide
+
 /-- Column 0 is e_a, column 1 is e_(a XOR 9). -/
 def colOrder (p : BlockIndex) : Fin 16 :=
   if p.1 = 0 then low p.2 else partnerIndex p.2
