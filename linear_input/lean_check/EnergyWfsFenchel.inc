@@ -55,15 +55,27 @@ theorem orientedGradient_eq_original (k lam a c y : ℝ) (z : ℝ × ℝ) :
       ((gradXu k lam a c (-1) y z).1,
        -(gradXu k lam a c (-1) y z).2) := by
   rw [gradXu_formula]
-  apply Prod.ext <;> dsimp [orientedGradient, force] <;> ring
+  apply Prod.ext
+  · dsimp [orientedGradient, force]
+    ring
+  · dsimp [orientedGradient, force]
+    ring
 
 theorem orientedInverse_left (k lam c y : ℝ) (z : ℝ × ℝ) :
     orientedInverse k lam c y (orientedGradient k lam c y z) = z := by
-  apply Prod.ext <;> dsimp [orientedGradient, orientedInverse] <;> ring
+  apply Prod.ext
+  · dsimp [orientedGradient, orientedInverse]
+    ring
+  · dsimp [orientedGradient, orientedInverse]
+    ring
 
 theorem orientedInverse_right (k lam c y : ℝ) (z : ℝ × ℝ) :
     orientedGradient k lam c y (orientedInverse k lam c y z) = z := by
-  apply Prod.ext <;> dsimp [orientedGradient, orientedInverse] <;> ring
+  apply Prod.ext
+  · dsimp [orientedGradient, orientedInverse]
+    ring
+  · dsimp [orientedGradient, orientedInverse]
+    ring
 
 theorem orientedGradient_bijective (k lam c y : ℝ) :
     Function.Bijective (orientedGradient k lam c y) := by
@@ -91,7 +103,11 @@ theorem stationary_iff_zero_first (k lam c y x u : ℝ) :
 at a stationary point, not an entire unrestricted (p,q)-plane. -/
 theorem stationary_curve (k lam c y x : ℝ) :
     orientedGradient k lam c y (x, force k lam c y x) = (0, x) := by
-  apply Prod.ext <;> dsimp [orientedGradient] <;> ring
+  apply Prod.ext
+  · dsimp [orientedGradient]
+    ring
+  · dsimp [orientedGradient]
+    ring
 
 /-- The physical Fenchel pairing and the exact transported pairing. -/
 def fenchelWork (k lam a c y u x : ℝ) : ℝ :=
@@ -130,7 +146,7 @@ theorem fenchel_bddAbove_transport (k lam a c y u : ℝ) :
 /-- This equality is about the true supremum when the value set is bounded
 above; it is not a claim of global convexity of the original potential. -/
 theorem fenchel_sSup_transport (k lam a c y u : ℝ)
-    (hb : BddAbove (Set.range (fun x : ℝ => fenchelWork k lam a c y u x))) :
+    (_hb : BddAbove (Set.range (fun x : ℝ => fenchelWork k lam a c y u x))) :
     sSup (Set.range (fun x : ℝ => fenchelWork k lam a c y u x)) =
     sSup (Set.range (fun x : ℝ =>
       transportedWork k lam a c y (orientedGradient k lam c y (x, u)))) := by
