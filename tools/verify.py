@@ -122,6 +122,7 @@ def verify_lean(rebuild):
         "F16Holonomy": "Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification",
         "F16RecoverySpectrum": "Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input",
         "F16RankCertificate": "Exact integer factor and 12-by-12 pivot certificates imply real Matrix.rank 12 at t = +1 and -1",
+        "F16RealDeterminant": "Eight 2-by-2 sedenion left-pencil blocks, verified row/column bijections and parity, and the full real Matrix.det identity",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
