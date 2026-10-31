@@ -117,6 +117,9 @@ def verify_lean(rebuild):
         "FiniteBayes": "Finite normalization and posterior composition, support constraints, log-loss comparison, observation pushforwards, and actual Elastica exponential-weight bridges",
         "FourBayes": "Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples",
         "GaloisChebyshev": "Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)",
+        "F0UpdateDescent": "Induced dynamics on F0 fixed representatives, descent iff fiber respect, composition, symmetry preservation and a finite counterexample",
+        "Rule481Symmetry": "Local Rule 481 reflection/complement and finite 3x3 torus mirror equivariance and two-cycle (not infinite-lattice OEIS coefficient proof)",
+        "HannaJetCorrection": "First-jet formal-series calculation: the k=3 denominator correction changes the local x^7 coefficient by eight (not the whole generating function)",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
