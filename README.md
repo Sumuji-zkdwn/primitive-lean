@@ -1,5 +1,7 @@
 # primitive-lean
 
+**2026-11-01 符号の反転軌道8分類を必要十分条件でLean証明:** 先行の`signShape`不変量に対し、`sameReflectionOrbit σ τ ↔ signShape τ = signShape σ` を追加。反転群による商集合と `Fin 3 → Bool` の明示的な同型、軌道数8、および反転を通じたエネルギー同値を証明。固定Leanの[Actions #41218537964](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41218537964)で `--trust=0`、**782定理・939宣言**、全公理監査成功・警告0。[検証記録](docs/verification/2026-11-01-sign-orbits-complete.md) / [PR #10](https://github.com/Sumuji-zkdwn/primitive-lean/pull/10)。8分類は形式的符号の座標反転軌道で、固定値・拘束を含む全15変数対の無条件な同値類数ではありません。以下の776定理・930宣言は前段階の記録です。
+
 **2026-11-01 変数対Eのガロア接続（Lean検証成功）:** 2026-10-20の15組比較に出る四次エネルギーを既存 `gradXY` の偏微分から三次方程式へ縮約し、ヘッセ退化・判別式・チェビシェフ臨界値を接続。`x,y` 反転のエネルギー等式と、32形式的符号を3ビットの8種類へ縮約する不変量も形式化。追加21定理・10定義、GitHub Actions [#41216334895](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41216334895) で `--trust=0` / 全公理監査成功、**776定理・930宣言**、警告・エラー・未許可公理0。[検証記録](docs/verification/2026-11-01-variable-pair-galois.md) / [PR #8](https://github.com/Sumuji-zkdwn/primitive-lean/pull/8)。15組すべてのガロア分類や、二面体ガロア同型を証明したわけではない。以下の755定理・899宣言は前段階の検証記録。
 
 **2026-10-31 クンマー分解体・二面体作用の追加検証成功:** 新しい `KummerDihedral.inc` で実際の分解体・根添加体と二次→クンマー拡大塔を構成し、既約性・原始根の存在を仮定して巡回ガロア群同型と拡大次数を証明。二面体群のラベル作用も検証。GitHub Actions [#41212071155](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41212071155) による固定Lean・`--trust=0` 全監査に成功し、**755定理・899宣言**、警告・許可外公理0。[検証詳細](docs/verification/2026-10-31-kummer-dihedral.md) / [PR #6](https://github.com/Sumuji-zkdwn/primitive-lean/pull/6)。**注：一般のチェビシェフ分解体のガロア群が二面体群になる完全な同型は未証明**。以下の746定理・880宣言は前段階の実行記録です。
