@@ -120,6 +120,7 @@ def verify_lean(rebuild):
         "KummerDihedral": "Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)",
         "FutureObservations": "Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries",
         "FutureFiniteHorizon": "Finite observation signatures, monotone trace rank, and stabilization after at most N-r refinement steps",
+        "EnergyWfsFenchel": "Exact E-gradient/Fenchel pairing transport, p=0/p=2 WFS gauges, all-u probe obstruction for F0 retractions and double-well minorants",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
