@@ -1,5 +1,7 @@
 # 線形入力と接続のLean証明
 
+**2026-11-01 最新検証:** F16の有限観測ホロノミーとF0忘却への降下条件を `F16Holonomy.inc` に追加（7定理・17宣言）。固定Leanでの[Actions #41224405790](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41224405790)で **789定理・956宣言**の `--trust=0` と全公理監査が成功。旧証明原稿は変更しない。 [検証記録](../../docs/verification/2026-11-01-f16-holonomy.md)。以下の782定理・939宣言およびそれ以前の件数は旧段階の記録。
+
 **2026-10-31 最新の統合検証:** 円分根・クンマー型冪根ラベル・チェビシェフ逆像の `GaloisChebyshev.inc`（6定義・13定理）を第15追補として登録。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Leanの `--trust=0` と全880宣言の公理監査が成功、**746定理・880宣言**、許可外公理・警告なし。PR #5からPR #3ブランチへマージ済み。詳細・SHA-256は[今回の検証記録](../../docs/verification/2026-10-31-galois-chebyshev.md)。以下の733定理・861宣言などは旧段階の記録です。
 
 **後続検査:** 下記の未検査記録の後、名前空間の修正を含む作業コピーで733定理・861宣言の検査が成功した。[修正と検査記録](../../docs/verification/2026-10-30-five-state-followup.md)を参照。下記は当時の状態を保持する。

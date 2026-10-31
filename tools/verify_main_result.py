@@ -36,6 +36,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/GaloisChebyshev.inc", "LinearInputGaloisChebyshev"),
     ("linear_input/lean_check/KummerDihedral.inc", "LinearInputKummerDihedral"),
     ("linear_input/lean_check/VariablePairGaloisBridge.inc", "LinearInputVariablePairGalois"),
+    ("linear_input/lean_check/F16Holonomy.inc", "LinearInputF16Holonomy"),
 )
 
 
