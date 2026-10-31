@@ -1,0 +1,73 @@
+name: Primitive Lean integration verification
+
+on:
+  push:
+    branches:
+      - chatgpt/galois-chebyshev-20261031
+  pull_request:
+    branches:
+      - codex/primitive-history-derivation-20261029
+    paths:
+      - 'linear_input/**'
+      - 'lean/**'
+      - 'tools/**'
+      - '.github/workflows/primitive-lean-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Lean proofs and axiom audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Check out exact commit
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install elan
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Verify pinned toolchain and fetch Mathlib cache
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lean --version
+          lake --version
+          lake exe cache get
+
+      - name: Exact-arithmetic smoke tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -X utf8 tools/check_galois_bridge.py
+
+      - name: Run full proof-only Lean integration and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -X utf8 tools/verify.py --proof-only
+
+      - name: Upload full verification logs even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: primitive-galois-lean-${{ github.run_id }}
+          path: |
+            verification/
+            linear_input/lean_results.json
+            linear_input/lean_check/*log
+          if-no-files-found: warn
+          retention-days: 14
