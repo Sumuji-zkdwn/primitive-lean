@@ -72,6 +72,16 @@ theorem pairedObservation_injective_iff (b : Fin 16) :
     exact hne he
   · exact pairedObservation_injective_bad b
 
+/-- A single probe exactly recovers the hidden bit precisely when it
+does not descend through the pre-existing F0 forgetting map. -/
+theorem pairedObservation_injective_iff_noncompatible (b : Fin 16) :
+    Function.Injective (pairedObservation b) ↔
+      ¬ LinearInputF0.Compatible forgetSigned
+        (fun s (_ : Fin 1) => observedRight b s) := by
+  rw [pairedObservation_injective_iff, observedRight_compatible_iff]
+  have hb := b.isLt
+  omega
+
 /-- Concrete F0 forgetting counterexample with a single probe e1. -/
 theorem forgotten_bit_reappears :
     forgetSigned (true, (0 : Fin 16)) =
@@ -118,13 +128,10 @@ theorem blockDet_formula (a : Fin 8) (t : ℤ) :
   rw [ha, hb]
   by_cases hlow : a.val < 4
   · by_cases h03 : a.val = 0 ∨ a.val = 3
-    · simp [hlow, h03]
-      ring
-    · simp [hlow, h03]
-      ring
+    · simp [hlow, h03] <;> ring
+    · simp [hlow, h03] <;> ring
   · have h03 : ¬(a.val = 0 ∨ a.val = 3) := by omega
-    simp [hlow, h03]
-    ring
+    simp [hlow, h03] <;> ring
 
 /-- The four blocks with indices 4..7 become singular exactly at t = +/-1
 when t is an integer. -/
