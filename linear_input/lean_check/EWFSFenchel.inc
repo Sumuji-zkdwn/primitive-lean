@@ -225,4 +225,31 @@ theorem changed_pairing_has_different_best_score :
   exact ⟨⟨⟨1, by norm_num⟩, physicalScore_one_attained⟩,
     physicalScore_one_bound, wfs2Score_one_constant⟩
 
+
+/-- Physical Legendre-Fenchel score is -E for the quadratic subfamily. -/
+theorem physicalScore_eq_negative_original_E (u : ℝ) (r : Positive) :
+    physicalScore u r =
+      -LinearInputVariablePairs.energy 1 0 0 0 r.val 0 u := by
+  dsimp [physicalScore, LinearInputVariablePairs.energy]
+  ring
+
+/-- The canonical x-only projection is an idempotent F0 observation. -/
+def forgetU (z : ℝ × ℝ) : ℝ × ℝ := (z.1, 0)
+
+theorem forgetU_idempotent : LinearInputF0.Idempotent forgetU := by
+  intro z
+  rfl
+
+/-- The E automorphism does not descend to the x-only observation quotient.
+This is exactly a failure of the F0-style relation K H K = K H. -/
+theorem forgetU_H_not_descend (k lam c y : ℝ) :
+    ¬ ∀ z : ℝ × ℝ,
+      forgetU (H k lam c y (forgetU z)) =
+        forgetU (H k lam c y z) := by
+  intro h
+  have hz := h (0, 1)
+  have hx := congrArg Prod.fst hz
+  dsimp [forgetU, H] at hx
+  linarith
+
 end LinearInputEWFSDual
