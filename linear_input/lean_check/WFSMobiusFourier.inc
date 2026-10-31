@@ -42,7 +42,7 @@ theorem wfs2_range_positive (r : ℝ) (hr : 0 < r) :
 theorem mobius_cross (z : ℝ) (hz : 1 + 2*z ≠ 0) :
     (1 + 2*z) * mobius z = -z := by
   unfold mobius
-  field_simp [hz] <;> ring
+  field_simp [hz]
 
 /-- The denominators of z and M(z) are multiplicative inverses. -/
 theorem mobius_denominator_product (z : ℝ) (hz : 1 + 2*z ≠ 0) :
@@ -75,7 +75,7 @@ theorem mobius_involutive (z : ℝ) (hz : 0 < 1 + 2*z) :
 theorem mobius_wfs2_inverse (r : ℝ) (hr : r ≠ 0) :
     mobius (wfs2 r) = wfs2 r⁻¹ := by
   unfold mobius wfs2
-  field_simp [hr] <;> ring
+  field_simp [hr]; ring
 
 /-- The physical E quarter-rotation sampled every two updates acts as
 the Möbius transformation on WFS2(exp(x)) observation coordinates. -/
@@ -105,7 +105,7 @@ def trace4 (z : ℝ × ℝ) (j : Fin 4) : ℝ :=
 theorem trace4_values (z : ℝ × ℝ) :
     trace4 z 0 = z.1 ∧ trace4 z 1 = -z.2 ∧
     trace4 z 2 = -z.1 ∧ trace4 z 3 = z.2 := by
-  simp [trace4, spin, H, Function.iterate_succ_apply']
+  simp [trace4, spin, H, observeX, Function.iterate_succ_apply']
 
 /-- First 4-point Fourier mode, with the convention exp(-2*pi*i*j/4). -/
 def fourier1 (z : ℝ × ℝ) : ℂ :=
@@ -143,6 +143,8 @@ theorem even_samples_erase_fourier_phase :
   constructor
   · rw [even_fourier_trace, even_fourier_trace]
   · rw [fourier1_formula, fourier1_formula]
-    simp
+    have hi : (Complex.I : ℂ) ≠ 0 := Complex.I_ne_zero
+    have hd : (Complex.I : ℂ) / 2 ≠ 0 := div_ne_zero hi (by norm_num)
+    simpa using (Ne.symm hd)
 
 end LinearInputWFSMobiusFourier
