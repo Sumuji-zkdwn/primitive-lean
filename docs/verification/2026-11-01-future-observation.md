@@ -33,7 +33,7 @@ State K U        :=  Quotient (futureSetoid K U)
 This is a deterministic automata / observable-state construction, not a
 new statement about polynomial maps, Rule 481 counting, or square packing.
 
-## Finite-state refinement: next proof obligation
+## Finite-state refinement: added formalization
 
 Define finite-horizon equivalence
 ```text
@@ -46,13 +46,17 @@ strengthening is:
 x ≈_(N-r) y ↔ FutureEq K U x y.
 ```
 
-The proposed bound assumes `α` is finite, `N` and `r` refer to the
-same fixed α and K, and no new inputs are introduced after time zero.
-It is not asserted by this first source until separately Lean-checked.
+The added `FutureFiniteHorizon.inc` states and proves this bound by counting
+distinct finite observation profiles. This proof requires finite α, a fixed
+update U, and a fixed observer K; no new inputs are introduced after time zero.
+The bound is not counted as verified until its exact commit passes Lean CI.
 
 ## Verification
 
-Added to `tools/verify_main_result.py` and `tools/verify.py`.
+Both new source files are registered in `tools/verify_main_result.py` and `tools/verify.py`.
+The independent `tools/check_future_observation.py` enumerates all deterministic
+pairs of update/observation maps on up to four labelled states (65,536
+models at N=4) to test the finite cutoff.
 Full integrated verification entry point:
 
 ```sh
