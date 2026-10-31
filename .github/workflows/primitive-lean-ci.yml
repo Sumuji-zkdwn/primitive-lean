@@ -58,6 +58,7 @@ jobs:
           python -B -X utf8 tools/check_e_wfs_fenchel.py
           python -B -X utf8 tools/check_e_wfs_future_bridge.py
           python -B -X utf8 tools/check_temporal_sampling.py
+          python -B -X utf8 tools/check_wfs_mobius_fourier.py
 
       - name: Run full proof-only Lean integration and axiom audit
         shell: bash
