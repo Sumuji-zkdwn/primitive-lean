@@ -131,7 +131,10 @@ theorem real_twiceIdentity_rank :
   have h : (twiceIdentity.map (Int.castRingHom ℝ)) =
       Matrix.diagonal (fun _ : Fin 12 => (2 : ℝ)) := by
     ext i j
-    simp [twiceIdentity]
+    by_cases hij : i = j
+    · subst j
+      simp [twiceIdentity]
+    · simp [twiceIdentity, hij]
   rw [h, Matrix.rank_diagonal]
   simp
 
