@@ -139,14 +139,18 @@ theorem globalDiagonal_rank_twelve (t : ℝ) (ht : t = 1 ∨ t = -1) :
 /-- The row and column elimination matrices have nonzero determinant. -/
 theorem globalBlocks_rank_eq_diagonal (t : ℝ) :
     (globalBlocks t).rank = (Matrix.diagonal (globalDiagonal t)).rank := by
-  have hL : (globalLeft t).det ≠ 0 := by rw [globalLeft_det]; norm_num
-  have hR : (globalRight t).det ≠ 0 := by rw [globalRight_det]; norm_num
+  have hL : IsUnit (globalLeft t).det := by
+    rw [globalLeft_det]
+    exact isUnit_one
+  have hR : IsUnit (globalRight t).det := by
+    rw [globalRight_det]
+    exact isUnit_one
   have hchange :
       (globalLeft t * globalBlocks t * globalRight t).rank =
       (globalBlocks t).rank := by
-    rw [Matrix.rank_mul_eq_left_of_det_ne_zero (globalRight t)
+    rw [Matrix.rank_mul_eq_left_of_isUnit_det (globalRight t)
           (globalLeft t * globalBlocks t) hR]
-    exact Matrix.rank_mul_eq_right_of_det_ne_zero
+    exact Matrix.rank_mul_eq_right_of_isUnit_det
       (globalLeft t) (globalBlocks t) hL
   rw [global_diagonalization] at hchange
   exact hchange.symm
@@ -156,6 +160,8 @@ each of t=+1 and t=-1. -/
 theorem full_rank_twelve (t : ℝ) (ht : t = 1 ∨ t = -1) :
     (leftMatrix t).rank = 12 := by
   have h := Matrix.rank_submatrix (leftMatrix t) rowEquiv colEquiv
+  change ((leftMatrix t).submatrix rowOrder colOrder).rank =
+    (leftMatrix t).rank at h
   rw [full_block_decomposition] at h
   exact h.symm.trans
     ((globalBlocks_rank_eq_diagonal t).trans (globalDiagonal_rank_twelve t ht))
@@ -169,7 +175,10 @@ theorem full_rank_sixteen (t : ℝ) (ht : t ≠ 1 ∧ t ≠ -1) :
     rcases (full_determinant_zero_iff t).mp h with h1 | h2
     · exact ht.1 h1
     · exact ht.2 h2
-  simpa using Matrix.rank_of_det_ne_zero hd
+  have hu : IsUnit (leftMatrix t).det := isUnit_iff_ne_zero.mpr hd
+  have hm : IsUnit (leftMatrix t) :=
+    ((leftMatrix t).isUnit_iff_isUnit_det).2 hu
+  simpa using Matrix.rank_of_isUnit (leftMatrix t) hm
 
 /-- Complete real rank classification of this exact F16 left pencil. -/
 theorem full_rank_classification (t : ℝ) :
@@ -177,7 +186,7 @@ theorem full_rank_classification (t : ℝ) :
   split_ifs with h
   · exact full_rank_twelve t h
   · exact full_rank_sixteen t (by
-      push_neg at h
+      simp only [not_or] at h
       exact h)
 
 end LinearInputF16FullRank
