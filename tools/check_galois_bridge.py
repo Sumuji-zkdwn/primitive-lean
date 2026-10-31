@@ -36,8 +36,8 @@ def check_critical_reflections():
             for k in range(m):
                 zero_same = j == k or j + k == m
                 pi_same = j == k or j + k + 1 == m
-                assert zero_same == (zero(j) == zero(k) or j == zero(k))
-                assert pi_same == (pi(j) == pi(k) or j == pi(k))
+                assert zero_same == (j == k or j == zero(k))
+                assert pi_same == (j == k or j == pi(k))
 
 
 if __name__ == "__main__":
