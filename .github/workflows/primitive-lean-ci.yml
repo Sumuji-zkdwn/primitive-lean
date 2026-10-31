@@ -56,6 +56,7 @@ jobs:
           set -euo pipefail
           python -B -X utf8 tools/check_galois_bridge.py
           python -B -X utf8 tools/check_future_observation.py
+          python -B -X utf8 tools/check_energy_gauge_fenchel.py
 
       - name: Run full proof-only Lean integration and axiom audit
         shell: bash
