@@ -1,0 +1,43 @@
+name: ARC3 actual Lean PPO integration
+on:
+  push:
+    branches: [chatgpt/arc3-linux-runtime-20261031]
+    paths: [.github/workflows/arc3-runtime-integration.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  actual-integration:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Retrieve and check already built runtime
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir delivery
+          gh run download 41166841892 --repo "$GITHUB_REPOSITORY" --name arc3-lean-runtime-linux-x86_64 --dir delivery
+          cd delivery
+          sha256sum -c arc3-lean-runtime-linux-x86_64.tar.gz.sha256
+          tar -xzf arc3-lean-runtime-linux-x86_64.tar.gz
+      - name: Install CPU test dependencies
+        run: |
+          python -m pip install --no-index --find-links delivery/arc3-lean-runtime/wheelhouse 'optuna==4.5.0' 'numpy==2.2.6'
+          python -m pip install 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+      - name: Exact v3 source hash and actual learning test
+        run: |
+          python tools/arc3_runtime/v3/check_actual.py delivery/arc3-lean-runtime integration-evidence
+      - name: Save results and actual protocol
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: arc3-actual-integration-evidence
+          path: integration-evidence
+          retention-days: 14
+          if-no-files-found: error
