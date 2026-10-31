@@ -8,8 +8,9 @@ response law from the primitive elastica energy.  The lift is on
 homogeneous coordinate pairs, not a constructed projective quotient.
 Its invertibility ensures that it descends to the projective line.
 
-For the sampling theorem, the state is the *fully observed* cyclic group
-ZMod m and m > 0.  Additional non-injective sensors need separate hypotheses.
+For the sampling theorem, x is an unknown *rotation increment* in the
+fully observed cyclic group ZMod m (m > 0); it is not the current phase of
+a trajectory. Additional non-injective sensors need separate hypotheses.
 -/
 
 namespace LinearInputWFSObservation
@@ -113,7 +114,7 @@ theorem four_state_one_step_separates :
 def samplePair (m d e : ℕ) (x : ZMod m) : ZMod m × ZMod m :=
   (sample m d x, sample m e x)
 
-/-- Two individually lossy samplers jointly identify every six-state phase. -/
+/-- Two individually lossy samplers jointly identify every six-state rotation increment. -/
 theorem six_state_two_three_joint_injective :
     Function.Injective (samplePair 6 2 3) := by
   decide
