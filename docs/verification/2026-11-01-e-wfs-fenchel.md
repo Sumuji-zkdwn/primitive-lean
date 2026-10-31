@@ -57,6 +57,24 @@ This establishes non-equivalence of pairings even though the gauge
 itself is injective. It does not prove a universal noncommutation statement
 for all E or all WFS parameters.
 
+## Canonical WFS lift: a second, compatible construction
+
+On positive intensities r, the p=2 gauge has z=(r²-1)/2 and dz=r dr.
+Transforming the conjugate variable to xi=u/r yields
+xi dz=u dr, so the cotangent lift is canonical (determinant 1).
+The physical E coupling is exactly
+ur=xi*(2z+1), **not** xi*z. A new Legendre-Fenchel conjugate
+which treats xi as a fixed dual variable is therefore a genuinely
+different operation. At fixed physical u, the transformed xi=u/r is
+state-dependent.
+
+For Fechner p=0, z=log r and the corresponding momentum coefficient is
+xi=r*u, giving xi*(dr/r)=u dr. The first-jet and differential identities
+are kept separate from geometric symplectic claims in higher dimensions.
+
+Module: \`WFSCanonicalLift.inc\`. No general WFS p-family differentiability
+or global contact-geometric equivalence is asserted.
+
 ## Verification and limits
 
 New registered supplemental proof source: \`EWFSFenchel.inc\`.
