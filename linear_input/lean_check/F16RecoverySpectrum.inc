@@ -126,12 +126,7 @@ theorem blockDet_formula (a : Fin 8) (t : ℤ) :
   obtain ⟨ha, hb⟩ := block_coefficients a
   unfold blockDet
   rw [ha, hb]
-  by_cases hlow : a.val < 4
-  · by_cases h03 : a.val = 0 ∨ a.val = 3
-    · simp [hlow, h03] <;> ring
-    · simp [hlow, h03] <;> ring
-  · have h03 : ¬(a.val = 0 ∨ a.val = 3) := by omega
-    simp [hlow, h03] <;> ring
+  fin_cases a <;> norm_num <;> ring
 
 /-- The four blocks with indices 4..7 become singular exactly at t = plus or minus1
 when t is an integer. -/
