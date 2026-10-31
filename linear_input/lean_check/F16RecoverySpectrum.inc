@@ -117,7 +117,7 @@ def blockDet (a : Fin 8) (t : ℤ) : ℤ :=
   eps (3 : Fin 16) (low a) * eps (3 : Fin 16) (partnerIndex a) -
     (eps (10 : Fin 16) (low a) * eps (10 : Fin 16) (partnerIndex a)) * t ^ 2
 
-/-- Four blocks are +/- (1+t²); four are (1-t²). -/
+/-- Four blocks are plus or minus (1+t²); four are (1-t²). -/
 theorem blockDet_formula (a : Fin 8) (t : ℤ) :
     blockDet a t =
       (if a.val < 4 then
@@ -133,7 +133,7 @@ theorem blockDet_formula (a : Fin 8) (t : ℤ) :
   · have h03 : ¬(a.val = 0 ∨ a.val = 3) := by omega
     simp [hlow, h03] <;> ring
 
-/-- The four blocks with indices 4..7 become singular exactly at t = +/-1
+/-- The four blocks with indices 4..7 become singular exactly at t = plus or minus1
 when t is an integer. -/
 theorem blockDet_at_plus_one (a : Fin 8) :
     blockDet a 1 = 0 ↔ 4 ≤ a.val := by
