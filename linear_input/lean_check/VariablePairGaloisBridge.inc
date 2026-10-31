@@ -179,13 +179,14 @@ theorem signedEnergy_flipX (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :
     signedEnergy (flipX σ) k lam a c x y u =
       signedEnergy σ k lam a c (-x) y u := by
   rw [signedEnergy_expansion, signedEnergy_expansion]
-  simp [flipX, signValue_not] <;> first | ring | tauto
+  simp [flipX, signValue_not]
+  tauto
 
 theorem signedEnergy_flipY (σ : Fin 5 → Bool) (k lam a c x y u : ℝ) :
     signedEnergy (flipY σ) k lam a c x y u =
       signedEnergy σ k lam a c x (-y) u := by
   rw [signedEnergy_expansion, signedEnergy_expansion]
-  simp [flipY, signValue_not] <;> ring
+  simp [flipY, signValue_not]
 
 theorem flipX_involutive (σ : Fin 5 → Bool) : flipX (flipX σ) = σ := by
   funext i
