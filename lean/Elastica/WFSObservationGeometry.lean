@@ -55,7 +55,8 @@ theorem sampleKernel_iff_gcd_zero (m : ℕ) (ds : Finset ℕ) (x : ZMod m) :
 
 /-- Number of elements in the finite cyclic sampling kernel. -/
 def sampleKernelCard (m : ℕ) [NeZero m] (ds : Finset ℕ) : ℕ :=
-  (Finset.univ.filter (fun x : ZMod m => sampleKernel m ds x)).card
+  (Finset.univ.filter (fun x : ZMod m =>
+    (ds.filter (fun d => sample m d x ≠ 0)).card = 0)).card
 
 /-- Two samples together eliminate the kernel in the six-state example. -/
 theorem sampleKernelCard_six_two_three :
