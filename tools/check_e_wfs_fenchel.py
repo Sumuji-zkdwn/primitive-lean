@@ -47,6 +47,13 @@ def main():
     assert all((r - V(r)) <= half for r in positive)
     assert Fraction(1) - V(Fraction(1)) == half
     assert all(wfs2(r) - V(r) == -half for r in positive)
+    for r, u in product(positive, values):
+        z = wfs2(r)
+        xi = u / r
+        assert xi * r == u  # xi dz=u dr because dz/dr=r
+        assert xi * (2 * z + 1) == u * r
+        assert r * (1 / r) == 1
+
     assert all(abs(exp(log(float(r))) - float(r)) < 1e-12
                for r in positive)
 
