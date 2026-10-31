@@ -56,7 +56,9 @@ def rowEquiv : BlockIndex ≃ Fin 16 where
 
 /-- The row/column reordering is even, hence leaves the full determinant unchanged. -/
 theorem reindex_sign_one :
-    Equiv.Perm.sign (colEquiv.symm.trans rowEquiv) = 1 := by decide
+    Equiv.Perm.sign (colEquiv.symm.trans rowEquiv) = 1 := by
+  rw [Equiv.Perm.sign_eq_prod_prod_Iio]
+  decide
 
 /-- Entry of left multiplication by a single signed basis vector. -/
 def leftEntry (e row col : Fin 16) : ℤ :=
