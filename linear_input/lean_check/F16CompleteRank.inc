@@ -28,7 +28,7 @@ theorem realPencilAll_of_int (t : ℤ) :
   ext i j
   simp only [realPencilAll, LinearInputF16Rank.realPencil,
     LinearInputF16Rank.intPencil, Matrix.of_apply, Matrix.map_apply,
-    entryThree, entryTen, Int.cast_add, Int.cast_mul]
+    entryThree, entryTen, map_add, map_mul]
 
 /-- Transport the previous rank-12 certificate to the real pencil at +1. -/
 theorem rank_at_plus_one : (realPencilAll 1).rank = 12 := by
@@ -77,7 +77,10 @@ theorem rank_regular (t : ℝ) (ht : t ≠ 1 ∧ t ≠ -1) :
     rcases (det_zero_iff t).mp hz with hpos | hneg
     · exact ht.1 hpos
     · exact ht.2 hneg
-  simpa using (Matrix.rank_of_det_ne_zero hdet)
+  have hunitDet : IsUnit (realPencilAll t).det := isUnit_iff_ne_zero.mpr hdet
+  have hunit : IsUnit (realPencilAll t) :=
+    (Matrix.isUnit_iff_isUnit_det _).mpr hunitDet
+  simpa using (Matrix.rank_of_isUnit (realPencilAll t) hunit)
 
 /-- COMPLETE RANK CLASSIFICATION for every real parameter. -/
 theorem rank_classification (t : ℝ) :
@@ -113,6 +116,6 @@ theorem rank_sixteen_iff (t : ℝ) :
         exact ht (Or.inl hpos)
       · intro hneg
         exact ht (Or.inr hneg)
-    simp [ht, hpair]
+    simp [hpair]
 
 end LinearInputF16CompleteRank
