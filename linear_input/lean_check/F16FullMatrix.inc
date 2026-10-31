@@ -165,8 +165,18 @@ theorem localBlock_det (a : Fin 8) (t : ℝ) :
     ring
   rw [hformula]
   obtain ⟨h3, h10⟩ := block_coefficients a
-  have hp := congrArg (fun x : ℤ => (x : ℝ)) h3
-  have hq := congrArg (fun x : ℤ => (x : ℝ)) h10
+  have hp :
+      (((eps (3 : Fin 16) (low a) *
+        eps (3 : Fin 16) (partnerIndex a) : ℤ) : ℝ)) =
+      (if a.val = 0 ∨ a.val = 3 then (-1 : ℝ) else 1) := by
+    exact_mod_cast h3
+  have hq :
+      (((eps (10 : Fin 16) (low a) *
+        eps (10 : Fin 16) (partnerIndex a) : ℤ) : ℝ)) =
+      (if a.val < 4 then
+        (if a.val = 0 ∨ a.val = 3 then (1 : ℝ) else -1)
+       else 1) := by
+    exact_mod_cast h10
   rw [hp, hq]
   by_cases hlo : a.val < 4
   · by_cases h03 : a.val = 0 ∨ a.val = 3
