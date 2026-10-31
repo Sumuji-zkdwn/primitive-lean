@@ -34,35 +34,47 @@ abbrev kummerAdjoinRoot {K : Type*} [Field K] (n : ℕ) (a : K) : Type _ :=
 /-- The field of the Kummer root and the splitting field agree as splitting
 extensions when the binomial is irreducible and primitive roots exist. -/
 theorem kummerAdjoinRoot_isSplittingField {K : Type*} [Field K]
-    {n : ℕ} {a : K} [Fact (Irreducible (kummerPoly n a))]
+    {n : ℕ} [NeZero n] {a : K} [Fact (Irreducible (kummerPoly n a))]
     {ζ : K} (hζ : IsPrimitiveRoot ζ n) :
     Polynomial.IsSplittingField K (kummerAdjoinRoot n a) (kummerPoly n a) := by
+  have hn : 0 < n := Nat.pos_of_ne_zero (NeZero.ne n)
   exact isSplittingField_AdjoinRoot_X_pow_sub_C
-    (show (primitiveRoots n K).Nonempty from ⟨ζ, hζ⟩) (Fact.out : Irreducible (kummerPoly n a))
+    (show (primitiveRoots n K).Nonempty from
+      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) (Fact.out : Irreducible (kummerPoly n a))
 
 /-- Genuine field-automorphism group: Gal(Split(X^n-a)/K) ≃ Z/nZ,
 given an irreducible binomial and a primitive root in K. -/
 noncomputable def kummerGaloisEquiv {K : Type*} [Field K]
     {n : ℕ} [NeZero n] {a ζ : K}
     (hζ : IsPrimitiveRoot ζ n) (hirr : Irreducible (kummerPoly n a)) :
-    (kummerPoly n a).Gal ≃* Multiplicative (ZMod n) := by
+    (kummerField n a ≃ₐ[K] kummerField n a) ≃* Multiplicative (ZMod n) := by
+  letI : Polynomial.IsSplittingField K (kummerField n a) (kummerPoly n a) :=
+    Polynomial.IsSplittingField.splittingField (kummerPoly n a)
   exact autEquivZmod hirr (kummerField n a) hζ
 
 /-- A Kummer extension with primitive roots in the base is Galois. -/
 theorem kummer_isGalois {K : Type*} [Field K]
-    {n : ℕ} {a ζ : K}
+    {n : ℕ} [NeZero n] {a ζ : K}
     (hζ : IsPrimitiveRoot ζ n) (hirr : Irreducible (kummerPoly n a)) :
     IsGalois K (kummerField n a) := by
+  have hn : 0 < n := Nat.pos_of_ne_zero (NeZero.ne n)
+  letI : Polynomial.IsSplittingField K (kummerField n a) (kummerPoly n a) :=
+    Polynomial.IsSplittingField.splittingField (kummerPoly n a)
   exact isGalois_of_isSplittingField_X_pow_sub_C
-    (show (primitiveRoots n K).Nonempty from ⟨ζ, hζ⟩) hirr (kummerField n a)
+    (show (primitiveRoots n K).Nonempty from
+      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) hirr (kummerField n a)
 
 /-- The degree of this actual extension equals n. -/
 theorem kummer_finrank {K : Type*} [Field K]
-    {n : ℕ} {a ζ : K}
+    {n : ℕ} [NeZero n] {a ζ : K}
     (hζ : IsPrimitiveRoot ζ n) (hirr : Irreducible (kummerPoly n a)) :
     Module.finrank K (kummerField n a) = n := by
+  have hn : 0 < n := Nat.pos_of_ne_zero (NeZero.ne n)
+  letI : Polynomial.IsSplittingField K (kummerField n a) (kummerPoly n a) :=
+    Polynomial.IsSplittingField.splittingField (kummerPoly n a)
   exact finrank_of_isSplittingField_X_pow_sub_C
-    (show (primitiveRoots n K).Nonempty from ⟨ζ, hζ⟩) hirr (kummerField n a)
+    (show (primitiveRoots n K).Nonempty from
+      ⟨ζ, (mem_primitiveRoots hn).2 hζ⟩) hirr (kummerField n a)
 
 /-- The action on root indices by rotations and reflections. The sign
 convention matches mathlib's DihedralGroup.r/sr multiplication rules. -/
@@ -78,7 +90,8 @@ theorem labelAction_reflection (n : ℕ) (a j : ZMod n) :
 
 theorem labelAction_one (n : ℕ) (j : ZMod n) :
     labelAction n 1 j = j := by
-  simp [DihedralGroup.one_def, labelAction]
+  rw [DihedralGroup.one_def]
+  simp only [labelAction, add_zero]
 
 theorem labelAction_mul (n : ℕ) (g h : DihedralGroup n) (j : ZMod n) :
     labelAction n (g * h) j = labelAction n g (labelAction n h j) := by
@@ -96,7 +109,6 @@ theorem labelAction_mul (n : ℕ) (g h : DihedralGroup n) (j : ZMod n) :
 theorem labelAction_reflection_involutive (n : ℕ) (a j : ZMod n) :
     labelAction n (.sr a) (labelAction n (.sr a) j) = j := by
   simp [labelAction]
-  ring
 
 /-- The rotation subgroup is the cyclic group of size n; the dihedral
 permutation structure has exactly 2n group elements for finite n. -/
@@ -134,7 +146,8 @@ noncomputable def chebyshevUpperGalEquiv {K : Type*} [Field K]
     {ζ : quadraticField y}
     (hζ : IsPrimitiveRoot ζ n)
     (hirr : Irreducible (kummerPoly n (quadraticGenerator y))) :
-    (kummerPoly n (quadraticGenerator y)).Gal ≃* Multiplicative (ZMod n) :=
+    (chebyshevKummerTower n y ≃ₐ[quadraticField y] chebyshevKummerTower n y) ≃*
+      Multiplicative (ZMod n) :=
   kummerGaloisEquiv hζ hirr
 
 end LinearInputKummerDihedral
