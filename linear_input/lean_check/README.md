@@ -1,5 +1,7 @@
 # 線形入力と接続のLean証明
 
+**2026-10-31 最新の統合検証:** 円分根・クンマー型冪根ラベル・チェビシェフ逆像の `GaloisChebyshev.inc`（6定義・13定理）を第15追補として登録。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Leanの `--trust=0` と全880宣言の公理監査が成功、**746定理・880宣言**、許可外公理・警告なし。PR #5からPR #3ブランチへマージ済み。詳細・SHA-256は[今回の検証記録](../../docs/verification/2026-10-31-galois-chebyshev.md)。以下の733定理・861宣言などは旧段階の記録です。
+
 **後続検査:** 下記の未検査記録の後、名前空間の修正を含む作業コピーで733定理・861宣言の検査が成功した。[修正と検査記録](../../docs/verification/2026-10-30-five-state-followup.md)を参照。下記は当時の状態を保持する。
 
 **状態追記（2026-10-30、PR #3）:** `F0MergeChains.inc` に、Fin 5 上の `q₀…q₄、その非空ファイバーサイズ、各段階のK/S/C実現を追加しました（16定理・9定義）。既存717定理・836宣言の検証はコミット `185a1713f2fca219e5f9fb1c5aa11955925cb97f` までの状態を対象とし、この追補は含みません。今回の実行環境には `lake` / `lean` がなく、追加分のLean検査は未実施です。現ブランチの全体検証結果としては扱わず、Windowsで `python -B -X utf8 tools/verify.py --proof-only` を再実行してください。
