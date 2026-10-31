@@ -41,15 +41,17 @@ theorem future_step {α ω : Type*} {K : α → ω} {U : α → α}
     {x y : α} (h : FutureEq K U x y) :
     FutureEq K U (U x) (U y) := by
   intro t
-  simpa only [Function.iterate_succ_apply'] using h (t + 1)
+  simpa only [Function.iterate_succ_apply] using h (t + 1)
 
 /-- The canonical equivalence relation on input states. -/
 def futureSetoid {α ω : Type*} (K : α → ω) (U : α → α) : Setoid α where
   r := FutureEq K U
-  iseqv := ⟨future_refl K U, (fun _ _ => future_symm), (fun _ _ _ => future_trans)⟩
+  iseqv := ⟨(fun x => future_refl K U x),
+    (fun _ _ h => future_symm h),
+    (fun _ _ _ hxy hyz => future_trans hxy hyz)⟩
 
 /-- Minimal predictive states, defined as future-observation classes. -/
-abbrev State {α ω : Type*} (K : α → ω) (U : α → α) : Type* :=
+abbrev State {α ω : Type*} (K : α → ω) (U : α → α) :=
   Quotient (futureSetoid K U)
 
 def encode {α ω : Type*} (K : α → ω) (U : α → α) (x : α) : State K U :=
@@ -92,9 +94,9 @@ theorem representation_iterate {α β : Type*}
   | zero => rfl
   | succ t ih =>
     calc
-      f (U^[t + 1] x) = f (U^[t] (U x)) := by rw [Function.iterate_succ_apply']
-      _ = V^[t] (f (U x)) := ih (U x)
-      _ = V^[t] (V (f x)) := by rw [hf x]
+      f (U^[t + 1] x) = f (U (U^[t] x)) := by rw [Function.iterate_succ_apply']
+      _ = V (f (U^[t] x)) := hf _
+      _ = V (V^[t] (f x)) := congrArg V (ih x)
       _ = V^[t + 1] (f x) := by rw [Function.iterate_succ_apply']
 
 /-- Any two states merged by a correct deterministic representation
@@ -163,9 +165,9 @@ theorem commute_iterates {α : Type*} (U M : α → α)
   | zero => rfl
   | succ t ih =>
     calc
-      U^[t + 1] (M x) = U^[t] (U (M x)) := by rw [Function.iterate_succ_apply']
-      _ = U^[t] (M (U x)) := by rw [h x]
-      _ = M (U^[t] (U x)) := ih (U x)
+      U^[t + 1] (M x) = U (U^[t] (M x)) := by rw [Function.iterate_succ_apply']
+      _ = U (M (U^[t] x)) := congrArg U (ih x)
+      _ = M (U (U^[t] x)) := h _
       _ = M (U^[t + 1] x) := by rw [Function.iterate_succ_apply']
 
 /-- An observation-invisible symmetry commutes with compression to
