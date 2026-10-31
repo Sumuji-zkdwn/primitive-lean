@@ -105,6 +105,9 @@ theorem observedRight_compatible_iff (b : Fin 16) :
     LinearInputF0.Compatible forgetSigned
       (fun s (_ : Fin 1) => observedRight b s) ↔
         (b.val = 0 ∨ 9 ≤ b.val) := by
+  change (∀ s : Bool × Fin 16, ∀ _ : Fin 1,
+    observedRight b (forgetSigned s) = forgetSigned (observedRight b s)) ↔
+      (b.val = 0 ∨ 9 ≤ b.val)
   fin_cases b <;> decide
 
 end LinearInputF16Holonomy
