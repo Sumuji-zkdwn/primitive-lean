@@ -127,6 +127,7 @@ def verify_lean(rebuild):
         "EWFSFutureBridge": "Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient",
         "F16RecoverySpectrum": "Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input",
         "TemporalSampling": "General observation schedules, exact stride-sampling iff one-step congruence, phase reconstruction, and E-rotation even-time aliasing with positive WFS gauge",
+        "WFSMobiusFourier": "WFS p=2 positive-intensity Möbius involution induced by two E rotation steps and exact four-phase first Fourier coefficient with even-sample aliasing",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
