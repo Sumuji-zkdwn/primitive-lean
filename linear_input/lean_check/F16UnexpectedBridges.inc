@@ -52,10 +52,23 @@ t-independent invertible row-sign gauge. -/
 theorem normalized_block_formula (a : Fin 8) (t : ℝ) (i j : Fin 2) :
     normalizedBlock a t i j =
       (if i = j then (1 : ℝ) else 0) + t * generatorEntry a i j := by
-  fin_cases a <;> fin_cases i <;> fin_cases j <;>
-    norm_num [normalizedBlock, generatorEntry, signedUpper, signedLower,
-      block, blockThree, blockTen, eps, epsTable, low, partnerIndex] <;>
-    ring <;> norm_num [Nat.xor]
+  -- Prove the finite sign units in integers before casting to the reals.
+  -- This keeps Nat.xor out of the real polynomial normalizer.
+  have hlow (b : Fin 8) :
+      (eps (3 : Fin 16) (low b) : ℝ) ^ 2 = 1 := by
+    have h : (eps (3 : Fin 16) (low b)) ^ 2 = (1 : ℤ) := by
+      fin_cases b <;> decide
+    exact_mod_cast h
+  have hhigh (b : Fin 8) :
+      (eps (3 : Fin 16) (partnerIndex b) : ℝ) ^ 2 = 1 := by
+    have h : (eps (3 : Fin 16) (partnerIndex b)) ^ 2 = (1 : ℤ) := by
+      fin_cases b <;> decide
+    exact_mod_cast h
+  fin_cases i <;> fin_cases j
+  all_goals
+    simp [normalizedBlock, generatorEntry, signedUpper, signedLower,
+      block, blockThree, blockTen]
+    all_goals nlinarith [hlow a, hhigh a]
 
 /-- The normalized generator acting on an abstract two-dimensional pair. -/
 def signedAction (a : Fin 8) (z : ℝ × ℝ) : ℝ × ℝ :=
@@ -111,7 +124,7 @@ theorem reflection_gauge (z : ℝ × ℝ) :
     diagonalGauge (signedAction 5 z) = diagonalReflection (diagonalGauge z) := by
   rw [reflection_sample]
   rcases z with ⟨x, y⟩
-  simp [diagonalGauge, diagonalReflection] <;> ring
+  simp [diagonalGauge, diagonalReflection]; ring
 
 /-- Genuine F16 determinant expressed through the *existing* cubic
 discriminant, not an identification of the two dynamical systems. -/
@@ -140,7 +153,7 @@ theorem opposite_probe_sum :
     realPencilAll 1 + realPencilAll (-1) =
       (2 : ℝ) • realPencilAll 0 := by
   ext i j
-  simp [realPencilAll] <;> ring
+  simp [realPencilAll]; ring
 
 theorem zero_probe_isUnit : IsUnit (realPencilAll 0) := by
   have hd : (realPencilAll 0).det ≠ 0 := by
@@ -161,8 +174,7 @@ theorem opposite_probe_joint_injective :
   have hsum :
       (realPencilAll 1 + realPencilAll (-1)).mulVec v =
         (realPencilAll 1 + realPencilAll (-1)).mulVec w := by
-    rw [Matrix.add_mulVec, Matrix.add_mulVec]
-    exact congrArg2 (· + ·) hp hm
+    rw [Matrix.add_mulVec, Matrix.add_mulVec, hp, hm]
   have hscaled :
       (2 : ℝ) • (realPencilAll 0).mulVec v =
         (2 : ℝ) • (realPencilAll 0).mulVec w := by
