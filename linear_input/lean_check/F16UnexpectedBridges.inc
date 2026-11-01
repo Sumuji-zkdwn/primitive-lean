@@ -54,7 +54,8 @@ theorem normalized_block_formula (a : Fin 8) (t : ℝ) (i j : Fin 2) :
       (if i = j then (1 : ℝ) else 0) + t * generatorEntry a i j := by
   fin_cases a <;> fin_cases i <;> fin_cases j <;>
     norm_num [normalizedBlock, generatorEntry, signedUpper, signedLower,
-      block, blockThree, blockTen, eps, epsTable, low, partnerIndex] <;> ring
+      block, blockThree, blockTen, eps, epsTable, low, partnerIndex] <;>
+    ring <;> norm_num [Nat.xor]
 
 /-- The normalized generator acting on an abstract two-dimensional pair. -/
 def signedAction (a : Fin 8) (z : ℝ × ℝ) : ℝ × ℝ :=
@@ -110,8 +111,7 @@ theorem reflection_gauge (z : ℝ × ℝ) :
     diagonalGauge (signedAction 5 z) = diagonalReflection (diagonalGauge z) := by
   rw [reflection_sample]
   rcases z with ⟨x, y⟩
-  simp [diagonalGauge, diagonalReflection]
-  ring
+  simp [diagonalGauge, diagonalReflection] <;> ring
 
 /-- Genuine F16 determinant expressed through the *existing* cubic
 discriminant, not an identification of the two dynamical systems. -/
@@ -135,13 +135,12 @@ theorem resolvent_cubic_discriminants (t : ℝ) :
   ring
 
 /-- Average of opposite parameter probes recovers the invertible t=0
-left action, although both +/-1 actions are individually rank deficient. -/
+left action, although the plus-one and minus-one actions are individually rank deficient. -/
 theorem opposite_probe_sum :
     realPencilAll 1 + realPencilAll (-1) =
       (2 : ℝ) • realPencilAll 0 := by
   ext i j
-  simp [realPencilAll]
-  ring
+  simp [realPencilAll] <;> ring
 
 theorem zero_probe_isUnit : IsUnit (realPencilAll 0) := by
   have hd : (realPencilAll 0).det ≠ 0 := by
