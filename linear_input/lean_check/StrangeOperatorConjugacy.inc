@@ -302,8 +302,7 @@ theorem spike_breaks_fiber_iff {α : Type u}
     BreaksFiber (Spike c a) (Spike c b) ↔ a ≠ b := by
   classical
   constructor
-  · intro h
-    intro hab
+  · intro h hab
     subst b
     have hn : ¬ BreaksFiber (Spike c a) (Spike c a) :=
       commuting_does_not_break
