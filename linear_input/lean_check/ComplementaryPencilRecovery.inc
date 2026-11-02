@@ -56,8 +56,8 @@ theorem negative_probe (B C : Matrix n n K) (v : n → K) :
     (pencil B C (-1)).mulVec v = B.mulVec v - C.mulVec v := by
   rw [pencil_neg, Matrix.sub_mulVec]
 
-/-- The average isolates the constant coefficient B. -/
 omit [DecidableEq n] in
+/-- The average isolates the constant coefficient B. -/
 theorem probe_average (B C : Matrix n n K) (h2 : (2 : K) ≠ 0) (v : n → K) :
     (1 / 2 : K) •
         ((pencil B C 1).mulVec v + (pencil B C (-1)).mulVec v) =
@@ -67,8 +67,8 @@ theorem probe_average (B C : Matrix n n K) (h2 : (2 : K) ≠ 0) (v : n → K) :
   simp only [Pi.smul_apply, Pi.add_apply, Pi.sub_apply, smul_eq_mul]
   field_simp [h2]; ring
 
-/-- The half difference isolates the parameter coefficient C. -/
 omit [DecidableEq n] in
+/-- The half difference isolates the parameter coefficient C. -/
 theorem probe_difference (B C : Matrix n n K) (h2 : (2 : K) ≠ 0)
     (v : n → K) :
     (1 / 2 : K) •
@@ -153,9 +153,9 @@ theorem unique_state (B C D : Matrix n n K) (h2 : (2 : K) ≠ 0)
     v = decode D (observe B C v) := (decode_observe B C D h2 hDB v).symm
     _ = decode D y := congrArg (decode D) hv
 
+omit [DecidableEq n] in
 /-- The two observation kernels intersect in precisely the common kernel
 of B and C.  This statement does not require B to be invertible. -/
-omit [DecidableEq n] in
 theorem joint_kernel_iff (B C : Matrix n n K) (h2 : (2 : K) ≠ 0)
     (v : n → K) :
     ((pencil B C 1).mulVec v = 0 ∧ (pencil B C (-1)).mulVec v = 0) ↔
