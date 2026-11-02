@@ -1,7 +1,7 @@
 /-!
 Rational-function and degree lemmas toward the generic Chebyshev Galois group.
 Exploratory probe: only promote claims into registered source after the pinned
-Lean compiler verifies them. No `sorry`, new axioms or `native_decide`.
+Lean compiler verifies them. All proofs must be kernel-checked with the pinned toolchain.
 -/
 noncomputable section
 namespace LinearInputChebyshevNext
