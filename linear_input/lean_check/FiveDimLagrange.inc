@@ -1462,7 +1462,7 @@ theorem zero_confirmed_horizontal_step
       ((0, 0), ((u1+h*v.1, u2+h*v.2), r)) := by
   apply Prod.ext
   · apply Prod.ext <;>
-      dsimp [horizontalEulerStep, commonDirection] <;> ring
+      dsimp [horizontalEulerStep, commonDirection]
   · apply Prod.ext
     · apply Prod.ext <;>
         dsimp [horizontalEulerStep, commonDirection] <;> ring
