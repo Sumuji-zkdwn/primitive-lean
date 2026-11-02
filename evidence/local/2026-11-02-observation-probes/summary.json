@@ -1,0 +1,50 @@
+{
+  "scope": "Isolated probes, not the final integrated repository audit",
+  "dependency_cache": "existing pinned Lean 4.30.0-rc2/mathlib cache; not a clean build",
+  "pr21_original": {
+    "exit_code": 1,
+    "errors": [
+      "Unknown identifier m"
+    ],
+    "warnings": 1
+  },
+  "pr21_repaired_audit": {
+    "exit_code": 0,
+    "declaration_count": 33,
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "warnings": 1,
+    "remaining_warning": "unused simp argument removed before final adapter check"
+  },
+  "pr21_final_adapter": {
+    "exit_code": 0,
+    "warnings": 0,
+    "imports": "exact integration All.lean import list",
+    "extra_imports_required": [],
+    "axiom_audit": "covered by forthcoming full joint integration check"
+  },
+  "f0_future_bridge": {
+    "exit_code": 0,
+    "warnings": 0,
+    "theorem_count": 6,
+    "allowed_axioms": [
+      "propext",
+      "Quot.sound"
+    ],
+    "probe_scope": "Exact reused F0 definitions, full F0UpdateDescent/FutureObservations modules, additive bridge"
+  },
+  "python": {
+    "idempotent_update_pairs": 10779,
+    "wfs_kernel_image_cases": 20790,
+    "wfs_pseudometric_triples": 66150
+  },
+  "logs": {
+    "wfs21-probe.log": "cd9e4a36cbc654316e88b07b8cc54fcde9b8df734da97937743e384113531da5",
+    "wfs21-fixed-probe.log": "cc830450dd017fb725d95436251f5af497f8e396e22c1b863816fa62fefebde9",
+    "wfs21-final-probe.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "f0future-probe.log": "1278c6c5780b350f788aa0d49b77af591a85a71480aac13617a21ff8d224125d"
+  }
+}

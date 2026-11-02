@@ -1,0 +1,217 @@
+{
+  "files": [
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/EWFSFenchel.inc",
+      "destination_path": "linear_input/lean_check/EWFSFenchel.inc",
+      "sha256": "90c03843306a9b88895a8adacfd0eaf5efa46b002166c2800c387b5f0aef386c",
+      "byte_identical": true,
+      "namespace": "LinearInputEWFSDual"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/WFSCanonicalLift.inc",
+      "destination_path": "linear_input/lean_check/WFSCanonicalLift.inc",
+      "sha256": "af0eb49cdd896e3ccd1564b64b4f52da746637a6b2272fd6504520c573684b10",
+      "byte_identical": true,
+      "namespace": "LinearInputWFSCanonical"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/EWFSFutureBridge.inc",
+      "destination_path": "linear_input/lean_check/EWFSFutureBridge.inc",
+      "sha256": "d0f2142e064841163464a1de14e6e3a646e5f17de230c2a67661ebd788d45af8",
+      "byte_identical": true,
+      "namespace": "LinearInputEWFSFuture"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/FutureObservations.inc",
+      "destination_path": "linear_input/lean_check/FutureObservations.inc",
+      "sha256": "8db780494b6e16fae9985bad1f4e59c456d6ae7b4598c351c86422d1e3fe8329",
+      "byte_identical": true,
+      "namespace": "LinearInputFutureObservation"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/FutureFiniteHorizon.inc",
+      "destination_path": "linear_input/lean_check/FutureFiniteHorizon.inc",
+      "sha256": "9d6e020ae9719ef7008e1b0ee857d7fde39a63dd3714fcd40379b9326cd2195a",
+      "byte_identical": true,
+      "namespace": "LinearInputFutureHorizon"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/TemporalSampling.inc",
+      "destination_path": "linear_input/lean_check/TemporalSampling.inc",
+      "sha256": "945aa518da1efb9bde61e162a2755ad56ff954e3585169e1f5a9436211e3b117",
+      "byte_identical": true,
+      "namespace": "LinearInputTemporalSampling"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "linear_input/lean_check/WFSMobiusFourier.inc",
+      "destination_path": "linear_input/lean_check/WFSMobiusFourier.inc",
+      "sha256": "669cc639499a5da3d0d46e4913b1d6ea3039e03b902e4b0e6ef570fb6ddcb39f",
+      "byte_identical": true,
+      "namespace": "LinearInputWFSMobiusFourier"
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "tools/check_e_wfs_fenchel.py",
+      "destination_path": "tools/check_e_wfs_fenchel.py",
+      "sha256": "0ed1776b7ca7f78ade03c98e77c5941e3f524e6c19007daa8a5dbd8657c3f8c2",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "tools/check_future_observation.py",
+      "destination_path": "tools/check_future_observation.py",
+      "sha256": "b882072f6dff8fadd1d43eab243e5bbcad57260ebcbbc75b5b25830f35f7c5aa",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "tools/check_e_wfs_future_bridge.py",
+      "destination_path": "tools/check_e_wfs_future_bridge.py",
+      "sha256": "2b3f258edc266c9ee196bd6278f3cb39aee12245a283ac3ae08fbfaf839a255b",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "tools/check_temporal_sampling.py",
+      "destination_path": "tools/check_temporal_sampling.py",
+      "sha256": "645d7eb85af614fd090e099ff199d43e2644e129f8b4f1ca80fac4bec102e97d",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "tools/check_wfs_mobius_fourier.py",
+      "destination_path": "tools/check_wfs_mobius_fourier.py",
+      "sha256": "722206d833aa995e92239bfc02a29eb766389d4112a8cf5ea1d504b26bdb7a97",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "docs/verification/2026-11-01-e-wfs-future-bridge.md",
+      "destination_path": "docs/verification/2026-11-01-e-wfs-future-bridge.md",
+      "sha256": "df6bbf73c1f6fde50d9389e82a7f7d7f2d168c6250f86a949f9b49044edb184f",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "docs/verification/2026-11-01-temporal-sampling.md",
+      "destination_path": "docs/verification/2026-11-01-temporal-sampling.md",
+      "sha256": "539fdd9ecf2bfccfd60c1e8e4fc393c134c82aa0087bdfe2e0d6c506c1338824",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 19,
+      "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "source_path": "docs/verification/2026-11-01-wfs-mobius-fourier.md",
+      "destination_path": "docs/verification/2026-11-01-wfs-mobius-fourier.md",
+      "sha256": "159cf2fb960430698da5b6768ece50b54f946dedd01d3e80aebc8b8fa0749b1b",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 9,
+      "source_commit": "80d9209c3c15bddbe90d295d9f586540dd0781e8",
+      "source_path": "docs/verification/2026-11-01-future-observation.md",
+      "destination_path": "docs/verification/2026-11-01-future-observation.md",
+      "sha256": "800e1a5f2885ba85a6612b89221c902ce90eb4a4cdb30b59f5a5a827c3083e77",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 13,
+      "source_commit": "c0970535f2c83d4cf3f9250b606689e29c9bc3bc",
+      "source_path": "docs/verification/2026-11-01-e-wfs-fenchel.md",
+      "destination_path": "docs/verification/2026-11-01-e-wfs-fenchel.md",
+      "sha256": "a4890ceca00ea4e310b33642b32a0b59ab561e9702539b2e418211160392baa3",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 12,
+      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "destination_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
+      "byte_identical": true,
+      "namespace": "LinearInputEnergyGaugeFenchel"
+    },
+    {
+      "source_pr": 12,
+      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "source_path": "tools/check_energy_gauge_fenchel.py",
+      "destination_path": "tools/check_energy_gauge_fenchel.py",
+      "sha256": "ea610d726f739e8615b56fe3330986f52bcfd328b27b9634e3188cd77cf7416c",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 12,
+      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "source_path": "docs/verification/2026-11-01-energy-wfs-fenchel.md",
+      "destination_path": "docs/verification/2026-11-01-energy-wfs-fenchel.md",
+      "sha256": "e2c7b66d5a60a6cfe7c9b07616ff440375eb16fc5f20212b49a4897893171c76",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 7,
+      "source_commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "source_path": "linear_input/lean_check/F0UpdateDescent.inc",
+      "destination_path": "linear_input/lean_check/F0UpdateDescent.inc",
+      "sha256": "616da7fdeb19d9204d965d88c4e43063a0b7663af2c65f4a25e927860093a189",
+      "byte_identical": true,
+      "namespace": "LinearInputF0Descent"
+    },
+    {
+      "source_pr": 7,
+      "source_commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "source_path": "linear_input/lean_check/Rule481Symmetry.inc",
+      "destination_path": "linear_input/lean_check/Rule481Symmetry.inc",
+      "sha256": "23584c6af15b5c22af405bd67bdfeb69c1ec3654176b8903a944418abb5c5d66",
+      "byte_identical": true,
+      "namespace": "LinearInputRule481"
+    },
+    {
+      "source_pr": 7,
+      "source_commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "source_path": "linear_input/lean_check/HannaJetCorrection.inc",
+      "destination_path": "linear_input/lean_check/HannaJetCorrection.inc",
+      "sha256": "c7265fbeab4f7084050979eb23a6c2f85df448a0978738a662c961d35f9e6482",
+      "byte_identical": true,
+      "namespace": "LinearInputHannaJets"
+    },
+    {
+      "source_pr": 7,
+      "source_commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "source_path": "tools/check_f0_dynamics.py",
+      "destination_path": "tools/check_f0_dynamics.py",
+      "sha256": "d3d69ec332567fe48d90f3ccd7bacd06474f934bbb47ff234a0b5afc2b718643",
+      "byte_identical": true
+    },
+    {
+      "source_pr": 7,
+      "source_commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "source_path": "docs/verification/2026-10-31-f0-descent-rule481-hanna.md",
+      "destination_path": "docs/verification/2026-10-31-f0-descent-rule481-hanna.md",
+      "sha256": "0ee87a5378d0d9afa8025c71331f2dce3e7bb2df49154daf391e8496b2af03e2",
+      "byte_identical": true
+    }
+  ],
+  "source_branches_preserved": true,
+  "integration_note": "The PR #19 stack retains the #9/#13/#15/#17 declarations byte for byte. Original verification documents remain historical claims for their pinned commits. This manifest establishes content provenance, not a new joint Lean result."
+}

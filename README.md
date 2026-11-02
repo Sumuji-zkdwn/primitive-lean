@@ -1,5 +1,9 @@
 # primitive-lean
 
+**2026-11-02 統合版:** [18件の PR の統合範囲・修正・拡張・再実行](docs/integration/2026-11-02-review.md)。`python -B -X utf8 tools/verify.py --integration-only` で、原本ハッシュ、登録漏れ、オフライン検算、Lean 全宣言の公理監査を実行します。以下の数値はそれぞれ記載された過去版の記録です。今回の実測値は同じコミットの CI と `verification/pr-integration.json` を参照してください。
+
+実験・配布用ツール: [ARC 公開デモのローカル統合検査](experiments/arc3/README.md) · [494 定理の歴史的 Kaggle handoff](docs/KAGGLE.md) · [717 定理の歴史的 handoff](docs/KAGGLE_717.md)。両 handoff は固定された過去の証明集合を対象とし、現在の拡張された証明集合用ではありません。[2026-11-02 統合範囲と再実行](docs/verification/2026-11-02-tooling-integration.md)。
+
 **2026-11-01 F16一手復元と左乗法の退化ブロックをLean検証:** PR #11のF0忘却モデルを拡張。探針1〜8では現在・後続の2観測から全32符号状態を復元でき、それとF0非両立は必要十分で一致する。右乗法・符号表から16次元左乗法の8個の2×2符号付きブロックを構成し、t=±1の各4本の明示的零ベクトルを証明。新規15定理・11定義／略記。固定Leanの[Actions #41227143919](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41227143919)で `--trust=0`・全公理監査に成功、**804定理・982宣言**、警告・未許可公理0。[追補ソース](linear_input/lean_check/F16RecoverySpectrum.inc) / [検証記録](docs/verification/2026-11-01-f16-recovery-degeneracy.md) / [PR #14](https://github.com/Sumuji-zkdwn/primitive-lean/pull/14)。16×16行列全体の行列式・階数12のLean定理はまだ含まない。以下の789定理・956宣言は前段階の検証記録。
 
 **2026-11-01 F16有限ホロノミー・F0忘却降下をLean検証:** EアトラスF16 v4の符号表に基づく128比較四角形、64対64の局所障害、全8比較積が+1となる集約忘却、符号付き高ビット忘却の冪等性と右乗法16種の降下条件を追加（7定理・10定義）。固定Leanの[Actions #41224405790](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41224405790)で `--trust=0` と全公理監査が成功、**789定理・956宣言**、警告・未許可公理0。[証明原稿](linear_input/lean_check/F16Holonomy.inc) / [検証記録](docs/verification/2026-11-01-f16-holonomy.md) / [PR #11](https://github.com/Sumuji-zkdwn/primitive-lean/pull/11)。有限F16と滑らかなSO(2)ホロノミーやクンマー拡大を同一視したものではありません。以下の782定理・939宣言は前段階の記録です。

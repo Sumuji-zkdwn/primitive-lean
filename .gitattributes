@@ -1,0 +1,4 @@
+/experiments/arc3/vendor/explore/** -text
+/lean/**/*.lean -text
+/linear_input/lean_check/**/*.lean -text
+/linear_input/lean_check/**/*.inc -text

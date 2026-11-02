@@ -1,0 +1,227 @@
+{
+  "base_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
+  "sources": [
+    {
+      "pr": 23,
+      "commit": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
+      "path": "docs/verification/2026-11-01-f16-unexpected-bridges.md",
+      "sha256": "f203eb38fe45414a25fa6bc9e36bae9c6f5e073ee7b8c9c4a6b0d59e2653145f"
+    },
+    {
+      "pr": 23,
+      "commit": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
+      "path": "linear_input/lean_check/F16UnexpectedBridges.inc",
+      "sha256": "ecf929ece3d986c75e9dd1793646db765983a159d2f5cef8f886c9793eb305f2"
+    },
+    {
+      "pr": 23,
+      "commit": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
+      "path": "tools/check_f16_unexpected_bridges.py",
+      "sha256": "91464269b441ae5bbaf6322638c846ed9563be589015f003afd7119f0537fcf0"
+    },
+    {
+      "pr": 24,
+      "commit": "4b7e1d86c23f5e6f941f041b52ab02370d690390",
+      "path": "docs/verification/2026-11-02-shear-commutator.md",
+      "sha256": "3bf4529baf4421d766a6261fb21bae4f000af00882b59922795f6e238d27480d"
+    },
+    {
+      "pr": 24,
+      "commit": "4b7e1d86c23f5e6f941f041b52ab02370d690390",
+      "path": "linear_input/lean_check/ShearCommutator.inc",
+      "sha256": "318e2691dc4c78f87dd30533ea640cce53acef03673bd3e04277065ae70a4747"
+    },
+    {
+      "pr": 24,
+      "commit": "4b7e1d86c23f5e6f941f041b52ab02370d690390",
+      "path": "tools/check_shear_commutator.py",
+      "sha256": "93c8d491733f5a1069bc91ae8231cc53a0f701e8af2c22d8b54c28bd7ce839cb"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "docs/verification/2026-11-02-complementary-pencil-recovery.md",
+      "sha256": "057269a1c7841bb9c123dab5767f56a3973a800c7fed9037659da0cca227e7d1"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "docs/verification/complementary-observation-comparison-notes.md",
+      "sha256": "85eebe4f6fd4437f4d327bb41e10180af919348ccbd1c4bb7a02368d6ef9db0e"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "evidence/ci/2026-11-02-complementary-recovery/summary.json",
+      "sha256": "6424b77268c9265b82121f4b79b31aaa0da8d7b736b3d989eff9288a60a2c37f"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+      "sha256": "7f1def4a7c55fec288dcd249f74e21bae9e7272048412d4eba63c14750312a9d"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "linear_input/lean_check/ComplementaryPencilRecovery.inc",
+      "sha256": "46723f39f4c48aad99b57fafb40415a867d5c11300aef92d4b18190420ace187"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+      "sha256": "b5c965ccb7a9b7f9a8110de0c8ac3aa0bcda25618d1602a32928fddff063e9e7"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "tools/check_complementary_recovery.py",
+      "sha256": "95a9e105517bec9934840a934959bc07c5d2a3ff04448492e070da6a3c42bec5"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "tools/complementary_recovery_baseline.json",
+      "sha256": "491f2a7d3a985847e1988806075fcde60091a3b538edfea50494ed9ba6caaad0"
+    },
+    {
+      "pr": 25,
+      "commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
+      "path": "tools/verify_complementary_recovery.py",
+      "sha256": "549cc5e77ca78808a5ecbc6651334879b0fcf7016ef2a07a528751ebc7dae160"
+    },
+    {
+      "pr": 26,
+      "commit": "23d40806f7462f32c46db524c0fdb23fe6dd3342",
+      "path": "linear_input/lean_check/StrangeOperatorBoundary.inc",
+      "sha256": "45f04e086f70e4f01fba1bc3948f2c59c6b6402bd7cb651f852b88ab422f4672"
+    },
+    {
+      "pr": 26,
+      "commit": "23d40806f7462f32c46db524c0fdb23fe6dd3342",
+      "path": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
+      "sha256": "71d22e4bf40c2268d4fcf5fec1ad05dbad72a81062314ae207b0bd7e7d9284f8"
+    },
+    {
+      "pr": 26,
+      "commit": "23d40806f7462f32c46db524c0fdb23fe6dd3342",
+      "path": "linear_input/lean_check/StrangeOperatorFixedSets.inc",
+      "sha256": "fc63eb53575f1d469ad6110102aba0efc0d9b5efe73c156772cf1d9b3ea62702"
+    },
+    {
+      "pr": 26,
+      "commit": "23d40806f7462f32c46db524c0fdb23fe6dd3342",
+      "path": "linear_input/lean_check/StrangeOperatorGalois.inc",
+      "sha256": "9cb923bd8ce4558b4aa15a4bd8f6c9ff346d3bbaf9c85da69bd35a0119a3ef8f"
+    },
+    {
+      "pr": 26,
+      "commit": "23d40806f7462f32c46db524c0fdb23fe6dd3342",
+      "path": "tools/check_strange_operator_galois.py",
+      "sha256": "cb20ecae51d6a0ff8bdf8939e5df1a7610411566c0dc8bff1e84d47f78013b83"
+    },
+    {
+      "pr": 27,
+      "commit": "852397457b81741f8b99533f10742534d14dc210",
+      "path": "docs/verification/2026-11-02-f16-saddle-cantor.md",
+      "sha256": "628da8359b2118cb457dc5ae4c9400a6760f9d08979309068f755c6122cbc881"
+    },
+    {
+      "pr": 27,
+      "commit": "852397457b81741f8b99533f10742534d14dc210",
+      "path": "linear_input/lean_check/F16SaddleCantor.inc",
+      "sha256": "6e8dd6ececaba4a244fcb23232e3937657b37df04fc829a4dc72be049bb328df"
+    },
+    {
+      "pr": 27,
+      "commit": "852397457b81741f8b99533f10742534d14dc210",
+      "path": "tools/check_f16_saddle_cantor.py",
+      "sha256": "07e25483d76058eb64ea0afc56732be217a69f900899973b6bebb611b1b6e8d7"
+    },
+    {
+      "pr": 16,
+      "commit": "0e4ceae8599c5383d08fb31dd472619696ebda64",
+      "path": "docs/verification/2026-11-01-f16-full-matrix.md",
+      "sha256": "cc1dd297cd543b5800915a6f2e8217a4b9bb03ab155f1835946ac8e3c7e447e5"
+    },
+    {
+      "pr": 16,
+      "commit": "0e4ceae8599c5383d08fb31dd472619696ebda64",
+      "path": "linear_input/lean_check/F16FullMatrix.inc",
+      "sha256": "f003b08d700b3ad0c21c79b1713546a7ce46124c7b4eaea29f4fd2bf079b47dd"
+    },
+    {
+      "pr": 16,
+      "commit": "0e4ceae8599c5383d08fb31dd472619696ebda64",
+      "path": "linear_input/lean_check/F16FullRank.inc",
+      "sha256": "71e5953a8b6ceec207dc82e066222fd75065ed4f0f6885e2b429216a95ba12a3"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "docs/verification/2026-10-31-f0-descent-rule481-hanna.md",
+      "sha256": "0ee87a5378d0d9afa8025c71331f2dce3e7bb2df49154daf391e8496b2af03e2"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "linear_input/lean_check/F0UpdateDescent.inc",
+      "sha256": "616da7fdeb19d9204d965d88c4e43063a0b7663af2c65f4a25e927860093a189"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "linear_input/lean_check/HannaJetCorrection.inc",
+      "sha256": "c7265fbeab4f7084050979eb23a6c2f85df448a0978738a662c961d35f9e6482"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "linear_input/lean_check/Rule481Symmetry.inc",
+      "sha256": "23584c6af15b5c22af405bd67bdfeb69c1ec3654176b8903a944418abb5c5d66"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "tools/check_f0_dynamics.py",
+      "sha256": "d3d69ec332567fe48d90f3ccd7bacd06474f934bbb47ff234a0b5afc2b718643"
+    },
+    {
+      "pr": 19,
+      "commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "path": "docs/verification/2026-11-01-wfs-mobius-fourier.md",
+      "sha256": "159cf2fb960430698da5b6768ece50b54f946dedd01d3e80aebc8b8fa0749b1b"
+    },
+    {
+      "pr": 19,
+      "commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "path": "linear_input/lean_check/WFSMobiusFourier.inc",
+      "sha256": "669cc639499a5da3d0d46e4913b1d6ea3039e03b902e4b0e6ef570fb6ddcb39f"
+    },
+    {
+      "pr": 19,
+      "commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "path": "tools/check_wfs_mobius_fourier.py",
+      "sha256": "722206d833aa995e92239bfc02a29eb766389d4112a8cf5ea1d504b26bdb7a97"
+    },
+    {
+      "pr": 12,
+      "commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "path": "docs/verification/2026-11-01-energy-wfs-fenchel.md",
+      "sha256": "e2c7b66d5a60a6cfe7c9b07616ff440375eb16fc5f20212b49a4897893171c76"
+    },
+    {
+      "pr": 12,
+      "commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809"
+    },
+    {
+      "pr": 12,
+      "commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "path": "tools/check_energy_gauge_fenchel.py",
+      "sha256": "ea610d726f739e8615b56fe3330986f52bcfd328b27b9634e3188cd77cf7416c"
+    }
+  ]
+}

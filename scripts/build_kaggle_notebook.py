@@ -3,24 +3,49 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def committed_bytes(source_ref, relative_path):
+    """Return Git's canonical committed bytes, independent of checkout newlines."""
+    try:
+        return subprocess.check_output(
+            ["git", "show", f"{source_ref}:{relative_path}"], cwd=ROOT,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return (ROOT / relative_path).read_bytes()
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-ref", required=True, help="GitHub commit containing both proof-only adapter files")
-    parser.add_argument("--setup-one-cell", action="store_true", help="Combine initialization and setup into one executable cell")
+    parser.add_argument("--source-mode", choices=("auto", "path", "github"), default="auto")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--setup-one-cell", action="store_true", help="Combine initialization and setup into one executable cell")
+    modes.add_argument("--proof-check-one-cell", action="store_true", help="Combine initialization, setup and proof checks into one executable cell")
+    parser.add_argument("--output", type=Path, help="Write the notebook to this path instead of the tracked notebooks directory")
     args = parser.parse_args()
     if len(args.source_ref) != 40 or any(c not in "0123456789abcdef" for c in args.source_ref):
         parser.error("source-ref must be a full commit SHA")
+    try:
+        head = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
+        ).strip()
+    except Exception:
+        head = None
+    if head is not None and head != args.source_ref:
+        parser.error(f"source-ref must match the checked-out source commit ({head})")
     inventory = json.loads((ROOT / "docs/import/archive_inventory.json").read_text("utf-8"))
     rows = [r for r in inventory["files"] if r["imported"]]
-    expected = {r["path"]: hashlib.sha256((ROOT / r["path"]).read_bytes()).hexdigest() for r in rows}
+    expected = {r["path"]: hashlib.sha256(committed_bytes(args.source_ref, r["path"])).hexdigest() for r in rows}
     # Accept the original verifier in the uploaded ZIP, then apply the exact
     # adapter from the selected GitHub snapshot. Proof sources are not overlaid.
     expected["tools/verify.py"] = next(r["sha256"] for r in rows if r["path"] == "tools/verify.py")
-    overlays = {p: (ROOT / p).read_bytes().decode("utf-8") for p in ["tools/verify.py", "tools/proof_only.py"]}
+    overlays = {p: committed_bytes(args.source_ref, p).decode("utf-8")
+                for p in ["tools/verify.py", "tools/proof_only.py"]}
     support = (ROOT / "notebooks/kaggle_support.py").read_text("utf-8")
     snapshot = {"repository": "Sumuji-zkdwn/primitive-lean", "source_commit": args.source_ref,
                 "original_import_commit": "b358f1a2753637992cdcfbaa5f354db3562ecc46",
@@ -49,8 +74,8 @@ GitHubの固定コミットと、Kaggle側の原本をハッシュで対応さ�
 
 検査結果の `passed` は今回のLean証明・公理検査の範囲だけを表します。過去ZIPの保存監査・本文描画・配送監査は別です。NotebookはKaggleコンペへの提出やGitHubへの書き戻しを行いません。
 """)
-    cell("code", """# ここだけ必要に応じて変更します
-SOURCE_MODE = "auto"       # auto / path / github
+    cell("code", f"""# ここだけ必要に応じて変更します
+SOURCE_MODE = {json.dumps(args.source_mode)}       # auto / path / github
 SOURCE_PATH = ""           # 例: /kaggle/input/your-data/archive.zip または原本フォルダ
 RUN_SETUP = False           # 初回はFalseのままファイル対応だけ確認
 RUN_PROOFS = False          # 実ビルドする段階でTrue（RUN_SETUPもTrue）
@@ -125,17 +150,37 @@ else:
 print(json.dumps({name: STATE[name]["status"] for name in ("source", "setup", "proofs")}, ensure_ascii=False, indent=2))
 show_output(output)
 """)
-    if args.setup_one_cell:
+    if args.setup_one_cell or args.proof_check_one_cell:
         combined = "\n\n".join("".join(c["source"]) for c in cells if c["cell_type"] == "code")
         combined = combined.replace('RUN_SETUP = False', 'RUN_SETUP = True', 1)
+        if args.proof_check_one_cell:
+            combined = combined.replace('RUN_PROOFS = False', 'RUN_PROOFS = True', 1)
         cells = []
-        cell("markdown", """# primitive-lean：環境準備・1セル版
+        if args.source_mode == "auto":
+            source_instructions = "同じ `archive.zip` をNotebook Inputへ追加します。原本は固定コミットのSHA-256一覧と照合し、不一致なら停止します。このモードではGitHub Secretは不要です。"
+        elif args.source_mode == "path":
+            source_instructions = "コード冒頭の `SOURCE_PATH` に検査対象の原本ZIPまたはフォルダを指定します。原本は固定コミットのSHA-256一覧と照合し、不一致なら停止します。"
+        else:
+            source_instructions = "Kaggle SecretsにContents読み取り用の `GITHUB_TOKEN` を登録します。固定コミットだけを読み取ります。トークンをコードへ貼り付けません。"
+        if args.proof_check_one_cell:
+            cell("markdown", f"""# primitive-lean：証明検査・1セル版
+
+原本照合、Lean環境準備、証明・公理検査を一つのコードセルで順番に実行します。前のセルや前セッションの変数には依存しません。
+
+生成時に固定されたGitHubコミットを読み取り、今回の実行ログと照合結果を出力ZIPに記録します。{source_instructions}
+
+初期設定は `RUN_SETUP=True`、`RUN_PROOFS=True` です。InternetをOnにして唯一のコードセルを実行します。
+
+成功・失敗どちらの場合も、今回の段階別状態とログを `/kaggle/working/primitive_lean_result.zip` に保存します。KaggleのOutput欄からダウンロードしてください。NotebookはGitHubへ書き戻さず、コンペへ提出しません。
+""")
+        else:
+            cell("markdown", f"""# primitive-lean：環境準備・1セル版
 
 この版は初期化・原本の照合・Lean環境の準備を**1つのコードセル**で順番に実行します。前のセルや前のセッションの変数は不要です。
 
-1. 同じ `archive.zip` をInputに追加するか、原本フォルダのあるKaggle環境で使います。
-2. Notebookの **InternetをOn** にします。
-3. 下のコードセルの **▶** を押します。設定変更は不要です。
+{source_instructions}
+
+Notebookの **InternetをOn** にして、下のコードセルの **▶** を押します。
 
 この版の初期設定は `RUN_SETUP=True`、`RUN_PROOFS=False` です。今回の目標は `source: passed`、`setup: passed`、`proofs: not_run`。Lean証明検査の合格を意味しません。
 
@@ -146,9 +191,16 @@ show_output(output)
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3.11"},
         "primitive_lean": snapshot}, "cells": cells}
-    filename = "primitive_lean_setup_one_cell.ipynb" if args.setup_one_cell else "primitive_lean_kaggle.ipynb"
-    path = ROOT / "notebooks" / filename
-    path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + "\n", "utf-8")
+    if args.proof_check_one_cell:
+        filename = "primitive_lean_proof_check.ipynb"
+    elif args.setup_one_cell:
+        filename = "primitive_lean_setup_one_cell.ipynb"
+    else:
+        filename = "primitive_lean_kaggle.ipynb"
+    path = args.output or (ROOT / "notebooks" / filename)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(notebook, ensure_ascii=False, indent=1) + "\n",
+                    encoding="utf-8", newline="\n")
     print(path)
 
 

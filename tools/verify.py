@@ -102,28 +102,55 @@ def verify_lean(rebuild):
               and supplement["all_declarations"] == declarations
               and len(axioms) == len(declarations) and not warnings and not changed)
     supplemental_scopes = {
-        "MainResult": "Additive connection and worked example",
-        "GeneralMinimum": "General fixed-input minimum and strict-support criteria, with quartic bridges",
-        "SupportComposition": "Support interpolation, ordering, derivative identification and shared-minimizer restrictions",
-        "QuarticClassification": "Exact quartic minimum uniqueness and supporting-input classification",
-        "CurvatureRigidity": "Conserved phase energy and the transverse square force constant curvature at a phase minimum",
-        "HistorySignature": "Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy",
-        "BranchForgetting": "Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion",
-        "VariablePairObservations": "Actual partial derivatives, explicit inverses, sign changes and transport of observation hierarchies in the primitive energy family",
-        "BranchFibers": "Cosine candidate equality, explicit critical fibers and retractions, and exhaustive counts of the real inverse images of the ternary iterate",
-        "F0Retractions": "Idempotent retractions, K-S-C composition, compatible-map counting by an explicit equivalence, finite orbit bounds, and bridges to the critical branch representatives",
-        "F0Counting": "Actual labelled idempotent maps counted by fixed-point rank, with exact seven- and eight-point totals",
-        "F0MergeChains": "Positive integer-partition merge chains and an explicit Fin 5 fiber-mass chain realized by sequential idempotent K-S-C steps, with mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton",
-        "FiniteBayes": "Finite normalization and posterior composition, support constraints, log-loss comparison, observation pushforwards, and actual Elastica exponential-weight bridges",
-        "FourBayes": "Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples",
-        "GaloisChebyshev": "Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)",
-        "KummerDihedral": "Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)",
-        "VariablePairGaloisBridge": "Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections",
-        "F16Holonomy": "Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification",
-        "F16RecoverySpectrum": "Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input",
-        "F16RankCertificate": "Exact integer factor and 12-by-12 pivot certificates imply real Matrix.rank 12 at t = +1 and -1",
-        "F16RealDeterminant": "Eight 2-by-2 sedenion left-pencil blocks, verified row/column bijections and parity, and the full real Matrix.det identity",
-        "F16CompleteRank": "Exact real-pencil comparison at integer parameters, determinant-zero characterization, and complete rank-12/rank-16 classification",
+        'MainResult': 'Additive connection and worked example',
+        'GeneralMinimum': 'General fixed-input minimum and strict-support criteria, with quartic bridges',
+        'SupportComposition': 'Support interpolation, ordering, derivative identification and shared-minimizer restrictions',
+        'QuarticClassification': 'Exact quartic minimum uniqueness and supporting-input classification',
+        'CurvatureRigidity': 'Conserved phase energy and the transverse square force constant curvature at a phase minimum',
+        'HistorySignature': 'Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy',
+        'BranchForgetting': 'Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion',
+        'VariablePairObservations': 'Actual partial derivatives, explicit inverses, sign changes and transport of observation hierarchies in the primitive energy family',
+        'BranchFibers': 'Cosine candidate equality, explicit critical fibers and retractions, and exhaustive counts of the real inverse images of the ternary iterate',
+        'F0Retractions': 'Idempotent retractions, K-S-C composition, compatible-map counting by an explicit equivalence, finite orbit bounds, and bridges to the critical branch representatives',
+        'F0Counting': 'Actual labelled idempotent maps counted by fixed-point rank, with exact seven- and eight-point totals',
+        'F0MergeChains': 'Positive integer-partition merge chains and an explicit Fin 5 fiber-mass chain realized by sequential idempotent K-S-C steps, with mass preservation, strict rank decrease, acyclicity and exact-length paths to the singleton',
+        'FiniteBayes': 'Finite normalization and posterior composition, support constraints, log-loss comparison, observation pushforwards, and actual Elastica exponential-weight bridges',
+        'FourBayes': 'Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples',
+        'GaloisChebyshev': 'Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)',
+        'KummerDihedral': 'Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)',
+        'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
+        'F16Holonomy': 'Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification',
+        'F16RecoverySpectrum': 'Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input',
+        'F16RankCertificate': 'Exact integer factor and 12-by-12 pivot certificates imply real Matrix.rank 12 at t = +1 and -1',
+        'F16RealDeterminant': 'Eight 2-by-2 sedenion left-pencil blocks, verified row/column bijections and parity, and the full real Matrix.det identity',
+        'F16CompleteRank': 'Exact real-pencil comparison at integer parameters, determinant-zero characterization, and complete rank-12/rank-16 classification',
+        'F16UnexpectedBridges': 'Exact signed F16 block normal forms, D4 reflection-rotation relations, cubic discriminant degeneracy, and two singular probes jointly identifying the full state',
+        'ShearCommutator': 'Actual energy partial derivatives generate horizontal and vertical shears through coordinate exchange; inverse-order cancellation, unit-determinant hyperbolic commutator, and a certified exponential lower bound',
+        'ComplementaryPencilRecovery': 'Constructive inverse for opposite matrix-pencil observations, compatible-data equivalence, uniqueness, and exact kernel criteria',
+        'F16ConstructiveRecovery': 'General inverse theorem instantiated with the original rank-12 F16 real matrices and exact reconstruction of both observations',
+        'ComplementaryObservationExamples': 'Counterexamples at missing assumptions and an independent PR19 four-phase coordinate observation model',
+        'StrangeOperatorGalois': 'F0-derived self-stopping, fiber obstruction and relational Galois closure',
+        'StrangeOperatorConjugacy': 'Naturality, one-point F0 closure classification and conjugacy orbit',
+        'StrangeOperatorBoundary': 'Finite non-idempotent obstruction to extending the spike-orbit theorem to arbitrary F0 maps',
+        'StrangeOperatorFixedSets': 'Complete singleton Galois closure classification by fixed-point sets',
+        'F16SaddleCantor': 'F16 reflection-derived hyperbolic saddle, finite two-branch ternary coding and the F0 two-cycle obstruction; no infinite fractal/dimension theorem.',
+        'F16FullMatrix': 'Actual real 16-by-16 sedenion left-pencil matrix, explicit eight-block row/column permutation equivalence, full determinant and real singularity classification',
+        'F16FullRank': 'Invertible 2-by-2 Gaussian elimination, global diagonalization and rank 12 exactly at t=±1 (rank 16 otherwise)',
+        'F0UpdateDescent': 'Induced dynamics on F0 fixed representatives, descent iff fiber respect, composition, symmetry preservation and a finite counterexample',
+        'Rule481Symmetry': 'Local Rule 481 reflection/complement and finite 3x3 torus mirror equivariance and two-cycle (not infinite-lattice OEIS coefficient proof)',
+        'HannaJetCorrection': 'First-jet formal-series calculation: the k=3 denominator correction changes the local x^7 coefficient by eight (not the whole generating function)',
+        'FutureObservations': 'Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries',
+        'FutureFiniteHorizon': 'Finite observation signatures, monotone trace rank, and stabilization after at most N-r refinement steps',
+        'EWFSFenchel': 'Verified reversible E polynomial, x-only forgetting obstruction, positive-intensity WFS gauge and physical-versus-changed Fenchel pairing',
+        'WFSCanonicalLift': 'Positive-intensity WFS p=2 cotangent lift and p=0 momentum identity under explicit domain conditions',
+        'EWFSFutureBridge': 'Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient',
+        'TemporalSampling': 'General observation schedules, exact stride-sampling iff one-step congruence, phase reconstruction, and E-rotation even-time aliasing with positive WFS gauge',
+        'WFSMobiusFourier': 'WFS p=2 positive-intensity Möbius involution induced by two E rotation steps and exact four-phase first Fourier coefficient with even-sample aliasing',
+        'EnergyWfsFenchel': 'Exact E-gradient/Fenchel pairing transport, p=0/p=2 WFS gauges, all-u probe obstruction for F0 retractions and double-well minorants',
+        'ObservationRetractionPolarity': 'Exact decode/re-observe retraction on data, compatible fixed points, Stops semantics, and singleton closure with explicit properness hypotheses.',
+        'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
+        'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
+        'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
@@ -186,8 +213,22 @@ def main(argv=None):
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
+    modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
+    modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     args = parser.parse_args(argv)
+    if args.arc3_only:
+        if args.rebuild:
+            parser.error("--rebuild applies to Lean, not --arc3-only")
+        from arc3_integration import run_arc3
+        report = run_arc3(ROOT)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 0 if report["passed"] else 1
     OUT.mkdir(exist_ok=True)
+    if args.integration_only:
+        from pr_integration import run_integration
+        result = run_integration(ROOT, command, args.rebuild)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result["passed"] else 1
     if args.proof_only:
         from proof_only import run_proof_only
         proof = run_proof_only(ROOT, command, args.rebuild)

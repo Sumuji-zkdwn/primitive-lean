@@ -1,0 +1,75 @@
+name: Historical 494-theorem Kaggle handoff validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-kaggle-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout the historical 494-theorem handoff commit
+        uses: actions/checkout@v5
+        with:
+          ref: 0298d2092c60a52fb39fad10c396f907253a8f74
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Run repository and handoff tests
+        run: python -X utf8 -m unittest discover -s tests -v
+
+      - name: Install pinned Lean toolchain and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Run fresh proof and axiom checks
+        run: python -X utf8 tools/verify.py --proof-only
+
+      - name: Package commit-pinned Kaggle notebooks
+        if: success()
+        run: >-
+          python -X utf8 scripts/package_kaggle_handoff.py
+          --source-ref "$(git rev-parse HEAD)"
+          --output-dir artifacts/kaggle-handoff
+
+      - name: Upload proof evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lean-proof-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            verification/lean.json
+            verification/proof-only.json
+            verification/proof-only-*.log
+            verification/main-result.json
+            verification/main-result.log
+            linear_input/lean_results.json
+            linear_input/lean_check/build.log
+            linear_input/lean_check/elastica-build.log
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload Kaggle handoff notebooks
+        if: success()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kaggle-handoff-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/kaggle-handoff/
+          if-no-files-found: error
+          retention-days: 30

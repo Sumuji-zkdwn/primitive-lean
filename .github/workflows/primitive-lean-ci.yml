@@ -2,72 +2,89 @@ name: Primitive Lean integration verification
 
 on:
   push:
-    branches:
-      - chatgpt/galois-chebyshev-20261031
+    branches: [codex/pr-integration-20261102]
   pull_request:
-    branches:
-      - codex/primitive-history-derivation-20261029
+    branches: [main, codex/primitive-history-derivation-20261029]
     paths:
       - 'linear_input/**'
       - 'lean/**'
       - 'tools/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'experiments/arc3/**'
+      - 'sources/**'
+      - 'docs/integration/**'
       - '.github/workflows/primitive-lean-ci.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: primitive-integration-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
 jobs:
   verify:
-    name: Lean proofs and axiom audit
+    name: Retained sources, offline checks, Lean proofs and axiom audit
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 60
     steps:
-      - name: Check out exact commit
-        uses: actions/checkout@v4
+      - name: Check out the exact proposed head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
-      - name: Install elan
-        shell: bash
+      - name: Record event and checked-out source separately
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          EVENT_SHA: ${{ github.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
-          set -euo pipefail
-          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
-          sh /tmp/elan-init.sh -y --default-toolchain none
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          assert actual == os.environ['EXPECTED_SHA']
+          out = pathlib.Path('verification')
+          out.mkdir(exist_ok=True)
+          (out/'ci-source.json').write_text(json.dumps(dict(
+              checkout_sha=actual, expected_head_sha=os.environ['EXPECTED_SHA'],
+              event_sha=os.environ['EVENT_SHA'], pr_base_sha=os.environ['PR_BASE_SHA'],
+              event=os.environ['GITHUB_EVENT_NAME'],
+              claim='Exact proposed source; a future merge with a changed base requires revalidation'
+          ), indent=2)+'\n')
+          PY
 
-      - name: Verify pinned toolchain and fetch Mathlib cache
-        working-directory: lean
-        shell: bash
-        run: |
-          set -euo pipefail
-          lean --version
-          lake --version
-          lake exe cache get
+      - name: Install offline test dependencies
+        run: python -m pip install pytest==9.2.0 numpy==2.5.4
 
-      - name: Exact-arithmetic smoke tests
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -B -X utf8 tools/check_galois_bridge.py
+      - name: Install pinned Lean and fetch Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
 
-      - name: Run full proof-only Lean integration and axiom audit
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -B -X utf8 tools/verify.py --proof-only
+      - name: Run complete integration verification
+        run: python -B -X utf8 tools/verify.py --integration-only
 
-      - name: Upload full verification logs even on failure
+      - name: Upload complete verification evidence even on failure
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
-          name: primitive-galois-lean-${{ github.run_id }}
+          name: primitive-integration-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             verification/
             linear_input/lean_results.json
             linear_input/lean_check/*log
-          if-no-files-found: warn
-          retention-days: 14
+            experiments/arc3/reports/integration-check.json
+          if-no-files-found: error
+          retention-days: 30
