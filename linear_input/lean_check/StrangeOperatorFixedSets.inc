@@ -97,8 +97,7 @@ theorem close_singleton_top_of_no_stoppers {α : Type u} (S : α → α)
   constructor
   · intro _
     exact Set.mem_univ U
-  · intro _
-    intro T hT
+  · intro _ T hT
     exact (hNo T (hT S rfl)).elim
 
 /-- The totally fixed case has no stopping tests. -/
