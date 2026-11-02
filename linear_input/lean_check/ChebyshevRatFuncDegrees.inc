@@ -12,7 +12,7 @@ open LinearInputChebyshevDescent
 theorem cubicPoly_natDegree :
     (cubicPoly (K := ℂ)).natDegree = 3 := by
   unfold cubicPoly
-  compute_degree <;> norm_num
+  compute_degree; norm_num
 
 theorem chebyPoly_natDegree (k : ℕ) :
     (chebyPoly (K := ℂ) k).natDegree = 3 ^ k := by
@@ -28,7 +28,7 @@ theorem generic_square_not_constant (c : ℂ) :
     (RatFunc.X : RatFunc ℂ) ^ 2 ≠ RatFunc.C c := by
   intro hc
   have hdeg : (Polynomial.X ^ 2 - Polynomial.C c : Polynomial ℂ).natDegree = 2 := by
-    compute_degree <;> norm_num
+    compute_degree; norm_num
   have hpoly : (Polynomial.X ^ 2 - Polynomial.C c : Polynomial ℂ) ≠ 0 := by
     intro hh
     rw [hh] at hdeg
