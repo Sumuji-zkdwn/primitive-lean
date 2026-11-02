@@ -1181,4 +1181,157 @@ theorem actual_parallel_Z2 (c1 c2 t r : ℝ) :
       dsimp [cartanZ2, parallelZ2, singularParallelPoint] <;> ring
 
 
+
+/-!
+# Genuine fourth-order brackets and the parallel-layer certificate
+
+These directional derivatives are the already verified real HasDerivAt-based
+actualLieBracket, NOT unproved symbolic differential expressions.  The
+fourth-order brackets have zero u components; this permits the same upper
+identity / upper-right zero block representation as the regular 5×5 matrix.
+-/
+
+def parallelActualW11 (c1 c2 t r : ℝ) : ℝ × ℝ × ℝ :=
+  actualBracketProj
+    (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyZ1)
+      (singularParallelPoint c1 c2 t r))
+
+def parallelActualW12 (c1 c2 t r : ℝ) : ℝ × ℝ × ℝ :=
+  actualBracketProj
+    (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyZ2)
+      (singularParallelPoint c1 c2 t r))
+
+/-- The actual fourth-order bracket [X1,[X1,Y]], evaluated at u=t*c. -/
+theorem actual_parallel_W11 (c1 c2 t r : ℝ) :
+    parallelActualW11 c1 c2 t r = parallelW11 c1 c2 t := by
+  unfold parallelActualW11
+  rw [actualLieBracket_poly]
+  apply Prod.ext
+  · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3,
+      singularParallelPoint, parallelW11]
+    ring
+  · apply Prod.ext
+    · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3,
+        singularParallelPoint, parallelW11]
+      ring
+    · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3,
+        singularParallelPoint, parallelW11]
+      ring
+
+/-- The actual fourth-order bracket [X1,[X2,Y]], evaluated at u=t*c. -/
+theorem actual_parallel_W12 (c1 c2 t r : ℝ) :
+    parallelActualW12 c1 c2 t r = parallelW12 c1 c2 t := by
+  unfold parallelActualW12
+  rw [actualLieBracket_poly]
+  apply Prod.ext
+  · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3,
+      singularParallelPoint, parallelW12]
+    ring
+  · apply Prod.ext
+    · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3,
+        singularParallelPoint, parallelW12]
+      ring
+    · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3,
+        singularParallelPoint, parallelW12]
+      ring
+
+/-- Fourth-order brackets have no undecided (u₁,u₂) component. -/
+theorem actual_fourth_undecided_zero (z : FiveState) :
+    (actualLieBracket
+      (fivePolyFieldEval polyX1) (fivePolyFieldEval polyZ1) z).2.1 =
+        (0, 0) ∧
+    (actualLieBracket
+      (fivePolyFieldEval polyX1) (fivePolyFieldEval polyZ2) z).2.1 =
+        (0, 0) := by
+  constructor
+  · rw [actualLieBracket_poly]
+    apply Prod.ext <;>
+      dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3] <;> ring
+  · rw [actualLieBracket_poly]
+    apply Prod.ext <;>
+      dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3] <;> ring
+
+/-- The full 5×5 matrix with genuine fourth-order Lie-bracket columns. -/
+def singularActualFourthMatrix (c1 c2 t r : ℝ) :
+    Matrix (Fin 2 ⊕ Fin 3) (Fin 2 ⊕ Fin 3) ℝ :=
+  let z := singularParallelPoint c1 c2 t r
+  let Y := actualBracketProj
+    (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyX2) z)
+  let Z1 := actualBracketProj
+    (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyY) z)
+  let Z2 := actualBracketProj
+    (actualLieBracket (fivePolyFieldEval polyX2) (fivePolyFieldEval polyY) z)
+  Matrix.fromBlocks (1 : Matrix (Fin 2) (Fin 2) ℝ)
+    (0 : Matrix (Fin 2) (Fin 3) ℝ)
+    (cartanLowerLeftBlock z)
+    (threeColumnMatrix Y
+      (tripleLinear c1 Z2 (-c2) Z1)
+      (tripleLinear (-2*c1*c2) (parallelActualW11 c1 c2 t r)
+        (c1^2-c2^2) (parallelActualW12 c1 c2 t r)))
+
+/-- The actual fourth-order matrix equals its exact polynomial model
+up to the irrelevant r-coordinate dependence of the lower-left block. -/
+theorem singularActualFourthMatrix_eq (c1 c2 t r : ℝ) :
+    singularActualFourthMatrix c1 c2 t r =
+      Matrix.fromBlocks (1 : Matrix (Fin 2) (Fin 2) ℝ)
+        (0 : Matrix (Fin 2) (Fin 3) ℝ)
+        (cartanLowerLeftBlock (singularParallelPoint c1 c2 t r))
+        (threeColumnMatrix (parallelY c1 c2)
+          (parallelZStar c1 c2 t) (parallelWStar c1 c2 t)) := by
+  unfold singularActualFourthMatrix
+  rw [actual_parallel_Y, actual_parallel_Z1, actual_parallel_Z2,
+    actual_parallel_W11, actual_parallel_W12]
+  rfl
+
+/-- The full determinant really comes from genuine fourth-order Lie brackets. -/
+theorem singularActualFourthMatrix_det (c1 c2 t r : ℝ) :
+    (singularActualFourthMatrix c1 c2 t r).det =
+      -4 * (c1^2+c2^2)^3 := by
+  rw [singularActualFourthMatrix_eq]
+  rw [Matrix.det_fromBlocks_zero₁₂]
+  simp only [Matrix.det_one, one_mul]
+  rw [threeColumnMatrix_det]
+  have hd := parallelFourthMatrix_det c1 c2 t
+  unfold parallelFourthMatrix at hd
+  rw [Matrix.det_fromBlocks_zero₁₂] at hd
+  simp only [Matrix.det_one, one_mul] at hd
+  rw [threeColumnMatrix_det] at hd
+  exact hd
+
+/-- Uniform bracket-generating rank 5 at every nonzero parallel c. -/
+theorem singularActualFourthMatrix_rank_five (c1 c2 t r : ℝ)
+    (hc : c1 ≠ 0 ∨ c2 ≠ 0) :
+    (singularActualFourthMatrix c1 c2 t r).rank = 5 := by
+  have hpos : 0 < c1^2+c2^2 := by
+    rcases hc with h1 | h2
+    · nlinarith [sq_pos_of_ne_zero h1, sq_nonneg c2]
+    · nlinarith [sq_pos_of_ne_zero h2, sq_nonneg c1]
+  have hdet : (singularActualFourthMatrix c1 c2 t r).det ≠ 0 := by
+    rw [singularActualFourthMatrix_det]
+    exact mul_ne_zero (by norm_num) (pow_ne_zero 3 (ne_of_gt hpos))
+  have hunitdet : IsUnit (singularActualFourthMatrix c1 c2 t r).det :=
+    isUnit_iff_ne_zero.mpr hdet
+  have hunit : IsUnit (singularActualFourthMatrix c1 c2 t r) :=
+    ((singularActualFourthMatrix c1 c2 t r).isUnit_iff_isUnit_det).2
+      hunitdet
+  simpa [Fintype.card_sum] using
+    Matrix.rank_of_isUnit (singularActualFourthMatrix c1 c2 t r) hunit
+
+
 end LinearInputFiveDimLagrange
