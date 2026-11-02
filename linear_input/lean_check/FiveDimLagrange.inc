@@ -1060,4 +1060,125 @@ theorem cartanActualFiveMatrix_example_rank :
   · norm_num
 
 
+
+/-!
+# Singular parallel layer: an exact fourth-order determinant certificate
+
+On the locus u=t*c with c ≠ 0, the five basic fields through bracket
+length 3 have rank 4.  Two fourth-order brackets recover the fifth
+direction.  This block is the polynomial/Matrix.det certificate; a
+separate bridge below identifies the fourth-order columns with actual
+real Lie derivatives.
+-/
+
+def singularParallelPoint (c1 c2 t r : ℝ) : FiveState :=
+  ((c1, c2), ((t * c1, t * c2), r))
+
+def parallelY (c1 c2 : ℝ) : ℝ × ℝ × ℝ :=
+  (c2, -c1, 0)
+
+def parallelZ1 (c1 c2 t : ℝ) : ℝ × ℝ × ℝ :=
+  (-t*c1*c2, -t*(c1^2 + 2*c2^2), -2*c2)
+
+def parallelZ2 (c1 c2 t : ℝ) : ℝ × ℝ × ℝ :=
+  (t*(2*c1^2 + c2^2), t*c1*c2, 2*c1)
+
+def parallelW11 (c1 c2 t : ℝ) : ℝ × ℝ × ℝ :=
+  (c2*((t*c1)^2 - 3), -c1*((t*c1)^2 + 1), 0)
+
+def parallelW12 (c1 c2 t : ℝ) : ℝ × ℝ × ℝ :=
+  (c1*((t*c2)^2 + 2), -c2*((t*c1)^2 + 2), 0)
+
+/-- Linear combination of three-dimensional projected bracket columns. -/
+def tripleLinear (a : ℝ) (v : ℝ × ℝ × ℝ)
+    (b : ℝ) (w : ℝ × ℝ × ℝ) : ℝ × ℝ × ℝ :=
+  (a*v.1+b*w.1, a*v.2.1+b*w.2.1, a*v.2.2+b*w.2.2)
+
+/-- The third-order direction whose r-component is 2*|c|². -/
+def parallelZStar (c1 c2 t : ℝ) : ℝ × ℝ × ℝ :=
+  tripleLinear c1 (parallelZ2 c1 c2 t)
+    (-c2) (parallelZ1 c1 c2 t)
+
+/-- The fourth-order direction with positive radial c component. -/
+def parallelWStar (c1 c2 t : ℝ) : ℝ × ℝ × ℝ :=
+  tripleLinear (-2*c1*c2) (parallelW11 c1 c2 t)
+    (c1^2-c2^2) (parallelW12 c1 c2 t)
+
+def parallelFourthMatrix (c1 c2 t : ℝ) :
+    Matrix (Fin 2 ⊕ Fin 3) (Fin 2 ⊕ Fin 3) ℝ :=
+  Matrix.fromBlocks (1 : Matrix (Fin 2) (Fin 2) ℝ)
+    (0 : Matrix (Fin 2) (Fin 3) ℝ)
+    (cartanLowerLeftBlock (singularParallelPoint c1 c2 t 0))
+    (threeColumnMatrix (parallelY c1 c2)
+      (parallelZStar c1 c2 t) (parallelWStar c1 c2 t))
+
+/-- A single exact fourth-order determinant works at EVERY nonzero c,
+independently of the proportionality scalar t. -/
+theorem parallelFourthMatrix_det (c1 c2 t : ℝ) :
+    (parallelFourthMatrix c1 c2 t).det =
+      -4 * (c1^2+c2^2)^3 := by
+  unfold parallelFourthMatrix
+  rw [Matrix.det_fromBlocks_zero₁₂]
+  simp only [Matrix.det_one, one_mul]
+  rw [threeColumnMatrix_det]
+  dsimp [cartanMinor, parallelY, parallelZStar, parallelWStar,
+    tripleLinear, parallelZ1, parallelZ2, parallelW11, parallelW12]
+  ring
+
+/-- The singular parallel stratum still admits an invertible fourth-order matrix. -/
+theorem parallelFourthMatrix_rank_five (c1 c2 t : ℝ)
+    (hc : c1 ≠ 0 ∨ c2 ≠ 0) :
+    (parallelFourthMatrix c1 c2 t).rank = 5 := by
+  have hpos : 0 < c1^2+c2^2 := by
+    rcases hc with h1 | h2
+    · nlinarith [sq_pos_of_ne_zero h1, sq_nonneg c2]
+    · nlinarith [sq_pos_of_ne_zero h2, sq_nonneg c1]
+  have hdet : (parallelFourthMatrix c1 c2 t).det ≠ 0 := by
+    rw [parallelFourthMatrix_det]
+    exact mul_ne_zero (by norm_num) (pow_ne_zero 3 (ne_of_gt hpos))
+  have hunitdet : IsUnit (parallelFourthMatrix c1 c2 t).det :=
+    isUnit_iff_ne_zero.mpr hdet
+  have hunit : IsUnit (parallelFourthMatrix c1 c2 t) :=
+    ((parallelFourthMatrix c1 c2 t).isUnit_iff_isUnit_det).2 hunitdet
+  simpa [Fintype.card_sum] using
+    Matrix.rank_of_isUnit (parallelFourthMatrix c1 c2 t) hunit
+
+/-- The first derived direction really is Y=(c2,-c1,0) on the parallel layer. -/
+theorem actual_parallel_Y (c1 c2 t r : ℝ) :
+    actualBracketProj
+      (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyX2)
+        (singularParallelPoint c1 c2 t r)) =
+      parallelY c1 c2 := by
+  rw [actual_bracket_X1_X2, actualBracketProj_Y]
+  apply Prod.ext
+  · dsimp [cartanY, parallelY, singularParallelPoint]
+    ring
+  · apply Prod.ext <;>
+      dsimp [cartanY, parallelY, singularParallelPoint] <;> ring
+
+theorem actual_parallel_Z1 (c1 c2 t r : ℝ) :
+    actualBracketProj
+      (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyY)
+        (singularParallelPoint c1 c2 t r)) =
+      parallelZ1 c1 c2 t := by
+  rw [actual_bracket_X1_Y, actualBracketProj_Z1]
+  apply Prod.ext
+  · dsimp [cartanZ1, parallelZ1, singularParallelPoint]
+    ring
+  · apply Prod.ext <;>
+      dsimp [cartanZ1, parallelZ1, singularParallelPoint] <;> ring
+
+theorem actual_parallel_Z2 (c1 c2 t r : ℝ) :
+    actualBracketProj
+      (actualLieBracket (fivePolyFieldEval polyX2) (fivePolyFieldEval polyY)
+        (singularParallelPoint c1 c2 t r)) =
+      parallelZ2 c1 c2 t := by
+  rw [actual_bracket_X2_Y, actualBracketProj_Z2]
+  apply Prod.ext
+  · dsimp [cartanZ2, parallelZ2, singularParallelPoint]
+    ring
+  · apply Prod.ext <;>
+      dsimp [cartanZ2, parallelZ2, singularParallelPoint] <;> ring
+
+
 end LinearInputFiveDimLagrange
