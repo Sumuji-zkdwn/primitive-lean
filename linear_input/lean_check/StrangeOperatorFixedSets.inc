@@ -105,8 +105,7 @@ theorem close_singleton_top_of_all_fixed {α : Type u} (S : α → α)
     (hAll : ∀ x : α, S x = x) :
     Close (Stops (α := α)) ({S} : Set (α → α)) = Set.univ := by
   apply close_singleton_top_of_no_stoppers S
-  intro T
-  rintro ⟨x, hx, hTx⟩
+  rintro T ⟨x, hx, hTx⟩
   exact hx (hAll x)
 
 /-- The fixed-point-free case also has no stopping tests. -/
@@ -114,8 +113,7 @@ theorem close_singleton_top_of_no_fixed {α : Type u} (S : α → α)
     (hNone : ∀ x : α, S x ≠ x) :
     Close (Stops (α := α)) ({S} : Set (α → α)) = Set.univ := by
   apply close_singleton_top_of_no_stoppers S
-  intro T
-  rintro ⟨x, hx, hTx⟩
+  rintro T ⟨x, hx, hTx⟩
   exact hNone (T x) hTx
 
 end LinearInputStrangeFixedSets
