@@ -43,6 +43,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/F16CompleteRank.inc", "LinearInputF16CompleteRank"),
     ("linear_input/lean_check/StrangeOperatorGalois.inc", "LinearInputStrangeGalois"),
     ("linear_input/lean_check/StrangeOperatorConjugacy.inc", "LinearInputStrangeConjugacy"),
+    ("linear_input/lean_check/StrangeOperatorBoundary.inc", "LinearInputStrangeBoundary"),
 )
 
 
