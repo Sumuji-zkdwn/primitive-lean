@@ -3,6 +3,8 @@
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
 MainResult.lean consists of the exact verified All.lean followed by the exact
 registered supplements, with all added declarations axiom-audited.
+The generated-only import preamble enables finite-dimensional mathlib adjoints
+without changing any retained historical proof source.
 """
 from pathlib import Path
 from datetime import datetime, timezone
