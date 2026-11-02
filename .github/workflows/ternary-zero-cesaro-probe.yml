@@ -1,0 +1,46 @@
+name: Ternary zero-placement Lean probe
+
+on:
+  push:
+    branches: [chatgpt/ternary-zero-cesaro-20261103]
+    paths:
+      - linear_input/lean_check/TernaryZeroCesaro.inc
+      - .github/workflows/ternary-zero-cesaro-probe.yml
+  pull_request:
+    branches: [codex/primitive-history-derivation-20261029]
+    paths:
+      - linear_input/lean_check/TernaryZeroCesaro.inc
+      - .github/workflows/ternary-zero-cesaro-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prepare standalone proof source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('linear_input/lean_check/TernaryZeroCesaro.inc').read_text()
+          for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+              assert token not in source, f'Forbidden Lean token: {token}'
+          Path('lean/TernaryZeroCesaroProbe.lean').write_text(
+              'import Mathlib\n\n' + source, encoding='utf-8')
+          PY
+      - name: Compile trusted Lean proofs
+        working-directory: lean
+        run: lake env lean --trust=0 TernaryZeroCesaroProbe.lean
