@@ -108,6 +108,7 @@ def verify_lean(rebuild):
         "QuarticClassification": "Exact quartic minimum uniqueness and supporting-input classification",
         "CurvatureRigidity": "Conserved phase energy and the transverse square force constant curvature at a phase minimum",
         "StrangeOperatorGalois": "F0-derived self-stopping, fiber obstruction and relational Galois closure",
+        "StrangeOperatorConjugacy": "Naturality, one-point F0 closure classification and conjugacy orbit",
         "HistorySignature": "Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy",
         "BranchForgetting": "Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion",
         "VariablePairObservations": "Actual partial derivatives, explicit inverses, sign changes and transport of observation hierarchies in the primitive energy family",
