@@ -138,6 +138,90 @@
       "commit": "852397457b81741f8b99533f10742534d14dc210",
       "path": "tools/check_f16_saddle_cantor.py",
       "sha256": "07e25483d76058eb64ea0afc56732be217a69f900899973b6bebb611b1b6e8d7"
+    },
+    {
+      "pr": 16,
+      "commit": "0e4ceae8599c5383d08fb31dd472619696ebda64",
+      "path": "docs/verification/2026-11-01-f16-full-matrix.md",
+      "sha256": "cc1dd297cd543b5800915a6f2e8217a4b9bb03ab155f1835946ac8e3c7e447e5"
+    },
+    {
+      "pr": 16,
+      "commit": "0e4ceae8599c5383d08fb31dd472619696ebda64",
+      "path": "linear_input/lean_check/F16FullMatrix.inc",
+      "sha256": "f003b08d700b3ad0c21c79b1713546a7ce46124c7b4eaea29f4fd2bf079b47dd"
+    },
+    {
+      "pr": 16,
+      "commit": "0e4ceae8599c5383d08fb31dd472619696ebda64",
+      "path": "linear_input/lean_check/F16FullRank.inc",
+      "sha256": "71e5953a8b6ceec207dc82e066222fd75065ed4f0f6885e2b429216a95ba12a3"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "docs/verification/2026-10-31-f0-descent-rule481-hanna.md",
+      "sha256": "0ee87a5378d0d9afa8025c71331f2dce3e7bb2df49154daf391e8496b2af03e2"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "linear_input/lean_check/F0UpdateDescent.inc",
+      "sha256": "616da7fdeb19d9204d965d88c4e43063a0b7663af2c65f4a25e927860093a189"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "linear_input/lean_check/HannaJetCorrection.inc",
+      "sha256": "c7265fbeab4f7084050979eb23a6c2f85df448a0978738a662c961d35f9e6482"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "linear_input/lean_check/Rule481Symmetry.inc",
+      "sha256": "23584c6af15b5c22af405bd67bdfeb69c1ec3654176b8903a944418abb5c5d66"
+    },
+    {
+      "pr": 7,
+      "commit": "d537654457b7caf5b0fe07be8e56b2cde0938b01",
+      "path": "tools/check_f0_dynamics.py",
+      "sha256": "d3d69ec332567fe48d90f3ccd7bacd06474f934bbb47ff234a0b5afc2b718643"
+    },
+    {
+      "pr": 19,
+      "commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "path": "docs/verification/2026-11-01-wfs-mobius-fourier.md",
+      "sha256": "159cf2fb960430698da5b6768ece50b54f946dedd01d3e80aebc8b8fa0749b1b"
+    },
+    {
+      "pr": 19,
+      "commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "path": "linear_input/lean_check/WFSMobiusFourier.inc",
+      "sha256": "669cc639499a5da3d0d46e4913b1d6ea3039e03b902e4b0e6ef570fb6ddcb39f"
+    },
+    {
+      "pr": 19,
+      "commit": "6bd74237f7b1910942988e6f542987857e9dec91",
+      "path": "tools/check_wfs_mobius_fourier.py",
+      "sha256": "722206d833aa995e92239bfc02a29eb766389d4112a8cf5ea1d504b26bdb7a97"
+    },
+    {
+      "pr": 12,
+      "commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "path": "docs/verification/2026-11-01-energy-wfs-fenchel.md",
+      "sha256": "e2c7b66d5a60a6cfe7c9b07616ff440375eb16fc5f20212b49a4897893171c76"
+    },
+    {
+      "pr": 12,
+      "commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809"
+    },
+    {
+      "pr": 12,
+      "commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "path": "tools/check_energy_gauge_fenchel.py",
+      "sha256": "ea610d726f739e8615b56fe3330986f52bcfd328b27b9634e3188cd77cf7416c"
     }
   ]
 }

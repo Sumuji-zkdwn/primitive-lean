@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "source": "Decoded GitHub Actions job log and workflow/artifact API responses",
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "pull_request": 25,
+  "verified_commit": "362dd5d286155abeb01c685aa17bbbe9172548f8",
+  "run_id": 41420522608,
+  "job_id": 125194684653,
+  "run_url": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41420522608",
+  "conclusion": "success",
+  "completed_at_utc": "2026-11-02T09:32:49Z",
+  "baseline_commit": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
+  "artifacts": [
+    {
+      "id": 13130002385,
+      "name": "complementary-recovery-41420522608",
+      "size_bytes": 111450,
+      "digest": "sha256:c00cdc7db507ed1facbe8ee3cf5c8db7ed9d57beccb553459361b96ca3aecad3",
+      "url": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41420522608/artifacts/13130002385"
+    }
+  ],
+  "reports": [
+    {
+      "passed": true,
+      "arithmetic": "fractions.Fraction",
+      "f16_basis_vectors": 16,
+      "f16_kernel_vectors": 8,
+      "singular_ranks": [
+        12,
+        12
+      ],
+      "paired_rank": 16,
+      "generic_dimensions": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "counterexample_categories": 4,
+      "scope": "Finite exact regression; universal claims are certified separately by Lean"
+    },
+    {
+      "timestamp_utc": "2026-11-02T09:27:45.965982+00:00",
+      "mode": "standalone",
+      "passed": true,
+      "errors": [],
+      "preservation": {
+        "base_commit": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
+        "base_run": 41316728844,
+        "file_count": 90,
+        "changed": [],
+        "passed": true
+      },
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "--trust=0",
+        "../verification/ComplementaryRecoveryStandalone.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 14.408,
+      "source_sha256": {
+        "linear_input/lean_check/ComplementaryPencilRecovery.inc": "46723f39f4c48aad99b57fafb40415a867d5c11300aef92d4b18190420ace187",
+        "linear_input/lean_check/ComplementaryObservationExamples.inc": "7f1def4a7c55fec288dcd249f74e21bae9e7272048412d4eba63c14750312a9d"
+      },
+      "theorem_count": 44,
+      "declaration_count": 61,
+      "log": "verification/complementary-recovery-standalone.log",
+      "warnings": []
+    },
+    {
+      "timestamp_utc": "2026-11-02T09:28:00.483036+00:00",
+      "passed": true,
+      "scope": "Fresh Elastica build and joint Lean proof/axiom checks only",
+      "historical_preservation": "not_checked",
+      "delivery_and_rendering": "not_checked",
+      "build_requested": true,
+      "clean_project_build": false,
+      "stages": [
+        {
+          "name": "joint",
+          "run": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.11.17/x64/bin/python",
+              "-X",
+              "utf8",
+              "linear_input/verify_lean.py"
+            ],
+            "working_directory": "/home/runner/work/primitive-lean/primitive-lean",
+            "exit_code": 0,
+            "seconds": 152.896,
+            "log": "verification/proof-only-joint.log",
+            "warnings": []
+          },
+          "fresh_report": true,
+          "passed": true,
+          "report": "linear_input/lean_results.json",
+          "warnings": []
+        },
+        {
+          "name": "supplement",
+          "run": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.11.17/x64/bin/python",
+              "-X",
+              "utf8",
+              "tools/verify_main_result.py"
+            ],
+            "working_directory": "/home/runner/work/primitive-lean/primitive-lean",
+            "exit_code": 0,
+            "seconds": 130.993,
+            "log": "verification/proof-only-supplement.log",
+            "warnings": []
+          },
+          "fresh_report": true,
+          "passed": true,
+          "report": "verification/main-result.json",
+          "warnings": []
+        }
+      ],
+      "errors": [],
+      "theorem_count": 902,
+      "declaration_count": 1129
+    },
+    {
+      "timestamp_utc": "2026-11-02T09:32:44.863650+00:00",
+      "mode": "integration",
+      "passed": true,
+      "errors": [],
+      "preservation": {
+        "base_commit": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
+        "base_run": 41316728844,
+        "file_count": 90,
+        "changed": [],
+        "passed": true
+      },
+      "total_theorem_count": 902,
+      "total_declaration_count": 1129,
+      "added_theorem_count": 59,
+      "added_declaration_count": 81,
+      "source_sha256": {
+        "linear_input/lean_check/ComplementaryPencilRecovery.inc": "46723f39f4c48aad99b57fafb40415a867d5c11300aef92d4b18190420ace187",
+        "linear_input/lean_check/F16ConstructiveRecovery.inc": "b5c965ccb7a9b7f9a8110de0c8ac3aa0bcda25618d1602a32928fddff063e9e7",
+        "linear_input/lean_check/ComplementaryObservationExamples.inc": "7f1def4a7c55fec288dcd249f74e21bae9e7272048412d4eba63c14750312a9d"
+      },
+      "evidence": "verification/main-result.json"
+    }
+  ]
+}

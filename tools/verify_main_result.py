@@ -51,6 +51,19 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/StrangeOperatorBoundary.inc', 'LinearInputStrangeBoundary'),
     ('linear_input/lean_check/StrangeOperatorFixedSets.inc', 'LinearInputStrangeFixedSets'),
     ('linear_input/lean_check/F16SaddleCantor.inc', 'LinearInputF16SaddleCantor'),
+    ('linear_input/lean_check/F16FullMatrix.inc', 'LinearInputF16FullMatrix'),
+    ('linear_input/lean_check/F16FullRank.inc', 'LinearInputF16FullRank'),
+    ('linear_input/lean_check/F0UpdateDescent.inc', 'LinearInputF0Descent'),
+    ('linear_input/lean_check/Rule481Symmetry.inc', 'LinearInputRule481'),
+    ('linear_input/lean_check/HannaJetCorrection.inc', 'LinearInputHannaJets'),
+    ('linear_input/lean_check/FutureObservations.inc', 'LinearInputFutureObservation'),
+    ('linear_input/lean_check/FutureFiniteHorizon.inc', 'LinearInputFutureHorizon'),
+    ('linear_input/lean_check/EWFSFenchel.inc', 'LinearInputEWFSDual'),
+    ('linear_input/lean_check/WFSCanonicalLift.inc', 'LinearInputWFSCanonical'),
+    ('linear_input/lean_check/EWFSFutureBridge.inc', 'LinearInputEWFSFuture'),
+    ('linear_input/lean_check/TemporalSampling.inc', 'LinearInputTemporalSampling'),
+    ('linear_input/lean_check/WFSMobiusFourier.inc', 'LinearInputWFSMobiusFourier'),
+    ('linear_input/lean_check/EnergyWfsFenchel.inc', 'LinearInputEnergyGaugeFenchel'),
 )
 
 

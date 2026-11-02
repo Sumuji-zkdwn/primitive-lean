@@ -134,6 +134,19 @@ def verify_lean(rebuild):
         'StrangeOperatorBoundary': 'Finite non-idempotent obstruction to extending the spike-orbit theorem to arbitrary F0 maps',
         'StrangeOperatorFixedSets': 'Complete singleton Galois closure classification by fixed-point sets',
         'F16SaddleCantor': 'F16 reflection-derived hyperbolic saddle, finite two-branch ternary coding and the F0 two-cycle obstruction; no infinite fractal/dimension theorem.',
+        'F16FullMatrix': 'Actual real 16-by-16 sedenion left-pencil matrix, explicit eight-block permutation conjugacy, full determinant and real singularity classification',
+        'F16FullRank': 'Invertible 2-by-2 Gaussian elimination, global diagonalization and rank 12 exactly at t=±1 (rank 16 otherwise)',
+        'F0UpdateDescent': 'Induced dynamics on F0 fixed representatives, descent iff fiber respect, composition, symmetry preservation and a finite counterexample',
+        'Rule481Symmetry': 'Local Rule 481 reflection/complement and finite 3x3 torus mirror equivariance and two-cycle (not infinite-lattice OEIS coefficient proof)',
+        'HannaJetCorrection': 'First-jet formal-series calculation: the k=3 denominator correction changes the local x^7 coefficient by eight (not the whole generating function)',
+        'FutureObservations': 'Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries',
+        'FutureFiniteHorizon': 'Finite observation signatures, monotone trace rank, and stabilization after at most N-r refinement steps',
+        'EWFSFenchel': 'Verified reversible E polynomial, x-only forgetting obstruction, positive-intensity WFS gauge and physical-versus-changed Fenchel pairing',
+        'WFSCanonicalLift': 'Positive-intensity WFS p=2 cotangent lift and p=0 momentum identity under explicit domain conditions',
+        'EWFSFutureBridge': 'Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient',
+        'TemporalSampling': 'General observation schedules, exact stride-sampling iff one-step congruence, phase reconstruction, and E-rotation even-time aliasing with positive WFS gauge',
+        'WFSMobiusFourier': 'WFS p=2 positive-intensity Möbius involution induced by two E rotation steps and exact four-phase first Fourier coefficient with even-sample aliasing',
+        'EnergyWfsFenchel': 'Exact E-gradient/Fenchel pairing transport, p=0/p=2 WFS gauges, all-u probe obstruction for F0 retractions and double-well minorants',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
