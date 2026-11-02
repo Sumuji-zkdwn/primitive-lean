@@ -162,4 +162,145 @@ theorem rewrite_invisible_on_constraint
   rw [hzero]
   ring
 
+/-!
+# A contact-geometric continuation of the verified five-coordinate multiplier bridge
+
+The same 2+2+1 tuple has TWO non-equivalent roles:
+ * constraint lift: (energy, residual), (x,y), multiplier q;
+ * first jet: (momentum_x, momentum_y), (x,y), action value.
+The second is a 1-jet contact model, not an identification of the two roles.
+No physical spacetime dimension or Lie-algebra isomorphism is inferred.
+-/
+
+def jetLift (lam r u a x y q : ℝ) : FiveState :=
+  ((gx lam r u x y - q, gy x y + q),
+    ((x, y), E lam r u x y - q * (x - y - a)))
+
+/-- The original kernel multiplier is precisely zero momentum of the jet lift. -/
+theorem tangent_stationarity_iff_zero_jet_momentum (lam r u a x y : ℝ) :
+    (∀ v : ℝ × ℝ, constraintVariation v = 0 →
+      energyVariation lam r u x y v = 0) ↔
+      ∃ q : ℝ, (jetLift lam r u a x y q).1 = (0, 0) := by
+  rw [tangent_stationarity_iff_multiplier]
+  constructor
+  · rintro ⟨q, hx, hy⟩
+    refine ⟨q, ?_⟩
+    change (gx lam r u x y - q, gy x y + q) = (0, 0)
+    apply Prod.ext <;> dsimp <;> linarith
+  · rintro ⟨q, hq⟩
+    have hx := congrArg Prod.fst hq
+    have hy := congrArg Prod.snd hq
+    change gx lam r u x y - q = 0 at hx
+    change gy x y + q = 0 at hy
+    exact ⟨q, by linarith, by linarith⟩
+
+/-- A genuine directional derivative of the old primitive energy plus rewrite term. -/
+theorem hasDerivAt_rewrite_line
+    (lam r u a x y q dx dy dq : ℝ) :
+    HasDerivAt
+      (fun t : ℝ =>
+        E lam r u (x + t * dx) (y + t * dy) -
+          (q + t * dq) * ((x + t * dx) - (y + t * dy) - a))
+      ((gx lam r u x y - q) * dx + (gy x y + q) * dy -
+        (x - y - a) * dq) 0 := by
+  have hx : HasDerivAt (fun t : ℝ => x + t * dx) dx 0 := by
+    simpa using (((hasDerivAt_id (0 : ℝ)).mul_const dx).const_add x)
+  have hy : HasDerivAt (fun t : ℝ => y + t * dy) dy 0 := by
+    simpa using (((hasDerivAt_id (0 : ℝ)).mul_const dy).const_add y)
+  have hq : HasDerivAt (fun t : ℝ => q + t * dq) dq 0 := by
+    simpa using (((hasDerivAt_id (0 : ℝ)).mul_const dq).const_add q)
+  have hu : HasDerivAt (fun _ : ℝ => u) 0 0 := hasDerivAt_const 0 u
+  have he := LinearInputGradient.hasDerivAt_energy_curve lam r hx hy hu
+  have hg : HasDerivAt
+      (fun t : ℝ => (x + t * dx) - (y + t * dy) - a)
+      (dx - dy) 0 := (hx.sub hy).sub_const a
+  have htotal := he.sub (hq.mul hg)
+  convert htotal using 1 <;> simp only [zero_mul, add_zero, mul_zero, sub_zero] <;> ring
+
+/-- Contact form alpha = dz - p_1 dx - p_2 dy on the 5D first jet. -/
+def contactForm (jet tangent : FiveState) : ℝ :=
+  tangent.2.2 - jet.1.1 * tangent.2.1.1 - jet.1.2 * tangent.2.1.2
+
+/-- Tangent direction: only the value derivative is needed for the contact form.
+The momentum-coordinate derivatives are irrelevant to alpha's evaluation. -/
+def rewriteDirection
+    (lam r u a x y q dx dy dq : ℝ) : FiveState :=
+  ((0, 0), ((dx, dy),
+    (gx lam r u x y - q) * dx + (gy x y + q) * dy -
+      (x - y - a) * dq))
+
+/-- The contact defect in the full (x,y,q) family is exactly -g(x,y)*dq. -/
+theorem contact_defect
+    (lam r u a x y q dx dy dq : ℝ) :
+    contactForm (jetLift lam r u a x y q)
+      (rewriteDirection lam r u a x y q dx dy dq) =
+        -(x - y - a) * dq := by
+  dsimp [contactForm, jetLift, rewriteDirection]
+  ring
+
+/-- Thus the entire feasible tangent family is contact-horizontal. -/
+theorem contact_vanishes_on_constraint
+    (lam r u a x y q dx dy dq : ℝ) (h : x - y = a) :
+    contactForm (jetLift lam r u a x y q)
+      (rewriteDirection lam r u a x y q dx dy dq) = 0 := by
+  rw [contact_defect]
+  have hg : x - y - a = 0 := by linarith
+  rw [hg]
+  ring
+
+/-- The original rewrite direction transports the confirmed pair by s*u. -/
+def originalRewriteShift (s : ℝ) (z : FiveState) : FiveState :=
+  ((z.1.1 + s * z.2.1.1, z.1.2 + s * z.2.1.2),
+    (z.2.1, z.2.2 + s))
+
+def undecidedShift (v : ℝ × ℝ) (z : FiveState) : FiveState :=
+  (z.1, ((z.2.1.1 + v.1, z.2.1.2 + v.2), z.2.2))
+
+def confirmedShift (w : ℝ × ℝ) (z : FiveState) : FiveState :=
+  ((z.1.1 + w.1, z.1.2 + w.2), z.2)
+
+/-- Old convention: [rewrite, undecided] has a confirmed two-vector residue. -/
+theorem original_bracket (s : ℝ) (v : ℝ × ℝ) (z : FiveState) :
+    originalRewriteShift s (undecidedShift v z) =
+      confirmedShift (s * v.1, s * v.2)
+        (undecidedShift v (originalRewriteShift s z)) := by
+  apply Prod.ext
+  · apply Prod.ext <;> dsimp [originalRewriteShift, undecidedShift, confirmedShift] <;> ring
+  · rfl
+
+/-- Jet convention: a confirmed translation changes the action value by w*u. -/
+def jetConfirmedShift (w : ℝ × ℝ) (z : FiveState) : FiveState :=
+  ((z.1.1 + w.1, z.1.2 + w.2),
+    (z.2.1, z.2.2 + w.1 * z.2.1.1 + w.2 * z.2.1.2))
+
+def jetRewriteShift (s : ℝ) (z : FiveState) : FiveState :=
+  (z.1, (z.2.1, z.2.2 + s))
+
+/-- Contact convention: [confirmed, undecided] has a scalar rewrite residue. -/
+theorem jet_bracket (v w : ℝ × ℝ) (z : FiveState) :
+    jetConfirmedShift w (undecidedShift v z) =
+      jetRewriteShift (w.1 * v.1 + w.2 * v.2)
+        (undecidedShift v (jetConfirmedShift w z)) := by
+  apply Prod.ext
+  · rfl
+  · apply Prod.ext
+    · rfl
+    · dsimp [jetConfirmedShift, undecidedShift, jetRewriteShift]
+      ring
+
+/-- The two residues are both nontrivial but land in different coordinates. -/
+theorem original_bracket_nontrivial :
+    originalRewriteShift 1
+      (undecidedShift ((1 : ℝ), 0) ((0, 0), ((0, 0), 0))) ≠
+    undecidedShift ((1 : ℝ), 0)
+      (originalRewriteShift 1 ((0, 0), ((0, 0), 0))) := by
+  norm_num [originalRewriteShift, undecidedShift]
+
+theorem jet_bracket_nontrivial :
+    jetConfirmedShift ((1 : ℝ), 0)
+      (undecidedShift ((1 : ℝ), 0) ((0, 0), ((0, 0), 0))) ≠
+    undecidedShift ((1 : ℝ), 0)
+      (jetConfirmedShift ((1 : ℝ), 0) ((0, 0), ((0, 0), 0))) := by
+  norm_num [jetConfirmedShift, undecidedShift]
+
 end LinearInputFiveDimLagrange
