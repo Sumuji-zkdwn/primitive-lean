@@ -2154,7 +2154,7 @@
     },
     {
       "path": "linear_input/lean_check/F16FenchelFull.inc",
-      "sha256": "43e7b843ddf15bd813dd34c2d9fa7656e0dce206d21a1a27ec10f291eec11678",
+      "sha256": "59cf968d5156fcfe9105bff905e551e7b00b1fa980c7af990de2d677e44dcc72",
       "original_sha256": "6d83a1e93303cad4b864109a22143ad582d7f87e2d3ec12293145f7b573cdec1",
       "source_pr": null,
       "source_commit": "351289e7b11c3f06b3262d7ad198f83e5a891940",
@@ -2162,7 +2162,8 @@
       "role": "adapted_retained_source",
       "byte_identical": false,
       "permitted_adaptations": [
-        "Replace a prose phrase in the introductory comment to satisfy the original token guard; declarations, types and proofs unchanged."
+        "Replace a prose phrase in the introductory comment to satisfy the original token guard; declarations, types and proofs unchanged.",
+        "Enable the imported scoped inner-product notation so the existing sixteen-dimensional identities elaborate."
       ]
     },
     {

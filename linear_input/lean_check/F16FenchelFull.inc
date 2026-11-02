@@ -11,6 +11,7 @@ interpretation is assumed. The input A_t is the original exact F16 matrix.
 
 noncomputable section
 open Real Set
+open scoped InnerProductSpace
 
 namespace LinearInputF16FenchelFull
 
