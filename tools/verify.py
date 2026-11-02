@@ -151,6 +151,8 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'TernaryZeroCesaro': 'Zero insertion into ternary blocks, six-step Cesaro values, preserved nonzero sums, and exact dwell-time weighted sums.',
+        'FiniteObservationSeparation': 'Probe refinement criteria, finite F0-style idempotent recovery, minimal permitted probe pair, six-state coordinates, and time-sensitive ternary observables.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
