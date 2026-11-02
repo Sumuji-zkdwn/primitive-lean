@@ -102,7 +102,7 @@ theorem one_score_unbounded (p q : ℝ) (hp : p ≠ 0) :
     field_simp [hp]
     ring
   have hu : score 1 p q s (q / 2) ≤ B :=
-    hB (score 1 p q s (q / 2)) (Set.mem_range.mpr ⟨(s, q / 2), rfl⟩)
+    hB (Set.mem_range.mpr ⟨(s, q / 2), rfl⟩)
   linarith
 
 /-- Exact finite-value domain of the restricted Fenchel conjugate at t=1. -/

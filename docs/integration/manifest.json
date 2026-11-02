@@ -2119,14 +2119,16 @@
     },
     {
       "path": "linear_input/lean_check/F16FenchelAtlas.inc",
-      "sha256": "00c943093f243e87f1f57c24fe41795520899c61118192871946604bb3567fb8",
+      "sha256": "6587c5bc579d6e4cecfb547f750fcc8bdae378c3fe11293b79de83972c98b3af",
       "original_sha256": "00c943093f243e87f1f57c24fe41795520899c61118192871946604bb3567fb8",
       "source_pr": null,
       "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
       "source_path": "linear_input/lean_check/F16FenchelAtlas.inc",
       "role": "new_branch_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Fix implicit upper-bound membership argument in BddAbove proof, without changing the theorem statement."
+      ]
     },
     {
       "path": "tools/check_f16_fenchel_atlas.py",
