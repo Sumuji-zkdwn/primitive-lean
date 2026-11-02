@@ -88,4 +88,6 @@ PR #19の既存 `fourier1_formula` は \(c_1=(x+iu)/2\) を与えるため、そ
 | 4位相列と復元演算 | `phase_trace_values`、`phase_decode_trace`、`phase_trace_injective` |
 | 整合するデータ上の逆と像の特徴付け | `phase_trace_decode_of_compatible`、`phase_compatible_iff_realizable` |
 
-この比較ノート単体はCI成功証明書ではない。実際のコンパイル結果、公理監査、検証コミットは最終検証記録にまとめる。
+追加の座標形・反例は、コミット `362dd5d286155abeb01c685aa17bbbe9172548f8` の [CI実行41420522608](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41420522608) で、一般定理と合わせて44定理・61宣言の独立コンパイル・公理監査に成功した。F16を含む全体は902定理・1129宣言で成功した。詳細は [検証記録](2026-11-02-complementary-pencil-recovery.md) を参照。
+
+PR #19側の参照コミットについても、[CI実行41232573849](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41232573849) の証明・公理監査成功を確認した。今回の独立検査は、そこで証明された4位相の座標形を対象とする。

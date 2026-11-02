@@ -1,5 +1,30 @@
 # Complementary pencil recovery — 2026-11-02
 
+## Verified result
+
+**SUCCESS**: [GitHub Actions run 41420522608](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41420522608),
+exact code commit `362dd5d286155abeb01c685aa17bbbe9172548f8`, completed
+2026-11-02 09:32:49 UTC (18:32:49 JST).
+
+| Check | Observed result |
+|---|---|
+| Independent general/examples Lean compile and axiom audit | 44 theorems / 61 declarations, exit 0, no warnings |
+| Complete proof-only integration and axiom audit | 902 theorems / 1129 declarations, both stages passed, no errors or warnings |
+| Separately counted additions including actual F16 | 59 theorems / 81 declarations |
+| Original PR #23 source/configuration/workflow preservation | 90 files byte-identical to the pinned baseline |
+| Exact F16 regression | All 16 basis vectors and eight null vectors passed; singular ranks 12/12, paired rank 16 |
+
+Full machine-produced reports and logs are in
+[artifact 13130002385](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41420522608/artifacts/13130002385).
+The durable [CI summary](../../evidence/ci/2026-11-02-complementary-recovery/summary.json)
+records the exact run, commit, source hashes, and decoded report summaries.
+Artifact ZIP SHA256: `c00cdc7db507ed1facbe8ee3cf5c8db7ed9d57beccb553459361b96ca3aecad3`.
+
+The verification record and evidence summary are documentation added after that
+successful code run. The verified proof and checker sources remain unchanged.
+The separate [Japanese comparison notes](complementary-observation-comparison-notes.md)
+cover the observation-kernel comparison and counterexamples.
+
 ## Scope and preserved baseline
 
 This additive change starts at PR #23 commit
@@ -192,8 +217,15 @@ The allowed axiom set remains `propext`, `Classical.choice`, `Quot.sound`.
 The checkers reject `sorry`, `admit`, newly declared axioms, `unsafe`,
 `native_decide`, incomplete audits, unexpected axioms, and Lean warnings.
 
-At preparation time the additions contain 59 theorems / 81 declarations:
-general 24/30, F16 15/20, examples 20/31. Expected integrated totals are
-902 theorems / 1129 declarations. These counts alone are not a successful
-Lean verification result. The exact successful CI commit, run, and observed
-counts will be recorded after the new workflow completes.
+The completed CI observed 59 added theorems / 81 added declarations:
+general 24/30, F16 15/20, examples 20/31. The integrated totals are
+902 theorems / 1129 declarations. All counts, source hashes, successful stages,
+and the original-source preservation result are recorded in the CI summary
+linked above. The standalone check covers the general/examples modules; the
+15 F16 theorems and 20 F16 declarations are verified in the complete integration
+against the original matrix definitions and then reported as their own group.
+
+The first two development runs failed on elaboration/linter and scoped-command
+syntax issues, respectively. Those runs are not treated as successful evidence.
+The successful run cited here follows the corresponding proof-script fixes;
+the mathematical hypotheses and conclusions did not change.
