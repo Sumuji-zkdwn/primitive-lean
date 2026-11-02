@@ -39,6 +39,7 @@ def chebyPoly : ℕ → Polynomial K
   | 0 => X
   | k + 1 => cubicPoly.comp (chebyPoly k)
 
+omit [CharZero K] in
 theorem cubicPoly_eval (x : K) :
     (cubicPoly (K := K)).eval x = cubic x := by
   simp [cubicPoly, cubic]
@@ -67,7 +68,10 @@ theorem iterate_joukowski (z : K) (hz : z ≠ 0) (k : ℕ) :
     change cubic (chebyIterate (joukowski z) k) =
       joukowski (z ^ (3 ^ (k + 1)))
     rw [ih, cubic_joukowski (z ^ (3 ^ k)) (pow_ne_zero _ hz)]
-    rw [pow_succ, pow_mul]
+    congr 1
+    calc
+      (z ^ (3 ^ k)) ^ 3 = z ^ ((3 ^ k) * 3) := (pow_mul z (3 ^ k) 3).symm
+      _ = z ^ (3 ^ (k + 1)) := by rw [pow_succ]
 
 /-- The j-th radical candidate, before taking inversion orbits. -/
 def rootCandidate (ζ z : K) (j : ℕ) : K :=
@@ -108,7 +112,7 @@ theorem primitive_denom_ne_zero {m : ℕ} {ζ : K}
   have htwo : ζ ^ 2 = 1 := by
     calc
       ζ ^ 2 = ζ * ζ := by ring
-      _ = ζ * ζ⁻¹ := by rw [heq]
+      _ = ζ * ζ⁻¹ := congrArg (fun w : K => ζ * w) heq
       _ = 1 := mul_inv_cancel₀ hζ0
   have hdiv : m ∣ 2 := hζ.dvd_of_pow_eq_one 2 htwo
   have hle : m ≤ 2 := Nat.le_of_dvd (by norm_num) hdiv
@@ -138,6 +142,7 @@ theorem reconstruct_z_primitive {m : ℕ} (ζ z : K)
   reconstruct_z ζ z hz (primitive_denom_ne_zero hζ hm)
 
 /-- The degree-three instance agrees with the existing cubic. -/
+omit [CharZero K] in
 theorem chebyIterate_one (x : K) :
     chebyIterate x 1 = cubic x := by
   rfl
@@ -173,7 +178,9 @@ theorem two_candidates_generate
   have hzB : z ∈ B :=
     IntermediateField.subset_adjoin F _ (by simp)
   have hrootB (j : ℕ) : rootCandidate u z j ∈ B := by
-    have hprod : u ^ j * z ∈ B := B.mul_mem (B.pow_mem huB j) hzB
+    have hpow : u ^ j ∈ B := by
+      simpa only [zpow_natCast] using (B.pow_mem huB (j : ℤ))
+    have hprod : u ^ j * z ∈ B := B.mul_mem hpow hzB
     change (u ^ j * z + (u ^ j * z)⁻¹) / 2 ∈ B
     exact B.div_mem (B.add_mem hprod (B.inv_mem hprod)) htwoB
   have hroot0A : rootCandidate u z 0 ∈ A :=
