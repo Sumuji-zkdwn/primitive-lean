@@ -64,6 +64,10 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/TemporalSampling.inc', 'LinearInputTemporalSampling'),
     ('linear_input/lean_check/WFSMobiusFourier.inc', 'LinearInputWFSMobiusFourier'),
     ('linear_input/lean_check/EnergyWfsFenchel.inc', 'LinearInputEnergyGaugeFenchel'),
+    ('linear_input/lean_check/ObservationRetractionPolarity.inc', 'LinearInputObservationRetractionPolarity'),
+    ('linear_input/lean_check/F0FutureMinimality.inc', 'LinearInputF0FutureMinimality'),
+    ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
+    ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
 )
 
 

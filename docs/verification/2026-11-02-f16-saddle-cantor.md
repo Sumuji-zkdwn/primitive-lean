@@ -41,9 +41,10 @@ itself.
 The existing `LinearInputF0.A_B_collapse` proves that when K is idempotent,
 Split/Collect reconstruct and splitting is compatible with K,
 `step K Split Collect = K`. The new direct corollary shows
-such a step has no genuine 2-cycle. Thus the horseshoe mechanism
-cannot be attributed to a reconstruction-compatible *fixed* F0
-retraction without extra history/phase dynamics.
+such a step has no genuine 2-cycle. Any genuine two-cycle must therefore
+violate at least one of idempotence, reconstruction, or compatibility.
+Extra history is one possible modification, not a necessary consequence
+of this theorem.
 
 ## Reproduce and scope
 

@@ -180,10 +180,13 @@ theorem localBlock_det (a : Fin 8) (t : ℝ) :
   rw [hp, hq]
   by_cases hlo : a.val < 4
   · by_cases h03 : a.val = 0 ∨ a.val = 3
-    · simp [hlo, h03] <;> ring
-    · simp [hlo, h03] <;> ring
+    · simp only [if_pos hlo, if_pos h03]
+      ring
+    · simp only [if_pos hlo, if_neg h03]
+      ring
   · have h03 : ¬(a.val = 0 ∨ a.val = 3) := by omega
-    simp [hlo, h03] <;> ring
+    simp only [if_neg hlo, if_neg h03]
+    ring
 
 /-- Four factors of either quadratic, with the two negative factors cancelling. -/
 theorem eight_block_product (t : ℝ) :

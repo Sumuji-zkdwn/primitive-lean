@@ -100,7 +100,8 @@ theorem branch_zero : branch 0 (0, 0) = (0, 0) := by
   simp [branch, keptDigit]
 
 /-- F0's existing collapse theorem excludes nontrivial two-cycles under
-reconstruction and compatibility. A horseshoe must retain extra history. -/
+reconstruction and compatibility. A genuine two-cycle must violate at least
+one of these hypotheses; extra history is only one possible modification. -/
 theorem compatible_F0_no_two_cycle
     {α I : Type*} {K : α → α}
     (hK : LinearInputF0.Idempotent K)

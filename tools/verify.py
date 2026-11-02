@@ -134,7 +134,7 @@ def verify_lean(rebuild):
         'StrangeOperatorBoundary': 'Finite non-idempotent obstruction to extending the spike-orbit theorem to arbitrary F0 maps',
         'StrangeOperatorFixedSets': 'Complete singleton Galois closure classification by fixed-point sets',
         'F16SaddleCantor': 'F16 reflection-derived hyperbolic saddle, finite two-branch ternary coding and the F0 two-cycle obstruction; no infinite fractal/dimension theorem.',
-        'F16FullMatrix': 'Actual real 16-by-16 sedenion left-pencil matrix, explicit eight-block permutation conjugacy, full determinant and real singularity classification',
+        'F16FullMatrix': 'Actual real 16-by-16 sedenion left-pencil matrix, explicit eight-block row/column permutation equivalence, full determinant and real singularity classification',
         'F16FullRank': 'Invertible 2-by-2 Gaussian elimination, global diagonalization and rank 12 exactly at t=±1 (rank 16 otherwise)',
         'F0UpdateDescent': 'Induced dynamics on F0 fixed representatives, descent iff fiber respect, composition, symmetry preservation and a finite counterexample',
         'Rule481Symmetry': 'Local Rule 481 reflection/complement and finite 3x3 torus mirror equivariance and two-cycle (not infinite-lattice OEIS coefficient proof)',
@@ -147,6 +147,10 @@ def verify_lean(rebuild):
         'TemporalSampling': 'General observation schedules, exact stride-sampling iff one-step congruence, phase reconstruction, and E-rotation even-time aliasing with positive WFS gauge',
         'WFSMobiusFourier': 'WFS p=2 positive-intensity Möbius involution induced by two E rotation steps and exact four-phase first Fourier coefficient with even-sample aliasing',
         'EnergyWfsFenchel': 'Exact E-gradient/Fenchel pairing transport, p=0/p=2 WFS gauges, all-u probe obstruction for F0 retractions and double-well minorants',
+        'ObservationRetractionPolarity': 'Exact decode/re-observe retraction on data, compatible fixed points, Stops semantics, and singleton closure with explicit properness hypotheses.',
+        'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
+        'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
+        'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
@@ -210,6 +214,7 @@ def main(argv=None):
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
+    modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     args = parser.parse_args(argv)
     if args.arc3_only:
         if args.rebuild:
@@ -219,6 +224,11 @@ def main(argv=None):
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 0 if report["passed"] else 1
     OUT.mkdir(exist_ok=True)
+    if args.integration_only:
+        from pr_integration import run_integration
+        result = run_integration(ROOT, command, args.rebuild)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result["passed"] else 1
     if args.proof_only:
         from proof_only import run_proof_only
         proof = run_proof_only(ROOT, command, args.rebuild)
