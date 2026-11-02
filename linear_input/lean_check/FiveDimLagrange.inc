@@ -336,19 +336,24 @@ theorem old_cartan_undecided_zero (z : FiveState) (v : ℝ × ℝ) :
     oldCartan z (undecidedTangent v) = (0, 0) := by
   apply Prod.ext <;> dsimp [oldCartan, undecidedTangent] <;> ring
 
-/-- The corresponding confirmed/slope movement for J^1(R^2,R). -/
-def confirmedTangent (z : FiveState) (w : ℝ × ℝ) : FiveState :=
-  (w, ((0, 0), w.1 * z.2.1.1 + w.2 * z.2.1.2))
+/-- Pure slope-coordinate motion lies in the jet contact distribution.
+This horizontal vector is different from a finite contactomorphism generator. -/
+def confirmedTangent (w : ℝ × ℝ) : FiveState :=
+  (w, ((0, 0), 0))
 
-/-- The canonical jet contact form vanishes along either direction family. -/
+/-- Base-coordinate motion with the compensating scalar derivative p*du. -/
+def jetUndecidedTangent (z : FiveState) (v : ℝ × ℝ) : FiveState :=
+  ((0, 0), (v, z.1.1 * v.1 + z.1.2 * v.2))
+
+/-- Both standard jet-horizontal families annihilate the contact form. -/
 theorem jet_contact_confirmed_zero (z : FiveState) (w : ℝ × ℝ) :
-    contactForm z (confirmedTangent z w) = 0 := by
+    contactForm z (confirmedTangent w) = 0 := by
   dsimp [contactForm, confirmedTangent]
   ring
 
 theorem jet_contact_undecided_zero (z : FiveState) (v : ℝ × ℝ) :
-    contactForm z (undecidedTangent v) = 0 := by
-  dsimp [contactForm, undecidedTangent]
+    contactForm z (jetUndecidedTangent z v) = 0 := by
+  dsimp [contactForm, jetUndecidedTangent]
   ring
 
 end LinearInputFiveDimLagrange
