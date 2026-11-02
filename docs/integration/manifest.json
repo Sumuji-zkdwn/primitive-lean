@@ -2119,10 +2119,10 @@
     },
     {
       "path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
-      "sha256": "d43d78a596c1e55b592d4adf5ea8d9618a4d5c1dbc78eb513872994a7b706ea5",
-      "original_sha256": "d43d78a596c1e55b592d4adf5ea8d9618a4d5c1dbc78eb513872994a7b706ea5",
+      "sha256": "a4764af3066ea46ac58409acacd4cdfcb86b6bafe642a255cf78e8d3501e678b",
+      "original_sha256": "a4764af3066ea46ac58409acacd4cdfcb86b6bafe642a255cf78e8d3501e678b",
       "source_pr": 31,
-      "source_commit": "7325ea7a706681a36b48458ed9a7ad4c1182932c",
+      "source_commit": "ddd8216fe2f8eeb41dd94d8830d5f295371206de",
       "source_path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
       "role": "retained_source",
       "byte_identical": true,
