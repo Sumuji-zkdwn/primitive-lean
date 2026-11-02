@@ -156,7 +156,6 @@ theorem genericQuotient_eq_pow_add_inv (m : ℕ) :
   simp only [map_add, map_pow, map_one, RatFunc.algebraMap_X]
   rw [show 2 * m = m * 2 by omega, pow_mul]
   field_simp [hx]
-  ring
 
 theorem genericParameter_eq_joukowski (m : ℕ) :
     genericParameter m =
