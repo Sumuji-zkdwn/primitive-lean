@@ -2190,14 +2190,16 @@
     },
     {
       "path": "linear_input/lean_check/F16SpectralProjectors.inc",
-      "sha256": "d0e37c6945e3e3ee282277d1c40ebaacc4ce0263e3e1c8409aa4b87089676fc6",
+      "sha256": "b0b5d794052bc89385a277ebc29052fba173729adc20ec969e255998633964bd",
       "original_sha256": "d0e37c6945e3e3ee282277d1c40ebaacc4ce0263e3e1c8409aa4b87089676fc6",
       "source_pr": null,
       "source_commit": "31a9dc36d199b2bdf25f6d1c78c6c6894f9dfc0a",
       "source_path": "linear_input/lean_check/F16SpectralProjectors.inc",
-      "role": "new_branch_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Enable Matrix scoped transpose notation and expose the computable numerical diagonal predicate; all mathematical statements unchanged."
+      ]
     },
     {
       "path": "tools/check_f16_spectral.py",

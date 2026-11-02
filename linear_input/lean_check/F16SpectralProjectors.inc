@@ -8,6 +8,7 @@ This establishes the three rational spectral subspaces with multiplicities
 -/
 
 noncomputable section
+open scoped Matrix
 
 namespace LinearInputF16Spectral
 
@@ -26,7 +27,7 @@ def active (i : Idx) : Prop :=
 
 /-- Diagonal of the real-eigenvalue sector, as an exact rational matrix. -/
 def realSector : QMat :=
-  fun i j => if i = j ∧ active i then 1 else 0
+  fun i j => if i = j ∧ ((4 ≤ i.val ∧ i.val < 8) ∨ 12 ≤ i.val) then 1 else 0
 
 /-- Exact symmetric cross matrix L3^T L10 + L10^T L3. -/
 def cross : QMat := fun i j =>
