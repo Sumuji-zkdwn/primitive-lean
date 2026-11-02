@@ -39,7 +39,7 @@ def ternaryBlock (r : Fin 3) (a : ℤ) : List ℤ :=
 
 theorem ternary_block_sum (r : Fin 3) (a : ℤ) :
     (ternaryBlock r a).sum = a := by
-  fin_cases r <;> simp [ternaryBlock]
+  fin_cases r <;> norm_num [ternaryBlock, List.range]
 
 /-- Two blocks: +1 followed by -1; p and q independently choose phases. -/
 def twoBlocks (p q : Fin 3) : List ℤ :=
@@ -71,7 +71,8 @@ theorem six_cesaro_values (p q : Fin 3) :
     sixCesaro p q = (1 / 2 : ℚ) ∨
     sixCesaro p q = (2 / 3 : ℚ) ∨
     sixCesaro p q = (5 / 6 : ℚ) := by
-  fin_cases p <;> fin_cases q <;> decide
+  rw [six_cesaro_formula]
+  fin_cases p <;> fin_cases q <;> norm_num
 
 /-- All nine zero-padded blocks have the same ordered nonzero terms. -/
 theorem two_blocks_nonzero (p q : Fin 3) :
@@ -84,7 +85,9 @@ theorem zero_placement_counterexample :
       (twoBlocks 2 0).filter (fun x => x ≠ 0) ∧
     sixCesaro 0 2 = (5 / 6 : ℚ) ∧
     sixCesaro 2 0 = (1 / 6 : ℚ) := by
-  decide
+  constructor
+  · rw [two_blocks_nonzero, two_blocks_nonzero]
+  constructor <;> rw [six_cesaro_formula] <;> norm_num
 
 /-- Removing literal zero entries never changes the finite additive sum. -/
 theorem filter_nonzero_preserves_sum (xs : List ℤ) :
@@ -92,9 +95,12 @@ theorem filter_nonzero_preserves_sum (xs : List ℤ) :
   induction xs with
   | nil => rfl
   | cons x xs ih =>
-      by_cases hx : x = 0
-      · simp [hx, ih]
-      · simp [hx, ih]
+      simp only [List.filter_cons]
+      split_ifs with hx
+      · simpa only [List.sum_cons, ih]
+      · have hzero : x = 0 := by simpa using hx
+        subst x
+        simpa only [List.sum_cons, zero_add] using ih
 
 /-- Repeat a partial-sum state for its actual number of time slots. -/
 def dwellExpand (blocks : List (ℤ × ℕ)) : List ℤ :=
