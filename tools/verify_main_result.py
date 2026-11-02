@@ -72,6 +72,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
     ('linear_input/lean_check/F16FenchelAtlas.inc', 'LinearInputF16FenchelAtlas'),
     ('linear_input/lean_check/F16FenchelFull.inc', 'LinearInputF16FenchelFull'),
+    ('linear_input/lean_check/F16SpectralProjectors.inc', 'LinearInputF16Spectral'),
 )
 
 

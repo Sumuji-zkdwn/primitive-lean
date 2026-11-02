@@ -153,6 +153,7 @@ def verify_lean(rebuild):
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
         'F16FenchelAtlas': 'Exact 2D F16 quadratic section as original E, actual Hessian Jacobian, sharp Fenchel dual bounds, singular finite-domain classification, and full pencil rank comparison',
         'F16FenchelFull': 'Actual 16D F16 left-pencil Fenchel dual: finite-domain iff normal range, sharp attained supremum, and null-kernel unboundedness',
+        'F16SpectralProjectors': 'Exact rational spectral projections from the original F16 table, rank decomposition 4/4/8, and checked cross term eigenvalues',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
