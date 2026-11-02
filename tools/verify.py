@@ -151,6 +151,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'FiveDimLagrange': 'Five-coordinate constrained-energy lift, regular one-constraint multiplier existence from Elastica kernel annihilators, confirmed-observation Jacobian rank drop, and explicit original-E stationary input.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
