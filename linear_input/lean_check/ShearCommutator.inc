@@ -89,14 +89,20 @@ theorem shearA_formula (a : ℝ) (z : ℝ × ℝ) :
     shearA a z = (z.1 + a * z.2, z.2) := by
   change gradient a (pairSwap z) = _
   rw [gradient_formula]
-  apply Prod.ext <;> (dsimp [pairSwap]; ring)
+  apply Prod.ext
+  · dsimp [pairSwap]
+    ring
+  · rfl
 
 /-- Swapping the outputs AFTER the same source gradient produces the y-shear. -/
 theorem shearB_formula (b : ℝ) (z : ℝ × ℝ) :
     shearB b z = (z.1, z.2 + b * z.1) := by
   change pairSwap (gradient b z) = _
   rw [gradient_formula]
-  apply Prod.ext <;> (dsimp [pairSwap]; ring)
+  apply Prod.ext
+  · rfl
+  · dsimp [pairSwap]
+    ring
 
 def undoA (a : ℝ) (z : ℝ × ℝ) : ℝ × ℝ :=
   (z.1 - a * z.2, z.2)
@@ -107,22 +113,34 @@ def undoB (b : ℝ) (z : ℝ × ℝ) : ℝ × ℝ :=
 theorem undoA_left (a : ℝ) (z : ℝ × ℝ) :
     undoA a (shearA a z) = z := by
   rw [shearA_formula]
-  apply Prod.ext <;> (dsimp [undoA]; ring)
+  apply Prod.ext
+  · dsimp [undoA]
+    ring
+  · rfl
 
 theorem undoA_right (a : ℝ) (z : ℝ × ℝ) :
     shearA a (undoA a z) = z := by
   rw [shearA_formula]
-  apply Prod.ext <;> (dsimp [undoA]; ring)
+  apply Prod.ext
+  · dsimp [undoA]
+    ring
+  · rfl
 
 theorem undoB_left (b : ℝ) (z : ℝ × ℝ) :
     undoB b (shearB b z) = z := by
   rw [shearB_formula]
-  apply Prod.ext <;> (dsimp [undoB]; ring)
+  apply Prod.ext
+  · rfl
+  · dsimp [undoB]
+    ring
 
 theorem undoB_right (b : ℝ) (z : ℝ × ℝ) :
     shearB b (undoB b z) = z := by
   rw [shearB_formula]
-  apply Prod.ext <;> (dsimp [undoB]; ring)
+  apply Prod.ext
+  · rfl
+  · dsimp [undoB]
+    ring
 
 /-- The genuine inverse order B^-1 then A^-1 cancels A then B. -/
 theorem correct_reverse_order (a b : ℝ) (z : ℝ × ℝ) :
