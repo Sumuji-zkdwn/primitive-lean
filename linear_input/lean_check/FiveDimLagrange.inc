@@ -840,8 +840,12 @@ theorem actualBracketProj_Y (z : FiveState) :
   · dsimp [actualBracketProj, fivePolyFieldEval, polyY,
       fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
     ring
-  · apply Prod.ext <;> dsimp [actualBracketProj, fivePolyFieldEval,
-      polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY] <;> ring
+  · apply Prod.ext
+    · dsimp [actualBracketProj, fivePolyFieldEval,
+        polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
+      ring
+    · dsimp [actualBracketProj, fivePolyFieldEval,
+        polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
 
 theorem actualBracketProj_Z1 (z : FiveState) :
     actualBracketProj (fivePolyFieldEval polyZ1 z) =
@@ -930,8 +934,9 @@ theorem rewrite_holonomy_pair (z : FiveState) (v : ℝ × ℝ) :
       fivePolyDir holonomyPoly z (commonDirection z v)) =
       (z.1.1 * v.1 + z.1.2 * v.2,
         z.1.1 * v.2 - z.1.2 * v.1) := by
-  rw [holonomy_common_derivative]
-  rfl
+  apply Prod.ext
+  · dsimp [commonDirection]
+  · exact holonomy_common_derivative z v
 
 
 end LinearInputFiveDimLagrange
