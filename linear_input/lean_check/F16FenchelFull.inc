@@ -47,6 +47,7 @@ theorem score_square_identity (t : ℝ) (z w : State) :
   have hd : action t (w - z) = action t w - action t z := by simp
   rw [hd, real_inner_sub_sub_self]
   simp only [score, potential, inner_normal]
+  rw [real_inner_comm (action t z) (action t w)]
   ring
 
 theorem score_upper (t : ℝ) (z w : State) :

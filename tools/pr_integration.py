@@ -15,6 +15,7 @@ SMOKE_TESTS = (
     'check_f0_future_minimality',
     'check_wfs_sampling',
     'check_f16_fenchel_atlas',
+    'check_f16_fenchel_full',
 )
 
 
