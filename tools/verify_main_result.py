@@ -41,6 +41,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/F16RankCertificate.inc", "LinearInputF16Rank"),
     ("linear_input/lean_check/F16RealDeterminant.inc", "LinearInputF16Determinant"),
     ("linear_input/lean_check/F16CompleteRank.inc", "LinearInputF16CompleteRank"),
+    ("linear_input/lean_check/StrangeOperatorGalois.inc", "LinearInputStrangeGalois"),
 )
 
 
