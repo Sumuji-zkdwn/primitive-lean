@@ -562,4 +562,267 @@ theorem cartan_minor_sample :
   rw [cartan_minor_factor]
   norm_num
 
+
+/-!
+# Genuine polynomial Lie derivatives in the common five-dimensional distribution
+
+All coordinates below are real.  We use a free expression syntax for finite
+multivariate polynomials in (c1,c2,u1,u2,r).  The first theorem derives the
+directional-derivative evaluation from the actual HasDerivAt rules, so later
+bracket formulas are not postulates about a formal substitution operator.
+-/
+
+inductive FivePoly where
+  | const (a : ℝ)
+  | c1 | c2 | u1 | u2 | rewrite
+  | add (p q : FivePoly)
+  | mul (p q : FivePoly)
+  | neg (p : FivePoly)
+
+instance : Add FivePoly := ⟨FivePoly.add⟩
+instance : Mul FivePoly := ⟨FivePoly.mul⟩
+instance : Neg FivePoly := ⟨FivePoly.neg⟩
+instance : Sub FivePoly := ⟨fun p q => FivePoly.add p (FivePoly.neg q)⟩
+
+def fiveLine (z v : FiveState) (t : ℝ) : FiveState :=
+  ((z.1.1 + t * v.1.1, z.1.2 + t * v.1.2),
+    ((z.2.1.1 + t * v.2.1.1, z.2.1.2 + t * v.2.1.2),
+      z.2.2 + t * v.2.2))
+
+theorem fiveLine_zero (z v : FiveState) : fiveLine z v 0 = z := by
+  simp [fiveLine]
+
+def fivePolyEval : FivePoly → FiveState → ℝ
+  | .const a, _ => a
+  | .c1, z => z.1.1
+  | .c2, z => z.1.2
+  | .u1, z => z.2.1.1
+  | .u2, z => z.2.1.2
+  | .rewrite, z => z.2.2
+  | .add p q, z => fivePolyEval p z + fivePolyEval q z
+  | .mul p q, z => fivePolyEval p z * fivePolyEval q z
+  | .neg p, z => -fivePolyEval p z
+
+def fivePolyDir : FivePoly → FiveState → FiveState → ℝ
+  | .const _, _, _ => 0
+  | .c1, _, v => v.1.1
+  | .c2, _, v => v.1.2
+  | .u1, _, v => v.2.1.1
+  | .u2, _, v => v.2.1.2
+  | .rewrite, _, v => v.2.2
+  | .add p q, z, v => fivePolyDir p z v + fivePolyDir q z v
+  | .mul p q, z, v =>
+      fivePolyDir p z v * fivePolyEval q z +
+        fivePolyEval p z * fivePolyDir q z v
+  | .neg p, z, v => -fivePolyDir p z v
+
+/-- The syntactic polynomial's directional differential IS the real derivative. -/
+theorem fivePolyDir_hasDerivAt (p : FivePoly) (z v : FiveState) :
+    HasDerivAt (fun t : ℝ => fivePolyEval p (fiveLine z v t))
+      (fivePolyDir p z v) 0 := by
+  induction p with
+  | const a =>
+      simpa [fivePolyEval, fivePolyDir] using (hasDerivAt_const (0 : ℝ) a)
+  | c1 =>
+      simpa [fivePolyEval, fivePolyDir, fiveLine] using
+        (((hasDerivAt_id (0 : ℝ)).mul_const v.1.1).const_add z.1.1)
+  | c2 =>
+      simpa [fivePolyEval, fivePolyDir, fiveLine] using
+        (((hasDerivAt_id (0 : ℝ)).mul_const v.1.2).const_add z.1.2)
+  | u1 =>
+      simpa [fivePolyEval, fivePolyDir, fiveLine] using
+        (((hasDerivAt_id (0 : ℝ)).mul_const v.2.1.1).const_add z.2.1.1)
+  | u2 =>
+      simpa [fivePolyEval, fivePolyDir, fiveLine] using
+        (((hasDerivAt_id (0 : ℝ)).mul_const v.2.1.2).const_add z.2.1.2)
+  | rewrite =>
+      simpa [fivePolyEval, fivePolyDir, fiveLine] using
+        (((hasDerivAt_id (0 : ℝ)).mul_const v.2.2).const_add z.2.2)
+  | add p q hp hq =>
+      simpa [fivePolyEval, fivePolyDir] using hp.add hq
+  | mul p q hp hq =>
+      simpa [fivePolyEval, fivePolyDir, fiveLine_zero] using hp.mul hq
+  | neg p hp =>
+      simpa [fivePolyEval, fivePolyDir] using hp.neg
+
+structure FivePolyField where
+  fc1 : FivePoly
+  fc2 : FivePoly
+  fu1 : FivePoly
+  fu2 : FivePoly
+  fr : FivePoly
+
+def fivePolyFieldEval (F : FivePolyField) (z : FiveState) : FiveState :=
+  ((fivePolyEval F.fc1 z, fivePolyEval F.fc2 z),
+    ((fivePolyEval F.fu1 z, fivePolyEval F.fu2 z), fivePolyEval F.fr z))
+
+def fivePolyFieldDir (F : FivePolyField) (z v : FiveState) : FiveState :=
+  ((fivePolyDir F.fc1 z v, fivePolyDir F.fc2 z v),
+    ((fivePolyDir F.fu1 z v, fivePolyDir F.fu2 z v), fivePolyDir F.fr z v))
+
+/-- Genuine directional derivative in all five coordinates, along a real affine line. -/
+def actualDirectional (F : FiveState → FiveState) (z v : FiveState) : FiveState :=
+  ((deriv (fun t : ℝ => (F (fiveLine z v t)).1.1) 0,
+    deriv (fun t : ℝ => (F (fiveLine z v t)).1.2) 0),
+    ((deriv (fun t : ℝ => (F (fiveLine z v t)).2.1.1) 0,
+      deriv (fun t : ℝ => (F (fiveLine z v t)).2.1.2) 0),
+      deriv (fun t : ℝ => (F (fiveLine z v t)).2.2) 0))
+
+theorem actualDirectional_poly (F : FivePolyField) (z v : FiveState) :
+    actualDirectional (fivePolyFieldEval F) z v = fivePolyFieldDir F z v := by
+  apply Prod.ext
+  · apply Prod.ext
+    · exact (fivePolyDir_hasDerivAt F.fc1 z v).deriv
+    · exact (fivePolyDir_hasDerivAt F.fc2 z v).deriv
+  · apply Prod.ext
+    · apply Prod.ext
+      · exact (fivePolyDir_hasDerivAt F.fu1 z v).deriv
+      · exact (fivePolyDir_hasDerivAt F.fu2 z v).deriv
+    · exact (fivePolyDir_hasDerivAt F.fr z v).deriv
+
+def fiveStateSub (v w : FiveState) : FiveState :=
+  ((v.1.1 - w.1.1, v.1.2 - w.1.2),
+    ((v.2.1.1 - w.2.1.1, v.2.1.2 - w.2.1.2), v.2.2 - w.2.2))
+
+/-- Actual Lie bracket, not an algebraically assigned exchange rule. -/
+def actualLieBracket (F G : FiveState → FiveState) (z : FiveState) : FiveState :=
+  fiveStateSub (actualDirectional G z (F z)) (actualDirectional F z (G z))
+
+def polyLieBracketEval (F G : FivePolyField) (z : FiveState) : FiveState :=
+  fiveStateSub
+    (fivePolyFieldDir G z (fivePolyFieldEval F z))
+    (fivePolyFieldDir F z (fivePolyFieldEval G z))
+
+/-- Polynomial bracket evaluation is the genuine bracket of the evaluated fields. -/
+theorem actualLieBracket_poly (F G : FivePolyField) (z : FiveState) :
+    actualLieBracket (fivePolyFieldEval F) (fivePolyFieldEval G) z =
+      polyLieBracketEval F G z := by
+  simp only [actualLieBracket, polyLieBracketEval, actualDirectional_poly]
+
+def pc1 : FivePoly := .c1
+def pc2 : FivePoly := .c2
+def pu1 : FivePoly := .u1
+def pu2 : FivePoly := .u2
+def p2 : FivePoly := .const 2
+def p3 : FivePoly := .const 3
+
+def polyX1 : FivePolyField where
+  fc1 := pc1 * pu1
+  fc2 := pc1 * pu2
+  fu1 := .const 1
+  fu2 := .const 0
+  fr := pc1
+
+def polyX2 : FivePolyField where
+  fc1 := pc2 * pu1
+  fc2 := pc2 * pu2
+  fu1 := .const 0
+  fu2 := .const 1
+  fr := pc2
+
+def polyY : FivePolyField where
+  fc1 := pc1 * pu1 * pu2 - pc2 * pu1 * pu1 + pc2
+  fc2 := pc1 * pu2 * pu2 - pc1 - pc2 * pu1 * pu2
+  fu1 := .const 0
+  fu2 := .const 0
+  fr := pc1 * pu2 - pc2 * pu1
+
+def polyZ1 : FivePolyField where
+  fc1 := -(pc1 * pu1 * pu1 * pu2) + p2 * pc1 * pu2 +
+    pc2 * pu1 * pu1 * pu1 - p3 * pc2 * pu1
+  fc2 := -(pc1 * pu1 * pu2 * pu2) - pc1 * pu1 +
+    pc2 * pu1 * pu1 * pu2 - p2 * pc2 * pu2
+  fu1 := .const 0
+  fu2 := .const 0
+  fr := -(pc1 * pu1 * pu2) + pc2 * pu1 * pu1 - p2 * pc2
+
+def polyZ2 : FivePolyField where
+  fc1 := -(pc1 * pu1 * pu2 * pu2) + p2 * pc1 * pu1 +
+    pc2 * pu1 * pu1 * pu2 + pc2 * pu2
+  fc2 := -(pc1 * pu2 * pu2 * pu2) + p3 * pc1 * pu2 +
+    pc2 * pu1 * pu2 * pu2 - p2 * pc2 * pu1
+  fu1 := .const 0
+  fu2 := .const 0
+  fr := -(pc1 * pu2 * pu2) + p2 * pc1 + pc2 * pu1 * pu2
+
+/-- The polynomial fields are the already-proved two common horizontal directions. -/
+theorem polyX1_eq_common (z : FiveState) :
+    fivePolyFieldEval polyX1 z = commonDirection z (1, 0) := by
+  apply Prod.ext
+  · apply Prod.ext <;> dsimp [fivePolyFieldEval, polyX1,
+      fivePolyEval, pc1, pu1, pu2, commonDirection] <;> ring
+  · apply Prod.ext
+    · apply Prod.ext <;> dsimp [fivePolyFieldEval, polyX1,
+        fivePolyEval, pc1, pu1, pu2, commonDirection] <;> ring
+    · dsimp [fivePolyFieldEval, polyX1, fivePolyEval, pc1,
+        commonDirection]
+      ring
+
+theorem polyX2_eq_common (z : FiveState) :
+    fivePolyFieldEval polyX2 z = commonDirection z (0, 1) := by
+  apply Prod.ext
+  · apply Prod.ext <;> dsimp [fivePolyFieldEval, polyX2,
+      fivePolyEval, pc2, pu1, pu2, commonDirection] <;> ring
+  · apply Prod.ext
+    · apply Prod.ext <;> dsimp [fivePolyFieldEval, polyX2,
+        fivePolyEval, pc2, pu1, pu2, commonDirection] <;> ring
+    · dsimp [fivePolyFieldEval, polyX2, fivePolyEval, pc2,
+        commonDirection]
+      ring
+
+/-- The first derived field is the genuine Lie bracket [X1,X2]. -/
+theorem actual_bracket_X1_X2 (z : FiveState) :
+    actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyX2) z =
+      fivePolyFieldEval polyY z := by
+  rw [actualLieBracket_poly]
+  apply Prod.ext
+  · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      polyX1, polyX2, polyY, pc1, pc2, pu1, pu2] <;> ring
+  · apply Prod.ext
+    · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyX2, polyY, pc1, pc2, pu1, pu2] <;> ring
+    · dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyX2, polyY, pc1, pc2, pu1, pu2]
+      ring
+
+/-- The first fourth-order candidate is the actual iterated bracket [X1,Y]. -/
+theorem actual_bracket_X1_Y (z : FiveState) :
+    actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyY) z =
+      fivePolyFieldEval polyZ1 z := by
+  rw [actualLieBracket_poly]
+  apply Prod.ext
+  · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      polyX1, polyY, polyZ1, pc1, pc2, pu1, pu2, p2, p3] <;> ring
+  · apply Prod.ext
+    · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyY, polyZ1, pc1, pc2, pu1, pu2, p2, p3] <;> ring
+    · dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX1, polyY, polyZ1, pc1, pc2, pu1, pu2, p2, p3]
+      ring
+
+/-- The second fourth-order candidate is the actual iterated bracket [X2,Y]. -/
+theorem actual_bracket_X2_Y (z : FiveState) :
+    actualLieBracket (fivePolyFieldEval polyX2) (fivePolyFieldEval polyY) z =
+      fivePolyFieldEval polyZ2 z := by
+  rw [actualLieBracket_poly]
+  apply Prod.ext
+  · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3] <;> ring
+  · apply Prod.ext
+    · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyDir, fivePolyFieldEval, fivePolyEval,
+        polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3] <;> ring
+    · dsimp [polyLieBracketEval, fiveStateSub,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3]
+      ring
+
+
 end LinearInputFiveDimLagrange
