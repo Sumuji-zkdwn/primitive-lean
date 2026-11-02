@@ -53,6 +53,7 @@ jobs:
         run: |
           set -euo pipefail
           python -B -X utf8 tools/check_galois_bridge.py
+          python -B -X utf8 tools/check_strange_operator_galois.py
 
       - name: Run full proof-only Lean integration and axiom audit
         shell: bash
