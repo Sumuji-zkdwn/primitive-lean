@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "d4730c733dc8aa3359471e77f239b76dfa66555d4f25a255f8b9cc6fa54c2c54",
+      "sha256": "a7061ed220b9adfb30f9ae87f1e54f09bb906bed40332c5f51c6844d9a521e22",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2131,9 +2131,10 @@
         "Replace a pair of equivalent tactic combinators to meet the strict zero-warning Lean compilation policy; no theorem statement changes.",
         "Add 4 algebraic Cartan/contact horizontality theorems for dual first-jet geometries J^1(R,R^2) and J^1(R^2,R).",
         "Correct two failed jet-horizontality attempts using pure momentum and base-plus-pairing tangent directions; add their explicit tangent definition.",
-        "Append 13 theorems and 7 definitions: exact common horizontal-plane parameterization; F0 retraction and a primitive-energy transverse update that violates descent; polynomial Cartan bracket minor factorization and nondegeneracy certificate."
+        "Append 13 theorems and 7 definitions: exact common horizontal-plane parameterization; F0 retraction and a primitive-energy transverse update that violates descent; polynomial Cartan bracket minor factorization and nondegeneracy certificate.",
+        "Add an inductively proved real HasDerivAt semantics for five-variable polynomial expressions, actual fieldwise derivatives, and true first/second Lie-bracket identifications with the previously symbolic Y/Z fields."
       ],
-      "note": "Original 11-theorem source preserved by original SHA; working source is a 36-theorem derivation (13 new since previous validated head). Bracket columns currently have symbolic-differentiation provenance; their Lean minor identity is a polynomial certificate, not yet a Lean derivation of iterated Lie brackets."
+      "note": "Original source provenance unchanged. Added derivative semantics and genuine iterated Lie brackets, pending exact-head CI. The earlier factorized minor and F0 proofs remain intact."
     }
   ],
   "construction_errors": []
