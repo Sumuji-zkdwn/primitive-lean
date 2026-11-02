@@ -18,19 +18,19 @@ abbrev Idx := Fin 16
 abbrev QMat := Matrix Idx Idx ℚ
 
 /-- Left actions of the actual basis units, cast from the verified table. -/
-def leftThreeQ : QMat := fun i j => (entryThree i j : ℚ)
-def leftTenQ : QMat := fun i j => (entryTen i j : ℚ)
+abbrev leftThreeQ : QMat := fun i j => (entryThree i j : ℚ)
+abbrev leftTenQ : QMat := fun i j => (entryTen i j : ℚ)
 
 /-- The only eight coordinates on which the cross term acts. -/
-def active (i : Idx) : Prop :=
+abbrev active (i : Idx) : Prop :=
   (4 ≤ i.val ∧ i.val < 8) ∨ 12 ≤ i.val
 
 /-- Diagonal of the real-eigenvalue sector, as an exact rational matrix. -/
-def realSector : QMat :=
+abbrev realSector : QMat :=
   fun i j => if i = j ∧ ((4 ≤ i.val ∧ i.val < 8) ∨ 12 ≤ i.val) then 1 else 0
 
 /-- Exact symmetric cross matrix L3^T L10 + L10^T L3. -/
-def cross : QMat := fun i j =>
+abbrev cross : QMat := fun i j =>
   if (i.val = 4 ∧ j.val = 13) ∨ (i.val = 13 ∧ j.val = 4) ∨
      (i.val = 7 ∧ j.val = 14) ∨ (i.val = 14 ∧ j.val = 7) then -2
   else if (i.val = 5 ∧ j.val = 12) ∨ (i.val = 12 ∧ j.val = 5) ∨
@@ -52,9 +52,9 @@ theorem cross_from_actual_F16 :
   fin_cases i <;> fin_cases j <;> decide
 
 /-- Orthogonal spectral projections for cross-term eigenvalues +2, -2, 0. -/
-def plus : QMat := ((1 / 2 : ℚ) • realSector) + ((1 / 4 : ℚ) • cross)
-def minus : QMat := ((1 / 2 : ℚ) • realSector) - ((1 / 4 : ℚ) • cross)
-def zero : QMat := 1 - realSector
+abbrev plus : QMat := ((1 / 2 : ℚ) • realSector) + ((1 / 4 : ℚ) • cross)
+abbrev minus : QMat := ((1 / 2 : ℚ) • realSector) - ((1 / 4 : ℚ) • cross)
+abbrev zero : QMat := 1 - realSector
 
 theorem projector_sum : plus + minus + zero = 1 := by
   ext i j
