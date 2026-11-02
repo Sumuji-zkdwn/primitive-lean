@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "92d14387f2d649d5b17c3540dfee9631ec01ba49a040a03429ee57b5ec995eba",
+      "sha256": "6ca850b64619e1e4ece3d2f6b6646ff79c0e20f0acf18ad3fb7d1422948a1df7",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2133,7 +2133,8 @@
         "Correct two failed jet-horizontality attempts using pure momentum and base-plus-pairing tangent directions; add their explicit tangent definition.",
         "Append 13 theorems and 7 definitions: exact common horizontal-plane parameterization; F0 retraction and a primitive-energy transverse update that violates descent; polynomial Cartan bracket minor factorization and nondegeneracy certificate.",
         "Add an inductively proved real HasDerivAt semantics for five-variable polynomial expressions, actual fieldwise derivatives, and true first/second Lie-bracket identifications with the previously symbolic Y/Z fields.",
-        "Remove the two redundant no-op ring tactics identified by strict Lean CI and add actual Lie-bracket projected minor and conserved/rotating holonomy derivative theorems."
+        "Remove the two redundant no-op ring tactics identified by strict Lean CI and add actual Lie-bracket projected minor and conserved/rotating holonomy derivative theorems.",
+        "Replace two potentially redundant end-of-proof tactics in projection and holonomy pairing with structurally exact proof steps."
       ],
       "note": "54 theorem statements in FiveDimLagrange.inc. 36 prior proved at 8e5ce2fd. Nine genuine-derivative theorems compiled at a7d8663f (CI failed only 2 style warnings); nine new projection/holonomy theorems pending integrated CI."
     }
