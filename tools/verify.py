@@ -119,6 +119,7 @@ def verify_lean(rebuild):
         'GaloisChebyshev': 'Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)',
         'KummerDihedral': 'Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)',
         'ChebyshevDihedralDescent': 'All ternary Chebyshev iterates, genuine polynomial root identities and reconstruction of a multiplicative radical from two candidates; not yet a full dihedral Galois equivalence',
+        'ChebyshevRatFuncDegrees': 'Exact degrees of all cubic Chebyshev iterates and nonconstancy of the square of the generic rational-function coordinate',
         'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
         'F16Holonomy': 'Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification',
         'F16RecoverySpectrum': 'Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input',
