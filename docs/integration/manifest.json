@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "e8c969d067b92fbd71d22a505c640b14682cedb02795492658b3b2950964def0",
+      "sha256": "374540da4517cc3cf1fd22937b053a66ea3bfa5307c81979f0d7078202eaad98",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2139,9 +2139,10 @@
         "Append genuine 5x5 Matrix.fromBlocks representation of horizontal and iterated Lie-bracket columns; derive its Mathlib Matrix.det, exact determinant-zero locus and rank-five generic condition.",
         "Replace unavailable Matrix.rank_of_det_ne_zero by the pinned Mathlib isUnit_iff_ne_zero → isUnit_iff_isUnit_det → Matrix.rank_of_isUnit chain already verified in F16FullRank.inc.",
         "Add singular parallel state and projected length-two/three/four bracket formulas, a universal fourth-order 5x5 determinant certificate -4*(c1²+c2²)^3 independent of t, and rank-five via unit determinant; derivative-level fourth bracket identifications to follow.",
-        "Prove two fourth-order actual Lie brackets projected onto (c1,c2,r) match the parallel polynomial W11 and W12, prove their undecided components vanish, identify the actual fourth-order 5x5 block matrix, and derive its nonzero determinant and rank five for all c != 0, u = t*c."
+        "Prove two fourth-order actual Lie brackets projected onto (c1,c2,r) match the parallel polynomial W11 and W12, prove their undecided components vanish, identify the actual fourth-order 5x5 block matrix, and derive its nonzero determinant and rank five for all c != 0, u = t*c.",
+        "Explicitly zeta-reduce local bindings in singularActualFourthMatrix_eq before rewriting the verified parallel projected Lie brackets; no theorem statement change."
       ],
-      "note": "71 theorem statements total: 60 already verified at ae061e44; 11 singular-stratum follow-up theorem candidates, of which six link genuine fourth-order Lie brackets to the universal -4*(c1²+c2²)^3 determinant. Exact-head CI pending."
+      "note": "65-theorem intermediate source CI green (41533787976). At 71-theorem head ea645, all additional Lie identities compiled; the exact matrix equivalence lemma had an unexpanded local let-binding, now fixed and pending full CI."
     }
   ],
   "construction_errors": []
