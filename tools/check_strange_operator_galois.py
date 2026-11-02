@@ -80,6 +80,13 @@ def main():
     assert breaks_fiber(k, bad)
     assert not breaks_fiber(k, k)
     assert closed == frozenset((k, kp))
+    constant_zero = (0, 0, 0)
+    delayed_zero = (0, 0, 1)
+    assert compose(constant_zero, constant_zero) == constant_zero
+    assert compose(delayed_zero, delayed_zero) != delayed_zero
+    assert delayed_zero in polar_pair(3, (constant_zero,))[2]
+    assert all(delayed_zero != conjugate(p, constant_zero)
+               for p in permutations(range(3)))
     assert conjugate((2, 1, 0), k) == kp
     assert all(
         stops(t, s) == stops(conjugate(p, t), conjugate(p, s))
