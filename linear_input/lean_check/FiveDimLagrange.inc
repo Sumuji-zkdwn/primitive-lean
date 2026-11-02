@@ -356,4 +356,210 @@ theorem jet_contact_undecided_zero (z : FiveState) (v : ℝ × ℝ) :
   dsimp [contactForm, jetUndecidedTangent]
   ring
 
+/-!
+# Common horizontal plane, hidden rewrite witness, and Cartan bracket certificate
+
+The common distribution of the two jet geometries is obtained by intersecting
+both old Cartan forms with the new contact form on the same fixed 5D tuple.
+The F0 transition is a separately chosen, exactly specified primitive-energy
+re-evaluation: no unrestricted dynamics or physical interpretation is assumed.
+
+The three candidate bracket columns below were obtained by symbolic real Lie
+brackets of the two common-horizontal polynomial fields.  This supplement
+certifies the bracket MINOR algebraically; identifying those columns as actual
+Lie brackets still requires a separate verified derivative calculation.
+-/
+
+def commonDirection (z : FiveState) (v : ℝ × ℝ) : FiveState :=
+  let dr : ℝ := z.1.1 * v.1 + z.1.2 * v.2
+  ((z.2.1.1 * dr, z.2.1.2 * dr), (v, dr))
+
+/-- Every common direction annihilates both old Cartan forms and the jet contact form. -/
+theorem common_horizontal (z : FiveState) (v : ℝ × ℝ) :
+    oldCartan z (commonDirection z v) = (0, 0) ∧
+      contactForm z (commonDirection z v) = 0 := by
+  constructor
+  · apply Prod.ext <;> dsimp [oldCartan, commonDirection] <;> ring
+  · dsimp [contactForm, commonDirection]
+    ring
+
+/-- No further common direction exists: the intersection is parameterized by v ∈ R². -/
+theorem common_horizontal_unique (z w : FiveState)
+    (hω : oldCartan z w = (0, 0)) (hα : contactForm z w = 0) :
+    w = commonDirection z w.2.1 := by
+  rcases z with ⟨⟨c1, c2⟩, ⟨⟨u1, u2⟩, r⟩⟩
+  rcases w with ⟨⟨a1, a2⟩, ⟨⟨v1, v2⟩, t⟩⟩
+  have h1 : a1 - u1 * t = 0 := by
+    have h := congrArg Prod.fst hω
+    simpa [oldCartan] using h
+  have h2 : a2 - u2 * t = 0 := by
+    have h := congrArg Prod.snd hω
+    simpa [oldCartan] using h
+  have ht : t = c1 * v1 + c2 * v2 := by
+    dsimp [contactForm] at hα
+    linarith
+  have ha1 : a1 = u1 * t := by linarith
+  have ha2 : a2 = u2 * t := by linarith
+  apply Prod.ext
+  · apply Prod.ext
+    · change a1 = u1 * (c1 * v1 + c2 * v2)
+      rw [ha1, ht]
+    · change a2 = u2 * (c1 * v1 + c2 * v2)
+      rw [ha2, ht]
+  · apply Prod.ext
+    · rfl
+    · change t = c1 * v1 + c2 * v2
+      exact ht
+
+/-- Exact characterization of the common horizontal distribution. -/
+theorem common_horizontal_iff (z w : FiveState) :
+    (oldCartan z w = (0, 0) ∧ contactForm z w = 0) ↔
+      ∃ v : ℝ × ℝ, w = commonDirection z v := by
+  constructor
+  · rintro ⟨hω, hα⟩
+    exact ⟨w.2.1, common_horizontal_unique z w hω hα⟩
+  · rintro ⟨v, rfl⟩
+    exact common_horizontal z v
+
+/-- The undecided increments are a faithful parameterization of common directions. -/
+theorem common_direction_injective (z : FiveState) :
+    Function.Injective (commonDirection z) := by
+  intro v w h
+  have hv := congrArg (fun a : FiveState => a.2.1) h
+  simpa only [commonDirection] using hv
+
+/-- A canonical F0 retraction records the rewritten value and erases q. -/
+def forgetRewriteObservation (z : FiveState) : FiveState :=
+  ((rewriteValue z, z.1.2), (z.2.1, 0))
+
+theorem forgetRewriteObservation_idempotent :
+    LinearInputF0.Idempotent forgetRewriteObservation := by
+  intro z
+  simp [forgetRewriteObservation, rewriteValue]
+
+/-- All multiplier choices are currently indistinguishable on the constraint. -/
+theorem forget_multiplier_on_constraint
+    (lam r u a x y q q' : ℝ) (h : x - y = a) :
+    forgetRewriteObservation (lift lam r u a x y q) =
+      forgetRewriteObservation (lift lam r u a x y q') := by
+  have hg : x - y - a = 0 := by linarith
+  simp [forgetRewriteObservation, rewriteValue, lift, hg]
+
+/-- A chosen update re-evaluates the genuine primitive energy after shifting x. -/
+def primitiveShiftX (lam r u a δ : ℝ) (z : FiveState) : FiveState :=
+  lift lam r u a (z.2.1.1 + δ) z.2.1.2 z.2.2
+
+/-- The hidden difference in q reappears after moving transversely to the constraint. -/
+theorem latent_multiplier_difference
+    (lam r u a x y δ q q' : ℝ) (h : x - y = a) :
+    rewriteValue (primitiveShiftX lam r u a δ (lift lam r u a x y q)) -
+      rewriteValue (primitiveShiftX lam r u a δ (lift lam r u a x y q')) =
+        -δ * (q - q') := by
+  change (E lam r u (x + δ) y - q * (x + δ - y - a)) -
+    (E lam r u (x + δ) y - q' * (x + δ - y - a)) = -δ * (q - q')
+  have hg : x + δ - y - a = δ := by linarith
+  rw [hg]
+  ring
+
+/-- F0 forgets a distinction that one primitive transverse update reveals. -/
+theorem rewrite_probe_breaks_fibers (lam r u : ℝ) :
+    ¬ LinearInputF0Descent.RespectsFibers forgetRewriteObservation
+      (primitiveShiftX lam r u 0 1) := by
+  intro hf
+  have heq := forget_multiplier_on_constraint lam r u 0 0 0 0 1 (by norm_num)
+  have hout := hf (lift lam r u 0 0 0 0) (lift lam r u 0 0 0 1) heq
+  have hs :
+      rewriteValue (primitiveShiftX lam r u 0 1 (lift lam r u 0 0 0 0)) =
+      rewriteValue (primitiveShiftX lam r u 0 1 (lift lam r u 0 0 0 1)) := by
+    have h' := congrArg (fun z : FiveState => z.1.1) hout
+    exact h'
+  have hdiff := latent_multiplier_difference lam r u 0 0 0 1 0 1 (by norm_num)
+  norm_num at hdiff
+  linarith
+
+/-- Hence no deterministic update exists on this particular forgotten F0 state. -/
+theorem rewrite_probe_not_descend (lam r u : ℝ) :
+    ¬ LinearInputF0Descent.Descends forgetRewriteObservation
+      (primitiveShiftX lam r u 0 1) := by
+  intro h
+  exact rewrite_probe_breaks_fibers lam r u
+    ((LinearInputF0Descent.descends_iff_respects
+      forgetRewriteObservation_idempotent).mp h)
+
+/-- The future-observation quotient sees more than this instantaneous F0 map. -/
+theorem rewrite_probe_future_distinguishes (lam r u : ℝ) :
+    forgetRewriteObservation (lift lam r u 0 0 0 0) =
+        forgetRewriteObservation (lift lam r u 0 0 0 1) ∧
+      ¬ LinearInputFutureObservation.FutureEq forgetRewriteObservation
+        (primitiveShiftX lam r u 0 1)
+        (lift lam r u 0 0 0 0) (lift lam r u 0 0 0 1) := by
+  constructor
+  · exact forget_multiplier_on_constraint lam r u 0 0 0 0 1 (by norm_num)
+  · intro hfuture
+    have hout := hfuture 1
+    have hs :
+        rewriteValue (primitiveShiftX lam r u 0 1 (lift lam r u 0 0 0 0)) =
+        rewriteValue (primitiveShiftX lam r u 0 1 (lift lam r u 0 0 0 1)) := by
+      have h' := congrArg (fun z : FiveState => z.1.1)
+        (by simpa only [Function.iterate_one] using hout)
+      exact h'
+    have hdiff := latent_multiplier_difference lam r u 0 0 0 1 0 1 (by norm_num)
+    norm_num at hdiff
+    linarith
+
+/-- First Lie-bracket candidate in the order (c1,c2,r), from exact polynomial differentiation. -/
+def cartanY (c1 c2 u1 u2 : ℝ) : ℝ × ℝ × ℝ :=
+  (c1 * u1 * u2 - c2 * u1 ^ 2 + c2,
+   c1 * u2 ^ 2 - c1 - c2 * u1 * u2,
+   c1 * u2 - c2 * u1)
+
+/-- Second-bracket candidate [X1,Y]. -/
+def cartanZ1 (c1 c2 u1 u2 : ℝ) : ℝ × ℝ × ℝ :=
+  (-c1 * u1 ^ 2 * u2 + 2*c1*u2 + c2*u1 ^ 3 - 3*c2*u1,
+   -c1*u1*u2 ^ 2 - c1*u1 + c2*u1 ^ 2*u2 - 2*c2*u2,
+   -c1*u1*u2 + c2*u1 ^ 2 - 2*c2)
+
+/-- Second-bracket candidate [X2,Y]. -/
+def cartanZ2 (c1 c2 u1 u2 : ℝ) : ℝ × ℝ × ℝ :=
+  (-c1*u1*u2 ^ 2 + 2*c1*u1 + c2*u1 ^ 2*u2 + c2*u2,
+   -c1*u2 ^ 3 + 3*c1*u2 + c2*u1*u2 ^ 2 - 2*c2*u1,
+   -c1*u2 ^ 2 + 2*c1 + c2*u1*u2)
+
+/-- A 3x3 minor, after eliminating the two identity columns of X1,X2. -/
+def cartanMinor (a b c : ℝ × ℝ × ℝ) : ℝ :=
+  a.1 * (b.2.1 * c.2.2 - b.2.2 * c.2.1) -
+    b.1 * (a.2.1 * c.2.2 - a.2.2 * c.2.1) +
+    c.1 * (a.2.1 * b.2.2 - a.2.2 * b.2.1)
+
+/-- Exact factorization of the derived-bracket candidate minor. -/
+theorem cartan_minor_factor (c1 c2 u1 u2 : ℝ) :
+    cartanMinor (cartanY c1 c2 u1 u2)
+      (cartanZ1 c1 c2 u1 u2) (cartanZ2 c1 c2 u1 u2) =
+      4 * (c1 ^ 2 + c2 ^ 2) * (c1 * u2 - c2 * u1) := by
+  dsimp [cartanMinor, cartanY, cartanZ1, cartanZ2]
+  ring
+
+/-- The candidate minor is nonzero away from the zero-confirmed and parallel strata. -/
+theorem cartan_minor_nonzero {c1 c2 u1 u2 : ℝ}
+    (hc : c1 ≠ 0 ∨ c2 ≠ 0) (hw : c1 * u2 - c2 * u1 ≠ 0) :
+    cartanMinor (cartanY c1 c2 u1 u2)
+      (cartanZ1 c1 c2 u1 u2) (cartanZ2 c1 c2 u1 u2) ≠ 0 := by
+  rw [cartan_minor_factor]
+  have hpos : 0 < c1 ^ 2 + c2 ^ 2 := by
+    rcases hc with h1 | h2
+    · have hs := sq_pos_of_ne_zero h1
+      have ht := sq_nonneg c2
+      linarith
+    · have hs := sq_pos_of_ne_zero h2
+      have ht := sq_nonneg c1
+      linarith
+  exact mul_ne_zero (mul_ne_zero (by norm_num) (ne_of_gt hpos)) hw
+
+/-- Exact nondegenerate numeric sample. -/
+theorem cartan_minor_sample :
+    cartanMinor (cartanY 1 0 0 1)
+      (cartanZ1 1 0 0 1) (cartanZ2 1 0 0 1) = 4 := by
+  rw [cartan_minor_factor]
+  norm_num
+
 end LinearInputFiveDimLagrange
