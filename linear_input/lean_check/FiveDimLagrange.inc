@@ -940,4 +940,120 @@ theorem rewrite_holonomy_pair (z : FiveState) (v : ℝ × ℝ) :
   · exact holonomy_common_derivative z v
 
 
+
+/-!
+# The actual five-field 5×5 matrix and its full rank certificate
+
+Rows are ordered (u₁,u₂,c₁,c₂,r), columns are
+(X₁, X₂, [X₁,X₂], [X₁,[X₁,X₂]], [X₂,[X₁,X₂]]).
+The first two rows form an identity block and the last three entries of the
+last three columns are the ALREADY verified actual Lie-bracket projections.
+The block determinant theorem is mathlib's actual Matrix.det, not a custom
+determinant of symbolic polynomials.
+-/
+
+/-- An arbitrary three-column matrix with columns a,b,c in the (c₁,c₂,r) basis. -/
+def threeColumnMatrix (a b c : ℝ × ℝ × ℝ) : Matrix (Fin 3) (Fin 3) ℝ :=
+  fun i j =>
+    let v := if j = 0 then a else if j = 1 then b else c
+    if i = 0 then v.1 else if i = 1 then v.2.1 else v.2.2
+
+theorem threeColumnMatrix_det (a b c : ℝ × ℝ × ℝ) :
+    (threeColumnMatrix a b c).det = cartanMinor a b c := by
+  rw [Matrix.det_fin_three]
+  change
+    a.1 * b.2.1 * c.2.2 - a.1 * c.2.1 * b.2.2 -
+      b.1 * a.2.1 * c.2.2 + b.1 * c.2.1 * a.2.2 +
+      c.1 * a.2.1 * b.2.2 - c.1 * b.2.1 * a.2.2 =
+      cartanMinor a b c
+  dsimp [cartanMinor]
+  ring
+
+def cartanActualTripleMatrix (z : FiveState) : Matrix (Fin 3) (Fin 3) ℝ :=
+  threeColumnMatrix
+    (actualBracketProj
+      (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyX2) z))
+    (actualBracketProj
+      (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyY) z))
+    (actualBracketProj
+      (actualLieBracket (fivePolyFieldEval polyX2) (fivePolyFieldEval polyY) z))
+
+/-- Actual genuine Lie bracket columns have exactly the certified triple determinant. -/
+theorem cartanActualTripleMatrix_det (z : FiveState) :
+    (cartanActualTripleMatrix z).det =
+      4 * (z.1.1 ^ 2 + z.1.2 ^ 2) *
+        (z.1.1 * z.2.1.2 - z.1.2 * z.2.1.1) := by
+  unfold cartanActualTripleMatrix
+  rw [threeColumnMatrix_det]
+  exact genuineLieCartanMinorFactor z
+
+/-- Lower-left block contains the confirmed/rewrite coordinates of X₁,X₂. -/
+def cartanLowerLeftBlock (z : FiveState) : Matrix (Fin 3) (Fin 2) ℝ :=
+  fun i j =>
+    let v := if j = 0 then fivePolyFieldEval polyX1 z
+      else fivePolyFieldEval polyX2 z
+    if i = 0 then v.1.1 else if i = 1 then v.1.2 else v.2.2
+
+/-- A real 5×5 matrix of actual horizontal fields and their Lie brackets,
+with the five row coordinates ordered (u₁,u₂,c₁,c₂,r). -/
+def cartanActualFiveMatrix (z : FiveState) :
+    Matrix (Fin 2 ⊕ Fin 3) (Fin 2 ⊕ Fin 3) ℝ :=
+  Matrix.fromBlocks (1 : Matrix (Fin 2) (Fin 2) ℝ)
+    (0 : Matrix (Fin 2) (Fin 3) ℝ)
+    (cartanLowerLeftBlock z) (cartanActualTripleMatrix z)
+
+/-- The genuine 5×5 determinant: a 2×2 identity pivot and the 3×3 Lie minor. -/
+theorem cartanActualFiveMatrix_det (z : FiveState) :
+    (cartanActualFiveMatrix z).det =
+      4 * (z.1.1 ^ 2 + z.1.2 ^ 2) *
+        (z.1.1 * z.2.1.2 - z.1.2 * z.2.1.1) := by
+  unfold cartanActualFiveMatrix
+  rw [Matrix.det_fromBlocks_zero₁₂]
+  simp only [Matrix.det_one, one_mul]
+  exact cartanActualTripleMatrix_det z
+
+/-- Maximum rank of the actual 5×5 Lie-bracket matrix at every generic point. -/
+theorem cartanActualFiveMatrix_rank_five (z : FiveState)
+    (hc : z.1.1 ≠ 0 ∨ z.1.2 ≠ 0)
+    (hw : z.1.1 * z.2.1.2 - z.1.2 * z.2.1.1 ≠ 0) :
+    (cartanActualFiveMatrix z).rank = 5 := by
+  have hdet : (cartanActualFiveMatrix z).det ≠ 0 := by
+    rw [cartanActualFiveMatrix_det]
+    have hpos : 0 < z.1.1 ^ 2 + z.1.2 ^ 2 := by
+      rcases hc with h1 | h2
+      · nlinarith [sq_pos_of_ne_zero h1, sq_nonneg z.1.2]
+      · nlinarith [sq_pos_of_ne_zero h2, sq_nonneg z.1.1]
+    exact mul_ne_zero (mul_ne_zero (by norm_num) (ne_of_gt hpos)) hw
+  have hrank := Matrix.rank_of_det_ne_zero hdet
+  simpa [Fintype.card_sum] using hrank
+
+/-- The exact singular locus of this five-column Lie-bracket matrix. -/
+theorem cartanActualFiveMatrix_det_zero_iff (z : FiveState) :
+    (cartanActualFiveMatrix z).det = 0 ↔
+      (z.1.1 = 0 ∧ z.1.2 = 0) ∨
+        z.1.1 * z.2.1.2 - z.1.2 * z.2.1.1 = 0 := by
+  rw [cartanActualFiveMatrix_det]
+  constructor
+  · intro h
+    rcases (mul_eq_zero.mp h) with hleft | hright
+    · rcases (mul_eq_zero.mp hleft) with hfour | hsum
+      · norm_num at hfour
+      · left
+        constructor
+        · nlinarith [sq_nonneg z.1.2]
+        · nlinarith [sq_nonneg z.1.1]
+    · exact Or.inr hright
+  · rintro (⟨hc1, hc2⟩ | hw)
+    · simp [hc1, hc2]
+    · rw [hw]
+      ring
+
+/-- An explicit concrete full-rank point of the actual Lie distribution. -/
+theorem cartanActualFiveMatrix_example_rank :
+    (cartanActualFiveMatrix ((1, 0), ((0, 1), 0))).rank = 5 := by
+  apply cartanActualFiveMatrix_rank_five
+  · norm_num
+  · norm_num
+
+
 end LinearInputFiveDimLagrange
