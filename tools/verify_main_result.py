@@ -69,6 +69,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
     ('linear_input/lean_check/F16FenchelAtlas.inc', 'LinearInputF16FenchelAtlas'),
+    ('linear_input/lean_check/F16FenchelFull.inc', 'LinearInputF16FenchelFull'),
 )
 
 
@@ -179,7 +180,9 @@ def main():
             raise ValueError("Forbidden proof tokens in the supplemental source")
 
         # Preserve every input byte for byte, including its original newlines.
-        assembled = (b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
+        assembled = (b"import Mathlib.Analysis.InnerProductSpace.Adjoint\n" +
+            b"import Mathlib.Analysis.InnerProductSpace.PiL2\n" +
+            b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)
