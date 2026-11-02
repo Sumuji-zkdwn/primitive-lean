@@ -133,6 +133,7 @@ def verify_lean(rebuild):
         'StrangeOperatorConjugacy': 'Naturality, one-point F0 closure classification and conjugacy orbit',
         'StrangeOperatorBoundary': 'Finite non-idempotent obstruction to extending the spike-orbit theorem to arbitrary F0 maps',
         'StrangeOperatorFixedSets': 'Complete singleton Galois closure classification by fixed-point sets',
+        'StrangeOperatorCounting': 'Exact finite fixed-set map and idempotent counts, connected to Stops closure with explicit empty and full fixed-set boundaries',
         'F16SaddleCantor': 'F16 reflection-derived hyperbolic saddle, finite two-branch ternary coding and the F0 two-cycle obstruction; no infinite fractal/dimension theorem.',
         'F16FullMatrix': 'Actual real 16-by-16 sedenion left-pencil matrix, explicit eight-block row/column permutation equivalence, full determinant and real singularity classification',
         'F16FullRank': 'Invertible 2-by-2 Gaussian elimination, global diagonalization and rank 12 exactly at t=±1 (rank 16 otherwise)',
