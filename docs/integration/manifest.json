@@ -2131,7 +2131,7 @@
         "Replace a pair of equivalent tactic combinators to meet the strict zero-warning Lean compilation policy; no theorem statement changes.",
         "Add 4 algebraic Cartan/contact horizontality theorems for dual first-jet geometries J^1(R,R^2) and J^1(R^2,R)."
       ],
-      "note": "Original first-commit proof retained in source provenance; working version adds 12 theorems (23 total), 12 original/new definitions and 1 abbreviation; no claim of 5D physical space or isomorphism between jet models."
+      "note": "Original first-commit proof retained by SHA; working version has 23 theorems (12 appended), 16 definitions (12 appended), and 1 abbreviation. Neither physical 5D space nor isomorphism of the two jet models is claimed."
     }
   ],
   "construction_errors": []
