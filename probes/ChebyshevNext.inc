@@ -12,7 +12,7 @@ open LinearInputChebyshevDescent
 theorem cubicPoly_natDegree :
     (cubicPoly (K := ℂ)).natDegree = 3 := by
   unfold cubicPoly
-  compute_degree <;> norm_num
+  compute_degree; norm_num
 
 theorem chebyPoly_natDegree (k : ℕ) :
     (chebyPoly (K := ℂ) k).natDegree = 3 ^ k := by
@@ -28,7 +28,7 @@ theorem generic_square_not_constant (c : ℂ) :
     (RatFunc.X : RatFunc ℂ) ^ 2 ≠ RatFunc.C c := by
   intro hc
   have hdeg : (Polynomial.X ^ 2 - Polynomial.C c : Polynomial ℂ).natDegree = 2 := by
-    compute_degree <;> norm_num
+    compute_degree; norm_num
   have hpoly : (Polynomial.X ^ 2 - Polynomial.C c : Polynomial ℂ) ≠ 0 := by
     intro hh
     rw [hh] at hdeg
@@ -74,7 +74,7 @@ theorem generic_candidate_injective (m : ℕ) (ζ : ℂ)
       rootCandidate (RatFunc.C ζ) (RatFunc.X : RatFunc ℂ) k := by
   have hζ0 : ζ ≠ 0 := hζ.ne_zero hm
   have hc0 : RatFunc.C ζ ≠ (0 : RatFunc ℂ) :=
-    (RatFunc.C (K := ℂ)).injective.ne hζ0
+    by simpa only [map_zero] using (RatFunc.C (K := ℂ)).injective.ne hζ0
   have hz : (RatFunc.X : RatFunc ℂ) ≠ 0 := RatFunc.X_ne_zero
   have haj : (RatFunc.C ζ) ^ j * RatFunc.X ≠ 0 :=
     mul_ne_zero (pow_ne_zero _ hc0) hz
@@ -95,16 +95,16 @@ theorem generic_candidate_injective (m : ℕ) (ζ : ℂ)
         RatFunc.C (ζ ^ (j + k)) * RatFunc.X ^ 2 =
             ((RatFunc.C ζ) ^ j * RatFunc.X) *
               ((RatFunc.C ζ) ^ k * RatFunc.X) := by
-                simp only [map_pow, pow_add]
+                simp only [pow_add, map_mul, map_pow]
                 ring
         _ = 1 := hprod
     have hh : ζ ^ (j + k) ≠ 0 := pow_ne_zero _ hζ0
     have hhC : RatFunc.C (ζ ^ (j + k)) ≠ (0 : RatFunc ℂ) :=
-      (RatFunc.C (K := ℂ)).injective.ne hh
+      by simpa only [map_zero] using (RatFunc.C (K := ℂ)).injective.ne hh
     have hsq : (RatFunc.X : RatFunc ℂ) ^ 2 =
         1 / RatFunc.C (ζ ^ (j + k)) :=
       (eq_div_iff hhC).2 (by simpa only [mul_comm] using hprod')
     apply generic_square_not_constant ((ζ ^ (j + k))⁻¹)
-    simpa only [map_inv, one_div] using hsq
+    simpa only [map_inv₀, one_div] using hsq
 
 end LinearInputChebyshevNext
