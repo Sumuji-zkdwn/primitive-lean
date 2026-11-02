@@ -753,7 +753,7 @@ theorem polyX1_eq_common (z : FiveState) :
       fivePolyEval, pc1, pu1, pu2, commonDirection] <;> ring
   · apply Prod.ext
     · apply Prod.ext <;> dsimp [fivePolyFieldEval, polyX1,
-        fivePolyEval, pc1, pu1, pu2, commonDirection] <;> ring
+        fivePolyEval, pc1, pu1, pu2, commonDirection]
     · dsimp [fivePolyFieldEval, polyX1, fivePolyEval, pc1,
         commonDirection]
       ring
@@ -765,7 +765,7 @@ theorem polyX2_eq_common (z : FiveState) :
       fivePolyEval, pc2, pu1, pu2, commonDirection] <;> ring
   · apply Prod.ext
     · apply Prod.ext <;> dsimp [fivePolyFieldEval, polyX2,
-        fivePolyEval, pc2, pu1, pu2, commonDirection] <;> ring
+        fivePolyEval, pc2, pu1, pu2, commonDirection]
     · dsimp [fivePolyFieldEval, polyX2, fivePolyEval, pc2,
         commonDirection]
       ring
@@ -823,6 +823,115 @@ theorem actual_bracket_X2_Y (z : FiveState) :
         fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
         polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3]
       ring
+
+
+
+/-!
+# From genuine iterated Lie derivatives to the exact Cartan minor
+-/ 
+
+def actualBracketProj (w : FiveState) : ℝ × ℝ × ℝ :=
+  (w.1.1, w.1.2, w.2.2)
+
+theorem actualBracketProj_Y (z : FiveState) :
+    actualBracketProj (fivePolyFieldEval polyY z) =
+      cartanY z.1.1 z.1.2 z.2.1.1 z.2.1.2 := by
+  apply Prod.ext
+  · dsimp [actualBracketProj, fivePolyFieldEval, polyY,
+      fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
+    ring
+  · apply Prod.ext <;> dsimp [actualBracketProj, fivePolyFieldEval,
+      polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY] <;> ring
+
+theorem actualBracketProj_Z1 (z : FiveState) :
+    actualBracketProj (fivePolyFieldEval polyZ1 z) =
+      cartanZ1 z.1.1 z.1.2 z.2.1.1 z.2.1.2 := by
+  apply Prod.ext
+  · dsimp [actualBracketProj, fivePolyFieldEval, polyZ1,
+      fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ1]
+    ring
+  · apply Prod.ext <;> dsimp [actualBracketProj, fivePolyFieldEval,
+      polyZ1, fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ1] <;> ring
+
+theorem actualBracketProj_Z2 (z : FiveState) :
+    actualBracketProj (fivePolyFieldEval polyZ2 z) =
+      cartanZ2 z.1.1 z.1.2 z.2.1.1 z.2.1.2 := by
+  apply Prod.ext
+  · dsimp [actualBracketProj, fivePolyFieldEval, polyZ2,
+      fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ2]
+    ring
+  · apply Prod.ext <;> dsimp [actualBracketProj, fivePolyFieldEval,
+      polyZ2, fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ2] <;> ring
+
+/-- The known 3x3 factor is now obtained from actual iterated Lie brackets. -/
+theorem genuineLieCartanMinorFactor (z : FiveState) :
+    cartanMinor
+      (actualBracketProj
+        (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyX2) z))
+      (actualBracketProj
+        (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyY) z))
+      (actualBracketProj
+        (actualLieBracket (fivePolyFieldEval polyX2) (fivePolyFieldEval polyY) z)) =
+      4 * (z.1.1 ^ 2 + z.1.2 ^ 2) *
+        (z.1.1 * z.2.1.2 - z.1.2 * z.2.1.1) := by
+  rw [actual_bracket_X1_X2, actual_bracket_X1_Y, actual_bracket_X2_Y,
+    actualBracketProj_Y, actualBracketProj_Z1, actualBracketProj_Z2]
+  exact cartan_minor_factor z.1.1 z.1.2 z.2.1.1 z.2.1.2
+
+theorem genuineLieCartanMinorNonzero (z : FiveState)
+    (hc : z.1.1 ≠ 0 ∨ z.1.2 ≠ 0)
+    (hw : z.1.1 * z.2.1.2 - z.1.2 * z.2.1.1 ≠ 0) :
+    cartanMinor
+      (actualBracketProj
+        (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyX2) z))
+      (actualBracketProj
+        (actualLieBracket (fivePolyFieldEval polyX1) (fivePolyFieldEval polyY) z))
+      (actualBracketProj
+        (actualLieBracket (fivePolyFieldEval polyX2) (fivePolyFieldEval polyY) z)) ≠ 0 := by
+  rw [genuineLieCartanMinorFactor]
+  have hpos : 0 < z.1.1 ^ 2 + z.1.2 ^ 2 := by
+    rcases hc with h1 | h2
+    · nlinarith [sq_pos_of_ne_zero h1, sq_nonneg z.1.2]
+    · nlinarith [sq_pos_of_ne_zero h2, sq_nonneg z.1.1]
+  exact mul_ne_zero (mul_ne_zero (by norm_num) (ne_of_gt hpos)) hw
+
+/-!
+The determinant H=c1*u2-c2*u1 and the rewrite coordinate are an inner/outer
+product pair along the common horizontal directions.  These are real
+identities; no imaginary-time or quantum postulate is made.
+-/
+
+def holonomyPoly : FivePoly := pc1 * pu2 - pc2 * pu1
+
+theorem holonomy_rewrite_zero (z : FiveState) :
+    fivePolyDir holonomyPoly z (rewriteTangent z) = 0 := by
+  dsimp [holonomyPoly, fivePolyDir, fivePolyEval,
+    pc1, pc2, pu1, pu2, rewriteTangent]
+  ring
+
+theorem holonomy_common_derivative (z : FiveState) (v : ℝ × ℝ) :
+    fivePolyDir holonomyPoly z (commonDirection z v) =
+      z.1.1 * v.2 - z.1.2 * v.1 := by
+  dsimp [holonomyPoly, fivePolyDir, fivePolyEval,
+    pc1, pc2, pu1, pu2, commonDirection]
+  ring
+
+/-- A real differentiability theorem, not just formal differentiation. -/
+theorem holonomy_real_derivative (z : FiveState) (v : ℝ × ℝ) :
+    deriv (fun t : ℝ =>
+      fivePolyEval holonomyPoly (fiveLine z (commonDirection z v) t)) 0 =
+      z.1.1 * v.2 - z.1.2 * v.1 := by
+  rw [(fivePolyDir_hasDerivAt holonomyPoly z (commonDirection z v)).deriv]
+  exact holonomy_common_derivative z v
+
+/-- The real/imaginary components of the Hermitian pairing conj(c)*du. -/
+theorem rewrite_holonomy_pair (z : FiveState) (v : ℝ × ℝ) :
+    ((commonDirection z v).2.2,
+      fivePolyDir holonomyPoly z (commonDirection z v)) =
+      (z.1.1 * v.1 + z.1.2 * v.2,
+        z.1.1 * v.2 - z.1.2 * v.1) := by
+  rw [holonomy_common_derivative]
+  rfl
 
 
 end LinearInputFiveDimLagrange
