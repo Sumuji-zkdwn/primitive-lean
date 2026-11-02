@@ -13,6 +13,7 @@ noncomputable section
 namespace LinearInputChebyshevTower
 
 open Polynomial
+open IntermediateField
 
 def quotientNumerator (m : ℕ) : Polynomial ℂ :=
   X ^ (2 * m) + 1
