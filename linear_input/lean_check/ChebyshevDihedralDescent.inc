@@ -142,4 +142,61 @@ theorem chebyIterate_one (x : K) :
     chebyIterate x 1 = cubic x := by
   rfl
 
+
+/--
+Over any field extension containing the primitive-root coefficient, the two
+adjacent Chebyshev candidates generate **exactly the same intermediate field**
+as the radical z.  This is the generator half of the field-identification
+argument; it does not claim that the generated field is already a splitting
+field of the Chebyshev polynomial over the smaller rational-function base.
+-/
+theorem two_candidates_generate
+    {F E : Type*} [Field F] [Field E] [Algebra F E] [CharZero E]
+    (ζ : F) (z : E) (hz : z ≠ 0)
+    (hdiff : (algebraMap F E ζ) - (algebraMap F E ζ)⁻¹ ≠ 0) :
+    IntermediateField.adjoin F
+      ({rootCandidate (algebraMap F E ζ) z 0,
+        rootCandidate (algebraMap F E ζ) z 1} : Set E) =
+    IntermediateField.adjoin F ({z} : Set E) := by
+  let u : E := algebraMap F E ζ
+  let A : IntermediateField F E :=
+    IntermediateField.adjoin F
+      ({rootCandidate u z 0, rootCandidate u z 1} : Set E)
+  let B : IntermediateField F E :=
+    IntermediateField.adjoin F ({z} : Set E)
+  have huA : u ∈ A := A.algebraMap_mem ζ
+  have huB : u ∈ B := B.algebraMap_mem ζ
+  have htwoA : (2 : E) ∈ A := by
+    convert A.add_mem (A.one_mem) (A.one_mem) using 1 <;> norm_num
+  have htwoB : (2 : E) ∈ B := by
+    convert B.add_mem (B.one_mem) (B.one_mem) using 1 <;> norm_num
+  have hzB : z ∈ B :=
+    IntermediateField.subset_adjoin F _ (by simp)
+  have hrootB (j : ℕ) : rootCandidate u z j ∈ B := by
+    have hprod : u ^ j * z ∈ B := B.mul_mem (B.pow_mem huB j) hzB
+    change (u ^ j * z + (u ^ j * z)⁻¹) / 2 ∈ B
+    exact B.div_mem (B.add_mem hprod (B.inv_mem hprod)) htwoB
+  have hroot0A : rootCandidate u z 0 ∈ A :=
+    IntermediateField.subset_adjoin F _ (by simp)
+  have hroot1A : rootCandidate u z 1 ∈ A :=
+    IntermediateField.subset_adjoin F _ (by simp)
+  have hzA : z ∈ A := by
+    rw [reconstruct_z u z hz hdiff]
+    exact A.div_mem
+      (A.mul_mem htwoA (A.sub_mem hroot1A (A.mul_mem (A.inv_mem huA) hroot0A)))
+      (A.sub_mem huA (A.inv_mem huA))
+  change A = B
+  apply le_antisymm
+  · refine (IntermediateField.adjoin_le_iff).2 ?_
+    intro y hy
+    have hy' : y = rootCandidate u z 0 ∨ y = rootCandidate u z 1 := by
+      simpa only [Set.mem_insert_iff, Set.mem_singleton_iff] using hy
+    rcases hy' with rfl | rfl
+    · exact hrootB 0
+    · exact hrootB 1
+  · refine (IntermediateField.adjoin_le_iff).2 ?_
+    intro y hy
+    have hy' : y = z := by simpa using hy
+    simpa [hy'] using hzA
+
 end LinearInputChebyshevDescent
