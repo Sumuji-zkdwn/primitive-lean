@@ -38,21 +38,26 @@ def Compatible (B C : Matrix n n K) (y : (n → K) × (n → K)) : Prop :=
 def inverseDecode (B : Matrix n n K) (y : (n → K) × (n → K)) : n → K :=
   decode B⁻¹ y
 
+omit [Fintype n] [DecidableEq n] in
 theorem pencil_pos (B C : Matrix n n K) : pencil B C 1 = B + C := by
   simp [pencil]
 
+omit [Fintype n] [DecidableEq n] in
 theorem pencil_neg (B C : Matrix n n K) : pencil B C (-1) = B - C := by
   simp [pencil, sub_eq_add_neg]
 
+omit [DecidableEq n] in
 theorem positive_probe (B C : Matrix n n K) (v : n → K) :
     (pencil B C 1).mulVec v = B.mulVec v + C.mulVec v := by
   rw [pencil_pos, Matrix.add_mulVec]
 
+omit [DecidableEq n] in
 theorem negative_probe (B C : Matrix n n K) (v : n → K) :
     (pencil B C (-1)).mulVec v = B.mulVec v - C.mulVec v := by
   rw [pencil_neg, Matrix.sub_mulVec]
 
 /-- The average isolates the constant coefficient B. -/
+omit [DecidableEq n] in
 theorem probe_average (B C : Matrix n n K) (h2 : (2 : K) ≠ 0) (v : n → K) :
     (1 / 2 : K) •
         ((pencil B C 1).mulVec v + (pencil B C (-1)).mulVec v) =
@@ -60,9 +65,10 @@ theorem probe_average (B C : Matrix n n K) (h2 : (2 : K) ≠ 0) (v : n → K) :
   rw [positive_probe, negative_probe]
   funext i
   simp only [Pi.smul_apply, Pi.add_apply, Pi.sub_apply, smul_eq_mul]
-  field_simp [h2] <;> ring
+  field_simp [h2]; ring
 
 /-- The half difference isolates the parameter coefficient C. -/
+omit [DecidableEq n] in
 theorem probe_difference (B C : Matrix n n K) (h2 : (2 : K) ≠ 0)
     (v : n → K) :
     (1 / 2 : K) •
@@ -71,7 +77,7 @@ theorem probe_difference (B C : Matrix n n K) (h2 : (2 : K) ≠ 0)
   rw [positive_probe, negative_probe]
   funext i
   simp only [Pi.smul_apply, Pi.add_apply, Pi.sub_apply, smul_eq_mul]
-  field_simp [h2] <;> ring
+  field_simp [h2]; ring
 
 /-- Constructive recovery: only the explicitly supplied left inverse is used. -/
 theorem decode_observe (B C D : Matrix n n K) (h2 : (2 : K) ≠ 0)
@@ -149,6 +155,7 @@ theorem unique_state (B C D : Matrix n n K) (h2 : (2 : K) ≠ 0)
 
 /-- The two observation kernels intersect in precisely the common kernel
 of B and C.  This statement does not require B to be invertible. -/
+omit [DecidableEq n] in
 theorem joint_kernel_iff (B C : Matrix n n K) (h2 : (2 : K) ≠ 0)
     (v : n → K) :
     ((pencil B C 1).mulVec v = 0 ∧ (pencil B C (-1)).mulVec v = 0) ↔
@@ -237,11 +244,11 @@ theorem compatible_iff_difference (B C : Matrix n n K) (h2 : (2 : K) ≠ 0)
       rw [positive_probe, inverseDecode_midpoint B hB y, hC]
       funext i
       simp only [Pi.smul_apply, Pi.add_apply, Pi.sub_apply, smul_eq_mul]
-      field_simp [h2] <;> ring
+      field_simp [h2]; ring
     · change (pencil B C (-1)).mulVec (inverseDecode B y) = y.2
       rw [negative_probe, inverseDecode_midpoint B hB y, hC]
       funext i
       simp only [Pi.smul_apply, Pi.add_apply, Pi.sub_apply, smul_eq_mul]
-      field_simp [h2] <;> ring
+      field_simp [h2]; ring
 
 end LinearInputComplementaryPencilRecovery

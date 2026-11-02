@@ -90,7 +90,9 @@ theorem even_observe_eq_iff (z w : ℝ × ℝ) :
     evenObserve z = evenObserve w ↔ z.1 = w.1 := by
   constructor
   · intro h
-    exact congrArg Prod.fst h
+    have hp := congrArg Prod.fst h
+    change z.1 = w.1 at hp
+    exact hp
   · intro h
     simp [evenObserve, h]
 
@@ -98,7 +100,9 @@ theorem odd_observe_eq_iff (z w : ℝ × ℝ) :
     oddObserve z = oddObserve w ↔ z.2 = w.2 := by
   constructor
   · intro h
-    exact congrArg Prod.snd h
+    have hp := congrArg Prod.snd h
+    change z.2 = w.2 at hp
+    exact hp
   · intro h
     simp [oddObserve, h]
 
