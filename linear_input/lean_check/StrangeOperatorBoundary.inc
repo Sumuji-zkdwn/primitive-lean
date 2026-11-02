@@ -26,7 +26,7 @@ theorem delayed_zero_not_idempotent :
     ¬ LinearInputF0.Idempotent delayedZero := by
   intro h
   have h2 := h (2 : Fin 3)
-  norm_num [delayedZero] at h2
+  norm_num [delayedZero, Fin.ext_iff] at h2
 
 /-- Every test stopping constantZero also stops delayedZero. -/
 theorem delayed_zero_in_constant_closure :
@@ -57,7 +57,7 @@ theorem delayed_zero_not_constant_conjugate :
       delayedZero 0 = Conjugate e constantZero 0 := congrFun he 0
       _ = Conjugate e constantZero 2 := rfl
       _ = delayedZero 2 := (congrFun he 2).symm
-  norm_num [delayedZero] at h02
+  norm_num [delayedZero, Fin.ext_iff] at h02
 
 /-- A general idempotent's closed family need not be a conjugacy orbit. -/
 theorem constant_closure_not_conjugacy_orbit :
