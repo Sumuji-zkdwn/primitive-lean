@@ -31,6 +31,23 @@ theorem source_energy (k x u : ℝ) :
   unfold energy
   ring
 
+/-- An exact slice of the ORIGINAL primitive Design.E, not just its extension. -/
+theorem source_is_original_energy (k x u : ℝ) :
+    LinearInputDesign.E 0 (k - 2) (-u) x 0 =
+      energy k 0 0 0 x 0 (-u) := by
+  calc
+    LinearInputDesign.E 0 (k - 2) (-u) x 0 =
+        energy ((k - 2) + 2) 0 1 (Real.sqrt 2) x 0 (-u) :=
+      (energy_eq_primitive 0 (k - 2) (-u) x 0).symm
+    _ = energy k 0 0 0 x 0 (-u) := by
+      unfold energy
+      ring
+
+theorem original_potential_formula (k x u : ℝ) :
+    LinearInputDesign.E 0 (k - 2) (-u) x 0 =
+      k * x ^ 2 / 2 + u * x := by
+  rw [source_is_original_energy, source_energy]
+
 def pairSwap (z : ℝ × ℝ) : ℝ × ℝ := (z.2, z.1)
 
 /-- A specialization of the actual derivative pair, not a postulated map. -/
@@ -42,6 +59,24 @@ theorem gradient_formula (k : ℝ) (z : ℝ × ℝ) :
   change gradXu k 0 0 0 1 0 z = _
   rw [gradXu_formula]
   apply Prod.ext <;> dsimp <;> ring
+
+/-- The same derivative pair computed directly from the original Design.E. -/
+theorem original_gradient_formula (k : ℝ) (z : ℝ × ℝ) :
+    (deriv (fun t : ℝ => LinearInputDesign.E 0 (k - 2) (-z.2) t 0) z.1,
+     deriv (fun t : ℝ => LinearInputDesign.E 0 (k - 2) (-t) z.1 0) z.2) =
+      (k * z.1 + z.2, z.1) := by
+  have hx :
+      (fun t : ℝ => LinearInputDesign.E 0 (k - 2) (-z.2) t 0) =
+        (fun t : ℝ => energy k 0 0 0 t 0 (-z.2)) := by
+    funext t
+    exact source_is_original_energy k t z.2
+  have hu :
+      (fun t : ℝ => LinearInputDesign.E 0 (k - 2) (-t) z.1 0) =
+        (fun t : ℝ => energy k 0 0 0 z.1 0 (-t)) := by
+    funext t
+    exact source_is_original_energy k z.1 t
+  rw [hx, hu]
+  simpa only [gradient, gradXu, neg_one_mul] using gradient_formula k z
 
 def shearA (a : ℝ) (z : ℝ × ℝ) : ℝ × ℝ :=
   gradient a (pairSwap z)
