@@ -1,0 +1,44 @@
+name: Chebyshev dihedral descent Lean probe
+
+on:
+  push:
+    branches: [chatgpt/chebyshev-dihedral-descent-20261103]
+    paths:
+      - linear_input/lean_check/ChebyshevDihedralDescent.inc
+      - .github/workflows/chebyshev-descent-probe.yml
+  pull_request:
+    branches: [codex/primitive-history-derivation-20261029]
+    paths:
+      - linear_input/lean_check/ChebyshevDihedralDescent.inc
+      - .github/workflows/chebyshev-descent-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compose independent Lean probe
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          fragment = Path('linear_input/lean_check/ChebyshevDihedralDescent.inc').read_text()
+          assert not any(x in fragment for x in ('sorry', 'admit', 'native_decide'))
+          Path('lean/ChebyshevDescentProbe.lean').write_text('import Mathlib\n\n' + fragment)
+          PY
+      - name: Compile and verify without new axioms
+        working-directory: lean
+        run: lake env lean --trust=0 ChebyshevDescentProbe.lean
