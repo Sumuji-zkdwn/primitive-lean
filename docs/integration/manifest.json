@@ -2127,6 +2127,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "sha256": "53e46ae2f0642c7483e09de982744e4ae77efcc08500c39fcc2fec8efcf7c106",
+      "original_sha256": "53e46ae2f0642c7483e09de982744e4ae77efcc08500c39fcc2fec8efcf7c106",
+      "source_pr": 31,
+      "source_commit": "09559c80c01b380eb39805bba98ba94448c62ef2",
+      "source_path": "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
