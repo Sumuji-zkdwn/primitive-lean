@@ -2157,7 +2157,7 @@
       "source_pr": null,
       "source_commit": "5ea8779110320644346b0e38fbfc9d6b7749783b",
       "source_path": "linear_input/lean_check/ChebyshevSplittingField.inc",
-      "role": "new_integration_extension",
+      "role": "adapted_retained_source",
       "byte_identical": false,
       "permitted_adaptations": ["Transport the established Chebyshev degree theorem from ℂ to RatFunc ℂ through the injective coefficient map.", "Expose the already-proved 2m degree theorem for the realized parameter field."],
       "authoring_commit": "5ea8779110320644346b0e38fbfc9d6b7749783b"
