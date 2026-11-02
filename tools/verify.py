@@ -125,6 +125,9 @@ def verify_lean(rebuild):
         "F16RealDeterminant": "Eight 2-by-2 sedenion left-pencil blocks, verified row/column bijections and parity, and the full real Matrix.det identity",
         "F16CompleteRank": "Exact real-pencil comparison at integer parameters, determinant-zero characterization, and complete rank-12/rank-16 classification",
         "F16UnexpectedBridges": "Exact signed F16 block normal forms, D4 reflection-rotation relations, cubic discriminant degeneracy, and two singular probes jointly identifying the full state",
+        "ComplementaryPencilRecovery": "Constructive inverse for opposite matrix-pencil observations, compatible-data equivalence, uniqueness, and exact kernel criteria",
+        "F16ConstructiveRecovery": "General inverse theorem instantiated with the original rank-12 F16 real matrices and exact reconstruction of both observations",
+        "ComplementaryObservationExamples": "Counterexamples at missing assumptions and an independent PR19 four-phase coordinate observation model",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

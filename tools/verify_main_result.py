@@ -42,6 +42,9 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/F16RealDeterminant.inc", "LinearInputF16Determinant"),
     ("linear_input/lean_check/F16CompleteRank.inc", "LinearInputF16CompleteRank"),
     ("linear_input/lean_check/F16UnexpectedBridges.inc", "LinearInputF16UnexpectedBridges"),
+    ("linear_input/lean_check/ComplementaryPencilRecovery.inc", "LinearInputComplementaryPencilRecovery"),
+    ("linear_input/lean_check/F16ConstructiveRecovery.inc", "LinearInputF16ConstructiveRecovery"),
+    ("linear_input/lean_check/ComplementaryObservationExamples.inc", "LinearInputComplementaryObservationExamples"),
 )
 
 

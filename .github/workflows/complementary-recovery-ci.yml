@@ -1,0 +1,80 @@
+name: Complementary observation constructive recovery
+
+on:
+  push:
+    branches:
+      - chatgpt/complementary-pencil-recovery-20261102
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Independent recovery and complete Lean audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Check out exact proposed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install elan
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Verify pinned toolchain and fetch Mathlib cache
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lean --version
+          lake --version
+          lake exe cache get
+
+      - name: Preserve existing exact tests and check actual F16 reconstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -X utf8 tools/check_galois_bridge.py
+          python -B -X utf8 tools/check_f16_unexpected_bridges.py
+          python -B -X utf8 tools/check_complementary_recovery.py
+
+      - name: Independently compile general recovery and counterexamples
+        shell: bash
+        run: python -B -X utf8 tools/verify_complementary_recovery.py --standalone
+
+      - name: Run full proof-only Lean integration and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! python -B -X utf8 tools/verify.py --proof-only; then
+            cat verification/main-result.log
+            exit 1
+          fi
+
+      - name: Check F16 integration and unchanged PR23 sources
+        shell: bash
+        run: python -B -X utf8 tools/verify_complementary_recovery.py --integration
+
+      - name: Upload full verification evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: complementary-recovery-${{ github.run_id }}
+          path: |
+            verification/
+            linear_input/lean_results.json
+            linear_input/lean_check/*log
+          if-no-files-found: warn
+          retention-days: 30
