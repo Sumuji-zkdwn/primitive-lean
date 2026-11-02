@@ -186,6 +186,7 @@ theorem candidate_mem_rootSet (k : ℕ) (ζ : ℂ) (j : ℕ)
   · rw [map_basePolynomial k]
     exact targetPolynomial_ne_zero k
   · rw [Polynomial.aeval_def, Polynomial.eval₂_eq_eval_map, map_basePolynomial k]
+    exact target_candidate_isRoot k ζ j hζ
 
 /-- The actual root set generates all of C(X): two adjacent roots recover X,
 and C(X) is generated over any intermediate field containing C by X. -/
@@ -198,7 +199,6 @@ theorem rootSet_adjoin_eq_top (k : ℕ) (hk : 0 < k) (ζ : ℂ)
   have hζmap : algebraMap F E ζF = RatFunc.C ζ := by
     change algebraMap F E (algebraMap ℂ F ζ) = algebraMap ℂ E ζ
     rw [IsScalarTower.algebraMap_apply ℂ F E]
-    rfl
   have hζE : IsPrimitiveRoot (RatFunc.C ζ) (3 ^ k) :=
     primitiveRoot_C (3 ^ k) ζ hζ
   have hm2 : 2 < 3 ^ k := by
