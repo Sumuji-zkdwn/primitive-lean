@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repository": "Sumuji-zkdwn/primitive-lean",
-  "snapshot_date": "2026-11-02",
+  "snapshot_date": "2026-11-03",
   "baseline_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
   "baseline_paths": [
     "lean/Audit.lean",
@@ -391,6 +391,16 @@
       "base": "chatgpt/f16-d4-observation-20261101",
       "base_sha": "675f2c50cf19e33446eceee24c060eb1a3dc783d",
       "merged": null
+    },
+    {
+      "number": 36,
+      "title": "Formalize ternary zero placement and finite observation separation",
+      "state": "open",
+      "draft": true,
+      "head": "chatgpt/ternary-zero-cesaro-20261103",
+      "sha": "43d4ec8a088c9a769b1e72718a322fd86bde0314",
+      "base": "codex/primitive-history-derivation-20261029",
+      "merged": false
     }
   ],
   "files": [
@@ -1125,6 +1135,25 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
+      "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
+      "source_pr": 12,
+      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "also_retained_from": [
+        {
+          "source_pr": 12,
+          "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+          "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+          "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809"
+        }
+      ]
+    },
+    {
       "path": "linear_input/lean_check/EWFSFenchel.inc",
       "sha256": "90c03843306a9b88895a8adacfd0eaf5efa46b002166c2800c387b5f0aef386c",
       "original_sha256": "90c03843306a9b88895a8adacfd0eaf5efa46b002166c2800c387b5f0aef386c",
@@ -1145,25 +1174,6 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/EnergyWfsFenchel.inc",
-      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
-      "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
-      "source_pr": 12,
-      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
-      "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": [],
-      "also_retained_from": [
-        {
-          "source_pr": 12,
-          "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
-          "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
-          "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809"
-        }
-      ]
     },
     {
       "path": "linear_input/lean_check/F0Counting.inc",
@@ -1384,6 +1394,18 @@
       "source_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
       "source_path": "linear_input/lean_check/FiniteInternalUpdate.inc",
       "role": "baseline_proof_or_configuration",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/FiniteObservationSeparation.inc",
+      "sha256": "431492dd7339e1f66dd91d331475058102d8bfe463e7eb87eef4d7bbc96fb2a8",
+      "source_commit": "033469351cd06173fdf1d32b62b4bc37b6dc6759",
+      "authoring_commit": "033469351cd06173fdf1d32b62b4bc37b6dc6759",
+      "original_sha256": "431492dd7339e1f66dd91d331475058102d8bfe463e7eb87eef4d7bbc96fb2a8",
+      "source_pr": 36,
+      "source_path": "linear_input/lean_check/FiniteObservationSeparation.inc",
+      "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": []
     },
@@ -1787,6 +1809,18 @@
       "source_commit": "6bd74237f7b1910942988e6f542987857e9dec91",
       "source_path": "linear_input/lean_check/TemporalSampling.inc",
       "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/TernaryZeroCesaro.inc",
+      "sha256": "9015645e6ab0f748e28f4edf1516a1526df31f058d623cbdeea0822dc4ae1776",
+      "source_commit": "140c8e648e89400959d15ce7c2459ce45e635364",
+      "authoring_commit": "506aea4490c719483a20ccbb117800f3aa4d695f",
+      "original_sha256": "9015645e6ab0f748e28f4edf1516a1526df31f058d623cbdeea0822dc4ae1776",
+      "source_pr": 36,
+      "source_path": "linear_input/lean_check/TernaryZeroCesaro.inc",
+      "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": []
     },
