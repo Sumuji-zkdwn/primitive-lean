@@ -215,7 +215,7 @@ theorem hasDerivAt_rewrite_line
       (fun t : ℝ => (x + t * dx) - (y + t * dy) - a)
       (dx - dy) 0 := (hx.sub hy).sub_const a
   have htotal := he.sub (hq.mul hg)
-  convert htotal using 1 <;> simp only [zero_mul, add_zero, mul_zero, sub_zero] <;> ring
+  convert htotal using 1; simp only [zero_mul, add_zero, mul_zero, sub_zero]; ring
 
 /-- Contact form alpha = dz - p_1 dx - p_2 dy on the 5D first jet. -/
 def contactForm (jet tangent : FiveState) : ℝ :=
@@ -302,5 +302,53 @@ theorem jet_bracket_nontrivial :
     undecidedShift ((1 : ℝ), 0)
       (jetConfirmedShift ((1 : ℝ), 0) ((0, 0), ((0, 0), 0))) := by
   norm_num [jetConfirmedShift, undecidedShift]
+
+/-!
+# The old 3+2 and jet 4+1 horizontal distributions are jet geometries.
+
+Old model: J^1(R, R^2), with confirmed function values c_i,
+undecided first derivatives u_i, and scalar independent rewrite coordinate r.
+The two Cartan forms are dc_i - u_i dr.
+
+New model: J^1(R^2, R), with slope pair p_i and scalar function value z.
+Its single contact form is dz - p_i du_i.
+-/
+
+def oldCartan (z tangent : FiveState) : ℝ × ℝ :=
+  (tangent.1.1 - z.2.1.1 * tangent.2.2,
+   tangent.1.2 - z.2.1.2 * tangent.2.2)
+
+/-- The total rewrite derivative in J^1(R,R^2). -/
+def rewriteTangent (z : FiveState) : FiveState :=
+  (z.2.1, ((0, 0), 1))
+
+/-- Vertical movement of the two undecided jet-derivative coordinates. -/
+def undecidedTangent (v : ℝ × ℝ) : FiveState :=
+  ((0, 0), (v, 0))
+
+/-- The canonical rewrite direction is horizontal for both Cartan forms. -/
+theorem old_cartan_rewrite_zero (z : FiveState) :
+    oldCartan z (rewriteTangent z) = (0, 0) := by
+  apply Prod.ext <;> dsimp [oldCartan, rewriteTangent] <;> ring
+
+/-- Undecided derivative-coordinate changes are likewise horizontal. -/
+theorem old_cartan_undecided_zero (z : FiveState) (v : ℝ × ℝ) :
+    oldCartan z (undecidedTangent v) = (0, 0) := by
+  apply Prod.ext <;> dsimp [oldCartan, undecidedTangent] <;> ring
+
+/-- The corresponding confirmed/slope movement for J^1(R^2,R). -/
+def confirmedTangent (z : FiveState) (w : ℝ × ℝ) : FiveState :=
+  (w, ((0, 0), w.1 * z.2.1.1 + w.2 * z.2.1.2))
+
+/-- The canonical jet contact form vanishes along either direction family. -/
+theorem jet_contact_confirmed_zero (z : FiveState) (w : ℝ × ℝ) :
+    contactForm z (confirmedTangent z w) = 0 := by
+  dsimp [contactForm, confirmedTangent]
+  ring
+
+theorem jet_contact_undecided_zero (z : FiveState) (v : ℝ × ℝ) :
+    contactForm z (undecidedTangent v) = 0 := by
+  dsimp [contactForm, undecidedTangent]
+  ring
 
 end LinearInputFiveDimLagrange
