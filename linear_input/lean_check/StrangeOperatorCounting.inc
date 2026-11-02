@@ -90,7 +90,8 @@ private noncomputable def fixedChoicesEquivFin {α : Type u} [Fintype α]
     FixedSetChoices A ≃ (OutsideSet A → Fin (Fintype.card α - 1)) := by
   classical
   exact Equiv.piCongrRight fun x =>
-    Fintype.equivOfCardEq (card_nonself_choices x.1)
+    Fintype.equivOfCardEq (by
+      simpa only [Fintype.card_fin] using card_nonself_choices x.1)
 
 /-- The exact number of arbitrary maps with prescribed fixed set A. -/
 theorem fixed_set_map_count {α : Type u} [Fintype α] (A : Finset α) :
@@ -312,7 +313,5 @@ theorem close_singleton_idempotent_count_of_all_fixed {α : Type u}
         Nat.card {U : α → α // LinearInputF0.Idempotent U} :=
       Nat.card_congr univIdempotentSubtypeEquiv
     _ = _ := LinearInputF0Counting.idempotent_count_sum α
-
-end LinearInputStrangeCounting
 
 end LinearInputStrangeCounting
