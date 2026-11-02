@@ -97,6 +97,14 @@ def main():
     empty_closure = polar_pair(3, tuple())[2]
     assert not empty_closure
     assert not {t for t in ops if all(stops(t, s) for s in actors)}
+    # Every one of the 27 singleton closures depends ONLY on its fixed set.
+    for s in ops:
+        fixed = frozenset(x for x in range(3) if s[x] == x)
+        expected = frozenset(ops) if len(fixed) in (0, 3) else frozenset(
+            u for u in ops
+            if frozenset(x for x in range(3) if u[x] == x) == fixed
+        )
+        assert polar_pair(3, (s,))[2] == expected
     assert all(
         a_set <= polar_pair(3, a_set)[2]
         for a_set in (frozenset(), *(frozenset((x,)) for x in ops))
