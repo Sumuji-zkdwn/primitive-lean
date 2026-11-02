@@ -57,7 +57,7 @@ theorem chebyPoly_map
   | zero => simp [LinearInputChebyshevDescent.chebyPoly]
   | succ k ih =>
       simp [LinearInputChebyshevDescent.chebyPoly,
-        LinearInputChebyshevDescent.cubicPoly, ih]
+        LinearInputChebyshevDescent.cubicPoly, ih, map_natCast]
 
 /-- The field polynomial maps to the explicit polynomial in C(X). -/
 theorem map_basePolynomial (k : ℕ) :
@@ -108,20 +108,34 @@ theorem targetPolynomial_ne_zero (k : ℕ) (hk : 0 < k) :
 def candidate (ζ : ℂ) (j : ℕ) : E :=
   LinearInputChebyshevDescent.rootCandidate (RatFunc.C ζ) RatFunc.X j
 
+/-- A primitive root remains primitive under the injective constant embedding. -/
+theorem primitiveRoot_C (m : ℕ) (ζ : ℂ)
+    (hζ : IsPrimitiveRoot ζ m) :
+    IsPrimitiveRoot (RatFunc.C ζ) m := by
+  refine ⟨?_, ?_⟩
+  · simpa only [map_pow, map_one] using
+      congrArg (RatFunc.C : ℂ →+* E) hζ.pow_eq_one
+  · intro l hl
+    have hpow : RatFunc.C (ζ ^ l) = RatFunc.C (1 : ℂ) := by
+      simpa only [map_pow, map_one] using hl
+    apply hζ.dvd_of_pow_eq_one l
+    exact RatFunc.C_injective hpow
+
 /-- The already-proved Joukowski root identity, expressed for T_(3^k)-t. -/
 theorem target_candidate_isRoot (k : ℕ) (ζ : ℂ) (j : ℕ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     IsRoot (targetPolynomial k) (candidate ζ j) := by
-  have hζE : IsPrimitiveRoot (RatFunc.C ζ) (3 ^ k) := by
-    simpa using hζ.map (RatFunc.C : ℂ →+* E)
+  have hζE : IsPrimitiveRoot (RatFunc.C ζ) (3 ^ k) :=
+    primitiveRoot_C (3 ^ k) ζ hζ
   have hroot := LinearInputChebyshevDescent.candidate_isRoot
     k j (RatFunc.C ζ) RatFunc.X hζE RatFunc.X_ne_zero
   simpa [targetPolynomial, candidate,
     LinearInputChebyshevTower.genericParameter_eq_joukowski] using hroot
 
 /-- The finite set of the m explicit radical-labelled roots. -/
-def candidateSet (m : ℕ) (ζ : ℂ) : Finset E :=
-  (Finset.range m).image (candidate ζ)
+noncomputable def candidateSet (m : ℕ) (ζ : ℂ) : Finset E := by
+  classical
+  exact (Finset.range m).image (candidate ζ)
 
 /-- Existing pairwise-distinctness theorem gives exactly m candidates. -/
 theorem candidateSet_card (m : ℕ) (ζ : ℂ)
@@ -150,7 +164,8 @@ theorem targetPolynomial_splits (k : ℕ) (hk : 0 < k) (ζ : ℂ)
     targetPolynomial_ne_zero k hk
   have hsubset : (candidateSet m ζ).val ⊆ (targetPolynomial k).roots := by
     intro x hx
-    rcases Finset.mem_image.mp hx with ⟨j, hj, rfl⟩
+    have hx' : x ∈ candidateSet m ζ := by simpa using hx
+    rcases Finset.mem_image.mp hx' with ⟨j, hj, rfl⟩
     exact (Polynomial.mem_roots hnonzero).2 (target_candidate_isRoot k ζ j hζ)
   have hcardle : (candidateSet m ζ).card ≤ (targetPolynomial k).roots.card :=
     Multiset.card_le_card (Finset.val_le_iff_val_subset.mpr hsubset)
@@ -170,8 +185,7 @@ theorem candidate_mem_rootSet (k : ℕ) (hk : 0 < k) (ζ : ℂ) (j : ℕ)
   constructor
   · rw [map_basePolynomial k]
     exact targetPolynomial_ne_zero k hk
-  · rw [Polynomial.aeval_def, ← Polynomial.eval₂_eq_eval_map,
-      map_basePolynomial k]
+  · rw [Polynomial.eval₂_eq_eval_map, map_basePolynomial k]
     exact target_candidate_isRoot k ζ j hζ
 
 /-- The actual root set generates all of C(X): two adjacent roots recover X,
@@ -186,8 +200,8 @@ theorem rootSet_adjoin_eq_top (k : ℕ) (hk : 0 < k) (ζ : ℂ)
     change algebraMap F E (algebraMap ℂ F ζ) = algebraMap ℂ E ζ
     rw [IsScalarTower.algebraMap_apply ℂ F E]
     rfl
-  have hζE : IsPrimitiveRoot (RatFunc.C ζ) (3 ^ k) := by
-    simpa using hζ.map (RatFunc.C : ℂ →+* E)
+  have hζE : IsPrimitiveRoot (RatFunc.C ζ) (3 ^ k) :=
+    primitiveRoot_C (3 ^ k) ζ hζ
   have hm2 : 2 < 3 ^ k := by
     cases k with
     | zero => omega
@@ -225,7 +239,7 @@ theorem rootSet_adjoin_eq_top (k : ℕ) (hk : 0 < k) (ζ : ℂ)
       exact IntermediateField.subset_adjoin F _ hroot1
   have hadjoinX :
       IntermediateField.adjoin F ({(RatFunc.X : E)} : Set E) = ⊤ := by
-    simpa using IntermediateField.adjoin_X F
+    simpa using RatFunc.IntermediateField.adjoin_X F
   apply le_antisymm
   · exact le_top
   · calc
@@ -241,7 +255,7 @@ field of T_(3^k)(X)-t for k ≥ 1. -/
 theorem rationalFunction_isSplittingField (k : ℕ) (hk : 0 < k) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     Polynomial.IsSplittingField (parameterField k) E (basePolynomial k) := by
-  rw [Polynomial.isSplittingField_iff_intermediateField]
+  rw [isSplittingField_iff_intermediateField]
   constructor
   · rw [map_basePolynomial k]
     exact targetPolynomial_splits k hk ζ hζ
@@ -254,6 +268,6 @@ noncomputable def actualSplittingFieldEquiv (k : ℕ) (hk : 0 < k) (ζ : ℂ)
     E ≃ₐ[parameterField k] (basePolynomial k).SplittingField := by
   letI : Polynomial.IsSplittingField (parameterField k) E (basePolynomial k) :=
     rationalFunction_isSplittingField k hk ζ hζ
-  exact Polynomial.IsSplittingField.algEquiv (basePolynomial k)
+  exact Polynomial.IsSplittingField.algEquiv E (basePolynomial k)
 
 end LinearInputChebyshevSplitting
