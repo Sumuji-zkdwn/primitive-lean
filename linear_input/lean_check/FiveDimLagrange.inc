@@ -1294,7 +1294,7 @@ theorem singularActualFourthMatrix_eq (c1 c2 t r : ℝ) :
         (cartanLowerLeftBlock (singularParallelPoint c1 c2 t r))
         (threeColumnMatrix (parallelY c1 c2)
           (parallelZStar c1 c2 t) (parallelWStar c1 c2 t)) := by
-  unfold singularActualFourthMatrix
+  dsimp only [singularActualFourthMatrix]
   rw [actual_parallel_Y, actual_parallel_Z1, actual_parallel_Z2,
     actual_parallel_W11, actual_parallel_W12]
   rfl
