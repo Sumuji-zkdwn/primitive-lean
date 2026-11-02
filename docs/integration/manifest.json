@@ -2187,6 +2187,39 @@
       "role": "new_branch_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16SpectralProjectors.inc",
+      "sha256": "d0e37c6945e3e3ee282277d1c40ebaacc4ce0263e3e1c8409aa4b87089676fc6",
+      "original_sha256": "d0e37c6945e3e3ee282277d1c40ebaacc4ce0263e3e1c8409aa4b87089676fc6",
+      "source_pr": null,
+      "source_commit": "31a9dc36d199b2bdf25f6d1c78c6c6894f9dfc0a",
+      "source_path": "linear_input/lean_check/F16SpectralProjectors.inc",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_f16_spectral.py",
+      "sha256": "7c72c906d770b037b36b18f7e0c3c591dd57af75c2e8a7e37f83fc54626d003f",
+      "original_sha256": "7c72c906d770b037b36b18f7e0c3c591dd57af75c2e8a7e37f83fc54626d003f",
+      "source_pr": null,
+      "source_commit": "31a9dc36d199b2bdf25f6d1c78c6c6894f9dfc0a",
+      "source_path": "tools/check_f16_spectral.py",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-spectral.md",
+      "sha256": "a3a9b572dc96d8418c8c1903a8cd59dabd6db2f872dc0b40e27ad299d9c608e4",
+      "original_sha256": "a3a9b572dc96d8418c8c1903a8cd59dabd6db2f872dc0b40e27ad299d9c608e4",
+      "source_pr": null,
+      "source_commit": "31a9dc36d199b2bdf25f6d1c78c6c6894f9dfc0a",
+      "source_path": "docs/verification/2026-11-03-f16-spectral.md",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
