@@ -846,6 +846,7 @@ theorem actualBracketProj_Y (z : FiveState) :
       ring
     · dsimp [actualBracketProj, fivePolyFieldEval,
         polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
+      ring
 
 theorem actualBracketProj_Z1 (z : FiveState) :
     actualBracketProj (fivePolyFieldEval polyZ1 z) =
