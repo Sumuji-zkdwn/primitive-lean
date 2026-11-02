@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repository": "Sumuji-zkdwn/primitive-lean",
-  "snapshot_date": "2026-11-02",
+  "snapshot_date": "2026-11-03",
   "baseline_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
   "baseline_paths": [
     "lean/Audit.lean",
@@ -93,7 +93,7 @@
     "linear_input/lean_check/VariationalBridge.inc",
     "linear_input/verify_lean.py"
   ],
-  "scope": "Hash and registration provenance only; neither Lean proof validity nor authentication of historical execution.",
+  "scope": "Hash and registration provenance only; neither Lean proof validity nor authentication of historical execution. New branch source rows point to their first authored commit; subsequent updates are audited separately.",
   "source_pull_requests": [
     {
       "number": 1,
@@ -2114,6 +2114,77 @@
       "source_commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
       "source_path": "tools/verify_complementary_recovery.py",
       "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16FenchelAtlas.inc",
+      "sha256": "6587c5bc579d6e4cecfb547f750fcc8bdae378c3fe11293b79de83972c98b3af",
+      "original_sha256": "00c943093f243e87f1f57c24fe41795520899c61118192871946604bb3567fb8",
+      "source_pr": null,
+      "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
+      "source_path": "linear_input/lean_check/F16FenchelAtlas.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Fix implicit upper-bound membership argument in BddAbove proof, without changing the theorem statement."
+      ]
+    },
+    {
+      "path": "tools/check_f16_fenchel_atlas.py",
+      "sha256": "33d3a09e2d7832082d542013abc03b191f7f88ecdaf29e14f314684d34ab8c71",
+      "original_sha256": "33d3a09e2d7832082d542013abc03b191f7f88ecdaf29e14f314684d34ab8c71",
+      "source_pr": null,
+      "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
+      "source_path": "tools/check_f16_fenchel_atlas.py",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-fenchel-atlas.md",
+      "sha256": "cbf263d9de50a4b37506c01ef451efbb5b4cc1f8b9e8cafa83c5404c997ffc72",
+      "original_sha256": "cbf263d9de50a4b37506c01ef451efbb5b4cc1f8b9e8cafa83c5404c997ffc72",
+      "source_pr": null,
+      "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
+      "source_path": "docs/verification/2026-11-03-f16-fenchel-atlas.md",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16FenchelFull.inc",
+      "sha256": "59cf968d5156fcfe9105bff905e551e7b00b1fa980c7af990de2d677e44dcc72",
+      "original_sha256": "6d83a1e93303cad4b864109a22143ad582d7f87e2d3ec12293145f7b573cdec1",
+      "source_pr": null,
+      "source_commit": "351289e7b11c3f06b3262d7ad198f83e5a891940",
+      "source_path": "linear_input/lean_check/F16FenchelFull.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace a prose phrase in the introductory comment to satisfy the original token guard; declarations, types and proofs unchanged.",
+        "Enable the imported scoped inner-product notation so the existing sixteen-dimensional identities elaborate."
+      ]
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-full-fenchel.md",
+      "sha256": "cc29e8da0e76f0df22c77c28771337f48492078ef1b193f61d185b12cbe4b870",
+      "original_sha256": "cc29e8da0e76f0df22c77c28771337f48492078ef1b193f61d185b12cbe4b870",
+      "source_pr": null,
+      "source_commit": "545e3f6af4705828b6ecf299cb2ae5e58075a492",
+      "source_path": "docs/verification/2026-11-03-f16-full-fenchel.md",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_f16_fenchel_full.py",
+      "sha256": "15ae54e4dd41558867eb3b824284449a2a1c72f888a80eeda5de7bb28bdc7df5",
+      "original_sha256": "15ae54e4dd41558867eb3b824284449a2a1c72f888a80eeda5de7bb28bdc7df5",
+      "source_pr": null,
+      "source_commit": "351289e7b11c3f06b3262d7ad198f83e5a891940",
+      "source_path": "tools/check_f16_fenchel_full.py",
+      "role": "new_branch_source",
       "byte_identical": true,
       "permitted_adaptations": []
     }
