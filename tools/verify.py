@@ -124,6 +124,7 @@ def verify_lean(rebuild):
         "F16RankCertificate": "Exact integer factor and 12-by-12 pivot certificates imply real Matrix.rank 12 at t = +1 and -1",
         "F16RealDeterminant": "Eight 2-by-2 sedenion left-pencil blocks, verified row/column bijections and parity, and the full real Matrix.det identity",
         "F16CompleteRank": "Exact real-pencil comparison at integer parameters, determinant-zero characterization, and complete rank-12/rank-16 classification",
+        "ShearCommutator": "Actual energy partial derivatives generate horizontal and vertical shears through coordinate exchange; inverse-order cancellation, unit-determinant hyperbolic commutator, and a certified exponential lower bound",
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
