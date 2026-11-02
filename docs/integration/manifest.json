@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "d7b4c5055036547c7a1fd6168701990a5747d7937e4bc98f654a0c51157080e9",
+      "sha256": "316819fef6ef019251e459bacd010445aeb2e4a31a3305057b9db2ef6c36f296",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2129,9 +2129,10 @@
       "permitted_adaptations": [
         "Append first-jet contact interpretation and genuine E directional derivative, with exact contact defect and two finite noncommutative shift laws.",
         "Replace a pair of equivalent tactic combinators to meet the strict zero-warning Lean compilation policy; no theorem statement changes.",
-        "Add 4 algebraic Cartan/contact horizontality theorems for dual first-jet geometries J^1(R,R^2) and J^1(R^2,R)."
+        "Add 4 algebraic Cartan/contact horizontality theorems for dual first-jet geometries J^1(R,R^2) and J^1(R^2,R).",
+        "Correct two failed jet-horizontality attempts using pure momentum and base-plus-pairing tangent directions; add their explicit tangent definition."
       ],
-      "note": "Original first-commit proof retained by SHA; working version has 23 theorems (12 appended), 16 definitions (12 appended), and 1 abbreviation. Neither physical 5D space nor isomorphism of the two jet models is claimed."
+      "note": "First-commit source retained by SHA. Working version has 23 theorem statements (12 appended), 17 definitions (13 appended), and 1 abbreviation. Horizontal tangent directions are distinguished from contact-preserving shifts."
     }
   ],
   "construction_errors": []
