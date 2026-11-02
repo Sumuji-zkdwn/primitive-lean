@@ -35,11 +35,13 @@ theorem ternary_word_count (m : ℕ) :
 
 /-- The three possibilities (a,0,0), (0,a,0), (0,0,a). -/
 def ternaryBlock (r : Fin 3) (a : ℤ) : List ℤ :=
-  (List.range 3).map (fun i => if i = r.val then a else 0)
+  if r.val = 0 then [a, 0, 0]
+  else if r.val = 1 then [0, a, 0]
+  else [0, 0, a]
 
 theorem ternary_block_sum (r : Fin 3) (a : ℤ) :
     (ternaryBlock r a).sum = a := by
-  fin_cases r <;> norm_num [ternaryBlock, List.range]
+  fin_cases r <;> simp [ternaryBlock]
 
 /-- Two blocks: +1 followed by -1; p and q independently choose phases. -/
 def twoBlocks (p q : Fin 3) : List ℤ :=
@@ -97,10 +99,10 @@ theorem filter_nonzero_preserves_sum (xs : List ℤ) :
   | cons x xs ih =>
       simp only [List.filter_cons]
       split_ifs with hx
-      · simpa only [List.sum_cons, ih]
+      · simp only [List.sum_cons, ih]
       · have hzero : x = 0 := by simpa using hx
         subst x
-        simpa only [List.sum_cons, zero_add] using ih
+        simp only [List.sum_cons, zero_add, ih]
 
 /-- Repeat a partial-sum state for its actual number of time slots. -/
 def dwellExpand (blocks : List (ℤ × ℕ)) : List ℤ :=
