@@ -2150,6 +2150,18 @@
       "byte_identical": true,
       "permitted_adaptations": []
     }
+    {
+      "path": "linear_input/lean_check/ChebyshevSplittingField.inc",
+      "sha256": "a7d77f9ff77fcc9ac8e754e9a9811933e0d029b53e62f073fb7c537826e01877",
+      "original_sha256": "a7d77f9ff77fcc9ac8e754e9a9811933e0d029b53e62f073fb7c537826e01877",
+      "source_pr": null,
+      "source_commit": "5ea8779110320644346b0e38fbfc9d6b7749783b",
+      "source_path": "linear_input/lean_check/ChebyshevSplittingField.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "5ea8779110320644346b0e38fbfc9d6b7749783b"
+    },
   ],
   "construction_errors": []
 }
