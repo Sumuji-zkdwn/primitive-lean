@@ -65,9 +65,9 @@ theorem exampleBadS_breaks :
 /-- Self-stopping does not imply reappearance of a forgotten distinction. -/
 theorem exampleK_does_not_break :
     ¬ BreaksFiber LinearInputF0.exampleK LinearInputF0.exampleK := by
-  apply commuting_does_not_break
-  exact (⟨LinearInputF0.exampleK, by intro x; rfl⟩ :
-    LinearInputF0.CommutingMap LinearInputF0.exampleK)
+  exact commuting_does_not_break
+    (⟨LinearInputF0.exampleK, by intro x; rfl⟩ :
+      LinearInputF0.CommutingMap LinearInputF0.exampleK)
 
 /-- Operators on the left that act strangely on *every* element on the right. -/
 def LeftPolar {ι : Type u} {κ : Type v}
