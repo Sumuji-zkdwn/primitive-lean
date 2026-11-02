@@ -12,7 +12,9 @@ open LinearInputChebyshevDescent
 theorem cubicPoly_natDegree :
     (cubicPoly (K := ℂ)).natDegree = 3 := by
   unfold cubicPoly
-  compute_degree; norm_num
+  compute_degree
+  · norm_num
+  · omega
 
 theorem chebyPoly_natDegree (k : ℕ) :
     (chebyPoly (K := ℂ) k).natDegree = 3 ^ k := by
