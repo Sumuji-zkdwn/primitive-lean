@@ -2223,6 +2223,42 @@
       "role": "new_branch_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "sha256": "9a8d4b732380a35964bf1f2ac53636179bb8c34d6b8f4c17e5be714e5fa57563",
+      "original_sha256": "8548219f79ab72f885c24e7974ee4c7d8f75ca87fc9e764d0fc9b5328018309e",
+      "source_pr": null,
+      "source_commit": "0be2444f993de8ba7823d99fbcc720103c03a2f6",
+      "source_path": "linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Enable scoped Matrix transpose notation in the supplement without changing theorem statements.",
+        "Make all four finite rational Gram and inverse matrices reducible for exact-kernel evaluation."
+      ]
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-singular-pinv.md",
+      "sha256": "61f019c39a712fd8fdd79d99a5fd35526062eea9728be97e077b848cd1332237",
+      "original_sha256": "61f019c39a712fd8fdd79d99a5fd35526062eea9728be97e077b848cd1332237",
+      "source_pr": null,
+      "source_commit": "0be2444f993de8ba7823d99fbcc720103c03a2f6",
+      "source_path": "docs/verification/2026-11-03-f16-singular-pinv.md",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_f16_singular_pinv.py",
+      "sha256": "9de27f28d43f06dd9577f6c8d4f6e85cf352b2347b07174ee43f659e71ca7d75",
+      "original_sha256": "9de27f28d43f06dd9577f6c8d4f6e85cf352b2347b07174ee43f659e71ca7d75",
+      "source_pr": null,
+      "source_commit": "0be2444f993de8ba7823d99fbcc720103c03a2f6",
+      "source_path": "tools/check_f16_singular_pinv.py",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
