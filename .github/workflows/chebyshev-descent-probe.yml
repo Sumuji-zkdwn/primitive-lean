@@ -7,12 +7,14 @@ on:
       - linear_input/lean_check/ChebyshevDihedralDescent.inc
       - .github/workflows/chebyshev-descent-probe.yml
       - probes/ChebyshevNext.inc
+      - probes/ChebyshevDegreeTower.inc
   pull_request:
     branches: [codex/primitive-history-derivation-20261029]
     paths:
       - linear_input/lean_check/ChebyshevDihedralDescent.inc
       - .github/workflows/chebyshev-descent-probe.yml
       - probes/ChebyshevNext.inc
+      - probes/ChebyshevDegreeTower.inc
   workflow_dispatch:
 
 permissions:
@@ -41,8 +43,11 @@ jobs:
           assert not any(x in fragment for x in ('sorry', 'admit', 'native_decide'))
           next_fragment = Path('probes/ChebyshevNext.inc').read_text()
           assert not any(x in next_fragment for x in ('sorry', 'admit', 'native_decide'))
+          tower_fragment = Path('probes/ChebyshevDegreeTower.inc').read_text()
+          assert not any(x in tower_fragment for x in ('sorry', 'admit', 'native_decide'))
           Path('lean/ChebyshevDescentProbe.lean').write_text(
-              'import Mathlib\n\n' + fragment + '\n\n' + next_fragment)
+              'import Mathlib\n\n' + fragment + '\n\n' + next_fragment +
+              '\n\n' + tower_fragment)
           PY
       - name: Compile and verify without new axioms
         working-directory: lean
