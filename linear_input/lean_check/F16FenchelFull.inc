@@ -5,7 +5,7 @@ The finite Fenchel domain is the range of the normal operator A* A,
 equivalently the orthogonal complement of ker A. The supremum is attained
 at every normal-equation solution, and is independent of that choice.
 
-No generalized-inverse routine, extra axiom, or unsupported physical
+No generalized-inverse routine, unverified assumption, or unsupported physical
 interpretation is assumed. The input A_t is the original exact F16 matrix.
 -/
 

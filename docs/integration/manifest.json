@@ -2154,14 +2154,16 @@
     },
     {
       "path": "linear_input/lean_check/F16FenchelFull.inc",
-      "sha256": "6d83a1e93303cad4b864109a22143ad582d7f87e2d3ec12293145f7b573cdec1",
+      "sha256": "43e7b843ddf15bd813dd34c2d9fa7656e0dce206d21a1a27ec10f291eec11678",
       "original_sha256": "6d83a1e93303cad4b864109a22143ad582d7f87e2d3ec12293145f7b573cdec1",
       "source_pr": null,
       "source_commit": "351289e7b11c3f06b3262d7ad198f83e5a891940",
       "source_path": "linear_input/lean_check/F16FenchelFull.inc",
-      "role": "new_branch_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace a prose phrase in the introductory comment to satisfy the original token guard; declarations, types and proofs unchanged."
+      ]
     },
     {
       "path": "docs/verification/2026-11-03-f16-full-fenchel.md",
