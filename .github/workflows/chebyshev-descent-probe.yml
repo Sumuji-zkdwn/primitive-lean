@@ -42,7 +42,7 @@ jobs:
           next_fragment = Path('probes/ChebyshevNext.inc').read_text()
           assert not any(x in next_fragment for x in ('sorry', 'admit', 'native_decide'))
           Path('lean/ChebyshevDescentProbe.lean').write_text(
-              'import Mathlib\\n\\n' + fragment + '\\n\\n' + next_fragment)
+              'import Mathlib\n\n' + fragment + '\n\n' + next_fragment)
           PY
       - name: Compile and verify without new axioms
         working-directory: lean
