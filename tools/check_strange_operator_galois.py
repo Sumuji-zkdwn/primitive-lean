@@ -16,6 +16,10 @@ def stops(t, s):
     return any(s[x] != x and s[t[x]] == t[x] for x in range(n))
 
 
+def compose(s, t):
+    return tuple(s[t[x]] for x in range(len(s)))
+
+
 def breaks_fiber(k, t):
     return any(k[x] == k[y] and k[t[x]] != k[t[y]]
                for x in range(len(k)) for y in range(len(k)))
@@ -47,12 +51,23 @@ def main():
         assert closed == expected_closure
         assert closed == conjugacy_orbit
         assert stops(k, k)
+        for source in range(n):
+            if source == c:
+                continue
+            for target in range(n):
+                if target == c:
+                    continue
+                first, second = spike(n, c, source), spike(n, c, target)
+                assert compose(first, second) == second
+                assert stops(first, second)
+                assert breaks_fiber(first, second) == (source != target)
 
         record[n] = {
             "endomaps": len(ops),
             "polar": len(actors),
             "closure": sorted(closed),
             "stabilizer_orbit": len(conjugacy_orbit),
+            "right_zero_and_breaking": True,
         }
 
     n = 3
