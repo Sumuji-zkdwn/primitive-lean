@@ -2163,7 +2163,7 @@
         "Transport the established Chebyshev degree theorem from ℂ to RatFunc ℂ through the injective coefficient map.",
         "Expose the already-proved 2m degree theorem for the realized parameter field."
       ],
-      "authoring_commit": "5ea8779110320644346b0e38fbfc9d6b7749783b"
+      "authoring_commit": "39c14c8214898618099bc937641ef91735254949"
     }
   ],
   "construction_errors": []
