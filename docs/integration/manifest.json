@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "9efbf39986fc3c1ef8a1eb85bb642b9d09832d9ba0a3331a2c4ccbc1f26e548a",
+      "sha256": "ab710da994119179d82b12d77af6b3af470d5bed63836bc401d178882ff75b36",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2141,9 +2141,10 @@
         "Add singular parallel state and projected length-two/three/four bracket formulas, a universal fourth-order 5x5 determinant certificate -4*(c1²+c2²)^3 independent of t, and rank-five via unit determinant; derivative-level fourth bracket identifications to follow.",
         "Prove two fourth-order actual Lie brackets projected onto (c1,c2,r) match the parallel polynomial W11 and W12, prove their undecided components vanish, identify the actual fourth-order 5x5 block matrix, and derive its nonzero determinant and rank five for all c != 0, u = t*c.",
         "Explicitly zeta-reduce local bindings in singularActualFourthMatrix_eq before rewriting the verified parallel projected Lie brackets; no theorem statement change.",
-        "Append eleven real-polynomial Monge contact identities (norm/wedge Lagrange identity, two horizontal differential equations, angular numerator) and F0-compatibility results for the horizontal Euler step, including an invariant c=0 leaf and future-state equivalence."
+        "Append eleven real-polynomial Monge contact identities (norm/wedge Lagrange identity, two horizontal differential equations, angular numerator) and F0-compatibility results for the horizontal Euler step, including an invariant c=0 leaf and future-state equivalence.",
+        "Add exact projected length-three bracket minors covering all c != 0 on u=t*c, an explicit algebraic dependence relation, and a one-step horizontal Euler counterexample entering the zero-confirmed invariant leaf; preserve all earlier theorem statements."
       ],
-      "note": "PR #30 has 82 theorem statements. Prior 71 theorems validated at 8c92eb39 (CI 41535378903). Eleven Monge/F0 lemmas at head 45642138 are pending exact-head pinned-Lean + all declaration audit. No global angle chart, Cartan quartic, physical five-dimensional spacetime, or true-flow F0 descent is assumed."
+      "note": "71 theorem baseline CI successful at 8c92eb390ff0 (1306 theorems / 1729 declarations). Current addendum has 89 theorem statements: 11 Monge/F0 theorems and 7 depth-three/crossing certificates appended to verified sources, pending CI. No Cartan harmonic quartic or global angle chart asserted."
     }
   ],
   "construction_errors": []
