@@ -1024,8 +1024,12 @@ theorem cartanActualFiveMatrix_rank_five (z : FiveState)
       · nlinarith [sq_pos_of_ne_zero h1, sq_nonneg z.1.2]
       · nlinarith [sq_pos_of_ne_zero h2, sq_nonneg z.1.1]
     exact mul_ne_zero (mul_ne_zero (by norm_num) (ne_of_gt hpos)) hw
-  have hrank := Matrix.rank_of_det_ne_zero hdet
-  simpa [Fintype.card_sum] using hrank
+  have hunitdet : IsUnit (cartanActualFiveMatrix z).det :=
+    isUnit_iff_ne_zero.mpr hdet
+  have hunit : IsUnit (cartanActualFiveMatrix z) :=
+    ((cartanActualFiveMatrix z).isUnit_iff_isUnit_det).2 hunitdet
+  simpa [Fintype.card_sum] using
+    Matrix.rank_of_isUnit (cartanActualFiveMatrix z) hunit
 
 /-- The exact singular locus of this five-column Lie-bracket matrix. -/
 theorem cartanActualFiveMatrix_det_zero_iff (z : FiveState) :
