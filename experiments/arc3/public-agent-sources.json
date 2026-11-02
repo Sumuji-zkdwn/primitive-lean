@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-27",
+  "repositories": [
+    {
+      "repository": "arcprize/ARC-AGI-3-Agents",
+      "url": "https://github.com/arcprize/ARC-AGI-3-Agents/blob/main/README.md",
+      "readme_blob_sha": "763c3837ee8e8fdefcd83b8a2525160d4148fbfb",
+      "tree_ref_if_inspected": "4743e7d0aaae0ded0d98a89a7e282e63564cd58b"
+    },
+    {
+      "repository": "Tufalabs/duck-harness",
+      "url": "https://github.com/Tufalabs/duck-harness/blob/main/README.md",
+      "readme_blob_sha": "e03f3892bff7ce93ae12dbde0d037dabbbb7ef20",
+      "tree_ref_if_inspected": null
+    },
+    {
+      "repository": "da-fr/arc-agi-3-solution",
+      "url": "https://github.com/da-fr/arc-agi-3-solution/blob/main/README.md",
+      "readme_blob_sha": "38bb1ffb24487ce7ea1b1f1bccf3e1d10ebbc590",
+      "tree_ref_if_inspected": null
+    },
+    {
+      "repository": "NVIDIA/dream-team",
+      "url": "https://github.com/NVIDIA/dream-team/blob/main/README.md",
+      "readme_blob_sha": "0f3fc298f77e17a0a4bd03beedeb2fd83e8f7ea3",
+      "tree_ref_if_inspected": null
+    },
+    {
+      "repository": "ryanbbrown/Retrodict",
+      "url": "https://github.com/ryanbbrown/Retrodict/blob/main/README.md",
+      "readme_blob_sha": "34ad9fa341cb47fac976386efbaa2d4961dba694",
+      "tree_ref_if_inspected": "71672e8e5adb008360f52a61ef9e2adf91a62d89"
+    },
+    {
+      "repository": "dolphin-in-a-coma/arc-agi-3-just-explore",
+      "url": "https://github.com/dolphin-in-a-coma/arc-agi-3-just-explore/blob/main/README.md",
+      "readme_blob_sha": "fc6e6b542d36a4af1586a4a5f631164a32f137e2",
+      "tree_ref_if_inspected": "c2d98318ecca38c8ee9fb49b5af159e51770bad7"
+    },
+    {
+      "repository": "NIMI-research/Tycho",
+      "url": "https://github.com/NIMI-research/Tycho/blob/main/README.md",
+      "readme_blob_sha": "62d33dc69d6539f994f816e171c4f0fbe40e3774",
+      "tree_ref_if_inspected": "f68912a764372ead0a610db2e1c011d41ce5197e"
+    },
+    {
+      "repository": "symbolica-ai/ARC-AGI-3-Agents",
+      "url": "https://github.com/symbolica-ai/ARC-AGI-3-Agents/blob/symbolica/arcgentica/README.md",
+      "readme_blob_sha": "47f8dd802b0938e49e2e13596a41e007d1916897",
+      "tree_ref_if_inspected": null
+    }
+  ]
+}

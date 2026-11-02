@@ -209,7 +209,15 @@ def main(argv=None):
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
+    modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     args = parser.parse_args(argv)
+    if args.arc3_only:
+        if args.rebuild:
+            parser.error("--rebuild applies to Lean, not --arc3-only")
+        from arc3_integration import run_arc3
+        report = run_arc3(ROOT)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 0 if report["passed"] else 1
     OUT.mkdir(exist_ok=True)
     if args.proof_only:
         from proof_only import run_proof_only

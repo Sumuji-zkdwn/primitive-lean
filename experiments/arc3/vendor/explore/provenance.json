@@ -1,0 +1,22 @@
+{
+  "repository": "dolphin-in-a-coma/arc-agi-3-just-explore",
+  "ref": "c2d98318ecca38c8ee9fb49b5af159e51770bad7",
+  "license": "MIT",
+  "files": {
+    "agents/heuristic_agent.py": {
+      "original_sha256": "8cd7204875b7d7a704777f8163d1431553bc745f61527bd0b9b531487b9a818c",
+      "vendored_sha256": "155110ea11e4700ec580efb6e213aa6815cbc227d45ba4293c1ae67212906e85",
+      "modifications": "package-local imports and explicit seed"
+    },
+    "graph_explorer.py": {
+      "original_sha256": "cebba2ae380e2ece6cff58ddb91f073cceca487e19e12adeb2dc16ab23a0ea0f",
+      "vendored_sha256": "cebba2ae380e2ece6cff58ddb91f073cceca487e19e12adeb2dc16ab23a0ea0f",
+      "modifications": "none"
+    },
+    "LICENSE": {
+      "original_sha256": "e2fd1b63f85da654c8761dec25240c85dbc0b5c090d78a43c4f01630f73c2b3e",
+      "vendored_sha256": "e2fd1b63f85da654c8761dec25240c85dbc0b5c090d78a43c4f01630f73c2b3e",
+      "modifications": "none"
+    }
+  }
+}

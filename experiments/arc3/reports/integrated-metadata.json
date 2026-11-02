@@ -1,0 +1,43 @@
+{
+  "purpose": "Public development evaluation; not an official or hidden-test score",
+  "packages": {
+    "arc-agi": "0.9.9",
+    "arcengine": "0.9.3",
+    "numpy": "2.5.4"
+  },
+  "source_sha256": {
+    "__init__.py": "909aabef74407f47ee65d93853e16c5d2ea791008d5e72840160c6a213ec8272",
+    "agent.py": "67d6bb33081c2007723133f18fed5be51925f85b68d0030d0c49ff02a250f91d",
+    "download.py": "54e749eadffc44d30bb6124437088e0c222226fe81e1fee3d30872f8bc81a563",
+    "evaluate.py": "723e94a6f177adfa655f6199b975f89b2d40a9a2bb5022157a507eabea495905",
+    "model.py": "246018452cf36be9efc52cf1c3690ca6d651d6a156c6de2adf1aad3507ed3faa",
+    "perception.py": "57000b2bd06f9e0f97d55c5df1d40f079d946cb4aa12524151b18c23b540cc7f",
+    "representation.py": "a2b874a0f4c68122646b49404b07d210a6773a958a8238f74a37d12c86934db6",
+    "sdk.py": "a773328ffe6cfb51524ff368154df81d5cb56b8020f7c50d572675afd80dedab",
+    "synthetic.py": "211a9182d0e8146a8ba27201904f05a67686b4033f45df5c46da8f5ce3f1e2ef"
+  },
+  "arguments": {
+    "games": [
+      "ls20",
+      "ft09",
+      "vc33"
+    ],
+    "agents": [
+      "model",
+      "structure",
+      "random"
+    ],
+    "seeds": [
+      3
+    ],
+    "budget": 500,
+    "max_resets": 8,
+    "raw_state": false,
+    "environments": "/workspace/arc3-model/environment_files",
+    "output": "experiments/arc3/runs/integrated-comparison"
+  },
+  "structural_source_sha256": {
+    "arc_agent.py": "fc8f00abc761911c40c2fa6664e245dea2e6323be812bf0c75da63e1840bace6",
+    "online.py": "08589dbdaa796491666be7d25d307eef7ac2f03abdd447d53e8cd6e511b9a989"
+  }
+}

@@ -62,3 +62,9 @@ Thumbs.db
 
 # Rendered root documents
 /*.html
+
+# Local ARC SDK assets, recordings, caches and regenerated experiment checks
+/experiments/arc3/runs/
+/experiments/arc3/environment_files/
+/experiments/arc3/reports/integration-check.json
+/experiments/arc3/.venv*/
