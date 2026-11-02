@@ -6,6 +6,7 @@ on:
     paths:
       - linear_input/lean_check/ChebyshevDihedralDescent.inc
       - .github/workflows/chebyshev-descent-probe.yml
+      - probes/ChebyshevNext.inc
   pull_request:
     branches: [codex/primitive-history-derivation-20261029]
     paths:
