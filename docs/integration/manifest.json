@@ -2116,6 +2116,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "sha256": "150a0e6dc9100b475901c5a047f527a8e839701de321ec0d449159cfce3bdbc9",
+      "original_sha256": "150a0e6dc9100b475901c5a047f527a8e839701de321ec0d449159cfce3bdbc9",
+      "source_pr": 31,
+      "source_commit": "3fcf1f504540666878995efa7c3d65f695a6152f",
+      "source_path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
