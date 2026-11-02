@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "ab710da994119179d82b12d77af6b3af470d5bed63836bc401d178882ff75b36",
+      "sha256": "b595d66520646601254bce6a8915c58b4ba68155795580538deb8cda556172be",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2142,9 +2142,10 @@
         "Prove two fourth-order actual Lie brackets projected onto (c1,c2,r) match the parallel polynomial W11 and W12, prove their undecided components vanish, identify the actual fourth-order 5x5 block matrix, and derive its nonzero determinant and rank five for all c != 0, u = t*c.",
         "Explicitly zeta-reduce local bindings in singularActualFourthMatrix_eq before rewriting the verified parallel projected Lie brackets; no theorem statement change.",
         "Append eleven real-polynomial Monge contact identities (norm/wedge Lagrange identity, two horizontal differential equations, angular numerator) and F0-compatibility results for the horizontal Euler step, including an invariant c=0 leaf and future-state equivalence.",
-        "Add exact projected length-three bracket minors covering all c != 0 on u=t*c, an explicit algebraic dependence relation, and a one-step horizontal Euler counterexample entering the zero-confirmed invariant leaf; preserve all earlier theorem statements."
+        "Add exact projected length-three bracket minors covering all c != 0 on u=t*c, an explicit algebraic dependence relation, and a one-step horizontal Euler counterexample entering the zero-confirmed invariant leaf; preserve all earlier theorem statements.",
+        "Remove a redundant ring tactic after dsimp on the zero-confirmed horizontal Euler lemma to satisfy the zero-warning Lean audit; no theorem statement changes."
       ],
-      "note": "71 theorem baseline CI successful at 8c92eb390ff0 (1306 theorems / 1729 declarations). Current addendum has 89 theorem statements: 11 Monge/F0 theorems and 7 depth-three/crossing certificates appended to verified sources, pending CI. No Cartan harmonic quartic or global angle chart asserted."
+      "note": "89 theorem statements at current head; 71-theorem baseline success. Follow-up Monge/F0 and rank witnesses compiled in preliminary runs, but strict warning-only CI failure led to removing one unnecessary ring tactic; exact-head integration pending."
     }
   ],
   "construction_errors": []
