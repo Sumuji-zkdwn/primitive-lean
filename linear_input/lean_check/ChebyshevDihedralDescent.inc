@@ -44,6 +44,7 @@ theorem cubicPoly_eval (x : K) :
     (cubicPoly (K := K)).eval x = cubic x := by
   simp [cubicPoly, cubic]
 
+omit [CharZero K] in
 theorem chebyPoly_eval (x : K) (k : ℕ) :
     (chebyPoly (K := K) k).eval x = chebyIterate x k := by
   induction k with
@@ -102,7 +103,8 @@ theorem candidate_isRoot (k j : ℕ) (ζ z : K)
     candidate_root k j ζ z hζ hz]
   simp
 
-/-- A primitive root of order at least three cannot equal its inverse. -/
+-- A primitive root of order at least three cannot equal its inverse.
+omit [CharZero K] in
 theorem primitive_denom_ne_zero {m : ℕ} {ζ : K}
     (hζ : IsPrimitiveRoot ζ m) (hm : 2 < m) :
     ζ - ζ⁻¹ ≠ 0 := by
@@ -141,12 +143,6 @@ theorem reconstruct_z_primitive {m : ℕ} (ζ z : K)
       ζ⁻¹ * rootCandidate ζ z 0) / (ζ - ζ⁻¹) :=
   reconstruct_z ζ z hz (primitive_denom_ne_zero hζ hm)
 
-/-- The degree-three instance agrees with the existing cubic. -/
-omit [CharZero K] in
-theorem chebyIterate_one (x : K) :
-    chebyIterate x 1 = cubic x := by
-  rfl
-
 
 /--
 Over any field extension containing the primitive-root coefficient, the two
@@ -171,10 +167,8 @@ theorem two_candidates_generate
     IntermediateField.adjoin F ({z} : Set E)
   have huA : u ∈ A := A.algebraMap_mem ζ
   have huB : u ∈ B := B.algebraMap_mem ζ
-  have htwoA : (2 : E) ∈ A := by
-    convert A.add_mem (A.one_mem) (A.one_mem) using 1 <;> norm_num
-  have htwoB : (2 : E) ∈ B := by
-    convert B.add_mem (B.one_mem) (B.one_mem) using 1 <;> norm_num
+  have htwoA : (2 : E) ∈ A := A.natCast_mem 2
+  have htwoB : (2 : E) ∈ B := B.natCast_mem 2
   have hzB : z ∈ B :=
     IntermediateField.subset_adjoin F _ (by simp)
   have hrootB (j : ℕ) : rootCandidate u z j ∈ B := by
