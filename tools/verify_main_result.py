@@ -44,6 +44,7 @@ SUPPLEMENTS = (
     ("linear_input/lean_check/StrangeOperatorGalois.inc", "LinearInputStrangeGalois"),
     ("linear_input/lean_check/StrangeOperatorConjugacy.inc", "LinearInputStrangeConjugacy"),
     ("linear_input/lean_check/StrangeOperatorBoundary.inc", "LinearInputStrangeBoundary"),
+    ("linear_input/lean_check/StrangeOperatorFixedSets.inc", "LinearInputStrangeFixedSets"),
 )
 
 
