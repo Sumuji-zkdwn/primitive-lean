@@ -26,6 +26,12 @@ def parameterField (k : ℕ) : IntermediateField ℂ E :=
   IntermediateField.adjoin ℂ
     ({LinearInputChebyshevTower.genericParameter (3 ^ k)} : Set E)
 
+/-- The degree of C(X)/C(t), reusing the established 2m theorem. -/
+theorem parameterField_finrank (k : ℕ) :
+    Module.finrank (parameterField k) E = 2 * (3 ^ k) := by
+  simpa [parameterField] using
+    LinearInputChebyshevTower.finrank_genericParameter (3 ^ k)
+
 /-- The element t, viewed as an element of the base intermediate field. -/
 def parameter (k : ℕ) : parameterField k :=
   ⟨LinearInputChebyshevTower.genericParameter (3 ^ k),
@@ -61,14 +67,24 @@ theorem map_basePolynomial (k : ℕ) :
     chebyPoly_map (algebraMap (parameterField k) E) k]
   simp [targetPolynomial, parameter]
 
+/-- The established degree formula over ℂ transports through the injective
+coefficient map ℂ → C(X). -/
+theorem chebyPoly_natDegree_E (k : ℕ) :
+    (LinearInputChebyshevDescent.chebyPoly (K := E) k).natDegree = 3 ^ k := by
+  have hmap := Polynomial.natDegree_map_eq_of_injective
+    (FaithfulSMul.algebraMap_injective ℂ E)
+    (LinearInputChebyshevDescent.chebyPoly (K := ℂ) k)
+  rw [chebyPoly_map (algebraMap ℂ E) k] at hmap
+  exact hmap.trans (LinearInputChebyshevNext.chebyPoly_natDegree k)
+
 /-- For k ≥ 1, the polynomial has degree 3^k. -/
 theorem targetPolynomial_natDegree (k : ℕ) (hk : 0 < k) :
     (targetPolynomial k).natDegree = 3 ^ k := by
   unfold targetPolynomial
   rw [Polynomial.natDegree_sub_eq_left_of_natDegree_lt (by
-    rw [Polynomial.natDegree_C, LinearInputChebyshevNext.chebyPoly_natDegree]
+    rw [Polynomial.natDegree_C, chebyPoly_natDegree_E]
     exact pow_pos (by norm_num : (0 : ℕ) < 3) k)]
-  exact LinearInputChebyshevNext.chebyPoly_natDegree k
+  exact chebyPoly_natDegree_E k
 
 /-- The base polynomial has the same degree, by injectivity of the field map. -/
 theorem basePolynomial_natDegree (k : ℕ) (hk : 0 < k) :
