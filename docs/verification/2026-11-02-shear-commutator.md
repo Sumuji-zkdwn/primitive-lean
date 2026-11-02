@@ -8,13 +8,19 @@ Sumuji-zkdwn/primitive-lean. It does not modify the original
 Elastica or polynomial-energy source.
 
 **Existing formalized input**:
+- LinearInputDesign.E (the original primitive energy)
+- LinearInputVariablePairs.energy_eq_primitive (the exact bridge)
 - linear_input/lean_check/VariablePairObservations.inc
 - LinearInputVariablePairs.energy
 - LinearInputVariablePairs.hasDerivAt_energy_x
 - LinearInputVariablePairs.hasDerivAt_signed_input
 - LinearInputVariablePairs.gradXu_formula
 
-The source potential, with the explicit chosen sign s=+1, is
+The source potential is also an exact slice of the ORIGINAL Design.E at
+lam=0, r=k-2, y=0, and input=-u; the new Lean theorems
+source_is_original_energy and original_gradient_formula prove the
+energy and both partial-derivative identities. With this explicit
+chosen sign s=+1, the potential is
 
     energy k 0 0 0 x 0 (-u) = (k/2)*x^2 + u*x.
 
