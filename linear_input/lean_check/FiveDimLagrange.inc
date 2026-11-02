@@ -1334,4 +1334,149 @@ theorem singularActualFourthMatrix_rank_five (c1 c2 t r : ℝ)
     Matrix.rank_of_isUnit (singularActualFourthMatrix c1 c2 t r) hunit
 
 
+
+/-!
+# Monge polynomial contact identities and operational F0 descent
+
+The real Monge angle z=arg(c) is only a local chart.  This source deliberately
+formalizes the global polynomial identities underlying its differential, not
+a globally defined angle function.  In particular, these are NOT Cartan's
+harmonic quartic or a curvature computation.
+-/
+
+def mongeRadiusSq (z : FiveState) : ℝ := z.1.1^2 + z.1.2^2
+
+def mongeDot (z : FiveState) : ℝ :=
+  z.1.1*z.2.1.1 + z.1.2*z.2.1.2
+
+def mongeWedge (z : FiveState) : ℝ :=
+  z.1.1*z.2.1.2 - z.1.2*z.2.1.1
+
+def mongeSecondQ (z : FiveState) : ℝ :=
+  1 + z.2.1.1^2 + z.2.1.2^2
+
+/-- The two-by-two Lagrange identity: inner and outer products resolve the norm. -/
+theorem monge_lagrange_identity (z : FiveState) :
+    mongeRadiusSq z * (mongeSecondQ z - 1) =
+      mongeDot z ^ 2 + mongeWedge z ^ 2 := by
+  dsimp [mongeRadiusSq, mongeSecondQ, mongeDot, mongeWedge]
+  ring
+
+def mongeYPoly : FivePoly :=
+  (pc1*pc1 + pc2*pc2) * FivePoly.const (1/2)
+
+def mongePPoly : FivePoly := pc1*pu1 + pc2*pu2
+
+def mongeQPoly : FivePoly :=
+  FivePoly.const 1 + pu1*pu1 + pu2*pu2
+
+/-- On the common plane the Monge contact form dy-p dx vanishes. -/
+theorem monge_contact_y (z : FiveState) (v : ℝ × ℝ) :
+    fivePolyDir mongeYPoly z (commonDirection z v) =
+      mongeDot z * (commonDirection z v).2.2 := by
+  dsimp [mongeYPoly, mongeDot, fivePolyDir, fivePolyEval,
+    pc1, pc2, pu1, pu2, commonDirection]
+  ring
+
+/-- On the common plane the second Monge contact form dp-q dx vanishes. -/
+theorem monge_contact_p (z : FiveState) (v : ℝ × ℝ) :
+    fivePolyDir mongePPoly z (commonDirection z v) =
+      mongeSecondQ z * (commonDirection z v).2.2 := by
+  dsimp [mongePPoly, mongeSecondQ, fivePolyDir, fivePolyEval,
+    pc1, pc2, pu1, pu2, commonDirection]
+  ring
+
+/-- Without choosing a branch of angle, its polynomial numerator has
+the correct angular derivative, S*d(arg c) = H*dr. -/
+theorem monge_angular_contact (z : FiveState) (v : ℝ × ℝ) :
+    -z.1.2 * (commonDirection z v).1.1 +
+        z.1.1 * (commonDirection z v).1.2 =
+      mongeWedge z * (commonDirection z v).2.2 := by
+  dsimp [mongeWedge, commonDirection]
+  ring
+
+/-- The square of the Monge square-root radicand is already a polynomial
+identity in the original five-dimensional variables. -/
+theorem monge_radicand (z : FiveState) :
+    2 * (mongeRadiusSq z / 2) * (mongeSecondQ z - 1) -
+      mongeDot z ^ 2 = mongeWedge z ^ 2 := by
+  have h := monge_lagrange_identity z
+  nlinarith
+
+/-- Every point with H nonzero has S strictly positive. -/
+theorem monge_radius_pos_of_wedge_ne_zero (z : FiveState)
+    (h : mongeWedge z ≠ 0) : 0 < mongeRadiusSq z := by
+  have hnonneg : 0 ≤ mongeRadiusSq z := by
+    dsimp [mongeRadiusSq]
+    positivity
+  have hne : mongeRadiusSq z ≠ 0 := by
+    intro hs
+    have hsum : z.1.1^2 + z.1.2^2 = 0 := hs
+    have hc1 : z.1.1 = 0 := by nlinarith [sq_nonneg z.1.2]
+    have hc2 : z.1.2 = 0 := by nlinarith [sq_nonneg z.1.1]
+    exact h (by simp [mongeWedge, hc1, hc2])
+  exact lt_of_le_of_ne hnonneg (Ne.symm hne)
+
+/-! The other side of the F0 comparison: the rewrite coordinate r can be
+forgotten for a chosen horizontal Euler update, unlike the multiplier q of
+the earlier primitive transverse update. -/
+
+def forgetJetRewrite (z : FiveState) : FiveState :=
+  (z.1, (z.2.1, 0))
+
+theorem forgetJetRewrite_idempotent :
+    LinearInputF0.Idempotent forgetJetRewrite := by
+  intro z
+  rfl
+
+/-- A finite, explicitly chosen Euler step along a common horizontal field. -/
+def horizontalEulerStep (h : ℝ) (v : ℝ × ℝ) (z : FiveState) : FiveState :=
+  let d := commonDirection z v
+  ((z.1.1 + h*d.1.1, z.1.2 + h*d.1.2),
+   ((z.2.1.1 + h*d.2.1.1, z.2.1.2 + h*d.2.1.2),
+    z.2.2 + h*d.2.2))
+
+/-- With this update, r is forgotten without changing any future observable
+one-step result; the field coefficients are independent of r. -/
+theorem horizontalEulerStep_descends (h : ℝ) (v : ℝ × ℝ) :
+    LinearInputF0Descent.Descends forgetJetRewrite (horizontalEulerStep h v) := by
+  intro z
+  rcases z with ⟨⟨c1, c2⟩, ⟨⟨u1, u2⟩, r⟩⟩
+  rfl
+
+/-- Existing F0 future minimality turns the one-step descent into exact
+equality of the full deterministic future-observation kernels. -/
+theorem horizontalEulerStep_future_equivalence (h : ℝ) (v : ℝ × ℝ) :
+    ∀ x y : FiveState,
+      LinearInputFutureObservation.FutureEq
+        forgetJetRewrite (horizontalEulerStep h v) x y ↔
+      forgetJetRewrite x = forgetJetRewrite y := by
+  exact (LinearInputF0FutureMinimality.descends_iff_future_eq
+    forgetJetRewrite_idempotent).mp (horizontalEulerStep_descends h v)
+
+/-- At c=0 all finite horizontal Euler steps remain in the invariant
+two-dimensional leaf with the original rewrite coordinate r fixed. -/
+theorem zero_confirmed_horizontal_step
+    (u1 u2 r h : ℝ) (v : ℝ × ℝ) :
+    horizontalEulerStep h v ((0, 0), ((u1, u2), r)) =
+      ((0, 0), ((u1+h*v.1, u2+h*v.2), r)) := by
+  apply Prod.ext
+  · apply Prod.ext <;>
+      dsimp [horizontalEulerStep, commonDirection] <;> ring
+  · apply Prod.ext
+    · apply Prod.ext <;>
+        dsimp [horizontalEulerStep, commonDirection] <;> ring
+    · dsimp [horizontalEulerStep, commonDirection]
+      ring
+
+/-- Existing F0 example and this one have opposite descent outcomes. -/
+theorem f0_operational_contrast
+    (lam r u h : ℝ) (v : ℝ × ℝ) :
+    LinearInputF0Descent.Descends
+        forgetJetRewrite (horizontalEulerStep h v) ∧
+      ¬ LinearInputF0Descent.Descends
+        forgetRewriteObservation (primitiveShiftX lam r u 0 1) := by
+  exact ⟨horizontalEulerStep_descends h v, rewrite_probe_not_descend lam r u⟩
+
+
 end LinearInputFiveDimLagrange
