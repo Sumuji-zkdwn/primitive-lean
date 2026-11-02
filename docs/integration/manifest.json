@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repository": "Sumuji-zkdwn/primitive-lean",
-  "snapshot_date": "2026-11-02",
+  "snapshot_date": "2026-11-03",
   "baseline_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
   "baseline_paths": [
     "lean/Audit.lean",
@@ -93,7 +93,7 @@
     "linear_input/lean_check/VariationalBridge.inc",
     "linear_input/verify_lean.py"
   ],
-  "scope": "Hash and registration provenance only; neither Lean proof validity nor authentication of historical execution.",
+  "scope": "Hash and registration provenance only; neither Lean proof validity nor authentication of historical execution. New branch source rows point to their first authored commit; subsequent updates are audited separately.",
   "source_pull_requests": [
     {
       "number": 1,
@@ -2114,6 +2114,39 @@
       "source_commit": "5005068af9bf66158eacde160e560dd0ba9cc5ba",
       "source_path": "tools/verify_complementary_recovery.py",
       "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16FenchelAtlas.inc",
+      "sha256": "00c943093f243e87f1f57c24fe41795520899c61118192871946604bb3567fb8",
+      "original_sha256": "00c943093f243e87f1f57c24fe41795520899c61118192871946604bb3567fb8",
+      "source_pr": null,
+      "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
+      "source_path": "linear_input/lean_check/F16FenchelAtlas.inc",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_f16_fenchel_atlas.py",
+      "sha256": "33d3a09e2d7832082d542013abc03b191f7f88ecdaf29e14f314684d34ab8c71",
+      "original_sha256": "33d3a09e2d7832082d542013abc03b191f7f88ecdaf29e14f314684d34ab8c71",
+      "source_pr": null,
+      "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
+      "source_path": "tools/check_f16_fenchel_atlas.py",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-fenchel-atlas.md",
+      "sha256": "cbf263d9de50a4b37506c01ef451efbb5b4cc1f8b9e8cafa83c5404c997ffc72",
+      "original_sha256": "cbf263d9de50a4b37506c01ef451efbb5b4cc1f8b9e8cafa83c5404c997ffc72",
+      "source_pr": null,
+      "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
+      "source_path": "docs/verification/2026-11-03-f16-fenchel-atlas.md",
+      "role": "new_branch_source",
       "byte_identical": true,
       "permitted_adaptations": []
     }
