@@ -257,4 +257,101 @@ theorem exampleK_pair_conjugate :
   rw [exampleK_is_spike, conjugate_spike]
   simp [Equiv.swap_apply_def]
 
+/-- The same-point forgetting operators form a right-zero semigroup. -/
+theorem spike_comp {α : Type u} (c a b : α) (hb : b ≠ c) :
+    (Spike c a) ∘ (Spike c b) = Spike c b := by
+  classical
+  funext x
+  by_cases hx : x = c
+  · subst x
+    simp [Function.comp, Spike, hb]
+  · simp [Function.comp, Spike, hx]
+
+/-- Every member of the closed orbit is an actual F0 idempotent. -/
+theorem spike_idempotent {α : Type u} (c a : α) (ha : a ≠ c) :
+    LinearInputF0.Idempotent (Spike c a) := by
+  intro x
+  have h := congrFun (spike_comp c a a ha) x
+  simpa only [Function.comp_apply] using h
+
+/-- Different targets commute if and only if they are actually equal. -/
+theorem spike_comp_commute_iff {α : Type u}
+    (c a b : α) (ha : a ≠ c) (hb : b ≠ c) :
+    (Spike c a ∘ Spike c b = Spike c b ∘ Spike c a) ↔ a = b := by
+  rw [spike_comp c a b hb, spike_comp c b a ha]
+  constructor
+  · intro h
+    have hc := congrFun h c
+    have hbc : b = a := by
+      simpa [Spike] using hc
+    exact hbc.symm
+  · intro hab
+    subst b
+    rfl
+
+/-- Any two spikes in the same closed orbit stop one another. -/
+theorem spikes_mutually_stop {α : Type u}
+    (c a b : α) (ha : a ≠ c) (hb : b ≠ c) :
+    Stops (Spike c a) (Spike c b) := by
+  apply (stops_spike_iff hb (Spike c a)).mpr
+  simpa [Spike] using ha
+
+/-- Distinct target assignments reveal a fiber that the first map forgot. -/
+theorem spike_breaks_fiber_iff {α : Type u}
+    (c a b : α) (ha : a ≠ c) (hb : b ≠ c) :
+    BreaksFiber (Spike c a) (Spike c b) ↔ a ≠ b := by
+  classical
+  constructor
+  · intro h
+    intro hab
+    subst b
+    have hn : ¬ BreaksFiber (Spike c a) (Spike c a) :=
+      commuting_does_not_break
+        (⟨Spike c a, by intro x; rfl⟩ :
+          LinearInputF0.CommutingMap (Spike c a))
+    exact hn h
+  · intro hab
+    refine ⟨c, a, ?_, ?_⟩
+    · simp [Spike, ha]
+    · simpa [Spike, ha, hb] using hab.symm
+
+/-- In this closed family, the failure of commutation is EXACTLY fiber breaking. -/
+theorem spike_breaks_iff_noncommute {α : Type u}
+    (c a b : α) (ha : a ≠ c) (hb : b ≠ c) :
+    BreaksFiber (Spike c a) (Spike c b) ↔
+      Spike c a ∘ Spike c b ≠ Spike c b ∘ Spike c a := by
+  rw [spike_breaks_fiber_iff c a b ha hb]
+  exact (not_congr (spike_comp_commute_iff c a b ha hb)).symm
+
+/-- The Galois-closed family is closed under composition and selects the right factor. -/
+theorem closed_spike_right_zero {α : Type u}
+    (c a : α) (ha : a ≠ c) (S T : α → α)
+    (hS : S ∈ Close (Stops (α := α)) ({Spike c a} : Set (α → α)))
+    (hT : T ∈ Close (Stops (α := α)) ({Spike c a} : Set (α → α))) :
+    S ∘ T = T := by
+  rw [close_spike_singleton c a ha] at hS hT
+  obtain ⟨b, hb, rfl⟩ := hS
+  obtain ⟨d, hd, rfl⟩ := hT
+  exact spike_comp c b d hd
+
+/-- Every member of the Galois-closed spike family remains an F0 idempotent. -/
+theorem closed_spike_idempotent {α : Type u}
+    (c a : α) (ha : a ≠ c) (S : α → α)
+    (hS : S ∈ Close (Stops (α := α)) ({Spike c a} : Set (α → α))) :
+    LinearInputF0.Idempotent S := by
+  rw [close_spike_singleton c a ha] at hS
+  obtain ⟨b, hb, rfl⟩ := hS
+  exact spike_idempotent c b hb
+
+/-- Every pair of members of this closed family is a stopping pair. -/
+theorem closed_spike_mutually_stop {α : Type u}
+    (c a : α) (ha : a ≠ c) (S T : α → α)
+    (hS : S ∈ Close (Stops (α := α)) ({Spike c a} : Set (α → α)))
+    (hT : T ∈ Close (Stops (α := α)) ({Spike c a} : Set (α → α))) :
+    Stops T S := by
+  rw [close_spike_singleton c a ha] at hS hT
+  obtain ⟨b, hb, rfl⟩ := hS
+  obtain ⟨d, hd, rfl⟩ := hT
+  exact spikes_mutually_stop c d b hd hb
+
 end LinearInputStrangeConjugacy
