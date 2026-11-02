@@ -2124,7 +2124,7 @@
       "source_pr": null,
       "source_commit": "3a724d5348596d91b418b2864e06c2b473905a61",
       "source_path": "linear_input/lean_check/F16FenchelAtlas.inc",
-      "role": "new_branch_source",
+      "role": "adapted_retained_source",
       "byte_identical": false,
       "permitted_adaptations": [
         "Fix implicit upper-bound membership argument in BddAbove proof, without changing the theorem statement."
