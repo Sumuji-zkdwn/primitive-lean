@@ -57,7 +57,7 @@ theorem chebyPoly_map
   | zero => simp [LinearInputChebyshevDescent.chebyPoly]
   | succ k ih =>
       simp [LinearInputChebyshevDescent.chebyPoly,
-        LinearInputChebyshevDescent.cubicPoly, ih, map_natCast]
+        LinearInputChebyshevDescent.cubicPoly, ih, map_ofNat]
 
 /-- The field polynomial maps to the explicit polynomial in C(X). -/
 theorem map_basePolynomial (k : ℕ) :
@@ -78,7 +78,7 @@ theorem chebyPoly_natDegree_E (k : ℕ) :
   exact hmap.trans (LinearInputChebyshevNext.chebyPoly_natDegree k)
 
 /-- For k ≥ 1, the polynomial has degree 3^k. -/
-theorem targetPolynomial_natDegree (k : ℕ) (hk : 0 < k) :
+theorem targetPolynomial_natDegree (k : ℕ) :
     (targetPolynomial k).natDegree = 3 ^ k := by
   unfold targetPolynomial
   rw [Polynomial.natDegree_sub_eq_left_of_natDegree_lt (by
@@ -87,18 +87,18 @@ theorem targetPolynomial_natDegree (k : ℕ) (hk : 0 < k) :
   exact chebyPoly_natDegree_E k
 
 /-- The base polynomial has the same degree, by injectivity of the field map. -/
-theorem basePolynomial_natDegree (k : ℕ) (hk : 0 < k) :
+theorem basePolynomial_natDegree (k : ℕ) :
     (basePolynomial k).natDegree = 3 ^ k := by
   have hdegree := Polynomial.natDegree_map_eq_of_injective
     (FaithfulSMul.algebraMap_injective (parameterField k) E) (basePolynomial k)
   rw [map_basePolynomial k] at hdegree
-  rw [targetPolynomial_natDegree k hk] at hdegree
+  rw [targetPolynomial_natDegree k] at hdegree
   exact hdegree.symm
 
-theorem targetPolynomial_ne_zero (k : ℕ) (hk : 0 < k) :
+theorem targetPolynomial_ne_zero (k : ℕ) :
     targetPolynomial k ≠ 0 := by
   intro h
-  have hdegree := targetPolynomial_natDegree k hk
+  have hdegree := targetPolynomial_natDegree k
   rw [h] at hdegree
   have hpos : 0 < 3 ^ k := pow_pos (by norm_num : (0 : ℕ) < 3) k
   simp at hdegree
@@ -154,14 +154,14 @@ theorem candidateSet_card (m : ℕ) (ζ : ℂ)
 
 /-- The mapped polynomial splits in C(X): m distinct candidates are roots of
 a degree-m polynomial. -/
-theorem targetPolynomial_splits (k : ℕ) (hk : 0 < k) (ζ : ℂ)
+theorem targetPolynomial_splits (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     (targetPolynomial k).Splits := by
   classical
   let m := 3 ^ k
   have hm : m ≠ 0 := by positivity
   have hnonzero : targetPolynomial k ≠ 0 :=
-    targetPolynomial_ne_zero k hk
+    targetPolynomial_ne_zero k
   have hsubset : (candidateSet m ζ).val ⊆ (targetPolynomial k).roots := by
     intro x hx
     have hx' : x ∈ candidateSet m ζ := by simpa using hx
@@ -170,22 +170,22 @@ theorem targetPolynomial_splits (k : ℕ) (hk : 0 < k) (ζ : ℂ)
   have hcardle : (candidateSet m ζ).card ≤ (targetPolynomial k).roots.card :=
     Multiset.card_le_card (Finset.val_le_iff_val_subset.mpr hsubset)
   have hrootsle := (targetPolynomial k).card_roots'
-  rw [targetPolynomial_natDegree k hk] at hrootsle
+  rw [targetPolynomial_natDegree k] at hrootsle
   have hcandidates := candidateSet_card m ζ hζ hm
   have hrootcount : (targetPolynomial k).roots.card = m := by omega
   apply (Polynomial.splits_iff_card_roots).2
-  rw [targetPolynomial_natDegree k hk]
+  rw [targetPolynomial_natDegree k]
   exact hrootcount
 
 /-- Each explicit candidate belongs to the root set of the polynomial over C(t). -/
-theorem candidate_mem_rootSet (k : ℕ) (hk : 0 < k) (ζ : ℂ) (j : ℕ)
+theorem candidate_mem_rootSet (k : ℕ) (ζ : ℂ) (j : ℕ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     candidate ζ j ∈ (basePolynomial k).rootSet E := by
   rw [Polynomial.mem_rootSet']
   constructor
   · rw [map_basePolynomial k]
-    exact targetPolynomial_ne_zero k hk
-  · rw [Polynomial.eval₂_eq_eval_map, map_basePolynomial k]
+    exact targetPolynomial_ne_zero k
+  · rw [Polynomial.aeval_def, Polynomial.eval₂_eq_eval_map, map_basePolynomial k]
     exact target_candidate_isRoot k ζ j hζ
 
 /-- The actual root set generates all of C(X): two adjacent roots recover X,
@@ -221,9 +221,9 @@ theorem rootSet_adjoin_eq_top (k : ℕ) (hk : 0 < k) (ζ : ℂ)
         IntermediateField.adjoin F ({(RatFunc.X : E)} : Set E) := by
     simpa only [candidate, hζmap] using hgen
   have hroot0 : candidate ζ 0 ∈ (basePolynomial k).rootSet E :=
-    candidate_mem_rootSet k hk ζ 0 hζ
+    candidate_mem_rootSet k ζ 0 hζ
   have hroot1 : candidate ζ 1 ∈ (basePolynomial k).rootSet E :=
-    candidate_mem_rootSet k hk ζ 1 hζ
+    candidate_mem_rootSet k ζ 1 hζ
   have hpair_le :
       IntermediateField.adjoin F
           ({candidate ζ 0, candidate ζ 1} : Set E) ≤
@@ -258,7 +258,7 @@ theorem rationalFunction_isSplittingField (k : ℕ) (hk : 0 < k) (ζ : ℂ)
   rw [isSplittingField_iff_intermediateField]
   constructor
   · rw [map_basePolynomial k]
-    exact targetPolynomial_splits k hk ζ hζ
+    exact targetPolynomial_splits k ζ hζ
   · exact rootSet_adjoin_eq_top k hk ζ hζ
 
 /-- Canonical algebra equivalence from the constructed model to Mathlib's
