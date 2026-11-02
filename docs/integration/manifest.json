@@ -2151,6 +2151,39 @@
       "role": "new_branch_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16FenchelFull.inc",
+      "sha256": "6d83a1e93303cad4b864109a22143ad582d7f87e2d3ec12293145f7b573cdec1",
+      "original_sha256": "6d83a1e93303cad4b864109a22143ad582d7f87e2d3ec12293145f7b573cdec1",
+      "source_pr": null,
+      "source_commit": "351289e7b11c3f06b3262d7ad198f83e5a891940",
+      "source_path": "linear_input/lean_check/F16FenchelFull.inc",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-full-fenchel.md",
+      "sha256": "cc29e8da0e76f0df22c77c28771337f48492078ef1b193f61d185b12cbe4b870",
+      "original_sha256": "cc29e8da0e76f0df22c77c28771337f48492078ef1b193f61d185b12cbe4b870",
+      "source_pr": null,
+      "source_commit": "545e3f6af4705828b6ecf299cb2ae5e58075a492",
+      "source_path": "docs/verification/2026-11-03-f16-full-fenchel.md",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_f16_fenchel_full.py",
+      "sha256": "15ae54e4dd41558867eb3b824284449a2a1c72f888a80eeda5de7bb28bdc7df5",
+      "original_sha256": "15ae54e4dd41558867eb3b824284449a2a1c72f888a80eeda5de7bb28bdc7df5",
+      "source_pr": null,
+      "source_commit": "351289e7b11c3f06b3262d7ad198f83e5a891940",
+      "source_path": "tools/check_f16_fenchel_full.py",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
