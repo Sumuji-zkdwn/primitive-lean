@@ -1125,6 +1125,25 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
+      "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
+      "source_pr": 12,
+      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+      "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "also_retained_from": [
+        {
+          "source_pr": 12,
+          "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
+          "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
+          "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809"
+        }
+      ]
+    },
+    {
       "path": "linear_input/lean_check/EWFSFenchel.inc",
       "sha256": "90c03843306a9b88895a8adacfd0eaf5efa46b002166c2800c387b5f0aef386c",
       "original_sha256": "90c03843306a9b88895a8adacfd0eaf5efa46b002166c2800c387b5f0aef386c",
@@ -1145,25 +1164,6 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/EnergyWfsFenchel.inc",
-      "sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
-      "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
-      "source_pr": 12,
-      "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
-      "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": [],
-      "also_retained_from": [
-        {
-          "source_pr": 12,
-          "source_commit": "949ba64b34c66b72d5d87b56375627c66b62fdd8",
-          "source_path": "linear_input/lean_check/EnergyWfsFenchel.inc",
-          "original_sha256": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809"
-        }
-      ]
     },
     {
       "path": "linear_input/lean_check/F0Counting.inc",
@@ -1736,6 +1736,16 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/StrangeOperatorCounting.inc",
+      "sha256": "da4632874b887733191332fbee894314b349ecf2e4de7bfcbbc93dd1f6a64bf9",
+      "original_sha256": "da4632874b887733191332fbee894314b349ecf2e4de7bfcbbc93dd1f6a64bf9",
+      "source_commit": "1a9884a63526f90d4ba5baecde29e9b853c5f4a0",
+      "source_path": "linear_input/lean_check/StrangeOperatorCounting.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
       "path": "linear_input/lean_check/StrangeOperatorFixedSets.inc",
       "sha256": "fc63eb53575f1d469ad6110102aba0efc0d9b5efe73c156772cf1d9b3ea62702",
       "original_sha256": "fc63eb53575f1d469ad6110102aba0efc0d9b5efe73c156772cf1d9b3ea62702",
@@ -2039,6 +2049,16 @@
       "source_pr": 24,
       "source_commit": "4b7e1d86c23f5e6f941f041b52ab02370d690390",
       "source_path": "tools/check_shear_commutator.py",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_strange_operator_counting.py",
+      "sha256": "bc9535fdf3e60ced616f213e9b4c79c0df7c85df0ca6736637fffaf947884915",
+      "original_sha256": "bc9535fdf3e60ced616f213e9b4c79c0df7c85df0ca6736637fffaf947884915",
+      "source_commit": "32a4a9af754b2839a68dc16d90eedfa4b5aee6e1",
+      "source_path": "tools/check_strange_operator_counting.py",
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
