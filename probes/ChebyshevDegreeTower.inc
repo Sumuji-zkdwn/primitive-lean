@@ -82,8 +82,21 @@ theorem finrank_genericQuotient (m : ℕ) :
       RatFunc.finrank_eq_max_natDegree (genericQuotient m)
     _ = 2 * m := by
       rw [quotient_num, quotient_denom]
-      simp only [quotientNumerator, quotientDenominator,
-        natDegree_add_eq_left_of_natDegree_lt, natDegree_X_pow]
+      have hn : (quotientNumerator m).natDegree = 2 * m := by
+        by_cases hm : m = 0
+        · subst m
+          norm_num [quotientNumerator]
+        · have hpos : 0 < 2 * m := by omega
+          have hlt :
+              (1 : Polynomial ℂ).natDegree <
+                ((X : Polynomial ℂ) ^ (2 * m)).natDegree := by
+            simpa using hpos
+          unfold quotientNumerator
+          rw [natDegree_add_eq_left_of_natDegree_lt hlt]
+          simp
+      have hd : (quotientDenominator m).natDegree = m := by
+        simp [quotientDenominator]
+      rw [hn, hd]
       omega
 
 end LinearInputChebyshevTower
