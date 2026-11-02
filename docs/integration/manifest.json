@@ -2138,6 +2138,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "sha256": "3e19941966b5b366b3e0a2aa0393b3505d24ed4d0a0cf6e920bee05ebe0a1eb5",
+      "original_sha256": "3e19941966b5b366b3e0a2aa0393b3505d24ed4d0a0cf6e920bee05ebe0a1eb5",
+      "source_pr": 31,
+      "source_commit": "710de2c01add72bac67b626303ca63bfc11d56af",
+      "source_path": "linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
