@@ -1479,4 +1479,98 @@ theorem f0_operational_contrast
   exact ⟨horizontalEulerStep_descends h v, rewrite_probe_not_descend lam r u⟩
 
 
+
+/-!
+# Parallel length-three rank witnesses, plus a discrete rewrite boundary
+
+On u=t*c the length-three projected brackets are Y and D.  The length-four
+radial bracket is needed for full rank, but the two smaller minors already
+show the length-three rank is at least four at every c != 0.
+-/
+
+/-- The third-step bracket combination is precisely 2*S times the total
+rewrite derivative D, with all five coordinates included. -/
+theorem parallelZStar_explicit (c1 c2 t : ℝ) :
+    parallelZStar c1 c2 t =
+      (2*(c1^2+c2^2)*t*c1,
+        2*(c1^2+c2^2)*t*c2,
+        2*(c1^2+c2^2)) := by
+  apply Prod.ext
+  · dsimp [parallelZStar, tripleLinear, parallelZ1, parallelZ2]
+    ring
+  · apply Prod.ext
+    · dsimp [parallelZStar, tripleLinear, parallelZ1, parallelZ2]
+      ring
+    · dsimp [parallelZStar, tripleLinear, parallelZ1, parallelZ2]
+      ring
+
+/-- A linear dependence of Y, Z1 and Z2 at the singular parallel stratum. -/
+theorem parallel_length_three_relation (c1 c2 t : ℝ) :
+    tripleLinear c1 (parallelZ1 c1 c2 t)
+      c2 (parallelZ2 c1 c2 t) =
+      (t*(c1^2+c2^2)*c2,
+        -t*(c1^2+c2^2)*c1, 0) := by
+  apply Prod.ext
+  · dsimp [tripleLinear, parallelZ1, parallelZ2]
+    ring
+  · apply Prod.ext
+    · dsimp [tripleLinear, parallelZ1, parallelZ2]
+      ring
+    · dsimp [tripleLinear, parallelZ1, parallelZ2]
+      ring
+
+/-- Projected Y,Zstar are independent in the (c1,r) rows whenever c2!=0. -/
+theorem parallel_minor_c1_r (c1 c2 t : ℝ) :
+    (parallelY c1 c2).1 * (parallelZStar c1 c2 t).2.2 -
+      (parallelY c1 c2).2.2 * (parallelZStar c1 c2 t).1 =
+        2*c2*(c1^2+c2^2) := by
+  dsimp [parallelY]
+  rw [parallelZStar_explicit]
+  ring
+
+/-- Complementary minor in the (c2,r) rows when c1!=0. -/
+theorem parallel_minor_c2_r (c1 c2 t : ℝ) :
+    (parallelY c1 c2).2.1 * (parallelZStar c1 c2 t).2.2 -
+      (parallelY c1 c2).2.2 * (parallelZStar c1 c2 t).2.1 =
+        -2*c1*(c1^2+c2^2) := by
+  dsimp [parallelY]
+  rw [parallelZStar_explicit]
+  ring
+
+/-- At least one length-three minor survives, uniformly on nonzero c. -/
+theorem parallel_depth_three_witness (c1 c2 t : ℝ)
+    (hc : c1 ≠ 0 ∨ c2 ≠ 0) :
+    ((parallelY c1 c2).1 * (parallelZStar c1 c2 t).2.2 -
+        (parallelY c1 c2).2.2 * (parallelZStar c1 c2 t).1 ≠ 0) ∨
+    ((parallelY c1 c2).2.1 * (parallelZStar c1 c2 t).2.2 -
+        (parallelY c1 c2).2.2 * (parallelZStar c1 c2 t).2.1 ≠ 0) := by
+  rw [parallel_minor_c1_r, parallel_minor_c2_r]
+  have hS : c1^2+c2^2 ≠ 0 := by
+    intro hzero
+    have hc1 : c1 = 0 := by nlinarith [sq_nonneg c2]
+    have hc2 : c2 = 0 := by nlinarith [sq_nonneg c1]
+    rcases hc with h1 | h2
+    · exact h1 hc1
+    · exact h2 hc2
+  rcases hc with h1 | h2
+  · right
+    exact mul_ne_zero (mul_ne_zero (by norm_num) h1) hS
+  · left
+    exact mul_ne_zero (mul_ne_zero (by norm_num) h2) hS
+
+/-- A single Euler-style rewrite can jump into c=0, unlike a smooth
+horizontal flow; this is a DISCRETIZATION effect. -/
+theorem discrete_rewrite_hits_zero_leaf :
+    horizontalEulerStep 1 ((-1 : ℝ), 0)
+      ((1, 0), ((1, 0), 0)) =
+      ((0, 0), ((0, 0), -1)) := by
+  norm_num [horizontalEulerStep, commonDirection]
+
+/-- No finite Euler step leaves the zero-confirmed stratum once entered. -/
+theorem zero_confirmed_step_stays_zero
+    (u1 u2 r h : ℝ) (v : ℝ × ℝ) :
+    (horizontalEulerStep h v ((0,0), ((u1,u2),r))).1 = (0, 0) := by
+  rw [zero_confirmed_horizontal_step]
+
+
 end LinearInputFiveDimLagrange
