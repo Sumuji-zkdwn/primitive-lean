@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "708073e947cec4063fc2ea7e5427080798cc12acee4544d76d57fe5dbbc161f5",
+      "sha256": "d7b4c5055036547c7a1fd6168701990a5747d7937e4bc98f654a0c51157080e9",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2127,9 +2127,11 @@
       "role": "adapted_retained_source",
       "byte_identical": false,
       "permitted_adaptations": [
-        "Append new first-jet contact interpretation, constrained contact defect derived from original E chain rule, and two explicitly chosen finite noncommutative shift laws; preserve all 11 existing proof statements and proofs."
+        "Append first-jet contact interpretation and genuine E directional derivative, with exact contact defect and two finite noncommutative shift laws.",
+        "Replace a pair of equivalent tactic combinators to meet the strict zero-warning Lean compilation policy; no theorem statement changes.",
+        "Add 4 algebraic Cartan/contact horizontality theorems for dual first-jet geometries J^1(R,R^2) and J^1(R^2,R)."
       ],
-      "note": "Retains original PR #30 first-commit source and hash; appended proof-only continuation records its changed working hash. Different five-dimensional roles are not identified."
+      "note": "Original first-commit proof retained in source provenance; working version adds 12 theorems (23 total), 12 original/new definitions and 1 abbreviation; no claim of 5D physical space or isomorphism between jet models."
     }
   ],
   "construction_errors": []
