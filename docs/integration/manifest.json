@@ -2119,15 +2119,17 @@
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
+      "sha256": "708073e947cec4063fc2ea7e5427080798cc12acee4544d76d57fe5dbbc161f5",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
       "source_path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "role": "new_derivation",
-      "byte_identical": true,
-      "permitted_adaptations": [],
-      "note": "New additive formalization; original file recorded at first branch commit; not part of the original 18-PR integration."
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Append new first-jet contact interpretation, constrained contact defect derived from original E chain rule, and two explicitly chosen finite noncommutative shift laws; preserve all 11 existing proof statements and proofs."
+      ],
+      "note": "Retains original PR #30 first-commit source and hash; appended proof-only continuation records its changed working hash. Different five-dimensional roles are not identified."
     }
   ],
   "construction_errors": []
