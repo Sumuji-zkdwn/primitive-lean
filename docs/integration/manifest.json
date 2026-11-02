@@ -2116,6 +2116,18 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/FiveDimLagrange.inc",
+      "sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
+      "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
+      "source_pr": null,
+      "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
+      "source_path": "linear_input/lean_check/FiveDimLagrange.inc",
+      "role": "new_derivation",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "note": "New additive formalization; original file recorded at first branch commit; not part of the original 18-PR integration."
     }
   ],
   "construction_errors": []
