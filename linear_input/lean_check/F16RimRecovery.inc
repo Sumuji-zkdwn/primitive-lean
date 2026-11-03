@@ -162,7 +162,7 @@ def f16Observe (v : State) : Channel -> Real :=
 
 /-- Row zero of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row0 (v : State) :
-    f16Observe v 0 = (v 9 - v 13) / 2 := by
+    f16Observe v 0 = (v (⟨9, by omega⟩ : Fin 16) - v (⟨13, by omega⟩ : Fin 16)) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
@@ -170,14 +170,14 @@ theorem f16Observe_checker_row0 (v : State) :
 
 /-- Row one of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row1 (v : State) :
-    f16Observe v 1 = (v 12 - v 8) / 2 := by
+    f16Observe v 1 = (v (⟨12, by omega⟩ : Fin 16) - v (⟨8, by omega⟩ : Fin 16)) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
 
 /-- Row two of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row2 (v : State) :
-    f16Observe v 2 = (v 11 + v 15) / 2 := by
+    f16Observe v 2 = (v (⟨11, by omega⟩ : Fin 16) + v (⟨15, by omega⟩ : Fin 16)) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
@@ -185,7 +185,7 @@ theorem f16Observe_checker_row2 (v : State) :
 
 /-- Row three of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row3 (v : State) :
-    f16Observe v 3 = (v 10 - v 14) / 2 := by
+    f16Observe v 3 = (v (⟨10, by omega⟩ : Fin 16) - v (⟨14, by omega⟩ : Fin 16)) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
@@ -193,10 +193,10 @@ theorem f16Observe_checker_row3 (v : State) :
 
 /-- The exact four-row output formula from the checker. -/
 def f16ObserveChecker (v : State) (ch : Channel) : Real :=
-  if ch.val = 0 then (v 9 - v 13) / 2
-  else if ch.val = 1 then (v 12 - v 8) / 2
-  else if ch.val = 2 then (v 11 + v 15) / 2
-  else (v 10 - v 14) / 2
+  if ch.val = 0 then (v (⟨9, by omega⟩ : Fin 16) - v (⟨13, by omega⟩ : Fin 16)) / 2
+  else if ch.val = 1 then (v (⟨12, by omega⟩ : Fin 16) - v (⟨8, by omega⟩ : Fin 16)) / 2
+  else if ch.val = 2 then (v (⟨11, by omega⟩ : Fin 16) + v (⟨15, by omega⟩ : Fin 16)) / 2
+  else (v (⟨10, by omega⟩ : Fin 16) - v (⟨14, by omega⟩ : Fin 16)) / 2
 
 theorem f16Observe_eq_checker (v : State) (ch : Channel) :
     f16Observe v ch = f16ObserveChecker v ch := by
@@ -444,10 +444,7 @@ theorem f16_decode_four_trace (v : State) :
     field_simp <;>
     first
     | ring
-    | (apply congrArg (fun x : Real => x * 2)
-       apply congrArg v
-       apply Fin.ext
-       decide)
+    | exact congrArg (fun k : Fin 16 => v k * 2) (Fin.ext (by decide))
 
 /-- The same decoder identity for four successive applications of U itself. -/
 theorem f16_decode_original_matrix_trace (v : State) :

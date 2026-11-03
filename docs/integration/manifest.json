@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
-      "sha256": "f15ad3e2ade427a549b43b5cc9163c234cf748260625007eb9adcf07ca236549",
+      "sha256": "ec05c2833a2087f2c95908f2642cde6e6060b4b30ae9a8bfa03ac7982f30001a",
       "original_sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
@@ -2140,7 +2140,8 @@
         "Restored explicit algebraic normalization for matrix action and checker rows, removed an unused tactic, and resolved finite-index congruence goals in the decoder.",
         "Resolved the final state-index equalities with explicit Fin extensionality and removed unnecessary sequencing warnings from checker-row algebra.",
         "Decomposed state-coordinate equality into explicit congruence steps for the decoder's final finite-index cases.",
-        "Used decidable finite-value equality after Fin.ext to normalize numeral Fin indices in the decoder."
+        "Used decidable finite-value equality after Fin.ext to normalize numeral Fin indices in the decoder.",
+        "Expressed the exact scalar-output coordinates as explicit Fin constructors to align them with finite coordinate cases."
       ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }
