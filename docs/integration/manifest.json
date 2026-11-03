@@ -2160,6 +2160,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
+      "sha256": "b463548df5937ce32131c9629718b2df470d916110261dd1bc70df22b33100c8",
+      "original_sha256": "b463548df5937ce32131c9629718b2df470d916110261dd1bc70df22b33100c8",
+      "source_pr": null,
+      "source_commit": "641b56e8dcc649cf32fb14c4d0894389991f93ba",
+      "source_path": "linear_input/lean_check/OperatorSemanticClosure.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2187,6 +2198,12 @@
       "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
       "source_commit": "b65aa486e20436939d4ac972a09e8fb3cab159d2",
       "note": "Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words; historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
+      "source_commit": "641b56e8dcc649cf32fb14c4d0894389991f93ba",
+      "note": "Semantic operator closure and conservative but nonword-generatable primitive. Historical baseline preserved."
     }
   ]
 }
