@@ -158,7 +158,10 @@ theorem f16BasisMatrix_three_transpose_mul :
       · intro h
         subst j
         rfl
-    simp [f16BasisMatrix, hperm, eq_comm, f16Eps_three_self_mul_real]
+    by_cases hij : i = j
+    · subst j
+      simp [f16BasisMatrix, f16Eps_three_self_mul_real]
+    · simp [f16BasisMatrix, hperm, hij, Ne.symm hij]
   · intro k _ hne
     have hzero :
         LinearInputF16Holonomy.rightIndex (3 : Fin 16) i ≠ k :=

@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
-      "sha256": "b3c2bc613048f58a1f226504bcfe5b75cfebca1c43e0b644c8cd872a6010d7ed",
+      "sha256": "8ece9145fa42f4de0f5163ed2dec78c4d7bf866b2f3b0fa45c80ec93461b1ccc",
       "original_sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
@@ -2146,7 +2146,8 @@
         "Normalized fin_cases observation channels before applying the exact output-row theorems and included explicit Fin coordinate equalities in decoder simplification.",
         "Proved the retained L₃ transpose is its inverse from the exact signed-permutation table, identifying AᵀC with the checker’s A⁻¹C.",
         "Made the signed-permutation inverse proof explicit over the real matrix entries and used the matrix-specific left-inverse theorem to identify A⁻¹.",
-        "Removed obsolete finite-index and tactic fallbacks after the decoder simplification passed."
+        "Removed obsolete finite-index and tactic fallbacks after the decoder simplification passed.",
+        "Split the L₃ transpose-product identity into equal-coordinate and distinct-coordinate cases to close the exact signed-entry sum."
       ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }
