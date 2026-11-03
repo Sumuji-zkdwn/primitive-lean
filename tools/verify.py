@@ -152,6 +152,8 @@ def verify_lean(rebuild):
         'OperatorReachability': 'Reachability closure, invariant predicates, and generated-language reachability preservation',
         'OperatorSensorFamilies': 'Arbitrary sensor bundles, kernel intersections, and joint separation',
         'OperatorF0SemanticBridge': 'Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates',
+        'OperatorSemanticMonoid': 'Faithful semantic operator monoid, quotient congruence and constructive full transformation monoid on predictive states',
+        'OperatorFiniteMapCounts': 'Finite three-state compatible-map cardinalities and non-generatable constant witness',
         'EWFSFenchel': 'Verified reversible E polynomial, x-only forgetting obstruction, positive-intensity WFS gauge and physical-versus-changed Fenchel pairing',
         'WFSCanonicalLift': 'Positive-intensity WFS p=2 cotangent lift and p=0 momentum identity under explicit domain conditions',
         'EWFSFutureBridge': 'Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient',

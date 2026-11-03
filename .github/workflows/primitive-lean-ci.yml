@@ -2,7 +2,7 @@ name: Primitive Lean integration verification
 
 on:
   push:
-    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/operator-algebra-scale-20261104]
+    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/operator-algebra-scale-20261104, chatgpt/operator-semigroup-counting-20261104]
   pull_request:
     branches: [main, codex/primitive-history-derivation-20261029]
     paths:
@@ -74,7 +74,7 @@ jobs:
           use-github-cache: true
 
       - name: Test finite operator-language semantics
-        run: python -m pytest -q tests/test_operator_words.py tests/test_operator_refinement.py tests/test_operator_semantic_closure.py tests/test_operator_algebra_scale.py
+        run: python -m pytest -q tests/test_operator_words.py tests/test_operator_refinement.py tests/test_operator_semantic_closure.py tests/test_operator_algebra_scale.py tests/test_operator_counting.py
 
       - name: Run complete integration verification
         run: python -B -X utf8 tools/verify.py --integration-only

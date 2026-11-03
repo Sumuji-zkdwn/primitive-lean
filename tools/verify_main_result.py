@@ -69,6 +69,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/OperatorReachability.inc', 'LinearInputOperatorReachability'),
     ('linear_input/lean_check/OperatorSensorFamilies.inc', 'LinearInputOperatorSensors'),
     ('linear_input/lean_check/OperatorF0SemanticBridge.inc', 'LinearInputOperatorF0Bridge'),
+    ('linear_input/lean_check/OperatorSemanticMonoid.inc', 'LinearInputOperatorSemanticMonoid'),
+    ('linear_input/lean_check/OperatorFiniteMapCounts.inc', 'LinearInputOperatorFiniteCounts'),
     ('linear_input/lean_check/EWFSFenchel.inc', 'LinearInputEWFSDual'),
     ('linear_input/lean_check/WFSCanonicalLift.inc', 'LinearInputWFSCanonical'),
     ('linear_input/lean_check/EWFSFutureBridge.inc', 'LinearInputEWFSFuture'),
