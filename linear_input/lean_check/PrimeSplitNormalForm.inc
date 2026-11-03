@@ -40,7 +40,6 @@ theorem split_increases_count {s t : Multiset ℕ}
   obtain ⟨a, b, rest, _, _, hs, ht⟩ := h
   rw [hs, ht]
   simp only [Multiset.card_cons]
-  omega
 
 /-- An integer-valued ranking potential on factor words. -/
 def splitRank (s : Multiset ℕ) : ℕ :=
