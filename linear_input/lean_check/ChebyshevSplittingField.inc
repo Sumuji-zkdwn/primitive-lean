@@ -205,7 +205,6 @@ theorem rootSet_adjoin_eq_top (k : ℕ) (hk : 0 < k) (ζ : ℂ)
     cases k with
     | zero => omega
     | succ n =>
-        change 2 < 3 ^ (n + 1)
         rw [pow_succ]
         have hp : 0 < (3 : ℕ) ^ n := by positivity
         omega
