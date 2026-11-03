@@ -23,7 +23,9 @@ def normalize (xs : List ℕ) : List ℕ :=
 the ordering, without losing any multiplicities. -/
 theorem normalize_multiset (xs : List ℕ) :
     (normalize xs : Multiset ℕ) = (xs : Multiset ℕ) := by
-  simp [normalize]
+  change ((xs : Multiset ℕ).sort (fun a b : ℕ => a ≤ b) : Multiset ℕ) =
+    (xs : Multiset ℕ)
+  exact Multiset.sort_eq (xs : Multiset ℕ) (fun a b : ℕ => a ≤ b)
 
 /-- Sorting preserves the length of an arbitrary finite list. -/
 theorem normalize_length (xs : List ℕ) :
