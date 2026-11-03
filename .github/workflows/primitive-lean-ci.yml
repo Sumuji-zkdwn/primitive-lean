@@ -73,6 +73,9 @@ jobs:
           use-mathlib-cache: true
           use-github-cache: true
 
+      - name: Check exact Rim/F16 observation decoder
+        run: python -B -X utf8 tools/check_rim_observability.py
+
       - name: Run complete integration verification
         run: python -B -X utf8 tools/verify.py --integration-only
 
