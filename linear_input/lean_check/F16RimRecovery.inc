@@ -442,7 +442,12 @@ theorem f16_decode_four_trace (v : State) :
       f16PartnerCode, f16SignR, f16Sign,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
     field_simp <;>
-    first | ring | exact congrArg (fun k : Fin 16 => v k * 2) (Fin.ext rfl)
+    first
+    | ring
+    | (apply congrArg (fun x : Real => x * 2)
+       apply congrArg v
+       apply Fin.ext
+       rfl)
 
 /-- The same decoder identity for four successive applications of U itself. -/
 theorem f16_decode_original_matrix_trace (v : State) :

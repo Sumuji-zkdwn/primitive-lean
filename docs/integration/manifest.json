@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
-      "sha256": "78d536aa37bb690bb755e84719899ce7277a5d920b97de9dffedae338686192f",
+      "sha256": "37bc9ea019fea11b6bcad5c90fdf7a6563abe2614d4cb15b7ac26b7423c3b12b",
       "original_sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
@@ -2138,7 +2138,8 @@
         "Replaced phase-zero row rewrites with a channel-indexed checker-output formula proved from the four exact observation rows.",
         "Removed vacuous tactic tails and proved the three-phase collision componentwise to avoid uncontrolled simplification.",
         "Restored explicit algebraic normalization for matrix action and checker rows, removed an unused tactic, and resolved finite-index congruence goals in the decoder.",
-        "Resolved the final state-index equalities with explicit Fin extensionality and removed unnecessary sequencing warnings from checker-row algebra."
+        "Resolved the final state-index equalities with explicit Fin extensionality and removed unnecessary sequencing warnings from checker-row algebra.",
+        "Decomposed state-coordinate equality into explicit congruence steps for the decoder's final finite-index cases."
       ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }
