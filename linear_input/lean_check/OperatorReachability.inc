@@ -238,6 +238,24 @@ theorem extended_reachable_old {α ι κ : Type*}
   rw [run_inl]
   exact hw
 
+/-- Every run using old or generated letters reaches an old-reachable state. -/
+theorem run_generated_extension_reachable {α ι κ : Type*}
+    (old : ι → α → α) (code : κ → List ι)
+    (word : List (Sum ι κ)) (x : α) :
+    Reachable old x (run (sumStep old (generated old code)) word x) := by
+  induction word generalizing x with
+  | nil =>
+      exact reachable_refl old x
+  | cons tag tail ih =>
+      cases tag with
+      | inl i =>
+          exact reachable_trans old (reachable_step old i x)
+            (ih (old i x))
+      | inr j =>
+          exact reachable_trans old
+            (reachable_word old (code j) x)
+            (ih (run old (code j) x))
+
 /-- Adding a primitive that is an old word preserves reachability exactly. -/
 theorem generated_extension_reachability {α ι κ : Type*}
     (old : ι → α → α) (code : κ → List ι)
@@ -246,21 +264,8 @@ theorem generated_extension_reachability {α ι κ : Type*}
       Reachable old x y := by
   constructor
   · rintro ⟨word,hw⟩
-    induction word generalizing x with
-    | nil =>
-        simpa [run] using (reachable_refl old x)
-    | cons tag tail ih =>
-        cases tag with
-        | inl i =>
-            have htail : Reachable old (old i x) y :=
-              ih (old i x) (by simpa [run,sumStep] using hw)
-            exact reachable_trans old (reachable_step old i x) htail
-        | inr j =>
-            have htail : Reachable old (run old (code j) x) y :=
-              ih (run old (code j) x)
-                (by simpa [run,sumStep,generated] using hw)
-            exact reachable_trans old
-              (reachable_word old (code j) x) htail
+    rw [← hw]
+    exact run_generated_extension_reachable old code word x
   · exact extended_reachable_old old (generated old code)
 
 end LinearInputOperatorReachability
