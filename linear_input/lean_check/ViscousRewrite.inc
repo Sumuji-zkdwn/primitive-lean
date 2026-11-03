@@ -46,7 +46,9 @@ theorem proximal_hasDerivAt
   have hP : HasDerivAt (fun w : ℝ => alpha / 2 * (w - old) ^ 2)
       (alpha * (z - old)) z := by
     convert ((((hasDerivAt_id z).sub_const old).pow 2).const_mul (alpha / 2))
-      using 1 <;> simp only [id_eq] <;> ring
+      using 1
+    simp only [id_eq]
+    ring
   simpa only [proximalEnergy] using hE.add hP
 
 /-- The resisting force emerges from minimization, not as an independent law. -/
