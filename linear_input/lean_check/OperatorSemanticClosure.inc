@@ -133,7 +133,10 @@ theorem induced_surjective {α ω ι : Type*}
   | _ x =>
       obtain ⟨p, hp⟩ := hs x
       refine ⟨encode K step p, ?_⟩
-      rw [induced_encode, hp]
+      calc
+        induced K step T hT (encode K step p) =
+            encode K step (T p) := induced_encode K step T hT p
+        _ = encode K step x := congrArg (encode K step) hp
 
 /-- If T reflects old observational equality, its quotient action is one-to-one. -/
 theorem induced_injective_of_reflects {α ω ι : Type*}
