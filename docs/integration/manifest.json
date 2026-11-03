@@ -2177,7 +2177,8 @@
       "role": "new_additive_source",
       "byte_identical": true,
       "permitted_adaptations": [],
-      "authoring_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db"
+      "authoring_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
+      "original_sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc"
     }
   ],
   "construction_errors": []
