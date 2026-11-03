@@ -124,11 +124,16 @@ theorem f16Base_eq_three :
     LinearInputF16Determinant.realPencilAll,
     LinearInputF16Determinant.entryThree]
 
-/-- Every sign in the original L₃ row has square one. -/
+/-- Every sign in the original L₃ row has square one over the reals. -/
 theorem f16Eps_three_self_mul (i : Fin 16) :
     LinearInputF16Holonomy.eps (3 : Fin 16) i *
       LinearInputF16Holonomy.eps (3 : Fin 16) i = 1 := by
   fin_cases i <;> decide
+
+theorem f16Eps_three_self_mul_real (i : Fin 16) :
+    (LinearInputF16Holonomy.eps (3 : Fin 16) i : Real) *
+      (LinearInputF16Holonomy.eps (3 : Fin 16) i : Real) = 1 := by
+  exact_mod_cast f16Eps_three_self_mul i
 
 /-- The transpose of the original L₃ signed-permutation matrix is a
     left inverse, certified from the retained sign table. -/
@@ -139,7 +144,8 @@ theorem f16BasisMatrix_three_transpose_mul :
   ext i j
   change (∑ k : Fin 16,
     f16BasisMatrix (3 : Fin 16) k i *
-      f16BasisMatrix (3 : Fin 16) k j) = _
+      f16BasisMatrix (3 : Fin 16) k j) =
+      (if i = j then (1 : Real) else 0)
   rw [Finset.sum_eq_single
     (LinearInputF16Holonomy.rightIndex (3 : Fin 16) i)]
   · have hperm :
@@ -152,7 +158,7 @@ theorem f16BasisMatrix_three_transpose_mul :
       · intro h
         subst j
         rfl
-    simp [f16BasisMatrix, hperm, eq_comm, f16Eps_three_self_mul]
+    simp [f16BasisMatrix, hperm, eq_comm, f16Eps_three_self_mul_real]
   · intro k _ hne
     have hzero :
         LinearInputF16Holonomy.rightIndex (3 : Fin 16) i ≠ k :=
@@ -168,7 +174,7 @@ theorem f16Base_transpose_mul_base_eq_one :
 
 theorem f16Base_inv_eq_transpose :
     f16Base⁻¹ = f16Base.transpose :=
-  inv_eq_of_mul_eq_one_left f16Base_transpose_mul_base_eq_one
+  Matrix.inv_eq_left_inv f16Base_transpose_mul_base_eq_one
 
 /-- The formal relative action is exactly A⁻¹ C from the finite checker. -/
 theorem f16RelativeMatrix_eq_checker_inverse :
@@ -545,10 +551,7 @@ theorem f16_decode_four_trace (v : State) :
     norm_num [f16ChannelLow, f16ChannelHigh, f16Partner_eq_code,
       f16PartnerCode, f16SignR, f16Sign,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    field_simp <;>
-    first
-    | ring
-    | exact congrArg (fun k : Fin 16 => v k * 2) (Fin.ext (by decide))
+    field_simp <;> ring
 
 /-- The same decoder identity for four successive applications of U itself. -/
 theorem f16_decode_original_matrix_trace (v : State) :
