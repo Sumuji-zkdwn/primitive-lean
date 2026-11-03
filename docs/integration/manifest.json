@@ -2119,10 +2119,10 @@
     },
     {
       "path": "linear_input/lean_check/ViscousRewrite.inc",
-      "sha256": "5f47185f0ed5aabe16c07a4a4d33fa6217cc903c623b96dcba476a37aea99ef8",
-      "original_sha256": "5f47185f0ed5aabe16c07a4a4d33fa6217cc903c623b96dcba476a37aea99ef8",
+      "sha256": "29e8037d8fe77f3faee8f8e75bde32684356dcbd278b1c5575478187c80a2fe4",
+      "original_sha256": "29e8037d8fe77f3faee8f8e75bde32684356dcbd278b1c5575478187c80a2fe4",
       "source_pr": 37,
-      "source_commit": "314fca4b3a738a067e17dfc6a04d13f372478c2a",
+      "source_commit": "fb1d8cccac55757e0af12313e3d06d72ad1f8ebf",
       "source_path": "linear_input/lean_check/ViscousRewrite.inc",
       "role": "retained_source",
       "byte_identical": true,
