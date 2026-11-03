@@ -14,6 +14,11 @@ SMOKE_TESTS = (
     'check_temporal_sampling', 'check_wfs_mobius_fourier',
     'check_f0_future_minimality',
     'check_wfs_sampling',
+    'check_f16_fenchel_atlas',
+    'check_f16_fenchel_full',
+    'check_f16_spectral',
+    'check_f16_singular_pinv',
+    'check_f16_all_real_pinv',
 )
 
 
