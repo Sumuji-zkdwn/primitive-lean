@@ -170,6 +170,30 @@ theorem zero_extra_probes_iff {α β γ ι : Type*} [DecidableEq ι]
   · intro h u v hu hv he _
     exact h u v hu hv he
 
+/-- Identifying probes are exactly a hitting set for all pairs of distinct
+terminal forms which collide under the old evaluation. This is the explicit
+finite-probe optimization constraint; no efficiency bound is assumed. -/
+theorem identifies_with_iff_hits_collisions {α β γ ι : Type*}
+    [DecidableEq ι] (R : α → α → Prop) (value : α → β)
+    (probe : ι → α → γ) (chosen : Finset ι) :
+    IdentifiesWith R value probe chosen ↔
+      ∀ u v, Terminal R u → Terminal R v →
+        value u = value v → u ≠ v →
+          ∃ i ∈ chosen, probe i u ≠ probe i v := by
+  classical
+  constructor
+  · intro h u v hu hv he hne
+    by_contra hn
+    have hall : ∀ i ∈ chosen, probe i u = probe i v := by
+      intro i hi
+      by_contra hd
+      exact hn ⟨i, hi, hd⟩
+    exact hne (h u v hu hv he hall)
+  · intro h u v hu hv he hall
+    by_contra hne
+    obtain ⟨i, hi, hd⟩ := h u v hu hv he hne
+    exact hd (hall i hi)
+
 /-- Explicit nonconfluent branching example with a fixed final value. -/
 def branchStep (x y : Fin 3) : Prop :=
   x = 0 ∧ (y = 1 ∨ y = 2)
@@ -250,6 +274,22 @@ theorem one_probe_suffices :
   intro u v hu hv he hp
   apply branch_probe_identifies u v hu hv he
   exact hp 0 (by simp)
+
+/-- Under the fixed one-element probe library, exactly one additional
+measurement is necessary and sufficient to identify terminal branches. -/
+theorem one_probe_is_minimal :
+    IdentifiesWith branchStep branchValue allowedProbe ({0} : Finset (Fin 1)) ∧
+      ∀ s : Finset (Fin 1),
+        IdentifiesWith branchStep branchValue allowedProbe s →
+          1 ≤ s.card := by
+  constructor
+  · exact one_probe_suffices
+  · intro s hs
+    by_contra hlt
+    have hz : s.card = 0 := by omega
+    have hempty : s = ∅ := Finset.card_eq_zero.mp hz
+    subst s
+    exact zero_probes_insufficient hs
 
 /-- One commutative multiplication, two distinct generator multisets. -/
 def generatorValue (i : Fin 3) : ℕ :=
