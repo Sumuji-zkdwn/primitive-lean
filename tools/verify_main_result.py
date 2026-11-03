@@ -74,6 +74,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/F16FenchelFull.inc', 'LinearInputF16FenchelFull'),
     ('linear_input/lean_check/F16SpectralProjectors.inc', 'LinearInputF16Spectral'),
     ('linear_input/lean_check/F16SingularPseudoinverse.inc', 'LinearInputF16SingularPinv'),
+    ('linear_input/lean_check/F16AllRealPseudoinverse.inc', 'LinearInputF16AllRealPinv'),
 )
 
 

@@ -2261,6 +2261,39 @@
       "role": "new_branch_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16AllRealPseudoinverse.inc",
+      "sha256": "ac5f7c28eebd651fbd9a200b5907672378c49328cad5111e16dcb5919ea2e3f8",
+      "original_sha256": "ac5f7c28eebd651fbd9a200b5907672378c49328cad5111e16dcb5919ea2e3f8",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/F16AllRealPseudoinverse.inc",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "docs/verification/2026-11-03-f16-all-real-pinv.md",
+      "sha256": "ecb203d818094827adcd40248c4d91e64cc5b8cc7c12b28077070cb50333da26",
+      "original_sha256": "ecb203d818094827adcd40248c4d91e64cc5b8cc7c12b28077070cb50333da26",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "docs/verification/2026-11-03-f16-all-real-pinv.md",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "tools/check_f16_all_real_pinv.py",
+      "sha256": "3a72c95f239ac8ee7de488193e527eb6ff05dffe050f98bb2352892c974b6065",
+      "original_sha256": "3a72c95f239ac8ee7de488193e527eb6ff05dffe050f98bb2352892c974b6065",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "tools/check_f16_all_real_pinv.py",
+      "role": "new_branch_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
