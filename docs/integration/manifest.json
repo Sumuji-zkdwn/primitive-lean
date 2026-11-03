@@ -1896,6 +1896,18 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/SingleSwapFiber.inc",
+      "sha256": "983ea4c8eea02fddcf2892727f2317d8b1223516dc9ef87870004ed6f50132ec",
+      "original_sha256": "983ea4c8eea02fddcf2892727f2317d8b1223516dc9ef87870004ed6f50132ec",
+      "source_pr": null,
+      "source_commit": "85e04c8c66848e1f6798c9df0a40d6987082103a",
+      "source_path": "linear_input/lean_check/SingleSwapFiber.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "85e04c8c66848e1f6798c9df0a40d6987082103a"
+    },
+    {
       "path": "linear_input/lean_check/StrangeOperatorBoundary.inc",
       "sha256": "45f04e086f70e4f01fba1bc3948f2c59c6b6402bd7cb651f852b88ab422f4672",
       "original_sha256": "45f04e086f70e4f01fba1bc3948f2c59c6b6402bd7cb651f852b88ab422f4672",
