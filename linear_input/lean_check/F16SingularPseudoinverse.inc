@@ -30,57 +30,97 @@ abbrev pinvMinus : QMat := (1 / 4 : ℚ) • minus + (1 / 2 : ℚ) • zero
 theorem gramPlus_eigenspaces :
     gramPlus = (4 : ℚ) • plus + (2 : ℚ) • zero := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem gramMinus_eigenspaces :
     gramMinus = (4 : ℚ) • minus + (2 : ℚ) • zero := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Penrose equation 1, at the positive singular input. -/
 theorem plus_penrose_one :
     gramPlus * pinvPlus * gramPlus = gramPlus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Penrose equation 2, at the positive singular input. -/
 theorem plus_penrose_two :
     pinvPlus * gramPlus * pinvPlus = pinvPlus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Penrose symmetry equations at the positive singular input. -/
 theorem plus_penrose_three :
     (gramPlus * pinvPlus)ᵀ = gramPlus * pinvPlus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem plus_penrose_four :
     (pinvPlus * gramPlus)ᵀ = pinvPlus * gramPlus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Penrose equation 1, at the negative singular input. -/
 theorem minus_penrose_one :
     gramMinus * pinvMinus * gramMinus = gramMinus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Penrose equation 2, at the negative singular input. -/
 theorem minus_penrose_two :
     pinvMinus * gramMinus * pinvMinus = pinvMinus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Penrose symmetry equations at the negative singular input. -/
 theorem minus_penrose_three :
     (gramMinus * pinvMinus)ᵀ = gramMinus * pinvMinus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem minus_penrose_four :
     (pinvMinus * gramMinus)ᵀ = pinvMinus * gramMinus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 end LinearInputF16SingularPinv

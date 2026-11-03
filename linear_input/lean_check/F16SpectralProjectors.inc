@@ -39,17 +39,29 @@ abbrev cross : QMat := fun i j =>
 
 theorem leftThreeQ_orthogonal : leftThreeQᵀ * leftThreeQ = 1 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem leftTenQ_orthogonal : leftTenQᵀ * leftTenQ = 1 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- No approximating cross operator is used: this is an entrywise equality. -/
 theorem cross_from_actual_F16 :
     leftThreeQᵀ * leftTenQ + leftTenQᵀ * leftThreeQ = cross := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Orthogonal spectral projections for cross-term eigenvalues +2, -2, 0. -/
 abbrev plus : QMat := ((1 / 2 : ℚ) • realSector) + ((1 / 4 : ℚ) • cross)
@@ -58,62 +70,117 @@ abbrev zero : QMat := 1 - realSector
 
 theorem projector_sum : plus + minus + zero = 1 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem plus_idempotent : plus * plus = plus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem minus_idempotent : minus * minus = minus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem zero_idempotent : zero * zero = zero := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem plus_minus_zero : plus * minus = 0 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem plus_zero_zero : plus * zero = 0 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem minus_zero_zero : minus * zero = 0 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem plus_symmetric : plusᵀ = plus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem minus_symmetric : minusᵀ = minus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem zero_symmetric : zeroᵀ = zero := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Exact eigenvalues of the cross term, without numerical diagonalization. -/
 theorem cross_plus : cross * plus = (2 : ℚ) • plus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem cross_minus : cross * minus = (-2 : ℚ) • minus := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem cross_zero : cross * zero = 0 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> decide
+  fin_cases i <;> fin_cases j <;>
+    norm_num [Matrix.mul_apply, Fin.sum_univ_succ, leftThreeQ, leftTenQ,
+      plus, minus, zero, realSector, cross, entryThree, entryTen,
+      LinearInputF16Holonomy.rightIndex, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 /-- Traces: 4 positive, 4 negative and 8 zero cross-term dimensions. -/
-theorem plus_trace : (∑ i : Idx, plus i i) = 4 := by decide
+theorem plus_trace : (∑ i : Idx, plus i i) = 4 := by
+  norm_num [Fin.sum_univ_succ, plus, minus, zero, realSector, cross]
 
-theorem minus_trace : (∑ i : Idx, minus i i) = 4 := by decide
+theorem minus_trace : (∑ i : Idx, minus i i) = 4 := by
+  norm_num [Fin.sum_univ_succ, plus, minus, zero, realSector, cross]
 
-theorem zero_trace : (∑ i : Idx, zero i i) = 8 := by decide
+theorem zero_trace : (∑ i : Idx, zero i i) = 8 := by
+  norm_num [Fin.sum_univ_succ, plus, minus, zero, realSector, cross]
 
 end LinearInputF16Spectral

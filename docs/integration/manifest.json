@@ -2190,7 +2190,7 @@
     },
     {
       "path": "linear_input/lean_check/F16SpectralProjectors.inc",
-      "sha256": "1db8e381626bae375cd5859b7d09749ef0c39c73b515ba9bf331e0616d209fc4",
+      "sha256": "c15f6419dd5d5b37f966da37d61972b93de895be7f8ed2b168253cd1b8fddf0c",
       "original_sha256": "d0e37c6945e3e3ee282277d1c40ebaacc4ce0263e3e1c8409aa4b87089676fc6",
       "source_pr": null,
       "source_commit": "31a9dc36d199b2bdf25f6d1c78c6c6894f9dfc0a",
@@ -2199,7 +2199,8 @@
       "byte_identical": false,
       "permitted_adaptations": [
         "Enable Matrix scoped transpose notation and expose the computable numerical diagonal predicate; all mathematical statements unchanged.",
-        "Convert finite matrix definitions to reducible abbreviations so kernel-level decidable rational equality can normalize the original table."
+        "Convert finite matrix definitions to reducible abbreviations so kernel-level decidable rational equality can normalize the original table.",
+        "Replace stuck rational decide evaluation with explicit finite-sum norm_num normalization; all theorem statements unchanged."
       ]
     },
     {
@@ -2226,7 +2227,7 @@
     },
     {
       "path": "linear_input/lean_check/F16SingularPseudoinverse.inc",
-      "sha256": "9a8d4b732380a35964bf1f2ac53636179bb8c34d6b8f4c17e5be714e5fa57563",
+      "sha256": "d8f69b0ecc43dd60ded98ea1dd4c1909314860b3757e861bbd8808c42c268870",
       "original_sha256": "8548219f79ab72f885c24e7974ee4c7d8f75ca87fc9e764d0fc9b5328018309e",
       "source_pr": null,
       "source_commit": "0be2444f993de8ba7823d99fbcc720103c03a2f6",
@@ -2235,7 +2236,8 @@
       "byte_identical": false,
       "permitted_adaptations": [
         "Enable scoped Matrix transpose notation in the supplement without changing theorem statements.",
-        "Make all four finite rational Gram and inverse matrices reducible for exact-kernel evaluation."
+        "Make all four finite rational Gram and inverse matrices reducible for exact-kernel evaluation.",
+        "Replace stuck rational decide evaluation with explicit finite-sum norm_num normalization; all theorem statements unchanged."
       ]
     },
     {
