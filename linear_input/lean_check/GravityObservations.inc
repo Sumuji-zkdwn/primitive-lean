@@ -144,7 +144,14 @@ theorem external_profile_detects_separation
   rw [h, sub_self] at hdiff
   have hR0 : R ≠ 0 := ne_of_gt (lt_trans ha hR)
   have hquad : R ^ 2 - a ^ 2 ≠ 0 := by
-    nlinarith [sq_pos_of_pos (sub_pos.mpr hR)]
+    have hminus : 0 < R - a := sub_pos.mpr hR
+    have hplus : 0 < R + a :=
+      add_pos (lt_trans ha hR) ha
+    have hprod : 0 < (R - a) * (R + a) :=
+      mul_pos hminus hplus
+    have hfactor : (R - a) * (R + a) = R ^ 2 - a ^ 2 := by ring
+    rw [hfactor] at hprod
+    exact ne_of_gt hprod
   have hnon : (2 * m * a ^ 2) / (R * (R ^ 2 - a ^ 2)) ≠ 0 :=
     div_ne_zero (mul_ne_zero (mul_ne_zero (by norm_num) hm)
       (pow_ne_zero 2 ha.ne')) (mul_ne_zero hR0 hquad)
