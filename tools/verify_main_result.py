@@ -1,8 +1,9 @@
 """Check additive proof sources against the unchanged joint assembly.
 
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
-MainResult.lean consists of the exact verified All.lean followed by the exact
-registered supplements, with all added declarations axiom-audited.
+MainResult.lean adds an explicitly documented Mathlib import before the byte-exact
+verified All.lean, then the registered supplements and all-declaration axiom audit.
+The original All.lean bytes are preserved without modification.
 """
 from pathlib import Path
 from datetime import datetime, timezone
@@ -35,6 +36,11 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/FourBayes.inc', 'LinearInputFourBayes'),
     ('linear_input/lean_check/GaloisChebyshev.inc', 'LinearInputGaloisChebyshev'),
     ('linear_input/lean_check/KummerDihedral.inc', 'LinearInputKummerDihedral'),
+    ('linear_input/lean_check/ChebyshevDihedralDescent.inc', 'LinearInputChebyshevDescent'),
+    ('linear_input/lean_check/ChebyshevRatFuncDegrees.inc', 'LinearInputChebyshevNext'),
+    ('linear_input/lean_check/ChebyshevDegreeTower.inc', 'LinearInputChebyshevTower'),
+    ('linear_input/lean_check/ChebyshevSplittingField.inc', 'LinearInputChebyshevSplitting'),
+    ('linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc', 'LinearInputChebyshevAutomorphisms'),
     ('linear_input/lean_check/VariablePairGaloisBridge.inc', 'LinearInputVariablePairGalois'),
     ('linear_input/lean_check/F16Holonomy.inc', 'LinearInputF16Holonomy'),
     ('linear_input/lean_check/F16RecoverySpectrum.inc', 'LinearInputF16Recovery'),
@@ -103,7 +109,7 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="Exact verified All.lean and each supplemental source in registered order, separated by newlines, followed by public axiom audits.",
+        assembly="Explicit Mathlib RatFunc.IntermediateField import, exact verified All.lean and each supplemental source in registered order, followed by all public axiom audits.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
@@ -177,8 +183,10 @@ def main():
         if report["forbidden_tokens"]:
             raise ValueError("Forbidden proof tokens in the supplemental source")
 
-        # Preserve every input byte for byte, including its original newlines.
-        assembled = (b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
+        # Preserve the original All.lean and every supplement byte for byte.
+        # This additive header exposes the pinned RatFunc.finrank_eq_max_natDegree theorem.
+        ratfunc_import = b"import Mathlib.FieldTheory.RatFunc.IntermediateField\n"
+        assembled = (ratfunc_import + b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)
