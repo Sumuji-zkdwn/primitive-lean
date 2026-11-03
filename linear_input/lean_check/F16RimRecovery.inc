@@ -124,6 +124,58 @@ theorem f16Base_eq_three :
     LinearInputF16Determinant.realPencilAll,
     LinearInputF16Determinant.entryThree]
 
+/-- Every sign in the original L₃ row has square one. -/
+theorem f16Eps_three_self_mul (i : Fin 16) :
+    LinearInputF16Holonomy.eps (3 : Fin 16) i *
+      LinearInputF16Holonomy.eps (3 : Fin 16) i = 1 := by
+  fin_cases i <;> decide
+
+/-- The transpose of the original L₃ signed-permutation matrix is a
+    left inverse, certified from the retained sign table. -/
+theorem f16BasisMatrix_three_transpose_mul :
+    (f16BasisMatrix (3 : Fin 16)).transpose *
+      f16BasisMatrix (3 : Fin 16) = 1 := by
+  classical
+  ext i j
+  change (∑ k : Fin 16,
+    f16BasisMatrix (3 : Fin 16) k i *
+      f16BasisMatrix (3 : Fin 16) k j) = _
+  rw [Finset.sum_eq_single
+    (LinearInputF16Holonomy.rightIndex (3 : Fin 16) i)]
+  · have hperm :
+        LinearInputF16Holonomy.rightIndex (3 : Fin 16) j =
+          LinearInputF16Holonomy.rightIndex (3 : Fin 16) i ↔ j = i := by
+      constructor
+      · intro h
+        have h' := congrArg (LinearInputF16Holonomy.rightIndex (3 : Fin 16)) h
+        simpa [f16RightIndex_involutive] using h'
+      · intro h
+        subst j
+        rfl
+    simp [f16BasisMatrix, hperm, eq_comm, f16Eps_three_self_mul]
+  · intro k _ hne
+    have hzero :
+        LinearInputF16Holonomy.rightIndex (3 : Fin 16) i ≠ k :=
+      Ne.symm hne
+    simp [f16BasisMatrix, hzero]
+  · simp
+
+/-- The retained base matrix has the exact inverse used by the Python checker. -/
+theorem f16Base_transpose_mul_base_eq_one :
+    f16Base.transpose * f16Base = 1 := by
+  rw [f16Base_eq_three]
+  exact f16BasisMatrix_three_transpose_mul
+
+theorem f16Base_inv_eq_transpose :
+    f16Base⁻¹ = f16Base.transpose :=
+  inv_eq_of_mul_eq_one_left f16Base_transpose_mul_base_eq_one
+
+/-- The formal relative action is exactly A⁻¹ C from the finite checker. -/
+theorem f16RelativeMatrix_eq_checker_inverse :
+    f16RelativeMatrix = f16Base⁻¹ * f16Slope := by
+  unfold f16RelativeMatrix
+  rw [← f16Base_inv_eq_transpose]
+
 theorem f16Slope_eq_ten :
     f16Slope = f16BasisMatrix (10 : Fin 16) := by
   ext i j
@@ -241,13 +293,17 @@ def f16ObserveChecker (v : State) (ch : Channel) : Real :=
 theorem f16Observe_eq_checker (v : State) (ch : Channel) :
     f16Observe v ch = f16ObserveChecker v ch := by
   fin_cases ch
-  · rw [f16Observe_checker_row0]
+  · change f16Observe v 0 = f16ObserveChecker v 0
+    rw [f16Observe_checker_row0]
     simp [f16ObserveChecker]
-  · rw [f16Observe_checker_row1]
+  · change f16Observe v 1 = f16ObserveChecker v 1
+    rw [f16Observe_checker_row1]
     simp [f16ObserveChecker]
-  · rw [f16Observe_checker_row2]
+  · change f16Observe v 2 = f16ObserveChecker v 2
+    rw [f16Observe_checker_row2]
     simp [f16ObserveChecker]
-  · rw [f16Observe_checker_row3]
+  · change f16Observe v 3 = f16ObserveChecker v 3
+    rw [f16Observe_checker_row3]
     simp [f16ObserveChecker]
 
 theorem f16Sign_self_mul_int (i : Fin 16) :
@@ -481,7 +537,11 @@ theorem f16_decode_four_trace (v : State) :
     simp only [f16Decode, f16ChannelOf, f16Partner_eq_code,
       f16PartnerCode, f16Trace4_phase0, f16Trace4_value1,
       f16Trace4_value2, f16Trace4_value3,
-      f16Observe_eq_checker, f16ObserveChecker] <;>
+      f16Observe_eq_checker, f16ObserveChecker,
+      f16Fin8_eq_constructor, f16Fin9_eq_constructor,
+      f16Fin10_eq_constructor, f16Fin11_eq_constructor,
+      f16Fin12_eq_constructor, f16Fin13_eq_constructor,
+      f16Fin14_eq_constructor, f16Fin15_eq_constructor] <;>
     norm_num [f16ChannelLow, f16ChannelHigh, f16Partner_eq_code,
       f16PartnerCode, f16SignR, f16Sign,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
