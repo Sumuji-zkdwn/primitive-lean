@@ -37,7 +37,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          modules = ['GeneratedNonUniqueMonoid.inc', 'HalfFactorialIdentification.inc', 'AtomicGeneratorClassification.inc', 'AtomicHalfFactorial.inc']
+          modules = ['GeneratedNonUniqueMonoid.inc', 'HalfFactorialIdentification.inc', 'AtomicGeneratorClassification.inc', 'AtomicHalfFactorial.inc', 'AtomicWordProbe.inc']
           snippets = []
           for module in modules:
               src = (Path('linear_input/lean_check') / module).read_text('utf-8')
