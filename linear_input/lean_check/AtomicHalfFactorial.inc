@@ -92,9 +92,9 @@ theorem all_atomic_factorizations_same_length
     u.card = v.card := by
   have hwu := atomic_multiset_weight u hu
   have hwv := atomic_multiset_weight v hv
-  have hv := congrArg Subtype.val heval
-  have h2 := congrArg (fun n : ℕ => n.factorization 2) hv
-  have h3 := congrArg (fun n : ℕ => n.factorization 3) hv
+  have heq : u.prod.val = v.prod.val := congrArg Subtype.val heval
+  rw [heq] at hwu
+  have hlen : 2 * u.card = 2 * v.card := hwu.symm.trans hwv
   omega
 
 end LinearInputAtomicHalfFactorial
