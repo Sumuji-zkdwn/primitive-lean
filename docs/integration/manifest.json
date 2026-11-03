@@ -1046,6 +1046,18 @@
       "authoring_commit": "3e89173036d77340eac9f35bf799e03344203d11"
     },
     {
+      "path": "linear_input/lean_check/AtomicWordProbe.inc",
+      "sha256": "ee1863d8a320d1b0e7720a83f611f80fd3db6a2e1a6d0742006d155e331f61c5",
+      "original_sha256": "ee1863d8a320d1b0e7720a83f611f80fd3db6a2e1a6d0742006d155e331f61c5",
+      "source_pr": 46,
+      "source_commit": "62b8211a9af5aab8c625c100b03c8d83f8c91e71",
+      "source_path": "linear_input/lean_check/AtomicWordProbe.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "05dfe79bc3824930fa902c8baca7b43351e0967c"
+    },
+    {
       "path": "linear_input/lean_check/BranchFibers.inc",
       "sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
       "original_sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
