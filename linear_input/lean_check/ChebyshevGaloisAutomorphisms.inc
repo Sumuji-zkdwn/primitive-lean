@@ -147,7 +147,7 @@ theorem linearAuto_fixes_parameter (m : ℕ) (hm : m ≠ 0) (ζ : ℂ)
     simp
   have htwo :
       linearAuto ζ (hζ.ne_zero hm) (2 : E) = 2 := by
-    exact map_two (linearAuto ζ (hζ.ne_zero hm))
+    exact map_ofNat (linearAuto ζ (hζ.ne_zero hm)) 2
   simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow, htwo] <;> ring
 
 theorem inversionAuto_fixes_parameter (m : ℕ) :
@@ -155,7 +155,7 @@ theorem inversionAuto_fixes_parameter (m : ℕ) :
   rw [genericParameter_eq_joukowski]
   unfold LinearInputChebyshevDescent.joukowski
   have htwo : inversionAuto (2 : E) = 2 := by
-    exact map_two inversionAuto
+    exact map_ofNat inversionAuto 2
   simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow, htwo] <;> ring
 
 /-- A base-field generator fixed by a ℂ-automorphism forces all of C(t) fixed. -/
@@ -180,13 +180,14 @@ theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
       subst y
       exact hψ
     · intro c
-      simp
+      change ψ (algebraMap ℂ E c) = algebraMap ℂ E c
+      exact ψ.commutes c
     · intro y z hy hz ihy ihz
-      simpa [map_add, ihy, ihz]
+      simp [map_add, ihy, ihz]
     · intro y hy ih
-      simpa [map_inv₀, ih]
+      simp [map_inv₀, ih]
     · intro y z hy hz ihy ihz
-      simpa [map_mul, ihy, ihz]
+      simp [map_mul, ihy, ihz]
   exact hfix x.1 x.2
 
 /-- Regrade a ℂ-automorphism fixing t as an automorphism over C(t). -/
@@ -305,8 +306,28 @@ theorem reflection_conjugates_rotation (k : ℕ) (ζ : ℂ)
   have hleft :
       (reflection k * rotation k ζ hζ * reflection k) (RatFunc.X : E) =
         RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
-    simp [AlgEquiv.mul_apply, reflection_X, rotation_X, map_inv₀,
-      map_mul, mul_inv_rev] <;> ring
+    calc
+      (reflection k * rotation k ζ hζ * reflection k) (RatFunc.X : E) =
+          reflection k (rotation k ζ hζ (reflection k (RatFunc.X : E))) := by
+            simp only [AlgEquiv.mul_apply]
+      _ = reflection k (rotation k ζ hζ ((RatFunc.X : E)⁻¹)) := by
+            rw [reflection_X]
+      _ = reflection k ((rotation k ζ hζ (RatFunc.X : E))⁻¹) := by
+            rw [map_inv₀]
+      _ = reflection k ((RatFunc.C ζ * (RatFunc.X : E))⁻¹) := by
+            rw [rotation_X]
+      _ = (reflection k (RatFunc.C ζ * (RatFunc.X : E)))⁻¹ := by
+            rw [map_inv₀]
+      _ = (reflection k (RatFunc.C ζ) *
+            reflection k (RatFunc.X : E))⁻¹ := by
+            rw [map_mul]
+      _ = (RatFunc.C ζ * (RatFunc.X : E)⁻¹)⁻¹ := by
+            rw [baseAuto_C, reflection_X]
+      _ = (RatFunc.X : E) * (RatFunc.C ζ)⁻¹ := by
+            rw [mul_inv_rev, inv_inv]
+      _ = (RatFunc.X : E) * RatFunc.C (ζ⁻¹) := by
+            rw [← map_inv₀]
+      _ = RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by ring
   rw [hleft, rotation_symm_X]
 
 /-- Exponents in ZMod act on a rotation with its finite order. -/
