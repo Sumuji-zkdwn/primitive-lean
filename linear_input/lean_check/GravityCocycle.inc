@@ -175,4 +175,18 @@ theorem line_force_attractive
   exact div_pos (mul_pos (mul_pos hG hm1) hm2)
     (pow_pos (sub_pos.mpr hxy) 2)
 
+/-- The total mass 2m alone cannot encode the exact far potential of two
+separated masses at -a and +a: the field at R>a detects their separation. -/
+theorem mass_only_merger_loses_external_potential
+    (a R : ℝ) (ha : 0 < a) (hR : a < R) :
+    (1 : ℝ) / (R - a) + (1 : ℝ) / (R + a) ≠ 2 / R := by
+  have hleft : R - a ≠ 0 := ne_of_gt (sub_pos.mpr hR)
+  have hR0 : R ≠ 0 := ne_of_gt (lt_trans ha hR)
+  have hright : R + a ≠ 0 :=
+    ne_of_gt (add_pos (lt_trans ha hR) ha)
+  intro h
+  field_simp [hleft, hright, hR0] at h
+  nlinarith [sq_pos_of_pos ha]
+
+
 end LinearInputGravityCocycle
