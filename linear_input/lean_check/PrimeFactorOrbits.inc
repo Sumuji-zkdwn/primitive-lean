@@ -199,10 +199,10 @@ theorem two_triple_observations_not_injective (i j : Fin 3) :
   intro h
   apply no_two_triple_probes i j
   intro x y hxy
-  have hi := congrArg Prod.fst hxy
-  have hj := congrArg Prod.snd hxy
+  have hi : tripleProbe i x = tripleProbe i y := congrArg Prod.fst hxy
+  have hj : tripleProbe j x = tripleProbe j y := congrArg Prod.snd hxy
   apply h
-  simp [tripleObservations, hi, hj]
+  simpa [tripleObservations] using And.intro hi hj
 
 /-- Any selection of fewer than three permitted calls fails. -/
 theorem fewer_than_three_not_injective (choices : List (Fin 3))
