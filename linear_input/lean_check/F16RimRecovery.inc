@@ -141,7 +141,7 @@ theorem f16_relative_action (v : State) :
   rw [f16Basis_transpose_mulVec, f16Basis_mulVec]
   simp only [f16RightIndex_ten_three, f16Step, f16SignR, f16Sign,
     f16Partner_involutive, Int.cast_mul]
-  all_goals ring
+
 
 def f16ChannelLow (i : Channel) : Fin 16 :=
   ⟨i.val, by omega⟩
@@ -165,32 +165,43 @@ theorem f16Observe_checker_row0 (v : State) :
     f16Observe v 0 = (v 9 - v 13) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    first | ring | trivial
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
 
 /-- Row one of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row1 (v : State) :
     f16Observe v 1 = (v 12 - v 8) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    first | ring | trivial
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
 
 /-- Row two of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row2 (v : State) :
     f16Observe v 2 = (v 11 + v 15) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    first | ring | trivial
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
 
 /-- Row three of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row3 (v : State) :
     f16Observe v 3 = (v 10 - v 14) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    first | ring | trivial
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
+
+/-- The exact four-row output formula from the checker. -/
+def f16ObserveChecker (v : State) (ch : Channel) : Real :=
+  if ch.val = 0 then (v 9 - v 13) / 2
+  else if ch.val = 1 then (v 12 - v 8) / 2
+  else if ch.val = 2 then (v 11 + v 15) / 2
+  else (v 10 - v 14) / 2
+
+theorem f16Observe_eq_checker (v : State) (ch : Channel) :
+    f16Observe v ch = f16ObserveChecker v ch := by
+  fin_cases ch
+  · simp [f16ObserveChecker, f16Observe_checker_row0]
+  · simp [f16ObserveChecker, f16Observe_checker_row1]
+  · simp [f16ObserveChecker, f16Observe_checker_row2]
+  · simp [f16ObserveChecker, f16Observe_checker_row3]
 
 theorem f16Sign_self_mul_int (i : Fin 16) :
     f16Sign i * f16Sign i = 1 := by
@@ -224,7 +235,7 @@ theorem f16SignR_cancel_self (i : Fin 16) (x : Real) :
   calc
     f16SignR i * (f16SignR i * x) =
         (f16SignR i * f16SignR i) * x := by ring
-    _ = x := by rw [f16SignR_self_mul] <;> ring
+    _ = x := by rw [f16SignR_self_mul]; ring
 
 theorem f16SignR_cancel_left (i j : Fin 16) (x : Real) :
     f16SignR i * (f16SignR i * f16SignR j * x) =
@@ -232,7 +243,7 @@ theorem f16SignR_cancel_left (i j : Fin 16) (x : Real) :
   calc
     f16SignR i * (f16SignR i * f16SignR j * x) =
         (f16SignR i * f16SignR i) * f16SignR j * x := by ring
-    _ = f16SignR j * x := by rw [f16SignR_self_mul] <;> ring
+    _ = f16SignR j * x := by rw [f16SignR_self_mul]; ring
 
 theorem f16SignR_cancel_right (i j : Fin 16) (x : Real) :
     f16SignR i * (f16SignR j * f16SignR i * x) =
@@ -240,7 +251,7 @@ theorem f16SignR_cancel_right (i j : Fin 16) (x : Real) :
   calc
     f16SignR i * (f16SignR j * f16SignR i * x) =
         (f16SignR i * f16SignR i) * f16SignR j * x := by ring
-    _ = f16SignR j * x := by rw [f16SignR_self_mul] <;> ring
+    _ = f16SignR j * x := by rw [f16SignR_self_mul]; ring
 
 theorem f16SignR_partner_low (i : Channel) :
     f16SignR (f16Partner (f16ChannelLow i)) =
@@ -424,8 +435,7 @@ theorem f16_decode_four_trace (v : State) :
     simp only [f16Decode, f16ChannelOf, f16Partner_eq_code,
       f16PartnerCode, f16Trace4_phase0, f16Trace4_value1,
       f16Trace4_value2, f16Trace4_value3,
-      f16Observe_checker_row0, f16Observe_checker_row1,
-      f16Observe_checker_row2, f16Observe_checker_row3] <;>
+      f16Observe_eq_checker, f16ObserveChecker] <;>
     norm_num [f16ChannelLow, f16ChannelHigh, f16Partner_eq_code,
       f16PartnerCode, f16SignR, f16Sign,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
@@ -514,11 +524,14 @@ theorem f16_three_phase_collision :
   apply Prod.ext
   · apply Prod.ext
     · funext ch
-      simp [f16Trace3, f16Zero]
+      simp only [f16Trace3, f16Observe_zero,
+        f16Observe_threeWitness_zero]
     · funext ch
-      simp [f16Trace3, f16Zero]
+      simp only [f16Trace3, f16Observe_step_zero,
+        f16Observe_step_threeWitness_zero]
   · funext ch
-    simp [f16Trace3, f16Zero]
+    simp only [f16Trace3, f16Observe_step2_zero,
+      f16Observe_step2_threeWitness_zero]
 
 theorem f16_zero_ne_three_phase_witness :
     f16Zero ≠ f16ThreePhaseWitness := by
