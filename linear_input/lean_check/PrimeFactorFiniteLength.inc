@@ -74,7 +74,7 @@ def bumpPrefix {n : ℕ} (i : Fin n) : Prefix n :=
   fun j => if j = i then 1 else 0
 
 def others (n : ℕ) (i : Fin n) : Finset (Fin n) :=
-  Finset.univ \ {i}
+  (Finset.univ : Finset (Fin n)).erase i
 
 /-- Swapping a 2 at position i with the final 3 preserves the product. -/
 theorem bumped_prefix_swap_product (n : ℕ) (i : Fin n) :
@@ -86,17 +86,15 @@ theorem bumped_prefix_swap_product (n : ℕ) (i : Fin n) :
     change (∏ _j : Fin n, (2 : ℕ)) =
       2 * (others n i).prod (fun _ => (2 : ℕ))
     simpa [others] using
-      (Finset.prod_eq_mul_prod_sdiff_singleton_of_mem
-        (s := Finset.univ) (i := i) (Finset.mem_univ i)
-        (fun _j : Fin n => (2 : ℕ)))
+      (Finset.mul_prod_erase
+        (Finset.univ : Finset (Fin n))
+        (fun _j : Fin n => (2 : ℕ)) (Finset.mem_univ i)).symm
   have hrest :
       (others n i).prod (fun j => if j = i then (3 : ℕ) else 2) =
         (others n i).prod (fun _ => (2 : ℕ)) := by
     apply Finset.prod_congr rfl
     intro j hj
-    have hnot : j ∉ ({i} : Finset (Fin n)) :=
-      (Finset.mem_sdiff.mp hj).2
-    have hji : j ≠ i := by simpa using hnot
+    have hji : j ≠ i := (Finset.mem_erase.mp hj).1
     simp [hji]
   have hbump : prefixProduct n (bumpPrefix i) =
       3 * (others n i).prod (fun _ => (2 : ℕ)) := by
@@ -110,9 +108,10 @@ theorem bumped_prefix_swap_product (n : ℕ) (i : Fin n) :
       _ = (if i = i then (3 : ℕ) else 2) *
           (others n i).prod (fun j => if j = i then (3 : ℕ) else 2) := by
         simpa [others] using
-          (Finset.prod_eq_mul_prod_sdiff_singleton_of_mem
-            (s := Finset.univ) (i := i) (Finset.mem_univ i)
-            (fun j : Fin n => if j = i then (3 : ℕ) else 2))
+          (Finset.mul_prod_erase
+            (Finset.univ : Finset (Fin n))
+            (fun j : Fin n => if j = i then (3 : ℕ) else 2)
+            (Finset.mem_univ i)).symm
       _ = 3 * (others n i).prod (fun _ => (2 : ℕ)) := by
         simpa [hrest]
   rw [hzero, hbump]
