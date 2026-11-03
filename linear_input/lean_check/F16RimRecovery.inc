@@ -166,7 +166,7 @@ theorem f16Observe_checker_row0 (v : State) :
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    simp <;> ring
+    first | ring | trivial
 
 /-- Row one of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row1 (v : State) :
@@ -174,7 +174,7 @@ theorem f16Observe_checker_row1 (v : State) :
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    simp <;> ring
+    first | ring | trivial
 
 /-- Row two of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row2 (v : State) :
@@ -182,7 +182,7 @@ theorem f16Observe_checker_row2 (v : State) :
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    simp <;> ring
+    first | ring | trivial
 
 /-- Row three of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row3 (v : State) :
@@ -190,7 +190,7 @@ theorem f16Observe_checker_row3 (v : State) :
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    simp <;> ring
+    first | ring | trivial
 
 theorem f16Sign_self_mul_int (i : Fin 16) :
     f16Sign i * f16Sign i = 1 := by
@@ -498,7 +498,9 @@ def f16Trace3 (v : State) :
 
 @[simp] theorem f16Observe_step_threeWitness_zero (ch : Channel) :
     f16Observe (f16Step f16ThreePhaseWitness) ch = 0 := by
-  rw [f16Observe_step, f16ThreePhaseWitness_channel_pair]
+  rw [f16Observe_step]
+  have hpair := f16ThreePhaseWitness_channel_pair ch
+  rw [hpair]
   ring
 
 @[simp] theorem f16Observe_step2_threeWitness_zero (ch : Channel) :
