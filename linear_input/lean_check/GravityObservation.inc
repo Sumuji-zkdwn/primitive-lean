@@ -96,7 +96,6 @@ theorem external_observation_moments_three {ι : Type*}
   rw [hterms]
   simp only [moment, pow_zero, pow_one, mul_one,
     Finset.sum_add_distrib, Finset.sum_div]
-  ring
 
 /-- If the first three moments agree, the exact field difference is solely
 the difference of third-order remainders. No infinite-series limits are used. -/
@@ -130,7 +129,6 @@ theorem symmetric_pair_moment_zero (m a : ℝ) :
 theorem symmetric_pair_moment_one (m a : ℝ) :
     symmetricPairMoment m a 1 = 0 := by
   simp [symmetricPairMoment]
-  ring
 
 theorem symmetric_pair_moment_two (m a : ℝ) :
     symmetricPairMoment m a 2 = 2 * m * a ^ 2 := by
