@@ -1656,10 +1656,10 @@
     },
     {
       "path": "linear_input/lean_check/HalfFactorialIdentification.inc",
-      "sha256": "e9757ed61601ec578d817debcc58d899b175e99cbbf3bf8e8b3f9d9a05b7d97d",
-      "original_sha256": "e9757ed61601ec578d817debcc58d899b175e99cbbf3bf8e8b3f9d9a05b7d97d",
+      "sha256": "4e748e7e2e7890ef4af510e767fb4118f22592b15be82ec8b83958bab7c6778f",
+      "original_sha256": "4e748e7e2e7890ef4af510e767fb4118f22592b15be82ec8b83958bab7c6778f",
       "source_pr": 46,
-      "source_commit": "778782ab79d94accdc8be93d6a407ab6f4801c8f",
+      "source_commit": "e0ed150cfb71d4fb6103689b941cb8b9fd2cb315",
       "source_path": "linear_input/lean_check/HalfFactorialIdentification.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
