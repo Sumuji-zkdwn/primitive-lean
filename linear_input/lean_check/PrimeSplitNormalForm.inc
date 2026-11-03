@@ -42,6 +42,35 @@ theorem split_increases_count {s t : Multiset ℕ}
   simp only [Multiset.card_cons]
   omega
 
+/-- An integer-valued ranking potential on factor words. -/
+def splitRank (s : Multiset ℕ) : ℕ :=
+  (s.map (fun x => x - 1)).sum
+
+/-- Strict descent:
+(a*b-1) - ((a-1)+(b-1)) = (a-1)*(b-1) >= 1 for a,b >= 2. -/
+theorem split_rank_decreases {s t : Multiset ℕ}
+    (h : SplitStep s t) : splitRank t < splitRank s := by
+  obtain ⟨a, b, rest, ha, hb, hs, ht⟩ := h
+  rw [hs, ht]
+  simp only [splitRank, Multiset.map_cons, Multiset.sum_cons]
+  have ha1 : a - 1 + 1 = a := Nat.sub_add_cancel (by omega)
+  have hb1 : b - 1 + 1 = b := Nat.sub_add_cancel (by omega)
+  have hprod : a * b =
+      (a - 1) * (b - 1) + (a - 1) + (b - 1) + 1 := by
+    calc
+      a * b = ((a - 1) + 1) * ((b - 1) + 1) := by rw [ha1, hb1]
+      _ = (a - 1) * (b - 1) + (a - 1) + (b - 1) + 1 := by ring
+  have hpositive : 0 < (a - 1) * (b - 1) :=
+    Nat.mul_pos (by omega) (by omega)
+  omega
+
+/-- Splitting cannot continue indefinitely, including when the input
+contains unmodified zeros or ones. This is a termination statement only. -/
+theorem split_terminates_raw (s : Multiset ℕ) :
+    ∃ t, Steps SplitStep s t ∧ Terminal SplitStep t :=
+  terminating_normal_form SplitStep splitRank
+    (fun h => split_rank_decreases h) s
+
 /-- A word is admissible when all factors are nonunits >= 2. -/
 def Admissible (s : Multiset ℕ) : Prop := ∀ a ∈ s, 2 ≤ a
 
@@ -153,6 +182,21 @@ theorem admissible_terminal_iff_prime (s : FactorWord) :
     exact hterm ⟨t, ht⟩ hstep
   · intro hp t hstep
     exact ((split_terminal_iff_all_prime s.property).2 hp) t.val hstep
+
+/-- The generic decreasing-rank theorem applies to the actual
+multiplicative factor splitting relation on admissible words. -/
+theorem admissible_split_terminates (s : FactorWord) :
+    ∃ t, Steps FactorSplit s t ∧ Terminal FactorSplit t :=
+  terminating_normal_form FactorSplit (fun x => splitRank x.val)
+    (fun h => split_rank_decreases h) s
+
+/-- Every admissible factor word has some finite splitting route
+to a word containing only prime atoms. -/
+theorem reachable_prime_normal_form (s : FactorWord) :
+    ∃ t, Steps FactorSplit s t ∧
+      (∀ p ∈ t.val, Nat.Prime p) := by
+  obtain ⟨t, hpath, hterm⟩ := admissible_split_terminates s
+  exact ⟨t, hpath, (admissible_terminal_iff_prime t).1 hterm⟩
 
 theorem factor_split_preserves_value (s t : FactorWord)
     (h : FactorSplit s t) : factorWordValue s = factorWordValue t :=
