@@ -2170,7 +2170,7 @@
     },
     {
       "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
-      "sha256": "0f3b432ac05a29df70ce01e74b4f31810ed6e0b3abd6e86991816b3223712b5d",
+      "sha256": "737376679101e85e2e9db7e8b1bd3bb193bd11583a76388515941aba97b862af",
       "source_pr": 31,
       "source_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
       "source_path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
@@ -2178,14 +2178,14 @@
       "byte_identical": false,
       "permitted_adaptations": [
         "Correct the explicit generation and transcendence rewrites for the X↦cX and X↦X⁻¹ substitutions.",
-        "Normalize the primitive-root scalar power and explicitly fix the denominator 2 when proving the Joukowski parameter invariant.",
-        "Prove fixedness of the base intermediate field by giving the adjunction induction motive explicitly.",
-        "Prove inverse-rotation action on X by injectivity of the algebra equivalence and its inverse law.",
+        "Normalize the primitive-root scalar power and explicitly prove that the denominator 2 is fixed when showing Joukowski-parameter invariance.",
+        "Prove fixedness of the base intermediate field by supplying every named adjoin-induction branch.",
+        "Rewrite inverse rotation on X using AlgEquiv.aut_inv and the symm_apply_apply inverse law.",
         "Prove conjugation on powers using the monoid homomorphism induced by an involution.",
         "Use the pinned DihedralGroup multiplication laws to verify the indexed rotation/reflection homomorphism.",
-        "Correct nonzero scalar cancellation and ZMod value injectivity in the faithful action proof."
+        "Correct nonzero scalar cancellation and ZMod value injectivity in the faithful-action proof."
       ],
-      "authoring_commit": "61ce2adb0f9ca07146c211619d50919efebecbef",
+      "authoring_commit": "61df6b4736ec3f5ea7fa922f3d1e67413ac7a8bc",
       "original_sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc"
     }
   ],
