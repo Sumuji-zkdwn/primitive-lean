@@ -1,0 +1,107 @@
+name: Primitive autonomous verified growth
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/primitive-autonomy.yml'
+      - 'tools/autonomy/**'
+      - 'tests/test_autonomy_generator.py'
+  schedule:
+    # Monday and Thursday, 09:17 JST. GitHub schedules run on default branch only.
+    - cron: '17 0 * * 1,4'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: primitive-autonomous-growth
+  cancel-in-progress: false
+
+jobs:
+  grow:
+    name: Generate one candidate, prove, audit, then feed back
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Check out the reviewed controller on the default branch
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          path: control
+          persist-credentials: false
+
+      - name: Check out the isolated verified growth branch
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/verified-operator-growth
+          path: working
+          persist-credentials: true
+
+      - name: Install Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Check bounded generator and fail-closed behavior
+        run: |
+          python control/tools/autonomy/grow.py self-test
+          python -m unittest discover -s control/tests -p test_autonomy_generator.py -v
+
+      - name: Generate one candidate from the verified ledger
+        id: prepare
+        working-directory: working
+        run: |
+          python ../control/tools/autonomy/grow.py prepare --root . --output-file "$GITHUB_OUTPUT"
+
+      - name: Install pinned Lean and Mathlib cache
+        if: steps.prepare.outputs.created == 'true'
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: working/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Install offline integration check dependencies
+        if: steps.prepare.outputs.created == 'true'
+        run: python -m pip install pytest==9.2.0 numpy==2.5.4
+
+      - name: Check candidate with original verifier, source audit and Lean axioms
+        if: steps.prepare.outputs.created == 'true'
+        working-directory: working
+        run: python -B -X utf8 tools/verify.py --integration-only
+
+      - name: Seal candidate only after every check has passed
+        if: steps.prepare.outputs.created == 'true'
+        working-directory: working
+        run: python ../control/tools/autonomy/grow.py seal --root .
+
+      - name: Commit only audited additions to isolated growth branch
+        if: steps.prepare.outputs.created == 'true'
+        working-directory: working
+        run: |
+          git config user.name "primitive-lean-autonomy[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add linear_input/lean_check/AutonomyCycle*.inc
+          git add tools/verify_main_result.py tools/verify.py docs/integration/manifest.json docs/autonomy/ledger.json
+          git diff --cached --stat
+          git diff --cached --quiet && { echo "No verified additions were staged"; exit 1; }
+          git commit -m "autonomy: append one Lean-verified finite operator witness"
+          git push origin HEAD:refs/heads/autonomy/verified-operator-growth
+
+      - name: Retain evidence even when compilation fails
+        if: always() && steps.prepare.outputs.created == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: primitive-autonomy-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            working/verification/
+            working/linear_input/lean_results.json
+            working/docs/autonomy/ledger.json
+            working/linear_input/lean_check/*log
+          if-no-files-found: warn
+          retention-days: 30
