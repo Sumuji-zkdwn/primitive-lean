@@ -156,6 +156,7 @@ def verify_lean(rebuild):
         'DecompositionIdentification': 'Terminating rewrite paths, uniqueness and common-ancestor criteria, terminal probe identification, monotone finite probe libraries, and commutative generator collisions.',
         'DecompositionF0Bridge': 'Actual positive F0 multiset merges as decreasing evaluation-preserving rewrites with a unique singleton terminal form.',
         'PrimeFactorIdentification': 'Mathlib positive integer factor-multiset equivalence, canonical prime product injectivity, zero extra probes, and contrast with composite generator collisions.',
+        'PrimeSplitNormalForm': 'Actual nonunit factor splitting, product invariance, terminal-prime equivalence, exact step count, and terminal uniqueness with zero extra probes.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
