@@ -2161,9 +2161,23 @@
       "byte_identical": false,
       "permitted_adaptations": [
         "Transport the established Chebyshev degree theorem from ℂ to RatFunc ℂ through the injective coefficient map.",
-        "Expose the already-proved 2m degree theorem for the realized parameter field."
+        "Expose the established degree 2m theorem for the realized parameter field.",
+        "Transport the distinct generic root candidates and their polynomial identities into the actual root set over C(t).",
+        "Use two adjacent roots to show that the actual root set generates C(X), and prove the polynomial IsSplittingField predicate for k ≥ 1.",
+        "Equate the constructed field with Mathlib's canonical splitting-field object."
       ],
       "authoring_commit": "48f50d00f9dc7de1a1c0eb8bb69f662d868a1bf5"
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc",
+      "source_pr": 31,
+      "source_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
+      "source_path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "role": "new_additive_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db"
     }
   ],
   "construction_errors": []
