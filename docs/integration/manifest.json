@@ -2163,10 +2163,10 @@
     },
     {
       "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
-      "sha256": "b463548df5937ce32131c9629718b2df470d916110261dd1bc70df22b33100c8",
-      "original_sha256": "b463548df5937ce32131c9629718b2df470d916110261dd1bc70df22b33100c8",
+      "sha256": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
+      "original_sha256": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
       "source_pr": null,
-      "source_commit": "641b56e8dcc649cf32fb14c4d0894389991f93ba",
+      "source_commit": "533919495f9f0d5960a9814e184f12f2424452cd",
       "source_path": "linear_input/lean_check/OperatorSemanticClosure.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2202,7 +2202,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
-      "source_commit": "641b56e8dcc649cf32fb14c4d0894389991f93ba",
+      "source_commit": "533919495f9f0d5960a9814e184f12f2424452cd",
       "note": "Semantic operator closure and conservative but nonword-generatable primitive. Historical baseline preserved."
     }
   ]
