@@ -33,15 +33,16 @@ theorem adjoin_scaled_X (c : ℂ) (hc : c ≠ 0) :
     IntermediateField.subset_adjoin ℂ _ (by simp)
   have hcF : RatFunc.C c ∈ F := F.algebraMap_mem c
   have hciF : RatFunc.C c⁻¹ ∈ F := F.algebraMap_mem c⁻¹
-  have hX : (RatFunc.X : E) ∈ F := by
-    have hprod : (RatFunc.C c⁻¹ * RatFunc.C c) * (RatFunc.X : E) =
-        RatFunc.C c⁻¹ * (RatFunc.C c * (RatFunc.X : E)) := by ring
+  have hXeq : (RatFunc.X : E) =
+      RatFunc.C c⁻¹ * (RatFunc.C c * (RatFunc.X : E)) := by
     calc
       (RatFunc.X : E) =
           (RatFunc.C c⁻¹ * RatFunc.C c) * (RatFunc.X : E) := by
             simp [hc]
-      _ = RatFunc.C c⁻¹ * (RatFunc.C c * (RatFunc.X : E)) := hprod
-      _ ∈ F := F.mul_mem hciF hgen
+      _ = RatFunc.C c⁻¹ * (RatFunc.C c * (RatFunc.X : E)) := by ring
+  have hX : (RatFunc.X : E) ∈ F := by
+    rw [hXeq]
+    exact F.mul_mem hciF hgen
   have hle : IntermediateField.adjoin ℂ ({(RatFunc.X : E)} : Set E) ≤ F := by
     apply IntermediateField.adjoin_le_iff.mpr
     intro x hx
@@ -89,7 +90,9 @@ noncomputable def linearAuto (c : ℂ) (hc : c ≠ 0) : E ≃ₐ[ℂ] E := by
         (RatFunc.X : E) =
             (RatFunc.C c⁻¹ * RatFunc.C c) * (RatFunc.X : E) := by simp [hc]
         _ = RatFunc.C c⁻¹ * (RatFunc.C c * (RatFunc.X : E)) := by ring
-        _ = RatFunc.C c⁻¹ * RatFunc.C d := by rw [hd]
+        _ = RatFunc.C c⁻¹ * RatFunc.C d := by
+          change RatFunc.C c⁻¹ * f = RatFunc.C c⁻¹ * RatFunc.C d
+          exact congrArg (fun y : E => RatFunc.C c⁻¹ * y) hd
         _ = RatFunc.C (c⁻¹ * d) := by simp
     exact RatFunc.transcendental_X (hX ▸ isAlgebraic_algebraMap _)
   have hgen : IntermediateField.adjoin ℂ ({f} : Set E) = ⊤ := by
@@ -107,7 +110,9 @@ noncomputable def inversionAuto : E ≃ₐ[ℂ] E := by
     have hX : (RatFunc.X : E) = RatFunc.C c⁻¹ := by
       calc
         (RatFunc.X : E) = ((RatFunc.X : E)⁻¹)⁻¹ := by simp
-        _ = (RatFunc.C c)⁻¹ := by rw [hc]
+        _ = (RatFunc.C c)⁻¹ := by
+          change f⁻¹ = (RatFunc.C c)⁻¹
+          rw [hc]
         _ = RatFunc.C c⁻¹ := by simp
     exact RatFunc.transcendental_X (hX ▸ isAlgebraic_algebraMap _)
   have hgen : IntermediateField.adjoin ℂ ({f} : Set E) = ⊤ := by
@@ -130,29 +135,43 @@ theorem linearAuto_fixes_parameter (m : ℕ) (hm : m ≠ 0) (ζ : ℂ)
     linearAuto ζ (hζ.ne_zero hm) (genericParameter m) =
       genericParameter m := by
   rw [genericParameter_eq_joukowski]
-  simp [joukowski, linearAuto_X, map_add, map_inv₀, map_div₀,
-    map_pow, map_mul, hζ.pow_eq_one]
+  unfold LinearInputChebyshevDescent.joukowski
+  have hpow : (RatFunc.C ζ * (RatFunc.X : E)) ^ m =
+      (RatFunc.X : E) ^ m := by
+    rw [mul_pow]
+    simp [hζ.pow_eq_one]
+  simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow] <;> ring
 
 theorem inversionAuto_fixes_parameter (m : ℕ) :
     inversionAuto (genericParameter m) = genericParameter m := by
   rw [genericParameter_eq_joukowski]
-  simp [joukowski, inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow]
+  unfold LinearInputChebyshevDescent.joukowski
+  simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow] <;> ring
 
 /-- A base-field generator fixed by a ℂ-automorphism forces all of C(t) fixed. -/
 theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
     (hψ : ψ (genericParameter m) = genericParameter m) :
     ∀ x : IntermediateField.adjoin ℂ ({genericParameter m} : Set E),
       ψ x.1 = x.1 := by
-  intro x
-  induction x.2 using IntermediateField.adjoin_induction with
-  | mem y hy =>
+  have hfix : ∀ y, y ∈
+      (IntermediateField.adjoin ℂ ({genericParameter m} : Set E)) →
+      ψ y = y := by
+    intro y hy
+    refine IntermediateField.adjoin_induction ?_ ?_ ?_ ?_ ?_ hy
+    · intro y hy
       have hy' : y = genericParameter m := by simpa using hy
       subst y
       exact hψ
-  | algebraMap c => simp
-  | add x y hx hy ihx ihy => simpa [map_add, ihx, ihy]
-  | inv x hx ih => simpa [map_inv₀, ih]
-  | mul x y hx hy ihx ihy => simpa [map_mul, ihx, ihy]
+    · intro c
+      change φ (RatFunc.C c) = ψ (RatFunc.C c)
+      exact (φ.commutes c).trans (ψ.commutes c).symm
+    · intro y z hy hz ihy ihz
+      simpa [map_add, ihy, ihz]
+    · intro y hy ih
+      simpa [map_inv₀, ih]
+    · intro y z hy hz ihy ihz
+      simpa [map_mul, ihy, ihz]
+  exact hfix x.1 x.2
 
 /-- Regrade a ℂ-automorphism fixing t as an automorphism over C(t). -/
 noncomputable def asBaseAuto (k : ℕ) (ψ : E ≃ₐ[ℂ] E)
@@ -208,7 +227,8 @@ theorem ratFunc_algEquiv_ext_X {φ ψ : E ≃ₐ[ℂ] E}
         ψ.toRingHom.comp (algebraMap (Polynomial ℂ) E) := by
     apply Polynomial.ringHom_ext
     · intro c
-      simp
+      change φ (RatFunc.C c) = ψ (RatFunc.C c)
+      exact (φ.commutes c).trans (ψ.commutes c).symm
     · simp [RatFunc.algebraMap_X, hX]
   have hring : φ.toRingHom = ψ.toRingHom := by
     apply IsFractionRing.ringHom_ext (A := Polynomial ℂ)
@@ -230,7 +250,8 @@ theorem baseAuto_ext_X {k : ℕ} {φ ψ : Aut k}
   | zero => simp
   | succ n ih =>
       rw [pow_succ, AlgEquiv.mul_apply, rotation_X]
-      simp [map_mul, ih, pow_succ, mul_assoc]
+      simp [map_mul, ih]
+      ring
 
 /-- The standard generator of the rotation automorphism has order dividing 3^k. -/
 theorem rotation_pow_order (k : ℕ) (ζ : ℂ)
@@ -250,10 +271,15 @@ theorem rotation_symm_X (k : ℕ) (ζ : ℂ)
       RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
   have hζ0 : ζ ≠ 0 := hζ.ne_zero (by positivity)
   have hC : RatFunc.C ζ ≠ (0 : E) := by
-    exact (RatFunc.C (K := ℂ)).injective.ne hζ0
+    simpa using (RatFunc.C (K := ℂ)).injective.ne hζ0
   have hpre : rotation k ζ hζ (RatFunc.C (ζ⁻¹) * (RatFunc.X : E)) =
       (RatFunc.X : E) := by
-    simp [rotation_X, map_mul, hC]
+    rw [map_mul, baseAuto_C, rotation_X]
+    calc
+      RatFunc.C (ζ⁻¹) * (RatFunc.C ζ * (RatFunc.X : E)) =
+          (RatFunc.C (ζ⁻¹) * RatFunc.C ζ) * (RatFunc.X : E) := by ring
+      _ = RatFunc.C (ζ⁻¹ * ζ) * (RatFunc.X : E) := by rw [← map_mul]
+      _ = (RatFunc.X : E) := by simp [inv_mul_cancel₀ hζ0]
   calc
     (rotation k ζ hζ)⁻¹ (RatFunc.X : E) =
         (rotation k ζ hζ)⁻¹
@@ -269,7 +295,7 @@ theorem reflection_conjugates_rotation (k : ℕ) (ζ : ℂ)
       (reflection k * rotation k ζ hζ * reflection k) (RatFunc.X : E) =
         RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
     simp [AlgEquiv.mul_apply, reflection_X, rotation_X, map_inv₀,
-      map_mul, mul_inv_rev, RatFunc.X_ne_zero]
+      map_mul, mul_inv_rev, RatFunc.X_ne_zero] <;> ring
   rw [hleft, rotation_symm_X]
 
 /-- Exponents in ZMod act on a rotation with its finite order. -/
@@ -304,15 +330,13 @@ power of the conjugate generator. -/
 theorem conjugate_pow_of_involution {G : Type*} [Group G] (s r : G)
     (hs : s * s = 1) (hsrs : s * r * s = r⁻¹) (n : ℕ) :
     s * r ^ n * s = (r⁻¹) ^ n := by
-  induction n with
-  | zero =>
-      simp [hs]
-  | succ n ih =>
-      rw [pow_succ]
-      calc
-        s * (r ^ n * r) * s = (s * r ^ n * s) * (s * r * s) := by group
-        _ = (r⁻¹) ^ n * r⁻¹ := by rw [ih, hsrs]
-        _ = (r⁻¹) ^ (n + 1) := by rw [pow_succ]
+  let f : G →* G :=
+    { toFun := fun x => s * x * s
+      map_one' := by simpa using hs
+      map_mul' := by
+        intro x y
+        simp [mul_assoc, hs] }
+  simpa [f, hsrs] using (map_pow f r n)
 
 /-- Regard the rotation powers as indexed by ZMod (3^k). -/
 noncomputable def rotationPower (k : ℕ) (ζ : ℂ)
@@ -361,6 +385,8 @@ theorem rotationPower_mul_reflection (k : ℕ) (ζ : ℂ)
     rotationPower k ζ hζ i * reflection k =
         reflection k * reflection k *
           rotationPower k ζ hζ i * reflection k := by
+            change rotationPower k ζ hζ i * reflection k =
+              (reflection k ^ 2) * rotationPower k ζ hζ i * reflection k
             rw [reflection_sq]
             simp
     _ = reflection k *
@@ -378,17 +404,20 @@ noncomputable def dihedralRepresentation (k : ℕ) (ζ : ℂ)
     | .sr i => reflection k * rotationPower k ζ hζ i
   map_one' := by
     letI : NeZero (3 ^ k) := ⟨by positivity⟩
-    simp [rotationPower, zmodPower]
+    rw [DihedralGroup.one_def]
+    change rotationPower k ζ hζ (0 : ZMod (3 ^ k)) = 1
+    exact zmodPower_zero (rotation k ζ hζ)
   map_mul' := by
     intro x y
     cases x with
     | r i =>
       cases y with
       | r j =>
-        change rotationPower k ζ hζ i * rotationPower k ζ hζ j =
-          rotationPower k ζ hζ (i + j)
-        exact (rotationPower_add k ζ hζ i j).symm
+        rw [DihedralGroup.r_mul_r]
+        exact rotationPower_add k ζ hζ i j
       | sr j =>
+        rw [DihedralGroup.r_mul_sr]
+        symm
         change rotationPower k ζ hζ i *
             (reflection k * rotationPower k ζ hζ j) =
           reflection k * rotationPower k ζ hζ (j - i)
@@ -410,6 +439,8 @@ noncomputable def dihedralRepresentation (k : ℕ) (ζ : ℂ)
     | sr i =>
       cases y with
       | r j =>
+        rw [DihedralGroup.sr_mul_r]
+        symm
         change (reflection k * rotationPower k ζ hζ i) *
               rotationPower k ζ hζ j =
           reflection k * rotationPower k ζ hζ (i + j)
@@ -422,6 +453,8 @@ noncomputable def dihedralRepresentation (k : ℕ) (ζ : ℂ)
           _ = reflection k * rotationPower k ζ hζ (i + j) := by
                 rw [← rotationPower_add k ζ hζ i j]
       | sr j =>
+        rw [DihedralGroup.sr_mul_sr]
+        symm
         change (reflection k * rotationPower k ζ hζ i) *
               (reflection k * rotationPower k ζ hζ j) =
           rotationPower k ζ hζ (j - i)
@@ -467,7 +500,10 @@ theorem dihedralRepresentation_sr_X (k : ℕ) (ζ : ℂ)
 theorem no_scalar_X_eq_inverse (a b : ℂ) (ha : a ≠ 0)
     (h : RatFunc.C a * (RatFunc.X : E) =
       RatFunc.C b * (RatFunc.X : E)⁻¹) : False := by
-  have haC : RatFunc.C a ≠ (0 : E) := map_ne_zero _ ha
+  have haC : RatFunc.C a ≠ (0 : E) := by
+    intro h0
+    apply ha
+    exact RatFunc.C_injective (by simpa using h0)
   have hsq' : RatFunc.C a * (RatFunc.X : E) ^ 2 = RatFunc.C b := by
     calc
       RatFunc.C a * (RatFunc.X : E) ^ 2 =
@@ -476,15 +512,12 @@ theorem no_scalar_X_eq_inverse (a b : ℂ) (ha : a ≠ 0)
       _ = RatFunc.C b := by field_simp [RatFunc.X_ne_zero]
   have hsq : (RatFunc.X : E) ^ 2 =
       RatFunc.C (b / a) := by
+    rw [map_div₀]
     apply (eq_div_iff haC).2
     calc
       (RatFunc.X : E) ^ 2 * RatFunc.C a =
           RatFunc.C a * (RatFunc.X : E) ^ 2 := mul_comm _ _
       _ = RatFunc.C b := hsq'
-      _ = RatFunc.C (b / a) * RatFunc.C a := by
-            rw [map_div₀]
-            field_simp [ha]
-            ring
   exact LinearInputChebyshevNext.generic_square_not_constant (b / a) hsq
 
 /-- Faithfulness follows by evaluating at the generic variable: the two
@@ -493,6 +526,7 @@ families cannot collide. -/
 theorem dihedralRepresentation_injective (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     Function.Injective (dihedralRepresentation k ζ hζ) := by
+  letI : NeZero (3 ^ k) := ⟨by positivity⟩
   intro a b hab
   have heval : (dihedralRepresentation k ζ hζ a) (RatFunc.X : E) =
       (dihedralRepresentation k ζ hζ b) (RatFunc.X : E) :=
@@ -505,7 +539,8 @@ theorem dihedralRepresentation_injective (k : ℕ) (ζ : ℂ)
       have hcoeff : ζ ^ i.val = ζ ^ j.val :=
         RatFunc.C_injective ((mul_right_cancel₀ RatFunc.X_ne_zero) heval)
       have hv := hζ.pow_inj (ZMod.val_lt i) (ZMod.val_lt j) hcoeff
-      exact congrArg DihedralGroup.r (ZMod.val_injective hv)
+      exact congrArg DihedralGroup.r
+        ((ZMod.val_injective (3 ^ k)) hv)
     | sr j =>
       rw [dihedralRepresentation_r_X, dihedralRepresentation_sr_X] at heval
       have hζ0 : ζ ≠ 0 := hζ.ne_zero (by positivity)
@@ -523,8 +558,10 @@ theorem dihedralRepresentation_injective (k : ℕ) (ζ : ℂ)
     | sr j =>
       rw [dihedralRepresentation_sr_X, dihedralRepresentation_sr_X] at heval
       have hcoeff : ζ ^ i.val = ζ ^ j.val :=
-        RatFunc.C_injective ((mul_right_cancel₀ RatFunc.X_ne_zero) heval)
+        RatFunc.C_injective
+          ((mul_right_cancel₀ (inv_ne_zero RatFunc.X_ne_zero)) heval)
       have hv := hζ.pow_inj (ZMod.val_lt i) (ZMod.val_lt j) hcoeff
-      exact congrArg DihedralGroup.sr (ZMod.val_injective hv)
+      exact congrArg DihedralGroup.sr
+        ((ZMod.val_injective (3 ^ k)) hv)
 
 end LinearInputChebyshevAutomorphisms
