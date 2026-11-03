@@ -1,0 +1,68 @@
+name: Arbitrary finite prime-list F0 Lean proof
+
+on:
+  push:
+    branches: [chatgpt/general-prime-f0-normalization-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorGeneralF0.inc
+      - .github/workflows/prime-factor-general-f0-probe.yml
+  pull_request:
+    branches: [chatgpt/prime-factor-f0-adaptive-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorGeneralF0.inc
+      - .github/workflows/prime-factor-general-f0-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Assemble isolated general-F0 source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          names = [
+              'TernaryZeroCesaro.inc',
+              'FiniteObservationSeparation.inc',
+              'PrimeFactorObservation.inc',
+              'PrimeFactorOrbits.inc',
+              'PrimeFactorF0Adaptive.inc',
+              'PrimeFactorGeneralF0.inc',
+          ]
+          sources = []
+          for name in names:
+              source = Path('linear_input/lean_check', name).read_text()
+              if name == 'PrimeFactorGeneralF0.inc':
+                  for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                      assert token not in source, f'Forbidden Lean token: {token}'
+              sources.append(source)
+          checks = [
+              '#print axioms LinearInputPrimeFactorGeneralF0.normalize_idempotent',
+              '#print axioms LinearInputPrimeFactorGeneralF0.normalize_eq_iff_perm',
+              '#print axioms LinearInputPrimeFactorGeneralF0.normalize_preserves_product',
+              '#print axioms LinearInputPrimeFactorGeneralF0.factors_through_normalize_iff',
+              '#print axioms LinearInputPrimeFactorGeneralF0.prime_product_eq_iff_perm',
+              '#print axioms LinearInputPrimeFactorGeneralF0.prime_product_kernel_eq_normalize_kernel',
+              '#print axioms LinearInputPrimeFactorGeneralF0.prime_product_invariant_of_normalize',
+          ]
+          Path('lean/PrimeFactorGeneralF0Probe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(sources) + '\n' +
+              '\n'.join(checks) + '\n', encoding='utf-8')
+          PY
+      - name: Compile independent general F0 proofs
+        working-directory: lean
+        run: lake env lean --trust=0 PrimeFactorGeneralF0Probe.lean
