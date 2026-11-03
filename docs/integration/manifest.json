@@ -2171,6 +2171,72 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
+      "sha256": "e0b48710f73ec6baca504f92dd112d953f4c758bffd88f15cdae2e9292097582",
+      "original_sha256": "e0b48710f73ec6baca504f92dd112d953f4c758bffd88f15cdae2e9292097582",
+      "source_pr": null,
+      "source_commit": "4c1a71a7f15fdc2e505ea4008115c4fafed19739",
+      "source_path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+      "sha256": "9dc0ab6f29f795bcf7134f64a29fcda144bd8edfe0bc1a234ff264940c602ac3",
+      "original_sha256": "9dc0ab6f29f795bcf7134f64a29fcda144bd8edfe0bc1a234ff264940c602ac3",
+      "source_pr": null,
+      "source_commit": "1221415a607c291d2c91ebbdd05f5ea3754c984e",
+      "source_path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorProductSystems.inc",
+      "sha256": "6c1865584f3179f5f96285a2d21b390e3331c08aa9c2a8c85c869f81101ff6dc",
+      "original_sha256": "6c1865584f3179f5f96285a2d21b390e3331c08aa9c2a8c85c869f81101ff6dc",
+      "source_pr": null,
+      "source_commit": "14c95cb605b472bb3ab43d1f750452375779aedb",
+      "source_path": "linear_input/lean_check/OperatorProductSystems.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorReachability.inc",
+      "sha256": "847c45561ed51559296f68e97b78b20b62319698299dd43011f12147368eaa29",
+      "original_sha256": "847c45561ed51559296f68e97b78b20b62319698299dd43011f12147368eaa29",
+      "source_pr": null,
+      "source_commit": "2b231e72113a58440a9e89d5152c650abfed9af5",
+      "source_path": "linear_input/lean_check/OperatorReachability.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorSensorFamilies.inc",
+      "sha256": "5d49b1a157a22d544a5cac7fc504ed1c3eaa4517044ac5b70ce67fe41ddaf6d1",
+      "original_sha256": "5d49b1a157a22d544a5cac7fc504ed1c3eaa4517044ac5b70ce67fe41ddaf6d1",
+      "source_pr": null,
+      "source_commit": "5cb5d9eb5ff40017ba218c620dfba5e1eee20390",
+      "source_path": "linear_input/lean_check/OperatorSensorFamilies.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+      "sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
+      "original_sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
+      "source_pr": null,
+      "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
+      "source_path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2204,6 +2270,42 @@
       "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
       "source_commit": "641b56e8dcc649cf32fb14c4d0894389991f93ba",
       "note": "Semantic operator closure and conservative but nonword-generatable primitive. Historical baseline preserved."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
+      "source_commit": "4c1a71a7f15fdc2e505ea4008115c4fafed19739",
+      "note": "Contextual two-sided congruence of operator programs and predictive quotient replacement. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+      "source_commit": "1221415a607c291d2c91ebbdd05f5ea3754c984e",
+      "note": "Quotient-safe feedback policies, adaptive iteration, and unsafe feedback counterexample. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorProductSystems.inc",
+      "source_commit": "14c95cb605b472bb3ab43d1f750452375779aedb",
+      "note": "Independent product systems, interleaved actions and observational product kernels. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorReachability.inc",
+      "source_commit": "2b231e72113a58440a9e89d5152c650abfed9af5",
+      "note": "Reachability closure, invariant predicates, and generated-language reachability preservation. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorSensorFamilies.inc",
+      "source_commit": "5cb5d9eb5ff40017ba218c620dfba5e1eee20390",
+      "note": "Arbitrary sensor bundles, kernel intersections, and joint separation. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+      "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
+      "note": "Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates. Historical baseline files remain unchanged."
     }
   ]
 }
