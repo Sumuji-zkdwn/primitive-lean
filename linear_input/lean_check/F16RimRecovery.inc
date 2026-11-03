@@ -372,6 +372,26 @@ def f16Zero : State := fun _ => 0
 def f16ThreePhaseWitness : State :=
   fun i => if i.val = 0 ∨ i.val = 4 then 1 else 0
 
+/-- The witness is zero on all coordinates seen by the zeroth observation. -/
+theorem f16ThreePhaseWitness_partner_low_zero (ch : Channel) :
+    f16ThreePhaseWitness (f16Partner (f16ChannelLow ch)) = 0 := by
+  fin_cases ch <;>
+    norm_num [f16ThreePhaseWitness, f16Partner_eq_code, f16PartnerCode,
+      f16ChannelLow]
+
+/-- The witness is also zero on all partner coordinates from the high channel. -/
+theorem f16ThreePhaseWitness_partner_high_zero (ch : Channel) :
+    f16ThreePhaseWitness (f16Partner (f16ChannelHigh ch)) = 0 := by
+  fin_cases ch <;>
+    norm_num [f16ThreePhaseWitness, f16Partner_eq_code, f16PartnerCode,
+      f16ChannelHigh]
+
+/-- The witness has equal low/high coordinates in each direct channel pair. -/
+theorem f16ThreePhaseWitness_channel_pair (ch : Channel) :
+    f16ThreePhaseWitness (f16ChannelHigh ch) =
+      f16ThreePhaseWitness (f16ChannelLow ch) := by
+  fin_cases ch <;> rfl
+
 def f16Trace3 (v : State) :
     ((Channel -> Real) × (Channel -> Real)) × (Channel -> Real) :=
   ((f16Observe v, f16Observe (f16Step v)),
@@ -393,22 +413,21 @@ def f16Trace3 (v : State) :
 
 @[simp] theorem f16Observe_threeWitness_zero (ch : Channel) :
     f16Observe f16ThreePhaseWitness ch = 0 := by
-  fin_cases ch <;>
-    norm_num [f16Observe, f16ThreePhaseWitness,
-      f16ChannelLow, f16ChannelHigh, f16Partner_eq_code, f16PartnerCode]
+  unfold f16Observe
+  rw [f16ThreePhaseWitness_partner_high_zero,
+      f16ThreePhaseWitness_partner_low_zero]
+  ring
 
 @[simp] theorem f16Observe_step_threeWitness_zero (ch : Channel) :
     f16Observe (f16Step f16ThreePhaseWitness) ch = 0 := by
-  rw [f16Observe_step]
-  fin_cases ch <;>
-    norm_num [f16ThreePhaseWitness, f16ChannelLow, f16ChannelHigh]
+  rw [f16Observe_step, f16ThreePhaseWitness_channel_pair]
+  ring
 
 @[simp] theorem f16Observe_step2_threeWitness_zero (ch : Channel) :
     f16Observe (f16Step (f16Step f16ThreePhaseWitness)) ch = 0 := by
-  rw [f16Observe_step2]
-  fin_cases ch <;>
-    norm_num [f16ThreePhaseWitness, f16ChannelLow, f16ChannelHigh,
-      f16Partner_eq_code, f16PartnerCode]
+  rw [f16Observe_step2, f16ThreePhaseWitness_partner_high_zero,
+      f16ThreePhaseWitness_partner_low_zero]
+  ring
 
 theorem f16_three_phase_collision :
     f16Trace3 f16Zero = f16Trace3 f16ThreePhaseWitness := by
