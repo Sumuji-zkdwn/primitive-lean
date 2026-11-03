@@ -20,6 +20,7 @@ noncomputable section
 namespace LinearInputOperatorHorizon
 
 open LinearInputOperatorWords
+attribute [local instance] Classical.decEq
 
 /-- Output equality for all operator words of length at most n. -/
 def HorizonEq {α ω ι : Type*}
@@ -274,7 +275,10 @@ theorem separating_short_word {α ω ι : Type*} [Fintype α]
       (Fintype.card α - rank K step 0) x y := by
     intro hh
     exact h (finite_horizon_complete K step hh)
-  simp only [HorizonEq, not_forall, not_imp] at hs
-  exact hs
+  by_contra hnone
+  apply hs
+  intro word hlen
+  by_contra hdiff
+  exact hnone ⟨word, hlen, hdiff⟩
 
 end LinearInputOperatorHorizon
