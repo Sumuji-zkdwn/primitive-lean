@@ -153,6 +153,7 @@ def verify_lean(rebuild):
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
         'ViscousRewrite': 'Proximal parameter-shift closure for the original E polynomial, minimizer-derived viscous balance, energy descent, Fenchel-Young identities, a nonconvex two-branch example, and an F16 rotation/reflection dissipation test.',
         'GravityCocycle': 'Generic pair-interaction two-cocycle, exact coboundary of symmetric internal energy, Newton inverse-distance kernel, and oriented 1D inverse-square force; does not deduce Newton law from associativity.',
+        'GravityObservation': 'Idempotent F0 observational descent iff fiber invariance; exact three-moment exterior inverse-distance expansion with finite remainder; symmetric-pair quadrupole witness and failure of mass-only reduction.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
