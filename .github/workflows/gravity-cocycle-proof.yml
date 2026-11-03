@@ -57,13 +57,40 @@ jobs:
             exit 1
           fi
           echo "Standalone Lean completed without warnings"
+      - name: Independently check F0 observation and multipole proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source=Path('linear_input/lean_check/GravityObservations.inc').read_text()
+          names=re.findall(r'(?m)^theorem\\s+([a-zA-Z0-9_]+)',source)
+          assert len(names)>=12, names
+          prelude = 'import Mathlib\\n\\nnamespace LinearInputF0\\ndef Idempotent {α : Type*} (K : α → α) : Prop := ∀ x, K (K x) = K x\\nend LinearInputF0\\n\\n'
+          body=prelude+source+'\\n'+'\\n'.join(
+            '#print axioms LinearInputGravityObservations.'+n for n in names)+'\\n'
+          Path('linear_input/lean_check/GravityObservationsStandalone.lean').write_text(body)
+          print('Observation theorems to audit:',len(names))
+          PY
+          cd lean
+          lake env lean --trust=0 ../linear_input/lean_check/GravityObservationsStandalone.lean > ../gravity-observations-standalone.log 2>&1 || {
+            cat ../gravity-observations-standalone.log
+            exit 1
+          }
+          if grep -E '[[:space:]]warning:' ../gravity-observations-standalone.log; then
+            echo "Lean warnings are not accepted"
+            exit 1
+          fi
+          echo "Observation theorems compiled without warnings"
       - name: Run complete source, model and full Lean integration audit
         shell: bash
         run: |
           set -euo pipefail
           cp gravity-standalone.log /tmp/gravity-standalone.log
-          rm -f gravity-standalone.log linear_input/lean_check/GravityCocycleStandalone.lean
-          trap 'cp /tmp/gravity-standalone.log gravity-standalone.log' EXIT
+          cp gravity-observations-standalone.log /tmp/gravity-observations-standalone.log
+          rm -f gravity-standalone.log gravity-observations-standalone.log linear_input/lean_check/GravityCocycleStandalone.lean linear_input/lean_check/GravityObservationsStandalone.lean
+          trap 'cp /tmp/gravity-standalone.log gravity-standalone.log; cp /tmp/gravity-observations-standalone.log gravity-observations-standalone.log' EXIT
           python -m pip install --disable-pip-version-check 'pytest==9.2.0' 'numpy==2.5.4'
           python -B -X utf8 tools/verify.py --integration-only
       - name: Upload logs
@@ -75,5 +102,6 @@ jobs:
           retention-days: 30
           path: |
             gravity-standalone.log
+            gravity-observations-standalone.log
             verification/
             linear_input/lean_results.json
