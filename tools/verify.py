@@ -153,6 +153,8 @@ def verify_lean(rebuild):
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
         'TernaryZeroCesaro': 'Zero insertion into ternary blocks, six-step Cesaro values, preserved nonzero sums, and exact dwell-time weighted sums.',
         'FiniteObservationSeparation': 'Probe refinement criteria, finite F0-style idempotent recovery, minimal permitted probe pair, six-state coordinates, and time-sensitive ternary observables.',
+        'DecompositionIdentification': 'Terminating rewrite paths, uniqueness and common-ancestor criteria, terminal probe identification, monotone finite probe libraries, and commutative generator collisions.',
+        'DecompositionF0Bridge': 'Actual positive F0 multiset merges as decreasing evaluation-preserving rewrites with a unique singleton terminal form.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
