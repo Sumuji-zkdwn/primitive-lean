@@ -188,10 +188,11 @@ theorem constantTwo_conservative (x y : Fin 3) :
     WordEq exampleK
         (sumStep baseStep (fun _ : Unit => constantTwo)) x y ↔
       WordEq exampleK baseStep x y := by
-  apply (extension_exact_iff_preserves exampleK baseStep
+  exact ((extension_exact_iff_preserves exampleK baseStep
     (fun _ : Unit => constantTwo)).2
-  intro j a b _
-  exact word_refl exampleK baseStep 2
+      (by
+        intro j a b _
+        exact word_refl exampleK baseStep 2)) x y
 
 /-- Nevertheless no finite word of the old alphabet can implement this
 primitive, even modulo observational equivalence. -/
