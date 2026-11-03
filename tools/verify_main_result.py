@@ -70,6 +70,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
     ('linear_input/lean_check/TernaryZeroCesaro.inc', 'LinearInputTernaryZero'),
     ('linear_input/lean_check/FiniteObservationSeparation.inc', 'LinearInputFiniteObservation'),
+    ('linear_input/lean_check/DecompositionIdentification.inc', 'LinearInputDecompositionIdentification'),
+    ('linear_input/lean_check/DecompositionF0Bridge.inc', 'LinearInputDecompositionF0Bridge'),
 )
 
 
