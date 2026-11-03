@@ -6,6 +6,7 @@ on:
     paths:
       - 'linear_input/lean_check/HalfFactorialIdentification.inc'
       - 'linear_input/lean_check/AtomicGeneratorClassification.inc'
+      - 'linear_input/lean_check/AtomicHalfFactorial.inc'
       - 'tools/verify_main_result.py'
       - 'tools/verify.py'
       - 'docs/integration/manifest.json'
