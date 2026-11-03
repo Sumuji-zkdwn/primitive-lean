@@ -151,6 +151,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'ViscousRewrite': 'Proximal parameter-shift closure for the original E polynomial, minimizer-derived viscous balance, energy descent, Fenchel-Young identities, a nonconvex two-branch example, and an F16 rotation/reflection dissipation test.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
