@@ -162,7 +162,7 @@ def f16Observe (v : State) : Channel -> Real :=
 
 /-- Row zero of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row0 (v : State) :
-    f16Observe v 0 = (v (⟨9, by omega⟩ : Fin 16) - v (⟨13, by omega⟩ : Fin 16)) / 2 := by
+    f16Observe v 0 = (v 9 - v 13) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
@@ -170,14 +170,14 @@ theorem f16Observe_checker_row0 (v : State) :
 
 /-- Row one of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row1 (v : State) :
-    f16Observe v 1 = (v (⟨12, by omega⟩ : Fin 16) - v (⟨8, by omega⟩ : Fin 16)) / 2 := by
+    f16Observe v 1 = (v 12 - v 8) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
 
 /-- Row two of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row2 (v : State) :
-    f16Observe v 2 = (v (⟨11, by omega⟩ : Fin 16) + v (⟨15, by omega⟩ : Fin 16)) / 2 := by
+    f16Observe v 2 = (v 11 + v 15) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
@@ -185,11 +185,51 @@ theorem f16Observe_checker_row2 (v : State) :
 
 /-- Row three of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row3 (v : State) :
-    f16Observe v 3 = (v (⟨10, by omega⟩ : Fin 16) - v (⟨14, by omega⟩ : Fin 16)) / 2 := by
+    f16Observe v 3 = (v 10 - v 14) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
   ring
+
+@[simp] theorem f16Fin8_eq_constructor :
+    (8 : Fin 16) = (⟨8, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin9_eq_constructor :
+    (9 : Fin 16) = (⟨9, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin10_eq_constructor :
+    (10 : Fin 16) = (⟨10, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin11_eq_constructor :
+    (11 : Fin 16) = (⟨11, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin12_eq_constructor :
+    (12 : Fin 16) = (⟨12, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin13_eq_constructor :
+    (13 : Fin 16) = (⟨13, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin14_eq_constructor :
+    (14 : Fin 16) = (⟨14, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
+
+@[simp] theorem f16Fin15_eq_constructor :
+    (15 : Fin 16) = (⟨15, by omega⟩ : Fin 16) := by
+  apply Fin.ext
+  decide
 
 /-- The exact four-row output formula from the checker. -/
 def f16ObserveChecker (v : State) (ch : Channel) : Real :=
@@ -201,10 +241,14 @@ def f16ObserveChecker (v : State) (ch : Channel) : Real :=
 theorem f16Observe_eq_checker (v : State) (ch : Channel) :
     f16Observe v ch = f16ObserveChecker v ch := by
   fin_cases ch
-  · simp [f16ObserveChecker, f16Observe_checker_row0]
-  · simp [f16ObserveChecker, f16Observe_checker_row1]
-  · simp [f16ObserveChecker, f16Observe_checker_row2]
-  · simp [f16ObserveChecker, f16Observe_checker_row3]
+  · rw [f16Observe_checker_row0]
+    simp [f16ObserveChecker]
+  · rw [f16Observe_checker_row1]
+    simp [f16ObserveChecker]
+  · rw [f16Observe_checker_row2]
+    simp [f16ObserveChecker]
+  · rw [f16Observe_checker_row3]
+    simp [f16ObserveChecker]
 
 theorem f16Sign_self_mul_int (i : Fin 16) :
     f16Sign i * f16Sign i = 1 := by
