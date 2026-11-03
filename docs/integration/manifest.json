@@ -1543,14 +1543,14 @@
     },
     {
       "path": "linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
-      "sha256": "258e9ee6687c15ae34f33a8ea12fb04b8e463f1bb1fdff9107a8b2e254ca5dda",
-      "original_sha256": "258e9ee6687c15ae34f33a8ea12fb04b8e463f1bb1fdff9107a8b2e254ca5dda",
+      "sha256": "623fe34865a5cd71505e47038b26c30a2da89be0a9feaa926713c7485ac51c9c",
+      "original_sha256": "623fe34865a5cd71505e47038b26c30a2da89be0a9feaa926713c7485ac51c9c",
       "source_pr": 42,
       "source_path": "linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": [],
-      "source_commit": "f5b7ecf5a14b322d0836b9474e4a366bb4262d86",
+      "source_commit": "ce4e37a526fc55b37e80f025705b3bef1f29ecb1",
       "authoring_commit": "f5b7ecf5a14b322d0836b9474e4a366bb4262d86"
     },
     {
