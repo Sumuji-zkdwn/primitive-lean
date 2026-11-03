@@ -67,7 +67,7 @@ theorem full_library_separates (n : ℕ) :
     mul_left_cancel₀ (Nat.ne_of_gt (prefix_product_pos n x.1)) hprod
   exact Prod.ext hp (primeOf_injective hlastval)
 
-/-- Every missing probe admits a specific counterexample pair. -/
+/-- Every omitted probe has a specific counterexample pair. -/
 def zeroPrefix (n : ℕ) : Prefix n := fun _ => 0
 
 def bumpPrefix {n : ℕ} (i : Fin n) : Prefix n :=
