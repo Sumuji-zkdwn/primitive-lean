@@ -37,7 +37,7 @@ theorem steps_preserve {α β : Type*} (R : α → α → Prop)
   | refl _ => rfl
   | cons h _ ih => exact (hstep _ _ h).trans ih
 
-/-- A terminal input admits no nontrivial rewrite path. -/
+/-- A terminal input has no nontrivial rewrite path. -/
 theorem terminal_path_eq {α : Type*} {R : α → α → Prop}
     {x y : α} (hterm : Terminal R x) (hxy : Steps R x y) :
     x = y := by
