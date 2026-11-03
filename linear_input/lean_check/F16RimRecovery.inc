@@ -354,6 +354,27 @@ def f16Trace4 (v : State) : Fin 4 -> Channel -> Real :=
       f16Observe (f16Step (f16Step (f16Step v))) ch := by
   simp [f16Trace4, f16OrbitState]
 
+/-- Closed form for the first matrix-observation phase. -/
+@[simp] theorem f16Trace4_value1 (v : State) (ch : Channel) :
+    f16Trace4 v 1 ch =
+      (v (f16ChannelHigh ch) - v (f16ChannelLow ch)) / 2 := by
+  rw [f16Trace4_phase1, f16Observe_step]
+
+/-- Closed form for the second matrix-observation phase. -/
+@[simp] theorem f16Trace4_value2 (v : State) (ch : Channel) :
+    f16Trace4 v 2 ch =
+      (f16SignR (f16ChannelHigh ch) *
+          v (f16Partner (f16ChannelHigh ch)) +
+        f16SignR (f16ChannelLow ch) *
+          v (f16Partner (f16ChannelLow ch))) / 2 := by
+  rw [f16Trace4_phase2, f16Observe_step2]
+
+/-- Closed form for the third matrix-observation phase. -/
+@[simp] theorem f16Trace4_value3 (v : State) (ch : Channel) :
+    f16Trace4 v 3 ch =
+      (v (f16ChannelHigh ch) + v (f16ChannelLow ch)) / 2 := by
+  rw [f16Trace4_phase3, f16Observe_step3]
+
 /-- The same four phases, written with the actual matrix U = Aᵀ C. -/
 def f16MatrixOrbitState (v : State) (phase : Fin 4) : State :=
   if phase.val = 0 then v
@@ -401,13 +422,12 @@ theorem f16_decode_four_trace (v : State) :
   funext j
   fin_cases j <;>
     simp only [f16Decode, f16ChannelOf, f16Partner_eq_code,
-      f16PartnerCode, f16Trace4_phase0, f16Trace4_phase1,
-      f16Trace4_phase2, f16Trace4_phase3, f16Observe_step,
-      f16Observe_step2, f16Observe_step3] <;>
+      f16PartnerCode, f16Trace4_phase0, f16Trace4_value1,
+      f16Trace4_value2, f16Trace4_value3,
+      f16Observe_checker_row0, f16Observe_checker_row1,
+      f16Observe_checker_row2, f16Observe_checker_row3] <;>
     norm_num [f16ChannelLow, f16ChannelHigh, f16Partner_eq_code,
       f16PartnerCode, f16SignR, f16Sign,
-      f16Observe_checker_row0, f16Observe_checker_row1,
-      f16Observe_checker_row2, f16Observe_checker_row3,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
     field_simp <;> ring
 
