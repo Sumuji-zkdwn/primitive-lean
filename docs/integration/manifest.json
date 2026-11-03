@@ -2185,10 +2185,10 @@
     },
     {
       "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
-      "sha256": "9dc0ab6f29f795bcf7134f64a29fcda144bd8edfe0bc1a234ff264940c602ac3",
-      "original_sha256": "9dc0ab6f29f795bcf7134f64a29fcda144bd8edfe0bc1a234ff264940c602ac3",
+      "sha256": "5f9b6cc1f46518c3fa26736e65d18fcf00c8c42f215129828715a3b95a03538b",
+      "original_sha256": "5f9b6cc1f46518c3fa26736e65d18fcf00c8c42f215129828715a3b95a03538b",
       "source_pr": null,
-      "source_commit": "1221415a607c291d2c91ebbdd05f5ea3754c984e",
+      "source_commit": "29167ba1414ba172e969558f740a1e14da1d3661",
       "source_path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2302,7 +2302,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
-      "source_commit": "1221415a607c291d2c91ebbdd05f5ea3754c984e",
+      "source_commit": "29167ba1414ba172e969558f740a1e14da1d3661",
       "note": "Quotient-safe feedback policies, adaptive iteration, and unsafe feedback counterexample. Historical baseline files remain unchanged."
     },
     {
