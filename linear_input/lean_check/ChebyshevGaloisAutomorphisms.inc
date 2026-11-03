@@ -147,9 +147,7 @@ theorem linearAuto_fixes_parameter (m : ℕ) (hm : m ≠ 0) (ζ : ℂ)
     simp
   have htwo :
       linearAuto ζ (hζ.ne_zero hm) (2 : E) = 2 := by
-    change linearAuto ζ (hζ.ne_zero hm)
-        (algebraMap ℂ E (2 : ℂ)) = algebraMap ℂ E (2 : ℂ)
-    exact (linearAuto ζ (hζ.ne_zero hm)).commutes _
+    simpa using (linearAuto ζ (hζ.ne_zero hm)).commutes (2 : ℂ)
   simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow, htwo] <;> ring
 
 theorem inversionAuto_fixes_parameter (m : ℕ) :
@@ -157,9 +155,7 @@ theorem inversionAuto_fixes_parameter (m : ℕ) :
   rw [genericParameter_eq_joukowski]
   unfold LinearInputChebyshevDescent.joukowski
   have htwo : inversionAuto (2 : E) = 2 := by
-    change inversionAuto (algebraMap ℂ E (2 : ℂ)) =
-      algebraMap ℂ E (2 : ℂ)
-    exact inversionAuto.commutes _
+    simpa using inversionAuto.commutes (2 : ℂ)
   simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow, htwo] <;> ring
 
 /-- A base-field generator fixed by a ℂ-automorphism forces all of C(t) fixed. -/
@@ -172,7 +168,13 @@ theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
       ψ y = y := by
     intro y hy
     refine IntermediateField.adjoin_induction
-      (p := fun y _ => ψ y = y) ?_ ?_ ?_ ?_ ?_ hy
+      (p := fun y _ => ψ y = y)
+      (mem := ?_)
+      (algebraMap := ?_)
+      (add := ?_)
+      (inv := ?_)
+      (mul := ?_)
+      hy
     · intro y hy
       have hy' : y = genericParameter m := by simpa using hy
       subst y
@@ -292,8 +294,16 @@ theorem rotation_symm_X (k : ℕ) (ζ : ℂ)
           (RatFunc.C (ζ⁻¹) * RatFunc.C ζ) * (RatFunc.X : E) := by ring
       _ = RatFunc.C (ζ⁻¹ * ζ) * (RatFunc.X : E) := by rw [← map_mul]
       _ = (RatFunc.X : E) := by simp [inv_mul_cancel₀ hζ0]
-  apply (rotation k ζ hζ).injective
-  rw [AlgEquiv.apply_symm_apply, hpre]
+  calc
+    (rotation k ζ hζ)⁻¹ (RatFunc.X : E) =
+        (rotation k ζ hζ).symm (RatFunc.X : E) := by
+          rw [AlgEquiv.aut_inv]
+    _ = (rotation k ζ hζ).symm
+          ((rotation k ζ hζ)
+            (RatFunc.C (ζ⁻¹) * (RatFunc.X : E))) := by
+          rw [← hpre]
+    _ = RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
+          rw [AlgEquiv.symm_apply_apply]
 
 theorem reflection_conjugates_rotation (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
