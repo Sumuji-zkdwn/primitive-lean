@@ -1728,6 +1728,18 @@
       "authoring_commit": "43ed5a5ef4590de6c2c9e79168b6c04c647c82a1"
     },
     {
+      "path": "linear_input/lean_check/PrimeSplitNormalForm.inc",
+      "sha256": "2a273c30a63f65fa2d7cedf979557cb9d351a0b5671ea29b1dd5fa16a6a36799",
+      "original_sha256": "2a273c30a63f65fa2d7cedf979557cb9d351a0b5671ea29b1dd5fa16a6a36799",
+      "source_pr": 39,
+      "source_commit": "38c6a9af6fd0b4c5e1343e08a510770fe0b70918",
+      "source_path": "linear_input/lean_check/PrimeSplitNormalForm.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "38c6a9af6fd0b4c5e1343e08a510770fe0b70918"
+    },
+    {
       "path": "linear_input/lean_check/QuarticClassification.inc",
       "sha256": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d",
       "original_sha256": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d",
