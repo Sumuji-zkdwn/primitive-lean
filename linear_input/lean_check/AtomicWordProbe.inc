@@ -115,16 +115,17 @@ theorem product_alone_does_not_identify_all_atomic_words :
   intro h
   have h49 : ∀ x ∈ LinearInputGeneratedNonUnique.word49, Atomic x := by
     intro x hx
-    simp only [LinearInputGeneratedNonUnique.word49, Multiset.mem_cons, Multiset.not_mem_zero,
-      or_false] at hx
-    rcases hx with rfl | rfl
+    have h : x = four ∨ x = nine := by
+      simpa [LinearInputGeneratedNonUnique.word49] using hx
+    rcases h with rfl | rfl
     · exact four_atomic
     · exact nine_atomic
   have h66 : ∀ x ∈ LinearInputGeneratedNonUnique.word66, Atomic x := by
     intro x hx
-    simp only [LinearInputGeneratedNonUnique.word66, Multiset.mem_cons, Multiset.not_mem_zero,
-      or_false] at hx
-    rcases hx with rfl | rfl <;> exact six_atomic
+    have h : x = six := by
+      simpa [LinearInputGeneratedNonUnique.word66] using hx
+    subst x
+    exact six_atomic
   exact words_distinct
     (h LinearInputGeneratedNonUnique.word49 LinearInputGeneratedNonUnique.word66 h49 h66 word_products_collide)
 
