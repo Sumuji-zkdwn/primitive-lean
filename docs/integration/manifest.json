@@ -2170,7 +2170,7 @@
     },
     {
       "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
-      "sha256": "3b4cba47de89352998c291ab0a21cf9059a0664291fc95f7993aa8b14ef54587",
+      "sha256": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98",
       "source_pr": 31,
       "source_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
       "source_path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
@@ -2179,14 +2179,15 @@
       "permitted_adaptations": [
         "Correct explicit generation and transcendence rewrites for the X↦cX and X↦X⁻¹ substitutions.",
         "Prove the denominator 2 is fixed by the ring-homomorphism map_ofNat law when showing Joukowski-parameter invariance.",
-        "Prove fixedness of the base intermediate field by supplying the base field, all adjoin-induction branches, and the ℂ-algebra map case.",
+        "Prove fixedness of the base intermediate field by introducing the adjoin element, supplying every induction branch, and fixing ℂ-algebra constants with commutes.",
         "Prove inverse-rotation action on X using AlgEquiv.aut_inv, injectivity and the inverse application law.",
         "Prove reflection conjugation explicitly by evaluating each automorphism on X.",
         "Prove conjugation on powers using the monoid homomorphism induced by an involution.",
         "Use the pinned DihedralGroup multiplication laws to verify the indexed rotation/reflection homomorphism.",
-        "Correct nonzero scalar cancellation and ZMod value injectivity in the faithful-action proof."
+        "Correct nonzero scalar cancellation and ZMod value injectivity in the faithful-action proof.",
+        "Remove unused proof tactics and linter warnings from the supplemental source."
       ],
-      "authoring_commit": "019405728c4401a439d2ac3e37259682551d885b",
+      "authoring_commit": "7584d6462d3482e69bc91925a9d3428dd37c6bfd",
       "original_sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc"
     }
   ],
