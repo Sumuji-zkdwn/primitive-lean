@@ -151,6 +151,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'RimObservability': 'Exact one-channel four-phase decoder for a 4D rotation/reflection model, optimal three-versus-four horizon witness and signed 2x2 local gauges; no global F16 conjugacy claim.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
