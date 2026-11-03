@@ -152,4 +152,43 @@ theorem actual_nonunique_factor_words :
     word49.prod = word66.prod ∧ word49 ≠ word66 :=
   ⟨word_products_collide, words_distinct⟩
 
+
+/-- Two different actual atomic words treated as a finite identification task. -/
+def candidate (i : Fin 2) : Multiset G :=
+  if i.val = 0 then word49 else word66
+
+def candidateProduct (i : Fin 2) : G := (candidate i).prod
+
+/-- The permitted probe counts occurrences of the actual element 4. -/
+def probeFour (i : Fin 2) : ℕ :=
+  ((candidate i).map (fun a : G => a.val)).count 4
+
+/-- The product alone cannot tell the two candidate words apart. -/
+theorem candidate_product_not_injective :
+    ¬ Function.Injective candidateProduct := by
+  intro hinj
+  have he : candidateProduct 0 = candidateProduct 1 := by
+    simpa [candidateProduct, candidate] using word_products_collide
+  have hbad : (0 : Fin 2) = 1 := hinj he
+  exact (by decide : (0 : Fin 2) ≠ 1) hbad
+
+/-- A single permitted count observation distinguishes both candidates. -/
+theorem probe_four_injective :
+    Function.Injective probeFour := by
+  intro i j he
+  fin_cases i <;> fin_cases j <;>
+    simp_all [probeFour, candidate, word49, word66, four, six, nine]
+
+/-- Exactly zero extra probes fail, while one additional count
+observation succeeds. This refers only to the two candidate words,
+not to every possible factor word in the infinite monoid. -/
+theorem one_extra_probe_on_two_words :
+    ¬ Function.Injective candidateProduct ∧
+    Function.Injective (fun i : Fin 2 =>
+      (candidateProduct i, probeFour i)) := by
+  constructor
+  · exact candidate_product_not_injective
+  · intro i j h
+    exact probe_four_injective (congrArg Prod.snd h)
+
 end LinearInputGeneratedNonUnique
