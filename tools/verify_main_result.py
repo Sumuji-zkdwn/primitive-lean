@@ -40,6 +40,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/ChebyshevRatFuncDegrees.inc', 'LinearInputChebyshevNext'),
     ('linear_input/lean_check/ChebyshevDegreeTower.inc', 'LinearInputChebyshevTower'),
     ('linear_input/lean_check/ChebyshevSplittingField.inc', 'LinearInputChebyshevSplitting'),
+    ('linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc', 'LinearInputChebyshevAutomorphisms'),
     ('linear_input/lean_check/VariablePairGaloisBridge.inc', 'LinearInputVariablePairGalois'),
     ('linear_input/lean_check/F16Holonomy.inc', 'LinearInputF16Holonomy'),
     ('linear_input/lean_check/F16RecoverySpectrum.inc', 'LinearInputF16Recovery'),

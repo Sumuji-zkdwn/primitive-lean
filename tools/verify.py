@@ -122,6 +122,7 @@ def verify_lean(rebuild):
         'ChebyshevRatFuncDegrees': 'Exact degrees of all cubic Chebyshev iterates and nonconstancy of the square of the generic rational-function coordinate',
         'ChebyshevDegreeTower': 'Exact Bezout coprimality, reduced rational-function numerator and denominator, degree 2m of the generic quotient and half-normalized Joukowski parameter',
         'ChebyshevSplittingField': 'The generic Chebyshev polynomial over C(t) has C(X) as its actual splitting field, using distinct roots and radical reconstruction',
+        'ChebyshevGaloisAutomorphisms': 'Base-field rotation and inversion automorphisms for the ternary Chebyshev model, the dihedral relations, and an injective representation; not yet a full Galois group equivalence',
         'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
         'F16Holonomy': 'Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification',
         'F16RecoverySpectrum': 'Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input',
