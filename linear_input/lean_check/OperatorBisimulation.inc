@@ -202,10 +202,10 @@ theorem symmetry_invisible_all_words {α ω ι : Type*}
     (hK : ∀ x, K (M x) = K x)
     (hM : ∀ i x, M (step i x) = step i (M x)) (x : α) :
     WordEq K step (M x) x := by
-  exact bisimulation_sub_wordEq K step
-    (fun a b => M a = b)
-    (symmetry_graph_bisimulation K step M hK hM)
-    (by rfl)
+  have hB : Bisimulation K step (fun a b => M b = a) :=
+    converse_bisimulation K step (fun a b => M a = b)
+      (symmetry_graph_bisimulation K step M hK hM)
+  exact bisimulation_sub_wordEq K step (fun a b => M b = a) hB (by rfl)
 
 /-- A bisimulation is stable under any newly named composite operator. -/
 theorem generated_bisimulation {α ω ι κ : Type*}
