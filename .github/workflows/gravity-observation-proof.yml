@@ -1,0 +1,74 @@
+name: Gravity observation moments Lean and full integration
+
+on:
+  push:
+    branches: ['chatgpt/gravity-observation-*']
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/GravityObservation.inc'
+      - 'tools/verify_main_result.py'
+      - 'tools/verify.py'
+      - '.github/workflows/gravity-observation-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact research head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Install elan Lean toolchain
+        shell: bash
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Install pinned mathlib sources and caches
+        working-directory: lean
+        run: lake exe cache get
+      - name: Compile standalone GravityCocycle and GravityObservation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('linear_input/lean_check')
+          code=(root/'GravityCocycle.inc').read_text()+'\n'+(root/'GravityObservation.inc').read_text()
+          names=re.findall(r'(?m)^theorem\s+([a-zA-Z0-9_]+)',(root/'GravityObservation.inc').read_text())
+          assert len(names)>=10
+          audits='\n'.join('#print axioms LinearInputGravityObservation.'+name for name in names)
+          (root/'GravityObservationStandalone.lean').write_text('import Mathlib\n\n'+code+'\n'+audits+'\n')
+          print('Gravity observation theorem audits:',len(names))
+          PY
+          (
+            cd lean
+            lake env lean --trust=0 ../linear_input/lean_check/GravityObservationStandalone.lean > ../gravity-observation.log 2>&1
+          ) || { cat gravity-observation.log; exit 1; }
+          if grep -E 'warning:|error:' gravity-observation.log; then
+            cat gravity-observation.log
+            exit 1
+          fi
+          echo "Standalone proof and declarations compiled without warnings"
+      - name: Full source and proof integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f linear_input/lean_check/GravityObservationStandalone.lean
+          python -m pip install --disable-pip-version-check 'pytest==9.2.0' 'numpy==2.5.4'
+          python -B -X utf8 tools/verify.py --integration-only
+      - name: Preserve complete evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gravity-observation-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            gravity-observation.log
+            verification/
+            linear_input/lean_results.json
