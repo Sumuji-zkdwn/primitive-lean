@@ -58,6 +58,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/HannaJetCorrection.inc', 'LinearInputHannaJets'),
     ('linear_input/lean_check/FutureObservations.inc', 'LinearInputFutureObservation'),
     ('linear_input/lean_check/FutureFiniteHorizon.inc', 'LinearInputFutureHorizon'),
+    ('linear_input/lean_check/OperatorWordObservations.inc', 'LinearInputOperatorWords'),
     ('linear_input/lean_check/EWFSFenchel.inc', 'LinearInputEWFSDual'),
     ('linear_input/lean_check/WFSCanonicalLift.inc', 'LinearInputWFSCanonical'),
     ('linear_input/lean_check/EWFSFutureBridge.inc', 'LinearInputEWFSFuture'),
