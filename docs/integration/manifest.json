@@ -2120,15 +2120,13 @@
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
       "sha256": "37ab3345af1d9a91bf2751d314b0e6fc11e1df65135ec1e2881d2418e2e268fc",
-      "original_sha256": "af03518a4fa4974e2ee41df0de23c838976d07461227485c182ea0e67deec560",
+      "original_sha256": "37ab3345af1d9a91bf2751d314b0e6fc11e1df65135ec1e2881d2418e2e268fc",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
       "source_path": "linear_input/lean_check/F16RimRecovery.inc",
       "role": "new_integration_extension",
-      "byte_identical": false,
-      "permitted_adaptations": [
-        "Lean proof refined after integrated CI feedback"
-      ],
+      "byte_identical": true,
+      "permitted_adaptations": [],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }
   ],
