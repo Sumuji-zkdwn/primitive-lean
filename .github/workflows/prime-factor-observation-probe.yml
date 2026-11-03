@@ -42,12 +42,15 @@ jobs:
               Path('linear_input/lean_check/TernaryZeroCesaro.inc').read_text(),
               Path('linear_input/lean_check/FiniteObservationSeparation.inc').read_text(),
           ]
+          extra_commands = [
+              '#print axioms LinearInputPrimeFactorObservation.product_kernel_eq_bag_kernel',
+              '#print axioms LinearInputPrimeFactorObservation.canonical_product_injective',
+              '#print axioms LinearInputPrimeFactorObservation.minimal_ordered_observation_count',
+          ]
           Path('lean/PrimeFactorObservationProbe.lean').write_text(
-              'import Mathlib\n\n' + '\n\n'.join(earlier + [source]) + '''
-#print axioms LinearInputPrimeFactorObservation.product_kernel_eq_bag_kernel
-#print axioms LinearInputPrimeFactorObservation.canonical_product_injective
-#print axioms LinearInputPrimeFactorObservation.minimal_ordered_observation_count
-''', encoding='utf-8')
+              'import Mathlib\n\n' + '\n\n'.join(earlier + [source])
+              + '\n' + '\n'.join(extra_commands) + '\n',
+              encoding='utf-8')
           PY
       - name: Compile standalone Lean proofs in kernel mode
         working-directory: lean
