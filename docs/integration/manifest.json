@@ -1022,6 +1022,18 @@
       "authoring_commit": "5ef286fa9127ada5cfc59788816c9518b74f7c11"
     },
     {
+      "path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "sha256": "000000000000000000000000000000004ca8b1e6de39b40c97d6951270d585b1",
+      "original_sha256": "000000000000000000000000000000004ca8b1e6de39b40c97d6951270d585b1",
+      "source_pr": 46,
+      "source_commit": "374722f9a20a3d698571f08ef6240e6e9360c0bb",
+      "source_path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "374722f9a20a3d698571f08ef6240e6e9360c0bb"
+    },
+    {
       "path": "linear_input/lean_check/BranchFibers.inc",
       "sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
       "original_sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
