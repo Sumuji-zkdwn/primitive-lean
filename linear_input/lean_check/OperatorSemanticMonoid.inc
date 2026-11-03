@@ -270,4 +270,83 @@ theorem onState_constant {α ω ι : Type*}
   induction q using Quotient.inductionOn with
   | _ x => rfl
 
+/-- Every predictive quotient state has an original-state representative. -/
+theorem encode_surjective {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) :
+    Function.Surjective (encode K step) := by
+  intro q
+  induction q using Quotient.inductionOn with
+  | _ x => exact ⟨x, rfl⟩
+
+/-- Choose one original state representing any predictive quotient state. -/
+noncomputable def representative {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α)
+    (q : State K step) : α :=
+  Classical.choose (encode_surjective K step q)
+
+theorem encode_representative {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α)
+    (q : State K step) :
+    encode K step (representative K step q) = q :=
+  Classical.choose_spec (encode_surjective K step q)
+
+/-- Every desired endomorphism on minimal predictive states has a raw
+state transformer implementation, by choosing representatives. -/
+noncomputable def realize {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α)
+    (F : State K step → State K step) : α → α :=
+  fun x => representative K step (F (encode K step x))
+
+theorem realize_compatible {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α)
+    (F : State K step → State K step) :
+    Compatible K step (realize K step F) := by
+  intro x y hxy
+  apply (encode_eq_iff K step _ _).1
+  change encode K step (representative K step (F (encode K step x))) =
+    encode K step (representative K step (F (encode K step y)))
+  rw [encode_representative, encode_representative]
+  exact congrArg F ((encode_eq_iff K step x y).2 hxy)
+
+/-- The constructed raw transformer is an element of the semantic monoid. -/
+noncomputable def realizedOp {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α)
+    (F : State K step → State K step) : Op K step :=
+  ⟨realize K step F, realize_compatible K step F⟩
+
+/-- The constructed operator realizes *exactly* the specified quotient map. -/
+theorem realizedOp_exact {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α)
+    (F : State K step → State K step) :
+    onState K step (realizedOp K step F) = F := by
+  funext q
+  induction q using Quotient.inductionOn with
+  | _ x =>
+      change encode K step (representative K step
+        (F (encode K step x))) = F (encode K step x)
+      exact encode_representative K step _
+
+/-- Every endomorphism of the predictive state space is implementable
+by some semantically compatible original-state operator. -/
+theorem onState_surjective {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) :
+    Function.Surjective (onState K step) := by
+  intro F
+  exact ⟨realizedOp K step F, realizedOp_exact K step F⟩
+
+/-- The faithful representation of effective operators is also onto. -/
+theorem evaluate_surjective {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) :
+    Function.Surjective (evaluate K step) := by
+  intro F
+  refine ⟨Quotient.mk (obsSetoid K step) (realizedOp K step F), ?_⟩
+  exact realizedOp_exact K step F
+
+/-- Effective operators correspond bijectively to *all* self-maps
+of predictive quotient states. -/
+theorem evaluate_bijective {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) :
+    Function.Bijective (evaluate K step) :=
+  ⟨evaluate_injective K step, evaluate_surjective K step⟩
+
 end LinearInputOperatorSemanticMonoid
