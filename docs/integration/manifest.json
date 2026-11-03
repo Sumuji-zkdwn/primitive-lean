@@ -2116,6 +2116,18 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/F16RimRecovery.inc",
+      "sha256": "af03518a4fa4974e2ee41df0de23c838976d07461227485c182ea0e67deec560",
+      "original_sha256": "af03518a4fa4974e2ee41df0de23c838976d07461227485c182ea0e67deec560",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/F16RimRecovery.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": null
     }
   ],
   "construction_errors": []
