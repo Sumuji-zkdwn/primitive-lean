@@ -1,7 +1,7 @@
 """Check additive proof sources against the unchanged joint assembly.
 
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
-MainResult.lean consists of the exact verified All.lean followed by the exact
+MainResult.lean prepends the prime-factor Mathlib import, then the exact verified All.lean and
 registered supplements, with all added declarations axiom-audited.
 """
 from pathlib import Path
@@ -72,6 +72,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/FiniteObservationSeparation.inc', 'LinearInputFiniteObservation'),
     ('linear_input/lean_check/DecompositionIdentification.inc', 'LinearInputDecompositionIdentification'),
     ('linear_input/lean_check/DecompositionF0Bridge.inc', 'LinearInputDecompositionF0Bridge'),
+    ('linear_input/lean_check/PrimeFactorIdentification.inc', 'LinearInputPrimeFactorIdentification'),
+    ('linear_input/lean_check/PrimeSplitNormalForm.inc', 'LinearInputPrimeSplitNormalForm'),
 )
 
 
@@ -107,7 +109,7 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="Exact verified All.lean and each supplemental source in registered order, separated by newlines, followed by public axiom audits.",
+        assembly="Pinned Mathlib.Data.PNat.Factors import, then exact verified All.lean and each supplemental source in registered order, followed by public axiom audits.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
@@ -181,8 +183,11 @@ def main():
         if report["forbidden_tokens"]:
             raise ValueError("Forbidden proof tokens in the supplemental source")
 
-        # Preserve every input byte for byte, including its original newlines.
-        assembled = (b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
+        # Preserve the original All.lean and every supplement byte for byte.
+        # The new prime-factor theorem group explicitly needs this Mathlib
+        # module, which the original All.lean imports do not include.
+        assembled = (b"import Mathlib.Data.PNat.Factors\n"
+            + b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)
