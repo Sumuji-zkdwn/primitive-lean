@@ -47,7 +47,11 @@ theorem reflectionForget_idempotent :
 /-- Reversing the labels/axis of a symmetric pair does not affect the probe. -/
 theorem pairProbe_even (R a : ℝ) :
     pairProbe R (-a) = pairProbe R a := by
-  simp only [pairProbe, sub_neg_eq_add, add_neg_eq_sub]
+  change 1 / (R - (-a)) + 1 / (R + (-a)) =
+    1 / (R - a) + 1 / (R + a)
+  have hplus : R - (-a) = R + a := by ring
+  have hminus : R + (-a) = R - a := by ring
+  rw [hplus, hminus]
   ring
 
 /-- The chosen gravity observer is compatible with the F0 reflection quotient. -/
