@@ -139,14 +139,28 @@ theorem linearAuto_fixes_parameter (m : ℕ) (hm : m ≠ 0) (ζ : ℂ)
   have hpow : (RatFunc.C ζ * (RatFunc.X : E)) ^ m =
       (RatFunc.X : E) ^ m := by
     rw [mul_pow]
-    simp [hζ.pow_eq_one]
-  simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow] <;> ring
+    have hCpow : (RatFunc.C ζ) ^ m = 1 := by
+      rw [← map_pow]
+      rw [hζ.pow_eq_one]
+      simp
+    rw [hCpow]
+    simp
+  have htwo :
+      linearAuto ζ (hζ.ne_zero hm) (2 : E) = 2 := by
+    change linearAuto ζ (hζ.ne_zero hm)
+        (algebraMap ℂ E (2 : ℂ)) = algebraMap ℂ E (2 : ℂ)
+    exact (linearAuto ζ (hζ.ne_zero hm)).commutes _
+  simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow, htwo] <;> ring
 
 theorem inversionAuto_fixes_parameter (m : ℕ) :
     inversionAuto (genericParameter m) = genericParameter m := by
   rw [genericParameter_eq_joukowski]
   unfold LinearInputChebyshevDescent.joukowski
-  simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow] <;> ring
+  have htwo : inversionAuto (2 : E) = 2 := by
+    change inversionAuto (algebraMap ℂ E (2 : ℂ)) =
+      algebraMap ℂ E (2 : ℂ)
+    exact inversionAuto.commutes _
+  simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow, htwo] <;> ring
 
 /-- A base-field generator fixed by a ℂ-automorphism forces all of C(t) fixed. -/
 theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
@@ -157,14 +171,14 @@ theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
       (IntermediateField.adjoin ℂ ({genericParameter m} : Set E)) →
       ψ y = y := by
     intro y hy
-    refine IntermediateField.adjoin_induction ?_ ?_ ?_ ?_ ?_ hy
+    refine IntermediateField.adjoin_induction
+      (p := fun y _ => ψ y = y) ?_ ?_ ?_ ?_ ?_ hy
     · intro y hy
       have hy' : y = genericParameter m := by simpa using hy
       subst y
       exact hψ
     · intro c
-      change φ (RatFunc.C c) = ψ (RatFunc.C c)
-      exact (φ.commutes c).trans (ψ.commutes c).symm
+      simp
     · intro y z hy hz ihy ihz
       simpa [map_add, ihy, ihz]
     · intro y hy ih
@@ -270,8 +284,6 @@ theorem rotation_symm_X (k : ℕ) (ζ : ℂ)
     (rotation k ζ hζ)⁻¹ (RatFunc.X : E) =
       RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
   have hζ0 : ζ ≠ 0 := hζ.ne_zero (by positivity)
-  have hC : RatFunc.C ζ ≠ (0 : E) := by
-    simpa using (RatFunc.C (K := ℂ)).injective.ne hζ0
   have hpre : rotation k ζ hζ (RatFunc.C (ζ⁻¹) * (RatFunc.X : E)) =
       (RatFunc.X : E) := by
     rw [map_mul, baseAuto_C, rotation_X]
@@ -280,11 +292,8 @@ theorem rotation_symm_X (k : ℕ) (ζ : ℂ)
           (RatFunc.C (ζ⁻¹) * RatFunc.C ζ) * (RatFunc.X : E) := by ring
       _ = RatFunc.C (ζ⁻¹ * ζ) * (RatFunc.X : E) := by rw [← map_mul]
       _ = (RatFunc.X : E) := by simp [inv_mul_cancel₀ hζ0]
-  calc
-    (rotation k ζ hζ)⁻¹ (RatFunc.X : E) =
-        (rotation k ζ hζ)⁻¹
-          (rotation k ζ hζ (RatFunc.C (ζ⁻¹) * (RatFunc.X : E))) := by rw [hpre]
-    _ = RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by simp
+  apply (rotation k ζ hζ).injective
+  rw [AlgEquiv.apply_symm_apply, hpre]
 
 theorem reflection_conjugates_rotation (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
@@ -295,7 +304,7 @@ theorem reflection_conjugates_rotation (k : ℕ) (ζ : ℂ)
       (reflection k * rotation k ζ hζ * reflection k) (RatFunc.X : E) =
         RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
     simp [AlgEquiv.mul_apply, reflection_X, rotation_X, map_inv₀,
-      map_mul, mul_inv_rev, RatFunc.X_ne_zero] <;> ring
+      map_mul, mul_inv_rev] <;> ring
   rw [hleft, rotation_symm_X]
 
 /-- Exponents in ZMod act on a rotation with its finite order. -/
@@ -335,7 +344,12 @@ theorem conjugate_pow_of_involution {G : Type*} [Group G] (s r : G)
       map_one' := by simpa using hs
       map_mul' := by
         intro x y
-        simp [mul_assoc, hs] }
+        calc
+          s * (x * y) * s = s * x * y * s := by group
+          _ = s * x * (s * s) * (y * s) := by
+            rw [hs]
+            group
+          _ = (s * x * s) * (s * y * s) := by group }
   simpa [f, hsrs] using (map_pow f r n)
 
 /-- Regard the rotation powers as indexed by ZMod (3^k). -/
