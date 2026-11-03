@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
-      "sha256": "0452f0d504e9f74595882b05a41cab5a311d7f2c90497268c552af5728747e37",
+      "sha256": "4e3ef77f7724c0d6f571497361bb6bc2a84d520067e5575dc938f103d4e95b7d",
       "original_sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
@@ -2136,7 +2136,8 @@
         "Added phase-specific closed forms so the decoder does not simplify higher iterates with a lower-phase rule.",
         "Removed no-progress simplifier tails from finite observation-row proofs and made the three-phase witness channel-pair rewrite explicit.",
         "Replaced phase-zero row rewrites with a channel-indexed checker-output formula proved from the four exact observation rows.",
-        "Removed vacuous tactic tails and proved the three-phase collision componentwise to avoid uncontrolled simplification."
+        "Removed vacuous tactic tails and proved the three-phase collision componentwise to avoid uncontrolled simplification.",
+        "Restored explicit algebraic normalization for matrix action and checker rows, removed an unused tactic, and resolved finite-index congruence goals in the decoder."
       ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }
