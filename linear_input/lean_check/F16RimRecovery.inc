@@ -404,7 +404,8 @@ theorem f16_decode_four_trace (v : State) :
       f16PartnerCode, f16Trace4_phase0, f16Trace4_phase1,
       f16Trace4_phase2, f16Trace4_phase3, f16Observe_step,
       f16Observe_step2, f16Observe_step3] <;>
-    norm_num [f16ChannelLow, f16ChannelHigh, f16SignR, f16Sign,
+    norm_num [f16ChannelLow, f16ChannelHigh, f16Partner_eq_code,
+      f16PartnerCode, f16SignR, f16Sign,
       f16Observe_checker_row0, f16Observe_checker_row1,
       f16Observe_checker_row2, f16Observe_checker_row3,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
