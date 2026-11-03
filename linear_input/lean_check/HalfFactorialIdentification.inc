@@ -66,15 +66,15 @@ theorem value_as_prime_powers (w : Counts) :
 theorem factorization_two (a b : ℕ) :
     ((2 : ℕ) ^ a * 3 ^ b).factorization 2 = a := by
   rw [Nat.factorization_mul (by positivity) (by positivity)]
-  rw [(show Nat.Prime 2 by norm_num).factorization_pow,
-      (show Nat.Prime 3 by norm_num).factorization_pow]
+  rw [(show Nat.Prime 2 by decide).factorization_pow,
+      (show Nat.Prime 3 by decide).factorization_pow]
   simp
 
 theorem factorization_three (a b : ℕ) :
     ((2 : ℕ) ^ a * 3 ^ b).factorization 3 = b := by
   rw [Nat.factorization_mul (by positivity) (by positivity)]
-  rw [(show Nat.Prime 2 by norm_num).factorization_pow,
-      (show Nat.Prime 3 by norm_num).factorization_pow]
+  rw [(show Nat.Prime 2 by decide).factorization_pow,
+      (show Nat.Prime 3 by decide).factorization_pow]
   simp
 
 theorem value_factorization_two (w : Counts) :
