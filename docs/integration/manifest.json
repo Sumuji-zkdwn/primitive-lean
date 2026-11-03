@@ -1035,10 +1035,10 @@
     },
     {
       "path": "linear_input/lean_check/AtomicHalfFactorial.inc",
-      "sha256": "b8bcdc7ad375aba37ad53d5992cc35ed65d1431555a3a609f265cacbd958ff81",
-      "original_sha256": "b8bcdc7ad375aba37ad53d5992cc35ed65d1431555a3a609f265cacbd958ff81",
+      "sha256": "c78a8a73bc5b4ab028c27a15daf7d9576c587ef10c104d604e3ebb5a8cd3bbcb",
+      "original_sha256": "c78a8a73bc5b4ab028c27a15daf7d9576c587ef10c104d604e3ebb5a8cd3bbcb",
       "source_pr": 46,
-      "source_commit": "3e89173036d77340eac9f35bf799e03344203d11",
+      "source_commit": "840760a19b31ae40d11b8ca0112b0117e98c3820",
       "source_path": "linear_input/lean_check/AtomicHalfFactorial.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
