@@ -2119,7 +2119,7 @@
     },
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
-      "sha256": "aa0ba857e7c3bc9b5218ab76cbef5b2aa19ce07cfdbbeebede44eba56e06bcee",
+      "sha256": "526691e8489f68b1cceba6017f65c5293827865e48d71312649082305f159551",
       "original_sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
@@ -2130,7 +2130,8 @@
         "Refined finite F16 sign-table normalization from the exact Lean table.",
         "Added the exact checker output rows and completed the 16-dimensional decoder and phase-collision proofs.",
         "Replaced fragile witness simplification with explicit finite lemmas for the three-phase collision.",
-        "Added an explicit theorem identifying the decoder trace with four iterations of the Lean matrix U = Aᵀ C."
+        "Added an explicit theorem identifying the decoder trace with four iterations of the Lean matrix U = Aᵀ C.",
+        "Separated the four exact observation-row proofs from phase simplification so the decoder uses the certified U, U², and U³ formulas."
       ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }

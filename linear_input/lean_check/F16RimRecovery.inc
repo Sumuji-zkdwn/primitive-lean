@@ -160,15 +160,37 @@ def f16Observe (v : State) : Channel -> Real :=
       f16SignR (f16ChannelLow i) *
         v (f16Partner (f16ChannelLow i))) / 2
 
-/-- The four rows are exactly the scalar matrix O in the rational checker. -/
-theorem f16Observe_checker_rows (v : State) :
-    (f16Observe v 0, f16Observe v 1, f16Observe v 2, f16Observe v 3) =
-      ((v 9 - v 13) / 2, (v 12 - v 8) / 2,
-       (v 11 + v 15) / 2, (v 10 - v 14) / 2) := by
+/-- Row zero of the scalar matrix O in the rational checker. -/
+theorem f16Observe_checker_row0 (v : State) :
+    f16Observe v 0 = (v 9 - v 13) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
     LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
-    ring
+    simp <;> ring
+
+/-- Row one of the scalar matrix O in the rational checker. -/
+theorem f16Observe_checker_row1 (v : State) :
+    f16Observe v 1 = (v 12 - v 8) / 2 := by
+  norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
+    f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
+    simp <;> ring
+
+/-- Row two of the scalar matrix O in the rational checker. -/
+theorem f16Observe_checker_row2 (v : State) :
+    f16Observe v 2 = (v 11 + v 15) / 2 := by
+  norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
+    f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
+    simp <;> ring
+
+/-- Row three of the scalar matrix O in the rational checker. -/
+theorem f16Observe_checker_row3 (v : State) :
+    f16Observe v 3 = (v 10 - v 14) / 2 := by
+  norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
+    f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
+    simp <;> ring
 
 theorem f16Sign_self_mul_int (i : Fin 16) :
     f16Sign i * f16Sign i = 1 := by
@@ -378,11 +400,14 @@ theorem f16_decode_four_trace (v : State) :
     f16Decode (f16Trace4 v) = v := by
   funext j
   fin_cases j <;>
-    norm_num [f16Decode, f16ChannelOf, f16Partner_eq_code,
-      f16PartnerCode, f16Observe, f16ChannelLow, f16ChannelHigh,
-      f16SignR, f16Sign,
-      LinearInputF16Holonomy.eps,
-      LinearInputF16Holonomy.epsTable] <;>
+    simp only [f16Decode, f16ChannelOf, f16Partner_eq_code,
+      f16PartnerCode, f16Trace4_phase0, f16Trace4_phase1,
+      f16Trace4_phase2, f16Trace4_phase3, f16Observe_step,
+      f16Observe_step2, f16Observe_step3] <;>
+    norm_num [f16ChannelLow, f16ChannelHigh, f16SignR, f16Sign,
+      f16Observe_checker_row0, f16Observe_checker_row1,
+      f16Observe_checker_row2, f16Observe_checker_row3,
+      LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
     field_simp <;> ring
 
 /-- The same decoder identity for four successive applications of U itself. -/
