@@ -447,7 +447,7 @@ theorem f16_decode_four_trace (v : State) :
     | (apply congrArg (fun x : Real => x * 2)
        apply congrArg v
        apply Fin.ext
-       rfl)
+       decide)
 
 /-- The same decoder identity for four successive applications of U itself. -/
 theorem f16_decode_original_matrix_trace (v : State) :
