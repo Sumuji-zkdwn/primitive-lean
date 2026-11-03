@@ -65,11 +65,11 @@ jobs:
           from pathlib import Path
           import re
           source=Path('linear_input/lean_check/GravityObservations.inc').read_text()
-          names=re.findall(r'(?m)^theorem\\s+([a-zA-Z0-9_]+)',source)
+          names=re.findall(r'(?m)^theorem\s+([a-zA-Z0-9_]+)',source)
           assert len(names)>=12, names
-          prelude = 'import Mathlib\\n\\nnamespace LinearInputF0\\ndef Idempotent {α : Type*} (K : α → α) : Prop := ∀ x, K (K x) = K x\\nend LinearInputF0\\n\\n'
-          body=prelude+source+'\\n'+'\\n'.join(
-            '#print axioms LinearInputGravityObservations.'+n for n in names)+'\\n'
+          prelude = 'import Mathlib\n\nnamespace LinearInputF0\ndef Idempotent {α : Type*} (K : α → α) : Prop := ∀ x, K (K x) = K x\nend LinearInputF0\n\n'
+          body=prelude+source+'\n'+'\n'.join(
+            '#print axioms LinearInputGravityObservations.'+n for n in names)+'\n'
           Path('linear_input/lean_check/GravityObservationsStandalone.lean').write_text(body)
           print('Observation theorems to audit:',len(names))
           PY
