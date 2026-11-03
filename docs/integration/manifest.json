@@ -2116,6 +2116,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ViscousRewrite.inc",
+      "sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f",
+      "original_sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f",
+      "source_pr": 37,
+      "source_commit": "a434faa7dafe97264fa933456a8faed497c726cd",
+      "source_path": "linear_input/lean_check/ViscousRewrite.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
