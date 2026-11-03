@@ -2138,6 +2138,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/GravityObserver.inc",
+      "sha256": "813921657842098adef57b279adfa6c6c4810bcd3b251d2f376e8fe45af5c409",
+      "original_sha256": "813921657842098adef57b279adfa6c6c4810bcd3b251d2f376e8fe45af5c409",
+      "source_pr": 43,
+      "source_commit": "74dbbe2312c32c76deb2d9816e06cb671a4b567b",
+      "source_path": "linear_input/lean_check/GravityObserver.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": []
