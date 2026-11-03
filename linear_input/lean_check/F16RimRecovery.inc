@@ -165,7 +165,8 @@ theorem f16Observe_checker_row0 (v : State) :
     f16Observe v 0 = (v 9 - v 13) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;> ring
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
+  ring
 
 /-- Row one of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row1 (v : State) :
@@ -179,14 +180,16 @@ theorem f16Observe_checker_row2 (v : State) :
     f16Observe v 2 = (v 11 + v 15) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;> ring
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
+  ring
 
 /-- Row three of the scalar matrix O in the rational checker. -/
 theorem f16Observe_checker_row3 (v : State) :
     f16Observe v 3 = (v 10 - v 14) / 2 := by
   norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
     f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
-    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;> ring
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
+  ring
 
 /-- The exact four-row output formula from the checker. -/
 def f16ObserveChecker (v : State) (ch : Channel) : Real :=
@@ -439,7 +442,7 @@ theorem f16_decode_four_trace (v : State) :
       f16PartnerCode, f16SignR, f16Sign,
       LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
     field_simp <;>
-    first | ring | (congr 1; congr 1; apply Fin.ext; rfl)
+    first | ring | exact congrArg (fun k : Fin 16 => v k * 2) (Fin.ext rfl)
 
 /-- The same decoder identity for four successive applications of U itself. -/
 theorem f16_decode_original_matrix_trace (v : State) :
