@@ -59,6 +59,50 @@ def canonicalProduct (x : CanonicalPair) : ℕ := pairProduct x.1
 theorem canonical_product_injective : Function.Injective canonicalProduct := by
   decide
 
+/-- All three coded values are actually prime. -/
+theorem primeOf_is_prime (i : Fin 3) : Nat.Prime (primeOf i) := by
+  fin_cases i <;> norm_num [primeOf]
+
+/-- There are exactly six canonical unordered factor pairs. -/
+theorem canonical_pair_count : Fintype.card CanonicalPair = 6 := by decide
+
+/-- Two distinguishable unordered multisets, written as canonical pairs. -/
+def canonical22 : CanonicalPair := ⟨(0, 0), by decide⟩
+def canonical33 : CanonicalPair := ⟨(1, 1), by decide⟩
+
+theorem canonical22_ne_canonical33 : canonical22 ≠ canonical33 := by decide
+
+/-- On unordered classes, the only permitted probe is product. -/
+def canonicalObservations (choices : List Unit) (x : CanonicalPair) : List ℕ :=
+  choices.map (fun _ => canonicalProduct x)
+
+theorem canonical_empty_not_injective :
+    ¬ Function.Injective (canonicalObservations []) := by
+  intro h
+  exact canonical22_ne_canonical33 (h rfl)
+
+theorem canonical_single_injective :
+    Function.Injective (canonicalObservations [()]) := by
+  intro x y h
+  apply canonical_product_injective
+  simpa [canonicalObservations] using h
+
+/-- Unordered identification needs precisely one observation in the
+    singleton library containing the product probe. -/
+theorem minimal_unordered_observation_count :
+    (∃ choices : List Unit, choices.length = 1 ∧
+      Function.Injective (canonicalObservations choices)) ∧
+    (∀ choices : List Unit, choices.length < 1 →
+      ¬ Function.Injective (canonicalObservations choices)) := by
+  constructor
+  · exact ⟨[()], by decide, canonical_single_injective⟩
+  · intro choices hshort
+    cases choices with
+    | nil => exact canonical_empty_not_injective
+    | cons i rest =>
+        simp only [List.length_cons] at hshort
+        omega
+
 /-- The product alone is not injective on ordered factor sequences. -/
 theorem product_not_injective : ¬ Function.Injective pairProduct := by
   intro h
