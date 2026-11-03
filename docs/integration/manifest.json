@@ -2237,6 +2237,28 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
+      "sha256": "dd7e2557682a25d308e9eacb286bb2f5958b0514faf67d2073c55f5e91360447",
+      "original_sha256": "dd7e2557682a25d308e9eacb286bb2f5958b0514faf67d2073c55f5e91360447",
+      "source_pr": null,
+      "source_commit": "5a5397593bebb7fddc6c5c2b92e46beb2ae6a69a",
+      "source_path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+      "sha256": "8885ae5a13addbcf1ec88e09fb10cee1cf72e4048bc8f26dfb4cadecdc528486",
+      "original_sha256": "8885ae5a13addbcf1ec88e09fb10cee1cf72e4048bc8f26dfb4cadecdc528486",
+      "source_pr": null,
+      "source_commit": "5e27658a7163519bf8200db31493b52a3d537905",
+      "source_path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2306,6 +2328,18 @@
       "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
       "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
       "note": "Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
+      "source_commit": "5a5397593bebb7fddc6c5c2b92e46beb2ae6a69a",
+      "note": "Faithful semantic operator monoid, quotient congruence and constructive full transformation monoid on predictive states"
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+      "source_commit": "5e27658a7163519bf8200db31493b52a3d537905",
+      "note": "Finite three-state compatible-map cardinalities and non-generatable constant witness"
     }
   ]
 }
