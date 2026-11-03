@@ -156,6 +156,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'AutonomyCycle00001': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

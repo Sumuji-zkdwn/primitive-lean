@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "cycles": [
+    {
+      "cycle": 1,
+      "name": "AutonomyCycle00001",
+      "status": "verified",
+      "model": {
+        "states": 3,
+        "image_of_zero": 0,
+        "image_of_one": 2
+      },
+      "source": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "sha256": "7c2e4d06913dc6b3971644421e016ff447c6e179297162ceff193f635883d826",
+      "parent_commit": "1f24bc3d082ff64d6972401e96274d5c28586807",
+      "claimed_theorems": 5,
+      "claimed_definitions": 3,
+      "created_utc": "2026-11-03T20:21:58.917705+00:00",
+      "verified_utc": "2026-11-03T20:35:05.938660+00:00",
+      "total_theorem_count": 1344,
+      "total_declaration_count": 1732,
+      "verification_kind": "fresh source audit, Lean trust=0 and axiom audit"
+    }
+  ]
+}

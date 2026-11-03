@@ -2171,6 +2171,23 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "sha256": "7c2e4d06913dc6b3971644421e016ff447c6e179297162ceff193f635883d826",
+      "original_sha256": "7c2e4d06913dc6b3971644421e016ff447c6e179297162ceff193f635883d826",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "generator": "tools/autonomy/grow.py",
+        "cycle": 1,
+        "parent_commit": "1f24bc3d082ff64d6972401e96274d5c28586807",
+        "description": "Generated in CI; Git commit follows validation"
+      }
     }
   ],
   "construction_errors": [],
@@ -2204,6 +2221,12 @@
       "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
       "source_commit": "533919495f9f0d5960a9814e184f12f2424452cd",
       "note": "Semantic operator closure and conservative but nonword-generatable primitive. Historical baseline preserved."
+    },
+    {
+      "date": "2026-11-03",
+      "path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "source_commit": null,
+      "note": "Generated finite witness; exact source SHA256 in files; commit only after successful Lean and source audit."
     }
   ]
 }
