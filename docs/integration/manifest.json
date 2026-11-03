@@ -2170,7 +2170,7 @@
     },
     {
       "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
-      "sha256": "3828ed6d50b3641a3bbbe1092f1e5403aac328e6fdf08a7b7f5d06d29a687305",
+      "sha256": "0f3b432ac05a29df70ce01e74b4f31810ed6e0b3abd6e86991816b3223712b5d",
       "source_pr": 31,
       "source_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
       "source_path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
@@ -2178,13 +2178,14 @@
       "byte_identical": false,
       "permitted_adaptations": [
         "Correct the explicit generation and transcendence rewrites for the X↦cX and X↦X⁻¹ substitutions.",
-        "Make the two automorphisms' invariance of the Joukowski parameter explicit, using the primitive-root power identity.",
-        "Prove base-field fixedness by induction over the intermediate-field adjunction and extensionality from the rational variable.",
+        "Normalize the primitive-root scalar power and explicitly fix the denominator 2 when proving the Joukowski parameter invariant.",
+        "Prove fixedness of the base intermediate field by giving the adjunction induction motive explicitly.",
+        "Prove inverse-rotation action on X by injectivity of the algebra equivalence and its inverse law.",
+        "Prove conjugation on powers using the monoid homomorphism induced by an involution.",
         "Use the pinned DihedralGroup multiplication laws to verify the indexed rotation/reflection homomorphism.",
-        "Prove reflection conjugation on powers via an involutive conjugation homomorphism.",
-        "Correct the nonzero scalar cancellation and ZMod value injectivity steps in the faithful-action proof."
+        "Correct nonzero scalar cancellation and ZMod value injectivity in the faithful action proof."
       ],
-      "authoring_commit": "a639829eeddb622d53876b5dc34d65f30b932948",
+      "authoring_commit": "61ce2adb0f9ca07146c211619d50919efebecbef",
       "original_sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc"
     }
   ],
