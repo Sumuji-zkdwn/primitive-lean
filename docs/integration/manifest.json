@@ -411,6 +411,16 @@
       "sha": "34c908f48fd72a5a3b270964895d182c89336bb1",
       "base": "chatgpt/ternary-zero-cesaro-20261103",
       "merged": false
+    },
+    {
+      "number": 39,
+      "title": "Connect prime factorization to minimal observation and normal-form uniqueness",
+      "state": "open",
+      "draft": true,
+      "head": "chatgpt/prime-factor-identification-20261103",
+      "sha": "a0729ab4b3d8661007970afe08fd6de9b16d71af",
+      "base": "chatgpt/decomposition-identification-20261103",
+      "merged": false
     }
   ],
   "files": [
@@ -1704,6 +1714,18 @@
       "role": "baseline_proof_or_configuration",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorIdentification.inc",
+      "sha256": "24e1e4f43483a7b9d9bf7e6caccbea69975eebf5b05b855bb870020cc3a8e67f",
+      "original_sha256": "24e1e4f43483a7b9d9bf7e6caccbea69975eebf5b05b855bb870020cc3a8e67f",
+      "source_pr": 39,
+      "source_commit": "43ed5a5ef4590de6c2c9e79168b6c04c647c82a1",
+      "source_path": "linear_input/lean_check/PrimeFactorIdentification.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "43ed5a5ef4590de6c2c9e79168b6c04c647c82a1"
     },
     {
       "path": "linear_input/lean_check/QuarticClassification.inc",
