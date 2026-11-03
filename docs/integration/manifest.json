@@ -1023,8 +1023,8 @@
     },
     {
       "path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
-      "sha256": "000000000000000000000000000000004ca8b1e6de39b40c97d6951270d585b1",
-      "original_sha256": "000000000000000000000000000000004ca8b1e6de39b40c97d6951270d585b1",
+      "sha256": "056b65d3d5569e608b9d4010f8b4e8fa343ba78a863d18cb7a22f7649cd010bf",
+      "original_sha256": "056b65d3d5569e608b9d4010f8b4e8fa343ba78a863d18cb7a22f7649cd010bf",
       "source_pr": 46,
       "source_commit": "374722f9a20a3d698571f08ef6240e6e9360c0bb",
       "source_path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
