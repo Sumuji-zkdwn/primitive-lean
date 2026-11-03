@@ -421,6 +421,16 @@
       "sha": "a0729ab4b3d8661007970afe08fd6de9b16d71af",
       "base": "chatgpt/decomposition-identification-20261103",
       "merged": false
+    },
+    {
+      "number": 42,
+      "title": "Classify factor identification modulo associates and exhibit a nonunique 4-6-9 monoid",
+      "state": "open",
+      "draft": true,
+      "head": "chatgpt/associates-unique-factorization-20261103",
+      "sha": "3bbdc8a3a0cb79f10903f4a1d983b509e1f0db68",
+      "base": "chatgpt/prime-factor-identification-20261103",
+      "merged": false
     }
   ],
   "files": [
@@ -990,6 +1000,18 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/AssociatesFactorIdentification.inc",
+      "sha256": "b46404e503674bce0e9929d0be17c403387bb36a27558a412bf93ddb593d4620",
+      "original_sha256": "b46404e503674bce0e9929d0be17c403387bb36a27558a412bf93ddb593d4620",
+      "source_pr": 42,
+      "source_path": "linear_input/lean_check/AssociatesFactorIdentification.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "source_commit": "5ef286fa9127ada5cfc59788816c9518b74f7c11",
+      "authoring_commit": "5ef286fa9127ada5cfc59788816c9518b74f7c11"
+    },
+    {
       "path": "linear_input/lean_check/BranchFibers.inc",
       "sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
       "original_sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
@@ -1518,6 +1540,18 @@
       "role": "baseline_proof_or_configuration",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "sha256": "258e9ee6687c15ae34f33a8ea12fb04b8e463f1bb1fdff9107a8b2e254ca5dda",
+      "original_sha256": "258e9ee6687c15ae34f33a8ea12fb04b8e463f1bb1fdff9107a8b2e254ca5dda",
+      "source_pr": 42,
+      "source_path": "linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "source_commit": "f5b7ecf5a14b322d0836b9474e4a366bb4262d86",
+      "authoring_commit": "f5b7ecf5a14b322d0836b9474e4a366bb4262d86"
     },
     {
       "path": "linear_input/lean_check/GlobalConsequences.inc",
