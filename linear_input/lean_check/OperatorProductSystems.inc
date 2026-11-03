@@ -231,8 +231,18 @@ theorem product_encode_eq_iff {α β ω ν ι κ : Type*}
       (productStep step update) (x',y') ↔
       encode K step x = encode K step x' ∧
         encode L update y = encode L update y' := by
-  rw [encode_eq_iff, product_wordEq_iff]
-  exact and_congr (encode_eq_iff K step x x').symm
-    (encode_eq_iff L update y y').symm
+  constructor
+  · intro h
+    have hp : WordEq (fun p : α × β => (K p.1,L p.2))
+        (productStep step update) (x,y) (x',y') :=
+      (encode_eq_iff _ _ _ _).1 h
+    obtain ⟨hK,hL⟩ := (product_wordEq_iff K L step update x x' y y').1 hp
+    exact ⟨(encode_eq_iff K step x x').2 hK,
+      (encode_eq_iff L update y y').2 hL⟩
+  · rintro ⟨hK,hL⟩
+    apply (encode_eq_iff _ _ _ _).2
+    exact (product_wordEq_iff K L step update x x' y y').2
+      ⟨(encode_eq_iff K step x x').1 hK,
+        (encode_eq_iff L update y y').1 hL⟩
 
 end LinearInputOperatorProducts
