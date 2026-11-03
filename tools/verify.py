@@ -151,7 +151,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
-        'F16RimRecovery': 'Lean-identifies the actual F16 relative action A^T C, proves a full 16D four-phase decoder, and exhibits collisions for one, two, and three phases.',
+        'F16RimRecovery': 'Lean-identifies the actual F16 relative action A^T C, proves a full 16D four-phase decoder, and exhibits collisions for one, two, and three phases.'
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
