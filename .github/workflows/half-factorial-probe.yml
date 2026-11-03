@@ -1,0 +1,80 @@
+name: Half-factorial 4-6-9 monoid and minimum one-probe Lean verification
+
+on:
+  push:
+    branches: [chatgpt/half-factorial-probe-20261103]
+    paths:
+      - 'linear_input/lean_check/HalfFactorialIdentification.inc'
+      - 'tools/verify_main_result.py'
+      - 'tools/verify.py'
+      - 'docs/integration/manifest.json'
+      - '.github/workflows/half-factorial-probe.yml'
+  pull_request:
+    branches: [chatgpt/associates-unique-factorization-20261103]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent:
+    name: Verify half-factorial and all-word identification proofs
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prepare standalone proof source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          modules = ['GeneratedNonUniqueMonoid.inc', 'HalfFactorialIdentification.inc']
+          snippets = []
+          for module in modules:
+              src = (Path('linear_input/lean_check') / module).read_text('utf-8')
+              for forbidden in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                  assert forbidden not in src, (module, forbidden)
+              snippets.append(src)
+          Path('lean/HalfFactorialProbe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(snippets), encoding='utf-8')
+          PY
+      - name: Verify Lean trust zero
+        working-directory: lean
+        run: lake env lean --trust=0 HalfFactorialProbe.lean
+
+  integrated:
+    name: Integrated proofs, source provenance and axiom audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest==9.2.0 numpy==2.5.4
+      - uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Verify all retained and new Lean declarations
+        run: python -B -X utf8 tools/verify.py --integration-only
+      - name: Preserve audit logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: half-factorial-verification-${{ github.run_id }}
+          path: |
+            verification/
+            linear_input/lean_results.json
+          if-no-files-found: warn
