@@ -172,7 +172,7 @@ def witnessStep : Bool → Fin 3 → Fin 3 :=
   fun b x => if b then 2 else x
 
 /-- A feedback controller selects the constant action at state 1. -/
-def witnessPolicy (x : Fin 3) : Bool := x = 1
+def witnessPolicy (x : Fin 3) : Bool := decide (x = 1)
 
 theorem witness_respects_readout :
     Respects exampleK witnessStep := by
