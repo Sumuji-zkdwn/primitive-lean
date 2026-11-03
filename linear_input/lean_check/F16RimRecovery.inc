@@ -1,11 +1,11 @@
 /-!
 # Exact four-channel observability for the original F16 relative action
 
-This supplement works from the retained F16 epsilon table and the existing
-16-dimensional matrices.  It identifies the checker matrix A^TC directly,
-proves A^TA = I, and proves a decoder identity for every real 16-state.
-A separate explicit collision shows that one, two, or three phases do not
-suffice.  No block-conjugacy assumption is used.
+This supplement identifies the checker matrix A^T C from the retained F16
+left-multiplication matrices.  It proves the four-phase decoder for every
+real 16-state and gives an explicit state hidden by the first three phases.
+The proof uses the signed-permutation action of the original matrices; it
+assumes no block decomposition into local models.
 -/
 
 noncomputable section
@@ -29,65 +29,104 @@ def f16Base : Matrix (Fin 16) (Fin 16) Real :=
 def f16Slope : Matrix (Fin 16) (Fin 16) Real :=
   LinearInputF16ConstructiveRecovery.slopeMatrix
 
-/-- This is the exact relative matrix constructed by the finite checker:
-    U = A^T C, with A = L3 and C = L10. -/
+/-- The actual relative matrix from the finite checker: U = Aᵀ C,
+    where A is the retained L₃ matrix and C is the retained L₁₀ matrix. -/
 def f16RelativeMatrix : Matrix (Fin 16) (Fin 16) Real :=
   f16Base.transpose * f16Slope
 
-/-- Signed permutation form of the same relative matrix. -/
-def f16ShiftMatrix : Matrix (Fin 16) (Fin 16) Real :=
-  fun row col => if row = f16Partner col then f16SignR col else 0
+/-- A single signed left-basis multiplication matrix. -/
+def f16BasisMatrix (a : Fin 16) : Matrix (Fin 16) (Fin 16) Real :=
+  fun row col =>
+    if LinearInputF16Holonomy.rightIndex a col = row then
+      (LinearInputF16Holonomy.eps a col : Real)
+    else 0
 
-/-- Coordinate action of U on states, obtained from its signed-permutation
-    matrix. -/
+/-- Coordinate action induced by U = L₃ᵀ L₁₀. -/
 def f16Step (v : State) : State :=
   fun i => f16SignR (f16Partner i) * v (f16Partner i)
 
-theorem f16_base_transpose_left_inverse :
-    f16Base.transpose * f16Base = (1 : Matrix (Fin 16) (Fin 16) Real) := by
+theorem f16RightIndex_involutive (a i : Fin 16) :
+    LinearInputF16Holonomy.rightIndex a
+      (LinearInputF16Holonomy.rightIndex a i) = i := by
+  fin_cases a <;> fin_cases i <;> decide
+
+theorem f16Partner_involutive (i : Fin 16) :
+    f16Partner (f16Partner i) = i := by
+  simpa [f16Partner] using
+    f16RightIndex_involutive (9 : Fin 16) i
+
+theorem f16RightIndex_ten_three (i : Fin 16) :
+    LinearInputF16Holonomy.rightIndex (10 : Fin 16)
+      (LinearInputF16Holonomy.rightIndex (3 : Fin 16) i) =
+        f16Partner i := by
+  fin_cases i <;> decide
+
+/-- A row of a signed permutation has exactly one nonzero entry. -/
+theorem f16Basis_mulVec (a : Fin 16) (v : State) (i : Fin 16) :
+    (f16BasisMatrix a).mulVec v i =
+      (LinearInputF16Holonomy.eps a
+        (LinearInputF16Holonomy.rightIndex a i) : Real) *
+        v (LinearInputF16Holonomy.rightIndex a i) := by
+  classical
+  change (∑ j : Fin 16, f16BasisMatrix a i j * v j) = _
+  rw [Finset.sum_eq_single (LinearInputF16Holonomy.rightIndex a i)]
+  · simp [f16BasisMatrix, f16RightIndex_involutive]
+  · intro j _ hne
+    have hzero :
+        LinearInputF16Holonomy.rightIndex a j ≠ i := by
+      intro h
+      apply hne
+      calc
+        j = LinearInputF16Holonomy.rightIndex a
+              (LinearInputF16Holonomy.rightIndex a j) :=
+                (f16RightIndex_involutive a j).symm
+        _ = LinearInputF16Holonomy.rightIndex a i := by rw [h]
+    simp [f16BasisMatrix, hzero]
+  · simp
+
+/-- The transpose sends a coordinate to its signed partner coordinate. -/
+theorem f16Basis_transpose_mulVec (a : Fin 16) (v : State) (i : Fin 16) :
+    (f16BasisMatrix a).transpose.mulVec v i =
+      (LinearInputF16Holonomy.eps a i : Real) *
+        v (LinearInputF16Holonomy.rightIndex a i) := by
+  classical
+  change (∑ j : Fin 16, f16BasisMatrix a j i * v j) = _
+  rw [Finset.sum_eq_single (LinearInputF16Holonomy.rightIndex a i)]
+  · simp [f16BasisMatrix]
+  · intro j _ hne
+    have hzero :
+        LinearInputF16Holonomy.rightIndex a i ≠ j := by
+      intro h
+      exact hne h.symm
+    simp [f16BasisMatrix, hzero]
+  · simp
+
+theorem f16Base_eq_three :
+    f16Base = f16BasisMatrix (3 : Fin 16) := by
   ext i j
-  fin_cases i <;> fin_cases j <;>
-    norm_num [f16Base,
-      LinearInputF16ConstructiveRecovery.baseMatrix,
-      LinearInputF16Determinant.realPencilAll,
-      LinearInputF16Determinant.entryThree,
-      LinearInputF16Holonomy.rightIndex,
-      LinearInputF16Holonomy.eps,
-      LinearInputF16Holonomy.epsTable,
-      Matrix.mul_apply, Matrix.transpose_apply]
+  simp [f16Base, f16BasisMatrix,
+    LinearInputF16ConstructiveRecovery.baseMatrix,
+    LinearInputF16Determinant.realPencilAll,
+    LinearInputF16Determinant.entryThree]
 
-/-- The retained F16 definitions reduce the checker’s A^TC to a signed
-    index-xor-9 permutation. -/
-theorem f16_relative_matrix_eq_shift :
-    f16RelativeMatrix = f16ShiftMatrix := by
+theorem f16Slope_eq_ten :
+    f16Slope = f16BasisMatrix (10 : Fin 16) := by
   ext i j
-  fin_cases i <;> fin_cases j <;>
-    norm_num [f16RelativeMatrix, f16ShiftMatrix, f16SignR, f16Sign,
-      f16Partner, f16Base, f16Slope,
-      LinearInputF16ConstructiveRecovery.baseMatrix,
-      LinearInputF16ConstructiveRecovery.slopeMatrix,
-      LinearInputF16Determinant.realPencilAll,
-      LinearInputF16Determinant.entryThree,
-      LinearInputF16Determinant.entryTen,
-      LinearInputF16Holonomy.rightIndex,
-      LinearInputF16Holonomy.eps,
-      LinearInputF16Holonomy.epsTable,
-      Matrix.mul_apply, Matrix.transpose_apply]
+  simp [f16Slope, f16BasisMatrix,
+    LinearInputF16ConstructiveRecovery.slopeMatrix,
+    LinearInputF16Determinant.entryTen]
 
-theorem f16_shift_mulVec (v : State) :
-    f16ShiftMatrix.mulVec v = f16Step v := by
-  ext i
-  fin_cases i <;>
-    norm_num [Matrix.mulVec, f16ShiftMatrix, f16Step, f16SignR,
-      f16Sign, f16Partner,
-      LinearInputF16Holonomy.rightIndex,
-      LinearInputF16Holonomy.eps,
-      LinearInputF16Holonomy.epsTable]
-
+/-- The checker matrix AᵀC acts as the signed xor-9 permutation built
+    from the original F16 sign table. -/
 theorem f16_relative_action (v : State) :
     f16RelativeMatrix.mulVec v = f16Step v := by
-  rw [f16_relative_matrix_eq_shift]
-  exact f16_shift_mulVec v
+  funext i
+  rw [f16RelativeMatrix, Matrix.mulVec_mulVec,
+    f16Base_eq_three, f16Slope_eq_ten]
+  rw [f16Basis_transpose_mulVec, f16Basis_mulVec]
+  simp [f16Step, f16SignR, f16Sign, f16Partner,
+    f16Partner_involutive, f16RightIndex_ten_three]
+  ring
 
 def f16ChannelLow (i : Channel) : Fin 16 :=
   ⟨i.val, by omega⟩
@@ -98,8 +137,7 @@ def f16ChannelHigh (i : Channel) : Fin 16 :=
 def f16ChannelOf (i : Fin 16) : Channel :=
   ⟨i.val % 4, Nat.mod_lt _ (by decide)⟩
 
-/-- The four scalar outputs are precisely the four rows of the checker’s
-    4×16 observation matrix O. -/
+/-- The four scalar output rows, matching the checker’s observation matrix O. -/
 def f16Observe (v : State) : Channel -> Real :=
   fun i =>
     (f16SignR (f16ChannelHigh i) *
@@ -107,18 +145,148 @@ def f16Observe (v : State) : Channel -> Real :=
       f16SignR (f16ChannelLow i) *
         v (f16Partner (f16ChannelLow i))) / 2
 
+theorem f16SignR_self_mul (i : Fin 16) :
+    f16SignR i * f16SignR i = 1 := by
+  fin_cases i <;>
+    norm_num [f16SignR, f16Sign, f16Partner,
+      LinearInputF16Holonomy.rightIndex,
+      LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
+
+theorem f16SignR_cancel_self (i : Fin 16) (x : Real) :
+    f16SignR i * (f16SignR i * x) = x := by
+  calc
+    f16SignR i * (f16SignR i * x) =
+        (f16SignR i * f16SignR i) * x := by ring
+    _ = x := by rw [f16SignR_self_mul]; ring
+
+theorem f16SignR_cancel_left (i j : Fin 16) (x : Real) :
+    f16SignR i * (f16SignR i * f16SignR j * x) =
+      f16SignR j * x := by
+  calc
+    f16SignR i * (f16SignR i * f16SignR j * x) =
+        (f16SignR i * f16SignR i) * f16SignR j * x := by ring
+    _ = f16SignR j * x := by rw [f16SignR_self_mul]; ring
+
+theorem f16SignR_cancel_right (i j : Fin 16) (x : Real) :
+    f16SignR i * (f16SignR j * f16SignR i * x) =
+      f16SignR j * x := by
+  calc
+    f16SignR i * (f16SignR j * f16SignR i * x) =
+        (f16SignR i * f16SignR i) * f16SignR j * x := by ring
+    _ = f16SignR j * x := by rw [f16SignR_self_mul]; ring
+
+theorem f16SignR_partner_low (i : Channel) :
+    f16SignR (f16Partner (f16ChannelLow i)) =
+      -f16SignR (f16ChannelLow i) := by
+  fin_cases i <;>
+    norm_num [f16SignR, f16Sign, f16Partner, f16ChannelLow,
+      LinearInputF16Holonomy.rightIndex,
+      LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
+
+theorem f16SignR_partner_high (i : Channel) :
+    f16SignR (f16Partner (f16ChannelHigh i)) =
+      f16SignR (f16ChannelHigh i) := by
+  fin_cases i <;>
+    norm_num [f16SignR, f16Sign, f16Partner, f16ChannelHigh,
+      LinearInputF16Holonomy.rightIndex,
+      LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
+
+/-- One observed phase after one application of U. -/
+@[simp] theorem f16Observe_step (v : State) (ch : Channel) :
+    f16Observe (f16Step v) ch =
+      (v (f16ChannelHigh ch) - v (f16ChannelLow ch)) / 2 := by
+  simp only [f16Observe, f16Step, f16Partner_involutive]
+  rw [f16SignR_cancel_self, f16SignR_cancel_self]
+  ring
+
+theorem f16Step_twice (v : State) (i : Fin 16) :
+    f16Step (f16Step v) i =
+      f16SignR (f16Partner i) * f16SignR i * v i := by
+  simp [f16Step, f16Partner_involutive]
+  ring
+
+theorem f16Step_twice_at_partner (v : State) (i : Fin 16) :
+    f16Step (f16Step v) (f16Partner i) =
+      f16SignR i * f16SignR (f16Partner i) *
+        v (f16Partner i) := by
+  simpa [f16Partner_involutive] using
+    f16Step_twice v (f16Partner i)
+
+@[simp] theorem f16Observe_step2 (v : State) (ch : Channel) :
+    f16Observe (f16Step (f16Step v)) ch =
+      (f16SignR (f16ChannelHigh ch) *
+          v (f16Partner (f16ChannelHigh ch)) +
+        f16SignR (f16ChannelLow ch) *
+          v (f16Partner (f16ChannelLow ch))) / 2 := by
+  unfold f16Observe
+  rw [f16Step_twice_at_partner, f16Step_twice_at_partner]
+  rw [f16SignR_cancel_left, f16SignR_cancel_left]
+  rw [f16SignR_partner_high, f16SignR_partner_low]
+  ring
+
+theorem f16Step_thrice_at_partner (v : State) (i : Fin 16) :
+    f16Step (f16Step (f16Step v)) (f16Partner i) =
+      f16SignR (f16Partner i) * v i := by
+  change f16SignR i * f16Step (f16Step v) i =
+    f16SignR (f16Partner i) * v i
+  rw [f16Step_twice]
+  exact f16SignR_cancel_right i (f16Partner i) (v i)
+
+theorem f16SignR_product_low (ch : Channel) :
+    f16SignR (f16ChannelLow ch) *
+      f16SignR (f16Partner (f16ChannelLow ch)) = -1 := by
+  rw [f16SignR_partner_low]
+  calc
+    f16SignR (f16ChannelLow ch) *
+        (-f16SignR (f16ChannelLow ch)) =
+        -(f16SignR (f16ChannelLow ch) * f16SignR (f16ChannelLow ch)) := by ring
+    _ = -1 := by rw [f16SignR_self_mul]; norm_num
+
+theorem f16SignR_product_high (ch : Channel) :
+    f16SignR (f16ChannelHigh ch) *
+      f16SignR (f16Partner (f16ChannelHigh ch)) = 1 := by
+  rw [f16SignR_partner_high, f16SignR_self_mul]
+
+@[simp] theorem f16Observe_step3 (v : State) (ch : Channel) :
+    f16Observe (f16Step (f16Step (f16Step v))) ch =
+      (v (f16ChannelHigh ch) + v (f16ChannelLow ch)) / 2 := by
+  unfold f16Observe
+  rw [f16Step_thrice_at_partner, f16Step_thrice_at_partner]
+  rw [f16SignR_product_high, f16SignR_product_low]
+  ring
+
 def f16OrbitState (v : State) (phase : Fin 4) : State :=
   if phase.val = 0 then v
   else if phase.val = 1 then f16Step v
   else if phase.val = 2 then f16Step (f16Step v)
   else f16Step (f16Step (f16Step v))
 
-/-- Rows O, OU, OU², OU³, represented as four time phases by four channels. -/
+/-- The four outputs O, OU, OU², OU³ for each state. -/
 def f16Trace4 (v : State) : Fin 4 -> Channel -> Real :=
   fun phase => f16Observe (f16OrbitState v phase)
 
-/-- Decoder matching the explicit rational certificate, applied to every
-    coordinate (the index xor 9 pairs the low and high halves). -/
+@[simp] theorem f16Trace4_phase0 (v : State) (ch : Channel) :
+    f16Trace4 v 0 ch = f16Observe v ch := by
+  simp [f16Trace4, f16OrbitState]
+
+@[simp] theorem f16Trace4_phase1 (v : State) (ch : Channel) :
+    f16Trace4 v 1 ch = f16Observe (f16Step v) ch := by
+  simp [f16Trace4, f16OrbitState]
+
+@[simp] theorem f16Trace4_phase2 (v : State) (ch : Channel) :
+    f16Trace4 v 2 ch =
+      f16Observe (f16Step (f16Step v)) ch := by
+  simp [f16Trace4, f16OrbitState]
+
+@[simp] theorem f16Trace4_phase3 (v : State) (ch : Channel) :
+    f16Trace4 v 3 ch =
+      f16Observe (f16Step (f16Step (f16Step v))) ch := by
+  simp [f16Trace4, f16OrbitState]
+
+/-- Explicit coordinate decoder matching the finite rational certificate. -/
 def f16Decode (y : Fin 4 -> Channel -> Real) (j : Fin 16) : Real :=
   if j.val < 4 then
     y 3 (f16ChannelOf j) - y 1 (f16ChannelOf j)
@@ -133,17 +301,18 @@ def f16Decode (y : Fin 4 -> Channel -> Real) (j : Fin 16) : Real :=
       (y 2 (f16ChannelOf (f16Partner j)) +
         y 0 (f16ChannelOf (f16Partner j)))
 
-/-- The four-phase decoder recovers all sixteen real coordinates. -/
+/-- The four-phase decoder reconstructs all sixteen real coordinates. -/
 theorem f16_decode_four_trace (v : State) :
     f16Decode (f16Trace4 v) = v := by
   funext j
   fin_cases j <;>
-    norm_num [f16Decode, f16Trace4, f16OrbitState, f16Observe, f16Step,
-      f16SignR, f16Sign, f16Partner, f16ChannelLow, f16ChannelHigh,
-      f16ChannelOf,
+    norm_num [f16Decode, f16ChannelOf, f16Partner,
       LinearInputF16Holonomy.rightIndex,
+      f16Observe, f16ChannelLow, f16ChannelHigh,
+      f16SignR, f16Sign,
       LinearInputF16Holonomy.eps,
-      LinearInputF16Holonomy.epsTable] <;> ring
+      LinearInputF16Holonomy.epsTable] <;>
+    field_simp <;> ring
 
 theorem f16_four_phase_injective : Function.Injective f16Trace4 := by
   intro v w h
@@ -163,40 +332,40 @@ def f16Trace3 (v : State) :
   ((f16Observe v, f16Observe (f16Step v)),
     f16Observe (f16Step (f16Step v)))
 
-def f16Trace2 (v : State) : (Channel -> Real) × (Channel -> Real) :=
-  Prod.fst (f16Trace3 v)
+@[simp] theorem f16Observe_zero (ch : Channel) :
+    f16Observe f16Zero ch = 0 := by
+  simp [f16Observe, f16Zero]
 
-def f16Trace1 (v : State) : Channel -> Real :=
-  Prod.fst (f16Trace2 v)
+@[simp] theorem f16Observe_threeWitness_zero (ch : Channel) :
+    f16Observe f16ThreePhaseWitness ch = 0 := by
+  fin_cases ch <;>
+    norm_num [f16Observe, f16ThreePhaseWitness,
+      f16ChannelLow, f16ChannelHigh, f16Partner,
+      LinearInputF16Holonomy.rightIndex]
+
+@[simp] theorem f16Observe_step_threeWitness_zero (ch : Channel) :
+    f16Observe (f16Step f16ThreePhaseWitness) ch = 0 := by
+  rw [f16Observe_step]
+  fin_cases ch <;>
+    norm_num [f16ThreePhaseWitness, f16ChannelLow, f16ChannelHigh]
+
+@[simp] theorem f16Observe_step2_threeWitness_zero (ch : Channel) :
+    f16Observe (f16Step (f16Step f16ThreePhaseWitness)) ch = 0 := by
+  rw [f16Observe_step2]
+  fin_cases ch <;>
+    norm_num [f16ThreePhaseWitness, f16ChannelLow, f16ChannelHigh,
+      f16Partner, LinearInputF16Holonomy.rightIndex]
 
 theorem f16_three_phase_collision :
     f16Trace3 f16Zero = f16Trace3 f16ThreePhaseWitness := by
   apply Prod.ext
   · apply Prod.ext
     · funext ch
-      fin_cases ch <;>
-        norm_num [f16Trace3, f16Observe, f16Step, f16SignR, f16Sign,
-          f16Partner, f16ChannelLow, f16ChannelHigh, f16Zero,
-          f16ThreePhaseWitness,
-          LinearInputF16Holonomy.rightIndex,
-          LinearInputF16Holonomy.eps,
-          LinearInputF16Holonomy.epsTable]
+      simp [f16Trace3]
     · funext ch
-      fin_cases ch <;>
-        norm_num [f16Trace3, f16Observe, f16Step, f16SignR, f16Sign,
-          f16Partner, f16ChannelLow, f16ChannelHigh, f16Zero,
-          f16ThreePhaseWitness,
-          LinearInputF16Holonomy.rightIndex,
-          LinearInputF16Holonomy.eps,
-          LinearInputF16Holonomy.epsTable]
+      simp [f16Trace3]
   · funext ch
-    fin_cases ch <;>
-      norm_num [f16Trace3, f16Observe, f16Step, f16SignR, f16Sign,
-        f16Partner, f16ChannelLow, f16ChannelHigh, f16Zero,
-        f16ThreePhaseWitness,
-        LinearInputF16Holonomy.rightIndex,
-        LinearInputF16Holonomy.eps,
-        LinearInputF16Holonomy.epsTable]
+    simp [f16Trace3]
 
 theorem f16_zero_ne_three_phase_witness :
     f16Zero ≠ f16ThreePhaseWitness := by
@@ -208,6 +377,12 @@ theorem f16_three_phase_not_injective :
     ¬ Function.Injective f16Trace3 := by
   intro h
   exact f16_zero_ne_three_phase_witness (h f16_three_phase_collision)
+
+def f16Trace2 (v : State) : (Channel -> Real) × (Channel -> Real) :=
+  Prod.fst (f16Trace3 v)
+
+def f16Trace1 (v : State) : Channel -> Real :=
+  Prod.fst (f16Trace2 v)
 
 theorem f16_two_phase_collision :
     f16Trace2 f16Zero = f16Trace2 f16ThreePhaseWitness := by
