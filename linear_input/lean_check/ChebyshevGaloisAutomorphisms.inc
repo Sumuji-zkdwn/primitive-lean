@@ -148,7 +148,7 @@ theorem linearAuto_fixes_parameter (m : ℕ) (hm : m ≠ 0) (ζ : ℂ)
   have htwo :
       linearAuto ζ (hζ.ne_zero hm) (2 : E) = 2 := by
     exact map_ofNat (linearAuto ζ (hζ.ne_zero hm)) 2
-  simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow, htwo] <;> ring
+  simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow, htwo]
 
 theorem inversionAuto_fixes_parameter (m : ℕ) :
     inversionAuto (genericParameter m) = genericParameter m := by
@@ -156,13 +156,15 @@ theorem inversionAuto_fixes_parameter (m : ℕ) :
   unfold LinearInputChebyshevDescent.joukowski
   have htwo : inversionAuto (2 : E) = 2 := by
     exact map_ofNat inversionAuto 2
-  simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow, htwo] <;> ring
+  simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow, htwo]
+  ring
 
 /-- A base-field generator fixed by a ℂ-automorphism forces all of C(t) fixed. -/
 theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
     (hψ : ψ (genericParameter m) = genericParameter m) :
     ∀ x : IntermediateField.adjoin ℂ ({genericParameter m} : Set E),
       ψ x.1 = x.1 := by
+  intro x
   have hfix : ∀ y, y ∈
       (IntermediateField.adjoin ℂ ({genericParameter m} : Set E)) →
       ψ y = y := by
