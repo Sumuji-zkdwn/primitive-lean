@@ -1,0 +1,79 @@
+name: Gravity cocycle isolated Lean check
+
+on:
+  push:
+    branches: ['chatgpt/gravity-cocycle-*']
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/GravityCocycle.inc'
+      - '.github/workflows/gravity-cocycle-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact proposed head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean
+        shell: bash
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Download pinned Mathlib cache
+        working-directory: lean
+        run: lake exe cache get
+      - name: Assemble standalone theorem and axiom probes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source=Path('linear_input/lean_check/GravityCocycle.inc').read_text()
+          names=re.findall(r'(?m)^theorem\s+([a-zA-Z0-9_]+)',source)
+          assert len(names)>=12, names
+          body='import Mathlib\n\n'+source+'\n'+'\n'.join(
+            '#print axioms LinearInputGravityCocycle.'+n for n in names)+'\n'
+          Path('linear_input/lean_check/GravityCocycleStandalone.lean').write_text(body)
+          print('Theorems to audit:',len(names))
+          PY
+      - name: Compile gravity proofs using Lean and reject warnings
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd lean
+          lake env lean --trust=0 ../linear_input/lean_check/GravityCocycleStandalone.lean > ../gravity-standalone.log 2>&1 || {
+            cat ../gravity-standalone.log
+            exit 1
+          }
+          if grep -E '[[:space:]]warning:' ../gravity-standalone.log; then
+            echo "Lean warnings are not accepted"
+            exit 1
+          fi
+          echo "Standalone Lean completed without warnings"
+      - name: Run complete source, model and full Lean integration audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp gravity-standalone.log /tmp/gravity-standalone.log
+          rm -f gravity-standalone.log linear_input/lean_check/GravityCocycleStandalone.lean
+          trap 'cp /tmp/gravity-standalone.log gravity-standalone.log' EXIT
+          python -m pip install --disable-pip-version-check 'pytest==9.2.0' 'numpy==2.5.4'
+          python -B -X utf8 tools/verify.py --integration-only
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gravity-cocycle-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            gravity-standalone.log
+            verification/
+            linear_input/lean_results.json

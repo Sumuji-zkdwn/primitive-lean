@@ -69,6 +69,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
     ('linear_input/lean_check/ViscousRewrite.inc', 'LinearInputViscousRewrite'),
+    ('linear_input/lean_check/GravityCocycle.inc', 'LinearInputGravityCocycle'),
 )
 
 
