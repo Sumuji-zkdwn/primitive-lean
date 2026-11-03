@@ -332,6 +332,32 @@ def f16Trace4 (v : State) : Fin 4 -> Channel -> Real :=
       f16Observe (f16Step (f16Step (f16Step v))) ch := by
   simp [f16Trace4, f16OrbitState]
 
+/-- The same four phases, written with the actual matrix U = Aᵀ C. -/
+def f16MatrixOrbitState (v : State) (phase : Fin 4) : State :=
+  if phase.val = 0 then v
+  else if phase.val = 1 then f16RelativeMatrix.mulVec v
+  else if phase.val = 2 then
+    f16RelativeMatrix.mulVec (f16RelativeMatrix.mulVec v)
+  else
+    f16RelativeMatrix.mulVec
+      (f16RelativeMatrix.mulVec (f16RelativeMatrix.mulVec v))
+
+def f16MatrixTrace4 (v : State) : Fin 4 -> Channel -> Real :=
+  fun phase => f16Observe (f16MatrixOrbitState v phase)
+
+/-- The signed-permutation reduction identifies every actual matrix phase. -/
+theorem f16MatrixOrbitState_eq_f16OrbitState (v : State) (phase : Fin 4) :
+    f16MatrixOrbitState v phase = f16OrbitState v phase := by
+  fin_cases phase <;>
+    simp [f16MatrixOrbitState, f16OrbitState, f16_relative_action]
+
+theorem f16MatrixTrace4_eq_f16Trace4 (v : State) :
+    f16MatrixTrace4 v = f16Trace4 v := by
+  funext phase ch
+  change f16Observe (f16MatrixOrbitState v phase) ch =
+    f16Observe (f16OrbitState v phase) ch
+  rw [f16MatrixOrbitState_eq_f16OrbitState]
+
 /-- Explicit coordinate decoder matching the finite rational certificate. -/
 def f16Decode (y : Fin 4 -> Channel -> Real) (j : Fin 16) : Real :=
   if j.val < 4 then
@@ -358,6 +384,12 @@ theorem f16_decode_four_trace (v : State) :
       LinearInputF16Holonomy.eps,
       LinearInputF16Holonomy.epsTable] <;>
     field_simp <;> ring
+
+/-- The same decoder identity for four successive applications of U itself. -/
+theorem f16_decode_original_matrix_trace (v : State) :
+    f16Decode (f16MatrixTrace4 v) = v := by
+  rw [f16MatrixTrace4_eq_f16Trace4]
+  exact f16_decode_four_trace v
 
 theorem f16_four_phase_injective : Function.Injective f16Trace4 := by
   intro v w h
