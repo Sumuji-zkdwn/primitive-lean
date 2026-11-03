@@ -2116,7 +2116,26 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "sha256": "3e08fc00c445f1bb2b5868c6992c639df221a8e9fe8bfc43681f7820d9787c78",
+      "original_sha256": "3e08fc00c445f1bb2b5868c6992c639df221a8e9fe8bfc43681f7820d9787c78",
+      "source_pr": null,
+      "source_commit": "18c24ea3cd18a50d4329dfeef87062fbd75af430",
+      "source_path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
-  "construction_errors": []
+  "construction_errors": [],
+  "post_snapshot_additions": [
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "source_commit": "18c24ea3cd18a50d4329dfeef87062fbd75af430",
+      "note": "Independent additive proof source. The 2026-11-02 integrated baseline proof files remain unchanged."
+    }
+  ]
 }
