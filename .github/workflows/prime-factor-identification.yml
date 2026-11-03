@@ -1,0 +1,88 @@
+name: Positive integer prime factor identification Lean verification
+
+on:
+  push:
+    branches: [chatgpt/prime-factor-identification-20261103]
+    paths:
+      - 'linear_input/lean_check/PrimeFactorIdentification.inc'
+      - '.github/workflows/prime-factor-identification.yml'
+      - 'tools/verify_main_result.py'
+      - 'tools/verify.py'
+      - 'docs/integration/manifest.json'
+  pull_request:
+    branches: [chatgpt/decomposition-identification-20261103]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  standalone:
+    name: Prime multiset evaluation and probe theorems
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install fixed Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prepare additive proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          parts = [
+            'TernaryZeroCesaro.inc',
+            'FiniteObservationSeparation.inc',
+            'DecompositionIdentification.inc',
+            'PrimeFactorIdentification.inc',
+          ]
+          sources = []
+          for part in parts:
+              code = (Path('linear_input/lean_check') / part).read_text(encoding='utf-8')
+              for forbidden in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                  assert forbidden not in code, (part, forbidden)
+              sources.append(code)
+          Path('lean/PrimeFactorIdentificationProbe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(sources), encoding='utf-8')
+          PY
+      - name: Verify Lean proof with trust zero
+        working-directory: lean
+        run: lake env lean --trust=0 PrimeFactorIdentificationProbe.lean
+
+  integrated:
+    name: Integration sources, Lean theorem and axiom audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install offline verification dependencies
+        run: python -m pip install pytest==9.2.0 numpy==2.5.4
+      - name: Install fixed Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Run complete integration verification
+        run: python -B -X utf8 tools/verify.py --integration-only
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: prime-factor-identification-verification-${{ github.run_id }}
+          path: |
+            verification/
+            linear_input/lean_results.json
+          if-no-files-found: warn
