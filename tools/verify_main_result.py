@@ -76,6 +76,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/PrimeSplitNormalForm.inc', 'LinearInputPrimeSplitNormalForm'),
     ('linear_input/lean_check/AssociatesFactorIdentification.inc', 'LinearInputAssociatesFactorIdentification'),
     ('linear_input/lean_check/GeneratedNonUniqueMonoid.inc', 'LinearInputGeneratedNonUnique'),
+    ('linear_input/lean_check/HalfFactorialIdentification.inc', 'LinearInputHalfFactorial'),
 )
 
 
