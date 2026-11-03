@@ -1729,10 +1729,10 @@
     },
     {
       "path": "linear_input/lean_check/PrimeSplitNormalForm.inc",
-      "sha256": "2a273c30a63f65fa2d7cedf979557cb9d351a0b5671ea29b1dd5fa16a6a36799",
-      "original_sha256": "2a273c30a63f65fa2d7cedf979557cb9d351a0b5671ea29b1dd5fa16a6a36799",
+      "sha256": "f6c0cd8ff141c22a754af56be876c02448b58107d2ad0d5f3b3a1d470e117ab1",
+      "original_sha256": "f6c0cd8ff141c22a754af56be876c02448b58107d2ad0d5f3b3a1d470e117ab1",
       "source_pr": 39,
-      "source_commit": "38c6a9af6fd0b4c5e1343e08a510770fe0b70918",
+      "source_commit": "7ddc64fcf0acd5ebff16f2c578a010d35a89f376",
       "source_path": "linear_input/lean_check/PrimeSplitNormalForm.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
