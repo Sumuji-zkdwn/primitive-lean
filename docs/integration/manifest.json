@@ -2152,10 +2152,10 @@
     },
     {
       "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
-      "sha256": "67ac7157797f2508292ef1247008ea9f230dd7bf4dce652509c3a8cf59945603",
-      "original_sha256": "67ac7157797f2508292ef1247008ea9f230dd7bf4dce652509c3a8cf59945603",
+      "sha256": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
+      "original_sha256": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
       "source_pr": null,
-      "source_commit": "5c19ef5b33ca6743e7d4cf9d258230d7a71864b9",
+      "source_commit": "b65aa486e20436939d4ac972a09e8fb3cab159d2",
       "source_path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2185,7 +2185,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
-      "source_commit": "5c19ef5b33ca6743e7d4cf9d258230d7a71864b9",
+      "source_commit": "b65aa486e20436939d4ac972a09e8fb3cab159d2",
       "note": "Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words; historical baseline files remain unchanged."
     }
   ]
