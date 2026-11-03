@@ -55,6 +55,15 @@ theorem one_or_at_least_four (x : G) :
 theorem member_positive (x : G) : 0 < x.val := by
   rcases one_or_at_least_four x with h | h <;> omega
 
+/-- Cancellation holds in the generated monoid since every element
+is a strictly positive natural number and natural multiplication cancels. -/
+theorem generated_left_cancellation (a b c : G)
+    (h : a * b = a * c) : b = c := by
+  apply Subtype.ext
+  have heq := congrArg (fun x : G => x.val) h
+  change a.val * b.val = a.val * c.val at heq
+  exact Nat.mul_left_cancel (member_positive a) heq
+
 /-- A relative atom cannot be expressed as a product of two nonunits.
 The only unit in this positive submonoid is the element 1. -/
 def Atomic (x : G) : Prop :=
@@ -146,6 +155,11 @@ theorem words_distinct : word49 ≠ word66 := by
   have hm := congrArg
     (fun w : Multiset G => (w.map (fun x : G => x.val)).count 4) heq
   norm_num [word49, word66, four, six, nine] at hm
+
+/-- Counting the total number of atoms does not distinguish the
+two factorizations: both have length two. -/
+theorem word_lengths_equal : word49.card = word66.card := by
+  simp [word49, word66]
 
 /-- Atomic factors and equal product do not imply unique words. -/
 theorem actual_nonunique_factor_words :
