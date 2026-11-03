@@ -2119,14 +2119,17 @@
     },
     {
       "path": "linear_input/lean_check/F16RimRecovery.inc",
-      "sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
+      "sha256": "de38f398681f694835e347f0120078ef1e41c7a56709a62fd702ee955d711881",
       "original_sha256": "b68e2e903a1277946cb43780df0a2e01037143b471336ef1484bf3c48269e187",
       "source_pr": null,
       "source_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913",
       "source_path": "linear_input/lean_check/F16RimRecovery.inc",
-      "role": "new_integration_extension",
-      "byte_identical": true,
-      "permitted_adaptations": [],
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Refined finite F16 sign-table normalization from the exact Lean table.",
+        "Added the four explicit checker output rows and completed the 16-dimensional decoder and phase-collision proofs."
+      ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
     }
   ],

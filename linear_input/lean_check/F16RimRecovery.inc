@@ -160,19 +160,37 @@ def f16Observe (v : State) : Channel -> Real :=
       f16SignR (f16ChannelLow i) *
         v (f16Partner (f16ChannelLow i))) / 2
 
+/-- The four rows are exactly the scalar matrix O in the rational checker. -/
+theorem f16Observe_checker_rows (v : State) :
+    (f16Observe v 0, f16Observe v 1, f16Observe v 2, f16Observe v 3) =
+      ((v 9 - v 13) / 2, (v 12 - v 8) / 2,
+       (v 11 + v 15) / 2, (v 10 - v 14) / 2) := by
+  norm_num [f16Observe, f16ChannelLow, f16ChannelHigh,
+    f16Partner_eq_code, f16PartnerCode, f16SignR, f16Sign,
+    LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable] <;>
+    ring
+
 theorem f16Sign_self_mul_int (i : Fin 16) :
     f16Sign i * f16Sign i = 1 := by
-  fin_cases i <;> decide
+  fin_cases i <;>
+    norm_num [f16Sign, f16Partner_eq_code, f16PartnerCode,
+      LinearInputF16Holonomy.eps, LinearInputF16Holonomy.epsTable]
 
 theorem f16Sign_partner_low_int (ch : Channel) :
     f16Sign (f16Partner (f16ChannelLow ch)) =
       -f16Sign (f16ChannelLow ch) := by
-  fin_cases ch <;> decide
+  fin_cases ch <;>
+    norm_num [f16Sign, f16Partner_eq_code, f16PartnerCode,
+      f16ChannelLow, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem f16Sign_partner_high_int (ch : Channel) :
     f16Sign (f16Partner (f16ChannelHigh ch)) =
       f16Sign (f16ChannelHigh ch) := by
-  fin_cases ch <;> decide
+  fin_cases ch <;>
+    norm_num [f16Sign, f16Partner_eq_code, f16PartnerCode,
+      f16ChannelHigh, LinearInputF16Holonomy.eps,
+      LinearInputF16Holonomy.epsTable]
 
 theorem f16SignR_self_mul (i : Fin 16) :
     f16SignR i * f16SignR i = 1 := by
@@ -184,7 +202,7 @@ theorem f16SignR_cancel_self (i : Fin 16) (x : Real) :
   calc
     f16SignR i * (f16SignR i * x) =
         (f16SignR i * f16SignR i) * x := by ring
-    _ = x := by rw [f16SignR_self_mul]; ring
+    _ = x := by rw [f16SignR_self_mul] <;> ring
 
 theorem f16SignR_cancel_left (i j : Fin 16) (x : Real) :
     f16SignR i * (f16SignR i * f16SignR j * x) =
@@ -192,7 +210,7 @@ theorem f16SignR_cancel_left (i j : Fin 16) (x : Real) :
   calc
     f16SignR i * (f16SignR i * f16SignR j * x) =
         (f16SignR i * f16SignR i) * f16SignR j * x := by ring
-    _ = f16SignR j * x := by rw [f16SignR_self_mul]; ring
+    _ = f16SignR j * x := by rw [f16SignR_self_mul] <;> ring
 
 theorem f16SignR_cancel_right (i j : Fin 16) (x : Real) :
     f16SignR i * (f16SignR j * f16SignR i * x) =
@@ -200,7 +218,7 @@ theorem f16SignR_cancel_right (i j : Fin 16) (x : Real) :
   calc
     f16SignR i * (f16SignR j * f16SignR i * x) =
         (f16SignR i * f16SignR i) * f16SignR j * x := by ring
-    _ = f16SignR j * x := by rw [f16SignR_self_mul]; ring
+    _ = f16SignR j * x := by rw [f16SignR_self_mul] <;> ring
 
 theorem f16SignR_partner_low (i : Channel) :
     f16SignR (f16Partner (f16ChannelLow i)) =
@@ -252,8 +270,14 @@ theorem f16Step_twice_at_partner (v : State) (i : Fin 16) :
 theorem f16Step_thrice_at_partner (v : State) (i : Fin 16) :
     f16Step (f16Step (f16Step v)) (f16Partner i) =
       f16SignR (f16Partner i) * v i := by
-  simpa [f16Step, f16Partner_involutive] using
-    f16SignR_cancel_right i (f16Partner i) (v i)
+  calc
+    f16Step (f16Step (f16Step v)) (f16Partner i) =
+        f16SignR i *
+          (f16SignR (f16Partner i) * f16SignR i * v i) := by
+      simp only [f16Step, f16Partner_involutive]
+      ring
+    _ = f16SignR (f16Partner i) * v i :=
+      f16SignR_cancel_right i (f16Partner i) (v i)
 
 theorem f16SignR_cancel_partner_low (ch : Channel) (x : Real) :
     f16SignR (f16ChannelLow ch) *
