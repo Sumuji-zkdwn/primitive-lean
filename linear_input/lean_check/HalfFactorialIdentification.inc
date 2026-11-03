@@ -129,10 +129,11 @@ theorem actual_G_value_and_six_injective :
   intro u v he
   apply value_and_six_injective
   apply Prod.ext
-  · have hG : valueInG u = valueInG v := congrArg Prod.fst he
+  · have hG : valueInG u = valueInG v :=
+      congrArg (fun p : G × ℕ => p.1) he
     have hv := congrArg Subtype.val hG
     simpa only [valueInG_val] using hv
-  · exact congrArg Prod.snd he
+  · exact congrArg (fun p : G × ℕ => p.2) he
 
 theorem actual_G_same_length (u v : Counts)
     (h : valueInG u = valueInG v) : length u = length v := by
