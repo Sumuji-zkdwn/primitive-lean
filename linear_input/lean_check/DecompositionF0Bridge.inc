@@ -51,8 +51,9 @@ theorem positive_reaches_singleton {p : Multiset ℕ}
 theorem singleton_terminal (n : ℕ) :
     Terminal LinearInputF0Merge.Merge ({n} : Multiset ℕ) := by
   intro q h
-  have hc := LinearInputF0Merge.merge_card h
-  simp only [Multiset.card_singleton] at hc
+  obtain ⟨a, b, rest, _, _, hp, _⟩ := h
+  have hc := congrArg Multiset.card hp
+  simp only [Multiset.card_singleton, Multiset.card_cons] at hc
   omega
 
 /-- Every F0 merge outputs at least one part. -/
