@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repository": "Sumuji-zkdwn/primitive-lean",
-  "snapshot_date": "2026-11-02",
+  "snapshot_date": "2026-11-03",
   "baseline_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
   "baseline_paths": [
     "lean/Audit.lean",
@@ -2116,6 +2116,18 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/RimObservability.inc",
+      "sha256": "e0e15e19457935384e42b4598e5b40bcd4011164a785cfca0603c8e0d0de7b12",
+      "original_sha256": "e0e15e19457935384e42b4598e5b40bcd4011164a785cfca0603c8e0d0de7b12",
+      "source_pr": 40,
+      "source_commit": "38bf7ef1e6106ad6d412ece43463be6da1686f9d",
+      "source_path": "linear_input/lean_check/RimObservability.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "38bf7ef1e6106ad6d412ece43463be6da1686f9d"
     }
   ],
   "construction_errors": []
