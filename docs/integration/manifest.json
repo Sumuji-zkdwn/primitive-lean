@@ -2170,14 +2170,21 @@
     },
     {
       "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
-      "sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc",
+      "sha256": "3828ed6d50b3641a3bbbe1092f1e5403aac328e6fdf08a7b7f5d06d29a687305",
       "source_pr": 31,
       "source_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
       "source_path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
-      "role": "new_additive_source",
-      "byte_identical": true,
-      "permitted_adaptations": [],
-      "authoring_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Correct the explicit generation and transcendence rewrites for the X↦cX and X↦X⁻¹ substitutions.",
+        "Make the two automorphisms' invariance of the Joukowski parameter explicit, using the primitive-root power identity.",
+        "Prove base-field fixedness by induction over the intermediate-field adjunction and extensionality from the rational variable.",
+        "Use the pinned DihedralGroup multiplication laws to verify the indexed rotation/reflection homomorphism.",
+        "Prove reflection conjugation on powers via an involutive conjugation homomorphism.",
+        "Correct the nonzero scalar cancellation and ZMod value injectivity steps in the faithful-action proof."
+      ],
+      "authoring_commit": "a639829eeddb622d53876b5dc34d65f30b932948",
       "original_sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc"
     }
   ],
