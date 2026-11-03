@@ -5,6 +5,7 @@ on:
     branches: [chatgpt/half-factorial-probe-20261103]
     paths:
       - 'linear_input/lean_check/HalfFactorialIdentification.inc'
+      - 'linear_input/lean_check/AtomicGeneratorClassification.inc'
       - 'tools/verify_main_result.py'
       - 'tools/verify.py'
       - 'docs/integration/manifest.json'
