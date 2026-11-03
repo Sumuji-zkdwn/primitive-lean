@@ -78,6 +78,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/GeneratedNonUniqueMonoid.inc', 'LinearInputGeneratedNonUnique'),
     ('linear_input/lean_check/HalfFactorialIdentification.inc', 'LinearInputHalfFactorial'),
     ('linear_input/lean_check/AtomicGeneratorClassification.inc', 'LinearInputAtomicGeneratorClassification'),
+    ('linear_input/lean_check/AtomicHalfFactorial.inc', 'LinearInputAtomicHalfFactorial'),
 )
 
 
