@@ -5,6 +5,7 @@ on:
     branches: [chatgpt/prime-factor-identification-20261103]
     paths:
       - 'linear_input/lean_check/PrimeFactorIdentification.inc'
+      - 'linear_input/lean_check/PrimeSplitNormalForm.inc'
       - '.github/workflows/prime-factor-identification.yml'
       - 'tools/verify_main_result.py'
       - 'tools/verify.py'
@@ -41,6 +42,7 @@ jobs:
             'FiniteObservationSeparation.inc',
             'DecompositionIdentification.inc',
             'PrimeFactorIdentification.inc',
+            'PrimeSplitNormalForm.inc',
           ]
           sources = []
           for part in parts:
