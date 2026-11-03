@@ -147,7 +147,7 @@ theorem linearAuto_fixes_parameter (m : ℕ) (hm : m ≠ 0) (ζ : ℂ)
     simp
   have htwo :
       linearAuto ζ (hζ.ne_zero hm) (2 : E) = 2 := by
-    simpa using (linearAuto ζ (hζ.ne_zero hm)).commutes (2 : ℂ)
+    exact map_two (linearAuto ζ (hζ.ne_zero hm))
   simp [linearAuto_X, map_add, map_inv₀, map_div₀, map_pow, hpow, htwo] <;> ring
 
 theorem inversionAuto_fixes_parameter (m : ℕ) :
@@ -155,7 +155,7 @@ theorem inversionAuto_fixes_parameter (m : ℕ) :
   rw [genericParameter_eq_joukowski]
   unfold LinearInputChebyshevDescent.joukowski
   have htwo : inversionAuto (2 : E) = 2 := by
-    simpa using inversionAuto.commutes (2 : ℂ)
+    exact map_two inversionAuto
   simp [inversionAuto_X, map_add, map_inv₀, map_div₀, inv_pow, htwo] <;> ring
 
 /-- A base-field generator fixed by a ℂ-automorphism forces all of C(t) fixed. -/
@@ -167,7 +167,7 @@ theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
       (IntermediateField.adjoin ℂ ({genericParameter m} : Set E)) →
       ψ y = y := by
     intro y hy
-    refine IntermediateField.adjoin_induction
+    refine IntermediateField.adjoin_induction (F := ℂ)
       (p := fun y _ => ψ y = y)
       (mem := ?_)
       (algebraMap := ?_)
@@ -294,16 +294,8 @@ theorem rotation_symm_X (k : ℕ) (ζ : ℂ)
           (RatFunc.C (ζ⁻¹) * RatFunc.C ζ) * (RatFunc.X : E) := by ring
       _ = RatFunc.C (ζ⁻¹ * ζ) * (RatFunc.X : E) := by rw [← map_mul]
       _ = (RatFunc.X : E) := by simp [inv_mul_cancel₀ hζ0]
-  calc
-    (rotation k ζ hζ)⁻¹ (RatFunc.X : E) =
-        (rotation k ζ hζ).symm (RatFunc.X : E) := by
-          rw [AlgEquiv.aut_inv]
-    _ = (rotation k ζ hζ).symm
-          ((rotation k ζ hζ)
-            (RatFunc.C (ζ⁻¹) * (RatFunc.X : E))) := by
-          rw [← hpre]
-    _ = RatFunc.C (ζ⁻¹) * (RatFunc.X : E) := by
-          rw [AlgEquiv.symm_apply_apply]
+  apply (rotation k ζ hζ).injective
+  rw [AlgEquiv.aut_inv, AlgEquiv.apply_symm_apply, hpre]
 
 theorem reflection_conjugates_rotation (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
