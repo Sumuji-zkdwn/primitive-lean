@@ -33,8 +33,14 @@ theorem generatorWord_length (w : Counts) :
 theorem generatorWord_six_count (w : Counts) :
     (generatorWord w).count six = countSix w := by
   classical
-  have h4 : four ≠ six := by decide
-  have h9 : nine ≠ six := by decide
+  have h4 : four ≠ six := by
+    intro h
+    have hv := congrArg Subtype.val h
+    norm_num [four, six] at hv
+  have h9 : nine ≠ six := by
+    intro h
+    have hv := congrArg Subtype.val h
+    norm_num [nine, six] at hv
   simp [generatorWord, countSix, Multiset.count_add,
     Multiset.count_replicate, h4, h9]
 
@@ -107,20 +113,20 @@ theorem product_alone_does_not_identify_all_atomic_words :
       (∀ x ∈ v, Atomic x) →
       u.prod = v.prod → u = v := by
   intro h
-  have h49 : ∀ x ∈ word49, Atomic x := by
+  have h49 : ∀ x ∈ LinearInputGeneratedNonUnique.word49, Atomic x := by
     intro x hx
-    simp only [word49, Multiset.mem_cons, Multiset.not_mem_zero,
+    simp only [LinearInputGeneratedNonUnique.word49, Multiset.mem_cons, Multiset.not_mem_zero,
       or_false] at hx
     rcases hx with rfl | rfl
     · exact four_atomic
     · exact nine_atomic
-  have h66 : ∀ x ∈ word66, Atomic x := by
+  have h66 : ∀ x ∈ LinearInputGeneratedNonUnique.word66, Atomic x := by
     intro x hx
-    simp only [word66, Multiset.mem_cons, Multiset.not_mem_zero,
+    simp only [LinearInputGeneratedNonUnique.word66, Multiset.mem_cons, Multiset.not_mem_zero,
       or_false] at hx
     rcases hx with rfl | rfl <;> exact six_atomic
   exact words_distinct
-    (h word49 word66 h49 h66 word_products_collide)
+    (h LinearInputGeneratedNonUnique.word49 LinearInputGeneratedNonUnique.word66 h49 h66 word_products_collide)
 
 /-- In the one-element permitted family {countSix}, the minimum number
 of additional observers needed to distinguish all actual atomic words
