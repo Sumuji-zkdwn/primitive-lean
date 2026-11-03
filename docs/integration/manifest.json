@@ -431,6 +431,16 @@
       "sha": "3bbdc8a3a0cb79f10903f4a1d983b509e1f0db68",
       "base": "chatgpt/prime-factor-identification-20261103",
       "merged": false
+    },
+    {
+      "number": 46,
+      "title": "Prove half-factorial lengths and exact one-probe identification for all 4-6-9 generator words",
+      "state": "open",
+      "draft": true,
+      "head": "chatgpt/half-factorial-probe-20261103",
+      "sha": "21a4a9feae938c69cfe51797de0a08bf0c35fca2",
+      "base": "chatgpt/associates-unique-factorization-20261103",
+      "merged": false
     }
   ],
   "files": [
@@ -1010,6 +1020,42 @@
       "permitted_adaptations": [],
       "source_commit": "5ef286fa9127ada5cfc59788816c9518b74f7c11",
       "authoring_commit": "5ef286fa9127ada5cfc59788816c9518b74f7c11"
+    },
+    {
+      "path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "sha256": "056b65d3d5569e608b9d4010f8b4e8fa343ba78a863d18cb7a22f7649cd010bf",
+      "original_sha256": "056b65d3d5569e608b9d4010f8b4e8fa343ba78a863d18cb7a22f7649cd010bf",
+      "source_pr": 46,
+      "source_commit": "374722f9a20a3d698571f08ef6240e6e9360c0bb",
+      "source_path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "374722f9a20a3d698571f08ef6240e6e9360c0bb"
+    },
+    {
+      "path": "linear_input/lean_check/AtomicHalfFactorial.inc",
+      "sha256": "c78a8a73bc5b4ab028c27a15daf7d9576c587ef10c104d604e3ebb5a8cd3bbcb",
+      "original_sha256": "c78a8a73bc5b4ab028c27a15daf7d9576c587ef10c104d604e3ebb5a8cd3bbcb",
+      "source_pr": 46,
+      "source_commit": "840760a19b31ae40d11b8ca0112b0117e98c3820",
+      "source_path": "linear_input/lean_check/AtomicHalfFactorial.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "3e89173036d77340eac9f35bf799e03344203d11"
+    },
+    {
+      "path": "linear_input/lean_check/AtomicWordProbe.inc",
+      "sha256": "926dc6dfdffc70d1fe7b59ee9c0ff3f548fbb1a28436b240942a8c99921cc69b",
+      "original_sha256": "926dc6dfdffc70d1fe7b59ee9c0ff3f548fbb1a28436b240942a8c99921cc69b",
+      "source_pr": 46,
+      "source_commit": "7d77680e57aff19cdda76ed2367723d7dde66e6a",
+      "source_path": "linear_input/lean_check/AtomicWordProbe.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "05dfe79bc3824930fa902c8baca7b43351e0967c"
     },
     {
       "path": "linear_input/lean_check/BranchFibers.inc",
@@ -1607,6 +1653,18 @@
       "role": "baseline_proof_or_configuration",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/HalfFactorialIdentification.inc",
+      "sha256": "4e748e7e2e7890ef4af510e767fb4118f22592b15be82ec8b83958bab7c6778f",
+      "original_sha256": "4e748e7e2e7890ef4af510e767fb4118f22592b15be82ec8b83958bab7c6778f",
+      "source_pr": 46,
+      "source_commit": "e0ed150cfb71d4fb6103689b941cb8b9fd2cb315",
+      "source_path": "linear_input/lean_check/HalfFactorialIdentification.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "585c0a294093c32228714742e77305ba991e86f4"
     },
     {
       "path": "linear_input/lean_check/HannaJetCorrection.inc",
