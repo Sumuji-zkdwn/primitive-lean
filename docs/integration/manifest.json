@@ -2127,6 +2127,39 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorBisimulation.inc",
+      "sha256": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
+      "original_sha256": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
+      "source_pr": null,
+      "source_commit": "4168a3a0e6c314fff93aec35252b515b7927654e",
+      "source_path": "linear_input/lean_check/OperatorBisimulation.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+      "original_sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+      "source_pr": null,
+      "source_commit": "b2b660c1d1e5a7b22dca0dc2c0fd790c6e17f1f5",
+      "source_path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
+      "sha256": "67ac7157797f2508292ef1247008ea9f230dd7bf4dce652509c3a8cf59945603",
+      "original_sha256": "67ac7157797f2508292ef1247008ea9f230dd7bf4dce652509c3a8cf59945603",
+      "source_pr": null,
+      "source_commit": "5c19ef5b33ca6743e7d4cf9d258230d7a71864b9",
+      "source_path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2136,6 +2169,24 @@
       "path": "linear_input/lean_check/OperatorWordObservations.inc",
       "source_commit": "6965d213f5b5fb5142761d02a5a3b8254265cf2d",
       "note": "Independent additive proof source. The 2026-11-02 integrated baseline proof files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorBisimulation.inc",
+      "source_commit": "4168a3a0e6c314fff93aec35252b515b7927654e",
+      "note": "Greatest observational bisimulation, closure operations, representation fibers and invisible symmetries; historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "source_commit": "b2b660c1d1e5a7b22dca0dc2c0fd790c6e17f1f5",
+      "note": "Conservative extension criterion, strict new-action witnesses, quotient surjection and quotient splits; historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
+      "source_commit": "5c19ef5b33ca6743e7d4cf9d258230d7a71864b9",
+      "note": "Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words; historical baseline files remain unchanged."
     }
   ]
 }
