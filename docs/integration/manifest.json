@@ -401,6 +401,16 @@
       "sha": "43d4ec8a088c9a769b1e72718a322fd86bde0314",
       "base": "codex/primitive-history-derivation-20261029",
       "merged": false
+    },
+    {
+      "number": 38,
+      "title": "General rewrite termination, normal forms and minimum identifying probes",
+      "state": "open",
+      "draft": true,
+      "head": "chatgpt/decomposition-identification-20261103",
+      "sha": "34c908f48fd72a5a3b270964895d182c89336bb1",
+      "base": "chatgpt/ternary-zero-cesaro-20261103",
+      "merged": false
     }
   ],
   "files": [
@@ -1111,6 +1121,30 @@
       "role": "baseline_proof_or_configuration",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/DecompositionF0Bridge.inc",
+      "sha256": "24fe75cb0c85841f59ced7b29c644d55f0363e9f82314aefdcab042cc63b5d5b",
+      "source_commit": "14366235edf9e192ebc06ea7b0f9eea64edfa8ec",
+      "original_sha256": "24fe75cb0c85841f59ced7b29c644d55f0363e9f82314aefdcab042cc63b5d5b",
+      "source_pr": 38,
+      "source_path": "linear_input/lean_check/DecompositionF0Bridge.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "14366235edf9e192ebc06ea7b0f9eea64edfa8ec"
+    },
+    {
+      "path": "linear_input/lean_check/DecompositionIdentification.inc",
+      "sha256": "1e2d027ebb6e63902c921d04810a0e680daf159292494ef390ad14fb30de02fa",
+      "source_commit": "73ed012a078f1a0a1d88f64a88d6238d2ce9de4f",
+      "original_sha256": "1e2d027ebb6e63902c921d04810a0e680daf159292494ef390ad14fb30de02fa",
+      "source_pr": 38,
+      "source_path": "linear_input/lean_check/DecompositionIdentification.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "73ed012a078f1a0a1d88f64a88d6238d2ce9de4f"
     },
     {
       "path": "linear_input/lean_check/Design.lean",
