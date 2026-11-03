@@ -57,6 +57,15 @@ jobs:
             exit 1
           fi
           echo "Standalone Lean completed without warnings"
+      - name: Run complete source, model and full Lean integration audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp gravity-standalone.log /tmp/gravity-standalone.log
+          rm -f gravity-standalone.log linear_input/lean_check/GravityCocycleStandalone.lean
+          trap 'cp /tmp/gravity-standalone.log gravity-standalone.log' EXIT
+          python -m pip install --disable-pip-version-check 'pytest==9.2.0' 'numpy==2.5.4'
+          python -B -X utf8 tools/verify.py --integration-only
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -64,4 +73,7 @@ jobs:
           name: gravity-cocycle-${{ github.run_id }}
           if-no-files-found: warn
           retention-days: 30
-          path: gravity-standalone.log
+          path: |
+            gravity-standalone.log
+            verification/
+            linear_input/lean_results.json
