@@ -163,6 +163,7 @@ def verify_lean(rebuild):
         'AtomicGeneratorClassification': 'Every atom in the actual 4-6-9 submonoid is one of 4, 6, 9; closure induction over arbitrary generator products.',
         'AtomicHalfFactorial': 'For every actual atomic multiset the sum of 2- and 3-valuations is twice its length, implying full half-factoriality of the generated submonoid.',
         'AtomicWordProbe': 'All actual atomic multisets admit explicit multiplicity triples; product plus count of factor 6 identifies any atomic decomposition, while product alone is insufficient.',
+        'SingleSwapFiber': 'Complete rank-one collision lattice and oriented 4*9-to-6*6 swap; every equal-product pair is connected by finite swaps, with termination and unique oriented endpoint.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
