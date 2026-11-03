@@ -1,0 +1,69 @@
+name: General finite prime-probe minimality Lean proof
+
+on:
+  push:
+    branches: [chatgpt/general-prime-probe-minimality-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorFiniteLength.inc
+      - .github/workflows/prime-factor-general-length-probe.yml
+  pull_request:
+    branches: [chatgpt/prime-factor-f0-adaptive-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorFiniteLength.inc
+      - .github/workflows/prime-factor-general-length-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Assemble isolated Lean proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          names = [
+              'TernaryZeroCesaro.inc',
+              'FiniteObservationSeparation.inc',
+              'PrimeFactorObservation.inc',
+              'PrimeFactorOrbits.inc',
+              'PrimeFactorF0Adaptive.inc',
+              'PrimeFactorFiniteLength.inc',
+          ]
+          sources = []
+          for name in names:
+              source = Path('linear_input/lean_check', name).read_text()
+              if name == 'PrimeFactorFiniteLength.inc':
+                  for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                      assert token not in source, f'Forbidden Lean token: {token}'
+              sources.append(source)
+          checks = [
+              '#print axioms LinearInputPrimeFactorFiniteLength.prefix_product_pos',
+              '#print axioms LinearInputPrimeFactorFiniteLength.full_library_separates',
+              '#print axioms LinearInputPrimeFactorFiniteLength.bumped_prefix_swap_product',
+              '#print axioms LinearInputPrimeFactorFiniteLength.missing_probe_witness',
+              '#print axioms LinearInputPrimeFactorFiniteLength.separates_iff_univ',
+              '#print axioms LinearInputPrimeFactorFiniteLength.minimal_distinct_probe_count',
+              '#print axioms LinearInputPrimeFactorFiniteLength.minimal_list_observation_count',
+              '#print axioms LinearInputPrimeFactorFiniteLength.unordered_factor_multiset_count',
+          ]
+          Path('lean/PrimeFactorFiniteLengthProbe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(sources) + '\n' +
+              '\n'.join(checks) + '\n', encoding='utf-8')
+          PY
+      - name: Verify new proofs with the trusted Lean kernel
+        working-directory: lean
+        run: lake env lean --trust=0 PrimeFactorFiniteLengthProbe.lean
