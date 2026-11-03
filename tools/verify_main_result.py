@@ -73,6 +73,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/DecompositionIdentification.inc', 'LinearInputDecompositionIdentification'),
     ('linear_input/lean_check/DecompositionF0Bridge.inc', 'LinearInputDecompositionF0Bridge'),
     ('linear_input/lean_check/PrimeFactorIdentification.inc', 'LinearInputPrimeFactorIdentification'),
+    ('linear_input/lean_check/PrimeSplitNormalForm.inc', 'LinearInputPrimeSplitNormalForm'),
 )
 
 
