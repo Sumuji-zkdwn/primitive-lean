@@ -306,8 +306,10 @@ theorem predictive_minimal {α β ω ι : Type*}
     {x y : α} (hxy : f x = f y) :
     encode K step x = encode K step y := by
   apply (encode_eq_iff K step x y).2
-  exact (representation_word_eq K step f update out hout hf x y).2
-    (by rw [hxy])
+  have hword : WordEq out update (f x) (f y) := by
+    intro word
+    rw [hxy]
+  exact (representation_word_eq K step f update out hout hf x y).2 hword
 
 /-- A small witness where an independent action reveals a hidden distinction. -/
 def exampleK (x : Fin 3) : Fin 2 := if x = 2 then 1 else 0
