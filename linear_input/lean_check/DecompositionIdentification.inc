@@ -27,7 +27,7 @@ theorem steps_trans {α : Type*} {R : α → α → Prop}
     Steps R x z := by
   induction hxy with
   | refl _ => exact hyz
-  | cons h _ ih => exact Steps.cons h ih
+  | cons h _ ih => exact Steps.cons h (ih hyz)
 
 /-- Rewrite-invariance extends from one step to every finite derivation. -/
 theorem steps_preserve {α β : Type*} (R : α → α → Prop)
@@ -205,7 +205,7 @@ def branchValue (_ : Fin 3) : ℕ := 36
 
 def branchProbe (x : Fin 3) : Bool := decide (x = 2)
 
-theorem branch_step_preserves (x y : Fin 3) (h : branchStep x y) :
+theorem branch_step_preserves (x y : Fin 3) (_h : branchStep x y) :
     branchValue x = branchValue y := rfl
 
 theorem branch_rank_decreases {x y : Fin 3} (h : branchStep x y) :
