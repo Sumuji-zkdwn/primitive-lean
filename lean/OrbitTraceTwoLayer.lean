@@ -37,7 +37,9 @@ theorem twoLayerN_top_nonzero
     (p : ℕ) (a : ℚ) (ha : a ≠ 0) (i : Fin (p + 1)) :
     (twoLayerN p a (twoLayerTop p i)).1 i ≠ 0 := by
   have hi : (((i.val + 1 : ℕ) : ℚ)) ≠ 0 := by positivity
-  simp [twoLayerN, twoLayerTop, hi, ha]
+  have hn : -(((i.val + 1 : ℕ) : ℚ) * a) ≠ 0 :=
+    neg_ne_zero.mpr (mul_ne_zero hi ha)
+  simpa [twoLayerN, twoLayerTop] using hn
 
 theorem twoLayerN_surjective_onto_low
     (p : ℕ) (a : ℚ) (ha : a ≠ 0)
