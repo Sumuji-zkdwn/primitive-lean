@@ -32,10 +32,10 @@ theorem first_shell_moment
       have hr := hrec 0
       have heq : M (p + 1) = s * s ^ p - a := by
         simpa [hp, hzero] using hr
-      simpa only [Nat.add_zero, Nat.cast_one, one_mul, pow_zero, mul_one] using
-        (show M (p + 1) = s ^ (p + 1) - a from by
-          rw [heq, pow_succ]
-          ring)
+      have hbase : M (p + 1) = s ^ (p + 1) - a := by
+        rw [heq, pow_succ]
+        ring
+      simpa using hbase
   | succ j ih =>
       intro hj
       have hj' : j ≤ p := by omega
@@ -43,7 +43,9 @@ theorem first_shell_moment
       have hr := hrec (j + 1)
       have hstep : M (p + 1 + (j + 1)) =
           s * M (p + 1 + j) - a * M (j + 1) := by
-        convert hr using 1 <;> omega
+        have hi1 : j + 1 + p + 1 = p + 1 + (j + 1) := by omega
+        have hi2 : j + 1 + p = p + 1 + j := by omega
+        simpa only [hi1, hi2] using hr
       calc
         M (p + 1 + (j + 1)) =
             s * M (p + 1 + j) - a * M (j + 1) := hstep
