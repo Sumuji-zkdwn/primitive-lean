@@ -132,7 +132,7 @@ theorem generate_none_exhaustive {α : Type*} [DecidableEq α]
     ∀ target, target ∈ candidates → viable target = false := by
   have hnone : chooseTarget candidates viable = none := by
     cases hc : chooseTarget candidates viable with
-    | none => exact hc
+    | none => rfl
     | some target =>
         simp [generate, hc] at h
   exact chooseTarget_none_exhaustive candidates viable hnone
@@ -244,7 +244,21 @@ def witnessAccepts (loc : Fin 2) (x : Fin 3) : Bool :=
 theorem witnessLocalTable_exact (x : Fin 3) :
     (∃ loc, loc ∈ witnessLocals ∧ witnessAccepts loc x = true) ↔
       HasLocal witnessAlive 1 x := by
-  fin_cases x <;> decide
+  constructor
+  · rintro ⟨loc, _, hacc⟩
+    have hpair : loc = 1 ∧ x = 2 := by
+      simpa [witnessAccepts] using hacc
+    exact ⟨loc, Or.inr ⟨rfl, hpair.1, hpair.2⟩⟩
+  · rintro ⟨loc, halive⟩
+    change (1 = 0 ∧ loc = 0 ∧ x = 1) ∨
+      (1 = 1 ∧ loc = 1 ∧ x = 2) at halive
+    rcases halive with hzero | hone
+    · have hz : (1 : ℕ) = 0 := hzero.1
+      omega
+    · refine ⟨loc, ?_, ?_⟩
+      · fin_cases loc <;> simp [witnessLocals]
+      · have hpair : loc = 1 ∧ x = 2 := ⟨hone.2.1, hone.2.2⟩
+        simpa [witnessAccepts] using hpair
 
 theorem witnessInternalFeasible :
     ∃ target, target ∈ witnessCandidates ∧
