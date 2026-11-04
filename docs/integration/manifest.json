@@ -2241,15 +2241,15 @@
     },
     {
       "path": "linear_input/lean_check/RadicalF0Bridge.inc",
-      "sha256": "9d74d944c6011481d153863a3448f69917ff5f14e74d66801ab226a3c66f643e",
-      "original_sha256": "9d74d944c6011481d153863a3448f69917ff5f14e74d66801ab226a3c66f643e",
+      "sha256": "20d14913b17735887818dd532ab743d61530b4bcce42825bb57d518ffed0924a",
+      "original_sha256": "20d14913b17735887818dd532ab743d61530b4bcce42825bb57d518ffed0924a",
       "source_pr": null,
-      "source_commit": "4684d33c03d6a2c79a6a491d42fd93ddfa3e7e56",
+      "source_commit": "9575e54ad4b12acbb7b3ee8d30adcafd65e34a18",
       "source_path": "linear_input/lean_check/RadicalF0Bridge.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": [],
-      "authoring_commit": "4684d33c03d6a2c79a6a491d42fd93ddfa3e7e56"
+      "authoring_commit": "9575e54ad4b12acbb7b3ee8d30adcafd65e34a18"
     }
   ],
   "construction_errors": [],
@@ -2323,8 +2323,8 @@
     {
       "date": "2026-11-05",
       "path": "linear_input/lean_check/RadicalF0Bridge.inc",
-      "source_commit": "4684d33c03d6a2c79a6a491d42fd93ddfa3e7e56",
-      "note": "Arithmetic radical support, F0 idempotence, squarefree fixed points, exact observation fibers, successor non-descent and incomplete future prediction; original proof inputs unchanged."
+      "source_commit": "9575e54ad4b12acbb7b3ee8d30adcafd65e34a18",
+      "note": "Current pinned-Mathlib-compatible radical F0, idempotence, squarefree fixed direction, exact observation kernel, successor non-descent, and future-state incompleteness; source retained unmodified in registry."
     }
   ]
 }
