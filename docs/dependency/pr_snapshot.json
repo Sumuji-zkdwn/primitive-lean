@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repository": "Sumuji-zkdwn/primitive-lean",
   "snapshot_date": "2026-11-05",
-  "observation": "Mostly retrieved earlier this conversation from GitHub metadata; some intermediate branches were inferred from named PR chain and must be treated as tentative.",
+  "observation": "GitHub PR metadata inspected as of 2026-11-05; base_branch denotes PR target at inspection, not necessarily Git commit ancestry. Heads may change.",
   "prs": [
     {
       "number": 3,
@@ -107,42 +107,42 @@
     {
       "number": 65,
       "base_branch": "chatgpt/metarule-self-extension-20261104",
-      "head_branch": "chatgpt/history-nonpreservation-20261104",
-      "head_sha": null,
+      "head_branch": "chatgpt/history-nonpreservation-obstruction-20261104",
+      "head_sha": "192c612cc51d4d13c6ad7d6c3e8f2bc49e9d5021",
       "state": "open",
       "merged": false,
       "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/65",
-      "sha_verified": false
+      "sha_verified": true
     },
     {
       "number": 66,
-      "base_branch": "chatgpt/history-nonpreservation-20261104",
+      "base_branch": "chatgpt/history-nonpreservation-obstruction-20261104",
       "head_branch": "chatgpt/temporal-local-extinction-20261104",
-      "head_sha": null,
+      "head_sha": "785876af38fed640c4862c99cebcae7b11cf9457",
       "state": "open",
       "merged": false,
       "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/66",
-      "sha_verified": false
+      "sha_verified": true
     },
     {
       "number": 67,
       "base_branch": "chatgpt/temporal-local-extinction-20261104",
       "head_branch": "chatgpt/local-capacity-incompatibility-20261104",
-      "head_sha": null,
+      "head_sha": "7793fc11fda58b7c8f0f4ba362a63bbc87deb09a",
       "state": "open",
       "merged": false,
       "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/67",
-      "sha_verified": false
+      "sha_verified": true
     },
     {
       "number": 69,
       "base_branch": "chatgpt/local-capacity-incompatibility-20261104",
       "head_branch": "chatgpt/cooperative-gluing-obstruction-20261104",
-      "head_sha": null,
+      "head_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17",
       "state": "open",
       "merged": false,
       "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/69",
-      "sha_verified": false
+      "sha_verified": true
     },
     {
       "number": 70,
@@ -178,11 +178,11 @@
       "number": 73,
       "base_branch": "chatgpt/metarule-self-extension-20261104",
       "head_branch": "chatgpt/higher-order-lift-self-rewriting-20261104",
-      "head_sha": "49bcf3612f5d166a916e8f16c7b594",
+      "head_sha": "49bcf3612f5d166a916e8f16b73577fd0fbcdf73",
       "state": "closed",
       "merged": false,
       "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/73",
-      "sha_verified": false
+      "sha_verified": true
     },
     {
       "number": 74,
