@@ -203,6 +203,64 @@ theorem twoLayerEncode_injective (p : ℕ) :
       congrArg (fun P : Polynomial ℚ => P.coeff (p + 1 + i.val)) h
     simpa only [twoLayerEncode_coeff_high] using hc
 
+
+/-!
+Uniform second shell of the algebraic moment recurrence (three-layer data).
+The natural coefficient `secondShellCoeff` equals binomial(j+2,2).
+We retain the recurrence formulation to avoid choosing rational denominators.
+-/
+
+def secondShellCoeff : ℕ → ℕ
+  | 0 => 1
+  | j + 1 => secondShellCoeff j + (j + 2)
+
+theorem second_shell_moment
+    {K : Type*} [CommRing K]
+    (p : ℕ) (s a : K) (M : ℕ → K)
+    (hinit : ∀ k : ℕ, k ≤ p → M k = s ^ k)
+    (hrec : ∀ k : ℕ,
+      M (k + p + 1) = s * M (k + p) - a * M k) :
+    ∀ j : ℕ, j ≤ p →
+      M (2 * (p + 1) + j) =
+        s ^ j *
+          ((s ^ (p + 1)) ^ 2 -
+           (((p + 2 + j : ℕ) : K) * a * s ^ (p + 1)) +
+           ((secondShellCoeff j : ℕ) : K) * a ^ 2) := by
+  intro j
+  induction j with
+  | zero =>
+      intro _
+      have hp := first_shell_moment p s a M hinit hrec p (le_refl p)
+      have h0 := first_shell_moment p s a M hinit hrec 0 (Nat.zero_le p)
+      have hq : M (p + 1) = s ^ (p + 1) - a := by simpa using h0
+      have hr : M (2 * (p + 1)) =
+          s * M (p + 1 + p) - a * M (p + 1) := by
+        convert hrec (p + 1) using 1 <;> omega
+      simp only [Nat.add_zero, pow_zero, one_mul, secondShellCoeff]
+      rw [hr, hp, hq]
+      rw [pow_add, pow_succ]
+      push_cast
+      ring
+  | succ j ih =>
+      intro hj
+      have hj' : j ≤ p := by omega
+      have hfirst :=
+        first_shell_moment p s a M hinit hrec (j + 1) hj
+      have hr : M (2 * (p + 1) + (j + 1)) =
+          s * M (2 * (p + 1) + j) -
+            a * M (p + 1 + (j + 1)) := by
+        convert hrec (p + 1 + (j + 1)) using 1 <;> omega
+      rw [hr, ih hj', hfirst]
+      have hpow : s ^ (p + 1 + (j + 1)) =
+          s ^ (p + 1) * s ^ (j + 1) := by rw [pow_add]
+      rw [hpow, pow_succ]
+      simp only [secondShellCoeff, Nat.cast_add, Nat.cast_succ]
+      push_cast
+      ring
+
+#print axioms OrbitTrace.second_shell_moment
+
+
 #print axioms OrbitTrace.twoLayerEncode_injective
 
 #print axioms OrbitTrace.twoLayerTransfer_eq_encode
