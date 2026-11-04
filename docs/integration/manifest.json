@@ -2262,6 +2262,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "99a63392584c4fcea9f1593bf6dda186dd0a6678"
+    },
+    {
+      "path": "linear_input/lean_check/PilotHullInflation.inc",
+      "sha256": "1d283f9809905b5ccdd6d8c98730d8ddec4f50c1afbe7e3de4dce5a041835bc0",
+      "original_sha256": "1d283f9809905b5ccdd6d8c98730d8ddec4f50c1afbe7e3de4dce5a041835bc0",
+      "source_pr": null,
+      "source_commit": "c394307292dc20993e923fcf01ff6b5ce9dca0ab",
+      "source_path": "linear_input/lean_check/PilotHullInflation.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "c394307292dc20993e923fcf01ff6b5ce9dca0ab"
     }
   ],
   "construction_errors": [],
@@ -2343,6 +2355,12 @@
       "path": "linear_input/lean_check/PilotVolumeTransport.inc",
       "source_commit": "99a63392584c4fcea9f1593bf6dda186dd0a6678",
       "note": "Abstract exact transport-shift criterion and conditional finite local packet budget; no IUT arithmetic lower bound or transport construction claimed."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/PilotHullInflation.inc",
+      "source_commit": "c394307292dc20993e923fcf01ff6b5ce9dca0ab",
+      "note": "Finite rectangle model proving that a volume-preserving swap can strictly inflate the join hull of orbit images; does not claim IUT Ind2 positivity."
     }
   ]
 }
