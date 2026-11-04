@@ -163,6 +163,7 @@ def verify_lean(rebuild):
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
         'PilotComparisonBridge': 'Choice-dependent reconstruction range cover, quotient factorization boundary, exact log-volume witness iff numerical cap, independent finite and ell=7 countermodels; not an IUT proof.',
+        'PilotVolumeTransport': 'Exact choice-dependent log-volume shift criterion, neutral/limited-shift obstruction, and conditional local packet budget certificate; not an arithmetic IUT proof.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
