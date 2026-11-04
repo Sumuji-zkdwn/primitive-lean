@@ -22,4 +22,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test demos/higher_order_playground.test.cjs
+      - run: node --test demos/higher_order_playground.test.cjs demos/rulefold_mandala.test.cjs
