@@ -121,6 +121,43 @@ theorem canonicalMoment_first_shell
     exact canonicalMoment_recurrence p k a
   · exact hj
 
+
+/-!
+Actual polynomial-observable bridge for the full two-shell range of degrees.
+The canonical transfer here is defined on linear combinations of monomials,
+so the equality below is not merely an unrelated companion matrix identity.
+-/
+
+def twoLayerEncode (p : ℕ) (low high : Fin (p + 1) → ℚ) : Polynomial ℚ :=
+  ∑ i : Fin (p + 1),
+    Polynomial.C (low i) * Polynomial.X ^ i.val +
+      Polynomial.C (high i) * Polynomial.X ^ (p + 1 + i.val)
+
+def twoLayerTransfer (p : ℕ) (a : ℚ)
+    (low high : Fin (p + 1) → ℚ) : Polynomial ℚ :=
+  ∑ i : Fin (p + 1),
+    Polynomial.C (low i) * canonicalMoment p a i.val +
+      Polynomial.C (high i) * canonicalMoment p a (p + 1 + i.val)
+
+/-- The actual transfer of every polynomial in the two-shell span is the
+explicit weighted nilpotent block action in polynomial coordinates. -/
+theorem twoLayerTransfer_eq_encode (p : ℕ) (a : ℚ)
+    (low high : Fin (p + 1) → ℚ) :
+    twoLayerTransfer p a low high =
+      twoLayerEncode p
+        (fun i => low i - ((i.val + 1 : ℕ) : ℚ) * a * high i)
+        high := by
+  unfold twoLayerTransfer twoLayerEncode
+  apply Finset.sum_congr rfl
+  intro i hi
+  have hle : i.val ≤ p := by omega
+  rw [canonicalMoment_initial p i.val a hle,
+      canonicalMoment_first_shell p i.val a hle]
+  simp only [map_sub, map_mul, map_natCast]
+  ring
+
+#print axioms OrbitTrace.twoLayerTransfer_eq_encode
+
 #print axioms OrbitTrace.canonicalMoment_first_shell
 
 #print axioms OrbitTrace.first_shell_moment
