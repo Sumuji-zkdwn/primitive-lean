@@ -19,12 +19,12 @@ namespace LinearInputPilotComparison
 /-- A target value can be reconstructed after forgetting by some choice. -/
 def Reachable {A B S V : Type*}
     (forget : A -> B) (target : A -> V) (out : B -> S -> V) : Prop :=
-  forall x, exists s, out (forget x) s = target x
+  ∀ x, ∃ s, out (forget x) s = target x
 
 /-- All original target values having a given forgotten observation. -/
 def FiberTargets {A B V : Type*}
     (forget : A -> B) (target : A -> V) (b : B) : Set V :=
-  {v | exists x, forget x = b /\ target x = v}
+  {v | ∃ x, forget x = b /\ target x = v}
 
 /-- Values available to the reconstruction procedure at a fixed observation. -/
 def ChoiceValues {B S V : Type*} (out : B -> S -> V) (b : B) : Set V :=
@@ -34,7 +34,7 @@ def ChoiceValues {B S V : Type*} (out : B -> S -> V) (b : B) : Set V :=
 theorem reachable_iff_fiber_covered {A B S V : Type*}
     (forget : A -> B) (target : A -> V) (out : B -> S -> V) :
     Reachable forget target out <->
-      forall b, FiberTargets forget target b ⊆ ChoiceValues out b := by
+      ∀ b, FiberTargets forget target b ⊆ ChoiceValues out b := by
   constructor
   · intro h b v hv
     obtain ⟨x, hfx, hq⟩ := hv
@@ -50,13 +50,13 @@ theorem reachable_iff_fiber_covered {A B S V : Type*}
 /-- The stronger notion: target is itself insensitive to forgotten fibers. -/
 def FiberInvariant {A B V : Type*}
     (forget : A -> B) (target : A -> V) : Prop :=
-  forall x y, forget x = forget y -> target x = target y
+  ∀ x y, forget x = forget y -> target x = target y
 
 /-- Deterministic quotient factorization is equivalent to fiber invariance,
 provided the target type is inhabited outside the observed range. -/
 theorem factorization_iff_fiber_invariant {A B V : Type*} [Inhabited V]
     (forget : A -> B) (target : A -> V) :
-    (exists q : B -> V, forall x, q (forget x) = target x) <->
+    (∃ q : B -> V, ∀ x, q (forget x) = target x) <->
       FiberInvariant forget target := by
   constructor
   · rintro ⟨q, hq⟩ x y hxy
@@ -67,13 +67,13 @@ theorem factorization_iff_fiber_invariant {A B V : Type*} [Inhabited V]
   · intro h
     classical
     let q : B -> V := fun b =>
-      if hb : exists x : A, forget x = b then
+      if hb : ∃ x : A, forget x = b then
         target (Classical.choose hb)
       else default
     refine ⟨q, ?_⟩
     intro x
-    have hx : exists y : A, forget y = forget x := ⟨x, rfl⟩
-    change (if hb : exists y : A, forget y = forget x then
+    have hx : ∃ y : A, forget y = forget x := ⟨x, rfl⟩
+    change (if hb : ∃ y : A, forget y = forget x then
       target (Classical.choose hb) else default) = target x
     rw [dif_pos hx]
     exact h (Classical.choose hx) x (Classical.choose_spec hx)
@@ -83,8 +83,8 @@ The witness is a separate input; it is not inferred from factorization. -/
 theorem reachable_of_factor_and_witness {A B S V : Type*}
     (forget : A -> B) (target : A -> V) (out : B -> S -> V)
     (q : B -> V)
-    (hfactor : forall x, q (forget x) = target x)
-    (hwitness : forall b, exists s, out b s = q b) :
+    (hfactor : ∀ x, q (forget x) = target x)
+    (hwitness : ∀ b, ∃ s, out b s = q b) :
     Reachable forget target out := by
   intro x
   obtain ⟨s, hs⟩ := hwitness (forget x)
@@ -95,7 +95,7 @@ target to descend through forgetting. The converse is false without a witness. -
 theorem reachable_choice_independent_implies_fiber_invariant {A B S V : Type*}
     (forget : A -> B) (target : A -> V) (out : B -> S -> V)
     (h : Reachable forget target out)
-    (hirr : forall b s t, out b s = out b t) :
+    (hirr : ∀ b s t, out b s = out b t) :
     FiberInvariant forget target := by
   intro x y hxy
   obtain ⟨sx, hx⟩ := h x
@@ -116,10 +116,10 @@ the precise arithmetic bound on the target.  This is the bridge obligation. -/
 theorem log_wall_iff_bound {A B S : Type*}
     (forget : A -> B) (target : A -> Real)
     (offset cap : B -> Real) (volume : B -> S -> Real)
-    (hupper : forall b s, volume b s ≤ cap b)
-    (hcomplete : forall b v, v ≤ cap b -> exists s, volume b s = v) :
+    (hupper : ∀ b s, volume b s ≤ cap b)
+    (hcomplete : ∀ b v, v ≤ cap b -> ∃ s, volume b s = v) :
     LogWall forget target offset volume <->
-      forall x, target x - offset (forget x) ≤ cap (forget x) := by
+      ∀ x, target x - offset (forget x) ≤ cap (forget x) := by
   constructor
   · intro h x
     obtain ⟨s, hs⟩ := h x
@@ -138,9 +138,9 @@ theorem log_wall_iff_bound {A B S : Type*}
 offset = -scale*a and target = -a. This is NOT its arithmetic proof. -/
 theorem scaled_pilot_witness_iff {S : Type*}
     (a scale cap : Real) (volume : S -> Real)
-    (hupper : forall t, volume t ≤ cap)
-    (hcomplete : forall v, v ≤ cap -> exists t, volume t = v) :
-    (exists t, -(scale * a) + volume t = -a) <->
+    (hupper : ∀ t, volume t ≤ cap)
+    (hcomplete : ∀ v, v ≤ cap -> ∃ t, volume t = v) :
+    (∃ t, -(scale * a) + volume t = -a) <->
       (scale - 1) * a ≤ cap := by
   constructor
   · rintro ⟨t, ht⟩
@@ -160,13 +160,13 @@ theorem truncated_upper (cap t : Real) :
   exact min_le_right t cap
 
 theorem truncated_complete (cap v : Real) (hv : v ≤ cap) :
-    exists t : Real, truncatedVolume cap t = v := by
+    ∃ t : Real, truncatedVolume cap t = v := by
   refine ⟨v, ?_⟩
   exact min_eq_left hv
 
 /-- ell=7, scale=14/3, a=1, cap=1: the comparison fails. -/
 theorem ell7_small_container_obstruction :
-    not (exists t : Real,
+    ¬ (∃ t : Real,
       -((14 / 3 : Real)) + truncatedVolume 1 t = -1) := by
   rintro ⟨t, ht⟩
   have hu := truncated_upper 1 t
@@ -174,7 +174,7 @@ theorem ell7_small_container_obstruction :
 
 /-- The same target is attainable when the cap is 4 instead of 1. -/
 theorem ell7_larger_container_witness :
-    exists t : Real,
+    ∃ t : Real,
       -((14 / 3 : Real)) + truncatedVolume 4 t = -1 := by
   refine ⟨11 / 3, ?_⟩
   have hv : truncatedVolume 4 (11 / 3) = (11 / 3 : Real) := by
@@ -191,14 +191,14 @@ def distinctTarget (x : Fin 2) : Real := if x = 0 then 0 else 1
 def choiceOutput (_ : Fin 2) (s : Fin 2) : Real := if s = 0 then 0 else 1
 
 /-- Choice-dependent reconstruction can retain both original values, even
-though no single-valued quotient target exists. -/
+though no single-valued quotient target ∃. -/
 theorem choice_range_can_cover_nonconstant_fiber :
     Reachable constantForget distinctTarget choiceOutput := by
   intro x
   exact ⟨x, rfl⟩
 
 theorem choice_range_not_single_valued :
-    not (FiberInvariant constantForget distinctTarget) := by
+    ¬ (FiberInvariant constantForget distinctTarget) := by
   intro h
   have heq : distinctTarget (0 : Fin 2) = distinctTarget (1 : Fin 2) :=
     h 0 1 rfl
@@ -213,7 +213,7 @@ theorem constant_forget_idempotent :
 the missing numerical comparison wall. -/
 theorem f0_descent_does_not_force_wall :
     LinearInputF0Descent.Descends constantForget (fun x : Fin 2 => x) /\
-    not (Reachable constantForget (fun _ : Fin 2 => (-1 : Real))
+    ¬ (Reachable constantForget (fun _ : Fin 2 => (-1 : Real))
       (fun (_ : Fin 2) (t : Real) =>
         -((14 / 3 : Real)) + truncatedVolume 1 t)) := by
   constructor
