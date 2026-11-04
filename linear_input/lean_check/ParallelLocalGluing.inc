@@ -53,10 +53,10 @@ def CoversCoordinates {Λ I V : Type*}
 values, using a default only at unspecified coordinates. The choice
 is coherent precisely when overlaps agree. -/
 def canonical {Λ I V : Type*} [Inhabited V]
-    (locals : List Λ) (part : Λ → I → Option V) (i : I) : V :=
-  if h : ∃ v : V, ∃ l, l ∈ locals ∧ part l i = some v
-  then Classical.choose h
-  else default
+    (locals : List Λ) (part : Λ → I → Option V) (i : I) : V := by
+  classical
+  exact if h : ∃ v : V, ∃ l, l ∈ locals ∧ part l i = some v
+    then Classical.choose h else default
 
 theorem canonical_respects {Λ I V : Type*} [Inhabited V]
     (locals : List Λ) (part : Λ → I → Option V)
@@ -65,11 +65,13 @@ theorem canonical_respects {Λ I V : Type*} [Inhabited V]
     (hv : part l i = some v) :
     canonical locals part i = v := by
   classical
-  unfold canonical
-  split_ifs with h
-  · obtain ⟨m, hm, hmv⟩ := Classical.choose_spec h
-    exact hc m hm l hl i (Classical.choose h) v hmv hv
-  · exact False.elim (h ⟨v, l, hl, hv⟩)
+  have hex : ∃ value : V, ∃ m, m ∈ locals ∧ part m i = some value :=
+    ⟨v, l, hl, hv⟩
+  have hvalue : canonical locals part i = Classical.choose hex := by
+    simp only [canonical, dif_pos hex]
+  rw [hvalue]
+  obtain ⟨m, hm, hmv⟩ := Classical.choose_spec hex
+  exact hc m hm l hl i (Classical.choose hex) v hmv hv
 
 /-- Necessity: the same global value cannot equal two different local
 values on an overlapping coordinate. -/
@@ -181,7 +183,10 @@ def disjointWrites (loc i : Fin 2) : Option Bool :=
 
 theorem disjoint_writes_are_compatible :
     PairwiseCompatible ([0, 1] : List (Fin 2)) disjointWrites := by
-  decide
+  intro l hl m hm i a b ha hb
+  fin_cases l <;> fin_cases m <;> fin_cases i <;>
+    cases a <;> cases b <;>
+    simp_all [disjointWrites]
 
 theorem disjoint_writes_cover_coordinates :
     CoversCoordinates ([0, 1] : List (Fin 2)) disjointWrites := by
@@ -256,6 +261,8 @@ theorem disjoint_writes_operationally_gluable_cumulatively :
       disjointWrites pairReadout cumulative (false, false)
       (fun _ => True) := by
   refine ⟨[0, 1], ?_, trivial⟩
-  decide
+  intro l hl i v hv
+  fin_cases l <;> fin_cases i <;> cases v <;>
+    simp_all [disjointWrites, pairReadout, run, cumulative]
 
 end LinearInputParallelGluing
