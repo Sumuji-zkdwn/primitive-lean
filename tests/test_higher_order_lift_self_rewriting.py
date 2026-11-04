@@ -38,7 +38,7 @@ def step_higher(state, viable):
     next_meta_rules = meta_rules + run_lift(next_lift_rules, target)
     return (
         known + (target,),
-        edges + interpret_meta(next_meta_rules, target),
+        edges + interpret_meta(meta_rules, target),
         next_meta_rules,
         next_lift_rules,
         lift_edits,
@@ -144,6 +144,17 @@ def test_rule_mutation_and_identification_capacity_are_separate():
 def test_stalled_finite_frontier_does_not_invent_targets():
     frozen = ((0, 1, 2), ((0, 1), (1, 2)), ((1, (1, 2)),), (), ())
     assert step_higher(frozen, (True,) * 4) is None
+
+
+def test_newly_emitted_meta_rule_is_not_applied_in_the_same_transition():
+    emitted = (1, (1, 2))
+    edit = (1, (1, emitted))
+    seed = ((0,), ((0, 1),), (), (), (edit,))
+
+    next_state = step_higher(seed, (True,) * 3)
+
+    assert next_state[2] == (emitted,)
+    assert next_state[1] == seed[1]
 
 
 def test_frontier_selection_is_first_viable_candidate():
