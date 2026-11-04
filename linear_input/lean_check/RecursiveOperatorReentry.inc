@@ -112,7 +112,7 @@ theorem reenter_none_certificate {α : Type*} [DecidableEq α]
   have hn : chooseTarget (novelFrontier children known) viable = none := by
     unfold reenter at h
     cases hc : chooseTarget (novelFrontier children known) viable with
-    | none => exact hc
+    | none => rfl
     | some target => simp [hc] at h
   intro target hchild
   by_cases hm : target ∈ known
