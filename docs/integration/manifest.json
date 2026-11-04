@@ -2238,6 +2238,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/PilotComparisonBridge.inc",
+      "sha256": "fbe61417ae597296787b5b0bedb06c31861f05b550200c46909713fffdd4b5e2",
+      "original_sha256": "fbe61417ae597296787b5b0bedb06c31861f05b550200c46909713fffdd4b5e2",
+      "source_pr": null,
+      "source_commit": "e70e842ac4593fea78c6d168e8d55bcd1f5557ce",
+      "source_path": "linear_input/lean_check/PilotComparisonBridge.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "e70e842ac4593fea78c6d168e8d55bcd1f5557ce"
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2319,12 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/PilotComparisonBridge.inc",
+      "source_commit": "e70e842ac4593fea78c6d168e8d55bcd1f5557ce",
+      "note": "Abstract, choice-dependent reconstruction and explicit numerical log-volume comparison wall with counterexamples; no IUT corollary or arithmetic lower bound claimed."
     }
   ]
 }
