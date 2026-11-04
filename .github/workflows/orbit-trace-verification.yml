@@ -14,6 +14,7 @@ on:
       - 'lean/OrbitTraceMoment12.lean'
       - 'lean/OrbitTraceFirstShell.lean'
       - 'lean/OrbitTraceTwoLayer.lean'
+      - 'lean/OrbitTraceJordanUniform3.lean'
       - 'tools/check_orbit_trace.py'
       - 'docs/research/2026-11-04-orbit-trace-integrals.md'
   workflow_dispatch:
@@ -49,6 +50,7 @@ jobs:
           lake env lean --trust=0 OrbitTraceMoment12.lean
           lake env lean --trust=0 OrbitTraceFirstShell.lean
           lake env lean --trust=0 OrbitTraceTwoLayer.lean
+          lake env lean --trust=0 OrbitTraceJordanUniform3.lean
 
       - name: Exact symbolic independent probes
         run: |
