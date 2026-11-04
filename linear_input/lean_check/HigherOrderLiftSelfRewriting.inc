@@ -109,17 +109,32 @@ theorem higherStep_sound {α : Type*} [DecidableEq α]
         LinearInputFiniteSelfSynthesis.chooseTarget_sound
           (higherFrontier s) viable target hc
       have hnew : target ∉ s.known :=
-        ((novelFrontier_mem_iff
+        ((LinearInputRecursiveReentry.novelFrontier_mem_iff
           (LinearInputRuleSelfModification.children
             (⟨s.known, s.edges⟩ :
               LinearInputRuleSelfModification.RuleMachine α))
           s.known target).mp hfront).2
-      exact ⟨target, hfront, hnew, hv,
-        congrArg HigherMachine.known heq,
-        congrArg HigherMachine.liftRules heq,
-        congrArg HigherMachine.metaRules heq,
-        congrArg HigherMachine.edges heq,
-        congrArg HigherMachine.liftEdits heq⟩
+      have hknown : next.known = s.known ++ [target] := by
+        rw [heq]
+        rfl
+      have hlift : next.liftRules =
+          applyLiftEdits s.liftEdits s.liftRules target := by
+        rw [heq]
+        rfl
+      have hmeta : next.metaRules =
+          s.metaRules ++ runLift
+            (applyLiftEdits s.liftEdits s.liftRules target) target := by
+        rw [heq]
+        rfl
+      have hedges : next.edges = s.edges ++
+          LinearInputMetaRuleExtension.interpretMeta s.metaRules target := by
+        rw [heq]
+        rfl
+      have hedits : next.liftEdits = s.liftEdits := by
+        rw [heq]
+        rfl
+      exact ⟨target, hfront, hnew, hv, hknown, hlift,
+        hmeta, hedges, hedits⟩
 
 theorem higherStep_strict_growth {α : Type*} [DecidableEq α]
     (viable : α → Bool) (s next : HigherMachine α)
@@ -207,7 +222,7 @@ theorem higherStep_none_certificate {α : Type*} [DecidableEq α]
     unfold higherStep at h
     cases hh : LinearInputFiniteSelfSynthesis.chooseTarget
         (higherFrontier s) viable with
-    | none => exact hh
+    | none => rfl
     | some target => simp [hh] at h
   exact LinearInputFiniteSelfSynthesis.chooseTarget_none_exhaustive
     (higherFrontier s) viable hc
