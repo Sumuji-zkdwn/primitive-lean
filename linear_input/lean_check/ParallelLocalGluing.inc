@@ -265,7 +265,7 @@ theorem equal_overlapping_writes_compatible :
     Compatible conflictingLeft conflictingLeft := by
   intro i a b ha hb
   rw [ha] at hb
-  exact Option.some.inj hb.symm
+  exact Option.some.inj hb
 
 /-- The destructive total-state proposals of PR #69 conflict on overlap,
 while the incremental writes can be glued. -/
