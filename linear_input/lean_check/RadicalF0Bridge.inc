@@ -95,7 +95,7 @@ theorem radical_of_prime (p : ℕ) (hp : Nat.Prime p) :
 /-- Explicitly identify the prime support of four as a singleton. -/
 theorem primeFactors_four :
     (4 : ℕ).primeFactors = ({2} : Finset ℕ) := by
-  have hp : Nat.Prime 2 := by norm_num
+  have hp : Nat.Prime 2 := by decide
   calc
     (4 : ℕ).primeFactors = (2 * 2 : ℕ).primeFactors := by norm_num
     _ = (2 : ℕ).primeFactors ∪ (2 : ℕ).primeFactors :=
@@ -109,14 +109,14 @@ theorem radical_four : radical 4 = 2 := by
 /-- Forgetting identifies the same support despite different exponents. -/
 theorem two_four_same_radical : radical 2 = radical 4 := by
   calc
-    radical 2 = 2 := radical_of_prime 2 (by norm_num)
+    radical 2 = 2 := radical_of_prime 2 (by decide)
     _ = radical 4 := radical_four.symm
 
 /-- One successor step distinguishes the previously identified states. -/
 theorem successors_distinguished :
     radical (Nat.succ 2) ≠ radical (Nat.succ 4) := by
   change radical 3 ≠ radical 5
-  rw [radical_of_prime 3 (by norm_num), radical_of_prime 5 (by norm_num)]
+  rw [radical_of_prime 3 (by decide), radical_of_prime 5 (by decide)]
   norm_num
 
 /-- The successor operation does not respect radical's observational fibers. -/
