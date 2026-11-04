@@ -69,6 +69,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RuleSelfModification.inc', 'LinearInputRuleSelfModification'),
     ('linear_input/lean_check/MetaRuleSelfExtension.inc', 'LinearInputMetaRuleExtension'),
     ('linear_input/lean_check/HistoryNonpreservation.inc', 'LinearInputHistoryNonpreservation'),
+    ('linear_input/lean_check/TemporalLocalExtinction.inc', 'LinearInputTemporalExtinction'),
     ('linear_input/lean_check/EWFSFenchel.inc', 'LinearInputEWFSDual'),
     ('linear_input/lean_check/WFSCanonicalLift.inc', 'LinearInputWFSCanonical'),
     ('linear_input/lean_check/EWFSFutureBridge.inc', 'LinearInputEWFSFuture'),
