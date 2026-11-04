@@ -66,7 +66,7 @@ theorem pilot_window_implies_cor312_variant (D : InitialThetaData.{0})
        -(sFactor (nC D) * D.qPilot.absLogQ) + logVol D S.1 =
          -D.qPilot.absLogQ) :
     Corollary312Variant (concreteVariantData D) := by
-  exact WallEquiv.variant_of_ss ((pilot_window_iff_ss D).mp hw)
+  exact WallEquiv.variant_of_ss D ((pilot_window_iff_ss D).mp hw)
 
 end PrimitiveIutCrossRepo
 
