@@ -83,7 +83,7 @@ Concrete polynomial sequence in the formal observation variable X.
 This recursion is constructed, rather than postulated as an arbitrary M.
 -/
 
-def canonicalMoment (p : ℕ) (a : ℚ) (k : ℕ) : Polynomial ℚ :=
+noncomputable def canonicalMoment (p : ℕ) (a : ℚ) (k : ℕ) : Polynomial ℚ :=
   if hk : k ≤ p then
     Polynomial.X ^ k
   else
