@@ -266,4 +266,50 @@ theorem reactivation_can_restore_preservation :
     change stepAt sample 0 x = stepAt reactivated 2 x
     rw [sample_step_zero, reactivated_step_two]
 
+/-- Reopening the old operation at time 3 recovers an endpoint
+representation, but the intervening loss at time 2 remains real. -/
+def recoveredAfterGap : LocalTimeline (Fin 2) Unit (Fin 2) :=
+  { sample with available := fun t loc x =>
+      if t = 3 then decide (loc = 0) else sampleAvailable t loc x }
+
+theorem recovered_step_zero (x : Fin 2) :
+    stepAt recoveredAfterGap 0 x = flip x := by
+  rfl
+
+theorem recovered_step_three (x : Fin 2) :
+    stepAt recoveredAfterGap 3 x = flip x := by
+  rfl
+
+theorem recovered_middle_extinct :
+    AllExtinct recoveredAfterGap 2 := by
+  intro x loc _
+  rfl
+
+theorem recovered_endpoints_preserve_history :
+    Preserves (historyAt recoveredAfterGap 0)
+      (historyAt recoveredAfterGap 3) := by
+  refine ⟨fun x => x, ?_, ?_, ?_⟩
+  · intro x y h
+    exact h
+  · intro x
+    rfl
+  · intro x
+    change stepAt recoveredAfterGap 0 x =
+      stepAt recoveredAfterGap 3 x
+    rw [recovered_step_zero, recovered_step_three]
+
+theorem recovered_interval_still_not_preserved :
+    ¬ PreservedOn recoveredAfterGap 0 3 := by
+  exact interval_with_extinct_endpoint_is_not_preserved
+    recoveredAfterGap 0 3 2 (by omega) (by omega) 0
+    (by decide) recovered_middle_extinct
+
+/-- Endpoint recovery does NOT imply interval preservation. -/
+theorem recovered_endpoints_but_broken_interval :
+    Preserves (historyAt recoveredAfterGap 0)
+      (historyAt recoveredAfterGap 3) ∧
+    ¬ PreservedOn recoveredAfterGap 0 3 :=
+  ⟨recovered_endpoints_preserve_history,
+   recovered_interval_still_not_preserved⟩
+
 end LinearInputTemporalExtinction
