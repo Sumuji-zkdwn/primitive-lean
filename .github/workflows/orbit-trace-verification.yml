@@ -51,13 +51,13 @@ jobs:
       - name: Lean kernel verification (trust zero)
         working-directory: lean
         run: |
+          mkdir -p .lake/build/lib/lean
           lake env lean --trust=0 OrbitTrace.lean
           lake env lean --trust=0 OrbitTraceVieta.lean
           lake env lean --trust=0 OrbitTraceMoment.lean
           lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceNilpotence.olean OrbitTraceNilpotence.lean
           lake env lean --trust=0 OrbitTraceJordan3.lean
           lake env lean --trust=0 OrbitTraceMoment12.lean
-          mkdir -p .lake/build/lib/lean
           lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceFirstShell.olean OrbitTraceFirstShell.lean
           lake env lean --trust=0 OrbitTraceTwoLayer.lean
           lake env lean --trust=0 OrbitTraceJordanUniform3.lean
