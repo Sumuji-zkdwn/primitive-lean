@@ -48,6 +48,27 @@ theorem chain_index_unique (p r s m n : ℕ)
     Nat.add_left_cancel hindex
   exact ⟨rfl, Nat.eq_of_mul_eq_mul_right (by omega) hprod⟩
 
+
+theorem chain_index_exists (p d k : ℕ) (hk : k ≤ d) :
+    ∃ r m : ℕ,
+      r ≤ p ∧ m < chainLength p d r ∧ k = r + m * (p + 1) := by
+  let r := k % (p + 1)
+  let m := k / (p + 1)
+  have hq : 0 < p + 1 := by omega
+  have hrlt : r < p + 1 := Nat.mod_lt k hq
+  have hrepr : k = r + m * (p + 1) := by
+    simpa only [r, m] using chain_index_divmod p k
+  have hrle : r ≤ d := by omega
+  have hm_le : m ≤ (d - r) / (p + 1) := by
+    apply (Nat.le_div_iff_mul_le hq).2
+    omega
+  have hm : m < chainLength p d r := by
+    simp only [chainLength, if_pos hrle]
+    omega
+  exact ⟨r, m, by omega, hm, hrepr⟩
+
+#print axioms OrbitTrace.chain_index_exists
+
 #print axioms OrbitTrace.chain_index_divmod
 #print axioms OrbitTrace.chain_index_bound
 #print axioms OrbitTrace.chain_index_unique
