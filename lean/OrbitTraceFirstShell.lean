@@ -77,6 +77,53 @@ theorem first_shell_linear
   rw [first_shell_moment p s a M hinit hrec j hj]
   ring
 
+
+/-!
+Concrete polynomial sequence in the formal observation variable X.
+This recursion is constructed, rather than postulated as an arbitrary M.
+-/
+
+def canonicalMoment (p : ℕ) (a : ℚ) : ℕ → Polynomial ℚ
+  | k =>
+    if hk : k ≤ p then
+      Polynomial.X ^ k
+    else
+      Polynomial.X * canonicalMoment p a (k - 1) -
+        Polynomial.C a * canonicalMoment p a (k - (p + 1))
+termination_by k
+decreasing_by all_goals omega
+
+theorem canonicalMoment_initial (p k : ℕ) (a : ℚ) (hk : k ≤ p) :
+    canonicalMoment p a k = (Polynomial.X : Polynomial ℚ) ^ k := by
+  rw [canonicalMoment]
+  simp [hk]
+
+theorem canonicalMoment_recurrence (p k : ℕ) (a : ℚ) :
+    canonicalMoment p a (k + p + 1) =
+      (Polynomial.X : Polynomial ℚ) * canonicalMoment p a (k + p) -
+        Polynomial.C a * canonicalMoment p a k := by
+  have hgt : ¬ k + p + 1 ≤ p := by omega
+  have hi1 : k + p + 1 - 1 = k + p := by omega
+  have hi2 : k + p + 1 - (p + 1) = k := by omega
+  conv_lhs => rw [canonicalMoment]
+  simp only [dif_neg hgt, hi1, hi2]
+
+theorem canonicalMoment_first_shell
+    (p j : ℕ) (a : ℚ) (hj : j ≤ p) :
+    canonicalMoment p a (p + 1 + j) =
+      (Polynomial.X : Polynomial ℚ) ^ (p + 1 + j) -
+        ((j + 1 : ℕ) : Polynomial ℚ) * Polynomial.C a *
+          (Polynomial.X : Polynomial ℚ) ^ j := by
+  apply first_shell_moment p (Polynomial.X : Polynomial ℚ)
+    (Polynomial.C a) (canonicalMoment p a)
+  · intro k hk
+    exact canonicalMoment_initial p k a hk
+  · intro k
+    exact canonicalMoment_recurrence p k a
+  · exact hj
+
+#print axioms OrbitTrace.canonicalMoment_first_shell
+
 #print axioms OrbitTrace.first_shell_moment
 #print axioms OrbitTrace.first_shell_linear
 
