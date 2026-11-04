@@ -1,0 +1,77 @@
+name: Orbit trace formalization (isolated)
+
+on:
+  push:
+    branches:
+      - research/orbit-trace-integrals-20261104
+    paths:
+      - '.github/workflows/orbit-trace-verification.yml'
+      - 'lean/OrbitTrace.lean'
+      - 'lean/OrbitTraceVieta.lean'
+      - 'lean/OrbitTraceMoment.lean'
+      - 'lean/OrbitTraceNilpotence.lean'
+      - 'lean/OrbitTraceJordan3.lean'
+      - 'lean/OrbitTraceMoment12.lean'
+      - 'lean/OrbitTraceFirstShell.lean'
+      - 'lean/OrbitTraceTwoLayer.lean'
+      - 'lean/OrbitTraceJordanUniform3.lean'
+      - 'lean/OrbitTraceRootRecurrence.lean'
+      - 'lean/OrbitTraceMonicSequence.lean'
+      - 'lean/OrbitTraceSpecialization.lean'
+      - 'lean/OrbitTraceJordanIndex.lean'
+      - 'lean/OrbitTraceDegreeGap.lean'
+      - 'lean/OrbitTraceLeadingDrop.lean'
+      - 'lean/OrbitTraceTransferOperator.lean'
+      - 'lean/OrbitTraceFiltration.lean'
+      - 'lean/OrbitTraceFastNilpotence.lean'
+      - 'tools/check_orbit_trace.py'
+      - 'docs/research/2026-11-04-orbit-trace-integrals.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Lean kernel verification (trust zero)
+        working-directory: lean
+        run: |
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 OrbitTrace.lean
+          lake env lean --trust=0 OrbitTraceVieta.lean
+          lake env lean --trust=0 OrbitTraceMoment.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceNilpotence.olean OrbitTraceNilpotence.lean
+          lake env lean --trust=0 OrbitTraceJordan3.lean
+          lake env lean --trust=0 OrbitTraceMoment12.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceFirstShell.olean OrbitTraceFirstShell.lean
+          lake env lean --trust=0 OrbitTraceTwoLayer.lean
+          lake env lean --trust=0 OrbitTraceJordanUniform3.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceRootRecurrence.olean OrbitTraceRootRecurrence.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceMonicSequence.olean OrbitTraceMonicSequence.lean
+          lake env lean --trust=0 OrbitTraceSpecialization.lean
+          lake env lean --trust=0 OrbitTraceJordanIndex.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceDegreeGap.olean OrbitTraceDegreeGap.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceLeadingDrop.olean OrbitTraceLeadingDrop.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceTransferOperator.olean OrbitTraceTransferOperator.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceFiltration.olean OrbitTraceFiltration.lean
+          lake env lean --trust=0 OrbitTraceFastNilpotence.lean
+
+      - name: Exact symbolic independent probes
+        run: |
+          python -m pip install sympy==1.14.0
+          python tools/check_orbit_trace.py
