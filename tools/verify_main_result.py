@@ -63,6 +63,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/OperatorVocabularyRefinement.inc', 'LinearInputOperatorRefinement'),
     ('linear_input/lean_check/OperatorFiniteHorizon.inc', 'LinearInputOperatorHorizon'),
     ('linear_input/lean_check/OperatorSemanticClosure.inc', 'LinearInputOperatorSemanticClosure'),
+    ('linear_input/lean_check/SemanticIntervalNecessity.inc', 'LinearInputSemanticIntervals'),
     ('linear_input/lean_check/EWFSFenchel.inc', 'LinearInputEWFSDual'),
     ('linear_input/lean_check/WFSCanonicalLift.inc', 'LinearInputWFSCanonical'),
     ('linear_input/lean_check/EWFSFutureBridge.inc', 'LinearInputEWFSFuture'),
