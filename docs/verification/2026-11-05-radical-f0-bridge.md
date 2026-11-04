@@ -22,8 +22,8 @@ The finite prime-support set discards repeated occurrences, not just order.
 - `radical_idempotent`: `LinearInputF0.Idempotent radical`.
 - `radical_kernel_iff`: for `x,y != 0`, equal radicals iff equal
   finite sets of distinct prime factors.
-- `radical_squarefree` and `radical_fixed_iff_squarefree`: the
-  nonzero fixed points are exactly the squarefree positive naturals.
+- `squarefree_fixed`: a nonzero squarefree natural is fixed by radical.
+  The reverse implication is not formalized in this module.
 - `two_four_same_radical` and `successors_distinguished`:
   `rad(2)=rad(4)=2` but `rad(3)=3 != 5=rad(5)`.
 - `successor_not_fiber_respecting` and `successor_not_descending`:
@@ -35,9 +35,10 @@ The finite prime-support set discards repeated occurrences, not just order.
   are currently identified but have unequal future observations.
   The last result explicitly applies the established future-completeness iff.
 
-The mathematical dependencies `Nat.primeFactors_prod_primeFactors`,
-`Nat.squarefree_prod_primeFactors` and
+The mathematical dependencies `Nat.primeFactors_prod` and
 `Nat.prod_primeFactors_of_squarefree` come from the pinned Mathlib.
+The additive assembly imports `Mathlib.Data.Nat.Squarefree` explicitly,
+without changing the historical baseline checker or proof sources.
 No new fundamental-theorem-of-arithmetic proof is claimed.
 
 ## Verification contract
