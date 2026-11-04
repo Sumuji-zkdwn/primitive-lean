@@ -57,7 +57,7 @@ jobs:
           lake env lean --trust=0 OrbitTraceTwoLayer.lean
           lake env lean --trust=0 OrbitTraceJordanUniform3.lean
           lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceRootRecurrence.olean OrbitTraceRootRecurrence.lean
-          lake env lean --trust=0 OrbitTraceMonicSequence.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceMonicSequence.olean OrbitTraceMonicSequence.lean
           lake env lean --trust=0 OrbitTraceSpecialization.lean
           lake env lean --trust=0 OrbitTraceJordanIndex.lean
 
