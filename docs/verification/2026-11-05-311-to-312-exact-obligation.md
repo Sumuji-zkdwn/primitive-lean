@@ -100,3 +100,35 @@ A source-based implementation check must reject any purported proof that:
 - assumes `SSIneq`, `XiPrinciple`, `Wall`, or `Corollary312Variant` as an input.
 
 This narrows the 3.11→3.12 goal to a single **provenance-preserving arithmetic output comparison**, with its actual source types now identified.
+
+
+## Direct proof attempt: instantiate retained gluing and volume lemmas (2026-11-05)
+
+**Attempted chain.** Apply `LinearInputParallelGluing.operational_gluing_iff` (PR #70) to the actual output of IUT III Theorem 3.11, and then apply the already verified `LinearInputPilotComparison.scaled_pilot_witness_iff` (PR #78) to identify its native q-pilot readout.
+
+At the concrete instantiation point, the gluing theorem requires all local reports and the global observation to use a **common coordinate type** `I → V`, plus an actual finite operator word whose observed state equals the canonical glue. The existing primitive-lean result *does not construct* a common value-group/log-shell coordinate from Hodge theaters with different arithmetic holomorphic structures, nor an IUT-correct run of the multiradial η-algorithm. Calling the existential `operational_gluing_iff` is not a proof of that existential.
+
+Under the **currently available identified-copies** output law (from LANA `EtaAlg.ThetaShift`) and volume-neutral Kummer transports, the exact remaining equation becomes
+
+```
+logVol(out(ι,S)) = -s*a + logVol(S) = -a
+  ↔ logVol(S) = (s-1)*a.
+
+Allowed Ind3 volumes fill (-∞, V].
+Hence ∃ (allowed S), correct logVol(out(ι,S))
+  ↔ (s-1)*a ≤ V.
+```
+
+This equivalence is established in the existing LANA `xi_iff_ss`, `wallOn_iff_ss_of_volCompat` and the already verified primitive-lean `scaled_pilot_witness_iff`. **None of those lemmas proves the inequality on genuine initial Θ-data.**
+
+**Countercheck.** LANA's formalized `Thm311Package.counterexample` (and the analogous primitive-lean `ell7_small_container_obstruction`) uses `ell=7`, `s=14/3`, `a=1`, `V=1`. Every allowed `S` has `logVol(S)≤1`, hence
+
+```
+logVol(out(ι,S)) ≤ -14/3+1 = -11/3 < -1 = logVol(q-pilot).
+```
+
+All the formalized package premises are compatible with this failure. **It is a counterexample to derivability in that model, not to genuine IUT or abc.** Therefore adding existing generic gluing/fiber lemmas cannot close the implication *within that abstraction*.
+
+**Only possible ways forward:** prove the needed arithmetic lower bound for the genuine log-shell hull; or construct and verify a genuinely different, holomorphic-structure-sensitive multiradial output law/transport that does not reduce to identified copies. The IUT-specific construction must be provided explicitly. In particular, LANA's `EtaAlg.etUnitOnly` (T2) forces `not_valDependent`, while its intended (SHE) comparison may require the q-side value/holomorphic structure; a proof must resolve that tension rather than assuming the desired identification.
+
+**Outcome of this attempt:** no new proof of Step (xi). The explicit failed application point is the absent **genuine IUT output witness**, not missing general-purpose Lean infrastructure. PR remains draft.
