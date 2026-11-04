@@ -100,14 +100,15 @@ candidate colourings cover all possible ordered pairs of edge constraints. -/
 theorem odd_cycle_pairwise_feasible :
     PairwiseFeasible OddCycleEdge := by
   intro i j
-  fin_cases i <;> fin_cases j <;>
-    first
-      | exact ⟨(fun k : Fin 3 => if k = 1 then true else false),
-          by simp [OddCycleEdge], by simp [OddCycleEdge]⟩
-      | exact ⟨(fun k : Fin 3 => if k = 2 then true else false),
-          by simp [OddCycleEdge], by simp [OddCycleEdge]⟩
-      | exact ⟨(fun k : Fin 3 => if k = 0 then false else true),
-          by simp [OddCycleEdge], by simp [OddCycleEdge]⟩
+  let witness : Fin 3 → Bool :=
+    if i = 2 ∨ j = 2 then
+      if i = 0 ∨ j = 0 then
+        (fun k => if k = 0 then false else true)
+      else (fun k => if k = 2 then true else false)
+    else (fun k => if k = 1 then true else false)
+  refine ⟨witness, ?_, ?_⟩
+  · fin_cases i <;> fin_cases j <;> decide
+  · fin_cases i <;> fin_cases j <;> decide
 
 /-- Individual local constraints are possible because all pairs are. -/
 theorem odd_cycle_each_locally_possible :
