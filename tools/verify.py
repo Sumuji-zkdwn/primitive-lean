@@ -162,6 +162,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'RadicalF0Bridge': 'Arithmetic radical as multiplicity-forgetting F0, exact prime-support kernel, squarefree fixed points, and successor failure of descent and predictive sufficiency',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
