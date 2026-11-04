@@ -2270,6 +2270,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "sha256": "05ca5cff42c0f1a64a433893c2176cac43f2eba1ba8b1e379a1a920b8d3317be",
+      "original_sha256": "05ca5cff42c0f1a64a433893c2176cac43f2eba1ba8b1e379a1a920b8d3317be",
+      "source_pr": null,
+      "source_commit": "7c70e49275668a56052b58055f5cab1450f782e0",
+      "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2357,6 +2368,12 @@
       "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
       "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
       "note": "Finite cooperation with individual coverage but no sequential global gluing due to destructive interference; invariant all-word obstruction, joint-postcondition-gated extinction and sharp non-destructive controls."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "source_commit": "7c70e49275668a56052b58055f5cab1450f782e0",
+      "note": "Finite families of parallel partial writes glue into one global assignment exactly when all overlapping writes agree. Constructive canonical merge, conflict/disjoint control, explicit temporal gate and historical nonpreservation."
     }
   ]
 }
