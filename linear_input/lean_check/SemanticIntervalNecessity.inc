@@ -222,9 +222,13 @@ theorem witness_forced_interval_and_refinement :
     witness_start_alive witness_repair_alive
     witness_old_equiv (by
       intro h
-      exact witness_new_breaks (by
-        intro word
-        exact h word))
+      have hObs :
+          exampleK (witnessFresh () (0 : Fin 3)) =
+            exampleK (witnessFresh () (1 : Fin 3)) := word_now h
+      have hNe :
+          exampleK (witnessFresh () (0 : Fin 3)) ≠
+            exampleK (witnessFresh () (1 : Fin 3)) := by decide
+      exact hNe hObs)
 
 /-- Countermodel: local component 0 goes extinct but component 1
 accepts the unchanged state, so old identity operations suffice. -/
