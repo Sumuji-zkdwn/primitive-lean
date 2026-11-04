@@ -186,7 +186,8 @@ theorem twoLayerEncode_coeff_high (p : ℕ)
     · intro h
       subst i
       rfl
-  simp [hlow, hhigh]
+  simp only [hlow, ite_false, zero_add, hhigh]
+  simp
 
 theorem twoLayerEncode_injective (p : ℕ) :
     Function.Injective
