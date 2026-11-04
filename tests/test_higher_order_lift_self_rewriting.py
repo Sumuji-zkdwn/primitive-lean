@@ -106,14 +106,17 @@ def test_three_conditions_and_four_state_saturation():
     pr64_seed = ((0,), ((0, 1),), (m12,))
     pr64_final, pr64_trace = iterate(step_pr64, pr64_seed, {1: (m23,), 2: ()}, viable)
 
-    frozen1 = ((0, 1), ((0, 1), (1, 2)), (m12,))
-    fixed_final, fixed_trace = iterate(step_pr64, frozen1, {1: (m23,), 2: ()}, viable)
+    fixed_seed = ((0,), ((0, 1),), (m12,))
+    fixed_final, fixed_trace = iterate(step_pr64, fixed_seed, {}, viable)
 
     assert [state[0] for state in high_trace] == [
         (0,), (0, 1), (0, 1, 2), (0, 1, 2, 3)
     ]
     assert [state[0] for state in pr64_trace] == [
         (0,), (0, 1), (0, 1, 2), (0, 1, 2, 3)
+    ]
+    assert [state[0] for state in fixed_trace] == [
+        (0,), (0, 1), (0, 1, 2)
     ]
     assert fixed_final[0] == (0, 1, 2)
     assert high_final[0] == pr64_final[0] == (0, 1, 2, 3)
@@ -130,8 +133,8 @@ def test_rule_mutation_and_identification_capacity_are_separate():
     high_final, high_trace = iterate(step_higher, high_seed, viable)
     assert high_trace[1][3] != high_trace[0][3]
 
-    frozen1 = ((0, 1), ((0, 1), (1, 2)), (m12,))
-    fixed_final, _ = iterate(step_pr64, frozen1, {1: (m23,), 2: ()}, viable)
+    fixed_seed = ((0,), ((0, 1),), (m12,))
+    fixed_final, _ = iterate(step_pr64, fixed_seed, {}, viable)
     pr64_seed = ((0,), ((0, 1),), (m12,))
     second_order_final, _ = iterate(step_pr64, pr64_seed, {1: (m23,), 2: ()}, viable)
 
