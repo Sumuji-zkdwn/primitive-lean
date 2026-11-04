@@ -53,7 +53,9 @@ def runLift {α : Type*} [DecidableEq α]
   rules.filterMap (fun rule =>
     if rule.1 = learned then some rule.2 else none)
 
-/-- The fixed interpreter executes a state-resident, mutable lift program. -/
+/-- The fixed interpreter executes a state-resident, mutable lift program.
+The new meta rules enter state now; object edges for this transition still
+use the pre-step meta-rule table, preserving PR #64's update order. -/
 def higherStep {α : Type*} [DecidableEq α]
     (viable : α → Bool) (s : HigherMachine α) :
     Option (HigherMachine α) :=
@@ -66,7 +68,7 @@ def higherStep {α : Type*} [DecidableEq α]
       { known := s.known ++ [target],
         edges := s.edges ++
           LinearInputMetaRuleExtension.interpretMeta
-            nextMetaRules target,
+            s.metaRules target,
         metaRules := nextMetaRules,
         liftRules := nextLiftRules,
         liftEdits := s.liftEdits })
@@ -83,9 +85,7 @@ theorem higherStep_sound {α : Type*} [DecidableEq α]
           (applyLiftEdits s.liftEdits s.liftRules target) target ∧
       next.edges = s.edges ++
         LinearInputMetaRuleExtension.interpretMeta
-          (s.metaRules ++ runLift
-            (applyLiftEdits s.liftEdits s.liftRules target) target)
-          target ∧
+          s.metaRules target ∧
       next.liftEdits = s.liftEdits := by
   unfold higherStep at h
   cases hc : LinearInputFiniteSelfSynthesis.chooseTarget
@@ -97,10 +97,7 @@ theorem higherStep_sound {α : Type*} [DecidableEq α]
           { known := s.known ++ [target],
             edges := s.edges ++
               LinearInputMetaRuleExtension.interpretMeta
-                (s.metaRules ++ runLift
-                  (applyLiftEdits s.liftEdits s.liftRules target)
-                  target)
-                target,
+                s.metaRules target,
             metaRules := s.metaRules ++ runLift
               (applyLiftEdits s.liftEdits s.liftRules target)
               target,
@@ -192,9 +189,7 @@ theorem higherStep_complete {α : Type*} [DecidableEq α]
     known := s.known ++ [target],
     edges := s.edges ++
       LinearInputMetaRuleExtension.interpretMeta
-        (s.metaRules ++ runLift
-          (applyLiftEdits s.liftEdits s.liftRules target) target)
-        target,
+        s.metaRules target,
     metaRules := s.metaRules ++ runLift
       (applyLiftEdits s.liftEdits s.liftRules target) target,
     liftRules := applyLiftEdits s.liftEdits s.liftRules target,
