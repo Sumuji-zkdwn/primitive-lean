@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="曼荼羅メーカー"><title>RULEFOLD × 曼荼羅メーカー — 自己変異する白黒位相場</title>
+<style>
+:root{color-scheme:dark;--vh:100dvh;--fg:#eee;--edge:#545454}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;padding:0;margin:0;background:#000;overscroll-behavior:none;overflow:hidden;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{font:13px/1.55 system-ui,-apple-system,"Noto Sans JP",sans-serif;color:var(--fg);-webkit-user-select:none;user-select:none}
+#stage{position:fixed;inset:0;width:100%;height:var(--vh);overflow:hidden;background:#000}
+#world{display:block;width:100%;height:100%;touch-action:none;image-rendering:pixelated;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#hud{position:fixed;z-index:10;right:calc(10px + env(safe-area-inset-right,0px));top:calc(10px + env(safe-area-inset-top,0px));display:flex;align-items:flex-end;flex-direction:column;gap:6px;pointer-events:none}
+#hud button{pointer-events:auto;width:44px;height:44px;display:grid;place-items:center;border:1px solid #eeeeee35;border-radius:13px;color:#f8f8f8;background:#0009;padding:10px;opacity:.64;touch-action:manipulation;cursor:pointer}
+#hud button:active,#hud button:focus-visible{opacity:1;background:#222;outline:1px solid white}
+#hud button svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
+#hud button svg .solid{fill:currentColor;stroke:none}
+#menuButtons{display:none;flex-direction:column;align-items:flex-end;gap:6px;max-height:calc(var(--vh) - 85px);overflow-y:auto;scrollbar-width:none}
+#hud.open #menuButtons{display:flex}
+#stage.paused #pauseIcon{display:none}#playIcon{display:none}#stage.paused #playIcon{display:block}
+#drawer{position:fixed;z-index:20;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(432px,calc(100vw - 22px));max-height:min(78dvh,680px);overflow:auto;border:1px solid #666;border-radius:19px;background:#111f;box-shadow:0 0 0 100vmax #0006,0 15px 35px #000a;padding:16px 16px 15px;user-select:text;-webkit-user-select:text}
+#drawer[hidden]{display:none}#drawer header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+#drawer h1{margin:0;font-weight:620;font-size:15px;letter-spacing:.01em}
+button,input,select{font:inherit}#drawer button,#drawer select,#drawer .result a{border:1px solid #656565;border-radius:10px;background:#202020;color:#eee;padding:9px 12px;min-height:42px;cursor:pointer}#drawer select{width:100%}#drawer button:disabled{opacity:.4;cursor:default}
+#drawer .close{min-width:38px;min-height:38px;padding:3px 12px;font-size:22px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:12px 0}.formgrid label{display:flex;flex-direction:column;gap:5px;color:#d6d6d6;font-size:12px}
+#summary,#status{font-size:12px;color:#bcbcbc;line-height:1.6;margin:11px 0}
+#status[role=alert]{color:#f6c5c5}
+#go{display:block;width:100%;background:#ebebeb!important;color:#101010!important;border-color:#ebebeb!important;font-weight:700;font-size:14px!important}
+#progress{width:100%;height:8px;accent-color:white;display:none;margin:9px 0}
+#cancel{display:none;width:100%;margin-top:8px}
+.result{display:none;gap:8px;margin-top:13px;padding-top:13px;border-top:1px solid #444}.result a{display:block;text-align:center;text-decoration:none;font-weight:650;background:#dedede!important;color:#151515!important}.result button{width:100%}
+.small{font-size:11px;color:#aaa;line-height:1.6;margin-top:12px}
+@media(hover:none) and (pointer:coarse){#hud button{width:48px;height:48px}}
+@media(orientation:landscape) and (max-height:450px){#menuButtons{display:none!important}#hud.open #menuButtons{display:flex!important;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;width:min(440px,75vw)}}
+@media(prefers-reduced-motion:reduce){#hud button{transition:none}}
+/* Full-screen white/black mandala remains the primary experience; controls hide when closed. */
+#rfLaunch{position:fixed;left:calc(11px + env(safe-area-inset-left,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:14;width:44px;height:44px;border:1px solid #bbb8;border-radius:50%;background:#000b;color:white;font:700 12px ui-monospace,monospace;letter-spacing:-.1em;cursor:pointer;touch-action:manipulation;opacity:.7}
+#rfPanel{position:fixed;z-index:25;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(65px + env(safe-area-inset-bottom,0px));width:min(418px,calc(100vw - 20px));max-height:min(78dvh,760px);overflow:auto;background:#070707f5;color:#eee;border:1px solid #666;border-radius:16px;box-shadow:0 12px 42px #000d;padding:15px 16px 18px;font:12px/1.5 system-ui,-apple-system,'Noto Sans JP',sans-serif;overscroll-behavior:contain;touch-action:pan-y;user-select:text}
+#rfPanel[hidden]{display:none}#rfPanel h2{font:700 18px/1.2 ui-monospace,monospace;letter-spacing:-.045em;margin:0}#rfPanel .small{font-size:10px;color:#a8a8a8}#rfPanel .rfHead{display:flex;gap:8px;justify-content:space-between;align-items:start}#rfPanel .rfHead small{display:block;margin-top:6px;color:#999;font-size:10px;max-width:280px}
+#rfPanel button,#rfPanel select,#rfPanel input{font:inherit;color:#fff;background:#1c1c1c;border:1px solid #777;border-radius:8px;min-height:36px;padding:6px 9px;touch-action:manipulation}#rfPanel button{cursor:pointer;font-weight:600}#rfPanel button:disabled{opacity:.3;cursor:default}#rfPanel button:focus-visible,#rfLaunch:focus-visible{outline:2px solid white;outline-offset:2px}
+#rfPanel button.primary{background:#f4f4f4;color:#080808}#rfPanel .rfLine{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin-top:13px}
+#rfPanel .rfLine select{max-width:210px}#rfPanel label{display:flex;align-items:center;gap:6px;color:#ddd}#rfPanel label input[type=checkbox]{min-height:auto;accent-color:white}#rfPanel .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px}#rfPanel .stat{border:1px solid #414141;border-radius:9px;padding:9px 7px}#rfPanel .stat b{display:block;font:700 20px/1.1 ui-monospace,monospace}#rfPanel .stat span{color:#aaa;font-size:10px}#rfPanel .sequence{font:500 12px ui-monospace,monospace;letter-spacing:.03em;border:1px solid #444;border-radius:9px;padding:10px;margin:11px 0 0;overflow-wrap:anywhere}
+#rfPanel .rfGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}#rfPanel .rfGrid label{display:flex;flex-direction:column;align-items:stretch;gap:4px;color:#bbb;font-size:11px}#rfPanel .rfGrid input{min-width:0;width:100%}
+#rfPanel .rfDivider{border-top:1px solid #444;margin:14px 0 0;padding-top:13px}#rfPanel summary{cursor:pointer;color:#ddd}#rfPanel details p{margin:6px 0;color:#c0c0c0;font-family:ui-monospace,monospace;word-break:break-word}#rfPanel details p b{color:#f4f4f4}#rfPanel ol{margin:8px 0 0;padding-left:22px;color:#bbb;max-height:120px;overflow:auto;font:11px/1.7 ui-monospace,monospace}#rfPanel .rfFoot{margin-top:12px;line-height:1.4;color:#999}#rfPanel .rfFoot a{color:#ddd}
+#rfStatus{min-height:26px;color:#c9c9c9;margin:12px 0 0;font-size:11px;white-space:normal}
+@media (pointer:coarse){#rfLaunch{height:48px;width:48px}#rfPanel button,#rfPanel select{min-height:40px}}
+
+</style></head><body>
+<main id="stage"><canvas id="world" aria-label="白黒の連続位相曼荼羅。接触中か非接触かだけを入力します。"></canvas></main>
+<nav id="hud" aria-label="曼荼羅メーカーの操作">
+ <button id="more" type="button" aria-label="操作を開く" aria-expanded="false"><svg viewBox="0 0 24 24"><circle class="solid" cx="5" cy="12" r="1.8"/><circle class="solid" cx="12" cy="12" r="1.8"/><circle class="solid" cx="19" cy="12" r="1.8"/></svg></button>
+ <div id="menuButtons">
+  <button id="playPause" type="button" aria-label="停止／再開" title="停止／再開"><svg id="pauseIcon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg><svg id="playIcon" viewBox="0 0 24 24"><path d="M7 4L20 12 7 20Z"/></svg></button>
+  <button id="mutate" type="button" aria-label="少し変異" title="少し変異"><svg viewBox="0 0 24 24"><path d="M4 12c3-8 6-8 9 0s6 8 7 0"/><path d="M17 4v4h4"/></svg></button>
+  <button id="newPattern" type="button" aria-label="新しい曼荼羅" title="新しい曼荼羅"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3m8 8 3 3M19 5l-3 3M8 16l-3 3"/><circle cx="12" cy="12" r="4"/></svg></button>
+  <button id="png" type="button" aria-label="PNG保存" title="PNG保存"><svg viewBox="0 0 24 24"><path d="M4 8h4l2-2h5l2 2h3v11H4Z"/><circle cx="12" cy="13" r="3"/></svg></button>
+  <button id="gif" type="button" aria-label="GIF出力" title="GIF出力"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 10l5 3-5 3Z"/></svg></button>
+  <button id="mp4" type="button" aria-label="MP4出力" title="MP4出力"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M11 10l3 2-3 2Z"/></svg></button>
+  <button id="stateSave" type="button" aria-label="状態JSON保存" title="状態JSON保存"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M4 19v2h16v-2"/></svg></button>
+  <button id="stateLoad" type="button" aria-label="状態JSON読込" title="状態JSON読込"><svg viewBox="0 0 24 24"><path d="M12 21V9M7 13l5-5 5 5M4 5V3h16v2"/></svg></button>
+ </div>
+</nav>
+<section id="drawer" hidden aria-label="書き出し設定"><header><h1 id="dialogTitle">GIF 書き出し</h1><button class="close" type="button" id="close" aria-label="閉じる">×</button></header>
+ <div class="formgrid">
+  <label>長さ<select id="duration"><option value="4" selected>4 秒</option><option value="6">6 秒</option><option value="8">8 秒</option><option value="12">12 秒</option></select></label>
+  <label>フレームレート<select id="fps"><option value="12">12 fps</option><option value="20">20 fps</option><option value="24" selected>24 fps</option><option value="30">30 fps</option><option value="50">50 fps</option></select></label>
+  <label>画面比<select id="aspect"><option value="screen" selected>表示画面と同じ</option><option value="square">正方形 1:1</option><option value="portrait">縦長 9:16</option><option value="landscape">横長 16:9</option></select></label>
+  <label>解像度（短辺）<select id="size"><option value="360">360 px</option><option value="480" selected>480 px</option><option value="720">720 px</option><option value="1080">1080 px</option></select></label>
+ </div>
+ <label style="display:flex;align-items:center;gap:8px;font-size:12px"><span>合成</span><select id="combine" style="flex:1"><option value="xor" selected>XOR（三相）</option><option value="majority">多数決（三相）</option></select></label>
+ <p id="summary">保存する映像は、現在の位相状態を起点に1周期を生成します。</p>
+ <button id="go" type="button">作成して保存</button><progress id="progress" value="0" max="1"></progress><button id="cancel" type="button">中止</button>
+ <p id="status" role="status" aria-live="polite"></p>
+ <div class="result" id="result"><a id="saveLink" download>作成したファイルを保存</a><button id="share" type="button" hidden>共有／ファイルに保存</button></div>
+ <div class="small" id="hint">GIFは厳密な白黒2色。MP4は対応ブラウザでH.264圧縮し、圧縮に由来する中間色が発生する場合があります。</div>
+</section>
+<input id="loadInput" type="file" accept="application/json,.json" hidden>
+<script>
+
+function createGIFEncoder(width,height,binary){
+  class Bytes {
+    constructor(){this.parts=[];this.buffer=new Uint8Array(65536);this.used=0;this.length=0}
+    byte(v){if(this.used===this.buffer.length){this.parts.push(this.buffer);this.buffer=new Uint8Array(65536);this.used=0}this.buffer[this.used++]=v;this.length++}
+    word(v){this.byte(v&255);this.byte((v>>>8)&255)}
+    text(s){for(let i=0;i<s.length;i++)this.byte(s.charCodeAt(i))}
+    all(a){for(let i=0;i<a.length;i++)this.byte(a[i])}
+    finish(){const result=new Uint8Array(this.length);let offset=0;for(const p of this.parts){result.set(p,offset);offset+=p.length}result.set(this.buffer.subarray(0,this.used),offset);return result}
+  }
+  if(!Number.isInteger(width)||!Number.isInteger(height)||width<1||height<1||width>65535||height>65535)throw new Error('保存サイズが不正です。');
+  const out=new Bytes();let closed=false,frames=0;
+  const minCodeSize=binary?2:8;
+  out.text('GIF89a');out.word(width);out.word(height);
+  out.byte(binary?0xF0:0xF7);out.byte(binary?1:255);out.byte(0);
+  if(binary){out.all([0,0,0,255,255,255])}else{for(let g=0;g<256;g++)out.all([g,g,g])}
+  out.all([0x21,0xFF,11]);out.text('NETSCAPE2.0');out.all([3,1,0,0,0]);
+
+  function writeLZW(pixels){
+    out.byte(minCodeSize);
+    const clear=1<<minCodeSize,end=clear+1;
+    let next=end+1,size=minCodeSize+1,dict=new Map();
+    const block=new Uint8Array(255);let count=0,acc=0,bits=0;
+    function emitByte(v){block[count++]=v;if(count===255){out.byte(count);out.all(block);count=0}}
+    function emit(code){
+      acc|=code<<bits;bits+=size;
+      while(bits>=8){emitByte(acc&255);acc>>>=8;bits-=8}
+      // Encoder's dictionary is one entry ahead of the decoder's dictionary.
+      // Increase width AFTER writing the last code at the old width.
+      if(next===(1<<size)&&size<12)size++;
+    }
+    emit(clear);
+    let prefix=pixels[0];
+    for(let i=1;i<pixels.length;i++){
+      const value=pixels[i],key=(prefix<<8)|value,found=dict.get(key);
+      if(found!==undefined){prefix=found;continue}
+      emit(prefix);
+      if(next<4096){dict.set(key,next++)}
+      else{emit(clear);dict.clear();next=end+1;size=minCodeSize+1}
+      prefix=value;
+    }
+    emit(prefix);emit(end);
+    if(bits>0)emitByte(acc&255);
+    if(count){out.byte(count);out.all(block.subarray(0,count))}
+    out.byte(0);
+  }
+  return {
+    addFrame(pixels,delay){
+      if(closed)throw new Error('GIFは既に完了しています。');
+      if(pixels.length!==width*height)throw new Error('フレームの画素数が不正です。');
+      if(!Number.isInteger(delay)||delay<2||delay>65535)throw new Error('フレーム時間が不正です。');
+      // Disposal=1; every frame fully replaces the logical screen, including white.
+      out.all([0x21,0xF9,4,4]);out.word(delay);out.all([0,0]);
+      out.byte(0x2C);out.word(0);out.word(0);out.word(width);out.word(height);out.byte(0);
+      writeLZW(pixels);frames++;
+      if(out.length>128*1024*1024)throw new Error('GIFが128 MBを超えました。保存サイズかフレームレートを下げてください。');
+      return out.length;
+    },
+    finish(){if(closed||!frames)throw new Error('GIFを完了できません。');closed=true;out.byte(0x3B);return out.finish()}
+  };
+}
+
+
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const world=$('world'),ctx=world.getContext('2d',{alpha:false,willReadFrequently:false});
+const stage=$('stage'),hud=$('hud'),drawer=$('drawer');
+const TAU=Math.PI*2, ONE_THIRD=1/3, TWO_THIRD=2/3;
+const littleEndian=new Uint8Array(new Uint32Array([0x01020304]).buffer)[0]===4;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const mod1=x=>x-Math.floor(x);
+const sleep=ms=>new Promise(r=>setTimeout(r,Math.max(0,ms)));
+let seedCounter=0x4b130bb1;
+function randomSeed(){try{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]||1;}catch(_){seedCounter^=seedCounter<<13;seedCounter^=seedCounter>>>17;seedCounter^=seedCounter<<5;return seedCounter>>>0;}}
+function rngFor(seed){let v=seed>>>0;return()=>{v^=v<<13;v^=v>>>17;v^=v<<5;return (v>>>0)/4294967296;}}
+function recipe(seed){
+ const r=rngFor(seed),ri=(a,b)=>a+Math.floor(r()*(b-a+1));
+ return {seed:seed>>>0,rad:2.7+2.25*r(),spin:ri(1,3)*(r()<.5?-1:1),
+  n0:ri(3,12),n4:ri(5,17),n1:ri(4,14),n2:ri(5,16),n3:ri(6,21),
+  k0:2+9*r(),k4:2+10*r(),k1:1+9*r(),k2:1+12*r(),k3:2+14*r(),
+  off0:TAU*r(),off1:TAU*r(),off2:TAU*r(),off3:TAU*r(),off4:TAU*r(),
+  a0:.08+.22*r(),a4:.05+.17*r(),a1:.22+.26*r(),a2:.15+.25*r(),a3:.06+.17*r()};
+}
+function geometry(width,height,config){
+ const count=width*height;
+ const [base,s1,c1,s2,c2,s3,c3]=Array.from({length:7},()=>new Float32Array(count));
+ const unit=Math.max(1,Math.min(width,height)*.5),centerX=width*.5,centerY=height*.5;
+ let z=0;
+ for(let y=0;y<height;y++){
+  const py=(y+.5-centerY)/unit;
+  for(let x=0;x<width;x++,z++){
+   const px=(x+.5-centerX)/unit,rr=Math.hypot(px,py),theta=Math.atan2(py,px);
+   base[z]=config.rad*rr+config.spin*theta/TAU+config.a0*Math.sin(config.n0*theta+config.k0*rr+config.off0)+config.a4*Math.cos(config.n4*theta-config.k4*rr+config.off4);
+   s1[z]=Math.sin(config.n1*theta+config.k1*rr+config.off1)*config.a1;
+   c1[z]=Math.cos(config.n1*theta+config.k1*rr+config.off1)*config.a1;
+   s2[z]=Math.sin(config.n2*theta-config.k2*rr+config.off2)*config.a2;
+   c2[z]=Math.cos(config.n2*theta-config.k2*rr+config.off2)*config.a2;
+   s3[z]=Math.sin(config.n3*theta+config.k3*rr+config.off3)*config.a3;
+   c3[z]=Math.cos(config.n3*theta+config.k3*rr+config.off3)*config.a3;
+  }
+ }
+ return {width,height,seed:config.seed>>>0,base,s1,c1,s2,c2,s3,c3};
+}
+// Geometry is calculated from a continuous field; no hexagons, triangles, grid cells or graph edges are generated.
+function target(width,height){
+ const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+ const context=canvas.getContext('2d',{alpha:false,willReadFrequently:true});
+ if(!context)throw new Error('2D Canvas を利用できません。');
+ return {canvas,ctx:context,image:context.createImageData(width,height),basisA:null,basisB:null};
+}
+// Both live rendering and GIF/MP4/PNG exports use this one binary-valued renderer.
+function paint(t,opts){
+ const {image,basisA,basisB}=t;
+ const out=image.data,fast=littleEndian?new Uint32Array(out.buffer):null;
+ const n=basisA.width*basisA.height;
+ const phase=TAU*mod1(opts.phase),cos1=Math.cos(phase),sin1=Math.sin(phase),cos2=Math.cos(2*phase),sin2=Math.sin(2*phase),cos3=Math.cos(3*phase),sin3=Math.sin(3*phase);
+ const mix=clamp(opts.mix,0,1),inv=1-mix,charge=clamp(opts.charge,0,1),duty=clamp(opts.duty,.15,.75),xor=opts.combine!=='majority';
+ const ba=basisA,bb=basisB||ba;
+ for(let j=0;j<n;j++){
+  const va=ba.base[j]+ba.s1[j]*cos1+ba.c1[j]*sin1+ba.s2[j]*cos2-ba.c2[j]*sin2+ba.s3[j]*cos3+ba.c3[j]*sin3+charge*(.44*ba.s2[j]-.38*ba.c1[j]+.29*ba.s3[j]);
+  const vb=ba===bb?va:bb.base[j]+bb.s1[j]*cos1+bb.c1[j]*sin1+bb.s2[j]*cos2-bb.c2[j]*sin2+bb.s3[j]*cos3+bb.c3[j]*sin3+charge*(.44*bb.s2[j]-.38*bb.c1[j]+.29*bb.s3[j]);
+  const f=ba===bb?va:inv*va+mix*vb,p=f-Math.floor(f);
+  const b0=p<duty?1:0, p1=p+ONE_THIRD, p2=p+TWO_THIRD;
+  const b1=(p1>=1?p1-1:p1)<duty?1:0;
+  const b2=(p2>=1?p2-1:p2)<duty?1:0;
+  // With three shift-aligned phase channels, XOR is complemented for ink-on-black artwork.
+  const on=xor?!(b0^b1^b2):(b0+b1+b2>=2);
+  const col=on?255:0;
+  if(fast)fast[j]=on?0xffffffff:0xff000000;
+  else {let k=j*4;out[k]=out[k+1]=out[k+2]=col;out[k+3]=255;}
+ }
+ t.ctx.putImageData(image,0,0);
+}
+const settings={duration:4,fps:24,aspect:'screen',size:480,combine:'xor',duty:.43};
+const state={seedA:20261024,seedB:20261024,configA:recipe(20261024),configB:recipe(20261024),mix:1,transition:false,startedMorph:0,morphLength:1800,
+ charge:0,contact:false,contacts:new Set(),running:true,phase:.24,phaseAt:performance.now(),last:performance.now(),
+ nextAuto:performance.now()+24000,auto:true};
+let preview=null,exporting=false,job=null,latestFile=null,resultURL=null,mode='gif',lastDraw=0,resizeQueued=false;
+function makePreview(){
+ const vv=window.visualViewport,h=Math.max(1,Math.round(vv?.height||window.innerHeight||document.documentElement.clientHeight)),w=Math.max(1,Math.round(document.documentElement.clientWidth));
+ document.documentElement.style.setProperty('--vh',h+'px');
+ const maxPixels=matchMedia('(pointer:coarse)').matches?270000:540000;
+ const scalar=Math.min(window.devicePixelRatio||1,1.45,Math.sqrt(maxPixels/(w*h)));
+ const pw=Math.max(2,Math.round(w*scalar)),ph=Math.max(2,Math.round(h*scalar));
+ if(preview&&preview.image.width===pw&&preview.image.height===ph)return;
+ world.width=pw;world.height=ph;
+ const image=ctx.createImageData(pw,ph);
+ preview={image,basisA:geometry(pw,ph,state.configA),basisB:null,ctx,canvas:world};
+ preview.basisB=state.configA===state.configB?preview.basisA:geometry(pw,ph,state.configB);
+}
+function queueResize(){if(resizeQueued)return;resizeQueued=true;requestAnimationFrame(()=>{resizeQueued=false;makePreview();});}
+function phaseNow(now){return mod1(state.phase+(state.running?(now-state.phaseAt)/(settings.duration*1000):0));}
+function setRunning(v){const now=performance.now();state.phase=phaseNow(now);state.phaseAt=now;state.running=!!v;stage.classList.toggle('paused',!v);}
+function contact(v){v=!!v;if(state.contact===v)return;state.contact=v;}
+function pointerDown(e){state.contacts.add(e.pointerId);contact(true);try{world.setPointerCapture(e.pointerId)}catch(_){}}
+function pointerUp(e){state.contacts.delete(e.pointerId);contact(state.contacts.size>0);}
+world.addEventListener('pointerdown',pointerDown);
+world.addEventListener('pointerup',pointerUp);world.addEventListener('pointercancel',pointerUp);
+window.addEventListener('blur',()=>{state.contacts.clear();contact(false)});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){state.contacts.clear();contact(false);state.last=performance.now();}});
+function promote(){state.seedA=state.seedB;state.configA=state.configB;state.mix=1;state.transition=false;if(preview)preview.basisA=preview.basisB;}
+function mutate(full=false){if(exporting)return;
+ if(state.transition)promote();
+ const seed=randomSeed(),r=rngFor(seed);
+ let next;
+ if(full){next=recipe(seed);next.spin=state.configA.spin;} // preserve winding to avoid introducing a branch-cut seam mid-morph
+ else {
+  // Make a true local perturbation of the current continuous-field coefficients.
+  next={...state.configA,seed};
+  const key=['rad','a0','a4','a1','a2','a3','k0','k1','k2','k3','off0','off1','off2','off3','off4'][Math.floor(r()*15)];
+  const delta=(r()-.5)*2;
+  if(key.startsWith('off'))next[key]+=delta*.55;
+  else if(key==='rad')next.rad=clamp(next.rad+delta*.32,1.8,5.8);
+  else if(key.startsWith('a'))next[key]=clamp(next[key]+delta*.06,.035,.65);
+  else next[key]=clamp(next[key]+delta*.85,1,19);
+  // A second smaller perturbation makes variation visible without changing harmonic topology.
+  next.off2+= (r()-.5)*.25;
+ }
+ state.seedB=seed>>>0;state.configB=next;state.mix=0;state.transition=true;state.startedMorph=performance.now();state.morphLength=full?2400:1700;
+ if(preview)preview.basisB=geometry(preview.image.width,preview.image.height,next);
+ state.nextAuto=performance.now()+27000;
+}
+function animate(now){
+ const dt=Math.min(.09,Math.max(0,(now-state.last)/1000));state.last=now;
+ const targetCharge=state.contact?1:0,lambda=state.contact?3.2:1.1;
+ state.charge+= (targetCharge-state.charge)*(1-Math.exp(-dt*lambda));
+ if(state.transition){const x=clamp((now-state.startedMorph)/state.morphLength,0,1);state.mix=x*x*(3-2*x);if(x>=1)promote();}
+ if(!exporting&&state.auto&&state.running&&now>state.nextAuto){mutate(false);state.nextAuto=now+23000;}
+ if(!exporting&&!document.hidden && now-lastDraw>17){
+  if(preview)paint(preview,{phase:phaseNow(now),mix:state.mix,charge:state.charge,combine:settings.combine,duty:settings.duty});
+  lastDraw=now;
+ }
+ requestAnimationFrame(animate);
+}
+function closeMenu(){hud.classList.remove('open');$('more').setAttribute('aria-expanded','false');}
+$('more').onclick=()=>{const open=hud.classList.toggle('open');$('more').setAttribute('aria-expanded',String(open));};
+$('playPause').onclick=()=>{setRunning(!state.running);closeMenu();};
+$('mutate').onclick=()=>{mutate(false);closeMenu();};
+$('newPattern').onclick=()=>{mutate(true);closeMenu();};
+function currentSnapshot(){return {seedA:state.seedA,seedB:state.seedB,configA:{...state.configA},configB:{...state.configB},mix:state.mix,charge:state.charge,phase:phaseNow(performance.now()),combine:settings.combine,duty:settings.duty};}
+function exportDimensions(aspect,size){
+ let ratio=aspect==='screen'?world.width/world.height:aspect==='square'?1:aspect==='portrait'?9/16:16/9;
+ ratio=clamp(ratio,.35,2.86);
+ let w=ratio>=1?Math.round(size*ratio):size,h=ratio>=1?size:Math.round(size/ratio);
+ const maxlong=mode==='gif'?850:1920;
+ if(Math.max(w,h)>maxlong){const q=maxlong/Math.max(w,h);w=Math.max(2,Math.round(w*q));h=Math.max(2,Math.round(h*q));}
+ // MP4 H.264 requires even dimensions on some encoders.
+ if(mode==='mp4'){w=Math.max(2,Math.round(w/2)*2);h=Math.max(2,Math.round(h/2)*2);}
+ return {w,h};
+}
+function plan(){
+ const seconds=Number($('duration').value),fps=Number($('fps').value),size=Number($('size').value),aspect=$('aspect').value;
+ const {w,h}=exportDimensions(aspect,size),wanted=Math.round(seconds*fps);
+ const limit=mode==='gif'?Math.min(260,Math.max(24,Math.floor(60000000/(w*h)))):Math.min(600,Math.max(48,Math.floor(460000000/(w*h))));
+ const frames=Math.max(1,Math.min(wanted,limit));
+ return {seconds,fps,frames,effectiveFps:frames/seconds,w,h,aspect,mode};
+}
+function capableMp4(){if(typeof MediaRecorder==='undefined'||typeof HTMLCanvasElement.prototype.captureStream!=='function')return null;
+ const types=['video/mp4;codecs="avc1.42E01E"','video/mp4;codecs="avc1.4D401F"','video/mp4'];
+ return types.find(t=>{try{return MediaRecorder.isTypeSupported(t)}catch(_){return false}})||null;
+}
+function capableWebm(){if(typeof MediaRecorder==='undefined')return null;
+ const types=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'];
+ return types.find(t=>{try{return MediaRecorder.isTypeSupported(t)}catch(_){return false}})||null;
+}
+function status(message,warning=false){$('status').textContent=message;$('status').setAttribute('role',warning?'alert':'status');}
+function updateSheet(){
+ const chosen=Number($('duration').value),now=performance.now();
+ if(mode!=='png'&&chosen!==settings.duration){state.phase=phaseNow(now);state.phaseAt=now;settings.duration=chosen;}
+ const p=plan();
+ $('summary').textContent=mode==='png'?`${p.w} × ${p.h} · 現在の静止画（黒／白のみ）`:`${p.w} × ${p.h} · ${p.seconds} 秒 · ${p.frames} フレーム · ${p.effectiveFps.toFixed(1)} fps`+(p.frames<p.fps*p.seconds?'（端末負荷を抑えるためコマ数調整）':'');
+ $('go').disabled=exporting||(mode==='mp4'&&!capableMp4());
+ if(mode==='mp4'&&!capableMp4())status('このブラウザはMP4/H.264の直接書き出しに対応していません。GIFは利用できます。',true);
+ else if(!exporting)status('同じ位相場の計算から1周期のフレームを生成します。');
+}
+function openDrawer(format){
+ mode=format;closeMenu();drawer.hidden=false;
+ $('dialogTitle').textContent=format==='gif'?'GIF 書き出し':format==='mp4'?'MP4 書き出し':'PNG 書き出し';
+ $('duration').closest('label').hidden=(format==='png');$('fps').closest('label').hidden=(format==='png');
+ $('size').value=format==='mp4'?'720':'480';
+ $('go').textContent=format==='png'?'PNGを作成して保存':'作成して保存';
+ if(format!=='png')$('duration').value='4';
+ $('result').style.display='none';$('progress').style.display='none';$('cancel').style.display='none';updateSheet();
+}
+$('png').onclick=()=>openDrawer('png');
+$('gif').onclick=()=>openDrawer('gif');$('mp4').onclick=()=>openDrawer('mp4');
+$('close').onclick=()=>{if(exporting)return;drawer.hidden=true;};
+for(const id of ['duration','fps','aspect','size'])$(id).addEventListener('change',updateSheet);
+$('combine').addEventListener('change',()=>{settings.combine=$('combine').value;updateSheet();});
+let savedURL=null;
+function storeResult(blob,name){
+ if(savedURL)URL.revokeObjectURL(savedURL);
+ savedURL=URL.createObjectURL(blob);
+ latestFile={blob,name};$('saveLink').href=savedURL;$('saveLink').download=name;
+ $('saveLink').textContent=`${name} を保存`;
+ $('result').style.display='grid';
+ const file=new File([blob],name,{type:blob.type||'application/octet-stream'});
+ let shareOk=false;try{shareOk=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]}));}catch(_){}
+ $('share').hidden=!shareOk;
+}
+$('share').onclick=async()=>{if(!latestFile||!navigator.share)return;try{await navigator.share({files:[new File([latestFile.blob],latestFile.name,{type:latestFile.blob.type})]});}catch(e){if(e.name!=='AbortError')status(String(e.message||e),true);}};
+$('cancel').onclick=()=>{if(job){job.cancelled=true;if(job.recorder&&job.recorder.state!=='inactive'){try{job.recorder.stop()}catch(_){}}}};
+function downloadBlob(blob,name){if(!blob)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+$('stateSave').onclick=()=>{const data={schema:'mandala-maker-v0.1',seedA:state.seedA,seedB:state.seedB,configA:state.configA,configB:state.configB,mix:state.mix,charge:state.charge,phase:phaseNow(performance.now()),combine:settings.combine,duty:settings.duty,duration:settings.duration,design:'continuous-3-phase-binary',input:'contact-or-release-only'};downloadBlob(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'mandala_state.json');closeMenu();};
+$('stateLoad').onclick=()=>{$('loadInput').click();closeMenu();};
+$('loadInput').onchange=async()=>{const file=$('loadInput').files?.[0];if(!file)return;
+ try{const d=JSON.parse(await file.text());if(d.schema!=='mandala-maker-v0.1')throw new Error('対応していない状態形式です');
+  if(![d.seedA,d.seedB].every(x=>Number.isInteger(x)&&x>=0&&x<=4294967295))throw new Error('シード値が不正です');
+  state.seedA=d.seedA;state.seedB=d.seedB;
+  const validConfig=c=>c&&typeof c==='object'&&['rad','spin','n0','n4','n1','n2','n3','k0','k4','k1','k2','k3','off0','off1','off2','off3','off4','a0','a4','a1','a2','a3'].every(k=>Number.isFinite(c[k])&&Math.abs(c[k])<100);
+  state.configA=validConfig(d.configA)?{...d.configA}:recipe(state.seedA);
+  state.configB=validConfig(d.configB)?{...d.configB}:recipe(state.seedB);
+  state.mix=clamp(Number(d.mix)||0,0,1);state.transition=false;
+  state.charge=clamp(Number(d.charge)||0,0,1);state.phase=mod1(Number(d.phase)||0);state.phaseAt=performance.now();
+  settings.combine=['xor','majority'].includes(d.combine)?d.combine:'xor';settings.duty=clamp(Number(d.duty)||.43,.15,.75);
+  settings.duration=[4,6,8,12].includes(d.duration)?d.duration:4;
+  $('combine').value=settings.combine;$('duration').value=String(settings.duration);
+  makePreview();if(preview){preview.basisA=geometry(preview.image.width,preview.image.height,state.configA);preview.basisB=geometry(preview.image.width,preview.image.height,state.configB);}
+  status('状態を復元しました');
+ }catch(err){drawer.hidden=false;status(`読み込めませんでした：${err.message}`,true);}finally{$('loadInput').value='';}
+};
+function exportSurface(p,snapshot){
+ const canvas=document.createElement('canvas');canvas.width=p.w;canvas.height=p.h;
+ const c=canvas.getContext('2d',{willReadFrequently:true,alpha:false});
+ const surface={canvas,ctx:c,image:c.createImageData(p.w,p.h)};
+ surface.basisA=geometry(p.w,p.h,snapshot.configA);
+ surface.basisB=JSON.stringify(snapshot.configA)===JSON.stringify(snapshot.configB)?surface.basisA:geometry(p.w,p.h,snapshot.configB);
+ return surface;
+}
+async function onePng(p,snapshot){const surface=exportSurface(p,snapshot);paint(surface,snapshot);
+ const blob=await new Promise(res=>surface.canvas.toBlob(res,'image/png'));if(!blob)throw Error('PNG生成に失敗しました');
+ return {blob,name:'mandala_black_white.png'};
+}
+function pixelsFrom(surface){
+ const dat=surface.image.data,w=surface.canvas.width,h=surface.canvas.height;
+ const arr=new Uint8Array(w*h);
+ // GIF pixels arrive top-to-bottom, while ImageData itself is already top-to-bottom.
+ for(let i=0;i<w*h;i++)arr[i]=dat[i*4]===255?1:0;
+ return arr;
+}
+async function oneGif(p,snapshot,j){
+ const surface=exportSurface(p,snapshot),encoder=createGIFEncoder(p.w,p.h,true),start=snapshot.phase;
+ const totalCs=Math.round(p.seconds*100),bound=Array.from({length:p.frames+1},(_,i)=>Math.round(i*totalCs/p.frames));
+ let bytes=0;
+ for(let i=0;i<p.frames;i++){
+  if(j.cancelled)throw new DOMException('中止','AbortError');
+  paint(surface,{...snapshot,phase:mod1(start+i/p.frames)});
+  bytes=encoder.addFrame(pixelsFrom(surface),Math.max(2,bound[i+1]-bound[i]));
+  $('progress').value=(i+1)/p.frames;
+  if(i%2===0||i===p.frames-1)status(`GIF生成：${i+1} / ${p.frames} フレーム · ${(bytes/1048576).toFixed(1)} MB`);
+  if(i%2===0)await sleep(0);
+ }
+ const encoded=encoder.finish();
+ return {blob:new Blob([encoded],{type:'image/gif'}),name:'mandala_loop_bw.gif'};
+}
+async function oneMp4(p,snapshot,j){
+ const mime=capableMp4();if(!mime)throw Error('MP4エンコーダがありません');
+ const surface=exportSurface(p,snapshot),stream=surface.canvas.captureStream(p.effectiveFps),track=stream.getVideoTracks()[0];
+ if(!track)throw Error('動画用トラックを作れませんでした');
+ const sections=[],startPhase=snapshot.phase;
+ let recorder,stopped,stopResolve,error=null;
+ try{
+  const bitrate=Math.round(clamp(p.w*p.h*p.effectiveFps*.32,900000,12500000));
+  recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:bitrate});j.recorder=recorder;
+  stopped=new Promise(resolve=>stopResolve=resolve);
+  recorder.ondataavailable=e=>{if(e.data?.size)sections.push(e.data);};
+  recorder.onerror=e=>{error=e.error||new Error('動画エンコードに失敗');stopResolve();};
+  recorder.onstop=()=>stopResolve();
+  paint(surface,{...snapshot,phase:startPhase});
+  recorder.start(1000);
+  const begin=performance.now();
+  for(let i=0;i<p.frames;i++){
+   if(j.cancelled)throw new DOMException('中止','AbortError');
+   paint(surface,{...snapshot,phase:mod1(startPhase+i/p.frames)});
+   if(track.requestFrame){try{track.requestFrame();}catch(_){}}
+   $('progress').value=(i+1)/p.frames;
+   if(i%Math.max(1,Math.floor(p.effectiveFps/3))===0)status(`MP4収録：${i+1} / ${p.frames} フレーム`);
+   await sleep(begin+(i+1)*p.seconds*1000/p.frames-performance.now());
+  }
+  if(recorder.state!=='inactive')recorder.stop();
+  await stopped;
+  if(error)throw error;
+  if(j.cancelled)throw new DOMException('中止','AbortError');
+  const blob=new Blob(sections,{type:'video/mp4'});
+  // Verify the container is an actual ISO BMFF movie (ftyp box), not a renamed WebM.
+  const head=new Uint8Array(await blob.slice(0,32).arrayBuffer());
+  if(head.length<12||String.fromCharCode(...head.slice(4,8))!=='ftyp')throw Error('MP4コンテナを検証できませんでした');
+  return {blob,name:'mandala_loop_h264.mp4'};
+ }finally{
+  if(recorder?.state!=='inactive'){try{recorder.stop()}catch(_){}}
+  stream.getTracks().forEach(t=>t.stop());
+  j.recorder=null;
+ }
+}
+$('go').onclick=async()=>{
+ if(exporting)return;
+ const p=plan(),snapshot=currentSnapshot(),wasRunning=state.running;
+ exporting=true;setRunning(false);job={cancelled:false,recorder:null};
+ $('go').disabled=true;$('cancel').style.display='block';$('progress').style.display='block';$('progress').value=0;
+ $('result').style.display='none';status('描画とエンコーダを準備しています…');
+ try{
+  await sleep(0);
+  const result=mode==='gif'?await oneGif(p,snapshot,job):mode==='mp4'?await oneMp4(p,snapshot,job):await onePng(p,snapshot);
+  if(job.cancelled)throw new DOMException('中止','AbortError');
+  storeResult(result.blob,result.name);
+  status(`作成完了：${(result.blob.size/1048576).toFixed(2)} MB。「保存」から端末へ保存できます。`);
+ }catch(err){status(err?.name==='AbortError'?'作成を中止しました。':`出力エラー：${err.message||String(err)}`,err?.name!=='AbortError');}
+ finally{exporting=false;job=null;setRunning(wasRunning);$('cancel').style.display='none';$('progress').style.display='none';updateGoWithoutErasingStatus();}
+};
+function updateGoWithoutErasingStatus(){$('go').disabled=mode==='mp4'&&!capableMp4();}
+window.addEventListener('resize',queueResize,{passive:true});
+window.visualViewport?.addEventListener('resize',queueResize,{passive:true});
+window.visualViewport?.addEventListener('scroll',queueResize,{passive:true});
+window.addEventListener('orientationchange',queueResize,{passive:true});
+window.addEventListener('pagehide',()=>{if(job){job.cancelled=true;try{job.recorder?.stop()}catch(_){}}});
+window.MandalaMaker=Object.freeze({
+/* Additive methods inside the original MandalaMaker API. The original export path is untouched. */
+ isRulefoldExportBusy:()=>exporting,
+ applyRulefoldPattern(pattern,{morphMs=1100}={}){
+  if(exporting)return false;
+  const seed=Number(pattern.seed)>>>0;
+  const next=recipe(seed||1);
+  next.spin=state.configA.spin; // preserve winding across morphs
+  for(const name of ['n0','n1','n2','n3','n4']){
+    const v=pattern[name];if(Number.isInteger(v)&&v>=1&&v<=40)next[name]=v;
+  }
+  for(const name of ['rad','k1','k2','k3','off0','off1','off2','off3']){
+    const v=pattern[name];if(Number.isFinite(v)&&Math.abs(v)<100)next[name]=v;
+  }
+  if(state.transition)promote();
+  state.seedB=seed||1;next.seed=seed||1;
+  state.configB=next;state.mix=0;state.transition=true;state.startedMorph=performance.now();
+  state.morphLength=Math.max(1,Math.min(5000,morphMs));
+  if(morphMs<=0){promote();state.configA=next;state.configB=next;state.seedA=seed||1;}
+  if(preview){
+    preview.basisB=geometry(preview.image.width,preview.image.height,next);
+    if(morphMs<=0)preview.basisA=preview.basisB;
+  }
+  settings.combine=pattern.combine==='majority'?'majority':'xor';
+  settings.duty=clamp(Number(pattern.duty)||.43,.15,.75);
+  $('combine').value=settings.combine;
+  state.auto=false;
+  return true;
+ },
+ async rulefoldEvolutionGIF(patterns,{size=256,frames=48,seconds=4}={}){
+  if(!Array.isArray(patterns)||!patterns.length||patterns.length>150)throw Error('履歴のサイズが不正です');
+  size=Math.max(96,Math.min(360,Math.round(size)));
+  frames=Math.max(12,Math.min(120,Math.round(frames)));
+  seconds=Math.max(2,Math.min(12,Number(seconds)||4));
+  const encoder=createGIFEncoder(size,size,true),p={w:size,h:size};
+  const winding=state.configA.spin;
+  const snapshots=patterns.map(p=>{
+    const s=Number(p.seed)>>>0,config=recipe(s||1);config.spin=winding;
+    for(const name of ['n0','n1','n2','n3','n4'])if(Number.isInteger(p[name])&&p[name]>=1&&p[name]<=40)config[name]=p[name];
+    for(const name of ['rad','k1','k2','k3','off0','off1','off2','off3'])if(Number.isFinite(p[name])&&Math.abs(p[name])<100)config[name]=p[name];
+    return {config,combine:p.combine==='majority'?'majority':'xor',duty:clamp(Number(p.duty)||.43,.15,.75)};
+  });
+  const surf=target(size,size);let lastA=-1,lastB=-1;
+  const totalCs=Math.round(seconds*100),bounds=Array.from({length:frames+1},(_,i)=>Math.round(i*totalCs/frames));
+  for(let i=0;i<frames;i++){
+    const f=patterns.length===1?0:i*patterns.length/frames;
+    const first=Math.floor(f),next=(first+1)%snapshots.length;
+    const frac=f-first,blend=frac*frac*(3-2*frac);
+    if(first!==lastA){surf.basisA=geometry(size,size,snapshots[first].config);lastA=first;}
+    if(next!==lastB){surf.basisB=geometry(size,size,snapshots[next].config);lastB=next;}
+    // The binary GIF cycles through the trajectory and closes its final transition.
+    paint(surf,{mix:blend,phase:(i/frames)%1,charge:.15,
+      combine:snapshots[first].combine,duty:snapshots[first].duty});
+    const pixels=new Uint8Array(size*size);
+    for(let j=0;j<pixels.length;j++)pixels[j]=surf.image.data[j*4]===255?1:0;
+    encoder.addFrame(pixels,Math.max(2,bounds[i+1]-bounds[i]));
+    if(i%3===0)await sleep(0);
+  }
+  return new Blob([encoder.finish()],{type:'image/gif'});
+ },
+
+ state:()=>({...currentSnapshot(),contact:Number(state.contact),running:state.running}),
+ capabilities:()=>({mp4:capableMp4(),webm:capableWebm(),png:true,gif:true}),
+ setContact(v){state.contacts.clear();contact(v);},
+ mutate:()=>mutate(false),newPattern:()=>mutate(true),
+ setPhase(p){state.phase=mod1(p);state.phaseAt=performance.now();},
+ setRunning,setCombine(c){if(['xor','majority'].includes(c)){settings.combine=c;$('combine').value=c;}},
+ getPlan:()=>plan(),openExport:openDrawer,
+ renderOptions:()=>({width:world.width,height:world.height}),
+ debugRender:(phase=0,size=128)=>{const s=currentSnapshot(),p={w:size,h:size};const x=exportSurface(p,s);paint(x,{...s,phase});return x.canvas.toDataURL('image/png');}
+});
+makePreview();stage.classList.toggle('paused',!state.running);requestAnimationFrame(animate);
+})();
+
+</script>
+
+<button id="rfLaunch" type="button" aria-label="RULEFOLD操作を開く" aria-expanded="false" title="RULEFOLD">RF</button>
+<aside id="rfPanel" hidden aria-label="RULEFOLD × 曼荼羅 実験制御">
+  <header class="rfHead">
+    <div><h2>RULEFOLD × 曼荼羅</h2><small>演算器を獲得し、生成規則を書き換えると白黒の位相場そのものが変わります。</small></div>
+    <button id="rfClose" type="button" aria-label="パネルを閉じる">×</button>
+  </header>
+  <div class="rfLine">
+    <label for="rfMode">MODE</label>
+    <select id="rfMode" aria-label="動作モード"><option value="studio" selected>LAB · 24演算器</option><option value="fin4">PR #73 · Fin4</option></select>
+    <label><input id="rfFrozen" type="checkbox">規則を凍結</label>
+  </div>
+  <div class="stats" role="group" aria-label="現在の演算器と規則の数">
+    <div class="stat"><b id="rfCountK">1</b><span>獲得 K / <span id="rfMax">24</span></span></div>
+    <div class="stat"><b id="rfCountE">1</b><span>生成 E</span></div>
+    <div class="stat"><b id="rfCountM">1</b><span>メタ M</span></div>
+    <div class="stat"><b id="rfCountL">0</b><span>lift L</span></div>
+    <div class="stat"><b id="rfCountD">1</b><span>編集 D</span></div>
+    <div class="stat"><b id="rfClasses">1</b><span>観測クラス</span></div>
+  </div>
+  <div class="sequence"><div>K = [<span id="rfKnown">0</span>]</div><div>frontier = <span id="rfFrontier">1</span></div></div>
+  <div class="rfLine" role="group" aria-label="演算器の実行">
+    <button id="rfNext" class="primary" type="button">一手</button>
+    <button id="rfRun" type="button">▶ 成長</button>
+    <button id="rfStop" type="button" hidden>■ 停止</button>
+    <button id="rfReset" type="button">初期化</button>
+    <span class="small">STEP <span id="rfStepCount">0</span></span>
+  </div>
+  <label id="rfCultivateLabel" class="rfLine"><input id="rfCultivate" type="checkbox" checked>飽和したら有限規則を補助播種する（LABのみ）</label>
+  <div id="rfEditor" class="rfDivider">
+    <div class="rfLine"><button id="rfGraft" class="primary" type="button">枝を接ぐ ＋</button><span class="small">止まった機械に外部から規則を追加</span></div>
+    <div class="rfGrid">
+      <label>規則<select id="rfKind"><option value="edge">E : 起点→先</option><option value="meta">M : トリガー⇒辺</option><option value="lift">L : トリガー⇒メタ</option><option value="edit">D : トリガー⇒lift</option></select></label>
+      <label>on<input id="rfOn" type="number" min="0" max="23" value="4"></label>
+      <label>from<input id="rfFrom" type="number" min="0" max="23" value="4"></label>
+      <label>to<input id="rfTo" type="number" min="0" max="23" value="5"></label>
+    </div>
+    <div class="rfLine"><button id="rfInsert" type="button">規則を注入</button><span class="small">注入はユーザー操作。Leanによる新規証明ではありません。</span></div>
+  </div>
+  <div class="rfDivider">
+    <div class="rfLine"><button id="rfGif" class="primary" type="button">変異のGIF</button><button id="rfExport" type="button">履歴JSON</button><button id="rfImport" type="button">読込</button><input id="rfLoadInput" type="file" accept="application/json,.json" hidden></div>
+    <p class="small">元の右上メニューから従来通り PNG / GIF / MP4 を書き出せます。ここでの「変異のGIF」は規則の履歴に沿って模様が変わる別形式です。</p>
+  </div>
+  <details class="rfDivider"><summary>いま動いている規則</summary>
+    <p><b>E</b> <span id="rfE"></span></p><p><b>M</b> <span id="rfM"></span></p><p><b>L</b> <span id="rfL"></span></p><p><b>D</b> <span id="rfD"></span></p>
+  </details>
+  <details class="rfDivider"><summary>生成・書換の履歴</summary><ol id="rfLog"></ol></details>
+  <p id="rfStatus" role="status" aria-live="polite"></p>
+  <div class="rfFoot">PR #73 の有限規則機械を参照する実行モデル。LABの規則注入・描画対応は独立の創作実装で、Lean証明済みの新規定理を生成する機能ではありません。 <a href="https://github.com/Sumuji-zkdwn/primitive-lean/pull/73" target="_blank" rel="noopener noreferrer">source</a></div>
+</aside>
+<script id="rulefold-core">'use strict';
+/* Reference semantic kernel: PR #73 Fin 4 higherStep, with finite creative laboratory as an extension.
+ * The interpreter remains fixed. Generated patterns are independent visual encodings, not Lean theorems.
+ */
+const RulefoldCore = (() => {
+  const clone = obj => JSON.parse(JSON.stringify(obj));
+  const seed = (editable=true) => ({
+    known:[0],edges:[[0,1]],metaRules:[{on:1,from:1,to:2}],liftRules:[],
+    liftEdits:editable?[{on:1,rule:{on:1,meta:{on:2,from:2,to:3}}}]:[]
+  });
+  const children = (s,src) => s.edges.filter(([a])=>a===src).map(([,b])=>b);
+  const frontier = s => s.known.flatMap(k=>children(s,k).filter(n=>!s.known.includes(n)));
+  const observations = s => s.known.map(k=>children(s,k));
+  const classes = s => new Set(observations(s).map(x=>JSON.stringify(x))).size;
+  function step(s,viable=()=>true) {
+    const target=frontier(s).find(viable);
+    if (target===undefined)return null;
+    // The next meta rules use the UPDATED lift program; current edges use PRE-STEP meta rules.
+    const installed=s.liftEdits.filter(e=>e.on===target).map(e=>clone(e.rule));
+    const lifts=[...s.liftRules,...installed];
+    const emitted=lifts.filter(l=>l.on===target).map(l=>clone(l.meta));
+    const edges=s.metaRules.filter(m=>m.on===target).map(m=>[m.from,m.to]);
+    const result={known:[...s.known,target],edges:[...s.edges,...edges],metaRules:[...s.metaRules,...emitted],liftRules:lifts,liftEdits:clone(s.liftEdits)};
+    return {state:result,event:{target,installed,emitted,edges}};
+  }
+  function run(initial,viable=()=>true,limit=128) {
+    let s=clone(initial);const history=[{state:clone(s),event:null}];
+    for(let i=0;i<limit;i++){
+      const t=step(s,viable);if(!t)return {state:s,history,saturated:true};
+      s=t.state;history.push({state:clone(s),event:t.event});
+    }
+    return {state:s,history,saturated:!step(s,viable)};
+  }
+  // Stable 32-bit hash of the observable machine and its generation rules.
+  function signature(s) {
+    const bytes=JSON.stringify([s.known,s.edges,s.metaRules,s.liftRules,s.liftEdits]);
+    let h=2166136261;
+    for(let i=0;i<bytes.length;i++) {h^=bytes.charCodeAt(i);h=Math.imul(h,16777619);}
+    return h>>>0;
+  }
+  function visual(s){
+    const h=signature(s),c=classes(s),k=s.known.length,e=s.edges.length,m=s.metaRules.length,l=s.liftRules.length,d=s.liftEdits.length;
+    const u=(i)=>((h>>>(i%24))&255)/255;
+    return {
+      seed:h||1,
+      // These coefficients are sampled from the machine signature and counted structural invariants.
+      n1:3+((c+e)%13), n2:4+((m*2+k)%13), n3:5+((l*3+d+k)%16),
+      n0:3+((k+e)%10), n4:5+((c+m+d)%13),
+      rad:2.3+1.5*u(3)+.065*Math.min(18,k),
+      k1:1.1+9*u(7), k2:2+10*u(11), k3:2+13*u(15),
+      off0:Math.PI*2*u(2),off1:Math.PI*2*u(6),off2:Math.PI*2*u(10),off3:Math.PI*2*u(14),
+      duty:Math.max(.2,Math.min(.65,.32+.015*((c*3+e+m)%15))),
+      combine:(l+e)%4===3?'majority':'xor',
+      metrics:{operators:k,edges:e,meta:m,lift:l,edits:d,classes:c}
+    };
+  }
+  // User-operated model modification, distinct from the machine's autonomous finite transitions.
+  function attach(s,type,{on,from,to},cap=24){
+    const values=[on,from,to];
+    if(!values.every(n=>Number.isInteger(n)&&n>=0&&n<cap))throw Error('演算器番号が範囲外です');
+    const next=clone(s);
+    if(type==='edge')next.edges.push([from,to]);
+    else if(type==='meta')next.metaRules.push({on,from,to});
+    else if(type==='lift')next.liftRules.push({on,meta:{on:from,from,to}});
+    else if(type==='edit')next.liftEdits.push({on,rule:{on,meta:{on:from,from,to}}});
+    else throw Error('未知の規則');
+    return next;
+  }
+  function graft(s,cap=24){
+    const next=clone(s),present=new Set(s.known);
+    let id=0;while(id<cap&&present.has(id))id++;
+    if(id>=cap)return null;
+    const source=s.known[s.known.length-1];
+    next.edges.push([source,id]);
+    // A small finite rule cassette: on learning id it creates the next edge,
+    // and installs a meta rule that can supply one further edge later.
+    if(id+1<cap){next.metaRules.push({on:id,from:id,to:id+1});}
+    if(id+2<cap){next.liftEdits.push({on:id,rule:{on:id,meta:{on:id+1,from:id+1,to:id+2}}});}
+    return next;
+  }
+  function validate(raw,cap=24){
+    if(!raw||typeof raw!=='object'||!Array.isArray(raw.known)||!Array.isArray(raw.edges))throw Error('状態形式が不正');
+    const lists=['known','edges','metaRules','liftRules','liftEdits'];
+    if(lists.some(k=>!Array.isArray(raw[k])||raw[k].length>256)||raw.known.length>cap)throw Error('規則が多すぎます');
+    const ok=n=>Number.isInteger(n)&&n>=0&&n<cap;
+    const edge=x=>Array.isArray(x)&&x.length===2&&x.every(ok);
+    const meta=x=>x&&ok(x.on)&&ok(x.from)&&ok(x.to);
+    const lift=x=>x&&ok(x.on)&&meta(x.meta);
+    const edit=x=>x&&ok(x.on)&&lift(x.rule);
+    if(!raw.known.every(ok)||new Set(raw.known).size!==raw.known.length||!raw.edges.every(edge)||!raw.metaRules.every(meta)||!raw.liftRules.every(lift)||!raw.liftEdits.every(edit))throw Error('ルール値が不正');
+    return clone({known:raw.known,edges:raw.edges,metaRules:raw.metaRules,liftRules:raw.liftRules,liftEdits:raw.liftEdits});
+  }
+  return Object.freeze({clone,seed,children,frontier,observations,classes,step,run,signature,visual,attach,graft,validate});
+})();
+</script>
+<script id="rulefold-ui">'use strict';
+(function(){
+  const $=id=>document.getElementById(id), E=RulefoldCore;
+  const cap=24;let mode='studio',editable=true,machine=E.seed(true),history=[],tick=0,playing=false,playTimer=null,exportingEvolution=false;
+  const finite = ()=>mode==='fin4';
+  const viable = id=> id>=0 && id < (finite()?4:cap);
+  const formatEdges = xs=>xs.map(([a,b])=>`${a}→${b}`).join(' · ')||'—';
+  const formatMeta = xs=>xs.map(x=>`${x.on}⇒${x.from}→${x.to}`).join(' · ')||'—';
+  const formatLift = xs=>xs.map(x=>`${x.on}⇒[${x.meta.on}⇒${x.meta.from}→${x.meta.to}]`).join(' · ')||'—';
+  const fmtEdit = xs=>xs.map(x=>`${x.on}↦${x.rule.on}⇒[${x.rule.meta.on}⇒${x.rule.meta.from}→${x.rule.meta.to}]`).join(' · ')||'—';
+  function stop(){playing=false;clearTimeout(playTimer);playTimer=null;}
+  function push(event=null){
+    const item={tick,mode,event,state:E.clone(machine),pattern:E.visual(machine)};
+    history.push(item);if(history.length>150)history.shift();return item;
+  }
+  function apply(instant=false){
+    const p=E.visual(machine);
+    window.MandalaMaker.applyRulefoldPattern(p,{morphMs:instant?0:1150});
+    return p;
+  }
+  function showStatus(msg){$('rfStatus').textContent=msg;}
+  function paintUI(){
+    const p=E.visual(machine),ready=!!E.step(machine,viable);
+    $('rfMode').value=mode;$('rfFrozen').checked=!editable;$('rfFrozen').disabled=!finite();
+    $('rfEditor').hidden=finite();$('rfCultivateLabel').hidden=finite();
+    $('rfKnown').textContent=machine.known.join(' / ');
+    $('rfCountK').textContent=machine.known.length;
+    $('rfCountE').textContent=machine.edges.length;
+    $('rfCountM').textContent=machine.metaRules.length;
+    $('rfCountL').textContent=machine.liftRules.length;
+    $('rfCountD').textContent=machine.liftEdits.length;
+    $('rfClasses').textContent=p.metrics.classes;
+    $('rfStepCount').textContent=String(tick);
+    $('rfNext').disabled=!ready || exportingEvolution;
+    $('rfRun').disabled=!ready || exportingEvolution;
+    $('rfGraft').disabled=finite()||exportingEvolution||machine.known.length>=cap;
+    $('rfStop').hidden=!playing;
+    $('rfRun').hidden=playing;
+    $('rfMax').textContent=finite()?'4':'24';
+    $('rfFrontier').textContent=E.frontier(machine).filter(viable).join(', ')||'∅';
+    $('rfE').textContent=formatEdges(machine.edges);
+    $('rfM').textContent=formatMeta(machine.metaRules);
+    $('rfL').textContent=formatLift(machine.liftRules);
+    $('rfD').textContent=fmtEdit(machine.liftEdits);
+    const recent=history.slice(-9).reverse();
+    $('rfLog').replaceChildren(...recent.map(item=>{
+      const li=document.createElement('li');
+      const name=item.event?.kind==='graft'?'接ぎ木':item.event?.kind==='attach'?'規則注入':item.event?.target!==undefined?`演算器 ${item.event.target} を取得`:'初期状態';
+      li.textContent=`${item.tick.toString().padStart(2,'0')}  ${name}  /  K:${item.state.known.length}  M:${item.state.metaRules.length}  L:${item.state.liftRules.length}`;
+      return li;
+    }));
+  }
+  function reset(){
+    stop(); tick=0;machine=E.seed(editable);history=[];push();apply(true);paintUI();showStatus('初期状態。演算器0から開始。');
+  }
+  function move(){
+    if(exportingEvolution||window.MandalaMaker.isRulefoldExportBusy())return false;
+    const next=E.step(machine,viable);
+    if(!next){stop();paintUI();showStatus('生成可能な未知演算器がありません。有限飽和。');return false;}
+    machine=next.state;tick++;push(next.event);apply(false);paintUI();
+    showStatus(`演算器 ${next.event.target} を取得。E +${next.event.edges.length} / M +${next.event.emitted.length} / L +${next.event.installed.length}`);
+    return true;
+  }
+  function play(){
+    if(playing||exportingEvolution)return;
+    playing=true;paintUI();
+    function schedule(){
+      if(!playing)return;
+      if(!E.step(machine,viable) && !finite() && $('rfCultivate').checked && machine.known.length<cap){
+        const next=E.graft(machine,cap);
+        if(next){machine=next;tick++;push({kind:'graft'});apply(false);paintUI();}
+      }
+      if(!move()){stop();paintUI();return;}
+      playTimer=setTimeout(schedule,1400);
+    }
+    schedule();
+  }
+  function graft(){
+    if(finite()||exportingEvolution||window.MandalaMaker.isRulefoldExportBusy())return;
+    stop();const v=E.graft(machine,cap);
+    if(!v){showStatus('演算器カタログが飽和しました。');return;}
+    machine=v;tick++;push({kind:'graft'});apply();paintUI();
+    showStatus('有限規則を接ぎ木しました。次の未知演算器が開きます。');
+  }
+  function attach(){
+    if(finite()||exportingEvolution||window.MandalaMaker.isRulefoldExportBusy())return;
+    stop();
+    const data={on:Number($('rfOn').value),from:Number($('rfFrom').value),to:Number($('rfTo').value)};
+    try{
+      machine=E.attach(machine,$('rfKind').value,data,cap);tick++;push({kind:'attach',type:$('rfKind').value,...data});apply();paintUI();
+      showStatus('規則を追記しました。新しい規則は、次の学習で使用されます。');
+    }catch(err){showStatus(err.message);}
+  }
+  function modeChange(v){mode=v==='studio'?'studio':'fin4'; editable=true;reset();}
+  function saveJSON(){
+    const output={schema:'rulefold-mandala-v1',source:'primitive-lean PR #73 + original mandala-maker-v0.1',mode,editable,tick,state:machine,history,mandala:window.MandalaMaker.state()};
+    downloadBlob(new Blob([JSON.stringify(output,null,2)+'\n'],{type:'application/json'}),'rulefold_mandala_state.json');
+  }
+  function downloadBlob(blob,name){
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),20000);
+  }
+  async function importJSON(){
+    const f=$('rfLoadInput').files?.[0];$('rfLoadInput').value='';if(!f)return;
+    try{
+      if(f.size>500000)throw Error('500KB以下の状態ファイルを選んでください');
+      const data=JSON.parse(await f.text());if(data.schema!=='rulefold-mandala-v1')throw Error('対応しない形式です');
+      const newMode=data.mode==='studio'?'studio':'fin4',newCap=newMode==='fin4'?4:cap;
+      const state=E.validate(data.state,newCap);
+      if(newMode==='fin4'&&data.editable===false&&state.liftEdits.length)throw Error('凍結状態に編集命令があります');
+      stop();mode=newMode;editable=data.editable!==false;
+      machine=state;tick=Number.isInteger(data.tick)&&data.tick>=0&&data.tick<=10000?data.tick:0;
+      const recovered=Array.isArray(data.history)?data.history.slice(-150).map(row=>{
+        const s=E.validate(row.state,newCap),t=Number.isInteger(row.tick)&&row.tick>=0&&row.tick<=10000?row.tick:0;
+        return {tick:t,mode:newMode,event:row.event??null,state:s,pattern:E.visual(s)};
+      }):[];
+      history=recovered;
+      if(!history.length||JSON.stringify(history[history.length-1].state)!==JSON.stringify(machine))push({kind:'import'});
+      apply(true);paintUI();showStatus(`演算器状態と履歴${history.length}件を読み込みました。`);
+    }catch(err){showStatus('読込エラー: '+err.message);}
+  }
+  async function saveEvolutionGIF(){
+    if(exportingEvolution||window.MandalaMaker.isRulefoldExportBusy())return;
+    stop();exportingEvolution=true;paintUI();showStatus('規則変異のGIFを生成しています…');
+    try{
+      const patterns=history.map(h=>h.pattern);
+      const result=await window.MandalaMaker.rulefoldEvolutionGIF(patterns,{size:256,frames:48,seconds:4});
+      downloadBlob(result,'rulefold_evolution_bw.gif');showStatus(`進化GIF作成：${history.length}状態 / ${(result.size/1024).toFixed(0)}KB`);
+    }catch(err){showStatus('GIFエラー: '+(err?.message||String(err)));}
+    finally{exportingEvolution=false;paintUI();}
+  }
+  $('rfLaunch').addEventListener('click',()=>{$('rfPanel').hidden=false;$('rfLaunch').setAttribute('aria-expanded','true');paintUI();});
+  $('rfClose').addEventListener('click',()=>{$('rfPanel').hidden=true;$('rfLaunch').setAttribute('aria-expanded','false');});
+  $('rfMode').addEventListener('change',e=>modeChange(e.target.value));
+  $('rfFrozen').addEventListener('change',e=>{if(finite()){editable=!e.target.checked;reset();}});
+  $('rfNext').addEventListener('click',move);$('rfRun').addEventListener('click',play);
+  $('rfStop').addEventListener('click',()=>{stop();paintUI();showStatus('停止しました。');});
+  $('rfReset').addEventListener('click',reset);
+  $('rfGraft').addEventListener('click',graft);
+  $('rfInsert').addEventListener('click',attach);
+  $('rfGif').addEventListener('click',saveEvolutionGIF);
+  $('rfExport').addEventListener('click',saveJSON);
+  $('rfImport').addEventListener('click',()=>$('rfLoadInput').click());
+  $('rfLoadInput').addEventListener('change',importJSON);
+  window.RulefoldMandala=Object.freeze({
+    state:()=>E.clone(machine),history:()=>E.clone(history),mode:()=>mode,
+    step:move,reset,runToSaturation:(n=40)=>{stop();let i=0;while(i<n&&move())i++;return i;},
+    graft,insert:(type,on,from,to)=>{if(finite())return false;machine=E.attach(machine,type,{on,from,to},cap);tick++;push({kind:'attach',type,on,from,to});apply();paintUI();return true;},
+    setMode:modeChange,pattern:()=>E.visual(machine),exportGIF:saveEvolutionGIF,
+    exportJSON:saveJSON,
+    selectFrozen:(v)=>{editable=!v;reset();},
+    isPlaying:()=>playing
+  });
+  reset();
+})();
+</script>
+</body></html>
