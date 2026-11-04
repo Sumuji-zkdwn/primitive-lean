@@ -2273,10 +2273,10 @@
     },
     {
       "path": "linear_input/lean_check/ParallelLocalGluing.inc",
-      "sha256": "05ca5cff42c0f1a64a433893c2176cac43f2eba1ba8b1e379a1a920b8d3317be",
-      "original_sha256": "05ca5cff42c0f1a64a433893c2176cac43f2eba1ba8b1e379a1a920b8d3317be",
+      "sha256": "6c48de4e041d3d9d75bfc7d8010106d47046a0ab1d1464fa7eb03686b62b88b6",
+      "original_sha256": "6c48de4e041d3d9d75bfc7d8010106d47046a0ab1d1464fa7eb03686b62b88b6",
       "source_pr": null,
-      "source_commit": "7c70e49275668a56052b58055f5cab1450f782e0",
+      "source_commit": "fac681e30b01f8c970ca6964b8f67bfe125cbf0d",
       "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2372,7 +2372,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/ParallelLocalGluing.inc",
-      "source_commit": "7c70e49275668a56052b58055f5cab1450f782e0",
+      "source_commit": "fac681e30b01f8c970ca6964b8f67bfe125cbf0d",
       "note": "Finite families of parallel partial writes glue into one global assignment exactly when all overlapping writes agree. Constructive canonical merge, conflict/disjoint control, explicit temporal gate and historical nonpreservation."
     }
   ]
