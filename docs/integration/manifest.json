@@ -2218,10 +2218,10 @@
     },
     {
       "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
-      "sha256": "17bd263cf4d7738d2d3b1a435c71cb96c6f6856364fec9c20b4998277afc802c",
-      "original_sha256": "17bd263cf4d7738d2d3b1a435c71cb96c6f6856364fec9c20b4998277afc802c",
+      "sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
+      "original_sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
       "source_pr": null,
-      "source_commit": "7341818aa053219d943190f753118977bff3dbc8",
+      "source_commit": "01da7db838bda1500c95b8e5dd0791e5e040ee90",
       "source_path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2287,7 +2287,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
-      "source_commit": "7341818aa053219d943190f753118977bff3dbc8",
+      "source_commit": "01da7db838bda1500c95b8e5dd0791e5e040ee90",
       "note": "Finite second-order mutable meta-rule table and fixed higher-order lift; prove divergent future first-order rules under identical lower-level state, conditional interval viability, bounded boot and frozen-meta saturation."
     }
   ]
