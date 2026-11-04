@@ -457,3 +457,85 @@ M₀,…,M_p と漸化式を仮定して
 - 任意p,dでの高次のジョルダン相似・階数公式：数学的証明と有限の厳密検算、Lean未完。
 - 六つの(p,d)で構成した基底変換 B の det(B)≠0 および NB=BJ：
   SymPyの有理数厳密検算。全称Lean定理とは区別する。
+
+
+## 13. 根のトレースと canonicalMoment の同定・全多項式基底
+
+### Leanで実装したトレースの一般構造
+
+追加の `lean/OrbitTraceRootRecurrence.lean` は、
+体 K 上の相異なる p+1 個の根 r_i に対して
+
+\[
+A_j=\sum_i\frac{r_i^j}{F'(r_i)},\qquad
+F(X)=\prod_i(X-r_i)
+\]
+
+を定義し、ラグランジュ補間から
+A_j=0 (0≤j<p)、A_p=1 を証明する。
+さらに F=X^(p+1)−s X^p+a の形である場合には
+
+\[
+M_k=\sum_i\frac{r_i^{p+k}}{F'(r_i)}
+\]
+
+が M_k=s^k (0≤k≤p) と
+M_(k+p+1)=s M_(k+p)−a M_k
+を満たすと示す。漸化式と初期値の**一意性**も証明する。
+定理名は
+`rootPowerSum_initial`、
+`root_relation_of_factorization`、
+`rootMoment_initial`、
+`rootMoment_recurrence`、
+`moment_recurrence_unique`、
+`rootMoment_unique`。
+根の因数分解・根の相異性は明示的仮定であり、
+特定の多項式の根が常に与えられるとは主張しない。
+
+### 元のcanonicalMomentへの完全な形式的接続
+
+`lean/OrbitTraceSpecialization.lean` は
+K が ℚ-代数である体の場合、
+\(\operatorname{eval}_2(\mathbb Q\to K,s)\)
+を用いて ℚ[X] 上の canonicalMoment を K に特殊化し、
+
+\[
+\boxed{M_k
+=\operatorname{eval}_2(\operatorname{canonicalMoment}(p,a,k),s)}
+\]
+
+を Lean 定理
+`rootMoment_eq_canonicalSpecialization` で証明する。
+この等式は、F が相異なる根に分解されるという明示仮定の下で成立する。
+積分の変数変換や実測度保存を同時に証明したわけではない。
+
+### 全次数のモニック性と多項式基底
+
+`lean/OrbitTraceMonicSequence.lean` は、
+上のモーメント型漸化式から任意 k について
+
+\[
+M_k\text{ は monic},\qquad \deg M_k=k
+\]
+
+となることを帰納法で証明し、
+`Polynomial.Sequence` を経由して
+線形独立性と ℚ[X] 全体の Module.Basis を構成する。
+`canonicalMomentBasis` は、外部の漸化式仮定を必要とせず、
+リポジトリ内の実際の canonicalMoment にこの基底を適用する。
+
+### ジョルダン添字の有限分類
+
+`lean/OrbitTraceJordanIndex.lean` は q=p+1 の
+r+m q という添字について、互いに異なる剰余類の一意性、
+有限次元カットオフ d における鎖長
+\(\ell_r=\lfloor(d-r)/q\rfloor+1\)
+との整合性、および任意の k≤d の表示の存在を扱う。
+
+**境界**：添字の一意性・全域性と、多項式基底の存在だけでは
+一般の転送作用素のジョルダン標準形をLeanで証明したことにはならない。
+残る正式な接続は、全 k に対する
+\(\mathcal L(X^k)-X^k\) の次数 q 降下と、
+次数 k−q の係数が −a(k−p) であることのLean全称証明、
+およびその下三角性から生成されるジョルダン基底の全次数相似定理である。
+先行する数学的証明と有限SymPy検算とは別扱いにする。
