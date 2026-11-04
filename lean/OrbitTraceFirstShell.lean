@@ -251,7 +251,8 @@ theorem second_shell_moment
       have hq : M (p + 1) = s ^ (p + 1) - a := by simpa using h0
       have hr : M (2 * (p + 1)) =
           s * M (p + 1 + p) - a * M (p + 1) := by
-        convert hrec (p + 1) using 1 <;> omega
+        have hi : p + 1 + p + 1 = 2 * (p + 1) := by omega
+        simpa only [hi] using (hrec (p + 1))
       simp only [Nat.add_zero, pow_zero, one_mul, secondShellCoeff]
       rw [hr, hp, hq]
       rw [pow_add, pow_succ]
@@ -265,7 +266,11 @@ theorem second_shell_moment
       have hr : M (2 * (p + 1) + (j + 1)) =
           s * M (2 * (p + 1) + j) -
             a * M (p + 1 + (j + 1)) := by
-        convert hrec (p + 1 + (j + 1)) using 1 <;> omega
+        have hi1 : p + 1 + (j + 1) + p + 1 =
+            2 * (p + 1) + (j + 1) := by omega
+        have hi2 : p + 1 + (j + 1) + p =
+            2 * (p + 1) + j := by omega
+        simpa only [hi1, hi2] using (hrec (p + 1 + (j + 1)))
       rw [hr, ih hj', hfirst]
       have hpow : s ^ (p + 1 + (j + 1)) =
           s ^ (p + 1) * s ^ (j + 1) := by rw [pow_add]
