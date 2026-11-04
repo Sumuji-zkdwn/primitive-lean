@@ -86,14 +86,38 @@ theorem squarefree_fixed (n : ℕ) (hn : n ≠ 0) (hs : Squarefree n) :
   rw [radical_eq_product n hn]
   exact Nat.prod_primeFactors_of_squarefree hs
 
-/-- Computable witness: forgetting equates 2 and 4. -/
+/-- On a prime, the radical is unchanged. -/
+theorem radical_of_prime (p : ℕ) (hp : Nat.Prime p) :
+    radical p = p := by
+  rw [radical_eq_product p hp.ne_zero, hp.primeFactors]
+  simp
+
+/-- Explicitly identify the prime support of four as a singleton. -/
+theorem primeFactors_four :
+    (4 : ℕ).primeFactors = ({2} : Finset ℕ) := by
+  have hp : Nat.Prime 2 := by norm_num
+  calc
+    (4 : ℕ).primeFactors = (2 * 2 : ℕ).primeFactors := by norm_num
+    _ = (2 : ℕ).primeFactors ∪ (2 : ℕ).primeFactors :=
+      Nat.primeFactors_mul (by norm_num) (by norm_num)
+    _ = ({2} : Finset ℕ) := by simp [hp.primeFactors]
+
+theorem radical_four : radical 4 = 2 := by
+  rw [radical_eq_product 4 (by norm_num), primeFactors_four]
+  simp
+
+/-- Forgetting identifies the same support despite different exponents. -/
 theorem two_four_same_radical : radical 2 = radical 4 := by
-  decide
+  calc
+    radical 2 = 2 := radical_of_prime 2 (by norm_num)
+    _ = radical 4 := radical_four.symm
 
 /-- One successor step distinguishes the previously identified states. -/
 theorem successors_distinguished :
     radical (Nat.succ 2) ≠ radical (Nat.succ 4) := by
-  decide
+  change radical 3 ≠ radical 5
+  rw [radical_of_prime 3 (by norm_num), radical_of_prime 5 (by norm_num)]
+  norm_num
 
 /-- The successor operation does not respect radical's observational fibers. -/
 theorem successor_not_fiber_respecting :
