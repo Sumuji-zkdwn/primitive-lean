@@ -2237,6 +2237,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "sha256": "9ea85615a4615d3b88c38c64b843c09614efa4a39338ce800cd635e014c544c6",
+      "original_sha256": "9ea85615a4615d3b88c38c64b843c09614efa4a39338ce800cd635e014c544c6",
+      "source_pr": null,
+      "source_commit": "8115c4a958c65d3cfb43d4a7b615a7fafa87a047",
+      "source_path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2306,6 +2317,12 @@
       "path": "linear_input/lean_check/HistoryNonpreservation.inc",
       "source_commit": "d51edae8e2540c0d7867b75e2235c3b958b79199",
       "note": "Structural obstructions to history preservation, irreversible observation loss and a tagged-state repair countermodel; original proofs unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "source_commit": "8115c4a958c65d3cfb43d4a7b615a7fafa87a047",
+      "note": "Time- and state-dependent partial local operation domains, exact total-extinction historical nonpreservation criterion, interval obstruction, and local handoff/reactivation countermodels."
     }
   ]
 }
