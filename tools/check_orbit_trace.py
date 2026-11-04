@@ -41,6 +41,28 @@ ranks = [int((N**power).rank()) for power in range(4)]
 assert ranks == [12, 8, 4, 0]
 print("Jordan witness: nilpotent ranks", ranks, "= four blocks of size 3.")
 
+# Rank classification of the general p family, using exact recurrence matrices.
+# This is finite symbolic evidence, NOT a universal Lean proof of similarity.
+for p0, d0 in [(1, 3), (2, 5), (3, 11), (4, 11), (1, 13), (5, 20)]:
+    q0 = p0 + 1
+    moments = []
+    for k0 in range(d0 + 1):
+        if k0 < q0:
+            moments.append(s**k0)
+        else:
+            moments.append(expand(s*moments[k0 - 1] - moments[k0 - q0]))
+    matrix = Matrix.zeros(d0 + 1)
+    for k0 in range(d0 + 1):
+        delta = Poly(expand(moments[k0] - s**k0), s)
+        for (degree,), coefficient in delta.terms():
+            matrix[degree, k0] = coefficient
+    bound = d0 // q0 + 1
+    exact_ranks = [(matrix**j).rank() for j in range(bound + 1)]
+    predicted_ranks = [max(0, d0 + 1 - j*q0) for j in range(bound + 1)]
+    assert exact_ranks == predicted_ranks, (p0, d0, exact_ranks, predicted_ranks)
+print("Uniform Jordan-rank evidence: six exact (p,d) matrices passed.")
+
+
 P, Q = x**3 - 3*x + 1, x**2-x
 S = P/Q
 T, T2 = 1/(1-x), (x-1)/x
