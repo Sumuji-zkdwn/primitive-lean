@@ -1,5 +1,6 @@
 import OrbitTraceFirstShell
 import OrbitTraceRootRecurrence
+import OrbitTraceMonicSequence
 
 /-!
 # Identification of the canonical polynomial moment with the root trace
@@ -14,6 +15,20 @@ The factorization hypothesis says the p+1 roots are distinct and exhaustive.
 namespace OrbitTrace
 
 open Polynomial
+
+/-- The actual recursively constructed canonical moments, without an
+external recurrence hypothesis, form a basis of Q[X]. -/
+noncomputable def canonicalMomentBasis (p : ℕ) (a : ℚ) :
+    Module.Basis ℕ ℚ (Polynomial ℚ) :=
+  polynomial_moment_basis p a (canonicalMoment p a)
+    (by
+      intro k hk
+      exact canonicalMoment_initial p k a hk)
+    (by
+      intro k
+      exact canonicalMoment_recurrence p k a)
+
+#print axioms OrbitTrace.canonicalMomentBasis
 
 noncomputable def specializeCanonicalMoment
     {K : Type*} [Field K] [Algebra ℚ K]
