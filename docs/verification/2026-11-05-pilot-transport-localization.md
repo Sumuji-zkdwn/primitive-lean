@@ -48,16 +48,27 @@ and for each i, c_i <= h_i.
 
 The actual LANA `h_i` are sums of local place/tuple hull terms. No charge allocation is constructed here. In particular, one must relate `q`-valuation / q-degree data to those hull terms, allowing for compensation between local places when necessary.
 
-## Exact first missing arithmetic bridge
+## Strong arithmetic route versus the weaker Corollary 3.12 variant
 
-The next non-structural obligation can be targeted at:
+The *identified-copies / single-output-hull* route reduces to:
 
 ```
 for genuine D:
     N*(s(D)-1)*a(D) <= sum_i (sum_v^fin hullPacket(D,i,v)).
 ```
 
-This is the actual `ssIneq_iff_packets` criterion, not a new theorem. New work must establish a **genuine arithmetic inequality or a different allowed comparison mechanism**, rather than postulating it. Equating a freely chosen fake region with the q-pilot would be circular.
+This is exactly the strong `ssIneq_iff_packets` criterion in LANA, not a new theorem. **It is sufficient but not generally necessary for the Corollary 3.12 numerical variant.**
+
+LANA `Gap.lean` defines `Delta(D) = R(D) - logVol(LGP·hull(VC(I))) >= 0` and proves
+
+```
+Var(D) <-> -a(D) <= R(D)
+SS(D)  <-> -a(D) <= R(D) - Delta(D).
+```
+
+Thus `0 <= R(D)+a(D) < Delta(D)` is precisely the interval in which `Var(D)` holds but the stronger `SS(D)` fails. The additional room comes from taking the hull of unions of indeterminacy images, not from a volume-neutral transport of a single image.
+
+An alternative route therefore must produce an **actual allowed eta-algorithm output witness** in that enlarged hull. Merely citing the existence of a freely chosen region of suitable log-volume is circular. This file establishes neither the strong arithmetic inequality nor the missing genuine output witness.
 
 ## Verification boundary
 
