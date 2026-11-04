@@ -2262,10 +2262,10 @@
     },
     {
       "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
-      "sha256": "249792d260b7bf88823267e59f1a47bca092e12d9d7e25f8a2f2aa92b62b418f",
-      "original_sha256": "249792d260b7bf88823267e59f1a47bca092e12d9d7e25f8a2f2aa92b62b418f",
+      "sha256": "b33f9ef8f26f30c2ab65f7f6071c5cdf02d044c7404261de43874181bf22ad95",
+      "original_sha256": "b33f9ef8f26f30c2ab65f7f6071c5cdf02d044c7404261de43874181bf22ad95",
       "source_pr": null,
-      "source_commit": "857e7880d4d56cb53afd2038cc8d502a8d2bac09",
+      "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
       "source_path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2355,7 +2355,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
-      "source_commit": "857e7880d4d56cb53afd2038cc8d502a8d2bac09",
+      "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
       "note": "Finite cooperation with individual coverage but no sequential global gluing due to destructive interference; invariant all-word obstruction, joint-postcondition-gated extinction and sharp non-destructive controls."
     }
   ]
