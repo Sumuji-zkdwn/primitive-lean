@@ -32,6 +32,8 @@ Our bridge explains precisely which extra work is needed:
 
 The present file **does not provide** these witnesses or bounds. The numerical equivalence itself cannot produce a missing inequality.
 
+**Important distinction (Gap.lean):** The displayed numerical wall corresponds to the stronger *identified-copies* comparison. It is sufficient, but need not be necessary for the weaker Corollary 3.12 numerical variant: LANA proves the latter can hold in the abstract window between the strong wall and the enlarged indeterminacy hull. The volume of individual transports and the volume of the hull of their union are different constructions. See `2026-11-05-pilot-transport-localization.md` for the two proof obligations.
+
 ## Verification criteria
 
 The new source is additive and leaves the baseline proofs unchanged. A success claim requires the exact-head `python -B -X utf8 tools/verify.py --integration-only` CI run, including `lake env lean --trust=0`, complete public declaration axiom auditing, source provenance and finite regressions. Independent Python tests are supporting checks, not Lean proofs.
