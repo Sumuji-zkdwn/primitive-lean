@@ -165,6 +165,7 @@ def verify_lean(rebuild):
         'PilotComparisonBridge': 'Choice-dependent reconstruction range cover, quotient factorization boundary, exact log-volume witness iff numerical cap, independent finite and ell=7 countermodels; not an IUT proof.',
         'PilotVolumeTransport': 'Exact choice-dependent log-volume shift criterion, neutral/limited-shift obstruction, and conditional local packet budget certificate; not an arithmetic IUT proof.',
         'PilotHullInflation': 'Volume-preserving coordinate swap with strictly larger hull of its orbit; abstract finite countermodel, not an IUT Ind2 calculation.',
+        'PilotHullStability': 'Exact no-hull-inflation iff every image stays within the original closure, with identity choice, volume monotonicity and escape obstruction.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
