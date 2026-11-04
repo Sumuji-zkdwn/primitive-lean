@@ -2215,6 +2215,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+      "sha256": "17bd263cf4d7738d2d3b1a435c71cb96c6f6856364fec9c20b4998277afc802c",
+      "original_sha256": "17bd263cf4d7738d2d3b1a435c71cb96c6f6856364fec9c20b4998277afc802c",
+      "source_pr": null,
+      "source_commit": "7341818aa053219d943190f753118977bff3dbc8",
+      "source_path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2272,6 +2283,12 @@
       "path": "linear_input/lean_check/RuleSelfModification.inc",
       "source_commit": "0c45401418fe83b522b056f69d25f0500e1ef291",
       "note": "Finite machine stores rules as mutable edge data and internally appends compiled rules after learning operators; proves soundness, preservation, saturation and a frozen-rule control."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+      "source_commit": "7341818aa053219d943190f753118977bff3dbc8",
+      "note": "Finite second-order mutable meta-rule table and fixed higher-order lift; prove divergent future first-order rules under identical lower-level state, conditional interval viability, bounded boot and frozen-meta saturation."
     }
   ]
 }
