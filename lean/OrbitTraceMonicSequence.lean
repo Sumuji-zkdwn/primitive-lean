@@ -80,6 +80,24 @@ theorem polynomial_moment_linearIndependent
     LinearIndependent ℚ M := by
   exact (polynomialMomentSequence p a M hinit hrec).linearIndependent
 
+
+/-- The moment recurrence gives an actual basis of the full polynomial
+algebra, not just a linearly independent finite family. -/
+noncomputable def polynomial_moment_basis
+    (p : ℕ) (a : ℚ) (M : ℕ → Polynomial ℚ)
+    (hinit : ∀ k, k ≤ p → M k = X ^ k)
+    (hrec : ∀ k, M (k + p + 1) = X * M (k + p) - C a * M k) :
+    Module.Basis ℕ ℚ (Polynomial ℚ) :=
+  (polynomialMomentSequence p a M hinit hrec).basis (by
+    intro k
+    change IsUnit (M k).leadingCoeff
+    have hm : (M k).leadingCoeff = 1 :=
+      (polynomial_moment_monic_degree p a M hinit hrec k).1
+    rw [hm]
+    exact isUnit_one)
+
+#print axioms OrbitTrace.polynomial_moment_basis
+
 #print axioms OrbitTrace.polynomial_moment_monic_degree
 #print axioms OrbitTrace.polynomial_moment_linearIndependent
 
