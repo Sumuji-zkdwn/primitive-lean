@@ -62,3 +62,17 @@ This is the actual `ssIneq_iff_packets` criterion, not a new theorem. New work m
 ## Verification boundary
 
 The additive source is registered for compilation with the original pinned Lean/mathlib, `--trust=0`, and full declaration-axiom audit. CI needs to succeed at the *new* exact commit after this addition; the prior successful CI run only verifies the previous PR #78 head.
+
+## Hull of the union is a separate operation
+
+The neutral-transport theorem concerns **individual transported regions**. It makes no assertion about the hull of a *union of multiple transported images*. The two operations do not commute with taking volume in general.
+
+[LANA Gap.lean](https://github.com/lana-agents/iut/blob/main/Iut/WallEquiv/Gap.lean) proves a precise distinction:
+
+- `gap D >= 0`, with `gap_eq` writing the hull gap as a sum of nonnegative **Ind2** terms over bad residue characteristics (it vanishes at good places and at infinity after taking hulls on both sides).
+- `gapNoHull D` contains additional shell and archimedean defects, so replacing the hull by the raw tensor log-shell changes the numerical problem.
+- Whether Ind2 terms at the bad primes vanish is an open arithmetic/geometric question in that formalization. Hence one cannot discard the hull-of-union inflation.
+
+New independent Lean source `PilotHullInflation.inc` proves that swapping the axes of a 2-by-1 rectangle preserves each individual area 2, while taking the coordinatewise hull of the two images yields area 4. It also proves monotonicity of hull area and a square non-inflation control.
+
+This is a **finite countermodel to an invalid abstract inference**. It does not compute or prove positivity for the IUT-specific `ind2Term` or establish a relation between the IUT quantity `V` and the actual `q`-degree.
