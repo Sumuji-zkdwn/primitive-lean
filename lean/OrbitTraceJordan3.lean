@@ -39,17 +39,19 @@ theorem jordanBlockN_square_top (r : ℕ) (a : ℚ) (v : Triple) :
 theorem jordanBlockN_cube_zero (r : ℕ) (a : ℚ) (v : Triple) :
     jordanBlockN r a (jordanBlockN r a (jordanBlockN r a v)) =
       ⟨0, 0, 0⟩ := by
-  apply Triple.ext <;> simp [jordanBlockN] <;> ring
+  cases v
+  simp [jordanBlockN]
 
 def blockTop : Triple := ⟨0, 0, 1⟩
 
 theorem jordanBlockN_square_top_nonzero (r : ℕ) (a : ℚ) (ha : a ≠ 0) :
     (jordanBlockN r a (jordanBlockN r a blockTop)).c0 ≠ 0 := by
   rw [jordanBlockN_square_top]
-  simp only [blockTop]
   have hr1 : ((r : ℚ) + 1) ≠ 0 := by positivity
   have hr5 : ((r : ℚ) + 5) ≠ 0 := by positivity
-  exact mul_ne_zero (mul_ne_zero hr1 hr5) (pow_ne_zero 2 ha)
+  have hn : ((r : ℚ) + 1) * ((r : ℚ) + 5) * a ^ 2 ≠ 0 :=
+    mul_ne_zero (mul_ne_zero hr1 hr5) (pow_ne_zero 2 ha)
+  simpa [blockTop] using hn
 
 def fourBlocks (a : ℚ) (v : Fin 4 → Triple) : Fin 4 → Triple :=
   fun i => jordanBlockN i.val a (v i)
