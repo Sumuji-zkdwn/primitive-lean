@@ -72,6 +72,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/TemporalLocalExtinction.inc', 'LinearInputTemporalExtinction'),
     ('linear_input/lean_check/LocalCapacityIncompatibility.inc', 'LinearInputCapacityExtinction'),
     ('linear_input/lean_check/CooperativeGluingObstruction.inc', 'LinearInputCooperativeGluing'),
+    ('linear_input/lean_check/RelationalOddCycleGluing.inc', 'LinearInputRelationalGluing'),
     ('linear_input/lean_check/EWFSFenchel.inc', 'LinearInputEWFSDual'),
     ('linear_input/lean_check/WFSCanonicalLift.inc', 'LinearInputWFSCanonical'),
     ('linear_input/lean_check/EWFSFutureBridge.inc', 'LinearInputEWFSFuture'),
