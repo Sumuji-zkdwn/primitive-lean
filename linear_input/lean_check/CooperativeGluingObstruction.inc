@@ -38,7 +38,7 @@ theorem goalFlag_false_iff_not_joint (x : Bool × Bool) :
     GoalFlag x = false ↔ ¬ JointGoal x := by
   cases x with
   | mk a b =>
-      cases a <;> cases b <;> decide
+      cases a <;> cases b <;> simp [GoalFlag, JointGoal]
 
 /-- The first primitive writes the first bit and deletes the second;
 the other primitive performs the opposite destructive write. -/
@@ -69,8 +69,8 @@ theorem destructive_individual_coverage :
     CollectiveCoverage destructive (false, false) := by
   intro req
   fin_cases req
-  · exact ⟨[0], by decide⟩
-  · exact ⟨[1], by decide⟩
+  · exact ⟨[0], by rfl⟩
+  · exact ⟨[1], by rfl⟩
 
 theorem destructive_every_primitive_misses_goal
     (loc : Fin 2) (x : Bool × Bool) :
@@ -110,7 +110,8 @@ theorem destructive_noncommuting :
 compose into one simultaneously satisfying state. -/
 theorem cumulative_two_steps_reach_joint_goal :
     JointGoal (run cumulative [0, 1] (false, false)) := by
-  decide
+  change true = true ∧ true = true
+  exact ⟨rfl, rfl⟩
 
 theorem cumulative_jointly_reachable :
     JointlyReachable cumulative (false, false) := by
@@ -227,7 +228,8 @@ theorem cumulative_valid_two_time_steps :
     JointGoal
       (stepAt (gatedTimeline cumulative) 1
         (stepAt (gatedTimeline cumulative) 0 (false, false))) := by
-  decide
+  change true = true ∧ true = true
+  exact ⟨rfl, rfl⟩
 
 theorem cumulative_later_not_totally_extinct :
     ¬ AllExtinct (gatedTimeline cumulative) 1 := by
@@ -235,7 +237,8 @@ theorem cumulative_later_not_totally_extinct :
   have havail :
       (gatedTimeline cumulative).available 1 1 (true, false) = true := by
     decide
-  have hdisabled := he (true, false) (1 : Fin 2) (by simp)
+  have hloc : (1 : Fin 2) ∈ ([0, 1] : List (Fin 2)) := by decide
+  have hdisabled := he (true, false) (1 : Fin 2) hloc
   rw [hdisabled] at havail
   cases havail
 
