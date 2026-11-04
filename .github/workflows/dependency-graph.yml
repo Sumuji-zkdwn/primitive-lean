@@ -1,0 +1,51 @@
+name: Build Lean source dependency graph
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/generate_dependency_graph.py'
+      - 'docs/dependency/pr_snapshot.json'
+      - '.github/workflows/dependency-graph.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  dependency-graph:
+    name: Extract sources, symbols and PR dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact proposed commit and reachable branches
+        uses: actions/checkout@v5
+        with:
+          ref: \${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Generate reproducible graph and check nonempty evidence
+        run: python3 tools/generate_dependency_graph.py
+
+      - name: Commit generated graph to the source branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          HEAD_BRANCH: \${{ github.event.pull_request.head.ref }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/dependency/generated
+          if ! git diff --cached --quiet; then
+            git commit -m 'Regenerate source and PR dependency graph at exact source snapshot'
+            git push origin HEAD:"refs/heads/$HEAD_BRANCH"
+          fi
+
+      - name: Upload machine-readable dependency graph even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: primitive-dependency-graph-\${{ github.run_id }}
+          path: docs/dependency/generated/
+          if-no-files-found: warn
+          retention-days: 30
