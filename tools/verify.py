@@ -164,6 +164,7 @@ def verify_lean(rebuild):
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
         'PilotComparisonBridge': 'Choice-dependent reconstruction range cover, quotient factorization boundary, exact log-volume witness iff numerical cap, independent finite and ell=7 countermodels; not an IUT proof.',
         'PilotVolumeTransport': 'Exact choice-dependent log-volume shift criterion, neutral/limited-shift obstruction, and conditional local packet budget certificate; not an arithmetic IUT proof.',
+        'PilotHullInflation': 'Volume-preserving coordinate swap with strictly larger hull of its orbit; abstract finite countermodel, not an IUT Ind2 calculation.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
