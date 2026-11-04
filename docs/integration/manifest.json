@@ -2274,6 +2274,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "c394307292dc20993e923fcf01ff6b5ce9dca0ab"
+    },
+    {
+      "path": "linear_input/lean_check/PilotHullStability.inc",
+      "sha256": "0c8e57c4833e3ccc0b5130d7b9b9967b63ab43ec8beb4c323383ac171235917f",
+      "original_sha256": "0c8e57c4833e3ccc0b5130d7b9b9967b63ab43ec8beb4c323383ac171235917f",
+      "source_pr": null,
+      "source_commit": "d4c7195c03dde315be1ab8bb7122205795b70362",
+      "source_path": "linear_input/lean_check/PilotHullStability.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "d4c7195c03dde315be1ab8bb7122205795b70362"
     }
   ],
   "construction_errors": [],
@@ -2361,6 +2373,12 @@
       "path": "linear_input/lean_check/PilotHullInflation.inc",
       "source_commit": "c394307292dc20993e923fcf01ff6b5ce9dca0ab",
       "note": "Finite rectangle model proving that a volume-preserving swap can strictly inflate the join hull of orbit images; does not claim IUT Ind2 positivity."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/PilotHullStability.inc",
+      "source_commit": "d4c7195c03dde315be1ab8bb7122205795b70362",
+      "note": "Exact closure operator condition for a family of Ind2-like images to leave a hull unchanged; includes escaping-image obstruction, conditional volume comparison. Not IUT specialized."
     }
   ]
 }
