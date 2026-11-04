@@ -103,11 +103,11 @@ theorem odd_cycle_pairwise_feasible :
   fin_cases i <;> fin_cases j <;>
     first
       | exact ⟨(fun k : Fin 3 => if k = 1 then true else false),
-          by decide, by decide⟩
+          by simp [OddCycleEdge], by simp [OddCycleEdge]⟩
       | exact ⟨(fun k : Fin 3 => if k = 2 then true else false),
-          by decide, by decide⟩
+          by simp [OddCycleEdge], by simp [OddCycleEdge]⟩
       | exact ⟨(fun k : Fin 3 => if k = 0 then false else true),
-          by decide, by decide⟩
+          by simp [OddCycleEdge], by simp [OddCycleEdge]⟩
 
 /-- Individual local constraints are possible because all pairs are. -/
 theorem odd_cycle_each_locally_possible :
@@ -156,7 +156,7 @@ theorem even_cycle_globally_feasible :
   refine ⟨(fun k : Fin 4 =>
     if k = 0 then false else if k = 2 then false else true), ?_⟩
   intro i
-  fin_cases i <;> decide
+  fin_cases i <;> simp [EvenCycleEdge]
 
 theorem even_cycle_pairwise_feasible :
     PairwiseFeasible EvenCycleEdge :=
