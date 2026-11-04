@@ -32,7 +32,9 @@ theorem rootPowerSum_initial
     rootPowerSum nodes roots k = if k = p then 1 else 0 := by
   have hdeg : ((X : Polynomial K) ^ k).degree <
       (nodes.card : WithBot ℕ) := by
-    simpa [degree_X_pow, hcard] using (show k < p + 1 by omega)
+    rw [degree_X_pow, hcard]
+    norm_cast
+    omega
   have hidx : nodes.card - 1 = p := by omega
   calc
     rootPowerSum nodes roots k =
@@ -123,7 +125,9 @@ theorem rootMoment_initial
       have h2 : k + p = p + k := by omega
       change rootPowerSum nodes roots (p + (k + 1)) = s ^ (k + 1)
       rw [h1, h2] at hr
-      rw [hr, hz, ih (by omega)]
+      have hprev := ih (by omega)
+      change rootPowerSum nodes roots (p + k) = s ^ k at hprev
+      rw [hr, hz, hprev]
       ring
 
 theorem rootMoment_recurrence
@@ -155,15 +159,16 @@ theorem moment_recurrence_unique
       · rw [hM0 k hk, hN0 k hk]
       · have h1 : k - (p + 1) + p + 1 = k := by omega
         have h2 : k - (p + 1) + p = k - 1 := by omega
+        have h3 : k - 1 + 1 = k := by omega
         have hl : k - 1 < k := by omega
         have hr : k - (p + 1) < k := by omega
         calc
           M k = s * M (k - 1) - a * M (k - (p + 1)) := by
-            simpa only [h1, h2] using hMr (k - (p + 1))
+            simpa only [h1, h2, h3] using hMr (k - (p + 1))
           _ = s * N (k - 1) - a * N (k - (p + 1)) := by
             rw [ih (k - 1) hl, ih (k - (p + 1)) hr]
           _ = N k := by
-            simpa only [h1, h2] using (hNr (k - (p + 1))).symm
+            simpa only [h1, h2, h3] using (hNr (k - (p + 1))).symm
 
 theorem rootMoment_unique
     {K : Type u} [Field K] {ι : Type v} [DecidableEq ι]
