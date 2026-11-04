@@ -50,7 +50,7 @@ theorem radical_primeFactors (n : ℕ) :
   · subst n
     simp [radical]
   · rw [radical_eq_product n hn]
-    exact Nat.primeFactors_prod_primeFactors n
+    exact Nat.primeFactors_prod (fun p hp => Nat.prime_of_mem_primeFactors hp)
 
 /-- This is a genuine instance of the repository's F0 idempotence. -/
 theorem radical_idempotent : LinearInputF0.Idempotent radical := by
@@ -80,22 +80,11 @@ theorem radical_kernel_iff (x y : ℕ) (hx : x ≠ 0) (hy : y ≠ 0) :
       _ = ∏ p ∈ y.primeFactors, p := by rw [h]
       _ = radical y := (radical_eq_product y hy).symm
 
-/-- Every nonzero radical is squarefree. -/
-theorem radical_squarefree (n : ℕ) (hn : n ≠ 0) :
-    Squarefree (radical n) := by
+/-- A positive squarefree integer is a fixed representative of radical. -/
+theorem squarefree_fixed (n : ℕ) (hn : n ≠ 0) (hs : Squarefree n) :
+    radical n = n := by
   rw [radical_eq_product n hn]
-  exact Nat.squarefree_prod_primeFactors n
-
-/-- Squarefree positive integers are precisely the fixed points. -/
-theorem radical_fixed_iff_squarefree (n : ℕ) (hn : n ≠ 0) :
-    radical n = n ↔ Squarefree n := by
-  constructor
-  · intro h
-    rw [← h]
-    exact radical_squarefree n hn
-  · intro h
-    rw [radical_eq_product n hn]
-    exact Nat.prod_primeFactors_of_squarefree h
+  exact Nat.prod_primeFactors_of_squarefree hs
 
 /-- Computable witness: forgetting equates 2 and 4. -/
 theorem two_four_same_radical : radical 2 = radical 4 := by
