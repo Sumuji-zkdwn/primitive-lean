@@ -2204,6 +2204,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/RuleSelfModification.inc",
+      "sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
+      "original_sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
+      "source_pr": null,
+      "source_commit": "0c45401418fe83b522b056f69d25f0500e1ef291",
+      "source_path": "linear_input/lean_check/RuleSelfModification.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2255,6 +2266,12 @@
       "path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
       "source_commit": "66396572c043f90011103d00e583d9709adafc0f",
       "note": "Finite feedback closure of an operator-patch descriptor catalogue, generation soundness, strict freshness, saturation and local extinction bridge. Previously verified sources unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/RuleSelfModification.inc",
+      "source_commit": "0c45401418fe83b522b056f69d25f0500e1ef291",
+      "note": "Finite machine stores rules as mutable edge data and internally appends compiled rules after learning operators; proves soundness, preservation, saturation and a frozen-rule control."
     }
   ]
 }
