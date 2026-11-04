@@ -2193,6 +2193,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+      "sha256": "c8798d4b41c3854d42e468112804faa70b3872cf87a60674516516a2e3a44ddc",
+      "original_sha256": "c8798d4b41c3854d42e468112804faa70b3872cf87a60674516516a2e3a44ddc",
+      "source_pr": null,
+      "source_commit": "0946286df28a653f1de2ed23c6a5391c68524db4",
+      "source_path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2238,6 +2249,12 @@
       "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
       "source_commit": "7c920a3c58c969dab43093165170892e407d62fa",
       "note": "Search-based finite repair synthesis from local acceptance tables; complete/sound within bounded candidates. Prior proof sources unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+      "source_commit": "0946286df28a653f1de2ed23c6a5391c68524db4",
+      "note": "Finite feedback closure of an operator-patch descriptor catalogue, generation soundness, strict freshness, saturation and local extinction bridge. Previously verified sources unchanged."
     }
   ]
 }
