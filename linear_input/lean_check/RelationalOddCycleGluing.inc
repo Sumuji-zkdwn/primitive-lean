@@ -107,8 +107,8 @@ theorem odd_cycle_pairwise_feasible :
       else (fun k => if k = 2 then true else false)
     else (fun k => if k = 1 then true else false)
   refine ⟨witness, ?_, ?_⟩
-  · fin_cases i <;> fin_cases j <;> decide
-  · fin_cases i <;> fin_cases j <;> decide
+  · fin_cases i <;> fin_cases j <;> simp [OddCycleEdge, witness]
+  · fin_cases i <;> fin_cases j <;> simp [OddCycleEdge, witness]
 
 /-- Individual local constraints are possible because all pairs are. -/
 theorem odd_cycle_each_locally_possible :
