@@ -64,6 +64,14 @@ availability* structure. Reactivating the old local domain at time 2
 recovers historical preservation, illustrating exactly which assumption
 the repair must violate.
 
+**Endpoint recovery does not imply interval preservation.** An added
+`recoveredAfterGap` model loses every local operation at time 2 and
+reactivates the original toggle at time 3. Faithful old-to-new embeddings
+exist between times 0 and 3, but no faithful embedding exists between
+times 0 and 2. Therefore `PreservedOn recoveredAfterGap 0 3` is false.
+This isolates the interval-specific failure: later representability
+does not make the entire earlier interval historically preserved.
+
 The proof does **not** assert that no possible extension of the state
 space or update of availability/observations can restore a missing
 history. PR #65 separately shows loss of an observable label may be
