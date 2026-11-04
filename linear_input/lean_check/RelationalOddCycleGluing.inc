@@ -94,23 +94,40 @@ def OddCycleEdge (edge : Fin 3) (s : Fin 3 → Bool) : Prop :=
   else if edge = 1 then s 1 ≠ s 2
   else s 2 ≠ s 0
 
-/-- Individual local constraints can be realized by finite assignments. -/
-theorem odd_cycle_each_locally_possible :
-    IndividuallyFeasible OddCycleEdge := by
-  exact pairwise_implies_individual OddCycleEdge
-    (by decide : PairwiseFeasible OddCycleEdge)
-
 /-- Every pair of relation constraints has a common global assignment,
-but the witness is allowed to depend on the pair. -/
+but the witness is allowed to depend on the pair. The three displayed
+candidate colourings cover all possible ordered pairs of edge constraints. -/
 theorem odd_cycle_pairwise_feasible :
     PairwiseFeasible OddCycleEdge := by
-  decide
+  intro i j
+  fin_cases i <;> fin_cases j <;>
+    first
+      | exact ⟨(fun k : Fin 3 => if k = 1 then true else false),
+          by decide, by decide⟩
+      | exact ⟨(fun k : Fin 3 => if k = 2 then true else false),
+          by decide, by decide⟩
+      | exact ⟨(fun k : Fin 3 => if k = 0 then false else true),
+          by decide, by decide⟩
 
-/-- Three Boolean "must differ" edges cannot be realized by a single
-assignment on an odd cycle. -/
+/-- Individual local constraints are possible because all pairs are. -/
+theorem odd_cycle_each_locally_possible :
+    IndividuallyFeasible OddCycleEdge :=
+  pairwise_implies_individual OddCycleEdge odd_cycle_pairwise_feasible
+
+/-- Three Boolean "must differ" edges cannot all hold on a single
+odd cycle. This proof applies to arbitrary assigned Boolean values,
+not to an enumerable function-space instance. -/
 theorem odd_cycle_not_globally_feasible :
     ¬ GloballyFeasible OddCycleEdge := by
-  decide
+  rintro ⟨s, hall⟩
+  have h01 : s 0 ≠ s 1 := by
+    simpa [OddCycleEdge] using hall (0 : Fin 3)
+  have h12 : s 1 ≠ s 2 := by
+    simpa [OddCycleEdge] using hall (1 : Fin 3)
+  have h20 : s 2 ≠ s 0 := by
+    simpa [OddCycleEdge] using hall (2 : Fin 3)
+  cases h0 : s 0 <;> cases h1 : s 1 <;> cases h2 : s 2 <;>
+    simp_all
 
 theorem pairwise_feasibility_does_not_imply_global :
     PairwiseFeasible OddCycleEdge ∧
@@ -136,7 +153,10 @@ def EvenCycleEdge (edge : Fin 4) (s : Fin 4 → Bool) : Prop :=
 
 theorem even_cycle_globally_feasible :
     GloballyFeasible EvenCycleEdge := by
-  decide
+  refine ⟨(fun k : Fin 4 =>
+    if k = 0 then false else if k = 2 then false else true), ?_⟩
+  intro i
+  fin_cases i <;> decide
 
 theorem even_cycle_pairwise_feasible :
     PairwiseFeasible EvenCycleEdge :=
