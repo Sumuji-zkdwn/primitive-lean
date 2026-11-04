@@ -84,3 +84,24 @@ def test_domain_reactivation_is_a_genuine_escape_from_no_rewrite_theorem():
     old = successor((0, 1), lambda loc, x: loc == 0, (flip, flip))
     reactivated = successor((0, 1), lambda loc, x: loc == 0, (flip, flip))
     assert tuple(embeddings((0, 0), old, (0, 0), reactivated))
+
+
+def test_endpoint_restoration_does_not_repair_broken_interval():
+    flip = (1, 0)
+
+    def enabled(t, loc, state):
+        return (t == 0 and loc == 0) or (t == 1 and loc == 1) or (
+            t == 3 and loc == 0)
+
+    transitions = tuple(
+        successor((0, 1), lambda loc, state, t=t: enabled(t, loc, state),
+                  (flip, flip)) for t in range(4))
+    assert transitions == (flip, flip, (0, 1), flip)
+    obs = (0, 0)
+
+    # The same operation is available at both endpoints.
+    assert tuple(embeddings(obs, transitions[0], obs, transitions[3]))
+    # But there is a genuine failure of historical simulation inside.
+    assert not tuple(embeddings(obs, transitions[0], obs, transitions[2]))
+    assert not all(tuple(embeddings(obs, transitions[0], obs, step))
+                   for step in transitions)
