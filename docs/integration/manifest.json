@@ -2185,10 +2185,10 @@
     },
     {
       "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
-      "sha256": "b077a8a28150bb63523e662841a7db655dbdcc138e5726dc8051d1932ed4dba0",
-      "original_sha256": "b077a8a28150bb63523e662841a7db655dbdcc138e5726dc8051d1932ed4dba0",
+      "sha256": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
+      "original_sha256": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
       "source_pr": null,
-      "source_commit": "e82c95986c0263d52712f6d9dcc7c97e6f40773f",
+      "source_commit": "7c920a3c58c969dab43093165170892e407d62fa",
       "source_path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2236,7 +2236,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
-      "source_commit": "e82c95986c0263d52712f6d9dcc7c97e6f40773f",
+      "source_commit": "7c920a3c58c969dab43093165170892e407d62fa",
       "note": "Search-based finite repair synthesis from local acceptance tables; complete/sound within bounded candidates. Prior proof sources unchanged."
     }
   ]
