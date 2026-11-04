@@ -98,6 +98,24 @@ noncomputable def polynomial_moment_basis
 
 #print axioms OrbitTrace.polynomial_moment_basis
 
+
+/-- Relative to the standard monomial X^k, the recurrence only changes
+strictly lower-degree coefficients (the stronger gap p+1 is separate). -/
+theorem polynomial_moment_lower_difference
+    (p : ℕ) (a : ℚ) (M : ℕ → Polynomial ℚ)
+    (hinit : ∀ k, k ≤ p → M k = X ^ k)
+    (hrec : ∀ k, M (k + p + 1) = X * M (k + p) - C a * M k)
+    (k : ℕ) (hk : k ≠ 0) :
+    (M k - X ^ k).natDegree < k := by
+  obtain ⟨hmonic, hdegree⟩ :=
+    polynomial_moment_monic_degree p a M hinit hrec k
+  have hnat : (M k).natDegree = k :=
+    natDegree_eq_of_degree_eq_some hdegree
+  have h : IsMonicOfDegree (M k) k := ⟨hnat, hmonic⟩
+  exact h.natDegree_sub_X_pow hk
+
+#print axioms OrbitTrace.polynomial_moment_lower_difference
+
 #print axioms OrbitTrace.polynomial_moment_monic_degree
 #print axioms OrbitTrace.polynomial_moment_linearIndependent
 
