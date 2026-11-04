@@ -154,6 +154,7 @@ def verify_lean(rebuild):
         'HistoryNonpreservation': 'Historical preservation as a falsifiable property, missing observation and transition obstructions, impossibility of internal repair with fixed readout, global growth counterexamples, and tagged-state extension',
         'TemporalLocalExtinction': 'Time-and-state-dependent partial local availability, extinction-induced historical obstruction, exact if-and-only-if preservation boundary, interval failure, local replacement and domain reactivation counterexamples',
         'LocalCapacityIncompatibility': 'Finite local capacity versus global all-requirements demand, derived total extinction and historical nonpreservation, pairwise-compatible non-gluing triple and finite noncommutativity countermodel',
+        'CooperativeGluingObstruction': 'Collective requirement reachability without joint sequential goal, destructive-operation invariant, cooperative versus noninterfering countermodels, joint-postcondition gated extinction and history nonpreservation',
         'EWFSFenchel': 'Verified reversible E polynomial, x-only forgetting obstruction, positive-intensity WFS gauge and physical-versus-changed Fenchel pairing',
         'WFSCanonicalLift': 'Positive-intensity WFS p=2 cotangent lift and p=0 momentum identity under explicit domain conditions',
         'EWFSFutureBridge': 'Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient',
