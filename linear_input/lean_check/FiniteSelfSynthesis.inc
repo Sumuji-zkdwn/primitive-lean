@@ -15,7 +15,7 @@ generated patch. Unbounded generation, repair feasibility from extinction
 alone, continuous time, and physical information creation are not asserted.
 -/
 
-noncomputable section
+section
 
 namespace LinearInputFiniteSelfSynthesis
 
@@ -258,6 +258,12 @@ theorem witnessInternalGenerator :
     synthesizeFromLocals witnessCandidates witnessLocals
       witnessAccepts (1 : Fin 3) = some (witnessFresh ()) := by
   rfl
+
+/-- The finite Boolean search itself reduces in Lean's computational kernel. -/
+theorem witnessGeneratorEvaluates :
+    (synthesizeFromLocals witnessCandidates witnessLocals
+      witnessAccepts (1 : Fin 3)).isSome = true := by
+  decide
 
 theorem witnessSelfGeneratedExtension :
     (∃ operation : Fin 3 → Fin 3,
