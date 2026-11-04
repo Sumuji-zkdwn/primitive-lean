@@ -38,6 +38,11 @@ def allSupported {Λ Req : Type*}
     (support : Λ → Req → Bool) (demand : List Req) (loc : Λ) : Bool :=
   demand.all (fun req => support loc req)
 
+/-- Boolean conjunction is true exactly when both inputs are true. -/
+theorem bool_and_true_iff (a b : Bool) :
+    (a && b) = true ↔ a = true ∧ b = true := by
+  cases a <;> cases b <;> decide
+
 theorem allSupported_iff_covers {Λ Req : Type*}
     (support : Λ → Req → Bool) (demand : List Req) (loc : Λ) :
     allSupported support demand loc = true ↔ Covers support demand loc := by
@@ -53,9 +58,9 @@ theorem allSupported_iff_covers {Λ Req : Type*}
         Covers support (req :: rest) loc
       constructor
       · intro h r hr
-        have hhead : support loc req = true := (Bool.and_eq_true.mp h).1
+        have hhead : support loc req = true := ((bool_and_true_iff (support loc req) (allSupported support rest loc)).mp h).1
         have htail : allSupported support rest loc = true :=
-          (Bool.and_eq_true.mp h).2
+          ((bool_and_true_iff (support loc req) (allSupported support rest loc)).mp h).2
         rcases List.mem_cons.mp hr with heq | hmem
         · subst r
           exact hhead
@@ -66,7 +71,7 @@ theorem allSupported_iff_covers {Λ Req : Type*}
           ih.mpr (by
             intro r hr
             exact h r (List.mem_cons_of_mem req hr))
-        exact Bool.and_eq_true.mpr ⟨hhead, htail⟩
+        exact (bool_and_true_iff (support loc req) (allSupported support rest loc)).mpr ⟨hhead, htail⟩
 
 /-- Adding demands can never make a previously incapable local capable. -/
 theorem coverage_antitone {Λ Req : Type*}
