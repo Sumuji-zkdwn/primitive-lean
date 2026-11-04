@@ -156,6 +156,54 @@ theorem twoLayerTransfer_eq_encode (p : ℕ) (a : ℚ)
   simp only [map_sub, map_mul, map_natCast]
   ring
 
+
+theorem twoLayerEncode_coeff_low (p : ℕ)
+    (low high : Fin (p + 1) → ℚ) (j : Fin (p + 1)) :
+    (twoLayerEncode p low high).coeff j.val = low j := by
+  classical
+  unfold twoLayerEncode
+  rw [Polynomial.finset_sum_coeff]
+  simp only [Polynomial.coeff_add, Polynomial.coeff_C_mul_X_pow]
+  have hhigh (i : Fin (p + 1)) : j.val ≠ p + 1 + i.val := by omega
+  have hlow (i : Fin (p + 1)) : (j.val = i.val) ↔ (j = i) := by
+    exact Fin.val_inj
+  simp [hhigh, hlow]
+
+theorem twoLayerEncode_coeff_high (p : ℕ)
+    (low high : Fin (p + 1) → ℚ) (j : Fin (p + 1)) :
+    (twoLayerEncode p low high).coeff (p + 1 + j.val) = high j := by
+  classical
+  unfold twoLayerEncode
+  rw [Polynomial.finset_sum_coeff]
+  simp only [Polynomial.coeff_add, Polynomial.coeff_C_mul_X_pow]
+  have hlow (i : Fin (p + 1)) : p + 1 + j.val ≠ i.val := by omega
+  have hhigh (i : Fin (p + 1)) :
+      (p + 1 + j.val = p + 1 + i.val) ↔ (j = i) := by
+    constructor
+    · intro h
+      apply Fin.ext
+      omega
+    · intro h
+      subst i
+      rfl
+  simp [hlow, hhigh]
+
+theorem twoLayerEncode_injective (p : ℕ) :
+    Function.Injective
+      (fun v : (Fin (p + 1) → ℚ) × (Fin (p + 1) → ℚ) =>
+        twoLayerEncode p v.1 v.2) := by
+  intro v w h
+  apply Prod.ext
+  · funext i
+    have hc := congrArg (fun P : Polynomial ℚ => P.coeff i.val) h
+    simpa only [twoLayerEncode_coeff_low] using hc
+  · funext i
+    have hc :=
+      congrArg (fun P : Polynomial ℚ => P.coeff (p + 1 + i.val)) h
+    simpa only [twoLayerEncode_coeff_high] using hc
+
+#print axioms OrbitTrace.twoLayerEncode_injective
+
 #print axioms OrbitTrace.twoLayerTransfer_eq_encode
 
 #print axioms OrbitTrace.canonicalMoment_first_shell
