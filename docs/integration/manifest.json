@@ -2240,10 +2240,10 @@
     },
     {
       "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
-      "sha256": "8e268c3244c66c1965dd83918e1297aabdcb9d85ae15704bbcbfa21fba6ee24d",
-      "original_sha256": "8e268c3244c66c1965dd83918e1297aabdcb9d85ae15704bbcbfa21fba6ee24d",
+      "sha256": "56f6bf6efc23770535f8a0130a7f68ac78108566656edc75d1772135cc872099",
+      "original_sha256": "56f6bf6efc23770535f8a0130a7f68ac78108566656edc75d1772135cc872099",
       "source_pr": null,
-      "source_commit": "3f145f6e0cdc95b5ab22748e89ffbdf7c9d1045c",
+      "source_commit": "0da7646a906060237bc4d406cf9bec347efc1026",
       "source_path": "linear_input/lean_check/TemporalLocalExtinction.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2321,7 +2321,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
-      "source_commit": "3f145f6e0cdc95b5ab22748e89ffbdf7c9d1045c",
+      "source_commit": "0da7646a906060237bc4d406cf9bec347efc1026",
       "note": "Time- and state-dependent partial local operation domains, exact total-extinction historical nonpreservation criterion, interval obstruction, and local handoff/reactivation countermodels."
     }
   ]
