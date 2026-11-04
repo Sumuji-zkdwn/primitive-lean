@@ -149,7 +149,9 @@ theorem one_step_interval {α σ ι : Type*}
     (hone : HasLocal alive 1 (step a start)) :
     IntervalSurvival alive step [a] start := by
   intro k hk
-  have hk01 : k = 0 ∨ k = 1 := by omega
+  have hk01 : k = 0 ∨ k = 1 := by
+    simp only [List.length_cons, List.length_nil] at hk
+    omega
   rcases hk01 with rfl | rfl
   · simpa [run] using hzero
   · simpa [run] using hone
@@ -218,7 +220,7 @@ theorem witness_forced_interval_and_refinement :
     ¬ Function.Injective (forget exampleK baseStep witnessFresh) := by
   exact viable_and_strict_extension witnessAlive witnessRegion
     exampleK baseStep witnessFresh () 1 0 1
-    witness_old_invariant (by decide) witness_terminal_extinct
+    witness_old_invariant (by simp [witnessRegion]) witness_terminal_extinct
     witness_start_alive witness_repair_alive
     witness_old_equiv (by
       intro h
