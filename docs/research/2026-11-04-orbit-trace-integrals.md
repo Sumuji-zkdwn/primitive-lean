@@ -539,3 +539,76 @@ r+m q という添字について、互いに異なる剰余類の一意性、
 次数 k−q の係数が −a(k−p) であることのLean全称証明、
 およびその下三角性から生成されるジョルダン基底の全次数相似定理である。
 先行する数学的証明と有限SymPy検算とは別扱いにする。
+
+
+## 14. 厳密な降下幅と実際の線形作用素への接続（2026-11-04 続編）
+
+### Lean kernel で検証した主張
+
+漸化式 \(M_k=X M_{k-1}-a M_{k-(p+1)}\)
+（\(k\ge p+1\)）と \(M_k=X^k\)（\(k\le p\)）について、
+`lean/OrbitTraceDegreeGap.lean` に
+
+\[
+\deg(M_k-X^k)\le k-(p+1)
+\quad(k\ge p+1)
+\]
+
+を追加し、`lean/OrbitTraceLeadingDrop.lean` に
+
+\[
+[X^{k-(p+1)}](M_k-X^k)=-(k-p)a
+\quad(k\ge p+1)
+\]
+
+を形式化した。係数体が ℚ なので \(a\neq0\) なら係数が零ではなく、
+
+\[
+\boxed{\deg(M_k-X^k)=k-(p+1)}
+\]
+
+が全 k≥p+1 に成立する。各命題は個別の `--trust=0` で
+検証された（Actions #41851993622、#41852277045、#41852848225）。
+
+`lean/OrbitTraceTransferOperator.lean` は
+`Polynomial.lsum` を用いて真の ℚ 線形作用素
+
+\[
+\mathcal L:\mathbb Q[X]\to\mathbb Q[X],
+\qquad \mathcal L(X^k)=M_k
+\]
+
+を構成し、\(N=\mathcal L-\mathrm{id}\) とする。
+`canonicalDelta_X_pow_exact_degree` で、
+\(\deg N(X^k)=k-(p+1)\)（a≠0、k≥p+1）を証明した。
+Actions #41853061557 で検証成功。
+
+### 任意多項式に関するフィルトレーションと局所冪零性
+
+`lean/OrbitTraceFiltration.lean` には多項式 P の全単項式展開、
+次数の上界、低次数の消去、局所冪零性の証明候補を追加した：
+
+\[
+\deg P\le d\Longrightarrow
+\deg N(P)\le\max(0,d-(p+1)),
+\quad
+\deg P\le p\Longrightarrow N(P)=0.
+\]
+
+したがって \(N^{d+1}P=0\) とする形式化を追加した。
+`lean/OrbitTraceFastNilpotence.lean` は反復次数の速い消去を扱う。
+`fastSteps(p,d)` は \(d\le p\) なら1、
+その他は \(1+\mathrm{fastSteps}(p,d-p-1)\) と定義した。
+数学的には \(\mathrm{fastSteps}(p,d)=\lfloor d/(p+1)\rfloor+1\)。
+\(\mathrm{fastSteps}(p,d)\) 回で N の作用が零になる補題を追加した。
+**この2ファイルは最終CI成功を確認した場合のみLean検証済みとみなす。**
+
+### 最終的に残る分岐
+
+- \(N(X^k)\) の最高次数は完全に形式化された。
+- 一般多項式の次元 d 以下での局所冪零性・フィルトレーションは上記CIを要する。
+- 任意の p,d で厳密な Jordan ブロック長の分配、
+  基底 \(N^{\ell_r-1-j}(X^{t_r})\) の相似同型、
+  階数 \(\operatorname{rank}(N^j)=\max(0,d+1-j(p+1))\) の
+  Lean 全称証明は引き続き未完。
+- 実測度保存と積分の変数変換は本追加のLean証明に含まれない。
