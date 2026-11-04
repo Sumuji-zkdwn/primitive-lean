@@ -73,6 +73,27 @@ theorem polynomial_moment_gap_coefficient
         push_cast
         ring
 
+
+theorem polynomial_moment_exact_degree_drop
+    (p : ℕ) (a : ℚ) (ha : a ≠ 0) (M : ℕ → Polynomial ℚ)
+    (hinit : ∀ k, k ≤ p → M k = X ^ k)
+    (hrec : ∀ k, M (k + p + 1) = X * M (k + p) - C a * M k)
+    (k : ℕ) (hk : p + 1 ≤ k) :
+    (M k - X ^ k).degree =
+        ((k - (p + 1) : ℕ) : WithBot ℕ) := by
+  have hupper := polynomial_moment_q_gap p a M hinit hrec k
+  have hcoeff := polynomial_moment_gap_coefficient p a M hinit hrec k hk
+  have hkpos : 0 < k - p := by omega
+  have hfactor : (((k - p : ℕ) : ℚ)) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt hkpos)
+  have hnonzero :
+      (M k - X ^ k).coeff (k - (p + 1)) ≠ 0 := by
+    rw [hcoeff]
+    exact neg_ne_zero.mpr (mul_ne_zero hfactor ha)
+  exact degree_eq_of_le_of_coeff_ne_zero hupper hnonzero
+
+#print axioms OrbitTrace.polynomial_moment_exact_degree_drop
+
 #print axioms OrbitTrace.polynomial_moment_gap_coefficient
 
 end OrbitTrace
