@@ -272,23 +272,25 @@ M_(k+4)=sM_(k+3)−aM_k を仮定し、次の8項をすべて一般可換環上�
 
 ## 10. 任意 p の第一層と任意次数 d の階数公式（続編）
 
-新規の `lean/OrbitTraceFirstShell.lean` は、任意の可換環 K、p∈ℕ、
+`lean/OrbitTraceFirstShell.lean` は、任意の可換環 K、p∈ℕ、
 M_k=s^k (0≤k≤p) および
 M_(k+p+1)=s M_(k+p)−a M_k の下で
 
-[
-M_{p+1+j}=s^{p+1+j}-(j+1)a s^j
-qquad (0le jle p)
-]
+\[
+M_{p+1+j}=s^{p+1+j}-(j+1)a\,s^j
+\qquad (0\le j\le p)
+\]
 
-を証明する。ここでの自然数 j+1 は K に写して掛ける。
-これは p に依らず、V_(2p+1) の最初の2層で N=ℒ−I の作用が
-−(j+1)a の係数を持って1段降下することを意味する。
+を証明する。自然数 j+1 は K に写して掛ける。
+同ファイルには、ℚ[s] 上でこの初期条件と漸化式を満たす
+`canonicalMoment` の再帰的構成も追加した（CI検証対象）。
+これにより V_(2p+1) の最初の二層で N=ℒ−I の作用が
+−(j+1)a の係数を持って1段降下することを表現できる。
 
 `lean/OrbitTraceTwoLayer.lean` は ℚ 上の明示座標
 V=(Fin(p+1)→ℚ)×(Fin(p+1)→ℚ) に対して
-N(low,high) = (r↦−(r+1)a·high(r),0) を定め、
-N²=0、a≠0 のとき各鎖の最上位ベクトルは非零像を持つこと、
+N(low,high)=(r↦−(r+1)a·high(r),0) を定め、
+N²=0、a≠0 なら各鎖の最上位ベクトルは非零像を持つこと、
 N の像が下層の全体であり、核が下層に一致することを形式化する。
 **これは二層の座標モデルの結果であり、任意次数の転送作用素の
 全体がこの線形写像と同型だという一般Lean証明ではない。**
@@ -297,31 +299,38 @@ N の像が下層の全体であり、核が下層に一致することを形式
 
 a≠0、標数0、q=p+1、d≥0 とする。(D) から
 
-[
+\[
 N(s^k)=-a(k-p)s^{k-q}
-+	ext{degree at most }k-2q,quad kge q.
-]
++\text{degree at most }k-2q,\qquad k\ge q.
+\]
 
 各 r∈{0,…,min(p,d)} の剰余類部分空間
-(operatorname{span}{s^r,s^{r+q},ldots,s^{r+(ell_r-1)q}})
-上で、N の一つ下の次数への係数が非零なので、
+
+\[
+\operatorname{span}\{s^r,s^{r+q},\ldots,
+s^{r+(\ell_r-1)q}\}
+\]
+
+上で N の一つ下の次数への係数が非零なので、
 この部分空間は長さ
-(ell_r=lfloor(d-r)/qfloor+1)
+
+\[
+\ell_r=\left\lfloor(d-r)/q\right\rfloor+1
+\]
+
 の単一ジョルダン鎖になる。
 従って
 
-[
-oxed{operatorname{rank}(N^j)
-=max(0,d+1-j(p+1))}
-quad(jge0).
-]
+\[
+\boxed{\operatorname{rank}(N^j)=\max(0,d+1-j(p+1))}
+\qquad(j\ge0).
+\]
 
-(dimker N=min(p+1,d+1)) および
-冪零指数 (lfloor d/(p+1)floor+1) が従う。
-これらの式は最初の2層を超えた一般数学的主張であり、
-全次数のジョルダン相似を証明するLeanファイルは未追加。
+また、\(\dim\ker N=\min(p+1,d+1)\) および
+冪零指数 \(\lfloor d/(p+1)\rfloor+1\) が従う。
+全次数での相似を証明するLeanファイルは未追加。
 
 独立な厳密SymPyチェックは、
 (p,d)=(1,3),(2,5),(3,11),(4,11),(1,13),(5,20)
-に対する冪零行列の階数列を正確に比較する。
+に対する冪零行列の階数列を比較する。
 有限検算を全称証明と同一視しない。
