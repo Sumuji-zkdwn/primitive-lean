@@ -2273,10 +2273,10 @@
     },
     {
       "path": "linear_input/lean_check/ParallelLocalGluing.inc",
-      "sha256": "e005c25a91ceed59f5f3fe3b2eb40e54b895b37d05f7c3db739703590cb933f3",
-      "original_sha256": "e005c25a91ceed59f5f3fe3b2eb40e54b895b37d05f7c3db739703590cb933f3",
+      "sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+      "original_sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
       "source_pr": null,
-      "source_commit": "b736c58204ded7a49cba21615f307b930084dfc7",
+      "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
       "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2372,7 +2372,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/ParallelLocalGluing.inc",
-      "source_commit": "b736c58204ded7a49cba21615f307b930084dfc7",
+      "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
       "note": "Exact iff local overlap consistency/global partial-function gluing; under coordinate coverage unique canonical state and 3-factor operational gluing criterion with concrete destructive and cumulative countermodels."
     }
   ]
