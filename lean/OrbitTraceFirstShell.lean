@@ -83,13 +83,12 @@ Concrete polynomial sequence in the formal observation variable X.
 This recursion is constructed, rather than postulated as an arbitrary M.
 -/
 
-def canonicalMoment (p : ℕ) (a : ℚ) : ℕ → Polynomial ℚ
-  | k =>
-    if hk : k ≤ p then
-      Polynomial.X ^ k
-    else
-      Polynomial.X * canonicalMoment p a (k - 1) -
-        Polynomial.C a * canonicalMoment p a (k - (p + 1))
+def canonicalMoment (p : ℕ) (a : ℚ) (k : ℕ) : Polynomial ℚ :=
+  if hk : k ≤ p then
+    Polynomial.X ^ k
+  else
+    Polynomial.X * canonicalMoment p a (k - 1) -
+      Polynomial.C a * canonicalMoment p a (k - (p + 1))
 termination_by k
 decreasing_by all_goals omega
 
