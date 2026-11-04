@@ -2250,6 +2250,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "e70e842ac4593fea78c6d168e8d55bcd1f5557ce"
+    },
+    {
+      "path": "linear_input/lean_check/PilotVolumeTransport.inc",
+      "sha256": "4a01c6bcfea3ac20a8ecd0b7408b21b77df28f96e0c093b7a983f0289c0d803b",
+      "original_sha256": "4a01c6bcfea3ac20a8ecd0b7408b21b77df28f96e0c093b7a983f0289c0d803b",
+      "source_pr": null,
+      "source_commit": "99a63392584c4fcea9f1593bf6dda186dd0a6678",
+      "source_path": "linear_input/lean_check/PilotVolumeTransport.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "99a63392584c4fcea9f1593bf6dda186dd0a6678"
     }
   ],
   "construction_errors": [],
@@ -2325,6 +2337,12 @@
       "path": "linear_input/lean_check/PilotComparisonBridge.inc",
       "source_commit": "e70e842ac4593fea78c6d168e8d55bcd1f5557ce",
       "note": "Abstract, choice-dependent reconstruction and explicit numerical log-volume comparison wall with counterexamples; no IUT corollary or arithmetic lower bound claimed."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/PilotVolumeTransport.inc",
+      "source_commit": "99a63392584c4fcea9f1593bf6dda186dd0a6678",
+      "note": "Abstract exact transport-shift criterion and conditional finite local packet budget; no IUT arithmetic lower bound or transport construction claimed."
     }
   ]
 }
