@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Rulefold — 自己拡張機械の実験台</title>
+  <style>
+    :root{--bg:#10141a;--panel:#1a2029;--raised:#222a35;--ink:#f0f2f6;--muted:#a4b0c0;--line:#36414f;--green:#91e1bd;--blue:#9bb9ff;--yellow:#f7d28e;--bad:#fc9f9f;--white:#fff;}
+    *{box-sizing:border-box} body{margin:0;color:var(--ink);background:radial-gradient(1000px 600px at 100% -10%,#243045 0%,transparent 70%),var(--bg);font-family:ui-sans-serif,system-ui,-apple-system,"Noto Sans JP",sans-serif;line-height:1.55} button,input{font:inherit} button{cursor:pointer;color:inherit} a{color:var(--blue)} button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+    .shell{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:40px 0 66px}.eyebrow{display:flex;align-items:center;gap:10px;letter-spacing:.16em;font-size:12px;color:var(--green);font-weight:800}.mark{display:inline-grid;place-items:center;width:29px;height:29px;border:1px solid var(--green);border-radius:8px;font-size:16px}h1{margin:16px 0 5px;font-weight:800;font-size:clamp(29px,5vw,54px);letter-spacing:-.055em}h2,h3{margin:0}.subtitle{max-width:820px;color:var(--muted);font-size:15px;margin:8px 0 0}.highlight{color:var(--green)}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin:31px 0 20px;padding:17px;background:#171d26;border:1px solid var(--line);border-radius:14px}.controls{display:flex;flex-wrap:wrap;gap:9px}.btn{background:var(--raised);border:1px solid #526074;padding:10px 16px;border-radius:9px;font-weight:700;transition:background .15s}.btn:hover{background:#303b4a}.btn.primary{background:var(--green);border-color:var(--green);color:#102019}.btn.primary:hover{background:#bef2da}.btn:disabled{cursor:not-allowed;opacity:.4}.count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}.count strong{color:var(--ink);font-size:22px;margin-right:6px}
+    .options{display:flex;flex-wrap:wrap;align-items:center;gap:13px 20px;margin:4px 0 25px;color:var(--muted);font-size:13px}.options label{display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none}.options input{accent-color:var(--green);width:17px;height:17px;cursor:pointer}.hint{margin-left:auto;color:#8493a8;font-size:12px}
+    .columns{display:grid;grid-template-columns:1fr 1fr;gap:15px}.machine{border:1px solid var(--line);background:var(--panel);border-radius:16px;overflow:hidden;min-width:0}.machine.live{border-color:#488b78}.machineheader{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:21px 22px 17px}.machineheader h2{font-size:21px;letter-spacing:-.03em}.machineheader .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.machine.live .tag{color:var(--green)}.state{font-size:12px;padding:4px 9px;border:1px solid #64768a;border-radius:999px;white-space:nowrap}.machine.live .state{border-color:#6eac96}.description{color:var(--muted);font-size:12px;padding:0 22px 11px;margin:0;min-height:47px}
+    .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0 22px 22px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}.metric{background:var(--raised);padding:11px 8px;text-align:center}.metric b{display:block;font-size:23px;font-variant-numeric:tabular-nums}.metric span{font-size:11px;color:var(--muted)}.machine.live .metric:first-child b{color:var(--green)}
+    .track{margin:0 22px 20px;padding:17px 14px;border:1px solid var(--line);border-radius:12px;background:#151b23}.trackTitle{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:16px}.graph{display:flex;align-items:center;justify-content:center;gap:5px}.node{display:grid;place-items:center;flex:0 0 auto;width:50px;height:50px;border-radius:13px;border:1px dashed #556273;background:#1c2631;color:#8795a6;font-size:21px;font-weight:700}.node.known{color:var(--ink);border-style:solid;border-color:#77869b;background:#354051}.live .node.known{color:#0f2a22;background:var(--green);border-color:var(--green)}.edge{font-size:20px;font-weight:700;color:#5e6b7e}.edge.active{color:var(--green)}.frozen .edge.active{color:var(--blue)}
+    .data{padding:0 22px 22px}.data h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}.rows{display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 12px;font-size:12px}.rows dt{color:var(--muted)}.rows dd{margin:0;font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;overflow-wrap:anywhere;white-space:normal;color:#dce4ef}.data .new{color:var(--green)}.data .empty{color:#8291a3}
+    .lower{display:grid;grid-template-columns:1.05fr .95fr;gap:15px;margin-top:15px}.card{background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:16px;min-width:0}.card h3{font-size:16px;margin:0 0 6px}.card p{font-size:13px;color:var(--muted);margin:0 0 13px}.events{margin:0;padding:0;list-style:none;max-height:282px;overflow:auto}.events li{border-top:1px solid var(--line);padding:10px 0;font-size:12px}.events b{color:var(--green)}.events .mono{font-family:ui-monospace,monospace;color:var(--muted);font-size:11px}.noevent{color:var(--muted)}.flow{display:flex;flex-direction:column;gap:9px}.flowStep{padding:10px 12px;border-left:3px solid #658bcd;background:#222b38;border-radius:0 9px 9px 0;font-size:12px}.flowStep strong{color:var(--ink)}.flowStep span{display:block;color:var(--muted);margin-top:3px}.fine{border-top:1px solid var(--line);padding-top:12px;margin-top:17px!important;font-size:12px!important}.footer{font-size:12px;color:var(--muted);padding:22px 2px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.sr-only{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
+    @media(max-width:850px){.columns,.lower{grid-template-columns:1fr}.description{min-height:0}.hint{margin-left:0}.shell{padding-top:25px}}@media(max-width:390px){.node{width:43px;height:43px}.edge{font-size:15px}.controls .btn{padding:9px 12px}.metric span{font-size:10px}.rows{grid-template-columns:90px 1fr}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <div class="eyebrow"><span class="mark">↗</span> PRIMITIVE / FORMAL MACHINE LAB</div>
+  <h1>RULEFOLD<span class="highlight">.</span></h1>
+  <p class="subtitle">演算器を学習するたびに、<strong>演算器を作るための規則</strong>まで更新する。Lean の有限4状態モデルを、編集あり／なしの二台で同時に動かす実験台。</p>
+  <div class="toolbar">
+    <div class="controls">
+      <button type="button" id="next" class="btn primary">1ステップ進める →</button>
+      <button type="button" id="run" class="btn">終点まで実行</button>
+      <button type="button" id="reset" class="btn">初期化</button>
+      <button type="button" id="export" class="btn">履歴をJSON保存</button>
+    </div>
+    <div class="count"><strong id="tick">0</strong> / 3 ステップ</div>
+  </div>
+  <div class="options" aria-label="実験条件">
+    <label><input id="edit" type="checkbox" checked>機械内の編集命令を有効化</label>
+    <label><input id="allow1" type="checkbox" checked>演算器1を許可</label>
+    <label><input id="allow2" type="checkbox" checked>演算器2を許可</label>
+    <label><input id="allow3" type="checkbox" checked>演算器3を許可</label>
+    <span class="hint">条件を変更すると実験は初期化されます。</span>
+  </div>
+  <div class="columns">
+    <section class="machine live" aria-labelledby="live-title">
+      <div class="machineheader"><div><div class="tag">MUTABLE / 高階規則の更新あり</div><h2 id="live-title">自己変更する機械</h2></div><div class="state" id="live-status">待機</div></div>
+      <p class="description">取得した演算器が、次のメタ規則を生むための lift 規則を追加できる。</p>
+      <div class="metrics" id="live-metrics"></div>
+      <div class="track"><div class="trackTitle"><span>獲得した演算器と生成経路</span><span id="live-known">K = [0]</span></div><div class="graph" id="live-graph"></div></div>
+      <div class="data"><h3>内部状態</h3><dl class="rows" id="live-data"></dl></div>
+    </section>
+    <section class="machine frozen" aria-labelledby="frozen-title">
+      <div class="machineheader"><div><div class="tag">FROZEN / 編集命令なし</div><h2 id="frozen-title">固定した対照機械</h2></div><div class="state" id="frozen-status">待機</div></div>
+      <p class="description">初期の演算器・生成規則・メタ規則は同じ。lift の編集命令だけを持たない。</p>
+      <div class="metrics" id="frozen-metrics"></div>
+      <div class="track"><div class="trackTitle"><span>獲得した演算器と生成経路</span><span id="frozen-known">K = [0]</span></div><div class="graph" id="frozen-graph"></div></div>
+      <div class="data"><h3>内部状態</h3><dl class="rows" id="frozen-data"></dl></div>
+    </section>
+  </div>
+  <div class="lower">
+    <section class="card"><h3>生成・書換の実行履歴</h3><p>両機械の状態変化を同じ時計で追跡。新しいメタ規則は、そのステップ内の object edge には遡及しません。</p><ol class="events" id="events" aria-live="polite"></ol></section>
+    <section class="card"><h3>ここで確かめられること</h3><p>初期条件では両方とも K=[0]、E=[0→1]、M=[1⇒(1→2)] から開始します。</p>
+      <div class="flow">
+        <div class="flowStep"><strong>1 の取得</strong><span>1→2 が追加される。同時に可変機械だけが lift 規則を取得し、2⇒(2→3) を次のメタ規則として追加する。</span></div>
+        <div class="flowStep"><strong>2 の取得</strong><span>可変機械だけが 2→3 を生成。固定対照では生成できない。</span></div>
+        <div class="flowStep"><strong>3 の取得</strong><span>可変機械は4個の演算器を識別して有限飽和。固定対照は3個で停止する。</span></div>
+      </div>
+      <p class="fine">有限の構成例です。解釈器と編集命令表は固定され、無限の自己改良や新しい数学の自律的発見を主張しません。「観測クラス」は既知演算器からの1ステップ到達先リストで数えています。</p>
+    </section>
+  </div>
+  <div class="footer"><span>Reference: <a href="https://github.com/Sumuji-zkdwn/primitive-lean/pull/73" target="_blank" rel="noopener">primitive-lean PR #73</a> · Fin 4 example. HTML/JS is a separate executable model, not itself a Lean proof.</span><span>Zero dependencies · Offline runnable</span></div>
+</main>
+<script id="rulefold-engine">
+'use strict';
+// The data layout follows HigherMachine(known, edges, metaRules, liftRules, liftEdits)
+// in HigherOrderLiftSelfRewriting.inc, PR #73 at 49bcf3612f5d166a916e8f16b73577fd0fbcdf73.
+// A meta rule {on,from,to} denotes on => (from -> to).
+// A lift rule {on,meta:{on,from,to}} adds a meta rule when operator 'on' is learned.
+// An edit {on,rule:{on,meta:{on,from,to}}} installs a lift rule.
+const RulefoldEngine = (() => {
+  const clone = value => JSON.parse(JSON.stringify(value));
+  const state = (mutable = true) => ({
+    known: [0], edges: [[0, 1]], metaRules: [{on:1,from:1,to:2}],
+    liftRules: [], liftEdits: mutable ? [{on:1,rule:{on:1,meta:{on:2,from:2,to:3}}}] : []
+  });
+  const children = (s, source) => s.edges.filter(([x]) => x === source).map(([,y])=>y);
+  const frontier = s => s.known.flatMap(x => children(s, x).filter(y => !s.known.includes(y)));
+  const observedBehaviors = s => s.known.map(x => children(s,x));
+  const observationClasses = s => new Set(observedBehaviors(s).map(x => JSON.stringify(x))).size;
+  const step = (s, viable = () => true) => {
+    const target = frontier(s).find(viable);
+    if (target === undefined) return null;
+    const installed = s.liftEdits.filter(e=>e.on===target).map(e=>clone(e.rule));
+    const liftRules = [...s.liftRules, ...installed];
+    const emitted = liftRules.filter(r=>r.on===target).map(r=>clone(r.meta));
+    const addedEdges = s.metaRules.filter(r=>r.on===target).map(r=>[r.from,r.to]);
+    const next = {
+      known: [...s.known,target],
+      edges: [...s.edges,...addedEdges],
+      metaRules: [...s.metaRules,...emitted],
+      liftRules,
+      liftEdits: clone(s.liftEdits)
+    };
+    return {state:next,event:{learned:target,addedEdges,installedLiftRules:installed,emittedMetaRules:emitted}};
+  };
+  const run = (seed, viable = () => true, cap = 32) => {
+    let current = clone(seed); const history = [{state:clone(current),event:null}];
+    for (let n=0;n<cap;n++) {
+      const result=step(current,viable);
+      if (!result) return {state:current,history,saturated:true};
+      current=result.state;
+      history.push({state:clone(current),event:result.event});
+    }
+    return {state:current,history,saturated:!step(current,viable)};
+  };
+  return {state,children,frontier,observedBehaviors,observationClasses,step,run,clone};
+})();
+</script>
+<script>
+'use strict';
+(function(){
+  const E=RulefoldEngine;
+  const $=id=>document.getElementById(id);
+  const settings=()=>({mutable:$('edit').checked,allowed:new Set([1,2,3].filter(n=>$('allow'+n).checked))});
+  let machines,timeline,tick,opts;
+  function reset(){
+    opts=settings();tick=0;
+    machines={live:E.state(opts.mutable),frozen:E.state(false)};
+    timeline=[{tick,live:E.clone(machines.live),frozen:E.clone(machines.frozen),liveEvent:null,frozenEvent:null}];
+    render();
+  }
+  const viable=n=>opts.allowed.has(n);
+  function move(){
+    const live=E.step(machines.live,viable),frozen=E.step(machines.frozen,viable);
+    if(!live && !frozen){render();return false;}
+    if(live)machines.live=live.state;
+    if(frozen)machines.frozen=frozen.state;
+    tick++;
+    timeline.push({tick,live:E.clone(machines.live),frozen:E.clone(machines.frozen),liveEvent:live?.event??null,frozenEvent:frozen?.event??null});
+    render();return true;
+  }
+  function toText(s){return s.length?s.join(' · '):'<span class="empty">∅</span>';}
+  function edgeText(x){return `${x[0]}→${x[1]}`;}
+  function ruleText(r){return `${r.on}⇒(${r.from}→${r.to})`;}
+  function liftText(r){return `${r.on}⇒${ruleText(r.meta)}`;}
+  function editText(e){return `${e.on} ↦ [${liftText(e.rule)}]`;}
+  function stats(s){return [{value:s.known.length,label:'演算器 K'},{value:s.edges.length,label:'生成規則 E'},{value:s.metaRules.length,label:'メタ規則 M'},{value:E.observationClasses(s),label:'観測クラス'}];}
+  function renderMachine(prefix,s){
+    $(prefix+'-known').textContent=`K = [${s.known.join(', ')}]`;
+    const sat=!E.step(s,viable);
+    $(prefix+'-status').textContent=sat?'飽和':'拡張可能';
+    $(prefix+'-metrics').innerHTML=stats(s).map(x=>`<div class="metric"><b>${x.value}</b><span>${x.label}</span></div>`).join('');
+    let html='';
+    for(let i=0;i<4;i++){
+      if(i)html+=`<span class="edge ${s.edges.some(([a,b])=>a===i-1&&b===i)?'active':''}" aria-hidden="true">→</span>`;
+      html+=`<span class="node ${s.known.includes(i)?'known':''}" aria-label="演算器${i}${s.known.includes(i)?' 獲得済み':' 未獲得'}">${i}</span>`;
+    }
+    $(prefix+'-graph').innerHTML=html;
+    const pairs=[
+      ['known',`[${s.known.join(', ')}]`],
+      ['edges',toText(s.edges.map(edgeText))],
+      ['metaRules',toText(s.metaRules.map(ruleText))],
+      ['liftRules',toText(s.liftRules.map(liftText))],
+      ['liftEdits',toText(s.liftEdits.map(editText))],
+      ['frontier',toText(E.frontier(s).map(String))]
+    ];
+    // All displayed content is derived from bounded numeric Fin4 states, not user HTML.
+    $(prefix+'-data').innerHTML=pairs.map(([key,val])=>`<dt>${key}</dt><dd>${val}</dd>`).join('');
+  }
+  function describeEvent(event){
+    if(!event)return '今回は新しい演算器を取得できない（停止）';
+    let parts=[`<b>${event.learned} を取得</b>`];
+    if(event.addedEdges.length)parts.push(`規則 ${event.addedEdges.map(edgeText).join(', ')}`);
+    if(event.installedLiftRules.length)parts.push(`lift ${event.installedLiftRules.map(liftText).join(', ')}`);
+    if(event.emittedMetaRules.length)parts.push(`meta ${event.emittedMetaRules.map(ruleText).join(', ')}`);
+    return parts.join(' / ');
+  }
+  function render(){
+    renderMachine('live',machines.live);renderMachine('frozen',machines.frozen);
+    $('tick').textContent=tick;
+    const stopped=!E.step(machines.live,viable)&&!E.step(machines.frozen,viable);
+    $('next').disabled=stopped;$('run').disabled=stopped;
+    $('events').innerHTML=timeline.slice(1).map(item=>`<li><span class="mono">STEP ${item.tick} · 可変機械</span><div>${describeEvent(item.liveEvent)}</div><span class="mono">STEP ${item.tick} · 固定対照</span><div>${describeEvent(item.frozenEvent)}</div></li>`).reverse().join('') || '<li class="noevent">「1ステップ進める」で状態遷移を確認できます。</li>';
+    if(stopped && tick>0)$('events').insertAdjacentHTML('afterbegin','<li><b>両機械ともこれ以上の取得がありません（有限飽和）。</b></li>');
+  }
+  function download(){
+    const data={model:'PR #73 Fin4 higherStep reference',sourceCommit:'49bcf3612f5d166a916e8f16b73577fd0fbcdf73',settings:{mutable:opts.mutable,allowed:[...opts.allowed]},timeline,final:{live:machines.live,frozen:machines.frozen},observationClasses:{live:E.observationClasses(machines.live),frozen:E.observationClasses(machines.frozen)}};
+    const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});
+    const href=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=href;a.download='rulefold-trace.json';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(href),1000);
+  }
+  $('next').addEventListener('click',move);
+  $('run').addEventListener('click',()=>{for(let n=0;n<8;n++)if(!move())break;});
+  $('reset').addEventListener('click',reset);
+  $('export').addEventListener('click',download);
+  ['edit','allow1','allow2','allow3'].forEach(x=>$(x).addEventListener('change',reset));
+  reset();
+})();
+</script>
+</body>
+</html>
