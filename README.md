@@ -1,5 +1,19 @@
 # primitive-lean
 
+## 現在の入口（2026-11-05）
+
+本リポジトリは **公開** されています。従来のElastica／線形入力の証明原稿を移設せず、出典・統合検証入口と個別研究モジュールを合わせて管理します。
+
+- **正典本文・証明入口**: [原始の形式化.md](原始の形式化.md) · [Elastica](lean/Elastica.lean) · [線形入力](linear_input/lean_check/README.md)
+- **統合台帳・検証**: [ソースSHA-256台帳](docs/integration/manifest.json) · [2026-11-02統合説明](docs/integration/2026-11-02-review.md) · `python -B -X utf8 tools/verify.py --integration-only`
+- **多項式・Orbit-trace**: [OrbitTrace入口](lean/OrbitTrace.lean) · [研究上の成立条件と未証明事項](docs/research/2026-11-04-orbit-trace-integrals.md)（[PR #68](https://github.com/Sumuji-zkdwn/primitive-lean/pull/68)）
+- **演算器の観測・有限自己拡張**: `linear_input/lean_check/OperatorWordObservations.inc` から `HigherOrderLiftSelfRewriting.inc` までの段階的な証明 · [系列の統合境界](docs/integration/2026-11-05-operator-rulefold-consolidation.md)（[PR #74](https://github.com/Sumuji-zkdwn/primitive-lean/pull/74)）
+- **操作可能なデモ**: [Rulefold × デジタル曼荼羅](demos/rulefold_mandala.html) · [数学モデルとの区別](demos/RULEFOLD_MANDALA_README.md)
+- **未統合の研究系列**: [PR #75](https://github.com/Sumuji-zkdwn/primitive-lean/pull/75) は履歴非保存・局所接合の証明群を統合提案中。#70 と #71 は同名の異なるLean原稿なので未選定です。
+
+**統合状態:** #3・#68・#74 は `main` に取り込み済み。各先端コミットに関する過去のLean／有限検算の成功記録はありますが、それだけで異なる枝を組み合わせた全体検証の成功は主張しません。CI実行の状態・固定コミットは各PRとActionsで確認してください。以下の旧版の定理数・「未マージ」記述は各日付当時の履歴記録です。
+
+
 **2026-11-02 統合版:** [18件の PR の統合範囲・修正・拡張・再実行](docs/integration/2026-11-02-review.md)。`python -B -X utf8 tools/verify.py --integration-only` で、原本ハッシュ、登録漏れ、オフライン検算、Lean 全宣言の公理監査を実行します。以下の数値はそれぞれ記載された過去版の記録です。今回の実測値は同じコミットの CI と `verification/pr-integration.json` を参照してください。
 
 実験・配布用ツール: [ARC 公開デモのローカル統合検査](experiments/arc3/README.md) · [494 定理の歴史的 Kaggle handoff](docs/KAGGLE.md) · [717 定理の歴史的 handoff](docs/KAGGLE_717.md)。両 handoff は固定された過去の証明集合を対象とし、現在の拡張された証明集合用ではありません。[2026-11-02 統合範囲と再実行](docs/verification/2026-11-02-tooling-integration.md)。
@@ -18,7 +32,7 @@
 **2026-10-31 円分根・クンマー型冪根・チェビシェフ逆像接続（Lean統合検証成功）:** Joukowski写像の衝突因数分解、原始根の円分多項式への接続、冪根ラベルの保存、ZMod上の反転、F0核への橋渡しを6定義・13定理で追加。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Lean 4.30.0-rc2 + mathlibの `--trust=0` 統合検査・全公理監査に成功し、**746定理・880宣言**（エラー・警告・許可外公理なし）。検証成果物・ソースハッシュも照合済み。PR #5 はPR #3作業ブランチへマージ済み、`main` は未マージ。[検証記録](docs/verification/2026-10-31-galois-chebyshev.md) / [ソース](linear_input/lean_check/GaloisChebyshev.inc)。
 
 
-原始の形式化に関する Lean ソースと検証入口を管理する非公開リポジトリ。
+原始の形式化に関する Lean ソースと検証入口を管理する公開リポジトリ。
 
 **状態追記（2026-10-30、PR #3）:** `F0MergeChains.inc` に、Fin 5 上の `q₀…q₄、その非空ファイバーサイズ、各段階のK/S/C実現を追加しました（16定理・9定義）。既存717定理・836宣言の検証はコミット `185a1713f2fca219e5f9fb1c5aa11955925cb97f` までの状態を対象とし、この追補は含みません。今回の実行環境には `lake` / `lean` がなく、追加分のLean検査は未実施です。現ブランチの全体検証結果としては扱わず、Windowsで `python -B -X utf8 tools/verify.py --proof-only` を再実行してください。
 
