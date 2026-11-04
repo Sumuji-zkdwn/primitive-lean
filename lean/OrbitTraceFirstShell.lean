@@ -128,16 +128,16 @@ The canonical transfer here is defined on linear combinations of monomials,
 so the equality below is not merely an unrelated companion matrix identity.
 -/
 
-def twoLayerEncode (p : ℕ) (low high : Fin (p + 1) → ℚ) : Polynomial ℚ :=
+noncomputable def twoLayerEncode (p : ℕ) (low high : Fin (p + 1) → ℚ) : Polynomial ℚ :=
   ∑ i : Fin (p + 1),
-    Polynomial.C (low i) * Polynomial.X ^ i.val +
-      Polynomial.C (high i) * Polynomial.X ^ (p + 1 + i.val)
+    (Polynomial.C (low i) * Polynomial.X ^ i.val +
+      Polynomial.C (high i) * Polynomial.X ^ (p + 1 + i.val))
 
-def twoLayerTransfer (p : ℕ) (a : ℚ)
+noncomputable def twoLayerTransfer (p : ℕ) (a : ℚ)
     (low high : Fin (p + 1) → ℚ) : Polynomial ℚ :=
   ∑ i : Fin (p + 1),
-    Polynomial.C (low i) * canonicalMoment p a i.val +
-      Polynomial.C (high i) * canonicalMoment p a (p + 1 + i.val)
+    (Polynomial.C (low i) * canonicalMoment p a i.val +
+      Polynomial.C (high i) * canonicalMoment p a (p + 1 + i.val))
 
 /-- The actual transfer of every polynomial in the two-shell span is the
 explicit weighted nilpotent block action in polynomial coordinates. -/
