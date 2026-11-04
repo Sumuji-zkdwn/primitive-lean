@@ -21,7 +21,7 @@ jobs:
       - name: Check out exact proposed commit and reachable branches
         uses: actions/checkout@v5
         with:
-          ref: \${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: true
 
@@ -31,7 +31,7 @@ jobs:
       - name: Commit generated graph to the source branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         env:
-          HEAD_BRANCH: \${{ github.event.pull_request.head.ref }}
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -45,7 +45,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: primitive-dependency-graph-\${{ github.run_id }}
+          name: primitive-dependency-graph-${{ github.run_id }}
           path: docs/dependency/generated/
           if-no-files-found: warn
           retention-days: 30
