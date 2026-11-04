@@ -247,13 +247,7 @@ def disjointRight (i : Fin 2) : Option Bool :=
 theorem disjoint_writes_compatible :
     Compatible disjointLeft disjointRight := by
   intro i a b ha hb
-  fin_cases i
-  · have hn : disjointRight 0 = none := rfl
-    rw [hn] at hb
-    cases hb
-  · have hn : disjointLeft 1 = none := rfl
-    rw [hn] at ha
-    cases ha
+  fin_cases i <;> simp [disjointLeft, disjointRight] at *
 
 theorem disjoint_glue_fulfills_both :
     glue (fun _ : Fin 2 => false) disjointLeft disjointRight 0 = true ∧
@@ -282,15 +276,49 @@ theorem destructive_whole_writes_incompatible :
     h 0 true false (by decide) (by decide)
   cases hc
 
-/-- This exact Boolean gate is an explicit operational policy:
-after time zero, keep local operations available iff both simultaneous
-partial updates admit a coherent global state. -/
+/-- Executable compatibility for one overlapping coordinate. -/
+def overlapFlag (a b : Option Bool) : Bool :=
+  match a, b with
+  | some x, some y => decide (x = y)
+  | _, _ => true
+
+theorem overlapFlag_iff (a b : Option Bool) :
+    overlapFlag a b = true ↔
+      ∀ x y, a = some x → b = some y → x = y := by
+  cases a with
+  | none => simp [overlapFlag]
+  | some x =>
+      cases b with
+      | none => simp [overlapFlag]
+      | some y =>
+          cases x <;> cases y <;> simp [overlapFlag]
+
+/-- The gate is a finite, executable two-coordinate overlap test.
+No instance for deciding an arbitrary function's universal equality
+is needed or postulated. -/
 def compatibleFlag (p q : Fin 2 → Option Bool) : Bool :=
-  decide (Compatible p q)
+  overlapFlag (p 0) (q 0) && overlapFlag (p 1) (q 1)
 
 theorem compatibleFlag_iff (p q : Fin 2 → Option Bool) :
     compatibleFlag p q = true ↔ Compatible p q := by
-  simp [compatibleFlag]
+  change (overlapFlag (p 0) (q 0) &&
+    overlapFlag (p 1) (q 1)) = true ↔ Compatible p q
+  rw [LinearInputCapacityExtinction.bool_and_true_iff]
+  constructor
+  · rintro ⟨h0, h1⟩ i a b ha hb
+    fin_cases i
+    · exact (overlapFlag_iff (p 0) (q 0)).mp h0 a b
+        (by simpa using ha) (by simpa using hb)
+    · exact (overlapFlag_iff (p 1) (q 1)).mp h1 a b
+        (by simpa using ha) (by simpa using hb)
+  · intro h
+    constructor
+    · apply (overlapFlag_iff (p 0) (q 0)).mpr
+      intro a b ha hb
+      exact h 0 a b ha hb
+    · apply (overlapFlag_iff (p 1) (q 1)).mpr
+      intro a b ha hb
+      exact h 1 a b ha hb
 
 def parallelTimeline (p q : Fin 2 → Option Bool) :
     LocalTimeline (Fin 2) Unit (Fin 2) :=
@@ -319,7 +347,12 @@ theorem parallelTimeline_extinct_of_incompatible
     AllExtinct (parallelTimeline p q) 1 := by
   intro x loc _
   have hb : compatibleFlag p q = false := by
-    simp [compatibleFlag, hc]
+    cases hflag : compatibleFlag p q with
+    | false => rfl
+    | true =>
+        have hh : Compatible p q :=
+          (compatibleFlag_iff p q).mp hflag
+        exact False.elim (hc hh)
   simp [parallelTimeline, hb]
 
 theorem parallel_no_preservation_of_incompatible
