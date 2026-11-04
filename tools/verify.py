@@ -151,6 +151,7 @@ def verify_lean(rebuild):
         'RecursiveOperatorReentry': 'Finite child-generated novel operator catalogue, fresh patch construction, sound and complete bounded frontier, reentry monotonicity, conditional local viability, three-round saturation example',
         'RuleSelfModification': 'Mutable internal rule-edge table, bounded generation meta-compiler, reactivation requiring an actual rule edit, finite startup and saturation, conditional interval survival bridge',
         'MetaRuleSelfExtension': 'Mutable second-order meta-rule catalogue, fixed higher-order lift, soundness and preservation, controlled divergent future object-level rules with identical lower-level state, finite saturation and interval viability bridge',
+        'HigherOrderLiftSelfRewriting': 'State-resident lift program updated by learned operators, exact lower-level trace reproduction, finite observation classes and saturation',
         'EWFSFenchel': 'Verified reversible E polynomial, x-only forgetting obstruction, positive-intensity WFS gauge and physical-versus-changed Fenchel pairing',
         'WFSCanonicalLift': 'Positive-intensity WFS p=2 cotangent lift and p=0 momentum identity under explicit domain conditions',
         'EWFSFutureBridge': 'Coordinate-conjugate future equivalence, E x-trace full-state reconstruction, WFS2 exp observation invariance and radial rotation quotient',
