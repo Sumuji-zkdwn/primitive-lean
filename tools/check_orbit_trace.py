@@ -60,7 +60,31 @@ for p0, d0 in [(1, 3), (2, 5), (3, 11), (4, 11), (1, 13), (5, 20)]:
     exact_ranks = [(matrix**j).rank() for j in range(bound + 1)]
     predicted_ranks = [max(0, d0 + 1 - j*q0) for j in range(bound + 1)]
     assert exact_ranks == predicted_ranks, (p0, d0, exact_ranks, predicted_ranks)
+
+    # Explicit (non-normalized) Jordan basis from the top monomial in each
+    # residue class: v_(r,ell) = N^(length-1-ell) * X^(r+(length-1)*q).
+    basis_columns = []
+    shift_matrix = Matrix.zeros(d0+1)
+    for r0 in range(min(q0, d0+1)):
+        length = (d0-r0)//q0+1
+        high_degree = r0 + (length-1)*q0
+        top_vector = Matrix.zeros(d0+1, 1)
+        top_vector[high_degree, 0] = 1
+        first_index = len(basis_columns)
+        for ell in range(length):
+            vector = matrix**(length-1-ell) * top_vector
+            assert vector[r0 + ell*q0, 0] != 0
+            assert all(vector[t0, 0] == 0
+                       for t0 in range(r0+ell*q0+1, d0+1))
+            if ell > 0:
+                shift_matrix[first_index + ell - 1, first_index + ell] = 1
+            basis_columns.append(vector)
+    basis_matrix = Matrix.hstack(*basis_columns)
+    assert len(basis_columns) == d0+1
+    assert basis_matrix.det() != 0, (p0, d0, "singular Jordan basis")
+    assert matrix*basis_matrix == basis_matrix*shift_matrix, (p0, d0)
 print("Uniform Jordan-rank evidence: six exact (p,d) matrices passed.")
+print("Constructive Jordan similarity: six exact finite basis certificates passed.")
 
 
 P, Q = x**3 - 3*x + 1, x**2-x
