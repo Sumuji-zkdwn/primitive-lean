@@ -7,8 +7,11 @@
 本ノートの一般命題は明記した仮定の下での数学的証明である。
 lean/OrbitTrace.lean が形式化するのは、元の3次式の代数恒等式、判別式、
 有限巡回多項式写像の具体例、不変量、望遠鏡和である。
-一般のヴィエタトレース、ルベーグ測度保存、積分の変数変換、
-転送作用素のジョルダン分解は、現段階では Lean 未形式化。
+一般のヴィエタ剰余トレースは、根の相異性・多項式の根分解・剰余証明書を明示的に仮定した形で、
+`lean/OrbitTraceVieta.lean` に形式化した。任意の根と重みの線形漸化式は
+`lean/OrbitTraceMoment.lean` に、次数低下からの一般冪零性は
+`lean/OrbitTraceNilpotence.lean` に証明原稿を追加した。解析的なルベーグ測度保存・積分の変数変換、
+具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。
 tools/check_orbit_trace.py は SymPy 1.14 の有限な厳密計算であり、全称証明ではない。
 
 ## 1. 出発点：位数3のメビウス変換と積分
@@ -193,3 +196,47 @@ Lean では上式の関数としての望遠鏡和を証明する。
   およびユーザーの研究中の多項式写像 E への同一化は未形式化・未確認。
 
 既存の lean/Elastica と linear_input/lean_check および統合検証器は変更しない。
+
+
+## 8. 一般定理のLean追加（2026-11-04 続編）
+
+- `lean/OrbitTraceVieta.lean`
+  - `OrbitTrace.nodal_remainder_trace`：任意の体 K と相異なる節点、
+    任意の W,Q,R,U∈K[X] について、
+    WQ=R+(∏(X−r_i))U、deg R<m なら
+    Σ_i W(r_i)Q(r_i)/F'(r_i)=[X^{m−1}]R。
+    Mathlib の `Lagrange.coeff_eq_sum` と節点多項式の導関数公式を使用。
+  - `OrbitTrace.parametric_remainder_trace`：
+    F=P−C(t)Q がこの節点積に一致する場合の直接的な系。
+    根の具体値・具体次数に依存しない。
+- `lean/OrbitTraceMoment.lean`
+  - `OrbitTrace.weighted_moment_recurrence`：
+    すべての重み w_i と r_i^(p+1)=s*r_i^p−a を満たす根について、
+    M_(k+p+1)=s*M_(k+p)−a*M_k。
+    任意の可換環で成立する。元のトレース公式で使う
+    w_i=Q(r_i)/F'(r_i) はその特殊例。
+- `lean/OrbitTraceNilpotence.lean`
+  - `OrbitTrace.iterDrop_nilpotent_of_rank_drop`：
+    零点を固定し、零でない点からの非零遷移が自然数ランクを
+    真に減少させるなら、ランク d 以下から d+1 回以内に零へ達する。
+  - `OrbitTrace.polynomial_degree_drop_nilpotent`：
+    線形写像 N:K[X]→ₗ[K]K[X] にこれを自然次数で適用。
+    **N=ℒ−I が実際に次数を下げることの証明は別途必要**であり、
+    この一般命題だけで具体的ジョルダン分解が成立するとは主張しない。
+
+今回のCIで独立に検査するコマンド：
+
+```bash
+cd lean
+lake env lean --trust=0 OrbitTrace.lean
+lake env lean --trust=0 OrbitTraceVieta.lean
+lake env lean --trust=0 OrbitTraceMoment.lean
+lake env lean --trust=0 OrbitTraceNilpotence.lean
+cd ..
+python tools/check_orbit_trace.py
+```
+
+**残課題**：一般 p,a の閉形式 (D) をLean上の
+剰余で実装し、(D) による厳密な次数降下を証明し、
+p+1本のジョルダン鎖への基底変換を証明する。
+12×12 の階数計算だけでは、任意次数の一般分類は形式的に確定しない。
