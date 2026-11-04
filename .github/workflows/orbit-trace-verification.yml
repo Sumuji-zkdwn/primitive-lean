@@ -19,6 +19,7 @@ on:
       - 'lean/OrbitTraceMonicSequence.lean'
       - 'lean/OrbitTraceSpecialization.lean'
       - 'lean/OrbitTraceJordanIndex.lean'
+      - 'lean/OrbitTraceDegreeGap.lean'
       - 'tools/check_orbit_trace.py'
       - 'docs/research/2026-11-04-orbit-trace-integrals.md'
   workflow_dispatch:
@@ -60,6 +61,7 @@ jobs:
           lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceMonicSequence.olean OrbitTraceMonicSequence.lean
           lake env lean --trust=0 OrbitTraceSpecialization.lean
           lake env lean --trust=0 OrbitTraceJordanIndex.lean
+          lake env lean --trust=0 OrbitTraceDegreeGap.lean
 
       - name: Exact symbolic independent probes
         run: |
