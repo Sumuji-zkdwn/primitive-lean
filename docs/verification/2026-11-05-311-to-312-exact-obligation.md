@@ -68,3 +68,35 @@ Find an explicit construction from the *genuine* Theorem 3.11 output of a direct
 ### Status
 
 **OPEN.** LANA's formalized conditions do not derive the comparison. This document does not prove the open arithmetic or group-theoretic bridge. The earlier Lean-verified four `primitive-lean` supplements are relevant conditional lemmas and counterexamples only.
+
+
+## First missing *typed* construction: raw multiradial orbit → eta output
+
+The actual public LANA code search finds `MRRep.possibleRegion` only in `Iut/Multiradial/Spec.lean` and planning notes (not as an input to `EtaAlg.out`). The sources define objects at two different stages:
+
+```text
+Iut/Multiradial/Spec.lean:
+  RawOutput  →  MRRep R P  →  MRRep.possibleRegion reg r : Set X
+
+Iut/Wall/EtaAlg.lean:
+  EtaAlg.out ι S : Region D
+  EtaAlg.etaAnab ι S : B.val.C →ₗ[ℝ] ℝ
+
+Iut/HodgeTheater/Wall.lean:
+  theaterAlg.out _ S := lgp D S.1
+  theaterKummer _ := 1
+```
+
+Thus no inspected construction maps the **genuine algorithmic orbit with its Ind1/Ind2 provenance** to the actual `EtaAlg.out` for a non-identified pair of Hodge theaters, with a verified log-volume readout. `theaterAlg` uses an identified-copies output by definition; it cannot be evidence that the needed nontrivial reconstruction has happened.
+
+In addition, `Iut/Multiradial/Spec.lean` proves `sUnion_ind3Possible`: the union of *all* Ind3 subregions of a fixed region is just that region. Ind3 can select and adjust **inside** an allowed image; it cannot introduce a missing new image into the orbit. The separate `Iut/Wall/Ind3.lean` grants arbitrarily smaller log-volumes inside `hull(VC(I))`, but that is a **container-domain statement** and is not an identification of these regions with an actual q-pilot-producing algorithmic output.
+
+The next meaningful proof target is therefore not another abstract closure theorem. It is a genuine map/functionality from the actual `MRRep` orbit (with its admissible choices and transport) into the output side of the eta algorithm, **together with** a proof that its chosen output has the native q-pilot value or yields the original numerical inequality. Naturality / quotient well-definedness alone will not imply the missing arithmetic equality.
+
+A source-based implementation check must reject any purported proof that:
+- defines `out` to return the q-pilot by fiat;
+- assumes `SHEq` (which is definitionally equivalent to `Wall` in the interface);
+- uses the full available *ambient* theta hull as if it were already an actual possible `EtaAlg.out`;
+- assumes `SSIneq`, `XiPrinciple`, `Wall`, or `Corollary312Variant` as an input.
+
+This narrows the 3.11→3.12 goal to a single **provenance-preserving arithmetic output comparison**, with its actual source types now identified.
