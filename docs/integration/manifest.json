@@ -2229,15 +2229,15 @@
     },
     {
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
-      "sha256": "2608965895eb3dd59494f49e4eb97f33335f86ed55629e219da398fccc53cfba",
-      "original_sha256": "2608965895eb3dd59494f49e4eb97f33335f86ed55629e219da398fccc53cfba",
+      "sha256": "3e60dbafe7a3fb722b6dedbf5eec346fdf7b1d7d51789e95ae0058030418028d",
+      "original_sha256": "3e60dbafe7a3fb722b6dedbf5eec346fdf7b1d7d51789e95ae0058030418028d",
       "source_pr": null,
-      "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
+      "source_commit": "504ad99ef2e1ff6d76780d38753300b1f80867af",
       "source_path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": [],
-      "authoring_commit": "88b846540b626dc9ecced95ce4716190091c5aeb"
+      "authoring_commit": "504ad99ef2e1ff6d76780d38753300b1f80867af"
     }
   ],
   "construction_errors": [],
