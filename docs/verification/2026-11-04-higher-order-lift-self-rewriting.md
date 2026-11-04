@@ -4,7 +4,7 @@ Date: 2026-11-04. Follow-up to PR #64, based on verified commit 48855cedf7e8723b
 
 ## Model
 
-The state extends PR #64's (known, edges, metaRules) with liftRules and liftEdits. A newly acquired operator can activate an edit in the state and append a rule to liftRules. The fixed interpreter executes the updated liftRules to produce metaRules, then compiles those metaRules into object edges.
+The state extends PR #64's (known, edges, metaRules) with liftRules and liftEdits. A newly acquired operator can activate an edit in the state and append a rule to liftRules. The fixed interpreter executes the updated liftRules and appends their output to the next metaRules state. Object edges in that same transition use the pre-step metaRules table, preserving PR #64's exact update order.
 
 The Fin 4 witness reproduces the lower-level trace of PR #64: known operators progress from [0] to [0,1,2,3], and then the finite frontier saturates. The frozen-meta control stops at [0,1,2].
 
@@ -18,4 +18,4 @@ The interpreter and the bootstrap edit table remain fixed. This is state-residen
 
 ## Verification
 
-The new Python regression is included in the integration workflow. The exact Lean declarations are added to the supplemental source set and subject to the existing all-declaration axiom audit. Lean and Mathlib execution must be judged by the new GitHub Actions run for the proposed head.
+The Python regressions include an explicit case confirming that a newly emitted meta rule does not affect edges until a later transition. The exact Lean declarations are added to the supplemental source set and subject to the existing all-declaration axiom audit. Lean and Mathlib execution must be judged by the GitHub Actions run for the proposed head.
