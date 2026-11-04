@@ -2,7 +2,7 @@ name: Primitive Lean integration verification
 
 on:
   push:
-    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104]
+    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104]
   pull_request:
     branches: [main, codex/primitive-history-derivation-20261029]
     paths:
