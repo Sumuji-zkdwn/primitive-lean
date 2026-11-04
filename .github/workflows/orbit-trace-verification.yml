@@ -8,6 +8,7 @@ on:
       - '.github/workflows/orbit-trace-verification.yml'
       - 'lean/OrbitTrace.lean'
       - 'lean/OrbitTraceVieta.lean'
+      - 'lean/OrbitTraceMoment.lean'
       - 'tools/check_orbit_trace.py'
       - 'docs/research/2026-11-04-orbit-trace-integrals.md'
   workflow_dispatch:
@@ -37,6 +38,7 @@ jobs:
         run: |
           lake env lean --trust=0 OrbitTrace.lean
           lake env lean --trust=0 OrbitTraceVieta.lean
+          lake env lean --trust=0 OrbitTraceMoment.lean
 
       - name: Exact symbolic independent probes
         run: |
