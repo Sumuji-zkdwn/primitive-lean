@@ -1,0 +1,58 @@
+name: IUT x primitive-lean typed cross-repository Lean probe
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/iut-crossrepo-probe.yml'
+      - 'probes/IutPilotCrossRepo.lean'
+      - 'scripts/test_iut_crossrepo.sh'
+      - 'linear_input/lean_check/PilotVolumeTransport.inc'
+      - 'docs/integration/manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-typed-bridge:
+    name: Compile primitive witness lemma against real LANA Ind3/EtaAlg
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out exact primitive-lean proposed head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Check out exact public LANA IUT commit (read-only copy)
+        uses: actions/checkout@v5
+        with:
+          repository: lana-agents/iut
+          ref: 553076af459e7a401bfee63a4607814d1c854477
+          path: _deps/iut
+          persist-credentials: false
+
+      - name: Set up pinned LANA Lean v4.32 and fetch Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: _deps/iut
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile authentic cross-repository theorem statements
+        run: bash scripts/test_iut_crossrepo.sh _deps/iut
+
+      - name: Upload evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: iut-primitive-crossrepo-${{ github.run_id }}
+          path: |
+            verification/iut-crossrepo-lean.log
+          if-no-files-found: warn

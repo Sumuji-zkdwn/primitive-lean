@@ -79,6 +79,10 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/F0FutureMinimality.inc', 'LinearInputF0FutureMinimality'),
     ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
+    ('linear_input/lean_check/PilotComparisonBridge.inc', 'LinearInputPilotComparison'),
+    ('linear_input/lean_check/PilotVolumeTransport.inc', 'LinearInputPilotTransport'),
+    ('linear_input/lean_check/PilotHullInflation.inc', 'LinearInputPilotHullInflation'),
+    ('linear_input/lean_check/PilotHullStability.inc', 'LinearInputPilotHullStability'),
 )
 
 
