@@ -50,3 +50,21 @@ These are original abstract theorems, not copies or imports of the LANA proof st
 ## Verification protocol
 
 The source files are separately registered with hashes, preserve all baseline proofs, and are subject to `tools/verify.py --integration-only`, pinned Lean/mathlib `--trust=0`, complete axiom auditing and finite Python regressions. Previous confirmed CI for PR #78 is [41899320499](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41899320499), and for the two-module stage [41900981481](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41900981481). Exact-head verification of all three modules must be checked separately.
+
+## Local zero-Ind2 test derived from a closure operator
+
+The additional `PilotHullStability.inc` proves the following **exact abstract criterion**. For an extensive, monotone, idempotent closure `H`, a set `S`, and a family of maps `phi_i` containing the identity:
+
+```
+H(union_i phi_i(S)) = H(S)
+  <-> forall i, phi_i(S) subset H(S).
+```
+
+The corresponding numerical hull gap is zero whenever these inclusions hold, for any volume functional of the hulls. Conversely, one image escaping the old hull proves the hull sets are unequal; without an additional strict-measure statement, **inequality of hull sets does not imply positive log-volume gap**.
+
+A concrete IUT specialization would need:
+1. Identify `H` with the local `leastHull` and verify closure axioms in its admissible region class.
+2. Take `S` to be the theta-scaled log-shell for each bad prime/capsule/label tuple and `phi_i` to be the genuine `Ind2` automorphisms.
+3. Prove or disprove inclusion of **every** image in the original hull, then separately calculate any resulting log-volume changes.
+
+The criterion by itself does not prove that `Ind2` vanishes; indeed the independent `PilotHullInflation.inc` model demonstrates an escaping image and strict hull-volume growth. The actual p-adic inclusion at bad primes is the next concrete target.
