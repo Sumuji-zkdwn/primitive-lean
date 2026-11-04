@@ -1,0 +1,25 @@
+name: Rulefold finite machine demo tests
+
+on:
+  push:
+    branches: [chatgpt/rulefold-playground-20261104]
+    paths: ['demos/**', '.github/workflows/rulefold-demo.yml']
+  pull_request:
+    branches: [chatgpt/higher-order-lift-self-rewriting-20261104]
+    paths: ['demos/**', '.github/workflows/rulefold-demo.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reference:
+    name: Check Fin4 JS/Lean trace parity cases
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test demos/higher_order_playground.test.cjs demos/rulefold_mandala.test.cjs
