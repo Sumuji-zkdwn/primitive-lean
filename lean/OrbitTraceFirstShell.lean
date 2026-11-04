@@ -214,6 +214,22 @@ def secondShellCoeff : ℕ → ℕ
   | 0 => 1
   | j + 1 => secondShellCoeff j + (j + 2)
 
+
+theorem secondShellCoeff_twice (j : ℕ) :
+    2 * secondShellCoeff j = (j + 1) * (j + 2) := by
+  induction j with
+  | zero => norm_num [secondShellCoeff]
+  | succ j ih =>
+      calc
+        2 * secondShellCoeff (j + 1) =
+            2 * secondShellCoeff j + 2 * (j + 2) := by
+              simp only [secondShellCoeff]
+              ring
+        _ = (j + 1) * (j + 2) + 2 * (j + 2) := by rw [ih]
+        _ = (j + 1 + 1) * (j + 1 + 2) := by ring
+
+#print axioms OrbitTrace.secondShellCoeff_twice
+
 theorem second_shell_moment
     {K : Type*} [CommRing K]
     (p : ℕ) (s a : K) (M : ℕ → K)
