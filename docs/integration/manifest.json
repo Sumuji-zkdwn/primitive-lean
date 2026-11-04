@@ -2273,10 +2273,10 @@
     },
     {
       "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
-      "sha256": "1ec326718491554dbb08671cf74420376b3e0ca745d4bd80b77d008bf047f964",
-      "original_sha256": "1ec326718491554dbb08671cf74420376b3e0ca745d4bd80b77d008bf047f964",
+      "sha256": "b85df6d07e210e377e532024740c33920e9b5faa1f2f4c1c8e35c9de9198d4ea",
+      "original_sha256": "b85df6d07e210e377e532024740c33920e9b5faa1f2f4c1c8e35c9de9198d4ea",
       "source_pr": null,
-      "source_commit": "2bc38a2c3e0fc303a46c1a0f9dd6ee83ec32d9f4",
+      "source_commit": "cb875948ab0fb1c8224a2bde6db3bec31819255b",
       "source_path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2372,7 +2372,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
-      "source_commit": "2bc38a2c3e0fc303a46c1a0f9dd6ee83ec32d9f4",
+      "source_commit": "cb875948ab0fb1c8224a2bde6db3bec31819255b",
       "note": "Distinguish individual, pairwise and global relational constraint feasibility; strict Boolean opposing-value and odd-cycle gluing obstructions with even-cycle control. Earlier proof sources retained."
     }
   ]
