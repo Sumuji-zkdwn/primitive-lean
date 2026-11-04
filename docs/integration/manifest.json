@@ -2182,6 +2182,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "sha256": "46e918cf525327ab6ad6d0edf23e14cffd9cbfd70e9b92e5f9c30d4cf862a987",
+      "original_sha256": "46e918cf525327ab6ad6d0edf23e14cffd9cbfd70e9b92e5f9c30d4cf862a987",
+      "source_pr": null,
+      "source_commit": "29b4e82139cd93ec14812d011c2d9b9f0bb07301",
+      "source_path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2221,6 +2232,12 @@
       "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
       "source_commit": "b314d11ff459e7fb27d258a8fcf044c7613c0496",
       "note": "Prefix-time viability, terminal-local extinction barrier, conditional forced fresh operator, strict-quotient witness and replacement counterexample. Retained baseline unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "source_commit": "29b4e82139cd93ec14812d011c2d9b9f0bb07301",
+      "note": "Search-based finite repair synthesis from local acceptance tables; complete/sound within bounded candidates. Prior proof sources unchanged."
     }
   ]
 }
