@@ -2171,6 +2171,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+      "sha256": "58337e90a5c3d3c382a175a976fb5888a9d30c2e5e25f4b4f5cddb1f05c4e454",
+      "original_sha256": "58337e90a5c3d3c382a175a976fb5888a9d30c2e5e25f4b4f5cddb1f05c4e454",
+      "source_pr": null,
+      "source_commit": "bc7b5003c710a5da8d241b26008aa9d060b10c90",
+      "source_path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2204,6 +2215,12 @@
       "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
       "source_commit": "533919495f9f0d5960a9814e184f12f2424452cd",
       "note": "Semantic operator closure and conservative but nonword-generatable primitive. Historical baseline preserved."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+      "source_commit": "bc7b5003c710a5da8d241b26008aa9d060b10c90",
+      "note": "Prefix-time viability, terminal-local extinction barrier, conditional forced fresh operator, strict-quotient witness and replacement counterexample. Retained baseline unchanged."
     }
   ]
 }
