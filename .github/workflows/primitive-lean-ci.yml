@@ -2,7 +2,7 @@ name: Primitive Lean integration verification
 
 on:
   push:
-    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104, chatgpt/finite-self-synthesis-20261104, chatgpt/recursive-operator-reentry-20261104, chatgpt/self-modifying-rule-machine-20261104, chatgpt/metarule-self-extension-20261104, chatgpt/history-nonpreservation-obstruction-20261104, chatgpt/temporal-local-extinction-20261104, chatgpt/local-capacity-incompatibility-20261104, chatgpt/cooperative-gluing-obstruction-20261104]
+    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104, chatgpt/finite-self-synthesis-20261104, chatgpt/recursive-operator-reentry-20261104, chatgpt/self-modifying-rule-machine-20261104, chatgpt/metarule-self-extension-20261104, chatgpt/history-nonpreservation-obstruction-20261104, chatgpt/temporal-local-extinction-20261104, chatgpt/local-capacity-incompatibility-20261104, chatgpt/cooperative-gluing-obstruction-20261104, chatgpt/parallel-gluing-criterion-20261104]
   pull_request:
     branches: [main, codex/primitive-history-derivation-20261029]
     paths:
