@@ -2270,6 +2270,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "sha256": "d7de445127ac7fe94e953a2ff0741558d41a5d13d6a3ae8af4350d8be20a9203",
+      "original_sha256": "d7de445127ac7fe94e953a2ff0741558d41a5d13d6a3ae8af4350d8be20a9203",
+      "source_pr": null,
+      "source_commit": "ce9fb0f6e959b4ae46da0eb07b117c4878e3538e",
+      "source_path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2357,6 +2368,12 @@
       "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
       "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
       "note": "Finite cooperation with individual coverage but no sequential global gluing due to destructive interference; invariant all-word obstruction, joint-postcondition-gated extinction and sharp non-destructive controls."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "source_commit": "ce9fb0f6e959b4ae46da0eb07b117c4878e3538e",
+      "note": "Distinguish individual, pairwise and global relational constraint feasibility; strict Boolean opposing-value and odd-cycle gluing obstructions with even-cycle control. Earlier proof sources retained."
     }
   ]
 }
