@@ -180,12 +180,12 @@ theorem sample_step_one (x : Fin 2) :
 theorem sample_first_local_disappears :
     ∀ x : Fin 2, sample.available 1 0 x = false := by
   intro x
-  decide
+  rfl
 
 theorem sample_second_local_takes_over :
     ∀ x : Fin 2, sample.available 1 1 x = true := by
   intro x
-  decide
+  rfl
 
 /-- One local extinction is insufficient: a second local realizes
 the same operation and fully preserves the older history. -/
@@ -197,7 +197,8 @@ theorem sample_history_preserved_after_one_local_disappears :
   · intro x
     rfl
   · intro x
-    simpa [sample_step_zero, sample_step_one]
+    change stepAt sample 0 x = stepAt sample 1 x
+    rw [sample_step_zero, sample_step_one]
 
 theorem sample_extinct_after_two
     (t : ℕ) (ht : 2 ≤ t) :
@@ -262,6 +263,7 @@ theorem reactivation_can_restore_preservation :
   · intro x
     rfl
   · intro x
-    simpa [sample_step_zero, reactivated_step_two]
+    change stepAt sample 0 x = stepAt reactivated 2 x
+    rw [sample_step_zero, reactivated_step_two]
 
 end LinearInputTemporalExtinction
