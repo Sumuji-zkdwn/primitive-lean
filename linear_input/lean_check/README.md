@@ -1,5 +1,31 @@
 # 線形入力と接続のLean証明
 
+**2026-11-01 F16実16×16行列式の形式証明（最新）:** `F16RealDeterminant.inc` で、任意の `t : ℝ` について十六元数の左作用 `L_(e3)+t L_(e10)` の実際の `Matrix.det` が `(1-t²)^4(1+t²)^4` と一致することをLean証明。8個の2×2ブロックへの行列の正確な並べ替えと置換符号+1、元符号表からの有限整数係数照合を含む。新規5定理・17宣言、全体**819定理・1,017宣言**。固定Lean `--trust=0` [CI #41233416093](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41233416093) は警告・許可外公理0で全宣言監査成功。[PR #20](https://github.com/Sumuji-zkdwn/primitive-lean/pull/20) から研究ブランチPR #3に統合済み。[検証記録](../../docs/verification/2026-11-01-f16-real-determinant.md)。階数12の814定理版は下の前段階記録。
+
+**2026-11-01 F16階数12の独立Lean証明（最新）:** `F16RankCertificate.inc` に、十六元数の実16×16左作用行列 `realPencil` が `t=+1,-1` で厳密に階数12となる定理を追加。16×12因数分解および12×12左逆証明書 `U·B=2I` を整数行列で証明した。新規10定理・18宣言を追加し、GitHub Actions [#41231121631](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41231121631) の固定Lean `--trust=0` で **814定理・1,000宣言**の全監査に成功。研究ブランチPR #3に[PR #18](https://github.com/Sumuji-zkdwn/primitive-lean/pull/18)で統合済み。一般実数パラメータの16次行列式のLean証明はまだ未登録。[検証記録](../../docs/verification/2026-11-01-f16-rank-certificate.md)。以下の804定理・982宣言は前段階の記録。
+
+**2026-11-01 新しい統合検証:** `F16RecoverySpectrum.inc` に、失われた1ビットの探針による完全復元／F0非両立との必要十分条件、左乗法の8個の2×2ブロック係数、t=±1での零ベクトルを追加。新規15定理・11定義／略記。GitHub Actions [#41227143919](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41227143919) の固定Lean `--trust=0` で**804定理・982宣言**の全監査成功、警告・許可外公理0。[検証記録](../../docs/verification/2026-11-01-f16-recovery-degeneracy.md)。全16×16の行列式・階数公式は数学的に得られているが独立のLean定理は未登録。以下の旧件数は各過去版の記録。
+
+**2026-11-01 最新検証:** F16の有限観測ホロノミーとF0忘却への降下条件を `F16Holonomy.inc` に追加（7定理・17宣言）。固定Leanでの[Actions #41224405790](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41224405790)で **789定理・956宣言**の `--trust=0` と全公理監査が成功。旧証明原稿は変更しない。 [検証記録](../../docs/verification/2026-11-01-f16-holonomy.md)。以下の782定理・939宣言およびそれ以前の件数は旧段階の記録。
+
+**2026-10-31 最新の統合検証:** 円分根・クンマー型冪根ラベル・チェビシェフ逆像の `GaloisChebyshev.inc`（6定義・13定理）を第15追補として登録。GitHub Actions [#41207011344](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/41207011344) で固定Leanの `--trust=0` と全880宣言の公理監査が成功、**746定理・880宣言**、許可外公理・警告なし。PR #5からPR #3ブランチへマージ済み。詳細・SHA-256は[今回の検証記録](../../docs/verification/2026-10-31-galois-chebyshev.md)。以下の733定理・861宣言などは旧段階の記録です。
+
+**後続検査:** 下記の未検査記録の後、名前空間の修正を含む作業コピーで733定理・861宣言の検査が成功した。[修正と検査記録](../../docs/verification/2026-10-30-five-state-followup.md)を参照。下記は当時の状態を保持する。
+
+**状態追記（2026-10-30、PR #3）:** `F0MergeChains.inc` に、Fin 5 上の `q₀…q₄、その非空ファイバーサイズ、各段階のK/S/C実現を追加しました（16定理・9定義）。既存717定理・836宣言の検証はコミット `185a1713f2fca219e5f9fb1c5aa11955925cb97f` までの状態を対象とし、この追補は含みません。今回の実行環境には `lake` / `lean` がなく、追加分のLean検査は未実施です。現ブランチの全体検証結果としては扱わず、Windowsで `python -B -X utf8 tools/verify.py --proof-only` を再実行してください。
+
+[FiniteBayes.inc](FiniteBayes.inc) と [FourBayes.inc](FourBayes.inc) を第13・14追補として登録した。53定理・17定義を追加し、全体は717定理・836宣言となる。有限確率の正規化と逐次更新、既存エラスティカ重みの分割、F0観測への押し出し、指数傾斜の相殺、支持削除の順序差、二値分配関数の実微分を証明する。[検証記録](../../docs/verification/2026-10-30-bayes.md)・[宣言と条件](../../sources/bayes_formalization_2026-10-30.json)。以下は各追加段階の記録。
+
+[F0Retractions.inc](F0Retractions.inc)、[F0Counting.inc](F0Counting.inc)、[F0MergeChains.inc](F0MergeChains.inc) を第10〜12追補として登録した。追加は61定理・30定義/略記、全体は664定理・766宣言である。F0の実際の写像の計数を全単射から導き、チェビシェフ代表元の核とA+B縮退へ接続し、合流チェインの一般定理を証明する。[検証記録](../../docs/verification/2026-10-30-f0.md)・[宣言と条件](../../sources/f0_formalization_2026-10-30.json)。共通入口は `python -B -X utf8 tools/verify.py --proof-only`、原本を保つ同梱有限検算の入口は `python -B -X utf8 tools/verify_f0_archive.py`（いずれもリポジトリ直下から実行）。
+
+[BranchFibers.inc](BranchFibers.inc) に40定理・7定義を追加し、全体の検証対象は603定理・675宣言となる。候補の等値条件、通常値での単射性、臨界値の明示代表元・冪等写像・1要素/2要素ファイバー、実逆像の網羅性と個数を証明する。通常値は3^n、±1は(3^n+1)/2。既存8追補の後に第9追補として結合する。[実行記録](../../docs/verification/2026-10-29-branch-fibers.md)・[宣言と条件](../../sources/branch_fibers_2026-10-29.json)。以下の件数は各追加段階の記録である。
+
+同日の続く追補 [VariablePairObservations.inc](VariablePairObservations.inc) は、実エネルギーと実偏微分から変数対・符号・観測の選択を形式化する。43定理・13定義を加え、全体は563定理・628宣言。原式との代入関係、(x,u)の明示逆と非零入力係数の必要十分条件、全32符号、(x,y)の符号変更例、観測階層の輸送と最小値での忘却を含む。[実行証拠](../../docs/verification/2026-10-29-variable-pairs.md)・[宣言と仮定](../../sources/variable_pairs_2026-10-29.json)。Researchの15組全分類は未移植である。
+
+2026年10月29日に [HistorySignature.inc](HistorySignature.inc) と [BranchForgetting.inc](BranchForgetting.inc) を追補した。実際の座標・面積積分から二次の履歴観測と面積分割を導き、実微分の停留入力からチェビシェフの正規化を導く。既存の線形入力エネルギーから最小値だけでは見えなくなる状態の条件も証明する。17+9定理と6+2定義を追加し、全体の検証対象は520定理・572宣言となる。全次数のsignature一意性や人間予測の検証は含めない。[検証記録](../../docs/verification/2026-10-29-history-branch.md)と[宣言・条件・依存の台帳](../../sources/history_branch_2026-10-29.json)に範囲を記載する。
+
+現在のGitHub版の再実行入口は `python -X utf8 tools/verify.py --proof-only`。従来の5追補の後に履歴・分岐の2追補、続いて変数対の1追補とファイバーの1追補を結合して、元の全宣言とともに `--trust=0` と公理監査で検査する。以下の旧件数と保存版へのリンクは以前の追加段階の記録として保持する。
+
 本文と利用・検証入口は [原始の形式化](../../原始の形式化.html) に統合しました。証明原稿の配置と分担は従来どおりです。このフォルダーの36原稿が線形入力・面積拘束・帰還系の251定理を担当し、エラスティカ側の214定理を実際にimportして接続します。
 
 [全体の定理対応・条件・再実行](../../検証と再実行.html)、[結合検証の全宣言と公理監査](../lean_results.json)、[生成されたAll.lean](All.lean)を参照してください。編集する正本は個々の `.lean` と `.inc` 原稿であり、All.leanは検証時に生成します。

@@ -1,0 +1,1025 @@
+{
+  "timestamp_utc": "2026-10-29T15:30:22.606426+00:00",
+  "local_date": "2026-10-30",
+  "base_commit": "986d8cdfd09e8c1cef01b8c2fa9b1b9a702c1991",
+  "supplied_archive": "F0_math_chat_20261029.zip",
+  "archive_sha256": "7c0d514bf1267c258f5a3f4b23f1c2856b3993137989a263e271fde0adefa8f1",
+  "source_inventory": "sources/f0_archive_inventory_2026-10-29.json",
+  "source_directory": "sources/f0_math_chat_2026-10-29",
+  "source_of_claim": "User-supplied F0 archive; definitions and proved propositions formalized separately from finite checks and conjectures.",
+  "groups": [
+    {
+      "source": "linear_input/lean_check/F0Retractions.inc",
+      "namespace": "LinearInputF0",
+      "theorem_count": 41,
+      "declaration_count": 61,
+      "sha256": "7dd831498e91cce9806f6f97362c8b4f70c9239ab23fdd26e9f7508b10880b05"
+    },
+    {
+      "source": "linear_input/lean_check/F0Counting.inc",
+      "namespace": "LinearInputF0Counting",
+      "theorem_count": 10,
+      "declaration_count": 18,
+      "sha256": "fa8d45beeca6b7df13024d377254bcad9c8622cd07d70236f3d478b89dc5df60"
+    },
+    {
+      "source": "linear_input/lean_check/F0MergeChains.inc",
+      "namespace": "LinearInputF0Merge",
+      "theorem_count": 10,
+      "declaration_count": 12,
+      "sha256": "e648399ea47447fdaf90f159b15eb6d3a441b755225f2ba286eb04efa5aa5773"
+    }
+  ],
+  "theorem_count": 61,
+  "declaration_count": 91,
+  "definitions_and_abbreviations": 30,
+  "original_connections": [
+    "LinearInputBranchFibers.zero_retraction_idempotent",
+    "LinearInputBranchFibers.pi_retraction_idempotent",
+    "LinearInputBranchFibers.candidate_zero_representative",
+    "LinearInputBranchFibers.candidate_pi_representative",
+    "LinearInputBranchFibers.candidate_zero_low_injective",
+    "LinearInputBranchFibers.candidate_pi_low_injective"
+  ],
+  "conditions": [
+    "K is idempotent; fixed points and fibers are actual subtypes, with an explicit fiber decomposition equivalence.",
+    "A means C(S(x))=x. B means S(K(x))(i)=K(S(x)(i)). T=K(C(liftK K (S x))).",
+    "The indistinguishability converse requires a nonempty output index type I.",
+    "Finite orbit conclusions require Fintype alpha; a period bound requires distinct points within the stated positive period.",
+    "Compatible-map counts require finite alpha and finite I; they count S for a fixed K, without imposing A or injectivity.",
+    "Rank counts concern all labelled idempotent maps with r fixed points. The all-ranks sum includes r=0, which also handles the empty base type.",
+    "Merge reachability assumes a nonempty multiset of positive natural numbers. All-ones reachability assumes N>0.",
+    "The Chebyshev bridge reuses the exact prior representative maps for degree 2*m+1 and proves equality of their kernels with candidate equality."
+  ],
+  "excluded": [
+    "A general Lean proof of the type-specific factorial count N!/(product_i (m_i-1)! product_s c_s!).",
+    "A general proof or counterexample for strict imbalance monotonicity; the supplied 528 finite checks are retained.",
+    "Realization of every integer-partition merge edge by specified S,C maps, or counting distinct transition maps T.",
+    "A structural identification of 34634 or 34643 with F0; finite coefficient calculations do not establish one.",
+    "Probability weights, Bayesian update compatibility, human prediction or ARC policy performance."
+  ],
+  "declarations": [
+    {
+      "name": "LinearInputF0.Idempotent",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 13,
+      "source_declaration_header": "def Idempotent {α : Type*} (K : α → α) : Prop",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.Fixed",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 15,
+      "source_declaration_header": "abbrev Fixed {α : Type*} (K : α → α)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.Fiber",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 17,
+      "source_declaration_header": "abbrev Fiber {α : Type*} (K : α → α) (a : Fixed K)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.liftK",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 19,
+      "source_declaration_header": "def liftK {α I : Type*} (K : α → α) (v : I → α) : I → α",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.Compatible",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 21,
+      "source_declaration_header": "def Compatible {α I : Type*} (K : α → α) (S : α → I → α) : Prop",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.Reconstructs",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 24,
+      "source_declaration_header": "def Reconstructs {α I : Type*} (S : α → I → α) (C : (I → α) → α) : Prop",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.step",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 27,
+      "source_declaration_header": "def step {α I : Type*} (K : α → α) (S : α → I → α) (C : (I → α) → α) (x : α) : α",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.fixed_iff_in_range",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 30,
+      "source_declaration_header": "theorem fixed_iff_in_range {α : Type*} {K : α → α} (hK : Idempotent K) (x : α) :\n    K x = x ↔ x ∈ Set.range K",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.fiberDecomposition",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 36,
+      "source_declaration_header": "def fiberDecomposition {α : Type*} {K : α → α} (hK : Idempotent K) :\n    α ≃ Σ a : Fixed K, Fiber K a",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.fiber_card_sum",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 47,
+      "source_declaration_header": "theorem fiber_card_sum {α : Type*} [Fintype α] {K : α → α} (hK : Idempotent K) :\n    Fintype.card α = ∑ a : Fixed K, Nat.card (Fiber K a)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.fiber_nonempty",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 52,
+      "source_declaration_header": "theorem fiber_nonempty {α : Type*} {K : α → α} (a : Fixed K) : Nonempty (Fiber K a)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.liftK_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 55,
+      "source_declaration_header": "theorem liftK_idempotent {α I : Type*} {K : α → α} (hK : Idempotent K) :\n    Idempotent (liftK (I",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.compatible_iff_lift",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 59,
+      "source_declaration_header": "theorem compatible_iff_lift {α I : Type*} (K : α → α) (S : α → I → α) :\n    Compatible K S ↔ ∀ x, liftK K (S x) = S (K x)",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.compatible_coarse_eq",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 65,
+      "source_declaration_header": "theorem compatible_coarse_eq {α I : Type*} {K : α → α} {S : α → I → α}\n    (hS : Compatible K S) {x y : α} (hxy : K x = K y) :\n    liftK K (S x) = liftK K (S y)",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.diagonal_compatible",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 70,
+      "source_declaration_header": "theorem diagonal_compatible {α I : Type*} (K : α → α) :\n    Compatible K (fun x (_ : I) => x)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.indistinguishable_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 73,
+      "source_declaration_header": "theorem indistinguishable_iff {α I : Type*} [Nonempty I] (K : α → α) (x y : α) :\n    K x = K y ↔ ∀ S : α → I → α, Compatible K S → liftK K (S x) = liftK K (S y)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.step_fixed",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 80,
+      "source_declaration_header": "theorem step_fixed {α I : Type*} {K : α → α} (hK : Idempotent K)\n    (S : α → I → α) (C : (I → α) → α) (x : α) :\n    K (step K S C x) = step K S C x",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.step_factor",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 84,
+      "source_declaration_header": "theorem step_factor {α I : Type*} {K : α → α} {S : α → I → α}\n    (hS : Compatible K S) (C : (I → α) → α) (x : α) :\n    step K S C x = K (C (S (K x)))",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.step_absorbs_K",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 89,
+      "source_declaration_header": "theorem step_absorbs_K {α I : Type*} {K : α → α} (hK : Idempotent K)\n    {S : α → I → α} (hS : Compatible K S) (C : (I → α) → α) (x : α) :\n    step K S C (K x) = step K S C x",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.step_equal_on_fibers",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 94,
+      "source_declaration_header": "theorem step_equal_on_fibers {α I : Type*} {K : α → α} {S : α → I → α}\n    (hS : Compatible K S) (C : (I → α) → α) {x y : α} (hxy : K x = K y) :\n    step K S C x = step K S C y",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.reconstruction_injective",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 98,
+      "source_declaration_header": "theorem reconstruction_injective {α I : Type*} {S : α → I → α} {C : (I → α) → α}\n    (hA : Reconstructs S C) : Function.Injective S",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.A_B_collapse",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 105,
+      "source_declaration_header": "theorem A_B_collapse {α I : Type*} {K : α → α} (hK : Idempotent K)\n    {S : α → I → α} {C : (I → α) → α} (hA : Reconstructs S C) (hB : Compatible K S) :\n    step K S C = K",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.noncollapse_requires_failure",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 111,
+      "source_declaration_header": "theorem noncollapse_requires_failure {α I : Type*} {K : α → α} (hK : Idempotent K)\n    {S : α → I → α} {C : (I → α) → α} (hT : step K S C ≠ K) :\n    ¬ Reconstructs S C ∨ ¬ Compatible K S",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.collapse_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 119,
+      "source_declaration_header": "theorem collapse_idempotent {α I : Type*} {K : α → α} (hK : Idempotent K)\n    {S : α → I → α} {C : (I → α) → α} (hA : Reconstructs S C) (hB : Compatible K S) :\n    Idempotent (step K S C)",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.idempotent_iterate_positive",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 123,
+      "source_declaration_header": "theorem idempotent_iterate_positive {α : Type*} {K : α → α} (hK : Idempotent K)\n    (n : ℕ) (x : α) : K^[n + 1] x = K x",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.positive_iterate_fixed",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 129,
+      "source_declaration_header": "theorem positive_iterate_fixed {α I : Type*} {K : α → α} (hK : Idempotent K)\n    (S : α → I → α) (C : (I → α) → α) (n : ℕ) (x : α) :\n    K ((step K S C)^[n + 1] x) = (step K S C)^[n + 1] x",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.periodic_point_fixed",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 135,
+      "source_declaration_header": "theorem periodic_point_fixed {α I : Type*} {K : α → α} (hK : Idempotent K)\n    (S : α → I → α) (C : (I → α) → α) {n : ℕ} (hn : 0 < n) {x : α}\n    (hp : (step K S C)^[n] x = x) : K x = x",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.periodic_cycle_bound",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 141,
+      "source_declaration_header": "theorem periodic_cycle_bound {α I : Type*} [Fintype α] {K : α → α} (hK : Idempotent K)\n    (S : α → I → α) (C : (I → α) → α) {p : ℕ} (hp : 0 < p) {x : α}\n    (hperiod : (step K S C)^[p] x = x)\n    (hdistinct : Function.Injective (fun i : Fin p => (step K S C)^[i.val] x)) :\n    p ≤ Nat.card (Fixed K)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchZeroK",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 158,
+      "source_declaration_header": "def branchZeroK (m : ℕ) (j : Fin (2 * m + 1)) : Fin (2 * m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchPiK",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 161,
+      "source_declaration_header": "def branchPiK (m : ℕ) (j : Fin (2 * m + 1)) : Fin (2 * m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchZeroK_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 164,
+      "source_declaration_header": "theorem branchZeroK_idempotent (m : ℕ) : Idempotent (branchZeroK m)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchPiK_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 167,
+      "source_declaration_header": "theorem branchPiK_idempotent (m : ℕ) : Idempotent (branchPiK m)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchZero_kernel",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 170,
+      "source_declaration_header": "theorem branchZero_kernel (m : ℕ) (j k : Fin (2 * m + 1)) :\n    branchZeroK m j = branchZeroK m k ↔\n      LinearInputBranchFibers.candidate (2 * m + 1) 0 j =\n        LinearInputBranchFibers.candidate (2 * m + 1) 0 k",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchPi_kernel",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 184,
+      "source_declaration_header": "theorem branchPi_kernel (m : ℕ) (j k : Fin (2 * m + 1)) :\n    branchPiK m j = branchPiK m k ↔\n      LinearInputBranchFibers.candidate (2 * m + 1) π j =\n        LinearInputBranchFibers.candidate (2 * m + 1) π k",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchZero_A_B_collapse",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 198,
+      "source_declaration_header": "theorem branchZero_A_B_collapse {I : Type*} (m : ℕ)\n    {S : Fin (2 * m + 1) → I → Fin (2 * m + 1)}\n    {C : (I → Fin (2 * m + 1)) → Fin (2 * m + 1)}\n    (hA : Reconstructs S C) (hB : Compatible (branchZeroK m) S) :\n    step (branchZeroK m) S C = branchZeroK m",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.branchPi_A_B_collapse",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 204,
+      "source_declaration_header": "theorem branchPi_A_B_collapse {I : Type*} (m : ℕ)\n    {S : Fin (2 * m + 1) → I → Fin (2 * m + 1)}\n    {C : (I → Fin (2 * m + 1)) → Fin (2 * m + 1)}\n    (hA : Reconstructs S C) (hB : Compatible (branchPiK m) S) :\n    step (branchPiK m) S C = branchPiK m",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.Tail",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 210,
+      "source_declaration_header": "abbrev Tail {α : Type*} (K : α → α) (a : Fixed K)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.CommutingMap",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 213,
+      "source_declaration_header": "abbrev CommutingMap {α : Type*} (K : α → α)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.FiberChoice",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 216,
+      "source_declaration_header": "abbrev FiberChoice {α : Type*} (K : α → α) (a : Fixed K)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.encodeCommuting",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 219,
+      "source_declaration_header": "def encodeCommuting {α : Type*} {K : α → α} (s : CommutingMap K) :\n    ∀ a : Fixed K, FiberChoice K a",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.decodeChoices",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 224,
+      "source_declaration_header": "def decodeChoices {α : Type*} {K : α → α} (hK : Idempotent K)\n    (v : ∀ a : Fixed K, FiberChoice K a) (x : α) : α",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.decodeChoices_fixed",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 229,
+      "source_declaration_header": "theorem decodeChoices_fixed {α : Type*} {K : α → α} (hK : Idempotent K)\n    (v : ∀ a : Fixed K, FiberChoice K a) (a : Fixed K) :\n    decodeChoices hK v a.val = (v a).1.val",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.decodeChoices_tail",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 236,
+      "source_declaration_header": "theorem decodeChoices_tail {α : Type*} {K : α → α} (hK : Idempotent K)\n    (v : ∀ a : Fixed K, FiberChoice K a) (a : Fixed K) (x : Tail K a) :\n    decodeChoices hK v x.val = ((v a).2 x).val",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.decodeChoices_commutes",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 245,
+      "source_declaration_header": "theorem decodeChoices_commutes {α : Type*} {K : α → α} (hK : Idempotent K)\n    (v : ∀ a : Fixed K, FiberChoice K a) (x : α) :\n    decodeChoices hK v (K x) = K (decodeChoices hK v x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.decode_encode",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 256,
+      "source_declaration_header": "theorem decode_encode {α : Type*} {K : α → α} (hK : Idempotent K)\n    (s : CommutingMap K) : decodeChoices hK (encodeCommuting s) = s.val",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.subtype_heq",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 265,
+      "source_declaration_header": "theorem subtype_heq {α : Type*} {p q : α → Prop} (hpq : p = q)\n    {x : Subtype p} {y : Subtype q} (hxy : x.val = y.val) : HEq x y",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.encode_decode",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 270,
+      "source_declaration_header": "theorem encode_decode {α : Type*} {K : α → α} (hK : Idempotent K)\n    (v : ∀ a : Fixed K, FiberChoice K a) :\n    encodeCommuting ⟨decodeChoices hK v, decodeChoices_commutes hK v⟩ = v",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.commutingChoicesEquiv",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 288,
+      "source_declaration_header": "def commutingChoicesEquiv {α : Type*} {K : α → α} (hK : Idempotent K) :\n    CommutingMap K ≃ (∀ a : Fixed K, FiberChoice K a)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.tailFiberEquiv",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 295,
+      "source_declaration_header": "def tailFiberEquiv {α : Type*} {K : α → α} (a : Fixed K) :\n    Tail K a ≃ {x : Fiber K a // x ≠ ⟨a.val, a.property⟩}",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.tail_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 302,
+      "source_declaration_header": "theorem tail_card {α : Type*} [Fintype α] {K : α → α} (a : Fixed K) :\n    Nat.card (Tail K a) = Nat.card (Fiber K a) - 1",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.commuting_map_count",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 309,
+      "source_declaration_header": "theorem commuting_map_count {α : Type*} [Fintype α] {K : α → α} (hK : Idempotent K) :\n    Nat.card (CommutingMap K) =\n      ∏ a : Fixed K, ∑ b : Fixed K, Nat.card (Fiber K b) ^ (Nat.card (Fiber K a) - 1)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.compatibleComponentsEquiv",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 321,
+      "source_declaration_header": "def compatibleComponentsEquiv {α I : Type*} (K : α → α) :\n    {S : α → I → α // Compatible K S} ≃ (I → CommutingMap K)",
+      "axioms": []
+    },
+    {
+      "name": "LinearInputF0.compatible_split_count",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 329,
+      "source_declaration_header": "theorem compatible_split_count {α I : Type*} [Fintype α] [Fintype I]\n    {K : α → α} (hK : Idempotent K) :\n    Nat.card {S : α → I → α // Compatible K S} =\n      ∏ a : Fixed K,\n        (∑ b : Fixed K, Nat.card (Fiber K b) ^ (Nat.card (Fiber K a) - 1)) ^ Fintype.card I",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.exampleK",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 338,
+      "source_declaration_header": "def exampleK (x : Fin 3) : Fin 3",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "name": "LinearInputF0.exampleBadS",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 340,
+      "source_declaration_header": "def exampleBadS (x : Fin 3) (_ : Fin 1) : Fin 3",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "name": "LinearInputF0.exampleK_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 342,
+      "source_declaration_header": "theorem exampleK_idempotent : Idempotent exampleK",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "name": "LinearInputF0.compatible_need_not_equal_raw_outputs",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 346,
+      "source_declaration_header": "theorem compatible_need_not_equal_raw_outputs :\n    Compatible exampleK (fun x (_ : Fin 1) => x) ∧\n    exampleK 0 = exampleK 1 ∧\n    (fun (_ : Fin 1) => (0 : Fin 3)) ≠ (fun (_ : Fin 1) => (1 : Fin 3))",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.incompatible_can_separate",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 355,
+      "source_declaration_header": "theorem incompatible_can_separate :\n    ¬ Compatible exampleK exampleBadS ∧ exampleK 0 = exampleK 1 ∧\n      liftK exampleK (exampleBadS 0) ≠ liftK exampleK (exampleBadS 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.failure_does_not_imply_noncollapse",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 366,
+      "source_declaration_header": "theorem failure_does_not_imply_noncollapse :\n    ¬ Reconstructs (fun x (_ : Fin 1) => x) (fun _ => (0 : Fin 3)) ∧\n      step (fun (_ : Fin 3) => (0 : Fin 3)) (fun x (_ : Fin 1) => x) (fun _ => 0) =\n        (fun _ => 0)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.eventual_collision_bound",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 376,
+      "source_declaration_header": "theorem eventual_collision_bound {α I : Type*} [Fintype α] {K : α → α}\n    (hK : Idempotent K) (S : α → I → α) (C : (I → α) → α) (x : α) :\n    ∃ i j : ℕ, 1 ≤ i ∧ i < j ∧ j ≤ Nat.card (Fixed K) + 1 ∧\n      (step K S C)^[i] x = (step K S C)^[j] x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0.eventually_periodic",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Retractions.inc",
+      "line": 394,
+      "source_declaration_header": "theorem eventually_periodic {α I : Type*} [Fintype α] {K : α → α}\n    (hK : Idempotent K) (S : α → I → α) (C : (I → α) → α) (x : α) :\n    ∃ i p : ℕ, 1 ≤ i ∧ 0 < p ∧ ∀ k : ℕ,\n      (step K S C)^[i + p + k] x = (step K S C)^[i + k] x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.RetractionOn",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 11,
+      "source_declaration_header": "def RetractionOn {α : Type*} (A : Finset α) (K : α → α) : Prop",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.SupportedRetraction",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 14,
+      "source_declaration_header": "abbrev SupportedRetraction {α : Type*} (A : Finset α)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.extendRetraction",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 16,
+      "source_declaration_header": "def extendRetraction {α : Type*} (A : Finset α) (f : {x : α // x ∉ A} → {x : α // x ∈ A})\n    (x : α) : α",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.extend_retracts",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 19,
+      "source_declaration_header": "theorem extend_retracts {α : Type*} (A : Finset α)\n    (f : {x : α // x ∉ A} → {x : α // x ∈ A}) : RetractionOn A (extendRetraction A f)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.supportedChoicesEquiv",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 29,
+      "source_declaration_header": "def supportedChoicesEquiv {α : Type*} (A : Finset α) :\n    SupportedRetraction A ≃ ({x : α // x ∉ A} → {x : α // x ∈ A})",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.supported_retraction_count",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 45,
+      "source_declaration_header": "theorem supported_retraction_count {α : Type*} [Fintype α] (A : Finset α) :\n    Nat.card (SupportedRetraction A) = A.card ^ (Fintype.card α - A.card)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.supported_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 51,
+      "source_declaration_header": "theorem supported_idempotent {α : Type*} {A : Finset α} (K : SupportedRetraction A) :\n    Idempotent K.val",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.fixedSet",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 54,
+      "source_declaration_header": "def fixedSet {α : Type*} [Fintype α] (K : α → α) : Finset α",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.mem_fixedSet",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 57,
+      "source_declaration_header": "theorem mem_fixedSet {α : Type*} [Fintype α] (K : α → α) (x : α) :\n    x ∈ fixedSet K ↔ K x = x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.fixedSet_supported",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 60,
+      "source_declaration_header": "theorem fixedSet_supported {α : Type*} [Fintype α] {A : Finset α}\n    (K : SupportedRetraction A) : fixedSet K.val = A",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.idempotent_supported",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 68,
+      "source_declaration_header": "theorem idempotent_supported {α : Type*} [Fintype α] {K : α → α}\n    (hK : Idempotent K) : RetractionOn (fixedSet K) K",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.RankedIdempotent",
+      "kind": "abbrev",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 74,
+      "source_declaration_header": "abbrev RankedIdempotent (α : Type*) [Fintype α] (r : ℕ)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.rankedChoicesEquiv",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 77,
+      "source_declaration_header": "def rankedChoicesEquiv (α : Type*) [Fintype α] (r : ℕ) :\n    RankedIdempotent α r ≃ (Σ A : {s : Finset α // s.card = r}, SupportedRetraction A.val)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.idempotent_rank_count",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 88,
+      "source_declaration_header": "theorem idempotent_rank_count (α : Type*) [Fintype α] (r : ℕ) :\n    Nat.card (RankedIdempotent α r) =\n      (Fintype.card α).choose r * r ^ (Fintype.card α - r)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.allRanksEquiv",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 101,
+      "source_declaration_header": "def allRanksEquiv (α : Type*) [Fintype α] :\n    {K : α → α // Idempotent K} ≃\n      (Σ r : Fin (Fintype.card α + 1), RankedIdempotent α r.val)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.idempotent_count_sum",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 116,
+      "source_declaration_header": "theorem idempotent_count_sum (α : Type*) [Fintype α] :\n    Nat.card {K : α → α // Idempotent K} =\n      ∑ r : Fin (Fintype.card α + 1),\n        (Fintype.card α).choose r.val * r.val ^ (Fintype.card α - r.val)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.seven_point_idempotents",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 126,
+      "source_declaration_header": "theorem seven_point_idempotents : Nat.card {K : Fin 7 → Fin 7 // Idempotent K} = 6322",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Counting.eight_point_idempotents",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0Counting.inc",
+      "line": 131,
+      "source_declaration_header": "theorem eight_point_idempotents : Nat.card {K : Fin 8 → Fin 8 // Idempotent K} = 41393",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.Merge",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 7,
+      "source_declaration_header": "def Merge (p q : Multiset ℕ) : Prop",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.Chain",
+      "kind": "def",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 11,
+      "source_declaration_header": "def Chain : ℕ → Multiset ℕ → Multiset ℕ → Prop",
+      "axioms": [
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.merge_sum",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 15,
+      "source_declaration_header": "theorem merge_sum {p q : Multiset ℕ} (h : Merge p q) : p.sum = q.sum",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.merge_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 19,
+      "source_declaration_header": "theorem merge_card {p q : Multiset ℕ} (h : Merge p q) : q.card + 1 = p.card",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.merge_preserves_positive",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 23,
+      "source_declaration_header": "theorem merge_preserves_positive {p q : Multiset ℕ} (h : Merge p q)\n    (hp : ∀ a ∈ p, 0 < a) : ∀ a ∈ q, 0 < a",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.chain_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 32,
+      "source_declaration_header": "theorem chain_card {n : ℕ} {p q : Multiset ℕ} (h : Chain n p q) :\n    q.card + n = p.card",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.chain_sum",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 42,
+      "source_declaration_header": "theorem chain_sum {n : ℕ} {p q : Multiset ℕ} (h : Chain n p q) : p.sum = q.sum",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.no_nonempty_cycle",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 49,
+      "source_declaration_header": "theorem no_nonempty_cycle {n : ℕ} (hn : 0 < n) (p : Multiset ℕ) : ¬ Chain n p p",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.merge_head_to_sum",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 54,
+      "source_declaration_header": "theorem merge_head_to_sum (rest : Multiset ℕ) (a : ℕ) (ha : 0 < a)\n    (hp : ∀ b ∈ rest, 0 < b) : Chain rest.card (a ::ₘ rest) {a + rest.sum}",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.reaches_singleton",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 66,
+      "source_declaration_header": "theorem reaches_singleton {p : Multiset ℕ} (hne : p ≠ 0)\n    (hp : ∀ a ∈ p, 0 < a) : Chain (p.card - 1) p {p.sum}",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.chain_to_singleton_length",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 74,
+      "source_declaration_header": "theorem chain_to_singleton_length {n N : ℕ} {p : Multiset ℕ} (h : Chain n p {N}) :\n    n = p.card - 1",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputF0Merge.all_ones_to_singleton",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/F0MergeChains.inc",
+      "line": 80,
+      "source_declaration_header": "theorem all_ones_to_singleton {N : ℕ} (hN : 0 < N) :\n    Chain (N - 1) (Multiset.replicate N 1) {N}",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ]
+}

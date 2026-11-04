@@ -1,0 +1,44 @@
+C:\Users\Dalcia\Documents\Codex\2026-11-02\pr\work\wfs21-fixed-probe.lean:173:20: warning: This simp argument is unused:
+  ZMod.natCast_self
+
+Hint: Omit it from the simp argument list.
+  simp [sample,̵ ̵Z̵M̵o̵d̵.̵n̵a̵t̵C̵a̵s̵t̵_̵s̵e̵l̵f̵]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'LinearInputWFSObservation.wfsLift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.gauge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.gaugeInv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.reflection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.gaugeInv_gauge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.gauge_gaugeInv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.gauge_wfsLift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.wfsLift_involutive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.reflection_involutive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.sample' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.sample_injective_iff_coprime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.four_state_two_step_alias' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.four_state_one_step_separates' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.samplePair' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.six_state_two_three_joint_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LinearInputWFSObservation.sampleKernel' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.observationGCD' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.sample_zero_iff_order_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.sampleKernel_iff_gcd_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.sampleKernelCard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.sampleKernelCard_six_two_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.sampleKernelCard_eight_two_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.mismatch' does not depend on any axioms
+'LinearInputWFSObservation.mismatch_self' depends on axioms: [propext]
+'LinearInputWFSObservation.mismatch_symm' depends on axioms: [propext]
+'LinearInputWFSObservation.mismatch_triangle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.observationDistance' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.observationDistance_self' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.observationDistance_symm' depends on axioms: [propext, Quot.sound]
+'LinearInputWFSObservation.observationDistance_triangle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.mismatch_eq_zero_iff' depends on axioms: [propext]
+'LinearInputWFSObservation.observationDistance_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputWFSObservation.observationDistance_zero_iff_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

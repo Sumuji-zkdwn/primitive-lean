@@ -1,0 +1,322 @@
+{
+  "schema": "primitive-history-branch-provenance-v1",
+  "recorded_utc": "2026-10-29T11:44:02.806934+00:00",
+  "base_commit": "318bff1f75ea8aa59a7c85b86c164765518f7463",
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "user_instruction": "その通りです。しかしながらこれらは、git hubのprimitive leanによって導出されなくてはならない",
+  "reference_note": {
+    "filename": "クソ玉_定理チェイン到達点_2026-10-20.md",
+    "sha256": "e6593070d343e25d784965213f053150d0194af53c45bba79843cc13b94cb9a9",
+    "role": "Research reference; its statements are not imported as Lean axioms or instructions."
+  },
+  "added_theorems": 26,
+  "new_definitions": 8,
+  "total_theorems": 520,
+  "total_declarations": 572,
+  "sources": [
+    {
+      "source": "linear_input/lean_check/HistorySignature.inc",
+      "namespace": "LinearInputHistorySignature",
+      "declarations": [
+        {
+          "name": "LinearInputHistorySignature.secondXY",
+          "kind": "def",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 15,
+          "exact_lean_statement": "def secondXY (θ : ℝ → ℝ) (ℓ : ℝ) : ℝ"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondYX",
+          "kind": "def",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 19,
+          "exact_lean_statement": "def secondYX (θ : ℝ → ℝ) (ℓ : ℝ) : ℝ"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondXX",
+          "kind": "def",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 22,
+          "exact_lean_statement": "def secondXX (θ : ℝ → ℝ) (ℓ : ℝ) : ℝ"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondYY",
+          "kind": "def",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 25,
+          "exact_lean_statement": "def secondYY (θ : ℝ → ℝ) (ℓ : ℝ) : ℝ"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondXY_eq_iterated",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 28,
+          "exact_lean_statement": "theorem secondXY_eq_iterated (θ : ℝ → ℝ) (ℓ : ℝ) :\n    secondXY θ ℓ = ∫ s in 0..ℓ, (∫ t in 0..s, cos (θ t)) * sin (θ s)"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondYX_eq_iterated",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 32,
+          "exact_lean_statement": "theorem secondYX_eq_iterated (θ : ℝ → ℝ) (ℓ : ℝ) :\n    secondYX θ ℓ = ∫ s in 0..ℓ, (∫ t in 0..s, sin (θ t)) * cos (θ s)"
+        },
+        {
+          "name": "LinearInputHistorySignature.xCoord_continuous",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 36,
+          "exact_lean_statement": "theorem xCoord_continuous {θ : ℝ → ℝ} (hθ : Continuous θ) :\n    Continuous (Elastica.xCoord θ 0)"
+        },
+        {
+          "name": "LinearInputHistorySignature.yCoord_continuous",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 41,
+          "exact_lean_statement": "theorem yCoord_continuous {θ : ℝ → ℝ} (hθ : Continuous θ) :\n    Continuous (Elastica.yCoord θ 0)"
+        },
+        {
+          "name": "LinearInputHistorySignature.area_eq_second_antisymmetric",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 47,
+          "exact_lean_statement": "theorem area_eq_second_antisymmetric {θ : ℝ → ℝ} (hθ : Continuous θ) (ℓ : ℝ) :\n    LinearInputAreaVariation.area θ ℓ = (secondXY θ ℓ - secondYX θ ℓ) / 2"
+        },
+        {
+          "name": "LinearInputHistorySignature.second_shuffle",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 60,
+          "exact_lean_statement": "theorem second_shuffle {θ : ℝ → ℝ} (hθ : Continuous θ) (ℓ : ℝ) :\n    secondXY θ ℓ + secondYX θ ℓ =\n      Elastica.xCoord θ 0 ℓ * Elastica.yCoord θ 0 ℓ"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondXX_eq_half_square",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 74,
+          "exact_lean_statement": "theorem secondXX_eq_half_square {θ : ℝ → ℝ} (hθ : Continuous θ) (ℓ : ℝ) :\n    secondXX θ ℓ = (Elastica.xCoord θ 0 ℓ) ^ 2 / 2"
+        },
+        {
+          "name": "LinearInputHistorySignature.secondYY_eq_half_square",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 87,
+          "exact_lean_statement": "theorem secondYY_eq_half_square {θ : ℝ → ℝ} (hθ : Continuous θ) (ℓ : ℝ) :\n    secondYY θ ℓ = (Elastica.yCoord θ 0 ℓ) ^ 2 / 2"
+        },
+        {
+          "name": "LinearInputHistorySignature.mixed_second_reconstruction",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 101,
+          "exact_lean_statement": "theorem mixed_second_reconstruction {θ : ℝ → ℝ} (hθ : Continuous θ) (ℓ : ℝ) :\n    secondXY θ ℓ =\n      Elastica.xCoord θ 0 ℓ * Elastica.yCoord θ 0 ℓ / 2 +\n        LinearInputAreaVariation.area θ ℓ ∧\n    secondYX θ ℓ =\n      Elastica.xCoord θ 0 ℓ * Elastica.yCoord θ 0 ℓ / 2 -\n        LinearInputAreaVariation.area θ ℓ"
+        },
+        {
+          "name": "LinearInputHistorySignature.subarcArea",
+          "kind": "def",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 113,
+          "exact_lean_statement": "def subarcArea (θ : ℝ → ℝ) (a b : ℝ) : ℝ"
+        },
+        {
+          "name": "LinearInputHistorySignature.area_split_cross_term",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 119,
+          "exact_lean_statement": "theorem area_split_cross_term {θ : ℝ → ℝ} (hθ : Continuous θ) (a b : ℝ) :\n    LinearInputAreaVariation.area θ b =\n      LinearInputAreaVariation.area θ a + subarcArea θ a b +\n      (Elastica.xCoord θ 0 a * (Elastica.yCoord θ 0 b - Elastica.yCoord θ 0 a) -\n       Elastica.yCoord θ 0 a * (Elastica.xCoord θ 0 b - Elastica.xCoord θ 0 a)) / 2"
+        },
+        {
+          "name": "LinearInputHistorySignature.rotated_piece_endpoint_x",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 167,
+          "exact_lean_statement": "theorem rotated_piece_endpoint_x {θ : ℝ → ℝ} (hθ : Continuous θ)\n    (α x ℓ : ℝ) :\n    Elastica.xCoord (fun s => θ s + α) x ℓ =\n      x + cos α * Elastica.xCoord θ 0 ℓ - sin α * Elastica.yCoord θ 0 ℓ"
+        },
+        {
+          "name": "LinearInputHistorySignature.rotated_piece_endpoint_y",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 175,
+          "exact_lean_statement": "theorem rotated_piece_endpoint_y {θ : ℝ → ℝ} (hθ : Continuous θ)\n    (α y ℓ : ℝ) :\n    Elastica.yCoord (fun s => θ s + α) y ℓ =\n      y + sin α * Elastica.xCoord θ 0 ℓ + cos α * Elastica.yCoord θ 0 ℓ"
+        },
+        {
+          "name": "LinearInputHistorySignature.two_inputs_determine_area",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 184,
+          "exact_lean_statement": "theorem two_inputs_determine_area {S : Type*} (base : S → ℝ)\n    (angle : S → ℝ → ℝ) (length : S → ℝ) (p q : S)\n    (u v : ℝ) (huv : u ≠ v) :\n    (LinearInputObservation.energy base\n        (fun z => LinearInputAreaVariation.area (angle z) (length z)) u p =\n      LinearInputObservation.energy base\n        (fun z => LinearInputAreaVariation.area (angle z) (length z)) u q ∧\n     LinearInputObservation.energy base\n        (fun z => LinearInputAreaVariation.area (angle z) (length z)) v p =\n      LinearInputObservation.energy base\n        (fun z => LinearInputAreaVariation.area (angle z) (length z)) v q) ↔\n    base p = base q ∧\n      LinearInputAreaVariation.area (angle p) (length p) =\n      LinearInputAreaVariation.area (angle q) (length q)"
+        },
+        {
+          "name": "LinearInputHistorySignature.agreeThrough",
+          "kind": "def",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 202,
+          "exact_lean_statement": "def agreeThrough {S : Type*} {O : ℕ → Type*}"
+        },
+        {
+          "name": "LinearInputHistorySignature.agreeThrough_mono",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 206,
+          "exact_lean_statement": "theorem agreeThrough_mono {S : Type*} {O : ℕ → Type*}\n    (obs : (k : ℕ) → S → O k) {m n : ℕ} {x y : S}\n    (hmn : m ≤ n) (h : agreeThrough obs n x y) : agreeThrough obs m x y"
+        },
+        {
+          "name": "LinearInputHistorySignature.distinguishing_level_refutes_agreement",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 212,
+          "exact_lean_statement": "theorem distinguishing_level_refutes_agreement {S : Type*} {O : ℕ → Type*}\n    (obs : (k : ℕ) → S → O k) {m k : ℕ} {x y : S}\n    (hkm : k ≤ m) (hne : obs k x ≠ obs k y) : ¬ agreeThrough obs m x y"
+        },
+        {
+          "name": "LinearInputHistorySignature.all_truncations_iff_all_levels",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 218,
+          "exact_lean_statement": "theorem all_truncations_iff_all_levels {S : Type*} {O : ℕ → Type*}\n    (obs : (k : ℕ) → S → O k) (x y : S) :\n    (∀ m, agreeThrough obs m x y) ↔ ∀ k, obs k x = obs k y"
+        },
+        {
+          "name": "LinearInputHistorySignature.finite_family_separating_cutoff",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/HistorySignature.inc",
+          "line": 225,
+          "exact_lean_statement": "theorem finite_family_separating_cutoff {S : Type*} [Fintype S]\n    {O : ℕ → Type*} (obs : (k : ℕ) → S → O k)\n    (hsep : ∀ x y : S, x ≠ y → ∃ k, obs k x ≠ obs k y) :\n    ∃ m, ∀ x y : S, agreeThrough obs m x y → x = y"
+        }
+      ],
+      "theorem_count": 17,
+      "declaration_count": 23,
+      "sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+      "reviewed_source_references": [
+        "Elastica.hasDerivAt_xCoord",
+        "Elastica.hasDerivAt_yCoord",
+        "Elastica.xCoord",
+        "Elastica.xCoord_add_angle",
+        "Elastica.xCoord_sub_eq_integral",
+        "Elastica.xCoord_zero",
+        "Elastica.yCoord",
+        "Elastica.yCoord_add_angle",
+        "Elastica.yCoord_sub_eq_integral",
+        "Elastica.yCoord_zero",
+        "LinearInputAreaVariation.area",
+        "LinearInputObservation.energy",
+        "LinearInputObservation.two_inputs_iff_pair"
+      ],
+      "reference_scope": "Qualified references in the inspected source; not an exhaustive proof-term dependency graph."
+    },
+    {
+      "source": "linear_input/lean_check/BranchForgetting.inc",
+      "namespace": "LinearInputBranchForgetting",
+      "declarations": [
+        {
+          "name": "LinearInputBranchForgetting.chebyshevThree",
+          "kind": "def",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 12,
+          "exact_lean_statement": "def chebyshevThree (x : ℝ) : ℝ"
+        },
+        {
+          "name": "LinearInputBranchForgetting.chebyshevThree_eq_input",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 15,
+          "exact_lean_statement": "theorem chebyshevThree_eq_input (x : ℝ) :\n    chebyshevThree x = LinearInputDesign.input 4 (-3) x"
+        },
+        {
+          "name": "LinearInputBranchForgetting.input_normalization",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 21,
+          "exact_lean_statement": "theorem input_normalization (lam s x : ℝ) :\n    LinearInputDesign.input lam (-3 * lam * s ^ 2 / 4) (s * x) =\n      lam * s ^ 3 / 4 * chebyshevThree x"
+        },
+        {
+          "name": "LinearInputBranchForgetting.stationary_iff_chebyshev",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 28,
+          "exact_lean_statement": "theorem stationary_iff_chebyshev (u x : ℝ) :\n    deriv (LinearInputCalculus.potential 4 (-3) u) x = 0 ↔\n      u = chebyshevThree x"
+        },
+        {
+          "name": "LinearInputBranchForgetting.chebyshevThree_cos",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 34,
+          "exact_lean_statement": "theorem chebyshevThree_cos (t : ℝ) :\n    chebyshevThree (cos t) = cos (3 * t)"
+        },
+        {
+          "name": "LinearInputBranchForgetting.ternaryIterate",
+          "kind": "def",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 39,
+          "exact_lean_statement": "def ternaryIterate : ℕ → ℝ → ℝ"
+        },
+        {
+          "name": "LinearInputBranchForgetting.ternaryIterate_cos",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 43,
+          "exact_lean_statement": "theorem ternaryIterate_cos (n : ℕ) (t : ℝ) :\n    ternaryIterate n (cos t) = cos ((3 : ℝ) ^ n * t)"
+        },
+        {
+          "name": "LinearInputBranchForgetting.iterated_inverse_candidate",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 54,
+          "exact_lean_statement": "theorem iterated_inverse_candidate (n : ℕ) (t : ℝ) (j : ℕ) :\n    ternaryIterate n (cos ((t + j * (2 * π)) / (3 : ℝ) ^ n)) = cos t"
+        },
+        {
+          "name": "LinearInputBranchForgetting.ternary_word_count",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 63,
+          "exact_lean_statement": "theorem ternary_word_count (n : ℕ) :\n    Fintype.card (Fin n → Fin 3) = 3 ^ n"
+        },
+        {
+          "name": "LinearInputBranchForgetting.hidden_state_above_chord",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 69,
+          "exact_lean_statement": "theorem hidden_state_above_chord {S : Type*} (A X : S → ℝ)\n    (p q r : S) (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1)\n    (hX : X q = (1 - t) * X p + t * X r)\n    (hA : (1 - t) * A p + t * A r ≤ A q) (u : ℝ) :\n    min (LinearInputObservation.energy A X u p)\n        (LinearInputObservation.energy A X u r) ≤\n      LinearInputObservation.energy A X u q"
+        },
+        {
+          "name": "LinearInputBranchForgetting.minimum_forgets_hidden_state",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/BranchForgetting.inc",
+          "line": 91,
+          "exact_lean_statement": "theorem minimum_forgets_hidden_state {S : Type*} (A X : S → ℝ)\n    (p q r : S) (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1)\n    (hX : X q = (1 - t) * X p + t * X r)\n    (hA : (1 - t) * A p + t * A r ≤ A q) :\n    (fun u => min (min (LinearInputObservation.energy A X u p)\n        (LinearInputObservation.energy A X u r))\n        (LinearInputObservation.energy A X u q)) =\n      (fun u => min (LinearInputObservation.energy A X u p)\n        (LinearInputObservation.energy A X u r))"
+        }
+      ],
+      "theorem_count": 9,
+      "declaration_count": 11,
+      "sha256": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+      "reviewed_source_references": [
+        "LinearInputCalculus.potential",
+        "LinearInputCalculus.stationary_iff_input",
+        "LinearInputDesign.input",
+        "LinearInputObservation.energy"
+      ],
+      "reference_scope": "Qualified references in the inspected source; not an exhaustive proof-term dependency graph."
+    }
+  ],
+  "explicit_choices": [
+    "Second iterated integrals and observation cutoff",
+    "Coupling the existing area observable to a linear input",
+    "Cubic normalization and iteration, not a derived time dynamics"
+  ],
+  "explicit_hypotheses": [
+    "Continuous real-line angle for analytic history theorems",
+    "Finite state family and pairwise separation for a common finite cutoff",
+    "Convex observable combination and base energy above the chord for hidden-state forgetting"
+  ],
+  "not_formalized": [
+    "All-degree Chen identity",
+    "Hambly-Lyons uniqueness and tree-like quotient",
+    "Injective encoding of ternary histories as bounded-variation paths",
+    "Completeness and distinctness of all inverse candidates at all values",
+    "General Fenchel-Moreau or partition-function uniqueness",
+    "Human replay calibration and ARC decision policy"
+  ],
+  "literature": [
+    {
+      "url": "https://annals.math.princeton.edu/2010/171-1/p02",
+      "role": "Proposed next connection; not assumed or proved by these sources."
+    }
+  ],
+  "verification": "evidence/local/2026-10-29-history-branch/audit.json"
+}

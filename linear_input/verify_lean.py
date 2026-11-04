@@ -50,7 +50,15 @@ def main():
     spec = importlib.util.spec_from_file_location("parent_verifier", ROOT / "tools/verify.py")
     old = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(old)
-    imports, bodies, declarations, hashes, forbidden = ["import Elastica"], [], [], {}, []
+    imports, bodies, declarations, hashes, forbidden = [
+        "import Elastica",
+        "import Mathlib.Data.Complex.Basic",
+        "import Mathlib.Data.ZMod.Basic",
+        "import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots",
+        "import Mathlib.FieldTheory.KummerExtension",
+        "import Mathlib.GroupTheory.SpecificGroups.Dihedral",
+        "import Mathlib.LinearAlgebra.Matrix.Rank",
+    ], [], [], {}, []
     parent_declarations = []
     for path in sorted((PROJECT / "Elastica").glob("*.lean")):
         rel = "../lean/" + path.relative_to(PROJECT).as_posix()

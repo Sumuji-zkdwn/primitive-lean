@@ -1,0 +1,33 @@
+{
+  "originals": [
+    {
+      "source_pr": 21,
+      "source_commit": "f4454b25d9bde057aa162ef7c9e4829dc007404e",
+      "source_path": "lean/Elastica/WFSObservation.lean",
+      "preserved_copy": "sources/wfs_projective_pr21_20261101/WFSObservation.lean",
+      "sha256": "0badfd16084134e7816d1bbe7cce63f15d8a1336c2c31ff6db36630294498d6f"
+    },
+    {
+      "source_pr": 21,
+      "source_commit": "f4454b25d9bde057aa162ef7c9e4829dc007404e",
+      "source_path": "lean/Elastica/WFSObservationGeometry.lean",
+      "preserved_copy": "sources/wfs_projective_pr21_20261101/WFSObservationGeometry.lean",
+      "sha256": "fed83c75f9d38b68e7b6021779181e9a05654be43e933c9b1610597c07b830ab"
+    }
+  ],
+  "adapter": "linear_input/lean_check/WFSProjectiveSampling.inc",
+  "adapter_changes": [
+    "Remove standalone imports for established All.lean assembly.",
+    "Combine repeated namespace blocks into one block for complete declaration audit.",
+    "Replace rcases rfl with explicit subst d to retain m in the gcd proof.",
+    "Combine intros to eliminate the tactic-style warning.",
+    "Remove the now-unused ZMod.natCast_self simp argument after the gcd proof fix."
+  ],
+  "original_probe": "PR21 originals failed with unknown identifier m and one tactic-style warning.",
+  "adapter_sha256": "874c90f744e2bc0b84e606b50b996d11a05f46bfc811bb34ad2867f8b812c5a9",
+  "retained_checker": {
+    "path": "tools/check_wfs_sampling.py",
+    "sha256": "542312cf305150e7fc17d2570dab222707178a4d54964e3eb1de0ec0e037de20",
+    "byte_identical": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "version": "0.1.0",
+  "artifact": "arc3-explorer-0.1.0.zip",
+  "bytes": 82436,
+  "sha256": "73a1d05633ab9ac66f7f4ed1696d03bc4a5f56bbaecb98cadb26b4e58a8be873",
+  "credential_free_tests_passed": 162,
+  "unpacked_tests_passed": 162,
+  "package_smoke": [
+    {
+      "game": "vc33-5430563c",
+      "agent": "explore",
+      "seed": 3,
+      "budget": 30,
+      "calls_including_initial_reset": 30,
+      "gameplay_actions": 29,
+      "resets_after_initial": 0,
+      "best_levels_completed": 1,
+      "final_levels_completed": 1,
+      "win": false,
+      "final_status": "NOT_FINISHED",
+      "local_sdk_score": 0.2588757396449704,
+      "seconds": 0.302,
+      "error": null,
+      "policy_source": "dolphin-in-a-coma/arc-agi-3-just-explore",
+      "policy_ref": "c2d98318ecca38c8ee9fb49b5af159e51770bad7",
+      "upstream_graph_nodes": 2,
+      "policy_recoveries": {},
+      "evidence_monitor": {
+        "history_depth": 0,
+        "refinements": 0,
+        "records": 29,
+        "observation_tokens": 30,
+        "state_action_pairs": 29,
+        "unresolved_conflicts": 0,
+        "prediction_trials": 0,
+        "prediction_accuracy_including_ties": null
+      }
+    }
+  ],
+  "official_submission": false,
+  "lean_rebuilt": false
+}

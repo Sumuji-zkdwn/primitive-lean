@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "version": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "theorem_count": 251,
+  "declaration_count": 280,
+  "parent_theorem_count": 214,
+  "parent_declaration_count": 229,
+  "parent_library_build": {
+    "command": [
+      "lake",
+      "build",
+      "Elastica"
+    ],
+    "working_directory": "<workspace>\\lean",
+    "exit_code": 0,
+    "seconds": 7.139,
+    "log": "lean_check/elastica-build.log",
+    "clean_build": false
+  },
+  "compile": {
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "--trust=0",
+      "../linear_input/lean_check/All.lean"
+    ],
+    "working_directory": "<workspace>\\lean",
+    "exit_code": 0,
+    "seconds": 47.663,
+    "log": "lean_check/build.log"
+  },
+  "unexpected": [],
+  "forbidden_tokens": []
+}

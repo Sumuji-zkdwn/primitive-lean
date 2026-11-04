@@ -1,5 +1,6 @@
 from pathlib import Path
 import importlib.util
+import os
 import tempfile
 import time
 import unittest
@@ -32,6 +33,7 @@ class SnapshotAndFailureLogs(unittest.TestCase):
             since = time.time_ns()
             fresh = root / "verification/proof-only-joint.log"
             fresh.write_text("actual failure diagnostic")
+            os.utime(fresh, ns=(since + 1_000_000, since + 1_000_000))
             state = {"proofs": {"status": "failed"}, "proof_attempt_started_ns": since}
             result = MODULE.export_results(root, reports, state)
             with zipfile.ZipFile(result) as archive:

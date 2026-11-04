@@ -1,0 +1,44 @@
+{
+  "purpose": "Public development evaluation; not an official or hidden-test score",
+  "packages": {
+    "arc-agi": "0.9.9",
+    "arcengine": "0.9.3",
+    "numpy": "2.5.4"
+  },
+  "source_sha256": {
+    "__init__.py": "909aabef74407f47ee65d93853e16c5d2ea791008d5e72840160c6a213ec8272",
+    "agent.py": "67d6bb33081c2007723133f18fed5be51925f85b68d0030d0c49ff02a250f91d",
+    "download.py": "54e749eadffc44d30bb6124437088e0c222226fe81e1fee3d30872f8bc81a563",
+    "evaluate.py": "ea8fc72339a20958da4155309da0868c69be14f3abe2e51fa36a17ba4c5c57c4",
+    "model.py": "246018452cf36be9efc52cf1c3690ca6d651d6a156c6de2adf1aad3507ed3faa",
+    "perception.py": "eab93dfd7f2242be458abc238819f333a1e519872573136579ecd19d720d771d",
+    "representation.py": "a2b874a0f4c68122646b49404b07d210a6773a958a8238f74a37d12c86934db6",
+    "sdk.py": "a773328ffe6cfb51524ff368154df81d5cb56b8020f7c50d572675afd80dedab",
+    "synthetic.py": "211a9182d0e8146a8ba27201904f05a67686b4033f45df5c46da8f5ce3f1e2ef"
+  },
+  "arguments": {
+    "games": [
+      "ls20",
+      "ft09",
+      "vc33"
+    ],
+    "agents": [
+      "explore"
+    ],
+    "seeds": [
+      3
+    ],
+    "budget": 500,
+    "max_resets": 8,
+    "raw_state": false,
+    "environments": "/workspace/arc3-model/environment_files",
+    "output": "experiments/arc3/runs/existing-explore-final"
+  },
+  "explore_source_sha256": {
+    "explore_agent.py": "63b84788411ab97ee80818a8981573c9677a5fada98a57838c27f91ee482668b",
+    "online.py": "08589dbdaa796491666be7d25d307eef7ac2f03abdd447d53e8cd6e511b9a989",
+    "vendor/explore/compat.py": "82977d664d7fece1cdfd9bcf4b8c67fffd483968616a2d48e93ea5d8f5b09f31",
+    "vendor/explore/heuristic_agent.py": "155110ea11e4700ec580efb6e213aa6815cbc227d45ba4293c1ae67212906e85",
+    "vendor/explore/graph_explorer.py": "cebba2ae380e2ece6cff58ddb91f073cceca487e19e12adeb2dc16ab23a0ea0f"
+  }
+}

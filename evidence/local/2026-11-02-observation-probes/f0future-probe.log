@@ -1,0 +1,6 @@
+'LinearInputF0FutureMinimality.future_of_respects' depends on axioms: [propext, Quot.sound]
+'LinearInputF0FutureMinimality.respects_iff_future_eq' depends on axioms: [propext, Quot.sound]
+'LinearInputF0FutureMinimality.descends_iff_future_eq' depends on axioms: [propext, Quot.sound]
+'LinearInputF0FutureMinimality.encode_eq_iff_observation' depends on axioms: [propext, Quot.sound]
+'LinearInputF0FutureMinimality.representative_future_eq' depends on axioms: [propext, Quot.sound]
+'LinearInputF0FutureMinimality.example_current_equal_future_distinct' depends on axioms: [propext, Quot.sound]

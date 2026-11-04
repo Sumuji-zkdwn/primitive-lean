@@ -1,0 +1,122 @@
+"""Independent finite tests for the F0-derived operator polarity and conjugacy.
+
+Runs over all endomaps on 2, 3 and 4 states. The actual arbitrary-type
+closure theorem is proved separately in StrangeOperatorConjugacy.inc.
+"""
+from itertools import product, permutations
+import json
+
+
+def spike(n, c, a):
+    return tuple(a if x == c else x for x in range(n))
+
+
+def stops(t, s):
+    n = len(t)
+    return any(s[x] != x and s[t[x]] == t[x] for x in range(n))
+
+
+def compose(s, t):
+    return tuple(s[t[x]] for x in range(len(s)))
+
+
+def breaks_fiber(k, t):
+    return any(k[x] == k[y] and k[t[x]] != k[t[y]]
+               for x in range(len(k)) for y in range(len(k)))
+
+
+def conjugate(p, s):
+    inverse = tuple(p.index(x) for x in range(len(p)))
+    return tuple(p[s[inverse[x]]] for x in range(len(p)))
+
+
+def polar_pair(n, seed):
+    ops = tuple(product(range(n), repeat=n))
+    actors = frozenset(t for t in ops if all(stops(t, s) for s in seed))
+    closed = frozenset(s for s in ops if all(stops(t, s) for t in actors))
+    return ops, actors, closed
+
+
+def main():
+    record = {}
+    for n in (2, 3, 4):
+        c, a = 1, 0
+        k = spike(n, c, a)
+        ops, actors, closed = polar_pair(n, (k,))
+        expected_actors = frozenset(t for t in ops if t[c] != c)
+        expected_closure = frozenset(spike(n, c, b) for b in range(n) if b != c)
+        stabilizer = [p for p in permutations(range(n)) if p[c] == c]
+        conjugacy_orbit = frozenset(conjugate(p, k) for p in stabilizer)
+        assert actors == expected_actors
+        assert closed == expected_closure
+        assert closed == conjugacy_orbit
+        assert stops(k, k)
+        for source in range(n):
+            if source == c:
+                continue
+            for target in range(n):
+                if target == c:
+                    continue
+                first, second = spike(n, c, source), spike(n, c, target)
+                assert compose(first, second) == second
+                assert stops(first, second)
+                assert breaks_fiber(first, second) == (source != target)
+
+        record[n] = {
+            "endomaps": len(ops),
+            "polar": len(actors),
+            "closure": sorted(closed),
+            "stabilizer_orbit": len(conjugacy_orbit),
+            "right_zero_and_breaking": True,
+        }
+
+    n = 3
+    ops, actors, closed = polar_pair(n, (spike(n, 1, 0),))
+    k = spike(n, 1, 0)
+    kp = spike(n, 1, 2)
+    bad = (0, 2, 0)
+    assert k == (0, 0, 2)
+    assert kp == (0, 2, 2)
+    assert breaks_fiber(k, bad)
+    assert not breaks_fiber(k, k)
+    assert closed == frozenset((k, kp))
+    constant_zero = (0, 0, 0)
+    delayed_zero = (0, 0, 1)
+    assert compose(constant_zero, constant_zero) == constant_zero
+    assert compose(delayed_zero, delayed_zero) != delayed_zero
+    assert delayed_zero in polar_pair(3, (constant_zero,))[2]
+    assert all(delayed_zero != conjugate(p, constant_zero)
+               for p in permutations(range(3)))
+    assert conjugate((2, 1, 0), k) == kp
+    assert all(
+        stops(t, s) == stops(conjugate(p, t), conjugate(p, s))
+        for p in permutations(range(3))
+        for t in ops for s in ops
+    )
+    assert frozenset(s for s in ops if all(stops(t, s) for t in actors)) == closed
+    empty_closure = polar_pair(3, tuple())[2]
+    assert not empty_closure
+    assert not {t for t in ops if all(stops(t, s) for s in actors)}
+    # Every one of the 27 singleton closures depends ONLY on its fixed set.
+    for s in ops:
+        fixed = frozenset(x for x in range(3) if s[x] == x)
+        expected = frozenset(ops) if len(fixed) in (0, 3) else frozenset(
+            u for u in ops
+            if frozenset(x for x in range(3) if u[x] == x) == fixed
+        )
+        assert polar_pair(3, (s,))[2] == expected
+    assert all(
+        a_set <= polar_pair(3, a_set)[2]
+        for a_set in (frozenset(), *(frozenset((x,)) for x in ops))
+    )
+    print(json.dumps({
+        "passed": True,
+        "checked_n": [2, 3, 4],
+        "results": record,
+        "three_state_conjugacy_invariance": True,
+        "scope": "exact exhaustive Python enumeration, with separate general Lean proofs",
+    }, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

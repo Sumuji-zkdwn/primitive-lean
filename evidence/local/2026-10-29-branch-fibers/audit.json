@@ -1,0 +1,706 @@
+{
+  "timestamp_utc": "2026-10-29T14:43:19.282919+00:00",
+  "passed": true,
+  "base_commit": "986d8cdfd09e8c1cef01b8c2fa9b1b9a702c1991",
+  "entry_point": "python -B -X utf8 tools/verify.py --proof-only",
+  "stage_seconds": 126.099,
+  "clean_project_build": false,
+  "version": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "theorem_count": 603,
+  "declaration_count": 675,
+  "axioms_audited": 675,
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "pinned_dependencies": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "pinned_dependencies_after": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "preserved_proof_file_count": 68,
+  "preserved_proof_files": [
+    {
+      "file": "lean/Elastica/AffineEquivalence.lean",
+      "git_blob_sha256": "5c1b4b92292a98200c5fda9e010e3b9083990523011f70c2de93977f5bad8d6b",
+      "worktree_sha256": "bf9c45a6164843a908678e81820c452cbe93f2d46051b6044d3638ee63fb0e11",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/CombinedConsequences.lean",
+      "git_blob_sha256": "89c1dd68142e6d45dcf2af1a5eadf8860dc8b757327a658dc237ac7559a7b7b2",
+      "worktree_sha256": "b53b1f54e1a31762240dfa90a4410ee48f9fd16ee9598fa1d73e514032b975dd",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Composition.lean",
+      "git_blob_sha256": "3834475a1b41cd6f1c89bb2c50c77e9701d6e7cb78aec740d0fe85476574879b",
+      "worktree_sha256": "3ecc1a200d2e89dd9f9cd850d558a8b1165a5033485f71093651b592f0de27c1",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ConstrainedSecondVariation.lean",
+      "git_blob_sha256": "0f6fef7f9a1b625f1662e77d413c6797415ac35d09ba31b59fb914f04dd8b01d",
+      "worktree_sha256": "579f2cfb2fc5ce4f976e1c3e7d9fc335d2dcf056b5fae027374404106e46d105",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ConstraintRegularity.lean",
+      "git_blob_sha256": "cbc7af0cb4815acda77a7d363f716c7da0df0987ec7f665d18cc26003f9808fe",
+      "worktree_sha256": "a62148952a14db35def7c5d7d9d262301d5e517bed3b8733d6f7d37b6140cdfa",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Derivation.lean",
+      "git_blob_sha256": "760d16e7cd7106cdd48951721ea187fae6a79110a8d5ba665e50634a478c98dc",
+      "worktree_sha256": "6ad48113be3fc0527137e7caa1cfc631f8a32f8090e016cb938d583d9f3c4573",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Equations.lean",
+      "git_blob_sha256": "588563ce3b56c21eebfcfb9df36e8ad5b0e052897e689b6f90f673e75f6419fa",
+      "worktree_sha256": "3344aad3d6a65b3d9d91196f3060edfd0c4f62c0a7b9e6d451acd2cbb27ab683",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ExactVariation.lean",
+      "git_blob_sha256": "76a8b04f8b8e05f4c876e5cd02968995e0b839cf1fff56fcdd46c62dd290cdbb",
+      "worktree_sha256": "9d0990c527af046453fc3562503b7b38830b6e093e0fcc6c65b1df74876069f1",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Examples.lean",
+      "git_blob_sha256": "c39ef5221465496305f9af9b62edd39d86d947dc5e7468e59a893a95398f4356",
+      "worktree_sha256": "a87da02f2de48b431737370d1b77248a56727505538a6b9d17948f66ea9327e0",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ExponentialWeight.lean",
+      "git_blob_sha256": "0bf9e3d2c0f22ef7034dd87deac7baafe14ad7c83b113d815e22d81b7e8268ab",
+      "worktree_sha256": "e1c680b27dd1b887a3cc784348f918e5543623795acd90a60c15ae65e46a9b6b",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Geometry.lean",
+      "git_blob_sha256": "5a7d021116a5ecc099f33f2cf4fbfc2189ff2b8053aa3065a10d4fcc4a1bdece",
+      "worktree_sha256": "3a59ad97c777e7735640f635827d04cfe92d4ca47b9b34e84cc83de95846a4ee",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/LocalMinimum.lean",
+      "git_blob_sha256": "b838b5c6291f8de3df85bf5fbe61ff0f83c19b596e259d07460d3d912411330c",
+      "worktree_sha256": "8cc4c34a2ba43a59703e88bcf2e43e93e370a7c5ec9e41c105de236752f7c5f1",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/MinimumConditions.lean",
+      "git_blob_sha256": "2e1fac501040dd0dd2fd009040cd8119be2464328c1605d940eb5ca6d4876a53",
+      "worktree_sha256": "be9e3c77486395bbffcdf728f4375b45767e93a9c79a75b654153dcee562ae7c",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/PowerLogResponse.lean",
+      "git_blob_sha256": "4c8cf9238a2752d78a3cde207f4aea97c8649259a5e3bca8baa70b02abe560da",
+      "worktree_sha256": "d92b4d9ff29b1f6e272a37f8b81a4146886a59fcf053f05a14c765e4aa758801",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Reconstruction.lean",
+      "git_blob_sha256": "20e2c467cfabcad9e2d11669e75f2183b216a1effe090bcf58290a238d21a297",
+      "worktree_sha256": "0c5bb97cf3386c7175132768a955ac62f2e665d35de2ba6b43372f9dc81b882b",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ReplacementConsequences.lean",
+      "git_blob_sha256": "f0a4fa40e6faffc640a26a9b1d3101d795c416add5cf0c70219bc811b6dc8d80",
+      "worktree_sha256": "7005ace260ad5d84219540434d568826e17bbc7afa40bbe55b30d73b6ab65f16",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ScalarMinimum.lean",
+      "git_blob_sha256": "c372ccc55c7eff747c13d51f464f0c4c4003bd23e350c68f113022e32f99a789",
+      "worktree_sha256": "5f5f641c0d720b8a5255fd233b4c7a6392dfe7f04fde49c2d4250038a66ee80f",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Scaling.lean",
+      "git_blob_sha256": "b7c8078c62baf4e297d40db237dff1d71ec4245fc4f8cc812d4432735de254b8",
+      "worktree_sha256": "c8e152f23de6af8292056ef31291cec1bbc757fbe93da8db27b293e2e6e82bf7",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/ScalingMinima.lean",
+      "git_blob_sha256": "6e7dc809acc1ebc49232c2500419a538b3012703df9cf5c9d0318a26600ef570",
+      "worktree_sha256": "522b0e670949f738b99bfd42b544c73477a4c77decb556c24de4d553f9552560",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/SecondVariation.lean",
+      "git_blob_sha256": "2b592aedc1f4ec119196ac6a4ad04ff2376a3521d5f1276c014946d3b60bfcbf",
+      "worktree_sha256": "32273f21f4375786b617f2d7d56ed34694aa2b9637f02ff8075ff08a6a49ea55",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Stationary.lean",
+      "git_blob_sha256": "fa36841f118f4500eff1dcb3ac7503c8a31cc0bf6a87909f0cb601587943d729",
+      "worktree_sha256": "8c2603f38147b09e82893184f1c72dadd1af3ff770c880963733b2e711fc7ba6",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/StraightConstraint.lean",
+      "git_blob_sha256": "93cd7f280bb2f9bf28727dcc6fc474496f8f37e8db09b2cd04a995e32c0af66e",
+      "worktree_sha256": "a0084d7fdd3031de1ec86b871a94da7b23605282376c9b2e003eef68571e1c37",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/Variation.lean",
+      "git_blob_sha256": "0816fa64e6d6b63c4cb8faa13114586f06a17928d2b948738e68c08276263e5f",
+      "worktree_sha256": "7a2a130d5d5ad211ef120744dc410a83321497b3c546a8dc998d5a5ea1b36d48",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "lean/Elastica/WeightResponse.lean",
+      "git_blob_sha256": "10e2084516c9e98d1b3f12feed1b0cd56c4dc9780056e3a0284fa9623f8ec60d",
+      "worktree_sha256": "b22bfc10f08dff4740b98a3d0ab9a8b32ba20fb43969248cecd59932fa017dcf",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/AreaExactVariation.inc",
+      "git_blob_sha256": "3c51bc3a0dd811b8f6c7ae0f0ce7c75aca9f7704a5852db6c89bbd7d76c8f1e9",
+      "worktree_sha256": "6ca6c4136b3105e5676aa0b69b52411b1ebd3c828936cb6eb971d9f5a5e043b4",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/AreaFamily.inc",
+      "git_blob_sha256": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+      "worktree_sha256": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/AreaMinimum.inc",
+      "git_blob_sha256": "6495ef140babfc06ab718b5d19f9567d939fdbc1d9d2aca4edd11a60eceb9afd",
+      "worktree_sha256": "04e23d908b7b44cb25cd7cdd4bb645a74b8f7df5ed33a2c50cc1467411be6ded",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/AreaParameters.inc",
+      "git_blob_sha256": "e23141b25aa88c8c7f9f4075327b317e28813aee3a652c07c4f0dfdfea36978b",
+      "worktree_sha256": "39f3d5aa510ceb227efca3353c4fc3d6521913f16f3de325bf6975076eddf73c",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/AreaRegularity.inc",
+      "git_blob_sha256": "5c7f22565f41884dfa56ee2236b083bf01940fae92a71a828cc72289c9a837a6",
+      "worktree_sha256": "a9f5ef622b17782ee94334bbe24333b424c9af780aca4e1c6707818a1ffa88b1",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/AreaVariation.inc",
+      "git_blob_sha256": "0c6a571742fe0add0488fc917124dcfbb727c29cd1aa0e1881f82944743a60bb",
+      "worktree_sha256": "3fc2544d624d1fe2f6808f2613196cd4345558561fe3447578256fa75b95c8c9",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/BranchForgetting.inc",
+      "git_blob_sha256": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+      "worktree_sha256": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/Calculus.lean",
+      "git_blob_sha256": "6adc1633283e928968d877db17ca58b647cf913d2ee68f41043e77a3fecc629a",
+      "worktree_sha256": "d901f0e4d4f191a0c594eb71e10325a5f2d16294eb802071d8df2e11f3207417",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Coercivity.inc",
+      "git_blob_sha256": "a1e6fd5b4b5278e8feb891bd6acdaf62774b01b21f5fbdd72079f94eb5317947",
+      "worktree_sha256": "eb9741ca6451447fc4acd3fa2dc958c7c0b323e1e5322b78b59ed382d8a7487a",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/CompactLocalExistence.inc",
+      "git_blob_sha256": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+      "worktree_sha256": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/Consequences.inc",
+      "git_blob_sha256": "b63d8fc479da5ae18bc0efa84bc4b99737f5e64ca64c7e733e82c566fe531ef6",
+      "worktree_sha256": "4a7ad55a8f200a76e95f6a1ff57470b82624ad131520ad9208cc26ab3a60b3b7",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Constraints.inc",
+      "git_blob_sha256": "3f749b971efc58d0f4451c66c7eff38dcaf5bc37642a531225121931da528546",
+      "worktree_sha256": "3df2ac7191b192435081880cc846bdf6699aa9ea1a9a5f2da48c443d0e578299",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/CoupledConsequences.inc",
+      "git_blob_sha256": "370e8c125c0f0cef840398ececf6137f15d9665176fb18d76410588aadeb7db6",
+      "worktree_sha256": "0b60dd162314e4e707132d108bf474e8ea2073d03e6ed168ceecdc628aa4bcbf",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/CoupledTrajectory.inc",
+      "git_blob_sha256": "e575924d3694a4cabaecde04a9f31266ed4a640e5d01c6ef1843de804653f70a",
+      "worktree_sha256": "5f2ade9f13470ed39bac60a105bb4c5e594805ee82f6b2fa7a434ded8cb18f18",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/CurvatureBridge.inc",
+      "git_blob_sha256": "d23bc45b8bcd06650b3de879fbed45a532a37506cd8126673ea1dcab8189d79f",
+      "worktree_sha256": "71bdd60077c5e6fb8bf4354ab55889b37579c56fadc8ee18636f6cb33ee96f6f",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/CurvatureRigidity.inc",
+      "git_blob_sha256": "b89461438d07ecdfd95c97e1a8f2a61dc6ecf05840808756f04d674d4640d0d5",
+      "worktree_sha256": "c6d797fb5439865dc5b83346572c5ff3722a596a4298df8a7f5cfa133827d433",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Design.lean",
+      "git_blob_sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
+      "worktree_sha256": "135b8ab0a827ac94e6bb47d8f96280ddb04de5159123c37354300a6a2e968e5e",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Dissipation.lean",
+      "git_blob_sha256": "2f98fe11dd728aa08038a1d3e01a9440ba83049b6dd4d3d1561a3dd140aac8e8",
+      "worktree_sha256": "57cd5592be128d7194b517074f6b8ed390b382c9e3fc7f6bfdd870a41e8c91d6",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Feedback.inc",
+      "git_blob_sha256": "9d97c366584d04da3fbdcd63080b2e98a7044f88132d83cfb8d6540002225747",
+      "worktree_sha256": "67ed48dfc1005f925736f1bb91d79013ef8ad70714edf70ea06fb41fa9e87990",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/FiniteBand.inc",
+      "git_blob_sha256": "9d7d506703c5f9e816b3e1c6bd988bad8a697f8d25bbd7a1354b63d420ea18cd",
+      "worktree_sha256": "172831bc32245db02bc250aa6a8d6e5909fa22c9397b6aa85c45d516a2a7043e",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/FiniteInternalUpdate.inc",
+      "git_blob_sha256": "8d919b3d39be880fd82959c7be1ee9dd40e9f5d2d009d70af95bbb7dc8e1b2b9",
+      "worktree_sha256": "c93294ced77816ff3a379e4a99e1212879278d9065825e5d979b7a3d109777a3",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/ForwardUniqueness.inc",
+      "git_blob_sha256": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+      "worktree_sha256": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/GeneralMinimum.inc",
+      "git_blob_sha256": "ce31350415300a6f772521c13d89f61808e4ed4911d7c37f39ac2bafde1987ca",
+      "worktree_sha256": "ca1b0363ba09ef89fbc906dc066b4ac293f5d25b3e2dc526f5984d3ffb7ec2fb",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/GlobalConsequences.inc",
+      "git_blob_sha256": "fd0dbd3ca5030b1cce1151bb5f11c0450b0fba7df6663be000732cdd4b7a1969",
+      "worktree_sha256": "f4220ef9638d825f53d6809158481e080f862fd166a5201e5c965ab0726b89d4",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/GlobalContinuation.inc",
+      "git_blob_sha256": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+      "worktree_sha256": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/GlobalTrajectory.inc",
+      "git_blob_sha256": "67b5494e57c0f9a9b4020486f4ea59468a27001601c2a4b34f84157b3f131ba9",
+      "worktree_sha256": "cae42a0105454fad1a1fb22f3459540104742e0f75c010638e1457e2c690cce0",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Gradient.inc",
+      "git_blob_sha256": "2aab575d80c5eca3871b68ac141b179ef7ab072e071097d3dfe758b13bf96201",
+      "worktree_sha256": "9a2734469dcf1fccf95c075f30d7b60f345f0094226b60c080e3fa8329b06357",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/GradientBound.inc",
+      "git_blob_sha256": "e1468dc3a1d2647923debe57854f0e77c745d88244daf44be2b1b890e8e9a770",
+      "worktree_sha256": "88dcb96b399f980cff2dda62bc6df318c5cfdc1d97ba7af23a750fdaee7ffdad",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/HistorySignature.inc",
+      "git_blob_sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+      "worktree_sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/InternalUpdate.inc",
+      "git_blob_sha256": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+      "worktree_sha256": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/Invariance.inc",
+      "git_blob_sha256": "7ba29d42bdde5903ebb47db238afefe3864fe1ea1580812cb1cbd2f16f5f0465",
+      "worktree_sha256": "d45c1f89978a5a9ad6e72691e37a80119deb28233ad492534d8cd5895df3452f",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/LevelConvergence.inc",
+      "git_blob_sha256": "268cdcb7da22ea5e9ea9529106e1a2f8970b8031cd7e0161073380122ad1de3f",
+      "worktree_sha256": "cccf9fde2109c0d84707c52f2433b822fc587f85b4152e577a7bb2c18a6720c1",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/LevelGeometry.inc",
+      "git_blob_sha256": "69bbfdb3ef02bf3b8c43f9388bda46a3d52bd29519c15752ac0ba84a57b53b63",
+      "worktree_sha256": "219d5c08b9b776156086d489dfc68ce5127d7f3c5c903ee9fa12620f3dcf96fe",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/MainResult.inc",
+      "git_blob_sha256": "7bded7415fafff042a23164fd4f12aa053dd5595e99b878b02e6ca4a5eac45da",
+      "worktree_sha256": "599e2df1cd6e46272bf13d0da1bb8cc5497a09cb0e1c8b8b6ff834fe67cce8bb",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/Observation.lean",
+      "git_blob_sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
+      "worktree_sha256": "137ad99b65363b1249a949d65895ab7a3c9e8b3c72bcf2d1b0852d6493a522cf",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/PressureCurvature.inc",
+      "git_blob_sha256": "4a0365823e7eec686dd940e531987ada928cb0e19ca6901d440745ce9da221b1",
+      "worktree_sha256": "cfaae4ec4789b566e7510c67a172aae341b48fea7a90a611721c366d69c289c6",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/PressureStationary.inc",
+      "git_blob_sha256": "4b95864614e426282726e16fbfe16c06c86f55e563fa1f7085060f606f0d0c83",
+      "worktree_sha256": "9c52cbfc3d30dd26f5012eceed481ba145c1a5a09e0d95bdfaa97ddc05c65ac7",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/QuarticClassification.inc",
+      "git_blob_sha256": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d",
+      "worktree_sha256": "6b3c6eff3acb3ad2c925aa4f7df47fd9526d6bd2462587a930c6c6af6e6f6836",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/RegularBand.inc",
+      "git_blob_sha256": "53d0053d7d4f0bf31eedc9a8e322c246a4b04f495f68c0d418084cc4c77cd6a4",
+      "worktree_sha256": "2daec56dda1b2d2546b1a12ab9cc6f060ccc2069741f7ee752c65fe687b8b1b9",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/StrictEnergy.inc",
+      "git_blob_sha256": "1a701960dd2d6118175f467a55ebf2a6902bac81581496a1dbe59d8d680cba7f",
+      "worktree_sha256": "2eebbe1949955d724ead0b502e0e63fd9d1bb6e73b982dfd75486977ca8bf725",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/SupportComposition.inc",
+      "git_blob_sha256": "0ed4c127f19fcb5eaa9512013a9ead4bcb723455d831c1a371dc62893b04392c",
+      "worktree_sha256": "cd991164b7fba469b5d0a3cc23ce4741fc40e1b2b6e0e2e2a5101796e5330dc6",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/TrajectoryExistence.inc",
+      "git_blob_sha256": "db5f37cc4923fd87063a75abc3ae560cd135ebe7c4d79104bd472f22d2dd53b0",
+      "worktree_sha256": "5cdd32624bb58856c8d0d879fc9e42edbaf5f0130c41b55761bf1368dc55e225",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    },
+    {
+      "file": "linear_input/lean_check/VariablePairObservations.inc",
+      "git_blob_sha256": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35",
+      "worktree_sha256": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35",
+      "same_text_including_spacing": true,
+      "byte_identical": true
+    },
+    {
+      "file": "linear_input/lean_check/VariationalBridge.inc",
+      "git_blob_sha256": "5b7b6619add1121a5245ef40f25b1be960682c8aa8617bb2accd19f10ebffb02",
+      "worktree_sha256": "43372cd11cd244ba9312e6e0583552c0be68964ddf3b131103b0003ce277aac9",
+      "same_text_including_spacing": true,
+      "byte_identical": false
+    }
+  ],
+  "source_hashes": {
+    "lean/Elastica/AffineEquivalence.lean": "bf9c45a6164843a908678e81820c452cbe93f2d46051b6044d3638ee63fb0e11",
+    "lean/Elastica/CombinedConsequences.lean": "b53b1f54e1a31762240dfa90a4410ee48f9fd16ee9598fa1d73e514032b975dd",
+    "lean/Elastica/Composition.lean": "3ecc1a200d2e89dd9f9cd850d558a8b1165a5033485f71093651b592f0de27c1",
+    "lean/Elastica/ConstrainedSecondVariation.lean": "579f2cfb2fc5ce4f976e1c3e7d9fc335d2dcf056b5fae027374404106e46d105",
+    "lean/Elastica/ConstraintRegularity.lean": "a62148952a14db35def7c5d7d9d262301d5e517bed3b8733d6f7d37b6140cdfa",
+    "lean/Elastica/Derivation.lean": "6ad48113be3fc0527137e7caa1cfc631f8a32f8090e016cb938d583d9f3c4573",
+    "lean/Elastica/Equations.lean": "3344aad3d6a65b3d9d91196f3060edfd0c4f62c0a7b9e6d451acd2cbb27ab683",
+    "lean/Elastica/ExactVariation.lean": "9d0990c527af046453fc3562503b7b38830b6e093e0fcc6c65b1df74876069f1",
+    "lean/Elastica/Examples.lean": "a87da02f2de48b431737370d1b77248a56727505538a6b9d17948f66ea9327e0",
+    "lean/Elastica/ExponentialWeight.lean": "e1c680b27dd1b887a3cc784348f918e5543623795acd90a60c15ae65e46a9b6b",
+    "lean/Elastica/Geometry.lean": "3a59ad97c777e7735640f635827d04cfe92d4ca47b9b34e84cc83de95846a4ee",
+    "lean/Elastica/LocalMinimum.lean": "8cc4c34a2ba43a59703e88bcf2e43e93e370a7c5ec9e41c105de236752f7c5f1",
+    "lean/Elastica/MinimumConditions.lean": "be9e3c77486395bbffcdf728f4375b45767e93a9c79a75b654153dcee562ae7c",
+    "lean/Elastica/PowerLogResponse.lean": "d92b4d9ff29b1f6e272a37f8b81a4146886a59fcf053f05a14c765e4aa758801",
+    "lean/Elastica/Reconstruction.lean": "0c5bb97cf3386c7175132768a955ac62f2e665d35de2ba6b43372f9dc81b882b",
+    "lean/Elastica/ReplacementConsequences.lean": "7005ace260ad5d84219540434d568826e17bbc7afa40bbe55b30d73b6ab65f16",
+    "lean/Elastica/ScalarMinimum.lean": "5f5f641c0d720b8a5255fd233b4c7a6392dfe7f04fde49c2d4250038a66ee80f",
+    "lean/Elastica/Scaling.lean": "c8e152f23de6af8292056ef31291cec1bbc757fbe93da8db27b293e2e6e82bf7",
+    "lean/Elastica/ScalingMinima.lean": "522b0e670949f738b99bfd42b544c73477a4c77decb556c24de4d553f9552560",
+    "lean/Elastica/SecondVariation.lean": "32273f21f4375786b617f2d7d56ed34694aa2b9637f02ff8075ff08a6a49ea55",
+    "lean/Elastica/Stationary.lean": "8c2603f38147b09e82893184f1c72dadd1af3ff770c880963733b2e711fc7ba6",
+    "lean/Elastica/StraightConstraint.lean": "a0084d7fdd3031de1ec86b871a94da7b23605282376c9b2e003eef68571e1c37",
+    "lean/Elastica/Variation.lean": "7a2a130d5d5ad211ef120744dc410a83321497b3c546a8dc998d5a5ea1b36d48",
+    "lean/Elastica/WeightResponse.lean": "b22bfc10f08dff4740b98a3d0ab9a8b32ba20fb43969248cecd59932fa017dcf",
+    "linear_input/lean_check/Design.lean": "135b8ab0a827ac94e6bb47d8f96280ddb04de5159123c37354300a6a2e968e5e",
+    "linear_input/lean_check/Observation.lean": "137ad99b65363b1249a949d65895ab7a3c9e8b3c72bcf2d1b0852d6493a522cf",
+    "linear_input/lean_check/Calculus.lean": "d901f0e4d4f191a0c594eb71e10325a5f2d16294eb802071d8df2e11f3207417",
+    "linear_input/lean_check/Consequences.inc": "4a7ad55a8f200a76e95f6a1ff57470b82624ad131520ad9208cc26ab3a60b3b7",
+    "linear_input/lean_check/Coercivity.inc": "eb9741ca6451447fc4acd3fa2dc958c7c0b323e1e5322b78b59ed382d8a7487a",
+    "linear_input/lean_check/Gradient.inc": "9a2734469dcf1fccf95c075f30d7b60f345f0094226b60c080e3fa8329b06357",
+    "linear_input/lean_check/Dissipation.lean": "57cd5592be128d7194b517074f6b8ed390b382c9e3fc7f6bfdd870a41e8c91d6",
+    "linear_input/lean_check/RegularBand.inc": "2daec56dda1b2d2546b1a12ab9cc6f060ccc2069741f7ee752c65fe687b8b1b9",
+    "linear_input/lean_check/Invariance.inc": "d45c1f89978a5a9ad6e72691e37a80119deb28233ad492534d8cd5895df3452f",
+    "linear_input/lean_check/CurvatureBridge.inc": "71bdd60077c5e6fb8bf4354ab55889b37579c56fadc8ee18636f6cb33ee96f6f",
+    "linear_input/lean_check/VariationalBridge.inc": "43372cd11cd244ba9312e6e0583552c0be68964ddf3b131103b0003ce277aac9",
+    "linear_input/lean_check/Feedback.inc": "67ed48dfc1005f925736f1bb91d79013ef8ad70714edf70ea06fb41fa9e87990",
+    "linear_input/lean_check/Constraints.inc": "3df2ac7191b192435081880cc846bdf6699aa9ea1a9a5f2da48c443d0e578299",
+    "linear_input/lean_check/AreaVariation.inc": "3fc2544d624d1fe2f6808f2613196cd4345558561fe3447578256fa75b95c8c9",
+    "linear_input/lean_check/PressureCurvature.inc": "cfaae4ec4789b566e7510c67a172aae341b48fea7a90a611721c366d69c289c6",
+    "linear_input/lean_check/PressureStationary.inc": "9c52cbfc3d30dd26f5012eceed481ba145c1a5a09e0d95bdfaa97ddc05c65ac7",
+    "linear_input/lean_check/AreaRegularity.inc": "a9f5ef622b17782ee94334bbe24333b424c9af780aca4e1c6707818a1ffa88b1",
+    "linear_input/lean_check/AreaParameters.inc": "39f3d5aa510ceb227efca3353c4fc3d6521913f16f3de325bf6975076eddf73c",
+    "linear_input/lean_check/AreaFamily.inc": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+    "linear_input/lean_check/AreaExactVariation.inc": "6ca6c4136b3105e5676aa0b69b52411b1ebd3c828936cb6eb971d9f5a5e043b4",
+    "linear_input/lean_check/AreaMinimum.inc": "04e23d908b7b44cb25cd7cdd4bb645a74b8f7df5ed33a2c50cc1467411be6ded",
+    "linear_input/lean_check/StrictEnergy.inc": "2eebbe1949955d724ead0b502e0e63fd9d1bb6e73b982dfd75486977ca8bf725",
+    "linear_input/lean_check/GradientBound.inc": "88dcb96b399f980cff2dda62bc6df318c5cfdc1d97ba7af23a750fdaee7ffdad",
+    "linear_input/lean_check/InternalUpdate.inc": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+    "linear_input/lean_check/TrajectoryExistence.inc": "5cdd32624bb58856c8d0d879fc9e42edbaf5f0130c41b55761bf1368dc55e225",
+    "linear_input/lean_check/FiniteBand.inc": "172831bc32245db02bc250aa6a8d6e5909fa22c9397b6aa85c45d516a2a7043e",
+    "linear_input/lean_check/CompactLocalExistence.inc": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+    "linear_input/lean_check/GlobalContinuation.inc": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+    "linear_input/lean_check/GlobalTrajectory.inc": "cae42a0105454fad1a1fb22f3459540104742e0f75c010638e1457e2c690cce0",
+    "linear_input/lean_check/ForwardUniqueness.inc": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+    "linear_input/lean_check/GlobalConsequences.inc": "f4220ef9638d825f53d6809158481e080f862fd166a5201e5c965ab0726b89d4",
+    "linear_input/lean_check/LevelGeometry.inc": "219d5c08b9b776156086d489dfc68ce5127d7f3c5c903ee9fa12620f3dcf96fe",
+    "linear_input/lean_check/FiniteInternalUpdate.inc": "c93294ced77816ff3a379e4a99e1212879278d9065825e5d979b7a3d109777a3",
+    "linear_input/lean_check/CoupledTrajectory.inc": "5f2ade9f13470ed39bac60a105bb4c5e594805ee82f6b2fa7a434ded8cb18f18",
+    "linear_input/lean_check/LevelConvergence.inc": "cccf9fde2109c0d84707c52f2433b822fc587f85b4152e577a7bb2c18a6720c1",
+    "linear_input/lean_check/CoupledConsequences.inc": "0b60dd162314e4e707132d108bf474e8ea2073d03e6ed168ceecdc628aa4bcbf",
+    "linear_input/lean_check/All.lean": "0a6e24be5624cdb3df5f6009e463de55d76896b39b1b7c82d44b8fdef1a31962",
+    "lean/Elastica.lean": "53c3bf443e011e10d2b06947e224101439c19a553c872d9e03d6ebce07122533",
+    "lean/lean-toolchain": "4ffb62ce8c8f7ebaff1c1e98c5d36fd60956fb6c9a55d66d8c75ceaae9e96507",
+    "lean/lakefile.toml": "edbf2635f45ad75671a20a5cdf7f722204d9dd16287f5bfb0b77b7d16f5aca28",
+    "lean/lake-manifest.json": "83c95e6e42dd72a65bf1e23405a5217801cdb3ad322d2fa464b86e7da6a3ea85",
+    "linear_input/verify_lean.py": "44e8c100639d3b40b2c3580fc6125667fd2ade35d04fb4a28bdd78c9584f4ec1",
+    "linear_input/lean_check/MainResult.inc": "599e2df1cd6e46272bf13d0da1bb8cc5497a09cb0e1c8b8b6ff834fe67cce8bb",
+    "linear_input/lean_check/GeneralMinimum.inc": "ca1b0363ba09ef89fbc906dc066b4ac293f5d25b3e2dc526f5984d3ffb7ec2fb",
+    "linear_input/lean_check/SupportComposition.inc": "cd991164b7fba469b5d0a3cc23ce4741fc40e1b2b6e0e2e2a5101796e5330dc6",
+    "linear_input/lean_check/QuarticClassification.inc": "6b3c6eff3acb3ad2c925aa4f7df47fd9526d6bd2462587a930c6c6af6e6f6836",
+    "linear_input/lean_check/CurvatureRigidity.inc": "c6d797fb5439865dc5b83346572c5ff3722a596a4298df8a7f5cfa133827d433",
+    "linear_input/lean_check/HistorySignature.inc": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+    "linear_input/lean_check/BranchForgetting.inc": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+    "linear_input/lean_check/VariablePairObservations.inc": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35",
+    "linear_input/lean_check/BranchFibers.inc": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
+    "linear_input/lean_results.json": "5d8eeb7e975da5de5e5baec91dee5e698237a08a1d1d9d4ccaea3e26ca9a93de",
+    "linear_input/lean_check/MainResult.lean": "41c151e96a8145395f76a2bafd3678570595d6e9ba401f799fe4850bd250b3d5",
+    "tools/verify_main_result.py": "e6be26d8006de01e7dbcfe9669fb5ae9e22b672df9ee6564a0cc7007222ea39f",
+    "tools/verify.py": "ff6d870137ea295f5065df84ee9ced846bc4bf3bb1bab6169a51f57306bcff2b",
+    "tools/check_delivery.py": "73d07fed611de15a8b571a1e3eb74e1fd203374d0834cd1de3b608dbbf2b5c49"
+  },
+  "evidence_sha256": {
+    "elastica-build.log": "22a0f504df424df17b9ed1c840f1983d65127bff09d9ce7d239822d47a73ebc6",
+    "joint.json": "5d8eeb7e975da5de5e5baec91dee5e698237a08a1d1d9d4ccaea3e26ca9a93de",
+    "joint.log": "3f959445a102086a70e22c7f613a62b4abf13c3e88b125a3369b828ad257fd6d",
+    "main-result.json": "29543a05561b3bc4745c02e6752d743acb468e5317bafdb54fddc4940386a154",
+    "main-result.log": "4dae47043cb5265939789e56a19f2ddb93b740f87a94a7063ed47370ce7a7217",
+    "proof-only.json": "84f7846dd09b011a24b6241004a3dd433895bd3d9c3a45d7152dfdd26c359f97"
+  },
+  "warnings": [],
+  "not_covered": [
+    "Targets outside [-1,1]",
+    "A base-three encoding of branch words",
+    "Identification with a separate K,S,C transition system",
+    "Bayesian extensions",
+    "Human prediction and ARC performance"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "timestamp_utc": "2026-10-27T14:32:19.562252+00:00",
+  "passed": true,
+  "source_audit": {
+    "passed": true,
+    "errors": [],
+    "sources": 61,
+    "theorems": 475,
+    "ref": "318bff1f75ea8aa59a7c85b86c164765518f7463",
+    "scope": "Source blob identities and inventory counts only; not proof verification"
+  },
+  "tests_exit_code": 0,
+  "test_output": "........................................................................ [ 45%]\n........................................................................ [ 90%]\n................                                                         [100%]\n160 passed in 0.79s\n",
+  "lean_rechecked": false,
+  "games_rerun": false
+}

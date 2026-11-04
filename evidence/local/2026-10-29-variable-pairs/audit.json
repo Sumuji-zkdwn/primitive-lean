@@ -1,0 +1,606 @@
+{
+  "schema": "primitive-local-proof-audit-v1",
+  "passed": true,
+  "checked_utc": "2026-10-29T12:15:47.708709+00:00",
+  "base_commit": "a53100f2cb25f74c6b4a4d421b493d43e186b7c6",
+  "scope": "Fresh Lean build/joint/supplement checks, all declaration axiom audit, source hashes, and Git baseline proof preservation",
+  "theorem_count": 563,
+  "declaration_count": 628,
+  "added_theorems": 43,
+  "added_definitions": 13,
+  "prior_proof_sources": 67,
+  "preserved_files": [
+    {
+      "path": "lean/Elastica/AffineEquivalence.lean",
+      "working_sha256": "bf9c45a6164843a908678e81820c452cbe93f2d46051b6044d3638ee63fb0e11",
+      "git_sha256": "5c1b4b92292a98200c5fda9e010e3b9083990523011f70c2de93977f5bad8d6b",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/CombinedConsequences.lean",
+      "working_sha256": "b53b1f54e1a31762240dfa90a4410ee48f9fd16ee9598fa1d73e514032b975dd",
+      "git_sha256": "89c1dd68142e6d45dcf2af1a5eadf8860dc8b757327a658dc237ac7559a7b7b2",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Composition.lean",
+      "working_sha256": "3ecc1a200d2e89dd9f9cd850d558a8b1165a5033485f71093651b592f0de27c1",
+      "git_sha256": "3834475a1b41cd6f1c89bb2c50c77e9701d6e7cb78aec740d0fe85476574879b",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ConstrainedSecondVariation.lean",
+      "working_sha256": "579f2cfb2fc5ce4f976e1c3e7d9fc335d2dcf056b5fae027374404106e46d105",
+      "git_sha256": "0f6fef7f9a1b625f1662e77d413c6797415ac35d09ba31b59fb914f04dd8b01d",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ConstraintRegularity.lean",
+      "working_sha256": "a62148952a14db35def7c5d7d9d262301d5e517bed3b8733d6f7d37b6140cdfa",
+      "git_sha256": "cbc7af0cb4815acda77a7d363f716c7da0df0987ec7f665d18cc26003f9808fe",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Derivation.lean",
+      "working_sha256": "6ad48113be3fc0527137e7caa1cfc631f8a32f8090e016cb938d583d9f3c4573",
+      "git_sha256": "760d16e7cd7106cdd48951721ea187fae6a79110a8d5ba665e50634a478c98dc",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Equations.lean",
+      "working_sha256": "3344aad3d6a65b3d9d91196f3060edfd0c4f62c0a7b9e6d451acd2cbb27ab683",
+      "git_sha256": "588563ce3b56c21eebfcfb9df36e8ad5b0e052897e689b6f90f673e75f6419fa",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ExactVariation.lean",
+      "working_sha256": "9d0990c527af046453fc3562503b7b38830b6e093e0fcc6c65b1df74876069f1",
+      "git_sha256": "76a8b04f8b8e05f4c876e5cd02968995e0b839cf1fff56fcdd46c62dd290cdbb",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Examples.lean",
+      "working_sha256": "a87da02f2de48b431737370d1b77248a56727505538a6b9d17948f66ea9327e0",
+      "git_sha256": "c39ef5221465496305f9af9b62edd39d86d947dc5e7468e59a893a95398f4356",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ExponentialWeight.lean",
+      "working_sha256": "e1c680b27dd1b887a3cc784348f918e5543623795acd90a60c15ae65e46a9b6b",
+      "git_sha256": "0bf9e3d2c0f22ef7034dd87deac7baafe14ad7c83b113d815e22d81b7e8268ab",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Geometry.lean",
+      "working_sha256": "3a59ad97c777e7735640f635827d04cfe92d4ca47b9b34e84cc83de95846a4ee",
+      "git_sha256": "5a7d021116a5ecc099f33f2cf4fbfc2189ff2b8053aa3065a10d4fcc4a1bdece",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/LocalMinimum.lean",
+      "working_sha256": "8cc4c34a2ba43a59703e88bcf2e43e93e370a7c5ec9e41c105de236752f7c5f1",
+      "git_sha256": "b838b5c6291f8de3df85bf5fbe61ff0f83c19b596e259d07460d3d912411330c",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/MinimumConditions.lean",
+      "working_sha256": "be9e3c77486395bbffcdf728f4375b45767e93a9c79a75b654153dcee562ae7c",
+      "git_sha256": "2e1fac501040dd0dd2fd009040cd8119be2464328c1605d940eb5ca6d4876a53",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/PowerLogResponse.lean",
+      "working_sha256": "d92b4d9ff29b1f6e272a37f8b81a4146886a59fcf053f05a14c765e4aa758801",
+      "git_sha256": "4c8cf9238a2752d78a3cde207f4aea97c8649259a5e3bca8baa70b02abe560da",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Reconstruction.lean",
+      "working_sha256": "0c5bb97cf3386c7175132768a955ac62f2e665d35de2ba6b43372f9dc81b882b",
+      "git_sha256": "20e2c467cfabcad9e2d11669e75f2183b216a1effe090bcf58290a238d21a297",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ReplacementConsequences.lean",
+      "working_sha256": "7005ace260ad5d84219540434d568826e17bbc7afa40bbe55b30d73b6ab65f16",
+      "git_sha256": "f0a4fa40e6faffc640a26a9b1d3101d795c416add5cf0c70219bc811b6dc8d80",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ScalarMinimum.lean",
+      "working_sha256": "5f5f641c0d720b8a5255fd233b4c7a6392dfe7f04fde49c2d4250038a66ee80f",
+      "git_sha256": "c372ccc55c7eff747c13d51f464f0c4c4003bd23e350c68f113022e32f99a789",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Scaling.lean",
+      "working_sha256": "c8e152f23de6af8292056ef31291cec1bbc757fbe93da8db27b293e2e6e82bf7",
+      "git_sha256": "b7c8078c62baf4e297d40db237dff1d71ec4245fc4f8cc812d4432735de254b8",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/ScalingMinima.lean",
+      "working_sha256": "522b0e670949f738b99bfd42b544c73477a4c77decb556c24de4d553f9552560",
+      "git_sha256": "6e7dc809acc1ebc49232c2500419a538b3012703df9cf5c9d0318a26600ef570",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/SecondVariation.lean",
+      "working_sha256": "32273f21f4375786b617f2d7d56ed34694aa2b9637f02ff8075ff08a6a49ea55",
+      "git_sha256": "2b592aedc1f4ec119196ac6a4ad04ff2376a3521d5f1276c014946d3b60bfcbf",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Stationary.lean",
+      "working_sha256": "8c2603f38147b09e82893184f1c72dadd1af3ff770c880963733b2e711fc7ba6",
+      "git_sha256": "fa36841f118f4500eff1dcb3ac7503c8a31cc0bf6a87909f0cb601587943d729",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/StraightConstraint.lean",
+      "working_sha256": "a0084d7fdd3031de1ec86b871a94da7b23605282376c9b2e003eef68571e1c37",
+      "git_sha256": "93cd7f280bb2f9bf28727dcc6fc474496f8f37e8db09b2cd04a995e32c0af66e",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/Variation.lean",
+      "working_sha256": "7a2a130d5d5ad211ef120744dc410a83321497b3c546a8dc998d5a5ea1b36d48",
+      "git_sha256": "0816fa64e6d6b63c4cb8faa13114586f06a17928d2b948738e68c08276263e5f",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica/WeightResponse.lean",
+      "working_sha256": "b22bfc10f08dff4740b98a3d0ab9a8b32ba20fb43969248cecd59932fa017dcf",
+      "git_sha256": "10e2084516c9e98d1b3f12feed1b0cd56c4dc9780056e3a0284fa9623f8ec60d",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/AreaExactVariation.inc",
+      "working_sha256": "6ca6c4136b3105e5676aa0b69b52411b1ebd3c828936cb6eb971d9f5a5e043b4",
+      "git_sha256": "3c51bc3a0dd811b8f6c7ae0f0ce7c75aca9f7704a5852db6c89bbd7d76c8f1e9",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/AreaFamily.inc",
+      "working_sha256": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+      "git_sha256": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/AreaMinimum.inc",
+      "working_sha256": "04e23d908b7b44cb25cd7cdd4bb645a74b8f7df5ed33a2c50cc1467411be6ded",
+      "git_sha256": "6495ef140babfc06ab718b5d19f9567d939fdbc1d9d2aca4edd11a60eceb9afd",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/AreaParameters.inc",
+      "working_sha256": "39f3d5aa510ceb227efca3353c4fc3d6521913f16f3de325bf6975076eddf73c",
+      "git_sha256": "e23141b25aa88c8c7f9f4075327b317e28813aee3a652c07c4f0dfdfea36978b",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/AreaRegularity.inc",
+      "working_sha256": "a9f5ef622b17782ee94334bbe24333b424c9af780aca4e1c6707818a1ffa88b1",
+      "git_sha256": "5c7f22565f41884dfa56ee2236b083bf01940fae92a71a828cc72289c9a837a6",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/AreaVariation.inc",
+      "working_sha256": "3fc2544d624d1fe2f6808f2613196cd4345558561fe3447578256fa75b95c8c9",
+      "git_sha256": "0c6a571742fe0add0488fc917124dcfbb727c29cd1aa0e1881f82944743a60bb",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/BranchForgetting.inc",
+      "working_sha256": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+      "git_sha256": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/Calculus.lean",
+      "working_sha256": "d901f0e4d4f191a0c594eb71e10325a5f2d16294eb802071d8df2e11f3207417",
+      "git_sha256": "6adc1633283e928968d877db17ca58b647cf913d2ee68f41043e77a3fecc629a",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Coercivity.inc",
+      "working_sha256": "eb9741ca6451447fc4acd3fa2dc958c7c0b323e1e5322b78b59ed382d8a7487a",
+      "git_sha256": "a1e6fd5b4b5278e8feb891bd6acdaf62774b01b21f5fbdd72079f94eb5317947",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/CompactLocalExistence.inc",
+      "working_sha256": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+      "git_sha256": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/Consequences.inc",
+      "working_sha256": "4a7ad55a8f200a76e95f6a1ff57470b82624ad131520ad9208cc26ab3a60b3b7",
+      "git_sha256": "b63d8fc479da5ae18bc0efa84bc4b99737f5e64ca64c7e733e82c566fe531ef6",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Constraints.inc",
+      "working_sha256": "3df2ac7191b192435081880cc846bdf6699aa9ea1a9a5f2da48c443d0e578299",
+      "git_sha256": "3f749b971efc58d0f4451c66c7eff38dcaf5bc37642a531225121931da528546",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/CoupledConsequences.inc",
+      "working_sha256": "0b60dd162314e4e707132d108bf474e8ea2073d03e6ed168ceecdc628aa4bcbf",
+      "git_sha256": "370e8c125c0f0cef840398ececf6137f15d9665176fb18d76410588aadeb7db6",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/CoupledTrajectory.inc",
+      "working_sha256": "5f2ade9f13470ed39bac60a105bb4c5e594805ee82f6b2fa7a434ded8cb18f18",
+      "git_sha256": "e575924d3694a4cabaecde04a9f31266ed4a640e5d01c6ef1843de804653f70a",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/CurvatureBridge.inc",
+      "working_sha256": "71bdd60077c5e6fb8bf4354ab55889b37579c56fadc8ee18636f6cb33ee96f6f",
+      "git_sha256": "d23bc45b8bcd06650b3de879fbed45a532a37506cd8126673ea1dcab8189d79f",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/CurvatureRigidity.inc",
+      "working_sha256": "c6d797fb5439865dc5b83346572c5ff3722a596a4298df8a7f5cfa133827d433",
+      "git_sha256": "b89461438d07ecdfd95c97e1a8f2a61dc6ecf05840808756f04d674d4640d0d5",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Design.lean",
+      "working_sha256": "135b8ab0a827ac94e6bb47d8f96280ddb04de5159123c37354300a6a2e968e5e",
+      "git_sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Dissipation.lean",
+      "working_sha256": "57cd5592be128d7194b517074f6b8ed390b382c9e3fc7f6bfdd870a41e8c91d6",
+      "git_sha256": "2f98fe11dd728aa08038a1d3e01a9440ba83049b6dd4d3d1561a3dd140aac8e8",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Feedback.inc",
+      "working_sha256": "67ed48dfc1005f925736f1bb91d79013ef8ad70714edf70ea06fb41fa9e87990",
+      "git_sha256": "9d97c366584d04da3fbdcd63080b2e98a7044f88132d83cfb8d6540002225747",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/FiniteBand.inc",
+      "working_sha256": "172831bc32245db02bc250aa6a8d6e5909fa22c9397b6aa85c45d516a2a7043e",
+      "git_sha256": "9d7d506703c5f9e816b3e1c6bd988bad8a697f8d25bbd7a1354b63d420ea18cd",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/FiniteInternalUpdate.inc",
+      "working_sha256": "c93294ced77816ff3a379e4a99e1212879278d9065825e5d979b7a3d109777a3",
+      "git_sha256": "8d919b3d39be880fd82959c7be1ee9dd40e9f5d2d009d70af95bbb7dc8e1b2b9",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/ForwardUniqueness.inc",
+      "working_sha256": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+      "git_sha256": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/GeneralMinimum.inc",
+      "working_sha256": "ca1b0363ba09ef89fbc906dc066b4ac293f5d25b3e2dc526f5984d3ffb7ec2fb",
+      "git_sha256": "ce31350415300a6f772521c13d89f61808e4ed4911d7c37f39ac2bafde1987ca",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/GlobalConsequences.inc",
+      "working_sha256": "f4220ef9638d825f53d6809158481e080f862fd166a5201e5c965ab0726b89d4",
+      "git_sha256": "fd0dbd3ca5030b1cce1151bb5f11c0450b0fba7df6663be000732cdd4b7a1969",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/GlobalContinuation.inc",
+      "working_sha256": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+      "git_sha256": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/GlobalTrajectory.inc",
+      "working_sha256": "cae42a0105454fad1a1fb22f3459540104742e0f75c010638e1457e2c690cce0",
+      "git_sha256": "67b5494e57c0f9a9b4020486f4ea59468a27001601c2a4b34f84157b3f131ba9",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Gradient.inc",
+      "working_sha256": "9a2734469dcf1fccf95c075f30d7b60f345f0094226b60c080e3fa8329b06357",
+      "git_sha256": "2aab575d80c5eca3871b68ac141b179ef7ab072e071097d3dfe758b13bf96201",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/GradientBound.inc",
+      "working_sha256": "88dcb96b399f980cff2dda62bc6df318c5cfdc1d97ba7af23a750fdaee7ffdad",
+      "git_sha256": "e1468dc3a1d2647923debe57854f0e77c745d88244daf44be2b1b890e8e9a770",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/HistorySignature.inc",
+      "working_sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+      "git_sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/InternalUpdate.inc",
+      "working_sha256": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+      "git_sha256": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": true,
+      "difference": null
+    },
+    {
+      "path": "linear_input/lean_check/Invariance.inc",
+      "working_sha256": "d45c1f89978a5a9ad6e72691e37a80119deb28233ad492534d8cd5895df3452f",
+      "git_sha256": "7ba29d42bdde5903ebb47db238afefe3864fe1ea1580812cb1cbd2f16f5f0465",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/LevelConvergence.inc",
+      "working_sha256": "cccf9fde2109c0d84707c52f2433b822fc587f85b4152e577a7bb2c18a6720c1",
+      "git_sha256": "268cdcb7da22ea5e9ea9529106e1a2f8970b8031cd7e0161073380122ad1de3f",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/LevelGeometry.inc",
+      "working_sha256": "219d5c08b9b776156086d489dfc68ce5127d7f3c5c903ee9fa12620f3dcf96fe",
+      "git_sha256": "69bbfdb3ef02bf3b8c43f9388bda46a3d52bd29519c15752ac0ba84a57b53b63",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/MainResult.inc",
+      "working_sha256": "599e2df1cd6e46272bf13d0da1bb8cc5497a09cb0e1c8b8b6ff834fe67cce8bb",
+      "git_sha256": "7bded7415fafff042a23164fd4f12aa053dd5595e99b878b02e6ca4a5eac45da",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/Observation.lean",
+      "working_sha256": "137ad99b65363b1249a949d65895ab7a3c9e8b3c72bcf2d1b0852d6493a522cf",
+      "git_sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/PressureCurvature.inc",
+      "working_sha256": "cfaae4ec4789b566e7510c67a172aae341b48fea7a90a611721c366d69c289c6",
+      "git_sha256": "4a0365823e7eec686dd940e531987ada928cb0e19ca6901d440745ce9da221b1",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/PressureStationary.inc",
+      "working_sha256": "9c52cbfc3d30dd26f5012eceed481ba145c1a5a09e0d95bdfaa97ddc05c65ac7",
+      "git_sha256": "4b95864614e426282726e16fbfe16c06c86f55e563fa1f7085060f606f0d0c83",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/QuarticClassification.inc",
+      "working_sha256": "6b3c6eff3acb3ad2c925aa4f7df47fd9526d6bd2462587a930c6c6af6e6f6836",
+      "git_sha256": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/RegularBand.inc",
+      "working_sha256": "2daec56dda1b2d2546b1a12ab9cc6f060ccc2069741f7ee752c65fe687b8b1b9",
+      "git_sha256": "53d0053d7d4f0bf31eedc9a8e322c246a4b04f495f68c0d418084cc4c77cd6a4",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/StrictEnergy.inc",
+      "working_sha256": "2eebbe1949955d724ead0b502e0e63fd9d1bb6e73b982dfd75486977ca8bf725",
+      "git_sha256": "1a701960dd2d6118175f467a55ebf2a6902bac81581496a1dbe59d8d680cba7f",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/SupportComposition.inc",
+      "working_sha256": "cd991164b7fba469b5d0a3cc23ce4741fc40e1b2b6e0e2e2a5101796e5330dc6",
+      "git_sha256": "0ed4c127f19fcb5eaa9512013a9ead4bcb723455d831c1a371dc62893b04392c",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/TrajectoryExistence.inc",
+      "working_sha256": "5cdd32624bb58856c8d0d879fc9e42edbaf5f0130c41b55761bf1368dc55e225",
+      "git_sha256": "db5f37cc4923fd87063a75abc3ae560cd135ebe7c4d79104bd472f22d2dd53b0",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/lean_check/VariationalBridge.inc",
+      "working_sha256": "43372cd11cd244ba9312e6e0583552c0be68964ddf3b131103b0003ce277aac9",
+      "git_sha256": "5b7b6619add1121a5245ef40f25b1be960682c8aa8617bb2accd19f10ebffb02",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/Elastica.lean",
+      "working_sha256": "53c3bf443e011e10d2b06947e224101439c19a553c872d9e03d6ebce07122533",
+      "git_sha256": "b701498633383a7c42397eaa7c149801c673bd06cf808091b98ddfe7839607ed",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "working_sha256": "4ffb62ce8c8f7ebaff1c1e98c5d36fd60956fb6c9a55d66d8c75ceaae9e96507",
+      "git_sha256": "ce4c4e3d87434b9663f46de25ce34b48a0cf0d392e0a320a0787b4674a2d7b61",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "working_sha256": "edbf2635f45ad75671a20a5cdf7f722204d9dd16287f5bfb0b77b7d16f5aca28",
+      "git_sha256": "24cbaef7acf55e1276267d5383d3107b695d5caa5ab0f12abd535c594c86eabe",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "lean/lake-manifest.json",
+      "working_sha256": "83c95e6e42dd72a65bf1e23405a5217801cdb3ad322d2fa464b86e7da6a3ea85",
+      "git_sha256": "5781fd49aff59347f594d12cbfa61129eebb10ef293729ead611bd7410740590",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    },
+    {
+      "path": "linear_input/verify_lean.py",
+      "working_sha256": "44e8c100639d3b40b2c3580fc6125667fd2ade35d04fb4a28bdd78c9584f4ec1",
+      "git_sha256": "f22428e8bf856a165d7ec43c9dac05ebd6c6d59380c27b893d135f1d38afd9b6",
+      "git_content_unchanged": true,
+      "byte_identical_to_git_blob": false,
+      "difference": "Windows checkout CRLF conversion only"
+    }
+  ],
+  "command": "python -X utf8 tools/verify.py --proof-only",
+  "lean_version": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "explicit_rebuild_flag": false,
+  "dependencies_cached": true,
+  "run_seconds": 156.143,
+  "files": {
+    "proof-only.json": "27e4db0b58192ce0e80c04cca7fef42891e8947a3fa9cc18f71ba742303a5066",
+    "main-result.json": "fa309663e448eb84600e6ac7cbf98abf87c541bedecddd2064074b978d88f865",
+    "main-result.log": "1560b0b2ac124f98f6a03aa820b7a9630a727af5a788f9cb619b00208569fbde",
+    "joint.json": "38b1214a5b7fa8990ff4ad22e58b924d50f3d5e8708ee4056b8fc1353f0277d4",
+    "joint.log": "3f959445a102086a70e22c7f613a62b4abf13c3e88b125a3369b828ad257fd6d",
+    "elastica-build.log": "22a0f504df424df17b9ed1c840f1983d65127bff09d9ce7d239822d47a73ebc6"
+  },
+  "historical_archive_audit": "not_checked",
+  "html_rendering": "not_checked",
+  "boundary": "Local Windows Lean proof check; not a new Kaggle run or ARC evaluation."
+}

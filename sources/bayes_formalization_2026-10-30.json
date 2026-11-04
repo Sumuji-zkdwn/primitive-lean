@@ -1,0 +1,896 @@
+{
+  "timestamp_utc": "2026-10-29T16:14:32.282662+00:00",
+  "local_date": "2026-10-30",
+  "base_commit": "b3b852723b37b160205adf7393009f0d48ca18c3",
+  "input": {
+    "original_path": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-20\\primitive\\archive\\四つのベイジアン_数理モデルと検証記録_2026-10-29.md",
+    "retained_path": "sources/four_bayes_2026-10-29.md",
+    "sha256": "8e3decdf7a5041637fdfccdb8f0eb9d433d816faabf977978d0a9b5405d06ef0",
+    "byte_identical": true
+  },
+  "source_of_claim": "The user-supplied Four Bayes synthesis, the existing Elastica exponentialWeight and split theorem, and the F0 representative maps.",
+  "groups": [
+    {
+      "source": "linear_input/lean_check/FiniteBayes.inc",
+      "namespace": "LinearInputBayes",
+      "theorem_count": 32,
+      "declaration_count": 38,
+      "sha256": "0c3d2c443825df36a1bbb7b51b602d148c4a5ae3d64e2b1dc7cb029f78da9405"
+    },
+    {
+      "source": "linear_input/lean_check/FourBayes.inc",
+      "namespace": "LinearInputFourBayes",
+      "theorem_count": 21,
+      "declaration_count": 32,
+      "sha256": "0c6f48956e71c9bcd691cc43eefaf3939f91be9fb747fb1a0e3f1d037e6ed441"
+    }
+  ],
+  "theorem_count": 53,
+  "definition_count": 17,
+  "declaration_count": 70,
+  "original_connections": [
+    "Elastica.exponentialWeight",
+    "Elastica.exponentialWeight_pos",
+    "Elastica.exponentialWeight_split",
+    "LinearInputF0.branchZeroK",
+    "LinearInputF0.branchPiK",
+    "LinearInputF0.exampleK"
+  ],
+  "conditions": [
+    "Finite candidate spaces; IsDistribution means nonnegative real weights summing to one.",
+    "A probability interpretation of posterior requires nonnegative prior and likelihood, and strictly positive total evidence. Algebraic division by zero is explicitly proved not to yield a distribution.",
+    "Two fixed-likelihood updates commute when each first-step evidence is nonzero; adaptive choices and deletion are separate operations.",
+    "Pushforward posterior commutation uses a likelihood of the form L(f(x)); it therefore depends only on the retained observation.",
+    "The actual Elastica interval split requires continuous density and C1 candidate angles; choosing a prior and likelihood is an additional finite probabilistic model.",
+    "Binary derivative and odds statements require 0<p<1. Exploration support needs a positive floor and positive generator mass on the candidate.",
+    "The exact deletion example uses prior (1/2,1/2), beta=log 3 and deletion threshold 1/3; the predictive-forgetting example uses the existing three-state F0 retraction."
+  ],
+  "excluded": [
+    "General KL minimization and a complete Legendre-Fenchel duality proof; binary log-partition first and second derivatives are proved.",
+    "Likelihood-ratio martingale or Ville inequality, Poisson waiting laws, infinite-horizon discovery guarantees, and general model-family generation.",
+    "New executions of historical Four Bayes Monte Carlo or Squares experiments; no new ARC or human-prediction performance result.",
+    "Interpreting a chosen energy weight as an empirically calibrated likelihood without an additional observation model."
+  ],
+  "declarations": [
+    {
+      "name": "LinearInputBayes.mass",
+      "kind": "def",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 10,
+      "source_declaration_header": "def mass {α : Type*} [Fintype α] (w : α → ℝ) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.IsDistribution",
+      "kind": "def",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 12,
+      "source_declaration_header": "def IsDistribution {α : Type*} [Fintype α] (w : α → ℝ) : Prop",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.normalize",
+      "kind": "def",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 15,
+      "source_declaration_header": "def normalize {α : Type*} [Fintype α] (w : α → ℝ) (x : α) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.posterior",
+      "kind": "def",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 17,
+      "source_declaration_header": "def posterior {α : Type*} [Fintype α] (w L : α → ℝ) : α → ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.tilt",
+      "kind": "def",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 20,
+      "source_declaration_header": "def tilt {α : Type*} [Fintype α] (w : α → ℝ) (β : ℝ) (r : α → ℝ) : α → ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.mass_scale",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 23,
+      "source_declaration_header": "theorem mass_scale {α : Type*} [Fintype α] (c : ℝ) (w : α → ℝ) :\n    mass (fun x => c * w x) = c * mass w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.mass_div",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 26,
+      "source_declaration_header": "theorem mass_div {α : Type*} [Fintype α] (w : α → ℝ) (c : ℝ) :\n    mass (fun x => w x / c) = mass w / c",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.normalize_mass",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 29,
+      "source_declaration_header": "theorem normalize_mass {α : Type*} [Fintype α] {w : α → ℝ} (h : mass w ≠ 0) :\n    mass (normalize w) = 1",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.normalize_of_mass_one",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 34,
+      "source_declaration_header": "theorem normalize_of_mass_one {α : Type*} [Fintype α] {w : α → ℝ} (h : mass w = 1) :\n    normalize w = w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.normalize_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 37,
+      "source_declaration_header": "theorem normalize_distribution {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : ∀ x, 0 ≤ w x) (h : 0 < mass w) : IsDistribution (normalize w)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.posterior_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 41,
+      "source_declaration_header": "theorem posterior_distribution {α : Type*} [Fintype α] {w L : α → ℝ}\n    (hw : ∀ x, 0 ≤ w x) (hL : ∀ x, 0 ≤ L x)\n    (h : 0 < mass (fun x => w x * L x)) : IsDistribution (posterior w L)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.posterior_zero_prior",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 46,
+      "source_declaration_header": "theorem posterior_zero_prior {α : Type*} [Fintype α] (w L : α → ℝ) {x : α}\n    (h : w x = 0) : posterior w L x = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.zero_evidence_not_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 49,
+      "source_declaration_header": "theorem zero_evidence_not_distribution {α : Type*} [Fintype α] (w L : α → ℝ)\n    (h : mass (fun x => w x * L x) = 0) : ¬ IsDistribution (posterior w L)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.mixture_log_loss_bound",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 57,
+      "source_declaration_header": "theorem mixture_log_loss_bound {α : Type*} [Fintype α] {w L : α → ℝ}\n    (hw : ∀ x, 0 ≤ w x) (hL : ∀ x, 0 ≤ L x) {x : α}\n    (hx : 0 < w x) (hLx : 0 < L x) :\n    -log (mass (fun y => w y * L y)) + log (L x) ≤ log (1 / w x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.posterior_zero_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 68,
+      "source_declaration_header": "theorem posterior_zero_iff {α : Type*} [Fintype α] (w L : α → ℝ)\n    (h : mass (fun x => w x * L x) ≠ 0) (x : α) :\n    posterior w L x = 0 ↔ w x = 0 ∨ L x = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.normalize_scale",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 73,
+      "source_declaration_header": "theorem normalize_scale {α : Type*} [Fintype α] {c : ℝ} (hc : c ≠ 0) (w : α → ℝ) :\n    normalize (fun x => c * w x) = normalize w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.posterior_compose",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 79,
+      "source_declaration_header": "theorem posterior_compose {α : Type*} [Fintype α] (w L M : α → ℝ)\n    (h : mass (fun x => w x * L x) ≠ 0) :\n    posterior (posterior w L) M = posterior w (fun x => L x * M x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.posterior_commute",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 88,
+      "source_declaration_header": "theorem posterior_commute {α : Type*} [Fintype α] (w L M : α → ℝ)\n    (hL : mass (fun x => w x * L x) ≠ 0) (hM : mass (fun x => w x * M x) ≠ 0) :\n    posterior (posterior w L) M = posterior (posterior w M) L",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.distribution_has_positive",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 94,
+      "source_declaration_header": "theorem distribution_has_positive {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) : ∃ x, 0 < w x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.positive_likelihood_evidence",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 103,
+      "source_declaration_header": "theorem positive_likelihood_evidence {α : Type*} [Fintype α] {w L : α → ℝ}\n    (hw : IsDistribution w) (hL : ∀ x, 0 < L x) : 0 < mass (fun x => w x * L x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.tilt_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 109,
+      "source_declaration_header": "theorem tilt_distribution {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (β : ℝ) (r : α → ℝ) : IsDistribution (tilt w β r)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.tilt_zero",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 114,
+      "source_declaration_header": "theorem tilt_zero {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (r : α → ℝ) : tilt w 0 r = w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.tilt_add",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 118,
+      "source_declaration_header": "theorem tilt_add {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (β γ : ℝ) (r : α → ℝ) :\n    tilt (tilt w β r) γ r = tilt w (β + γ) r",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.tilt_cancel",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 125,
+      "source_declaration_header": "theorem tilt_cancel {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (β : ℝ) (r : α → ℝ) : tilt (tilt w β r) (-β) r = w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.tilt_support",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 129,
+      "source_declaration_header": "theorem tilt_support {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (β : ℝ) (r : α → ℝ) (x : α) :\n    tilt w β r x = 0 ↔ w x = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.pushWeight",
+      "kind": "def",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 135,
+      "source_declaration_header": "def pushWeight {α β : Type*} [Fintype α] (f : α → β) (w : α → ℝ) (b : β) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_mass",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 138,
+      "source_declaration_header": "theorem push_mass {α β : Type*} [Fintype α] [Fintype β] (f : α → β) (w : α → ℝ) :\n    mass (pushWeight f w) = mass w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 144,
+      "source_declaration_header": "theorem push_distribution {α β : Type*} [Fintype α] [Fintype β]\n    (f : α → β) {w : α → ℝ} (hw : IsDistribution w) : IsDistribution (pushWeight f w)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_div",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 150,
+      "source_declaration_header": "theorem push_div {α β : Type*} [Fintype α] (f : α → β) (w : α → ℝ) (c : ℝ) :\n    pushWeight f (fun x => w x / c) = fun b => pushWeight f w b / c",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_normalize",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 158,
+      "source_declaration_header": "theorem push_normalize {α β : Type*} [Fintype α] [Fintype β] (f : α → β) (w : α → ℝ) :\n    pushWeight f (normalize w) = normalize (pushWeight f w)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_weight_likelihood",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 163,
+      "source_declaration_header": "theorem push_weight_likelihood {α β : Type*} [Fintype α]\n    (f : α → β) (w : α → ℝ) (L : β → ℝ) :\n    pushWeight f (fun x => w x * L (f x)) = fun b => pushWeight f w b * L b",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_posterior",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 173,
+      "source_declaration_header": "theorem push_posterior {α β : Type*} [Fintype α] [Fintype β]\n    (f : α → β) (w : α → ℝ) (L : β → ℝ) :\n    pushWeight f (posterior w (fun x => L (f x))) = posterior (pushWeight f w) L",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.push_evidence",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 179,
+      "source_declaration_header": "theorem push_evidence {α β : Type*} [Fintype α] [Fintype β]\n    (f : α → β) (w : α → ℝ) (L : β → ℝ) :\n    mass (fun b => pushWeight f w b * L b) = mass (fun x => w x * L (f x))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.branchZero_posterior",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 184,
+      "source_declaration_header": "theorem branchZero_posterior (m : ℕ) (w : Fin (2 * m + 1) → ℝ)\n    (L : Fin (2 * m + 1) → ℝ) :\n    pushWeight (LinearInputF0.branchZeroK m)\n        (posterior w (fun x => L (LinearInputF0.branchZeroK m x))) =\n      posterior (pushWeight (LinearInputF0.branchZeroK m) w) L",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.branchPi_posterior",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 190,
+      "source_declaration_header": "theorem branchPi_posterior (m : ℕ) (w : Fin (2 * m + 1) → ℝ)\n    (L : Fin (2 * m + 1) → ℝ) :\n    pushWeight (LinearInputF0.branchPiK m)\n        (posterior w (fun x => L (LinearInputF0.branchPiK m x))) =\n      posterior (pushWeight (LinearInputF0.branchPiK m) w) L",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.curve_weight_as_tilt",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 196,
+      "source_declaration_header": "theorem curve_weight_as_tilt {α : Type*} [Fintype α] (w : α → ℝ)\n    (β : ℝ) (ε : ℝ → ℝ) (θ : α → ℝ → ℝ) (ℓ : ℝ) :\n    posterior w (fun x => Elastica.exponentialWeight β ε (θ x) ℓ) =\n      tilt w (-β) (fun x => Elastica.energy ε (θ x) ℓ)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.curve_weight_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 201,
+      "source_declaration_header": "theorem curve_weight_distribution {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (β : ℝ) (ε : ℝ → ℝ) (θ : α → ℝ → ℝ) (ℓ : ℝ) :\n    IsDistribution (posterior w (fun x => Elastica.exponentialWeight β ε (θ x) ℓ))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBayes.curve_split_update",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FiniteBayes.inc",
+      "line": 207,
+      "source_declaration_header": "theorem curve_split_update {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) {ε : ℝ → ℝ} {θ : α → ℝ → ℝ}\n    (hε : Continuous ε) (hθ : ∀ x, ContDiff ℝ 1 (θ x)) (β a ℓ : ℝ) :\n    posterior w (fun x => Elastica.exponentialWeight β ε (θ x) ℓ) =\n      posterior (posterior w (fun x => Elastica.exponentialWeight β ε (θ x) a))\n        (fun x => exp (-β * (∫ s in a..ℓ, ε (deriv (θ x) s))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.mixture",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 10,
+      "source_declaration_header": "def mixture {α : Type*} (ε : ℝ) (q μ : α → ℝ) (x : α) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.mixture_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 13,
+      "source_declaration_header": "theorem mixture_distribution {α : Type*} [Fintype α] {q μ : α → ℝ}\n    (hq : IsDistribution q) (hμ : IsDistribution μ) {ε : ℝ}\n    (hε : 0 ≤ ε) (hε1 : ε ≤ 1) : IsDistribution (mixture ε q μ)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.exploration_floor",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 25,
+      "source_declaration_header": "theorem exploration_floor {α : Type*} {q μ : α → ℝ} (hq : ∀ x, 0 ≤ q x)\n    {ε : ℝ} (hε1 : ε ≤ 1) (x : α) : ε * μ x ≤ mixture ε q μ x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.exploration_can_restore_support",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 31,
+      "source_declaration_header": "theorem exploration_can_restore_support {α : Type*} {q μ : α → ℝ}\n    (hq : ∀ x, 0 ≤ q x) {ε : ℝ} (hε : 0 < ε) (hε1 : ε ≤ 1) {x : α}\n    (hμ : 0 < μ x) : 0 < mixture ε q μ x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.disappointment",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 36,
+      "source_declaration_header": "def disappointment (p y : ℝ) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.calibrated_binary_disappointment",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 38,
+      "source_declaration_header": "theorem calibrated_binary_disappointment {p : ℝ} (hp : 0 ≤ p) (hp1 : p ≤ 1) :\n    p * disappointment p 1 + (1 - p) * disappointment p 0 = p * (1 - p)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.calibrated_disappointment_positive",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 44,
+      "source_declaration_header": "theorem calibrated_disappointment_positive {p : ℝ} (hp : 0 < p) (hp1 : p < 1) :\n    0 < p * disappointment p 1 + (1 - p) * disappointment p 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binaryPrior",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 49,
+      "source_declaration_header": "def binaryPrior (p : ℝ) (b : Bool) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binaryScore",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 51,
+      "source_declaration_header": "def binaryScore (b : Bool) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binaryPrior_distribution",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 53,
+      "source_declaration_header": "theorem binaryPrior_distribution {p : ℝ} (hp : 0 ≤ p) (hp1 : p ≤ 1) :\n    IsDistribution (binaryPrior p)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binaryPartition",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 59,
+      "source_declaration_header": "def binaryPartition (p β : ℝ) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binaryTilt",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 61,
+      "source_declaration_header": "def binaryTilt (p β : ℝ) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_tilt_formula",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 63,
+      "source_declaration_header": "theorem binary_tilt_formula (p β : ℝ) :\n    tilt (binaryPrior p) β binaryScore true = binaryTilt p β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_partition_positive",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 67,
+      "source_declaration_header": "theorem binary_partition_positive {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    0 < binaryPartition p β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_tilt_odds",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 70,
+      "source_declaration_header": "theorem binary_tilt_odds {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    binaryTilt p β / (1 - binaryTilt p β) = (p / (1 - p)) * exp β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binaryFreeEnergy",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 81,
+      "source_declaration_header": "def binaryFreeEnergy (p β : ℝ) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.hasDerivAt_binaryPartition",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 83,
+      "source_declaration_header": "theorem hasDerivAt_binaryPartition (p β : ℝ) :\n    HasDerivAt (binaryPartition p) (p * exp β) β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.hasDerivAt_binaryFreeEnergy",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 88,
+      "source_declaration_header": "theorem hasDerivAt_binaryFreeEnergy {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    HasDerivAt (binaryFreeEnergy p) (binaryTilt p β) β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_tilt_between",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 93,
+      "source_declaration_header": "theorem binary_tilt_between {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    0 < binaryTilt p β ∧ binaryTilt p β < 1",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.hasDerivAt_binaryTilt",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 102,
+      "source_declaration_header": "theorem hasDerivAt_binaryTilt {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    HasDerivAt (binaryTilt p) (binaryTilt p β * (1 - binaryTilt p β)) β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_free_energy_derivative",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 110,
+      "source_declaration_header": "theorem binary_free_energy_derivative {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    deriv (binaryFreeEnergy p) β = binaryTilt p β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_free_energy_second_derivative",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 114,
+      "source_declaration_header": "theorem binary_free_energy_second_derivative {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    HasDerivAt (deriv (binaryFreeEnergy p)) (binaryTilt p β * (1 - binaryTilt p β)) β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.binary_free_energy_second_positive",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 120,
+      "source_declaration_header": "theorem binary_free_energy_second_positive {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :\n    0 < deriv (deriv (binaryFreeEnergy p)) β",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.thresholdForget",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 125,
+      "source_declaration_header": "def thresholdForget {α : Type*} [Fintype α] (τ : ℝ) (w : α → ℝ) : α → ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.forgotten_stays_zero",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 128,
+      "source_declaration_header": "theorem forgotten_stays_zero {α : Type*} [Fintype α] (τ : ℝ) (w L : α → ℝ)\n    {x : α} (h : w x < τ) : posterior (thresholdForget τ w) L x = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.prayer_doubt_cancel",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 133,
+      "source_declaration_header": "theorem prayer_doubt_cancel {α : Type*} [Fintype α] {w : α → ℝ}\n    (hw : IsDistribution w) (β : ℝ) (r : α → ℝ) :\n    tilt (tilt w β r) (-β) r = w ∧ tilt (tilt w (-β) r) β r = w",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.deletion_order_counterexample",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 139,
+      "source_declaration_header": "theorem deletion_order_counterexample :\n    tilt (thresholdForget (1 / 3) (tilt (binaryPrior (1 / 2)) (log 3) binaryScore))\n        (-log 3) binaryScore = binaryPrior 1 ∧\n    tilt (thresholdForget (1 / 3) (tilt (binaryPrior (1 / 2)) (-log 3) binaryScore))\n        (log 3) binaryScore = binaryPrior 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.aliasPriorLeft",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 148,
+      "source_declaration_header": "def aliasPriorLeft (x : Fin 3) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.aliasPriorRight",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 150,
+      "source_declaration_header": "def aliasPriorRight (x : Fin 3) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.aliasLikelihood",
+      "kind": "def",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 152,
+      "source_declaration_header": "def aliasLikelihood (x : Fin 3) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.alias_priors_are_distributions",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 154,
+      "source_declaration_header": "theorem alias_priors_are_distributions :\n    IsDistribution aliasPriorLeft ∧ IsDistribution aliasPriorRight",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputFourBayes.forgetting_can_lose_predictive_information",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/FourBayes.inc",
+      "line": 164,
+      "source_declaration_header": "theorem forgetting_can_lose_predictive_information :\n    pushWeight LinearInputF0.exampleK aliasPriorLeft = pushWeight LinearInputF0.exampleK aliasPriorRight ∧\n    pushWeight LinearInputF0.exampleK (posterior aliasPriorLeft aliasLikelihood) 0 = 1 / 2 ∧\n    pushWeight LinearInputF0.exampleK (posterior aliasPriorRight aliasLikelihood) 0 = 3 / 4",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ]
+}

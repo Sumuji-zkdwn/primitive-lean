@@ -1,0 +1,1 @@
+{"partition_rows": 271, "graphs": [{"N": 7, "vertices": 15, "distinct_edges": 28}, {"N": 8, "vertices": 22, "distinct_edges": 47}], "imbalance_index_pair_checks": 528, "direct_formula_check": "passed for every K and every s, N=1..4", "A322725_x8": 34643, "all_assertions_passed": true}

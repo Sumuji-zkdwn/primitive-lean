@@ -1,0 +1,584 @@
+{
+  "timestamp_utc": "2026-10-29T14:43:19.265076+00:00",
+  "base_commit": "986d8cdfd09e8c1cef01b8c2fa9b1b9a702c1991",
+  "source": "linear_input/lean_check/BranchFibers.inc",
+  "sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
+  "theorem_count": 40,
+  "definition_count": 7,
+  "declaration_count": 47,
+  "source_of_claim": "User-supplied cosine-label derivation and the existing BranchForgetting.inc definitions; formalized and compiled locally.",
+  "original_connections": [
+    "LinearInputBranchForgetting.ternaryIterate",
+    "LinearInputBranchForgetting.ternaryIterate_cos",
+    "LinearInputBranchForgetting.iterated_inverse_candidate"
+  ],
+  "conditions": [
+    "General candidate equality: natural d > 0, 0 <= t <= pi, labels in Fin d.",
+    "Critical representatives and fibers: d = 2*m+1.",
+    "Real inverse counts: arbitrary natural n, y in (-1,1), or y = 1 / -1. n=0 is the identity.",
+    "The counted set consists of distinct real solutions, not labels or polynomial multiplicities."
+  ],
+  "excluded": [
+    "Targets outside [-1,1]",
+    "A base-three encoding of branch words",
+    "Identification with a separate K,S,C transition system",
+    "Bayesian extensions",
+    "Human prediction and ARC performance"
+  ],
+  "declarations": [
+    {
+      "name": "LinearInputBranchFibers.candidate",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 11,
+      "source_declaration_header": "def candidate (d : ℕ) (t : ℝ) (j : Fin d) : ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidateSet",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 14,
+      "source_declaration_header": "def candidateSet (d : ℕ) (t : ℝ) : Finset ℝ",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.cos_eq_on_turn",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 18,
+      "source_declaration_header": "theorem cos_eq_on_turn {a b : ℝ}\n    (ha0 : 0 ≤ a) (ha2 : a < 2 * π) (hb0 : 0 ≤ b) (hb2 : b < 2 * π) :\n    cos a = cos b ↔ a = b ∨ a + b = 2 * π",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_angle_bounds",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 44,
+      "source_declaration_header": "theorem candidate_angle_bounds {d : ℕ} (hd : 0 < d) {t : ℝ}\n    (ht0 : 0 ≤ t) (htπ : t ≤ π) (j : Fin d) :\n    0 ≤ (t + (j : ℝ) * (2 * π)) / d ∧\n      (t + (j : ℝ) * (2 * π)) / d < 2 * π",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_eq_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 57,
+      "source_declaration_header": "theorem candidate_eq_iff {d : ℕ} (hd : 0 < d) {t : ℝ}\n    (ht0 : 0 ≤ t) (htπ : t ≤ π) (j k : Fin d) :\n    candidate d t j = candidate d t k ↔\n      j = k ∨ t + ((j : ℝ) + (k : ℝ)) * π = d * π",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_injective_regular",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 84,
+      "source_declaration_header": "theorem candidate_injective_regular {d : ℕ} (hd : 0 < d) {t : ℝ}\n    (ht0 : 0 < t) (htπ : t < π) : Function.Injective (candidate d t)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_eq_zero_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 97,
+      "source_declaration_header": "theorem candidate_eq_zero_iff {d : ℕ} (hd : 0 < d) (j k : Fin d) :\n    candidate d 0 j = candidate d 0 k ↔ j = k ∨ (j : ℕ) + k = d",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_eq_pi_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 112,
+      "source_declaration_header": "theorem candidate_eq_pi_iff {d : ℕ} (hd : 0 < d) (j k : Fin d) :\n    candidate d π j = candidate d π k ↔ j = k ∨ (j : ℕ) + k + 1 = d",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidateSet_card_regular",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 128,
+      "source_declaration_header": "theorem candidateSet_card_regular {d : ℕ} (hd : 0 < d) {t : ℝ}\n    (ht0 : 0 < t) (htπ : t < π) : (candidateSet d t).card = d",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.lowLabel",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 134,
+      "source_declaration_header": "def lowLabel (m : ℕ) (j : Fin (m + 1)) : Fin (2 * m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zeroRepresentative",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 137,
+      "source_declaration_header": "def zeroRepresentative (m : ℕ) (j : Fin (2 * m + 1)) : Fin (m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.piRepresentative",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 140,
+      "source_declaration_header": "def piRepresentative (m : ℕ) (j : Fin (2 * m + 1)) : Fin (m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zeroRepresentative_lowLabel",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 143,
+      "source_declaration_header": "theorem zeroRepresentative_lowLabel (m : ℕ) (j : Fin (m + 1)) :\n    zeroRepresentative m (lowLabel m j) = j",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.piRepresentative_lowLabel",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 150,
+      "source_declaration_header": "theorem piRepresentative_lowLabel (m : ℕ) (j : Fin (m + 1)) :\n    piRepresentative m (lowLabel m j) = j",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_zero_representative",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 157,
+      "source_declaration_header": "theorem candidate_zero_representative (m : ℕ) (j : Fin (2 * m + 1)) :\n    candidate (2 * m + 1) 0 (lowLabel m (zeroRepresentative m j)) =\n      candidate (2 * m + 1) 0 j",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_pi_representative",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 165,
+      "source_declaration_header": "theorem candidate_pi_representative (m : ℕ) (j : Fin (2 * m + 1)) :\n    candidate (2 * m + 1) π (lowLabel m (piRepresentative m j)) =\n      candidate (2 * m + 1) π j",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_zero_low_injective",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 173,
+      "source_declaration_header": "theorem candidate_zero_low_injective (m : ℕ) :\n    Function.Injective (fun j : Fin (m + 1) => candidate (2 * m + 1) 0 (lowLabel m j))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidate_pi_low_injective",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 183,
+      "source_declaration_header": "theorem candidate_pi_low_injective (m : ℕ) :\n    Function.Injective (fun j : Fin (m + 1) => candidate (2 * m + 1) π (lowLabel m j))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidateSet_zero_image",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 193,
+      "source_declaration_header": "theorem candidateSet_zero_image (m : ℕ) :\n    candidateSet (2 * m + 1) 0 =\n      Finset.univ.image (fun j : Fin (m + 1) => candidate (2 * m + 1) 0 (lowLabel m j))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidateSet_pi_image",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 205,
+      "source_declaration_header": "theorem candidateSet_pi_image (m : ℕ) :\n    candidateSet (2 * m + 1) π =\n      Finset.univ.image (fun j : Fin (m + 1) => candidate (2 * m + 1) π (lowLabel m j))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidateSet_zero_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 217,
+      "source_declaration_header": "theorem candidateSet_zero_card (m : ℕ) : (candidateSet (2 * m + 1) 0).card = m + 1",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.candidateSet_pi_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 222,
+      "source_declaration_header": "theorem candidateSet_pi_card (m : ℕ) : (candidateSet (2 * m + 1) π).card = m + 1",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zero_retraction_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 227,
+      "source_declaration_header": "theorem zero_retraction_idempotent (m : ℕ) :\n    ∀ j, lowLabel m (zeroRepresentative m (lowLabel m (zeroRepresentative m j))) =\n      lowLabel m (zeroRepresentative m j)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.pi_retraction_idempotent",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 233,
+      "source_declaration_header": "theorem pi_retraction_idempotent (m : ℕ) :\n    ∀ j, lowLabel m (piRepresentative m (lowLabel m (piRepresentative m j))) =\n      lowLabel m (piRepresentative m j)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.three_pow_odd_form",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 239,
+      "source_declaration_header": "theorem three_pow_odd_form (n : ℕ) : 3 ^ n = 2 * (3 ^ n / 2) + 1",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternary_candidates_regular_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 243,
+      "source_declaration_header": "theorem ternary_candidates_regular_card (n : ℕ) {t : ℝ} (ht0 : 0 < t) (htπ : t < π) :\n    (candidateSet (3 ^ n) t).card = 3 ^ n",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternary_candidates_zero_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 247,
+      "source_declaration_header": "theorem ternary_candidates_zero_card (n : ℕ) :\n    (candidateSet (3 ^ n) 0).card = (3 ^ n + 1) / 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternary_candidates_pi_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 254,
+      "source_declaration_header": "theorem ternary_candidates_pi_card (n : ℕ) :\n    (candidateSet (3 ^ n) π).card = (3 ^ n + 1) / 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.cosine_solution_has_label",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 262,
+      "source_declaration_header": "theorem cosine_solution_has_label {d : ℕ} (hd : 0 < d) {a t : ℝ}\n    (ha0 : 0 ≤ a) (haπ : a ≤ π) (ht0 : 0 ≤ t) (htπ : t ≤ π)\n    (h : cos ((d : ℝ) * a) = cos t) :\n    ∃ j : Fin d, candidate d t j = cos a",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.chebyshev_gt_one",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 313,
+      "source_declaration_header": "theorem chebyshev_gt_one {x : ℝ} (hx : 1 < x) :\n    1 < LinearInputBranchForgetting.chebyshevThree x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternaryIterate_gt_one",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 320,
+      "source_declaration_header": "theorem ternaryIterate_gt_one (n : ℕ) {x : ℝ} (hx : 1 < x) :\n    1 < LinearInputBranchForgetting.ternaryIterate n x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternaryIterate_neg",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 326,
+      "source_declaration_header": "theorem ternaryIterate_neg (n : ℕ) (x : ℝ) :\n    LinearInputBranchForgetting.ternaryIterate n (-x) =\n      -LinearInputBranchForgetting.ternaryIterate n x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternary_inverse_mem_interval",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 336,
+      "source_declaration_header": "theorem ternary_inverse_mem_interval (n : ℕ) {x y : ℝ}\n    (hy0 : -1 ≤ y) (hy1 : y ≤ 1)\n    (h : LinearInputBranchForgetting.ternaryIterate n x = y) : -1 ≤ x ∧ x ≤ 1",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.ternary_inverse_iff_candidate",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 351,
+      "source_declaration_header": "theorem ternary_inverse_iff_candidate (n : ℕ) {t : ℝ}\n    (ht0 : 0 ≤ t) (htπ : t ≤ π) (x : ℝ) :\n    LinearInputBranchForgetting.ternaryIterate n x = cos t ↔\n      x ∈ candidateSet (3 ^ n) t",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.real_inverse_card_regular",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 372,
+      "source_declaration_header": "theorem real_inverse_card_regular (n : ℕ) {y : ℝ} (hy0 : -1 < y) (hy1 : y < 1) :\n    {x : ℝ | LinearInputBranchForgetting.ternaryIterate n x = y}.ncard = 3 ^ n",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.real_inverse_card_one",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 382,
+      "source_declaration_header": "theorem real_inverse_card_one (n : ℕ) :\n    {x : ℝ | LinearInputBranchForgetting.ternaryIterate n x = 1}.ncard = (3 ^ n + 1) / 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.real_inverse_card_neg_one",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 390,
+      "source_declaration_header": "theorem real_inverse_card_neg_one (n : ℕ) :\n    {x : ℝ | LinearInputBranchForgetting.ternaryIterate n x = -1}.ncard = (3 ^ n + 1) / 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.critical_depth_two_not_binary",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 398,
+      "source_declaration_header": "theorem critical_depth_two_not_binary :\n    {x : ℝ | LinearInputBranchForgetting.ternaryIterate 2 x = 1}.ncard ≠ 2 ^ 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zeroPartner",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 403,
+      "source_declaration_header": "def zeroPartner (m : ℕ) (j : Fin (2 * m + 1)) : Fin (2 * m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.piPartner",
+      "kind": "def",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 408,
+      "source_declaration_header": "def piPartner (m : ℕ) (j : Fin (2 * m + 1)) : Fin (2 * m + 1)",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zeroPartner_fixed_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 411,
+      "source_declaration_header": "theorem zeroPartner_fixed_iff (m : ℕ) (j : Fin (2 * m + 1)) :\n    zeroPartner m j = j ↔ (j : ℕ) = 0",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.piPartner_fixed_iff",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 417,
+      "source_declaration_header": "theorem piPartner_fixed_iff (m : ℕ) (j : Fin (2 * m + 1)) :\n    piPartner m j = j ↔ (j : ℕ) = m",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zero_fiber_pair",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 423,
+      "source_declaration_header": "theorem zero_fiber_pair (m : ℕ) (j : Fin (2 * m + 1)) :\n    Finset.univ.filter (fun k => candidate (2 * m + 1) 0 k = candidate (2 * m + 1) 0 j) =\n      {j, zeroPartner m j}",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.pi_fiber_pair",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 435,
+      "source_declaration_header": "theorem pi_fiber_pair (m : ℕ) (j : Fin (2 * m + 1)) :\n    Finset.univ.filter (fun k => candidate (2 * m + 1) π k = candidate (2 * m + 1) π j) =\n      {j, piPartner m j}",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.zero_fiber_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 447,
+      "source_declaration_header": "theorem zero_fiber_card (m : ℕ) (j : Fin (2 * m + 1)) :\n    (Finset.univ.filter (fun k => candidate (2 * m + 1) 0 k = candidate (2 * m + 1) 0 j)).card =\n      if (j : ℕ) = 0 then 1 else 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.pi_fiber_card",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 458,
+      "source_declaration_header": "theorem pi_fiber_card (m : ℕ) (j : Fin (2 * m + 1)) :\n    (Finset.univ.filter (fun k => candidate (2 * m + 1) π k = candidate (2 * m + 1) π j)).card =\n      if (j : ℕ) = m then 1 else 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "LinearInputBranchFibers.critical_candidate_collision",
+      "kind": "theorem",
+      "file": "linear_input/lean_check/BranchFibers.inc",
+      "line": 469,
+      "source_declaration_header": "theorem critical_candidate_collision :\n    candidate 3 0 ⟨1, by decide⟩ = candidate 3 0 ⟨2, by decide⟩",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ]
+}
