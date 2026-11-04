@@ -2238,6 +2238,61 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/HistoryNonpreservation.inc",
+      "sha256": "8e2b70a4c87b20bd4b2c3ae57bb8f28e8f61a677017abd04bd52680de4bae433",
+      "original_sha256": "8e2b70a4c87b20bd4b2c3ae57bb8f28e8f61a677017abd04bd52680de4bae433",
+      "source_pr": null,
+      "source_commit": "d51edae8e2540c0d7867b75e2235c3b958b79199",
+      "source_path": "linear_input/lean_check/HistoryNonpreservation.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "sha256": "56f6bf6efc23770535f8a0130a7f68ac78108566656edc75d1772135cc872099",
+      "original_sha256": "56f6bf6efc23770535f8a0130a7f68ac78108566656edc75d1772135cc872099",
+      "source_pr": null,
+      "source_commit": "0da7646a906060237bc4d406cf9bec347efc1026",
+      "source_path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "sha256": "58c30ddf38b02650c7c71a91a8ba307795bb4228630383ac109a5535419ce037",
+      "original_sha256": "58c30ddf38b02650c7c71a91a8ba307795bb4228630383ac109a5535419ce037",
+      "source_pr": null,
+      "source_commit": "7122066a76491eef0970fbbe998aead038c923e8",
+      "source_path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "sha256": "b33f9ef8f26f30c2ab65f7f6071c5cdf02d044c7404261de43874181bf22ad95",
+      "original_sha256": "b33f9ef8f26f30c2ab65f7f6071c5cdf02d044c7404261de43874181bf22ad95",
+      "source_pr": null,
+      "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
+      "source_path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "sha256": "b85df6d07e210e377e532024740c33920e9b5faa1f2f4c1c8e35c9de9198d4ea",
+      "original_sha256": "b85df6d07e210e377e532024740c33920e9b5faa1f2f4c1c8e35c9de9198d4ea",
+      "source_pr": null,
+      "source_commit": "cb875948ab0fb1c8224a2bde6db3bec31819255b",
+      "source_path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2362,36 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/HistoryNonpreservation.inc",
+      "source_commit": "d51edae8e2540c0d7867b75e2235c3b958b79199",
+      "note": "Structural obstructions to history preservation, irreversible observation loss and a tagged-state repair countermodel; original proofs unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "source_commit": "0da7646a906060237bc4d406cf9bec347efc1026",
+      "note": "Time- and state-dependent partial local operation domains, exact total-extinction historical nonpreservation criterion, interval obstruction, and local handoff/reactivation countermodels."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "source_commit": "7122066a76491eef0970fbbe998aead038c923e8",
+      "note": "Bounded local capacity plus full simultaneous requirement demand derives total operation-domain extinction and nonpreservation; pairwise but non-global finite compatibility and always-available noncommuting controls."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
+      "note": "Finite cooperation with individual coverage but no sequential global gluing due to destructive interference; invariant all-word obstruction, joint-postcondition-gated extinction and sharp non-destructive controls."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "source_commit": "cb875948ab0fb1c8224a2bde6db3bec31819255b",
+      "note": "Distinguish individual, pairwise and global relational constraint feasibility; strict Boolean opposing-value and odd-cycle gluing obstructions with even-cycle control. Earlier proof sources retained."
     }
   ]
 }
