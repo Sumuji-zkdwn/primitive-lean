@@ -115,19 +115,19 @@ theorem higherStep_sound {α : Type*} [DecidableEq α]
               LinearInputRuleSelfModification.RuleMachine α))
           s.known target).mp hfront).2
       have hknown : next.known = s.known ++ [target] := by
-        simpa [heq]
+        simp [heq]
       have hlift : next.liftRules =
           applyLiftEdits s.liftEdits s.liftRules target := by
-        simpa [heq]
+        simp [heq]
       have hmeta : next.metaRules =
           s.metaRules ++ runLift
             (applyLiftEdits s.liftEdits s.liftRules target) target := by
-        simpa [heq]
+        simp [heq]
       have hedges : next.edges = s.edges ++
           LinearInputMetaRuleExtension.interpretMeta s.metaRules target := by
-        simpa [heq]
+        simp [heq]
       have hedits : next.liftEdits = s.liftEdits := by
-        simpa [heq]
+        simp [heq]
       exact ⟨target, hfront, hnew, hv, hknown, hlift,
         hmeta, hedges, hedits⟩
 
