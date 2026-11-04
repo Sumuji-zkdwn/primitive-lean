@@ -2174,10 +2174,10 @@
     },
     {
       "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
-      "sha256": "58337e90a5c3d3c382a175a976fb5888a9d30c2e5e25f4b4f5cddb1f05c4e454",
-      "original_sha256": "58337e90a5c3d3c382a175a976fb5888a9d30c2e5e25f4b4f5cddb1f05c4e454",
+      "sha256": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
+      "original_sha256": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
       "source_pr": null,
-      "source_commit": "bc7b5003c710a5da8d241b26008aa9d060b10c90",
+      "source_commit": "b314d11ff459e7fb27d258a8fcf044c7613c0496",
       "source_path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
       "role": "retained_source",
       "byte_identical": true,
@@ -2219,7 +2219,7 @@
     {
       "date": "2026-11-04",
       "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
-      "source_commit": "bc7b5003c710a5da8d241b26008aa9d060b10c90",
+      "source_commit": "b314d11ff459e7fb27d258a8fcf044c7613c0496",
       "note": "Prefix-time viability, terminal-local extinction barrier, conditional forced fresh operator, strict-quotient witness and replacement counterexample. Retained baseline unchanged."
     }
   ]
