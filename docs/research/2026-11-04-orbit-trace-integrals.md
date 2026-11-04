@@ -387,3 +387,73 @@ det(B)≠0 と N·B=B·J を検査する。
 **任意 p,d の全称証明を Lean kernel に与えたわけではない**。
 残る Lean の必要箇所は、全 k の閉形式 (D)、主係数の非消滅、
 および構成した v_{r,j} の多項式基底性である。
+
+
+## 12. 実多項式座標への二層結合と第2層モーメント（2026-11-04）
+
+### 二層：Leanで形式化済み・CI成功
+
+次数 2p+1 以下の形式的観測多項式について
+
+\[
+\iota_p(u,v)=
+\sum_{r=0}^{p}(u_rs^r+v_rs^{p+1+r})
+\]
+
+を定義する。Lean の twoLayerEncode_coeff_low / coeff_high が
+\(\iota_p(u,v)\) の係数から u,v の両者を回復し、
+twoLayerEncode_injective がこの写像の単射を証明する。
+
+再帰的に構成した canonicalMoment を各単項式に適用し
+線形に足し合わせる twoLayerTransfer は
+
+\[
+\operatorname{Transfer}_p(\iota_p(u,v))
+=\iota_p\bigl((u_r-(r+1)av_r)_r,v\bigr)
+\]
+
+という恒等式を満たす。
+Lean 定理：twoLayerTransfer_eq_encode。
+よって \(a\neq0\) では、この具体的二層多項式観測空間の
+作用は長さ2の鎖 p+1 本で記述できる。
+一般剰余トレースから canonicalMoment への同定はなお別証明を要する。
+
+### 三層：任意pの第2層公式をLean証明
+
+q=p+1、c₀=1、c_(j+1)=c_j+j+2 とすると、
+secondShellCoeff_twice により \(2c_j=(j+1)(j+2)\)。
+一般可換環上の second_shell_moment は、
+M₀,…,M_p と漸化式を仮定して
+
+\[
+\boxed{M_{2q+j}=s^j\left[
+ (s^q)^2-(p+2+j)a s^q+c_j a^2\right]}
+\quad(0\le j\le p)
+\]
+
+を証明する。標数0では c_j は二項係数 \(\binom{j+2}{2}\) と一致。
+
+三層の予想座標更新は
+
+\[
+(u_r,v_r,w_r)\mapsto
+\left(
+ u_r-(r+1)av_r+c_ra^2w_r,\;
+ v_r-(p+2+r)aw_r,\;
+ w_r
+\right).
+\]
+
+独立の generalThreeBlock / generalThreeBlocks はこの
+座標変換の冪零部分の三乗零と、a≠0 で各鎖の二乗非零を形式化する。
+ただし、この三層行列と一般の剰余トレース演算子との
+すべての次数にわたる相似は未形式化である。
+
+### 全称定理と有限検証の境界
+
+- Vieta--Lagrange 剰余トレース一般定理：Lean済み。
+- 二層の再帰モーメント・多項式座標の単射と転送式：Lean済み。
+- 第2層モーメントの任意p公式：Lean済み。
+- 任意p,dでの高次のジョルダン相似・階数公式：数学的証明と有限の厳密検算、Lean未完。
+- 六つの(p,d)で構成した基底変換 B の det(B)≠0 および NB=BJ：
+  SymPyの有理数厳密検算。全称Lean定理とは区別する。
