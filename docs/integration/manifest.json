@@ -2248,6 +2248,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "sha256": "58c30ddf38b02650c7c71a91a8ba307795bb4228630383ac109a5535419ce037",
+      "original_sha256": "58c30ddf38b02650c7c71a91a8ba307795bb4228630383ac109a5535419ce037",
+      "source_pr": null,
+      "source_commit": "7122066a76491eef0970fbbe998aead038c923e8",
+      "source_path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2323,6 +2334,12 @@
       "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
       "source_commit": "0da7646a906060237bc4d406cf9bec347efc1026",
       "note": "Time- and state-dependent partial local operation domains, exact total-extinction historical nonpreservation criterion, interval obstruction, and local handoff/reactivation countermodels."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "source_commit": "7122066a76491eef0970fbbe998aead038c923e8",
+      "note": "Bounded local capacity plus full simultaneous requirement demand derives total operation-domain extinction and nonpreservation; pairwise but non-global finite compatibility and always-available noncommuting controls."
     }
   ]
 }
