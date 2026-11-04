@@ -46,7 +46,6 @@ theorem polynomial_moment_monic_degree
             _ = (k : WithBot ℕ) := by
               rw [hdprev]
               norm_cast
-              omega
         have hright : (C a * M (k - (p + 1))).degree ≤
             ((k - (p + 1) : ℕ) : WithBot ℕ) := by
           calc
@@ -62,7 +61,6 @@ theorem polynomial_moment_monic_degree
           rw [hdeg]
           apply lt_of_le_of_lt hright
           norm_cast
-          omega
         rw [hform]
         exact ⟨hmono.sub_of_left hlt, by
           rw [degree_sub_eq_left_of_degree_lt hlt, hdeg]⟩
