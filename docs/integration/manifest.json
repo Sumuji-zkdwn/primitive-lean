@@ -2270,6 +2270,17 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+      "original_sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+      "source_pr": null,
+      "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
+      "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -2357,6 +2368,12 @@
       "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
       "source_commit": "34a9354f3c1330d097c9d98b7c62a85ded5dc4e4",
       "note": "Finite cooperation with individual coverage but no sequential global gluing due to destructive interference; invariant all-word obstruction, joint-postcondition-gated extinction and sharp non-destructive controls."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
+      "note": "Exact iff local overlap consistency/global partial-function gluing; under coordinate coverage unique canonical state and 3-factor operational gluing criterion with concrete destructive and cumulative countermodels."
     }
   ]
 }
