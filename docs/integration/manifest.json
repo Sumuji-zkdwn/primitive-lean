@@ -2226,6 +2226,18 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+      "sha256": "2608965895eb3dd59494f49e4eb97f33335f86ed55629e219da398fccc53cfba",
+      "original_sha256": "2608965895eb3dd59494f49e4eb97f33335f86ed55629e219da398fccc53cfba",
+      "source_pr": null,
+      "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
+      "source_path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "88b846540b626dc9ecced95ce4716190091c5aeb"
     }
   ],
   "construction_errors": [],
@@ -2289,6 +2301,12 @@
       "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
       "source_commit": "01da7db838bda1500c95b8e5dd0791e5e040ee90",
       "note": "Finite second-order mutable meta-rule table and fixed higher-order lift; prove divergent future first-order rules under identical lower-level state, conditional interval viability, bounded boot and frozen-meta saturation."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+      "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
+      "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
     }
   ]
 }
