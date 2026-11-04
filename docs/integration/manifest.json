@@ -2238,6 +2238,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "sha256": "9d74d944c6011481d153863a3448f69917ff5f14e74d66801ab226a3c66f643e",
+      "original_sha256": "9d74d944c6011481d153863a3448f69917ff5f14e74d66801ab226a3c66f643e",
+      "source_pr": null,
+      "source_commit": "4684d33c03d6a2c79a6a491d42fd93ddfa3e7e56",
+      "source_path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "4684d33c03d6a2c79a6a491d42fd93ddfa3e7e56"
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2319,12 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "source_commit": "4684d33c03d6a2c79a6a491d42fd93ddfa3e7e56",
+      "note": "Arithmetic radical support, F0 idempotence, squarefree fixed points, exact observation fibers, successor non-descent and incomplete future prediction; original proof inputs unchanged."
     }
   ]
 }
