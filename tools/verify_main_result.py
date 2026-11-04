@@ -81,6 +81,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
     ('linear_input/lean_check/PilotComparisonBridge.inc', 'LinearInputPilotComparison'),
     ('linear_input/lean_check/PilotVolumeTransport.inc', 'LinearInputPilotTransport'),
+    ('linear_input/lean_check/PilotHullInflation.inc', 'LinearInputPilotHullInflation'),
 )
 
 
