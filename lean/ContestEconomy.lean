@@ -53,8 +53,94 @@ theorem delayed_ratio_strict_drop
     nlinarith [sq_nonneg (r - a / 2)]
   calc
     a - γ / r = (a * r - γ) / r := by
-      field_simp [ne_of_gt hr] <;> ring
+      field_simp [ne_of_gt hr]
     _ < r := (div_lt_iff₀ hr).2 (by nlinarith [hquad])
+
+/-- A uniform finite decrement in the positive ratio, valid below a,
+under the sharp negative-discriminant condition.
+The decrement δ=(γ-a²/4)/a is strictly positive. -/
+theorem delayed_ratio_uniform_drop
+    {a γ r : ℝ} (ha : 0 < a) (hr : 0 < r) (hrle : r ≤ a)
+    (hdisc : a * a < 4 * γ) :
+    a - γ / r ≤ r - (γ - a * a / 4) / a := by
+  have hδpos : 0 < γ - a * a / 4 := by nlinarith
+  have hquad : γ - a * a / 4 ≤ r * r - a * r + γ := by
+    nlinarith [sq_nonneg (r - a / 2)]
+  have hscaled : ((γ - a * a / 4) / a) * r ≤ γ - a * a / 4 := by
+    calc
+      ((γ - a * a / 4) / a) * r
+          = (γ - a * a / 4) * (r / a) := by ring
+      _ ≤ (γ - a * a / 4) * 1 := by
+        apply mul_le_mul_of_nonneg_left
+        · exact (div_le_iff₀ ha).2 (by linarith)
+        · exact le_of_lt hδpos
+      _ = γ - a * a / 4 := by ring
+  have hbound :
+      a * r - γ + ((γ - a * a / 4) / a) * r ≤ r * r := by
+    linarith
+  have heq :
+      a - γ / r + (γ - a * a / 4) / a =
+      (a * r - γ + ((γ - a * a / 4) / a) * r) / r := by
+    field_simp [ne_of_gt hr]
+  have hres : a - γ / r + (γ - a * a / 4) / a ≤ r := by
+    rw [heq]
+    exact (div_le_iff₀ hr).2 hbound
+  linarith
+
+/-- SHARP finite-time threshold theorem. For the delayed recurrence with
+z₀>0, z₁=a*z₀ and z_(n+2)=a*z_(n+1)-γ*z_n, if a>0
+and a²<4γ, not all z_n can remain positive forever. -/
+theorem delayed_crossing_of_negative_discriminant
+    (a γ : ℝ) (ha : 0 < a) (hdisc : a * a < 4 * γ)
+    (z : ℕ → ℝ) (hz₀ : 0 < z 0)
+    (hz₁ : z 1 = a * z 0)
+    (hrec : ∀ n : ℕ, z (n + 2) = a * z (n + 1) - γ * z n) :
+    ∃ n : ℕ, z n ≤ 0 := by
+  by_contra! hpos
+  let r : ℕ → ℝ := fun n => z (n + 1) / z n
+  have hrpos (n : ℕ) : 0 < r n := by
+    exact div_pos (hpos (n + 1)) (hpos n)
+  have hr₀ : r 0 = a := by
+    dsimp [r]
+    rw [hz₁]
+    field_simp [ne_of_gt hz₀]
+  have hrrec (n : ℕ) : r (n + 1) = a - γ / r n := by
+    change z (n + 2) / z (n + 1) = a - γ / (z (n + 1) / z n)
+    rw [hrec n]
+    field_simp [ne_of_gt (hpos (n + 1)), ne_of_gt (hpos n)]
+  have hγpos : 0 < γ := by
+    nlinarith [sq_nonneg a]
+  have hrle (n : ℕ) : r n ≤ a := by
+    cases n with
+    | zero => simpa only [hr₀] using (le_refl a)
+    | succ n =>
+        rw [hrrec n]
+        have hdiv : 0 ≤ γ / r n :=
+          div_nonneg (le_of_lt hγpos) (le_of_lt (hrpos n))
+        linarith
+  let δ : ℝ := (γ - a * a / 4) / a
+  have hδ : 0 < δ := by
+    dsimp [δ]
+    exact div_pos (by nlinarith) ha
+  have huniform (n : ℕ) : r (n + 1) ≤ r n - δ := by
+    rw [hrrec n]
+    change a - γ / r n ≤ r n - (γ - a * a / 4) / a
+    exact delayed_ratio_uniform_drop ha (hrpos n) (hrle n) hdisc
+  have hbound (n : ℕ) : r n + (n : ℝ) * δ ≤ a := by
+    induction n with
+    | zero => simpa [hr₀]
+    | succ n ih =>
+        calc
+          r (n + 1) + ((n + 1 : ℕ) : ℝ) * δ
+              = r (n + 1) + (n : ℝ) * δ + δ := by push_cast; ring
+          _ ≤ r n + (n : ℝ) * δ := by linarith [huniform n]
+          _ ≤ a := ih
+  obtain ⟨N, hN⟩ := exists_nat_gt (a / δ)
+  have hNprod : a < (N : ℝ) * δ :=
+    (div_lt_iff₀ hδ).1 hN
+  have hNbound := hbound N
+  have hNpos := hrpos N
+  linarith
 
 /-- A stronger, directly finite-horizon sufficient condition for a crossing.
 With z₁=a*z₀, z₂=a*z₁-γ*z₀, z₃=a*z₂-γ*z₁,
@@ -145,6 +231,8 @@ theorem participation_no_joint_boundary_limit :
 
 #print axioms ContestEconomy.selection_gain_le_gap
 #print axioms ContestEconomy.delayed_ratio_strict_drop
+#print axioms ContestEconomy.delayed_ratio_uniform_drop
+#print axioms ContestEconomy.delayed_crossing_of_negative_discriminant
 #print axioms ContestEconomy.delayed_third_step_nonpos
 #print axioms ContestEconomy.delayed_seventh_step_example
 #print axioms ContestEconomy.participation_no_joint_boundary_limit
