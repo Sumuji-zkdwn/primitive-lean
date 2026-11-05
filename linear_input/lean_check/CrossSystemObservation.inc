@@ -7,7 +7,7 @@ CrossBisim is a relation respected by current observations and each action.
 
 A state map only produces a sound map between predictive quotients when its
 outputs and its dynamics commute. Surjectivity/injectivity of the induced map
-require separate hypotheses. A finite Bool-pair example distinguishes a
+have distinct guarantees. A finite Bool-pair example distinguishes a
 valid loss of latent state from an impossible, dynamics-breaking forgetting.
 
 This is a general structural tool, not a formalization of modularity of an
@@ -146,6 +146,22 @@ theorem bridge_preserves_wordEq {α β ω ι : Type*}
     _ = L (run stepB word (φ y)) :=
       bridge_trace K L stepA stepB φ h y word
 
+/-- Exact state bridges also reflect full trace equality: no observable
+source distinctions are erased by an exact bridge. -/
+theorem bridge_reflects_wordEq {α β ω ι : Type*}
+    (K : α → ω) (L : β → ω)
+    (stepA : ι → α → α) (stepB : ι → β → β)
+    (φ : α → β) (h : ExactBridge K L stepA stepB φ)
+    {x y : α} (hxy : WordEq L stepB (φ x) (φ y)) :
+    WordEq K stepA x y := by
+  intro word
+  calc
+    K (run stepA word x) = L (run stepB word (φ x)) :=
+      bridge_trace K L stepA stepB φ h x word
+    _ = L (run stepB word (φ y)) := hxy word
+    _ = K (run stepA word y) :=
+      (bridge_trace K L stepA stepB φ h y word).symm
+
 /-- An exact bridge descends to a map between predictive quotient spaces. -/
 def predictiveMap {α β ω ι : Type*}
     (K : α → ω) (L : β → ω)
@@ -221,6 +237,16 @@ theorem predictiveMap_injective_of_reflects {α β ω ι : Type*}
       apply (encode_eq_iff L stepB (φ x) (φ y)).1
       exact hqr
 
+/-- Every exact state bridge is injective on predictive quotients,
+even when the original state map is many-to-one. -/
+theorem predictiveMap_injective {α β ω ι : Type*}
+    (K : α → ω) (L : β → ω)
+    (stepA : ι → α → α) (stepB : ι → β → β)
+    (φ : α → β) (h : ExactBridge K L stepA stepB φ) :
+    Function.Injective (predictiveMap K L stepA stepB φ h) :=
+  predictiveMap_injective_of_reflects K L stepA stepB φ h
+    (fun x y hxy => bridge_reflects_wordEq K L stepA stepB φ h hxy)
+
 /-- Surjectivity plus reflection gives an isomorphism of predictive states. -/
 theorem predictiveMap_bijective {α β ω ι : Type*}
     (K : α → ω) (L : β → ω)
@@ -230,6 +256,17 @@ theorem predictiveMap_bijective {α β ω ι : Type*}
     (hr : ∀ x y, WordEq L stepB (φ x) (φ y) → WordEq K stepA x y) :
     Function.Bijective (predictiveMap K L stepA stepB φ h) :=
   ⟨predictiveMap_injective_of_reflects K L stepA stepB φ h hr,
+    predictiveMap_surjective K L stepA stepB φ h hs⟩
+
+/-- A surjective exact state bridge always induces a predictive-state
+bijection, without needing injectivity on original states. -/
+theorem predictiveMap_bijective_of_surjective {α β ω ι : Type*}
+    (K : α → ω) (L : β → ω)
+    (stepA : ι → α → α) (stepB : ι → β → β)
+    (φ : α → β) (h : ExactBridge K L stepA stepB φ)
+    (hs : Function.Surjective φ) :
+    Function.Bijective (predictiveMap K L stepA stepB φ h) :=
+  ⟨predictiveMap_injective K L stepA stepB φ h,
     predictiveMap_surjective K L stepA stepB φ h hs⟩
 
 /-- Exact criterion: any fiber split by a successor obstructs all possible
@@ -266,6 +303,19 @@ theorem flip_bridge :
     rfl
   · intro i x
     rfl
+
+theorem forgetSecond_surjective : Function.Surjective forgetSecond := by
+  intro b
+  exact ⟨(b, false), rfl⟩
+
+/-- Although the raw states have lost a bit, their complete predictive
+quotients remain in bijection for this exact bridge. -/
+theorem flip_predictive_bijective :
+    Function.Bijective
+      (predictiveMap pairOutput (fun b : Bool => b)
+        flipFirst flipBit forgetSecond flip_bridge) :=
+  predictiveMap_bijective_of_surjective pairOutput (fun b : Bool => b)
+    flipFirst flipBit forgetSecond flip_bridge forgetSecond_surjective
 
 /-- A different action makes the previously hidden second bit observable. -/
 def revealSecond : Unit → Bool × Bool → Bool × Bool :=

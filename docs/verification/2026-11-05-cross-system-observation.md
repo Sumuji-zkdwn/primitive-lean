@@ -17,8 +17,8 @@ Let `A`, `B` be arbitrary state spaces, `I` one common action alphabet, `K: A→
 - `ExactBridge K L sA sB φ` requires both `L(φ(x))=K(x)` and `φ(sA(i,x))=sB(i,φ(x))`; it does *not* assume an invertible state map.
 - `bridge_trace`, `bridge_preserves_wordEq` and `predictiveMap` transport the bridge to the existing predictive quotient.
 - `predictiveMap_output` and `predictiveMap_step` make the induced output and operator laws explicit.
-- `predictiveMap_surjective` requires surjectivity of `φ`; `predictiveMap_injective_of_reflects` separately requires reflection of full trace equality; `predictiveMap_bijective` needs both. No unqualified isomorphism is asserted.
-- `no_bridge_if_fiber_splits` shows that if `φ(x)=φ(y)` but `φ(sA(i,x))≠φ(sA(i,y))`, **no** transition `sB` can make the square commute. `flip_bridge` is a valid many-to-one forgetting example; `reveal_has_no_bridge` proves an impossible one for Bool pairs.
+- `bridge_reflects_wordEq` shows that an exact bridge also **reflects** every finite trace equality. Hence `predictiveMap_injective` needs no extra hypothesis. `predictiveMap_surjective` requires a surjective `φ`; `predictiveMap_bijective_of_surjective` then proves quotient bijectivity. The older conditional helper lemmas remain for explicit dependencies. No unqualified isomorphism of original state spaces is asserted.
+- `no_bridge_if_fiber_splits` shows that if `φ(x)=φ(y)` but `φ(sA(i,x))≠φ(sA(i,y))`, **no** transition `sB` can make the square commute. `flip_bridge` is a valid many-to-one forgetting example and `flip_predictive_bijective` shows its predictive quotients are nevertheless bijective; `reveal_has_no_bridge` proves an impossible forgetting for Bool pairs.
 
 These statements establish a precise boundary between observably sound forgetting and loss of successor consistency; this is the intended connection to the F0 and operator-language series.
 

@@ -2241,14 +2241,16 @@
     },
     {
       "path": "linear_input/lean_check/CrossSystemObservation.inc",
-      "sha256": "0b80ce7350c3faf4a98a190bf500951f8c9d12036c85530ecbd0c71576ed4d12",
+      "sha256": "843de9b99dd2d21f94abfc1365e7a9636db7812002bf5251b0d9c40ecf2e197e",
       "original_sha256": "0b80ce7350c3faf4a98a190bf500951f8c9d12036c85530ecbd0c71576ed4d12",
       "source_pr": 81,
       "source_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16",
       "source_path": "linear_input/lean_check/CrossSystemObservation.inc",
-      "role": "new_integration_extension",
-      "byte_identical": true,
-      "permitted_adaptations": [],
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Extend original source with unconditional trace reflection, injectivity of predictive quotient, and a concrete bijective quotient of a many-to-one state forgetful map"
+      ],
       "authoring_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16"
     }
   ],
