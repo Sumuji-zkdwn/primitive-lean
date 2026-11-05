@@ -1,4 +1,5 @@
 import Elastica.Geometry
+import Elastica.MovingCurve
 import Elastica.Variation
 import Elastica.Stationary
 import Elastica.Equations
