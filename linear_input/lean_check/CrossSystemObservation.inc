@@ -146,6 +146,16 @@ theorem bridge_preserves_wordEq {α β ω ι : Type*}
     _ = L (run stepB word (φ y)) :=
       bridge_trace K L stepA stepB φ h y word
 
+/-- A concrete finite separating word refutes equality of all finite traces. -/
+theorem separating_word_refutes_trace {α β ω ι : Type*}
+    {K : α → ω} {L : β → ω}
+    {stepA : ι → α → α} {stepB : ι → β → β}
+    {x : α} {y : β} (word : List ι)
+    (h : K (run stepA word x) ≠ L (run stepB word y)) :
+    ¬ CrossTrace K L stepA stepB x y := by
+  intro hAll
+  exact h (hAll word)
+
 /-- Exact state bridges also reflect full trace equality: no observable
 source distinctions are erased by an exact bridge. -/
 theorem bridge_reflects_wordEq {α β ω ι : Type*}
@@ -245,7 +255,7 @@ theorem predictiveMap_injective {α β ω ι : Type*}
     (φ : α → β) (h : ExactBridge K L stepA stepB φ) :
     Function.Injective (predictiveMap K L stepA stepB φ h) :=
   predictiveMap_injective_of_reflects K L stepA stepB φ h
-    (fun x y hxy => bridge_reflects_wordEq K L stepA stepB φ h hxy)
+    (fun _ _ hxy => bridge_reflects_wordEq K L stepA stepB φ h hxy)
 
 /-- Surjectivity plus reflection gives an isomorphism of predictive states. -/
 theorem predictiveMap_bijective {α β ω ι : Type*}
