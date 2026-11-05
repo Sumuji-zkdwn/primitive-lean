@@ -1,11 +1,11 @@
 import Elastica.Geometry
 
-/-!
+/-
 # A moving arc-length curve with independent rotation and time inputs
 
-The parameter `s` is arc length along the planar curve. The parameter `t`
-is time and contributes only the prescribed constant translation `v * t`.
-The angle `α` is fixed independently of `t`; this file postulates no
+The parameter s is arc length along the planar curve. The parameter t
+is time and contributes only the prescribed constant translation v * t.
+The angle alpha is fixed independently of t; this file postulates no
 dynamical law for either angle or translation.
 -/
 
@@ -41,16 +41,18 @@ theorem hasDerivAt_movingX_arcLength {θ : ℝ → ℝ} (hθ : Continuous θ)
     (x₀ vₓ α s t : ℝ) :
     HasDerivAt (fun r => movingX θ x₀ vₓ α r t)
       (Real.cos (θ s + α)) s := by
-  have h := (hasDerivAt_xCoord (hθ.add continuous_const) 0 s).const_add
-    (x₀ + vₓ * t)
+  have hα : Continuous (fun _ : ℝ => α) := continuous_const
+  have hθrot : Continuous (fun u : ℝ => θ u + α) := hθ.add hα
+  have h := (hasDerivAt_xCoord hθrot 0 s).const_add (x₀ + vₓ * t)
   simpa [movingX] using h
 
 theorem hasDerivAt_movingY_arcLength {θ : ℝ → ℝ} (hθ : Continuous θ)
     (y₀ vᵧ α s t : ℝ) :
     HasDerivAt (fun r => movingY θ y₀ vᵧ α r t)
       (Real.sin (θ s + α)) s := by
-  have h := (hasDerivAt_yCoord (hθ.add continuous_const) 0 s).const_add
-    (y₀ + vᵧ * t)
+  have hα : Continuous (fun _ : ℝ => α) := continuous_const
+  have hθrot : Continuous (fun u : ℝ => θ u + α) := hθ.add hα
+  have h := (hasDerivAt_yCoord hθrot 0 s).const_add (y₀ + vᵧ * t)
   simpa [movingY] using h
 
 /-- Rotation preserves the unit-speed property of the arc-length reconstruction. -/
@@ -66,17 +68,21 @@ theorem movingCurve_unit_speed_squared {θ : ℝ → ℝ} (hθ : Continuous θ)
 of the arc-length and rotation inputs. -/
 theorem hasDerivAt_movingX_time (θ : ℝ → ℝ) (x₀ vₓ α s t : ℝ) :
     HasDerivAt (fun r => movingX θ x₀ vₓ α s r) vₓ t := by
-  have hlin : HasDerivAt (fun r : ℝ => vₓ * r) vₓ t :=
-    (hasDerivAt_id t).const_mul vₓ
-  convert hlin.const_add (x₀ + xCoord (fun u => θ u + α) 0 s) using 1 <;>
-    simp only [movingX] <;> ring
+  have hlin : HasDerivAt (fun r : ℝ => vₓ * r) vₓ t := by
+    simpa using (hasDerivAt_id t).const_mul vₓ
+  convert hlin.const_add (x₀ + xCoord (fun u => θ u + α) 0 s) using 1
+  · ext r
+    simp [movingX]
+    ring
 
 theorem hasDerivAt_movingY_time (θ : ℝ → ℝ) (y₀ vᵧ α s t : ℝ) :
     HasDerivAt (fun r => movingY θ y₀ vᵧ α s r) vᵧ t := by
-  have hlin : HasDerivAt (fun r : ℝ => vᵧ * r) vᵧ t :=
-    (hasDerivAt_id t).const_mul vᵧ
-  convert hlin.const_add (y₀ + yCoord (fun u => θ u + α) 0 s) using 1 <;>
-    simp only [movingY] <;> ring
+  have hlin : HasDerivAt (fun r : ℝ => vᵧ * r) vᵧ t := by
+    simpa using (hasDerivAt_id t).const_mul vᵧ
+  convert hlin.const_add (y₀ + yCoord (fun u => θ u + α) 0 s) using 1
+  · ext r
+    simp [movingY]
+    ring
 
 /-- Squared translation distance equals squared elapsed time exactly when the
 velocity vector has unit norm. -/
