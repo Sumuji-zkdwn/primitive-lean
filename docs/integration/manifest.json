@@ -2188,6 +2188,23 @@
         "parent_commit": "1f24bc3d082ff64d6972401e96274d5c28586807",
         "description": "Generated in CI; Git commit follows validation"
       }
+    },
+    {
+      "path": "linear_input/lean_check/AutonomyCycle00002.inc",
+      "sha256": "57d89fc457a464659fce56dab8317e7483e7aae50a34e3dc4a16f3c1abae5d5e",
+      "original_sha256": "57d89fc457a464659fce56dab8317e7483e7aae50a34e3dc4a16f3c1abae5d5e",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/AutonomyCycle00002.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "generator": "tools/autonomy/grow.py",
+        "cycle": 2,
+        "parent_commit": "6581ba3f24307a3d770c88e7963b3ef5b76ea64f",
+        "description": "Generated in CI; Git commit follows validation"
+      }
     }
   ],
   "construction_errors": [],
@@ -2225,6 +2242,12 @@
     {
       "date": "2026-11-03",
       "path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "source_commit": null,
+      "note": "Generated finite witness; exact source SHA256 in files; commit only after successful Lean and source audit."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/AutonomyCycle00002.inc",
       "source_commit": null,
       "note": "Generated finite witness; exact source SHA256 in files; commit only after successful Lean and source audit."
     }

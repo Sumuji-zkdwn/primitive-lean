@@ -74,6 +74,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
     ('linear_input/lean_check/AutonomyCycle00001.inc', 'LinearInputAutoCycle00001'),
+    ('linear_input/lean_check/AutonomyCycle00002.inc', 'LinearInputAutoCycle00002'),
 )
 
 

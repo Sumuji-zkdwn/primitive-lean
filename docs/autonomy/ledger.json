@@ -20,6 +20,26 @@
       "total_theorem_count": 1344,
       "total_declaration_count": 1732,
       "verification_kind": "fresh source audit, Lean trust=0 and axiom audit"
+    },
+    {
+      "cycle": 2,
+      "name": "AutonomyCycle00002",
+      "status": "verified",
+      "model": {
+        "states": 3,
+        "image_of_zero": 1,
+        "image_of_one": 2
+      },
+      "source": "linear_input/lean_check/AutonomyCycle00002.inc",
+      "sha256": "57d89fc457a464659fce56dab8317e7483e7aae50a34e3dc4a16f3c1abae5d5e",
+      "parent_commit": "6581ba3f24307a3d770c88e7963b3ef5b76ea64f",
+      "claimed_theorems": 5,
+      "claimed_definitions": 3,
+      "created_utc": "2026-11-05T06:58:17.074413+00:00",
+      "verified_utc": "2026-11-05T07:03:13.688148+00:00",
+      "total_theorem_count": 1349,
+      "total_declaration_count": 1740,
+      "verification_kind": "fresh source audit, Lean trust=0 and axiom audit"
     }
   ]
 }
