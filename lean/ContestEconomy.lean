@@ -112,9 +112,7 @@ theorem delayed_crossing_of_negative_discriminant
     nlinarith [sq_nonneg a]
   have hrle (n : ℕ) : r n ≤ a := by
     cases n with
-    | zero =>
-        simp only [Nat.cast_zero, zero_mul, add_zero]
-        exact le_of_eq hr₀
+    | zero => exact le_of_eq hr₀
     | succ n =>
         rw [hrrec n]
         have hdiv : 0 ≤ γ / r n :=
@@ -130,7 +128,7 @@ theorem delayed_crossing_of_negative_discriminant
     exact delayed_ratio_uniform_drop ha (hrpos n) (hrle n) hdisc
   have hbound (n : ℕ) : r n + (n : ℝ) * δ ≤ a := by
     induction n with
-    | zero => simpa [hr₀]
+    | zero => simp [hr₀]
     | succ n ih =>
         calc
           r (n + 1) + ((n + 1 : ℕ) : ℝ) * δ
