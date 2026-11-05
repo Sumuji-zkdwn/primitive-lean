@@ -2238,6 +2238,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "sha256": "0b80ce7350c3faf4a98a190bf500951f8c9d12036c85530ecbd0c71576ed4d12",
+      "original_sha256": "0b80ce7350c3faf4a98a190bf500951f8c9d12036c85530ecbd0c71576ed4d12",
+      "source_pr": 81,
+      "source_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16",
+      "source_path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16"
     }
   ],
   "construction_errors": [],
