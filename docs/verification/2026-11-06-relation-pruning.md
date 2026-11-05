@@ -51,4 +51,4 @@ From the repository root on the PR #81-based branch:
     python tools/relation_pruning.py --actions delete:A-B
     python tools/relation_pruning.py --observe edge:A-B
 
-Observed in the local authoring environment on 2026-11-06: 11 of 11 unittest cases passed, including the triangle, 4-vertex two-step witness, curve reconstruction and malformed-input checks. This is local Python evidence, not a claim about GitHub CI or a formal verification of algorithmic soundness.
+Observed in the local authoring environment on 2026-11-06: 12 of 12 unittest cases passed, including the triangle, 4-vertex two-step witness, curve reconstruction and malformed-input checks, and independent brute-force comparison of all 3-vertex pruning candidates across four observations. This is local Python evidence, not a claim about GitHub CI or a formal verification of algorithmic soundness.
