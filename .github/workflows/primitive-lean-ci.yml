@@ -73,9 +73,10 @@ jobs:
           use-mathlib-cache: true
           use-github-cache: true
 
-      - name: Build and audit independent moving-curve module
+      - name: Build parent library and audit independent moving-curve module
         working-directory: lean
         run: |
+          lake build Elastica
           lake env lean --trust=0 MovingCurve.lean -o .lake/build/lib/lean/MovingCurve.olean
           lake env lean --trust=0 MovingCurveAudit.lean
 
