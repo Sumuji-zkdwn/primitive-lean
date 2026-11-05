@@ -129,6 +129,34 @@ class RelationPruningTests(unittest.TestCase):
         self.assertEqual({s.parse_edge(u + "-" + v)
                           for u, v in zip(walk, walk[1:])}, set(s.edges(star)))
 
+    def test_all_triangle_prunings_agree_with_naive_word_enumeration(self):
+        # Three independent idempotent edge deletes: repeated deletions add
+        # nothing, so a shortest witness has length at most three.
+        for observation_name in ("connected", "components", "edge:A-B", "reachable:A-C"):
+            observation = parse_observation(self.s, observation_name)
+            machine = graph_machine(self.s, observation, self.all_deletes)
+            names = tuple(action.label for action in self.all_deletes)
+            for original in range(8):
+                for retained in range(8):
+                    if retained & original != retained:
+                        continue
+                    answer = shortest_word(machine, machine, names, (original, retained))
+                    naive = None
+                    for depth in range(4):
+                        for word in itertools.product(range(3), repeat=depth):
+                            left, right = original, retained
+                            for index in word:
+                                left = self.all_deletes[index].apply(self.s, left)
+                                right = self.all_deletes[index].apply(self.s, right)
+                            if observation.value(self.s, left) != observation.value(self.s, right):
+                                naive = depth
+                                break
+                        if naive is not None:
+                            break
+                    self.assertEqual(answer.get("length"), naive)
+                    self.assertTrue(verify_certificate(machine, machine, names,
+                                                       (original, retained), answer))
+
     def test_invalid_edges_and_operations_are_rejected(self):
         with self.assertRaises(ValueError):
             self.s.parse_edge("A-A")
