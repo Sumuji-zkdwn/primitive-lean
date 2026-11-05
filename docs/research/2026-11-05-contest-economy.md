@@ -19,12 +19,13 @@ Dedicated verification: .github/workflows/contest-economy.yml
    z_(t+1) = a z_t - gamma z_(t-1), with 0<a<1, gamma>0 and
    z_(-1)=0, z_0>0. Under a²<4 gamma, the positive ratio
    r=z_t/z_(t-1) strictly decreases on every valid positive step:
-   a-gamma/r<r. This local strict inequality is machine-formalized.
-   A stronger sufficient condition, a²<=2 gamma, forces z_3<=0:
-   this finite-horizon crossing is also machine-formalized.
-   The sharper *global* claim that every positive initial state crosses
-   in finite time whenever a²<4 gamma is a mathematical target, not
-   certified by the current Lean module.
+   a-gamma/r<r. This local strict inequality is machine-formalized. More strongly,
+   if z_0>0, z_1=a*z_0, a>0, and a²<4 gamma, Lean now proves that
+   some finite n satisfies z_n<=0. The proof uses a uniform bound:
+   each positive ratio loses at least δ=(gamma-a²/4)/a>0 per step.
+   Consequently an infinite all-positive trajectory is impossible.
+   The stronger easy-to-check condition a²<=2 gamma additionally forces
+   crossing by step 3.
 
 3. **The boundary of the participation model is singular.**
    In the selected symmetric two-person participation equilibrium,
@@ -33,8 +34,11 @@ Dedicated verification: .github/workflows/contest-economy.yml
    p(D,0)=1 while p(D,D)=0. Lean proves that these contrasting
    paths occur arbitrarily close to (0,0), and gives a direct
    epsilon-delta proof that no common two-variable boundary limit exists.
-   Strictly speaking, this is nonexistence of a JOINT limit, not yet a
-   Lean proof of the two separate iterated-limit statements.
+   Lean also proves the two inner one-sided limits via explicit
+   epsilon-delta certificates: for fixed e>0, p(D,e) is eventually
+   identically 0 as D approaches 0; for fixed D>0, p(D,e) approaches 1
+   as e approaches 0. Thus the iterated limits are respectively 0 and 1,
+   while the joint limit does not exist.
    The expression is not a probability when e<0; the model is restricted
    to e>=0 here. At e<0 the underlying game has full participation.
 
@@ -70,8 +74,9 @@ participant population may renew, and exit may be structurally costly.
   the proof only bounds the *gain from selection*.
 - The first Lean theorem assumes finite participants and normalized,
   nonnegative baseline weights, not uniform weights only.
-- The finite-time crossing condition in Lean is deliberately stronger
-  than the mathematically predicted negative-discriminant criterion.
+- The sharp recurrence condition a²<4 gamma is proved for the stated
+  linear, constant-coefficient recurrence; no theorem says an empirical
+  market follows this recurrence or maintains a fixed critical gap.
 - A two-dimensional non-limit does not by itself prove that actual
   population participation switches discontinuously at a fixed date.
 - No market-wide general equilibrium, credit, labor supply, or institutional
