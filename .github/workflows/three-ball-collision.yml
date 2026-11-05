@@ -1,0 +1,44 @@
+name: Three-ball elastic contact order (exact Lean)
+
+on:
+  push:
+    branches:
+      - chatgpt/three-ball-contact-order-20261105
+    paths:
+      - 'lean/ThreeBallCollision.lean'
+      - 'tests/test_three_ball_collision.py'
+      - '.github/workflows/three-ball-collision.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/ThreeBallCollision.lean'
+      - 'tests/test_three_ball_collision.py'
+      - '.github/workflows/three-ball-collision.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-collision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile exact rational collision proofs with zero trust
+        working-directory: lean
+        run: lake env lean --trust=0 ThreeBallCollision.lean
+
+      - name: Independently check rational schedules and conservation
+        run: python -m unittest -v tests/test_three_ball_collision.py
