@@ -41,4 +41,4 @@ jobs:
         run: lake env lean --trust=0 ThreeBallCollision.lean
 
       - name: Independently check rational schedules and conservation
-        run: python -m unittest -v tests/test_three_ball_collision.py
+        run: python tests/test_three_ball_collision.py -v
