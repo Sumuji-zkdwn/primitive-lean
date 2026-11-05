@@ -146,6 +146,7 @@ def verify_lean(rebuild):
         'OperatorVocabularyRefinement': 'Conservative extension criterion, strict new-action witnesses, quotient surjection and quotient splits',
         'OperatorFiniteHorizon': 'Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words',
         'OperatorSemanticClosure': 'Semantically compatible operators, induced quotient endomorphisms, functoriality, and a conservative nonword-generatable finite witness',
+        'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
         'SemanticIntervalNecessity': 'Finite prefix-time survival of local systems, old invariant extinction barrier, fresh-operation necessity, finite strict-quotient example and one-local extinction counterexample',
         'FiniteSelfSynthesis': 'Executable finite local repair search, complete bounded-catalog oracle, nonword-generable interval restoration, and Fin 3 instantiated repair/refinement',
         'RecursiveOperatorReentry': 'Finite child-generated novel operator catalogue, fresh patch construction, sound and complete bounded frontier, reentry monotonicity, conditional local viability, three-round saturation example',
