@@ -14,7 +14,7 @@ Thus s, t, and α are distinct inputs. The model prescribes constant translation
 
 ## Lean declarations
 
-Source: lean/Elastica/MovingCurve.lean.
+Source: lean/MovingCurve.lean; axiom audit: lean/MovingCurveAudit.lean.
 
 - movingX_time_displacement, movingY_time_displacement: time changes the position by exactly vₓ(t₁−t₀) and vᵧ(t₁−t₀); the displacement is independent of fixed α and the arc-length profile.
 - hasDerivAt_movingX_arcLength, hasDerivAt_movingY_arcLength: the arc-length derivatives are cos(θ(s)+α) and sin(θ(s)+α).
@@ -28,4 +28,4 @@ These statements formalize only the explicit coordinate model used by the curve/
 
 ## Verification
 
-The repository CI has an explicit lake build Elastica.MovingCurve step. A successful exact-head run is required before treating these declarations as machine-checked; the integration audit also remains required.
+The repository CI compiles MovingCurve.lean with Lean --trust=0 and runs the explicit axiom audit in MovingCurveAudit.lean. A successful exact-head run is required before treating these declarations as machine-checked; the main integration audit also remains required.
