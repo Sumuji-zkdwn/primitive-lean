@@ -57,12 +57,19 @@ def observation_rows(max_prime: int = 97, degree: int = 200) -> list[dict[str, i
 
 
 def hecke_failures(degree: int = 200) -> list[str]:
-    """Check good-prime square relation and coprime-index multiplicativity."""
+    """Check all in-range good prime-power recurrences and coprime multiplicativity."""
     a = eta_coefficients(degree)
     failures = []
     for p in range(2, isqrt(degree) + 1):
-        if is_prime(p) and p != 11 and a[p * p] != a[p] ** 2 - p:
-            failures.append(f"square: p={p}")
+        if not is_prime(p) or p == 11:
+            continue
+        previous, current = a[1], a[p]
+        power = p * p
+        while power <= degree:
+            if a[power] != a[p] * current - p * previous:
+                failures.append(f"prime-power: p={p}, power={power}")
+            previous, current = current, a[power]
+            power *= p
     for m in range(1, degree + 1):
         for n in range(1, degree // m + 1):
             if gcd(m, n) == 1 and a[m * n] != a[m] * a[n]:

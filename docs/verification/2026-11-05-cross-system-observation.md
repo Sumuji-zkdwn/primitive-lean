@@ -32,7 +32,7 @@ f  : q × ∏(1−qⁿ)²(1−q¹¹ⁿ)²
 a_p(E) = p+1−#E(F_p),  p≠11.
 ```
 
-The Python script obtains `#E(F_p)` by enumerating `y²+y` residues and `x` values including the unique point at infinity, and builds the truncated eta product using only exact integers. Its default checks are all **24** primes `2 ≤ p ≤ 97` excluding the bad prime `11`, along with `a_(p²)=a_p²−p` for good squares in range and `a_(mn)=a_m a_n` when `gcd(m,n)=1` for `mn ≤ 200`. A changed curve constant is a negative control.
+The Python script obtains `#E(F_p)` by enumerating `y²+y` residues and `x` values including the unique point at infinity, and builds the truncated eta product using only exact integers. Its default checks are all **24** primes `2 ≤ p ≤ 97` excluding the bad prime `11`, along with `a_(p^(r+1))=a_p*a_(p^r)−p*a_(p^(r−1))` for every good prime power in range and `a_(mn)=a_m a_n` when `gcd(m,n)=1` for `mn ≤ 200`. A changed curve constant is a negative control.
 
 Sample computed rows:
 
