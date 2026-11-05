@@ -112,7 +112,9 @@ theorem delayed_crossing_of_negative_discriminant
     nlinarith [sq_nonneg a]
   have hrle (n : ℕ) : r n ≤ a := by
     cases n with
-    | zero => simpa only [hr₀] using (le_refl a)
+    | zero =>
+        simp only [Nat.cast_zero, zero_mul, add_zero]
+        exact le_of_eq hr₀
     | succ n =>
         rw [hrrec n]
         have hdiv : 0 ≤ γ / r n :=
@@ -198,6 +200,49 @@ theorem participation_stops_of_gap_le_cost
   have hnonpos : 1 - e / D ≤ 0 := by linarith
   simp [participation, max_eq_left hnonpos]
 
+/-- At any fixed positive net entry cost, participation is identically
+zero for every sufficiently small positive objective gap. This is the
+inner D→0+ boundary limit (its value is 0). -/
+theorem participation_fixed_cost_eventually_zero
+    {e : ℝ} (he : 0 < e) :
+    ∃ δ : ℝ, 0 < δ ∧ ∀ D : ℝ,
+      0 < D → D < δ → participation D e = 0 := by
+  refine ⟨e, he, ?_⟩
+  intro D hD hlt
+  exact participation_stops_of_gap_le_cost hD (le_of_lt hlt)
+
+/-- At any fixed positive objective gap, participation approaches 1 as
+net entry cost decreases to zero from above. This is the inner e→0+
+boundary limit (its value is 1). -/
+theorem participation_fixed_gap_tends_one
+    {D : ℝ} (hD : 0 < D) :
+    ∀ η : ℝ, 0 < η →
+      ∃ δ : ℝ, 0 < δ ∧ ∀ e : ℝ,
+        0 ≤ e → e < δ → |participation D e - 1| < η := by
+  intro η hη
+  refine ⟨min (D / 2) (D * η / 2), ?_, ?_⟩
+  · exact lt_min (by linarith) (by positivity)
+  · intro e he heδ
+    have heD₂ : e < D / 2 :=
+      lt_of_lt_of_le heδ (min_le_left _ _)
+    have heDη : e < D * η / 2 :=
+      lt_of_lt_of_le heδ (min_le_right _ _)
+    have heD : e < D := by linarith
+    have hrnonneg : 0 ≤ e / D :=
+      div_nonneg he (le_of_lt hD)
+    have hrlt1 : e / D < 1 :=
+      (div_lt_iff₀ hD).2 (by linarith)
+    have hnonneg : 0 ≤ 1 - e / D := by linarith
+    have hp : participation D e = 1 - e / D := by
+      unfold participation
+      exact max_eq_right hnonneg
+    have hrltη : e / D < η :=
+      (div_lt_iff₀ hD).2 (by nlinarith [mul_pos hD hη])
+    rw [hp]
+    have heq : 1 - e / D - 1 = -(e / D) := by ring
+    rw [heq, abs_neg, abs_of_nonneg hrnonneg]
+    exact hrltη
+
 /-- Arbitrarily near (D,e)=(0,0), the two approaches e=0 and e=D
 give opposite participation rates. -/
 theorem participation_paths_disagree_arbitrarily_near
@@ -235,6 +280,8 @@ theorem participation_no_joint_boundary_limit :
 #print axioms ContestEconomy.delayed_crossing_of_negative_discriminant
 #print axioms ContestEconomy.delayed_third_step_nonpos
 #print axioms ContestEconomy.delayed_seventh_step_example
+#print axioms ContestEconomy.participation_fixed_cost_eventually_zero
+#print axioms ContestEconomy.participation_fixed_gap_tends_one
 #print axioms ContestEconomy.participation_no_joint_boundary_limit
 
 end ContestEconomy
