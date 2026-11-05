@@ -57,7 +57,7 @@ jobs:
               event_sha=os.environ['EVENT_SHA'], pr_base_sha=os.environ['PR_BASE_SHA'],
               event=os.environ['GITHUB_EVENT_NAME'],
               claim='Exact proposed source; a future merge with a changed base requires revalidation'
-          ), indent=2)+'\n')
+          ), indent=2)+'\\n')
           PY
 
       - name: Install offline test dependencies
@@ -72,6 +72,10 @@ jobs:
           test: false
           use-mathlib-cache: true
           use-github-cache: true
+
+      - name: Build independent moving-curve module
+        working-directory: lean
+        run: lake build Elastica.MovingCurve
 
       - name: Test finite operator-language semantics
         run: python -m pytest -q tests/test_operator_words.py tests/test_operator_refinement.py tests/test_operator_semantic_closure.py tests/test_semantic_interval_necessity.py tests/test_finite_self_synthesis.py tests/test_recursive_operator_reentry.py tests/test_rule_self_modification.py tests/test_meta_rule_self_extension.py tests/test_higher_order_lift_self_rewriting.py

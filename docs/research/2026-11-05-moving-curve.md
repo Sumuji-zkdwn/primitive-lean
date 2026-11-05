@@ -28,4 +28,4 @@ These statements formalize only the explicit coordinate model used by the curve/
 
 ## Verification
 
-Pending exact-head CI for the pull request. Do not cite this source as machine-checked until that run succeeds.
+The repository CI has an explicit lake build Elastica.MovingCurve step. A successful exact-head run is required before treating these declarations as machine-checked; the integration audit also remains required.
