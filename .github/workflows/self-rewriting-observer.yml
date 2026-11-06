@@ -1,0 +1,58 @@
+name: Self-rewriting observer Lean (isolated)
+
+on:
+  push:
+    branches: [chatgpt/self-rewriting-observer-lean-20261106]
+    paths:
+      - 'lean/SelfRewritingObserver.lean'
+      - '.github/workflows/self-rewriting-observer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile exact model with zero trust
+        working-directory: lean
+        run: |
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/SelfRewritingObserver.olean SelfRewritingObserver.lean
+
+      - name: Audit proof dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo 'import SelfRewritingObserver'
+            for name in wordEq_iff_signature blind_classes frozen_classes feedback_classes feedback_implies_frozen frozen_implies_blind strict_feedback feedback_two_scans delayed_witness symmetry_involutive symmetry_invisible; do
+              echo "#print axioms SelfRewritingObserver.$name"
+            done
+          } > SelfRewritingObserverAudit.lean
+          lake env lean --trust=0 SelfRewritingObserverAudit.lean 2>&1 | tee ../self-rewriting-observer-axioms.log
+          if grep -E 'sorryAx|selfRewritingSorry' ../self-rewriting-observer-axioms.log; then exit 1; fi
+
+      - name: Upload verification log
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: self-rewriting-observer-lean-${{ github.run_id }}
+          path: |
+            self-rewriting-observer-axioms.log
+          if-no-files-found: warn
