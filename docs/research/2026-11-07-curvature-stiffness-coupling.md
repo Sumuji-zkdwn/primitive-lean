@@ -41,9 +41,17 @@ The relay state itself follows from a *different* explicit energy reduction: eva
 
 This is a genuine syntactic Lean bridge to a previously proved actual integral, not an assumed energy symbol. However, the reduction still makes choices: the polynomial V, two-state restriction, switching penalty, identification of local curvature stiffness with input/flow resistance, and quadratic pressure work.
 
+## Exact two-step controllability Gramian
+
+To reproduce a precise instance of the **revised** Part II minimum-input-energy calculation, we use two signed controls `u,v` and the history-conditioned response `d=(u+v)/k_q`, where `k_false=1` and `k_true=3` come from the single curvature energy.
+
+The two-input endpoint operator is the row vector `L_q=[1/k_q,1/k_q]`. Its scalar controllability Gramian is `W_q=L_q L_qᵀ=2/k_q²`. Thus `W_false=2` and `W_true=2/9`. Both are **strictly positive** (full scalar rank), yet the minimum effort for target `d` is `d²/W_q=k_q²d²/2`. A direct two-term Cauchy–Schwarz inequality proves the lower bound, and the constant controls `u=v=k_q d/2` attain it. The model matches Part II's finite-horizon minimum-energy principle in this exact finite scalar special case. It does not assert the general Hilbert-space controllability theorem.
+
+It is not a claim that the earlier history update *must* decrease gain: this specific chosen potential and relay do so for the positive pulse. Reversing the relay restores the low-stiffness state.
+
 ## Formal files and verification
 
-- `lean/Research/OkanoharaTransport.lean`: 18 additional theorems (total 46), especially `curvature_double_well_integral`, `well_curvature_exact_variation`, `well_stiffness_eq_previous_resistance`, `curvature_flow_work_gap`, `curvature_flow_action_eq_prior_fiber_action`, `actual_curvature_step_eq_discrete_energy`, and `actual_curvature_switch_minimizes`.
+- `lean/Research/OkanoharaTransport.lean`: 24 additional theorems (total 52), especially `curvature_double_well_integral`, `well_curvature_exact_variation`, `well_stiffness_eq_previous_resistance`, `curvature_flow_work_gap`, `curvature_flow_action_eq_prior_fiber_action`, `actual_curvature_step_eq_discrete_energy`, and `actual_curvature_switch_minimizes`.
 - `tools/verify_okanohara_bridge.py`: audits `#print axioms` for each theorem, and runs the sidecar under `--trust=0`.
 - `tests/test_okanohara_curvature.py`: independent exact Fraction finite-value checks of the polynomial identities, relay minimization and quadratic work. Finite tests are NOT mathematical proofs for all real numbers.
 - CI: the existing protected Elastica library is built first. Standalone proofs are then checked and the original integration suite is run. Check the latest PR head and Actions result.
