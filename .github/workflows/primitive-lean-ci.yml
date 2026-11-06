@@ -79,6 +79,9 @@ jobs:
       - name: Run complete integration verification
         run: python -B -X utf8 tools/verify.py --integration-only
 
+      - name: Check isolated Okanohara transport bridge (trust-zero + axiom audit)
+        run: python -B -X utf8 tools/verify_okanohara_bridge.py
+
       - name: Upload complete verification evidence even on failure
         if: always()
         uses: actions/upload-artifact@v6
