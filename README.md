@@ -9,6 +9,7 @@
 - **多項式・Orbit-trace**: [OrbitTrace入口](lean/OrbitTrace.lean) · [研究上の成立条件と未証明事項](docs/research/2026-11-04-orbit-trace-integrals.md)（[PR #68](https://github.com/Sumuji-zkdwn/primitive-lean/pull/68)）
 - **演算器の観測・有限自己拡張**: `linear_input/lean_check/OperatorWordObservations.inc` から `HigherOrderLiftSelfRewriting.inc` までの段階的な証明 · [系列の統合境界](docs/integration/2026-11-05-operator-rulefold-consolidation.md)（[PR #74](https://github.com/Sumuji-zkdwn/primitive-lean/pull/74)）
 - **操作可能なデモ**: [Rulefold × デジタル曼荼羅](demos/rulefold_mandala.html) · [数学モデルとの区別](demos/RULEFOLD_MANDALA_README.md)
+- **初期465定理からの往復操作**: [13往復の記録](experiments/roundtrip/README.md) · 初期509宣言のみを結合して `python3 -B experiments/roundtrip/assemble.py --compile`（新規107定理・116宣言、Lean検証済み）
 - **未統合の研究系列**: [PR #75](https://github.com/Sumuji-zkdwn/primitive-lean/pull/75) は履歴非保存・局所接合の証明群を統合提案中。#70 と #71 は同名の異なるLean原稿なので未選定です。
 
 **統合状態:** #3・#68・#74 は `main` に取り込み済み。各先端コミットに関する過去のLean／有限検算の成功記録はありますが、それだけで異なる枝を組み合わせた全体検証の成功は主張しません。CI実行の状態・固定コミットは各PRとActionsで確認してください。以下の旧版の定理数・「未マージ」記述は各日付当時の履歴記録です。

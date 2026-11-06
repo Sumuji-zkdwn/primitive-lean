@@ -1,0 +1,582 @@
+[
+ {
+  "name": "RoundTrip01.obsMatrix",
+  "kind": "def",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.obsMatrix_mulVec",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.obsMatrix_eq_vandermonde",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.det_obsMatrix",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.obsMatrix_isUnit_iff",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.energy_interpolate",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.recover_zero_input_energy_of_interpolation",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.hasDerivAt_energy_input",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.single_input_not_injective",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip01.recover_by_inverse",
+  "kind": "theorem",
+  "file": "R01_Interpolation.inc"
+ },
+ {
+  "name": "RoundTrip02.IsMinimizer",
+  "kind": "def",
+  "file": "R02_ValueFunction.inc"
+ },
+ {
+  "name": "RoundTrip02.supergradient",
+  "kind": "theorem",
+  "file": "R02_ValueFunction.inc"
+ },
+ {
+  "name": "RoundTrip02.observable_monotone",
+  "kind": "theorem",
+  "file": "R02_ValueFunction.inc"
+ },
+ {
+  "name": "RoundTrip02.minimizer_monotone_from_envelope",
+  "kind": "theorem",
+  "file": "R02_ValueFunction.inc"
+ },
+ {
+  "name": "RoundTrip02.value_concave",
+  "kind": "theorem",
+  "file": "R02_ValueFunction.inc"
+ },
+ {
+  "name": "RoundTrip03.design_is_pencil",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.input_eq_mul_margin",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.maxwell_input_zero",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.maxwell_two_global_minimizers",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.metastable_local_not_global",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.fold_discriminant",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.discriminant_fold",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.input_chebyshev",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip03.chebyshev_folds_and_margin",
+  "kind": "theorem",
+  "file": "R03_Cusp.inc"
+ },
+ {
+  "name": "RoundTrip04.not_differentiableAt_of_two_minimizers",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.pencil_apply",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.input_neg_of_margin",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.value",
+  "kind": "def",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.value_bddBelow",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.value_le",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.value_eq_of_globalMin",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.value_not_differentiableAt_zero",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip04.order_parameter_jump",
+  "kind": "theorem",
+  "file": "R04_PhaseTransition.inc"
+ },
+ {
+  "name": "RoundTrip05.freeEnergy",
+  "kind": "def",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.freeEnergy_le_min",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.min_sub_log_two_le_freeEnergy",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.freeEnergy_maxwell",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.hasDerivAt_freeEnergy_maxwell",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.susceptibility_at_zero",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.tendsto_freeEnergy_maxwell",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip05.limit_not_differentiableAt",
+  "kind": "theorem",
+  "file": "R05_GibbsSmoothing.inc"
+ },
+ {
+  "name": "RoundTrip06.phase_energy_split",
+  "kind": "theorem",
+  "file": "R06_CircleMechanics.inc"
+ },
+ {
+  "name": "RoundTrip06.circle_iff_input",
+  "kind": "theorem",
+  "file": "R06_CircleMechanics.inc"
+ },
+ {
+  "name": "RoundTrip06.pressure_circle_iff",
+  "kind": "theorem",
+  "file": "R06_CircleMechanics.inc"
+ },
+ {
+  "name": "RoundTrip06.expansion_around_circle",
+  "kind": "theorem",
+  "file": "R06_CircleMechanics.inc"
+ },
+ {
+  "name": "RoundTrip06.metastable_circle",
+  "kind": "theorem",
+  "file": "R06_CircleMechanics.inc"
+ },
+ {
+  "name": "RoundTrip06.metastable_circle_example",
+  "kind": "theorem",
+  "file": "R06_CircleMechanics.inc"
+ },
+ {
+  "name": "RoundTrip07.soliton",
+  "kind": "def",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.solitonDeriv",
+  "kind": "def",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.hasDerivAt_soliton",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.deriv_soliton",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.hasDerivAt_solitonDeriv",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.contDiff_soliton",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.soliton_curvature_equation",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.soliton_phase_energy",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.soliton_phase_flow",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip07.soliton_tendsto_zero",
+  "kind": "theorem",
+  "file": "R07_Soliton.inc"
+ },
+ {
+  "name": "RoundTrip08.kink",
+  "kind": "def",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.cosh_eq_exp",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.sinh_eq_exp",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.hasDerivAt_kink",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.deriv_kink",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.curvature_kink",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.contDiff_kink",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.cos_two_arctan",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.sin_two_arctan",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.cos_kink",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.sin_kink",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.kink_angleEquation",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.kink_stationary",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip08.kink_first_integral",
+  "kind": "theorem",
+  "file": "R08_KinkAngle.inc"
+ },
+ {
+  "name": "RoundTrip09.moment_balance",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.hasDerivAt_xAntideriv",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.hasDerivAt_yAntideriv",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.xCoord_kink",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.yCoord_kink",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.soliton_eq_height",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.moment_constant_kink",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.tanh_one_gt_half",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip09.kink_self_intersection",
+  "kind": "theorem",
+  "file": "R09_LoopCurve.inc"
+ },
+ {
+  "name": "RoundTrip10.kink_scaling",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.soliton_scaling_from_baseline",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.hasDerivAt_energyAntideriv",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.energy_kink",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.energy_scaling_baseline",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.energy_routes_agree",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.energy_kink_lt",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.kink_tendsto_atTop",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip10.kink_tendsto_atBot",
+  "kind": "theorem",
+  "file": "R10_ScalingInvariants.inc"
+ },
+ {
+  "name": "RoundTrip11.fgl",
+  "kind": "def",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.fgl_comm",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.fgl_assoc",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.fgl_zero",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.fgl_inv",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.one_add_mul_fgl",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.fgl_zero_param",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.powerLog_hom",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.rpow_eq_one_add_powerLog",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.energy_relative_change",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.energy_composed_scaling",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.scaling_compose",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.quadratic_loss_fraction",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip11.loss_fraction_union",
+  "kind": "theorem",
+  "file": "R11_FormalGroup.inc"
+ },
+ {
+  "name": "RoundTrip12.deform",
+  "kind": "def",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip12.deform_eq",
+  "kind": "theorem",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip12.deform_add",
+  "kind": "theorem",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip12.deform_energy_split",
+  "kind": "theorem",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip12.deform_subadditive",
+  "kind": "theorem",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip12.deform_order",
+  "kind": "theorem",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip12.deform_tendsto",
+  "kind": "theorem",
+  "file": "R12_TsallisEnergy.inc"
+ },
+ {
+  "name": "RoundTrip13.deform_strictMono",
+  "kind": "theorem",
+  "file": "R13_DeformedTransition.inc"
+ },
+ {
+  "name": "RoundTrip13.deform_zero",
+  "kind": "theorem",
+  "file": "R13_DeformedTransition.inc"
+ },
+ {
+  "name": "RoundTrip13.deform_left_inverse",
+  "kind": "theorem",
+  "file": "R13_DeformedTransition.inc"
+ },
+ {
+  "name": "RoundTrip13.not_differentiableAt_deform",
+  "kind": "theorem",
+  "file": "R13_DeformedTransition.inc"
+ },
+ {
+  "name": "RoundTrip13.deform_value_is_min",
+  "kind": "theorem",
+  "file": "R13_DeformedTransition.inc"
+ },
+ {
+  "name": "RoundTrip13.deformed_maxwell_corner",
+  "kind": "theorem",
+  "file": "R13_DeformedTransition.inc"
+ }
+]
