@@ -1,0 +1,34 @@
+name: Two-wavelength phase observation (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/two-wavelength-phase-20261107]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile additions, audit axioms, and run independent experiments
+        run: python -B tools/verify.py --two-wavelength-only
+      - name: Upload source-specific verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: two-wavelength-phase-${{ github.run_id }}
+          path: verification/two-wavelength/
+          if-no-files-found: warn

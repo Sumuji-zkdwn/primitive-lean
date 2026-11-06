@@ -1,0 +1,2919 @@
+{
+  "schema_version": 1,
+  "parent_commit": "b293710217765e12992de522a866d0fafef4d95a",
+  "model": {
+    "first_phase": "pi*(h+1)/2",
+    "second_phase": "(d/w)*pi*(h+1)/2",
+    "intensity": "(1+cos(phase))/2",
+    "ideal_wavelength_ratio": "2/3",
+    "ideal_index_contrast_ratio": "1",
+    "exact_equality": "Rational phase coefficients modulo sign and 2; never a floating tolerance"
+  },
+  "exact_checks": {
+    "fine_grid_state_count": 145,
+    "exhaustive_pair_comparisons": 10440,
+    "bounded_noise_sample_count": 5020,
+    "bounded_noise_magnitude": 0.24,
+    "bounded_noise_note": "Finite checks; the analytic spacing bound is epsilon < 1/4.",
+    "grids": {
+      "five_representatives": {
+        "state_count": 5,
+        "single_class_count": 3,
+        "dual_class_count": 5,
+        "single_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0"
+            ],
+            "heights": [
+              "-1",
+              "3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2"
+            ],
+            "heights": [
+              "0",
+              "2"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1"
+            ],
+            "heights": [
+              "1"
+            ]
+          }
+        ],
+        "dual_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "0"
+            ],
+            "heights": [
+              "-1"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "3/4"
+            ],
+            "heights": [
+              "0"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1",
+              "1/2"
+            ],
+            "heights": [
+              "1"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "1/4"
+            ],
+            "heights": [
+              "2"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "1"
+            ],
+            "heights": [
+              "3"
+            ]
+          }
+        ],
+        "minimum_linf_spacing": 0.5,
+        "closest_height_pair": [
+          "-1",
+          "2"
+        ],
+        "strict_bounded_error_sufficient_limit": 0.25
+      },
+      "integer_minus1_to7": {
+        "state_count": 9,
+        "single_class_count": 3,
+        "dual_class_count": 5,
+        "single_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0"
+            ],
+            "heights": [
+              "-1",
+              "3",
+              "7"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2"
+            ],
+            "heights": [
+              "0",
+              "2",
+              "4",
+              "6"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1"
+            ],
+            "heights": [
+              "1",
+              "5"
+            ]
+          }
+        ],
+        "dual_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "0"
+            ],
+            "heights": [
+              "-1",
+              "7"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "3/4"
+            ],
+            "heights": [
+              "0",
+              "6"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1",
+              "1/2"
+            ],
+            "heights": [
+              "1",
+              "5"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "1/4"
+            ],
+            "heights": [
+              "2",
+              "4"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "1"
+            ],
+            "heights": [
+              "3"
+            ]
+          }
+        ],
+        "minimum_linf_spacing": 0.0,
+        "closest_height_pair": [
+          "-1",
+          "7"
+        ],
+        "strict_bounded_error_sufficient_limit": 0.0
+      },
+      "integer_minus9_to15": {
+        "state_count": 25,
+        "single_class_count": 3,
+        "dual_class_count": 5,
+        "single_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0"
+            ],
+            "heights": [
+              "-9",
+              "-5",
+              "-1",
+              "3",
+              "7",
+              "11",
+              "15"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2"
+            ],
+            "heights": [
+              "-8",
+              "-6",
+              "-4",
+              "-2",
+              "0",
+              "2",
+              "4",
+              "6",
+              "8",
+              "10",
+              "12",
+              "14"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1"
+            ],
+            "heights": [
+              "-7",
+              "-3",
+              "1",
+              "5",
+              "9",
+              "13"
+            ]
+          }
+        ],
+        "dual_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "0"
+            ],
+            "heights": [
+              "-9",
+              "-1",
+              "7",
+              "15"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "3/4"
+            ],
+            "heights": [
+              "-8",
+              "-2",
+              "0",
+              "6",
+              "8",
+              "14"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1",
+              "1/2"
+            ],
+            "heights": [
+              "-7",
+              "-3",
+              "1",
+              "5",
+              "9",
+              "13"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "1/4"
+            ],
+            "heights": [
+              "-6",
+              "-4",
+              "2",
+              "4",
+              "10",
+              "12"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "1"
+            ],
+            "heights": [
+              "-5",
+              "3",
+              "11"
+            ]
+          }
+        ],
+        "minimum_linf_spacing": 0.0,
+        "closest_height_pair": [
+          "-9",
+          "-1"
+        ],
+        "strict_bounded_error_sufficient_limit": 0.0
+      },
+      "thirds_minus1_to7": {
+        "state_count": 25,
+        "single_class_count": 7,
+        "dual_class_count": 12,
+        "single_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0"
+            ],
+            "heights": [
+              "-1",
+              "3",
+              "7"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/6"
+            ],
+            "heights": [
+              "-2/3",
+              "8/3",
+              "10/3",
+              "20/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/3"
+            ],
+            "heights": [
+              "-1/3",
+              "7/3",
+              "11/3",
+              "19/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2"
+            ],
+            "heights": [
+              "0",
+              "2",
+              "4",
+              "6"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "2/3"
+            ],
+            "heights": [
+              "1/3",
+              "5/3",
+              "13/3",
+              "17/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "5/6"
+            ],
+            "heights": [
+              "2/3",
+              "4/3",
+              "14/3",
+              "16/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1"
+            ],
+            "heights": [
+              "1",
+              "5"
+            ]
+          }
+        ],
+        "dual_classes": [
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "0"
+            ],
+            "heights": [
+              "-1",
+              "7"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/6",
+              "1/4"
+            ],
+            "heights": [
+              "-2/3",
+              "20/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/3",
+              "1/2"
+            ],
+            "heights": [
+              "-1/3",
+              "7/3",
+              "11/3",
+              "19/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "3/4"
+            ],
+            "heights": [
+              "0",
+              "6"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "2/3",
+              "1"
+            ],
+            "heights": [
+              "1/3",
+              "17/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "5/6",
+              "3/4"
+            ],
+            "heights": [
+              "2/3",
+              "16/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1",
+              "1/2"
+            ],
+            "heights": [
+              "1",
+              "5"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "5/6",
+              "1/4"
+            ],
+            "heights": [
+              "4/3",
+              "14/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "2/3",
+              "0"
+            ],
+            "heights": [
+              "5/3",
+              "13/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/2",
+              "1/4"
+            ],
+            "heights": [
+              "2",
+              "4"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "1/6",
+              "3/4"
+            ],
+            "heights": [
+              "8/3",
+              "10/3"
+            ]
+          },
+          {
+            "folded_phase_over_pi": [
+              "0",
+              "1"
+            ],
+            "heights": [
+              "3"
+            ]
+          }
+        ],
+        "minimum_linf_spacing": 0.0,
+        "closest_height_pair": [
+          "-1",
+          "7"
+        ],
+        "strict_bounded_error_sufficient_limit": 0.0
+      }
+    }
+  },
+  "parameter_scan": {
+    "exact_optical_calibration_checks": 325,
+    "scenarios": [
+      {
+        "scenario": "equal_wavelengths",
+        "wavelength_ratio": "1",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "1",
+        "five_state_exact_classes": 3,
+        "nine_state_exact_classes": 3,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "3"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "3"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "example_minus1_vs3_second_channel_gap": 0.0
+      },
+      {
+        "scenario": "second_harmonic",
+        "wavelength_ratio": "1/2",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "2",
+        "five_state_exact_classes": 3,
+        "nine_state_exact_classes": 3,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "3"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "3"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "example_minus1_vs3_second_channel_gap": 0.0
+      },
+      {
+        "scenario": "ideal_two_thirds",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "3/2",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 5,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "example_minus1_vs3_second_channel_gap": 1.0
+      },
+      {
+        "scenario": "wavelength_three_quarters",
+        "wavelength_ratio": "3/4",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "4/3",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 6,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "0",
+            "4"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "example_minus1_vs3_second_channel_gap": 0.75
+      },
+      {
+        "scenario": "wavelength_four_fifths",
+        "wavelength_ratio": "4/5",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "5/4",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.27059805007309845,
+          "closest_height_pair": [
+            "2",
+            "6"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.13529902503654923
+        },
+        "example_minus1_vs3_second_channel_gap": 0.5
+      },
+      {
+        "scenario": "wavelength_plus_1pct",
+        "wavelength_ratio": "101/150",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "150/101",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.00868237588886811,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.004341187944434055
+        },
+        "example_minus1_vs3_second_channel_gap": 0.9978246739845094
+      },
+      {
+        "scenario": "wavelength_minus_1pct",
+        "wavelength_ratio": "33/50",
+        "index_contrast_ratio": "1",
+        "effective_phase_ratio": "50/33",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.009035651368646702,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.004517825684323351
+        },
+        "example_minus1_vs3_second_channel_gap": 0.9977359612865423
+      },
+      {
+        "scenario": "contrast_plus_0_01pct",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "10001/10000",
+        "effective_phase_ratio": "30003/20000",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 8.882641331364738e-07,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 4.441320665682369e-07
+        },
+        "example_minus1_vs3_second_channel_gap": 0.9999997779339174
+      },
+      {
+        "scenario": "contrast_plus_0_1pct",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "1001/1000",
+        "effective_phase_ratio": "3003/2000",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 8.882380959551739e-05,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 4.4411904797758694e-05
+        },
+        "example_minus1_vs3_second_channel_gap": 0.9999777935544749
+      },
+      {
+        "scenario": "contrast_plus_1pct",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "101/100",
+        "effective_phase_ratio": "303/200",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.008856374635655584,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.004428187317827792
+        },
+        "example_minus1_vs3_second_channel_gap": 0.99778098230154
+      },
+      {
+        "scenario": "contrast_minus_1pct",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "99/100",
+        "effective_phase_ratio": "297/200",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.5,
+          "closest_height_pair": [
+            "-1",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.25
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.008856374635655584,
+          "closest_height_pair": [
+            "-1",
+            "7"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.004428187317827792
+        },
+        "example_minus1_vs3_second_channel_gap": 0.99778098230154
+      },
+      {
+        "scenario": "contrast_plus_10pct",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "11/10",
+        "effective_phase_ratio": "33/20",
+        "five_state_exact_classes": 5,
+        "nine_state_exact_classes": 9,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.4655496300409686,
+          "closest_height_pair": [
+            "0",
+            "2"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.2327748150204843
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.08173678345562785,
+          "closest_height_pair": [
+            "4",
+            "6"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.040868391727813924
+        },
+        "example_minus1_vs3_second_channel_gap": 0.7938926261462365
+      },
+      {
+        "scenario": "contrast_plus_one_third",
+        "wavelength_ratio": "2/3",
+        "index_contrast_ratio": "4/3",
+        "effective_phase_ratio": "2",
+        "five_state_exact_classes": 3,
+        "nine_state_exact_classes": 3,
+        "five_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "3"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "nine_state_spacing": {
+          "minimum_linf_spacing": 0.0,
+          "closest_height_pair": [
+            "-1",
+            "3"
+          ],
+          "strict_bounded_error_sufficient_limit": 0.0
+        },
+        "example_minus1_vs3_second_channel_gap": 0.0
+      }
+    ]
+  },
+  "noise_experiments": {
+    "seed": 20261107,
+    "trials_per_state": 5000,
+    "decoder": "L-infinity nearest codeword; ties select first height in ascending order",
+    "sampling": "Equal numbers per state; independent additive N(0,sigma^2) errors on both channels; no clipping",
+    "calibrated_decoder": "Uses the actual effective phase ratio d/w",
+    "nominal_decoder": "Continues to use ideal ratio 3/2 even when d/w changes",
+    "scenarios": [
+      {
+        "scenario": "five_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.0,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.001,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.01,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.05,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.1,
+        "samples": 25000,
+        "calibrated_error_count": 162,
+        "calibrated_error_rate": 0.00648,
+        "nominal_error_count": 162,
+        "nominal_error_rate": 0.00648,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 28,
+            "nominal_errors": 28
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 43,
+            "nominal_errors": 43
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 11,
+            "nominal_errors": 11
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 41,
+            "nominal_errors": 41
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 39,
+            "nominal_errors": 39
+          }
+        ]
+      },
+      {
+        "scenario": "five_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.2,
+        "samples": 25000,
+        "calibrated_error_count": 3407,
+        "calibrated_error_rate": 0.13628,
+        "nominal_error_count": 3407,
+        "nominal_error_rate": 0.13628,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 502,
+            "nominal_errors": 502
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 898,
+            "nominal_errors": 898
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 567,
+            "nominal_errors": 567
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 925,
+            "nominal_errors": 925
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 515,
+            "nominal_errors": 515
+          }
+        ]
+      },
+      {
+        "scenario": "nine_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.0,
+        "samples": 45000,
+        "calibrated_error_count": 20000,
+        "calibrated_error_rate": 0.4444444444444444,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.001,
+        "samples": 45000,
+        "calibrated_error_count": 20000,
+        "calibrated_error_rate": 0.4444444444444444,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.01,
+        "samples": 45000,
+        "calibrated_error_count": 20000,
+        "calibrated_error_rate": 0.4444444444444444,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.05,
+        "samples": 45000,
+        "calibrated_error_count": 20000,
+        "calibrated_error_rate": 0.4444444444444444,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.1,
+        "samples": 45000,
+        "calibrated_error_count": 20137,
+        "calibrated_error_rate": 0.4474888888888889,
+        "nominal_error_count": 20137,
+        "nominal_error_rate": 0.4474888888888889,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 31,
+            "nominal_errors": 31
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 36,
+            "nominal_errors": 36
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 16,
+            "nominal_errors": 16
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 34,
+            "nominal_errors": 34
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 20,
+            "nominal_errors": 20
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_ideal",
+        "effective_phase_ratio": "3/2",
+        "sigma": 0.2,
+        "samples": 45000,
+        "calibrated_error_count": 23481,
+        "calibrated_error_rate": 0.5218,
+        "nominal_error_count": 23481,
+        "nominal_error_rate": 0.5218,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 483,
+            "nominal_errors": 483
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 942,
+            "nominal_errors": 942
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 575,
+            "nominal_errors": 575
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 955,
+            "nominal_errors": 955
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 526,
+            "nominal_errors": 526
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 5000,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.0,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.001,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.01,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.05,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.1,
+        "samples": 25000,
+        "calibrated_error_count": 150,
+        "calibrated_error_rate": 0.006,
+        "nominal_error_count": 144,
+        "nominal_error_rate": 0.00576,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 25,
+            "nominal_errors": 25
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 42,
+            "nominal_errors": 43
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 28,
+            "nominal_errors": 22
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 27,
+            "nominal_errors": 27
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 28,
+            "nominal_errors": 27
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.2,
+        "samples": 25000,
+        "calibrated_error_count": 3579,
+        "calibrated_error_rate": 0.14316,
+        "nominal_error_count": 3584,
+        "nominal_error_rate": 0.14336,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 483,
+            "nominal_errors": 506
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 921,
+            "nominal_errors": 916
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 621,
+            "nominal_errors": 607
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 1026,
+            "nominal_errors": 1030
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 528,
+            "nominal_errors": 525
+          }
+        ]
+      },
+      {
+        "scenario": "nine_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.0,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.001,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.01,
+        "samples": 45000,
+        "calibrated_error_count": 3565,
+        "calibrated_error_rate": 0.07922222222222222,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1101,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 2,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 2,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 7,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 1,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 2452,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.05,
+        "samples": 45000,
+        "calibrated_error_count": 12060,
+        "calibrated_error_rate": 0.268,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1239,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 907,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 751,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 952,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 1851,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 1153,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 1685,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 3522,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.1,
+        "samples": 45000,
+        "calibrated_error_count": 16303,
+        "calibrated_error_rate": 0.3622888888888889,
+        "nominal_error_count": 20139,
+        "nominal_error_rate": 0.44753333333333334,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1254,
+            "nominal_errors": 27
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 1226,
+            "nominal_errors": 39
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 1114,
+            "nominal_errors": 11
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 1243,
+            "nominal_errors": 35
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 27,
+            "nominal_errors": 27
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 2836,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 2353,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 2685,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 3565,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_contrast_plus_1pct",
+        "effective_phase_ratio": "303/200",
+        "sigma": 0.2,
+        "samples": 45000,
+        "calibrated_error_count": 22063,
+        "calibrated_error_rate": 0.4902888888888889,
+        "nominal_error_count": 23465,
+        "nominal_error_rate": 0.5214444444444445,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1652,
+            "nominal_errors": 484
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 1978,
+            "nominal_errors": 920
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 1744,
+            "nominal_errors": 602
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 2215,
+            "nominal_errors": 961
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 502,
+            "nominal_errors": 498
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 3422,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 3204,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 3565,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 3781,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_10pct",
+        "effective_phase_ratio": "33/20",
+        "sigma": 0.0,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_10pct",
+        "effective_phase_ratio": "33/20",
+        "sigma": 0.001,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_10pct",
+        "effective_phase_ratio": "33/20",
+        "sigma": 0.01,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 0,
+        "nominal_error_rate": 0.0,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_10pct",
+        "effective_phase_ratio": "33/20",
+        "sigma": 0.05,
+        "samples": 25000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 1074,
+        "nominal_error_rate": 0.04296,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 1
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 1073
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_10pct",
+        "effective_phase_ratio": "33/20",
+        "sigma": 0.1,
+        "samples": 25000,
+        "calibrated_error_count": 237,
+        "calibrated_error_rate": 0.00948,
+        "nominal_error_count": 2097,
+        "nominal_error_rate": 0.08388,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 19
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 87,
+            "nominal_errors": 36
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 29,
+            "nominal_errors": 140
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 88,
+            "nominal_errors": 1798
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 33,
+            "nominal_errors": 104
+          }
+        ]
+      },
+      {
+        "scenario": "five_contrast_plus_10pct",
+        "effective_phase_ratio": "33/20",
+        "sigma": 0.2,
+        "samples": 25000,
+        "calibrated_error_count": 3923,
+        "calibrated_error_rate": 0.15692,
+        "nominal_error_count": 6027,
+        "nominal_error_rate": 0.24108,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 318,
+            "nominal_errors": 533
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 922,
+            "nominal_errors": 844
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 455,
+            "nominal_errors": 962
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 1479,
+            "nominal_errors": 2598
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 749,
+            "nominal_errors": 1090
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_plus_1pct",
+        "effective_phase_ratio": "150/101",
+        "sigma": 0.0,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_plus_1pct",
+        "effective_phase_ratio": "150/101",
+        "sigma": 0.001,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_plus_1pct",
+        "effective_phase_ratio": "150/101",
+        "sigma": 0.01,
+        "samples": 45000,
+        "calibrated_error_count": 3571,
+        "calibrated_error_rate": 0.07935555555555555,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1124,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 7,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 1,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 1,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 6,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 2432,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_plus_1pct",
+        "effective_phase_ratio": "150/101",
+        "sigma": 0.05,
+        "samples": 45000,
+        "calibrated_error_count": 12407,
+        "calibrated_error_rate": 0.27571111111111113,
+        "nominal_error_count": 20000,
+        "nominal_error_rate": 0.4444444444444444,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1238,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 992,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 713,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 960,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 1825,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 1225,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 1961,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 3493,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_plus_1pct",
+        "effective_phase_ratio": "150/101",
+        "sigma": 0.1,
+        "samples": 45000,
+        "calibrated_error_count": 16432,
+        "calibrated_error_rate": 0.36515555555555557,
+        "nominal_error_count": 20154,
+        "nominal_error_rate": 0.4478666666666667,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1282,
+            "nominal_errors": 44
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 1257,
+            "nominal_errors": 42
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 1047,
+            "nominal_errors": 10
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 1175,
+            "nominal_errors": 37
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 22,
+            "nominal_errors": 21
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 2734,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 2394,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 2847,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 3674,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_plus_1pct",
+        "effective_phase_ratio": "150/101",
+        "sigma": 0.2,
+        "samples": 45000,
+        "calibrated_error_count": 22033,
+        "calibrated_error_rate": 0.48962222222222224,
+        "nominal_error_count": 23520,
+        "nominal_error_rate": 0.5226666666666666,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 1639,
+            "nominal_errors": 515
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 2097,
+            "nominal_errors": 947
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 1768,
+            "nominal_errors": 592
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 2003,
+            "nominal_errors": 928
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 563,
+            "nominal_errors": 538
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 3511,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 3210,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 3432,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 3810,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_four_fifths",
+        "effective_phase_ratio": "5/4",
+        "sigma": 0.0,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 25000,
+        "nominal_error_rate": 0.5555555555555556,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_four_fifths",
+        "effective_phase_ratio": "5/4",
+        "sigma": 0.001,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 23093,
+        "nominal_error_rate": 0.5131777777777777,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 3093
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_four_fifths",
+        "effective_phase_ratio": "5/4",
+        "sigma": 0.01,
+        "samples": 45000,
+        "calibrated_error_count": 0,
+        "calibrated_error_rate": 0.0,
+        "nominal_error_count": 23155,
+        "nominal_error_rate": 0.5145555555555555,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 3155
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_four_fifths",
+        "effective_phase_ratio": "5/4",
+        "sigma": 0.05,
+        "samples": 45000,
+        "calibrated_error_count": 79,
+        "calibrated_error_rate": 0.0017555555555555556,
+        "nominal_error_count": 23268,
+        "nominal_error_rate": 0.5170666666666667,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 0,
+            "nominal_errors": 0
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 19,
+            "nominal_errors": 1
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 0,
+            "nominal_errors": 110
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 18,
+            "nominal_errors": 0
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 0,
+            "nominal_errors": 3157
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 27,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 15,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 0,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_four_fifths",
+        "effective_phase_ratio": "5/4",
+        "sigma": 0.1,
+        "samples": 45000,
+        "calibrated_error_count": 2604,
+        "calibrated_error_rate": 0.057866666666666663,
+        "nominal_error_count": 24156,
+        "nominal_error_rate": 0.5368,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 87,
+            "nominal_errors": 37
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 623,
+            "nominal_errors": 202
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 37,
+            "nominal_errors": 716
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 465,
+            "nominal_errors": 36
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 91,
+            "nominal_errors": 3165
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 552,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 26,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 673,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 50,
+            "nominal_errors": 5000
+          }
+        ]
+      },
+      {
+        "scenario": "nine_wavelength_four_fifths",
+        "effective_phase_ratio": "5/4",
+        "sigma": 0.2,
+        "samples": 45000,
+        "calibrated_error_count": 14407,
+        "calibrated_error_rate": 0.3201555555555556,
+        "nominal_error_count": 27605,
+        "nominal_error_rate": 0.6134444444444445,
+        "per_state_errors": [
+          {
+            "height": "-1",
+            "calibrated_errors": 924,
+            "nominal_errors": 511
+          },
+          {
+            "height": "0",
+            "calibrated_errors": 2545,
+            "nominal_errors": 1482
+          },
+          {
+            "height": "1",
+            "calibrated_errors": 725,
+            "nominal_errors": 1560
+          },
+          {
+            "height": "2",
+            "calibrated_errors": 1884,
+            "nominal_errors": 917
+          },
+          {
+            "height": "3",
+            "calibrated_errors": 1499,
+            "nominal_errors": 3135
+          },
+          {
+            "height": "4",
+            "calibrated_errors": 2182,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "5",
+            "calibrated_errors": 752,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "6",
+            "calibrated_errors": 2852,
+            "nominal_errors": 5000
+          },
+          {
+            "height": "7",
+            "calibrated_errors": 1044,
+            "nominal_errors": 5000
+          }
+        ]
+      }
+    ]
+  },
+  "limits": [
+    "Finite sets and parameter samples do not establish a global optimum or a generic physical device.",
+    "Dispersion ratios are chosen hypothetical parameters; no Sellmeier curve or measured material is used.",
+    "The first wavelength calibration, common path, static state, unit fringe visibility and zero bias are assumed.",
+    "Only additive detector noise is simulated; phase noise, shot statistics, heating, drift and cross-talk are absent.",
+    "Signal identifiability does not imply stability, writability or retention at these additional heights.",
+    "Numerical margins and Monte Carlo rates are not Lean theorems or experimental observations."
+  ]
+}
