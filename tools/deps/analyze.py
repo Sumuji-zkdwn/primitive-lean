@@ -44,28 +44,33 @@ def strip_private(name: str) -> str:
     return m.group(1) if m else name
 
 
-def line_map(assembled: Path, report: dict):
+def line_map(assembled: Path, report: dict, root: Path = ROOT):
     """Map each line of the assembled file to (layer, source file)."""
     text = assembled.read_bytes()
-    all_bytes = (PROOFS / "All.lean").read_bytes()
-    if not text.startswith(all_bytes):
-        raise ValueError("assembled source does not start with the exact All.lean")
+    all_bytes = (root / "linear_input/lean_check/All.lean").read_bytes()
+    start = text.find(all_bytes)
+    prefix = text[:start] if start >= 0 else b""
+    # Some assembler versions hoist extra imports above the exact All.lean bytes.
+    if start < 0 or any(l and not l.startswith(b"import ") for l in prefix.split(b"\n")):
+        raise ValueError("assembled source does not contain the exact All.lean after an import-only prefix")
+    shift = prefix.count(b"\n")
     spans = []  # (first_line, last_line, layer, file)
     # Inside All.lean: '-- Source: X' markers written by linear_input/verify_lean.py.
     all_lines = all_bytes.decode("utf-8").split("\n")
     current = None
-    start = 1
+    start_line = 1
     for i, line in enumerate(all_lines, 1):
         m = re.match(r"-- Source: (\S+)$", line)
         if m:
             if current:
-                spans.append((start, i - 1, "initial", "linear_input/lean_check/" + current))
-            current, start = m.group(1), i
-    spans.append((start, len(all_lines), "initial", "linear_input/lean_check/" + current))
-    offset = all_bytes.count(b"\n") + 1  # pieces are joined with b"\n"
-    pos = len(all_bytes) + 1
+                spans.append((start_line, i - 1, "initial", "linear_input/lean_check/" + current))
+            current, start_line = m.group(1), i
+    spans.append((start_line, len(all_lines), "initial", "linear_input/lean_check/" + current))
+    spans = [(f + shift, l + shift, y, src) for f, l, y, src in spans]
+    offset = shift + all_bytes.count(b"\n") + 1  # pieces are joined with b"\n"
+    pos = start + len(all_bytes) + 1
     for source in report["supplemental_sources"]:
-        data = (ROOT / source).read_bytes()
+        data = (root / source).read_bytes()
         if text[pos:pos + len(data)] != data:
             raise ValueError("assembly mismatch at " + source)
         first = offset + 1
@@ -94,7 +99,8 @@ def origin_of_module(module: str) -> str:
     return "other:" + top
 
 
-def build(raw: dict, spans, autonomy_sources: dict):
+def build(raw: dict, spans, autonomy_sources: dict, module_sources: dict | None = None):
+    module_sources = module_sources or {}
     decls = {d["name"]: d for d in raw["declarations"]}
     external = {e["name"]: e for e in raw["external"]}
 
@@ -137,6 +143,9 @@ def build(raw: dict, spans, autonomy_sources: dict):
                 layer[n], source[n] = None, None
                 continue
             layer[n], source[n] = locate(spans, ln)
+        elif mod in module_sources:
+            # Separately compiled module (isolated Lean file or probe stacked on the assembly).
+            layer[n], source[n] = "module", module_sources[mod]
         else:
             raise ValueError("unexpected module " + mod)
     by_namespace = collections.defaultdict(set)
@@ -325,15 +334,19 @@ def main():
     ap.add_argument("--report", default=str(ROOT / "verification/main-result.json"))
     ap.add_argument("--autonomy-ledger")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--root", default=str(ROOT), help="repository checkout the assembly came from")
+    ap.add_argument("--module-source", action="append", default=[],
+                    help="MODULE=source/path for separately compiled modules")
     a = ap.parse_args()
     raw = json.loads(Path(a.raw).read_text())
     report = json.loads(Path(a.report).read_text())
-    spans = line_map(Path(a.assembled), report)
+    spans = line_map(Path(a.assembled), report, Path(a.root))
     auto = {}
     if a.autonomy_ledger:
         for c in json.loads(Path(a.autonomy_ledger).read_text())["cycles"]:
             auto[c["cycle"]] = c["source"]
-    g = build(raw, spans, auto)
+    mods = dict(x.split("=", 1) for x in a.module_source)
+    g = build(raw, spans, auto, mods)
     rows = analyze(g)
     modules = raw["module_imports"]
     out = dict(
