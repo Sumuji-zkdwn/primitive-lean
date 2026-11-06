@@ -1,0 +1,70 @@
+name: Oblique prism TMM (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/prism-oblique-tmm-20261107]
+  pull_request:
+    branches: [chatgpt/prism-airy-reflectance-20261107]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile linked Lean modules with zero trust
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          for mod in DarkBrightObservation PrismHysteresisReadout FluidPrismPhaseMemory PrismAiryReflectance PrismObliqueTMM; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/${mod}.olean" "${mod}.lean" 2>&1 | tee "../oblique-${mod}.log"
+            if grep -E 'warning:|error:' "../oblique-${mod}.log"; then exit 1; fi
+          done
+      - name: Audit new theorem axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source=pathlib.Path('PrismObliqueTMM.lean').read_text()
+          assert not re.search(r'\b(sorry|admit)\b', source)
+          names=re.findall(r'^theorem\s+(\w+)', source, re.M)
+          assert len(names) >= 3, names
+          pathlib.Path('PrismObliqueTMMAudit.lean').write_text(
+            'import PrismObliqueTMM\n' + ''.join(
+              '#print axioms PrismObliqueTMM.'+name+'\n' for name in names))
+          print('Auditing', len(names), 'new Lean theorems')
+          PY
+          lake env lean --trust=0 PrismObliqueTMMAudit.lean 2>&1 | tee ../oblique-audit.log
+          python - <<'PY'
+          import pathlib, re
+          source=pathlib.Path('PrismObliqueTMM.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)', source, re.M)
+          log=pathlib.Path('../oblique-audit.log').read_text()
+          rows=re.findall(r'depends on axioms:\s*\[([^\]]*)\]', log)
+          assert len(rows)==len(names), (len(rows),len(names))
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+            used=set(filter(None, (x.strip() for x in row.split(','))))
+            assert used <= allowed, used-allowed
+          assert 'warning:' not in log and 'error:' not in log
+          print('PASS: only standard foundational axioms; no sorry')
+          PY
+      - name: Independent oblique-incidence regression
+        run: python -B tools/check_prism_oblique_tmm.py
