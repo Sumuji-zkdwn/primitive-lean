@@ -525,6 +525,82 @@ theorem actual_curvature_switch_minimizes (q : Bool) (u : ℝ) :
     _ = actualCurvatureStepEnergy q (!(switchFiber q u)) u :=
         (actual_curvature_step_eq_discrete_energy _ _ _).symm
 
+
+/-!
+## Exact finite-horizon input-to-target reachability
+
+A two-control scalar toy model represents a finite-horizon analogue of
+Okanohara Part II's input-to-endpoint Gramian: x_final=(u+v)/k_q.
+For a fixed well q, arbitrary signed controls are permitted, so every
+target is reachable. The minimal quadratic effort is k_q²*d²/2.
+This is NOT an empirical model of training or general nonlinear control.
+-/
+
+noncomputable def curvatureTwoStepDisplacement (q : Bool) (u v : ℝ) : ℝ :=
+  (u + v) / wellStiffness q
+
+def curvatureTwoStepMinCost (q : Bool) (d : ℝ) : ℝ :=
+  (wellStiffness q) ^ 2 * d ^ 2 / 2
+
+theorem curvature_two_step_cost_lower_bound (q : Bool) (d u v : ℝ)
+    (htarget : curvatureTwoStepDisplacement q u v = d) :
+    curvatureTwoStepMinCost q d ≤ twoStepAction u v := by
+  have hk : wellStiffness q ≠ 0 := (well_stiffness_positive q).ne'
+  have hs : u + v = d * wellStiffness q :=
+    (div_eq_iff hk).mp htarget
+  have hspeed : (u + v) ^ 2 ≤ 2 * (u ^ 2 + v ^ 2) := by
+    simpa [twoStepTransport, twoStepAction] using two_step_speed_limit u v
+  rw [hs] at hspeed
+  unfold curvatureTwoStepMinCost twoStepAction
+  nlinarith
+
+theorem curvature_two_step_constant_control_attains (q : Bool) (d : ℝ) :
+    curvatureTwoStepDisplacement q
+      (curvatureFlowPressure q d / 2) (curvatureFlowPressure q d / 2) = d ∧
+    twoStepAction
+      (curvatureFlowPressure q d / 2) (curvatureFlowPressure q d / 2) =
+      curvatureTwoStepMinCost q d := by
+  constructor
+  · have hk : wellStiffness q ≠ 0 := (well_stiffness_positive q).ne'
+    unfold curvatureTwoStepDisplacement curvatureFlowPressure
+    field_simp [hk] <;> ring
+  · unfold twoStepAction curvatureTwoStepMinCost curvatureFlowPressure
+    ring
+
+theorem curvature_two_step_cost_by_history (d : ℝ) :
+    curvatureTwoStepMinCost false d = d ^ 2 / 2 ∧
+      curvatureTwoStepMinCost true d = 9 * d ^ 2 / 2 := by
+  constructor <;> norm_num
+    [curvatureTwoStepMinCost, wellStiffness, wellCurvatureResponse,
+     leftCurvatureResponse, rightCurvatureResponse] <;> ring
+
+/-- Scalar two-step controllability Gramian, i.e. sum of two squared gains. -/
+noncomputable def curvatureTwoStepGramian (q : Bool) : ℝ :=
+  2 / (wellStiffness q) ^ 2
+
+theorem curvature_two_step_gramian_by_history :
+    curvatureTwoStepGramian false = 2 ∧
+      curvatureTwoStepGramian true = 2 / 9 := by
+  constructor <;> norm_num
+    [curvatureTwoStepGramian, wellStiffness, wellCurvatureResponse,
+     leftCurvatureResponse, rightCurvatureResponse]
+
+theorem curvature_two_step_gramian_positive (q : Bool) :
+    0 < curvatureTwoStepGramian q := by
+  cases q <;> norm_num
+    [curvatureTwoStepGramian, wellStiffness, wellCurvatureResponse,
+     leftCurvatureResponse, rightCurvatureResponse]
+
+/-- Exact minimum energy y²/W for this fully reachable scalar system,
+with W>0 in both histories; rank loss is not responsible for the cost gap. -/
+theorem curvature_two_step_cost_gramian (q : Bool) (d : ℝ) :
+    curvatureTwoStepMinCost q d =
+      d ^ 2 / curvatureTwoStepGramian q := by
+  cases q <;> norm_num
+    [curvatureTwoStepMinCost, curvatureTwoStepGramian, wellStiffness,
+     wellCurvatureResponse, leftCurvatureResponse,
+     rightCurvatureResponse] <;> ring
+
 end Elastica
 
 /-! Explicit kernel-axiom audit for the standalone extension. -/
@@ -575,3 +651,9 @@ end Elastica
 #print axioms Elastica.curvature_flow_pulse_action_gap
 #print axioms Elastica.actual_curvature_step_eq_discrete_energy
 #print axioms Elastica.actual_curvature_switch_minimizes
+#print axioms Elastica.curvature_two_step_cost_lower_bound
+#print axioms Elastica.curvature_two_step_constant_control_attains
+#print axioms Elastica.curvature_two_step_cost_by_history
+#print axioms Elastica.curvature_two_step_gramian_by_history
+#print axioms Elastica.curvature_two_step_gramian_positive
+#print axioms Elastica.curvature_two_step_cost_gramian
