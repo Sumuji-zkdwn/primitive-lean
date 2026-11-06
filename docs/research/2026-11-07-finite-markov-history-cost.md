@@ -15,13 +15,13 @@ For target mass `d=1/3` at position 1, the finite kernel forces `u+v=1/3` when `
 
 On the unit-spaced two-point position space, the squared ground cost is 1 for a move and 0 for staying. A coupling from source `δ₀` to target `(2/3)δ₀+(1/3)δ₁` is forced, so its finite transport cost is `1/3` under either history. The state marginals alone do not retain the hidden history; controlled action does.
 
-At this target, the two-step action values agree exactly with the existing `Elastica.curvatureTwoStepMinCost` and equal half the existing one-step `requiredAction`: `1/18 = (1/9)/2`, `1/2 = 1/2`. The factor 9 is obtained from the history-conditioned transition gain, and the finite enumeration certifies its minimum over the specified action grid.
+At this target, the two-step action values agree exactly with the existing `Elastica.curvatureTwoStepMinCost` and equal half the existing one-step `requiredAction`: `1/18 = (1/9)/2`, `1/2 = (1)/2`. The factor 9 is obtained from the history-conditioned transition gain, and the finite enumeration certifies its minimum over the specified action grid.
 
 ## What is assumed and what is proved
 
-The Lean file proves the row-stochasticity of both rational kernels, the update/readout counterexample, finite-grid optimality, the transport-plan cost, and the numerical equalities to existing quadratic-action definitions. The Python checker independently enumerates every finite state and control with `fractions.Fraction`.
+The Lean file proves the row-stochasticity of both rational kernels, the update/readout counterexample, finite-grid optimality, the coupling marginal constraints and their forced transport cost, and the numerical equalities to existing quadratic-action definitions. The Python checker independently enumerates every finite state and control with `fractions.Fraction`; run it with `python -B tests/test_finite_markov_transport.py`.
 
-The transition law itself chooses history-dependent gains 1 and 1/3. The Lean result therefore derives action cost from a specified finite controlled kernel; it does not derive those gains from physical fiber hysteresis or data. It does not formalize a continuum Wasserstein theorem, entropy production, arbitrary-horizon controllability, or Okanohara's general learning theory. See the primary papers [Part I](https://arxiv.org/abs/2601.17607) and [Part II, revised version](https://arxiv.org/abs/2602.07950v3).
+The transition law itself chooses history-dependent gains 1 and 1/3. The Lean result therefore derives action cost from a specified finite controlled kernel; it does not derive those gains from physical fiber hysteresis or data. Part I's ensemble transport/epistemic-speed-limit setting and Part II's target-dependent reachability are broader claims. Part II also distinguishes geometric transport action from optimizer-input effort and free-energy change; identifying them requires an additional model, which this finite kernel supplies only for its own toy system. This code does not formalize a continuum Wasserstein theorem, entropy production, arbitrary-horizon controllability, or Okanohara's general learning theory. See the primary papers [Part I](https://arxiv.org/abs/2601.17607) and [Part II, revised version](https://arxiv.org/abs/2602.07950v3).
 
 ## Remaining proof obligations
 
