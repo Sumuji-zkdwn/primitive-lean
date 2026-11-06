@@ -1,0 +1,11 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 1,
+   "seconds": 817.3,
+   "log": "/tmp/claude-0/inv/kernel/49/proof_only.log"
+  }
+ },
+ "proof_only_passed": false
+}

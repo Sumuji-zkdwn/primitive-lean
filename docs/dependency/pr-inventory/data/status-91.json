@@ -1,0 +1,50 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 166.4,
+   "log": "/tmp/claude-0/inv/kernel/91/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/91 -o /tmp/claude-0/inv/kernel/91/PrimitiveMain.olean /tmp/claude-0/inv/kernel/91/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 92.6,
+   "log": "/tmp/claude-0/inv/kernel/91/compile_main.log"
+  },
+  "compile_Research.OkanoharaTransport": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/91 lean --root=/tmp/claude-0/wt/91/lean -o /tmp/claude-0/inv/kernel/91/Research/OkanoharaTransport.olean /tmp/claude-0/wt/91/lean/Research/OkanoharaTransport.lean",
+   "exit": 0,
+   "seconds": 4.0,
+   "log": "/tmp/claude-0/inv/kernel/91/compile_Research.OkanoharaTransport.log"
+  },
+  "compile_Research.FiniteMarkovTransport": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/91 lean --root=/tmp/claude-0/wt/91/lean -o /tmp/claude-0/inv/kernel/91/Research/FiniteMarkovTransport.olean /tmp/claude-0/wt/91/lean/Research/FiniteMarkovTransport.lean",
+   "exit": 0,
+   "seconds": 18.0,
+   "log": "/tmp/claude-0/inv/kernel/91/compile_Research.FiniteMarkovTransport.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/91 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/91/raw.json PrimitiveMain Research.OkanoharaTransport Research.FiniteMarkovTransport -- Elastica PrimitiveMain Research.OkanoharaTransport Research.FiniteMarkovTransport",
+   "exit": 0,
+   "seconds": 27.4,
+   "log": "/tmp/claude-0/inv/kernel/91/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/91/raw.json --assembled /tmp/claude-0/inv/kernel/91/PrimitiveMain.lean --report /tmp/claude-0/wt/91/verification/main-result.json --out /tmp/claude-0/inv/kernel/91/deps.json --root /tmp/claude-0/wt/91 --module-source Research.OkanoharaTransport=lean/Research/OkanoharaTransport.lean --module-source Research.FiniteMarkovTransport=lean/Research/FiniteMarkovTransport.lean",
+   "exit": 0,
+   "seconds": 0.4,
+   "log": "/tmp/claude-0/inv/kernel/91/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain",
+  "Research.OkanoharaTransport",
+  "Research.FiniteMarkovTransport"
+ ],
+ "module_sources": {
+  "Research.OkanoharaTransport": "lean/Research/OkanoharaTransport.lean",
+  "Research.FiniteMarkovTransport": "lean/Research/FiniteMarkovTransport.lean"
+ }
+}

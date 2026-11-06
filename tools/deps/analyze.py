@@ -99,8 +99,10 @@ def origin_of_module(module: str) -> str:
     return "other:" + top
 
 
-def build(raw: dict, spans, autonomy_sources: dict, module_sources: dict | None = None):
+def build(raw: dict, spans, autonomy_sources: dict, module_sources: dict | None = None,
+          module_spans: dict | None = None):
     module_sources = module_sources or {}
+    module_spans = module_spans or {}
     decls = {d["name"]: d for d in raw["declarations"]}
     external = {e["name"]: e for e in raw["external"]}
 
@@ -143,6 +145,10 @@ def build(raw: dict, spans, autonomy_sources: dict, module_sources: dict | None 
                 layer[n], source[n] = None, None
                 continue
             layer[n], source[n] = locate(spans, ln)
+        elif mod in module_spans and d["line"] is not None:
+            # Standalone concatenation: attribute each declaration to its source file by line.
+            layer[n] = "module"
+            source[n] = next((src for f, l, src in module_spans[mod] if f <= d["line"] <= l), "unresolved")
         elif mod in module_sources:
             # Separately compiled module (isolated Lean file or probe stacked on the assembly).
             layer[n], source[n] = "module", module_sources[mod]
@@ -330,23 +336,29 @@ def source_graph(g, rows):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw", required=True)
-    ap.add_argument("--assembled", required=True)
+    ap.add_argument("--assembled", help="assembled MainResult.lean (omit for standalone modules)")
     ap.add_argument("--report", default=str(ROOT / "verification/main-result.json"))
     ap.add_argument("--autonomy-ledger")
     ap.add_argument("--out", required=True)
     ap.add_argument("--root", default=str(ROOT), help="repository checkout the assembly came from")
     ap.add_argument("--module-source", action="append", default=[],
                     help="MODULE=source/path for separately compiled modules")
+    ap.add_argument("--module-spans", action="append", default=[],
+                    help="MODULE=spans.json: [[first_line, last_line, source], ...] for concatenated modules")
     a = ap.parse_args()
     raw = json.loads(Path(a.raw).read_text())
-    report = json.loads(Path(a.report).read_text())
-    spans = line_map(Path(a.assembled), report, Path(a.root))
+    if a.assembled:
+        report = json.loads(Path(a.report).read_text())
+        spans = line_map(Path(a.assembled), report, Path(a.root))
+    else:
+        spans = []  # standalone modules only; every node comes from --module-source
     auto = {}
     if a.autonomy_ledger:
         for c in json.loads(Path(a.autonomy_ledger).read_text())["cycles"]:
             auto[c["cycle"]] = c["source"]
     mods = dict(x.split("=", 1) for x in a.module_source)
-    g = build(raw, spans, auto, mods)
+    mspans = {m: json.loads(Path(f).read_text()) for m, f in (x.split("=", 1) for x in a.module_spans)}
+    g = build(raw, spans, auto, mods, mspans)
     rows = analyze(g)
     modules = raw["module_imports"]
     out = dict(
@@ -354,8 +366,8 @@ def main():
                "An edge is not a claim of mathematical necessity; a missing path is not a proof of "
                "non-derivability. No conceptual edges are produced."),
         inputs=dict(raw_sha256=sha(Path(a.raw).read_bytes()),
-                    assembled_sha256=sha(Path(a.assembled).read_bytes()),
-                    report_sha256=sha(Path(a.report).read_bytes())),
+                    assembled_sha256=sha(Path(a.assembled).read_bytes()) if a.assembled else None,
+                    report_sha256=sha(Path(a.report).read_bytes()) if a.assembled else None),
         source_spans=[dict(first_line=f, last_line=l, layer=y, source=s) for f, l, y, s in spans],
         module_imports=modules,
         nodes=rows,

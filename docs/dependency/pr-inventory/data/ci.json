@@ -1,0 +1,984 @@
+{
+ "97": [
+  {
+   "name": "PAD four-layer observational identifiability (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42291319754,
+   "created": "2026-11-06T20:47:29Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42291319740,
+   "created": "2026-11-06T20:47:29Z"
+  },
+  {
+   "name": "PAD four-layer observational identifiability (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42291311476,
+   "created": "2026-11-06T20:47:26Z"
+  }
+ ],
+ "87": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42263956125,
+   "created": "2026-11-06T17:41:37Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42263956111,
+   "created": "2026-11-06T17:41:37Z"
+  }
+ ],
+ "91": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42263723150,
+   "created": "2026-11-06T17:40:07Z"
+  }
+ ],
+ "95": [
+  {
+   "name": "Two-motion IVP existence (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42263071914,
+   "created": "2026-11-06T17:35:43Z"
+  }
+ ],
+ "96": [
+  {
+   "name": "Oblique prism TMM (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42262600995,
+   "created": "2026-11-06T17:32:40Z"
+  },
+  {
+   "name": "Oblique prism TMM (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42262595570,
+   "created": "2026-11-06T17:32:38Z"
+  }
+ ],
+ "94": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42258367607,
+   "created": "2026-11-06T17:05:17Z"
+  },
+  {
+   "name": "Two-wavelength phase observation (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42258357379,
+   "created": "2026-11-06T17:05:14Z"
+  }
+ ],
+ "93": [
+  {
+   "name": "Prism Airy film reflectance (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42250423921,
+   "created": "2026-11-06T16:13:59Z"
+  },
+  {
+   "name": "Prism Airy film reflectance (isolated Lean)",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 42250409530,
+   "created": "2026-11-06T16:13:54Z"
+  }
+ ],
+ "92": [
+  {
+   "name": "Fluid-prism phase memory (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42247866446,
+   "created": "2026-11-06T15:57:37Z"
+  },
+  {
+   "name": "Fluid-prism phase memory (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42247854705,
+   "created": "2026-11-06T15:57:32Z"
+  }
+ ],
+ "90": [
+  {
+   "name": "Portable operator loop (finite, no Kaggle submit)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42247096235,
+   "created": "2026-11-06T15:52:33Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42247096227,
+   "created": "2026-11-06T15:52:33Z"
+  }
+ ],
+ "89": [
+  {
+   "name": "Prism hysteresis readout (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42245596957,
+   "created": "2026-11-06T15:42:52Z"
+  },
+  {
+   "name": "Prism hysteresis readout (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42245584574,
+   "created": "2026-11-06T15:42:47Z"
+  }
+ ],
+ "88": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42229591362,
+   "created": "2026-11-06T13:56:40Z"
+  },
+  {
+   "name": "Two-motion outgoing energy (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42229581270,
+   "created": "2026-11-06T13:56:35Z"
+  }
+ ],
+ "86": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42205086676,
+   "created": "2026-11-06T10:45:26Z"
+  },
+  {
+   "name": "Dark-bright observation (isolated Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42205080221,
+   "created": "2026-11-06T10:45:23Z"
+  }
+ ],
+ "85": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42155843434,
+   "created": "2026-11-06T03:19:32Z"
+  },
+  {
+   "name": "Self-rewriting observer Lean (isolated)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42155839032,
+   "created": "2026-11-06T03:19:29Z"
+  }
+ ],
+ "83": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42044048904,
+   "created": "2026-11-05T14:20:25Z"
+  }
+ ],
+ "82": [
+  {
+   "name": "Contest economy model (isolated Lean verification)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42025147193,
+   "created": "2026-11-05T12:12:15Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42025147192,
+   "created": "2026-11-05T12:12:15Z"
+  },
+  {
+   "name": "Contest economy model (isolated Lean verification)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42025139111,
+   "created": "2026-11-05T12:12:11Z"
+  }
+ ],
+ "81": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42017087640,
+   "created": "2026-11-05T11:12:36Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 42017087305,
+   "created": "2026-11-05T11:12:36Z"
+  }
+ ],
+ "80": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41997893090,
+   "created": "2026-11-05T08:52:59Z"
+  },
+  {
+   "name": "Three-ball elastic contact order (exact Lean)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41997893055,
+   "created": "2026-11-05T08:52:59Z"
+  }
+ ],
+ "79": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "action_required",
+   "attempt": 1,
+   "id": 41921120016,
+   "created": "2026-11-04T21:59:09Z"
+  },
+  {
+   "name": "Build Lean source dependency graph",
+   "conclusion": "action_required",
+   "attempt": 1,
+   "id": 41921119420,
+   "created": "2026-11-04T21:59:09Z"
+  }
+ ],
+ "78": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41910379430,
+   "created": "2026-11-04T20:50:20Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41910379013,
+   "created": "2026-11-04T20:50:20Z"
+  },
+  {
+   "name": "IUT x primitive-lean typed cross-repository Lean probe",
+   "conclusion": "cancelled",
+   "attempt": 1,
+   "id": 41910378679,
+   "created": "2026-11-04T20:50:20Z"
+  }
+ ],
+ "77": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41896376641,
+   "created": "2026-11-04T19:22:52Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41896376627,
+   "created": "2026-11-04T19:22:52Z"
+  }
+ ],
+ "76": [
+  {
+   "name": "Rulefold iOS touch regression",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41870900684,
+   "created": "2026-11-04T16:46:52Z"
+  },
+  {
+   "name": "Rulefold iOS touch regression",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41870847624,
+   "created": "2026-11-04T16:46:35Z"
+  }
+ ],
+ "75": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41864770869,
+   "created": "2026-11-04T16:10:57Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41864770757,
+   "created": "2026-11-04T16:10:57Z"
+  }
+ ],
+ "72": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41845130028,
+   "created": "2026-11-04T14:11:44Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41845118785,
+   "created": "2026-11-04T14:11:40Z"
+  }
+ ],
+ "71": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41836839901,
+   "created": "2026-11-04T13:18:05Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41836831306,
+   "created": "2026-11-04T13:18:02Z"
+  }
+ ],
+ "70": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41836765316,
+   "created": "2026-11-04T13:17:35Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41836757593,
+   "created": "2026-11-04T13:17:32Z"
+  }
+ ],
+ "69": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41832533203,
+   "created": "2026-11-04T12:48:57Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 2,
+   "id": 41832525918,
+   "created": "2026-11-04T12:48:54Z"
+  }
+ ],
+ "67": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41828926932,
+   "created": "2026-11-04T12:23:57Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41828917279,
+   "created": "2026-11-04T12:23:53Z"
+  }
+ ],
+ "66": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41825540494,
+   "created": "2026-11-04T12:00:24Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41825533426,
+   "created": "2026-11-04T12:00:21Z"
+  }
+ ],
+ "65": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41820021501,
+   "created": "2026-11-04T11:19:45Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41819956456,
+   "created": "2026-11-04T11:19:16Z"
+  }
+ ],
+ "59": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41709806605,
+   "created": "2026-11-03T20:08:35Z"
+  }
+ ],
+ "58": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41709798738,
+   "created": "2026-11-03T20:08:32Z"
+  }
+ ],
+ "54": [
+  {
+   "name": "Arbitrary finite prime-list F0 Lean proof",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41633977068,
+   "created": "2026-11-03T12:14:00Z"
+  }
+ ],
+ "53": [
+  {
+   "name": "General finite prime-probe minimality Lean proof",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41633798718,
+   "created": "2026-11-03T12:12:43Z"
+  }
+ ],
+ "48": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41632776552,
+   "created": "2026-11-03T12:05:22Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41632776416,
+   "created": "2026-11-03T12:05:22Z"
+  }
+ ],
+ "52": [
+  {
+   "name": "Prime factor F0 and adaptive observations Lean probe",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41628886216,
+   "created": "2026-11-03T11:36:26Z"
+  }
+ ],
+ "51": [
+  {
+   "name": "Prime factor orbit and triple observation Lean probe",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41627616028,
+   "created": "2026-11-03T11:27:05Z"
+  }
+ ],
+ "50": [
+  {
+   "name": "Finite prime-factor observation Lean probe",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41624627426,
+   "created": "2026-11-03T11:05:27Z"
+  },
+  {
+   "name": "Finite prime-factor observation Lean probe",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41624617967,
+   "created": "2026-11-03T11:05:23Z"
+  }
+ ],
+ "49": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41624133317,
+   "created": "2026-11-03T11:01:51Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41624133063,
+   "created": "2026-11-03T11:01:51Z"
+  }
+ ],
+ "47": [
+  {
+   "name": "One-swap generator fiber connectivity proof",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41604886059,
+   "created": "2026-11-03T08:39:18Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41604886049,
+   "created": "2026-11-03T08:39:18Z"
+  },
+  {
+   "name": "One-swap generator fiber connectivity proof",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41604859603,
+   "created": "2026-11-03T08:39:05Z"
+  }
+ ],
+ "46": [
+  {
+   "name": "Half-factorial 4-6-9 monoid and minimum one-probe Lean verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41604096586,
+   "created": "2026-11-03T08:32:57Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41604095440,
+   "created": "2026-11-03T08:32:57Z"
+  },
+  {
+   "name": "Half-factorial 4-6-9 monoid and minimum one-probe Lean verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41604086845,
+   "created": "2026-11-03T08:32:53Z"
+  }
+ ],
+ "44": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600547675,
+   "created": "2026-11-03T08:04:09Z"
+  },
+  {
+   "name": "Viscous rewrite Lean proof and axiom audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600547670,
+   "created": "2026-11-03T08:04:09Z"
+  },
+  {
+   "name": "Gravity observation moments Lean and full integration",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600547661,
+   "created": "2026-11-03T08:04:09Z"
+  },
+  {
+   "name": "Gravity observation moments Lean and full integration",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600538142,
+   "created": "2026-11-03T08:04:04Z"
+  }
+ ],
+ "43": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600381917,
+   "created": "2026-11-03T08:02:44Z"
+  },
+  {
+   "name": "Viscous rewrite Lean proof and axiom audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600381796,
+   "created": "2026-11-03T08:02:44Z"
+  },
+  {
+   "name": "Gravitational F0 observer proof and full audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600381779,
+   "created": "2026-11-03T08:02:44Z"
+  },
+  {
+   "name": "Gravitational F0 observer proof and full audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600375299,
+   "created": "2026-11-03T08:02:41Z"
+  }
+ ],
+ "45": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41600324742,
+   "created": "2026-11-03T08:02:14Z"
+  },
+  {
+   "name": "Gravity cocycle isolated Lean check",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41600324695,
+   "created": "2026-11-03T08:02:14Z"
+  },
+  {
+   "name": "Viscous rewrite Lean proof and axiom audit",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41600324587,
+   "created": "2026-11-03T08:02:14Z"
+  },
+  {
+   "name": "Gravity cocycle isolated Lean check",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41600317822,
+   "created": "2026-11-03T08:02:11Z"
+  }
+ ],
+ "42": [
+  {
+   "name": "Associates and actual nonunique monoid Lean verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41599949070,
+   "created": "2026-11-03T07:59:07Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41599949036,
+   "created": "2026-11-03T07:59:07Z"
+  },
+  {
+   "name": "Associates and actual nonunique monoid Lean verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41599942443,
+   "created": "2026-11-03T07:59:03Z"
+  }
+ ],
+ "41": [
+  {
+   "name": "Gravity cocycle isolated Lean check",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41599589633,
+   "created": "2026-11-03T07:55:49Z"
+  },
+  {
+   "name": "Viscous rewrite Lean proof and axiom audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41597433893,
+   "created": "2026-11-03T07:36:24Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41597433872,
+   "created": "2026-11-03T07:36:24Z"
+  },
+  {
+   "name": "Gravity cocycle isolated Lean check",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41597433868,
+   "created": "2026-11-03T07:36:24Z"
+  },
+  {
+   "name": "Gravity cocycle isolated Lean check",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41597426466,
+   "created": "2026-11-03T07:36:20Z"
+  }
+ ],
+ "39": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41597109629,
+   "created": "2026-11-03T07:33:33Z"
+  },
+  {
+   "name": "Positive integer prime factor identification Lean verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41597109472,
+   "created": "2026-11-03T07:33:32Z"
+  }
+ ],
+ "40": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41596581150,
+   "created": "2026-11-03T07:28:51Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41596581125,
+   "created": "2026-11-03T07:28:51Z"
+  }
+ ],
+ "37": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593471523,
+   "created": "2026-11-03T07:00:38Z"
+  },
+  {
+   "name": "Viscous rewrite Lean proof and axiom audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593471497,
+   "created": "2026-11-03T07:00:38Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593471454,
+   "created": "2026-11-03T07:00:38Z"
+  },
+  {
+   "name": "Viscous rewrite Lean proof and axiom audit",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593465803,
+   "created": "2026-11-03T07:00:35Z"
+  }
+ ],
+ "38": [
+  {
+   "name": "Decomposition identification Lean and integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593194268,
+   "created": "2026-11-03T06:57:59Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593194241,
+   "created": "2026-11-03T06:57:59Z"
+  },
+  {
+   "name": "Decomposition identification Lean and integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41593186772,
+   "created": "2026-11-03T06:57:55Z"
+  }
+ ],
+ "31": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41560855389,
+   "created": "2026-11-03T01:36:45Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41560855223,
+   "created": "2026-11-03T01:36:44Z"
+  },
+  {
+   "name": "Chebyshev dihedral descent Lean probe",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41560855208,
+   "created": "2026-11-03T01:36:44Z"
+  }
+ ],
+ "36": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41546255654,
+   "created": "2026-11-02T23:32:47Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41546255615,
+   "created": "2026-11-02T23:32:47Z"
+  },
+  {
+   "name": "Ternary zero-placement Lean probe",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41546255609,
+   "created": "2026-11-02T23:32:47Z"
+  }
+ ],
+ "35": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41543361155,
+   "created": "2026-11-02T23:10:45Z"
+  }
+ ],
+ "34": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41542442824,
+   "created": "2026-11-02T23:04:09Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41542442814,
+   "created": "2026-11-02T23:04:09Z"
+  }
+ ],
+ "30": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41540916778,
+   "created": "2026-11-02T22:52:45Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "failure",
+   "attempt": 1,
+   "id": 41540916766,
+   "created": "2026-11-02T22:52:45Z"
+  }
+ ],
+ "33": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41534417131,
+   "created": "2026-11-02T22:06:58Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41534416847,
+   "created": "2026-11-02T22:06:58Z"
+  }
+ ],
+ "32": [
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41526628931,
+   "created": "2026-11-02T21:15:11Z"
+  },
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41526628910,
+   "created": "2026-11-02T21:15:11Z"
+  }
+ ],
+ "29": [
+  {
+   "name": "Primitive Lean integration verification",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41492016100,
+   "created": "2026-11-02T17:31:47Z"
+  },
+  {
+   "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+   "conclusion": "success",
+   "attempt": 1,
+   "id": 41492016017,
+   "created": "2026-11-02T17:31:47Z"
+  }
+ ]
+}

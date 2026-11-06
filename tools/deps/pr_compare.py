@@ -47,24 +47,29 @@ def main():
     P = {p["number"]: p for p in S["prs"]}
     main_names = set(M)
 
-    tips = {}
+    tips = {}  # measurement id (dir name, e.g. "53" or "53s" for a standalone probe) -> info
     for d in sorted(Path(a.kernel_dir).iterdir()):
         st = d / "status.json"
         dep = d / "deps.json"
         status = json.loads(st.read_text()) if st.exists() else None
-        tips[int(d.name)] = dict(status=status, nodes=json.loads(dep.read_text())["nodes"] if dep.exists() else None)
+        num = int("".join(ch for ch in d.name if ch.isdigit()))
+        tips[d.name] = dict(pr=num, status=status,
+                            nodes=json.loads(dep.read_text())["nodes"] if dep.exists() else None)
 
     def tip_for(n):
-        if tips.get(n, {}).get("nodes") is not None:
-            return n  # the PR's own head was measured
+        """Measurement whose head contains PR n and attributes the most declarations to n's files."""
         units = {(u["path"], u["blob"]) for u in P[n]["units"]}
-        best = None
+        own_paths = {u["path"] for u in P[n]["own_units"]}
+        best, best_key = None, None
         for t, info in tips.items():
             if info["nodes"] is None:
                 continue
-            tu = {(u["path"], u["blob"]) for u in P[t]["units"]}
-            if units <= tu and (best is None or len(tu) < len({(u["path"], u["blob"]) for u in P[best]["units"]})):
-                best = t
+            if not units <= {(u["path"], u["blob"]) for u in P[info["pr"]]["units"]}:
+                continue
+            hits = sum(1 for k, v in info["nodes"].items() if k not in main_names and sources_of(v) & own_paths)
+            key = (hits, info["pr"] == n, -len(P[info["pr"]]["units"]))
+            if best_key is None or key > best_key:
+                best, best_key = t, key
         return best
 
     rows = {}
@@ -78,7 +83,7 @@ def main():
                  ci=[dict(name=x["name"], conclusion=x["conclusion"]) for x in CI.get(str(n), [])],
                  kernel_tip=t)
         if own_paths and t is None:
-            st = tips.get(n, {}).get("status") if n in tips else None
+            st = tips.get(str(n), {}).get("status")
             r["kernel"] = dict(status="not_compiled" if st is None else "failed",
                                failed_steps={k: v["exit"] for k, v in (st or {}).get("steps", {}).items() if v["exit"] != 0})
             rows[n] = r
