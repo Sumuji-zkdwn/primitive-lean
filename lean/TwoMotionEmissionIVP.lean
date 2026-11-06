@@ -33,7 +33,9 @@ def ivpPath (α : ℝ → IVPState) : Path where
   y := fun t => α t 4
 
 theorem ivpVectorField_contDiff : ContDiff ℝ 1 ivpVectorField := by
-  fun_prop [ivpVectorField, ivpForce]
+  apply contDiff_pi.2
+  intro i
+  fin_cases i <;> simp [ivpVectorField, ivpForce] <;> fun_prop
 
 theorem ivp_components_solve (α : ℝ → IVPState) (t : ℝ)
     (hα : HasDerivAt α (ivpVectorField (α t)) t) :
@@ -53,7 +55,12 @@ theorem exists_local_ivp :
         ∀ t ∈ Ioo (-ε) ε, SolvesAt 1 1 0 0 1 z t := by
   obtain ⟨α, hα₀, ε, hε, hα⟩ :=
     ContDiffAt.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀
-      (ivpVectorField_contDiff.contDiffAt ivpInitial) 0
+      (show ContDiffAt ℝ 1 ivpVectorField ivpInitial from
+        ivpVectorField_contDiff.contDiffAt) 0
+  have hα' : ∀ t ∈ Ioo (-ε) ε,
+      HasDerivAt α (ivpVectorField (α t)) t := by
+    intro t ht
+    exact hα t (by simpa using ht)
   refine ⟨ivpPath α, ?_, ?_, ?_, ?_, ?_, ε, hε, ?_⟩
   · simpa [ivpPath, ivpInitial] using congrFun hα₀ (0 : Fin 5)
   · simpa [ivpPath, ivpInitial] using congrFun hα₀ (1 : Fin 5)
@@ -61,7 +68,7 @@ theorem exists_local_ivp :
   · simpa [ivpPath, ivpInitial] using congrFun hα₀ (3 : Fin 5)
   · simpa [ivpPath, ivpInitial] using congrFun hα₀ (4 : Fin 5)
   · intro t ht
-    exact ivp_components_solve α t (hα t ht)
+    exact ivp_components_solve α t (hα' t ht)
 
 /-- The actual initial derivatives follow from the constructed path and its IVP. -/
 theorem initial_derivatives_of_ivp (z : Path)
@@ -92,10 +99,11 @@ theorem exists_local_ivp_with_positive_emission :
   have hz : ∀ t ∈ Icc 0 T, SolvesAt 1 1 0 0 1 z t := by
     intro t ht
     apply hsolves t
-    constructor <;> dsimp [T] <;> linarith
+    rcases ht with ⟨ht₀, htT⟩
+    have htT' : t ≤ ε/2 := by simpa [T] using htT
+    constructor <;> linarith
   have hproduct : ∃ t ∈ Icc 0 T, z.x₁ t * z.x₂ t ≠ 0 := by
-    refine ⟨0, ?_, ?_⟩
-    · constructor <;> simp [T, hε.le]
+    refine ⟨0, ⟨le_rfl, hT.le⟩, ?_⟩
     · rw [hx₁, hx₂]
       norm_num
   have hwork :=
