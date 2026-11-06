@@ -1,0 +1,128 @@
+{
+  "source": "primitive-lean initial 465 theorem family; numerical derived observable probe",
+  "parameters": {
+    "lambda": 1.0,
+    "r": 1.0,
+    "u": 0.0,
+    "gamma": 1.0,
+    "target": 0.5,
+    "beta": 2.0
+  },
+  "identities": {
+    "energy_gap_derivative": "e_prime=-gamma*e*|grad(E)|^2",
+    "normalized_observer": "p=1/(1+exp(beta*e))",
+    "p_derivative": "p_prime=beta*gamma*e*|grad(E)|^2*p*(1-p)",
+    "binary_entropy_derivative": "H_prime=beta^2*gamma*e^2*|grad(E)|^2*p*(1-p)>=0",
+    "tangential_motion": "(x_prime,y_prime)=-gamma*e*grad(E)+b*J*grad(E) with J(gx,gy)=(-gy,gx)"
+  },
+  "trajectories": {
+    "below_target": {
+      "initial": [
+        0.0,
+        0.5
+      ],
+      "b": 0.0,
+      "e_initial": -0.375,
+      "e_final": 6.084022174945858e-14,
+      "E_initial": 0.125,
+      "E_final": 0.5000000000000608,
+      "p_initial": 0.679178699175393,
+      "p_final": 0.4999999999999696,
+      "H_initial": 0.6274869817333553,
+      "H_final": 0.6931471805599453,
+      "H_monotonic_min_increment": -2.220446049250313e-16,
+      "max_e_deviation_from_initial": 0.3750000000259345,
+      "distance_final_from_initial": 0.2730821890924382,
+      "total_travel_distance": 0.27313976145321456,
+      "max_abs_energy_derivative_along_shell": 0.4195871891401635,
+      "H_derivative_formula_min": 2.8095031773945384e-30,
+      "trajectory_t_end": [
+        -0.2298235869086539,
+        0.6474957657017942
+      ]
+    },
+    "above_target": {
+      "initial": [
+        0.0,
+        1.5
+      ],
+      "b": 0.0,
+      "e_initial": 0.625,
+      "e_final": -5.6288307348495437e-14,
+      "E_initial": 1.125,
+      "E_final": 0.4999999999999437,
+      "p_initial": 0.22270013882530884,
+      "p_final": 0.5000000000000282,
+      "H_initial": 0.5303042548770089,
+      "H_final": 0.6931471805599453,
+      "H_monotonic_min_increment": -1.1102230246251565e-16,
+      "max_e_deviation_from_initial": 0.6250000000049543,
+      "distance_final_from_initial": 0.30676732628638065,
+      "total_travel_distance": 0.3068911350277796,
+      "max_abs_energy_derivative_along_shell": 4.218750000000001,
+      "H_derivative_formula_min": 1.240944840464961e-29,
+      "trajectory_t_end": [
+        0.24311194589180415,
+        1.3129097163356813
+      ]
+    },
+    "shell_stationary": {
+      "initial": [
+        0.0,
+        1.0
+      ],
+      "b": 0.0,
+      "e_initial": 0.0,
+      "e_final": 0.0,
+      "E_initial": 0.5,
+      "E_final": 0.5,
+      "p_initial": 0.5,
+      "p_final": 0.5,
+      "H_initial": 0.6931471805599453,
+      "H_final": 0.6931471805599453,
+      "H_monotonic_min_increment": 0.0,
+      "max_e_deviation_from_initial": 0.0,
+      "distance_final_from_initial": 0.0,
+      "total_travel_distance": 0.0,
+      "max_abs_energy_derivative_along_shell": 0.0,
+      "H_derivative_formula_min": 0.0,
+      "trajectory_t_end": [
+        0.0,
+        1.0
+      ]
+    },
+    "shell_circulating": {
+      "initial": [
+        0.0,
+        1.0
+      ],
+      "b": 1.0,
+      "e_initial": 0.0,
+      "e_final": 1.0835776720341528e-13,
+      "E_initial": 0.5,
+      "E_final": 0.5000000000001084,
+      "p_initial": 0.5,
+      "p_final": 0.4999999999999458,
+      "H_initial": 0.6931471805599453,
+      "H_final": 0.6931471805599453,
+      "H_monotonic_min_increment": 0.0,
+      "max_e_deviation_from_initial": 2.9566349368792544e-12,
+      "distance_final_from_initial": 0.3977397787485896,
+      "total_travel_distance": 30.226489461825548,
+      "max_abs_energy_derivative_along_shell": 6.954036099769025e-12,
+      "H_derivative_formula_min": 0.0,
+      "trajectory_t_end": [
+        0.2440905332414608,
+        1.3140330288056916
+      ]
+    }
+  },
+  "invalid_independence_example": {
+    "e1": 1.0,
+    "e2": 1.0,
+    "p_sum": 0.01798620996209156,
+    "p1_times_p2": 0.014209336618611037,
+    "discrepancy": 0.003776873343480522
+  },
+  "scope": "Algebraic derivation plus independent numerical integration only; Lean proof of newly derived H_prime not run."
+}

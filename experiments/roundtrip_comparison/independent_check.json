@@ -1,0 +1,107 @@
+{
+ "integrator": "classical RK4, fixed step (independent of scipy DOP853)",
+ "cases": {
+  "below_target": {
+   "e_initial": -0.375,
+   "e_final": -8.493206138382448e-15,
+   "z_final": [
+    -0.2298235869086283,
+    0.6474957657017655
+   ],
+   "max_abs_de_fd_minus_formula": 4.3180183445512554e-07,
+   "max_abs_dH_fd_minus_formula": 1.5559669756803896e-07,
+   "min_dH_increment": -2.220446049250313e-16,
+   "max_abs_e_increment_(should_be_<=0)": 0.0,
+   "max_abs_entropy_closed_form_error": 2.220446049250313e-16,
+   "max_energy_drift": 0.3749999999999915
+  },
+  "above_target": {
+   "e_initial": 0.625,
+   "e_final": 1.2434497875801753e-14,
+   "z_final": [
+    0.24311194589192145,
+    1.312909716335887
+   ],
+   "max_abs_de_fd_minus_formula": 0.0001310927876216894,
+   "max_abs_dH_fd_minus_formula": 5.862260168632005e-05,
+   "min_dH_increment": -2.220446049250313e-16,
+   "max_abs_e_increment_(should_be_<=0)": 1.1102230246251565e-16,
+   "max_abs_entropy_closed_form_error": 2.220446049250313e-16,
+   "max_energy_drift": 0.6249999999999876
+  },
+  "shell_stationary": {
+   "e_initial": 0.0,
+   "e_final": 0.0,
+   "z_final": [
+    0.0,
+    1.0
+   ],
+   "max_abs_de_fd_minus_formula": 0.0,
+   "max_abs_dH_fd_minus_formula": 0.0,
+   "min_dH_increment": 0.0,
+   "max_abs_e_increment_(should_be_<=0)": 0.0,
+   "max_abs_entropy_closed_form_error": 0.0,
+   "max_energy_drift": 0.0
+  },
+  "shell_circulating": {
+   "e_initial": 0.0,
+   "e_final": -9.048317650695026e-15,
+   "z_final": [
+    0.2440905332373927,
+    1.3140330288009032
+   ],
+   "max_abs_de_fd_minus_formula": 1.498010791102755e-12,
+   "max_abs_dH_fd_minus_formula": 3.4045356127442174e-25,
+   "min_dH_increment": 0.0,
+   "max_abs_e_increment_(should_be_<=0)": 6.661338147750939e-16,
+   "max_abs_entropy_closed_form_error": 1.1102230246251565e-16,
+   "max_energy_drift": 2.8765878568037806e-13
+  }
+ },
+ "gpt_raw_H_monotonic_min_increment": {
+  "below_target": -2.220446049250313e-16,
+  "above_target": -1.1102230246251565e-16,
+  "shell_stationary": 0.0,
+  "shell_circulating": 0.0
+ },
+ "shell_circulating_period_from_x_downcrossing": 5.06165701079443,
+ "shell_orbit_return_error": 1.2352341372331407e-12,
+ "shell_T20_over_period": 3.951275236024139,
+ "max_err_p_eq_gibbs_two_state": 1.1102230246251565e-16,
+ "max_err_entropy_eq_beta_U_minus_F": 6.800116025829084e-16,
+ "max_err_p_eq_dF_de1": 3.011705329569736e-10,
+ "max_err_tanh_eq_2p_minus_1": 3.3306690738754696e-16,
+ "independence": {
+  "p(2)": 0.01798620996209156,
+  "p(1)^2": 0.014209336618611037,
+  "odds_law_p1p2/(p1p2+(1-p1)(1-p2))": 0.01798620996209156,
+  "product_always_smaller_on_grid": true
+ },
+ "circulation_vs_curvature_flow": {
+  "gpt_field_b=-1_gamma=0": [
+   -0.25,
+   -0.17016877520865825
+  ],
+  "curvature_phase_velocity_(gy,-gx)": [
+   -0.25,
+   -0.17016877520865825
+  ],
+  "kappa_double_prime_from_ODE": 0.1833846153846154,
+  "w_prime_should_equal_kappa_double_prime_plus_sqrt2_kappa_prime": -0.1701687752086584
+ },
+ "value_one_sided_slopes_at_u0": {
+  "gpt_regime_(1,1)": [
+   -0.00049999975,
+   0.00049999975
+  ],
+  "R04_regime_(1,-1)": [
+   -1.0002498749844269,
+   1.0002498749844269
+  ]
+ },
+ "gpt_shell_orbit_as_curvature_equation": {
+  "max_residual_kappa''+kappa+kappa^3/2": 5.781768921409025e-07,
+  "max_residual_w_minus_(kappa'+sqrt2*kappa)": 3.740123366569037e-07,
+  "phase_energy_lambda_half_r_one": 1.0000000000000002
+ }
+}

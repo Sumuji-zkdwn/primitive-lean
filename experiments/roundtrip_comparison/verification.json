@@ -1,0 +1,32 @@
+{
+ "passed": true,
+ "command": "python3 -B experiments/roundtrip_comparison/assemble.py",
+ "baseline_and_rounds_unchanged": true,
+ "rounds_reused": [
+  "R01_Interpolation.inc",
+  "R02_ValueFunction.inc",
+  "R03_Cusp.inc",
+  "R04_PhaseTransition.inc",
+  "R05_GibbsSmoothing.inc",
+  "R06_CircleMechanics.inc",
+  "R07_Soliton.inc",
+  "R08_KinkAngle.inc",
+  "R09_LoopCurve.inc",
+  "R10_ScalingInvariants.inc",
+  "R11_FormalGroup.inc",
+  "R12_TsallisEnergy.inc",
+  "R13_DeformedTransition.inc"
+ ],
+ "comparison_files": [
+  "C01_GPTComparison.inc"
+ ],
+ "new_declarations": 29,
+ "new_theorems": 27,
+ "errors_or_warnings": 0,
+ "axiom_reports": 29,
+ "unexpected_axioms": [],
+ "comparison_sha256": {
+  "C01_GPTComparison.inc": "7ae3954f94f4acbfe47b63cdfa040e705176fc3a674d705a3bd73e82d87080fb"
+ },
+ "gpt_script_sha256": "7332300e922be49a56c35f7cd068ceacb64c4885de8cb0475fd5971248d0b44a"
+}

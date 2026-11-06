@@ -1,0 +1,147 @@
+[
+ {
+  "name": "RoundTripCompare.gpt_energy_gap_derivative",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic",
+  "kind": "def",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.binEntropy",
+  "kind": "def",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_pos",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_lt_one",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.one_sub_logistic",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.hasDerivAt_logistic",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.entropy_logistic",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.hasDerivAt_entropy_logistic",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.gpt_entropy_derivative",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.gpt_entropy_derivative_nonneg",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.entropy_even",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.entropy_strictAntiOn",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.entropy_le_iff_abs",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_eq_gibbs",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.hasDerivAt_freeEnergy_fst",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.entropy_eq_beta_U_minus_F",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.r05_tanh_eq_logistic_mean",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_odds",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_compose",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_mul_lt",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.logistic_fgl",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.circulation_is_curvature_flow",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.soliton_isTrajectory",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.unique_minimizer_of_r_pos",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.E_scale",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.gx_scale",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.gy_scale",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ },
+ {
+  "name": "RoundTripCompare.circulation_scale",
+  "kind": "theorem",
+  "file": "C01_GPTComparison.inc"
+ }
+]
