@@ -3,6 +3,8 @@ name: Fluid-prism phase memory (isolated Lean)
 on:
   push:
     branches: [chatgpt/fluid-prism-phase-memory-20261107]
+  pull_request:
+    branches: [chatgpt/prism-hysteresis-readout-20261107]
   workflow_dispatch:
 
 permissions:
