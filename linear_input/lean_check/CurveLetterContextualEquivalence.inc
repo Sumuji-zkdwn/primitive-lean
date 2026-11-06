@@ -35,7 +35,14 @@ theorem turnLeft_add (p q : Point) :
     turnLeft (pointAdd p q) = pointAdd (turnLeft p) (turnLeft q) := by
   cases p
   cases q
-  simp [turnLeft, pointAdd]
+  simp [turnLeft, pointAdd, Int.add_comm]
+
+theorem pointAdd_assoc (p q r : Point) :
+    pointAdd (pointAdd p q) r = pointAdd p (pointAdd q r) := by
+  cases p
+  cases q
+  cases r
+  simp [pointAdd, Int.add_assoc]
 
 theorem rotateQuarter_addPoint (n : Nat) (p q : Point) :
     rotateQuarter n (pointAdd p q) =
@@ -74,8 +81,8 @@ theorem curveJoin_assoc (a b c : CurvePiece) :
   cases a
   cases b
   cases c
-  simp [curveJoin, pointAdd, rotateQuarter_addPoint, rotateQuarter_comp,
-    Int.add_assoc, Nat.add_assoc]
+  simp [curveJoin, rotateQuarter_addPoint, rotateQuarter_comp,
+    pointAdd_assoc, Nat.add_assoc]
 
 /-- Observe only Re(z), the lifted total angle α, and additive cost F. -/
 structure Readout where
@@ -171,15 +178,15 @@ theorem old_quotient_has_no_exact_attachment :
 /-- The full contextual quotient retains the observed readout. -/
 theorem contextual_readout_exact (s : CurvePiece) :
     LinearInputJoinContexts.readout observe rewrite curveJoin
-      (LinearInputJoinContexts.encode observe rewrite s) = observe s :=
+      (LinearInputJoinContexts.encode observe rewrite curveJoin s) = observe s :=
   LinearInputJoinContexts.readout_encode observe rewrite curveJoin s
 
 /-- On the full contextual quotient, the original attachment is well-defined. -/
 theorem contextual_attachment_exact (s t : CurvePiece) :
     LinearInputJoinContexts.attach observe rewrite curveJoin
-      (LinearInputJoinContexts.encode observe rewrite s)
-      (LinearInputJoinContexts.encode observe rewrite t) =
-        LinearInputJoinContexts.encode observe rewrite (curveJoin s t) :=
+      (LinearInputJoinContexts.encode observe rewrite curveJoin s)
+      (LinearInputJoinContexts.encode observe rewrite curveJoin t) =
+        LinearInputJoinContexts.encode observe rewrite curveJoin (curveJoin s t) :=
   LinearInputJoinContexts.attach_encode observe rewrite curveJoin s t
 
 /-- The canonical contextual quotient refines the old AB/BA collision. -/
