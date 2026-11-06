@@ -213,7 +213,7 @@ theorem best_pair_induces_target_coupling (h : History) :
       norm_num [inducedPlan, canonicalPlan, controlledKernel, endpointMass,
         bestPair, controlValue, historyStiffness]
   rw [hplan]
-  exact canonical_plan_is_target_coupling (by norm_num) (by norm_num)
+  exact canonical_plan_is_target_coupling (d := 1 / 3) (by norm_num) (by norm_num)
 
 theorem finite_transport_cost_same_across_histories :
     twoPointTransportCost (inducedPlan (0 : History) (bestPair 0).1 (bestPair 0).2) =
