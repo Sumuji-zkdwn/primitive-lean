@@ -33,9 +33,25 @@ def main() -> int:
         if f"#print axioms Elastica.FiniteMarkov.{theorem}" not in source:
             raise RuntimeError(f"Missing axiom audit directive: {theorem}")
 
+    lean_root = ROOT / "lean"
+    (lean_root / ".lake/build/lib/lean/Research").mkdir(parents=True, exist_ok=True)
+    dependency_command = [
+        "lake", "env", "lean", "--trust=0", "-o",
+        ".lake/build/lib/lean/Research/OkanoharaTransport.olean",
+        "Research/OkanoharaTransport.lean",
+    ]
     command = ["lake", "env", "lean", "--trust=0", "Research/FiniteMarkovTransport.lean"]
-    process = subprocess.run(command, cwd=ROOT / "lean", capture_output=True, text=True)
-    log = process.stdout + process.stderr
+    dependency = subprocess.run(
+        dependency_command, cwd=lean_root, capture_output=True, text=True
+    )
+    process = (
+        subprocess.run(command, cwd=lean_root, capture_output=True, text=True)
+        if dependency.returncode == 0
+        else None
+    )
+    log = dependency.stdout + dependency.stderr
+    if process is not None:
+        log += process.stdout + process.stderr
     OUT.mkdir(exist_ok=True)
     (OUT / "finite-markov-transport.log").write_text(log, encoding="utf-8")
 
@@ -61,9 +77,9 @@ def main() -> int:
         if any(marker in line for marker in ("warning:", "warning(", "error:", "error("))
     )
     result = {
-        "passed": process.returncode == 0 and not issues,
-        "command": command,
-        "exit_code": process.returncode,
+        "passed": dependency.returncode == 0 and process is not None and process.returncode == 0 and not issues,
+        "commands": [dependency_command, command],
+        "exit_code": dependency.returncode if process is None else process.returncode,
         "checked_theorems": len(audited),
         "axioms": audited,
         "issues": issues,
