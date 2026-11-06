@@ -20,13 +20,18 @@ For the finite-ensemble analogue, a deterministic pushforward takes a mass `p : 
 
 For `n` fibers in series, choose multiplicative resistances: `R_series = ∏_i R(q_i)`. If all fibers are activated, `R_series=3^n`, and unit-horizon input action for displacement `d` becomes `9^n*d²`. If all are off, it is `d²`. **This conditional exponential input-energy law is not an algorithmic running-time lower bound**, and is not forced by the general Part II model.
 
+
+## Deriving the relay thresholds from a discrete energy
+
+In the common Elastica-style notation, choose a two-state external-work energy `E(q;u) = -u*x(q)` where `x(false)=-1`, `x(true)=1`. Add a rate-independent switching cost `D(q_old,q_new)=2` when states differ, otherwise zero. The step energy is `E(q_new;u)+D(q_old,q_new)`. The Lean theorems `fiber_up_threshold_iff` and `fiber_down_threshold_iff` prove the exact equivalences `E_step(false,true;u) ≤ E_step(false,false;u) ↔ 1≤u` and `E_step(true,false;u) ≤ E_step(true,true;u) ↔ u≤-1`. `fiber_hold_is_strict_minimizer` proves remanence strictly inside the hysteresis window, and `switchFiber_minimizes_step_energy` proves the actual update chooses a cost minimizer for any current state and forcing, with a defined tie convention at thresholds. This is a discrete reduction of a potential with linear input, not a derivation of elastic rod shapes from the full curvature integral.
+
 ## Relationship to existing formalizations
 
 This extends the existing isolated Lean bridge without changing the source-retained `Elastica` library, importing `Elastica.ExponentialWeight` and reusing `requiredInput`/`requiredAction`. The existing finite Bayesian `LinearInputBayes` and future observational quotient `LinearInputFutureObservation` appear in separately composed `.inc` files and are **not imported or claimed to have been identified with this new fiber kernel**.
 
 ## Limitations and next verification
 
-1. Thresholds and resistance law are explicit mathematical choices, not derived from bending energy or measured fluid dynamics.
+1. Thresholds follow from the specifically chosen two-state external-work-plus-dissipation energy; the potential itself and the resistance law remain explicit modelling choices, not derived from bending energy or measured fluid dynamics.
 2. The finite pushforward is a deterministic map on a two-point state space. No full Wasserstein-2 theorem or Fokker–Planck equation is established.
 3. The exponential `9^n` follows from the **series product** assumption; alternative network topologies (parallel flow, correlated fibers, fluid feedback) require different laws.
 4. A full connection with the original elastica energy would derive the relay threshold and the gain from a specific bistable curvature-energy minimization law, replacing the chosen `switchFiber` rule. The required step is a finite, provable energy comparison and threshold switching condition.
