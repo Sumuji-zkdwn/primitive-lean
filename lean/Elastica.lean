@@ -22,4 +22,3 @@ import Elastica.ScalingMinima
 import Elastica.ReplacementConsequences
 import Elastica.WeightResponse
 import Elastica.CombinedConsequences
-import Elastica.ThermodynamicLearningBridge
