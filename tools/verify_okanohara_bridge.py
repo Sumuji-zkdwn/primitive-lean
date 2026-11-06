@@ -41,6 +41,7 @@ NAMES = (
     "fiber_down_threshold_iff",
     "fiber_hold_is_strict_minimizer",
     "switchFiber_minimizes_step_energy",
+    "additive_series_has_constant_cost_factor",
 )
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
