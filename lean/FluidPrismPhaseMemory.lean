@@ -132,10 +132,8 @@ theorem port_injective_on_bits :
   intro b c he
   cases b <;> cases c
   · rfl
-  · have : (1:ℝ) = 0 := by simpa [port_false,port_true] using he
-    norm_num at this
-  · have : (0:ℝ) = 1 := by simpa [port_false,port_true] using he
-    norm_num at this
+  · exact False.elim (port_separates he)
+  · exact False.elim (port_separates he.symm)
   · rfl
 
 /-- The output port is physically normalized to [0,1] in the ideal model. -/
