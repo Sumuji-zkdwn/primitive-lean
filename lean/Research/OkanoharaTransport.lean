@@ -140,7 +140,7 @@ resistances, not a lower bound for every inverse-learning algorithm.
 -/
 
 /-- Binary fiber with remanence in the threshold interval (-1, 1). -/
-def switchFiber (q : Bool) (drive : ℝ) : Bool :=
+noncomputable def switchFiber (q : Bool) (drive : ℝ) : Bool :=
   if (1 : ℝ) ≤ drive then true
   else if drive ≤ (-1 : ℝ) then false
   else q
@@ -173,7 +173,7 @@ theorem fiber_resistance_positive (q : Bool) :
   cases q <;> norm_num [fiberResistance, fiberMemory]
 
 /-- The physical input is converted into displacement through resistance. -/
-def fiberDisplacement (q : Bool) (input : ℝ) : ℝ :=
+noncomputable def fiberDisplacement (q : Bool) (input : ℝ) : ℝ :=
   input / fiberResistance q
 
 /-- Reuse the *existing* requiredInput from the history-control bridge. -/
@@ -200,7 +200,7 @@ def fiberRead (s : FiberState) : ℝ := s.1
 def fiberReadCost (s : FiberState) : ℝ := fiberAction s.2 1
 
 /-- Different pulse histories from the same initial state, with readout zero. -/
-def fiberPulse (drive : ℝ) : FiberState :=
+noncomputable def fiberPulse (drive : ℝ) : FiberState :=
   ((0 : ℝ), switchFiber (switchFiber false drive) 0)
 
 theorem fiber_pulse_readout_and_cost :
@@ -222,7 +222,7 @@ theorem pulse_cost_does_not_factor_through_readout :
   linarith
 
 /-- Pushforward of a signed mass function by the deterministic switch. -/
-def fiberPushforward (drive : ℝ) (p : Bool → ℝ) (target : Bool) : ℝ :=
+noncomputable def fiberPushforward (drive : ℝ) (p : Bool → ℝ) (target : Bool) : ℝ :=
   (if switchFiber false drive = target then p false else 0) +
     (if switchFiber true drive = target then p true else 0)
 
@@ -256,7 +256,7 @@ def serialAction {n : ℕ} (q : Fin n → Bool) (d : ℝ) : ℝ :=
 
 theorem serial_all_on_resistance (n : ℕ) :
     serialResistance (fun _ : Fin n => true) = (3 : ℝ) ^ n := by
-  simp [serialResistance, fiberResistance, fiberMemory]
+  norm_num [serialResistance, fiberResistance, fiberMemory]
 
 theorem serial_all_off_resistance (n : ℕ) :
     serialResistance (fun _ : Fin n => false) = 1 := by
