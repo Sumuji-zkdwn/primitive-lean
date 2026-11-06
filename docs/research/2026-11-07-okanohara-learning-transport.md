@@ -7,7 +7,7 @@
 
 ## Checked mathematical interface
 
-Module: `lean/Elastica/ThermodynamicLearningBridge.lean`, imported by `lean/Elastica.lean`.
+Module: `lean/Research/OkanoharaTransport.lean`, importing the unchanged `Elastica.ExponentialWeight` module.
 
 1. `two_step_speed_limit` proves `(u+v)^2 ≤ 2*(u^2+v^2)`, a discrete two-unit-time scalar quadratic-action bound. `balanced_path_attains_bound` gives equality for constant velocity. This is **not** a theorem about arbitrary measures or Wasserstein-2.
 2. `required_action_exact` encodes a one-dimensional **unit-horizon, constant-input** gain of `1/(1+h)`: required input for displacement `d` is `(1+h)*d`, so its action is `(1+h)^2*d^2`. `history_unit_cost_mono` proves monotonicity on nonnegative memory.
@@ -29,4 +29,4 @@ Formalize a finite Markov kernel on `Fin n` plus an explicit history-update oper
 
 ## Verification
 
-The PR invokes `.github/workflows/primitive-lean-ci.yml` on PR changes under `lean/**`. Check the PR's latest commit SHA and Actions conclusion; this document makes no independent claim of local Lean execution.
+The PR invokes `.github/workflows/primitive-lean-ci.yml` for changes under `lean/**`, with `tools/verify_okanohara_bridge.py` compiling this sidecar using `lake env lean --trust=0` and checking nine `#print axioms` outputs. The original `lean/Elastica.lean` is preserved byte-for-byte because the integration manifest protects the original source. Check the PR's latest commit SHA and Actions conclusion; this document makes no independent claim of local Lean execution.
