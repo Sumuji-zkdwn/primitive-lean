@@ -277,6 +277,80 @@ theorem serial_all_off_action (n : ℕ) (d : ℝ) :
     serialAction (fun _ : Fin n => false) d = d ^ 2 := by
   simp [serialAction, serial_all_off_resistance]
 
+/-!
+## Energy-derived relay thresholds
+
+The switching rule can be justified as a minimizer of a two-state
+linear-forcing energy with a discrete dissipation penalty, rather
+than only an operational if-then-else rule. This is a *discrete*
+energy choice, not a derivation from the full smooth curvature integral.
+-/
+
+/-- The two-state reduction of a signed linear external work term -u*x. -/
+def fiberExternalEnergy (q : Bool) (u : ℝ) : ℝ :=
+  if q then -u else u
+
+/-- One unit of switching distance costs two units of dissipated energy. -/
+def fiberSwitchPenalty (old new : Bool) : ℝ :=
+  if old = new then 0 else 2
+
+def fiberStepEnergy (old new : Bool) (u : ℝ) : ℝ :=
+  fiberExternalEnergy new u + fiberSwitchPenalty old new
+
+/-- From the relaxed state, changing to the activated state becomes
+weakly preferable exactly when u >= +1. -/
+theorem fiber_up_threshold_iff (u : ℝ) :
+    fiberStepEnergy false true u ≤ fiberStepEnergy false false u ↔
+      (1 : ℝ) ≤ u := by
+  change -u + 2 ≤ u ↔ (1 : ℝ) ≤ u
+  constructor <;> intro h <;> linarith
+
+/-- From the activated state, changing to the relaxed state becomes
+weakly preferable exactly when u <= -1. -/
+theorem fiber_down_threshold_iff (u : ℝ) :
+    fiberStepEnergy true false u ≤ fiberStepEnergy true true u ↔
+      u ≤ (-1 : ℝ) := by
+  change u + 2 ≤ -u ↔ u ≤ (-1 : ℝ)
+  constructor <;> intro h <;> linarith
+
+/-- In the middle of the hysteresis loop, holding is strictly cheaper
+than switching, for either internal fiber state. -/
+theorem fiber_hold_is_strict_minimizer (q : Bool) (u : ℝ)
+    (hl : (-1 : ℝ) < u) (hr : u < (1 : ℝ)) :
+    fiberStepEnergy q q u < fiberStepEnergy q (!q) u := by
+  cases q
+  · change u < -u + 2
+    linarith
+  · change -u < u + 2
+    linarith
+
+/-- The actual relay update always weakly minimizes the discrete energy
+including dissipation among the two possible next fiber states. -/
+theorem switchFiber_minimizes_step_energy (q : Bool) (u : ℝ) :
+    fiberStepEnergy q (switchFiber q u) u ≤
+      fiberStepEnergy q (!(switchFiber q u)) u := by
+  cases q
+  · by_cases hhi : (1 : ℝ) ≤ u
+    · have hs : switchFiber false u = true := by simp [switchFiber, hhi]
+      rw [hs]
+      exact (fiber_up_threshold_iff u).2 hhi
+    · have hs : switchFiber false u = false := by simp [switchFiber, hhi]
+      rw [hs]
+      change u ≤ -u + 2
+      linarith [lt_of_not_ge hhi]
+  · by_cases hlo : u ≤ (-1 : ℝ)
+    · have hhi : ¬ ((1 : ℝ) ≤ u) := by linarith
+      have hs : switchFiber true u = false := by simp [switchFiber, hhi, hlo]
+      rw [hs]
+      exact (fiber_down_threshold_iff u).2 hlo
+    · have hs : switchFiber true u = true := by
+        by_cases hhi : (1 : ℝ) ≤ u
+        · simp [switchFiber, hhi]
+        · simp [switchFiber, hhi, hlo]
+      rw [hs]
+      change -u ≤ u + 2
+      linarith [lt_of_not_ge hlo]
+
 end Elastica
 
 /-! Explicit kernel-axiom audit for the standalone extension. -/
@@ -304,3 +378,7 @@ end Elastica
 #print axioms Elastica.serial_all_off_resistance
 #print axioms Elastica.serial_all_on_action
 #print axioms Elastica.serial_all_off_action
+#print axioms Elastica.fiber_up_threshold_iff
+#print axioms Elastica.fiber_down_threshold_iff
+#print axioms Elastica.fiber_hold_is_strict_minimizer
+#print axioms Elastica.switchFiber_minimizes_step_energy
