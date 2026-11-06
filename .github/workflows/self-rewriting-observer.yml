@@ -5,6 +5,9 @@ on:
     branches: [chatgpt/self-rewriting-observer-lean-20261106]
     paths:
       - 'lean/SelfRewritingObserver.lean'
+      - 'lean/SelfRewritingObserverExtensions.lean'
+      - 'lean/SelfRewritingObserverBridgeTail.inc'
+      - 'linear_input/lean_check/OperatorWordObservations.inc'
       - '.github/workflows/self-rewriting-observer.yml'
   workflow_dispatch:
 
@@ -33,6 +36,17 @@ jobs:
         run: |
           mkdir -p .lake/build/lib/lean
           lake env lean --trust=0 -o .lake/build/lib/lean/SelfRewritingObserver.olean SelfRewritingObserver.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/SelfRewritingObserverExtensions.olean SelfRewritingObserverExtensions.lean
+
+      - name: Compile bridge against original operator-word Lean source
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          printf 'import SelfRewritingObserverExtensions\n' > SelfRewritingObserverNativeBridge.lean
+          cat ../linear_input/lean_check/OperatorWordObservations.inc >> SelfRewritingObserverNativeBridge.lean
+          printf '\n' >> SelfRewritingObserverNativeBridge.lean
+          cat SelfRewritingObserverBridgeTail.inc >> SelfRewritingObserverNativeBridge.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/SelfRewritingObserverNativeBridge.olean SelfRewritingObserverNativeBridge.lean
 
       - name: Audit proof dependencies
         working-directory: lean
@@ -40,8 +54,8 @@ jobs:
         run: |
           set -euo pipefail
           {
-            echo 'import SelfRewritingObserver'
-            for name in wordEq_iff_signature blind_classes frozen_classes feedback_classes feedback_implies_frozen frozen_implies_blind strict_feedback feedback_two_scans delayed_witness symmetry_involutive symmetry_invisible; do
+            echo 'import SelfRewritingObserverNativeBridge'
+            for name in wordEq_iff_signature blind_classes frozen_classes feedback_classes feedback_implies_frozen frozen_implies_blind strict_feedback feedback_two_scans delayed_witness symmetry_involutive symmetry_invisible ruleWordEq_iff_signature headWordEq_iff_signature rule_classes head_classes head_signature_injective head_wordEq_iff_eq symmetry_invisible_with_rule symmetry_broken_by_head rule_probe_refines_feedback run_agrees_native native_wordEq_iff_signature compiled_old_program_cannot_reveal peek_rule_not_generated; do
               echo "#print axioms SelfRewritingObserver.$name"
             done
           } > SelfRewritingObserverAudit.lean
