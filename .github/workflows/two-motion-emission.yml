@@ -31,14 +31,15 @@ jobs:
           mkdir -p .lake/build/lib/lean
           git rev-parse HEAD | tee ../two-motion-source.txt
           cat lean-toolchain | tee -a ../two-motion-source.txt
-          sha256sum TwoMotionEmission.lean TwoMotionEmissionBridgeTail.inc ../linear_input/lean_check/Observation.lean lake-manifest.json | tee -a ../two-motion-source.txt
+          sha256sum TwoMotionEmission.lean TwoMotionEmissionConsequences.lean TwoMotionEmissionBridgeTail.inc ../linear_input/lean_check/Observation.lean lake-manifest.json | tee -a ../two-motion-source.txt
           lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmission.olean TwoMotionEmission.lean 2>&1 | tee ../two-motion-model.log
-          printf 'import TwoMotionEmission\n' > TwoMotionEmissionNativeBridge.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmissionConsequences.olean TwoMotionEmissionConsequences.lean 2>&1 | tee ../two-motion-consequences.log
+          printf 'import TwoMotionEmissionConsequences\n' > TwoMotionEmissionNativeBridge.lean
           cat ../linear_input/lean_check/Observation.lean >> TwoMotionEmissionNativeBridge.lean
           printf '\n' >> TwoMotionEmissionNativeBridge.lean
           cat TwoMotionEmissionBridgeTail.inc >> TwoMotionEmissionNativeBridge.lean
           lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmissionNativeBridge.olean TwoMotionEmissionNativeBridge.lean 2>&1 | tee ../two-motion-bridge.log
-          if grep -E 'warning:|error:' ../two-motion-model.log ../two-motion-bridge.log; then exit 1; fi
+          if grep -E 'warning:|error:' ../two-motion-model.log ../two-motion-consequences.log ../two-motion-bridge.log; then exit 1; fi
       - name: Audit every added theorem
         working-directory: lean
         shell: bash
@@ -46,7 +47,7 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           import pathlib, re
-          sources = [pathlib.Path('TwoMotionEmission.lean'), pathlib.Path('TwoMotionEmissionBridgeTail.inc')]
+          sources = [pathlib.Path('TwoMotionEmission.lean'), pathlib.Path('TwoMotionEmissionConsequences.lean'), pathlib.Path('TwoMotionEmissionBridgeTail.inc')]
           names = [n for p in sources for n in re.findall(r'^theorem\s+(\w+)', p.read_text(), re.M)]
           assert names and len(names) == len(set(names))
           text = 'import TwoMotionEmissionNativeBridge\n' + ''.join('#print axioms TwoMotionEmission.'+n+'\n' for n in names)

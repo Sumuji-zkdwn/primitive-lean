@@ -49,21 +49,24 @@ theorem energy_nonneg {κ : ℝ} (hκ : 0 ≤ κ) (g ω₁ ω₂ x₁ v₁ x₂ 
 /-- The actual derivative of the potential in the outgoing boundary variable. -/
 theorem coupling_hasDerivAt_y (κ g x₁ x₂ y : ℝ) :
     HasDerivAt (fun z => coupling κ g x₁ x₂ z) (-force κ g x₁ x₂ y) y := by
-  convert (((hasDerivAt_id y).sub_const (g*x₁*x₂)).pow 2).const_mul (κ/2) using 1 <;>
-    dsimp [coupling, force] <;> ring
+  convert (((hasDerivAt_id y).sub_const (g*x₁*x₂)).pow 2).const_mul (κ/2) using 1
+  dsimp [coupling, force]
+  ring
 
 /-- Backreaction on the first internal motion comes from the same potential. -/
 theorem coupling_hasDerivAt_x1 (κ g x₁ x₂ y : ℝ) :
     HasDerivAt (fun z => coupling κ g z x₂ y)
       (g*x₂*force κ g x₁ x₂ y) x₁ := by
-  convert (((((hasDerivAt_id x₁).const_mul g).mul_const x₂).const_sub y).pow 2).const_mul (κ/2) using 1 <;>
-    dsimp [coupling, force] <;> ring
+  convert (((((hasDerivAt_id x₁).const_mul g).mul_const x₂).const_sub y).pow 2).const_mul (κ/2) using 1
+  dsimp [coupling, force]
+  ring
 
 theorem coupling_hasDerivAt_x2 (κ g x₁ x₂ y : ℝ) :
     HasDerivAt (fun z => coupling κ g x₁ z y)
       (g*x₁*force κ g x₁ x₂ y) x₂ := by
-  convert ((((hasDerivAt_id x₂).const_mul (g*x₁)).const_sub y).pow 2).const_mul (κ/2) using 1 <;>
-    dsimp [coupling, force] <;> ring
+  convert ((((hasDerivAt_id x₂).const_mul (g*x₁)).const_sub y).pow 2).const_mul (κ/2) using 1
+  dsimp [coupling, force]
+  ring
 
 structure Path where
   x₁ : ℝ → ℝ
@@ -99,8 +102,9 @@ theorem energy_chain_rule (κ g ω₁ ω₂ : ℝ) (z : Path) (t a₁ a₂ w : �
   have hm := ((((hv₁.pow 2).add ((hx₁.pow 2).const_mul (ω₁^2))).add
     (hv₂.pow 2)).add ((hx₂.pow 2).const_mul (ω₂^2))).div_const 2
   have hi := ((hy.sub (((hx₁.const_mul g).mul hx₂))).pow 2).const_mul (κ/2)
-  convert hm.add hi using 1 <;>
-    dsimp [energyAlong, energy, mechanical, coupling, forceAlong, force] <;> ring
+  convert hm.add hi using 1
+  dsimp [energyAlong, energy, mechanical, coupling, forceAlong, force]
+  ring
 
 /-- Energy loss is a derived consequence of the supplied equations. -/
 theorem energy_hasDerivAt (κ g ω₁ ω₂ c : ℝ) (z : Path) (t : ℝ)
@@ -109,7 +113,9 @@ theorem energy_hasDerivAt (κ g ω₁ ω₂ c : ℝ) (z : Path) (t : ℝ)
       (-power c (forceAlong κ g z t)) t := by
   have h := energy_chain_rule κ g ω₁ ω₂ z t _ _ _
     hz.dx₁ hz.dv₁ hz.dx₂ hz.dv₂ hz.dy
-  convert h using 1 <;> dsimp [power] <;> ring
+  convert h using 1
+  dsimp [power]
+  ring
 
 theorem power_nonneg {c : ℝ} (hc : 0 < c) (f : ℝ) : 0 ≤ power c f := by
   exact div_nonneg (sq_nonneg f) (le_of_lt (mul_pos (by norm_num) hc))
@@ -156,7 +162,7 @@ theorem emitted_pos_iff {c T : ℝ} (hc : 0 < c) (hT : 0 < T)
   constructor
   · intro h
     by_contra hn
-    push_neg at hn
+    push Not at hn
     have he : emitted c F T = 0 := by
       unfold emitted
       calc
@@ -201,14 +207,16 @@ theorem leftWave_time (c s t d : ℝ) (y : ℝ → ℝ)
 theorem rightWave_space (c s t d : ℝ) (y : ℝ → ℝ)
     (hy : HasDerivAt y d (t-s/c)) :
     HasDerivAt (fun u => rightWave c y u t) (-d/c) s := by
-  convert hy.comp s (((hasDerivAt_id s).div_const c).const_sub t) using 1 <;>
-    dsimp [rightWave] <;> ring
+  convert hy.comp s (((hasDerivAt_id s).div_const c).const_sub t) using 1
+  dsimp [rightWave]
+  ring
 
 theorem leftWave_space (c s t d : ℝ) (y : ℝ → ℝ)
     (hy : HasDerivAt y d (t+s/c)) :
     HasDerivAt (fun u => leftWave c y u t) (d/c) s := by
-  convert hy.comp s (((hasDerivAt_id s).div_const c).const_add t) using 1 <;>
-    dsimp [leftWave] <;> ring
+  convert hy.comp s (((hasDerivAt_id s).div_const c).const_add t) using 1
+  dsimp [leftWave]
+  ring
 
 theorem outgoing_density {c : ℝ} (hc : c ≠ 0) (w : ℝ) :
     waveDensity c w (-w/c) = w^2 ∧ waveDensity c w (w/c) = w^2 := by
@@ -216,14 +224,13 @@ theorem outgoing_density {c : ℝ} (hc : c ≠ 0) (w : ℝ) :
 
 theorem outgoing_flux {c : ℝ} (hc : c ≠ 0) (w : ℝ) :
     waveFlux c w (-w/c) = c*w^2 ∧ waveFlux c w (w/c) = -c*w^2 := by
-  constructor <;> unfold waveFlux <;> field_simp [hc] <;> ring
+  constructor <;> unfold waveFlux <;> field_simp [hc]
 
 /-- The two outgoing fluxes add to the local loss rate. -/
 theorem two_sided_flux {c : ℝ} (hc : c ≠ 0) (f : ℝ) :
     waveFlux c (f/(2*c)) (-((f/(2*c))/c)) -
       waveFlux c (f/(2*c)) ((f/(2*c))/c) = power c f := by
-  rw [(outgoing_flux hc _).1, (outgoing_flux hc _).2]
-  unfold power
+  unfold waveFlux power
   field_simp [hc]
   ring
 
@@ -240,11 +247,11 @@ theorem outgoing_transport (c s t h : ℝ) (hc : c ≠ 0) (y : ℝ → ℝ) :
   constructor <;> dsimp [rightWave, leftWave] <;> congr 1 <;> field_simp [hc] <;> ring
 
 /-- Shifted quartic potential: the cubic coefficient is lambda*x0. -/
-def quartic (k λ u x : ℝ) : ℝ := k*x^2/2 + λ*x^4/4 - u*x
+def quartic (k lam u x : ℝ) : ℝ := k*x^2/2 + lam*x^4/4 - u*x
 
-theorem shifted_quartic (k λ x₀ η : ℝ) :
-    quartic k λ (k*x₀+λ*x₀^3) (x₀+η) - quartic k λ (k*x₀+λ*x₀^3) x₀ =
-    (k+3*λ*x₀^2)*η^2/2 + λ*x₀*η^3 + λ*η^4/4 := by
+theorem shifted_quartic (k lam x₀ η : ℝ) :
+    quartic k lam (k*x₀+lam*x₀^3) (x₀+η) - quartic k lam (k*x₀+lam*x₀^3) x₀ =
+    (k+3*lam*x₀^2)*η^2/2 + lam*x₀*η^3 + lam*η^4/4 := by
   unfold quartic
   ring
 
