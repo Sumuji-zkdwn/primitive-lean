@@ -72,7 +72,7 @@ theorem read_false : readSignal false = -(144 / 25 : ℝ) := by
   change intensityPlus (step () witnessLeft) -
     intensityMinus (step () witnessLeft) = -(144 / 25 : ℝ)
   rw [balanced_difference]
-  have hi : imQ (step () witnessLeft) = -(36 / 25 : ℝ) :=
+  have hi : imQ (step () witnessLeft) = (-36 / 25 : ℝ) :=
     congrArg Prod.snd next_values.1
   rw [hi]
   norm_num
