@@ -553,6 +553,18 @@
       "permitted_adaptations": []
     },
     {
+      "path": "docs/verification/2026-11-07-curve-letter-context.md",
+      "sha256": "6ce172379e7fbedbc706bda8031dab5f715b05c8a2ab9e2358b5220f97528fa2",
+      "original_sha256": "6ce172379e7fbedbc706bda8031dab5f715b05c8a2ab9e2358b5220f97528fa2",
+      "source_pr": 87,
+      "source_commit": "597246334098fa550220890015e76e674109ad84",
+      "source_path": "docs/verification/2026-11-07-curve-letter-context.md",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "597246334098fa550220890015e76e674109ad84"
+    },
+    {
       "path": "docs/verification/complementary-observation-comparison-notes.md",
       "sha256": "85eebe4f6fd4437f4d327bb41e10180af919348ccbd1c4bb7a02368d6ef9db0e",
       "original_sha256": "85eebe4f6fd4437f4d327bb41e10180af919348ccbd1c4bb7a02368d6ef9db0e",
@@ -1103,6 +1115,18 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
+      "original_sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
+      "source_pr": 87,
+      "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
+      "source_path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "db89426dc61742ce1f10ea18152478819159b5d2"
+    },
+    {
       "path": "linear_input/lean_check/Design.lean",
       "sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
       "original_sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
@@ -1388,6 +1412,17 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "sha256": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
+      "original_sha256": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
+      "source_pr": null,
+      "source_commit": "7c920a3c58c969dab43093165170892e407d62fa",
+      "source_path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
       "path": "linear_input/lean_check/ForwardUniqueness.inc",
       "sha256": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
       "original_sha256": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
@@ -1528,6 +1563,18 @@
       ]
     },
     {
+      "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+      "sha256": "c4d801ecb6f3936359b14062c6892e0bb4312f75341d334aa785b9c3fb07ab59",
+      "original_sha256": "c4d801ecb6f3936359b14062c6892e0bb4312f75341d334aa785b9c3fb07ab59",
+      "source_pr": null,
+      "source_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9",
+      "source_path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
       "path": "linear_input/lean_check/HistorySignature.inc",
       "sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
       "original_sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
@@ -1559,6 +1606,18 @@
       "role": "baseline_proof_or_configuration",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "sha256": "996a9b4605029746763ce5eeabf21a346c2bdf04026a3541f6c2da19f6b238b2",
+      "original_sha256": "996a9b4605029746763ce5eeabf21a346c2bdf04026a3541f6c2da19f6b238b2",
+      "source_pr": 87,
+      "source_commit": "be41acd054e0a2d566636a24b7f5058da1638735",
+      "source_path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "be41acd054e0a2d566636a24b7f5058da1638735"
     },
     {
       "path": "linear_input/lean_check/KummerDihedral.inc",
@@ -1605,6 +1664,17 @@
       "permitted_adaptations": []
     },
     {
+      "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+      "sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
+      "original_sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
+      "source_pr": null,
+      "source_commit": "01da7db838bda1500c95b8e5dd0791e5e040ee90",
+      "source_path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
       "path": "linear_input/lean_check/Observation.lean",
       "sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
       "original_sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
@@ -1626,6 +1696,61 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "8a7d34d10f6d4275929f1f711e1b240b3b52fef3"
+    },
+    {
+      "path": "linear_input/lean_check/OperatorBisimulation.inc",
+      "sha256": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
+      "original_sha256": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
+      "source_pr": null,
+      "source_commit": "4168a3a0e6c314fff93aec35252b515b7927654e",
+      "source_path": "linear_input/lean_check/OperatorBisimulation.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
+      "sha256": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
+      "original_sha256": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
+      "source_pr": null,
+      "source_commit": "b65aa486e20436939d4ac972a09e8fb3cab159d2",
+      "source_path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
+      "sha256": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
+      "original_sha256": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
+      "source_pr": null,
+      "source_commit": "533919495f9f0d5960a9814e184f12f2424452cd",
+      "source_path": "linear_input/lean_check/OperatorSemanticClosure.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+      "original_sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+      "source_pr": null,
+      "source_commit": "b2b660c1d1e5a7b22dca0dc2c0fd790c6e17f1f5",
+      "source_path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721",
+      "original_sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721",
+      "source_pr": null,
+      "source_commit": "6965d213f5b5fb5142761d02a5a3b8254265cf2d",
+      "source_path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     },
     {
       "path": "linear_input/lean_check/PressureCurvature.inc",
@@ -1657,6 +1782,17 @@
       "source_commit": "cda8a2362bff5cbe6c304b234128d2b88d644c94",
       "source_path": "linear_input/lean_check/QuarticClassification.inc",
       "role": "baseline_proof_or_configuration",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+      "sha256": "6de68cc3d1a2f2dca101c47639d24527306487fcd7e75713f3177aad15882bcb",
+      "original_sha256": "6de68cc3d1a2f2dca101c47639d24527306487fcd7e75713f3177aad15882bcb",
+      "source_pr": null,
+      "source_commit": "66396572c043f90011103d00e583d9709adafc0f",
+      "source_path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+      "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
     },
@@ -1701,6 +1837,28 @@
           "original_sha256": "23584c6af15b5c22af405bd67bdfeb69c1ec3654176b8903a944418abb5c5d66"
         }
       ]
+    },
+    {
+      "path": "linear_input/lean_check/RuleSelfModification.inc",
+      "sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
+      "original_sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
+      "source_pr": null,
+      "source_commit": "0c45401418fe83b522b056f69d25f0500e1ef291",
+      "source_path": "linear_input/lean_check/RuleSelfModification.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+      "sha256": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
+      "original_sha256": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
+      "source_pr": null,
+      "source_commit": "b314d11ff459e7fb27d258a8fcf044c7613c0496",
+      "source_path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     },
     {
       "path": "linear_input/lean_check/ShearCommutator.inc",
@@ -1929,6 +2087,18 @@
       "permitted_adaptations": []
     },
     {
+      "path": "tests/test_curve_letter_context.py",
+      "sha256": "fe7763ba17d1ed321026033f14ad9b32ea6773759d1450402c074e150904f8cd",
+      "original_sha256": "fe7763ba17d1ed321026033f14ad9b32ea6773759d1450402c074e150904f8cd",
+      "source_pr": 87,
+      "source_commit": "597246334098fa550220890015e76e674109ad84",
+      "source_path": "tests/test_curve_letter_context.py",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "597246334098fa550220890015e76e674109ad84"
+    },
+    {
       "path": "tools/check_complementary_recovery.py",
       "sha256": "95a9e105517bec9934840a934959bc07c5d2a3ff04448492e070da6a3c42bec5",
       "original_sha256": "95a9e105517bec9934840a934959bc07c5d2a3ff04448492e070da6a3c42bec5",
@@ -2116,128 +2286,6 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/OperatorWordObservations.inc",
-      "sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721",
-      "original_sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721",
-      "source_pr": null,
-      "source_commit": "6965d213f5b5fb5142761d02a5a3b8254265cf2d",
-      "source_path": "linear_input/lean_check/OperatorWordObservations.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/OperatorBisimulation.inc",
-      "sha256": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
-      "original_sha256": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
-      "source_pr": null,
-      "source_commit": "4168a3a0e6c314fff93aec35252b515b7927654e",
-      "source_path": "linear_input/lean_check/OperatorBisimulation.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
-      "sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
-      "original_sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
-      "source_pr": null,
-      "source_commit": "b2b660c1d1e5a7b22dca0dc2c0fd790c6e17f1f5",
-      "source_path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
-      "sha256": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
-      "original_sha256": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
-      "source_pr": null,
-      "source_commit": "b65aa486e20436939d4ac972a09e8fb3cab159d2",
-      "source_path": "linear_input/lean_check/OperatorFiniteHorizon.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/OperatorSemanticClosure.inc",
-      "sha256": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
-      "original_sha256": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
-      "source_pr": null,
-      "source_commit": "533919495f9f0d5960a9814e184f12f2424452cd",
-      "source_path": "linear_input/lean_check/OperatorSemanticClosure.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
-      "sha256": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
-      "original_sha256": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
-      "source_pr": null,
-      "source_commit": "b314d11ff459e7fb27d258a8fcf044c7613c0496",
-      "source_path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
-      "sha256": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
-      "original_sha256": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
-      "source_pr": null,
-      "source_commit": "7c920a3c58c969dab43093165170892e407d62fa",
-      "source_path": "linear_input/lean_check/FiniteSelfSynthesis.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
-      "sha256": "6de68cc3d1a2f2dca101c47639d24527306487fcd7e75713f3177aad15882bcb",
-      "original_sha256": "6de68cc3d1a2f2dca101c47639d24527306487fcd7e75713f3177aad15882bcb",
-      "source_pr": null,
-      "source_commit": "66396572c043f90011103d00e583d9709adafc0f",
-      "source_path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/RuleSelfModification.inc",
-      "sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
-      "original_sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
-      "source_pr": null,
-      "source_commit": "0c45401418fe83b522b056f69d25f0500e1ef291",
-      "source_path": "linear_input/lean_check/RuleSelfModification.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
-      "sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
-      "original_sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
-      "source_pr": null,
-      "source_commit": "01da7db838bda1500c95b8e5dd0791e5e040ee90",
-      "source_path": "linear_input/lean_check/MetaRuleSelfExtension.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
-    },
-    {
-      "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
-      "sha256": "c4d801ecb6f3936359b14062c6892e0bb4312f75341d334aa785b9c3fb07ab59",
-      "original_sha256": "c4d801ecb6f3936359b14062c6892e0bb4312f75341d334aa785b9c3fb07ab59",
-      "source_pr": null,
-      "source_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9",
-      "source_path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
-      "role": "new_integration_extension",
-      "byte_identical": true,
-      "permitted_adaptations": [],
-      "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2355,18 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-06",
+      "path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "source_commit": "be41acd054e0a2d566636a24b7f5058da1638735",
+      "note": "Contextual congruence under rewrite and binary attachment; exact minimal quotient, old-quotient descent iff stability, and explicit finite hidden-bit witness. Previous sources remain unchanged."
+    },
+    {
+      "date": "2026-11-07",
+      "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
+      "note": "Instantiates PR #87's WordEq/StableJoin descent criterion with the normalized A/B curve-letter model from the 2026-10-20 note; exact AB/BA observation collision and left-A separation, independently checked in Python."
     }
   ]
 }

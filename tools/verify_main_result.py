@@ -59,6 +59,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/FutureObservations.inc', 'LinearInputFutureObservation'),
     ('linear_input/lean_check/FutureFiniteHorizon.inc', 'LinearInputFutureHorizon'),
     ('linear_input/lean_check/OperatorWordObservations.inc', 'LinearInputOperatorWords'),
+    ('linear_input/lean_check/JoinContextualEquivalence.inc', 'LinearInputJoinContexts'),
+    ('linear_input/lean_check/CurveLetterContextualEquivalence.inc', 'LinearInputCurveLetters'),
     ('linear_input/lean_check/OperatorBisimulation.inc', 'LinearInputOperatorBisimulation'),
     ('linear_input/lean_check/OperatorVocabularyRefinement.inc', 'LinearInputOperatorRefinement'),
     ('linear_input/lean_check/OperatorFiniteHorizon.inc', 'LinearInputOperatorHorizon'),
