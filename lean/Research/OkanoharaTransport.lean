@@ -127,6 +127,156 @@ theorem history_weight_le_original {β : ℝ} (hβ : 0 < β)
   exact (exp_neg_mul_le_exp_neg_mul_iff hβ).2
     (energy_le_history_augmented ε θ ℓ h)
 
+/-!
+## Explicit bistable fiber / finite ensemble extension
+
+The threshold values ±1 and the high/low resistances 3/1 are constitutive
+model choices, not physical constants. For each fiber, the update holds its
+previous state between the thresholds. A chosen resistance law connects
+that updated state to the control-gain example above.
+
+The serial amplification theorem is conditional on *multiplicative* fiber
+resistances, not a lower bound for every inverse-learning algorithm.
+-/
+
+/-- Binary fiber with remanence in the threshold interval (-1, 1). -/
+def switchFiber (q : Bool) (drive : ℝ) : Bool :=
+  if (1 : ℝ) ≤ drive then true
+  else if drive ≤ (-1 : ℝ) then false
+  else q
+
+theorem switch_fiber_holds_at_zero (q : Bool) :
+    switchFiber q 0 = q := by
+  norm_num [switchFiber]
+
+/-- The same final external drive can retain distinct switch histories. -/
+theorem switch_fiber_remanence :
+    switchFiber (switchFiber false 2) 0 = true ∧
+      switchFiber (switchFiber false (-2)) 0 = false := by
+  constructor <;> norm_num [switchFiber]
+
+/-- At forcing +2, two different internal states merge. -/
+theorem positive_pulse_is_not_injective :
+    ¬ Function.Injective (fun q : Bool => switchFiber q 2) := by
+  intro h
+  have heq : (false : Bool) = true := h (by norm_num [switchFiber])
+  cases heq
+
+/-- Chosen memory variable: relaxed fiber = 0, activated fiber = 2. -/
+def fiberMemory (q : Bool) : ℝ := if q then 2 else 0
+
+/-- Resistance law consistent with Okanohara's toy gain 1/(1+h). -/
+def fiberResistance (q : Bool) : ℝ := 1 + fiberMemory q
+
+theorem fiber_resistance_positive (q : Bool) :
+    0 < fiberResistance q := by
+  cases q <;> norm_num [fiberResistance, fiberMemory]
+
+/-- The physical input is converted into displacement through resistance. -/
+def fiberDisplacement (q : Bool) (input : ℝ) : ℝ :=
+  input / fiberResistance q
+
+/-- Reuse the *existing* requiredInput from the history-control bridge. -/
+theorem fiber_required_input_realizes_target (q : Bool) (d : ℝ) :
+    fiberDisplacement q (requiredInput (fiberMemory q) d) = d := by
+  cases q <;>
+    norm_num [fiberDisplacement, requiredInput, fiberMemory, fiberResistance]
+
+def fiberAction (q : Bool) (d : ℝ) : ℝ :=
+  requiredAction (fiberMemory q) d
+
+/-- The pulse history changes the unit-target energy from 1 to 9. -/
+theorem pulse_action_gap :
+    fiberAction (switchFiber (switchFiber false 2) 0) 1 = 9 ∧
+    fiberAction (switchFiber (switchFiber false (-2)) 0) 1 = 1 := by
+  constructor <;>
+    norm_num [fiberAction, requiredAction, requiredInput,
+      fiberMemory, switchFiber]
+
+/-- The present visible position is independent of the recorded switch. -/
+abbrev FiberState := ℝ × Bool
+
+def fiberRead (s : FiberState) : ℝ := s.1
+def fiberReadCost (s : FiberState) : ℝ := fiberAction s.2 1
+
+/-- Different pulse histories from the same initial state, with readout zero. -/
+def fiberPulse (drive : ℝ) : FiberState :=
+  ((0 : ℝ), switchFiber (switchFiber false drive) 0)
+
+theorem fiber_pulse_readout_and_cost :
+    fiberRead (fiberPulse 2) = fiberRead (fiberPulse (-2)) ∧
+    fiberReadCost (fiberPulse 2) = 9 ∧
+    fiberReadCost (fiberPulse (-2)) = 1 := by
+  norm_num [fiberRead, fiberReadCost, fiberPulse, fiberAction,
+    switchFiber, fiberMemory, requiredAction, requiredInput]
+
+/-- A cost determined from only the present position cannot fit both pulses. -/
+theorem pulse_cost_does_not_factor_through_readout :
+    ¬ ∃ f : ℝ → ℝ, ∀ drive : ℝ,
+        fiberReadCost (fiberPulse drive) = f (fiberRead (fiberPulse drive)) := by
+  rintro ⟨f, hf⟩
+  have hp := hf 2
+  have hn := hf (-2)
+  norm_num [fiberRead, fiberReadCost, fiberPulse, fiberAction,
+    switchFiber, fiberMemory, requiredAction, requiredInput] at hp hn
+  linarith
+
+/-- Pushforward of a signed mass function by the deterministic switch. -/
+def fiberPushforward (drive : ℝ) (p : Bool → ℝ) (target : Bool) : ℝ :=
+  (if switchFiber false drive = target then p false else 0) +
+    (if switchFiber true drive = target then p true else 0)
+
+/-- A positive pulse pushes all mass to the high-resistance fiber state. -/
+theorem positive_pulse_collapses_mass (p : Bool → ℝ) :
+    fiberPushforward 2 p false = 0 ∧
+      fiberPushforward 2 p true = p false + p true := by
+  constructor <;> simp [fiberPushforward, switchFiber]
+
+def fiberDirac (q target : Bool) : ℝ := if q = target then 1 else 0
+
+/-- Distinct initial point distributions become identical after the pulse. -/
+theorem positive_pulse_erases_distinct_diracs :
+    fiberDirac false ≠ fiberDirac true ∧
+      (fun b => fiberPushforward 2 (fiberDirac false) b) =
+        (fun b => fiberPushforward 2 (fiberDirac true) b) := by
+  constructor
+  · intro h
+    have heq := congrFun h false
+    norm_num [fiberDirac] at heq
+  · funext b
+    cases b <;>
+      norm_num [fiberPushforward, fiberDirac, switchFiber]
+
+/-- Independent fibers in series: resistances multiply, by modelling choice. -/
+def serialResistance {n : ℕ} (q : Fin n → Bool) : ℝ :=
+  ∏ i : Fin n, fiberResistance (q i)
+
+def serialAction {n : ℕ} (q : Fin n → Bool) (d : ℝ) : ℝ :=
+  (serialResistance q) ^ 2 * d ^ 2
+
+theorem serial_all_on_resistance (n : ℕ) :
+    serialResistance (fun _ : Fin n => true) = (3 : ℝ) ^ n := by
+  simp [serialResistance, fiberResistance, fiberMemory]
+
+theorem serial_all_off_resistance (n : ℕ) :
+    serialResistance (fun _ : Fin n => false) = 1 := by
+  simp [serialResistance, fiberResistance, fiberMemory]
+
+/-- Exponential action is derived under the explicit series-resistance law. -/
+theorem serial_all_on_action (n : ℕ) (d : ℝ) :
+    serialAction (fun _ : Fin n => true) d = (9 : ℝ) ^ n * d ^ 2 := by
+  rw [serialAction, serial_all_on_resistance]
+  congr 1
+  calc
+    ((3 : ℝ) ^ n) ^ 2 = (3 : ℝ) ^ (n * 2) := by rw [pow_mul]
+    _ = (3 : ℝ) ^ (2 * n) := by rw [Nat.mul_comm n 2]
+    _ = ((3 : ℝ) ^ 2) ^ n := by rw [pow_mul]
+    _ = (9 : ℝ) ^ n := by norm_num
+
+theorem serial_all_off_action (n : ℕ) (d : ℝ) :
+    serialAction (fun _ : Fin n => false) d = d ^ 2 := by
+  simp [serialAction, serial_all_off_resistance]
+
 end Elastica
 
 /-! Explicit kernel-axiom audit for the standalone extension. -/
@@ -139,3 +289,18 @@ end Elastica
 #print axioms Elastica.energy_le_history_augmented
 #print axioms Elastica.history_augmented_energy_mono
 #print axioms Elastica.history_weight_le_original
+
+#print axioms Elastica.switch_fiber_holds_at_zero
+#print axioms Elastica.switch_fiber_remanence
+#print axioms Elastica.positive_pulse_is_not_injective
+#print axioms Elastica.fiber_resistance_positive
+#print axioms Elastica.fiber_required_input_realizes_target
+#print axioms Elastica.pulse_action_gap
+#print axioms Elastica.fiber_pulse_readout_and_cost
+#print axioms Elastica.pulse_cost_does_not_factor_through_readout
+#print axioms Elastica.positive_pulse_collapses_mass
+#print axioms Elastica.positive_pulse_erases_distinct_diracs
+#print axioms Elastica.serial_all_on_resistance
+#print axioms Elastica.serial_all_off_resistance
+#print axioms Elastica.serial_all_on_action
+#print axioms Elastica.serial_all_off_action
