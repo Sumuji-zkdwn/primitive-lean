@@ -335,6 +335,72 @@ theorem stable_iff_word_context {α ω ι : Type*}
            (hall (join z x) (join z y)).mpr
              (context_left K step join hc z)⟩
 
+/-- A binary attachment on the old word quotient, provided its fibers are stable
+under replacing either argument. -/
+def attachOld {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) (join : α → α → α)
+    (hs : StableJoin K step join) :
+    LinearInputOperatorWords.State K step →
+      LinearInputOperatorWords.State K step →
+      LinearInputOperatorWords.State K step :=
+  Quotient.lift₂
+    (fun x y => LinearInputOperatorWords.encode K step (join x y)) (by
+      intro x z y w hxz hyw
+      have h₁ : WordEq K step (join x z) (join y z) :=
+        (hs x y z hxz).1
+      have h₂ : WordEq K step (join y z) (join y w) :=
+        (hs z w y hyw).2
+      exact Quotient.sound (word_trans h₁ h₂))
+
+theorem attachOld_encode {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) (join : α → α → α)
+    (hs : StableJoin K step join) (x y : α) :
+    attachOld K step join hs
+      (LinearInputOperatorWords.encode K step x)
+      (LinearInputOperatorWords.encode K step y) =
+        LinearInputOperatorWords.encode K step (join x y) := rfl
+
+/-- Exact descent theorem: the old predictive quotient admits the original
+binary attachment iff its observational equivalence is a join congruence. -/
+theorem stable_iff_old_attach_exists {α ω ι : Type*}
+    (K : α → ω) (step : ι → α → α) (join : α → α → α) :
+    StableJoin K step join ↔
+      ∃ A : LinearInputOperatorWords.State K step →
+          LinearInputOperatorWords.State K step →
+          LinearInputOperatorWords.State K step,
+        ∀ x y : α,
+          A (LinearInputOperatorWords.encode K step x)
+            (LinearInputOperatorWords.encode K step y) =
+              LinearInputOperatorWords.encode K step (join x y) := by
+  constructor
+  · intro hs
+    exact ⟨attachOld K step join hs, attachOld_encode K step join hs⟩
+  · rintro ⟨A, hA⟩ x y z hxy
+    have hclass : LinearInputOperatorWords.encode K step x =
+        LinearInputOperatorWords.encode K step y :=
+      (LinearInputOperatorWords.encode_eq_iff K step x y).2 hxy
+    constructor
+    · apply (LinearInputOperatorWords.encode_eq_iff K step
+        (join x z) (join y z)).1
+      calc
+        LinearInputOperatorWords.encode K step (join x z) =
+          A (LinearInputOperatorWords.encode K step x)
+            (LinearInputOperatorWords.encode K step z) := (hA x z).symm
+        _ = A (LinearInputOperatorWords.encode K step y)
+            (LinearInputOperatorWords.encode K step z) :=
+              congrArg (fun q => A q (LinearInputOperatorWords.encode K step z)) hclass
+        _ = LinearInputOperatorWords.encode K step (join y z) := hA y z
+    · apply (LinearInputOperatorWords.encode_eq_iff K step
+        (join z x) (join z y)).1
+      calc
+        LinearInputOperatorWords.encode K step (join z x) =
+          A (LinearInputOperatorWords.encode K step z)
+            (LinearInputOperatorWords.encode K step x) := (hA z x).symm
+        _ = A (LinearInputOperatorWords.encode K step z)
+            (LinearInputOperatorWords.encode K step y) :=
+              congrArg (A (LinearInputOperatorWords.encode K step z)) hclass
+        _ = LinearInputOperatorWords.encode K step (join z y) := hA z y
+
 /-- Four concrete bars.  The second bit is invisible until an attachment
 with a partner whose first bit is true flips the first-bit readout. -/
 def exK (x : Bool × Bool) : Bool := x.1
