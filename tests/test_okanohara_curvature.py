@@ -65,3 +65,21 @@ def test_pressure_work_and_constant_vs_exponential_cascade():
         d = F(5, 7)
         assert (F(3*n)*d)**2 == 9*(F(n)*d)**2
         assert (F(3)**n*d)**2 == F(9)**n*d*d
+
+
+def test_two_step_history_conditioned_gramian():
+    for k in (F(1), F(3)):
+        gramian = F(2) / (k*k)
+        assert gramian > 0
+        for i in range(-8, 9):
+            d = F(i, 5)
+            u_star = k*d/F(2)
+            assert (u_star + u_star)/k == d
+            assert 2*u_star*u_star == d*d/gramian
+        for i in range(-6, 7):
+            for j in range(-6, 7):
+                u, v = F(i, 4), F(j, 4)
+                d = (u+v)/k
+                assert u*u+v*v >= d*d/gramian
+    assert F(2)/(F(1)*F(1)) == 2
+    assert F(2)/(F(3)*F(3)) == F(2, 9)
