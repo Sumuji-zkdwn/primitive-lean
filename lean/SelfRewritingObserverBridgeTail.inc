@@ -33,8 +33,7 @@ theorem native_wordEq_iff_signature (m : Mode) (s t : State) :
         readout (LinearInputOperatorWords.run (step m) w t) := h w
     rw [run_agrees_native m w s, run_agrees_native m w t] at hw
     exact hw
-  · intro h
-    intro w
+  · intro h w
     rw [run_agrees_native m w s, run_agrees_native m w t]
     exact ((wordEq_iff_signature m s t).2 h) w
 
