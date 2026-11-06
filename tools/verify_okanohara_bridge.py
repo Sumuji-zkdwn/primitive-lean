@@ -53,7 +53,7 @@ def main():
         for ax in used:
             if ax not in ALLOWED:
                 issues.append(f"Forbidden axiom {key}: {ax}")
-    issues.extend(x for x in log.splitlines() if "warning:" in x or "error:" in x)
+    issues.extend(x for x in log.splitlines() if any(t in x for t in ("warning:", "warning(", "error:", "error(")))
     result = {
         "passed": p.returncode == 0 and not issues,
         "command": cmd,
