@@ -351,6 +351,14 @@ theorem switchFiber_minimizes_step_energy (q : Bool) (u : ℝ) :
       change -u ≤ u + 2
       linarith [lt_of_not_ge hlo]
 
+
+/-- Countermodel to *unconditional* exponential amplification: ordinary
+additive series resistances have a constant on/off cost ratio of 9,
+regardless of the number n of identical fibers. -/
+theorem additive_series_has_constant_cost_factor (n : ℕ) (d : ℝ) :
+    ((3 * (n : ℝ)) * d) ^ 2 = 9 * (((n : ℝ)) * d) ^ 2 := by
+  ring
+
 end Elastica
 
 /-! Explicit kernel-axiom audit for the standalone extension. -/
@@ -382,3 +390,4 @@ end Elastica
 #print axioms Elastica.fiber_down_threshold_iff
 #print axioms Elastica.fiber_hold_is_strict_minimizer
 #print axioms Elastica.switchFiber_minimizes_step_energy
+#print axioms Elastica.additive_series_has_constant_cost_factor
