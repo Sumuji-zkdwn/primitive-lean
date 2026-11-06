@@ -126,7 +126,6 @@ theorem phase_at_three_quarters (n wavelength : ℝ)
       3*Real.pi := by
   unfold roundtripPhase
   field_simp
-  ring
 
 theorem film_halfwave_high (n0 n1 n2 wavelength : ℝ)
     (hn : n1 ≠ 0) (hw : wavelength ≠ 0) :
@@ -188,7 +187,6 @@ theorem sample_contrast_positive :
     either sampled film state is strictly smaller than half the true
     absolute contrast. This is deterministic; shot noise is not modeled. -/
 theorem contrast_margin (high low error : ℝ)
-    (hgap : low < high)
     (he : |error| < (high-low)/2) :
     low+error < (high+low)/2 ∧
       (high+low)/2 < high+error := by
@@ -209,8 +207,9 @@ theorem quartic_fold_positive_drive (r : ℝ) (hr : 3*r^2=1) :
       _ = r/3 := by rw [hr2]; ring
   constructor
   · unfold FluidPrismPhaseMemory.energySlope
-    rw [show (-r)^3 = -(r^3) by ring, hr3]
-    ring
+    calc
+      (-r)*((-r)^2-1) - 2*r/3 = -r^3+r-2*r/3 := by ring
+      _ = 0 := by rw [hr3]; ring
   · unfold FluidPrismPhaseMemory.energyCurvature
     nlinarith [hr]
 
