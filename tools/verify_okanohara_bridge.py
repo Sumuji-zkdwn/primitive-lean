@@ -37,6 +37,10 @@ NAMES = (
     "serial_all_off_resistance",
     "serial_all_on_action",
     "serial_all_off_action",
+    "fiber_up_threshold_iff",
+    "fiber_down_threshold_iff",
+    "fiber_hold_is_strict_minimizer",
+    "switchFiber_minimizes_step_energy",
 )
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
