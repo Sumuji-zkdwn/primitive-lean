@@ -23,6 +23,20 @@ NAMES = (
     "energy_le_history_augmented",
     "history_augmented_energy_mono",
     "history_weight_le_original",
+    "switch_fiber_holds_at_zero",
+    "switch_fiber_remanence",
+    "positive_pulse_is_not_injective",
+    "fiber_resistance_positive",
+    "fiber_required_input_realizes_target",
+    "pulse_action_gap",
+    "fiber_pulse_readout_and_cost",
+    "pulse_cost_does_not_factor_through_readout",
+    "positive_pulse_collapses_mass",
+    "positive_pulse_erases_distinct_diracs",
+    "serial_all_on_resistance",
+    "serial_all_off_resistance",
+    "serial_all_on_action",
+    "serial_all_off_action",
 )
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
@@ -62,7 +76,7 @@ def main():
         "axioms": axioms,
         "issues": issues,
         "log": "verification/okanohara-bridge.log",
-        "scope": "Finite scalar speed-limit and history-cost Elastica interface; not general Wasserstein ESL",
+        "scope": "Finite scalar transport, hysteretic fiber-state update, finite mass pushforward, and conditional serial resistance; not general Wasserstein ESL or algorithmic complexity",
     }
     (OUT / "okanohara-bridge.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
