@@ -93,7 +93,7 @@ theorem adaptation_cost_not_observation_factor :
   linarith
 
 /-- Explicitly chosen augmentation of the existing curvature integral. -/
-def historyAugmentedEnergy (ε θ : ℝ → ℝ) (ℓ h : ℝ) : ℝ :=
+noncomputable def historyAugmentedEnergy (ε θ : ℝ → ℝ) (ℓ h : ℝ) : ℝ :=
   energy ε θ ℓ + historyUnitCost h
 
 /-- The history penalty cannot lower the original Elastica energy. -/
@@ -113,7 +113,7 @@ theorem history_augmented_energy_mono (ε θ : ℝ → ℝ) (ℓ : ℝ)
 
 /-- Apply the existing whole-energy exponential representation to the
 history-augmented energy, not to the curvature density. -/
-def historyAugmentedWeight (β : ℝ) (ε θ : ℝ → ℝ) (ℓ h : ℝ) : ℝ :=
+noncomputable def historyAugmentedWeight (β : ℝ) (ε θ : ℝ → ℝ) (ℓ h : ℝ) : ℝ :=
   Real.exp (-β * historyAugmentedEnergy ε θ ℓ h)
 
 /-- Existing Elastica exponential-weight order remains valid after adding
