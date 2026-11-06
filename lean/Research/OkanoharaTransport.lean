@@ -1,4 +1,5 @@
 import Elastica.ExponentialWeight
+import Elastica.Examples
 import Mathlib.Tactic
 
 /-!
@@ -361,6 +362,169 @@ theorem additive_series_has_constant_cost_factor (n : ℕ) (d : ℝ) :
     ((3 * (n : ℝ)) * d) ^ 2 = 9 * (((n : ℝ)) * d) ^ 2 := by
   ring
 
+
+/-!
+## Curvature double well and locally asymmetric stiffness
+
+A single nonnegative polynomial curvature density has equal zero-energy
+minima at kappa = -1 and +1, but different exact quadratic coefficients.
+The real Elastica.energy integral is evaluated via energy_affine.
+Fluid response uses an EXPLICIT model assumption: pressure couples to a
+local deformation with quadratic stiffness set by this curvature density.
+It is not a derivation of viscous hydrodynamics or endpoint-constrained
+minimum energy for arbitrary fiber shapes.
+-/
+
+def curvatureDoubleWell (κ : ℝ) : ℝ :=
+  ((κ ^ 2 - 1) ^ 2 * ((κ + 1) ^ 2 + 2)) / 16
+
+theorem curvature_double_well_nonneg (κ : ℝ) :
+    0 ≤ curvatureDoubleWell κ := by
+  unfold curvatureDoubleWell
+  positivity
+
+theorem curvature_double_well_zero_wells :
+    curvatureDoubleWell (-1) = 0 ∧ curvatureDoubleWell 1 = 0 := by
+  constructor <;> norm_num [curvatureDoubleWell]
+
+theorem curvature_double_well_integral (κ : ℝ) :
+    energy curvatureDoubleWell (fun s : ℝ => (0 : ℝ) + κ * s) 1 =
+      curvatureDoubleWell κ := by
+  simpa using (energy_affine curvatureDoubleWell 0 κ 1)
+
+def wellCurvature (q : Bool) : ℝ := if q then 1 else -1
+
+theorem well_curvature_zero (q : Bool) :
+    curvatureDoubleWell (wellCurvature q) = 0 := by
+  cases q <;> norm_num [wellCurvature, curvatureDoubleWell]
+
+theorem well_curvature_energy_zero (q : Bool) :
+    energy curvatureDoubleWell
+      (fun s : ℝ => (0 : ℝ) + wellCurvature q * s) 1 = 0 := by
+  rw [curvature_double_well_integral, well_curvature_zero]
+
+theorem well_curvature_is_minimum (q : Bool) (κ : ℝ) :
+    curvatureDoubleWell (wellCurvature q) ≤ curvatureDoubleWell κ := by
+  rw [well_curvature_zero]
+  exact curvature_double_well_nonneg κ
+
+def leftCurvatureResponse (t : ℝ) : ℝ :=
+  ((t - 2) ^ 2 * (t ^ 2 + 2)) / 8
+
+def rightCurvatureResponse (t : ℝ) : ℝ :=
+  ((t + 2) ^ 2 * ((t + 2) ^ 2 + 2)) / 8
+
+theorem left_curvature_exact_variation (t : ℝ) :
+    2 * curvatureDoubleWell (-1 + t) =
+      t ^ 2 * leftCurvatureResponse t := by
+  unfold curvatureDoubleWell leftCurvatureResponse
+  ring
+
+theorem right_curvature_exact_variation (t : ℝ) :
+    2 * curvatureDoubleWell (1 + t) =
+      t ^ 2 * rightCurvatureResponse t := by
+  unfold curvatureDoubleWell rightCurvatureResponse
+  ring
+
+def wellCurvatureResponse (q : Bool) (t : ℝ) : ℝ :=
+  if q then rightCurvatureResponse t else leftCurvatureResponse t
+
+theorem well_curvature_exact_variation (q : Bool) (t : ℝ) :
+    2 * curvatureDoubleWell (wellCurvature q + t) =
+      t ^ 2 * wellCurvatureResponse q t := by
+  cases q
+  · simpa [wellCurvature, wellCurvatureResponse] using
+      left_curvature_exact_variation t
+  · simpa [wellCurvature, wellCurvatureResponse] using
+      right_curvature_exact_variation t
+
+def wellStiffness (q : Bool) : ℝ := wellCurvatureResponse q 0
+
+theorem well_stiffness_off_on :
+    wellStiffness false = 1 ∧ wellStiffness true = 3 := by
+  constructor <;> norm_num
+    [wellStiffness, wellCurvatureResponse, leftCurvatureResponse,
+     rightCurvatureResponse]
+
+theorem well_stiffness_eq_previous_resistance (q : Bool) :
+    wellStiffness q = fiberResistance q := by
+  cases q <;> norm_num
+    [wellStiffness, wellCurvatureResponse, leftCurvatureResponse,
+     rightCurvatureResponse, fiberResistance, fiberMemory]
+
+theorem well_stiffness_positive (q : Bool) : 0 < wellStiffness q := by
+  rw [well_stiffness_eq_previous_resistance]
+  exact fiber_resistance_positive q
+
+/-- Explicit fluid/deformation coupling: quadratic elastic response minus
+linear applied pressure work, retaining each well's local stiffness. -/
+def curvatureFlowWork (q : Bool) (pressure z : ℝ) : ℝ :=
+  wellStiffness q / 2 * z ^ 2 - pressure * z
+
+def curvatureFlowPressure (q : Bool) (d : ℝ) : ℝ :=
+  wellStiffness q * d
+
+theorem curvature_flow_work_gap (q : Bool) (d z : ℝ) :
+    curvatureFlowWork q (curvatureFlowPressure q d) z -
+      curvatureFlowWork q (curvatureFlowPressure q d) d =
+      wellStiffness q / 2 * (z - d) ^ 2 := by
+  unfold curvatureFlowWork curvatureFlowPressure
+  ring
+
+theorem curvature_flow_work_minimum (q : Bool) (d z : ℝ) :
+    curvatureFlowWork q (curvatureFlowPressure q d) d ≤
+      curvatureFlowWork q (curvatureFlowPressure q d) z := by
+  have hk : 0 ≤ wellStiffness q / 2 := by
+    exact div_nonneg (well_stiffness_positive q).le (by norm_num)
+  have hs : 0 ≤ wellStiffness q / 2 * (z - d) ^ 2 :=
+    mul_nonneg hk (sq_nonneg _)
+  have hgap := curvature_flow_work_gap q d z
+  linarith
+
+def curvatureFlowAction (q : Bool) (d : ℝ) : ℝ :=
+  (curvatureFlowPressure q d) ^ 2
+
+theorem curvature_flow_action_eq_prior_fiber_action (q : Bool) (d : ℝ) :
+    curvatureFlowAction q d = fiberAction q d := by
+  unfold curvatureFlowAction curvatureFlowPressure fiberAction
+    requiredAction requiredInput
+  rw [well_stiffness_eq_previous_resistance]
+  unfold fiberResistance
+  ring
+
+theorem curvature_flow_pulse_action_gap :
+    curvatureFlowAction (switchFiber (switchFiber false 2) 0) 1 = 9 ∧
+      curvatureFlowAction (switchFiber (switchFiber false (-2)) 0) 1 = 1 := by
+  simpa only [curvature_flow_action_eq_prior_fiber_action] using pulse_action_gap
+
+/-- The previous discrete relay step is an exact reduction of the
+existing Elastica curvature-integral energy, on the two affine families,
+plus selected linear forcing and switching dissipation. -/
+noncomputable def actualCurvatureStepEnergy
+    (old new : Bool) (u : ℝ) : ℝ :=
+  energy curvatureDoubleWell
+    (fun s : ℝ => (0 : ℝ) + wellCurvature new * s) 1 -
+    u * wellCurvature new + fiberSwitchPenalty old new
+
+theorem actual_curvature_step_eq_discrete_energy
+    (old new : Bool) (u : ℝ) :
+    actualCurvatureStepEnergy old new u = fiberStepEnergy old new u := by
+  unfold actualCurvatureStepEnergy
+  rw [well_curvature_energy_zero]
+  cases new <;> simp [wellCurvature, fiberStepEnergy, fiberExternalEnergy]
+
+theorem actual_curvature_switch_minimizes (q : Bool) (u : ℝ) :
+    actualCurvatureStepEnergy q (switchFiber q u) u ≤
+      actualCurvatureStepEnergy q (!(switchFiber q u)) u := by
+  calc
+    actualCurvatureStepEnergy q (switchFiber q u) u =
+      fiberStepEnergy q (switchFiber q u) u :=
+        actual_curvature_step_eq_discrete_energy _ _ _
+    _ ≤ fiberStepEnergy q (!(switchFiber q u)) u :=
+        switchFiber_minimizes_step_energy q u
+    _ = actualCurvatureStepEnergy q (!(switchFiber q u)) u :=
+        (actual_curvature_step_eq_discrete_energy _ _ _).symm
+
 end Elastica
 
 /-! Explicit kernel-axiom audit for the standalone extension. -/
@@ -393,3 +557,21 @@ end Elastica
 #print axioms Elastica.fiber_hold_is_strict_minimizer
 #print axioms Elastica.switchFiber_minimizes_step_energy
 #print axioms Elastica.additive_series_has_constant_cost_factor
+#print axioms Elastica.curvature_double_well_nonneg
+#print axioms Elastica.curvature_double_well_zero_wells
+#print axioms Elastica.curvature_double_well_integral
+#print axioms Elastica.well_curvature_zero
+#print axioms Elastica.well_curvature_energy_zero
+#print axioms Elastica.well_curvature_is_minimum
+#print axioms Elastica.left_curvature_exact_variation
+#print axioms Elastica.right_curvature_exact_variation
+#print axioms Elastica.well_curvature_exact_variation
+#print axioms Elastica.well_stiffness_off_on
+#print axioms Elastica.well_stiffness_eq_previous_resistance
+#print axioms Elastica.well_stiffness_positive
+#print axioms Elastica.curvature_flow_work_gap
+#print axioms Elastica.curvature_flow_work_minimum
+#print axioms Elastica.curvature_flow_action_eq_prior_fiber_action
+#print axioms Elastica.curvature_flow_pulse_action_gap
+#print axioms Elastica.actual_curvature_step_eq_discrete_energy
+#print axioms Elastica.actual_curvature_switch_minimizes
