@@ -302,16 +302,18 @@ weakly preferable exactly when u >= +1. -/
 theorem fiber_up_threshold_iff (u : ℝ) :
     fiberStepEnergy false true u ≤ fiberStepEnergy false false u ↔
       (1 : ℝ) ≤ u := by
-  change -u + 2 ≤ u ↔ (1 : ℝ) ≤ u
-  constructor <;> intro h <;> linarith
+  have h : (-u + 2 ≤ u) ↔ (1 : ℝ) ≤ u := by
+    constructor <;> intro hx <;> linarith
+  simpa [fiberStepEnergy, fiberExternalEnergy, fiberSwitchPenalty] using h
 
 /-- From the activated state, changing to the relaxed state becomes
 weakly preferable exactly when u <= -1. -/
 theorem fiber_down_threshold_iff (u : ℝ) :
     fiberStepEnergy true false u ≤ fiberStepEnergy true true u ↔
       u ≤ (-1 : ℝ) := by
-  change u + 2 ≤ -u ↔ u ≤ (-1 : ℝ)
-  constructor <;> intro h <;> linarith
+  have h : (u + 2 ≤ -u) ↔ u ≤ (-1 : ℝ) := by
+    constructor <;> intro hx <;> linarith
+  simpa [fiberStepEnergy, fiberExternalEnergy, fiberSwitchPenalty] using h
 
 /-- In the middle of the hysteresis loop, holding is strictly cheaper
 than switching, for either internal fiber state. -/
@@ -319,10 +321,10 @@ theorem fiber_hold_is_strict_minimizer (q : Bool) (u : ℝ)
     (hl : (-1 : ℝ) < u) (hr : u < (1 : ℝ)) :
     fiberStepEnergy q q u < fiberStepEnergy q (!q) u := by
   cases q
-  · change u < -u + 2
-    linarith
-  · change -u < u + 2
-    linarith
+  · have h : u < -u + 2 := by linarith
+    simpa [fiberStepEnergy, fiberExternalEnergy, fiberSwitchPenalty] using h
+  · have h : -u < u + 2 := by linarith
+    simpa [fiberStepEnergy, fiberExternalEnergy, fiberSwitchPenalty] using h
 
 /-- The actual relay update always weakly minimizes the discrete energy
 including dissipation among the two possible next fiber states. -/
@@ -333,23 +335,23 @@ theorem switchFiber_minimizes_step_energy (q : Bool) (u : ℝ) :
   · by_cases hhi : (1 : ℝ) ≤ u
     · have hs : switchFiber false u = true := by simp [switchFiber, hhi]
       rw [hs]
-      exact (fiber_up_threshold_iff u).2 hhi
+      simpa using (fiber_up_threshold_iff u).2 hhi
     · have hs : switchFiber false u = false := by simp [switchFiber, hhi]
       rw [hs]
-      change u ≤ -u + 2
-      linarith [lt_of_not_ge hhi]
+      have h : u ≤ -u + 2 := by linarith [lt_of_not_ge hhi]
+      simpa [fiberStepEnergy, fiberExternalEnergy, fiberSwitchPenalty] using h
   · by_cases hlo : u ≤ (-1 : ℝ)
     · have hhi : ¬ ((1 : ℝ) ≤ u) := by linarith
       have hs : switchFiber true u = false := by simp [switchFiber, hhi, hlo]
       rw [hs]
-      exact (fiber_down_threshold_iff u).2 hlo
+      simpa using (fiber_down_threshold_iff u).2 hlo
     · have hs : switchFiber true u = true := by
         by_cases hhi : (1 : ℝ) ≤ u
         · simp [switchFiber, hhi]
         · simp [switchFiber, hhi, hlo]
       rw [hs]
-      change -u ≤ u + 2
-      linarith [lt_of_not_ge hlo]
+      have h : -u ≤ u + 2 := by linarith [lt_of_not_ge hlo]
+      simpa [fiberStepEnergy, fiberExternalEnergy, fiberSwitchPenalty] using h
 
 
 /-- Countermodel to *unconditional* exponential amplification: ordinary
