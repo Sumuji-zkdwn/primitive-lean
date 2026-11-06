@@ -1,0 +1,77 @@
+{
+ "report_declarations": {
+  "expected": 1901,
+  "mismatched": 0,
+  "examples": [],
+  "extra_nodes": 48
+ },
+ "known_edges_main_result": {
+  "expected": [
+   "LinearInputAreaMinimum.locallyMinimizing_areaStationary",
+   "LinearInputCurvatureBridge.energy_shear",
+   "LinearInputCurvatureBridge.forced_energy_constant",
+   "LinearInputCurvatureBridge.forced_phase_hasDerivAt",
+   "LinearInputPressureStationary.areaStationary_exists_pressure",
+   "LinearInputPressureStationary.stationary_curvature"
+  ],
+  "extracted": [
+   "LinearInputAreaMinimum.locallyMinimizing_areaStationary",
+   "LinearInputCurvatureBridge.energy_shear",
+   "LinearInputCurvatureBridge.forced_energy_constant",
+   "LinearInputCurvatureBridge.forced_phase_hasDerivAt",
+   "LinearInputPressureStationary.areaStationary_exists_pressure",
+   "LinearInputPressureStationary.stationary_curvature"
+  ],
+  "equal": true
+ },
+ "lexical_vs_kernel": {
+  "scope": "proof edges between project theorems; theorems of the concatenated linear-input sources",
+  "kernel_and_lexical": 1200,
+  "kernel_only": 7,
+  "lexical_only_unambiguous": 3,
+  "kernel_only_examples": [
+   [
+    "LinearInputAreaParameters.instContinuousAddContinuousLinearMapRealIdParameters",
+    "LinearInputAreaParameters.instIsTopologicalAddGroupContinuousLinearMapRealIdParameters"
+   ],
+   [
+    "LinearInputAreaParameters.contDiff_two_integral_mul",
+    "LinearInputAreaParameters.instContinuousAddContinuousLinearMapRealIdParameters"
+   ],
+   [
+    "LinearInputForwardUniqueness.coordinate_solution_unique_on_Ici",
+    "LinearInputTrajectoryExistence.hasDerivAt_vectorField_iff"
+   ],
+   [
+    "LinearInputLevelGeometry.continuous_direction_subtype",
+    "LinearInputLevelGeometry.continuous_radius"
+   ],
+   [
+    "LinearInputF16Rank.realPencil_rank",
+    "LinearInputF16Rank.real_twiceIdentity_rank"
+   ],
+   [
+    "LinearInputHannaJets.seventh_coefficient_correction",
+    "LinearInputHannaJets.k3_coefficient_correction"
+   ],
+   [
+    "LinearInputTemporalSampling.spin_even_not_step_compatible",
+    "LinearInputTemporalSampling.spin_even_merges_but_full_distinguishes"
+   ]
+  ],
+  "lexical_only_examples": [
+   [
+    "LinearInputVariablePairs.signedGradXu_bijective",
+    "LinearInputVariablePairs.signedGradXu_eq"
+   ],
+   [
+    "LinearInputOperatorRefinement.instability_has_explicit_word",
+    "LinearInputOperatorWords.run_cons"
+   ],
+   [
+    "LinearInputOperatorHorizon.horizon_step",
+    "LinearInputOperatorWords.run_cons"
+   ]
+  ]
+ }
+}
