@@ -191,8 +191,9 @@ theorem five_height_gap (i j : Fin 5) (hne : i ≠ j) :
       (|(idealObservation (fiveHeight i)).2 -
         (idealObservation (fiveHeight j)).2|)
   simp only [five_height_readout]
-  fin_cases i <;> fin_cases j <;>
-    norm_num [le_max_iff] at hne ⊢ <;> assumption
+  fin_cases i <;> fin_cases j <;> norm_num at hne
+  all_goals norm_num [le_max_iff]
+  all_goals assumption
 
 /-- Thus an error strictly below 1/4 per output channel cannot confuse any
     two members of the five-height alphabet.  This is a deterministic bound. -/

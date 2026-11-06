@@ -72,6 +72,9 @@ def run_two_wavelength(root, rebuild=False):
             if re.search(r"\b(sorry|admit|axiom|unsafe)\b", source):
                 raise RuntimeError(f"Forbidden declaration or unproved term in {module}")
             names = re.findall(r"^theorem\s+(\w+)", source, re.M)
+            discovered = re.findall(r"\b(?:theorem|lemma)\s+([\w']+)", source)
+            if names != discovered:
+                raise RuntimeError(f"Unsupported theorem syntax would escape the audit in {module}")
             if not names:
                 raise RuntimeError(f"No audited theorems found in {module}")
             report["theorems"].extend(module + "." + n for n in names)

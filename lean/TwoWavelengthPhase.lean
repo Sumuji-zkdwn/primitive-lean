@@ -204,11 +204,13 @@ theorem mixed_counterexample_values :
     apply Prod.ext
     · have hp : phase (-1/3) = Real.pi / 3 := by dsimp [phase]; ring
       change firstPort (-1/3) = 3/4
-      norm_num [firstPort, port, hp, Real.cos_pi_div_three]
+      rw [firstPort, port, hp, Real.cos_pi_div_three]
+      norm_num
     · have hp : ratioPhase (3/2) (-1/3) = Real.pi / 2 := by
         dsimp [ratioPhase, phase]; ring
       change secondPort (-1/3) = 1/2
-      norm_num [secondPort, ratioPort, hp, Real.cos_pi_div_two]
+      rw [secondPort, ratioPort, hp, Real.cos_pi_div_two]
+      norm_num
   exact ⟨hv, mixed_counterexample.2.symm.trans hv⟩
 
 /-- Exact response of the proposed pair to any effective phase ratio. -/
@@ -238,7 +240,8 @@ theorem five_height_readout_injective :
   change idealObservation (fiveHeight i) = idealObservation (fiveHeight j) at hij
   rw [five_height_readout, five_height_readout] at hij
   have hs : 0 < Real.sqrt 2 := Real.sqrt_pos.2 (by norm_num)
-  fin_cases i <;> fin_cases j <;> norm_num at hij ⊢ <;> nlinarith
+  fin_cases i <;> fin_cases j <;> norm_num at hij
+  all_goals first | rfl | (exfalso; nlinarith)
 
 /-- This same finite alphabet is not identified by the first wavelength. -/
 theorem five_height_first_not_injective :
