@@ -167,6 +167,17 @@ def main() -> None:
                 assert abs(reflectance + transmittance - 1.0) < 2e-12
                 checked += 1
 
+    # Compare the complex amplitudes in the evanescent-output and 60-degree
+    # regimes too, not just their unit intensities.
+    for deg in (37.0, 60.0):
+        alpha = math.radians(deg)
+        for pol in "sp":
+            for thickness in (0.0, D_HALF_WAVE_NM, D_THREE_QUARTER_NM, 1000.0):
+                r, _, _, _ = transfer_matrix_reflection(alpha, thickness, pol)
+                r_air = airy_recursion_reflection(alpha, thickness, pol)
+                assert abs(r-r_air) < 2e-12, (deg, pol, thickness, r, r_air)
+                checked += 1
+
     # The pair aliases at the exact internal angle for which cos(alpha1)=4/5:
     # their round-trip phases are 1.6*pi and 2.4*pi, with equal cosines.
     alpha_pair_alias = math.asin((N_FILM * 3 / 5) / N_GLASS)
@@ -217,7 +228,7 @@ def main() -> None:
     assert abs(roots["p"][0] - 29.03390855) < 1e-6
     assert abs(roots["p"][1] - 30.06572076) < 1e-6
 
-    print("PASS transfer matrix vs independent Airy recursion: 80 cases")
+    print(f"PASS transfer matrix vs independent Airy recursion: {checked} cases")
     print("PASS R+T=1 for all tested subcritical propagating s/p cases")
     print("PASS 60-degree s/p reflectance is 1 and thickness-independent")
     print("PASS 60-degree reflected phase remains thickness-dependent")
