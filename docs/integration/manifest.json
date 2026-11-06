@@ -1116,15 +1116,15 @@
     },
     {
       "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
-      "sha256": "3a51440d2c55a4176b235f059195cc130546307a867d2bfc2621b946cbd1d3b3",
-      "original_sha256": "3a51440d2c55a4176b235f059195cc130546307a867d2bfc2621b946cbd1d3b3",
+      "sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
+      "original_sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
       "source_pr": 87,
-      "source_commit": "597246334098fa550220890015e76e674109ad84",
+      "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
       "source_path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": [],
-      "authoring_commit": "597246334098fa550220890015e76e674109ad84"
+      "authoring_commit": "db89426dc61742ce1f10ea18152478819159b5d2"
     },
     {
       "path": "linear_input/lean_check/Design.lean",
@@ -2365,7 +2365,7 @@
     {
       "date": "2026-11-07",
       "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
-      "source_commit": "597246334098fa550220890015e76e674109ad84",
+      "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
       "note": "Instantiates PR #87's WordEq/StableJoin descent criterion with the normalized A/B curve-letter model from the 2026-10-20 note; exact AB/BA observation collision and left-A separation, independently checked in Python."
     }
   ]
