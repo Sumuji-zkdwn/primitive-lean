@@ -1,0 +1,70 @@
+name: PAD four-layer observational identifiability (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/pad-3d-identifiability-20261107]
+  pull_request:
+    paths:
+      - 'lean/PADFourLayer.lean'
+      - 'tools/check_pad_four_layer.py'
+      - '.github/workflows/pad-four-layer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check exact finite fractions and spherical illustrative kernel
+        run: python -B tools/check_pad_four_layer.py
+
+      - name: Install pinned Lean/Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile source and audit every new theorem
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          git rev-parse HEAD
+          cat lean-toolchain
+          sha256sum PADFourLayer.lean ../tools/check_pad_four_layer.py
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayer.olean PADFourLayer.lean 2>&1 | tee ../pad-four-layer-build.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('PADFourLayer.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',s,re.M)
+          assert len(names)==10 and len(set(names))==10,names
+          pathlib.Path('PADFourLayerAudit.lean').write_text('import PADFourLayer\n'+''.join('#print axioms PADFourLayer.'+n+'\n' for n in names))
+          print('Audit target names:',names)
+          PY
+          lake env lean --trust=0 PADFourLayerAudit.lean 2>&1 | tee ../pad-four-layer-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          x=pathlib.Path('../pad-four-layer-build.log').read_text()+pathlib.Path('../pad-four-layer-axioms.log').read_text()
+          assert 'sorryAx' not in x and 'error:' not in x and 'warning:' not in x
+          print('No warnings/errors/sorryAx.')
+          PY
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pad-four-layer-${{ github.run_id }}
+          path: |
+            pad-four-layer-build.log
+            pad-four-layer-axioms.log
+            docs/pad_four_layer_results.json
+          if-no-files-found: warn
