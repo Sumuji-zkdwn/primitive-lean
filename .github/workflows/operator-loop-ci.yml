@@ -1,0 +1,45 @@
+name: Portable operator loop (finite, no Kaggle submit)
+
+on:
+  pull_request:
+    paths:
+      - 'loopcore/**'
+      - 'tools/autonomy/check_extracted_loop.py'
+      - 'tests/test_loopcore.py'
+      - '.github/workflows/operator-loop-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'loopcore/**'
+      - 'tools/autonomy/check_extracted_loop.py'
+      - 'tests/test_loopcore.py'
+      - '.github/workflows/operator-loop-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test fail-closed bounded controller
+        run: python -m unittest discover -s tests -p test_loopcore.py -v
+      - name: Exercise two fresh cycles and recheck mathematical meaning
+        run: |
+          python -m loopcore run --domain finite --root build/operator-loop-finite
+          python -m loopcore run --domain finite --root build/operator-loop-finite
+          python -m loopcore audit --domain finite --root build/operator-loop-finite --recheck
+      - name: Retain portable verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: operator-loop-finite-${{ github.run_id }}-${{ github.run_attempt }}
+          path: build/operator-loop-finite/
+          if-no-files-found: warn
+          retention-days: 14
