@@ -23,10 +23,12 @@ It does **not** prove Okanohara's continuous Epistemic Speed Limit, free-energy 
 
 In particular, the scalar two-segment inequality is symmetric in transport direction. Direction-dependent adaptation cost appears only after extending the state with the hidden, history-dependent variable. A non-invertible observation is different from a dynamically irreversible transport.
 
-## Next proof obligation
+## Finite-kernel follow-up
 
-Formalize a finite Markov kernel on `Fin n` plus an explicit history-update operator, and derive (rather than assume) the change of control gain from a hysteretic finite transition law. Compare the resulting action with a finite optimal-transport coupling cost. If possible, connect the history-state observation map to the existing `LinearInputFutureObservation.FutureEq` / `LinearInputBayes` definitions; those are currently in the composite `.inc` pipeline, not importable standalone Elastica modules.
+The finite-state transition and action comparison is now in the independent module [`Research/FiniteMarkovTransport.lean`](../../lean/Research/FiniteMarkovTransport.lean), with the exact-rational checker [`test_finite_markov_transport.py`](../../tests/test_finite_markov_transport.py) and a dedicated trust-zero verifier. It defines a rational kernel on `Fin 2`, a deterministic history-update kernel, an observation that forgets history, and a separate quadratic action. The exact target example has equal finite transport cost under both histories but a 9:1 two-step action gap. The history-conditioned gains are still chosen by the model; they have not been derived from measured fibers or a microscopic law.
+
+A remaining connection is to the existing `LinearInputFutureObservation.FutureEq` / `LinearInputBayes` definitions, which remain in the composite `.inc` pipeline and are not imported by these standalone modules. Broader rational/real control domains and a general finite-horizon transport/action theorem also remain open.
 
 ## Verification
 
-The PR invokes `.github/workflows/primitive-lean-ci.yml` for changes under `lean/**`, with `tools/verify_okanohara_bridge.py` compiling this sidecar using `lake env lean --trust=0` and checking nine `#print axioms` outputs. The original `lean/Elastica.lean` is preserved byte-for-byte because the integration manifest protects the original source. Check the PR's latest commit SHA and Actions conclusion; this document makes no independent claim of local Lean execution.
+The CI workflow first builds the retained Elastica library, runs `tools/verify_okanohara_bridge.py` for the Okanohara–Elastica sidecar, then runs `tools/verify_finite_markov_transport.py` for the new module and its explicit axiom audit. The new checker compiles its dependency as an importable sidecar before checking the finite model with `--trust=0`. The original `lean/Elastica.lean` and Elastica proof files remain unchanged. Verification status is specific to the head SHA and Actions run reported on the PR.
