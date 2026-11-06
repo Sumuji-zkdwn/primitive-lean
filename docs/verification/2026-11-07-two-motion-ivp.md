@@ -30,9 +30,9 @@ there is some (T>0) for which the constructed path has positive emitted work.
 It also proves the initial first derivatives from the equations:
 
 \[
-\dot x_1(0)=\dot x_2(0)=0,\quad
-\ddot x_1(0)=\ddot x_2(0)=-1,\quad
-\dot y(0)=1/2.
+\operatorname{deriv}x_1(0)=\operatorname{deriv}x_2(0)=0,\quad
+\operatorname{deriv}v_1(0)=\operatorname{deriv}v_2(0)=-1,\quad
+\operatorname{deriv}y(0)=1/2.
 \]
 
 ## Taylor jet
@@ -41,6 +41,11 @@ Repeated substitution into the polynomial ODE gives the exact rational
 coefficients below. These are the local Taylor coefficients; the Lean patch
 proves local existence and the initial derivatives, but does not formalize an
 analytic remainder bound.
+
+Because the local solution satisfies \(x_i'=v_i\) throughout its interval,
+the state-coordinate result \(v_i'(0)=-1\) gives \(x_i''(0)=-1\). The Lean
+theorem records the derivative of each state coordinate; it does not separately
+prove the second-derivative notation for \(x_i\).
 
 \[
 \begin{aligned}
@@ -80,7 +85,10 @@ python3 tools/check_two_motion_ivp.py
 
 A separate SciPy DOP853 run (`rtol=1e-13`, `atol=1e-15`, 257 RHS evaluations)
 was used as a second numerical method. The following values are rounded from
-that run; the RK4 checker agrees to the displayed digits.
+that run; the RK4 checker agrees to the displayed digits. The symmetric initial
+data and local uniqueness of this polynomial ODE imply \(x_1=x_2\) and
+\(v_1=v_2\); the Lean patch does not formalize uniqueness, so the table records
+the coalesced numerical values.
 
 | t | x₁=x₂ | v₁=v₂ | y | F | local energy | W | E+W−0.5 |
 |---:|---:|---:|---:|---:|---:|---:|---:|
