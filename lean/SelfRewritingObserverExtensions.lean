@@ -67,13 +67,15 @@ private theorem ruleSignature_step (a : RuleAction) :
   | base a => cases a <;> decide
   | peekRule => decide
 
+/-- Complete observation is an injective coordinate encoding. -/
+theorem head_signature_injective : Function.Injective headSignature := by decide
+
 private theorem headSignature_step (a : HeadAction) :
     ∀ s t : State, headSignature s = headSignature t →
       headSignature (headStep a s) = headSignature (headStep a t) := by
-  cases a with
-  | base a => cases a <;> decide
-  | peekRule => decide
-  | peekHead => decide
+  intro s t h
+  exact congrArg (fun u : State => headSignature (headStep a u))
+    (head_signature_injective h)
 
 private theorem ruleSignature_readout (s t : State)
     (h : ruleSignature s = ruleSignature t) : readout s = readout t := by
@@ -146,8 +148,6 @@ theorem rule_classes : (Finset.univ.image ruleSignature).card = 16 := by decide
 
 /-- With both probes, all 32 original states become distinguishable. -/
 theorem head_classes : (Finset.univ.image headSignature).card = 32 := by decide
-
-theorem head_signature_injective : Function.Injective headSignature := by decide
 
 /-- Full rule-and-head observation distinguishes every labelled state. -/
 theorem head_wordEq_iff_eq (s t : State) : HeadWordEq s t ↔ s = t := by
