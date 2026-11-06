@@ -63,13 +63,13 @@ def main():
                                 (wt / "tools/verify_main_result.py").read_text()))
     probes = [p for p in a.own if p.endswith(".inc") and p not in registered and not p.startswith("lean/")]
     if probes:
-        text = "import PrimitiveMain\n\n" + "\n\n".join((wt / p).read_text() for p in sorted(probes))
+        text = "import PrimitiveMain\n\n" + "\n\n".join((wt / p).read_text() for p in probes)  # caller passes ancestry order
         (work / "ExtraProbe.lean").write_text(text)
         S["compile_probes"] = run(["lake", "env", "sh", "-c", f"{lp} lean --root={work} -o {work}/ExtraProbe.olean {work}/ExtraProbe.lean"],
                                   lean, work / "compile_probes.log")
         if S["compile_probes"]["exit"] == 0:
             modules.append("ExtraProbe")
-            module_sources["ExtraProbe"] = "+".join(sorted(probes))
+            module_sources["ExtraProbe"] = "+".join(probes)
 
     own_lean = [p for p in a.own if p.startswith("lean/") and p.endswith(".lean")]
     mods = {p[len("lean/"):-len(".lean")].replace("/", "."): p for p in own_lean}

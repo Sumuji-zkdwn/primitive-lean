@@ -55,6 +55,8 @@ def main():
         tips[int(d.name)] = dict(status=status, nodes=json.loads(dep.read_text())["nodes"] if dep.exists() else None)
 
     def tip_for(n):
+        if tips.get(n, {}).get("nodes") is not None:
+            return n  # the PR's own head was measured
         units = {(u["path"], u["blob"]) for u in P[n]["units"]}
         best = None
         for t, info in tips.items():
@@ -109,12 +111,14 @@ def main():
         depth = [v["proof_depth"] for v in thms.values() if v["proof_depth"] is not None]
         for k in new:
             new_name_owner[k].add(n)
+        covered = set().union(*(sources_of(v) for v in new.values())) if new else set()
         r["kernel"] = dict(
             status="ok", new_theorems=len(thms), new_definitions=len(new) - len(thms),
             theorems_using_main_any_edge=uses_main, theorems_using_main_theorem_in_proof=uses_main_proof,
             theorems_reaching_initial=reaches_initial, shapes=dict(shapes),
             max_proof_depth=max(depth) if depth else None,
             most_used_main_theorems=main_targets.most_common(5),
+            files_without_declarations=sorted(own_paths - covered),
             new_names=sorted(new))
         rows[n] = r
 
