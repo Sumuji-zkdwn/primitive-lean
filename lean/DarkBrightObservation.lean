@@ -102,7 +102,8 @@ theorem output_closes_iff (c s : ℝ) :
     have he : output (mix c s brightBasis) = output (mix c s darkBasis) := by
       calc
         output (mix c s brightBasis) = f (output brightBasis) := hf _
-        _ = f (output darkBasis) := by rfl
+        _ = f (output darkBasis) := congrArg f (by
+          norm_num [output, reQ, imQ, brightBasis, darkBasis])
         _ = output (mix c s darkBasis) := (hf _).symm
     have hi : imQ (mix c s brightBasis) = imQ (mix c s darkBasis) :=
       congrArg Prod.snd he
@@ -145,7 +146,9 @@ theorem summary_eq_of_two_reads (x y : Spinor)
     summary x = summary y := by
   have hd : delta x = delta y := by
     rw [one_probe_recovers_delta x, one_probe_recovers_delta y, h0, h1]
-  exact Prod.ext (congrArg Prod.fst h0) (Prod.ext (congrArg Prod.snd h0) hd)
+  have hr : reQ x = reQ y := congrArg Prod.fst h0
+  have hi : imQ x = imQ y := congrArg Prod.snd h0
+  exact Prod.ext hr (Prod.ext hi hd)
 
 theorem two_reads_iff_summary (x y : Spinor) :
     (output x = output y ∧ output (step () x) = output (step () y)) ↔
