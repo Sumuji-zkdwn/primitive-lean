@@ -375,7 +375,7 @@ It is not a derivation of viscous hydrodynamics or endpoint-constrained
 minimum energy for arbitrary fiber shapes.
 -/
 
-def curvatureDoubleWell (κ : ℝ) : ℝ :=
+noncomputable def curvatureDoubleWell (κ : ℝ) : ℝ :=
   ((κ ^ 2 - 1) ^ 2 * ((κ + 1) ^ 2 + 2)) / 16
 
 theorem curvature_double_well_nonneg (κ : ℝ) :
@@ -392,7 +392,7 @@ theorem curvature_double_well_integral (κ : ℝ) :
       curvatureDoubleWell κ := by
   simpa using (energy_affine curvatureDoubleWell 0 κ 1)
 
-def wellCurvature (q : Bool) : ℝ := if q then 1 else -1
+noncomputable def wellCurvature (q : Bool) : ℝ := if q then 1 else -1
 
 theorem well_curvature_zero (q : Bool) :
     curvatureDoubleWell (wellCurvature q) = 0 := by
@@ -408,10 +408,10 @@ theorem well_curvature_is_minimum (q : Bool) (κ : ℝ) :
   rw [well_curvature_zero]
   exact curvature_double_well_nonneg κ
 
-def leftCurvatureResponse (t : ℝ) : ℝ :=
+noncomputable def leftCurvatureResponse (t : ℝ) : ℝ :=
   ((t - 2) ^ 2 * (t ^ 2 + 2)) / 8
 
-def rightCurvatureResponse (t : ℝ) : ℝ :=
+noncomputable def rightCurvatureResponse (t : ℝ) : ℝ :=
   ((t + 2) ^ 2 * ((t + 2) ^ 2 + 2)) / 8
 
 theorem left_curvature_exact_variation (t : ℝ) :
@@ -426,7 +426,7 @@ theorem right_curvature_exact_variation (t : ℝ) :
   unfold curvatureDoubleWell rightCurvatureResponse
   ring
 
-def wellCurvatureResponse (q : Bool) (t : ℝ) : ℝ :=
+noncomputable def wellCurvatureResponse (q : Bool) (t : ℝ) : ℝ :=
   if q then rightCurvatureResponse t else leftCurvatureResponse t
 
 theorem well_curvature_exact_variation (q : Bool) (t : ℝ) :
@@ -438,7 +438,7 @@ theorem well_curvature_exact_variation (q : Bool) (t : ℝ) :
   · simpa [wellCurvature, wellCurvatureResponse] using
       right_curvature_exact_variation t
 
-def wellStiffness (q : Bool) : ℝ := wellCurvatureResponse q 0
+noncomputable def wellStiffness (q : Bool) : ℝ := wellCurvatureResponse q 0
 
 theorem well_stiffness_off_on :
     wellStiffness false = 1 ∧ wellStiffness true = 3 := by
@@ -458,10 +458,10 @@ theorem well_stiffness_positive (q : Bool) : 0 < wellStiffness q := by
 
 /-- Explicit fluid/deformation coupling: quadratic elastic response minus
 linear applied pressure work, retaining each well's local stiffness. -/
-def curvatureFlowWork (q : Bool) (pressure z : ℝ) : ℝ :=
+noncomputable def curvatureFlowWork (q : Bool) (pressure z : ℝ) : ℝ :=
   wellStiffness q / 2 * z ^ 2 - pressure * z
 
-def curvatureFlowPressure (q : Bool) (d : ℝ) : ℝ :=
+noncomputable def curvatureFlowPressure (q : Bool) (d : ℝ) : ℝ :=
   wellStiffness q * d
 
 theorem curvature_flow_work_gap (q : Bool) (d z : ℝ) :
@@ -481,7 +481,7 @@ theorem curvature_flow_work_minimum (q : Bool) (d z : ℝ) :
   have hgap := curvature_flow_work_gap q d z
   linarith
 
-def curvatureFlowAction (q : Bool) (d : ℝ) : ℝ :=
+noncomputable def curvatureFlowAction (q : Bool) (d : ℝ) : ℝ :=
   (curvatureFlowPressure q d) ^ 2
 
 theorem curvature_flow_action_eq_prior_fiber_action (q : Bool) (d : ℝ) :
