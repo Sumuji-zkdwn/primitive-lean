@@ -54,7 +54,8 @@ theorem boundary_zero_of_drive_zero {κ c T : ℝ} (hκ : 0 ≤ κ) (hc : 0 < c)
     apply antitoneOn_of_hasDerivWithinAt_nonpos (convex_Icc 0 T) hcont
       (fun t ht => (hs t (interior_subset ht)).hasDerivWithinAt)
     intro t ht
-    exact neg_nonpos.mpr (mul_nonneg (div_nonneg hκ hc.le) (sq_nonneg (z.y t)))
+    simpa only [neg_mul] using
+      (neg_nonpos.mpr (mul_nonneg (div_nonneg hκ hc.le) (sq_nonneg (z.y t))))
   intro t ht
   have he := hanti (show (0 : ℝ) ∈ Icc 0 T from ⟨le_rfl, hT⟩) ht ht.1
   have he' : (z.y t)^2 = 0 := le_antisymm (by simpa [hy₀] using he) (sq_nonneg _)
@@ -112,9 +113,10 @@ theorem rightWave_equation {c : ℝ} (hc : c ≠ 0) (y dy ddy : ℝ → ℝ)
   rw [ht, hs]
   have htt := rightWave_time c s t _ dy (hdy (t-s/c))
   have hss := (rightWave_space c s t _ dy (hdy (t-s/c))).neg.div_const c
+  dsimp [rightWave] at htt hss
   rw [htt.deriv, hss.deriv]
+  ring_nf
   field_simp [hc]
-  ring
 
 theorem leftWave_equation {c : ℝ} (hc : c ≠ 0) (y dy ddy : ℝ → ℝ)
     (hy : ∀ r, HasDerivAt y (dy r) r) (hdy : ∀ r, HasDerivAt dy (ddy r) r)
@@ -128,9 +130,10 @@ theorem leftWave_equation {c : ℝ} (hc : c ≠ 0) (y dy ddy : ℝ → ℝ)
   rw [ht, hs]
   have htt := leftWave_time c s t _ dy (hdy (t+s/c))
   have hss := (leftWave_space c s t _ dy (hdy (t+s/c))).div_const c
+  dsimp [leftWave] at htt hss
   rw [htt.deriv, hss.deriv]
+  ring_nf
   field_simp [hc]
-  ring
 
 /-- A smooth, nontrivial excursion of a separate closed unit-frequency oscillator. -/
 def cancelPosition (t : ℝ) : ℝ := t^2 - 2*t^3 + t^4

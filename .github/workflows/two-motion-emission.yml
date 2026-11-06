@@ -14,6 +14,11 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5
+      - name: Independent rational regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_two_motion_emission.py | tee two-motion-finite-checks.log
       - name: Install repository-pinned Lean and Mathlib cache
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
@@ -31,7 +36,7 @@ jobs:
           mkdir -p .lake/build/lib/lean
           git rev-parse HEAD | tee ../two-motion-source.txt
           cat lean-toolchain | tee -a ../two-motion-source.txt
-          sha256sum TwoMotionEmission.lean TwoMotionEmissionConsequences.lean TwoMotionEmissionBridgeTail.inc ../linear_input/lean_check/Observation.lean lake-manifest.json | tee -a ../two-motion-source.txt
+          sha256sum TwoMotionEmission.lean TwoMotionEmissionConsequences.lean TwoMotionEmissionBridgeTail.inc ../linear_input/lean_check/Observation.lean lake-manifest.json ../tools/check_two_motion_emission.py | tee -a ../two-motion-source.txt
           lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmission.olean TwoMotionEmission.lean 2>&1 | tee ../two-motion-model.log
           lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmissionConsequences.olean TwoMotionEmissionConsequences.lean 2>&1 | tee ../two-motion-consequences.log
           printf 'import TwoMotionEmissionConsequences\n' > TwoMotionEmissionNativeBridge.lean
