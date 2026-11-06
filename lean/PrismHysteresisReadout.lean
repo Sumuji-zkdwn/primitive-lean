@@ -8,7 +8,7 @@ The two amplitudes are classical complex mode amplitudes. The binary latch is an
 externally supplied ideal Preisach-style hysteron, not derived from N-BASF64,
 fluid dynamics, Maxwell equations, or an elastica energy.
 
-A balanced interference readout (unnormalized B +/- iD intensities) detects
+A balanced interference readout (unnormalized B plus/minus iD intensities) detects
 a phase-sensitive difference that is invisible in the initial coherence Q
 and total power. The reversible mixer is ideal: real detectors, leakage,
 absorption, disturbances of the liquid and actual nondemolition measurement
@@ -149,14 +149,14 @@ theorem two_writes_retained :
 theorem written_states_blind :
     blindRead (write false (2 : ℝ)) =
       blindRead (write false (-2 : ℝ)) := by
-  change blindRead true = blindRead false
+  rw [write_high, write_low]
   exact blind_equivalence.symm
 
 /-- But one phase-sensitive pulse distinguishes both histories. -/
 theorem written_states_separate :
     readSignal (write false (2 : ℝ)) ≠
       readSignal (write false (-2 : ℝ)) := by
-  change readSignal true ≠ readSignal false
+  rw [write_high, write_low]
   exact probe_separates.symm
 
 /-- Exact readout and restoration of both written configurations. -/
