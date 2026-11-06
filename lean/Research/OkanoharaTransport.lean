@@ -539,7 +539,7 @@ This is NOT an empirical model of training or general nonlinear control.
 noncomputable def curvatureTwoStepDisplacement (q : Bool) (u v : ℝ) : ℝ :=
   (u + v) / wellStiffness q
 
-def curvatureTwoStepMinCost (q : Bool) (d : ℝ) : ℝ :=
+noncomputable def curvatureTwoStepMinCost (q : Bool) (d : ℝ) : ℝ :=
   (wellStiffness q) ^ 2 * d ^ 2 / 2
 
 theorem curvature_two_step_cost_lower_bound (q : Bool) (d u v : ℝ)
@@ -563,7 +563,7 @@ theorem curvature_two_step_constant_control_attains (q : Bool) (d : ℝ) :
   constructor
   · have hk : wellStiffness q ≠ 0 := (well_stiffness_positive q).ne'
     unfold curvatureTwoStepDisplacement curvatureFlowPressure
-    field_simp [hk] <;> ring
+    field_simp [hk]; ring
   · unfold twoStepAction curvatureTwoStepMinCost curvatureFlowPressure
     ring
 
@@ -572,7 +572,7 @@ theorem curvature_two_step_cost_by_history (d : ℝ) :
       curvatureTwoStepMinCost true d = 9 * d ^ 2 / 2 := by
   constructor <;> norm_num
     [curvatureTwoStepMinCost, wellStiffness, wellCurvatureResponse,
-     leftCurvatureResponse, rightCurvatureResponse] <;> ring
+     leftCurvatureResponse, rightCurvatureResponse]
 
 /-- Scalar two-step controllability Gramian, i.e. sum of two squared gains. -/
 noncomputable def curvatureTwoStepGramian (q : Bool) : ℝ :=
@@ -599,7 +599,7 @@ theorem curvature_two_step_cost_gramian (q : Bool) (d : ℝ) :
   cases q <;> norm_num
     [curvatureTwoStepMinCost, curvatureTwoStepGramian, wellStiffness,
      wellCurvatureResponse, leftCurvatureResponse,
-     rightCurvatureResponse] <;> ring
+     rightCurvatureResponse]; ring
 
 end Elastica
 
