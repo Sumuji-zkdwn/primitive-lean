@@ -60,6 +60,12 @@ NAMES = (
     "curvature_flow_pulse_action_gap",
     "actual_curvature_step_eq_discrete_energy",
     "actual_curvature_switch_minimizes",
+    "curvature_two_step_cost_lower_bound",
+    "curvature_two_step_constant_control_attains",
+    "curvature_two_step_cost_by_history",
+    "curvature_two_step_gramian_by_history",
+    "curvature_two_step_gramian_positive",
+    "curvature_two_step_cost_gramian",
 )
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
