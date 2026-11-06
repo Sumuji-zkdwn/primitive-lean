@@ -63,9 +63,9 @@ def run_two_wavelength(root, rebuild=False):
             p: digest(root / p) == expected for p, expected in PRESERVED.items()}
         if not all(report["preserved_pr92_sources"].values()):
             raise RuntimeError("A preserved PR #92 source or dependency pin changed")
-        additions = [m for m in ADDITIONS if (lean / (m + ".lean")).is_file()]
-        if additions[:2] != ADDITIONS[:2]:
-            raise RuntimeError("Missing core two-wavelength modules")
+        additions = ADDITIONS
+        if not all((lean / (m + ".lean")).is_file() for m in additions):
+            raise RuntimeError("Missing two-wavelength module")
         report["modules"] = ANCESTORS + additions
         for module in additions:
             source = strip_comments_strings((lean / (module + ".lean")).read_text())

@@ -52,16 +52,14 @@ theorem dispersive_calibrated_phase
   have href := calibrated_phase deltaN1 a lambda1 h hw1 hcal
   rw [ratioPhase, ← href]
   unfold opticalPhase effectiveRatio
-  field_simp
-  <;> ring
+  field_simp [hd, hw1, hw2]
 
 theorem nondispersive_ratio (deltaN wavelength : ℝ)
     (hd : deltaN ≠ 0) (hw : wavelength ≠ 0) :
     effectiveRatio deltaN deltaN (wavelengthOne wavelength)
       (wavelengthTwo wavelength) = 3/2 := by
   unfold effectiveRatio wavelengthOne wavelengthTwo
-  field_simp
-  <;> ring
+  field_simp [hd, hw]
 
 theorem ideal_second_calibrated_phase (deltaN a wavelength h : ℝ)
     (hw : wavelength ≠ 0) (hcal : 4 * deltaN * a = wavelength) :
@@ -74,7 +72,10 @@ theorem ideal_second_calibrated_phase (deltaN a wavelength h : ℝ)
     exact hw hcal.symm
   have hc := dispersive_calibrated_phase deltaN deltaN a wavelength
     (wavelengthTwo wavelength) h hd hw (second_wavelength_ne_zero wavelength hw) hcal
-  simpa only [nondispersive_ratio deltaN wavelength hd hw, wavelengthOne] using hc
+  have hr : effectiveRatio deltaN deltaN wavelength (wavelengthTwo wavelength) = 3/2 :=
+    nondispersive_ratio deltaN wavelength hd hw
+  rw [hr] at hc
+  exact hc
 
 theorem first_channel_unchanged (h : ℝ) :
     (idealObservation h).1 = port h := rfl
@@ -152,7 +153,7 @@ theorem ideal_period_eight (h : ℝ) :
   apply Prod.ext
   · change firstPort (h+8) = firstPort h
     calc
-      firstPort (h+8) = firstPort ((h+4)+4) := by congr 1 <;> ring
+      firstPort (h+8) = firstPort ((h+4)+4) := by congr 1; ring
       _ = firstPort (h+4) := first_period_four (h+4)
       _ = firstPort h := first_period_four h
   · exact second_period_eight h
@@ -196,6 +197,28 @@ theorem mixed_counterexample :
         dsimp [ratioPhase, phase]; ring
       simp [secondPort, ratioPort, hp, Real.cos_add]
 
+theorem mixed_counterexample_values :
+    idealObservation (-1/3) = (3/4,1/2) ∧
+      idealObservation (7/3) = (3/4,1/2) := by
+  have hv : idealObservation (-1/3) = (3/4,1/2) := by
+    apply Prod.ext
+    · have hp : phase (-1/3) = Real.pi / 3 := by dsimp [phase]; ring
+      change firstPort (-1/3) = 3/4
+      norm_num [firstPort, port, hp, Real.cos_pi_div_three]
+    · have hp : ratioPhase (3/2) (-1/3) = Real.pi / 2 := by
+        dsimp [ratioPhase, phase]; ring
+      change secondPort (-1/3) = 1/2
+      norm_num [secondPort, ratioPort, hp, Real.cos_pi_div_two]
+  exact ⟨hv, mixed_counterexample.2.symm.trans hv⟩
+
+/-- Exact response of the proposed pair to any effective phase ratio. -/
+theorem proposed_pair_gap (r : ℝ) :
+    ratioPort r (-1) - ratioPort r 3 = (1 - Real.cos (2*Real.pi*r))/2 := by
+  have hp : ratioPhase r 3 = 2*Real.pi*r := by dsimp [ratioPhase, phase]; ring
+  have hz : ratioPhase r (-1) = 0 := by dsimp [ratioPhase, phase]; ring
+  simp only [ratioPort, hp, hz, Real.cos_zero]
+  ring
+
 /-- A finite sensor alphabet; no new equilibrium or write dynamics are assumed. -/
 def fiveHeight (i : Fin 5) : ℝ := (i.val : ℝ) - 1
 
@@ -203,14 +226,16 @@ theorem five_height_readout (i : Fin 5) :
     idealObservation (fiveHeight i) =
       ![(1,1), (1/2,(2-Real.sqrt 2)/4), (0,1/2),
         (1/2,(2+Real.sqrt 2)/4), (1,0)] i := by
+  change (firstPort (fiveHeight i), secondPort (fiveHeight i)) = _
   fin_cases i <;>
-    norm_num [fiveHeight, idealObservation, observation, ← secondPort,
+    norm_num [fiveHeight,
       first_left, first_zero, first_right, first_two, first_three,
       second_left, second_zero, second_one, second_two, second_three]
 
 theorem five_height_readout_injective :
     Function.Injective (fun i : Fin 5 => idealObservation (fiveHeight i)) := by
   intro i j hij
+  change idealObservation (fiveHeight i) = idealObservation (fiveHeight j) at hij
   rw [five_height_readout, five_height_readout] at hij
   have hs : 0 < Real.sqrt 2 := Real.sqrt_pos.2 (by norm_num)
   fin_cases i <;> fin_cases j <;> norm_num at hij ⊢ <;> nlinarith
@@ -223,7 +248,8 @@ theorem five_height_first_not_injective :
       firstPort (fiveHeight (4 : Fin 5)) := by
     norm_num [fiveHeight, first_left, first_three]
   have he := hi hh
-  norm_num at he
+  have hv := congrArg Fin.val he
+  norm_num at hv
 
 /-- Sensor injectivity transfers to any set contained in the certified alphabet. -/
 theorem injective_on_five_height_range :

@@ -166,4 +166,42 @@ theorem bounded_noise_disjoint (r epsilon h k : ℝ)
   have hle : outputGap r h k ≤ 2 * epsilon := max_le hfirst hsecond
   linarith
 
+/-- The certified five-height alphabet has at least 1/2 output separation in
+    the coordinatewise error norm, including the two equal-first-port pairs. -/
+theorem five_height_gap (i j : Fin 5) (hne : i ≠ j) :
+    (1/2 : ℝ) ≤ outputGap (3/2) (fiveHeight i) (fiveHeight j) := by
+  have hs : (1 : ℝ) ≤ Real.sqrt 2 := by
+    have hp := Real.sqrt_nonneg (2 : ℝ)
+    have hsq := Real.sq_sqrt (show (0 : ℝ) ≤ 2 by norm_num)
+    nlinarith
+  have habs1 : (1/2 : ℝ) ≤
+      |(2 - Real.sqrt 2)/4 - (2 + Real.sqrt 2)/4| := by
+    rw [show (2 - Real.sqrt 2)/4 - (2 + Real.sqrt 2)/4 =
+      -(Real.sqrt 2 / 2) by ring]
+    rw [abs_neg, abs_of_nonneg (show (0 : ℝ) ≤ Real.sqrt 2 / 2 by positivity)]
+    linarith
+  have habs2 : (1/2 : ℝ) ≤
+      |(2 + Real.sqrt 2)/4 - (2 - Real.sqrt 2)/4| := by
+    rw [abs_sub_comm]
+    exact habs1
+  norm_num at habs1 habs2
+  change (1/2 : ℝ) ≤
+    max (|(idealObservation (fiveHeight i)).1 -
+        (idealObservation (fiveHeight j)).1|)
+      (|(idealObservation (fiveHeight i)).2 -
+        (idealObservation (fiveHeight j)).2|)
+  simp only [five_height_readout]
+  fin_cases i <;> fin_cases j <;>
+    norm_num [le_max_iff] at hne ⊢ <;> assumption
+
+/-- Thus an error strictly below 1/4 per output channel cannot confuse any
+    two members of the five-height alphabet.  This is a deterministic bound. -/
+theorem five_height_bounded_noise (epsilon : ℝ) (heps : epsilon < 1/4)
+    (i j : Fin 5) (hne : i ≠ j) (y : ℝ × ℝ) :
+    ¬ (BoundedReadout (3/2) epsilon (fiveHeight i) y ∧
+      BoundedReadout (3/2) epsilon (fiveHeight j) y) := by
+  apply bounded_noise_disjoint
+  have hg := five_height_gap i j hne
+  linarith
+
 end TwoWavelengthSeparation
