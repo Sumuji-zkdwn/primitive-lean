@@ -26,6 +26,7 @@
 | `representation_plug`, `representation_minimal` | 観測・書換え・接合を正確に保つ記述の核は文脈同値に含まれる |
 | `context_implies_word` | 文脈同値は書換え語同値より細かい |
 | `stable_iff_word_context` | 書換え語だけの最小商で十分となる必要十分条件 |
+| `stable_iff_old_attach_exists` | 旧来の書換え語商に正確な二項接合が降下することと、接合合同性の必要十分条件 |
 | `ex_word_equal`, `ex_context_separates` | 書換え語では同じ二状態が接合で識別される反例 |
 
 ## 最小反例と独立の有限検算
