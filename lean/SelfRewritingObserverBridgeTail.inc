@@ -55,8 +55,15 @@ theorem peek_rule_not_generated (code : RuleAction → List Action) :
         (LinearInputOperatorWords.generated (step .feedback) code) s t ↔
           RuleWordEq s t) := by
   intro h
-  have hsig : signature .feedback zeroMem0 = signature .feedback zeroMem1 := by decide
-  have hOld := compiled_old_program_cannot_reveal .feedback code zeroMem0 zeroMem1 hsig
-  exact rule_probe_refines_feedback.2 ((h zeroMem0 zeroMem1).1 hOld)
+  let s0 : State := ⟨false, false, false, false, false⟩
+  let s1 : State := ⟨false, false, false, false, true⟩
+  have hsig : signature .feedback s0 = signature .feedback s1 := by decide
+  have hOld := compiled_old_program_cannot_reveal .feedback code s0 s1 hsig
+  have hNew : ¬ RuleWordEq s0 s1 := by
+    intro hr
+    have hw : readout (ruleRun [.peekRule] s0) ≠
+        readout (ruleRun [.peekRule] s1) := by decide
+    exact hw (hr [.peekRule])
+  exact hNew ((h s0 s1).1 hOld)
 
 end SelfRewritingObserver
