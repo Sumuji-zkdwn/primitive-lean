@@ -42,6 +42,24 @@ NAMES = (
     "fiber_hold_is_strict_minimizer",
     "switchFiber_minimizes_step_energy",
     "additive_series_has_constant_cost_factor",
+    "curvature_double_well_nonneg",
+    "curvature_double_well_zero_wells",
+    "curvature_double_well_integral",
+    "well_curvature_zero",
+    "well_curvature_energy_zero",
+    "well_curvature_is_minimum",
+    "left_curvature_exact_variation",
+    "right_curvature_exact_variation",
+    "well_curvature_exact_variation",
+    "well_stiffness_off_on",
+    "well_stiffness_eq_previous_resistance",
+    "well_stiffness_positive",
+    "curvature_flow_work_gap",
+    "curvature_flow_work_minimum",
+    "curvature_flow_action_eq_prior_fiber_action",
+    "curvature_flow_pulse_action_gap",
+    "actual_curvature_step_eq_discrete_energy",
+    "actual_curvature_switch_minimizes",
 )
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
@@ -81,7 +99,7 @@ def main():
         "axioms": axioms,
         "issues": issues,
         "log": "verification/okanohara-bridge.log",
-        "scope": "Finite scalar transport, hysteretic fiber-state update, finite mass pushforward, and conditional serial resistance; not general Wasserstein ESL or algorithmic complexity",
+        "scope": "Finite scalar transport, hysteretic pushforward, exact double-well Elastica integral, curvature stiffness, and explicit quadratic pressure coupling; not continuum hydrodynamics or inverse-algorithm complexity",
     }
     (OUT / "okanohara-bridge.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
