@@ -32,7 +32,10 @@ def response (s : ℚ) (p : Profile) : ℚ :=
 def plus : Profile := ⟨11/60, 7/15, 1/60, 1/3⟩
 def minus : Profile := ⟨19/60, 1/30, 29/60, 1/6⟩
 
-theorem witness_distinct : plus ≠ minus := by decide
+theorem witness_distinct : plus ≠ minus := by
+  intro h
+  have h0 := congrArg Profile.p0 h
+  norm_num [plus, minus] at h0
 
 theorem witness_mass : mass plus = 1 ∧ mass minus = 1 := by
   norm_num [mass, plus, minus]
