@@ -51,9 +51,16 @@ def main (args : List String) : IO Unit := do
   let isProject (m : Name) : Bool := prefixes.any (·.isPrefixOf m)
   let mut decls : Array Json := #[]
   let mut external : Std.HashMap Name Name := {}
-  for (n, ci) in env.constants.map₁.toList do
+  let projectIdx := (List.range env.header.moduleNames.size).filter
+    (fun i => isProject env.header.moduleNames[i]!)
+  let names : Array Name := projectIdx.foldl
+    (fun acc i => acc ++ env.header.moduleData[i]!.constNames) #[]
+  let mut visited : Std.HashSet Name := {}
+  for n in names do
+    if visited.contains n then continue
+    visited := visited.insert n
+    let some ci := env.find? n | continue
     let m := moduleOf env n
-    unless isProject m do continue
     let tc := ci.type.getUsedConstants
     let vc := match ci.value? (allowOpaque := true) with
       | some v => v.getUsedConstants
