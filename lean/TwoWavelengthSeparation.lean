@@ -149,7 +149,7 @@ theorem bounded_noise_disjoint (r epsilon h k : ℝ)
     calc
       |firstPort h - firstPort k| =
           |(firstPort h - y.1) + (y.1 - firstPort k)| := by congr 1; ring
-      _ ≤ |firstPort h - y.1| + |y.1 - firstPort k| := abs_add _ _
+      _ ≤ |firstPort h - y.1| + |y.1 - firstPort k| := abs_add_le _ _
       _ = |y.1 - firstPort h| + |y.1 - firstPort k| := by
         rw [abs_sub_comm (firstPort h) y.1]
       _ ≤ epsilon + epsilon := add_le_add hyh.1 hyk.1
@@ -158,7 +158,7 @@ theorem bounded_noise_disjoint (r epsilon h k : ℝ)
     calc
       |ratioPort r h - ratioPort r k| =
           |(ratioPort r h - y.2) + (y.2 - ratioPort r k)| := by congr 1; ring
-      _ ≤ |ratioPort r h - y.2| + |y.2 - ratioPort r k| := abs_add _ _
+      _ ≤ |ratioPort r h - y.2| + |y.2 - ratioPort r k| := abs_add_le _ _
       _ = |y.2 - ratioPort r h| + |y.2 - ratioPort r k| := by
         rw [abs_sub_comm (ratioPort r h) y.2]
       _ ≤ epsilon + epsilon := add_le_add hyh.2 hyk.2

@@ -88,9 +88,18 @@ def run_two_wavelength(root, rebuild=False):
         if lake is None:
             raise RuntimeError("lake is not available in PATH")
         report["lean_version"] = command([lake, "env", "lean", "--version"], "version").strip()
-        for module in report["modules"]:
+        for module in ANCESTORS + additions[:1]:
             command([lake, "env", "lean", "--trust=0", "-o",
                      str(build / (module + ".olean")), module + ".lean"], module)
+        independent_failures = []
+        for module in additions[1:]:
+            try:
+                command([lake, "env", "lean", "--trust=0", "-o",
+                         str(build / (module + ".olean")), module + ".lean"], module)
+            except RuntimeError as error:
+                independent_failures.append(str(error))
+        if independent_failures:
+            raise RuntimeError("\n".join(independent_failures))
         audit = lean / "TwoWavelengthAudit.lean"
         audit.write_text("\n".join("import " + m for m in additions) + "\n" +
                          "\n".join("#print axioms " + n for n in report["theorems"]) + "\n")
