@@ -17,6 +17,7 @@
 2. **カーネル**：`tools/deps/pr_kernel.py`
    - 他の PR に含まれない先端のヘッドごとに、そのヘッド自身の `tools/verify.py --proof-only` を実行します。
    - 組み立てを `.olean` にし、未登録のプローブと独立した `lean/*.lean` も同じ環境でコンパイルして、依存を抽出します。
+   - 作業ディレクトリを `LEAN_PATH` の先頭に置く呼出しでは、パスを固定のシェル文字列に埋め込まず、環境変数 `PR_KERNEL_WORK` と位置引数で渡します（空白入りパスの回帰テストは `tests/test_pr_kernel_paths.py`、記録は [2026-11-07 の検証記録](../../verification/2026-11-07-pr-kernel-path-arguments.md)）。上の表の測定はこの変更前の実行です。
    - プローブを PR 自身の CI が単独ファイルとしてコンパイルしている場合（#50〜#54）は、同じ方法で単独に測定しました。
 3. **集計**：`tools/deps/pr_compare.py`
    - `main` にない宣言のうち、PR 固有ファイルに属するものを、その PR の新しい内容とします。
