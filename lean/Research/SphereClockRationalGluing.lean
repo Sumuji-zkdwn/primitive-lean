@@ -178,7 +178,7 @@ def rationalAngles : AddSubgroup Angle where
     refine ⟨qa + qb, ?_⟩
     calc
       (((qa + qb : ℚ) : ℝ) : Angle) =
-          (((qa : ℝ) + (qb : ℝ)) : Angle) := by simp only [Rat.cast_add]
+          (((qa : ℝ) + (qb : ℝ)) : Angle) := by simp only [Rat.cast_add, AddCircle.coe_add]
       _ = ((qa : ℝ) : Angle) + ((qb : ℝ) : Angle) :=
         AddCircle.coe_add (1 : ℝ) (qa : ℝ) (qb : ℝ)
       _ = a + b := by rw [hqa, hqb]
@@ -188,7 +188,7 @@ def rationalAngles : AddSubgroup Angle where
     refine ⟨-q, ?_⟩
     calc
       (((-q : ℚ) : ℝ) : Angle) = ((-(q : ℝ)) : Angle) := by
-        simp only [Rat.cast_neg]
+        simp only [Rat.cast_neg, AddCircle.coe_neg]
       _ = -((q : ℝ) : Angle) := AddCircle.coe_neg (1 : ℝ)
       _ = -a := by rw [hq]
 
