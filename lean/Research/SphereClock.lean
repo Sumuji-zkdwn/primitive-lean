@@ -17,13 +17,13 @@ def meridianAngle : ℝ → ℝ := fun s => (0 : ℝ) + 1 * s
 
 theorem meridian_x (s : ℝ) :
     Elastica.xCoord meridianAngle 0 s = Real.sin s := by
-  simpa [meridianAngle] using
-    (Elastica.xCoord_affine (0 : ℝ) 1 0 s (by norm_num))
+  change Elastica.xCoord (fun u : ℝ => (0 : ℝ) + 1 * u) 0 s = Real.sin s
+  simpa using (Elastica.xCoord_affine (0 : ℝ) 1 0 s (by norm_num))
 
 theorem meridian_z (s : ℝ) :
     Elastica.yCoord meridianAngle 0 s = 1 - Real.cos s := by
-  simpa [meridianAngle] using
-    (Elastica.yCoord_affine (0 : ℝ) 1 0 s (by norm_num))
+  change Elastica.yCoord (fun u : ℝ => (0 : ℝ) + 1 * u) 0 s = 1 - Real.cos s
+  simpa using (Elastica.yCoord_affine (0 : ℝ) 1 0 s (by norm_num))
 
 def sphereX (s a : ℝ) : ℝ :=
   Elastica.xCoord meridianAngle 0 s * Real.cos a
