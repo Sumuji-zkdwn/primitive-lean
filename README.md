@@ -91,6 +91,7 @@ python -B -X utf8 tools/verify.py --integration-only
 - ARC3 のオフライン検査
 - Lean の joint 検査と追補の検査（`--trust=0`）
 - 全宣言の公理監査
+- joint 検査の外にある独立モジュール（MovingCurve・Okanohara・FiniteMarkov）の `--trust=0` 検査と公理監査
 
 ほかに次のモードがあります。
 

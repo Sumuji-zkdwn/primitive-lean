@@ -36,9 +36,19 @@ def run_integration(root, command, rebuild=False):
     if rebuild:
         proof_command.append('--rebuild')
     stages.append(('proof-only', proof_command))
-    for name, args in stages:
+    # Independent Lean modules outside the joint checker: trust-zero compilation and
+    # axiom audits, identical to the separate CI steps. They run after proof-only
+    # because --rebuild clears lean/.lake/build.
+    lean = root / 'lean'
+    stages += [('build-elastica', ['lake', 'build', 'Elastica'], lean),
+               ('moving-curve', ['lake', 'env', 'lean', '--trust=0', 'MovingCurve.lean',
+                                 '-o', '.lake/build/lib/lean/MovingCurve.olean'], lean),
+               ('moving-curve-audit', ['lake', 'env', 'lean', '--trust=0', 'MovingCurveAudit.lean'], lean),
+               ('okanohara-bridge', [sys.executable, '-B', '-X', 'utf8', 'tools/verify_okanohara_bridge.py']),
+               ('finite-markov-transport', [sys.executable, '-B', '-X', 'utf8', 'tools/verify_finite_markov_transport.py'])]
+    for name, args, *cwd in stages:
         print('Running ' + name, flush=True)
-        record = command(args, 'integration-' + name, cwd=root)
+        record = command(args, 'integration-' + name, cwd=cwd[0] if cwd else root)
         result['checks'].append(dict(name=name, **record))
         if record['exit_code']:
             result['errors'].append(name + ' failed; see ' + record['log'])

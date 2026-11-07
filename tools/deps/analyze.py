@@ -274,7 +274,9 @@ def analyze(g):
 
     rows = {}
     for n in user:
-        if kind[n] not in ("theorem", "def", "inductive", "opaque"):
+        # Constructors with their own source range are referenced by exported nodes;
+        # dropping them would leave dangling edges and hide dependencies from grounding.
+        if kind[n] not in ("theorem", "def", "inductive", "opaque", "ctor"):
             continue
         clo = closure(n, all_edges, memo_all)
         pclo = closure(n, proof_adj, memo_proof)
