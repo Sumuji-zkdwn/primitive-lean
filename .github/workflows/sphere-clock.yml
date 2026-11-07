@@ -4,7 +4,9 @@ on:
   pull_request:
     paths:
       - 'lean/Research/SphereClock.lean'
+      - 'lean/Research/SphereClockRationalGluing.lean'
       - 'tests/test_sphere_clock.py'
+      - 'tests/test_sphere_clock_rational_gluing.py'
       - '.github/workflows/sphere-clock.yml'
       - 'docs/research/2026-11-08-sphere-clock.md'
   workflow_dispatch:
@@ -26,7 +28,9 @@ jobs:
         run: git rev-parse HEAD
 
       - name: Independently check finite sphere-clock model
-        run: python -m unittest discover -s tests -p test_sphere_clock.py -v
+        run: |
+          python -m unittest discover -s tests -p test_sphere_clock.py -v
+          python -m unittest discover -s tests -p test_sphere_clock_rational_gluing.py -v
 
       - name: Install pinned Lean and mathlib cache
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
@@ -43,3 +47,4 @@ jobs:
         run: |
           lake build Elastica.Geometry
           lake env lean --trust=0 Research/SphereClock.lean
+          lake env lean --trust=0 Research/SphereClockRationalGluing.lean
