@@ -1,0 +1,132 @@
+{
+ "proved_equal": 0,
+ "attempted": 22,
+ "skipped_private": 3,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "DarkBrightObservation.Observation",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "DarkBrightObservation.Spinor",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "DarkBrightObservation.Summary",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.energy",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.energy",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.energySlope",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.energySlope",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.opticalPhase",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.opticalPhase",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.airy",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.airy",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.filmReflect",
+   "initial": "LinearInputDesign.E",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.filmReflect",
+   "initial": "LinearInputGradient.gSq",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.filmReflect",
+   "initial": "LinearInputGradient.gx",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.filmReflect",
+   "initial": "LinearInputGradientBound.gradientLowerBound",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.fresnel",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.fresnel",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.roundtripPhase",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismAiryReflectance.roundtripPhase",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismObliqueTMM.FilmMatrixPattern",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismObliqueTMM.snellRadicand",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "PrismObliqueTMM.snellRadicand",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "DarkBrightObservation.Observation",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "DarkBrightObservation.Spinor",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "PrismObliqueTMM.FilmMatrixPattern",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

@@ -1,0 +1,79 @@
+{
+ "proved_equal": 2,
+ "attempted": 14,
+ "skipped_private": 0,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "CopyControl.fCopy",
+   "initial": "Elastica.powerLogDensity",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fCopy",
+   "initial": "LinearInputLevelConvergence.bandRadius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.ECopy",
+   "initial": "LinearInputGradient.gSq",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.ECopy",
+   "initial": "LinearInputGradient.gx",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.ECopy",
+   "initial": "LinearInputGradientBound.gradientLowerBound",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.inputCopy",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fRearranged",
+   "initial": "Elastica.powerLogDensity",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fRearranged",
+   "initial": "LinearInputCalculus.potential",
+   "ring_stage": "proved_equal"
+  },
+  {
+   "candidate": "CopyControl.fRearranged",
+   "initial": "LinearInputDesign.f",
+   "ring_stage": "proved_equal"
+  },
+  {
+   "candidate": "CopyControl.fRearranged",
+   "initial": "LinearInputLevelConvergence.bandRadius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fWrong",
+   "initial": "Elastica.powerLogDensity",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fWrong",
+   "initial": "LinearInputCalculus.potential",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fWrong",
+   "initial": "LinearInputDesign.f",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "CopyControl.fWrong",
+   "initial": "LinearInputLevelConvergence.bandRadius",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": []
+}

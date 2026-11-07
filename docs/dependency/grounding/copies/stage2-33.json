@@ -1,0 +1,19 @@
+{
+ "proved_equal": 0,
+ "attempted": 1,
+ "skipped_private": 1,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputF16FenchelFull.State",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputF16FenchelFull.State",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

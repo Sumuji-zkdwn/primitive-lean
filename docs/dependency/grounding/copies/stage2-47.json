@@ -1,0 +1,28 @@
+{
+ "proved_equal": 0,
+ "attempted": 2,
+ "skipped_private": 2,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputHalfFactorial.Counts",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeSplitNormalForm.FactorWord",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputHalfFactorial.Counts",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputPrimeSplitNormalForm.FactorWord",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

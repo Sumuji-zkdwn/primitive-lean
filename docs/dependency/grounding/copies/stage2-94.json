@@ -1,0 +1,74 @@
+{
+ "proved_equal": 0,
+ "attempted": 13,
+ "skipped_private": 0,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "FluidPrismPhaseMemory.opticalPhase",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "FluidPrismPhaseMemory.opticalPhase",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.effectiveRatio",
+   "initial": "Elastica.powerLogDensity",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.effectiveRatio",
+   "initial": "LinearInputCalculus.potential",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.effectiveRatio",
+   "initial": "LinearInputDesign.f",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.effectiveRatio",
+   "initial": "LinearInputLevelConvergence.bandRadius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.ratioPhase",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.ratioPhase",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.ratioPort",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthPhase.ratioPort",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthSeparation.HeightAlias",
+   "initial": "LinearInputDesign.GlobalMin",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthSeparation.outputGap",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoWavelengthSeparation.outputGap",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": []
+}

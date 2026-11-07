@@ -1,0 +1,55 @@
+{
+ "proved_equal": 0,
+ "attempted": 5,
+ "skipped_private": 5,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "SelfRewritingObserver.Action",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "SelfRewritingObserver.HeadAction",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "SelfRewritingObserver.Mode",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "SelfRewritingObserver.RuleAction",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "SelfRewritingObserver.State",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "SelfRewritingObserver.Action",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "SelfRewritingObserver.HeadAction",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "SelfRewritingObserver.Mode",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "SelfRewritingObserver.RuleAction",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "SelfRewritingObserver.State",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

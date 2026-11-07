@@ -1,0 +1,61 @@
+{
+ "proved_equal": 0,
+ "attempted": 7,
+ "skipped_private": 4,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputPrimeFactorFiniteLength.Prefix",
+   "initial": "LinearInputCoupledTrajectory.State",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorFiniteLength.Probe",
+   "initial": "LinearInputCoupledTrajectory.State",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorFiniteLength.Word",
+   "initial": "LinearInputCoupledTrajectory.State",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorObservation.CanonicalPair",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorObservation.OrderedPair",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorOrbits.CanonicalTriple",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorOrbits.OrderedTriple",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputPrimeFactorObservation.CanonicalPair",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorObservation.OrderedPair",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorOrbits.CanonicalTriple",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputPrimeFactorOrbits.OrderedTriple",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

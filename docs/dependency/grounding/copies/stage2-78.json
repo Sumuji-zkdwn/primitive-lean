@@ -1,0 +1,29 @@
+{
+ "proved_equal": 0,
+ "attempted": 3,
+ "skipped_private": 1,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputPilotComparison.truncatedVolume",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPilotComparison.truncatedVolume",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputPilotHullInflation.Rect",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputPilotHullInflation.Rect",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

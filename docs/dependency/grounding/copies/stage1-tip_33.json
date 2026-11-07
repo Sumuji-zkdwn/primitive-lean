@@ -1,0 +1,13 @@
+{"unresolved_names": [],
+ "type_matches": 2,
+ "rows":
+ [{"value": "not_identified",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "candidate": "LinearInputF16FenchelFull.State"},
+  {"value": "not_identified",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters",
+   "candidate": "LinearInputF16FenchelFull.State"}],
+ "pairs_skipped": 0,
+ "initial_definitions": 46,
+ "copies": 0,
+ "candidates": 12}
