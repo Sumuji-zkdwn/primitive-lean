@@ -1,0 +1,1680 @@
+{
+ "parameters": {
+  "lambda": 1.0,
+  "r": -1.0,
+  "u": 0.0,
+  "gamma": 1.0,
+  "a0": 1.0,
+  "bottom_energy": -0.25,
+  "saddle_energy": 0.0
+ },
+ "two_shells_T=-0.1_b=0.0": {
+  "grid": "41x41 on [-2.4,2.4]^2, t_end=1500",
+  "counts": {
+   "shell-": 840,
+   "shell+": 840,
+   "saddle": 1
+  },
+  "starts_with_E<0": 186,
+  "sign_change_violations_for_E<0_starts": 0,
+  "mirror_symmetry_violations": 0,
+  "saddle_eigenvalues": [
+   0.0414213562373095,
+   -0.24142135623730956
+  ],
+  "saddle_stable_direction_angle_mod_pi": 2.356194490192345,
+  "basin_boundary_angles_mod_pi_on_circle_rho=0.05": [
+   2.3605578133223304,
+   2.3605578133223304
+  ]
+ },
+ "two_shells_T=-0.1_b=0.5": {
+  "grid": "41x41 on [-2.4,2.4]^2, t_end=1500",
+  "counts": {
+   "shell-": 840,
+   "shell+": 840,
+   "saddle": 1
+  },
+  "starts_with_E<0": 186,
+  "sign_change_violations_for_E<0_starts": 0,
+  "mirror_symmetry_violations": 0,
+  "saddle_eigenvalues": [
+   0.4196152422706634,
+   -0.6196152422706633
+  ],
+  "saddle_stable_direction_angle_mod_pi": 1.2864127818729452,
+  "basin_boundary_angles_mod_pi_on_circle_rho=0.05": [
+   1.287180323345818,
+   1.2871803233458188
+  ]
+ },
+ "one_shell_T=0.3_b=0": {
+  "counts": {
+   "shell-": 220,
+   "shell+": 220,
+   "saddle": 1
+  },
+  "starts_with_E<0": 44,
+  "of_which_changed_sign_of_x": 2
+ },
+ "below_bottom_T=-0.4_b=0": {
+  "counts": {
+   "bottom": 120,
+   "saddle": 1
+  },
+  "min_final_gap": 0.15000000000000002,
+  "lean_lower_bound_for_gap": 0.15000000000000002
+ },
+ "tilted_wells_near_maxwell": {
+  "delta=0.02": {
+   "both_wells_reach_target_for_u_in": [
+    -0.0075,
+    0.0075
+   ],
+   "analytic_half_width_|f(aL)-f(aR)|<delta": 0.010001,
+   "first_order_estimate_delta/(2 a0)": 0.01,
+   "lean_trapped_cases_all_unreached": true,
+   "predicted_reachable_but_unconverged_at_t=600": [
+    {
+     "u": -0.010000000000000002,
+     "well": "right",
+     "bottom_minus_T": -2.500328208643321e-07,
+     "final_gap": 1.7374690064186904e-06
+    },
+    {
+     "u": 0.009999999999999995,
+     "well": "left",
+     "bottom_minus_T": -2.500328208643321e-07,
+     "final_gap": 1.7374690063354237e-06
+    }
+   ],
+   "all_trajectories_stayed_in_their_well": true,
+   "rows": [
+    {
+     "u": -0.05,
+     "T": -0.2806101085862056,
+     "barrier": 0.0012515703716364768,
+     "left": {
+      "bottom": -0.3006101085862056,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2006414617854309,
+      "reached": false,
+      "final_gap": 0.0799686468007747,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0475,
+     "T": -0.2780512653379808,
+     "barrier": 0.0011294034481179305,
+     "left": {
+      "bottom": -0.2980512653379808,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.20307813811013706,
+      "reached": false,
+      "final_gap": 0.07497312722784372,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.045000000000000005,
+     "T": -0.27549534361000444,
+     "barrier": 0.0010135293335443623,
+     "left": {
+      "bottom": -0.29549534361000446,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.20551818572353991,
+      "reached": false,
+      "final_gap": 0.06997715788646455,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0425,
+     "T": -0.27294235324140376,
+     "barrier": 0.0009039435973189973,
+     "left": {
+      "bottom": -0.2929423532414038,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.20796159035591533,
+      "reached": false,
+      "final_gap": 0.06498076288548843,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.04,
+     "T": -0.2703923041599324,
+     "barrier": 0.0008006420578884562,
+     "left": {
+      "bottom": -0.2903923041599324,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2104083378979561,
+      "reached": false,
+      "final_gap": 0.059983966261976274,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.037500000000000006,
+     "T": -0.2678452063832872,
+     "barrier": 0.0007036207811191933,
+     "left": {
+      "bottom": -0.2878452063832872,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.21285841439783196,
+      "reached": false,
+      "final_gap": 0.054986791985455225,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.035,
+     "T": -0.2653010700204515,
+     "barrier": 0.000612876078775875,
+     "left": {
+      "bottom": -0.2853010700204515,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.21531180605832434,
+      "reached": false,
+      "final_gap": 0.04998926396212716,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0325,
+     "T": -0.26275990527306703,
+     "barrier": 0.0005284045071000303,
+     "left": {
+      "bottom": -0.28275990527306705,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.21776849923403296,
+      "reached": false,
+      "final_gap": 0.044991406039034176,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.030000000000000002,
+     "T": -0.26022172243683483,
+     "barrier": 0.0004502028654874099,
+     "left": {
+      "bottom": -0.28022172243683485,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.22022848042865262,
+      "reached": false,
+      "final_gap": 0.03999324200818316,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.027500000000000004,
+     "T": -0.2576865319029452,
+     "barrier": 0.00037826819526262325,
+     "left": {
+      "bottom": -0.27768653190294523,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.22269173629231737,
+      "reached": false,
+      "final_gap": 0.034994795610639895,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.025,
+     "T": -0.2551543441595395,
+     "barrier": 0.00031259777854972026,
+     "left": {
+      "bottom": -0.27515434415953954,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.22515825361901012,
+      "reached": false,
+      "final_gap": 0.029996090540679504,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.022500000000000003,
+     "T": -0.2526251697932016,
+     "barrier": 0.00025318913723750344,
+     "left": {
+      "bottom": -0.2726251697932016,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2276280193440359,
+      "reached": false,
+      "final_gap": 0.024997150451064598,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.020000000000000004,
+     "T": -0.25009901949048224,
+     "barrier": 0.00020004003203845654,
+     "left": {
+      "bottom": -0.27009901949048226,
+      "reached": true,
+      "final_gap": -2.220446049250313e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.23010102054155618,
+      "reached": false,
+      "final_gap": 0.019997998973267844,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0175,
+     "T": -0.2475759040394572,
+     "barrier": 0.00015314846164028468,
+     "left": {
+      "bottom": -0.2675759040394572,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2325772444221831,
+      "reached": false,
+      "final_gap": 0.014998659933415953,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.015,
+     "T": -0.24505583433131803,
+     "barrier": 0.00011251266194916,
+     "left": {
+      "bottom": -0.265055834331318,
+      "reached": true,
+      "final_gap": -2.498001805406602e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2350566783306312,
+      "reached": false,
+      "final_gap": 0.009999160160280907,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.012500000000000004,
+     "T": -0.24253882136199903,
+     "barrier": 7.813110542386827e-05,
+     "left": {
+      "bottom": -0.262538821361999,
+      "reached": true,
+      "final_gap": -2.498001805406602e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2375393097434248,
+      "reached": false,
+      "final_gap": 0.004999567064618238,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.010000000000000002,
+     "T": -0.24002487623383964,
+     "barrier": 5.000250050015007e-05,
+     "left": {
+      "bottom": -0.26002487623383963,
+      "reached": true,
+      "final_gap": -1.942890293094024e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2400251262666605,
+      "reached": false,
+      "final_gap": 1.7374690064186904e-06,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0075,
+     "T": -0.2375140101572835,
+     "barrier": 2.8125791104629274e-05,
+     "left": {
+      "bottom": -0.2575140101572835,
+      "reached": true,
+      "final_gap": -1.3877787807814457e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.24251411563382114,
+      "reached": true,
+      "final_gap": -5.507680422844885e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0050000000000000044,
+     "T": -0.23500623445261623,
+     "barrier": 1.2500156257813106e-05,
+     "left": {
+      "bottom": -0.2550062344526162,
+      "reached": true,
+      "final_gap": -2.498001805406602e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.24500626570364165,
+      "reached": true,
+      "final_gap": -1.942890293094024e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0025000000000000022,
+     "T": -0.2325015605517419,
+     "barrier": 3.125009765747078e-06,
+     "left": {
+      "bottom": -0.2525015605517419,
+      "reached": true,
+      "final_gap": -1.942890293094024e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2475015644580239,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0,
+     "T": -0.23,
+     "barrier": 0.0,
+     "left": {
+      "bottom": -0.25,
+      "reached": true,
+      "final_gap": -1.6653345369377348e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.25,
+      "reached": true,
+      "final_gap": -8.326672684688674e-17,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0024999999999999953,
+     "T": -0.2325015605517419,
+     "barrier": 3.1250097657470614e-06,
+     "left": {
+      "bottom": -0.2475015644580239,
+      "reached": true,
+      "final_gap": -2.498001805406602e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2525015605517419,
+      "reached": true,
+      "final_gap": -1.3877787807814457e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0049999999999999975,
+     "T": -0.23500623445261618,
+     "barrier": 1.2500156257813074e-05,
+     "left": {
+      "bottom": -0.24500626570364165,
+      "reached": true,
+      "final_gap": -3.608224830031759e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.25500623445261617,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0075,
+     "T": -0.2375140101572835,
+     "barrier": 2.8125791104629274e-05,
+     "left": {
+      "bottom": -0.24251411563382114,
+      "reached": true,
+      "final_gap": -1.53623502807676e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2575140101572835,
+      "reached": true,
+      "final_gap": -8.326672684688674e-17,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.009999999999999995,
+     "T": -0.24002487623383964,
+     "barrier": 5.0002500500150005e-05,
+     "left": {
+      "bottom": -0.2400251262666605,
+      "reached": false,
+      "final_gap": 1.7374690063354237e-06,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.26002487623383963,
+      "reached": true,
+      "final_gap": -1.3877787807814457e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.012499999999999997,
+     "T": -0.24253882136199897,
+     "barrier": 7.813110542386816e-05,
+     "left": {
+      "bottom": -0.2375393097434248,
+      "reached": false,
+      "final_gap": 0.004999567136908606,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.26253882136199896,
+      "reached": true,
+      "final_gap": -1.3877787807814457e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.015,
+     "T": -0.24505583433131803,
+     "barrier": 0.00011251266194916,
+     "left": {
+      "bottom": -0.2350566783306312,
+      "reached": false,
+      "final_gap": 0.009999160168643162,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.265055834331318,
+      "reached": true,
+      "final_gap": -1.3877787807814457e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0175,
+     "T": -0.2475759040394572,
+     "barrier": 0.00015314846164028468,
+     "left": {
+      "bottom": -0.2325772444221831,
+      "reached": false,
+      "final_gap": 0.014998659934116088,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2675759040394572,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.020000000000000004,
+     "T": -0.25009901949048224,
+     "barrier": 0.00020004003203845654,
+     "left": {
+      "bottom": -0.23010102054155618,
+      "reached": false,
+      "final_gap": 0.019997998973323383,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27009901949048226,
+      "reached": true,
+      "final_gap": -3.3306690738754696e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.022499999999999992,
+     "T": -0.25262516979320154,
+     "barrier": 0.00025318913723750317,
+     "left": {
+      "bottom": -0.22762801934403593,
+      "reached": false,
+      "final_gap": 0.024997150451068872,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27262516979320156,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.024999999999999994,
+     "T": -0.2551543441595395,
+     "barrier": 0.0003125977785497201,
+     "left": {
+      "bottom": -0.22515825361901015,
+      "reached": false,
+      "final_gap": 0.029996090540679837,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27515434415953954,
+      "reached": true,
+      "final_gap": -3.3306690738754696e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.027499999999999997,
+     "T": -0.2576865319029452,
+     "barrier": 0.00037826819526262304,
+     "left": {
+      "bottom": -0.2226917362923174,
+      "reached": false,
+      "final_gap": 0.03499479561063987,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27768653190294523,
+      "reached": true,
+      "final_gap": -3.3306690738754696e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.03,
+     "T": -0.2602217224368348,
+     "barrier": 0.0004502028654874098,
+     "left": {
+      "bottom": -0.22022848042865262,
+      "reached": false,
+      "final_gap": 0.039993242008183105,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2802217224368348,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0325,
+     "T": -0.26275990527306703,
+     "barrier": 0.0005284045071000303,
+     "left": {
+      "bottom": -0.21776849923403296,
+      "reached": false,
+      "final_gap": 0.04499140603903415,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.28275990527306705,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.035,
+     "T": -0.2653010700204515,
+     "barrier": 0.000612876078775875,
+     "left": {
+      "bottom": -0.21531180605832434,
+      "reached": false,
+      "final_gap": 0.04998926396212716,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2853010700204515,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.037500000000000006,
+     "T": -0.2678452063832872,
+     "barrier": 0.0007036207811191933,
+     "left": {
+      "bottom": -0.21285841439783196,
+      "reached": false,
+      "final_gap": 0.054986791985455225,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2878452063832872,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.039999999999999994,
+     "T": -0.2703923041599324,
+     "barrier": 0.0008006420578884558,
+     "left": {
+      "bottom": -0.2104083378979561,
+      "reached": false,
+      "final_gap": 0.059983966261976274,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2903923041599324,
+      "reached": true,
+      "final_gap": -5.551115123125783e-17,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.042499999999999996,
+     "T": -0.27294235324140376,
+     "barrier": 0.0009039435973189969,
+     "left": {
+      "bottom": -0.20796159035591533,
+      "reached": false,
+      "final_gap": 0.06498076288548846,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2929423532414038,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.045,
+     "T": -0.2754953436100044,
+     "barrier": 0.001013529333544362,
+     "left": {
+      "bottom": -0.20551818572353991,
+      "reached": false,
+      "final_gap": 0.06997715788646447,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2954953436100044,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0475,
+     "T": -0.2780512653379808,
+     "barrier": 0.0011294034481179305,
+     "left": {
+      "bottom": -0.20307813811013706,
+      "reached": false,
+      "final_gap": 0.07497312722784377,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2980512653379808,
+      "reached": true,
+      "final_gap": -5.551115123125783e-17,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.05,
+     "T": -0.2806101085862056,
+     "barrier": 0.0012515703716364768,
+     "left": {
+      "bottom": -0.2006414617854309,
+      "reached": false,
+      "final_gap": 0.07996864680077473,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.3006101085862056,
+      "reached": true,
+      "final_gap": -1.1102230246251565e-16,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    }
+   ]
+  },
+  "delta=0.005": {
+   "both_wells_reach_target_for_u_in": [
+    0.0,
+    0.0
+   ],
+   "analytic_half_width_|f(aL)-f(aR)|<delta": 0.0025009999999999998,
+   "first_order_estimate_delta/(2 a0)": 0.0025,
+   "lean_trapped_cases_all_unreached": true,
+   "predicted_reachable_but_unconverged_at_t=600": [
+    {
+     "u": -0.0025000000000000022,
+     "well": "right",
+     "bottom_minus_T": -3.906282020071927e-09,
+     "final_gap": 1.981846984355773e-06
+    },
+    {
+     "u": 0.0024999999999999953,
+     "well": "left",
+     "bottom_minus_T": -3.906282020071927e-09,
+     "final_gap": 1.981846984161484e-06
+    }
+   ],
+   "all_trajectories_stayed_in_their_well": true,
+   "rows": [
+    {
+     "u": -0.05,
+     "T": -0.2956101085862056,
+     "barrier": 0.0012515703716364768,
+     "left": {
+      "bottom": -0.3006101085862056,
+      "reached": true,
+      "final_gap": -6.475930902638538e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2006414617854309,
+      "reached": false,
+      "final_gap": 0.09496864680077474,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0475,
+     "T": -0.2930512653379808,
+     "barrier": 0.0011294034481179305,
+     "left": {
+      "bottom": -0.2980512653379808,
+      "reached": true,
+      "final_gap": -6.718792189275291e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.20307813811013706,
+      "reached": false,
+      "final_gap": 0.08997312722784373,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.045000000000000005,
+     "T": -0.29049534361000445,
+     "barrier": 0.0010135293335443623,
+     "left": {
+      "bottom": -0.29549534361000446,
+      "reached": true,
+      "final_gap": -6.971256905075052e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.20551818572353991,
+      "reached": false,
+      "final_gap": 0.08497715788646457,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0425,
+     "T": -0.28794235324140377,
+     "barrier": 0.0009039435973189973,
+     "left": {
+      "bottom": -0.2929423532414038,
+      "reached": true,
+      "final_gap": -7.2334360723402824e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.20796159035591533,
+      "reached": false,
+      "final_gap": 0.07998076288548844,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.04,
+     "T": -0.2853923041599324,
+     "barrier": 0.0008006420578884562,
+     "left": {
+      "bottom": -0.2903923041599324,
+      "reached": true,
+      "final_gap": -7.506273380641915e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2104083378979561,
+      "reached": false,
+      "final_gap": 0.07498396626197634,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.037500000000000006,
+     "T": -0.2828452063832872,
+     "barrier": 0.0007036207811191933,
+     "left": {
+      "bottom": -0.2878452063832872,
+      "reached": true,
+      "final_gap": -7.789935363433642e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.21285841439783196,
+      "reached": false,
+      "final_gap": 0.06998679198545524,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.035,
+     "T": -0.2803010700204515,
+     "barrier": 0.000612876078775875,
+     "left": {
+      "bottom": -0.2853010700204515,
+      "reached": true,
+      "final_gap": -8.084588554169159e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.21531180605832434,
+      "reached": false,
+      "final_gap": 0.06498926396212718,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0325,
+     "T": -0.27775990527306704,
+     "barrier": 0.0005284045071000303,
+     "left": {
+      "bottom": -0.28275990527306705,
+      "reached": true,
+      "final_gap": -8.391287664721858e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.21776849923403296,
+      "reached": false,
+      "final_gap": 0.059991406039034106,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.030000000000000002,
+     "T": -0.27522172243683485,
+     "barrier": 0.0004502028654874099,
+     "left": {
+      "bottom": -0.28022172243683485,
+      "reached": true,
+      "final_gap": -8.71003269509174e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.22022848042865262,
+      "reached": false,
+      "final_gap": 0.0549932420081822,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.027500000000000004,
+     "T": -0.27268653190294523,
+     "barrier": 0.00037826819526262325,
+     "left": {
+      "bottom": -0.27768653190294523,
+      "reached": true,
+      "final_gap": -9.041600801396044e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.22269173629231737,
+      "reached": false,
+      "final_gap": 0.049994795610627835,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.025,
+     "T": -0.27015434415953954,
+     "barrier": 0.00031259777854972026,
+     "left": {
+      "bottom": -0.27515434415953954,
+      "reached": true,
+      "final_gap": -9.386269539390923e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.22515825361901012,
+      "reached": false,
+      "final_gap": 0.04499609054052947,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.022500000000000003,
+     "T": -0.2676251697932016,
+     "barrier": 0.00025318913723750344,
+     "left": {
+      "bottom": -0.2726251697932016,
+      "reached": true,
+      "final_gap": -9.745038109798543e-12,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2276280193440359,
+      "reached": false,
+      "final_gap": 0.039997150449166574,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.020000000000000004,
+     "T": -0.26509901949048226,
+     "barrier": 0.00020004003203845654,
+     "left": {
+      "bottom": -0.27009901949048226,
+      "reached": true,
+      "final_gap": -1.0118017534921364e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.23010102054155618,
+      "reached": false,
+      "final_gap": 0.034997998948936654,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0175,
+     "T": -0.2625759040394572,
+     "barrier": 0.00015314846164028468,
+     "left": {
+      "bottom": -0.2675759040394572,
+      "reached": true,
+      "final_gap": -1.0506095993179088e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2325772444221831,
+      "reached": false,
+      "final_gap": 0.029998659617408774,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.015,
+     "T": -0.260055834331318,
+     "barrier": 0.00011251266194916,
+     "left": {
+      "bottom": -0.265055834331318,
+      "reached": true,
+      "final_gap": -1.0909884107235257e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2350566783306312,
+      "reached": false,
+      "final_gap": 0.024999156002425776,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.012500000000000004,
+     "T": -0.257538821361999,
+     "barrier": 7.813110542386827e-05,
+     "left": {
+      "bottom": -0.262538821361999,
+      "reached": true,
+      "final_gap": -1.1330048010904648e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2375393097434248,
+      "reached": false,
+      "final_gap": 0.01999951164131175,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.010000000000000002,
+     "T": -0.2550248762338396,
+     "barrier": 5.000250050015007e-05,
+     "left": {
+      "bottom": -0.26002487623383963,
+      "reached": true,
+      "final_gap": -1.1767142815699572e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2400251262666605,
+      "reached": false,
+      "final_gap": 0.01499975026831904,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0075,
+     "T": -0.2525140101572835,
+     "barrier": 2.8125791104629274e-05,
+     "left": {
+      "bottom": -0.2575140101572835,
+      "reached": true,
+      "final_gap": -1.2222167722342192e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.24251411563382114,
+      "reached": false,
+      "final_gap": 0.009999898562883858,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0050000000000000044,
+     "T": -0.2500062344526162,
+     "barrier": 1.2500156257813106e-05,
+     "left": {
+      "bottom": -0.2550062344526162,
+      "reached": true,
+      "final_gap": -1.2695677842344821e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.24500626570364165,
+      "reached": false,
+      "final_gap": 0.005000023628176864,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": -0.0025000000000000022,
+     "T": -0.24750156055174188,
+     "barrier": 3.125009765747078e-06,
+     "left": {
+      "bottom": -0.2525015605517419,
+      "reached": true,
+      "final_gap": -1.318836706509785e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2475015644580239,
+      "reached": false,
+      "final_gap": 1.981846984355773e-06,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0,
+     "T": -0.245,
+     "barrier": 0.0,
+     "left": {
+      "bottom": -0.25,
+      "reached": true,
+      "final_gap": -1.3701678680533291e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.25,
+      "reached": true,
+      "final_gap": -4.94486673829897e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0024999999999999953,
+     "T": -0.24750156055174188,
+     "barrier": 3.1250097657470614e-06,
+     "left": {
+      "bottom": -0.2475015644580239,
+      "reached": false,
+      "final_gap": 1.981846984161484e-06,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2525015605517419,
+      "reached": true,
+      "final_gap": -4.7701731453742013e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0049999999999999975,
+     "T": -0.25000623445261616,
+     "barrier": 1.2500156257813074e-05,
+     "left": {
+      "bottom": -0.24500626570364165,
+      "reached": false,
+      "final_gap": 0.005000023698958439,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.25500623445261617,
+      "reached": true,
+      "final_gap": -4.601968806028367e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0075,
+     "T": -0.2525140101572835,
+     "barrier": 2.8125791104629274e-05,
+     "left": {
+      "bottom": -0.24251411563382114,
+      "reached": false,
+      "final_gap": 0.009999898570883042,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2575140101572835,
+      "reached": true,
+      "final_gap": -4.43999281785068e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.009999999999999995,
+     "T": -0.2550248762338396,
+     "barrier": 5.0002500500150005e-05,
+     "left": {
+      "bottom": -0.2400251262666605,
+      "reached": false,
+      "final_gap": 0.014999750268974987,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.26002487623383963,
+      "reached": true,
+      "final_gap": -4.283984278430353e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.012499999999999997,
+     "T": -0.25753882136199896,
+     "barrier": 7.813110542386816e-05,
+     "left": {
+      "bottom": -0.2375393097434248,
+      "reached": false,
+      "final_gap": 0.01999951164136271,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.26253882136199896,
+      "reached": true,
+      "final_gap": -4.133726694277584e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.015,
+     "T": -0.260055834331318,
+     "barrier": 0.00011251266194916,
+     "left": {
+      "bottom": -0.2350566783306312,
+      "reached": false,
+      "final_gap": 0.024999156002429745,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.265055834331318,
+      "reached": true,
+      "final_gap": -3.989003571902572e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0175,
+     "T": -0.2625759040394572,
+     "barrier": 0.00015314846164028468,
+     "left": {
+      "bottom": -0.2325772444221831,
+      "reached": false,
+      "final_gap": 0.02999865961740905,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2675759040394572,
+      "reached": true,
+      "final_gap": -3.849598417815514e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.020000000000000004,
+     "T": -0.26509901949048226,
+     "barrier": 0.00020004003203845654,
+     "left": {
+      "bottom": -0.23010102054155618,
+      "reached": false,
+      "final_gap": 0.034997998948936654,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27009901949048226,
+      "reached": true,
+      "final_gap": -3.7152780851812395e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.022499999999999992,
+     "T": -0.26762516979320156,
+     "barrier": 0.00025318913723750317,
+     "left": {
+      "bottom": -0.22762801934403593,
+      "reached": false,
+      "final_gap": 0.03999715044916649,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27262516979320156,
+      "reached": true,
+      "final_gap": -3.5858760405460544e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.024999999999999994,
+     "T": -0.27015434415953954,
+     "barrier": 0.0003125977785497201,
+     "left": {
+      "bottom": -0.22515825361901015,
+      "reached": false,
+      "final_gap": 0.04499609054052944,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27515434415953954,
+      "reached": true,
+      "final_gap": -3.4612090971108955e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.027499999999999997,
+     "T": -0.27268653190294523,
+     "barrier": 0.00037826819526262304,
+     "left": {
+      "bottom": -0.2226917362923174,
+      "reached": false,
+      "final_gap": 0.04999479561062786,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.27768653190294523,
+      "reached": true,
+      "final_gap": -3.3410774147313305e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.03,
+     "T": -0.2752217224368348,
+     "barrier": 0.0004502028654874098,
+     "left": {
+      "bottom": -0.22022848042865262,
+      "reached": false,
+      "final_gap": 0.05499324200818215,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2802217224368348,
+      "reached": true,
+      "final_gap": -3.225297806608296e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0325,
+     "T": -0.27775990527306704,
+     "barrier": 0.0005284045071000303,
+     "left": {
+      "bottom": -0.21776849923403296,
+      "reached": false,
+      "final_gap": 0.05999140603903408,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.28275990527306705,
+      "reached": true,
+      "final_gap": -3.113737045978837e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.035,
+     "T": -0.2803010700204515,
+     "barrier": 0.000612876078775875,
+     "left": {
+      "bottom": -0.21531180605832434,
+      "reached": false,
+      "final_gap": 0.06498926396212723,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2853010700204515,
+      "reached": true,
+      "final_gap": -3.006211946043891e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.037500000000000006,
+     "T": -0.2828452063832872,
+     "barrier": 0.0007036207811191933,
+     "left": {
+      "bottom": -0.21285841439783196,
+      "reached": false,
+      "final_gap": 0.06998679198545521,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2878452063832872,
+      "reached": true,
+      "final_gap": -2.9025726266951324e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.039999999999999994,
+     "T": -0.2853923041599324,
+     "barrier": 0.0008006420578884558,
+     "left": {
+      "bottom": -0.2104083378979561,
+      "reached": false,
+      "final_gap": 0.07498396626197631,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2903923041599324,
+      "reached": true,
+      "final_gap": -2.8026581055939914e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.042499999999999996,
+     "T": -0.28794235324140377,
+     "barrier": 0.0009039435973189969,
+     "left": {
+      "bottom": -0.20796159035591533,
+      "reached": false,
+      "final_gap": 0.07998076288548847,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2929423532414038,
+      "reached": true,
+      "final_gap": -2.7063573604380053e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.045,
+     "T": -0.2904953436100044,
+     "barrier": 0.001013529333544362,
+     "left": {
+      "bottom": -0.20551818572353991,
+      "reached": false,
+      "final_gap": 0.08497715788646454,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2954953436100044,
+      "reached": true,
+      "final_gap": -2.6135149600037266e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.0475,
+     "T": -0.2930512653379808,
+     "barrier": 0.0011294034481179305,
+     "left": {
+      "bottom": -0.20307813811013706,
+      "reached": false,
+      "final_gap": 0.08997312722784376,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.2980512653379808,
+      "reached": true,
+      "final_gap": -2.5240032286433234e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    },
+    {
+     "u": 0.05,
+     "T": -0.2956101085862056,
+     "barrier": 0.0012515703716364768,
+     "left": {
+      "bottom": -0.2006414617854309,
+      "reached": false,
+      "final_gap": 0.09496864680077477,
+      "lean_predicts_trapped": true,
+      "stayed_in_well": true
+     },
+     "right": {
+      "bottom": -0.3006101085862056,
+      "reached": true,
+      "final_gap": -2.437700041824087e-11,
+      "lean_predicts_trapped": false,
+      "stayed_in_well": true
+     }
+    }
+   ]
+  }
+ }
+}
