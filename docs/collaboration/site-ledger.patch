@@ -1,0 +1,191 @@
+diff --git a/README.md b/README.md
+index 55d1a44..939960b 100644
+--- a/README.md
++++ b/README.md
+@@ -30,3 +30,7 @@ python3 build.py
+ ```
+ 
+ 生成先は `dist/index.html` です。`data/` に固定版の元データを含めています。最新の GitHub と自動同期する機能はありません。更新時は正確なコミットとデータの範囲、CI の対象ヘッドを再確認したうえで、`data/` と出典表示を更新し、再ビルドしてください。
++
++## 協調引継ぎ
++
++「協調引継ぎ」は固定された PR ヘッドの出自・独立レビュー・Actions 実行・未確認事項・次の担当を表示します。同梱した `data/collaboration_handoff.json` はスナップショットです。別の引継ぎ JSON は画面上で一時表示でき、既存のブラウザ保存メモを変更しません。形式の簡易確認は真偽の検証ではありません。GitHub との自動同期や書込みはありません。
+diff --git a/app.js b/app.js
+index dbdaa0c..5987eb6 100644
+--- a/app.js
++++ b/app.js
+@@ -12,13 +12,15 @@
+   const routes = [
+     ['overview','◫','全体像'], ['prs','▤','PR 一覧'], ['declarations','◇','Lean 宣言'],
+     ['graph','⌘','依存グラフ'], ['compare','▥','重複・比較'], ['integration','◈','統合候補'],
+-    ['series','▱','研究系列'], ['sources','◷','データと保存']
++    ['series','▱','研究系列'], ['handoff','⇄','協調引継ぎ'], ['sources','◷','データと保存']
+   ];
+   const state = {route:'overview', pr:102, search:'', status:'all', declaration:'', declSearch:'', declLayer:'all',
+     declMode:'main', declPrFilter:null, graph:'LinearInputMainResult.locallyMinimizing_pressure_curvature_phase', graphType:'all',
+     module:'Elastica.MinimumConditions', compareSearch:'', fileSearch:'', page:0};
+   const emptyStore = () => ({version:1,notes:{},tasks:{},concepts:[],customPr:[]});
+   let saved = emptyStore();
++  let handoff = DATA.handoff;
++  let handoffOrigin = '同梱した固定記録';
+   try { const s = JSON.parse(localStorage.getItem(STORAGE) || 'null'); if (s && s.version === 1) saved = {...emptyStore(), ...s}; } catch (_) {}
+   function save(){ try{localStorage.setItem(STORAGE,JSON.stringify(saved));}catch(_){toast('保存できません。書き出しをお試しください');} }
+   function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>e.classList.remove('show'),2600);}
+@@ -211,6 +213,41 @@
+     return head('RESEARCH SERIES','研究系列と次の課題','各系列に 1 件ずつ、次に取り組む最小 Lean 課題を記録します。')+
+       '<div class="notice">初期文面はこの試作の<strong>提案</strong>です。実施状況・既存定理との重複・成立は未確認です。編集するとこの端末に保存されます。</div><div class="grid-even">'+taskSeries.map(t=>'<section class="card series-card"><div class="series-top"><div class="series-icon">'+t.icon+'</div>'+badge('提案 · 状態未確認','amber')+'</div><div><h3>'+esc(t.name)+'</h3><p>次の最小 Lean 課題</p></div><textarea aria-label="'+esc(t.name)+' の次の課題" data-task="'+esc(t.id)+'">'+esc(saved.tasks[t.id]??t.seed)+'</textarea><div class="series-foot">この端末に保存 · 状態や証明結果は自動で変更されません</div></section>').join('')+'</div>';
+   }
++  function handoffEvidenceLink(value){
++    try {
++      const u=new URL(value);
++      if(u.protocol==='https:' && u.hostname==='github.com' && u.pathname.startsWith('/Sumuji-zkdwn/primitive-lean/'))
++        return '<a href="'+esc(u.href)+'" target="_blank" rel="noopener noreferrer">'+esc(value)+' ↗</a>';
++    } catch (_) {}
++    return '<span class="mono">'+esc(value||'未確認')+'</span>';
++  }
++  function validHandoff(d){
++    return d && d.schema_version==='1.0' && d.repository==='Sumuji-zkdwn/primitive-lean' &&
++      typeof d.id==='string' && d.subject && /^[0-9a-f]{40}$/.test(d.subject.head_sha||'') &&
++      Number.isInteger(d.subject.pull_request) && d.producer && Array.isArray(d.observations) &&
++      d.observations.every(x=>x && typeof x.kind==='string' && typeof x.status==='string' &&
++        typeof x.summary==='string' && typeof x.evidence==='string' && x.subject_sha===d.subject.head_sha) &&
++      Array.isArray(d.unverified) && d.next_action && typeof d.next_action.task==='string';
++  }
++  function showHandoff(){
++    const d=handoff;
++    const statusText={confirmed:'確認',counterexample:'反例',success:'成功',failure:'失敗',action_required:'要対応',unverified:'未確認',pass:'成功',fail:'失敗'};
++    const rows=d.observations.map(x=>'<tr><td>'+esc(x.kind)+'</td><td>'+badge(statusText[x.status]||x.status,x.status==='success'||x.status==='confirmed'?'green':x.status==='counterexample'||x.status==='failure'?'red':'amber')+'</td><td>'+esc(x.summary)+(x.scope?'<p class="small muted">範囲: '+esc(x.scope)+'</p>':'')+'</td><td>'+handoffEvidenceLink(x.evidence)+'</td></tr>').join('');
++    return head('COLLABORATION','協調引継ぎ','Claude の候補、Codex の独立レビュー、Actions の実行記録を対象コミットごとに表示します。')+
++      '<div class="notice info">'+esc(handoffOrigin)+'。記録の形式を簡易確認して表示しています。内容の真偽を自動検証したものではありません。利用者メモは変更しません。</div>'+
++      '<section class="card">'+cardHead('対象と出自','固定ヘッドごとに成果を区別')+
++      '<p><strong>PR #'+esc(d.subject.pull_request)+'</strong> · '+esc(d.subject.description||'')+'</p><p class="mono source-url">HEAD '+esc(d.subject.head_sha)+'</p>'+
++      '<p>作成主体: '+esc(d.producer.role||'未確認')+' · '+esc(d.producer.note||'')+'</p><p>'+handoffEvidenceLink(d.subject.url)+'</p>'+
++      '<p class="small muted">記録日時 '+esc(d.recorded_at||'未確認')+' · 記録 '+esc(d.id)+'</p></section>'+
++      '<section class="card" style="margin-top:15px">'+cardHead('観測と検証','Actions の成功は対象ヘッドと記載された検査範囲に限ります')+
++      '<div class="table-wrap"><table class="table"><thead><tr><th>種類</th><th>状態</th><th>内容・範囲</th><th>出典</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
++      '<div class="detail-block"><h3>数学的主張</h3><p>'+esc(d.mathematical_claim||'未確認')+'</p></div>'+
++      '<div class="detail-block"><h3>未確認</h3><ul>'+d.unverified.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div></section>'+
++      '<section class="card" style="margin-top:15px">'+cardHead('次の引継ぎ','候補を確認後に進めます')+
++      '<p><strong>'+esc(d.next_action.assignee||'未定')+'</strong> · '+esc(d.next_action.status||'未確認')+'</p><p>'+esc(d.next_action.task)+'</p><p class="small muted">終了条件: '+esc(d.next_action.completion_condition||'未確認')+'</p>'+
++      '<div class="toolbar"><button class="btn primary" data-action="handoff-import">引継ぎ JSON を開く</button><a class="btn" href="https://github.com/Sumuji-zkdwn/primitive-lean/tree/codex/collaboration-v1-20261108/docs/collaboration" target="_blank" rel="noopener noreferrer">GitHub の記録 ↗</a></div>'+
++      '<p class="small muted">開いた記録は表示中だけ保持します。自動同期・GitHubへの書込み・mainへのマージは行いません。</p></section>';
++  }
+   function showSources(){
+     return head('DATA & STORAGE','データと保存','一次資料、固定した参照先、書き込んだメモの扱いを確認します。')+
+       '<section class="card">'+cardHead('取り込んだ資料','各リンクは固定されたコミットまたは実行記録')+
+@@ -227,7 +264,7 @@
+   function render(){
+     const active=document.activeElement, id=active?.id, pos=typeof active?.selectionStart==='number'?[active.selectionStart,active.selectionEnd]:null;
+     renderNav();
+-    const f={overview:showOverview,prs:showPrs,declarations:showDeclarations,graph:showGraph,compare:showCompare,integration:showIntegration,series:showSeries,sources:showSources};
++    const f={overview:showOverview,prs:showPrs,declarations:showDeclarations,graph:showGraph,compare:showCompare,integration:showIntegration,series:showSeries,handoff:showHandoff,sources:showSources};
+     $('#content').innerHTML=f[state.route]();
+     for(const [id2,value] of [['pr-status',state.status],['decl-mode',state.declMode],['decl-layer',state.declLayer],['graph-type',state.graphType]]){const e=document.getElementById(id2);if(e)e.value=value;}
+     if(id){const target=document.getElementById(id);if(target){target.focus();if(pos&&target.setSelectionRange)try{target.setSelectionRange(...pos)}catch(_){}}}
+@@ -250,6 +287,7 @@
+     else if(action==='page'){state.page=Math.max(0,state.page+Number(id));render();}
+     else if(action==='export')exportNotes();
+     else if(action==='import')$('#import-input').click();
++    else if(action==='handoff-import')$('#handoff-input').click();
+     else if(action==='add-pr'){
+       const number=Number($('#custom-pr-number').value),title=$('#custom-pr-title').value.trim(),sha=$('#custom-pr-sha').value.trim();
+       if(!Number.isInteger(number)||number<=0||!title||numbers.includes(number)||saved.customPr.some(x=>Number(x.number)===number)){toast('未登録の PR 番号とタイトルを入力してください');return;}
+@@ -278,6 +316,13 @@
+     if(t.id==='graph-type'){state.graphType=t.value;render();}
+     if(t.id==='graph-node'){state.graph=t.value;render();}
+     if(t.id==='module-node'){state.module=t.value;render();}
++    if(t.id==='handoff-input'&&t.files[0]){
++      const reader=new FileReader();reader.onload=()=>{try{
++        const n=JSON.parse(reader.result);
++        if(!validHandoff(n)) throw Error('invalid handoff');
++        handoff=n;handoffOrigin='読み込んだ記録（内容は未検証）';render();toast('引継ぎ記録を表示しました');
++      }catch(_){toast('対応する引継ぎ JSON ではありません');}};reader.readAsText(t.files[0]);t.value='';return;
++    }
+     if(t.id==='import-input'&&t.files[0]){
+       const reader=new FileReader();reader.onload=()=>{try{
+         const n=JSON.parse(reader.result);
+diff --git a/build.py b/build.py
+index 8d4830b..864fc77 100644
+--- a/build.py
++++ b/build.py
+@@ -34,6 +34,7 @@ def main():
+         'validation': read('validation.json'),
+         'snapshot': read('snapshot.json'),
+         'recent': read('recent_prs.json'),
++        'handoff': read('collaboration_handoff.json'),
+         'modules': modules_from_report(),
+     }
+     assert len(d['deps']['nodes']) == 1949
+diff --git a/data/collaboration_handoff.json b/data/collaboration_handoff.json
+new file mode 100644
+index 0000000..c704ce6
+--- /dev/null
++++ b/data/collaboration_handoff.json
+@@ -0,0 +1,55 @@
++{
++  "schema_version": "1.0",
++  "id": "pr111-path-review-20261108",
++  "recorded_at": "2026-11-08T06:59:56+09:00",
++  "repository": "Sumuji-zkdwn/primitive-lean",
++  "subject": {
++    "pull_request": 111,
++    "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111",
++    "head_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
++    "description": "統合候補の依存抽出における LEAN_PATH の探索順序修正"
++  },
++  "producer": {
++    "role": "Claude Code",
++    "status": "source_attribution",
++    "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111",
++    "note": "PR 本文が Claude Code による生成を明記。今回新たに Claude を呼び出した記録ではない。"
++  },
++  "observations": [
++    {
++      "kind": "source_observation",
++      "status": "confirmed",
++      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
++      "summary": "tools/deps/pr_kernel.py は作業ディレクトリを LEAN_PATH の先頭に置き、sh -c の文字列にパスを引用せず埋め込む。",
++      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/blob/fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5/tools/deps/pr_kernel.py"
++    },
++    {
++      "kind": "independent_probe",
++      "status": "counterexample",
++      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
++      "summary": "同じシェル文字列の組立てを偽の lean で再現。空白のないパスは成功、空白入りパスは exit 127。引数配列と環境変数で渡す代替は成功。",
++      "evidence": "docs/collaboration/probe_shell_path.py",
++      "scope": "シェルの引数分割のみ。実 Lean、既存の成功 CI、数学的証明の成否は検査していない。"
++    },
++    {
++      "kind": "github_actions",
++      "status": "success",
++      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
++      "summary": "PR #111 の固定ヘッドに対する統合ワークフローは success。独立モジュール監査・統合検証・依存再抽出の各ステップも success。",
++      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42414035348",
++      "scope": "run 42414035348 の対象ヘッドと各ステップに限る。異なるパス環境や別の PR には結果を拡張しない。"
++    }
++  ],
++  "mathematical_claim": "この記録は新しい数学的定理を主張しない。",
++  "unverified": [
++    "修正候補を実際の pr_kernel.py に適用した後の Lean / 統合 CI",
++    "Claude への新規の依頼と応答",
++    "後続の PR #112 の対象ヘッドにおける成功した統合 CI"
++  ],
++  "next_action": {
++    "assignee": "Claude",
++    "task": "既存の検証範囲を維持し、sh -c の文字列補間を引数配列と環境変数に置き換える最小候補を別ブランチに作成。空白を含むパスの回帰テストを追加し、既存の検証器と証明は保持する。",
++    "completion_condition": "Codex に差分と独立テストを引き継ぎ、対象ヘッドの Actions 成功と検証範囲を別途記録する。自動マージしない。",
++    "status": "not_started"
++  }
++}
+diff --git a/template.html b/template.html
+index fcc8fdb..e05cbca 100644
+--- a/template.html
++++ b/template.html
+@@ -23,6 +23,7 @@
+ </div>
+ <div id="toast" role="status" aria-live="polite"></div>
+ <input id="import-input" type="file" accept="application/json,.json" hidden>
++<input id="handoff-input" type="file" accept="application/json,.json" hidden>
+ <script>/*__DATA__*/
+ /*__APP__*/</script>
+ </body>

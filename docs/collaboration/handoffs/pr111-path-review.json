@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "id": "pr111-path-review-20261108",
+  "recorded_at": "2026-11-08T06:59:56+09:00",
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "subject": {
+    "pull_request": 111,
+    "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111",
+    "head_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
+    "description": "統合候補の依存抽出における LEAN_PATH の探索順序修正"
+  },
+  "producer": {
+    "role": "Claude Code",
+    "status": "source_attribution",
+    "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111",
+    "note": "PR 本文が Claude Code による生成を明記。今回新たに Claude を呼び出した記録ではない。"
+  },
+  "observations": [
+    {
+      "kind": "source_observation",
+      "status": "confirmed",
+      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
+      "summary": "tools/deps/pr_kernel.py は作業ディレクトリを LEAN_PATH の先頭に置き、sh -c の文字列にパスを引用せず埋め込む。",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/blob/fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5/tools/deps/pr_kernel.py"
+    },
+    {
+      "kind": "independent_probe",
+      "status": "counterexample",
+      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
+      "summary": "同じシェル文字列の組立てを偽の lean で再現。空白のないパスは成功、空白入りパスは exit 127。引数配列と環境変数で渡す代替は成功。",
+      "evidence": "docs/collaboration/probe_shell_path.py",
+      "scope": "シェルの引数分割のみ。実 Lean、既存の成功 CI、数学的証明の成否は検査していない。"
+    },
+    {
+      "kind": "github_actions",
+      "status": "success",
+      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
+      "summary": "PR #111 の固定ヘッドに対する統合ワークフローは success。独立モジュール監査・統合検証・依存再抽出の各ステップも success。",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42414035348",
+      "scope": "run 42414035348 の対象ヘッドと各ステップに限る。異なるパス環境や別の PR には結果を拡張しない。"
+    }
+  ],
+  "mathematical_claim": "この記録は新しい数学的定理を主張しない。",
+  "unverified": [
+    "修正候補を実際の pr_kernel.py に適用した後の Lean / 統合 CI",
+    "Claude への新規の依頼と応答",
+    "後続の PR #112 の対象ヘッドにおける成功した統合 CI"
+  ],
+  "next_action": {
+    "assignee": "Claude",
+    "task": "既存の検証範囲を維持し、sh -c の文字列補間を引数配列と環境変数に置き換える最小候補を別ブランチに作成。空白を含むパスの回帰テストを追加し、既存の検証器と証明は保持する。",
+    "completion_condition": "Codex に差分と独立テストを引き継ぎ、対象ヘッドの Actions 成功と検証範囲を別途記録する。自動マージしない。",
+    "status": "not_started"
+  }
+}
