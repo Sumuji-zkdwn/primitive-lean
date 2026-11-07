@@ -2416,6 +2416,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "d4c7195c03dde315be1ab8bb7122205795b70362"
+    },
+    {
+      "path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "sha256": "2ade7430c924d63b6c7b5ead9afe0ebb5525201d86019fe92454cc61175587b4",
+      "original_sha256": "2ade7430c924d63b6c7b5ead9afe0ebb5525201d86019fe92454cc61175587b4",
+      "source_pr": 99,
+      "source_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd",
+      "source_path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd"
     }
   ],
   "construction_errors": [],
@@ -2557,6 +2569,12 @@
       "path": "linear_input/lean_check/PilotHullStability.inc",
       "source_commit": "d4c7195c03dde315be1ab8bb7122205795b70362",
       "note": "Exact closure operator condition for a family of Ind2-like images to leave a hull unchanged; includes escaping-image obstruction, conditional volume comparison. Not IUT specialized."
+    },
+    {
+      "date": "2026-11-07",
+      "path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "source_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd",
+      "note": "Additive, exact constant-angle Elastica endpoint bridge to strict operator-vocabulary quotient refinement. No retained Lean theorem modified."
     }
   ]
 }
