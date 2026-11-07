@@ -45,7 +45,7 @@ jobs:
           import pathlib, re
           src = pathlib.Path("PADFourLayerThreeProbe.lean").read_text()
           names = re.findall(r'^theorem\s+(\w+)', src, re.M)
-          assert len(names) == 11 and len(set(names)) == 11, names
+          assert len(names) == 12 and len(set(names)) == 11, names
           pathlib.Path("PADFourLayerThreeProbeAudit.lean").write_text(
               "import PADFourLayerThreeProbe\n" +
               "".join("#print axioms PADFourLayerThreeProbe." + n + "\n" for n in names))
@@ -58,7 +58,7 @@ jobs:
                    "../pad-three-probe-build.log", "../pad-three-probe-axioms.log")
           s = "".join(Path(p).read_text() for p in names)
           assert not any(bad in s for bad in ("error:", "warning:", "sorryAx")), s
-          print("PASS: 11 Lean theorems, no error/warning/sorryAx")
+          print("PASS: 12 Lean theorems, no error/warning/sorryAx")
           PY
       - name: Save verification logs
         if: always()
