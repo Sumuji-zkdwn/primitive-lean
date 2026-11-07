@@ -1,6 +1,6 @@
 {
  "proved_equal": 0,
- "attempted": 42,
+ "attempted": 58,
  "skipped_private": 4,
  "compile_exit": 1,
  "rows": [
@@ -11,6 +11,11 @@
   },
   {
    "candidate": "LinearInputComplementaryObservationExamples.oddObserve",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputComplementaryObservationExamples.phaseAverage",
    "initial": "LinearInputLevelGeometry.direction",
    "ring_stage": "not_proved"
   },
@@ -31,6 +36,11 @@
   },
   {
    "candidate": "LinearInputEWFSDual.observeX",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSFuture.perceptualObservation",
    "initial": "LinearInputLevelGeometry.radius",
    "ring_stage": "not_proved"
   },
@@ -86,6 +96,16 @@
   },
   {
    "candidate": "LinearInputF16SaddleCantor.eigenCoords",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16SaddleCantor.fromEigen",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16SaddleCantor.saddle",
    "initial": "LinearInputLevelGeometry.direction",
    "ring_stage": "not_proved"
   },
@@ -160,6 +180,26 @@
    "ring_stage": "not_proved"
   },
   {
+   "candidate": "LinearInputVariablePairGalois.cubicDerivative",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDerivative",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDiscriminant",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDiscriminant",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
    "candidate": "LinearInputVariablePairGalois.reducedB",
    "initial": "LinearInputCoercivity.lowerBoundConstant",
    "ring_stage": "not_proved"
@@ -200,6 +240,41 @@
    "ring_stage": "not_proved"
   },
   {
+   "candidate": "LinearInputVariablePairs.inverseMinusGradient",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.inversePlusCoordinates",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.minusEnergy",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.minusEnergy",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.plusCoordinates",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.plusEnergy",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.plusEnergy",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
    "candidate": "LinearInputWFSObservation.gauge",
    "initial": "LinearInputLevelGeometry.direction",
    "ring_stage": "not_proved"
@@ -211,6 +286,11 @@
   },
   {
    "candidate": "LinearInputWFSObservation.reflection",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputWFSObservation.wfsLift",
    "initial": "LinearInputLevelGeometry.direction",
    "ring_stage": "not_proved"
   }

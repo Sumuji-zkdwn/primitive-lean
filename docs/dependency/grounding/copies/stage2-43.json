@@ -1,6 +1,6 @@
 {
  "proved_equal": 0,
- "attempted": 6,
+ "attempted": 10,
  "skipped_private": 0,
  "compile_exit": 1,
  "rows": [
@@ -31,6 +31,26 @@
   },
   {
    "candidate": "LinearInputGravityObserver.pairProbe",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputViscousRewrite.dissipation",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputViscousRewrite.dissipation",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputViscousRewrite.dualDissipation",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputViscousRewrite.dualDissipation",
    "initial": "LinearInputGradient.gy",
    "ring_stage": "not_proved"
   }

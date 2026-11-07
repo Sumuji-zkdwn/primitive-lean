@@ -166,13 +166,30 @@ def build(raw: dict, spans, autonomy_sources: dict, module_sources: dict | None 
             else:
                 layer[n], source[n] = "unresolved", None
 
-    # 3. Resolve a referenced constant to a node id.
-    def target(c: str):
+    # 3. Resolve a referenced constant to node ids.
+    # Lean shares auxiliary proofs (`_proof_N`, `_simp_N`, `_auxLemma`) between
+    # declarations with the same proposition. A reference to another declaration's
+    # shared proof is not a dependency on that declaration: expand its contents.
+    # Equation lemmas and matchers do mean unfolding the owner, so they map to it.
+    def is_shared_proof(c: str) -> bool:
+        return any(re.match(r"^_?(proof_\d|simp_\d|auxLemma)", part) for part in c.split(".")[1:])
+
+    def targets(c: str, seen=None):
         if c in decls:
             o = owner(c)
-            return ("project", o if o else c)
+            if o and o != c and is_shared_proof(c):
+                seen = seen if seen is not None else set()
+                if c in seen:
+                    return
+                seen.add(c)
+                d = decls[c]
+                for x in d["type_consts"] + d["value_consts"]:
+                    yield from targets(x, seen)
+                return
+            yield ("project", o if o else c)
+            return
         e = external.get(c)
-        return (origin_of_module(e["module"]) if e else "unknown", c)
+        yield (origin_of_module(e["module"]) if e else "unknown", c)
 
     # 4. Typed edges. Constants of a node's own auxiliaries are inlined.
     own_aux = collections.defaultdict(list)
@@ -198,12 +215,12 @@ def build(raw: dict, spans, autonomy_sources: dict, module_sources: dict | None 
             groups[cat] += a["type_consts"] + a["value_consts"]
         for cat, consts in groups.items():
             for c in consts:
-                kind, t = target(c)
-                if kind == "project":
-                    if t != n:
-                        edges[cat][n].add(t)
-                else:
-                    external_edges[cat][n].add((kind, t))
+                for kind, t in targets(c):
+                    if kind == "project":
+                        if t != n:
+                            edges[cat][n].add(t)
+                    else:
+                        external_edges[cat][n].add((kind, t))
         heads[n] = d["head"]
     return dict(decls=decls, user=user, layer=layer, source=source, edges=edges,
                 external_edges=external_edges, heads=heads, external=external)

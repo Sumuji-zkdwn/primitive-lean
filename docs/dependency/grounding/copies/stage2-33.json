@@ -1,9 +1,39 @@
 {
  "proved_equal": 0,
- "attempted": 1,
+ "attempted": 7,
  "skipped_private": 1,
  "compile_exit": 1,
  "rows": [
+  {
+   "candidate": "LinearInputF16FenchelAtlas.score",
+   "initial": "LinearInputDesign.E",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16FenchelAtlas.score",
+   "initial": "LinearInputGradient.gSq",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16FenchelAtlas.score",
+   "initial": "LinearInputGradient.gx",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16FenchelAtlas.score",
+   "initial": "LinearInputGradientBound.gradientLowerBound",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16FenchelAtlas.sectionEnergy",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16FenchelAtlas.sectionEnergy",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
   {
    "candidate": "LinearInputF16FenchelFull.State",
    "initial": "LinearInputAreaParameters.Parameters",

@@ -1,9 +1,14 @@
 {
  "proved_equal": 0,
- "attempted": 2,
+ "attempted": 3,
  "skipped_private": 2,
  "compile_exit": 1,
  "rows": [
+  {
+   "candidate": "LinearInputChebyshevAutomorphisms.Aut",
+   "initial": "LinearInputCoupledTrajectory.State",
+   "ring_stage": "not_proved"
+  },
   {
    "candidate": "LinearInputChebyshevAutomorphisms.E",
    "initial": "LinearInputAreaParameters.Parameters",
