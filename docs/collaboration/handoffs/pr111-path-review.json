@@ -51,5 +51,37 @@
     "task": "既存の検証範囲を維持し、sh -c の文字列補間を引数配列と環境変数に置き換える最小候補を別ブランチに作成。空白を含むパスの回帰テストを追加し、既存の検証器と証明は保持する。",
     "completion_condition": "Codex に差分と独立テストを引き継ぎ、対象ヘッドの Actions 成功と検証範囲を別途記録する。自動マージしない。",
     "status": "not_started"
-  }
+  },
+  "history": [
+    {
+      "actor": "Claude Code",
+      "subject_sha": "5e909f5eade0aedb1b3c9b2e191a96cfa9b1cdc4",
+      "action": "依存抽出の探索パス修正を提案",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/commit/5e909f5eade0aedb1b3c9b2e191a96cfa9b1cdc4"
+    },
+    {
+      "actor": "Codex review",
+      "subject_sha": "5e909f5eade0aedb1b3c9b2e191a96cfa9b1cdc4",
+      "action": "統合検証が独立モジュールを含まない問題を指摘",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111#discussion_r4503678638"
+    },
+    {
+      "actor": "Codex review",
+      "subject_sha": "5e909f5eade0aedb1b3c9b2e191a96cfa9b1cdc4",
+      "action": "依存グラフのコンストラクタ欠落を指摘",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111#discussion_r4503678642"
+    },
+    {
+      "actor": "Claude Code",
+      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
+      "action": "指摘に対応する修正を追加",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/111#discussion_r4503740591"
+    },
+    {
+      "actor": "GitHub Actions",
+      "subject_sha": "fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5",
+      "action": "統合ワークフロー success",
+      "evidence": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42414035348"
+    }
+  ]
 }

@@ -23,6 +23,12 @@ def validate(doc):
     require(subject.get('url', '').startswith('https://github.com/Sumuji-zkdwn/primitive-lean/pull/'), 'subject PR URL is required')
     producer = doc.get('producer', {})
     require(all(producer.get(k) for k in ('role', 'status', 'evidence', 'note')), 'producer attribution is incomplete')
+    history = doc.get('history', [])
+    require(isinstance(history, list), 'history must be a list')
+    for i, item in enumerate(history):
+        require(isinstance(item, dict) and all(item.get(k) for k in ('actor', 'subject_sha', 'action', 'evidence')), f'history {i} is incomplete')
+        require(re.fullmatch(r'[0-9a-f]{40}', item['subject_sha']) is not None, f'history {i} requires a full SHA')
+        require(item['evidence'].startswith('https://github.com/Sumuji-zkdwn/primitive-lean/'), f'history {i} requires a GitHub source')
     observations = doc.get('observations')
     require(isinstance(observations, list) and observations, 'observations required')
     allowed = {

@@ -35,12 +35,15 @@ python3 docs/collaboration/probe_shell_path.py
 - Work の GitHub 接続では対象リポジトリの読み書きが可能で、リポジトリは public。Work の GitHub 接続と Claude の認証は別であり、一方から他方の利用権限は推定できない。Site に GitHub の書込みトークンを埋め込まない。
 - 作業環境で `claude`、`gh`、`netlify` コマンドは見つからなかった。Claude Code が別の環境で利用可能かは未確認。PR #111 本文は Claude Code が生成したと記載するが、今回の新規 Claude 実行を意味しない。
 - Netlify の Agent Runner は別の接続経路になりうるが、今回の環境では CLI・プロジェクトの対象リポジトリ接続・課金枠・実行認証を確認していない。利用の可否は未確認。
+- [Claude Code GitHub Actions の公式手順](https://code.claude.com/docs/en/github-actions)では、Claude GitHub App、認証用の Actions secret または対応クラウド認証、ワークフローを構成できる。Claude の認証方式と GitHub アプリの権限は別々に確認する。`main` の確認範囲に Claude 用 workflow は存在せず、アプリのインストールと secret の有無は未確認。この PR は接続権限や secret を変更しない。workflow の導入は別 PR で確認し、人が判断する。秘密値はチャットや Site に記録しない。
+- PR #111 の履歴では、既存の Codex GitHub レビューが候補 `5e909f5` に指摘し、Claude Code が `fb049ad` で修正した後、同ヘッドの統合 Actions が成功している。新規 PR すべてで同じ連携が有効とは仮定しない。
+- [GitHub の GITHUB_TOKEN に関する説明](https://docs.github.com/en/actions/concepts/security/github_token)によると、ワークフローからの操作は後続実行が抑止または承認待ちになる場合がある。今回の PR #112 の `action_required` との因果関係は未確認。
 - 既存 Site は Site 独自のソースとバージョンを使う。今回の台帳画面は、GitHub の引継ぎ JSON を同梱するか、利用者が JSON を一時的に開く方式であり、GitHub からの自動同期、Site からの GitHub 書込みや Claude 起動はしない。Site は既存のアクセス範囲を変更しない。
 - リポジトリ設定の `allow_auto_merge` は false。main の保護は確認時点で無効だった。設定によるマージ禁止を保証するものではないため、運用としてマージしない。権限や保護設定の変更は行っていない。
 
 ## 最初の実例と現在の限界
 
-`handoffs/pr111-path-review.json` は、既存の Claude Code 作業 → 今回の Codex の独立シェル境界検査 → 当時の同じヘッドの Actions → Sites 表示、という証拠の受け渡しである。新たな Claude との往復通信ではない。
+`handoffs/pr111-path-review.json` には、実際の過去の Claude → Codex → Claude → Actions の往復を、各段階の SHA と一次記録付きで記録する。さらに今回の Codex による独立シェル境界検査と Sites 表示を追加した。今回新たに Claude を呼び出したわけではない。
 
 対象は PR #111 の `fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5`。Actions run [42414035348](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42414035348) は success。Codex の独立検査では、元のコードと同じシェル組立てが空白入りパスで失敗する反例を見た。これは Lean の数学的正当性や、空白のない当時の CI の成功を否定しない。PR #111 はその後 main にマージ済みで、今回の作業ではマージしていない。
 
