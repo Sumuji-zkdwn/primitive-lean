@@ -1,0 +1,97 @@
+[
+ {
+  "name": "RoundTripDoubleWell.field_norm_sq",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.rest_iff_of_b_ne",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.rest_energy",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.const_isTrajectory",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.stuck_at_saddle_and_well",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.energy_between",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.barrier",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.confined",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.confined_right",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.trapped",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.f_zero_input_zero",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.neg_energy_x_ne_zero",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.well_selection",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.mirror",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.energy_lower_bound",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.unreachable_below_bottom",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.two_shells",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.metastable_rest_point",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ },
+ {
+  "name": "RoundTripDoubleWell.maxwell_wells_equal",
+  "kind": "theorem",
+  "file": "D01_DoubleWellFlow.inc"
+ }
+]

@@ -1,0 +1,31 @@
+{
+ "passed": true,
+ "command": "python3 -B experiments/roundtrip_doublewell/assemble.py",
+ "baseline_and_rounds_unchanged": true,
+ "rounds_reused": [
+  "R01_Interpolation.inc",
+  "R02_ValueFunction.inc",
+  "R03_Cusp.inc",
+  "R04_PhaseTransition.inc",
+  "R05_GibbsSmoothing.inc",
+  "R06_CircleMechanics.inc",
+  "R07_Soliton.inc",
+  "R08_KinkAngle.inc",
+  "R09_LoopCurve.inc",
+  "R10_ScalingInvariants.inc",
+  "R11_FormalGroup.inc",
+  "R12_TsallisEnergy.inc",
+  "R13_DeformedTransition.inc"
+ ],
+ "new_files": [
+  "D01_DoubleWellFlow.inc"
+ ],
+ "new_declarations": 19,
+ "new_theorems": 19,
+ "errors_or_warnings": 0,
+ "axiom_reports": 19,
+ "unexpected_axioms": [],
+ "source_sha256": {
+  "D01_DoubleWellFlow.inc": "ab87a78859f3bae838c70f7922759c2a7101edad7e7c08514a369afa310910d7"
+ }
+}
