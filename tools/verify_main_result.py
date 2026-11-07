@@ -1,8 +1,9 @@
 """Check additive proof sources against the unchanged joint assembly.
 
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
-MainResult.lean consists of the exact verified All.lean followed by the exact
-registered supplements, with all added declarations axiom-audited.
+MainResult.lean prepends the additive Mathlib imports listed in EXTRA_IMPORTS, then the
+byte-exact verified All.lean, the registered supplements and the all-declaration axiom audit.
+The original All.lean bytes are preserved without modification.
 """
 from pathlib import Path
 from datetime import datetime, timezone
@@ -18,6 +19,12 @@ LEAN = ROOT / "lean"
 OUT = ROOT / "verification"
 PROOFS = ROOT / "linear_input/lean_check"
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
+# Additive Mathlib imports prepended to MainResult.lean (All.lean bytes stay unchanged).
+EXTRA_IMPORTS = (
+    "Mathlib.Data.Nat.Squarefree",
+    "Mathlib.FieldTheory.RatFunc.IntermediateField",
+)
+
 SUPPLEMENTS = (
     ('linear_input/lean_check/MainResult.inc', 'LinearInputMainResult'),
     ('linear_input/lean_check/GeneralMinimum.inc', 'LinearInputMinimum'),
@@ -96,6 +103,11 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/PilotHullStability.inc', 'LinearInputPilotHullStability'),
     ('linear_input/lean_check/ElasticaOperatorBridge.inc', 'LinearInputElasticaOperatorBridge'),
     ('linear_input/lean_check/ObservableRigidPoint.inc', 'LinearInputRigidPoint'),
+    ('linear_input/lean_check/ChebyshevDihedralDescent.inc', 'LinearInputChebyshevDescent'),
+    ('linear_input/lean_check/ChebyshevRatFuncDegrees.inc', 'LinearInputChebyshevNext'),
+    ('linear_input/lean_check/ChebyshevDegreeTower.inc', 'LinearInputChebyshevTower'),
+    ('linear_input/lean_check/ChebyshevSplittingField.inc', 'LinearInputChebyshevSplitting'),
+    ('linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc', 'LinearInputChebyshevAutomorphisms'),
 )
 
 
@@ -131,7 +143,7 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="Exact verified All.lean and each supplemental source in registered order, separated by newlines, followed by public axiom audits.",
+        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, followed by all public axiom audits.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
@@ -206,7 +218,7 @@ def main():
             raise ValueError("Forbidden proof tokens in the supplemental source")
 
         # Preserve every input byte for byte, including its original newlines.
-        assembled = (b"import Mathlib.Data.Nat.Squarefree\n" +
+        assembled = ("".join(f"import {m}\n" for m in EXTRA_IMPORTS).encode("utf-8") +
             b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))

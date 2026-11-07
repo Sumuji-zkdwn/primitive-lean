@@ -1,0 +1,203 @@
+/-!
+# Generic Chebyshev radical certificates for the dihedral descent
+
+The earlier GaloisChebyshev and KummerDihedral supplements treat the cubic
+Joukowski identity and the cyclic upper extension.  Here the cubic is iterated
+for all powers 3^k over any characteristic-zero field, and candidate roots
+are proved to be actual roots of an explicitly defined polynomial.
+
+The reconstruction formula shows that two adjacent root candidates determine
+the multiplicative coordinate.  It does not assert an equivalence of Galois
+groups: that still requires a rational-function-field extension, descent
+automorphisms, and a proof of the field degree.
+-/
+
+noncomputable section
+
+namespace LinearInputChebyshevDescent
+
+open Polynomial
+
+variable {K : Type*} [Field K] [CharZero K]
+
+/-- The multiplicative coordinate modulo inversion. -/
+def joukowski (z : K) : K := (z + z⁻¹) / 2
+
+/-- The real-normalized cubic Chebyshev map. -/
+def cubic (x : K) : K := 4 * x ^ 3 - 3 * x
+
+/-- The k-fold cubic iterate, of degree 3^k. -/
+def chebyIterate (x : K) : ℕ → K
+  | 0 => x
+  | k + 1 => cubic (chebyIterate x k)
+
+/-- Polynomial corresponding to the cubic map. -/
+def cubicPoly : Polynomial K := C (4 : K) * X ^ 3 - C (3 : K) * X
+
+/-- Polynomial composition matching chebyIterate. -/
+def chebyPoly : ℕ → Polynomial K
+  | 0 => X
+  | k + 1 => cubicPoly.comp (chebyPoly k)
+
+omit [CharZero K] in
+theorem cubicPoly_eval (x : K) :
+    (cubicPoly (K := K)).eval x = cubic x := by
+  simp [cubicPoly, cubic]
+
+omit [CharZero K] in
+theorem chebyPoly_eval (x : K) (k : ℕ) :
+    (chebyPoly (K := K) k).eval x = chebyIterate x k := by
+  induction k with
+  | zero => simp [chebyPoly, chebyIterate]
+  | succ k ih =>
+    change ((cubicPoly (K := K)).comp (chebyPoly k)).eval x =
+      cubic (chebyIterate x k)
+    rw [Polynomial.eval_comp, cubicPoly_eval, ih]
+
+theorem cubic_joukowski (z : K) (hz : z ≠ 0) :
+    cubic (joukowski z) = joukowski (z ^ 3) := by
+  unfold cubic joukowski
+  field_simp [hz]
+  ring
+
+/-- Every ternary iterate obeys the Joukowski power relation. -/
+theorem iterate_joukowski (z : K) (hz : z ≠ 0) (k : ℕ) :
+    chebyIterate (joukowski z) k = joukowski (z ^ (3 ^ k)) := by
+  induction k with
+  | zero => simp [chebyIterate]
+  | succ k ih =>
+    change cubic (chebyIterate (joukowski z) k) =
+      joukowski (z ^ (3 ^ (k + 1)))
+    rw [ih, cubic_joukowski (z ^ (3 ^ k)) (pow_ne_zero _ hz)]
+    congr 1
+    calc
+      (z ^ (3 ^ k)) ^ 3 = z ^ ((3 ^ k) * 3) := (pow_mul z (3 ^ k) 3).symm
+      _ = z ^ (3 ^ (k + 1)) := by rw [pow_succ]
+
+/-- The j-th radical candidate, before taking inversion orbits. -/
+def rootCandidate (ζ z : K) (j : ℕ) : K :=
+  joukowski (ζ ^ j * z)
+
+/-- Every radical candidate is an actual root of the iterated equation. -/
+theorem candidate_root (k j : ℕ) (ζ z : K)
+    (hζ : IsPrimitiveRoot ζ (3 ^ k)) (hz : z ≠ 0) :
+    chebyIterate (rootCandidate ζ z j) k =
+      joukowski (z ^ (3 ^ k)) := by
+  have hm : 3 ^ k ≠ 0 := pow_ne_zero _ (by norm_num)
+  have hζ0 : ζ ≠ 0 := hζ.ne_zero hm
+  have hx : ζ ^ j * z ≠ 0 := mul_ne_zero (pow_ne_zero _ hζ0) hz
+  change chebyIterate (joukowski (ζ ^ j * z)) k = _
+  rw [iterate_joukowski (ζ ^ j * z) hx k]
+  congr 1
+  rw [mul_pow, ← pow_mul, mul_comm j (3 ^ k), pow_mul, hζ.pow_eq_one]
+  simp
+
+/-- A polynomial-level root statement, not just a pointwise map identity. -/
+theorem candidate_isRoot (k j : ℕ) (ζ z : K)
+    (hζ : IsPrimitiveRoot ζ (3 ^ k)) (hz : z ≠ 0) :
+    (chebyPoly (K := K) k -
+      C (joukowski (z ^ (3 ^ k)))).IsRoot (rootCandidate ζ z j) := by
+  change (chebyPoly (K := K) k -
+    C (joukowski (z ^ (3 ^ k)))).eval (rootCandidate ζ z j) = 0
+  rw [Polynomial.eval_sub, Polynomial.eval_C, chebyPoly_eval,
+    candidate_root k j ζ z hζ hz]
+  simp
+
+-- A primitive root of order at least three cannot equal its inverse.
+omit [CharZero K] in
+theorem primitive_denom_ne_zero {m : ℕ} {ζ : K}
+    (hζ : IsPrimitiveRoot ζ m) (hm : 2 < m) :
+    ζ - ζ⁻¹ ≠ 0 := by
+  intro h
+  have hζ0 : ζ ≠ 0 := hζ.ne_zero (by omega)
+  have heq : ζ = ζ⁻¹ := sub_eq_zero.mp h
+  have htwo : ζ ^ 2 = 1 := by
+    calc
+      ζ ^ 2 = ζ * ζ := by ring
+      _ = ζ * ζ⁻¹ := congrArg (fun w : K => ζ * w) heq
+      _ = 1 := mul_inv_cancel₀ hζ0
+  have hdiv : m ∣ 2 := hζ.dvd_of_pow_eq_one 2 htwo
+  have hle : m ≤ 2 := Nat.le_of_dvd (by norm_num) hdiv
+  omega
+
+/-- Crucial descent certificate: two adjacent roots recover z itself. -/
+theorem reconstruct_z (ζ z : K) (hz : z ≠ 0)
+    (hζ : ζ - ζ⁻¹ ≠ 0) :
+    z = 2 * (rootCandidate ζ z 1 -
+      ζ⁻¹ * rootCandidate ζ z 0) / (ζ - ζ⁻¹) := by
+  have hζ0 : ζ ≠ 0 := by
+    intro h
+    apply hζ
+    simp [h]
+  apply (eq_div_iff hζ).2
+  simp only [rootCandidate, pow_zero, pow_one, one_mul]
+  unfold joukowski
+  field_simp [hz, hζ0]
+  ring
+
+/-- Reconstruction requires no independent nondegeneracy assumption
+when the radical has primitive order m > 2. -/
+theorem reconstruct_z_primitive {m : ℕ} (ζ z : K)
+    (hζ : IsPrimitiveRoot ζ m) (hm : 2 < m) (hz : z ≠ 0) :
+    z = 2 * (rootCandidate ζ z 1 -
+      ζ⁻¹ * rootCandidate ζ z 0) / (ζ - ζ⁻¹) :=
+  reconstruct_z ζ z hz (primitive_denom_ne_zero hζ hm)
+
+
+/--
+Over any field extension containing the primitive-root coefficient, the two
+adjacent Chebyshev candidates generate **exactly the same intermediate field**
+as the radical z.  This is the generator half of the field-identification
+argument; it does not claim that the generated field is already a splitting
+field of the Chebyshev polynomial over the smaller rational-function base.
+-/
+theorem two_candidates_generate
+    {F E : Type*} [Field F] [Field E] [Algebra F E] [CharZero E]
+    (ζ : F) (z : E) (hz : z ≠ 0)
+    (hdiff : (algebraMap F E ζ) - (algebraMap F E ζ)⁻¹ ≠ 0) :
+    IntermediateField.adjoin F
+      ({rootCandidate (algebraMap F E ζ) z 0,
+        rootCandidate (algebraMap F E ζ) z 1} : Set E) =
+    IntermediateField.adjoin F ({z} : Set E) := by
+  let u : E := algebraMap F E ζ
+  let A : IntermediateField F E :=
+    IntermediateField.adjoin F
+      ({rootCandidate u z 0, rootCandidate u z 1} : Set E)
+  let B : IntermediateField F E :=
+    IntermediateField.adjoin F ({z} : Set E)
+  have huA : u ∈ A := A.algebraMap_mem ζ
+  have huB : u ∈ B := B.algebraMap_mem ζ
+  have htwoA : (2 : E) ∈ A := A.natCast_mem 2
+  have htwoB : (2 : E) ∈ B := B.natCast_mem 2
+  have hzB : z ∈ B :=
+    IntermediateField.subset_adjoin F _ (by simp)
+  have hrootB (j : ℕ) : rootCandidate u z j ∈ B := by
+    have hpow : u ^ j ∈ B := by
+      simpa only [zpow_natCast] using (B.pow_mem huB (j : ℤ))
+    have hprod : u ^ j * z ∈ B := B.mul_mem hpow hzB
+    change (u ^ j * z + (u ^ j * z)⁻¹) / 2 ∈ B
+    exact B.div_mem (B.add_mem hprod (B.inv_mem hprod)) htwoB
+  have hroot0A : rootCandidate u z 0 ∈ A :=
+    IntermediateField.subset_adjoin F _ (by simp)
+  have hroot1A : rootCandidate u z 1 ∈ A :=
+    IntermediateField.subset_adjoin F _ (by simp)
+  have hzA : z ∈ A := by
+    rw [reconstruct_z u z hz hdiff]
+    exact A.div_mem
+      (A.mul_mem htwoA (A.sub_mem hroot1A (A.mul_mem (A.inv_mem huA) hroot0A)))
+      (A.sub_mem huA (A.inv_mem huA))
+  change A = B
+  apply le_antisymm
+  · refine (IntermediateField.adjoin_le_iff).2 ?_
+    intro y hy
+    have hy' : y = rootCandidate u z 0 ∨ y = rootCandidate u z 1 := by
+      simpa only [Set.mem_insert_iff, Set.mem_singleton_iff] using hy
+    rcases hy' with rfl | rfl
+    · exact hrootB 0
+    · exact hrootB 1
+  · refine (IntermediateField.adjoin_le_iff).2 ?_
+    intro y hy
+    have hy' : y = z := by simpa using hy
+    simpa [hy'] using hzA
+
+end LinearInputChebyshevDescent

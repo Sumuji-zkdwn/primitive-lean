@@ -2475,6 +2475,79 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "sha256": "a4764af3066ea46ac58409acacd4cdfcb86b6bafe642a255cf78e8d3501e678b",
+      "original_sha256": "a4764af3066ea46ac58409acacd4cdfcb86b6bafe642a255cf78e8d3501e678b",
+      "source_pr": 31,
+      "source_commit": "ddd8216fe2f8eeb41dd94d8830d5f295371206de",
+      "source_path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "sha256": "c9df8a0237371b7c841e0220c6e5d68e32a06adb46c8735fbbb6faae37730b1b",
+      "original_sha256": "c9df8a0237371b7c841e0220c6e5d68e32a06adb46c8735fbbb6faae37730b1b",
+      "source_pr": 31,
+      "source_commit": "8e4bdc0b515be1ef0858eab5674c7841a63912f8",
+      "source_path": "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "sha256": "3e19941966b5b366b3e0a2aa0393b3505d24ed4d0a0cf6e920bee05ebe0a1eb5",
+      "original_sha256": "3e19941966b5b366b3e0a2aa0393b3505d24ed4d0a0cf6e920bee05ebe0a1eb5",
+      "source_pr": 31,
+      "source_commit": "710de2c01add72bac67b626303ca63bfc11d56af",
+      "source_path": "linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevSplittingField.inc",
+      "sha256": "5bee36fce9a721ce50effcb3568c131d8029861099af9e309c1510b83c6b970f",
+      "original_sha256": "a7d77f9ff77fcc9ac8e754e9a9811933e0d029b53e62f073fb7c537826e01877",
+      "source_pr": null,
+      "source_commit": "5ea8779110320644346b0e38fbfc9d6b7749783b",
+      "source_path": "linear_input/lean_check/ChebyshevSplittingField.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Transport the established Chebyshev degree theorem from ℂ to RatFunc ℂ through the injective coefficient map.",
+        "Expose the established degree 2m theorem for the realized parameter field.",
+        "Transport the distinct generic root candidates and their polynomial identities into the actual root set over C(t).",
+        "Use two adjacent roots to show that the actual root set generates C(X), and prove the polynomial IsSplittingField predicate for k ≥ 1.",
+        "Equate the constructed field with Mathlib's canonical splitting-field object."
+      ],
+      "authoring_commit": "48f50d00f9dc7de1a1c0eb8bb69f662d868a1bf5"
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "sha256": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98",
+      "source_pr": 31,
+      "source_commit": "29709ea90ca0f1e5757c69c1317adb5e1b9e94db",
+      "source_path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Correct explicit generation and transcendence rewrites for the X↦cX and X↦X⁻¹ substitutions.",
+        "Prove the denominator 2 is fixed by the ring-homomorphism map_ofNat law when showing Joukowski-parameter invariance.",
+        "Prove fixedness of the base intermediate field by introducing the adjoin element, supplying every induction branch, and fixing ℂ-algebra constants with commutes.",
+        "Prove inverse-rotation action on X using AlgEquiv.aut_inv, injectivity and the inverse application law.",
+        "Prove reflection conjugation explicitly by evaluating each automorphism on X.",
+        "Prove conjugation on powers using the monoid homomorphism induced by an involution.",
+        "Use the pinned DihedralGroup multiplication laws to verify the indexed rotation/reflection homomorphism.",
+        "Correct nonzero scalar cancellation and ZMod value injectivity in the faithful-action proof.",
+        "Remove unused proof tactics and linter warnings from the supplemental source."
+      ],
+      "authoring_commit": "7584d6462d3482e69bc91925a9d3428dd37c6bfd",
+      "original_sha256": "abb2c384d05e685d2b708786e4dc9d0134ca96418c0710abda649275cc38e3bc"
     }
   ],
   "construction_errors": [],
