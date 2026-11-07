@@ -1,0 +1,44 @@
+name: Contest economy model (isolated Lean verification)
+
+on:
+  pull_request:
+    paths:
+      - 'lean/ContestEconomy.lean'
+      - 'tests/test_contest_economy.py'
+      - '.github/workflows/contest-economy.yml'
+      - 'docs/research/2026-11-05-contest-economy.md'
+  push:
+    branches:
+      - chatgpt/contest-economy-collapse-20261105
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contest-economy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile all new theorems with trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ContestEconomy.lean 2>&1 | tee contest-economy-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' contest-economy-lean.log; then
+            echo 'Lean error, warning or sorryAx found'
+            exit 1
+          fi
+      - name: Independent exact-arithmetic checks
+        run: python tests/test_contest_economy.py
