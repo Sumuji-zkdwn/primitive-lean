@@ -142,6 +142,7 @@ def verify_lean(rebuild):
         'FutureObservations': 'Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries',
         'FutureFiniteHorizon': 'Finite observation signatures, monotone trace rank, and stabilization after at most N-r refinement steps',
         'OperatorWordObservations': 'Operator-word observational equivalence, canonical quotient states, compilation without new distinctions, and an independent-action counterexample',
+        'MonoEyeComposition': 'Open-eye product quotient commutation, observable-boundary feedback soundness and a finite inaccessible-input obstruction',
         'OperatorBisimulation': 'Greatest observational bisimulation, closure operations, representation fibers and invisible symmetries',
         'OperatorVocabularyRefinement': 'Conservative extension criterion, strict new-action witnesses, quotient surjection and quotient splits',
         'OperatorFiniteHorizon': 'Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words',
