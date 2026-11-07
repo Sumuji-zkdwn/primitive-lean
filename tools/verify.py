@@ -243,12 +243,18 @@ def main(argv=None):
     modes.add_argument("--two-wavelength-only", action="store_true", help="Verify the isolated PR #92 two-wavelength extension")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
+    modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     args = parser.parse_args(argv)
     if args.two_wavelength_only:
         from verify_two_wavelength import run_two_wavelength
         result = run_two_wavelength(ROOT, args.rebuild)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0 if result["passed"] else 1
+    if args.elastica_boundary_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --elastica-boundary-only")
+        from verify_elastica_fixed_boundary import main as verify_boundary
+        return verify_boundary([])
     if args.arc3_only:
         if args.rebuild:
             parser.error("--rebuild applies to Lean, not --arc3-only")
