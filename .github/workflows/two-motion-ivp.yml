@@ -1,0 +1,81 @@
+name: Two-motion IVP existence (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/two-motion-ivp-existence-20261107]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Independent RK4 and exact Taylor regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_two_motion_ivp.py | tee two-motion-ivp-numeric.log
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile the exact PR #88 model and IVP extension
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          git rev-parse HEAD | tee ../two-motion-ivp-source.txt
+          cat lean-toolchain | tee -a ../two-motion-ivp-source.txt
+          sha256sum TwoMotionEmission.lean TwoMotionEmissionConsequences.lean TwoMotionEmissionIVP.lean ../tools/check_two_motion_ivp.py lake-manifest.json | tee -a ../two-motion-ivp-source.txt
+          lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmission.olean TwoMotionEmission.lean 2>&1 | tee ../two-motion-ivp-model.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmissionConsequences.olean TwoMotionEmissionConsequences.lean 2>&1 | tee ../two-motion-ivp-consequences.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/TwoMotionEmissionIVP.olean TwoMotionEmissionIVP.lean 2>&1 | tee ../two-motion-ivp-existence.log
+          if grep -E 'warning:|error:' ../two-motion-ivp-model.log ../two-motion-ivp-consequences.log ../two-motion-ivp-existence.log; then exit 1; fi
+      - name: Audit new theorem dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('TwoMotionEmissionIVP.lean')
+          names = re.findall(r'^theorem\s+(\w+)', source.read_text(), re.M)
+          assert names and len(names) == len(set(names))
+          audit = 'import TwoMotionEmissionIVP\n' + ''.join('#print axioms TwoMotionEmission.'+n+'\n' for n in names)
+          pathlib.Path('TwoMotionEmissionIVPAudit.lean').write_text(audit)
+          pathlib.Path('../two-motion-ivp-theorems.txt').write_text('\n'.join(names)+'\n')
+          print('Auditing', len(names), 'new theorems')
+          PY
+          lake env lean --trust=0 TwoMotionEmissionIVPAudit.lean 2>&1 | tee ../two-motion-ivp-axioms.log
+          python - <<'PY'
+          import pathlib, re
+          text = pathlib.Path('../two-motion-ivp-axioms.log').read_text()
+          names = pathlib.Path('../two-motion-ivp-theorems.txt').read_text().splitlines()
+          rows = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text)
+          assert len(rows) == len(names), (len(rows), len(names))
+          allowed = {'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+              assert set(filter(None, (x.strip() for x in row.split(',')))) <= allowed
+          assert 'warning:' not in text and 'error:' not in text
+          print('All new theorem dependencies are within the standard allowlist.')
+          PY
+      - name: Upload exact-source verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: two-motion-ivp-${{ github.run_id }}
+          path: |
+            two-motion-ivp-*.log
+            two-motion-ivp-theorems.txt
+            two-motion-ivp-source.txt
+          if-no-files-found: warn
