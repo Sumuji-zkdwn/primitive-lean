@@ -1,6 +1,7 @@
 # Intensity-only exchange symmetry
 
-Date: 2026-11-07. Base: PR #86 exact head `f08c8786f774cc8ad3abd45184ce3cf17ff1ecc5`.
+Date: 2026-11-07. Base: PR #86 exact head
+`f08c8786f774cc8ad3abd45184ce3cf17ff1ecc5`.
 
 ## Lean addition
 
@@ -26,6 +27,21 @@ No hypotheses beyond the imported model definitions are used. In particular,
 unitarity/norm preservation is unnecessary for the exchange argument. The
 additional theorems are audited against the standard Lean axiom allowlist;
 there are no project-added axioms or `sorry` declarations.
+
+## Verification record
+
+The add-on was checked at source commit
+`3801c42f61761a2f24e61ac1f02bc9ad6d901ce7` by isolated GitHub Actions run
+[42379824248](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42379824248),
+which completed successfully. The workflow used the repository-pinned Lean
+`4.30.0-rc2` and Mathlib revision
+`5450b53e5ddc75d46418fabb605edbf36bd0beb6`. Both the unchanged base model and
+the add-on compiled with `--trust=0`, with no warnings or errors. All 13 added
+theorem audits report only `propext`, `Classical.choice`, and `Quot.sound`.
+The Python checker passed 625 cases each for exchange involution, conjugation,
+and intensity invariance; 2,500 mixer-commutation checks; and 25,000 exact
+finite-trace comparisons. The uploaded evidence artifact is ID `13577341517`
+with SHA-256 `6580babd82e620a3593db4f96d7bf79cc7bacb6dd9c79780e3636572da5b1d21`.
 
 ## Exact Python regression
 

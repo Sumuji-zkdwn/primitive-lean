@@ -74,9 +74,11 @@ https://optics.ansys.com/hc/en-us/articles/30220581229459-Calculation-of-Stokes-
 For the observer |Q|^2, swapping B,D leaves the readout unchanged and commutes
 with every chosen mixer. Consequently the displayed swapped pair cannot be
 distinguished by any number of these pulses if only |Q|^2 is measured.
-This statement has a direct algebraic proof and finite Python checks; it is
-not among this PR's Lean theorems. Optical total intensity N is a different
-quantity from this toy product intensity |Q|^2.
+This statement is proved in the independent add-on module
+`lean/DarkBrightIntensity.lean`; it is separate from the original 28 theorems
+in this PR. Optical total intensity N is a different quantity from this toy
+product intensity |Q|^2. Verification details are in
+`docs/verification/2026-11-07-dark-bright-intensity-symmetry.md`.
 
 ## Finite regression and verification record
 
