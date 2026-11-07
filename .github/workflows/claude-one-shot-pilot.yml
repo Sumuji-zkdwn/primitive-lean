@@ -1,0 +1,101 @@
+name: Claude collaboration one-shot pilot
+
+# One PR-open event only. This experiment is not a reusable production workflow.
+on:
+  pull_request:
+    types: [opened]
+    branches: [codex/collaboration-v1-20261108]
+    paths:
+      - '.github/workflows/claude-one-shot-pilot.yml'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  candidate:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'codex/claude-action-pilot-20261108'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout proposed head without persisting credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Check Claude credential availability
+        id: auth
+        env:
+          CLAUDE_API_PRESENT: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_OAUTH_PRESENT: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        shell: bash
+        run: |
+          if [ -n "$CLAUDE_API_PRESENT" ]; then
+            echo 'mode=api' >> "$GITHUB_OUTPUT"
+          elif [ -n "$CLAUDE_OAUTH_PRESENT" ]; then
+            echo 'mode=oauth' >> "$GITHUB_OUTPUT"
+          else
+            echo '::error::No Claude API or Claude Code OAuth secret is available to this PR run.'
+            exit 1
+          fi
+
+      - name: Generate a candidate for independent review
+        id: claude
+        uses: anthropics/claude-code-action@61a9c274fa7110a66dfafc1bbbced03833eb25fe
+        with:
+          github_token: ${{ github.token }}
+          anthropic_api_key: ${{ steps.auth.outputs.mode == 'api' && secrets.ANTHROPIC_API_KEY || '' }}
+          claude_code_oauth_token: ${{ steps.auth.outputs.mode == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          show_full_output: 'false'
+          prompt: |
+            Prepare a narrowly scoped Python implementation candidate for independent review.
+            Do not claim to have run tests or modified any repository files.
+            The source is tools/deps/pr_kernel.py at commit
+            fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5.
+            Its helper `run(cmd, cwd, log, env=None)` passes env to subprocess.run.
+            It calls `lake env sh -c` on three constructed strings:
+              lp = f"LEAN_PATH={work}:$LEAN_PATH"
+              f"{lp} lean --root={work} -o {work}/ExtraProbe.olean {work}/ExtraProbe.lean"
+              f"{lp} lean --root={lean} -o {out} {wt / mods[m]}"
+              f"{lp} lean --run {TOOLS}/ExtractDeps.lean {work}/raw.json {' '.join(modules)} -- {' '.join(prefixes)}"
+            Each command is executed in cwd `lean`. Paths can contain spaces or shell
+            metacharacters. The work directory must remain the first LEAN_PATH root
+            AFTER `lake env` has established its environment. Preserve the arguments,
+            current working directory, logging, and error propagation. Existing Lean
+            proofs and verification scope must remain unchanged.
+            Propose a concrete minimal code change for all three call sites and
+            a regression test for paths containing spaces, including the inherited
+            LEAN_PATH. Identify any assumptions or limitations. Return the requested
+            structured JSON; put the Python candidate in the `implementation` field.
+          claude_args: >-
+            --max-turns 2
+            --max-budget-usd 0.50
+            --tools ""
+            --disallowedTools "mcp__*"
+            --json-schema '{"type":"object","properties":{"implementation":{"type":"string"},"test_plan":{"type":"string"},"limitations":{"type":"string"}},"required":["implementation","test_plan","limitations"],"additionalProperties":false}'
+
+      - name: Save structured candidate as unverified evidence
+        env:
+          CLAUDE_RESULT: ${{ steps.claude.outputs.structured_output }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          result = json.loads(os.environ['CLAUDE_RESULT'])
+          required = ('implementation', 'test_plan', 'limitations')
+          if not all(isinstance(result.get(k), str) and result[k].strip() for k in required):
+              raise SystemExit('Claude candidate is missing a required string field')
+          Path('claude-candidate.json').write_text(json.dumps(result, indent=2, ensure_ascii=False)+'\n')
+          print('Structured candidate retained; correctness and tests remain unverified.')
+          PY
+
+      - name: Retain candidate for Codex review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: claude-collaboration-candidate-${{ github.run_id }}
+          path: claude-candidate.json
+          if-no-files-found: error
+          retention-days: 7
