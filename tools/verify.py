@@ -171,6 +171,10 @@ def verify_lean(rebuild):
         'CurveLetterContextualEquivalence': 'Exact normalized A/B curve-letter composition, observational collision, left-context separation, and specialization of the attachment-descent criterion',
         'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
         'RadicalF0Bridge': 'Arithmetic radical as multiplicity-forgetting F0, exact prime-support kernel, squarefree fixed points, and successor failure of descent and predictive sufficiency',
+        'PilotComparisonBridge': 'Choice-dependent reconstruction range cover, quotient factorization boundary, exact log-volume witness iff numerical cap, independent finite and ell=7 countermodels; not an IUT proof.',
+        'PilotVolumeTransport': 'Exact choice-dependent log-volume shift criterion, neutral/limited-shift obstruction, and conditional local packet budget certificate; not an arithmetic IUT proof.',
+        'PilotHullInflation': 'Volume-preserving coordinate swap with strictly larger hull of its orbit; abstract finite countermodel, not an IUT Ind2 calculation.',
+        'PilotHullStability': 'Exact no-hull-inflation iff every image stays within the original closure, with identity choice, volume monotonicity and escape obstruction.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

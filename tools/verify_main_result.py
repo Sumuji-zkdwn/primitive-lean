@@ -88,6 +88,10 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/CurveLetterContextualEquivalence.inc', 'LinearInputCurveLetters'),
     ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
     ('linear_input/lean_check/RadicalF0Bridge.inc', 'LinearInputRadicalF0'),
+    ('linear_input/lean_check/PilotComparisonBridge.inc', 'LinearInputPilotComparison'),
+    ('linear_input/lean_check/PilotVolumeTransport.inc', 'LinearInputPilotTransport'),
+    ('linear_input/lean_check/PilotHullInflation.inc', 'LinearInputPilotHullInflation'),
+    ('linear_input/lean_check/PilotHullStability.inc', 'LinearInputPilotHullStability'),
 )
 
 
