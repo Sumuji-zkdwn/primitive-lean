@@ -79,6 +79,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/F0FutureMinimality.inc', 'LinearInputF0FutureMinimality'),
     ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
+    ('linear_input/lean_check/ElasticaOperatorBridge.inc', 'LinearInputElasticaOperatorBridge'),
 )
 
 
