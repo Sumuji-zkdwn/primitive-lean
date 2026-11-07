@@ -22,7 +22,7 @@ theorem fixedFirstGap (e s : ℚ) :
 
 /-- A global upper bound for the determinant when both probes lie in [e,1]. -/
 theorem detEnvelope_upper (e t s : ℚ)
-    (he : 0 ≤ e) (het : e ≤ t) (hts : t ≤ s) (hs : s ≤ 1) :
+    (het : e ≤ t) (hts : t ≤ s) (hs : s ≤ 1) :
     detEnvelope t s ≤ 4*(1-e)^5/27 := by
   have ht_le : t ≤ 1 := le_trans hts hs
   have he_le : e ≤ 1 := le_trans (le_trans het hts) hs
@@ -61,7 +61,7 @@ theorem detEnvelope_at_optimal (e : ℚ) :
 theorem unitInterval_upper (t s : ℚ)
     (ht : 0 ≤ t) (hts : t ≤ s) (hs : s ≤ 1) :
     detEnvelope t s ≤ 4/27 := by
-  have h := detEnvelope_upper 0 t s (by norm_num) ht hts hs
+  have h := detEnvelope_upper 0 t s ht hts hs
   norm_num at h ⊢
   exact h
 
