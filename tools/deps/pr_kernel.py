@@ -56,7 +56,11 @@ def main():
     shutil.copy(main_result, work / "PrimitiveMain.lean")
     S["compile_main"] = run(["lake", "env", "lean", f"--root={work}", "-o", str(work / "PrimitiveMain.olean"),
                              str(work / "PrimitiveMain.lean")], lean, work / "compile_main.log")
-    lp = f"LEAN_PATH=$LEAN_PATH:{work}"
+    # The work directory must come first: Lean resolves a module through the first
+    # search-path root that contains its top-level package directory. If an earlier
+    # build left e.g. lean/.lake/build/lib/lean/Research/ behind, appending `work`
+    # makes Research.* modules that exist only in `work` unresolvable.
+    lp = f"LEAN_PATH={work}:$LEAN_PATH"
     modules, module_sources = ["PrimitiveMain"], {}
 
     registered = set(re.findall(r"'(linear_input/lean_check/[^']+\.inc)'",
