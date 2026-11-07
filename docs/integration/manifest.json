@@ -2844,6 +2844,17 @@
         "Split the L₃ transpose-product identity into equal-coordinate and distinct-coordinate cases to close the exact signed-entry sum."
       ],
       "authoring_commit": "57d4a85ffad45cb9fdf77aff3e101ec522949913"
+    },
+    {
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+      "original_sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+      "source_pr": null,
+      "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
+      "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -3003,6 +3014,12 @@
       "path": "linear_input/lean_check/ObservableRigidPoint.inc",
       "source_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e",
       "note": "Additive conditional F0 observable-common-fixed derivation and 4-state counterexample. Existing proofs unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
+      "note": "Exact iff local overlap consistency/global partial-function gluing; under coordinate coverage unique canonical state and 3-factor operational gluing criterion with concrete destructive and cumulative countermodels."
     }
   ]
 }
