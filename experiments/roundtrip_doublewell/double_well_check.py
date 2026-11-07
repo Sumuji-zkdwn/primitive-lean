@@ -34,7 +34,7 @@ def make_field(T, b, u=0.0):
     return fld
 
 
-def run(z0, T, b, u=0.0, t_end=200.0):
+def run(z0, T, b, u=0.0, t_end=1500.0):
     sol = solve_ivp(make_field(T, b, u), (0, t_end), z0, method="DOP853", rtol=1e-10,
                     atol=1e-12, dense_output=False, max_step=1.0)
     z = sol.y[:, -1]
@@ -87,12 +87,12 @@ for b in (0.0, 0.5):
     # classify starts on a small circle around the saddle; locate class changes
     rho, flips = 0.05, []
     angles = np.linspace(0, 2 * math.pi, 721)[:-1]
-    ring = [classify(*run([rho * math.cos(a), rho * math.sin(a)], T, b, t_end=300)[:2]) for a in angles]
+    ring = [classify(*run([rho * math.cos(a), rho * math.sin(a)], T, b)[:2]) for a in angles]
     for i in range(len(angles)):
         if ring[i] != ring[i - 1]:
             flips.append(float(((angles[i] + angles[i - 1]) / 2) % math.pi))
     report[f"two_shells_T=-0.1_b={b}"] = {
-        "grid": f"{len(grid)}x{len(grid)} on [-2.4,2.4]^2, t_end=200",
+        "grid": f"{len(grid)}x{len(grid)} on [-2.4,2.4]^2, t_end=1500",
         "counts": counts,
         "starts_with_E<0": neg_start_total,
         "sign_change_violations_for_E<0_starts": viol_sign,
@@ -152,8 +152,14 @@ for delta in (0.02, 0.005):
                          "stayed_in_well": bool(np.all((xs < c) if name == "left" else (xs > c)))}
         rows.append({"u": float(u), "T": float(T), "barrier": float(f(c)), **out})
     both = [r["u"] for r in rows if r["left"]["reached"] and r["right"]["reached"]]
-    consistent = all((not r[s]["reached"]) == r[s]["lean_predicts_trapped"]
-                     for r in rows for s in ("left", "right"))
+    # Lean (`trapped`) proves only: bottom > T  =>  never reached.
+    lean_part_ok = all(not r[s]["reached"] for r in rows for s in ("left", "right")
+                       if r[s]["lean_predicts_trapped"])
+    # Numerical-only claim: bottom < T  =>  reached.  List the exceptions with their margins.
+    unconverged = [{"u": r["u"], "well": s, "bottom_minus_T": r[s]["bottom"] - r["T"],
+                    "final_gap": r[s]["final_gap"]}
+                   for r in rows for s in ("left", "right")
+                   if not r[s]["lean_predicts_trapped"] and not r[s]["reached"]]
     # analytic window: |f(aL) - f(aR)| < δ
     def gap(u):
         aL, c, aR, f = wells(u)
@@ -164,7 +170,8 @@ for delta in (0.02, 0.005):
         "both_wells_reach_target_for_u_in": [min(both), max(both)] if both else None,
         "analytic_half_width_|f(aL)-f(aR)|<delta": half,
         "first_order_estimate_delta/(2 a0)": delta / (2 * A0),
-        "every_trapped_case_predicted_by_bottom>T_and_vice_versa": consistent,
+        "lean_trapped_cases_all_unreached": lean_part_ok,
+        "predicted_reachable_but_unconverged_at_t=600": unconverged,
         "all_trajectories_stayed_in_their_well": all(r[s]["stayed_in_well"]
                                                      for r in rows for s in ("left", "right")),
         "rows": rows,
