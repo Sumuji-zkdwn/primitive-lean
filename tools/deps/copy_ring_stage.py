@@ -20,6 +20,28 @@ import subprocess
 from pathlib import Path
 
 
+def classify(log, returncode, starts, n):
+    """Per-theorem outcome from a Lean log.
+
+    An error inside theorem k's lines marks only k as not proved. An error that
+    belongs to no theorem (e.g. a failed import on line 1), or a nonzero exit
+    with no located error at all, means the file was not checked: every pair is
+    then "not_checked", never "proved_equal".
+    """
+    err_lines = {int(m.group(1)) for m in re.finditer(r"RingStage\.lean:(\d+):\d+: error", log)}
+    bounds = sorted(starts.items(), key=lambda kv: kv[1])
+    failed, unowned = set(), False
+    for ln in err_lines:
+        owner = max((k for k, s in bounds if s <= ln), default=None)
+        if owner is None:
+            unowned = True
+        else:
+            failed.add(owner)
+    if unowned or (returncode != 0 and not err_lines):
+        return ["not_checked"] * n, "compile_failed"
+    return ["not_proved" if k in failed else "proved_equal" for k in range(n)], "checked"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pairs", required=True, help="CopyCheck output JSON")
@@ -54,20 +76,12 @@ def main():
                        cwd=a.lean_dir, capture_output=True, text=True)
     log = p.stdout + p.stderr
     (work / "ring_stage.log").write_text(log)
-    err_lines = {int(m.group(1)) for m in re.finditer(r"RingStage\.lean:(\d+):\d+: error", log)}
-    bounds = sorted(starts.items(), key=lambda kv: kv[1])
-    failed = set()
-    for ln in err_lines:
-        owner = max((k for k, s in bounds if s <= ln), default=None)
-        if owner is not None:
-            failed.add(owner)
-    result = []
-    for k, r in enumerate(todo):
-        result.append(dict(candidate=r["candidate"], initial=r["initial"],
-                           ring_stage="proved_equal" if k not in failed else "not_proved"))
-    out = dict(proved_equal=sum(x["ring_stage"] == "proved_equal" for x in result),
-               attempted=len(result), skipped_private=len(skipped),
-               compile_exit=p.returncode, rows=result,
+    result, status = classify(log, p.returncode, starts, len(todo))
+    rows_out = [dict(candidate=r["candidate"], initial=r["initial"], ring_stage=st)
+                for r, st in zip(todo, result)]
+    out = dict(proved_equal=sum(st == "proved_equal" for st in result),
+               attempted=len(rows_out), skipped_private=len(skipped),
+               compile_exit=p.returncode, compile_status=status, rows=rows_out,
                skipped=[dict(candidate=r["candidate"], initial=r["initial"]) for r in skipped])
     Path(a.out).write_text(json.dumps(out, ensure_ascii=False, indent=1))
     print(json.dumps({k: v for k, v in out.items() if k not in ("rows", "skipped")}))

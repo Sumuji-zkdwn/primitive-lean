@@ -12,7 +12,9 @@ for f in sorted(glob.glob(D + "/stage1-*.json")):
     d = json.load(open(f))
     s2 = f"{D}/stage2-{t}.json"
     e = json.load(open(s2)) if os.path.exists(s2) else dict(proved_equal=0, attempted=0, skipped_private=0)
-    rows.append((t, d["candidates"], d["type_matches"], d["copies"], e["attempted"], e["proved_equal"], e["skipped_private"],
+    # A stage-2 file whose Lean compilation failed proves nothing: never report its count as equalities.
+    proved = "コンパイル失敗" if e.get("compile_status") == "compile_failed" else e["proved_equal"]
+    rows.append((t, d["candidates"], d["type_matches"], d["copies"], e["attempted"], proved, e["skipped_private"],
                  [r for r in d["rows"] if r["value"] == "definitionally_equal"]))
 L = ["# 初期の定義の「作り直された写し」の検出", "",
      "「新しい対象」（初期層に触れずに定義されたプロジェクトの定義）が、名前を変えただけの初期の定義ではないかを調べた。", "",
