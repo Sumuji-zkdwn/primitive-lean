@@ -2241,15 +2241,15 @@
     },
     {
       "path": "linear_input/lean_check/MonoEyeComposition.inc",
-      "sha256": "8d28a2585ea581ee9687c18063415e202af4fdfc07ceb55de7b8386ad9462694",
-      "original_sha256": "8d28a2585ea581ee9687c18063415e202af4fdfc07ceb55de7b8386ad9462694",
+      "sha256": "3e8e966784e5b784f34173922f14a041590978c5d54f519bdd9854eedf6398ea",
+      "original_sha256": "3e8e966784e5b784f34173922f14a041590978c5d54f519bdd9854eedf6398ea",
       "source_pr": null,
-      "source_commit": "698ddfa4e9391e6f92cdb115d380889af7b4d853",
+      "source_commit": "edba4874adc7c492fd4a2ba312d85140366ac204",
       "source_path": "linear_input/lean_check/MonoEyeComposition.inc",
       "role": "new_integration_extension",
       "byte_identical": true,
       "permitted_adaptations": [],
-      "authoring_commit": "698ddfa4e9391e6f92cdb115d380889af7b4d853"
+      "authoring_commit": "edba4874adc7c492fd4a2ba312d85140366ac204"
     }
   ],
   "construction_errors": [],
@@ -2323,7 +2323,7 @@
     {
       "date": "2026-11-08",
       "path": "linear_input/lean_check/MonoEyeComposition.inc",
-      "source_commit": "698ddfa4e9391e6f92cdb115d380889af7b4d853",
+      "source_commit": "edba4874adc7c492fd4a2ba312d85140366ac204",
       "note": "Mono-eye open-product predictive quotient equivalence, observable-boundary feedback soundness and inaccessible-input counterexample. Historical proof files unchanged."
     }
   ]
