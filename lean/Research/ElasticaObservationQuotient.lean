@@ -12,6 +12,8 @@ middle-piece replacement, or that refinement is forced by elastica equations.
 
 namespace ElasticaObservationBridge
 
+noncomputable section
+
 /-- Run a finite left-to-right word of deterministic actions. -/
 def run {α ι : Type*} (step : ι → α → α) : List ι → α → α
   | [], x => x
