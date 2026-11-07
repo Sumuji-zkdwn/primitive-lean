@@ -27,10 +27,12 @@ def coefP3 : ℚ := 1702471931945/272239830669568
 def coefQ2 : ℚ := 987235535475/34029978833696
 
 theorem param_mass (a b : ℚ) : mass (param a b) = 1 := by
-  norm_num [mass, param]
+  unfold mass param
+  ring
 
 theorem param_mean (a b : ℚ) : mean (param a b) = 3/2 := by
-  norm_num [mean, param]
+  unfold mean param
+  ring
 
 theorem positive_weights_and_margin :
     0 < lam ∧ 0 < mu ∧ lam+mu=1 ∧
@@ -65,7 +67,7 @@ theorem two_probe_uniform_separation (a b c d : ℚ)
       lam*crossGap (9/10) a b c d - mu*crossGap (1/2) a b c d := by
     linarith
   by_contra h
-  push_neg at h
+  push Not at h
   have hx : 0 < lam*(margin-crossGap (9/10) a b c d) :=
     mul_pos hl (sub_pos.mpr h.1)
   have hy : 0 < mu*(margin+crossGap (1/2) a b c d) :=
