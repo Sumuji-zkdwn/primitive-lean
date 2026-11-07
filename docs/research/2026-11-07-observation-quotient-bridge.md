@@ -47,6 +47,7 @@ Run with the pinned Lean `v4.30.0-rc2` and Mathlib revision in `lean/lakefile.to
 ```sh
 cd lean
 lake exe cache get
+lake build Elastica.Geometry
 lake env lean --trust=0 Research/ElasticaObservationQuotient.lean
 ```
 
