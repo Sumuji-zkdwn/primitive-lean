@@ -129,6 +129,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/AtomicHalfFactorial.inc', 'LinearInputAtomicHalfFactorial'),
     ('linear_input/lean_check/AtomicWordProbe.inc', 'LinearInputAtomicWordProbe'),
     ('linear_input/lean_check/SingleSwapFiber.inc', 'LinearInputSingleSwapFiber'),
+    ('linear_input/lean_check/F16RimRecovery.inc', 'LinearInputF16RimRecovery'),
 )
 
 

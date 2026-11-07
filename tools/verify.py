@@ -202,6 +202,7 @@ def verify_lean(rebuild):
         'AtomicHalfFactorial': 'For every actual atomic multiset the sum of 2- and 3-valuations is twice its length, implying full half-factoriality of the generated submonoid.',
         'AtomicWordProbe': 'All actual atomic multisets admit explicit multiplicity triples; product plus count of factor 6 identifies any atomic decomposition, while product alone is insufficient.',
         'SingleSwapFiber': 'Complete rank-one collision lattice and oriented 4*9-to-6*6 swap; every equal-product pair is connected by finite swaps, with termination and unique oriented endpoint.',
+        'F16RimRecovery': 'Lean-identifies the actual F16 relative action A^T C, proves a full 16D four-phase decoder, and exhibits collisions for one, two, and three phases.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
