@@ -2293,6 +2293,54 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "docs/verification/2026-11-07-curve-letter-context.md",
+      "sha256": "6ce172379e7fbedbc706bda8031dab5f715b05c8a2ab9e2358b5220f97528fa2",
+      "original_sha256": "6ce172379e7fbedbc706bda8031dab5f715b05c8a2ab9e2358b5220f97528fa2",
+      "source_pr": 87,
+      "source_commit": "597246334098fa550220890015e76e674109ad84",
+      "source_path": "docs/verification/2026-11-07-curve-letter-context.md",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "597246334098fa550220890015e76e674109ad84"
+    },
+    {
+      "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
+      "original_sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
+      "source_pr": 87,
+      "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
+      "source_path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "db89426dc61742ce1f10ea18152478819159b5d2"
+    },
+    {
+      "path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "sha256": "996a9b4605029746763ce5eeabf21a346c2bdf04026a3541f6c2da19f6b238b2",
+      "original_sha256": "996a9b4605029746763ce5eeabf21a346c2bdf04026a3541f6c2da19f6b238b2",
+      "source_pr": 87,
+      "source_commit": "be41acd054e0a2d566636a24b7f5058da1638735",
+      "source_path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "be41acd054e0a2d566636a24b7f5058da1638735"
+    },
+    {
+      "path": "tests/test_curve_letter_context.py",
+      "sha256": "fe7763ba17d1ed321026033f14ad9b32ea6773759d1450402c074e150904f8cd",
+      "original_sha256": "fe7763ba17d1ed321026033f14ad9b32ea6773759d1450402c074e150904f8cd",
+      "source_pr": 87,
+      "source_commit": "597246334098fa550220890015e76e674109ad84",
+      "source_path": "tests/test_curve_letter_context.py",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "597246334098fa550220890015e76e674109ad84"
     }
   ],
   "construction_errors": [],
@@ -2392,6 +2440,18 @@
       "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
       "source_commit": "cb875948ab0fb1c8224a2bde6db3bec31819255b",
       "note": "Distinguish individual, pairwise and global relational constraint feasibility; strict Boolean opposing-value and odd-cycle gluing obstructions with even-cycle control. Earlier proof sources retained."
+    },
+    {
+      "date": "2026-11-06",
+      "path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "source_commit": "be41acd054e0a2d566636a24b7f5058da1638735",
+      "note": "Contextual congruence under rewrite and binary attachment; exact minimal quotient, old-quotient descent iff stability, and explicit finite hidden-bit witness. Previous sources remain unchanged."
+    },
+    {
+      "date": "2026-11-07",
+      "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
+      "note": "Instantiates PR #87's WordEq/StableJoin descent criterion with the normalized A/B curve-letter model from the 2026-10-20 note; exact AB/BA observation collision and left-A separation, independently checked in Python."
     }
   ]
 }

@@ -84,6 +84,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/LocalCapacityIncompatibility.inc', 'LinearInputCapacityExtinction'),
     ('linear_input/lean_check/CooperativeGluingObstruction.inc', 'LinearInputCooperativeGluing'),
     ('linear_input/lean_check/RelationalOddCycleGluing.inc', 'LinearInputRelationalGluing'),
+    ('linear_input/lean_check/JoinContextualEquivalence.inc', 'LinearInputJoinContexts'),
+    ('linear_input/lean_check/CurveLetterContextualEquivalence.inc', 'LinearInputCurveLetters'),
 )
 
 

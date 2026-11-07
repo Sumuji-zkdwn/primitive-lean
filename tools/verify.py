@@ -167,6 +167,8 @@ def verify_lean(rebuild):
         'LocalCapacityIncompatibility': 'Finite local capacity versus global all-requirements demand, derived total extinction and historical nonpreservation, pairwise-compatible non-gluing triple and finite noncommutativity countermodel',
         'CooperativeGluingObstruction': 'Collective requirement reachability without joint sequential goal, destructive-operation invariant, cooperative versus noninterfering countermodels, joint-postcondition gated extinction and history nonpreservation',
         'RelationalOddCycleGluing': 'Strict hierarchy of individual, pairwise and global relational feasibility, Boolean odd-cycle obstruction, even-cycle control; pairwise SAT is not overlap agreement of fixed assignments',
+        'JoinContextualEquivalence': 'Contextual equality under rewrites and binary attachment, compositional quotient, representation minimality, exact descent of old quotient attachment, and finite counterexample',
+        'CurveLetterContextualEquivalence': 'Exact normalized A/B curve-letter composition, observational collision, left-context separation, and specialization of the attachment-descent criterion',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
