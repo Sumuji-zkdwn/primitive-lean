@@ -1,0 +1,45 @@
+name: Sphere clock Elastica formalization
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SphereClock.lean'
+      - 'tests/test_sphere_clock.py'
+      - '.github/workflows/sphere-clock.yml'
+      - 'docs/research/2026-11-08-sphere-clock.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sphere-clock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Record checked revision
+        run: git rev-parse HEAD
+
+      - name: Independently check finite sphere-clock model
+        run: python -m unittest discover -s tests -p test_sphere_clock.py -v
+
+      - name: Install pinned Lean and mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile exact Elastica bridge under trust zero
+        working-directory: lean
+        run: |
+          lake build Elastica.Geometry
+          lake env lean --trust=0 Research/SphereClock.lean
