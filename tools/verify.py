@@ -188,6 +188,7 @@ def verify_lean(rebuild):
         'ViscousRewrite': 'Proximal parameter-shift closure for the original E polynomial, minimizer-derived viscous balance, energy descent, Fenchel-Young identities, a nonconvex two-branch example, and an F16 rotation/reflection dissipation test.',
         'GravityCocycle': 'Generic pair-interaction two-cocycle, exact coboundary of symmetric internal energy, Newton inverse-distance kernel, and oriented 1D inverse-square force; does not deduce Newton law from associativity.',
         'GravityObserver': 'F0 reflection quotient and mass-only counterexample for symmetric two-mass gravitational observation; exact probe kernel, injectivity, and quadrupole/remainder identities.',
+        'GravityObservation': 'Idempotent F0 observational descent iff fiber invariance; exact three-moment exterior inverse-distance expansion with finite remainder; symmetric-pair quadrupole witness and failure of mass-only reduction.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
