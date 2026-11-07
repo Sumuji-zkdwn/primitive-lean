@@ -170,6 +170,7 @@ def verify_lean(rebuild):
         'JoinContextualEquivalence': 'Contextual equality under rewrites and binary attachment, compositional quotient, representation minimality, exact descent of old quotient attachment, and finite counterexample',
         'CurveLetterContextualEquivalence': 'Exact normalized A/B curve-letter composition, observational collision, left-context separation, and specialization of the attachment-descent criterion',
         'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
+        'RadicalF0Bridge': 'Arithmetic radical as multiplicity-forgetting F0, exact prime-support kernel, squarefree fixed points, and successor failure of descent and predictive sufficiency',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

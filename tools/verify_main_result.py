@@ -87,6 +87,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/JoinContextualEquivalence.inc', 'LinearInputJoinContexts'),
     ('linear_input/lean_check/CurveLetterContextualEquivalence.inc', 'LinearInputCurveLetters'),
     ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
+    ('linear_input/lean_check/RadicalF0Bridge.inc', 'LinearInputRadicalF0'),
 )
 
 
@@ -197,7 +198,8 @@ def main():
             raise ValueError("Forbidden proof tokens in the supplemental source")
 
         # Preserve every input byte for byte, including its original newlines.
-        assembled = (b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
+        assembled = (b"import Mathlib.Data.Nat.Squarefree\n" +
+            b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)

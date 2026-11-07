@@ -2356,6 +2356,18 @@
         "Replace unused proof binder names and add a separating-word witness certificate lemma"
       ],
       "authoring_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16"
+    },
+    {
+      "path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "sha256": "aacc9eb3d56d9fce9e97ccf27418c006187b38b9b6916a6da5f852785b1bcc57",
+      "original_sha256": "aacc9eb3d56d9fce9e97ccf27418c006187b38b9b6916a6da5f852785b1bcc57",
+      "source_pr": null,
+      "source_commit": "9551bc7958fb706e9f968949fe4663b0ba63ad59",
+      "source_path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "9551bc7958fb706e9f968949fe4663b0ba63ad59"
     }
   ],
   "construction_errors": [],
@@ -2467,6 +2479,12 @@
       "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
       "source_commit": "db89426dc61742ce1f10ea18152478819159b5d2",
       "note": "Instantiates PR #87's WordEq/StableJoin descent criterion with the normalized A/B curve-letter model from the 2026-10-20 note; exact AB/BA observation collision and left-A separation, independently checked in Python."
+    },
+    {
+      "date": "2026-11-05",
+      "path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "source_commit": "9551bc7958fb706e9f968949fe4663b0ba63ad59",
+      "note": "Current pinned-Mathlib-compatible radical F0, idempotence, squarefree fixed direction, exact observation kernel, successor non-descent, and future-state incompleteness; source retained unmodified in registry."
     }
   ]
 }
