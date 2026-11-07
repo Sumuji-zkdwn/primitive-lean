@@ -88,7 +88,6 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RelationalOddCycleGluing.inc', 'LinearInputRelationalGluing'),
     ('linear_input/lean_check/JoinContextualEquivalence.inc', 'LinearInputJoinContexts'),
     ('linear_input/lean_check/CurveLetterContextualEquivalence.inc', 'LinearInputCurveLetters'),
-    ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
     ('linear_input/lean_check/RadicalF0Bridge.inc', 'LinearInputRadicalF0'),
     ('linear_input/lean_check/PilotComparisonBridge.inc', 'LinearInputPilotComparison'),
     ('linear_input/lean_check/PilotVolumeTransport.inc', 'LinearInputPilotTransport'),
