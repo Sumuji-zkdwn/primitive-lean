@@ -50,6 +50,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/StrangeOperatorConjugacy.inc', 'LinearInputStrangeConjugacy'),
     ('linear_input/lean_check/StrangeOperatorBoundary.inc', 'LinearInputStrangeBoundary'),
     ('linear_input/lean_check/StrangeOperatorFixedSets.inc', 'LinearInputStrangeFixedSets'),
+    ('linear_input/lean_check/StrangeOperatorCounting.inc', 'LinearInputStrangeCounting'),
     ('linear_input/lean_check/F16SaddleCantor.inc', 'LinearInputF16SaddleCantor'),
     ('linear_input/lean_check/F16FullMatrix.inc', 'LinearInputF16FullMatrix'),
     ('linear_input/lean_check/F16FullRank.inc', 'LinearInputF16FullRank'),

@@ -2452,6 +2452,29 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e"
+    },
+    {
+      "path": "linear_input/lean_check/StrangeOperatorCounting.inc",
+      "sha256": "5727034d4ac2f90dde819edfedc04cc615caa532fdc1742cf646d217a57067e8",
+      "original_sha256": "da4632874b887733191332fbee894314b349ecf2e4de7bfcbbc93dd1f6a64bf9",
+      "source_commit": "1a9884a63526f90d4ba5baecde29e9b853c5f4a0",
+      "source_path": "linear_input/lean_check/StrangeOperatorCounting.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Normalize the finite choice cardinality equality with Fintype.card_fin.",
+        "Remove the duplicate namespace terminator."
+      ]
+    },
+    {
+      "path": "tools/check_strange_operator_counting.py",
+      "sha256": "bc9535fdf3e60ced616f213e9b4c79c0df7c85df0ca6736637fffaf947884915",
+      "original_sha256": "bc9535fdf3e60ced616f213e9b4c79c0df7c85df0ca6736637fffaf947884915",
+      "source_commit": "32a4a9af754b2839a68dc16d90eedfa4b5aee6e1",
+      "source_path": "tools/check_strange_operator_counting.py",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
