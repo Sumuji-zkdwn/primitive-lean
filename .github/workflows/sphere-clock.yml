@@ -48,5 +48,6 @@ jobs:
         run: |
           lake build Elastica.Geometry
           lake env lean --trust=0 Research/SphereClock.lean
-          lake env lean --trust=0 -o Research/SphereClockRationalGluing.olean Research/SphereClockRationalGluing.lean
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/SphereClockRationalGluing.olean Research/SphereClockRationalGluing.lean
           lake env lean --trust=0 Research/SphereClockWordNormalForm.lean
