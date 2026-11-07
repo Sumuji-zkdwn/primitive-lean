@@ -41,4 +41,5 @@ jobs:
       - name: Compile quotient bridge without sorry, with kernel trust zero
         working-directory: lean
         run: |
+          lake build Elastica.Geometry
           lake env lean --trust=0 Research/ElasticaObservationQuotient.lean
