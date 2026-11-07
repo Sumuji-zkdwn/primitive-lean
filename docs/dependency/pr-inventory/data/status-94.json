@@ -1,0 +1,82 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 151.7,
+   "log": "/tmp/claude-0/inv/kernel/94/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/94 -o /tmp/claude-0/inv/kernel/94/PrimitiveMain.olean /tmp/claude-0/inv/kernel/94/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 97.7,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_main.log"
+  },
+  "compile_DarkBrightObservation": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --root=/tmp/claude-0/wt/94/lean -o /tmp/claude-0/inv/kernel/94/DarkBrightObservation.olean /tmp/claude-0/wt/94/lean/DarkBrightObservation.lean",
+   "exit": 0,
+   "seconds": 6.4,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_DarkBrightObservation.log"
+  },
+  "compile_PrismHysteresisReadout": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --root=/tmp/claude-0/wt/94/lean -o /tmp/claude-0/inv/kernel/94/PrismHysteresisReadout.olean /tmp/claude-0/wt/94/lean/PrismHysteresisReadout.lean",
+   "exit": 0,
+   "seconds": 4.3,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_PrismHysteresisReadout.log"
+  },
+  "compile_FluidPrismPhaseMemory": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --root=/tmp/claude-0/wt/94/lean -o /tmp/claude-0/inv/kernel/94/FluidPrismPhaseMemory.olean /tmp/claude-0/wt/94/lean/FluidPrismPhaseMemory.lean",
+   "exit": 0,
+   "seconds": 4.8,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_FluidPrismPhaseMemory.log"
+  },
+  "compile_TwoWavelengthPhase": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --root=/tmp/claude-0/wt/94/lean -o /tmp/claude-0/inv/kernel/94/TwoWavelengthPhase.olean /tmp/claude-0/wt/94/lean/TwoWavelengthPhase.lean",
+   "exit": 0,
+   "seconds": 5.9,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_TwoWavelengthPhase.log"
+  },
+  "compile_TwoWavelengthRecovery": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --root=/tmp/claude-0/wt/94/lean -o /tmp/claude-0/inv/kernel/94/TwoWavelengthRecovery.olean /tmp/claude-0/wt/94/lean/TwoWavelengthRecovery.lean",
+   "exit": 0,
+   "seconds": 5.5,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_TwoWavelengthRecovery.log"
+  },
+  "compile_TwoWavelengthSeparation": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --root=/tmp/claude-0/wt/94/lean -o /tmp/claude-0/inv/kernel/94/TwoWavelengthSeparation.olean /tmp/claude-0/wt/94/lean/TwoWavelengthSeparation.lean",
+   "exit": 0,
+   "seconds": 7.7,
+   "log": "/tmp/claude-0/inv/kernel/94/compile_TwoWavelengthSeparation.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/94 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/94/raw.json PrimitiveMain DarkBrightObservation PrismHysteresisReadout FluidPrismPhaseMemory TwoWavelengthPhase TwoWavelengthRecovery TwoWavelengthSeparation -- Elastica PrimitiveMain DarkBrightObservation PrismHysteresisReadout FluidPrismPhaseMemory TwoWavelengthPhase TwoWavelengthRecovery TwoWavelengthSeparation",
+   "exit": 0,
+   "seconds": 88.0,
+   "log": "/tmp/claude-0/inv/kernel/94/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/94/raw.json --assembled /tmp/claude-0/inv/kernel/94/PrimitiveMain.lean --report /tmp/claude-0/wt/94/verification/main-result.json --out /tmp/claude-0/inv/kernel/94/deps.json --root /tmp/claude-0/wt/94 --module-source DarkBrightObservation=lean/DarkBrightObservation.lean --module-source PrismHysteresisReadout=lean/PrismHysteresisReadout.lean --module-source FluidPrismPhaseMemory=lean/FluidPrismPhaseMemory.lean --module-source TwoWavelengthPhase=lean/TwoWavelengthPhase.lean --module-source TwoWavelengthRecovery=lean/TwoWavelengthRecovery.lean --module-source TwoWavelengthSeparation=lean/TwoWavelengthSeparation.lean",
+   "exit": 0,
+   "seconds": 0.3,
+   "log": "/tmp/claude-0/inv/kernel/94/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain",
+  "DarkBrightObservation",
+  "PrismHysteresisReadout",
+  "FluidPrismPhaseMemory",
+  "TwoWavelengthPhase",
+  "TwoWavelengthRecovery",
+  "TwoWavelengthSeparation"
+ ],
+ "module_sources": {
+  "DarkBrightObservation": "lean/DarkBrightObservation.lean",
+  "PrismHysteresisReadout": "lean/PrismHysteresisReadout.lean",
+  "FluidPrismPhaseMemory": "lean/FluidPrismPhaseMemory.lean",
+  "TwoWavelengthPhase": "lean/TwoWavelengthPhase.lean",
+  "TwoWavelengthRecovery": "lean/TwoWavelengthRecovery.lean",
+  "TwoWavelengthSeparation": "lean/TwoWavelengthSeparation.lean"
+ }
+}

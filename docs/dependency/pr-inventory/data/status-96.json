@@ -1,0 +1,74 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 124.9,
+   "log": "/tmp/claude-0/inv/kernel/96/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/96 -o /tmp/claude-0/inv/kernel/96/PrimitiveMain.olean /tmp/claude-0/inv/kernel/96/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 59.4,
+   "log": "/tmp/claude-0/inv/kernel/96/compile_main.log"
+  },
+  "compile_DarkBrightObservation": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/96 lean --root=/tmp/claude-0/wt/96/lean -o /tmp/claude-0/inv/kernel/96/DarkBrightObservation.olean /tmp/claude-0/wt/96/lean/DarkBrightObservation.lean",
+   "exit": 0,
+   "seconds": 5.2,
+   "log": "/tmp/claude-0/inv/kernel/96/compile_DarkBrightObservation.log"
+  },
+  "compile_PrismHysteresisReadout": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/96 lean --root=/tmp/claude-0/wt/96/lean -o /tmp/claude-0/inv/kernel/96/PrismHysteresisReadout.olean /tmp/claude-0/wt/96/lean/PrismHysteresisReadout.lean",
+   "exit": 0,
+   "seconds": 4.9,
+   "log": "/tmp/claude-0/inv/kernel/96/compile_PrismHysteresisReadout.log"
+  },
+  "compile_FluidPrismPhaseMemory": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/96 lean --root=/tmp/claude-0/wt/96/lean -o /tmp/claude-0/inv/kernel/96/FluidPrismPhaseMemory.olean /tmp/claude-0/wt/96/lean/FluidPrismPhaseMemory.lean",
+   "exit": 0,
+   "seconds": 5.4,
+   "log": "/tmp/claude-0/inv/kernel/96/compile_FluidPrismPhaseMemory.log"
+  },
+  "compile_PrismAiryReflectance": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/96 lean --root=/tmp/claude-0/wt/96/lean -o /tmp/claude-0/inv/kernel/96/PrismAiryReflectance.olean /tmp/claude-0/wt/96/lean/PrismAiryReflectance.lean",
+   "exit": 0,
+   "seconds": 5.4,
+   "log": "/tmp/claude-0/inv/kernel/96/compile_PrismAiryReflectance.log"
+  },
+  "compile_PrismObliqueTMM": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/96 lean --root=/tmp/claude-0/wt/96/lean -o /tmp/claude-0/inv/kernel/96/PrismObliqueTMM.olean /tmp/claude-0/wt/96/lean/PrismObliqueTMM.lean",
+   "exit": 0,
+   "seconds": 4.4,
+   "log": "/tmp/claude-0/inv/kernel/96/compile_PrismObliqueTMM.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/96 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/96/raw.json PrimitiveMain DarkBrightObservation PrismHysteresisReadout FluidPrismPhaseMemory PrismAiryReflectance PrismObliqueTMM -- Elastica PrimitiveMain DarkBrightObservation PrismHysteresisReadout FluidPrismPhaseMemory PrismAiryReflectance PrismObliqueTMM",
+   "exit": 0,
+   "seconds": 85.2,
+   "log": "/tmp/claude-0/inv/kernel/96/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/96/raw.json --assembled /tmp/claude-0/inv/kernel/96/PrimitiveMain.lean --report /tmp/claude-0/wt/96/verification/main-result.json --out /tmp/claude-0/inv/kernel/96/deps.json --root /tmp/claude-0/wt/96 --module-source DarkBrightObservation=lean/DarkBrightObservation.lean --module-source PrismHysteresisReadout=lean/PrismHysteresisReadout.lean --module-source FluidPrismPhaseMemory=lean/FluidPrismPhaseMemory.lean --module-source PrismAiryReflectance=lean/PrismAiryReflectance.lean --module-source PrismObliqueTMM=lean/PrismObliqueTMM.lean",
+   "exit": 0,
+   "seconds": 0.4,
+   "log": "/tmp/claude-0/inv/kernel/96/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain",
+  "DarkBrightObservation",
+  "PrismHysteresisReadout",
+  "FluidPrismPhaseMemory",
+  "PrismAiryReflectance",
+  "PrismObliqueTMM"
+ ],
+ "module_sources": {
+  "DarkBrightObservation": "lean/DarkBrightObservation.lean",
+  "PrismHysteresisReadout": "lean/PrismHysteresisReadout.lean",
+  "FluidPrismPhaseMemory": "lean/FluidPrismPhaseMemory.lean",
+  "PrismAiryReflectance": "lean/PrismAiryReflectance.lean",
+  "PrismObliqueTMM": "lean/PrismObliqueTMM.lean"
+ }
+}

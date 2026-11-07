@@ -1,0 +1,4925 @@
+{
+ "main_nodes": 1949,
+ "prs": {
+  "29": {
+   "number": 29,
+   "title": "Add finite counting theorems for Stops fixed-set closures",
+   "parent_pr": null,
+   "head": "chatgpt/stops-fixed-set-counting-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/StrangeOperatorCounting.inc"
+   ],
+   "lexical_theorems": 11,
+   "non_lean_changes": {
+    "docs": 1,
+    "tools": 4
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "29",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 13,
+    "new_definitions": 12,
+    "theorems_using_main_any_edge": 10,
+    "theorems_using_main_theorem_in_proof": 8,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 8,
+     "library_only": 5
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [
+     [
+      "LinearInputStrangeFixedSets.close_singleton_top_of_no_stoppers",
+      4
+     ],
+     [
+      "LinearInputF0Counting.supported_retraction_count",
+      4
+     ],
+     [
+      "LinearInputStrangeFixedSets.close_singleton_top_of_all_fixed",
+      2
+     ],
+     [
+      "LinearInputStrangeFixedSets.close_singleton_exact_fixed_set",
+      2
+     ],
+     [
+      "LinearInputStrangeFixedSets.same_fixed_in_closure",
+      2
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputStrangeCounting.FixedSetChoices",
+     "LinearInputStrangeCounting.IdempotentsWithFixedSet",
+     "LinearInputStrangeCounting.MapsWithFixedSet",
+     "LinearInputStrangeCounting.OutsideSet",
+     "LinearInputStrangeCounting.close_singleton_idempotent_count",
+     "LinearInputStrangeCounting.close_singleton_idempotent_count_of_all_fixed",
+     "LinearInputStrangeCounting.close_singleton_idempotent_count_of_no_fixed",
+     "LinearInputStrangeCounting.close_singleton_map_count",
+     "LinearInputStrangeCounting.close_singleton_map_count_of_all_fixed",
+     "LinearInputStrangeCounting.close_singleton_map_count_of_no_fixed",
+     "LinearInputStrangeCounting.fixedSet_realizeChoices",
+     "LinearInputStrangeCounting.fixedStates_eq_iff_fixedSet_eq",
+     "LinearInputStrangeCounting.fixed_set_idempotent_count",
+     "LinearInputStrangeCounting.fixed_set_map_count",
+     "LinearInputStrangeCounting.idempotentsWithFixedSetEquivRetractions",
+     "LinearInputStrangeCounting.mapsWithFixedSetEquivChoices",
+     "LinearInputStrangeCounting.realizeChoices",
+     "LinearInputStrangeCounting.sameFixedSetIdempotentsEquivFinset",
+     "LinearInputStrangeCounting.sameFixedSetMapsEquivFinset",
+     "_private.PrimitiveMain.0.LinearInputStrangeCounting.card_nonself_choices",
+     "_private.PrimitiveMain.0.LinearInputStrangeCounting.fixedChoicesEquivFin",
+     "_private.PrimitiveMain.0.LinearInputStrangeCounting.univIdempotentSubtypeEquiv",
+     "_private.PrimitiveMain.0.LinearInputStrangeCounting.univSubtypeEquiv",
+     "_private.PrimitiveMain.0.LinearInputStrangeCounting.univSubtypeEquiv._proof_2",
+     "_private.PrimitiveMain.0.LinearInputStrangeCounting.univSubtypeEquiv._proof_3"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "30": {
+   "number": 30,
+   "title": "Candidate: five-coordinate constraint/rewrite bridge from primitive E",
+   "parent_pr": null,
+   "head": "chatgpt/five-dim-lagrange-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/FiveDimLagrange.inc"
+   ],
+   "lexical_theorems": 89,
+   "non_lean_changes": {
+    "docs": 1,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "failure"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "31": {
+   "number": 31,
+   "title": "Formalize ternary Chebyshev roots and radical reconstruction for dihedral descent",
+   "parent_pr": null,
+   "head": "chatgpt/chebyshev-dihedral-descent-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/ChebyshevDegreeTower.inc",
+    "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+    "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+    "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+    "linear_input/lean_check/ChebyshevSplittingField.inc",
+    "probes/ChebyshevDegreeTower.inc",
+    "probes/ChebyshevNext.inc"
+   ],
+   "lexical_theorems": 87,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Chebyshev dihedral descent Lean probe",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "31",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 71,
+    "new_definitions": 29,
+    "theorems_using_main_any_edge": 49,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 49,
+    "shapes": {
+     "library_only": 17,
+     "composite": 46,
+     "decision_procedure_only": 8
+    },
+    "max_proof_depth": 7,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [
+     "probes/ChebyshevDegreeTower.inc",
+     "probes/ChebyshevNext.inc"
+    ],
+    "new_names": [
+     "LinearInputChebyshevAutomorphisms.Aut",
+     "LinearInputChebyshevAutomorphisms.Base",
+     "LinearInputChebyshevAutomorphisms.E",
+     "LinearInputChebyshevAutomorphisms.adjoin_inv_X",
+     "LinearInputChebyshevAutomorphisms.adjoin_scaled_X",
+     "LinearInputChebyshevAutomorphisms.asBaseAuto",
+     "LinearInputChebyshevAutomorphisms.baseAuto_C",
+     "LinearInputChebyshevAutomorphisms.baseAuto_ext_X",
+     "LinearInputChebyshevAutomorphisms.conjugate_pow_of_involution",
+     "LinearInputChebyshevAutomorphisms.dihedralRepresentation",
+     "LinearInputChebyshevAutomorphisms.dihedralRepresentation_injective",
+     "LinearInputChebyshevAutomorphisms.dihedralRepresentation_r",
+     "LinearInputChebyshevAutomorphisms.dihedralRepresentation_r_X",
+     "LinearInputChebyshevAutomorphisms.dihedralRepresentation_sr",
+     "LinearInputChebyshevAutomorphisms.dihedralRepresentation_sr_X",
+     "LinearInputChebyshevAutomorphisms.fixes_adjoin_parameter",
+     "LinearInputChebyshevAutomorphisms.inversionAuto",
+     "LinearInputChebyshevAutomorphisms.inversionAuto_X",
+     "LinearInputChebyshevAutomorphisms.inversionAuto_fixes_parameter",
+     "LinearInputChebyshevAutomorphisms.linearAuto",
+     "LinearInputChebyshevAutomorphisms.linearAuto_X",
+     "LinearInputChebyshevAutomorphisms.linearAuto_fixes_parameter",
+     "LinearInputChebyshevAutomorphisms.no_scalar_X_eq_inverse",
+     "LinearInputChebyshevAutomorphisms.ratFunc_algEquiv_ext_X",
+     "LinearInputChebyshevAutomorphisms.reflection",
+     "LinearInputChebyshevAutomorphisms.reflection_X",
+     "LinearInputChebyshevAutomorphisms.reflection_conjugates_rotation",
+     "LinearInputChebyshevAutomorphisms.reflection_conjugates_rotationPower",
+     "LinearInputChebyshevAutomorphisms.reflection_sq",
+     "LinearInputChebyshevAutomorphisms.rotation",
+     "LinearInputChebyshevAutomorphisms.rotationPower",
+     "LinearInputChebyshevAutomorphisms.rotationPower_add",
+     "LinearInputChebyshevAutomorphisms.rotationPower_mul_reflection",
+     "LinearInputChebyshevAutomorphisms.rotationPower_neg",
+     "LinearInputChebyshevAutomorphisms.rotation_X",
+     "LinearInputChebyshevAutomorphisms.rotation_pow_apply_X",
+     "LinearInputChebyshevAutomorphisms.rotation_pow_order",
+     "LinearInputChebyshevAutomorphisms.rotation_symm_X",
+     "LinearInputChebyshevAutomorphisms.zmodPower",
+     "LinearInputChebyshevAutomorphisms.zmodPower_add",
+     "LinearInputChebyshevAutomorphisms.zmodPower_neg",
+     "LinearInputChebyshevAutomorphisms.zmodPower_zero",
+     "LinearInputChebyshevDescent.candidate_isRoot",
+     "LinearInputChebyshevDescent.candidate_root",
+     "LinearInputChebyshevDescent.chebyIterate",
+     "LinearInputChebyshevDescent.chebyPoly",
+     "LinearInputChebyshevDescent.chebyPoly_eval",
+     "LinearInputChebyshevDescent.cubic",
+     "LinearInputChebyshevDescent.cubicPoly",
+     "LinearInputChebyshevDescent.cubicPoly_eval",
+     "LinearInputChebyshevDescent.cubic_joukowski",
+     "LinearInputChebyshevDescent.iterate_joukowski",
+     "LinearInputChebyshevDescent.joukowski",
+     "LinearInputChebyshevDescent.primitive_denom_ne_zero",
+     "LinearInputChebyshevDescent.reconstruct_z",
+     "LinearInputChebyshevDescent.reconstruct_z_primitive",
+     "LinearInputChebyshevDescent.rootCandidate",
+     "LinearInputChebyshevDescent.two_candidates_generate",
+     "LinearInputChebyshevNext.chebyPoly_natDegree",
+     "LinearInputChebyshevNext.cubicPoly_natDegree",
+     "LinearInputChebyshevNext.generic_candidate_injective",
+     "LinearInputChebyshevNext.generic_square_not_constant",
+     "LinearInputChebyshevNext.joukowski_eq_iff_rf",
+     "LinearInputChebyshevSplitting.E",
+     "LinearInputChebyshevSplitting.actualSplittingFieldEquiv",
+     "LinearInputChebyshevSplitting.basePolynomial",
+     "LinearInputChebyshevSplitting.basePolynomial_natDegree",
+     "LinearInputChebyshevSplitting.candidate",
+     "LinearInputChebyshevSplitting.candidateSet",
+     "LinearInputChebyshevSplitting.candidateSet_card",
+     "LinearInputChebyshevSplitting.candidate_mem_rootSet",
+     "LinearInputChebyshevSplitting.chebyPoly_map",
+     "LinearInputChebyshevSplitting.chebyPoly_natDegree_E",
+     "LinearInputChebyshevSplitting.map_basePolynomial",
+     "LinearInputChebyshevSplitting.parameter",
+     "LinearInputChebyshevSplitting.parameterField",
+     "LinearInputChebyshevSplitting.parameterField_finrank",
+     "LinearInputChebyshevSplitting.primitiveRoot_C",
+     "LinearInputChebyshevSplitting.rationalFunction_isSplittingField",
+     "LinearInputChebyshevSplitting.rootSet_adjoin_eq_top",
+     "LinearInputChebyshevSplitting.targetPolynomial",
+     "LinearInputChebyshevSplitting.targetPolynomial_natDegree",
+     "LinearInputChebyshevSplitting.targetPolynomial_ne_zero",
+     "LinearInputChebyshevSplitting.targetPolynomial_splits",
+     "LinearInputChebyshevSplitting.target_candidate_isRoot",
+     "LinearInputChebyshevTower.adjoin_half_eq",
+     "LinearInputChebyshevTower.finrank_genericParameter",
+     "LinearInputChebyshevTower.finrank_genericQuotient",
+     "LinearInputChebyshevTower.genericParameter",
+     "LinearInputChebyshevTower.genericParameter_eq_joukowski",
+     "LinearInputChebyshevTower.genericQuotient",
+     "LinearInputChebyshevTower.genericQuotient_eq_pow_add_inv",
+     "LinearInputChebyshevTower.numerator_denominator_isCoprime",
+     "LinearInputChebyshevTower.numerator_sub_denominator_sq",
+     "LinearInputChebyshevTower.quotientDenominator",
+     "LinearInputChebyshevTower.quotientDenominator_ne_zero",
+     "LinearInputChebyshevTower.quotientNumerator",
+     "LinearInputChebyshevTower.quotient_denom",
+     "LinearInputChebyshevTower.quotient_gcd_one",
+     "LinearInputChebyshevTower.quotient_num"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "32": {
+   "number": 32,
+   "title": "Formalize F16 Fenchel section, E-atlas Hessian, and singular dual domain",
+   "parent_pr": null,
+   "head": "chatgpt/f16-fenchel-atlas-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/F16FenchelAtlas.inc"
+   ],
+   "lexical_theorems": 17,
+   "non_lean_changes": {
+    "docs": 2,
+    "tools": 4
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "33",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 17,
+    "new_definitions": 2,
+    "theorems_using_main_any_edge": 16,
+    "theorems_using_main_theorem_in_proof": 3,
+    "theorems_reaching_initial": 15,
+    "shapes": {
+     "library_only": 12,
+     "composite": 3,
+     "decision_procedure_only": 1,
+     "application_of_earlier_theorem": 1
+    },
+    "max_proof_depth": 7,
+    "most_used_main_theorems": [
+     [
+      "LinearInputF16Rank.realPencil_rank",
+      2
+     ],
+     [
+      "LinearInputF16Rank.unmix_plus",
+      2
+     ],
+     [
+      "LinearInputF16Rank.unmix_minus",
+      2
+     ],
+     [
+      "LinearInputF16Rank.real_twiceIdentity_rank",
+      2
+     ],
+     [
+      "LinearInputF16Rank.factor_plus",
+      2
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputF16FenchelAtlas.full_f16_rank_classification",
+     "LinearInputF16FenchelAtlas.minus_one_score_attained",
+     "LinearInputF16FenchelAtlas.minus_one_score_upper",
+     "LinearInputF16FenchelAtlas.one_score_attained",
+     "LinearInputF16FenchelAtlas.one_score_bdd_iff",
+     "LinearInputF16FenchelAtlas.one_score_unbounded",
+     "LinearInputF16FenchelAtlas.one_score_upper",
+     "LinearInputF16FenchelAtlas.score",
+     "LinearInputF16FenchelAtlas.sectionEnergy",
+     "LinearInputF16FenchelAtlas.section_at_minus_one",
+     "LinearInputF16FenchelAtlas.section_at_one",
+     "LinearInputF16FenchelAtlas.section_at_zero",
+     "LinearInputF16FenchelAtlas.section_hessian_determinant",
+     "LinearInputF16FenchelAtlas.section_hessian_zero_iff",
+     "LinearInputF16FenchelAtlas.section_is_original_E",
+     "LinearInputF16FenchelAtlas.section_nonnegative",
+     "LinearInputF16FenchelAtlas.slice_and_full_rank_at_one",
+     "LinearInputF16FenchelAtlas.zero_score_attained",
+     "LinearInputF16FenchelAtlas.zero_score_upper"
+    ],
+    "names_shared_with_other_prs": [
+     33
+    ]
+   }
+  },
+  "33": {
+   "number": 33,
+   "title": "F16: full 16D Fenchel dual domain, normal equations and attained supremum",
+   "parent_pr": null,
+   "head": "chatgpt/f16-full-fenchel-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/F16FenchelAtlas.inc",
+    "linear_input/lean_check/F16FenchelFull.inc"
+   ],
+   "lexical_theorems": 28,
+   "non_lean_changes": {
+    "docs": 3,
+    "tools": 5
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "33",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 28,
+    "new_definitions": 7,
+    "theorems_using_main_any_edge": 27,
+    "theorems_using_main_theorem_in_proof": 4,
+    "theorems_reaching_initial": 25,
+    "shapes": {
+     "library_only": 15,
+     "composite": 10,
+     "decision_procedure_only": 1,
+     "application_of_earlier_theorem": 2
+    },
+    "max_proof_depth": 7,
+    "most_used_main_theorems": [
+     [
+      "LinearInputF16Rank.realPencil_rank",
+      3
+     ],
+     [
+      "LinearInputF16Rank.unmix_plus",
+      3
+     ],
+     [
+      "LinearInputF16Rank.unmix_minus",
+      3
+     ],
+     [
+      "LinearInputF16Rank.real_twiceIdentity_rank",
+      3
+     ],
+     [
+      "LinearInputF16Rank.factor_plus",
+      3
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputF16FenchelAtlas.full_f16_rank_classification",
+     "LinearInputF16FenchelAtlas.minus_one_score_attained",
+     "LinearInputF16FenchelAtlas.minus_one_score_upper",
+     "LinearInputF16FenchelAtlas.one_score_attained",
+     "LinearInputF16FenchelAtlas.one_score_bdd_iff",
+     "LinearInputF16FenchelAtlas.one_score_unbounded",
+     "LinearInputF16FenchelAtlas.one_score_upper",
+     "LinearInputF16FenchelAtlas.score",
+     "LinearInputF16FenchelAtlas.sectionEnergy",
+     "LinearInputF16FenchelAtlas.section_at_minus_one",
+     "LinearInputF16FenchelAtlas.section_at_one",
+     "LinearInputF16FenchelAtlas.section_at_zero",
+     "LinearInputF16FenchelAtlas.section_hessian_determinant",
+     "LinearInputF16FenchelAtlas.section_hessian_zero_iff",
+     "LinearInputF16FenchelAtlas.section_is_original_E",
+     "LinearInputF16FenchelAtlas.section_nonnegative",
+     "LinearInputF16FenchelAtlas.slice_and_full_rank_at_one",
+     "LinearInputF16FenchelAtlas.zero_score_attained",
+     "LinearInputF16FenchelAtlas.zero_score_upper",
+     "LinearInputF16FenchelFull.State",
+     "LinearInputF16FenchelFull.action",
+     "LinearInputF16FenchelFull.conjugate_eq_of_normal",
+     "LinearInputF16FenchelFull.conjugate_of_bddAbove",
+     "LinearInputF16FenchelFull.inner_normal",
+     "LinearInputF16FenchelFull.left_pencil_rank",
+     "LinearInputF16FenchelFull.normal",
+     "LinearInputF16FenchelFull.normal_range_eq_orthogonal_kernel",
+     "LinearInputF16FenchelFull.potential",
+     "LinearInputF16FenchelFull.potential_eq_of_same_normal",
+     "LinearInputF16FenchelFull.score",
+     "LinearInputF16FenchelFull.score_attained",
+     "LinearInputF16FenchelFull.score_bddAbove_iff",
+     "LinearInputF16FenchelFull.score_kernel_ray",
+     "LinearInputF16FenchelFull.score_square_identity",
+     "LinearInputF16FenchelFull.score_upper"
+    ],
+    "names_shared_with_other_prs": [
+     32
+    ]
+   }
+  },
+  "34": {
+   "number": 34,
+   "title": "F16: rational spectral projector certificates and exact 4/4/8 decomposition",
+   "parent_pr": null,
+   "head": "chatgpt/f16-spectral-projectors-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/F16FenchelAtlas.inc",
+    "linear_input/lean_check/F16FenchelFull.inc",
+    "linear_input/lean_check/F16SpectralProjectors.inc"
+   ],
+   "lexical_theorems": 47,
+   "non_lean_changes": {
+    "docs": 4,
+    "tools": 6
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "failure"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "35": {
+   "number": 35,
+   "title": "F16: exact singular Moore–Penrose inverses at t=±1",
+   "parent_pr": 34,
+   "head": "chatgpt/f16-singular-pinv-on-proj-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/F16SingularPseudoinverse.inc"
+   ],
+   "lexical_theorems": 10,
+   "non_lean_changes": {
+    "docs": 5,
+    "tools": 7
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "36": {
+   "number": 36,
+   "title": "Formalize ternary zero placement and finite observation separation",
+   "parent_pr": null,
+   "head": "chatgpt/ternary-zero-cesaro-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/FiniteObservationSeparation.inc",
+    "linear_input/lean_check/TernaryZeroCesaro.inc"
+   ],
+   "lexical_theorems": 33,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Ternary zero-placement Lean probe",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "53",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 33,
+    "new_definitions": 13,
+    "theorems_using_main_any_edge": 7,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 14,
+     "library_only": 9,
+     "decision_procedure_only": 10
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputFiniteObservation.allowedProbe",
+     "LinearInputFiniteObservation.both_allowed_probes_identify",
+     "LinearInputFiniteObservation.coarse",
+     "LinearInputFiniteObservation.coarse_idempotent",
+     "LinearInputFiniteObservation.coarse_marker_joint_injective",
+     "LinearInputFiniteObservation.coarse_not_injective",
+     "LinearInputFiniteObservation.f0_strict_observation",
+     "LinearInputFiniteObservation.joint",
+     "LinearInputFiniteObservation.joint_eq_iff",
+     "LinearInputFiniteObservation.joint_injective_iff",
+     "LinearInputFiniteObservation.marker",
+     "LinearInputFiniteObservation.marker_not_injective",
+     "LinearInputFiniteObservation.no_factor_of_separation",
+     "LinearInputFiniteObservation.no_single_allowed_probe",
+     "LinearInputFiniteObservation.parity_not_injective",
+     "LinearInputFiniteObservation.six_coordinate_joint_injective",
+     "LinearInputFiniteObservation.six_state_count",
+     "LinearInputFiniteObservation.strict_probe_not_invariant",
+     "LinearInputFiniteObservation.strict_refinement_witness",
+     "LinearInputFiniteObservation.ternaryCesaro",
+     "LinearInputFiniteObservation.ternaryFinal",
+     "LinearInputFiniteObservation.ternaryNonzero",
+     "LinearInputFiniteObservation.ternary_cesaro_distinct",
+     "LinearInputFiniteObservation.ternary_cesaro_not_factor",
+     "LinearInputFiniteObservation.ternary_final_constant",
+     "LinearInputFiniteObservation.ternary_not_injective",
+     "LinearInputFiniteObservation.ternary_same_evaluation_more_observation",
+     "LinearInputFiniteObservation.ternary_same_nonzero",
+     "LinearInputTernaryZero.dwellExpand",
+     "LinearInputTernaryZero.dwell_occupation_identity",
+     "LinearInputTernaryZero.filter_nonzero_preserves_sum",
+     "LinearInputTernaryZero.repeat_sum",
+     "LinearInputTernaryZero.sixCesaro",
+     "LinearInputTernaryZero.sixNumerator",
+     "LinearInputTernaryZero.six_cesaro_formula",
+     "LinearInputTernaryZero.six_cesaro_values",
+     "LinearInputTernaryZero.six_numerator_formula",
+     "LinearInputTernaryZero.ternaryBlock",
+     "LinearInputTernaryZero.ternaryPosition",
+     "LinearInputTernaryZero.ternary_block_sum",
+     "LinearInputTernaryZero.ternary_position_increases",
+     "LinearInputTernaryZero.ternary_position_mod",
+     "LinearInputTernaryZero.ternary_word_count",
+     "LinearInputTernaryZero.twoBlocks",
+     "LinearInputTernaryZero.two_blocks_nonzero",
+     "LinearInputTernaryZero.zero_placement_counterexample"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "37": {
+   "number": 37,
+   "title": "Formalize viscous state rewrites as proximal updates of polynomial E",
+   "parent_pr": null,
+   "head": "chatgpt/viscous-rewrite-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/ViscousRewrite.inc"
+   ],
+   "lexical_theorems": 14,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Viscous rewrite Lean proof and axiom audit",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Viscous rewrite Lean proof and axiom audit",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "43",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 14,
+    "new_definitions": 4,
+    "theorems_using_main_any_edge": 14,
+    "theorems_using_main_theorem_in_proof": 6,
+    "theorems_reaching_initial": 13,
+    "shapes": {
+     "composite": 9,
+     "decision_procedure_only": 2,
+     "library_only": 3
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [
+     [
+      "LinearInputVariablePairs.hasDerivAt_energy_x",
+      3
+     ],
+     [
+      "LinearInputF16UnexpectedBridges.quarter_sample",
+      2
+     ],
+     [
+      "LinearInputF16UnexpectedBridges.reflection_sample",
+      1
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputViscousRewrite.concrete_double_well_square",
+     "LinearInputViscousRewrite.dissipation",
+     "LinearInputViscousRewrite.double_well_two_proximal_branches",
+     "LinearInputViscousRewrite.dualDissipation",
+     "LinearInputViscousRewrite.dualDissipation_attained",
+     "LinearInputViscousRewrite.energy_x_derivative",
+     "LinearInputViscousRewrite.f16RotationResistance",
+     "LinearInputViscousRewrite.f16_reflection_indefinite",
+     "LinearInputViscousRewrite.f16_rotation_resistance_dissipative",
+     "LinearInputViscousRewrite.f16_rotation_resistance_work",
+     "LinearInputViscousRewrite.fenchel_young_gap",
+     "LinearInputViscousRewrite.fenchel_young_inequality",
+     "LinearInputViscousRewrite.proximalEnergy",
+     "LinearInputViscousRewrite.proximal_energy_bound",
+     "LinearInputViscousRewrite.proximal_energy_descent",
+     "LinearInputViscousRewrite.proximal_hasDerivAt",
+     "LinearInputViscousRewrite.proximal_is_parameter_shift",
+     "LinearInputViscousRewrite.viscous_force_from_global_minimum"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "38": {
+   "number": 38,
+   "title": "General rewrite termination, normal forms and minimum identifying probes",
+   "parent_pr": 36,
+   "head": "chatgpt/decomposition-identification-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/DecompositionF0Bridge.inc",
+    "linear_input/lean_check/DecompositionIdentification.inc"
+   ],
+   "lexical_theorems": 37,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 3,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Decomposition identification Lean and integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Decomposition identification Lean and integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "47",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 37,
+    "new_definitions": 15,
+    "theorems_using_main_any_edge": 26,
+    "theorems_using_main_theorem_in_proof": 8,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "decision_procedure_only": 6,
+     "library_only": 13,
+     "composite": 15,
+     "application_of_earlier_theorem": 3
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [
+     [
+      "LinearInputF0Merge.merge_head_to_sum",
+      4
+     ],
+     [
+      "LinearInputF0Merge.reaches_singleton",
+      4
+     ],
+     [
+      "LinearInputF0Merge.merge_card",
+      2
+     ],
+     [
+      "LinearInputF0Merge.merge_sum",
+      2
+     ],
+     [
+      "LinearInputF0Merge.merge_preserves_positive",
+      2
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputDecompositionF0Bridge.chain_is_path",
+     "LinearInputDecompositionF0Bridge.merge_decreases_card",
+     "LinearInputDecompositionF0Bridge.merge_normal_form_exists",
+     "LinearInputDecompositionF0Bridge.merge_output_nonempty",
+     "LinearInputDecompositionF0Bridge.merge_preserves_sum",
+     "LinearInputDecompositionF0Bridge.path_preserves_nonempty",
+     "LinearInputDecompositionF0Bridge.path_preserves_positive",
+     "LinearInputDecompositionF0Bridge.positive_reaches_singleton",
+     "LinearInputDecompositionF0Bridge.positive_terminal_is_singleton",
+     "LinearInputDecompositionF0Bridge.positive_terminal_value_identifies",
+     "LinearInputDecompositionF0Bridge.positive_unique_normal_form",
+     "LinearInputDecompositionF0Bridge.singleton_terminal",
+     "LinearInputDecompositionIdentification.IdentifiesTerminals",
+     "LinearInputDecompositionIdentification.IdentifiesWith",
+     "LinearInputDecompositionIdentification.Steps",
+     "LinearInputDecompositionIdentification.Terminal",
+     "LinearInputDecompositionIdentification.TerminalValueInjective",
+     "LinearInputDecompositionIdentification.allowedProbe",
+     "LinearInputDecompositionIdentification.branchProbe",
+     "LinearInputDecompositionIdentification.branchRank",
+     "LinearInputDecompositionIdentification.branchStep",
+     "LinearInputDecompositionIdentification.branchValue",
+     "LinearInputDecompositionIdentification.branch_nonconfluent",
+     "LinearInputDecompositionIdentification.branch_probe_identifies",
+     "LinearInputDecompositionIdentification.branch_rank_decreases",
+     "LinearInputDecompositionIdentification.branch_root_reaches_one",
+     "LinearInputDecompositionIdentification.branch_root_reaches_two",
+     "LinearInputDecompositionIdentification.branch_step_preserves",
+     "LinearInputDecompositionIdentification.branch_terminal_one",
+     "LinearInputDecompositionIdentification.branch_terminal_two",
+     "LinearInputDecompositionIdentification.branch_terminates",
+     "LinearInputDecompositionIdentification.branch_value_not_identifying",
+     "LinearInputDecompositionIdentification.countFour",
+     "LinearInputDecompositionIdentification.evaluateFactors",
+     "LinearInputDecompositionIdentification.factorsFourNine",
+     "LinearInputDecompositionIdentification.factorsSixSix",
+     "LinearInputDecompositionIdentification.generatorValue",
+     "LinearInputDecompositionIdentification.generator_collision",
+     "LinearInputDecompositionIdentification.identifies_with_iff_hits_collisions",
+     "LinearInputDecompositionIdentification.identifies_with_mono",
+     "LinearInputDecompositionIdentification.joint_identifies_terminals_iff",
+     "LinearInputDecompositionIdentification.normal_forms_unique_of_value",
+     "LinearInputDecompositionIdentification.one_probe_is_minimal",
+     "LinearInputDecompositionIdentification.one_probe_suffices",
+     "LinearInputDecompositionIdentification.same_final_of_invariant_probe",
+     "LinearInputDecompositionIdentification.steps_preserve",
+     "LinearInputDecompositionIdentification.steps_trans",
+     "LinearInputDecompositionIdentification.terminal_path_eq",
+     "LinearInputDecompositionIdentification.terminal_value_injective_of_common_ancestor",
+     "LinearInputDecompositionIdentification.terminating_normal_form",
+     "LinearInputDecompositionIdentification.zero_extra_probes_iff",
+     "LinearInputDecompositionIdentification.zero_probes_insufficient"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "39": {
+   "number": 39,
+   "title": "Connect prime factorization to minimal observation and normal-form uniqueness",
+   "parent_pr": 38,
+   "head": "chatgpt/prime-factor-identification-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/PrimeFactorIdentification.inc",
+    "linear_input/lean_check/PrimeSplitNormalForm.inc"
+   ],
+   "lexical_theorems": 27,
+   "non_lean_changes": {
+    ".github": 3,
+    "docs": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Positive integer prime factor identification Lean verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "47",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 27,
+    "new_definitions": 10,
+    "theorems_using_main_any_edge": 3,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 14,
+     "decision_procedure_only": 2,
+     "library_only": 7,
+     "application_of_earlier_theorem": 4
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputPrimeFactorIdentification.composite_generators_not_identified",
+     "LinearInputPrimeFactorIdentification.evaluatePrimeWord",
+     "LinearInputPrimeFactorIdentification.evaluatePrimeWord_injective",
+     "LinearInputPrimeFactorIdentification.evaluate_after_factor",
+     "LinearInputPrimeFactorIdentification.evaluate_union",
+     "LinearInputPrimeFactorIdentification.factor_after_evaluate",
+     "LinearInputPrimeFactorIdentification.factor_product",
+     "LinearInputPrimeFactorIdentification.natural_prime_multiset_injective",
+     "LinearInputPrimeFactorIdentification.normalized_step_is_identity",
+     "LinearInputPrimeFactorIdentification.primeNormalForm",
+     "LinearInputPrimeFactorIdentification.primeNormalForm_injective",
+     "LinearInputPrimeFactorIdentification.primeWordEquiv",
+     "LinearInputPrimeFactorIdentification.prime_normal_form_unique",
+     "LinearInputPrimeFactorIdentification.prime_terminal_value_injective",
+     "LinearInputPrimeFactorIdentification.prime_zero_extra_probes",
+     "LinearInputPrimeSplitNormalForm.Admissible",
+     "LinearInputPrimeSplitNormalForm.FactorSplit",
+     "LinearInputPrimeSplitNormalForm.FactorWord",
+     "LinearInputPrimeSplitNormalForm.SplitChain",
+     "LinearInputPrimeSplitNormalForm.SplitStep",
+     "LinearInputPrimeSplitNormalForm.admissible_split_terminates",
+     "LinearInputPrimeSplitNormalForm.admissible_terminal_iff_prime",
+     "LinearInputPrimeSplitNormalForm.factorWordValue",
+     "LinearInputPrimeSplitNormalForm.factor_split_preserves_value",
+     "LinearInputPrimeSplitNormalForm.reachable_prime_normal_form",
+     "LinearInputPrimeSplitNormalForm.singleton_split_chain_count",
+     "LinearInputPrimeSplitNormalForm.splitRank",
+     "LinearInputPrimeSplitNormalForm.split_chain_count",
+     "LinearInputPrimeSplitNormalForm.split_increases_count",
+     "LinearInputPrimeSplitNormalForm.split_preserves_admissible",
+     "LinearInputPrimeSplitNormalForm.split_preserves_product",
+     "LinearInputPrimeSplitNormalForm.split_rank_decreases",
+     "LinearInputPrimeSplitNormalForm.split_terminal_iff_all_prime",
+     "LinearInputPrimeSplitNormalForm.split_terminates_raw",
+     "LinearInputPrimeSplitNormalForm.terminal_factor_word_value_injective",
+     "LinearInputPrimeSplitNormalForm.terminal_factor_words_unique",
+     "LinearInputPrimeSplitNormalForm.terminal_words_zero_extra_probes"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "40": {
+   "number": 40,
+   "title": "Formalize a four-phase Rim observation decoder and signed local gauges",
+   "parent_pr": null,
+   "head": "chatgpt/rim-observability-fourchannel-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/RimObservability.inc"
+   ],
+   "lexical_theorems": 6,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tools": 3
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "40",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 6,
+    "new_definitions": 8,
+    "theorems_using_main_any_edge": 3,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 3,
+    "shapes": {
+     "library_only": 5,
+     "composite": 1
+    },
+    "max_proof_depth": 1,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputRimObservability.LocalState",
+     "LinearInputRimObservability.decode4",
+     "LinearInputRimObservability.decode4_trace4",
+     "LinearInputRimObservability.observe",
+     "LinearInputRimObservability.reflection_sign_gauge",
+     "LinearInputRimObservability.rotation_sign_gauge",
+     "LinearInputRimObservability.signGauge",
+     "LinearInputRimObservability.signedStep",
+     "LinearInputRimObservability.step",
+     "LinearInputRimObservability.step_four",
+     "LinearInputRimObservability.trace3",
+     "LinearInputRimObservability.trace3_not_injective",
+     "LinearInputRimObservability.trace4",
+     "LinearInputRimObservability.trace4_injective"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "41": {
+   "number": 41,
+   "title": "Derive symmetric interaction cocycles and a Newtonian gravity specialization",
+   "parent_pr": 37,
+   "head": "chatgpt/gravity-cocycle-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/GravityCocycle.inc"
+   ],
+   "lexical_theorems": 16,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 3,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Gravity cocycle isolated Lean check",
+     "conclusion": "success"
+    },
+    {
+     "name": "Viscous rewrite Lean proof and axiom audit",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravity cocycle isolated Lean check",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravity cocycle isolated Lean check",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "43",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 16,
+    "new_definitions": 4,
+    "theorems_using_main_any_edge": 3,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 3,
+    "shapes": {
+     "composite": 8,
+     "library_only": 8
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputGravityCocycle.crossEnergy",
+     "LinearInputGravityCocycle.cross_cocycle",
+     "LinearInputGravityCocycle.cross_empty_left",
+     "LinearInputGravityCocycle.cross_empty_right",
+     "LinearInputGravityCocycle.cross_is_coboundary",
+     "LinearInputGravityCocycle.cross_symmetric",
+     "LinearInputGravityCocycle.cross_union_left",
+     "LinearInputGravityCocycle.cross_union_right",
+     "LinearInputGravityCocycle.internalEnergy",
+     "LinearInputGravityCocycle.internal_union",
+     "LinearInputGravityCocycle.linePotential",
+     "LinearInputGravityCocycle.line_force_attractive",
+     "LinearInputGravityCocycle.line_force_inverse_square",
+     "LinearInputGravityCocycle.line_potential_derivative",
+     "LinearInputGravityCocycle.mass_only_merger_loses_external_potential",
+     "LinearInputGravityCocycle.newtonKernel",
+     "LinearInputGravityCocycle.newton_cross_cocycle",
+     "LinearInputGravityCocycle.newton_cross_is_coboundary",
+     "LinearInputGravityCocycle.newton_cross_symmetric",
+     "LinearInputGravityCocycle.newton_kernel_symmetric"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "42": {
+   "number": 42,
+   "title": "Classify factor identification modulo associates and exhibit a nonunique 4–6–9 monoid",
+   "parent_pr": 39,
+   "head": "chatgpt/associates-unique-factorization-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/AssociatesFactorIdentification.inc",
+    "linear_input/lean_check/GeneratedNonUniqueMonoid.inc"
+   ],
+   "lexical_theorems": 31,
+   "non_lean_changes": {
+    ".github": 4,
+    "docs": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Associates and actual nonunique monoid Lean verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Associates and actual nonunique monoid Lean verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "47",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 31,
+    "new_definitions": 19,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 11,
+     "decision_procedure_only": 2,
+     "composite": 18
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputAssociatesFactorIdentification.AssociatedWords",
+     "LinearInputAssociatesFactorIdentification.AtomicWord",
+     "LinearInputAssociatesFactorIdentification.IdentifiesWithUnits",
+     "LinearInputAssociatesFactorIdentification.ProductIdentifiesAtoms",
+     "LinearInputAssociatesFactorIdentification.associates_quotient_forgets_units",
+     "LinearInputAssociatesFactorIdentification.collision_requires_nonempty_observation",
+     "LinearInputAssociatesFactorIdentification.evaluation",
+     "LinearInputAssociatesFactorIdentification.probes_mono",
+     "LinearInputAssociatesFactorIdentification.steps_preserve_associated",
+     "LinearInputAssociatesFactorIdentification.ufm_iff_product_identifies_of_exists",
+     "LinearInputAssociatesFactorIdentification.ufm_irreducible_iff_prime",
+     "LinearInputAssociatesFactorIdentification.ufm_product_identifies",
+     "LinearInputAssociatesFactorIdentification.ufm_terminal_paths_agree",
+     "LinearInputAssociatesFactorIdentification.ufm_zero_extra_probes",
+     "LinearInputAssociatesFactorIdentification.unit_multiple_associated",
+     "LinearInputAssociatesFactorIdentification.zero_probes_iff_product_identifies",
+     "LinearInputGeneratedNonUnique.Atomic",
+     "LinearInputGeneratedNonUnique.Divides",
+     "LinearInputGeneratedNonUnique.G",
+     "LinearInputGeneratedNonUnique.Primal",
+     "LinearInputGeneratedNonUnique.actual_nonunique_factor_words",
+     "LinearInputGeneratedNonUnique.candidate",
+     "LinearInputGeneratedNonUnique.candidateProduct",
+     "LinearInputGeneratedNonUnique.candidate_product_not_injective",
+     "LinearInputGeneratedNonUnique.four",
+     "LinearInputGeneratedNonUnique.four_atomic",
+     "LinearInputGeneratedNonUnique.four_nine_eq_six_six",
+     "LinearInputGeneratedNonUnique.generated",
+     "LinearInputGeneratedNonUnique.generated_left_cancellation",
+     "LinearInputGeneratedNonUnique.generatorSet",
+     "LinearInputGeneratedNonUnique.member_positive",
+     "LinearInputGeneratedNonUnique.nine",
+     "LinearInputGeneratedNonUnique.nine_atomic",
+     "LinearInputGeneratedNonUnique.nonunique_atomic_factorization",
+     "LinearInputGeneratedNonUnique.one_extra_probe_on_two_words",
+     "LinearInputGeneratedNonUnique.one_or_at_least_four",
+     "LinearInputGeneratedNonUnique.probeFour",
+     "LinearInputGeneratedNonUnique.probe_four_injective",
+     "LinearInputGeneratedNonUnique.six",
+     "LinearInputGeneratedNonUnique.six_atomic",
+     "LinearInputGeneratedNonUnique.six_dvd_four_times_nine",
+     "LinearInputGeneratedNonUnique.six_not_dvd_four",
+     "LinearInputGeneratedNonUnique.six_not_dvd_nine",
+     "LinearInputGeneratedNonUnique.six_not_primal",
+     "LinearInputGeneratedNonUnique.small_is_atomic",
+     "LinearInputGeneratedNonUnique.word49",
+     "LinearInputGeneratedNonUnique.word66",
+     "LinearInputGeneratedNonUnique.word_lengths_equal",
+     "LinearInputGeneratedNonUnique.word_products_collide",
+     "LinearInputGeneratedNonUnique.words_distinct"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "43": {
+   "number": 43,
+   "title": "Formalize the minimal F0 quotient for symmetric gravitational potential observations",
+   "parent_pr": 41,
+   "head": "chatgpt/gravity-observer-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/GravityObserver.inc"
+   ],
+   "lexical_theorems": 15,
+   "non_lean_changes": {
+    ".github": 3,
+    "docs": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Viscous rewrite Lean proof and axiom audit",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravitational F0 observer proof and full audit",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravitational F0 observer proof and full audit",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "43",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 15,
+    "new_definitions": 3,
+    "theorems_using_main_any_edge": 2,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 9,
+     "library_only": 5,
+     "application_of_earlier_theorem": 1
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputGravityObserver.massOnly",
+     "LinearInputGravityObserver.massOnly_idempotent",
+     "LinearInputGravityObserver.no_massOnly_factorization",
+     "LinearInputGravityObserver.pairProbe",
+     "LinearInputGravityObserver.pairProbe_denom_pos",
+     "LinearInputGravityObserver.pairProbe_eq_iff_reflection",
+     "LinearInputGravityObserver.pairProbe_even",
+     "LinearInputGravityObserver.pairProbe_injective_nonneg",
+     "LinearInputGravityObserver.pairProbe_massOnly_counterexample",
+     "LinearInputGravityObserver.pairProbe_quadrupole_identity",
+     "LinearInputGravityObserver.pairProbe_quadrupole_positive",
+     "LinearInputGravityObserver.pairProbe_rational",
+     "LinearInputGravityObserver.pairProbe_reflection",
+     "LinearInputGravityObserver.pairProbe_respects_reflection",
+     "LinearInputGravityObserver.pairProbe_two_term_expansion",
+     "LinearInputGravityObserver.pairProbe_zero",
+     "LinearInputGravityObserver.reflectionForget",
+     "LinearInputGravityObserver.reflectionForget_idempotent"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "44": {
+   "number": 44,
+   "title": "Formalize gravitational F0 observation descent and exact moment hierarchy",
+   "parent_pr": 41,
+   "head": "chatgpt/gravity-observation-moments-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/GravityObservation.inc"
+   ],
+   "lexical_theorems": 14,
+   "non_lean_changes": {
+    ".github": 3,
+    "docs": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Viscous rewrite Lean proof and axiom audit",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravity observation moments Lean and full integration",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravity observation moments Lean and full integration",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "44",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 14,
+    "new_definitions": 5,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "decision_procedure_only": 3,
+     "library_only": 8,
+     "composite": 3
+    },
+    "max_proof_depth": 1,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputGravityObservation.ObservableThrough",
+     "LinearInputGravityObservation.externalObservation",
+     "LinearInputGravityObservation.external_observation_moments_three",
+     "LinearInputGravityObservation.forgetSeparation",
+     "LinearInputGravityObservation.forget_separation_idempotent",
+     "LinearInputGravityObservation.gravity_observation_not_mass_only",
+     "LinearInputGravityObservation.inverse_distance_exact_three",
+     "LinearInputGravityObservation.matching_moments_leave_remainder",
+     "LinearInputGravityObservation.moment",
+     "LinearInputGravityObservation.moment_one",
+     "LinearInputGravityObservation.moment_two",
+     "LinearInputGravityObservation.moment_zero",
+     "LinearInputGravityObservation.observable_through_iff_fibers",
+     "LinearInputGravityObservation.symmetricPairMoment",
+     "LinearInputGravityObservation.symmetric_pair_field_difference",
+     "LinearInputGravityObservation.symmetric_pair_field_strictly_larger",
+     "LinearInputGravityObservation.symmetric_pair_moment_one",
+     "LinearInputGravityObservation.symmetric_pair_moment_two",
+     "LinearInputGravityObservation.symmetric_pair_moment_zero"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "45": {
+   "number": 45,
+   "title": "Formalize gravity observation descent and second-moment recovery under F0 forgetting",
+   "parent_pr": 41,
+   "head": "chatgpt/gravity-cocycle-observations-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/GravityObservations.inc"
+   ],
+   "lexical_theorems": 14,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 3,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Gravity cocycle isolated Lean check",
+     "conclusion": "failure"
+    },
+    {
+     "name": "Viscous rewrite Lean proof and axiom audit",
+     "conclusion": "failure"
+    },
+    {
+     "name": "Gravity cocycle isolated Lean check",
+     "conclusion": "failure"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "46": {
+   "number": 46,
+   "title": "Prove half-factorial lengths and exact one-probe identification for all 4–6–9 generator words",
+   "parent_pr": 42,
+   "head": "chatgpt/half-factorial-probe-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/AtomicGeneratorClassification.inc",
+    "linear_input/lean_check/AtomicHalfFactorial.inc",
+    "linear_input/lean_check/AtomicWordProbe.inc",
+    "linear_input/lean_check/HalfFactorialIdentification.inc"
+   ],
+   "lexical_theorems": 26,
+   "non_lean_changes": {
+    ".github": 5,
+    "docs": 6,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Half-factorial 4-6-9 monoid and minimum one-probe Lean verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Half-factorial 4-6-9 monoid and minimum one-probe Lean verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "47",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 26,
+    "new_definitions": 16,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "decision_procedure_only": 2,
+     "composite": 17,
+     "library_only": 7
+    },
+    "max_proof_depth": 6,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputAtomicGeneratorClassification.atom_iff_three_generators",
+     "LinearInputAtomicGeneratorClassification.atom_is_generator",
+     "LinearInputAtomicHalfFactorial.all_atomic_factorizations_same_length",
+     "LinearInputAtomicHalfFactorial.atomic_multiset_weight",
+     "LinearInputAtomicHalfFactorial.atomic_weight_two",
+     "LinearInputAtomicWordProbe.atomic_word_has_counts",
+     "LinearInputAtomicWordProbe.exactly_one_extra_probe_for_all_atomic_words",
+     "LinearInputAtomicWordProbe.generatorWord",
+     "LinearInputAtomicWordProbe.generatorWord_length",
+     "LinearInputAtomicWordProbe.generatorWord_product",
+     "LinearInputAtomicWordProbe.generatorWord_six_count",
+     "LinearInputAtomicWordProbe.product_alone_does_not_identify_all_atomic_words",
+     "LinearInputAtomicWordProbe.product_and_six_identifies_all_atomic_words",
+     "LinearInputHalfFactorial.Counts",
+     "LinearInputHalfFactorial.Counts.c4",
+     "LinearInputHalfFactorial.Counts.c6",
+     "LinearInputHalfFactorial.Counts.c9",
+     "LinearInputHalfFactorial.actual_G_same_length",
+     "LinearInputHalfFactorial.actual_G_value_and_six_injective",
+     "LinearInputHalfFactorial.collision_example",
+     "LinearInputHalfFactorial.countSix",
+     "LinearInputHalfFactorial.every_element_has_generator_counts",
+     "LinearInputHalfFactorial.factorization_three",
+     "LinearInputHalfFactorial.factorization_two",
+     "LinearInputHalfFactorial.instDecidableEqCounts",
+     "LinearInputHalfFactorial.instDecidableEqCounts.decEq",
+     "LinearInputHalfFactorial.instReprCounts",
+     "LinearInputHalfFactorial.instReprCounts.repr",
+     "LinearInputHalfFactorial.length",
+     "LinearInputHalfFactorial.one_probe_necessary_and_sufficient",
+     "LinearInputHalfFactorial.same_value_same_length",
+     "LinearInputHalfFactorial.same_value_same_signature",
+     "LinearInputHalfFactorial.signature",
+     "LinearInputHalfFactorial.value",
+     "LinearInputHalfFactorial.valueInG",
+     "LinearInputHalfFactorial.valueInG_val",
+     "LinearInputHalfFactorial.value_and_six_injective",
+     "LinearInputHalfFactorial.value_as_prime_powers",
+     "LinearInputHalfFactorial.value_factorization_three",
+     "LinearInputHalfFactorial.value_factorization_two",
+     "LinearInputHalfFactorial.word49",
+     "LinearInputHalfFactorial.word66"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "47": {
+   "number": 47,
+   "title": "Show the single relation 4·9 ↔ 6² generates every factorization collision",
+   "parent_pr": 46,
+   "head": "chatgpt/single-swap-fiber-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/SingleSwapFiber.inc"
+   ],
+   "lexical_theorems": 10,
+   "non_lean_changes": {
+    ".github": 6,
+    "docs": 6,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "One-swap generator fiber connectivity proof",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "One-swap generator fiber connectivity proof",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "47",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 10,
+    "new_definitions": 1,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 4,
+     "application_of_earlier_theorem": 2,
+     "decision_procedure_only": 4
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputSingleSwapFiber.Swap",
+     "LinearInputSingleSwapFiber.all_equal_products_connected",
+     "LinearInputSingleSwapFiber.equal_product_terminal_unique",
+     "LinearInputSingleSwapFiber.k_swaps",
+     "LinearInputSingleSwapFiber.same_value_parametric",
+     "LinearInputSingleSwapFiber.swap_decreases_four",
+     "LinearInputSingleSwapFiber.swap_preserves_length",
+     "LinearInputSingleSwapFiber.swap_preserves_value",
+     "LinearInputSingleSwapFiber.swap_signature",
+     "LinearInputSingleSwapFiber.swap_terminal_iff",
+     "LinearInputSingleSwapFiber.swap_terminates"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "48": {
+   "number": 48,
+   "title": "Lean proof of exact 16D F16 four-phase recovery",
+   "parent_pr": null,
+   "head": "codex/f16-rim-lean-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/F16RimRecovery.inc"
+   ],
+   "lexical_theorems": 73,
+   "non_lean_changes": {
+    "docs": 1,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "48",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 73,
+    "new_definitions": 26,
+    "theorems_using_main_any_edge": 63,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 31,
+    "shapes": {
+     "composite": 54,
+     "library_only": 7,
+     "decision_procedure_only": 12
+    },
+    "max_proof_depth": 8,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputF16RimRecovery.Channel",
+     "LinearInputF16RimRecovery.State",
+     "LinearInputF16RimRecovery.f16Base",
+     "LinearInputF16RimRecovery.f16Base_eq_three",
+     "LinearInputF16RimRecovery.f16Base_inv_eq_transpose",
+     "LinearInputF16RimRecovery.f16Base_transpose_mul_base_eq_one",
+     "LinearInputF16RimRecovery.f16BasisMatrix",
+     "LinearInputF16RimRecovery.f16BasisMatrix_three_transpose_mul",
+     "LinearInputF16RimRecovery.f16Basis_mulVec",
+     "LinearInputF16RimRecovery.f16Basis_transpose_mulVec",
+     "LinearInputF16RimRecovery.f16ChannelHigh",
+     "LinearInputF16RimRecovery.f16ChannelLow",
+     "LinearInputF16RimRecovery.f16ChannelOf",
+     "LinearInputF16RimRecovery.f16Decode",
+     "LinearInputF16RimRecovery.f16Eps_three_self_mul",
+     "LinearInputF16RimRecovery.f16Eps_three_self_mul_real",
+     "LinearInputF16RimRecovery.f16Fin10_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin11_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin12_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin13_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin14_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin15_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin8_eq_constructor",
+     "LinearInputF16RimRecovery.f16Fin9_eq_constructor",
+     "LinearInputF16RimRecovery.f16MatrixOrbitState",
+     "LinearInputF16RimRecovery.f16MatrixOrbitState_eq_f16OrbitState",
+     "LinearInputF16RimRecovery.f16MatrixTrace4",
+     "LinearInputF16RimRecovery.f16MatrixTrace4_eq_f16Trace4",
+     "LinearInputF16RimRecovery.f16Observe",
+     "LinearInputF16RimRecovery.f16ObserveChecker",
+     "LinearInputF16RimRecovery.f16Observe_checker_row0",
+     "LinearInputF16RimRecovery.f16Observe_checker_row1",
+     "LinearInputF16RimRecovery.f16Observe_checker_row2",
+     "LinearInputF16RimRecovery.f16Observe_checker_row3",
+     "LinearInputF16RimRecovery.f16Observe_eq_checker",
+     "LinearInputF16RimRecovery.f16Observe_step",
+     "LinearInputF16RimRecovery.f16Observe_step2",
+     "LinearInputF16RimRecovery.f16Observe_step2_threeWitness_zero",
+     "LinearInputF16RimRecovery.f16Observe_step2_zero",
+     "LinearInputF16RimRecovery.f16Observe_step3",
+     "LinearInputF16RimRecovery.f16Observe_step_threeWitness_zero",
+     "LinearInputF16RimRecovery.f16Observe_step_zero",
+     "LinearInputF16RimRecovery.f16Observe_threeWitness_zero",
+     "LinearInputF16RimRecovery.f16Observe_zero",
+     "LinearInputF16RimRecovery.f16OrbitState",
+     "LinearInputF16RimRecovery.f16Partner",
+     "LinearInputF16RimRecovery.f16PartnerCode",
+     "LinearInputF16RimRecovery.f16Partner_eq_code",
+     "LinearInputF16RimRecovery.f16Partner_involutive",
+     "LinearInputF16RimRecovery.f16RelativeMatrix",
+     "LinearInputF16RimRecovery.f16RelativeMatrix_eq_checker_inverse",
+     "LinearInputF16RimRecovery.f16RightIndex_involutive",
+     "LinearInputF16RimRecovery.f16RightIndex_ten_three",
+     "LinearInputF16RimRecovery.f16Sign",
+     "LinearInputF16RimRecovery.f16SignR",
+     "LinearInputF16RimRecovery.f16SignR_cancel_left",
+     "LinearInputF16RimRecovery.f16SignR_cancel_partner_high",
+     "LinearInputF16RimRecovery.f16SignR_cancel_partner_low",
+     "LinearInputF16RimRecovery.f16SignR_cancel_right",
+     "LinearInputF16RimRecovery.f16SignR_cancel_self",
+     "LinearInputF16RimRecovery.f16SignR_partner_high",
+     "LinearInputF16RimRecovery.f16SignR_partner_low",
+     "LinearInputF16RimRecovery.f16SignR_self_mul",
+     "LinearInputF16RimRecovery.f16Sign_partner_high_int",
+     "LinearInputF16RimRecovery.f16Sign_partner_low_int",
+     "LinearInputF16RimRecovery.f16Sign_self_mul_int",
+     "LinearInputF16RimRecovery.f16Slope",
+     "LinearInputF16RimRecovery.f16Slope_eq_ten",
+     "LinearInputF16RimRecovery.f16Step",
+     "LinearInputF16RimRecovery.f16Step_thrice_at_partner",
+     "LinearInputF16RimRecovery.f16Step_twice",
+     "LinearInputF16RimRecovery.f16Step_twice_at_partner",
+     "LinearInputF16RimRecovery.f16ThreePhaseWitness",
+     "LinearInputF16RimRecovery.f16ThreePhaseWitness_channel_pair",
+     "LinearInputF16RimRecovery.f16ThreePhaseWitness_partner_high_zero",
+     "LinearInputF16RimRecovery.f16ThreePhaseWitness_partner_low_zero",
+     "LinearInputF16RimRecovery.f16Trace1",
+     "LinearInputF16RimRecovery.f16Trace2",
+     "LinearInputF16RimRecovery.f16Trace3",
+     "LinearInputF16RimRecovery.f16Trace4",
+     "LinearInputF16RimRecovery.f16Trace4_phase0",
+     "LinearInputF16RimRecovery.f16Trace4_phase1",
+     "LinearInputF16RimRecovery.f16Trace4_phase2",
+     "LinearInputF16RimRecovery.f16Trace4_phase3",
+     "LinearInputF16RimRecovery.f16Trace4_value1",
+     "LinearInputF16RimRecovery.f16Trace4_value2",
+     "LinearInputF16RimRecovery.f16Trace4_value3",
+     "LinearInputF16RimRecovery.f16Zero",
+     "LinearInputF16RimRecovery.f16_decode_four_trace",
+     "LinearInputF16RimRecovery.f16_decode_original_matrix_trace",
+     "LinearInputF16RimRecovery.f16_four_phase_injective",
+     "LinearInputF16RimRecovery.f16_one_phase_collision",
+     "LinearInputF16RimRecovery.f16_one_phase_not_injective",
+     "LinearInputF16RimRecovery.f16_relative_action",
+     "LinearInputF16RimRecovery.f16_three_phase_collision",
+     "LinearInputF16RimRecovery.f16_three_phase_not_injective",
+     "LinearInputF16RimRecovery.f16_two_phase_collision",
+     "LinearInputF16RimRecovery.f16_two_phase_not_injective",
+     "LinearInputF16RimRecovery.f16_zero_ne_three_phase_witness"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "49": {
+   "number": 49,
+   "title": "F16: all-real Gram pseudoinverse and Penrose/Fenchel bridge (draft)",
+   "parent_pr": null,
+   "head": "chatgpt/f16-all-real-pinv-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/F16AllRealPseudoinverse.inc",
+    "linear_input/lean_check/F16FenchelAtlas.inc",
+    "linear_input/lean_check/F16FenchelFull.inc",
+    "linear_input/lean_check/F16SingularPseudoinverse.inc",
+    "linear_input/lean_check/F16SpectralProjectors.inc"
+   ],
+   "lexical_theorems": 91,
+   "non_lean_changes": {
+    "docs": 6,
+    "tools": 8
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "failure"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "50": {
+   "number": 50,
+   "title": "Finite prime-factor observation kernels and minimal probe count for 2,3,5",
+   "parent_pr": 36,
+   "head": "chatgpt/prime-factor-observation-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/PrimeFactorObservation.inc"
+   ],
+   "lexical_theorems": 21,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Finite prime-factor observation Lean probe",
+     "conclusion": "success"
+    },
+    {
+     "name": "Finite prime-factor observation Lean probe",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "53s",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 21,
+    "new_definitions": 12,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 9,
+     "library_only": 2,
+     "decision_procedure_only": 9,
+     "application_of_earlier_theorem": 1
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputPrimeFactorObservation.CanonicalPair",
+     "LinearInputPrimeFactorObservation.OrderedPair",
+     "LinearInputPrimeFactorObservation.canonical22",
+     "LinearInputPrimeFactorObservation.canonical22_ne_canonical33",
+     "LinearInputPrimeFactorObservation.canonical33",
+     "LinearInputPrimeFactorObservation.canonicalObservations",
+     "LinearInputPrimeFactorObservation.canonicalProduct",
+     "LinearInputPrimeFactorObservation.canonical_empty_not_injective",
+     "LinearInputPrimeFactorObservation.canonical_pair_count",
+     "LinearInputPrimeFactorObservation.canonical_product_injective",
+     "LinearInputPrimeFactorObservation.canonical_single_injective",
+     "LinearInputPrimeFactorObservation.empty_selection_not_injective",
+     "LinearInputPrimeFactorObservation.factorBag",
+     "LinearInputPrimeFactorObservation.fewer_than_two_not_injective",
+     "LinearInputPrimeFactorObservation.firstPrime",
+     "LinearInputPrimeFactorObservation.first_not_injective",
+     "LinearInputPrimeFactorObservation.minimal_ordered_observation_count",
+     "LinearInputPrimeFactorObservation.minimal_unordered_observation_count",
+     "LinearInputPrimeFactorObservation.no_single_probe",
+     "LinearInputPrimeFactorObservation.pairProduct",
+     "LinearInputPrimeFactorObservation.permittedProbe",
+     "LinearInputPrimeFactorObservation.primeOf",
+     "LinearInputPrimeFactorObservation.primeOf_is_prime",
+     "LinearInputPrimeFactorObservation.product_first_joint_injective",
+     "LinearInputPrimeFactorObservation.product_first_kernel",
+     "LinearInputPrimeFactorObservation.product_kernel_eq_bag_kernel",
+     "LinearInputPrimeFactorObservation.product_not_injective",
+     "LinearInputPrimeFactorObservation.selectedObservations",
+     "LinearInputPrimeFactorObservation.singleton_selection_not_injective",
+     "LinearInputPrimeFactorObservation.swapped_order_distinct",
+     "LinearInputPrimeFactorObservation.swapped_same_bag",
+     "LinearInputPrimeFactorObservation.swapped_same_product",
+     "LinearInputPrimeFactorObservation.two_selection_injective"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "51": {
+   "number": 51,
+   "title": "Prime-factor orbit kernels (S2/S3) and exact three-factor observation counts",
+   "parent_pr": 50,
+   "head": "chatgpt/prime-observation-orbits-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/PrimeFactorOrbits.inc"
+   ],
+   "lexical_theorems": 23,
+   "non_lean_changes": {
+    ".github": 3,
+    "docs": 3,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Prime factor orbit and triple observation Lean probe",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "53s",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 23,
+    "new_definitions": 14,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "decision_procedure_only": 11,
+     "composite": 9,
+     "application_of_earlier_theorem": 1,
+     "library_only": 2
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputPrimeFactorOrbits.CanonicalTriple",
+     "LinearInputPrimeFactorOrbits.OrderedTriple",
+     "LinearInputPrimeFactorOrbits.canonical222",
+     "LinearInputPrimeFactorOrbits.canonical333",
+     "LinearInputPrimeFactorOrbits.canonicalTripleObservations",
+     "LinearInputPrimeFactorOrbits.canonicalTripleProduct",
+     "LinearInputPrimeFactorOrbits.canonical_triple_count",
+     "LinearInputPrimeFactorOrbits.canonical_triple_empty_not_injective",
+     "LinearInputPrimeFactorOrbits.canonical_triple_one_injective",
+     "LinearInputPrimeFactorOrbits.canonical_triple_product_injective",
+     "LinearInputPrimeFactorOrbits.empty_triple_observations_not_injective",
+     "LinearInputPrimeFactorOrbits.fewer_than_three_not_injective",
+     "LinearInputPrimeFactorOrbits.firstTripleFactor",
+     "LinearInputPrimeFactorOrbits.minimal_ordered_triple_observations",
+     "LinearInputPrimeFactorOrbits.minimal_unordered_triple_observations",
+     "LinearInputPrimeFactorOrbits.no_two_triple_probes",
+     "LinearInputPrimeFactorOrbits.pair_bag_eq_iff_swap_orbit",
+     "LinearInputPrimeFactorOrbits.pair_joint_refines_swap_orbit",
+     "LinearInputPrimeFactorOrbits.pair_product_eq_iff_swap_orbit",
+     "LinearInputPrimeFactorOrbits.reorderTriple",
+     "LinearInputPrimeFactorOrbits.reorder_preserves_product",
+     "LinearInputPrimeFactorOrbits.secondTripleFactor",
+     "LinearInputPrimeFactorOrbits.singleton_triple_observations_not_injective",
+     "LinearInputPrimeFactorOrbits.six_permutations_count",
+     "LinearInputPrimeFactorOrbits.swapPair",
+     "LinearInputPrimeFactorOrbits.swap_pair_involutive",
+     "LinearInputPrimeFactorOrbits.three_triple_probes_injective",
+     "LinearInputPrimeFactorOrbits.tripleBag",
+     "LinearInputPrimeFactorOrbits.tripleObservations",
+     "LinearInputPrimeFactorOrbits.tripleProbe",
+     "LinearInputPrimeFactorOrbits.tripleProduct",
+     "LinearInputPrimeFactorOrbits.triple_bag_eq_iff_orbit",
+     "LinearInputPrimeFactorOrbits.triple_joint_kernel",
+     "LinearInputPrimeFactorOrbits.triple_product_eq_iff_bag",
+     "LinearInputPrimeFactorOrbits.triple_product_eq_iff_orbit",
+     "LinearInputPrimeFactorOrbits.triple_state_count",
+     "LinearInputPrimeFactorOrbits.two_triple_observations_not_injective"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "52": {
+   "number": 52,
+   "title": "F0 sorting retraction, product-kernel quotient, and adaptive observation lower bound",
+   "parent_pr": 51,
+   "head": "chatgpt/prime-factor-f0-adaptive-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/PrimeFactorF0Adaptive.inc"
+   ],
+   "lexical_theorems": 19,
+   "non_lean_changes": {
+    ".github": 4,
+    "docs": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Prime factor F0 and adaptive observations Lean probe",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "53s",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 19,
+    "new_definitions": 4,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 12,
+     "decision_procedure_only": 4,
+     "application_of_earlier_theorem": 2,
+     "library_only": 1
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputPrimeFactorF0.adaptiveTwo",
+     "LinearInputPrimeFactorF0.adaptive_three_upper_bound",
+     "LinearInputPrimeFactorF0.adaptive_two_not_injective",
+     "LinearInputPrimeFactorF0.canonicalOf",
+     "LinearInputPrimeFactorF0.canonical_of_fixed",
+     "LinearInputPrimeFactorF0.canonical_of_surjective",
+     "LinearInputPrimeFactorF0.factors_through_normalize_iff",
+     "LinearInputPrimeFactorF0.first_factor_not_recoverable_from_normalize",
+     "LinearInputPrimeFactorF0.hardFiberValue",
+     "LinearInputPrimeFactorF0.hard_fiber_second_probe_collision",
+     "LinearInputPrimeFactorF0.joint_normalize_product_same_kernel",
+     "LinearInputPrimeFactorF0.normalizeTriple",
+     "LinearInputPrimeFactorF0.normalize_fixed_iff_sorted",
+     "LinearInputPrimeFactorF0.normalize_fixed_point_count",
+     "LinearInputPrimeFactorF0.normalize_idempotent",
+     "LinearInputPrimeFactorF0.normalize_is_sorted",
+     "LinearInputPrimeFactorF0.normalize_kernel_eq_bag",
+     "LinearInputPrimeFactorF0.normalize_kernel_eq_orbit",
+     "LinearInputPrimeFactorF0.normalize_of_sorted",
+     "LinearInputPrimeFactorF0.normalize_preserves_bag",
+     "LinearInputPrimeFactorF0.normalize_preserves_product",
+     "LinearInputPrimeFactorF0.product_descends_through_normalize",
+     "LinearInputPrimeFactorF0.product_kernel_eq_normalize_kernel"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "53": {
+   "number": 53,
+   "title": "General finite-length prime-factor observation minimum and unordered-state count",
+   "parent_pr": 52,
+   "head": "chatgpt/general-prime-probe-minimality-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/PrimeFactorFiniteLength.inc"
+   ],
+   "lexical_theorems": 14,
+   "non_lean_changes": {
+    ".github": 5,
+    "docs": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "General finite prime-probe minimality Lean proof",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "53s",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 14,
+    "new_definitions": 11,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 8,
+     "library_only": 4,
+     "decision_procedure_only": 2
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputPrimeFactorFiniteLength.Prefix",
+     "LinearInputPrimeFactorFiniteLength.Probe",
+     "LinearInputPrimeFactorFiniteLength.Separates",
+     "LinearInputPrimeFactorFiniteLength.Word",
+     "LinearInputPrimeFactorFiniteLength.bumpPrefix",
+     "LinearInputPrimeFactorFiniteLength.bumped_prefix_swap_product",
+     "LinearInputPrimeFactorFiniteLength.completeCalls",
+     "LinearInputPrimeFactorFiniteLength.complete_calls_cover",
+     "LinearInputPrimeFactorFiniteLength.complete_calls_length",
+     "LinearInputPrimeFactorFiniteLength.full_library_separates",
+     "LinearInputPrimeFactorFiniteLength.minimal_distinct_probe_count",
+     "LinearInputPrimeFactorFiniteLength.minimal_list_observation_count",
+     "LinearInputPrimeFactorFiniteLength.missing_probe_witness",
+     "LinearInputPrimeFactorFiniteLength.needed_probe_of_separates",
+     "LinearInputPrimeFactorFiniteLength.others",
+     "LinearInputPrimeFactorFiniteLength.prefixProduct",
+     "LinearInputPrimeFactorFiniteLength.prefix_product_pos",
+     "LinearInputPrimeFactorFiniteLength.primeOf_injective",
+     "LinearInputPrimeFactorFiniteLength.probe",
+     "LinearInputPrimeFactorFiniteLength.probe_library_card",
+     "LinearInputPrimeFactorFiniteLength.product",
+     "LinearInputPrimeFactorFiniteLength.separates_iff_univ",
+     "LinearInputPrimeFactorFiniteLength.separating_list_length_lower_bound",
+     "LinearInputPrimeFactorFiniteLength.unordered_factor_multiset_count",
+     "LinearInputPrimeFactorFiniteLength.zeroPrefix"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "54": {
+   "number": 54,
+   "title": "Canonical F0 sorting for arbitrary finite prime lists and exact product kernels",
+   "parent_pr": 52,
+   "head": "chatgpt/general-prime-f0-normalization-20261103",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/PrimeFactorGeneralF0.inc"
+   ],
+   "lexical_theorems": 10,
+   "non_lean_changes": {
+    ".github": 5,
+    "docs": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Arbitrary finite prime-list F0 Lean proof",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "54s",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 10,
+    "new_definitions": 2,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 5,
+     "library_only": 4,
+     "decision_procedure_only": 1
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputPrimeFactorGeneralF0.AllPrime",
+     "LinearInputPrimeFactorGeneralF0.factors_through_normalize_iff",
+     "LinearInputPrimeFactorGeneralF0.normalize",
+     "LinearInputPrimeFactorGeneralF0.normalize_eq_iff_perm",
+     "LinearInputPrimeFactorGeneralF0.normalize_idempotent",
+     "LinearInputPrimeFactorGeneralF0.normalize_length",
+     "LinearInputPrimeFactorGeneralF0.normalize_multiset",
+     "LinearInputPrimeFactorGeneralF0.normalize_preserves_product",
+     "LinearInputPrimeFactorGeneralF0.normalize_sorted",
+     "LinearInputPrimeFactorGeneralF0.prime_product_eq_iff_perm",
+     "LinearInputPrimeFactorGeneralF0.prime_product_invariant_of_normalize",
+     "LinearInputPrimeFactorGeneralF0.prime_product_kernel_eq_normalize_kernel"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "58": {
+   "number": 58,
+   "title": "Scale operator calculus: 130 contextual, policy, product, reachability, sensor, F0 theorem candidates",
+   "parent_pr": null,
+   "head": "chatgpt/operator-algebra-scale-20261104",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+    "linear_input/lean_check/OperatorContextualEquivalence.inc",
+    "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+    "linear_input/lean_check/OperatorProductSystems.inc",
+    "linear_input/lean_check/OperatorReachability.inc",
+    "linear_input/lean_check/OperatorSensorFamilies.inc"
+   ],
+   "lexical_theorems": 130,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 5,
+    "tests": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "failure"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "59": {
+   "number": 59,
+   "title": "Build full semantic operator monoid and finite compatible-map counting engine",
+   "parent_pr": 58,
+   "head": "chatgpt/operator-semigroup-counting-20261104",
+   "behind_main": 56,
+   "own_files": [
+    "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+    "linear_input/lean_check/OperatorSemanticMonoid.inc"
+   ],
+   "lexical_theorems": 40,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 6,
+    "tests": 5,
+    "tools": 3
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "failure"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "failed",
+    "failed_steps": {
+     "proof_only": 1
+    },
+    "names_shared_with_other_prs": []
+   }
+  },
+  "65": {
+   "number": 65,
+   "title": "Formalize the failure of historical preservation and irreparable observation loss",
+   "parent_pr": null,
+   "head": "chatgpt/history-nonpreservation-obstruction-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/HistoryNonpreservation.inc"
+   ],
+   "lexical_theorems": 18,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 2,
+    "tests": 1,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "70",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 18,
+    "new_definitions": 14,
+    "theorems_using_main_any_edge": 9,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 9,
+     "composite": 6,
+     "decision_procedure_only": 3
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputHistoryNonpreservation.HistoryModel",
+     "LinearInputHistoryNonpreservation.HistoryModel.advance",
+     "LinearInputHistoryNonpreservation.HistoryModel.observe",
+     "LinearInputHistoryNonpreservation.PostRepairSnapshot",
+     "LinearInputHistoryNonpreservation.Preserves",
+     "LinearInputHistoryNonpreservation.SnapshotPreserves",
+     "LinearInputHistoryNonpreservation.adjoinOldHistory",
+     "LinearInputHistoryNonpreservation.adjoining_old_history_restores_embedding",
+     "LinearInputHistoryNonpreservation.expandedHistory",
+     "LinearInputHistoryNonpreservation.expandedReadout",
+     "LinearInputHistoryNonpreservation.expanded_but_not_preserved",
+     "LinearInputHistoryNonpreservation.expanded_has_more_observable_labels",
+     "LinearInputHistoryNonpreservation.expanded_has_more_states",
+     "LinearInputHistoryNonpreservation.expanded_history_irreparable_by_internal_action",
+     "LinearInputHistoryNonpreservation.expanded_history_irreparable_by_transition_rewrite",
+     "LinearInputHistoryNonpreservation.extension_can_represent_both_histories",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_all_internal_repairs",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_any_transition_rewrite",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_preservation",
+     "LinearInputHistoryNonpreservation.moving_history_cannot_embed_in_stationary_history",
+     "LinearInputHistoryNonpreservation.originalHistory",
+     "LinearInputHistoryNonpreservation.originalReadout",
+     "LinearInputHistoryNonpreservation.original_label_disappears",
+     "LinearInputHistoryNonpreservation.preserves_iff_one_step_observation_of_injective",
+     "LinearInputHistoryNonpreservation.preserves_implies_snapshot",
+     "LinearInputHistoryNonpreservation.preserves_refl",
+     "LinearInputHistoryNonpreservation.preserves_trans",
+     "LinearInputHistoryNonpreservation.snapshots_can_be_embedded",
+     "LinearInputHistoryNonpreservation.stationaryHistory",
+     "LinearInputHistoryNonpreservation.toggle",
+     "LinearInputHistoryNonpreservation.togglingHistory",
+     "LinearInputHistoryNonpreservation.toggling_history_cannot_be_preserved"
+    ],
+    "names_shared_with_other_prs": [
+     72,
+     75
+    ]
+   }
+  },
+  "66": {
+   "number": 66,
+   "title": "Temporal local-operation extinction: exact historical preservation boundary and handoff counterexample",
+   "parent_pr": 65,
+   "head": "chatgpt/temporal-local-extinction-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/TemporalLocalExtinction.inc"
+   ],
+   "lexical_theorems": 26,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 3,
+    "tests": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "70",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 26,
+    "new_definitions": 15,
+    "theorems_using_main_any_edge": 25,
+    "theorems_using_main_theorem_in_proof": 11,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 12,
+     "library_only": 10,
+     "decision_procedure_only": 2,
+     "application_of_earlier_theorem": 2
+    },
+    "max_proof_depth": 6,
+    "most_used_main_theorems": [
+     [
+      "LinearInputFiniteSelfSynthesis.chooseTarget_sound",
+      11
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputTemporalExtinction.AllExtinct",
+     "LinearInputTemporalExtinction.LocalTimeline",
+     "LinearInputTemporalExtinction.LocalTimeline.action",
+     "LinearInputTemporalExtinction.LocalTimeline.available",
+     "LinearInputTemporalExtinction.LocalTimeline.locals",
+     "LinearInputTemporalExtinction.LocalTimeline.readout",
+     "LinearInputTemporalExtinction.PreservedOn",
+     "LinearInputTemporalExtinction.chooseTarget_none_of_all_disabled",
+     "LinearInputTemporalExtinction.extinct_step_identity",
+     "LinearInputTemporalExtinction.extinction_blocks_every_local_action_rewrite",
+     "LinearInputTemporalExtinction.extinction_forces_nonpreservation",
+     "LinearInputTemporalExtinction.extinction_survives_reassignment",
+     "LinearInputTemporalExtinction.flip",
+     "LinearInputTemporalExtinction.historyAt",
+     "LinearInputTemporalExtinction.interval_with_extinct_endpoint_is_not_preserved",
+     "LinearInputTemporalExtinction.preservation_iff_old_stationary_under_extinction",
+     "LinearInputTemporalExtinction.reactivated",
+     "LinearInputTemporalExtinction.reactivated_step_two",
+     "LinearInputTemporalExtinction.reactivation_can_restore_preservation",
+     "LinearInputTemporalExtinction.reassignActions",
+     "LinearInputTemporalExtinction.recoveredAfterGap",
+     "LinearInputTemporalExtinction.recovered_endpoints_but_broken_interval",
+     "LinearInputTemporalExtinction.recovered_endpoints_preserve_history",
+     "LinearInputTemporalExtinction.recovered_interval_still_not_preserved",
+     "LinearInputTemporalExtinction.recovered_middle_extinct",
+     "LinearInputTemporalExtinction.recovered_step_three",
+     "LinearInputTemporalExtinction.recovered_step_zero",
+     "LinearInputTemporalExtinction.sample",
+     "LinearInputTemporalExtinction.sampleAvailable",
+     "LinearInputTemporalExtinction.sample_extinct_after_two",
+     "LinearInputTemporalExtinction.sample_first_local_disappears",
+     "LinearInputTemporalExtinction.sample_history_preserved_after_one_local_disappears",
+     "LinearInputTemporalExtinction.sample_no_interval_preservation",
+     "LinearInputTemporalExtinction.sample_no_local_action_rewrite_restores_history",
+     "LinearInputTemporalExtinction.sample_no_preservation_after_two",
+     "LinearInputTemporalExtinction.sample_old_history_moves",
+     "LinearInputTemporalExtinction.sample_second_local_takes_over",
+     "LinearInputTemporalExtinction.sample_snapshots_always_preserved",
+     "LinearInputTemporalExtinction.sample_step_one",
+     "LinearInputTemporalExtinction.sample_step_zero",
+     "LinearInputTemporalExtinction.stepAt"
+    ],
+    "names_shared_with_other_prs": [
+     72,
+     75
+    ]
+   }
+  },
+  "67": {
+   "number": 67,
+   "title": "Derive local operation extinction from finite capacity and simultaneous incompatible demands",
+   "parent_pr": 66,
+   "head": "chatgpt/local-capacity-incompatibility-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/LocalCapacityIncompatibility.inc"
+   ],
+   "lexical_theorems": 20,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 4,
+    "tests": 3,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "70",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 20,
+    "new_definitions": 9,
+    "theorems_using_main_any_edge": 10,
+    "theorems_using_main_theorem_in_proof": 3,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "decision_procedure_only": 7,
+     "composite": 6,
+     "application_of_earlier_theorem": 3,
+     "library_only": 4
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [
+     [
+      "LinearInputFiniteSelfSynthesis.chooseTarget_sound",
+      3
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputCapacityExtinction.Covers",
+     "LinearInputCapacityExtinction.allSupported",
+     "LinearInputCapacityExtinction.allSupported_iff_covers",
+     "LinearInputCapacityExtinction.bool_and_true_iff",
+     "LinearInputCapacityExtinction.bounded_capacity_blocks_global_cover",
+     "LinearInputCapacityExtinction.bounded_capacity_disables_each_local",
+     "LinearInputCapacityExtinction.capacityTimeline",
+     "LinearInputCapacityExtinction.capacity_overload_forces_history_loss",
+     "LinearInputCapacityExtinction.capacity_overload_forces_total_extinction",
+     "LinearInputCapacityExtinction.coverage_antitone",
+     "LinearInputCapacityExtinction.finite_actions_do_not_commute",
+     "LinearInputCapacityExtinction.increasingDemands",
+     "LinearInputCapacityExtinction.noncoverage_persists_under_demand_growth",
+     "LinearInputCapacityExtinction.overload_causes_interval_failure",
+     "LinearInputCapacityExtinction.overload_causes_nonpreservation",
+     "LinearInputCapacityExtinction.overload_initially_operates",
+     "LinearInputCapacityExtinction.overload_later_every_local_extinct",
+     "LinearInputCapacityExtinction.overload_old_history_moves",
+     "LinearInputCapacityExtinction.overloadedTimeline",
+     "LinearInputCapacityExtinction.overloaded_snapshots_survive",
+     "LinearInputCapacityExtinction.permanentTimeline",
+     "LinearInputCapacityExtinction.permanent_has_available_local",
+     "LinearInputCapacityExtinction.permanent_history_is_preserved",
+     "LinearInputCapacityExtinction.supportsOthers",
+     "LinearInputCapacityExtinction.supportsOthers_exact_capacity",
+     "LinearInputCapacityExtinction.supportsOthers_no_global_cover",
+     "LinearInputCapacityExtinction.supportsOthers_pairwise_cover",
+     "LinearInputCapacityExtinction.swap01",
+     "LinearInputCapacityExtinction.swap12"
+    ],
+    "names_shared_with_other_prs": [
+     72,
+     75
+    ]
+   }
+  },
+  "69": {
+   "number": 69,
+   "title": "Cooperative local operators: collective coverage without global gluing and derived history loss",
+   "parent_pr": 67,
+   "head": "chatgpt/cooperative-gluing-obstruction-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/CooperativeGluingObstruction.inc"
+   ],
+   "lexical_theorems": 20,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 5,
+    "tests": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "70",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 20,
+    "new_definitions": 8,
+    "theorems_using_main_any_edge": 19,
+    "theorems_using_main_theorem_in_proof": 6,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 7,
+     "composite": 7,
+     "application_of_earlier_theorem": 3,
+     "decision_procedure_only": 3
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [
+     [
+      "LinearInputFiniteSelfSynthesis.chooseTarget_sound",
+      4
+     ],
+     [
+      "LinearInputSemanticIntervals.invariant_old_word",
+      2
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputCooperativeGluing.CollectiveCoverage",
+     "LinearInputCooperativeGluing.GoalFlag",
+     "LinearInputCooperativeGluing.JointGoal",
+     "LinearInputCooperativeGluing.JointlyReachable",
+     "LinearInputCooperativeGluing.Meets",
+     "LinearInputCooperativeGluing.collective_coverage_does_not_glue",
+     "LinearInputCooperativeGluing.cumulative",
+     "LinearInputCooperativeGluing.cumulative_jointly_reachable",
+     "LinearInputCooperativeGluing.cumulative_later_not_totally_extinct",
+     "LinearInputCooperativeGluing.cumulative_primitives_commute",
+     "LinearInputCooperativeGluing.cumulative_two_steps_reach_joint_goal",
+     "LinearInputCooperativeGluing.cumulative_valid_two_time_steps",
+     "LinearInputCooperativeGluing.destructive",
+     "LinearInputCooperativeGluing.destructive_every_primitive_misses_goal",
+     "LinearInputCooperativeGluing.destructive_history_not_preserved",
+     "LinearInputCooperativeGluing.destructive_individual_coverage",
+     "LinearInputCooperativeGluing.destructive_initially_moves",
+     "LinearInputCooperativeGluing.destructive_interval_not_preserved",
+     "LinearInputCooperativeGluing.destructive_later_extinct",
+     "LinearInputCooperativeGluing.destructive_no_action_rewrite_repairs_history",
+     "LinearInputCooperativeGluing.destructive_no_joint_word",
+     "LinearInputCooperativeGluing.destructive_noncommuting",
+     "LinearInputCooperativeGluing.destructive_old_invariant",
+     "LinearInputCooperativeGluing.destructive_snapshots_still_preserved",
+     "LinearInputCooperativeGluing.gatedTimeline",
+     "LinearInputCooperativeGluing.gated_extinction_iff_no_joint_action",
+     "LinearInputCooperativeGluing.goalFlag_false_iff_not_joint",
+     "LinearInputCooperativeGluing.goal_incompatibility_forces_history_loss"
+    ],
+    "names_shared_with_other_prs": [
+     72,
+     75
+    ]
+   }
+  },
+  "70": {
+   "number": 70,
+   "title": "Exact simultaneous local-to-global gluing criteria with admissibility and operational reachability",
+   "parent_pr": 69,
+   "head": "chatgpt/parallel-overlap-gluing-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/ParallelLocalGluing.inc"
+   ],
+   "lexical_theorems": 14,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 6,
+    "tests": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "70",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 14,
+    "new_definitions": 11,
+    "theorems_using_main_any_edge": 6,
+    "theorems_using_main_theorem_in_proof": 1,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 5,
+     "composite": 7,
+     "decision_procedure_only": 2
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [
+     [
+      "LinearInputSemanticIntervals.invariant_old_word",
+      1
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputParallelGluing.AdmissibleGlue",
+     "LinearInputParallelGluing.CoversCoordinates",
+     "LinearInputParallelGluing.HasGlue",
+     "LinearInputParallelGluing.OperationalGlue",
+     "LinearInputParallelGluing.PairwiseCompatible",
+     "LinearInputParallelGluing.Represents",
+     "LinearInputParallelGluing.admissible_glue_iff",
+     "LinearInputParallelGluing.canonical",
+     "LinearInputParallelGluing.canonical_respects",
+     "LinearInputParallelGluing.destructiveSnapshots",
+     "LinearInputParallelGluing.destructive_full_snapshots_conflict",
+     "LinearInputParallelGluing.destructive_full_snapshots_have_no_glue",
+     "LinearInputParallelGluing.disjointWrites",
+     "LinearInputParallelGluing.disjoint_writes_are_compatible",
+     "LinearInputParallelGluing.disjoint_writes_cover_coordinates",
+     "LinearInputParallelGluing.disjoint_writes_fail_global_policy",
+     "LinearInputParallelGluing.disjoint_writes_have_glue",
+     "LinearInputParallelGluing.disjoint_writes_not_operationally_gluable_destructively",
+     "LinearInputParallelGluing.disjoint_writes_operationally_gluable_cumulatively",
+     "LinearInputParallelGluing.excludesBoth",
+     "LinearInputParallelGluing.gluing_iff_pairwise_compatible",
+     "LinearInputParallelGluing.gluing_implies_compatibility",
+     "LinearInputParallelGluing.gluing_unique_under_full_coverage",
+     "LinearInputParallelGluing.operational_gluing_iff",
+     "LinearInputParallelGluing.pairReadout"
+    ],
+    "names_shared_with_other_prs": [
+     71
+    ]
+   }
+  },
+  "71": {
+   "number": 71,
+   "title": "Constructive finite-family parallel gluing iff overlap compatibility, with temporal history countermodel",
+   "parent_pr": 69,
+   "head": "chatgpt/parallel-gluing-criterion-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/ParallelLocalGluing.inc"
+   ],
+   "lexical_theorems": 29,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 6,
+    "tests": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "71",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 29,
+    "new_definitions": 15,
+    "theorems_using_main_any_edge": 15,
+    "theorems_using_main_theorem_in_proof": 3,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 10,
+     "composite": 15,
+     "decision_procedure_only": 4
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [
+     [
+      "LinearInputFiniteSelfSynthesis.chooseTarget_sound",
+      3
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputParallelGluing.Compatible",
+     "LinearInputParallelGluing.PairwiseCompatible",
+     "LinearInputParallelGluing.Realizes",
+     "LinearInputParallelGluing.all_realizations_agree_on_written_coordinates",
+     "LinearInputParallelGluing.compatibleFlag",
+     "LinearInputParallelGluing.compatibleFlag_iff",
+     "LinearInputParallelGluing.compatible_iff_exists_glue",
+     "LinearInputParallelGluing.compatible_symm",
+     "LinearInputParallelGluing.conflict_causes_historical_nonpreservation",
+     "LinearInputParallelGluing.conflictingLeft",
+     "LinearInputParallelGluing.conflictingRight",
+     "LinearInputParallelGluing.conflicting_family_has_no_global_state",
+     "LinearInputParallelGluing.conflicting_writes_do_not_glue",
+     "LinearInputParallelGluing.destructiveWholeA",
+     "LinearInputParallelGluing.destructiveWholeB",
+     "LinearInputParallelGluing.destructive_whole_writes_incompatible",
+     "LinearInputParallelGluing.disjointLeft",
+     "LinearInputParallelGluing.disjointRight",
+     "LinearInputParallelGluing.disjoint_glue_fulfills_both",
+     "LinearInputParallelGluing.disjoint_gluing_avoids_history_loss",
+     "LinearInputParallelGluing.disjoint_writes_compatible",
+     "LinearInputParallelGluing.equal_overlapping_writes_compatible",
+     "LinearInputParallelGluing.firstWrite",
+     "LinearInputParallelGluing.firstWrite_eq_of_member",
+     "LinearInputParallelGluing.firstWrite_exists_of_member",
+     "LinearInputParallelGluing.firstWrite_none_of_unwritten",
+     "LinearInputParallelGluing.firstWrite_some_has_member",
+     "LinearInputParallelGluing.glue",
+     "LinearInputParallelGluing.glueAll",
+     "LinearInputParallelGluing.glueAll_realizes_of_pairwise",
+     "LinearInputParallelGluing.glueAll_untouched",
+     "LinearInputParallelGluing.glue_realizes_left",
+     "LinearInputParallelGluing.glue_realizes_right",
+     "LinearInputParallelGluing.glue_untouched",
+     "LinearInputParallelGluing.overlapFlag",
+     "LinearInputParallelGluing.overlapFlag_iff",
+     "LinearInputParallelGluing.pairwise_iff_exists_global",
+     "LinearInputParallelGluing.parallelTimeline",
+     "LinearInputParallelGluing.parallelTimeline_extinct_of_incompatible",
+     "LinearInputParallelGluing.parallelTimeline_step_one_of_compatible",
+     "LinearInputParallelGluing.parallelTimeline_step_zero",
+     "LinearInputParallelGluing.parallel_history_preserved_iff_compatible",
+     "LinearInputParallelGluing.parallel_no_preservation_of_incompatible",
+     "LinearInputParallelGluing.parallel_preservation_of_compatible"
+    ],
+    "names_shared_with_other_prs": [
+     70
+    ]
+   }
+  },
+  "72": {
+   "number": 72,
+   "title": "Consolidate historical nonpreservation and relational gluing results",
+   "parent_pr": null,
+   "head": "chatgpt/relational-oddcycle-gluing-20261104",
+   "behind_main": 124,
+   "own_files": [
+    "linear_input/lean_check/CooperativeGluingObstruction.inc",
+    "linear_input/lean_check/HistoryNonpreservation.inc",
+    "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+    "linear_input/lean_check/RelationalOddCycleGluing.inc",
+    "linear_input/lean_check/TemporalLocalExtinction.inc"
+   ],
+   "lexical_theorems": 98,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 6,
+    "tests": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "72",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 98,
+    "new_definitions": 52,
+    "theorems_using_main_any_edge": 73,
+    "theorems_using_main_theorem_in_proof": 20,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 37,
+     "library_only": 37,
+     "decision_procedure_only": 16,
+     "application_of_earlier_theorem": 8
+    },
+    "max_proof_depth": 6,
+    "most_used_main_theorems": [
+     [
+      "LinearInputFiniteSelfSynthesis.chooseTarget_sound",
+      18
+     ],
+     [
+      "LinearInputSemanticIntervals.invariant_old_word",
+      2
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputCapacityExtinction.Covers",
+     "LinearInputCapacityExtinction.allSupported",
+     "LinearInputCapacityExtinction.allSupported_iff_covers",
+     "LinearInputCapacityExtinction.bool_and_true_iff",
+     "LinearInputCapacityExtinction.bounded_capacity_blocks_global_cover",
+     "LinearInputCapacityExtinction.bounded_capacity_disables_each_local",
+     "LinearInputCapacityExtinction.capacityTimeline",
+     "LinearInputCapacityExtinction.capacity_overload_forces_history_loss",
+     "LinearInputCapacityExtinction.capacity_overload_forces_total_extinction",
+     "LinearInputCapacityExtinction.coverage_antitone",
+     "LinearInputCapacityExtinction.finite_actions_do_not_commute",
+     "LinearInputCapacityExtinction.increasingDemands",
+     "LinearInputCapacityExtinction.noncoverage_persists_under_demand_growth",
+     "LinearInputCapacityExtinction.overload_causes_interval_failure",
+     "LinearInputCapacityExtinction.overload_causes_nonpreservation",
+     "LinearInputCapacityExtinction.overload_initially_operates",
+     "LinearInputCapacityExtinction.overload_later_every_local_extinct",
+     "LinearInputCapacityExtinction.overload_old_history_moves",
+     "LinearInputCapacityExtinction.overloadedTimeline",
+     "LinearInputCapacityExtinction.overloaded_snapshots_survive",
+     "LinearInputCapacityExtinction.permanentTimeline",
+     "LinearInputCapacityExtinction.permanent_has_available_local",
+     "LinearInputCapacityExtinction.permanent_history_is_preserved",
+     "LinearInputCapacityExtinction.supportsOthers",
+     "LinearInputCapacityExtinction.supportsOthers_exact_capacity",
+     "LinearInputCapacityExtinction.supportsOthers_no_global_cover",
+     "LinearInputCapacityExtinction.supportsOthers_pairwise_cover",
+     "LinearInputCapacityExtinction.swap01",
+     "LinearInputCapacityExtinction.swap12",
+     "LinearInputCooperativeGluing.CollectiveCoverage",
+     "LinearInputCooperativeGluing.GoalFlag",
+     "LinearInputCooperativeGluing.JointGoal",
+     "LinearInputCooperativeGluing.JointlyReachable",
+     "LinearInputCooperativeGluing.Meets",
+     "LinearInputCooperativeGluing.collective_coverage_does_not_glue",
+     "LinearInputCooperativeGluing.cumulative",
+     "LinearInputCooperativeGluing.cumulative_jointly_reachable",
+     "LinearInputCooperativeGluing.cumulative_later_not_totally_extinct",
+     "LinearInputCooperativeGluing.cumulative_primitives_commute",
+     "LinearInputCooperativeGluing.cumulative_two_steps_reach_joint_goal",
+     "LinearInputCooperativeGluing.cumulative_valid_two_time_steps",
+     "LinearInputCooperativeGluing.destructive",
+     "LinearInputCooperativeGluing.destructive_every_primitive_misses_goal",
+     "LinearInputCooperativeGluing.destructive_history_not_preserved",
+     "LinearInputCooperativeGluing.destructive_individual_coverage",
+     "LinearInputCooperativeGluing.destructive_initially_moves",
+     "LinearInputCooperativeGluing.destructive_interval_not_preserved",
+     "LinearInputCooperativeGluing.destructive_later_extinct",
+     "LinearInputCooperativeGluing.destructive_no_action_rewrite_repairs_history",
+     "LinearInputCooperativeGluing.destructive_no_joint_word",
+     "LinearInputCooperativeGluing.destructive_noncommuting",
+     "LinearInputCooperativeGluing.destructive_old_invariant",
+     "LinearInputCooperativeGluing.destructive_snapshots_still_preserved",
+     "LinearInputCooperativeGluing.gatedTimeline",
+     "LinearInputCooperativeGluing.gated_extinction_iff_no_joint_action",
+     "LinearInputCooperativeGluing.goalFlag_false_iff_not_joint",
+     "LinearInputCooperativeGluing.goal_incompatibility_forces_history_loss",
+     "LinearInputHistoryNonpreservation.HistoryModel",
+     "LinearInputHistoryNonpreservation.HistoryModel.advance",
+     "LinearInputHistoryNonpreservation.HistoryModel.observe",
+     "LinearInputHistoryNonpreservation.PostRepairSnapshot",
+     "LinearInputHistoryNonpreservation.Preserves",
+     "LinearInputHistoryNonpreservation.SnapshotPreserves",
+     "LinearInputHistoryNonpreservation.adjoinOldHistory",
+     "LinearInputHistoryNonpreservation.adjoining_old_history_restores_embedding",
+     "LinearInputHistoryNonpreservation.expandedHistory",
+     "LinearInputHistoryNonpreservation.expandedReadout",
+     "LinearInputHistoryNonpreservation.expanded_but_not_preserved",
+     "LinearInputHistoryNonpreservation.expanded_has_more_observable_labels",
+     "LinearInputHistoryNonpreservation.expanded_has_more_states",
+     "LinearInputHistoryNonpreservation.expanded_history_irreparable_by_internal_action",
+     "LinearInputHistoryNonpreservation.expanded_history_irreparable_by_transition_rewrite",
+     "LinearInputHistoryNonpreservation.extension_can_represent_both_histories",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_all_internal_repairs",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_any_transition_rewrite",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_preservation",
+     "LinearInputHistoryNonpreservation.moving_history_cannot_embed_in_stationary_history",
+     "LinearInputHistoryNonpreservation.originalHistory",
+     "LinearInputHistoryNonpreservation.originalReadout",
+     "LinearInputHistoryNonpreservation.original_label_disappears",
+     "LinearInputHistoryNonpreservation.preserves_iff_one_step_observation_of_injective",
+     "LinearInputHistoryNonpreservation.preserves_implies_snapshot",
+     "LinearInputHistoryNonpreservation.preserves_refl",
+     "LinearInputHistoryNonpreservation.preserves_trans",
+     "LinearInputHistoryNonpreservation.snapshots_can_be_embedded",
+     "LinearInputHistoryNonpreservation.stationaryHistory",
+     "LinearInputHistoryNonpreservation.toggle",
+     "LinearInputHistoryNonpreservation.togglingHistory",
+     "LinearInputHistoryNonpreservation.toggling_history_cannot_be_preserved",
+     "LinearInputRelationalGluing.EvenCycleEdge",
+     "LinearInputRelationalGluing.GloballyFeasible",
+     "LinearInputRelationalGluing.IndividuallyFeasible",
+     "LinearInputRelationalGluing.OddCycleEdge",
+     "LinearInputRelationalGluing.Opposing",
+     "LinearInputRelationalGluing.PairwiseFeasible",
+     "LinearInputRelationalGluing.even_cycle_globally_feasible",
+     "LinearInputRelationalGluing.even_cycle_pairwise_feasible",
+     "LinearInputRelationalGluing.every_two_compatible_but_three_incompatible",
+     "LinearInputRelationalGluing.global_gluing_iff_one_common_witness",
+     "LinearInputRelationalGluing.global_implies_individual",
+     "LinearInputRelationalGluing.global_implies_pairwise",
+     "LinearInputRelationalGluing.individual_does_not_imply_pairwise",
+     "LinearInputRelationalGluing.odd_cycle_each_locally_possible",
+     "LinearInputRelationalGluing.odd_cycle_not_globally_feasible",
+     "LinearInputRelationalGluing.odd_cycle_pairwise_feasible",
+     "LinearInputRelationalGluing.opposing_individually_feasible",
+     "LinearInputRelationalGluing.opposing_not_pairwise",
+     "LinearInputRelationalGluing.pairwise_feasibility_does_not_imply_global",
+     "LinearInputRelationalGluing.pairwise_implies_individual",
+     "LinearInputTemporalExtinction.AllExtinct",
+     "LinearInputTemporalExtinction.LocalTimeline",
+     "LinearInputTemporalExtinction.LocalTimeline.action",
+     "LinearInputTemporalExtinction.LocalTimeline.available",
+     "LinearInputTemporalExtinction.LocalTimeline.locals",
+     "LinearInputTemporalExtinction.LocalTimeline.readout",
+     "LinearInputTemporalExtinction.PreservedOn",
+     "LinearInputTemporalExtinction.chooseTarget_none_of_all_disabled",
+     "LinearInputTemporalExtinction.extinct_step_identity",
+     "LinearInputTemporalExtinction.extinction_blocks_every_local_action_rewrite",
+     "LinearInputTemporalExtinction.extinction_forces_nonpreservation",
+     "LinearInputTemporalExtinction.extinction_survives_reassignment",
+     "LinearInputTemporalExtinction.flip",
+     "LinearInputTemporalExtinction.historyAt",
+     "LinearInputTemporalExtinction.interval_with_extinct_endpoint_is_not_preserved",
+     "LinearInputTemporalExtinction.preservation_iff_old_stationary_under_extinction",
+     "LinearInputTemporalExtinction.reactivated",
+     "LinearInputTemporalExtinction.reactivated_step_two",
+     "LinearInputTemporalExtinction.reactivation_can_restore_preservation",
+     "LinearInputTemporalExtinction.reassignActions",
+     "LinearInputTemporalExtinction.recoveredAfterGap",
+     "LinearInputTemporalExtinction.recovered_endpoints_but_broken_interval",
+     "LinearInputTemporalExtinction.recovered_endpoints_preserve_history",
+     "LinearInputTemporalExtinction.recovered_interval_still_not_preserved",
+     "LinearInputTemporalExtinction.recovered_middle_extinct",
+     "LinearInputTemporalExtinction.recovered_step_three",
+     "LinearInputTemporalExtinction.recovered_step_zero",
+     "LinearInputTemporalExtinction.sample",
+     "LinearInputTemporalExtinction.sampleAvailable",
+     "LinearInputTemporalExtinction.sample_extinct_after_two",
+     "LinearInputTemporalExtinction.sample_first_local_disappears",
+     "LinearInputTemporalExtinction.sample_history_preserved_after_one_local_disappears",
+     "LinearInputTemporalExtinction.sample_no_interval_preservation",
+     "LinearInputTemporalExtinction.sample_no_local_action_rewrite_restores_history",
+     "LinearInputTemporalExtinction.sample_no_preservation_after_two",
+     "LinearInputTemporalExtinction.sample_old_history_moves",
+     "LinearInputTemporalExtinction.sample_second_local_takes_over",
+     "LinearInputTemporalExtinction.sample_snapshots_always_preserved",
+     "LinearInputTemporalExtinction.sample_step_one",
+     "LinearInputTemporalExtinction.sample_step_zero",
+     "LinearInputTemporalExtinction.stepAt"
+    ],
+    "names_shared_with_other_prs": [
+     65,
+     66,
+     67,
+     69,
+     75
+    ]
+   }
+  },
+  "75": {
+   "number": 75,
+   "title": "Consolidate history nonpreservation and relational-gluing proof stack",
+   "parent_pr": null,
+   "head": "integration/history-gluing-20261105",
+   "behind_main": 1,
+   "own_files": [
+    "linear_input/lean_check/CooperativeGluingObstruction.inc",
+    "linear_input/lean_check/HistoryNonpreservation.inc",
+    "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+    "linear_input/lean_check/RelationalOddCycleGluing.inc",
+    "linear_input/lean_check/TemporalLocalExtinction.inc"
+   ],
+   "lexical_theorems": 98,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 7,
+    "tests": 5,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "75",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 98,
+    "new_definitions": 52,
+    "theorems_using_main_any_edge": 73,
+    "theorems_using_main_theorem_in_proof": 20,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 37,
+     "library_only": 37,
+     "decision_procedure_only": 16,
+     "application_of_earlier_theorem": 8
+    },
+    "max_proof_depth": 6,
+    "most_used_main_theorems": [
+     [
+      "LinearInputFiniteSelfSynthesis.chooseTarget_sound",
+      18
+     ],
+     [
+      "LinearInputSemanticIntervals.invariant_old_word",
+      2
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputCapacityExtinction.Covers",
+     "LinearInputCapacityExtinction.allSupported",
+     "LinearInputCapacityExtinction.allSupported_iff_covers",
+     "LinearInputCapacityExtinction.bool_and_true_iff",
+     "LinearInputCapacityExtinction.bounded_capacity_blocks_global_cover",
+     "LinearInputCapacityExtinction.bounded_capacity_disables_each_local",
+     "LinearInputCapacityExtinction.capacityTimeline",
+     "LinearInputCapacityExtinction.capacity_overload_forces_history_loss",
+     "LinearInputCapacityExtinction.capacity_overload_forces_total_extinction",
+     "LinearInputCapacityExtinction.coverage_antitone",
+     "LinearInputCapacityExtinction.finite_actions_do_not_commute",
+     "LinearInputCapacityExtinction.increasingDemands",
+     "LinearInputCapacityExtinction.noncoverage_persists_under_demand_growth",
+     "LinearInputCapacityExtinction.overload_causes_interval_failure",
+     "LinearInputCapacityExtinction.overload_causes_nonpreservation",
+     "LinearInputCapacityExtinction.overload_initially_operates",
+     "LinearInputCapacityExtinction.overload_later_every_local_extinct",
+     "LinearInputCapacityExtinction.overload_old_history_moves",
+     "LinearInputCapacityExtinction.overloadedTimeline",
+     "LinearInputCapacityExtinction.overloaded_snapshots_survive",
+     "LinearInputCapacityExtinction.permanentTimeline",
+     "LinearInputCapacityExtinction.permanent_has_available_local",
+     "LinearInputCapacityExtinction.permanent_history_is_preserved",
+     "LinearInputCapacityExtinction.supportsOthers",
+     "LinearInputCapacityExtinction.supportsOthers_exact_capacity",
+     "LinearInputCapacityExtinction.supportsOthers_no_global_cover",
+     "LinearInputCapacityExtinction.supportsOthers_pairwise_cover",
+     "LinearInputCapacityExtinction.swap01",
+     "LinearInputCapacityExtinction.swap12",
+     "LinearInputCooperativeGluing.CollectiveCoverage",
+     "LinearInputCooperativeGluing.GoalFlag",
+     "LinearInputCooperativeGluing.JointGoal",
+     "LinearInputCooperativeGluing.JointlyReachable",
+     "LinearInputCooperativeGluing.Meets",
+     "LinearInputCooperativeGluing.collective_coverage_does_not_glue",
+     "LinearInputCooperativeGluing.cumulative",
+     "LinearInputCooperativeGluing.cumulative_jointly_reachable",
+     "LinearInputCooperativeGluing.cumulative_later_not_totally_extinct",
+     "LinearInputCooperativeGluing.cumulative_primitives_commute",
+     "LinearInputCooperativeGluing.cumulative_two_steps_reach_joint_goal",
+     "LinearInputCooperativeGluing.cumulative_valid_two_time_steps",
+     "LinearInputCooperativeGluing.destructive",
+     "LinearInputCooperativeGluing.destructive_every_primitive_misses_goal",
+     "LinearInputCooperativeGluing.destructive_history_not_preserved",
+     "LinearInputCooperativeGluing.destructive_individual_coverage",
+     "LinearInputCooperativeGluing.destructive_initially_moves",
+     "LinearInputCooperativeGluing.destructive_interval_not_preserved",
+     "LinearInputCooperativeGluing.destructive_later_extinct",
+     "LinearInputCooperativeGluing.destructive_no_action_rewrite_repairs_history",
+     "LinearInputCooperativeGluing.destructive_no_joint_word",
+     "LinearInputCooperativeGluing.destructive_noncommuting",
+     "LinearInputCooperativeGluing.destructive_old_invariant",
+     "LinearInputCooperativeGluing.destructive_snapshots_still_preserved",
+     "LinearInputCooperativeGluing.gatedTimeline",
+     "LinearInputCooperativeGluing.gated_extinction_iff_no_joint_action",
+     "LinearInputCooperativeGluing.goalFlag_false_iff_not_joint",
+     "LinearInputCooperativeGluing.goal_incompatibility_forces_history_loss",
+     "LinearInputHistoryNonpreservation.HistoryModel",
+     "LinearInputHistoryNonpreservation.HistoryModel.advance",
+     "LinearInputHistoryNonpreservation.HistoryModel.observe",
+     "LinearInputHistoryNonpreservation.PostRepairSnapshot",
+     "LinearInputHistoryNonpreservation.Preserves",
+     "LinearInputHistoryNonpreservation.SnapshotPreserves",
+     "LinearInputHistoryNonpreservation.adjoinOldHistory",
+     "LinearInputHistoryNonpreservation.adjoining_old_history_restores_embedding",
+     "LinearInputHistoryNonpreservation.expandedHistory",
+     "LinearInputHistoryNonpreservation.expandedReadout",
+     "LinearInputHistoryNonpreservation.expanded_but_not_preserved",
+     "LinearInputHistoryNonpreservation.expanded_has_more_observable_labels",
+     "LinearInputHistoryNonpreservation.expanded_has_more_states",
+     "LinearInputHistoryNonpreservation.expanded_history_irreparable_by_internal_action",
+     "LinearInputHistoryNonpreservation.expanded_history_irreparable_by_transition_rewrite",
+     "LinearInputHistoryNonpreservation.extension_can_represent_both_histories",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_all_internal_repairs",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_any_transition_rewrite",
+     "LinearInputHistoryNonpreservation.missing_label_blocks_preservation",
+     "LinearInputHistoryNonpreservation.moving_history_cannot_embed_in_stationary_history",
+     "LinearInputHistoryNonpreservation.originalHistory",
+     "LinearInputHistoryNonpreservation.originalReadout",
+     "LinearInputHistoryNonpreservation.original_label_disappears",
+     "LinearInputHistoryNonpreservation.preserves_iff_one_step_observation_of_injective",
+     "LinearInputHistoryNonpreservation.preserves_implies_snapshot",
+     "LinearInputHistoryNonpreservation.preserves_refl",
+     "LinearInputHistoryNonpreservation.preserves_trans",
+     "LinearInputHistoryNonpreservation.snapshots_can_be_embedded",
+     "LinearInputHistoryNonpreservation.stationaryHistory",
+     "LinearInputHistoryNonpreservation.toggle",
+     "LinearInputHistoryNonpreservation.togglingHistory",
+     "LinearInputHistoryNonpreservation.toggling_history_cannot_be_preserved",
+     "LinearInputRelationalGluing.EvenCycleEdge",
+     "LinearInputRelationalGluing.GloballyFeasible",
+     "LinearInputRelationalGluing.IndividuallyFeasible",
+     "LinearInputRelationalGluing.OddCycleEdge",
+     "LinearInputRelationalGluing.Opposing",
+     "LinearInputRelationalGluing.PairwiseFeasible",
+     "LinearInputRelationalGluing.even_cycle_globally_feasible",
+     "LinearInputRelationalGluing.even_cycle_pairwise_feasible",
+     "LinearInputRelationalGluing.every_two_compatible_but_three_incompatible",
+     "LinearInputRelationalGluing.global_gluing_iff_one_common_witness",
+     "LinearInputRelationalGluing.global_implies_individual",
+     "LinearInputRelationalGluing.global_implies_pairwise",
+     "LinearInputRelationalGluing.individual_does_not_imply_pairwise",
+     "LinearInputRelationalGluing.odd_cycle_each_locally_possible",
+     "LinearInputRelationalGluing.odd_cycle_not_globally_feasible",
+     "LinearInputRelationalGluing.odd_cycle_pairwise_feasible",
+     "LinearInputRelationalGluing.opposing_individually_feasible",
+     "LinearInputRelationalGluing.opposing_not_pairwise",
+     "LinearInputRelationalGluing.pairwise_feasibility_does_not_imply_global",
+     "LinearInputRelationalGluing.pairwise_implies_individual",
+     "LinearInputTemporalExtinction.AllExtinct",
+     "LinearInputTemporalExtinction.LocalTimeline",
+     "LinearInputTemporalExtinction.LocalTimeline.action",
+     "LinearInputTemporalExtinction.LocalTimeline.available",
+     "LinearInputTemporalExtinction.LocalTimeline.locals",
+     "LinearInputTemporalExtinction.LocalTimeline.readout",
+     "LinearInputTemporalExtinction.PreservedOn",
+     "LinearInputTemporalExtinction.chooseTarget_none_of_all_disabled",
+     "LinearInputTemporalExtinction.extinct_step_identity",
+     "LinearInputTemporalExtinction.extinction_blocks_every_local_action_rewrite",
+     "LinearInputTemporalExtinction.extinction_forces_nonpreservation",
+     "LinearInputTemporalExtinction.extinction_survives_reassignment",
+     "LinearInputTemporalExtinction.flip",
+     "LinearInputTemporalExtinction.historyAt",
+     "LinearInputTemporalExtinction.interval_with_extinct_endpoint_is_not_preserved",
+     "LinearInputTemporalExtinction.preservation_iff_old_stationary_under_extinction",
+     "LinearInputTemporalExtinction.reactivated",
+     "LinearInputTemporalExtinction.reactivated_step_two",
+     "LinearInputTemporalExtinction.reactivation_can_restore_preservation",
+     "LinearInputTemporalExtinction.reassignActions",
+     "LinearInputTemporalExtinction.recoveredAfterGap",
+     "LinearInputTemporalExtinction.recovered_endpoints_but_broken_interval",
+     "LinearInputTemporalExtinction.recovered_endpoints_preserve_history",
+     "LinearInputTemporalExtinction.recovered_interval_still_not_preserved",
+     "LinearInputTemporalExtinction.recovered_middle_extinct",
+     "LinearInputTemporalExtinction.recovered_step_three",
+     "LinearInputTemporalExtinction.recovered_step_zero",
+     "LinearInputTemporalExtinction.sample",
+     "LinearInputTemporalExtinction.sampleAvailable",
+     "LinearInputTemporalExtinction.sample_extinct_after_two",
+     "LinearInputTemporalExtinction.sample_first_local_disappears",
+     "LinearInputTemporalExtinction.sample_history_preserved_after_one_local_disappears",
+     "LinearInputTemporalExtinction.sample_no_interval_preservation",
+     "LinearInputTemporalExtinction.sample_no_local_action_rewrite_restores_history",
+     "LinearInputTemporalExtinction.sample_no_preservation_after_two",
+     "LinearInputTemporalExtinction.sample_old_history_moves",
+     "LinearInputTemporalExtinction.sample_second_local_takes_over",
+     "LinearInputTemporalExtinction.sample_snapshots_always_preserved",
+     "LinearInputTemporalExtinction.sample_step_one",
+     "LinearInputTemporalExtinction.sample_step_zero",
+     "LinearInputTemporalExtinction.stepAt"
+    ],
+    "names_shared_with_other_prs": [
+     65,
+     66,
+     67,
+     69,
+     72
+    ]
+   }
+  },
+  "76": {
+   "number": 76,
+   "title": "Build iOS/iPadOS Safari touch-ready Rulefold mandala",
+   "parent_pr": null,
+   "head": "chatgpt/rulefold-touch-ios-20261105",
+   "behind_main": 0,
+   "own_files": [],
+   "lexical_theorems": 0,
+   "non_lean_changes": {
+    ".github": 1,
+    "demos": 3
+   },
+   "ci": [
+    {
+     "name": "Rulefold iOS touch regression",
+     "conclusion": "success"
+    },
+    {
+     "name": "Rulefold iOS touch regression",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "no_lean_content",
+    "names_shared_with_other_prs": []
+   }
+  },
+  "77": {
+   "number": 77,
+   "title": "Formalize arithmetic radical forgetting as F0 and show successor non-descent",
+   "parent_pr": null,
+   "head": "chatgpt/radical-f0-bridge-20261105",
+   "behind_main": 0,
+   "own_files": [
+    "linear_input/lean_check/RadicalF0Bridge.inc"
+   ],
+   "lexical_theorems": 18,
+   "non_lean_changes": {
+    "docs": 2,
+    "tests": 1,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "77",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 18,
+    "new_definitions": 1,
+    "theorems_using_main_any_edge": 5,
+    "theorems_using_main_theorem_in_proof": 2,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 15,
+     "decision_procedure_only": 1,
+     "library_only": 2
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [
+     [
+      "LinearInputF0Descent.descends_iff_respects",
+      2
+     ],
+     [
+      "LinearInputF0FutureMinimality.future_of_respects",
+      1
+     ],
+     [
+      "LinearInputF0FutureMinimality.respects_iff_future_eq",
+      1
+     ],
+     [
+      "LinearInputF0FutureMinimality.descends_iff_future_eq",
+      1
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputRadicalF0.future_separates_two_four",
+     "LinearInputRadicalF0.no_radical_successor_readout",
+     "LinearInputRadicalF0.primeFactors_four",
+     "LinearInputRadicalF0.radical",
+     "LinearInputRadicalF0.radical_eq_product",
+     "LinearInputRadicalF0.radical_eq_zero_iff",
+     "LinearInputRadicalF0.radical_four",
+     "LinearInputRadicalF0.radical_idempotent",
+     "LinearInputRadicalF0.radical_kernel_iff",
+     "LinearInputRadicalF0.radical_ne_zero",
+     "LinearInputRadicalF0.radical_not_complete_predictive_state",
+     "LinearInputRadicalF0.radical_of_prime",
+     "LinearInputRadicalF0.radical_primeFactors",
+     "LinearInputRadicalF0.radical_zero",
+     "LinearInputRadicalF0.squarefree_fixed",
+     "LinearInputRadicalF0.successor_not_descending",
+     "LinearInputRadicalF0.successor_not_fiber_respecting",
+     "LinearInputRadicalF0.successors_distinguished",
+     "LinearInputRadicalF0.two_four_same_radical"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "78": {
+   "number": 78,
+   "title": "IUT III 3.11→3.12: isolate the missing η-comparison (open)",
+   "parent_pr": null,
+   "head": "chatgpt/pilot-comparison-wall-20261105",
+   "behind_main": 0,
+   "own_files": [
+    "linear_input/lean_check/PilotComparisonBridge.inc",
+    "linear_input/lean_check/PilotHullInflation.inc",
+    "linear_input/lean_check/PilotHullStability.inc",
+    "linear_input/lean_check/PilotVolumeTransport.inc",
+    "probes/IutPilotCrossRepo.lean"
+   ],
+   "lexical_theorems": 38,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 5,
+    "scripts": 1,
+    "tests": 4,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "IUT x primitive-lean typed cross-repository Lean probe",
+     "conclusion": "cancelled"
+    }
+   ],
+   "kernel_tip": "78",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 35,
+    "new_definitions": 21,
+    "theorems_using_main_any_edge": 4,
+    "theorems_using_main_theorem_in_proof": 1,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 22,
+     "composite": 11,
+     "decision_procedure_only": 2
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [
+     [
+      "LinearInputF0Descent.identity_descends",
+      1
+     ]
+    ],
+    "files_without_declarations": [
+     "probes/IutPilotCrossRepo.lean"
+    ],
+    "new_names": [
+     "LinearInputPilotComparison.ChoiceValues",
+     "LinearInputPilotComparison.FiberInvariant",
+     "LinearInputPilotComparison.FiberTargets",
+     "LinearInputPilotComparison.LogWall",
+     "LinearInputPilotComparison.Reachable",
+     "LinearInputPilotComparison.choiceOutput",
+     "LinearInputPilotComparison.choice_range_can_cover_nonconstant_fiber",
+     "LinearInputPilotComparison.choice_range_not_single_valued",
+     "LinearInputPilotComparison.constantForget",
+     "LinearInputPilotComparison.constant_forget_idempotent",
+     "LinearInputPilotComparison.distinctTarget",
+     "LinearInputPilotComparison.ell7_larger_container_witness",
+     "LinearInputPilotComparison.ell7_small_container_obstruction",
+     "LinearInputPilotComparison.f0_descent_does_not_force_wall",
+     "LinearInputPilotComparison.factorization_iff_fiber_invariant",
+     "LinearInputPilotComparison.log_wall_iff_bound",
+     "LinearInputPilotComparison.reachable_choice_independent_implies_fiber_invariant",
+     "LinearInputPilotComparison.reachable_iff_fiber_covered",
+     "LinearInputPilotComparison.reachable_of_factor_and_witness",
+     "LinearInputPilotComparison.scaled_pilot_witness_iff",
+     "LinearInputPilotComparison.truncatedVolume",
+     "LinearInputPilotComparison.truncated_complete",
+     "LinearInputPilotComparison.truncated_upper",
+     "LinearInputPilotHullInflation.Rect",
+     "LinearInputPilotHullInflation.Rect.height",
+     "LinearInputPilotHullInflation.Rect.width",
+     "LinearInputPilotHullInflation.area",
+     "LinearInputPilotHullInflation.hull",
+     "LinearInputPilotHullInflation.hull_area_ge_left",
+     "LinearInputPilotHullInflation.hull_area_ge_right",
+     "LinearInputPilotHullInflation.instDecidableEqRect",
+     "LinearInputPilotHullInflation.instDecidableEqRect.decEq",
+     "LinearInputPilotHullInflation.instReprRect",
+     "LinearInputPilotHullInflation.instReprRect.repr",
+     "LinearInputPilotHullInflation.square_orbit_no_inflation",
+     "LinearInputPilotHullInflation.swap",
+     "LinearInputPilotHullInflation.swap_involutive",
+     "LinearInputPilotHullInflation.swap_preserves_area",
+     "LinearInputPilotHullInflation.volume_preserving_hull_can_inflate",
+     "LinearInputPilotHullInflation.witness",
+     "LinearInputPilotHullInflation.witness_equal_areas",
+     "LinearInputPilotHullInflation.witness_hull_area_is_four",
+     "LinearInputPilotHullInflation.witness_individual_area_is_two",
+     "LinearInputPilotHullStability.escaping_image_blocks_hull_equality",
+     "LinearInputPilotHullStability.hull_orbit_volume_ge",
+     "LinearInputPilotHullStability.orbitUnion",
+     "LinearInputPilotHullStability.orbit_hull_eq_iff_each_image_stable",
+     "LinearInputPilotHullStability.original_subset_orbit",
+     "LinearInputPilotHullStability.stable_images_give_zero_volume_gap",
+     "LinearInputPilotTransport.bounded_shift_cannot_bridge_gap",
+     "LinearInputPilotTransport.bounded_shift_forces_budget",
+     "LinearInputPilotTransport.neutral_transport_wall_iff",
+     "LinearInputPilotTransport.packet_budget_suffices",
+     "LinearInputPilotTransport.packet_budget_yields_wall",
+     "LinearInputPilotTransport.packet_wall_iff_total_bound",
+     "LinearInputPilotTransport.shifted_wall_iff"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "79": {
+   "number": 79,
+   "title": "Generate source-grounded Lean dependency graph and PR branch DAG",
+   "parent_pr": null,
+   "head": "chatgpt/dependency-graph-20261105",
+   "behind_main": 0,
+   "own_files": [],
+   "lexical_theorems": 0,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 7,
+    "tools": 1
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "action_required"
+    },
+    {
+     "name": "Build Lean source dependency graph",
+     "conclusion": "action_required"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "no_lean_content",
+    "names_shared_with_other_prs": []
+   }
+  },
+  "80": {
+   "number": 80,
+   "title": "Formalize exact 1–2–1 elastic collision order, forgetting and finite velocity jump",
+   "parent_pr": null,
+   "head": "chatgpt/three-ball-contact-order-20261105",
+   "behind_main": 0,
+   "own_files": [
+    "lean/ThreeBallCollision.lean"
+   ],
+   "lexical_theorems": 26,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tests": 1
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Three-ball elastic contact order (exact Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "80",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 26,
+    "new_definitions": 23,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 10,
+     "library_only": 16
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "ThreeBallCollision.FirstContact",
+     "ThreeBallCollision.Velocity",
+     "ThreeBallCollision.Velocity.left",
+     "ThreeBallCollision.Velocity.middle",
+     "ThreeBallCollision.Velocity.right",
+     "ThreeBallCollision.collideLM",
+     "ThreeBallCollision.collideMR",
+     "ThreeBallCollision.different_final_states",
+     "ThreeBallCollision.final_velocities_separate",
+     "ThreeBallCollision.impacts_do_not_commute",
+     "ThreeBallCollision.initial",
+     "ThreeBallCollision.instDecidableEqFirstContact",
+     "ThreeBallCollision.instDecidableEqVelocity",
+     "ThreeBallCollision.instDecidableEqVelocity.decEq",
+     "ThreeBallCollision.instReprFirstContact",
+     "ThreeBallCollision.instReprFirstContact.repr",
+     "ThreeBallCollision.instReprVelocity",
+     "ThreeBallCollision.instReprVelocity.repr",
+     "ThreeBallCollision.jump_persists_arbitrarily_close",
+     "ThreeBallCollision.leftApproaches",
+     "ThreeBallCollision.leftFirst",
+     "ThreeBallCollision.left_first_contact_speeds",
+     "ThreeBallCollision.left_first_exact",
+     "ThreeBallCollision.left_first_preserves_energy",
+     "ThreeBallCollision.left_first_preserves_momentum",
+     "ThreeBallCollision.left_first_stage_one",
+     "ThreeBallCollision.left_first_stage_two",
+     "ThreeBallCollision.lm_preserves_energy",
+     "ThreeBallCollision.lm_preserves_momentum",
+     "ThreeBallCollision.lm_reverses_relative_speed",
+     "ThreeBallCollision.middleByOffset",
+     "ThreeBallCollision.middle_velocity_jump",
+     "ThreeBallCollision.momentum",
+     "ThreeBallCollision.mr_preserves_energy",
+     "ThreeBallCollision.mr_preserves_momentum",
+     "ThreeBallCollision.mr_reverses_relative_speed",
+     "ThreeBallCollision.negative_offset",
+     "ThreeBallCollision.no_history_free_middle_predictor",
+     "ThreeBallCollision.outcome",
+     "ThreeBallCollision.positive_offset",
+     "ThreeBallCollision.rightApproaches",
+     "ThreeBallCollision.rightFirst",
+     "ThreeBallCollision.right_first_contact_speeds",
+     "ThreeBallCollision.right_first_exact",
+     "ThreeBallCollision.right_first_preserves_energy",
+     "ThreeBallCollision.right_first_preserves_momentum",
+     "ThreeBallCollision.same_conserved_observations",
+     "ThreeBallCollision.simultaneous_unassigned",
+     "ThreeBallCollision.twiceEnergy"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "81": {
+   "number": 81,
+   "title": "Cross-system trace bridge, shortest finite counterexamples and level-11 modularity probe",
+   "parent_pr": null,
+   "head": "chatgpt/cross-system-modularity-observation-20261105",
+   "behind_main": 0,
+   "own_files": [
+    "linear_input/lean_check/CrossSystemObservation.inc"
+   ],
+   "lexical_theorems": 24,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 3,
+    "tests": 2,
+    "tools": 4
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "81",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 24,
+    "new_definitions": 9,
+    "theorems_using_main_any_edge": 20,
+    "theorems_using_main_theorem_in_proof": 5,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 12,
+     "library_only": 12
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [
+     [
+      "LinearInputOperatorWords.encode_eq_iff",
+      5
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputCrossSystemObservation.CrossBisim",
+     "LinearInputCrossSystemObservation.CrossTrace",
+     "LinearInputCrossSystemObservation.ExactBridge",
+     "LinearInputCrossSystemObservation.bisim_run",
+     "LinearInputCrossSystemObservation.bisim_sub_trace",
+     "LinearInputCrossSystemObservation.bridge_preserves_wordEq",
+     "LinearInputCrossSystemObservation.bridge_reflects_wordEq",
+     "LinearInputCrossSystemObservation.bridge_run",
+     "LinearInputCrossSystemObservation.bridge_trace",
+     "LinearInputCrossSystemObservation.crossTrace_now",
+     "LinearInputCrossSystemObservation.crossTrace_step",
+     "LinearInputCrossSystemObservation.flipBit",
+     "LinearInputCrossSystemObservation.flipFirst",
+     "LinearInputCrossSystemObservation.flip_bridge",
+     "LinearInputCrossSystemObservation.flip_predictive_bijective",
+     "LinearInputCrossSystemObservation.forgetSecond",
+     "LinearInputCrossSystemObservation.forgetSecond_surjective",
+     "LinearInputCrossSystemObservation.greatest_cross_bisim",
+     "LinearInputCrossSystemObservation.no_bridge_if_fiber_splits",
+     "LinearInputCrossSystemObservation.pairOutput",
+     "LinearInputCrossSystemObservation.predictiveMap",
+     "LinearInputCrossSystemObservation.predictiveMap_bijective",
+     "LinearInputCrossSystemObservation.predictiveMap_bijective_of_surjective",
+     "LinearInputCrossSystemObservation.predictiveMap_encode",
+     "LinearInputCrossSystemObservation.predictiveMap_injective",
+     "LinearInputCrossSystemObservation.predictiveMap_injective_of_reflects",
+     "LinearInputCrossSystemObservation.predictiveMap_output",
+     "LinearInputCrossSystemObservation.predictiveMap_step",
+     "LinearInputCrossSystemObservation.predictiveMap_surjective",
+     "LinearInputCrossSystemObservation.revealSecond",
+     "LinearInputCrossSystemObservation.reveal_has_no_bridge",
+     "LinearInputCrossSystemObservation.separating_word_refutes_trace",
+     "LinearInputCrossSystemObservation.trace_is_bisim"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "82": {
+   "number": 82,
+   "title": "Formalize contest selection, delayed compression and participation singularity",
+   "parent_pr": null,
+   "head": "chatgpt/contest-economy-collapse-20261105",
+   "behind_main": 0,
+   "own_files": [
+    "lean/ContestEconomy.lean"
+   ],
+   "lexical_theorems": 14,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tests": 1
+   },
+   "ci": [
+    {
+     "name": "Contest economy model (isolated Lean verification)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Contest economy model (isolated Lean verification)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "82",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 14,
+    "new_definitions": 1,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 9,
+     "composite": 4,
+     "decision_procedure_only": 1
+    },
+    "max_proof_depth": 1,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "ContestEconomy.delayed_crossing_of_negative_discriminant",
+     "ContestEconomy.delayed_ratio_strict_drop",
+     "ContestEconomy.delayed_ratio_uniform_drop",
+     "ContestEconomy.delayed_seventh_step_example",
+     "ContestEconomy.delayed_third_step_nonpos",
+     "ContestEconomy.participation",
+     "ContestEconomy.participation_entry_cost_equals_gap",
+     "ContestEconomy.participation_fixed_cost_eventually_zero",
+     "ContestEconomy.participation_fixed_gap_tends_one",
+     "ContestEconomy.participation_no_joint_boundary_limit",
+     "ContestEconomy.participation_paths_disagree_arbitrarily_near",
+     "ContestEconomy.participation_stops_of_gap_le_cost",
+     "ContestEconomy.participation_zero_entry_cost",
+     "ContestEconomy.selection_gain_le_gap",
+     "ContestEconomy.selection_net_negative"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "83": {
+   "number": 83,
+   "title": "Formalize independent time and rotation inputs for moving curves",
+   "parent_pr": null,
+   "head": "chatgpt/time-distance-moving-curve-20261105",
+   "behind_main": 0,
+   "own_files": [
+    "lean/MovingCurve.lean",
+    "lean/MovingCurveAudit.lean"
+   ],
+   "lexical_theorems": 8,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "83",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 8,
+    "new_definitions": 2,
+    "theorems_using_main_any_edge": 8,
+    "theorems_using_main_theorem_in_proof": 3,
+    "theorems_reaching_initial": 8,
+    "shapes": {
+     "composite": 4,
+     "library_only": 4
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [
+     [
+      "Elastica.hasDerivAt_yCoord",
+      2
+     ],
+     [
+      "Elastica.hasDerivAt_xCoord",
+      2
+     ]
+    ],
+    "files_without_declarations": [
+     "lean/MovingCurveAudit.lean"
+    ],
+    "new_names": [
+     "Elastica.hasDerivAt_movingX_arcLength",
+     "Elastica.hasDerivAt_movingX_time",
+     "Elastica.hasDerivAt_movingY_arcLength",
+     "Elastica.hasDerivAt_movingY_time",
+     "Elastica.movingCurve_unit_speed_squared",
+     "Elastica.movingX",
+     "Elastica.movingX_time_displacement",
+     "Elastica.movingY",
+     "Elastica.movingY_time_displacement",
+     "Elastica.moving_translation_distance_eq_time_sq"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "84": {
+   "number": 84,
+   "title": "Observable relation pruning: finite edge deletion, shortest witnesses and curve encoding",
+   "parent_pr": 81,
+   "head": "chatgpt/relation-pruning-observable-20261106",
+   "behind_main": 0,
+   "own_files": [],
+   "lexical_theorems": 0,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 4,
+    "tests": 3,
+    "tools": 5
+   },
+   "ci": [],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "no_lean_content",
+    "names_shared_with_other_prs": []
+   }
+  },
+  "85": {
+   "number": 85,
+   "title": "Lean: verified finite self-rewriting observer and observational quotient",
+   "parent_pr": null,
+   "head": "chatgpt/self-rewriting-observer-lean-20261106",
+   "behind_main": 0,
+   "own_files": [
+    "lean/SelfRewritingObserver.lean",
+    "lean/SelfRewritingObserverBridgeTail.inc",
+    "lean/SelfRewritingObserverExtensions.lean"
+   ],
+   "lexical_theorems": 34,
+   "non_lean_changes": {
+    ".github": 1
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Self-rewriting observer Lean (isolated)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "85",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 30,
+    "new_definitions": 55,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 16,
+     "decision_procedure_only": 12,
+     "library_only": 2
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [
+     "lean/SelfRewritingObserverBridgeTail.inc"
+    ],
+    "new_names": [
+     "SelfRewritingObserver.Action",
+     "SelfRewritingObserver.HeadAction",
+     "SelfRewritingObserver.HeadWordEq",
+     "SelfRewritingObserver.Mode",
+     "SelfRewritingObserver.RuleAction",
+     "SelfRewritingObserver.RuleWordEq",
+     "SelfRewritingObserver.State",
+     "SelfRewritingObserver.State.a",
+     "SelfRewritingObserver.State.b",
+     "SelfRewritingObserver.State.g",
+     "SelfRewritingObserver.State.h",
+     "SelfRewritingObserver.State.r",
+     "SelfRewritingObserver.WordEq",
+     "SelfRewritingObserver.blind_classes",
+     "SelfRewritingObserver.delayed_witness",
+     "SelfRewritingObserver.feedback_classes",
+     "SelfRewritingObserver.feedback_implies_frozen",
+     "SelfRewritingObserver.feedback_two_scans",
+     "SelfRewritingObserver.first",
+     "SelfRewritingObserver.frozen_classes",
+     "SelfRewritingObserver.frozen_implies_blind",
+     "SelfRewritingObserver.headRun",
+     "SelfRewritingObserver.headSignature",
+     "SelfRewritingObserver.headStep",
+     "SelfRewritingObserver.headWordEq_iff_signature",
+     "SelfRewritingObserver.head_classes",
+     "SelfRewritingObserver.head_signature_injective",
+     "SelfRewritingObserver.head_wordEq_iff_eq",
+     "SelfRewritingObserver.instDecidableEqAction",
+     "SelfRewritingObserver.instDecidableEqHeadAction",
+     "SelfRewritingObserver.instDecidableEqHeadAction.decEq",
+     "SelfRewritingObserver.instDecidableEqMode",
+     "SelfRewritingObserver.instDecidableEqRuleAction",
+     "SelfRewritingObserver.instDecidableEqRuleAction.decEq",
+     "SelfRewritingObserver.instDecidableEqState",
+     "SelfRewritingObserver.instDecidableEqState.decEq",
+     "SelfRewritingObserver.instFintypeAction",
+     "SelfRewritingObserver.instFintypeHeadAction",
+     "SelfRewritingObserver.instFintypeMode",
+     "SelfRewritingObserver.instFintypeRuleAction",
+     "SelfRewritingObserver.instFintypeState",
+     "SelfRewritingObserver.instReprAction",
+     "SelfRewritingObserver.instReprAction.repr",
+     "SelfRewritingObserver.instReprHeadAction",
+     "SelfRewritingObserver.instReprHeadAction.repr",
+     "SelfRewritingObserver.instReprMode",
+     "SelfRewritingObserver.instReprMode.repr",
+     "SelfRewritingObserver.instReprRuleAction",
+     "SelfRewritingObserver.instReprRuleAction.repr",
+     "SelfRewritingObserver.instReprState",
+     "SelfRewritingObserver.instReprState.repr",
+     "SelfRewritingObserver.readout",
+     "SelfRewritingObserver.ruleRun",
+     "SelfRewritingObserver.ruleSignature",
+     "SelfRewritingObserver.ruleStep",
+     "SelfRewritingObserver.ruleWordEq_iff_signature",
+     "SelfRewritingObserver.rule_classes",
+     "SelfRewritingObserver.rule_probe_refines_feedback",
+     "SelfRewritingObserver.run",
+     "SelfRewritingObserver.second",
+     "SelfRewritingObserver.signature",
+     "SelfRewritingObserver.states_card",
+     "SelfRewritingObserver.step",
+     "SelfRewritingObserver.strict_feedback",
+     "SelfRewritingObserver.symmetry",
+     "SelfRewritingObserver.symmetry_broken_by_head",
+     "SelfRewritingObserver.symmetry_invisible",
+     "SelfRewritingObserver.symmetry_invisible_with_rule",
+     "SelfRewritingObserver.symmetry_involutive",
+     "SelfRewritingObserver.wordEq_iff_signature",
+     "_private.SelfRewritingObserver.0.SelfRewritingObserver.p",
+     "_private.SelfRewritingObserver.0.SelfRewritingObserver.q",
+     "_private.SelfRewritingObserver.0.SelfRewritingObserver.signature_readout",
+     "_private.SelfRewritingObserver.0.SelfRewritingObserver.signature_sound",
+     "_private.SelfRewritingObserver.0.SelfRewritingObserver.signature_step",
+     "_private.SelfRewritingObserver.0.SelfRewritingObserver.z",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.differentHeads",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.headSignature_readout",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.headSignature_sound",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.headSignature_step",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.ruleSignature_readout",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.ruleSignature_sound",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.ruleSignature_step",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.zeroMem0",
+     "_private.SelfRewritingObserverExtensions.0.SelfRewritingObserver.zeroMem1"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "86": {
+   "number": 86,
+   "title": "Dark/bright two-amplitude model: closure obstruction, minimal predictive state and exact WordEq bridge",
+   "parent_pr": null,
+   "head": "chatgpt/dark-bright-observation-20261106",
+   "behind_main": 0,
+   "own_files": [
+    "lean/DarkBrightObservation.lean",
+    "lean/DarkBrightObservationBridgeTail.inc"
+   ],
+   "lexical_theorems": 28,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tools": 1
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Dark-bright observation (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "96",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 23,
+    "new_definitions": 23,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 12,
+     "composite": 11
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [
+     "lean/DarkBrightObservationBridgeTail.inc"
+    ],
+    "new_names": [
+     "DarkBrightObservation.Observation",
+     "DarkBrightObservation.Spinor",
+     "DarkBrightObservation.Spinor.bi",
+     "DarkBrightObservation.Spinor.br",
+     "DarkBrightObservation.Spinor.di",
+     "DarkBrightObservation.Spinor.dr",
+     "DarkBrightObservation.Summary",
+     "DarkBrightObservation.brightBasis",
+     "DarkBrightObservation.commonPhase",
+     "DarkBrightObservation.common_phase_summary",
+     "DarkBrightObservation.current_collision",
+     "DarkBrightObservation.darkBasis",
+     "DarkBrightObservation.delta",
+     "DarkBrightObservation.delta_mix",
+     "DarkBrightObservation.delta_phase",
+     "DarkBrightObservation.delta_sign_ambiguity",
+     "DarkBrightObservation.evolution",
+     "DarkBrightObservation.imQ",
+     "DarkBrightObservation.imQ_mix",
+     "DarkBrightObservation.imQ_phase",
+     "DarkBrightObservation.mix",
+     "DarkBrightObservation.next_separates",
+     "DarkBrightObservation.next_values",
+     "DarkBrightObservation.norm2",
+     "DarkBrightObservation.norm2_mix",
+     "DarkBrightObservation.norm2_nonnegative",
+     "DarkBrightObservation.norm2_preserved",
+     "DarkBrightObservation.one_probe_recovers_delta",
+     "DarkBrightObservation.output",
+     "DarkBrightObservation.output_closes_iff",
+     "DarkBrightObservation.project",
+     "DarkBrightObservation.project_summary",
+     "DarkBrightObservation.reQ",
+     "DarkBrightObservation.reQ_mix",
+     "DarkBrightObservation.reQ_phase",
+     "DarkBrightObservation.sphere_identity",
+     "DarkBrightObservation.step",
+     "DarkBrightObservation.step_preserves_norm2",
+     "DarkBrightObservation.summary",
+     "DarkBrightObservation.summaryStep",
+     "DarkBrightObservation.summary_eq_of_two_reads",
+     "DarkBrightObservation.summary_mix",
+     "DarkBrightObservation.summary_step",
+     "DarkBrightObservation.two_reads_iff_summary",
+     "DarkBrightObservation.witnessLeft",
+     "DarkBrightObservation.witnessRight"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "87": {
+   "number": 87,
+   "title": "Formalize descriptive elastica contextual equality and join congruence",
+   "parent_pr": null,
+   "head": "chatgpt/descriptive-elastica-join-20261106",
+   "behind_main": 0,
+   "own_files": [
+    "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+    "linear_input/lean_check/JoinContextualEquivalence.inc"
+   ],
+   "lexical_theorems": 50,
+   "non_lean_changes": {
+    "docs": 3,
+    "tests": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "87",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 50,
+    "new_definitions": 53,
+    "theorems_using_main_any_edge": 14,
+    "theorems_using_main_theorem_in_proof": 9,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 16,
+     "composite": 21,
+     "decision_procedure_only": 11,
+     "application_of_earlier_theorem": 2
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [
+     [
+      "LinearInputOperatorWords.word_now",
+      8
+     ],
+     [
+      "LinearInputOperatorWords.word_step",
+      3
+     ],
+     [
+      "LinearInputOperatorWords.encode_eq_iff",
+      3
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "LinearInputCurveLetters.A",
+     "LinearInputCurveLetters.AAB_real_endpoint",
+     "LinearInputCurveLetters.AAB_state",
+     "LinearInputCurveLetters.ABA_real_endpoint",
+     "LinearInputCurveLetters.ABA_state",
+     "LinearInputCurveLetters.AB_BA_noncommute",
+     "LinearInputCurveLetters.AB_BA_wordEq",
+     "LinearInputCurveLetters.AB_state",
+     "LinearInputCurveLetters.AB_values",
+     "LinearInputCurveLetters.B",
+     "LinearInputCurveLetters.BA_state",
+     "LinearInputCurveLetters.BA_values",
+     "LinearInputCurveLetters.CurvePiece",
+     "LinearInputCurveLetters.CurvePiece.alpha",
+     "LinearInputCurveLetters.CurvePiece.cost",
+     "LinearInputCurveLetters.CurvePiece.z",
+     "LinearInputCurveLetters.Point",
+     "LinearInputCurveLetters.Point.im",
+     "LinearInputCurveLetters.Point.re",
+     "LinearInputCurveLetters.Readout",
+     "LinearInputCurveLetters.Readout.additiveCost",
+     "LinearInputCurveLetters.Readout.endpointReal",
+     "LinearInputCurveLetters.Readout.totalQuarterTurns",
+     "LinearInputCurveLetters._aux_PrimitiveMain___unexpand_LinearInputCurveLetters_curveJoin_1",
+     "LinearInputCurveLetters.contextual_attachment_exact",
+     "LinearInputCurveLetters.contextual_quotient_separates_AB_BA",
+     "LinearInputCurveLetters.contextual_readout_exact",
+     "LinearInputCurveLetters.curveJoin",
+     "LinearInputCurveLetters.curveJoin_assoc",
+     "LinearInputCurveLetters.instDecidableEqCurvePiece",
+     "LinearInputCurveLetters.instDecidableEqCurvePiece.decEq",
+     "LinearInputCurveLetters.instDecidableEqPoint",
+     "LinearInputCurveLetters.instDecidableEqPoint.decEq",
+     "LinearInputCurveLetters.instDecidableEqReadout",
+     "LinearInputCurveLetters.instDecidableEqReadout.decEq",
+     "LinearInputCurveLetters.instReprCurvePiece",
+     "LinearInputCurveLetters.instReprCurvePiece.repr",
+     "LinearInputCurveLetters.instReprPoint",
+     "LinearInputCurveLetters.instReprPoint.repr",
+     "LinearInputCurveLetters.instReprReadout",
+     "LinearInputCurveLetters.instReprReadout.repr",
+     "LinearInputCurveLetters.left_attachment_separates",
+     "LinearInputCurveLetters.observe",
+     "LinearInputCurveLetters.old_curve_kernel_not_stable",
+     "LinearInputCurveLetters.old_quotient_has_no_exact_attachment",
+     "LinearInputCurveLetters.old_quotient_identifies_AB_BA",
+     "LinearInputCurveLetters.pointAdd",
+     "LinearInputCurveLetters.pointAdd_assoc",
+     "LinearInputCurveLetters.rewrite",
+     "LinearInputCurveLetters.rotateQuarter",
+     "LinearInputCurveLetters.rotateQuarter_addPoint",
+     "LinearInputCurveLetters.rotateQuarter_comp",
+     "LinearInputCurveLetters.run_rewrite_identity",
+     "LinearInputCurveLetters.turnLeft",
+     "LinearInputCurveLetters.turnLeft_add",
+     "LinearInputCurveLetters.wordEq_iff_observe_eq",
+     "LinearInputCurveLetters.«_aux_PrimitiveMain___macroRules_LinearInputCurveLetters_term_⋆__1»",
+     "LinearInputCurveLetters.«term_⋆_»",
+     "LinearInputJoinContexts.Context",
+     "LinearInputJoinContexts.ContextEq",
+     "LinearInputJoinContexts.StableJoin",
+     "LinearInputJoinContexts.State",
+     "LinearInputJoinContexts.attach",
+     "LinearInputJoinContexts.attachOld",
+     "LinearInputJoinContexts.attachOld_encode",
+     "LinearInputJoinContexts.attach_encode",
+     "LinearInputJoinContexts.compose",
+     "LinearInputJoinContexts.contextSetoid",
+     "LinearInputJoinContexts.context_implies_word",
+     "LinearInputJoinContexts.context_join",
+     "LinearInputJoinContexts.context_left",
+     "LinearInputJoinContexts.context_now",
+     "LinearInputJoinContexts.context_plug",
+     "LinearInputJoinContexts.context_refl",
+     "LinearInputJoinContexts.context_right",
+     "LinearInputJoinContexts.context_step",
+     "LinearInputJoinContexts.context_symm",
+     "LinearInputJoinContexts.context_trans",
+     "LinearInputJoinContexts.encode",
+     "LinearInputJoinContexts.encode_iff",
+     "LinearInputJoinContexts.exA",
+     "LinearInputJoinContexts.exB",
+     "LinearInputJoinContexts.exJoin",
+     "LinearInputJoinContexts.exK",
+     "LinearInputJoinContexts.exStep",
+     "LinearInputJoinContexts.exZ",
+     "LinearInputJoinContexts.ex_context_separates",
+     "LinearInputJoinContexts.ex_join_not_stable",
+     "LinearInputJoinContexts.ex_run",
+     "LinearInputJoinContexts.ex_word_equal",
+     "LinearInputJoinContexts.mapContext",
+     "LinearInputJoinContexts.plug",
+     "LinearInputJoinContexts.plug_compose",
+     "LinearInputJoinContexts.readout",
+     "LinearInputJoinContexts.readout_encode",
+     "LinearInputJoinContexts.representation_kernel_sub",
+     "LinearInputJoinContexts.representation_minimal",
+     "LinearInputJoinContexts.representation_plug",
+     "LinearInputJoinContexts.stable_iff_old_attach_exists",
+     "LinearInputJoinContexts.stable_iff_word_context",
+     "LinearInputJoinContexts.transition",
+     "LinearInputJoinContexts.transition_encode",
+     "LinearInputJoinContexts.word_implies_context_of_stable"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "88": {
+   "number": 88,
+   "title": "Two-motion emission: coupling gradients, outgoing flux and exact energy balance",
+   "parent_pr": null,
+   "head": "chatgpt/two-motion-emission-20261106",
+   "behind_main": 0,
+   "own_files": [
+    "lean/TwoMotionEmission.lean",
+    "lean/TwoMotionEmissionBridgeTail.inc",
+    "lean/TwoMotionEmissionConsequences.lean"
+   ],
+   "lexical_theorems": 38,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tools": 1
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "Two-motion outgoing energy (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "95",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 41,
+    "new_definitions": 24,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 23,
+     "decision_procedure_only": 4,
+     "composite": 14
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [
+     "lean/TwoMotionEmissionBridgeTail.inc"
+    ],
+    "new_names": [
+     "TwoMotionEmission.Path",
+     "TwoMotionEmission.Path.v₁",
+     "TwoMotionEmission.Path.v₂",
+     "TwoMotionEmission.Path.x₁",
+     "TwoMotionEmission.Path.x₂",
+     "TwoMotionEmission.Path.y",
+     "TwoMotionEmission.SolvesAt",
+     "TwoMotionEmission.SolvesAt.dv₁",
+     "TwoMotionEmission.SolvesAt.dv₂",
+     "TwoMotionEmission.SolvesAt.dx₁",
+     "TwoMotionEmission.SolvesAt.dx₂",
+     "TwoMotionEmission.SolvesAt.dy",
+     "TwoMotionEmission.boundary_zero_of_drive_zero",
+     "TwoMotionEmission.boundary_zero_of_force_zero",
+     "TwoMotionEmission.cancelAcceleration",
+     "TwoMotionEmission.cancelDrive",
+     "TwoMotionEmission.cancelPosition",
+     "TwoMotionEmission.cancelPosition_hasDerivAt",
+     "TwoMotionEmission.cancelVelocity",
+     "TwoMotionEmission.cancelVelocity_hasDerivAt",
+     "TwoMotionEmission.closed_mode_equation",
+     "TwoMotionEmission.closed_mode_returns_to_rest",
+     "TwoMotionEmission.coupling",
+     "TwoMotionEmission.coupling_expansion",
+     "TwoMotionEmission.coupling_hasDerivAt_x1",
+     "TwoMotionEmission.coupling_hasDerivAt_x2",
+     "TwoMotionEmission.coupling_hasDerivAt_y",
+     "TwoMotionEmission.coupling_nonneg",
+     "TwoMotionEmission.emitted",
+     "TwoMotionEmission.emitted_le_initial_energy",
+     "TwoMotionEmission.emitted_nonneg",
+     "TwoMotionEmission.emitted_pos_iff",
+     "TwoMotionEmission.emitted_pos_iff_product_nonzero",
+     "TwoMotionEmission.energy",
+     "TwoMotionEmission.energyAlong",
+     "TwoMotionEmission.energy_balance",
+     "TwoMotionEmission.energy_chain_rule",
+     "TwoMotionEmission.energy_hasDerivAt",
+     "TwoMotionEmission.energy_nonneg",
+     "TwoMotionEmission.force",
+     "TwoMotionEmission.forceAlong",
+     "TwoMotionEmission.forceAlong_continuousOn",
+     "TwoMotionEmission.force_zero_iff_product_zero",
+     "TwoMotionEmission.leftWave",
+     "TwoMotionEmission.leftWave_equation",
+     "TwoMotionEmission.leftWave_space",
+     "TwoMotionEmission.leftWave_time",
+     "TwoMotionEmission.mechanical",
+     "TwoMotionEmission.mechanical_nonneg",
+     "TwoMotionEmission.outgoing_density",
+     "TwoMotionEmission.outgoing_flux",
+     "TwoMotionEmission.outgoing_transport",
+     "TwoMotionEmission.power",
+     "TwoMotionEmission.power_nonneg",
+     "TwoMotionEmission.power_pos_iff",
+     "TwoMotionEmission.quartic",
+     "TwoMotionEmission.rightWave",
+     "TwoMotionEmission.rightWave_equation",
+     "TwoMotionEmission.rightWave_space",
+     "TwoMotionEmission.rightWave_time",
+     "TwoMotionEmission.shifted_quartic",
+     "TwoMotionEmission.source_slope_jump",
+     "TwoMotionEmission.two_sided_flux",
+     "TwoMotionEmission.waveDensity",
+     "TwoMotionEmission.waveFlux"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "89": {
+   "number": 89,
+   "title": "Formalize hysteretic prism memory, balanced optical readout and reversible pulse",
+   "parent_pr": 86,
+   "head": "chatgpt/prism-hysteresis-readout-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/PrismHysteresisReadout.lean"
+   ],
+   "lexical_theorems": 18,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Prism hysteresis readout (isolated Lean)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Prism hysteresis readout (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "96",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 18,
+    "new_definitions": 7,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 11,
+     "library_only": 7
+    },
+    "max_proof_depth": 3,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "PrismHysteresisReadout.balanced_difference",
+     "PrismHysteresisReadout.balanced_probe_recovers_delta",
+     "PrismHysteresisReadout.blindRead",
+     "PrismHysteresisReadout.blind_equivalence",
+     "PrismHysteresisReadout.encoded",
+     "PrismHysteresisReadout.equal_initial_power",
+     "PrismHysteresisReadout.hold_zero",
+     "PrismHysteresisReadout.intensityMinus",
+     "PrismHysteresisReadout.intensityPlus",
+     "PrismHysteresisReadout.probe_separates",
+     "PrismHysteresisReadout.readAndRestore",
+     "PrismHysteresisReadout.readSignal",
+     "PrismHysteresisReadout.read_encoded_signal",
+     "PrismHysteresisReadout.read_false",
+     "PrismHysteresisReadout.read_true",
+     "PrismHysteresisReadout.restore_encoded",
+     "PrismHysteresisReadout.restore_state",
+     "PrismHysteresisReadout.two_writes_retained",
+     "PrismHysteresisReadout.unmix_after_pulse",
+     "PrismHysteresisReadout.write",
+     "PrismHysteresisReadout.write_high",
+     "PrismHysteresisReadout.write_low",
+     "PrismHysteresisReadout.written_state_restored",
+     "PrismHysteresisReadout.written_states_blind",
+     "PrismHysteresisReadout.written_states_separate"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "90": {
+   "number": 90,
+   "title": "Re-enter portable operator loop into Lean-verified autonomy cycle",
+   "parent_pr": null,
+   "head": "chatgpt/operator-loop-reentry-20261107",
+   "behind_main": 0,
+   "own_files": [],
+   "lexical_theorems": 0,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 1,
+    "loopcore": 5,
+    "tests": 2,
+    "tools": 1
+   },
+   "ci": [
+    {
+     "name": "Portable operator loop (finite, no Kaggle submit)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": null,
+   "kernel": {
+    "status": "no_lean_content",
+    "names_shared_with_other_prs": []
+   }
+  },
+  "91": {
+   "number": 91,
+   "title": "Lean bridge: Okanohara control Gramian from an Elastica double-well hysteron",
+   "parent_pr": null,
+   "head": "chatgpt/okanohara-history-transport-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/Research/FiniteMarkovTransport.lean",
+    "lean/Research/OkanoharaTransport.lean"
+   ],
+   "lexical_theorems": 65,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 4,
+    "tests": 2,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "91",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 65,
+    "new_definitions": 66,
+    "theorems_using_main_any_edge": 7,
+    "theorems_using_main_theorem_in_proof": 5,
+    "theorems_reaching_initial": 7,
+    "shapes": {
+     "library_only": 45,
+     "composite": 20
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [
+     [
+      "Elastica.curvature_affine",
+      4
+     ],
+     [
+      "Elastica.energy_affine",
+      4
+     ],
+     [
+      "Elastica.exp_neg_mul_le_exp_neg_mul_iff",
+      1
+     ]
+    ],
+    "files_without_declarations": [],
+    "new_names": [
+     "Elastica.FiberState",
+     "Elastica.FiniteMarkov.Control",
+     "Elastica.FiniteMarkov.ExtendedState",
+     "Elastica.FiniteMarkov.History",
+     "Elastica.FiniteMarkov.IsProbabilityKernel",
+     "Elastica.FiniteMarkov.IsTargetCoupling",
+     "Elastica.FiniteMarkov.PastOperation",
+     "Elastica.FiniteMarkov.Position",
+     "Elastica.FiniteMarkov.TransportPlan",
+     "Elastica.FiniteMarkov.applyPastOperation",
+     "Elastica.FiniteMarkov.bestPair",
+     "Elastica.FiniteMarkov.best_pair_induces_target_coupling",
+     "Elastica.FiniteMarkov.best_pair_reaches_target",
+     "Elastica.FiniteMarkov.canonicalPlan",
+     "Elastica.FiniteMarkov.canonical_plan_is_target_coupling",
+     "Elastica.FiniteMarkov.controlValue",
+     "Elastica.FiniteMarkov.controlledKernel",
+     "Elastica.FiniteMarkov.controlledKernel_is_probability_kernel",
+     "Elastica.FiniteMarkov.endpointMass",
+     "Elastica.FiniteMarkov.every_target_coupling_has_cost",
+     "Elastica.FiniteMarkov.every_target_pair_has_minimum_action",
+     "Elastica.FiniteMarkov.finiteMinimumAction",
+     "Elastica.FiniteMarkov.finite_action_history_gap_and_ot_equality",
+     "Elastica.FiniteMarkov.finite_markov_action_is_half_existing_required_action",
+     "Elastica.FiniteMarkov.finite_markov_action_matches_curvature_gramian",
+     "Elastica.FiniteMarkov.finite_minimum_action_values",
+     "Elastica.FiniteMarkov.finite_transport_cost_same_across_histories",
+     "Elastica.FiniteMarkov.historyKernel",
+     "Elastica.FiniteMarkov.historyKernel_is_probability_kernel",
+     "Elastica.FiniteMarkov.historyStiffness",
+     "Elastica.FiniteMarkov.inducedPlan",
+     "Elastica.FiniteMarkov.instDecidableEqPastOperation",
+     "Elastica.FiniteMarkov.instFintypePastOperation",
+     "Elastica.FiniteMarkov.observe",
+     "Elastica.FiniteMarkov.quadraticAction",
+     "Elastica.FiniteMarkov.reachesTarget",
+     "Elastica.FiniteMarkov.same_readout_after_different_operations",
+     "Elastica.FiniteMarkov.sourceMarginal",
+     "Elastica.FiniteMarkov.targetMarginal",
+     "Elastica.FiniteMarkov.twoPointTransportCost",
+     "Elastica.FiniteMarkov.updateHistory",
+     "Elastica.HistoryState",
+     "Elastica.actualCurvatureStepEnergy",
+     "Elastica.actual_curvature_step_eq_discrete_energy",
+     "Elastica.actual_curvature_switch_minimizes",
+     "Elastica.adaptationCost",
+     "Elastica.adaptation_cost_not_observation_factor",
+     "Elastica.additive_series_has_constant_cost_factor",
+     "Elastica.balanced_path_attains_bound",
+     "Elastica.curvatureDoubleWell",
+     "Elastica.curvatureFlowAction",
+     "Elastica.curvatureFlowPressure",
+     "Elastica.curvatureFlowWork",
+     "Elastica.curvatureTwoStepDisplacement",
+     "Elastica.curvatureTwoStepGramian",
+     "Elastica.curvatureTwoStepMinCost",
+     "Elastica.curvature_double_well_integral",
+     "Elastica.curvature_double_well_nonneg",
+     "Elastica.curvature_double_well_zero_wells",
+     "Elastica.curvature_flow_action_eq_prior_fiber_action",
+     "Elastica.curvature_flow_pulse_action_gap",
+     "Elastica.curvature_flow_work_gap",
+     "Elastica.curvature_flow_work_minimum",
+     "Elastica.curvature_two_step_constant_control_attains",
+     "Elastica.curvature_two_step_cost_by_history",
+     "Elastica.curvature_two_step_cost_gramian",
+     "Elastica.curvature_two_step_cost_lower_bound",
+     "Elastica.curvature_two_step_gramian_by_history",
+     "Elastica.curvature_two_step_gramian_positive",
+     "Elastica.energy_le_history_augmented",
+     "Elastica.fiberAction",
+     "Elastica.fiberDirac",
+     "Elastica.fiberDisplacement",
+     "Elastica.fiberExternalEnergy",
+     "Elastica.fiberMemory",
+     "Elastica.fiberPulse",
+     "Elastica.fiberPushforward",
+     "Elastica.fiberRead",
+     "Elastica.fiberReadCost",
+     "Elastica.fiberResistance",
+     "Elastica.fiberStepEnergy",
+     "Elastica.fiberSwitchPenalty",
+     "Elastica.fiber_down_threshold_iff",
+     "Elastica.fiber_hold_is_strict_minimizer",
+     "Elastica.fiber_pulse_readout_and_cost",
+     "Elastica.fiber_required_input_realizes_target",
+     "Elastica.fiber_resistance_positive",
+     "Elastica.fiber_up_threshold_iff",
+     "Elastica.historyAugmentedEnergy",
+     "Elastica.historyAugmentedWeight",
+     "Elastica.historyUnitCost",
+     "Elastica.history_augmented_energy_mono",
+     "Elastica.history_unit_cost_mono",
+     "Elastica.history_weight_le_original",
+     "Elastica.leftCurvatureResponse",
+     "Elastica.left_curvature_exact_variation",
+     "Elastica.positive_pulse_collapses_mass",
+     "Elastica.positive_pulse_erases_distinct_diracs",
+     "Elastica.positive_pulse_is_not_injective",
+     "Elastica.pulse_action_gap",
+     "Elastica.pulse_cost_does_not_factor_through_readout",
+     "Elastica.readPosition",
+     "Elastica.requiredAction",
+     "Elastica.requiredInput",
+     "Elastica.required_action_exact",
+     "Elastica.rightCurvatureResponse",
+     "Elastica.right_curvature_exact_variation",
+     "Elastica.same_observation_different_cost",
+     "Elastica.serialAction",
+     "Elastica.serialResistance",
+     "Elastica.serial_all_off_action",
+     "Elastica.serial_all_off_resistance",
+     "Elastica.serial_all_on_action",
+     "Elastica.serial_all_on_resistance",
+     "Elastica.switchFiber",
+     "Elastica.switchFiber_minimizes_step_energy",
+     "Elastica.switch_fiber_holds_at_zero",
+     "Elastica.switch_fiber_remanence",
+     "Elastica.twoStepAction",
+     "Elastica.twoStepTransport",
+     "Elastica.two_step_speed_limit",
+     "Elastica.wellCurvature",
+     "Elastica.wellCurvatureResponse",
+     "Elastica.wellStiffness",
+     "Elastica.well_curvature_energy_zero",
+     "Elastica.well_curvature_exact_variation",
+     "Elastica.well_curvature_is_minimum",
+     "Elastica.well_curvature_zero",
+     "Elastica.well_stiffness_eq_previous_resistance",
+     "Elastica.well_stiffness_off_on",
+     "Elastica.well_stiffness_positive"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "92": {
+   "number": 92,
+   "title": "Formalize fluid-interface energy, prism phase readout, aliasing and multibit observation",
+   "parent_pr": 89,
+   "head": "chatgpt/fluid-prism-phase-memory-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/FluidPrismPhaseMemory.lean"
+   ],
+   "lexical_theorems": 29,
+   "non_lean_changes": {
+    ".github": 3,
+    "docs": 3,
+    "tools": 3
+   },
+   "ci": [
+    {
+     "name": "Fluid-prism phase memory (isolated Lean)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Fluid-prism phase memory (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "96",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 29,
+    "new_definitions": 8,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 12,
+     "library_only": 16,
+     "application_of_earlier_theorem": 1
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "FluidPrismPhaseMemory.calibrated_phase",
+     "FluidPrismPhaseMemory.calibrated_probe_relation",
+     "FluidPrismPhaseMemory.cellReadout",
+     "FluidPrismPhaseMemory.cell_readout_injective",
+     "FluidPrismPhaseMemory.energy",
+     "FluidPrismPhaseMemory.energyCurvature",
+     "FluidPrismPhaseMemory.energySlope",
+     "FluidPrismPhaseMemory.every_encoded_height_minimizes",
+     "FluidPrismPhaseMemory.height",
+     "FluidPrismPhaseMemory.height_false",
+     "FluidPrismPhaseMemory.height_true",
+     "FluidPrismPhaseMemory.hysteretic_optical_separation",
+     "FluidPrismPhaseMemory.memory_count",
+     "FluidPrismPhaseMemory.neutral_barrier",
+     "FluidPrismPhaseMemory.neutral_energy_left",
+     "FluidPrismPhaseMemory.neutral_energy_nonnegative",
+     "FluidPrismPhaseMemory.neutral_energy_right",
+     "FluidPrismPhaseMemory.neutral_energy_zero_only",
+     "FluidPrismPhaseMemory.neutral_probe_does_not_rewrite",
+     "FluidPrismPhaseMemory.neutral_stationary_barrier",
+     "FluidPrismPhaseMemory.neutral_stationary_left",
+     "FluidPrismPhaseMemory.neutral_stationary_right",
+     "FluidPrismPhaseMemory.noisy_high_below_threshold",
+     "FluidPrismPhaseMemory.noisy_low_above_threshold",
+     "FluidPrismPhaseMemory.opticalPhase",
+     "FluidPrismPhaseMemory.phase",
+     "FluidPrismPhaseMemory.phase_false",
+     "FluidPrismPhaseMemory.phase_true",
+     "FluidPrismPhaseMemory.port",
+     "FluidPrismPhaseMemory.port_bounded",
+     "FluidPrismPhaseMemory.port_false",
+     "FluidPrismPhaseMemory.port_injective_on_bits",
+     "FluidPrismPhaseMemory.port_period_four",
+     "FluidPrismPhaseMemory.port_separates",
+     "FluidPrismPhaseMemory.port_true",
+     "FluidPrismPhaseMemory.retained_height_high",
+     "FluidPrismPhaseMemory.retained_height_low"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "93": {
+   "number": 93,
+   "title": "Derive Fresnel–Airy prism-film readout, fringe contrast and thickness aliasing in Lean",
+   "parent_pr": 92,
+   "head": "chatgpt/prism-airy-reflectance-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/PrismAiryReflectance.lean"
+   ],
+   "lexical_theorems": 23,
+   "non_lean_changes": {
+    ".github": 4,
+    "docs": 4,
+    "tools": 4
+   },
+   "ci": [
+    {
+     "name": "Prism Airy film reflectance (isolated Lean)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Prism Airy film reflectance (isolated Lean)",
+     "conclusion": "failure"
+    }
+   ],
+   "kernel_tip": "96",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 23,
+    "new_definitions": 8,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "composite": 9,
+     "library_only": 11,
+     "decision_procedure_only": 3
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "PrismAiryReflectance.airy",
+     "PrismAiryReflectance.airy_at_neg_one",
+     "PrismAiryReflectance.airy_at_one",
+     "PrismAiryReflectance.airy_contrast",
+     "PrismAiryReflectance.contrast_margin",
+     "PrismAiryReflectance.critical_root_has_required_square",
+     "PrismAiryReflectance.exitInterface",
+     "PrismAiryReflectance.explicit_fold",
+     "PrismAiryReflectance.filmReflect",
+     "PrismAiryReflectance.film_halfwave_high",
+     "PrismAiryReflectance.film_three_quarters_low",
+     "PrismAiryReflectance.first_interface_matched",
+     "PrismAiryReflectance.fluidIndex",
+     "PrismAiryReflectance.fresnel",
+     "PrismAiryReflectance.fresnel_same",
+     "PrismAiryReflectance.glassIndex",
+     "PrismAiryReflectance.incidentInterface",
+     "PrismAiryReflectance.phase_at_halfwave",
+     "PrismAiryReflectance.phase_at_three_quarters",
+     "PrismAiryReflectance.quartic_fold_positive_drive",
+     "PrismAiryReflectance.reflectance_period",
+     "PrismAiryReflectance.roundtripPhase",
+     "PrismAiryReflectance.roundtrip_period",
+     "PrismAiryReflectance.sample_contrast_positive",
+     "PrismAiryReflectance.sample_first_interface",
+     "PrismAiryReflectance.sample_high",
+     "PrismAiryReflectance.sample_low",
+     "PrismAiryReflectance.sample_second_interface",
+     "PrismAiryReflectance.second_interface_matched",
+     "PrismAiryReflectance.thickness_alias",
+     "PrismAiryReflectance.thickness_shift_nonzero"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "94": {
+   "number": 94,
+   "title": "Formalize two-wavelength height separation, exact aliases and noise robustness",
+   "parent_pr": 92,
+   "head": "chatgpt/two-wavelength-phase-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/TwoWavelengthPhase.lean",
+    "lean/TwoWavelengthRecovery.lean",
+    "lean/TwoWavelengthSeparation.lean"
+   ],
+   "lexical_theorems": 56,
+   "non_lean_changes": {
+    ".github": 4,
+    "docs": 5,
+    "tools": 6
+   },
+   "ci": [
+    {
+     "name": "ARC3 Public Demo diagnostics (no Kaggle submissions)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Two-wavelength phase observation (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "94",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 56,
+    "new_definitions": 15,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 22,
+     "composite": 30,
+     "application_of_earlier_theorem": 3,
+     "decision_procedure_only": 1
+    },
+    "max_proof_depth": 5,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "TwoWavelengthPhase.dispersive_calibrated_phase",
+     "TwoWavelengthPhase.effectiveRatio",
+     "TwoWavelengthPhase.firstPort",
+     "TwoWavelengthPhase.first_channel_unchanged",
+     "TwoWavelengthPhase.first_left",
+     "TwoWavelengthPhase.first_period_four",
+     "TwoWavelengthPhase.first_right",
+     "TwoWavelengthPhase.first_three",
+     "TwoWavelengthPhase.first_two",
+     "TwoWavelengthPhase.first_zero",
+     "TwoWavelengthPhase.fiveHeight",
+     "TwoWavelengthPhase.five_height_first_not_injective",
+     "TwoWavelengthPhase.five_height_readout",
+     "TwoWavelengthPhase.five_height_readout_injective",
+     "TwoWavelengthPhase.idealObservation",
+     "TwoWavelengthPhase.ideal_period_eight",
+     "TwoWavelengthPhase.ideal_second_calibrated_phase",
+     "TwoWavelengthPhase.injective_on_five_height_range",
+     "TwoWavelengthPhase.mixed_counterexample",
+     "TwoWavelengthPhase.mixed_counterexample_values",
+     "TwoWavelengthPhase.no_ratio_globally_injective",
+     "TwoWavelengthPhase.nondispersive_ratio",
+     "TwoWavelengthPhase.observation",
+     "TwoWavelengthPhase.observation_refines_first",
+     "TwoWavelengthPhase.observation_reflection",
+     "TwoWavelengthPhase.periodic_counterexample",
+     "TwoWavelengthPhase.proposed_pair_gap",
+     "TwoWavelengthPhase.proposed_pair_separated",
+     "TwoWavelengthPhase.proposed_pair_values",
+     "TwoWavelengthPhase.proposed_single_collision",
+     "TwoWavelengthPhase.ratioPhase",
+     "TwoWavelengthPhase.ratioPort",
+     "TwoWavelengthPhase.secondPort",
+     "TwoWavelengthPhase.second_left",
+     "TwoWavelengthPhase.second_one",
+     "TwoWavelengthPhase.second_period_eight",
+     "TwoWavelengthPhase.second_three",
+     "TwoWavelengthPhase.second_two",
+     "TwoWavelengthPhase.second_wavelength_ne_zero",
+     "TwoWavelengthPhase.second_zero",
+     "TwoWavelengthPhase.wavelengthOne",
+     "TwoWavelengthPhase.wavelengthTwo",
+     "TwoWavelengthPhase.wavelengths_positive",
+     "TwoWavelengthRecovery.carrier",
+     "TwoWavelengthRecovery.carrier_eq_of_observation_eq",
+     "TwoWavelengthRecovery.carrier_injOn_interval",
+     "TwoWavelengthRecovery.carrier_recovery",
+     "TwoWavelengthRecovery.finite_alphabet_injective_of_interval",
+     "TwoWavelengthRecovery.first_port_eq_carrier_sq",
+     "TwoWavelengthRecovery.halfPhase",
+     "TwoWavelengthRecovery.half_phase_mem_Icc",
+     "TwoWavelengthRecovery.ideal_injOn_of_interval_and_exclusion",
+     "TwoWavelengthRecovery.observation_eq_iff_carrier",
+     "TwoWavelengthRecovery.phase_eq_two_half",
+     "TwoWavelengthRecovery.ratio_phase_eq_three_half",
+     "TwoWavelengthRecovery.second_port_chebyshev",
+     "TwoWavelengthSeparation.BoundedReadout",
+     "TwoWavelengthSeparation.HeightAlias",
+     "TwoWavelengthSeparation.bounded_noise_disjoint",
+     "TwoWavelengthSeparation.finite_alphabet_injective",
+     "TwoWavelengthSeparation.first_port_eq_iff",
+     "TwoWavelengthSeparation.five_height_bounded_noise",
+     "TwoWavelengthSeparation.five_height_gap",
+     "TwoWavelengthSeparation.mixed_sign_alias",
+     "TwoWavelengthSeparation.mixed_sign_heights_distinct",
+     "TwoWavelengthSeparation.not_injective_on_four_unit_interval",
+     "TwoWavelengthSeparation.observation_eq_iff",
+     "TwoWavelengthSeparation.observation_injOn_iff",
+     "TwoWavelengthSeparation.outputGap",
+     "TwoWavelengthSeparation.ratio_port_eq_iff",
+     "TwoWavelengthSeparation.scaled_cos_eq_iff"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "95": {
+   "number": 95,
+   "title": "Add a local IVP existence bridge for two-motion emission",
+   "parent_pr": 88,
+   "head": "chatgpt/two-motion-ivp-existence-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/TwoMotionEmissionIVP.lean"
+   ],
+   "lexical_theorems": 5,
+   "non_lean_changes": {
+    ".github": 2,
+    "docs": 3,
+    "tools": 2
+   },
+   "ci": [
+    {
+     "name": "Two-motion IVP existence (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "95",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 5,
+    "new_definitions": 5,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 2,
+     "composite": 3
+    },
+    "max_proof_depth": 4,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "TwoMotionEmission.IVPState",
+     "TwoMotionEmission.exists_local_ivp",
+     "TwoMotionEmission.exists_local_ivp_with_positive_emission",
+     "TwoMotionEmission.initial_derivatives_of_ivp",
+     "TwoMotionEmission.ivpForce",
+     "TwoMotionEmission.ivpInitial",
+     "TwoMotionEmission.ivpPath",
+     "TwoMotionEmission.ivpVectorField",
+     "TwoMotionEmission.ivpVectorField_contDiff",
+     "TwoMotionEmission.ivp_components_solve"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "96": {
+   "number": 96,
+   "title": "Add oblique Fresnel TMM checks for prism readout",
+   "parent_pr": 93,
+   "head": "chatgpt/prism-oblique-tmm-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/PrismObliqueTMM.lean"
+   ],
+   "lexical_theorems": 4,
+   "non_lean_changes": {
+    ".github": 5,
+    "docs": 5,
+    "tools": 5
+   },
+   "ci": [
+    {
+     "name": "Oblique prism TMM (isolated Lean)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Oblique prism TMM (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "96",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 4,
+    "new_definitions": 16,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "decision_procedure_only": 1,
+     "composite": 2,
+     "library_only": 1
+    },
+    "max_proof_depth": 1,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "PrismObliqueTMM.FilmMatrixPattern",
+     "PrismObliqueTMM.FilmMatrixPattern.a",
+     "PrismObliqueTMM.FilmMatrixPattern.b",
+     "PrismObliqueTMM.FilmMatrixPattern.c",
+     "PrismObliqueTMM.FilmMatrixPattern.d",
+     "PrismObliqueTMM.RayGeometry",
+     "PrismObliqueTMM.RayGeometry.airRefraction",
+     "PrismObliqueTMM.RayGeometry.apexAngle",
+     "PrismObliqueTMM.RayGeometry.filmRefraction",
+     "PrismObliqueTMM.RayGeometry.glassSideIncidence",
+     "PrismObliqueTMM.compose",
+     "PrismObliqueTMM.evanescent_output_reflectance_one",
+     "PrismObliqueTMM.inputImag",
+     "PrismObliqueTMM.inputReal",
+     "PrismObliqueTMM.reflectedIntensity",
+     "PrismObliqueTMM.snellRadicand",
+     "PrismObliqueTMM.supercritical_has_no_real_refracted_cosine",
+     "PrismObliqueTMM.supercritical_radicand_negative",
+     "PrismObliqueTMM.tangentialIndex",
+     "PrismObliqueTMM.unit_intensity_of_conjugate_ratio"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  },
+  "97": {
+   "number": 97,
+   "title": "Formalize conditional 3D-PAD finite observation identifiability",
+   "parent_pr": null,
+   "head": "chatgpt/pad-3d-identifiability-20261107",
+   "behind_main": 0,
+   "own_files": [
+    "lean/PADFourLayer.lean"
+   ],
+   "lexical_theorems": 10,
+   "non_lean_changes": {
+    ".github": 1,
+    "docs": 1,
+    "tools": 1
+   },
+   "ci": [
+    {
+     "name": "PAD four-layer observational identifiability (isolated Lean)",
+     "conclusion": "success"
+    },
+    {
+     "name": "Primitive Lean integration verification",
+     "conclusion": "success"
+    },
+    {
+     "name": "PAD four-layer observational identifiability (isolated Lean)",
+     "conclusion": "success"
+    }
+   ],
+   "kernel_tip": "97",
+   "kernel": {
+    "status": "ok",
+    "new_theorems": 10,
+    "new_definitions": 14,
+    "theorems_using_main_any_edge": 0,
+    "theorems_using_main_theorem_in_proof": 0,
+    "theorems_reaching_initial": 0,
+    "shapes": {
+     "library_only": 8,
+     "composite": 2
+    },
+    "max_proof_depth": 2,
+    "most_used_main_theorems": [],
+    "files_without_declarations": [],
+    "new_names": [
+     "PADFourLayer.Profile",
+     "PADFourLayer.Profile.p0",
+     "PADFourLayer.Profile.p1",
+     "PADFourLayer.Profile.p2",
+     "PADFourLayer.Profile.p3",
+     "PADFourLayer.instDecidableEqProfile",
+     "PADFourLayer.instDecidableEqProfile.decEq",
+     "PADFourLayer.instReprProfile",
+     "PADFourLayer.instReprProfile.repr",
+     "PADFourLayer.mass",
+     "PADFourLayer.mean",
+     "PADFourLayer.minus",
+     "PADFourLayer.plus",
+     "PADFourLayer.response",
+     "PADFourLayer.two_probe_injective",
+     "PADFourLayer.two_probes_zero",
+     "PADFourLayer.witness_difference_factorization",
+     "PADFourLayer.witness_distinct",
+     "PADFourLayer.witness_first_probe",
+     "PADFourLayer.witness_mass",
+     "PADFourLayer.witness_mean",
+     "PADFourLayer.witness_second_probe",
+     "PADFourLayer.witness_second_probe_gap",
+     "PADFourLayer.zeroes_imply_factor"
+    ],
+    "names_shared_with_other_prs": []
+   }
+  }
+ },
+ "duplicate_names": 170,
+ "scope": "Kernel occurrences only. Not reaching main is not a non-derivability claim; a single-theorem application is a term-shape heuristic, not a novelty verdict."
+}
