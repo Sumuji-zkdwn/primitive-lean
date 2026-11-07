@@ -8,26 +8,26 @@ This graph distinguishes (1) exact Lean import, (2) literal qualified declaratio
 references, (3) globally unique bare-name candidates, and (4) PR base-target edges.
 Only (1) and (2) appear in the graphical source edges.
 
-Main files: 191; PR overlay files: 26.
-Declaration names scanned: 3855.
-Source edges: {"exact_import": 120, "qualified_reference": 183, "unique_identifier_candidate": 385}.
+Main files: 217; PR overlay files: 26.
+Declaration names scanned: 4390.
+Source edges: {"exact_import": 120, "qualified_reference": 205, "unique_identifier_candidate": 431}.
 
 ## Source group dependencies
 
 ~~~mermaid
 flowchart LR
-  g0["Arithmetic / Galois (10)"]
+  g0["Arithmetic / Galois (16)"]
   g1["Bayes / Jets (3)"]
   g2["Elastica (25)"]
-  g3["F0 / Observation (15)"]
-  g4["F16 / Recovery (13)"]
+  g3["F0 / Observation (16)"]
+  g4["F16 / Recovery (14)"]
   g5["IUT comparison / Pilot (8)"]
   g6["LinearInput foundation (36)"]
-  g7["Local / Global gluing (17)"]
+  g7["Local / Global gluing (18)"]
   g8["Operator / Rulefold (11)"]
   g9["OrbitTrace (18)"]
   g10["Other (36)"]
-  g11["Other supplements (14)"]
+  g11["Other supplements (31)"]
   g12["WFS / Fenchel (11)"]
   g10 -->|36 source refs| g2
   g6 -->|17 source refs| g2
@@ -35,19 +35,21 @@ flowchart LR
   g0 -->|12 source refs| g3
   g3 -->|5 source refs| g4
   g7 -->|5 source refs| g12
+  g11 -->|5 source refs| g3
   g5 -->|4 source refs| g3
   g10 -->|4 source refs| g8
   g11 -->|4 source refs| g2
   g3 -->|3 source refs| g6
   g4 -->|3 source refs| g3
-  g11 -->|3 source refs| g3
   g11 -->|3 source refs| g8
   g1 -->|2 source refs| g2
   g1 -->|2 source refs| g3
   g3 -->|2 source refs| g12
   g12 -->|2 source refs| g3
   g12 -->|2 source refs| g11
+  g0 -->|1 source refs| g11
   g10 -->|1 source refs| g11
+  g11 -->|1 source refs| g4
 ~~~
 
 ## PR targets (not theorem dependencies)

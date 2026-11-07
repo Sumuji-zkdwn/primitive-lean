@@ -2538,6 +2538,79 @@
       "sha256": "0c6a571742fe0add0488fc917124dcfbb727c29cd1aa0e1881f82944743a60bb"
     },
     {
+      "id": "main:linear_input/lean_check/AssociatesFactorIdentification.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/AssociatesFactorIdentification.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputAssociatesFactorIdentification",
+      "declarations": [
+        "AtomicWord",
+        "AssociatedWords",
+        "evaluation",
+        "ProductIdentifiesAtoms",
+        "IdentifiesWithUnits",
+        "probes_mono",
+        "zero_probes_iff_product_identifies",
+        "ufm_product_identifies",
+        "ufm_zero_extra_probes",
+        "ufm_iff_product_identifies_of_exists",
+        "ufm_irreducible_iff_prime",
+        "unit_multiple_associated",
+        "associates_quotient_forgets_units",
+        "steps_preserve_associated",
+        "ufm_terminal_paths_agree",
+        "collision_requires_nonempty_observation"
+      ],
+      "imports": [],
+      "sha256": "b46404e503674bce0e9929d0be17c403387bb36a27558a412bf93ddb593d4620"
+    },
+    {
+      "id": "main:linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputAtomicGeneratorClassification",
+      "declarations": [
+        "atom_is_generator",
+        "atom_iff_three_generators"
+      ],
+      "imports": [],
+      "sha256": "056b65d3d5569e608b9d4010f8b4e8fa343ba78a863d18cb7a22f7649cd010bf"
+    },
+    {
+      "id": "main:linear_input/lean_check/AtomicHalfFactorial.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/AtomicHalfFactorial.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputAtomicHalfFactorial",
+      "declarations": [
+        "atomic_weight_two",
+        "atomic_multiset_weight",
+        "all_atomic_factorizations_same_length"
+      ],
+      "imports": [],
+      "sha256": "c78a8a73bc5b4ab028c27a15daf7d9576c587ef10c104d604e3ebb5a8cd3bbcb"
+    },
+    {
+      "id": "main:linear_input/lean_check/AtomicWordProbe.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/AtomicWordProbe.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputAtomicWordProbe",
+      "declarations": [
+        "generatorWord",
+        "generatorWord_product",
+        "generatorWord_length",
+        "generatorWord_six_count",
+        "atomic_word_has_counts",
+        "product_and_six_identifies_all_atomic_words",
+        "product_alone_does_not_identify_all_atomic_words",
+        "exactly_one_extra_probe_for_all_atomic_words"
+      ],
+      "imports": [],
+      "sha256": "926dc6dfdffc70d1fe7b59ee9c0ff3f548fbb1a28436b240942a8c99921cc69b"
+    },
+    {
       "id": "main:linear_input/lean_check/BranchFibers.inc",
       "scope": "main",
       "path": "linear_input/lean_check/BranchFibers.inc",
@@ -2616,6 +2689,153 @@
       ],
       "imports": [],
       "sha256": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevTower",
+      "declarations": [
+        "quotientNumerator",
+        "quotientDenominator",
+        "genericQuotient",
+        "numerator_sub_denominator_sq",
+        "quotientDenominator_ne_zero",
+        "numerator_denominator_isCoprime",
+        "quotient_gcd_one",
+        "quotient_num",
+        "quotient_denom",
+        "finrank_genericQuotient",
+        "genericParameter",
+        "adjoin_half_eq",
+        "finrank_genericParameter",
+        "genericQuotient_eq_pow_add_inv",
+        "genericParameter_eq_joukowski"
+      ],
+      "imports": [],
+      "sha256": "3e19941966b5b366b3e0a2aa0393b3505d24ed4d0a0cf6e920bee05ebe0a1eb5"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevDescent",
+      "declarations": [
+        "joukowski",
+        "cubic",
+        "chebyIterate",
+        "cubicPoly",
+        "chebyPoly",
+        "cubicPoly_eval",
+        "chebyPoly_eval",
+        "cubic_joukowski",
+        "iterate_joukowski",
+        "rootCandidate",
+        "candidate_root",
+        "candidate_isRoot",
+        "primitive_denom_ne_zero",
+        "reconstruct_z",
+        "reconstruct_z_primitive",
+        "two_candidates_generate"
+      ],
+      "imports": [],
+      "sha256": "a4764af3066ea46ac58409acacd4cdfcb86b6bafe642a255cf78e8d3501e678b"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevAutomorphisms",
+      "declarations": [
+        "E",
+        "Base",
+        "Aut",
+        "adjoin_scaled_X",
+        "adjoin_inv_X",
+        "linearAuto",
+        "inversionAuto",
+        "linearAuto_fixes_parameter",
+        "inversionAuto_fixes_parameter",
+        "fixes_adjoin_parameter",
+        "asBaseAuto",
+        "rotation",
+        "reflection",
+        "ratFunc_algEquiv_ext_X",
+        "baseAuto_ext_X",
+        "rotation_pow_order",
+        "reflection_sq",
+        "rotation_symm_X",
+        "reflection_conjugates_rotation",
+        "zmodPower",
+        "zmodPower_zero",
+        "zmodPower_add",
+        "zmodPower_neg",
+        "conjugate_pow_of_involution",
+        "rotationPower",
+        "rotationPower_add",
+        "rotationPower_neg",
+        "reflection_conjugates_rotationPower",
+        "rotationPower_mul_reflection",
+        "dihedralRepresentation",
+        "dihedralRepresentation_r_X",
+        "dihedralRepresentation_sr_X",
+        "no_scalar_X_eq_inverse",
+        "dihedralRepresentation_injective"
+      ],
+      "imports": [],
+      "sha256": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevNext",
+      "declarations": [
+        "cubicPoly_natDegree",
+        "chebyPoly_natDegree",
+        "generic_square_not_constant",
+        "joukowski_eq_iff_rf",
+        "generic_candidate_injective"
+      ],
+      "imports": [],
+      "sha256": "c9df8a0237371b7c841e0220c6e5d68e32a06adb46c8735fbbb6faae37730b1b"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevSplittingField.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevSplitting",
+      "declarations": [
+        "E",
+        "parameterField",
+        "parameterField_finrank",
+        "parameter",
+        "basePolynomial",
+        "targetPolynomial",
+        "chebyPoly_map",
+        "map_basePolynomial",
+        "chebyPoly_natDegree_E",
+        "targetPolynomial_natDegree",
+        "basePolynomial_natDegree",
+        "targetPolynomial_ne_zero",
+        "candidate",
+        "primitiveRoot_C",
+        "target_candidate_isRoot",
+        "candidateSet",
+        "candidateSet_card",
+        "targetPolynomial_splits",
+        "candidate_mem_rootSet",
+        "rootSet_adjoin_eq_top",
+        "rationalFunction_isSplittingField",
+        "actualSplittingFieldEquiv"
+      ],
+      "imports": [],
+      "sha256": "5bee36fce9a721ce50effcb3568c131d8029861099af9e309c1510b83c6b970f"
     },
     {
       "id": "main:linear_input/lean_check/Coercivity.inc",
@@ -2973,6 +3193,80 @@
       ],
       "imports": [],
       "sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f"
+    },
+    {
+      "id": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/DecompositionF0Bridge.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputDecompositionF0Bridge",
+      "declarations": [
+        "merge_preserves_sum",
+        "merge_decreases_card",
+        "merge_normal_form_exists",
+        "chain_is_path",
+        "positive_reaches_singleton",
+        "singleton_terminal",
+        "merge_output_nonempty",
+        "path_preserves_nonempty",
+        "path_preserves_positive",
+        "positive_terminal_is_singleton",
+        "positive_unique_normal_form",
+        "positive_terminal_value_identifies"
+      ],
+      "imports": [],
+      "sha256": "22cecd11ce63dfcba64363ae0aea2e7681bd60807aaf5005d1c57e84fdb43dd6"
+    },
+    {
+      "id": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/DecompositionIdentification.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputDecompositionIdentification",
+      "declarations": [
+        "Steps",
+        "Terminal",
+        "steps_trans",
+        "steps_preserve",
+        "terminal_path_eq",
+        "terminating_normal_form",
+        "TerminalValueInjective",
+        "normal_forms_unique_of_value",
+        "terminal_value_injective_of_common_ancestor",
+        "IdentifiesTerminals",
+        "joint_identifies_terminals_iff",
+        "same_final_of_invariant_probe",
+        "IdentifiesWith",
+        "identifies_with_mono",
+        "zero_extra_probes_iff",
+        "identifies_with_iff_hits_collisions",
+        "branchStep",
+        "branchRank",
+        "branchValue",
+        "branchProbe",
+        "branch_step_preserves",
+        "branch_rank_decreases",
+        "branch_terminates",
+        "branch_terminal_one",
+        "branch_terminal_two",
+        "branch_root_reaches_one",
+        "branch_root_reaches_two",
+        "branch_nonconfluent",
+        "branch_value_not_identifying",
+        "branch_probe_identifies",
+        "allowedProbe",
+        "zero_probes_insufficient",
+        "one_probe_suffices",
+        "one_probe_is_minimal",
+        "generatorValue",
+        "evaluateFactors",
+        "factorsFourNine",
+        "factorsSixSix",
+        "countFour",
+        "generator_collision"
+      ],
+      "imports": [],
+      "sha256": "f953488cd473b2d6732dd8659d606673de79486a59f61f82dcf8b05359488eb0"
     },
     {
       "id": "main:linear_input/lean_check/EWFSFenchel.inc",
@@ -3565,6 +3859,92 @@
       "sha256": "fa96ebb4fa9b05e41c77771fb386c1af0e851bec1fd59b556cafa1cf7f62f0fc"
     },
     {
+      "id": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/F16RimRecovery.inc",
+      "group": "F16 / Recovery",
+      "namespace": "LinearInputF16RimRecovery",
+      "declarations": [
+        "State",
+        "Channel",
+        "f16Partner",
+        "f16PartnerCode",
+        "f16Partner_eq_code",
+        "f16Sign",
+        "f16SignR",
+        "f16Base",
+        "f16Slope",
+        "f16RelativeMatrix",
+        "f16BasisMatrix",
+        "f16Step",
+        "f16RightIndex_involutive",
+        "f16Partner_involutive",
+        "f16RightIndex_ten_three",
+        "f16Basis_mulVec",
+        "f16Basis_transpose_mulVec",
+        "f16Base_eq_three",
+        "f16Eps_three_self_mul",
+        "f16Eps_three_self_mul_real",
+        "f16BasisMatrix_three_transpose_mul",
+        "f16Base_transpose_mul_base_eq_one",
+        "f16Base_inv_eq_transpose",
+        "f16RelativeMatrix_eq_checker_inverse",
+        "f16Slope_eq_ten",
+        "f16_relative_action",
+        "f16ChannelLow",
+        "f16ChannelHigh",
+        "f16ChannelOf",
+        "f16Observe",
+        "f16Observe_checker_row0",
+        "f16Observe_checker_row1",
+        "f16Observe_checker_row2",
+        "f16Observe_checker_row3",
+        "f16ObserveChecker",
+        "f16Observe_eq_checker",
+        "f16Sign_self_mul_int",
+        "f16Sign_partner_low_int",
+        "f16Sign_partner_high_int",
+        "f16SignR_self_mul",
+        "f16SignR_cancel_self",
+        "f16SignR_cancel_left",
+        "f16SignR_cancel_right",
+        "f16SignR_partner_low",
+        "f16SignR_partner_high",
+        "f16Step_twice",
+        "f16Step_twice_at_partner",
+        "f16Step_thrice_at_partner",
+        "f16SignR_cancel_partner_low",
+        "f16SignR_cancel_partner_high",
+        "f16OrbitState",
+        "f16Trace4",
+        "f16MatrixOrbitState",
+        "f16MatrixTrace4",
+        "f16MatrixOrbitState_eq_f16OrbitState",
+        "f16MatrixTrace4_eq_f16Trace4",
+        "f16Decode",
+        "f16_decode_four_trace",
+        "f16_decode_original_matrix_trace",
+        "f16_four_phase_injective",
+        "f16Zero",
+        "f16ThreePhaseWitness",
+        "f16ThreePhaseWitness_partner_low_zero",
+        "f16ThreePhaseWitness_partner_high_zero",
+        "f16ThreePhaseWitness_channel_pair",
+        "f16Trace3",
+        "f16_three_phase_collision",
+        "f16_zero_ne_three_phase_witness",
+        "f16_three_phase_not_injective",
+        "f16Trace2",
+        "f16Trace1",
+        "f16_two_phase_collision",
+        "f16_two_phase_not_injective",
+        "f16_one_phase_collision",
+        "f16_one_phase_not_injective"
+      ],
+      "imports": [],
+      "sha256": "8ece9145fa42f4de0f5163ed2dec78c4d7bf866b2f3b0fa45c80ec93461b1ccc"
+    },
+    {
       "id": "main:linear_input/lean_check/F16SaddleCantor.inc",
       "scope": "main",
       "path": "linear_input/lean_check/F16SaddleCantor.inc",
@@ -3725,6 +4105,45 @@
       ],
       "imports": [],
       "sha256": "8d919b3d39be880fd82959c7be1ee9dd40e9f5d2d009d70af95bbb7dc8e1b2b9"
+    },
+    {
+      "id": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/FiniteObservationSeparation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputFiniteObservation",
+      "declarations": [
+        "joint",
+        "joint_eq_iff",
+        "joint_injective_iff",
+        "strict_refinement_witness",
+        "no_factor_of_separation",
+        "strict_probe_not_invariant",
+        "coarse",
+        "marker",
+        "coarse_idempotent",
+        "coarse_not_injective",
+        "marker_not_injective",
+        "coarse_marker_joint_injective",
+        "allowedProbe",
+        "no_single_allowed_probe",
+        "both_allowed_probes_identify",
+        "f0_strict_observation",
+        "parity_not_injective",
+        "ternary_not_injective",
+        "six_coordinate_joint_injective",
+        "six_state_count",
+        "ternaryFinal",
+        "ternaryNonzero",
+        "ternaryCesaro",
+        "ternary_final_constant",
+        "ternary_same_nonzero",
+        "ternary_cesaro_distinct",
+        "ternary_same_evaluation_more_observation",
+        "ternary_cesaro_not_factor"
+      ],
+      "imports": [],
+      "sha256": "431492dd7339e1f66dd91d331475058102d8bfe463e7eb87eef4d7bbc96fb2a8"
     },
     {
       "id": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
@@ -3937,6 +4356,51 @@
       "sha256": "ce31350415300a6f772521c13d89f61808e4ed4911d7c37f39ac2bafde1987ca"
     },
     {
+      "id": "main:linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputGeneratedNonUnique",
+      "declarations": [
+        "generatorSet",
+        "generated",
+        "G",
+        "four",
+        "six",
+        "nine",
+        "one_or_at_least_four",
+        "member_positive",
+        "generated_left_cancellation",
+        "Atomic",
+        "small_is_atomic",
+        "four_atomic",
+        "six_atomic",
+        "nine_atomic",
+        "four_nine_eq_six_six",
+        "nonunique_atomic_factorization",
+        "Divides",
+        "Primal",
+        "six_dvd_four_times_nine",
+        "six_not_dvd_four",
+        "six_not_dvd_nine",
+        "six_not_primal",
+        "word49",
+        "word66",
+        "word_products_collide",
+        "words_distinct",
+        "word_lengths_equal",
+        "actual_nonunique_factor_words",
+        "candidate",
+        "candidateProduct",
+        "probeFour",
+        "candidate_product_not_injective",
+        "probe_four_injective",
+        "one_extra_probe_on_two_words"
+      ],
+      "imports": [],
+      "sha256": "2dad32d635cfa55954190549d24aa4940a9d11858c7a99aa994b9d80316ba93b"
+    },
+    {
       "id": "main:linear_input/lean_check/GlobalConsequences.inc",
       "scope": "main",
       "path": "linear_input/lean_check/GlobalConsequences.inc",
@@ -4036,6 +4500,129 @@
       ],
       "imports": [],
       "sha256": "e1468dc3a1d2647923debe57854f0e77c745d88244daf44be2b1b890e8e9a770"
+    },
+    {
+      "id": "main:linear_input/lean_check/GravityCocycle.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/GravityCocycle.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputGravityCocycle",
+      "declarations": [
+        "crossEnergy",
+        "cross_empty_left",
+        "cross_empty_right",
+        "cross_union_left",
+        "cross_union_right",
+        "cross_cocycle",
+        "cross_symmetric",
+        "internalEnergy",
+        "internal_union",
+        "cross_is_coboundary",
+        "newtonKernel",
+        "newton_kernel_symmetric",
+        "newton_cross_symmetric",
+        "newton_cross_cocycle",
+        "newton_cross_is_coboundary",
+        "linePotential",
+        "line_potential_derivative",
+        "line_force_inverse_square",
+        "line_force_attractive",
+        "mass_only_merger_loses_external_potential"
+      ],
+      "imports": [],
+      "sha256": "50157183f74a2117a15b242d4dbab3ba20d736144f99fa946cbe7fc6d8b77eec"
+    },
+    {
+      "id": "main:linear_input/lean_check/GravityObservation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/GravityObservation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputGravityObservation",
+      "declarations": [
+        "ObservableThrough",
+        "observable_through_iff_fibers",
+        "externalObservation",
+        "moment",
+        "moment_zero",
+        "moment_one",
+        "moment_two",
+        "inverse_distance_exact_three",
+        "external_observation_moments_three",
+        "matching_moments_leave_remainder",
+        "symmetricPairMoment",
+        "symmetric_pair_moment_zero",
+        "symmetric_pair_moment_one",
+        "symmetric_pair_moment_two",
+        "symmetric_pair_field_difference",
+        "symmetric_pair_field_strictly_larger",
+        "forgetSeparation",
+        "forget_separation_idempotent",
+        "gravity_observation_not_mass_only"
+      ],
+      "imports": [],
+      "sha256": "fb17cb8ecfab81bf468fe9288f8f7b543b603258498c9a520a753c701bb83374"
+    },
+    {
+      "id": "main:linear_input/lean_check/GravityObserver.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/GravityObserver.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputGravityObserver",
+      "declarations": [
+        "pairProbe",
+        "massOnly",
+        "reflectionForget",
+        "massOnly_idempotent",
+        "reflectionForget_idempotent",
+        "pairProbe_even",
+        "pairProbe_reflection",
+        "pairProbe_respects_reflection",
+        "pairProbe_zero",
+        "pairProbe_denom_pos",
+        "pairProbe_rational",
+        "pairProbe_injective_nonneg",
+        "pairProbe_eq_iff_reflection",
+        "pairProbe_massOnly_counterexample",
+        "no_massOnly_factorization",
+        "pairProbe_quadrupole_identity",
+        "pairProbe_quadrupole_positive",
+        "pairProbe_two_term_expansion"
+      ],
+      "imports": [],
+      "sha256": "28a8d76ba98421fcc683349f69f09b29a6fa55cd7d2a04b64c7672a594d0f93d"
+    },
+    {
+      "id": "main:linear_input/lean_check/HalfFactorialIdentification.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/HalfFactorialIdentification.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputHalfFactorial",
+      "declarations": [
+        "Counts",
+        "value",
+        "signature",
+        "length",
+        "countSix",
+        "valueInG",
+        "valueInG_val",
+        "value_as_prime_powers",
+        "factorization_two",
+        "factorization_three",
+        "value_factorization_two",
+        "value_factorization_three",
+        "same_value_same_signature",
+        "same_value_same_length",
+        "value_and_six_injective",
+        "actual_G_value_and_six_injective",
+        "actual_G_same_length",
+        "word49",
+        "word66",
+        "collision_example",
+        "one_probe_necessary_and_sufficient",
+        "every_element_has_generator_counts"
+      ],
+      "imports": [],
+      "sha256": "4e748e7e2e7890ef4af510e767fb4118f22592b15be82ec8b83958bab7c6778f"
     },
     {
       "id": "main:linear_input/lean_check/HannaJetCorrection.inc",
@@ -4742,6 +5329,42 @@
       "sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721"
     },
     {
+      "id": "main:linear_input/lean_check/ParallelLocalGluing.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "group": "Local / Global gluing",
+      "namespace": "LinearInputParallelGluing",
+      "declarations": [
+        "PairwiseCompatible",
+        "Represents",
+        "HasGlue",
+        "CoversCoordinates",
+        "canonical",
+        "canonical_respects",
+        "gluing_implies_compatibility",
+        "gluing_iff_pairwise_compatible",
+        "gluing_unique_under_full_coverage",
+        "AdmissibleGlue",
+        "admissible_glue_iff",
+        "OperationalGlue",
+        "operational_gluing_iff",
+        "disjointWrites",
+        "disjoint_writes_are_compatible",
+        "disjoint_writes_cover_coordinates",
+        "disjoint_writes_have_glue",
+        "excludesBoth",
+        "disjoint_writes_fail_global_policy",
+        "pairReadout",
+        "destructiveSnapshots",
+        "destructive_full_snapshots_conflict",
+        "destructive_full_snapshots_have_no_glue",
+        "disjoint_writes_not_operationally_gluable_destructively",
+        "disjoint_writes_operationally_gluable_cumulatively"
+      ],
+      "imports": [],
+      "sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42"
+    },
+    {
       "id": "main:linear_input/lean_check/PilotComparisonBridge.inc",
       "scope": "main",
       "path": "linear_input/lean_check/PilotComparisonBridge.inc",
@@ -4881,6 +5504,65 @@
         "Elastica"
       ],
       "sha256": "4b95864614e426282726e16fbfe16c06c86f55e563fa1f7085060f606f0d0c83"
+    },
+    {
+      "id": "main:linear_input/lean_check/PrimeFactorIdentification.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PrimeFactorIdentification.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputPrimeFactorIdentification",
+      "declarations": [
+        "evaluatePrimeWord",
+        "primeNormalForm",
+        "evaluate_after_factor",
+        "factor_after_evaluate",
+        "evaluatePrimeWord_injective",
+        "primeNormalForm_injective",
+        "primeWordEquiv",
+        "evaluate_union",
+        "factor_product",
+        "normalized_step_is_identity",
+        "prime_terminal_value_injective",
+        "prime_zero_extra_probes",
+        "prime_normal_form_unique",
+        "natural_prime_multiset_injective",
+        "composite_generators_not_identified"
+      ],
+      "imports": [],
+      "sha256": "24e1e4f43483a7b9d9bf7e6caccbea69975eebf5b05b855bb870020cc3a8e67f"
+    },
+    {
+      "id": "main:linear_input/lean_check/PrimeSplitNormalForm.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PrimeSplitNormalForm.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputPrimeSplitNormalForm",
+      "declarations": [
+        "SplitStep",
+        "split_preserves_product",
+        "split_increases_count",
+        "splitRank",
+        "split_rank_decreases",
+        "split_terminates_raw",
+        "Admissible",
+        "split_preserves_admissible",
+        "split_terminal_iff_all_prime",
+        "SplitChain",
+        "split_chain_count",
+        "singleton_split_chain_count",
+        "FactorWord",
+        "FactorSplit",
+        "factorWordValue",
+        "admissible_terminal_iff_prime",
+        "admissible_split_terminates",
+        "reachable_prime_normal_form",
+        "factor_split_preserves_value",
+        "terminal_factor_word_value_injective",
+        "terminal_factor_words_unique",
+        "terminal_words_zero_extra_probes"
+      ],
+      "imports": [],
+      "sha256": "065741655e5180a317c9454228b0d5272f1d6243065fae869a4a5485fb8a2f32"
     },
     {
       "id": "main:linear_input/lean_check/QuarticClassification.inc",
@@ -5029,6 +5711,31 @@
       ],
       "imports": [],
       "sha256": "a6e7db4ee1112f3fa5048cfd12315b56018f25136187a88f35d5f97bae9591a6"
+    },
+    {
+      "id": "main:linear_input/lean_check/RimObservability.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RimObservability.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRimObservability",
+      "declarations": [
+        "LocalState",
+        "step",
+        "observe",
+        "trace4",
+        "decode4",
+        "step_four",
+        "decode4_trace4",
+        "trace4_injective",
+        "trace3",
+        "trace3_not_injective",
+        "signedStep",
+        "signGauge",
+        "rotation_sign_gauge",
+        "reflection_sign_gauge"
+      ],
+      "imports": [],
+      "sha256": "e0e15e19457935384e42b4598e5b40bcd4011164a785cfca0603c8e0d0de7b12"
     },
     {
       "id": "main:linear_input/lean_check/Rule481Symmetry.inc",
@@ -5182,6 +5889,28 @@
       "sha256": "318e2691dc4c78f87dd30533ea640cce53acef03673bd3e04277065ae70a4747"
     },
     {
+      "id": "main:linear_input/lean_check/SingleSwapFiber.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/SingleSwapFiber.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputSingleSwapFiber",
+      "declarations": [
+        "Swap",
+        "swap_signature",
+        "swap_preserves_value",
+        "swap_preserves_length",
+        "swap_decreases_four",
+        "swap_terminates",
+        "swap_terminal_iff",
+        "same_value_parametric",
+        "k_swaps",
+        "all_equal_products_connected",
+        "equal_product_terminal_unique"
+      ],
+      "imports": [],
+      "sha256": "983ea4c8eea02fddcf2892727f2317d8b1223516dc9ef87870004ed6f50132ec"
+    },
+    {
       "id": "main:linear_input/lean_check/StrangeOperatorBoundary.inc",
       "scope": "main",
       "path": "linear_input/lean_check/StrangeOperatorBoundary.inc",
@@ -5234,6 +5963,40 @@
       ],
       "imports": [],
       "sha256": "71d22e4bf40c2268d4fcf5fec1ad05dbad72a81062314ae207b0bd7e7d9284f8"
+    },
+    {
+      "id": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/StrangeOperatorCounting.inc",
+      "group": "F0 / Observation",
+      "namespace": "LinearInputStrangeCounting",
+      "declarations": [
+        "MapsWithFixedSet",
+        "OutsideSet",
+        "FixedSetChoices",
+        "realizeChoices",
+        "fixedSet_realizeChoices",
+        "mapsWithFixedSetEquivChoices",
+        "card_nonself_choices",
+        "fixedChoicesEquivFin",
+        "fixed_set_map_count",
+        "IdempotentsWithFixedSet",
+        "idempotentsWithFixedSetEquivRetractions",
+        "fixed_set_idempotent_count",
+        "fixedStates_eq_iff_fixedSet_eq",
+        "sameFixedSetMapsEquivFinset",
+        "sameFixedSetIdempotentsEquivFinset",
+        "close_singleton_map_count",
+        "close_singleton_idempotent_count",
+        "univSubtypeEquiv",
+        "univIdempotentSubtypeEquiv",
+        "close_singleton_map_count_of_no_fixed",
+        "close_singleton_map_count_of_all_fixed",
+        "close_singleton_idempotent_count_of_no_fixed",
+        "close_singleton_idempotent_count_of_all_fixed"
+      ],
+      "imports": [],
+      "sha256": "5727034d4ac2f90dde819edfedc04cc615caa532fdc1742cf646d217a57067e8"
     },
     {
       "id": "main:linear_input/lean_check/StrangeOperatorFixedSets.inc",
@@ -5416,6 +6179,35 @@
       "sha256": "945aa518da1efb9bde61e162a2755ad56ff954e3585169e1f5a9436211e3b117"
     },
     {
+      "id": "main:linear_input/lean_check/TernaryZeroCesaro.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/TernaryZeroCesaro.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputTernaryZero",
+      "declarations": [
+        "ternaryPosition",
+        "ternary_position_mod",
+        "ternary_position_increases",
+        "ternary_word_count",
+        "ternaryBlock",
+        "ternary_block_sum",
+        "twoBlocks",
+        "sixNumerator",
+        "six_numerator_formula",
+        "sixCesaro",
+        "six_cesaro_formula",
+        "six_cesaro_values",
+        "two_blocks_nonzero",
+        "zero_placement_counterexample",
+        "filter_nonzero_preserves_sum",
+        "dwellExpand",
+        "repeat_sum",
+        "dwell_occupation_identity"
+      ],
+      "imports": [],
+      "sha256": "9015645e6ab0f748e28f4edf1516a1526df31f058d623cbdeea0822dc4ae1776"
+    },
+    {
       "id": "main:linear_input/lean_check/TrajectoryExistence.inc",
       "scope": "main",
       "path": "linear_input/lean_check/TrajectoryExistence.inc",
@@ -5579,6 +6371,35 @@
         "Elastica.AffineEquivalence"
       ],
       "sha256": "5b7b6619add1121a5245ef40f25b1be960682c8aa8617bb2accd19f10ebffb02"
+    },
+    {
+      "id": "main:linear_input/lean_check/ViscousRewrite.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ViscousRewrite.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputViscousRewrite",
+      "declarations": [
+        "proximalEnergy",
+        "proximal_is_parameter_shift",
+        "energy_x_derivative",
+        "proximal_hasDerivAt",
+        "viscous_force_from_global_minimum",
+        "proximal_energy_bound",
+        "proximal_energy_descent",
+        "dissipation",
+        "dualDissipation",
+        "fenchel_young_gap",
+        "fenchel_young_inequality",
+        "dualDissipation_attained",
+        "concrete_double_well_square",
+        "double_well_two_proximal_branches",
+        "f16RotationResistance",
+        "f16_rotation_resistance_work",
+        "f16_rotation_resistance_dissipative",
+        "f16_reflection_indefinite"
+      ],
+      "imports": [],
+      "sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f"
     },
     {
       "id": "main:linear_input/lean_check/WFSCanonicalLift.inc",
@@ -9376,6 +10197,79 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "to": "main:linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "four_atomic",
+        "generatorSet",
+        "nine_atomic",
+        "six_atomic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicHalfFactorial.inc",
+      "to": "main:linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "atom_is_generator"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicHalfFactorial.inc",
+      "to": "main:linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "member_positive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicHalfFactorial.inc",
+      "to": "main:linear_input/lean_check/HalfFactorialIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "value_factorization_three",
+        "value_factorization_two"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicWordProbe.inc",
+      "to": "main:linear_input/lean_check/AtomicGeneratorClassification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "atom_is_generator"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicWordProbe.inc",
+      "to": "main:linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputGeneratedNonUnique.word49",
+        "LinearInputGeneratedNonUnique.word66"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicWordProbe.inc",
+      "to": "main:linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "four_atomic",
+        "nine_atomic",
+        "six_atomic",
+        "word_products_collide",
+        "words_distinct"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/AtomicWordProbe.inc",
+      "to": "main:linear_input/lean_check/HalfFactorialIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "actual_G_value_and_six_injective"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/BranchFibers.inc",
       "to": "main:linear_input/lean_check/BranchForgetting.inc",
       "kind": "qualified_reference",
@@ -9428,6 +10322,133 @@
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputObservation.energy"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevDescent.joukowski"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "genericParameter",
+        "genericParameter_eq_joukowski"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevDescent.joukowski"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevNext.generic_square_not_constant"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "generic_square_not_constant"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevSplitting.parameterField"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "parameterField"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rootCandidate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevTower.finrank_genericParameter",
+        "LinearInputChebyshevTower.genericParameter",
+        "LinearInputChebyshevTower.genericParameter_eq_joukowski"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "finrank_genericParameter",
+        "genericParameter",
+        "genericParameter_eq_joukowski"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevDescent.candidate_isRoot",
+        "LinearInputChebyshevDescent.chebyPoly",
+        "LinearInputChebyshevDescent.cubicPoly",
+        "LinearInputChebyshevDescent.primitive_denom_ne_zero",
+        "LinearInputChebyshevDescent.rootCandidate",
+        "LinearInputChebyshevDescent.two_candidates_generate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "candidate_isRoot",
+        "primitive_denom_ne_zero",
+        "rootCandidate",
+        "two_candidates_generate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevNext.chebyPoly_natDegree",
+        "LinearInputChebyshevNext.generic_candidate_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chebyPoly_natDegree",
+        "generic_candidate_injective"
       ]
     },
     {
@@ -9781,6 +10802,56 @@
         "LinearInputOperatorWords.encode_eq_iff",
         "LinearInputOperatorWords.run",
         "LinearInputOperatorWords.word_now"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
+      "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "steps_preserve",
+        "terminal_path_eq",
+        "terminating_normal_form"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0MergeChains.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0Merge.Chain",
+        "LinearInputF0Merge.Merge",
+        "LinearInputF0Merge.merge_card",
+        "LinearInputF0Merge.merge_preserves_positive",
+        "LinearInputF0Merge.merge_sum",
+        "LinearInputF0Merge.reaches_singleton"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0MergeChains.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "merge_card",
+        "merge_preserves_positive",
+        "reaches_singleton"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "to": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputFiniteObservation.joint",
+        "LinearInputFiniteObservation.joint_eq_iff"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "to": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "joint_eq_iff"
       ]
     },
     {
@@ -10400,6 +11471,61 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "to": "main:linear_input/lean_check/F16ConstructiveRecovery.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF16ConstructiveRecovery.baseMatrix",
+        "LinearInputF16ConstructiveRecovery.slopeMatrix"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "to": "main:linear_input/lean_check/F16ConstructiveRecovery.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "baseMatrix",
+        "slopeMatrix"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "to": "main:linear_input/lean_check/F16Holonomy.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF16Holonomy.eps",
+        "LinearInputF16Holonomy.epsTable",
+        "LinearInputF16Holonomy.rightIndex"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "to": "main:linear_input/lean_check/F16Holonomy.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rightIndex"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "to": "main:linear_input/lean_check/F16RealDeterminant.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF16Determinant.entryTen",
+        "LinearInputF16Determinant.entryThree",
+        "LinearInputF16Determinant.realPencilAll"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16RimRecovery.inc",
+      "to": "main:linear_input/lean_check/F16RealDeterminant.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "entryThree",
+        "realPencilAll"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/F16SaddleCantor.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -10551,6 +11677,26 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "branchZeroK"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "to": "main:linear_input/lean_check/TernaryZeroCesaro.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputTernaryZero.sixCesaro",
+        "LinearInputTernaryZero.ternary_block_sum",
+        "LinearInputTernaryZero.twoBlocks",
+        "LinearInputTernaryZero.zero_placement_counterexample"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "to": "main:linear_input/lean_check/TernaryZeroCesaro.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ternary_block_sum",
+        "zero_placement_counterexample"
       ]
     },
     {
@@ -10914,6 +12060,54 @@
       "symbols": [
         "IsTrajectory",
         "hasDerivAt_gap_of_trajectory"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/GravityObservation.inc",
+      "to": "main:linear_input/lean_check/GravityCocycle.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputGravityCocycle.mass_only_merger_loses_external_potential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/GravityObservation.inc",
+      "to": "main:linear_input/lean_check/GravityCocycle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "mass_only_merger_loses_external_potential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/GravityObserver.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0.Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/GravityObserver.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/GravityObserver.inc",
+      "to": "main:linear_input/lean_check/GravityCocycle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "mass_only_merger_loses_external_potential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/HalfFactorialIdentification.inc",
+      "to": "main:linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "generatorSet"
       ]
     },
     {
@@ -11507,6 +12701,16 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "collective_coverage_does_not_glue",
+        "cumulative",
+        "destructive"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/PilotComparisonBridge.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -11691,6 +12895,52 @@
       "symbols": [
         "pressure_angle_curvature",
         "pressure_angle_eq_phase_energy"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PrimeFactorIdentification.inc",
+      "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputDecompositionIdentification.evaluateFactors",
+        "LinearInputDecompositionIdentification.factorsFourNine",
+        "LinearInputDecompositionIdentification.factorsSixSix",
+        "LinearInputDecompositionIdentification.generator_collision"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PrimeFactorIdentification.inc",
+      "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "IdentifiesWith",
+        "TerminalValueInjective",
+        "evaluateFactors",
+        "factorsFourNine",
+        "factorsSixSix",
+        "generator_collision",
+        "normal_forms_unique_of_value",
+        "zero_extra_probes_iff"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PrimeSplitNormalForm.inc",
+      "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "IdentifiesWith",
+        "TerminalValueInjective",
+        "normal_forms_unique_of_value",
+        "terminating_normal_form",
+        "zero_extra_probes_iff"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PrimeSplitNormalForm.inc",
+      "to": "main:linear_input/lean_check/PrimeFactorIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "natural_prime_multiset_injective"
       ]
     },
     {
@@ -12057,6 +13307,25 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/SingleSwapFiber.inc",
+      "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "terminal_path_eq",
+        "terminating_normal_form"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/SingleSwapFiber.inc",
+      "to": "main:linear_input/lean_check/HalfFactorialIdentification.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "same_value_same_length",
+        "same_value_same_signature",
+        "value_as_prime_powers"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/StrangeOperatorBoundary.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -12099,6 +13368,80 @@
         "BreaksFiber",
         "RightPolar",
         "commuting_does_not_break"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/F0Counting.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0Counting.SupportedRetraction",
+        "LinearInputF0Counting.fixedSet",
+        "LinearInputF0Counting.fixedSet_supported",
+        "LinearInputF0Counting.idempotent_count_sum",
+        "LinearInputF0Counting.mem_fixedSet",
+        "LinearInputF0Counting.supported_idempotent",
+        "LinearInputF0Counting.supported_retraction_count"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/F0Counting.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SupportedRetraction",
+        "fixedSet_supported",
+        "idempotent_count_sum",
+        "mem_fixedSet",
+        "supported_idempotent",
+        "supported_retraction_count"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0.Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/StrangeOperatorFixedSets.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputStrangeFixedSets.FixedStates",
+        "LinearInputStrangeFixedSets.close_singleton_exact_fixed_set",
+        "LinearInputStrangeFixedSets.close_singleton_top_of_all_fixed",
+        "LinearInputStrangeFixedSets.close_singleton_top_of_no_fixed"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/StrangeOperatorFixedSets.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "FixedStates",
+        "close_singleton_exact_fixed_set",
+        "close_singleton_top_of_all_fixed",
+        "close_singleton_top_of_no_fixed"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
+      "to": "main:linear_input/lean_check/StrangeOperatorGalois.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputStrangeGalois.Close",
+        "LinearInputStrangeGalois.Stops"
       ]
     },
     {
@@ -12400,6 +13743,34 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/ViscousRewrite.inc",
+      "to": "main:linear_input/lean_check/F16UnexpectedBridges.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF16UnexpectedBridges.quarter_sample",
+        "LinearInputF16UnexpectedBridges.reflection_sample",
+        "LinearInputF16UnexpectedBridges.signedAction"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ViscousRewrite.inc",
+      "to": "main:linear_input/lean_check/F16UnexpectedBridges.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "quarter_sample",
+        "reflection_sample",
+        "signedAction"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ViscousRewrite.inc",
+      "to": "main:linear_input/lean_check/VariablePairObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "hasDerivAt_energy_x"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/WFSMobiusFourier.inc",
       "to": "main:linear_input/lean_check/EWFSFutureBridge.inc",
       "kind": "unique_identifier_candidate",
@@ -12417,6 +13788,28 @@
     },
     {
       "from": "pr31:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "adjoin_half_eq",
+        "finrank_genericParameter",
+        "finrank_genericQuotient",
+        "genericParameter",
+        "genericParameter_eq_joukowski",
+        "genericQuotient",
+        "genericQuotient_eq_pow_add_inv",
+        "numerator_denominator_isCoprime",
+        "numerator_sub_denominator_sq",
+        "quotientDenominator",
+        "quotientDenominator_ne_zero",
+        "quotientNumerator",
+        "quotient_denom",
+        "quotient_gcd_one",
+        "quotient_num"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevDegreeTower.inc",
       "to": "pr31:linear_input/lean_check/ChebyshevDihedralDescent.inc",
       "kind": "qualified_reference",
       "symbols": [
@@ -12425,18 +13818,80 @@
     },
     {
       "from": "pr31:linear_input/lean_check/ChebyshevDihedralDescent.inc",
-      "to": "main:linear_input/lean_check/GaloisChebyshev.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "cubic_joukowski"
+        "candidate_isRoot",
+        "candidate_root",
+        "chebyIterate",
+        "chebyPoly_eval",
+        "cubicPoly_eval",
+        "iterate_joukowski",
+        "primitive_denom_ne_zero",
+        "reconstruct_z",
+        "reconstruct_z_primitive",
+        "rootCandidate",
+        "two_candidates_generate"
       ]
     },
     {
       "from": "pr31:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
-      "to": "main:linear_input/lean_check/WFSProjectiveSampling.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "reflection"
+        "genericParameter",
+        "genericParameter_eq_joukowski"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "adjoin_inv_X",
+        "adjoin_scaled_X",
+        "asBaseAuto",
+        "baseAuto_ext_X",
+        "conjugate_pow_of_involution",
+        "dihedralRepresentation",
+        "dihedralRepresentation_injective",
+        "dihedralRepresentation_r_X",
+        "dihedralRepresentation_sr_X",
+        "fixes_adjoin_parameter",
+        "inversionAuto",
+        "inversionAuto_fixes_parameter",
+        "linearAuto",
+        "linearAuto_fixes_parameter",
+        "no_scalar_X_eq_inverse",
+        "ratFunc_algEquiv_ext_X",
+        "reflection_conjugates_rotation",
+        "reflection_conjugates_rotationPower",
+        "reflection_sq",
+        "rotationPower",
+        "rotationPower_add",
+        "rotationPower_mul_reflection",
+        "rotationPower_neg",
+        "rotation_pow_order",
+        "rotation_symm_X",
+        "zmodPower_add",
+        "zmodPower_neg",
+        "zmodPower_zero"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "generic_square_not_constant"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "parameterField"
       ]
     },
     {
@@ -12464,11 +13919,78 @@
       ]
     },
     {
-      "from": "pr31:linear_input/lean_check/ChebyshevSplittingField.inc",
-      "to": "main:linear_input/lean_check/BranchFibers.inc",
+      "from": "pr31:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "candidateSet"
+        "rootCandidate"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chebyPoly_natDegree",
+        "cubicPoly_natDegree",
+        "generic_candidate_injective",
+        "generic_square_not_constant",
+        "joukowski_eq_iff_rf"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "finrank_genericParameter",
+        "genericParameter",
+        "genericParameter_eq_joukowski"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "candidate_isRoot",
+        "primitive_denom_ne_zero",
+        "rootCandidate",
+        "two_candidates_generate"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chebyPoly_natDegree",
+        "generic_candidate_injective"
+      ]
+    },
+    {
+      "from": "pr31:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "actualSplittingFieldEquiv",
+        "basePolynomial",
+        "basePolynomial_natDegree",
+        "candidateSet_card",
+        "candidate_mem_rootSet",
+        "chebyPoly_map",
+        "chebyPoly_natDegree_E",
+        "map_basePolynomial",
+        "parameterField",
+        "parameterField_finrank",
+        "primitiveRoot_C",
+        "rationalFunction_isSplittingField",
+        "rootSet_adjoin_eq_top",
+        "targetPolynomial",
+        "targetPolynomial_natDegree",
+        "targetPolynomial_ne_zero",
+        "targetPolynomial_splits",
+        "target_candidate_isRoot"
       ]
     },
     {
@@ -12733,10 +14255,31 @@
     },
     {
       "from": "pr70:linear_input/lean_check/ParallelLocalGluing.inc",
-      "to": "main:linear_input/lean_check/MonoEyeComposition.inc",
+      "to": "main:linear_input/lean_check/ParallelLocalGluing.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "pairReadout"
+        "AdmissibleGlue",
+        "CoversCoordinates",
+        "OperationalGlue",
+        "PairwiseCompatible",
+        "Represents",
+        "admissible_glue_iff",
+        "canonical_respects",
+        "destructiveSnapshots",
+        "destructive_full_snapshots_conflict",
+        "destructive_full_snapshots_have_no_glue",
+        "disjointWrites",
+        "disjoint_writes_are_compatible",
+        "disjoint_writes_cover_coordinates",
+        "disjoint_writes_fail_global_policy",
+        "disjoint_writes_have_glue",
+        "disjoint_writes_not_operationally_gluable_destructively",
+        "disjoint_writes_operationally_gluable_cumulatively",
+        "excludesBoth",
+        "gluing_iff_pairwise_compatible",
+        "gluing_implies_compatibility",
+        "gluing_unique_under_full_coverage",
+        "operational_gluing_iff"
       ]
     },
     {
@@ -12761,6 +14304,14 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "bool_and_true_iff"
+      ]
+    },
+    {
+      "from": "pr71:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/ParallelLocalGluing.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "PairwiseCompatible"
       ]
     },
     {
@@ -13528,6 +15079,7 @@
     "linear_input/lean_check/StrangeOperatorConjugacy.inc",
     "linear_input/lean_check/StrangeOperatorBoundary.inc",
     "linear_input/lean_check/StrangeOperatorFixedSets.inc",
+    "linear_input/lean_check/StrangeOperatorCounting.inc",
     "linear_input/lean_check/F16SaddleCantor.inc",
     "linear_input/lean_check/F16FullMatrix.inc",
     "linear_input/lean_check/F16FullRank.inc",
@@ -13572,7 +15124,32 @@
     "linear_input/lean_check/PilotHullInflation.inc",
     "linear_input/lean_check/PilotHullStability.inc",
     "linear_input/lean_check/ElasticaOperatorBridge.inc",
-    "linear_input/lean_check/ObservableRigidPoint.inc"
+    "linear_input/lean_check/ObservableRigidPoint.inc",
+    "linear_input/lean_check/ChebyshevDihedralDescent.inc",
+    "linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
+    "linear_input/lean_check/ChebyshevDegreeTower.inc",
+    "linear_input/lean_check/ChebyshevSplittingField.inc",
+    "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+    "linear_input/lean_check/RimObservability.inc",
+    "linear_input/lean_check/ViscousRewrite.inc",
+    "linear_input/lean_check/GravityCocycle.inc",
+    "linear_input/lean_check/GravityObserver.inc",
+    "linear_input/lean_check/GravityObservation.inc",
+    "linear_input/lean_check/TernaryZeroCesaro.inc",
+    "linear_input/lean_check/FiniteObservationSeparation.inc",
+    "linear_input/lean_check/DecompositionIdentification.inc",
+    "linear_input/lean_check/DecompositionF0Bridge.inc",
+    "linear_input/lean_check/PrimeFactorIdentification.inc",
+    "linear_input/lean_check/PrimeSplitNormalForm.inc",
+    "linear_input/lean_check/AssociatesFactorIdentification.inc",
+    "linear_input/lean_check/GeneratedNonUniqueMonoid.inc",
+    "linear_input/lean_check/HalfFactorialIdentification.inc",
+    "linear_input/lean_check/AtomicGeneratorClassification.inc",
+    "linear_input/lean_check/AtomicHalfFactorial.inc",
+    "linear_input/lean_check/AtomicWordProbe.inc",
+    "linear_input/lean_check/SingleSwapFiber.inc",
+    "linear_input/lean_check/F16RimRecovery.inc",
+    "linear_input/lean_check/ParallelLocalGluing.inc"
   ],
   "prs": [
     {
