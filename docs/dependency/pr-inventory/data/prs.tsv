@@ -1,0 +1,58 @@
+97	chatgpt/pad-3d-identifiability-20261107	main	Formalize conditional 3D-PAD finite observation identifiability
+96	chatgpt/prism-oblique-tmm-20261107	chatgpt/prism-airy-reflectance-20261107	Add oblique Fresnel TMM checks for prism readout
+95	chatgpt/two-motion-ivp-existence-20261107	chatgpt/two-motion-emission-20261106	Add a local IVP existence bridge for two-motion emission
+94	chatgpt/two-wavelength-phase-20261107	chatgpt/fluid-prism-phase-memory-20261107	Formalize two-wavelength height separation, exact aliases and noise robustness
+93	chatgpt/prism-airy-reflectance-20261107	chatgpt/fluid-prism-phase-memory-20261107	Derive Fresnel–Airy prism-film readout, fringe contrast and thickness aliasing in Lean
+92	chatgpt/fluid-prism-phase-memory-20261107	chatgpt/prism-hysteresis-readout-20261107	Formalize fluid-interface energy, prism phase readout, aliasing and multibit observation
+91	chatgpt/okanohara-history-transport-20261107	main	Lean bridge: Okanohara control Gramian from an Elastica double-well hysteron
+90	chatgpt/operator-loop-reentry-20261107	main	Re-enter portable operator loop into Lean-verified autonomy cycle
+89	chatgpt/prism-hysteresis-readout-20261107	chatgpt/dark-bright-observation-20261106	Formalize hysteretic prism memory, balanced optical readout and reversible pulse
+88	chatgpt/two-motion-emission-20261106	main	Two-motion emission: coupling gradients, outgoing flux and exact energy balance
+87	chatgpt/descriptive-elastica-join-20261106	main	Formalize descriptive elastica contextual equality and join congruence
+86	chatgpt/dark-bright-observation-20261106	main	Dark/bright two-amplitude model: closure obstruction, minimal predictive state and exact WordEq bridge
+85	chatgpt/self-rewriting-observer-lean-20261106	main	Lean: verified finite self-rewriting observer and observational quotient
+84	chatgpt/relation-pruning-observable-20261106	chatgpt/cross-system-modularity-observation-20261105	Observable relation pruning: finite edge deletion, shortest witnesses and curve encoding
+83	chatgpt/time-distance-moving-curve-20261105	main	Formalize independent time and rotation inputs for moving curves
+82	chatgpt/contest-economy-collapse-20261105	main	Formalize contest selection, delayed compression and participation singularity
+81	chatgpt/cross-system-modularity-observation-20261105	main	Cross-system trace bridge, shortest finite counterexamples and level-11 modularity probe
+80	chatgpt/three-ball-contact-order-20261105	main	Formalize exact 1–2–1 elastic collision order, forgetting and finite velocity jump
+79	chatgpt/dependency-graph-20261105	main	Generate source-grounded Lean dependency graph and PR branch DAG
+78	chatgpt/pilot-comparison-wall-20261105	main	IUT III 3.11→3.12: isolate the missing η-comparison (open)
+77	chatgpt/radical-f0-bridge-20261105	main	Formalize arithmetic radical forgetting as F0 and show successor non-descent
+76	chatgpt/rulefold-touch-ios-20261105	main	Build iOS/iPadOS Safari touch-ready Rulefold mandala
+75	integration/history-gluing-20261105	main	Consolidate history nonpreservation and relational-gluing proof stack
+72	chatgpt/relational-oddcycle-gluing-20261104	main	Consolidate historical nonpreservation and relational gluing results
+71	chatgpt/parallel-gluing-criterion-20261104	chatgpt/cooperative-gluing-obstruction-20261104	Constructive finite-family parallel gluing iff overlap compatibility, with temporal history countermodel
+70	chatgpt/parallel-overlap-gluing-20261104	chatgpt/cooperative-gluing-obstruction-20261104	Exact simultaneous local-to-global gluing criteria with admissibility and operational reachability
+69	chatgpt/cooperative-gluing-obstruction-20261104	chatgpt/local-capacity-incompatibility-20261104	Cooperative local operators: collective coverage without global gluing and derived history loss
+67	chatgpt/local-capacity-incompatibility-20261104	chatgpt/temporal-local-extinction-20261104	Derive local operation extinction from finite capacity and simultaneous incompatible demands
+66	chatgpt/temporal-local-extinction-20261104	chatgpt/history-nonpreservation-obstruction-20261104	Temporal local-operation extinction: exact historical preservation boundary and handoff counterexample
+65	chatgpt/history-nonpreservation-obstruction-20261104	chatgpt/metarule-self-extension-20261104	Formalize the failure of historical preservation and irreparable observation loss
+59	chatgpt/operator-semigroup-counting-20261104	chatgpt/operator-algebra-scale-20261104	Build full semantic operator monoid and finite compatible-map counting engine
+58	chatgpt/operator-algebra-scale-20261104	chatgpt/operator-semantic-closure-20261104	Scale operator calculus: 130 contextual, policy, product, reachability, sensor, F0 theorem candidates
+54	chatgpt/general-prime-f0-normalization-20261103	chatgpt/prime-factor-f0-adaptive-20261103	Canonical F0 sorting for arbitrary finite prime lists and exact product kernels
+53	chatgpt/general-prime-probe-minimality-20261103	chatgpt/prime-factor-f0-adaptive-20261103	General finite-length prime-factor observation minimum and unordered-state count
+52	chatgpt/prime-factor-f0-adaptive-20261103	chatgpt/prime-observation-orbits-20261103	F0 sorting retraction, product-kernel quotient, and adaptive observation lower bound
+51	chatgpt/prime-observation-orbits-20261103	chatgpt/prime-factor-observation-20261103	Prime-factor orbit kernels (S2/S3) and exact three-factor observation counts
+50	chatgpt/prime-factor-observation-20261103	chatgpt/ternary-zero-cesaro-20261103	Finite prime-factor observation kernels and minimal probe count for 2,3,5
+49	chatgpt/f16-all-real-pinv-20261103	codex/primitive-history-derivation-20261029	F16: all-real Gram pseudoinverse and Penrose/Fenchel bridge (draft)
+48	codex/f16-rim-lean-20261103	codex/primitive-history-derivation-20261029	Lean proof of exact 16D F16 four-phase recovery
+47	chatgpt/single-swap-fiber-20261103	chatgpt/half-factorial-probe-20261103	Show the single relation 4·9 ↔ 6² generates every factorization collision
+46	chatgpt/half-factorial-probe-20261103	chatgpt/associates-unique-factorization-20261103	Prove half-factorial lengths and exact one-probe identification for all 4–6–9 generator words
+45	chatgpt/gravity-cocycle-observations-20261103	chatgpt/gravity-cocycle-20261103	Formalize gravity observation descent and second-moment recovery under F0 forgetting
+44	chatgpt/gravity-observation-moments-20261103	chatgpt/gravity-cocycle-20261103	Formalize gravitational F0 observation descent and exact moment hierarchy
+43	chatgpt/gravity-observer-20261103	chatgpt/gravity-cocycle-20261103	Formalize the minimal F0 quotient for symmetric gravitational potential observations
+42	chatgpt/associates-unique-factorization-20261103	chatgpt/prime-factor-identification-20261103	Classify factor identification modulo associates and exhibit a nonunique 4–6–9 monoid
+41	chatgpt/gravity-cocycle-20261103	chatgpt/viscous-rewrite-20261103	Derive symmetric interaction cocycles and a Newtonian gravity specialization
+40	chatgpt/rim-observability-fourchannel-20261103	codex/primitive-history-derivation-20261029	Formalize a four-phase Rim observation decoder and signed local gauges
+39	chatgpt/prime-factor-identification-20261103	chatgpt/decomposition-identification-20261103	Connect prime factorization to minimal observation and normal-form uniqueness
+38	chatgpt/decomposition-identification-20261103	chatgpt/ternary-zero-cesaro-20261103	General rewrite termination, normal forms and minimum identifying probes
+37	chatgpt/viscous-rewrite-20261103	codex/primitive-history-derivation-20261029	Formalize viscous state rewrites as proximal updates of polynomial E
+36	chatgpt/ternary-zero-cesaro-20261103	codex/primitive-history-derivation-20261029	Formalize ternary zero placement and finite observation separation
+35	chatgpt/f16-singular-pinv-on-proj-20261103	chatgpt/f16-spectral-projectors-20261103	F16: exact singular Moore–Penrose inverses at t=±1
+34	chatgpt/f16-spectral-projectors-20261103	codex/primitive-history-derivation-20261029	F16: rational spectral projector certificates and exact 4/4/8 decomposition
+33	chatgpt/f16-full-fenchel-20261103	codex/primitive-history-derivation-20261029	F16: full 16D Fenchel dual domain, normal equations and attained supremum
+32	chatgpt/f16-fenchel-atlas-20261103	codex/primitive-history-derivation-20261029	Formalize F16 Fenchel section, E-atlas Hessian, and singular dual domain
+31	chatgpt/chebyshev-dihedral-descent-20261103	codex/primitive-history-derivation-20261029	Formalize ternary Chebyshev roots and radical reconstruction for dihedral descent
+30	chatgpt/five-dim-lagrange-20261103	codex/primitive-history-derivation-20261029	Candidate: five-coordinate constraint/rewrite bridge from primitive E
+29	chatgpt/stops-fixed-set-counting-20261103	codex/primitive-history-derivation-20261029	Add finite counting theorems for Stops fixed-set closures

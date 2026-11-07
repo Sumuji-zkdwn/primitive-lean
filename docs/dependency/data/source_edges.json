@@ -1,0 +1,3243 @@
+[
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/Derivation.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/Examples.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 3,
+   "statement": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/MinimumConditions.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/PowerLogResponse.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/AffineEquivalence.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/CombinedConsequences.lean",
+  "target": "lean/Elastica/AffineEquivalence.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/CombinedConsequences.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/CombinedConsequences.lean",
+  "target": "lean/Elastica/PowerLogResponse.lean",
+  "counts": {
+   "proof": 3,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/CombinedConsequences.lean",
+  "target": "lean/Elastica/Scaling.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/CombinedConsequences.lean",
+  "target": "lean/Elastica/ScalingMinima.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/CombinedConsequences.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/Composition.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 6
+  }
+ },
+ {
+  "source": "lean/Elastica/Composition.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/ConstrainedSecondVariation.lean",
+  "target": "lean/Elastica/SecondVariation.lean",
+  "counts": {
+   "proof": 4
+  }
+ },
+ {
+  "source": "lean/Elastica/ConstrainedSecondVariation.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ConstrainedSecondVariation.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 4,
+   "definition": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ConstraintRegularity.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ConstraintRegularity.lean",
+  "target": "lean/Elastica/Reconstruction.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ConstraintRegularity.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/Derivation.lean",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/Derivation.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 3,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/Derivation.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 5
+  }
+ },
+ {
+  "source": "lean/Elastica/ExactVariation.lean",
+  "target": "lean/Elastica/ConstraintRegularity.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ExactVariation.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/Examples.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/Examples.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 10,
+   "statement": 9
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/Composition.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/ConstrainedSecondVariation.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/Derivation.lean",
+  "counts": {
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/SecondVariation.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/ExponentialWeight.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 21,
+   "statement": 11,
+   "definition": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/LocalMinimum.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/LocalMinimum.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/ConstrainedSecondVariation.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/ConstraintRegularity.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/Derivation.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/ExactVariation.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 4
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/ScalarMinimum.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/MinimumConditions.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/PowerLogResponse.lean",
+  "target": "lean/Elastica/Examples.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/PowerLogResponse.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/Reconstruction.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 15,
+   "statement": 15
+  }
+ },
+ {
+  "source": "lean/Elastica/Reconstruction.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/ReplacementConsequences.lean",
+  "target": "lean/Elastica/Composition.lean",
+  "counts": {
+   "proof": 5
+  }
+ },
+ {
+  "source": "lean/Elastica/ReplacementConsequences.lean",
+  "target": "lean/Elastica/ExponentialWeight.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/ReplacementConsequences.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/ReplacementConsequences.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/ReplacementConsequences.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "lean/Elastica/Scaling.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 4,
+   "statement": 5
+  }
+ },
+ {
+  "source": "lean/Elastica/Scaling.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 4,
+   "statement": 4
+  }
+ },
+ {
+  "source": "lean/Elastica/ScalingMinima.lean",
+  "target": "lean/Elastica/ExponentialWeight.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/ScalingMinima.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/ScalingMinima.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 4
+  }
+ },
+ {
+  "source": "lean/Elastica/ScalingMinima.lean",
+  "target": "lean/Elastica/Scaling.lean",
+  "counts": {
+   "proof": 7
+  }
+ },
+ {
+  "source": "lean/Elastica/ScalingMinima.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "lean/Elastica/SecondVariation.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 13,
+   "statement": 10
+  }
+ },
+ {
+  "source": "lean/Elastica/StraightConstraint.lean",
+  "target": "lean/Elastica/Examples.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/StraightConstraint.lean",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 12,
+   "statement": 9
+  }
+ },
+ {
+  "source": "lean/Elastica/StraightConstraint.lean",
+  "target": "lean/Elastica/Reconstruction.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/StraightConstraint.lean",
+  "target": "lean/Elastica/SecondVariation.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/StraightConstraint.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 7,
+   "statement": 5
+  }
+ },
+ {
+  "source": "lean/Elastica/WeightResponse.lean",
+  "target": "lean/Elastica/ExponentialWeight.lean",
+  "counts": {
+   "proof": 12,
+   "statement": 7
+  }
+ },
+ {
+  "source": "lean/Elastica/WeightResponse.lean",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "lean/Elastica/WeightResponse.lean",
+  "target": "lean/Elastica/PowerLogResponse.lean",
+  "counts": {
+   "proof": 13,
+   "statement": 9
+  }
+ },
+ {
+  "source": "lean/Elastica/WeightResponse.lean",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 10,
+   "statement": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 6,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "linear_input/lean_check/AreaParameters.inc",
+  "counts": {
+   "statement": 7,
+   "definition": 3,
+   "proof": 18
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "linear_input/lean_check/AreaRegularity.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaExactVariation.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaFamily.inc",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaFamily.inc",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaFamily.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaFamily.inc",
+  "target": "linear_input/lean_check/AreaParameters.inc",
+  "counts": {
+   "proof": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 6,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/AreaExactVariation.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/AreaFamily.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/AreaRegularity.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 3,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 2,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaMinimum.inc",
+  "target": "linear_input/lean_check/PressureStationary.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaParameters.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaParameters.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaParameters.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "lean/Elastica/ConstraintRegularity.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 8,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 7,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaRegularity.inc",
+  "target": "linear_input/lean_check/PressureStationary.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaVariation.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 18,
+   "statement": 12,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaVariation.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AreaVariation.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AutonomyCycle00001.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AutonomyCycle00001.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AutonomyCycle00002.inc",
+  "target": "linear_input/lean_check/AutonomyCycle00001.inc",
+  "counts": {
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AutonomyCycle00002.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/AutonomyCycle00002.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchFibers.inc",
+  "target": "linear_input/lean_check/BranchForgetting.inc",
+  "counts": {
+   "proof": 11,
+   "statement": 9
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchFibers.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchFibers.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 5,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchForgetting.inc",
+  "target": "linear_input/lean_check/Calculus.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchForgetting.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchForgetting.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 5,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/BranchForgetting.inc",
+  "target": "linear_input/lean_check/Observation.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Calculus.lean",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Coercivity.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 8,
+   "statement": 6,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ComplementaryPencilRecovery.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Consequences.inc",
+  "target": "linear_input/lean_check/Calculus.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Consequences.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 9,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/CoupledTrajectory.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/GradientBound.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/Invariance.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/LevelConvergence.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledConsequences.inc",
+  "target": "linear_input/lean_check/StrictEnergy.inc",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/CompactLocalExistence.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 7,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/FiniteBand.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/FiniteInternalUpdate.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/ForwardUniqueness.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/GlobalContinuation.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CoupledTrajectory.inc",
+  "target": "linear_input/lean_check/TrajectoryExistence.inc",
+  "counts": {
+   "proof": 1,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureBridge.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureBridge.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureRigidity.inc",
+  "target": "linear_input/lean_check/AreaMinimum.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureRigidity.inc",
+  "target": "linear_input/lean_check/CurvatureBridge.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureRigidity.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 4,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureRigidity.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureRigidity.inc",
+  "target": "linear_input/lean_check/MainResult.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/CurvatureRigidity.inc",
+  "target": "linear_input/lean_check/PressureStationary.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EWFSFenchel.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EWFSFenchel.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 8,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EWFSFenchel.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EWFSFenchel.inc",
+  "target": "linear_input/lean_check/VariablePairObservations.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EWFSFutureBridge.inc",
+  "target": "linear_input/lean_check/EWFSFenchel.inc",
+  "counts": {
+   "proof": 18,
+   "statement": 14,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EWFSFutureBridge.inc",
+  "target": "linear_input/lean_check/FutureObservations.inc",
+  "counts": {
+   "proof": 10,
+   "statement": 8
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EnergyWfsFenchel.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 11,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EnergyWfsFenchel.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/EnergyWfsFenchel.inc",
+  "target": "linear_input/lean_check/VariablePairObservations.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 5,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0Counting.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 6,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0FutureMinimality.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0FutureMinimality.inc",
+  "target": "linear_input/lean_check/F0UpdateDescent.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0FutureMinimality.inc",
+  "target": "linear_input/lean_check/FutureObservations.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0MergeChains.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "statement": 4,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0MergeChains.inc",
+  "target": "linear_input/lean_check/VariablePairObservations.inc",
+  "counts": {
+   "definition": 5,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0Retractions.inc",
+  "target": "linear_input/lean_check/BranchFibers.inc",
+  "counts": {
+   "proof": 12,
+   "definition": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F0UpdateDescent.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 11,
+   "statement": 12,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16CompleteRank.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16CompleteRank.inc",
+  "target": "linear_input/lean_check/F16RankCertificate.inc",
+  "counts": {
+   "proof": 5,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16CompleteRank.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "proof": 10,
+   "statement": 9
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16CompleteRank.inc",
+  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+  "target": "linear_input/lean_check/ComplementaryPencilRecovery.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+  "target": "linear_input/lean_check/F16CompleteRank.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "statement": 6,
+   "proof": 8,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+  "target": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullMatrix.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "definition": 7,
+   "proof": 5,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullMatrix.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "definition": 3,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullMatrix.inc",
+  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "counts": {
+   "definition": 8,
+   "proof": 7,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullRank.inc",
+  "target": "linear_input/lean_check/F16FullMatrix.inc",
+  "counts": {
+   "proof": 24,
+   "statement": 14,
+   "definition": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullRank.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "definition": 5,
+   "proof": 12
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullRank.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "definition": 3,
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16FullRank.inc",
+  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "counts": {
+   "definition": 4,
+   "proof": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16Holonomy.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "statement": 2,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16RankCertificate.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16RankCertificate.inc",
+  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "counts": {
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16RealDeterminant.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "definition": 11,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16RealDeterminant.inc",
+  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "counts": {
+   "definition": 8,
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "proof": 11,
+   "statement": 8,
+   "definition": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16SaddleCantor.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 4,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16SaddleCantor.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 3,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16SaddleCantor.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 7,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16SaddleCantor.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16SaddleCantor.inc",
+  "target": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16SaddleCantor.inc",
+  "target": "linear_input/lean_check/ShearCommutator.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "target": "linear_input/lean_check/F16CompleteRank.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "target": "linear_input/lean_check/F16Holonomy.inc",
+  "counts": {
+   "definition": 6,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "proof": 13,
+   "statement": 5,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
+  "counts": {
+   "definition": 6,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
+  "target": "linear_input/lean_check/VariablePairGaloisBridge.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Feedback.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 3,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Feedback.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 9
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBand.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBand.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBand.inc",
+  "target": "linear_input/lean_check/StrictEnergy.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBand.inc",
+  "target": "linear_input/lean_check/TrajectoryExistence.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBayes.inc",
+  "target": "lean/Elastica/ExponentialWeight.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBayes.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteBayes.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 3,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "proof": 2,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 5,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 5,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "target": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "counts": {
+   "proof": 14,
+   "statement": 8
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ForwardUniqueness.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ForwardUniqueness.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ForwardUniqueness.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ForwardUniqueness.inc",
+  "target": "linear_input/lean_check/TrajectoryExistence.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FourBayes.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 1,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FourBayes.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FourBayes.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FourBayes.inc",
+  "target": "linear_input/lean_check/FiniteBayes.inc",
+  "counts": {
+   "proof": 17,
+   "statement": 10,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/FutureFiniteHorizon.inc",
+  "target": "linear_input/lean_check/FutureObservations.inc",
+  "counts": {
+   "proof": 5,
+   "statement": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GaloisChebyshev.inc",
+  "target": "linear_input/lean_check/BranchFibers.inc",
+  "counts": {
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GaloisChebyshev.inc",
+  "target": "linear_input/lean_check/BranchForgetting.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GaloisChebyshev.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 2,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GaloisChebyshev.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 4,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GaloisChebyshev.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GeneralMinimum.inc",
+  "target": "linear_input/lean_check/Consequences.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GeneralMinimum.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 11,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GeneralMinimum.inc",
+  "target": "linear_input/lean_check/Observation.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/GlobalTrajectory.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/GradientBound.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/Invariance.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/StrictEnergy.inc",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalConsequences.inc",
+  "target": "linear_input/lean_check/TrajectoryExistence.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/CompactLocalExistence.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 3,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/FiniteBand.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/GlobalContinuation.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GlobalTrajectory.inc",
+  "target": "linear_input/lean_check/TrajectoryExistence.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Gradient.inc",
+  "target": "linear_input/lean_check/Calculus.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Gradient.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 20,
+   "statement": 14,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/Calculus.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/Dissipation.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/Invariance.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/GradientBound.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 5,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+  "counts": {
+   "definition": 9
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+  "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "counts": {
+   "proof": 6,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+  "target": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "counts": {
+   "proof": 16,
+   "statement": 8,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+  "target": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
+  "target": "linear_input/lean_check/RuleSelfModification.inc",
+  "counts": {
+   "proof": 2,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HistorySignature.inc",
+  "target": "lean/Elastica/Composition.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HistorySignature.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 28,
+   "statement": 14,
+   "definition": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HistorySignature.inc",
+  "target": "lean/Elastica/Reconstruction.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HistorySignature.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HistorySignature.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/HistorySignature.inc",
+  "target": "linear_input/lean_check/Observation.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/InternalUpdate.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/InternalUpdate.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/InternalUpdate.inc",
+  "target": "linear_input/lean_check/Dissipation.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/InternalUpdate.inc",
+  "target": "linear_input/lean_check/Invariance.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/InternalUpdate.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Invariance.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Invariance.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Invariance.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/KummerDihedral.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelConvergence.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelConvergence.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 9,
+   "statement": 7,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelConvergence.inc",
+  "target": "linear_input/lean_check/GradientBound.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelConvergence.inc",
+  "target": "linear_input/lean_check/Invariance.inc",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelConvergence.inc",
+  "target": "linear_input/lean_check/LevelGeometry.inc",
+  "counts": {
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelConvergence.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelGeometry.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 2,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelGeometry.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 11,
+   "statement": 9,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelGeometry.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/LevelGeometry.inc",
+  "target": "linear_input/lean_check/GradientBound.inc",
+  "counts": {
+   "proof": 3,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "lean/Elastica/Examples.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 8,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/AreaMinimum.inc",
+  "counts": {
+   "statement": 3,
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/CurvatureBridge.inc",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 11,
+   "statement": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/GlobalConsequences.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/PressureStationary.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MainResult.inc",
+  "target": "linear_input/lean_check/TrajectoryExistence.inc",
+  "counts": {
+   "statement": 3,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+  "counts": {
+   "definition": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "counts": {
+   "proof": 9,
+   "statement": 2,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/RuleSelfModification.inc",
+  "counts": {
+   "definition": 2,
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
+  "target": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ObservationRetractionPolarity.inc",
+  "target": "linear_input/lean_check/ComplementaryPencilRecovery.inc",
+  "counts": {
+   "proof": 18,
+   "statement": 5,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ObservationRetractionPolarity.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ObservationRetractionPolarity.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ObservationRetractionPolarity.inc",
+  "target": "linear_input/lean_check/StrangeOperatorFixedSets.inc",
+  "counts": {
+   "statement": 4,
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ObservationRetractionPolarity.inc",
+  "target": "linear_input/lean_check/StrangeOperatorGalois.inc",
+  "counts": {
+   "statement": 11,
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorBisimulation.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 10,
+   "statement": 11
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorFiniteHorizon.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 10,
+   "statement": 9,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorSemanticClosure.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 1,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorSemanticClosure.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorSemanticClosure.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 49,
+   "statement": 31,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 54,
+   "statement": 37,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorWordObservations.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/OperatorWordObservations.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureCurvature.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 16,
+   "statement": 12
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureCurvature.inc",
+  "target": "linear_input/lean_check/CurvatureBridge.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureCurvature.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "statement": 2,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureCurvature.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "statement": 4,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "lean/Elastica/Geometry.lean",
+  "counts": {
+   "proof": 20,
+   "statement": 10
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "lean/Elastica/Stationary.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 12,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "definition": 4,
+   "proof": 11,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "linear_input/lean_check/AreaVariation.inc",
+  "counts": {
+   "definition": 2,
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "linear_input/lean_check/Constraints.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/PressureStationary.inc",
+  "target": "linear_input/lean_check/PressureCurvature.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/QuarticClassification.inc",
+  "target": "linear_input/lean_check/Consequences.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/QuarticClassification.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 15,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/QuarticClassification.inc",
+  "target": "linear_input/lean_check/GeneralMinimum.inc",
+  "counts": {
+   "proof": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/QuarticClassification.inc",
+  "target": "linear_input/lean_check/Observation.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+  "counts": {
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "counts": {
+   "proof": 11,
+   "statement": 4,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "target": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RegularBand.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RegularBand.inc",
+  "target": "linear_input/lean_check/Consequences.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RegularBand.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1,
+   "proof": 12,
+   "statement": 8
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RegularBand.inc",
+  "target": "linear_input/lean_check/Dissipation.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RegularBand.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "definition": 2,
+   "proof": 8,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RepresentationBridges.inc",
+  "target": "linear_input/lean_check/EWFSFenchel.inc",
+  "counts": {
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RepresentationBridges.inc",
+  "target": "linear_input/lean_check/EnergyWfsFenchel.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RepresentationBridges.inc",
+  "target": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RepresentationBridges.inc",
+  "target": "linear_input/lean_check/F16FullMatrix.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RepresentationBridges.inc",
+  "target": "linear_input/lean_check/F16RankCertificate.inc",
+  "counts": {
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RepresentationBridges.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Rule481Symmetry.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/Rule481Symmetry.inc",
+  "target": "linear_input/lean_check/F0UpdateDescent.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RuleSelfModification.inc",
+  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+  "counts": {
+   "definition": 6
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RuleSelfModification.inc",
+  "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
+  "counts": {
+   "proof": 9,
+   "statement": 2,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RuleSelfModification.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RuleSelfModification.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RuleSelfModification.inc",
+  "target": "linear_input/lean_check/RecursiveOperatorReentry.inc",
+  "counts": {
+   "definition": 1,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/RuleSelfModification.inc",
+  "target": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "counts": {
+   "proof": 6,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 6,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "target": "linear_input/lean_check/F16RealDeterminant.inc",
+  "counts": {
+   "proof": 5,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 8
+  }
+ },
+ {
+  "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
+  "target": "linear_input/lean_check/OperatorWordObservations.inc",
+  "counts": {
+   "proof": 15,
+   "statement": 14,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ShearCommutator.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ShearCommutator.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 11,
+   "statement": 3,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/ShearCommutator.inc",
+  "target": "linear_input/lean_check/VariablePairObservations.inc",
+  "counts": {
+   "proof": 7,
+   "statement": 2,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorBoundary.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorBoundary.inc",
+  "target": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorBoundary.inc",
+  "target": "linear_input/lean_check/StrangeOperatorGalois.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
+  "target": "linear_input/lean_check/StrangeOperatorGalois.inc",
+  "counts": {
+   "proof": 25,
+   "statement": 22
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorFixedSets.inc",
+  "target": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorFixedSets.inc",
+  "target": "linear_input/lean_check/StrangeOperatorGalois.inc",
+  "counts": {
+   "proof": 11,
+   "statement": 11
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrangeOperatorGalois.inc",
+  "target": "linear_input/lean_check/F0Retractions.inc",
+  "counts": {
+   "proof": 8,
+   "statement": 7
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrictEnergy.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 10,
+   "statement": 9
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrictEnergy.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 21,
+   "statement": 5
+  }
+ },
+ {
+  "source": "linear_input/lean_check/StrictEnergy.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 11,
+   "statement": 9
+  }
+ },
+ {
+  "source": "linear_input/lean_check/SupportComposition.inc",
+  "target": "linear_input/lean_check/GeneralMinimum.inc",
+  "counts": {
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/SupportComposition.inc",
+  "target": "linear_input/lean_check/Observation.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TemporalSampling.inc",
+  "target": "linear_input/lean_check/EWFSFenchel.inc",
+  "counts": {
+   "proof": 10,
+   "statement": 6,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TemporalSampling.inc",
+  "target": "linear_input/lean_check/EWFSFutureBridge.inc",
+  "counts": {
+   "proof": 4,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TemporalSampling.inc",
+  "target": "linear_input/lean_check/FutureObservations.inc",
+  "counts": {
+   "proof": 13,
+   "statement": 12
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TrajectoryExistence.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 6,
+   "statement": 4,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TrajectoryExistence.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "proof": 12,
+   "statement": 6,
+   "definition": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TrajectoryExistence.inc",
+  "target": "linear_input/lean_check/RegularBand.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/TrajectoryExistence.inc",
+  "target": "linear_input/lean_check/StrictEnergy.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
+  "target": "linear_input/lean_check/BranchForgetting.inc",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
+  "target": "linear_input/lean_check/VariablePairObservations.inc",
+  "counts": {
+   "proof": 21,
+   "statement": 7,
+   "definition": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairObservations.inc",
+  "target": "linear_input/lean_check/BranchForgetting.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairObservations.inc",
+  "target": "linear_input/lean_check/Calculus.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairObservations.inc",
+  "target": "linear_input/lean_check/Coercivity.inc",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairObservations.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 13,
+   "statement": 1,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairObservations.inc",
+  "target": "linear_input/lean_check/HistorySignature.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariablePairObservations.inc",
+  "target": "linear_input/lean_check/Observation.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/AffineEquivalence.lean",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/ConstraintRegularity.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/Derivation.lean",
+  "counts": {
+   "proof": 5,
+   "statement": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/Equations.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/Examples.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/LocalMinimum.lean",
+  "counts": {
+   "proof": 2,
+   "statement": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/MinimumConditions.lean",
+  "counts": {
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "lean/Elastica/Variation.lean",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "linear_input/lean_check/CurvatureBridge.inc",
+  "counts": {
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "statement": 2,
+   "proof": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/VariationalBridge.inc",
+  "target": "linear_input/lean_check/Gradient.inc",
+  "counts": {
+   "statement": 4,
+   "proof": 2
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSCanonicalLift.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "proof": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSCanonicalLift.inc",
+  "target": "linear_input/lean_check/EWFSFenchel.inc",
+  "counts": {
+   "proof": 10,
+   "statement": 12,
+   "definition": 3
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
+  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
+  "counts": {
+   "proof": 1,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 2,
+   "proof": 4
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
+  "target": "linear_input/lean_check/EWFSFenchel.inc",
+  "counts": {
+   "proof": 5,
+   "statement": 3,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
+  "target": "linear_input/lean_check/EWFSFutureBridge.inc",
+  "counts": {
+   "proof": 1,
+   "statement": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
+  "target": "linear_input/lean_check/TemporalSampling.inc",
+  "counts": {
+   "proof": 3,
+   "statement": 1,
+   "definition": 1
+  }
+ },
+ {
+  "source": "linear_input/lean_check/WFSProjectiveSampling.inc",
+  "target": "linear_input/lean_check/Design.lean",
+  "counts": {
+   "definition": 1
+  }
+ }
+]

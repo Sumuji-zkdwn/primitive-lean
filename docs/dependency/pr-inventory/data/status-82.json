@@ -1,0 +1,42 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 167.8,
+   "log": "/tmp/claude-0/inv/kernel/82/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/82 -o /tmp/claude-0/inv/kernel/82/PrimitiveMain.olean /tmp/claude-0/inv/kernel/82/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 98.0,
+   "log": "/tmp/claude-0/inv/kernel/82/compile_main.log"
+  },
+  "compile_ContestEconomy": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/82 lean --root=/tmp/claude-0/wt/82/lean -o /tmp/claude-0/inv/kernel/82/ContestEconomy.olean /tmp/claude-0/wt/82/lean/ContestEconomy.lean",
+   "exit": 0,
+   "seconds": 6.8,
+   "log": "/tmp/claude-0/inv/kernel/82/compile_ContestEconomy.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/82 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/82/raw.json PrimitiveMain ContestEconomy -- Elastica PrimitiveMain ContestEconomy",
+   "exit": 0,
+   "seconds": 81.3,
+   "log": "/tmp/claude-0/inv/kernel/82/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/82/raw.json --assembled /tmp/claude-0/inv/kernel/82/PrimitiveMain.lean --report /tmp/claude-0/wt/82/verification/main-result.json --out /tmp/claude-0/inv/kernel/82/deps.json --root /tmp/claude-0/wt/82 --module-source ContestEconomy=lean/ContestEconomy.lean",
+   "exit": 0,
+   "seconds": 0.3,
+   "log": "/tmp/claude-0/inv/kernel/82/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain",
+  "ContestEconomy"
+ ],
+ "module_sources": {
+  "ContestEconomy": "lean/ContestEconomy.lean"
+ }
+}

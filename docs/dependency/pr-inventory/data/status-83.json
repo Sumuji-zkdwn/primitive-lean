@@ -1,0 +1,50 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 171.2,
+   "log": "/tmp/claude-0/inv/kernel/83/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/83 -o /tmp/claude-0/inv/kernel/83/PrimitiveMain.olean /tmp/claude-0/inv/kernel/83/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 70.9,
+   "log": "/tmp/claude-0/inv/kernel/83/compile_main.log"
+  },
+  "compile_MovingCurve": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/83 lean --root=/tmp/claude-0/wt/83/lean -o /tmp/claude-0/inv/kernel/83/MovingCurve.olean /tmp/claude-0/wt/83/lean/MovingCurve.lean",
+   "exit": 0,
+   "seconds": 2.5,
+   "log": "/tmp/claude-0/inv/kernel/83/compile_MovingCurve.log"
+  },
+  "compile_MovingCurveAudit": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/83 lean --root=/tmp/claude-0/wt/83/lean -o /tmp/claude-0/inv/kernel/83/MovingCurveAudit.olean /tmp/claude-0/wt/83/lean/MovingCurveAudit.lean",
+   "exit": 0,
+   "seconds": 2.3,
+   "log": "/tmp/claude-0/inv/kernel/83/compile_MovingCurveAudit.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/83 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/83/raw.json PrimitiveMain MovingCurve MovingCurveAudit -- Elastica PrimitiveMain MovingCurve MovingCurveAudit",
+   "exit": 0,
+   "seconds": 22.0,
+   "log": "/tmp/claude-0/inv/kernel/83/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/83/raw.json --assembled /tmp/claude-0/inv/kernel/83/PrimitiveMain.lean --report /tmp/claude-0/wt/83/verification/main-result.json --out /tmp/claude-0/inv/kernel/83/deps.json --root /tmp/claude-0/wt/83 --module-source MovingCurve=lean/MovingCurve.lean --module-source MovingCurveAudit=lean/MovingCurveAudit.lean",
+   "exit": 0,
+   "seconds": 0.5,
+   "log": "/tmp/claude-0/inv/kernel/83/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain",
+  "MovingCurve",
+  "MovingCurveAudit"
+ ],
+ "module_sources": {
+  "MovingCurve": "lean/MovingCurve.lean",
+  "MovingCurveAudit": "lean/MovingCurveAudit.lean"
+ }
+}

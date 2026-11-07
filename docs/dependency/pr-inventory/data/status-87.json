@@ -1,0 +1,33 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 150.3,
+   "log": "/tmp/claude-0/inv/kernel/87/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/87 -o /tmp/claude-0/inv/kernel/87/PrimitiveMain.olean /tmp/claude-0/inv/kernel/87/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 96.1,
+   "log": "/tmp/claude-0/inv/kernel/87/compile_main.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/87 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/87/raw.json PrimitiveMain -- Elastica PrimitiveMain",
+   "exit": 0,
+   "seconds": 25.1,
+   "log": "/tmp/claude-0/inv/kernel/87/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/87/raw.json --assembled /tmp/claude-0/inv/kernel/87/PrimitiveMain.lean --report /tmp/claude-0/wt/87/verification/main-result.json --out /tmp/claude-0/inv/kernel/87/deps.json --root /tmp/claude-0/wt/87",
+   "exit": 0,
+   "seconds": 0.5,
+   "log": "/tmp/claude-0/inv/kernel/87/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain"
+ ],
+ "module_sources": {}
+}

@@ -1,0 +1,38 @@
+{
+ "proof_check_failures": {
+  "30": {
+   "first_error": "error: unsolved goals",
+   "error_lines": 1
+  },
+  "34": {
+   "first_error": "error: Tactic `decide` failed for proposition",
+   "error_lines": 101
+  },
+  "35": {
+   "first_error": "error: Tactic `decide` failed for proposition",
+   "error_lines": 101
+  },
+  "45": {
+   "first_error": "error: No goals to be solved",
+   "error_lines": 1
+  },
+  "49": {
+   "first_error": "error(lean.unknownIdentifier): Unknown identifier `plus`",
+   "error_lines": 101
+  },
+  "58": {
+   "first_error": "error: unexpected token 'prefix'; expected ')'",
+   "error_lines": 26
+  },
+  "59": {
+   "first_error": "error: unexpected token 'prefix'; expected ')'",
+   "error_lines": 27
+  }
+ },
+ "stacked_probe_failures": {
+  "31": "error: `LinearInputChebyshevTower.quotientNumerator` has already been declared",
+  "53": "error: unsolved goals",
+  "54": "error: unsolved goals"
+ },
+ "note": "Stacked-probe failures of #53/#54 are resolved by compiling the probe standalone as the PR's own workflow does (measurements 53s/54s)."
+}
