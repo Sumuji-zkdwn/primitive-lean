@@ -171,9 +171,17 @@ theorem wired_word_sound {α β ι ω ν : Type*}
      ob (run (wiredStep oa ob stepA stepB) word x).2) =
     (oa (run (wiredStep oa ob stepA stepB) word y).1,
      ob (run (wiredStep oa ob stepA stepB) word y).2)
-  apply Prod.ext
-  · exact word_now h.1
-  · exact word_now h.2
+  have hleft :
+      oa (run (wiredStep oa ob stepA stepB) word x).1 =
+      oa (run (wiredStep oa ob stepA stepB) word y).1 :=
+    LinearInputOperatorWords.word_now (K := oa)
+      (step := localStep stepA) h.1
+  have hright :
+      ob (run (wiredStep oa ob stepA stepB) word x).2 =
+      ob (run (wiredStep oa ob stepA stepB) word y).2 :=
+    LinearInputOperatorWords.word_now (K := ob)
+      (step := localStep stepB) h.2
+  exact Prod.ext hleft hright
 
 /-- Finite counterexample: the neighbor stays false, so the local input true
     can never be presented in the wired system starting in this state. -/
