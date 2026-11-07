@@ -1,0 +1,81 @@
+name: PAD fourth-probe exact rational sidecar
+
+on:
+  push:
+    branches:
+      - chatgpt/pad-fourth-probe-followup-20261108
+    paths:
+      - 'lean/PADFourLayerFourProbe.lean'
+      - 'tools/check_pad_fourth_probe.py'
+      - '.github/workflows/pad-fourth-probe.yml'
+  pull_request:
+    paths:
+      - 'lean/PADFourLayerFourProbe.lean'
+      - 'tools/check_pad_fourth_probe.py'
+      - '.github/workflows/pad-fourth-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Check exact rational fourth-probe computations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/check_pad_fourth_probe.py | tee pad-fourth-fraction.log
+      - name: Compile isolated Lean sidecar at trust zero and audit axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayer.olean PADFourLayer.lean 2>&1 | tee ../pad-fourth-base.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerCalibration.olean PADFourLayerCalibration.lean 2>&1 | tee ../pad-fourth-calibration.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerThreeProbe.olean PADFourLayerThreeProbe.lean 2>&1 | tee ../pad-fourth-three.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerFourProbe.olean PADFourLayerFourProbe.lean 2>&1 | tee ../pad-fourth-build.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('PADFourLayerFourProbe.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',s,re.M)
+          assert len(names) == 7 and len(set(names)) == 7, names
+          Path('PADFourLayerFourProbeAudit.lean').write_text('import PADFourLayerFourProbe\n' + ''.join('#print axioms PADFourLayerFourProbe.'+n+'\n' for n in names))
+          print('Audited', names)
+          PY
+          lake env lean --trust=0 PADFourLayerFourProbeAudit.lean 2>&1 | tee ../pad-fourth-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          logs=['../pad-fourth-base.log','../pad-fourth-calibration.log','../pad-fourth-three.log','../pad-fourth-build.log','../pad-fourth-axioms.log']
+          s=''.join(Path(name).read_text() for name in logs)
+          assert not any(v in s for v in ('error:','warning:','sorryAx')),s
+          print('PASS isolated additive Lean trust-zero/axiom audit')
+          PY
+      - name: Upload fourth-probe verification logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pad-fourth-probe-evidence
+          path: |
+            pad-fourth-fraction.log
+            pad-fourth-base.log
+            pad-fourth-calibration.log
+            pad-fourth-three.log
+            pad-fourth-build.log
+            pad-fourth-axioms.log
+          if-no-files-found: warn

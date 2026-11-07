@@ -118,6 +118,11 @@ def verify_lean(rebuild):
         'FourBayes': 'Exploration mixtures, calibrated disappointment, binary log-partition derivatives, cancellation of opposite tilts, and exact deletion and predictive-forgetting counterexamples',
         'GaloisChebyshev': 'Elementary Joukowski/Chebyshev collision identity, cyclotomic and Kummer root labels, modular reflections and existing critical-fiber kernels (not a full Galois group identification)',
         'KummerDihedral': 'Actual splitting and adjoining-root fields, cyclic Kummer Galois group equivalence, Galois degree, and dihedral group action on root labels (not yet a dihedral field-Galois identification)',
+        'ChebyshevDihedralDescent': 'All ternary Chebyshev iterates, genuine polynomial root identities and reconstruction of a multiplicative radical from two candidates; not yet a full dihedral Galois equivalence',
+        'ChebyshevRatFuncDegrees': 'Exact degrees of all cubic Chebyshev iterates and nonconstancy of the square of the generic rational-function coordinate',
+        'ChebyshevDegreeTower': 'Exact Bezout coprimality, reduced rational-function numerator and denominator, degree 2m of the generic quotient and half-normalized Joukowski parameter',
+        'ChebyshevSplittingField': 'The generic Chebyshev polynomial over C(t) has C(X) as its actual splitting field, using distinct roots and radical reconstruction',
+        'ChebyshevGaloisAutomorphisms': 'Base-field rotation and inversion automorphisms for the ternary Chebyshev model, the dihedral relations, and an injective representation; not yet a full Galois group equivalence',
         'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
         'F16Holonomy': 'Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification',
         'F16RecoverySpectrum': 'Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input',
@@ -133,6 +138,7 @@ def verify_lean(rebuild):
         'StrangeOperatorConjugacy': 'Naturality, one-point F0 closure classification and conjugacy orbit',
         'StrangeOperatorBoundary': 'Finite non-idempotent obstruction to extending the spike-orbit theorem to arbitrary F0 maps',
         'StrangeOperatorFixedSets': 'Complete singleton Galois closure classification by fixed-point sets',
+        'StrangeOperatorCounting': 'Exact finite fixed-set map and idempotent counts, connected to Stops closure with explicit empty and full fixed-set boundaries',
         'F16SaddleCantor': 'F16 reflection-derived hyperbolic saddle, finite two-branch ternary coding and the F0 two-cycle obstruction; no infinite fractal/dimension theorem.',
         'F16FullMatrix': 'Actual real 16-by-16 sedenion left-pencil matrix, explicit eight-block row/column permutation equivalence, full determinant and real singularity classification',
         'F16FullRank': 'Invertible 2-by-2 Gaussian elimination, global diagonalization and rank 12 exactly at t=±1 (rank 16 otherwise)',
@@ -142,10 +148,12 @@ def verify_lean(rebuild):
         'FutureObservations': 'Future observation equivalence, induced deterministic quotient state, universal minimal predictive kernel, and observation-invisible symmetries',
         'FutureFiniteHorizon': 'Finite observation signatures, monotone trace rank, and stabilization after at most N-r refinement steps',
         'OperatorWordObservations': 'Operator-word observational equivalence, canonical quotient states, compilation without new distinctions, and an independent-action counterexample',
+        'MonoEyeComposition': 'Open-eye product quotient commutation, observable-boundary feedback soundness and a finite inaccessible-input obstruction',
         'OperatorBisimulation': 'Greatest observational bisimulation, closure operations, representation fibers and invisible symmetries',
         'OperatorVocabularyRefinement': 'Conservative extension criterion, strict new-action witnesses, quotient surjection and quotient splits',
         'OperatorFiniteHorizon': 'Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words',
         'OperatorSemanticClosure': 'Semantically compatible operators, induced quotient endomorphisms, functoriality, and a conservative nonword-generatable finite witness',
+        'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
         'SemanticIntervalNecessity': 'Finite prefix-time survival of local systems, old invariant extinction barrier, fresh-operation necessity, finite strict-quotient example and one-local extinction counterexample',
         'FiniteSelfSynthesis': 'Executable finite local repair search, complete bounded-catalog oracle, nonword-generable interval restoration, and Fin 3 instantiated repair/refinement',
         'RecursiveOperatorReentry': 'Finite child-generated novel operator catalogue, fresh patch construction, sound and complete bounded frontier, reentry monotonicity, conditional local viability, three-round saturation example',
@@ -169,7 +177,33 @@ def verify_lean(rebuild):
         'RelationalOddCycleGluing': 'Strict hierarchy of individual, pairwise and global relational feasibility, Boolean odd-cycle obstruction, even-cycle control; pairwise SAT is not overlap agreement of fixed assignments',
         'JoinContextualEquivalence': 'Contextual equality under rewrites and binary attachment, compositional quotient, representation minimality, exact descent of old quotient attachment, and finite counterexample',
         'CurveLetterContextualEquivalence': 'Exact normalized A/B curve-letter composition, observational collision, left-context separation, and specialization of the attachment-descent criterion',
-        'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
+        'RadicalF0Bridge': 'Arithmetic radical as multiplicity-forgetting F0, exact prime-support kernel, squarefree fixed points, and successor failure of descent and predictive sufficiency',
+        'PilotComparisonBridge': 'Choice-dependent reconstruction range cover, quotient factorization boundary, exact log-volume witness iff numerical cap, independent finite and ell=7 countermodels; not an IUT proof.',
+        'PilotVolumeTransport': 'Exact choice-dependent log-volume shift criterion, neutral/limited-shift obstruction, and conditional local packet budget certificate; not an arithmetic IUT proof.',
+        'PilotHullInflation': 'Volume-preserving coordinate swap with strictly larger hull of its orbit; abstract finite countermodel, not an IUT Ind2 calculation.',
+        'PilotHullStability': 'Exact no-hull-inflation iff every image stays within the original closure, with identity choice, volume monotonicity and escape obstruction.',
+        'ElasticaOperatorBridge': 'Constant-angle Elastica xCoord reconstruction applied to strict operator-quotient splitting (four directed straight segments).',
+        'ObservableRigidPoint': 'Conditional common observable fixed point of projected idempotents, F0 range derivation, four-state hidden-order counterexample and disjoint-idempotent obstruction',
+        'RimObservability': 'Exact one-channel four-phase decoder for a 4D rotation/reflection model, optimal three-versus-four horizon witness and signed 2x2 local gauges; no global F16 conjugacy claim.',
+        'ViscousRewrite': 'Proximal parameter-shift closure for the original E polynomial, minimizer-derived viscous balance, energy descent, Fenchel-Young identities, a nonconvex two-branch example, and an F16 rotation/reflection dissipation test.',
+        'GravityCocycle': 'Generic pair-interaction two-cocycle, exact coboundary of symmetric internal energy, Newton inverse-distance kernel, and oriented 1D inverse-square force; does not deduce Newton law from associativity.',
+        'GravityObserver': 'F0 reflection quotient and mass-only counterexample for symmetric two-mass gravitational observation; exact probe kernel, injectivity, and quadrupole/remainder identities.',
+        'GravityObservation': 'Idempotent F0 observational descent iff fiber invariance; exact three-moment exterior inverse-distance expansion with finite remainder; symmetric-pair quadrupole witness and failure of mass-only reduction.',
+        'TernaryZeroCesaro': 'Zero insertion into ternary blocks, six-step Cesaro values, preserved nonzero sums, and exact dwell-time weighted sums.',
+        'FiniteObservationSeparation': 'Probe refinement criteria, finite F0-style idempotent recovery, minimal permitted probe pair, six-state coordinates, and time-sensitive ternary observables.',
+        'DecompositionIdentification': 'Terminating rewrite paths, uniqueness and common-ancestor criteria, terminal probe identification, monotone finite probe libraries, and commutative generator collisions.',
+        'DecompositionF0Bridge': 'Actual positive F0 multiset merges as decreasing evaluation-preserving rewrites with a unique singleton terminal form.',
+        'PrimeFactorIdentification': 'Mathlib positive integer factor-multiset equivalence, canonical prime product injectivity, zero extra probes, and contrast with composite generator collisions.',
+        'PrimeSplitNormalForm': 'Actual nonunit factor splitting, product invariance, terminal-prime equivalence, exact step count, and terminal uniqueness with zero extra probes.',
+        'AssociatesFactorIdentification': 'UFM atomic-factor uniqueness modulo units, explicit existence and cancellation converse, finite probe monotonicity and zero probes, and rewrite path invariance.',
+        'GeneratedNonUniqueMonoid': 'Actual multiplicative submonoid generated by 4,6,9 with three relative atoms, two distinct atomic factorizations of 36, and failure of Euclid primality.',
+        'HalfFactorialIdentification': 'Exponents at 2 and 3 of 4^r6^s9^t; half-factorial length across all generator words; one-count probe reconstructs every generator word; concrete G coverage.',
+        'AtomicGeneratorClassification': 'Every atom in the actual 4-6-9 submonoid is one of 4, 6, 9; closure induction over arbitrary generator products.',
+        'AtomicHalfFactorial': 'For every actual atomic multiset the sum of 2- and 3-valuations is twice its length, implying full half-factoriality of the generated submonoid.',
+        'AtomicWordProbe': 'All actual atomic multisets admit explicit multiplicity triples; product plus count of factor 6 identifies any atomic decomposition, while product alone is insufficient.',
+        'SingleSwapFiber': 'Complete rank-one collision lattice and oriented 4*9-to-6*6 swap; every equal-product pair is connected by finite swaps, with termination and unique oriented endpoint.',
+        'F16RimRecovery': 'Lean-identifies the actual F16 relative action A^T C, proves a full 16D four-phase decoder, and exhibits collisions for one, two, and three phases.',
+        'ParallelLocalGluing': 'Pairwise overlap agreement iff global gluing, canonical unique global state under coverage, exact global policy and operational reachability factorization, three independent finite failure modes',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
@@ -232,9 +266,21 @@ def main(argv=None):
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
+    modes.add_argument("--two-wavelength-only", action="store_true", help="Verify the isolated PR #92 two-wavelength extension")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
+    modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     args = parser.parse_args(argv)
+    if args.two_wavelength_only:
+        from verify_two_wavelength import run_two_wavelength
+        result = run_two_wavelength(ROOT, args.rebuild)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result["passed"] else 1
+    if args.elastica_boundary_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --elastica-boundary-only")
+        from verify_elastica_fixed_boundary import main as verify_boundary
+        return verify_boundary([])
     if args.arc3_only:
         if args.rebuild:
             parser.error("--rebuild applies to Lean, not --arc3-only")

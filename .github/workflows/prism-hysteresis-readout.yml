@@ -1,0 +1,76 @@
+name: Prism hysteresis readout (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/prism-hysteresis-readout-20261107]
+  pull_request:
+    branches: [chatgpt/dark-bright-observation-20261106]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile imported amplitude model and prism-readout proofs with zero trust
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/DarkBrightObservation.olean DarkBrightObservation.lean 2>&1 | tee ../prism-amplitude.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PrismHysteresisReadout.olean PrismHysteresisReadout.lean 2>&1 | tee ../prism-readout.log
+          if grep -E 'warning:|error:' ../prism-amplitude.log ../prism-readout.log; then exit 1; fi
+      - name: Audit all readout theorem dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('PrismHysteresisReadout.lean').read_text()
+          assert not re.search(r'\b(sorry|admit)\b', source), 'Sorry or admit present'
+          names = re.findall(r'^theorem\s+(\w+)', source, re.M)
+          assert len(names) >= 14, names
+          pathlib.Path('PrismHysteresisReadoutAudit.lean').write_text(
+              'import PrismHysteresisReadout\n' +
+              ''.join('#print axioms PrismHysteresisReadout.' + n + '\n' for n in names))
+          print('Auditing', len(names), 'Lean theorems')
+          PY
+          lake env lean --trust=0 PrismHysteresisReadoutAudit.lean 2>&1 | tee ../prism-audit.log
+          python - <<'PY'
+          import pathlib, re
+          names = re.findall(r'^theorem\s+(\w+)',pathlib.Path('PrismHysteresisReadout.lean').read_text(),re.M)
+          output = pathlib.Path('../prism-audit.log').read_text()
+          rows = re.findall(r'depends on axioms:\s*\[([^\]]*)\]',output)
+          assert len(rows) == len(names), (len(rows), len(names))
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for row in rows:
+              used = set(filter(None,(x.strip() for x in row.split(','))))
+              assert used <= allowed, used - allowed
+          assert 'warning:' not in output and 'error:' not in output
+          print('PASS: all theorem axiom dependencies within allowed foundations')
+          PY
+      - name: Independently check exact rational examples
+        run: python -B tools/check_prism_hysteresis.py
+      - name: Upload proof evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: prism-hysteresis-readout-${{ github.run_id }}
+          path: |
+            prism-*.log
+          if-no-files-found: warn

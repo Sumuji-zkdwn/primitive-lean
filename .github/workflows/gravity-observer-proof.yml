@@ -1,0 +1,88 @@
+name: Gravitational F0 observer proof and full audit
+
+on:
+  push:
+    branches: ['chatgpt/gravity-observer-*']
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/GravityObserver.inc'
+      - '.github/workflows/gravity-observer-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean
+        shell: bash
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch pinned mathlib cache
+        working-directory: lean
+        run: lake exe cache get
+      - name: Assemble isolated F0 observation proof check
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          old=Path('linear_input/lean_check/GravityCocycle.inc').read_text()
+          obs=Path('linear_input/lean_check/GravityObserver.inc').read_text()
+          names=re.findall(r'(?m)^theorem\s+([a-zA-Z0-9_]+)',obs)
+          assert len(names)>=10, names
+          shim = '''namespace LinearInputF0
+          def Idempotent {α : Type*} (K : α → α) : Prop :=
+            ∀ x, K (K x) = K x
+          end LinearInputF0
+          '''
+          # The actual F0 definition is checked separately by integration.
+          code = 'import Mathlib\n\n' + shim + '\n\n' + old + '\n\n' + obs
+          code += '\n' + '\n'.join(
+            '#print axioms LinearInputGravityObserver.'+n for n in names) + '\n'
+          Path('linear_input/lean_check/GravityObserverStandalone.lean').write_text(code)
+          print('New declarations to audit:',len(names))
+          PY
+      - name: Compile new Lean claims with no warnings or extra axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd lean
+          lake env lean --trust=0 ../linear_input/lean_check/GravityObserverStandalone.lean > ../gravity-observer-standalone.log 2>&1 || {
+            cat ../gravity-observer-standalone.log
+            exit 1
+          }
+          if grep -E '[[:space:]]warning:' ../gravity-observer-standalone.log; then
+            cat ../gravity-observer-standalone.log
+            exit 1
+          fi
+          if grep -Ei "axioms:.*(sorryAx|admit|unknown)" ../gravity-observer-standalone.log; then
+            exit 1
+          fi
+          echo "Isolated Lean check passed"
+      - name: Full integration with actual F0 and all recorded proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f linear_input/lean_check/GravityObserverStandalone.lean
+          python -m pip install --disable-pip-version-check 'pytest==9.2.0' 'numpy==2.5.4'
+          python -B -X utf8 tools/verify.py --integration-only
+      - name: Keep proof evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gravity-observer-proof-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            gravity-observer-standalone.log
+            verification/
+            linear_input/lean_results.json

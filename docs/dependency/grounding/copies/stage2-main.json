@@ -1,0 +1,316 @@
+{
+ "proved_equal": 0,
+ "attempted": 58,
+ "skipped_private": 4,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputComplementaryObservationExamples.evenObserve",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputComplementaryObservationExamples.oddObserve",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputComplementaryObservationExamples.phaseAverage",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputComplementaryObservationExamples.sharedProjection",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSDual.Positive",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSDual.forgetU",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSDual.observeX",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSFuture.perceptualObservation",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSFuture.positiveIntensity",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEWFSFuture.radialIntensity",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEnergyGaugeFenchel.affineProbe",
+   "initial": "Elastica.xCoord",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEnergyGaugeFenchel.affineProbe",
+   "initial": "Elastica.yCoord",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEnergyGaugeFenchel.force",
+   "initial": "LinearInputDesign.E",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEnergyGaugeFenchel.force",
+   "initial": "LinearInputGradient.gSq",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEnergyGaugeFenchel.force",
+   "initial": "LinearInputGradient.gx",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputEnergyGaugeFenchel.force",
+   "initial": "LinearInputGradientBound.gradientLowerBound",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16FullMatrix.BlockIndex",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16Recovery.SignedBasis",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16SaddleCantor.eigenCoords",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16SaddleCantor.fromEigen",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16SaddleCantor.saddle",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16UnexpectedBridges.diagonalGauge",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16UnexpectedBridges.diagonalReflection",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.binaryFreeEnergy",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.binaryFreeEnergy",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.binaryPartition",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.binaryPartition",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.binaryTilt",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.binaryTilt",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.disappointment",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputFourBayes.disappointment",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputRule481.Grid",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputShearCommutator.pairSwap",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputTemporalSampling.spin",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputTemporalSampling.spinTwo",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDerivative",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDerivative",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDiscriminant",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.cubicDiscriminant",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.reducedB",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.reducedB",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.reducedCubic",
+   "initial": "Elastica.powerLogDensity",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.reducedCubic",
+   "initial": "LinearInputCalculus.potential",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.reducedCubic",
+   "initial": "LinearInputDesign.f",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.reducedCubic",
+   "initial": "LinearInputLevelConvergence.bandRadius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.stationaryY",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairGalois.stationaryY",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.inverseMinusGradient",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.inversePlusCoordinates",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.minusEnergy",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.minusEnergy",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.plusCoordinates",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.plusEnergy",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputVariablePairs.plusEnergy",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputWFSObservation.gauge",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputWFSObservation.gaugeInv",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputWFSObservation.reflection",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputWFSObservation.wfsLift",
+   "initial": "LinearInputLevelGeometry.direction",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputEWFSDual.Positive",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputF16FullMatrix.BlockIndex",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputF16Recovery.SignedBasis",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputRule481.Grid",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+{"unresolved_names": [],
+ "type_matches": 2,
+ "rows":
+ [{"value": "not_identified",
+   "initial": "Elastica.powerLog",
+   "candidate": "ContestEconomy.participation"},
+  {"value": "not_identified",
+   "initial": "LinearInputGradient.gy",
+   "candidate": "ContestEconomy.participation"}],
+ "pairs_skipped": 0,
+ "initial_definitions": 46,
+ "copies": 0,
+ "candidates": 1}

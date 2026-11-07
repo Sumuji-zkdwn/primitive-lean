@@ -1,0 +1,60 @@
+name: Elastica fixed-boundary operator bridge
+
+on:
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/Elastica*.lean'
+      - 'linear_input/lean_check/OperatorWordObservations.inc'
+      - 'linear_input/lean_check/OperatorVocabularyRefinement.inc'
+      - 'lean/Elastica/Geometry.lean'
+      - 'lean/Research/ElasticaObservationQuotient.lean'
+      - 'tests/test_elastica_fixed_boundary.py'
+      - 'tools/verify.py'
+      - 'tools/verify_elastica_fixed_boundary.py'
+      - '.github/workflows/elastica-fixed-boundary.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'linear_input/lean_check/Elastica*.lean'
+      - 'linear_input/lean_check/OperatorWordObservations.inc'
+      - 'linear_input/lean_check/OperatorVocabularyRefinement.inc'
+      - 'lean/Elastica/Geometry.lean'
+      - 'lean/Research/ElasticaObservationQuotient.lean'
+      - 'tests/test_elastica_fixed_boundary.py'
+      - 'tools/verify.py'
+      - 'tools/verify_elastica_fixed_boundary.py'
+      - '.github/workflows/elastica-fixed-boundary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixed-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact proposed head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Fetch the pinned reference commits
+        run: |
+          git fetch --no-tags origin abc94a7d313efc194fe43a6bfc1ed955fa36f17b
+          git fetch --no-tags origin a721c47b6cfa18ef101fd5dc563881c3c9654af7
+          git rev-parse HEAD
+
+      - name: Install pinned Lean and mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Check boundary bridge and independent finite model
+        run: python -X utf8 tools/verify.py --elastica-boundary-only

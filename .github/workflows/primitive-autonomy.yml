@@ -55,6 +55,11 @@ jobs:
         run: |
           python ../control/tools/autonomy/grow.py prepare --root . --output-file "$GITHUB_OUTPUT"
 
+      - name: Recheck extracted finite semantics and original ledger
+        if: steps.prepare.outputs.created == 'true'
+        working-directory: working
+        run: python ../control/tools/autonomy/check_extracted_loop.py --root .
+
       - name: Install pinned Lean and Mathlib cache
         if: steps.prepare.outputs.created == 'true'
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
@@ -79,6 +84,11 @@ jobs:
         if: steps.prepare.outputs.created == 'true'
         working-directory: working
         run: python ../control/tools/autonomy/grow.py seal --root .
+
+      - name: Recheck sealed feedback before any commit
+        if: steps.prepare.outputs.created == 'true'
+        working-directory: working
+        run: python ../control/tools/autonomy/check_extracted_loop.py --root . --sealed
 
       - name: Commit only audited additions to isolated growth branch
         if: steps.prepare.outputs.created == 'true'
