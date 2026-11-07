@@ -2238,6 +2238,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "sha256": "71ef3033078f7b28d01f48a19404043a7bf549bc024db94ec73ad56309dd862e",
+      "original_sha256": "71ef3033078f7b28d01f48a19404043a7bf549bc024db94ec73ad56309dd862e",
+      "source_pr": null,
+      "source_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e",
+      "source_path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e"
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2319,12 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-08",
+      "path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "source_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e",
+      "note": "Additive conditional F0 observable-common-fixed derivation and 4-state counterexample. Existing proofs unchanged."
     }
   ]
 }
