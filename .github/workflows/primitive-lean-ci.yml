@@ -95,6 +95,54 @@ jobs:
       - name: Run complete integration verification
         run: python -B -X utf8 tools/verify.py --integration-only
 
+      - name: Re-extract combined Lean kernel dependencies
+        run: |
+          python3 -B tools/deps/pr_kernel.py --worktree . --work verification/integrated-kernel --own lean/MovingCurve.lean lean/MovingCurveAudit.lean lean/Research/OkanoharaTransport.lean lean/Research/FiniteMarkovTransport.lean
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from collections import Counter
+          import sys
+          sys.path.insert(0, 'tools/deps')
+          from grounding import classify
+          work = Path('verification/integrated-kernel')
+          status = json.loads((work / 'status.json').read_text())
+          required = [
+              'proof_only', 'compile_main',
+              'compile_MovingCurve', 'compile_MovingCurveAudit',
+              'compile_Research.OkanoharaTransport',
+              'compile_Research.FiniteMarkovTransport',
+              'extract', 'analyze'
+          ]
+          failures = {k: status['steps'].get(k) for k in required
+                      if status['steps'].get(k, {}).get('exit') != 0}
+          if failures:
+              print('KERNEL_REEXTRACTION_FAILED', json.dumps(failures))
+              raise SystemExit(1)
+          nodes = json.loads((work / 'deps.json').read_text())['nodes']
+          expected = [
+              'Elastica.moving_translation_distance_eq_time_sq',
+              'Elastica.curvature_double_well_integral',
+              'LinearInputCrossSystemObservation.bridge_trace'
+          ]
+          missing = [n for n in expected if n not in nodes]
+          if missing:
+              print('MISSING_INTEGRATED_THEOREMS', missing)
+              raise SystemExit(1)
+          summary = {}
+          for layer in sorted({r['layer'] for r in nodes.values()}):
+              ts = [n for n, r in nodes.items() if r['layer'] == layer and r['kind'] == 'theorem']
+              classified = classify(nodes, ts) if layer != 'initial' else {}
+              summary[layer] = dict(theorems=len(ts), vocabulary=Counter(
+                  v['vocabulary'] for v in classified.values()),
+                  proof_through_initial=sum(v['proof_through_initial'] for v in classified.values()))
+          summary['total_nodes'] = len(nodes)
+          summary['module_sources'] = status['module_sources']
+          (work / 'summary.json').write_text(json.dumps(summary, indent=2))
+          print('INTEGRATED_KERNEL_SUMMARY', json.dumps(summary))
+          PY
+          python3 -B tools/deps/grounding.py --main-deps verification/integrated-kernel/deps.json --out verification/integrated-kernel/grounding
+
       - name: Upload complete verification evidence even on failure
         if: always()
         uses: actions/upload-artifact@v6
