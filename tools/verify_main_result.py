@@ -95,6 +95,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/PilotHullInflation.inc', 'LinearInputPilotHullInflation'),
     ('linear_input/lean_check/PilotHullStability.inc', 'LinearInputPilotHullStability'),
     ('linear_input/lean_check/ElasticaOperatorBridge.inc', 'LinearInputElasticaOperatorBridge'),
+    ('linear_input/lean_check/ObservableRigidPoint.inc', 'LinearInputRigidPoint'),
 )
 
 

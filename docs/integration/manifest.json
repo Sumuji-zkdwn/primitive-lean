@@ -2440,6 +2440,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "edba4874adc7c492fd4a2ba312d85140366ac204"
+    },
+    {
+      "path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "sha256": "71ef3033078f7b28d01f48a19404043a7bf549bc024db94ec73ad56309dd862e",
+      "original_sha256": "71ef3033078f7b28d01f48a19404043a7bf549bc024db94ec73ad56309dd862e",
+      "source_pr": null,
+      "source_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e",
+      "source_path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e"
     }
   ],
   "construction_errors": [],
@@ -2593,6 +2605,12 @@
       "path": "linear_input/lean_check/MonoEyeComposition.inc",
       "source_commit": "edba4874adc7c492fd4a2ba312d85140366ac204",
       "note": "Mono-eye open-product predictive quotient equivalence, observable-boundary feedback soundness and inaccessible-input counterexample. Historical proof files unchanged."
+    },
+    {
+      "date": "2026-11-08",
+      "path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "source_commit": "caea97fd181dc0d68b22eab3949ddefa8850032e",
+      "note": "Additive conditional F0 observable-common-fixed derivation and 4-state counterexample. Existing proofs unchanged."
     }
   ]
 }

@@ -178,6 +178,7 @@ def verify_lean(rebuild):
         'PilotHullInflation': 'Volume-preserving coordinate swap with strictly larger hull of its orbit; abstract finite countermodel, not an IUT Ind2 calculation.',
         'PilotHullStability': 'Exact no-hull-inflation iff every image stays within the original closure, with identity choice, volume monotonicity and escape obstruction.',
         'ElasticaOperatorBridge': 'Constant-angle Elastica xCoord reconstruction applied to strict operator-quotient splitting (four directed straight segments).',
+        'ObservableRigidPoint': 'Conditional common observable fixed point of projected idempotents, F0 range derivation, four-state hidden-order counterexample and disjoint-idempotent obstruction',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
