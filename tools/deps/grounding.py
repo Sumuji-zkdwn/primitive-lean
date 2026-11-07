@@ -12,7 +12,9 @@ questions that can:
               introduced from scratch. Classes:
                 initial_only      reaches initial vocabulary, no new primitives
                 mixed             reaches initial vocabulary and new primitives
-                new_objects_only  new primitives only
+                new_objects_bridged    new primitives only, each related to initial
+                                       definitions by theorem statements (transitively)
+                new_objects_unbridged  new primitives only, some with no such relation
                 mathlib_only      no project definition at all
   proof       Does the transitive proof-edge closure contain an initial theorem?
 
@@ -27,7 +29,7 @@ import collections
 import json
 from pathlib import Path
 
-CLASSES = ("initial_only", "mixed", "new_objects_only", "mathlib_only")
+CLASSES = ("initial_only", "mixed", "new_objects_bridged", "new_objects_unbridged", "mathlib_only")
 
 
 def classify(N, targets):
@@ -51,6 +53,30 @@ def classify(N, targets):
     def is_def(n):
         return N[n]["kind"] != "theorem"
 
+    # Bridges: a theorem whose statement mentions definitions relates them. A new
+    # primitive is "bridged" if such statements connect it, possibly through other
+    # definitions, to an initial definition. Co-occurrence is a relation proved by a
+    # theorem, not necessarily an equality.
+    defs_in_stmt = {}
+    for n, r in N.items():
+        if r["kind"] == "theorem":
+            ds = {x for x in r["direct"]["statement"] if x in N and is_def(x)}
+            if len(ds) > 1:
+                defs_in_stmt[n] = ds
+    link = collections.defaultdict(set)
+    for ds in defs_in_stmt.values():
+        for x in ds:
+            link[x] |= ds - {x}
+    bridged = set()
+    frontier = [x for x in N if is_def(x) and layer[x] == "initial"]
+    seen = set(frontier)
+    while frontier:
+        x = frontier.pop()
+        for y in link.get(x, ()):
+            if y not in seen:
+                seen.add(y)
+                bridged.add(y)
+                frontier.append(y)
     out = {}
     for t in targets:
         V = clo(voc, t, "v")
@@ -60,6 +86,8 @@ def classify(N, targets):
         cls = ("initial_only" if touches and not prims else "mixed" if touches
                else "new_objects_only" if prims else "mathlib_only")
         through = sorted(x for x in clo(prf, t, "p") if layer[x] == "initial" and N[x]["kind"] == "theorem")
+        if cls == "new_objects_only":
+            cls = "new_objects_bridged" if all(p in bridged for p in prims) else "new_objects_unbridged"
         out[t] = dict(vocabulary=cls, proof_through_initial=bool(through),
                       initial_theorems_in_proof=len(through), new_primitive_definitions=prims)
     return out
@@ -113,8 +141,11 @@ def main():
          "  1. **命題の語彙**：命題と定義をたどって、初期の対象に行き着くか。初期層に一度も触れずに mathlib だけから定義された"
          "プロジェクトの定義を「新しい原始的対象」と呼ぶ。",
          "  2. **証明の経路**：証明項の連鎖が、初期の定理を実際に経由しているか。",
-         "- 語彙が `new_objects_only` または `mathlib_only` の定理は、初期の対象について何も述べていないので、"
-         "「初期定理から導けるか」という問い自体が成り立たない。",
+         "- 新しい対象だけで書かれた定理は 2 つに分ける。`new_objects_bridged` は、その新しい対象がどれも、"
+         "別の定理の命題の中で初期の対象と（推移的に）一緒に現れるもの。一緒に現れることは等式を意味せず、"
+         "定理によって関係づけられていることだけを示す。`new_objects_unbridged` は、そうした関係が一つもない対象を含むもの。",
+         "- `new_objects_unbridged` と `mathlib_only` の定理は、初期の対象について何も述べておらず、"
+         "初期の対象との関係を示す定理もないので、「初期定理から導けるか」という問い自体が成り立たない。",
          "- 語彙が `initial_only` で証明が初期定理を経由しない定理が、「初期定理から導けるかもしれないが示されていない」候補である。",
          "- 名前の違う定数は、定義として等しくても別物として数える（初期の対象を作り直した写しは「新しい対象」に入る）。", "",
          "## main の後続層（984 定理）", ""]

@@ -1,0 +1,58 @@
+name: PAD design determinant certificate (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/pad-robust-design-20261107]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Check determinant certificate and axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat lean-toolchain
+          sha256sum PADFourLayerDesign.lean
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerDesign.olean PADFourLayerDesign.lean 2>&1 | tee ../pad-design-build.log
+          cat > PADFourLayerDesignAudit.lean <<'EOF'
+          import PADFourLayerDesign
+          #print axioms PADFourLayerDesign.fixedFirstGap
+          #print axioms PADFourLayerDesign.detEnvelope_upper
+          #print axioms PADFourLayerDesign.detEnvelope_at_optimal
+          #print axioms PADFourLayerDesign.unitInterval_upper
+          #print axioms PADFourLayerDesign.unitInterval_at_optimal
+          EOF
+          lake env lean --trust=0 PADFourLayerDesignAudit.lean 2>&1 | tee ../pad-design-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          out = Path('../pad-design-build.log').read_text() + Path('../pad-design-audit.log').read_text()
+          assert not any(x in out for x in ('error:', 'sorryAx', 'warning:')), out
+          print('Certificate verified without warnings/errors/sorryAx')
+          PY
+      - name: Save logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pad-design-lean
+          path: |
+            pad-design-build.log
+            pad-design-audit.log
+          if-no-files-found: warn

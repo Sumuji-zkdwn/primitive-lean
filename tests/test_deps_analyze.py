@@ -71,5 +71,21 @@ class DepsAnalyzeTests(unittest.TestCase):
         self.assertEqual(r["proof_shape"], "library_only")
 
 
+class SharedProofTests(unittest.TestCase):
+    def test_foreign_shared_proof_is_expanded_not_attributed(self):
+        decls = [
+            decl("Init.f", kind="def", line=10),
+            decl("Init.f._proof_1", line=None, internal=True, vc=["Nat.succ"]),
+            decl("A.g", kind="def", line=110, vc=["Init.f._proof_1"]),
+            decl("A.h", kind="def", line=120, vc=["Init.f.eq_1"]),
+            decl("Init.f.eq_1", line=None, tc=["Init.f"]),
+        ]
+        ext = [dict(name="Nat.succ", module="Init.Prelude", kind="ctor")]
+        g, rows = run(decls, ext)
+        self.assertEqual(rows["A.g"]["direct"]["definition"], [])
+        self.assertEqual(rows["A.g"]["direct_external_counts"]["definition"], {"core": 1})
+        self.assertEqual(rows["A.h"]["direct"]["definition"], ["Init.f"])
+
+
 if __name__ == "__main__":
     unittest.main()

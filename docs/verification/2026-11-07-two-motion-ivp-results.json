@@ -1,0 +1,363 @@
+{
+  "initial_state": {
+    "v1": 0,
+    "v2": 0,
+    "x1": 1,
+    "x2": 1,
+    "y": 0
+  },
+  "integrator": "classical RK4, independent implementation",
+  "max_energy_balance_residual_fine": 1.1324274851176597e-14,
+  "model": "PR #88 SolvesAt vector field with W'=F^2/(2c)",
+  "parameter_grid_search": {
+    "assumptions": "kappa>0,c>0,g!=0,y(0)=0,x1(0)*x2(0)!=0; omega_i in {0,1}",
+    "cases": 576,
+    "counterexamples_found": 0,
+    "maximum_energy_balance_residual": 2.0552448631860898e-12,
+    "meaning": "finite numerical search only; the Lean theorem proves the conditional equivalence for supplied solutions",
+    "minimum_emitted_work_at_t1": 0.007818660091213197
+  },
+  "parameter_variations_and_boundary_cases": [
+    {
+      "balance_residual": 2.220446049250313e-15,
+      "emitted_work": 0.678110248461563,
+      "force": -0.5651157439261255,
+      "hypotheses_kappa_positive_c_positive_g_nonzero": true,
+      "initial_force": 2.184,
+      "local_energy": 1.5980537515384396,
+      "name": "positive_coupling_and_frequencies",
+      "v1": -0.8121975265307813,
+      "v2": 1.5099822585228786,
+      "x1": -0.0447582251161012,
+      "x2": -0.28199046526409455,
+      "y": 0.26741220069320143
+    },
+    {
+      "balance_residual": 9.769962616701378e-15,
+      "emitted_work": 0.054798573833570736,
+      "force": 0.04036644445065642,
+      "hypotheses_kappa_positive_c_positive_g_nonzero": true,
+      "initial_force": 0.72,
+      "local_energy": 1.2124014261664389,
+      "name": "weaker_coupling",
+      "v1": -1.3348752756481508,
+      "v2": -0.697266157795799,
+      "x1": 0.37956072796979773,
+      "x2": 0.32327336379768407,
+      "y": 0.1033199210431285
+    },
+    {
+      "balance_residual": 0.0,
+      "emitted_work": 0.0,
+      "force": 0.0,
+      "hypotheses_kappa_positive_c_positive_g_nonzero": true,
+      "initial_force": 0.0,
+      "local_energy": 0.0,
+      "name": "boundary_equilibrium_no_emission",
+      "v1": 0.0,
+      "v2": 0.0,
+      "x1": 1.0,
+      "x2": 1.0,
+      "y": 1.0
+    },
+    {
+      "balance_residual": 0.0,
+      "emitted_work": 0.0,
+      "force": 0.0,
+      "hypotheses_kappa_positive_c_positive_g_nonzero": false,
+      "initial_force": 0.0,
+      "local_energy": 0.0,
+      "name": "zero_coupling_counterexample",
+      "v1": 0.0,
+      "v2": 0.0,
+      "x1": 1.0,
+      "x2": 1.0,
+      "y": 0.0
+    },
+    {
+      "balance_residual": 0.0,
+      "emitted_work": 0.0,
+      "force": 0.0,
+      "hypotheses_kappa_positive_c_positive_g_nonzero": false,
+      "initial_force": 0.0,
+      "local_energy": 0.0,
+      "name": "zero_stiffness_counterexample",
+      "v1": 0.0,
+      "v2": 0.0,
+      "x1": 1.0,
+      "x2": 1.0,
+      "y": 0.0
+    }
+  ],
+  "parameters": {
+    "c": 1,
+    "g": 1,
+    "kappa": 1,
+    "omega1": 0,
+    "omega2": 0
+  },
+  "refinement_difference_fine_vs_twice_fine": {
+    "emitted_work": 1.942890293094024e-16,
+    "force": 3.885780586188048e-16,
+    "local_energy": 8.271161533457416e-15,
+    "v1": 7.66053886991358e-15,
+    "v2": 7.66053886991358e-15,
+    "x1": 2.220446049250313e-16,
+    "x2": 2.220446049250313e-16,
+    "y": 6.661338147750939e-16
+  },
+  "richardson_error_estimate_order4": {
+    "emitted_work": 1.295260195396016e-17,
+    "force": 2.590520390792032e-17,
+    "local_energy": 5.514107688971611e-16,
+    "v1": 5.10702591327572e-16,
+    "v2": 5.10702591327572e-16,
+    "x1": 1.4802973661668754e-17,
+    "x2": 1.4802973661668754e-17,
+    "y": 4.4408920985006264e-17
+  },
+  "sampled_trajectory": [
+    {
+      "balance_residual": 0.0,
+      "emitted_work": 0.0,
+      "force": 1.0,
+      "local_energy": 0.5,
+      "time": 0.0,
+      "v1": 0.0,
+      "v2": 0.0,
+      "x1": 1.0,
+      "x2": 1.0,
+      "y": 0.0
+    },
+    {
+      "balance_residual": 4.107825191113079e-15,
+      "emitted_work": 0.04726996405431255,
+      "force": 0.9416044452791895,
+      "local_energy": 0.45273003594569156,
+      "time": 0.1,
+      "v1": -0.09705962219649557,
+      "v2": -0.09705962219649557,
+      "x1": 0.995094438360362,
+      "x2": 0.995094438360362,
+      "y": 0.04860849597653486
+    },
+    {
+      "balance_residual": 4.218847493575595e-15,
+      "emitted_work": 0.08833479040345076,
+      "force": 0.868134049701972,
+      "local_energy": 0.4116652095965535,
+      "time": 0.2,
+      "v1": -0.18664631116253128,
+      "v2": -0.18664631116253128,
+      "x1": 0.980837813381216,
+      "x2": 0.980837813381216,
+      "y": 0.09390876645647302
+    },
+    {
+      "balance_residual": 7.66053886991358e-15,
+      "emitted_work": 0.12250120293355567,
+      "force": 0.7826944800543016,
+      "local_energy": 0.377498797066452,
+      "time": 0.3,
+      "v1": -0.26682104960575204,
+      "v2": -0.26682104960575204,
+      "x1": 0.9580796679465082,
+      "x2": 0.9580796679465082,
+      "y": 0.13522217007818976
+    },
+    {
+      "balance_residual": 7.993605777301127e-15,
+      "emitted_work": 0.14964572368986698,
+      "force": 0.6888313036579369,
+      "local_energy": 0.35035427631014104,
+      "time": 0.4,
+      "v1": -0.3363182924858453,
+      "v2": -0.3363182924858453,
+      "x1": 0.9278303014802276,
+      "x2": 0.9278303014802276,
+      "y": 0.17203776468695317
+    },
+    {
+      "balance_residual": 9.2148511043888e-15,
+      "emitted_work": 0.17015110572850992,
+      "force": 0.5901967452582133,
+      "local_energy": 0.3298488942714993,
+      "time": 0.5,
+      "v1": -0.39456659161009205,
+      "v2": -0.39456659161009205,
+      "x1": 0.8911916911673881,
+      "x2": 0.8911916911673881,
+      "y": 0.20402588514757586
+    },
+    {
+      "balance_residual": 9.547918011776346e-15,
+      "emitted_work": 0.1847836191775501,
+      "force": 0.49025807510903796,
+      "local_energy": 0.3152163808224594,
+      "time": 0.6,
+      "v1": -0.4416332083501532,
+      "v2": -0.4416332083501532,
+      "x1": 0.8492902975064356,
+      "x2": 0.8492902975064356,
+      "y": 0.23103593432953196
+    },
+    {
+      "balance_residual": 8.992806499463768e-15,
+      "emitted_work": 0.1945437928318208,
+      "force": 0.39207836953308367,
+      "local_energy": 0.3054562071681882,
+      "time": 0.7000000000000001,
+      "v1": -0.47811450850222853,
+      "v2": -0.47811450850222853,
+      "x1": 0.8032183284080339,
+      "x2": 0.8032183284080339,
+      "y": 0.25308131355751246
+    },
+    {
+      "balance_residual": 9.992007221626409e-15,
+      "emitted_work": 0.2005208930598116,
+      "force": 0.2981818086027587,
+      "local_energy": 0.2994791069401984,
+      "time": 0.8,
+      "v1": -0.5049979321238774,
+      "v2": -0.5049979321238774,
+      "x1": 0.7539875990412352,
+      "x2": 0.7539875990412352,
+      "y": 0.27031549090520784
+    },
+    {
+      "balance_residual": 1.0880185641326534e-14,
+      "emitted_work": 0.2037726033020376,
+      "force": 0.21049949814835422,
+      "local_energy": 0.2962273966979732,
+      "time": 0.9,
+      "v1": -0.5235192234652122,
+      "v2": -0.5235192234652122,
+      "x1": 0.7024976082017926,
+      "x2": 0.7024976082017926,
+      "y": 0.28300339138088515
+    },
+    {
+      "balance_residual": 1.1324274851176597e-14,
+      "emitted_work": 0.2052404232602049,
+      "force": 0.13038100216351545,
+      "local_energy": 0.2947595767398064,
+      "time": 1.0,
+      "v1": -0.5350326848681537,
+      "v2": -0.5350326848681537,
+      "x1": 0.6495173586991091,
+      "x2": 0.6495173586991091,
+      "y": 0.2914917970879517
+    }
+  ],
+  "scope": "Local existence follows analytically from Picard-Lindelof for the polynomial vector field. Numerical agreement is not that proof; finite parameter samples do not prove the universal theorem.",
+  "status": "all finite numeric checks passed",
+  "step_doubling_100_to_200_difference": {
+    "emitted_work": 6.420167175669178e-11,
+    "force": 2.3094187673322608e-10,
+    "local_energy": 5.0486614888711756e-11,
+    "v1": 1.9041990206858372e-11,
+    "v2": 1.9041990206858372e-11,
+    "x1": 2.2225055129609927e-10,
+    "x2": 2.2225055129609927e-10,
+    "y": 5.7769344863345395e-11
+  },
+  "step_doubling_200_to_400_difference": {
+    "emitted_work": 3.97853971989548e-12,
+    "force": 1.4380441282213496e-11,
+    "local_energy": 3.242683899173926e-12,
+    "v1": 1.2781997682509427e-12,
+    "v2": 1.2781997682509427e-12,
+    "x1": 1.3879897231561245e-11,
+    "x2": 1.3879897231561245e-11,
+    "y": 3.650024726908896e-12
+  },
+  "step_doubling_error_estimate_at_200_order4": {
+    "emitted_work": 4.2801114504461186e-12,
+    "force": 1.5396125115548406e-11,
+    "local_energy": 3.365774325914117e-12,
+    "v1": 1.2694660137905582e-12,
+    "v2": 1.2694660137905582e-12,
+    "x1": 1.4816703419739952e-11,
+    "x2": 1.4816703419739952e-11,
+    "y": 3.85128965755636e-12
+  },
+  "step_doubling_error_estimate_at_400_order4": {
+    "emitted_work": 2.652359813263653e-13,
+    "force": 9.586960854808997e-13,
+    "local_energy": 2.1617892661159507e-13,
+    "v1": 8.521331788339618e-14,
+    "v2": 8.521331788339618e-14,
+    "x1": 9.25326482104083e-13,
+    "x2": 9.25326482104083e-13,
+    "y": 2.433349817939264e-13
+  },
+  "steps": {
+    "coarse": 100,
+    "medium": 200,
+    "refined": 400,
+    "reported_fine": 20000,
+    "twice_fine": 40000
+  },
+  "t1": {
+    "balance_residual": 1.1324274851176597e-14,
+    "emitted_work": 0.2052404232602049,
+    "force": 0.13038100216351545,
+    "local_energy": 0.2947595767398064,
+    "v1": -0.5350326848681537,
+    "v2": -0.5350326848681537,
+    "x1": 0.6495173586991091,
+    "x2": 0.6495173586991091,
+    "y": 0.2914917970879517
+  },
+  "taylor_coefficients_exact": {
+    "W": [
+      "0",
+      "1/2",
+      "-1/4",
+      "-1/4",
+      "3/16",
+      "2/15"
+    ],
+    "v1": [
+      "0",
+      "-1",
+      "1/4",
+      "11/24",
+      "-31/192",
+      "-73/384"
+    ],
+    "v2": [
+      "0",
+      "-1",
+      "1/4",
+      "11/24",
+      "-31/192",
+      "-73/384"
+    ],
+    "x1": [
+      "1",
+      "0",
+      "-1/2",
+      "1/12",
+      "11/96",
+      "-31/960"
+    ],
+    "x2": [
+      "1",
+      "0",
+      "-1/2",
+      "1/12",
+      "11/96",
+      "-31/960"
+    ],
+    "y": [
+      "0",
+      "1/2",
+      "-1/8",
+      "-7/48",
+      "5/128",
+      "169/3840"
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+name: Dark-bright intensity-only symmetry
+
+on:
+  push:
+    branches: [chatgpt/dark-bright-observation-20261106]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile the existing model and the independent add-on
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/DarkBrightObservation.olean DarkBrightObservation.lean 2>&1 | tee ../dark-bright-model.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/DarkBrightIntensity.olean DarkBrightIntensity.lean 2>&1 | tee ../dark-bright-intensity.log
+          if grep -E 'warning:|error:' ../dark-bright-model.log ../dark-bright-intensity.log; then exit 1; fi
+      - name: Audit every added theorem
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('DarkBrightIntensity.lean').read_text()
+          assert not re.search(r'^\s*(?:sorry|axiom)\b', source, re.M)
+          names = re.findall(r'^theorem\s+(\w+)', source, re.M)
+          audit = 'import DarkBrightIntensity\n' + ''.join(
+              '#print axioms DarkBrightIntensity.' + name + '\n' for name in names)
+          pathlib.Path('DarkBrightIntensityAudit.lean').write_text(audit)
+          pathlib.Path('../dark-bright-intensity-theorems.txt').write_text('\n'.join(names) + '\n')
+          print('Auditing', len(names), 'added theorems')
+          PY
+          lake env lean --trust=0 DarkBrightIntensityAudit.lean 2>&1 | tee ../dark-bright-intensity-axioms.log
+          python - <<'PY'
+          import pathlib, re
+          text = pathlib.Path('../dark-bright-intensity-axioms.log').read_text()
+          names = pathlib.Path('../dark-bright-intensity-theorems.txt').read_text().splitlines()
+          rows = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text)
+          assert len(rows) == len(names), (len(rows), len(names))
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for row in rows:
+              used = set(filter(None, (x.strip() for x in row.split(','))))
+              assert used <= allowed, used - allowed
+          assert 'warning:' not in text and 'error:' not in text
+          print('All added theorem dependencies lie in the standard axiom allowlist.')
+          PY
+      - name: Run exact rational independent checks
+        run: python tools/check_dark_bright_intensity.py | tee dark-bright-intensity-python.json
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: dark-bright-intensity-${{ github.run_id }}
+          path: |
+            dark-bright-*.log
+            dark-bright-intensity-*.log
+            dark-bright-intensity-*.txt
+            dark-bright-intensity-python.json
+          if-no-files-found: warn

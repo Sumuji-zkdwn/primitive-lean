@@ -8,7 +8,8 @@ import sys
 SMOKE_TESTS = (
     'check_galois_bridge', 'check_f16_unexpected_bridges',
     'check_complementary_recovery', 'check_shear_commutator',
-    'check_strange_operator_galois', 'check_f16_saddle_cantor',
+    'check_strange_operator_galois',
+    'check_strange_operator_counting', 'check_f16_saddle_cantor',
     'check_f0_dynamics', 'check_future_observation', 'check_e_wfs_fenchel',
     'check_energy_gauge_fenchel', 'check_e_wfs_future_bridge',
     'check_temporal_sampling', 'check_wfs_mobius_fourier',

@@ -1,0 +1,19 @@
+{
+ "proved_equal": 0,
+ "attempted": 2,
+ "skipped_private": 0,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "ContestEconomy.participation",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "ContestEconomy.participation",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": []
+}

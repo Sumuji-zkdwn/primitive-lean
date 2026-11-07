@@ -1,0 +1,87 @@
+name: Decomposition identification Lean and integration verification
+
+on:
+  push:
+    branches: [chatgpt/decomposition-identification-20261103]
+    paths:
+      - 'linear_input/lean_check/DecompositionIdentification.inc'
+      - 'linear_input/lean_check/DecompositionF0Bridge.inc'
+      - '.github/workflows/decomposition-identification-probe.yml'
+      - 'tools/verify.py'
+      - 'tools/verify_main_result.py'
+      - 'docs/integration/manifest.json'
+  pull_request:
+    branches: [chatgpt/ternary-zero-cesaro-20261103]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  standalone:
+    name: New general rewrite theory without new axioms
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Construct standalone Lean proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          names = [
+              'TernaryZeroCesaro.inc',
+              'FiniteObservationSeparation.inc',
+              'DecompositionIdentification.inc',
+          ]
+          sources = []
+          for name in names:
+              code = (Path('linear_input/lean_check') / name).read_text('utf-8')
+              for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                  assert token not in code, f'{token} in {name}'
+              sources.append(code)
+          Path('lean/DecompositionIdentificationProbe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(sources), encoding='utf-8')
+          PY
+      - name: Lean 4 --trust=0
+        working-directory: lean
+        run: lake env lean --trust=0 DecompositionIdentificationProbe.lean
+
+  integrated:
+    name: Source provenance, all proofs and axiom audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pytest==9.2.0 numpy==2.5.4
+      - name: Set up pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Verify existing and added sources
+        run: python -B -X utf8 tools/verify.py --integration-only
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: decomposition-verification-${{ github.run_id }}
+          path: |
+            verification/
+            linear_input/lean_results.json
+          if-no-files-found: warn

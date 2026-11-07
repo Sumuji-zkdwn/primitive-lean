@@ -1,0 +1,80 @@
+name: PAD four-layer reconstruction and calibration identities
+
+on:
+  push:
+    branches: [chatgpt/pad-robust-design-20261107]
+    paths:
+      - 'lean/PADFourLayerCalibration.lean'
+      - 'tools/check_pad_calibration.py'
+      - '.github/workflows/pad-calibration.yml'
+  pull_request:
+    paths:
+      - 'lean/PADFourLayerCalibration.lean'
+      - 'tools/check_pad_calibration.py'
+      - '.github/workflows/pad-calibration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check exact rational identity and numerical nuisance sensitivity
+        run: |
+          python -m pip install --disable-pip-version-check 'numpy>=2.0,<3' 'scipy>=1.13,<2'
+          python -B tools/check_pad_calibration.py
+
+      - name: Install pinned Lean/Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile original PR 97 source and additive proof
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          cat lean-toolchain
+          sha256sum PADFourLayer.lean PADFourLayerCalibration.lean
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayer.olean PADFourLayer.lean 2>&1 | tee ../pad-calibration-base.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerCalibration.olean PADFourLayerCalibration.lean 2>&1 | tee ../pad-calibration-build.log
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('PADFourLayerCalibration.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==11 and len(set(names))==11,names
+          pathlib.Path('PADFourLayerCalibrationAudit.lean').write_text(
+            'import PADFourLayerCalibration\n'+''.join(
+            '#print axioms PADFourLayerCalibration.'+n+'\n' for n in names))
+          print('Audit targets:',names)
+          PY
+          lake env lean --trust=0 PADFourLayerCalibrationAudit.lean 2>&1 | tee ../pad-calibration-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          out = ''.join(Path(p).read_text() for p in [
+            '../pad-calibration-base.log','../pad-calibration-build.log','../pad-calibration-axioms.log'])
+          assert not any(x in out for x in ('error:', 'sorryAx', 'warning:')), out
+          print('11 identities checked, no warnings/errors/sorryAx')
+          PY
+      - name: Save logs and independent results
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pad-calibration-checks
+          path: |
+            pad-calibration-base.log
+            pad-calibration-build.log
+            pad-calibration-axioms.log
+            docs/pad_calibration_results.json
+          if-no-files-found: warn

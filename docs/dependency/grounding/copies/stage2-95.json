@@ -1,0 +1,118 @@
+{
+ "proved_equal": 0,
+ "attempted": 20,
+ "skipped_private": 2,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "TwoMotionEmission.IVPState",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.Path",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.coupling",
+   "initial": "LinearInputDesign.E",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.coupling",
+   "initial": "LinearInputGradient.gSq",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.coupling",
+   "initial": "LinearInputGradient.gx",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.coupling",
+   "initial": "LinearInputGradientBound.gradientLowerBound",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.force",
+   "initial": "LinearInputDesign.E",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.force",
+   "initial": "LinearInputGradient.gSq",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.force",
+   "initial": "LinearInputGradient.gx",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.force",
+   "initial": "LinearInputGradientBound.gradientLowerBound",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.power",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.power",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.quartic",
+   "initial": "Elastica.powerLogDensity",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.quartic",
+   "initial": "LinearInputCalculus.potential",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.quartic",
+   "initial": "LinearInputDesign.f",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.quartic",
+   "initial": "LinearInputLevelConvergence.bandRadius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.waveDensity",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.waveDensity",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.waveFlux",
+   "initial": "LinearInputCoercivity.lowerBoundConstant",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "TwoMotionEmission.waveFlux",
+   "initial": "LinearInputDesign.input",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "TwoMotionEmission.IVPState",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "TwoMotionEmission.Path",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

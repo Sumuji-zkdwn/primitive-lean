@@ -1,0 +1,77 @@
+name: Fluid-prism phase memory (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/fluid-prism-phase-memory-20261107]
+  pull_request:
+    branches: [chatgpt/prism-hysteresis-readout-20261107]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile three linked modules with --trust=0
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/DarkBrightObservation.olean DarkBrightObservation.lean 2>&1 | tee ../fluid-amplitude.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PrismHysteresisReadout.olean PrismHysteresisReadout.lean 2>&1 | tee ../fluid-prior.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/FluidPrismPhaseMemory.olean FluidPrismPhaseMemory.lean 2>&1 | tee ../fluid-current.log
+          if grep -E 'warning:|error:' ../fluid-amplitude.log ../fluid-prior.log ../fluid-current.log; then exit 1; fi
+      - name: Audit exact theorems and foundational dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('FluidPrismPhaseMemory.lean').read_text()
+          assert not re.search(r'\b(sorry|admit)\b',s)
+          names=re.findall(r'^theorem\s+(\w+)',s,re.M)
+          assert len(names)>=20, names
+          pathlib.Path('FluidPrismPhaseMemoryAudit.lean').write_text(
+            'import FluidPrismPhaseMemory\n'+
+            ''.join('#print axioms FluidPrismPhaseMemory.'+n+'\n' for n in names))
+          print('Auditing',len(names),'Lean theorems')
+          PY
+          lake env lean --trust=0 FluidPrismPhaseMemoryAudit.lean 2>&1 | tee ../fluid-audit.log
+          python - <<'PY'
+          import pathlib,re
+          names=re.findall(r'^theorem\s+(\w+)',pathlib.Path('FluidPrismPhaseMemory.lean').read_text(),re.M)
+          t=pathlib.Path('../fluid-audit.log').read_text()
+          rows=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',t)
+          assert len(rows)==len(names),(len(rows),len(names))
+          allow={'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+            used=set(filter(None,[p.strip() for p in row.split(',')]))
+            assert used<=allow,used-allow
+          assert 'error:' not in t and 'warning:' not in t
+          print('PASS: exact-head foundational axiom audit')
+          PY
+      - name: Independently check optical phase and potential
+        run: python -B tools/check_fluid_prism_phase.py
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: fluid-prism-phase-memory-${{ github.run_id }}
+          path: |
+            fluid-*.log
+          if-no-files-found: warn

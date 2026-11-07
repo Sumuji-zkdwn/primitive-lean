@@ -1,8 +1,9 @@
 """Check additive proof sources against the unchanged joint assembly.
 
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
-MainResult.lean consists of the exact verified All.lean followed by the exact
-registered supplements, with all added declarations axiom-audited.
+MainResult.lean prepends the additive Mathlib imports listed in EXTRA_IMPORTS, then the
+byte-exact verified All.lean, the registered supplements and the all-declaration axiom audit.
+The original All.lean bytes are preserved without modification.
 """
 from pathlib import Path
 from datetime import datetime, timezone
@@ -18,6 +19,15 @@ LEAN = ROOT / "lean"
 OUT = ROOT / "verification"
 PROOFS = ROOT / "linear_input/lean_check"
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
+# Additive Mathlib imports prepended to MainResult.lean (All.lean bytes stay unchanged).
+EXTRA_IMPORTS = (
+    "Mathlib.Data.Nat.Squarefree",
+    "Mathlib.FieldTheory.RatFunc.IntermediateField",
+    "Mathlib.Data.Nat.Factorization.Defs",
+    "Mathlib.RingTheory.UniqueFactorizationDomain.Basic",
+    "Mathlib.Data.PNat.Factors",
+)
+
 SUPPLEMENTS = (
     ('linear_input/lean_check/MainResult.inc', 'LinearInputMainResult'),
     ('linear_input/lean_check/GeneralMinimum.inc', 'LinearInputMinimum'),
@@ -50,6 +60,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/StrangeOperatorConjugacy.inc', 'LinearInputStrangeConjugacy'),
     ('linear_input/lean_check/StrangeOperatorBoundary.inc', 'LinearInputStrangeBoundary'),
     ('linear_input/lean_check/StrangeOperatorFixedSets.inc', 'LinearInputStrangeFixedSets'),
+    ('linear_input/lean_check/StrangeOperatorCounting.inc', 'LinearInputStrangeCounting'),
     ('linear_input/lean_check/F16SaddleCantor.inc', 'LinearInputF16SaddleCantor'),
     ('linear_input/lean_check/F16FullMatrix.inc', 'LinearInputF16FullMatrix'),
     ('linear_input/lean_check/F16FullRank.inc', 'LinearInputF16FullRank'),
@@ -59,10 +70,12 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/FutureObservations.inc', 'LinearInputFutureObservation'),
     ('linear_input/lean_check/FutureFiniteHorizon.inc', 'LinearInputFutureHorizon'),
     ('linear_input/lean_check/OperatorWordObservations.inc', 'LinearInputOperatorWords'),
+    ('linear_input/lean_check/MonoEyeComposition.inc', 'LinearInputMonoEyeComposition'),
     ('linear_input/lean_check/OperatorBisimulation.inc', 'LinearInputOperatorBisimulation'),
     ('linear_input/lean_check/OperatorVocabularyRefinement.inc', 'LinearInputOperatorRefinement'),
     ('linear_input/lean_check/OperatorFiniteHorizon.inc', 'LinearInputOperatorHorizon'),
     ('linear_input/lean_check/OperatorSemanticClosure.inc', 'LinearInputOperatorSemanticClosure'),
+    ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
     ('linear_input/lean_check/SemanticIntervalNecessity.inc', 'LinearInputSemanticIntervals'),
     ('linear_input/lean_check/FiniteSelfSynthesis.inc', 'LinearInputFiniteSelfSynthesis'),
     ('linear_input/lean_check/RecursiveOperatorReentry.inc', 'LinearInputRecursiveReentry'),
@@ -86,7 +99,38 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RelationalOddCycleGluing.inc', 'LinearInputRelationalGluing'),
     ('linear_input/lean_check/JoinContextualEquivalence.inc', 'LinearInputJoinContexts'),
     ('linear_input/lean_check/CurveLetterContextualEquivalence.inc', 'LinearInputCurveLetters'),
-    ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
+    ('linear_input/lean_check/RadicalF0Bridge.inc', 'LinearInputRadicalF0'),
+    ('linear_input/lean_check/PilotComparisonBridge.inc', 'LinearInputPilotComparison'),
+    ('linear_input/lean_check/PilotVolumeTransport.inc', 'LinearInputPilotTransport'),
+    ('linear_input/lean_check/PilotHullInflation.inc', 'LinearInputPilotHullInflation'),
+    ('linear_input/lean_check/PilotHullStability.inc', 'LinearInputPilotHullStability'),
+    ('linear_input/lean_check/ElasticaOperatorBridge.inc', 'LinearInputElasticaOperatorBridge'),
+    ('linear_input/lean_check/ObservableRigidPoint.inc', 'LinearInputRigidPoint'),
+    ('linear_input/lean_check/ChebyshevDihedralDescent.inc', 'LinearInputChebyshevDescent'),
+    ('linear_input/lean_check/ChebyshevRatFuncDegrees.inc', 'LinearInputChebyshevNext'),
+    ('linear_input/lean_check/ChebyshevDegreeTower.inc', 'LinearInputChebyshevTower'),
+    ('linear_input/lean_check/ChebyshevSplittingField.inc', 'LinearInputChebyshevSplitting'),
+    ('linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc', 'LinearInputChebyshevAutomorphisms'),
+    ('linear_input/lean_check/RimObservability.inc', 'LinearInputRimObservability'),
+    ('linear_input/lean_check/ViscousRewrite.inc', 'LinearInputViscousRewrite'),
+    ('linear_input/lean_check/GravityCocycle.inc', 'LinearInputGravityCocycle'),
+    ('linear_input/lean_check/GravityObserver.inc', 'LinearInputGravityObserver'),
+    ('linear_input/lean_check/GravityObservation.inc', 'LinearInputGravityObservation'),
+    ('linear_input/lean_check/TernaryZeroCesaro.inc', 'LinearInputTernaryZero'),
+    ('linear_input/lean_check/FiniteObservationSeparation.inc', 'LinearInputFiniteObservation'),
+    ('linear_input/lean_check/DecompositionIdentification.inc', 'LinearInputDecompositionIdentification'),
+    ('linear_input/lean_check/DecompositionF0Bridge.inc', 'LinearInputDecompositionF0Bridge'),
+    ('linear_input/lean_check/PrimeFactorIdentification.inc', 'LinearInputPrimeFactorIdentification'),
+    ('linear_input/lean_check/PrimeSplitNormalForm.inc', 'LinearInputPrimeSplitNormalForm'),
+    ('linear_input/lean_check/AssociatesFactorIdentification.inc', 'LinearInputAssociatesFactorIdentification'),
+    ('linear_input/lean_check/GeneratedNonUniqueMonoid.inc', 'LinearInputGeneratedNonUnique'),
+    ('linear_input/lean_check/HalfFactorialIdentification.inc', 'LinearInputHalfFactorial'),
+    ('linear_input/lean_check/AtomicGeneratorClassification.inc', 'LinearInputAtomicGeneratorClassification'),
+    ('linear_input/lean_check/AtomicHalfFactorial.inc', 'LinearInputAtomicHalfFactorial'),
+    ('linear_input/lean_check/AtomicWordProbe.inc', 'LinearInputAtomicWordProbe'),
+    ('linear_input/lean_check/SingleSwapFiber.inc', 'LinearInputSingleSwapFiber'),
+    ('linear_input/lean_check/F16RimRecovery.inc', 'LinearInputF16RimRecovery'),
+    ('linear_input/lean_check/ParallelLocalGluing.inc', 'LinearInputParallelGluing'),
 )
 
 
@@ -122,7 +166,7 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="Exact verified All.lean and each supplemental source in registered order, separated by newlines, followed by public axiom audits.",
+        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, followed by all public axiom audits.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
@@ -197,7 +241,8 @@ def main():
             raise ValueError("Forbidden proof tokens in the supplemental source")
 
         # Preserve every input byte for byte, including its original newlines.
-        assembled = (b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
+        assembled = ("".join(f"import {m}\n" for m in EXTRA_IMPORTS).encode("utf-8") +
+            b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)

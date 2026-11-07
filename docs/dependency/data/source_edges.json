@@ -115,8 +115,8 @@
   "source": "lean/Elastica/Composition.lean",
   "target": "lean/Elastica/Variation.lean",
   "counts": {
-   "proof": 2,
-   "statement": 3
+   "statement": 3,
+   "proof": 2
   }
  },
  {
@@ -176,17 +176,17 @@
   "source": "lean/Elastica/Derivation.lean",
   "target": "lean/Elastica/Stationary.lean",
   "counts": {
-   "definition": 1,
    "proof": 3,
-   "statement": 1
+   "statement": 1,
+   "definition": 1
   }
  },
  {
   "source": "lean/Elastica/Derivation.lean",
   "target": "lean/Elastica/Variation.lean",
   "counts": {
-   "definition": 2,
-   "proof": 5
+   "proof": 5,
+   "definition": 2
   }
  },
  {
@@ -284,9 +284,9 @@
   "source": "lean/Elastica/LocalMinimum.lean",
   "target": "lean/Elastica/Variation.lean",
   "counts": {
-   "definition": 1,
    "proof": 1,
-   "statement": 1
+   "statement": 1,
+   "definition": 1
   }
  },
  {
@@ -459,8 +459,8 @@
   "source": "lean/Elastica/ScalingMinima.lean",
   "target": "lean/Elastica/LocalMinimum.lean",
   "counts": {
-   "proof": 2,
-   "statement": 4
+   "statement": 4,
+   "proof": 2
   }
  },
  {
@@ -526,8 +526,8 @@
   "source": "lean/Elastica/WeightResponse.lean",
   "target": "lean/Elastica/ExponentialWeight.lean",
   "counts": {
-   "proof": 12,
-   "statement": 7
+   "statement": 7,
+   "proof": 12
   }
  },
  {
@@ -558,9 +558,9 @@
   "source": "linear_input/lean_check/AreaExactVariation.inc",
   "target": "lean/Elastica/Geometry.lean",
   "counts": {
-   "definition": 2,
    "proof": 6,
-   "statement": 4
+   "statement": 4,
+   "definition": 2
   }
  },
  {
@@ -582,9 +582,9 @@
   "source": "linear_input/lean_check/AreaExactVariation.inc",
   "target": "linear_input/lean_check/AreaParameters.inc",
   "counts": {
+   "proof": 18,
    "statement": 7,
-   "definition": 3,
-   "proof": 18
+   "definition": 3
   }
  },
  {
@@ -600,14 +600,6 @@
   "counts": {
    "proof": 4,
    "statement": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/AreaExactVariation.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 1,
-   "proof": 3
   }
  },
  {
@@ -666,9 +658,9 @@
   "source": "linear_input/lean_check/AreaMinimum.inc",
   "target": "lean/Elastica/Variation.lean",
   "counts": {
-   "definition": 1,
    "proof": 6,
-   "statement": 1
+   "statement": 1,
+   "definition": 1
   }
  },
  {
@@ -696,17 +688,15 @@
   "source": "linear_input/lean_check/AreaMinimum.inc",
   "target": "linear_input/lean_check/AreaVariation.inc",
   "counts": {
-   "definition": 1,
    "proof": 3,
-   "statement": 1
+   "statement": 1,
+   "definition": 1
   }
  },
  {
   "source": "linear_input/lean_check/AreaMinimum.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "definition": 1,
-   "proof": 2,
    "statement": 1
   }
  },
@@ -739,13 +729,6 @@
    "definition": 1,
    "proof": 1,
    "statement": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/AreaParameters.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 1
   }
  },
  {
@@ -794,13 +777,6 @@
  },
  {
   "source": "linear_input/lean_check/AreaRegularity.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/AreaRegularity.inc",
   "target": "linear_input/lean_check/PressureStationary.inc",
   "counts": {
    "proof": 4,
@@ -825,13 +801,6 @@
   }
  },
  {
-  "source": "linear_input/lean_check/AreaVariation.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 1
-  }
- },
- {
   "source": "linear_input/lean_check/AutonomyCycle00001.inc",
   "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
   "counts": {
@@ -849,13 +818,6 @@
  },
  {
   "source": "linear_input/lean_check/AutonomyCycle00002.inc",
-  "target": "linear_input/lean_check/AutonomyCycle00001.inc",
-  "counts": {
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/AutonomyCycle00002.inc",
   "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
   "counts": {
    "proof": 3,
@@ -866,8 +828,8 @@
   "source": "linear_input/lean_check/AutonomyCycle00002.inc",
   "target": "linear_input/lean_check/OperatorWordObservations.inc",
   "counts": {
-   "proof": 7,
-   "statement": 6
+   "statement": 6,
+   "proof": 7
   }
  },
  {
@@ -876,21 +838,6 @@
   "counts": {
    "proof": 11,
    "statement": 9
-  }
- },
- {
-  "source": "linear_input/lean_check/BranchFibers.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/BranchFibers.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 5,
-   "definition": 1
   }
  },
  {
@@ -903,18 +850,9 @@
  },
  {
   "source": "linear_input/lean_check/BranchForgetting.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "definition": 1,
-   "proof": 3
-  }
- },
- {
-  "source": "linear_input/lean_check/BranchForgetting.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "definition": 1,
-   "proof": 5,
+   "proof": 2,
    "statement": 2
   }
  },
@@ -927,35 +865,11 @@
   }
  },
  {
-  "source": "linear_input/lean_check/Calculus.lean",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 1,
-   "proof": 2
-  }
- },
- {
   "source": "linear_input/lean_check/Coercivity.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
    "proof": 8,
-   "statement": 6,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/ComplementaryObservationExamples.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 2,
-   "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/ComplementaryPencilRecovery.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 2
+   "statement": 6
   }
  },
  {
@@ -969,7 +883,7 @@
   "source": "linear_input/lean_check/Consequences.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 9,
+   "proof": 8,
    "statement": 5
   }
  },
@@ -1088,7 +1002,6 @@
   "source": "linear_input/lean_check/CoupledTrajectory.inc",
   "target": "linear_input/lean_check/RegularBand.inc",
   "counts": {
-   "proof": 1,
    "statement": 1
   }
  },
@@ -1104,7 +1017,7 @@
   "source": "linear_input/lean_check/CurvatureBridge.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 6,
+   "proof": 4,
    "statement": 5
   }
  },
@@ -1112,8 +1025,8 @@
   "source": "linear_input/lean_check/CurvatureBridge.inc",
   "target": "linear_input/lean_check/Gradient.inc",
   "counts": {
-   "proof": 8,
-   "statement": 7
+   "statement": 7,
+   "proof": 8
   }
  },
  {
@@ -1163,22 +1076,6 @@
  },
  {
   "source": "linear_input/lean_check/EWFSFenchel.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "definition": 1,
-   "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/EWFSFenchel.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 8,
-   "definition": 4
-  }
- },
- {
-  "source": "linear_input/lean_check/EWFSFenchel.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
    "statement": 1
@@ -1211,14 +1108,6 @@
  },
  {
   "source": "linear_input/lean_check/EnergyWfsFenchel.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 11,
-   "definition": 3
-  }
- },
- {
-  "source": "linear_input/lean_check/EnergyWfsFenchel.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
    "proof": 1,
@@ -1229,18 +1118,18 @@
   "source": "linear_input/lean_check/EnergyWfsFenchel.inc",
   "target": "linear_input/lean_check/VariablePairObservations.inc",
   "counts": {
-   "definition": 1,
    "proof": 5,
-   "statement": 4
+   "statement": 4,
+   "definition": 1
   }
  },
  {
   "source": "linear_input/lean_check/F0Counting.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
-   "proof": 4,
    "statement": 6,
-   "definition": 4
+   "definition": 4,
+   "proof": 4
   }
  },
  {
@@ -1276,19 +1165,11 @@
   }
  },
  {
-  "source": "linear_input/lean_check/F0MergeChains.inc",
-  "target": "linear_input/lean_check/VariablePairObservations.inc",
-  "counts": {
-   "definition": 5,
-   "proof": 1
-  }
- },
- {
   "source": "linear_input/lean_check/F0Retractions.inc",
   "target": "linear_input/lean_check/BranchFibers.inc",
   "counts": {
-   "proof": 12,
    "definition": 4,
+   "proof": 12,
    "statement": 2
   }
  },
@@ -1298,7 +1179,7 @@
   "counts": {
    "proof": 11,
    "statement": 12,
-   "definition": 3
+   "definition": 2
   }
  },
  {
@@ -1325,13 +1206,6 @@
   }
  },
  {
-  "source": "linear_input/lean_check/F16CompleteRank.inc",
-  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
-  "counts": {
-   "proof": 1
-  }
- },
- {
   "source": "linear_input/lean_check/F16ConstructiveRecovery.inc",
   "target": "linear_input/lean_check/ComplementaryPencilRecovery.inc",
   "counts": {
@@ -1351,8 +1225,8 @@
   "source": "linear_input/lean_check/F16ConstructiveRecovery.inc",
   "target": "linear_input/lean_check/F16RealDeterminant.inc",
   "counts": {
-   "statement": 6,
    "proof": 8,
+   "statement": 6,
    "definition": 3
   }
  },
@@ -1374,19 +1248,11 @@
  },
  {
   "source": "linear_input/lean_check/F16FullMatrix.inc",
-  "target": "linear_input/lean_check/F16RealDeterminant.inc",
-  "counts": {
-   "definition": 3,
-   "proof": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/F16FullMatrix.inc",
   "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
   "counts": {
-   "definition": 8,
-   "proof": 7,
-   "statement": 1
+   "proof": 3,
+   "statement": 1,
+   "definition": 1
   }
  },
  {
@@ -1408,26 +1274,18 @@
  },
  {
   "source": "linear_input/lean_check/F16FullRank.inc",
-  "target": "linear_input/lean_check/F16RealDeterminant.inc",
-  "counts": {
-   "definition": 3,
-   "proof": 4
-  }
- },
- {
-  "source": "linear_input/lean_check/F16FullRank.inc",
   "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
   "counts": {
-   "definition": 4,
-   "proof": 5
+   "definition": 1,
+   "proof": 1
   }
  },
  {
   "source": "linear_input/lean_check/F16Holonomy.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
-   "statement": 2,
-   "proof": 1
+   "proof": 1,
+   "statement": 2
   }
  },
  {
@@ -1435,13 +1293,6 @@
   "target": "linear_input/lean_check/F16Holonomy.inc",
   "counts": {
    "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/F16RankCertificate.inc",
-  "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
-  "counts": {
-   "definition": 1
   }
  },
  {
@@ -1456,8 +1307,8 @@
   "source": "linear_input/lean_check/F16RealDeterminant.inc",
   "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
   "counts": {
-   "definition": 8,
-   "proof": 3
+   "definition": 3,
+   "proof": 2
   }
  },
  {
@@ -1479,51 +1330,18 @@
  },
  {
   "source": "linear_input/lean_check/F16SaddleCantor.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 4,
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/F16SaddleCantor.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 3,
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/F16SaddleCantor.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
-   "definition": 1,
-   "proof": 7,
+   "proof": 5,
    "statement": 4
-  }
- },
- {
-  "source": "linear_input/lean_check/F16SaddleCantor.inc",
-  "target": "linear_input/lean_check/F16RealDeterminant.inc",
-  "counts": {
-   "definition": 1,
-   "proof": 2
   }
  },
  {
   "source": "linear_input/lean_check/F16SaddleCantor.inc",
   "target": "linear_input/lean_check/F16UnexpectedBridges.inc",
   "counts": {
-   "definition": 1,
-   "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/F16SaddleCantor.inc",
-  "target": "linear_input/lean_check/ShearCommutator.inc",
-  "counts": {
-   "definition": 1,
-   "proof": 1
+   "proof": 2,
+   "definition": 1
   }
  },
  {
@@ -1545,17 +1363,17 @@
   "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
   "target": "linear_input/lean_check/F16RealDeterminant.inc",
   "counts": {
-   "proof": 13,
+   "proof": 12,
    "statement": 5,
-   "definition": 3
+   "definition": 1
   }
  },
  {
   "source": "linear_input/lean_check/F16UnexpectedBridges.inc",
   "target": "linear_input/lean_check/F16RecoverySpectrum.inc",
   "counts": {
-   "definition": 6,
-   "proof": 2
+   "definition": 3,
+   "proof": 1
   }
  },
  {
@@ -1624,8 +1442,8 @@
   "source": "linear_input/lean_check/FiniteBayes.inc",
   "target": "lean/Elastica/Variation.lean",
   "counts": {
-   "proof": 1,
-   "statement": 1
+   "statement": 1,
+   "proof": 1
   }
  },
  {
@@ -1634,22 +1452,6 @@
   "counts": {
    "proof": 2,
    "statement": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
-  "target": "linear_input/lean_check/F0Retractions.inc",
-  "counts": {
-   "proof": 3,
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/FiniteSelfSynthesis.inc",
-  "target": "linear_input/lean_check/F16RealDeterminant.inc",
-  "counts": {
-   "proof": 2,
-   "definition": 2
   }
  },
  {
@@ -1708,22 +1510,6 @@
  },
  {
   "source": "linear_input/lean_check/FourBayes.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 1,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/FourBayes.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 2,
-   "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/FourBayes.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
    "proof": 1,
@@ -1743,8 +1529,8 @@
   "source": "linear_input/lean_check/FutureFiniteHorizon.inc",
   "target": "linear_input/lean_check/FutureObservations.inc",
   "counts": {
-   "proof": 5,
-   "statement": 7
+   "statement": 7,
+   "proof": 5
   }
  },
  {
@@ -1760,22 +1546,6 @@
   "counts": {
    "proof": 1,
    "statement": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/GaloisChebyshev.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 2,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/GaloisChebyshev.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 4,
-   "definition": 2
   }
  },
  {
@@ -1797,7 +1567,7 @@
   "source": "linear_input/lean_check/GeneralMinimum.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 11,
+   "proof": 10,
    "statement": 3
   }
  },
@@ -1909,8 +1679,8 @@
   "source": "linear_input/lean_check/GlobalTrajectory.inc",
   "target": "linear_input/lean_check/TrajectoryExistence.inc",
   "counts": {
-   "proof": 4,
-   "statement": 2
+   "statement": 2,
+   "proof": 4
   }
  },
  {
@@ -1924,9 +1694,8 @@
   "source": "linear_input/lean_check/Gradient.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 20,
-   "statement": 14,
-   "definition": 2
+   "proof": 16,
+   "statement": 14
   }
  },
  {
@@ -1984,13 +1753,6 @@
  },
  {
   "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
-  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
-  "counts": {
-   "definition": 9
-  }
- },
- {
-  "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
   "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
   "counts": {
    "proof": 6,
@@ -2017,8 +1779,8 @@
   "source": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
   "target": "linear_input/lean_check/RuleSelfModification.inc",
   "counts": {
-   "proof": 2,
-   "definition": 4
+   "definition": 4,
+   "proof": 2
   }
  },
  {
@@ -2050,14 +1812,6 @@
   "counts": {
    "proof": 4,
    "statement": 4
-  }
- },
- {
-  "source": "linear_input/lean_check/HistorySignature.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 1,
-   "proof": 2
   }
  },
  {
@@ -2129,13 +1883,6 @@
   }
  },
  {
-  "source": "linear_input/lean_check/KummerDihedral.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 1
-  }
- },
- {
   "source": "linear_input/lean_check/LevelConvergence.inc",
   "target": "linear_input/lean_check/Coercivity.inc",
   "counts": {
@@ -2147,9 +1894,8 @@
   "source": "linear_input/lean_check/LevelConvergence.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 9,
-   "statement": 7,
-   "definition": 1
+   "proof": 8,
+   "statement": 7
   }
  },
  {
@@ -2186,17 +1932,17 @@
   "source": "linear_input/lean_check/LevelGeometry.inc",
   "target": "linear_input/lean_check/Coercivity.inc",
   "counts": {
-   "proof": 2,
-   "definition": 4
+   "definition": 4,
+   "proof": 2
   }
  },
  {
   "source": "linear_input/lean_check/LevelGeometry.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 11,
    "statement": 9,
-   "definition": 2
+   "definition": 2,
+   "proof": 10
   }
  },
  {
@@ -2211,8 +1957,7 @@
   "source": "linear_input/lean_check/LevelGeometry.inc",
   "target": "linear_input/lean_check/GradientBound.inc",
   "counts": {
-   "proof": 3,
-   "definition": 2
+   "proof": 3
   }
  },
  {
@@ -2271,7 +2016,7 @@
   "source": "linear_input/lean_check/MainResult.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 11,
+   "proof": 10,
    "statement": 6
   }
  },
@@ -2302,24 +2047,17 @@
   "source": "linear_input/lean_check/MainResult.inc",
   "target": "linear_input/lean_check/TrajectoryExistence.inc",
   "counts": {
-   "statement": 3,
-   "proof": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
-  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
-  "counts": {
-   "definition": 7
+   "proof": 1,
+   "statement": 3
   }
  },
  {
   "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
   "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
   "counts": {
+   "definition": 1,
    "proof": 9,
-   "statement": 2,
-   "definition": 1
+   "statement": 2
   }
  },
  {
@@ -2349,9 +2087,9 @@
   "source": "linear_input/lean_check/MetaRuleSelfExtension.inc",
   "target": "linear_input/lean_check/RuleSelfModification.inc",
   "counts": {
+   "statement": 1,
    "definition": 2,
-   "proof": 1,
-   "statement": 1
+   "proof": 1
   }
  },
  {
@@ -2369,13 +2107,6 @@
    "proof": 18,
    "statement": 5,
    "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/ObservationRetractionPolarity.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 1
   }
  },
  {
@@ -2413,17 +2144,9 @@
   "source": "linear_input/lean_check/OperatorFiniteHorizon.inc",
   "target": "linear_input/lean_check/OperatorWordObservations.inc",
   "counts": {
+   "definition": 2,
    "proof": 10,
-   "statement": 9,
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/OperatorSemanticClosure.inc",
-  "target": "linear_input/lean_check/F0Retractions.inc",
-  "counts": {
-   "proof": 1,
-   "definition": 1
+   "statement": 9
   }
  },
  {
@@ -2445,32 +2168,11 @@
  },
  {
   "source": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
-  "target": "linear_input/lean_check/F0Retractions.inc",
-  "counts": {
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
   "target": "linear_input/lean_check/OperatorWordObservations.inc",
   "counts": {
    "proof": 54,
    "statement": 37,
    "definition": 4
-  }
- },
- {
-  "source": "linear_input/lean_check/OperatorWordObservations.inc",
-  "target": "linear_input/lean_check/F0Retractions.inc",
-  "counts": {
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/OperatorWordObservations.inc",
-  "target": "linear_input/lean_check/F16RealDeterminant.inc",
-  "counts": {
-   "definition": 1
   }
  },
  {
@@ -2523,8 +2225,8 @@
   "source": "linear_input/lean_check/PressureStationary.inc",
   "target": "lean/Elastica/Stationary.lean",
   "counts": {
-   "definition": 2,
    "proof": 12,
+   "definition": 2,
    "statement": 3
   }
  },
@@ -2556,7 +2258,6 @@
   "source": "linear_input/lean_check/PressureStationary.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "definition": 2,
    "proof": 2,
    "statement": 2
   }
@@ -2603,13 +2304,6 @@
   "target": "linear_input/lean_check/Observation.lean",
   "counts": {
    "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/RecursiveOperatorReentry.inc",
-  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
-  "counts": {
-   "definition": 2
   }
  },
  {
@@ -2663,9 +2357,9 @@
   "source": "linear_input/lean_check/RegularBand.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "definition": 1,
    "proof": 12,
-   "statement": 8
+   "statement": 8,
+   "definition": 1
   }
  },
  {
@@ -2679,9 +2373,9 @@
   "source": "linear_input/lean_check/RegularBand.inc",
   "target": "linear_input/lean_check/Gradient.inc",
   "counts": {
-   "definition": 2,
    "proof": 8,
-   "statement": 2
+   "statement": 2,
+   "definition": 2
   }
  },
  {
@@ -2746,13 +2440,6 @@
  },
  {
   "source": "linear_input/lean_check/RuleSelfModification.inc",
-  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
-  "counts": {
-   "definition": 6
-  }
- },
- {
-  "source": "linear_input/lean_check/RuleSelfModification.inc",
   "target": "linear_input/lean_check/FiniteSelfSynthesis.inc",
   "counts": {
    "proof": 9,
@@ -2794,22 +2481,6 @@
  },
  {
   "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
-  "target": "linear_input/lean_check/F0Retractions.inc",
-  "counts": {
-   "proof": 6,
-   "definition": 3
-  }
- },
- {
-  "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
-  "target": "linear_input/lean_check/F16RealDeterminant.inc",
-  "counts": {
-   "proof": 5,
-   "definition": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
   "target": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
   "counts": {
    "proof": 8,
@@ -2820,26 +2491,17 @@
   "source": "linear_input/lean_check/SemanticIntervalNecessity.inc",
   "target": "linear_input/lean_check/OperatorWordObservations.inc",
   "counts": {
+   "definition": 1,
    "proof": 15,
-   "statement": 14,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/ShearCommutator.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 3,
-   "definition": 1
+   "statement": 14
   }
  },
  {
   "source": "linear_input/lean_check/ShearCommutator.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 11,
-   "statement": 3,
-   "definition": 2
+   "proof": 3,
+   "statement": 3
   }
  },
  {
@@ -2847,17 +2509,16 @@
   "target": "linear_input/lean_check/VariablePairObservations.inc",
   "counts": {
    "proof": 7,
-   "statement": 2,
-   "definition": 1
+   "definition": 1,
+   "statement": 2
   }
  },
  {
   "source": "linear_input/lean_check/StrangeOperatorBoundary.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
-   "proof": 4,
    "statement": 2,
-   "definition": 2
+   "proof": 1
   }
  },
  {
@@ -2880,8 +2541,8 @@
   "source": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
   "target": "linear_input/lean_check/F0Retractions.inc",
   "counts": {
-   "proof": 4,
-   "statement": 5
+   "statement": 5,
+   "proof": 4
   }
  },
  {
@@ -2984,8 +2645,8 @@
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
    "proof": 6,
-   "statement": 4,
-   "definition": 1
+   "definition": 1,
+   "statement": 4
   }
  },
  {
@@ -2993,15 +2654,14 @@
   "target": "linear_input/lean_check/Gradient.inc",
   "counts": {
    "proof": 12,
-   "statement": 6,
-   "definition": 2
+   "definition": 2,
+   "statement": 6
   }
  },
  {
   "source": "linear_input/lean_check/TrajectoryExistence.inc",
   "target": "linear_input/lean_check/RegularBand.inc",
   "counts": {
-   "proof": 1,
    "statement": 1
   }
  },
@@ -3022,27 +2682,11 @@
  },
  {
   "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 3,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 3,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/VariablePairGaloisBridge.inc",
   "target": "linear_input/lean_check/VariablePairObservations.inc",
   "counts": {
-   "proof": 21,
+   "proof": 16,
    "statement": 7,
-   "definition": 4
+   "definition": 2
   }
  },
  {
@@ -3063,18 +2707,10 @@
  },
  {
   "source": "linear_input/lean_check/VariablePairObservations.inc",
-  "target": "linear_input/lean_check/Coercivity.inc",
-  "counts": {
-   "proof": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/VariablePairObservations.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "proof": 13,
-   "statement": 1,
-   "definition": 3
+   "proof": 2,
+   "statement": 1
   }
  },
  {
@@ -3163,48 +2799,25 @@
   "source": "linear_input/lean_check/VariationalBridge.inc",
   "target": "linear_input/lean_check/Design.lean",
   "counts": {
-   "statement": 2,
-   "proof": 1
+   "proof": 1,
+   "statement": 2
   }
  },
  {
   "source": "linear_input/lean_check/VariationalBridge.inc",
   "target": "linear_input/lean_check/Gradient.inc",
   "counts": {
-   "statement": 4,
-   "proof": 2
-  }
- },
- {
-  "source": "linear_input/lean_check/WFSCanonicalLift.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "proof": 3
+   "proof": 2,
+   "statement": 4
   }
  },
  {
   "source": "linear_input/lean_check/WFSCanonicalLift.inc",
   "target": "linear_input/lean_check/EWFSFenchel.inc",
   "counts": {
-   "proof": 10,
    "statement": 12,
-   "definition": 3
-  }
- },
- {
-  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
-  "target": "linear_input/lean_check/ComplementaryObservationExamples.inc",
-  "counts": {
-   "proof": 1,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/WFSMobiusFourier.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
-   "definition": 2,
-   "proof": 4
+   "definition": 3,
+   "proof": 10
   }
  },
  {
@@ -3230,13 +2843,6 @@
   "counts": {
    "proof": 3,
    "statement": 1,
-   "definition": 1
-  }
- },
- {
-  "source": "linear_input/lean_check/WFSProjectiveSampling.inc",
-  "target": "linear_input/lean_check/Design.lean",
-  "counts": {
    "definition": 1
   }
  }

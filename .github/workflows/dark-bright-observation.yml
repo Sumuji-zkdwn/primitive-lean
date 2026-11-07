@@ -1,0 +1,75 @@
+name: Dark-bright observation (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/dark-bright-observation-20261106]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile model and native-source bridge with zero trust
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/DarkBrightObservation.olean DarkBrightObservation.lean 2>&1 | tee ../dark-bright-model.log
+          printf 'import DarkBrightObservation\n' > DarkBrightObservationNativeBridge.lean
+          cat ../linear_input/lean_check/OperatorWordObservations.inc >> DarkBrightObservationNativeBridge.lean
+          printf '\n' >> DarkBrightObservationNativeBridge.lean
+          cat DarkBrightObservationBridgeTail.inc >> DarkBrightObservationNativeBridge.lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/DarkBrightObservationNativeBridge.olean DarkBrightObservationNativeBridge.lean 2>&1 | tee ../dark-bright-bridge.log
+          if grep -E 'warning:|error:' ../dark-bright-model.log ../dark-bright-bridge.log; then exit 1; fi
+      - name: Audit every added theorem
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          sources = [pathlib.Path('DarkBrightObservation.lean'), pathlib.Path('DarkBrightObservationBridgeTail.inc')]
+          names = [n for p in sources for n in re.findall(r'^theorem\s+(\w+)', p.read_text(), re.M)]
+          text = 'import DarkBrightObservationNativeBridge\n' + ''.join('#print axioms DarkBrightObservation.'+n+'\n' for n in names)
+          pathlib.Path('DarkBrightObservationAudit.lean').write_text(text)
+          pathlib.Path('../dark-bright-theorems.txt').write_text('\n'.join(names)+'\n')
+          print('Auditing',len(names),'theorems')
+          PY
+          lake env lean --trust=0 DarkBrightObservationAudit.lean 2>&1 | tee ../dark-bright-axioms.log
+          python - <<'PY'
+          import pathlib, re
+          text = pathlib.Path('../dark-bright-axioms.log').read_text()
+          names = pathlib.Path('../dark-bright-theorems.txt').read_text().splitlines()
+          rows = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text)
+          assert len(rows) == len(names), (len(rows), len(names))
+          allowed = {'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+              used = set(filter(None, (x.strip() for x in row.split(','))))
+              assert used <= allowed, used - allowed
+          assert 'warning:' not in text and 'error:' not in text
+          print('All theorem dependencies lie in the standard axiom allowlist.')
+          PY
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: dark-bright-observation-${{ github.run_id }}
+          path: |
+            dark-bright-*.log
+            dark-bright-theorems.txt
+          if-no-files-found: warn

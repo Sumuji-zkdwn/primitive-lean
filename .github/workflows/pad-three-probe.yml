@@ -1,0 +1,73 @@
+name: PAD three-probe identifiability (isolated additive Lean)
+
+on:
+  push:
+    branches:
+      - chatgpt/pad-three-probe-identifiability-20261108
+    paths:
+      - 'lean/PADFourLayerThreeProbe.lean'
+      - '.github/workflows/pad-three-probe.yml'
+  pull_request:
+    paths:
+      - 'lean/PADFourLayerThreeProbe.lean'
+      - '.github/workflows/pad-three-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile original and additive source at trust zero
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayer.olean PADFourLayer.lean 2>&1 | tee ../pad-three-probe-base.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerCalibration.olean PADFourLayerCalibration.lean 2>&1 | tee ../pad-three-probe-calibration.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerThreeProbe.olean PADFourLayerThreeProbe.lean 2>&1 | tee ../pad-three-probe-build.log
+          python - <<'PY'
+          import pathlib, re
+          src = pathlib.Path("PADFourLayerThreeProbe.lean").read_text()
+          names = re.findall(r'^theorem\s+(\w+)', src, re.M)
+          assert len(names) == 12 and len(set(names)) == 12, names
+          pathlib.Path("PADFourLayerThreeProbeAudit.lean").write_text(
+              "import PADFourLayerThreeProbe\n" +
+              "".join("#print axioms PADFourLayerThreeProbe." + n + "\n" for n in names))
+          print("Audited", names)
+          PY
+          lake env lean --trust=0 PADFourLayerThreeProbeAudit.lean 2>&1 | tee ../pad-three-probe-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          names = ("../pad-three-probe-base.log", "../pad-three-probe-calibration.log",
+                   "../pad-three-probe-build.log", "../pad-three-probe-axioms.log")
+          s = "".join(Path(p).read_text() for p in names)
+          assert not any(bad in s for bad in ("error:", "warning:", "sorryAx")), s
+          print("PASS: 12 Lean theorems, no error/warning/sorryAx")
+          PY
+      - name: Save verification logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pad-three-probe-checks
+          path: |
+            pad-three-probe-base.log
+            pad-three-probe-calibration.log
+            pad-three-probe-build.log
+            pad-three-probe-axioms.log
+          if-no-files-found: warn

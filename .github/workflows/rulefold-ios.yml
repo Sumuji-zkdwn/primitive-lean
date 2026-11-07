@@ -1,0 +1,30 @@
+name: Rulefold iOS touch regression
+
+on:
+  push:
+    branches: [chatgpt/rulefold-touch-ios-20261105]
+    paths:
+      - 'demos/**'
+      - '.github/workflows/rulefold-ios.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'demos/**'
+      - '.github/workflows/rulefold-ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Rulefold / mandala / iOS integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify all frontend regression checks
+        run: node --test demos/higher_order_playground.test.cjs demos/rulefold_mandala.test.cjs demos/rulefold_touch_ios.test.cjs
