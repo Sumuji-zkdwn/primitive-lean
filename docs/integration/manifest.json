@@ -2238,6 +2238,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "sha256": "4465e90939c1d8fd23b7a15e5f1f616f4382e9d0e94d8a44bbf36f6bc3f78b30",
+      "original_sha256": "4465e90939c1d8fd23b7a15e5f1f616f4382e9d0e94d8a44bbf36f6bc3f78b30",
+      "source_pr": null,
+      "source_commit": "1f8e01237db2e88ce34b595f0ee40156bb04aa85",
+      "source_path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "1f8e01237db2e88ce34b595f0ee40156bb04aa85"
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2319,12 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-08",
+      "path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "source_commit": "1f8e01237db2e88ce34b595f0ee40156bb04aa85",
+      "note": "Mono-eye open-product predictive quotient equivalence, observable-boundary feedback soundness and inaccessible-input counterexample. Historical proof files unchanged."
     }
   ]
 }
