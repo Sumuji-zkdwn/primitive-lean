@@ -162,6 +162,7 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'ElasticaOperatorBridge': 'Constant-angle Elastica xCoord reconstruction applied to strict operator-quotient splitting (four directed straight segments).',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

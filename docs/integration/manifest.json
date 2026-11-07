@@ -2238,6 +2238,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "3f6ca0de8aecaa3f49cc3d79481601134db738c9"
+    },
+    {
+      "path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "sha256": "2ade7430c924d63b6c7b5ead9afe0ebb5525201d86019fe92454cc61175587b4",
+      "original_sha256": "2ade7430c924d63b6c7b5ead9afe0ebb5525201d86019fe92454cc61175587b4",
+      "source_pr": 99,
+      "source_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd",
+      "source_path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd"
     }
   ],
   "construction_errors": [],
@@ -2307,6 +2319,12 @@
       "path": "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc",
       "source_commit": "88b846540b626dc9ecced95ce4716190091c5aeb",
       "note": "Finite state-resident lift program updated by acquired operators; exact PR #64 lower-level trace, separate one-step observation classes, frozen control and finite saturation."
+    },
+    {
+      "date": "2026-11-07",
+      "path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "source_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd",
+      "note": "Additive, exact constant-angle Elastica endpoint bridge to strict operator-vocabulary quotient refinement. No retained Lean theorem modified."
     }
   ]
 }
