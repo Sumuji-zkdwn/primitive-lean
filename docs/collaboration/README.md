@@ -47,6 +47,6 @@ python3 docs/collaboration/probe_shell_path.py
 
 対象は PR #111 の `fb049ad18b3a6cb2de325fddb0180f2a3cae6fa5`。Actions run [42414035348](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42414035348) は success。Codex の独立検査では、元のコードと同じシェル組立てが空白入りパスで失敗する反例を見た。これは Lean の数学的正当性や、空白のない当時の CI の成功を否定しない。PR #111 はその後 main にマージ済みで、今回の作業ではマージしていない。
 
-別の Claude Code 統合候補 PR #112 の確認時ヘッドは `12ffd3293dad437a57dd877f7f8912ba2c53becb`。統合ワークフロー [42417954837](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42417954837) は `action_required` で、ジョブが確認できなかった。原因・その後の変化は未確認。PR #111 の成功を PR #112 の成功として扱わない。
+別の Claude Code 統合候補 PR #112 の確認時ヘッドは `12ffd3293dad437a57dd877f7f8912ba2c53becb`。統合ワークフロー [42417954837](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42417954837) は `action_required` で、ジョブが確認できなかった。原因・その後の変化は未確認。PR #111 の成功を PR #112 の成功として扱わない。さらに、[Codex の未解決レビュー](https://github.com/Sumuji-zkdwn/primitive-lean/pull/112#discussion_r4503887478)は、コンパイル失敗時に等式が `proved_equal` と集計されうる問題を指摘する。指摘対象の `tools/deps/copy_ring_stage.py` と `tools/deps/copy_report.py` は、レビュー時 `6073c14` と確認時ヘッド `12ffd32` で Git blob SHA が一致した。ここではその不具合を独立再現していない。
 
 `site-ledger.patch` は既存 Site ソースに対する変更をレビューするための差分で、Site の通常のソースバージョン管理とは別にこの PR に収める。適用には既存 Site の ID とアクセス範囲を維持する。既存の台帳データは固定スナップショットで、現在の GitHub と同期済みとは限らない。

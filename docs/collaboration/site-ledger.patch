@@ -11,7 +11,7 @@ index 55d1a44..939960b 100644
 +
 +「協調引継ぎ」は固定された PR ヘッドの出自・独立レビュー・Actions 実行・未確認事項・次の担当を表示します。同梱した `data/collaboration_handoff.json` はスナップショットです。別の引継ぎ JSON は画面上で一時表示でき、既存のブラウザ保存メモを変更しません。形式の簡易確認は真偽の検証ではありません。GitHub との自動同期や書込みはありません。
 diff --git a/app.js b/app.js
-index dbdaa0c..7df851c 100644
+index dbdaa0c..8fab978 100644
 --- a/app.js
 +++ b/app.js
 @@ -12,13 +12,15 @@
@@ -31,7 +31,7 @@ index dbdaa0c..7df851c 100644
    try { const s = JSON.parse(localStorage.getItem(STORAGE) || 'null'); if (s && s.version === 1) saved = {...emptyStore(), ...s}; } catch (_) {}
    function save(){ try{localStorage.setItem(STORAGE,JSON.stringify(saved));}catch(_){toast('保存できません。書き出しをお試しください');} }
    function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>e.classList.remove('show'),2600);}
-@@ -211,6 +213,43 @@
+@@ -211,6 +213,44 @@
      return head('RESEARCH SERIES','研究系列と次の課題','各系列に 1 件ずつ、次に取り組む最小 Lean 課題を記録します。')+
        '<div class="notice">初期文面はこの試作の<strong>提案</strong>です。実施状況・既存定理との重複・成立は未確認です。編集するとこの端末に保存されます。</div><div class="grid-even">'+taskSeries.map(t=>'<section class="card series-card"><div class="series-top"><div class="series-icon">'+t.icon+'</div>'+badge('提案 · 状態未確認','amber')+'</div><div><h3>'+esc(t.name)+'</h3><p>次の最小 Lean 課題</p></div><textarea aria-label="'+esc(t.name)+' の次の課題" data-task="'+esc(t.id)+'">'+esc(saved.tasks[t.id]??t.seed)+'</textarea><div class="series-foot">この端末に保存 · 状態や証明結果は自動で変更されません</div></section>').join('')+'</div>';
    }
@@ -49,6 +49,7 @@ index dbdaa0c..7df851c 100644
 +      Number.isInteger(d.subject.pull_request) && d.producer && Array.isArray(d.observations) &&
 +      d.observations.every(x=>x && typeof x.kind==='string' && typeof x.status==='string' &&
 +        typeof x.summary==='string' && typeof x.evidence==='string' && x.subject_sha===d.subject.head_sha) &&
++      (d.history===undefined || (Array.isArray(d.history) && d.history.every(x=>x && typeof x.actor==='string' && /^[0-9a-f]{40}$/.test(x.subject_sha||'') && typeof x.action==='string' && typeof x.evidence==='string'))) &&
 +      Array.isArray(d.unverified) && d.next_action && typeof d.next_action.task==='string';
 +  }
 +  function showHandoff(){
@@ -75,7 +76,7 @@ index dbdaa0c..7df851c 100644
    function showSources(){
      return head('DATA & STORAGE','データと保存','一次資料、固定した参照先、書き込んだメモの扱いを確認します。')+
        '<section class="card">'+cardHead('取り込んだ資料','各リンクは固定されたコミットまたは実行記録')+
-@@ -227,7 +266,7 @@
+@@ -227,7 +267,7 @@
    function render(){
      const active=document.activeElement, id=active?.id, pos=typeof active?.selectionStart==='number'?[active.selectionStart,active.selectionEnd]:null;
      renderNav();
@@ -84,7 +85,7 @@ index dbdaa0c..7df851c 100644
      $('#content').innerHTML=f[state.route]();
      for(const [id2,value] of [['pr-status',state.status],['decl-mode',state.declMode],['decl-layer',state.declLayer],['graph-type',state.graphType]]){const e=document.getElementById(id2);if(e)e.value=value;}
      if(id){const target=document.getElementById(id);if(target){target.focus();if(pos&&target.setSelectionRange)try{target.setSelectionRange(...pos)}catch(_){}}}
-@@ -250,6 +289,7 @@
+@@ -250,6 +290,7 @@
      else if(action==='page'){state.page=Math.max(0,state.page+Number(id));render();}
      else if(action==='export')exportNotes();
      else if(action==='import')$('#import-input').click();
@@ -92,7 +93,7 @@ index dbdaa0c..7df851c 100644
      else if(action==='add-pr'){
        const number=Number($('#custom-pr-number').value),title=$('#custom-pr-title').value.trim(),sha=$('#custom-pr-sha').value.trim();
        if(!Number.isInteger(number)||number<=0||!title||numbers.includes(number)||saved.customPr.some(x=>Number(x.number)===number)){toast('未登録の PR 番号とタイトルを入力してください');return;}
-@@ -278,6 +318,13 @@
+@@ -278,6 +319,13 @@
      if(t.id==='graph-type'){state.graphType=t.value;render();}
      if(t.id==='graph-node'){state.graph=t.value;render();}
      if(t.id==='module-node'){state.module=t.value;render();}
