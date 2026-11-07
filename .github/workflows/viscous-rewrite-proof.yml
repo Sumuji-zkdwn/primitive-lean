@@ -1,0 +1,54 @@
+name: Viscous rewrite Lean proof and axiom audit
+
+on:
+  push:
+    branches: ['chatgpt/viscous-rewrite-*']
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/ViscousRewrite.inc'
+      - 'tools/verify_main_result.py'
+      - 'tools/verify.py'
+      - '.github/workflows/viscous-rewrite-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - name: Checkout exact proposed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Install elan
+        shell: bash
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Install pinned mathlib sources and cached artifacts
+        working-directory: lean
+        shell: bash
+        run: |
+          lake exe cache get
+      - name: Compile all Lean sources and audit all declaration axioms
+        shell: bash
+        run: |
+          python -B -X utf8 tools/verify.py --proof-only
+      - name: Record diagnostics even if proof fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: viscous-rewrite-proof-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            verification/proof-only.json
+            verification/main-result.json
+            verification/main-result.log
+            verification/proof-supplement-run.log
+            verification/proof-joint-run.log
+            linear_input/lean_results.json
+            linear_input/lean_results.log

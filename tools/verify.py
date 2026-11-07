@@ -185,6 +185,9 @@ def verify_lean(rebuild):
         'ElasticaOperatorBridge': 'Constant-angle Elastica xCoord reconstruction applied to strict operator-quotient splitting (four directed straight segments).',
         'ObservableRigidPoint': 'Conditional common observable fixed point of projected idempotents, F0 range derivation, four-state hidden-order counterexample and disjoint-idempotent obstruction',
         'RimObservability': 'Exact one-channel four-phase decoder for a 4D rotation/reflection model, optimal three-versus-four horizon witness and signed 2x2 local gauges; no global F16 conjugacy claim.',
+        'ViscousRewrite': 'Proximal parameter-shift closure for the original E polynomial, minimizer-derived viscous balance, energy descent, Fenchel-Young identities, a nonconvex two-branch example, and an F16 rotation/reflection dissipation test.',
+        'GravityCocycle': 'Generic pair-interaction two-cocycle, exact coboundary of symmetric internal energy, Newton inverse-distance kernel, and oriented 1D inverse-square force; does not deduce Newton law from associativity.',
+        'GravityObserver': 'F0 reflection quotient and mass-only counterexample for symmetric two-mass gravitational observation; exact probe kernel, injectivity, and quadrupole/remainder identities.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

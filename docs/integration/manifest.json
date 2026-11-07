@@ -2560,6 +2560,39 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "38bf7ef1e6106ad6d412ece43463be6da1686f9d"
+    },
+    {
+      "path": "linear_input/lean_check/ViscousRewrite.inc",
+      "sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f",
+      "original_sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f",
+      "source_pr": 37,
+      "source_commit": "a434faa7dafe97264fa933456a8faed497c726cd",
+      "source_path": "linear_input/lean_check/ViscousRewrite.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/GravityCocycle.inc",
+      "sha256": "50157183f74a2117a15b242d4dbab3ba20d736144f99fa946cbe7fc6d8b77eec",
+      "original_sha256": "50157183f74a2117a15b242d4dbab3ba20d736144f99fa946cbe7fc6d8b77eec",
+      "source_pr": 41,
+      "source_commit": "1dead80455f1ea310184a53beaea9eea0cb26d20",
+      "source_path": "linear_input/lean_check/GravityCocycle.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/GravityObserver.inc",
+      "sha256": "28a8d76ba98421fcc683349f69f09b29a6fa55cd7d2a04b64c7672a594d0f93d",
+      "original_sha256": "28a8d76ba98421fcc683349f69f09b29a6fa55cd7d2a04b64c7672a594d0f93d",
+      "source_pr": 43,
+      "source_commit": "61dd9ccd50ba8562f22c23e39da5afc3025a7c92",
+      "source_path": "linear_input/lean_check/GravityObserver.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
