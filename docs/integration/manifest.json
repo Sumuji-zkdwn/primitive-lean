@@ -2428,6 +2428,18 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd"
+    },
+    {
+      "path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "sha256": "3e8e966784e5b784f34173922f14a041590978c5d54f519bdd9854eedf6398ea",
+      "original_sha256": "3e8e966784e5b784f34173922f14a041590978c5d54f519bdd9854eedf6398ea",
+      "source_pr": null,
+      "source_commit": "edba4874adc7c492fd4a2ba312d85140366ac204",
+      "source_path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "role": "new_integration_extension",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "authoring_commit": "edba4874adc7c492fd4a2ba312d85140366ac204"
     }
   ],
   "construction_errors": [],
@@ -2575,6 +2587,12 @@
       "path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
       "source_commit": "4b42dc052dea2b37ce3d7d56b39a875b92c42bbd",
       "note": "Additive, exact constant-angle Elastica endpoint bridge to strict operator-vocabulary quotient refinement. No retained Lean theorem modified."
+    },
+    {
+      "date": "2026-11-08",
+      "path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "source_commit": "edba4874adc7c492fd4a2ba312d85140366ac204",
+      "note": "Mono-eye open-product predictive quotient equivalence, observable-boundary feedback soundness and inaccessible-input counterexample. Historical proof files unchanged."
     }
   ]
 }
