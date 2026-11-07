@@ -2341,6 +2341,21 @@
       "byte_identical": true,
       "permitted_adaptations": [],
       "authoring_commit": "597246334098fa550220890015e76e674109ad84"
+    },
+    {
+      "path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "sha256": "8816235e77ba0612ac801d3dd10b3835fc62079903d17de8ef6e72635c332592",
+      "original_sha256": "0b80ce7350c3faf4a98a190bf500951f8c9d12036c85530ecbd0c71576ed4d12",
+      "source_pr": 81,
+      "source_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16",
+      "source_path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Extend original source with unconditional trace reflection, injectivity of predictive quotient, and a concrete bijective quotient of a many-to-one state forgetful map",
+        "Replace unused proof binder names and add a separating-word witness certificate lemma"
+      ],
+      "authoring_commit": "2270eff36e97be289218ce99a7690dd2e9a19f16"
     }
   ],
   "construction_errors": [],

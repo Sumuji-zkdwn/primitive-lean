@@ -169,6 +169,7 @@ def verify_lean(rebuild):
         'RelationalOddCycleGluing': 'Strict hierarchy of individual, pairwise and global relational feasibility, Boolean odd-cycle obstruction, even-cycle control; pairwise SAT is not overlap agreement of fixed assignments',
         'JoinContextualEquivalence': 'Contextual equality under rewrites and binary attachment, compositional quotient, representation minimality, exact descent of old quotient attachment, and finite counterexample',
         'CurveLetterContextualEquivalence': 'Exact normalized A/B curve-letter composition, observational collision, left-context separation, and specialization of the attachment-descent criterion',
+        'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
