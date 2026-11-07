@@ -5,6 +5,7 @@ on:
     paths:
       - 'lean/Research/SphereClock.lean'
       - 'lean/Research/SphereClockRationalGluing.lean'
+      - 'lean/Research/SphereClockWordNormalForm.lean'
       - 'tests/test_sphere_clock.py'
       - 'tests/test_sphere_clock_rational_gluing.py'
       - '.github/workflows/sphere-clock.yml'
@@ -47,4 +48,5 @@ jobs:
         run: |
           lake build Elastica.Geometry
           lake env lean --trust=0 Research/SphereClock.lean
-          lake env lean --trust=0 Research/SphereClockRationalGluing.lean
+          lake env lean --trust=0 -o Research/SphereClockRationalGluing.olean Research/SphereClockRationalGluing.lean
+          lake env lean --trust=0 Research/SphereClockWordNormalForm.lean
