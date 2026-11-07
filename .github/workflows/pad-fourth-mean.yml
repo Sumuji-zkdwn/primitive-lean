@@ -1,0 +1,85 @@
+name: PAD fourth-probe mean constraint (isolated algebraic audit)
+
+on:
+  push:
+    branches:
+      - chatgpt/pad-four-interior-global-r43-20261108
+    paths:
+      - 'lean/PADFourLayerFourthMean.lean'
+      - 'tools/check_pad_fourth_mean.py'
+      - '.github/workflows/pad-fourth-mean.yml'
+  pull_request:
+    paths:
+      - 'lean/PADFourLayerFourthMean.lean'
+      - 'tools/check_pad_fourth_mean.py'
+      - '.github/workflows/pad-fourth-mean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Independent exact Fraction and polynomial checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/check_pad_fourth_mean.py | tee pad-fourth-mean-fraction.log
+      - name: Lean trust-zero compile and axiom audit
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayer.olean PADFourLayer.lean 2>&1 | tee ../pad-mean-base.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerCalibration.olean PADFourLayerCalibration.lean 2>&1 | tee ../pad-mean-calibration.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerThreeProbe.olean PADFourLayerThreeProbe.lean 2>&1 | tee ../pad-mean-three.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerFourProbe.olean PADFourLayerFourProbe.lean 2>&1 | tee ../pad-mean-four.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/PADFourLayerFourthMean.olean PADFourLayerFourthMean.lean 2>&1 | tee ../pad-mean-build.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('PADFourLayerFourthMean.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',s,re.M)
+          assert len(names)==16 and len(set(names))==16,names
+          Path('PADFourLayerFourthMeanAudit.lean').write_text(
+            'import PADFourLayerFourthMean\n' +
+            ''.join('#print axioms PADFourLayerFourthMean.'+n+'\n' for n in names))
+          print('Audited',names)
+          PY
+          lake env lean --trust=0 PADFourLayerFourthMeanAudit.lean 2>&1 | tee ../pad-mean-axioms.log
+          python3 - <<'PY'
+          from pathlib import Path
+          logs=['../pad-mean-base.log','../pad-mean-calibration.log','../pad-mean-three.log',
+                '../pad-mean-four.log','../pad-mean-build.log','../pad-mean-axioms.log']
+          s=''.join(Path(x).read_text() for x in logs)
+          assert not any(v in s for v in ('error:','warning:','sorryAx')),s
+          print('PASS: isolated fourth-probe mean Lean source trust zero, axiom audited')
+          PY
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pad-fourth-mean-evidence
+          path: |
+            pad-fourth-mean-fraction.log
+            pad-mean-base.log
+            pad-mean-calibration.log
+            pad-mean-three.log
+            pad-mean-four.log
+            pad-mean-build.log
+            pad-mean-axioms.log
+          if-no-files-found: warn
