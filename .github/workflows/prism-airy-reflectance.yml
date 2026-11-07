@@ -1,0 +1,78 @@
+name: Prism Airy film reflectance (isolated Lean)
+
+on:
+  push:
+    branches: [chatgpt/prism-airy-reflectance-20261107]
+  pull_request:
+    branches: [chatgpt/fluid-prism-phase-memory-20261107]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile all four linked Lean modules with zero trust
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          for mod in DarkBrightObservation PrismHysteresisReadout FluidPrismPhaseMemory PrismAiryReflectance; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/${mod}.olean" "${mod}.lean" 2>&1 | tee "../airy-${mod}.log"
+            if grep -E 'warning:|error:' "../airy-${mod}.log"; then exit 1; fi
+          done
+      - name: Audit theorem axioms with exact imports
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          txt=pathlib.Path('PrismAiryReflectance.lean').read_text()
+          assert not re.search(r'\b(sorry|admit)\b',txt)
+          names=re.findall(r'^theorem\s+(\w+)',txt,re.M)
+          assert len(names)>=18,names
+          pathlib.Path('PrismAiryReflectanceAudit.lean').write_text(
+            'import PrismAiryReflectance\n'+
+            ''.join('#print axioms PrismAiryReflectance.'+name+'\n' for name in names))
+          print('Auditing',len(names),'new Lean theorems')
+          PY
+          lake env lean --trust=0 PrismAiryReflectanceAudit.lean 2>&1 | tee ../airy-audit.log
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('PrismAiryReflectance.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          logs=pathlib.Path('../airy-audit.log').read_text()
+          rows=re.findall(r'depends on axioms:\s*\[([^\]]*)\]',logs)
+          assert len(rows)==len(names),(len(rows),len(names))
+          allow={'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+            used=set(filter(None,[p.strip() for p in row.split(',')]))
+            assert used<=allow,used-allow
+          assert 'warning:' not in logs and 'error:' not in logs
+          print('PASS: only standard foundational axioms; no sorry')
+          PY
+      - name: Independent exact and coherent-wave regression
+        run: python -B tools/check_prism_airy_reflectance.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: prism-airy-reflectance-${{ github.run_id }}
+          path: |
+            airy-*.log
+          if-no-files-found: warn
