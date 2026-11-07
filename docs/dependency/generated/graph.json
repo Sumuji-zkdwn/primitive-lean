@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "67fdf6b74bbbcb20dc70e7bf98b90471e329aa91",
+  "main_commit": "f348ec7541551ec84ca537ade7feac206313e6da",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -15,6 +15,122 @@
         "Elastica"
       ],
       "sha256": "f42ab494ea4c1dec1731ffd7c9114047afef66831eaeaacc97e6c45135594d2c"
+    },
+    {
+      "id": "main:lean/ContestEconomy.lean",
+      "scope": "main",
+      "path": "lean/ContestEconomy.lean",
+      "group": "Other",
+      "namespace": "ContestEconomy",
+      "declarations": [
+        "selection_gain_le_gap",
+        "selection_net_negative",
+        "delayed_ratio_strict_drop",
+        "delayed_ratio_uniform_drop",
+        "delayed_crossing_of_negative_discriminant",
+        "delayed_third_step_nonpos",
+        "delayed_seventh_step_example",
+        "participation",
+        "participation_zero_entry_cost",
+        "participation_entry_cost_equals_gap",
+        "participation_stops_of_gap_le_cost",
+        "participation_fixed_cost_eventually_zero",
+        "participation_fixed_gap_tends_one",
+        "participation_paths_disagree_arbitrarily_near",
+        "participation_no_joint_boundary_limit"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "5d473107f64828c1d225fbfc4cf96ab43ef8d61320b000d839023e336ac1cb84"
+    },
+    {
+      "id": "main:lean/DarkBrightIntensity.lean",
+      "scope": "main",
+      "path": "lean/DarkBrightIntensity.lean",
+      "group": "Other",
+      "namespace": "DarkBrightIntensity",
+      "declarations": [
+        "exchange",
+        "intensity",
+        "Pulse",
+        "runWord",
+        "intensityTrace",
+        "reQ_exchange",
+        "imQ_exchange",
+        "output_exchange",
+        "intensity_exchange",
+        "exchange_mix",
+        "exchange_runWord",
+        "intensityTrace_exchange",
+        "terminal_intensity_exchange",
+        "unitPhaseWitness",
+        "unitPhase_complex_readouts",
+        "unitPhase_complex_separates",
+        "unitPhase_intensity_collision",
+        "signed_quadrature_breaks_exchange",
+        "unitPhase_signed_quadrature_separates"
+      ],
+      "imports": [
+        "Mathlib",
+        "DarkBrightObservation"
+      ],
+      "sha256": "5da3e033f2ffef15a4e5e61b610f758f4b0caad572a32f1d5a4e7f7e5af718f7"
+    },
+    {
+      "id": "main:lean/DarkBrightObservation.lean",
+      "scope": "main",
+      "path": "lean/DarkBrightObservation.lean",
+      "group": "Other",
+      "namespace": "DarkBrightObservation",
+      "declarations": [
+        "Spinor",
+        "Observation",
+        "Summary",
+        "reQ",
+        "imQ",
+        "delta",
+        "norm2",
+        "output",
+        "summary",
+        "project",
+        "mix",
+        "evolution",
+        "reQ_mix",
+        "imQ_mix",
+        "delta_mix",
+        "norm2_mix",
+        "summary_mix",
+        "norm2_preserved",
+        "sphere_identity",
+        "norm2_nonnegative",
+        "delta_sign_ambiguity",
+        "brightBasis",
+        "darkBasis",
+        "output_closes_iff",
+        "step",
+        "summaryStep",
+        "summary_step",
+        "project_summary",
+        "step_preserves_norm2",
+        "one_probe_recovers_delta",
+        "summary_eq_of_two_reads",
+        "two_reads_iff_summary",
+        "witnessLeft",
+        "witnessRight",
+        "current_collision",
+        "next_values",
+        "next_separates",
+        "commonPhase",
+        "reQ_phase",
+        "imQ_phase",
+        "delta_phase",
+        "common_phase_summary"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "cc4eed983b9027c26c3ac2f789b26ed619043befa983c3eef3d15c4a026ad016"
     },
     {
       "id": "main:lean/Elastica/AffineEquivalence.lean",
@@ -664,6 +780,89 @@
       "sha256": "b701498633383a7c42397eaa7c149801c673bd06cf808091b98ddfe7839607ed"
     },
     {
+      "id": "main:lean/FluidPrismPhaseMemory.lean",
+      "scope": "main",
+      "path": "lean/FluidPrismPhaseMemory.lean",
+      "group": "Other",
+      "namespace": "FluidPrismPhaseMemory",
+      "declarations": [
+        "energy",
+        "energySlope",
+        "energyCurvature",
+        "neutral_energy_nonnegative",
+        "neutral_energy_left",
+        "neutral_energy_right",
+        "neutral_barrier",
+        "neutral_energy_zero_only",
+        "neutral_stationary_left",
+        "neutral_stationary_right",
+        "neutral_stationary_barrier",
+        "height",
+        "every_encoded_height_minimizes",
+        "opticalPhase",
+        "phase",
+        "calibrated_phase",
+        "port",
+        "phase_false",
+        "phase_true",
+        "port_false",
+        "port_true",
+        "port_separates",
+        "port_injective_on_bits",
+        "port_bounded",
+        "port_period_four",
+        "calibrated_probe_relation",
+        "retained_height_high",
+        "retained_height_low",
+        "hysteretic_optical_separation",
+        "neutral_probe_does_not_rewrite",
+        "cellReadout",
+        "cell_readout_injective",
+        "memory_count",
+        "noisy_low_above_threshold",
+        "noisy_high_below_threshold"
+      ],
+      "imports": [
+        "PrismHysteresisReadout"
+      ],
+      "sha256": "708a98bd54831aa3571a61d5f51045ad9ba04ab03413d3b6ad7deb44c7037e5c"
+    },
+    {
+      "id": "main:lean/MovingCurve.lean",
+      "scope": "main",
+      "path": "lean/MovingCurve.lean",
+      "group": "Other",
+      "namespace": "Elastica",
+      "declarations": [
+        "movingX",
+        "movingY",
+        "movingX_time_displacement",
+        "movingY_time_displacement",
+        "hasDerivAt_movingX_arcLength",
+        "hasDerivAt_movingY_arcLength",
+        "movingCurve_unit_speed_squared",
+        "hasDerivAt_movingX_time",
+        "hasDerivAt_movingY_time",
+        "moving_translation_distance_eq_time_sq"
+      ],
+      "imports": [
+        "Elastica.Geometry"
+      ],
+      "sha256": "c7cb87ae51b6a84b286e59b7a0a203f7dc845fb375d7334bf48f306019387eca"
+    },
+    {
+      "id": "main:lean/MovingCurveAudit.lean",
+      "scope": "main",
+      "path": "lean/MovingCurveAudit.lean",
+      "group": "Other",
+      "namespace": "",
+      "declarations": [],
+      "imports": [
+        "MovingCurve"
+      ],
+      "sha256": "2b3ba6fdf9e28be1d379d0a3fda6ce87dfb1c62f38e4b92d9045d57e5f6c0bcb"
+    },
+    {
       "id": "main:lean/OrbitTrace.lean",
       "scope": "main",
       "path": "lean/OrbitTrace.lean",
@@ -1014,6 +1213,939 @@
       "sha256": "df603f153f8e50565fcdca912374bc4e7854d3705bbdad13946a73383d8ad511"
     },
     {
+      "id": "main:lean/PADFourLayer.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayer.lean",
+      "group": "Other",
+      "namespace": "PADFourLayer",
+      "declarations": [
+        "Profile",
+        "mass",
+        "mean",
+        "response",
+        "plus",
+        "minus",
+        "witness_distinct",
+        "witness_mass",
+        "witness_mean",
+        "witness_first_probe",
+        "witness_second_probe",
+        "witness_second_probe_gap",
+        "witness_difference_factorization",
+        "zeroes_imply_factor",
+        "two_probes_zero",
+        "two_probe_injective"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "a10096ef649b278ea2953307e8e983c4c812fbfee04c38062288e10921409744"
+    },
+    {
+      "id": "main:lean/PADFourLayerCalibration.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayerCalibration.lean",
+      "group": "Other",
+      "namespace": "PADFourLayerCalibration",
+      "declarations": [
+        "residual",
+        "residual_factor",
+        "recover_p3",
+        "recover_p2",
+        "residual_difference",
+        "perturb",
+        "perturb_mass",
+        "perturb_mean",
+        "perturb_response",
+        "perturb_probe",
+        "perturb_nontrivial",
+        "independent_energy_ambiguity",
+        "response_difference"
+      ],
+      "imports": [
+        "PADFourLayer"
+      ],
+      "sha256": "b7e9d4591e9684127287d9ba583eaaa319e9a159cf4bd0910dd7f462b8c30000"
+    },
+    {
+      "id": "main:lean/PADFourLayerDesign.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayerDesign.lean",
+      "group": "Other",
+      "namespace": "PADFourLayerDesign",
+      "declarations": [
+        "detEnvelope",
+        "fixedFirstGap",
+        "detEnvelope_upper",
+        "detEnvelope_at_optimal",
+        "unitInterval_upper",
+        "unitInterval_at_optimal"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "ad3fa725b7c4284a7bdf9a6f5344e5b67a6e61bc56d3d788a03d4cf1380782a4"
+    },
+    {
+      "id": "main:lean/PADFourLayerFourProbe.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayerFourProbe.lean",
+      "group": "Other",
+      "namespace": "PADFourLayerFourProbe",
+      "declarations": [
+        "remainder",
+        "remainder_positive",
+        "exact_gap_factor",
+        "fourth_exact_gap",
+        "fourth_exact_gap_positive",
+        "fourth_separates_fixed_pair",
+        "fixed_pair_separated_off_roots",
+        "fourth_unit_probe_ambiguous"
+      ],
+      "imports": [
+        "PADFourLayerThreeProbe"
+      ],
+      "sha256": "40f5c2ad3b3b9833132c7ff242bcb7d04a9e8cd86c0bbc72617b6c8c671cae53"
+    },
+    {
+      "id": "main:lean/PADFourLayerFourthMean.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayerFourthMean.lean",
+      "group": "Other",
+      "namespace": "PADFourLayerFourthMean",
+      "declarations": [
+        "massOnlyP",
+        "massOnlyQ",
+        "massOnly_positive",
+        "massOnly_masses",
+        "massOnly_four_equalities",
+        "massOnly_means_differ",
+        "massOnly_distinct",
+        "A",
+        "B",
+        "C",
+        "E",
+        "PB",
+        "dA",
+        "dB",
+        "dC",
+        "A_right_certificate",
+        "A_positive_right",
+        "B_positive_certificate",
+        "B_positive",
+        "C_positive",
+        "E_left_certificate",
+        "E_negative_left",
+        "AB_wronskian",
+        "AC_wronskian",
+        "AB_wronskian_negative",
+        "AC_wronskian_negative"
+      ],
+      "imports": [
+        "PADFourLayerFourProbe"
+      ],
+      "sha256": "5642cb87466908ecdf660088e8406cd09d36040c9b071856416f7c5e4b7c11bb"
+    },
+    {
+      "id": "main:lean/PADFourLayerThreeProbe.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayerThreeProbe.lean",
+      "group": "Other",
+      "namespace": "PADFourLayerThreeProbe",
+      "declarations": [
+        "coefA",
+        "coefB",
+        "jacDet",
+        "jacDet_closed",
+        "jacDet_nonzero_of_cross",
+        "repeated_probe",
+        "unit_probe",
+        "tripleP",
+        "tripleQ",
+        "triple_masses",
+        "triple_means",
+        "triple_positive",
+        "triple_distinct",
+        "triple_ambiguity",
+        "scaleDeriv",
+        "singularP",
+        "singular_positive",
+        "singular_jacobian",
+        "uniformP",
+        "regular_jacobian"
+      ],
+      "imports": [
+        "PADFourLayerCalibration"
+      ],
+      "sha256": "6017f43bb1a577dd4693d5750f100360b48632edbfb431fb4fe9c15f282e332f"
+    },
+    {
+      "id": "main:lean/PADFourLayerUniformMargin.lean",
+      "scope": "main",
+      "path": "lean/PADFourLayerUniformMargin.lean",
+      "group": "Other",
+      "namespace": "PADFourLayerUniformMargin",
+      "declarations": [
+        "param",
+        "crossGap",
+        "lam",
+        "mu",
+        "margin",
+        "coefP1",
+        "coefP3",
+        "coefQ2",
+        "param_mass",
+        "param_mean",
+        "positive_weights_and_margin",
+        "weighted_gap_identity",
+        "two_probe_uniform_separation",
+        "sharpP",
+        "sharpQ",
+        "sharp_profiles_nonnegative",
+        "sharp_two_responses"
+      ],
+      "imports": [
+        "PADFourLayerFourthMean"
+      ],
+      "sha256": "eaa5cf90c15f818d4451c876c351923b599c3c1f59a14564bbd141a68d80e5ca"
+    },
+    {
+      "id": "main:lean/PrismAiryReflectance.lean",
+      "scope": "main",
+      "path": "lean/PrismAiryReflectance.lean",
+      "group": "Other",
+      "namespace": "PrismAiryReflectance",
+      "declarations": [
+        "fresnel",
+        "airy",
+        "roundtripPhase",
+        "filmReflect",
+        "fresnel_same",
+        "first_interface_matched",
+        "second_interface_matched",
+        "airy_at_one",
+        "airy_at_neg_one",
+        "airy_contrast",
+        "roundtrip_period",
+        "reflectance_period",
+        "thickness_shift_nonzero",
+        "thickness_alias",
+        "phase_at_halfwave",
+        "phase_at_three_quarters",
+        "film_halfwave_high",
+        "film_three_quarters_low",
+        "glassIndex",
+        "fluidIndex",
+        "incidentInterface",
+        "exitInterface",
+        "sample_first_interface",
+        "sample_second_interface",
+        "sample_high",
+        "sample_low",
+        "sample_contrast_positive",
+        "contrast_margin",
+        "quartic_fold_positive_drive",
+        "critical_root_has_required_square",
+        "explicit_fold"
+      ],
+      "imports": [
+        "FluidPrismPhaseMemory"
+      ],
+      "sha256": "0a0f3507414d32a939c56a4765c3a4b42a38c8f1212c58dffdd2cff5d62ae5f3"
+    },
+    {
+      "id": "main:lean/PrismHysteresisReadout.lean",
+      "scope": "main",
+      "path": "lean/PrismHysteresisReadout.lean",
+      "group": "Other",
+      "namespace": "PrismHysteresisReadout",
+      "declarations": [
+        "intensityPlus",
+        "intensityMinus",
+        "balanced_difference",
+        "balanced_probe_recovers_delta",
+        "encoded",
+        "blindRead",
+        "blind_equivalence",
+        "equal_initial_power",
+        "readSignal",
+        "read_false",
+        "read_true",
+        "probe_separates",
+        "unmix_after_pulse",
+        "readAndRestore",
+        "restore_state",
+        "restore_encoded",
+        "read_encoded_signal",
+        "write",
+        "write_high",
+        "write_low",
+        "hold_zero",
+        "two_writes_retained",
+        "written_states_blind",
+        "written_states_separate",
+        "written_state_restored"
+      ],
+      "imports": [
+        "DarkBrightObservation"
+      ],
+      "sha256": "8425a731133460caebf7b93e91a4fc398fc9398d13f160b265c3c17bc7153423"
+    },
+    {
+      "id": "main:lean/PrismObliqueTMM.lean",
+      "scope": "main",
+      "path": "lean/PrismObliqueTMM.lean",
+      "group": "Other",
+      "namespace": "PrismObliqueTMM",
+      "declarations": [
+        "RayGeometry",
+        "tangentialIndex",
+        "snellRadicand",
+        "supercritical_radicand_negative",
+        "supercritical_has_no_real_refracted_cosine",
+        "FilmMatrixPattern",
+        "compose",
+        "inputReal",
+        "inputImag",
+        "reflectedIntensity",
+        "unit_intensity_of_conjugate_ratio",
+        "evanescent_output_reflectance_one"
+      ],
+      "imports": [
+        "PrismAiryReflectance"
+      ],
+      "sha256": "066c1dc7eb94627c92c2901242da914f73a23c582dc0348dd21565ac214e116d"
+    },
+    {
+      "id": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "scope": "main",
+      "path": "lean/Research/ElasticaObservationQuotient.lean",
+      "group": "Other",
+      "namespace": "ElasticaObservationBridge",
+      "declarations": [
+        "run",
+        "ObsEq",
+        "obsSetoid",
+        "PredState",
+        "encode",
+        "encode_eq_iff",
+        "sumStep",
+        "run_inl",
+        "extended_implies_old",
+        "forget",
+        "forget_encode",
+        "strict_refinement_splits_quotient",
+        "angle",
+        "K",
+        "K_zero",
+        "K_one",
+        "K_two",
+        "oldStep",
+        "freshStep",
+        "run_old",
+        "old_cannot_separate",
+        "fresh_separates",
+        "fresh_changes_initial_tangent",
+        "curve_split",
+        "inertStep",
+        "run_inert",
+        "inert_forget_injective",
+        "inert_no_split"
+      ],
+      "imports": [
+        "Elastica.Geometry"
+      ],
+      "sha256": "11de11b81dd0e7adc3b28cda2ca2375c5142fa8d3c9ac7308b33434e25fc7d07"
+    },
+    {
+      "id": "main:lean/Research/FiniteMarkovTransport.lean",
+      "scope": "main",
+      "path": "lean/Research/FiniteMarkovTransport.lean",
+      "group": "Other",
+      "namespace": "Elastica",
+      "declarations": [
+        "Position",
+        "History",
+        "Control",
+        "ExtendedState",
+        "IsProbabilityKernel",
+        "PastOperation",
+        "updateHistory",
+        "observe",
+        "applyPastOperation",
+        "historyKernel",
+        "historyKernel_is_probability_kernel",
+        "same_readout_after_different_operations",
+        "historyStiffness",
+        "controlValue",
+        "endpointMass",
+        "controlledKernel",
+        "controlledKernel_is_probability_kernel",
+        "quadraticAction",
+        "bestPair",
+        "finiteMinimumAction",
+        "reachesTarget",
+        "best_pair_reaches_target",
+        "every_target_pair_has_minimum_action",
+        "finite_minimum_action_values",
+        "finite_markov_action_matches_curvature_gramian",
+        "finite_markov_action_is_half_existing_required_action",
+        "TransportPlan",
+        "canonicalPlan",
+        "sourceMarginal",
+        "targetMarginal",
+        "IsTargetCoupling",
+        "twoPointTransportCost",
+        "canonical_plan_is_target_coupling",
+        "every_target_coupling_has_cost",
+        "inducedPlan",
+        "best_pair_induces_target_coupling",
+        "finite_transport_cost_same_across_histories",
+        "finite_action_history_gap_and_ot_equality"
+      ],
+      "imports": [
+        "Mathlib.Tactic",
+        "Research.OkanoharaTransport"
+      ],
+      "sha256": "dfae3b6c58fcd69fc37bf53e4b2508039899d3db89cd0c95976a5bee53697d47"
+    },
+    {
+      "id": "main:lean/Research/OkanoharaTransport.lean",
+      "scope": "main",
+      "path": "lean/Research/OkanoharaTransport.lean",
+      "group": "Other",
+      "namespace": "Elastica",
+      "declarations": [
+        "twoStepTransport",
+        "twoStepAction",
+        "two_step_speed_limit",
+        "balanced_path_attains_bound",
+        "historyUnitCost",
+        "requiredInput",
+        "requiredAction",
+        "required_action_exact",
+        "history_unit_cost_mono",
+        "HistoryState",
+        "readPosition",
+        "adaptationCost",
+        "same_observation_different_cost",
+        "adaptation_cost_not_observation_factor",
+        "historyAugmentedEnergy",
+        "energy_le_history_augmented",
+        "history_augmented_energy_mono",
+        "historyAugmentedWeight",
+        "history_weight_le_original",
+        "switchFiber",
+        "switch_fiber_holds_at_zero",
+        "switch_fiber_remanence",
+        "positive_pulse_is_not_injective",
+        "fiberMemory",
+        "fiberResistance",
+        "fiber_resistance_positive",
+        "fiberDisplacement",
+        "fiber_required_input_realizes_target",
+        "fiberAction",
+        "pulse_action_gap",
+        "FiberState",
+        "fiberRead",
+        "fiberReadCost",
+        "fiberPulse",
+        "fiber_pulse_readout_and_cost",
+        "pulse_cost_does_not_factor_through_readout",
+        "fiberPushforward",
+        "positive_pulse_collapses_mass",
+        "fiberDirac",
+        "positive_pulse_erases_distinct_diracs",
+        "serialResistance",
+        "serialAction",
+        "serial_all_on_resistance",
+        "serial_all_off_resistance",
+        "serial_all_on_action",
+        "serial_all_off_action",
+        "fiberExternalEnergy",
+        "fiberSwitchPenalty",
+        "fiberStepEnergy",
+        "fiber_up_threshold_iff",
+        "fiber_down_threshold_iff",
+        "fiber_hold_is_strict_minimizer",
+        "switchFiber_minimizes_step_energy",
+        "additive_series_has_constant_cost_factor",
+        "curvatureDoubleWell",
+        "curvature_double_well_nonneg",
+        "curvature_double_well_zero_wells",
+        "curvature_double_well_integral",
+        "wellCurvature",
+        "well_curvature_zero",
+        "well_curvature_energy_zero",
+        "well_curvature_is_minimum",
+        "leftCurvatureResponse",
+        "rightCurvatureResponse",
+        "left_curvature_exact_variation",
+        "right_curvature_exact_variation",
+        "wellCurvatureResponse",
+        "well_curvature_exact_variation",
+        "wellStiffness",
+        "well_stiffness_off_on",
+        "well_stiffness_eq_previous_resistance",
+        "well_stiffness_positive",
+        "curvatureFlowWork",
+        "curvatureFlowPressure",
+        "curvature_flow_work_gap",
+        "curvature_flow_work_minimum",
+        "curvatureFlowAction",
+        "curvature_flow_action_eq_prior_fiber_action",
+        "curvature_flow_pulse_action_gap",
+        "actualCurvatureStepEnergy",
+        "actual_curvature_step_eq_discrete_energy",
+        "actual_curvature_switch_minimizes",
+        "curvatureTwoStepDisplacement",
+        "curvatureTwoStepMinCost",
+        "curvature_two_step_cost_lower_bound",
+        "curvature_two_step_constant_control_attains",
+        "curvature_two_step_cost_by_history",
+        "curvatureTwoStepGramian",
+        "curvature_two_step_gramian_by_history",
+        "curvature_two_step_gramian_positive",
+        "curvature_two_step_cost_gramian"
+      ],
+      "imports": [
+        "Elastica.ExponentialWeight",
+        "Elastica.Examples",
+        "Mathlib.Tactic"
+      ],
+      "sha256": "1123f02c0c5ce5e212ad4db0fcf80065dd99d02bd268c8f7ad08a6559b6acbb6"
+    },
+    {
+      "id": "main:lean/Research/SphereClock.lean",
+      "scope": "main",
+      "path": "lean/Research/SphereClock.lean",
+      "group": "Other",
+      "namespace": "SphereClock",
+      "declarations": [
+        "meridianAngle",
+        "meridian_x",
+        "meridian_z",
+        "sphereX",
+        "sphereY",
+        "sphereZ",
+        "on_unit_sphere",
+        "needle",
+        "dial",
+        "dial_step",
+        "needle_eq_dial_diff",
+        "full_history_determines_needle",
+        "full_history_determines_route",
+        "SurfaceSample",
+        "meridianNeedle",
+        "surfaceDial",
+        "meridian_is_surface_difference",
+        "routeAB",
+        "routeBA",
+        "same_final_dial",
+        "different_first_needle",
+        "final_dial_forgets_order"
+      ],
+      "imports": [
+        "Elastica.Geometry",
+        "Mathlib.Tactic"
+      ],
+      "sha256": "0331df54e7c811d5fcbccf0009f926d33b85481b7b42ed6a983decb9668935ee"
+    },
+    {
+      "id": "main:lean/Research/SphereClockRationalGluing.lean",
+      "scope": "main",
+      "path": "lean/Research/SphereClockRationalGluing.lean",
+      "group": "Other",
+      "namespace": "SphereClock.RationalGluing",
+      "declarations": [
+        "Glued",
+        "gluedSetoid",
+        "ClockSpace",
+        "point",
+        "layers_share_iff",
+        "points_share_iff",
+        "rotate",
+        "rotate_respects_of_mem",
+        "rotate_respects_iff",
+        "rotateSpace",
+        "rotateSpace_zero",
+        "rotateSpace_add",
+        "flip",
+        "flipSpace",
+        "flip_fixed_iff",
+        "flipSpace_involution",
+        "Angle",
+        "rationalAngles",
+        "rational_point_joins",
+        "one_turn_is_zero",
+        "one_turn_is_rational",
+        "full_turn_is_identity",
+        "sqrt_two_angle_not_rational",
+        "hidden_layer_reappears",
+        "loopWithSwitch",
+        "switched_loop_fixes_rational",
+        "switched_loop_changes_nonrational",
+        "sqrt_two_layer_reappears",
+        "sqrt_two_switched_loop_changes"
+      ],
+      "imports": [
+        "Mathlib.Topology.Instances.AddCircle.Defs",
+        "Mathlib.NumberTheory.Real.Irrational",
+        "Mathlib.Tactic"
+      ],
+      "sha256": "54df9be6fcbf87e447e507dd9f8ffabe9af7f92afb2610466878a57ce7e63a69"
+    },
+    {
+      "id": "main:lean/SelfRewritingObserver.lean",
+      "scope": "main",
+      "path": "lean/SelfRewritingObserver.lean",
+      "group": "Other",
+      "namespace": "SelfRewritingObserver",
+      "declarations": [
+        "Mode",
+        "Action",
+        "State",
+        "first",
+        "second",
+        "step",
+        "run",
+        "readout",
+        "WordEq",
+        "signature",
+        "signature_step",
+        "signature_readout",
+        "signature_sound",
+        "wordEq_iff_signature",
+        "states_card",
+        "blind_classes",
+        "frozen_classes",
+        "feedback_classes",
+        "feedback_implies_frozen",
+        "frozen_implies_blind",
+        "p",
+        "q",
+        "z",
+        "strict_feedback",
+        "feedback_two_scans",
+        "delayed_witness",
+        "symmetry",
+        "symmetry_involutive",
+        "symmetry_invisible"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "86168ee4cfd2cb733c44b791dbb2c9f0120e7b2fde2dfa81caa4cbe62a947101"
+    },
+    {
+      "id": "main:lean/SelfRewritingObserverExtensions.lean",
+      "scope": "main",
+      "path": "lean/SelfRewritingObserverExtensions.lean",
+      "group": "Other",
+      "namespace": "SelfRewritingObserver",
+      "declarations": [
+        "RuleAction",
+        "HeadAction",
+        "ruleStep",
+        "headStep",
+        "ruleRun",
+        "headRun",
+        "RuleWordEq",
+        "HeadWordEq",
+        "ruleSignature",
+        "headSignature",
+        "ruleSignature_step",
+        "head_signature_injective",
+        "headSignature_step",
+        "ruleSignature_readout",
+        "headSignature_readout",
+        "ruleSignature_sound",
+        "headSignature_sound",
+        "ruleWordEq_iff_signature",
+        "headWordEq_iff_signature",
+        "rule_classes",
+        "head_classes",
+        "head_wordEq_iff_eq",
+        "symmetry_invisible_with_rule",
+        "differentHeads",
+        "symmetry_broken_by_head",
+        "zeroMem0",
+        "zeroMem1",
+        "rule_probe_refines_feedback"
+      ],
+      "imports": [
+        "SelfRewritingObserver"
+      ],
+      "sha256": "d6ebb2770af782538a344ea2ea53223e8991387b451d60ce8e3da018808bbe1a"
+    },
+    {
+      "id": "main:lean/ThreeBallCollision.lean",
+      "scope": "main",
+      "path": "lean/ThreeBallCollision.lean",
+      "group": "Other",
+      "namespace": "ThreeBallCollision",
+      "declarations": [
+        "Velocity",
+        "collideLM",
+        "collideMR",
+        "momentum",
+        "twiceEnergy",
+        "lm_reverses_relative_speed",
+        "mr_reverses_relative_speed",
+        "lm_preserves_momentum",
+        "mr_preserves_momentum",
+        "lm_preserves_energy",
+        "mr_preserves_energy",
+        "initial",
+        "leftFirst",
+        "rightFirst",
+        "left_first_stage_one",
+        "left_first_stage_two",
+        "left_first_exact",
+        "right_first_exact",
+        "left_first_preserves_momentum",
+        "right_first_preserves_momentum",
+        "left_first_preserves_energy",
+        "right_first_preserves_energy",
+        "same_conserved_observations",
+        "impacts_do_not_commute",
+        "middle_velocity_jump",
+        "different_final_states",
+        "leftApproaches",
+        "rightApproaches",
+        "left_first_contact_speeds",
+        "right_first_contact_speeds",
+        "final_velocities_separate",
+        "FirstContact",
+        "outcome",
+        "no_history_free_middle_predictor",
+        "middleByOffset",
+        "positive_offset",
+        "negative_offset",
+        "simultaneous_unassigned",
+        "jump_persists_arbitrarily_close"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "f0a9dbbf6fe3110d40ddc63cdf86b4d4dd0036aa0256e9d83e99969c69f954df"
+    },
+    {
+      "id": "main:lean/TwoMotionEmission.lean",
+      "scope": "main",
+      "path": "lean/TwoMotionEmission.lean",
+      "group": "Other",
+      "namespace": "TwoMotionEmission",
+      "declarations": [
+        "coupling",
+        "force",
+        "mechanical",
+        "energy",
+        "power",
+        "emitted",
+        "coupling_expansion",
+        "coupling_nonneg",
+        "mechanical_nonneg",
+        "energy_nonneg",
+        "coupling_hasDerivAt_y",
+        "coupling_hasDerivAt_x1",
+        "coupling_hasDerivAt_x2",
+        "Path",
+        "forceAlong",
+        "energyAlong",
+        "SolvesAt",
+        "energy_chain_rule",
+        "energy_hasDerivAt",
+        "power_nonneg",
+        "power_pos_iff",
+        "forceAlong_continuousOn",
+        "energy_balance",
+        "emitted_nonneg",
+        "emitted_pos_iff",
+        "emitted_le_initial_energy",
+        "rightWave",
+        "leftWave",
+        "waveDensity",
+        "waveFlux",
+        "rightWave_time",
+        "leftWave_time",
+        "rightWave_space",
+        "leftWave_space",
+        "outgoing_density",
+        "outgoing_flux",
+        "two_sided_flux",
+        "source_slope_jump",
+        "outgoing_transport",
+        "quartic",
+        "shifted_quartic"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "db76822f339dc279c66f3d971ef81e6ebc74a26ecb797b316e3f930072288c97"
+    },
+    {
+      "id": "main:lean/TwoMotionEmissionConsequences.lean",
+      "scope": "main",
+      "path": "lean/TwoMotionEmissionConsequences.lean",
+      "group": "Other",
+      "namespace": "TwoMotionEmission",
+      "declarations": [
+        "boundary_zero_of_force_zero",
+        "boundary_zero_of_drive_zero",
+        "force_zero_iff_product_zero",
+        "emitted_pos_iff_product_nonzero",
+        "rightWave_equation",
+        "leftWave_equation",
+        "cancelPosition",
+        "cancelVelocity",
+        "cancelAcceleration",
+        "cancelDrive",
+        "cancelPosition_hasDerivAt",
+        "cancelVelocity_hasDerivAt",
+        "closed_mode_equation",
+        "closed_mode_returns_to_rest"
+      ],
+      "imports": [
+        "TwoMotionEmission"
+      ],
+      "sha256": "0bf04784266ee4295899eae13dcc19e14048e6f5743f6aa72a88b89d1d5a498e"
+    },
+    {
+      "id": "main:lean/TwoMotionEmissionIVP.lean",
+      "scope": "main",
+      "path": "lean/TwoMotionEmissionIVP.lean",
+      "group": "Other",
+      "namespace": "TwoMotionEmission",
+      "declarations": [
+        "IVPState",
+        "ivpForce",
+        "ivpVectorField",
+        "ivpInitial",
+        "ivpPath",
+        "ivpVectorField_contDiff",
+        "ivp_components_solve",
+        "exists_local_ivp",
+        "initial_derivatives_of_ivp",
+        "exists_local_ivp_with_positive_emission"
+      ],
+      "imports": [
+        "Mathlib.Analysis.ODE.PicardLindelof",
+        "TwoMotionEmissionConsequences"
+      ],
+      "sha256": "d54a81601a3c4e83aa1596de042b25cf67ef6a8205aefb023b54be583a08c8ca"
+    },
+    {
+      "id": "main:lean/TwoWavelengthPhase.lean",
+      "scope": "main",
+      "path": "lean/TwoWavelengthPhase.lean",
+      "group": "Other",
+      "namespace": "TwoWavelengthPhase",
+      "declarations": [
+        "wavelengthOne",
+        "wavelengthTwo",
+        "firstPort",
+        "ratioPhase",
+        "ratioPort",
+        "observation",
+        "secondPort",
+        "idealObservation",
+        "effectiveRatio",
+        "wavelengths_positive",
+        "second_wavelength_ne_zero",
+        "dispersive_calibrated_phase",
+        "nondispersive_ratio",
+        "ideal_second_calibrated_phase",
+        "first_channel_unchanged",
+        "observation_refines_first",
+        "first_left",
+        "first_right",
+        "first_zero",
+        "first_two",
+        "first_three",
+        "second_left",
+        "second_zero",
+        "second_one",
+        "second_two",
+        "second_three",
+        "proposed_single_collision",
+        "proposed_pair_values",
+        "proposed_pair_separated",
+        "first_period_four",
+        "second_period_eight",
+        "ideal_period_eight",
+        "observation_reflection",
+        "no_ratio_globally_injective",
+        "periodic_counterexample",
+        "mixed_counterexample",
+        "mixed_counterexample_values",
+        "proposed_pair_gap",
+        "fiveHeight",
+        "five_height_readout",
+        "five_height_readout_injective",
+        "five_height_first_not_injective",
+        "injective_on_five_height_range"
+      ],
+      "imports": [
+        "FluidPrismPhaseMemory"
+      ],
+      "sha256": "ab0e88bb3c9985beb1c47977ad936d999e6491ce638876a569d743bb5a34d5a0"
+    },
+    {
+      "id": "main:lean/TwoWavelengthRecovery.lean",
+      "scope": "main",
+      "path": "lean/TwoWavelengthRecovery.lean",
+      "group": "Other",
+      "namespace": "TwoWavelengthRecovery",
+      "declarations": [
+        "halfPhase",
+        "carrier",
+        "phase_eq_two_half",
+        "ratio_phase_eq_three_half",
+        "first_port_eq_carrier_sq",
+        "second_port_chebyshev",
+        "carrier_recovery",
+        "carrier_eq_of_observation_eq",
+        "observation_eq_iff_carrier",
+        "half_phase_mem_Icc",
+        "carrier_injOn_interval",
+        "ideal_injOn_of_interval_and_exclusion",
+        "finite_alphabet_injective_of_interval"
+      ],
+      "imports": [
+        "TwoWavelengthPhase"
+      ],
+      "sha256": "38bfedc254c6dcddc3b0bd07df69c2ba7df521ec115d6a3498db8c533ffc2ed7"
+    },
+    {
+      "id": "main:lean/TwoWavelengthSeparation.lean",
+      "scope": "main",
+      "path": "lean/TwoWavelengthSeparation.lean",
+      "group": "Other",
+      "namespace": "TwoWavelengthSeparation",
+      "declarations": [
+        "HeightAlias",
+        "scaled_cos_eq_iff",
+        "ratio_port_eq_iff",
+        "first_port_eq_iff",
+        "observation_eq_iff",
+        "observation_injOn_iff",
+        "finite_alphabet_injective",
+        "mixed_sign_alias",
+        "mixed_sign_heights_distinct",
+        "not_injective_on_four_unit_interval",
+        "outputGap",
+        "BoundedReadout",
+        "bounded_noise_disjoint",
+        "five_height_gap",
+        "five_height_bounded_noise"
+      ],
+      "imports": [
+        "TwoWavelengthPhase"
+      ],
+      "sha256": "891646a0e55986d203b7858c667830c617d6fa7fd40f7413a979ef2bd0eee038"
+    },
+    {
       "id": "main:linear_input/lean_check/Calculus.lean",
       "scope": "main",
       "path": "linear_input/lean_check/Calculus.lean",
@@ -1094,6 +2226,160 @@
         "Mathlib.Tactic.Positivity"
       ],
       "sha256": "2f98fe11dd728aa08038a1d3e01a9440ba83049b6dd4d3d1561a3dd140aac8e8"
+    },
+    {
+      "id": "main:linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "scope": "main",
+      "path": "linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "group": "Other",
+      "namespace": "FixedBoundaryCurveDistinct",
+      "declarations": [
+        "coordinates",
+        "same_coordinates_same_curvature",
+        "curvature_zero_quarter",
+        "curvature_one_quarter",
+        "coords_zero_ne_one",
+        "coords_zero_ne_two",
+        "coords_one_ne_two",
+        "coordinates_injective"
+      ],
+      "imports": [
+        "ElasticaFixedBoundaryWitness"
+      ],
+      "sha256": "4a75d4f72d44b5c97c77b1868103e6e159814c3b97cc99c3695a61b406dae510"
+    },
+    {
+      "id": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "scope": "main",
+      "path": "linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "group": "Other",
+      "namespace": "",
+      "declarations": [
+        "projectProofPath"
+      ],
+      "imports": [
+        "ElasticaUnifiedOperatorAdapter",
+        "ElasticaCurveDistinct",
+        "ElasticaFixedBoundaryEnergy",
+        "Lean.Util.FoldConsts"
+      ],
+      "sha256": "b40b9563c0de5212e8d7d863e8f2ea688a3024c81061261a883073cb7fea7119"
+    },
+    {
+      "id": "main:linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "scope": "main",
+      "path": "linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "group": "Other",
+      "namespace": "FixedBoundaryExactEnergy",
+      "declarations": [
+        "trig_identity",
+        "cos_integral_nat",
+        "deriv_f_sq",
+        "trig_combo_integral",
+        "quadratic_bending_value",
+        "represented_curve_energy",
+        "exact_represented_realization"
+      ],
+      "imports": [
+        "ElasticaFixedBoundaryWitness"
+      ],
+      "sha256": "8ef80dad8151117d69e2a590212082a1edb87d4dcf5e85879c31e2a94246249c"
+    },
+    {
+      "id": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "scope": "main",
+      "path": "linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "group": "Other",
+      "namespace": "FixedBoundaryWitness",
+      "declarations": [
+        "f",
+        "angle",
+        "f_contDiff",
+        "f_odd",
+        "f_periodic",
+        "f_reflect",
+        "f_zero",
+        "f_one",
+        "f_half",
+        "f_quarter",
+        "angle_initial",
+        "angle_final",
+        "hasDeriv_f",
+        "curvature_zero",
+        "curvature_one",
+        "curvature_two",
+        "angle_zero_ne_one",
+        "angle_zero_ne_two",
+        "angle_one_ne_two",
+        "angle_injective",
+        "angle_smooth",
+        "sin_f_integral_zero",
+        "shifted_integral",
+        "common_x_endpoint",
+        "common_y_endpoint",
+        "unit_speed",
+        "shared_boundary",
+        "quadraticBending",
+        "f_deriv_periodic",
+        "periodic_halfshift_integral",
+        "quadratic_bending_equal",
+        "observer",
+        "oldStep",
+        "freshStep",
+        "old_preserves_boundary",
+        "fresh_preserves_boundary",
+        "run_old",
+        "old_indistinguishable",
+        "fresh_distinguishes",
+        "fixed_boundary_quotient_splits",
+        "fixed_boundary_realization",
+        "RepresentedCurve",
+        "curveEquiv",
+        "curveObserver",
+        "curveOld",
+        "curveFresh",
+        "curve_readout",
+        "curve_old_step",
+        "curve_extended_step",
+        "curve_old_indistinguishable",
+        "curve_fresh_distinguishes",
+        "represented_curve_split",
+        "represented_curve_smooth",
+        "represented_unit_speed",
+        "represented_curve_boundary",
+        "represented_curve_realization"
+      ],
+      "imports": [
+        "ElasticaOperatorTheory"
+      ],
+      "sha256": "eec0c71828bd908b9cfeee7df4bad3e98db933ee9ce04594cd6f1ac0fcb91997"
+    },
+    {
+      "id": "main:linear_input/lean_check/ElasticaUnifiedOperatorAdapter.lean",
+      "scope": "main",
+      "path": "linear_input/lean_check/ElasticaUnifiedOperatorAdapter.lean",
+      "group": "Other",
+      "namespace": "ElasticaUnifiedOperatorAdapter",
+      "declarations": [
+        "run_agrees",
+        "obs_eq_wordEq",
+        "toLater",
+        "fromLater",
+        "from_to",
+        "to_from",
+        "forget_commutes",
+        "injective_readout_relabel",
+        "curvature_as_old_example",
+        "old_action_is_existing",
+        "fresh_action_is_existing",
+        "existing_finite_example_same_kernel",
+        "pr100_same_extended_kernel"
+      ],
+      "imports": [
+        "ElasticaOperatorTheory",
+        "Research.ElasticaObservationQuotient"
+      ],
+      "sha256": "7311ed9a723bddc6b3618828403487b1febfe88a9e397707824e4cc9fdc1ff9e"
     },
     {
       "id": "main:linear_input/lean_check/Observation.lean",
@@ -1482,6 +2768,45 @@
       "sha256": "3f749b971efc58d0f4451c66c7eff38dcaf5bc37642a531225121931da528546"
     },
     {
+      "id": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "group": "Local / Global gluing",
+      "namespace": "LinearInputCooperativeGluing",
+      "declarations": [
+        "JointGoal",
+        "GoalFlag",
+        "goalFlag_false_iff_not_joint",
+        "destructive",
+        "cumulative",
+        "Meets",
+        "CollectiveCoverage",
+        "JointlyReachable",
+        "destructive_individual_coverage",
+        "destructive_every_primitive_misses_goal",
+        "destructive_old_invariant",
+        "destructive_no_joint_word",
+        "collective_coverage_does_not_glue",
+        "destructive_noncommuting",
+        "cumulative_two_steps_reach_joint_goal",
+        "cumulative_jointly_reachable",
+        "cumulative_primitives_commute",
+        "gatedTimeline",
+        "gated_extinction_iff_no_joint_action",
+        "goal_incompatibility_forces_history_loss",
+        "destructive_initially_moves",
+        "destructive_later_extinct",
+        "destructive_history_not_preserved",
+        "destructive_interval_not_preserved",
+        "destructive_snapshots_still_preserved",
+        "destructive_no_action_rewrite_repairs_history",
+        "cumulative_valid_two_time_steps",
+        "cumulative_later_not_totally_extinct"
+      ],
+      "imports": [],
+      "sha256": "b33f9ef8f26f30c2ab65f7f6071c5cdf02d044c7404261de43874181bf22ad95"
+    },
+    {
       "id": "main:linear_input/lean_check/CoupledConsequences.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CoupledConsequences.inc",
@@ -1523,6 +2848,50 @@
       "sha256": "e575924d3694a4cabaecde04a9f31266ed4a640e5d01c6ef1843de804653f70a"
     },
     {
+      "id": "main:linear_input/lean_check/CrossSystemObservation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCrossSystemObservation",
+      "declarations": [
+        "CrossTrace",
+        "CrossBisim",
+        "crossTrace_now",
+        "crossTrace_step",
+        "trace_is_bisim",
+        "bisim_run",
+        "bisim_sub_trace",
+        "greatest_cross_bisim",
+        "ExactBridge",
+        "bridge_run",
+        "bridge_trace",
+        "bridge_preserves_wordEq",
+        "separating_word_refutes_trace",
+        "bridge_reflects_wordEq",
+        "predictiveMap",
+        "predictiveMap_encode",
+        "predictiveMap_output",
+        "predictiveMap_step",
+        "predictiveMap_surjective",
+        "predictiveMap_injective_of_reflects",
+        "predictiveMap_injective",
+        "predictiveMap_bijective",
+        "predictiveMap_bijective_of_surjective",
+        "no_bridge_if_fiber_splits",
+        "forgetSecond",
+        "pairOutput",
+        "flipFirst",
+        "flipBit",
+        "flip_bridge",
+        "forgetSecond_surjective",
+        "flip_predictive_bijective",
+        "revealSecond",
+        "reveal_has_no_bridge"
+      ],
+      "imports": [],
+      "sha256": "8816235e77ba0612ac801d3dd10b3835fc62079903d17de8ef6e72635c332592"
+    },
+    {
       "id": "main:linear_input/lean_check/CurvatureBridge.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurvatureBridge.inc",
@@ -1558,6 +2927,52 @@
       ],
       "imports": [],
       "sha256": "b89461438d07ecdfd95c97e1a8f2a61dc6ecf05840808756f04d674d4640d0d5"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveLetters",
+      "declarations": [
+        "Point",
+        "pointAdd",
+        "turnLeft",
+        "rotateQuarter",
+        "turnLeft_add",
+        "pointAdd_assoc",
+        "rotateQuarter_addPoint",
+        "rotateQuarter_comp",
+        "CurvePiece",
+        "curveJoin",
+        "curveJoin_assoc",
+        "Readout",
+        "observe",
+        "A",
+        "B",
+        "rewrite",
+        "run_rewrite_identity",
+        "wordEq_iff_observe_eq",
+        "AB_state",
+        "BA_state",
+        "AB_BA_noncommute",
+        "AB_values",
+        "BA_values",
+        "AB_BA_wordEq",
+        "old_quotient_identifies_AB_BA",
+        "AAB_state",
+        "ABA_state",
+        "AAB_real_endpoint",
+        "ABA_real_endpoint",
+        "left_attachment_separates",
+        "old_curve_kernel_not_stable",
+        "old_quotient_has_no_exact_attachment",
+        "contextual_readout_exact",
+        "contextual_attachment_exact",
+        "contextual_quotient_separates_AB_BA"
+      ],
+      "imports": [],
+      "sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f"
     },
     {
       "id": "main:linear_input/lean_check/EWFSFenchel.inc",
@@ -1637,6 +3052,31 @@
       ],
       "imports": [],
       "sha256": "d0f2142e064841163464a1de14e6e3a646e5f17de230c2a67661ebd788d45af8"
+    },
+    {
+      "id": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputElasticaOperatorBridge",
+      "declarations": [
+        "angle",
+        "observer",
+        "reflect",
+        "quarterTurn",
+        "straight",
+        "observer_zero",
+        "observer_one",
+        "observer_two",
+        "observer_three",
+        "reflect_preserves_readout",
+        "run_reflect_readout",
+        "old_indistinguishable",
+        "new_distinguishes",
+        "elastica_quotient_splits"
+      ],
+      "imports": [],
+      "sha256": "2ade7430c924d63b6c7b5ead9afe0ebb5525201d86019fe92454cc61175587b4"
     },
     {
       "id": "main:linear_input/lean_check/EnergyWfsFenchel.inc",
@@ -2676,6 +4116,47 @@
       "sha256": "c4d801ecb6f3936359b14062c6892e0bb4312f75341d334aa785b9c3fb07ab59"
     },
     {
+      "id": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/HistoryNonpreservation.inc",
+      "group": "Local / Global gluing",
+      "namespace": "LinearInputHistoryNonpreservation",
+      "declarations": [
+        "HistoryModel",
+        "Preserves",
+        "SnapshotPreserves",
+        "preserves_implies_snapshot",
+        "preserves_refl",
+        "preserves_trans",
+        "missing_label_blocks_preservation",
+        "missing_label_blocks_any_transition_rewrite",
+        "PostRepairSnapshot",
+        "missing_label_blocks_all_internal_repairs",
+        "preserves_iff_one_step_observation_of_injective",
+        "moving_history_cannot_embed_in_stationary_history",
+        "adjoinOldHistory",
+        "adjoining_old_history_restores_embedding",
+        "originalReadout",
+        "expandedReadout",
+        "originalHistory",
+        "expandedHistory",
+        "expanded_has_more_states",
+        "expanded_has_more_observable_labels",
+        "original_label_disappears",
+        "expanded_but_not_preserved",
+        "expanded_history_irreparable_by_internal_action",
+        "expanded_history_irreparable_by_transition_rewrite",
+        "toggle",
+        "togglingHistory",
+        "stationaryHistory",
+        "snapshots_can_be_embedded",
+        "toggling_history_cannot_be_preserved",
+        "extension_can_represent_both_histories"
+      ],
+      "imports": [],
+      "sha256": "8e2b70a4c87b20bd4b2c3ae57bb8f28e8f61a677017abd04bd52680de4bae433"
+    },
+    {
       "id": "main:linear_input/lean_check/HistorySignature.inc",
       "scope": "main",
       "path": "linear_input/lean_check/HistorySignature.inc",
@@ -2741,6 +4222,62 @@
       ],
       "imports": [],
       "sha256": "7ba29d42bdde5903ebb47db238afefe3864fe1ea1580812cb1cbd2f16f5f0465"
+    },
+    {
+      "id": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/JoinContextualEquivalence.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputJoinContexts",
+      "declarations": [
+        "Context",
+        "plug",
+        "compose",
+        "plug_compose",
+        "ContextEq",
+        "context_refl",
+        "context_symm",
+        "context_trans",
+        "context_plug",
+        "context_now",
+        "context_step",
+        "context_left",
+        "context_right",
+        "context_join",
+        "contextSetoid",
+        "State",
+        "encode",
+        "encode_iff",
+        "readout",
+        "transition",
+        "attach",
+        "readout_encode",
+        "transition_encode",
+        "attach_encode",
+        "mapContext",
+        "representation_plug",
+        "representation_kernel_sub",
+        "representation_minimal",
+        "context_implies_word",
+        "StableJoin",
+        "word_implies_context_of_stable",
+        "stable_iff_word_context",
+        "attachOld",
+        "attachOld_encode",
+        "stable_iff_old_attach_exists",
+        "exK",
+        "exStep",
+        "exJoin",
+        "exA",
+        "exB",
+        "exZ",
+        "ex_run",
+        "ex_word_equal",
+        "ex_context_separates",
+        "ex_join_not_stable"
+      ],
+      "imports": [],
+      "sha256": "996a9b4605029746763ce5eeabf21a346c2bdf04026a3541f6c2da19f6b238b2"
     },
     {
       "id": "main:linear_input/lean_check/KummerDihedral.inc",
@@ -2829,6 +4366,46 @@
       "sha256": "69bbfdb3ef02bf3b8c43f9388bda46a3d52bd29519c15752ac0ba84a57b53b63"
     },
     {
+      "id": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "group": "Local / Global gluing",
+      "namespace": "LinearInputCapacityExtinction",
+      "declarations": [
+        "Covers",
+        "allSupported",
+        "bool_and_true_iff",
+        "allSupported_iff_covers",
+        "coverage_antitone",
+        "noncoverage_persists_under_demand_growth",
+        "bounded_capacity_blocks_global_cover",
+        "bounded_capacity_disables_each_local",
+        "capacityTimeline",
+        "capacity_overload_forces_total_extinction",
+        "capacity_overload_forces_history_loss",
+        "supportsOthers",
+        "supportsOthers_pairwise_cover",
+        "supportsOthers_exact_capacity",
+        "supportsOthers_no_global_cover",
+        "increasingDemands",
+        "overloadedTimeline",
+        "overload_initially_operates",
+        "overload_old_history_moves",
+        "overload_later_every_local_extinct",
+        "overload_causes_nonpreservation",
+        "overload_causes_interval_failure",
+        "overloaded_snapshots_survive",
+        "swap01",
+        "swap12",
+        "finite_actions_do_not_commute",
+        "permanentTimeline",
+        "permanent_has_available_local",
+        "permanent_history_is_preserved"
+      ],
+      "imports": [],
+      "sha256": "58c30ddf38b02650c7c71a91a8ba307795bb4228630383ac109a5535419ce037"
+    },
+    {
       "id": "main:linear_input/lean_check/MainResult.inc",
       "scope": "main",
       "path": "linear_input/lean_check/MainResult.inc",
@@ -2893,6 +4470,62 @@
       ],
       "imports": [],
       "sha256": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a"
+    },
+    {
+      "id": "main:linear_input/lean_check/MonoEyeComposition.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/MonoEyeComposition.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputMonoEyeComposition",
+      "declarations": [
+        "pairStep",
+        "pairReadout",
+        "pair_run",
+        "pair_word_eq_iff",
+        "productEncode",
+        "product_encode_eq_iff",
+        "product_encode_surjective",
+        "wiredStep",
+        "localStep",
+        "wired_word_sound",
+        "exampleOA",
+        "exampleOB",
+        "exampleA",
+        "exampleB",
+        "example_run_zero",
+        "example_run_one",
+        "example_global_equivalent",
+        "example_local_distinct"
+      ],
+      "imports": [],
+      "sha256": "3e8e966784e5b784f34173922f14a041590978c5d54f519bdd9854eedf6398ea"
+    },
+    {
+      "id": "main:linear_input/lean_check/ObservableRigidPoint.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ObservableRigidPoint.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRigidPoint",
+      "declarations": [
+        "projected",
+        "common_fixed_of_commuting",
+        "observed_rigid_exists",
+        "observed_rigid_in_Krange",
+        "incompatibleM",
+        "incompatibleC",
+        "no_common_without_commutation",
+        "exK",
+        "exM",
+        "exC",
+        "example_K_idempotent",
+        "example_raw_idempotents",
+        "example_hidden_order_difference",
+        "example_projected_idempotents",
+        "example_projected_commute",
+        "example_observed_rigid"
+      ],
+      "imports": [],
+      "sha256": "71ef3033078f7b28d01f48a19404043a7bf549bc024db94ec73ad56309dd862e"
     },
     {
       "id": "main:linear_input/lean_check/ObservationRetractionPolarity.inc",
@@ -3109,6 +4742,100 @@
       "sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721"
     },
     {
+      "id": "main:linear_input/lean_check/PilotComparisonBridge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PilotComparisonBridge.inc",
+      "group": "IUT comparison / Pilot",
+      "namespace": "LinearInputPilotComparison",
+      "declarations": [
+        "Reachable",
+        "FiberTargets",
+        "ChoiceValues",
+        "reachable_iff_fiber_covered",
+        "FiberInvariant",
+        "factorization_iff_fiber_invariant",
+        "reachable_of_factor_and_witness",
+        "reachable_choice_independent_implies_fiber_invariant",
+        "LogWall",
+        "log_wall_iff_bound",
+        "scaled_pilot_witness_iff",
+        "truncatedVolume",
+        "truncated_upper",
+        "truncated_complete",
+        "ell7_small_container_obstruction",
+        "ell7_larger_container_witness",
+        "constantForget",
+        "distinctTarget",
+        "choiceOutput",
+        "choice_range_can_cover_nonconstant_fiber",
+        "choice_range_not_single_valued",
+        "constant_forget_idempotent",
+        "f0_descent_does_not_force_wall"
+      ],
+      "imports": [],
+      "sha256": "fbe61417ae597296787b5b0bedb06c31861f05b550200c46909713fffdd4b5e2"
+    },
+    {
+      "id": "main:linear_input/lean_check/PilotHullInflation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PilotHullInflation.inc",
+      "group": "IUT comparison / Pilot",
+      "namespace": "LinearInputPilotHullInflation",
+      "declarations": [
+        "Rect",
+        "area",
+        "swap",
+        "hull",
+        "swap_preserves_area",
+        "swap_involutive",
+        "hull_area_ge_left",
+        "hull_area_ge_right",
+        "witness",
+        "witness_equal_areas",
+        "witness_hull_area_is_four",
+        "witness_individual_area_is_two",
+        "volume_preserving_hull_can_inflate",
+        "square_orbit_no_inflation"
+      ],
+      "imports": [],
+      "sha256": "1d283f9809905b5ccdd6d8c98730d8ddec4f50c1afbe7e3de4dce5a041835bc0"
+    },
+    {
+      "id": "main:linear_input/lean_check/PilotHullStability.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PilotHullStability.inc",
+      "group": "IUT comparison / Pilot",
+      "namespace": "LinearInputPilotHullStability",
+      "declarations": [
+        "orbitUnion",
+        "original_subset_orbit",
+        "orbit_hull_eq_iff_each_image_stable",
+        "escaping_image_blocks_hull_equality",
+        "hull_orbit_volume_ge",
+        "stable_images_give_zero_volume_gap"
+      ],
+      "imports": [],
+      "sha256": "6650a7d25c3ebafc06d41c2e374fe3fe1b5841f3bc0e817c5ac7945b919d1837"
+    },
+    {
+      "id": "main:linear_input/lean_check/PilotVolumeTransport.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PilotVolumeTransport.inc",
+      "group": "IUT comparison / Pilot",
+      "namespace": "LinearInputPilotTransport",
+      "declarations": [
+        "shifted_wall_iff",
+        "neutral_transport_wall_iff",
+        "bounded_shift_forces_budget",
+        "bounded_shift_cannot_bridge_gap",
+        "packet_wall_iff_total_bound",
+        "packet_budget_suffices",
+        "packet_budget_yields_wall"
+      ],
+      "imports": [],
+      "sha256": "4a01c6bcfea3ac20a8ecd0b7408b21b77df28f96e0c093b7a983f0289c0d803b"
+    },
+    {
       "id": "main:linear_input/lean_check/PressureCurvature.inc",
       "scope": "main",
       "path": "linear_input/lean_check/PressureCurvature.inc",
@@ -3172,6 +4899,36 @@
       "sha256": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d"
     },
     {
+      "id": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RadicalF0Bridge.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputRadicalF0",
+      "declarations": [
+        "radical",
+        "radical_eq_product",
+        "radical_zero",
+        "radical_ne_zero",
+        "radical_eq_zero_iff",
+        "radical_primeFactors",
+        "radical_idempotent",
+        "radical_kernel_iff",
+        "squarefree_fixed",
+        "radical_of_prime",
+        "primeFactors_four",
+        "radical_four",
+        "two_four_same_radical",
+        "successors_distinguished",
+        "successor_not_fiber_respecting",
+        "successor_not_descending",
+        "no_radical_successor_readout",
+        "future_separates_two_four",
+        "radical_not_complete_predictive_state"
+      ],
+      "imports": [],
+      "sha256": "aacc9eb3d56d9fce9e97ccf27418c006187b38b9b6916a6da5f852785b1bcc57"
+    },
+    {
       "id": "main:linear_input/lean_check/RecursiveOperatorReentry.inc",
       "scope": "main",
       "path": "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -3223,6 +4980,37 @@
       ],
       "imports": [],
       "sha256": "53d0053d7d4f0bf31eedc9a8e322c246a4b04f495f68c0d418084cc4c77cd6a4"
+    },
+    {
+      "id": "main:linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "group": "Local / Global gluing",
+      "namespace": "LinearInputRelationalGluing",
+      "declarations": [
+        "IndividuallyFeasible",
+        "PairwiseFeasible",
+        "GloballyFeasible",
+        "global_implies_pairwise",
+        "pairwise_implies_individual",
+        "global_implies_individual",
+        "Opposing",
+        "opposing_individually_feasible",
+        "opposing_not_pairwise",
+        "individual_does_not_imply_pairwise",
+        "OddCycleEdge",
+        "odd_cycle_pairwise_feasible",
+        "odd_cycle_each_locally_possible",
+        "odd_cycle_not_globally_feasible",
+        "pairwise_feasibility_does_not_imply_global",
+        "every_two_compatible_but_three_incompatible",
+        "EvenCycleEdge",
+        "even_cycle_globally_feasible",
+        "even_cycle_pairwise_feasible",
+        "global_gluing_iff_one_common_witness"
+      ],
+      "imports": [],
+      "sha256": "b85df6d07e210e377e532024740c33920e9b5faa1f2f4c1c8e35c9de9198d4ea"
     },
     {
       "id": "main:linear_input/lean_check/RepresentationBridges.inc",
@@ -3542,6 +5330,54 @@
       ],
       "imports": [],
       "sha256": "0ed4c127f19fcb5eaa9512013a9ead4bcb723455d831c1a371dc62893b04392c"
+    },
+    {
+      "id": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/TemporalLocalExtinction.inc",
+      "group": "WFS / Fenchel",
+      "namespace": "LinearInputTemporalExtinction",
+      "declarations": [
+        "LocalTimeline",
+        "stepAt",
+        "historyAt",
+        "AllExtinct",
+        "chooseTarget_none_of_all_disabled",
+        "extinct_step_identity",
+        "extinction_forces_nonpreservation",
+        "reassignActions",
+        "extinction_survives_reassignment",
+        "extinction_blocks_every_local_action_rewrite",
+        "preservation_iff_old_stationary_under_extinction",
+        "PreservedOn",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "flip",
+        "sampleAvailable",
+        "sample",
+        "sample_step_zero",
+        "sample_step_one",
+        "sample_first_local_disappears",
+        "sample_second_local_takes_over",
+        "sample_history_preserved_after_one_local_disappears",
+        "sample_extinct_after_two",
+        "sample_old_history_moves",
+        "sample_no_preservation_after_two",
+        "sample_no_interval_preservation",
+        "sample_snapshots_always_preserved",
+        "sample_no_local_action_rewrite_restores_history",
+        "reactivated",
+        "reactivated_step_two",
+        "reactivation_can_restore_preservation",
+        "recoveredAfterGap",
+        "recovered_step_zero",
+        "recovered_step_three",
+        "recovered_middle_extinct",
+        "recovered_endpoints_preserve_history",
+        "recovered_interval_still_not_preserved",
+        "recovered_endpoints_but_broken_interval"
+      ],
+      "imports": [],
+      "sha256": "56f6bf6efc23770535f8a0130a7f68ac78108566656edc75d1772135cc872099"
     },
     {
       "id": "main:linear_input/lean_check/TemporalSampling.inc",
@@ -5531,6 +7367,14 @@
       ]
     },
     {
+      "from": "main:lean/DarkBrightIntensity.lean",
+      "to": "main:lean/DarkBrightObservation.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "DarkBrightObservation"
+      ]
+    },
+    {
       "from": "main:lean/Elastica.lean",
       "to": "main:lean/Elastica/AffineEquivalence.lean",
       "kind": "exact_import",
@@ -6554,6 +8398,81 @@
       ]
     },
     {
+      "from": "main:lean/FluidPrismPhaseMemory.lean",
+      "to": "main:lean/PrismHysteresisReadout.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PrismHysteresisReadout"
+      ]
+    },
+    {
+      "from": "main:lean/FluidPrismPhaseMemory.lean",
+      "to": "main:lean/PrismHysteresisReadout.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "readSignal",
+        "read_false",
+        "write_high"
+      ]
+    },
+    {
+      "from": "main:lean/MovingCurve.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Elastica.Geometry"
+      ]
+    },
+    {
+      "from": "main:lean/MovingCurve.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "hasDerivAt_xCoord",
+        "hasDerivAt_yCoord"
+      ]
+    },
+    {
+      "from": "main:lean/MovingCurveAudit.lean",
+      "to": "main:lean/MovingCurve.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "MovingCurve"
+      ]
+    },
+    {
+      "from": "main:lean/MovingCurveAudit.lean",
+      "to": "main:lean/MovingCurve.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.hasDerivAt_movingX_arcLength",
+        "Elastica.hasDerivAt_movingX_time",
+        "Elastica.hasDerivAt_movingY_arcLength",
+        "Elastica.hasDerivAt_movingY_time",
+        "Elastica.movingCurve_unit_speed_squared",
+        "Elastica.movingX",
+        "Elastica.movingX_time_displacement",
+        "Elastica.movingY",
+        "Elastica.movingY_time_displacement",
+        "Elastica.moving_translation_distance_eq_time_sq"
+      ]
+    },
+    {
+      "from": "main:lean/MovingCurveAudit.lean",
+      "to": "main:lean/MovingCurve.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "hasDerivAt_movingX_arcLength",
+        "hasDerivAt_movingX_time",
+        "hasDerivAt_movingY_arcLength",
+        "hasDerivAt_movingY_time",
+        "movingCurve_unit_speed_squared",
+        "movingX_time_displacement",
+        "movingY_time_displacement",
+        "moving_translation_distance_eq_time_sq"
+      ]
+    },
+    {
       "from": "main:lean/OrbitTraceDegreeGap.lean",
       "to": "main:lean/OrbitTraceMonicSequence.lean",
       "kind": "exact_import",
@@ -6753,6 +8672,327 @@
       "symbols": [
         "polynomial_moment_exact_degree_drop",
         "polynomial_moment_gap_coefficient"
+      ]
+    },
+    {
+      "from": "main:lean/PADFourLayerCalibration.lean",
+      "to": "main:lean/PADFourLayer.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PADFourLayer"
+      ]
+    },
+    {
+      "from": "main:lean/PADFourLayerFourProbe.lean",
+      "to": "main:lean/PADFourLayerThreeProbe.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PADFourLayerThreeProbe"
+      ]
+    },
+    {
+      "from": "main:lean/PADFourLayerFourthMean.lean",
+      "to": "main:lean/PADFourLayerFourProbe.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PADFourLayerFourProbe"
+      ]
+    },
+    {
+      "from": "main:lean/PADFourLayerThreeProbe.lean",
+      "to": "main:lean/PADFourLayerCalibration.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PADFourLayerCalibration"
+      ]
+    },
+    {
+      "from": "main:lean/PADFourLayerUniformMargin.lean",
+      "to": "main:lean/PADFourLayerFourthMean.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PADFourLayerFourthMean"
+      ]
+    },
+    {
+      "from": "main:lean/PrismAiryReflectance.lean",
+      "to": "main:lean/FluidPrismPhaseMemory.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "FluidPrismPhaseMemory"
+      ]
+    },
+    {
+      "from": "main:lean/PrismAiryReflectance.lean",
+      "to": "main:lean/FluidPrismPhaseMemory.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "energyCurvature",
+        "energySlope"
+      ]
+    },
+    {
+      "from": "main:lean/PrismHysteresisReadout.lean",
+      "to": "main:lean/DarkBrightObservation.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "DarkBrightObservation"
+      ]
+    },
+    {
+      "from": "main:lean/PrismHysteresisReadout.lean",
+      "to": "main:lean/DarkBrightObservation.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Observation",
+        "current_collision",
+        "next_values",
+        "one_probe_recovers_delta",
+        "witnessLeft",
+        "witnessRight"
+      ]
+    },
+    {
+      "from": "main:lean/PrismObliqueTMM.lean",
+      "to": "main:lean/PrismAiryReflectance.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "PrismAiryReflectance"
+      ]
+    },
+    {
+      "from": "main:lean/PrismObliqueTMM.lean",
+      "to": "main:lean/PrismAiryReflectance.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "glassIndex"
+      ]
+    },
+    {
+      "from": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Elastica.Geometry"
+      ]
+    },
+    {
+      "from": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature",
+        "Elastica.curvature_affine"
+      ]
+    },
+    {
+      "from": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curvature_affine"
+      ]
+    },
+    {
+      "from": "main:lean/Research/FiniteMarkovTransport.lean",
+      "to": "main:lean/Research/OkanoharaTransport.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.OkanoharaTransport"
+      ]
+    },
+    {
+      "from": "main:lean/Research/FiniteMarkovTransport.lean",
+      "to": "main:lean/Research/OkanoharaTransport.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curvatureTwoStepMinCost",
+        "leftCurvatureResponse",
+        "requiredAction",
+        "requiredInput",
+        "rightCurvatureResponse",
+        "wellCurvatureResponse",
+        "wellStiffness"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OkanoharaTransport.lean",
+      "to": "main:lean/Elastica/Examples.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Elastica.Examples"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OkanoharaTransport.lean",
+      "to": "main:lean/Elastica/Examples.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "energy_affine"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OkanoharaTransport.lean",
+      "to": "main:lean/Elastica/ExponentialWeight.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Elastica.ExponentialWeight"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OkanoharaTransport.lean",
+      "to": "main:lean/Elastica/ExponentialWeight.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "exp_neg_mul_le_exp_neg_mul_iff",
+        "exponentialWeight"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SphereClock.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Elastica.Geometry"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SphereClock.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.xCoord",
+        "Elastica.xCoord_affine",
+        "Elastica.yCoord",
+        "Elastica.yCoord_affine"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SphereClock.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "xCoord_affine",
+        "yCoord_affine"
+      ]
+    },
+    {
+      "from": "main:lean/SelfRewritingObserverExtensions.lean",
+      "to": "main:lean/SelfRewritingObserver.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "SelfRewritingObserver"
+      ]
+    },
+    {
+      "from": "main:lean/SelfRewritingObserverExtensions.lean",
+      "to": "main:lean/SelfRewritingObserver.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "wordEq_iff_signature"
+      ]
+    },
+    {
+      "from": "main:lean/TwoMotionEmissionConsequences.lean",
+      "to": "main:lean/TwoMotionEmission.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "TwoMotionEmission"
+      ]
+    },
+    {
+      "from": "main:lean/TwoMotionEmissionConsequences.lean",
+      "to": "main:lean/TwoMotionEmission.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "emitted_pos_iff",
+        "forceAlong",
+        "forceAlong_continuousOn",
+        "leftWave_space",
+        "leftWave_time",
+        "rightWave_space",
+        "rightWave_time"
+      ]
+    },
+    {
+      "from": "main:lean/TwoMotionEmissionIVP.lean",
+      "to": "main:lean/TwoMotionEmission.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "forceAlong"
+      ]
+    },
+    {
+      "from": "main:lean/TwoMotionEmissionIVP.lean",
+      "to": "main:lean/TwoMotionEmissionConsequences.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "TwoMotionEmissionConsequences"
+      ]
+    },
+    {
+      "from": "main:lean/TwoMotionEmissionIVP.lean",
+      "to": "main:lean/TwoMotionEmissionConsequences.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "emitted_pos_iff_product_nonzero"
+      ]
+    },
+    {
+      "from": "main:lean/TwoWavelengthPhase.lean",
+      "to": "main:lean/FluidPrismPhaseMemory.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "FluidPrismPhaseMemory"
+      ]
+    },
+    {
+      "from": "main:lean/TwoWavelengthPhase.lean",
+      "to": "main:lean/FluidPrismPhaseMemory.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "calibrated_phase",
+        "opticalPhase",
+        "port_false",
+        "port_period_four"
+      ]
+    },
+    {
+      "from": "main:lean/TwoWavelengthRecovery.lean",
+      "to": "main:lean/TwoWavelengthPhase.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "TwoWavelengthPhase"
+      ]
+    },
+    {
+      "from": "main:lean/TwoWavelengthRecovery.lean",
+      "to": "main:lean/TwoWavelengthPhase.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "idealObservation",
+        "ratioPhase",
+        "secondPort"
+      ]
+    },
+    {
+      "from": "main:lean/TwoWavelengthSeparation.lean",
+      "to": "main:lean/TwoWavelengthPhase.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "TwoWavelengthPhase"
+      ]
+    },
+    {
+      "from": "main:lean/TwoWavelengthSeparation.lean",
+      "to": "main:lean/TwoWavelengthPhase.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "fiveHeight",
+        "five_height_readout",
+        "idealObservation",
+        "observation",
+        "ratioPhase"
       ]
     },
     {
@@ -7233,6 +9473,37 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/SemanticIntervalNecessity.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "OldInvariant",
+        "invariant_old_word"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "reassignActions"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CoupledConsequences.inc",
       "to": "main:linear_input/lean_check/CoupledTrajectory.inc",
       "kind": "qualified_reference",
@@ -7474,6 +9745,45 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "to": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputJoinContexts.StableJoin",
+        "LinearInputJoinContexts.attach",
+        "LinearInputJoinContexts.attach_encode",
+        "LinearInputJoinContexts.encode",
+        "LinearInputJoinContexts.encode_iff",
+        "LinearInputJoinContexts.readout",
+        "LinearInputJoinContexts.readout_encode",
+        "LinearInputJoinContexts.stable_iff_old_attach_exists"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "to": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "StableJoin",
+        "attach_encode",
+        "encode_iff",
+        "stable_iff_old_attach_exists"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.State",
+        "LinearInputOperatorWords.WordEq",
+        "LinearInputOperatorWords.encode",
+        "LinearInputOperatorWords.encode_eq_iff",
+        "LinearInputOperatorWords.run",
+        "LinearInputOperatorWords.word_now"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/EWFSFenchel.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -7522,6 +9832,253 @@
       "symbols": [
         "future_refl",
         "predictive_kernel_sub"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature",
+        "Elastica.signed_curvature_eq_deriv",
+        "Elastica.xCoord",
+        "Elastica.yCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signed_curvature_eq_deriv"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "to": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "angle_smooth",
+        "curvature_one",
+        "curvature_two",
+        "curvature_zero",
+        "hasDeriv_f"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature_affine",
+        "Elastica.signed_curvature_eq_deriv",
+        "Elastica.unit_speed_squared",
+        "Elastica.xCoord_const"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curvature_affine",
+        "signed_curvature_eq_deriv",
+        "unit_speed_squared",
+        "xCoord_const"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curve_split",
+        "fresh_separates",
+        "old_cannot_separate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "coordinates_injective",
+        "same_coordinates_same_curvature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "exact_represented_realization",
+        "represented_curve_energy"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "fixed_boundary_quotient_splits",
+        "represented_curve_split",
+        "unit_speed"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputElasticaOperatorBridge.elastica_quotient_splits",
+        "LinearInputElasticaOperatorBridge.new_distinguishes",
+        "LinearInputElasticaOperatorBridge.observer_one",
+        "LinearInputElasticaOperatorBridge.observer_three",
+        "LinearInputElasticaOperatorBridge.observer_two",
+        "LinearInputElasticaOperatorBridge.observer_zero",
+        "LinearInputElasticaOperatorBridge.old_indistinguishable"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "elastica_quotient_splits",
+        "new_distinguishes",
+        "observer_one",
+        "observer_three",
+        "observer_two",
+        "observer_zero"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
+      "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorRefinement.strict_refinement_splits_quotient"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature",
+        "Elastica.xCoord",
+        "Elastica.yCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "to": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentedCurve",
+        "curveFresh",
+        "curveObserver",
+        "hasDeriv_f",
+        "quadraticBending",
+        "quadratic_bending_equal",
+        "represented_curve_boundary",
+        "represented_curve_smooth",
+        "represented_curve_split",
+        "represented_unit_speed"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorRefinement.forget",
+        "LinearInputOperatorRefinement.sumStep"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryEnergy.lean",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.State"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature",
+        "Elastica.unit_speed_squared",
+        "Elastica.xCoord",
+        "Elastica.yCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unit_speed_squared"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "witnessFresh"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "representation_word_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature",
+        "Elastica.xCoord",
+        "Elastica.xCoord_const"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "xCoord_const"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaUnifiedOperatorAdapter.lean",
+      "to": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.ElasticaObservationQuotient"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaUnifiedOperatorAdapter.lean",
+      "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorRefinement.forget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ElasticaUnifiedOperatorAdapter.lean",
+      "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "witnessFresh"
       ]
     },
     {
@@ -8602,6 +11159,24 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.State",
+        "LinearInputOperatorWords.encode",
+        "LinearInputOperatorWords.encode_eq_iff"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "word_trans"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/LevelConvergence.inc",
       "to": "main:linear_input/lean_check/Coercivity.inc",
       "kind": "unique_identifier_candidate",
@@ -8665,6 +11240,34 @@
       "symbols": [
         "energy_gradient_identity",
         "reduced_energy_bound"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputTemporalExtinction.flip"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved"
       ]
     },
     {
@@ -8808,6 +11411,23 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/MonoEyeComposition.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.word_now"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ObservableRigidPoint.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Idempotent",
+        "fixed_iff_in_range"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/ObservationRetractionPolarity.inc",
       "to": "main:linear_input/lean_check/ComplementaryPencilRecovery.inc",
       "kind": "qualified_reference",
@@ -8875,7 +11495,6 @@
       "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "encode_eq_iff",
         "respects_implies_now_complete"
       ]
     },
@@ -8884,8 +11503,40 @@
       "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "base_cannot_distinguish",
-        "encode_eq_iff"
+        "base_cannot_distinguish"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PilotComparisonBridge.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0.Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PilotComparisonBridge.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PilotComparisonBridge.inc",
+      "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0Descent.Descends",
+        "LinearInputF0Descent.identity_descends"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PilotComparisonBridge.inc",
+      "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "identity_descends"
       ]
     },
     {
@@ -9076,6 +11727,65 @@
         "quartic_support_iff_input_and_margin",
         "strict_quartic_support_of_margin_pos",
         "unique_minimum_iff_strict_support"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0FutureMinimality.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0FutureMinimality.descends_iff_future_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0FutureMinimality.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "descends_iff_future_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0.Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0Retractions.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Idempotent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF0Descent.Descends",
+        "LinearInputF0Descent.RespectsFibers",
+        "LinearInputF0Descent.descends_iff_respects"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RespectsFibers",
+        "descends_iff_respects"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/FutureObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputFutureObservation.FutureEq"
       ]
     },
     {
@@ -9452,6 +12162,25 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chooseTarget",
+        "chooseTarget_sound"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "SnapshotPreserves",
+        "moving_history_cannot_embed_in_stationary_history"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/TemporalSampling.inc",
       "to": "main:linear_input/lean_check/EWFSFenchel.inc",
       "kind": "unique_identifier_candidate",
@@ -9775,12 +12504,198 @@
       ]
     },
     {
+      "from": "pr65:linear_input/lean_check/HistoryNonpreservation.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "PostRepairSnapshot",
+        "SnapshotPreserves",
+        "adjoinOldHistory",
+        "adjoining_old_history_restores_embedding",
+        "expandedHistory",
+        "expandedReadout",
+        "expanded_but_not_preserved",
+        "expanded_has_more_observable_labels",
+        "expanded_has_more_states",
+        "expanded_history_irreparable_by_internal_action",
+        "expanded_history_irreparable_by_transition_rewrite",
+        "extension_can_represent_both_histories",
+        "missing_label_blocks_all_internal_repairs",
+        "missing_label_blocks_any_transition_rewrite",
+        "missing_label_blocks_preservation",
+        "moving_history_cannot_embed_in_stationary_history",
+        "originalHistory",
+        "originalReadout",
+        "original_label_disappears",
+        "preserves_iff_one_step_observation_of_injective",
+        "preserves_implies_snapshot",
+        "preserves_refl",
+        "preserves_trans",
+        "snapshots_can_be_embedded",
+        "stationaryHistory",
+        "togglingHistory",
+        "toggling_history_cannot_be_preserved"
+      ]
+    },
+    {
       "from": "pr66:linear_input/lean_check/TemporalLocalExtinction.inc",
       "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "chooseTarget",
         "chooseTarget_sound"
+      ]
+    },
+    {
+      "from": "pr66:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "SnapshotPreserves",
+        "moving_history_cannot_embed_in_stationary_history"
+      ]
+    },
+    {
+      "from": "pr66:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "chooseTarget_none_of_all_disabled",
+        "extinct_step_identity",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "extinction_survives_reassignment",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "preservation_iff_old_stationary_under_extinction",
+        "reactivated",
+        "reactivated_step_two",
+        "reactivation_can_restore_preservation",
+        "reassignActions",
+        "recoveredAfterGap",
+        "recovered_endpoints_but_broken_interval",
+        "recovered_endpoints_preserve_history",
+        "recovered_interval_still_not_preserved",
+        "recovered_middle_extinct",
+        "recovered_step_three",
+        "recovered_step_zero",
+        "sampleAvailable",
+        "sample_extinct_after_two",
+        "sample_first_local_disappears",
+        "sample_history_preserved_after_one_local_disappears",
+        "sample_no_interval_preservation",
+        "sample_no_local_action_rewrite_restores_history",
+        "sample_no_preservation_after_two",
+        "sample_old_history_moves",
+        "sample_second_local_takes_over",
+        "sample_snapshots_always_preserved",
+        "sample_step_one",
+        "sample_step_zero"
+      ]
+    },
+    {
+      "from": "pr67:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
+      ]
+    },
+    {
+      "from": "pr67:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "allSupported",
+        "allSupported_iff_covers",
+        "bool_and_true_iff",
+        "bounded_capacity_blocks_global_cover",
+        "bounded_capacity_disables_each_local",
+        "capacityTimeline",
+        "capacity_overload_forces_history_loss",
+        "capacity_overload_forces_total_extinction",
+        "coverage_antitone",
+        "finite_actions_do_not_commute",
+        "increasingDemands",
+        "noncoverage_persists_under_demand_growth",
+        "overload_causes_interval_failure",
+        "overload_causes_nonpreservation",
+        "overload_initially_operates",
+        "overload_later_every_local_extinct",
+        "overload_old_history_moves",
+        "overloadedTimeline",
+        "overloaded_snapshots_survive",
+        "permanentTimeline",
+        "permanent_has_available_local",
+        "permanent_history_is_preserved",
+        "supportsOthers",
+        "supportsOthers_exact_capacity",
+        "supportsOthers_no_global_cover",
+        "supportsOthers_pairwise_cover"
+      ]
+    },
+    {
+      "from": "pr67:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputTemporalExtinction.flip"
+      ]
+    },
+    {
+      "from": "pr67:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved"
+      ]
+    },
+    {
+      "from": "pr69:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "CollectiveCoverage",
+        "JointlyReachable",
+        "collective_coverage_does_not_glue",
+        "cumulative",
+        "cumulative_jointly_reachable",
+        "cumulative_later_not_totally_extinct",
+        "cumulative_primitives_commute",
+        "cumulative_two_steps_reach_joint_goal",
+        "cumulative_valid_two_time_steps",
+        "destructive",
+        "destructive_every_primitive_misses_goal",
+        "destructive_history_not_preserved",
+        "destructive_individual_coverage",
+        "destructive_initially_moves",
+        "destructive_interval_not_preserved",
+        "destructive_later_extinct",
+        "destructive_no_action_rewrite_repairs_history",
+        "destructive_no_joint_word",
+        "destructive_noncommuting",
+        "destructive_old_invariant",
+        "destructive_snapshots_still_preserved",
+        "gatedTimeline",
+        "gated_extinction_iff_no_joint_action",
+        "goalFlag_false_iff_not_joint",
+        "goal_incompatibility_forces_history_loss"
+      ]
+    },
+    {
+      "from": "pr69:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
       ]
     },
     {
@@ -9793,11 +12708,117 @@
       ]
     },
     {
+      "from": "pr69:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "reassignActions"
+      ]
+    },
+    {
+      "from": "pr70:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "collective_coverage_does_not_glue",
+        "cumulative",
+        "destructive"
+      ]
+    },
+    {
+      "from": "pr70:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/MonoEyeComposition.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pairReadout"
+      ]
+    },
+    {
       "from": "pr71:linear_input/lean_check/ParallelLocalGluing.inc",
       "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "chooseTarget"
+      ]
+    },
+    {
+      "from": "pr71:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCapacityExtinction.bool_and_true_iff"
+      ]
+    },
+    {
+      "from": "pr71:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bool_and_true_iff"
+      ]
+    },
+    {
+      "from": "pr71:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputTemporalExtinction.flip"
+      ]
+    },
+    {
+      "from": "pr71:linear_input/lean_check/ParallelLocalGluing.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "extinction_forces_nonpreservation"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "CollectiveCoverage",
+        "JointlyReachable",
+        "collective_coverage_does_not_glue",
+        "cumulative",
+        "cumulative_jointly_reachable",
+        "cumulative_later_not_totally_extinct",
+        "cumulative_primitives_commute",
+        "cumulative_two_steps_reach_joint_goal",
+        "cumulative_valid_two_time_steps",
+        "destructive",
+        "destructive_every_primitive_misses_goal",
+        "destructive_history_not_preserved",
+        "destructive_individual_coverage",
+        "destructive_initially_moves",
+        "destructive_interval_not_preserved",
+        "destructive_later_extinct",
+        "destructive_no_action_rewrite_repairs_history",
+        "destructive_no_joint_word",
+        "destructive_noncommuting",
+        "destructive_old_invariant",
+        "destructive_snapshots_still_preserved",
+        "gatedTimeline",
+        "gated_extinction_iff_no_joint_action",
+        "goalFlag_false_iff_not_joint",
+        "goal_incompatibility_forces_history_loss"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
       ]
     },
     {
@@ -9810,11 +12831,139 @@
       ]
     },
     {
+      "from": "pr72:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "reassignActions"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/HistoryNonpreservation.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "PostRepairSnapshot",
+        "SnapshotPreserves",
+        "adjoinOldHistory",
+        "adjoining_old_history_restores_embedding",
+        "expandedHistory",
+        "expandedReadout",
+        "expanded_but_not_preserved",
+        "expanded_has_more_observable_labels",
+        "expanded_has_more_states",
+        "expanded_history_irreparable_by_internal_action",
+        "expanded_history_irreparable_by_transition_rewrite",
+        "extension_can_represent_both_histories",
+        "missing_label_blocks_all_internal_repairs",
+        "missing_label_blocks_any_transition_rewrite",
+        "missing_label_blocks_preservation",
+        "moving_history_cannot_embed_in_stationary_history",
+        "originalHistory",
+        "originalReadout",
+        "original_label_disappears",
+        "preserves_iff_one_step_observation_of_injective",
+        "preserves_implies_snapshot",
+        "preserves_refl",
+        "preserves_trans",
+        "snapshots_can_be_embedded",
+        "stationaryHistory",
+        "togglingHistory",
+        "toggling_history_cannot_be_preserved"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "allSupported",
+        "allSupported_iff_covers",
+        "bool_and_true_iff",
+        "bounded_capacity_blocks_global_cover",
+        "bounded_capacity_disables_each_local",
+        "capacityTimeline",
+        "capacity_overload_forces_history_loss",
+        "capacity_overload_forces_total_extinction",
+        "coverage_antitone",
+        "finite_actions_do_not_commute",
+        "increasingDemands",
+        "noncoverage_persists_under_demand_growth",
+        "overload_causes_interval_failure",
+        "overload_causes_nonpreservation",
+        "overload_initially_operates",
+        "overload_later_every_local_extinct",
+        "overload_old_history_moves",
+        "overloadedTimeline",
+        "overloaded_snapshots_survive",
+        "permanentTimeline",
+        "permanent_has_available_local",
+        "permanent_history_is_preserved",
+        "supportsOthers",
+        "supportsOthers_exact_capacity",
+        "supportsOthers_no_global_cover",
+        "supportsOthers_pairwise_cover"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved"
+      ]
+    },
+    {
       "from": "pr72:linear_input/lean_check/LocalCapacityIncompatibility.inc",
       "to": "pr72:linear_input/lean_check/TemporalLocalExtinction.inc",
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputTemporalExtinction.flip"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "to": "main:linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "EvenCycleEdge",
+        "GloballyFeasible",
+        "IndividuallyFeasible",
+        "OddCycleEdge",
+        "PairwiseFeasible",
+        "even_cycle_globally_feasible",
+        "even_cycle_pairwise_feasible",
+        "every_two_compatible_but_three_incompatible",
+        "global_gluing_iff_one_common_witness",
+        "global_implies_individual",
+        "global_implies_pairwise",
+        "individual_does_not_imply_pairwise",
+        "odd_cycle_each_locally_possible",
+        "odd_cycle_not_globally_feasible",
+        "odd_cycle_pairwise_feasible",
+        "opposing_individually_feasible",
+        "opposing_not_pairwise",
+        "pairwise_feasibility_does_not_imply_global",
+        "pairwise_implies_individual"
       ]
     },
     {
@@ -9827,12 +12976,204 @@
       ]
     },
     {
+      "from": "pr72:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "SnapshotPreserves",
+        "moving_history_cannot_embed_in_stationary_history"
+      ]
+    },
+    {
+      "from": "pr72:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "chooseTarget_none_of_all_disabled",
+        "extinct_step_identity",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "extinction_survives_reassignment",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "preservation_iff_old_stationary_under_extinction",
+        "reactivated",
+        "reactivated_step_two",
+        "reactivation_can_restore_preservation",
+        "reassignActions",
+        "recoveredAfterGap",
+        "recovered_endpoints_but_broken_interval",
+        "recovered_endpoints_preserve_history",
+        "recovered_interval_still_not_preserved",
+        "recovered_middle_extinct",
+        "recovered_step_three",
+        "recovered_step_zero",
+        "sampleAvailable",
+        "sample_extinct_after_two",
+        "sample_first_local_disappears",
+        "sample_history_preserved_after_one_local_disappears",
+        "sample_no_interval_preservation",
+        "sample_no_local_action_rewrite_restores_history",
+        "sample_no_preservation_after_two",
+        "sample_old_history_moves",
+        "sample_second_local_takes_over",
+        "sample_snapshots_always_preserved",
+        "sample_step_one",
+        "sample_step_zero"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "CollectiveCoverage",
+        "JointlyReachable",
+        "collective_coverage_does_not_glue",
+        "cumulative",
+        "cumulative_jointly_reachable",
+        "cumulative_later_not_totally_extinct",
+        "cumulative_primitives_commute",
+        "cumulative_two_steps_reach_joint_goal",
+        "cumulative_valid_two_time_steps",
+        "destructive",
+        "destructive_every_primitive_misses_goal",
+        "destructive_history_not_preserved",
+        "destructive_individual_coverage",
+        "destructive_initially_moves",
+        "destructive_interval_not_preserved",
+        "destructive_later_extinct",
+        "destructive_no_action_rewrite_repairs_history",
+        "destructive_no_joint_word",
+        "destructive_noncommuting",
+        "destructive_old_invariant",
+        "destructive_snapshots_still_preserved",
+        "gatedTimeline",
+        "gated_extinction_iff_no_joint_action",
+        "goalFlag_false_iff_not_joint",
+        "goal_incompatibility_forces_history_loss"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
+      ]
+    },
+    {
       "from": "pr75:linear_input/lean_check/CooperativeGluingObstruction.inc",
       "to": "main:linear_input/lean_check/SemanticIntervalNecessity.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "OldInvariant",
         "invariant_old_word"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "reassignActions"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/HistoryNonpreservation.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "PostRepairSnapshot",
+        "SnapshotPreserves",
+        "adjoinOldHistory",
+        "adjoining_old_history_restores_embedding",
+        "expandedHistory",
+        "expandedReadout",
+        "expanded_but_not_preserved",
+        "expanded_has_more_observable_labels",
+        "expanded_has_more_states",
+        "expanded_history_irreparable_by_internal_action",
+        "expanded_history_irreparable_by_transition_rewrite",
+        "extension_can_represent_both_histories",
+        "missing_label_blocks_all_internal_repairs",
+        "missing_label_blocks_any_transition_rewrite",
+        "missing_label_blocks_preservation",
+        "moving_history_cannot_embed_in_stationary_history",
+        "originalHistory",
+        "originalReadout",
+        "original_label_disappears",
+        "preserves_iff_one_step_observation_of_injective",
+        "preserves_implies_snapshot",
+        "preserves_refl",
+        "preserves_trans",
+        "snapshots_can_be_embedded",
+        "stationaryHistory",
+        "togglingHistory",
+        "toggling_history_cannot_be_preserved"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SnapshotPreserves"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "allSupported",
+        "allSupported_iff_covers",
+        "bool_and_true_iff",
+        "bounded_capacity_blocks_global_cover",
+        "bounded_capacity_disables_each_local",
+        "capacityTimeline",
+        "capacity_overload_forces_history_loss",
+        "capacity_overload_forces_total_extinction",
+        "coverage_antitone",
+        "finite_actions_do_not_commute",
+        "increasingDemands",
+        "noncoverage_persists_under_demand_growth",
+        "overload_causes_interval_failure",
+        "overload_causes_nonpreservation",
+        "overload_initially_operates",
+        "overload_later_every_local_extinct",
+        "overload_old_history_moves",
+        "overloadedTimeline",
+        "overloaded_snapshots_survive",
+        "permanentTimeline",
+        "permanent_has_available_local",
+        "permanent_history_is_preserved",
+        "supportsOthers",
+        "supportsOthers_exact_capacity",
+        "supportsOthers_no_global_cover",
+        "supportsOthers_pairwise_cover"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/LocalCapacityIncompatibility.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "extinction_forces_nonpreservation",
+        "interval_with_extinct_endpoint_is_not_preserved"
       ]
     },
     {
@@ -9844,12 +13185,88 @@
       ]
     },
     {
+      "from": "pr75:linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "to": "main:linear_input/lean_check/RelationalOddCycleGluing.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "EvenCycleEdge",
+        "GloballyFeasible",
+        "IndividuallyFeasible",
+        "OddCycleEdge",
+        "PairwiseFeasible",
+        "even_cycle_globally_feasible",
+        "even_cycle_pairwise_feasible",
+        "every_two_compatible_but_three_incompatible",
+        "global_gluing_iff_one_common_witness",
+        "global_implies_individual",
+        "global_implies_pairwise",
+        "individual_does_not_imply_pairwise",
+        "odd_cycle_each_locally_possible",
+        "odd_cycle_not_globally_feasible",
+        "odd_cycle_pairwise_feasible",
+        "opposing_individually_feasible",
+        "opposing_not_pairwise",
+        "pairwise_feasibility_does_not_imply_global",
+        "pairwise_implies_individual"
+      ]
+    },
+    {
       "from": "pr75:linear_input/lean_check/TemporalLocalExtinction.inc",
       "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "chooseTarget",
         "chooseTarget_sound"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/HistoryNonpreservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HistoryModel",
+        "SnapshotPreserves",
+        "moving_history_cannot_embed_in_stationary_history"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "AllExtinct",
+        "LocalTimeline",
+        "PreservedOn",
+        "chooseTarget_none_of_all_disabled",
+        "extinct_step_identity",
+        "extinction_blocks_every_local_action_rewrite",
+        "extinction_forces_nonpreservation",
+        "extinction_survives_reassignment",
+        "interval_with_extinct_endpoint_is_not_preserved",
+        "preservation_iff_old_stationary_under_extinction",
+        "reactivated",
+        "reactivated_step_two",
+        "reactivation_can_restore_preservation",
+        "reassignActions",
+        "recoveredAfterGap",
+        "recovered_endpoints_but_broken_interval",
+        "recovered_endpoints_preserve_history",
+        "recovered_interval_still_not_preserved",
+        "recovered_middle_extinct",
+        "recovered_step_three",
+        "recovered_step_zero",
+        "sampleAvailable",
+        "sample_extinct_after_two",
+        "sample_first_local_disappears",
+        "sample_history_preserved_after_one_local_disappears",
+        "sample_no_interval_preservation",
+        "sample_no_local_action_rewrite_restores_history",
+        "sample_no_preservation_after_two",
+        "sample_old_history_moves",
+        "sample_second_local_takes_over",
+        "sample_snapshots_always_preserved",
+        "sample_step_one",
+        "sample_step_zero"
       ]
     },
     {
@@ -9912,6 +13329,31 @@
       ]
     },
     {
+      "from": "pr77:linear_input/lean_check/RadicalF0Bridge.inc",
+      "to": "main:linear_input/lean_check/RadicalF0Bridge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "future_separates_two_four",
+        "no_radical_successor_readout",
+        "primeFactors_four",
+        "radical_eq_product",
+        "radical_eq_zero_iff",
+        "radical_four",
+        "radical_idempotent",
+        "radical_kernel_iff",
+        "radical_ne_zero",
+        "radical_not_complete_predictive_state",
+        "radical_of_prime",
+        "radical_primeFactors",
+        "radical_zero",
+        "squarefree_fixed",
+        "successor_not_descending",
+        "successor_not_fiber_respecting",
+        "successors_distinguished",
+        "two_four_same_radical"
+      ]
+    },
+    {
       "from": "pr78:linear_input/lean_check/PilotComparisonBridge.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -9942,6 +13384,77 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "identity_descends"
+      ]
+    },
+    {
+      "from": "pr78:linear_input/lean_check/PilotComparisonBridge.inc",
+      "to": "main:linear_input/lean_check/PilotComparisonBridge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ChoiceValues",
+        "FiberInvariant",
+        "FiberTargets",
+        "choiceOutput",
+        "choice_range_can_cover_nonconstant_fiber",
+        "choice_range_not_single_valued",
+        "constantForget",
+        "constant_forget_idempotent",
+        "distinctTarget",
+        "ell7_larger_container_witness",
+        "ell7_small_container_obstruction",
+        "f0_descent_does_not_force_wall",
+        "factorization_iff_fiber_invariant",
+        "log_wall_iff_bound",
+        "reachable_choice_independent_implies_fiber_invariant",
+        "reachable_iff_fiber_covered",
+        "reachable_of_factor_and_witness",
+        "scaled_pilot_witness_iff",
+        "truncatedVolume",
+        "truncated_complete",
+        "truncated_upper"
+      ]
+    },
+    {
+      "from": "pr78:linear_input/lean_check/PilotHullInflation.inc",
+      "to": "main:linear_input/lean_check/PilotHullInflation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "hull_area_ge_left",
+        "hull_area_ge_right",
+        "square_orbit_no_inflation",
+        "swap_involutive",
+        "swap_preserves_area",
+        "volume_preserving_hull_can_inflate",
+        "witness_equal_areas",
+        "witness_hull_area_is_four",
+        "witness_individual_area_is_two"
+      ]
+    },
+    {
+      "from": "pr78:linear_input/lean_check/PilotHullStability.inc",
+      "to": "main:linear_input/lean_check/PilotHullStability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "escaping_image_blocks_hull_equality",
+        "hull_orbit_volume_ge",
+        "orbitUnion",
+        "orbit_hull_eq_iff_each_image_stable",
+        "original_subset_orbit",
+        "stable_images_give_zero_volume_gap"
+      ]
+    },
+    {
+      "from": "pr78:linear_input/lean_check/PilotVolumeTransport.inc",
+      "to": "main:linear_input/lean_check/PilotVolumeTransport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bounded_shift_cannot_bridge_gap",
+        "bounded_shift_forces_budget",
+        "neutral_transport_wall_iff",
+        "packet_budget_suffices",
+        "packet_budget_yields_wall",
+        "packet_wall_iff_total_bound",
+        "shifted_wall_iff"
       ]
     }
   ],
@@ -10024,10 +13537,12 @@
     "linear_input/lean_check/FutureObservations.inc",
     "linear_input/lean_check/FutureFiniteHorizon.inc",
     "linear_input/lean_check/OperatorWordObservations.inc",
+    "linear_input/lean_check/MonoEyeComposition.inc",
     "linear_input/lean_check/OperatorBisimulation.inc",
     "linear_input/lean_check/OperatorVocabularyRefinement.inc",
     "linear_input/lean_check/OperatorFiniteHorizon.inc",
     "linear_input/lean_check/OperatorSemanticClosure.inc",
+    "linear_input/lean_check/CrossSystemObservation.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
     "linear_input/lean_check/FiniteSelfSynthesis.inc",
     "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -10043,7 +13558,21 @@
     "linear_input/lean_check/ObservationRetractionPolarity.inc",
     "linear_input/lean_check/F0FutureMinimality.inc",
     "linear_input/lean_check/WFSProjectiveSampling.inc",
-    "linear_input/lean_check/RepresentationBridges.inc"
+    "linear_input/lean_check/RepresentationBridges.inc",
+    "linear_input/lean_check/HistoryNonpreservation.inc",
+    "linear_input/lean_check/TemporalLocalExtinction.inc",
+    "linear_input/lean_check/LocalCapacityIncompatibility.inc",
+    "linear_input/lean_check/CooperativeGluingObstruction.inc",
+    "linear_input/lean_check/RelationalOddCycleGluing.inc",
+    "linear_input/lean_check/JoinContextualEquivalence.inc",
+    "linear_input/lean_check/CurveLetterContextualEquivalence.inc",
+    "linear_input/lean_check/RadicalF0Bridge.inc",
+    "linear_input/lean_check/PilotComparisonBridge.inc",
+    "linear_input/lean_check/PilotVolumeTransport.inc",
+    "linear_input/lean_check/PilotHullInflation.inc",
+    "linear_input/lean_check/PilotHullStability.inc",
+    "linear_input/lean_check/ElasticaOperatorBridge.inc",
+    "linear_input/lean_check/ObservableRigidPoint.inc"
   ],
   "prs": [
     {
