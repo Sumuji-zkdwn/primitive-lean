@@ -1,0 +1,33 @@
+{
+ "proved_equal": 0,
+ "attempted": 3,
+ "skipped_private": 2,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputChebyshevAutomorphisms.Aut",
+   "initial": "LinearInputCoupledTrajectory.State",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputChebyshevAutomorphisms.E",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputChebyshevSplitting.E",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputChebyshevAutomorphisms.E",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputChebyshevSplitting.E",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

@@ -1,0 +1,132 @@
+{
+ "proved_equal": 0,
+ "attempted": 18,
+ "skipped_private": 8,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "Elastica.FiberState",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.Control",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.ExtendedState",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.History",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.PastOperation",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.Position",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.TransportPlan",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.HistoryState",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.adaptationCost",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.readPosition",
+   "initial": "LinearInputLevelGeometry.radius",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.requiredAction",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.requiredAction",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.requiredInput",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.requiredInput",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.twoStepAction",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.twoStepAction",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.twoStepTransport",
+   "initial": "Elastica.powerLog",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "Elastica.twoStepTransport",
+   "initial": "LinearInputGradient.gy",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "Elastica.FiberState",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.Control",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.ExtendedState",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.History",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.PastOperation",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.Position",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.FiniteMarkov.TransportPlan",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "Elastica.HistoryState",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

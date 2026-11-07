@@ -34,29 +34,29 @@
     "theorems_using_main_theorem_in_proof": 8,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 8,
-     "library_only": 5
+     "library_only": 5,
+     "composite": 8
     },
     "max_proof_depth": 3,
     "most_used_main_theorems": [
+     [
+      "LinearInputF0Counting.supported_retraction_count",
+      4
+     ],
      [
       "LinearInputStrangeFixedSets.close_singleton_top_of_no_stoppers",
       4
      ],
      [
-      "LinearInputF0Counting.supported_retraction_count",
-      4
+      "LinearInputF0Counting.idempotent_rank_count",
+      2
      ],
      [
       "LinearInputStrangeFixedSets.close_singleton_top_of_all_fixed",
       2
      ],
      [
-      "LinearInputStrangeFixedSets.close_singleton_exact_fixed_set",
-      2
-     ],
-     [
-      "LinearInputStrangeFixedSets.same_fixed_in_closure",
+      "LinearInputF0Counting.idempotent_count_sum",
       2
      ]
     ],
@@ -164,12 +164,12 @@
     "status": "ok",
     "new_theorems": 71,
     "new_definitions": 29,
-    "theorems_using_main_any_edge": 49,
+    "theorems_using_main_any_edge": 0,
     "theorems_using_main_theorem_in_proof": 0,
-    "theorems_reaching_initial": 49,
+    "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 17,
-     "composite": 46,
+     "library_only": 15,
+     "composite": 48,
      "decision_procedure_only": 8
     },
     "max_proof_depth": 7,
@@ -312,19 +312,23 @@
     "status": "ok",
     "new_theorems": 17,
     "new_definitions": 2,
-    "theorems_using_main_any_edge": 16,
+    "theorems_using_main_any_edge": 4,
     "theorems_using_main_theorem_in_proof": 3,
-    "theorems_reaching_initial": 15,
+    "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 12,
      "composite": 3,
-     "decision_procedure_only": 1,
-     "application_of_earlier_theorem": 1
+     "library_only": 12,
+     "application_of_earlier_theorem": 1,
+     "decision_procedure_only": 1
     },
     "max_proof_depth": 7,
     "most_used_main_theorems": [
      [
-      "LinearInputF16Rank.realPencil_rank",
+      "LinearInputF16Rank.factor_minus",
+      2
+     ],
+     [
+      "LinearInputF16Rank.unmix_at",
       2
      ],
      [
@@ -336,11 +340,7 @@
       2
      ],
      [
-      "LinearInputF16Rank.real_twiceIdentity_rank",
-      2
-     ],
-     [
-      "LinearInputF16Rank.factor_plus",
+      "LinearInputF16Rank.realPencil_rank",
       2
      ]
     ],
@@ -401,19 +401,23 @@
     "status": "ok",
     "new_theorems": 28,
     "new_definitions": 7,
-    "theorems_using_main_any_edge": 27,
+    "theorems_using_main_any_edge": 15,
     "theorems_using_main_theorem_in_proof": 4,
-    "theorems_reaching_initial": 25,
+    "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 15,
      "composite": 10,
-     "decision_procedure_only": 1,
-     "application_of_earlier_theorem": 2
+     "library_only": 15,
+     "application_of_earlier_theorem": 2,
+     "decision_procedure_only": 1
     },
     "max_proof_depth": 7,
     "most_used_main_theorems": [
      [
-      "LinearInputF16Rank.realPencil_rank",
+      "LinearInputF16Rank.factor_minus",
+      3
+     ],
+     [
+      "LinearInputF16Rank.unmix_at",
       3
      ],
      [
@@ -425,11 +429,7 @@
       3
      ],
      [
-      "LinearInputF16Rank.real_twiceIdentity_rank",
-      3
-     ],
-     [
-      "LinearInputF16Rank.factor_plus",
+      "LinearInputF16Rank.realPencil_rank",
       3
      ]
     ],
@@ -575,13 +575,13 @@
     "status": "ok",
     "new_theorems": 33,
     "new_definitions": 13,
-    "theorems_using_main_any_edge": 7,
+    "theorems_using_main_any_edge": 0,
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 14,
      "library_only": 9,
-     "decision_procedure_only": 10
+     "decision_procedure_only": 10,
+     "composite": 14
     },
     "max_proof_depth": 4,
     "most_used_main_theorems": [],
@@ -675,12 +675,12 @@
     "status": "ok",
     "new_theorems": 14,
     "new_definitions": 4,
-    "theorems_using_main_any_edge": 14,
+    "theorems_using_main_any_edge": 11,
     "theorems_using_main_theorem_in_proof": 6,
-    "theorems_reaching_initial": 13,
+    "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 9,
      "decision_procedure_only": 2,
+     "composite": 9,
      "library_only": 3
     },
     "max_proof_depth": 2,
@@ -757,14 +757,14 @@
     "status": "ok",
     "new_theorems": 37,
     "new_definitions": 15,
-    "theorems_using_main_any_edge": 26,
+    "theorems_using_main_any_edge": 12,
     "theorems_using_main_theorem_in_proof": 8,
     "theorems_reaching_initial": 0,
     "shapes": {
      "decision_procedure_only": 6,
-     "library_only": 13,
+     "application_of_earlier_theorem": 3,
      "composite": 15,
-     "application_of_earlier_theorem": 3
+     "library_only": 13
     },
     "max_proof_depth": 4,
     "most_used_main_theorems": [
@@ -878,14 +878,14 @@
     "status": "ok",
     "new_theorems": 27,
     "new_definitions": 10,
-    "theorems_using_main_any_edge": 3,
+    "theorems_using_main_any_edge": 2,
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
      "composite": 14,
      "decision_procedure_only": 2,
-     "library_only": 7,
-     "application_of_earlier_theorem": 4
+     "application_of_earlier_theorem": 4,
+     "library_only": 7
     },
     "max_proof_depth": 4,
     "most_used_main_theorems": [],
@@ -962,9 +962,9 @@
     "status": "ok",
     "new_theorems": 6,
     "new_definitions": 8,
-    "theorems_using_main_any_edge": 3,
+    "theorems_using_main_any_edge": 0,
     "theorems_using_main_theorem_in_proof": 0,
-    "theorems_reaching_initial": 3,
+    "theorems_reaching_initial": 0,
     "shapes": {
      "library_only": 5,
      "composite": 1
@@ -1033,12 +1033,12 @@
     "status": "ok",
     "new_theorems": 16,
     "new_definitions": 4,
-    "theorems_using_main_any_edge": 3,
+    "theorems_using_main_any_edge": 0,
     "theorems_using_main_theorem_in_proof": 0,
-    "theorems_reaching_initial": 3,
+    "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 8,
-     "library_only": 8
+     "library_only": 8,
+     "composite": 8
     },
     "max_proof_depth": 3,
     "most_used_main_theorems": [],
@@ -1107,9 +1107,9 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
+     "composite": 18,
      "library_only": 11,
-     "decision_procedure_only": 2,
-     "composite": 18
+     "decision_procedure_only": 2
     },
     "max_proof_depth": 3,
     "most_used_main_theorems": [],
@@ -1283,9 +1283,9 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "decision_procedure_only": 3,
+     "composite": 3,
      "library_only": 8,
-     "composite": 3
+     "decision_procedure_only": 3
     },
     "max_proof_depth": 1,
     "most_used_main_theorems": [],
@@ -1490,8 +1490,8 @@
     "theorems_reaching_initial": 0,
     "shapes": {
      "composite": 4,
-     "application_of_earlier_theorem": 2,
-     "decision_procedure_only": 4
+     "decision_procedure_only": 4,
+     "application_of_earlier_theorem": 2
     },
     "max_proof_depth": 5,
     "most_used_main_theorems": [],
@@ -1543,11 +1543,11 @@
     "new_definitions": 26,
     "theorems_using_main_any_edge": 63,
     "theorems_using_main_theorem_in_proof": 0,
-    "theorems_reaching_initial": 31,
+    "theorems_reaching_initial": 0,
     "shapes": {
      "composite": 54,
-     "library_only": 7,
-     "decision_procedure_only": 12
+     "decision_procedure_only": 12,
+     "library_only": 7
     },
     "max_proof_depth": 8,
     "most_used_main_theorems": [],
@@ -1727,10 +1727,10 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 9,
-     "library_only": 2,
      "decision_procedure_only": 9,
-     "application_of_earlier_theorem": 1
+     "composite": 9,
+     "application_of_earlier_theorem": 1,
+     "library_only": 2
     },
     "max_proof_depth": 5,
     "most_used_main_theorems": [],
@@ -1805,8 +1805,8 @@
     "shapes": {
      "decision_procedure_only": 11,
      "composite": 9,
-     "application_of_earlier_theorem": 1,
-     "library_only": 2
+     "library_only": 2,
+     "application_of_earlier_theorem": 1
     },
     "max_proof_depth": 3,
     "most_used_main_theorems": [],
@@ -1883,10 +1883,10 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 12,
      "decision_procedure_only": 4,
-     "application_of_earlier_theorem": 2,
-     "library_only": 1
+     "library_only": 1,
+     "composite": 12,
+     "application_of_earlier_theorem": 2
     },
     "max_proof_depth": 2,
     "most_used_main_theorems": [],
@@ -1949,8 +1949,8 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 8,
      "library_only": 4,
+     "composite": 8,
      "decision_procedure_only": 2
     },
     "max_proof_depth": 5,
@@ -2139,12 +2139,12 @@
     "status": "ok",
     "new_theorems": 18,
     "new_definitions": 14,
-    "theorems_using_main_any_edge": 9,
+    "theorems_using_main_any_edge": 2,
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 9,
      "composite": 6,
+     "library_only": 9,
      "decision_procedure_only": 3
     },
     "max_proof_depth": 2,
@@ -2221,12 +2221,12 @@
     "status": "ok",
     "new_theorems": 26,
     "new_definitions": 15,
-    "theorems_using_main_any_edge": 25,
+    "theorems_using_main_any_edge": 21,
     "theorems_using_main_theorem_in_proof": 11,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 12,
      "library_only": 10,
+     "composite": 12,
      "decision_procedure_only": 2,
      "application_of_earlier_theorem": 2
     },
@@ -2318,14 +2318,14 @@
     "status": "ok",
     "new_theorems": 20,
     "new_definitions": 9,
-    "theorems_using_main_any_edge": 10,
+    "theorems_using_main_any_edge": 7,
     "theorems_using_main_theorem_in_proof": 3,
     "theorems_reaching_initial": 0,
     "shapes": {
+     "library_only": 4,
      "decision_procedure_only": 7,
      "composite": 6,
-     "application_of_earlier_theorem": 3,
-     "library_only": 4
+     "application_of_earlier_theorem": 3
     },
     "max_proof_depth": 5,
     "most_used_main_theorems": [
@@ -2403,12 +2403,12 @@
     "status": "ok",
     "new_theorems": 20,
     "new_definitions": 8,
-    "theorems_using_main_any_edge": 19,
+    "theorems_using_main_any_edge": 13,
     "theorems_using_main_theorem_in_proof": 6,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 7,
      "composite": 7,
+     "library_only": 7,
      "application_of_earlier_theorem": 3,
      "decision_procedure_only": 3
     },
@@ -2491,13 +2491,13 @@
     "status": "ok",
     "new_theorems": 14,
     "new_definitions": 11,
-    "theorems_using_main_any_edge": 6,
+    "theorems_using_main_any_edge": 3,
     "theorems_using_main_theorem_in_proof": 1,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 5,
+     "decision_procedure_only": 2,
      "composite": 7,
-     "decision_procedure_only": 2
+     "library_only": 5
     },
     "max_proof_depth": 4,
     "most_used_main_theorems": [
@@ -2570,12 +2570,12 @@
     "status": "ok",
     "new_theorems": 29,
     "new_definitions": 15,
-    "theorems_using_main_any_edge": 15,
+    "theorems_using_main_any_edge": 7,
     "theorems_using_main_theorem_in_proof": 3,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 10,
      "composite": 15,
+     "library_only": 10,
      "decision_procedure_only": 4
     },
     "max_proof_depth": 5,
@@ -2672,14 +2672,14 @@
     "status": "ok",
     "new_theorems": 98,
     "new_definitions": 52,
-    "theorems_using_main_any_edge": 73,
+    "theorems_using_main_any_edge": 43,
     "theorems_using_main_theorem_in_proof": 20,
     "theorems_reaching_initial": 0,
     "shapes": {
+     "application_of_earlier_theorem": 8,
      "composite": 37,
      "library_only": 37,
-     "decision_procedure_only": 16,
-     "application_of_earlier_theorem": 8
+     "decision_procedure_only": 16
     },
     "max_proof_depth": 6,
     "most_used_main_theorems": [
@@ -2889,12 +2889,12 @@
     "status": "ok",
     "new_theorems": 98,
     "new_definitions": 52,
-    "theorems_using_main_any_edge": 73,
+    "theorems_using_main_any_edge": 43,
     "theorems_using_main_theorem_in_proof": 20,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 37,
      "library_only": 37,
+     "composite": 37,
      "decision_procedure_only": 16,
      "application_of_earlier_theorem": 8
     },
@@ -3134,8 +3134,8 @@
     "theorems_reaching_initial": 0,
     "shapes": {
      "composite": 15,
-     "decision_procedure_only": 1,
-     "library_only": 2
+     "library_only": 2,
+     "decision_procedure_only": 1
     },
     "max_proof_depth": 5,
     "most_used_main_theorems": [
@@ -3148,11 +3148,11 @@
       1
      ],
      [
-      "LinearInputF0FutureMinimality.respects_iff_future_eq",
+      "LinearInputF0FutureMinimality.descends_iff_future_eq",
       1
      ],
      [
-      "LinearInputF0FutureMinimality.descends_iff_future_eq",
+      "LinearInputF0FutureMinimality.respects_iff_future_eq",
       1
      ]
     ],
@@ -3221,7 +3221,7 @@
     "status": "ok",
     "new_theorems": 35,
     "new_definitions": 21,
-    "theorems_using_main_any_edge": 4,
+    "theorems_using_main_any_edge": 2,
     "theorems_using_main_theorem_in_proof": 1,
     "theorems_reaching_initial": 0,
     "shapes": {
@@ -3363,8 +3363,8 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 10,
-     "library_only": 16
+     "library_only": 16,
+     "composite": 10
     },
     "max_proof_depth": 2,
     "most_used_main_theorems": [],
@@ -3458,8 +3458,8 @@
     "theorems_using_main_theorem_in_proof": 5,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "composite": 12,
-     "library_only": 12
+     "library_only": 12,
+     "composite": 12
     },
     "max_proof_depth": 5,
     "most_used_main_theorems": [
@@ -3602,8 +3602,8 @@
     "theorems_using_main_theorem_in_proof": 3,
     "theorems_reaching_initial": 8,
     "shapes": {
-     "composite": 4,
-     "library_only": 4
+     "library_only": 4,
+     "composite": 4
     },
     "max_proof_depth": 2,
     "most_used_main_theorems": [
@@ -3823,8 +3823,8 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 12,
-     "composite": 11
+     "composite": 11,
+     "library_only": 12
     },
     "max_proof_depth": 3,
     "most_used_main_theorems": [],
@@ -3917,9 +3917,9 @@
     "theorems_using_main_theorem_in_proof": 9,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 16,
-     "composite": 21,
      "decision_procedure_only": 11,
+     "composite": 21,
+     "library_only": 16,
      "application_of_earlier_theorem": 2
     },
     "max_proof_depth": 4,
@@ -3929,11 +3929,11 @@
       8
      ],
      [
-      "LinearInputOperatorWords.word_step",
+      "LinearInputOperatorWords.encode_eq_iff",
       3
      ],
      [
-      "LinearInputOperatorWords.encode_eq_iff",
+      "LinearInputOperatorWords.word_step",
       3
      ]
     ],
@@ -4083,8 +4083,8 @@
     "theorems_reaching_initial": 0,
     "shapes": {
      "library_only": 23,
-     "decision_procedure_only": 4,
-     "composite": 14
+     "composite": 14,
+     "decision_procedure_only": 4
     },
     "max_proof_depth": 3,
     "most_used_main_theorems": [],
@@ -4645,8 +4645,8 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "library_only": 22,
      "composite": 30,
+     "library_only": 22,
      "application_of_earlier_theorem": 3,
      "decision_procedure_only": 1
     },
@@ -4814,9 +4814,9 @@
     "theorems_using_main_theorem_in_proof": 0,
     "theorems_reaching_initial": 0,
     "shapes": {
-     "decision_procedure_only": 1,
+     "library_only": 1,
      "composite": 2,
-     "library_only": 1
+     "decision_procedure_only": 1
     },
     "max_proof_depth": 1,
     "most_used_main_theorems": [],

@@ -1,0 +1,28 @@
+{
+ "proved_equal": 0,
+ "attempted": 2,
+ "skipped_private": 2,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "ThreeBallCollision.FirstContact",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "ThreeBallCollision.Velocity",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "ThreeBallCollision.FirstContact",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "ThreeBallCollision.Velocity",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

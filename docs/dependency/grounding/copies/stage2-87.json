@@ -1,0 +1,37 @@
+{
+ "proved_equal": 0,
+ "attempted": 3,
+ "skipped_private": 3,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputCurveLetters.CurvePiece",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputCurveLetters.Point",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputCurveLetters.Readout",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputCurveLetters.CurvePiece",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputCurveLetters.Point",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputCurveLetters.Readout",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

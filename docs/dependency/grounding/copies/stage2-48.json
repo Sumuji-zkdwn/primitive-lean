@@ -1,0 +1,28 @@
+{
+ "proved_equal": 0,
+ "attempted": 2,
+ "skipped_private": 2,
+ "compile_exit": 1,
+ "rows": [
+  {
+   "candidate": "LinearInputF16RimRecovery.Channel",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  },
+  {
+   "candidate": "LinearInputF16RimRecovery.State",
+   "initial": "LinearInputAreaParameters.Parameters",
+   "ring_stage": "not_proved"
+  }
+ ],
+ "skipped": [
+  {
+   "candidate": "LinearInputF16RimRecovery.Channel",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  },
+  {
+   "candidate": "LinearInputF16RimRecovery.State",
+   "initial": "_private.Elastica.ExactVariation.0.Elastica.Parameters"
+  }
+ ]
+}

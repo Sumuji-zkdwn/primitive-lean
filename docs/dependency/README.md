@@ -46,7 +46,7 @@
 | `LinearInputMainResult.locallyMinimizing_pressure_curvature_phase` | subsequent | 11 | 1 / 1 | initial 98 | 複合 |
 | `LinearInputMainResult.pressure_parameters_global_feedback` | subsequent | 10 | 1 / 1 | initial 69 | 既存定理1つの適用（`LinearInputGlobalConsequences.exists_global_injective_convergent_solution`） |
 | `LinearInputQuarticClassification.unique_global_minimum_iff` | subsequent | 6 | 2 / 1 | initial 17, subsequent 5 | 複合 |
-| `LinearInputBranchFibers.real_inverse_card_regular` | subsequent | 5 | なし / 2 | initial 2, subsequent 19 | 複合 |
+| `LinearInputBranchFibers.real_inverse_card_regular` | subsequent | 5 | なし / なし | subsequent 19 | 複合 |
 
 ### 自動生成定理（cycle 1。cycle 2 は数値だけが異なる同形）
 
@@ -66,60 +66,75 @@
 | `LinearInputMetaRuleExtension.metaStep_sound` | subsequent | 1 | なし / なし | subsequent 19 | 複合 |
 | `LinearInputBayes.posterior_commute` | subsequent | 3 | なし / なし | subsequent 6 | 複合 |
 | `LinearInputWFSObservation.observationDistance_triangle` | subsequent | 1 | なし / なし | subsequent 4 | 複合 |
-| `LinearInputF16UnexpectedBridges.singular_iff_chebyshev_critical` | subsequent | 8 | なし / 2 | initial 1, subsequent 53 | 複合 |
+| `LinearInputF16UnexpectedBridges.singular_iff_chebyshev_critical` | subsequent | 8 | なし / なし | subsequent 52 | 複合 |
 | `LinearInputCurvatureRigidity.locallyMinimizing_phase_minimum_exclusion` | subsequent | 12 | 2 / 1 | initial 98, subsequent 3 | 複合 |
 
 ## 全体：後続定理は初期層からどこまで届いているか
 
-- 後続 984 定理のうち、全種類の辺で初期層に到達するもの：**293（29%）**
+- 後続 984 定理のうち、全種類の辺で初期層に到達するもの：**57（5%）**
 - 証明項の連鎖だけで初期定理に到達するもの：**34（3.4%）**
-- 後続層・自動生成層から直接参照される初期ノード：47 / 522。そのうち後続の**証明**で使われる初期**定理**は 28 / 476
+- 後続層・自動生成層から直接参照される初期ノード：46 / 522。そのうち後続の**証明**で使われる初期**定理**は 28 / 476
 - 後続から初期層への接続の大半は、定義（`LinearInputDesign.f`・`E`・`input`、`Elastica.xCoord` など）を命題の中で再利用する形です。初期の**定理**を証明に使う形は少数です。
 
 よく参照される初期ノード（後続層からの直接参照数、全種類合計）：
 
 | 参照数 | 初期ノード | 種類 |
 |---:|---|---|
-| 111 | `LinearInputDesign.f` | def |
 | 35 | `LinearInputDesign.E` | def |
-| 29 | `LinearInputCoercivity.lowerBoundConstant` | def |
 | 23 | `LinearInputObservation.energy` | def |
 | 22 | `Elastica.xCoord` | def |
 | 22 | `Elastica.yCoord` | def |
 | 17 | `LinearInputDesign.input` | def |
+| 9 | `LinearInputDesign.f` | def |
 | 9 | `LinearInputAreaVariation.area` | def |
 | 8 | `LinearInputPressureStationary.Stationary` | def |
 | 7 | `LinearInputAreaMinimum.LocallyMinimizing` | def |
 | 7 | `LinearInputGradient.gx` | def |
 | 7 | `LinearInputGradient.gy` | def |
+| 6 | `Elastica.exponentialWeight` | def |
 
 ### 追補ファイル別
 
 | 追補 | 定理数 | 初期層に到達（全種類） | 証明のみで到達 | 最大の証明の深さ | 既存定理1つの適用 | 決定手続きのみ |
 |---|---:|---:|---:|---:|---:|---:|
+| BranchFibers.inc | 40 | 0 | 0 | 8 | 0 | 6 |
+| ComplementaryObservationExamples.inc | 20 | 0 | 0 | 1 | 0 | 1 |
+| ComplementaryPencilRecovery.inc | 24 | 0 | 0 | 6 | 0 | 0 |
+| EWFSFenchel.inc | 24 | 0 | 0 | 2 | 0 | 0 |
+| EWFSFutureBridge.inc | 15 | 0 | 0 | 4 | 0 | 0 |
+| EnergyWfsFenchel.inc | 28 | 0 | 0 | 2 | 0 | 0 |
 | F0Counting.inc | 10 | 0 | 0 | 3 | 0 | 0 |
 | F0FutureMinimality.inc | 6 | 0 | 0 | 3 | 0 | 1 |
+| F0MergeChains.inc | 26 | 0 | 0 | 3 | 0 | 8 |
+| F0Retractions.inc | 41 | 0 | 0 | 4 | 2 | 0 |
 | F0UpdateDescent.inc | 10 | 0 | 0 | 1 | 0 | 1 |
 | F16CompleteRank.inc | 9 | 0 | 0 | 7 | 0 | 0 |
+| F16ConstructiveRecovery.inc | 15 | 0 | 0 | 7 | 1 | 0 |
 | F16FullMatrix.inc | 13 | 0 | 0 | 4 | 0 | 6 |
 | F16FullRank.inc | 13 | 0 | 0 | 6 | 0 | 0 |
 | F16Holonomy.inc | 7 | 0 | 0 | 1 | 0 | 6 |
 | F16RankCertificate.inc | 10 | 0 | 0 | 3 | 0 | 4 |
 | F16RealDeterminant.inc | 5 | 0 | 0 | 2 | 0 | 2 |
 | F16RecoverySpectrum.inc | 15 | 0 | 0 | 3 | 0 | 11 |
+| F16SaddleCantor.inc | 14 | 0 | 0 | 3 | 0 | 0 |
+| F16UnexpectedBridges.inc | 15 | 0 | 0 | 8 | 0 | 4 |
 | FiniteSelfSynthesis.inc | 18 | 0 | 0 | 4 | 0 | 3 |
+| FourBayes.inc | 21 | 0 | 0 | 5 | 1 | 2 |
 | FutureFiniteHorizon.inc | 14 | 0 | 0 | 6 | 0 | 3 |
 | FutureObservations.inc | 14 | 0 | 0 | 4 | 0 | 0 |
+| GaloisChebyshev.inc | 13 | 0 | 0 | 5 | 0 | 2 |
 | HannaJetCorrection.inc | 4 | 0 | 0 | 1 | 0 | 3 |
 | HigherOrderLiftSelfRewriting.inc | 22 | 0 | 0 | 2 | 0 | 11 |
 | KummerDihedral.inc | 9 | 0 | 0 | 0 | 0 | 0 |
 | MetaRuleSelfExtension.inc | 20 | 0 | 0 | 2 | 0 | 7 |
+| ObservationRetractionPolarity.inc | 16 | 0 | 0 | 8 | 2 | 0 |
 | OperatorBisimulation.inc | 21 | 0 | 0 | 2 | 0 | 0 |
 | OperatorFiniteHorizon.inc | 16 | 0 | 0 | 6 | 0 | 2 |
 | OperatorSemanticClosure.inc | 17 | 0 | 0 | 3 | 2 | 0 |
 | OperatorVocabularyRefinement.inc | 22 | 0 | 0 | 3 | 2 | 1 |
 | OperatorWordObservations.inc | 28 | 0 | 0 | 3 | 0 | 1 |
 | RecursiveOperatorReentry.inc | 17 | 0 | 0 | 3 | 0 | 6 |
+| RepresentationBridges.inc | 7 | 0 | 0 | 6 | 1 | 0 |
 | Rule481Symmetry.inc | 12 | 0 | 0 | 2 | 1 | 5 |
 | RuleSelfModification.inc | 17 | 0 | 0 | 2 | 0 | 6 |
 | SemanticIntervalNecessity.inc | 16 | 0 | 0 | 5 | 0 | 4 |
@@ -127,38 +142,23 @@
 | StrangeOperatorConjugacy.inc | 22 | 0 | 0 | 3 | 0 | 0 |
 | StrangeOperatorFixedSets.inc | 6 | 0 | 0 | 2 | 0 | 0 |
 | StrangeOperatorGalois.inc | 18 | 0 | 0 | 4 | 0 | 2 |
-| F0Retractions.inc | 41 | 2 | 0 | 4 | 2 | 0 |
-| WFSProjectiveSampling.inc | 22 | 2 | 0 | 2 | 0 | 5 |
+| TemporalSampling.inc | 20 | 0 | 0 | 4 | 1 | 1 |
+| VariablePairGaloisBridge.inc | 27 | 0 | 0 | 5 | 0 | 3 |
+| WFSCanonicalLift.inc | 8 | 0 | 0 | 1 | 0 | 2 |
+| WFSMobiusFourier.inc | 14 | 0 | 0 | 3 | 0 | 2 |
+| WFSProjectiveSampling.inc | 22 | 0 | 0 | 2 | 0 | 5 |
 | FiniteBayes.inc | 32 | 3 | 1 | 5 | 0 | 0 |
-| FourBayes.inc | 21 | 2 | 0 | 5 | 1 | 2 |
-| ComplementaryObservationExamples.inc | 20 | 2 | 0 | 1 | 0 | 1 |
-| TemporalSampling.inc | 20 | 2 | 0 | 4 | 1 | 1 |
-| RepresentationBridges.inc | 7 | 1 | 0 | 6 | 1 | 0 |
-| EWFSFutureBridge.inc | 15 | 3 | 0 | 4 | 0 | 0 |
-| F16UnexpectedBridges.inc | 15 | 3 | 0 | 8 | 0 | 4 |
-| ObservationRetractionPolarity.inc | 16 | 7 | 0 | 8 | 2 | 0 |
-| EWFSFenchel.inc | 24 | 12 | 0 | 2 | 0 | 0 |
-| F0MergeChains.inc | 26 | 13 | 0 | 3 | 0 | 8 |
-| GaloisChebyshev.inc | 13 | 7 | 0 | 5 | 0 | 2 |
-| EnergyWfsFenchel.inc | 28 | 18 | 0 | 2 | 0 | 0 |
-| F16SaddleCantor.inc | 14 | 9 | 0 | 3 | 0 | 0 |
-| ComplementaryPencilRecovery.inc | 24 | 16 | 0 | 6 | 0 | 0 |
-| F16ConstructiveRecovery.inc | 15 | 10 | 0 | 7 | 1 | 0 |
-| WFSMobiusFourier.inc | 14 | 10 | 0 | 3 | 0 | 2 |
-| WFSCanonicalLift.inc | 8 | 6 | 0 | 1 | 0 | 2 |
+| ShearCommutator.inc | 28 | 3 | 0 | 8 | 0 | 0 |
+| VariablePairObservations.inc | 43 | 5 | 0 | 5 | 0 | 1 |
+| BranchForgetting.inc | 9 | 5 | 1 | 3 | 0 | 0 |
 | HistorySignature.inc | 17 | 13 | 11 | 3 | 1 | 0 |
-| BranchFibers.inc | 40 | 31 | 0 | 8 | 0 | 6 |
-| VariablePairGaloisBridge.inc | 27 | 21 | 0 | 5 | 0 | 0 |
 | SupportComposition.inc | 5 | 4 | 2 | 2 | 0 | 0 |
-| BranchForgetting.inc | 9 | 8 | 1 | 3 | 0 | 0 |
-| ShearCommutator.inc | 28 | 25 | 0 | 8 | 0 | 0 |
-| VariablePairObservations.inc | 43 | 39 | 0 | 5 | 0 | 1 |
 | CurvatureRigidity.inc | 3 | 3 | 3 | 12 | 0 | 0 |
 | GeneralMinimum.inc | 6 | 6 | 3 | 5 | 0 | 1 |
 | MainResult.inc | 10 | 10 | 8 | 11 | 2 | 0 |
 | QuarticClassification.inc | 5 | 5 | 5 | 6 | 0 | 0 |
 
-どの定理も初期層に到達しない追補は 30 / 60 ファイルです。これらは初期層と無関係に、mathlib と自前の定義の上に立っています。初期層から導出できないという意味ではありません。
+どの定理も初期層に到達しない追補は 50 / 60 ファイルです。これらは初期層と無関係に、mathlib と自前の定義の上に立っています。初期層から導出できないという意味ではありません。
 
 ## 証明の深さの分布（後続定理）
 
@@ -182,7 +182,7 @@
 判定規則：束縛変数とメタデータを外した証明項の先頭が、別のソースファイルにあるプロジェクト定理 1 つです。かつ、他に使うプロジェクト定理が同じファイル内の補題だけである場合、「既存定理1つの適用」とします。これは項の形だけに基づく判定で、数学的に新しい内容がないことの証明ではありません。
 
 - initial：既存定理1つの適用 6、決定手続きのみ 8、mathlib/core のみ 144、複合 318
-- subsequent：既存定理1つの適用 16、決定手続きのみ 121、mathlib/core のみ 339、複合 508
+- subsequent：既存定理1つの適用 16、決定手続きのみ 124、mathlib/core のみ 336、複合 508
 - autonomy：既存定理1つの適用 2、決定手続きのみ 2、mathlib/core のみ 2、複合 4
 
 | 定理 | 層 | 適用している定理 |
