@@ -1,9 +1,9 @@
 name: Claude collaboration one-shot pilot
 
-# One PR-open event only. This experiment is not a reusable production workflow.
+# Run only on this pilot PR when this workflow itself is opened or changed.
 on:
   pull_request:
-    types: [opened]
+    types: [opened, synchronize]
     branches: [codex/collaboration-v1-20261108]
     paths:
       - '.github/workflows/claude-one-shot-pilot.yml'
@@ -76,6 +76,41 @@ jobs:
             --tools ""
             --disallowedTools "mcp__*"
             --json-schema '{"type":"object","properties":{"implementation":{"type":"string"},"test_plan":{"type":"string"},"limitations":{"type":"string"}},"required":["implementation","test_plan","limitations"],"additionalProperties":false}'
+
+      - name: Classify failure without exposing execution output
+        if: failure() && steps.claude.outcome == 'failure'
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
+        run: |
+          python3 - <<'PYDIAG'
+          import json, os
+          from pathlib import Path
+          temp = Path(os.environ['RUNNER_TEMP']).resolve()
+          candidate = Path(os.environ.get('CLAUDE_EXECUTION_FILE') or temp / 'claude-execution-output.json').resolve()
+          if not candidate.is_relative_to(temp) or not candidate.is_file() or candidate.stat().st_size > 10_000_000:
+              print('Diagnostic: execution data unavailable; cause remains unconfirmed.')
+              raise SystemExit(0)
+          try:
+              data = json.loads(candidate.read_text(encoding='utf-8'))
+              messages = data if isinstance(data, list) else data.get('messages', [])
+              result = next((m for m in reversed(messages) if isinstance(m, dict) and m.get('type') == 'result'), {})
+              code = result.get('api_error_status')
+              if type(code) is int and 100 <= code <= 599:
+                  print(f'Claude API status: {code}')
+              else:
+                  print('Claude API status: not present')
+              text = ' '.join(str(result.get(k, '')) for k in ('result', 'errors')).lower()
+              rules = (
+                  ('usage or rate limit', ('rate limit', 'usage limit', 'session limit', 'too many requests')),
+                  ('authentication', ('invalid api key', 'invalid x-api-key', 'authentication_error', 'invalid authentication', 'unauthorized')),
+                  ('billing or credit', ('credit balance', 'billing', 'insufficient credits')),
+                  ('model availability', ('model not found', 'model does not exist', 'not_found_error')),
+              )
+              category = next((label for label, needles in rules if any(n in text for n in needles)), 'unclassified')
+              print('Failure category:', category)
+          except (ValueError, TypeError, OSError, AttributeError):
+              print('Diagnostic: execution data unreadable; cause remains unconfirmed.')
+          PYDIAG
 
       - name: Save structured candidate as unverified evidence
         env:
