@@ -80,11 +80,14 @@ theorem A_positive_right (t : ℚ) (hhalf : 1/2 ≤ t) (hone : t ≤ 1) :
     0 < A t := by
   rw [A_right_certificate]
   have hnonneg : 0 ≤ 2*t-1 := by linarith
-  by_cases h : t = 1
-  · subst t
-    norm_num
+  by_cases hlt : t < 1
   · have hpos : 0 < 1-t := by linarith
     positivity
+  · have heq : t = 1 := by
+      have hge : 1 ≤ t := le_of_not_gt hlt
+      exact le_antisymm hone hge
+    subst t
+    norm_num
 
 theorem B_positive_certificate (t : ℚ) :
     B t =
