@@ -162,6 +162,11 @@ def verify_lean(rebuild):
         'F0FutureMinimality': 'F0 descent iff the current observation kernel equals complete future equivalence, plus the concrete one-step counterexample.',
         'WFSProjectiveSampling': 'Projective conjugacy, gcd sampling kernel and cyclic phase pseudometric; adapted original PR21 with repaired proof and unchanged assumptions.',
         'RepresentationBridges': 'Exact identities of retained F16 matrix representations and energy maps, with transfer of actual complementary reconstruction.',
+        'HistoryNonpreservation': 'Historical preservation as a falsifiable property, missing observation and transition obstructions, impossibility of internal repair with fixed readout, global growth counterexamples, and tagged-state extension',
+        'TemporalLocalExtinction': 'Time-and-state-dependent partial local availability, extinction-induced historical obstruction, exact if-and-only-if preservation boundary, interval failure, local replacement and domain reactivation counterexamples',
+        'LocalCapacityIncompatibility': 'Finite local capacity versus global all-requirements demand, derived total extinction and historical nonpreservation, pairwise-compatible non-gluing triple and finite noncommutativity countermodel',
+        'CooperativeGluingObstruction': 'Collective requirement reachability without joint sequential goal, destructive-operation invariant, cooperative versus noninterfering countermodels, joint-postcondition gated extinction and history nonpreservation',
+        'RelationalOddCycleGluing': 'Strict hierarchy of individual, pairwise and global relational feasibility, Boolean odd-cycle obstruction, even-cycle control; pairwise SAT is not overlap agreement of fixed assignments',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

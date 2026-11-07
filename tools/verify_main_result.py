@@ -79,6 +79,11 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/F0FutureMinimality.inc', 'LinearInputF0FutureMinimality'),
     ('linear_input/lean_check/WFSProjectiveSampling.inc', 'LinearInputWFSObservation'),
     ('linear_input/lean_check/RepresentationBridges.inc', 'LinearInputRepresentationBridges'),
+    ('linear_input/lean_check/HistoryNonpreservation.inc', 'LinearInputHistoryNonpreservation'),
+    ('linear_input/lean_check/TemporalLocalExtinction.inc', 'LinearInputTemporalExtinction'),
+    ('linear_input/lean_check/LocalCapacityIncompatibility.inc', 'LinearInputCapacityExtinction'),
+    ('linear_input/lean_check/CooperativeGluingObstruction.inc', 'LinearInputCooperativeGluing'),
+    ('linear_input/lean_check/RelationalOddCycleGluing.inc', 'LinearInputRelationalGluing'),
 )
 
 
