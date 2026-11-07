@@ -226,7 +226,13 @@ def main(argv=None):
     modes.add_argument("--proof-only", action="store_true")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
+    modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     args = parser.parse_args(argv)
+    if args.elastica_boundary_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --elastica-boundary-only")
+        from verify_elastica_fixed_boundary import main as verify_boundary
+        return verify_boundary([])
     if args.arc3_only:
         if args.rebuild:
             parser.error("--rebuild applies to Lean, not --arc3-only")
