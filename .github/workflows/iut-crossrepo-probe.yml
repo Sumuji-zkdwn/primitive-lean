@@ -1,15 +1,11 @@
 name: IUT x primitive-lean typed cross-repository Lean probe
 
 on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/iut-crossrepo-probe.yml'
-      - 'probes/IutPilotCrossRepo.lean'
-      - 'scripts/test_iut_crossrepo.sh'
-      - 'linear_input/lean_check/PilotVolumeTransport.inc'
-      - 'docs/integration/manifest.json'
+  # Manual only: this job compiles against an external repository (lana-agents/iut)
+  # with its own Lean v4.32 toolchain and Mathlib build, and timed out (cancelled
+  # after 90 minutes) on its source PR #78. As an automatic pull_request check it
+  # would also fire on every change to docs/integration/manifest.json. The proof
+  # sources it probes are already checked by tools/verify.py --integration-only.
   workflow_dispatch:
 
 permissions:
