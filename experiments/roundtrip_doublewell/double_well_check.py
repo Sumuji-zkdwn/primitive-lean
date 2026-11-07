@@ -87,7 +87,7 @@ for b in (0.0, 0.5):
     # classify starts on a small circle around the saddle; locate class changes
     rho, flips = 0.05, []
     angles = np.linspace(0, 2 * math.pi, 721)[:-1]
-    ring = [classify(*run([rho * math.cos(a), rho * math.sin(a)], T, b, t_end=300)) for a in angles]
+    ring = [classify(*run([rho * math.cos(a), rho * math.sin(a)], T, b, t_end=300)[:2]) for a in angles]
     for i in range(len(angles)):
         if ring[i] != ring[i - 1]:
             flips.append(float(((angles[i] + angles[i - 1]) / 2) % math.pi))
