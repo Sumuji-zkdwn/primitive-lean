@@ -1,4 +1,5 @@
 import Mathlib.Topology.Instances.AddCircle.Defs
+import Mathlib.NumberTheory.Real.Irrational
 import Mathlib.Tactic
 
 /-!
@@ -210,6 +211,26 @@ theorem full_turn_is_identity (p : ClockSpace rationalAngles) :
     rotateSpace rationalAngles ((1 : ℝ) : Angle) one_turn_is_rational p = p := by
   simpa only [one_turn_is_zero] using (rotateSpace_zero rationalAngles p)
 
+/-- A concrete non-rational point of the actual real circle.
+    Uses Mathlib's irrationality proof and finite-order characterization
+    of rational points on the additive circle. -/
+theorem sqrt_two_angle_not_rational :
+    ((Real.sqrt 2 : ℝ) : Angle) ∉ rationalAngles := by
+  intro h
+  change ∃ q : ℚ, ((q : ℝ) : Angle) = ((Real.sqrt 2 : ℝ) : Angle) at h
+  obtain ⟨q, hq⟩ := h
+  have hfin_rat : IsOfFinAddOrder ((q : ℝ) : Angle) := by
+    apply (AddCircle.isOfFinAddOrder_iff_exists_rat_eq_div
+      (p := (1 : ℝ)) (a := (q : ℝ))).2
+    exact ⟨q, by simp⟩
+  have hfin : IsOfFinAddOrder ((Real.sqrt 2 : ℝ) : Angle) :=
+    hq ▸ hfin_rat
+  obtain ⟨r, hr⟩ :=
+    (AddCircle.isOfFinAddOrder_iff_exists_rat_eq_div
+      (p := (1 : ℝ)) (a := Real.sqrt 2)).1 hfin
+  have hreal : (r : ℝ) = Real.sqrt 2 := by simpa using hr
+  exact irrational_sqrt_two ⟨r, hreal⟩
+
 /-- Two glued layers can become distinct under a non-rational rotation
     of their *representatives*. Such a rotation does not descend to
     a well-defined map of the quotient; this is not quotient dynamics. -/
@@ -243,6 +264,22 @@ theorem switched_loop_changes_nonrational (θ : Angle)
   rw [full_turn_is_identity]
   intro h
   exact hθ ((flip_fixed_iff rationalAngles θ b).1 h)
+
+/-- The distinction is non-vacuous: use sqrt(2) mod 1 explicitly. -/
+theorem sqrt_two_layer_reappears :
+    point rationalAngles 0 false = point rationalAngles 0 true ∧
+    point rationalAngles ((Real.sqrt 2 : ℝ) : Angle) false ≠
+      point rationalAngles ((Real.sqrt 2 : ℝ) : Angle) true :=
+  hidden_layer_reappears _ sqrt_two_angle_not_rational
+
+theorem sqrt_two_switched_loop_changes :
+    loopWithSwitch (point rationalAngles ((Real.sqrt 2 : ℝ) : Angle) false) ≠
+      point rationalAngles ((Real.sqrt 2 : ℝ) : Angle) false :=
+  switched_loop_changes_nonrational _ sqrt_two_angle_not_rational false
+
+#print axioms sqrt_two_angle_not_rational
+#print axioms sqrt_two_layer_reappears
+#print axioms sqrt_two_switched_loop_changes
 
 #print axioms rotate_respects_iff
 #print axioms full_turn_is_identity
