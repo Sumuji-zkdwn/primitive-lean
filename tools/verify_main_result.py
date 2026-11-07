@@ -108,6 +108,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/ChebyshevDegreeTower.inc', 'LinearInputChebyshevTower'),
     ('linear_input/lean_check/ChebyshevSplittingField.inc', 'LinearInputChebyshevSplitting'),
     ('linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc', 'LinearInputChebyshevAutomorphisms'),
+    ('linear_input/lean_check/RimObservability.inc', 'LinearInputRimObservability'),
 )
 
 

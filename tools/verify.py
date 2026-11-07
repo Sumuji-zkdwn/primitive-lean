@@ -184,6 +184,7 @@ def verify_lean(rebuild):
         'PilotHullStability': 'Exact no-hull-inflation iff every image stays within the original closure, with identity choice, volume monotonicity and escape obstruction.',
         'ElasticaOperatorBridge': 'Constant-angle Elastica xCoord reconstruction applied to strict operator-quotient splitting (four directed straight segments).',
         'ObservableRigidPoint': 'Conditional common observable fixed point of projected idempotents, F0 range derivation, four-state hidden-order counterexample and disjoint-idempotent obstruction',
+        'RimObservability': 'Exact one-channel four-phase decoder for a 4D rotation/reflection model, optimal three-versus-four horizon witness and signed 2x2 local gauges; no global F16 conjugacy claim.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

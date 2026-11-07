@@ -2,7 +2,7 @@ name: Primitive Lean integration verification
 
 on:
   push:
-    branches: [main, codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104, chatgpt/finite-self-synthesis-20261104, chatgpt/recursive-operator-reentry-20261104, chatgpt/self-modifying-rule-machine-20261104, chatgpt/metarule-self-extension-20261104, chatgpt/higher-order-lift-self-rewriting-20261104]
+    branches: [codex/pr-integration-20261102, main, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104, chatgpt/finite-self-synthesis-20261104, chatgpt/recursive-operator-reentry-20261104, chatgpt/self-modifying-rule-machine-20261104, chatgpt/metarule-self-extension-20261104, chatgpt/higher-order-lift-self-rewriting-20261104]
   pull_request:
     branches: [main, codex/primitive-history-derivation-20261029, chatgpt/metarule-self-extension-20261104]
     paths:
@@ -91,6 +91,8 @@ jobs:
 
       - name: Check finite Markov history-cost extension (trust-zero + axiom audit)
         run: python -B -X utf8 tools/verify_finite_markov_transport.py
+      - name: Check exact Rim/F16 observation decoder
+        run: python -B -X utf8 tools/check_rim_observability.py
 
       - name: Run complete integration verification
         run: python -B -X utf8 tools/verify.py --integration-only
