@@ -91,6 +91,18 @@ class FixedBoundaryIndependentChecks(unittest.TestCase):
         for i, exact in enumerate(exact_kappa_over_pi):
             self.assertAlmostEqual(curvature(i, 0), float(exact) * pi, places=12)
 
+    def test_reconstructed_coordinate_curves_differ(self):
+        # Reconstruct each curve at s=1/4, not merely its tangent-angle label.
+        points = [
+            tuple(integrate(lambda t: fun(angle(i, t / 4))) / 4
+                  for fun in (cos, sin))
+            for i in range(3)
+        ]
+        for i in range(3):
+            for j in range(i + 1, 3):
+                distance_sq = sum((a - b)**2 for a, b in zip(points[i], points[j]))
+                self.assertGreater(distance_sq, 1e-6)
+
     def test_quadratic_bending(self):
         # Exact Fourier orthogonality gives integral(kappa**2) / pi**2.
         exact = [2 * sum((k * c) ** 2 for k, c in enumerate(row, 1))

@@ -33,6 +33,7 @@ and read at `s=1`. The observer reads `Elastica.curvature θ 0`.
 | Statement | Lean declarations |
 | --- | --- |
 | All angle functions are smooth and pairwise distinct | `angle_smooth`, `angle_injective` |
+| Their reconstructed coordinate curves are also pairwise distinct | `FixedBoundaryCurveDistinct.coordinates_injective` |
 | Reconstructed curves have squared speed 1 | `unit_speed`, using `Elastica.unit_speed_squared` |
 | Both endpoint positions and both endpoint angles agree | `angle_initial`, `angle_final`, `common_x_endpoint`, `common_y_endpoint`, `shared_boundary` |
 | Initial curvatures are 0, 0, −2π | `curvature_zero`, `curvature_one`, `curvature_two` |
@@ -45,7 +46,9 @@ Unqualified names in the table are in the `FixedBoundaryWitness` namespace.
 The represented subtype and `angle_injective` ensure that the positive
 example does not rely on two labels denoting the same angle function. The
 actions on that subtype are obtained by transporting the finite actions along
-the equivalence between `Fin 3` and the image of `angle`.
+the equivalence between `Fin 3` and the image of `angle`. The separate
+`coordinates_injective` theorem checks the stronger claim for the pairs of
+reconstructed coordinate functions.
 
 The quotient theorem invokes the existing
 `LinearInputOperatorRefinement.strict_refinement_splits_quotient`.
@@ -70,6 +73,8 @@ exact_represented_realization
   → represented_unit_speed → unit_speed → Elastica.unit_speed_squared
 exact_represented_realization
   → represented_curve_split → strict_refinement_splits_quotient
+coordinates_injective
+  → ... → same_coordinates_same_curvature → Elastica.signed_curvature_eq_deriv
 ```
 
 These are explicit paths through theorem proof bodies, not a claim that a
@@ -86,12 +91,9 @@ quadrature. They also calculate the Fourier coefficients and curvature/energy
 coefficients exactly using rational arithmetic. Numerical integration is a
 cross-check; the exact boundary and π² statements are Lean theorems.
 
-On 2026-11-08 (JST), the additive working tree based on the pinned #100
-commit passed the command below locally: five independent Python tests,
-the original and new Lean modules compiled with `--trust=0`, the specified
-proof-term paths were found, and all 76 new declarations passed the permitted
-axiom check. The pinned Lean, mathlib, and manifest dependency revisions were
-checked. This local result is separate from any later GitHub Actions run.
+The command below reports the number of checked declarations and independent
+Python tests. It also checks the pinned Lean, mathlib, and manifest dependency
+revisions. Local results are separate from any later GitHub Actions run.
 
 ## Boundary of the claim
 

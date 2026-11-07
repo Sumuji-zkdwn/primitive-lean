@@ -1,4 +1,5 @@
 import ElasticaUnifiedOperatorAdapter
+import ElasticaCurveDistinct
 import ElasticaFixedBoundaryEnergy
 import Lean.Util.FoldConsts
 
@@ -57,6 +58,8 @@ run_cmd do
     (⟨`FixedBoundaryWitness.represented_curve_split,
       `LinearInputOperatorRefinement.strict_refinement_splits_quotient⟩),
     (⟨`FixedBoundaryWitness.unit_speed, `Elastica.unit_speed_squared⟩),
+    (⟨`FixedBoundaryCurveDistinct.same_coordinates_same_curvature,
+      `Elastica.signed_curvature_eq_deriv⟩),
     (⟨`FixedBoundaryExactEnergy.exact_represented_realization,
       `FixedBoundaryWitness.represented_curve_split⟩),
     (⟨`FixedBoundaryExactEnergy.exact_represented_realization,
@@ -78,7 +81,9 @@ run_cmd do
     (⟨`FixedBoundaryExactEnergy.exact_represented_realization,
       `Elastica.unit_speed_squared⟩),
     (⟨`FixedBoundaryExactEnergy.exact_represented_realization,
-      `LinearInputOperatorRefinement.strict_refinement_splits_quotient⟩)
+      `LinearInputOperatorRefinement.strict_refinement_splits_quotient⟩),
+    (⟨`FixedBoundaryCurveDistinct.coordinates_injective,
+      `Elastica.signed_curvature_eq_deriv⟩)
   ]
   for (source, target) in paths do
     let some path := projectProofPath env source target |

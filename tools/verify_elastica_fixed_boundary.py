@@ -27,6 +27,7 @@ ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 NEW_MODULES = (
     ("ElasticaUnifiedOperatorAdapter", "ElasticaUnifiedOperatorAdapter"),
     ("ElasticaFixedBoundaryWitness", "FixedBoundaryWitness"),
+    ("ElasticaCurveDistinct", "FixedBoundaryCurveDistinct"),
     ("ElasticaFixedBoundaryEnergy", "FixedBoundaryExactEnergy"),
 )
 
