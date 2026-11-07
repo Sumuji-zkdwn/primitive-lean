@@ -10,9 +10,9 @@ It does not show that the state-dependent fresh action is a physically feasible
 middle-piece replacement, or that refinement is forced by elastica equations.
 -/
 
-namespace ElasticaObservationBridge
-
 noncomputable section
+
+namespace ElasticaObservationBridge
 
 /-- Run a finite left-to-right word of deterministic actions. -/
 def run {α ι : Type*} (step : ι → α → α) : List ι → α → α
@@ -112,21 +112,24 @@ theorem strict_refinement_splits_quotient {α ω ι κ : Type*}
 def angle (x : Fin 3) : ℝ → ℝ :=
   if x = 0 then (fun _ => (0 : ℝ))
   else if x = 1 then (fun _ => (1 : ℝ))
-  else (fun s => s)
+  else (fun s => (0 : ℝ) + 1 * s)
 
 /-- Read out the initial Elastica signed curvature at arc-length zero. -/
 def K (x : Fin 3) : ℝ := Elastica.curvature (angle x) 0
 
 /-- The first two curves have the same observed curvature. -/
 theorem K_zero : K (0 : Fin 3) = 0 := by
-  simp [K, angle]
+  change Elastica.curvature (fun _ : ℝ => (0 : ℝ)) 0 = 0
+  exact Elastica.curvature_const 0 0
 
 theorem K_one : K (1 : Fin 3) = 0 := by
-  simp [K, angle]
+  change Elastica.curvature (fun _ : ℝ => (1 : ℝ)) 0 = 0
+  exact Elastica.curvature_const 1 0
 
-/-- The third curve is distinguished using the initial curvature definition. -/
+/-- This proof explicitly uses a theorem of the original Elastica.Geometry. -/
 theorem K_two : K (2 : Fin 3) = 1 := by
-  simp [K, angle, Elastica.curvature]
+  change Elastica.curvature (fun s : ℝ => (0 : ℝ) + 1 * s) 0 = 1
+  exact Elastica.curvature_affine 0 1 0
 
 /-- The old system leaves the curve label unchanged. -/
 def oldStep (_ : Unit) (x : Fin 3) : Fin 3 := x
@@ -145,7 +148,7 @@ theorem run_old (word : List Unit) (x : Fin 3) :
 
 theorem old_cannot_separate : ObsEq K oldStep (0 : Fin 3) 1 := by
   intro word
-  simpa [run_old, K_zero, K_one]
+  simp [run_old, K_zero, K_one]
 
 theorem fresh_separates :
     ¬ ObsEq K (sumStep oldStep freshStep) (0 : Fin 3) 1 := by
@@ -153,6 +156,12 @@ theorem fresh_separates :
   have hbad : (0 : ℝ) = 1 := by
     simpa [run, sumStep, freshStep, K_zero, K_two] using (h [Sum.inr ()])
   exact zero_ne_one hbad
+
+/-- The chosen new action violates a fixed initial tangent-angle condition:
+it is not an admissible fixed-endpoint elastica replacement on this witness. -/
+theorem fresh_changes_initial_tangent :
+    angle (freshStep () (1 : Fin 3)) 0 ≠ angle (1 : Fin 3) 0 := by
+  simp [freshStep, angle]
 
 /-- Conditional quotient splitting is witnessed by the three actual angles. -/
 theorem curve_split :
