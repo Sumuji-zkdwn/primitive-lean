@@ -23,6 +23,9 @@ ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 EXTRA_IMPORTS = (
     "Mathlib.Data.Nat.Squarefree",
     "Mathlib.FieldTheory.RatFunc.IntermediateField",
+    "Mathlib.Data.Nat.Factorization.Defs",
+    "Mathlib.RingTheory.UniqueFactorizationDomain.Basic",
+    "Mathlib.Data.PNat.Factors",
 )
 
 SUPPLEMENTS = (
@@ -113,6 +116,19 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/GravityCocycle.inc', 'LinearInputGravityCocycle'),
     ('linear_input/lean_check/GravityObserver.inc', 'LinearInputGravityObserver'),
     ('linear_input/lean_check/GravityObservation.inc', 'LinearInputGravityObservation'),
+    ('linear_input/lean_check/TernaryZeroCesaro.inc', 'LinearInputTernaryZero'),
+    ('linear_input/lean_check/FiniteObservationSeparation.inc', 'LinearInputFiniteObservation'),
+    ('linear_input/lean_check/DecompositionIdentification.inc', 'LinearInputDecompositionIdentification'),
+    ('linear_input/lean_check/DecompositionF0Bridge.inc', 'LinearInputDecompositionF0Bridge'),
+    ('linear_input/lean_check/PrimeFactorIdentification.inc', 'LinearInputPrimeFactorIdentification'),
+    ('linear_input/lean_check/PrimeSplitNormalForm.inc', 'LinearInputPrimeSplitNormalForm'),
+    ('linear_input/lean_check/AssociatesFactorIdentification.inc', 'LinearInputAssociatesFactorIdentification'),
+    ('linear_input/lean_check/GeneratedNonUniqueMonoid.inc', 'LinearInputGeneratedNonUnique'),
+    ('linear_input/lean_check/HalfFactorialIdentification.inc', 'LinearInputHalfFactorial'),
+    ('linear_input/lean_check/AtomicGeneratorClassification.inc', 'LinearInputAtomicGeneratorClassification'),
+    ('linear_input/lean_check/AtomicHalfFactorial.inc', 'LinearInputAtomicHalfFactorial'),
+    ('linear_input/lean_check/AtomicWordProbe.inc', 'LinearInputAtomicWordProbe'),
+    ('linear_input/lean_check/SingleSwapFiber.inc', 'LinearInputSingleSwapFiber'),
 )
 
 
