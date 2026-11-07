@@ -1,0 +1,58 @@
+{
+ "steps": {
+  "proof_only": {
+   "cmd": "python3 -B -X utf8 tools/verify.py --proof-only",
+   "exit": 0,
+   "seconds": 155.7,
+   "log": "/tmp/claude-0/inv/kernel/95/proof_only.log"
+  },
+  "compile_main": {
+   "cmd": "lake env lean --root=/tmp/claude-0/inv/kernel/95 -o /tmp/claude-0/inv/kernel/95/PrimitiveMain.olean /tmp/claude-0/inv/kernel/95/PrimitiveMain.lean",
+   "exit": 0,
+   "seconds": 70.6,
+   "log": "/tmp/claude-0/inv/kernel/95/compile_main.log"
+  },
+  "compile_TwoMotionEmission": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/95 lean --root=/tmp/claude-0/wt/95/lean -o /tmp/claude-0/inv/kernel/95/TwoMotionEmission.olean /tmp/claude-0/wt/95/lean/TwoMotionEmission.lean",
+   "exit": 0,
+   "seconds": 5.7,
+   "log": "/tmp/claude-0/inv/kernel/95/compile_TwoMotionEmission.log"
+  },
+  "compile_TwoMotionEmissionConsequences": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/95 lean --root=/tmp/claude-0/wt/95/lean -o /tmp/claude-0/inv/kernel/95/TwoMotionEmissionConsequences.olean /tmp/claude-0/wt/95/lean/TwoMotionEmissionConsequences.lean",
+   "exit": 0,
+   "seconds": 5.2,
+   "log": "/tmp/claude-0/inv/kernel/95/compile_TwoMotionEmissionConsequences.log"
+  },
+  "compile_TwoMotionEmissionIVP": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/95 lean --root=/tmp/claude-0/wt/95/lean -o /tmp/claude-0/inv/kernel/95/TwoMotionEmissionIVP.olean /tmp/claude-0/wt/95/lean/TwoMotionEmissionIVP.lean",
+   "exit": 0,
+   "seconds": 4.5,
+   "log": "/tmp/claude-0/inv/kernel/95/compile_TwoMotionEmissionIVP.log"
+  },
+  "extract": {
+   "cmd": "lake env sh -c LEAN_PATH=$LEAN_PATH:/tmp/claude-0/inv/kernel/95 lean --run /home/user/primitive-lean/tools/deps/ExtractDeps.lean /tmp/claude-0/inv/kernel/95/raw.json PrimitiveMain TwoMotionEmission TwoMotionEmissionConsequences TwoMotionEmissionIVP -- Elastica PrimitiveMain TwoMotionEmission TwoMotionEmissionConsequences TwoMotionEmissionIVP",
+   "exit": 0,
+   "seconds": 99.3,
+   "log": "/tmp/claude-0/inv/kernel/95/extract.log"
+  },
+  "analyze": {
+   "cmd": "python3 /home/user/primitive-lean/tools/deps/analyze.py --raw /tmp/claude-0/inv/kernel/95/raw.json --assembled /tmp/claude-0/inv/kernel/95/PrimitiveMain.lean --report /tmp/claude-0/wt/95/verification/main-result.json --out /tmp/claude-0/inv/kernel/95/deps.json --root /tmp/claude-0/wt/95 --module-source TwoMotionEmission=lean/TwoMotionEmission.lean --module-source TwoMotionEmissionConsequences=lean/TwoMotionEmissionConsequences.lean --module-source TwoMotionEmissionIVP=lean/TwoMotionEmissionIVP.lean",
+   "exit": 0,
+   "seconds": 0.3,
+   "log": "/tmp/claude-0/inv/kernel/95/analyze.log"
+  }
+ },
+ "proof_only_passed": true,
+ "modules": [
+  "PrimitiveMain",
+  "TwoMotionEmission",
+  "TwoMotionEmissionConsequences",
+  "TwoMotionEmissionIVP"
+ ],
+ "module_sources": {
+  "TwoMotionEmission": "lean/TwoMotionEmission.lean",
+  "TwoMotionEmissionConsequences": "lean/TwoMotionEmissionConsequences.lean",
+  "TwoMotionEmissionIVP": "lean/TwoMotionEmissionIVP.lean"
+ }
+}

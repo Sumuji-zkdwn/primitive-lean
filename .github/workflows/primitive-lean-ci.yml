@@ -2,7 +2,7 @@ name: Primitive Lean integration verification
 
 on:
   push:
-    branches: [codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104, chatgpt/finite-self-synthesis-20261104, chatgpt/recursive-operator-reentry-20261104, chatgpt/self-modifying-rule-machine-20261104, chatgpt/metarule-self-extension-20261104, chatgpt/higher-order-lift-self-rewriting-20261104]
+    branches: [main, codex/pr-integration-20261102, chatgpt/operator-bisimulation-refinement-20261104, chatgpt/operator-semantic-closure-20261104, chatgpt/semantic-interval-necessity-20261104, chatgpt/finite-self-synthesis-20261104, chatgpt/recursive-operator-reentry-20261104, chatgpt/self-modifying-rule-machine-20261104, chatgpt/metarule-self-extension-20261104, chatgpt/higher-order-lift-self-rewriting-20261104]
   pull_request:
     branches: [main, codex/primitive-history-derivation-20261029, chatgpt/metarule-self-extension-20261104]
     paths:
@@ -73,11 +73,75 @@ jobs:
           use-mathlib-cache: true
           use-github-cache: true
 
+      - name: Build parent library and audit independent moving-curve module
+        working-directory: lean
+        run: |
+          lake build Elastica
+          lake env lean --trust=0 MovingCurve.lean -o .lake/build/lib/lean/MovingCurve.olean
+          lake env lean --trust=0 MovingCurveAudit.lean
+
       - name: Test finite operator-language semantics
-        run: python -m pytest -q tests/test_operator_words.py tests/test_operator_refinement.py tests/test_operator_semantic_closure.py tests/test_semantic_interval_necessity.py tests/test_finite_self_synthesis.py tests/test_recursive_operator_reentry.py tests/test_rule_self_modification.py tests/test_meta_rule_self_extension.py tests/test_higher_order_lift_self_rewriting.py
+        run: python -m pytest -q tests/test_operator_words.py tests/test_operator_refinement.py tests/test_operator_semantic_closure.py tests/test_semantic_interval_necessity.py tests/test_finite_self_synthesis.py tests/test_recursive_operator_reentry.py tests/test_rule_self_modification.py tests/test_meta_rule_self_extension.py tests/test_higher_order_lift_self_rewriting.py tests/test_history_nonpreservation.py tests/test_temporal_local_extinction.py tests/test_local_capacity_incompatibility.py tests/test_cooperative_gluing_obstruction.py tests/test_relational_oddcycle_gluing.py tests/test_join_contextual_equivalence.py tests/test_curve_letter_context.py tests/test_shortest_cross_trace.py tests/test_elliptic_modular_probe.py tests/test_okanohara_curvature.py tests/test_finite_markov_transport.py
+
+      - name: Build retained Elastica library before checking extension
+        run: cd lean && lake build Elastica
+
+      - name: Check isolated Okanohara transport bridge (trust-zero + axiom audit)
+        run: python -B -X utf8 tools/verify_okanohara_bridge.py
+
+      - name: Check finite Markov history-cost extension (trust-zero + axiom audit)
+        run: python -B -X utf8 tools/verify_finite_markov_transport.py
 
       - name: Run complete integration verification
         run: python -B -X utf8 tools/verify.py --integration-only
+
+      - name: Re-extract combined Lean kernel dependencies
+        run: |
+          python3 -B tools/deps/pr_kernel.py --worktree . --work verification/integrated-kernel --own lean/MovingCurve.lean lean/MovingCurveAudit.lean lean/Research/OkanoharaTransport.lean lean/Research/FiniteMarkovTransport.lean
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from collections import Counter
+          import sys
+          sys.path.insert(0, 'tools/deps')
+          from grounding import classify
+          work = Path('verification/integrated-kernel')
+          status = json.loads((work / 'status.json').read_text())
+          required = [
+              'proof_only', 'compile_main',
+              'compile_MovingCurve', 'compile_MovingCurveAudit',
+              'compile_Research.OkanoharaTransport',
+              'compile_Research.FiniteMarkovTransport',
+              'extract', 'analyze'
+          ]
+          failures = {k: status['steps'].get(k) for k in required
+                      if status['steps'].get(k, {}).get('exit') != 0}
+          if failures:
+              print('KERNEL_REEXTRACTION_FAILED', json.dumps(failures))
+              raise SystemExit(1)
+          nodes = json.loads((work / 'deps.json').read_text())['nodes']
+          expected = [
+              'Elastica.moving_translation_distance_eq_time_sq',
+              'Elastica.curvature_double_well_integral',
+              'LinearInputCrossSystemObservation.bridge_trace'
+          ]
+          missing = [n for n in expected if n not in nodes]
+          if missing:
+              print('MISSING_INTEGRATED_THEOREMS', missing)
+              raise SystemExit(1)
+          summary = {}
+          for layer in sorted({r['layer'] for r in nodes.values()}):
+              ts = [n for n, r in nodes.items() if r['layer'] == layer and r['kind'] == 'theorem']
+              classified = classify(nodes, ts) if layer != 'initial' else {}
+              summary[layer] = dict(theorems=len(ts), vocabulary=Counter(
+                  v['vocabulary'] for v in classified.values()),
+                  proof_through_initial=sum(v['proof_through_initial'] for v in classified.values()))
+          summary['total_nodes'] = len(nodes)
+          summary['module_sources'] = status['module_sources']
+          (work / 'summary.json').write_text(json.dumps(summary, indent=2))
+          print('INTEGRATED_KERNEL_SUMMARY', json.dumps(summary))
+          PY
+          python3 -B tools/deps/grounding.py --main-deps verification/integrated-kernel/deps.json --out verification/integrated-kernel/grounding
 
       - name: Upload complete verification evidence even on failure
         if: always()
