@@ -42,6 +42,10 @@ def run_integration(root, command, rebuild=False):
     # because --rebuild clears lean/.lake/build.
     lean = root / 'lean'
     stages += [('build-elastica', ['lake', 'build', 'Elastica'], lean),
+               ('siphon-interaction', ['lake', 'env', 'lean', '--trust=0',
+                                       'Research/SiphonInteraction.lean'], lean),
+               ('siphon-polynomial-e', ['lake', 'env', 'lean', '--trust=0',
+                                        'Research/SiphonPolynomialE.lean'], lean),
                ('moving-curve', ['lake', 'env', 'lean', '--trust=0', 'MovingCurve.lean',
                                  '-o', '.lake/build/lib/lean/MovingCurve.olean'], lean),
                ('moving-curve-audit', ['lake', 'env', 'lean', '--trust=0', 'MovingCurveAudit.lean'], lean),
@@ -53,6 +57,11 @@ def run_integration(root, command, rebuild=False):
         result['checks'].append(dict(name=name, **record))
         if record['exit_code']:
             result['errors'].append(name + ' failed; see ' + record['log'])
+        if name in ('siphon-interaction', 'siphon-polynomial-e'):
+            # Trust-zero compilation must also reject sorryAx reported by #print axioms.
+            if 'sorryAx' in (out / ('integration-' + name + '.log')).read_text('utf-8'):
+                result['errors'].append(name + ' reports sorryAx; see ' + record['log'])
+        if result['errors']:
             save()
             return result
         save()
