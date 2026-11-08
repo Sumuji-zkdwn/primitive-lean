@@ -1,0 +1,53 @@
+name: Build SPORE POP Android and iOS
+on:
+  push:
+    branches: [app/spore-pop-universal]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  web-and-android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test gameplay engine
+        run: node spore-pop/tests/engine.test.js
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build Android APK
+        working-directory: spore-pop/android
+        run: gradle --no-daemon :app:assembleDebug --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spore-pop-android-apk
+          path: spore-pop/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+  ios-simulator:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test deterministic game rules
+        run: node spore-pop/tests/engine.test.js
+      - name: Build unsigned iOS simulator app
+        run: |
+          xcodebuild -project spore-pop/ios/SporePop.xcodeproj \
+            -scheme SporePop -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/spore-ios-build" \
+            CODE_SIGNING_ALLOWED=NO build
+      - name: Package simulator app
+        run: |
+          cd "$RUNNER_TEMP/spore-ios-build/Build/Products/Debug-iphonesimulator"
+          ditto -c -k --sequesterRsrc --keepParent SporePop.app "$RUNNER_TEMP/SPORE-POP-iOS-Simulator.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: spore-pop-ios-simulator
+          path: ${{ runner.temp }}/SPORE-POP-iOS-Simulator.zip
+          if-no-files-found: error

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no,maximum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#08151e" />
+  <meta name="description" content="SPORE POP — タップで増殖する、色と光の連鎖爆発ゲーム。" />
+  <link rel="manifest" href="manifest.webmanifest" /><link rel="apple-touch-icon" href="icons/180.png" />
+  <title>SPORE POP — 連鎖培養ゲーム</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+ <main id="app">
+  <header class="header">
+   <div class="brand"><div class="brand-orb"><i></i><i></i><i></i></div><div><div class="wordmark">SPORE<span>POP</span></div><div class="subtitle">CHAIN REACTION GARDEN</div></div></div>
+   <div class="head-actions"><button id="sound" class="icon-button" title="サウンド">♫</button><button id="help" class="icon-button question" title="遊び方">?</button></div>
+  </header>
+  <section class="scoreboard" aria-label="ゲームの進行状況">
+   <div class="stat"><span class="stat-label">STAGE</span><b id="level">01</b></div>
+   <div class="stat"><span class="stat-label">SCORE</span><b id="score">000000</b></div>
+   <div class="stat"><span class="stat-label">BEST</span><b id="best">000000</b></div>
+   <div class="stat shots-stat"><span class="stat-label">TAPS LEFT</span><b id="shots">● ● ● ● ●</b></div>
+  </section>
+  <div class="play-space">
+   <div class="play-border"><canvas id="field" aria-label="微生物が漂うゲームフィールド。タップで連鎖を起こします"></canvas>
+    <div class="field-label"><span class="signal"><i></i> LIVE CULTURE</span><span id="remaining">0 / 0</span></div>
+    <div id="combo" class="combo hidden">x1 <small>CHAIN</small></div>
+    <div id="toast" class="toast hidden"></div>
+   </div>
+  </div>
+  <footer class="footer">
+   <div class="progress-line"><div id="progress-fill"></div></div>
+   <div class="footer-line"><div class="goal"><div class="goal-title">BLOOM TARGET</div><div class="goal-text"><span id="popped">0</span> / <span id="target">0</span> <small>spores</small></div></div>
+   <button id="restart" class="restart" title="やり直し">↻ <span>RETRY</span></button></div>
+  </footer>
+  <div id="overlay" class="overlay">
+   <div id="menu" class="menu-card">
+    <div class="eyebrow"><span class="small-dot"></span> A LITTLE WORLD, ONE BIG CHAIN</div>
+    <div class="hero-art"><div class="hero-glow"></div><div class="hero-spore hero-a"><i></i></div><div class="hero-spore hero-b"><i></i></div><div class="hero-spore hero-c"><i></i></div><div class="hero-ring"></div><div class="hero-petal p1"></div><div class="hero-petal p2"></div><div class="hero-petal p3"></div></div>
+    <h1><span>SPORE</span> POP<span class="punct">.</span></h1>
+    <p class="tagline">ちいさな一撃。<br/>とんでもない連鎖。</p>
+    <p class="description">漂う微生物をタップして、連鎖爆発を起こそう。<br/>少ないタップで目標数を開花させればクリア。</p>
+    <button id="play" class="big-button">PLAY <span>→</span></button>
+    <button id="zen" class="secondary-button">∞ ZEN MODE <small>自由に連鎖を楽しむ</small></button>
+    <p class="tiny-note">オフライン対応 ・ 片手で遊べる ・ 広告なし</p>
+   </div>
+  </div>
+ </main>
+ <script src="engine.js"></script><script src="game.js"></script>
+ <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
+</body>
+</html>
