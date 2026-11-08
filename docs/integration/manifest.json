@@ -3083,7 +3083,7 @@
     },
     {
       "path": "linear_input/lean_check/FoldCountOriginal.inc",
-      "sha256": "9ab4eb6069128528b0793b42151adbf261db8d05bda209587670453c77b77ac5",
+      "sha256": "79e167643acd6258c63d990398ae9dbdc08563d257992597091b00cb3b24efd5",
       "original_sha256": "8f446d1a11a700d8a99348e6e5f3d4e0d5f4a5dd7ad5fad34aa6e692819cd026",
       "source_pr": 120,
       "source_path": "FoldCountOriginal.inc (user-supplied attachment, 2026-11-09)",
@@ -3315,7 +3315,7 @@
     {
       "date": "2026-11-09",
       "path": "linear_input/lean_check/FoldCountOriginal.inc",
-      "note": "User-supplied FoldCountOriginal.inc; seven proof obligations filled, original-variable classification. Exact-head Lean verification pending."
+      "note": "User-supplied FoldCountOriginal.inc; seven sorry-free proof obligations, original-variable classification. Subsequent Lean tactic repairs; exact-head verification pending."
     }
   ]
 }
