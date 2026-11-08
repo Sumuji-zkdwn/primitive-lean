@@ -1,6 +1,6 @@
 # Intrinsic height as a curvature-bearing Elastica quantity
 
-Date: 2026-11-08 (JST). Source: `lean/Elastica/IntrinsicHeight.lean`.
+Date: 2026-11-08 (JST). Source: `lean/Research/ElasticaIntrinsicHeight.lean`.
 Dependency: existing `Elastica.Geometry` (its actual interval-integral reconstruction
 `xCoord`, `yCoord`, and `curvature θ := deriv θ`). No changes to those definitions.
 
@@ -49,8 +49,8 @@ zero difference under trigonometric identities (independent SymPy check).
 The *baseline* source `lean/Elastica.lean` is protected by
 `docs/integration/manifest.json` as byte-identical; do not modify it to
 import this module. The separate GitHub Actions workflow
-`elastica-intrinsic-height.yml` builds `Elastica.IntrinsicHeight` and
-runs `lake env lean --trust=0 Elastica/IntrinsicHeight.lean`.
+`elastica-intrinsic-height.yml` builds `Elastica.Geometry` and
+runs `lake env lean --trust=0 Research/ElasticaIntrinsicHeight.lean`.
 
 CI evidence on first head `d5be98bc69b72ca12d7cbfb8de9b65a4d59134f0`:
 the dedicated run 42484534863 succeeded; the wider integration source audit
@@ -64,3 +64,8 @@ This proves a rigorous geometric **candidate definition** of intrinsic
 height and its curvature information. It does not prove that all possible
 uses of physical or gravitational 'height' must follow this definition, nor
 that height alone determines a complete curve without initial data.
+
+The joint linear-input checker enumerates `lean/Elastica/*.lean` and audits
+those declarations through the byte-locked root import; an unimported module in
+that directory gives unknown-identifier errors. For this reason the extension
+lives under `lean/Research/` like existing standalone Elastica bridges.
