@@ -215,6 +215,11 @@ def verify_lean(rebuild):
         'GravityObservations': 'Exact F0 observational descent and injectivity obstruction; monopole/dipole invariance, lost quadratic moment and exact exterior inverse-distance correction for symmetric two-body configurations.',
         'FiveDimLagrange': 'Five-coordinate constrained-energy lift, regular one-constraint multiplier existence from Elastica kernel annihilators, confirmed-observation Jacobian rank drop, and explicit original-E stationary input.',
         'ParallelWriteGluing': 'Finite-family partial-state update amalgamation iff overlap compatibility, constructive first-write gluing and written-coordinate uniqueness, conflicting/disjoint concurrent writes, explicit history gate and conditional nonpreservation (PR #71, renamed so it coexists with the different ParallelLocalGluing proof of PR #70)',
+        'PrimeFactorObservation': 'Finite prime-factor observation kernels and the minimal probe count for 2, 3 and 5 (PR #50).',
+        'PrimeFactorOrbits': 'Prime-factor orbit kernels (S2/S3) and exact three-factor observation counts (PR #51).',
+        'PrimeFactorF0Adaptive': 'F0 sorting retraction, product-kernel quotient and adaptive observation lower bound (PR #52).',
+        'PrimeFactorFiniteLength': 'General finite-length prime-factor observation minimum and unordered-state count (PR #53).',
+        'PrimeFactorGeneralF0': 'Canonical F0 sorting for arbitrary finite prime lists and exact product kernels (PR #54).',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

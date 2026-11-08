@@ -8,7 +8,7 @@
 |---|---|
 | #111 | #102（#98・#75・#87・#81・#83・#91 の統合ドラフト）と、依存関係抽出の LEAN_PATH 修正 |
 | #112 | 11月5〜8日の 20 件（#76〜#110）と 11月3〜4日の 8 件（#29・#31・#40・#43・#44・#47・#48・#70） |
-| 本 PR | #108 の続き（語の正規形と端点の観測可能性）、#58・#59（演算器の文脈同値・方策・積・到達性・感知族・F0 橋渡し・意味モノイド・有限写像の数え上げ） |
+| 本 PR | #108 の続き（語の正規形と端点の観測可能性）、#58・#59（演算器の文脈同値・方策・積・到達性・感知族・F0 橋渡し・意味モノイド・有限写像の数え上げ）、#45（重力観測の二次モーメント）、#30（五座標の拘束・書換え橋渡し）、#71（並列書き込みの貼り合わせ、`ParallelWriteGluing` として）、#50〜#54（素因数観測。#53・#54 経由） |
 
 途中段階の PR（後続 PR にコミットが丸ごと含まれていたもの）は個別にマージせずクローズした。
 
@@ -35,6 +35,12 @@ pinned の Lean `v4.30.0-rc2` と Mathlib で通らなかった箇所だけを�
 | `OperatorProductSystems.inc`（#58） | 非推奨の `push_neg` を `push Not` に置き換え |
 | `OperatorFiniteMapCounts.inc`（#59） | `simpa ... using rfl` を `simp [eligibleThree]` に置き換え（linter の警告） |
 | `OperatorSemanticMonoid.inc`（#59） | `evaluate_injective` を `fun h => evaluate_injective K step h` として適用（`Function.Injective` の強い暗黙引数のため） |
+| `GravityObservations.inc`（#45） | `moment_one_formula` の末尾の不要な `ring` を削除（`simp` で証明が終わっていた） |
+| `FiveDimLagrange.inc`（#30） | `zero_confirmed_horizontal_step` で、残っていた線形のゴールを `ring` で閉じ、実行されない `<;> ring` を削除 |
+| `ParallelWriteGluing.inc`（#71） | #70 と同じ `ParallelLocalGluing.inc`・`LinearInputParallelGluing` だったため、ファイル名と名前空間を `ParallelWriteGluing`・`LinearInputParallelWriteGluing` に変更（名前空間の 2 行だけ） |
+| `PrimeFactorFiniteLength.inc`（#53） | `simpa` 3 か所を `simp` に置き換え（`import Mathlib` 全体ではなく必要なモジュールだけで検査したときの linter の警告） |
+
+#50〜#54 の素因数観測の証明は、元は `import Mathlib` 全体を使う単独のプローブとしてだけ検査されていた。Mathlib 全体を `MainResult.lean` に import すると他の証明の型クラス探索が時間切れになるため、必要な `Mathlib.Tactic.NormNum.Prime` と `Mathlib.Data.Sym.Card` だけを `EXTRA_IMPORTS` に足して joint 検査に登録した。
 
 ## ワークフローの変更
 
@@ -45,8 +51,6 @@ pinned の Lean `v4.30.0-rc2` と Mathlib で通らなかった箇所だけを�
 
 | PR | 状態 |
 |---|---|
-| #30 #45 #49 | 自分のブランチでも Lean 検証が失敗している |
-| #53 #54 | 素因数観測の証明が joint 検査に登録されていない単独プローブ（`import Mathlib` 全体）。Mathlib 全体を import すると他の証明が時間切れになる |
-| #71 | #70 と同じファイル・同じ名前空間の別版 |
+| #49 | `F16SpectralProjectors.inc` の 16×16 行列の全成分を `norm_num` で計算する証明 6 つが、`maxHeartbeats` を 1,000,000 に上げても時間切れになる（自分のブランチの CI でも失敗していた）。定義より前で `plus`・`minus`・`zero` を展開している箇所もある |
 
-各 PR に、取り込まなかった理由をコメントしてある。
+取り込まなかった理由は PR にコメントしてある。

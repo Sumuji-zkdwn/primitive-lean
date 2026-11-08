@@ -3010,6 +3010,63 @@
       "permitted_adaptations": [
         "Integrated as ParallelWriteGluing.inc with namespace LinearInputParallelWriteGluing instead of ParallelLocalGluing / LinearInputParallelGluing, which PR #70 already uses for a different proof; only the two namespace lines change."
       ]
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorObservation.inc",
+      "sha256": "5d1124bd98d6187f80aeb1351452dc3046d4f31e3e653b0ba8f48fffb700592e",
+      "original_sha256": "5d1124bd98d6187f80aeb1351452dc3046d4f31e3e653b0ba8f48fffb700592e",
+      "source_pr": 50,
+      "source_commit": "b8d9697bcc29d5aeff1f9226326a0c2bf1774bb5",
+      "source_path": "linear_input/lean_check/PrimeFactorObservation.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorOrbits.inc",
+      "sha256": "3da25f0ab1b4f532ec0cdbb8af77c6b3908068664273e4363f94440e25560973",
+      "original_sha256": "3da25f0ab1b4f532ec0cdbb8af77c6b3908068664273e4363f94440e25560973",
+      "source_pr": 51,
+      "source_commit": "35dcf2cb2bf30c18f6aaaaea27924823b87c89af",
+      "source_path": "linear_input/lean_check/PrimeFactorOrbits.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorF0Adaptive.inc",
+      "sha256": "ee03c3a635e879c0088c6019b262260df3eb2f25040c311f3703951f02e24642",
+      "original_sha256": "ee03c3a635e879c0088c6019b262260df3eb2f25040c311f3703951f02e24642",
+      "source_pr": 52,
+      "source_commit": "94d25a8029d668bf76deb6d2c11b6d615ddb4523",
+      "source_path": "linear_input/lean_check/PrimeFactorF0Adaptive.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorFiniteLength.inc",
+      "sha256": "dfc80274f5f8bd3219f304e8deb6c4eb787657270b667639af2c9b1dceacbd15",
+      "original_sha256": "62384cc88d3f8d0d1f7fd3f280e0222797aff84934dc1f65828af4b8fa8b76d0",
+      "source_pr": 53,
+      "source_commit": "b4d928af47d6f867b0fc708654cc8b5b2fbfd78d",
+      "source_path": "linear_input/lean_check/PrimeFactorFiniteLength.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace three simpa calls by simp, as the unnecessarySimpa linter asks once the module is compiled with the specific Mathlib imports in EXTRA_IMPORTS instead of import Mathlib; statements are unchanged."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorGeneralF0.inc",
+      "sha256": "4e34cb529094bc77ec365c1ef368e8979898c69980aab065b206743fe3fcbf9d",
+      "original_sha256": "4e34cb529094bc77ec365c1ef368e8979898c69980aab065b206743fe3fcbf9d",
+      "source_pr": 54,
+      "source_commit": "331cae85c9ab5019fb0acbcda5779e3a44db8226",
+      "source_path": "linear_input/lean_check/PrimeFactorGeneralF0.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],

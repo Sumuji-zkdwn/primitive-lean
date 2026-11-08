@@ -113,7 +113,7 @@ theorem bumped_prefix_swap_product (n : ℕ) (i : Fin n) :
             (fun j : Fin n => if j = i then (3 : ℕ) else 2)
             (Finset.mem_univ i)).symm
       _ = 3 * (others n i).prod (fun _ => (2 : ℕ)) := by
-        simpa [hrest]
+        simp [hrest]
   rw [hzero, hbump]
   ring
 
@@ -187,7 +187,7 @@ theorem minimal_distinct_probe_count (n : ℕ) :
     (∀ s : Finset (Probe n), s.card < n + 1 → ¬ Separates n s) := by
   constructor
   · refine ⟨Finset.univ, ?_, full_library_separates n⟩
-    simpa using probe_library_card n
+    simp
   · intro s hshort hs
     have hfull := (separates_iff_univ n s).mp hs
     subst s
@@ -202,7 +202,7 @@ theorem separating_list_length_lower_bound (n : ℕ)
   have hall := (separates_iff_univ n calls.toFinset).mp h
   have hcard : calls.toFinset.card = n + 1 := by
     rw [hall]
-    simpa using probe_library_card n
+    simp
   calc
     n + 1 = calls.toFinset.card := hcard.symm
     _ ≤ calls.length := List.toFinset_card_le calls

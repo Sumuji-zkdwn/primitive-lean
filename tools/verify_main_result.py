@@ -26,6 +26,8 @@ EXTRA_IMPORTS = (
     "Mathlib.Data.Nat.Factorization.Defs",
     "Mathlib.RingTheory.UniqueFactorizationDomain.Basic",
     "Mathlib.Data.PNat.Factors",
+    "Mathlib.Tactic.NormNum.Prime",  # norm_num proves Nat.Prime (PR #50-#54)
+    "Mathlib.Data.Sym.Card",  # Sym.card_sym_fin_eq_multichoose (PR #53)
 )
 
 SUPPLEMENTS = (
@@ -142,6 +144,11 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/GravityObservations.inc', 'LinearInputGravityObservations'),
     ('linear_input/lean_check/FiveDimLagrange.inc', 'LinearInputFiveDimLagrange'),
     ('linear_input/lean_check/ParallelWriteGluing.inc', 'LinearInputParallelWriteGluing'),
+    ('linear_input/lean_check/PrimeFactorObservation.inc', 'LinearInputPrimeFactorObservation'),
+    ('linear_input/lean_check/PrimeFactorOrbits.inc', 'LinearInputPrimeFactorOrbits'),
+    ('linear_input/lean_check/PrimeFactorF0Adaptive.inc', 'LinearInputPrimeFactorF0'),
+    ('linear_input/lean_check/PrimeFactorFiniteLength.inc', 'LinearInputPrimeFactorFiniteLength'),
+    ('linear_input/lean_check/PrimeFactorGeneralF0.inc', 'LinearInputPrimeFactorGeneralF0'),
 )
 
 
