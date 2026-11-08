@@ -6,6 +6,7 @@ import Elastica.Derivation
 import Elastica.Examples
 import Elastica.Composition
 import Elastica.Reconstruction
+import Elastica.IntrinsicHeight
 import Elastica.SecondVariation
 import Elastica.ConstraintRegularity
 import Elastica.ExactVariation
