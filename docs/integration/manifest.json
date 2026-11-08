@@ -3080,6 +3080,18 @@
       "permitted_adaptations": [
         "Replace unavailable pow_eq_zero with real zero-product case analysis under the pinned Lean version; theorem statement unchanged."
       ]
+    },
+    {
+      "path": "linear_input/lean_check/FoldCountOriginal.inc",
+      "sha256": "9ab4eb6069128528b0793b42151adbf261db8d05bda209587670453c77b77ac5",
+      "original_sha256": "8f446d1a11a700d8a99348e6e5f3d4e0d5f4a5dd7ad5fad34aa6e692819cd026",
+      "source_pr": 120,
+      "source_path": "FoldCountOriginal.inc (user-supplied attachment, 2026-11-09)",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Filled the seven original sorry proofs using the previous FoldCount.inc and private lemmas; preserved all seven theorem statements."
+      ]
     }
   ],
   "construction_errors": [],
@@ -3299,6 +3311,11 @@
       "path": "linear_input/lean_check/FoldCount.inc",
       "source_commit": "474102ba34de7eaa5955b2f8a370e6d19d945aee",
       "note": "Provisional normalized fold/cusp root count classification; first pinned Lean attempt found an unavailable lemma, repaired without changing any statement; exact-head joint CI pending."
+    },
+    {
+      "date": "2026-11-09",
+      "path": "linear_input/lean_check/FoldCountOriginal.inc",
+      "note": "User-supplied FoldCountOriginal.inc; seven proof obligations filled, original-variable classification. Exact-head Lean verification pending."
     }
   ]
 }
