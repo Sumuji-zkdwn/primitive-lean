@@ -1,0 +1,41 @@
+name: Elastica intrinsic height and curvature
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Elastica/IntrinsicHeight.lean'
+      - 'lean/Elastica.lean'
+      - '.github/workflows/elastica-intrinsic-height.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'lean/Elastica/IntrinsicHeight.lean'
+      - 'lean/Elastica.lean'
+      - '.github/workflows/elastica-intrinsic-height.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Check actual Elastica geometry with trust zero
+        working-directory: lean
+        run: |
+          lake build Elastica
+          lake env lean --trust=0 Elastica/IntrinsicHeight.lean
