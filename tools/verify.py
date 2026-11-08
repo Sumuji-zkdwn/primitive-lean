@@ -212,6 +212,7 @@ def verify_lean(rebuild):
         'OperatorF0SemanticBridge': 'Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates',
         'OperatorSemanticMonoid': 'Faithful semantic operator monoid, quotient congruence and constructive full transformation monoid on predictive states',
         'OperatorFiniteMapCounts': 'Finite three-state compatible-map cardinalities and non-generatable constant witness',
+        'GravityObservations': 'Exact F0 observational descent and injectivity obstruction; monopole/dipole invariance, lost quadratic moment and exact exterior inverse-distance correction for symmetric two-body configurations.',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
