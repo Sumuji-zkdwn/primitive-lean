@@ -3,13 +3,13 @@ name: Elastica intrinsic height and curvature
 on:
   pull_request:
     paths:
-      - 'lean/Elastica/IntrinsicHeight.lean'
+      - 'lean/Research/ElasticaIntrinsicHeight.lean'
       - 'lean/Elastica.lean'
       - '.github/workflows/elastica-intrinsic-height.yml'
   push:
     branches: [main]
     paths:
-      - 'lean/Elastica/IntrinsicHeight.lean'
+      - 'lean/Research/ElasticaIntrinsicHeight.lean'
       - 'lean/Elastica.lean'
       - '.github/workflows/elastica-intrinsic-height.yml'
   workflow_dispatch:
@@ -37,5 +37,5 @@ jobs:
       - name: Check actual Elastica geometry with trust zero
         working-directory: lean
         run: |
-          lake build Elastica.IntrinsicHeight
-          lake env lean --trust=0 Elastica/IntrinsicHeight.lean
+          lake build Elastica.Geometry
+          lake env lean --trust=0 Research/ElasticaIntrinsicHeight.lean
