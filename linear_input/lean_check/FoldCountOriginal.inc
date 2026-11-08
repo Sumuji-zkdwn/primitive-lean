@@ -19,7 +19,6 @@ theorem scale_exists {lam r : ℝ} (hlam : 0 < lam) (hr : r < 0) :
   refine ⟨Real.sqrt (-r / (3 * lam)), Real.sqrt_pos.2 hq, ?_⟩
   rw [Real.sq_sqrt (le_of_lt hq)]
   field_simp [ne_of_gt hden]
-  ring
 
 /-- The original stationary equation and normalized cubic agree under scaling. -/
 theorem input_iff_normal {lam a t z : ℝ} (hlam : 0 < lam) (ha : 0 < a) :
@@ -48,7 +47,6 @@ private theorem scaled_data {lam r u : ℝ} (hlam : 0 < lam) (hr : r < 0) :
   refine ⟨a, u / (2 * lam * a ^ 3), ha, hr', ?_⟩
   have hden : 2 * lam * a ^ 3 ≠ 0 := ne_of_gt (by positivity)
   field_simp [hden]
-  ring
 
 private theorem quot_eq_scaled_iff {a x z : ℝ} (ha : a ≠ 0) :
     x / a = z ↔ x = a * z := by
@@ -60,7 +58,6 @@ private theorem quot_eq_scaled_iff {a x z : ℝ} (ha : a ≠ 0) :
   · intro h
     rw [h]
     field_simp [ha]
-    ring
 
 private theorem input_scaled_iff {lam r u a t : ℝ}
     (hlam : 0 < lam) (ha : 0 < a)
@@ -194,7 +191,7 @@ theorem stationary_fold {lam r u : ℝ} (hlam : 0 < lam) (hr : r ≠ 0)
     · rw [hessian_scaled lam r a (-1) hr']
       norm_num
     · rw [hessian_scaled lam r a 2 hr']
-      norm_num <;> positivity
+      norm_num; positivity
   · have ht : t = -1 := by linarith
     subst t
     refine ⟨a * 1, a * (-2), ?_, ?_, ?_, ?_⟩
@@ -210,7 +207,7 @@ theorem stationary_fold {lam r u : ℝ} (hlam : 0 < lam) (hr : r ≠ 0)
     · rw [hessian_scaled lam r a 1 hr']
       norm_num
     · rw [hessian_scaled lam r a (-2) hr']
-      norm_num <;> positivity
+      norm_num; positivity
 
 private theorem input_difference (lam r x y : ℝ) :
     LinearInputDesign.input lam r y - LinearInputDesign.input lam r x =
@@ -243,7 +240,6 @@ private theorem nonnegative_unique {lam r u : ℝ} (hlam : 0 < lam)
   have hlinear : lam * M = |u| + lam := by
     dsimp [M]
     field_simp [ne_of_gt hlam]
-    ring
   have hprod : 0 ≤ M * ((M - 1) * (M + 1)) :=
     mul_nonneg (le_of_lt hMpos)
       (mul_nonneg (by linarith) (by linarith))
@@ -336,8 +332,7 @@ theorem stationary_one {lam r u : ℝ} (hlam : 0 < lam)
         have hu0 : LinearInputDesign.input lam 0 (0 : ℝ) = u := by
           exact (hunique 0).2 h.symm
         have hu : u = 0 := by simpa [LinearInputDesign.input] using hu0.symm
-        subst u
-        norm_num at hD
+        simp [hu] at hD
       have hp : 0 < x ^ 2 := sq_pos_of_ne_zero hx
       have hm : 0 < lam * x ^ 2 := mul_pos hlam hp
       nlinarith
@@ -350,9 +345,8 @@ theorem tip_of_D_zero {lam r u : ℝ} (hlam : 0 < lam) (hr : r = 0)
     (hD : 4 * r ^ 3 + 27 * lam * u ^ 2 = 0) : u = 0 := by
   rw [hr] at hD
   norm_num at hD
-  have h27 : (27 : ℝ) * lam ≠ 0 := ne_of_gt (by positivity)
-  have hu2 : u ^ 2 = 0 :=
-    (mul_eq_zero.mp (show (27 * lam) * u ^ 2 = 0 by nlinarith [hD])).resolve_left h27
-  nlinarith
+  rcases hD with hzero | hu
+  · exact (ne_of_gt hlam hzero).elim
+  · exact hu
 
 end LinearInputFoldCountOriginal
