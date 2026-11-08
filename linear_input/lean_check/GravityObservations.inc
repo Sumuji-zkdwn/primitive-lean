@@ -67,7 +67,6 @@ theorem moment_zero_formula (m a : ℝ) :
 theorem moment_one_formula (m a : ℝ) :
     symmetricMoment (m, a) 1 = 0 := by
   simp [symmetricMoment]
-  ring
 
 theorem moment_two_formula (m a : ℝ) :
     symmetricMoment (m, a) 2 = 2 * m * a ^ 2 := by

@@ -214,6 +214,7 @@ def verify_lean(rebuild):
         'OperatorFiniteMapCounts': 'Finite three-state compatible-map cardinalities and non-generatable constant witness',
         'GravityObservations': 'Exact F0 observational descent and injectivity obstruction; monopole/dipole invariance, lost quadratic moment and exact exterior inverse-distance correction for symmetric two-body configurations.',
         'FiveDimLagrange': 'Five-coordinate constrained-energy lift, regular one-constraint multiplier existence from Elastica kernel annihilators, confirmed-observation Jacobian rank drop, and explicit original-E stationary input.',
+        'ParallelWriteGluing': 'Finite-family partial-state update amalgamation iff overlap compatibility, constructive first-write gluing and written-coordinate uniqueness, conflicting/disjoint concurrent writes, explicit history gate and conditional nonpreservation (PR #71, renamed so it coexists with the different ParallelLocalGluing proof of PR #70)',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

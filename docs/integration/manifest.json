@@ -2956,18 +2956,20 @@
     },
     {
       "path": "linear_input/lean_check/GravityObservations.inc",
-      "sha256": "bf3ebb42c3b7ab861677424f338ae021a1602f9228940ab187d2660c4ae1ad45",
+      "sha256": "f4ed39b4e7eb93be8275a106d2519bd96400592946fa92d5df59407aa0513271",
       "original_sha256": "bf3ebb42c3b7ab861677424f338ae021a1602f9228940ab187d2660c4ae1ad45",
       "source_pr": 45,
       "source_commit": "ab049c72875bd53df6be375a7090832b43a8aa0b",
       "source_path": "linear_input/lean_check/GravityObservations.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Drop a trailing ring in moment_one_formula: simp already closes the goal under the pinned Mathlib (No goals error)."
+      ]
     },
     {
       "path": "linear_input/lean_check/FiveDimLagrange.inc",
-      "sha256": "b595d66520646601254bce6a8915c58b4ba68155795580538deb8cda556172be",
+      "sha256": "ab31543baff700b42f435d7ef0bac188cd82743ba0bc41cefa627fd907c46d45",
       "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
       "source_pr": null,
       "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
@@ -2991,9 +2993,23 @@
         "Explicitly zeta-reduce local bindings in singularActualFourthMatrix_eq before rewriting the verified parallel projected Lie brackets; no theorem statement change.",
         "Append eleven real-polynomial Monge contact identities (norm/wedge Lagrange identity, two horizontal differential equations, angular numerator) and F0-compatibility results for the horizontal Euler step, including an invariant c=0 leaf and future-state equivalence.",
         "Add exact projected length-three bracket minors covering all c != 0 on u=t*c, an explicit algebraic dependence relation, and a one-step horizontal Euler counterexample entering the zero-confirmed invariant leaf; preserve all earlier theorem statements.",
-        "Remove a redundant ring tactic after dsimp on the zero-confirmed horizontal Euler lemma to satisfy the zero-warning Lean audit; no theorem statement changes."
+        "Remove a redundant ring tactic after dsimp on the zero-confirmed horizontal Euler lemma to satisfy the zero-warning Lean audit; no theorem statement changes.",
+        "In zero_confirmed_horizontal_step, append <;> ring after the first dsimp to close the remaining linear goals 0 + h * (u1 * (0 * v.1 + 0 * v.2)) = 0, and drop the never-executed <;> ring after the second dsimp, which already closes its goals. The statement is unchanged."
       ],
       "note": "89 theorem statements at current head; 71-theorem baseline success. Follow-up Monge/F0 and rank witnesses compiled in preliminary runs, but strict warning-only CI failure led to removing one unnecessary ring tactic; exact-head integration pending."
+    },
+    {
+      "path": "linear_input/lean_check/ParallelWriteGluing.inc",
+      "sha256": "68ed1856ede6454b99144343ed392d51431f78eb181c260cc7525b42d71c5a87",
+      "original_sha256": "6c48de4e041d3d9d75bfc7d8010106d47046a0ab1d1464fa7eb03686b62b88b6",
+      "source_pr": 71,
+      "source_commit": "fac681e30b01f8c970ca6964b8f67bfe125cbf0d",
+      "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Integrated as ParallelWriteGluing.inc with namespace LinearInputParallelWriteGluing instead of ParallelLocalGluing / LinearInputParallelGluing, which PR #70 already uses for a different proof; only the two namespace lines change."
+      ]
     }
   ],
   "construction_errors": [],
