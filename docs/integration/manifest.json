@@ -3092,6 +3092,60 @@
       "permitted_adaptations": [
         "Filled the seven original sorry proofs using the previous FoldCount.inc and private lemmas; preserved all seven theorem statements."
       ]
+    },
+    {
+      "path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "sha256": "7c2e4d06913dc6b3971644421e016ff447c6e179297162ceff193f635883d826",
+      "original_sha256": "7c2e4d06913dc6b3971644421e016ff447c6e179297162ceff193f635883d826",
+      "source_pr": null,
+      "source_commit": "1f24bc3d082ff64d6972401e96274d5c28586807",
+      "source_path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "source_branch": "autonomy/verified-operator-growth",
+        "source_ledger": "docs/autonomy/ledger.json",
+        "legacy_cycle": 1,
+        "verified_utc": "2026-11-03T20:35:05.938660+00:00",
+        "mainline_migration": "requires fresh exact-head Lean and axiom audit"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/AutonomyCycle00002.inc",
+      "sha256": "57d89fc457a464659fce56dab8317e7483e7aae50a34e3dc4a16f3c1abae5d5e",
+      "original_sha256": "57d89fc457a464659fce56dab8317e7483e7aae50a34e3dc4a16f3c1abae5d5e",
+      "source_pr": null,
+      "source_commit": "6581ba3f24307a3d770c88e7963b3ef5b76ea64f",
+      "source_path": "linear_input/lean_check/AutonomyCycle00002.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "source_branch": "autonomy/verified-operator-growth",
+        "source_ledger": "docs/autonomy/ledger.json",
+        "legacy_cycle": 2,
+        "verified_utc": "2026-11-05T07:03:13.688148+00:00",
+        "mainline_migration": "requires fresh exact-head Lean and axiom audit"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/AutonomyCycle00003.inc",
+      "sha256": "18affb992ba95bb0f833f273926791d57427a99f9b48ff0607454f7542347b3a",
+      "original_sha256": "18affb992ba95bb0f833f273926791d57427a99f9b48ff0607454f7542347b3a",
+      "source_pr": null,
+      "source_commit": "405d884331cb6deb1ccc158fd86aab5275d96e50",
+      "source_path": "linear_input/lean_check/AutonomyCycle00003.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "source_branch": "autonomy/verified-operator-growth",
+        "source_ledger": "docs/autonomy/ledger.json",
+        "legacy_cycle": 3,
+        "verified_utc": "2026-11-07T23:30:09.753493+00:00",
+        "mainline_migration": "requires fresh exact-head Lean and axiom audit"
+      }
     }
   ],
   "construction_errors": [],
@@ -3316,6 +3370,24 @@
       "date": "2026-11-09",
       "path": "linear_input/lean_check/FoldCountOriginal.inc",
       "note": "User-supplied FoldCountOriginal.inc; seven sorry-free proof obligations, original-variable classification. Subsequent Lean tactic repairs; exact-head verification pending."
+    },
+    {
+      "date": "2026-11-09",
+      "path": "linear_input/lean_check/AutonomyCycle00001.inc",
+      "source_commit": "1f24bc3d082ff64d6972401e96274d5c28586807",
+      "note": "Unchanged legacy verified witness ported for exact-head mainline audit; original branch preserved"
+    },
+    {
+      "date": "2026-11-09",
+      "path": "linear_input/lean_check/AutonomyCycle00002.inc",
+      "source_commit": "6581ba3f24307a3d770c88e7963b3ef5b76ea64f",
+      "note": "Unchanged legacy verified witness ported for exact-head mainline audit; original branch preserved"
+    },
+    {
+      "date": "2026-11-09",
+      "path": "linear_input/lean_check/AutonomyCycle00003.inc",
+      "source_commit": "405d884331cb6deb1ccc158fd86aab5275d96e50",
+      "note": "Unchanged legacy verified witness ported for exact-head mainline audit; original branch preserved"
     }
   ]
 }
