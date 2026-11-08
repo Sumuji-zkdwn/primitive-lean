@@ -1,0 +1,57 @@
+name: Finite prime-factor observation Lean probe
+
+on:
+  push:
+    branches: [chatgpt/prime-factor-observation-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorObservation.inc
+      - .github/workflows/prime-factor-observation-probe.yml
+  pull_request:
+    branches: [chatgpt/ternary-zero-cesaro-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorObservation.inc
+      - .github/workflows/prime-factor-observation-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prepare standalone proof source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('linear_input/lean_check/PrimeFactorObservation.inc').read_text()
+          for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+              assert token not in source, f'Forbidden Lean token: {token}'
+          earlier = [
+              Path('linear_input/lean_check/TernaryZeroCesaro.inc').read_text(),
+              Path('linear_input/lean_check/FiniteObservationSeparation.inc').read_text(),
+          ]
+          extra_commands = [
+              '#print axioms LinearInputPrimeFactorObservation.product_kernel_eq_bag_kernel',
+              '#print axioms LinearInputPrimeFactorObservation.canonical_product_injective',
+              '#print axioms LinearInputPrimeFactorObservation.minimal_ordered_observation_count',
+          ]
+          Path('lean/PrimeFactorObservationProbe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(earlier + [source])
+              + '\n' + '\n'.join(extra_commands) + '\n',
+              encoding='utf-8')
+          PY
+      - name: Compile standalone Lean proofs in kernel mode
+        working-directory: lean
+        run: lake env lean --trust=0 PrimeFactorObservationProbe.lean

@@ -1,0 +1,67 @@
+name: Prime factor F0 and adaptive observations Lean probe
+
+on:
+  push:
+    branches: [chatgpt/prime-factor-f0-adaptive-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorF0Adaptive.inc
+      - .github/workflows/prime-factor-f0-adaptive-probe.yml
+  pull_request:
+    branches: [chatgpt/prime-observation-orbits-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorF0Adaptive.inc
+      - .github/workflows/prime-factor-f0-adaptive-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prepare standalone proof source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          names = [
+              'TernaryZeroCesaro.inc',
+              'FiniteObservationSeparation.inc',
+              'PrimeFactorObservation.inc',
+              'PrimeFactorOrbits.inc',
+              'PrimeFactorF0Adaptive.inc',
+          ]
+          sources = []
+          for name in names:
+              source = Path('linear_input/lean_check', name).read_text()
+              if name == 'PrimeFactorF0Adaptive.inc':
+                  for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                      assert token not in source, f'Forbidden Lean token: {token}'
+              sources.append(source)
+          checks = [
+              '#print axioms LinearInputPrimeFactorF0.normalize_idempotent',
+              '#print axioms LinearInputPrimeFactorF0.product_kernel_eq_normalize_kernel',
+              '#print axioms LinearInputPrimeFactorF0.normalize_kernel_eq_orbit',
+              '#print axioms LinearInputPrimeFactorF0.normalize_fixed_point_count',
+              '#print axioms LinearInputPrimeFactorF0.factors_through_normalize_iff',
+              '#print axioms LinearInputPrimeFactorF0.adaptive_two_not_injective',
+          ]
+          Path('lean/PrimeFactorF0AdaptiveProbe.lean').write_text(
+              'import Mathlib\n\n' + '\n\n'.join(sources) + '\n' +
+              '\n'.join(checks) + '\n',
+              encoding='utf-8')
+          PY
+      - name: Compile new extension with trusted kernel
+        working-directory: lean
+        run: lake env lean --trust=0 PrimeFactorF0AdaptiveProbe.lean

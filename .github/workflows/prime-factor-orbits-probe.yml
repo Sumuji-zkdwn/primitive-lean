@@ -1,0 +1,65 @@
+name: Prime factor orbit and triple observation Lean probe
+
+on:
+  push:
+    branches: [chatgpt/prime-observation-orbits-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorOrbits.inc
+      - .github/workflows/prime-factor-orbits-probe.yml
+  pull_request:
+    branches: [chatgpt/prime-factor-observation-20261103]
+    paths:
+      - linear_input/lean_check/PrimeFactorOrbits.inc
+      - .github/workflows/prime-factor-orbits-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prepare standalone proof source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          files = [
+            'TernaryZeroCesaro.inc',
+            'FiniteObservationSeparation.inc',
+            'PrimeFactorObservation.inc',
+            'PrimeFactorOrbits.inc',
+          ]
+          sources = []
+          for filename in files:
+              source = Path('linear_input/lean_check', filename).read_text()
+              if filename == 'PrimeFactorOrbits.inc':
+                  for token in ('sorry', 'admit', 'axiom', 'unsafe', 'native_decide'):
+                      assert token not in source, f'Forbidden Lean token: {token}'
+              sources.append(source)
+          checks = [
+            '#print axioms LinearInputPrimeFactorOrbits.pair_product_eq_iff_swap_orbit',
+            '#print axioms LinearInputPrimeFactorOrbits.triple_product_eq_iff_orbit',
+            '#print axioms LinearInputPrimeFactorOrbits.triple_product_eq_iff_bag',
+            '#print axioms LinearInputPrimeFactorOrbits.canonical_triple_product_injective',
+            '#print axioms LinearInputPrimeFactorOrbits.minimal_unordered_triple_observations',
+            '#print axioms LinearInputPrimeFactorOrbits.minimal_ordered_triple_observations',
+          ]
+          Path('lean/PrimeFactorOrbitsProbe.lean').write_text(
+            'import Mathlib\n\n' + '\n\n'.join(sources) + '\n' +
+            '\n'.join(checks) + '\n', encoding='utf-8')
+          PY
+      - name: Compile standalone Lean proofs in kernel mode
+        working-directory: lean
+        run: lake env lean --trust=0 PrimeFactorOrbitsProbe.lean
