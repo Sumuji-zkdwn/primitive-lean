@@ -37,5 +37,5 @@ jobs:
       - name: Check actual Elastica geometry with trust zero
         working-directory: lean
         run: |
-          lake build Elastica
+          lake build Elastica.IntrinsicHeight
           lake env lean --trust=0 Elastica/IntrinsicHeight.lean
