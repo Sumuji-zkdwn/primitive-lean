@@ -66,7 +66,13 @@ theorem cusp_tip_unique (lam : ℝ) (hlam : 0 < lam) (x : ℝ) :
   · intro h
     have hx : lam * x ^ 3 = 0 := by simpa [LinearInputDesign.input] using h
     have hx3 : x ^ 3 = 0 := (mul_eq_zero.mp hx).resolve_left (ne_of_gt hlam)
-    exact pow_eq_zero hx3
+    have hprod : x * (x * x) = 0 := by
+      calc
+        x * (x * x) = x ^ 3 := by ring
+        _ = 0 := hx3
+    rcases mul_eq_zero.mp hprod with hx0 | hxx
+    · exact hx0
+    · rcases mul_eq_zero.mp hxx with hx0 | hx0 <;> exact hx0
   · rintro rfl
     simp [LinearInputDesign.input]
 
