@@ -111,7 +111,7 @@ python -B -X utf8 tools/verify.py --integration-only
 - **演算器の観測・有限自己拡張**: `linear_input/lean_check/OperatorWordObservations.inc` 〜 `HigherOrderLiftSelfRewriting.inc` · [系列の統合境界](docs/integration/2026-11-05-operator-rulefold-consolidation.md)
 - **デモ**: [Rulefold × デジタル曼荼羅](demos/rulefold_mandala.html) · [数学モデルとの区別](demos/RULEFOLD_MANDALA_README.md)
 - **実験**: [ARC 公開デモのローカル統合検査](experiments/arc3/README.md) · [Kaggle handoff（歴史的記録）](docs/KAGGLE.md)
-- **未統合の研究系列**: [PR #75](https://github.com/Sumuji-zkdwn/primitive-lean/pull/75) は履歴非保存・局所接合の証明群を統合提案中。#70 と #71 は同名の異なるLean原稿なので未選定です。
+- **PR の統合状況**: [2026-11-08 一括統合の記録](docs/integration/2026-11-08-open-pr-consolidation.md)（統合した PR、登録一覧の追加方法、改変したソース、未統合の PR とその理由）
 - **更新履歴**: [docs/HISTORY.md](docs/HISTORY.md)（2026-11-06 までの README の日付別記録）
 
 ## 運用方針

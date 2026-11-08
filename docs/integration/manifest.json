@@ -2855,6 +2855,218 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
+      "sha256": "9c638b6beebb7a64ed25330274d3db8b9faf4482acfa8325df9bf58f4bf76f8f",
+      "original_sha256": "e0b48710f73ec6baca504f92dd112d953f4c758bffd88f15cdae2e9292097582",
+      "source_pr": 58,
+      "source_commit": "4c1a71a7f15fdc2e505ea4008115c4fafed19739",
+      "source_path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Rename the bound variable prefix to pre: prefix is a reserved Lean keyword and the original source did not parse. No statement or proof step changes otherwise."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+      "sha256": "5f9b6cc1f46518c3fa26736e65d18fcf00c8c42f215129828715a3b95a03538b",
+      "original_sha256": "5f9b6cc1f46518c3fa26736e65d18fcf00c8c42f215129828715a3b95a03538b",
+      "source_pr": null,
+      "source_commit": "1bd0c2fae4f5af41db07352ea7a0282511b7f2cd",
+      "source_path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorProductSystems.inc",
+      "sha256": "6f2bb3e6abe50df68bb79d05eaee9a5d49893a867dd97fa6b5f2b89d84cddcae",
+      "original_sha256": "6c1865584f3179f5f96285a2d21b390e3331c08aa9c2a8c85c869f81101ff6dc",
+      "source_pr": null,
+      "source_commit": "14c95cb605b472bb3ab43d1f750452375779aedb",
+      "source_path": "linear_input/lean_check/OperatorProductSystems.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace the deprecated push_neg tactic by push Not (same negation normal form); the pinned Mathlib warns and the audit rejects warnings."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/OperatorReachability.inc",
+      "sha256": "847c45561ed51559296f68e97b78b20b62319698299dd43011f12147368eaa29",
+      "original_sha256": "847c45561ed51559296f68e97b78b20b62319698299dd43011f12147368eaa29",
+      "source_pr": null,
+      "source_commit": "2b231e72113a58440a9e89d5152c650abfed9af5",
+      "source_path": "linear_input/lean_check/OperatorReachability.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorSensorFamilies.inc",
+      "sha256": "5d49b1a157a22d544a5cac7fc504ed1c3eaa4517044ac5b70ce67fe41ddaf6d1",
+      "original_sha256": "5d49b1a157a22d544a5cac7fc504ed1c3eaa4517044ac5b70ce67fe41ddaf6d1",
+      "source_pr": null,
+      "source_commit": "5cb5d9eb5ff40017ba218c620dfba5e1eee20390",
+      "source_path": "linear_input/lean_check/OperatorSensorFamilies.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+      "sha256": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e",
+      "original_sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
+      "source_pr": 58,
+      "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
+      "source_path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Remove the unused implicit type argument ι from fiber_stable_eq_F0_respects, which the pinned Lean could not infer at its use and flagged as unused; the proposition is unchanged."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
+      "sha256": "3cc1bfe1ad8f2554339e0724a23eb1fdbe3ab66b070556394eecf5bc99d05439",
+      "original_sha256": "ac91be213431dfccea6eec3dbd036d9f4ed7f42dab92a6dffd8f2b5da7b79d96",
+      "source_pr": 59,
+      "source_commit": "5a5397593bebb7fddc6c5c2b92e46beb2ae6a69a",
+      "source_path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Apply evaluate_injective through an explicit lambda (fun h => evaluate_injective K step h) because Function.Injective binds its arguments strictly implicitly. Statements are unchanged."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+      "sha256": "fed818ad809bd16fee371ea9a7edc27b83c33c6af521e7931cfff1ed63403a8d",
+      "original_sha256": "9cea7fd2bc307c6c76191cc2687bc32332eec9e1e5090c03188d71af6afdfffc",
+      "source_pr": null,
+      "source_commit": "5e27658a7163519bf8200db31493b52a3d537905",
+      "source_path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace simpa ... using rfl by simp [eligibleThree], as requested by the unnecessarySimpa linter; the statement is unchanged."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/GravityObservations.inc",
+      "sha256": "f4ed39b4e7eb93be8275a106d2519bd96400592946fa92d5df59407aa0513271",
+      "original_sha256": "bf3ebb42c3b7ab861677424f338ae021a1602f9228940ab187d2660c4ae1ad45",
+      "source_pr": 45,
+      "source_commit": "ab049c72875bd53df6be375a7090832b43a8aa0b",
+      "source_path": "linear_input/lean_check/GravityObservations.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Drop a trailing ring in moment_one_formula: simp already closes the goal under the pinned Mathlib (No goals error)."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/FiveDimLagrange.inc",
+      "sha256": "ab31543baff700b42f435d7ef0bac188cd82743ba0bc41cefa627fd907c46d45",
+      "original_sha256": "c2baef24f5f84a0254b0e8b586f92993c6d21d3323d892ad65cc8461ed3dddd9",
+      "source_pr": null,
+      "source_commit": "7927cf1057c0ecda7e3c95554abfaecdae8226b4",
+      "source_path": "linear_input/lean_check/FiveDimLagrange.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Append first-jet contact interpretation and genuine E directional derivative, with exact contact defect and two finite noncommutative shift laws.",
+        "Replace a pair of equivalent tactic combinators to meet the strict zero-warning Lean compilation policy; no theorem statement changes.",
+        "Add 4 algebraic Cartan/contact horizontality theorems for dual first-jet geometries J^1(R,R^2) and J^1(R^2,R).",
+        "Correct two failed jet-horizontality attempts using pure momentum and base-plus-pairing tangent directions; add their explicit tangent definition.",
+        "Append 13 theorems and 7 definitions: exact common horizontal-plane parameterization; F0 retraction and a primitive-energy transverse update that violates descent; polynomial Cartan bracket minor factorization and nondegeneracy certificate.",
+        "Add an inductively proved real HasDerivAt semantics for five-variable polynomial expressions, actual fieldwise derivatives, and true first/second Lie-bracket identifications with the previously symbolic Y/Z fields.",
+        "Remove the two redundant no-op ring tactics identified by strict Lean CI and add actual Lie-bracket projected minor and conserved/rotating holonomy derivative theorems.",
+        "Replace two potentially redundant end-of-proof tactics in projection and holonomy pairing with structurally exact proof steps.",
+        "Complete the actualBracketProj_Y ring identity where syntactic subtraction differed from addition of negation, as required by the exact-head Lean CI.",
+        "Append genuine 5x5 Matrix.fromBlocks representation of horizontal and iterated Lie-bracket columns; derive its Mathlib Matrix.det, exact determinant-zero locus and rank-five generic condition.",
+        "Replace unavailable Matrix.rank_of_det_ne_zero by the pinned Mathlib isUnit_iff_ne_zero → isUnit_iff_isUnit_det → Matrix.rank_of_isUnit chain already verified in F16FullRank.inc.",
+        "Add singular parallel state and projected length-two/three/four bracket formulas, a universal fourth-order 5x5 determinant certificate -4*(c1²+c2²)^3 independent of t, and rank-five via unit determinant; derivative-level fourth bracket identifications to follow.",
+        "Prove two fourth-order actual Lie brackets projected onto (c1,c2,r) match the parallel polynomial W11 and W12, prove their undecided components vanish, identify the actual fourth-order 5x5 block matrix, and derive its nonzero determinant and rank five for all c != 0, u = t*c.",
+        "Explicitly zeta-reduce local bindings in singularActualFourthMatrix_eq before rewriting the verified parallel projected Lie brackets; no theorem statement change.",
+        "Append eleven real-polynomial Monge contact identities (norm/wedge Lagrange identity, two horizontal differential equations, angular numerator) and F0-compatibility results for the horizontal Euler step, including an invariant c=0 leaf and future-state equivalence.",
+        "Add exact projected length-three bracket minors covering all c != 0 on u=t*c, an explicit algebraic dependence relation, and a one-step horizontal Euler counterexample entering the zero-confirmed invariant leaf; preserve all earlier theorem statements.",
+        "Remove a redundant ring tactic after dsimp on the zero-confirmed horizontal Euler lemma to satisfy the zero-warning Lean audit; no theorem statement changes.",
+        "In zero_confirmed_horizontal_step, append <;> ring after the first dsimp to close the remaining linear goals 0 + h * (u1 * (0 * v.1 + 0 * v.2)) = 0, and drop the never-executed <;> ring after the second dsimp, which already closes its goals. The statement is unchanged."
+      ],
+      "note": "89 theorem statements at current head; 71-theorem baseline success. Follow-up Monge/F0 and rank witnesses compiled in preliminary runs, but strict warning-only CI failure led to removing one unnecessary ring tactic; exact-head integration pending."
+    },
+    {
+      "path": "linear_input/lean_check/ParallelWriteGluing.inc",
+      "sha256": "68ed1856ede6454b99144343ed392d51431f78eb181c260cc7525b42d71c5a87",
+      "original_sha256": "6c48de4e041d3d9d75bfc7d8010106d47046a0ab1d1464fa7eb03686b62b88b6",
+      "source_pr": 71,
+      "source_commit": "fac681e30b01f8c970ca6964b8f67bfe125cbf0d",
+      "source_path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Integrated as ParallelWriteGluing.inc with namespace LinearInputParallelWriteGluing instead of ParallelLocalGluing / LinearInputParallelGluing, which PR #70 already uses for a different proof; only the two namespace lines change."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorObservation.inc",
+      "sha256": "5d1124bd98d6187f80aeb1351452dc3046d4f31e3e653b0ba8f48fffb700592e",
+      "original_sha256": "5d1124bd98d6187f80aeb1351452dc3046d4f31e3e653b0ba8f48fffb700592e",
+      "source_pr": 50,
+      "source_commit": "b8d9697bcc29d5aeff1f9226326a0c2bf1774bb5",
+      "source_path": "linear_input/lean_check/PrimeFactorObservation.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorOrbits.inc",
+      "sha256": "3da25f0ab1b4f532ec0cdbb8af77c6b3908068664273e4363f94440e25560973",
+      "original_sha256": "3da25f0ab1b4f532ec0cdbb8af77c6b3908068664273e4363f94440e25560973",
+      "source_pr": 51,
+      "source_commit": "35dcf2cb2bf30c18f6aaaaea27924823b87c89af",
+      "source_path": "linear_input/lean_check/PrimeFactorOrbits.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorF0Adaptive.inc",
+      "sha256": "ee03c3a635e879c0088c6019b262260df3eb2f25040c311f3703951f02e24642",
+      "original_sha256": "ee03c3a635e879c0088c6019b262260df3eb2f25040c311f3703951f02e24642",
+      "source_pr": 52,
+      "source_commit": "94d25a8029d668bf76deb6d2c11b6d615ddb4523",
+      "source_path": "linear_input/lean_check/PrimeFactorF0Adaptive.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorFiniteLength.inc",
+      "sha256": "dfc80274f5f8bd3219f304e8deb6c4eb787657270b667639af2c9b1dceacbd15",
+      "original_sha256": "62384cc88d3f8d0d1f7fd3f280e0222797aff84934dc1f65828af4b8fa8b76d0",
+      "source_pr": 53,
+      "source_commit": "b4d928af47d6f867b0fc708654cc8b5b2fbfd78d",
+      "source_path": "linear_input/lean_check/PrimeFactorFiniteLength.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace three simpa calls by simp, as the unnecessarySimpa linter asks once the module is compiled with the specific Mathlib imports in EXTRA_IMPORTS instead of import Mathlib; statements are unchanged."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/PrimeFactorGeneralF0.inc",
+      "sha256": "4e34cb529094bc77ec365c1ef368e8979898c69980aab065b206743fe3fcbf9d",
+      "original_sha256": "4e34cb529094bc77ec365c1ef368e8979898c69980aab065b206743fe3fcbf9d",
+      "source_pr": 54,
+      "source_commit": "331cae85c9ab5019fb0acbcda5779e3a44db8226",
+      "source_path": "linear_input/lean_check/PrimeFactorGeneralF0.inc",
+      "role": "retained_source",
+      "byte_identical": true,
+      "permitted_adaptations": []
     }
   ],
   "construction_errors": [],
@@ -3020,6 +3232,54 @@
       "path": "linear_input/lean_check/ParallelLocalGluing.inc",
       "source_commit": "bf0644cb42731f70b97463dc3a6b89c56ddefce5",
       "note": "Exact iff local overlap consistency/global partial-function gluing; under coordinate coverage unique canonical state and 3-factor operational gluing criterion with concrete destructive and cumulative countermodels."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
+      "source_commit": "4c1a71a7f15fdc2e505ea4008115c4fafed19739",
+      "note": "Contextual two-sided congruence of operator programs and predictive quotient replacement. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
+      "source_commit": "1bd0c2fae4f5af41db07352ea7a0282511b7f2cd",
+      "note": "Quotient-safe feedback policies, adaptive iteration, and unsafe feedback counterexample. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorProductSystems.inc",
+      "source_commit": "14c95cb605b472bb3ab43d1f750452375779aedb",
+      "note": "Independent product systems, interleaved actions and observational product kernels. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorReachability.inc",
+      "source_commit": "2b231e72113a58440a9e89d5152c650abfed9af5",
+      "note": "Reachability closure, invariant predicates, and generated-language reachability preservation. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorSensorFamilies.inc",
+      "source_commit": "5cb5d9eb5ff40017ba218c620dfba5e1eee20390",
+      "note": "Arbitrary sensor bundles, kernel intersections, and joint separation. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
+      "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
+      "note": "Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates. Historical baseline files remain unchanged."
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
+      "source_commit": "5a5397593bebb7fddc6c5c2b92e46beb2ae6a69a",
+      "note": "Faithful semantic operator monoid, quotient congruence and constructive full transformation monoid on predictive states"
+    },
+    {
+      "date": "2026-11-04",
+      "path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
+      "source_commit": "5e27658a7163519bf8200db31493b52a3d537905",
+      "note": "Finite three-state compatible-map cardinalities and non-generatable constant witness"
     }
   ]
 }

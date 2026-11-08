@@ -204,6 +204,22 @@ def verify_lean(rebuild):
         'SingleSwapFiber': 'Complete rank-one collision lattice and oriented 4*9-to-6*6 swap; every equal-product pair is connected by finite swaps, with termination and unique oriented endpoint.',
         'F16RimRecovery': 'Lean-identifies the actual F16 relative action A^T C, proves a full 16D four-phase decoder, and exhibits collisions for one, two, and three phases.',
         'ParallelLocalGluing': 'Pairwise overlap agreement iff global gluing, canonical unique global state under coverage, exact global policy and operational reachability factorization, three independent finite failure modes',
+        'OperatorContextualEquivalence': 'Contextual two-sided congruence of operator programs and predictive quotient replacement',
+        'OperatorAdaptivePolicies': 'Quotient-safe feedback policies, adaptive iteration, and unsafe feedback counterexample',
+        'OperatorProductSystems': 'Independent product systems, interleaved actions and observational product kernels',
+        'OperatorReachability': 'Reachability closure, invariant predicates, and generated-language reachability preservation',
+        'OperatorSensorFamilies': 'Arbitrary sensor bundles, kernel intersections, and joint separation',
+        'OperatorF0SemanticBridge': 'Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates',
+        'OperatorSemanticMonoid': 'Faithful semantic operator monoid, quotient congruence and constructive full transformation monoid on predictive states',
+        'OperatorFiniteMapCounts': 'Finite three-state compatible-map cardinalities and non-generatable constant witness',
+        'GravityObservations': 'Exact F0 observational descent and injectivity obstruction; monopole/dipole invariance, lost quadratic moment and exact exterior inverse-distance correction for symmetric two-body configurations.',
+        'FiveDimLagrange': 'Five-coordinate constrained-energy lift, regular one-constraint multiplier existence from Elastica kernel annihilators, confirmed-observation Jacobian rank drop, and explicit original-E stationary input.',
+        'ParallelWriteGluing': 'Finite-family partial-state update amalgamation iff overlap compatibility, constructive first-write gluing and written-coordinate uniqueness, conflicting/disjoint concurrent writes, explicit history gate and conditional nonpreservation (PR #71, renamed so it coexists with the different ParallelLocalGluing proof of PR #70)',
+        'PrimeFactorObservation': 'Finite prime-factor observation kernels and the minimal probe count for 2, 3 and 5 (PR #50).',
+        'PrimeFactorOrbits': 'Prime-factor orbit kernels (S2/S3) and exact three-factor observation counts (PR #51).',
+        'PrimeFactorF0Adaptive': 'F0 sorting retraction, product-kernel quotient and adaptive observation lower bound (PR #52).',
+        'PrimeFactorFiniteLength': 'General finite-length prime-factor observation minimum and unordered-state count (PR #53).',
+        'PrimeFactorGeneralF0': 'Canonical F0 sorting for arbitrary finite prime lists and exact product kernels (PR #54).',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
