@@ -140,6 +140,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/OperatorSemanticMonoid.inc', 'LinearInputOperatorSemanticMonoid'),
     ('linear_input/lean_check/OperatorFiniteMapCounts.inc', 'LinearInputOperatorFiniteCounts'),
     ('linear_input/lean_check/GravityObservations.inc', 'LinearInputGravityObservations'),
+    ('linear_input/lean_check/FiveDimLagrange.inc', 'LinearInputFiveDimLagrange'),
 )
 
 
