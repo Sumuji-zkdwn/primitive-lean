@@ -3070,14 +3070,16 @@
     },
     {
       "path": "linear_input/lean_check/FoldCount.inc",
-      "sha256": "f6697e524d315211f4dbb0474cb9ce8dd2fd6b1785d4f29273382f99603cc70e",
+      "sha256": "31f23b0867326888c73213f8fdb6ef769c7a710368c23a085e7be577e9668c17",
       "original_sha256": "f6697e524d315211f4dbb0474cb9ce8dd2fd6b1785d4f29273382f99603cc70e",
       "source_pr": 120,
       "source_commit": "474102ba34de7eaa5955b2f8a370e6d19d945aee",
       "source_path": "linear_input/lean_check/FoldCount.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace unavailable pow_eq_zero with real zero-product case analysis under the pinned Lean version; theorem statement unchanged."
+      ]
     }
   ],
   "construction_errors": [],
@@ -3296,7 +3298,7 @@
       "date": "2026-11-09",
       "path": "linear_input/lean_check/FoldCount.inc",
       "source_commit": "474102ba34de7eaa5955b2f8a370e6d19d945aee",
-      "note": "Provisional normalized fold/cusp critical point classification; sorry-free candidate pending pinned Lean and joint axiom audit. Original seven statements not available."
+      "note": "Provisional normalized fold/cusp root count classification; first pinned Lean attempt found an unavailable lemma, repaired without changing any statement; exact-head joint CI pending."
     }
   ]
 }
