@@ -55,8 +55,62 @@ theorem jacobian_identity (u r x : ℝ) :
 theorem nontrivial_step : E (1, 0) = (2, -7) := by
   norm_num [E, I]
 
+
+/-- Polynomial inverse, using the same invariant coordinate. -/
+def invE (z : ℝ × ℝ) : ℝ × ℝ :=
+  let r := I z
+  let u := z.1 - r ^ 2
+  (u, r - u ^ 3)
+
+/-- No appeal to Jacobian conjectures: both inverses are explicit. -/
+theorem invE_E (z : ℝ × ℝ) : invE (E z) = z := by
+  rcases z with ⟨u, v⟩
+  apply Prod.ext <;> dsimp [invE, E, I] <;> ring
+
+theorem E_invE (z : ℝ × ℝ) : E (invE z) = z := by
+  rcases z with ⟨u, v⟩
+  apply Prod.ext <;> dsimp [invE, E, I] <;> ring
+
+/-- The orbit of E is explicitly computable from the first invariant. -/
+def closedOrbit (n : ℕ) (z : ℝ × ℝ) : ℝ × ℝ :=
+  let r := I z
+  let x := z.1 + (n : ℝ) * r ^ 2
+  (x, r - x ^ 3)
+
+theorem closedOrbit_zero (z : ℝ × ℝ) : closedOrbit 0 z = z := by
+  rcases z with ⟨u, v⟩
+  apply Prod.ext <;> dsimp [closedOrbit, I] <;> norm_num <;> ring
+
+theorem closedOrbit_step (n : ℕ) (z : ℝ × ℝ) :
+    E (closedOrbit n z) = closedOrbit (n + 1) z := by
+  rcases z with ⟨u, v⟩
+  apply Prod.ext
+  · dsimp [E, closedOrbit, I]
+    simp only [Nat.cast_add, Nat.cast_one]
+    ring
+  · dsimp [E, closedOrbit, I]
+    simp only [Nat.cast_add, Nat.cast_one]
+    ring
+
+theorem iterate_eq_closedOrbit (n : ℕ) (z : ℝ × ℝ) :
+    iterate n z = closedOrbit n z := by
+  induction n with
+  | zero => exact (closedOrbit_zero z).symm
+  | succ n ih =>
+      change E (iterate n z) = closedOrbit (n + 1) z
+      rw [ih, closedOrbit_step]
+
+/-- Iteration preserves the same invariant, even though most states move. -/
+theorem closedOrbit_invariant (n : ℕ) (z : ℝ × ℝ) :
+    I (closedOrbit n z) = I z := by
+  rw [← iterate_eq_closedOrbit]
+  exact I_iterate n z
+
 end Elastica.SiphonPolynomialE
 
 #print axioms Elastica.SiphonPolynomialE.I_E
 #print axioms Elastica.SiphonPolynomialE.I_iterate
 #print axioms Elastica.SiphonPolynomialE.jacobian_identity
+#print axioms Elastica.SiphonPolynomialE.invE_E
+#print axioms Elastica.SiphonPolynomialE.E_invE
+#print axioms Elastica.SiphonPolynomialE.iterate_eq_closedOrbit
