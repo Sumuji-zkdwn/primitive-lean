@@ -1,0 +1,36 @@
+name: Build NEON ORBIT Android APK
+on:
+  push:
+    branches: [app/neon-orbit-android]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  android-debug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Validate deterministic game physics
+        run: |
+          mkdir -p /tmp/neon-test
+          javac -d /tmp/neon-test \
+            neon-orbit-android/app/src/main/java/com/primitive/neonorbit/OrbitPhysics.java \
+            neon-orbit-android/tests/OrbitPhysicsTest.java
+          java -cp /tmp/neon-test OrbitPhysicsTest
+      - name: Assemble installable debug APK
+        working-directory: neon-orbit-android
+        run: gradle --no-daemon :app:assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: neon-orbit-android-apk
+          path: neon-orbit-android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
