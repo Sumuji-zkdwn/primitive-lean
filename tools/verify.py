@@ -125,7 +125,7 @@ def verify_lean(rebuild):
         'ChebyshevGaloisAutomorphisms': 'Base-field rotation and inversion automorphisms for the ternary Chebyshev model, the dihedral relations, and an injective representation; not yet a full Galois group equivalence',
         'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
         'FoldCount': 'Normalized cusp fold root counting, stationary sign types, ordinary discriminant, and triple-root cusp tip',
-        'FoldCountOriginal': 'Original-variable cusp/fold classification for every positive leading coefficient, including all discriminant regimes and explicit Hessian signs,
+        'FoldCountOriginal': 'Original-variable cusp/fold classification for every positive leading coefficient, including all discriminant regimes and explicit Hessian signs',
         'F16Holonomy': 'Finite Cayley-Dickson epsilon table, 128 signed observation squares, F0 idempotent forgetting and right-probe descent classification',
         'F16RecoverySpectrum': 'Constructive recovery of the forgotten bit by an obstructed probe, explicit signed 2x2 pencil factors, and four null vectors at each singular input',
         'F16RankCertificate': 'Exact integer factor and 12-by-12 pivot certificates imply real Matrix.rank 12 at t = +1 and -1',
