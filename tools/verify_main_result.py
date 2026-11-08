@@ -137,6 +137,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/OperatorReachability.inc', 'LinearInputOperatorReachability'),
     ('linear_input/lean_check/OperatorSensorFamilies.inc', 'LinearInputOperatorSensors'),
     ('linear_input/lean_check/OperatorF0SemanticBridge.inc', 'LinearInputOperatorF0Bridge'),
+    ('linear_input/lean_check/OperatorSemanticMonoid.inc', 'LinearInputOperatorSemanticMonoid'),
+    ('linear_input/lean_check/OperatorFiniteMapCounts.inc', 'LinearInputOperatorFiniteCounts'),
 )
 
 

@@ -210,6 +210,8 @@ def verify_lean(rebuild):
         'OperatorReachability': 'Reachability closure, invariant predicates, and generated-language reachability preservation',
         'OperatorSensorFamilies': 'Arbitrary sensor bundles, kernel intersections, and joint separation',
         'OperatorF0SemanticBridge': 'Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates',
+        'OperatorSemanticMonoid': 'Faithful semantic operator monoid, quotient congruence and constructive full transformation monoid on predictive states',
+        'OperatorFiniteMapCounts': 'Finite three-state compatible-map cardinalities and non-generatable constant witness',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
