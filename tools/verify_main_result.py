@@ -131,6 +131,12 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/SingleSwapFiber.inc', 'LinearInputSingleSwapFiber'),
     ('linear_input/lean_check/F16RimRecovery.inc', 'LinearInputF16RimRecovery'),
     ('linear_input/lean_check/ParallelLocalGluing.inc', 'LinearInputParallelGluing'),
+    ('linear_input/lean_check/OperatorContextualEquivalence.inc', 'LinearInputOperatorContexts'),
+    ('linear_input/lean_check/OperatorAdaptivePolicies.inc', 'LinearInputOperatorPolicies'),
+    ('linear_input/lean_check/OperatorProductSystems.inc', 'LinearInputOperatorProducts'),
+    ('linear_input/lean_check/OperatorReachability.inc', 'LinearInputOperatorReachability'),
+    ('linear_input/lean_check/OperatorSensorFamilies.inc', 'LinearInputOperatorSensors'),
+    ('linear_input/lean_check/OperatorF0SemanticBridge.inc', 'LinearInputOperatorF0Bridge'),
 )
 
 

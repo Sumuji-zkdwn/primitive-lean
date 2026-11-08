@@ -204,6 +204,12 @@ def verify_lean(rebuild):
         'SingleSwapFiber': 'Complete rank-one collision lattice and oriented 4*9-to-6*6 swap; every equal-product pair is connected by finite swaps, with termination and unique oriented endpoint.',
         'F16RimRecovery': 'Lean-identifies the actual F16 relative action A^T C, proves a full 16D four-phase decoder, and exhibits collisions for one, two, and three phases.',
         'ParallelLocalGluing': 'Pairwise overlap agreement iff global gluing, canonical unique global state under coverage, exact global policy and operational reachability factorization, three independent finite failure modes',
+        'OperatorContextualEquivalence': 'Contextual two-sided congruence of operator programs and predictive quotient replacement',
+        'OperatorAdaptivePolicies': 'Quotient-safe feedback policies, adaptive iteration, and unsafe feedback counterexample',
+        'OperatorProductSystems': 'Independent product systems, interleaved actions and observational product kernels',
+        'OperatorReachability': 'Reachability closure, invariant predicates, and generated-language reachability preservation',
+        'OperatorSensorFamilies': 'Arbitrary sensor bundles, kernel intersections, and joint separation',
+        'OperatorF0SemanticBridge': 'Exact semantic-compatibility and F0-descent correspondence under fiber-respecting updates',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
