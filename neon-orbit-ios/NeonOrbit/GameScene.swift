@@ -271,7 +271,7 @@ final class GameScene: SKScene {
             let t = Double(i) / Double(rate)
             let envelope = pow(max(0, 1 - Double(i) / Double(count)), 2.0)
             let sample = Int16(sin(t * frequency * .pi * 2) * envelope * 9500)
-            appendLE(sample.bitPattern)
+            appendLE(UInt16(bitPattern: sample))
         }
         if let player = try? AVAudioPlayer(data: data) {
             player.volume = 0.3
