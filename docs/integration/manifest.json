@@ -2858,14 +2858,16 @@
     },
     {
       "path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
-      "sha256": "e0b48710f73ec6baca504f92dd112d953f4c758bffd88f15cdae2e9292097582",
+      "sha256": "9c638b6beebb7a64ed25330274d3db8b9faf4482acfa8325df9bf58f4bf76f8f",
       "original_sha256": "e0b48710f73ec6baca504f92dd112d953f4c758bffd88f15cdae2e9292097582",
-      "source_pr": null,
+      "source_pr": 58,
       "source_commit": "4c1a71a7f15fdc2e505ea4008115c4fafed19739",
       "source_path": "linear_input/lean_check/OperatorContextualEquivalence.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Rename the bound variable prefix to pre: prefix is a reserved Lean keyword and the original source did not parse. No statement or proof step changes otherwise."
+      ]
     },
     {
       "path": "linear_input/lean_check/OperatorAdaptivePolicies.inc",
@@ -2880,14 +2882,16 @@
     },
     {
       "path": "linear_input/lean_check/OperatorProductSystems.inc",
-      "sha256": "6c1865584f3179f5f96285a2d21b390e3331c08aa9c2a8c85c869f81101ff6dc",
+      "sha256": "6f2bb3e6abe50df68bb79d05eaee9a5d49893a867dd97fa6b5f2b89d84cddcae",
       "original_sha256": "6c1865584f3179f5f96285a2d21b390e3331c08aa9c2a8c85c869f81101ff6dc",
       "source_pr": null,
       "source_commit": "14c95cb605b472bb3ab43d1f750452375779aedb",
       "source_path": "linear_input/lean_check/OperatorProductSystems.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace the deprecated push_neg tactic by push Not (same negation normal form); the pinned Mathlib warns and the audit rejects warnings."
+      ]
     },
     {
       "path": "linear_input/lean_check/OperatorReachability.inc",
@@ -2913,36 +2917,42 @@
     },
     {
       "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
-      "sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
+      "sha256": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e",
       "original_sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
-      "source_pr": null,
+      "source_pr": 58,
       "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
       "source_path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Remove the unused implicit type argument ι from fiber_stable_eq_F0_respects, which the pinned Lean could not infer at its use and flagged as unused; the proposition is unchanged."
+      ]
     },
     {
       "path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
-      "sha256": "ac91be213431dfccea6eec3dbd036d9f4ed7f42dab92a6dffd8f2b5da7b79d96",
+      "sha256": "3cc1bfe1ad8f2554339e0724a23eb1fdbe3ab66b070556394eecf5bc99d05439",
       "original_sha256": "ac91be213431dfccea6eec3dbd036d9f4ed7f42dab92a6dffd8f2b5da7b79d96",
-      "source_pr": null,
+      "source_pr": 59,
       "source_commit": "5a5397593bebb7fddc6c5c2b92e46beb2ae6a69a",
       "source_path": "linear_input/lean_check/OperatorSemanticMonoid.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Apply evaluate_injective through an explicit lambda (fun h => evaluate_injective K step h) because Function.Injective binds its arguments strictly implicitly. Statements are unchanged."
+      ]
     },
     {
       "path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
-      "sha256": "9cea7fd2bc307c6c76191cc2687bc32332eec9e1e5090c03188d71af6afdfffc",
+      "sha256": "fed818ad809bd16fee371ea9a7edc27b83c33c6af521e7931cfff1ed63403a8d",
       "original_sha256": "9cea7fd2bc307c6c76191cc2687bc32332eec9e1e5090c03188d71af6afdfffc",
       "source_pr": null,
       "source_commit": "5e27658a7163519bf8200db31493b52a3d537905",
       "source_path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
-      "role": "retained_source",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace simpa ... using rfl by simp [eligibleThree], as requested by the unnecessarySimpa linter; the statement is unchanged."
+      ]
     }
   ],
   "construction_errors": [],

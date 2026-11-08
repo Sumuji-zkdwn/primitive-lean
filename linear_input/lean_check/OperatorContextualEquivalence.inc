@@ -47,12 +47,12 @@ theorem sem_trans {α ι : Type*} {step : ι → α → α}
   exact (hwv x).trans (hvz x)
 
 theorem sem_append_left {α ι : Type*}
-    (step : ι → α → α) (w v prefix : List ι)
+    (step : ι → α → α) (w v pre : List ι)
     (h : SemEq step w v) :
-    SemEq step (prefix ++ w) (prefix ++ v) := by
+    SemEq step (pre ++ w) (pre ++ v) := by
   intro x
   rw [run_append, run_append]
-  exact h (run step prefix x)
+  exact h (run step pre x)
 
 theorem sem_append_right {α ι : Type*}
     (step : ι → α → α) (w v suffix : List ι)
@@ -62,11 +62,11 @@ theorem sem_append_right {α ι : Type*}
   rw [run_append, run_append, h x]
 
 theorem sem_context {α ι : Type*}
-    (step : ι → α → α) (w v prefix suffix : List ι)
+    (step : ι → α → α) (w v pre suffix : List ι)
     (h : SemEq step w v) :
-    SemEq step (prefix ++ w ++ suffix) (prefix ++ v ++ suffix) := by
+    SemEq step (pre ++ w ++ suffix) (pre ++ v ++ suffix) := by
   exact sem_append_right step _ _ suffix
-    (sem_append_left step w v prefix h)
+    (sem_append_left step w v pre h)
 
 theorem sem_empty_identity {α ι : Type*}
     (step : ι → α → α) (w : List ι)
@@ -124,11 +124,11 @@ theorem sem_implies_context {α ω ι : Type*}
 
 theorem context_append_left {α ω ι : Type*}
     (K : α → ω) (step : ι → α → α)
-    (w v prefix : List ι) (h : ContextEq K step w v) :
-    ContextEq K step (prefix ++ w) (prefix ++ v) := by
+    (w v pre : List ι) (h : ContextEq K step w v) :
+    ContextEq K step (pre ++ w) (pre ++ v) := by
   intro x
   rw [run_append, run_append]
-  exact h (run step prefix x)
+  exact h (run step pre x)
 
 theorem context_append_right {α ω ι : Type*}
     (K : α → ω) (step : ι → α → α)
@@ -141,11 +141,11 @@ theorem context_append_right {α ω ι : Type*}
 /-- Arbitrary replacement of a subprogram inside any sequential context. -/
 theorem context_replacement {α ω ι : Type*}
     (K : α → ω) (step : ι → α → α)
-    (prefix w v suffix : List ι) (h : ContextEq K step w v) :
-    ContextEq K step (prefix ++ w ++ suffix)
-      (prefix ++ v ++ suffix) := by
+    (pre w v suffix : List ι) (h : ContextEq K step w v) :
+    ContextEq K step (pre ++ w ++ suffix)
+      (pre ++ v ++ suffix) := by
   exact context_append_right K step _ _ suffix
-    (context_append_left K step w v prefix h)
+    (context_append_left K step w v pre h)
 
 /-- Context equivalence is equality of the induced quotient programs. -/
 theorem context_iff_quotient {α ω ι : Type*}

@@ -257,7 +257,7 @@ theorem effective_acts_faithfully {α ω ι : Type*}
     (q r : Effective K step) :
     evaluate K step q = evaluate K step r ↔ q = r := by
   constructor
-  · exact evaluate_injective K step
+  · exact fun h => evaluate_injective K step h
   · intro h
     rw [h]
 

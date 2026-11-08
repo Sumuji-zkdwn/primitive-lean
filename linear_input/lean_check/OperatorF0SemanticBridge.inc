@@ -107,7 +107,7 @@ theorem compatible_iff_fiber_stable {α ω ι : Type*}
 
 /-- The predicate FiberStable is the exact existing F0 fiber condition
 when K and T are endomorphisms of the same state space. -/
-theorem fiber_stable_eq_F0_respects {α ι : Type*}
+theorem fiber_stable_eq_F0_respects {α : Type*}
     (K T : α → α) :
     FiberStable K T ↔ RespectsFibers K T := by
   rfl

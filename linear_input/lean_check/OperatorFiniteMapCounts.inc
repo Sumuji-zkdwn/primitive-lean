@@ -50,8 +50,7 @@ theorem constantTwo_eligible :
 /-- Every constant raw transformer preserves the two-class observer. -/
 theorem constant_eligible (c : Fin 3) :
     (fun _ : Fin 3 => c) ∈ eligibleThree := by
-  simpa [eligibleThree] using (rfl :
-      observedThree c = observedThree c)
+  simp [eligibleThree]
 
 /-- Exact count of all raw three-state maps. -/
 theorem total_raw_three_count : allRawThree.card = 27 := by

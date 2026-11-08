@@ -177,7 +177,7 @@ theorem product_neq_implies_component_neq {α β ω ν ι κ : Type*}
     ¬ WordEq K step x x' ∨ ¬ WordEq L update y y' := by
   classical
   by_contra hnot
-  push_neg at hnot
+  push Not at hnot
   exact h ((product_wordEq_iff K L step update x x' y y').2
     ⟨hnot.1, hnot.2⟩)
 
