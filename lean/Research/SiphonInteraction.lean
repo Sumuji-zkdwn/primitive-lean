@@ -69,7 +69,8 @@ theorem chain_iff_potential (w : α → α → ℤ) (anchor : α) :
   · intro h
     refine ⟨fun x => w anchor x, ?_⟩
     intro a b
-    have hab := h anchor a b
+    change w a b = w anchor b - w anchor a
+    have hab : w anchor a + w a b = w anchor b := h anchor a b
     omega
   · rintro ⟨E, hE⟩
     intro a b c
@@ -99,8 +100,8 @@ theorem nonexact_three :
     ¬ HasChain (fun (a b : Fin 3) =>
       if a = 0 ∧ b = 1 then (1 : ℤ) else 0) := by
   intro h
-  have h012 := h 0 1 2
-  norm_num at h012
+  have h012 := h (0 : Fin 3) (1 : Fin 3) (2 : Fin 3)
+  simp at h012
 
 end Elastica.SiphonInteraction
 
