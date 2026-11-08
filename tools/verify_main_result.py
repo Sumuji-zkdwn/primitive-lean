@@ -151,6 +151,9 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/PrimeFactorF0Adaptive.inc', 'LinearInputPrimeFactorF0'),
     ('linear_input/lean_check/PrimeFactorFiniteLength.inc', 'LinearInputPrimeFactorFiniteLength'),
     ('linear_input/lean_check/PrimeFactorGeneralF0.inc', 'LinearInputPrimeFactorGeneralF0'),
+    ('linear_input/lean_check/AutonomyCycle00001.inc', 'LinearInputAutoCycle00001'),
+    ('linear_input/lean_check/AutonomyCycle00002.inc', 'LinearInputAutoCycle00002'),
+    ('linear_input/lean_check/AutonomyCycle00003.inc', 'LinearInputAutoCycle00003'),
 )
 
 
