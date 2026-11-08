@@ -48,6 +48,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/GaloisChebyshev.inc', 'LinearInputGaloisChebyshev'),
     ('linear_input/lean_check/KummerDihedral.inc', 'LinearInputKummerDihedral'),
     ('linear_input/lean_check/VariablePairGaloisBridge.inc', 'LinearInputVariablePairGalois'),
+    ('linear_input/lean_check/FoldCount.inc', 'LinearInputFoldCount'),
+    ('linear_input/lean_check/FoldCountOriginal.inc', 'LinearInputFoldCountOriginal'),
     ('linear_input/lean_check/F16Holonomy.inc', 'LinearInputF16Holonomy'),
     ('linear_input/lean_check/F16RecoverySpectrum.inc', 'LinearInputF16Recovery'),
     ('linear_input/lean_check/F16RankCertificate.inc', 'LinearInputF16Rank'),

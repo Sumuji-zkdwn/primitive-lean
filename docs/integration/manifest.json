@@ -3067,6 +3067,31 @@
       "role": "retained_source",
       "byte_identical": true,
       "permitted_adaptations": []
+    },
+    {
+      "path": "linear_input/lean_check/FoldCount.inc",
+      "sha256": "31f23b0867326888c73213f8fdb6ef769c7a710368c23a085e7be577e9668c17",
+      "original_sha256": "f6697e524d315211f4dbb0474cb9ce8dd2fd6b1785d4f29273382f99603cc70e",
+      "source_pr": 120,
+      "source_commit": "474102ba34de7eaa5955b2f8a370e6d19d945aee",
+      "source_path": "linear_input/lean_check/FoldCount.inc",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Replace unavailable pow_eq_zero with real zero-product case analysis under the pinned Lean version; theorem statement unchanged."
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/FoldCountOriginal.inc",
+      "sha256": "79e167643acd6258c63d990398ae9dbdc08563d257992597091b00cb3b24efd5",
+      "original_sha256": "8f446d1a11a700d8a99348e6e5f3d4e0d5f4a5dd7ad5fad34aa6e692819cd026",
+      "source_pr": 120,
+      "source_path": "FoldCountOriginal.inc (user-supplied attachment, 2026-11-09)",
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Filled the seven original sorry proofs using the previous FoldCount.inc and private lemmas; preserved all seven theorem statements."
+      ]
     }
   ],
   "construction_errors": [],
@@ -3280,6 +3305,17 @@
       "path": "linear_input/lean_check/OperatorFiniteMapCounts.inc",
       "source_commit": "5e27658a7163519bf8200db31493b52a3d537905",
       "note": "Finite three-state compatible-map cardinalities and non-generatable constant witness"
+    },
+    {
+      "date": "2026-11-09",
+      "path": "linear_input/lean_check/FoldCount.inc",
+      "source_commit": "474102ba34de7eaa5955b2f8a370e6d19d945aee",
+      "note": "Provisional normalized fold/cusp root count classification; first pinned Lean attempt found an unavailable lemma, repaired without changing any statement; exact-head joint CI pending."
+    },
+    {
+      "date": "2026-11-09",
+      "path": "linear_input/lean_check/FoldCountOriginal.inc",
+      "note": "User-supplied FoldCountOriginal.inc; seven sorry-free proof obligations, original-variable classification. Subsequent Lean tactic repairs; exact-head verification pending."
     }
   ]
 }
