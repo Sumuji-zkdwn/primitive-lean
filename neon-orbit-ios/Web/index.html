@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no,maximum-scale=1"/>
+<meta name="theme-color" content="#070a1b"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="NEON ORBIT"/>
+<link rel="apple-touch-icon" href="icons/180.png"/>
+<link rel="icon" type="image/png" href="icons/192.png"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<link rel="stylesheet" href="styles.css"/>
+<title>NEON ORBIT · gravity arcade</title>
+</head><body>
+<main id="app" aria-label="NEON ORBIT ゲーム">
+<canvas id="stage" aria-label="ドラッグした位置に重力が発生します"></canvas>
+<div class="hud" id="hud">
+  <div class="topline">
+    <div class="score"><span class="caption">SCORE</span><strong id="score">000000</strong></div>
+    <div class="timer"><span class="caption">TIME</span><strong id="time">60.0</strong></div>
+    <div class="high"><span class="caption">BEST</span><strong id="best">000000</strong></div>
+  </div>
+  <div class="barline">
+    <div class="lives" id="lives" aria-label="ライフ3"><i></i><i></i><i></i></div>
+    <div class="actions"><button id="sound" aria-label="効果音のオンオフ">SFX ON</button><button id="pause" aria-label="一時停止">Ⅱ</button></div>
+  </div>
+  <div class="timebar"><span id="timebar"></span></div>
+</div>
+<div class="footer" id="footer"><div class="dynamic" id="status">WAVE 01</div><div class="hint">HOLD + DRAG <span>指の位置に引力を発生させる</span></div></div>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true">
+  <div class="orbit-logo" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><span class="core"></span></div>
+  <div class="wordmark"><b>NEON</b><b>ORBIT</b></div>
+  <p class="subtitle" id="overlayDesc">重力で、星を奪え。</p>
+  <div class="end-stats" id="endStats" hidden><div class="result-label">FINAL SCORE</div><div class="result-score" id="resultScore">000000</div><div class="result-best" id="resultBest">BEST 000000</div><div class="result-stars" id="resultStars">STARS COLLECTED 0</div></div>
+  <button class="play" id="start">START <span>▶</span></button>
+  <p class="helper" id="overlayHelp">ホールドしてドラッグ。星を集め、機雷を避けよう。<br/>60秒のスコアアタック。</p>
+  <div class="footnote">OFFLINE · NO ADS · ONE FINGER</div>
+</div>
+</main>
+<script src="game.js" defer></script>
+</body></html>

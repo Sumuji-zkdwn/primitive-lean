@@ -1,0 +1,33 @@
+name: Build NEON ORBIT native iOS (unsigned simulator)
+on:
+  push:
+    branches: [app/neon-orbit-ios]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify deterministic game physics in Swift
+        run: |
+          swiftc neon-orbit-ios/NeonOrbit/GameCore.swift neon-orbit-ios/Tests/main.swift -o /tmp/neon-ios-core
+          /tmp/neon-ios-core
+      - name: Build for iOS Simulator without Apple signing
+        run: |
+          xcodebuild -project neon-orbit-ios/NeonOrbit.xcodeproj \
+            -scheme NeonOrbit -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/neon-ios-derived" \
+            CODE_SIGNING_ALLOWED=NO build
+      - name: Package simulator app
+        run: |
+          cd "$RUNNER_TEMP/neon-ios-derived/Build/Products/Debug-iphonesimulator"
+          ditto -c -k --sequesterRsrc --keepParent NeonOrbit.app "$RUNNER_TEMP/NeonOrbit-iOS-Simulator.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NeonOrbit-iOS-Simulator-unsigned
+          path: ${{ runner.temp }}/NeonOrbit-iOS-Simulator.zip
+          if-no-files-found: error
