@@ -1,5 +1,5 @@
 {
-  "meaning": "Native additive relative-energy bridge: finite-dimensional cancellation without a ||Q|| factor; no chain-rule or continuum PDE claim. Checks actual proof-value reuse of original scalar gap, matrix skew pairing, and previously constructed finite flow.",
+  "meaning": "Native additive Kerr finite relative-energy bridge: skew cancellation and actual-time HasDerivAt chain rule against a differentiable comparison state. This does not assert a continuum PDE solution, dimension-uniform time discretization or Gronwall bound.",
   "required_proof_edges": {
     "KerrKoopman.RelativeEnergyBridge.relative_energy_controls": [
       "KerrKoopman.RelativeEnergy.square_error_le_gap"
@@ -16,6 +16,19 @@
     ],
     "KerrKoopman.RelativeEnergyBridge.actual_flow_relative_rate_identity": [
       "KerrKoopman.RelativeEnergyBridge.relative_energy_rate_identity"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.electricGap_hasDerivAt": [
+      "KerrKoopman.FiniteEnergy.density_hasDerivAt",
+      "KerrKoopman.FiniteEnergy.constitutive_hasDerivAt"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relativeEnergy_hasDerivAt_physical": [
+      "KerrKoopman.RelativeEnergyBridge.electricGap_hasDerivAt",
+      "KerrKoopman.RelativeEnergyBridge.relative_energy_rate_identity"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relativeEnergy_hasDerivAt_flow": [
+      "KerrKoopman.RelativeEnergyBridge.relativeEnergy_hasDerivAt_physical",
+      "KerrKoopman.FiniteFlow.hasDerivAt_electric",
+      "KerrKoopman.FiniteFlow.hasDerivAt_magnetic"
     ]
   }
 }
