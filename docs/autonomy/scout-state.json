@@ -1,8 +1,81 @@
 {
-  "schema_version": 1,
-  "last_scanned_head": null,
-  "queue": [],
-  "seen": [],
+  "attempts": [],
   "last_ai_day": null,
-  "attempts": []
+  "last_scanned_head": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
+  "queue": [
+    {
+      "evidence": "具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。",
+      "id": "00ade657754e49e18cc1",
+      "line": 14,
+      "path": "docs/research/2026-11-04-orbit-trace-integrals.md",
+      "priority": 8,
+      "source_sha256": "bdce55ec62e88180a16d63ae4cea641899c0555ef14ced175c96dff20afd06b3",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "微分形式・線積分の一般解析的設定は本追加では未形式化。",
+      "id": "e697e78d1aa269efed23",
+      "line": 185,
+      "path": "docs/research/2026-11-04-orbit-trace-integrals.md",
+      "priority": 8,
+      "source_sha256": "bdce55ec62e88180a16d63ae4cea641899c0555ef14ced175c96dff20afd06b3",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "およびユーザーの研究中の多項式写像 E への同一化は未形式化・未確認。",
+      "id": "98f18ba60e4ab61825f4",
+      "line": 196,
+      "path": "docs/research/2026-11-04-orbit-trace-integrals.md",
+      "priority": 8,
+      "source_sha256": "bdce55ec62e88180a16d63ae4cea641899c0555ef14ced175c96dff20afd06b3",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "## Translation to existing Elastica expressions (not yet a geometric instantiation)",
+      "id": "83c7c11a13d6ec1d85d8",
+      "line": 27,
+      "path": "docs/research/2026-11-08-mono-eye-elastica-composition.md",
+      "priority": 7,
+      "source_sha256": "cddfd7afb140fc345fb2133855afdd0f386b92aec71735407bd43d13df25f2ea",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "three-state counterexample demonstrates failure at the next observation.",
+      "id": "8fca61d1316709d31ed0",
+      "line": 61,
+      "path": "docs/integration/2026-11-02-review.md",
+      "priority": 6,
+      "source_sha256": "4bab761e30f9f7a7932b0c3ddf698715db362f5c41c310867acf1bde4f22c6dd",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "| `PilotComparisonBridge.inc` | Choice output coverage vs deterministic factorization; F0-descent counterexample; numerical window iff | Genuine q-pilot reconstruction |",
+      "id": "20c10905cbe4240d186c",
+      "line": 44,
+      "path": "docs/integration/2026-11-05-iut-wall-branches.md",
+      "priority": 6,
+      "source_sha256": "c2fa713e3224f867a0cc4fd81ba51d54294388dacf2a68485f906f8657de5a07",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "Counterexample: w(0,1)=1 and w(a,b)=0 for all other ordered pairs on",
+      "id": "c6ca9196db61049406d3",
+      "line": 36,
+      "path": "docs/research/2026-11-08-siphon-interaction.md",
+      "priority": 6,
+      "source_sha256": "4fb0f18ec0fa862c11e356ed10721e349190b3afdb2f184d8fe78e30fd783411",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "- A two-step counterexample gives identical final dials for longitude order false,true and true,false, while the ordered routes differ.",
+      "id": "517025bc36a61df1bd4c",
+      "line": 10,
+      "path": "docs/research/2026-11-08-sphere-clock.md",
+      "priority": 6,
+      "source_sha256": "0a4759a597a32f2ef7a327eea95a613d58854fa0e9d19ace19a4b0d156fe6685",
+      "status": "UNVERIFIED_LEAD"
+    }
+  ],
+  "schema_version": 1,
+  "seen": []
 }
