@@ -208,6 +208,81 @@ theorem relativeEnergy_hasDerivAt_flow (Q : ι → ι → ℝ)
     hEB hHB
 
 
+
+/-! ## Mesh-independent residual growth bounds -/
+
+/-- Exact Kerr remainder and a pointwise bound on the comparison displacement
+rate control the formal relative-energy production. No \`‖Q‖\` assumption. -/
+theorem relativeRateRight_le (Q : ι → ι → ℝ)
+    (E H EB HB db dh : ι → ℝ) (A : ℝ) (hA : 0 ≤ A)
+    (hdb : ∀ i, |db i| ≤ A) :
+    (∑ i, relativeRateRight Q E H EB HB db dh i) ≤
+      3 * A * relativeEnergy E H EB HB +
+        ∑ i, (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+          |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|) := by
+  have hgR : (∑ i, RelativeEnergy.electricGap (EB i) (E i)) ≤
+      relativeEnergy E H EB HB := by
+    unfold relativeEnergy
+    apply Finset.sum_le_sum
+    intro i _
+    have hs : 0 ≤ (H i - HB i) ^ 2 / 2 := by positivity
+    linarith
+  have hterm (i : ι) :
+      relativeRateRight Q E H EB HB db dh i ≤
+        3 * A * RelativeEnergy.electricGap (EB i) (E i) +
+          (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+            |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|) := by
+    have hg : 0 ≤ RelativeEnergy.electricGap (EB i) (E i) :=
+      RelativeEnergy.electricGap_nonneg _ _
+    have hr := constitutive_remainder_control (E i) (EB i)
+    have hmain :
+        ((E i - EB i) -
+          (Riccati.constitutive (E i) - Riccati.constitutive (EB i)) /
+            (1 + (EB i) ^ 2)) * db i ≤
+        3 * A * RelativeEnergy.electricGap (EB i) (E i) := by
+      calc
+        _ ≤ |((E i - EB i) -
+          (Riccati.constitutive (E i) - Riccati.constitutive (EB i)) /
+            (1 + (EB i) ^ 2)) * db i| := le_abs_self _
+        _ = |(E i - EB i) -
+          (Riccati.constitutive (E i) - Riccati.constitutive (EB i)) /
+            (1 + (EB i) ^ 2)| * |db i| := abs_mul _ _
+        _ ≤ (3 * RelativeEnergy.electricGap (EB i) (E i)) * |db i| :=
+          mul_le_mul_of_nonneg_right hr (abs_nonneg _)
+        _ ≤ (3 * RelativeEnergy.electricGap (EB i) (E i)) * A :=
+          mul_le_mul_of_nonneg_left (hdb i) (by positivity)
+        _ = 3 * A * RelativeEnergy.electricGap (EB i) (E i) := by ring
+    have he : -(E i - EB i) * (db i + FiniteEnergy.applyQ Q HB i) ≤
+        |E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| := by
+      calc
+        _ ≤ |-(E i - EB i) * (db i + FiniteEnergy.applyQ Q HB i)| := le_abs_self _
+        _ = _ := by rw [abs_mul, abs_neg]
+    have hh : -(H i - HB i) * (dh i + FiniteEnergy.applyQ Q EB i) ≤
+        |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i| := by
+      calc
+        _ ≤ |-(H i - HB i) * (dh i + FiniteEnergy.applyQ Q EB i)| := le_abs_self _
+        _ = _ := by rw [abs_mul, abs_neg]
+    dsimp only [relativeRateRight]
+    linarith
+  calc
+    (∑ i, relativeRateRight Q E H EB HB db dh i) ≤
+        ∑ i, (3 * A * RelativeEnergy.electricGap (EB i) (E i) +
+          (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+            |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|)) := by
+              apply Finset.sum_le_sum
+              intro i _
+              exact hterm i
+    _ = 3 * A * (∑ i, RelativeEnergy.electricGap (EB i) (E i)) +
+          ∑ i, (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+            |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|) := by
+              rw [Finset.sum_add_distrib, ← Finset.mul_sum]
+    _ ≤ 3 * A * relativeEnergy E H EB HB +
+          ∑ i, (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+            |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|) := by
+              exact add_le_add_right
+                (mul_le_mul_of_nonneg_left hgR (by positivity)) _
+
+
 end
 
 end KerrKoopman.RelativeEnergyBridge
