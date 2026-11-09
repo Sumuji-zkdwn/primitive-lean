@@ -242,6 +242,7 @@ def verify_lean(rebuild):
         'AstraHilbertIteration': 'Convergence of actual split iterates to the exact flow with an explicit O(1/n) bound',
         'AstraFiniteFlow': 'Actual finite matrix Maxwell flow with the scalar material inverse: global existence and uniqueness, old ExactShear identification, O(1/n) split convergence, physical reconstruction and skew-matrix energy conservation',
         'ContinuumRelativeEnergy': 'Algebraic skew-operator cancellation and Kerr relative-energy rate budget; no PDE existence or Gronwall formalization claimed',
+        'ContinuumRelativeDynamics': 'Actual time derivative of finite Kerr relative energy under explicit physical and residual ODE hypotheses; no PDE existence or Gronwall result',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
