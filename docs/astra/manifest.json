@@ -345,14 +345,14 @@
   "counts": {
     "source_modules": 19,
     "new_proof_modules": 17,
-    "new_theorems": 219,
-    "new_physics_theorems": 218,
+    "new_theorems": 220,
+    "new_physics_theorems": 219,
     "new_original_koopman_theorems": 1,
     "reused_original_theorems": 29,
     "import_only_modules": 15,
     "import_only_theorems": 176,
     "repository_native_modules": 2,
-    "repository_native_theorems": 43
+    "repository_native_theorems": 44
   },
   "verification": {
     "source_audit": "python -B -X utf8 tools/check_astra_physics.py",
@@ -388,10 +388,10 @@
       "module": "KerrKoopman.RelativeEnergyBridge",
       "namespace": "KerrKoopman.RelativeEnergyBridge",
       "destination": "linear_input/lean_check/AstraRelativeEnergyBridge.inc",
-      "sha256": "c4f8db61cbb09908ac418c4395e9dfcdc58203c4969e432b1ce8cabe2f946a15",
-      "original_sha256": "c4f8db61cbb09908ac418c4395e9dfcdc58203c4969e432b1ce8cabe2f946a15",
-      "theorem_count": 9,
-      "declaration_count": 12,
+      "sha256": "f444cd2ffb591b91c3d71a53006c47bdae9aea2bc9fddf4ddd31ce0732a0dc29",
+      "original_sha256": "f444cd2ffb591b91c3d71a53006c47bdae9aea2bc9fddf4ddd31ce0732a0dc29",
+      "theorem_count": 10,
+      "declaration_count": 13,
       "role": "repository_native_proof",
       "origin": "authored_in_primitive_lean",
       "authored_on_parent_commit": "5b744532cba43fdd0075f868883cdabaff7d49c3",
@@ -416,9 +416,9 @@
     },
     {
       "path": "docs/astra/relative_energy_bridge_contract.json",
-      "sha256": "e816559989df0fabca57237c73ef3d73e990789ec7d5d0396dfaec1857f97274",
-      "theorem_nodes": 8,
-      "direct_references": 13,
+      "sha256": "1f19aae0209ae8bb1b42ed061131ae66430551041fe9c3e70e9d7cf359c8943f",
+      "theorem_nodes": 9,
+      "direct_references": 14,
       "role": "repository_native_contract"
     }
   ],
