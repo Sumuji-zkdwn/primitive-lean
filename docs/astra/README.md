@@ -88,7 +88,7 @@ python -B -X utf8 tools/verify.py --integration-only
 
 Lean と mathlib はリポジトリの既存の固定版を使う。新しい追補も既存の `MainResult.lean` 生成・`--trust=0`・全宣言公理監査に含める。許可する公理は `propext`、`Quot.sound`、`Classical.choice` のみ。新しい公理を追加して物理学を導入する構成ではない。
 
-実行記録は [初回の検証記録](verification.md)と[有限系追加の検証記録](verification-finite-flow.md)にまとめる。原資料の過去の成功記録、統合後の実行、リモート CI の成否を区別する。
+実行記録は [初回の検証記録](verification.md)、[有限系追加の検証記録](verification-finite-flow.md)、[依存関係解析の修正記録](dependency-analysis.md)にまとめる。原資料の過去の成功記録、統合後の実行、リモート CI の成否を区別する。
 
 ## 次に導入する順序
 

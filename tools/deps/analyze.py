@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import collections
 import hashlib
+import importlib.util
 import json
 import re
 from pathlib import Path
@@ -44,9 +45,37 @@ def strip_private(name: str) -> str:
     return m.group(1) if m else name
 
 
+def assembly_context(root: Path, report: dict):
+    """Use the assembler's fixed context implementation, with matching metadata."""
+    if "assembly_contexts" not in report:
+        return None, []  # Historical reports used exact unwrapped concatenation.
+    contexts = report["assembly_contexts"]
+    manifest_path = root / "docs/astra/manifest.json"
+    if not manifest_path.is_file():
+        if contexts:
+            raise ValueError("assembly context manifest is missing")
+        return None, []
+    manifest = json.loads(manifest_path.read_text("utf-8"))
+    if contexts != manifest.get("assembly_contexts", []):
+        raise ValueError("assembly context report/manifest mismatch")
+    checker_path = root / "tools/check_astra_physics.py"
+    for path in (manifest_path, checker_path):
+        expected = report.get("source_hashes", {}).get(path.relative_to(root).as_posix())
+        if expected is not None and sha(path.read_bytes()) != expected:
+            raise ValueError("assembly context input hash mismatch: " + path.name)
+    spec = importlib.util.spec_from_file_location("deps_assembly_context", checker_path)
+    checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(checker)
+    errors = checker.assembly_context_errors(contexts, report["supplemental_sources"])
+    if errors:
+        raise ValueError("invalid assembly context: " + "; ".join(errors))
+    return checker, contexts
+
+
 def line_map(assembled: Path, report: dict, root: Path = ROOT):
-    """Map each line of the assembled file to (layer, source file)."""
+    """Map exact source spans; assembly-only context lines have no source owner."""
     text = assembled.read_bytes()
+    checker, contexts = assembly_context(root, report)
     all_bytes = (root / "linear_input/lean_check/All.lean").read_bytes()
     start = text.find(all_bytes)
     prefix = text[:start] if start >= 0 else b""
@@ -69,15 +98,25 @@ def line_map(assembled: Path, report: dict, root: Path = ROOT):
     spans = [(f + shift, l + shift, y, src) for f, l, y, src in spans]
     offset = shift + all_bytes.count(b"\n") + 1  # pieces are joined with b"\n"
     pos = start + len(all_bytes) + 1
+    if report["supplemental_sources"] and text[pos - 1:pos] != b"\n":
+        raise ValueError("assembly separator mismatch after All.lean")
     for source in report["supplemental_sources"]:
         data = (root / source).read_bytes()
-        if text[pos:pos + len(data)] != data:
+        fragment = checker.assembly_fragment(source, data, contexts) if checker else data
+        context_prefix = (checker.ASSEMBLY_CONTEXTS[source][1]
+                          if any(c["source"] == source for c in contexts) else b"")
+        if text[pos:pos + len(fragment)] != fragment:
             raise ValueError("assembly mismatch at " + source)
-        first = offset + 1
-        last = first + data.count(b"\n")
-        spans.append((first, last, "subsequent", source))
-        offset = last
-        pos += len(data) + 1
+        first = offset + context_prefix.count(b"\n") + 1
+        # A final newline terminates the last source line; the next blank line
+        # belongs to the suffix/separator, not to the source that just ended.
+        last = first + data.count(b"\n") - int(data.endswith(b"\n"))
+        if data:
+            spans.append((first, last, "subsequent", source))
+        if text[pos + len(fragment):pos + len(fragment) + 1] != b"\n":
+            raise ValueError("assembly separator mismatch at " + source)
+        offset += fragment.count(b"\n") + 1
+        pos += len(fragment) + 1
     return spans
 
 
