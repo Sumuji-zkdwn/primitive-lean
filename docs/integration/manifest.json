@@ -3691,6 +3691,22 @@
       }
     },
     {
+      "path": "linear_input/lean_check/ContinuumRelativeDynamics.inc",
+      "sha256": "43c71c36ce07ee9839e4e3040c529859fc2cc422a471785fdeaac9ab5bff8356",
+      "original_sha256": "43c71c36ce07ee9839e4e3040c529859fc2cc422a471785fdeaac9ab5bff8356",
+      "source_pr": 124,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/ContinuumRelativeDynamics.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "26a27cdf76403d11e8ff7c10fb97ff7d8f48f40d",
+        "description": "Source-authored chain rule and physical relative-energy derivative under finite Kerr Maxwell and explicitly residual-perturbed reference rates; separate from spatial consistency and continuum PDE existence."
+      }
+    },
+    {
       "path": "docs/astra/finite_flow_bridge_contract.json",
       "sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
       "original_sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
