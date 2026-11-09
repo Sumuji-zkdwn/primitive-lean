@@ -135,7 +135,9 @@ theorem electricGap_hasDerivAt (e b : ℝ → ℝ) (t de db : ℝ)
     simpa only [Riccati.constitutive] using
       (FiniteEnergy.constitutive_hasDerivAt b db t hb)
   have h := (hWe.sub hWb).sub (hb.mul (hDe.sub hDb))
-  convert h using 1 <;> dsimp [RelativeEnergy.electricGap, Riccati.constitutive] <;> ring
+  convert h using 1
+  dsimp [RelativeEnergy.electricGap, Riccati.constitutive]
+  ring
 
 /-- Genuine physical Maxwell component rates, paired with a differentiable
 comparison profile, satisfy the relative-energy chain rule. -/
@@ -161,17 +163,18 @@ theorem relativeEnergy_hasDerivAt_physical (Q : ι → ι → ℝ)
     have hm : HasDerivAt (fun s => (H s i - HB s i) ^ 2 / 2)
         ((H t i - HB t i) *
           (FiniteEnergy.magneticRate Q (E t) i - dHB i)) t := by
-      convert (((hH i).sub (hHB i)).pow 2).div_const 2 using 1 <;> ring
+      convert (((hH i).sub (hHB i)).pow 2).div_const 2 using 1
+      simp only [Pi.sub_apply]
+      ring
     have he0 : (1 + (E t i) ^ 2) ≠ 0 :=
       ne_of_gt (FiniteEnergy.constitutive_denominator_pos (E t i))
     have hb0 : (1 + (EB t i) ^ 2) ≠ 0 :=
       ne_of_gt (FiniteEnergy.constitutive_denominator_pos (EB t i))
     convert hg.add hm using 1
-    · rfl
-    · dsimp only [relativeRateLeft, FiniteEnergy.electricRate,
-        FiniteEnergy.magneticRate]
-      field_simp [he0, hb0]
-      ring
+    dsimp only [relativeRateLeft, FiniteEnergy.electricRate,
+      FiniteEnergy.magneticRate]
+    field_simp [he0, hb0]
+    ring
   have hsum : HasDerivAt
       (fun s => relativeEnergy (E s) (H s) (EB s) (HB s))
       (∑ i, relativeRateLeft Q (E t) (H t) (EB t) (HB t)
