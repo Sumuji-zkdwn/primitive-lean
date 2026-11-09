@@ -1,98 +1,151 @@
-# Finite Kerr relative-energy bridge: first additive step toward a continuum limit
+# Finite Kerr relative-energy bridge: dimension-independent growth rate
 
-Base: `Sumuji-zkdwn/primitive-lean` PR #122, head `5b744532cba43fdd0075f868883cdabaff7d49c3`.
-This is an independently authored native proof supplement, not a modified copy
-of the retained `kerr-koopman-lean` sources. It leaves `main` unchanged.
+This additive, repository-native Lean supplement extends Astra PR #122
+(base head `5b744532cba43fdd0075f868883cdabaff7d49c3`).
+It leaves the original Kerr sources, the established finite-flow proofs,
+all verification algorithms, and `main` unchanged.
 
-## Reused definitions
+## Exact finite equations and reused structure
 
-The original finite system is
-`D'=-Q H, H'=-Q g(D)`, with `D(E)=E+E³/3`,
-`W(E)=E²/2+E⁴/4`, and `Q(i,j)=-Q(j,i)`.
-`KerrKoopman.FiniteFlow.flow` constructs its actual finite solution.
-The retained scalar relative energy is
-`KerrKoopman.RelativeEnergy.electricGap(barE,E)`:
-`W(E)-W(barE)-barE*(D(E)-D(barE))`.
-
-For an actual field `E,H`, comparison field `barE,barH`,
-comparison rates `db,dh`, define
-`deltaE=E-barE`, `deltaD=D(E)-D(barE)`,
-`deltaH=H-barH`, and the comparison residuals
-`rD=db+Q barH`, `rH=dh+Q barE`.
-The rate expression on the left is
+The physical Kerr law and energy are
 
 ```text
-sum_i [deltaE_i*(-Q H)_i
-       -deltaD_i/(1+barE_i²)*db_i
-       +deltaH_i*((-Q E)_i-dh_i)]
+D(E)=E+E^3/3,    W(E)=E^2/2+E^4/4,
+D'=-Q H,        H'=-Q E,         Q(i,j)=-Q(j,i).
 ```
 
-The theorem `relative_energy_rate_identity` identifies this exactly with
+`KerrKoopman.FiniteFlow.flow` supplies an **actually constructed,
+unique global finite-dimensional solution**. Let its restored fields
+be `E,H`, and let `barE,barH` be differentiable comparison fields.
+Use `barD=D(barE)`, `db=barD'`, `dh=barH'` and residuals
 
 ```text
-sum_i [(deltaE_i-deltaD_i/(1+barE_i²))*db_i
-       -deltaE_i*rD_i -deltaH_i*rH_i].
+rD=db+Q barH,       rH=dh+Q barE.
 ```
 
-The equality follows from `FiniteEnergy.skew_pairing`. It is exact for
-**every finite skew matrix Q** and does not contain `||Q||`.
-The theorem `relative_energy_controls` gives the squared physical field
-error bound by the scalar gap, using the original
-`RelativeEnergy.square_error_le_gap`; `constitutive_remainder_control`
-reuses the original dimension-free nonlinear remainder estimate.
+The scalar gap is the existing `RelativeEnergy.electricGap(barE,E)`:
 
-## What is and is not established
+```text
+G(barE,E)=W(E)-W(barE)-barE*(D(E)-D(barE)).
+```
 
-This supplement proves exact algebraic identities between instantaneous
-rate expressions and now also the **actual time derivative** of the relative
-energy along the already constructed finite Kerr flow, against any comparison
-electric/magnetic curves differentiable at the evaluated time:
+The finite relative energy is
+`R=sum_i[G(barE_i,E_i)+(H_i-barH_i)^2/2]`.
+Existing Lean theorems provide `(E_i-barE_i)^2 <= 2*G(barE_i,E_i)`
+and the precise global Kerr nonlinear remainder bound.
 
-- `electricGap_hasDerivAt`: the genuine derivative of the scalar Kerr gap;
-- `relativeEnergy_hasDerivAt_physical`: chain rule for physical Maxwell
-  component rates, with comparison electric derivative `dEB` and magnetic
-  derivative `dHB`;
-- `relativeEnergy_hasDerivAt_flow`: specialize the previous theorem to the
-  independently constructed `FiniteFlow.flow` using its actual electric and
-  magnetic time-derivative theorems.
+`relative_energy_rate_identity` uses `FiniteEnergy.skew_pairing`
+to cancel the two skew-difference pairings **exactly**:
 
-The comparison displacement rate in the right-hand expression is
-`db_i=(1+barE_i²)*dEB_i`. No C¹ smoothness for all time is hidden: each
-derivative theorem assumes the required comparison derivatives at the
-selected time. The finite matrix is skew, with no bound on its norm.
+```text
+R' = sum_i [(deltaE_i-deltaD_i/(1+barE_i^2))*db_i
+            - deltaE_i*rD_i - deltaH_i*rH_i].
+```
 
-A continuum convergence theorem further requires a smooth reference solution,
-uniform-in-mesh consistency bounds for spatial differences and initial relative
-energy, then an integrated Grönwall estimate. Time-discretized splitting needs
-an additional, genuinely mesh-uniform stability bound; the current `O(1/n)`
-constant grows with the matrix norm. No general periodic nonlinear PDE
-existence, weak-solution uniqueness, or viscosity-zero limit is claimed.
+This is a genuine derivative of the constructed finite flow: the
+`electricGap_hasDerivAt`, `relativeEnergy_hasDerivAt_physical`, and
+`relativeEnergy_hasDerivAt_flow` proofs connect the algebraic identity
+to the existing componentwise ODE derivative certificates.
 
-## Proposed next formal statements
+## New Lean theorems: residual growth without ||Q||
 
-1. `relativeRateRight_le`: use the retained
-   `constitutive_remainder_le_three_gap` and
-   `electricGap_nonneg` to bound the relative-energy derivative by
-   `3*A*relativeEnergy + sum_i(|deltaE_i|*|rD_i|+|deltaH_i|*|rH_i|)`,
-   assuming `|db_i|<=A`. This candidate bound contains no `||Q_N||`.
-2. `relativeEnergy_gronwall`: integrate that bound without inserting a
-   dimension-dependent operator norm.
-3. `centeredDifference_consistency`: for a separately assumed smooth
-   periodic reference solution, show `||(r_D,r_H)||_h <= C*h²`.
-4. Prove conditional *semidiscrete* convergence. Mesh-uniform stability and
-   convergence of the **explicit splitting** remain independent questions.
+The new `relativeRateRight_le` theorem assumes only `A >= 0`
+and `|db_i| <= A`, and proves
 
-## Validation status
+```text
+sum_i rateRight_i
+  <= 3*A*R + sum_i[|deltaE_i|*|rD_i|+|deltaH_i|*|rH_i|].
+```
 
-The repaired source-and-ledger commit
-`c6ea299cdf1962958b6234d6bbd4fa5cef5f6f13` passed
-the pinned Lean proof/axiom workflow (run `42657056414`) and the
-full source/proof integration workflow (run `42657056370`).
-The proof-only artifact reports 2,739 total theorems, 3,702 named
-declarations, complete `--trust=0` compilation, no warnings or
-unexpected axioms, and 42/42 direct Astra proof edges present.
-The two earlier unsuccessful attempts were tactic/elaboration errors,
-not failures of a separately proved PDE statement. The original finite
-flow proofs, retained source modules, verifier algorithms, and `main` remain
-unchanged. A subsequent documentation-only commit does not change the
-proof-verified source snapshot.
+`relativeRateRight_quadratic_le` uses scalar Young inequalities
+and the proven gap coercivity to obtain the stronger estimate
+
+```text
+sum_i rateRight_i
+  <= (3*A+1)*R + (1/2)*sum_i[rD_i^2+rH_i^2].
+```
+
+`relativeEnergy_deriv_le_flow` applies this bound to the **actual**
+finite Kerr flow and the actual comparison derivatives, so the final
+result is not an assumed trajectory or a separate evolution axiom.
+
+A mesh weight `h>0` can be multiplied through the validated
+unweighted theorem to give
+
+```text
+R_h = h*sum_i[G(barE_i,E_i) + (H_i-barH_i)^2/2]
+R_h' <= (3*A+1)*R_h + (h/2)*sum_i[rD_i^2+rH_i^2].
+```
+
+**The coefficient 3*A+1 is independent of the dimension and ||Q||.**
+The residuals `rD,rH` still contain `Q` and require separate spatial
+consistency bounds; these do not follow automatically.
+
+## Integration boundary — not yet Lean verified
+
+If `R_h` and the comparison curve have the above derivatives for all
+times `0 <= t <= T`, the comparison rate bound is uniform, and
+`||(rD,rH)(t)||_h <= B*h^2`, standard scalar Grönwall implies
+
+```text
+R_h(t) <= exp((3*A+1)*T)*(R_h(0)+B^2*T*h^4/2).
+```
+
+This integrated inequality is **a conditional mathematical deduction,
+not yet a Lean theorem**. With `R_h(0)=0`, coercivity would then give
+an `O(h^2)` discrete `L2` error in physical `E,H`.
+
+A full semidiscrete limit still requires a separately established
+smooth periodic reference PDE solution, uniformly bounded time
+displacement rate and third spatial derivatives, consistency of the
+centered difference, and identification of initial data. No general
+nonlinear PDE existence, post-shock uniqueness, weak-solution limit
+or zero-viscosity result is claimed. The explicit Lie splitting
+additionally requires mesh-uniform time stability: PR #122's fixed-Q
+`O(1/n)` estimate alone does not establish it.
+
+### Independent Fourier consistency check
+
+For the periodic centered difference `(Q_Nf)_j=(f_{j+1}-f_{j-1})/(2h)`,
+`h=1/N`, and `f(x)=sin(2*pi*x)`, direct discrete Fourier calculation
+gives, for `N>=3`,
+
+```text
+||Q_N f_N - (f')_N||_h
+   = |N*sin(2*pi/N)-2*pi|/sqrt(2)
+   <= (2*pi)^3/(6*sqrt(2)*N^2).
+```
+
+The identity, its order `O(h^2)`, and direct finite numerical values
+for N=8,16,32,64,128 were checked independently. This one smooth
+Fourier mode is not a general smooth nonlinear PDE convergence proof.
+
+## Exact verification provenance
+
+The code-and-ledger commit
+`91a8521657865942473a91cae5e57d2f308710bf` passed:
+
+- [Pinned Lean proof and axiom audit — success](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42661578093)
+- [Full source/proof integration — success](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/42661578280)
+
+The verified source includes **2,742 Lean theorems / 3,705 named
+declarations** across the joint assembly, `--trust=0`, no warnings,
+compile errors or unexpected axioms, and **47/47** direct Astra proof
+dependency edges. The relative-energy native bridge now contains
+**12 theorems / 15 named declarations**, and the Astra manifest
+records **222 added theorems**.
+
+Historical CI attempts that failed due to local Lean elaboration
+or tactic issues remain distinct from these successful runs. No
+general PDE theorem was counted as proved. Edits to this explanatory
+document after the verified commit are documentation only.
+
+## Next theorem
+
+The next Lean target is a scalar `relativeEnergy_gronwall`
+integration theorem that consumes `relativeEnergy_deriv_le_flow`
+and a uniform residual bound, preferably reusing pinned Mathlib
+`le_gronwallBound_of_liminf_deriv_right_le`. Then prove a general
+smooth-reference `centeredDifference_consistency` and a conditional
+semidiscrete `O(h^2)` convergence theorem. Keep the explicit time
+splitting as a separate stability problem.
