@@ -1,0 +1,157 @@
+name: Bounded research scout (cloud, AI opt-in)
+
+on:
+  pull_request:
+    paths:
+      - 'tools/autonomy/research_scout.py'
+      - 'tools/autonomy/research_ai.py'
+      - 'tests/test_research_scout.py'
+      - '.github/workflows/research-scout.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/research_scout.py'
+      - 'tools/autonomy/research_ai.py'
+      - 'tests/test_research_scout.py'
+      - '.github/workflows/research-scout.yml'
+  schedule:
+    # UTC: 00:23, 06:23, 12:23, 18:23 (09:23/15:23/21:23/03:23 JST)
+    - cron: '23 0,6,12,18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Offline scout and paid-call gating tests (no network)
+        run: python -m unittest discover -s tests -p test_research_scout.py -v
+
+  scout:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    permissions:
+      contents: write
+    concurrency:
+      group: primitive-research-scout-state
+      cancel-in-progress: false
+    steps:
+      - name: Check out trusted main controller
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          path: control
+          persist-credentials: false
+      - name: Check out isolated JSON state branch
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/research-scout-state
+          path: state
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Scan retained research notes for explicit unresolved claims
+        id: scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          main_sha="$(git -C control rev-parse HEAD)"
+          python control/tools/autonomy/research_scout.py scan \
+            --root control \
+            --state state/docs/autonomy/scout-state.json \
+            --head "$main_sha" \
+            --report "$RUNNER_TEMP/research-scout-report.json"
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os
+          from pathlib import Path
+          r = json.loads((Path(os.environ['RUNNER_TEMP']) / 'research-scout-report.json').read_text())
+          print('candidate_id=' + (r['next_candidate']['id'] if r['next_candidate'] else ''))
+          print('last_ai_day=' + (r['last_ai_day'] or ''))
+          PY
+      - name: Persist scan cursor without changing main
+        working-directory: state
+        run: |
+          git config user.name 'research-scout[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/autonomy/scout-state.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'scout: record main revision and candidate queue'
+            git push origin HEAD:refs/heads/autonomy/research-scout-state
+          fi
+      - name: Check paid inference opt-in (disabled by default)
+        id: paid
+        if: vars.RESEARCH_AI_PAID_OPT_IN == 'true' && steps.scan.outputs.candidate_id != ''
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RESEARCH_AI_MODEL: ${{ vars.RESEARCH_AI_MODEL }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ] || [ -z "$RESEARCH_AI_MODEL" ]; then
+            echo 'No paid call: explicit model and API key are both required'
+            exit 0
+          fi
+          echo 'configured=true' >> "$GITHUB_OUTPUT"
+      - name: Reserve the single UTC daily paid call before making a request
+        id: reserve
+        if: steps.paid.outputs.configured == 'true'
+        env:
+          CANDIDATE_ID: ${{ steps.scan.outputs.candidate_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          day="$(date -u +%Y-%m-%d)"
+          previous="$(python - <<'PY'
+          import json
+          print(json.load(open('state/docs/autonomy/scout-state.json')).get('last_ai_day') or '')
+          PY
+          )"
+          if [ "$previous" = "$day" ]; then
+            echo 'Daily reservation already consumed; no paid request'
+            exit 0
+          fi
+          python control/tools/autonomy/research_scout.py reserve \
+            --state state/docs/autonomy/scout-state.json \
+            --day "$day" --candidate-id "$CANDIDATE_ID" \
+            --reservation "$RUNNER_TEMP/research-reservation.json"
+          git -C state add docs/autonomy/scout-state.json
+          git -C state commit -m "scout: reserve one paid request for $day"
+          git -C state push origin HEAD:refs/heads/autonomy/research-scout-state
+          echo 'reserved=true' >> "$GITHUB_OUTPUT"
+          echo "utc_day=$day" >> "$GITHUB_OUTPUT"
+      - name: Produce one unverified research note (never execute model output)
+        if: steps.reserve.outputs.reserved == 'true'
+        env:
+          RESEARCH_AI_PAID_OPT_IN: 'true'
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RESEARCH_AI_MODEL: ${{ vars.RESEARCH_AI_MODEL }}
+          CANDIDATE_ID: ${{ steps.scan.outputs.candidate_id }}
+          UTC_DAY: ${{ steps.reserve.outputs.utc_day }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python control/tools/autonomy/research_ai.py \
+            --reservation "$RUNNER_TEMP/research-reservation.json" \
+            --output "state/docs/autonomy/research-outbox/$UTC_DAY-$CANDIDATE_ID.json"
+          git -C state add docs/autonomy/research-outbox/
+          git -C state commit -m "scout: retain unverified research note $UTC_DAY"
+          git -C state push origin HEAD:refs/heads/autonomy/research-scout-state
+      - name: Retain the candidate queue and any independent inference result
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: research-scout-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/research-scout-report.json
+            ${{ runner.temp }}/research-reservation.json
+            state/docs/autonomy/research-outbox/*.json
+          if-no-files-found: warn
+          retention-days: 14

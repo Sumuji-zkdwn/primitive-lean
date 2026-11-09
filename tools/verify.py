@@ -222,6 +222,9 @@ def verify_lean(rebuild):
         'PrimeFactorF0Adaptive': 'F0 sorting retraction, product-kernel quotient and adaptive observation lower bound (PR #52).',
         'PrimeFactorFiniteLength': 'General finite-length prime-factor observation minimum and unordered-state count (PR #53).',
         'PrimeFactorGeneralF0': 'Canonical F0 sorting for arbitrary finite prime lists and exact product kernels (PR #54).',
+        'AutonomyCycle00001': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
+        'AutonomyCycle00002': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
+        'AutonomyCycle00003': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

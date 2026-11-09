@@ -1,15 +1,9 @@
-name: Primitive autonomous verified growth
+name: Primitive autonomous verified growth (legacy; paused)
 
+# Legacy finite-growth branch has diverged from main.
+# Keep exact history, but do not spend CI minutes on stale proofs.
+# Re-enable only after exact-head Lean/axiom audit on a new main-derived branch.
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/primitive-autonomy.yml'
-      - 'tools/autonomy/**'
-      - 'tests/test_autonomy_generator.py'
-  schedule:
-    # Monday and Thursday, 09:17 JST. GitHub schedules run on default branch only.
-    - cron: '17 0 * * 1,4'
   workflow_dispatch:
 
 permissions:
@@ -21,6 +15,7 @@ concurrency:
 
 jobs:
   grow:
+    if: ${{ false }} # fail-closed while mainline migration is under review
     name: Generate one candidate, prove, audit, then feed back
     runs-on: ubuntu-latest
     timeout-minutes: 55
