@@ -43,11 +43,23 @@ reuses the original dimension-free nonlinear remainder estimate.
 
 ## What is and is not established
 
-This supplement proves algebraic identities between *instantaneous rate
-expressions*. Its `actual_flow_relative_rate_identity` instantiates the
-algebraic identity with the actual `FiniteFlow.flow` state. **It does not yet
-prove a Lean `HasDerivAt` theorem for the time-dependent relative-energy
-function**: that chain-rule connection is the next outstanding proof step.
+This supplement proves exact algebraic identities between instantaneous
+rate expressions and now also the **actual time derivative** of the relative
+energy along the already constructed finite Kerr flow, against any comparison
+electric/magnetic curves differentiable at the evaluated time:
+
+- `electricGap_hasDerivAt`: the genuine derivative of the scalar Kerr gap;
+- `relativeEnergy_hasDerivAt_physical`: chain rule for physical Maxwell
+  component rates, with comparison electric derivative `dEB` and magnetic
+  derivative `dHB`;
+- `relativeEnergy_hasDerivAt_flow`: specialize the previous theorem to the
+  independently constructed `FiniteFlow.flow` using its actual electric and
+  magnetic time-derivative theorems.
+
+The comparison displacement rate in the right-hand expression is
+`db_i=(1+barE_i²)*dEB_i`. No C¹ smoothness for all time is hidden: each
+derivative theorem assumes the required comparison derivatives at the
+selected time. The finite matrix is skew, with no bound on its norm.
 
 A continuum convergence theorem further requires a smooth reference solution,
 uniform-in-mesh consistency bounds for spatial differences and initial relative
@@ -58,19 +70,29 @@ existence, weak-solution uniqueness, or viscosity-zero limit is claimed.
 
 ## Proposed next formal statements
 
-1. `relativeEnergy_hasDerivAt_flow`: connect the genuine finite flow and a
-   differentiable comparison curve to the already proved instantaneous identity.
-2. `relativeEnergy_gronwall`: derive an estimate uniform in `||Q_N||` from the
-   scalar remainder and the skew cancellation.
-3. `centeredDifference_consistency`: for a fixed smooth periodic reference
-   solution, show `||r_D,r_H||_h <= C*h²`.
-4. A conditional *semidiscrete* convergence theorem; only after this, analyze
-   the separate explicit Lie-step time discretization.
+1. `relativeRateRight_le`: use the retained
+   `constitutive_remainder_le_three_gap` and
+   `electricGap_nonneg` to bound the relative-energy derivative by
+   `3*A*relativeEnergy + sum_i(|deltaE_i|*|rD_i|+|deltaH_i|*|rH_i|)`,
+   assuming `|db_i|<=A`. This candidate bound contains no `||Q_N||`.
+2. `relativeEnergy_gronwall`: integrate that bound without inserting a
+   dimension-dependent operator norm.
+3. `centeredDifference_consistency`: for a separately assumed smooth
+   periodic reference solution, show `||(r_D,r_H)||_h <= C*h²`.
+4. Prove conditional *semidiscrete* convergence. Mesh-uniform stability and
+   convergence of the **explicit splitting** remain independent questions.
 
 ## Validation status
 
-As initially submitted, these are candidate Lean proofs; a passing
-`--trust=0` integrated build and direct proof-value edge audit must be
-observed before calling them kernel-verified. Existing Lean proofs, verifier
-algorithms, and `main` were left intact; only the new proof, its independent
-contract and additive registration/manifest metadata were changed.
+The repaired source-and-ledger commit
+`c6ea299cdf1962958b6234d6bbd4fa5cef5f6f13` passed
+the pinned Lean proof/axiom workflow (run `42657056414`) and the
+full source/proof integration workflow (run `42657056370`).
+The proof-only artifact reports 2,739 total theorems, 3,702 named
+declarations, complete `--trust=0` compilation, no warnings or
+unexpected axioms, and 42/42 direct Astra proof edges present.
+The two earlier unsuccessful attempts were tactic/elaboration errors,
+not failures of a separately proved PDE statement. The original finite
+flow proofs, retained source modules, verifier algorithms, and `main` remain
+unchanged. A subsequent documentation-only commit does not change the
+proof-verified source snapshot.
