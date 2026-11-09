@@ -3,6 +3,7 @@
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
 MainResult.lean prepends the additive Mathlib imports listed in EXTRA_IMPORTS, then the
 byte-exact verified All.lean, the registered supplements and the all-declaration axiom audit.
+Approved assembly contexts can add namespace aliases outside a source's exact byte span.
 The original All.lean bytes are preserved without modification.
 """
 from pathlib import Path
@@ -28,6 +29,30 @@ EXTRA_IMPORTS = (
     "Mathlib.Data.PNat.Factors",
     "Mathlib.Tactic.NormNum.Prime",  # norm_num proves Nat.Prime (PR #50-#54)
     "Mathlib.Data.Sym.Card",  # Sym.card_sym_fin_eq_multichoose (PR #53)
+    "Mathlib.Analysis.Calculus.Deriv.Inv",
+    "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+    "Mathlib.Analysis.Calculus.Deriv.Pow",
+    "Mathlib.Analysis.Calculus.MeanValue",
+    "Mathlib.Analysis.Normed.Operator.Basic",
+    "Mathlib.Analysis.SpecialFunctions.Arsinh",
+    "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+    "Mathlib.Analysis.SpecialFunctions.Sqrt",
+    "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic",
+    "Mathlib.Data.Real.Basic",
+    "Mathlib.Tactic",
+    "Mathlib.Tactic.FieldSimp",
+    "Mathlib.Tactic.Linarith",
+    "Mathlib.Tactic.NormNum",
+    "Mathlib.Tactic.Positivity",
+    "Mathlib.Tactic.Ring",
+    "Mathlib.Topology.MetricSpace.Lipschitz",
+    "Mathlib.Topology.Order.IntermediateValue",
+    "Mathlib.Analysis.InnerProductSpace.ProdL2",
+    "Mathlib.Analysis.ODE.Gronwall",
+    "Mathlib.Analysis.ODE.PicardLindelof",
+    "Mathlib.Analysis.SpecialFunctions.Exp",
+    "Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp",
+    "Mathlib.Analysis.SpecificLimits.Basic",
 )
 
 SUPPLEMENTS = (
@@ -154,6 +179,22 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/AutonomyCycle00001.inc', 'LinearInputAutoCycle00001'),
     ('linear_input/lean_check/AutonomyCycle00002.inc', 'LinearInputAutoCycle00002'),
     ('linear_input/lean_check/AutonomyCycle00003.inc', 'LinearInputAutoCycle00003'),
+    ('linear_input/lean_check/AstraRiccati.inc', 'KerrKoopman.Riccati'),
+    ('linear_input/lean_check/AstraFiniteEnergy.inc', 'KerrKoopman.FiniteEnergy'),
+    ('linear_input/lean_check/AstraReconstruction.inc', 'KerrKoopman.Reconstruction'),
+    ('linear_input/lean_check/AstraKoopmanDescent.inc', 'LinearInputKoopmanDescent'),
+    ('linear_input/lean_check/AstraConstitutive.inc', 'KerrKoopman.PrimitiveConstitutive'),
+    ('linear_input/lean_check/AstraObservation.inc', 'KerrKoopman.PrimitiveObservation'),
+    ('linear_input/lean_check/AstraDynamicsBoundary.inc', 'KerrKoopman.PrimitiveDynamicsBoundary'),
+    ('linear_input/lean_check/AstraExplicitMaterial.inc', 'KerrKoopman.ExplicitMaterial'),
+    ('linear_input/lean_check/AstraRelativeEnergy.inc', 'KerrKoopman.RelativeEnergy'),
+    ('linear_input/lean_check/AstraExactShear.inc', 'KerrKoopman.ExactShear'),
+    ('linear_input/lean_check/AstraHilbertShear.inc', 'KerrKoopman.HilbertShear'),
+    ('linear_input/lean_check/AstraHilbertFlow.inc', 'KerrKoopman.HilbertFlow'),
+    ('linear_input/lean_check/AstraHilbertError.inc', 'KerrKoopman.HilbertError'),
+    ('linear_input/lean_check/AstraIterationBound.inc', 'KerrKoopman.IterationBound'),
+    ('linear_input/lean_check/AstraHilbertIteration.inc', 'KerrKoopman.HilbertIteration'),
+    ('linear_input/lean_check/AstraFiniteFlow.inc', 'KerrKoopman.FiniteFlow'),
 )
 
 
@@ -189,12 +230,13 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, followed by all public axiom audits.",
+        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, with approved assembly contexts outside exact source bytes, followed by all public axiom audits.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
         source_hashes={}, changed_during_verification=[], dependencies=[],
-        baseline_axioms_match=False, joint_axiom_audit=False, compile=None)
+        baseline_axioms_match=False, joint_axiom_audit=False, compile=None,
+        astra_source_audit=None, astra_proof_dependencies=None)
     log_path = OUT / "main-result.log"
     log_path.write_text("Supplemental verification has not yet compiled.\n", "utf-8")
     try:
@@ -220,13 +262,28 @@ def main():
         if not all(package["match"] for package in report["dependencies"]):
             raise ValueError("A pinned dependency revision changed after the baseline check")
 
+        astra_spec = importlib.util.spec_from_file_location("astra_physics_audit", ROOT / "tools/check_astra_physics.py")
+        astra = importlib.util.module_from_spec(astra_spec)
+        astra_spec.loader.exec_module(astra)
+        report["astra_source_audit"] = astra.audit(ROOT)
+        if not report["astra_source_audit"]["passed"]:
+            raise ValueError("Astra source/provenance audit failed: " + repr(report["astra_source_audit"]["errors"]))
+        astra_manifest = json.loads((ROOT / "docs/astra/manifest.json").read_text("utf-8"))
+        report["assembly_contexts"] = astra_manifest.get("assembly_contexts", [])
+        astra_inputs = ["tools/check_astra_physics.py", "docs/astra/manifest.json",
+                        astra_manifest["bridge_contract"]["preserved_copy"]]
+        astra_inputs += [row["preserved_copy"] for row in astra_manifest["modules"]]
+        astra_inputs += [astra.contract_path(row) for row in astra_manifest.get("additional_bridge_contracts", [])]
+        for rel in astra_inputs:
+            hashes[rel] = sha(ROOT / rel)
+
         spec = importlib.util.spec_from_file_location("common_verifier", ROOT / "tools/verify.py")
         common = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(common)
         supplement_bytes = []
         for source, namespace in SUPPLEMENTS:
             raw = (ROOT / source).read_bytes()
-            supplement_bytes.append(raw)
+            supplement_bytes.append(astra.assembly_fragment(source, raw, report["assembly_contexts"]))
             hashes[source] = hashlib.sha256(raw).hexdigest()
             code = common.strip_comments_strings(raw.decode("utf-8"))
             namespaces = re.findall(r"(?m)^namespace\s+([^\s]+)", code)
@@ -267,7 +324,8 @@ def main():
         assembled = ("".join(f"import {m}\n" for m in EXTRA_IMPORTS).encode("utf-8") +
             b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
-            + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8"))
+            + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8")
+            + astra.proof_edge_commands(ROOT).encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)
         for rel in (report["baseline_report"], report["assembled_source"],
                     "tools/verify_main_result.py", "tools/verify.py", "tools/check_delivery.py"):
@@ -282,6 +340,7 @@ def main():
         report["compile"] = dict(command=command, working_directory=str(LEAN), exit_code=proc.returncode,
             seconds=round(time.monotonic() - started, 3), log="verification/main-result.log")
         report["warnings"] = [line for line in log.splitlines() if re.search(r"\bwarning:", line)]
+        report["astra_proof_dependencies"] = astra.audit_proof_edges(ROOT, log)
         for declaration in all_declarations:
             name = declaration["name"]
             matches = re.findall("'" + re.escape(name) + r"' depends on axioms: \[([^]]*)\]", log, re.S)
@@ -303,6 +362,8 @@ def main():
             report["errors"].append("Supplemental joint compilation failed")
         if report["warnings"]:
             report["errors"].append("Lean emitted warnings")
+        if not report["astra_proof_dependencies"]["passed"]:
+            report["errors"].append("Astra elaborated proof dependency audit failed")
         if report["unexpected"] or not report["joint_axiom_audit"] or not report["baseline_axioms_match"]:
             report["errors"].append("Supplemental joint axiom audit failed")
         if report["changed_during_verification"]:

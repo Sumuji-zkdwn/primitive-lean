@@ -1,0 +1,404 @@
+{
+  "schema_version": 2,
+  "source_project": "kerr-koopman-lean",
+  "source_commit": "51a49be2e8f8b440c891240b574fdf97e08b9e84",
+  "integration_base_commit": "e17a3da948221535d0539a21e2f8a7074a72fa49",
+  "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs.",
+  "adaptation": "Imported module bodies and namespaces are unchanged: only complete import lines are removed. Repository-native bridges are separately authored proofs, identified by native_bridges; they are not import-only adaptations. The joint assembly context listed in assembly_contexts adds two namespace-qualified Set aliases outside the exact HilbertFlow source byte span.",
+  "modules": [
+    {
+      "module": "KerrKoopman.Riccati",
+      "source_path": "KerrKoopman/Riccati.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/Riccati.lean",
+      "source_sha256": "0a86fa23870082efb8bdcecd47bd727473704c4e2fdf460dfc084b3f9d7f9157",
+      "imports": [
+        "Mathlib.Analysis.Calculus.Deriv.Inv",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.NormNum"
+      ],
+      "namespace": "KerrKoopman.Riccati",
+      "theorem_count": 8,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraRiccati.inc",
+      "sha256": "716421d68cb38393668db574790e032308a5a3d1357218fb1424809af755fddd",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.FiniteEnergy",
+      "source_path": "KerrKoopman/FiniteEnergy.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/FiniteEnergy.lean",
+      "source_sha256": "ad57c1ec9b222a4ed6bb2d663cfbfde6aeadeeb162ada5d21dd731473e3adb60",
+      "imports": [
+        "Mathlib.Analysis.Calculus.Deriv.Pow",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.FiniteEnergy",
+      "theorem_count": 13,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraFiniteEnergy.inc",
+      "sha256": "f9b6dd3f56d95e59e7d999e8f536f8c2e14cce5baff06afa53c2037d7959e198",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.Reconstruction",
+      "source_path": "KerrKoopman/Reconstruction.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/Reconstruction.lean",
+      "source_sha256": "2b057a38ccbb61b2cd2cdf0a9c1a7facabc029b1b766878e378771fb7a6fdf99",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Sqrt",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic",
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+        "Mathlib.Analysis.Normed.Operator.Basic",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.NormNum",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring"
+      ],
+      "namespace": "KerrKoopman.Reconstruction",
+      "theorem_count": 23,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraReconstruction.inc",
+      "sha256": "1dc05a8c995ac116ee8ae6d7e41eeb55c637e6951bcf8d93b9bf17aa8fc9d927",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveKoopmanSource",
+      "source_path": "KerrKoopman/PrimitiveKoopmanSource.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveKoopmanSource.lean",
+      "source_sha256": "1a3006dc9785e58d2c5cb6118fa1a93af3b4d1483444975e2f9f95df1a1f5164",
+      "imports": [
+        "Mathlib.Data.Real.Basic"
+      ],
+      "namespace": "LinearInputKoopmanDescent",
+      "theorem_count": 1,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraKoopmanDescent.inc",
+      "sha256": "aa45b505b0f7b20f7899ace6660cee9d7cfda50f2f4eb73c7d3336679225a18f",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveConstitutive",
+      "source_path": "KerrKoopman/PrimitiveConstitutive.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveConstitutive.lean",
+      "source_sha256": "2c133987024c741e1e9dbccec12dc2fc188dc5fe01bb5c0633d586217277d442",
+      "imports": [
+        "KerrKoopman.PrimitiveSource",
+        "KerrKoopman.Riccati",
+        "KerrKoopman.FiniteEnergy",
+        "Mathlib.Topology.Order.IntermediateValue",
+        "Mathlib.Topology.MetricSpace.Lipschitz"
+      ],
+      "namespace": "KerrKoopman.PrimitiveConstitutive",
+      "theorem_count": 23,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraConstitutive.inc",
+      "sha256": "8cade3159159ebc00638bc3e0f82dfdcbfba60eb1d0f19a5f74d19ebba01065b",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveObservation",
+      "source_path": "KerrKoopman/PrimitiveObservation.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveObservation.lean",
+      "source_sha256": "be076cff77521907db8e04e43c3edd52b262f05f6d3c00368aadc363c8775286",
+      "imports": [
+        "KerrKoopman.PrimitiveSource",
+        "KerrKoopman.Reconstruction"
+      ],
+      "namespace": "KerrKoopman.PrimitiveObservation",
+      "theorem_count": 11,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraObservation.inc",
+      "sha256": "ff5f060d64f6a4a64ac6601e1c20d38a4ba14411a100a9fca120488ca807e9be",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveDynamicsBoundary",
+      "source_path": "KerrKoopman/PrimitiveDynamicsBoundary.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveDynamicsBoundary.lean",
+      "source_sha256": "5417ef689486e4dec49993fe28de6e49e22e4a6d861d10dd8dddf741b9f51b46",
+      "imports": [
+        "KerrKoopman.PrimitiveSource",
+        "KerrKoopman.FiniteEnergy"
+      ],
+      "namespace": "KerrKoopman.PrimitiveDynamicsBoundary",
+      "theorem_count": 8,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraDynamicsBoundary.inc",
+      "sha256": "c23160842681041c6d84cc1bed665ac67337cfc7218fd605f0268fa2c182e571",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.ExplicitMaterial",
+      "source_path": "KerrKoopman/ExplicitMaterial.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ExplicitMaterial.lean",
+      "source_sha256": "a94fdfb94585a7b8b0d1664ab821bf796cc6b2f75e79e160eb0de3ec708277cd",
+      "imports": [
+        "KerrKoopman.PrimitiveConstitutive",
+        "Mathlib.Analysis.SpecialFunctions.Arsinh"
+      ],
+      "namespace": "KerrKoopman.ExplicitMaterial",
+      "theorem_count": 9,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraExplicitMaterial.inc",
+      "sha256": "52992917ba33f20638b8b2dccef307ae2599660a86be3289cdd5eed09f560767",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.RelativeEnergy",
+      "source_path": "KerrKoopman/RelativeEnergy.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/RelativeEnergy.lean",
+      "source_sha256": "e03557bded37d518bfecc2fc272f43ef7b1b9b9c998f298accc11aee9a37ad34",
+      "imports": [
+        "KerrKoopman.PrimitiveConstitutive"
+      ],
+      "namespace": "KerrKoopman.RelativeEnergy",
+      "theorem_count": 10,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraRelativeEnergy.inc",
+      "sha256": "50cc2d25b4395fa2ce09b81a914f95175076b7a1e1ffc9f0735b93c542f4913e",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.ExactShear",
+      "source_path": "KerrKoopman/ExactShear.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ExactShear.lean",
+      "source_sha256": "3d565dfd4ee7406b8462f6c0f531471b050f61afdbe415d203ec1016916301c8",
+      "imports": [
+        "KerrKoopman.PrimitiveConstitutive",
+        "KerrKoopman.ExplicitMaterial"
+      ],
+      "namespace": "KerrKoopman.ExactShear",
+      "theorem_count": 20,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraExactShear.inc",
+      "sha256": "5a9add60683f3f4b68c89576afd16d6e805b4169617a797baccff7f6fe6e6662",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveDesign",
+      "source_path": "KerrKoopman/PrimitiveDesign.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveDesign.lean",
+      "source_sha256": "135b8ab0a827ac94e6bb47d8f96280ddb04de5159123c37354300a6a2e968e5e",
+      "imports": [
+        "Mathlib.Data.Real.Sqrt",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.FieldSimp"
+      ],
+      "namespace": "LinearInputDesign",
+      "theorem_count": 10,
+      "role": "reuse_existing",
+      "destination": "linear_input/lean_check/Design.lean",
+      "sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
+      "transformation": "compare_after_crlf_to_lf_only"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveCalculus",
+      "source_path": "KerrKoopman/PrimitiveCalculus.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveCalculus.lean",
+      "source_sha256": "d901f0e4d4f191a0c594eb71e10325a5f2d16294eb802071d8df2e11f3207417",
+      "imports": [
+        "Mathlib.Analysis.Calculus.LocalExtr.Basic",
+        "Mathlib.Analysis.Calculus.Deriv.Pow",
+        "Mathlib.Analysis.Calculus.Deriv.Mul",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.NormNum"
+      ],
+      "namespace": "LinearInputCalculus",
+      "theorem_count": 8,
+      "role": "reuse_existing",
+      "destination": "linear_input/lean_check/Calculus.lean",
+      "sha256": "6adc1633283e928968d877db17ca58b647cf913d2ee68f41043e77a3fecc629a",
+      "transformation": "compare_after_crlf_to_lf_only"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveObservationSource",
+      "source_path": "KerrKoopman/PrimitiveObservationSource.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveObservationSource.lean",
+      "source_sha256": "137ad99b65363b1249a949d65895ab7a3c9e8b3c72bcf2d1b0852d6493a522cf",
+      "imports": [
+        "Mathlib.Data.Real.Basic",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Linarith"
+      ],
+      "namespace": "LinearInputObservation",
+      "theorem_count": 11,
+      "role": "reuse_existing",
+      "destination": "linear_input/lean_check/Observation.lean",
+      "sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
+      "transformation": "compare_after_crlf_to_lf_only"
+    },
+    {
+      "module": "KerrKoopman.PrimitiveSource",
+      "source_path": "KerrKoopman/PrimitiveSource.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PrimitiveSource.lean",
+      "source_sha256": "210ec807ba561c8e9abcf4c4ae68ec4c49b77c2b8bc398b8290419424181406e",
+      "imports": [
+        "KerrKoopman.PrimitiveDesign",
+        "KerrKoopman.PrimitiveCalculus",
+        "KerrKoopman.PrimitiveObservationSource",
+        "KerrKoopman.PrimitiveKoopmanSource"
+      ],
+      "namespace": null,
+      "theorem_count": 0,
+      "role": "import_aggregator",
+      "transformation": "imports_resolved_by_joint_registry"
+    },
+    {
+      "module": "KerrKoopman.HilbertShear",
+      "source_path": "KerrKoopman/HilbertShear.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertShear.lean",
+      "source_sha256": "5f91eeddf44a79ea56645a640d2ad17e9ca5329c447c0f12bf8bf86e76160e01",
+      "imports": [
+        "Mathlib.Analysis.InnerProductSpace.ProdL2",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp",
+        "Mathlib.Analysis.ODE.Gronwall",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.HilbertShear",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertShear.inc",
+      "sha256": "10a9e613b6be73ec8076187febbc5f17c8ef302a38f059d3fe3bfe36b93ff509",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.HilbertFlow",
+      "source_path": "KerrKoopman/HilbertFlow.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertFlow.lean",
+      "source_sha256": "2d3cc3f07bb22608bbace87959fca55f12163b14ebe83d709e169e438efc6833",
+      "imports": [
+        "KerrKoopman.HilbertShear",
+        "Mathlib.Analysis.ODE.PicardLindelof"
+      ],
+      "namespace": "KerrKoopman.HilbertFlow",
+      "theorem_count": 22,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertFlow.inc",
+      "sha256": "685a9193c47d25c43c9c14fafd6ed5e60807eca605560cb87d6be7e67ca95202",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.HilbertError",
+      "source_path": "KerrKoopman/HilbertError.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertError.lean",
+      "source_sha256": "b766d42d7f51440bb4e40992edae4b1c778e250d2cbf2d6be5017143e048eb49",
+      "imports": [
+        "KerrKoopman.HilbertFlow"
+      ],
+      "namespace": "KerrKoopman.HilbertError",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertError.inc",
+      "sha256": "236547bc5bed9e46dbecccd7eda24a35bc276d6dd1a1a3445b277f127ffd9aca",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.IterationBound",
+      "source_path": "KerrKoopman/IterationBound.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/IterationBound.lean",
+      "source_sha256": "265403377cbcc3c2fa01443ccda252cb36badd98af7f98611de25a6ac8b1802d",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Exp",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.IterationBound",
+      "theorem_count": 3,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraIterationBound.inc",
+      "sha256": "f412d74b767d6918ed4bef8d83d92beb7be1a2efbda8477d68d1cbaf3a54dc46",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.HilbertIteration",
+      "source_path": "KerrKoopman/HilbertIteration.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertIteration.lean",
+      "source_sha256": "9a3496231d318e655f628db6222cf654d3a942b59fa733f9f1978ec3ed286b39",
+      "imports": [
+        "KerrKoopman.HilbertError",
+        "KerrKoopman.IterationBound",
+        "Mathlib.Analysis.SpecificLimits.Basic"
+      ],
+      "namespace": "KerrKoopman.HilbertIteration",
+      "theorem_count": 6,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertIteration.inc",
+      "sha256": "3caec67951e5de641bc757a2f9389f29e317d3517cdf2a9f7ca0380442e13c6c",
+      "transformation": "remove_import_lines_exact_bytes"
+    }
+  ],
+  "bridge_contract": {
+    "preserved_copy": "sources/astra_physics_20261109/tools/bridge_contract.json",
+    "sha256": "8c34e4f6f35aebd97eb31802087a569ac9372b99434efd42f2c29f14421b7cb7",
+    "theorem_nodes": 11,
+    "direct_references": 12
+  },
+  "counts": {
+    "source_modules": 19,
+    "new_proof_modules": 16,
+    "new_theorems": 210,
+    "new_physics_theorems": 209,
+    "new_original_koopman_theorems": 1,
+    "reused_original_theorems": 29,
+    "import_only_modules": 15,
+    "import_only_theorems": 176,
+    "repository_native_modules": 1,
+    "repository_native_theorems": 34
+  },
+  "verification": {
+    "source_audit": "python -B -X utf8 tools/check_astra_physics.py",
+    "proof_and_axioms": "python -B -X utf8 tools/verify.py --proof-only",
+    "integration": "python -B -X utf8 tools/verify.py --integration-only"
+  },
+  "native_bridges": [
+    {
+      "module": "KerrKoopman.FiniteFlow",
+      "namespace": "KerrKoopman.FiniteFlow",
+      "destination": "linear_input/lean_check/AstraFiniteFlow.inc",
+      "sha256": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4",
+      "original_sha256": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4",
+      "theorem_count": 34,
+      "declaration_count": 51,
+      "role": "repository_native_proof",
+      "origin": "authored_in_primitive_lean",
+      "authored_on_parent_commit": "08c04d85dd32680620ab15d57bd685ff011a20be",
+      "authorship_description": "New proof body authored in primitive-lean: instantiate the abstract Hilbert results with an arbitrary finite real matrix and the existing scalar materialInverse; identify the existing ExactShear iteration and recover physical electric and magnetic fields.",
+      "dependencies": [
+        "KerrKoopman.ExactShear",
+        "KerrKoopman.HilbertIteration",
+        "KerrKoopman.PrimitiveConstitutive",
+        "KerrKoopman.ExplicitMaterial",
+        "KerrKoopman.FiniteEnergy",
+        "KerrKoopman.HilbertFlow",
+        "KerrKoopman.HilbertShear"
+      ],
+      "required_mathlib_imports": [],
+      "proof_contract": "docs/astra/finite_flow_bridge_contract.json"
+    }
+  ],
+  "additional_bridge_contracts": [
+    {
+      "path": "docs/astra/finite_flow_bridge_contract.json",
+      "sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
+      "theorem_nodes": 14,
+      "direct_references": 17,
+      "role": "repository_native_contract"
+    }
+  ],
+  "assembly_contexts": [
+    {
+      "source": "linear_input/lean_check/AstraHilbertFlow.inc",
+      "kind": "hilbertflow_set_exports",
+      "reason": "Earlier joint supplements open Finset outside their namespaces. Add namespace-qualified aliases of Set.piecewise and Set.union_comm before the exact HilbertFlow source so its original unqualified rewrite names retain their standalone meanings. These export aliases may persist after the surrounding section; no source bytes or proof declarations are changed."
+    }
+  ]
+}

@@ -75,6 +75,12 @@ theorem real_inverse_card_regular (n : ℕ) (hy0 : -1 < y) (hy1 : y < 1) :
 
 これら以外の追補（有限ベイズ更新、F0/F16 の有限モデル、ガロア・クンマー拡大、演算子の自己拡張、Orbit-trace 多項式など）は、本文の第8章以降と [検証と再実行.md](検証と再実行.md) に、宣言名と仮定の対応表があります。
 
+## Astra 物理学との接続
+
+[Astra 物理学の入口](docs/astra/README.md)に、Kerr–Koopman 研究との接続をまとめています。初回の10原稿・126定理で、既存の最小化・微分・観測から、非線形材料則 `D = E + E³/3`、明示逆関数、物理エネルギー、有限 Maxwell 系、共通尺度での Koopman 観測に接続しました。
+
+続く[有限系の大域解と分割反復](docs/astra/finite-flow.md)では、任意の固定有限行列と実際の材料逆関数について、全実時間の存在・一意性と、既存の明示更新が O(1/n) の誤差で解へ収束することを接続します。元の解析定理と新規の有限系接続を区別し、同じ統合検証に登録しています。[初回の検証記録](docs/astra/verification.md)と[有限系追加の検証記録](docs/astra/verification-finite-flow.md)はそれぞれの対象コミットを明示します。
+
 ## 検証の実行
 
 ```bash
@@ -106,6 +112,7 @@ python -B -X utf8 tools/verify.py --integration-only
 ## 入口
 
 - **本文・証明**: [原始の形式化.md](原始の形式化.md) · [Elastica](lean/Elastica.lean) · [線形入力](linear_input/lean_check/README.md)
+- **Astra 物理学**: [材料・観測・有限力学の導入](docs/astra/README.md) · [原本・変換台帳](docs/astra/manifest.json) · [統合後の検証](docs/astra/verification.md)
 - **統合台帳・検証**: [ソースSHA-256台帳](docs/integration/manifest.json) · [2026-11-02統合説明](docs/integration/2026-11-02-review.md)
 - **多項式・Orbit-trace**: [OrbitTrace入口](lean/OrbitTrace.lean) · [研究上の成立条件と未証明事項](docs/research/2026-11-04-orbit-trace-integrals.md)
 - **演算器の観測・有限自己拡張**: `linear_input/lean_check/OperatorWordObservations.inc` 〜 `HigherOrderLiftSelfRewriting.inc` · [系列の統合境界](docs/integration/2026-11-05-operator-rulefold-consolidation.md)
