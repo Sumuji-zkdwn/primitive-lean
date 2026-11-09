@@ -60,6 +60,9 @@ jobs:
           ), indent=2)+'\n')
           PY
 
+      - name: Test ERG exact-head evidence exporter (offline)
+        run: python -m unittest discover -s tests -p 'test_erg_formal_evidence.py' -v
+
       - name: Install offline test dependencies
         run: python -m pip install pytest==9.2.0 numpy==2.5.4
 
@@ -144,6 +147,15 @@ jobs:
           print('INTEGRATED_KERNEL_SUMMARY', json.dumps(summary))
           PY
           python3 -B tools/deps/grounding.py --main-deps verification/integrated-kernel/deps.json --out verification/integrated-kernel/grounding
+
+      - name: Export exact-head source inventory for ERG (not a proof checker)
+        if: success()
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python -B tools/erg/export_formal_evidence.py \
+            --root . --expected-head "$EXPECTED_HEAD" \
+            --output verification/erg-formal-evidence.json
 
       - name: Upload complete verification evidence even on failure
         if: always()
