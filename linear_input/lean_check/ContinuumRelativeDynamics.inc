@@ -43,9 +43,8 @@ theorem electricGap_hasDerivAt (e a : ℝ → ℝ) (e' a' t : ℝ)
       (FiniteEnergy.constitutive_hasDerivAt e e' t he)
   have h := (hWa.sub hWe).sub (he.mul (hDa.sub hDe))
   convert h using 1
-  · rfl
-  · dsimp [FiniteEnergy.density]
-    ring
+  dsimp [FiniteEnergy.density, Riccati.constitutive]
+  ring
 
 /-- Differentiating the sum of the exact electric gap and magnetic L2 gap. -/
 theorem relativeEnergy_hasDerivAt (A H E V : ℝ → ι → ℝ)
@@ -66,7 +65,9 @@ theorem relativeEnergy_hasDerivAt (A H E V : ℝ → ι → ℝ)
     (ed i) (ad i) t (hE i) (hA i)
   have hb := ((hH i).sub (hV i)).pow 2
   have h := hg.add (hb.div_const 2)
-  convert h using 1 <;> ring
+  convert h using 1
+  dsimp
+  ring
 
 /-- The finite matrix derivative respects subtraction by linearity. -/
 theorem applyQ_sub (Q : ι → ι → ℝ) (a e : ι → ℝ) (i : ι) :
@@ -106,19 +107,18 @@ theorem physicalRelative_hasDerivAt (Q : ι → ι → ℝ)
     (fun i => -FiniteEnergy.applyQ Q (E t) i + rH i)
     t hA hH hE hV
   convert hd using 1
-  · rfl
-  · unfold physicalRate
-    apply Finset.sum_congr rfl
-    intro i _
-    have ha0 : 1 + (A t i) ^ 2 ≠ 0 :=
-      ne_of_gt (FiniteEnergy.constitutive_denominator_pos (A t i))
-    have he0 : 1 + (E t i) ^ 2 ≠ 0 :=
-      ne_of_gt (FiniteEnergy.constitutive_denominator_pos (E t i))
-    rw [applyQ_sub Q (A t) (E t) i]
-    rw [applyQ_sub Q (H t) (V t) i]
-    dsimp [FiniteEnergy.electricRate, FiniteEnergy.magneticRate]
-    field_simp
-    ring
+  unfold physicalRate
+  apply Finset.sum_congr rfl
+  intro i _
+  have ha0 : 1 + (A t i) ^ 2 ≠ 0 :=
+    ne_of_gt (FiniteEnergy.constitutive_denominator_pos (A t i))
+  have he0 : 1 + (E t i) ^ 2 ≠ 0 :=
+    ne_of_gt (FiniteEnergy.constitutive_denominator_pos (E t i))
+  rw [applyQ_sub Q (A t) (E t) i]
+  rw [applyQ_sub Q (H t) (V t) i]
+  dsimp [FiniteEnergy.electricRate, FiniteEnergy.magneticRate]
+  field_simp [ha0, he0]
+  ring
 
 /-- The actual relative-energy derivative rate obeys the already proven
     matrix-norm-free bound; this uses only skewness and a reference rate cap. -/
