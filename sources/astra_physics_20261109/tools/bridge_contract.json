@@ -1,0 +1,16 @@
+{
+  "meaning": "Required direct references in elaborated proof terms. These witness actual reuse, not logical necessity or an unconditional PDE derivation.",
+  "required_proof_edges": {
+    "KerrKoopman.PrimitiveConstitutive.coenergy_hasDerivAt": ["LinearInputCalculus.hasDerivAt_potential"],
+    "KerrKoopman.PrimitiveConstitutive.constitutive_gap": ["LinearInputDesign.scalar_gap"],
+    "KerrKoopman.PrimitiveConstitutive.global_minimum_iff_constitutive": ["LinearInputCalculus.global_minimum_forces_input", "LinearInputDesign.globalMin_of_margin"],
+    "KerrKoopman.PrimitiveConstitutive.electric_energy_eq_negative_minimum": ["LinearInputCalculus.critical_value"],
+    "KerrKoopman.PrimitiveConstitutive.minimization_error_bound": ["LinearInputDesign.position_error"],
+    "KerrKoopman.PrimitiveObservation.two_inputs_recover_magnetic": ["LinearInputObservation.recover_coordinate"],
+    "KerrKoopman.PrimitiveObservation.magnetic_recovery_error_bound": ["LinearInputObservation.recovery_error_bound"],
+    "KerrKoopman.PrimitiveObservation.probe_summary_decodes_magnetic": ["LinearInputObservation.summary_decodes_pair"],
+    "KerrKoopman.PrimitiveObservation.eigenfunction_pullback_iterate": ["LinearInputKoopmanDescent.eigenfunction_pullback"],
+    "KerrKoopman.PrimitiveDynamicsBoundary.ramp_static_globalMin": ["LinearInputDesign.globalMin_of_margin"],
+    "KerrKoopman.PrimitiveDynamicsBoundary.ramp_static_stationary": ["LinearInputCalculus.stationary_iff_input"]
+  }
+}

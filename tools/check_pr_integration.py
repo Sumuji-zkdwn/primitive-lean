@@ -5,6 +5,7 @@ This is a source/provenance audit; Lean proof validity is checked separately.
 """
 import ast
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 
@@ -86,8 +87,16 @@ def audit(root=ROOT):
     covered = {row['path'] for row in manifest['files']}
     if not set(paths) <= covered:
         errors.append('Missing supplement provenance: ' + repr(sorted(set(paths) - covered)))
+    astra = None
+    if any(Path(path).stem.startswith('Astra') for path in paths) or (root / 'docs/astra/manifest.json').is_file():
+        spec = importlib.util.spec_from_file_location('astra_source_audit', root / 'tools/check_astra_physics.py')
+        checker = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(checker)
+        astra = checker.audit(root)
+        errors.extend('Astra: ' + error for error in astra['errors'])
     return dict(passed=not errors, errors=errors, retained_files=len(manifest['files']),
-                supplemental_groups=len(registry), scope='Source bytes and registration, not proof validity')
+                supplemental_groups=len(registry), astra_source_audit=astra,
+                scope='Source bytes and registration, not proof validity')
 
 
 if __name__ == '__main__':

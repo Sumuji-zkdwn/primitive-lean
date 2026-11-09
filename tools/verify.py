@@ -225,6 +225,16 @@ def verify_lean(rebuild):
         'AutonomyCycle00001': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
         'AutonomyCycle00002': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
         'AutonomyCycle00003': 'Autonomously enumerated finite operator separation and strictly refined predictive quotient; five explicit Lean theorems',
+        'AstraRiccati': 'Exact Riccati clock and derivative identities; branch and pole conditions remain explicit',
+        'AstraFiniteEnergy': 'Pointwise and finite dimensional energy identities under explicitly given evolution equations',
+        'AstraReconstruction': 'Fixed-energy smooth periodic family obstructs uniformly bounded encoding with continuous linear point reconstruction',
+        'AstraKoopmanDescent': 'Koopman eigenfunction pullback under an explicit update intertwining hypothesis',
+        'AstraConstitutive': 'Quartic constitutive law and scalar inverse bounds connected to the existing primitive potential',
+        'AstraObservation': 'Two-input probe recovery, semiconjugate eigenfunction pullback, and observation obstruction',
+        'AstraDynamicsBoundary': 'Static potential and critical points do not determine an evolution law',
+        'AstraExplicitMaterial': 'Explicit nonlinear scalar constitutive inverse using hyperbolic functions',
+        'AstraRelativeEnergy': 'Pointwise relative energy identities and bounds for the chosen constitutive law',
+        'AstraExactShear': 'Exact finite dimensional split shear steps, reversibility, and preserved components',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
