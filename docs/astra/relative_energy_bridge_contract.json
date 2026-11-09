@@ -1,0 +1,21 @@
+{
+  "meaning": "Native additive relative-energy bridge: finite-dimensional cancellation without a ||Q|| factor; no chain-rule or continuum PDE claim. Checks actual proof-value reuse of original scalar gap, matrix skew pairing, and previously constructed finite flow.",
+  "required_proof_edges": {
+    "KerrKoopman.RelativeEnergyBridge.relative_energy_controls": [
+      "KerrKoopman.RelativeEnergy.square_error_le_gap"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.constitutive_remainder_control": [
+      "KerrKoopman.RelativeEnergy.constitutive_remainder_le_three_gap"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relative_rate_term": [
+      "KerrKoopman.RelativeEnergyBridge.applyQ_sub"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relative_energy_rate_identity": [
+      "KerrKoopman.FiniteEnergy.skew_pairing",
+      "KerrKoopman.RelativeEnergyBridge.relative_rate_term"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.actual_flow_relative_rate_identity": [
+      "KerrKoopman.RelativeEnergyBridge.relative_energy_rate_identity"
+    ]
+  }
+}
