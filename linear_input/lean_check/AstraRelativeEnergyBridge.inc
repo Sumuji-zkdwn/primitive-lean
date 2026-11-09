@@ -334,6 +334,7 @@ theorem relativeRateRight_quadratic_le (Q : ι → ι → ℝ)
         ∑ i, ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
           (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2 := by
           rw [Finset.sum_add_distrib]
+          ring
     _ ≤ (3 * A + 1) * relativeEnergy E H EB HB +
         ∑ i, ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
           (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2 := by
