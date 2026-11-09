@@ -109,6 +109,103 @@ theorem actual_flow_relative_rate_identity (Q : ι → ι → ℝ)
         (fun j => (FiniteFlow.flow Q t z).snd j) EB HB db dh i :=
   relative_energy_rate_identity Q hQ _ _ EB HB db dh
 
+
+/-! ## Time-dependent Kerr relative energy: genuine finite-flow chain rule -/
+
+/-- Differentiate the physical Kerr relative electric energy by applying the
+existing energy and constitutive chain rules, rather than assuming a rate. -/
+theorem electricGap_hasDerivAt (e b : ℝ → ℝ) (t de db : ℝ)
+    (he : HasDerivAt e de t) (hb : HasDerivAt b db t) :
+    HasDerivAt (fun s => RelativeEnergy.electricGap (b s) (e s))
+      ((e t - b t) * (1 + (e t) ^ 2) * de -
+        (Riccati.constitutive (e t) - Riccati.constitutive (b t)) * db) t := by
+  have hz : HasDerivAt (fun _ : ℝ => (0 : ℝ)) 0 t := hasDerivAt_const t 0
+  have hWe : HasDerivAt (fun s => FiniteEnergy.density (e s) 0)
+      ((e t + (e t) ^ 3) * de) t := by
+    simpa using (FiniteEnergy.density_hasDerivAt e (fun _ : ℝ => 0) de 0 t he hz)
+  have hWb : HasDerivAt (fun s => FiniteEnergy.density (b s) 0)
+      ((b t + (b t) ^ 3) * db) t := by
+    simpa using (FiniteEnergy.density_hasDerivAt b (fun _ : ℝ => 0) db 0 t hb hz)
+  have hDe : HasDerivAt (fun s => Riccati.constitutive (e s))
+      ((1 + (e t) ^ 2) * de) t := by
+    simpa only [Riccati.constitutive] using
+      (FiniteEnergy.constitutive_hasDerivAt e de t he)
+  have hDb : HasDerivAt (fun s => Riccati.constitutive (b s))
+      ((1 + (b t) ^ 2) * db) t := by
+    simpa only [Riccati.constitutive] using
+      (FiniteEnergy.constitutive_hasDerivAt b db t hb)
+  have h := (hWe.sub hWb).sub (hb.mul (hDe.sub hDb))
+  convert h using 1 <;> dsimp [RelativeEnergy.electricGap, Riccati.constitutive] <;> ring
+
+/-- Genuine physical Maxwell component rates, paired with a differentiable
+comparison profile, satisfy the relative-energy chain rule. -/
+theorem relativeEnergy_hasDerivAt_physical (Q : ι → ι → ℝ)
+    (hQ : ∀ i j, Q i j = -Q j i)
+    (E H EB HB : ℝ → ι → ℝ) (dEB dHB : ι → ℝ) (t : ℝ)
+    (hE : ∀ i, HasDerivAt (fun s => E s i)
+      (FiniteEnergy.electricRate Q (E t) (H t) i) t)
+    (hH : ∀ i, HasDerivAt (fun s => H s i)
+      (FiniteEnergy.magneticRate Q (E t) i) t)
+    (hEB : ∀ i, HasDerivAt (fun s => EB s i) (dEB i) t)
+    (hHB : ∀ i, HasDerivAt (fun s => HB s i) (dHB i) t) :
+    HasDerivAt (fun s => relativeEnergy (E s) (H s) (EB s) (HB s))
+      (∑ i, relativeRateRight Q (E t) (H t) (EB t) (HB t)
+        (fun j => (1 + (EB t j) ^ 2) * dEB j) dHB i) t := by
+  have hpoint (i : ι) : HasDerivAt
+      (fun s => RelativeEnergy.electricGap (EB s i) (E s i) +
+        (H s i - HB s i) ^ 2 / 2)
+      (relativeRateLeft Q (E t) (H t) (EB t) (HB t)
+        (fun j => (1 + (EB t j) ^ 2) * dEB j) dHB i) t := by
+    have hg := electricGap_hasDerivAt (fun s => E s i) (fun s => EB s i)
+      t (FiniteEnergy.electricRate Q (E t) (H t) i) (dEB i) (hE i) (hEB i)
+    have hm : HasDerivAt (fun s => (H s i - HB s i) ^ 2 / 2)
+        ((H t i - HB t i) *
+          (FiniteEnergy.magneticRate Q (E t) i - dHB i)) t := by
+      convert (((hH i).sub (hHB i)).pow 2).div_const 2 using 1 <;> ring
+    have he0 : (1 + (E t i) ^ 2) ≠ 0 :=
+      ne_of_gt (FiniteEnergy.constitutive_denominator_pos (E t i))
+    have hb0 : (1 + (EB t i) ^ 2) ≠ 0 :=
+      ne_of_gt (FiniteEnergy.constitutive_denominator_pos (EB t i))
+    convert hg.add hm using 1
+    · rfl
+    · dsimp only [relativeRateLeft, FiniteEnergy.electricRate,
+        FiniteEnergy.magneticRate]
+      field_simp [he0, hb0]
+      ring
+  have hsum : HasDerivAt
+      (fun s => relativeEnergy (E s) (H s) (EB s) (HB s))
+      (∑ i, relativeRateLeft Q (E t) (H t) (EB t) (HB t)
+        (fun j => (1 + (EB t j) ^ 2) * dEB j) dHB i) t := by
+    unfold relativeEnergy
+    exact HasDerivAt.fun_sum (fun i _ => hpoint i)
+  rw [relative_energy_rate_identity Q hQ (E t) (H t) (EB t) (HB t)
+    (fun j => (1 + (EB t j) ^ 2) * dEB j) dHB] at hsum
+  exact hsum
+
+/-- The constructed finite Kerr ODE flow satisfies the exact
+relative-energy time-derivative identity against any C1 comparison field.
+The comparison displacement rate is (1+barE²)*barE'. -/
+theorem relativeEnergy_hasDerivAt_flow (Q : ι → ι → ℝ)
+    (hQ : ∀ i j, Q i j = -Q j i) (z : FiniteFlow.State ι)
+    (EB HB : ℝ → ι → ℝ) (dEB dHB : ι → ℝ) (t : ℝ)
+    (hEB : ∀ i, HasDerivAt (fun s => EB s i) (dEB i) t)
+    (hHB : ∀ i, HasDerivAt (fun s => HB s i) (dHB i) t) :
+    HasDerivAt
+      (fun s => relativeEnergy
+        (fun i => FiniteFlow.electric (FiniteFlow.flow Q s z) i)
+        (fun i => (FiniteFlow.flow Q s z).snd i) (EB s) (HB s))
+      (∑ i, relativeRateRight Q
+        (fun j => FiniteFlow.electric (FiniteFlow.flow Q t z) j)
+        (fun j => (FiniteFlow.flow Q t z).snd j) (EB t) (HB t)
+        (fun j => (1 + (EB t j) ^ 2) * dEB j) dHB i) t := by
+  exact relativeEnergy_hasDerivAt_physical Q hQ
+    (fun s i => FiniteFlow.electric (FiniteFlow.flow Q s z) i)
+    (fun s i => (FiniteFlow.flow Q s z).snd i) EB HB dEB dHB t
+    (fun i => FiniteFlow.hasDerivAt_electric Q t z i)
+    (fun i => FiniteFlow.hasDerivAt_magnetic Q t z i)
+    hEB hHB
+
+
 end
 
 end KerrKoopman.RelativeEnergyBridge
