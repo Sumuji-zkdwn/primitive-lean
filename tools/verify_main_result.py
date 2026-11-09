@@ -93,6 +93,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/GeneralMinimum.inc', 'LinearInputMinimum'),
     ('linear_input/lean_check/SupportComposition.inc', 'LinearInputSupportComposition'),
     ('linear_input/lean_check/QuarticClassification.inc', 'LinearInputQuarticClassification'),
+    ('linear_input/lean_check/QuarticNonneg.inc', 'LinearInputQuarticNonneg'),
     ('linear_input/lean_check/CurvatureRigidity.inc', 'LinearInputCurvatureRigidity'),
     ('linear_input/lean_check/HistorySignature.inc', 'LinearInputHistorySignature'),
     ('linear_input/lean_check/BranchForgetting.inc', 'LinearInputBranchForgetting'),

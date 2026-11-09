@@ -106,6 +106,7 @@ def verify_lean(rebuild):
         'GeneralMinimum': 'General fixed-input minimum and strict-support criteria, with quartic bridges',
         'SupportComposition': 'Support interpolation, ordering, derivative identification and shared-minimizer restrictions',
         'QuarticClassification': 'Exact quartic minimum uniqueness and supporting-input classification',
+        'QuarticNonneg': 'Quartic support classification extended to lam >= 0, including the removed quartic lam = 0',
         'CurvatureRigidity': 'Conserved phase energy and the transverse square force constant curvature at a phase minimum',
         'HistorySignature': 'Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy',
         'BranchForgetting': 'Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion',

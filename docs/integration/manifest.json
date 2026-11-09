@@ -5431,6 +5431,22 @@
         "authored_on_parent_commit": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
         "description": "New direct-proof-reference contract for the continuum certificate and actual mixed-wave example."
       }
+    },
+    {
+      "path": "linear_input/lean_check/QuarticNonneg.inc",
+      "sha256": "c2297736cd07306bbd90e7943f679f7112c6b024b25beca43b47363d595a19a6",
+      "original_sha256": "c2297736cd07306bbd90e7943f679f7112c6b024b25beca43b47363d595a19a6",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/QuarticNonneg.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "389bcf585e206fdf4241f73e75dc3f40a27ad43e",
+        "description": "Quartic support classification extended from lam > 0 to lam >= 0, including the removed quartic lam = 0; for lam > 0 it reduces to QuarticClassification."
+      }
     }
   ],
   "construction_errors": [],
@@ -5688,6 +5704,13 @@
       "manifest": "docs/astra/manifest.json",
       "authored_on_parent_commit": "08c04d85dd32680620ab15d57bd685ff011a20be",
       "scope": "Five import-only source modules (50 theorems) plus one separately authored finite-matrix bridge (34 theorems)."
+    },
+    {
+      "date": "2026-11-10",
+      "source": "Quartic support classification for lam >= 0",
+      "source_commit": null,
+      "authored_on_parent_commit": "389bcf585e206fdf4241f73e75dc3f40a27ad43e",
+      "scope": "One repository-native supplement (13 theorems). Scalar statements only; no lam -> 0 asymptotics or dynamics."
     }
   ]
 }
