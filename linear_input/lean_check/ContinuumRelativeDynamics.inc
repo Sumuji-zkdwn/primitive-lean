@@ -134,6 +134,46 @@ theorem physicalRate_le (Q : ι → ι → ℝ)
   exact ContinuumRelativeEnergy.finite_skew_rate_budget Q hQ e a
     (fun i => h i - v i) v rD rH M hM hdt
 
+/-- The exact, previously constructed finite Kerr flow satisfies the
+    relative-energy derivative and its Q-norm-free rate bound.
+    The comparison field's residual ODE and its time-derivative cap
+    remain explicit hypotheses. No PDE solution is conjured by this result. -/
+theorem actualFlow_rate_certificate (Q : ι → ι → ℝ)
+    (hQ : ∀ i j, Q i j = -Q j i)
+    (z : FiniteFlow.State ι) (E V : ℝ → ι → ℝ)
+    (rD rH : ι → ℝ) (M t : ℝ) (hM : 0 ≤ M)
+    (hE : ∀ i, HasDerivAt (fun s => E s i)
+      ((-FiniteEnergy.applyQ Q (V t) i + rD i) / (1 + (E t i) ^ 2)) t)
+    (hV : ∀ i, HasDerivAt (fun s => V s i)
+      (-FiniteEnergy.applyQ Q (E t) i + rH i) t)
+    (hdt : ∀ i, |-FiniteEnergy.applyQ Q (V t) i + rD i| ≤ M) :
+    ∃ rate : ℝ,
+      HasDerivAt
+        (fun s => relativeEnergy (E s)
+          (fun i => FiniteFlow.electric (FiniteFlow.flow Q s z) i)
+          (fun i => (FiniteFlow.flow Q s z).snd i - V s i))
+        rate t ∧
+      rate ≤ ∑ i, ((3 * M + 1) *
+        (RelativeEnergy.electricGap (E t i)
+          (FiniteFlow.electric (FiniteFlow.flow Q t z) i) +
+          ((FiniteFlow.flow Q t z).snd i - V t i) ^ 2 / 2) +
+        ((rD i) ^ 2 + (rH i) ^ 2) / 2) := by
+  refine ⟨physicalRate Q
+    (fun i => FiniteFlow.electric (FiniteFlow.flow Q t z) i)
+    (fun i => (FiniteFlow.flow Q t z).snd i)
+    (E t) (V t) rD rH, ?_, ?_⟩
+  · exact physicalRelative_hasDerivAt Q
+      (fun s i => FiniteFlow.electric (FiniteFlow.flow Q s z) i)
+      (fun s i => (FiniteFlow.flow Q s z).snd i)
+      E V rD rH t
+      (fun i => FiniteFlow.hasDerivAt_electric Q t z i)
+      (fun i => FiniteFlow.hasDerivAt_magnetic Q t z i)
+      hE hV
+  · exact physicalRate_le Q hQ
+      (fun i => FiniteFlow.electric (FiniteFlow.flow Q t z) i)
+      (fun i => (FiniteFlow.flow Q t z).snd i)
+      (E t) (V t) rD rH M hM hdt
+
 end
 
 end KerrKoopman.ContinuumRelativeDynamics
