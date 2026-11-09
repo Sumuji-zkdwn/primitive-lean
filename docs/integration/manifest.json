@@ -3692,8 +3692,8 @@
     },
     {
       "path": "linear_input/lean_check/AstraRelativeEnergyBridge.inc",
-      "sha256": "c4f8db61cbb09908ac418c4395e9dfcdc58203c4969e432b1ce8cabe2f946a15",
-      "original_sha256": "c4f8db61cbb09908ac418c4395e9dfcdc58203c4969e432b1ce8cabe2f946a15",
+      "sha256": "f444cd2ffb591b91c3d71a53006c47bdae9aea2bc9fddf4ddd31ce0732a0dc29",
+      "original_sha256": "f444cd2ffb591b91c3d71a53006c47bdae9aea2bc9fddf4ddd31ce0732a0dc29",
       "source_pr": null,
       "source_commit": null,
       "source_path": "linear_input/lean_check/AstraRelativeEnergyBridge.inc",
@@ -3708,8 +3708,8 @@
     },
     {
       "path": "docs/astra/relative_energy_bridge_contract.json",
-      "sha256": "e816559989df0fabca57237c73ef3d73e990789ec7d5d0396dfaec1857f97274",
-      "original_sha256": "e816559989df0fabca57237c73ef3d73e990789ec7d5d0396dfaec1857f97274",
+      "sha256": "1f19aae0209ae8bb1b42ed061131ae66430551041fe9c3e70e9d7cf359c8943f",
+      "original_sha256": "1f19aae0209ae8bb1b42ed061131ae66430551041fe9c3e70e9d7cf359c8943f",
       "source_pr": null,
       "source_commit": null,
       "source_path": "docs/astra/relative_energy_bridge_contract.json",
