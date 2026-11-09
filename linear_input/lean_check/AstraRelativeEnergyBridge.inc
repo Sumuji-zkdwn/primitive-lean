@@ -279,8 +279,9 @@ theorem relativeRateRight_le (Q : ι → ι → ℝ)
     _ ≤ 3 * A * relativeEnergy E H EB HB +
           ∑ i, (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
             |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|) := by
+              have h3A : 0 ≤ 3 * A := mul_nonneg (by norm_num) hA
               exact add_le_add_right
-                (mul_le_mul_of_nonneg_left hgR (by positivity)) _
+                (mul_le_mul_of_nonneg_left hgR h3A) _
 
 
 
