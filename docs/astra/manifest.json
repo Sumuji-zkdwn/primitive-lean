@@ -3,7 +3,7 @@
   "source_project": "kerr-koopman-lean",
   "source_commit": "51a49be2e8f8b440c891240b574fdf97e08b9e84",
   "integration_base_commit": "e17a3da948221535d0539a21e2f8a7074a72fa49",
-  "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs.",
+  "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs. This branch also includes an additive finite relative-energy rate cancellation and coercivity lemma, not yet a chain-rule or PDE result.",
   "adaptation": "Imported module bodies and namespaces are unchanged: only complete import lines are removed. Repository-native bridges are separately authored proofs, identified by native_bridges; they are not import-only adaptations. The joint assembly context listed in assembly_contexts adds two namespace-qualified Set aliases outside the exact HilbertFlow source byte span.",
   "modules": [
     {
@@ -344,15 +344,15 @@
   },
   "counts": {
     "source_modules": 19,
-    "new_proof_modules": 16,
-    "new_theorems": 210,
-    "new_physics_theorems": 209,
+    "new_proof_modules": 17,
+    "new_theorems": 216,
+    "new_physics_theorems": 215,
     "new_original_koopman_theorems": 1,
     "reused_original_theorems": 29,
     "import_only_modules": 15,
     "import_only_theorems": 176,
-    "repository_native_modules": 1,
-    "repository_native_theorems": 34
+    "repository_native_modules": 2,
+    "repository_native_theorems": 40
   },
   "verification": {
     "source_audit": "python -B -X utf8 tools/check_astra_physics.py",
@@ -383,6 +383,27 @@
       ],
       "required_mathlib_imports": [],
       "proof_contract": "docs/astra/finite_flow_bridge_contract.json"
+    },
+    {
+      "module": "KerrKoopman.RelativeEnergyBridge",
+      "namespace": "KerrKoopman.RelativeEnergyBridge",
+      "destination": "linear_input/lean_check/AstraRelativeEnergyBridge.inc",
+      "sha256": "e59236769d724ce7df310f74c3da413bed824d6badf66748b38e92de8ef77dce",
+      "original_sha256": "e59236769d724ce7df310f74c3da413bed824d6badf66748b38e92de8ef77dce",
+      "theorem_count": 6,
+      "declaration_count": 9,
+      "role": "repository_native_proof",
+      "origin": "authored_in_primitive_lean",
+      "authored_on_parent_commit": "5b744532cba43fdd0075f868883cdabaff7d49c3",
+      "authorship_description": "New additive finite Kerr relative-energy rate cancellation and coercivity, reusing the retained nonlinear gap, the skew matrix pairing and the already constructed finite flow. Differential chain-rule and continuum-limit statements are intentionally not claimed.",
+      "dependencies": [
+        "KerrKoopman.FiniteFlow",
+        "KerrKoopman.RelativeEnergy",
+        "KerrKoopman.FiniteEnergy",
+        "KerrKoopman.Riccati"
+      ],
+      "required_mathlib_imports": [],
+      "proof_contract": "docs/astra/relative_energy_bridge_contract.json"
     }
   ],
   "additional_bridge_contracts": [
@@ -391,6 +412,13 @@
       "sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
       "theorem_nodes": 14,
       "direct_references": 17,
+      "role": "repository_native_contract"
+    },
+    {
+      "path": "docs/astra/relative_energy_bridge_contract.json",
+      "sha256": "9b373a033ca4f706fa9f8a31d8266f2f33895afb57da7c0534d0103bb66ebf38",
+      "theorem_nodes": 5,
+      "direct_references": 6,
       "role": "repository_native_contract"
     }
   ],
