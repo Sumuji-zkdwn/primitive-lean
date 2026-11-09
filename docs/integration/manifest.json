@@ -3689,6 +3689,38 @@
         "authored_on_parent_commit": "08c04d85dd32680620ab15d57bd685ff011a20be",
         "description": "New direct-proof-reference contract for the repository-native finite matrix bridge."
       }
+    },
+    {
+      "path": "linear_input/lean_check/AstraRelativeEnergyBridge.inc",
+      "sha256": "e59236769d724ce7df310f74c3da413bed824d6badf66748b38e92de8ef77dce",
+      "original_sha256": "e59236769d724ce7df310f74c3da413bed824d6badf66748b38e92de8ef77dce",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/AstraRelativeEnergyBridge.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "5b744532cba43fdd0075f868883cdabaff7d49c3",
+        "description": "New finite skew cancellation theorem and Kerr gap coercivity; additive and not yet Lean checked."
+      }
+    },
+    {
+      "path": "docs/astra/relative_energy_bridge_contract.json",
+      "sha256": "9b373a033ca4f706fa9f8a31d8266f2f33895afb57da7c0534d0103bb66ebf38",
+      "original_sha256": "9b373a033ca4f706fa9f8a31d8266f2f33895afb57da7c0534d0103bb66ebf38",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "docs/astra/relative_energy_bridge_contract.json",
+      "role": "repository_native_contract",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "5b744532cba43fdd0075f868883cdabaff7d49c3",
+        "description": "Direct proof-constant dependency contract for the native finite relative-energy bridge."
+      }
     }
   ],
   "construction_errors": [],
