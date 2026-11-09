@@ -174,7 +174,6 @@ theorem relativeEnergy_hasDerivAt_physical (Q : ι → ι → ℝ)
     dsimp only [relativeRateLeft, FiniteEnergy.electricRate,
       FiniteEnergy.magneticRate]
     field_simp [he0, hb0]
-    ring
   have hsum : HasDerivAt
       (fun s => relativeEnergy (E s) (H s) (EB s) (HB s))
       (∑ i, relativeRateLeft Q (E t) (H t) (EB t) (HB t)
