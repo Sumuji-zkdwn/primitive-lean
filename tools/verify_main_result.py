@@ -53,6 +53,39 @@ EXTRA_IMPORTS = (
     "Mathlib.Analysis.SpecialFunctions.Exp",
     "Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp",
     "Mathlib.Analysis.SpecificLimits.Basic",
+    "Lean.Util.CollectAxioms",
+    "Mathlib.Algebra.QuadraticDiscriminant",
+    "Mathlib.Analysis.Calculus.IteratedDeriv.Defs",
+    "Mathlib.Analysis.Calculus.ParametricIntervalIntegral",
+    "Mathlib.Analysis.Calculus.SmoothSeries",
+    "Mathlib.Analysis.Complex.Basic",
+    "Mathlib.Analysis.Complex.ExponentialBounds",
+    "Mathlib.Analysis.Complex.Trigonometric",
+    "Mathlib.Analysis.Fourier.AddCircle",
+    "Mathlib.Analysis.InnerProductSpace.Adjoint",
+    "Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional",
+    "Mathlib.Analysis.Normed.Lp.lpSpace",
+    "Mathlib.Analysis.Normed.Module.Basic",
+    "Mathlib.Analysis.Normed.Operator.Bilinear",
+    "Mathlib.Analysis.Normed.Operator.Prod",
+    "Mathlib.Analysis.Normed.Ring.InfiniteSum",
+    "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
+    "Mathlib.Analysis.SpecialFunctions.Log.Basic",
+    "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv",
+    "Mathlib.Data.Real.Sqrt",
+    "Mathlib.MeasureTheory.Integral.Bochner.Set",
+    "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus",
+    "Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts",
+    "Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic",
+    "Mathlib.Order.Filter.AtTopBot.Finset",
+    "Mathlib.Topology.Algebra.Module.FiniteDimension",
+    "Mathlib.Topology.ContinuousMap.Algebra",
+    "Mathlib.Topology.ContinuousMap.Compact",
+    "Mathlib.Topology.ContinuousMap.Star",
+    "Mathlib.Topology.MetricSpace.Contracting",
+    "Mathlib.Topology.MetricSpace.Equicontinuity",
+    "Mathlib.Topology.Order.ProjIcc",
+    "Mathlib.Topology.UniformSpace.Ascoli",
 )
 
 SUPPLEMENTS = (
@@ -194,7 +227,65 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/AstraHilbertError.inc', 'KerrKoopman.HilbertError'),
     ('linear_input/lean_check/AstraIterationBound.inc', 'KerrKoopman.IterationBound'),
     ('linear_input/lean_check/AstraHilbertIteration.inc', 'KerrKoopman.HilbertIteration'),
+    ('linear_input/lean_check/AstraFourierProjection.inc', 'KerrKoopman.FourierProjection'),
+    ('linear_input/lean_check/AstraMaterialL2.inc', 'KerrKoopman.MaterialL2'),
+    ('linear_input/lean_check/AstraRealGalerkin.inc', 'KerrKoopman.RealGalerkin'),
+    ('linear_input/lean_check/AstraFourierDerivative.inc', 'KerrKoopman.FourierProjection'),
+    ('linear_input/lean_check/AstraRealFourierDerivative.inc', 'KerrKoopman.RealFourierDerivative'),
+    ('linear_input/lean_check/AstraFiniteRepresentatives.inc', 'KerrKoopman.FiniteRepresentatives'),
+    ('linear_input/lean_check/AstraFourierSupBounds.inc', 'KerrKoopman.FourierSupBounds'),
+    ('linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc', 'KerrKoopman.FiniteRepresentatives'),
+    ('linear_input/lean_check/AstraRelativeDynamics.inc', 'KerrKoopman.RelativeDynamics'),
+    ('linear_input/lean_check/AstraContinuumCalculus.inc', 'KerrKoopman.ContinuumCalculus'),
+    ('linear_input/lean_check/AstraIntervalFourier.inc', 'KerrKoopman.IntervalFourier'),
+    ('linear_input/lean_check/AstraContinuumRelative.inc', 'KerrKoopman.ContinuumRelative'),
+    ('linear_input/lean_check/AstraIntegralTail.inc', 'KerrKoopman.IntegralTail'),
+    ('linear_input/lean_check/AstraContinuumGalerkin.inc', 'KerrKoopman.ContinuumGalerkin'),
+    ('linear_input/lean_check/AstraIntervalFourierProjection.inc', 'KerrKoopman.IntervalFourier'),
+    ('linear_input/lean_check/AstraCircleProjection.inc', 'KerrKoopman.FiniteRepresentatives'),
+    ('linear_input/lean_check/AstraGalerkinFlow.inc', 'KerrKoopman.GalerkinFlow'),
+    ('linear_input/lean_check/AstraGalerkinClassical.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraContinuumFourier.inc', 'KerrKoopman.ContinuumFourier'),
+    ('linear_input/lean_check/AstraGalerkinRelative.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraGalerkinRestoration.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraInitialRelativeEnergy.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraStoppingCertificate.inc', 'KerrKoopman.StoppingCertificate'),
+    ('linear_input/lean_check/AstraInteriorGronwall.inc', 'KerrKoopman.InteriorGronwall'),
+    ('linear_input/lean_check/AstraGalerkinGronwall.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraGalerkinRegularity.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraJointGalerkinLimit.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraUniformGalerkinLimit.inc', 'KerrKoopman.GalerkinClassical'),
+    ('linear_input/lean_check/AstraPolynomialInverse.inc', 'KerrKoopman.Phase3PolynomialInverse'),
+    ('linear_input/lean_check/AstraAnalyticFixedPoint.inc', 'KerrKoopman.AnalyticFixedPoint'),
+    ('linear_input/lean_check/AstraAnalyticLpMap.inc', 'KerrKoopman.AnalyticLpMap'),
+    ('linear_input/lean_check/AstraAnalyticLift.inc', 'KerrKoopman.AnalyticLift'),
+    ('linear_input/lean_check/AstraWeightedConvolution.inc', 'KerrKoopman.Phase3WeightedConvolution'),
+    ('linear_input/lean_check/AstraAnalyticKernel.inc', 'KerrKoopman.Phase3AnalyticKernel'),
+    ('linear_input/lean_check/AstraAnalyticDuhamel.inc', 'KerrKoopman.AnalyticDuhamel'),
+    ('linear_input/lean_check/AstraAnalyticFourierDuhamel.inc', 'KerrKoopman.AnalyticFourierDuhamel'),
+    ('linear_input/lean_check/AstraAnalyticAssembly.inc', 'KerrKoopman.AnalyticAssembly'),
+    ('linear_input/lean_check/AstraWeightedDecoder.inc', 'KerrKoopman.Phase3WeightedDecoder'),
+    ('linear_input/lean_check/AstraWeightedReality.inc', 'KerrKoopman.Phase3WeightedReality'),
+    ('linear_input/lean_check/AstraAnalyticReality.inc', 'KerrKoopman.AnalyticReality'),
+    ('linear_input/lean_check/AstraWeightedDerivative.inc', 'KerrKoopman.Phase3WeightedDerivative'),
+    ('linear_input/lean_check/AstraWeightedRealDecode.inc', 'KerrKoopman.Phase3WeightedRealDecode'),
+    ('linear_input/lean_check/AstraAnalyticModeODE.inc', 'KerrKoopman.AnalyticModeODE'),
+    ('linear_input/lean_check/AstraAnalyticFields.inc', 'KerrKoopman.AnalyticFields'),
+    ('linear_input/lean_check/AstraAnalyticPhysicalMode.inc', 'KerrKoopman.AnalyticPhysicalMode'),
+    ('linear_input/lean_check/AstraAnalyticTransport.inc', 'KerrKoopman.AnalyticTransport'),
+    ('linear_input/lean_check/AstraAnalyticPDE.inc', 'KerrKoopman.AnalyticPDE'),
+    ('linear_input/lean_check/AstraAnalyticClassical.inc', 'KerrKoopman.AnalyticClassical'),
+    ('linear_input/lean_check/AstraRealFourierProjection.inc', 'KerrKoopman.RealFourierProjection'),
+    ('linear_input/lean_check/AstraAnalyticTails.inc', 'KerrKoopman.AnalyticTails'),
+    ('linear_input/lean_check/AstraAnalyticTraceTails.inc', 'KerrKoopman.AnalyticTraceTails'),
+    ('linear_input/lean_check/AstraAnalyticFieldTails.inc', 'KerrKoopman.AnalyticFieldTails'),
+    ('linear_input/lean_check/AstraAnalyticInitial.inc', 'KerrKoopman.AnalyticInitial'),
+    ('linear_input/lean_check/AstraAnalyticInitialTails.inc', 'KerrKoopman.AnalyticInitialTails'),
+    ('linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc', 'KerrKoopman.AnalyticGalerkinCertificate'),
+    ('linear_input/lean_check/AstraExplicitAnalyticInput.inc', 'KerrKoopman.ExplicitAnalyticInput'),
+    ('linear_input/lean_check/AstraAnalyticExample.inc', 'KerrKoopman.AnalyticExample'),
     ('linear_input/lean_check/AstraFiniteFlow.inc', 'KerrKoopman.FiniteFlow'),
+    ('linear_input/lean_check/AstraContinuumLimit.inc', 'KerrKoopman.ContinuumLimit'),
 )
 
 
@@ -230,13 +321,13 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, with approved assembly contexts outside exact source bytes, followed by all public axiom audits.",
+        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, with approved assembly contexts outside exact source bytes, followed by public axiom audits, direct proof references and the Astra namespace environment audit.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
         source_hashes={}, changed_during_verification=[], dependencies=[],
         baseline_axioms_match=False, joint_axiom_audit=False, compile=None,
-        astra_source_audit=None, astra_proof_dependencies=None)
+        astra_source_audit=None, astra_proof_dependencies=None, astra_environment_audit=None)
     log_path = OUT / "main-result.log"
     log_path.write_text("Supplemental verification has not yet compiled.\n", "utf-8")
     try:
@@ -286,21 +377,25 @@ def main():
             supplement_bytes.append(astra.assembly_fragment(source, raw, report["assembly_contexts"]))
             hashes[source] = hashlib.sha256(raw).hexdigest()
             code = common.strip_comments_strings(raw.decode("utf-8"))
-            namespaces = re.findall(r"(?m)^namespace\s+([^\s]+)", code)
-            if namespaces != [namespace]:
-                raise ValueError(source + " must use the sole namespace " + namespace)
+            if not Path(source).stem.startswith('Astra'):
+                namespaces = re.findall(r"(?m)^namespace\s+([^\s]+)", code)
+                if namespaces != [namespace]:
+                    raise ValueError(source + " must use the sole namespace " + namespace)
             if re.search(r"(?m)^\s*import\b", code):
                 raise ValueError(source + " must use the imports already present in All.lean")
             for found in re.finditer(r"\b(sorry|admit|axiom|unsafe|native_decide)\b", code):
                 report["forbidden_tokens"].append(dict(file=source,
                     token=found.group(), line=code.count("\n", 0, found.start()) + 1))
-            declarations = []
-            for found in re.finditer(
-                    r"(?m)^(?:@\[[^\n]*\]\s*)?(?:noncomputable\s+)?(theorem|lemma|def|abbrev)\s+([^\s({:]+)",
-                    code):
-                declarations.append(dict(name=namespace + "." + found.group(2),
-                    kind=found.group(1), file=source,
-                    line=code.count("\n", 0, found.start()) + 1))
+            if Path(source).stem.startswith('Astra'):
+                declarations = astra.source_declarations(raw.decode('utf-8'), namespace, source)
+            else:
+                declarations = []
+                for found in re.finditer(
+                        r"(?m)^(?:@\[[^\n]*\]\s*)?(?:noncomputable\s+)?(theorem|lemma|def|abbrev)\s+([^\s({:]+)",
+                        code):
+                    declarations.append(dict(name=namespace + "." + found.group(2),
+                        kind=found.group(1), file=source,
+                        line=code.count("\n", 0, found.start()) + 1))
             if not declarations:
                 raise ValueError("No supplemental public declarations found in " + source)
             report["supplemental_groups"].append(dict(
@@ -325,7 +420,8 @@ def main():
             b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8")
-            + astra.proof_edge_commands(ROOT).encode("utf-8"))
+            + astra.proof_edge_commands(ROOT).encode("utf-8")
+            + astra.environment_audit_commands(ROOT).encode("utf-8"))
         (ROOT / report["assembled_source"]).write_bytes(assembled)
         for rel in (report["baseline_report"], report["assembled_source"],
                     "tools/verify_main_result.py", "tools/verify.py", "tools/check_delivery.py"):
@@ -341,6 +437,7 @@ def main():
             seconds=round(time.monotonic() - started, 3), log="verification/main-result.log")
         report["warnings"] = [line for line in log.splitlines() if re.search(r"\bwarning:", line)]
         report["astra_proof_dependencies"] = astra.audit_proof_edges(ROOT, log)
+        report["astra_environment_audit"] = astra.audit_environment(ROOT, log)
         for declaration in all_declarations:
             name = declaration["name"]
             matches = re.findall("'" + re.escape(name) + r"' depends on axioms: \[([^]]*)\]", log, re.S)
@@ -364,6 +461,8 @@ def main():
             report["errors"].append("Lean emitted warnings")
         if not report["astra_proof_dependencies"]["passed"]:
             report["errors"].append("Astra elaborated proof dependency audit failed")
+        if not report["astra_environment_audit"]["passed"]:
+            report["errors"].append("Astra environment axiom audit failed")
         if report["unexpected"] or not report["joint_axiom_audit"] or not report["baseline_axioms_match"]:
             report["errors"].append("Supplemental joint axiom audit failed")
         if report["changed_during_verification"]:

@@ -1,8 +1,8 @@
 """Audit the selected Astra source closure and its exact assembly adapters.
 
 This is a source/provenance check, not a substitute for Lean proof checking.
-The unchanged joint checker and the registered supplemental checker perform
-the separate --trust=0 proof and all-declaration axiom checks.
+The joint and supplemental checkers perform the separate --trust=0 proof,
+named-declaration and generated-environment axiom checks.
 """
 import ast
 import hashlib
@@ -22,6 +22,65 @@ ASSEMBLY_CONTEXTS = {
         b'export Set (piecewise union_comm)\nend KerrKoopman.HilbertFlow\n',
         b'\nend\n',
     ),
+    'linear_input/lean_check/AstraFourierProjection.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraMaterialL2.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraRealGalerkin.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraFourierDerivative.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraRealFourierDerivative.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraFiniteRepresentatives.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraFourierSupBounds.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraRelativeDynamics.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraContinuumCalculus.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraIntervalFourier.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraContinuumRelative.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraIntegralTail.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraContinuumGalerkin.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraIntervalFourierProjection.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraCircleProjection.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraGalerkinFlow.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraGalerkinClassical.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraContinuumFourier.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraGalerkinRelative.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraGalerkinRestoration.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraInitialRelativeEnergy.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraStoppingCertificate.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraInteriorGronwall.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraGalerkinGronwall.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraGalerkinRegularity.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraJointGalerkinLimit.inc': ('continuum_joint_filter_alias', b'section\nnamespace KerrKoopman.GalerkinClassical\nexport Filter (tendsto_atTop)\nend KerrKoopman.GalerkinClassical\n', b'\nend\n'),
+    'linear_input/lean_check/AstraUniformGalerkinLimit.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraPolynomialInverse.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticFixedPoint.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticLpMap.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticLift.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraWeightedConvolution.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraAnalyticKernel.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticDuhamel.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticFourierDuhamel.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticAssembly.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraWeightedDecoder.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraWeightedReality.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraAnalyticReality.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraWeightedDerivative.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraWeightedRealDecode.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraAnalyticModeODE.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticFields.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticPhysicalMode.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticTransport.inc': ('continuum_transport_extend_alias', b'section\nnamespace KerrKoopman.AnalyticTransport\nexport KerrKoopman.AnalyticDuhamel (extend)\nend KerrKoopman.AnalyticTransport\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticPDE.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticClassical.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraRealFourierProjection.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraAnalyticTails.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraAnalyticTraceTails.inc': ('continuum_file_scope', b'section\n', b'\nend\nend\n'),
+    'linear_input/lean_check/AstraAnalyticFieldTails.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticInitial.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticInitialTails.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraExplicitAnalyticInput.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraAnalyticExample.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraFiniteFlow.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
+    'linear_input/lean_check/AstraContinuumLimit.inc': ('continuum_file_scope', b'section\n', b'\nend\n'),
 }
 
 
@@ -35,10 +94,10 @@ def strip_imports(raw):
                     if not line.startswith(b'import '))
 
 
-def assembly_context_errors(contexts, adapter_paths):
+def assembly_context_errors(contexts, registered_paths):
     errors = []
     sources = [row['source'] for row in contexts]
-    required = set(ASSEMBLY_CONTEXTS).intersection(adapter_paths)
+    required = set(ASSEMBLY_CONTEXTS).intersection(registered_paths)
     if len(sources) != len(set(sources)):
         errors.append('Duplicate assembly context')
     if set(sources) != required:
@@ -52,7 +111,7 @@ def assembly_context_errors(contexts, adapter_paths):
 
 
 def assembly_fragment(source, raw, contexts):
-    """Insert approved namespace aliases outside the exact source byte span."""
+    """Apply fixed scope isolation and aliases outside the exact source bytes."""
     selected = [row for row in contexts if row['source'] == source]
     if not selected:
         return raw
@@ -98,13 +157,66 @@ def code_only(text):
             result.extend(' ' * (end - i)); i = end; continue
         if c == '"': string = True; result.append(' '); i += 1; continue
         result.append(c); i += 1
+    if depth or string:
+        raise ValueError('Unclosed Lean comment or string')
     return ''.join(result)
 
 
 def declarations(text, namespace):
-    return [(kind, namespace + '.' + name) for kind, name in re.findall(
-        r'(?m)^(?:@\[[^\n]*\]\s*)?(?:noncomputable\s+)?(theorem|lemma|def|abbrev)\s+([^\s({:]+)',
-        code_only(text))]
+    return [(row['kind'], row['name']) for row in source_declarations(text, namespace)]
+
+
+def source_declarations(text, namespace, filename='<source>'):
+    """Index named source declarations; independently audit generated constants in Lean.
+
+    Only the selected public-source grammar is supported. In particular private
+    declarations cannot silently acquire public names in this ledger.
+    """
+    stack = []; result = []; roots = []; names = set()
+    for number, line in enumerate(code_only(text).splitlines(), 1):
+        command = re.sub(r'^(?:@\[[^\]]*\]\s*)*', '', line.lstrip())
+        if re.match(r'(?:(?:noncomputable|protected)\s+)*private\b', command):
+            raise ValueError(f'Private source declarations are unsupported: {filename}:{number}')
+        if re.match(r'(?:noncomputable\s+)?(?:protected|opaque|class|inductive|mutual|public|local\s+(?:def|theorem|lemma|instance))\b', command):
+            raise ValueError(f'Unsupported source declaration grammar: {filename}:{number}')
+        if line != line.lstrip() and re.match(
+                r'(?:noncomputable\s+)?(?:namespace|section|end|theorem|lemma|def|abbrev|structure|instance)\b', command):
+            raise ValueError(f'Unsupported indented source command: {filename}:{number}')
+        opening = re.fullmatch(r'(?:noncomputable\s+)?(namespace|section)(?:\s+(\S+))?\s*', line)
+        if opening:
+            kind, name = opening.groups()
+            if kind == 'namespace':
+                if not name: raise ValueError(f'Unnamed namespace: {filename}:{number}')
+                prefix = '.'.join(n for k, n in stack if k == 'namespace')
+                full = prefix + '.' + name if prefix else name
+                if full != namespace and not full.startswith(namespace + '.'):
+                    raise ValueError(f'Source namespace mismatch: {filename}:{number}: {full}')
+                if not prefix: roots.append(full)
+            stack.append((kind, name)); continue
+        closing = re.fullmatch(r'end(?:\s+(\S+))?\s*', line)
+        if closing:
+            if not stack: raise ValueError(f'Unmatched scope end: {filename}:{number}')
+            _, name = stack.pop()
+            if closing.group(1) is not None and closing.group(1) != name:
+                raise ValueError(f'Mismatched scope end: {filename}:{number}')
+            continue
+        found = re.match(r'^(?:@\[[^\]]*\]\s*)*(?:noncomputable\s+)?'
+                         r'(theorem|lemma|def|abbrev|structure|instance)\s+([^\s({:\[]+)', line)
+        if found:
+            prefix = '.'.join(n for k, n in stack if k == 'namespace')
+            name = prefix + '.' + found.group(2) if prefix else found.group(2)
+            if not name.startswith(namespace + '.') or found.group(2).startswith('_root_.'):
+                raise ValueError(f'Declaration outside registered namespace: {filename}:{number}')
+            if name in names: raise ValueError('Duplicate source declaration: ' + name)
+            names.add(name)
+            result.append(dict(name=name, kind=found.group(1), file=filename, line=number))
+    # Lean permits file-wide sections to end at EOF. Namespaces in these
+    # import-only source adapters must nevertheless close explicitly.
+    if any(kind == 'namespace' for kind, _ in stack):
+        raise ValueError('Unclosed source namespace: ' + filename)
+    if not roots or any(root != namespace for root in roots):
+        raise ValueError('Source namespace mismatch: ' + filename)
+    return result
 
 
 def proof_contract(root=ROOT):
@@ -164,6 +276,85 @@ def audit_proof_edges(root, log):
                 scope='Direct constants in elaborated proof values; this witnesses reuse, not logical necessity or an unconditional PDE derivation')
 
 
+def environment_roots(root=ROOT):
+    manifest = json.loads((Path(root) / MANIFEST).read_text('utf-8'))
+    roots = sorted({row['namespace'] for row in
+                    manifest['modules'] + manifest.get('native_bridges', []) if row['namespace']})
+    if any(not re.fullmatch(r'[A-Za-z_][A-Za-z_0-9]*(?:\.[A-Za-z_][A-Za-z_0-9]*)*', n) for n in roots):
+        raise ValueError('Invalid Astra environment namespace')
+    return roots
+
+
+def environment_audit_commands(root=ROOT):
+    roots = ', '.join('`' + name for name in environment_roots(root))
+    return '''
+open Lean Elab Command in
+elab "audit_astra_environment" : command => do
+  let env ← getEnv
+  let roots : Array Name := #[''' + roots + ''']
+  let entries ← env.constants.foldM (init := #[]) fun entries name info => do
+    if roots.any (·.isPrefixOf (privateToUserName name)) then
+      return entries.push (name, info)
+    else
+      return entries
+  if entries.isEmpty then throwError "No Astra environment declarations"
+  for (name, info) in entries do
+    let axioms ← Lean.collectAxioms name
+    for a in axioms do
+      unless #[`propext, `Classical.choice, `Quot.sound].contains a do
+        throwError "Forbidden Astra environment axiom: {name}: {a}"
+    let kind := match info with
+      | .thmInfo _ => "theorem"
+      | .defnInfo _ => "definition"
+      | .axiomInfo _ => "axiom"
+      | .opaqueInfo _ => "opaque"
+      | .inductInfo _ => "inductive"
+      | .ctorInfo _ => "constructor"
+      | .recInfo _ => "recursor"
+      | .quotInfo _ => "quotient"
+    logInfo m!"ASTRA_ENV|{name}|{kind}|{String.intercalate "," (axioms.toList.map toString)}"
+  logInfo m!"ASTRA_ENV_TOTAL|{entries.size}"
+
+audit_astra_environment
+'''
+
+
+def audit_environment(root, log):
+    roots = environment_roots(root)
+    records = re.findall(r'ASTRA_ENV\|([^|\r\n]+)\|([^|\r\n]+)\|([^\r\n]*)', log)
+    totals = re.findall(r'ASTRA_ENV_TOTAL\|(\d+)', log)
+    names = [name for name, _, _ in records]
+    errors = []
+    if len(totals) != 1 or int(totals[0]) != len(records) or not records:
+        errors.append('Missing or inconsistent Astra environment total')
+    if len(names) != len(set(names)): errors.append('Duplicate Astra environment declaration')
+    observed = {}
+    kinds = {'theorem', 'definition', 'axiom', 'opaque', 'inductive', 'constructor', 'recursor', 'quotient'}
+    for name, kind, raw_axioms in records:
+        normalized = re.sub(r'^_private\..*?\.\d+\.', '', name)
+        if not any(normalized.startswith(ns + '.') for ns in roots) or kind not in kinds:
+            errors.append('Unexpected Astra environment declaration: ' + name)
+        axioms = [a.strip() for a in raw_axioms.split(',') if a.strip()]
+        if set(axioms) - {'propext', 'Classical.choice', 'Quot.sound'}:
+            errors.append('Forbidden Astra environment axiom: ' + name)
+        observed[name] = dict(kind=kind, axioms=axioms)
+    manifest = json.loads((Path(root) / MANIFEST).read_text('utf-8'))
+    expected = []
+    for row in manifest['modules'] + manifest.get('native_bridges', []):
+        if row.get('destination'):
+            expected += declarations(local_file(Path(root), row['destination']).read_text('utf-8'), row['namespace'])
+    for kind, name in expected:
+        actual = observed.get(name, {})
+        wanted = ({'theorem'} if kind in ('theorem', 'lemma') else {'inductive'} if kind == 'structure'
+                  else {'theorem', 'definition'} if kind == 'instance' else {'definition'})
+        if actual.get('kind') not in wanted:
+            errors.append('Missing or wrong-kind Astra source declaration: ' + name)
+    return dict(passed=not errors, errors=errors, namespace_roots=roots,
+                source_named_declarations=len(expected), environment_declarations=len(records),
+                declarations=observed,
+                scope='All constants under registered Astra source namespaces, including instances, structures, constructors, recursors, private generated names and auxiliaries; source counts remain separate')
+
+
 def audit(root=ROOT):
     root = Path(root).resolve()
     errors = []; new_declarations = []; module_results = []
@@ -183,10 +374,10 @@ def audit(root=ROOT):
         position = {path: i for i, (path, _) in enumerate(registry)}
         registered = dict(registry)
         adapter_paths = [row['destination'] for row in rows if row['role'] == 'import_only_adapter']
-        contexts = manifest.get('assembly_contexts', [])
-        errors.extend(assembly_context_errors(contexts, adapter_paths))
-        result['assembly_contexts'] = contexts
         native_paths = [row['destination'] for row in native_rows]
+        contexts = manifest.get('assembly_contexts', [])
+        errors.extend(assembly_context_errors(contexts, adapter_paths + native_paths))
+        result['assembly_contexts'] = contexts
         actual_astra = [path for path, _ in registry if Path(path).stem.startswith('Astra')]
         if adapter_paths + native_paths != actual_astra:
             errors.append('Astra registry differs from declared adapter order')
@@ -199,14 +390,15 @@ def audit(root=ROOT):
             imports = re.findall(r'(?m)^import ([^\r\n]+)', code)
             if imports != row['imports']:
                 errors.append('Source import list mismatch: ' + module)
-            namespaces = re.findall(r'(?m)^namespace\s+(\S+)', code)
-            expected_ns = [row['namespace']] if row['namespace'] else []
-            if namespaces != expected_ns:
-                errors.append('Source namespace mismatch: ' + module)
             decls = declarations(text, row['namespace']) if row['namespace'] else []
             theorem_count = sum(kind in ('theorem', 'lemma') for kind, _ in decls)
             if theorem_count != row['theorem_count']:
                 errors.append('Source theorem count mismatch: ' + module)
+            if ('declaration_count_including_structures' in row and
+                    len(decls) != row['declaration_count_including_structures']):
+                errors.append('Source named declaration count mismatch: ' + module)
+            if 'declaration_count' in row and len(decls) != row['declaration_count']:
+                errors.append('Source declaration count mismatch: ' + module)
             if all_declarations.intersection(name for _, name in decls):
                 errors.append('Duplicate source declaration: ' + module)
             all_declarations.update(name for _, name in decls)
@@ -248,8 +440,6 @@ def audit(root=ROOT):
                 errors.append('Native bridge cannot claim import-only adaptation: ' + module)
             if sha(raw) != row['sha256'] or row['sha256'] != row.get('original_sha256'):
                 errors.append('Native bridge creation hash mismatch: ' + destination)
-            if re.findall(r'(?m)^namespace\s+(\S+)', code) != [row['namespace']]:
-                errors.append('Native bridge namespace mismatch: ' + module)
             if re.search(r'(?m)^\s*import\b', code) or re.search(r'\b(sorry|admit|axiom|unsafe|native_decide)\b', code):
                 errors.append('Native bridge contains forbidden assembly/proof token: ' + module)
             if registered.get(destination) != row['namespace']:

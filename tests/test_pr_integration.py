@@ -85,6 +85,23 @@ class SourceIntegrationAudit(unittest.TestCase):
                    "('linear_input/lean_check/Base.inc', 'Example'))\n")
         self.assert_rejected('Duplicate supplemental source or namespace')
 
+    def test_verified_astra_sources_can_share_a_namespace(self):
+        pairs = [('AstraFirst.inc', 'KerrKoopman.Shared'), ('AstraSecond.inc', 'KerrKoopman.Shared')]
+        self.assertEqual(CHECK.duplicate_namespace_errors(pairs, set(pairs)), [])
+
+    def test_shared_namespace_requires_every_exact_verified_pair(self):
+        pairs = [('AstraFirst.inc', 'KerrKoopman.Shared'), ('Unverified.inc', 'KerrKoopman.Shared')]
+        self.assertTrue(CHECK.duplicate_namespace_errors(pairs, {pairs[0]}))
+
+    def test_filename_prefix_does_not_authorize_shared_namespace(self):
+        pairs = [('AstraFirst.inc', 'KerrKoopman.Shared'), ('AstraSecond.inc', 'KerrKoopman.Shared')]
+        self.assertTrue(CHECK.duplicate_namespace_errors(pairs, set()))
+
+    def test_verified_file_does_not_authorize_different_namespace(self):
+        pairs = [('AstraFirst.inc', 'Other'), ('AstraSecond.inc', 'Other')]
+        allowed = {(path, 'KerrKoopman.Shared') for path, _ in pairs}
+        self.assertTrue(CHECK.duplicate_namespace_errors(pairs, allowed))
+
     def test_registered_proof_requires_descriptive_scope(self):
         self.write('tools/verify.py', 'supplemental_scopes = {}\n')
         self.assert_rejected('Missing descriptive scope')

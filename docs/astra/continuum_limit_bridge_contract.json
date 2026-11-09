@@ -1,0 +1,70 @@
+{
+  "meaning": "Required direct constants observed in elaborated proof values of the authored initial-data-only continuum bridge. These connect the actual analytic input, Kerr constitutive law, physical-time Maxwell PDE, real L2 restoration, cutoff-uniform spatial bound, joint spatial/time formula limit, and a proved nonconstant mixed-wave instance. The coefficient class and 0 <= T <= 1/5 remain explicit; no arbitrary-data PDE uniqueness or cutoff-uniform C/n splitting bound is claimed.",
+  "required_proof_edges": {
+    "KerrKoopman.ContinuumLimit.material_identity": [
+      "KerrKoopman.AnalyticFields.material_identity"
+    ],
+    "KerrKoopman.ContinuumLimit.displacement_initial": [
+      "KerrKoopman.AnalyticInitial.displacement_initial"
+    ],
+    "KerrKoopman.ContinuumLimit.magnetic_initial": [
+      "KerrKoopman.AnalyticInitial.magnetic_initial"
+    ],
+    "KerrKoopman.ContinuumLimit.electric_initial": [
+      "KerrKoopman.AnalyticInitial.electric_initial"
+    ],
+    "KerrKoopman.ContinuumLimit.displacement_time_derivative": [
+      "KerrKoopman.AnalyticPDE.displacement_time_derivative"
+    ],
+    "KerrKoopman.ContinuumLimit.maxwell_equations": [
+      "KerrKoopman.ContinuumLimit.displacement_time_derivative",
+      "KerrKoopman.AnalyticClassical.H_space",
+      "KerrKoopman.AnalyticClassical.H_time",
+      "KerrKoopman.AnalyticClassical.E_space"
+    ],
+    "KerrKoopman.ContinuumLimit.scalar_restoration": [
+      "KerrKoopman.AnalyticFieldTails.electricCircle_coe",
+      "KerrKoopman.AnalyticFieldTails.magneticCircle_coe"
+    ],
+    "KerrKoopman.ContinuumLimit.steps_pos": [
+      "KerrKoopman.GalerkinClassical.jointSteps_pos"
+    ],
+    "KerrKoopman.ContinuumLimit.steps_tendsto": [
+      "KerrKoopman.GalerkinClassical.jointSteps_tendsto"
+    ],
+    "KerrKoopman.ContinuumLimit.spatial_error": [
+      "KerrKoopman.AnalyticGalerkinCertificate.actual_spatial_error"
+    ],
+    "KerrKoopman.ContinuumLimit.approximation_error": [
+      "KerrKoopman.AnalyticGalerkinCertificate.uniform_error"
+    ],
+    "KerrKoopman.ContinuumLimit.spatial_tendsto_uniformly": [
+      "KerrKoopman.ContinuumLimit.spatial_error",
+      "KerrKoopman.ContinuumLimit.spatialBudget_tendsto"
+    ],
+    "KerrKoopman.ContinuumLimit.approximation_tendsto_uniformly": [
+      "KerrKoopman.AnalyticGalerkinCertificate.finiteFormula_tendstoUniformlyOn"
+    ],
+    "KerrKoopman.ContinuumLimit.certificate": [
+      "KerrKoopman.ContinuumLimit.material_identity",
+      "KerrKoopman.ContinuumLimit.displacement_initial",
+      "KerrKoopman.ContinuumLimit.magnetic_initial",
+      "KerrKoopman.ContinuumLimit.maxwell_equations",
+      "KerrKoopman.ContinuumLimit.spatial_error",
+      "KerrKoopman.ContinuumLimit.approximation_error",
+      "KerrKoopman.ContinuumLimit.approximation_tendsto_uniformly"
+    ],
+    "KerrKoopman.ContinuumLimit.mixed_initial_displacement": [
+      "KerrKoopman.AnalyticExample.displacement_initial_wave"
+    ],
+    "KerrKoopman.ContinuumLimit.mixed_initial_magnetic": [
+      "KerrKoopman.AnalyticExample.magnetic_initial_wave"
+    ],
+    "KerrKoopman.ContinuumLimit.mixed_initial_nonconstant": [
+      "KerrKoopman.ContinuumLimit.mixed_initial_displacement"
+    ],
+    "KerrKoopman.ContinuumLimit.mixed_certificate": [
+      "KerrKoopman.ContinuumLimit.certificate"
+    ]
+  }
+}

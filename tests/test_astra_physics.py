@@ -124,6 +124,12 @@ class AstraSourceAudit(unittest.TestCase):
         text = '/- theorem bogus : False := by\n /- nested -/ -/\nnamespace Test\ntheorem real : True := True.intro\nend Test\n'
         self.assertEqual(CHECK.declarations(text, 'Test'), [('theorem', 'Test.real')])
 
+    def test_source_named_declaration_count_includes_instances_and_structures(self):
+        row = next(r for r in self.manifest['modules'] if 'declaration_count' in r)
+        row['declaration_count'] -= 1
+        self.save()
+        self.reject('Source declaration count mismatch')
+
     def test_all_direct_proof_edges_are_required(self):
         lines = [f'ASTRA_PROOF_EDGE|{source}|{target}|present'
                  for source, target in CHECK.proof_contract(self.root)]
@@ -213,6 +219,30 @@ class AstraSourceAudit(unittest.TestCase):
         row = self.manifest['modules'][0]
         raw = (self.root / row['destination']).read_bytes()
         self.assertEqual(CHECK.assembly_fragment(row['destination'], raw, self.manifest['assembly_contexts']), raw)
+
+    def test_eof_section_context_preserves_source_and_closes_two_scopes(self):
+        source = 'linear_input/lean_check/AstraFourierProjection.inc'
+        raw = (self.root / source).read_bytes()
+        fragment = CHECK.assembly_fragment(source, raw, self.manifest['assembly_contexts'])
+        self.assertEqual(fragment, b'section\n' + raw + b'\nend\nend\n')
+
+    def test_native_scope_context_preserves_entire_authored_proof(self):
+        source = 'linear_input/lean_check/AstraContinuumLimit.inc'
+        raw = (self.root / source).read_bytes()
+        self.assertEqual(CHECK.assembly_fragment(source, raw, self.manifest['assembly_contexts']),
+                         b'section\n' + raw + b'\nend\n')
+
+    def test_scope_context_cannot_accept_manifest_supplied_suffix(self):
+        row = next(r for r in self.manifest['assembly_contexts'] if r['kind'] == 'continuum_file_scope')
+        row['suffix'] = '\nend\naxiom fake : False\n'
+        self.save()
+        self.reject('Unapproved assembly context')
+
+    def test_required_native_scope_context_cannot_be_omitted(self):
+        self.manifest['assembly_contexts'] = [r for r in self.manifest['assembly_contexts']
+            if r['source'] != 'linear_input/lean_check/AstraContinuumLimit.inc']
+        self.save()
+        self.reject('Assembly context coverage mismatch')
 
     def test_missing_required_assembly_context_is_rejected(self):
         self.manifest['assembly_contexts'] = []; self.save()
