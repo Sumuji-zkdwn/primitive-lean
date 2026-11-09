@@ -3,6 +3,7 @@
 Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
 MainResult.lean prepends the additive Mathlib imports listed in EXTRA_IMPORTS, then the
 byte-exact verified All.lean, the registered supplements and the all-declaration axiom audit.
+Approved assembly contexts can add namespace aliases outside a source's exact byte span.
 The original All.lean bytes are preserved without modification.
 """
 from pathlib import Path
@@ -229,7 +230,7 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, followed by all public axiom audits.",
+        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, with approved assembly contexts outside exact source bytes, followed by all public axiom audits.",
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
@@ -268,6 +269,7 @@ def main():
         if not report["astra_source_audit"]["passed"]:
             raise ValueError("Astra source/provenance audit failed: " + repr(report["astra_source_audit"]["errors"]))
         astra_manifest = json.loads((ROOT / "docs/astra/manifest.json").read_text("utf-8"))
+        report["assembly_contexts"] = astra_manifest.get("assembly_contexts", [])
         astra_inputs = ["tools/check_astra_physics.py", "docs/astra/manifest.json",
                         astra_manifest["bridge_contract"]["preserved_copy"]]
         astra_inputs += [row["preserved_copy"] for row in astra_manifest["modules"]]
@@ -281,7 +283,7 @@ def main():
         supplement_bytes = []
         for source, namespace in SUPPLEMENTS:
             raw = (ROOT / source).read_bytes()
-            supplement_bytes.append(raw)
+            supplement_bytes.append(astra.assembly_fragment(source, raw, report["assembly_contexts"]))
             hashes[source] = hashlib.sha256(raw).hexdigest()
             code = common.strip_comments_strings(raw.decode("utf-8"))
             namespaces = re.findall(r"(?m)^namespace\s+([^\s]+)", code)

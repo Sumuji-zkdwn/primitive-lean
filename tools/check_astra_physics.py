@@ -12,6 +12,17 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = 'docs/astra/manifest.json'
+# Fixed assembly-only context, never arbitrary Lean text read from the ledger.
+# The aliases are namespace qualified and may persist after the section ends;
+# they resolve to the existing Set declarations, not new proof declarations.
+ASSEMBLY_CONTEXTS = {
+    'linear_input/lean_check/AstraHilbertFlow.inc': (
+        'hilbertflow_set_exports',
+        b'section\nnamespace KerrKoopman.HilbertFlow\n'
+        b'export Set (piecewise union_comm)\nend KerrKoopman.HilbertFlow\n',
+        b'\nend\n',
+    ),
+}
 
 
 def sha(raw):
@@ -22,6 +33,34 @@ def strip_imports(raw):
     """The only permitted adaptation: remove whole import lines, byte exactly."""
     return b''.join(line for line in raw.splitlines(keepends=True)
                     if not line.startswith(b'import '))
+
+
+def assembly_context_errors(contexts, adapter_paths):
+    errors = []
+    sources = [row['source'] for row in contexts]
+    required = set(ASSEMBLY_CONTEXTS).intersection(adapter_paths)
+    if len(sources) != len(set(sources)):
+        errors.append('Duplicate assembly context')
+    if set(sources) != required:
+        errors.append('Assembly context coverage mismatch')
+    for row in contexts:
+        allowed = ASSEMBLY_CONTEXTS.get(row['source'])
+        if (set(row) != {'source', 'kind', 'reason'} or not allowed or
+                row['kind'] != allowed[0] or not isinstance(row['reason'], str) or not row['reason'].strip()):
+            errors.append('Unapproved assembly context: ' + row['source'])
+    return errors
+
+
+def assembly_fragment(source, raw, contexts):
+    """Insert approved namespace aliases outside the exact source byte span."""
+    selected = [row for row in contexts if row['source'] == source]
+    if not selected:
+        return raw
+    errors = assembly_context_errors(selected, [source])
+    if errors:
+        raise ValueError('; '.join(errors))
+    _, prefix, suffix = ASSEMBLY_CONTEXTS[source]
+    return prefix + raw + suffix
 
 
 def assignment(path, name):
@@ -144,6 +183,9 @@ def audit(root=ROOT):
         position = {path: i for i, (path, _) in enumerate(registry)}
         registered = dict(registry)
         adapter_paths = [row['destination'] for row in rows if row['role'] == 'import_only_adapter']
+        contexts = manifest.get('assembly_contexts', [])
+        errors.extend(assembly_context_errors(contexts, adapter_paths))
+        result['assembly_contexts'] = contexts
         native_paths = [row['destination'] for row in native_rows]
         actual_astra = [path for path, _ in registry if Path(path).stem.startswith('Astra')]
         if adapter_paths + native_paths != actual_astra:

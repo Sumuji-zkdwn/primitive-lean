@@ -4,7 +4,7 @@
   "source_commit": "51a49be2e8f8b440c891240b574fdf97e08b9e84",
   "integration_base_commit": "e17a3da948221535d0539a21e2f8a7074a72fa49",
   "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs.",
-  "adaptation": "Imported module bodies and namespaces are unchanged: only complete import lines are removed. Repository-native bridges are separately authored proofs, identified by native_bridges; they are not import-only adaptations.",
+  "adaptation": "Imported module bodies and namespaces are unchanged: only complete import lines are removed. Repository-native bridges are separately authored proofs, identified by native_bridges; they are not import-only adaptations. The joint assembly context listed in assembly_contexts adds two namespace-qualified Set aliases outside the exact HilbertFlow source byte span.",
   "modules": [
     {
       "module": "KerrKoopman.Riccati",
@@ -392,6 +392,13 @@
       "theorem_nodes": 14,
       "direct_references": 17,
       "role": "repository_native_contract"
+    }
+  ],
+  "assembly_contexts": [
+    {
+      "source": "linear_input/lean_check/AstraHilbertFlow.inc",
+      "kind": "hilbertflow_set_exports",
+      "reason": "Earlier joint supplements open Finset outside their namespaces. Add namespace-qualified aliases of Set.piecewise and Set.union_comm before the exact HilbertFlow source so its original unqualified rewrite names retain their standalone meanings. These export aliases may persist after the surrounding section; no source bytes or proof declarations are changed."
     }
   ]
 }

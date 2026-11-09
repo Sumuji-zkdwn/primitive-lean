@@ -199,6 +199,41 @@ class AstraSourceAudit(unittest.TestCase):
         row = self.native_fixture(); row['transformation'] = 'remove_import_lines_exact_bytes'; self.save()
         self.reject('cannot claim import-only adaptation')
 
+    def test_assembly_context_preserves_exact_source_span(self):
+        source = 'linear_input/lean_check/AstraHilbertFlow.inc'
+        raw = (self.root / source).read_bytes()
+        assembled = CHECK.assembly_fragment(source, raw, self.manifest['assembly_contexts'])
+        prefix = (b'section\nnamespace KerrKoopman.HilbertFlow\n'
+                  b'export Set (piecewise union_comm)\nend KerrKoopman.HilbertFlow\n')
+        self.assertTrue(assembled.startswith(prefix))
+        self.assertTrue(assembled.endswith(b'\nend\n'))
+        self.assertEqual(assembled[len(prefix):-len(b'\nend\n')], raw)
+
+    def test_assembly_context_does_not_rewrite_other_sources(self):
+        row = self.manifest['modules'][0]
+        raw = (self.root / row['destination']).read_bytes()
+        self.assertEqual(CHECK.assembly_fragment(row['destination'], raw, self.manifest['assembly_contexts']), raw)
+
+    def test_missing_required_assembly_context_is_rejected(self):
+        self.manifest['assembly_contexts'] = []; self.save()
+        self.reject('Assembly context coverage mismatch')
+
+    def test_assembly_context_cannot_inject_arbitrary_lean(self):
+        self.manifest['assembly_contexts'][0]['prefix'] = 'axiom fake : False\n'; self.save()
+        self.reject('Unapproved assembly context')
+
+    def test_unknown_assembly_context_is_rejected(self):
+        self.manifest['assembly_contexts'][0]['kind'] = 'rewrite_proofs'; self.save()
+        self.reject('Unapproved assembly context')
+
+    def test_duplicate_assembly_context_is_rejected(self):
+        self.manifest['assembly_contexts'].append(dict(self.manifest['assembly_contexts'][0])); self.save()
+        self.reject('Duplicate assembly context')
+
+    def test_assembly_context_cannot_target_another_proof(self):
+        self.manifest['assembly_contexts'][0]['source'] = self.manifest['modules'][0]['destination']; self.save()
+        self.reject('Unapproved assembly context')
+
 
 if __name__ == '__main__':
     unittest.main()

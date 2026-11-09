@@ -52,6 +52,8 @@ Sₕ(D,H) = (D₊, H₊)
 
 元の `kerr-koopman-lean` から、以下の5原稿・50定理・58名前付き宣言を取り込む。いずれも原本を保存し、変換は import 行の除去だけとする。
 
+全原稿を連結すると、既存原稿の `open Finset` が引き継がれ、`HilbertFlow` の `piecewise` と `union_comm` が曖昧になる。そのため生成時に、`KerrKoopman.HilbertFlow` 名前空間で `export Set (piecewise union_comm)` を指定する。これは原本単独での名前の意味を明示する組み立て文脈であり、証明本文の書き換えや新しい公理ではない。適用先と内容は台帳・検証器で限定する。
+
 | 追補 | 元の定理数 | 役割 |
 |---|---:|---|
 | `AstraHilbertShear.inc` | 12 | L2 直積での部分流の安定性とベクトル場の Lipschitz 評価 |
