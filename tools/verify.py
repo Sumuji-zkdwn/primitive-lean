@@ -235,6 +235,12 @@ def verify_lean(rebuild):
         'AstraExplicitMaterial': 'Explicit nonlinear scalar constitutive inverse using hyperbolic functions',
         'AstraRelativeEnergy': 'Pointwise relative energy identities and bounds for the chosen constitutive law',
         'AstraExactShear': 'Exact finite dimensional split shear steps, reversibility, and preserved components',
+        'AstraHilbertShear': 'Hilbert norm estimates for split shears and globally Lipschitz nonlinear vector fields',
+        'AstraHilbertFlow': 'Global existence, uniqueness, flow composition and growth for globally Lipschitz fields on a complete space',
+        'AstraHilbertError': 'Local second order Lie split-step error relative to the exact Lipschitz flow',
+        'AstraIterationBound': 'Explicit recurrence and finite time inverse-step-count error bounds',
+        'AstraHilbertIteration': 'Convergence of actual split iterates to the exact flow with an explicit O(1/n) bound',
+        'AstraFiniteFlow': 'Actual finite matrix Maxwell flow with the scalar material inverse: global existence and uniqueness, old ExactShear identification, O(1/n) split convergence, physical reconstruction and skew-matrix energy conservation',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(

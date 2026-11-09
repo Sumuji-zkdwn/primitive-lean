@@ -46,6 +46,12 @@ EXTRA_IMPORTS = (
     "Mathlib.Tactic.Ring",
     "Mathlib.Topology.MetricSpace.Lipschitz",
     "Mathlib.Topology.Order.IntermediateValue",
+    "Mathlib.Analysis.InnerProductSpace.ProdL2",
+    "Mathlib.Analysis.ODE.Gronwall",
+    "Mathlib.Analysis.ODE.PicardLindelof",
+    "Mathlib.Analysis.SpecialFunctions.Exp",
+    "Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp",
+    "Mathlib.Analysis.SpecificLimits.Basic",
 )
 
 SUPPLEMENTS = (
@@ -182,6 +188,12 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/AstraExplicitMaterial.inc', 'KerrKoopman.ExplicitMaterial'),
     ('linear_input/lean_check/AstraRelativeEnergy.inc', 'KerrKoopman.RelativeEnergy'),
     ('linear_input/lean_check/AstraExactShear.inc', 'KerrKoopman.ExactShear'),
+    ('linear_input/lean_check/AstraHilbertShear.inc', 'KerrKoopman.HilbertShear'),
+    ('linear_input/lean_check/AstraHilbertFlow.inc', 'KerrKoopman.HilbertFlow'),
+    ('linear_input/lean_check/AstraHilbertError.inc', 'KerrKoopman.HilbertError'),
+    ('linear_input/lean_check/AstraIterationBound.inc', 'KerrKoopman.IterationBound'),
+    ('linear_input/lean_check/AstraHilbertIteration.inc', 'KerrKoopman.HilbertIteration'),
+    ('linear_input/lean_check/AstraFiniteFlow.inc', 'KerrKoopman.FiniteFlow'),
 )
 
 
@@ -259,6 +271,7 @@ def main():
         astra_inputs = ["tools/check_astra_physics.py", "docs/astra/manifest.json",
                         astra_manifest["bridge_contract"]["preserved_copy"]]
         astra_inputs += [row["preserved_copy"] for row in astra_manifest["modules"]]
+        astra_inputs += [astra.contract_path(row) for row in astra_manifest.get("additional_bridge_contracts", [])]
         for rel in astra_inputs:
             hashes[rel] = sha(ROOT / rel)
 

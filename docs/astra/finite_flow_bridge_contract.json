@@ -1,0 +1,50 @@
+{
+  "meaning": "Required direct constants in the elaborated proof values of the new finite matrix bridge. These witness reuse of actual scalar material inversion, old ExactShear steps, Hilbert existence and uniqueness, finite-step convergence, physical reconstruction and conditional energy conservation; no continuum limit or dimension-uniform bound is claimed.",
+  "required_proof_edges": {
+    "KerrKoopman.FiniteFlow.material_lipschitz": [
+      "KerrKoopman.PrimitiveConstitutive.materialInverse_stability"
+    ],
+    "KerrKoopman.FiniteFlow.material_zero": [
+      "KerrKoopman.PrimitiveConstitutive.materialInverse_constitutive"
+    ],
+    "KerrKoopman.FiniteFlow.encode_lieStep": [
+      "KerrKoopman.ExactShear.lieStep"
+    ],
+    "KerrKoopman.FiniteFlow.encode_iterate": [
+      "KerrKoopman.FiniteFlow.encode_lieStep"
+    ],
+    "KerrKoopman.FiniteFlow.hasDerivAt_flow": [
+      "KerrKoopman.HilbertFlow.hasDerivAt_flow"
+    ],
+    "KerrKoopman.FiniteFlow.exists_global": [
+      "KerrKoopman.FiniteFlow.hasDerivAt_flow"
+    ],
+    "KerrKoopman.FiniteFlow.global_unique": [
+      "KerrKoopman.HilbertFlow.global_unique"
+    ],
+    "KerrKoopman.FiniteFlow.finite_time_error_le": [
+      "KerrKoopman.HilbertIteration.finite_time_error_le"
+    ],
+    "KerrKoopman.FiniteFlow.iterate_tendsto_flow": [
+      "KerrKoopman.HilbertIteration.iterate_tendsto_flow"
+    ],
+    "KerrKoopman.FiniteFlow.original_finite_time_error_le": [
+      "KerrKoopman.FiniteFlow.encode_iterate",
+      "KerrKoopman.FiniteFlow.finite_time_error_le"
+    ],
+    "KerrKoopman.FiniteFlow.original_iterate_tendsto_flow": [
+      "KerrKoopman.FiniteFlow.encode_iterate",
+      "KerrKoopman.FiniteFlow.iterate_tendsto_flow"
+    ],
+    "KerrKoopman.FiniteFlow.hasDerivAt_electric": [
+      "KerrKoopman.ExplicitMaterial.hasDerivAt_materialInverse"
+    ],
+    "KerrKoopman.FiniteFlow.energy_conserved": [
+      "KerrKoopman.FiniteEnergy.energy_conserved"
+    ],
+    "KerrKoopman.FiniteFlow.restored_finite_time_error_le": [
+      "KerrKoopman.FiniteFlow.restore_norm_sub_le",
+      "KerrKoopman.FiniteFlow.finite_time_error_le"
+    ]
+  }
+}

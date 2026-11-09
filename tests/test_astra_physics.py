@@ -1,6 +1,7 @@
 """Reject hidden proof rewrites and broken dependency/registration contracts."""
 import hashlib
 import importlib.util
+import ast
 import json
 from pathlib import Path
 import shutil
@@ -23,6 +24,8 @@ class AstraSourceAudit(unittest.TestCase):
         for row in self.manifest['modules']:
             paths.add(row['preserved_copy'])
             if 'destination' in row: paths.add(row['destination'])
+        paths.update(row['destination'] for row in self.manifest.get('native_bridges', []))
+        paths.update(CHECK.contract_path(row) for row in self.manifest.get('additional_bridge_contracts', []))
         for path in paths:
             dest = self.root / path
             dest.parent.mkdir(parents=True, exist_ok=True)
@@ -39,9 +42,9 @@ class AstraSourceAudit(unittest.TestCase):
     def test_actual_selected_closure_passes(self):
         result = CHECK.audit(self.root)
         self.assertTrue(result['passed'], result)
-        self.assertEqual(result['counts']['new_theorems'], 126)
+        self.assertEqual(result['counts'], self.manifest['counts'])
         self.assertEqual(result['counts']['reused_original_theorems'], 29)
-        self.assertEqual(result['bridge_direct_references'], 12)
+        self.assertEqual(result['bridge_direct_references'], len(CHECK.proof_contract(self.root)))
         self.assertFalse(result['proof_edges_checked'])
 
     def test_rehashed_adapter_cannot_rewrite_proof_body(self):
@@ -135,6 +138,66 @@ class AstraSourceAudit(unittest.TestCase):
         report = CHECK.audit_proof_edges(self.root, '\n'.join(lines + lines[:1]))
         self.assertFalse(report['passed'])
         self.assertTrue(report['duplicate_results'])
+
+    def native_fixture(self):
+        """Use the real bridge when present, otherwise add a tiny ledger fixture."""
+        if self.manifest.get('native_bridges'):
+            return self.manifest['native_bridges'][0]
+        destination = 'linear_input/lean_check/AstraNativeFixture.inc'
+        raw = b'namespace AstraNativeFixture\ntheorem witness : True := True.intro\nend AstraNativeFixture\n'
+        (self.root / destination).write_bytes(raw)
+        contract_path = 'docs/astra/native_fixture_contract.json'
+        contract = {'required_proof_edges': {'AstraNativeFixture.witness': ['KerrKoopman.HilbertFlow.exists_global']}}
+        contract_raw = json.dumps(contract).encode()
+        (self.root / contract_path).write_bytes(contract_raw)
+        row = dict(module='AstraNativeFixture', namespace='AstraNativeFixture', destination=destination,
+                   sha256=CHECK.sha(raw), original_sha256=CHECK.sha(raw), theorem_count=1, declaration_count=1,
+                   role='repository_native_proof', origin='authored_in_primitive_lean',
+                   authored_on_parent_commit='a' * 40, authorship_description='Native proof fixture; never an import adapter.',
+                   dependencies=['KerrKoopman.HilbertFlow'], required_mathlib_imports=[], proof_contract=contract_path)
+        self.manifest.update(schema_version=2, native_bridges=[row], additional_bridge_contracts=[dict(
+            path=contract_path, sha256=CHECK.sha(contract_raw), theorem_nodes=1, direct_references=1)])
+        counts = self.manifest['counts']
+        counts.update(import_only_modules=counts['new_proof_modules'], import_only_theorems=counts['new_theorems'],
+                      repository_native_modules=1, repository_native_theorems=1)
+        for key in ('new_proof_modules', 'new_theorems', 'new_physics_theorems'): counts[key] += 1
+        registry_path = self.root / 'tools/verify_main_result.py'
+        text = registry_path.read_text('utf-8'); tree = ast.parse(text)
+        node = next(n for n in ast.walk(tree) if isinstance(n, ast.Assign)
+                    and any(isinstance(t, ast.Name) and t.id == 'SUPPLEMENTS' for t in n.targets))
+        lines = text.splitlines(keepends=True)
+        lines.insert(node.end_lineno - 1, f"    ('{destination}', 'AstraNativeFixture'),\n")
+        registry_path.write_text(''.join(lines), 'utf-8')
+        self.save()
+        return row
+
+    def test_explicit_native_proof_ledger_passes_source_audit(self):
+        self.native_fixture()
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        self.assertGreater(result['counts']['repository_native_theorems'], 0)
+
+    def test_native_proof_cannot_pretend_import_only_origin(self):
+        row = self.native_fixture(); row['origin'] = 'import_only_adapter'; self.save()
+        self.reject('explicit repository authorship')
+
+    def test_native_proof_rehash_does_not_replace_creation_hash(self):
+        row = self.native_fixture(); path = self.root / row['destination']
+        path.write_bytes(path.read_bytes() + b'\n-- changed body\n')
+        row['sha256'] = CHECK.sha(path.read_bytes()); self.save()
+        self.reject('creation hash mismatch')
+
+    def test_native_proof_requires_dependency_closure(self):
+        row = self.native_fixture(); row['dependencies'].append('KerrKoopman.Missing'); self.save()
+        self.reject('Missing native bridge dependency')
+
+    def test_native_proof_requires_registered_contract(self):
+        row = self.native_fixture(); row['proof_contract'] = 'docs/astra/missing_contract.json'; self.save()
+        self.reject('lacks registered proof contract')
+
+    def test_native_proof_cannot_claim_preserved_import_adapter(self):
+        row = self.native_fixture(); row['transformation'] = 'remove_import_lines_exact_bytes'; self.save()
+        self.reject('cannot claim import-only adaptation')
 
 
 if __name__ == '__main__':

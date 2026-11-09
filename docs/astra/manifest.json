@@ -1,10 +1,10 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source_project": "kerr-koopman-lean",
   "source_commit": "51a49be2e8f8b440c891240b574fdf97e08b9e84",
   "integration_base_commit": "e17a3da948221535d0539a21e2f8a7074a72fa49",
-  "scope": "Selected constitutive, observation, reconstruction, conditional energy and finite dimensional split-step theorems. This is not the full periodic nonlinear PDE or RKHA solution.",
-  "adaptation": "Exact complete import-line removal only; no proof bodies or namespaces rewritten.",
+  "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs.",
+  "adaptation": "Imported module bodies and namespaces are unchanged: only complete import lines are removed. Repository-native bridges are separately authored proofs, identified by native_bridges; they are not import-only adaptations.",
   "modules": [
     {
       "module": "KerrKoopman.Riccati",
@@ -252,6 +252,88 @@
       "theorem_count": 0,
       "role": "import_aggregator",
       "transformation": "imports_resolved_by_joint_registry"
+    },
+    {
+      "module": "KerrKoopman.HilbertShear",
+      "source_path": "KerrKoopman/HilbertShear.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertShear.lean",
+      "source_sha256": "5f91eeddf44a79ea56645a640d2ad17e9ca5329c447c0f12bf8bf86e76160e01",
+      "imports": [
+        "Mathlib.Analysis.InnerProductSpace.ProdL2",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp",
+        "Mathlib.Analysis.ODE.Gronwall",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.HilbertShear",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertShear.inc",
+      "sha256": "10a9e613b6be73ec8076187febbc5f17c8ef302a38f059d3fe3bfe36b93ff509",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.HilbertFlow",
+      "source_path": "KerrKoopman/HilbertFlow.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertFlow.lean",
+      "source_sha256": "2d3cc3f07bb22608bbace87959fca55f12163b14ebe83d709e169e438efc6833",
+      "imports": [
+        "KerrKoopman.HilbertShear",
+        "Mathlib.Analysis.ODE.PicardLindelof"
+      ],
+      "namespace": "KerrKoopman.HilbertFlow",
+      "theorem_count": 22,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertFlow.inc",
+      "sha256": "685a9193c47d25c43c9c14fafd6ed5e60807eca605560cb87d6be7e67ca95202",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.HilbertError",
+      "source_path": "KerrKoopman/HilbertError.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertError.lean",
+      "source_sha256": "b766d42d7f51440bb4e40992edae4b1c778e250d2cbf2d6be5017143e048eb49",
+      "imports": [
+        "KerrKoopman.HilbertFlow"
+      ],
+      "namespace": "KerrKoopman.HilbertError",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertError.inc",
+      "sha256": "236547bc5bed9e46dbecccd7eda24a35bc276d6dd1a1a3445b277f127ffd9aca",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.IterationBound",
+      "source_path": "KerrKoopman/IterationBound.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/IterationBound.lean",
+      "source_sha256": "265403377cbcc3c2fa01443ccda252cb36badd98af7f98611de25a6ac8b1802d",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Exp",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.IterationBound",
+      "theorem_count": 3,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraIterationBound.inc",
+      "sha256": "f412d74b767d6918ed4bef8d83d92beb7be1a2efbda8477d68d1cbaf3a54dc46",
+      "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.HilbertIteration",
+      "source_path": "KerrKoopman/HilbertIteration.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/HilbertIteration.lean",
+      "source_sha256": "9a3496231d318e655f628db6222cf654d3a942b59fa733f9f1978ec3ed286b39",
+      "imports": [
+        "KerrKoopman.HilbertError",
+        "KerrKoopman.IterationBound",
+        "Mathlib.Analysis.SpecificLimits.Basic"
+      ],
+      "namespace": "KerrKoopman.HilbertIteration",
+      "theorem_count": 6,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraHilbertIteration.inc",
+      "sha256": "3caec67951e5de641bc757a2f9389f29e317d3517cdf2a9f7ca0380442e13c6c",
+      "transformation": "remove_import_lines_exact_bytes"
     }
   ],
   "bridge_contract": {
@@ -261,16 +343,55 @@
     "direct_references": 12
   },
   "counts": {
-    "source_modules": 14,
-    "new_proof_modules": 10,
-    "new_theorems": 126,
-    "new_physics_theorems": 125,
+    "source_modules": 19,
+    "new_proof_modules": 16,
+    "new_theorems": 210,
+    "new_physics_theorems": 209,
     "new_original_koopman_theorems": 1,
-    "reused_original_theorems": 29
+    "reused_original_theorems": 29,
+    "import_only_modules": 15,
+    "import_only_theorems": 176,
+    "repository_native_modules": 1,
+    "repository_native_theorems": 34
   },
   "verification": {
     "source_audit": "python -B -X utf8 tools/check_astra_physics.py",
     "proof_and_axioms": "python -B -X utf8 tools/verify.py --proof-only",
     "integration": "python -B -X utf8 tools/verify.py --integration-only"
-  }
+  },
+  "native_bridges": [
+    {
+      "module": "KerrKoopman.FiniteFlow",
+      "namespace": "KerrKoopman.FiniteFlow",
+      "destination": "linear_input/lean_check/AstraFiniteFlow.inc",
+      "sha256": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4",
+      "original_sha256": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4",
+      "theorem_count": 34,
+      "declaration_count": 51,
+      "role": "repository_native_proof",
+      "origin": "authored_in_primitive_lean",
+      "authored_on_parent_commit": "08c04d85dd32680620ab15d57bd685ff011a20be",
+      "authorship_description": "New proof body authored in primitive-lean: instantiate the abstract Hilbert results with an arbitrary finite real matrix and the existing scalar materialInverse; identify the existing ExactShear iteration and recover physical electric and magnetic fields.",
+      "dependencies": [
+        "KerrKoopman.ExactShear",
+        "KerrKoopman.HilbertIteration",
+        "KerrKoopman.PrimitiveConstitutive",
+        "KerrKoopman.ExplicitMaterial",
+        "KerrKoopman.FiniteEnergy",
+        "KerrKoopman.HilbertFlow",
+        "KerrKoopman.HilbertShear"
+      ],
+      "required_mathlib_imports": [],
+      "proof_contract": "docs/astra/finite_flow_bridge_contract.json"
+    }
+  ],
+  "additional_bridge_contracts": [
+    {
+      "path": "docs/astra/finite_flow_bridge_contract.json",
+      "sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
+      "theorem_nodes": 14,
+      "direct_references": 17,
+      "role": "repository_native_contract"
+    }
+  ]
 }
