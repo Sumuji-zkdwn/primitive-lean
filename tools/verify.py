@@ -241,6 +241,7 @@ def verify_lean(rebuild):
         'AstraIterationBound': 'Explicit recurrence and finite time inverse-step-count error bounds',
         'AstraHilbertIteration': 'Convergence of actual split iterates to the exact flow with an explicit O(1/n) bound',
         'AstraFiniteFlow': 'Actual finite matrix Maxwell flow with the scalar material inverse: global existence and uniqueness, old ExactShear identification, O(1/n) split convergence, physical reconstruction and skew-matrix energy conservation',
+        'AstraRelativeEnergyBridge': 'Native finite relative-energy coercivity, Kerr remainder and exact skew cancellation with no matrix-norm factor; the actual time derivative and PDE limit are not claimed',
     }
     supplemental_groups = {
         Path(group["source"]).stem: dict(
