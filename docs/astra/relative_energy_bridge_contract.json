@@ -29,6 +29,9 @@
       "KerrKoopman.RelativeEnergyBridge.relativeEnergy_hasDerivAt_physical",
       "KerrKoopman.FiniteFlow.hasDerivAt_electric",
       "KerrKoopman.FiniteFlow.hasDerivAt_magnetic"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relativeRateRight_le": [
+      "KerrKoopman.RelativeEnergyBridge.constitutive_remainder_control"
     ]
   }
 }
