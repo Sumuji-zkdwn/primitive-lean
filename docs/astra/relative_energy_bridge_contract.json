@@ -32,6 +32,14 @@
     ],
     "KerrKoopman.RelativeEnergyBridge.relativeRateRight_le": [
       "KerrKoopman.RelativeEnergyBridge.constitutive_remainder_control"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relativeRateRight_quadratic_le": [
+      "KerrKoopman.RelativeEnergyBridge.relativeRateRight_le",
+      "KerrKoopman.RelativeEnergyBridge.relative_energy_controls"
+    ],
+    "KerrKoopman.RelativeEnergyBridge.relativeEnergy_deriv_le_flow": [
+      "KerrKoopman.RelativeEnergyBridge.relativeEnergy_hasDerivAt_flow",
+      "KerrKoopman.RelativeEnergyBridge.relativeRateRight_quadratic_le"
     ]
   }
 }
