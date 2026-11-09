@@ -3,7 +3,7 @@
   "source_project": "kerr-koopman-lean",
   "source_commit": "51a49be2e8f8b440c891240b574fdf97e08b9e84",
   "integration_base_commit": "e17a3da948221535d0539a21e2f8a7074a72fa49",
-  "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs.",
+  "scope": "Constitutive inversion, observation, reconstruction, conditional energy identities, global existence and uniqueness for globally Lipschitz Hilbert fields, and actual finite-matrix split iteration with O(1/n) convergence. This is not a continuum limit, a dimension-uniform bound, or a closed solution of general periodic nonlinear PDEs. Additionally, the original inviscid periodic Kerr PDE is constructed for the fixed analytic initial class (weighted branch norm at most 57/250 and 0 <= T <= 1/5), with actual initial attainment, cutoff-independent analytic tail controls, and a joint Fourier/time-iteration limit, including a certified mixed-wave input. This does not assert a general large-data or postshock inviscid continuum limit.",
   "adaptation": "Imported module bodies and namespaces are unchanged: only complete import lines are removed. Repository-native bridges are separately authored proofs, identified by native_bridges; they are not import-only adaptations. The joint assembly context listed in assembly_contexts adds two namespace-qualified Set aliases outside the exact HilbertFlow source byte span.",
   "modules": [
     {
@@ -334,6 +334,1005 @@
       "destination": "linear_input/lean_check/AstraHilbertIteration.inc",
       "sha256": "3caec67951e5de641bc757a2f9389f29e317d3517cdf2a9f7ca0380442e13c6c",
       "transformation": "remove_import_lines_exact_bytes"
+    },
+    {
+      "module": "KerrKoopman.FourierProjection",
+      "source_path": "KerrKoopman/FourierProjection.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/FourierProjection.lean",
+      "source_sha256": "5cc6d7fab94e65ba3a9a03d0225a9faf0096b635f5d4e6a973e650e4d0643618",
+      "imports": [
+        "Mathlib.Analysis.Fourier.AddCircle",
+        "Mathlib.Analysis.InnerProductSpace.Adjoint",
+        "Mathlib.Order.Filter.AtTopBot.Finset",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.FourierProjection",
+      "theorem_count": 15,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraFourierProjection.inc",
+      "sha256": "99904017798c931f97cfb3ab30a1011692df4a0dacb724427a558925e946e879",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 22
+    },
+    {
+      "module": "KerrKoopman.MaterialL2",
+      "source_path": "KerrKoopman/MaterialL2.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/MaterialL2.lean",
+      "source_sha256": "4972bd9ce053c709156b58a8b642ef0f59e15de5b7709bc5d15382e6f7cc1a3a",
+      "imports": [
+        "KerrKoopman.FourierProjection",
+        "KerrKoopman.ExplicitMaterial"
+      ],
+      "namespace": "KerrKoopman.MaterialL2",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraMaterialL2.inc",
+      "sha256": "f50fe6ca5c70f17f930c54482775f71fa7e8382338ca2dbe035882bd02f437ca",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 9
+    },
+    {
+      "module": "KerrKoopman.RealGalerkin",
+      "source_path": "KerrKoopman/RealGalerkin.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/RealGalerkin.lean",
+      "source_sha256": "d8b0ba57212d6f459d55084684955c49aa93c18af93b4d8f6ca06a26f6aa6dbe",
+      "imports": [
+        "KerrKoopman.MaterialL2",
+        "Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional"
+      ],
+      "namespace": "KerrKoopman.RealGalerkin",
+      "theorem_count": 11,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraRealGalerkin.inc",
+      "sha256": "a513e9497244a8e879ca997058050fbd553197ab8f54e61c06865ab2cfbb413b",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 21
+    },
+    {
+      "module": "KerrKoopman.FourierDerivative",
+      "source_path": "KerrKoopman/FourierDerivative.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/FourierDerivative.lean",
+      "source_sha256": "7553b44e8fb762dcac033f887f88ca54e63d3c442c1f71fe231a99a4145a3b3a",
+      "imports": [
+        "KerrKoopman.FourierProjection"
+      ],
+      "namespace": "KerrKoopman.FourierProjection",
+      "theorem_count": 16,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraFourierDerivative.inc",
+      "sha256": "add27799f5f44afcc6a98e633f7b69d7bba88e3d066177ccfa6e682c93a0cbc6",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 21
+    },
+    {
+      "module": "KerrKoopman.RealFourierDerivative",
+      "source_path": "KerrKoopman/RealFourierDerivative.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/RealFourierDerivative.lean",
+      "source_sha256": "db1ebbd243df9e3f10287a68d1e92515f549eadce87121e71865e329573106a5",
+      "imports": [
+        "KerrKoopman.RealGalerkin",
+        "KerrKoopman.FourierDerivative"
+      ],
+      "namespace": "KerrKoopman.RealFourierDerivative",
+      "theorem_count": 26,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraRealFourierDerivative.inc",
+      "sha256": "471c7f83cfd867a15a606567b5e9c8bfc44b20ca62ae54f0cb739717b8648ae4",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 32
+    },
+    {
+      "module": "KerrKoopman.FiniteRepresentatives",
+      "source_path": "KerrKoopman/FiniteRepresentatives.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/FiniteRepresentatives.lean",
+      "source_sha256": "543ee174609384e356ed77e0555bfdad11257518e70bb3c53c2e14c49f90c6c6",
+      "imports": [
+        "KerrKoopman.RealFourierDerivative",
+        "Mathlib.Topology.Algebra.Module.FiniteDimension",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic"
+      ],
+      "namespace": "KerrKoopman.FiniteRepresentatives",
+      "theorem_count": 14,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraFiniteRepresentatives.inc",
+      "sha256": "37054caf961714f707637a76bfe0a5fd8c71d6f4d6c0b8b2ac3fff77db2297ac",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 23
+    },
+    {
+      "module": "KerrKoopman.FourierSupBounds",
+      "source_path": "KerrKoopman/FourierSupBounds.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/FourierSupBounds.lean",
+      "source_sha256": "c8b5bb90821d9daf99660955b2543c1ac2f421c78315bc302afa05d8487ac79c",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Defs",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.FourierSupBounds",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraFourierSupBounds.inc",
+      "sha256": "80d11220c2cabe7ec13a7f53869d5dfc375c21c63e06341a930f9e92b1a8bd9c",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 15
+    },
+    {
+      "module": "KerrKoopman.FiniteRepresentativeCalculus",
+      "source_path": "KerrKoopman/FiniteRepresentativeCalculus.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/FiniteRepresentativeCalculus.lean",
+      "source_sha256": "5b1a4ccd7a5436c0798eae15ac6240ddc95b1bafe8f5704f5d8ca308c83b5e80",
+      "imports": [
+        "KerrKoopman.FiniteRepresentatives",
+        "KerrKoopman.FourierSupBounds"
+      ],
+      "namespace": "KerrKoopman.FiniteRepresentatives",
+      "theorem_count": 16,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc",
+      "sha256": "0d9958e36c834a3549ce1446d68bf321ed350813b3a77924e16d65cd80324735",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 19
+    },
+    {
+      "module": "KerrKoopman.RelativeDynamics",
+      "source_path": "KerrKoopman/RelativeDynamics.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/RelativeDynamics.lean",
+      "source_sha256": "347b10544ea91095174f9917afb78b5a829747a8227c92a4c89b3165b6f80e5d",
+      "imports": [
+        "KerrKoopman.RelativeEnergy",
+        "Mathlib.Analysis.ODE.Gronwall"
+      ],
+      "namespace": "KerrKoopman.RelativeDynamics",
+      "theorem_count": 16,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraRelativeDynamics.inc",
+      "sha256": "8a4b52d12329349cb8603b84d49089d0cfb329ae16c662d8c881031e17d081ac",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 19
+    },
+    {
+      "module": "KerrKoopman.ContinuumCalculus",
+      "source_path": "KerrKoopman/ContinuumCalculus.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ContinuumCalculus.lean",
+      "source_sha256": "57b2c1092f10c974454070d7013c79f7dcf94809d7fb09f9da6b5571903f1bfb",
+      "imports": [
+        "KerrKoopman.RelativeDynamics",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts",
+        "Mathlib.Analysis.Calculus.ParametricIntervalIntegral"
+      ],
+      "namespace": "KerrKoopman.ContinuumCalculus",
+      "theorem_count": 4,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraContinuumCalculus.inc",
+      "sha256": "3e8b304c9b869fc0ffca85ebab2e9d0844a7c05e2be899002847685bed910b55",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 4
+    },
+    {
+      "module": "KerrKoopman.IntervalFourier",
+      "source_path": "KerrKoopman/IntervalFourier.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/IntervalFourier.lean",
+      "source_sha256": "3ba07a659a6c6108a2b7306f60469fa98d9479ffdaa23e0f8ecfb70eb87af58f",
+      "imports": [
+        "KerrKoopman.ContinuumCalculus",
+        "KerrKoopman.FourierSupBounds"
+      ],
+      "namespace": "KerrKoopman.IntervalFourier",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraIntervalFourier.inc",
+      "sha256": "39ba941d462d3063e76f5301357a2addf7aceb05f0d650f6b80a89b6989325e9",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 17
+    },
+    {
+      "module": "KerrKoopman.ContinuumRelative",
+      "source_path": "KerrKoopman/ContinuumRelative.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ContinuumRelative.lean",
+      "source_sha256": "5622d3d65bd0153773afc170ca310e9ca4799800e0d2d1a27f72d8b8f32c29d7",
+      "imports": [
+        "KerrKoopman.ContinuumCalculus"
+      ],
+      "namespace": "KerrKoopman.ContinuumRelative",
+      "theorem_count": 11,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraContinuumRelative.inc",
+      "sha256": "6240d139c72e288edbcf074c0c6ae402a65baa5e9588f9878fb88504e19aef6c",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 16
+    },
+    {
+      "module": "KerrKoopman.IntegralTail",
+      "source_path": "KerrKoopman/IntegralTail.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/IntegralTail.lean",
+      "source_sha256": "1ab5ac36a873c8cd58029449c1bafab81b1fa68a4775d1627640787b04767a28",
+      "imports": [
+        "KerrKoopman.ContinuumRelative",
+        "Mathlib.Algebra.QuadraticDiscriminant"
+      ],
+      "namespace": "KerrKoopman.IntegralTail",
+      "theorem_count": 4,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraIntegralTail.inc",
+      "sha256": "02e20c5e58291cd4db050c441a02caccb9003581f04f40963919cc6d18ed5f45",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 4
+    },
+    {
+      "module": "KerrKoopman.ContinuumGalerkin",
+      "source_path": "KerrKoopman/ContinuumGalerkin.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ContinuumGalerkin.lean",
+      "source_sha256": "19e218cbb78518b2ea5a11b907c16856952fb02c6bcb5296a8473fe492d93c72",
+      "imports": [
+        "KerrKoopman.IntegralTail"
+      ],
+      "namespace": "KerrKoopman.ContinuumGalerkin",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraContinuumGalerkin.inc",
+      "sha256": "f2f006fae808b5880ce8135bded86e87f8632ede8bc57bcd16481c3af4667b0d",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 9
+    },
+    {
+      "module": "KerrKoopman.IntervalFourierProjection",
+      "source_path": "KerrKoopman/IntervalFourierProjection.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/IntervalFourierProjection.lean",
+      "source_sha256": "0564ee10c1b99de6b89061949bbcbfa57e8543dd2a1fd8b0aa45d9f57ac53f41",
+      "imports": [
+        "KerrKoopman.IntervalFourier",
+        "KerrKoopman.ContinuumGalerkin",
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic"
+      ],
+      "namespace": "KerrKoopman.IntervalFourier",
+      "theorem_count": 20,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraIntervalFourierProjection.inc",
+      "sha256": "44ed0faa606aa538b4f1b7209d227469d27b24287d25a8fcf04e1d0efc53304b",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 21
+    },
+    {
+      "module": "KerrKoopman.CircleProjection",
+      "source_path": "KerrKoopman/CircleProjection.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/CircleProjection.lean",
+      "source_sha256": "a85da61b3a2784a9765d1ae94451df91de51192f93ebd34dc69beada3a15e94c",
+      "imports": [
+        "KerrKoopman.FiniteRepresentatives",
+        "KerrKoopman.IntervalFourierProjection"
+      ],
+      "namespace": "KerrKoopman.FiniteRepresentatives",
+      "theorem_count": 14,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraCircleProjection.inc",
+      "sha256": "6c621e16398c488af11fdbfbd0d9f70cae6ea6bf76baf4f7538db5766d4f82ce",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 16
+    },
+    {
+      "module": "KerrKoopman.GalerkinFlow",
+      "source_path": "KerrKoopman/GalerkinFlow.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/GalerkinFlow.lean",
+      "source_sha256": "46e2d4ba4943af6b8a39754b7cdd78faeb6242dfed55f929391a23ad52c248dd",
+      "imports": [
+        "KerrKoopman.HilbertIteration",
+        "KerrKoopman.RealFourierDerivative"
+      ],
+      "namespace": "KerrKoopman.GalerkinFlow",
+      "theorem_count": 18,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraGalerkinFlow.inc",
+      "sha256": "b5c301bee1b0d6fb8160e28e6265de4b1f77446447082a9bee7c3c99a1524bc5",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 25
+    },
+    {
+      "module": "KerrKoopman.GalerkinClassical",
+      "source_path": "KerrKoopman/GalerkinClassical.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/GalerkinClassical.lean",
+      "source_sha256": "c554a87593690d2cac5cbb77644999342f271a414c0c65de77b86b1e57de76f5",
+      "imports": [
+        "KerrKoopman.FiniteRepresentativeCalculus",
+        "KerrKoopman.CircleProjection",
+        "KerrKoopman.GalerkinFlow"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 13,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraGalerkinClassical.inc",
+      "sha256": "7aca8935f087081acbcdfeb6d4369f78805f293ef15b051be35d1bc2f4ba2102",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 18
+    },
+    {
+      "module": "KerrKoopman.ContinuumFourier",
+      "source_path": "KerrKoopman/ContinuumFourier.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ContinuumFourier.lean",
+      "source_sha256": "bf48b74bd6906423f3134b30ea00548f4f0cd46520b778813fb3c9c6e6fd874b",
+      "imports": [
+        "KerrKoopman.IntervalFourierProjection"
+      ],
+      "namespace": "KerrKoopman.ContinuumFourier",
+      "theorem_count": 1,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraContinuumFourier.inc",
+      "sha256": "51777a47d87321475f6c1226955eb3b547f8cb25eb8117034a087b7b4a1c0a88",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 1
+    },
+    {
+      "module": "KerrKoopman.GalerkinRelative",
+      "source_path": "KerrKoopman/GalerkinRelative.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/GalerkinRelative.lean",
+      "source_sha256": "56246ba0dc89c285b82dc3d22eaaefd237ceb80e4e1e28b10c4ec24ed836b635",
+      "imports": [
+        "KerrKoopman.GalerkinClassical",
+        "KerrKoopman.ContinuumFourier"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 2,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraGalerkinRelative.inc",
+      "sha256": "551bac47b38eb1628d9aab79fc410198793d863c5440c17fd89ac26b0200cbab",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 3
+    },
+    {
+      "module": "KerrKoopman.GalerkinRestoration",
+      "source_path": "KerrKoopman/GalerkinRestoration.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/GalerkinRestoration.lean",
+      "source_sha256": "8161ce5f30216e4d5c1e31b7d16ce32cf7ee40cf8b8f84f191ab9a0d85f033d8",
+      "imports": [
+        "KerrKoopman.GalerkinRelative"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 4,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraGalerkinRestoration.inc",
+      "sha256": "0139b8893d78c1cfffaebb7fd61ef7351811ae85f83962f0ab640b237bbf31f9",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 4
+    },
+    {
+      "module": "KerrKoopman.InitialRelativeEnergy",
+      "source_path": "KerrKoopman/InitialRelativeEnergy.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/InitialRelativeEnergy.lean",
+      "source_sha256": "2f14a332e8a171037bab2403ddd1c8905ed4b9c79aae55291000924520c5ed9f",
+      "imports": [
+        "KerrKoopman.GalerkinRestoration"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 6,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraInitialRelativeEnergy.inc",
+      "sha256": "832e06b26918a4c4ece5e1c50912576f859f474cb95aedd501b2c7831bea1f99",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 8
+    },
+    {
+      "module": "KerrKoopman.StoppingCertificate",
+      "source_path": "KerrKoopman/StoppingCertificate.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/StoppingCertificate.lean",
+      "source_sha256": "2375c8ec6e70ff5a3f2b6be6c1ceb339ac5c2d54420ac1f432b95790438b3444",
+      "imports": [
+        "Mathlib.Analysis.ODE.Gronwall",
+        "Mathlib.Analysis.SpecialFunctions.Log.Basic",
+        "Mathlib.Analysis.Complex.ExponentialBounds",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.StoppingCertificate",
+      "theorem_count": 18,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraStoppingCertificate.inc",
+      "sha256": "e93fb91a649d983c371bebc7f04f808d1c03cdc4957424506c837344424e0f90",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 21
+    },
+    {
+      "module": "KerrKoopman.InteriorGronwall",
+      "source_path": "KerrKoopman/InteriorGronwall.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/InteriorGronwall.lean",
+      "source_sha256": "6b2ef1a36f739ff8576d14251e57c964a380d46dbd51c4fe6e952f711f4c5947",
+      "imports": [
+        "KerrKoopman.StoppingCertificate",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue"
+      ],
+      "namespace": "KerrKoopman.InteriorGronwall",
+      "theorem_count": 4,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraInteriorGronwall.inc",
+      "sha256": "10a58f4ceb926edae3c7a53c5ac509feac5fa354c6247d2ed8cf929d29674804",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 4
+    },
+    {
+      "module": "KerrKoopman.GalerkinGronwall",
+      "source_path": "KerrKoopman/GalerkinGronwall.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/GalerkinGronwall.lean",
+      "source_sha256": "2e5b04ef8caaec6272c6a0265e52fff1dfb9f2e93fdb675b2743fd8c205701bd",
+      "imports": [
+        "KerrKoopman.InitialRelativeEnergy",
+        "KerrKoopman.InteriorGronwall"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 5,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraGalerkinGronwall.inc",
+      "sha256": "004c591256b426039537ccb147e02d3a22161acc8f7d2e08f7e634f59eeda2ef",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 7
+    },
+    {
+      "module": "KerrKoopman.GalerkinRegularity",
+      "source_path": "KerrKoopman/GalerkinRegularity.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/GalerkinRegularity.lean",
+      "source_sha256": "ccb6b4fce9f4b925cd8379da0dd66b7e6b47c826baedb0a1c9ecf59e856e99af",
+      "imports": [
+        "KerrKoopman.GalerkinRestoration",
+        "Mathlib.MeasureTheory.Integral.Bochner.Set"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 14,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraGalerkinRegularity.inc",
+      "sha256": "2425cdc590be033d16041f6ea48efb8069e9b908c8a708f89d030c4a7e9793a0",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 14
+    },
+    {
+      "module": "KerrKoopman.JointGalerkinLimit",
+      "source_path": "KerrKoopman/JointGalerkinLimit.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/JointGalerkinLimit.lean",
+      "source_sha256": "7290d0d1b1cd6d7bfb7f690880689177db9bc146df9e891b71ab75125951f4fb",
+      "imports": [
+        "KerrKoopman.GalerkinGronwall",
+        "KerrKoopman.GalerkinRegularity",
+        "Mathlib.Analysis.SpecificLimits.Basic"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 8,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraJointGalerkinLimit.inc",
+      "sha256": "acaa02ebcff313bea0bc1ca488eccf22bd26e99a251dcb22d7555900fadd699e",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 12
+    },
+    {
+      "module": "KerrKoopman.UniformGalerkinLimit",
+      "source_path": "KerrKoopman/UniformGalerkinLimit.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/UniformGalerkinLimit.lean",
+      "source_sha256": "d2a45ea0e8e5212ba7afa2faf130bb2f8a124e3698350feaaffe4e764b67820b",
+      "imports": [
+        "KerrKoopman.JointGalerkinLimit"
+      ],
+      "namespace": "KerrKoopman.GalerkinClassical",
+      "theorem_count": 3,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraUniformGalerkinLimit.inc",
+      "sha256": "f4a5710eccaea111575327c4195380f651fb932b42029c6001f68cce59278b03",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 3
+    },
+    {
+      "module": "KerrKoopman.PolynomialInverse",
+      "source_path": "KerrKoopman/PolynomialInverse.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/PolynomialInverse.lean",
+      "source_sha256": "1fbdcc81e7b94291550af21b228e0267373958851d504ed881c00fa650f1d5a3",
+      "imports": [
+        "Mathlib.Analysis.Normed.Operator.Bilinear",
+        "Mathlib.Topology.MetricSpace.Contracting",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.Phase3PolynomialInverse",
+      "theorem_count": 21,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraPolynomialInverse.inc",
+      "sha256": "7d72ccbd7dbe14dbb53e25914bd4505e5632d3f35b7897127e53eb29b051c100",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 28
+    },
+    {
+      "module": "KerrKoopman.AnalyticFixedPoint",
+      "source_path": "KerrKoopman/AnalyticFixedPoint.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticFixedPoint.lean",
+      "source_sha256": "f6437f535ad8bc158e35c04cb0ff8aa4d35182a9a974e6e5d68f25cfa25ff176",
+      "imports": [
+        "KerrKoopman.PolynomialInverse"
+      ],
+      "namespace": "KerrKoopman.AnalyticFixedPoint",
+      "theorem_count": 5,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticFixedPoint.inc",
+      "sha256": "0c60f2fc4b7ea32a3a34b75150a46cf7ef82cbf3931c7c20d47c03e2ada2dcd1",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 8
+    },
+    {
+      "module": "KerrKoopman.AnalyticLpMap",
+      "source_path": "KerrKoopman/AnalyticLpMap.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticLpMap.lean",
+      "source_sha256": "ececf2c42e8ff7e1e0ffe2ec51395c4e323be439b1b160eae97886e8f41eb195",
+      "imports": [
+        "Mathlib.Analysis.Normed.Lp.lpSpace",
+        "Mathlib.Analysis.Normed.Operator.Basic",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.AnalyticLpMap",
+      "theorem_count": 8,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticLpMap.inc",
+      "sha256": "49d4478d9d15eb97fb18dc144ffbcbb276f0e023ee7b95c52e178eeeae1d8e4d",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 11
+    },
+    {
+      "module": "KerrKoopman.AnalyticLift",
+      "source_path": "KerrKoopman/AnalyticLift.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticLift.lean",
+      "source_sha256": "3421f59e3ef9d829b0ba5f6e66377ea3591e5635bf75c3b437dd6c7fb94036b6",
+      "imports": [
+        "KerrKoopman.AnalyticLpMap",
+        "Mathlib.Topology.ContinuousMap.Compact",
+        "Mathlib.Topology.ContinuousMap.Algebra",
+        "Mathlib.Analysis.Complex.Trigonometric",
+        "Mathlib.Analysis.Complex.Basic",
+        "Mathlib.Data.Real.Sqrt"
+      ],
+      "namespace": "KerrKoopman.AnalyticLift",
+      "theorem_count": 11,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticLift.inc",
+      "sha256": "204f2f7350ff3ff02dbcc44a8c334930afa7cd1c72db93f47bb92c58c6be9c04",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 24
+    },
+    {
+      "module": "KerrKoopman.WeightedConvolution",
+      "source_path": "KerrKoopman/WeightedConvolution.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/WeightedConvolution.lean",
+      "source_sha256": "34e692a139f7a1da7ef326be114370112008d34cb586eb2a60777e4367057b1a",
+      "imports": [
+        "Mathlib.Analysis.Normed.Lp.lpSpace",
+        "Mathlib.Analysis.Normed.Ring.InfiniteSum",
+        "Mathlib.Analysis.Normed.Operator.Bilinear",
+        "Mathlib.Topology.ContinuousMap.Compact",
+        "Mathlib.Analysis.SpecialFunctions.Exp",
+        "Mathlib.Analysis.Complex.Basic",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.Phase3WeightedConvolution",
+      "theorem_count": 17,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraWeightedConvolution.inc",
+      "sha256": "4f1abc34b46c2dcc47aa071ae5c6fbc897aa25ac207a07617c585baaef540458",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 25
+    },
+    {
+      "module": "KerrKoopman.AnalyticKernel",
+      "source_path": "KerrKoopman/AnalyticKernel.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticKernel.lean",
+      "source_sha256": "267989d1b0833ad56e1422533b13d03ee22c70aafd85f9aa68e6766dc1c21ba0",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+        "Mathlib.Tactic"
+      ],
+      "namespace": "KerrKoopman.Phase3AnalyticKernel",
+      "theorem_count": 4,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticKernel.inc",
+      "sha256": "be5130675a6df6291653449c7940dc724b11424e38ec7608c7dda2030a83a9b4",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 4
+    },
+    {
+      "module": "KerrKoopman.AnalyticDuhamel",
+      "source_path": "KerrKoopman/AnalyticDuhamel.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticDuhamel.lean",
+      "source_sha256": "32398a441a1d8db5bd8adadc63fe701f900c9d0e072c86838e5c660d211a3689",
+      "imports": [
+        "KerrKoopman.AnalyticKernel",
+        "Mathlib.Topology.ContinuousMap.Compact",
+        "Mathlib.Topology.Order.ProjIcc",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus",
+        "Mathlib.Analysis.Normed.Lp.lpSpace",
+        "Mathlib.Analysis.Complex.Trigonometric"
+      ],
+      "namespace": "KerrKoopman.AnalyticDuhamel",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticDuhamel.inc",
+      "sha256": "25a2f07bd11f1eb3d07859767cebc490649d01ce768907caa75288bfc16366d3",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 20
+    },
+    {
+      "module": "KerrKoopman.AnalyticFourierDuhamel",
+      "source_path": "KerrKoopman/AnalyticFourierDuhamel.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticFourierDuhamel.lean",
+      "source_sha256": "6f0e84b3bf744176613d049a295c0709877ce8102ac4596acbd27151fb29a09a",
+      "imports": [
+        "KerrKoopman.AnalyticDuhamel",
+        "KerrKoopman.AnalyticLpMap"
+      ],
+      "namespace": "KerrKoopman.AnalyticFourierDuhamel",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticFourierDuhamel.inc",
+      "sha256": "67246b3abaaba7985f0ae463b17607956e294592272ef1a4856400b373238a28",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 13
+    },
+    {
+      "module": "KerrKoopman.AnalyticAssembly",
+      "source_path": "KerrKoopman/AnalyticAssembly.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticAssembly.lean",
+      "source_sha256": "c107bdf85ee8431db396c4eaedcee69d49b5e9a8e90adae7e3db56c4f98634c2",
+      "imports": [
+        "KerrKoopman.AnalyticFixedPoint",
+        "KerrKoopman.AnalyticLift",
+        "KerrKoopman.WeightedConvolution",
+        "KerrKoopman.AnalyticFourierDuhamel"
+      ],
+      "namespace": "KerrKoopman.AnalyticAssembly",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticAssembly.inc",
+      "sha256": "d43baa709281ca71d74f4928aebbf6000a8d62e03f17b68a96bf70fd2226b065",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 18
+    },
+    {
+      "module": "KerrKoopman.WeightedDecoder",
+      "source_path": "KerrKoopman/WeightedDecoder.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/WeightedDecoder.lean",
+      "source_sha256": "c05a629eef8735085652aa99f7da652ecb44f0041007990ae7ae97fc4ef90c67",
+      "imports": [
+        "KerrKoopman.WeightedConvolution",
+        "Mathlib.Analysis.Complex.Trigonometric"
+      ],
+      "namespace": "KerrKoopman.Phase3WeightedDecoder",
+      "theorem_count": 15,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraWeightedDecoder.inc",
+      "sha256": "ed9787e17ae04dfaff09cbd1fe7f3f4564d17bc13a214c999f12116056b3b647",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 21
+    },
+    {
+      "module": "KerrKoopman.WeightedReality",
+      "source_path": "KerrKoopman/WeightedReality.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/WeightedReality.lean",
+      "source_sha256": "767ec4b4a1398ae55a933b18b7a13b5a9a969edc779e7d6f9d8246de5c421521",
+      "imports": [
+        "KerrKoopman.WeightedDecoder"
+      ],
+      "namespace": "KerrKoopman.Phase3WeightedReality",
+      "theorem_count": 9,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraWeightedReality.inc",
+      "sha256": "c6859eb20927b8ba09d7ae346a8a04091f8b9989491c099fe673c679a8382246",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 11
+    },
+    {
+      "module": "KerrKoopman.AnalyticReality",
+      "source_path": "KerrKoopman/AnalyticReality.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticReality.lean",
+      "source_sha256": "569e8155df4e12201b28ce05e1248aebb23a47e6a8b6b7bea4c7c7395e1529f3",
+      "imports": [
+        "KerrKoopman.AnalyticAssembly",
+        "KerrKoopman.WeightedReality",
+        "Mathlib.Topology.ContinuousMap.Star"
+      ],
+      "namespace": "KerrKoopman.AnalyticReality",
+      "theorem_count": 20,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticReality.inc",
+      "sha256": "20c32b4fffcc95d30930897858b8a610b827cb52fd7548523ade5367313af6e3",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 22
+    },
+    {
+      "module": "KerrKoopman.WeightedDerivative",
+      "source_path": "KerrKoopman/WeightedDerivative.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/WeightedDerivative.lean",
+      "source_sha256": "adcc3e3a8bb05d878e7ac77845af8b22b1e77472374f16461f86bc3d05de68e3",
+      "imports": [
+        "KerrKoopman.WeightedDecoder",
+        "Mathlib.Analysis.Calculus.SmoothSeries",
+        "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic"
+      ],
+      "namespace": "KerrKoopman.Phase3WeightedDerivative",
+      "theorem_count": 16,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraWeightedDerivative.inc",
+      "sha256": "c6261358657f75dd34e9838c1b5132ff3be27c9cc47d0d029866e89ac4dac526",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 20
+    },
+    {
+      "module": "KerrKoopman.WeightedRealDecode",
+      "source_path": "KerrKoopman/WeightedRealDecode.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/WeightedRealDecode.lean",
+      "source_sha256": "ad65e979320c6081e23d56a9603beb48a1767cd1a21d7e96e99980a3c8fe4fd7",
+      "imports": [
+        "KerrKoopman.WeightedDerivative",
+        "KerrKoopman.WeightedReality"
+      ],
+      "namespace": "KerrKoopman.Phase3WeightedRealDecode",
+      "theorem_count": 15,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraWeightedRealDecode.inc",
+      "sha256": "1881b2038f950da73b81e2ff80c0653a5e16a8e465b35e5a263ab031a60bc70c",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 19
+    },
+    {
+      "module": "KerrKoopman.AnalyticModeODE",
+      "source_path": "KerrKoopman/AnalyticModeODE.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticModeODE.lean",
+      "source_sha256": "6e5612e432a8cee286c57f9db183161fbb180ecf9690aa02c80b86271914a724",
+      "imports": [
+        "KerrKoopman.AnalyticDuhamel"
+      ],
+      "namespace": "KerrKoopman.AnalyticModeODE",
+      "theorem_count": 9,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticModeODE.inc",
+      "sha256": "89c7230330562a266737d32dd05146f1ee21c5e18fa3e47e2ea4bf3b0fa0279a",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 12
+    },
+    {
+      "module": "KerrKoopman.AnalyticFields",
+      "source_path": "KerrKoopman/AnalyticFields.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticFields.lean",
+      "source_sha256": "a504d1a94bf0d1770b43ae849123af81d996d2e8cf75776b037c64588273d7ab",
+      "imports": [
+        "KerrKoopman.AnalyticReality",
+        "KerrKoopman.WeightedRealDecode",
+        "KerrKoopman.AnalyticModeODE",
+        "Mathlib.Analysis.Normed.Operator.Prod"
+      ],
+      "namespace": "KerrKoopman.AnalyticFields",
+      "theorem_count": 26,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticFields.inc",
+      "sha256": "4c62e86e20def08a6239ff79b1c47590a97ca2d61e2c37e83cda1eb59a90625e",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 39
+    },
+    {
+      "module": "KerrKoopman.AnalyticPhysicalMode",
+      "source_path": "KerrKoopman/AnalyticPhysicalMode.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticPhysicalMode.lean",
+      "source_sha256": "fd22c0485b03334327216946077e027bd85bc66f1b2f77ad2eda812d565aef4e",
+      "imports": [
+        "KerrKoopman.AnalyticModeODE",
+        "KerrKoopman.AnalyticFourierDuhamel",
+        "KerrKoopman.AnalyticLift"
+      ],
+      "namespace": "KerrKoopman.AnalyticPhysicalMode",
+      "theorem_count": 6,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticPhysicalMode.inc",
+      "sha256": "381ac8ae9c8e31cb1235dd5b6b839f1b96444fda8f3eec9851bd881cf3866771",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 10
+    },
+    {
+      "module": "KerrKoopman.AnalyticTransport",
+      "source_path": "KerrKoopman/AnalyticTransport.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticTransport.lean",
+      "source_sha256": "9b511f2343d1ee0cb65bc445f1dcae799aef37e508eac2541395e541c001e73d",
+      "imports": [
+        "KerrKoopman.AnalyticPhysicalMode",
+        "KerrKoopman.WeightedRealDecode"
+      ],
+      "namespace": "KerrKoopman.AnalyticTransport",
+      "theorem_count": 15,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticTransport.inc",
+      "sha256": "4e1b5faf032ad403c583b8ef620e5778aa474da4570e5a3a9b57596d1845f8db",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 22
+    },
+    {
+      "module": "KerrKoopman.AnalyticPDE",
+      "source_path": "KerrKoopman/AnalyticPDE.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticPDE.lean",
+      "source_sha256": "5b9cc455dcf4d618a9ab6dd2cadada661722270ef03126d27bbcb54eaff0e747",
+      "imports": [
+        "KerrKoopman.AnalyticFields",
+        "KerrKoopman.AnalyticTransport",
+        "KerrKoopman.ExplicitMaterial"
+      ],
+      "namespace": "KerrKoopman.AnalyticPDE",
+      "theorem_count": 19,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticPDE.inc",
+      "sha256": "414f05a46e2057c033536201eeefa909c5c248c47a8580e80c235892b0b1f5e7",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 28
+    },
+    {
+      "module": "KerrKoopman.AnalyticClassical",
+      "source_path": "KerrKoopman/AnalyticClassical.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticClassical.lean",
+      "source_sha256": "ef4f6e3eb2c33ca2264fc2b1296377c61cb1e60ecde15b67699b95955f32857e",
+      "imports": [
+        "KerrKoopman.AnalyticPDE",
+        "KerrKoopman.IntervalFourier",
+        "KerrKoopman.ContinuumRelative"
+      ],
+      "namespace": "KerrKoopman.AnalyticClassical",
+      "theorem_count": 22,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticClassical.inc",
+      "sha256": "2e7f0c4400f24a14046bc195d30741a5511bab99796440616de7c0caa4673bba",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 29
+    },
+    {
+      "module": "KerrKoopman.RealFourierProjection",
+      "source_path": "KerrKoopman/RealFourierProjection.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/RealFourierProjection.lean",
+      "source_sha256": "ac58d120157085769019292392abe9e078bc7780d920a32fb68035e5df88a224",
+      "imports": [
+        "KerrKoopman.RealFourierDerivative",
+        "Mathlib.Topology.UniformSpace.Ascoli",
+        "Mathlib.Topology.MetricSpace.Equicontinuity"
+      ],
+      "namespace": "KerrKoopman.RealFourierProjection",
+      "theorem_count": 11,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraRealFourierProjection.inc",
+      "sha256": "e674267e029465b12efc5802b67433f8f284e9bb369b5556a2adfd97fa1ad660",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 11
+    },
+    {
+      "module": "KerrKoopman.AnalyticTails",
+      "source_path": "KerrKoopman/AnalyticTails.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticTails.lean",
+      "source_sha256": "a7d338d1b5670e98250d0aa2a181af6faae17fc9ba783fdb90225ca6acb30943",
+      "imports": [
+        "KerrKoopman.WeightedRealDecode",
+        "KerrKoopman.RealFourierProjection"
+      ],
+      "namespace": "KerrKoopman.AnalyticTails",
+      "theorem_count": 14,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticTails.inc",
+      "sha256": "f5724e53b86a2cfacfa503cb057076f8e5cfdc84e1acd0b62ad46727ba7fcc19",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 20
+    },
+    {
+      "module": "KerrKoopman.AnalyticTraceTails",
+      "source_path": "KerrKoopman/AnalyticTraceTails.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticTraceTails.lean",
+      "source_sha256": "76e16c4ead3b9307625318b514a7e0156025d78c01bacfa8bf7de49ca5e2fb98",
+      "imports": [
+        "KerrKoopman.AnalyticTails"
+      ],
+      "namespace": "KerrKoopman.AnalyticTraceTails",
+      "theorem_count": 14,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticTraceTails.inc",
+      "sha256": "4750e0dd17ddb953a644fe11e1207d2f4a283f07678300a69d181e4b197403ca",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 17
+    },
+    {
+      "module": "KerrKoopman.AnalyticFieldTails",
+      "source_path": "KerrKoopman/AnalyticFieldTails.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticFieldTails.lean",
+      "source_sha256": "5e7842d86848645584437c1c02c95dc9212bd595f3da2b82778f36edba6db595",
+      "imports": [
+        "KerrKoopman.AnalyticTraceTails",
+        "KerrKoopman.AnalyticFields",
+        "KerrKoopman.GalerkinGronwall"
+      ],
+      "namespace": "KerrKoopman.AnalyticFieldTails",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticFieldTails.inc",
+      "sha256": "f426fbceb5667c547fc1e95486c65836924f61287fda940d0cea323c85f86944",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 10
+    },
+    {
+      "module": "KerrKoopman.AnalyticInitial",
+      "source_path": "KerrKoopman/AnalyticInitial.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticInitial.lean",
+      "source_sha256": "6f8036d126745d2779172408434df4e80bade9a0a4d5541da091b22425a532ba",
+      "imports": [
+        "KerrKoopman.AnalyticPDE"
+      ],
+      "namespace": "KerrKoopman.AnalyticInitial",
+      "theorem_count": 6,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticInitial.inc",
+      "sha256": "44aa9dd83f8049e26999e8144eff57db3be50afb66213e53b6b163b603aef423",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 10
+    },
+    {
+      "module": "KerrKoopman.AnalyticInitialTails",
+      "source_path": "KerrKoopman/AnalyticInitialTails.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticInitialTails.lean",
+      "source_sha256": "31b10bac68fa9fc5c479342f0f992fd3263731631fc3c771636908bb3327cc75",
+      "imports": [
+        "KerrKoopman.AnalyticTraceTails",
+        "KerrKoopman.AnalyticInitial",
+        "KerrKoopman.FiniteRepresentatives"
+      ],
+      "namespace": "KerrKoopman.AnalyticInitialTails",
+      "theorem_count": 11,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticInitialTails.inc",
+      "sha256": "8592d8ceaa69b5a70495804e952eed9ae36ac97b3b1aaaf95e26e78774a30d63",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 16
+    },
+    {
+      "module": "KerrKoopman.AnalyticGalerkinCertificate",
+      "source_path": "KerrKoopman/AnalyticGalerkinCertificate.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticGalerkinCertificate.lean",
+      "source_sha256": "c9f004c4df106e1a7a04fb20d88437c0764d796c78b9307dec2a9670f27e08f5",
+      "imports": [
+        "KerrKoopman.UniformGalerkinLimit",
+        "KerrKoopman.AnalyticClassical",
+        "KerrKoopman.AnalyticFieldTails",
+        "KerrKoopman.AnalyticInitialTails"
+      ],
+      "namespace": "KerrKoopman.AnalyticGalerkinCertificate",
+      "theorem_count": 12,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc",
+      "sha256": "9dbf6b277a73595954f5a7092b584b0f31e60027e2bd05a909a60c0423ec71cb",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 16
+    },
+    {
+      "module": "KerrKoopman.ExplicitAnalyticInput",
+      "source_path": "KerrKoopman/ExplicitAnalyticInput.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/ExplicitAnalyticInput.lean",
+      "source_sha256": "5404fff64fd2551e4d8e495d6df0443172fecf3f202032b18e9b6fc8448fe638",
+      "imports": [
+        "KerrKoopman.AnalyticReality",
+        "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
+        "Mathlib.Analysis.Complex.ExponentialBounds",
+        "Mathlib.Analysis.Normed.Module.Basic"
+      ],
+      "namespace": "KerrKoopman.ExplicitAnalyticInput",
+      "theorem_count": 7,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraExplicitAnalyticInput.inc",
+      "sha256": "640fec5537737c5f563490b14a140ba82214829b54ef0faecfd43907d825a63c",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 11
+    },
+    {
+      "module": "KerrKoopman.AnalyticExample",
+      "source_path": "KerrKoopman/AnalyticExample.lean",
+      "preserved_copy": "sources/astra_physics_20261109/KerrKoopman/AnalyticExample.lean",
+      "source_sha256": "afbb12fcede6de6ed4b97417536a1c904f66008aedc74505f41776db18829a08",
+      "imports": [
+        "KerrKoopman.AnalyticInitial",
+        "KerrKoopman.ExplicitAnalyticInput"
+      ],
+      "namespace": "KerrKoopman.AnalyticExample",
+      "theorem_count": 6,
+      "role": "import_only_adapter",
+      "destination": "linear_input/lean_check/AstraAnalyticExample.inc",
+      "sha256": "f33e01e3949380fe953c033835592f9743cf64a33920a1f59ab9d80cd96e0cbc",
+      "transformation": "remove_import_lines_exact_bytes",
+      "declaration_count": 7
     }
   ],
   "bridge_contract": {
@@ -343,16 +1342,16 @@
     "direct_references": 12
   },
   "counts": {
-    "source_modules": 19,
-    "new_proof_modules": 16,
-    "new_theorems": 210,
-    "new_physics_theorems": 209,
+    "source_modules": 76,
+    "new_proof_modules": 74,
+    "new_theorems": 891,
+    "new_physics_theorems": 890,
     "new_original_koopman_theorems": 1,
     "reused_original_theorems": 29,
-    "import_only_modules": 15,
-    "import_only_theorems": 176,
-    "repository_native_modules": 1,
-    "repository_native_theorems": 34
+    "import_only_modules": 72,
+    "import_only_theorems": 834,
+    "repository_native_modules": 2,
+    "repository_native_theorems": 57
   },
   "verification": {
     "source_audit": "python -B -X utf8 tools/check_astra_physics.py",
@@ -383,6 +1382,25 @@
       ],
       "required_mathlib_imports": [],
       "proof_contract": "docs/astra/finite_flow_bridge_contract.json"
+    },
+    {
+      "module": "KerrKoopman.ContinuumLimit",
+      "namespace": "KerrKoopman.ContinuumLimit",
+      "destination": "linear_input/lean_check/AstraContinuumLimit.inc",
+      "sha256": "787e414e6718b3b7edfc434ed6b60136161bbfeb17a90d5f5adc7c7758cd4de7",
+      "original_sha256": "787e414e6718b3b7edfc434ed6b60136161bbfeb17a90d5f5adc7c7758cd4de7",
+      "theorem_count": 23,
+      "declaration_count": 37,
+      "role": "repository_native_proof",
+      "origin": "authored_in_primitive_lean",
+      "authored_on_parent_commit": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
+      "authorship_description": "New input-only continuum certificate authored in primitive-lean: bundle the actual analytic Maxwell fields, initial attainment, spatial Galerkin error, explicit splitting diagonal and uniform joint limit; specialize to the committed sinusoidal input.",
+      "dependencies": [
+        "KerrKoopman.AnalyticGalerkinCertificate",
+        "KerrKoopman.AnalyticExample"
+      ],
+      "required_mathlib_imports": [],
+      "proof_contract": "docs/astra/continuum_limit_bridge_contract.json"
     }
   ],
   "additional_bridge_contracts": [
@@ -392,6 +1410,13 @@
       "theorem_nodes": 14,
       "direct_references": 17,
       "role": "repository_native_contract"
+    },
+    {
+      "path": "docs/astra/continuum_limit_bridge_contract.json",
+      "sha256": "175a76cdeffdba0a5d4d25bb6bc6b1dd5493116db46ddd93b18df1c33cee9674",
+      "theorem_nodes": 18,
+      "direct_references": 29,
+      "role": "repository_native_contract"
     }
   ],
   "assembly_contexts": [
@@ -399,6 +1424,301 @@
       "source": "linear_input/lean_check/AstraHilbertFlow.inc",
       "kind": "hilbertflow_set_exports",
       "reason": "Earlier joint supplements open Finset outside their namespaces. Add namespace-qualified aliases of Set.piecewise and Set.union_comm before the exact HilbertFlow source so its original unqualified rewrite names retain their standalone meanings. These export aliases may persist after the surrounding section; no source bytes or proof declarations are changed."
+    },
+    {
+      "source": "linear_input/lean_check/AstraFourierProjection.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraMaterialL2.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraRealGalerkin.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraFourierDerivative.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraRealFourierDerivative.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraFiniteRepresentatives.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraFourierSupBounds.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraRelativeDynamics.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraContinuumCalculus.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraIntervalFourier.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraContinuumRelative.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraIntegralTail.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraContinuumGalerkin.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraIntervalFourierProjection.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraCircleProjection.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraGalerkinFlow.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraGalerkinClassical.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraContinuumFourier.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraGalerkinRelative.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraGalerkinRestoration.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraInitialRelativeEnergy.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraStoppingCertificate.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraInteriorGronwall.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraGalerkinGronwall.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraGalerkinRegularity.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraJointGalerkinLimit.inc",
+      "kind": "continuum_joint_filter_alias",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Resolve tendsto_atTop to the original Filter declaration inside KerrKoopman.GalerkinClassical, avoiding inherited Metric ambiguity."
+    },
+    {
+      "source": "linear_input/lean_check/AstraUniformGalerkinLimit.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraPolynomialInverse.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticFixedPoint.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticLpMap.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticLift.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraWeightedConvolution.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticKernel.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticDuhamel.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticFourierDuhamel.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticAssembly.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraWeightedDecoder.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraWeightedReality.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticReality.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraWeightedDerivative.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraWeightedRealDecode.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticModeODE.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticFields.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticPhysicalMode.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticTransport.inc",
+      "kind": "continuum_transport_extend_alias",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Resolve extend to the original AnalyticDuhamel declaration inside KerrKoopman.AnalyticTransport, avoiding inherited MeasureTheory ambiguity."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticPDE.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticClassical.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraRealFourierProjection.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticTails.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticTraceTails.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte. Close the one anonymous file-wide section that Lean closes automatically at the original module EOF."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticFieldTails.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticInitial.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticInitialTails.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraExplicitAnalyticInput.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraAnalyticExample.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraFiniteFlow.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
+    },
+    {
+      "source": "linear_input/lean_check/AstraContinuumLimit.inc",
+      "kind": "continuum_file_scope",
+      "reason": "Restore the original module-local scope for opens and options, using an outer assembly section while preserving every source byte."
     }
   ]
 }

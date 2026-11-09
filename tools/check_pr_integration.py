@@ -21,6 +21,15 @@ def assignment(path, name):
     return ast.literal_eval(matches[0].value)
 
 
+def duplicate_namespace_errors(registry, verified_astra_pairs):
+    errors = []
+    for namespace in {ns for _, ns in registry}:
+        group = [(path, ns) for path, ns in registry if ns == namespace]
+        if len(group) > 1 and not all(pair in verified_astra_pairs for pair in group):
+            errors.append('Duplicate supplemental source or namespace: ' + namespace)
+    return errors
+
+
 def audit(root=ROOT):
     manifest = json.loads((root / 'docs/integration/manifest.json').read_text('utf-8'))
     errors = ['Unresolved manifest construction error: ' + error
@@ -72,7 +81,7 @@ def audit(root=ROOT):
     original_parts = set(assignment(root / 'linear_input/verify_lean.py', 'PARTS'))
     paths = [path for path, _ in registry]
     namespaces = [ns for _, ns in registry]
-    if len(paths) != len(set(paths)) or len(namespaces) != len(set(namespaces)):
+    if len(paths) != len(set(paths)):
         errors.append('Duplicate supplemental source or namespace')
     for path in paths:
         if not (root / path).is_file():
@@ -94,6 +103,14 @@ def audit(root=ROOT):
         spec.loader.exec_module(checker)
         astra = checker.audit(root)
         errors.extend('Astra: ' + error for error in astra['errors'])
+    # Several exact Astra modules extend the same namespace. This exception is
+    # available only after their source ledger and fully qualified names pass.
+    allowed_shared = set()
+    if astra and astra['passed']:
+        ledger = json.loads((root / 'docs/astra/manifest.json').read_text('utf-8'))
+        allowed_shared = {(row['destination'], row['namespace']) for row in
+                          ledger['modules'] + ledger.get('native_bridges', []) if row.get('destination')}
+    errors.extend(duplicate_namespace_errors(registry, allowed_shared))
     return dict(passed=not errors, errors=errors, retained_files=len(manifest['files']),
                 supplemental_groups=len(registry), astra_source_audit=astra,
                 scope='Source bytes and registration, not proof validity')

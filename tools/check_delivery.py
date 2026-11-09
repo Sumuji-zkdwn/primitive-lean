@@ -211,6 +211,7 @@ def main():
             if not (ROOT / rel).is_file() or sha(ROOT / rel) != digest:
                 errors.append("Stale main-result verification: " + rel)
         if (not main_result["joint_axiom_audit"] or not main_result["baseline_axioms_match"]
+                or not main_result.get("astra_environment_audit", {}).get("passed", False)
                 or main_result["compile"]["exit_code"] != 0
                 or main_result["warnings"] or main_result["unexpected"]
                 or main_result["forbidden_tokens"] or main_result["changed_during_verification"]

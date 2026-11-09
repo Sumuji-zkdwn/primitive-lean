@@ -4,3 +4,4 @@
 /linear_input/lean_check/**/*.inc -text
 /sources/astra_physics_20261109/** -text
 /docs/astra/finite_flow_bridge_contract.json -text
+/docs/astra/continuum_limit_bridge_contract.json -text

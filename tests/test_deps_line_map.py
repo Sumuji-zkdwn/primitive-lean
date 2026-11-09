@@ -139,5 +139,58 @@ class AssemblyLineMapTests(unittest.TestCase):
         self.reject('context coverage mismatch')
 
 
+class ScopedEOFLineMapTests(unittest.TestCase):
+    write = AssemblyLineMapTests.write
+    save_manifest = AssemblyLineMapTests.save_manifest
+    assemble = AssemblyLineMapTests.assemble
+    line = AssemblyLineMapTests.line
+    spans = AssemblyLineMapTests.spans
+    reject = AssemblyLineMapTests.reject
+
+    def setUp(self):
+        AssemblyLineMapTests.setUp(self)
+        self.flow = 'linear_input/lean_check/AstraFourierProjection.inc'
+        self.sources = [self.before, self.flow, self.after]
+        self.write(self.flow, b'noncomputable section\r\nnamespace KerrKoopman.FourierProjection\r\n'
+                             b'theorem scoped : True := True.intro\r\nend KerrKoopman.FourierProjection\r\n')
+        self.contexts = [dict(source=self.flow, kind=C.ASSEMBLY_CONTEXTS[self.flow][0], reason='EOF section fixture')]
+        self.report = dict(supplemental_sources=self.sources, assembly_contexts=self.contexts)
+        self.save_manifest(); self.assemble()
+
+    def test_eof_section_closures_are_not_source_lines(self):
+        spans = self.spans(); assembled = self.assembled.read_bytes()
+        source = (self.root / self.flow).read_bytes()
+        start = assembled.index(source); stop = start + len(source)
+        first = assembled[:start].count(b'\n') + 1
+        last = first + len(source.splitlines()) - 1
+        for line in range(first, last + 1):
+            self.assertEqual(A.locate(spans, line), ('subsequent', self.flow))
+        _, prefix, suffix = C.ASSEMBLY_CONTEXTS[self.flow]
+        self.assertEqual(sum(line == b'end' for line in suffix.splitlines()), 2)
+        for line in range(first - prefix.count(b'\n'), first):
+            self.assertEqual(A.locate(spans, line), (None, None))
+        for line in range(last + 1, last + 1 + suffix.count(b'\n')):
+            self.assertEqual(A.locate(spans, line), (None, None))
+        self.assertEqual(A.locate(spans, self.line(b'theorem later')), ('subsequent', self.after))
+
+    def test_following_source_shift_includes_both_closures(self):
+        wrapped = self.line(b'theorem later')
+        self.assemble(wrapped=False)
+        _, prefix, suffix = C.ASSEMBLY_CONTEXTS[self.flow]
+        self.assertEqual(wrapped - self.line(b'theorem later'), prefix.count(b'\n') + suffix.count(b'\n'))
+
+    def test_missing_eof_closure_is_rejected(self):
+        text = self.assembled.read_bytes(); source = (self.root / self.flow).read_bytes()
+        stop = text.index(source) + len(source)
+        suffix = C.ASSEMBLY_CONTEXTS[self.flow][2]
+        self.assembled.write_bytes(text[:stop] + suffix.replace(b'end\n', b'', 1) + text[stop + len(suffix):])
+        self.reject('assembly mismatch')
+
+    def test_mutated_scoped_prefix_is_rejected(self):
+        _, prefix, _ = C.ASSEMBLY_CONTEXTS[self.flow]
+        self.assembled.write_bytes(self.assembled.read_bytes().replace(prefix, prefix + b'open Finset\n', 1))
+        self.reject('assembly mismatch')
+
+
 if __name__ == '__main__':
     unittest.main()
