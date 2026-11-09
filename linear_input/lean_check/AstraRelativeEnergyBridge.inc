@@ -329,7 +329,7 @@ theorem relativeRateRight_quadratic_le (Q : ι → ι → ℝ)
         ∑ i, (((E i - EB i) ^ 2 + (H i - HB i) ^ 2) / 2 +
           ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
             (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2) :=
-          add_le_add_left hcross _
+          add_le_add_right hcross _
     _ = 3 * A * relativeEnergy E H EB HB +
         (∑ i, ((E i - EB i) ^ 2 + (H i - HB i) ^ 2) / 2) +
         ∑ i, ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
