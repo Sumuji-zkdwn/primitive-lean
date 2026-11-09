@@ -195,6 +195,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/AstraIterationBound.inc', 'KerrKoopman.IterationBound'),
     ('linear_input/lean_check/AstraHilbertIteration.inc', 'KerrKoopman.HilbertIteration'),
     ('linear_input/lean_check/AstraFiniteFlow.inc', 'KerrKoopman.FiniteFlow'),
+    ('linear_input/lean_check/AstraRelativeEnergyBridge.inc', 'KerrKoopman.RelativeEnergyBridge'),
 )
 
 
