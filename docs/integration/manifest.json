@@ -3675,6 +3675,22 @@
       }
     },
     {
+      "path": "linear_input/lean_check/ContinuumRelativeEnergy.inc",
+      "sha256": "b55ebc22c7e19bc4c343eee7581f42a08196fd7dca9bb1a1f22582f5515992eb",
+      "original_sha256": "b55ebc22c7e19bc4c343eee7581f42a08196fd7dca9bb1a1f22582f5515992eb",
+      "source_pr": 124,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/ContinuumRelativeEnergy.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
+        "description": "Separate Kerr relative-energy skew cancellation and algebraic rate budget; original Astra proofs unchanged. Conditional PDE derivative and Gronwall steps are not asserted."
+      }
+    },
+    {
       "path": "docs/astra/finite_flow_bridge_contract.json",
       "sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
       "original_sha256": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
