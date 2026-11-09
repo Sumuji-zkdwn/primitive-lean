@@ -109,6 +109,7 @@ python -B -X utf8 tools/verify.py --integration-only
 - **統合台帳・検証**: [ソースSHA-256台帳](docs/integration/manifest.json) · [2026-11-02統合説明](docs/integration/2026-11-02-review.md)
 - **多項式・Orbit-trace**: [OrbitTrace入口](lean/OrbitTrace.lean) · [研究上の成立条件と未証明事項](docs/research/2026-11-04-orbit-trace-integrals.md)
 - **演算器の観測・有限自己拡張**: `linear_input/lean_check/OperatorWordObservations.inc` 〜 `HigherOrderLiftSelfRewriting.inc` · [系列の統合境界](docs/integration/2026-11-05-operator-rulefold-consolidation.md)
+- **回転する直線への逐次射影**: [RotatingProjections](lean/RotatingProjections.lean) · [範囲と F0・曲げエネルギーとの接続](docs/research/2026-11-09-rotating-projections.md)
 - **デモ**: [Rulefold × デジタル曼荼羅](demos/rulefold_mandala.html) · [数学モデルとの区別](demos/RULEFOLD_MANDALA_README.md)
 - **実験**: [ARC 公開デモのローカル統合検査](experiments/arc3/README.md) · [Kaggle handoff（歴史的記録）](docs/KAGGLE.md)
 - **PR の統合状況**: [2026-11-08 一括統合の記録](docs/integration/2026-11-08-open-pr-consolidation.md)（統合した PR、登録一覧の追加方法、改変したソース、未統合の PR とその理由）

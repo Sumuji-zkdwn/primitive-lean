@@ -1,0 +1,84 @@
+name: Rotating line projections
+
+on:
+  pull_request:
+    paths:
+      - 'lean/RotatingProjections.lean'
+      - 'tests/test_rotating_projections.py'
+      - '.github/workflows/rotating-projections.yml'
+      - 'docs/research/2026-11-09-rotating-projections.md'
+  push:
+    branches: [ccr-e8f7eafe-0e8j9s]
+    paths:
+      - 'lean/RotatingProjections.lean'
+      - 'tests/test_rotating_projections.py'
+      - '.github/workflows/rotating-projections.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Numerical regressions
+        run: python -m unittest tests/test_rotating_projections.py -v 2>&1 | tee rotating-projections-python.log
+      - name: Install repository-pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile the independent module with --trust=0
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/RotatingProjections.olean RotatingProjections.lean 2>&1 | tee ../rotating-projections.log
+          if grep -E 'warning:|error:' ../rotating-projections.log; then exit 1; fi
+      - name: Audit every theorem
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('RotatingProjections.lean').read_text()
+          assert not re.search(r'\b(?:sorry|admit|native_decide)\b|^\s*axiom\b', source, re.M)
+          names = re.findall(r'^theorem\s+(\w+)', source, re.M)
+          audit = 'import RotatingProjections\n' + ''.join(
+              '#print axioms RotatingProjections.' + name + '\n' for name in names)
+          pathlib.Path('RotatingProjectionsAudit.lean').write_text(audit)
+          pathlib.Path('../rotating-projections-theorems.txt').write_text('\n'.join(names) + '\n')
+          print('Auditing', len(names), 'theorems')
+          PY
+          lake env lean --trust=0 RotatingProjectionsAudit.lean 2>&1 | tee ../rotating-projections-axioms.log
+          python - <<'PY'
+          import pathlib, re
+          text = pathlib.Path('../rotating-projections-axioms.log').read_text()
+          names = pathlib.Path('../rotating-projections-theorems.txt').read_text().splitlines()
+          rows = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text)
+          assert len(rows) == len(names), (len(rows), len(names))
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for row in rows:
+              used = set(filter(None, (x.strip() for x in row.split(','))))
+              assert used <= allowed, used - allowed
+          assert 'warning:' not in text and 'error:' not in text
+          print('All theorem dependencies lie in the standard axiom allowlist.')
+          PY
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: rotating-projections-${{ github.run_id }}
+          path: |
+            rotating-projections*.log
+            rotating-projections-theorems.txt
+          if-no-files-found: warn
