@@ -283,6 +283,89 @@ theorem relativeRateRight_le (Q : ι → ι → ℝ)
                 (mul_le_mul_of_nonneg_left hgR (by positivity)) _
 
 
+
+/-- Strong dimension-independent residual estimate. The elementary inequality
+\`|a|*|r| ≤ (a^2+r^2)/2\` absorbs the physical field errors into the Kerr gap.
+Only the prescribed comparison rate A enters; no matrix operator norm. -/
+theorem relativeRateRight_quadratic_le (Q : ι → ι → ℝ)
+    (E H EB HB db dh : ι → ℝ) (A : ℝ) (hA : 0 ≤ A)
+    (hdb : ∀ i, |db i| ≤ A) :
+    (∑ i, relativeRateRight Q E H EB HB db dh i) ≤
+      (3 * A + 1) * relativeEnergy E H EB HB +
+        ∑ i, ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
+          (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2 := by
+  have hcross :
+      (∑ i, (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+        |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|)) ≤
+      ∑ i, (((E i - EB i) ^ 2 + (H i - HB i) ^ 2) / 2 +
+        ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
+          (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2) := by
+    apply Finset.sum_le_sum
+    intro i _
+    have he : |E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| ≤
+        ((E i - EB i) ^ 2 +
+          (db i + FiniteEnergy.applyQ Q HB i) ^ 2) / 2 := by
+      nlinarith [sq_nonneg (|E i - EB i| -
+        |db i + FiniteEnergy.applyQ Q HB i|),
+        sq_abs (E i - EB i),
+        sq_abs (db i + FiniteEnergy.applyQ Q HB i)]
+    have hh : |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i| ≤
+        ((H i - HB i) ^ 2 +
+          (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2 := by
+      nlinarith [sq_nonneg (|H i - HB i| -
+        |dh i + FiniteEnergy.applyQ Q EB i|),
+        sq_abs (H i - HB i),
+        sq_abs (dh i + FiniteEnergy.applyQ Q EB i)]
+    linarith
+  have hphysical := relative_energy_controls E H EB HB
+  calc
+    (∑ i, relativeRateRight Q E H EB HB db dh i) ≤
+        3 * A * relativeEnergy E H EB HB +
+        ∑ i, (|E i - EB i| * |db i + FiniteEnergy.applyQ Q HB i| +
+          |H i - HB i| * |dh i + FiniteEnergy.applyQ Q EB i|) :=
+          relativeRateRight_le Q E H EB HB db dh A hA hdb
+    _ ≤ 3 * A * relativeEnergy E H EB HB +
+        ∑ i, (((E i - EB i) ^ 2 + (H i - HB i) ^ 2) / 2 +
+          ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
+            (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2) :=
+          add_le_add_left hcross _
+    _ = 3 * A * relativeEnergy E H EB HB +
+        (∑ i, ((E i - EB i) ^ 2 + (H i - HB i) ^ 2) / 2) +
+        ∑ i, ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
+          (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2 := by
+          rw [Finset.sum_add_distrib]
+    _ ≤ (3 * A + 1) * relativeEnergy E H EB HB +
+        ∑ i, ((db i + FiniteEnergy.applyQ Q HB i) ^ 2 +
+          (dh i + FiniteEnergy.applyQ Q EB i) ^ 2) / 2 := by
+          nlinarith
+
+/-- Bound on the actual derivative of the genuine finite Kerr flow's relative
+energy against a differentiable comparison field. In particular, its growth
+coefficient is independent of the matrix norm or the number of grid cells. -/
+theorem relativeEnergy_deriv_le_flow (Q : ι → ι → ℝ)
+    (hQ : ∀ i j, Q i j = -Q j i) (z : FiniteFlow.State ι)
+    (EB HB : ℝ → ι → ℝ) (dEB dHB : ι → ℝ) (t A : ℝ)
+    (hA : 0 ≤ A)
+    (hdb : ∀ i, |(1 + (EB t i) ^ 2) * dEB i| ≤ A)
+    (hEB : ∀ i, HasDerivAt (fun s => EB s i) (dEB i) t)
+    (hHB : ∀ i, HasDerivAt (fun s => HB s i) (dHB i) t) :
+    deriv (fun s => relativeEnergy
+      (fun i => FiniteFlow.electric (FiniteFlow.flow Q s z) i)
+      (fun i => (FiniteFlow.flow Q s z).snd i) (EB s) (HB s)) t ≤
+      (3 * A + 1) * relativeEnergy
+        (fun i => FiniteFlow.electric (FiniteFlow.flow Q t z) i)
+        (fun i => (FiniteFlow.flow Q t z).snd i) (EB t) (HB t) +
+      ∑ i, (((1 + (EB t i) ^ 2) * dEB i +
+          FiniteEnergy.applyQ Q (HB t) i) ^ 2 +
+        (dHB i + FiniteEnergy.applyQ Q (EB t) i) ^ 2) / 2 := by
+  have hd := relativeEnergy_hasDerivAt_flow Q hQ z EB HB dEB dHB t hEB hHB
+  rw [hd.deriv]
+  exact relativeRateRight_quadratic_le Q
+    (fun i => FiniteFlow.electric (FiniteFlow.flow Q t z) i)
+    (fun i => (FiniteFlow.flow Q t z).snd i)
+    (EB t) (HB t) (fun i => (1 + (EB t i) ^ 2) * dEB i) dHB A hA hdb
+
+
 end
 
 end KerrKoopman.RelativeEnergyBridge
