@@ -62,10 +62,19 @@ class FormalEvidenceTests(unittest.TestCase):
             build_manifest(self.root, "HEAD", {})
 
     def test_symlinks_are_excluded(self):
-        (self.root / "lean/Sneaky.lean").symlink_to(self.root / "README.md")
-        git(self.root, "add", "lean/Sneaky.lean")
+        # The exporter reads Git trees, so construct the symlink entry directly
+        # without requiring operating-system symlink privileges.
+        target_blob = subprocess.check_output(
+            ["git", "-C", str(self.root), "hash-object", "-w", "--stdin"],
+            input=b"../README.md",
+        ).decode("ascii").strip()
+        git(self.root, "update-index", "--add", "--cacheinfo", f"120000,{target_blob},lean/Sneaky.lean")
         git(self.root, "commit", "-qm", "symlink")
         head = git(self.root, "rev-parse", "HEAD")
+        self.assertEqual(
+            git(self.root, "ls-tree", head, "--", "lean/Sneaky.lean"),
+            f"120000 blob {target_blob}\tlean/Sneaky.lean",
+        )
         self.assertNotIn("lean/Sneaky.lean", source_paths(self.root, head))
 
     def test_missing_source_fails_closed(self):
