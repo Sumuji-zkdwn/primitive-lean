@@ -219,6 +219,7 @@ def verify_lean(rebuild):
         'OperatorBisimulation': 'Greatest observational bisimulation, closure operations, representation fibers and invisible symmetries',
         'OperatorVocabularyRefinement': 'Conservative extension criterion, strict new-action witnesses, quotient surjection and quotient splits',
         'OperatorFiniteHorizon': 'Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words',
+        'OperatorOrientationDepth': 'Observer-dependent allowed-word equivalence, shortest separating-depth antitonicity, finite strict refinement and reversal-invariant sign obstruction',
         'OperatorSemanticClosure': 'Semantically compatible operators, induced quotient endomorphisms, functoriality, and a conservative nonword-generatable finite witness',
         'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
         'SemanticIntervalNecessity': 'Finite prefix-time survival of local systems, old invariant extinction barrier, fresh-operation necessity, finite strict-quotient example and one-local extinction counterexample',
