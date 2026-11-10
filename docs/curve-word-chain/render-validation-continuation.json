@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "errors": [],
+  "checked_markdown_links": 21,
+  "rendered": [
+    {
+      "file": "原始の形式化.html",
+      "math_expressions": 1292,
+      "sha256": "d005f519bd09e78bf7f058ef58c0f995642dbdfaf2d4786de90ab1971eedad80"
+    },
+    {
+      "file": "検証と再実行.html",
+      "math_expressions": 48,
+      "sha256": "52bed57d2d02063ca3a23ba68a87515b369c52559690ef009ff86c1b98a0dec5"
+    },
+    {
+      "file": "linear_input/線形入力の使い方.html",
+      "math_expressions": 0,
+      "sha256": "390882bbcb08b6686e0485516470c46bda179aff17e2fabbf2cab86d9194b6c0"
+    }
+  ],
+  "font_references": 60,
+  "browser_visual_review": false,
+  "scope": "Current root rendering syntax, unique anchors, local fonts, and curve-word continuation Markdown links. This is not a full historical delivery audit or browser review."
+}
