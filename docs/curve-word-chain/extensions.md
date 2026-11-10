@@ -2,7 +2,7 @@
 
 PR #128・#129 の原稿を保持し、その時点で残っていた曲線の構成、一般の有限グラフ、ラプラス一意性、スペクトル極限、全次数署名を接続した。連続BV曲線の一般Hambly–Lyonsも両方向を証明し、A〜Mの数学的核心に対応する形式定理をそろえた。本文では定理の仮定、実曲線と代数模型の対応、完成範囲に含まない追加主張を明示する。
 
-最終のHL・二曲線同値・有限次元座標転送まで含む依存原稿は、個別の `lake env lean --trust=0` で終了コード0・警告0、公理監査は `propext`・`Classical.choice`・`Quot.sound` のみとなった。[verification-extensions.md](verification-extensions.md) は43ファイル時点のクリーンな全26段階検査の記録として保持し、登録原稿とハッシュは [extension-provenance.json](extension-provenance.json) に記録する。最終原稿全体の共通組立・総合検査については完成検証記録を別途追加予定である。個別検査、総合検査、CI、mainへの統合はそれぞれ別の状態である。
+最終のHL・二曲線同値・有限次元座標転送を含む完成コミット `956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3` は、クリーンな独立worktreeで総合検査26段階を通過した。共通検査は4,673定理・6,194宣言、Lean警告0、許可外公理0である。[完成検証記録](verification-completion.md)と[全追加宣言の公理・ハッシュ記録](validation-completion.json)を参照する。[verification-extensions.md](verification-extensions.md) は43ファイル時点の途中検証として保持し、現在の登録原稿は [extension-provenance.json](extension-provenance.json) に記録する。ローカル総合検査、GitHub CI、mainへの統合はそれぞれ別の状態である。
 
 ## 一本の曲線と整数状態の同定
 
@@ -162,7 +162,9 @@ $$
 
 を証明する。`signature_triviality_coordinate_independent` が保証するのは「全署名が単位であること」の座標独立性であり、座標を変えた後の個々の係数が同じという主張ではない。二曲線版の公開定理は有限座標型で述べ、一般 $E$ の署名はこの明示した座標APIを通じて扱う。有限次元・連続・有界変動の条件を外した一意性定理までは述べない。
 
-最終の数学原稿は依存込みの個別Lean検査を通過している。43ファイル時点のクリーンな総合検査は [verification-extensions.md](verification-extensions.md) に固定し、最終原稿全体の共通検証には別の完成検証記録を追加予定である。[extension-provenance.json](extension-provenance.json) のハッシュを対応するログと照合し、前段階の成功を未検査の版へ持ち越さない。
+最終の数学原稿全体は、[完成検証記録](verification-completion.md)に示す共通Lean検査とクリーンな総合検査を通過している。43ファイル時点の [途中検証記録](verification-extensions.md)も保持する。[extension-provenance.json](extension-provenance.json) のハッシュを対応するログと照合し、異なる版の成功記録を混同しない。
+
+実経路の弧長化も `BVIntrinsic` 内で構成している。`intrinsicDist_le_variation` と `shortestRoute_variation` は、上の距離が単なる時間の下限にとどまらず、許された実座標曲線の変動量の最小値そのものに等しいことを証明する。
 
 ## 有限終点集合の凸包による忘却
 

@@ -4,7 +4,9 @@
 
 第一段階の55定理・81宣言はPR #128、次の150定理・196宣言はPR #129でmainへ統合しました。その[第一段階の検証記録](verification.md)と[解析・最適化の追補記録](verification-continuation.md)を保持します。続く[全次数・一般極限への拡張](extensions.md)では、一本の曲線の構成、一般グラフ、ラプラス一意性、スペクトル極限、全次数Chen・自由Lie・BCHに加え、連続BV曲線の一般Hambly–Lyonsまで証明し、A〜Mの数学的核心を接続しました。各主張の条件は以下の表と証明原稿に明示します。原文の手証明、有限全列挙、既知定理の引用、Leanの核による検査は、それぞれの証拠として区別します。
 
-最終のHambly–Lyons・二曲線同値・有限次元座標転送は、最新依存原稿を含む個別検査で `lake env lean --trust=0` が終了コード0・警告0となり、公理監査は `propext`・`Classical.choice`・`Quot.sound` のみでした。[拡張の検証記録](verification-extensions.md)は43ファイル時点のクリーンな全26段階検査の記録として保持します。現在の登録原稿・ハッシュは[台帳](extension-provenance.json)を参照してください。最終原稿全体の共通組立・総合検査については完成検証記録を別途追加予定です。途中コミットの総合検査を、その後の追加原稿の検査結果として扱いません。
+最終のHambly–Lyons・二曲線同値・有限次元座標転送は、依存原稿を含めて `lake env lean --trust=0` で検査しました。公理監査は `propext`・`Classical.choice`・`Quot.sound` のみです。[拡張の検証記録](verification-extensions.md)は43ファイル時点の途中コミットの記録として保持し、現在の登録原稿・ハッシュは[台帳](extension-provenance.json)に記します。
+
+完成実装コミット `956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3` は、独立したクリーンなworktreeで総合検査26段階を通過しました。共通検査は4,673定理・6,194宣言、今回の追加は56ファイル・1,057定理です。[完成検証記録](verification-completion.md)と[機械可読の公理・ハッシュ記録](validation-completion.json)を保持しています。GitHub CIとmainへの統合状態は、このローカル検証とは区別します。
 
 ## 模型と適用範囲
 
