@@ -5511,6 +5511,118 @@
         "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
         "ledger": "sources/curve_word_chain_20261110/provenance.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordArc.inc",
+      "sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
+      "original_sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordArc.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "sha256": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9",
+      "original_sha256": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "sha256": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63",
+      "original_sha256": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordRealization.inc",
+      "sha256": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb",
+      "original_sha256": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordRealization.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49",
+      "original_sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignature.inc",
+      "sha256": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee",
+      "original_sha256": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSignature.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0",
+      "original_sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+        "ledger": "docs/curve-word-chain/continuation-provenance.json"
+      }
     }
   ],
   "construction_errors": [],
@@ -5775,6 +5887,13 @@
       "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
       "manifest": "sources/curve_word_chain_20261110/provenance.json",
       "scope": "55 Lean theorems for lifted-angle algebra and exact integer words; all-degree signature and analytic identification remain separate."
+    },
+    {
+      "date": "2026-11-10",
+      "source": "Curve-word analytic and optimization continuation",
+      "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+      "manifest": "docs/curve-word-chain/continuation-provenance.json",
+      "scope": "Actual arcs and arbitrary word states, finite-state global optimization and four-state average limit, finite-temperature bounds, iterated-integral homogeneity and explicit circular moment/area integrals; full path construction and all-degree Chen/uniqueness/BCH remain separate."
     }
   ]
 }

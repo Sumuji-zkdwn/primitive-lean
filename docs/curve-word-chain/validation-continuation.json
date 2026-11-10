@@ -1,0 +1,2468 @@
+{
+  "checked_commit": "1683b54db2514a09da6125904e0dfdd193906393",
+  "timestamp_utc": "2026-11-10T12:48:02.246395+00:00",
+  "passed": true,
+  "source_worktree_dirty_at_start": false,
+  "command": "python -B -X utf8 tools/verify.py --integration-only",
+  "integration_stages": [
+    {
+      "name": "source-audit",
+      "exit_code": 0,
+      "seconds": 0.711
+    },
+    {
+      "name": "repository-tests",
+      "exit_code": 0,
+      "seconds": 46.636
+    },
+    {
+      "name": "check_galois_bridge",
+      "exit_code": 0,
+      "seconds": 0.093
+    },
+    {
+      "name": "check_f16_unexpected_bridges",
+      "exit_code": 0,
+      "seconds": 0.093
+    },
+    {
+      "name": "check_complementary_recovery",
+      "exit_code": 0,
+      "seconds": 0.181
+    },
+    {
+      "name": "check_shear_commutator",
+      "exit_code": 0,
+      "seconds": 0.057
+    },
+    {
+      "name": "check_strange_operator_galois",
+      "exit_code": 0,
+      "seconds": 0.096
+    },
+    {
+      "name": "check_strange_operator_counting",
+      "exit_code": 0,
+      "seconds": 0.117
+    },
+    {
+      "name": "check_f16_saddle_cantor",
+      "exit_code": 0,
+      "seconds": 0.075
+    },
+    {
+      "name": "check_f0_dynamics",
+      "exit_code": 0,
+      "seconds": 0.085
+    },
+    {
+      "name": "check_future_observation",
+      "exit_code": 0,
+      "seconds": 0.856
+    },
+    {
+      "name": "check_e_wfs_fenchel",
+      "exit_code": 0,
+      "seconds": 0.999
+    },
+    {
+      "name": "check_energy_gauge_fenchel",
+      "exit_code": 0,
+      "seconds": 0.872
+    },
+    {
+      "name": "check_e_wfs_future_bridge",
+      "exit_code": 0,
+      "seconds": 0.302
+    },
+    {
+      "name": "check_temporal_sampling",
+      "exit_code": 0,
+      "seconds": 3.508
+    },
+    {
+      "name": "check_wfs_mobius_fourier",
+      "exit_code": 0,
+      "seconds": 0.067
+    },
+    {
+      "name": "check_f0_future_minimality",
+      "exit_code": 0,
+      "seconds": 0.129
+    },
+    {
+      "name": "check_wfs_sampling",
+      "exit_code": 0,
+      "seconds": 0.694
+    },
+    {
+      "name": "check_curve_word_chain",
+      "exit_code": 0,
+      "seconds": 0.091
+    },
+    {
+      "name": "arc3-offline",
+      "exit_code": 0,
+      "seconds": 2.636
+    },
+    {
+      "name": "proof-only",
+      "exit_code": 0,
+      "seconds": 432.566
+    },
+    {
+      "name": "build-elastica",
+      "exit_code": 0,
+      "seconds": 6.373
+    },
+    {
+      "name": "moving-curve",
+      "exit_code": 0,
+      "seconds": 40.812
+    },
+    {
+      "name": "moving-curve-audit",
+      "exit_code": 0,
+      "seconds": 22.452
+    },
+    {
+      "name": "okanohara-bridge",
+      "exit_code": 0,
+      "seconds": 29.964
+    },
+    {
+      "name": "finite-markov-transport",
+      "exit_code": 0,
+      "seconds": 68.671
+    }
+  ],
+  "repository_unittest_count": 229,
+  "added_theorems": 150,
+  "added_declarations": 196,
+  "joint_theorem_count": 3616,
+  "joint_declaration_count": 4894,
+  "lean_version": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "python_version": "3.14.5 (tags/v3.14.5:5607950, May 10 2026, 10:43:50) [MSC v.1944 64 bit (AMD64)]",
+  "allowed_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "unexpected_axioms": [],
+  "lean_warnings": [],
+  "forbidden_tokens": [],
+  "changed_during_verification": [],
+  "dependencies": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "dependencies_after_compile": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "source_hashes": {
+    "linear_input/lean_check/CurveWordArc.inc": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
+    "linear_input/lean_check/CurveWordFiniteState.inc": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9",
+    "linear_input/lean_check/CurveWordCycleLimit.inc": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63",
+    "linear_input/lean_check/CurveWordRealization.inc": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb",
+    "linear_input/lean_check/CurveWordThermodynamics.inc": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49",
+    "linear_input/lean_check/CurveWordSignature.inc": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee",
+    "linear_input/lean_check/CurveWordCircularMoment.inc": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0",
+    "tools/verify.py": "3afea00df6325db892f29e230c67442c9df8cb92f848d12c78923404676a5cc9",
+    "tools/verify_main_result.py": "796c1e01cef4444b9cb624e7dc29a33bfa309ef9f25dbdf89908ae50368e4a78",
+    "tools/pr_integration.py": "1fe3fddef13c1d1d5841f5bc26efe44e0983031e284e39d7faa43670e35e4e72",
+    "docs/integration/manifest.json": "e3a797fcf68ba2044799a6778c9a4da8e984eb6a45c808f02bd6549d02cd6956",
+    "docs/curve-word-chain/continuation-provenance.json": "607a233ed0bab7d2c87f91456a86534983451c37175995e6f59f6148bafe83b7"
+  },
+  "new_declaration_axioms": [
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.arcAngle",
+      "line": 17,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.quadraticDensity",
+      "line": 19,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.arcState",
+      "line": 21,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arcAngle_continuous",
+      "line": 26,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arcAngle_initial",
+      "line": 30,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arcAngle_terminal",
+      "line": 32,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arcAngle_derivative",
+      "line": 35,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_curvature",
+      "line": 38,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_unit_speed",
+      "line": 41,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_x_endpoint",
+      "line": 46,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_y_endpoint",
+      "line": 52,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_quadratic_energy",
+      "line": 58,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_state_formula",
+      "line": 66,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_state_scale",
+      "line": 74,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.endpointUnit",
+      "line": 85,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.costUnit",
+      "line": 87,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.endpointUnit_pos",
+      "line": 89,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.costUnit_pos",
+      "line": 93,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.sin_three_pi_div_two",
+      "line": 97,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.cos_three_pi_div_two",
+      "line": 101,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_A_state",
+      "line": 105,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.arc_B_state",
+      "line": 117,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.letterState",
+      "line": 130,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordArc.interpretFirstState",
+      "line": 134,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordArc.letter_matches_integer_step",
+      "line": 139,
+      "source": "linear_input/lean_check/CurveWordArc.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.terminal",
+      "line": 14,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": []
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.wordCost",
+      "line": 18,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.terminal_append",
+      "line": 23,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": []
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.wordCost_append",
+      "line": 30,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.terminal_repeat_cycle",
+      "line": 38,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": []
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.wordCost_repeat_cycle",
+      "line": 46,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.words",
+      "line": 58,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.mem_words",
+      "line": 62,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.words_nonempty",
+      "line": 71,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.bellmanStep",
+      "line": 77,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.bellman",
+      "line": 81,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.bellman_zero",
+      "line": 86,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.bellman_succ",
+      "line": 90,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.bellman_le_word",
+      "line": 96,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.bellman_attained",
+      "line": 104,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.exhaustiveMinimum",
+      "line": 116,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.bellman_eq_exhaustiveMinimum",
+      "line": 121,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.bellman_is_global_minimum",
+      "line": 132,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.arcPhase",
+      "line": 141,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": []
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.arcNext",
+      "line": 144,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": []
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.arcEdge",
+      "line": 148,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.arcObjective",
+      "line": 152,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arcPhase_step",
+      "line": 155,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arcObjective_step",
+      "line": 161,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arcPhase_fold",
+      "line": 168,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_wordCost_eq_objective_difference",
+      "line": 177,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_wordCost_eq_objective",
+      "line": 187,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_bellman_is_global_minimum",
+      "line": 194,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_bellman_eq_exhaustiveMinimum",
+      "line": 204,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_pureA_cycle",
+      "line": 211,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_pureB_cycle",
+      "line": 217,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_AB_cycle_zero",
+      "line": 223,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.arc_AB_cycle_one",
+      "line": 229,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordFiniteState.listedCycleRate",
+      "line": 236,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.listedCycleRate_formula",
+      "line": 238,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.listedCycleRate_pure_regime",
+      "line": 247,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordFiniteState.listedCycleRate_mixed_regime",
+      "line": 251,
+      "source": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCycleLimit.rate",
+      "line": 17,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCycleLimit.potential",
+      "line": 19,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCycleLimit.selectedLetter",
+      "line": 39,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.potential_zero",
+      "line": 44,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.rate_negative",
+      "line": 46,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.rate_positive",
+      "line": 50,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.rate_middle",
+      "line": 53,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.edge_lower_bound",
+      "line": 58,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.selected_edge_eq",
+      "line": 76,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.word_lower_bound",
+      "line": 94,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCycleLimit.selectedWord",
+      "line": 105,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.selectedWord_length",
+      "line": 109,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.selectedWord_cost",
+      "line": 115,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCycleLimit.potentialBound",
+      "line": 126,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.abs_potential_le",
+      "line": 129,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.potentialBound_nonneg",
+      "line": 133,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.potential_lower",
+      "line": 136,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.potential_upper",
+      "line": 139,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.bellman_bounds",
+      "line": 143,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.average_bounds",
+      "line": 157,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.bellman_average_tendsto",
+      "line": 175,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCycleLimit.exhaustive_average_tendsto",
+      "line": 187,
+      "source": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.point",
+      "line": 13,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.decode",
+      "line": 17,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.decode_endpoint",
+      "line": 20,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.decode_angle",
+      "line": 23,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.decode_cost",
+      "line": 26,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.point_add",
+      "line": 30,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.rotation_quarter_count",
+      "line": 34,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.rotation_matches_lattice",
+      "line": 43,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.decode_empty",
+      "line": 52,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.letter_endpoint",
+      "line": 58,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.letter_angle",
+      "line": 66,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.letter_cost",
+      "line": 74,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.decode_step",
+      "line": 82,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.wordState",
+      "line": 98,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.decode_fold",
+      "line": 102,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.wordState_eq_decode",
+      "line": 112,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.word_endpoint",
+      "line": 117,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.word_lifted_angle",
+      "line": 122,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.word_cost",
+      "line": 127,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.normalizedInput",
+      "line": 133,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.linearEnergy_decode",
+      "line": 137,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.word_linearEnergy_normalized",
+      "line": 149,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.minimumEnergy",
+      "line": 157,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.minimumEnergy_is_global_minimum",
+      "line": 163,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.physicalRate",
+      "line": 180,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.normalized_rate_to_physical",
+      "line": 184,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.physicalRate_formula",
+      "line": 195,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.minimumEnergy_average_tendsto",
+      "line": 204,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.minimumEnergy_average_explicit",
+      "line": 214,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordRealization.criticalInput",
+      "line": 220,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.criticalInput_pos",
+      "line": 222,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.criticalInput_unit_identity",
+      "line": 226,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.physicalRate_pureA",
+      "line": 233,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.physicalRate_alternating",
+      "line": 241,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordRealization.physicalRate_at_threshold",
+      "line": 250,
+      "source": "linear_input/lean_check/CurveWordRealization.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordThermodynamics.minimum",
+      "line": 17,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordThermodynamics.partition",
+      "line": 20,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy",
+      "line": 23,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.minimum_le",
+      "line": 26,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.minimum_attained",
+      "line": 30,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.partition_positive",
+      "line": 35,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.minimum_weight_le_partition",
+      "line": 42,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.partition_le_card_minimum_weight",
+      "line": 49,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy_le_minimum",
+      "line": 60,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.minimum_sub_entropy_le_freeEnergy",
+      "line": 70,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy_bounds",
+      "line": 83,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy_tendsto_minimum",
+      "line": 90,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy_error_bound",
+      "line": 104,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.partition_scaled_energy",
+      "line": 111,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy_scaled_energy",
+      "line": 118,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.partition_scale_states",
+      "line": 126,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.freeEnergy_scale_states",
+      "line": 138,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordThermodynamics.endpointMass",
+      "line": 151,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.endpointMass_nonneg",
+      "line": 155,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.endpointMass_common_cost",
+      "line": 161,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordThermodynamics.multiplicity_from_common_cost_mass",
+      "line": 174,
+      "source": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordSignature.reverseIntegral",
+      "line": 14,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordSignature.signature",
+      "line": 19,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.reverseIntegral_scale",
+      "line": 22,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_scale",
+      "line": 38,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_empty",
+      "line": 42,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_singleton",
+      "line": 45,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_pair",
+      "line": 49,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.reverseIntegral_continuous",
+      "line": 53,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_singleton_split",
+      "line": 62,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_pair_split",
+      "line": 71,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordSignature.tangentVelocity",
+      "line": 103,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_x",
+      "line": 106,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_y",
+      "line": 110,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.signature_xx",
+      "line": 114,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordSignature.thirdMoment",
+      "line": 133,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.thirdMoment_eq_two_signature_xxy",
+      "line": 136,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.translated_thirdMoment",
+      "line": 152,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordSignature.translated_closed_thirdMoment",
+      "line": 177,
+      "source": "linear_input/lean_check/CurveWordSignature.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.circleX",
+      "line": 14,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.circleY",
+      "line": 16,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circle_equation",
+      "line": 18,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleY_hasDerivAt",
+      "line": 24,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleY_deriv",
+      "line": 29,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment",
+      "line": 34,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_integrand",
+      "line": 37,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_explicit",
+      "line": 41,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_full_turns",
+      "line": 64,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turns",
+      "line": 70,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turn_difference",
+      "line": 77,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turn_difference_nonzero",
+      "line": 83,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turn_difference_h",
+      "line": 89,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleMoment_add",
+      "line": 98,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circle_returns",
+      "line": 106,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circle_start_at_origin",
+      "line": 112,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.insertion_position",
+      "line": 116,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.sequentialLoopsMoment",
+      "line": 127,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.insertedLoopsMoment",
+      "line": 134,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.insertion_moment_difference",
+      "line": 139,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.insertion_moment_difference_h",
+      "line": 147,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.insertion_moments_distinct",
+      "line": 154,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleX_hasDerivAt",
+      "line": 163,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleX_deriv",
+      "line": 167,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.circleArea",
+      "line": 172,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleArea_integrand",
+      "line": 177,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleArea_explicit",
+      "line": 190,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleArea_full_turns",
+      "line": 208,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleArea_three_turns",
+      "line": 214,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleArea_one_turn",
+      "line": 221,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.circleArea_add",
+      "line": 225,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.sequentialLoopsArea",
+      "line": 230,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "def",
+      "name": "LinearInputCurveWordCircularMoment.insertedLoopsArea",
+      "line": 234,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.sequentialLoopsArea_value",
+      "line": 239,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.insertedLoopsArea_value",
+      "line": 247,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.insertion_preserves_area",
+      "line": 262,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.loop_area_h",
+      "line": 266,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "kind": "theorem",
+      "name": "LinearInputCurveWordCircularMoment.equal_area_distinct_moments",
+      "line": 274,
+      "source": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "local_raw_evidence": [
+    {
+      "local_artifact": "passing-integration/pr-integration.json",
+      "sha256": "882ac66577ded59348db3ba263c4fe5a78117c75501227ffc0e471946a26bc45",
+      "bytes": 14318
+    },
+    {
+      "local_artifact": "passing-integration/proof-only.json",
+      "sha256": "c9333b597aa42465bca3dbd113a0f782f2023ce94ab718e3658365f3c7c9a2d8",
+      "bytes": 1568
+    },
+    {
+      "local_artifact": "passing-integration/main-result.json",
+      "sha256": "2b945436a061790d1ed67b23bc64e29474339f0cb5d1949a1ec873426dd0c2e5",
+      "bytes": 3910375
+    },
+    {
+      "local_artifact": "passing-integration/main-result.log",
+      "sha256": "5a31cfad8f1d5e2b91b0beef70dd88733d94277d3f43d60327cc91a52098dc2c",
+      "bytes": 701078
+    },
+    {
+      "local_artifact": "passing-integration/curve-word-chain.json",
+      "sha256": "e1c00f00b2b9a67b3ffe60fb84ba1e9c0ea39c5f5e68436bbc6287be90017075",
+      "bytes": 2552
+    },
+    {
+      "local_artifact": "passing-integration/pr-source-audit.json",
+      "sha256": "6023307bd8720e6cff9957a731e9317da22d8caef4d87a73edfb3695c73a751d",
+      "bytes": 99650
+    },
+    {
+      "local_artifact": "passing-integration/integration-repository-tests.log",
+      "sha256": "a139226fb614f6d11f67b11edb599ee8031c15e07455ab5e7f2a18172dea309e",
+      "bytes": 35167
+    },
+    {
+      "local_artifact": "passing-integration/integration-proof-only.log",
+      "sha256": "c9333b597aa42465bca3dbd113a0f782f2023ce94ab718e3658365f3c7c9a2d8",
+      "bytes": 1568
+    },
+    {
+      "local_artifact": "passing-integration/proof-only-joint.log",
+      "sha256": "00984e59b7de20e19494e748301519ba5e847bb0b4a22ff45b02f070ef100da6",
+      "bytes": 1003
+    },
+    {
+      "local_artifact": "passing-integration/proof-only-supplement.log",
+      "sha256": "c108877833cbe348d060a5365147832d464a751ef1bdc455156a7f9d7cbe30ff",
+      "bytes": 634
+    }
+  ],
+  "scope": "Fresh local integrated Lean kernel/axiom verification using pinned dependency caches; not a full mathlib source rebuild or CI result. See continuation.md for theorem-level boundaries."
+}
