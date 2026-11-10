@@ -1,6 +1,8 @@
 # primitive-lean dependency graphs
 
-Snapshot: main f348ec7541551ec84ca537ade7feac206313e6da, PR metadata 2026-11-05.
+Snapshot: main 73f0aefcabb6ecc37d646d9025f98eb929b00d5d, PR metadata 2026-11-05.
+Main sources, registries and PR snapshot were read from Git blobs at main_commit.
+PR overlays use immutable base/head SHAs listed in graph.json pr_inputs.
 
 A --> B means A references B. It does NOT mean A mathematically implies B.
 
@@ -8,47 +10,49 @@ This graph distinguishes (1) exact Lean import, (2) literal qualified declaratio
 references, (3) globally unique bare-name candidates, and (4) PR base-target edges.
 Only (1) and (2) appear in the graphical source edges.
 
-Main files: 217; PR overlay files: 26.
-Declaration names scanned: 4390.
-Source edges: {"exact_import": 120, "qualified_reference": 205, "unique_identifier_candidate": 431}.
+Main files: 316; PR overlay files: 17.
+Declaration names scanned: 6050.
+Source edges: {"exact_import": 122, "qualified_reference": 226, "unique_identifier_candidate": 690}.
 
 ## Source group dependencies
 
 ~~~mermaid
 flowchart LR
-  g0["Arithmetic / Galois (16)"]
+  g0["Arithmetic / Galois (20)"]
   g1["Bayes / Jets (3)"]
   g2["Elastica (25)"]
   g3["F0 / Observation (16)"]
   g4["F16 / Recovery (14)"]
-  g5["IUT comparison / Pilot (8)"]
+  g5["IUT comparison / Pilot (4)"]
   g6["LinearInput foundation (36)"]
-  g7["Local / Global gluing (18)"]
-  g8["Operator / Rulefold (11)"]
+  g7["Local / Global gluing (16)"]
+  g8["Operator / Rulefold (19)"]
   g9["OrbitTrace (18)"]
-  g10["Other (36)"]
-  g11["Other supplements (31)"]
-  g12["WFS / Fenchel (11)"]
+  g10["Other (40)"]
+  g11["Other supplements (112)"]
+  g12["WFS / Fenchel (10)"]
   g10 -->|36 source refs| g2
+  g11 -->|22 source refs| g6
   g6 -->|17 source refs| g2
-  g11 -->|14 source refs| g6
-  g0 -->|12 source refs| g3
+  g11 -->|10 source refs| g3
+  g11 -->|9 source refs| g8
+  g0 -->|8 source refs| g3
   g3 -->|5 source refs| g4
   g7 -->|5 source refs| g12
-  g11 -->|5 source refs| g3
-  g5 -->|4 source refs| g3
+  g11 -->|5 source refs| g2
   g10 -->|4 source refs| g8
-  g11 -->|4 source refs| g2
   g3 -->|3 source refs| g6
   g4 -->|3 source refs| g3
-  g11 -->|3 source refs| g8
   g1 -->|2 source refs| g2
   g1 -->|2 source refs| g3
   g3 -->|2 source refs| g12
+  g5 -->|2 source refs| g3
+  g8 -->|2 source refs| g3
   g12 -->|2 source refs| g3
   g12 -->|2 source refs| g11
   g0 -->|1 source refs| g11
   g10 -->|1 source refs| g11
+  g11 -->|1 source refs| g0
   g11 -->|1 source refs| g4
 ~~~
 
