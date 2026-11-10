@@ -20,6 +20,7 @@ not evidence that a statement cannot be derived from it.
 from __future__ import annotations
 
 import argparse
+import ast
 import collections
 import hashlib
 import importlib.util
@@ -72,10 +73,40 @@ def assembly_context(root: Path, report: dict):
     return checker, contexts
 
 
+def assembly_prelude(root: Path, report: dict):
+    """Validate the recorded fixed prelude without executing the assembler."""
+    if "assembly_prelude" not in report:
+        return None  # Historical assemblies have no prelude chunk or separator.
+    prelude = report["assembly_prelude"]
+    if not isinstance(prelude, str):
+        raise ValueError("assembly prelude metadata must be a string")
+    verifier_path = root / "tools/verify_main_result.py"
+    if not verifier_path.is_file():
+        raise ValueError("assembly prelude verifier is missing")
+    verifier_bytes = verifier_path.read_bytes()
+    expected = report.get("source_hashes", {}).get("tools/verify_main_result.py")
+    if expected is not None and sha(verifier_bytes) != expected:
+        raise ValueError("assembly prelude verifier hash mismatch")
+    tree = ast.parse(verifier_bytes, filename=str(verifier_path))
+    values = [node.value for node in tree.body if isinstance(node, ast.Assign)
+              and any(isinstance(target, ast.Name) and target.id == "ASSEMBLY_PRELUDE"
+                      for target in node.targets)]
+    if len(values) != 1:
+        raise ValueError("assembly prelude verifier must define one fixed ASSEMBLY_PRELUDE")
+    try:
+        fixed = ast.literal_eval(values[0])
+    except (ValueError, TypeError) as exc:
+        raise ValueError("assembly prelude verifier constant is not literal") from exc
+    if not isinstance(fixed, str) or prelude != fixed:
+        raise ValueError("assembly prelude report/verifier mismatch")
+    return prelude.encode("utf-8")
+
+
 def line_map(assembled: Path, report: dict, root: Path = ROOT):
     """Map exact source spans; assembly-only context lines have no source owner."""
     text = assembled.read_bytes()
     checker, contexts = assembly_context(root, report)
+    prelude = assembly_prelude(root, report)
     all_bytes = (root / "linear_input/lean_check/All.lean").read_bytes()
     start = text.find(all_bytes)
     prefix = text[:start] if start >= 0 else b""
@@ -98,8 +129,16 @@ def line_map(assembled: Path, report: dict, root: Path = ROOT):
     spans = [(f + shift, l + shift, y, src) for f, l, y, src in spans]
     offset = shift + all_bytes.count(b"\n") + 1  # pieces are joined with b"\n"
     pos = start + len(all_bytes) + 1
-    if report["supplemental_sources"] and text[pos - 1:pos] != b"\n":
+    if (prelude is not None or report["supplemental_sources"]) and text[pos - 1:pos] != b"\n":
         raise ValueError("assembly separator mismatch after All.lean")
+    if prelude is not None:
+        if text[pos:pos + len(prelude)] != prelude:
+            raise ValueError("assembly prelude bytes mismatch")
+        if text[pos + len(prelude):pos + len(prelude) + 1] != b"\n":
+            raise ValueError("assembly prelude separator mismatch")
+        # The prelude is a separate assembler-owned chunk, not a source span.
+        offset += prelude.count(b"\n") + 1
+        pos += len(prelude) + 1
     for source in report["supplemental_sources"]:
         data = (root / source).read_bytes()
         fragment = checker.assembly_fragment(source, data, contexts) if checker else data

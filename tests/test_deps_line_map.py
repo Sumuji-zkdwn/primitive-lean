@@ -17,6 +17,7 @@ def load(name, path):
 
 A = load('deps_line_map_analyzer', ROOT / 'tools/deps/analyze.py')
 C = load('deps_line_map_assembler', ROOT / 'tools/check_astra_physics.py')
+V = load('deps_line_map_verifier', ROOT / 'tools/verify_main_result.py')
 
 
 class AssemblyLineMapTests(unittest.TestCase):
@@ -52,6 +53,8 @@ class AssemblyLineMapTests(unittest.TestCase):
 
     def assemble(self, wrapped=True):
         chunks = [(self.root / 'linear_input/lean_check/All.lean').read_bytes()]
+        if 'assembly_prelude' in self.report:
+            chunks.append(self.report['assembly_prelude'].encode('utf-8'))
         for source in self.sources:
             raw = (self.root / source).read_bytes()
             chunks.append(C.assembly_fragment(source, raw, self.contexts) if wrapped else raw)
@@ -190,6 +193,95 @@ class ScopedEOFLineMapTests(unittest.TestCase):
         _, prefix, _ = C.ASSEMBLY_CONTEXTS[self.flow]
         self.assembled.write_bytes(self.assembled.read_bytes().replace(prefix, prefix + b'open Finset\n', 1))
         self.reject('assembly mismatch')
+
+
+class PreludeLineMapTests(unittest.TestCase):
+    write = AssemblyLineMapTests.write
+    save_manifest = AssemblyLineMapTests.save_manifest
+    assemble = AssemblyLineMapTests.assemble
+    line = AssemblyLineMapTests.line
+    spans = AssemblyLineMapTests.spans
+    reject = AssemblyLineMapTests.reject
+
+    def setUp(self):
+        AssemblyLineMapTests.setUp(self)
+        verifier = (ROOT / 'tools/verify_main_result.py').read_bytes()
+        self.write('tools/verify_main_result.py', verifier)
+        self.prelude = V.ASSEMBLY_PRELUDE
+        self.report['assembly_prelude'] = self.prelude
+        self.report['source_hashes'] = {'tools/verify_main_result.py': A.sha(verifier)}
+        self.assemble()
+
+    def test_recorded_prelude_is_unowned_and_sources_still_map_exactly(self):
+        spans = self.spans()
+        self.assertEqual(A.locate(spans, self.line(b'theorem initial')),
+                         ('initial', 'linear_input/lean_check/Design.lean'))
+        for token, source in [(b'theorem before', self.before), (b'theorem mapped', self.flow),
+                              (b'theorem later', self.after), (b'end After', self.after)]:
+            self.assertEqual(A.locate(spans, self.line(token)), ('subsequent', source))
+        first = self.line(self.prelude.encode('utf-8'))
+        for line in range(first, first + self.prelude.count('\n') + 1):
+            self.assertEqual(A.locate(spans, line), (None, None))
+
+    def test_prelude_shifts_every_supplement_by_its_lines_and_separator(self):
+        tokens = [b'theorem initial', b'theorem before', b'theorem mapped', b'theorem later']
+        with_prelude = [self.line(token) for token in tokens]
+        del self.report['assembly_prelude']
+        self.assemble()
+        without_prelude = [self.line(token) for token in tokens]
+        self.assertEqual(with_prelude[0], without_prelude[0])
+        for before, after in zip(without_prelude[1:], with_prelude[1:]):
+            self.assertEqual(after - before, self.prelude.count('\n') + 1)
+        self.assertEqual(A.locate(self.spans(), self.line(b'theorem later')),
+                         ('subsequent', self.after))
+
+    def test_missing_prelude_metadata_cannot_skip_actual_prelude(self):
+        del self.report['assembly_prelude']
+        self.reject('assembly mismatch')
+
+    def test_missing_actual_prelude_is_rejected(self):
+        text = self.assembled.read_bytes()
+        self.assembled.write_bytes(text.replace(self.prelude.encode('utf-8') + b'\n', b'', 1))
+        self.reject('prelude bytes mismatch')
+
+    def test_altered_actual_prelude_is_rejected(self):
+        text = self.assembled.read_bytes()
+        self.assembled.write_bytes(text.replace(self.prelude.encode('utf-8'), b'-- changed prelude\n', 1))
+        self.reject('prelude bytes mismatch')
+
+    def test_altered_prelude_metadata_is_rejected(self):
+        self.report['assembly_prelude'] = '-- changed prelude\n'
+        self.reject('prelude report/verifier mismatch')
+
+    def test_matching_altered_metadata_and_bytes_cannot_skip_source(self):
+        self.report['assembly_prelude'] += '\n' + (self.root / self.before).read_text('utf-8')
+        self.assemble()
+        self.reject('prelude report/verifier mismatch')
+
+    def test_prelude_separator_is_required(self):
+        text = self.assembled.read_bytes()
+        prelude = self.prelude.encode('utf-8')
+        self.assembled.write_bytes(text.replace(prelude + b'\n', prelude + b'X', 1))
+        self.reject('prelude separator mismatch')
+
+    def test_separator_after_all_is_still_required(self):
+        text = self.assembled.read_bytes()
+        original = (self.root / 'linear_input/lean_check/All.lean').read_bytes()
+        self.assembled.write_bytes(text.replace(original + b'\n', original + b'X', 1))
+        self.reject('separator mismatch after All.lean')
+
+    def test_prelude_does_not_relax_source_byte_checks(self):
+        text = self.assembled.read_bytes()
+        self.assembled.write_bytes(text.replace(b'theorem before', b'theorem edited', 1))
+        self.reject('assembly mismatch at ' + self.before)
+
+    def test_nonstring_prelude_metadata_is_rejected(self):
+        self.report['assembly_prelude'] = None
+        self.reject('prelude metadata must be a string')
+
+    def test_recorded_verifier_hash_must_match(self):
+        self.report['source_hashes']['tools/verify_main_result.py'] = '0' * 64
+        self.reject('prelude verifier hash mismatch')
 
 
 if __name__ == '__main__':
