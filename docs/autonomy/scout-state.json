@@ -1,7 +1,7 @@
 {
   "attempts": [],
   "last_ai_day": null,
-  "last_scanned_head": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
+  "last_scanned_head": "389bcf585e206fdf4241f73e75dc3f40a27ad43e",
   "queue": [
     {
       "evidence": "具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。",
@@ -73,6 +73,24 @@
       "path": "docs/research/2026-11-08-sphere-clock.md",
       "priority": 6,
       "source_sha256": "0a4759a597a32f2ef7a327eea95a613d58854fa0e9d19ace19a4b0d156fe6685",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "- 未証明: F0 cand.f0.imbalance_monotonicity: strict imbalance monotonicity remains a conjecture; finite checks do not establish its general form. Seek a finite counterexample or state explicit hypotheses for a proof.",
+      "id": "61ddfee48be35848aeaa",
+      "line": 37,
+      "path": "docs/integration/erg-r005-handoff.md",
+      "priority": 9,
+      "source_sha256": "c61d15ee2821f6c1befda54c42339ef11680f59a7455af5bb2e03b7e3ac6d3ce",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "- 要検証: F0 cand.f0.drop_b_not_always: formalize the claim that violating condition B does not necessarily restore distinguishability; do not substitute the existing counterexample for failure of condition A.",
+      "id": "4afc61808509e19e86ad",
+      "line": 38,
+      "path": "docs/integration/erg-r005-handoff.md",
+      "priority": 8,
+      "source_sha256": "c61d15ee2821f6c1befda54c42339ef11680f59a7455af5bb2e03b7e3ac6d3ce",
       "status": "UNVERIFIED_LEAD"
     }
   ],
