@@ -25,7 +25,7 @@
 
 Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)。既存の固定依存キャッシュを使用した。mathlib全体をソースから再構築したという意味ではない。Pythonテストには作業専用のpytest 9.2.0・NumPy 2.4.4を使用した。
 
-本文HTMLは作業専用Markdown 3.8.2と既存チェックアウトのKaTeX資産を使って再生成した。初回のMarkdown不足と、この作業ツリーでのvendor資産不足はローカル補助環境を整えて解決した。これらはLean証明の失敗とは別である。追加文書の表示・リンク検査の範囲は別記録とし、ブラウザ視覚確認は主張しない。
+本文HTMLは作業専用Markdown 3.8.2と既存チェックアウトのKaTeX資産を使って再生成した。初回のMarkdown不足と、この作業ツリーでのvendor資産不足はローカル補助環境を整えて解決した。これらはLean証明の失敗とは別である。追加文書のリンク、数式生成、重複アンカー、ローカルフォントの[表示検査記録](render-validation-continuation.json)も保存した。ブラウザ視覚確認は主張しない。
 
 個別証明の開発中には積分の測度/関数の型推論不足、未使用tactic、ASCII `pi` の解釈を修正した。定理文を目標結論の仮定に置き換えてはいない。成功した共通検証の生ログは作業用 `curve-word-chain-continuation-evidence/passing-integration/` に保存し、機械可読記録にハッシュを載せた。
 
