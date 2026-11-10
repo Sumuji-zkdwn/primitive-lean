@@ -5,7 +5,13 @@ on:
     branches: [main]
     paths:
       - 'tools/generate_dependency_graph.py'
+      - 'tools/verify_main_result.py'
+      - 'linear_input/verify_lean.py'
+      - 'lean/**'
+      - 'linear_input/lean_check/**'
+      - 'tests/test_dependency_graph.py'
       - 'docs/dependency/pr_snapshot.json'
+      - 'docs/dependency/generated/**'
       - '.github/workflows/dependency-graph.yml'
   workflow_dispatch:
 
@@ -25,8 +31,23 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Generate reproducible graph and check nonempty evidence
-        run: python3 tools/generate_dependency_graph.py
+      - name: Test pinned-commit graph extraction
+        run: python3 -m unittest discover -s tests -p 'test_dependency_graph.py' -v
+
+      # A bot commit updates only generated files. Pinning the most recent
+      # INPUT-changing commit prevents a new SHA on every bot push.
+      - name: Pin source input commit (exclude generated outputs)
+        id: source
+        run: |
+          SOURCE_SHA=$(git log -1 --format=%H HEAD -- \
+            lean linear_input/lean_check linear_input/verify_lean.py \
+            tools/verify_main_result.py tools/generate_dependency_graph.py \
+            docs/dependency/pr_snapshot.json)
+          test -n "$SOURCE_SHA"
+          echo "sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Generate reproducible graph from pinned Git objects
+        run: python3 tools/generate_dependency_graph.py --main-ref "${{ steps.source.outputs.sha }}"
 
       - name: Commit generated graph to the source branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository

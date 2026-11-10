@@ -13,7 +13,6 @@ import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-SNAP = ROOT / "docs/dependency/pr_snapshot.json"
 REPO = "Sumuji-zkdwn/primitive-lean"
 DECL = re.compile(r"(?m)^[ \t]*(?:(?:private|protected|noncomputable|partial|unsafe)\s+)*(?:theorem|lemma|def|abbrev|structure|inductive|class)\s+([A-Za-z_][A-Za-z0-9_'.]*)")
 QUAL = re.compile(r"\b((?:Elastica|LinearInput[A-Za-z0-9_']+|OrbitTrace[A-Za-z0-9_']*)\.[A-Za-z_][A-Za-z0-9_']+(?:\.[A-Za-z_][A-Za-z0-9_']+)*)\b")
@@ -26,6 +25,39 @@ def git(*args):
                  text=True, stderr=subprocess.DEVNULL).rstrip("\n")
     except (OSError, subprocess.CalledProcessError):
         return None
+
+
+def git_bytes(*args):
+    """Read immutable Git data as exact bytes (including trailing newlines)."""
+    try:
+        return subprocess.check_output(
+            ["git", "-C", str(ROOT), *args], stderr=subprocess.PIPE
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise RuntimeError("Unable to read pinned Git object: git " + " ".join(args)) from exc
+
+
+def resolved_commit(ref):
+    return git_bytes("rev-parse", "--verify", ref + "^{commit}").decode("ascii").strip()
+
+
+def committed_text(commit, path):
+    return git_bytes("show", commit + ":" + path).decode("utf8")
+
+
+def is_source_path(path):
+    if ".lake" in path.split("/") or Path(path).name in ("All.lean", "MainResult.lean"):
+        return False
+    if path.startswith("lean/") and path.endswith(".lean"):
+        return True
+    prefix = "linear_input/lean_check/"
+    return (path.startswith(prefix) and "/" not in path[len(prefix):]
+            and path.endswith((".lean", ".inc")))
+
+
+def tracked_source_paths(commit):
+    raw = git_bytes("ls-tree", "-r", "-z", "--name-only", commit)
+    return sorted(p for p in raw.decode("utf8").split("\0") if is_source_path(p))
 
 
 def strip(src):
@@ -57,8 +89,8 @@ def strip(src):
     return "".join(out)
 
 
-def assignment(filename, key):
-    root = ast.parse((ROOT / filename).read_text("utf8"))
+def assignment(filename, key, source_commit):
+    root = ast.parse(committed_text(source_commit, filename))
     for node in root.body:
         if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == key for t in node.targets):
             return ast.literal_eval(node.value)
@@ -98,39 +130,41 @@ def source_node(path, text, scope, baseline, supplements):
     }
 
 
-def sources(baseline, supplements):
-    paths = sorted((ROOT / "lean").rglob("*.lean"))
-    paths += sorted((ROOT / "linear_input/lean_check").glob("*.lean"))
-    paths += sorted((ROOT / "linear_input/lean_check").glob("*.inc"))
-    paths = [p for p in paths if p.is_file() and p.name not in ("All.lean", "MainResult.lean")]
-    return [source_node(p.relative_to(ROOT).as_posix(), p.read_text("utf8"),
-                        "main", baseline, supplements) for p in paths]
+def sources(baseline, supplements, source_commit):
+    # Worktree files never contribute to a graph labeled with a different SHA.
+    return [source_node(path, committed_text(source_commit, path),
+                        "main", baseline, supplements)
+            for path in tracked_source_paths(source_commit)]
 
 
-def branch_sources(snap, baseline, supplements):
-    overlay, issues = [], []
+def branch_sources(snap, baseline, supplements, source_commit):
+    overlay, inputs = [], []
     interesting = {31, 65, 66, 67, 69, 70, 71, 72, 75, 77, 78}
+    pinned_branches = {p["head_branch"]: p.get("head_sha") for p in snap["prs"]}
     for pr in snap["prs"]:
         n, head, base = pr["number"], pr.get("head_sha"), pr.get("base_branch")
-        if n not in interesting: continue
-        if not head or git("cat-file", "-e", head + "^{commit}") is None:
-            issues.append("PR #" + str(n) + ": head commit unavailable")
+        if n not in interesting:
             continue
-        base_ref = "refs/remotes/origin/" + str(base)
-        if git("cat-file", "-e", base_ref + "^{commit}") is None:
-            issues.append("PR #" + str(n) + ": base ref unavailable")
-            continue
-        paths = git("diff", "--name-only", base_ref + "..." + head)
-        if paths is None:
-            issues.append("PR #" + str(n) + ": unable to compare base")
-            continue
+        base_sha = source_commit if base == "main" else pinned_branches.get(base)
+        if not head or not base_sha:
+            raise ValueError(f"PR #{n}: no immutable head/base in PR snapshot")
+        for role, sha in (("base", base_sha), ("head", head)):
+            if git("cat-file", "-e", sha + "^{commit}") is None:
+                raise RuntimeError(f"PR #{n}: pinned {role} commit {sha} unavailable; "
+                                   "fetch its Git object or use --skip-prs")
+        merge_base = git("merge-base", base_sha, head)
+        paths = git("diff", "--name-only", base_sha + "..." + head)
+        if merge_base is None or paths is None:
+            raise RuntimeError(f"PR #{n}: cannot compare pinned base and head")
+        inputs.append({"number": n, "base_branch": base, "base_sha": base_sha,
+                       "head_sha": head, "merge_base_sha": merge_base})
         for path in paths.splitlines():
-            if not (path.endswith(".lean") or path.endswith(".inc")): continue
-            if not path.startswith(("lean/", "linear_input/lean_check/")): continue
-            data = git("show", head + ":" + path)
-            if data is not None:
-                overlay.append(source_node(path, data, "pr" + str(n), baseline, supplements))
-    return overlay, issues
+            if not is_source_path(path):
+                continue
+            if git("cat-file", "-e", head + ":" + path) is not None:
+                overlay.append(source_node(path, committed_text(head, path),
+                                           "pr" + str(n), baseline, supplements))
+    return overlay, inputs
 
 
 def source_edges(nodes):
@@ -215,26 +249,29 @@ def main():
     arg = argparse.ArgumentParser()
     arg.add_argument("--out", default="docs/dependency/generated")
     arg.add_argument("--skip-prs", action="store_true")
+    arg.add_argument("--main-ref", default="HEAD",
+                     help="Immutable source Git revision for ALL main inputs (default: HEAD)")
     opts = arg.parse_args()
+    source_commit = resolved_commit(opts.main_ref)
     baseline = {"linear_input/lean_check/" + p for p in
-                assignment("linear_input/verify_lean.py", "PARTS")}
+                assignment("linear_input/verify_lean.py", "PARTS", source_commit)}
     supplements = {p for p, ns in
-                   assignment("tools/verify_main_result.py", "SUPPLEMENTS")}
-    snapshot = json.loads(SNAP.read_text("utf8"))
-    nodes = sources(baseline, supplements)
-    issues = []
+                   assignment("tools/verify_main_result.py", "SUPPLEMENTS", source_commit)}
+    snapshot = json.loads(committed_text(source_commit, "docs/dependency/pr_snapshot.json"))
+    nodes = sources(baseline, supplements, source_commit)
+    issues, pr_inputs = [], []
     if not opts.skip_prs:
-        extra, issues = branch_sources(snapshot, baseline, supplements)
+        extra, pr_inputs = branch_sources(snapshot, baseline, supplements, source_commit)
         nodes += extra
     edges = source_edges(nodes)
     for n in nodes:
         del n["_code"]
-    head_main = git("rev-parse", "refs/remotes/origin/main") or git("rev-parse", "HEAD")
-    graph = {"schema_version":1, "repo":REPO, "main_commit":head_main,
+    graph = {"schema_version":1, "repo":REPO, "main_commit":source_commit,
              "pr_snapshot":snapshot["snapshot_date"], "nodes":nodes, "edges":edges,
-             "baseline_part_order":list(assignment("linear_input/verify_lean.py", "PARTS")),
-             "supplement_order":[p for p, _ in assignment("tools/verify_main_result.py", "SUPPLEMENTS")],
-             "prs":snapshot["prs"], "issues":issues,
+             "baseline_part_order":list(assignment("linear_input/verify_lean.py", "PARTS", source_commit)),
+             "supplement_order":[p for p, _ in assignment("tools/verify_main_result.py", "SUPPLEMENTS", source_commit)],
+             "prs":snapshot["prs"], "issues":issues, "pr_inputs":pr_inputs,
+             "source_provenance":"Git blobs at main_commit; PR diffs from pinned base/head SHAs",
              "meaning":"Source textual evidence, not kernel-certified theorem dependency closure"}
     output = ROOT / opts.out
     output.mkdir(parents=True, exist_ok=True)
@@ -252,7 +289,9 @@ def main():
     intro = [
         "# primitive-lean dependency graphs",
         "",
-        "Snapshot: main " + str(head_main) + ", PR metadata " + snapshot["snapshot_date"] + ".",
+        "Snapshot: main " + str(source_commit) + ", PR metadata " + snapshot["snapshot_date"] + ".",
+        "Main sources, registries and PR snapshot were read from Git blobs at main_commit.",
+        "PR overlays use immutable base/head SHAs listed in graph.json pr_inputs.",
         "",
         "A --> B means A references B. It does NOT mean A mathematically implies B.",
         "",
