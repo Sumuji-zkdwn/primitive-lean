@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "import_date": "2026-11-10",
+  "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+  "source_title": "クソ玉定理チェイン：到達点と停止境界",
+  "source_date": "2026-10-20",
+  "source_bundle": "クソ玉_定理チェイン_検算付き_2026-10-20.zip",
+  "originals": [
+    {
+      "path": "sources/curve_word_chain_20261110/theorem-chain-2026-10-20.md",
+      "sha256": "e6593070d343e25d784965213f053150d0194af53c45bba79843cc13b94cb9a9",
+      "bytes": 21895,
+      "original_filename": "クソ玉_定理チェイン到達点_2026-10-20.md",
+      "byte_identical": true,
+      "note": "User supplied original theorem chain; byte-identical to the preserved 2026-10-20 bundle."
+    },
+    {
+      "path": "sources/curve_word_chain_20261110/check_chain_exact.py",
+      "sha256": "2588cb20334c2a387ff3c50fe77d0c8d1b6932cb389ede587daa546c3e4e26bd",
+      "bytes": 3546,
+      "original_filename": "check_chain_exact.py",
+      "byte_identical": true,
+      "note": "Original finite integer checks and floating point long-word comparison; not a general Lean proof."
+    },
+    {
+      "path": "sources/curve_word_chain_20261110/check_signature_levels.py",
+      "sha256": "d180870bca76f6ec9c3470d351576153177bb96183df59c99efa4a2c52ba1f83",
+      "bytes": 1242,
+      "original_filename": "check_signature_levels.py",
+      "byte_identical": true,
+      "note": "Original polygonal approximation of degree <=3 signatures; numerical evidence only."
+    }
+  ],
+  "corrections": [
+    "F: the quartic convex-envelope statement requires lambda > 0.",
+    "G: at fixed beta the recovered mass at an endpoint is the sum of exp(-beta F); raw multiplicity requires additional known equal-cost assumptions.",
+    "M: the full log-signature lies in the degree-completed free Lie algebra."
+  ],
+  "scope": "Original prose and scripts remain unchanged. New Lean algebra and integer certificates are separately authored and do not assert full Chen/Hambly-Lyons or the original constrained elastica problem.",
+  "lean_supplements": [
+    {
+      "path": "linear_input/lean_check/CurveWordAlgebra.inc",
+      "sha256": "1ad80d1dc97499c035b9c453b666017f88e78b20ec1160541f048080811369bc",
+      "namespace": "LinearInputCurveWordAlgebra",
+      "origin": "newly_authored_algebra_or_finite_certificate",
+      "theorem_count": 32,
+      "declaration_count": 47,
+      "declarations": [
+        {
+          "kind": "abbrev",
+          "name": "LinearInputCurveWordAlgebra.State",
+          "line": 11
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.endpoint",
+          "line": 13
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.angle",
+          "line": 15
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.cost",
+          "line": 17
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.rotation",
+          "line": 19
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.emptyState",
+          "line": 21
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.join",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.state_ext",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.rotation_zero",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.rotation_add",
+          "line": 32
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.rotation_norm",
+          "line": 35
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.join_endpoint",
+          "line": 38
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.join_angle",
+          "line": 41
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.join_cost",
+          "line": 43
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.empty_join",
+          "line": 45
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.join_empty",
+          "line": 48
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.join_assoc",
+          "line": 51
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.exchange_angle",
+          "line": 60
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.exchange_cost",
+          "line": 63
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.exchange_endpoint",
+          "line": 66
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.context_endpoint_difference",
+          "line": 74
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.context_difference_norm",
+          "line": 80
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.exchange_context_difference",
+          "line": 85
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.exchange_context_norm",
+          "line": 91
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.observe",
+          "line": 97
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.quarterPrefix",
+          "line": 99
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.rotation_quarter",
+          "line": 101
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.quarter_prefix_endpoint_real",
+          "line": 105
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.quarter_endpoint_real",
+          "line": 111
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.two_observations_complete",
+          "line": 115
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.quarter_prefix_observations_complete",
+          "line": 133
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.equal_state_all_contexts",
+          "line": 150
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.contextual_observation_complete",
+          "line": 153
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.scale",
+          "line": 167
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.scale_join",
+          "line": 170
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.linearEnergy",
+          "line": 178
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.linearEnergy_scale",
+          "line": 181
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.cross",
+          "line": 189
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.cross_add_left",
+          "line": 191
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.cross_add_right",
+          "line": 195
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.cross_rotation",
+          "line": 199
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.areaCocycle",
+          "line": 213
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.area_cocycle_identity",
+          "line": 216
+        },
+        {
+          "kind": "abbrev",
+          "name": "LinearInputCurveWordAlgebra.AreaState",
+          "line": 223
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordAlgebra.joinArea",
+          "line": 225
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.joinArea_assoc",
+          "line": 228
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordAlgebra.equal_area_state_all_contexts",
+          "line": 236
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFinite.inc",
+      "sha256": "3057597b6d47db36b9629a15d7be3eca307a57f1f70ff0da5454064cb577bf34",
+      "namespace": "LinearInputCurveWordFinite",
+      "origin": "newly_authored_algebra_or_finite_certificate",
+      "theorem_count": 23,
+      "declaration_count": 34,
+      "declarations": [
+        {
+          "kind": "abbrev",
+          "name": "LinearInputCurveWordFinite.Point",
+          "line": 15
+        },
+        {
+          "kind": "abbrev",
+          "name": "LinearInputCurveWordFinite.State",
+          "line": 17
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.rotate",
+          "line": 20
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.step",
+          "line": 27
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.state",
+          "line": 34
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.firstState",
+          "line": 36
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.crossArea",
+          "line": 40
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.ab_state",
+          "line": 42
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.ba_state",
+          "line": 44
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.ab_ba_same_cost_turn",
+          "line": 46
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.ab_ba_distinct_endpoint",
+          "line": 50
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.ab_ba_same_x",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.prefix_A_separates_x",
+          "line": 56
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.six_letter_first_collision",
+          "line": 59
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.six_letter_area_values",
+          "line": 63
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.six_letter_area_separates",
+          "line": 67
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.eight_letter_area_collision",
+          "line": 71
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.eight_letter_state_value",
+          "line": 75
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.allWords",
+          "line": 80
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.mem_allWords",
+          "line": 84
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.balancedWords",
+          "line": 95
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.mem_balancedWords",
+          "line": 98
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.endpointCount",
+          "line": 102
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFinite.areaStateCount",
+          "line": 105
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.three_three_word_count",
+          "line": 109
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.three_three_distinct_word_count",
+          "line": 112
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.three_three_endpoint_count",
+          "line": 115
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.three_three_area_state_count",
+          "line": 118
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.three_three_endpoint_set",
+          "line": 121
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.three_three_lifted_data",
+          "line": 128
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.four_four_word_count",
+          "line": 132
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.four_four_distinct_word_count",
+          "line": 135
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.four_four_endpoint_count",
+          "line": 138
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFinite.four_four_area_state_count",
+          "line": 141
+        }
+      ]
+    }
+  ]
+}
