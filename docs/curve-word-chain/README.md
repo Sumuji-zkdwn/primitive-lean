@@ -2,7 +2,9 @@
 
 2026-10-20 の「クソ玉定理チェイン」を、primitive-lean の既存の曲線・面積・観測の定理へ接続する案内です。[保存原文](../../sources/curve_word_chain_20261110/theorem-chain-2026-10-20.md)は歴史資料として保持し、条件の補足と形式化の範囲をこの文書で明示します。本文の入口は引き続き[原始の形式化](../../原始の形式化.md)です。
 
-第一段階の55定理・81宣言はPR #128、次の150定理・196宣言はPR #129でmainへ統合しました。その[第一段階の検証記録](verification.md)と[解析・最適化の追補記録](verification-continuation.md)を保持します。続く[全次数・一般極限への拡張](extensions.md)では、一本の曲線の構成、一般グラフ、ラプラス一意性、スペクトル極限、全次数Chen・自由Lie・BCHを追加しています。一般Hambly–Lyonsは開発中です。原文の手証明、有限全列挙、既知定理の適用、Leanの核による検査を区別します。
+第一段階の55定理・81宣言はPR #128、次の150定理・196宣言はPR #129でmainへ統合しました。その[第一段階の検証記録](verification.md)と[解析・最適化の追補記録](verification-continuation.md)を保持します。続く[全次数・一般極限への拡張](extensions.md)では、一本の曲線の構成、一般グラフ、ラプラス一意性、スペクトル極限、全次数Chen・自由Lie・BCHに加え、連続BV曲線の一般Hambly–Lyonsまで証明し、A〜Mの数学的核心を接続しました。各主張の条件は以下の表と証明原稿に明示します。原文の手証明、有限全列挙、既知定理の引用、Leanの核による検査は、それぞれの証拠として区別します。
+
+最終のHambly–Lyons・二曲線同値・有限次元座標転送は、最新依存原稿を含む個別検査で `lake env lean --trust=0` が終了コード0・警告0となり、公理監査は `propext`・`Classical.choice`・`Quot.sound` のみでした。[拡張の検証記録](verification-extensions.md)は43ファイル時点のクリーンな全26段階検査の記録として保持します。現在の登録原稿・ハッシュは[台帳](extension-provenance.json)を参照してください。最終原稿全体の共通組立・総合検査については完成検証記録を別途追加予定です。途中コミットの総合検査を、その後の追加原稿の検査結果として扱いません。
 
 ## 模型と適用範囲
 
@@ -28,11 +30,11 @@ $$
 | D | 語の状態は接合則で逐次計算できる。有限個の向きに閉じる場合、線形終点費用は有限状態化できる。 | `CurveWordFiniteState.inc` がBellman再帰と全固定長語の有限最小値の一致を証明し、四状態の実目的関数へ接続。`CurveWordGenerating.inc`・`CurveWordWordGenerating.inc` が実行列べきの全語長形式級数とレゾルベント・有理性を証明する。 |
 | E | 四状態模型の最適長時間平均と切替閾値。 | 四状態の直接証明に加え、`CurveWordGraphLimit.inc` と `CurveWordDirectedGraph.inc` が一般有限グラフの最小平均閉路の存在と、到達可能な始点からの最適平均費用の収束を証明する。 |
 | F | 同費用の終点集合の全入力最小値は凸包の支持関数で決まり、内部の点や語数を忘れる。 | `CurveWordConvexObservation.inc`・`CurveWordConvexSeparation.inc` が有限非空集合の実支持関数・凸包上の最小値と、全連続線形観測の一致⇔凸包の一致を証明する。一般の Fenchel–Moreau 定理とは区別する。 |
-| G | 有限温度の誤差評価、零温度、終点合算重み、長語自由エネルギー。 | `CurveWordLaplace.inc` が指数可積分性の下で有限測度の一意性、`CurveWordSpectral.inc`・`CurveWordTransfer.inc` が通常のスペクトル半径への長語極限と零温度極限を証明。`CurveWordArcGenerating.inc` は四状態Laurent重みの係数を実端点・費用の語数へ同定し、有理母関数を得る。 |
+| G | 有限温度の誤差評価、零温度、終点合算重み、長語自由エネルギー。 | `CurveWordThermodynamics.inc` が固定有限非空集合の実最小値への零温度極限を証明。`CurveWordLaplace.inc` が指数可積分性の下で有限測度の一意性、`CurveWordSpectral.inc`・`CurveWordTransfer.inc` が通常のスペクトル半径への長語極限と、その後の零温度極限を証明。`CurveWordArcGenerating.inc` は四状態Laurent重みの係数を実端点・費用の語数へ同定し、有理母関数を得る。 |
 | H | 面積を加えると、接合に外積の交差項が現れる。交差項はコサイクル条件を満たす。 | `HistorySignature.inc` の実積分分割則と `CurveWordAlgebra.inc` の代数則に加え、`CurveWordPiecewise.inc` が任意語の実面積を整数交差項と固有面積の和へ同定する。 |
 | I | 3A3B の20語は終点では12状態、面積までなら20状態になる。 | `CurveWordFinite.inc` の有限例・全列挙に実装。面積差は文字固有面積が同数で相殺することを使う。 |
 | J | 4A4B の70語は面積まででも50状態。特定の衝突は三次モーメントで分かれる。 | `CurveWordFinite.inc` の整数衝突と `CurveWordCircularMoment.inc` の実積分を、`CurveWordCircleWords.inc` がBoolean語から作った同じ曲線上で接続する。 |
-| K | Chen の接合則と、全 signature による tree-like 同値までの一意性。 | 一般BVの全次数Chen・shuffle・canonical署名と、実任意語の回転付きChenを証明。`CurveWordTreeLimit.inc` が任意有限次元の連続BV tree-like曲線⇒全署名自明を、実際の有限高さ近似と極限から証明する。逆方向と二曲線同値への最終接続は開発中。 |
+| K | Chen の接合則と、全 signature による tree-like 同値までの一意性。 | 一般連続BVの全次数Chen・shuffle・canonical署名と、実任意語の回転付きChenを証明。`CurveWordTreeLimit.inc`・`CurveWordBVHamblyLyons.inc` が独立な高さ条件によるtree-like性⇔全署名自明を証明し、`CurveWordBVEquivalence.inc` が実際の接合・反転による二曲線同値へ接続する。`CurveWordBVCoordinates.inc` で任意有限次元実ノルム空間へ核定理を転送する。 |
 | L | 相似倍率に応じて変位・曲げ費用・面積・高次積分の次数が変わる。 | 状態・円弧・分配関数・任意次数の空間相似に加え、`CurveWordReparametrization.inc` がC1時間変換の全署名不変性、`CurveWordBoundedVariation.inc` が一般連続BV曲線の変動量時計と1-Lipschitz因子化を証明する。 |
 | M | 全 signature の形式的対数は、次数で完備化した自由リー代数に入り、接合は BCH 級数で記述される。 | 形式指数の全次数逆、通常の交代冪対数との一致、group-like対数のprimitive性、有限文字集合での実自由Lie元の次数別展開とBCH接合を証明。`CurveWordBVAlgebra.inc` で一般BV署名へ接続する。 |
 
@@ -86,7 +88,7 @@ $$
 - AB/BA は、単位化した終点が $(2,2)/(2,-2)$。費用と実総角は同じです。
 - AAB/ABA は、終点が $(1,5)/(5,5)$ となり、x 方向でも区別できます。
 - AABBBA/BAAABB は終点などが同じで、D が 8/24。面積差は $8\xi^2=32h^2/(9\pi^2)$ です。
-- AAAABBBB/AAABBBBA は終点・総角・費用・面積が同じです。`CurveWordCircleWords.inc` はBoolean語から構成した実曲線を明示円周列へ同定し、その曲線上で実面積の一致と三次モーメント差 $-32h^3/(9\pi^2)$ を証明します。
+- AAAABBBB/AAABBBBA は終点・総角・費用・面積が同じです。`CurveWordCircleWords.inc` はBoolean語から構成した実曲線を明示円周列へ同定し、その曲線上で実面積の一致と、三次モーメントの差「AAABBBBA − AAAABBBB」$=-32h^3/(9\pi^2)$ を証明します。
 
 有限の全列挙は、指定した語集合についての証明です。任意の長さの語を二次または三次までで識別できるとは主張しません。また、元の `check_chain_exact.py` にある三次モーメント式の表示は、その式を計算機が導出・証明した証拠ではありません。
 
@@ -110,7 +112,7 @@ Z(u,\beta)=\sum_{w\in W}e^{-\beta(F_w-u\cdot z_w)},\qquad
 q=-\beta^{-1}\log Z
 $$
 
-を定めると、$m-\log N/\beta\le q\le m$ です。固定した $\beta$ で全 u の Z を厳密に知ることは、有限測度のラプラス変換を知ることに対応します。復元対象は各終点 z の重み
+を定めると、$m-\log N/\beta\le q\le m$ です。この零温度極限は固定した有限集合 $W$ に対するもので、語長を無限にする極限とは別です。一般有限状態模型の長語極限は転送行列から別に証明し、その極限値の零温度極限へ接続しています。固定した $\beta$ で全 u の Z を厳密に知ることは、有限測度のラプラス変換を知ることに対応します。復元対象は各終点 z の重み
 
 $$
 \mu_\beta(\{z\})=\sum_{w:z_w=z}e^{-\beta F_w}
@@ -130,7 +132,20 @@ $$
 
 が成り立ちます。実曲線の面積積分からの分割則は `LinearInputHistorySignature.area_split_cross_term`、二次反復積分との関係は `area_eq_second_antisymmetric`、`second_shuffle`、`mixed_second_reconstruction` に対応します。
 
-全署名はすべての反復積分を並べた形式級数です。Chen の公式では、後半の曲線の増分を前半の総角だけ回転させてからテンソル代数の積を取ります。有限長の有界変動曲線について、全署名が同じであることと tree-like 同値であることの同値は、[Hambly–Lyons の既知定理](https://annals.math.princeton.edu/2010/171-1/p02)です。始点はそろえ、パラメータ時刻や tree-like な往復まで復元するとはしません。
+全署名はすべての反復積分を並べた形式級数です。一般のChen公式は実曲線の接合をテンソル代数の積へ送ります。この円弧文字模型では、後半の曲線の増分を前半の総角だけ回転させてから接ぐので、その回転の各次数テンソル作用も含めて証明しています。
+
+有限次元実ノルム空間に値を取る、コンパクト区間 $[a,b]$ 上の連続有界変動曲線について、**全署名が単位であることと幾何学的なtree-like性の同値**を証明しました。単位署名は空語の係数が1、すべての非空語の係数が0です。tree-like性は署名を使わず、連続な非負高さ $h$ が $h(a)=h(b)=0$ と
+
+$$
+d(\gamma(s),\gamma(t))\le h(s)+h(t)-2\min_{r\in[s,t]}h(r)
+\qquad(a\le s\le t\le b)
+$$
+
+を満たすこととして定義しています。一般の連続BV曲線の署名は実Stieltjes積分から定め、Jordan対・区間外の延長・連続単調時計の選択に依存しないことも証明済みです。
+
+`CurveWordBVHamblyLyons.treeLike_iff_pathSignature_eq_unit` が有限座標空間での核定理、`CurveWordBVCoordinates.finiteDimensionalSignature_eq_unit_iff` が実際の有限基底を通じた一般有限次元実ノルム空間版です。座標を変えると個々の署名係数は変わりますが、「全署名が単位」という性質は座標に依存しません。
+
+二曲線版 `CurveWordBVEquivalence.based_pathSignature_eq_iff_tree_equivalent` は、同じコンパクト区間を持つ有限座標空間の連続BV曲線で、始点が同じときに、**署名の一致⇔終点の一致かつ一方を進み他方を逆に戻る実接合曲線がtree-like**と述べます。終点の一致は署名の一次係数から導きます。これは[Hambly–Lyons の既知定理](https://annals.math.princeton.edu/2010/171-1/p02)に対応する形式命題であり、外部の定理を公理として取り込んだものではありません。パラメータ時刻やtree-likeな往復そのものを復元する主張ではありません。
 
 全署名の形式的対数は、厳密には**次数で完備化した自由リー代数**の元です。有限次数で打ち切った対数と、無限の形式級数である全対数は区別します。
 
@@ -139,7 +154,7 @@ $$
 =z_xX+z_yY+A_{\rm signed}[X,Y]+\text{三次以上}.
 $$
 
-接合と BCH の全次数等式は `signature_logarithm_chen`、対数署名の実自由Lie元による次数別展開は `signature_logarithm_completed_lie` に追加しました。幾何学的な一般Hambly–Lyonsはこれらの代数結果とは別の未解決接続です。原文が示した [Chen identity・log-signature の参照先](https://link.springer.com/chapter/10.1007/978-3-031-97239-3_1)も保持します。
+接合と BCH の全次数等式は `signature_logarithm_chen`、対数署名の実自由Lie元による次数別展開は `signature_logarithm_completed_lie` に対応します。形式指数の両側逆と通常の交代冪対数との一致、group-like対数のprimitive性を証明し、有限文字集合について各次数のLie元を実際に構成しています。ここで保証するのは次数別の係数展開であり、自由Lie代数からテンソル代数への写像の単射性やPBW同型を追加したという意味ではありません。幾何学的なHambly–Lyonsは、この代数結果とは別に実曲線・最小代表・内部距離を構成して証明しています。原文が示した [Chen identity・log-signature の参照先](https://link.springer.com/chapter/10.1007/978-3-031-97239-3_1)も保持します。
 
 相似倍率 $\sigma>0$ では、変位は $\sigma$、二次曲げ費用は $\sigma^{-1}$、面積は $\sigma^2$、m 次反復積分は $\sigma^m$ 倍です。原文の
 
@@ -150,16 +165,16 @@ $$
 
 は入力と温度も一緒に変換する式です。同じ数値入力を固定したまま、異なる大きさの模型を同一視するものではありません。
 
-## 残る形式化と検証の読み方
+## 適用境界と検証の読み方
 
-第一段階の後に[解析・最適化の追補](continuation.md)、さらに[全次数・一般極限への拡張](extensions.md)を加えました。現在も次を分けて残します。
+第一段階の後に[解析・最適化の追補](continuation.md)、さらに[全次数・一般極限への拡張](extensions.md)を加えました。`continuation.md` はPR #129時点の到達点を残す歴史記録です。現在のA〜M対応と一般HLの完成範囲は、このREADMEと `extensions.md` を参照してください。次の追加主張は今回の完成範囲に含めません。
 
 - 曲率の跳びを持つ接合部を滑らかに近似する構成と、元の拘束付き変分問題での性質。単一のC1曲線・状態・面積・円周列との同定は追加済み。
 - 一般のmin-plus行列べきとの表記上の同定、および仮定を追加しない二重極限の交換。一般有限グラフの平均閉路、長語のスペクトル極限、その後の零温度極限は追加済み。
 - 一般の Fenchel–Moreau 定理。指数可積分性の下での有限測度のラプラス一意性と終点測度への適用は追加済み。
-- 一般の連続BV署名から幾何学的な木への因子化と、二曲線の同署名⇔tree-like同値への最終接続。反対方向のtree-like⇒全署名自明、全次数Chen・自由Lie展開・BCH、BV署名の解析と実近似は追加済み。
+- 無限次元空間・不連続BV曲線・粗い経路への同じ一意性定理の拡張。ここで完成したHLは、任意有限次元実ノルム空間の連続BV曲線を対象にします。
 - 曲線の停留性から独立した時間発展・履歴選択・自己増殖の法則。
 
 `LinearInputHistorySignature.finite_family_separating_cutoff` は、異なる二対象がある段で区別できるという仮定の下で、有限族に共通の識別段数を与えます。その仮定を証明せずに、全署名の一意性や任意長の語の識別へ読み替えることはできません。
 
-共通検証入口はリポジトリ直下の `python -B -X utf8 tools/verify.py --integration-only` です。結果は対象ソース・依存 revision・実行ログに結び付けて報告します。有限検算の成功は全チェインの形式証明完了を意味せず、過去の成功記録は今回の実行結果として数えません。
+共通検証入口はリポジトリ直下の `python -B -X utf8 tools/verify.py --integration-only` です。結果は対象ソース・依存 revision・実行ログに結び付けて報告します。今回の全次数・一般極限・HLの根拠は各形式証明であり、有限検算の成功から一般命題を推測したものではありません。過去の成功記録は今回の実行結果として数えません。

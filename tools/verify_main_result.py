@@ -116,6 +116,8 @@ EXTRA_IMPORTS = (
     "Mathlib.Data.Finset.Sort",
     "Mathlib.Combinatorics.SimpleGraph.Acyclic",
     "Mathlib.Algebra.MonoidAlgebra.Basic",
+    "Mathlib.Topology.ContinuousMap.Bounded.ArzelaAscoli",
+    "Mathlib.Analysis.Normed.Module.FiniteDimension",
 )
 
 # Importing FreeLieAlgebra adds a generic LieAlgebra-to-Module instance.
@@ -373,6 +375,19 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/CurveWordTreeSampleProduct.inc', 'LinearInputCurveWordTreeSampleProduct'),
     ('linear_input/lean_check/CurveWordTreeLimit.inc', 'LinearInputCurveWordTreeLimit'),
     ('linear_input/lean_check/CurveWordArcGenerating.inc', 'LinearInputCurveWordArcGenerating'),
+    ('linear_input/lean_check/CurveWordBVPathOperations.inc', 'LinearInputCurveWordBVPathOperations'),
+    ('linear_input/lean_check/CurveWordBVCompactness.inc', 'LinearInputCurveWordBVCompactness'),
+    ('linear_input/lean_check/CurveWordBVLoopErase.inc', 'LinearInputCurveWordBVLoopErase'),
+    ('linear_input/lean_check/CurveWordBVReduced.inc', 'LinearInputCurveWordBVReduced'),
+    ('linear_input/lean_check/CurveWordBVArc.inc', 'LinearInputCurveWordBVArc'),
+    ('linear_input/lean_check/CurveWordBVOrientation.inc', 'LinearInputCurveWordBVOrientation'),
+    ('linear_input/lean_check/CurveWordGeodesicTree.inc', 'LinearInputCurveWordGeodesicTree'),
+    ('linear_input/lean_check/CurveWordBVArcUnique.inc', 'LinearInputCurveWordBVArcUnique'),
+    ('linear_input/lean_check/CurveWordBVIntrinsic.inc', 'LinearInputCurveWordBVIntrinsic'),
+    ('linear_input/lean_check/CurveWordBVIntrinsicTree.inc', 'LinearInputCurveWordBVIntrinsicTree'),
+    ('linear_input/lean_check/CurveWordBVHamblyLyons.inc', 'LinearInputCurveWordBVHamblyLyons'),
+    ('linear_input/lean_check/CurveWordBVEquivalence.inc', 'LinearInputCurveWordBVEquivalence'),
+    ('linear_input/lean_check/CurveWordBVCoordinates.inc', 'LinearInputCurveWordBVCoordinates'),
 )
 
 

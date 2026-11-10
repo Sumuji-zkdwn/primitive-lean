@@ -6,8 +6,16 @@
   "source_chain_sha256": "e6593070d343e25d784965213f053150d0194af53c45bba79843cc13b94cb9a9",
   "prior_ledger": "docs/curve-word-chain/continuation-provenance.json",
   "prior_pr": 129,
-  "complete_chain_formalization": false,
-  "remaining_core": "The general Hambly-Lyons direction from trivial signature to a geometric tree-height witness, and the two-path equivalence connection, remain open. The opposite direction for all finite-dimensional continuous BV paths is proved by actual finite sampling and a verified uniform BV limit.",
+  "complete_chain_formalization": true,
+  "remaining_core": null,
+  "scope": "The A-M auxiliary curve-word chain and the requested general finite-graph, Laplace, spectral, all-degree Chen, Hambly-Lyons and formal Lie/BCH bridges, under the explicit hypotheses in each theorem.",
+  "excluded_claims": [
+    "Smooth elastica stationarity or minimizing behavior of concatenated circular arcs",
+    "Unconditional exchange of infinite-word and zero-temperature limits",
+    "General Fenchel-Moreau beyond the proved finite-hull observation statements",
+    "PBW or injectivity of the free-Lie coefficient map",
+    "Dynamics, hysteresis, history selection or self-reproduction without a specified evolution law"
+  ],
   "counting_convention": "Named theorem/lemma/def/abbrev declarations indexed by the existing common verifier; structures and instances are not included in these counts.",
   "lean_supplements": [
     {
@@ -5161,8 +5169,1860 @@
           "line": 71
         }
       ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "namespace": "LinearInputCurveWordBVPathOperations",
+      "sha256": "a32d3dd682609a97c2746f7624f0f6a61bb42a3664ef4b0b13c44bfae4f66014",
+      "theorem_count": 42,
+      "declaration_count": 47,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVPathOperations.reverseTime",
+          "line": 16
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVPathOperations.reversePath",
+          "line": 18
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reverseTime_continuous",
+          "line": 20
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reverseTime_antitone",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reverseTime_mem",
+          "line": 27
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reverseTime_involutive",
+          "line": 31
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reverseTime_image",
+          "line": 36
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reversePath_variation",
+          "line": 43
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reversePath_boundedVariation",
+          "line": 49
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reversePath_continuousOn",
+          "line": 55
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reversePath_reversePath",
+          "line": 60
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve",
+          "line": 65
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve_left",
+          "line": 68
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve_right",
+          "line": 71
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve_continuousOn",
+          "line": 78
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve_variation",
+          "line": 87
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve_boundedVariation",
+          "line": 96
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_split",
+          "line": 106
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_join",
+          "line": 139
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reversePath_length",
+          "line": 154
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.joinCurve_length",
+          "line": 159
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.retrace_treeLike",
+          "line": 168
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reparam_mapsTo_endpoints",
+          "line": 186
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reparam_bv_endpoints",
+          "line": 191
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.reparam_cont_endpoints",
+          "line": 198
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_reparametrize_endpoints",
+          "line": 204
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVPathOperations.retraceTime",
+          "line": 217
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.retraceTime_continuous",
+          "line": 219
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.retraceTime_left",
+          "line": 222
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.retraceTime_right",
+          "line": 225
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.retraceTime_mem",
+          "line": 228
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVPathOperations.mirrorPath",
+          "line": 235
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.join_mirror_eq_retrace",
+          "line": 237
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.mirrorPath_boundedVariation",
+          "line": 245
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.mirrorPath_continuousOn",
+          "line": 254
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.mirrorPath_matches",
+          "line": 262
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.backtrack_treeLike",
+          "line": 267
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_mirror",
+          "line": 276
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_product_reverse",
+          "line": 305
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.stieltjesSignature_same",
+          "line": 320
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.stieltjesSignature_inverse",
+          "line": 329
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_reverse",
+          "line": 339
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_reverse_product",
+          "line": 363
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.pathSignature_eq_iff_join_reverse_unit",
+          "line": 376
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.join_reverse_endpoints",
+          "line": 406
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.join_reverse_closed",
+          "line": 416
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVPathOperations.same_signature_of_treeLike_join_reverse",
+          "line": 422
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVCompactness.inc",
+      "namespace": "LinearInputCurveWordBVCompactness",
+      "sha256": "44d31f274f9c04ae875e4018b6d7e0451d10b65a6c2617ea527f407d1fea7bad",
+      "theorem_count": 20,
+      "declaration_count": 26,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCompactness.speedControlledPaths",
+          "line": 14
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.speedControlledPaths_isClosed",
+          "line": 18
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.speedControlledPaths_equicontinuous",
+          "line": 27
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.speedControlledPaths_isCompact",
+          "line": 34
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension",
+          "line": 46
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension_lipschitz",
+          "line": 49
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension_continuous",
+          "line": 54
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension_boundedVariation_interval",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension_clamp",
+          "line": 64
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension_boundedVariation",
+          "line": 69
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.pathExtension_variation_lowerSemicontinuous",
+          "line": 75
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.exists_minimal_variation_in_closed_class",
+          "line": 86
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.lipschitz_variation_le",
+          "line": 96
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.coordinateExtension_boundedVariation",
+          "line": 107
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.coordinateExtension_continuous",
+          "line": 112
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.coordinateExtension_variation_le",
+          "line": 117
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCompactness.prefixSignature",
+          "line": 126
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.prefixSignature_continuous",
+          "line": 134
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCompactness.basedPrefixSignature",
+          "line": 174
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.basedPrefixSignature_continuous",
+          "line": 178
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCompactness.signatureRangeClass",
+          "line": 187
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.signatureRangeClass_isClosed",
+          "line": 195
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.exists_minimal_signature_range_representative",
+          "line": 211
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCompactness.speedControlledOfLipschitz",
+          "line": 230
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.speedControlledOfLipschitz_eq",
+          "line": 239
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCompactness.prefixSignature_eq_pathSignature",
+          "line": 248
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "namespace": "LinearInputCurveWordBVLoopErase",
+      "sha256": "0d11b32a522309f58273ff4cc655c2009af18052dbeed5d1c58d11b0dcdb4c76",
+      "theorem_count": 28,
+      "declaration_count": 32,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVLoopErase.tailClock",
+          "line": 14
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop",
+          "line": 16
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.tailClock_monotone",
+          "line": 19
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.tailClock_continuous",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.tailClock_lipschitz",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.tailClock_at_cut",
+          "line": 34
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.tailClock_mem",
+          "line": 37
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_before",
+          "line": 40
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_after",
+          "line": 43
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_middle",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_stopped",
+          "line": 60
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_initial",
+          "line": 68
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_terminal",
+          "line": 71
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_lipschitz",
+          "line": 75
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.lipschitz_boundedVariation",
+          "line": 112
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.variation_shift",
+          "line": 116
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_variation_identity",
+          "line": 127
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_variation_strict",
+          "line": 152
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_variation_strict_of_nonconstant",
+          "line": 162
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVLoopErase.lipSignature",
+          "line": 174
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.lipSignature_congr",
+          "line": 178
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.lipSignature_endpoint_congr",
+          "line": 185
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.lipSignature_split",
+          "line": 192
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.lipSignature_reparametrize",
+          "line": 198
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_tail_signature",
+          "line": 207
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVLoopErase.eraseClock",
+          "line": 221
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseClock_mem",
+          "line": 223
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_prefix_signature",
+          "line": 233
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseClock_terminal",
+          "line": 258
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_signature",
+          "line": 264
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.eraseLoop_based_prefix_mem",
+          "line": 275
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVLoopErase.exists_shorter_representative",
+          "line": 289
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVReduced.inc",
+      "namespace": "LinearInputCurveWordBVReduced",
+      "sha256": "7af51157159054980f780ee230aafcbc8a659f7c7ae7993d630f3904fcbb58ae",
+      "theorem_count": 13,
+      "declaration_count": 14,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.unitLipschitz_variation_le",
+          "line": 15
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.unitLipschitz_variation_ne_top",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.unitLipschitz_variation_toReal_le",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.unitLipschitz_variation_add",
+          "line": 36
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.arcLength_variation_subinterval",
+          "line": 48
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.basedPrefix_eq_imp_prefix_eq",
+          "line": 63
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.prefixSignature_continuous_time",
+          "line": 96
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.basedPrefixSignature_continuous_time",
+          "line": 109
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVReduced.basedSignatureRange",
+          "line": 119
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.basedSignatureRange_isCompact",
+          "line": 124
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.exists_minimal_in_actual_signature_image",
+          "line": 133
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.prefixSignature_eq_lipSignature",
+          "line": 153
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.minimal_representative_constant_on_signature_fiber",
+          "line": 163
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVReduced.exists_reduced_in_actual_signature_image",
+          "line": 246
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVArc.inc",
+      "namespace": "LinearInputCurveWordBVArc",
+      "sha256": "890e89a2c3f1e4133f576e4c99531fa849ffe8d00128cf7c748bf77010342b33",
+      "theorem_count": 6,
+      "declaration_count": 6,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArc.variationClock_eq_of_constant",
+          "line": 16
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArc.lipSignature_arcLength_prefix",
+          "line": 35
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArc.arcLength_based_lift_injective",
+          "line": 60
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArc.arcLength_signature_range_factorization",
+          "line": 96
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArc.exists_arcLength_injective_lift",
+          "line": 144
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArc.exists_injective_signature_lift_in_closed_range",
+          "line": 174
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVOrientation.inc",
+      "namespace": "LinearInputCurveWordBVOrientation",
+      "sha256": "9060480c6470082d744b29d06bc62fc6bee49df5888544bab8512f1a1aa1207c",
+      "theorem_count": 2,
+      "declaration_count": 2,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVOrientation.oriented_comp_boundedVariation",
+          "line": 10
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVOrientation.pathSignature_oriented_reparametrize",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "namespace": "LinearInputCurveWordGeodesicTree",
+      "sha256": "f7d22b2bf2675da99cbe0518ea872186b0768e883e93a1ee675dbb07b207909f",
+      "theorem_count": 9,
+      "declaration_count": 11,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordGeodesicTree.segment",
+          "line": 21
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordGeodesicTree.ThinTriangles",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.path_dist_source",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.path_dist_target",
+          "line": 32
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.dist_add_of_mem_segment",
+          "line": 38
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.rootProduct_nonnegative",
+          "line": 44
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.rootProduct_le_right",
+          "line": 50
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.initial_point_mem",
+          "line": 59
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.thin_rootProduct_min",
+          "line": 73
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.fourPoint_of_rootProduct_min",
+          "line": 97
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordGeodesicTree.fourPoint_of_thin_geodesics",
+          "line": 111
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "namespace": "LinearInputCurveWordBVArcUnique",
+      "sha256": "fd5e0df19a0d955a2649513a9d3d9cd1e2bcc20d9bbd1491e04928c0ed93a21a",
+      "theorem_count": 24,
+      "declaration_count": 26,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.exists_disjoint_arc_excursion",
+          "line": 16
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter",
+          "line": 51
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter_continuous",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter_zero",
+          "line": 56
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter_one",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter_mem",
+          "line": 60
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter_injective",
+          "line": 73
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop",
+          "line": 78
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_left",
+          "line": 81
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_right",
+          "line": 84
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_continuous",
+          "line": 94
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_closed",
+          "line": 106
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.arcParameter_in_ambient",
+          "line": 114
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.disjoint_excursion_crossing",
+          "line": 120
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_simple",
+          "line": 155
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.product_left_injective",
+          "line": 197
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.shiftedArcParameter_oriented",
+          "line": 222
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_boundedVariation",
+          "line": 235
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.twoArcLoop_signature",
+          "line": 255
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.represented_signature_singleton",
+          "line": 320
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.represented_lift_point_eq",
+          "line": 328
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.represented_lift_continuous",
+          "line": 344
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.represented_injective_signature_image_subset",
+          "line": 357
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.represented_injective_signature_images_eq",
+          "line": 426
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.exists_lipSignature_representation",
+          "line": 449
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVArcUnique.injective_lipSignature_ranges_eq",
+          "line": 471
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "namespace": "LinearInputCurveWordBVIntrinsic",
+      "sha256": "bdf294af0c8cdd4b3bfe95caf9002c3a22c6793e636b3a2088afe408d669227a",
+      "theorem_count": 96,
+      "declaration_count": 124,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.stoppedClass",
+          "line": 24
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.stoppedClass_isClosed",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.terminal_mem_stoppedClass",
+          "line": 43
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.exists_minimal_stopping_time",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_same",
+          "line": 64
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.constant_lipschitz",
+          "line": 68
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_constant",
+          "line": 75
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.translate_lipschitz",
+          "line": 80
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_translate",
+          "line": 88
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shift_lipschitz",
+          "line": 105
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_shift",
+          "line": 111
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_nil",
+          "line": 131
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_singleton",
+          "line": 135
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.target_nil",
+          "line": 153
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.firstLevel_increment",
+          "line": 158
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.firstLevel_bound",
+          "line": 167
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.source_mem",
+          "line": 181
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.target_mem",
+          "line": 186
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.refl",
+          "line": 189
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.controlled",
+          "line": 203
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.controlled_eq",
+          "line": 209
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.controlled_prefix",
+          "line": 213
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.controlled_admissible",
+          "line": 221
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.stoppedClass_constant",
+          "line": 233
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.stoppedClass_terminal",
+          "line": 243
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.routeOfStopped",
+          "line": 261
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.clamp_lipschitz",
+          "line": 281
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.paddedCurve",
+          "line": 288
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.paddedCurve_lipschitz",
+          "line": 291
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.paddedCurve_initial",
+          "line": 296
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.paddedControlled",
+          "line": 301
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.paddedControlled_prefix",
+          "line": 308
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.paddedControlled_stopped",
+          "line": 328
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.exists_shortest_route",
+          "line": 353
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.joinCurve_lipschitz",
+          "line": 365
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.concatTail",
+          "line": 401
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.concatTail_lipschitz",
+          "line": 404
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.concatTail_matches",
+          "line": 409
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.concatCurve",
+          "line": 412
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.concatCurve_lipschitz",
+          "line": 415
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_interval_congr",
+          "line": 421
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.concatTail_signature",
+          "line": 429
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.concatCurve_prefix_left",
+          "line": 440
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.concatCurve_prefix_right",
+          "line": 447
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.join",
+          "line": 458
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.join_duration",
+          "line": 481
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.mono",
+          "line": 484
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.copy",
+          "line": 488
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.copy_duration",
+          "line": 494
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefix",
+          "line": 500
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefix_duration",
+          "line": 511
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.reverseClock_lipschitz",
+          "line": 514
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.reverseCurve",
+          "line": 520
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.reverseCurve_lipschitz",
+          "line": 522
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.reverseCurve_initial",
+          "line": 528
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.reverseCurve_based_prefix",
+          "line": 533
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.reverse",
+          "line": 569
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.reverse_duration",
+          "line": 589
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.reverse_prefix",
+          "line": 592
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.subCurve",
+          "line": 599
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.subCurve_lipschitz",
+          "line": 601
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.subCurve_initial",
+          "line": 606
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.lipSignature_bounds_congr",
+          "line": 609
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.subCurve_signature",
+          "line": 616
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.subCurve_based_prefix",
+          "line": 626
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.subpath",
+          "line": 633
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.subpath_duration",
+          "line": 652
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.subpath_prefix",
+          "line": 656
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.subpath_shortest",
+          "line": 665
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist",
+          "line": 680
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.routeDurations_bddBelow",
+          "line": 683
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist_le_duration",
+          "line": 689
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist_nonneg",
+          "line": 694
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRouteOfNonempty",
+          "line": 703
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRouteOfNonempty_minimal",
+          "line": 707
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRouteOfNonempty_duration",
+          "line": 712
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist_self",
+          "line": 723
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.eq_of_duration_zero",
+          "line": 728
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.eq_of_intrinsicDist_zero",
+          "line": 735
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist_triangle",
+          "line": 741
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist_comm",
+          "line": 749
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.ext",
+          "line": 766
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.route",
+          "line": 774
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.dist_eq",
+          "line": 788
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.value_injective",
+          "line": 792
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.dist_le_duration",
+          "line": 797
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRoute",
+          "line": 801
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRoute_duration",
+          "line": 805
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRoute_minimal",
+          "line": 809
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.ofRoute",
+          "line": 813
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.root",
+          "line": 817
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint",
+          "line": 821
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_value",
+          "line": 825
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_zero",
+          "line": 829
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_last",
+          "line": 836
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_closed",
+          "line": 841
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.value_nil",
+          "line": 847
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.firstLevel_lipschitz",
+          "line": 851
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_dist_le",
+          "line": 859
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_lipschitz",
+          "line": 867
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_dist_of_le",
+          "line": 880
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.prefixPoint_isometry",
+          "line": 890
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.embed",
+          "line": 906
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.IntrinsicPoint.embed_isometry",
+          "line": 911
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicIndex",
+          "line": 915
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicIndex_isometry",
+          "line": 920
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicIndex_surjective",
+          "line": 924
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicPoint",
+          "line": 930
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicPoint_isometry",
+          "line": 935
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicPoint_value",
+          "line": 941
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicPoint_source",
+          "line": 947
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicPoint_target",
+          "line": 953
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicGeodesicSystem",
+          "line": 962
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRoute_lift_injective",
+          "line": 970
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.geodesicPoint_value_range",
+          "line": 979
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.exists_arcLength",
+          "line": 994
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.arcLengthRoute",
+          "line": 1028
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.arcLengthRoute_duration",
+          "line": 1032
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.arcLengthRoute_variation",
+          "line": 1037
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.arcLengthRoute_image",
+          "line": 1042
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.shortest_variation",
+          "line": 1052
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.Route.shortest_variation_minimal",
+          "line": 1060
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.intrinsicDist_le_variation",
+          "line": 1067
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsic.shortestRoute_variation",
+          "line": 1072
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "namespace": "LinearInputCurveWordBVIntrinsicTree",
+      "sha256": "38943bdffb92059f622ef94bb00a114d5982b8faafad4d53d838e3d2e2a23278",
+      "theorem_count": 10,
+      "declaration_count": 13,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeLift",
+          "line": 17
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeImage",
+          "line": 21
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.route_prefix_eq_controlled",
+          "line": 24
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeLift_continuous",
+          "line": 39
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeImage_isCompact",
+          "line": 49
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeImage_subset",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.exists_injective_route",
+          "line": 60
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.injective_route_images_eq",
+          "line": 86
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.injective_route_image_subset",
+          "line": 98
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeInImage",
+          "line": 106
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.routeImage_subset_union",
+          "line": 114
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.fourPoint_of_actual_signature_geodesics",
+          "line": 131
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVIntrinsicTree.intrinsic_fourPoint",
+          "line": 158
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "namespace": "LinearInputCurveWordBVHamblyLyons",
+      "sha256": "1950339aa39218755811bdf885f748f4b65f87ebd16da020338abc931eb1cc2c",
+      "theorem_count": 27,
+      "declaration_count": 31,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix",
+          "line": 19
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_eq_stieltjes",
+          "line": 25
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_continuous",
+          "line": 38
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_nil",
+          "line": 49
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_singleton",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_initial",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_terminal",
+          "line": 64
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_range_isCompact",
+          "line": 68
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeHeight_congr",
+          "line": 74
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeHeight_reparametrize",
+          "line": 87
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeLike_reparametrize",
+          "line": 107
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.pathSignature_arcLength_prefix",
+          "line": 118
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeLike_of_arcLength_factor",
+          "line": 141
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.canonicalPrefix_arcLength_factorization",
+          "line": 155
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.variationClock_sub",
+          "line": 183
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.arcLength_lift_distance_le_variation",
+          "line": 197
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.arcLength_lift_continuousOn",
+          "line": 209
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeHeight_of_dominated_fourPoint_lift",
+          "line": 219
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeLike_of_realized_signature_metric",
+          "line": 235
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVHamblyLyons.lipSignatureImage",
+          "line": 260
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.lipSignatureImage_isCompact",
+          "line": 264
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.lipSignatureImage_isClosed",
+          "line": 269
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVHamblyLyons.normalizedLoopRoute",
+          "line": 275
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.normalizedLoopRoute_prefix",
+          "line": 292
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVHamblyLyons.normalizedLoopLift",
+          "line": 299
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.normalizedLoopLift_lipschitz",
+          "line": 306
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.normalizedLoopLift_value",
+          "line": 314
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.normalizedLoopLift_closed",
+          "line": 322
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeLike_of_lipSignature_eq_unit",
+          "line": 333
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeLike_of_pathSignature_eq_unit",
+          "line": 348
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVHamblyLyons.treeLike_iff_pathSignature_eq_unit",
+          "line": 364
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "namespace": "LinearInputCurveWordBVEquivalence",
+      "sha256": "ecc3777633099ca847d9b470407dc2688760202db750ec40185e247e2b464c54",
+      "theorem_count": 7,
+      "declaration_count": 7,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.pathSignature_eq_unit_iff_nonempty_zero",
+          "line": 14
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.displacement_eq_of_pathSignature_eq",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.endpoint_eq_of_pathSignature_eq",
+          "line": 44
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.pathSignature_eq_unit_iff_treeLike",
+          "line": 61
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.nonempty_signature_zero_iff_treeLike",
+          "line": 68
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.pathSignature_eq_iff_join_reverse_treeLike",
+          "line": 77
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVEquivalence.based_pathSignature_eq_iff_tree_equivalent",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "namespace": "LinearInputCurveWordBVCoordinates",
+      "sha256": "a1894e4bb2ab8a0acf62d3305fd33c4552ad38d3db1d0bb51def45581af88776",
+      "theorem_count": 6,
+      "declaration_count": 8,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCoordinates.treeLike_linearEquiv_iff",
+          "line": 13
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCoordinates.coordinate_boundedVariation",
+          "line": 25
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCoordinates.coordinate_continuousOn",
+          "line": 30
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCoordinates.signatureInCoordinates",
+          "line": 39
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCoordinates.signatureInCoordinates_eq_unit_iff",
+          "line": 45
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCoordinates.signature_triviality_coordinate_independent",
+          "line": 62
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordBVCoordinates.finiteDimensionalSignature",
+          "line": 73
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordBVCoordinates.finiteDimensionalSignature_eq_unit_iff",
+          "line": 81
+        }
+      ]
     }
   ],
-  "theorem_count": 767,
-  "declaration_count": 953
+  "theorem_count": 1057,
+  "declaration_count": 1300
 }
