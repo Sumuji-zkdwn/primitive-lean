@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "1683b54db2514a09da6125904e0dfdd193906393",
+  "main_commit": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -5207,6 +5207,833 @@
       "sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60"
     },
     {
+      "id": "main:linear_input/lean_check/CurveWordArcGenerating.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordArcGenerating.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordArcGenerating",
+      "declarations": [
+        "Exponent",
+        "LaurentWeights",
+        "stateExponent",
+        "edgeExponent",
+        "monomial",
+        "arcWeight",
+        "monomial_zero",
+        "monomial_add",
+        "stateExponent_step",
+        "monomial_fold",
+        "arc_word_monomial",
+        "arc_coefficient_counts_words",
+        "arc_matrix_coefficients_exact",
+        "arc_endpoint_cost_series_rational"
+      ],
+      "imports": [],
+      "sha256": "2ce39ed55d4563acb3f47f5465c60ba6533d3c47f4e30e9dd8815b989013658b"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVAlgebra",
+      "declarations": [
+        "signature_groupLike",
+        "signature_product",
+        "signature_logarithm_primitive",
+        "signature_logarithm_completed_lie",
+        "signature_logarithm_chen",
+        "signature_bch_completed_lie"
+      ],
+      "imports": [],
+      "sha256": "47ffff437e607590ee6e2a792a185e1b45d69f3a140cb6dd14eed2683701f241"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVArc.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVArc",
+      "declarations": [
+        "variationClock_eq_of_constant",
+        "lipSignature_arcLength_prefix",
+        "arcLength_based_lift_injective",
+        "arcLength_signature_range_factorization",
+        "exists_arcLength_injective_lift",
+        "exists_injective_signature_lift_in_closed_range"
+      ],
+      "imports": [],
+      "sha256": "890e89a2c3f1e4133f576e4c99531fa849ffe8d00128cf7c748bf77010342b33"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVArcUnique",
+      "declarations": [
+        "exists_disjoint_arc_excursion",
+        "arcParameter",
+        "arcParameter_continuous",
+        "arcParameter_zero",
+        "arcParameter_one",
+        "arcParameter_mem",
+        "arcParameter_injective",
+        "twoArcLoop",
+        "twoArcLoop_left",
+        "twoArcLoop_right",
+        "twoArcLoop_continuous",
+        "twoArcLoop_closed",
+        "arcParameter_in_ambient",
+        "disjoint_excursion_crossing",
+        "twoArcLoop_simple",
+        "product_left_injective",
+        "shiftedArcParameter_oriented",
+        "twoArcLoop_boundedVariation",
+        "twoArcLoop_signature",
+        "represented_signature_singleton",
+        "represented_lift_point_eq",
+        "represented_lift_continuous",
+        "represented_injective_signature_image_subset",
+        "represented_injective_signature_images_eq",
+        "exists_lipSignature_representation",
+        "injective_lipSignature_ranges_eq"
+      ],
+      "imports": [],
+      "sha256": "fd5e0df19a0d955a2649513a9d3d9cd1e2bcc20d9bbd1491e04928c0ed93a21a"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVCanonical.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVCanonical",
+      "declarations": [
+        "SameIncrementsOn",
+        "SameIncrementsOn.mono",
+        "restricted_measure_sum_eq",
+        "stieltjesIntegral_independent_on",
+        "stieltjesIntegral_congr_on",
+        "reverseStieltjes_independent_on",
+        "stieltjesSignature_independent_on",
+        "RepresentsOn",
+        "representsOn_of_values",
+        "RepresentsOn.sameIncrementsOn",
+        "canonicalPositive",
+        "canonicalNegative",
+        "canonicalPositive_continuous",
+        "canonicalNegative_continuous",
+        "canonical_difference",
+        "canonical_represents",
+        "curveSignature",
+        "curveSignature_eq_representation",
+        "curveSignature_congr",
+        "coordinate_boundedVariation",
+        "coordinate_continuousOn",
+        "pathSignature",
+        "pathSignature_eq_representation",
+        "clock_mapsTo",
+        "clock_endpoints",
+        "reparam_boundedVariation",
+        "reparam_continuousOn",
+        "curveSignature_reparametrize",
+        "pathSignature_reparametrize",
+        "pathSignature_congr",
+        "c1_representsOn",
+        "curveSignature_eq_c1",
+        "pathSignature_eq_c1",
+        "arcLength_signature_factorization"
+      ],
+      "imports": [],
+      "sha256": "91511adf72ac392eba0f66f623f303b493ab85f3d136a7fd727f3fd72fa1feca"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVChen.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVChen",
+      "declarations": [
+        "stieltjesIntegral_add_adjacent",
+        "stieltjesIntegral_mul_const",
+        "stieltjesIntegral_finset_sum",
+        "reverseStieltjes_split",
+        "stieltjesSignature_chen"
+      ],
+      "imports": [],
+      "sha256": "762b4500cf9d316a3bfd84299a6deeb4633fb66379ea45abf5bc109c5ca9cc62"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVCompactness.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVCompactness",
+      "declarations": [
+        "speedControlledPaths",
+        "speedControlledPaths_isClosed",
+        "speedControlledPaths_equicontinuous",
+        "speedControlledPaths_isCompact",
+        "pathExtension",
+        "pathExtension_lipschitz",
+        "pathExtension_continuous",
+        "pathExtension_boundedVariation_interval",
+        "pathExtension_clamp",
+        "pathExtension_boundedVariation",
+        "pathExtension_variation_lowerSemicontinuous",
+        "exists_minimal_variation_in_closed_class",
+        "lipschitz_variation_le",
+        "coordinateExtension_boundedVariation",
+        "coordinateExtension_continuous",
+        "coordinateExtension_variation_le",
+        "prefixSignature",
+        "prefixSignature_continuous",
+        "basedPrefixSignature",
+        "basedPrefixSignature_continuous",
+        "signatureRangeClass",
+        "signatureRangeClass_isClosed",
+        "exists_minimal_signature_range_representative",
+        "speedControlledOfLipschitz",
+        "speedControlledOfLipschitz_eq",
+        "prefixSignature_eq_pathSignature"
+      ],
+      "imports": [],
+      "sha256": "44d31f274f9c04ae875e4018b6d7e0451d10b65a6c2617ea527f407d1fea7bad"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVCoordinates",
+      "declarations": [
+        "treeLike_linearEquiv_iff",
+        "coordinate_boundedVariation",
+        "coordinate_continuousOn",
+        "signatureInCoordinates",
+        "signatureInCoordinates_eq_unit_iff",
+        "signature_triviality_coordinate_independent",
+        "finiteDimensionalSignature",
+        "finiteDimensionalSignature_eq_unit_iff"
+      ],
+      "imports": [],
+      "sha256": "a1894e4bb2ab8a0acf62d3305fd33c4552ad38d3db1d0bb51def45581af88776"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVEquivalence",
+      "declarations": [
+        "pathSignature_eq_unit_iff_nonempty_zero",
+        "displacement_eq_of_pathSignature_eq",
+        "endpoint_eq_of_pathSignature_eq",
+        "pathSignature_eq_unit_iff_treeLike",
+        "nonempty_signature_zero_iff_treeLike",
+        "pathSignature_eq_iff_join_reverse_treeLike",
+        "based_pathSignature_eq_iff_tree_equivalent"
+      ],
+      "imports": [],
+      "sha256": "ecc3777633099ca847d9b470407dc2688760202db750ec40185e247e2b464c54"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVHamblyLyons",
+      "declarations": [
+        "canonicalPrefix",
+        "canonicalPrefix_eq_stieltjes",
+        "canonicalPrefix_continuous",
+        "canonicalPrefix_nil",
+        "canonicalPrefix_singleton",
+        "canonicalPrefix_initial",
+        "canonicalPrefix_terminal",
+        "canonicalPrefix_range_isCompact",
+        "treeHeight_congr",
+        "treeHeight_reparametrize",
+        "treeLike_reparametrize",
+        "pathSignature_arcLength_prefix",
+        "treeLike_of_arcLength_factor",
+        "canonicalPrefix_arcLength_factorization",
+        "variationClock_sub",
+        "arcLength_lift_distance_le_variation",
+        "arcLength_lift_continuousOn",
+        "treeHeight_of_dominated_fourPoint_lift",
+        "treeLike_of_realized_signature_metric",
+        "lipSignatureImage",
+        "lipSignatureImage_isCompact",
+        "lipSignatureImage_isClosed",
+        "normalizedLoopRoute",
+        "normalizedLoopRoute_prefix",
+        "normalizedLoopLift",
+        "normalizedLoopLift_lipschitz",
+        "normalizedLoopLift_value",
+        "normalizedLoopLift_closed",
+        "treeLike_of_lipSignature_eq_unit",
+        "treeLike_of_pathSignature_eq_unit",
+        "treeLike_iff_pathSignature_eq_unit"
+      ],
+      "imports": [],
+      "sha256": "1950339aa39218755811bdf885f748f4b65f87ebd16da020338abc931eb1cc2c"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVIntrinsic",
+      "declarations": [
+        "stoppedClass",
+        "stoppedClass_isClosed",
+        "terminal_mem_stoppedClass",
+        "exists_minimal_stopping_time",
+        "lipSignature_same",
+        "constant_lipschitz",
+        "lipSignature_constant",
+        "translate_lipschitz",
+        "lipSignature_translate",
+        "shift_lipschitz",
+        "lipSignature_shift",
+        "Route",
+        "lipSignature_nil",
+        "lipSignature_singleton",
+        "Route.target_nil",
+        "Route.firstLevel_increment",
+        "Route.firstLevel_bound",
+        "Route.source_mem",
+        "Route.target_mem",
+        "Route.refl",
+        "Route.controlled",
+        "Route.controlled_eq",
+        "Route.controlled_prefix",
+        "Route.controlled_admissible",
+        "stoppedClass_constant",
+        "stoppedClass_terminal",
+        "routeOfStopped",
+        "clamp_lipschitz",
+        "Route.paddedCurve",
+        "Route.paddedCurve_lipschitz",
+        "Route.paddedCurve_initial",
+        "Route.paddedControlled",
+        "Route.paddedControlled_prefix",
+        "Route.paddedControlled_stopped",
+        "exists_shortest_route",
+        "joinCurve_lipschitz",
+        "concatTail",
+        "concatTail_lipschitz",
+        "concatTail_matches",
+        "concatCurve",
+        "concatCurve_lipschitz",
+        "lipSignature_interval_congr",
+        "concatTail_signature",
+        "concatCurve_prefix_left",
+        "concatCurve_prefix_right",
+        "Route.join",
+        "Route.join_duration",
+        "Route.mono",
+        "Route.copy",
+        "Route.copy_duration",
+        "Route.prefix",
+        "Route.prefix_duration",
+        "reverseClock_lipschitz",
+        "reverseCurve",
+        "reverseCurve_lipschitz",
+        "reverseCurve_initial",
+        "reverseCurve_based_prefix",
+        "Route.reverse",
+        "Route.reverse_duration",
+        "Route.reverse_prefix",
+        "subCurve",
+        "subCurve_lipschitz",
+        "subCurve_initial",
+        "lipSignature_bounds_congr",
+        "subCurve_signature",
+        "subCurve_based_prefix",
+        "Route.subpath",
+        "Route.subpath_duration",
+        "Route.subpath_prefix",
+        "Route.subpath_shortest",
+        "intrinsicDist",
+        "routeDurations_bddBelow",
+        "intrinsicDist_le_duration",
+        "intrinsicDist_nonneg",
+        "shortestRouteOfNonempty",
+        "shortestRouteOfNonempty_minimal",
+        "shortestRouteOfNonempty_duration",
+        "intrinsicDist_self",
+        "Route.eq_of_duration_zero",
+        "eq_of_intrinsicDist_zero",
+        "intrinsicDist_triangle",
+        "intrinsicDist_comm",
+        "IntrinsicPoint",
+        "IntrinsicPoint.ext",
+        "IntrinsicPoint.route",
+        "IntrinsicPoint.dist_eq",
+        "IntrinsicPoint.value_injective",
+        "IntrinsicPoint.dist_le_duration",
+        "shortestRoute",
+        "shortestRoute_duration",
+        "shortestRoute_minimal",
+        "IntrinsicPoint.ofRoute",
+        "IntrinsicPoint.root",
+        "Route.prefixPoint",
+        "Route.prefixPoint_value",
+        "Route.prefixPoint_zero",
+        "Route.prefixPoint_last",
+        "Route.prefixPoint_closed",
+        "IntrinsicPoint.value_nil",
+        "firstLevel_lipschitz",
+        "Route.prefixPoint_dist_le",
+        "Route.prefixPoint_lipschitz",
+        "Route.prefixPoint_dist_of_le",
+        "Route.prefixPoint_isometry",
+        "IntrinsicPoint.embed",
+        "IntrinsicPoint.embed_isometry",
+        "geodesicIndex",
+        "geodesicIndex_isometry",
+        "geodesicIndex_surjective",
+        "geodesicPoint",
+        "geodesicPoint_isometry",
+        "geodesicPoint_value",
+        "geodesicPoint_source",
+        "geodesicPoint_target",
+        "intrinsicGeodesicSystem",
+        "shortestRoute_lift_injective",
+        "geodesicPoint_value_range",
+        "Route.exists_arcLength",
+        "Route.arcLengthRoute",
+        "Route.arcLengthRoute_duration",
+        "Route.arcLengthRoute_variation",
+        "Route.arcLengthRoute_image",
+        "Route.shortest_variation",
+        "Route.shortest_variation_minimal",
+        "intrinsicDist_le_variation",
+        "shortestRoute_variation"
+      ],
+      "imports": [],
+      "sha256": "bdf294af0c8cdd4b3bfe95caf9002c3a22c6793e636b3a2088afe408d669227a"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVIntrinsicTree",
+      "declarations": [
+        "routeLift",
+        "routeImage",
+        "route_prefix_eq_controlled",
+        "routeLift_continuous",
+        "routeImage_isCompact",
+        "routeImage_subset",
+        "exists_injective_route",
+        "injective_route_images_eq",
+        "injective_route_image_subset",
+        "routeInImage",
+        "routeImage_subset_union",
+        "fourPoint_of_actual_signature_geodesics",
+        "intrinsic_fourPoint"
+      ],
+      "imports": [],
+      "sha256": "38943bdffb92059f622ef94bb00a114d5982b8faafad4d53d838e3d2e2a23278"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVLoopErase",
+      "declarations": [
+        "tailClock",
+        "eraseLoop",
+        "tailClock_monotone",
+        "tailClock_continuous",
+        "tailClock_lipschitz",
+        "tailClock_at_cut",
+        "tailClock_mem",
+        "eraseLoop_before",
+        "eraseLoop_after",
+        "eraseLoop_middle",
+        "eraseLoop_stopped",
+        "eraseLoop_initial",
+        "eraseLoop_terminal",
+        "eraseLoop_lipschitz",
+        "lipschitz_boundedVariation",
+        "variation_shift",
+        "eraseLoop_variation_identity",
+        "eraseLoop_variation_strict",
+        "eraseLoop_variation_strict_of_nonconstant",
+        "lipSignature",
+        "lipSignature_congr",
+        "lipSignature_endpoint_congr",
+        "lipSignature_split",
+        "lipSignature_reparametrize",
+        "eraseLoop_tail_signature",
+        "eraseClock",
+        "eraseClock_mem",
+        "eraseLoop_prefix_signature",
+        "eraseClock_terminal",
+        "eraseLoop_signature",
+        "eraseLoop_based_prefix_mem",
+        "exists_shorter_representative"
+      ],
+      "imports": [],
+      "sha256": "0d11b32a522309f58273ff4cc655c2009af18052dbeed5d1c58d11b0dcdb4c76"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVOrientation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVOrientation",
+      "declarations": [
+        "oriented_comp_boundedVariation",
+        "pathSignature_oriented_reparametrize"
+      ],
+      "imports": [],
+      "sha256": "9060480c6470082d744b29d06bc62fc6bee49df5888544bab8512f1a1aa1207c"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVPathOperations",
+      "declarations": [
+        "reverseTime",
+        "reversePath",
+        "reverseTime_continuous",
+        "reverseTime_antitone",
+        "reverseTime_mem",
+        "reverseTime_involutive",
+        "reverseTime_image",
+        "reversePath_variation",
+        "reversePath_boundedVariation",
+        "reversePath_continuousOn",
+        "reversePath_reversePath",
+        "joinCurve",
+        "joinCurve_left",
+        "joinCurve_right",
+        "joinCurve_continuousOn",
+        "joinCurve_variation",
+        "joinCurve_boundedVariation",
+        "pathSignature_split",
+        "pathSignature_join",
+        "reversePath_length",
+        "joinCurve_length",
+        "retrace_treeLike",
+        "reparam_mapsTo_endpoints",
+        "reparam_bv_endpoints",
+        "reparam_cont_endpoints",
+        "pathSignature_reparametrize_endpoints",
+        "retraceTime",
+        "retraceTime_continuous",
+        "retraceTime_left",
+        "retraceTime_right",
+        "retraceTime_mem",
+        "mirrorPath",
+        "join_mirror_eq_retrace",
+        "mirrorPath_boundedVariation",
+        "mirrorPath_continuousOn",
+        "mirrorPath_matches",
+        "backtrack_treeLike",
+        "pathSignature_mirror",
+        "pathSignature_product_reverse",
+        "stieltjesSignature_same",
+        "stieltjesSignature_inverse",
+        "pathSignature_reverse",
+        "pathSignature_reverse_product",
+        "pathSignature_eq_iff_join_reverse_unit",
+        "join_reverse_endpoints",
+        "join_reverse_closed",
+        "same_signature_of_treeLike_join_reverse"
+      ],
+      "imports": [],
+      "sha256": "a32d3dd682609a97c2746f7624f0f6a61bb42a3664ef4b0b13c44bfae4f66014"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVReduced.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVReduced",
+      "declarations": [
+        "unitLipschitz_variation_le",
+        "unitLipschitz_variation_ne_top",
+        "unitLipschitz_variation_toReal_le",
+        "unitLipschitz_variation_add",
+        "arcLength_variation_subinterval",
+        "basedPrefix_eq_imp_prefix_eq",
+        "prefixSignature_continuous_time",
+        "basedPrefixSignature_continuous_time",
+        "basedSignatureRange",
+        "basedSignatureRange_isCompact",
+        "exists_minimal_in_actual_signature_image",
+        "prefixSignature_eq_lipSignature",
+        "minimal_representative_constant_on_signature_fiber",
+        "exists_reduced_in_actual_signature_image"
+      ],
+      "imports": [],
+      "sha256": "7af51157159054980f780ee230aafcbc8a659f7c7ae7993d630f3904fcbb58ae"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVReparam.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVReparam.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVReparam",
+      "declarations": [
+        "rightEndInverse",
+        "sublevel_nonempty",
+        "sublevel_bddAbove",
+        "rightEndInverse_spec",
+        "preimage_Iic",
+        "preimage_Ioc",
+        "reparam",
+        "reparam_map_measure",
+        "reparam_map_restrict",
+        "reparam_setIntegral",
+        "reparam_intervalIntegral",
+        "reparam_stieltjesIntegral",
+        "reverseStieltjes_reparam",
+        "stieltjesSignature_reparam",
+        "ontoExtension",
+        "ontoExtension_eq",
+        "ontoExtension_continuous",
+        "ontoExtension_monotone",
+        "ontoExtension_surjective",
+        "stieltjesSignature_interval_reparam"
+      ],
+      "imports": [],
+      "sha256": "968b310cefe103155b89c9676d0426c8f2fb1193ee2be21d84885d7ddd3a9858"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVShuffle.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVShuffle",
+      "declarations": [
+        "integral_triangle_product",
+        "integral_restrict_Iic",
+        "intervalIntegral_triangle_product",
+        "stieltjes_integration_by_parts",
+        "stieltjesIntegral_congr",
+        "stieltjesIntegral_add",
+        "stieltjesIntegral_list_sum",
+        "sum_reverseStieltjes_cons",
+        "reverseStieltjes_shuffle",
+        "stieltjesSignature_shuffle"
+      ],
+      "imports": [],
+      "sha256": "dfeb7156a1a2df8d63bdc3a2d3f20428e2596bf0672f78e76936a5d3473ff607"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVSignature.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVSignature",
+      "declarations": [
+        "SameIncrements",
+        "continuous_stieltjes_noAtoms",
+        "primitive_stieltjes_continuous",
+        "stieltjesIntegral_continuous",
+        "sameIncrements_measure_sum",
+        "intervalIntegral_add_measure",
+        "stieltjesIntegral_independent",
+        "reverseStieltjes_continuous",
+        "reverseStieltjes_independent",
+        "stieltjesSignature_independent"
+      ],
+      "imports": [],
+      "sha256": "b3f2b79d9af09ecdbb965573b618c9656ae8d330610747c9386c29cd1f00d505"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVSubinterval",
+      "declarations": [
+        "signatureTimeMap",
+        "time_coefficient_descends",
+        "periodic_time_integral_zero",
+        "stieltjesIntegral_one",
+        "constant_of_periodic_integrals_zero",
+        "reverseStieltjes_diagonal",
+        "stieltjesSignature_same",
+        "signature_prefix_constant_of_coordinate_constant",
+        "signature_lift_not_simple_loop",
+        "subinterval_signature_zero_of_prefix_eq",
+        "exists_proper_trivial_subinterval",
+        "curveSignature_subinterval_eq",
+        "curveSignature_singleton",
+        "curveSignature_exists_proper_trivial_subinterval",
+        "pathSignature_exists_proper_trivial_subinterval"
+      ],
+      "imports": [],
+      "sha256": "b403ed17632f0f1c3b406764fd3223fd84e4b46a1613fd4089937b12843f8104"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBVTopology.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBVTopology",
+      "declarations": [
+        "measureLineLinear",
+        "measureLineLinear_bound",
+        "measureLineFunctional",
+        "stieltjesLineFunctional",
+        "stieltjesLineFunctional_apply",
+        "stieltjesLineFunctional_bound",
+        "signatureRange",
+        "signature_lift_continuous",
+        "signaturePoint",
+        "signaturePoint_continuous",
+        "signatureRange_isCompact",
+        "coordinate",
+        "coordinate_empty",
+        "coordinate_shuffle",
+        "signature_coordinates_dense",
+        "integral_coordinate_against_coordinate",
+        "coordinate_one_form_zero_of_trivial_signature",
+        "continuous_one_form_zero_of_trivial_signature"
+      ],
+      "imports": [],
+      "sha256": "51eff4b2b634d0551d0f2c8442c39a82d87d173e05c58e78b61635fd722af197"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordBoundedVariation",
+      "declarations": [
+        "distance_le_variation_difference",
+        "equal_of_variation_clock_eq",
+        "exists_lipschitz_factor_on_variation_range",
+        "variation_clock_continuousOn",
+        "variationClock",
+        "variationLength",
+        "variationClock_initial",
+        "variationClock_terminal",
+        "variationClock_monotoneOn",
+        "variationClock_image",
+        "variationClock_mem",
+        "variationParameter",
+        "variationParameter_monotone",
+        "variationParameter_continuous",
+        "variationParameter_surjective",
+        "arcLength_factorization",
+        "boundedVariationOn_of_continuous_derivative",
+        "variation_monotone_surjection",
+        "factor_preserves_variation",
+        "arcLength_factorization_with_length",
+        "clamp",
+        "clamp_mem",
+        "clamp_eq",
+        "clamp_monotone",
+        "clamp_continuous",
+        "constantExtension_boundedVariation",
+        "constantExtension_continuous"
+      ],
+      "imports": [],
+      "sha256": "2f1efa023de0fb4451503b7f4a75ad9c6d0ddfb201ea4444525aabec74e2d793"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordChen.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordChen.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordChen",
+      "declarations": [
+        "reverseIntegral_split",
+        "signature_chen",
+        "shuffles",
+        "shuffles_nil_right",
+        "continuous_list_sum",
+        "integral_list_sum",
+        "reverseIntegral_hasDerivAt",
+        "sum_reverseIntegral_cons",
+        "reverseIntegral_shuffle",
+        "chronologicalShuffles",
+        "signature_shuffle",
+        "shuffles_word_length",
+        "chronologicalShuffles_word_length"
+      ],
+      "imports": [],
+      "sha256": "b916f789273625cc3945a78026b97de7ad7eb56d196790798c14ca58c2795f06"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordCircleWords.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordCircleWords",
+      "declarations": [
+        "sequentialWord",
+        "insertedWord",
+        "curvatureA",
+        "curvatureB",
+        "sequential_angle_first",
+        "sequential_angle_second",
+        "inserted_angle_first",
+        "inserted_angle_middle",
+        "inserted_angle_last",
+        "circlePoint",
+        "point_on_circle_segment",
+        "radiusB",
+        "radiusA_curvatureA",
+        "radiusB_curvatureB",
+        "circlePoint_zero",
+        "sequential_curve_first",
+        "inserted_curve_first",
+        "circlePoint_full_turns",
+        "sequential_join",
+        "sequential_curve_second",
+        "circlePoint_insertion",
+        "inserted_join_first",
+        "inserted_curve_middle",
+        "inserted_join_second",
+        "inserted_curve_last",
+        "curveMoment",
+        "curveMoment_integrand",
+        "curveMoment_add",
+        "circleMoment_arclength",
+        "curveMoment_circle_segment",
+        "curveArea",
+        "curveArea_add",
+        "circleArea_arclength",
+        "curveArea_circle_segment",
+        "curve_integrals_circle_segment",
+        "sequential_integrals_first",
+        "sequential_integrals_second",
+        "inserted_integrals_first",
+        "inserted_integrals_middle",
+        "inserted_integrals_last",
+        "wordMoment",
+        "sequentialWord_length",
+        "insertedWord_length",
+        "sequential_integrals",
+        "inserted_integrals",
+        "actual_word_moment_difference",
+        "actual_words_equal_area",
+        "actual_word_area_value",
+        "actual_words_distinct_moments",
+        "actual_words_same_state",
+        "sequential_state_value",
+        "inserted_state_value",
+        "actual_curve_collision"
+      ],
+      "imports": [],
+      "sha256": "a2d009f7c006dc9975b9b4c03bb93115570eb4f05308ec8097e64c1923c02f86"
+    },
+    {
       "id": "main:linear_input/lean_check/CurveWordCircularMoment.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurveWordCircularMoment.inc",
@@ -5256,6 +6083,110 @@
       "sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0"
     },
     {
+      "id": "main:linear_input/lean_check/CurveWordConvexObservation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordConvexObservation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordConvexObservation",
+      "declarations": [
+        "finiteSupport",
+        "support_bounds_hull",
+        "support_attained",
+        "finiteSupport_eq_of_convexHull_eq",
+        "equal_cost_minimum_eq_support",
+        "equal_cost_hull_minimum",
+        "equal_cost_observation_forgets_hull_interior"
+      ],
+      "imports": [],
+      "sha256": "afd2f2c1eafbc43f4e5dedb16c93a342ebe7989a71fac97c2cf03026a04b2885"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordConvexSeparation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordConvexSeparation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordConvexSeparation",
+      "declarations": [
+        "mem_convexHull_iff_support",
+        "convexHull_eq_iff_support_eq",
+        "convexHull_eq_iff_equal_cost_observations"
+      ],
+      "imports": [],
+      "sha256": "993ec1b58b8ea62ff56f00c9064fe0f831d0c054031a691b499e93646062cee5"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordCoproduct.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordCoproduct",
+      "declarations": [
+        "coproduct_nil_left",
+        "coproduct_nil_right",
+        "coproduct_snoc_snoc",
+        "coproduct_add",
+        "coproduct_const_mul",
+        "coproduct_mul_const",
+        "product_snoc",
+        "BiSeries",
+        "cutSum",
+        "cutSum_add",
+        "cutSum_snoc",
+        "biProduct",
+        "tensor",
+        "biProduct_tensor",
+        "biProduct_add_right",
+        "biProduct_snoc_left",
+        "biProduct_snoc_right",
+        "biProduct_coproduct_snoc_snoc",
+        "coproduct_product",
+        "coproduct_zero",
+        "coproduct_congr_degree",
+        "coproduct_unit",
+        "coproduct_sum",
+        "product_sum_right",
+        "biProduct_rows",
+        "biProduct_empty_left",
+        "biProduct_cons_left",
+        "biProduct_add_left",
+        "biProduct_coefficient_left",
+        "biProduct_assoc",
+        "biProduct_unit_left",
+        "biProduct_unit_right",
+        "biProduct_zero_left",
+        "biProduct_zero_right",
+        "biProduct_const_left",
+        "biProduct_const_right",
+        "BiTensorSeries",
+        "biPower",
+        "biPower_eq_pow",
+        "biExp",
+        "coproduct_power",
+        "coproduct_formalExp",
+        "biPower_one",
+        "biPower_empty",
+        "biPower_congr_through",
+        "biPower_congr_below",
+        "biExp_difference",
+        "biExp_injective",
+        "power_unit",
+        "biPower_tensor",
+        "tensor_left_right_commute",
+        "biTensor_sum_apply",
+        "biTensor_nsmul_apply",
+        "biPower_tensor_sum",
+        "exp_binomial_term",
+        "biExp_tensor_sum",
+        "logarithm_primitive",
+        "signature_logarithm_primitive",
+        "formalExp_groupLike_of_primitive",
+        "groupLike_product",
+        "bch_primitive"
+      ],
+      "imports": [],
+      "sha256": "fef28191c26b130453e8c15bb748821d0310685a3fe9521f0074959c8c68b809"
+    },
+    {
       "id": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurveWordCycleLimit.inc",
@@ -5287,6 +6218,39 @@
       ],
       "imports": [],
       "sha256": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordDirectedGraph",
+      "declarations": [
+        "Walk",
+        "Walk.length",
+        "Walk.finish",
+        "Walk.cost",
+        "Policy",
+        "policyNext",
+        "policyCost",
+        "decode",
+        "decode_length",
+        "decode_finish",
+        "decode_cost",
+        "edgePolicy",
+        "edgePolicy_at",
+        "encode",
+        "encode_length",
+        "encode_finish",
+        "encode_cost",
+        "minimumMean",
+        "optimum",
+        "optimum_attained_and_le",
+        "minimum_closed_walk",
+        "optimum_average_tendsto"
+      ],
+      "imports": [],
+      "sha256": "445ac49f6187a5c455888969fad99a6b25549cfb51d0381ee9b1080f1baec456"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordFinite.inc",
@@ -5382,6 +6346,497 @@
       "sha256": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9"
     },
     {
+      "id": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordFormalSeries.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordFormalSeries",
+      "declarations": [
+        "Series",
+        "product",
+        "unitSeries",
+        "product_empty",
+        "product_cons",
+        "product_add_left",
+        "product_add_right",
+        "product_const_left",
+        "product_const_right",
+        "product_zero_left",
+        "product_zero_right",
+        "product_assoc",
+        "product_unit_left",
+        "product_unit_right",
+        "signature_product",
+        "coproduct",
+        "GroupLike",
+        "Primitive",
+        "signature_groupLike",
+        "power",
+        "power_zero",
+        "power_one",
+        "power_empty",
+        "power_vanishes_above_degree",
+        "formalLog",
+        "formalExp",
+        "formalLog_empty",
+        "formalLog_singleton",
+        "formalLog_pair",
+        "formalExp_empty",
+        "formalExp_singleton",
+        "formalExp_pair",
+        "signature_log_pair",
+        "log_product_pair",
+        "power_congr_through",
+        "formalExp_congr_through",
+        "power_congr_below",
+        "formalExp_difference",
+        "formalExp_injective",
+        "logApprox",
+        "logApprox_empty",
+        "logApprox_above",
+        "logApprox_stable",
+        "exp_logApprox",
+        "logarithm",
+        "logApprox_eq_logarithm",
+        "logarithm_empty",
+        "formalExp_logarithm",
+        "logarithm_formalExp",
+        "logarithm_singleton",
+        "logarithm_pair",
+        "bch",
+        "bch_empty",
+        "formalExp_bch",
+        "bch_assoc",
+        "bch_singleton",
+        "bch_pair",
+        "signature_logarithm_chen"
+      ],
+      "imports": [],
+      "sha256": "6c5b5e02b8f1b33defcc5d289de59506db49276e3228b7f8feb292c70c9c29eb"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordFriedrichs.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordFriedrichs",
+      "declarations": [
+        "dynkin",
+        "dynkin_empty",
+        "unitSeries_eq_zero_of_ne_nil",
+        "dynkin_primitive",
+        "dynkin_add",
+        "dynkin_const_mul",
+        "TensorSeries",
+        "delta",
+        "lieExpansion",
+        "rcons",
+        "lcons",
+        "rcons_nil",
+        "rcons_snoc",
+        "coproduct_zero",
+        "coproduct_zero_fun",
+        "coproduct_rcons",
+        "antipodeConvolution",
+        "antipodeConvolution_empty",
+        "dynkin_rcons_left",
+        "dynkin_rcons_right",
+        "dynkin_rcons",
+        "antipode_rcons_left",
+        "antipode_rcons_right",
+        "antipode_rcons",
+        "rcons_delta",
+        "delta_nil",
+        "coproduct_unit",
+        "dynkin_unit",
+        "antipode_unit",
+        "antipode_delta",
+        "rcons_zero",
+        "lcons_zero",
+        "rcons_unit",
+        "dynkin_singleton",
+        "product_delta_right",
+        "product_delta_left",
+        "nestedLie",
+        "nestedLie_snoc",
+        "dynkin_delta_eq_lieExpansion",
+        "homogeneous",
+        "coproduct_homogeneous",
+        "primitive_homogeneous",
+        "degreeWords",
+        "mem_degreeWords",
+        "homogeneous_delta_sum",
+        "dynkin_zero",
+        "dynkin_sum",
+        "primitiveLieDegree",
+        "primitiveLieDegree_expansion",
+        "primitive_has_freeLie_degrees",
+        "lieDegree",
+        "primitiveLieDegree_mem",
+        "primitive_completed_lie_expansion",
+        "signature_logarithm_completed_lie",
+        "bch_completed_lie"
+      ],
+      "imports": [],
+      "sha256": "7f036b4c8a9d5371f97d19513c5238cb27ef23b5828d2772545fdd9af52249f9"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordGenerating.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordGenerating.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordGenerating",
+      "declarations": [
+        "matrixSeries",
+        "resolvent",
+        "polynomialResolvent",
+        "matrixSeries_coeff",
+        "resolvent_mul_series",
+        "polynomialResolvent_to_series",
+        "denominator_constantCoeff",
+        "determinant_mul_series",
+        "polynomial_denominator_certificate",
+        "rowSeries",
+        "rowSeries_coeff",
+        "row_generating_function_rational"
+      ],
+      "imports": [],
+      "sha256": "465cf8b11d1c8018fe0c5a61e9b084d830ba30184109a26a3c44f64588f49c37"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordGeodesicTree",
+      "declarations": [
+        "GeodesicSystem",
+        "segment",
+        "ThinTriangles",
+        "path_dist_source",
+        "path_dist_target",
+        "dist_add_of_mem_segment",
+        "rootProduct_nonnegative",
+        "rootProduct_le_right",
+        "initial_point_mem",
+        "thin_rootProduct_min",
+        "fourPoint_of_rootProduct_min",
+        "fourPoint_of_thin_geodesics"
+      ],
+      "imports": [],
+      "sha256": "f7d22b2bf2675da99cbe0518ea872186b0768e883e93a1ee675dbb07b207909f"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordGraphLimit.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordGraphLimit.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordGraphLimit",
+      "declarations": [
+        "cycle_between_prefixes",
+        "extract_short_cycle",
+        "boundedWords",
+        "mem_boundedWords",
+        "shortCycles",
+        "mem_shortCycles",
+        "shortCycles_nonempty",
+        "cycleMean",
+        "short_cycle_cost_lower",
+        "minimum_cycle_exists",
+        "remove_cycle_terminal",
+        "remove_cycle_cost",
+        "edgeBound",
+        "abs_edge_le",
+        "edgeBound_nonneg",
+        "word_cost_bounds",
+        "residualBound",
+        "word_cost_lower",
+        "closed_word_cost_lower",
+        "shorter_optimal_cycle_of_repeat",
+        "minimum_simple_cycle_exists",
+        "repeated_length",
+        "upperBound",
+        "words_from_minimum_cycle",
+        "bellman_lower_bound",
+        "bellman_upper_eventually",
+        "bellman_average_tendsto",
+        "exhaustive_average_tendsto"
+      ],
+      "imports": [],
+      "sha256": "023a1fff0eed60635e15b8e7b11d6aec7b57436f995a373526b34a6a2f2109a5"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordHeightMetric.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordHeightMetric.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordHeightMetric",
+      "declarations": [
+        "intervalMinimum",
+        "intervalMinimum_symm",
+        "intervalMinimum_self",
+        "uIcc_subset_interval",
+        "intervalMinimum_attained",
+        "intervalMinimum_le",
+        "min_le_intervalMinimum",
+        "heightDist",
+        "heightDist_self",
+        "heightDist_symm",
+        "heightDist_nonneg",
+        "heightDist_zero_iff",
+        "heightDist_triangle",
+        "similarity_fourPoint",
+        "HeightTime",
+        "heightTime_fourPoint",
+        "HeightQuotient",
+        "heightQuotient_fourPoint",
+        "timeMap",
+        "interval_point_dist_le",
+        "timeMap_continuous",
+        "timeMap_surjective",
+        "quotientTime",
+        "quotientTime_continuous",
+        "quotientTime_surjective",
+        "quotientTime_eq_iff",
+        "heightQuotient_pathConnectedSpace",
+        "curve_dist_le_heightDist",
+        "curve_eq_of_heightDist_zero",
+        "factorCurve",
+        "factorCurve_time",
+        "factorCurve_lipschitz",
+        "height_implies_curve_continuous",
+        "quotientTime_endpoints",
+        "height_metric_factorization"
+      ],
+      "imports": [],
+      "sha256": "aa92c23ed32592c27bb9ae409e28483ea06626ee953b2442c7bdf921fd9cdd1a"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordLaplace.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordLaplace.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordLaplace",
+      "declarations": [
+        "zero_iff_of_mgf_eq",
+        "map_eq_of_mgf_eq",
+        "laplace",
+        "laplace_smul",
+        "measure_eq_of_laplace_eq",
+        "measure_eq_of_laplace_eq_of_integrable",
+        "endpointMeasure",
+        "endpointMeasure_integrable",
+        "integral_endpointMeasure",
+        "laplace_endpointMeasure",
+        "partition_eq_laplace_endpointMeasure",
+        "endpointMeasure_eq_of_exponential_sums_eq",
+        "endpointMeasure_eq_of_partition_eq"
+      ],
+      "imports": [],
+      "sha256": "4569a18082b885b1c1acc8efbfd0848486ded6bfea528d0823e2897f081dd6ce"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordLinearAction.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordLinearAction.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordLinearAction",
+      "declarations": [
+        "reverseIntegral_congr_Icc",
+        "signature_congr_Icc",
+        "reverseTensorAction",
+        "tensorAction",
+        "transformedVelocity",
+        "reverseTensorAction_mul_const",
+        "reverseTensorAction_continuous",
+        "reverseTensorAction_integral",
+        "transformedVelocity_continuous",
+        "reverseIntegral_linear_action",
+        "signature_linear_action",
+        "rotationMatrix",
+        "rotation_velocity_x",
+        "rotation_velocity_y",
+        "signature_rotation_all_degrees",
+        "signature_rotation_chen"
+      ],
+      "imports": [],
+      "sha256": "8f6dbea53ed71e76e18d6d0a610bbed4f80047b1afd97e6df8f5f239589519a6"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordLogFormula.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordLogFormula",
+      "declarations": [
+        "tensor_sum_apply",
+        "tensor_smul_apply",
+        "power_eq_tensorPow",
+        "aeval_coefficient",
+        "aeval_congr_degree",
+        "scalar_coeff_pow_vanishes",
+        "scalar_coeff_trunc_pow",
+        "scalar_coeff_subst_trunc",
+        "coe_comp_eq_subst",
+        "aeval_trunc_exp",
+        "aeval_trunc_log",
+        "formalExp_formalLog",
+        "formalLog_eq_logarithm",
+        "formalLog_formalExp",
+        "formalLog_primitive",
+        "bch_eq_formalLog",
+        "formalLog_completed_lie",
+        "signature_formalLog_completed_lie"
+      ],
+      "imports": [],
+      "sha256": "07f83ed56ccacd0a07279d832ea4dcf873566d9d877ef121ef3c5e2a5dd9aa84"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordPiecewise.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordPiecewise",
+      "declarations": [
+        "letterAngle",
+        "splice",
+        "wordAngle",
+        "wordLength",
+        "totalAngle",
+        "curvePoint",
+        "curve",
+        "wordLength_nonneg",
+        "wordLength_cons",
+        "splice_left",
+        "splice_right",
+        "splice_continuous",
+        "wordAngle_initial",
+        "wordAngle_continuous",
+        "wordAngle_terminal",
+        "curve_unit_speed",
+        "curve_tangent_continuous",
+        "integral_splice",
+        "splice_x_right",
+        "splice_y_right",
+        "splice_point_right",
+        "curve_endpoint_cons",
+        "fold_join",
+        "wordState_cons",
+        "curve_endpoint_wordState",
+        "splice_deriv_left",
+        "splice_deriv_right",
+        "splice_energy_left_ae",
+        "splice_energy_right_ae",
+        "splice_energy_integrable",
+        "splice_energy",
+        "word_energy_integrable",
+        "word_energy_cons",
+        "curve_cost_wordState",
+        "curve_angle_wordState",
+        "curvePoint_continuous",
+        "curvePoint_splice_left",
+        "curvePoint_rotation",
+        "areaIntegrand",
+        "signedArea",
+        "areaIntegrand_eq",
+        "areaIntegrand_continuous",
+        "integral_cross_tangent",
+        "splice_areaIntegrand_right",
+        "signedArea_splice",
+        "areaLetterState",
+        "areaWordState",
+        "areaWordState_first",
+        "curve_area_wordState",
+        "reconstructedState",
+        "reconstructedState_eq_wordState",
+        "reconstructedState_eq_integer_decode",
+        "reconstructedAreaState_eq",
+        "intrinsicArea",
+        "decodeArea",
+        "lattice_area_step",
+        "decodeArea_step",
+        "empty_joinArea",
+        "joinArea_empty",
+        "area_fold_join",
+        "decodeArea_fold",
+        "areaWordState_eq_integer_decode",
+        "curve_area_integer_formula",
+        "reconstructedAreaState_eq_integer_decode",
+        "sixWordLeft",
+        "sixWordRight",
+        "six_word_intrinsicArea",
+        "six_word_same_state",
+        "six_word_actual_area_difference",
+        "six_word_actual_areas_distinct"
+      ],
+      "imports": [],
+      "sha256": "ddc09dffcd3bd34ecd1c92677280415074e900da7636c2c02d709d5ffc11a09c"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordPolygonal.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordPolygonal",
+      "declarations": [
+        "ramp",
+        "ramp_continuous",
+        "ramp_monotone",
+        "ramp_mem",
+        "ramp_before",
+        "ramp_after",
+        "ramp_on",
+        "polygonal",
+        "polygonal_zero",
+        "polygonal_succ",
+        "polygonal_continuous",
+        "polygonal_before",
+        "polygonal_after",
+        "polygonal_on_edge",
+        "polygonal_sub_eq_sum",
+        "lengthControl",
+        "sampleLength",
+        "lengthControl_mem",
+        "polygonal_increment_le_control",
+        "variation_le_bounded_control",
+        "polygonal_variation_le_sampleLength",
+        "polygonal_boundedVariation",
+        "sampleLength_le_variation",
+        "polygonal_variation_le",
+        "exists_sample_edge",
+        "polygonal_approx_on_edge",
+        "polygonal_uniform_approx",
+        "extendSamples",
+        "extendSamples_of_le",
+        "extendSamples_monotone",
+        "extendSamples_strict",
+        "interpolate",
+        "interpolate_continuous",
+        "interpolate_boundedVariation",
+        "interpolate_on_edge",
+        "interpolate_variation_le",
+        "interpolate_uniform_approx",
+        "interpolate_tendstoUniformlyOn_of_oscillation",
+        "affineEdge",
+        "affineEdge_hasDerivAt",
+        "stieltjesSignature_affineEdge",
+        "segmentProduct",
+        "stieltjesSignature_same",
+        "stieltjesSignature_polygonal_product",
+        "curveSignature_polygonal_product",
+        "bvSignature_polygonal_product",
+        "interpolateProduct",
+        "bvSignature_interpolate_product",
+        "curveSignature_eq_bvSignature",
+        "curveSignature_interpolate_product",
+        "interpolate_tendstoUniformlyOn_of_mesh",
+        "interpolateProduct_tendsto",
+        "interpolateProduct_tendsto_of_mesh"
+      ],
+      "imports": [],
+      "sha256": "a38873c6f640db5603883fd3ed14aab562840cd232e5243431178f2a2984be7f"
+    },
+    {
       "id": "main:linear_input/lean_check/CurveWordRealization.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurveWordRealization.inc",
@@ -5428,6 +6883,62 @@
       "sha256": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb"
     },
     {
+      "id": "main:linear_input/lean_check/CurveWordReparametrization.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordReparametrization.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordReparametrization",
+      "declarations": [
+        "reverseIntegral_reparametrize",
+        "signature_reparametrize",
+        "signature_reverse_time",
+        "signature_reparametrize_same_endpoints",
+        "signature_closed_reparametrize"
+      ],
+      "imports": [],
+      "sha256": "8c7fa363b697cc6d30f0f718a9cebd44c3ed8f579bd042259af6e7304425cd84"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSamplingOrder.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSamplingOrder.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSamplingOrder",
+      "declarations": [
+        "Consecutive",
+        "GoodSampling",
+        "consecutive_subset",
+        "goodSampling_singleton",
+        "goodSampling_union",
+        "goodSampling_with_mesh",
+        "chainSamples",
+        "chainSamples_zero",
+        "chainSamples_succ",
+        "goodSampling_chain",
+        "chainSamples_contains_grid",
+        "ordered_consecutive",
+        "goodSampling_enumeration"
+      ],
+      "imports": [],
+      "sha256": "6ef3de5f1e3d3c80c637c43e58eafd9f92be11cb52f319c191f6a7a42d55df11"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordScalarLog.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordScalarLog.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordScalarLog",
+      "declarations": [
+        "derivative_log_mul_one_add_X",
+        "logOf_exp",
+        "exp_subst_log",
+        "coeff_log_real",
+        "coeff_exp_real"
+      ],
+      "imports": [],
+      "sha256": "fe1a2d520c4f95d4160d2a6f26819395f75bef086df0783783b2d5d62403f19d"
+    },
+    {
       "id": "main:linear_input/lean_check/CurveWordSignature.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurveWordSignature.inc",
@@ -5455,6 +6966,203 @@
       ],
       "imports": [],
       "sha256": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSignatureBounds",
+      "declarations": [
+        "positiveIterate",
+        "positiveIterate_zero",
+        "positiveIterate_succ",
+        "positiveIterate_continuous",
+        "positiveIterate_one",
+        "shuffles_replicate_singleton",
+        "positiveIterate_recurrence",
+        "positiveIterate_divided_power",
+        "positiveIterate_nonneg",
+        "abs_stieltjesIntegral_le_control",
+        "reverseStieltjes_le_positiveIterate",
+        "signature_factorial_bound",
+        "stieltjesIntegral_sub",
+        "differenceIntegral_eq",
+        "differenceIntegral_split",
+        "abs_stieltjesIntegral_le_constant",
+        "reverseStieltjes_power_bound",
+        "reverseStieltjes_difference_bound",
+        "signature_difference_bound",
+        "signature_tendsto_of_variation_tendsto_zero",
+        "finiteControl",
+        "finiteSum_apply",
+        "finiteSum_measure",
+        "finiteControl_continuous",
+        "finiteControl_dominates",
+        "finiteControl_increment",
+        "signature_factorial_bound_finite",
+        "bv_signature_factorial_bound"
+      ],
+      "imports": [],
+      "sha256": "dad3fa7bfbcbb5ba6da6fcec6eb918b035e0c48b42a94115e16203c6b5f4e964"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSignatureTopology",
+      "declarations": [
+        "coordinateSpan",
+        "coordinate_mem_span",
+        "coordinate_list_sum_mem",
+        "coordinateSpan_mul_mem",
+        "coordinateAlgebra",
+        "coordinates_dense",
+        "functional_zero_of_coordinates",
+        "lineIntegralLinear",
+        "lineIntegralLinear_bound",
+        "lineIntegralFunctional",
+        "lineIntegralFunctional_apply",
+        "signatureRange",
+        "signature_lift_continuous",
+        "signaturePoint",
+        "signaturePoint_continuous",
+        "reverseIntegral_deriv_continuous",
+        "signatureRange_isCompact",
+        "coordinate",
+        "coordinate_empty",
+        "coordinate_shuffle",
+        "signature_coordinates_dense",
+        "integral_coordinate_against_coordinate",
+        "coordinate_one_form_zero_of_trivial_signature",
+        "continuous_one_form_zero_of_trivial_signature"
+      ],
+      "imports": [],
+      "sha256": "41e0bbd5f192d9c1d2d0fa2ba2c278ecea274591e8df259cdf883eac33930b8f"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSignatureTree.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSignatureTree.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSignatureTree",
+      "declarations": [
+        "FourPoint",
+        "rootProduct",
+        "rootProduct_self",
+        "rootProduct_symm",
+        "rootProduct_lower",
+        "rootProduct_min",
+        "branch_locallyConstant",
+        "path_meets_branch_height",
+        "loop_hasTreeHeight",
+        "loop_treeLike",
+        "lipschitz_factor_loop_treeLike"
+      ],
+      "imports": [],
+      "sha256": "ee1eab1e53775c467ad2f870bdb01a66c99d4b24417da216d987fc31c292de07"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSignatureUniform",
+      "declarations": [
+        "coordinateIncrement",
+        "stieltjesIntegral_one_of_le",
+        "difference_coordinate_increment",
+        "integral_reverse_bound_of_small_primitive",
+        "reverseStieltjes_uniform_difference_bound",
+        "signature_uniform_difference_bound",
+        "signature_tendsto_of_uniform_increment_bound",
+        "signature_tendsto_of_uniform_convergence",
+        "bvSignature",
+        "bvControl",
+        "coordinateIncrement_bv",
+        "bvControl_increment",
+        "bvSignature_tendsto_of_uniform_convergence"
+      ],
+      "imports": [],
+      "sha256": "576be1510db8e43daedfd5a6ca1a83343ae0a1907efbda9ceeb266c0d13cb84a"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSpectral.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSpectral.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSpectral",
+      "declarations": [
+        "rowSum",
+        "complexMatrix",
+        "complexMatrix_pow",
+        "rowSum_zero",
+        "rowSum_nonneg",
+        "rowSum_add",
+        "rowSum_le_norm",
+        "norm_le_of_rowSum_le",
+        "rowSum_add_upper",
+        "rowSum_add_lower",
+        "rowSum_lower_pow",
+        "spectralRadius_ne_top",
+        "norm_root_tendsto",
+        "exists_norm_bound_by_row",
+        "spectralRadius_pos_of_rowSum_pos",
+        "rowSum_pos",
+        "norm_log_tendsto",
+        "rowSum_log_tendsto",
+        "rowSum_one_pos_of_cycle",
+        "rowSum_log_tendsto_of_irreducible",
+        "freeEnergy_row_tendsto"
+      ],
+      "imports": [],
+      "sha256": "c1abe088a4bd0bc3546e3f994569e5403995625152fa909c686087b15bd98248"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordStieltjes.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordStieltjes",
+      "declarations": [
+        "ofContinuousMonotone",
+        "c1_stieltjes_measure",
+        "primitive",
+        "primitive_hasDerivAt",
+        "primitive_continuous",
+        "primitive_sub",
+        "primitive_monotone",
+        "primitiveStieltjes",
+        "primitiveStieltjes_measure",
+        "intervalIntegral_withDensity",
+        "positiveVelocity",
+        "negativeVelocity",
+        "positiveVelocity_continuous",
+        "negativeVelocity_continuous",
+        "velocity_decomposition",
+        "positiveStieltjes",
+        "negativeStieltjes",
+        "stieltjesIntegral",
+        "c1_stieltjesIntegral",
+        "coordinate_increment",
+        "reverseStieltjes",
+        "stieltjesSignature",
+        "reverseStieltjes_eq_reverseIntegral",
+        "c1_stieltjesSignature_eq_signature",
+        "jordanPositive",
+        "jordanNegative",
+        "jordan_difference",
+        "jordan_sum",
+        "jordan_monotone",
+        "jordan_continuous",
+        "bvPositive",
+        "bvNegative",
+        "bv_signed_interval_mass",
+        "compact_bv_stieltjes_representation"
+      ],
+      "imports": [],
+      "sha256": "a1800eb35cb2f2d38697d4ba2edeabd4a39e4217ae0022545e706f1d7f7d9b20"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
@@ -5487,6 +7195,219 @@
       ],
       "imports": [],
       "sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordTransfer.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordTransfer",
+      "declarations": [
+        "sum_words_succ",
+        "words_card",
+        "wordPartition",
+        "transferMatrix",
+        "wordPartition_zero",
+        "wordPartition_succ",
+        "transferMatrix_action",
+        "wordPartition_eq_matrix_power",
+        "transferMatrix_nonneg",
+        "transferMatrix_edge_positive",
+        "transferMatrix_pow_nonneg",
+        "transferMatrix_path_positive",
+        "wordFreeEnergy",
+        "per_letter_bounds",
+        "transfer_rows_positive",
+        "transfer_reachability",
+        "spectralFreeEnergy",
+        "wordFreeEnergy_average_tendsto",
+        "spectralFreeEnergy_bounds",
+        "spectralFreeEnergy_zero_temperature"
+      ],
+      "imports": [],
+      "sha256": "4b5c8fb3d6fa70207e43bb0eeea3c9c2121e926f858111acb7d4db24dbf3c79b"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordTreeLike.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordTreeLike",
+      "declarations": [
+        "HasTreeHeight",
+        "TreeLike",
+        "treeLike_closed",
+        "treeLike_constant",
+        "HasTreeHeight.lipschitz_map",
+        "TreeLike.lipschitz_map",
+        "HasTreeHeight.minimum_bound",
+        "HasTreeHeight.uniform_limit",
+        "treeLike_uniform_limit",
+        "real_height_witness",
+        "real_closed_treeLike",
+        "real_treeLike_iff_closed",
+        "reverseIntegral_scalar",
+        "signature_scalar",
+        "scalarCurve",
+        "scalar_treeLike_iff_signature_trivial"
+      ],
+      "imports": [],
+      "sha256": "de98d4dd4f2f53ea846ad2cfbd1e1d6e53609fa3bb9570e4b6a50a4259b39b43"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordTreeLimit.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordTreeLimit",
+      "declarations": [
+        "extendedCoordinates",
+        "extendedCoordinates_boundedVariation",
+        "extendedCoordinates_continuous",
+        "extendedCoordinates_eq",
+        "pathSignature_eq_extension",
+        "pathSignature_eq_unit_of_fine_samples",
+        "pathSignature_eq_unit_of_tree_height",
+        "pathSignature_eq_unit_of_height",
+        "treeLike_pathSignature_eq_unit"
+      ],
+      "imports": [],
+      "sha256": "c08089f20f438dc0d860270398e2a29b42770a1d5931f66c377206b0bd3d63a7"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordTreeSampleProduct",
+      "declarations": [
+        "segmentProduct_eq_sequenceWeight",
+        "interpolateProduct_graph_eq_one",
+        "interpolateProduct_of_height_steps",
+        "exists_unit_signature_sampling"
+      ],
+      "imports": [],
+      "sha256": "f7b3f39060edc7622a569243a244f3276c033bef66891c143f6b23d9fcef255d"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordTreeSampling.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordTreeSampling",
+      "declarations": [
+        "hitSet",
+        "hitSet_compact",
+        "hitSet_nonempty",
+        "firstHit",
+        "lastHit",
+        "firstHit_spec",
+        "lastHit_spec",
+        "firstHit_left",
+        "lastHit_right",
+        "le_height_before_firstHit",
+        "le_height_after_lastHit",
+        "firstHit_strictAnti",
+        "lastHit_strictMono",
+        "HeightStep",
+        "descendingSet",
+        "ascendingSet",
+        "descendingSet_spec",
+        "descendingSet_endpoints",
+        "descendingSet_step",
+        "ascendingSet_spec",
+        "ascendingSet_endpoints",
+        "ascendingSet_step",
+        "descendingSet_good",
+        "ascendingSet_good",
+        "exists_goodSampling_of_minimum",
+        "LevelEdge",
+        "levelGraph",
+        "levelGraph_height_ne",
+        "levelGraph_lower_edge",
+        "equal_ancestor_of_equal_height",
+        "levelGraph_unique_lower",
+        "levelGraph_acyclic",
+        "levelGraph_signature_cancel",
+        "quotientTime_dist",
+        "quotientTime_root_dist",
+        "heightStep_minimum",
+        "heightStep_quotient_edge",
+        "exists_goodSampling_grid",
+        "exists_height_sampling"
+      ],
+      "imports": [],
+      "sha256": "8a45f983ede5d9952630822422c28abfbfa3fc7e69f590bb4ce39fe959f13c95"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordTreeSignature.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordTreeSignature",
+      "declarations": [
+        "walkWeight",
+        "walkWeight_append",
+        "walkWeight_concat",
+        "rootPath",
+        "vertexWeight",
+        "vertexWeight_edge",
+        "vertexWeight_walk",
+        "tree_closed_walk_weight",
+        "walkWeight_map",
+        "acyclic_closed_walk_weight",
+        "acyclic_of_unique_lower_neighbor",
+        "signature_same",
+        "segmentSignature",
+        "segmentSignature_reverse",
+        "segmentSignature_cancel",
+        "tree_segment_signature_cancel",
+        "height_walk_segment_signature_cancel",
+        "sequenceWeight",
+        "exists_walk_sequenceWeight",
+        "acyclic_closed_sequence_weight",
+        "segmentSignature_self",
+        "acyclic_closed_segment_sequence"
+      ],
+      "imports": [],
+      "sha256": "98b9a66c991d9040bc631d6ed1b105df7f845d3a8033f4de2f145ade73191178"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordWordGenerating.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordWordGenerating.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordWordGenerating",
+      "declarations": [
+        "weightedWord",
+        "wordSum",
+        "weightedMatrix",
+        "wordSum_succ",
+        "weightedMatrix_action",
+        "wordSum_eq_matrix_power",
+        "wordSum_generating_series",
+        "all_word_generating_function_rational"
+      ],
+      "imports": [],
+      "sha256": "60a49c9c83b1ccb8690868cbf00528641b84f9d90ac65ac7aabbfa2cbc9b4e04"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordWordSignature.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordWordSignature.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordWordSignature",
+      "declarations": [
+        "angleVelocity",
+        "angleVelocity_continuous",
+        "angleVelocity_rotation",
+        "signature_time_translation",
+        "signature_splice_left",
+        "signature_splice_right",
+        "actual_word_signature_cons"
+      ],
+      "imports": [],
+      "sha256": "728fc6bdb02a3ff3f7bf969f2b4878446fccbd0f8dce2885de95ac95a8a326ff"
     },
     {
       "id": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
@@ -16319,6 +18240,1482 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveWordArcGenerating.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcPhase_step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordArcGenerating.inc",
+      "to": "main:linear_input/lean_check/CurveWordWordGenerating.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "all_word_generating_function_rational",
+        "weightedMatrix",
+        "weightedWord",
+        "wordSum_eq_matrix_power"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature_chen"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature_shuffle"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "to": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "logarithm_primitive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "formalExp_logarithm"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "to": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bch_completed_lie",
+        "lieExpansion",
+        "primitive_completed_lie_expansion"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcLength_signature_factorization",
+        "pathSignature",
+        "pathSignature_congr"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "basedPrefixSignature",
+        "exists_minimal_signature_range_representative",
+        "pathExtension",
+        "pathExtension_lipschitz",
+        "prefixSignature",
+        "signatureRangeClass",
+        "speedControlledPaths"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "lipSignature",
+        "lipSignature_endpoint_congr",
+        "lipschitz_boundedVariation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature_reparametrize_endpoints"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "basedSignatureRange",
+        "minimal_representative_constant_on_signature_fiber",
+        "prefixSignature_eq_lipSignature",
+        "unitLipschitz_variation_ne_top"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "variationClock",
+        "variationClock_initial",
+        "variationClock_mem",
+        "variationClock_monotoneOn",
+        "variationClock_terminal",
+        "variationLength",
+        "variationParameter_surjective",
+        "variation_clock_continuousOn"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVAlgebra.signature_product"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentsOn",
+        "canonicalNegative",
+        "canonicalNegative_continuous",
+        "canonicalPositive",
+        "canonicalPositive_continuous",
+        "canonical_represents",
+        "pathSignature",
+        "pathSignature_congr",
+        "pathSignature_eq_representation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "lipSignature",
+        "lipschitz_boundedVariation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "oriented_comp_boundedVariation",
+        "pathSignature_oriented_reparametrize"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVPathOperations.stieltjesSignature_same"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "joinCurve_boundedVariation",
+        "pathSignature_split"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_lift_not_simple_loop",
+        "stieltjesIntegral_one"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFormalSeries.product_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_assoc",
+        "product_empty",
+        "product_unit_right",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVReparam.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ontoExtension",
+        "ontoExtension_continuous",
+        "ontoExtension_eq",
+        "ontoExtension_monotone",
+        "stieltjesSignature_interval_reparam"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcLength_factorization",
+        "constantExtension_boundedVariation",
+        "constantExtension_continuous",
+        "variationClock",
+        "variationClock_image",
+        "variationClock_initial",
+        "variationClock_mem",
+        "variationClock_monotoneOn",
+        "variationClock_terminal",
+        "variationLength",
+        "variation_clock_continuousOn"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordSignature.signature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvNegative",
+        "bvPositive",
+        "c1_stieltjesSignature_eq_signature",
+        "jordanNegative",
+        "jordanPositive",
+        "jordan_continuous",
+        "jordan_difference",
+        "negativeStieltjes",
+        "negativeVelocity",
+        "negativeVelocity_continuous",
+        "positiveStieltjes",
+        "positiveVelocity",
+        "positiveVelocity_continuous",
+        "primitive_continuous",
+        "primitive_sub",
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature",
+        "velocity_decomposition"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature",
+        "pathSignature_eq_representation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "constantExtension_boundedVariation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvSignature",
+        "bvSignature_tendsto_of_uniform_convergence"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordStieltjes.bvNegative",
+        "LinearInputCurveWordStieltjes.bvPositive",
+        "LinearInputCurveWordStieltjes.jordanNegative",
+        "LinearInputCurveWordStieltjes.jordanPositive",
+        "LinearInputCurveWordStieltjes.jordan_continuous",
+        "LinearInputCurveWordStieltjes.jordan_difference"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvNegative",
+        "bvPositive",
+        "jordanNegative",
+        "jordanPositive",
+        "jordan_continuous",
+        "jordan_difference"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVHamblyLyons.treeLike_of_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_of_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordTreeLimit.treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_of_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "joinCurve_boundedVariation",
+        "joinCurve_continuousOn",
+        "mirrorPath",
+        "mirrorPath_boundedVariation",
+        "mirrorPath_continuousOn",
+        "mirrorPath_matches",
+        "pathSignature_eq_iff_join_reverse_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curveSignature_singleton"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcLength_signature_factorization",
+        "canonicalNegative",
+        "canonicalNegative_continuous",
+        "canonicalPositive",
+        "canonicalPositive_continuous",
+        "pathSignature",
+        "pathSignature_congr"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "IntrinsicPoint",
+        "firstLevel_lipschitz",
+        "lipSignature_same",
+        "lipSignature_translate",
+        "translate_lipschitz"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVIntrinsicTree.intrinsic_fourPoint"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "intrinsic_fourPoint"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "lipSignature",
+        "lipSignature_endpoint_congr",
+        "lipschitz_boundedVariation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVPathOperations.stieltjesSignature_same"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature_reparametrize_endpoints",
+        "reparam_mapsTo_endpoints"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curveSignature_singleton",
+        "curveSignature_subinterval_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "variationClock",
+        "variationClock_initial",
+        "variationClock_mem",
+        "variationClock_monotoneOn",
+        "variationClock_terminal",
+        "variationLength",
+        "variationParameter_surjective",
+        "variation_clock_continuousOn"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_unit_left",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureTree.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "loop_hasTreeHeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HasTreeHeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordTreeLimit.treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVAlgebra.signature_product"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcLength_signature_range_factorization"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentsOn",
+        "canonicalNegative",
+        "canonicalNegative_continuous",
+        "canonicalPositive",
+        "canonicalPositive_continuous",
+        "canonical_represents",
+        "pathSignature",
+        "pathSignature_congr",
+        "pathSignature_eq_representation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathExtension",
+        "pathExtension_boundedVariation",
+        "pathExtension_continuous",
+        "pathExtension_lipschitz",
+        "prefixSignature",
+        "prefixSignature_eq_pathSignature",
+        "signatureRangeClass",
+        "signatureRangeClass_isClosed",
+        "speedControlledOfLipschitz",
+        "speedControlledOfLipschitz_eq",
+        "speedControlledPaths",
+        "speedControlledPaths_isCompact"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "lipSignature",
+        "lipSignature_congr",
+        "lipSignature_endpoint_congr",
+        "lipSignature_reparametrize",
+        "lipSignature_split",
+        "lipschitz_boundedVariation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature_oriented_reparametrize"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "joinCurve_left",
+        "joinCurve_right"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "basedSignatureRange",
+        "unitLipschitz_variation_toReal_le"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "clamp_monotone",
+        "variationLength"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFormalSeries.product_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_assoc",
+        "product_cons",
+        "product_empty",
+        "product_unit_right",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordGeodesicTree.GeodesicSystem"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "GeodesicSystem"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_constant"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "exists_injective_signature_lift_in_closed_range"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVArcUnique.injective_lipSignature_ranges_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "injective_lipSignature_ranges_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature_congr"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "basedPrefixSignature",
+        "pathExtension_lipschitz",
+        "prefixSignature",
+        "prefixSignature_eq_pathSignature",
+        "signatureRangeClass",
+        "speedControlledOfLipschitz",
+        "speedControlledOfLipschitz_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "IntrinsicPoint",
+        "geodesicPoint_value_range",
+        "intrinsicGeodesicSystem",
+        "shortestRoute",
+        "shortestRoute_lift_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "lipSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "basedPrefixSignature_continuous_time",
+        "unitLipschitz_variation_toReal_le"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "GeodesicSystem",
+        "fourPoint_of_thin_geodesics"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature",
+        "pathSignature_congr"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature_reparametrize_endpoints",
+        "pathSignature_split"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_unit_left",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentsOn",
+        "pathSignature",
+        "pathSignature_eq_representation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "pathSignature_product_reverse",
+        "pathSignature_reparametrize_endpoints",
+        "reversePath",
+        "reversePath_boundedVariation",
+        "reversePath_continuousOn",
+        "stieltjesSignature_inverse"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_assoc",
+        "product_unit_left",
+        "product_unit_right",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVAlgebra.signature_product"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentsOn",
+        "canonicalNegative",
+        "canonicalNegative_continuous",
+        "canonicalPositive",
+        "canonicalPositive_continuous",
+        "canonical_represents",
+        "clock_mapsTo",
+        "pathSignature",
+        "pathSignature_congr",
+        "pathSignature_eq_representation",
+        "pathSignature_reparametrize"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "distance_le_variation_difference",
+        "variationClock",
+        "variationLength",
+        "variation_clock_continuousOn"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_assoc",
+        "product_unit_left",
+        "product_unit_right",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "real_closed_treeLike"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "treeLike_pathSignature_eq_unit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentsOn",
+        "curveSignature",
+        "pathSignature_eq_representation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "basedPrefixSignature",
+        "coordinateExtension_boundedVariation",
+        "coordinateExtension_continuous",
+        "exists_minimal_signature_range_representative",
+        "pathExtension",
+        "pathExtension_lipschitz",
+        "prefixSignature",
+        "prefixSignature_eq_pathSignature",
+        "signatureRangeClass",
+        "speedControlledOfLipschitz",
+        "speedControlledOfLipschitz_eq",
+        "speedControlledPaths"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "exists_shorter_representative",
+        "lipSignature",
+        "lipSignature_congr"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curveSignature_singleton",
+        "subinterval_signature_zero_of_prefix_eq"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVTopology.signature_lift_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordStieltjes.jordan_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReduced.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvNegative",
+        "bvPositive",
+        "jordanNegative",
+        "jordanPositive",
+        "jordan_continuous",
+        "jordan_difference",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReparam.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReparam.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "clamp_monotone",
+        "constantExtension_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVReparam.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ofContinuousMonotone",
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "continuous_stieltjes_noAtoms",
+        "primitive_stieltjes_continuous",
+        "reverseStieltjes_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chronologicalShuffles",
+        "continuous_list_sum",
+        "shuffles_nil_right"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "to": "main:linear_input/lean_check/AstraAnalyticDuhamel.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "continuous_primitive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "canonicalNegative",
+        "canonicalNegative_continuous",
+        "canonicalPositive",
+        "canonicalPositive_continuous",
+        "canonical_represents",
+        "curveSignature",
+        "curveSignature_eq_representation",
+        "pathSignature",
+        "stieltjesIntegral_congr_on",
+        "stieltjesSignature_independent_on"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature_chen"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjes_integration_by_parts"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesIntegral_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "c1_stieltjesIntegral",
+        "negativeStieltjes",
+        "negativeVelocity_continuous",
+        "positiveStieltjes",
+        "positiveVelocity_continuous",
+        "primitive_continuous",
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/GravityObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "FactorsThrough"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_shuffle",
+        "stieltjesIntegral_congr",
+        "stieltjesSignature_shuffle",
+        "sum_reverseStieltjes_cons"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chronologicalShuffles"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "coordinateAlgebra",
+        "coordinates_dense",
+        "functional_zero_of_coordinates"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordBVTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordChen.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral",
+        "reverseIntegral_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:lean/Elastica/Composition.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.xCoord_sub_eq_integral",
+        "Elastica.yCoord_sub_eq_integral"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:lean/Elastica/Composition.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "xCoord_sub_eq_integral",
+        "yCoord_sub_eq_integral"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.deriv_yCoord",
+        "Elastica.hasDerivAt_xCoord",
+        "Elastica.xCoord",
+        "Elastica.yCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "deriv_yCoord",
+        "hasDerivAt_xCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.endpoint",
+        "LinearInputCurveWordAlgebra.state_ext"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordArc.arcAngle",
+        "LinearInputCurveWordArc.endpointUnit",
+        "LinearInputCurveWordArc.interpretFirstState"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "endpointUnit",
+        "interpretFirstState"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordCircularMoment.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordCircularMoment.circleArea",
+        "LinearInputCurveWordCircularMoment.circleMoment",
+        "LinearInputCurveWordCircularMoment.circleMoment_integrand",
+        "LinearInputCurveWordCircularMoment.circleX",
+        "LinearInputCurveWordCircularMoment.circleX_deriv",
+        "LinearInputCurveWordCircularMoment.circleX_hasDerivAt",
+        "LinearInputCurveWordCircularMoment.circleY",
+        "LinearInputCurveWordCircularMoment.circleY_deriv",
+        "LinearInputCurveWordCircularMoment.circleY_hasDerivAt",
+        "LinearInputCurveWordCircularMoment.insertion_position"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordCircularMoment.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "circleArea",
+        "circleMoment",
+        "circleMoment_integrand",
+        "circleX_deriv",
+        "circleX_hasDerivAt",
+        "circleY_deriv",
+        "circleY_hasDerivAt",
+        "insertedLoopsArea",
+        "insertedLoopsMoment",
+        "insertion_moment_difference_h",
+        "insertion_moments_distinct",
+        "insertion_position",
+        "insertion_preserves_area",
+        "loop_area_h",
+        "sequentialLoopsArea",
+        "sequentialLoopsMoment"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFinite.state"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "areaIntegrand",
+        "areaIntegrand_continuous",
+        "areaIntegrand_eq",
+        "curvePoint",
+        "letterAngle",
+        "reconstructedState",
+        "reconstructedState_eq_integer_decode",
+        "signedArea",
+        "wordAngle_continuous",
+        "wordLength"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCircleWords.inc",
+      "to": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordRealization.decode"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordConvexSeparation.inc",
+      "to": "main:linear_input/lean_check/CurveWordConvexObservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "equal_cost_minimum_eq_support",
+        "equal_cost_observation_forgets_hull_interior",
+        "finiteSupport",
+        "finiteSupport_eq_of_convexHull_eq",
+        "support_attained",
+        "support_bounds_hull"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chronologicalShuffles",
+        "chronologicalShuffles_word_length",
+        "shuffles_nil_right"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFormalSeries.product_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "formalExp_empty",
+        "formalExp_logarithm",
+        "logarithm_empty",
+        "power_vanishes_above_degree",
+        "product_assoc",
+        "product_empty",
+        "product_unit_left",
+        "product_unit_right",
+        "product_zero_right",
+        "unitSeries"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
       "to": "main:linear_input/lean_check/CurveWordFinite.inc",
       "kind": "qualified_reference",
@@ -16340,6 +19737,24 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bellman_attained",
+        "bellman_le_word"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "to": "main:linear_input/lean_check/CurveWordGraphLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "closed_word_cost_lower",
+        "minimum_cycle_exists"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CurveWordFiniteState.inc",
       "to": "main:linear_input/lean_check/CurveWordFinite.inc",
       "kind": "qualified_reference",
@@ -16348,6 +19763,447 @@
         "LinearInputCurveWordFinite.rotate",
         "LinearInputCurveWordFinite.state",
         "LinearInputCurveWordFinite.step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chronologicalShuffles",
+        "signature_chen",
+        "signature_shuffle"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordChen.chronologicalShuffles",
+        "LinearInputCurveWordChen.chronologicalShuffles_word_length"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chronologicalShuffles",
+        "chronologicalShuffles_word_length"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "to": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bch_primitive",
+        "coproduct_add",
+        "coproduct_const_mul",
+        "coproduct_nil_left",
+        "coproduct_nil_right",
+        "coproduct_snoc_snoc",
+        "product_snoc"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFormalSeries.product_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "product_assoc",
+        "product_cons",
+        "product_const_left",
+        "product_const_right",
+        "product_empty",
+        "product_unit_left",
+        "product_unit_right",
+        "product_zero_left",
+        "product_zero_right",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordSignature.signature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordGeodesicTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureTree.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rootProduct",
+        "rootProduct_symm"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordGraphLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bellman_attained",
+        "bellman_eq_exhaustiveMinimum",
+        "bellman_le_word",
+        "exhaustiveMinimum",
+        "terminal_append",
+        "terminal_repeat_cycle",
+        "wordCost_append",
+        "wordCost_repeat_cycle"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordHeightMetric.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HasTreeHeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLaplace.inc",
+      "to": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordThermodynamics.partition"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLinearAction.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_chen"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLinearAction.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral",
+        "reverseIntegral_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "to": "main:linear_input/lean_check/CurveWordCoproduct.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "logarithm_primitive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFormalSeries.product_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "formalExp_congr_through",
+        "formalExp_empty",
+        "formalExp_injective",
+        "formalExp_logarithm",
+        "formalLog_empty",
+        "logarithm_empty",
+        "logarithm_formalExp",
+        "power_vanishes_above_degree",
+        "power_zero",
+        "product_empty",
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "to": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "TensorSeries",
+        "lieExpansion",
+        "primitive_completed_lie_expansion"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "to": "main:linear_input/lean_check/CurveWordScalarLog.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "coeff_exp_real",
+        "coeff_log_real",
+        "exp_subst_log"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordLogFormula.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordSignature.signature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.deriv_xCoord",
+        "Elastica.deriv_yCoord",
+        "Elastica.hasDerivAt_xCoord",
+        "Elastica.hasDerivAt_yCoord",
+        "Elastica.unit_speed_squared",
+        "Elastica.xCoord",
+        "Elastica.yCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "deriv_xCoord",
+        "deriv_yCoord",
+        "hasDerivAt_xCoord",
+        "hasDerivAt_yCoord",
+        "unit_speed_squared"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:lean/Elastica/Reconstruction.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.xCoord_add_angle",
+        "Elastica.yCoord_add_angle"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:lean/Elastica/Reconstruction.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "xCoord_add_angle",
+        "yCoord_add_angle"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:lean/Elastica/Variation.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.energy"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "areaCocycle",
+        "cross_add_left",
+        "cross_rotation",
+        "emptyState",
+        "empty_join",
+        "joinArea_assoc",
+        "join_angle",
+        "join_assoc",
+        "join_empty",
+        "join_endpoint",
+        "rotation_add"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordArc.arcAngle",
+        "LinearInputCurveWordArc.arcAngle_continuous",
+        "LinearInputCurveWordArc.arcAngle_derivative",
+        "LinearInputCurveWordArc.arcAngle_initial",
+        "LinearInputCurveWordArc.arcAngle_terminal",
+        "LinearInputCurveWordArc.arcState",
+        "LinearInputCurveWordArc.arc_quadratic_energy",
+        "LinearInputCurveWordArc.costUnit",
+        "LinearInputCurveWordArc.endpointUnit",
+        "LinearInputCurveWordArc.letterState",
+        "LinearInputCurveWordArc.quadraticDensity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcAngle_continuous",
+        "arcAngle_derivative",
+        "arcAngle_initial",
+        "arcAngle_terminal",
+        "arc_quadratic_energy",
+        "endpointUnit",
+        "letterState",
+        "quadraticDensity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFinite.State",
+        "LinearInputCurveWordFinite.crossArea",
+        "LinearInputCurveWordFinite.firstState",
+        "LinearInputCurveWordFinite.state",
+        "LinearInputCurveWordFinite.step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstState"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordRealization.decode",
+        "LinearInputCurveWordRealization.decode_angle",
+        "LinearInputCurveWordRealization.decode_empty",
+        "LinearInputCurveWordRealization.decode_endpoint",
+        "LinearInputCurveWordRealization.decode_step",
+        "LinearInputCurveWordRealization.letter_endpoint",
+        "LinearInputCurveWordRealization.point",
+        "LinearInputCurveWordRealization.rotation_matches_lattice",
+        "LinearInputCurveWordRealization.wordState",
+        "LinearInputCurveWordRealization.wordState_eq_decode"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "to": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "decode_angle",
+        "decode_empty",
+        "decode_endpoint",
+        "decode_step",
+        "letter_endpoint",
+        "rotation_matches_lattice",
+        "wordState_eq_decode"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RepresentsOn",
+        "c1_representsOn",
+        "canonicalNegative_continuous",
+        "canonicalPositive_continuous",
+        "canonical_represents",
+        "curveSignature",
+        "curveSignature_eq_representation",
+        "stieltjesSignature_independent_on"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordBVChen.stieltjesSignature_chen"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjesSignature_chen"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "clamp_continuous",
+        "clamp_monotone"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordReparametrization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_reparametrize"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvSignature",
+        "bvSignature_tendsto_of_uniform_convergence"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvNegative",
+        "bvPositive",
+        "c1_stieltjesSignature_eq_signature",
+        "jordanNegative",
+        "jordanPositive",
+        "jordan_continuous",
+        "jordan_difference",
+        "negativeVelocity_continuous",
+        "positiveVelocity_continuous",
+        "primitive_continuous",
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
       ]
     },
     {
@@ -16423,14 +20279,6 @@
     },
     {
       "from": "main:linear_input/lean_check/CurveWordRealization.inc",
-      "to": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "bellman_average_tendsto"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
       "to": "main:linear_input/lean_check/CurveWordFinite.inc",
       "kind": "qualified_reference",
       "symbols": [
@@ -16463,6 +20311,23 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveWordReparametrization.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral_hasDerivAt"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordReparametrization.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral",
+        "reverseIntegral_continuous"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CurveWordSignature.inc",
       "to": "main:lean/Elastica/Geometry.lean",
       "kind": "qualified_reference",
@@ -16478,6 +20343,157 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "hasDerivAt_xCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_shuffle"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "SameIncrements",
+        "intervalIntegral_add_measure",
+        "reverseStieltjes_continuous",
+        "stieltjesIntegral_independent"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "shuffles_nil_right"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvNegative",
+        "bvPositive",
+        "jordanNegative",
+        "jordanPositive",
+        "jordan_continuous",
+        "jordan_sum",
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chronologicalShuffles",
+        "reverseIntegral_hasDerivAt",
+        "reverseIntegral_shuffle",
+        "signature_shuffle",
+        "sum_reverseIntegral_cons"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral",
+        "reverseIntegral_continuous",
+        "signature_empty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureTree.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HasTreeHeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "stieltjes_integration_by_parts"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseStieltjes_continuous",
+        "stieltjesIntegral_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "abs_stieltjesIntegral_le_constant",
+        "differenceIntegral_split",
+        "finiteControl",
+        "finiteControl_continuous",
+        "finiteControl_dominates",
+        "finiteControl_increment",
+        "reverseStieltjes_power_bound"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "to": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvNegative",
+        "bvPositive",
+        "jordanNegative",
+        "jordanPositive",
+        "jordan_continuous",
+        "jordan_difference",
+        "jordan_sum",
+        "reverseStieltjes",
+        "stieltjesIntegral",
+        "stieltjesSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "constantExtension_boundedVariation",
+        "constantExtension_continuous",
+        "distance_le_variation_difference",
+        "variation_clock_continuousOn"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordSignature.reverseIntegral",
+        "LinearInputCurveWordSignature.reverseIntegral_continuous",
+        "LinearInputCurveWordSignature.signature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordStieltjes.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral",
+        "reverseIntegral_continuous"
       ]
     },
     {
@@ -16498,6 +20514,362 @@
       "symbols": [
         "linearEnergy",
         "linearEnergy_scale"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bellman_eq_exhaustiveMinimum",
+        "exhaustiveMinimum",
+        "words_nonempty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "to": "main:linear_input/lean_check/CurveWordGraphLimit.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordGraphLimit.bellman_average_tendsto",
+        "LinearInputCurveWordGraphLimit.cycleMean"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "to": "main:linear_input/lean_check/CurveWordSpectral.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordSpectral.complexMatrix",
+        "LinearInputCurveWordSpectral.rowSum",
+        "LinearInputCurveWordSpectral.rowSum_log_tendsto"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "to": "main:linear_input/lean_check/CurveWordSpectral.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "complexMatrix",
+        "rowSum_log_tendsto"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "to": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordThermodynamics.freeEnergy_bounds",
+        "LinearInputCurveWordThermodynamics.partition_positive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "to": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "freeEnergy_bounds",
+        "partition_positive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral",
+        "signature_singleton"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curveSignature_congr",
+        "pathSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "constantExtension_boundedVariation",
+        "constantExtension_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordHeightMetric.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "height_implies_curve_continuous"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "curveSignature_eq_bvSignature",
+        "interpolateProduct",
+        "interpolateProduct_tendsto_of_mesh"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bvSignature"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HasTreeHeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "exists_unit_signature_sampling"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "TensorSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordHeightMetric.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HeightQuotient",
+        "factorCurve",
+        "heightQuotient_fourPoint",
+        "quotientTime",
+        "quotientTime_endpoints"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordPolygonal.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "interpolateProduct",
+        "segmentProduct"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeLike.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HasTreeHeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "HeightStep",
+        "exists_height_sampling",
+        "heightStep_quotient_edge",
+        "levelGraph",
+        "levelGraph_acyclic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "acyclic_closed_segment_sequence",
+        "segmentSignature",
+        "sequenceWeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "to": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFriedrichs.TensorSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "to": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "TensorSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "to": "main:linear_input/lean_check/CurveWordHeightMetric.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "heightDist",
+        "intervalMinimum",
+        "intervalMinimum_attained",
+        "intervalMinimum_le",
+        "quotientTime",
+        "uIcc_subset_interval"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "to": "main:linear_input/lean_check/CurveWordSamplingOrder.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "GoodSampling",
+        "chainSamples",
+        "goodSampling_chain",
+        "goodSampling_enumeration",
+        "goodSampling_union",
+        "goodSampling_with_mesh"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
+      "to": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "acyclic_closed_walk_weight",
+        "acyclic_of_unique_lower_neighbor",
+        "segmentSignature",
+        "segmentSignature_cancel",
+        "walkWeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordFormalSeries.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unitSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "TensorSeries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordReparametrization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_reverse_time"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reverseIntegral"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordGenerating.inc",
+      "to": "main:linear_input/lean_check/CurveWordGenerating.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rowSeries_coeff",
+        "row_generating_function_rational"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordGenerating.inc",
+      "to": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordTransfer.sum_words_succ"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordGenerating.inc",
+      "to": "main:linear_input/lean_check/CurveWordTransfer.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "sum_words_succ"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordChen.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_chen"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordLinearAction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rotationMatrix",
+        "rotation_velocity_x",
+        "rotation_velocity_y",
+        "signature_congr_Icc",
+        "signature_linear_action",
+        "tensorAction",
+        "transformedVelocity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordPiecewise.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "letterAngle",
+        "splice_left",
+        "splice_right",
+        "wordAngle_continuous",
+        "wordAngle_initial",
+        "wordLength",
+        "wordLength_cons",
+        "wordLength_nonneg"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordWordSignature.inc",
+      "to": "main:linear_input/lean_check/CurveWordReparametrization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "signature_reparametrize"
       ]
     },
     {
@@ -21024,7 +25396,63 @@
     "linear_input/lean_check/AstraExplicitAnalyticInput.inc",
     "linear_input/lean_check/AstraAnalyticExample.inc",
     "linear_input/lean_check/AstraFiniteFlow.inc",
-    "linear_input/lean_check/AstraContinuumLimit.inc"
+    "linear_input/lean_check/AstraContinuumLimit.inc",
+    "linear_input/lean_check/CurveWordPiecewise.inc",
+    "linear_input/lean_check/CurveWordCircleWords.inc",
+    "linear_input/lean_check/CurveWordGraphLimit.inc",
+    "linear_input/lean_check/CurveWordDirectedGraph.inc",
+    "linear_input/lean_check/CurveWordLaplace.inc",
+    "linear_input/lean_check/CurveWordSpectral.inc",
+    "linear_input/lean_check/CurveWordTransfer.inc",
+    "linear_input/lean_check/CurveWordChen.inc",
+    "linear_input/lean_check/CurveWordFormalSeries.inc",
+    "linear_input/lean_check/CurveWordCoproduct.inc",
+    "linear_input/lean_check/CurveWordFriedrichs.inc",
+    "linear_input/lean_check/CurveWordTreeLike.inc",
+    "linear_input/lean_check/CurveWordSignatureTopology.inc",
+    "linear_input/lean_check/CurveWordReparametrization.inc",
+    "linear_input/lean_check/CurveWordBoundedVariation.inc",
+    "linear_input/lean_check/CurveWordStieltjes.inc",
+    "linear_input/lean_check/CurveWordBVSignature.inc",
+    "linear_input/lean_check/CurveWordBVReparam.inc",
+    "linear_input/lean_check/CurveWordBVChen.inc",
+    "linear_input/lean_check/CurveWordBVShuffle.inc",
+    "linear_input/lean_check/CurveWordSignatureTree.inc",
+    "linear_input/lean_check/CurveWordHeightMetric.inc",
+    "linear_input/lean_check/CurveWordScalarLog.inc",
+    "linear_input/lean_check/CurveWordLogFormula.inc",
+    "linear_input/lean_check/CurveWordBVTopology.inc",
+    "linear_input/lean_check/CurveWordBVAlgebra.inc",
+    "linear_input/lean_check/CurveWordConvexObservation.inc",
+    "linear_input/lean_check/CurveWordSignatureBounds.inc",
+    "linear_input/lean_check/CurveWordSignatureUniform.inc",
+    "linear_input/lean_check/CurveWordConvexSeparation.inc",
+    "linear_input/lean_check/CurveWordLinearAction.inc",
+    "linear_input/lean_check/CurveWordBVCanonical.inc",
+    "linear_input/lean_check/CurveWordWordSignature.inc",
+    "linear_input/lean_check/CurveWordGenerating.inc",
+    "linear_input/lean_check/CurveWordWordGenerating.inc",
+    "linear_input/lean_check/CurveWordSamplingOrder.inc",
+    "linear_input/lean_check/CurveWordTreeSignature.inc",
+    "linear_input/lean_check/CurveWordPolygonal.inc",
+    "linear_input/lean_check/CurveWordBVSubinterval.inc",
+    "linear_input/lean_check/CurveWordTreeSampling.inc",
+    "linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+    "linear_input/lean_check/CurveWordTreeLimit.inc",
+    "linear_input/lean_check/CurveWordArcGenerating.inc",
+    "linear_input/lean_check/CurveWordBVPathOperations.inc",
+    "linear_input/lean_check/CurveWordBVCompactness.inc",
+    "linear_input/lean_check/CurveWordBVLoopErase.inc",
+    "linear_input/lean_check/CurveWordBVReduced.inc",
+    "linear_input/lean_check/CurveWordBVArc.inc",
+    "linear_input/lean_check/CurveWordBVOrientation.inc",
+    "linear_input/lean_check/CurveWordGeodesicTree.inc",
+    "linear_input/lean_check/CurveWordBVArcUnique.inc",
+    "linear_input/lean_check/CurveWordBVIntrinsic.inc",
+    "linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
+    "linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+    "linear_input/lean_check/CurveWordBVEquivalence.inc",
+    "linear_input/lean_check/CurveWordBVCoordinates.inc"
   ],
   "prs": [
     {
@@ -21302,28 +25730,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
+      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
+      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
+      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
+      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

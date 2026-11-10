@@ -4,6 +4,8 @@ Run linear_input/verify_lean.py first, or use tools/verify.py for both stages.
 MainResult.lean prepends the additive Mathlib imports listed in EXTRA_IMPORTS, then the
 byte-exact verified All.lean, the registered supplements and the all-declaration axiom audit.
 Approved assembly contexts can add namespace aliases outside a source's exact byte span.
+The recorded prelude lowers the generic LieAlgebra Module instance priority
+after All.lean, preserving the existing analytic instances and proof bytes.
 The original All.lean bytes are preserved without modification.
 """
 from pathlib import Path
@@ -89,7 +91,39 @@ EXTRA_IMPORTS = (
     "Mathlib.Topology.MetricSpace.Equicontinuity",
     "Mathlib.Topology.Order.ProjIcc",
     "Mathlib.Topology.UniformSpace.Ascoli",
+    "Mathlib.Analysis.Calculus.Deriv.Shift",
+    "Mathlib.Data.Fintype.Pigeonhole",
+    "Mathlib.Probability.Moments.ComplexMGF",
+    "Mathlib.Analysis.Normed.Algebra.GelfandFormula",
+    "Mathlib.Analysis.Matrix.Normed",
+    "Mathlib.LinearAlgebra.Matrix.Irreducible.Defs",
+    "Mathlib.Algebra.BigOperators.Intervals",
+    "Mathlib.Algebra.Lie.Free",
+    "Mathlib.Topology.ContinuousMap.StoneWeierstrass",
+    "Mathlib.Topology.UniformSpace.UniformApproximation",
+    "Mathlib.Topology.EMetricSpace.BoundedVariation",
+    "Mathlib.MeasureTheory.Measure.Stieltjes",
+    "Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap",
+    "Mathlib.MeasureTheory.Integral.DominatedConvergence",
+    "Mathlib.MeasureTheory.Integral.Prod",
+    "Mathlib.Topology.LocallyConstant.Basic",
+    "Mathlib.RingTheory.PowerSeries.Log",
+    "Mathlib.Analysis.Convex.Jensen",
+    "Mathlib.Analysis.Convex.PathConnected",
+    "Mathlib.Analysis.Convex.Topology",
+    "Mathlib.Analysis.LocallyConvex.Separation",
+    "Mathlib.LinearAlgebra.Matrix.Adjugate",
+    "Mathlib.Data.Finset.Sort",
+    "Mathlib.Combinatorics.SimpleGraph.Acyclic",
+    "Mathlib.Algebra.MonoidAlgebra.Basic",
+    "Mathlib.Topology.ContinuousMap.Bounded.ArzelaAscoli",
+    "Mathlib.Analysis.Normed.Module.FiniteDimension",
 )
+
+# Importing FreeLieAlgebra adds a generic LieAlgebra-to-Module instance.
+# Prefer the pre-existing analytic Module instances without changing any
+# historical proof bytes; the generic instance remains available as fallback.
+ASSEMBLY_PRELUDE = "attribute [instance 90] LieAlgebra.toModule\n"
 
 SUPPLEMENTS = (
     ('linear_input/lean_check/MainResult.inc', 'LinearInputMainResult'),
@@ -298,6 +332,62 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/AstraAnalyticExample.inc', 'KerrKoopman.AnalyticExample'),
     ('linear_input/lean_check/AstraFiniteFlow.inc', 'KerrKoopman.FiniteFlow'),
     ('linear_input/lean_check/AstraContinuumLimit.inc', 'KerrKoopman.ContinuumLimit'),
+    ('linear_input/lean_check/CurveWordPiecewise.inc', 'LinearInputCurveWordPiecewise'),
+    ('linear_input/lean_check/CurveWordCircleWords.inc', 'LinearInputCurveWordCircleWords'),
+    ('linear_input/lean_check/CurveWordGraphLimit.inc', 'LinearInputCurveWordGraphLimit'),
+    ('linear_input/lean_check/CurveWordDirectedGraph.inc', 'LinearInputCurveWordDirectedGraph'),
+    ('linear_input/lean_check/CurveWordLaplace.inc', 'LinearInputCurveWordLaplace'),
+    ('linear_input/lean_check/CurveWordSpectral.inc', 'LinearInputCurveWordSpectral'),
+    ('linear_input/lean_check/CurveWordTransfer.inc', 'LinearInputCurveWordTransfer'),
+    ('linear_input/lean_check/CurveWordChen.inc', 'LinearInputCurveWordChen'),
+    ('linear_input/lean_check/CurveWordFormalSeries.inc', 'LinearInputCurveWordFormalSeries'),
+    ('linear_input/lean_check/CurveWordCoproduct.inc', 'LinearInputCurveWordCoproduct'),
+    ('linear_input/lean_check/CurveWordFriedrichs.inc', 'LinearInputCurveWordFriedrichs'),
+    ('linear_input/lean_check/CurveWordTreeLike.inc', 'LinearInputCurveWordTreeLike'),
+    ('linear_input/lean_check/CurveWordSignatureTopology.inc', 'LinearInputCurveWordSignatureTopology'),
+    ('linear_input/lean_check/CurveWordReparametrization.inc', 'LinearInputCurveWordReparametrization'),
+    ('linear_input/lean_check/CurveWordBoundedVariation.inc', 'LinearInputCurveWordBoundedVariation'),
+    ('linear_input/lean_check/CurveWordStieltjes.inc', 'LinearInputCurveWordStieltjes'),
+    ('linear_input/lean_check/CurveWordBVSignature.inc', 'LinearInputCurveWordBVSignature'),
+    ('linear_input/lean_check/CurveWordBVReparam.inc', 'LinearInputCurveWordBVReparam'),
+    ('linear_input/lean_check/CurveWordBVChen.inc', 'LinearInputCurveWordBVChen'),
+    ('linear_input/lean_check/CurveWordBVShuffle.inc', 'LinearInputCurveWordBVShuffle'),
+    ('linear_input/lean_check/CurveWordSignatureTree.inc', 'LinearInputCurveWordSignatureTree'),
+    ('linear_input/lean_check/CurveWordHeightMetric.inc', 'LinearInputCurveWordHeightMetric'),
+    ('linear_input/lean_check/CurveWordScalarLog.inc', 'LinearInputCurveWordScalarLog'),
+    ('linear_input/lean_check/CurveWordLogFormula.inc', 'LinearInputCurveWordLogFormula'),
+    ('linear_input/lean_check/CurveWordBVTopology.inc', 'LinearInputCurveWordBVTopology'),
+    ('linear_input/lean_check/CurveWordBVAlgebra.inc', 'LinearInputCurveWordBVAlgebra'),
+    ('linear_input/lean_check/CurveWordConvexObservation.inc', 'LinearInputCurveWordConvexObservation'),
+    ('linear_input/lean_check/CurveWordSignatureBounds.inc', 'LinearInputCurveWordSignatureBounds'),
+    ('linear_input/lean_check/CurveWordSignatureUniform.inc', 'LinearInputCurveWordSignatureUniform'),
+    ('linear_input/lean_check/CurveWordConvexSeparation.inc', 'LinearInputCurveWordConvexSeparation'),
+    ('linear_input/lean_check/CurveWordLinearAction.inc', 'LinearInputCurveWordLinearAction'),
+    ('linear_input/lean_check/CurveWordBVCanonical.inc', 'LinearInputCurveWordBVCanonical'),
+    ('linear_input/lean_check/CurveWordWordSignature.inc', 'LinearInputCurveWordWordSignature'),
+    ('linear_input/lean_check/CurveWordGenerating.inc', 'LinearInputCurveWordGenerating'),
+    ('linear_input/lean_check/CurveWordWordGenerating.inc', 'LinearInputCurveWordWordGenerating'),
+    ('linear_input/lean_check/CurveWordSamplingOrder.inc', 'LinearInputCurveWordSamplingOrder'),
+    ('linear_input/lean_check/CurveWordTreeSignature.inc', 'LinearInputCurveWordTreeSignature'),
+    ('linear_input/lean_check/CurveWordPolygonal.inc', 'LinearInputCurveWordPolygonal'),
+    ('linear_input/lean_check/CurveWordBVSubinterval.inc', 'LinearInputCurveWordBVSubinterval'),
+    ('linear_input/lean_check/CurveWordTreeSampling.inc', 'LinearInputCurveWordTreeSampling'),
+    ('linear_input/lean_check/CurveWordTreeSampleProduct.inc', 'LinearInputCurveWordTreeSampleProduct'),
+    ('linear_input/lean_check/CurveWordTreeLimit.inc', 'LinearInputCurveWordTreeLimit'),
+    ('linear_input/lean_check/CurveWordArcGenerating.inc', 'LinearInputCurveWordArcGenerating'),
+    ('linear_input/lean_check/CurveWordBVPathOperations.inc', 'LinearInputCurveWordBVPathOperations'),
+    ('linear_input/lean_check/CurveWordBVCompactness.inc', 'LinearInputCurveWordBVCompactness'),
+    ('linear_input/lean_check/CurveWordBVLoopErase.inc', 'LinearInputCurveWordBVLoopErase'),
+    ('linear_input/lean_check/CurveWordBVReduced.inc', 'LinearInputCurveWordBVReduced'),
+    ('linear_input/lean_check/CurveWordBVArc.inc', 'LinearInputCurveWordBVArc'),
+    ('linear_input/lean_check/CurveWordBVOrientation.inc', 'LinearInputCurveWordBVOrientation'),
+    ('linear_input/lean_check/CurveWordGeodesicTree.inc', 'LinearInputCurveWordGeodesicTree'),
+    ('linear_input/lean_check/CurveWordBVArcUnique.inc', 'LinearInputCurveWordBVArcUnique'),
+    ('linear_input/lean_check/CurveWordBVIntrinsic.inc', 'LinearInputCurveWordBVIntrinsic'),
+    ('linear_input/lean_check/CurveWordBVIntrinsicTree.inc', 'LinearInputCurveWordBVIntrinsicTree'),
+    ('linear_input/lean_check/CurveWordBVHamblyLyons.inc', 'LinearInputCurveWordBVHamblyLyons'),
+    ('linear_input/lean_check/CurveWordBVEquivalence.inc', 'LinearInputCurveWordBVEquivalence'),
+    ('linear_input/lean_check/CurveWordBVCoordinates.inc', 'LinearInputCurveWordBVCoordinates'),
 )
 
 
@@ -333,7 +423,8 @@ def main():
         supplemental_sources=[source for source, _ in SUPPLEMENTS],
         supplemental_groups=[],
         assembled_source="linear_input/lean_check/MainResult.lean",
-        assembly="EXTRA_IMPORTS, then exact verified All.lean and each supplemental source in registered order, with approved assembly contexts outside exact source bytes, followed by public axiom audits, direct proof references and the Astra namespace environment audit.",
+        assembly="EXTRA_IMPORTS, exact verified All.lean, the recorded instance-priority prelude and each supplemental source in registered order, with approved assembly contexts outside exact source bytes, followed by public axiom audits, direct proof references and the Astra namespace environment audit.",
+        assembly_prelude=ASSEMBLY_PRELUDE,
         errors=[], declarations=[], theorem_count=0, declaration_count=0,
         all_declarations=[], total_theorem_count=0, total_declaration_count=0,
         axioms={}, unexpected=[], forbidden_tokens=[], warnings=[],
@@ -429,7 +520,8 @@ def main():
 
         # Preserve every input byte for byte, including its original newlines.
         assembled = ("".join(f"import {m}\n" for m in EXTRA_IMPORTS).encode("utf-8") +
-            b"\n".join([(PROOFS / "All.lean").read_bytes(), *supplement_bytes])
+            b"\n".join([(PROOFS / "All.lean").read_bytes(),
+                         ASSEMBLY_PRELUDE.encode("utf-8"), *supplement_bytes])
             + b"\n\n-- Audit the additive proof declarations.\n"
             + ("\n".join("#print axioms " + d["name"] for d in report["declarations"]) + "\n").encode("utf-8")
             + astra.proof_edge_commands(ROOT).encode("utf-8")
