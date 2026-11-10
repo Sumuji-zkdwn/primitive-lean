@@ -15,6 +15,7 @@ SMOKE_TESTS = (
     'check_temporal_sampling', 'check_wfs_mobius_fourier',
     'check_f0_future_minimality',
     'check_wfs_sampling',
+    'check_curve_word_chain',
 )
 
 

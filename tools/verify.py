@@ -108,6 +108,8 @@ def verify_lean(rebuild):
         'QuarticClassification': 'Exact quartic minimum uniqueness and supporting-input classification',
         'CurvatureRigidity': 'Conserved phase energy and the transverse square force constant curvature at a phase minimum',
         'HistorySignature': 'Actual primitive coordinates, second iterated integrals, area composition and explicit observation hierarchy',
+        'CurveWordAlgebra': 'Lifted-angle curve-word composition, contextual observation, signed-area cocycle and quadratic-cost similarity; an algebraic auxiliary model',
+        'CurveWordFinite': 'Kernel-checked integer quarter-turn words, first- and second-level collisions and balanced-word cardinalities; no analytic arc integral identification',
         'BranchForgetting': 'Chebyshev normalization of the actual stationary input and an explicit minimum-only forgetting criterion',
         'VariablePairObservations': 'Actual partial derivatives, explicit inverses, sign changes and transport of observation hierarchies in the primitive energy family',
         'BranchFibers': 'Cosine candidate equality, explicit critical fibers and retractions, and exhaustive counts of the real inverse images of the ternary iterate',

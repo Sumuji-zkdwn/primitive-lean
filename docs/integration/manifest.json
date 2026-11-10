@@ -5431,6 +5431,86 @@
         "authored_on_parent_commit": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
         "description": "New direct-proof-reference contract for the continuum certificate and actual mixed-wave example."
       }
+    },
+    {
+      "path": "sources/curve_word_chain_20261110/theorem-chain-2026-10-20.md",
+      "sha256": "e6593070d343e25d784965213f053150d0194af53c45bba79843cc13b94cb9a9",
+      "original_sha256": "e6593070d343e25d784965213f053150d0194af53c45bba79843cc13b94cb9a9",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "クソ玉_定理チェイン到達点_2026-10-20.md",
+      "role": "preserved_unmodified_original",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "user_supplied_2026_10_20_bundle",
+        "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+        "ledger": "sources/curve_word_chain_20261110/provenance.json"
+      }
+    },
+    {
+      "path": "sources/curve_word_chain_20261110/check_chain_exact.py",
+      "sha256": "2588cb20334c2a387ff3c50fe77d0c8d1b6932cb389ede587daa546c3e4e26bd",
+      "original_sha256": "2588cb20334c2a387ff3c50fe77d0c8d1b6932cb389ede587daa546c3e4e26bd",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "check_chain_exact.py",
+      "role": "preserved_unmodified_original",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "user_supplied_2026_10_20_bundle",
+        "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+        "ledger": "sources/curve_word_chain_20261110/provenance.json"
+      }
+    },
+    {
+      "path": "sources/curve_word_chain_20261110/check_signature_levels.py",
+      "sha256": "d180870bca76f6ec9c3470d351576153177bb96183df59c99efa4a2c52ba1f83",
+      "original_sha256": "d180870bca76f6ec9c3470d351576153177bb96183df59c99efa4a2c52ba1f83",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "check_signature_levels.py",
+      "role": "preserved_unmodified_original",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "user_supplied_2026_10_20_bundle",
+        "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+        "ledger": "sources/curve_word_chain_20261110/provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordAlgebra.inc",
+      "sha256": "1ad80d1dc97499c035b9c453b666017f88e78b20ec1160541f048080811369bc",
+      "original_sha256": "1ad80d1dc97499c035b9c453b666017f88e78b20ec1160541f048080811369bc",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordAlgebra.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+        "ledger": "sources/curve_word_chain_20261110/provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFinite.inc",
+      "sha256": "b49011bcc5feaf70b9e947a6395c0279ae29f528d5f3d12e7cbdfa5534c2facb",
+      "original_sha256": "b49011bcc5feaf70b9e947a6395c0279ae29f528d5f3d12e7cbdfa5534c2facb",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordFinite.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+        "ledger": "sources/curve_word_chain_20261110/provenance.json"
+      }
     }
   ],
   "construction_errors": [],
@@ -5688,6 +5768,13 @@
       "manifest": "docs/astra/manifest.json",
       "authored_on_parent_commit": "08c04d85dd32680620ab15d57bd685ff011a20be",
       "scope": "Five import-only source modules (50 theorems) plus one separately authored finite-matrix bridge (34 theorems)."
+    },
+    {
+      "date": "2026-11-10",
+      "source": "Curve-word theorem chain A-M",
+      "authored_on_parent_commit": "55266d11bbe854df90f44e6df63977b879ca61a8",
+      "manifest": "sources/curve_word_chain_20261110/provenance.json",
+      "scope": "55 Lean theorems for lifted-angle algebra and exact integer words; all-degree signature and analytic identification remain separate."
     }
   ]
 }
