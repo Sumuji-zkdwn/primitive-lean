@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "be2d206881527eb21fcb62d58323225b2d930ebe",
+  "main_commit": "1683b54db2514a09da6125904e0dfdd193906393",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -5171,6 +5171,124 @@
       "sha256": "1ad80d1dc97499c035b9c453b666017f88e78b20ec1160541f048080811369bc"
     },
     {
+      "id": "main:linear_input/lean_check/CurveWordArc.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordArc.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordArc",
+      "declarations": [
+        "arcAngle",
+        "quadraticDensity",
+        "arcState",
+        "arcAngle_continuous",
+        "arcAngle_initial",
+        "arcAngle_terminal",
+        "arcAngle_derivative",
+        "arc_curvature",
+        "arc_unit_speed",
+        "arc_x_endpoint",
+        "arc_y_endpoint",
+        "arc_quadratic_energy",
+        "arc_state_formula",
+        "arc_state_scale",
+        "endpointUnit",
+        "costUnit",
+        "endpointUnit_pos",
+        "costUnit_pos",
+        "sin_three_pi_div_two",
+        "cos_three_pi_div_two",
+        "arc_A_state",
+        "arc_B_state",
+        "letterState",
+        "interpretFirstState",
+        "letter_matches_integer_step"
+      ],
+      "imports": [],
+      "sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordCircularMoment.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordCircularMoment",
+      "declarations": [
+        "circleX",
+        "circleY",
+        "circle_equation",
+        "circleY_hasDerivAt",
+        "circleY_deriv",
+        "circleMoment",
+        "circleMoment_integrand",
+        "circleMoment_explicit",
+        "circleMoment_full_turns",
+        "circleMoment_three_turns",
+        "circleMoment_three_turn_difference",
+        "circleMoment_three_turn_difference_nonzero",
+        "circleMoment_three_turn_difference_h",
+        "circleMoment_add",
+        "circle_returns",
+        "circle_start_at_origin",
+        "insertion_position",
+        "sequentialLoopsMoment",
+        "insertedLoopsMoment",
+        "insertion_moment_difference",
+        "insertion_moment_difference_h",
+        "insertion_moments_distinct",
+        "circleX_hasDerivAt",
+        "circleX_deriv",
+        "circleArea",
+        "circleArea_integrand",
+        "circleArea_explicit",
+        "circleArea_full_turns",
+        "circleArea_three_turns",
+        "circleArea_one_turn",
+        "circleArea_add",
+        "sequentialLoopsArea",
+        "insertedLoopsArea",
+        "sequentialLoopsArea_value",
+        "insertedLoopsArea_value",
+        "insertion_preserves_area",
+        "loop_area_h",
+        "equal_area_distinct_moments"
+      ],
+      "imports": [],
+      "sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordCycleLimit",
+      "declarations": [
+        "rate",
+        "potential",
+        "selectedLetter",
+        "potential_zero",
+        "rate_negative",
+        "rate_positive",
+        "rate_middle",
+        "edge_lower_bound",
+        "selected_edge_eq",
+        "word_lower_bound",
+        "selectedWord",
+        "selectedWord_length",
+        "selectedWord_cost",
+        "potentialBound",
+        "abs_potential_le",
+        "potentialBound_nonneg",
+        "potential_lower",
+        "potential_upper",
+        "bellman_bounds",
+        "average_bounds",
+        "bellman_average_tendsto",
+        "exhaustive_average_tendsto"
+      ],
+      "imports": [],
+      "sha256": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63"
+    },
+    {
       "id": "main:linear_input/lean_check/CurveWordFinite.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurveWordFinite.inc",
@@ -5214,6 +5332,161 @@
       ],
       "imports": [],
       "sha256": "3057597b6d47db36b9629a15d7be3eca307a57f1f70ff0da5454064cb577bf34"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordFiniteState",
+      "declarations": [
+        "terminal",
+        "wordCost",
+        "terminal_append",
+        "wordCost_append",
+        "terminal_repeat_cycle",
+        "wordCost_repeat_cycle",
+        "words",
+        "mem_words",
+        "words_nonempty",
+        "bellmanStep",
+        "bellman",
+        "bellman_zero",
+        "bellman_succ",
+        "bellman_le_word",
+        "bellman_attained",
+        "exhaustiveMinimum",
+        "bellman_eq_exhaustiveMinimum",
+        "bellman_is_global_minimum",
+        "arcPhase",
+        "arcNext",
+        "arcEdge",
+        "arcObjective",
+        "arcPhase_step",
+        "arcObjective_step",
+        "arcPhase_fold",
+        "arc_wordCost_eq_objective_difference",
+        "arc_wordCost_eq_objective",
+        "arc_bellman_is_global_minimum",
+        "arc_bellman_eq_exhaustiveMinimum",
+        "arc_pureA_cycle",
+        "arc_pureB_cycle",
+        "arc_AB_cycle_zero",
+        "arc_AB_cycle_one",
+        "listedCycleRate",
+        "listedCycleRate_formula",
+        "listedCycleRate_pure_regime",
+        "listedCycleRate_mixed_regime"
+      ],
+      "imports": [],
+      "sha256": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordRealization.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordRealization",
+      "declarations": [
+        "point",
+        "decode",
+        "decode_endpoint",
+        "decode_angle",
+        "decode_cost",
+        "point_add",
+        "rotation_quarter_count",
+        "rotation_matches_lattice",
+        "decode_empty",
+        "letter_endpoint",
+        "letter_angle",
+        "letter_cost",
+        "decode_step",
+        "wordState",
+        "decode_fold",
+        "wordState_eq_decode",
+        "word_endpoint",
+        "word_lifted_angle",
+        "word_cost",
+        "normalizedInput",
+        "linearEnergy_decode",
+        "word_linearEnergy_normalized",
+        "minimumEnergy",
+        "minimumEnergy_is_global_minimum",
+        "physicalRate",
+        "normalized_rate_to_physical",
+        "physicalRate_formula",
+        "minimumEnergy_average_tendsto",
+        "minimumEnergy_average_explicit",
+        "criticalInput",
+        "criticalInput_pos",
+        "criticalInput_unit_identity",
+        "physicalRate_pureA",
+        "physicalRate_alternating",
+        "physicalRate_at_threshold"
+      ],
+      "imports": [],
+      "sha256": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSignature.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSignature",
+      "declarations": [
+        "reverseIntegral",
+        "signature",
+        "reverseIntegral_scale",
+        "signature_scale",
+        "signature_empty",
+        "signature_singleton",
+        "signature_pair",
+        "reverseIntegral_continuous",
+        "signature_singleton_split",
+        "signature_pair_split",
+        "tangentVelocity",
+        "signature_x",
+        "signature_y",
+        "signature_xx",
+        "thirdMoment",
+        "thirdMoment_eq_two_signature_xxy",
+        "translated_thirdMoment",
+        "translated_closed_thirdMoment"
+      ],
+      "imports": [],
+      "sha256": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordThermodynamics",
+      "declarations": [
+        "minimum",
+        "partition",
+        "freeEnergy",
+        "minimum_le",
+        "minimum_attained",
+        "partition_positive",
+        "minimum_weight_le_partition",
+        "partition_le_card_minimum_weight",
+        "freeEnergy_le_minimum",
+        "minimum_sub_entropy_le_freeEnergy",
+        "freeEnergy_bounds",
+        "freeEnergy_tendsto_minimum",
+        "freeEnergy_error_bound",
+        "partition_scaled_energy",
+        "freeEnergy_scaled_energy",
+        "partition_scale_states",
+        "freeEnergy_scale_states",
+        "endpointMass",
+        "endpointMass_nonneg",
+        "endpointMass_common_cost",
+        "multiplicity_from_common_cost_mass"
+      ],
+      "imports": [],
+      "sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49"
     },
     {
       "id": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
@@ -15994,6 +16267,240 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveWordArc.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.curvature",
+        "Elastica.unit_speed_squared",
+        "Elastica.xCoord",
+        "Elastica.xCoord_affine",
+        "Elastica.yCoord",
+        "Elastica.yCoord_affine"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordArc.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "unit_speed_squared",
+        "xCoord_affine",
+        "yCoord_affine"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordArc.inc",
+      "to": "main:lean/Elastica/Variation.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.energy"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.State",
+        "LinearInputCurveWordAlgebra.endpoint",
+        "LinearInputCurveWordAlgebra.scale",
+        "LinearInputCurveWordAlgebra.state_ext"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFinite.State",
+        "LinearInputCurveWordFinite.rotate",
+        "LinearInputCurveWordFinite.step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFinite.rotate",
+        "LinearInputCurveWordFinite.state"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcObjective",
+        "arc_bellman_eq_exhaustiveMinimum",
+        "bellman_attained",
+        "bellman_le_word",
+        "words_nonempty"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFinite.State",
+        "LinearInputCurveWordFinite.rotate",
+        "LinearInputCurveWordFinite.state",
+        "LinearInputCurveWordFinite.step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.State",
+        "LinearInputCurveWordAlgebra.angle",
+        "LinearInputCurveWordAlgebra.cost",
+        "LinearInputCurveWordAlgebra.emptyState",
+        "LinearInputCurveWordAlgebra.endpoint",
+        "LinearInputCurveWordAlgebra.join",
+        "LinearInputCurveWordAlgebra.join_angle",
+        "LinearInputCurveWordAlgebra.join_cost",
+        "LinearInputCurveWordAlgebra.join_endpoint",
+        "LinearInputCurveWordAlgebra.linearEnergy",
+        "LinearInputCurveWordAlgebra.rotation",
+        "LinearInputCurveWordAlgebra.rotation_add",
+        "LinearInputCurveWordAlgebra.rotation_quarter",
+        "LinearInputCurveWordAlgebra.rotation_zero",
+        "LinearInputCurveWordAlgebra.state_ext"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "emptyState",
+        "join_angle",
+        "join_endpoint",
+        "linearEnergy",
+        "rotation_add",
+        "rotation_quarter",
+        "rotation_zero"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordArc.costUnit",
+        "LinearInputCurveWordArc.costUnit_pos",
+        "LinearInputCurveWordArc.endpointUnit",
+        "LinearInputCurveWordArc.endpointUnit_pos",
+        "LinearInputCurveWordArc.interpretFirstState",
+        "LinearInputCurveWordArc.letterState",
+        "LinearInputCurveWordArc.letter_matches_integer_step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "costUnit_pos",
+        "endpointUnit",
+        "endpointUnit_pos",
+        "interpretFirstState",
+        "letterState",
+        "letter_matches_integer_step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordCycleLimit.bellman_average_tendsto"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bellman_average_tendsto"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordFinite.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFinite.Point",
+        "LinearInputCurveWordFinite.State",
+        "LinearInputCurveWordFinite.rotate",
+        "LinearInputCurveWordFinite.state",
+        "LinearInputCurveWordFinite.step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordFiniteState.arcEdge",
+        "LinearInputCurveWordFiniteState.arcNext",
+        "LinearInputCurveWordFiniteState.arcObjective",
+        "LinearInputCurveWordFiniteState.arc_bellman_is_global_minimum",
+        "LinearInputCurveWordFiniteState.bellman"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordRealization.inc",
+      "to": "main:linear_input/lean_check/CurveWordFiniteState.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arcObjective",
+        "arc_bellman_is_global_minimum"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.hasDerivAt_xCoord",
+        "Elastica.xCoord",
+        "Elastica.yCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordSignature.inc",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "hasDerivAt_xCoord"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.State",
+        "LinearInputCurveWordAlgebra.linearEnergy",
+        "LinearInputCurveWordAlgebra.linearEnergy_scale",
+        "LinearInputCurveWordAlgebra.scale"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "linearEnergy",
+        "linearEnergy_scale"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/DecompositionF0Bridge.inc",
       "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
       "kind": "unique_identifier_candidate",
@@ -20320,6 +20827,13 @@
     "linear_input/lean_check/HistorySignature.inc",
     "linear_input/lean_check/CurveWordAlgebra.inc",
     "linear_input/lean_check/CurveWordFinite.inc",
+    "linear_input/lean_check/CurveWordArc.inc",
+    "linear_input/lean_check/CurveWordFiniteState.inc",
+    "linear_input/lean_check/CurveWordCycleLimit.inc",
+    "linear_input/lean_check/CurveWordRealization.inc",
+    "linear_input/lean_check/CurveWordThermodynamics.inc",
+    "linear_input/lean_check/CurveWordSignature.inc",
+    "linear_input/lean_check/CurveWordCircularMoment.inc",
     "linear_input/lean_check/BranchForgetting.inc",
     "linear_input/lean_check/VariablePairObservations.inc",
     "linear_input/lean_check/BranchFibers.inc",
@@ -20788,28 +21302,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "be2d206881527eb21fcb62d58323225b2d930ebe",
+      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "be2d206881527eb21fcb62d58323225b2d930ebe",
+      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "be2d206881527eb21fcb62d58323225b2d930ebe",
+      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "be2d206881527eb21fcb62d58323225b2d930ebe",
+      "base_sha": "1683b54db2514a09da6125904e0dfdd193906393",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
