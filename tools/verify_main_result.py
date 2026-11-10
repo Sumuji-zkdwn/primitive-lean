@@ -22,6 +22,8 @@ PROOFS = ROOT / "linear_input/lean_check"
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 # Additive Mathlib imports prepended to MainResult.lean (All.lean bytes stay unchanged).
 EXTRA_IMPORTS = (
+    "Mathlib.Data.Finset.Max",
+    "Mathlib.Topology.Algebra.Order.Field",
     "Mathlib.Data.List.Dedup",
     "Mathlib.Data.Nat.Squarefree",
     "Mathlib.FieldTheory.RatFunc.IntermediateField",
@@ -98,6 +100,13 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/HistorySignature.inc', 'LinearInputHistorySignature'),
     ('linear_input/lean_check/CurveWordAlgebra.inc', 'LinearInputCurveWordAlgebra'),
     ('linear_input/lean_check/CurveWordFinite.inc', 'LinearInputCurveWordFinite'),
+    ('linear_input/lean_check/CurveWordArc.inc', 'LinearInputCurveWordArc'),
+    ('linear_input/lean_check/CurveWordFiniteState.inc', 'LinearInputCurveWordFiniteState'),
+    ('linear_input/lean_check/CurveWordCycleLimit.inc', 'LinearInputCurveWordCycleLimit'),
+    ('linear_input/lean_check/CurveWordRealization.inc', 'LinearInputCurveWordRealization'),
+    ('linear_input/lean_check/CurveWordThermodynamics.inc', 'LinearInputCurveWordThermodynamics'),
+    ('linear_input/lean_check/CurveWordSignature.inc', 'LinearInputCurveWordSignature'),
+    ('linear_input/lean_check/CurveWordCircularMoment.inc', 'LinearInputCurveWordCircularMoment'),
     ('linear_input/lean_check/BranchForgetting.inc', 'LinearInputBranchForgetting'),
     ('linear_input/lean_check/VariablePairObservations.inc', 'LinearInputVariablePairs'),
     ('linear_input/lean_check/BranchFibers.inc', 'LinearInputBranchFibers'),

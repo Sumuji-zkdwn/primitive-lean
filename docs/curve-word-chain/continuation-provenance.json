@@ -1,0 +1,1058 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-10",
+  "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
+  "source_chain": "sources/curve_word_chain_20261110/theorem-chain-2026-10-20.md",
+  "source_chain_sha256": "e6593070d343e25d784965213f053150d0194af53c45bba79843cc13b94cb9a9",
+  "prior_ledger": "sources/curve_word_chain_20261110/provenance.json",
+  "prior_pr": 128,
+  "lean_supplements": [
+    {
+      "path": "linear_input/lean_check/CurveWordArc.inc",
+      "namespace": "LinearInputCurveWordArc",
+      "sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
+      "theorem_count": 18,
+      "declaration_count": 25,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.arcAngle",
+          "line": 17
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.quadraticDensity",
+          "line": 19
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.arcState",
+          "line": 21
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arcAngle_continuous",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arcAngle_initial",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arcAngle_terminal",
+          "line": 32
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arcAngle_derivative",
+          "line": 35
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_curvature",
+          "line": 38
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_unit_speed",
+          "line": 41
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_x_endpoint",
+          "line": 46
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_y_endpoint",
+          "line": 52
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_quadratic_energy",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_state_formula",
+          "line": 66
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_state_scale",
+          "line": 74
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.endpointUnit",
+          "line": 85
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.costUnit",
+          "line": 87
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.endpointUnit_pos",
+          "line": 89
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.costUnit_pos",
+          "line": 93
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.sin_three_pi_div_two",
+          "line": 97
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.cos_three_pi_div_two",
+          "line": 101
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_A_state",
+          "line": 105
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.arc_B_state",
+          "line": 117
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.letterState",
+          "line": 130
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordArc.interpretFirstState",
+          "line": 134
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordArc.letter_matches_integer_step",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFiniteState.inc",
+      "namespace": "LinearInputCurveWordFiniteState",
+      "sha256": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9",
+      "theorem_count": 26,
+      "declaration_count": 37,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.terminal",
+          "line": 14
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.wordCost",
+          "line": 18
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.terminal_append",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.wordCost_append",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.terminal_repeat_cycle",
+          "line": 38
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.wordCost_repeat_cycle",
+          "line": 46
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.words",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.mem_words",
+          "line": 62
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.words_nonempty",
+          "line": 71
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.bellmanStep",
+          "line": 77
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.bellman",
+          "line": 81
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.bellman_zero",
+          "line": 86
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.bellman_succ",
+          "line": 90
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.bellman_le_word",
+          "line": 96
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.bellman_attained",
+          "line": 104
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.exhaustiveMinimum",
+          "line": 116
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.bellman_eq_exhaustiveMinimum",
+          "line": 121
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.bellman_is_global_minimum",
+          "line": 132
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.arcPhase",
+          "line": 141
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.arcNext",
+          "line": 144
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.arcEdge",
+          "line": 148
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.arcObjective",
+          "line": 152
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arcPhase_step",
+          "line": 155
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arcObjective_step",
+          "line": 161
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arcPhase_fold",
+          "line": 168
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_wordCost_eq_objective_difference",
+          "line": 177
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_wordCost_eq_objective",
+          "line": 187
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_bellman_is_global_minimum",
+          "line": 194
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_bellman_eq_exhaustiveMinimum",
+          "line": 204
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_pureA_cycle",
+          "line": 211
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_pureB_cycle",
+          "line": 217
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_AB_cycle_zero",
+          "line": 223
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.arc_AB_cycle_one",
+          "line": 229
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordFiniteState.listedCycleRate",
+          "line": 236
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.listedCycleRate_formula",
+          "line": 238
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.listedCycleRate_pure_regime",
+          "line": 247
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordFiniteState.listedCycleRate_mixed_regime",
+          "line": 251
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCycleLimit.inc",
+      "namespace": "LinearInputCurveWordCycleLimit",
+      "sha256": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63",
+      "theorem_count": 17,
+      "declaration_count": 22,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCycleLimit.rate",
+          "line": 17
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCycleLimit.potential",
+          "line": 19
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCycleLimit.selectedLetter",
+          "line": 39
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.potential_zero",
+          "line": 44
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.rate_negative",
+          "line": 46
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.rate_positive",
+          "line": 50
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.rate_middle",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.edge_lower_bound",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.selected_edge_eq",
+          "line": 76
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.word_lower_bound",
+          "line": 94
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCycleLimit.selectedWord",
+          "line": 105
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.selectedWord_length",
+          "line": 109
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.selectedWord_cost",
+          "line": 115
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCycleLimit.potentialBound",
+          "line": 126
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.abs_potential_le",
+          "line": 129
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.potentialBound_nonneg",
+          "line": 133
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.potential_lower",
+          "line": 136
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.potential_upper",
+          "line": 139
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.bellman_bounds",
+          "line": 143
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.average_bounds",
+          "line": 157
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.bellman_average_tendsto",
+          "line": 175
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCycleLimit.exhaustive_average_tendsto",
+          "line": 187
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordRealization.inc",
+      "namespace": "LinearInputCurveWordRealization",
+      "sha256": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb",
+      "theorem_count": 28,
+      "declaration_count": 35,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.point",
+          "line": 13
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.decode",
+          "line": 17
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.decode_endpoint",
+          "line": 20
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.decode_angle",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.decode_cost",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.point_add",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.rotation_quarter_count",
+          "line": 34
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.rotation_matches_lattice",
+          "line": 43
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.decode_empty",
+          "line": 52
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.letter_endpoint",
+          "line": 58
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.letter_angle",
+          "line": 66
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.letter_cost",
+          "line": 74
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.decode_step",
+          "line": 82
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.wordState",
+          "line": 98
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.decode_fold",
+          "line": 102
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.wordState_eq_decode",
+          "line": 112
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.word_endpoint",
+          "line": 117
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.word_lifted_angle",
+          "line": 122
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.word_cost",
+          "line": 127
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.normalizedInput",
+          "line": 133
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.linearEnergy_decode",
+          "line": 137
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.word_linearEnergy_normalized",
+          "line": 149
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.minimumEnergy",
+          "line": 157
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.minimumEnergy_is_global_minimum",
+          "line": 163
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.physicalRate",
+          "line": 180
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.normalized_rate_to_physical",
+          "line": 184
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.physicalRate_formula",
+          "line": 195
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.minimumEnergy_average_tendsto",
+          "line": 204
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.minimumEnergy_average_explicit",
+          "line": 214
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordRealization.criticalInput",
+          "line": 220
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.criticalInput_pos",
+          "line": 222
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.criticalInput_unit_identity",
+          "line": 226
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.physicalRate_pureA",
+          "line": 233
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.physicalRate_alternating",
+          "line": 241
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordRealization.physicalRate_at_threshold",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "namespace": "LinearInputCurveWordThermodynamics",
+      "sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49",
+      "theorem_count": 17,
+      "declaration_count": 21,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordThermodynamics.minimum",
+          "line": 17
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordThermodynamics.partition",
+          "line": 20
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy",
+          "line": 23
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.minimum_le",
+          "line": 26
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.minimum_attained",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.partition_positive",
+          "line": 35
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.minimum_weight_le_partition",
+          "line": 42
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.partition_le_card_minimum_weight",
+          "line": 49
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy_le_minimum",
+          "line": 60
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.minimum_sub_entropy_le_freeEnergy",
+          "line": 70
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy_bounds",
+          "line": 83
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy_tendsto_minimum",
+          "line": 90
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy_error_bound",
+          "line": 104
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.partition_scaled_energy",
+          "line": 111
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy_scaled_energy",
+          "line": 118
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.partition_scale_states",
+          "line": 126
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.freeEnergy_scale_states",
+          "line": 138
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordThermodynamics.endpointMass",
+          "line": 151
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.endpointMass_nonneg",
+          "line": 155
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.endpointMass_common_cost",
+          "line": 161
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordThermodynamics.multiplicity_from_common_cost_mass",
+          "line": 174
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignature.inc",
+      "namespace": "LinearInputCurveWordSignature",
+      "sha256": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee",
+      "theorem_count": 14,
+      "declaration_count": 18,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordSignature.reverseIntegral",
+          "line": 14
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordSignature.signature",
+          "line": 19
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.reverseIntegral_scale",
+          "line": 22
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_scale",
+          "line": 38
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_empty",
+          "line": 42
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_singleton",
+          "line": 45
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_pair",
+          "line": 49
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.reverseIntegral_continuous",
+          "line": 53
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_singleton_split",
+          "line": 62
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_pair_split",
+          "line": 71
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordSignature.tangentVelocity",
+          "line": 103
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_x",
+          "line": 106
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_y",
+          "line": 110
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.signature_xx",
+          "line": 114
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordSignature.thirdMoment",
+          "line": 133
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.thirdMoment_eq_two_signature_xxy",
+          "line": 136
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.translated_thirdMoment",
+          "line": 152
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordSignature.translated_closed_thirdMoment",
+          "line": 177
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "namespace": "LinearInputCurveWordCircularMoment",
+      "sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0",
+      "theorem_count": 30,
+      "declaration_count": 38,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.circleX",
+          "line": 14
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.circleY",
+          "line": 16
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circle_equation",
+          "line": 18
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleY_hasDerivAt",
+          "line": 24
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleY_deriv",
+          "line": 29
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment",
+          "line": 34
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_integrand",
+          "line": 37
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_explicit",
+          "line": 41
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_full_turns",
+          "line": 64
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turns",
+          "line": 70
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turn_difference",
+          "line": 77
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turn_difference_nonzero",
+          "line": 83
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_three_turn_difference_h",
+          "line": 89
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleMoment_add",
+          "line": 98
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circle_returns",
+          "line": 106
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circle_start_at_origin",
+          "line": 112
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.insertion_position",
+          "line": 116
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.sequentialLoopsMoment",
+          "line": 127
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.insertedLoopsMoment",
+          "line": 134
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.insertion_moment_difference",
+          "line": 139
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.insertion_moment_difference_h",
+          "line": 147
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.insertion_moments_distinct",
+          "line": 154
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleX_hasDerivAt",
+          "line": 163
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleX_deriv",
+          "line": 167
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.circleArea",
+          "line": 172
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleArea_integrand",
+          "line": 177
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleArea_explicit",
+          "line": 190
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleArea_full_turns",
+          "line": 208
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleArea_three_turns",
+          "line": 214
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleArea_one_turn",
+          "line": 221
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.circleArea_add",
+          "line": 225
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.sequentialLoopsArea",
+          "line": 230
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputCurveWordCircularMoment.insertedLoopsArea",
+          "line": 234
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.sequentialLoopsArea_value",
+          "line": 239
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.insertedLoopsArea_value",
+          "line": 247
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.insertion_preserves_area",
+          "line": 262
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.loop_area_h",
+          "line": 266
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputCurveWordCircularMoment.equal_area_distinct_moments",
+          "line": 274
+        }
+      ]
+    }
+  ],
+  "added_theorems": 150,
+  "added_declarations": 196,
+  "validation": "docs/curve-word-chain/validation-continuation.json",
+  "scope_document": "docs/curve-word-chain/continuation.md"
+}
