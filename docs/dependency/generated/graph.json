@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+  "main_commit": "f26d760c4a9c93d0721ef1a32a62e76bdf8c1811",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -10054,6 +10054,40 @@
       ],
       "imports": [],
       "sha256": "fed818ad809bd16fee371ea9a7edc27b83c33c6af521e7931cfff1ed63403a8d"
+    },
+    {
+      "id": "main:linear_input/lean_check/OperatorOrientationDepth.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/OperatorOrientationDepth.inc",
+      "group": "Operator / Rulefold",
+      "namespace": "LinearInputOperatorOrientationDepth",
+      "declarations": [
+        "AllowedWord",
+        "SeparatedWithin",
+        "EverSeparated",
+        "ObservationalEq",
+        "allowedWord_mono",
+        "separatedWithin_mono",
+        "everSeparated_mono",
+        "observationalEq_antitone",
+        "everSeparated_iff_not_observationalEq",
+        "observationalEq_univ_iff_wordEq",
+        "leastDepth",
+        "leastDepth_spec",
+        "leastDepth_le",
+        "leastDepth_antitone",
+        "not_separated_at_zero",
+        "oldAllowed",
+        "old_word_identity",
+        "old_observationalEq",
+        "old_not_everSeparated",
+        "full_separated_in_one",
+        "full_everSeparated",
+        "full_leastDepth_one",
+        "invariant_residue_forces_zero_orientation"
+      ],
+      "imports": [],
+      "sha256": "14c0271fad2fa052485967e9e14b8d3afc7293372b14db17790942fe8779baa9"
     },
     {
       "id": "main:linear_input/lean_check/OperatorProductSystems.inc",
@@ -23042,6 +23076,14 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/OperatorOrientationDepth.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "extendedStep"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/OperatorReachability.inc",
       "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
       "kind": "unique_identifier_candidate",
@@ -25247,6 +25289,7 @@
     "linear_input/lean_check/OperatorBisimulation.inc",
     "linear_input/lean_check/OperatorVocabularyRefinement.inc",
     "linear_input/lean_check/OperatorFiniteHorizon.inc",
+    "linear_input/lean_check/OperatorOrientationDepth.inc",
     "linear_input/lean_check/OperatorSemanticClosure.inc",
     "linear_input/lean_check/CrossSystemObservation.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
@@ -25730,28 +25773,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "f26d760c4a9c93d0721ef1a32a62e76bdf8c1811",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "f26d760c4a9c93d0721ef1a32a62e76bdf8c1811",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "f26d760c4a9c93d0721ef1a32a62e76bdf8c1811",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "f26d760c4a9c93d0721ef1a32a62e76bdf8c1811",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

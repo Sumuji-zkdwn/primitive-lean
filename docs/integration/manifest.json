@@ -6519,6 +6519,22 @@
         "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
         "ledger": "docs/curve-word-chain/extension-provenance.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/OperatorOrientationDepth.inc",
+      "sha256": "14c0271fad2fa052485967e9e14b8d3afc7293372b14db17790942fe8779baa9",
+      "original_sha256": "14c0271fad2fa052485967e9e14b8d3afc7293372b14db17790942fe8779baa9",
+      "source_pr": 131,
+      "source_commit": "c4202bf698b0b57633217ca31b53358930d69a48",
+      "source_path": "linear_input/lean_check/OperatorOrientationDepth.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "28721702d21720c37805fb64924253f3e1ace11f",
+        "ledger": "docs/research/2026-11-11-observer-orientation-depth.md"
+      }
     }
   ],
   "construction_errors": [],

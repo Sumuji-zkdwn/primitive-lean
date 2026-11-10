@@ -182,6 +182,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/OperatorBisimulation.inc', 'LinearInputOperatorBisimulation'),
     ('linear_input/lean_check/OperatorVocabularyRefinement.inc', 'LinearInputOperatorRefinement'),
     ('linear_input/lean_check/OperatorFiniteHorizon.inc', 'LinearInputOperatorHorizon'),
+    ('linear_input/lean_check/OperatorOrientationDepth.inc', 'LinearInputOperatorOrientationDepth'),
     ('linear_input/lean_check/OperatorSemanticClosure.inc', 'LinearInputOperatorSemanticClosure'),
     ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
     ('linear_input/lean_check/SemanticIntervalNecessity.inc', 'LinearInputSemanticIntervals'),
