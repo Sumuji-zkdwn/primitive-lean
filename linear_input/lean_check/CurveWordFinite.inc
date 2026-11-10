@@ -78,7 +78,7 @@ theorem eight_letter_state_value :
 
 /-- Every Boolean word of a prescribed length, with no restriction on counts. -/
 def allWords : ℕ → List (List Bool)
-  | 0 => [[]]
+  | 0 => ([] : List Bool) :: []
   | n + 1 => (allWords n).flatMap (fun w => [true :: w, false :: w])
 
 theorem mem_allWords (w : List Bool) (n : ℕ) :
