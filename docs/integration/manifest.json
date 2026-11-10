@@ -5623,6 +5623,694 @@
         "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
         "ledger": "docs/curve-word-chain/continuation-provenance.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordPiecewise.inc",
+      "sha256": "ddc09dffcd3bd34ecd1c92677280415074e900da7636c2c02d709d5ffc11a09c",
+      "original_sha256": "ddc09dffcd3bd34ecd1c92677280415074e900da7636c2c02d709d5ffc11a09c",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordPiecewise.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCircleWords.inc",
+      "sha256": "a2d009f7c006dc9975b9b4c03bb93115570eb4f05308ec8097e64c1923c02f86",
+      "original_sha256": "a2d009f7c006dc9975b9b4c03bb93115570eb4f05308ec8097e64c1923c02f86",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordCircleWords.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordGraphLimit.inc",
+      "sha256": "023a1fff0eed60635e15b8e7b11d6aec7b57436f995a373526b34a6a2f2109a5",
+      "original_sha256": "023a1fff0eed60635e15b8e7b11d6aec7b57436f995a373526b34a6a2f2109a5",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordGraphLimit.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "sha256": "445ac49f6187a5c455888969fad99a6b25549cfb51d0381ee9b1080f1baec456",
+      "original_sha256": "445ac49f6187a5c455888969fad99a6b25549cfb51d0381ee9b1080f1baec456",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordLaplace.inc",
+      "sha256": "4569a18082b885b1c1acc8efbfd0848486ded6bfea528d0823e2897f081dd6ce",
+      "original_sha256": "4569a18082b885b1c1acc8efbfd0848486ded6bfea528d0823e2897f081dd6ce",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordLaplace.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSpectral.inc",
+      "sha256": "c1abe088a4bd0bc3546e3f994569e5403995625152fa909c686087b15bd98248",
+      "original_sha256": "c1abe088a4bd0bc3546e3f994569e5403995625152fa909c686087b15bd98248",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSpectral.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTransfer.inc",
+      "sha256": "4b5c8fb3d6fa70207e43bb0eeea3c9c2121e926f858111acb7d4db24dbf3c79b",
+      "original_sha256": "4b5c8fb3d6fa70207e43bb0eeea3c9c2121e926f858111acb7d4db24dbf3c79b",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordTransfer.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordChen.inc",
+      "sha256": "b916f789273625cc3945a78026b97de7ad7eb56d196790798c14ca58c2795f06",
+      "original_sha256": "b916f789273625cc3945a78026b97de7ad7eb56d196790798c14ca58c2795f06",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordChen.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFormalSeries.inc",
+      "sha256": "6c5b5e02b8f1b33defcc5d289de59506db49276e3228b7f8feb292c70c9c29eb",
+      "original_sha256": "6c5b5e02b8f1b33defcc5d289de59506db49276e3228b7f8feb292c70c9c29eb",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordFormalSeries.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCoproduct.inc",
+      "sha256": "fef28191c26b130453e8c15bb748821d0310685a3fe9521f0074959c8c68b809",
+      "original_sha256": "fef28191c26b130453e8c15bb748821d0310685a3fe9521f0074959c8c68b809",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordCoproduct.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFriedrichs.inc",
+      "sha256": "7f036b4c8a9d5371f97d19513c5238cb27ef23b5828d2772545fdd9af52249f9",
+      "original_sha256": "7f036b4c8a9d5371f97d19513c5238cb27ef23b5828d2772545fdd9af52249f9",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordFriedrichs.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeLike.inc",
+      "sha256": "de98d4dd4f2f53ea846ad2cfbd1e1d6e53609fa3bb9570e4b6a50a4259b39b43",
+      "original_sha256": "de98d4dd4f2f53ea846ad2cfbd1e1d6e53609fa3bb9570e4b6a50a4259b39b43",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordTreeLike.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "sha256": "41e0bbd5f192d9c1d2d0fa2ba2c278ecea274591e8df259cdf883eac33930b8f",
+      "original_sha256": "41e0bbd5f192d9c1d2d0fa2ba2c278ecea274591e8df259cdf883eac33930b8f",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordReparametrization.inc",
+      "sha256": "8c7fa363b697cc6d30f0f718a9cebd44c3ed8f579bd042259af6e7304425cd84",
+      "original_sha256": "8c7fa363b697cc6d30f0f718a9cebd44c3ed8f579bd042259af6e7304425cd84",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordReparametrization.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "sha256": "2f1efa023de0fb4451503b7f4a75ad9c6d0ddfb201ea4444525aabec74e2d793",
+      "original_sha256": "2f1efa023de0fb4451503b7f4a75ad9c6d0ddfb201ea4444525aabec74e2d793",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordStieltjes.inc",
+      "sha256": "a1800eb35cb2f2d38697d4ba2edeabd4a39e4217ae0022545e706f1d7f7d9b20",
+      "original_sha256": "a1800eb35cb2f2d38697d4ba2edeabd4a39e4217ae0022545e706f1d7f7d9b20",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordStieltjes.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVSignature.inc",
+      "sha256": "b3f2b79d9af09ecdbb965573b618c9656ae8d330610747c9386c29cd1f00d505",
+      "original_sha256": "b3f2b79d9af09ecdbb965573b618c9656ae8d330610747c9386c29cd1f00d505",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVSignature.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVReparam.inc",
+      "sha256": "968b310cefe103155b89c9676d0426c8f2fb1193ee2be21d84885d7ddd3a9858",
+      "original_sha256": "968b310cefe103155b89c9676d0426c8f2fb1193ee2be21d84885d7ddd3a9858",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVReparam.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVChen.inc",
+      "sha256": "762b4500cf9d316a3bfd84299a6deeb4633fb66379ea45abf5bc109c5ca9cc62",
+      "original_sha256": "762b4500cf9d316a3bfd84299a6deeb4633fb66379ea45abf5bc109c5ca9cc62",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVChen.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVShuffle.inc",
+      "sha256": "dfeb7156a1a2df8d63bdc3a2d3f20428e2596bf0672f78e76936a5d3473ff607",
+      "original_sha256": "dfeb7156a1a2df8d63bdc3a2d3f20428e2596bf0672f78e76936a5d3473ff607",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVShuffle.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureTree.inc",
+      "sha256": "ee1eab1e53775c467ad2f870bdb01a66c99d4b24417da216d987fc31c292de07",
+      "original_sha256": "ee1eab1e53775c467ad2f870bdb01a66c99d4b24417da216d987fc31c292de07",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSignatureTree.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordHeightMetric.inc",
+      "sha256": "aa92c23ed32592c27bb9ae409e28483ea06626ee953b2442c7bdf921fd9cdd1a",
+      "original_sha256": "aa92c23ed32592c27bb9ae409e28483ea06626ee953b2442c7bdf921fd9cdd1a",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordHeightMetric.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordScalarLog.inc",
+      "sha256": "fe1a2d520c4f95d4160d2a6f26819395f75bef086df0783783b2d5d62403f19d",
+      "original_sha256": "fe1a2d520c4f95d4160d2a6f26819395f75bef086df0783783b2d5d62403f19d",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordScalarLog.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordLogFormula.inc",
+      "sha256": "07f83ed56ccacd0a07279d832ea4dcf873566d9d877ef121ef3c5e2a5dd9aa84",
+      "original_sha256": "07f83ed56ccacd0a07279d832ea4dcf873566d9d877ef121ef3c5e2a5dd9aa84",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordLogFormula.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVTopology.inc",
+      "sha256": "51eff4b2b634d0551d0f2c8442c39a82d87d173e05c58e78b61635fd722af197",
+      "original_sha256": "51eff4b2b634d0551d0f2c8442c39a82d87d173e05c58e78b61635fd722af197",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVTopology.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "sha256": "47ffff437e607590ee6e2a792a185e1b45d69f3a140cb6dd14eed2683701f241",
+      "original_sha256": "47ffff437e607590ee6e2a792a185e1b45d69f3a140cb6dd14eed2683701f241",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVAlgebra.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordConvexObservation.inc",
+      "sha256": "afd2f2c1eafbc43f4e5dedb16c93a342ebe7989a71fac97c2cf03026a04b2885",
+      "original_sha256": "afd2f2c1eafbc43f4e5dedb16c93a342ebe7989a71fac97c2cf03026a04b2885",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordConvexObservation.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "sha256": "dad3fa7bfbcbb5ba6da6fcec6eb918b035e0c48b42a94115e16203c6b5f4e964",
+      "original_sha256": "dad3fa7bfbcbb5ba6da6fcec6eb918b035e0c48b42a94115e16203c6b5f4e964",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "sha256": "576be1510db8e43daedfd5a6ca1a83343ae0a1907efbda9ceeb266c0d13cb84a",
+      "original_sha256": "576be1510db8e43daedfd5a6ca1a83343ae0a1907efbda9ceeb266c0d13cb84a",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSignatureUniform.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordConvexSeparation.inc",
+      "sha256": "993ec1b58b8ea62ff56f00c9064fe0f831d0c054031a691b499e93646062cee5",
+      "original_sha256": "993ec1b58b8ea62ff56f00c9064fe0f831d0c054031a691b499e93646062cee5",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordConvexSeparation.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordLinearAction.inc",
+      "sha256": "8f6dbea53ed71e76e18d6d0a610bbed4f80047b1afd97e6df8f5f239589519a6",
+      "original_sha256": "8f6dbea53ed71e76e18d6d0a610bbed4f80047b1afd97e6df8f5f239589519a6",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordLinearAction.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVCanonical.inc",
+      "sha256": "91511adf72ac392eba0f66f623f303b493ab85f3d136a7fd727f3fd72fa1feca",
+      "original_sha256": "91511adf72ac392eba0f66f623f303b493ab85f3d136a7fd727f3fd72fa1feca",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVCanonical.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordWordSignature.inc",
+      "sha256": "728fc6bdb02a3ff3f7bf969f2b4878446fccbd0f8dce2885de95ac95a8a326ff",
+      "original_sha256": "728fc6bdb02a3ff3f7bf969f2b4878446fccbd0f8dce2885de95ac95a8a326ff",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordWordSignature.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordGenerating.inc",
+      "sha256": "465cf8b11d1c8018fe0c5a61e9b084d830ba30184109a26a3c44f64588f49c37",
+      "original_sha256": "465cf8b11d1c8018fe0c5a61e9b084d830ba30184109a26a3c44f64588f49c37",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordGenerating.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordWordGenerating.inc",
+      "sha256": "60a49c9c83b1ccb8690868cbf00528641b84f9d90ac65ac7aabbfa2cbc9b4e04",
+      "original_sha256": "60a49c9c83b1ccb8690868cbf00528641b84f9d90ac65ac7aabbfa2cbc9b4e04",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordWordGenerating.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSamplingOrder.inc",
+      "sha256": "6ef3de5f1e3d3c80c637c43e58eafd9f92be11cb52f319c191f6a7a42d55df11",
+      "original_sha256": "6ef3de5f1e3d3c80c637c43e58eafd9f92be11cb52f319c191f6a7a42d55df11",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSamplingOrder.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeSignature.inc",
+      "sha256": "98b9a66c991d9040bc631d6ed1b105df7f845d3a8033f4de2f145ade73191178",
+      "original_sha256": "98b9a66c991d9040bc631d6ed1b105df7f845d3a8033f4de2f145ade73191178",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordTreeSignature.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordPolygonal.inc",
+      "sha256": "a38873c6f640db5603883fd3ed14aab562840cd232e5243431178f2a2984be7f",
+      "original_sha256": "a38873c6f640db5603883fd3ed14aab562840cd232e5243431178f2a2984be7f",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordPolygonal.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "sha256": "b403ed17632f0f1c3b406764fd3223fd84e4b46a1613fd4089937b12843f8104",
+      "original_sha256": "b403ed17632f0f1c3b406764fd3223fd84e4b46a1613fd4089937b12843f8104",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeSampling.inc",
+      "sha256": "8a45f983ede5d9952630822422c28abfbfa3fc7e69f590bb4ce39fe959f13c95",
+      "original_sha256": "8a45f983ede5d9952630822422c28abfbfa3fc7e69f590bb4ce39fe959f13c95",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordTreeSampling.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "sha256": "f7b3f39060edc7622a569243a244f3276c033bef66891c143f6b23d9fcef255d",
+      "original_sha256": "f7b3f39060edc7622a569243a244f3276c033bef66891c143f6b23d9fcef255d",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeLimit.inc",
+      "sha256": "c08089f20f438dc0d860270398e2a29b42770a1d5931f66c377206b0bd3d63a7",
+      "original_sha256": "c08089f20f438dc0d860270398e2a29b42770a1d5931f66c377206b0bd3d63a7",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordTreeLimit.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordArcGenerating.inc",
+      "sha256": "2ce39ed55d4563acb3f47f5465c60ba6533d3c47f4e30e9dd8815b989013658b",
+      "original_sha256": "2ce39ed55d4563acb3f47f5465c60ba6533d3c47f4e30e9dd8815b989013658b",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordArcGenerating.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+        "ledger": "docs/curve-word-chain/extension-provenance.json"
+      }
     }
   ],
   "construction_errors": [],
@@ -5894,6 +6582,13 @@
       "authored_on_parent_commit": "067a92759240fac3483692f87a66d1aa6ec3a7b7",
       "manifest": "docs/curve-word-chain/continuation-provenance.json",
       "scope": "Actual arcs and arbitrary word states, finite-state global optimization and four-state average limit, finite-temperature bounds, iterated-integral homogeneity and explicit circular moment/area integrals; full path construction and all-degree Chen/uniqueness/BCH remain separate."
+    },
+    {
+      "date": "2026-11-11",
+      "source": "Curve-word all-degree and general-limit extension",
+      "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
+      "manifest": "docs/curve-word-chain/extension-provenance.json",
+      "scope": "Actual piecewise curves and integer identification, general finite graphs and spectral/Laplace limits, full Chen/shuffle/free-Lie/BCH, canonical BV signatures and tree-like implies trivial signature via constructed finite sampling. The reverse Hambly-Lyons direction and final two-path equivalence remain open."
     }
   ]
 }

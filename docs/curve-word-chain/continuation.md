@@ -2,6 +2,8 @@
 
 PR #128 の代数と整数語の55定理を土台に、原文B・D・E・G・J・K・Lの未形式化部分を進めた追補である。原文と旧検証記録は変更せず、今回の宣言・ハッシュは [追補台帳](continuation-provenance.json)、実行結果は [追補検証記録](verification-continuation.md) に保存する。
 
+このページはPR #129時点の範囲を記録する。その後に証明した単一曲線の構成・一般グラフ・ラプラス一意性・スペクトル極限・全次数の代数と、一般Hambly–Lyonsへ向けた現在の残件は[全次数・一般極限への拡張](extensions.md)を参照する。
+
 ## 実積分から円弧の文字状態へ
 
 [CurveWordArc.inc](../../linear_input/lean_check/CurveWordArc.inc) は、長さ $h>0$、総角 $a$ の接線角を $\theta(s)=(a/h)s$ と定義する。座標と費用には既存の `Elastica.xCoord`、`yCoord`、`energy` の実積分を使う。$a\ne0$ のとき
