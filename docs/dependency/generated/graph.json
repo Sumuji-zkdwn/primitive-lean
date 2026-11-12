@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "2c267c4db6bb3ceb1ce5e2cee84b27077bd72838",
+  "main_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -4718,7 +4718,7 @@
         "dihedralSplittingFieldEquiv"
       ],
       "imports": [],
-      "sha256": "fc82996317c4b390ff2a59cf8a2b3b0ec21e7733eb64ea267eba7b5ae653ea1c"
+      "sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6"
     },
     {
       "id": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
@@ -17790,6 +17790,17 @@
     {
       "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
       "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevSplitting.actualSplittingFieldEquiv",
+        "LinearInputChebyshevSplitting.basePolynomial",
+        "LinearInputChebyshevSplitting.parameterField_finrank",
+        "LinearInputChebyshevSplitting.rationalFunction_isSplittingField"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "actualSplittingFieldEquiv",
@@ -25764,28 +25775,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "2c267c4db6bb3ceb1ce5e2cee84b27077bd72838",
+      "base_sha": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "2c267c4db6bb3ceb1ce5e2cee84b27077bd72838",
+      "base_sha": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "2c267c4db6bb3ceb1ce5e2cee84b27077bd72838",
+      "base_sha": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "2c267c4db6bb3ceb1ce5e2cee84b27077bd72838",
+      "base_sha": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
