@@ -46,7 +46,7 @@ jobs:
           fragments = [(name, (Path("linear_input/lean_check") / name).read_text()) for name in names]
           for name, fragment in fragments:
               assert not any(token in fragment for token in ("sorryAx", "native_decide", "admit"))
-          source = "import Mathlib\n\n" + "\n\n".join(
+          source = ("import Mathlib\n\n"\n              "attribute [instance 90] LieAlgebra.toModule\n"\n              "set_option synthInstance.maxHeartbeats 300000\n"\n              "set_option maxHeartbeats 1000000\n\n") + "\n\n".join(
               "-- Source: " + name + "\n" + text for name, text in fragments)
           source += "\n\n" + "\n".join([
               "#print axioms LinearInputChebyshevGaloisCompletion.dihedralRepresentation_surjective",
