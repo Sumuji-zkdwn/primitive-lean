@@ -96,8 +96,7 @@ theorem pointLift_normalize_scale (p : ℂ × ℂ) (hp : p ≠ (0, 0)) :
     refine ⟨x⁻¹, inv_ne_zero hx, ?_⟩
     simp [normalize, pointLift, scale, hy, hx]
   · refine ⟨y⁻¹, inv_ne_zero hy, ?_⟩
-    simp [normalize, pointLift, scale, hy, div_eq_mul_inv, mul_comm,
-      mul_left_comm, mul_assoc]
+    simp [normalize, pointLift, scale, hy, div_eq_mul_inv, mul_comm]
 
 /-- Invertible matrix action never sends a nonzero vector to zero. -/
 theorem hom_ne_zero (f : LinearFracTrans) (p : ℂ × ℂ)
@@ -135,8 +134,7 @@ theorem normalize_hom_eq_action (f : LinearFracTrans) (z : EComplex) :
       · have hd : f.d ≠ 0 :=
           (LinearFracTrans.a_d_nonzero_of_c_zero f.determinant_ne_zero hc).2
         simp [normalize, pointLift, hom, LinearFracTrans.apply,
-          hc, hd, div_eq_mul_inv, mul_add, add_mul,
-          mul_comm, mul_left_comm, mul_assoc]
+          hc, hd, div_eq_mul_inv, add_mul, mul_comm, mul_assoc]
       · have hpole : (f.c * z + f.d = 0) ↔ z = -f.d / f.c := by
           constructor
           · intro h
@@ -148,8 +146,10 @@ theorem normalize_hom_eq_action (f : LinearFracTrans) (z : EComplex) :
             ring
         by_cases hden : f.c * z + f.d = 0
         · have hzp : z = -f.d / f.c := hpole.mp hden
+          have hden' : f.c * (-f.d / f.c) + f.d = 0 := by
+            simpa [hzp] using hden
           simp [normalize, pointLift, hom, LinearFracTrans.apply, hc,
-            hden, hzp]
+            hzp, hden']
         · have hzn : z ≠ -f.d / f.c := fun h => hden (hpole.mpr h)
           simp [normalize, pointLift, hom, LinearFracTrans.apply, hc,
             hden, hzn]
