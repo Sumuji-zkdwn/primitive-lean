@@ -1,4 +1,4 @@
-import Research.MobiusProjectiveCompletion
+import Research.MobiusProjectiveStructure
 
 #print axioms LinearFracTrans.comp_equivalent
 #print axioms LinearFracTrans.exist_LFT_mapping_three_point
@@ -12,3 +12,8 @@ import Research.MobiusProjectiveCompletion
 #print axioms PrimitiveMobius.crossRatioHom_invariant
 #print axioms PrimitiveMobius.triple_transport
 #print axioms PrimitiveMobius.triple_determines_action
+
+#print axioms PrimitiveMobius.actionHom_eq_iff_proportional
+#print axioms PrimitiveMobius.crossRatioHom_scale
+#print axioms PrimitiveMobius.normalize_hom_eq_action
+#print axioms PrimitiveMobius.extendedCrossRatio_invariant
