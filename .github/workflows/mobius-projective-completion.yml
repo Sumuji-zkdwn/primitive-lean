@@ -8,6 +8,8 @@ on:
       - 'lean/Research/MobiusProjectiveCompletion.lean'
       - 'lean/Research/MobiusProjectiveAudit.lean'
       - 'lean/Research/MobiusProjectiveStructure.lean'
+      - 'lean/Research/MobiusSphericalCrossRatio.lean'
+      - 'tools/check_mobius_projective_completion.py'
       - '.github/workflows/mobius-projective-completion.yml'
   push:
     branches: [chatgpt/mobius-projective-completion-20261112]
@@ -16,6 +18,8 @@ on:
       - 'lean/Research/MobiusProjectiveCompletion.lean'
       - 'lean/Research/MobiusProjectiveAudit.lean'
       - 'lean/Research/MobiusProjectiveStructure.lean'
+      - 'lean/Research/MobiusSphericalCrossRatio.lean'
+      - 'tools/check_mobius_projective_completion.py'
       - '.github/workflows/mobius-projective-completion.yml'
   workflow_dispatch:
 
@@ -36,12 +40,15 @@ jobs:
               'lean/Research/EComplexThirdParty.lean',
               'lean/Research/MobiusProjectiveCompletion.lean',
               'lean/Research/MobiusProjectiveStructure.lean',
+              'lean/Research/MobiusSphericalCrossRatio.lean',
           ):
               source = Path(name).read_text()
               import re
               if re.search(r'\b(sorry|admit|native_decide)\b', source):
                   raise SystemExit(f'Forbidden proof placeholder in {name}')
           PY
+      - name: Reproduce rational finite checks
+        run: python -B -X utf8 tools/check_mobius_projective_completion.py
       - name: Install pinned Lean and Mathlib cache
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
@@ -64,6 +71,10 @@ jobs:
         working-directory: lean
         run: |
           lake env lean --trust=0 Research/MobiusProjectiveStructure.lean -o .lake/build/lib/lean/Research/MobiusProjectiveStructure.olean
+      - name: Compile EComplex-valued spherical cross ratio and pole formula
+        working-directory: lean
+        run: |
+          lake env lean --trust=0 Research/MobiusSphericalCrossRatio.lean -o .lake/build/lib/lean/Research/MobiusSphericalCrossRatio.olean
       - name: Audit theorem axioms
         working-directory: lean
         run: |

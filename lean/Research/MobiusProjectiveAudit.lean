@@ -1,4 +1,4 @@
-import Research.MobiusProjectiveStructure
+import Research.MobiusSphericalCrossRatio
 
 #print axioms LinearFracTrans.comp_equivalent
 #print axioms LinearFracTrans.exist_LFT_mapping_three_point
@@ -17,3 +17,9 @@ import Research.MobiusProjectiveStructure
 #print axioms PrimitiveMobius.crossRatioHom_scale
 #print axioms PrimitiveMobius.normalize_hom_eq_action
 #print axioms PrimitiveMobius.extendedCrossRatio_invariant
+
+#print axioms PrimitiveMobius.normalize_scale
+#print axioms PrimitiveMobius.crossRatioSphereHom_invariant
+#print axioms PrimitiveMobius.sphericalCrossRatio_invariant
+#print axioms PrimitiveMobius.sphericalCrossRatio_pole
+#print axioms PrimitiveMobius.wfs_finite_formula

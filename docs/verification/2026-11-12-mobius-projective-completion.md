@@ -1,58 +1,83 @@
-# WFS Möbius map on the extended complex line (2026-11-12)
+# Möbius transformations over the extended complex line (2026-11-12)
 
-## Pin and provenance
+## Base and original work
 
-Base: main commit 28721702d21720c37805fb64924253f3e1ace11f.
+- Base main revision: 28721702d21720c37805fb64924253f3e1ace11f.
+- Existing WFS theorems are unchanged in
+  \`linear_input/lean_check/WFSMobiusFourier.inc\` and
+  \`linear_input/lean_check/WFSProjectiveSampling.inc\`.
+- Pinned project environment: Lean v4.30.0-rc2,
+  Mathlib revision 5450b53e5ddc75d46418fabb605edbf36bd0beb6.
 
-The original WFS real-domain calculations are retained, unchanged:
-- linear_input/lean_check/WFSMobiusFourier.inc
-- linear_input/lean_check/WFSProjectiveSampling.inc
+The upstream group, inversion, triple mapping, functional uniqueness and
+proportionality theorems are credited to Fubin Yan and Kenneth Shum,
+"Formalizing Extended Complex Numbers, Möbius Transformations, and Cross Ratio
+in Lean 4" (2026): https://arxiv.org/abs/2606.20358
 
-The group-action and three-point LFT proofs are an attributed upstream
-dependency, NOT original results from primitive-lean.
+Original source: https://github.com/fubinyan/ComplexVariables/blob/bfdb91564bb5aafe0c3e7ec73501e43598146b13/MAT3253/Chapter02/EComplex.lean
+Our vendor copy: \`lean/Research/EComplexThirdParty.lean\`.
+License: Apache-2.0, retained in \`licenses/Mobius-Apache-2.0.txt\`.
+The original bytes were not edited; it is an attributed dependency.
 
-- Fubin Yan and Kenneth Shum, "Formalizing Extended Complex Numbers,
-  Möbius Transformations, and Cross Ratio in Lean 4" (2026),
-  https://arxiv.org/abs/2606.20358
-- https://github.com/fubinyan/ComplexVariables
-- source: MAT3253/Chapter02/EComplex.lean at commit
-  bfdb91564bb5aafe0c3e7ec73501e43598146b13
-- copied unchanged to lean/Research/EComplexThirdParty.lean
-- license: Apache-2.0; preserved in licenses/Mobius-Apache-2.0.txt
-- source checked with THIS repository's pinned Lean 4.30.0-rc2 in PR CI.
+## New results
 
-## New Lean claims
+\`lean/Research/MobiusProjectiveCompletion.lean\`:
+- The observed WFS involution matrix [[-1,0],[2,1]] has determinant -1.
+- Its action on EComplex=Option Complex is order two, including infinity.
+- The finite pole -1/2 maps to infinity, and infinity maps back to -1/2.
+- An arbitrary invertible complex 2×2 matrix scales alternating brackets
+  by its determinant.
+- Complex-totalized cross-ratio invariance on homogeneous coordinates.
+- General three-point transport/uniqueness are bridged to upstream theorems.
 
-lean/Research/MobiusProjectiveCompletion.lean proves:
-1. The specific matrix [[-1,0],[2,1]] has nonzero determinant and
-   squares to the identity.
-2. Its induced action on EComplex = Option Complex is an involution
-   including the infinity point.
-3. Its pole -1/2 and infinity are exchanged exactly.
-4. Every invertible complex 2x2 matrix scales the alternating bracket
-   of two homogeneous pairs by its determinant.
-5. The resulting homogeneous cross ratio is invariant under ALL such
-   matrices, with a deliberately totalized complex-division convention.
-6. Distinguished homogeneous representatives for finite points and infinity.
-7. The existing upstream general three-point existence and functional
-   uniqueness theorems are exposed as bridge lemmas.
-8. Functionally equal invertible matrices are exactly those with
-   proportional coefficients (upstream theorem), the algebraic
-   identification used for a projective group quotient.
+\`lean/Research/MobiusProjectiveStructure.lean\`:
+- Image of the Möbius group acting on EComplex in Equiv.Perm EComplex,
+  a concrete model of effective PGL(2,C).
+- Two matrices act identically iff their coefficients are proportional.
+- The cross ratio is invariant under nonzero scalings of each homogeneous
+  coordinate representative.
+- Canonical lifts, normalization, nonzero preservation, and equality of
+  normalized matrix action with the actual EComplex fractional-linear action.
+- A deliberately totalized Complex-valued extended cross-ratio invariant.
 
-The homogeneous cross ratio is on coordinate pairs; the theorem does
-not yet identify it with a separately constructed quotient type
-PGL(2,C), or prove topological/conformal/circline classification.
-The WFS bridge is an equality of indicated projective actions,
-not a derivation of the original physical WFS response law.
+\`lean/Research/MobiusSphericalCrossRatio.lean\`:
+- A new, *EComplex-valued* projective cross ratio, preserving actual infinity
+  at a zero denominator (unlike totalized Complex division).
+- A pair of numerator/denominator homogeneous coordinates for each cross ratio.
+- Independent-scaling covariance, determinant-squared covariance, and
+  invariance for arbitrary complex Möbius transformations acting on the
+  *extended complex line*, including infinity.
+- A concrete pole-value example and the ordinary finite WFS formula away
+  from the pole.
 
-Important: none here is a valid new real-number result 1/0 = infinity.
-The map is total only because its state space is changed to Option Complex.
+Thus the algebraic projective-action and cross-ratio aspects are proved.
+We do not assert conformality, circle-line preservation, Lorentz-group
+isomorphisms, analytic topology of the sphere, or full Wikipedia coverage.
+No original WFS physical response law is derived from elastica energy.
 
 ## Verification
 
-The PR's dedicated workflow compiles the unchanged upstream file and
-the extension with --trust=0, checks for admitted placeholders,
-and prints axiom dependencies for selected general and new theorems.
-A completed success run at the exact PR head is needed before calling
-the integrated results Lean-verified on the pinned project toolchain.
+Dedicated workflow: \`.github/workflows/mobius-projective-completion.yml\`.
+At the exact checked-out PR revision:
+- independently check rational examples with
+  \`python -B -X utf8 tools/check_mobius_projective_completion.py\`
+- compile all four new-source stages at Lean \`--trust=0\`
+- audit theorem axioms using \`lean/Research/MobiusProjectiveAudit.lean\`
+- no \`sorry\`, \`admit\`, \`native_decide\` proof placeholders allowed.
+
+Earlier successful exact-head workflow for the first two extensions:
+https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/43151217163 .
+At that run all 16 selected audited theorems depend only on
+propext, Classical.choice, Quot.sound. A new exact-head success is
+required for the additional spherical-cross-ratio module.
+
+The original upstream source emits inherited deprecated-tactic/unused-variable
+warnings under Lean 4.30.0-rc2; no new warnings were observed in the
+previously verified Structure extension.
+
+## Meaning of zero denominators
+
+The result is NOT a new division operation making 1/0 legal in the real or
+complex field. EComplex contains a genuinely new point \`none\`, denoting
+infinity. The WFS matrix acts as a total bijection on that enlarged state
+space. The two-cycle pole <-> infinity is an equality of projective states.

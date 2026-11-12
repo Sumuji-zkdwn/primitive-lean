@@ -112,4 +112,12 @@ theorem sphericalCrossRatio_pole :
   norm_num [sphericalCrossRatio, crossRatioSphereHom, crossRatioPair,
     normalize, pointLift, bracket, EComplex.infty]
 
+
+/-- The original real WFS fractional-linear formula extends to finite complex
+coordinates at every nonpole value. -/
+theorem wfs_finite_formula (z : ℂ) (hz : (1 : ℂ) + 2 * z ≠ 0) :
+    wfs (some z) = some (-z / (1 + 2 * z)) := by
+  rw [← normalize_hom_eq_action wfs (some z)]
+  simp [normalize, hom_wfs, pointLift, add_comm, hz]
+
 end PrimitiveMobius
