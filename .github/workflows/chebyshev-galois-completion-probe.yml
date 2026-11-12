@@ -1,0 +1,60 @@
+name: Chebyshev Galois completion Lean probe
+
+on:
+  push:
+    branches: [chatgpt/chebyshev-galois-completion-20261112]
+    paths:
+      - linear_input/lean_check/ChebyshevGaloisCompletion.inc
+      - .github/workflows/chebyshev-galois-completion-probe.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - linear_input/lean_check/ChebyshevGaloisCompletion.inc
+      - .github/workflows/chebyshev-galois-completion-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  completion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compose fresh proof from the five unchanged prerequisites and completion
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          names = [
+              "ChebyshevDihedralDescent.inc",
+              "ChebyshevRatFuncDegrees.inc",
+              "ChebyshevDegreeTower.inc",
+              "ChebyshevSplittingField.inc",
+              "ChebyshevGaloisAutomorphisms.inc",
+              "ChebyshevGaloisCompletion.inc",
+          ]
+          fragments = [(name, (Path("linear_input/lean_check") / name).read_text()) for name in names]
+          for name, fragment in fragments:
+              assert not any(token in fragment for token in ("sorryAx", "native_decide", "admit"))
+          source = "import Mathlib\n\n" + "\n\n".join(
+              "-- Source: " + name + "\n" + text for name, text in fragments)
+          source += "\n\n" + "\n".join([
+              "#print axioms LinearInputChebyshevGaloisCompletion.dihedralRepresentation_surjective",
+              "#print axioms LinearInputChebyshevGaloisCompletion.dihedralModelEquiv",
+              "#print axioms LinearInputChebyshevGaloisCompletion.dihedralSplittingFieldEquiv",
+          ]) + "\n"
+          Path("lean/ChebyshevGaloisCompletionProbe.lean").write_text(source)
+          PY
+      - name: Typecheck proof with kernel trust level zero
+        working-directory: lean
+        run: lake env lean --trust=0 ChebyshevGaloisCompletionProbe.lean
