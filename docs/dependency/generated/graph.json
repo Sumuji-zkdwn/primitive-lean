@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
+  "main_commit": "b3f93bfb02bf401dd0c309e50b292a4f51292ce0",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1756,9 +1756,9 @@
       "namespace": "",
       "declarations": [],
       "imports": [
-        "Research.MobiusProjectiveCompletion"
+        "Research.MobiusProjectiveStructure"
       ],
-      "sha256": "e51883e6214c5f5111493d9b34785db5963f58fd08328eb9eda097d1038e8688"
+      "sha256": "bd324df524acbb6e0de9e7053044f4b33708bb107f61ba0eb9181890331fdaf7"
     },
     {
       "id": "main:lean/Research/MobiusProjectiveCompletion.lean",
@@ -1801,6 +1801,7 @@
       "group": "Other",
       "namespace": "PrimitiveMobius",
       "declarations": [
+        "cancel_common",
         "actionHom",
         "projectiveMobiusGroup",
         "actionHom_eq_iff_proportional",
@@ -1818,7 +1819,7 @@
         "Research.MobiusProjectiveCompletion",
         "Mathlib.Algebra.Group.Action.End"
       ],
-      "sha256": "900eda361ad527e0df23c15a7c362126a305cedea969ea4012fab4aeedaa5d1d"
+      "sha256": "2b53a62147a8cbe167bee07da23c227be016084164932d423288b282631fe09a"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -14817,14 +14818,6 @@
     {
       "from": "main:lean/Research/MobiusProjectiveAudit.lean",
       "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "Research.MobiusProjectiveCompletion"
-      ]
-    },
-    {
-      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
-      "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "bracket_hom",
@@ -14835,6 +14828,25 @@
         "wfs_infty_to_pole",
         "wfs_involutive",
         "wfs_pole_to_infty"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/MobiusProjectiveStructure.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.MobiusProjectiveStructure"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/MobiusProjectiveStructure.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "actionHom_eq_iff_proportional",
+        "crossRatioHom_scale",
+        "extendedCrossRatio_invariant",
+        "normalize_hom_eq_action"
       ]
     },
     {
@@ -14883,7 +14895,6 @@
       "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "cancel_common",
         "crossRatioHom",
         "crossRatioHom_invariant",
         "extendedCrossRatio",
@@ -26037,28 +26048,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
+      "base_sha": "b3f93bfb02bf401dd0c309e50b292a4f51292ce0",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
+      "base_sha": "b3f93bfb02bf401dd0c309e50b292a4f51292ce0",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
+      "base_sha": "b3f93bfb02bf401dd0c309e50b292a4f51292ce0",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
+      "base_sha": "b3f93bfb02bf401dd0c309e50b292a4f51292ce0",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
