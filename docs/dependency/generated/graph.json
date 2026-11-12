@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+  "main_commit": "e9f2837e757325fff65685b1fadd650e0a46994c",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -4705,6 +4705,20 @@
       ],
       "imports": [],
       "sha256": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevGaloisCompletion",
+      "declarations": [
+        "dihedralRepresentation_surjective",
+        "dihedralModelEquiv",
+        "dihedralSplittingFieldEquiv"
+      ],
+      "imports": [],
+      "sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6"
     },
     {
       "id": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
@@ -17765,6 +17779,37 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "dihedralRepresentation",
+        "dihedralRepresentation_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevSplitting.actualSplittingFieldEquiv",
+        "LinearInputChebyshevSplitting.basePolynomial",
+        "LinearInputChebyshevSplitting.parameterField_finrank",
+        "LinearInputChebyshevSplitting.rationalFunction_isSplittingField"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "actualSplittingFieldEquiv",
+        "basePolynomial",
+        "parameterField_finrank",
+        "rationalFunction_isSplittingField"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
       "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
       "kind": "unique_identifier_candidate",
@@ -25284,6 +25329,7 @@
     "linear_input/lean_check/ChebyshevDegreeTower.inc",
     "linear_input/lean_check/ChebyshevSplittingField.inc",
     "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+    "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
     "linear_input/lean_check/RimObservability.inc",
     "linear_input/lean_check/ViscousRewrite.inc",
     "linear_input/lean_check/GravityCocycle.inc",
@@ -25730,28 +25776,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "e9f2837e757325fff65685b1fadd650e0a46994c",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "e9f2837e757325fff65685b1fadd650e0a46994c",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "e9f2837e757325fff65685b1fadd650e0a46994c",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "e9f2837e757325fff65685b1fadd650e0a46994c",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

@@ -6519,6 +6519,23 @@
         "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
         "ledger": "docs/curve-word-chain/extension-provenance.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6",
+      "original_sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6",
+      "source_pr": 133,
+      "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
+      "source_path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "proof_reference": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/133",
+        "independent_lean_run": "43148729006",
+        "scope": "The dihedral representation is surjective and induces an isomorphism with the true splitting-field Galois group for generic T_(3^k), k>=1."
+      }
     }
   ],
   "construction_errors": [],
@@ -6797,6 +6814,13 @@
       "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
       "manifest": "docs/curve-word-chain/extension-provenance.json",
       "scope": "Actual piecewise curves and integer identification, general finite graphs and spectral/Laplace limits, full Chen/shuffle/free-Lie/BCH, canonical BV signatures, the independent geometric tree-height equivalence and actual two-path equivalence. The coordinate transfer covers arbitrary finite-dimensional real normed spaces; theorem hypotheses and excluded claims remain explicit."
+    },
+    {
+      "date": "2026-11-12",
+      "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
+      "source_pr": 133,
+      "note": "Provenance of new native proof after the 2026-11-03 historical integration snapshot; standalone pinned Lean --trust=0 probe #43148729006 passed, full-tree source and axiom audit tracked separately."
     }
   ]
 }

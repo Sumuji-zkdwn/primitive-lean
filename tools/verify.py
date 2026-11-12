@@ -188,6 +188,7 @@ def verify_lean(rebuild):
         'ChebyshevDegreeTower': 'Exact Bezout coprimality, reduced rational-function numerator and denominator, degree 2m of the generic quotient and half-normalized Joukowski parameter',
         'ChebyshevSplittingField': 'The generic Chebyshev polynomial over C(t) has C(X) as its actual splitting field, using distinct roots and radical reconstruction',
         'ChebyshevGaloisAutomorphisms': 'Base-field rotation and inversion automorphisms for the ternary Chebyshev model, the dihedral relations, and an injective representation; not yet a full Galois group equivalence',
+        'ChebyshevGaloisCompletion': 'Surjectivity via the degree and algebra-hom cardinal bound; full dihedral Galois group equivalence over C(t) for generic ternary Chebyshev splitting fields, k ≥ 1',
         'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
         'FoldCount': 'Normalized cusp fold root counting, stationary sign types, ordinary discriminant, and triple-root cusp tip',
         'FoldCountOriginal': 'Original-variable cusp/fold classification for every positive leading coefficient, including all discriminant regimes and explicit Hessian signs',
