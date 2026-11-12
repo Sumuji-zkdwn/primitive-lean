@@ -18,7 +18,6 @@ noncomputable section
 namespace LinearInputChebyshevGaloisCompletion
 
 open Polynomial
-open LinearInputChebyshevSplitting
 open LinearInputChebyshevAutomorphisms
 
 /-- A faithful dihedral subgroup of order 2*3^k already fills the
@@ -28,10 +27,10 @@ theorem dihedralRepresentation_surjective (k : ℕ) (hk : 0 < k)
     (ζ : ℂ) (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     Function.Surjective (dihedralRepresentation k ζ hζ) := by
   classical
-  letI : Polynomial.IsSplittingField (Base k) E (basePolynomial k) :=
-    rationalFunction_isSplittingField k hk ζ hζ
+  letI : Polynomial.IsSplittingField (Base k) E (LinearInputChebyshevSplitting.basePolynomial k) :=
+    LinearInputChebyshevSplitting.rationalFunction_isSplittingField k hk ζ hζ
   letI : FiniteDimensional (Base k) E :=
-    Polynomial.IsSplittingField.finiteDimensional E (basePolynomial k)
+    Polynomial.IsSplittingField.finiteDimensional E (LinearInputChebyshevSplitting.basePolynomial k)
   letI : Finite (E →ₐ[Base k] E) := inferInstance
   letI : Finite (Aut k) :=
     Finite.of_injective
@@ -45,7 +44,7 @@ theorem dihedralRepresentation_surjective (k : ℕ) (hk : 0 < k)
           AlgEquiv.coe_algHom_injective
       _ ≤ Module.finrank (Base k) E :=
         card_algHom_le_finrank (Base k) E E
-      _ = 2 * (3 ^ k) := parameterField_finrank k
+      _ = 2 * (3 ^ k) := LinearInputChebyshevSplitting.parameterField_finrank k
   have h_card : Nat.card (Aut k) ≤ Nat.card (DihedralGroup (3 ^ k)) := by
     simpa only [DihedralGroup.nat_card] using h_bound
   exact (Function.Injective.bijective_of_nat_card_le
@@ -64,9 +63,9 @@ of T_(3^k)(X)-t over the intermediate field C(t), k≥1. -/
 noncomputable def dihedralSplittingFieldEquiv (k : ℕ) (hk : 0 < k)
     (ζ : ℂ) (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     DihedralGroup (3 ^ k) ≃*
-      ((basePolynomial k).SplittingField ≃ₐ[Base k]
-        (basePolynomial k).SplittingField) :=
+      ((LinearInputChebyshevSplitting.basePolynomial k).SplittingField ≃ₐ[Base k]
+        (LinearInputChebyshevSplitting.basePolynomial k).SplittingField) :=
   (dihedralModelEquiv k hk ζ hζ).trans
-    (actualSplittingFieldEquiv k hk ζ hζ).autCongr
+    (LinearInputChebyshevSplitting.actualSplittingFieldEquiv k hk ζ hζ).autCongr
 
 end LinearInputChebyshevGaloisCompletion
