@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
+  "main_commit": "2206f117f058b4283a4b1284774e19707b4ece29",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1843,7 +1843,7 @@
       "imports": [
         "Research.MobiusProjectiveStructure"
       ],
-      "sha256": "bacd20c26f01fdc2bf4f15caeaa00f1776f712aeb746ea22001d3657816d063c"
+      "sha256": "7c21d58f082b665e73b2821f4a9a090a26e64f35d5d0527efd947c9829a5c388"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -26119,28 +26119,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
+      "base_sha": "2206f117f058b4283a4b1284774e19707b4ece29",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
+      "base_sha": "2206f117f058b4283a4b1284774e19707b4ece29",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
+      "base_sha": "2206f117f058b4283a4b1284774e19707b4ece29",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
+      "base_sha": "2206f117f058b4283a4b1284774e19707b4ece29",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
