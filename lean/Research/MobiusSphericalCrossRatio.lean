@@ -31,7 +31,6 @@ theorem normalize_scale (k : ℂ) (hk : k ≠ 0) (p : ℂ × ℂ) :
   · have hky : k * y ≠ 0 := mul_ne_zero hk hy
     have hdiv : (k * x) / (k * y) = x / y := by
       field_simp [hk, hy]
-      ring
     simp [normalize, scale, hy, hky, hdiv]
 
 /-- Any four projective representatives can be rescaled independently. -/
