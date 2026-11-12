@@ -36,13 +36,13 @@ theorem dihedralRepresentation_surjective (k : ℕ) (hk : 0 < k)
   letI : Finite (Aut k) :=
     Finite.of_injective
       (fun σ : Aut k => (σ : E →ₐ[Base k] E))
-      AlgEquiv.coe_toAlgHom_injective
+      AlgEquiv.coe_algHom_injective
   have h_bound : Nat.card (Aut k) ≤ 2 * (3 ^ k) := by
     calc
       Nat.card (Aut k) ≤ Nat.card (E →ₐ[Base k] E) :=
         Nat.card_le_card_of_injective
           (fun σ : Aut k => (σ : E →ₐ[Base k] E))
-          AlgEquiv.coe_toAlgHom_injective
+          AlgEquiv.coe_algHom_injective
       _ ≤ Module.finrank (Base k) E :=
         card_algHom_le_finrank (Base k) E E
       _ = 2 * (3 ^ k) := parameterField_finrank k
