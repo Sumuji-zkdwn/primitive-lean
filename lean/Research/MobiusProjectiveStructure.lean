@@ -12,6 +12,14 @@ noncomputable section
 
 namespace PrimitiveMobius
 
+private theorem cancel_common (k u v : ℂ) (hk : k ≠ 0) :
+    (k * u) / (k * v) = u / v := by
+  calc
+    (k * u) / (k * v) = (k * k⁻¹) * (u / v) := by
+      simp only [div_eq_mul_inv, mul_inv_rev]
+      ring
+    _ = u / v := by simp [hk]
+
 /-- The Möbius group realized faithfully as permutations of the sphere. -/
 def actionHom : LinearFracTrans →* Equiv.Perm EComplex :=
   MulAction.toPermHom LinearFracTrans EComplex
