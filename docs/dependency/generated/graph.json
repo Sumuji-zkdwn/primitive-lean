@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "ab22b5dd22eb03973493b40e8b75e70480191b11",
+  "main_commit": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1793,6 +1793,32 @@
         "Mathlib.Tactic"
       ],
       "sha256": "3ebc1bab8082f2f0438545ba2a0a36a3276e7c5fb7540bed4aa2c2f83255f228"
+    },
+    {
+      "id": "main:lean/Research/MobiusProjectiveStructure.lean",
+      "scope": "main",
+      "path": "lean/Research/MobiusProjectiveStructure.lean",
+      "group": "Other",
+      "namespace": "PrimitiveMobius",
+      "declarations": [
+        "actionHom",
+        "projectiveMobiusGroup",
+        "actionHom_eq_iff_proportional",
+        "scale",
+        "bracket_scale",
+        "crossRatioHom_scale",
+        "normalize",
+        "normalize_pointLift",
+        "pointLift_normalize_scale",
+        "hom_ne_zero",
+        "normalize_hom_eq_action",
+        "extendedCrossRatio_invariant"
+      ],
+      "imports": [
+        "Research.MobiusProjectiveCompletion",
+        "Mathlib.Algebra.Group.Action.End"
+      ],
+      "sha256": "900eda361ad527e0df23c15a7c362126a305cedea969ea4012fab4aeedaa5d1d"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -14833,6 +14859,38 @@
       ]
     },
     {
+      "from": "main:lean/Research/MobiusProjectiveStructure.lean",
+      "to": "main:lean/Research/EComplexThirdParty.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "LinearFracTrans",
+        "Proportional",
+        "a_d_nonzero_of_c_zero",
+        "funEq_iff_proportional",
+        "proportional2FunEq"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveStructure.lean",
+      "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.MobiusProjectiveCompletion"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveStructure.lean",
+      "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "cancel_common",
+        "crossRatioHom",
+        "crossRatioHom_invariant",
+        "extendedCrossRatio",
+        "pointLift_ne_zero"
+      ]
+    },
+    {
       "from": "main:lean/Research/OkanoharaTransport.lean",
       "to": "main:lean/Elastica/Examples.lean",
       "kind": "exact_import",
@@ -25979,28 +26037,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
+      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
+      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
+      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
+      "base_sha": "292928ad9b85c5cda1cc48fe533a9a0cb608ceba",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
