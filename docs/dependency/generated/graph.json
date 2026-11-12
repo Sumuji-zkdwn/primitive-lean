@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
+  "main_commit": "ab22b5dd22eb03973493b40e8b75e70480191b11",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1792,7 +1792,7 @@
         "Research.EComplexThirdParty",
         "Mathlib.Tactic"
       ],
-      "sha256": "5b9a1d816dad87fb836f16d0f61b171ae538e8ac90876e50eaa432644661f804"
+      "sha256": "3ebc1bab8082f2f0438545ba2a0a36a3276e7c5fb7540bed4aa2c2f83255f228"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -25979,28 +25979,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
+      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
+      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
+      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
+      "base_sha": "ab22b5dd22eb03973493b40e8b75e70480191b11",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
