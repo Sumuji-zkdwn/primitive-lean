@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "e9ea35c0409272a418b9b10267a435ca0d8feaba",
+  "main_commit": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1756,9 +1756,9 @@
       "namespace": "",
       "declarations": [],
       "imports": [
-        "Research.MobiusProjectiveStructure"
+        "Research.MobiusSphericalCrossRatio"
       ],
-      "sha256": "bd324df524acbb6e0de9e7053044f4b33708bb107f61ba0eb9181890331fdaf7"
+      "sha256": "76c67c1c7cb889c1417b1fd9575b0b7f4830a872b7a14b1abc7befc7e98f1e52"
     },
     {
       "id": "main:lean/Research/MobiusProjectiveCompletion.lean",
@@ -1837,12 +1837,13 @@
         "crossRatioSphereHom_scale",
         "crossRatioSphereHom_invariant",
         "sphericalCrossRatio_invariant",
-        "sphericalCrossRatio_pole"
+        "sphericalCrossRatio_pole",
+        "wfs_finite_formula"
       ],
       "imports": [
         "Research.MobiusProjectiveStructure"
       ],
-      "sha256": "70c0101871faac7bb23b988b70e26e5100b5f1770a068c92d118c07d1eb001fb"
+      "sha256": "bacd20c26f01fdc2bf4f15caeaa00f1776f712aeb746ea22001d3657816d063c"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -14856,20 +14857,31 @@
     {
       "from": "main:lean/Research/MobiusProjectiveAudit.lean",
       "to": "main:lean/Research/MobiusProjectiveStructure.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "Research.MobiusProjectiveStructure"
-      ]
-    },
-    {
-      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
-      "to": "main:lean/Research/MobiusProjectiveStructure.lean",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "actionHom_eq_iff_proportional",
         "crossRatioHom_scale",
         "extendedCrossRatio_invariant",
         "normalize_hom_eq_action"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/MobiusSphericalCrossRatio.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.MobiusSphericalCrossRatio"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/MobiusSphericalCrossRatio.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "crossRatioSphereHom_invariant",
+        "sphericalCrossRatio_invariant",
+        "sphericalCrossRatio_pole",
+        "wfs_finite_formula"
       ]
     },
     {
@@ -26107,28 +26119,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "e9ea35c0409272a418b9b10267a435ca0d8feaba",
+      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "e9ea35c0409272a418b9b10267a435ca0d8feaba",
+      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "e9ea35c0409272a418b9b10267a435ca0d8feaba",
+      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "e9ea35c0409272a418b9b10267a435ca0d8feaba",
+      "base_sha": "3766fc4a9f410d89ee68cfb170a6342404df4fce",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
