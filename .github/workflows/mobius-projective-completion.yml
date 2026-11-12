@@ -1,0 +1,64 @@
+name: WFS Möbius projective completion proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/Research/EComplexThirdParty.lean'
+      - 'lean/Research/MobiusProjectiveCompletion.lean'
+      - 'lean/Research/MobiusProjectiveAudit.lean'
+      - '.github/workflows/mobius-projective-completion.yml'
+  push:
+    branches: [chatgpt/mobius-projective-completion-20261112]
+    paths:
+      - 'lean/Research/EComplexThirdParty.lean'
+      - 'lean/Research/MobiusProjectiveCompletion.lean'
+      - 'lean/Research/MobiusProjectiveAudit.lean'
+      - '.github/workflows/mobius-projective-completion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check proof sources are not admitted
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for name in (
+              'lean/Research/EComplexThirdParty.lean',
+              'lean/Research/MobiusProjectiveCompletion.lean',
+          ):
+              source = Path(name).read_text()
+              import re
+              if re.search(r'\b(sorry|admit|native_decide)\b', source):
+                  raise SystemExit(f'Forbidden proof placeholder in {name}')
+          PY
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile upstream source at pinned project toolchain
+        working-directory: lean
+        run: |
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 Research/EComplexThirdParty.lean -o .lake/build/lib/lean/Research/EComplexThirdParty.olean
+      - name: Compile WFS/projective extension at trust zero
+        working-directory: lean
+        run: |
+          lake env lean --trust=0 Research/MobiusProjectiveCompletion.lean -o .lake/build/lib/lean/Research/MobiusProjectiveCompletion.olean
+      - name: Audit theorem axioms
+        working-directory: lean
+        run: |
+          lake env lean --trust=0 Research/MobiusProjectiveAudit.lean | tee mobius-projective-axioms.log
+          ! grep -E 'sorryAx|Lean.ofReduceBool' mobius-projective-axioms.log
