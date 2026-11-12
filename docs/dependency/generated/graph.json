@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+  "main_commit": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1517,6 +1517,145 @@
       "sha256": "066c1dc7eb94627c92c2901242da914f73a23c582dc0348dd21565ac214e116d"
     },
     {
+      "id": "main:lean/Research/EComplexThirdParty.lean",
+      "scope": "main",
+      "path": "lean/Research/EComplexThirdParty.lean",
+      "group": "Other",
+      "namespace": "EComplex",
+      "declarations": [
+        "EComplex",
+        "infty",
+        "printEComplex",
+        "infty_eq_none",
+        "coe_zero",
+        "coe_one",
+        "toComplex",
+        "zero",
+        "toComplex_Inf",
+        "toComplex_eq_zero_iff",
+        "some_eq_iff",
+        "coe_injective",
+        "coe_eq_coe",
+        "coe_eq_coe_iff",
+        "coe_ne_coe_iff",
+        "add",
+        "mul",
+        "EComplex_addition",
+        "EComplex_multiplication",
+        "finite_add_infinity",
+        "infinity_add_finite",
+        "finite_mul_infinity",
+        "infinity_mul_finite",
+        "sub",
+        "EComplex_subtraction",
+        "coe_mul",
+        "coe_add",
+        "coe_neg",
+        "coe_mul_some",
+        "some_mul_coe",
+        "coe_add_some",
+        "some_add_coe",
+        "some_neq_imply_tocomplex_neq",
+        "finite_EComplex_sub_ne_zero",
+        "inv",
+        "div",
+        "coe_inv",
+        "coe_div",
+        "infty_inv",
+        "zero_inv",
+        "complex_div_infty",
+        "complex_div_infty_slash",
+        "LinearFracTrans",
+        "apply",
+        "pole",
+        "f_test",
+        "apply_lft_coe",
+        "f_test1",
+        "a_d_nonzero_of_c_zero",
+        "b_c_nonzero_of_a_zero",
+        "f_infty_infty",
+        "f_z_azbd",
+        "f_infty_a_div_c",
+        "f_neg_d_div_c_infty",
+        "f_value_when_c_nonzero",
+        "comp",
+        "id",
+        "id_apply_infty",
+        "id_apply",
+        "IsTranslation",
+        "IsScaling",
+        "IsInversion",
+        "IsAffine",
+        "mk_lft",
+        "translation",
+        "scaling",
+        "inversion",
+        "IsTranslation_implies_IsAffine",
+        "IsScaling_implies_IsAffine",
+        "IsInversion_implies_NotAffine",
+        "IsAffine_iff_affine_action",
+        "IsAffine_iff_infty",
+        "decomposition_nonaffine",
+        "decomposition_affine",
+        "IsDecomposable",
+        "decomposition_general",
+        "case11",
+        "comp_f_g_not_affine1",
+        "comp_f_g_not_affine2",
+        "case121",
+        "case122",
+        "case211",
+        "case212",
+        "case221",
+        "case222a",
+        "case222b",
+        "case222",
+        "comp_equivalent",
+        "lft_one_mul",
+        "lft_mul_one",
+        "lft_mul_assoc",
+        "inv",
+        "lft_mul_left_inv",
+        "lft_mul_right_inv",
+        "construct_lft_to0_1_infty",
+        "constructlft_map_to_01infty",
+        "proof_inv_constructlft_map_to_01infty",
+        "exist_LFT_mapping_three_point",
+        "Proportional",
+        "FunEq",
+        "proportional2FunEq",
+        "c_zero_iff_of_funEq",
+        "ratio_a_c_of_funEq_inf",
+        "ratio_b_d_of_funEq_zero",
+        "ratio_at_one_of_funEq",
+        "pole_eq_of_funEq",
+        "pro_d_of_pole_eq",
+        "proportional_of_c_ne_zero",
+        "proportional_of_c_zero",
+        "FunEq2proportional",
+        "funEq_iff_proportional",
+        "infty_fixed_iff",
+        "finite_fixed_iff",
+        "coeff_id_implies_fun_id",
+        "quadratic_at_most_two_roots",
+        "linear_two_roots_implies_trivial",
+        "fixes_three_finite_is_id",
+        "fixes_infty_and_two_finite_is_id",
+        "fixes_three_is_id",
+        "lft_uniqueness",
+        "cross_ratio",
+        "cross_ratio_finite",
+        "cross_ratio_z1_infty",
+        "cross_ratio_z2_infty",
+        "cross_ratio_z3_infty"
+      ],
+      "imports": [
+        "Mathlib.Tactic",
+        "Mathlib.Data.Complex.Basic"
+      ],
+      "sha256": "cbc9a8f9ecbad1b0328e04c4fdc4913f11cac79e11ffbe0a1281e29ea4f2213f"
+    },
+    {
       "id": "main:lean/Research/ElasticaObservationQuotient.lean",
       "scope": "main",
       "path": "lean/Research/ElasticaObservationQuotient.lean",
@@ -1608,6 +1747,52 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "dfae3b6c58fcd69fc37bf53e4b2508039899d3db89cd0c95976a5bee53697d47"
+    },
+    {
+      "id": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "scope": "main",
+      "path": "lean/Research/MobiusProjectiveAudit.lean",
+      "group": "Other",
+      "namespace": "",
+      "declarations": [],
+      "imports": [
+        "Research.MobiusProjectiveCompletion"
+      ],
+      "sha256": "e51883e6214c5f5111493d9b34785db5963f58fd08328eb9eda097d1038e8688"
+    },
+    {
+      "id": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "scope": "main",
+      "path": "lean/Research/MobiusProjectiveCompletion.lean",
+      "group": "Other",
+      "namespace": "PrimitiveMobius",
+      "declarations": [
+        "wfs",
+        "wfs_comp_self",
+        "wfs_involutive",
+        "wfs_pole_to_infty",
+        "wfs_infty_to_pole",
+        "wfs_zero_fixed",
+        "hom",
+        "bracket",
+        "bracket_hom",
+        "cancel_common",
+        "crossRatioHom",
+        "crossRatioHom_invariant",
+        "pointLift",
+        "pointLift_ne_zero",
+        "extendedCrossRatio",
+        "extendedCrossRatio_finite",
+        "triple_determines_action",
+        "triple_transport",
+        "same_projective_map_iff_proportional",
+        "hom_wfs"
+      ],
+      "imports": [
+        "Research.EComplexThirdParty",
+        "Mathlib.Tactic"
+      ],
+      "sha256": "5b9a1d816dad87fb836f16d0f61b171ae538e8ac90876e50eaa432644661f804"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -14592,6 +14777,62 @@
       ]
     },
     {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/EComplexThirdParty.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "LinearFracTrans",
+        "comp_equivalent",
+        "exist_LFT_mapping_three_point",
+        "funEq_iff_proportional",
+        "lft_uniqueness"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.MobiusProjectiveCompletion"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveAudit.lean",
+      "to": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bracket_hom",
+        "crossRatioHom_invariant",
+        "triple_determines_action",
+        "triple_transport",
+        "wfs_comp_self",
+        "wfs_infty_to_pole",
+        "wfs_involutive",
+        "wfs_pole_to_infty"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "to": "main:lean/Research/EComplexThirdParty.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.EComplexThirdParty"
+      ]
+    },
+    {
+      "from": "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "to": "main:lean/Research/EComplexThirdParty.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "LinearFracTrans",
+        "Proportional",
+        "comp_equivalent",
+        "exist_LFT_mapping_three_point",
+        "funEq_iff_proportional",
+        "lft_uniqueness"
+      ]
+    },
+    {
       "from": "main:lean/Research/OkanoharaTransport.lean",
       "to": "main:lean/Elastica/Examples.lean",
       "kind": "exact_import",
@@ -23382,6 +23623,14 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/PrimeFactorGeneralF0.inc",
+      "to": "main:lean/Research/EComplexThirdParty.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "coe_eq_coe"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/PrimeFactorIdentification.inc",
       "to": "main:linear_input/lean_check/DecompositionIdentification.inc",
       "kind": "qualified_reference",
@@ -25730,28 +25979,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "6e998cc3eb8a418d73143fdfa13c9f170d73c8ee",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
