@@ -1,6 +1,6 @@
 # primitive-lean dependency graphs
 
-Snapshot: main 956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3, PR metadata 2026-11-05.
+Snapshot: main bade0f95fd6768b1a45451db5c7b4b5a3d383c0f, PR metadata 2026-11-05.
 Main sources, registries and PR snapshot were read from Git blobs at main_commit.
 PR overlays use immutable base/head SHAs listed in graph.json pr_inputs.
 
@@ -10,15 +10,15 @@ This graph distinguishes (1) exact Lean import, (2) literal qualified declaratio
 references, (3) globally unique bare-name candidates, and (4) PR base-target edges.
 Only (1) and (2) appear in the graphical source edges.
 
-Main files: 381; PR overlay files: 17.
-Declaration names scanned: 7632.
-Source edges: {"exact_import": 122, "qualified_reference": 283, "unique_identifier_candidate": 895}.
+Main files: 382; PR overlay files: 17.
+Declaration names scanned: 7635.
+Source edges: {"exact_import": 122, "qualified_reference": 283, "unique_identifier_candidate": 897}.
 
 ## Source group dependencies
 
 ~~~mermaid
 flowchart LR
-  g0["Arithmetic / Galois (20)"]
+  g0["Arithmetic / Galois (21)"]
   g1["Bayes / Jets (3)"]
   g2["Elastica (25)"]
   g3["F0 / Observation (16)"]
