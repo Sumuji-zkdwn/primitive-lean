@@ -1,0 +1,25 @@
+import Research.MobiusSphericalCrossRatio
+
+#print axioms LinearFracTrans.comp_equivalent
+#print axioms LinearFracTrans.exist_LFT_mapping_three_point
+#print axioms LinearFracTrans.lft_uniqueness
+#print axioms LinearFracTrans.funEq_iff_proportional
+#print axioms PrimitiveMobius.wfs_comp_self
+#print axioms PrimitiveMobius.wfs_involutive
+#print axioms PrimitiveMobius.wfs_pole_to_infty
+#print axioms PrimitiveMobius.wfs_infty_to_pole
+#print axioms PrimitiveMobius.bracket_hom
+#print axioms PrimitiveMobius.crossRatioHom_invariant
+#print axioms PrimitiveMobius.triple_transport
+#print axioms PrimitiveMobius.triple_determines_action
+
+#print axioms PrimitiveMobius.actionHom_eq_iff_proportional
+#print axioms PrimitiveMobius.crossRatioHom_scale
+#print axioms PrimitiveMobius.normalize_hom_eq_action
+#print axioms PrimitiveMobius.extendedCrossRatio_invariant
+
+#print axioms PrimitiveMobius.normalize_scale
+#print axioms PrimitiveMobius.crossRatioSphereHom_invariant
+#print axioms PrimitiveMobius.sphericalCrossRatio_invariant
+#print axioms PrimitiveMobius.sphericalCrossRatio_pole
+#print axioms PrimitiveMobius.wfs_finite_formula
