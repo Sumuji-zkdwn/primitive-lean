@@ -116,7 +116,7 @@ theorem triple_determines_action (f g : LinearFracTrans) (p q r : EComplex)
     ∀ z : EComplex, f z = g z := by
   exact LinearFracTrans.lft_uniqueness f g p q r hd hp hq hr
 
-/-- Any two triples of mutually distinct points admit an LFT between them. -/
+/-- Two triples of mutually distinct points have an LFT between them. -/
 theorem triple_transport (p q r p' q' r' : EComplex)
     (hd : p ≠ q ∧ q ≠ r ∧ r ≠ p)
     (hd' : p' ≠ q' ∧ q' ≠ r' ∧ r' ≠ p') :
