@@ -219,6 +219,7 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/ChebyshevDegreeTower.inc', 'LinearInputChebyshevTower'),
     ('linear_input/lean_check/ChebyshevSplittingField.inc', 'LinearInputChebyshevSplitting'),
     ('linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc', 'LinearInputChebyshevAutomorphisms'),
+    ('linear_input/lean_check/ChebyshevGaloisCompletion.inc', 'LinearInputChebyshevGaloisCompletion'),
     ('linear_input/lean_check/RimObservability.inc', 'LinearInputRimObservability'),
     ('linear_input/lean_check/ViscousRewrite.inc', 'LinearInputViscousRewrite'),
     ('linear_input/lean_check/GravityCocycle.inc', 'LinearInputGravityCocycle'),
