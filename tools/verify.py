@@ -102,6 +102,9 @@ def verify_lean(rebuild):
               and supplement["all_declarations"] == declarations
               and len(axioms) == len(declarations) and not warnings and not changed)
     supplemental_scopes = {
+        'LaaksoRealization': 'Actual closed-interval graph realization with endpoint-only gluing, quotient topology, interior separation, continuous descent, and compactness for finite vertex/edge indices; no path metric.',
+        'LaaksoGeometricProjection': 'Explicit ternary bonding maps on the realized multigraphs, endpoint compatibility, continuity, surjectivity, and noninjectivity; affine coordinate identities do not assert a graph metric.',
+        'LaaksoGeometricTower': 'Actual compact realized levels and continuous surjective bonding maps, compatible threads with product-subspace topology and continuous base-interval evaluation; chosen lifts are not asserted continuous, and no metric/measure limit or PI theorem is claimed.',
         'InverseTowerObservation': 'Compatible set-level inverse towers, deterministic and multi-action projection bridges, and a nonempty binary-prefix example; no metric or measure limit.',
         'LaaksoFiniteGraph': 'Canonical binary trisect-and-glue finite multigraphs with distinct parallel-edge identities, raw quotient and an explicit six-vertex first approximant; no continuous geometric realization.',
         'LaaksoNonlinearObstruction': 'First-approximant multigraph Laplacian, cubic reaction obstruction to pair-mean descent for every coupling, and exact synchronized weighted subsystem and Euler observation bridges; no ODE-solution theorem.',

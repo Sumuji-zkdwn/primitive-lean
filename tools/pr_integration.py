@@ -17,6 +17,7 @@ SMOKE_TESTS = (
     'check_wfs_sampling',
     'check_curve_word_chain',
     'check_laakso_finite',
+    'check_laakso_geometric',
 )
 
 

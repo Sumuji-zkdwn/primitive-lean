@@ -6567,6 +6567,54 @@
         "authored_on_parent_commit": "28721702d21720c37805fb64924253f3e1ace11f",
         "ledger": "docs/laakso/provenance.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoRealization.inc",
+      "sha256": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16",
+      "original_sha256": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoRealization.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+        "ledger": "docs/laakso/provenance-geometric.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "sha256": "7ed41c14e6ce22e77158ca77bee7520eae9309e0220a5d87241aa5c351aa32f4",
+      "original_sha256": "7ed41c14e6ce22e77158ca77bee7520eae9309e0220a5d87241aa5c351aa32f4",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+        "ledger": "docs/laakso/provenance-geometric.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e",
+      "original_sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+        "ledger": "docs/laakso/provenance-geometric.json"
+      }
     }
   ],
   "construction_errors": [],
