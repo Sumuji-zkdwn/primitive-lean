@@ -1,0 +1,41 @@
+name = "primitive_lmlexplore_bridge"
+version = "0.1.0"
+defaultTargets = ["ElasticaLMLExploreBridge"]
+
+# Independent Lake workspace. It does not mutate the pinned Lean 4.30
+# environment used for primitive-lean's existing verification.
+# Pins from the LMLExplore lake-manifest at upstream commit
+# 8280ba89e727bf08859d21c084dd44bca7968e1f.
+[[require]]
+name = "TauCeti"
+git = "https://github.com/TauCetiProject/TauCeti"
+rev = "4d91513e4d30746eb1fa96658c18e051c772e55e"
+
+[[require]]
+name = "LeanMachineLearning"
+git = "https://github.com/LeanMachineLearning/LML"
+rev = "86a0ab04f72987d9a09e820b7883e8d08980b244"
+
+[[require]]
+name = "Statlib"
+git = "https://github.com/stat-lib/statlib"
+rev = "af3496983daa5d0e4cc18bb05f91f07885db94b1"
+
+[[require]]
+name = "LMLExplore"
+git = "https://github.com/LeanMachineLearning/LMLExplore"
+rev = "8280ba89e727bf08859d21c084dd44bca7968e1f"
+
+# Last direct Mathlib requirement wins, as in the upstream LMLExplore project.
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
+
+# Reuse original Elastica sources in place, not copied or rewritten.
+[[lean_lib]]
+name = "Elastica"
+srcDir = "../../lean"
+
+[[lean_lib]]
+name = "ElasticaLMLExploreBridge"
