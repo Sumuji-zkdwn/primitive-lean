@@ -24,6 +24,7 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --no-modify-path
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           "$HOME/.elan/bin/lake" update
+          python3 prepare_compat.py
       - uses: leanprover/lean-action@v1
         with:
           lake-package-directory: experiments/lmlexplore_bridge
