@@ -1,0 +1,30 @@
+name: LMLExplore × Elastica bridge experiment
+
+on:
+  pull_request:
+    paths:
+      - 'experiments/lmlexplore_bridge/**'
+      - '.github/workflows/lmlexplore_bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-library-lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: experiments/lmlexplore_bridge
+          use-mathlib-cache: "true"
+          use-github-cache: "true"
+          build: "true"
+          build-args: "ElasticaLMLExploreBridge"
+          test: "false"
+          lint: "false"
+      - name: Recheck bridge with Lean kernel trust=0
+        working-directory: experiments/lmlexplore_bridge
+        run: lake env lean --trust=0 ElasticaLMLExploreBridge.lean
