@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "base_commit": "28721702d21720c37805fb64924253f3e1ace11f",
+  "scope": "Finite combinatorial construction, first-approximant nonlinear update, and abstract compatible inverse systems",
+  "not_claimed": [
+    "Laakso metric realization",
+    "geometric inverse limit",
+    "Hausdorff dimension",
+    "Ahlfors regularity",
+    "Poincare inequality",
+    "continuous-time ODE solution or Euler convergence"
+  ],
+  "source_inputs": [
+    {
+      "origin": "C:/Users/Dalcia/Research/05_Notes/abstract_elastica_reference_2026-10-19/formal/sources/v03/laakso.py",
+      "preserved_copy": "sources/laakso/laakso.py",
+      "sha256": "6dcbc496b1dd1c18d507ff0d47193cbba986c0e20deeede193d56f07fa62aee4",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:/Users/Dalcia/Research/04_History/Recent_2026-10-25/local_snapshots/context_review_2026-10-21/verify_laakso_connection.py",
+      "preserved_copy": "sources/laakso/verify_laakso_connection.py",
+      "sha256": "3a44b6f1ead8c170941d8b416b5cbe864fd40f76bc6cd2d286c38ca955b6ef91",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:/Users/Dalcia/Research/04_History/Recent_2026-10-25/local_snapshots/context_review_2026-10-21/verify_scale_flow.py",
+      "preserved_copy": "sources/laakso/verify_scale_flow.py",
+      "sha256": "15a8d33bf21ed84520f38510b8385a081cd80e4cf7c239e94918557a2f6344d9",
+      "byte_identical": true
+    },
+    {
+      "origin": "C:/Users/Dalcia/Documents/Codex/2026-11-14/laakso-primitive-lean/probe/TowerBridge.inc",
+      "preserved_copy": "sources/laakso/TowerBridge-probe.inc",
+      "sha256": "effb3624ff46189b765d254c0e65212e3ac3c0886ad030e51fa6b04044a28469",
+      "byte_identical": true
+    }
+  ],
+  "modules": [
+    {
+      "path": "linear_input/lean_check/InverseTowerObservation.inc",
+      "namespace": "LinearInputInverseTowerObservation",
+      "sha256": "dbd899cf55e0b1fc97ce0d87e2f7d894f90c4ba902a3221f800f1eb32a9c0a0c",
+      "declarations": 22,
+      "theorems": 14
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "namespace": "LinearInputLaaksoFiniteGraph",
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143",
+      "declarations": 41,
+      "theorems": 14
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "namespace": "LinearInputLaaksoNonlinear",
+      "sha256": "c62f9202b98e0581ca00160c6a2c23fa871050f080d0eaf3ddb518f4c08904fb",
+      "declarations": 51,
+      "theorems": 31
+    }
+  ],
+  "historical_conversations": [
+    {
+      "id": "6ad37f6e-39d8-83ee-bcc4-a0043f0f3ce1",
+      "title": "Laakso空間の用途"
+    },
+    {
+      "id": "6ad36070-7f74-83ee-99ff-da48996064f7",
+      "title": "抽象エラスティカの見解"
+    },
+    {
+      "id": "01a159f7-4139-71f1-9cf0-74d0878404ff",
+      "title": "チャットログ、弾性棒の向きと平行移動を参照して下さい"
+    }
+  ],
+  "external_references": [
+    {
+      "url": "https://arxiv.org/abs/1011.3567",
+      "use": "Finite binary graph construction, section 2.1"
+    },
+    {
+      "url": "https://arxiv.org/abs/1312.5227",
+      "use": "Scope of additional metric-measure inverse-limit obligations"
+    }
+  ]
+}
