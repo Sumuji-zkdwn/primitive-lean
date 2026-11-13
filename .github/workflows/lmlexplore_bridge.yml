@@ -5,6 +5,8 @@ on:
     paths:
       - 'experiments/lmlexplore_bridge/**'
       - '.github/workflows/lmlexplore_bridge.yml'
+      - 'lean/Elastica/Variation.lean'
+      - '.gitattributes'
   workflow_dispatch:
 
 permissions:
@@ -16,6 +18,10 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Record the exact checked commit
+        run: git rev-parse HEAD
       # lean-action's configure step requires a Lake manifest to exist.
       # Bootstrap and resolve dependencies before invoking that action.
       - name: Bootstrap Lean and generate Lake manifest
@@ -37,3 +43,19 @@ jobs:
       - name: Recheck bridge with Lean kernel trust=0
         working-directory: experiments/lmlexplore_bridge
         run: lake env lean --trust=0 ElasticaLMLExploreBridge.lean
+      - name: Audit all bridge theorem axioms
+        working-directory: experiments/lmlexplore_bridge
+        run: |
+          python3 check_axioms.py --self-test
+          python3 check_axioms.py
+      - name: Upload bridge axiom audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lmlexplore-bridge-axiom-audit
+          path: |
+            experiments/lmlexplore_bridge/.lake/axiom-audit/Audit.lean
+            experiments/lmlexplore_bridge/.lake/axiom-audit/audit.log
+            experiments/lmlexplore_bridge/.lake/axiom-audit/audit.json
+          if-no-files-found: warn
+          include-hidden-files: true
