@@ -1,4 +1,4 @@
-import Elastica.ExponentialWeight
+import Elastica.Variation
 import LMLExplore.OnlineLearning.ExponentialWeights
 
 /-!
@@ -26,13 +26,13 @@ def curveGibbs (β : ℝ) (ε : ℝ → ℝ)
   LMLExplore.OnlineLearning.softmax
     (fun a => -β * Elastica.energy ε (θ a) ℓ)
 
-/-- Elastica's unnormalized exponential weights and LMLExplore's softmax
-yield definitionally the same normalized weights. -/
+/-- The exact curvature-energy definition imported from Elastica.Variation
+agrees with LMLExplore's finite softmax weighting formula. -/
 theorem curveGibbs_apply (β : ℝ) (ε : ℝ → ℝ)
     (θ : α → ℝ → ℝ) (ℓ : ℝ) (a : α) :
     curveGibbs β ε θ ℓ a =
-      Elastica.exponentialWeight β ε (θ a) ℓ /
-        ∑ b, Elastica.exponentialWeight β ε (θ b) ℓ := by
+      Real.exp (-β * Elastica.energy ε (θ a) ℓ) /
+        ∑ b, Real.exp (-β * Elastica.energy ε (θ b) ℓ) := by
   rfl
 
 /-- A nonempty family of Elastica candidates gives an LMLExplore simplex
