@@ -66,8 +66,8 @@ def main() -> None:
     second_variation = COMPAT / "Elastica" / "SecondVariation.lean"
     replace_once(
         second_variation,
-        "    simp\\n  have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le",
-        "    all_goals first | (funext x; rfl) | (simp; ring)\\n  have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le",
+        "    simp\n  have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le",
+        "    all_goals first | (funext x; rfl) | (simp; ring)\n  have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le",
     )
     print("Elastica 4.36 compatibility copy ready: 3 files / 4 proof-tactic edits")
 
