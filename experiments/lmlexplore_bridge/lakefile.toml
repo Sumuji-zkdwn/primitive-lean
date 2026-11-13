@@ -32,10 +32,10 @@ name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
 rev = "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
 
-# Reuse original Elastica sources in place, not copied or rewritten.
+# Read a generated, hash-pinned compatibility copy. Original sources are not modified.
 [[lean_lib]]
 name = "Elastica"
-srcDir = "../../lean"
+srcDir = "compat"
 
 [[lean_lib]]
 name = "ElasticaLMLExploreBridge"
