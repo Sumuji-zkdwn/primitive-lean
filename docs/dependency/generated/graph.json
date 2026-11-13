@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
+  "main_commit": "735b58d65da3349cc523783090b9f384cce1aafe",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -9671,6 +9671,92 @@
       "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
     },
     {
+      "id": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoGeometricProjection",
+      "declarations": [
+        "thirdParam",
+        "newParam",
+        "thirdParam_zero_zero",
+        "thirdParam_one_zero",
+        "thirdParam_two_zero",
+        "thirdParam_zero_one",
+        "thirdParam_one_one",
+        "thirdParam_two_one",
+        "continuous_thirdParam",
+        "thirdParam_cover",
+        "vertexImage",
+        "edgeImage",
+        "edgeImage_zero",
+        "edgeImage_one",
+        "bond",
+        "bond_vertexPoint_old",
+        "bond_vertexPoint_new",
+        "bond_edgePoint",
+        "continuous_bond",
+        "bond_surjective",
+        "bond_forgets_sheet",
+        "bond_not_injective",
+        "thirdParam_difference"
+      ],
+      "imports": [],
+      "sha256": "7ed41c14e6ce22e77158ca77bee7520eae9309e0220a5d87241aa5c351aa32f4"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoGeometricTower.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoGeometricTower",
+      "declarations": [
+        "edgeTopology",
+        "vertexTopology",
+        "edgeDiscrete",
+        "vertexDiscrete",
+        "Space",
+        "compact_space",
+        "bonding",
+        "continuous_bonding",
+        "bonding_surjective",
+        "successor",
+        "bonding_successor",
+        "coordinates",
+        "Tower",
+        "towerTopology",
+        "threadFromBase",
+        "project",
+        "project_compatible",
+        "continuous_project",
+        "project_zero_thread",
+        "project_zero_surjective",
+        "threadFromBase_injective",
+        "baseVertexCoordinate",
+        "base_source_coordinate",
+        "base_target_coordinate",
+        "baseCoordinate",
+        "basePoint",
+        "baseCoordinate_basePoint",
+        "continuous_baseCoordinate",
+        "basePoint_baseCoordinate",
+        "baseHomeomorph",
+        "evaluation",
+        "continuous_evaluation",
+        "intervalThread",
+        "evaluation_intervalThread",
+        "evaluation_surjective",
+        "intervalThread_injective",
+        "tower_nonempty",
+        "interval_threads_zero_one_distinct",
+        "heightAt",
+        "continuous_heightAt",
+        "heightAt_project"
+      ],
+      "imports": [],
+      "sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e"
+    },
+    {
       "id": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
       "scope": "main",
       "path": "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
@@ -9731,6 +9817,42 @@
       ],
       "imports": [],
       "sha256": "c62f9202b98e0581ca00160c6a2c23fa871050f080d0eaf3ddb518f4c08904fb"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoRealization.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoRealization.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoRealization",
+      "declarations": [
+        "Raw",
+        "normal",
+        "endpointSetoid",
+        "Realization",
+        "vertexPoint",
+        "edgePoint",
+        "realization_cases",
+        "edgePoint_zero",
+        "edgePoint_one",
+        "vertexPoint_injective",
+        "edgePoint_interior_eq_iff",
+        "edgePoint_interior_ne_vertex",
+        "rawLift",
+        "normalValue",
+        "normalValue_normal",
+        "rawLift_respects",
+        "lift",
+        "lift_vertex",
+        "lift_edge",
+        "lift_unique",
+        "continuous_vertexPoint",
+        "continuous_edgePoint",
+        "continuous_edgePoints",
+        "continuous_lift",
+        "compact_realization"
+      ],
+      "imports": [],
+      "sha256": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16"
     },
     {
       "id": "main:linear_input/lean_check/LevelConvergence.inc",
@@ -22812,6 +22934,75 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RefinedEdge",
+        "RefinedVertex",
+        "refineSource",
+        "refineTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "to": "main:linear_input/lean_check/LaaksoRealization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Realization",
+        "continuous_edgePoint",
+        "continuous_lift",
+        "edgePoint_interior_eq_iff",
+        "edgePoint_one",
+        "edgePoint_zero",
+        "lift_vertex",
+        "vertexPoint"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoGeometricTower.inc",
+      "to": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputInverseTowerObservation.Limit",
+        "LinearInputInverseTowerObservation.project"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoGeometricTower.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RefinedEdge",
+        "RefinedVertex",
+        "VertexType"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoGeometricTower.inc",
+      "to": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bond_surjective",
+        "continuous_bond"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoGeometricTower.inc",
+      "to": "main:linear_input/lean_check/LaaksoRealization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "Realization",
+        "compact_realization",
+        "continuous_edgePoint",
+        "continuous_lift",
+        "edgePoint_one",
+        "edgePoint_zero",
+        "realization_cases",
+        "vertexPoint"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
       "to": "main:linear_input/lean_check/FutureObservations.inc",
       "kind": "qualified_reference",
@@ -25478,6 +25669,9 @@
     "linear_input/lean_check/InverseTowerObservation.inc",
     "linear_input/lean_check/LaaksoFiniteGraph.inc",
     "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+    "linear_input/lean_check/LaaksoRealization.inc",
+    "linear_input/lean_check/LaaksoGeometricProjection.inc",
+    "linear_input/lean_check/LaaksoGeometricTower.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
     "linear_input/lean_check/FiniteSelfSynthesis.inc",
     "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -25959,28 +26153,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
+      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
+      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
+      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
+      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
