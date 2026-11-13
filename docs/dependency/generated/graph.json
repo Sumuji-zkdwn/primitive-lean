@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "735b58d65da3349cc523783090b9f384cce1aafe",
+  "main_commit": "f6ee8eb8fec6a9441785613f034714c535c47b18",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -9853,6 +9853,91 @@
       ],
       "imports": [],
       "sha256": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoSigned",
+      "declarations": [
+        "Twist",
+        "untwisted",
+        "flipped",
+        "sign",
+        "sign_untwisted",
+        "sign_flipped_three",
+        "sign_flipped_of_ne",
+        "flipped_only_middle",
+        "LiftVertex",
+        "LiftEdge",
+        "liftSource",
+        "liftTarget",
+        "liftGraph",
+        "lift_vertex_card",
+        "lift_edge_card",
+        "Adj",
+        "Reach",
+        "adj_symm",
+        "reach_symm",
+        "TwoStep",
+        "twoStep_reach",
+        "untwisted_to_root",
+        "flipped_to_root",
+        "untwisted_adj_layer",
+        "untwisted_reach_layer",
+        "untwisted_reach_iff",
+        "flipped_root_switch",
+        "flipped_fully_connected",
+        "untwisted_sheets_separate",
+        "reachableFintype",
+        "untwisted_reachable_card",
+        "flipped_reachable_card",
+        "middleParity",
+        "untwisted_middle_parity",
+        "flipped_middle_parity",
+        "Spin",
+        "Compatible",
+        "compatible_middle_parity",
+        "untwisted_has_spin",
+        "flipped_no_spin"
+      ],
+      "imports": [],
+      "sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoSignedEnergy",
+      "declarations": [
+        "State",
+        "localPotential",
+        "localPotential_eq_design_energy",
+        "edgeEnergy",
+        "energy",
+        "localPotential_nonneg",
+        "edgeEnergy_nonneg",
+        "energy_nonneg",
+        "constantWell",
+        "localPotential_constantWell",
+        "edgeEnergy_untwisted_constantWell",
+        "energy_untwisted_constantWell",
+        "sum_six",
+        "energy_expansion",
+        "middle_energy_decomposition",
+        "middle_energy_lower_bound",
+        "energy_flipped_lower_bound",
+        "energy_flipped_pos",
+        "energy_flipped_ne_zero",
+        "edgeEnergy_flip_difference",
+        "flip_energy_jump",
+        "flip_can_increase_energy",
+        "flip_can_decrease_energy"
+      ],
+      "imports": [],
+      "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9"
     },
     {
       "id": "main:linear_input/lean_check/LevelConvergence.inc",
@@ -23032,6 +23117,33 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "sign_flipped_of_ne",
+        "sign_untwisted"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/LevelConvergence.inc",
       "to": "main:linear_input/lean_check/Coercivity.inc",
       "kind": "unique_identifier_candidate",
@@ -25672,6 +25784,8 @@
     "linear_input/lean_check/LaaksoRealization.inc",
     "linear_input/lean_check/LaaksoGeometricProjection.inc",
     "linear_input/lean_check/LaaksoGeometricTower.inc",
+    "linear_input/lean_check/LaaksoSignedConnection.inc",
+    "linear_input/lean_check/LaaksoSignedEnergy.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
     "linear_input/lean_check/FiniteSelfSynthesis.inc",
     "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -26153,28 +26267,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
+      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
+      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
+      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "735b58d65da3349cc523783090b9f384cce1aafe",
+      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
