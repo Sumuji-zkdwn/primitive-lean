@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+  "main_commit": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -9500,6 +9500,39 @@
       "sha256": "7ba29d42bdde5903ebb47db238afefe3864fe1ea1580812cb1cbd2f16f5f0465"
     },
     {
+      "id": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/InverseTowerObservation.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputInverseTowerObservation",
+      "declarations": [
+        "Limit",
+        "project",
+        "project_compatible",
+        "update",
+        "project_update",
+        "project_iterate",
+        "same_projection_same_future",
+        "projected_future_iff",
+        "all_projections_separate",
+        "action",
+        "project_exactBridge",
+        "project_run",
+        "projected_wordEq_iff",
+        "BitLevel",
+        "dropLast",
+        "bitLimit",
+        "bitStep",
+        "bitStep_compatible",
+        "bit_project_exactBridge",
+        "bit_action_false",
+        "bit_action_true_changes_zero",
+        "bit_project_not_injective"
+      ],
+      "imports": [],
+      "sha256": "dbd899cf55e0b1fc97ce0d87e2f7d894f90c4ba902a3221f800f1eb32a9c0a0c"
+    },
+    {
       "id": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
       "scope": "main",
       "path": "linear_input/lean_check/JoinContextualEquivalence.inc",
@@ -9584,6 +9617,120 @@
       ],
       "imports": [],
       "sha256": "8b522f412c683f56b4cfe5cda75cc4b81a32368af46c09e977b90e5dc116876e"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoFiniteGraph",
+      "declarations": [
+        "Graph",
+        "RefinedVertex",
+        "RefinedEdge",
+        "RawVertex",
+        "refineSource",
+        "refineTarget",
+        "refine",
+        "rawProjection",
+        "RawRelated",
+        "rawProjection_eq_iff",
+        "rawProjection_surjective",
+        "rawSetoid",
+        "quotientProjection",
+        "quotientProjection_bijective",
+        "rawQuotientEquiv",
+        "old_vertices_keep_sheet",
+        "new_vertices_glue_sheets",
+        "base",
+        "EdgeType",
+        "VertexType",
+        "edgeFintype",
+        "vertexFintype",
+        "level",
+        "edge_card_succ",
+        "vertex_card_succ",
+        "edge_card",
+        "twice_vertex_card",
+        "first_vertex_card",
+        "first_edge_card",
+        "firstSource",
+        "firstTarget",
+        "firstGraph",
+        "firstVertexEncode",
+        "firstVertexDecode",
+        "firstVertexEquiv",
+        "firstEdgeEncode",
+        "firstEdgeDecode",
+        "firstEdgeEquiv",
+        "first_source_compatible",
+        "first_target_compatible",
+        "first_parallel_middle_edges"
+      ],
+      "imports": [],
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoNonlinear",
+      "declarations": [
+        "vectorSix_apply_two",
+        "vectorSix_apply_three",
+        "vectorSix_apply_four",
+        "vectorSix_apply_five",
+        "vectorFour_apply_two",
+        "vectorFour_apply_three",
+        "vectorThree_apply_two",
+        "FineState",
+        "SyncState",
+        "reaction",
+        "fineLaplacian",
+        "fineLaplacian_coordinates",
+        "fineField",
+        "pairMean",
+        "uniformWitness",
+        "splitWitness",
+        "witnesses_same_mean",
+        "uniformWitness_projected_field",
+        "splitWitness_projected_field",
+        "pairMean_field_does_not_descend",
+        "syncLift",
+        "syncRead",
+        "syncRead_syncLift",
+        "syncLift_injective",
+        "syncSource",
+        "syncTarget",
+        "syncMass",
+        "syncConductance",
+        "syncVertexMap",
+        "syncEdgeMap",
+        "syncLift_apply",
+        "syncSource_commutes",
+        "syncTarget_commutes",
+        "syncMass_eq_multiplicity",
+        "syncConductance_eq_multiplicity",
+        "syncMass_pos",
+        "syncLaplacian",
+        "syncLaplacian_coordinates",
+        "syncField",
+        "fineField_syncLift",
+        "fineStep",
+        "syncStep",
+        "fineStep_syncLift",
+        "fineStep_iterate_syncLift",
+        "synchronized_future_iff",
+        "uniformWitness_projected_step",
+        "splitWitness_projected_step",
+        "witnesses_different_next_mean",
+        "pairMean_step_does_not_descend",
+        "witnesses_not_futureEq",
+        "witnesses_predictive_states_distinct"
+      ],
+      "imports": [],
+      "sha256": "c62f9202b98e0581ca00160c6a2c23fa871050f080d0eaf3ddb518f4c08904fb"
     },
     {
       "id": "main:linear_input/lean_check/LevelConvergence.inc",
@@ -22597,6 +22744,56 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "to": "main:linear_input/lean_check/CrossSystemObservation.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCrossSystemObservation.ExactBridge",
+        "LinearInputCrossSystemObservation.bridge_preserves_wordEq",
+        "LinearInputCrossSystemObservation.bridge_reflects_wordEq",
+        "LinearInputCrossSystemObservation.bridge_run"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "to": "main:linear_input/lean_check/CrossSystemObservation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ExactBridge",
+        "bridge_preserves_wordEq",
+        "bridge_reflects_wordEq",
+        "bridge_run"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "to": "main:linear_input/lean_check/FutureObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputFutureObservation.FutureEq",
+        "LinearInputFutureObservation.predictive_kernel_sub",
+        "LinearInputFutureObservation.representation_iterate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "to": "main:linear_input/lean_check/FutureObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "predictive_kernel_sub",
+        "representation_iterate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/InverseTowerObservation.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.WordEq",
+        "LinearInputOperatorWords.run"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/JoinContextualEquivalence.inc",
       "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
       "kind": "qualified_reference",
@@ -22612,6 +22809,35 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "word_trans"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "to": "main:linear_input/lean_check/FutureObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputFutureObservation.FutureEq",
+        "LinearInputFutureObservation.encode",
+        "LinearInputFutureObservation.encode_iff_future",
+        "LinearInputFutureObservation.representation_iterate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "to": "main:linear_input/lean_check/FutureObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "encode_iff_future",
+        "representation_iterate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
       ]
     },
     {
@@ -25249,6 +25475,9 @@
     "linear_input/lean_check/OperatorFiniteHorizon.inc",
     "linear_input/lean_check/OperatorSemanticClosure.inc",
     "linear_input/lean_check/CrossSystemObservation.inc",
+    "linear_input/lean_check/InverseTowerObservation.inc",
+    "linear_input/lean_check/LaaksoFiniteGraph.inc",
+    "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
     "linear_input/lean_check/FiniteSelfSynthesis.inc",
     "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -25730,28 +25959,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "956fe5c9f18f1360a84a1736dcf038ebc0cdf7b3",
+      "base_sha": "1fa2d93c06102195bc693afc4d1e59344e3656ab",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
