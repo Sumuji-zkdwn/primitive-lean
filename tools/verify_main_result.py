@@ -24,6 +24,7 @@ PROOFS = ROOT / "linear_input/lean_check"
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 # Additive Mathlib imports prepended to MainResult.lean (All.lean bytes stay unchanged).
 EXTRA_IMPORTS = (
+    "Mathlib.Logic.Relation",
     "Mathlib.Topology.UnitInterval",
     "Mathlib.Topology.Constructions.SumProd",
     "Mathlib.Topology.Compactness.Compact",
@@ -201,6 +202,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/LaaksoRealization.inc', 'LinearInputLaaksoRealization'),
     ('linear_input/lean_check/LaaksoGeometricProjection.inc', 'LinearInputLaaksoGeometricProjection'),
     ('linear_input/lean_check/LaaksoGeometricTower.inc', 'LinearInputLaaksoGeometricTower'),
+    ('linear_input/lean_check/LaaksoSignedConnection.inc', 'LinearInputLaaksoSigned'),
+    ('linear_input/lean_check/LaaksoSignedEnergy.inc', 'LinearInputLaaksoSignedEnergy'),
     ('linear_input/lean_check/SemanticIntervalNecessity.inc', 'LinearInputSemanticIntervals'),
     ('linear_input/lean_check/FiniteSelfSynthesis.inc', 'LinearInputFiniteSelfSynthesis'),
     ('linear_input/lean_check/RecursiveOperatorReentry.inc', 'LinearInputRecursiveReentry'),
