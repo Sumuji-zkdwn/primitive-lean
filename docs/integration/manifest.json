@@ -6615,6 +6615,38 @@
         "authored_on_parent_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
         "ledger": "docs/laakso/provenance-geometric.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459",
+      "original_sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "9ad1fe7e0505d0e9507ed6bf231100955928a55b",
+        "ledger": "docs/laakso/provenance-signed.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9",
+      "original_sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "9ad1fe7e0505d0e9507ed6bf231100955928a55b",
+        "ledger": "docs/laakso/provenance-signed.json"
+      }
     }
   ],
   "construction_errors": [],

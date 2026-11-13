@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "base_commit": "9ad1fe7e0505d0e9507ed6bf231100955928a55b",
+  "scope": "First Laakso approximant: one labelled middle-edge sign flip, two-lift reachability and spin obstruction, and Research shifted two-component quartic energy at lambda=kappa=1 with a uniform lower bound",
+  "not_claimed": [
+    "all finite signed graphs or a general balance theorem",
+    "sharpness or attainment of the energy bound 1/2",
+    "monotone fixed-state cost under a sign flip",
+    "gradient flow or relaxation convergence",
+    "a compatible signed connection on the whole geometric inverse system",
+    "metric, measure, dimension or Poincare inequality",
+    "equivalence with macro-word enlargement or homological non-fillability"
+  ],
+  "inherited_source_ledger": "docs/laakso/provenance.json",
+  "source_inputs": [
+    {
+      "origin": "C:\\Users\\Dalcia\\Research\\05_Notes\\recent_discussions_2026-10-19\\artifacts\\continuous_field_energy_lab_v2_7\\SIGNED_CONNECTIONS.md",
+      "preserved_copy": "sources/laakso/signed/SIGNED_CONNECTIONS.md",
+      "sha256": "f70c840823a161ee068e3ca805b01a7b2e4b12d7ad8a0a3a714cf8d79006140a",
+      "use": "Sections 1-4 define signs, two-lift edges, fixed-state flip cost and the two-component energy; sections 6-7 distinguish types of obstruction"
+    }
+  ],
+  "base_inputs": [
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
+    },
+    {
+      "path": "linear_input/lean_check/Design.lean",
+      "sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549"
+    },
+    {
+      "path": "tools/check_laakso_finite.py",
+      "sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+    },
+    {
+      "path": "docs/laakso/provenance.json",
+      "sha256": "2c0eaa7dff5b20683e030c60392a6edf4b1de6f4d1d0ac775d6893ef32f7663a"
+    }
+  ],
+  "modules": [
+    {
+      "path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "namespace": "LinearInputLaaksoSigned",
+      "sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459",
+      "declarations": 40,
+      "theorems": 24
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "namespace": "LinearInputLaaksoSignedEnergy",
+      "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9",
+      "declarations": 23,
+      "theorems": 18
+    }
+  ],
+  "finite_checker": {
+    "path": "tools/check_laakso_signed.py",
+    "sha256": "b7c9a9245618a7de3b9149ac368d0b8655b9de6add9a9e668ebc89269e866793",
+    "shared_builder": "tools/check_laakso_finite.py",
+    "shared_builder_sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+  },
+  "parameters": {
+    "lam": 1,
+    "kappa": 1,
+    "u": 0,
+    "r": -1
+  },
+  "edge_signs": {
+    "untwisted": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "flipped": [
+      1,
+      1,
+      1,
+      -1,
+      1,
+      1
+    ]
+  },
+  "proof_boundary": "The lower bound is a theorem for every real state on this one graph; finite rational checks are independent replay evidence, not an all-real proof"
+}
