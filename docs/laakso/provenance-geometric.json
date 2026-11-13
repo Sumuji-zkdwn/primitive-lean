@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-14",
+  "base_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+  "scope": "Closed-interval quotient realizations, continuous surjective geometric bonding maps, compact finite levels, a base-interval homeomorphism, and compatible threads with continuous interval evaluation",
+  "not_claimed": [
+    "path metric or global Lipschitz bound",
+    "measure or measure pushforward",
+    "Hausdorffness or path connectedness of all levels",
+    "compactness or metrizability of the whole inverse limit",
+    "continuity of the chosen successor or thread maps",
+    "Hausdorff dimension, Ahlfors regularity or Poincare inequality",
+    "compatibility of the earlier nonlinear reaction with all geometric bonding maps"
+  ],
+  "inherited_source_ledger": "docs/laakso/provenance.json",
+  "base_inputs": [
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
+    },
+    {
+      "path": "linear_input/lean_check/InverseTowerObservation.inc",
+      "sha256": "dbd899cf55e0b1fc97ce0d87e2f7d894f90c4ba902a3221f800f1eb32a9c0a0c"
+    },
+    {
+      "path": "linear_input/lean_check/FutureObservations.inc",
+      "sha256": "8db780494b6e16fae9985bad1f4e59c456d6ae7b4598c351c86422d1e3fe8329"
+    },
+    {
+      "path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "sha256": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721"
+    },
+    {
+      "path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "sha256": "8816235e77ba0612ac801d3dd10b3835fc62079903d17de8ef6e72635c332592"
+    },
+    {
+      "path": "tools/check_laakso_finite.py",
+      "sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+    },
+    {
+      "path": "sources/laakso/laakso.py",
+      "sha256": "6dcbc496b1dd1c18d507ff0d47193cbba986c0e20deeede193d56f07fa62aee4"
+    },
+    {
+      "path": "docs/laakso/provenance.json",
+      "sha256": "2c0eaa7dff5b20683e030c60392a6edf4b1de6f4d1d0ac775d6893ef32f7663a"
+    }
+  ],
+  "modules": [
+    {
+      "path": "linear_input/lean_check/LaaksoRealization.inc",
+      "namespace": "LinearInputLaaksoRealization",
+      "sha256": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16",
+      "declarations": 25,
+      "theorems": 16
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "namespace": "LinearInputLaaksoGeometricProjection",
+      "sha256": "7ed41c14e6ce22e77158ca77bee7520eae9309e0220a5d87241aa5c351aa32f4",
+      "declarations": 23,
+      "theorems": 18
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "namespace": "LinearInputLaaksoGeometricTower",
+      "sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e",
+      "declarations": 41,
+      "theorems": 22
+    }
+  ],
+  "finite_checker": {
+    "path": "tools/check_laakso_geometric.py",
+    "sha256": "63ffb662a002e0dcfdff3f4a9bd86911d7ef304e8e34ec505c4d2037adb09ba7",
+    "shared_builder": "tools/check_laakso_finite.py",
+    "shared_builder_sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+  },
+  "references": [
+    {
+      "url": "https://arxiv.org/html/1011.3567v2",
+      "use": "Section 2.1 binary subdivide-copy-glue construction"
+    },
+    {
+      "url": "https://arxiv.org/html/1312.5227v1",
+      "use": "Additional metric/measure admissibility obligations, not assumed verified"
+    }
+  ]
+}

@@ -1,0 +1,1235 @@
+{
+  "recorded_at_utc": "2026-11-13T18:03:54.385883+00:00",
+  "passed": true,
+  "base_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+  "local_run_source_commit": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+  "local_run_dirty": true,
+  "audit_head": "583e9d1dcb1e7e215082131e9c82cc65905bbd12",
+  "audit_dirty": true,
+  "source_binding": "Local precommit working-tree run. Complete proof-input hashes, native module provenance, manifest bytes and raw axiom-log results rechecked; not a remote CI or clean-rebuild claim.",
+  "environment": {
+    "python": "3.14.5",
+    "executable": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-11-14\\laakso-primitive-lean\\primitive-lean\\.venv\\Scripts\\python.exe",
+    "pytest": "9.2.0",
+    "numpy": "2.5.4",
+    "lean": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+    "clean_project_build": false,
+    "python_metadata_observed_at": "Artifact audit, using the integration report's interpreter path",
+    "dependency_cache_retained": true,
+    "dependency_cache_path": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-10-30\\gi\\work\\pr3-verify\\lean\\.lake\\packages",
+    "project_build_path": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-11-14\\laakso-primitive-lean\\primitive-lean-geometric\\lean\\.lake\\build",
+    "cache_scope": "Pinned dependency cache retained; project build not cleaned for this run"
+  },
+  "modules": [
+    {
+      "path": "linear_input/lean_check/LaaksoRealization.inc",
+      "namespace": "LinearInputLaaksoRealization",
+      "sha256": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16",
+      "declarations": 25,
+      "theorems": 16,
+      "audited_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "namespace": "LinearInputLaaksoGeometricProjection",
+      "sha256": "7ed41c14e6ce22e77158ca77bee7520eae9309e0220a5d87241aa5c351aa32f4",
+      "declarations": 23,
+      "theorems": 18,
+      "audited_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "namespace": "LinearInputLaaksoGeometricTower",
+      "sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e",
+      "declarations": 41,
+      "theorems": 22,
+      "audited_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "added_theorems": 56,
+  "added_declarations": 89,
+  "joint_proof": {
+    "theorems": 4788,
+    "declarations": 6397,
+    "compile": {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "--trust=0",
+        "../linear_input/lean_check/MainResult.lean"
+      ],
+      "working_directory": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-11-14\\laakso-primitive-lean\\primitive-lean-geometric\\lean",
+      "exit_code": 0,
+      "seconds": 438.857,
+      "log": "verification/main-result.log"
+    },
+    "warnings": [],
+    "unexpected_axioms": [],
+    "forbidden_tokens": [],
+    "complete_axiom_audit": true,
+    "baseline_axioms_match": true,
+    "input_hashes_rechecked": 420,
+    "raw_axiom_results_rechecked": 6397
+  },
+  "integration_stage_count": 28,
+  "integration_checks": [
+    {
+      "name": "source-audit",
+      "exit_code": 0,
+      "seconds": 0.886,
+      "log": "verification/integration-source-audit.log",
+      "warnings": []
+    },
+    {
+      "name": "repository-tests",
+      "exit_code": 0,
+      "seconds": 46.768,
+      "log": "verification/integration-repository-tests.log",
+      "warnings": [
+        "test_exact_commit_hashes_ignore_dirty_and_untracked_files (test_erg_formal_evidence.FormalEvidenceTests.test_exact_commit_hashes_ignore_dirty_and_untracked_files) ... warning: in the working copy of 'lean/Research/Example.lean', LF will be replaced by CRLF the next time Git touches it",
+        "warning: in the working copy of 'linear_input/lean_check/F0.inc', LF will be replaced by CRLF the next time Git touches it",
+        "test_head_mismatch_fails_closed (test_erg_formal_evidence.FormalEvidenceTests.test_head_mismatch_fails_closed) ... warning: in the working copy of 'lean/Research/Example.lean', LF will be replaced by CRLF the next time Git touches it",
+        "warning: in the working copy of 'linear_input/lean_check/F0.inc', LF will be replaced by CRLF the next time Git touches it",
+        "test_invalid_run_metadata_fails_closed (test_erg_formal_evidence.FormalEvidenceTests.test_invalid_run_metadata_fails_closed) ... warning: in the working copy of 'lean/Research/Example.lean', LF will be replaced by CRLF the next time Git touches it",
+        "warning: in the working copy of 'linear_input/lean_check/F0.inc', LF will be replaced by CRLF the next time Git touches it",
+        "test_missing_source_fails_closed (test_erg_formal_evidence.FormalEvidenceTests.test_missing_source_fails_closed) ... warning: in the working copy of 'lean/Research/Example.lean', LF will be replaced by CRLF the next time Git touches it",
+        "warning: in the working copy of 'linear_input/lean_check/F0.inc', LF will be replaced by CRLF the next time Git touches it",
+        "test_symlinks_are_excluded (test_erg_formal_evidence.FormalEvidenceTests.test_symlinks_are_excluded) ... warning: in the working copy of 'lean/Research/Example.lean', LF will be replaced by CRLF the next time Git touches it",
+        "warning: in the working copy of 'linear_input/lean_check/F0.inc', LF will be replaced by CRLF the next time Git touches it"
+      ]
+    },
+    {
+      "name": "check_galois_bridge",
+      "exit_code": 0,
+      "seconds": 0.121,
+      "log": "verification/integration-check_galois_bridge.log",
+      "warnings": []
+    },
+    {
+      "name": "check_f16_unexpected_bridges",
+      "exit_code": 0,
+      "seconds": 0.11,
+      "log": "verification/integration-check_f16_unexpected_bridges.log",
+      "warnings": []
+    },
+    {
+      "name": "check_complementary_recovery",
+      "exit_code": 0,
+      "seconds": 0.206,
+      "log": "verification/integration-check_complementary_recovery.log",
+      "warnings": []
+    },
+    {
+      "name": "check_shear_commutator",
+      "exit_code": 0,
+      "seconds": 0.086,
+      "log": "verification/integration-check_shear_commutator.log",
+      "warnings": []
+    },
+    {
+      "name": "check_strange_operator_galois",
+      "exit_code": 0,
+      "seconds": 0.11,
+      "log": "verification/integration-check_strange_operator_galois.log",
+      "warnings": []
+    },
+    {
+      "name": "check_strange_operator_counting",
+      "exit_code": 0,
+      "seconds": 0.129,
+      "log": "verification/integration-check_strange_operator_counting.log",
+      "warnings": []
+    },
+    {
+      "name": "check_f16_saddle_cantor",
+      "exit_code": 0,
+      "seconds": 0.096,
+      "log": "verification/integration-check_f16_saddle_cantor.log",
+      "warnings": []
+    },
+    {
+      "name": "check_f0_dynamics",
+      "exit_code": 0,
+      "seconds": 0.111,
+      "log": "verification/integration-check_f0_dynamics.log",
+      "warnings": []
+    },
+    {
+      "name": "check_future_observation",
+      "exit_code": 0,
+      "seconds": 0.805,
+      "log": "verification/integration-check_future_observation.log",
+      "warnings": []
+    },
+    {
+      "name": "check_e_wfs_fenchel",
+      "exit_code": 0,
+      "seconds": 1.002,
+      "log": "verification/integration-check_e_wfs_fenchel.log",
+      "warnings": []
+    },
+    {
+      "name": "check_energy_gauge_fenchel",
+      "exit_code": 0,
+      "seconds": 0.937,
+      "log": "verification/integration-check_energy_gauge_fenchel.log",
+      "warnings": []
+    },
+    {
+      "name": "check_e_wfs_future_bridge",
+      "exit_code": 0,
+      "seconds": 0.339,
+      "log": "verification/integration-check_e_wfs_future_bridge.log",
+      "warnings": []
+    },
+    {
+      "name": "check_temporal_sampling",
+      "exit_code": 0,
+      "seconds": 3.926,
+      "log": "verification/integration-check_temporal_sampling.log",
+      "warnings": []
+    },
+    {
+      "name": "check_wfs_mobius_fourier",
+      "exit_code": 0,
+      "seconds": 0.103,
+      "log": "verification/integration-check_wfs_mobius_fourier.log",
+      "warnings": []
+    },
+    {
+      "name": "check_f0_future_minimality",
+      "exit_code": 0,
+      "seconds": 0.168,
+      "log": "verification/integration-check_f0_future_minimality.log",
+      "warnings": []
+    },
+    {
+      "name": "check_wfs_sampling",
+      "exit_code": 0,
+      "seconds": 0.747,
+      "log": "verification/integration-check_wfs_sampling.log",
+      "warnings": []
+    },
+    {
+      "name": "check_curve_word_chain",
+      "exit_code": 0,
+      "seconds": 0.115,
+      "log": "verification/integration-check_curve_word_chain.log",
+      "warnings": []
+    },
+    {
+      "name": "check_laakso_finite",
+      "exit_code": 0,
+      "seconds": 0.131,
+      "log": "verification/integration-check_laakso_finite.log",
+      "warnings": []
+    },
+    {
+      "name": "check_laakso_geometric",
+      "exit_code": 0,
+      "seconds": 3.014,
+      "log": "verification/integration-check_laakso_geometric.log",
+      "warnings": []
+    },
+    {
+      "name": "arc3-offline",
+      "exit_code": 0,
+      "seconds": 2.203,
+      "log": "verification/integration-arc3-offline.log",
+      "warnings": []
+    },
+    {
+      "name": "proof-only",
+      "exit_code": 0,
+      "seconds": 544.218,
+      "log": "verification/integration-proof-only.log",
+      "warnings": []
+    },
+    {
+      "name": "build-elastica",
+      "exit_code": 0,
+      "seconds": 9.229,
+      "log": "verification/integration-build-elastica.log",
+      "warnings": []
+    },
+    {
+      "name": "moving-curve",
+      "exit_code": 0,
+      "seconds": 41.544,
+      "log": "verification/integration-moving-curve.log",
+      "warnings": []
+    },
+    {
+      "name": "moving-curve-audit",
+      "exit_code": 0,
+      "seconds": 22.1,
+      "log": "verification/integration-moving-curve-audit.log",
+      "warnings": []
+    },
+    {
+      "name": "okanohara-bridge",
+      "exit_code": 0,
+      "seconds": 29.837,
+      "log": "verification/integration-okanohara-bridge.log",
+      "warnings": []
+    },
+    {
+      "name": "finite-markov-transport",
+      "exit_code": 0,
+      "seconds": 68.201,
+      "log": "verification/integration-finite-markov-transport.log",
+      "warnings": []
+    }
+  ],
+  "finite_check": {
+    "passed": true,
+    "scope": "Exact finite rational checks for bondings from levels 1..4 to 0..3; samples do not prove continuity, global path-metric claims, inverse-limit or metric-measure results",
+    "point_equality": "Vertex identity at endpoints; labelled edge ID and rational parameter in interiors",
+    "fine_parameters": [
+      "0",
+      "1/7",
+      "1/3",
+      "1/2",
+      "2/3",
+      "6/7",
+      "1"
+    ],
+    "coarse_parameters": [
+      "0",
+      "1/9",
+      "1/6",
+      "1/3",
+      "2/5",
+      "1/2",
+      "2/3",
+      "5/6",
+      "8/9",
+      "1"
+    ],
+    "graph_levels": [
+      {
+        "coarse_level": 0,
+        "fine_level": 1,
+        "coarse_vertices": 2,
+        "coarse_edges": 1,
+        "fine_vertices": 6,
+        "fine_edges": 6,
+        "coarse_edge_length": "1",
+        "fine_edge_length": "1/3",
+        "endpoint_compatibility_checks": 12,
+        "vertex_height_checks": 6,
+        "edge_point_height_checks": 42,
+        "scaled_edge_parameter_length_checks": 126,
+        "distinct_surjectivity_targets": 10,
+        "sampled_fiber_sizes": {
+          "1": 2,
+          "2": 8
+        },
+        "noninjective_sheet_pairs": 1,
+        "labelled_parallel_edge_groups": 0,
+        "mutation_controls": [
+          {
+            "name": "forgotten_third_offset",
+            "rejected": true,
+            "fine_edge": 1,
+            "parameter": "0",
+            "expected": [
+              "edge",
+              0,
+              "1/3"
+            ],
+            "mutated": [
+              "vertex",
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "coarse_level": 1,
+        "fine_level": 2,
+        "coarse_vertices": 6,
+        "coarse_edges": 6,
+        "fine_vertices": 24,
+        "fine_edges": 36,
+        "coarse_edge_length": "1/3",
+        "fine_edge_length": "1/9",
+        "endpoint_compatibility_checks": 72,
+        "vertex_height_checks": 24,
+        "edge_point_height_checks": 252,
+        "scaled_edge_parameter_length_checks": 756,
+        "distinct_surjectivity_targets": 54,
+        "sampled_fiber_sizes": {
+          "1": 12,
+          "2": 42
+        },
+        "noninjective_sheet_pairs": 6,
+        "labelled_parallel_edge_groups": 1,
+        "mutation_controls": [
+          {
+            "name": "forgotten_third_offset",
+            "rejected": true,
+            "fine_edge": 1,
+            "parameter": "0",
+            "expected": [
+              "edge",
+              0,
+              "1/3"
+            ],
+            "mutated": [
+              "vertex",
+              0
+            ]
+          },
+          {
+            "name": "early_parallel_edge_collapse",
+            "rejected": true,
+            "distinct_edge_ids": [
+              1,
+              4
+            ],
+            "distinct_points": [
+              [
+                "edge",
+                1,
+                "1/2"
+              ],
+              [
+                "edge",
+                4,
+                "1/2"
+              ]
+            ],
+            "mutated_common_point": [
+              "edge",
+              1,
+              "1/2"
+            ],
+            "expected_refined_edges": 36,
+            "mutated_refined_edges": 30
+          }
+        ]
+      },
+      {
+        "coarse_level": 2,
+        "fine_level": 3,
+        "coarse_vertices": 24,
+        "coarse_edges": 36,
+        "fine_vertices": 120,
+        "fine_edges": 216,
+        "coarse_edge_length": "1/9",
+        "fine_edge_length": "1/27",
+        "endpoint_compatibility_checks": 432,
+        "vertex_height_checks": 120,
+        "edge_point_height_checks": 1512,
+        "scaled_edge_parameter_length_checks": 4536,
+        "distinct_surjectivity_targets": 312,
+        "sampled_fiber_sizes": {
+          "1": 72,
+          "2": 240
+        },
+        "noninjective_sheet_pairs": 36,
+        "labelled_parallel_edge_groups": 6,
+        "mutation_controls": [
+          {
+            "name": "forgotten_third_offset",
+            "rejected": true,
+            "fine_edge": 1,
+            "parameter": "0",
+            "expected": [
+              "edge",
+              0,
+              "1/3"
+            ],
+            "mutated": [
+              "vertex",
+              0
+            ]
+          },
+          {
+            "name": "early_parallel_edge_collapse",
+            "rejected": true,
+            "distinct_edge_ids": [
+              1,
+              4
+            ],
+            "distinct_points": [
+              [
+                "edge",
+                1,
+                "1/2"
+              ],
+              [
+                "edge",
+                4,
+                "1/2"
+              ]
+            ],
+            "mutated_common_point": [
+              "edge",
+              1,
+              "1/2"
+            ],
+            "expected_refined_edges": 216,
+            "mutated_refined_edges": 180
+          }
+        ]
+      },
+      {
+        "coarse_level": 3,
+        "fine_level": 4,
+        "coarse_vertices": 120,
+        "coarse_edges": 216,
+        "fine_vertices": 672,
+        "fine_edges": 1296,
+        "coarse_edge_length": "1/27",
+        "fine_edge_length": "1/81",
+        "endpoint_compatibility_checks": 2592,
+        "vertex_height_checks": 672,
+        "edge_point_height_checks": 9072,
+        "scaled_edge_parameter_length_checks": 27216,
+        "distinct_surjectivity_targets": 1848,
+        "sampled_fiber_sizes": {
+          "1": 432,
+          "2": 1416
+        },
+        "noninjective_sheet_pairs": 216,
+        "labelled_parallel_edge_groups": 36,
+        "mutation_controls": [
+          {
+            "name": "forgotten_third_offset",
+            "rejected": true,
+            "fine_edge": 1,
+            "parameter": "0",
+            "expected": [
+              "edge",
+              0,
+              "1/3"
+            ],
+            "mutated": [
+              "vertex",
+              0
+            ]
+          },
+          {
+            "name": "early_parallel_edge_collapse",
+            "rejected": true,
+            "distinct_edge_ids": [
+              1,
+              4
+            ],
+            "distinct_points": [
+              [
+                "edge",
+                1,
+                "1/2"
+              ],
+              [
+                "edge",
+                4,
+                "1/2"
+              ]
+            ],
+            "mutated_common_point": [
+              "edge",
+              1,
+              "1/2"
+            ],
+            "expected_refined_edges": 1296,
+            "mutated_refined_edges": 1080
+          }
+        ]
+      }
+    ],
+    "mutation_controls_rejected": 7,
+    "source_sha256": "63ffb662a002e0dcfdff3f4a9bd86911d7ef304e8e34ec505c4d2037adb09ba7",
+    "graph_builder_sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb",
+    "totals": {
+      "endpoint_compatibility_checks": 3108,
+      "vertex_height_checks": 822,
+      "edge_point_height_checks": 10878,
+      "scaled_edge_parameter_length_checks": 32634,
+      "distinct_surjectivity_targets": 2224,
+      "noninjective_sheet_pairs": 259
+    }
+  },
+  "proof_dependency_revisions": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "source_hashes": {
+    "docs/astra/continuum_limit_bridge_contract.json": "175a76cdeffdba0a5d4d25bb6bc6b1dd5493116db46ddd93b18df1c33cee9674",
+    "docs/astra/finite_flow_bridge_contract.json": "849dcd5e5fe2065fc4b79e0dc20136b9f8b8fbaf432499266a157732f6860028",
+    "docs/astra/manifest.json": "19c68e1648f6b92b18525873d08fc981b65e66d2411d29ce0c30d4c35d764571",
+    "lean/Elastica.lean": "b701498633383a7c42397eaa7c149801c673bd06cf808091b98ddfe7839607ed",
+    "lean/Elastica/AffineEquivalence.lean": "5c1b4b92292a98200c5fda9e010e3b9083990523011f70c2de93977f5bad8d6b",
+    "lean/Elastica/CombinedConsequences.lean": "89c1dd68142e6d45dcf2af1a5eadf8860dc8b757327a658dc237ac7559a7b7b2",
+    "lean/Elastica/Composition.lean": "3834475a1b41cd6f1c89bb2c50c77e9701d6e7cb78aec740d0fe85476574879b",
+    "lean/Elastica/ConstrainedSecondVariation.lean": "0f6fef7f9a1b625f1662e77d413c6797415ac35d09ba31b59fb914f04dd8b01d",
+    "lean/Elastica/ConstraintRegularity.lean": "cbc7af0cb4815acda77a7d363f716c7da0df0987ec7f665d18cc26003f9808fe",
+    "lean/Elastica/Derivation.lean": "760d16e7cd7106cdd48951721ea187fae6a79110a8d5ba665e50634a478c98dc",
+    "lean/Elastica/Equations.lean": "588563ce3b56c21eebfcfb9df36e8ad5b0e052897e689b6f90f673e75f6419fa",
+    "lean/Elastica/ExactVariation.lean": "76a8b04f8b8e05f4c876e5cd02968995e0b839cf1fff56fcdd46c62dd290cdbb",
+    "lean/Elastica/Examples.lean": "c39ef5221465496305f9af9b62edd39d86d947dc5e7468e59a893a95398f4356",
+    "lean/Elastica/ExponentialWeight.lean": "0bf9e3d2c0f22ef7034dd87deac7baafe14ad7c83b113d815e22d81b7e8268ab",
+    "lean/Elastica/Geometry.lean": "5a7d021116a5ecc099f33f2cf4fbfc2189ff2b8053aa3065a10d4fcc4a1bdece",
+    "lean/Elastica/LocalMinimum.lean": "b838b5c6291f8de3df85bf5fbe61ff0f83c19b596e259d07460d3d912411330c",
+    "lean/Elastica/MinimumConditions.lean": "2e1fac501040dd0dd2fd009040cd8119be2464328c1605d940eb5ca6d4876a53",
+    "lean/Elastica/PowerLogResponse.lean": "4c8cf9238a2752d78a3cde207f4aea97c8649259a5e3bca8baa70b02abe560da",
+    "lean/Elastica/Reconstruction.lean": "20e2c467cfabcad9e2d11669e75f2183b216a1effe090bcf58290a238d21a297",
+    "lean/Elastica/ReplacementConsequences.lean": "f0a4fa40e6faffc640a26a9b1d3101d795c416add5cf0c70219bc811b6dc8d80",
+    "lean/Elastica/ScalarMinimum.lean": "c372ccc55c7eff747c13d51f464f0c4c4003bd23e350c68f113022e32f99a789",
+    "lean/Elastica/Scaling.lean": "b7c8078c62baf4e297d40db237dff1d71ec4245fc4f8cc812d4432735de254b8",
+    "lean/Elastica/ScalingMinima.lean": "6e7dc809acc1ebc49232c2500419a538b3012703df9cf5c9d0318a26600ef570",
+    "lean/Elastica/SecondVariation.lean": "2b592aedc1f4ec119196ac6a4ad04ff2376a3521d5f1276c014946d3b60bfcbf",
+    "lean/Elastica/Stationary.lean": "fa36841f118f4500eff1dcb3ac7503c8a31cc0bf6a87909f0cb601587943d729",
+    "lean/Elastica/StraightConstraint.lean": "93cd7f280bb2f9bf28727dcc6fc474496f8f37e8db09b2cd04a995e32c0af66e",
+    "lean/Elastica/Variation.lean": "0816fa64e6d6b63c4cb8faa13114586f06a17928d2b948738e68c08276263e5f",
+    "lean/Elastica/WeightResponse.lean": "10e2084516c9e98d1b3f12feed1b0cd56c4dc9780056e3a0284fa9623f8ec60d",
+    "lean/lake-manifest.json": "5781fd49aff59347f594d12cbfa61129eebb10ef293729ead611bd7410740590",
+    "lean/lakefile.toml": "24cbaef7acf55e1276267d5383d3107b695d5caa5ab0f12abd535c594c86eabe",
+    "lean/lean-toolchain": "ce4c4e3d87434b9663f46de25ce34b48a0cf0d392e0a320a0787b4674a2d7b61",
+    "linear_input/lean_check/All.lean": "e7b3f3522d43e041d6229232bf473a74a7c74cbcb005314db82f97de3965000f",
+    "linear_input/lean_check/AreaExactVariation.inc": "3c51bc3a0dd811b8f6c7ae0f0ce7c75aca9f7704a5852db6c89bbd7d76c8f1e9",
+    "linear_input/lean_check/AreaFamily.inc": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+    "linear_input/lean_check/AreaMinimum.inc": "6495ef140babfc06ab718b5d19f9567d939fdbc1d9d2aca4edd11a60eceb9afd",
+    "linear_input/lean_check/AreaParameters.inc": "e23141b25aa88c8c7f9f4075327b317e28813aee3a652c07c4f0dfdfea36978b",
+    "linear_input/lean_check/AreaRegularity.inc": "5c7f22565f41884dfa56ee2236b083bf01940fae92a71a828cc72289c9a837a6",
+    "linear_input/lean_check/AreaVariation.inc": "0c6a571742fe0add0488fc917124dcfbb727c29cd1aa0e1881f82944743a60bb",
+    "linear_input/lean_check/AssociatesFactorIdentification.inc": "b46404e503674bce0e9929d0be17c403387bb36a27558a412bf93ddb593d4620",
+    "linear_input/lean_check/AstraAnalyticAssembly.inc": "d43baa709281ca71d74f4928aebbf6000a8d62e03f17b68a96bf70fd2226b065",
+    "linear_input/lean_check/AstraAnalyticClassical.inc": "2e7f0c4400f24a14046bc195d30741a5511bab99796440616de7c0caa4673bba",
+    "linear_input/lean_check/AstraAnalyticDuhamel.inc": "25a2f07bd11f1eb3d07859767cebc490649d01ce768907caa75288bfc16366d3",
+    "linear_input/lean_check/AstraAnalyticExample.inc": "f33e01e3949380fe953c033835592f9743cf64a33920a1f59ab9d80cd96e0cbc",
+    "linear_input/lean_check/AstraAnalyticFieldTails.inc": "f426fbceb5667c547fc1e95486c65836924f61287fda940d0cea323c85f86944",
+    "linear_input/lean_check/AstraAnalyticFields.inc": "4c62e86e20def08a6239ff79b1c47590a97ca2d61e2c37e83cda1eb59a90625e",
+    "linear_input/lean_check/AstraAnalyticFixedPoint.inc": "0c60f2fc4b7ea32a3a34b75150a46cf7ef82cbf3931c7c20d47c03e2ada2dcd1",
+    "linear_input/lean_check/AstraAnalyticFourierDuhamel.inc": "67246b3abaaba7985f0ae463b17607956e294592272ef1a4856400b373238a28",
+    "linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc": "9dbf6b277a73595954f5a7092b584b0f31e60027e2bd05a909a60c0423ec71cb",
+    "linear_input/lean_check/AstraAnalyticInitial.inc": "44aa9dd83f8049e26999e8144eff57db3be50afb66213e53b6b163b603aef423",
+    "linear_input/lean_check/AstraAnalyticInitialTails.inc": "8592d8ceaa69b5a70495804e952eed9ae36ac97b3b1aaaf95e26e78774a30d63",
+    "linear_input/lean_check/AstraAnalyticKernel.inc": "be5130675a6df6291653449c7940dc724b11424e38ec7608c7dda2030a83a9b4",
+    "linear_input/lean_check/AstraAnalyticLift.inc": "204f2f7350ff3ff02dbcc44a8c334930afa7cd1c72db93f47bb92c58c6be9c04",
+    "linear_input/lean_check/AstraAnalyticLpMap.inc": "49d4478d9d15eb97fb18dc144ffbcbb276f0e023ee7b95c52e178eeeae1d8e4d",
+    "linear_input/lean_check/AstraAnalyticModeODE.inc": "89c7230330562a266737d32dd05146f1ee21c5e18fa3e47e2ea4bf3b0fa0279a",
+    "linear_input/lean_check/AstraAnalyticPDE.inc": "414f05a46e2057c033536201eeefa909c5c248c47a8580e80c235892b0b1f5e7",
+    "linear_input/lean_check/AstraAnalyticPhysicalMode.inc": "381ac8ae9c8e31cb1235dd5b6b839f1b96444fda8f3eec9851bd881cf3866771",
+    "linear_input/lean_check/AstraAnalyticReality.inc": "20c32b4fffcc95d30930897858b8a610b827cb52fd7548523ade5367313af6e3",
+    "linear_input/lean_check/AstraAnalyticTails.inc": "f5724e53b86a2cfacfa503cb057076f8e5cfdc84e1acd0b62ad46727ba7fcc19",
+    "linear_input/lean_check/AstraAnalyticTraceTails.inc": "4750e0dd17ddb953a644fe11e1207d2f4a283f07678300a69d181e4b197403ca",
+    "linear_input/lean_check/AstraAnalyticTransport.inc": "4e1b5faf032ad403c583b8ef620e5778aa474da4570e5a3a9b57596d1845f8db",
+    "linear_input/lean_check/AstraCircleProjection.inc": "6c621e16398c488af11fdbfbd0d9f70cae6ea6bf76baf4f7538db5766d4f82ce",
+    "linear_input/lean_check/AstraConstitutive.inc": "8cade3159159ebc00638bc3e0f82dfdcbfba60eb1d0f19a5f74d19ebba01065b",
+    "linear_input/lean_check/AstraContinuumCalculus.inc": "3e8b304c9b869fc0ffca85ebab2e9d0844a7c05e2be899002847685bed910b55",
+    "linear_input/lean_check/AstraContinuumFourier.inc": "51777a47d87321475f6c1226955eb3b547f8cb25eb8117034a087b7b4a1c0a88",
+    "linear_input/lean_check/AstraContinuumGalerkin.inc": "f2f006fae808b5880ce8135bded86e87f8632ede8bc57bcd16481c3af4667b0d",
+    "linear_input/lean_check/AstraContinuumLimit.inc": "787e414e6718b3b7edfc434ed6b60136161bbfeb17a90d5f5adc7c7758cd4de7",
+    "linear_input/lean_check/AstraContinuumRelative.inc": "6240d139c72e288edbcf074c0c6ae402a65baa5e9588f9878fb88504e19aef6c",
+    "linear_input/lean_check/AstraDynamicsBoundary.inc": "c23160842681041c6d84cc1bed665ac67337cfc7218fd605f0268fa2c182e571",
+    "linear_input/lean_check/AstraExactShear.inc": "5a9add60683f3f4b68c89576afd16d6e805b4169617a797baccff7f6fe6e6662",
+    "linear_input/lean_check/AstraExplicitAnalyticInput.inc": "640fec5537737c5f563490b14a140ba82214829b54ef0faecfd43907d825a63c",
+    "linear_input/lean_check/AstraExplicitMaterial.inc": "52992917ba33f20638b8b2dccef307ae2599660a86be3289cdd5eed09f560767",
+    "linear_input/lean_check/AstraFiniteEnergy.inc": "f9b6dd3f56d95e59e7d999e8f536f8c2e14cce5baff06afa53c2037d7959e198",
+    "linear_input/lean_check/AstraFiniteFlow.inc": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4",
+    "linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc": "0d9958e36c834a3549ce1446d68bf321ed350813b3a77924e16d65cd80324735",
+    "linear_input/lean_check/AstraFiniteRepresentatives.inc": "37054caf961714f707637a76bfe0a5fd8c71d6f4d6c0b8b2ac3fff77db2297ac",
+    "linear_input/lean_check/AstraFourierDerivative.inc": "add27799f5f44afcc6a98e633f7b69d7bba88e3d066177ccfa6e682c93a0cbc6",
+    "linear_input/lean_check/AstraFourierProjection.inc": "99904017798c931f97cfb3ab30a1011692df4a0dacb724427a558925e946e879",
+    "linear_input/lean_check/AstraFourierSupBounds.inc": "80d11220c2cabe7ec13a7f53869d5dfc375c21c63e06341a930f9e92b1a8bd9c",
+    "linear_input/lean_check/AstraGalerkinClassical.inc": "7aca8935f087081acbcdfeb6d4369f78805f293ef15b051be35d1bc2f4ba2102",
+    "linear_input/lean_check/AstraGalerkinFlow.inc": "b5c301bee1b0d6fb8160e28e6265de4b1f77446447082a9bee7c3c99a1524bc5",
+    "linear_input/lean_check/AstraGalerkinGronwall.inc": "004c591256b426039537ccb147e02d3a22161acc8f7d2e08f7e634f59eeda2ef",
+    "linear_input/lean_check/AstraGalerkinRegularity.inc": "2425cdc590be033d16041f6ea48efb8069e9b908c8a708f89d030c4a7e9793a0",
+    "linear_input/lean_check/AstraGalerkinRelative.inc": "551bac47b38eb1628d9aab79fc410198793d863c5440c17fd89ac26b0200cbab",
+    "linear_input/lean_check/AstraGalerkinRestoration.inc": "0139b8893d78c1cfffaebb7fd61ef7351811ae85f83962f0ab640b237bbf31f9",
+    "linear_input/lean_check/AstraHilbertError.inc": "236547bc5bed9e46dbecccd7eda24a35bc276d6dd1a1a3445b277f127ffd9aca",
+    "linear_input/lean_check/AstraHilbertFlow.inc": "685a9193c47d25c43c9c14fafd6ed5e60807eca605560cb87d6be7e67ca95202",
+    "linear_input/lean_check/AstraHilbertIteration.inc": "3caec67951e5de641bc757a2f9389f29e317d3517cdf2a9f7ca0380442e13c6c",
+    "linear_input/lean_check/AstraHilbertShear.inc": "10a9e613b6be73ec8076187febbc5f17c8ef302a38f059d3fe3bfe36b93ff509",
+    "linear_input/lean_check/AstraInitialRelativeEnergy.inc": "832e06b26918a4c4ece5e1c50912576f859f474cb95aedd501b2c7831bea1f99",
+    "linear_input/lean_check/AstraIntegralTail.inc": "02e20c5e58291cd4db050c441a02caccb9003581f04f40963919cc6d18ed5f45",
+    "linear_input/lean_check/AstraInteriorGronwall.inc": "10a58f4ceb926edae3c7a53c5ac509feac5fa354c6247d2ed8cf929d29674804",
+    "linear_input/lean_check/AstraIntervalFourier.inc": "39ba941d462d3063e76f5301357a2addf7aceb05f0d650f6b80a89b6989325e9",
+    "linear_input/lean_check/AstraIntervalFourierProjection.inc": "44ed0faa606aa538b4f1b7209d227469d27b24287d25a8fcf04e1d0efc53304b",
+    "linear_input/lean_check/AstraIterationBound.inc": "f412d74b767d6918ed4bef8d83d92beb7be1a2efbda8477d68d1cbaf3a54dc46",
+    "linear_input/lean_check/AstraJointGalerkinLimit.inc": "acaa02ebcff313bea0bc1ca488eccf22bd26e99a251dcb22d7555900fadd699e",
+    "linear_input/lean_check/AstraKoopmanDescent.inc": "aa45b505b0f7b20f7899ace6660cee9d7cfda50f2f4eb73c7d3336679225a18f",
+    "linear_input/lean_check/AstraMaterialL2.inc": "f50fe6ca5c70f17f930c54482775f71fa7e8382338ca2dbe035882bd02f437ca",
+    "linear_input/lean_check/AstraObservation.inc": "ff5f060d64f6a4a64ac6601e1c20d38a4ba14411a100a9fca120488ca807e9be",
+    "linear_input/lean_check/AstraPolynomialInverse.inc": "7d72ccbd7dbe14dbb53e25914bd4505e5632d3f35b7897127e53eb29b051c100",
+    "linear_input/lean_check/AstraRealFourierDerivative.inc": "471c7f83cfd867a15a606567b5e9c8bfc44b20ca62ae54f0cb739717b8648ae4",
+    "linear_input/lean_check/AstraRealFourierProjection.inc": "e674267e029465b12efc5802b67433f8f284e9bb369b5556a2adfd97fa1ad660",
+    "linear_input/lean_check/AstraRealGalerkin.inc": "a513e9497244a8e879ca997058050fbd553197ab8f54e61c06865ab2cfbb413b",
+    "linear_input/lean_check/AstraReconstruction.inc": "1dc05a8c995ac116ee8ae6d7e41eeb55c637e6951bcf8d93b9bf17aa8fc9d927",
+    "linear_input/lean_check/AstraRelativeDynamics.inc": "8a4b52d12329349cb8603b84d49089d0cfb329ae16c662d8c881031e17d081ac",
+    "linear_input/lean_check/AstraRelativeEnergy.inc": "50cc2d25b4395fa2ce09b81a914f95175076b7a1e1ffc9f0735b93c542f4913e",
+    "linear_input/lean_check/AstraRiccati.inc": "716421d68cb38393668db574790e032308a5a3d1357218fb1424809af755fddd",
+    "linear_input/lean_check/AstraStoppingCertificate.inc": "e93fb91a649d983c371bebc7f04f808d1c03cdc4957424506c837344424e0f90",
+    "linear_input/lean_check/AstraUniformGalerkinLimit.inc": "f4a5710eccaea111575327c4195380f651fb932b42029c6001f68cce59278b03",
+    "linear_input/lean_check/AstraWeightedConvolution.inc": "4f1abc34b46c2dcc47aa071ae5c6fbc897aa25ac207a07617c585baaef540458",
+    "linear_input/lean_check/AstraWeightedDecoder.inc": "ed9787e17ae04dfaff09cbd1fe7f3f4564d17bc13a214c999f12116056b3b647",
+    "linear_input/lean_check/AstraWeightedDerivative.inc": "c6261358657f75dd34e9838c1b5132ff3be27c9cc47d0d029866e89ac4dac526",
+    "linear_input/lean_check/AstraWeightedRealDecode.inc": "1881b2038f950da73b81e2ff80c0653a5e16a8e465b35e5a263ab031a60bc70c",
+    "linear_input/lean_check/AstraWeightedReality.inc": "c6859eb20927b8ba09d7ae346a8a04091f8b9989491c099fe673c679a8382246",
+    "linear_input/lean_check/AtomicGeneratorClassification.inc": "056b65d3d5569e608b9d4010f8b4e8fa343ba78a863d18cb7a22f7649cd010bf",
+    "linear_input/lean_check/AtomicHalfFactorial.inc": "c78a8a73bc5b4ab028c27a15daf7d9576c587ef10c104d604e3ebb5a8cd3bbcb",
+    "linear_input/lean_check/AtomicWordProbe.inc": "926dc6dfdffc70d1fe7b59ee9c0ff3f548fbb1a28436b240942a8c99921cc69b",
+    "linear_input/lean_check/AutonomyCycle00001.inc": "7c2e4d06913dc6b3971644421e016ff447c6e179297162ceff193f635883d826",
+    "linear_input/lean_check/AutonomyCycle00002.inc": "57d89fc457a464659fce56dab8317e7483e7aae50a34e3dc4a16f3c1abae5d5e",
+    "linear_input/lean_check/AutonomyCycle00003.inc": "18affb992ba95bb0f833f273926791d57427a99f9b48ff0607454f7542347b3a",
+    "linear_input/lean_check/BranchFibers.inc": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
+    "linear_input/lean_check/BranchForgetting.inc": "bf0910ef1731f8c39a95d59c55e751b096eab0b59af1c7f5892c2ca6b21dd060",
+    "linear_input/lean_check/Calculus.lean": "6adc1633283e928968d877db17ca58b647cf913d2ee68f41043e77a3fecc629a",
+    "linear_input/lean_check/ChebyshevDegreeTower.inc": "3e19941966b5b366b3e0a2aa0393b3505d24ed4d0a0cf6e920bee05ebe0a1eb5",
+    "linear_input/lean_check/ChebyshevDihedralDescent.inc": "a4764af3066ea46ac58409acacd4cdfcb86b6bafe642a255cf78e8d3501e678b",
+    "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98",
+    "linear_input/lean_check/ChebyshevRatFuncDegrees.inc": "c9df8a0237371b7c841e0220c6e5d68e32a06adb46c8735fbbb6faae37730b1b",
+    "linear_input/lean_check/ChebyshevSplittingField.inc": "5bee36fce9a721ce50effcb3568c131d8029861099af9e309c1510b83c6b970f",
+    "linear_input/lean_check/Coercivity.inc": "a1e6fd5b4b5278e8feb891bd6acdaf62774b01b21f5fbdd72079f94eb5317947",
+    "linear_input/lean_check/CompactLocalExistence.inc": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+    "linear_input/lean_check/ComplementaryObservationExamples.inc": "7f1def4a7c55fec288dcd249f74e21bae9e7272048412d4eba63c14750312a9d",
+    "linear_input/lean_check/ComplementaryPencilRecovery.inc": "46723f39f4c48aad99b57fafb40415a867d5c11300aef92d4b18190420ace187",
+    "linear_input/lean_check/Consequences.inc": "b63d8fc479da5ae18bc0efa84bc4b99737f5e64ca64c7e733e82c566fe531ef6",
+    "linear_input/lean_check/Constraints.inc": "3f749b971efc58d0f4451c66c7eff38dcaf5bc37642a531225121931da528546",
+    "linear_input/lean_check/CooperativeGluingObstruction.inc": "b33f9ef8f26f30c2ab65f7f6071c5cdf02d044c7404261de43874181bf22ad95",
+    "linear_input/lean_check/CoupledConsequences.inc": "370e8c125c0f0cef840398ececf6137f15d9665176fb18d76410588aadeb7db6",
+    "linear_input/lean_check/CoupledTrajectory.inc": "e575924d3694a4cabaecde04a9f31266ed4a640e5d01c6ef1843de804653f70a",
+    "linear_input/lean_check/CrossSystemObservation.inc": "8816235e77ba0612ac801d3dd10b3835fc62079903d17de8ef6e72635c332592",
+    "linear_input/lean_check/CurvatureBridge.inc": "d23bc45b8bcd06650b3de879fbed45a532a37506cd8126673ea1dcab8189d79f",
+    "linear_input/lean_check/CurvatureRigidity.inc": "b89461438d07ecdfd95c97e1a8f2a61dc6ecf05840808756f04d674d4640d0d5",
+    "linear_input/lean_check/CurveLetterContextualEquivalence.inc": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f",
+    "linear_input/lean_check/CurveWordAlgebra.inc": "1ad80d1dc97499c035b9c453b666017f88e78b20ec1160541f048080811369bc",
+    "linear_input/lean_check/CurveWordArc.inc": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
+    "linear_input/lean_check/CurveWordArcGenerating.inc": "2ce39ed55d4563acb3f47f5465c60ba6533d3c47f4e30e9dd8815b989013658b",
+    "linear_input/lean_check/CurveWordBVAlgebra.inc": "47ffff437e607590ee6e2a792a185e1b45d69f3a140cb6dd14eed2683701f241",
+    "linear_input/lean_check/CurveWordBVArc.inc": "890e89a2c3f1e4133f576e4c99531fa849ffe8d00128cf7c748bf77010342b33",
+    "linear_input/lean_check/CurveWordBVArcUnique.inc": "fd5e0df19a0d955a2649513a9d3d9cd1e2bcc20d9bbd1491e04928c0ed93a21a",
+    "linear_input/lean_check/CurveWordBVCanonical.inc": "91511adf72ac392eba0f66f623f303b493ab85f3d136a7fd727f3fd72fa1feca",
+    "linear_input/lean_check/CurveWordBVChen.inc": "762b4500cf9d316a3bfd84299a6deeb4633fb66379ea45abf5bc109c5ca9cc62",
+    "linear_input/lean_check/CurveWordBVCompactness.inc": "44d31f274f9c04ae875e4018b6d7e0451d10b65a6c2617ea527f407d1fea7bad",
+    "linear_input/lean_check/CurveWordBVCoordinates.inc": "a1894e4bb2ab8a0acf62d3305fd33c4552ad38d3db1d0bb51def45581af88776",
+    "linear_input/lean_check/CurveWordBVEquivalence.inc": "ecc3777633099ca847d9b470407dc2688760202db750ec40185e247e2b464c54",
+    "linear_input/lean_check/CurveWordBVHamblyLyons.inc": "1950339aa39218755811bdf885f748f4b65f87ebd16da020338abc931eb1cc2c",
+    "linear_input/lean_check/CurveWordBVIntrinsic.inc": "bdf294af0c8cdd4b3bfe95caf9002c3a22c6793e636b3a2088afe408d669227a",
+    "linear_input/lean_check/CurveWordBVIntrinsicTree.inc": "38943bdffb92059f622ef94bb00a114d5982b8faafad4d53d838e3d2e2a23278",
+    "linear_input/lean_check/CurveWordBVLoopErase.inc": "0d11b32a522309f58273ff4cc655c2009af18052dbeed5d1c58d11b0dcdb4c76",
+    "linear_input/lean_check/CurveWordBVOrientation.inc": "9060480c6470082d744b29d06bc62fc6bee49df5888544bab8512f1a1aa1207c",
+    "linear_input/lean_check/CurveWordBVPathOperations.inc": "a32d3dd682609a97c2746f7624f0f6a61bb42a3664ef4b0b13c44bfae4f66014",
+    "linear_input/lean_check/CurveWordBVReduced.inc": "7af51157159054980f780ee230aafcbc8a659f7c7ae7993d630f3904fcbb58ae",
+    "linear_input/lean_check/CurveWordBVReparam.inc": "968b310cefe103155b89c9676d0426c8f2fb1193ee2be21d84885d7ddd3a9858",
+    "linear_input/lean_check/CurveWordBVShuffle.inc": "dfeb7156a1a2df8d63bdc3a2d3f20428e2596bf0672f78e76936a5d3473ff607",
+    "linear_input/lean_check/CurveWordBVSignature.inc": "b3f2b79d9af09ecdbb965573b618c9656ae8d330610747c9386c29cd1f00d505",
+    "linear_input/lean_check/CurveWordBVSubinterval.inc": "b403ed17632f0f1c3b406764fd3223fd84e4b46a1613fd4089937b12843f8104",
+    "linear_input/lean_check/CurveWordBVTopology.inc": "51eff4b2b634d0551d0f2c8442c39a82d87d173e05c58e78b61635fd722af197",
+    "linear_input/lean_check/CurveWordBoundedVariation.inc": "2f1efa023de0fb4451503b7f4a75ad9c6d0ddfb201ea4444525aabec74e2d793",
+    "linear_input/lean_check/CurveWordChen.inc": "b916f789273625cc3945a78026b97de7ad7eb56d196790798c14ca58c2795f06",
+    "linear_input/lean_check/CurveWordCircleWords.inc": "a2d009f7c006dc9975b9b4c03bb93115570eb4f05308ec8097e64c1923c02f86",
+    "linear_input/lean_check/CurveWordCircularMoment.inc": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0",
+    "linear_input/lean_check/CurveWordConvexObservation.inc": "afd2f2c1eafbc43f4e5dedb16c93a342ebe7989a71fac97c2cf03026a04b2885",
+    "linear_input/lean_check/CurveWordConvexSeparation.inc": "993ec1b58b8ea62ff56f00c9064fe0f831d0c054031a691b499e93646062cee5",
+    "linear_input/lean_check/CurveWordCoproduct.inc": "fef28191c26b130453e8c15bb748821d0310685a3fe9521f0074959c8c68b809",
+    "linear_input/lean_check/CurveWordCycleLimit.inc": "5c8ac4c20171913396c659b3727c950105069026de0dbd4fcff3eb24c342db63",
+    "linear_input/lean_check/CurveWordDirectedGraph.inc": "445ac49f6187a5c455888969fad99a6b25549cfb51d0381ee9b1080f1baec456",
+    "linear_input/lean_check/CurveWordFinite.inc": "3057597b6d47db36b9629a15d7be3eca307a57f1f70ff0da5454064cb577bf34",
+    "linear_input/lean_check/CurveWordFiniteState.inc": "a7481b464ff4f648c79fd8180ce0783e289bfade4bccddcfb75d21e65c1473e9",
+    "linear_input/lean_check/CurveWordFormalSeries.inc": "6c5b5e02b8f1b33defcc5d289de59506db49276e3228b7f8feb292c70c9c29eb",
+    "linear_input/lean_check/CurveWordFriedrichs.inc": "7f036b4c8a9d5371f97d19513c5238cb27ef23b5828d2772545fdd9af52249f9",
+    "linear_input/lean_check/CurveWordGenerating.inc": "465cf8b11d1c8018fe0c5a61e9b084d830ba30184109a26a3c44f64588f49c37",
+    "linear_input/lean_check/CurveWordGeodesicTree.inc": "f7d22b2bf2675da99cbe0518ea872186b0768e883e93a1ee675dbb07b207909f",
+    "linear_input/lean_check/CurveWordGraphLimit.inc": "023a1fff0eed60635e15b8e7b11d6aec7b57436f995a373526b34a6a2f2109a5",
+    "linear_input/lean_check/CurveWordHeightMetric.inc": "aa92c23ed32592c27bb9ae409e28483ea06626ee953b2442c7bdf921fd9cdd1a",
+    "linear_input/lean_check/CurveWordLaplace.inc": "4569a18082b885b1c1acc8efbfd0848486ded6bfea528d0823e2897f081dd6ce",
+    "linear_input/lean_check/CurveWordLinearAction.inc": "8f6dbea53ed71e76e18d6d0a610bbed4f80047b1afd97e6df8f5f239589519a6",
+    "linear_input/lean_check/CurveWordLogFormula.inc": "07f83ed56ccacd0a07279d832ea4dcf873566d9d877ef121ef3c5e2a5dd9aa84",
+    "linear_input/lean_check/CurveWordPiecewise.inc": "ddc09dffcd3bd34ecd1c92677280415074e900da7636c2c02d709d5ffc11a09c",
+    "linear_input/lean_check/CurveWordPolygonal.inc": "a38873c6f640db5603883fd3ed14aab562840cd232e5243431178f2a2984be7f",
+    "linear_input/lean_check/CurveWordRealization.inc": "c9572f37df47a6e4d512b5eea84304d59343c7002aa4a90af6d04850e5c3c9bb",
+    "linear_input/lean_check/CurveWordReparametrization.inc": "8c7fa363b697cc6d30f0f718a9cebd44c3ed8f579bd042259af6e7304425cd84",
+    "linear_input/lean_check/CurveWordSamplingOrder.inc": "6ef3de5f1e3d3c80c637c43e58eafd9f92be11cb52f319c191f6a7a42d55df11",
+    "linear_input/lean_check/CurveWordScalarLog.inc": "fe1a2d520c4f95d4160d2a6f26819395f75bef086df0783783b2d5d62403f19d",
+    "linear_input/lean_check/CurveWordSignature.inc": "607285d80abe4b67a6f04a1103d023633030d88ac1c78525cbd24862d51449ee",
+    "linear_input/lean_check/CurveWordSignatureBounds.inc": "dad3fa7bfbcbb5ba6da6fcec6eb918b035e0c48b42a94115e16203c6b5f4e964",
+    "linear_input/lean_check/CurveWordSignatureTopology.inc": "41e0bbd5f192d9c1d2d0fa2ba2c278ecea274591e8df259cdf883eac33930b8f",
+    "linear_input/lean_check/CurveWordSignatureTree.inc": "ee1eab1e53775c467ad2f870bdb01a66c99d4b24417da216d987fc31c292de07",
+    "linear_input/lean_check/CurveWordSignatureUniform.inc": "576be1510db8e43daedfd5a6ca1a83343ae0a1907efbda9ceeb266c0d13cb84a",
+    "linear_input/lean_check/CurveWordSpectral.inc": "c1abe088a4bd0bc3546e3f994569e5403995625152fa909c686087b15bd98248",
+    "linear_input/lean_check/CurveWordStieltjes.inc": "a1800eb35cb2f2d38697d4ba2edeabd4a39e4217ae0022545e706f1d7f7d9b20",
+    "linear_input/lean_check/CurveWordThermodynamics.inc": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49",
+    "linear_input/lean_check/CurveWordTransfer.inc": "4b5c8fb3d6fa70207e43bb0eeea3c9c2121e926f858111acb7d4db24dbf3c79b",
+    "linear_input/lean_check/CurveWordTreeLike.inc": "de98d4dd4f2f53ea846ad2cfbd1e1d6e53609fa3bb9570e4b6a50a4259b39b43",
+    "linear_input/lean_check/CurveWordTreeLimit.inc": "c08089f20f438dc0d860270398e2a29b42770a1d5931f66c377206b0bd3d63a7",
+    "linear_input/lean_check/CurveWordTreeSampleProduct.inc": "f7b3f39060edc7622a569243a244f3276c033bef66891c143f6b23d9fcef255d",
+    "linear_input/lean_check/CurveWordTreeSampling.inc": "8a45f983ede5d9952630822422c28abfbfa3fc7e69f590bb4ce39fe959f13c95",
+    "linear_input/lean_check/CurveWordTreeSignature.inc": "98b9a66c991d9040bc631d6ed1b105df7f845d3a8033f4de2f145ade73191178",
+    "linear_input/lean_check/CurveWordWordGenerating.inc": "60a49c9c83b1ccb8690868cbf00528641b84f9d90ac65ac7aabbfa2cbc9b4e04",
+    "linear_input/lean_check/CurveWordWordSignature.inc": "728fc6bdb02a3ff3f7bf969f2b4878446fccbd0f8dce2885de95ac95a8a326ff",
+    "linear_input/lean_check/DecompositionF0Bridge.inc": "22cecd11ce63dfcba64363ae0aea2e7681bd60807aaf5005d1c57e84fdb43dd6",
+    "linear_input/lean_check/DecompositionIdentification.inc": "f953488cd473b2d6732dd8659d606673de79486a59f61f82dcf8b05359488eb0",
+    "linear_input/lean_check/Design.lean": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
+    "linear_input/lean_check/Dissipation.lean": "2f98fe11dd728aa08038a1d3e01a9440ba83049b6dd4d3d1561a3dd140aac8e8",
+    "linear_input/lean_check/EWFSFenchel.inc": "90c03843306a9b88895a8adacfd0eaf5efa46b002166c2800c387b5f0aef386c",
+    "linear_input/lean_check/EWFSFutureBridge.inc": "d0f2142e064841163464a1de14e6e3a646e5f17de230c2a67661ebd788d45af8",
+    "linear_input/lean_check/ElasticaOperatorBridge.inc": "2ade7430c924d63b6c7b5ead9afe0ebb5525201d86019fe92454cc61175587b4",
+    "linear_input/lean_check/EnergyWfsFenchel.inc": "23cc3e28036dbdd74029d895a23f21533698fe705d4731ff84d5bafdc0a1b809",
+    "linear_input/lean_check/F0Counting.inc": "fa8d45beeca6b7df13024d377254bcad9c8622cd07d70236f3d478b89dc5df60",
+    "linear_input/lean_check/F0FutureMinimality.inc": "c48c0d08b1e9785d0d96b34b9fd000f9ae68f37a77c2c067bd8b7e1b116175d9",
+    "linear_input/lean_check/F0MergeChains.inc": "93a9fda3dd419f6e70c68c1cb99c8448b07a635c30264c146fa43f3201440f59",
+    "linear_input/lean_check/F0Retractions.inc": "7dd831498e91cce9806f6f97362c8b4f70c9239ab23fdd26e9f7508b10880b05",
+    "linear_input/lean_check/F0UpdateDescent.inc": "616da7fdeb19d9204d965d88c4e43063a0b7663af2c65f4a25e927860093a189",
+    "linear_input/lean_check/F16CompleteRank.inc": "73c4db1e75d648d0bf584bfbf27eb709389ed67f5cdfc3bcbcb2a6bf9662a222",
+    "linear_input/lean_check/F16ConstructiveRecovery.inc": "b5c965ccb7a9b7f9a8110de0c8ac3aa0bcda25618d1602a32928fddff063e9e7",
+    "linear_input/lean_check/F16FullMatrix.inc": "5bcc1101b95cba1cfa38c099b797ea0c9677713a5cb69ddb2396dd8ea72084e7",
+    "linear_input/lean_check/F16FullRank.inc": "71e5953a8b6ceec207dc82e066222fd75065ed4f0f6885e2b429216a95ba12a3",
+    "linear_input/lean_check/F16Holonomy.inc": "6ebd05dbbbe80b3e033a18afbf76d8115d9c09b6e817bbfa8569342ff0b0fb46",
+    "linear_input/lean_check/F16RankCertificate.inc": "0e81eafa0118eda8f2f1ee9f4cc20aec884d35d78865d50a2bdce981c1b96b5b",
+    "linear_input/lean_check/F16RealDeterminant.inc": "73314e8ea6bd96740da090c591dab6d64cb9544e239645dc71f2e83ecf5ebc91",
+    "linear_input/lean_check/F16RecoverySpectrum.inc": "fa96ebb4fa9b05e41c77771fb386c1af0e851bec1fd59b556cafa1cf7f62f0fc",
+    "linear_input/lean_check/F16RimRecovery.inc": "8ece9145fa42f4de0f5163ed2dec78c4d7bf866b2f3b0fa45c80ec93461b1ccc",
+    "linear_input/lean_check/F16SaddleCantor.inc": "a3c3f5dce6f1caf26c929ee7cdf6bf335bbf06f17031ce8d7995e111a9ab8949",
+    "linear_input/lean_check/F16UnexpectedBridges.inc": "ecf929ece3d986c75e9dd1793646db765983a159d2f5cef8f886c9793eb305f2",
+    "linear_input/lean_check/Feedback.inc": "9d97c366584d04da3fbdcd63080b2e98a7044f88132d83cfb8d6540002225747",
+    "linear_input/lean_check/FiniteBand.inc": "9d7d506703c5f9e816b3e1c6bd988bad8a697f8d25bbd7a1354b63d420ea18cd",
+    "linear_input/lean_check/FiniteBayes.inc": "0c3d2c443825df36a1bbb7b51b602d148c4a5ae3d64e2b1dc7cb029f78da9405",
+    "linear_input/lean_check/FiniteInternalUpdate.inc": "8d919b3d39be880fd82959c7be1ee9dd40e9f5d2d009d70af95bbb7dc8e1b2b9",
+    "linear_input/lean_check/FiniteObservationSeparation.inc": "431492dd7339e1f66dd91d331475058102d8bfe463e7eb87eef4d7bbc96fb2a8",
+    "linear_input/lean_check/FiniteSelfSynthesis.inc": "1f343854dd560138b457926c0ef5937a78bc1c5564a6a7fbc5ce6c22d622af02",
+    "linear_input/lean_check/FiveDimLagrange.inc": "ab31543baff700b42f435d7ef0bac188cd82743ba0bc41cefa627fd907c46d45",
+    "linear_input/lean_check/FoldCount.inc": "31f23b0867326888c73213f8fdb6ef769c7a710368c23a085e7be577e9668c17",
+    "linear_input/lean_check/FoldCountOriginal.inc": "79e167643acd6258c63d990398ae9dbdc08563d257992597091b00cb3b24efd5",
+    "linear_input/lean_check/ForwardUniqueness.inc": "a93efd6d16caf0d173b5d71ae872bbff50ae113ce8a6ff8dbd68dbbb0605f214",
+    "linear_input/lean_check/FourBayes.inc": "0c6f48956e71c9bcd691cc43eefaf3939f91be9fb747fb1a0e3f1d037e6ed441",
+    "linear_input/lean_check/FutureFiniteHorizon.inc": "9d6e020ae9719ef7008e1b0ee857d7fde39a63dd3714fcd40379b9326cd2195a",
+    "linear_input/lean_check/FutureObservations.inc": "8db780494b6e16fae9985bad1f4e59c456d6ae7b4598c351c86422d1e3fe8329",
+    "linear_input/lean_check/GaloisChebyshev.inc": "93d474a84e788001a23b26e16ba81e2417406a7b5cc08822ce573e09426c1f9d",
+    "linear_input/lean_check/GeneralMinimum.inc": "ce31350415300a6f772521c13d89f61808e4ed4911d7c37f39ac2bafde1987ca",
+    "linear_input/lean_check/GeneratedNonUniqueMonoid.inc": "2dad32d635cfa55954190549d24aa4940a9d11858c7a99aa994b9d80316ba93b",
+    "linear_input/lean_check/GlobalConsequences.inc": "fd0dbd3ca5030b1cce1151bb5f11c0450b0fba7df6663be000732cdd4b7a1969",
+    "linear_input/lean_check/GlobalContinuation.inc": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+    "linear_input/lean_check/GlobalTrajectory.inc": "67b5494e57c0f9a9b4020486f4ea59468a27001601c2a4b34f84157b3f131ba9",
+    "linear_input/lean_check/Gradient.inc": "2aab575d80c5eca3871b68ac141b179ef7ab072e071097d3dfe758b13bf96201",
+    "linear_input/lean_check/GradientBound.inc": "e1468dc3a1d2647923debe57854f0e77c745d88244daf44be2b1b890e8e9a770",
+    "linear_input/lean_check/GravityCocycle.inc": "50157183f74a2117a15b242d4dbab3ba20d736144f99fa946cbe7fc6d8b77eec",
+    "linear_input/lean_check/GravityObservation.inc": "fb17cb8ecfab81bf468fe9288f8f7b543b603258498c9a520a753c701bb83374",
+    "linear_input/lean_check/GravityObservations.inc": "f4ed39b4e7eb93be8275a106d2519bd96400592946fa92d5df59407aa0513271",
+    "linear_input/lean_check/GravityObserver.inc": "28a8d76ba98421fcc683349f69f09b29a6fa55cd7d2a04b64c7672a594d0f93d",
+    "linear_input/lean_check/HalfFactorialIdentification.inc": "4e748e7e2e7890ef4af510e767fb4118f22592b15be82ec8b83958bab7c6778f",
+    "linear_input/lean_check/HannaJetCorrection.inc": "c7265fbeab4f7084050979eb23a6c2f85df448a0978738a662c961d35f9e6482",
+    "linear_input/lean_check/HigherOrderLiftSelfRewriting.inc": "c4d801ecb6f3936359b14062c6892e0bb4312f75341d334aa785b9c3fb07ab59",
+    "linear_input/lean_check/HistoryNonpreservation.inc": "8e2b70a4c87b20bd4b2c3ae57bb8f28e8f61a677017abd04bd52680de4bae433",
+    "linear_input/lean_check/HistorySignature.inc": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+    "linear_input/lean_check/InternalUpdate.inc": "6493eb6ce9d576bb789f96fb33eef6a97ba0d2bb7100d9db8985cc0b63c7d63a",
+    "linear_input/lean_check/Invariance.inc": "7ba29d42bdde5903ebb47db238afefe3864fe1ea1580812cb1cbd2f16f5f0465",
+    "linear_input/lean_check/InverseTowerObservation.inc": "dbd899cf55e0b1fc97ce0d87e2f7d894f90c4ba902a3221f800f1eb32a9c0a0c",
+    "linear_input/lean_check/JoinContextualEquivalence.inc": "996a9b4605029746763ce5eeabf21a346c2bdf04026a3541f6c2da19f6b238b2",
+    "linear_input/lean_check/KummerDihedral.inc": "8b522f412c683f56b4cfe5cda75cc4b81a32368af46c09e977b90e5dc116876e",
+    "linear_input/lean_check/LaaksoFiniteGraph.inc": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143",
+    "linear_input/lean_check/LaaksoGeometricProjection.inc": "7ed41c14e6ce22e77158ca77bee7520eae9309e0220a5d87241aa5c351aa32f4",
+    "linear_input/lean_check/LaaksoGeometricTower.inc": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e",
+    "linear_input/lean_check/LaaksoNonlinearObstruction.inc": "c62f9202b98e0581ca00160c6a2c23fa871050f080d0eaf3ddb518f4c08904fb",
+    "linear_input/lean_check/LaaksoRealization.inc": "c4dca8a0b519516128aae8e6b6cd7254c17fa57b3ca21e6c2ba29b80dec32b16",
+    "linear_input/lean_check/LevelConvergence.inc": "268cdcb7da22ea5e9ea9529106e1a2f8970b8031cd7e0161073380122ad1de3f",
+    "linear_input/lean_check/LevelGeometry.inc": "69bbfdb3ef02bf3b8c43f9388bda46a3d52bd29519c15752ac0ba84a57b53b63",
+    "linear_input/lean_check/LocalCapacityIncompatibility.inc": "58c30ddf38b02650c7c71a91a8ba307795bb4228630383ac109a5535419ce037",
+    "linear_input/lean_check/MainResult.inc": "7bded7415fafff042a23164fd4f12aa053dd5595e99b878b02e6ca4a5eac45da",
+    "linear_input/lean_check/MainResult.lean": "4ddcc076818dcb14839efa862bdefeaf55f0a3b690b17cef190c610fdb855ffb",
+    "linear_input/lean_check/MetaRuleSelfExtension.inc": "f59d83a8155244b2d88cce2cbcfbe1984a9f38d88f59f639129b0d1623b36d0a",
+    "linear_input/lean_check/MonoEyeComposition.inc": "3e8e966784e5b784f34173922f14a041590978c5d54f519bdd9854eedf6398ea",
+    "linear_input/lean_check/ObservableRigidPoint.inc": "71ef3033078f7b28d01f48a19404043a7bf549bc024db94ec73ad56309dd862e",
+    "linear_input/lean_check/Observation.lean": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
+    "linear_input/lean_check/ObservationRetractionPolarity.inc": "bbb56f48f843396f249db79f47da41bb7ed2a41030852b37029c8ef3ed6b4d81",
+    "linear_input/lean_check/OperatorAdaptivePolicies.inc": "5f9b6cc1f46518c3fa26736e65d18fcf00c8c42f215129828715a3b95a03538b",
+    "linear_input/lean_check/OperatorBisimulation.inc": "302da98fe0858136f2ef4aaf8636da164234eb921eddf4395256cab53167df79",
+    "linear_input/lean_check/OperatorContextualEquivalence.inc": "9c638b6beebb7a64ed25330274d3db8b9faf4482acfa8325df9bf58f4bf76f8f",
+    "linear_input/lean_check/OperatorF0SemanticBridge.inc": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e",
+    "linear_input/lean_check/OperatorFiniteHorizon.inc": "f4004b810af5612a35da04df19da2d8a2b7bd9de0a722e156b981916a2822330",
+    "linear_input/lean_check/OperatorFiniteMapCounts.inc": "fed818ad809bd16fee371ea9a7edc27b83c33c6af521e7931cfff1ed63403a8d",
+    "linear_input/lean_check/OperatorProductSystems.inc": "6f2bb3e6abe50df68bb79d05eaee9a5d49893a867dd97fa6b5f2b89d84cddcae",
+    "linear_input/lean_check/OperatorReachability.inc": "847c45561ed51559296f68e97b78b20b62319698299dd43011f12147368eaa29",
+    "linear_input/lean_check/OperatorSemanticClosure.inc": "e13b3330eb3b51aebab730211948949cbf6a6a6e212673481f1202d449eda0dc",
+    "linear_input/lean_check/OperatorSemanticMonoid.inc": "3cc1bfe1ad8f2554339e0724a23eb1fdbe3ab66b070556394eecf5bc99d05439",
+    "linear_input/lean_check/OperatorSensorFamilies.inc": "5d49b1a157a22d544a5cac7fc504ed1c3eaa4517044ac5b70ce67fe41ddaf6d1",
+    "linear_input/lean_check/OperatorVocabularyRefinement.inc": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+    "linear_input/lean_check/OperatorWordObservations.inc": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721",
+    "linear_input/lean_check/ParallelLocalGluing.inc": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+    "linear_input/lean_check/ParallelWriteGluing.inc": "68ed1856ede6454b99144343ed392d51431f78eb181c260cc7525b42d71c5a87",
+    "linear_input/lean_check/PilotComparisonBridge.inc": "fbe61417ae597296787b5b0bedb06c31861f05b550200c46909713fffdd4b5e2",
+    "linear_input/lean_check/PilotHullInflation.inc": "1d283f9809905b5ccdd6d8c98730d8ddec4f50c1afbe7e3de4dce5a041835bc0",
+    "linear_input/lean_check/PilotHullStability.inc": "6650a7d25c3ebafc06d41c2e374fe3fe1b5841f3bc0e817c5ac7945b919d1837",
+    "linear_input/lean_check/PilotVolumeTransport.inc": "4a01c6bcfea3ac20a8ecd0b7408b21b77df28f96e0c093b7a983f0289c0d803b",
+    "linear_input/lean_check/PressureCurvature.inc": "4a0365823e7eec686dd940e531987ada928cb0e19ca6901d440745ce9da221b1",
+    "linear_input/lean_check/PressureStationary.inc": "4b95864614e426282726e16fbfe16c06c86f55e563fa1f7085060f606f0d0c83",
+    "linear_input/lean_check/PrimeFactorF0Adaptive.inc": "ee03c3a635e879c0088c6019b262260df3eb2f25040c311f3703951f02e24642",
+    "linear_input/lean_check/PrimeFactorFiniteLength.inc": "dfc80274f5f8bd3219f304e8deb6c4eb787657270b667639af2c9b1dceacbd15",
+    "linear_input/lean_check/PrimeFactorGeneralF0.inc": "4e34cb529094bc77ec365c1ef368e8979898c69980aab065b206743fe3fcbf9d",
+    "linear_input/lean_check/PrimeFactorIdentification.inc": "24e1e4f43483a7b9d9bf7e6caccbea69975eebf5b05b855bb870020cc3a8e67f",
+    "linear_input/lean_check/PrimeFactorObservation.inc": "5d1124bd98d6187f80aeb1351452dc3046d4f31e3e653b0ba8f48fffb700592e",
+    "linear_input/lean_check/PrimeFactorOrbits.inc": "3da25f0ab1b4f532ec0cdbb8af77c6b3908068664273e4363f94440e25560973",
+    "linear_input/lean_check/PrimeSplitNormalForm.inc": "065741655e5180a317c9454228b0d5272f1d6243065fae869a4a5485fb8a2f32",
+    "linear_input/lean_check/QuarticClassification.inc": "1a733d21a58ecf03e26bd06ecc8fb79e25541e76762e4c1c1b20e5acec3fc89d",
+    "linear_input/lean_check/RadicalF0Bridge.inc": "aacc9eb3d56d9fce9e97ccf27418c006187b38b9b6916a6da5f852785b1bcc57",
+    "linear_input/lean_check/RecursiveOperatorReentry.inc": "6de68cc3d1a2f2dca101c47639d24527306487fcd7e75713f3177aad15882bcb",
+    "linear_input/lean_check/RegularBand.inc": "53d0053d7d4f0bf31eedc9a8e322c246a4b04f495f68c0d418084cc4c77cd6a4",
+    "linear_input/lean_check/RelationalOddCycleGluing.inc": "b85df6d07e210e377e532024740c33920e9b5faa1f2f4c1c8e35c9de9198d4ea",
+    "linear_input/lean_check/RepresentationBridges.inc": "a6e7db4ee1112f3fa5048cfd12315b56018f25136187a88f35d5f97bae9591a6",
+    "linear_input/lean_check/RimObservability.inc": "e0e15e19457935384e42b4598e5b40bcd4011164a785cfca0603c8e0d0de7b12",
+    "linear_input/lean_check/Rule481Symmetry.inc": "23584c6af15b5c22af405bd67bdfeb69c1ec3654176b8903a944418abb5c5d66",
+    "linear_input/lean_check/RuleSelfModification.inc": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436",
+    "linear_input/lean_check/SemanticIntervalNecessity.inc": "a125045dc91f3f3d056819b9a1717c166e16334cc081918ef2e38ed5ce8971da",
+    "linear_input/lean_check/ShearCommutator.inc": "318e2691dc4c78f87dd30533ea640cce53acef03673bd3e04277065ae70a4747",
+    "linear_input/lean_check/SingleSwapFiber.inc": "983ea4c8eea02fddcf2892727f2317d8b1223516dc9ef87870004ed6f50132ec",
+    "linear_input/lean_check/StrangeOperatorBoundary.inc": "45f04e086f70e4f01fba1bc3948f2c59c6b6402bd7cb651f852b88ab422f4672",
+    "linear_input/lean_check/StrangeOperatorConjugacy.inc": "71d22e4bf40c2268d4fcf5fec1ad05dbad72a81062314ae207b0bd7e7d9284f8",
+    "linear_input/lean_check/StrangeOperatorCounting.inc": "5727034d4ac2f90dde819edfedc04cc615caa532fdc1742cf646d217a57067e8",
+    "linear_input/lean_check/StrangeOperatorFixedSets.inc": "fc63eb53575f1d469ad6110102aba0efc0d9b5efe73c156772cf1d9b3ea62702",
+    "linear_input/lean_check/StrangeOperatorGalois.inc": "9cb923bd8ce4558b4aa15a4bd8f6c9ff346d3bbaf9c85da69bd35a0119a3ef8f",
+    "linear_input/lean_check/StrictEnergy.inc": "1a701960dd2d6118175f467a55ebf2a6902bac81581496a1dbe59d8d680cba7f",
+    "linear_input/lean_check/SupportComposition.inc": "0ed4c127f19fcb5eaa9512013a9ead4bcb723455d831c1a371dc62893b04392c",
+    "linear_input/lean_check/TemporalLocalExtinction.inc": "56f6bf6efc23770535f8a0130a7f68ac78108566656edc75d1772135cc872099",
+    "linear_input/lean_check/TemporalSampling.inc": "945aa518da1efb9bde61e162a2755ad56ff954e3585169e1f5a9436211e3b117",
+    "linear_input/lean_check/TernaryZeroCesaro.inc": "9015645e6ab0f748e28f4edf1516a1526df31f058d623cbdeea0822dc4ae1776",
+    "linear_input/lean_check/TrajectoryExistence.inc": "db5f37cc4923fd87063a75abc3ae560cd135ebe7c4d79104bd472f22d2dd53b0",
+    "linear_input/lean_check/VariablePairGaloisBridge.inc": "fd91c2b515112174446a2226bbbbe61d6ff01485ca02af14164e3e366239d08d",
+    "linear_input/lean_check/VariablePairObservations.inc": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35",
+    "linear_input/lean_check/VariationalBridge.inc": "5b7b6619add1121a5245ef40f25b1be960682c8aa8617bb2accd19f10ebffb02",
+    "linear_input/lean_check/ViscousRewrite.inc": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f",
+    "linear_input/lean_check/WFSCanonicalLift.inc": "af0eb49cdd896e3ccd1564b64b4f52da746637a6b2272fd6504520c573684b10",
+    "linear_input/lean_check/WFSMobiusFourier.inc": "669cc639499a5da3d0d46e4913b1d6ea3039e03b902e4b0e6ef570fb6ddcb39f",
+    "linear_input/lean_check/WFSProjectiveSampling.inc": "874c90f744e2bc0b84e606b50b996d11a05f46bfc811bb34ad2867f8b812c5a9",
+    "linear_input/lean_results.json": "5576474a48af9a34fa74a2d54a5462a22f0d66db0df89bd8792555ad548522cd",
+    "linear_input/verify_lean.py": "5429b34ab52c752aaa742fb58509033a4ad8f53c4850c2104143331782393b7a",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticAssembly.lean": "c107bdf85ee8431db396c4eaedcee69d49b5e9a8e90adae7e3db56c4f98634c2",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticClassical.lean": "ef4f6e3eb2c33ca2264fc2b1296377c61cb1e60ecde15b67699b95955f32857e",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticDuhamel.lean": "32398a441a1d8db5bd8adadc63fe701f900c9d0e072c86838e5c660d211a3689",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticExample.lean": "afbb12fcede6de6ed4b97417536a1c904f66008aedc74505f41776db18829a08",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticFieldTails.lean": "5e7842d86848645584437c1c02c95dc9212bd595f3da2b82778f36edba6db595",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticFields.lean": "a504d1a94bf0d1770b43ae849123af81d996d2e8cf75776b037c64588273d7ab",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticFixedPoint.lean": "f6437f535ad8bc158e35c04cb0ff8aa4d35182a9a974e6e5d68f25cfa25ff176",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticFourierDuhamel.lean": "6f0e84b3bf744176613d049a295c0709877ce8102ac4596acbd27151fb29a09a",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticGalerkinCertificate.lean": "c9f004c4df106e1a7a04fb20d88437c0764d796c78b9307dec2a9670f27e08f5",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticInitial.lean": "6f8036d126745d2779172408434df4e80bade9a0a4d5541da091b22425a532ba",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticInitialTails.lean": "31b10bac68fa9fc5c479342f0f992fd3263731631fc3c771636908bb3327cc75",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticKernel.lean": "267989d1b0833ad56e1422533b13d03ee22c70aafd85f9aa68e6766dc1c21ba0",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticLift.lean": "3421f59e3ef9d829b0ba5f6e66377ea3591e5635bf75c3b437dd6c7fb94036b6",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticLpMap.lean": "ececf2c42e8ff7e1e0ffe2ec51395c4e323be439b1b160eae97886e8f41eb195",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticModeODE.lean": "6e5612e432a8cee286c57f9db183161fbb180ecf9690aa02c80b86271914a724",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticPDE.lean": "5b9cc455dcf4d618a9ab6dd2cadada661722270ef03126d27bbcb54eaff0e747",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticPhysicalMode.lean": "fd22c0485b03334327216946077e027bd85bc66f1b2f77ad2eda812d565aef4e",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticReality.lean": "569e8155df4e12201b28ce05e1248aebb23a47e6a8b6b7bea4c7c7395e1529f3",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticTails.lean": "a7d338d1b5670e98250d0aa2a181af6faae17fc9ba783fdb90225ca6acb30943",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticTraceTails.lean": "76e16c4ead3b9307625318b514a7e0156025d78c01bacfa8bf7de49ca5e2fb98",
+    "sources/astra_physics_20261109/KerrKoopman/AnalyticTransport.lean": "9b511f2343d1ee0cb65bc445f1dcae799aef37e508eac2541395e541c001e73d",
+    "sources/astra_physics_20261109/KerrKoopman/CircleProjection.lean": "a85da61b3a2784a9765d1ae94451df91de51192f93ebd34dc69beada3a15e94c",
+    "sources/astra_physics_20261109/KerrKoopman/ContinuumCalculus.lean": "57b2c1092f10c974454070d7013c79f7dcf94809d7fb09f9da6b5571903f1bfb",
+    "sources/astra_physics_20261109/KerrKoopman/ContinuumFourier.lean": "bf48b74bd6906423f3134b30ea00548f4f0cd46520b778813fb3c9c6e6fd874b",
+    "sources/astra_physics_20261109/KerrKoopman/ContinuumGalerkin.lean": "19e218cbb78518b2ea5a11b907c16856952fb02c6bcb5296a8473fe492d93c72",
+    "sources/astra_physics_20261109/KerrKoopman/ContinuumRelative.lean": "5622d3d65bd0153773afc170ca310e9ca4799800e0d2d1a27f72d8b8f32c29d7",
+    "sources/astra_physics_20261109/KerrKoopman/ExactShear.lean": "3d565dfd4ee7406b8462f6c0f531471b050f61afdbe415d203ec1016916301c8",
+    "sources/astra_physics_20261109/KerrKoopman/ExplicitAnalyticInput.lean": "5404fff64fd2551e4d8e495d6df0443172fecf3f202032b18e9b6fc8448fe638",
+    "sources/astra_physics_20261109/KerrKoopman/ExplicitMaterial.lean": "a94fdfb94585a7b8b0d1664ab821bf796cc6b2f75e79e160eb0de3ec708277cd",
+    "sources/astra_physics_20261109/KerrKoopman/FiniteEnergy.lean": "ad57c1ec9b222a4ed6bb2d663cfbfde6aeadeeb162ada5d21dd731473e3adb60",
+    "sources/astra_physics_20261109/KerrKoopman/FiniteRepresentativeCalculus.lean": "5b1a4ccd7a5436c0798eae15ac6240ddc95b1bafe8f5704f5d8ca308c83b5e80",
+    "sources/astra_physics_20261109/KerrKoopman/FiniteRepresentatives.lean": "543ee174609384e356ed77e0555bfdad11257518e70bb3c53c2e14c49f90c6c6",
+    "sources/astra_physics_20261109/KerrKoopman/FourierDerivative.lean": "7553b44e8fb762dcac033f887f88ca54e63d3c442c1f71fe231a99a4145a3b3a",
+    "sources/astra_physics_20261109/KerrKoopman/FourierProjection.lean": "5cc6d7fab94e65ba3a9a03d0225a9faf0096b635f5d4e6a973e650e4d0643618",
+    "sources/astra_physics_20261109/KerrKoopman/FourierSupBounds.lean": "c8b5bb90821d9daf99660955b2543c1ac2f421c78315bc302afa05d8487ac79c",
+    "sources/astra_physics_20261109/KerrKoopman/GalerkinClassical.lean": "c554a87593690d2cac5cbb77644999342f271a414c0c65de77b86b1e57de76f5",
+    "sources/astra_physics_20261109/KerrKoopman/GalerkinFlow.lean": "46e2d4ba4943af6b8a39754b7cdd78faeb6242dfed55f929391a23ad52c248dd",
+    "sources/astra_physics_20261109/KerrKoopman/GalerkinGronwall.lean": "2e5b04ef8caaec6272c6a0265e52fff1dfb9f2e93fdb675b2743fd8c205701bd",
+    "sources/astra_physics_20261109/KerrKoopman/GalerkinRegularity.lean": "ccb6b4fce9f4b925cd8379da0dd66b7e6b47c826baedb0a1c9ecf59e856e99af",
+    "sources/astra_physics_20261109/KerrKoopman/GalerkinRelative.lean": "56246ba0dc89c285b82dc3d22eaaefd237ceb80e4e1e28b10c4ec24ed836b635",
+    "sources/astra_physics_20261109/KerrKoopman/GalerkinRestoration.lean": "8161ce5f30216e4d5c1e31b7d16ce32cf7ee40cf8b8f84f191ab9a0d85f033d8",
+    "sources/astra_physics_20261109/KerrKoopman/HilbertError.lean": "b766d42d7f51440bb4e40992edae4b1c778e250d2cbf2d6be5017143e048eb49",
+    "sources/astra_physics_20261109/KerrKoopman/HilbertFlow.lean": "2d3cc3f07bb22608bbace87959fca55f12163b14ebe83d709e169e438efc6833",
+    "sources/astra_physics_20261109/KerrKoopman/HilbertIteration.lean": "9a3496231d318e655f628db6222cf654d3a942b59fa733f9f1978ec3ed286b39",
+    "sources/astra_physics_20261109/KerrKoopman/HilbertShear.lean": "5f91eeddf44a79ea56645a640d2ad17e9ca5329c447c0f12bf8bf86e76160e01",
+    "sources/astra_physics_20261109/KerrKoopman/InitialRelativeEnergy.lean": "2f14a332e8a171037bab2403ddd1c8905ed4b9c79aae55291000924520c5ed9f",
+    "sources/astra_physics_20261109/KerrKoopman/IntegralTail.lean": "1ab5ac36a873c8cd58029449c1bafab81b1fa68a4775d1627640787b04767a28",
+    "sources/astra_physics_20261109/KerrKoopman/InteriorGronwall.lean": "6b2ef1a36f739ff8576d14251e57c964a380d46dbd51c4fe6e952f711f4c5947",
+    "sources/astra_physics_20261109/KerrKoopman/IntervalFourier.lean": "3ba07a659a6c6108a2b7306f60469fa98d9479ffdaa23e0f8ecfb70eb87af58f",
+    "sources/astra_physics_20261109/KerrKoopman/IntervalFourierProjection.lean": "0564ee10c1b99de6b89061949bbcbfa57e8543dd2a1fd8b0aa45d9f57ac53f41",
+    "sources/astra_physics_20261109/KerrKoopman/IterationBound.lean": "265403377cbcc3c2fa01443ccda252cb36badd98af7f98611de25a6ac8b1802d",
+    "sources/astra_physics_20261109/KerrKoopman/JointGalerkinLimit.lean": "7290d0d1b1cd6d7bfb7f690880689177db9bc146df9e891b71ab75125951f4fb",
+    "sources/astra_physics_20261109/KerrKoopman/MaterialL2.lean": "4972bd9ce053c709156b58a8b642ef0f59e15de5b7709bc5d15382e6f7cc1a3a",
+    "sources/astra_physics_20261109/KerrKoopman/PolynomialInverse.lean": "1fbdcc81e7b94291550af21b228e0267373958851d504ed881c00fa650f1d5a3",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveCalculus.lean": "d901f0e4d4f191a0c594eb71e10325a5f2d16294eb802071d8df2e11f3207417",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveConstitutive.lean": "2c133987024c741e1e9dbccec12dc2fc188dc5fe01bb5c0633d586217277d442",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveDesign.lean": "135b8ab0a827ac94e6bb47d8f96280ddb04de5159123c37354300a6a2e968e5e",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveDynamicsBoundary.lean": "5417ef689486e4dec49993fe28de6e49e22e4a6d861d10dd8dddf741b9f51b46",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveKoopmanSource.lean": "1a3006dc9785e58d2c5cb6118fa1a93af3b4d1483444975e2f9f95df1a1f5164",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveObservation.lean": "be076cff77521907db8e04e43c3edd52b262f05f6d3c00368aadc363c8775286",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveObservationSource.lean": "137ad99b65363b1249a949d65895ab7a3c9e8b3c72bcf2d1b0852d6493a522cf",
+    "sources/astra_physics_20261109/KerrKoopman/PrimitiveSource.lean": "210ec807ba561c8e9abcf4c4ae68ec4c49b77c2b8bc398b8290419424181406e",
+    "sources/astra_physics_20261109/KerrKoopman/RealFourierDerivative.lean": "db1ebbd243df9e3f10287a68d1e92515f549eadce87121e71865e329573106a5",
+    "sources/astra_physics_20261109/KerrKoopman/RealFourierProjection.lean": "ac58d120157085769019292392abe9e078bc7780d920a32fb68035e5df88a224",
+    "sources/astra_physics_20261109/KerrKoopman/RealGalerkin.lean": "d8b0ba57212d6f459d55084684955c49aa93c18af93b4d8f6ca06a26f6aa6dbe",
+    "sources/astra_physics_20261109/KerrKoopman/Reconstruction.lean": "2b057a38ccbb61b2cd2cdf0a9c1a7facabc029b1b766878e378771fb7a6fdf99",
+    "sources/astra_physics_20261109/KerrKoopman/RelativeDynamics.lean": "347b10544ea91095174f9917afb78b5a829747a8227c92a4c89b3165b6f80e5d",
+    "sources/astra_physics_20261109/KerrKoopman/RelativeEnergy.lean": "e03557bded37d518bfecc2fc272f43ef7b1b9b9c998f298accc11aee9a37ad34",
+    "sources/astra_physics_20261109/KerrKoopman/Riccati.lean": "0a86fa23870082efb8bdcecd47bd727473704c4e2fdf460dfc084b3f9d7f9157",
+    "sources/astra_physics_20261109/KerrKoopman/StoppingCertificate.lean": "2375c8ec6e70ff5a3f2b6be6c1ceb339ac5c2d54420ac1f432b95790438b3444",
+    "sources/astra_physics_20261109/KerrKoopman/UniformGalerkinLimit.lean": "d2a45ea0e8e5212ba7afa2faf130bb2f8a124e3698350feaaffe4e764b67820b",
+    "sources/astra_physics_20261109/KerrKoopman/WeightedConvolution.lean": "34e692a139f7a1da7ef326be114370112008d34cb586eb2a60777e4367057b1a",
+    "sources/astra_physics_20261109/KerrKoopman/WeightedDecoder.lean": "c05a629eef8735085652aa99f7da652ecb44f0041007990ae7ae97fc4ef90c67",
+    "sources/astra_physics_20261109/KerrKoopman/WeightedDerivative.lean": "adcc3e3a8bb05d878e7ac77845af8b22b1e77472374f16461f86bc3d05de68e3",
+    "sources/astra_physics_20261109/KerrKoopman/WeightedRealDecode.lean": "ad65e979320c6081e23d56a9603beb48a1767cd1a21d7e96e99980a3c8fe4fd7",
+    "sources/astra_physics_20261109/KerrKoopman/WeightedReality.lean": "767ec4b4a1398ae55a933b18b7a13b5a9a969edc779e7d6f9d8246de5c421521",
+    "sources/astra_physics_20261109/tools/bridge_contract.json": "8c34e4f6f35aebd97eb31802087a569ac9372b99434efd42f2c29f14421b7cb7",
+    "tools/check_astra_physics.py": "30523952999ab92cba68bb1fb9cc9a2ff69896d691bf60371e1a5a9bfbebbbb0",
+    "tools/check_delivery.py": "7642a0a20c7c2fd9ba1139385861c4d049bc1b5d438c95344184e35eeba4d897",
+    "tools/verify.py": "2f45a1d084ef4f9900ca7843568b634fe2506937c500a1a494286b74f48c44a7",
+    "tools/verify_main_result.py": "01f8d2524bd9909c2f262e1f27da287abc1373c0700e8eec573815c442cceba3"
+  },
+  "current_retained_manifest_files_rechecked": 450,
+  "provenance_base_inputs_rechecked": 8,
+  "artifacts": [
+    {
+      "path": "docs/integration/manifest.json",
+      "sha256": "411103e52dbdb891c06cb497445e2890ecedb7c4f5daaa7d0763e9115b9e0275"
+    },
+    {
+      "path": "docs/laakso/provenance-geometric.json",
+      "sha256": "767e1c4804d391e671b66b7894057d5caa5d7eaac84712be1d6742562e45b0eb"
+    },
+    {
+      "path": "linear_input/lean_results.json",
+      "sha256": "5576474a48af9a34fa74a2d54a5462a22f0d66db0df89bd8792555ad548522cd"
+    },
+    {
+      "path": "tools/check_pr_integration.py",
+      "sha256": "9bb39fa151dbd997aa9ef07cb3860b3cec7edd21a022393e31df091fd1e7b3e0"
+    },
+    {
+      "path": "tools/pr_integration.py",
+      "sha256": "060b37aef663dc5e4c52d3f0b282266ce1df5615db5e7b4611699388a9617407"
+    },
+    {
+      "path": "tools/proof_only.py",
+      "sha256": "cc59268294e17b6649c9715b836b4066f9e4416ca02758e261fa848242e5e815"
+    },
+    {
+      "path": "verification/integration-arc3-offline.log",
+      "sha256": "05504385debf5c804525ceb4145cd62a584db99130e9a331878e109189496d72"
+    },
+    {
+      "path": "verification/integration-build-elastica.log",
+      "sha256": "22a0f504df424df17b9ed1c840f1983d65127bff09d9ce7d239822d47a73ebc6"
+    },
+    {
+      "path": "verification/integration-check_complementary_recovery.log",
+      "sha256": "09e00e13dda52793e3c9b449c61d816754243b375585d5bda2489731b1db1c1e"
+    },
+    {
+      "path": "verification/integration-check_curve_word_chain.log",
+      "sha256": "e1c00f00b2b9a67b3ffe60fb84ba1e9c0ea39c5f5e68436bbc6287be90017075"
+    },
+    {
+      "path": "verification/integration-check_e_wfs_fenchel.log",
+      "sha256": "61f4020ab2b8985ad9b9f21fe1ad20f0137eaaa33f5d2d8f3e1d4e48446e0a2e"
+    },
+    {
+      "path": "verification/integration-check_e_wfs_future_bridge.log",
+      "sha256": "9ef97cfac399e1adca383c4e5535dab42a2e3fb9b39d164b81c3b691eccfb6c4"
+    },
+    {
+      "path": "verification/integration-check_energy_gauge_fenchel.log",
+      "sha256": "cd4f455875cd3a0b32920eef86131aa6ef4e539792b8e8a4b480f3cb03f769ac"
+    },
+    {
+      "path": "verification/integration-check_f0_dynamics.log",
+      "sha256": "87d63496696e0a83d960b51eb94861e5d84f185efd0521fe8bf39fe17db0ca2a"
+    },
+    {
+      "path": "verification/integration-check_f0_future_minimality.log",
+      "sha256": "d4b1e50a9eab376ca27e3cacec0b736ea9b94026a52d80188ea5208750a304ec"
+    },
+    {
+      "path": "verification/integration-check_f16_saddle_cantor.log",
+      "sha256": "7852ac47884a08c65f33f87fd08d94a9e289433badbb1d4e879b51bd3424bf8e"
+    },
+    {
+      "path": "verification/integration-check_f16_unexpected_bridges.log",
+      "sha256": "45484cd83ced10f64ca58a63f386bd5d3e55101702472ec1aaf2e0196aecd191"
+    },
+    {
+      "path": "verification/integration-check_future_observation.log",
+      "sha256": "1faa35cde56a0f4623382f92bfa9dd084234090ca6e737221c1ebdb8b59de49f"
+    },
+    {
+      "path": "verification/integration-check_galois_bridge.log",
+      "sha256": "957e105d0a13f5c0e4b7add5f1eaad19d7c498e9c719087c17f22204a3932724"
+    },
+    {
+      "path": "verification/integration-check_laakso_finite.log",
+      "sha256": "127fe52f5a694974373ccfc38e48fd00ff2161a6d5c977afa50152058a7f59d6"
+    },
+    {
+      "path": "verification/integration-check_laakso_geometric.log",
+      "sha256": "3d54f80ab5d0a1f2517a5085924214ffe64406db4d7f4724dbb720972b2f5d15"
+    },
+    {
+      "path": "verification/integration-check_shear_commutator.log",
+      "sha256": "5f8c0dc393cbc71b63c606c41a8d6ab6693b3522c94714c9540bd6e8b815fc29"
+    },
+    {
+      "path": "verification/integration-check_strange_operator_counting.log",
+      "sha256": "0f611a430bf5bb6bc0372bbdc97a8238d5f489820e45a0d49a995a31ee3acd56"
+    },
+    {
+      "path": "verification/integration-check_strange_operator_galois.log",
+      "sha256": "120435b0b66bbb8f8b396c445189e91a9446152ad60271826240e26fd83c767a"
+    },
+    {
+      "path": "verification/integration-check_temporal_sampling.log",
+      "sha256": "1ac8f1cc2ed49edd59653a4c65e24c7134100ddce695115508852bb3d879d3c7"
+    },
+    {
+      "path": "verification/integration-check_wfs_mobius_fourier.log",
+      "sha256": "3940838d1e0135f28cb780d1ed700bdae223da7500481c10679c520ce8ecb82d"
+    },
+    {
+      "path": "verification/integration-check_wfs_sampling.log",
+      "sha256": "fb8bdafa8bbca0559b2df927defada5752cc90cb7d1759b297e238acaae79219"
+    },
+    {
+      "path": "verification/integration-finite-markov-transport.log",
+      "sha256": "33142503fdd77036eb3a2d4e51d7ab5f271da350ef1e97e4fcabe2f860c30220"
+    },
+    {
+      "path": "verification/integration-moving-curve-audit.log",
+      "sha256": "b386498ab2f9b6ab82cab45f4d91749ea3ca562186ce8c40391c028c58646493"
+    },
+    {
+      "path": "verification/integration-moving-curve.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "verification/integration-okanohara-bridge.log",
+      "sha256": "c38e91d50471c0b245de17a1ce9ee79f106035c710ff424dec56664b0891aea8"
+    },
+    {
+      "path": "verification/integration-proof-only.log",
+      "sha256": "f994e4add71be04dff3f1596b23c28cf76ff7f647dd3aac4ed3e10895c71914f"
+    },
+    {
+      "path": "verification/integration-repository-tests.log",
+      "sha256": "aa093fd963cf0e49fd1276bffa744fb059d514daa53e91f44d3c678f602002b5"
+    },
+    {
+      "path": "verification/integration-source-audit.log",
+      "sha256": "3492e0a7ad9bca0f2444c15bff782915e22570805967af2461a37782122c15f9"
+    },
+    {
+      "path": "verification/laakso-geometric.json",
+      "sha256": "3d54f80ab5d0a1f2517a5085924214ffe64406db4d7f4724dbb720972b2f5d15"
+    },
+    {
+      "path": "verification/main-result.json",
+      "sha256": "a27acc20065f9c3698017e9beaeb08fbcd01d9921484ede068ad139341becbdb"
+    },
+    {
+      "path": "verification/main-result.log",
+      "sha256": "43ab8f009c5e75c27d27807bd93c2b0476d4cd7b9a2e7f3e713995a76bcac30e"
+    },
+    {
+      "path": "verification/pr-integration.json",
+      "sha256": "a6e12e4a77e6266658d6176e0fc281ff6824897418475d78dfe485ef3cdabd35"
+    },
+    {
+      "path": "verification/pr-source-audit.json",
+      "sha256": "3492e0a7ad9bca0f2444c15bff782915e22570805967af2461a37782122c15f9"
+    },
+    {
+      "path": "verification/proof-only-joint.log",
+      "sha256": "de5fa9f3c55f5a725369c26f1706e7b22546ff5e2c1ccc97540b67ed1cde7705"
+    },
+    {
+      "path": "verification/proof-only-supplement.log",
+      "sha256": "450e88d7dc000bdaa00acf8f886265050b21f40c2da43acbcbe93bcc9e5b194a"
+    },
+    {
+      "path": "verification/proof-only.json",
+      "sha256": "f994e4add71be04dff3f1596b23c28cf76ff7f647dd3aac4ed3e10895c71914f"
+    }
+  ],
+  "audit_script": {
+    "path": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-11-14\\laakso-primitive-lean\\geometric_staging\\audit_geometric_results.py",
+    "sha256": "619635f72c5d4b1d4547718e58c1abfc0e344643c40c6b2aaedc57d9273460f2"
+  },
+  "not_claimed": [
+    "remote CI completion",
+    "clean project/dependency rebuild",
+    "historical release/delivery/rendering audit",
+    "path metric or global Lipschitz bound",
+    "measure or measure pushforward",
+    "Hausdorffness or path connectedness of all levels",
+    "compactness or metrizability of the whole inverse limit",
+    "continuity of the chosen successor or thread maps",
+    "Hausdorff dimension, Ahlfors regularity or Poincare inequality",
+    "compatibility of the earlier nonlinear reaction with all geometric bonding maps"
+  ]
+}
