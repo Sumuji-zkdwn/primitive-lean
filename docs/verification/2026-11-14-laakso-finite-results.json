@@ -1,0 +1,425 @@
+{
+  "recorded_at_utc": "2026-11-13T16:52:57.664464+00:00",
+  "passed": true,
+  "base_commit": "28721702d21720c37805fb64924253f3e1ace11f",
+  "local_run_source_commit": "28721702d21720c37805fb64924253f3e1ace11f",
+  "local_run_dirty": true,
+  "source_binding": "Local working-tree verification; module and complete proof-input hashes checked. Not a remote CI claim.",
+  "environment": {
+    "python": "3.14.5",
+    "pytest": "9.2.0",
+    "numpy": "2.5.4",
+    "lean": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+    "clean_project_build": false,
+    "cache": "Shared pinned dependency package cache; independent copied project build cache"
+  },
+  "modules": [
+    {
+      "path": "linear_input/lean_check/InverseTowerObservation.inc",
+      "namespace": "LinearInputInverseTowerObservation",
+      "sha256": "dbd899cf55e0b1fc97ce0d87e2f7d894f90c4ba902a3221f800f1eb32a9c0a0c",
+      "declarations": 22,
+      "theorems": 14,
+      "audited_axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "namespace": "LinearInputLaaksoFiniteGraph",
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143",
+      "declarations": 41,
+      "theorems": 14,
+      "audited_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "namespace": "LinearInputLaaksoNonlinear",
+      "sha256": "c62f9202b98e0581ca00160c6a2c23fa871050f080d0eaf3ddb518f4c08904fb",
+      "declarations": 51,
+      "theorems": 31,
+      "audited_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "added_theorems": 59,
+  "added_declarations": 114,
+  "joint_proof": {
+    "theorems": 4732,
+    "declarations": 6308,
+    "compile": {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "--trust=0",
+        "../linear_input/lean_check/MainResult.lean"
+      ],
+      "working_directory": "C:\\Users\\Dalcia\\Documents\\Codex\\2026-11-14\\laakso-primitive-lean\\primitive-lean\\lean",
+      "exit_code": 0,
+      "seconds": 431.383,
+      "log": "verification/main-result.log"
+    },
+    "warnings": [],
+    "unexpected_axioms": [],
+    "forbidden_tokens": [],
+    "complete_axiom_audit": true,
+    "baseline_axioms_match": true,
+    "input_hashes_rechecked": 417
+  },
+  "integration_checks": [
+    {
+      "name": "source-audit",
+      "exit_code": 0,
+      "seconds": 0.738,
+      "log": "verification/integration-source-audit.log"
+    },
+    {
+      "name": "repository-tests",
+      "exit_code": 0,
+      "seconds": 44.235,
+      "log": "verification/integration-repository-tests.log"
+    },
+    {
+      "name": "check_galois_bridge",
+      "exit_code": 0,
+      "seconds": 0.108,
+      "log": "verification/integration-check_galois_bridge.log"
+    },
+    {
+      "name": "check_f16_unexpected_bridges",
+      "exit_code": 0,
+      "seconds": 0.097,
+      "log": "verification/integration-check_f16_unexpected_bridges.log"
+    },
+    {
+      "name": "check_complementary_recovery",
+      "exit_code": 0,
+      "seconds": 0.18,
+      "log": "verification/integration-check_complementary_recovery.log"
+    },
+    {
+      "name": "check_shear_commutator",
+      "exit_code": 0,
+      "seconds": 0.081,
+      "log": "verification/integration-check_shear_commutator.log"
+    },
+    {
+      "name": "check_strange_operator_galois",
+      "exit_code": 0,
+      "seconds": 0.105,
+      "log": "verification/integration-check_strange_operator_galois.log"
+    },
+    {
+      "name": "check_strange_operator_counting",
+      "exit_code": 0,
+      "seconds": 0.131,
+      "log": "verification/integration-check_strange_operator_counting.log"
+    },
+    {
+      "name": "check_f16_saddle_cantor",
+      "exit_code": 0,
+      "seconds": 0.093,
+      "log": "verification/integration-check_f16_saddle_cantor.log"
+    },
+    {
+      "name": "check_f0_dynamics",
+      "exit_code": 0,
+      "seconds": 0.102,
+      "log": "verification/integration-check_f0_dynamics.log"
+    },
+    {
+      "name": "check_future_observation",
+      "exit_code": 0,
+      "seconds": 0.785,
+      "log": "verification/integration-check_future_observation.log"
+    },
+    {
+      "name": "check_e_wfs_fenchel",
+      "exit_code": 0,
+      "seconds": 0.971,
+      "log": "verification/integration-check_e_wfs_fenchel.log"
+    },
+    {
+      "name": "check_energy_gauge_fenchel",
+      "exit_code": 0,
+      "seconds": 0.97,
+      "log": "verification/integration-check_energy_gauge_fenchel.log"
+    },
+    {
+      "name": "check_e_wfs_future_bridge",
+      "exit_code": 0,
+      "seconds": 0.325,
+      "log": "verification/integration-check_e_wfs_future_bridge.log"
+    },
+    {
+      "name": "check_temporal_sampling",
+      "exit_code": 0,
+      "seconds": 3.538,
+      "log": "verification/integration-check_temporal_sampling.log"
+    },
+    {
+      "name": "check_wfs_mobius_fourier",
+      "exit_code": 0,
+      "seconds": 0.087,
+      "log": "verification/integration-check_wfs_mobius_fourier.log"
+    },
+    {
+      "name": "check_f0_future_minimality",
+      "exit_code": 0,
+      "seconds": 0.154,
+      "log": "verification/integration-check_f0_future_minimality.log"
+    },
+    {
+      "name": "check_wfs_sampling",
+      "exit_code": 0,
+      "seconds": 0.724,
+      "log": "verification/integration-check_wfs_sampling.log"
+    },
+    {
+      "name": "check_curve_word_chain",
+      "exit_code": 0,
+      "seconds": 0.109,
+      "log": "verification/integration-check_curve_word_chain.log"
+    },
+    {
+      "name": "check_laakso_finite",
+      "exit_code": 0,
+      "seconds": 0.115,
+      "log": "verification/integration-check_laakso_finite.log"
+    },
+    {
+      "name": "arc3-offline",
+      "exit_code": 0,
+      "seconds": 2.386,
+      "log": "verification/integration-arc3-offline.log"
+    },
+    {
+      "name": "proof-only",
+      "exit_code": 0,
+      "seconds": 492.339,
+      "log": "verification/integration-proof-only.log"
+    },
+    {
+      "name": "build-elastica",
+      "exit_code": 0,
+      "seconds": 9.66,
+      "log": "verification/integration-build-elastica.log"
+    },
+    {
+      "name": "moving-curve",
+      "exit_code": 0,
+      "seconds": 39.71,
+      "log": "verification/integration-moving-curve.log"
+    },
+    {
+      "name": "moving-curve-audit",
+      "exit_code": 0,
+      "seconds": 21.148,
+      "log": "verification/integration-moving-curve-audit.log"
+    },
+    {
+      "name": "okanohara-bridge",
+      "exit_code": 0,
+      "seconds": 29.208,
+      "log": "verification/integration-okanohara-bridge.log"
+    },
+    {
+      "name": "finite-markov-transport",
+      "exit_code": 0,
+      "seconds": 66.277,
+      "log": "verification/integration-finite-markov-transport.log"
+    }
+  ],
+  "finite_check": {
+    "passed": true,
+    "scope": "Exact finite rational instances, not an infinite-space theorem",
+    "graph_levels": [
+      {
+        "level": 0,
+        "vertices": 2,
+        "edges": 1,
+        "cycle_rank": 0
+      },
+      {
+        "level": 1,
+        "vertices": 6,
+        "edges": 6,
+        "cycle_rank": 1
+      },
+      {
+        "level": 2,
+        "vertices": 24,
+        "edges": 36,
+        "cycle_rank": 13
+      },
+      {
+        "level": 3,
+        "vertices": 120,
+        "edges": 216,
+        "cycle_rank": 97
+      },
+      {
+        "level": 4,
+        "vertices": 672,
+        "edges": 1296,
+        "cycle_rank": 625
+      }
+    ],
+    "mean_obstruction": [
+      {
+        "coupling": "-2",
+        "uniform": [
+          "1",
+          "1"
+        ],
+        "perturbed": [
+          "5/8",
+          "1"
+        ]
+      },
+      {
+        "coupling": "0",
+        "uniform": [
+          "1",
+          "1"
+        ],
+        "perturbed": [
+          "5/8",
+          "1"
+        ]
+      },
+      {
+        "coupling": "1",
+        "uniform": [
+          "1",
+          "1"
+        ],
+        "perturbed": [
+          "5/8",
+          "1"
+        ]
+      },
+      {
+        "coupling": "7/3",
+        "uniform": [
+          "1",
+          "1"
+        ],
+        "perturbed": [
+          "5/8",
+          "1"
+        ]
+      }
+    ],
+    "synchronized_steps_checked": 36,
+    "mutation_controls": [
+      "missing parallel edge rejected",
+      "unit masses rejected"
+    ],
+    "source_sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+  },
+  "proof_dependency_revisions": [
+    {
+      "name": "mathlib",
+      "expected": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "actual": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+      "match": true
+    },
+    {
+      "name": "plausible",
+      "expected": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "actual": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+      "match": true
+    },
+    {
+      "name": "LeanSearchClient",
+      "expected": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "actual": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "match": true
+    },
+    {
+      "name": "importGraph",
+      "expected": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "actual": "cdab3938ccabbdb044be6896e251b5814bec932e",
+      "match": true
+    },
+    {
+      "name": "proofwidgets",
+      "expected": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "actual": "2db6054a44326f8c0230ee0570e2ddb894816511",
+      "match": true
+    },
+    {
+      "name": "aesop",
+      "expected": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "actual": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+      "match": true
+    },
+    {
+      "name": "Qq",
+      "expected": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "actual": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+      "match": true
+    },
+    {
+      "name": "batteries",
+      "expected": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "actual": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+      "match": true
+    },
+    {
+      "name": "Cli",
+      "expected": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "actual": "13567aed1ac4f12aea9484178e07e51f8c9f7658",
+      "match": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "verification/pr-integration.json",
+      "sha256": "7bc747a8f8f24a116fbd313994bba2c449f087b8e92d7032579f961816c95a0f"
+    },
+    {
+      "path": "verification/proof-only.json",
+      "sha256": "691c7c8a65e953bf0f61a66beaa45d5010e586316ed4a862a07333c578d94d0a"
+    },
+    {
+      "path": "verification/main-result.json",
+      "sha256": "c5df72700deaf66aab5fdf996f834dd5e7e5372e724ddd0a48508e62436f9736"
+    },
+    {
+      "path": "verification/main-result.log",
+      "sha256": "9fb9c52e5f9a0c7268f54becfd454b383e3c3ec103ce155ae6128544dc6d2af4"
+    },
+    {
+      "path": "verification/laakso-finite.json",
+      "sha256": "127fe52f5a694974373ccfc38e48fd00ff2161a6d5c977afa50152058a7f59d6"
+    },
+    {
+      "path": "verification/integration-repository-tests.log",
+      "sha256": "0a662ef8d0c3e06c79d00f730a680740850bce11a80c5b2ce7ab27e9bd6dd70f"
+    },
+    {
+      "path": "verification/laakso-failed-missing-pytest-20261114/pr-integration.json",
+      "sha256": "d42b535eb87e2a715b8cff660d101caca7b148e1d7fe0edefe714f24d9c701a3"
+    },
+    {
+      "path": "verification/laakso-failed-missing-pytest-20261114/integration-repository-tests.log",
+      "sha256": "d8b8f3c56407952e3fb18f79f37e31efccdc97695f4ec34d95c0e9deb5c7024e"
+    }
+  ],
+  "first_attempt": {
+    "passed": false,
+    "reason": "Default Python lacked pytest; no theorem or checker was weakened",
+    "recovery": "Created .venv and installed CI-pinned pytest==9.2.0 numpy==2.5.4"
+  }
+}

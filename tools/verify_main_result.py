@@ -24,6 +24,13 @@ PROOFS = ROOT / "linear_input/lean_check"
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 # Additive Mathlib imports prepended to MainResult.lean (All.lean bytes stay unchanged).
 EXTRA_IMPORTS = (
+    "Mathlib.Data.Fintype.Card",
+    "Mathlib.Data.Fintype.Prod",
+    "Mathlib.Data.Fintype.Sum",
+    "Mathlib.SetTheory.Cardinal.Finite",
+    "Mathlib.Data.Fin.VecNotation",
+    "Mathlib.Data.Setoid.Basic",
+    "Mathlib.Algebra.BigOperators.Fin",
     "Mathlib.Data.Finset.Max",
     "Mathlib.Topology.Algebra.Order.Field",
     "Mathlib.Data.List.Dedup",
@@ -184,6 +191,9 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/OperatorFiniteHorizon.inc', 'LinearInputOperatorHorizon'),
     ('linear_input/lean_check/OperatorSemanticClosure.inc', 'LinearInputOperatorSemanticClosure'),
     ('linear_input/lean_check/CrossSystemObservation.inc', 'LinearInputCrossSystemObservation'),
+    ('linear_input/lean_check/InverseTowerObservation.inc', 'LinearInputInverseTowerObservation'),
+    ('linear_input/lean_check/LaaksoFiniteGraph.inc', 'LinearInputLaaksoFiniteGraph'),
+    ('linear_input/lean_check/LaaksoNonlinearObstruction.inc', 'LinearInputLaaksoNonlinear'),
     ('linear_input/lean_check/SemanticIntervalNecessity.inc', 'LinearInputSemanticIntervals'),
     ('linear_input/lean_check/FiniteSelfSynthesis.inc', 'LinearInputFiniteSelfSynthesis'),
     ('linear_input/lean_check/RecursiveOperatorReentry.inc', 'LinearInputRecursiveReentry'),

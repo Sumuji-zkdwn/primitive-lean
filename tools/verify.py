@@ -102,6 +102,9 @@ def verify_lean(rebuild):
               and supplement["all_declarations"] == declarations
               and len(axioms) == len(declarations) and not warnings and not changed)
     supplemental_scopes = {
+        'InverseTowerObservation': 'Compatible set-level inverse towers, deterministic and multi-action projection bridges, and a nonempty binary-prefix example; no metric or measure limit.',
+        'LaaksoFiniteGraph': 'Canonical binary trisect-and-glue finite multigraphs with distinct parallel-edge identities, raw quotient and an explicit six-vertex first approximant; no continuous geometric realization.',
+        'LaaksoNonlinearObstruction': 'First-approximant multigraph Laplacian, cubic reaction obstruction to pair-mean descent for every coupling, and exact synchronized weighted subsystem and Euler observation bridges; no ODE-solution theorem.',
         'MainResult': 'Additive connection and worked example',
         'GeneralMinimum': 'General fixed-input minimum and strict-support criteria, with quartic bridges',
         'SupportComposition': 'Support interpolation, ordering, derivative identification and shared-minimizer restrictions',
