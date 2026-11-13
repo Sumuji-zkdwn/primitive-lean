@@ -12,7 +12,7 @@
 ## 方法
 
 1. **構造（git のみ）**：`tools/deps/pr_inventory.py`。`main` との分岐点からヘッドまでの Lean ファイルを、パスとブロブ SHA で記録。積み重なった PR では、親 PR のヘッドにない分をその PR 固有の内容とし、すでに `main` に同一バイトで入っているファイルは除外。
-2. **カーネル**：`tools/deps/pr_kernel.py`。他の PR に含まれない先端のヘッドごとに、そのヘッド自身の `tools/verify.py --proof-only` を実行し、組み立て・未登録のプローブ・独立した `lean/*.lean` をコンパイルして依存を抽出。PR 自身の CI がプローブを単独ファイルとしてコンパイルしている場合（#50〜#54）は同じ方法で単独に測定。
+2. **カーネル**：`tools/deps/pr_kernel.py`。他の PR に含まれない先端のヘッドごとに、そのヘッド自身の `tools/verify.py --proof-only` を実行し、組み立て・未登録のプローブ・独立した `lean/*.lean` をコンパイルして依存を抽出。PR 自身の CI がプローブを単独ファイルとしてコンパイルしている場合（#50〜#54）は同じ方法で単独に測定。作業ディレクトリを `LEAN_PATH` の先頭に置く呼出しでは、パスをシェル文字列に埋め込まず、環境変数 `PR_KERNEL_WORK` と位置引数で渡す（空白入りパスの回帰テストは `tests/test_pr_kernel_paths.py`、記録は [2026-11-07 の検証記録](../../verification/2026-11-07-pr-kernel-path-arguments.md)）。この節以下の表の測定はこの変更前の実行。
 3. **集計**：`tools/deps/pr_compare.py`。`main` にない宣言のうち PR 固有ファイルに属するものを、その PR の新しい内容とする。
 4. **CI**：GitHub Actions の実行履歴（1200 件）を PR ヘッドの SHA で突き合わせ。
 
