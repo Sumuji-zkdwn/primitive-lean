@@ -89,16 +89,17 @@ theorem canonicalDelta_strict_degree_or_zero (p : ℕ) (a : ℚ)
     (P : Polynomial ℚ) (hP : P ≠ 0) :
     canonicalDelta p a P = 0 ∨
       (canonicalDelta p a P).natDegree < P.natDegree := by
-  clear hP
-  by_cases hsmall : P.natDegree ≤ p
-  · exact Or.inl (canonicalDelta_zero_of_low_degree p a P hsmall)
-  · right
-    have hbound :=
-      canonicalDelta_degree_bound p a P.natDegree P (le_refl _)
-    have hnat :
-        (canonicalDelta p a P).natDegree ≤ P.natDegree - (p + 1) :=
-      (natDegree_le_iff_degree_le).2 hbound
-    omega
+  by_cases hzero : P = 0
+  · exact (hP hzero).elim
+  · by_cases hsmall : P.natDegree ≤ p
+    · exact Or.inl (canonicalDelta_zero_of_low_degree p a P hsmall)
+    · right
+      have hbound :=
+        canonicalDelta_degree_bound p a P.natDegree P (le_refl _)
+      have hnat :
+          (canonicalDelta p a P).natDegree ≤ P.natDegree - (p + 1) :=
+        (natDegree_le_iff_degree_le).2 hbound
+      omega
 
 theorem canonicalDelta_local_nilpotent (p : ℕ) (a : ℚ)
     (d : ℕ) (P : Polynomial ℚ) (hdegree : P.natDegree ≤ d) :

@@ -113,7 +113,11 @@ def audit(root):
             if sha(current_path.read_bytes()) != new:
                 raise ValueError('Migration current hash mismatch: ' + relative)
             accepted[relative] = row
-        changed = {name for name in git(root, 'diff', '--name-only', '-z', commit, '--',
+        # Only paths retained from the source commit have an old migration hash.
+        # New modules belong to normal registration/proof checks. Disable rename
+        # detection so a renamed retained source still exposes its deletion.
+        changed = {name for name in git(root, 'diff', '--no-renames', '--diff-filter=MDT',
+                   '--name-only', '-z', commit, '--',
                    'lean', 'linear_input/lean_check',
                    *sorted(ASSEMBLER_PATHS | DERIVATION_PATHS)).decode('utf-8').split('\0')
                    if migration_path(name)}

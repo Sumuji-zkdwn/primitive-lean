@@ -69,14 +69,16 @@ theorem coords_one_ne_two : coordinates (1 : Fin 3) ≠ coordinates 2 := by
 
 theorem coordinates_injective : Function.Injective coordinates := by
   intro i j h
-  fin_cases i <;> fin_cases j <;> first
-    | rfl
-    | exact (coords_zero_ne_one h).elim
-    | exact (coords_zero_ne_one h.symm).elim
-    | exact (coords_zero_ne_two h).elim
-    | exact (coords_zero_ne_two h.symm).elim
-    | exact (coords_one_ne_two h).elim
-    | exact (coords_one_ne_two h.symm).elim
+  fin_cases i <;> fin_cases j
+  · rfl
+  · exact (coords_zero_ne_one h).elim
+  · exact (coords_zero_ne_two h).elim
+  · exact (coords_zero_ne_one h.symm).elim
+  · rfl
+  · exact (coords_one_ne_two h).elim
+  · exact (coords_zero_ne_two h.symm).elim
+  · exact (coords_one_ne_two h.symm).elim
+  · rfl
 
 #print axioms coordinates_injective
 end FixedBoundaryCurveDistinct

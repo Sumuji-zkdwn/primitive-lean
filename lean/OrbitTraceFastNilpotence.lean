@@ -19,7 +19,7 @@ open Polynomial
 def fastSteps (p : ℕ) (d : ℕ) : ℕ :=
   if h : d ≤ p then 1 else fastSteps p (d - (p + 1)) + 1
 termination_by d
-decreasing_by all_goals omega
+decreasing_by omega
 
 theorem canonicalDelta_fast_nilpotent (p : ℕ) (a : ℚ) :
     ∀ d : ℕ, ∀ P : Polynomial ℚ, P.natDegree ≤ d →

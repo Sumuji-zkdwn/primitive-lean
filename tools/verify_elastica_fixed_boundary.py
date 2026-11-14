@@ -191,7 +191,7 @@ def main(argv=None):
     print(tests.stdout, end="", flush=True)
     build = command(["lake", "build", "Elastica.Geometry"], cwd=LEAN)
     print(build.stdout, end="", flush=True)
-    result = command(["lake", "env", sys.executable, __file__, "--inside-lake"], cwd=LEAN)
+    result = command(["lake", "env", sys.executable, "-B", "-X", "utf8", __file__, "--inside-lake"], cwd=LEAN)
     print(result.stdout, end="", flush=True)
     print("PASS: independent checks, pinned sources, Lean proofs and axiom audit")
     return 0

@@ -232,6 +232,41 @@ class ToolchainMigrationAudit(unittest.TestCase):
         self.assertTrue(result['passed'], result)
         self.assertEqual(len(result['migration_audit']['changes']), 4)
 
+    def stage_new_module(self):
+        path = 'lean/AfterMigration.lean'
+        self.write(path, 'namespace AfterMigration\ntheorem added : True := True.intro\nend AfterMigration\n')
+        self.git('add', path)
+        self.assertEqual(self.git('diff', '--cached', '--name-status'), 'A\t' + path)
+        return path
+
+    def test_staged_new_module_does_not_require_a_migration_original(self):
+        path = self.stage_new_module()
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        self.assertNotIn(path, result['migration_audit']['changes'])
+        self.assertEqual(len(result['migration_audit']['changes']), 4)
+
+    def test_new_module_does_not_hide_unrecorded_retained_edit(self):
+        self.stage_new_module()
+        self.write('lean/Elastica.lean', 'namespace Elastica\ndef unexpected : Nat := 1\nend Elastica\n')
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_deleted_retained_source_still_requires_migration_coverage(self):
+        self.git('rm', 'lean/Elastica.lean')
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_renaming_retained_source_cannot_hide_its_deletion(self):
+        self.git('mv', 'lean/Elastica.lean', 'lean/Renamed.lean')
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_new_fragment_still_requires_standard_registration(self):
+        path = 'linear_input/lean_check/AfterMigration.inc'
+        self.write(path, 'namespace AfterMigration\ntheorem added : True := True.intro\nend AfterMigration\n')
+        self.git('add', path)
+        migration = MIGRATION.audit(self.root)
+        self.assertTrue(migration['passed'], migration)
+        self.assert_rejected('Supplement registration mismatch')
+
     def migrate_assemblers(self):
         for path in sorted(MIGRATION.ASSEMBLER_PATHS):
             original = (self.root / path).read_bytes()
