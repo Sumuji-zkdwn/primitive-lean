@@ -23,8 +23,8 @@ abbrev Fields := HilbertShear.State RealCircleL2
 
 /-- Initial-only exact orthogonal projection of displacement and magnetic field. -/
 def encode (N : ℕ) (z : Fields) : State N :=
-  WithLp.toLp 2 ((RealGalerkin.space N).orthogonalProjection z.fst,
-    (RealGalerkin.space N).orthogonalProjection z.snd)
+  WithLp.toLp 2 ((RealGalerkin.space N).orthogonalProjectionOnto z.fst,
+    (RealGalerkin.space N).orthogonalProjectionOnto z.snd)
 
 /-- Restoration of physical electric and magnetic fields. -/
 def decode (N : ℕ) (z : State N) : Fields :=
@@ -55,9 +55,9 @@ theorem step_snd (N : ℕ) (h : ℝ) (z : State N) :
 
 theorem encode_norm_le (N : ℕ) (z : Fields) : ‖encode N z‖ ≤ ‖z‖ := by
   have hf : ‖(encode N z).fst‖ ≤ ‖z.fst‖ :=
-    (RealGalerkin.space N).norm_orthogonalProjection_apply_le z.fst
+    (RealGalerkin.space N).norm_orthogonalProjectionOnto_apply_le z.fst
   have hs : ‖(encode N z).snd‖ ≤ ‖z.snd‖ :=
-    (RealGalerkin.space N).norm_orthogonalProjection_apply_le z.snd
+    (RealGalerkin.space N).norm_orthogonalProjectionOnto_apply_le z.snd
   have hf2 : ‖(encode N z).fst‖ ^ 2 ≤ ‖z.fst‖ ^ 2 := by gcongr
   have hs2 : ‖(encode N z).snd‖ ^ 2 ≤ ‖z.snd‖ ^ 2 := by gcongr
   have hsq : ‖encode N z‖ ^ 2 ≤ ‖z‖ ^ 2 := by

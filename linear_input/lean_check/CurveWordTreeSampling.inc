@@ -323,7 +323,7 @@ def LevelEdge {E : Type*} [MetricSpace E] (o : E) (L : Finset ℝ) (x y : E) : P
 segment.  Points outside the selected levels are simply isolated. -/
 def levelGraph {E : Type*} [MetricSpace E] (o : E) (L : Finset ℝ) : SimpleGraph E where
   Adj x y := LevelEdge o L x y ∨ LevelEdge o L y x
-  symm := fun _ _ => Or.symm
+  symm := ⟨fun _ _ => Or.symm⟩
   loopless := ⟨by intro x; rintro (h | h) <;> exact lt_irrefl _ h.2.2.1⟩
 
 theorem levelGraph_height_ne {E : Type*} [MetricSpace E] (o : E) (L : Finset ℝ)
@@ -471,7 +471,7 @@ theorem exists_goodSampling_grid {h : ℝ → ℝ} (t : ℕ → ℝ) (N : ℕ)
   let U : ℕ → Finset ℝ := fun i => if hi : i < N then S ⟨i, hi⟩ else ∅
   refine ⟨L, chainSamples t U N, goodSampling_chain t U N ?_⟩
   intro i hi
-  simpa only [U, dif_pos hi] using hS ⟨i, hi⟩
+  simpa only [U, dite_eq_left hi] using hS ⟨i, hi⟩
 
 /-- Arbitrarily fine chronological samples with the finite-level edge law.
 This is an existence theorem for every continuous height on the interval. -/

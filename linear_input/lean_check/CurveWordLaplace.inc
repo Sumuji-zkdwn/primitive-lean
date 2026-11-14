@@ -72,7 +72,7 @@ theorem measure_eq_of_laplace_eq_of_integrable {μ ν : Measure E}
   intro L
   have he : integrableExpSet L μ = Set.univ := by
     ext t
-    simp only [integrableExpSet, Set.mem_setOf_eq, Set.mem_univ, iff_true]
+    simp only [integrableExpSet, Set.mem_ofPred_eq, Set.mem_univ, iff_true]
     simpa using hint (t • L)
   simp [he]
 
@@ -89,13 +89,13 @@ instance endpointMeasure_finite (S : Finset ι) (z : ι → E) (F : ι → ℝ) 
     IsFiniteMeasure (endpointMeasure S z F β) := by
   constructor
   unfold endpointMeasure
-  simp only [Measure.finset_sum_apply, Measure.smul_apply, Measure.dirac_apply_of_mem
+  simp only [sum_apply, smul_apply, Measure.dirac_apply_of_mem
     (Set.mem_univ _), smul_eq_mul, mul_one]
   exact ENNReal.sum_lt_top.mpr (fun _ _ => ENNReal.ofReal_lt_top)
 
 theorem endpointMeasure_integrable (S : Finset ι) (z : ι → E) (F : ι → ℝ)
     (β : ℝ) (f : E → ℝ) : Integrable f (endpointMeasure S z F β) := by
-  apply integrable_finset_sum_measure.mpr
+  apply integrable_finsetSum_measure.mpr
   intro w _
   exact (integrable_dirac (by finiteness)).smul_measure (by finiteness)
 
@@ -104,7 +104,7 @@ theorem integral_endpointMeasure (S : Finset ι) (z : ι → E) (F : ι → ℝ)
     (∫ x, f x ∂endpointMeasure S z F β) =
       ∑ w ∈ S, Real.exp (-β * F w) * f (z w) := by
   unfold endpointMeasure
-  rw [integral_finset_sum_measure]
+  rw [integral_finsetSum_measure]
   · apply Finset.sum_congr rfl
     intro w _
     rw [integral_smul_measure, integral_dirac]
@@ -137,7 +137,7 @@ theorem partition_eq_laplace_endpointMeasure (S : Finset ι) (z : ι → E)
   apply Finset.sum_congr rfl
   intro w _
   congr 1
-  simp only [ContinuousLinearMap.smul_apply, smul_eq_mul]
+  simp only [smul_apply, smul_eq_mul]
   ring
 
 /-- Equality of all real exponential sums determines the finite endpoint

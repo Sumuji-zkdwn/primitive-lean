@@ -33,17 +33,19 @@ theorem rawMode_hasDerivAt (T : ℝ) (hT : 0 ≤ T) (β ν : ℝ) (f : C(Time T,
   have hs : HasDerivAt (fun s : ℝ => ν * Real.exp (-β * s * ν))
       (-(β * ν) * (ν * Real.exp (-β * t * ν))) t := by
     convert (((hasDerivAt_id t).const_mul (-β) |>.mul_const ν).exp.const_mul ν) using 1
-    simp only [id_eq]
-    ring
+    · rfl
+    · simp only [id_eq]
+      ring
   have hp := primitive_hasDerivAt T hT β ν f t
   have hd := hs.smul hp
   have hc : (ν * Real.exp (-β * t * ν)) * Real.exp (β * t * ν) = ν := by
     rw [mul_assoc, ← Real.exp_add]
     simp
   convert hd using 1
-  simp only [rawMode, smul_smul]
-  rw [hc]
-  simp only [neg_mul, neg_smul, sub_eq_add_neg]
+  · rfl
+  · simp only [rawMode, smul_smul]
+    rw [hc]
+    simp only [neg_mul, neg_smul, sub_eq_add_neg]
 
 def phaseAt (ω t : ℝ) : ℂ := Complex.exp (Complex.I * (ω * t : ℝ))
 
@@ -51,8 +53,9 @@ theorem phaseAt_hasDerivAt (ω t : ℝ) :
     HasDerivAt (phaseAt ω) (Complex.I * (ω : ℂ) * phaseAt ω t) t := by
   have h := (((hasDerivAt_id t).const_mul ω).ofReal_comp.const_mul Complex.I).cexp
   convert h using 1
-  simp only [id_eq, phaseAt, mul_one]
-  ring
+  · rfl
+  · simp only [id_eq, phaseAt, mul_one]
+    ring
 
 theorem phaseAt_neg_mul (ω t : ℝ) : phaseAt (-ω) t * phaseAt ω t = 1 := by
   unfold phaseAt
@@ -82,8 +85,9 @@ theorem rawOsc_hasDerivAt (T : ℝ) (hT : 0 ≤ T) (β ν ω : ℝ)
     (rawMode_hasDerivAt T hT β ν (phaseCLM T ω f) t)
   have hi := phaseAt_neg_mul ω t
   convert hd using 1
-  simp only [rawOsc, extend_phase_at, Complex.real_smul, Complex.ofReal_neg, Complex.ofReal_mul]
-  linear_combination -(ν : ℂ) * f t * hi
+  · rfl
+  · simp only [rawOsc, extend_phase_at, Complex.real_smul, Complex.ofReal_neg, Complex.ofReal_mul]
+    linear_combination -(ν : ℂ) * f t * hi
 
 end
 end KerrKoopman.AnalyticModeODE

@@ -51,8 +51,10 @@ theorem scalarSolution_hasDerivAt (A y₀ t : ℝ)
     HasDerivAt (scalarSolution A y₀)
       (A * (scalarSolution A y₀ t) ^ 2) t := by
   have hd : HasDerivAt (fun z : ℝ => 1 - A * y₀ * z) (-(A * y₀)) t := by
-    simpa using (hasDerivAt_const t (1 : ℝ)).sub
-      ((hasDerivAt_id t).const_mul (A * y₀))
+    convert (hasDerivAt_const t (1 : ℝ)).sub
+      ((hasDerivAt_id t).const_mul (A * y₀)) using 1
+    · rfl
+    · simp
   unfold scalarSolution
   convert (hasDerivAt_const t y₀).div hd hden using 1
   field_simp
@@ -70,8 +72,10 @@ theorem positive_riccati_lifetime_bound
   let v : ℝ → ℝ := fun t => (y t)⁻¹ + a₀ * t
   have hv : ∀ t ∈ Set.Icc 0 T, HasDerivAt v (-a t + a₀) t := by
     intro t ht
-    simpa [v] using (reciprocal_riccati_derivative y a t (hderiv t ht)
-      (ne_of_gt (hypos t ht))).add ((hasDerivAt_id t).const_mul a₀)
+    convert (reciprocal_riccati_derivative y a t (hderiv t ht)
+      (ne_of_gt (hypos t ht))).add ((hasDerivAt_id t).const_mul a₀) using 1
+    · rfl
+    · simp
   have hvcont : ContinuousOn v (Set.Icc 0 T) := by
     intro t ht
     exact (hv t ht).continuousAt.continuousWithinAt

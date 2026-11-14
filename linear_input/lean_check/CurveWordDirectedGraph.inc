@@ -112,7 +112,7 @@ theorem optimum_attained_and_le (c : ∀ q, Out q → ℝ) (q : Q) (n : ℕ) :
       (decode_cost Out target c q w).trans hc⟩
   · intro p hp
     have h := bellman_le_word (policyNext Out target) (policyCost Out c) q (encode Out target p)
-    simpa only [encode_length, hp, encode_cost] using h
+    simpa only [optimum, encode_length, hp, encode_cost] using h
 
 /-- The minimum mean is attained by a nonempty closed walk of at most |Q|
 edges, and bounds the mean of every nonempty closed walk in the multigraph. -/

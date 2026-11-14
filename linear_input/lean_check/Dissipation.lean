@@ -1,7 +1,7 @@
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
-import Mathlib.Data.Real.Sqrt
+import Mathlib.Analysis.Real.Sqrt
 import Mathlib.Tactic.Ring
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Positivity
@@ -24,8 +24,9 @@ theorem exponential_bound {v q : ℝ → ℝ} {k : ℝ}
   have hw : ∀ s ∈ Set.Ici (0 : ℝ), HasDerivAt w (dw s) s := by
     intro s hs
     convert (((hasDerivAt_id s).const_mul k).exp.mul (hd s hs)) using 1
-    dsimp [w, dw]
-    ring
+    · rfl
+    · dsimp [dw]
+      ring
   have hc : ContinuousOn w (Set.Ici (0 : ℝ)) := fun s hs =>
     (hw s hs).continuousAt.continuousWithinAt
   have ha : AntitoneOn w (Set.Ici (0 : ℝ)) :=
@@ -90,7 +91,7 @@ theorem error_tendsto_zero {e g : ℝ → ℝ} {gamma m : ℝ}
     (hg : ∀ t ∈ Set.Ici (0 : ℝ), m ≤ g t) :
     Filter.Tendsto e Filter.atTop (nhds 0) := by
   rw [tendsto_zero_iff_abs_tendsto_zero]
-  simpa only [Real.sqrt_sq_eq_abs, Real.sqrt_zero] using
+  simpa only [Real.sqrt_sq_eq_abs, Real.sqrt_zero, Function.comp_def] using
     (squared_error_tendsto_zero hgamma hm hd hg).sqrt
 
 end LinearInputDissipation

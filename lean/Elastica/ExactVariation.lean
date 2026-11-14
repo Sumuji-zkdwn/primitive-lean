@@ -189,20 +189,21 @@ theorem fderiv_endpointParameters_zero {θ η u v : ℝ → ℝ} {ℓ : ℝ}
   have hd : HasFDerivAt (endpointParameters θ η u v ℓ)
       ((∫ s in 0..ℓ, -sin (θ s) • parameterLinear η u v s).prod
        (∫ s in 0..ℓ, cos (θ s) • parameterLinear η u v s)) 0 := by
-    simpa only [map_zero, add_zero, Real.deriv_cos, Real.deriv_sin] using hc.prodMk hs
+    convert hc.prodMk hs using 1
+    all_goals first | rfl | simp only [map_zero, add_zero, Real.deriv_cos, Real.deriv_sin]
   rw [hd.fderiv]
   apply Prod.ext
   · change (∫ s in 0..ℓ, -sin (θ s) • parameterLinear η u v s) p = _
     rw [ContinuousLinearMap.intervalIntegral_apply
       (φ := fun s => -sin (θ s) • parameterLinear η u v s) (μ := volume) (v := p)
       (((Real.continuous_sin.comp hθ).neg.smul hB).intervalIntegrable 0 ℓ)]
-    simpa only [ContinuousLinearMap.smul_apply, smul_eq_mul] using
+    simpa only [smul_apply, smul_eq_mul, Function.comp_apply, Pi.neg_apply] using
       integral_parameterLinear hη hu hv (Real.continuous_sin.comp hθ).neg p
   · change (∫ s in 0..ℓ, cos (θ s) • parameterLinear η u v s) p = _
     rw [ContinuousLinearMap.intervalIntegral_apply
       (φ := fun s => cos (θ s) • parameterLinear η u v s) (μ := volume) (v := p)
       (((Real.continuous_cos.comp hθ).smul hB).intervalIntegrable 0 ℓ)]
-    simpa only [ContinuousLinearMap.smul_apply, smul_eq_mul] using
+    simpa only [smul_apply, smul_eq_mul, Function.comp_apply] using
       integral_parameterLinear hη hu hv (Real.continuous_cos.comp hθ) p
 
 /-- Genuine finite-dimensional IFT, specialized to an identity correction block
@@ -278,9 +279,9 @@ theorem exists_exact_endpoint_variation {θ : ℝ → ℝ} {ℓ : ℝ}
 theorem corrected_angle_hasDerivAt {θ η u v a b : ℝ → ℝ}
     (ha : HasDerivAt a 0 0) (hb : HasDerivAt b 0 0) (s : ℝ) :
     HasDerivAt (fun t => θ s + t * η s + a t * u s + b t * v s) (η s) 0 := by
-  simpa only [one_mul, zero_mul, add_zero] using
-    (((hasDerivAt_id (0 : ℝ)).mul_const (η s)).const_add (θ s) |>.add
-      (ha.mul_const (u s)) |>.add (hb.mul_const (v s)))
+  convert (((hasDerivAt_id (0 : ℝ)).mul_const (η s)).const_add (θ s) |>.add
+    (ha.mul_const (u s)) |>.add (hb.mul_const (v s))) using 1
+  all_goals first | rfl | simp only [one_mul, zero_mul, add_zero]
 
 /-- Correction by fixed-end angle variations preserves both prescribed angles. -/
 theorem corrected_angle_endpoints {θ a b : ℝ → ℝ} {ℓ : ℝ}

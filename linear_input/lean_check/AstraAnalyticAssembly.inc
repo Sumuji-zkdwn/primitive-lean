@@ -35,6 +35,7 @@ def kernel (T : ℝ) (hT : 0 ≤ T) : Scalar T →L[ℝ] Branches T :=
   AnalyticFourierDuhamel.duhamel T hT 1 (1 / Real.sqrt 2) (by norm_num)
 
 theorem kernel_opNorm_le (T : ℝ) (hT : 0 ≤ T) : ‖kernel T hT‖ ≤ 1 := by
+  unfold kernel
   simpa only [inv_one] using
     AnalyticFourierDuhamel.duhamel_opNorm_le T hT 1 (1 / Real.sqrt 2) (by norm_num)
 

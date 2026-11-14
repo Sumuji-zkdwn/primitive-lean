@@ -33,7 +33,7 @@ theorem Hermitian.smul {u : L1 C(I, ℂ)} (hu : Hermitian u) (c : ℝ) :
   simpa using congrArg (fun z : ℂ => c • z) (hu k t)
 
 theorem isClosed_hermitian : IsClosed {u : L1 C(I, ℂ) | Hermitian u} := by
-  simp only [Hermitian, Set.setOf_forall]
+  simp only [Hermitian, Set.ofPred_forall]
   apply isClosed_iInter
   intro k
   apply isClosed_iInter
@@ -53,7 +53,7 @@ theorem product_mode_apply (ρ : C(I, ℝ)) (hρ : ∀ t, 0 ≤ ρ t)
   by_cases hp : k = p.1 + p.2
   · subst k
     simp [modeEval_apply, interaction]
-  · rw [if_neg hp]
+  · rw [ite_eq_right hp]
     change (lp.single (E := fun _ : ℤ => C(I, ℂ)) 1 (p.1+p.2)
       (twist ρ p.1 p.2 * (u p.1 * v p.2))) k t = 0
     rw [lp.single_apply_ne (E := fun _ : ℤ => C(I, ℂ)) 1 _ _ hp]
@@ -62,7 +62,9 @@ theorem product_mode_apply (ρ : C(I, ℝ)) (hρ : ∀ t, 0 ≤ ρ t)
 omit [CompactSpace I] in
 theorem twist_neg (ρ : C(I, ℝ)) (k l : ℤ) (t : I) :
     twist ρ (-k) (-l) t = twist ρ k l t := by
-  simp only [twist, ContinuousMap.coe_mk, ← neg_add, Int.cast_neg, abs_neg]
+  change (Real.exp (ρ t * (|((-k + -l : ℤ) : ℝ)| - |((-k : ℤ) : ℝ)| - |((-l : ℤ) : ℝ)|)) : ℂ) =
+    (Real.exp (ρ t * (|((k + l : ℤ) : ℝ)| - |(k : ℝ)| - |(l : ℝ)|)) : ℂ)
+  simp only [← neg_add, Int.cast_neg, abs_neg]
 
 omit [CompactSpace I] in
 theorem twist_star (ρ : C(I, ℝ)) (k l : ℤ) (t : I) :

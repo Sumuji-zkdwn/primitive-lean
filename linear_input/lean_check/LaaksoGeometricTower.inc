@@ -34,7 +34,7 @@ attribute [instance] vertexTopology
 abbrev edgeDiscrete : (n : ℕ) → DiscreteTopology (EdgeType n)
   | 0 => discreteTopology_bot _
   | n + 1 => by
-      letI := edgeDiscrete n
+      let := edgeDiscrete n
       exact inferInstanceAs (DiscreteTopology (RefinedEdge (EdgeType n)))
 
 attribute [instance] edgeDiscrete
@@ -42,7 +42,7 @@ attribute [instance] edgeDiscrete
 abbrev vertexDiscrete : (n : ℕ) → DiscreteTopology (VertexType n)
   | 0 => discreteTopology_bot _
   | n + 1 => by
-      letI := vertexDiscrete n
+      let := vertexDiscrete n
       exact inferInstanceAs (DiscreteTopology (RefinedVertex (VertexType n) (EdgeType n)))
 
 attribute [instance] vertexDiscrete
@@ -131,9 +131,9 @@ theorem basePoint_baseCoordinate (x : Space 0) : basePoint (baseCoordinate x) = 
   · change basePoint (baseVertexCoordinate v) = vertexPoint (level 0) v
     change Fin 2 at v
     fin_cases v
-    · simpa [basePoint, baseVertexCoordinate, level, base] using
+    · simpa [Space, basePoint, baseVertexCoordinate, level, base] using
         edgePoint_zero (level 0) (0 : Fin 1)
-    · simpa [basePoint, baseVertexCoordinate, level, base] using
+    · simpa [Space, basePoint, baseVertexCoordinate, level, base] using
         edgePoint_one (level 0) (0 : Fin 1)
   · change basePoint u = edgePoint (level 0) e u
     have he : e = (0 : Fin 1) := @Subsingleton.elim (Fin 1) _ e 0

@@ -434,11 +434,18 @@ def main(argv=None):
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
+    modes.add_argument("--toolchain-modules-only", action="store_true", help="Compile and axiom-audit every tracked standalone Lean module")
     modes.add_argument("--two-wavelength-only", action="store_true", help="Verify the isolated PR #92 two-wavelength extension")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     args = parser.parse_args(argv)
+    if args.toolchain_modules_only:
+        if args.rebuild:
+            parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")
+        from verify_toolchain_modules import run as verify_modules
+        result = verify_modules(root=ROOT)
+        return 0 if result["passed"] else 1
     if args.two_wavelength_only:
         from verify_two_wavelength import run_two_wavelength
         result = run_two_wavelength(ROOT, args.rebuild)

@@ -59,7 +59,7 @@ theorem projection_idempotent (N : ℕ) (f : CircleL2) :
   conv_rhs => rw [projection_apply]
   apply Finset.sum_congr rfl
   intro k hk
-  rw [projection_coefficient, if_pos hk]
+  rw [projection_coefficient, ite_eq_left hk]
 
 /-- Self-adjointness is proved for the constructed operator. -/
 theorem projection_inner (N : ℕ) (f g : CircleL2) :
@@ -125,7 +125,7 @@ theorem projection_eq_self (N : ℕ) {f : CircleL2} (hf : f ∈ bandlimited N) :
   induction hf using Submodule.span_induction with
   | mem x hx =>
       obtain ⟨k, hk, rfl⟩ := hx
-      rw [projection_basis, if_pos (show k ∈ frequencies N from hk)]
+      rw [projection_basis, ite_eq_left (show k ∈ frequencies N from hk)]
   | zero => simp
   | add x y hx hy ihx ihy => simp only [map_add, ihx, ihy]
   | smul a x hx ih => simp only [map_smul, ih]
@@ -150,6 +150,6 @@ theorem frequencies_tendsto : Tendsto frequencies atTop atTop := by
 theorem projection_tendsto (f : CircleL2) :
     Tendsto (fun N => projection N f) atTop (𝓝 f) := by
   have h := (basis.hasSum_repr f).comp frequencies_tendsto
-  simpa only [projection_apply, basis.repr_apply_apply] using h
+  simpa only [projection_apply, basis.repr_apply_apply, Function.comp_def] using h
 
 end KerrKoopman.FourierProjection

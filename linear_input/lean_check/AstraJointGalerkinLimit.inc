@@ -78,8 +78,9 @@ theorem approximation_error_le (T : ℝ) (hT : T ≤ 1/5)
   have hsum := add_le_add htstep hs
   apply hi.trans
   convert hsum using 1
-  unfold splittingNumerator
-  ring
+  · rfl
+  · unfold splittingNumerator
+    ring
 
 /-- Both indices grow; the time count uses only the initial norm and physical time. -/
 def jointSteps (N : ℕ) (t r : ℝ) : ℕ :=

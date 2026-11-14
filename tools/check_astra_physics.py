@@ -6,12 +6,23 @@ named-declaration and generated-environment axiom checks.
 """
 import ast
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = 'docs/astra/manifest.json'
+_MIGRATION_SPEC = importlib.util.spec_from_file_location(
+    'astra_lean_migration', Path(__file__).with_name('check_lean_migration.py'))
+MIGRATION = importlib.util.module_from_spec(_MIGRATION_SPEC)
+_MIGRATION_SPEC.loader.exec_module(MIGRATION)
+LEAN436_IMPORT_RENAMES = {
+    'Mathlib.Data.Complex.Basic': 'Mathlib.Basic.Complex.Basic',
+    'Mathlib.Data.Real.Basic': 'Mathlib.Basic.Real.Basic',
+    'Mathlib.Data.Real.Sqrt': 'Mathlib.Analysis.Real.Sqrt',
+    'Mathlib.Data.Setoid.Basic': 'Mathlib.Order.Setoid.Basic',
+}
 # Fixed assembly-only context, never arbitrary Lean text read from the ledger.
 # The aliases are namespace qualified and may persist after the section ends;
 # they resolve to the existing Set declarations, not new proof declarations.
@@ -92,6 +103,22 @@ def strip_imports(raw):
     """The only permitted adaptation: remove whole import lines, byte exactly."""
     return b''.join(line for line in raw.splitlines(keepends=True)
                     if not line.startswith(b'import '))
+
+
+def original_destination(root, migration, destination, current):
+    """Recover the old adapter only for an exact, validated current migration."""
+    if destination in migration['changes']:
+        return MIGRATION.git(root, 'show', f"{migration['source_commit']}:{destination}")
+    return current
+
+
+def current_imports(imports, migration):
+    """Apply known module moves only with a verified assembly-script migration."""
+    renamed = (LEAN436_IMPORT_RENAMES
+               if migration.get('passed') and
+               migration.get('target', {}).get('toolchain') == 'leanprover/lean4:v4.36.0-rc2' and
+               'tools/verify_main_result.py' in migration['changes'] else {})
+    return {renamed.get(name, name) for name in imports}
 
 
 def assembly_context_errors(contexts, registered_paths):
@@ -362,6 +389,14 @@ def audit(root=ROOT):
                   scope='Exact source adaptation, dependency closure and registration; proof validity is checked separately')
     try:
         manifest = json.loads((root / MANIFEST).read_text('utf-8'))
+        migration = MIGRATION.audit(root)
+        result['migration_audit'] = migration
+        errors.extend('Migration: ' + error for error in migration['errors'])
+        if migration.get('present') and migration['passed']:
+            original_manifest = json.loads(MIGRATION.git(
+                root, 'show', f"{migration['source_commit']}:{MANIFEST}"))
+            if manifest != original_manifest:
+                errors.append('Historical Astra manifest was changed during migration')
         if manifest['schema_version'] not in (1, 2):
             raise ValueError('Unsupported Astra manifest schema')
         rows = manifest['modules']; by_module = {row['module']: row for row in rows}
@@ -405,20 +440,24 @@ def audit(root=ROOT):
             role = row['role']
             if role in ('import_only_adapter', 'reuse_existing'):
                 destination = row['destination']; target = local_file(root, destination).read_bytes()
-                if sha(target) != row['sha256']:
+                original = original_destination(root, migration, destination, target)
+                if sha(original) != row['sha256'] or not MIGRATION.accepts_current_hash(
+                        migration, destination, row['sha256'], sha(target)):
                     errors.append('Destination hash mismatch: ' + destination)
+                if declarations(target.decode('utf-8'), row['namespace']) != decls:
+                    errors.append('Current destination declaration mismatch: ' + destination)
                 if role == 'import_only_adapter':
-                    if row['transformation'] != 'remove_import_lines_exact_bytes' or target != strip_imports(raw):
+                    if row['transformation'] != 'remove_import_lines_exact_bytes' or original != strip_imports(raw):
                         errors.append('Adapter changes bytes beyond import removal: ' + destination)
                     if registered.get(destination) != row['namespace']:
                         errors.append('Adapter namespace registration mismatch: ' + destination)
                     new_theorems += theorem_count
                     new_declarations.extend(name for _, name in decls)
-                    missing = set(i for i in imports if i.startswith('Mathlib.')) - extra_imports
+                    missing = current_imports((i for i in imports if i.startswith('Mathlib.')), migration) - extra_imports
                     if missing: errors.append('Missing additive Mathlib import: ' + ', '.join(sorted(missing)))
                 else:
                     if (row['transformation'] != 'compare_after_crlf_to_lf_only' or
-                            target.replace(b'\r\n', b'\n') != raw.replace(b'\r\n', b'\n')):
+                            original.replace(b'\r\n', b'\n') != raw.replace(b'\r\n', b'\n')):
                         errors.append('Reused primitive source differs beyond line endings: ' + destination)
                     reused_theorems += theorem_count
             elif role != 'import_aggregator' or code.strip() != '\n'.join('import ' + i for i in imports):
@@ -432,19 +471,23 @@ def audit(root=ROOT):
         for row in native_rows:
             module = row['module']; destination = row['destination']
             raw = local_file(root, destination).read_bytes(); text = raw.decode('utf-8'); code = code_only(text)
+            original = original_destination(root, migration, destination, raw)
             if row.get('role') != 'repository_native_proof' or row.get('origin') != 'authored_in_primitive_lean':
                 errors.append('Native bridge lacks explicit repository authorship: ' + module)
             if not row.get('authored_on_parent_commit') or not row.get('authorship_description'):
                 errors.append('Native bridge lacks creation provenance: ' + module)
             if 'preserved_copy' in row or 'transformation' in row:
                 errors.append('Native bridge cannot claim import-only adaptation: ' + module)
-            if sha(raw) != row['sha256'] or row['sha256'] != row.get('original_sha256'):
+            if (sha(original) != row['sha256'] or row['sha256'] != row.get('original_sha256') or
+                    not MIGRATION.accepts_current_hash(migration, destination, row['sha256'], sha(raw))):
                 errors.append('Native bridge creation hash mismatch: ' + destination)
             if re.search(r'(?m)^\s*import\b', code) or re.search(r'\b(sorry|admit|axiom|unsafe|native_decide)\b', code):
                 errors.append('Native bridge contains forbidden assembly/proof token: ' + module)
             if registered.get(destination) != row['namespace']:
                 errors.append('Native bridge registration mismatch: ' + destination)
             decls = declarations(text, row['namespace'])
+            if decls != declarations(original.decode('utf-8'), row['namespace']):
+                errors.append('Current native bridge declaration mismatch: ' + module)
             theorem_count = sum(kind in ('theorem', 'lemma') for kind, _ in decls)
             if theorem_count != row['theorem_count'] or len(decls) != row['declaration_count']:
                 errors.append('Native bridge declaration count mismatch: ' + module)
@@ -459,7 +502,7 @@ def audit(root=ROOT):
                     errors.append('Missing native bridge dependency: ' + dependency)
                 elif other.get('destination') in position and position[other['destination']] >= position.get(destination, -1):
                     errors.append('Native bridge dependency appears after dependent: ' + module)
-            missing = set(row['required_mathlib_imports']) - extra_imports
+            missing = current_imports(row['required_mathlib_imports'], migration) - extra_imports
             if missing: errors.append('Missing native bridge Mathlib import: ' + ', '.join(sorted(missing)))
             contracts = manifest.get('additional_bridge_contracts', [])
             if row['proof_contract'] not in [contract_path(c) for c in contracts]:

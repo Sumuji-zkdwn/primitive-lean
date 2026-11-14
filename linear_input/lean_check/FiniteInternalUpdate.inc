@@ -14,8 +14,9 @@ theorem exponential_bound_on_Icc {v q : ℝ → ℝ} {k T : ℝ} (hT : 0 ≤ T)
   have hw : ∀ s ∈ Icc (0 : ℝ) T, HasDerivAt w (dw s) s := by
     intro s hs
     convert (((hasDerivAt_id s).const_mul k).exp.mul (hd s hs)) using 1
-    dsimp [w, dw]
-    ring
+    · rfl
+    · dsimp [dw]
+      ring
   have hc : ContinuousOn w (Icc (0 : ℝ) T) :=
     fun s hs => (hw s hs).continuousAt.continuousWithinAt
   have ha : AntitoneOn w (Icc (0 : ℝ) T) :=

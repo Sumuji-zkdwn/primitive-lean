@@ -75,7 +75,7 @@ theorem factorization_iff_fiber_invariant {A B V : Type*} [Inhabited V]
     have hx : ∃ y : A, forget y = forget x := ⟨x, rfl⟩
     change (if hb : ∃ y : A, forget y = forget x then
       target (Classical.choose hb) else default) = target x
-    rw [dif_pos hx]
+    rw [dite_eq_left hx]
     exact h (Classical.choose hx) x (Classical.choose_spec hx)
 
 /-- A quotient target and an actual output witness produce reconstruction.

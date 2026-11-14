@@ -74,14 +74,16 @@ theorem lift_hasDerivAt (N : ℕ) (f : RealGalerkin.space N) (x : ℝ) :
           (lift N (finiteDerivative N (sineVector N k.val hk)) x) x
         rw [lift_sineVector, finiteDerivative_sineVector, lift_smul, lift_cosineVector]
         convert ((hasDerivAt_id x).const_mul (k.val : ℝ)).sin using 1
-        simp only [id_eq]
-        ring
+        · rfl
+        · simp only [id_eq]
+          ring
       · change HasDerivAt (lift N (cosineVector N k.val hk))
           (lift N (finiteDerivative N (cosineVector N k.val hk)) x) x
         rw [lift_cosineVector, finiteDerivative_cosineVector, lift_smul, lift_sineVector]
         convert ((hasDerivAt_id x).const_mul (k.val : ℝ)).cos using 1
-        simp only [id_eq]
-        ring
+        · rfl
+        · simp only [id_eq]
+          ring
   | zero =>
       change HasDerivAt (lift N 0) (lift N (finiteDerivative N 0) x) x
       rw [map_zero, lift_zero]

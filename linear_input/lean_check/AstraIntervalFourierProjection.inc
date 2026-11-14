@@ -16,7 +16,7 @@ theorem integral_cos_int (k : ℤ) :
   · have hr : (k : ℝ) ≠ 0 := by exact_mod_cast hk
     have hs : Real.sin ((k : ℝ)*period) = 0 := by
       simpa only [period, zero_add, Real.sin_zero] using Real.sin_add_int_mul_two_pi 0 k
-    rw [if_neg hk, intervalIntegral.integral_comp_mul_left Real.cos hr, integral_cos]
+    rw [ite_eq_right hk, intervalIntegral.integral_comp_mul_left Real.cos hr, integral_cos]
     simp [hs]
 
 theorem integral_sin_int (k : ℤ) :
@@ -29,7 +29,7 @@ theorem integral_sin_int (k : ℤ) :
 
 theorem integral_cos_nat (k : ℕ) (hk : 0<k) :
     (∫ x in 0..period, Real.cos ((k : ℝ)*x)) = 0 := by
-  simpa only [Int.cast_natCast, if_neg (show (k : ℤ) ≠ 0 by omega)] using integral_cos_int (k : ℤ)
+  simpa only [Int.cast_natCast, ite_eq_right (show (k : ℤ) ≠ 0 by omega)] using integral_cos_int (k : ℤ)
 
 theorem integral_sin_nat (k : ℕ) :
     (∫ x in 0..period, Real.sin ((k : ℝ)*x)) = 0 := by
@@ -53,10 +53,10 @@ theorem integral_cos_cos (k l : ℕ) (hk : 0<k) (hl : 0<l) :
       (∫ x in 0..period, Real.cos ((((k : ℤ)+(l : ℤ) : ℤ) : ℝ)*x)) :=
     intervalIntegral.integral_add (hd.intervalIntegrable _ _) (ha.intervalIntegrable _ _)
   rw [he, intervalIntegral.integral_div, hi, integral_cos_int, integral_cos_int,
-    if_neg (show (k : ℤ)+(l : ℤ) ≠ 0 by omega), add_zero]
+    ite_eq_right (show (k : ℤ)+(l : ℤ) ≠ 0 by omega), add_zero]
   by_cases h : k=l
   · simp [h]
-  · rw [if_neg h, if_neg (show (k : ℤ)-(l : ℤ) ≠ 0 by omega), zero_div]
+  · rw [ite_eq_right h, ite_eq_right (show (k : ℤ)-(l : ℤ) ≠ 0 by omega), zero_div]
 
 theorem integral_sin_sin (k l : ℕ) (hk : 0<k) (hl : 0<l) :
     (∫ x in 0..period, Real.sin ((k : ℝ)*x)*Real.sin ((l : ℝ)*x)) =
@@ -76,10 +76,10 @@ theorem integral_sin_sin (k l : ℕ) (hk : 0<k) (hl : 0<l) :
       (∫ x in 0..period, Real.cos ((((k : ℤ)+(l : ℤ) : ℤ) : ℝ)*x)) :=
     intervalIntegral.integral_sub (hd.intervalIntegrable _ _) (ha.intervalIntegrable _ _)
   rw [he, intervalIntegral.integral_div, hi, integral_cos_int, integral_cos_int,
-    if_neg (show (k : ℤ)+(l : ℤ) ≠ 0 by omega), sub_zero]
+    ite_eq_right (show (k : ℤ)+(l : ℤ) ≠ 0 by omega), sub_zero]
   by_cases h : k=l
   · simp [h]
-  · rw [if_neg h, if_neg (show (k : ℤ)-(l : ℤ) ≠ 0 by omega), zero_div]
+  · rw [ite_eq_right h, ite_eq_right (show (k : ℤ)-(l : ℤ) ≠ 0 by omega), zero_div]
 
 theorem integral_sin_cos (k l : ℕ) :
     (∫ x in 0..period, Real.sin ((k : ℝ)*x)*Real.cos ((l : ℝ)*x)) = 0 := by
@@ -125,7 +125,7 @@ theorem cosCoeff_polynomial (N : ℕ) (c : ℝ) (a b : Fin N → ℝ) (j : Fin N
   simp only [mul_zero, zero_add, add_zero] at hi
   have he (k : Fin N) : (k.val+1=j.val+1) ↔ k=j := by simp [Fin.ext_iff]
   simp_rw [he, mul_ite, mul_zero] at hi
-  simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true] at hi
+  simp only [Finset.sum_ite_eq', Finset.mem_univ, ite_true] at hi
   unfold cosCoeff
   rw [hi]
   have hp : period ≠ 0 := by unfold period; positivity
@@ -140,7 +140,7 @@ theorem sinCoeff_polynomial (N : ℕ) (c : ℝ) (a b : Fin N → ℝ) (j : Fin N
   simp only [mul_zero, zero_add] at hi
   have he (k : Fin N) : (k.val+1=j.val+1) ↔ k=j := by simp [Fin.ext_iff]
   simp_rw [he, mul_ite, mul_zero] at hi
-  simp only [Finset.sum_ite_eq', Finset.mem_univ, if_true] at hi
+  simp only [Finset.sum_ite_eq', Finset.mem_univ, ite_true] at hi
   unfold sinCoeff
   rw [hi]
   have hp : period ≠ 0 := by unfold period; positivity

@@ -368,7 +368,7 @@ theorem sameReflectionOrbit_energy (σ τ : Fin 5 → Bool)
     simpa [h] using signedEnergy_flipX σ k lam a c x y u
   · refine ⟨true, true, ?_⟩
     intro k lam a c x y u
-    simp only [if_true, h]
+    simp only [ite_true, h]
     calc
       signedEnergy (flipX (flipY σ)) k lam a c x y u =
         signedEnergy (flipY σ) k lam a c (-x) y u :=

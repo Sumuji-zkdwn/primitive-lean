@@ -639,11 +639,12 @@ theorem fivePolyDir_hasDerivAt (p : FivePoly) (z v : FiveState) :
       simpa [fivePolyEval, fivePolyDir, fiveLine] using
         (((hasDerivAt_id (0 : ℝ)).mul_const v.2.2).const_add z.2.2)
   | add p q hp hq =>
-      simpa [fivePolyEval, fivePolyDir] using hp.add hq
+      convert hp.add hq using 1 <;> rfl
   | mul p q hp hq =>
-      simpa [fivePolyEval, fivePolyDir, fiveLine_zero] using hp.mul hq
+      convert hp.mul hq using 1
+      all_goals first | rfl | simp only [fivePolyDir, fiveLine_zero]
   | neg p hp =>
-      simpa [fivePolyEval, fivePolyDir] using hp.neg
+      convert hp.neg using 1 <;> rfl
 
 structure FivePolyField where
   fc1 : FivePoly
@@ -777,16 +778,15 @@ theorem actual_bracket_X1_X2 (z : FiveState) :
   rw [actualLieBracket_poly]
   apply Prod.ext
   · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
-      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
       polyX1, polyX2, polyY, pc1, pc2, pu1, pu2] <;> ring
   · apply Prod.ext
     · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyX2, polyY, pc1, pc2, pu1, pu2] <;> ring
     · dsimp [polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyX2, polyY, pc1, pc2, pu1, pu2]
-      ring
 
 /-- The first fourth-order candidate is the actual iterated bracket [X1,Y]. -/
 theorem actual_bracket_X1_Y (z : FiveState) :
@@ -795,14 +795,14 @@ theorem actual_bracket_X1_Y (z : FiveState) :
   rw [actualLieBracket_poly]
   apply Prod.ext
   · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
-      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
       polyX1, polyY, polyZ1, pc1, pc2, pu1, pu2, p2, p3] <;> ring
   · apply Prod.ext
     · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyY, polyZ1, pc1, pc2, pu1, pu2, p2, p3] <;> ring
     · dsimp [polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyY, polyZ1, pc1, pc2, pu1, pu2, p2, p3]
       ring
 
@@ -813,14 +813,14 @@ theorem actual_bracket_X2_Y (z : FiveState) :
   rw [actualLieBracket_poly]
   apply Prod.ext
   · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
-      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
       polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3] <;> ring
   · apply Prod.ext
     · apply Prod.ext <;> dsimp [polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyDir, fivePolyFieldEval, fivePolyEval,
+        fivePolyFieldDir, fivePolyDir, fivePolyFieldEval, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3] <;> ring
     · dsimp [polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX2, polyY, polyZ2, pc1, pc2, pu1, pu2, p2, p3]
       ring
 
@@ -838,35 +838,34 @@ theorem actualBracketProj_Y (z : FiveState) :
       cartanY z.1.1 z.1.2 z.2.1.1 z.2.1.2 := by
   apply Prod.ext
   · dsimp [actualBracketProj, fivePolyFieldEval, polyY,
-      fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
+      fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, cartanY]
     ring
   · apply Prod.ext
     · dsimp [actualBracketProj, fivePolyFieldEval,
-        polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
+        polyY, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, cartanY]
       ring
     · dsimp [actualBracketProj, fivePolyFieldEval,
-        polyY, fivePolyEval, pc1, pc2, pu1, pu2, cartanY]
-      ring
+        polyY, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, cartanY]
 
 theorem actualBracketProj_Z1 (z : FiveState) :
     actualBracketProj (fivePolyFieldEval polyZ1 z) =
       cartanZ1 z.1.1 z.1.2 z.2.1.1 z.2.1.2 := by
   apply Prod.ext
   · dsimp [actualBracketProj, fivePolyFieldEval, polyZ1,
-      fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ1]
+      fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, p2, p3, cartanZ1]
     ring
   · apply Prod.ext <;> dsimp [actualBracketProj, fivePolyFieldEval,
-      polyZ1, fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ1] <;> ring
+      polyZ1, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, p2, p3, cartanZ1] <;> ring
 
 theorem actualBracketProj_Z2 (z : FiveState) :
     actualBracketProj (fivePolyFieldEval polyZ2 z) =
       cartanZ2 z.1.1 z.1.2 z.2.1.1 z.2.1.2 := by
   apply Prod.ext
   · dsimp [actualBracketProj, fivePolyFieldEval, polyZ2,
-      fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ2]
+      fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, p2, p3, cartanZ2]
     ring
   · apply Prod.ext <;> dsimp [actualBracketProj, fivePolyFieldEval,
-      polyZ2, fivePolyEval, pc1, pc2, pu1, pu2, p2, p3, cartanZ2] <;> ring
+      polyZ2, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub, pc1, pc2, pu1, pu2, p2, p3, cartanZ2] <;> ring
 
 /-- The known 3x3 factor is now obtained from actual iterated Lie brackets. -/
 theorem genuineLieCartanMinorFactor (z : FiveState) :
@@ -910,14 +909,14 @@ def holonomyPoly : FivePoly := pc1 * pu2 - pc2 * pu1
 
 theorem holonomy_rewrite_zero (z : FiveState) :
     fivePolyDir holonomyPoly z (rewriteTangent z) = 0 := by
-  dsimp [holonomyPoly, fivePolyDir, fivePolyEval,
+  dsimp [holonomyPoly, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
     pc1, pc2, pu1, pu2, rewriteTangent]
   ring
 
 theorem holonomy_common_derivative (z : FiveState) (v : ℝ × ℝ) :
     fivePolyDir holonomyPoly z (commonDirection z v) =
       z.1.1 * v.2 - z.1.2 * v.1 := by
-  dsimp [holonomyPoly, fivePolyDir, fivePolyEval,
+  dsimp [holonomyPoly, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
     pc1, pc2, pu1, pu2, commonDirection]
   ring
 
@@ -1208,18 +1207,18 @@ theorem actual_parallel_W11 (c1 c2 t r : ℝ) :
   rw [actualLieBracket_poly]
   apply Prod.ext
   · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
-      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
       polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3,
       singularParallelPoint, parallelW11]
     ring
   · apply Prod.ext
     · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3,
         singularParallelPoint, parallelW11]
       ring
     · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyZ1, pc1, pc2, pu1, pu2, p2, p3,
         singularParallelPoint, parallelW11]
       ring
@@ -1231,18 +1230,18 @@ theorem actual_parallel_W12 (c1 c2 t r : ℝ) :
   rw [actualLieBracket_poly]
   apply Prod.ext
   · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
-      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+      fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
       polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3,
       singularParallelPoint, parallelW12]
     ring
   · apply Prod.ext
     · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3,
         singularParallelPoint, parallelW12]
       ring
     · dsimp [actualBracketProj, polyLieBracketEval, fiveStateSub,
-        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval,
+        fivePolyFieldDir, fivePolyFieldEval, fivePolyDir, fivePolyEval, instSubFivePoly, HSub.hSub, Sub.sub, instHSub,
         polyX1, polyZ2, pc1, pc2, pu1, pu2, p2, p3,
         singularParallelPoint, parallelW12]
       ring

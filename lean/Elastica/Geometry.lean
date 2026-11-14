@@ -108,7 +108,7 @@ theorem yCoord_const (α y₀ s : ℝ) :
 /-- The linear angle of a circular arc has the specified constant signed curvature. -/
 theorem curvature_affine (α κ s : ℝ) :
     curvature (fun u => α + κ * u) s = κ := by
-  simpa [curvature] using ((hasDerivAt_id s).const_mul κ |>.const_add α).deriv
+  simp [curvature]
 
 /-- A nonzero affine angle reconstructs the classical circular arc. -/
 theorem xCoord_affine (α κ x₀ s : ℝ) (hκ : κ ≠ 0) :

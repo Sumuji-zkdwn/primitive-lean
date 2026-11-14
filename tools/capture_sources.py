@@ -33,5 +33,5 @@ if existing.exists():
                    if record['source'] not in captured)
 (ROOT/'sources'/'provenance.json').write_text(json.dumps(dict(research=records,vendor_sources=[str(md),str(katex)],licenses=licenses,external=[
  {'title':'Euler Methodus E65, Appendix I','url':'https://scholarlycommons.pacific.edu/euler-works/65/','role':'古典的な変分問題の原典参照。今回の一般密度全体を歴史的に帰属させない。'},
- {'title':'mathlib pinned source','url':'https://github.com/leanprover-community/mathlib4/tree/5450b53e5ddc75d46418fabb605edbf36bd0beb6','role':'解析・線形代数・積分の機械証明ライブラリ。'}]),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ {'title':'mathlib pinned source','url':'https://github.com/leanprover-community/mathlib4/tree/2ddf59c8f14245864e6c0ed227a2dab76b9efea2','role':'解析・線形代数・積分の機械証明ライブラリ。'}]),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(f'Captured {len(records)} source excerpts and rendering libraries.')

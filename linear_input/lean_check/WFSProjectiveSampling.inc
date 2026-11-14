@@ -89,7 +89,7 @@ the infinite cyclic group, where x ↦ 2*x is injective.
 -/
 theorem sample_injective_iff_coprime (m d : ℕ) (hm : 0 < m) :
     Function.Injective (sample m d) ↔ Nat.Coprime d m := by
-  letI : NeZero m := ⟨Nat.ne_of_gt hm⟩
+  let : NeZero m := ⟨Nat.ne_of_gt hm⟩
   constructor
   · intro hinj
     have hsurj : Function.Surjective (sample m d) :=

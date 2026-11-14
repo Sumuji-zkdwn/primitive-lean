@@ -58,8 +58,10 @@ theorem shearB_inverse (Q : ι → ι → ℝ) (t : ℝ) (z : State ι) :
 theorem shearA_displacement_derivative (Q : ι → ι → ℝ) (z : State ι)
     (t : ℝ) (i : ι) :
     HasDerivAt (fun s => (shearA Q s z).1 i) (-applyQ Q z.2 i) t := by
-  simpa [shearA] using (hasDerivAt_const t (z.1 i)).sub
-    ((hasDerivAt_id t).mul_const (applyQ Q z.2 i))
+  convert (hasDerivAt_const t (z.1 i)).sub
+    ((hasDerivAt_id t).mul_const (applyQ Q z.2 i)) using 1
+  · rfl
+  · simp
 
 theorem shearA_magnetic_derivative (Q : ι → ι → ℝ) (z : State ι)
     (t : ℝ) (i : ι) :
@@ -75,8 +77,10 @@ theorem shearB_magnetic_derivative (Q : ι → ι → ℝ) (z : State ι)
     (t : ℝ) (i : ι) :
     HasDerivAt (fun s => (shearB Q s z).2 i)
       (-applyQ Q (fieldE z.1) i) t := by
-  simpa [shearB] using (hasDerivAt_const t (z.2 i)).sub
-    ((hasDerivAt_id t).mul_const (applyQ Q (fieldE z.1) i))
+  convert (hasDerivAt_const t (z.2 i)).sub
+    ((hasDerivAt_id t).mul_const (applyQ Q (fieldE z.1) i)) using 1
+  · rfl
+  · simp
 
 /-- Both updates use the same matrix and material inverse for all input states. -/
 theorem lieStep_formula (Q : ι → ι → ℝ) (t : ℝ) (z : State ι) :
@@ -124,15 +128,21 @@ theorem lieStep_magnetic_derivative_zero
       (fun t : ℝ => materialInverse (z.1 j - t * applyQ Q z.2 j))
       ((1 / (1 + materialInverse (z.1 j) ^ 2)) * (-applyQ Q z.2 j)) 0 := by
     intro j
+    have hlin : HasDerivAt (fun t : ℝ => z.1 j - t * applyQ Q z.2 j)
+        (-applyQ Q z.2 j) 0 := by
+      convert (hasDerivAt_const 0 (z.1 j)).sub
+        ((hasDerivAt_id 0).mul_const (applyQ Q z.2 j)) using 1
+      · rfl
+      · simp
     have h := (ExplicitMaterial.hasDerivAt_materialInverse
-      (z.1 j - 0 * applyQ Q z.2 j)).comp 0
-      ((hasDerivAt_const 0 (z.1 j)).sub
-        ((hasDerivAt_id 0).mul_const (applyQ Q z.2 j)))
-    simpa using h
+      (z.1 j - 0 * applyQ Q z.2 j)).comp
+        (h := fun t : ℝ => z.1 j - t * applyQ Q z.2 j)
+        (h' := -applyQ Q z.2 j) 0 hlin
+    simpa only [zero_mul, sub_zero, Function.comp_def] using h
   have hv : HasDerivAt v v' 0 := by
     exact HasDerivAt.fun_sum (fun j _ => (hd j).const_mul (Q i j))
   have h := (hasDerivAt_const 0 (z.2 i)).sub ((hasDerivAt_id 0).mul hv)
-  simpa [v, lieStep, shearA, shearB, fieldE] using h
+  simpa [v, lieStep, shearA, shearB, fieldE, Pi.sub_apply, Pi.mul_apply] using! h
 
 /-- The discrepancy between the two orders is already visible in D. -/
 theorem displacement_commutator (Q : ι → ι → ℝ)

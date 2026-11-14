@@ -53,7 +53,6 @@ theorem constraint_coefficients_zero {θ : ℝ → ℝ} {ℓ a b : ℝ}
       ((-a * cos (θ s) - b * sin (θ s)) * deriv θ s) s := by
     convert (((hθ.differentiable one_ne_zero s).hasDerivAt.sin.const_mul (-a)).add
       ((hθ.differentiable one_ne_zero s).hasDerivAt.cos.const_mul b)) using 1
-    dsimp [q]
     ring
   have hcoef : -a * cos (θ s) - b * sin (θ s) = 0 :=
     (mul_eq_zero.mp (hd.unique hd0)).resolve_right hκ

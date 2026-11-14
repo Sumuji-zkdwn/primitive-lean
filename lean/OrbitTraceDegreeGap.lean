@@ -21,7 +21,7 @@ theorem polynomial_moment_q_gap
       (M k - X ^ k).degree ≤ ((k - (p + 1) : ℕ) : WithBot ℕ) := by
   intro k
   induction k using Nat.strong_induction_on with
-  | h k ih =>
+  | ind k ih =>
       by_cases hk : k ≤ p
       · rw [hinit k hk, sub_self]
         simp

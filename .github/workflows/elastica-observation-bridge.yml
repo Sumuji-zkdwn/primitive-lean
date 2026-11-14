@@ -3,6 +3,9 @@ name: Elastica observation quotient bridge
 on:
   pull_request:
     paths:
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
       - 'lean/Research/ElasticaObservationQuotient.lean'
       - 'tests/test_elastica_observation_bridge.py'
       - 'docs/research/2026-11-07-observation-quotient-bridge.md'

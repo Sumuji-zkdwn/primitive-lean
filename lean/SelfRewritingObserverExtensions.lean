@@ -112,6 +112,7 @@ theorem ruleWordEq_iff_signature (s t : State) :
     RuleWordEq s t ↔ ruleSignature s = ruleSignature t := by
   constructor
   · intro h
+    unfold ruleSignature signature
     apply Prod.ext
     · apply Prod.ext
       · simpa [ruleRun, ruleStep, run] using h []
@@ -129,6 +130,7 @@ theorem headWordEq_iff_signature (s t : State) :
     HeadWordEq s t ↔ headSignature s = headSignature t := by
   constructor
   · intro h
+    unfold headSignature ruleSignature signature
     apply Prod.ext
     · apply Prod.ext
       · apply Prod.ext

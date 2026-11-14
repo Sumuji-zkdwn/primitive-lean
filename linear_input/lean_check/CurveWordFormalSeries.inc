@@ -297,7 +297,7 @@ theorem formalExp_injective {ι : Type*} {F G : Series ι}
     (hF : F [] = 0) (hG : G [] = 0) (he : formalExp F = formalExp G) : F = G := by
   funext w
   induction hn : w.length using Nat.strong_induction_on generalizing w with
-  | h n ih =>
+  | ind n ih =>
     by_cases hw : w = []
     · subst w
       exact hF.trans hG.symm
@@ -324,12 +324,12 @@ theorem logApprox_above {ι : Type*} (F : Series ι) (n : ℕ) (w : List ι)
   induction n with
   | zero => rfl
   | succ n ih =>
-    simp only [logApprox, show w.length ≠ n + 1 by omega, if_false]
+    simp only [logApprox, show w.length ≠ n + 1 by omega, ite_false]
     exact ih (by omega)
 
 theorem logApprox_stable {ι : Type*} (F : Series ι) (n : ℕ) (w : List ι)
     (hw : w.length ≤ n) : logApprox F (n + 1) w = logApprox F n w := by
-  simp only [logApprox, show w.length ≠ n + 1 by omega, if_false]
+  simp only [logApprox, show w.length ≠ n + 1 by omega, ite_false]
 
 theorem exp_logApprox {ι : Type*} (F : Series ι) (hF : F [] = 1)
     (n : ℕ) (w : List ι) (hw : w.length ≤ n) : formalExp (logApprox F n) w = F w := by
@@ -347,7 +347,7 @@ theorem exp_logApprox {ι : Type*} (F : Series ι) (hF : F [] = 1)
       have hd := formalExp_difference (logApprox_empty F (n + 1)) (logApprox_empty F n)
         w hw0 (fun z hz => logApprox_stable F n z (by omega))
       have hs : logApprox F (n + 1) w = F w - formalExp (logApprox F n) w := by
-        simp only [logApprox, he, if_true]
+        simp only [logApprox, he, ite_true]
       rw [hs, logApprox_above F n w (by omega)] at hd
       linarith
 

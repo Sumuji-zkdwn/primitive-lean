@@ -34,10 +34,12 @@ theorem original_gradient_formula (k : ℝ) (z : ℝ × ℝ) :
   have d1 : HasDerivAt (fun t : ℝ => k / 2 * t ^ 2 + z.2 * t) (k * z.1 + z.2) z.1 := by
     have := ((hasDerivAt_pow 2 z.1).const_mul (k / 2)).add ((hasDerivAt_id z.1).const_mul z.2)
     convert this using 1
+    · rfl
     · ring
   have d2 : HasDerivAt (fun t : ℝ => z.1 * t + k / 2 * z.1 ^ 2) z.1 z.2 := by
     have := ((hasDerivAt_id z.2).const_mul z.1).add_const (k / 2 * z.1 ^ 2)
     convert this using 1
+    · rfl
     · ring
   rw [d1.deriv, d2.deriv]
 

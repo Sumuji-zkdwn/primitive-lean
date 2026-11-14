@@ -24,7 +24,8 @@ theorem circle_equation (c d R t : ℝ) :
 theorem circleY_hasDerivAt (d R t : ℝ) :
     HasDerivAt (circleY d R) (R * sin t) t := by
   convert ((hasDerivAt_cos t).const_mul R).const_sub d using 1
-  simp
+  · rfl
+  · ring
 
 theorem circleY_deriv (d R t : ℝ) :
     deriv (circleY d R) t = R * sin t :=

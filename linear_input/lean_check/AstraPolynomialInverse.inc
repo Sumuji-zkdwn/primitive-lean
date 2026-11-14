@@ -38,7 +38,7 @@ theorem cube_norm_le (B : E →L[ℝ] E →L[ℝ] E)
 
 theorem square_difference (B : E →L[ℝ] E →L[ℝ] E) (x y : E) :
     square B x - square B y = B (x - y) x + B y (x - y) := by
-  simp only [square, map_sub, ContinuousLinearMap.sub_apply]
+  simp only [square, map_sub, sub_apply]
   abel
 
 theorem square_norm_sub_le (B : E →L[ℝ] E →L[ℝ] E)
@@ -58,7 +58,7 @@ theorem cube_norm_sub_le (B : E →L[ℝ] E →L[ℝ] E)
     ‖cube B x - cube B y‖ ≤ (3 * r ^ 2) * ‖x - y‖ := by
   have hid : cube B x - cube B y =
       B (x - y) (square B x) + B y (square B x - square B y) := by
-    simp only [cube, map_sub, ContinuousLinearMap.sub_apply]
+    simp only [cube, map_sub, sub_apply]
     abel
   have hsq : ‖square B x‖ ≤ r ^ 2 := (square_norm_le B hB x).trans (by gcongr)
   rw [hid]

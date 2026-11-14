@@ -54,8 +54,10 @@ theorem adj_symm (τ : Twist) {x y : LiftVertex} (h : Adj τ x y) : Adj τ y x :
   exact ⟨e, h.symm⟩
 
 theorem reach_symm (τ : Twist) {x y : LiftVertex} (h : Reach τ x y) :
-    Reach τ y x :=
-  Relation.ReflTransGen.symmetric (fun _ _ => adj_symm τ) h
+    Reach τ y x := by
+  let : Std.Symm (Adj τ) := ⟨fun _ _ => adj_symm τ⟩
+  change Relation.ReflTransGen (Adj τ) y x
+  exact symm h
 
 /-- A finite, checkable witness format used only to construct genuine paths. -/
 abbrev TwoStep (τ : Twist) (x y : LiftVertex) : Prop :=

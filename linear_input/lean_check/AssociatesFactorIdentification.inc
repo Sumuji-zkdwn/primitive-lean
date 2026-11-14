@@ -104,7 +104,7 @@ theorem ufm_iff_product_identifies_of_exists (M : Type*)
     UniqueFactorizationMonoid M ↔ ProductIdentifiesAtoms M := by
   constructor
   · intro h
-    letI : UniqueFactorizationMonoid M := h
+    let : UniqueFactorizationMonoid M := h
     exact ufm_product_identifies M
   · intro h
     exact UniqueFactorizationMonoid.of_existsUnique_irreducible_factors

@@ -30,7 +30,11 @@ theorem branch_mild (p : Data) (b : Bool) :
         branchTrace p false k t at h
     change branchTrace p false k t = waveFactor p.T 1 (-speed) k 1 t * (p.initial k).2 + _
     have hw : waveFactor p.T 1 (-speed) k 1 t = waveFactor p.T 1 speed k (-1) t := by
-      simp [waveFactor]
+      change (Real.exp (-1 * (t : ℝ) * |(k : ℝ)|) : ℂ) *
+        Complex.exp (((-1 * (-speed) * (k : ℝ) * (t : ℝ) : ℝ) : ℂ) * Complex.I) =
+        (Real.exp (-1 * (t : ℝ) * |(k : ℝ)|) : ℂ) *
+        Complex.exp (((-(-1) * speed * (k : ℝ) * (t : ℝ) : ℝ) : ℂ) * Complex.I)
+      simp
     rw [hw]
     exact h.symm
   · have h := congrArg (fun z : Branches p.T => (z k t).1) he
@@ -162,10 +166,11 @@ theorem displacement_time_derivative (p : Data) (t x : ℝ) (ht : t ∈ Set.Ioo 
   have hd := (((branch_time_derivative p true t x ht).sub
     (branch_time_derivative p false t x ht)).const_mul speed).const_add (4 / 3)
   convert hd using 1
-  rw [magneticX_eq]
-  simp only [branchSpeed, Bool.false_eq_true, ↓reduceIte, neg_neg]
-  linear_combination (branchX p true ⟨t, ht.1.le, ht.2.le⟩ x +
-    branchX p false ⟨t, ht.1.le, ht.2.le⟩ x) * speed_sq
+  · rfl
+  · rw [magneticX_eq]
+    simp only [branchSpeed, Bool.false_eq_true, ↓reduceIte, neg_neg]
+    linear_combination (branchX p true ⟨t, ht.1.le, ht.2.le⟩ x +
+      branchX p false ⟨t, ht.1.le, ht.2.le⟩ x) * speed_sq
 
 /-- Actual second Maxwell equation for the constructed infinite-mode solution. -/
 theorem magnetic_time_derivative (p : Data) (t x : ℝ) (ht : t ∈ Set.Ioo 0 p.T) :
@@ -174,9 +179,10 @@ theorem magnetic_time_derivative (p : Data) (t x : ℝ) (ht : t ∈ Set.Ioo 0 p.
   have hd := (((branch_time_derivative p true t x ht).add
     (branch_time_derivative p false t x ht)).const_mul (1 / 2)).const_add (3 / 10)
   convert hd using 1
-  rw [electricX_eq, displacementX_eq]
-  simp only [branchSpeed, Bool.false_eq_true, ↓reduceIte, neg_neg]
-  ring
+  · rfl
+  · rw [electricX_eq, displacementX_eq]
+    simp only [branchSpeed, Bool.false_eq_true, ↓reduceIte, neg_neg]
+    ring
 
 theorem electric_time_derivative (p : Data) (t x : ℝ) (ht : t ∈ Set.Ioo 0 p.T) :
     HasDerivAt (fun s => electricExtension p s x)

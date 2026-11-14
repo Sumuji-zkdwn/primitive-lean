@@ -89,7 +89,7 @@ theorem exists_internal_bounds {n : ℕ} {K : Set (ℝ × ℝ)} (hK : IsCompact 
     ∃ M : Fin n → ℝ, (∀ i, 0 ≤ M i) ∧ (∀ i, |theta₀ i| ≤ M i) ∧
       ∀ z ∈ K, ∀ i, |rho i * Phi z i| ≤ kappa i * M i := by
   have hbounded (i : Fin n) : ∃ B : ℝ, ∀ z ∈ K, |rho i * Phi z i| ≤ B := by
-    simpa only [Real.norm_eq_abs] using hK.exists_bound_of_continuousOn
+    simpa only [Real.norm_eq_abs, Pi.mul_apply, Function.comp_def] using hK.exists_bound_of_continuousOn
       ((continuous_const.mul ((continuous_apply i).comp hPhi)).continuousOn)
   choose B hB using hbounded
   let M : Fin n → ℝ := fun i => max |theta₀ i| (max (B i) 0 / kappa i)
@@ -164,13 +164,13 @@ theorem exists_global_solution {n : ℕ} {lam r u gamma target : ℝ}
         target ≤ E lam r u z.1 z.2 ∧
           E lam r u z.1 z.2 ≤ E lam r u (q 0).1.1 (q 0).1.2 →
         ∀ i, |rho i * Phi z i| ≤ kappa i * M i := by
-      simpa only [hq₀] using hforce
+      simpa only [K, mem_ofPred_eq, hq₀] using hforce
     have hbound := band_box_on_Icc hgamma ht hkappa hM hiforce hi hitheta
       (fun s hs => hq s ⟨by linarith [hs.1], hs.2.trans_lt hta⟩)
       (show t ∈ Icc (0 : ℝ) t from ⟨ht, le_rfl⟩)
     refine ⟨?_, (fun i => (abs_le.mp (hbound.2 i)).1),
       fun i => (abs_le.mp (hbound.2 i)).2⟩
-    simpa only [hq₀] using hbound.1
+    simpa only [K, mem_ofPred_eq, hq₀] using hbound.1
   obtain ⟨q, hq₀, hq⟩ :=
     LinearInputGlobalContinuation.exists_forward_solution hF hstart heps hlocal hstay
   refine ⟨M, hM, q, hq₀, hq, fun t ht => ?_⟩
@@ -180,7 +180,7 @@ theorem exists_global_solution {n : ℕ} {lam r u gamma target : ℝ}
       target ≤ E lam r u z.1 z.2 ∧
         E lam r u z.1 z.2 ≤ E lam r u (q 0).1.1 (q 0).1.2 →
       ∀ i, |rho i * Phi z i| ≤ kappa i * M i := by
-    simpa only [hq₀] using hforce
+    simpa only [K, mem_ofPred_eq, hq₀] using hforce
   have hbound := band_box_on_Icc hgamma ht hkappa hM hiforce hi hitheta
     (fun s hs => hq s hs.1) (show t ∈ Icc (0 : ℝ) t from ⟨ht, le_rfl⟩)
   simpa only [hq₀] using hbound
@@ -205,7 +205,12 @@ theorem contDiff_finite_expansion {n : ℕ} {m : WithTop ℕ∞}
     ContDiff ℝ m (fun q : State n => ∑ i, q.2 i * psi i q.1) := by
   apply ContDiff.sum
   intro i _
-  exact ((contDiff_apply ℝ ℝ i).comp contDiff_snd).mul ((hpsi i).comp contDiff_fst)
+  have hi : ContDiff ℝ m (fun q : State n => q.2 i) := by
+    simpa only [Function.comp_def] using
+      (contDiff_apply ℝ (fun _ : Fin n => ℝ) i).comp (contDiff_snd (E := ℝ × ℝ))
+  have hp : ContDiff ℝ m (fun q : State n => psi i q.1) := by
+    simpa only [Function.comp_def] using (hpsi i).comp (contDiff_fst (F := Fin n → ℝ))
+  exact hi.mul hp
 
 /-- The original coefficient 1 + Qθ², now with genuinely evolving finite
 internal coefficients, has an actual forward-global coupled solution. -/

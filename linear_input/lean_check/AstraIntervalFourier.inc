@@ -77,7 +77,7 @@ theorem polynomial_pairing {ι : Type*} [Fintype ι] (c : ℝ) (ω a b : ι → 
       (a k * (Real.cos (ω k*x)*g x) + b k * (Real.sin (ω k*x)*g x)) :=
     intervalIntegral.integral_add (hc.intervalIntegrable _ _) (hs.intervalIntegrable _ _)
   rw [he, hadd, intervalIntegral.integral_const_mul,
-    intervalIntegral.integral_finset_sum (fun k _ => (hk k).intervalIntegrable _ _)]
+    intervalIntegral.integral_finsetSum (fun k _ => (hk k).intervalIntegrable _ _)]
   congr 1
   apply Finset.sum_congr rfl
   intro k _
@@ -129,8 +129,9 @@ theorem cosCoeff_derivative (f df : ℝ → ℝ) (k : ℕ)
   have hd (x : ℝ) : HasDerivAt (fun y => Real.cos ((k : ℝ)*y))
       (-(k : ℝ)*Real.sin ((k : ℝ)*x)) x := by
     convert ((hasDerivAt_id x).const_mul (k : ℝ)).cos using 1
-    simp only [id_eq]
-    ring
+    · rfl
+    · simp only [id_eq]
+      ring
   have cd : Continuous (fun x => -(k : ℝ)*Real.sin ((k : ℝ)*x)) := by fun_prop
   have hi := periodic_skew_integral f (fun x => Real.cos ((k : ℝ)*x)) df
     (fun x => -(k : ℝ)*Real.sin ((k : ℝ)*x)) 0 period hdf hd cdf cd hp (cos_endpoint k)
@@ -149,8 +150,9 @@ theorem sinCoeff_derivative (f df : ℝ → ℝ) (k : ℕ)
   have hd (x : ℝ) : HasDerivAt (fun y => Real.sin ((k : ℝ)*y))
       ((k : ℝ)*Real.cos ((k : ℝ)*x)) x := by
     convert ((hasDerivAt_id x).const_mul (k : ℝ)).sin using 1
-    simp only [id_eq]
-    ring
+    · rfl
+    · simp only [id_eq]
+      ring
   have cd : Continuous (fun x => (k : ℝ)*Real.cos ((k : ℝ)*x)) := by fun_prop
   have hi := periodic_skew_integral f (fun x => Real.sin ((k : ℝ)*x)) df
     (fun x => (k : ℝ)*Real.cos ((k : ℝ)*x)) 0 period hdf hd cdf cd hp (sin_endpoint k)

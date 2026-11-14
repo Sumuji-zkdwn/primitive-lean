@@ -33,7 +33,9 @@ theorem arcAngle_terminal {h : ℝ} (hh : 0 < h) (a : ℝ) : arcAngle h a h = a 
   simp [arcAngle, ne_of_gt hh]
 
 theorem arcAngle_derivative (h a s : ℝ) : HasDerivAt (arcAngle h a) (a / h) s := by
-  simpa only [arcAngle, mul_one] using (hasDerivAt_id s).const_mul (a / h)
+  convert (hasDerivAt_id s).const_mul (a / h) using 1
+  · rfl
+  · ring
 
 theorem arc_curvature (h a s : ℝ) : Elastica.curvature (arcAngle h a) s = a / h :=
   (arcAngle_derivative h a s).deriv
@@ -45,12 +47,14 @@ theorem arc_unit_speed (h a s : ℝ) :
 
 theorem arc_x_endpoint {h a : ℝ} (hh : 0 < h) (ha : a ≠ 0) :
     Elastica.xCoord (arcAngle h a) 0 h = h * Real.sin a / a := by
+  unfold arcAngle
   have hx := Elastica.xCoord_affine 0 (a / h) 0 h (div_ne_zero ha (ne_of_gt hh))
   simpa only [zero_add, arcAngle, div_mul_cancel₀ _ (ne_of_gt hh), Real.sin_zero,
     sub_zero, div_div_eq_mul_div, mul_comm (Real.sin a) h] using hx
 
 theorem arc_y_endpoint {h a : ℝ} (hh : 0 < h) (ha : a ≠ 0) :
     Elastica.yCoord (arcAngle h a) 0 h = h * (1 - Real.cos a) / a := by
+  unfold arcAngle
   have hy := Elastica.yCoord_affine 0 (a / h) 0 h (div_ne_zero ha (ne_of_gt hh))
   simpa only [zero_add, arcAngle, div_mul_cancel₀ _ (ne_of_gt hh), Real.cos_zero,
     div_div_eq_mul_div, mul_comm (1 - Real.cos a) h] using hy

@@ -27,9 +27,9 @@ theorem angle_sub_eq_initial_of_curvature_eq {θ ψ : ℝ → ℝ} {ℓ : ℝ}
   have hd : ∀ s ∈ Ioo 0 ℓ, HasDerivAt (fun t => ψ t - θ t) 0 s := by
     intro s hs
     have hk : deriv ψ s = deriv θ s := hκ s hs
-    simpa only [hk, sub_self] using
-      ((hψ.differentiable one_ne_zero s).hasDerivAt.sub
-        (hθ.differentiable one_ne_zero s).hasDerivAt)
+    convert ((hψ.differentiable one_ne_zero s).hasDerivAt.sub
+      (hθ.differentiable one_ne_zero s).hasDerivAt) using 1
+    simp only [hk, sub_self]
   obtain ⟨c, hc⟩ := isOpen_Ioo.exists_is_const_of_deriv_eq_zero
     (convex_Ioo (0 : ℝ) ℓ).isPreconnected
     (fun s hs => (hd s hs).differentiableAt.differentiableWithinAt)
@@ -57,8 +57,7 @@ theorem xCoord_eq_of_angle_eq {θ ψ : ℝ → ℝ} {ℓ s : ℝ}
     (h : EqOn ψ θ (Icc 0 ℓ)) (hs : s ∈ Icc 0 ℓ) (x₀ : ℝ) :
     xCoord ψ x₀ s = xCoord θ x₀ s := by
   unfold xCoord
-  congr 1
-  apply intervalIntegral.integral_congr
+  refine congrArg (fun z : ℝ => x₀ + z) (intervalIntegral.integral_congr ?_)
   intro t ht
   rw [uIcc_of_le hs.1] at ht
   change cos (ψ t) = cos (θ t)
@@ -68,8 +67,7 @@ theorem yCoord_eq_of_angle_eq {θ ψ : ℝ → ℝ} {ℓ s : ℝ}
     (h : EqOn ψ θ (Icc 0 ℓ)) (hs : s ∈ Icc 0 ℓ) (y₀ : ℝ) :
     yCoord ψ y₀ s = yCoord θ y₀ s := by
   unfold yCoord
-  congr 1
-  apply intervalIntegral.integral_congr
+  refine congrArg (fun z : ℝ => y₀ + z) (intervalIntegral.integral_congr ?_)
   intro t ht
   rw [uIcc_of_le hs.1] at ht
   change sin (ψ t) = sin (θ t)

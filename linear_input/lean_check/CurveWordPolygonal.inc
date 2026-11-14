@@ -49,7 +49,8 @@ theorem polygonal_succ (T X : ℕ → ℝ) (N : ℕ) (t : ℝ) :
 
 theorem polygonal_continuous (T X : ℕ → ℝ) (N : ℕ) : Continuous (polygonal T X N) := by
   apply continuous_const.add
-  exact continuous_finset_sum _ (fun j _ => (ramp_continuous (T j) (T (j + 1))).mul continuous_const)
+  change Continuous (fun t => ∑ j ∈ Finset.range N, ramp (T j) (T (j + 1)) t * (X (j + 1) - X j))
+  exact continuous_finsetSum _ (fun j _ => (ramp_continuous (T j) (T (j + 1))).mul continuous_const)
 
 theorem polygonal_before (T X : ℕ → ℝ) (N : ℕ) (hT : Monotone T)
     {t : ℝ} (ht : t ≤ T 0) : polygonal T X N t = X 0 := by
@@ -264,17 +265,17 @@ theorem interpolate_on_edge {N : ℕ} (T X : Fin (N + 1) → ℝ) (hT : StrictMo
   have he := polygonal_on_edge (extendSamples T) (extendSamples X) (extendSamples_monotone T hT)
     N (extendSamples_strict T hT) i.val i.isLt (t := t)
   have ht' : t ∈ Icc (extendSamples T i.val) (extendSamples T (i.val + 1)) := by
-    simpa only [extendSamples_of_le T i.isLt.le, extendSamples_of_le T (Nat.succ_le_of_lt i.isLt)] using ht
+    simpa only [extendSamples_of_le T i.isLt.le, extendSamples_of_le T (Nat.succ_le_of_lt i.isLt)] using! ht
   simpa only [interpolate, extendSamples_of_le T i.isLt.le,
     extendSamples_of_le T (Nat.succ_le_of_lt i.isLt), extendSamples_of_le X i.isLt.le,
-    extendSamples_of_le X (Nat.succ_le_of_lt i.isLt)] using he ht'
+    extendSamples_of_le X (Nat.succ_le_of_lt i.isLt)] using! he ht'
 
 theorem interpolate_variation_le {N : ℕ} (T : Fin (N + 1) → ℝ) (hT : StrictMono T) (f : ℝ → ℝ) :
     eVariationOn (interpolate T (f ∘ T)) univ ≤ eVariationOn f (Icc (T 0) (T (Fin.last N))) := by
   have h := polygonal_variation_le (extendSamples T) f N (extendSamples_monotone T hT)
     (extendSamples_strict T hT)
   change eVariationOn (interpolate T (f ∘ T)) univ ≤ _ at h
-  simpa only [extendSamples_of_le T (Nat.zero_le N), extendSamples_of_le T (le_refl N)] using h
+  simpa only [extendSamples_of_le T (Nat.zero_le N), extendSamples_of_le T (le_refl N)] using! h
 
 theorem interpolate_uniform_approx {N : ℕ} (T : Fin (N + 1) → ℝ) (hT : StrictMono T)
     (f : ℝ → ℝ) {ε : ℝ} (hε : 0 ≤ ε)
@@ -284,12 +285,12 @@ theorem interpolate_uniform_approx {N : ℕ} (T : Fin (N + 1) → ℝ) (hT : Str
   have ho : ∀ j < N, ∀ t ∈ Icc (extendSamples T j) (extendSamples T (j + 1)),
       |f (extendSamples T j) - f t| ≤ ε ∧ |f (extendSamples T (j + 1)) - f t| ≤ ε := by
     intro j hj t ht
-    simpa only [extendSamples_of_le T hj.le, extendSamples_of_le T (Nat.succ_le_of_lt hj)] using
+    simpa only [extendSamples_of_le T hj.le, extendSamples_of_le T (Nat.succ_le_of_lt hj)] using!
       hosc ⟨j, hj⟩ t (by simpa only [extendSamples_of_le T hj.le,
-        extendSamples_of_le T (Nat.succ_le_of_lt hj)] using ht)
+        extendSamples_of_le T (Nat.succ_le_of_lt hj)] using! ht)
   have h := polygonal_uniform_approx (extendSamples T) f (extendSamples_monotone T hT)
     N (extendSamples_strict T hT) hε ho
-  simpa only [extendSamples_of_le T (Nat.zero_le N), extendSamples_of_le T (le_refl N)] using h
+  simpa only [extendSamples_of_le T (Nat.zero_le N), extendSamples_of_le T (le_refl N)] using! h
 
 theorem interpolate_tendstoUniformlyOn_of_oscillation {κ : Type*} {l : Filter κ}
     (N : κ → ℕ) (T : ∀ k, Fin (N k + 1) → ℝ) (hT : ∀ k, StrictMono (T k))
@@ -315,7 +316,8 @@ theorem affineEdge_hasDerivAt (a b x y t : ℝ) :
     HasDerivAt (affineEdge a b x y) ((y - x) / (b - a)) t := by
   change HasDerivAt (fun s => x + (s - a) / (b - a) * (y - x)) _ t
   convert (hasDerivAt_const t x).add (((hasDerivAt_id t).sub_const a).div_const (b - a) |>.mul_const (y - x)) using 1
-  ring
+  · rfl
+  · ring
 
 /-- Any local Stieltjes representation of the affine edge has the actual
 unit-time straight-segment signature. -/
@@ -434,7 +436,7 @@ theorem bvSignature_interpolate_product {ι : Type*} {N : ℕ}
       (fun i => interpolate_continuous T (fun k => X k i)) (T 0) (T (Fin.last N)) = interpolateProduct X := by
   have h := bvSignature_polygonal_product (extendSamples T)
     (fun j i => extendSamples (fun k => X k i) j) N (extendSamples_monotone T hT) (extendSamples_strict T hT)
-  simpa only [extendSamples_of_le T (Nat.zero_le N), extendSamples_of_le T (le_refl N)] using h
+  simpa only [extendSamples_of_le T (Nat.zero_le N), extendSamples_of_le T (le_refl N)] using! h
 
 theorem curveSignature_eq_bvSignature {ι : Type*} (f : ι → ℝ → ℝ)
     (hf : ∀ i, BoundedVariationOn (f i) univ) (hc : ∀ i, Continuous (f i))
@@ -516,7 +518,7 @@ theorem interpolateProduct_tendsto {ι κ : Type*} [Fintype ι] {l : Filter κ}
   have he (k : κ) : bvSignature (P k) (hP k) (hPc k) a b =
       interpolateProduct (fun j i => f i (T k j)) := by
     have hk := bvSignature_interpolate_product (T k) (fun j i => f i (T k j)) (hT k)
-    simpa only [ha k, hb k] using hk
+    simpa only [ha k, hb k] using! hk
   simpa only [he] using h
 
 theorem interpolateProduct_tendsto_of_mesh {ι κ : Type*} [Fintype ι] {l : Filter κ}

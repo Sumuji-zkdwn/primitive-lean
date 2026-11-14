@@ -180,12 +180,12 @@ theorem localBlock_det (a : Fin 8) (t : ℝ) :
   rw [hp, hq]
   by_cases hlo : a.val < 4
   · by_cases h03 : a.val = 0 ∨ a.val = 3
-    · simp only [if_pos hlo, if_pos h03]
+    · simp only [ite_eq_left hlo, ite_eq_left h03]
       ring
-    · simp only [if_pos hlo, if_neg h03]
+    · simp only [ite_eq_left hlo, ite_eq_right h03]
       ring
   · have h03 : ¬(a.val = 0 ∨ a.val = 3) := by omega
-    simp only [if_neg hlo, if_neg h03]
+    simp only [ite_eq_right hlo, ite_eq_right h03]
     ring
 
 /-- Four factors of either quadratic, with the two negative factors cancelling. -/

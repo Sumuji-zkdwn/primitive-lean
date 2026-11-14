@@ -68,7 +68,7 @@ theorem normalized_block_formula (a : Fin 8) (t : ℝ) (i j : Fin 2) :
   all_goals
     simp [normalizedBlock, generatorEntry, signedUpper, signedLower,
       block, blockThree, blockTen]
-    all_goals nlinarith [hlow a, hhigh a]
+    nlinarith [hlow a, hhigh a]
 
 /-- The normalized generator acting on an abstract two-dimensional pair. -/
 def signedAction (a : Fin 8) (z : ℝ × ℝ) : ℝ × ℝ :=

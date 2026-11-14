@@ -17,10 +17,10 @@ theorem energy_envelope (R R' : ℝ → ℝ) (δ η T t : ℝ)
       HasDerivAt W (Real.exp (-4*x)*(R' x-4*R x-η)) x := by
     have he : HasDerivAt (fun y : ℝ => Real.exp (-4*y)) (-4*Real.exp (-4*x)) x := by
       convert ((hasDerivAt_id x).const_mul (-4)).exp using 1
-      simp only [id_eq]
-      ring
+      · rfl
+      · simp only [id_eq]
+        ring
     convert he.mul ((hd x hx).add_const (η/4)) using 1
-    dsimp [W]
     ring
   have hanti : AntitoneOn W (Icc 0 T) := by
     apply antitoneOn_of_deriv_nonpos (convex_Icc _ _) cW

@@ -85,8 +85,9 @@ theorem hasDeriv_f (s : ℝ) :
       (1 / 2 : ℝ)).sub
     (((((hasDerivAt_id s).const_mul (4 * Real.pi)).sin).const_mul
       (1 / 4 : ℝ)))) using 1
-  all_goals simp only [id_eq]
-  all_goals ring
+  · rfl
+  · simp only [id_eq]
+    ring
 
 theorem curvature_zero :
     Elastica.curvature (angle (0 : Fin 3)) 0 = 0 := by
@@ -96,7 +97,7 @@ theorem curvature_zero :
 theorem curvature_one :
     Elastica.curvature (angle (1 : Fin 3)) 0 = 0 := by
   change deriv (fun s => -f s) 0 = 0
-  simpa using (hasDeriv_f 0).neg.deriv
+  simpa using! (hasDeriv_f 0).neg.deriv
 
 theorem curvature_two :
     Elastica.curvature (angle (2 : Fin 3)) 0 = -2 * Real.pi := by
@@ -104,17 +105,18 @@ theorem curvature_two :
   have h₁ : 2 * Real.pi * (1 / 2 : ℝ) = Real.pi := by ring
   have h₂ : 4 * Real.pi * (1 / 2 : ℝ) = 2 * Real.pi := by ring
   have hi : HasDerivAt (fun s : ℝ => s + 1 / 2) 1 0 := by
-    simpa using ((hasDerivAt_id (0 : ℝ)).add_const (1 / 2 : ℝ))
+    simpa using! ((hasDerivAt_id (0 : ℝ)).add_const (1 / 2 : ℝ))
   have ho : HasDerivAt f
       (Real.pi * Real.cos (2 * Real.pi * (1 / 2)) -
         Real.pi * Real.cos (4 * Real.pi * (1 / 2)))
       ((fun s : ℝ => s + 1 / 2) 0) := by
     simpa only [zero_add] using (hasDeriv_f (1 / 2))
-  have h := ho.comp (0 : ℝ) hi
+  have h := ho.comp (0 : ℝ) (h := fun s : ℝ => s + 1 / 2) (h' := 1) hi
   rw [h₁, h₂] at h
   simp only [Real.cos_pi, Real.cos_two_pi, mul_one] at h
-  convert h.deriv using 1
-  ring
+  calc
+    deriv (fun s => f (s + 1 / 2)) 0 = Real.pi * -1 - Real.pi := h.deriv
+    _ = -2 * Real.pi := by ring
 
 theorem angle_zero_ne_one : angle (0 : Fin 3) ≠ angle 1 := by
   intro h
@@ -141,14 +143,16 @@ theorem angle_one_ne_two : angle (1 : Fin 3) ≠ angle 2 := by
 
 theorem angle_injective : Function.Injective angle := by
   intro i j h
-  fin_cases i <;> fin_cases j <;> first
-    | rfl
-    | exact (angle_zero_ne_one h).elim
-    | exact (angle_zero_ne_one h.symm).elim
-    | exact (angle_zero_ne_two h).elim
-    | exact (angle_zero_ne_two h.symm).elim
-    | exact (angle_one_ne_two h).elim
-    | exact (angle_one_ne_two h.symm).elim
+  fin_cases i <;> fin_cases j
+  · rfl
+  · exact (angle_zero_ne_one h).elim
+  · exact (angle_zero_ne_two h).elim
+  · exact (angle_zero_ne_one h.symm).elim
+  · rfl
+  · exact (angle_one_ne_two h).elim
+  · exact (angle_zero_ne_two h.symm).elim
+  · exact (angle_one_ne_two h.symm).elim
+  · rfl
 
 theorem angle_smooth (i : Fin 3) : ContDiff ℝ ⊤ (angle i) := by
   fin_cases i
@@ -196,7 +200,7 @@ theorem common_x_endpoint (i : Fin 3) :
 theorem common_y_endpoint (i : Fin 3) :
     Elastica.yCoord (angle i) 0 1 = 0 := by
   fin_cases i
-  · simpa [Elastica.yCoord] using sin_f_integral_zero
+  · simpa [Elastica.yCoord] using! sin_f_integral_zero
   · change Elastica.yCoord (fun s => -f s) 0 1 = 0
     simp [Elastica.yCoord, Real.sin_neg, sin_f_integral_zero]
   · change Elastica.yCoord (fun s => f (s + 1 / 2)) 0 1 = 0

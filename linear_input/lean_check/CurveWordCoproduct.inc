@@ -319,7 +319,8 @@ theorem biPower_eq_pow {ι : Type*} (P : BiTensorSeries ι) (n : ℕ) :
   induction n with
   | zero => rfl
   | succ n ih =>
-    rw [biPower, ih, pow_succ']
+    change biProduct P (biPower P n) = _
+    rw [ih, pow_succ']
     rfl
 
 def biExp {ι : Type*} (P : BiSeries ι) (u w : List ι) : ℝ :=
@@ -436,7 +437,7 @@ theorem biExp_injective {ι : Type*} {P Q : BiSeries ι}
     (hP : P [] [] = 0) (hQ : Q [] [] = 0) (he : biExp P = biExp Q) : P = Q := by
   funext u w
   induction hn : u.length + w.length using Nat.strong_induction_on generalizing u w with
-  | h n ih =>
+  | ind n ih =>
     by_cases hw : u.length + w.length = 0
     · have hu : u = [] := List.length_eq_zero_iff.mp (by omega)
       have hw' : w = [] := List.length_eq_zero_iff.mp (by omega)
@@ -495,7 +496,6 @@ theorem biPower_tensor_sum {ι : Type*} (A B : Series ι) (n : ℕ) (u w : List 
   have hcomm : Commute L R := tensor_left_right_commute A B
   have hb := hcomm.add_pow' n
   have he := congrArg (fun P : BiTensorSeries ι => P u w) hb
-  dsimp only at he
   rw [← biPower_eq_pow] at he
   trans ((∑ m ∈ Finset.antidiagonal n, n.choose m.1 • (L ^ m.1 * R ^ m.2)) : BiTensorSeries ι) u w
   · exact he

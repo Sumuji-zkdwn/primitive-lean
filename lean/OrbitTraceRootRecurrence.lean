@@ -142,7 +142,7 @@ theorem rootMoment_recurrence
   have hr := rootPowerSum_relation nodes roots p s a hroot (p + k)
   have h1 : p + k + p + 1 = p + (k + p + 1) := by omega
   have h2 : p + k + p = p + (k + p) := by omega
-  simpa only [rootMoment, h1, h2] using hr
+  simpa only [rootMoment, h1, h2, Nat.add_assoc] using hr
 
 theorem moment_recurrence_unique
     {K : Type u} [CommRing K] (p : ℕ) (s a : K)
@@ -154,7 +154,7 @@ theorem moment_recurrence_unique
     M = N := by
   funext k
   induction k using Nat.strong_induction_on with
-  | h k ih =>
+  | ind k ih =>
       by_cases hk : k ≤ p
       · rw [hM0 k hk, hN0 k hk]
       · have h1 : k - (p + 1) + p + 1 = k := by omega

@@ -1,0 +1,1031 @@
+{
+  "schema_version": 1,
+  "source_commit": "1f83367f9680319849a1e0c5288cf7b5a19efb86",
+  "target": {
+    "toolchain": "leanprover/lean4:v4.36.0-rc2",
+    "mathlib": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
+  },
+  "scope": "Current source migration only. Original integration manifest, Git source objects and historical validation records are retained. Proof validity is checked separately.",
+  "changes": [
+    {
+      "path": "lean/Elastica/ConstrainedSecondVariation.lean",
+      "old_sha256": "0f6fef7f9a1b625f1662e77d413c6797415ac35d09ba31b59fb914f04dd8b01d",
+      "new_sha256": "5e03d4a8b808d82a7d44c644cff350f3c0543cb9b63bec76d341c314b6aa8454",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/ConstraintRegularity.lean",
+      "old_sha256": "cbc7af0cb4815acda77a7d363f716c7da0df0987ec7f665d18cc26003f9808fe",
+      "new_sha256": "876339989dccd25d7216c1509883c88f420e9d451b593621a44f444353c37ef9",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/Equations.lean",
+      "old_sha256": "588563ce3b56c21eebfcfb9df36e8ad5b0e052897e689b6f90f673e75f6419fa",
+      "new_sha256": "583b32533be459120ce32e81371cf99061e95af5a180e295dc5aeb1d6beb8118",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/ExactVariation.lean",
+      "old_sha256": "76a8b04f8b8e05f4c876e5cd02968995e0b839cf1fff56fcdd46c62dd290cdbb",
+      "new_sha256": "c811eae6b912c6beb489795dd1b6dbbe6a6ec3d41c26a8ead48613a998532744",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/Geometry.lean",
+      "old_sha256": "5a7d021116a5ecc099f33f2cf4fbfc2189ff2b8053aa3065a10d4fcc4a1bdece",
+      "new_sha256": "d552dd7f1669c6f7d17f279532a9f8a1ca1658c34467642b576deb9e22627d05",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/PowerLogResponse.lean",
+      "old_sha256": "4c8cf9238a2752d78a3cde207f4aea97c8649259a5e3bca8baa70b02abe560da",
+      "new_sha256": "1e5e706d23c77bad9519c105589dd90ea798689d87e7bd47551b2943f2ada400",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/Reconstruction.lean",
+      "old_sha256": "20e2c467cfabcad9e2d11669e75f2183b216a1effe090bcf58290a238d21a297",
+      "new_sha256": "214b91a4ce12285b27141a5fc1a4851cc08bb88db83fa18909e7aca346fbe41a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/Scaling.lean",
+      "old_sha256": "b7c8078c62baf4e297d40db237dff1d71ec4245fc4f8cc812d4432735de254b8",
+      "new_sha256": "36ad906653f47e5a715daa22bcbf476ff03046375f47a48228c99be538be6763",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/SecondVariation.lean",
+      "old_sha256": "2b592aedc1f4ec119196ac6a4ad04ff2376a3521d5f1276c014946d3b60bfcbf",
+      "new_sha256": "fecfe0a5b9e9e8c33e34c29ae81bfb8f0559f15fa73aa1c506bad65132186228",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/StraightConstraint.lean",
+      "old_sha256": "93cd7f280bb2f9bf28727dcc6fc474496f8f37e8db09b2cd04a995e32c0af66e",
+      "new_sha256": "acf28fb8147192ad916ce74e24da746b3466c67fe23d70b5aae84faa54a8800f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/Variation.lean",
+      "old_sha256": "0816fa64e6d6b63c4cb8faa13114586f06a17928d2b948738e68c08276263e5f",
+      "new_sha256": "68064afc3e05d890fca2540e4a34479ed8757b0b866980816017669ee1b266a9",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Elastica/WeightResponse.lean",
+      "old_sha256": "10e2084516c9e98d1b3f12feed1b0cd56c4dc9780056e3a0284fa9623f8ec60d",
+      "new_sha256": "265d964c768ba9f6ce3d4bd7d4f06d406722b3ce68a2e53bf29a3ab3cf56a245",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceDegreeGap.lean",
+      "old_sha256": "ba0deedfde9d843cf6a736e7f89a36be21fe429a680603dfa47e42d0f09dc396",
+      "new_sha256": "d9fae58a23aeabf29b2b8495efaf30a2d1d6de4877a2ea2f23f19ac014550964",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceFastNilpotence.lean",
+      "old_sha256": "256150323648905715f48fc8ca60187b1750135c2cf8075a275ccb3016fa9720",
+      "new_sha256": "3715fb3e746492b1e9bf614f1de68a4e06831bac78e1e3950dfdc581e5e5f51c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceFiltration.lean",
+      "old_sha256": "214d3d38e89404e47854720c6b6bf80349c1dbb7483a761b33ecbd5ff08a900d",
+      "new_sha256": "29059f3ee92efd65878adc4da1addd994cae1e897a803bebcacf0c303153e2c1",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceFirstShell.lean",
+      "old_sha256": "3b535240237ed85f687c349ba95307477e911e10712875be51487ec1a7f2828b",
+      "new_sha256": "41dd0a51d3e4752d0dfe73f94ef05dad70307ccdd2741a92e401885bcb12e696",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceJordanIndex.lean",
+      "old_sha256": "c9ec0deeb59c4dddb66fae7b0564d7f369c969cf9c50b52ad4fe2d4b32f65064",
+      "new_sha256": "0f2f12e5dae31bc1c90e85fbb8cd6172c30614af43a8c46f7152f9fc4edd0ce5",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceLeadingDrop.lean",
+      "old_sha256": "be32ee9012dccd3ac04eaba6781ddb4922b66c161494d550f8923724c41aadeb",
+      "new_sha256": "4735fcb4c7cfeda2f59cf88115089b7bce1899f3f5e75873488058d07dbe63c2",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceMonicSequence.lean",
+      "old_sha256": "c27aba043934705937f09ec2e5068bf53bbf8161d16118d42a15322a871dca19",
+      "new_sha256": "3eeed1b2cb651f69a8f452f807448a7bbe4c6f6e705a643a73fb66594e706707",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceNilpotence.lean",
+      "old_sha256": "92f44e7892a792be6f321f8d2b66cc4117aab4c3530a9dae6fc46eed3a782fe7",
+      "new_sha256": "44cb4774affbb50b40c08813c8a179dc2adee5fa9eab30f64b8b813b6ddc1188",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/OrbitTraceRootRecurrence.lean",
+      "old_sha256": "73bb6c6eecf78019bff6750f409cb9e6bd0591e2651d22fc1886945f18522aac",
+      "new_sha256": "9a85f171496c040ea8b0a75579a9905619a47562664b672b705a58f091e3bc1a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Research/FiniteMarkovTransport.lean",
+      "old_sha256": "dfae3b6c58fcd69fc37bf53e4b2508039899d3db89cd0c95976a5bee53697d47",
+      "new_sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Research/SiphonPolynomialE.lean",
+      "old_sha256": "37c71861a769b3d6970b0ebbe0a51fb24ebf2b6290ccc1e7240f081a188db217",
+      "new_sha256": "bd1f9d17bb346818bf2ad8ec0e8439e6779fa142741f2116ae8f0b1a2ed6e928",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Research/SphereClockRationalGluing.lean",
+      "old_sha256": "54df9be6fcbf87e447e507dd9f8ffabe9af7f92afb2610466878a57ce7e63a69",
+      "new_sha256": "3ddeea9bac08a3acc0ee4249c645809452e7d1463291c8fac77a7541a08c8979",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/Research/SphereClockWordNormalForm.lean",
+      "old_sha256": "e5ec61b8c08512ac30d84f115fbcbdc46a77615f7ae0c78960d8b4fb94ee2f2b",
+      "new_sha256": "b2083a6b41bfe26557a9bb00a5cb062b0fca4edd683ac1bfbd3c6710e1b8d4bf",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/SelfRewritingObserver.lean",
+      "old_sha256": "86168ee4cfd2cb733c44b791dbb2c9f0120e7b2fde2dfa81caa4cbe62a947101",
+      "new_sha256": "4cfe8a712b6118b5697800c90526a43769a941aaeeacbe7e567f397829ca11cb",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/SelfRewritingObserverExtensions.lean",
+      "old_sha256": "d6ebb2770af782538a344ea2ea53223e8991387b451d60ce8e3da018808bbe1a",
+      "new_sha256": "8010e071ae7e3e0eb0e685a805aca478574828328effba84c7d94cb3ce2be9fc",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/TwoMotionEmission.lean",
+      "old_sha256": "db76822f339dc279c66f3d971ef81e6ebc74a26ecb797b316e3f930072288c97",
+      "new_sha256": "6181d3f1e93c8382950a69d9a89651e4167069bf447a724eabae4856b79b7e3e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/TwoMotionEmissionConsequences.lean",
+      "old_sha256": "0bf04784266ee4295899eae13dcc19e14048e6f5743f6aa72a88b89d1d5a498e",
+      "new_sha256": "4f127bb2a85a7fb1aa0d566c9f8364caad88aed6d015802bc0668acc1cab756a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "lean/lake-manifest.json",
+      "old_sha256": "5781fd49aff59347f594d12cbfa61129eebb10ef293729ead611bd7410740590",
+      "new_sha256": "ff86f77b56654e34d1e708bff9a6e4b93ff010d640ac803d2c91049c17279f95",
+      "reason": "Align the pinned Lean/Mathlib environment with PR138; retain legacy module/export semantics via Lake allowNonModules."
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "old_sha256": "24cbaef7acf55e1276267d5383d3107b695d5caa5ab0f12abd535c594c86eabe",
+      "new_sha256": "7234ef546c5fc48d45ca164754cd64b4e9f4d8f17f1ed9c005a48633de45a64f",
+      "reason": "Align the pinned Lean/Mathlib environment with PR138; retain legacy module/export semantics via Lake allowNonModules."
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "old_sha256": "ce4c4e3d87434b9663f46de25ce34b48a0cf0d392e0a320a0787b4674a2d7b61",
+      "new_sha256": "11c697aebe5b539d74f5069e497a588e7dfab1c4eeb74313f28357e351c55ca3",
+      "reason": "Align the pinned Lean/Mathlib environment with PR138; retain legacy module/export semantics via Lake allowNonModules."
+    },
+    {
+      "path": "linear_input/lean_check/AreaExactVariation.inc",
+      "old_sha256": "3c51bc3a0dd811b8f6c7ae0f0ce7c75aca9f7704a5852db6c89bbd7d76c8f1e9",
+      "new_sha256": "2d30f682bafe67106ca5defddaf1bd9b2d9f24f3207cd2e9f269f693da62d0a7",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AreaFamily.inc",
+      "old_sha256": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160",
+      "new_sha256": "93492d4b242a35ad26f4678a250111c3be8613cc1eba64fe0f616cfd04c4bd72",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AreaParameters.inc",
+      "old_sha256": "e23141b25aa88c8c7f9f4075327b317e28813aee3a652c07c4f0dfdfea36978b",
+      "new_sha256": "6b1f7c1e6f908030fc6b2f4676bce1dda470d197be7fb0ba20b6e708c30e471b",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AssociatesFactorIdentification.inc",
+      "old_sha256": "b46404e503674bce0e9929d0be17c403387bb36a27558a412bf93ddb593d4620",
+      "new_sha256": "605c6d7de977c574e2a73255bababa5b2dee82a1a56d4be7286eb5d3f09b075a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticAssembly.inc",
+      "old_sha256": "d43baa709281ca71d74f4928aebbf6000a8d62e03f17b68a96bf70fd2226b065",
+      "new_sha256": "e4ad61c8522df2da0a7950c6e34be87a8861c7ba631309830364984bdbb967fc",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticFields.inc",
+      "old_sha256": "4c62e86e20def08a6239ff79b1c47590a97ca2d61e2c37e83cda1eb59a90625e",
+      "new_sha256": "3ed404866f34ee21f2a25e270d5b25a7c299df320fe883d871792151e2ece4fb",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticFixedPoint.inc",
+      "old_sha256": "0c60f2fc4b7ea32a3a34b75150a46cf7ef82cbf3931c7c20d47c03e2ada2dcd1",
+      "new_sha256": "861484aa3acb6a6fa5f34d0c72b7ef480e4703a6bf12a739c1a420f367c0c1ef",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticFourierDuhamel.inc",
+      "old_sha256": "67246b3abaaba7985f0ae463b17607956e294592272ef1a4856400b373238a28",
+      "new_sha256": "2ed06c4dbbf319e5e8efccbf6ab02970f2ef39c2bf710edfef215109be7efd67",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc",
+      "old_sha256": "9dbf6b277a73595954f5a7092b584b0f31e60027e2bd05a909a60c0423ec71cb",
+      "new_sha256": "fbfd383eb1c1aaa19c552d7cb3ecca8d3938992a4b6abbf5e08be78a9a1d866d",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticKernel.inc",
+      "old_sha256": "be5130675a6df6291653449c7940dc724b11424e38ec7608c7dda2030a83a9b4",
+      "new_sha256": "dcd716dc6328d9eeae57404a860fbb4ff34aeabe8332fc1a2b74068809b6e702",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticLift.inc",
+      "old_sha256": "204f2f7350ff3ff02dbcc44a8c334930afa7cd1c72db93f47bb92c58c6be9c04",
+      "new_sha256": "ff1cda48d377f7597d4aa060f2a8cebeab1910fdb156bd8163c28cc5519dee0f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticModeODE.inc",
+      "old_sha256": "89c7230330562a266737d32dd05146f1ee21c5e18fa3e47e2ea4bf3b0fa0279a",
+      "new_sha256": "5c23d4b2e340d1e5e13c8372bab4f0823463b7d8c37e5fbb2c6864db5e593805",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticPDE.inc",
+      "old_sha256": "414f05a46e2057c033536201eeefa909c5c248c47a8580e80c235892b0b1f5e7",
+      "new_sha256": "b2c92006186f946a303f1ceb9d3ff8388039f229419c42aaf2eff16874cd8af8",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticPhysicalMode.inc",
+      "old_sha256": "381ac8ae9c8e31cb1235dd5b6b839f1b96444fda8f3eec9851bd881cf3866771",
+      "new_sha256": "7c34a9adc1427cadbd87bc221c53a929d361163826b73664c9cf15e946cd5cd1",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticReality.inc",
+      "old_sha256": "20c32b4fffcc95d30930897858b8a610b827cb52fd7548523ade5367313af6e3",
+      "new_sha256": "0a9cb3936cb8f7eab4c4ee8dc058ad641a03ab752adb3c58c12b09d56991bd80",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraAnalyticTransport.inc",
+      "old_sha256": "4e1b5faf032ad403c583b8ef620e5778aa474da4570e5a3a9b57596d1845f8db",
+      "new_sha256": "16b73e11a7a397d9008cd45428284a98dcde1ed04fe06494a749e8ffba44e638",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraContinuumCalculus.inc",
+      "old_sha256": "3e8b304c9b869fc0ffca85ebab2e9d0844a7c05e2be899002847685bed910b55",
+      "new_sha256": "55654f8df28770d2ddabc9f5b97a829ddf2b306437d6fea3e35126db0ceee230",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraContinuumLimit.inc",
+      "old_sha256": "787e414e6718b3b7edfc434ed6b60136161bbfeb17a90d5f5adc7c7758cd4de7",
+      "new_sha256": "93247b7102183e320407fcb8070829726860b335d753937e9c48fcd6eb8d9ac8",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraContinuumRelative.inc",
+      "old_sha256": "6240d139c72e288edbcf074c0c6ae402a65baa5e9588f9878fb88504e19aef6c",
+      "new_sha256": "5bae7cd1c7e31136715674c78c40c1142b92182945e4996560f8dc78f3c0f90c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraExactShear.inc",
+      "old_sha256": "5a9add60683f3f4b68c89576afd16d6e805b4169617a797baccff7f6fe6e6662",
+      "new_sha256": "51a2065298cef83b2f60542ad55f32b9dddfe3b5c318e214825834c567f566e4",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraFiniteEnergy.inc",
+      "old_sha256": "f9b6dd3f56d95e59e7d999e8f536f8c2e14cce5baff06afa53c2037d7959e198",
+      "new_sha256": "6ee32c2fe05bde06a9e6d6002bf1068a6d868129afe7b5e4e9b9b7822872459b",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraFiniteFlow.inc",
+      "old_sha256": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4",
+      "new_sha256": "f03e2025cdc445fe57d115ee6ed8dab008006f31646f108ec158c21acbc80eab",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc",
+      "old_sha256": "0d9958e36c834a3549ce1446d68bf321ed350813b3a77924e16d65cd80324735",
+      "new_sha256": "353ec4b727da11f35d61d99cefbf74f96980777aab1efc5eb396207d8d889fb0",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraFourierDerivative.inc",
+      "old_sha256": "add27799f5f44afcc6a98e633f7b69d7bba88e3d066177ccfa6e682c93a0cbc6",
+      "new_sha256": "20868c947f193d8ff75663e122772527602f932ceed1312557d407ee5c29d902",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraFourierProjection.inc",
+      "old_sha256": "99904017798c931f97cfb3ab30a1011692df4a0dacb724427a558925e946e879",
+      "new_sha256": "e7feac6fbd811d5ab72d78eba4000e2beee83d271ab1c75d8e645c86d2c1a272",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraGalerkinClassical.inc",
+      "old_sha256": "7aca8935f087081acbcdfeb6d4369f78805f293ef15b051be35d1bc2f4ba2102",
+      "new_sha256": "a67ce946e184768428dac3a6c645f65752c4ba11dbcf91791bd7653d5a69dba3",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraGalerkinFlow.inc",
+      "old_sha256": "b5c301bee1b0d6fb8160e28e6265de4b1f77446447082a9bee7c3c99a1524bc5",
+      "new_sha256": "0b21bbe1eecfcbcf65632f767d375943cdfef4649aca2bb9baccc963f02636d9",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraGalerkinRegularity.inc",
+      "old_sha256": "2425cdc590be033d16041f6ea48efb8069e9b908c8a708f89d030c4a7e9793a0",
+      "new_sha256": "0415c2c520341bfa99a22573970fee57a360330fc5ac7b9b06146bfc423e1aff",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraHilbertError.inc",
+      "old_sha256": "236547bc5bed9e46dbecccd7eda24a35bc276d6dd1a1a3445b277f127ffd9aca",
+      "new_sha256": "71307b4016ee5f56253ca9d17ded1eae11ad7b27e39e40bdfb13beeeb35e0d00",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraHilbertFlow.inc",
+      "old_sha256": "685a9193c47d25c43c9c14fafd6ed5e60807eca605560cb87d6be7e67ca95202",
+      "new_sha256": "fd89a10937fefd252c150123358aa34bf5c4cd292876febb107701c6b36a338d",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraInteriorGronwall.inc",
+      "old_sha256": "10a58f4ceb926edae3c7a53c5ac509feac5fa354c6247d2ed8cf929d29674804",
+      "new_sha256": "670499a694ad3921cc08adf9de0d96b00cdeea105a2598e0cd39e1d5e3efe85c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraIntervalFourier.inc",
+      "old_sha256": "39ba941d462d3063e76f5301357a2addf7aceb05f0d650f6b80a89b6989325e9",
+      "new_sha256": "996f647323c8f1951853f9a21a471ed1ce8719e986471d8f418ac4ff8f9ec657",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraIntervalFourierProjection.inc",
+      "old_sha256": "44ed0faa606aa538b4f1b7209d227469d27b24287d25a8fcf04e1d0efc53304b",
+      "new_sha256": "6c0e755ad1859bdbebc35d8e2c22e661c5fa78e5c97b47a7ed255450918f424e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraJointGalerkinLimit.inc",
+      "old_sha256": "acaa02ebcff313bea0bc1ca488eccf22bd26e99a251dcb22d7555900fadd699e",
+      "new_sha256": "a2f9de5969ca37170f1ccb01ca9ef086c5b9115a48da9566b313e2c6a6bb4169",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraObservation.inc",
+      "old_sha256": "ff5f060d64f6a4a64ac6601e1c20d38a4ba14411a100a9fca120488ca807e9be",
+      "new_sha256": "ceac984bcbd31d17120c113ec062f0d7c3c0eb12331b11a9fe474e8616196ad5",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraPolynomialInverse.inc",
+      "old_sha256": "7d72ccbd7dbe14dbb53e25914bd4505e5632d3f35b7897127e53eb29b051c100",
+      "new_sha256": "a89b16a0646cf4fd4e4ca6715e05e5603bcf3dad08a681af730da605f11b43d1",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraRealFourierDerivative.inc",
+      "old_sha256": "471c7f83cfd867a15a606567b5e9c8bfc44b20ca62ae54f0cb739717b8648ae4",
+      "new_sha256": "9b476ce23b27b2db67da4b16297d3c5b1a4c1322a9eb07456a389d60b26f7eab",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraRealFourierProjection.inc",
+      "old_sha256": "e674267e029465b12efc5802b67433f8f284e9bb369b5556a2adfd97fa1ad660",
+      "new_sha256": "0d80c04037cc9da80d8c53bfa21102992d1f66f328fa52522345ffa141880661",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraRealGalerkin.inc",
+      "old_sha256": "a513e9497244a8e879ca997058050fbd553197ab8f54e61c06865ab2cfbb413b",
+      "new_sha256": "3defe31f622a714adc9c49def2d4b99ce1c3b92e3946b3d9fa6057fb44fdf7f0",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraReconstruction.inc",
+      "old_sha256": "1dc05a8c995ac116ee8ae6d7e41eeb55c637e6951bcf8d93b9bf17aa8fc9d927",
+      "new_sha256": "1902b0c667ab1f0389ccb157a1b73efae2e38c66008229681b5a811aeeca701f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraRelativeDynamics.inc",
+      "old_sha256": "8a4b52d12329349cb8603b84d49089d0cfb329ae16c662d8c881031e17d081ac",
+      "new_sha256": "a3de3895cbff7de7da6030466241865d4f7c6c47ea8da8648575d552d139250e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraRiccati.inc",
+      "old_sha256": "716421d68cb38393668db574790e032308a5a3d1357218fb1424809af755fddd",
+      "new_sha256": "10661fe17cb4a1bd8303204aec7d29642e4194fbb365981bfed2eb2bff3c7dc3",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraWeightedDerivative.inc",
+      "old_sha256": "c6261358657f75dd34e9838c1b5132ff3be27c9cc47d0d029866e89ac4dac526",
+      "new_sha256": "96daebb78707fe1dfda2a4c5eae1a55105ee3ee627087761ce2c7363b6d3a832",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraWeightedRealDecode.inc",
+      "old_sha256": "1881b2038f950da73b81e2ff80c0653a5e16a8e465b35e5a263ab031a60bc70c",
+      "new_sha256": "325b73d1efe79f2fb23d0b876366e0cc3d9f80400829d67b95f6ad51cfd124ea",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/AstraWeightedReality.inc",
+      "old_sha256": "c6859eb20927b8ba09d7ae346a8a04091f8b9989491c099fe673c679a8382246",
+      "new_sha256": "ff85fac821cefa38540b525e252b244b38adcd318192e88476d67cf5e85f3fd1",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/BranchFibers.inc",
+      "old_sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a",
+      "new_sha256": "721eea173d1fd320b5fddae96f9d1fd89ecca3356454f0c8c5689764783d1903",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/Calculus.lean",
+      "old_sha256": "6adc1633283e928968d877db17ca58b647cf913d2ee68f41043e77a3fecc629a",
+      "new_sha256": "51122d391cf9c09ee1f25b59b89a99f064787dc06b751302670e468a30974bb6",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "old_sha256": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98",
+      "new_sha256": "303890a80f7be3623b98ac2de60c910711ee921f52a0e689d4c06fe38edd9e33",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevSplittingField.inc",
+      "old_sha256": "5bee36fce9a721ce50effcb3568c131d8029861099af9e309c1510b83c6b970f",
+      "new_sha256": "2d353ff71828222a2ebbe9f111915217df1d3831bf466764faf6c14388c69ecd",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CompactLocalExistence.inc",
+      "old_sha256": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab",
+      "new_sha256": "11ed615b24f112c0f2b35329b83450a92e366aa9d9d9ffe16a72e5e56dc195f3",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CoupledTrajectory.inc",
+      "old_sha256": "e575924d3694a4cabaecde04a9f31266ed4a640e5d01c6ef1843de804653f70a",
+      "new_sha256": "2862160fd805cd2b16f9fa145a9f3992e11d667d1c12cf8da5b1fb68e2458604",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordArc.inc",
+      "old_sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
+      "new_sha256": "f08edf6dd7648e613a6d2b9c5bfefea2de9053587de564cdeb92bcf5dc258800",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordArcGenerating.inc",
+      "old_sha256": "2ce39ed55d4563acb3f47f5465c60ba6533d3c47f4e30e9dd8815b989013658b",
+      "new_sha256": "4ac888aafa51dc60ca2a27c3060d88e5009707d322980e94ed7a0928e46aeeb2",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVArcUnique.inc",
+      "old_sha256": "fd5e0df19a0d955a2649513a9d3d9cd1e2bcc20d9bbd1491e04928c0ed93a21a",
+      "new_sha256": "7ea87dc11e88de71093c6ca17988a8774bdd10c193213535acccfec19ce79cf1",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVCanonical.inc",
+      "old_sha256": "91511adf72ac392eba0f66f623f303b493ab85f3d136a7fd727f3fd72fa1feca",
+      "new_sha256": "079be58e489ba433557f973b8dcce23a79fbd0f3c81d989fabae9265c0f032b5",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVChen.inc",
+      "old_sha256": "762b4500cf9d316a3bfd84299a6deeb4633fb66379ea45abf5bc109c5ca9cc62",
+      "new_sha256": "bf045939f82274bc3c99fd49cdf522db934cb39399332d690089933ebe04715a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVCompactness.inc",
+      "old_sha256": "44d31f274f9c04ae875e4018b6d7e0451d10b65a6c2617ea527f407d1fea7bad",
+      "new_sha256": "58de982a541ca33c2a950428a5231f42fe2c9107ddb0355e7134ff44afe4cac2",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVCoordinates.inc",
+      "old_sha256": "a1894e4bb2ab8a0acf62d3305fd33c4552ad38d3db1d0bb51def45581af88776",
+      "new_sha256": "941821eb1a5f9523c3ff3071fba88cd60161a23c22ada003051ad5ed74c7bccb",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVHamblyLyons.inc",
+      "old_sha256": "1950339aa39218755811bdf885f748f4b65f87ebd16da020338abc931eb1cc2c",
+      "new_sha256": "5e6a91014ab91e3bb3908855807804a7a546d8f304e89ec53ec89690e23bd0da",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVIntrinsic.inc",
+      "old_sha256": "bdf294af0c8cdd4b3bfe95caf9002c3a22c6793e636b3a2088afe408d669227a",
+      "new_sha256": "7168bb257bc4d139f197ef50f1b97b34a4659aa695c8e49e46b58eb8ee4fcc39",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVLoopErase.inc",
+      "old_sha256": "0d11b32a522309f58273ff4cc655c2009af18052dbeed5d1c58d11b0dcdb4c76",
+      "new_sha256": "2eb0a3035e2f8cfed75c8d9f07041f2bd93e7af9fabacebbcf98ca109fd14cb5",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVOrientation.inc",
+      "old_sha256": "9060480c6470082d744b29d06bc62fc6bee49df5888544bab8512f1a1aa1207c",
+      "new_sha256": "a0c7d02a74ef93804bfc76588fd92e111b64600550dfb6c29bcb9efd4b5fbfe7",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVPathOperations.inc",
+      "old_sha256": "a32d3dd682609a97c2746f7624f0f6a61bb42a3664ef4b0b13c44bfae4f66014",
+      "new_sha256": "781b1d8a06560d554af40b580ca88bff923df900340fd5906b6774f172a435e5",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVReduced.inc",
+      "old_sha256": "7af51157159054980f780ee230aafcbc8a659f7c7ae7993d630f3904fcbb58ae",
+      "new_sha256": "99e15e8feafcbe3aa0bf8d37458c9e7f3505d4984ec4888417194d5c68c5a0c3",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVReparam.inc",
+      "old_sha256": "968b310cefe103155b89c9676d0426c8f2fb1193ee2be21d84885d7ddd3a9858",
+      "new_sha256": "65a690fc81e751f720f1faad0f6320555230b7ae0cee6ba4e08b6c1de369d732",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVShuffle.inc",
+      "old_sha256": "dfeb7156a1a2df8d63bdc3a2d3f20428e2596bf0672f78e76936a5d3473ff607",
+      "new_sha256": "7df983bf267eb990b8b6d5a313f7b93b672d131916c7d7ce92df07009184337a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVSignature.inc",
+      "old_sha256": "b3f2b79d9af09ecdbb965573b618c9656ae8d330610747c9386c29cd1f00d505",
+      "new_sha256": "b1c004d4f71c84545f07bcd90a058d055fe0caf9e8b1158191487c911ce8737c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "old_sha256": "b403ed17632f0f1c3b406764fd3223fd84e4b46a1613fd4089937b12843f8104",
+      "new_sha256": "2452382e3fc8bc1f7e5f003ffb7603871fbb707906ab564e6f6348b96d062752",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBVTopology.inc",
+      "old_sha256": "51eff4b2b634d0551d0f2c8442c39a82d87d173e05c58e78b61635fd722af197",
+      "new_sha256": "a0272372cb8be0dca2ea5176add6c414f582739c11c2828c49d182489328b179",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordBoundedVariation.inc",
+      "old_sha256": "2f1efa023de0fb4451503b7f4a75ad9c6d0ddfb201ea4444525aabec74e2d793",
+      "new_sha256": "520caee94eb26ebd433accb089d44d5231bfabef198b9625cda4976345e0658f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordChen.inc",
+      "old_sha256": "b916f789273625cc3945a78026b97de7ad7eb56d196790798c14ca58c2795f06",
+      "new_sha256": "e95ad251a22dd12f2e35f3372246b43d8678692ef9619a43ac8e1aa2a664eee0",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCircleWords.inc",
+      "old_sha256": "a2d009f7c006dc9975b9b4c03bb93115570eb4f05308ec8097e64c1923c02f86",
+      "new_sha256": "594043ba13ac3498da7487e0e017592cecceec878b4a10f118ea3cfb8dc51736",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCircularMoment.inc",
+      "old_sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0",
+      "new_sha256": "3c4a11aa8460cd4d8732c07a6f05c966a87929a7b92fdde60fb2008aa196523a",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordCoproduct.inc",
+      "old_sha256": "fef28191c26b130453e8c15bb748821d0310685a3fe9521f0074959c8c68b809",
+      "new_sha256": "5d514ed53339acc6c84275edf1c5703cdacb69c075381d1f3fdc3946a366f299",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordDirectedGraph.inc",
+      "old_sha256": "445ac49f6187a5c455888969fad99a6b25549cfb51d0381ee9b1080f1baec456",
+      "new_sha256": "74566f796d5d289f593709d324630587530789ab0d76b21565dd10e2b316e5dc",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFormalSeries.inc",
+      "old_sha256": "6c5b5e02b8f1b33defcc5d289de59506db49276e3228b7f8feb292c70c9c29eb",
+      "new_sha256": "2e3619373d95c79cdd14ca7c601a1c7c92e7f4aadd94ed7856b135cb9877960c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordFriedrichs.inc",
+      "old_sha256": "7f036b4c8a9d5371f97d19513c5238cb27ef23b5828d2772545fdd9af52249f9",
+      "new_sha256": "5e6a7c80d8af4fdd66e2e4d5b23cdabe1326fafa56632a186e2629812dab4e2b",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordGenerating.inc",
+      "old_sha256": "465cf8b11d1c8018fe0c5a61e9b084d830ba30184109a26a3c44f64588f49c37",
+      "new_sha256": "c1956801dc7a5bbebb37ef92abb9b4fcb4b8352a81574821f308ac09b3ce4d04",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordGraphLimit.inc",
+      "old_sha256": "023a1fff0eed60635e15b8e7b11d6aec7b57436f995a373526b34a6a2f2109a5",
+      "new_sha256": "665ff2dc86240cac205d8fa4ccd356131b561a000064e3ab5c2f17d9bcc80165",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordHeightMetric.inc",
+      "old_sha256": "aa92c23ed32592c27bb9ae409e28483ea06626ee953b2442c7bdf921fd9cdd1a",
+      "new_sha256": "11bcb120e400aaea10fe9019c90b8d3e4bef33b2c857658ca5d80984ff2a71bb",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordLaplace.inc",
+      "old_sha256": "4569a18082b885b1c1acc8efbfd0848486ded6bfea528d0823e2897f081dd6ce",
+      "new_sha256": "9bb258b18871d07c811def047e92fc9a35730fe9d1e1cf2545300c2a4fe8340e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordLinearAction.inc",
+      "old_sha256": "8f6dbea53ed71e76e18d6d0a610bbed4f80047b1afd97e6df8f5f239589519a6",
+      "new_sha256": "6a463752377115ee361bc71a6667a76036ff9c0a3a48ab5d54f7b41b0e449051",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordLogFormula.inc",
+      "old_sha256": "07f83ed56ccacd0a07279d832ea4dcf873566d9d877ef121ef3c5e2a5dd9aa84",
+      "new_sha256": "2644ef231f1577fef1dac56103e17ff3f84d896fd20474eb22e815611bf1f625",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordPiecewise.inc",
+      "old_sha256": "ddc09dffcd3bd34ecd1c92677280415074e900da7636c2c02d709d5ffc11a09c",
+      "new_sha256": "e91204f1e9602c7b1e86c40bd03a3987b4db9ecf35d8817fa3f7712a17d5d503",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordPolygonal.inc",
+      "old_sha256": "a38873c6f640db5603883fd3ed14aab562840cd232e5243431178f2a2984be7f",
+      "new_sha256": "a3cf39a0c91eb152772a47f19c3e0c69d3da306c1b4ec26b638c442a8aa3c232",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordReparametrization.inc",
+      "old_sha256": "8c7fa363b697cc6d30f0f718a9cebd44c3ed8f579bd042259af6e7304425cd84",
+      "new_sha256": "8726ca551032e1f4f97f746cbb59ac1161f177bfa2c7f5aec1fbe764b24f6174",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordScalarLog.inc",
+      "old_sha256": "fe1a2d520c4f95d4160d2a6f26819395f75bef086df0783783b2d5d62403f19d",
+      "new_sha256": "044edf00142a908ba9eebe075413db7db258970f69c3926e15010e4dc58c6d39",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureBounds.inc",
+      "old_sha256": "dad3fa7bfbcbb5ba6da6fcec6eb918b035e0c48b42a94115e16203c6b5f4e964",
+      "new_sha256": "2a49177d64e3c0b4bc753be754dd07d62af92af7f749c33ebbd2014a5960ce9c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureTopology.inc",
+      "old_sha256": "41e0bbd5f192d9c1d2d0fa2ba2c278ecea274591e8df259cdf883eac33930b8f",
+      "new_sha256": "607212307d62d8b942eec31dee225a93e901829ebbe08fe0cdfe678d0de3e595",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSignatureTree.inc",
+      "old_sha256": "ee1eab1e53775c467ad2f870bdb01a66c99d4b24417da216d987fc31c292de07",
+      "new_sha256": "8ac39a194403ea68cf112bc8a17565c08633c15887b80679c22b1d7f8432320f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordSpectral.inc",
+      "old_sha256": "c1abe088a4bd0bc3546e3f994569e5403995625152fa909c686087b15bd98248",
+      "new_sha256": "7fdf9f08040a8709a64d15b6bf11beedfaf3a37269f56c4eba39a06b2515f357",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordStieltjes.inc",
+      "old_sha256": "a1800eb35cb2f2d38697d4ba2edeabd4a39e4217ae0022545e706f1d7f7d9b20",
+      "new_sha256": "e5b2b684fbcb99ac7a767f0eb77a57e616d4a6d7a396010597282c781791b06c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordThermodynamics.inc",
+      "old_sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49",
+      "new_sha256": "ed21c8c0d2c92c0d2e98313396adf41f881a37898587cdcaf87dba3cf6ab1f14",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTransfer.inc",
+      "old_sha256": "4b5c8fb3d6fa70207e43bb0eeea3c9c2121e926f858111acb7d4db24dbf3c79b",
+      "new_sha256": "29f83ec2052084bc1adc85dbabb92461c9d8d3f708833f97c9278dc9daaca6dc",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeSampleProduct.inc",
+      "old_sha256": "f7b3f39060edc7622a569243a244f3276c033bef66891c143f6b23d9fcef255d",
+      "new_sha256": "0057c2fe19774fbbcb9a25fe82ce9fe0034520fd32961350987d105b56e5c51e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/CurveWordTreeSampling.inc",
+      "old_sha256": "8a45f983ede5d9952630822422c28abfbfa3fc7e69f590bb4ce39fe959f13c95",
+      "new_sha256": "b8b0800c5ea7d460dfbaf0228c9886798a882948986a153f9ad3efc5aac1121e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/DecompositionIdentification.inc",
+      "old_sha256": "f953488cd473b2d6732dd8659d606673de79486a59f61f82dcf8b05359488eb0",
+      "new_sha256": "1b42b9814fb54840972e4d9d11caebd9de6c9795365bf139d908395c289af2fe",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/Design.lean",
+      "old_sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549",
+      "new_sha256": "d8b91da37eed29f562ef1e6ce35eaf5cc2e841c1639da94ffa5b6fddd9538a45",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/Dissipation.lean",
+      "old_sha256": "2f98fe11dd728aa08038a1d3e01a9440ba83049b6dd4d3d1561a3dd140aac8e8",
+      "new_sha256": "50208b1f0b6c12ef5e093ea21a39fec76b503ac6c4d4dd052649a17b330f604c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/ElasticaCurveDistinct.lean",
+      "old_sha256": "4a75d4f72d44b5c97c77b1868103e6e159814c3b97cc99c3695a61b406dae510",
+      "new_sha256": "ec917f20ca4b69706dc102d4d4f0da681d3ba7429569a52720f1eb32b4d1d998",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/ElasticaFixedBoundaryWitness.lean",
+      "old_sha256": "eec0c71828bd908b9cfeee7df4bad3e98db933ee9ce04594cd6f1ac0fcb91997",
+      "new_sha256": "dad1b2c58ac808253dfe59fd15f60fb0bfc07bd67592e908075a3a14a076f1c9",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F0Counting.inc",
+      "old_sha256": "fa8d45beeca6b7df13024d377254bcad9c8622cd07d70236f3d478b89dc5df60",
+      "new_sha256": "b776b5d72327030a616c540a54dc46d22ebe76c96a4a0e554b7c78c630044e73",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F0Retractions.inc",
+      "old_sha256": "7dd831498e91cce9806f6f97362c8b4f70c9239ab23fdd26e9f7508b10880b05",
+      "new_sha256": "6f4fca83639987939d8777620ca2e59b21f296c19251c28713bc4fb336d7afb2",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F16CompleteRank.inc",
+      "old_sha256": "73c4db1e75d648d0bf584bfbf27eb709389ed67f5cdfc3bcbcb2a6bf9662a222",
+      "new_sha256": "6598603b7bc0b987caffeae44561e2cc0c09469379a18b3cb6ca9bedb90f9249",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F16ConstructiveRecovery.inc",
+      "old_sha256": "b5c965ccb7a9b7f9a8110de0c8ac3aa0bcda25618d1602a32928fddff063e9e7",
+      "new_sha256": "f24e4051ab5f26971f6a6bd85ef10a2fb23ba153658c687215c64a632beb3812",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F16FullMatrix.inc",
+      "old_sha256": "5bcc1101b95cba1cfa38c099b797ea0c9677713a5cb69ddb2396dd8ea72084e7",
+      "new_sha256": "da57cc221a0507b8f00fc601e568064c410c12d9c23952b0cf344dea3c802237",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F16RimRecovery.inc",
+      "old_sha256": "8ece9145fa42f4de0f5163ed2dec78c4d7bf866b2f3b0fa45c80ec93461b1ccc",
+      "new_sha256": "adb7ec59741e2ac686fed1e1086a6eea4172b609d4174b95ebe88515878c7e74",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/F16UnexpectedBridges.inc",
+      "old_sha256": "ecf929ece3d986c75e9dd1793646db765983a159d2f5cef8f886c9793eb305f2",
+      "new_sha256": "4a7adf8e3c7a29d3d039d9b36d21f67c0bf72067e24c1863ace922af46cbfef0",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/FiniteInternalUpdate.inc",
+      "old_sha256": "8d919b3d39be880fd82959c7be1ee9dd40e9f5d2d009d70af95bbb7dc8e1b2b9",
+      "new_sha256": "c08f77988b677107a50aa383a758e0a79d6936698c73db7d0aeebbcbb9ac5443",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/FiniteObservationSeparation.inc",
+      "old_sha256": "431492dd7339e1f66dd91d331475058102d8bfe463e7eb87eef4d7bbc96fb2a8",
+      "new_sha256": "6dc41f74829ff6ea3fc5be9b4a6372d103c0705851905d6536720bb1d4085f90",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/FiveDimLagrange.inc",
+      "old_sha256": "ab31543baff700b42f435d7ef0bac188cd82743ba0bc41cefa627fd907c46d45",
+      "new_sha256": "7b81331e861cd15d42ef03cfd4564a8c225934cb875ac214518b952582563527",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/FourBayes.inc",
+      "old_sha256": "0c6f48956e71c9bcd691cc43eefaf3939f91be9fb747fb1a0e3f1d037e6ed441",
+      "new_sha256": "7d16a450108d831eddf2de770fb36a7e13fbe2196a178d4f438691ddc704d48f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/GlobalContinuation.inc",
+      "old_sha256": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664",
+      "new_sha256": "ff0286828aeba12b48043f2f7ed2cbcd7e472949262250c8ee3fcdcc284b737f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/GlobalTrajectory.inc",
+      "old_sha256": "67b5494e57c0f9a9b4020486f4ea59468a27001601c2a4b34f84157b3f131ba9",
+      "new_sha256": "66d841d55f2c3e41a01d259d1afb9430f60ed71d0a7bac3d79f09783b7d0db3e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/Gradient.inc",
+      "old_sha256": "2aab575d80c5eca3871b68ac141b179ef7ab072e071097d3dfe758b13bf96201",
+      "new_sha256": "c692ba9bc9ad9dbd2ec767684c9d5ab9c02476ded938188ac8aa6cbf570a9e48",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/GravityCocycle.inc",
+      "old_sha256": "50157183f74a2117a15b242d4dbab3ba20d736144f99fa946cbe7fc6d8b77eec",
+      "new_sha256": "96863eccbf84bdcd628e8e482bb97277b8844027921ebab01d23cf3b2ebc8128",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/GravityObservation.inc",
+      "old_sha256": "fb17cb8ecfab81bf468fe9288f8f7b543b603258498c9a520a753c701bb83374",
+      "new_sha256": "79267f6f6270fcb0d4c20abc7b26fd4c670cb08365491db68e2c90401b3dcfcc",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/HistorySignature.inc",
+      "old_sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45",
+      "new_sha256": "3b1a366a7be6fd2e73447bc883b8026827ea11941fd9025c8c866b50c4e634d4",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "old_sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143",
+      "new_sha256": "a50c9225099c788d2df76b7b325b866a61a4f20613e0366b8883cd3800a0457c",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "old_sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e",
+      "new_sha256": "f69f3aab3b196ebc2064f930527459a79ba4b695bfd09893d360248b44c0cc7e",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "old_sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459",
+      "new_sha256": "87a4ea5c2093c2ff785addbe011ff973284ff11945a8ec328a724ba596fcaefa",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "old_sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9",
+      "new_sha256": "ae07897b3238f9028c269da496753b441dc6f713784f7c83243453f5d4df9140",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/Observation.lean",
+      "old_sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6",
+      "new_sha256": "2c58f8452d8ad4e1a270504b3213de8919c40340b0ac3b5f6d1407fddc96419d",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+      "old_sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+      "new_sha256": "7019eb6083edfcdd4382ec97fc8c6a17080763dbd2d6002fef1cfe58297877d4",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/ParallelLocalGluing.inc",
+      "old_sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42",
+      "new_sha256": "27ddbe5a3323a8529e5dc19c0be36e51d0f6ac2340a59687f33da582ef5d0cb2",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/PilotComparisonBridge.inc",
+      "old_sha256": "fbe61417ae597296787b5b0bedb06c31861f05b550200c46909713fffdd4b5e2",
+      "new_sha256": "5eafc5f0be34f6f7bd053078e606528b3c8a285ed8d67c2eeafc76ece703e1c5",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/PressureCurvature.inc",
+      "old_sha256": "4a0365823e7eec686dd940e531987ada928cb0e19ca6901d440745ce9da221b1",
+      "new_sha256": "beb49850219a7db63e5de13199ed7b27393c65ba2e1664e7f2105fb2990756ab",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/StrangeOperatorConjugacy.inc",
+      "old_sha256": "71d22e4bf40c2268d4fcf5fec1ad05dbad72a81062314ae207b0bd7e7d9284f8",
+      "new_sha256": "14440434f42ed951c67110873fdcb6360728e4e0c0fb257910d5e3d385c2c588",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/StrangeOperatorCounting.inc",
+      "old_sha256": "5727034d4ac2f90dde819edfedc04cc615caa532fdc1742cf646d217a57067e8",
+      "new_sha256": "d5a1547a21e3f48720432888be19f478766e13e321cb2b9be53526a893f7c37f",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/TrajectoryExistence.inc",
+      "old_sha256": "db5f37cc4923fd87063a75abc3ae560cd135ebe7c4d79104bd472f22d2dd53b0",
+      "new_sha256": "05639785b6d652165849e43be81cbd18fff3f3b5a8eb5ada10b19d29387a28e9",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/VariablePairGaloisBridge.inc",
+      "old_sha256": "fd91c2b515112174446a2226bbbbe61d6ff01485ca02af14164e3e366239d08d",
+      "new_sha256": "808bfd90971940dadb93593da781ecc67e6b475fa997dd52bb08885c64bfedc4",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/VariablePairObservations.inc",
+      "old_sha256": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35",
+      "new_sha256": "ae4dec60f8d22d8b9a8c3be6dde2e17d0704b711c55c7c1aa9c5f84eeadbc498",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/ViscousRewrite.inc",
+      "old_sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f",
+      "new_sha256": "149d07252da444b2461fc44f5de5862b87992d86500c5802312d41e9566c41be",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/WFSCanonicalLift.inc",
+      "old_sha256": "af0eb49cdd896e3ccd1564b64b4f52da746637a6b2272fd6504520c573684b10",
+      "new_sha256": "f21f17a88b36df9bdaca13702c262b71bc1765542bd93e97503dfa85e77820b0",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/lean_check/WFSProjectiveSampling.inc",
+      "old_sha256": "874c90f744e2bc0b84e606b50b996d11a05f46bfc811bb34ad2867f8b812c5a9",
+      "new_sha256": "20adb4363c886317f3f9acdce70a17d262d90500916962823f3dce9b0f2daa4d",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "linear_input/verify_lean.py",
+      "old_sha256": "5429b34ab52c752aaa742fb58509033a4ad8f53c4850c2104143331782393b7a",
+      "new_sha256": "07bf26531edde242094965b85cec63d16212f4812528637d90947f59dd3af00d",
+      "reason": "Replace deprecated Mathlib import aliases in the existing assembly; retain proof-source assembly and axiom audit rules."
+    },
+    {
+      "path": "tools/deps/derivation/DirectDerivation.lean",
+      "old_sha256": "062a9cd1b7348c4b3305c40f0d506118eaac53aae4cb4751edae708e09381407",
+      "new_sha256": "49d9e960ff8254a05b3a0efd07421c4ea5e05bd94129e38ba3e2be5eec74c760",
+      "reason": "Adapt the proof script to Lean 4.36 and pinned Mathlib: explicit function equalities, elaboration or renamed lemmas; preserve mathematical definitions and theorem hypotheses/conclusions."
+    },
+    {
+      "path": "tools/verify_main_result.py",
+      "old_sha256": "99c50509e50d27fddd1cceab1c4eb47909407a5d42d0137697e95577a654a811",
+      "new_sha256": "8810b0656121c1670666b9712d59b23a761addfd2189cfcc6a318dbe66e8f859",
+      "reason": "Replace deprecated Mathlib import aliases in the existing assembly; retain proof-source assembly and axiom audit rules."
+    }
+  ]
+}

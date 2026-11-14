@@ -56,7 +56,7 @@ theorem integrated_densityRate_eq
   have hp := periodic_product_integral (fun x => V x - E x) (fun x => J x - H x)
     (fun x => Vx x - Ex x) (fun x => Jx x - Hx x) a b
     (fun x => (hV x).sub (hE x)) (fun x => (hJ x).sub (hH x))
-    (cVx.sub cEx) (cJx.sub cHx) (by dsimp; rw [pV, pE]) (by dsimp; rw [pJ, pH])
+    (cVx.sub cEx) (cJx.sub cHx) (by rw [pV, pE]) (by rw [pJ, pH])
   have hc : Continuous (fun x => -((Vx x - Ex x) * (J x - H x) +
       (V x - E x) * (Jx x - Hx x))) := by fun_prop
   have hn := nonlinearRemainder_continuous E V cE cV
@@ -222,7 +222,7 @@ theorem deriv_energy_le (t M : ℝ) (hs : s ∈ 𝓝 t) (hab : a ≤ b) (hM : 0 
       relativeRate_le (u.E t x) (u.H t x) (u.V t x) (u.J t x)
         (-u.Hx t x) (u.residual t x) M hM (by simpa only [abs_neg] using hHx x hx))
   have c₁ := (u.density_continuous t).const_mul (3 * M + 1)
-  have c₂ := (hr.pow 2).div_const 2
+  have c₂ : Continuous (fun x => u.residual t x ^ 2 / 2) := by fun_prop
   rw [intervalIntegral.integral_add (c₁.intervalIntegrable a b) (c₂.intervalIntegrable a b),
     intervalIntegral.integral_const_mul, intervalIntegral.integral_div] at hi
   exact hi

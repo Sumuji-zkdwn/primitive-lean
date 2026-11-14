@@ -38,7 +38,7 @@ theorem rowSum_le_norm {M : Matrix Q Q ℝ} (hM : ∀ i j, 0 ≤ M i j) (n : ℕ
   have hh := Finset.le_sup (s := Finset.univ)
     (f := fun i : Q => ∑ j : Q, ‖complexMatrix (M ^ n) i j‖₊) (Finset.mem_univ q)
   have hh' := NNReal.coe_le_coe.mpr hh
-  simpa only [NNReal.coe_sum, coe_nnnorm, complexMatrix, Matrix.map_apply,
+  simpa only [rowSum, NNReal.coe_sum, coe_nnNorm, complexMatrix, Matrix.map_apply,
     Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (Matrix.pow_apply_nonneg hM n q _)] using hh'
 
 theorem norm_le_of_rowSum_le {M : Matrix Q Q ℝ} (hM : ∀ i j, 0 ≤ M i j)
@@ -50,8 +50,8 @@ theorem norm_le_of_rowSum_le {M : Matrix Q Q ℝ} (hM : ∀ i j, 0 ≤ M i j)
     apply Finset.sup_le
     intro i _
     apply NNReal.coe_le_coe.mp
-    simpa only [NNReal.coe_sum, coe_nnnorm, complexMatrix, Matrix.map_apply,
-      Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (Matrix.pow_apply_nonneg hM n i _)] using h i
+    simpa only [rowSum, NNReal.coe_sum, coe_nnNorm, complexMatrix, Matrix.map_apply,
+      Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (Matrix.pow_apply_nonneg hM n i _)] using! h i
   exact_mod_cast hs
 
 theorem rowSum_add_upper {M : Matrix Q Q ℝ} (hM : ∀ i j, 0 ≤ M i j)
@@ -91,8 +91,9 @@ theorem rowSum_lower_pow {M : Matrix Q Q ℝ} (hM : ∀ i j, 0 ≤ M i j)
 variable [Nonempty Q]
 
 theorem spectralRadius_ne_top (M : Matrix Q Q ℝ) :
-    spectralRadius ℂ (complexMatrix M) ≠ ⊤ :=
-  ne_top_of_le_ne_top ENNReal.coe_ne_top (spectrum.spectralRadius_le_nnnorm _)
+    spectralRadius ℂ (complexMatrix M) ≠ ⊤ := by
+  have _ := ‹Nonempty Q›
+  exact ne_top_of_le_ne_top ENNReal.coe_ne_top (spectralRadius_le_nnNorm _)
 
 /-- Gelfand's formula for the actual complexified transfer matrix. -/
 theorem norm_root_tendsto (M : Matrix Q Q ℝ) :

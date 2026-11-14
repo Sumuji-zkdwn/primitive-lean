@@ -306,7 +306,7 @@ theorem finiteControl_continuous {ι : Type*} [Fintype ι] (p m : ι → Stieltj
     Continuous (finiteControl p m : ℝ → ℝ) := by
   change Continuous (fun t => (∑ i, (p i + m i)) t)
   simp_rw [finiteSum_apply, StieltjesFunction.add_apply]
-  exact continuous_finset_sum _ (fun i _ => (hp i).add (hm i))
+  exact continuous_finsetSum _ (fun i _ => (hp i).add (hm i))
 
 theorem finiteControl_dominates {ι : Type*} [Fintype ι] (p m : ι → StieltjesFunction ℝ) (i : ι) :
     (p i).measure + (m i).measure ≤ (finiteControl p m).measure := by
