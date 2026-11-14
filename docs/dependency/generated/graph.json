@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "fe34ab61a44a559133bebf2aca612a127c04c27d",
+  "main_commit": "5973cb1556aaaaa5910519446b98219e74ca6051",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -925,7 +925,7 @@
       "imports": [
         "OrbitTraceFiltration"
       ],
-      "sha256": "f859e54aff613cba4ba7af201c35aa31c94fba7ef721d41a619de2f29183b756"
+      "sha256": "3715fb3e746492b1e9bf614f1de68a4e06831bac78e1e3950dfdc581e5e5f51c"
     },
     {
       "id": "main:lean/OrbitTraceFiltration.lean",
@@ -944,7 +944,7 @@
         "OrbitTraceTransferOperator",
         "OrbitTraceNilpotence"
       ],
-      "sha256": "be97d8bdca731a809bb2af35b93b08b80ca17cc80e17602bbc7edcbb15afb527"
+      "sha256": "29059f3ee92efd65878adc4da1addd994cae1e897a803bebcacf0c303153e2c1"
     },
     {
       "id": "main:lean/OrbitTraceFirstShell.lean",
@@ -7635,7 +7635,7 @@
       "imports": [
         "ElasticaFixedBoundaryWitness"
       ],
-      "sha256": "4a75d4f72d44b5c97c77b1868103e6e159814c3b97cc99c3695a61b406dae510"
+      "sha256": "ec917f20ca4b69706dc102d4d4f0da681d3ba7429569a52720f1eb32b4d1d998"
     },
     {
       "id": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
@@ -7741,7 +7741,7 @@
       "imports": [
         "ElasticaOperatorTheory"
       ],
-      "sha256": "3ba2db83cd52b814ae15613bda5bd324971648ac4de49c4cca8f5986c164008d"
+      "sha256": "dad1b2c58ac808253dfe59fd15f60fb0bfc07bd67592e908075a3a14a076f1c9"
     },
     {
       "id": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
@@ -26268,28 +26268,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "fe34ab61a44a559133bebf2aca612a127c04c27d",
+      "base_sha": "5973cb1556aaaaa5910519446b98219e74ca6051",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "fe34ab61a44a559133bebf2aca612a127c04c27d",
+      "base_sha": "5973cb1556aaaaa5910519446b98219e74ca6051",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "fe34ab61a44a559133bebf2aca612a127c04c27d",
+      "base_sha": "5973cb1556aaaaa5910519446b98219e74ca6051",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "fe34ab61a44a559133bebf2aca612a127c04c27d",
+      "base_sha": "5973cb1556aaaaa5910519446b98219e74ca6051",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
