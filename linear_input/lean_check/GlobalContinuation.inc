@@ -36,9 +36,10 @@ theorem unique_on_Ioo {F : V → V} (hF : ContDiff ℝ 1 F)
   · change closure ({t | z t = w t} ∩ Ioo a c) ∩ Ioo a c ⊆
       {t | z t = w t} ∩ Ioo a c
     rw [inter_comm, ← Subtype.image_preimage_val, inter_comm, ← Subtype.image_preimage_val,
-      image_subset_image_iff Subtype.val_injective, preimage_setOf_eq]
+      image_subset_image_iff Subtype.val_injective, preimage_ofPred_eq]
     intro t ht
-    rw [mem_preimage, ← closure_subtype] at ht
+    change (t : ℝ) ∈ closure (Subtype.val '' (Subtype.val ⁻¹' {t | z t = w t})) at ht
+    rw [← closure_subtype] at ht
     revert ht t
     apply IsClosed.closure_subset (isClosed_eq _ _)
     · rw [continuous_iff_continuousAt]
@@ -74,9 +75,9 @@ theorem piecewise_eqOn {F : V → V} (hF : ContDiff ℝ 1 F)
         lt_of_lt_of_le ht.2 (min_le_right _ _)⟩) heq
   intro t ht
   by_cases hmem : t ∈ Ioo a b
-  · rw [piecewise, if_pos hmem]
+  · rw [piecewise, ite_eq_left hmem]
     exact hu ⟨max_lt hmem.1 ht.1, lt_min hmem.2 ht.2⟩
-  · rw [piecewise, if_neg hmem]
+  · rw [piecewise, ite_eq_right hmem]
 
 /-- Overlapping actual solutions glue to an actual solution on the union. -/
 theorem hasDerivAt_piecewise {F : V → V} (hF : ContDiff ℝ 1 F)
@@ -140,11 +141,11 @@ theorem exists_arbitrarily_long_solution
       have ht' : t - (A - ε / 2) ∈ Ioo (-ε) ε := by constructor <;> linarith [ht.1, ht.2]
       have hshift : HasDerivAt (fun s : ℝ => s - (A - ε / 2)) 1 t := by
         simpa using (hasDerivAt_id t).sub_const (A - ε / 2)
-      simpa only [v, one_smul] using (hw _ ht').scomp t hshift
+      simpa only [v, one_smul, Function.comp_def] using (hw _ ht').scomp t hshift
     let q : ℝ → V := (Ioo (-ε) a).piecewise z v
     have hqinit : q 0 = z₀ := by
       change (Ioo (-ε) a).piecewise z v 0 = z₀
-      rw [piecewise, if_pos (show (0 : ℝ) ∈ Ioo (-ε) a from ⟨by linarith, by linarith⟩)]
+      rw [piecewise, ite_eq_left (show (0 : ℝ) ∈ Ioo (-ε) a from ⟨by linarith, by linarith⟩)]
       exact hzinit
     have hq : ∀ t ∈ Ioo (-ε) (A + ε / 2), HasDerivAt q (F (q t)) t := by
       have hpatch := hasDerivAt_piecewise hF hz hv

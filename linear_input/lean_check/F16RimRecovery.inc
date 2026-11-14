@@ -202,7 +202,7 @@ theorem f16_relative_action (v : State) :
   rw [f16Basis_transpose_mulVec, f16Basis_mulVec]
   simp only [f16RightIndex_ten_three, f16Step, f16SignR, f16Sign,
     f16Partner_involutive, Int.cast_mul]
-  all_goals ring
+  ring
 
 def f16ChannelLow (i : Channel) : Fin 16 :=
   ⟨i.val, by omega⟩
@@ -390,7 +390,7 @@ theorem f16Step_twice (v : State) (i : Fin 16) :
     f16Step (f16Step v) i =
       f16SignR (f16Partner i) * f16SignR i * v i := by
   simp [f16Step, f16Partner_involutive]
-  all_goals ring
+  ring
 
 theorem f16Step_twice_at_partner (v : State) (i : Fin 16) :
     f16Step (f16Step v) (f16Partner i) =
@@ -409,7 +409,7 @@ theorem f16Step_twice_at_partner (v : State) (i : Fin 16) :
   rw [f16Step_twice_at_partner, f16Step_twice_at_partner]
   rw [f16SignR_cancel_left, f16SignR_cancel_left]
   rw [f16SignR_partner_high, f16SignR_partner_low]
-  all_goals ring
+  ring
 
 theorem f16Step_thrice_at_partner (v : State) (i : Fin 16) :
     f16Step (f16Step (f16Step v)) (f16Partner i) =
@@ -446,7 +446,7 @@ theorem f16SignR_cancel_partner_high (ch : Channel) (x : Real) :
   unfold f16Observe
   rw [f16Step_thrice_at_partner, f16Step_thrice_at_partner]
   rw [f16SignR_cancel_partner_high, f16SignR_cancel_partner_low]
-  all_goals ring
+  ring
 
 def f16OrbitState (v : State) (phase : Fin 4) : State :=
   if phase.val = 0 then v

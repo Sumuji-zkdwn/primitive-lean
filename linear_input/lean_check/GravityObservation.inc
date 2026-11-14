@@ -188,7 +188,7 @@ theorem gravity_observation_not_mass_only
   have hmerged :
       (1 : ℝ) / R + (1 : ℝ) / R =
         decoded 0 PUnit.unit := by
-    simpa using h 0 PUnit.unit
+    simpa [forgetSeparation] using h 0 PUnit.unit
   have hbad :
       (1 : ℝ) / (R - a) + (1 : ℝ) / (R + a) = 2 / R := by
     calc

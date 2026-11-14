@@ -24,7 +24,7 @@ theorem chain_index_bound (p d r m : ℕ)
     r + m * (p + 1) ≤ d := by
   unfold chainLength at hm
   by_cases hr : r ≤ d
-  · simp only [if_pos hr] at hm
+  · simp only [ite_eq_left hr] at hm
     have hml : m ≤ (d - r) / (p + 1) := by omega
     have hmul : m * (p + 1) ≤ ((d - r) / (p + 1)) * (p + 1) :=
       Nat.mul_le_mul_right (p + 1) hml
@@ -63,7 +63,7 @@ theorem chain_index_exists (p d k : ℕ) (hk : k ≤ d) :
     apply (Nat.le_div_iff_mul_le hq).2
     omega
   have hm : m < chainLength p d r := by
-    simp only [chainLength, if_pos hrle]
+    simp only [chainLength, ite_eq_left hrle]
     omega
   exact ⟨r, m, by omega, hm, hrepr⟩
 

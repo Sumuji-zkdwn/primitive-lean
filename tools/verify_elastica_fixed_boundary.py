@@ -21,7 +21,7 @@ LEAN = ROOT / "lean"
 PROOFS = ROOT / "linear_input" / "lean_check"
 PR99 = "abc94a7d313efc194fe43a6bfc1ed955fa36f17b"
 PR100 = "a721c47b6cfa18ef101fd5dc563881c3c9654af7"
-MATHLIB = "5450b53e5ddc75d46418fabb605edbf36bd0beb6"
+MATHLIB = "2ddf59c8f14245864e6c0ed227a2dab76b9efea2"
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 
 NEW_MODULES = (
@@ -59,28 +59,35 @@ def git_file(commit, path):
 
 
 def check_sources():
+    from check_lean_migration import audit as audit_migration, accepts_current_hash
+
+    migration = audit_migration(ROOT)
+    if not migration['passed']:
+        raise RuntimeError('Invalid toolchain migration: ' + '; '.join(migration['errors']))
     # #99 and #100 share these exact original sources.  Check bytes rather than
-    # assuming a shared filename implies a shared definition.
-    paths = (
-        "lean/Elastica/Geometry.lean",
-        "linear_input/lean_check/OperatorWordObservations.inc",
-        "linear_input/lean_check/OperatorVocabularyRefinement.inc",
+    # assuming a shared filename implies a shared definition. A verified
+    # migration records the old Git bytes separately from the current proof.
+    sources = (
+        (PR99, "lean/Elastica/Geometry.lean"),
+        (PR99, "linear_input/lean_check/OperatorWordObservations.inc"),
+        (PR99, "linear_input/lean_check/OperatorVocabularyRefinement.inc"),
+        (PR100, "lean/Research/ElasticaObservationQuotient.lean"),
     )
-    for path in paths:
-        original = git_bytes(PR99, path)
+    for commit, path in sources:
+        original = git_bytes(commit, path)
         current = (ROOT / path).read_bytes()
-        if current != original:
-            raise RuntimeError(f"source differs from pinned #99: {path}")
-        print("pinned source", path, hashlib.sha256(current).hexdigest())
-    path = "lean/Research/ElasticaObservationQuotient.lean"
-    original = git_bytes(PR100, path)
-    if (ROOT / path).read_bytes() != original:
-        raise RuntimeError(f"source differs from pinned #100: {path}")
+        original_sha, current_sha = hashlib.sha256(original).hexdigest(), hashlib.sha256(current).hexdigest()
+        if not accepts_current_hash(migration, path, original_sha, current_sha):
+            raise RuntimeError(f"source differs from pinned original without a verified migration: {path}")
+        print("source provenance", json.dumps(dict(path=path, original_commit=commit,
+            original_sha256=original_sha, current_sha256=current_sha,
+            byte_identical=current == original,
+            migration_verified=current != original), sort_keys=True), flush=True)
     if (LEAN / "lean-toolchain").read_text(encoding="utf-8").strip() != \
-            "leanprover/lean4:v4.30.0-rc2":
+            "leanprover/lean4:v4.36.0-rc2":
         raise RuntimeError("unexpected Lean toolchain pin")
     version = command(["lean", "--version"], cwd=LEAN).stdout.strip()
-    if "version 4.30.0-rc2" not in version:
+    if "version 4.36.0-rc2" not in version:
         raise RuntimeError(f"unexpected Lean version: {version}")
     manifest = json.loads((LEAN / "lake-manifest.json").read_text(encoding="utf-8"))
     for package in manifest["packages"]:

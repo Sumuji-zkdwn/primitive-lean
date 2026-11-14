@@ -81,9 +81,9 @@ theorem piecewise_agrees {F : E → E} {K : ℝ≥0} (hF : LipschitzWith K F)
       ⟨max_lt ht₀.1.1 ht₀.2.1, lt_min ht₀.1.2 ht₀.2.2⟩) h₀
   intro t ht
   by_cases ht' : t ∈ Ioo a b
-  · rw [piecewise, if_pos ht']
+  · rw [piecewise, ite_eq_left ht']
     exact heq ⟨max_lt ht'.1 ht.1, lt_min ht'.2 ht.2⟩
-  · rw [piecewise, if_neg ht']
+  · rw [piecewise, ite_eq_right ht']
 
 theorem piecewise_solution {F : E → E} {K : ℝ≥0} (hF : LipschitzWith K F)
     {u v : ℝ → E} {a b c d t₀ : ℝ} (hu : SolvesOn F u (Ioo a b))
@@ -161,13 +161,15 @@ theorem global_of_uniform_local {F : E → E} {K : ℝ≥0}
   have hv₁ : SolvesOn F v₁ (Ioo (-(A + δ / 2)) (-A + 3 * δ / 2)) := by
     intro t ht
     have ht' : t + (A - δ / 2) ∈ Ioo (-δ) δ := ⟨by linarith [ht.1], by linarith [ht.2]⟩
-    simpa only [v₁, one_smul] using
+    simpa only [v₁, one_smul, Function.comp_def, id_eq] using
       (hu₁ _ ht').scomp t ((hasDerivAt_id t).add_const (A - δ / 2))
   have hv₂ : SolvesOn F v₂ (Ioo (A - 3 * δ / 2) (A + δ / 2)) := by
     intro t ht
     have ht' : t - (A - δ / 2) ∈ Ioo (-δ) δ := ⟨by linarith [ht.1], by linarith [ht.2]⟩
-    simpa only [v₂, one_smul] using
-      (hu₂ _ ht').scomp t ((hasDerivAt_id t).sub_const (A - δ / 2))
+    have hshift : HasDerivAt (fun s : ℝ => s - (A - δ / 2)) 1 t := by
+      simpa using (hasDerivAt_id t).sub_const (A - δ / 2)
+    simpa only [v₂, one_smul, Function.comp_def] using (hu₂ _ ht').scomp
+      (h := fun s : ℝ => s - (A - δ / 2)) (h' := (1 : ℝ)) t hshift
   have heq₁ : v₁ (-(A - δ / 2)) = u (-(A - δ / 2)) := by simp [v₁, h₁]
   have heq₂ : v₂ (A - δ / 2) = u (A - δ / 2) := by simp [v₂, h₂]
   have hdA : δ ≤ A := le_csSup hbdd (h x)
@@ -175,8 +177,8 @@ theorem global_of_uniform_local {F : E → E} {K : ℝ≥0}
     (piecewise (Ioo (-a) a) u v₁) v₂
   have hw₀ : w 0 = x := by
     dsimp only [w]
-    rw [piecewise, if_pos ⟨by linarith, by linarith⟩,
-      piecewise, if_pos ⟨by linarith, by linarith⟩, h₀]
+    rw [piecewise, ite_eq_left ⟨by linarith, by linarith⟩,
+      piecewise, ite_eq_left ⟨by linarith, by linarith⟩, h₀]
   suffices hw : SolvesOn F w (Ioo (-(A + δ / 2)) (A + δ / 2)) from
     (not_lt.mpr (le_csSup hbdd ⟨w, hw₀, hw⟩)) (by linarith)
   have hleft : SolvesOn F (piecewise (Ioo (-a) a) u v₁)
@@ -190,7 +192,7 @@ theorem global_of_uniform_local {F : E → E} {K : ℝ≥0}
     (show A - δ / 2 ∈ Ioo (-(A + δ / 2)) a ∩
         Ioo (A - 3 * δ / 2) (A + δ / 2) from
       ⟨⟨by linarith, hlt⟩, ⟨by linarith, by linarith⟩⟩)
-    (by rw [piecewise, if_pos ⟨by linarith, hlt⟩, heq₂]))
+    (by rw [piecewise, ite_eq_left ⟨by linarith, hlt⟩, heq₂]))
   exact Ioo_subset_Ioo_union_Ioo le_rfl (by linarith) (by linarith)
 
 /-- Global existence follows from the actual global Lipschitz estimate, with
@@ -230,7 +232,7 @@ theorem globalFlow_add {F : E → E} {K : ℝ≥0}
       (fun r => globalFlow hF r (globalFlow hF s x)) := by
     apply global_unique hF
     · intro r
-      simpa only [one_smul] using
+      simpa only [one_smul, Function.comp_def, id_eq] using
         (hasDerivAt_globalFlow hF (r + s) x).scomp r ((hasDerivAt_id r).add_const s)
     · exact fun r => hasDerivAt_globalFlow hF r _
     · simp only [zero_add, globalFlow_zero]

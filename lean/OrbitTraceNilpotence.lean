@@ -35,7 +35,7 @@ theorem iterDrop_nilpotent_of_rank_drop {A : Type u}
       · subst x
         exact iterDrop_fixed f z hz (0 + 1)
       · rcases hdrop x hzero with h | h
-        · simpa [iterDrop, h]
+        · simp [iterDrop, h]
         · omega
   | succ d ih =>
       by_cases hzero : x = z

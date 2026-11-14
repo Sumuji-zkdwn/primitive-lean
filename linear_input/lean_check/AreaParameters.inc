@@ -13,7 +13,7 @@ open Elastica LinearInputAreaVariation
 abbrev Parameters := ℝ × (ℝ × (ℝ × ℝ))
 
 local instance : IsTopologicalAddGroup (Parameters →L[ℝ] (Parameters →L[ℝ] ℝ)) :=
-  ContinuousLinearMap.topologicalAddGroup
+  ContinuousLinearMap.isTopologicalAddGroup
 
 local instance : ContinuousAdd (Parameters →L[ℝ] (Parameters →L[ℝ] ℝ)) :=
   (inferInstance : IsTopologicalAddGroup (Parameters →L[ℝ] (Parameters →L[ℝ] ℝ))).toContinuousAdd

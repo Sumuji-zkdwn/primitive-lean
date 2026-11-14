@@ -32,8 +32,8 @@ theorem interpolateProduct_graph_eq_one {ι V : Type*} {G : SimpleGraph V}
   let z : ℕ → V := fun j => x ⟨min j N, Nat.lt_succ_of_le (min_le_right j N)⟩
   have hz : ∀j < N, z j = z (j + 1) ∨ G.Adj (z j) (z (j + 1)) := by
     intro j hj
-    simpa only [z, min_eq_left hj.le, min_eq_left (Nat.succ_le_of_lt hj)] using hedge ⟨j, hj⟩
-  have hc : z N = z 0 := by simpa only [z, min_self, zero_min] using hclosed
+    simpa only [z, min_eq_left hj.le, min_eq_left (Nat.succ_le_of_lt hj)] using! hedge ⟨j, hj⟩
+  have hc : z N = z 0 := by simpa only [z, min_self, zero_min] using! hclosed
   change segmentProduct (fun j => f (z j)) N = (1 : TensorSeries ι)
   rw [segmentProduct_eq_sequenceWeight]
   exact acyclic_closed_segment_sequence hG f z N hz hc

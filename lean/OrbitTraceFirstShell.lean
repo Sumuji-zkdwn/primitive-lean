@@ -45,7 +45,7 @@ theorem first_shell_moment
           s * M (p + 1 + j) - a * M (j + 1) := by
         have hi1 : j + 1 + p + 1 = p + 1 + (j + 1) := by omega
         have hi2 : j + 1 + p = p + 1 + j := by omega
-        simpa only [hi1, hi2] using hr
+        simpa only [hi1, hi2, Nat.add_assoc] using hr
       calc
         M (p + 1 + (j + 1)) =
             s * M (p + 1 + j) - a * M (j + 1) := hstep
@@ -105,7 +105,7 @@ theorem canonicalMoment_recurrence (p k : ℕ) (a : ℚ) :
   have hi1 : k + p + 1 - 1 = k + p := by omega
   have hi2 : k + p + 1 - (p + 1) = k := by omega
   conv_lhs => rw [canonicalMoment]
-  simp only [dif_neg hgt, hi1, hi2]
+  simp only [dite_eq_right hgt, hi1, hi2]
 
 theorem canonicalMoment_first_shell
     (p j : ℕ) (a : ℚ) (hj : j ≤ p) :
@@ -162,7 +162,7 @@ theorem twoLayerEncode_coeff_low (p : ℕ)
     (twoLayerEncode p low high).coeff j.val = low j := by
   classical
   unfold twoLayerEncode
-  rw [Polynomial.finset_sum_coeff]
+  rw [Polynomial.finsetSum_coeff]
   simp only [Polynomial.coeff_add, Polynomial.coeff_C_mul_X_pow]
   have hhigh (i : Fin (p + 1)) : j.val ≠ p + 1 + i.val := by omega
   have hlow (i : Fin (p + 1)) : (j.val = i.val) ↔ (j = i) := by
@@ -174,7 +174,7 @@ theorem twoLayerEncode_coeff_high (p : ℕ)
     (twoLayerEncode p low high).coeff (p + 1 + j.val) = high j := by
   classical
   unfold twoLayerEncode
-  rw [Polynomial.finset_sum_coeff]
+  rw [Polynomial.finsetSum_coeff]
   simp only [Polynomial.coeff_add, Polynomial.coeff_C_mul_X_pow]
   have hlow (i : Fin (p + 1)) : p + 1 + j.val ≠ i.val := by omega
   have hhigh (i : Fin (p + 1)) :
@@ -270,13 +270,14 @@ theorem second_shell_moment
             2 * (p + 1) + (j + 1) := by omega
         have hi2 : p + 1 + (j + 1) + p =
             2 * (p + 1) + j := by omega
-        simpa only [hi1, hi2] using (hrec (p + 1 + (j + 1)))
+        have h := hrec (p + 1 + (j + 1))
+        rw [hi1, hi2] at h
+        exact h
       rw [hr, ih hj', hfirst]
       have hpow : s ^ (p + 1 + (j + 1)) =
           s ^ (p + 1) * s ^ (j + 1) := by rw [pow_add]
       rw [hpow, pow_succ]
       simp only [secondShellCoeff, Nat.cast_add, Nat.cast_succ]
-      push_cast
       ring
 
 #print axioms OrbitTrace.second_shell_moment

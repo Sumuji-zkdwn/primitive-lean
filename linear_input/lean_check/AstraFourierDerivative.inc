@@ -116,7 +116,7 @@ theorem derivative_projection (N : ℕ) (f : CircleL2) :
   conv_rhs => rw [derivative_apply]
   apply Finset.sum_congr rfl
   intro k hk
-  rw [projection_coefficient, if_pos hk]
+  rw [projection_coefficient, ite_eq_left hk]
 
 /-- The smooth periodic representative of the projected L2 element. -/
 def polynomial (N : ℕ) (f : CircleL2) (x : ℝ) : ℂ :=

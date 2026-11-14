@@ -64,7 +64,7 @@ theorem curvature_zero_of_xCoord_eq_length {θ : ℝ → ℝ} {ℓ x₀ : ℝ}
     rw [he.deriv_eq, deriv_const, hc s ⟨hsi.1.le, hsi.2.le⟩, one_mul] at hh
     exact hh.symm
   have hclosed := hd.closure hθ.continuous_deriv_one continuous_const
-  simpa only [curvature, closure_Ioo hℓ.ne] using hclosed
+  simpa only [curvature, closure_Ioo hℓ.ne, Set.EqOn] using hclosed
 
 /-- Fixing the initial real angle removes the possible multiples of 2π:
 the whole lifted angle is exactly its initial value. -/
@@ -108,8 +108,7 @@ theorem straight_polynomial_hasDerivAt (s : ℝ) :
       (-3 * s ^ 2 + 3 * s - 1 / 2) s := by
   convert (((hasDerivAt_id s).mul ((hasDerivAt_const s (1 : ℝ)).sub (hasDerivAt_id s))).mul
     ((hasDerivAt_id s).sub_const (1 / 2))) using 1
-  dsimp
-  ring
+  all_goals first | rfl | (simp only [id_eq, Pi.sub_apply, Pi.mul_apply]; ring)
 
 /-- Its average is zero, hence it lies in the vertical linearized constraint
 kernel at a horizontal straight curve. -/
@@ -121,8 +120,7 @@ theorem straight_polynomial_integral :
     convert ((((hasDerivAt_id s).pow 4).neg.div_const 4).add
       (((hasDerivAt_id s).pow 3).div_const 2)).sub
         (((hasDerivAt_id s).pow 2).div_const 4) using 1
-    dsimp
-    ring
+    all_goals first | rfl | (simp only [id_eq]; norm_num; ring)
   have hc : Continuous (fun s : ℝ => s * (1 - s) * (s - 1 / 2)) := by fun_prop
   have h := intervalIntegral.integral_eq_sub_of_hasDerivAt
     (a := (0 : ℝ)) (b := 1) (fun s _ => hd s) (hc.intervalIntegrable 0 1)
@@ -142,8 +140,7 @@ theorem straight_polynomial_deriv_square_integral :
         (((hasDerivAt_id s).pow 3).const_mul 4)).sub
           ((((hasDerivAt_id s).pow 2).const_mul 3).div_const 2) |>.add
             ((hasDerivAt_id s).div_const 4) using 1
-    dsimp
-    ring
+    all_goals first | rfl | (simp only [id_eq]; norm_num; ring)
   have hc : Continuous (fun s : ℝ => (-3 * s ^ 2 + 3 * s - 1 / 2) ^ 2) := by fun_prop
   have h := intervalIntegral.integral_eq_sub_of_hasDerivAt
     (a := (0 : ℝ)) (b := 1) (fun s _ => hd s) (hc.intervalIntegrable 0 1)
@@ -157,8 +154,7 @@ theorem negative_quadratic_second_deriv (q : ℝ) :
     funext x
     have h : HasDerivAt (fun u : ℝ => -(u ^ 2) / 2) (-x) x := by
       convert ((hasDerivAt_id x).pow 2).neg.div_const 2 using 1
-      dsimp
-      ring
+      all_goals first | rfl | (simp only [id_eq]; norm_num; ring)
     exact h.deriv
   rw [hd]
   exact (hasDerivAt_id q).neg.deriv

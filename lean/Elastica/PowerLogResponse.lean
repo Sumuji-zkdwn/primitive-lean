@@ -38,7 +38,7 @@ theorem hasDerivAt_powerLog {p z : ℝ} (hz : 0 < z) :
     unfold powerLog
     simpa [Real.rpow_neg_one] using Real.hasDerivAt_log hz.ne'
   · unfold powerLog
-    simp only [hp, if_false]
+    simp only [hp, ite_false]
     convert ((Real.hasDerivAt_rpow_const (p := p) (Or.inl hz.ne')).sub_const 1).div_const p using 1
     field_simp
 
@@ -58,7 +58,7 @@ theorem powerLog_mul (p : ℝ) {z w : ℝ} (hz : 0 < z) (hw : 0 < w) :
   by_cases hp : p = 0
   · subst p
     simp [powerLog, Real.log_mul hz.ne' hw.ne']
-  · simp only [powerLog, hp, if_false]
+  · simp only [powerLog, hp, ite_false]
     rw [Real.mul_rpow hz.le hw.le]
     field_simp
     ring
@@ -105,7 +105,7 @@ theorem powerLogDensity_reference (p K : ℝ) {κ₀ : ℝ} (hκ₀ : 0 < κ₀)
 private theorem hasDerivAt_log_ratio {κ₀ κ : ℝ} (hκ₀ : 0 < κ₀) (hκ : 0 < κ) :
     HasDerivAt (fun q : ℝ => log (q / κ₀)) (1 / κ) κ := by
   convert ((hasDerivAt_id κ).div_const κ₀).log (div_ne_zero hκ.ne' hκ₀.ne') using 1
-  dsimp
+  all_goals dsimp
   field_simp
 
 /-- Actual differentiation of the displayed potential, including both exceptional
@@ -120,23 +120,21 @@ theorem hasDerivAt_powerLogDensity (p K : ℝ) {κ₀ κ : ℝ}
     simp only [powerLog_zero]
     convert ((((hasDerivAt_id κ).mul (hasDerivAt_log_ratio hκ₀ hκ)).sub
       (hasDerivAt_id κ)).add_const κ₀).const_mul K using 1
-    dsimp
+    all_goals dsimp
     field_simp; ring
   · by_cases hp' : p = -1
     · subst p
-      simp only [show (-1 : ℝ) ≠ 0 by norm_num, if_false]
+      simp only [show (-1 : ℝ) ≠ 0 by norm_num, ite_false]
       convert (((hasDerivAt_id κ).sub_const κ₀).sub
         ((hasDerivAt_log_ratio hκ₀ hκ).const_mul κ₀)).const_mul K using 1
-      dsimp
-      simp only [powerLog, if_neg hp, Real.rpow_neg_one, inv_div]
-      ring
+      all_goals first | rfl | (simp only [powerLog, ite_eq_right hp, Real.rpow_neg_one, inv_div]; ring)
     · have hp1 : p + 1 ≠ 0 := by intro h; apply hp'; linarith
-      simp only [hp, hp', if_false, powerLog]
+      simp only [hp, hp', ite_false, powerLog]
       have hd := ((((hasDerivAt_id κ).div_const κ₀).rpow_const
         (p := p + 1) (Or.inl hz.ne')).sub_const 1).div_const (p + 1)
       convert (hd.sub (((hasDerivAt_id κ).div_const κ₀).sub_const 1)).const_mul
         (K * κ₀ / p) using 1
-      dsimp
+      all_goals dsimp
       rw [show p + 1 - 1 = p by ring]
       field_simp
 
@@ -155,7 +153,7 @@ theorem hasDerivAt_deriv_powerLogDensity (p K : ℝ) {κ₀ κ : ℝ}
   have hd' : HasDerivAt (fun q => K * powerLog p (q / κ₀))
       (K / κ₀ * (κ / κ₀) ^ (p - 1)) κ := by
     convert hd using 1
-    ring
+    all_goals first | rfl | ring
   exact hd'.congr_of_eventuallyEq he
 
 theorem second_deriv_powerLogDensity_pos (p : ℝ) {K κ₀ κ : ℝ}

@@ -85,8 +85,8 @@ theorem hasDeriv_f (s : ℝ) :
       (1 / 2 : ℝ)).sub
     (((((hasDerivAt_id s).const_mul (4 * Real.pi)).sin).const_mul
       (1 / 4 : ℝ)))) using 1
-  all_goals simp only [id_eq]
-  all_goals ring
+  · rfl
+  · ring
 
 theorem curvature_zero :
     Elastica.curvature (angle (0 : Fin 3)) 0 = 0 := by
@@ -96,7 +96,7 @@ theorem curvature_zero :
 theorem curvature_one :
     Elastica.curvature (angle (1 : Fin 3)) 0 = 0 := by
   change deriv (fun s => -f s) 0 = 0
-  simpa using (hasDeriv_f 0).neg.deriv
+  simpa using! (hasDeriv_f 0).neg.deriv
 
 theorem curvature_two :
     Elastica.curvature (angle (2 : Fin 3)) 0 = -2 * Real.pi := by
@@ -104,7 +104,7 @@ theorem curvature_two :
   have h₁ : 2 * Real.pi * (1 / 2 : ℝ) = Real.pi := by ring
   have h₂ : 4 * Real.pi * (1 / 2 : ℝ) = 2 * Real.pi := by ring
   have hi : HasDerivAt (fun s : ℝ => s + 1 / 2) 1 0 := by
-    simpa using ((hasDerivAt_id (0 : ℝ)).add_const (1 / 2 : ℝ))
+    simpa using! ((hasDerivAt_id (0 : ℝ)).add_const (1 / 2 : ℝ))
   have ho : HasDerivAt f
       (Real.pi * Real.cos (2 * Real.pi * (1 / 2)) -
         Real.pi * Real.cos (4 * Real.pi * (1 / 2)))
@@ -113,8 +113,9 @@ theorem curvature_two :
   have h := ho.comp (0 : ℝ) hi
   rw [h₁, h₂] at h
   simp only [Real.cos_pi, Real.cos_two_pi, mul_one] at h
-  convert h.deriv using 1
-  ring
+  calc
+    deriv (fun s => f (s + 1 / 2)) 0 = Real.pi * -1 - Real.pi := h.deriv
+    _ = -2 * Real.pi := by ring
 
 theorem angle_zero_ne_one : angle (0 : Fin 3) ≠ angle 1 := by
   intro h

@@ -374,7 +374,7 @@ theorem real_inverse_card_regular (n : ℕ) {y : ℝ} (hy0 : -1 < y) (hy1 : y < 
   have hs : {x : ℝ | LinearInputBranchForgetting.ternaryIterate n x = y} =
       (candidateSet (3 ^ n) (arccos y) : Set ℝ) := by
     ext x
-    simpa only [Set.mem_setOf_eq, Finset.mem_coe, Real.cos_arccos hy0.le hy1.le] using
+    simpa only [Set.mem_ofPred_eq, Finset.mem_coe, Real.cos_arccos hy0.le hy1.le] using
       ternary_inverse_iff_candidate n (Real.arccos_nonneg y) (Real.arccos_le_pi y) x
   rw [hs, Set.ncard_coe_finset]
   exact ternary_candidates_regular_card n (Real.arccos_pos.mpr hy1) (Real.arccos_lt_pi.mpr hy0)

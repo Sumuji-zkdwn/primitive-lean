@@ -44,8 +44,8 @@ theorem hasDerivAt_energy_x (k lam a c x y u : ℝ) :
   convert ((h.add_const (a * y ^ 2 / 2)).sub
     (((hasDerivAt_id x).const_mul c).mul_const y)).sub
     ((hasDerivAt_id x).const_mul u) using 1
-  simp only [id_eq]
-  ring
+  · rfl
+  · simp only [id_eq]; ring
 
 theorem hasDerivAt_energy_y (k lam a c x y u : ℝ) :
     HasDerivAt (fun t => energy k lam a c x t u) (a * y - c * x) y := by
@@ -53,8 +53,8 @@ theorem hasDerivAt_energy_y (k lam a c x y u : ℝ) :
     (k * x ^ 2 / 2 + lam * x ^ 4 / 4)
   convert (h.sub ((hasDerivAt_id y).const_mul (c * x))).sub_const (u * x)
     using 1
-  simp only [id_eq]
-  ring
+  · rfl
+  · simp only [id_eq]; ring
 
 /-- The input coefficient s is kept explicit; s=-1 recovers the original energy. -/
 def gradXu (k lam a c s y : ℝ) (z : ℝ × ℝ) : ℝ × ℝ :=
@@ -143,8 +143,8 @@ theorem gradXu_jacobian (k lam a c s y x u : ℝ) :
     convert ((((hasDerivAt_id x).const_mul k).add
       (((hasDerivAt_id x).pow 3).const_mul lam)).sub_const (c * y)).add_const (s * u)
       using 1
-    simp only [id_eq]
-    ring
+    · rfl
+    · simp only [id_eq]; ring
   have hu : HasDerivAt (fun t : ℝ => k * x + lam * x ^ 3 - c * y + s * t) s u := by
     simpa using ((hasDerivAt_id u).const_mul s).const_add (k * x + lam * x ^ 3 - c * y)
   have hqx : HasDerivAt (fun t : ℝ => s * t) s x := by
@@ -190,7 +190,10 @@ theorem signedGradXu_eq (σ : Fin 5 → Bool) (k lam a c y : ℝ) (z : ℝ × �
 
 theorem signedGradXu_bijective (σ : Fin 5 → Bool) (k lam a c y : ℝ) :
     Function.Bijective (signedGradXu σ k lam a c y) := by
-  simpa only [signedGradXu_eq] using
+  change Function.Bijective (gradXu (signValue (σ 0) * k)
+    (signValue (σ 1) * lam) (signValue (σ 2) * a)
+    (-signValue (σ 3) * c) (signValue (σ 4)) y)
+  exact
     gradXu_bijective (signValue (σ 0) * k) (signValue (σ 1) * lam)
       (signValue (σ 2) * a) (-signValue (σ 3) * c) (signValue (σ 4)) y
       (signValue_ne_zero (σ 4))
@@ -271,8 +274,8 @@ theorem gradXY_jacobian (k lam a c u x y : ℝ) :
       (k + 3 * lam * x ^ 2) x := by
     convert ((((hasDerivAt_id x).const_mul k).add
       (((hasDerivAt_id x).pow 3).const_mul lam)).sub_const (c * y)).sub_const u using 1
-    simp only [id_eq]
-    ring
+    · rfl
+    · simp only [id_eq]; ring
   have hxy : HasDerivAt (fun t : ℝ => k * x + lam * x ^ 3 - c * t - u) (-c) y := by
     simpa using (((hasDerivAt_id y).const_mul c).const_sub
       (k * x + lam * x ^ 3)).sub_const u

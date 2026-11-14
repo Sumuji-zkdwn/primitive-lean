@@ -64,7 +64,6 @@ theorem freeEnergy_le_minimum (S : Finset ι) (hS : S.Nonempty)
     (minimum_weight_le_partition S hS E β)
   rw [Real.log_exp] at hh
   apply (div_le_iff₀ hβ).mpr
-  dsimp [freeEnergy]
   nlinarith
 
 theorem minimum_sub_entropy_le_freeEnergy (S : Finset ι) (hS : S.Nonempty)

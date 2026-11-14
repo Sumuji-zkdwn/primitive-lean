@@ -55,8 +55,8 @@ theorem preimage_Iic {φ : ℝ → ℝ} (hm : Monotone φ) (hc : Continuous φ)
 theorem preimage_Ioc {φ : ℝ → ℝ} (hm : Monotone φ) (hc : Continuous φ)
     (hs : Function.Surjective φ) (a b : ℝ) :
     φ ⁻¹' Ioc a b = Ioc (rightEndInverse φ a) (rightEndInverse φ b) := by
-  rw [← Iic_diff_Iic, preimage_diff, preimage_Iic hm hc hs, preimage_Iic hm hc hs,
-    Iic_diff_Iic]
+  rw [← Iic_sdiff_Iic, preimage_sdiff, preimage_Iic hm hc hs, preimage_Iic hm hc hs,
+    Iic_sdiff_Iic]
 
 def reparam (p : StieltjesFunction ℝ) (hp : Continuous (p : ℝ → ℝ))
     (φ : ℝ → ℝ) (hm : Monotone φ) (hc : Continuous φ) : StieltjesFunction ℝ :=

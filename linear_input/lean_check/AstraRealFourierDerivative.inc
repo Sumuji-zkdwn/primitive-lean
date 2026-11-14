@@ -143,7 +143,7 @@ theorem derivative_complexify_cosine (N k : ℕ) (hk : k ≤ N) :
     simp only [FourierProjection.frequencies, Finset.mem_Icc]
     omega
   rw [complexify_cosine, map_smul, map_add, derivative_basis, derivative_basis,
-    if_pos hp, if_pos hn, complexify_smul, complexify_sine]
+    ite_eq_left hp, ite_eq_left hn, complexify_smul, complexify_sine]
   push_cast
   module
 
@@ -157,7 +157,7 @@ theorem derivative_complexify_sine (N k : ℕ) (hk : k ≤ N) :
     simp only [FourierProjection.frequencies, Finset.mem_Icc]
     omega
   rw [complexify_sine, map_smul, map_sub, derivative_basis, derivative_basis,
-    if_pos hp, if_pos hn, complexify_smul, complexify_cosine]
+    ite_eq_left hp, ite_eq_left hn, complexify_smul, complexify_cosine]
   push_cast
   simp only [smul_sub, smul_add, smul_smul]
   have hc (z : ℂ) : -(Complex.I / 2) * (Complex.I * z) = z / 2 := by

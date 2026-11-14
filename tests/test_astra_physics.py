@@ -2,11 +2,14 @@
 import hashlib
 import importlib.util
 import ast
+from functools import lru_cache
+import io
 import json
 from pathlib import Path
-import shutil
+import subprocess
 import tempfile
 import unittest
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location('check_astra_physics', ROOT / 'tools/check_astra_physics.py')
@@ -14,22 +17,35 @@ CHECK = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CHECK)
 
 
+@lru_cache(maxsize=1)
+def original_fixture_files():
+    """Keep historical-adapter tests stable after a committed toolchain port."""
+    ledger = ROOT / CHECK.MIGRATION.LEDGER
+    baseline = json.loads(ledger.read_text('utf-8'))['source_commit'] if ledger.exists() else 'HEAD'
+    manifest = json.loads(subprocess.check_output(
+        ['git', 'show', f'{baseline}:{CHECK.MANIFEST}'], cwd=ROOT))
+    paths = {CHECK.MANIFEST, 'tools/verify_main_result.py', manifest['bridge_contract']['preserved_copy']}
+    for row in manifest['modules']:
+        paths.add(row['preserved_copy'])
+        if 'destination' in row: paths.add(row['destination'])
+    paths.update(row['destination'] for row in manifest.get('native_bridges', []))
+    paths.update(CHECK.contract_path(row) for row in manifest.get('additional_bridge_contracts', []))
+    archive = subprocess.check_output(['git', 'archive', '--format=zip', baseline, '--', *sorted(paths)], cwd=ROOT)
+    with zipfile.ZipFile(io.BytesIO(archive)) as files:
+        return {path: files.read(path) for path in paths}
+
+
 class AstraSourceAudit(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.manifest = json.loads((ROOT / CHECK.MANIFEST).read_text('utf-8'))
-        paths = {CHECK.MANIFEST, 'tools/verify_main_result.py', self.manifest['bridge_contract']['preserved_copy']}
-        for row in self.manifest['modules']:
-            paths.add(row['preserved_copy'])
-            if 'destination' in row: paths.add(row['destination'])
-        paths.update(row['destination'] for row in self.manifest.get('native_bridges', []))
-        paths.update(CHECK.contract_path(row) for row in self.manifest.get('additional_bridge_contracts', []))
-        for path in paths:
+        files = original_fixture_files()
+        self.manifest = json.loads(files[CHECK.MANIFEST])
+        for path, raw in files.items():
             dest = self.root / path
             dest.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(ROOT / path, dest)
+            dest.write_bytes(raw)
 
     def save(self):
         (self.root / CHECK.MANIFEST).write_text(json.dumps(self.manifest), 'utf-8')
@@ -39,7 +55,7 @@ class AstraSourceAudit(unittest.TestCase):
         self.assertFalse(result['passed'], result)
         self.assertTrue(any(message in error for error in result['errors']), result)
 
-    def test_actual_selected_closure_passes(self):
+    def test_preserved_selected_closure_passes(self):
         result = CHECK.audit(self.root)
         self.assertTrue(result['passed'], result)
         self.assertEqual(result['counts'], self.manifest['counts'])
@@ -263,6 +279,100 @@ class AstraSourceAudit(unittest.TestCase):
     def test_assembly_context_cannot_target_another_proof(self):
         self.manifest['assembly_contexts'][0]['source'] = self.manifest['modules'][0]['destination']; self.save()
         self.reject('Unapproved assembly context')
+
+
+class AstraMigrationAudit(unittest.TestCase):
+    save = AstraSourceAudit.save
+    reject = AstraSourceAudit.reject
+
+    def git(self, *args):
+        return subprocess.check_output(['git', *args], cwd=self.root, stderr=subprocess.PIPE).decode().strip()
+
+    def write(self, path, raw):
+        target = self.root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(raw)
+
+    def save_migration(self):
+        self.write(CHECK.MIGRATION.LEDGER, json.dumps(self.migration).encode())
+
+    def setUp(self):
+        AstraSourceAudit.setUp(self)
+        old_rev, new_rev = 'b' * 40, 'c' * 40
+        configs = {
+            'lean/lean-toolchain': b'leanprover/lean4:v4.30.0-rc2\n',
+            'lean/lakefile.toml': f'[[require]]\nname = "mathlib"\nrev = "{old_rev}"\n'.encode(),
+            'lean/lake-manifest.json': json.dumps({'packages': [{'name': 'mathlib', 'rev': old_rev}]}).encode(),
+        }
+        for path, raw in configs.items(): self.write(path, raw)
+        destinations = {row['destination'] for row in self.manifest['modules'] if row.get('destination')}
+        destinations.update(row['destination'] for row in self.manifest.get('native_bridges', []))
+        destinations.update(configs)
+        destinations.add('tools/verify_main_result.py')
+        original = {path: (self.root / path).read_bytes() for path in destinations}
+        self.write(CHECK.MIGRATION.INTEGRATION_LEDGER, json.dumps({'files': [
+            dict(path=path, sha256=CHECK.sha(raw)) for path, raw in original.items()]}).encode())
+        self.git('init', '--quiet')
+        self.git('config', 'core.autocrlf', 'false')
+        self.git('config', 'user.name', 'Astra migration fixture')
+        self.git('config', 'user.email', 'fixture@example.invalid')
+        self.git('add', '.')
+        self.git('commit', '--quiet', '-m', 'Preserved Astra adapters and native bridges')
+        commit = self.git('rev-parse', 'HEAD')
+        changed = {path: raw.replace(old_rev.encode(), new_rev.encode()) for path, raw in configs.items()}
+        changed['lean/lean-toolchain'] = b'leanprover/lean4:v4.36.0-rc2\n'
+        registry = original['tools/verify_main_result.py']
+        for old, new in CHECK.LEAN436_IMPORT_RENAMES.items():
+            registry = registry.replace(old.encode(), new.encode())
+        changed['tools/verify_main_result.py'] = registry
+        self.adapter = next(row for row in self.manifest['modules'] if row['role'] == 'import_only_adapter')
+        self.native = self.manifest['native_bridges'][0]
+        for row in (self.adapter, self.native):
+            path = row['destination']
+            changed[path] = original[path] + b'\n-- explicit toolchain migration fixture\n'
+        changes = []
+        for path, raw in changed.items():
+            self.write(path, raw)
+            changes.append(dict(path=path, old_sha256=CHECK.sha(original[path]),
+                new_sha256=CHECK.sha(raw), reason='Explicit current toolchain migration fixture.'))
+        self.migration = dict(schema_version=1, source_commit=commit,
+            target=dict(toolchain='leanprover/lean4:v4.36.0-rc2', mathlib=new_rev), changes=changes)
+        self.save_migration()
+
+    def test_import_adapter_and_native_bridge_keep_historical_provenance(self):
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        self.assertEqual(result['counts'], self.manifest['counts'])
+        for row in (self.adapter, self.native):
+            accepted = result['migration_audit']['changes'][row['destination']]
+            self.assertEqual(accepted['old_sha256'], row['sha256'])
+            self.assertNotEqual(accepted['new_sha256'], row['sha256'])
+
+    def test_migrated_adapter_rejects_unrecorded_current_edit(self):
+        path = self.root / self.adapter['destination']
+        path.write_bytes(path.read_bytes() + b'-- another edit\n')
+        self.reject('Migration current hash mismatch')
+
+    def test_migration_does_not_authorize_rewriting_astra_manifest(self):
+        self.adapter['sha256'] = CHECK.sha((self.root / self.adapter['destination']).read_bytes())
+        self.save()
+        self.reject('Historical Astra manifest was changed')
+
+    def add_current_declaration(self, row):
+        path = self.root / row['destination']
+        path.write_bytes(path.read_bytes() +
+            f"namespace {row['namespace']}\ntheorem migration_extra : True := True.intro\nend {row['namespace']}\n".encode())
+        change = next(r for r in self.migration['changes'] if r['path'] == row['destination'])
+        change['new_sha256'] = CHECK.sha(path.read_bytes())
+        self.save_migration()
+
+    def test_migrated_adapter_still_checks_current_declarations(self):
+        self.add_current_declaration(self.adapter)
+        self.reject('Current destination declaration mismatch')
+
+    def test_migrated_native_bridge_still_checks_current_declarations(self):
+        self.add_current_declaration(self.native)
+        self.reject('Current native bridge declaration mismatch')
 
 
 if __name__ == '__main__':

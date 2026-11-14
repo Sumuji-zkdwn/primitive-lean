@@ -45,7 +45,7 @@ def pairModeLinear (T : ℝ) (hT : 0 ≤ T) (β c : ℝ) (hβ : 0 < β) (k : ℤ
     C(Time T, ℂ) →ₗ[ℝ] C(Time T, ℂ × ℂ) where
   toFun f := pairTrace (mode T hT β c hβ k f) (mode T hT β (-c) hβ k f)
   map_add' f g := by ext t <;> simp [pairTrace]
-  map_smul' a f := by ext t <;> simp [pairTrace] <;> rfl
+  map_smul' a f := by ext t <;> simp [pairTrace]
 
 theorem pairModeLinear_norm_le (T : ℝ) (hT : 0 ≤ T) (β c : ℝ) (hβ : 0 < β) (k : ℤ)
     (f : C(Time T, ℂ)) : ‖pairModeLinear T hT β c hβ k f‖ ≤ β⁻¹ * ‖f‖ := by

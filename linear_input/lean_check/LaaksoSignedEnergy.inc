@@ -136,7 +136,7 @@ theorem edgeEnergy_flip_difference (q : State) (e : Fin 6) :
       (((q 4).1 - (-1) * (q 5).1) ^ 2 + ((q 4).2 - (-1) * (q 5).2) ^ 2) / 2 -
       (((q 4).1 - 1 * (q 5).1) ^ 2 + ((q 4).2 - 1 * (q 5).2) ^ 2) / 2 = _
     ring
-  · simp only [edgeEnergy, sign_flipped_of_ne e h, sign_untwisted, h, if_false,
+  · simp only [edgeEnergy, sign_flipped_of_ne e h, sign_untwisted, h, ite_false,
       sub_self]
 
 /-- Change of the energy at a fixed state when only edge 3 is flipped.

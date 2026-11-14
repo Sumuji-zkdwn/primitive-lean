@@ -29,7 +29,7 @@ theorem contDiff_angle_scaling {θ : ℝ → ℝ} {n : WithTop ℕ∞}
 theorem hasDerivAt_angle_scaling {θ : ℝ → ℝ} {a κ s : ℝ}
     (hθ : HasDerivAt θ κ (s / a)) :
     HasDerivAt (fun t => θ (t / a)) (κ / a) s := by
-  simpa only [div_eq_mul_inv, one_mul] using
+  simpa only [Function.comp_def, id_eq, div_eq_mul_inv, one_mul] using
     hθ.comp s ((hasDerivAt_id s).div_const a)
 
 theorem deriv_angle_scaling {θ : ℝ → ℝ} (hθ : Differentiable ℝ θ)

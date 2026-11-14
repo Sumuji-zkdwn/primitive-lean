@@ -27,6 +27,7 @@ abbrev ExtendedState := Position × History
 def IsProbabilityKernel {n : ℕ} (K : Fin n → Fin n → ℚ) : Prop :=
   (∀ x y, 0 ≤ K x y) ∧ ∀ x, ∑ y : Fin n, K x y = 1
 
+set_option backward.isDefEq.respectTransparency false in
 inductive PastOperation where
   | relax
   | prime

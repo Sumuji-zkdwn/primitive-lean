@@ -235,7 +235,7 @@ theorem finite_family_separating_cutoff {S : Type*} [Fintype S]
   have hbound : depth (x, y) ≤ Finset.univ.sup depth :=
     Finset.le_sup (Finset.mem_univ (x, y))
   have hd : depth (x, y) = Classical.choose (hsep x y hne) := by
-    simp only [depth, dif_pos hne]
+    simp only [depth, dite_eq_left hne]
   have hdiff := Classical.choose_spec (hsep x y hne)
   apply hdiff
   rw [← hd]

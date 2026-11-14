@@ -60,7 +60,7 @@ theorem branch_locallyConstant {E : Type*} [PseudoMetricSpace E]
   refine ⟨Metric.ball y ε, Metric.isOpen_ball, Metric.mem_ball_self hε, ?_⟩
   intro z hz
   have hdist : dist (y : E) (z : E) < ε := by
-    simpa only [Metric.mem_ball, dist_comm] using hz
+    simpa only [Metric.mem_ball, dist_comm] using! hz
   have hp : c < rootProduct o (y : E) (z : E) := by
     have hb := rootProduct_lower o (y : E) (z : E)
     dsimp [ε] at hdist
@@ -89,9 +89,9 @@ theorem path_meets_branch_height {E : Type*} [PseudoMetricSpace E]
     intro r hr
     exact lt_of_not_ge (fun hle => hn ⟨r, hr, hle⟩)
   let τ : Icc s t → {z : E // c < dist o z} := fun r => ⟨γ r, habove r r.property⟩
-  have hτ : Continuous τ := hγ.restrict.subtype_mk _
+  have hτ : Continuous τ := hγ.domRestrict.subtype_mk _
   have hbranch := (branch_locallyConstant h o (γ s) c).comp_continuous hτ
-  letI : PreconnectedSpace (Icc s t) := isPreconnected_iff_preconnectedSpace.mp isPreconnected_Icc
+  let : PreconnectedSpace (Icc s t) := isPreconnected_iff_preconnectedSpace.mp isPreconnected_Icc
   have he := hbranch.apply_eq_of_preconnectedSpace ⟨s, ⟨le_rfl, hst⟩⟩ ⟨t, ⟨hst, le_rfl⟩⟩
   have hs : c < dist o (γ s) := habove s ⟨le_rfl, hst⟩
   change decide (c < rootProduct o (γ s) (γ s)) = decide (c < rootProduct o (γ s) (γ t)) at he

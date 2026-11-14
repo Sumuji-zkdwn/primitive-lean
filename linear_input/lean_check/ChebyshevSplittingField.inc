@@ -29,8 +29,7 @@ def parameterField (k : ℕ) : IntermediateField ℂ E :=
 /-- The degree of C(X)/C(t), reusing the established 2m theorem. -/
 theorem parameterField_finrank (k : ℕ) :
     Module.finrank (parameterField k) E = 2 * (3 ^ k) := by
-  simpa [parameterField] using
-    LinearInputChebyshevTower.finrank_genericParameter (3 ^ k)
+  exact LinearInputChebyshevTower.finrank_genericParameter (3 ^ k)
 
 /-- The element t, viewed as an element of the base intermediate field. -/
 def parameter (k : ℕ) : parameterField k :=

@@ -145,15 +145,17 @@ theorem cancelPosition_hasDerivAt (t : ℝ) :
     HasDerivAt cancelPosition (cancelVelocity t) t := by
   convert (((hasDerivAt_id t).pow 2).sub (((hasDerivAt_id t).pow 3).const_mul 2)).add
     ((hasDerivAt_id t).pow 4) using 1
-  dsimp [cancelPosition, cancelVelocity]
-  ring
+  · rfl
+  · dsimp [cancelVelocity]
+    ring
 
 theorem cancelVelocity_hasDerivAt (t : ℝ) :
     HasDerivAt cancelVelocity (cancelAcceleration t) t := by
   convert (((hasDerivAt_id t).const_mul 2).sub (((hasDerivAt_id t).pow 2).const_mul 6)).add
     (((hasDerivAt_id t).pow 3).const_mul 4) using 1
-  dsimp [cancelVelocity, cancelAcceleration]
-  ring
+  · rfl
+  · dsimp [cancelAcceleration]
+    ring
 
 theorem closed_mode_equation (t : ℝ) :
     deriv (deriv cancelPosition) t + cancelPosition t = cancelDrive t := by

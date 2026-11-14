@@ -34,7 +34,7 @@ theorem stoppedClass_isClosed {ι : Type*} [Fintype ι] {L : ℝ} (hL : 0 ≤ L)
     continuous_subtype_val.comp continuous_snd
   have he : IsClosed {z : Icc (0 : ℝ) L × speedControlledPaths L hL x |
       ∀t : Icc (0 : ℝ) L, z.2.val (max z.1 t) = z.2.val z.1} := by
-    simp only [setOf_forall]
+    simp only [ofPred_forall]
     exact isClosed_iInter (fun t => isClosed_eq (hf.eval (continuous_fst.max continuous_const))
       (hf.eval continuous_fst))
   exact ((signatureRangeClass_isClosed hL x P Q hK).preimage continuous_snd).inter he
@@ -55,7 +55,7 @@ theorem exists_minimal_stopping_time {ι : Type*} [Fintype ι] {L : ℝ} (hL : 0
     (f : speedControlledPaths L hL x) (hf : f ∈ signatureRangeClass hL x P Q K) :
     ∃ z ∈ stoppedClass hL x P Q K,
       ∀w ∈ stoppedClass hL x P Q K, (z.1 : ℝ) ≤ (w.1 : ℝ) := by
-  letI : CompactSpace (speedControlledPaths L hL x) :=
+  let : CompactSpace (speedControlledPaths L hL x) :=
     isCompact_iff_compactSpace.mp (speedControlledPaths_isCompact L hL x)
   exact (stoppedClass_isClosed hL x P Q hK).isCompact.exists_isMinOn
     ⟨(⟨L, hL, le_rfl⟩, f), terminal_mem_stoppedClass hL x P Q K f hf⟩
@@ -111,7 +111,7 @@ theorem shift_lipschitz (d : ℝ) : LipschitzWith 1 (fun t : ℝ => t + d) := by
 theorem lipSignature_shift {ι : Type*} [Fintype ι] (γ : ℝ → ι → ℝ)
     (hγ : LipschitzWith 1 γ) (d : ℝ) {a b : ℝ} (hab : a ≤ b) :
     lipSignature (fun t => γ (t + d))
-      (by simpa only [one_mul, Function.comp_apply] using (hγ.comp (shift_lipschitz d))) a b hab =
+      (by simpa only [one_mul, Function.comp_apply] using! (hγ.comp (shift_lipschitz d))) a b hab =
       lipSignature γ hγ (a + d) (b + d) (add_le_add hab le_rfl) :=
   lipSignature_reparametrize γ hγ (fun t => t + d) (shift_lipschitz d)
     (fun _ _ h => add_le_add h le_rfl) (add_le_add hab le_rfl) hab rfl rfl
@@ -291,7 +291,7 @@ def Route.paddedCurve {ι : Type*} [Fintype ι] {K : Set (Series ι)} {P Q : Ser
 theorem Route.paddedCurve_lipschitz {ι : Type*} [Fintype ι]
     {K : Set (Series ι)} {P Q : Series ι} (r : Route K P Q) :
     LipschitzWith 1 r.paddedCurve := by
-  simpa only [one_mul] using r.lipschitz.comp (clamp_lipschitz 0 r.duration)
+  simpa only [one_mul] using! r.lipschitz.comp (clamp_lipschitz 0 r.duration)
 
 theorem Route.paddedCurve_initial {ι : Type*} [Fintype ι]
     {K : Set (Series ι)} {P Q : Series ι} (r : Route K P Q) : r.paddedCurve 0 = 0 := by
@@ -404,7 +404,7 @@ def concatTail {ι : Type*} (γ η : ℝ → ι → ℝ) (T u : ℝ) : ι → �
 theorem concatTail_lipschitz {ι : Type*} [Fintype ι] (γ η : ℝ → ι → ℝ)
     (hη : LipschitzWith 1 η) (T : ℝ) : LipschitzWith 1 (concatTail γ η T) :=
   translate_lipschitz (fun u => η (u + -T))
-    (by simpa only [one_mul, Function.comp_apply] using hη.comp (shift_lipschitz (-T))) (γ T)
+    (by simpa only [one_mul, Function.comp_apply] using! hη.comp (shift_lipschitz (-T))) (γ T)
 
 theorem concatTail_matches {ι : Type*} (γ η : ℝ → ι → ℝ) (T : ℝ) (hη0 : η 0 = 0) :
     γ T = concatTail γ η T T := by simp [concatTail, hη0]
@@ -432,7 +432,7 @@ theorem concatTail_signature {ι : Type*} [Fintype ι] (γ η : ℝ → ι → �
       lipSignature η hη 0 (u - T) (sub_nonneg.mpr hTu) := by
   rw [show lipSignature (concatTail γ η T) (concatTail_lipschitz γ η hη T) T u hTu =
       lipSignature (fun z => η (z + -T))
-        (by simpa only [one_mul, Function.comp_apply] using hη.comp (shift_lipschitz (-T))) T u hTu from
+        (by simpa only [one_mul, Function.comp_apply] using! hη.comp (shift_lipschitz (-T))) T u hTu from
     lipSignature_translate _ _ (γ T) hTu]
   exact (lipSignature_shift η hη (-T) hTu).trans
     (lipSignature_interval_congr η hη _ _ (by ring) (by ring))
@@ -523,7 +523,7 @@ theorem reverseCurve_lipschitz {ι : Type*} [Fintype ι]
     (γ : ℝ → ι → ℝ) (hγ : LipschitzWith 1 γ) (T : ℝ) :
     LipschitzWith 1 (reverseCurve γ T) :=
   translate_lipschitz (fun u => γ (T - u))
-    (by simpa only [one_mul, Function.comp_apply] using hγ.comp (reverseClock_lipschitz T)) (-γ T)
+    (by simpa only [one_mul, Function.comp_apply] using! hγ.comp (reverseClock_lipschitz T)) (-γ T)
 
 theorem reverseCurve_initial {ι : Type*} (γ : ℝ → ι → ℝ) (T : ℝ) :
     reverseCurve γ T 0 = 0 := by simp [reverseCurve]
@@ -560,8 +560,8 @@ theorem reverseCurve_based_prefix {ι : Type*} [Fintype ι]
       stieltjesSignature p m T (T - u) := by
     have he := lipSignature_translate (fun t => γ (T - t))
       (show LipschitzWith 1 (fun t => γ (T - t)) by
-        simpa only [one_mul, Function.comp_apply] using hγ.comp (reverseClock_lipschitz T)) (-γ T) hu.1
-    exact he.trans (by simpa only [sub_zero] using hr)
+        simpa only [one_mul, Function.comp_apply] using! hγ.comp (reverseClock_lipschitz T)) (-γ T) hu.1
+    exact he.trans (by simpa only [sub_zero] using! hr)
   rw [hreverse, hsig T ⟨hT, le_rfl⟩,
     hsig (T - u) ⟨sub_nonneg.mpr hu.2, by linarith [hu.1]⟩, product_assoc,
     ← LinearInputCurveWordBVAlgebra.signature_product p m hp hm 0 T (T - u)]
@@ -601,7 +601,7 @@ def subCurve {ι : Type*} (γ : ℝ → ι → ℝ) (s u : ℝ) : ι → ℝ := 
 theorem subCurve_lipschitz {ι : Type*} [Fintype ι] (γ : ℝ → ι → ℝ)
     (hγ : LipschitzWith 1 γ) (s : ℝ) : LipschitzWith 1 (subCurve γ s) :=
   translate_lipschitz (fun u => γ (u + s))
-    (by simpa only [one_mul, Function.comp_apply] using hγ.comp (shift_lipschitz s)) (-γ s)
+    (by simpa only [one_mul, Function.comp_apply] using! hγ.comp (shift_lipschitz s)) (-γ s)
 
 theorem subCurve_initial {ι : Type*} (γ : ℝ → ι → ℝ) (s : ℝ) : subCurve γ s 0 = 0 := by
   simp [subCurve]
@@ -619,7 +619,7 @@ theorem subCurve_signature {ι : Type*} [Fintype ι] (γ : ℝ → ι → ℝ)
       lipSignature γ hγ s (u + s) (by linarith) := by
   have he := lipSignature_translate (fun t => γ (t + s))
     (show LipschitzWith 1 (fun t => γ (t + s)) by
-      simpa only [one_mul, Function.comp_apply] using hγ.comp (shift_lipschitz s)) (-γ s) hu
+      simpa only [one_mul, Function.comp_apply] using! hγ.comp (shift_lipschitz s)) (-γ s) hu
   exact he.trans ((lipSignature_shift γ hγ s hu).trans
     (lipSignature_bounds_congr γ hγ _ _ (zero_add s) rfl))
 
@@ -672,8 +672,8 @@ theorem Route.subpath_shortest {ι : Type*} [Fintype ι]
   let front := r.prefix s ⟨hs, hst.trans ht⟩
   let back := (r.subpath (hs.trans hst) ht le_rfl).copy rfl r.terminal
   have hbound := hmin ((front.join q).join back)
-  simp only [Route.join_duration, Route.copy_duration, Route.subpath_duration,
-    Route.prefix_duration, front, back] at hbound
+  simp only [Route.join_duration, front, back, Route.copy_duration, Route.subpath_duration] at hbound
+  change r.duration ≤ s + q.duration + (r.duration - t) at hbound
   linarith
 
 
@@ -1054,7 +1054,7 @@ theorem Route.shortest_variation {ι : Type*} [Fintype ι]
     (hmin : ∀ q : Route K P Q, r.duration ≤ q.duration) :
     variationLength r.curve 0 r.duration = r.duration := by
   apply le_antisymm
-  · simpa only [sub_zero] using unitLipschitz_variation_toReal_le r.lipschitz r.nonneg
+  · simpa only [sub_zero] using! unitLipschitz_variation_toReal_le r.lipschitz r.nonneg
   · exact (hmin r.arcLengthRoute).trans_eq r.arcLengthRoute_duration
 
 theorem Route.shortest_variation_minimal {ι : Type*} [Fintype ι]

@@ -58,7 +58,7 @@ theorem HermitianPair.add {T : ℝ} {u v : Branches T}
   simpa using congrArg₂ (· + ·) (hu k t) (hv k t)
 
 theorem isClosed_hermitianPair (T : ℝ) : IsClosed {u : Branches T | HermitianPair T u} := by
-  simp only [HermitianPair, Set.setOf_forall]
+  simp only [HermitianPair, Set.ofPred_forall]
   apply isClosed_iInter
   intro k
   apply isClosed_iInter
@@ -69,7 +69,11 @@ theorem isClosed_hermitianPair (T : ℝ) : IsClosed {u : Branches T | HermitianP
 
 theorem waveFactor_neg (T β c : ℝ) (k : ℤ) (σ : ℝ) (t : Time T) :
     waveFactor T β c (-k) σ t = star (waveFactor T β c k σ t) := by
-  simp only [waveFactor, ContinuousMap.coe_mk, Int.cast_neg, abs_neg,
+  change (Real.exp (-β * (t : ℝ) * |((-k : ℤ) : ℝ)|) : ℂ) *
+    Complex.exp (((-σ * c * ((-k : ℤ) : ℝ) * (t : ℝ) : ℝ) : ℂ) * Complex.I) =
+    star ((Real.exp (-β * (t : ℝ) * |(k : ℝ)|) : ℂ) *
+    Complex.exp (((-σ * c * (k : ℝ) * (t : ℝ) : ℝ) : ℂ) * Complex.I))
+  simp only [Int.cast_neg, abs_neg,
     star_mul, Complex.star_def, map_mul, Complex.conj_ofReal, ← Complex.exp_conj]
   rw [mul_comm]
   congr 1
@@ -131,17 +135,20 @@ theorem multiplier_neg (k : ℤ) (hk : k ≠ 0) :
   unfold AnalyticFourierDuhamel.multiplier
   by_cases h : k < 0
   · have hn : ¬ -k < 0 := by omega
-    rw [if_neg hn, if_pos h]
+    rw [ite_eq_right hn, ite_eq_left h]
     simp
   · have hn : -k < 0 := by omega
-    rw [if_pos hn, if_neg h]
+    rw [ite_eq_left hn, ite_eq_right h]
     simp
 
 theorem mode_zero (T : ℝ) (hT : 0 ≤ T) (β c : ℝ) (hβ : 0 < β) (f : C(Time T, ℂ)) :
     AnalyticFourierDuhamel.mode T hT β c hβ 0 f = 0 := by
   ext t
-  simp [AnalyticFourierDuhamel.mode, AnalyticDuhamel.oscillatoryCLM,
-    AnalyticDuhamel.oneModeCLM, AnalyticDuhamel.oneMode, AnalyticDuhamel.phaseCLM]
+  change AnalyticFourierDuhamel.multiplier 0 *
+    (AnalyticDuhamel.phase T (-(c * 0)) t *
+      ((|(0 : ℝ)| * Real.exp (-β * (t : ℝ) * |(0 : ℝ)|)) •
+        AnalyticDuhamel.primitive T hT β |(0 : ℝ)| (AnalyticDuhamel.phaseCLM T (c * 0) f) t)) = 0
+  simp
 
 theorem mode_neg_star (T : ℝ) (hT : 0 ≤ T) (β c : ℝ) (hβ : 0 < β)
     (k : ℤ) (f : C(Time T, ℂ)) :

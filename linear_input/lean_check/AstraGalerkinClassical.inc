@@ -106,8 +106,9 @@ theorem electric_time (N : ℕ) (z : GalerkinFlow.State N) (t x : ℝ) :
   have hd := (hasDerivAt_electricOfDisplacement (displacement N z t x)).comp t
     (displacement_time N z t x)
   convert hd using 1
-  dsimp [electric]
-  ring
+  · rfl
+  · dsimp [electric]
+    ring
 
 theorem magnetic_endpoint (N : ℕ) (z : GalerkinFlow.State N) (t : ℝ) :
     magnetic N z t (2*Real.pi) = magnetic N z t 0 := lift_endpoint N _

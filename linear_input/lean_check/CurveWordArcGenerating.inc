@@ -51,17 +51,16 @@ theorem arc_word_monomial (w : List Bool) :
   simpa only [monomial_zero, one_mul] using he
 
 theorem arc_coefficient_counts_words (n : ℕ) (e : Exponent) :
-    (wordSum arcNext arcWeight n 0) e =
+    (wordSum arcNext arcWeight n 0).coeff e =
       (((words (A := Bool) n).filter (fun w => stateExponent (state w) = e)).card : ℤ) := by
   classical
   change (AddMonoidAlgebra.coeff (wordSum arcNext arcWeight n 0)) e = _
   unfold wordSum
-  rw [AddMonoidAlgebra.coeff_sum, Finsupp.finset_sum_apply]
-  simp [arc_word_monomial, monomial, AddMonoidAlgebra.coeff]
-  simp [AddMonoidAlgebra.single_apply]
+  rw [AddMonoidAlgebra.coeff_sum, Finsupp.finsetSum_apply]
+  simp [arc_word_monomial, monomial, Finsupp.single_apply]
 
 theorem arc_matrix_coefficients_exact (n : ℕ) (e : Exponent) :
-    (∑ r : Fin 4, (weightedMatrix arcNext arcWeight ^ n) 0 r) e =
+    (∑ r : Fin 4, (weightedMatrix arcNext arcWeight ^ n) 0 r).coeff e =
       (((words (A := Bool) n).filter (fun w => stateExponent (state w) = e)).card : ℤ) := by
   rw [← wordSum_eq_matrix_power]
   exact arc_coefficient_counts_words n e

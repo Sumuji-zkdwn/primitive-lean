@@ -21,8 +21,9 @@ theorem hasDerivAt_potential (lam r u x : ℝ) :
   convert ((((hasDerivAt_id x).pow 4).const_mul lam).div_const 4).add
     ((((hasDerivAt_id x).pow 2).const_mul r).div_const 2) |>.sub
     ((hasDerivAt_id x).const_mul u) using 1
-  simp only [id_eq]
-  ring
+  · rfl
+  · simp only [id_eq]
+    ring
 
 theorem deriv_potential (lam r u x : ℝ) :
     deriv (potential lam r u) x = lam * x ^ 3 + r * x - u :=

@@ -247,8 +247,9 @@ theorem hasDerivAt_electric (Q : ι → ι → ℝ) (t : ℝ) (z : State ι) (i 
   have h := (ExplicitMaterial.hasDerivAt_materialInverse ((flow Q t z).fst i)).comp t
     (hasDerivAt_displacement Q t z i)
   convert h using 1
-  dsimp only [FiniteEnergy.electricRate, electric]
-  ring
+  · rfl
+  · dsimp only [FiniteEnergy.electricRate, electric]
+    ring
 
 /-- The constructed flow, rather than an assumed trajectory, satisfies the physical ODEs. -/
 theorem restored_physical_equations (Q : ι → ι → ℝ) (z : State ι) (t : ℝ) (i : ι) :

@@ -196,8 +196,7 @@ theorem hasDerivAt_deriv_density_integral
   · intro t ht s hs
     convert (((hε.deriv'.differentiable one_ne_zero) (K t s)).hasDerivAt.comp t
       (hKV t ht s hs)).mul (hVA t ht s hs) using 1
-    dsimp
-    ring
+    all_goals first | rfl | (simp only [Function.comp_apply]; ring)
 
 /-- Local C² correction coefficients have a common compact time neighborhood
 on which their first two derivatives are continuous and their jets exist. -/
@@ -259,15 +258,16 @@ theorem hasDerivAt_corrected_integral_and_deriv
     intro t ht s _
     have ha' := ((hab t ⟨ht.1.le, ht.2.le⟩).1.differentiableAt (by norm_num)).hasDerivAt
     have hb' := ((hab t ⟨ht.1.le, ht.2.le⟩).2.differentiableAt (by norm_num)).hasDerivAt
-    simpa [K, V] using ((((hasDerivAt_id t).mul_const (v s)).const_add (κ s)).add
-      (ha'.mul_const (u s))).add (hb'.mul_const (w s))
+    convert ((((hasDerivAt_id t).mul_const (v s)).const_add (κ s)).add
+      (ha'.mul_const (u s))).add (hb'.mul_const (w s)) using 1
+    all_goals first | rfl | simp [V]
   have hdV : ∀ t ∈ Ioo (-r) r, ∀ s ∈ Icc 0 ℓ, HasDerivAt (fun t => V t s) (A t s) t := by
     intro t ht s _
     have ha' := (((hab t ⟨ht.1.le, ht.2.le⟩).1.derivWithin
       (m := 1) (by norm_num)).differentiableAt one_ne_zero).hasDerivAt
     have hb' := (((hab t ⟨ht.1.le, ht.2.le⟩).2.derivWithin
       (m := 1) (by norm_num)).differentiableAt one_ne_zero).hasDerivAt
-    simpa [V, A] using ((ha'.mul_const (u s)).const_add (v s)).add (hb'.mul_const (w s))
+    convert ((ha'.mul_const (u s)).const_add (v s)).add (hb'.mul_const (w s)) using 1
   constructor
   · have hf := hasDerivAt_integral_of_continuousOn_rectangle
       (F := fun t s => ε (K t s)) (D := fun t s => deriv ε (K t s) * V t s)

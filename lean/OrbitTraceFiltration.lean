@@ -89,6 +89,7 @@ theorem canonicalDelta_strict_degree_or_zero (p : ℕ) (a : ℚ)
     (P : Polynomial ℚ) (hP : P ≠ 0) :
     canonicalDelta p a P = 0 ∨
       (canonicalDelta p a P).natDegree < P.natDegree := by
+  clear hP
   by_cases hsmall : P.natDegree ≤ p
   · exact Or.inl (canonicalDelta_zero_of_low_degree p a P hsmall)
   · right

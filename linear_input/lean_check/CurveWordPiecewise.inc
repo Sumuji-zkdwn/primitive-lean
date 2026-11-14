@@ -336,16 +336,18 @@ theorem curvePoint_splice_left (h a : ℝ) (θ : ℝ → ℝ)
     curvePoint (splice h a θ) t = curvePoint (LinearInputCurveWordArc.arcAngle h a) t := by
   apply Complex.ext
   · change Elastica.xCoord (splice h a θ) 0 t = _
-    unfold Elastica.xCoord
-    congr 1
+    change Elastica.xCoord (splice h a θ) 0 t =
+      Elastica.xCoord (LinearInputCurveWordArc.arcAngle h a) 0 t
+    simp only [Elastica.xCoord, zero_add]
     apply intervalIntegral.integral_congr
     intro s hs
     rw [uIcc_of_le ht.1] at hs
     change Real.cos (splice h a θ s) = _
     rw [splice_left h a θ (hs.2.trans ht.2)]
   · change Elastica.yCoord (splice h a θ) 0 t = _
-    unfold Elastica.yCoord
-    congr 1
+    change Elastica.yCoord (splice h a θ) 0 t =
+      Elastica.yCoord (LinearInputCurveWordArc.arcAngle h a) 0 t
+    simp only [Elastica.yCoord, zero_add]
     apply intervalIntegral.integral_congr
     intro s hs
     rw [uIcc_of_le ht.1] at hs
@@ -469,6 +471,7 @@ theorem areaWordState_first (h : ℝ) (w : List Bool) :
   | cons a w ih =>
     simp only [areaWordState, joinArea, areaLetterState, ih, wordState_cons]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem curve_area_wordState {h : ℝ} (hh : 0 < h) (w : List Bool) :
     signedArea (wordAngle h w) (wordLength h w) = (areaWordState h w).2 := by
   induction w with
@@ -479,7 +482,9 @@ theorem curve_area_wordState {h : ℝ} (hh : 0 < h) (w : List Bool) :
     rw [signedArea_splice hh _ (wordAngle_continuous hh w) (wordAngle_initial hh w)
       (wordLength_nonneg hh w), ih]
     simp only [areaWordState, joinArea, areaLetterState, areaCocycle, areaWordState_first]
-    congr 1
+    apply congrArg (fun z : ℝ =>
+      signedArea (LinearInputCurveWordArc.arcAngle h (letterAngle a)) h +
+        (areaWordState h w).2 + z)
     rw [← curve_endpoint_wordState hh]
     have ha : angle (LinearInputCurveWordArc.letterState h a) = letterAngle a := by
       change LinearInputCurveWordArc.arcAngle h (letterAngle a) h -

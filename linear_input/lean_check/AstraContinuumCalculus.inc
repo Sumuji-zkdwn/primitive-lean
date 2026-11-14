@@ -92,7 +92,7 @@ theorem projection_residual_pairing
     simp_rw [hr]
     exact periodic_skew_integral H (fun x => V x - P V x) Hx
       (fun x => Vx x - PVx x) a b hH (fun x => (hV x).sub (hPV x))
-      cHx (cVx.sub cPVx) pH (by dsimp; rw [pV, pPV])
+      cHx (cVx.sub cPVx) pH (by rw [pV, pPV])
   have hsub₁ : (∫ x in a..b, J x * r x - H x * r x) =
       (∫ x in a..b, J x * r x) - ∫ x in a..b, H x * r x :=
     intervalIntegral.integral_sub ((cJ.mul cr).intervalIntegrable a b)

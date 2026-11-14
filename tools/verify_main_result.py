@@ -34,7 +34,7 @@ EXTRA_IMPORTS = (
     "Mathlib.Data.Fintype.Sum",
     "Mathlib.SetTheory.Cardinal.Finite",
     "Mathlib.Data.Fin.VecNotation",
-    "Mathlib.Data.Setoid.Basic",
+    "Mathlib.Order.Setoid.Basic",
     "Mathlib.Algebra.BigOperators.Fin",
     "Mathlib.Data.Finset.Max",
     "Mathlib.Topology.Algebra.Order.Field",
@@ -55,7 +55,7 @@ EXTRA_IMPORTS = (
     "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
     "Mathlib.Analysis.SpecialFunctions.Sqrt",
     "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic",
-    "Mathlib.Data.Real.Basic",
+    "Mathlib.Basic.Real.Basic",
     "Mathlib.Tactic",
     "Mathlib.Tactic.FieldSimp",
     "Mathlib.Tactic.Linarith",
@@ -89,7 +89,7 @@ EXTRA_IMPORTS = (
     "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
     "Mathlib.Analysis.SpecialFunctions.Log.Basic",
     "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv",
-    "Mathlib.Data.Real.Sqrt",
+    "Mathlib.Analysis.Real.Sqrt",
     "Mathlib.MeasureTheory.Integral.Bochner.Set",
     "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus",
     "Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts",
@@ -114,6 +114,7 @@ EXTRA_IMPORTS = (
     "Mathlib.Topology.ContinuousMap.StoneWeierstrass",
     "Mathlib.Topology.UniformSpace.UniformApproximation",
     "Mathlib.Topology.EMetricSpace.BoundedVariation",
+    "Mathlib.Topology.EMetricSpace.VariationOnFromTo",
     "Mathlib.MeasureTheory.Measure.Stieltjes",
     "Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap",
     "Mathlib.MeasureTheory.Integral.DominatedConvergence",
@@ -457,7 +458,7 @@ def main():
         baseline_path = ROOT / report["baseline_report"]
         baseline = json.loads(baseline_path.read_text("utf-8"))
         if not baseline["passed"]:
-            raise ValueError("The unchanged baseline verifier did not pass")
+            raise ValueError("The current baseline verifier did not pass")
         if baseline["compile"]["exit_code"] != 0 or baseline["parent_library_build"]["exit_code"] != 0:
             raise ValueError("The baseline build or joint compile failed")
         original = [{**d, "file": canonical_path(d["file"])}
@@ -486,6 +487,8 @@ def main():
         report["assembly_contexts"] = astra_manifest.get("assembly_contexts", [])
         astra_inputs = ["tools/check_astra_physics.py", "docs/astra/manifest.json",
                         astra_manifest["bridge_contract"]["preserved_copy"]]
+        if (ROOT / "docs/lean436/migration.json").is_file():
+            astra_inputs += ["docs/lean436/migration.json", "tools/check_lean_migration.py"]
         astra_inputs += [row["preserved_copy"] for row in astra_manifest["modules"]]
         astra_inputs += [astra.contract_path(row) for row in astra_manifest.get("additional_bridge_contracts", [])]
         for rel in astra_inputs:
@@ -597,8 +600,9 @@ def main():
     except (OSError, ValueError, KeyError, TypeError) as error:
         report["errors"].append(str(error))
     report["log_sha256"] = sha(log_path)
-    report["scope"] = ("The original checker and its 60 proof sources remain unchanged. "
-        "This second --trust=0 compilation audits the original declarations, the additive main result "
+    report["scope"] = ("This report checks the current pinned sources, whose hashes and baseline audit are verified above. "
+        "Historical integration sources and migration hashes are audited separately. "
+        "This second --trust=0 compilation audits the baseline declarations, the additive main result "
         "and the general fixed-input minimum, support composition, quartic classification and curvature rigidity criteria "
         "in one assembled Lean session. It verifies proofs, not numerical simulations or browser rendering.")
     write_json(OUT / "main-result.json", report)

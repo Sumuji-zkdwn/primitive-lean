@@ -5,6 +5,9 @@ noncomputable section
 namespace LinearInputCurveWordFriedrichs
 open LinearInputCurveWordFormalSeries LinearInputCurveWordCoproduct
 
+-- Mathlib now requires the associative commutator Lie ring explicitly.
+attribute [local instance 100] LieRing.ofAssociativeRing
+
 /-- The coefficient formula for the convolution `S * Y`, where `S` is reversal
 with sign and `Y` multiplies a word by its degree. -/
 def dynkin {ι : Type*} (F : Series ι) (w : List ι) : ℝ :=
@@ -129,7 +132,7 @@ theorem coproduct_rcons {ι : Type*} [DecidableEq ι] (F : Series ι) (a : ι) (
     | append_singleton w j _ =>
       rw [coproduct_snoc_snoc, rcons_snoc, rcons_snoc]
       by_cases hi : i = a <;> by_cases hj : j = a <;>
-        simp only [rcons_snoc, hi, hj, if_true, if_false, coproduct_zero_fun, add_zero, zero_add]
+        simp only [rcons_snoc, hi, hj, ite_true, ite_false, coproduct_zero_fun, add_zero, zero_add]
 
 /-- The convolution `S * id`, used to expose the cancellation in Dynkin's formula. -/
 def antipodeConvolution {ι : Type*} (F : Series ι) (w : List ι) : ℝ :=
@@ -151,7 +154,7 @@ theorem dynkin_rcons_left {ι : Type*} [DecidableEq ι] (F : Series ι) (a : ι)
       List.take_succ_cons, List.reverse_cons, List.drop_succ_cons, rcons_snoc,
       Nat.add_sub_add_right, pow_succ, lcons]
     by_cases hi : i = a
-    · simp only [hi, if_true, dynkin, ← Finset.sum_neg_distrib]
+    · simp only [hi, ite_true, dynkin, ← Finset.sum_neg_distrib]
       apply Finset.sum_congr rfl
       intro k _
       ring
@@ -168,16 +171,16 @@ theorem dynkin_rcons_right {ι : Type*} [DecidableEq ι] (F : Series ι) (a : ι
     simp only [Nat.sub_self, Nat.cast_zero, mul_zero, zero_mul, add_zero]
     rw [rcons_snoc]
     by_cases hi : i = a
-    · simp only [hi, if_true, Pi.add_apply, dynkin, antipodeConvolution, ← Finset.sum_add_distrib]
+    · simp only [hi, ite_true, Pi.add_apply, dynkin, antipodeConvolution, ← Finset.sum_add_distrib]
       apply Finset.sum_congr rfl
       intro k hk
       have hk' : k ≤ w.length := Nat.le_of_lt_succ (Finset.mem_range.mp hk)
       rw [List.take_append_of_le_length hk', List.drop_append_of_le_length hk', rcons_snoc]
-      simp only [if_true]
+      simp only [ite_true]
       have hn : w.length + 1 - k = w.length - k + 1 := by omega
       rw [hn, Nat.cast_add, Nat.cast_one]
       ring
-    · simp only [hi, if_false]
+    · simp only [hi, ite_false]
       apply Finset.sum_eq_zero
       intro k hk
       have hk' : k ≤ w.length := Nat.le_of_lt_succ (Finset.mem_range.mp hk)
@@ -203,7 +206,7 @@ theorem antipode_rcons_left {ι : Type*} [DecidableEq ι] (F : Series ι) (a : �
     simp only [List.take_zero, List.reverse_nil, rcons_nil, mul_zero, add_zero,
       List.take_succ_cons, List.reverse_cons, List.drop_succ_cons, rcons_snoc, pow_succ, lcons]
     by_cases hi : i = a
-    · simp only [hi, if_true, antipodeConvolution, ← Finset.sum_neg_distrib]
+    · simp only [hi, ite_true, antipodeConvolution, ← Finset.sum_neg_distrib]
       apply Finset.sum_congr rfl
       intro k _
       ring
@@ -220,13 +223,13 @@ theorem antipode_rcons_right {ι : Type*} [DecidableEq ι] (F : Series ι) (a : 
     have hd : List.drop (w.length + 1) (w ++ [i]) = [] := by simp
     rw [hd, rcons_nil, mul_zero, add_zero, rcons_snoc]
     by_cases hi : i = a
-    · simp only [hi, if_true, antipodeConvolution]
+    · simp only [hi, ite_true, antipodeConvolution]
       apply Finset.sum_congr rfl
       intro k hk
       have hk' : k ≤ w.length := Nat.le_of_lt_succ (Finset.mem_range.mp hk)
       rw [List.take_append_of_le_length hk', List.drop_append_of_le_length hk', rcons_snoc]
-      simp only [if_true]
-    · simp only [hi, if_false]
+      simp only [ite_true]
+    · simp only [hi, ite_false]
       apply Finset.sum_eq_zero
       intro k hk
       have hk' : k ≤ w.length := Nat.le_of_lt_succ (Finset.mem_range.mp hk)
@@ -242,6 +245,7 @@ theorem antipode_rcons {ι : Type*} [DecidableEq ι] (F : Series ι) (a : ι) :
   simp only [Pi.sub_apply]
   ring
 
+set_option backward.isDefEq.respectTransparency false in
 theorem rcons_delta {ι : Type*} [DecidableEq ι] (u : List ι) (a : ι) :
     rcons (delta u) a = delta (u ++ [a]) := by
   funext w
@@ -302,6 +306,7 @@ theorem antipode_unit {ι : Type*} : antipodeConvolution (@unitSeries ι) = unit
       rw [unitSeries_eq_zero_of_ne_nil _ hz]
       ring
 
+set_option backward.isDefEq.respectTransparency false in
 theorem antipode_delta {ι : Type*} [DecidableEq ι] (u : List ι) (hu : u ≠ []) :
     antipodeConvolution (delta u) = 0 := by
   induction u using List.reverseRecOn with
@@ -347,6 +352,7 @@ theorem dynkin_singleton {ι : Type*} [DecidableEq ι] (a : ι) : dynkin (delta 
   rw [← rcons_unit, dynkin_rcons, dynkin_unit, antipode_unit, zero_add,
     lcons_zero, sub_zero, rcons_unit]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem product_delta_right {ι : Type*} [DecidableEq ι] (F : Series ι) (a : ι) :
     product F (delta [a]) = rcons F a := by
   funext w
@@ -363,6 +369,7 @@ theorem product_delta_right {ι : Type*} [DecidableEq ι] (F : Series ι) (a : �
     rw [hz, mul_zero, add_zero]
     by_cases hi : i = a <;> simp [hi, product_unit_right, product_zero_right]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem product_delta_left {ι : Type*} [DecidableEq ι] (F : Series ι) (a : ι) :
     product (delta [a]) F = lcons F a := by
   funext w
@@ -391,6 +398,7 @@ theorem nestedLie_snoc {ι : Type*} (u : List ι) (a : ι) (hu : u ≠ []) :
   | nil => contradiction
   | cons i u => simp [nestedLie, List.foldl_append]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Dynkin's word identity: the convolution operator sends each tensor word
 to its actual left-nested free-Lie bracket under the universal expansion. -/
 theorem dynkin_delta_eq_lieExpansion {ι : Type*} [DecidableEq ι] (u : List ι) :
@@ -399,7 +407,7 @@ theorem dynkin_delta_eq_lieExpansion {ι : Type*} [DecidableEq ι] (u : List ι)
   | nil =>
     rw [delta_nil, dynkin_unit]
     change (0 : TensorSeries ι) = lieExpansion 0
-    exact (map_zero lieExpansion).symm
+    exact (map_zero (lieExpansion (ι := ι))).symm
   | append_singleton u a ih =>
     by_cases hu : u = []
     · subst u
@@ -477,6 +485,7 @@ def primitiveLieDegree {ι : Type*} [Fintype ι] [DecidableEq ι]
     (F : Series ι) (n : ℕ) : FreeLieAlgebra ℝ ι :=
   (n : ℝ)⁻¹ • ∑ u ∈ degreeWords ι n, F u • nestedLie u
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The homogeneous Friedrichs theorem, with an explicit free-Lie witness. -/
 theorem primitiveLieDegree_expansion {ι : Type*} [Fintype ι] [DecidableEq ι]
     {F : Series ι} (hF : Primitive F) (n : ℕ) (hn : n ≠ 0) :

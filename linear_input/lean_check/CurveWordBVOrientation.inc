@@ -63,7 +63,7 @@ theorem pathSignature_oriented_reparametrize {ι : Type*} [Fintype ι]
     have hreverse : pathSignature (reversePath (γ ∘ φ) c d) hcd
         (reversePath_boundedVariation (oriented_comp_boundedVariation hγ (Or.inr ho) hmap))
         (reversePath_continuousOn (hc.comp hφ hmap)) = stieltjesSignature p m (φ d) (φ c) := by
-      simpa only [hec, hed] using heψ
+      simpa only [hec, hed] using! heψ
     have hXY := pathSignature_product_reverse (γ ∘ φ) hcd
       (oriented_comp_boundedVariation hγ (Or.inr ho) hmap) (hc.comp hφ hmap)
     rw [hreverse] at hXY

@@ -27,14 +27,14 @@ theorem canonicalDelta_fast_nilpotent (p : ℕ) (a : ℚ) :
         (fastSteps p d) P = 0 := by
   intro d
   induction d using Nat.strong_induction_on with
-  | h d ih =>
+  | ind d ih =>
       intro P hdegree
       by_cases hsmall : d ≤ p
       · have hzero : canonicalDelta p a P = 0 :=
           canonicalDelta_zero_of_low_degree p a P
             (hdegree.trans hsmall)
         have hsteps : fastSteps p d = 1 := by
-          rw [fastSteps, dif_pos hsmall]
+          rw [fastSteps, dite_eq_left hsmall]
         rw [hsteps]
         change canonicalDelta p a P = 0
         exact hzero
@@ -46,7 +46,7 @@ theorem canonicalDelta_fast_nilpotent (p : ℕ) (a : ℚ) :
             (canonicalDelta_degree_bound p a d P hdegree)
         have hstep : fastSteps p d =
             fastSteps p (d - (p + 1)) + 1 := by
-          rw [fastSteps, dif_neg hsmall]
+          rw [fastSteps, dite_eq_right hsmall]
         rw [hstep]
         change iterDrop (fun Q : Polynomial ℚ => canonicalDelta p a Q)
           (fastSteps p (d - (p + 1)))

@@ -307,7 +307,7 @@ theorem normalizedLoopLift_lipschitz {ι : Type*} [Fintype ι] (G : ℝ → ι �
     (hG : LipschitzWith 1 G) {L : ℝ} (hL : 0 ≤ L)
     (hzero : lipSignature G hG 0 L hL = unitSeries) :
     LipschitzWith 1 (normalizedLoopLift G hG hL hzero) := by
-  simpa only [one_mul] using
+  simpa only [one_mul] using!
     ((normalizedLoopRoute G hG hL hzero).prefixPoint_lipschitz (lipSignatureImage_isClosed G hG hL)).comp
       (LipschitzWith.projIcc hL)
 
@@ -316,8 +316,10 @@ theorem normalizedLoopLift_value {ι : Type*} [Fintype ι] (G : ℝ → ι → �
     (hzero : lipSignature G hG 0 L hL = unitSeries) {t : ℝ} (ht : t ∈ Icc 0 L) :
     (normalizedLoopLift G hG hL hzero t).value = lipSignature G hG 0 t ht.1 := by
   change ((normalizedLoopRoute G hG hL hzero).prefixPoint _ (projIcc 0 L hL t)).value = _
-  rw [projIcc_of_mem hL ht, Route.prefixPoint_value, product_unit_left,
-    normalizedLoopRoute_prefix G hG hL hzero ht.1]
+  rw [projIcc_of_mem hL ht]
+  change product unitSeries (lipSignature (normalizedLoopRoute G hG hL hzero).curve
+    (normalizedLoopRoute G hG hL hzero).lipschitz 0 t ht.1) = _
+  rw [product_unit_left, normalizedLoopRoute_prefix G hG hL hzero ht.1]
 
 theorem normalizedLoopLift_closed {ι : Type*} [Fintype ι] (G : ℝ → ι → ℝ)
     (hG : LipschitzWith 1 G) {L : ℝ} (hL : 0 ≤ L)

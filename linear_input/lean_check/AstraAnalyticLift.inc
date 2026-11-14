@@ -55,12 +55,15 @@ def freeTraceLinear (T β c : ℝ) (k : ℤ) : (ℂ × ℂ) →ₗ[ℝ] C(Time T
 
 def freeTraceCLM (T β c : ℝ) (hβ : 0 ≤ β) (k : ℤ) :
     (ℂ × ℂ) →L[ℝ] C(Time T, ℂ × ℂ) :=
-  (freeTraceLinear T β c k).mkContinuous 1 (fun a => by simpa using freeTrace_norm_le T β c hβ k a)
+  (freeTraceLinear T β c k).mkContinuous 1 (fun a => by
+    change ‖freeTrace T β c k a‖ ≤ 1 * ‖a‖
+    simpa only [one_mul] using freeTrace_norm_le T β c hβ k a)
 
 theorem freeTraceCLM_opNorm_le (T β c : ℝ) (hβ : 0 ≤ β) (k : ℤ) :
     ‖freeTraceCLM T β c hβ k‖ ≤ 1 := by
   apply (freeTraceCLM T β c hβ k).opNorm_le_bound (by norm_num)
   intro a
+  change ‖freeTrace T β c k a‖ ≤ 1 * ‖a‖
   simpa only [one_mul] using freeTrace_norm_le T β c hβ k a
 
 /-- The supplied initial coefficients already include exp(rho0 |k|).
@@ -74,13 +77,18 @@ theorem freeLift_apply (T β c : ℝ) (hβ : 0 ≤ β) (a : Initial) (k : ℤ) (
 
 theorem freeLift_norm_le (T β c : ℝ) (hβ : 0 ≤ β) (a : Initial) :
     ‖freeLift T β c hβ a‖ ≤ ‖a‖ := by
+  unfold freeLift
   simpa only [one_mul] using AnalyticLpMap.diagonal_norm_le
     (freeTraceCLM T β c hβ) 1 (freeTraceCLM_opNorm_le T β c hβ) a
 
 theorem freeLift_initial (T β c : ℝ) (hT : 0 ≤ T) (hβ : 0 ≤ β) (a : Initial) (k : ℤ) :
     freeLift T β c hβ a k ⟨0, ⟨le_rfl, hT⟩⟩ = a k := by
   rw [freeLift_apply]
-  simp [waveFactor]
+  change ((Real.exp (-β * 0 * |(k : ℝ)|) : ℂ) *
+    Complex.exp (((-1 * c * (k : ℝ) * 0 : ℝ) : ℂ) * Complex.I) * (a k).1,
+    (Real.exp (-β * 0 * |(k : ℝ)|) : ℂ) *
+    Complex.exp (((-(-1) * c * (k : ℝ) * 0 : ℝ) : ℂ) * Complex.I) * (a k).2) = a k
+  simp
 
 theorem inverse_sqrt_two_le : (1 : ℝ) / Real.sqrt 2 ≤ 5 / 7 := by
   have hp : 0 < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)

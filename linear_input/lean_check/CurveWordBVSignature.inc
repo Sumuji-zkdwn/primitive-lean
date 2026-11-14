@@ -16,7 +16,7 @@ def SameIncrements (p m q n : StieltjesFunction ℝ) : Prop :=
   ∀ a b, (p b - p a) - (m b - m a) = (q b - q a) - (n b - n a)
 
 theorem continuous_stieltjes_noAtoms (p : StieltjesFunction ℝ) (hp : Continuous (p : ℝ → ℝ)) :
-    NoAtoms p.measure := by
+    NullSingletonClass p.measure := by
   constructor
   intro t
   rw [StieltjesFunction.measure_singleton, hp.continuousWithinAt.leftLim_eq, sub_self, ENNReal.ofReal_zero]
@@ -24,7 +24,7 @@ theorem continuous_stieltjes_noAtoms (p : StieltjesFunction ℝ) (hp : Continuou
 theorem primitive_stieltjes_continuous (p : StieltjesFunction ℝ)
     (hp : Continuous (p : ℝ → ℝ)) {F : ℝ → ℝ} (hF : Continuous F) (a : ℝ) :
     Continuous (fun t => ∫ s in a..t, F s ∂p.measure) := by
-  letI : NoAtoms p.measure := continuous_stieltjes_noAtoms p hp
+  let : NullSingletonClass p.measure := continuous_stieltjes_noAtoms p hp
   exact intervalIntegral.continuous_primitive (fun x y => hF.intervalIntegrable x y) a
 
 theorem stieltjesIntegral_continuous (p m : StieltjesFunction ℝ)
