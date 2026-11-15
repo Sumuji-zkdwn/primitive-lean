@@ -158,6 +158,79 @@ theorem relSet_comp_eq_of_first_closed
     exact ⟨x, hx, by simpa only [hxy] using hr⟩
   · exact relSet_comp_subset π U V B
 
+
+/-- Provided the observer has at least two genuinely different outputs,
+    fiber-image closure is not merely sufficient: it is NECESSARY for exact
+    relational composition with every possible continuation V. -/
+theorem fiberImageClosed_iff_all_continuations
+    (π : α → β) (U : α → α) (a b : α) (hab : π a ≠ π b) :
+    FiberImageClosed π U ↔
+      ∀ (V : α → α) (B : Set β),
+        relSet π V (relSet π U B) =
+          relSet π (fun x => V (U x)) B := by
+  constructor
+  · intro h V B
+    exact relSet_comp_eq_of_first_closed π U V h B
+  · intro h q x hreach
+    classical
+    by_contra hno
+    let V : α → α := fun t => if t = x then a else b
+    have hx : π x ∈ relSet π U ({q} : Set β) := by
+      rcases hreach with ⟨y, hy, hout⟩
+      exact ⟨y, by simpa only [hy, Set.mem_singleton_iff], hout⟩
+    have hm : π a ∈ relSet π V (relSet π U ({q} : Set β)) := by
+      exact ⟨x, hx, by simp [V]⟩
+    rw [h V {q}] at hm
+    rcases hm with ⟨z, hz, hzout⟩
+    have hneq : U z ≠ x := by
+      intro hzux
+      apply hno
+      exact ⟨z, by simpa only [Set.mem_singleton_iff] using hz, hzux⟩
+    have heq : π b = π a := by simpa [V, hneq] using hzout
+    exact hab heq.symm
+
+/-- Concrete updates, composed from left to right. -/
+def concreteIter (U : α → α) : ℕ → α → α
+  | 0 => fun x => x
+  | n + 1 => fun x => concreteIter U n (U x)
+
+/-- Coarse relational updates, composed from left to right. -/
+def observedIter (π : α → β) (U : α → α) : ℕ → Set β → Set β
+  | 0 => fun B => B
+  | n + 1 => fun B => observedIter π U n (relSet π U B)
+
+theorem relSet_identity (π : α → β) (hπ : Function.Surjective π) (B : Set β) :
+    relSet π (fun x => x) B = B := by
+  ext r
+  constructor
+  · rintro ⟨x, hx, hr⟩
+    exact hr ▸ hx
+  · intro hr
+    rcases hπ r with ⟨x, hx⟩
+    exact ⟨x, by simpa only [hx] using hr, hx⟩
+
+/-- For fiber-image-closed U, repeatedly collapsing and applying the
+    relation agrees at EVERY finite time with concrete iteration from the
+    full preimage of the initial observable set. -/
+theorem observedIter_exact_of_fiberImageClosed (π : α → β) (U : α → α)
+    (hπ : Function.Surjective π) (hU : FiberImageClosed π U)
+    (n : ℕ) (B : Set β) :
+    observedIter π U n B = relSet π (concreteIter U n) B := by
+  induction n generalizing B with
+  | zero =>
+      change B = relSet π (fun x => x) B
+      exact (relSet_identity π hπ B).symm
+  | succ n ih =>
+      change observedIter π U n (relSet π U B) =
+        relSet π (fun x => concreteIter U n (U x)) B
+      rw [ih (relSet π U B)]
+      exact relSet_comp_eq_of_first_closed π U (concreteIter U n) hU B
+
+/-- Set preimages allow an exact-concrete statement without any artificial
+    choice of representatives. -/
+theorem relSet_eq_exactSet (π : α → β) (U : α → α) (B : Set β) :
+    relSet π U B = exactSet π U (π ⁻¹' B) := rfl
+
 section FiniteLaakso
 
 open LinearInputLaaksoFiniteGraph
@@ -241,6 +314,39 @@ theorem first_relational_composition_exact (V : Raw1 → Raw1) (B : Set Obs1) :
       relSet firstRead (fun x => V (advanceRight x)) B :=
   relSet_comp_eq_of_first_closed firstRead advanceRight V
     first_fiber_images_closed B
+
+
+/-- The old first-stage projection is surjective. -/
+theorem firstRead_surjective : Function.Surjective firstRead :=
+  rawProjection_surjective
+
+/-- Exact multivalued observations at ALL finite times, despite the lack of
+    any deterministic quotient update. -/
+theorem first_all_times_exact (n : ℕ) (B : Set Obs1) :
+    observedIter firstRead advanceRight n B =
+      exactSet firstRead (concreteIter advanceRight n) (firstRead ⁻¹' B) := by
+  rw [← relSet_eq_exactSet firstRead (concreteIter advanceRight n) B]
+  exact observedIter_exact_of_fiberImageClosed firstRead advanceRight
+    firstRead_surjective first_fiber_images_closed n B
+
+/-- The number of raw pre-gluing vertices exceeds the identified vertex
+    count by exactly two per edge of the previous level. -/
+theorem raw_gluing_cardinality (V E : Type) [Fintype V] [Fintype E] :
+    Fintype.card (RawVertex V E) =
+      Fintype.card (RefinedVertex V E) + 2 * Fintype.card E := by
+  simp only [RawVertex, RefinedVertex,
+    Fintype.card_prod, Fintype.card_sum, Fintype.card_bool, Fintype.card_fin]
+  omega
+
+/-- The Laakso graph has 2 * 6^n forgotten raw sheet distinctions at
+    refinement stage n -> n+1 (cardinality gap, not an entropy bound). -/
+theorem gluing_gap_at_level (n : ℕ) :
+    Fintype.card (RawVertex (VertexType n) (EdgeType n)) =
+      Fintype.card (VertexType (n + 1)) + 2 * 6 ^ n := by
+  change Fintype.card (RawVertex (VertexType n) (EdgeType n)) =
+    Fintype.card (RefinedVertex (VertexType n) (EdgeType n)) + 2 * 6 ^ n
+  rw [← edge_card n]
+  exact raw_gluing_cardinality (VertexType n) (EdgeType n)
 
 theorem first_not_fiber_stable :
     ¬ FiberStable firstRead advanceRight := by
