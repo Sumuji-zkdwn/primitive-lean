@@ -271,20 +271,22 @@ theorem general_right_edge (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) 
 /-- For EACH edge of ANY parent graph, the hidden sheet at its first new
     junction remains invisible for one step and reappears after two. -/
 theorem general_w1_depth_two (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) :
-    rawProjection (rawW1 e false) = rawProjection (rawW1 e true) ∧
-    rawProjection (advanceRightGeneral G (rawW1 e false)) =
-      rawProjection (advanceRightGeneral G (rawW1 e true)) ∧
-    rawProjection (advanceRightGeneral G (advanceRightGeneral G (rawW1 e false))) ≠
-      rawProjection (advanceRightGeneral G (advanceRightGeneral G (rawW1 e true))) := by
+    rawProjection (rawW1 (V := V) e false) = rawProjection (rawW1 (V := V) e true) ∧
+    rawProjection (advanceRightGeneral G (rawW1 (V := V) e false)) =
+      rawProjection (advanceRightGeneral G (rawW1 (V := V) e true)) ∧
+    rawProjection (advanceRightGeneral G (advanceRightGeneral G (rawW1 (V := V) e false))) ≠
+      rawProjection (advanceRightGeneral G (advanceRightGeneral G (rawW1 (V := V) e true))) := by
   simp [rawW1, advanceRightGeneral, rawProjection]
+  all_goals simp
 
 /-- For EACH edge, the hidden sheet at its second new junction is revealed
     after exactly one chosen rightward edge step. -/
 theorem general_w2_depth_one (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) :
-    rawProjection (rawW2 e false) = rawProjection (rawW2 e true) ∧
-    rawProjection (advanceRightGeneral G (rawW2 e false)) ≠
-      rawProjection (advanceRightGeneral G (rawW2 e true)) := by
+    rawProjection (rawW2 (V := V) e false) = rawProjection (rawW2 (V := V) e true) ∧
+    rawProjection (advanceRightGeneral G (rawW2 (V := V) e false)) ≠
+      rawProjection (advanceRightGeneral G (rawW2 (V := V) e true)) := by
   simp [rawW2, advanceRightGeneral, rawProjection]
+  all_goals simp
 
 /-- The same delayed distinction is available at EACH finite Laakso level.
     This is a stage-dependent chosen graph step, not a compatible continuous
