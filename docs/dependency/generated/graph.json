@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "a614c06a7ef1094264963bd0ab03c724e6640d4e",
+  "main_commit": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1926,12 +1926,18 @@
         "cyclicApproxTriple",
         "cyclic_exact_triple",
         "cyclic_approx_triple",
-        "cyclic_spurious_observation"
+        "cyclic_spurious_observation",
+        "exactUpdate",
+        "abstractUpdate",
+        "ForwardComplete",
+        "forwardComplete_iff_saturation",
+        "forwardComplete_iff_all_words",
+        "shifts_separate_subsets"
       ],
       "imports": [
         "Mathlib"
       ],
-      "sha256": "0f75ce568255c8b330e4ce8c2ed7037e2968f488f6ba745c24b787ac17279fa6"
+      "sha256": "30bdbb4d01f72f2643edb072c5517e2940571760fe57521b61d09099ed50cc03"
     },
     {
       "id": "main:lean/SelfRewritingObserver.lean",
@@ -26307,28 +26313,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "a614c06a7ef1094264963bd0ab03c724e6640d4e",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "a614c06a7ef1094264963bd0ab03c724e6640d4e",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "a614c06a7ef1094264963bd0ab03c724e6640d4e",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "a614c06a7ef1094264963bd0ab03c724e6640d4e",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
