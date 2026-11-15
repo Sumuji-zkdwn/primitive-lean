@@ -106,7 +106,8 @@ theorem relSet_global_exact_iff (π : α → β) (U : α → α) :
     constructor
     · rintro ⟨x, ⟨y, hy, hxy⟩, hr⟩
       exact ⟨y, hy, (h y x hxy).trans hr⟩
-    · exact (exactSet_subset_relSet π U A) r
+    · intro hr
+      exact exactSet_subset_relSet π U A hr
 
 /-- Coarse-graining between two updates can only add possible outputs. -/
 theorem relSet_comp_subset (π : α → β) (U V : α → α) (B : Set β) :
@@ -218,8 +219,8 @@ theorem depth_two_separates :
       firstRead (advanceRight x) = firstRead (advanceRight y) →
       firstRead (advanceRight (advanceRight x)) =
         firstRead (advanceRight (advanceRight y)) → x = y := by
-  classical
-  decide
+  intro x y
+  fin_cases x <;> fin_cases y <;> decide
 
 theorem depth_one_not_enough :
     ∃ x y : Raw1,
@@ -231,8 +232,8 @@ theorem depth_one_not_enough :
 /-- Despite non-descending behavior, whole fibers have whole-fiber images. -/
 theorem first_fiber_images_closed :
     FiberImageClosed firstRead advanceRight := by
-  classical
-  decide
+  intro q x
+  fin_cases q <;> fin_cases x <;> decide
 
 /-- This non-deterministic quotient step composes EXACTLY. -/
 theorem first_relational_composition_exact (V : Raw1 → Raw1) (B : Set Obs1) :
