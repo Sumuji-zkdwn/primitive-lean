@@ -189,4 +189,93 @@ theorem cyclic_spurious_observation :
     cyclicExactTriple ≠ cyclicApproxTriple := by
   decide
 
+
+/-! ## Streaming exactness is stronger than mere hyper-associativity. -/
+
+/-- Append a single observed symbol to the EXACT set of possible internal states. -/
+def exactUpdate (op : α → α → α) (π : α → β)
+    (A : Set α) (q : β) : Set α :=
+  setProd op A (π ⁻¹' ({q} : Set β))
+
+/-- Append an observed symbol after rounding the internal state up to fibers. -/
+def abstractUpdate (op : α → α → α) (π : α → β)
+    (U : Set β) (q : β) : Set β :=
+  hyperProd op π U ({q} : Set β)
+
+/-- Global one-step forward completeness for arbitrary initial uncertainty sets. -/
+def ForwardComplete (op : α → α → α) (π : α → β) : Prop :=
+  ∀ A : Set α, ∀ q : β,
+    abstractUpdate op π (π '' A) q = π '' exactUpdate op π A q
+
+/-- Exact characterization: reintroducing forgotten representatives cannot
+    create any new observed outcome at the next step. -/
+theorem forwardComplete_iff_saturation
+    (op : α → α → α) (π : α → β) :
+    ForwardComplete op π ↔
+      ∀ A : Set α, ∀ q : β,
+        π '' setProd op (saturate π A) (π ⁻¹' ({q} : Set β)) =
+          π '' setProd op A (π ⁻¹' ({q} : Set β)) := by
+  rfl
+
+/-- One-step forward completeness is EQUIVALENT to exact streaming of
+    every finite observation word starting from every concrete uncertainty set.
+    No associativity of the concrete operation is needed for this theorem. -/
+theorem forwardComplete_iff_all_words
+    (op : α → α → α) (π : α → β) :
+    ForwardComplete op π ↔
+      ∀ (A : Set α) (word : List β),
+        word.foldl (abstractUpdate op π) (π '' A) =
+          π '' (word.foldl (exactUpdate op π) A) := by
+  constructor
+  · intro h A word
+    induction word generalizing A with
+    | nil => rfl
+    | cons q qs ih =>
+      change qs.foldl (abstractUpdate op π)
+        (abstractUpdate op π (π '' A) q) =
+        π '' (qs.foldl (exactUpdate op π) (exactUpdate op π A q))
+      rw [h A q]
+      exact ih (exactUpdate op π A q)
+  · intro h A q
+    simpa only [List.foldl_cons, List.foldl_nil] using h A [q]
+
+/-! ## A unique observed group element makes all subsets observable by shifts. -/
+
+/-- If one group element has a unique observation label, equality of ALL
+    translated observation images forces equality of the internal subsets.
+    This is an infinite-group theorem: neither finiteness nor decidability
+    is assumed. -/
+theorem shifts_separate_subsets {G : Type*} [Group G] {δ : Type*}
+    (π : G → δ) (c : G)
+    (hunique : ∀ z : G, π z = π c → z = c)
+    (A B : Set G)
+    (himages : ∀ g : G,
+      π '' setProd (fun a b : G => a * b) A {g} =
+        π '' setProd (fun a b : G => a * b) B {g}) :
+    A = B := by
+  have hsub : ∀ (U V : Set G),
+      (∀ g : G,
+        π '' setProd (fun a b : G => a * b) U {g} =
+          π '' setProd (fun a b : G => a * b) V {g}) → U ⊆ V := by
+    intro U V h x hx
+    let g : G := x⁻¹ * c
+    have hxg : x * g = c := by simp [g, ← mul_assoc]
+    have source : π c ∈ π '' setProd (fun a b : G => a * b) U {g} := by
+      exact ⟨c, ⟨x, hx, g, by simp, hxg⟩, rfl⟩
+    have target : π c ∈ π '' setProd (fun a b : G => a * b) V {g} := by
+      rw [h g] at source
+      exact source
+    rcases target with ⟨z, ⟨y, hy, w, hw, hmul⟩, hπ⟩
+    have hw' : w = g := by simpa using hw
+    have hxy : y * g = x * g := by
+      calc
+        y * g = y * w := by rw [hw']
+        _ = z := hmul
+        _ = c := hunique z hπ
+        _ = x * g := hxg.symm
+    have hyx : y = x := mul_right_cancel hxy
+    exact hyx ▸ hy
+  exact Set.Subset.antisymm (hsub A B himages)
+    (hsub B A (fun g => (himages g).symm))
+
 end VoidHyperCompletion
