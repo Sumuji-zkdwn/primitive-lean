@@ -240,7 +240,7 @@ open LinearInputLaaksoFiniteGraph
 
 /-- The same rightward edge-walk is defined for an arbitrary labelled
     parent graph, preserving the sheet until the right old endpoint. -/
-def advanceRightGeneral {V E : Type} (G : Graph V E) :
+def advanceRightGeneral {V E : Type} (G : LinearInputLaaksoFiniteGraph.Graph V E) :
     RawVertex V E → RawVertex V E
   | (.inl v, b) => (.inl v, b)
   | (.inr (e, k), b) =>
@@ -254,14 +254,14 @@ def rawW2 {V E : Type} (e : E) (b : Bool) : RawVertex V E :=
 
 /-- The move from the first to second junction follows an ACTUAL
     labelled middle edge of refine G. -/
-theorem general_middle_edge (G : Graph V E) (e : E) (b : Bool) :
+theorem general_middle_edge (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) (b : Bool) :
     rawProjection (rawW1 e b) =
       refineSource G (e, b, (1 : Fin 3)) ∧
     rawProjection (advanceRightGeneral G (rawW1 e b)) =
       refineTarget G (e, b, (1 : Fin 3)) := by
   simp [rawW1, advanceRightGeneral, rawProjection, refineSource, refineTarget]
 
-theorem general_right_edge (G : Graph V E) (e : E) (b : Bool) :
+theorem general_right_edge (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) (b : Bool) :
     rawProjection (rawW2 e b) =
       refineSource G (e, b, (2 : Fin 3)) ∧
     rawProjection (advanceRightGeneral G (rawW2 e b)) =
@@ -270,7 +270,7 @@ theorem general_right_edge (G : Graph V E) (e : E) (b : Bool) :
 
 /-- For EACH edge of ANY parent graph, the hidden sheet at its first new
     junction remains invisible for one step and reappears after two. -/
-theorem general_w1_depth_two (G : Graph V E) (e : E) :
+theorem general_w1_depth_two (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) :
     rawProjection (rawW1 e false) = rawProjection (rawW1 e true) ∧
     rawProjection (advanceRightGeneral G (rawW1 e false)) =
       rawProjection (advanceRightGeneral G (rawW1 e true)) ∧
@@ -280,7 +280,7 @@ theorem general_w1_depth_two (G : Graph V E) (e : E) :
 
 /-- For EACH edge, the hidden sheet at its second new junction is revealed
     after exactly one chosen rightward edge step. -/
-theorem general_w2_depth_one (G : Graph V E) (e : E) :
+theorem general_w2_depth_one (G : LinearInputLaaksoFiniteGraph.Graph V E) (e : E) :
     rawProjection (rawW2 e false) = rawProjection (rawW2 e true) ∧
     rawProjection (advanceRightGeneral G (rawW2 e false)) ≠
       rawProjection (advanceRightGeneral G (rawW2 e true)) := by
@@ -290,13 +290,13 @@ theorem general_w2_depth_one (G : Graph V E) (e : E) :
     This is a stage-dependent chosen graph step, not a compatible continuous
     flow on the inverse limit. -/
 theorem laakso_every_level_delayed_split (n : ℕ) (e : EdgeType n) :
-    rawProjection (rawW1 e false) = rawProjection (rawW1 e true) ∧
-    rawProjection (advanceRightGeneral (level n) (rawW1 e false)) =
-      rawProjection (advanceRightGeneral (level n) (rawW1 e true)) ∧
+    rawProjection (rawW1 (V := VertexType n) e false) = rawProjection (rawW1 (V := VertexType n) e true) ∧
+    rawProjection (advanceRightGeneral (level n) (rawW1 (V := VertexType n) e false)) =
+      rawProjection (advanceRightGeneral (level n) (rawW1 (V := VertexType n) e true)) ∧
     rawProjection (advanceRightGeneral (level n)
-      (advanceRightGeneral (level n) (rawW1 e false))) ≠
+      (advanceRightGeneral (level n) (rawW1 (V := VertexType n) e false))) ≠
     rawProjection (advanceRightGeneral (level n)
-      (advanceRightGeneral (level n) (rawW1 e true))) :=
+      (advanceRightGeneral (level n) (rawW1 (V := VertexType n) e true))) :=
   general_w1_depth_two (level n) e
 
 /-- Exactly the RawVertex and RefinedVertex types of LaaksoFiniteGraph.inc. -/
