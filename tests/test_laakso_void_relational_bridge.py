@@ -77,5 +77,58 @@ class LaaksoVoidBridgeTest(unittest.TestCase):
         self.assertEqual(rel_set(rel_set({observe(x)})), frozenset({2, 3}))
         self.assertEqual({observe(advance(advance(x)))}, {2})
 
+
+    def test_universal_composition_iff_saturated_three_state_models(self):
+        """All five partitions and 27 updates on 3 states; 27 continuations and all label sets."""
+        S = range(3)
+
+        def parts(n):
+            def recurse(i, labels, maximum):
+                if i == n:
+                    yield tuple(labels)
+                    return
+                for z in range(maximum + 2):
+                    labels.append(z)
+                    yield from recurse(i + 1, labels, max(z, maximum))
+                    labels.pop()
+            yield from recurse(1, [0], 0)
+
+        def rel(U, B, p):
+            return frozenset(p[U[x]] for x in S if p[x] in B)
+
+        def fiber_closed(U, p):
+            return all(
+                frozenset(U[x] for x in S if p[x] == q) ==
+                frozenset(x for x in S if p[x] in rel(U, {q}, p))
+                for q in set(p)
+            )
+
+        def universally_exact(U, p):
+            for V in itertools.product(S, repeat=3):
+                composed = tuple(V[U[x]] for x in S)
+                for mask in range(1 << len(set(p))):
+                    B = {q for q in set(p) if mask & (1 << q)}
+                    if rel(composed, B, p) != rel(V, rel(U, B, p), p):
+                        return False
+            return True
+
+        from collections import Counter
+        summary = Counter()
+        for p in parts(3):
+            for U in itertools.product(S, repeat=3):
+                closed = fiber_closed(U, p)
+                exact = universally_exact(U, p)
+                summary[(len(set(p)), closed, exact)] += 1
+                if len(set(p)) > 1:
+                    self.assertEqual(closed, exact, (p, U))
+
+        self.assertEqual(summary, Counter({
+            (1, False, True): 21,  # The >=2 observables hypothesis is essential.
+            (1, True, True): 6,
+            (2, False, False): 72,
+            (2, True, True): 9,
+            (3, True, True): 27,
+        }))
+
 if __name__ == "__main__":
     unittest.main()
