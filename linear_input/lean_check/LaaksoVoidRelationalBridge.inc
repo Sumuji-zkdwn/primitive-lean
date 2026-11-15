@@ -95,7 +95,7 @@ theorem relSet_global_exact_iff (π : α → β) (U : α → α) :
   constructor
   · intro h x y hxy
     have hy : π (U y) ∈ relSet π U (π '' ({x} : Set α)) :=
-      ⟨y, ⟨x, by simp, hxy.symm⟩, rfl⟩
+      ⟨y, ⟨x, by simp, hxy⟩, rfl⟩
     rw [h {x}] at hy
     rcases hy with ⟨z, hz, hzout⟩
     have hzx : z = x := by simpa only [Set.mem_singleton_iff] using hz
@@ -106,7 +106,7 @@ theorem relSet_global_exact_iff (π : α → β) (U : α → α) :
     constructor
     · rintro ⟨x, ⟨y, hy, hxy⟩, hr⟩
       exact ⟨y, hy, (h y x hxy).trans hr⟩
-    · exact exactSet_subset_relSet π U A
+    · exact (exactSet_subset_relSet π U A) r
 
 /-- Coarse-graining between two updates can only add possible outputs. -/
 theorem relSet_comp_subset (π : α → β) (U V : α → α) (B : Set β) :
@@ -137,7 +137,8 @@ theorem fiberImageClosed_sets (π : α → β) (U : α → α)
     exact ⟨y, hy, congrArg π hxy⟩
   · rintro ⟨y, hy, hxy⟩
     obtain ⟨z, hz, hzout⟩ := h (π y) x ⟨y, rfl, hxy⟩
-    exact ⟨z, by simpa only [hz] using hy, hzout⟩
+    have hzB : π z ∈ B := by rw [hz]; exact hy
+    exact ⟨z, hzB, hzout⟩
 
 /-- A fiber-image-closed FIRST operator also makes relational composition
     exact for EVERY second operator, even if both are nondeterministic after
@@ -217,6 +218,7 @@ theorem depth_two_separates :
       firstRead (advanceRight x) = firstRead (advanceRight y) →
       firstRead (advanceRight (advanceRight x)) =
         firstRead (advanceRight (advanceRight y)) → x = y := by
+  classical
   decide
 
 theorem depth_one_not_enough :
@@ -229,6 +231,7 @@ theorem depth_one_not_enough :
 /-- Despite non-descending behavior, whole fibers have whole-fiber images. -/
 theorem first_fiber_images_closed :
     FiberImageClosed firstRead advanceRight := by
+  classical
   decide
 
 /-- This non-deterministic quotient step composes EXACTLY. -/
