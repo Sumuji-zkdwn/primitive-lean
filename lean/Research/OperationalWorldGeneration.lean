@@ -56,7 +56,8 @@ theorem passive_iff_signature (z t : State) :
   · intro h
     exact signature_of_two_reads (h 0) (h 1)
   · intro h n
-    have hx : z.1 = t.1 := congrArg Prod.fst h
+    have hx := congrArg Prod.fst h
+    change z.1 = t.1 at hx
     have hr : I z ^ 2 = I t ^ 2 := congrArg Prod.snd h
     rw [position_iterate, position_iterate, hx, hr]
 
@@ -74,10 +75,11 @@ theorem signature_eq_iff_mirror (z t : State) :
       rw [hx] at hp
       linarith
     · right
-      apply Prod.ext hx
-      dsimp [mirror, I] at hn ⊢
-      rw [hx] at hn
-      linarith
+      apply Prod.ext
+      · exact hx
+      · dsimp [mirror, I] at hn ⊢
+        rw [hx] at hn
+        linarith
   · rintro (rfl | rfl)
     · rfl
     · apply Prod.ext
@@ -178,7 +180,9 @@ theorem halfTurn_wordEq_iff (z t : State) :
     exact signature_of_two_reads (h []) (h [.advance])
   · intro h w
     induction w generalizing z t with
-    | nil => exact congrArg Prod.fst h
+    | nil =>
+      have hx := congrArg Prod.fst h
+      exact hx
     | cons a w ih =>
       cases a with
       | advance =>
@@ -218,9 +222,9 @@ theorem integer_word (w : List Move) (a b : ℤ) :
     | advance =>
       let r := b + a ^ 3
       let x := a + r ^ 2
-      simpa [run, E, I, x, r] using ih x (r - x ^ 3)
+      simpa only [run, E, I, x, r, Int.cast_sub, Int.cast_add, Int.cast_pow] using ih x (r - x ^ 3)
     | turn =>
-      simpa [run, OrbitTrace.linearE] using ih b (b - a)
+      simpa only [run, OrbitTrace.linearE, Int.cast_sub] using ih b (b - a)
 
 /-- Every integer-starting orbit misses the same nonempty Euclidean-open strip. -/
 theorem integer_word_open_strip (a b : ℤ) :

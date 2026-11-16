@@ -91,7 +91,7 @@ theorem polynomial_zero_of_regular_orbit (p : MvPolynomial Bool ℝ) (z : ℝ ×
   have ht : StrictMono t := by
     intro n m hnm
     have hc : (n : ℝ) < m := by exact_mod_cast hnm
-    exact add_lt_add_left (mul_lt_mul_of_pos_right hc (sq_pos_of_ne_zero hr)) z.1
+    exact add_lt_add_right (mul_lt_mul_of_pos_right hc (sq_pos_of_ne_zero hr)) z.1
   have hiter (n : ℕ) : iterate n z = fibre (I z) (t n) := by
     rw [iterate_eq_closedOrbit]
     rfl
@@ -146,6 +146,31 @@ theorem polynomial_zero_of_nonzero_orbit (p : MvPolynomial Bool ℝ) (z : ℝ ×
   · exact polynomial_zero_of_regular_orbit p (OrbitTrace.linearE z)
       (zero_fibre_regular_after_turn z hz hI) (hzero _ (by simp))
   · exact polynomial_zero_of_regular_orbit p z hI (hzero _ (by simp))
+
+/-- On the fixed cubic of E, the trajectories with at most one L never
+determine every polynomial. The two-turn bound at a nonzero such seed is sharp. -/
+theorem one_turn_insufficient_on_zero_fibre (z : ℝ × ℝ) (hz : I z = 0) :
+    ∃ p : MvPolynomial Bool ℝ, p ≠ 0 ∧
+      (∀ n, readPoly p (iterate n z) = 0) ∧
+      (∀ n m, readPoly p (iterate m (OrbitTrace.linearE (iterate n z))) = 0) := by
+  let c := I (OrbitTrace.linearE z)
+  let J : MvPolynomial Bool ℝ := MvPolynomial.X true + MvPolynomial.X false ^ 3
+  let p := J * (J - MvPolynomial.C c)
+  have heval (a : ℝ × ℝ) : readPoly p a = I a * (I a - c) := by
+    simp [readPoly, p, J, I]
+  have hfix (n : ℕ) : iterate n z = z := OperationalWorldGeneration.zero_fibre_fixed n z hz
+  refine ⟨p, ?_, ?_, ?_⟩
+  · intro hp
+    let k : ℝ := max 0 c + 1
+    have hk : 0 < k := by dsimp [k]; linarith [le_max_left (0 : ℝ) c]
+    have hkc : 0 < k - c := by dsimp [k]; linarith [le_max_right (0 : ℝ) c]
+    have hh := heval (0,k)
+    simp [hp, readPoly, I] at hh
+    exact hh.elim hk.ne' hkc.ne'
+  · intro n
+    simp [heval, I_iterate, hz]
+  · intro n m
+    simp [heval, I_iterate, hfix, c]
 
 open OperationalWorldGeneration
 
