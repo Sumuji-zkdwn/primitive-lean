@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "0706fc34154b1b4721384d979f5fca0fdc8da8e6",
+  "main_commit": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1542,7 +1542,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "28b43695e17800abba4ee120eae6aff1e599f9a769fefb461df1ee1fb4a7a103"
+      "sha256": "76048c07294282de9a040d574fb1299c420b7d624fa00058411d956f43e289bb"
     },
     {
       "id": "main:lean/Research/ElasticaObservationQuotient.lean",
@@ -26295,28 +26295,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "0706fc34154b1b4721384d979f5fca0fdc8da8e6",
+      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "0706fc34154b1b4721384d979f5fca0fdc8da8e6",
+      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "0706fc34154b1b4721384d979f5fca0fdc8da8e6",
+      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "0706fc34154b1b4721384d979f5fca0fdc8da8e6",
+      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
