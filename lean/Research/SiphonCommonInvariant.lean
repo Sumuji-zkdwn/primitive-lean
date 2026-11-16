@@ -188,7 +188,7 @@ theorem polynomial_eq_of_agree_on_orbit (z : State) (hz : z ≠ (0, 0))
   have block (x : State) : run OrbitTrace.linearE x w = iterate m (OrbitTrace.linearE (iterate n x)) := by
     simp only [w, run_append, run_advances, run]
   rcases (show a = z ∨ a = OrbitTrace.linearE z by simpa using ha) with rfl | rfl
-  · exact (block z) ▸ hv w
+  · exact (block a) ▸ hv w
   · have ht : readPoly (p - q) (run OrbitTrace.linearE (OrbitTrace.linearE z) w) = 0 :=
       hv (.turn :: w)
     exact (block (OrbitTrace.linearE z)) ▸ ht

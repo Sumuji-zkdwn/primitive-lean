@@ -222,7 +222,20 @@ theorem integer_word (w : List Move) (a b : ℤ) :
     | advance =>
       let r := b + a ^ 3
       let x := a + r ^ 2
-      simpa only [run, E, I, x, r, Int.cast_sub, Int.cast_add, Int.cast_pow] using ih x (r - x ^ 3)
+      have hr : (r : ℝ) = (b : ℝ) + (a : ℝ) ^ 3 := by
+        rw [show r = b + a ^ 3 by rfl, Int.cast_add, Int.cast_pow]
+      have hx : (x : ℝ) = (a : ℝ) + (r : ℝ) ^ 2 := by
+        rw [show x = a + r ^ 2 by rfl, Int.cast_add, Int.cast_pow]
+      have hstep : E ((a : ℝ), (b : ℝ)) = ((x : ℝ), ((r - x ^ 3 : ℤ) : ℝ)) := by
+        apply Prod.ext
+        · change (a : ℝ) + ((b : ℝ) + (a : ℝ)^3)^2 = (x : ℝ)
+          rw [hx, hr]
+        · change ((b : ℝ) + (a : ℝ)^3) - ((a : ℝ) + ((b : ℝ) + (a : ℝ)^3)^2)^3 =
+            ((r - x ^ 3 : ℤ) : ℝ)
+          rw [Int.cast_sub, Int.cast_pow, hx, hr]
+      change ∃ c d : ℤ, run OrbitTrace.linearE (E ((a : ℝ), (b : ℝ))) w = ((c : ℝ), (d : ℝ))
+      rw [hstep]
+      exact ih x (r - x ^ 3)
     | turn =>
       simpa only [run, OrbitTrace.linearE, Int.cast_sub] using ih b (b - a)
 
