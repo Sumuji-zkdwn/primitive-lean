@@ -1,0 +1,42 @@
+name: Chair and pie finite kill-spot checks
+
+on:
+  push:
+    branches: [research/chair-pie-killspot-20261117]
+    paths:
+      - 'tools/chair_pie_killspot.py'
+      - 'tests/test_chair_pie_killspot.py'
+      - 'docs/research/2026-11-17-chair-pie-killspot.md'
+      - '.github/workflows/chair-pie-killspot.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/chair_pie_killspot.py'
+      - 'tests/test_chair_pie_killspot.py'
+      - 'docs/research/2026-11-17-chair-pie-killspot.md'
+      - '.github/workflows/chair-pie-killspot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -p 'test_chair_pie_killspot.py' -v
+
+      - name: Reproduce finite enumeration
+        run: python -B tools/chair_pie_killspot.py
