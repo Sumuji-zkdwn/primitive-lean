@@ -148,8 +148,7 @@ theorem mirror_involutive (z : State) : mirror (mirror z) = z := by
   · rfl
   · change -(I (mirror z)) - (mirror z).1 ^ 3 = z.2
     rw [invariant_mirror]
-    change I z - z.1 ^ 3 = z.2
-    dsimp [I]
+    dsimp [mirror, I]
     ring
 
 private theorem mirror_ne_of_invariant_nonzero (z : State)
