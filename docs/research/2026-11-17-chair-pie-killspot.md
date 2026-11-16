@@ -67,13 +67,29 @@
 
 実行結果：**PASS**（標準Python 3.13、外部ライブラリ不要）。
 
+
+### Lean 形式化（2026-11-17）
+
+`lean/Research/ChairPieKillSpot.lean` を独立した Mathlib モジュールとして追加した。リポジトリのピン留めされた Lean `v4.30.0-rc2` において、次を定義・証明した。
+
+- `Allowed`, `run`, `RevenuePossible`：内部操作と外部許可付き操作による有限語の存在的到達可能性。
+- `allowed_mono`, `revenue_mono`：利用可能な外部条件を増やしても旧経路は失われない。
+- `MinimalEnabler`, `minimal_enabler_exists_iff`：成功する有限条件集合には包含最小の証明書が存在する。
+- `Blocks`, `blocks_iff_hits_minimal`, `revenue_blocks_iff`：外部条件を除去して失敗することと、すべての最小成功証明書を横断することの同値。
+- `MinimalBlocker`, `minimal_blocker_exists_of_no_free_success`, `minimal_blocker_iff_minimal_hitting`：条件のない成功が不可能なら最小遮断集合が存在し、それは包含最小の横断集合に一致する。
+- `SharedBuyer`, `two_chairs_without_buyer`, `shared_buyer_killspot`：共通購入者が二つの椅子を同時に遮断し得る具体例。
+
+**検証証拠**：PR #145 ヘッド `ccb446c57d792b6f2ea9aa87ad416a92db59a90b` で、GitHub Actions [run 43980669322](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/43980669322) の `lean-kernel-check` と `finite-check` が双方 success。Lean は `lake env lean --trust=0 Research/ChairPieKillSpot.lean` で直接コンパイルし、`#print axioms` の出力に `sorryAx` が含まれないことを監査した。
+
+**厳密な境界**：Lean は一般の決定的有限語操作系と抽象的な共有購入者模型について証明した。Python の `Economy` の `grow` / `internal_unlocks` / `sale` の全実装と Lean の操作系の同値性、4具体模型の最小集合の全列挙、168個の単調ブール関数の列挙それ自体は Lean に移植していない。それらは独立したPython全探索・回帰テストによる検証であり、数学的な一般定理のLean証明とは区別する。
+
 ## 5. 到達したこと・到達していないこと
 
-**確定**：上記の集合論的命題の紙上証明と、有限模型の全探索結果。
+**確定**：上記の集合論的命題の紙上証明、有限集合についてのLeanカーネル検証、Pythonによる有限模型の全探索結果。
 
 **暫定**：この抽象的な `E` を実際のプラットフォーム、本人確認、需要、決済経路、信用、ユーザーとの接点にどう割り当てるのが適切か。
 
-**未実施**：Leanによる新規命題のカーネル検証、実市場データでの識別、実際の収益化。GitHubへの追加は本研究記録とPython実装・回帰テストを含むドラフトPRとして行う。
+**未実施**：LeanとPythonの各具体実装の完全な対応証明、実市場データでの識別、実際の収益化。GitHubへの追加はLean・Python・研究記録・回帰テストを含むドラフトPRとして行った。
 
 ## 6. 次の研究課題
 
