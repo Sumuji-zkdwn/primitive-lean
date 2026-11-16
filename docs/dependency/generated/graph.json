@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
+  "main_commit": "ccb446c57d792b6f2ea9aa87ad416a92db59a90b",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1533,6 +1533,9 @@
         "minimal_enabler_exists_iff",
         "Blocks",
         "blocks_iff_hits_minimal",
+        "MinimalBlocker",
+        "minimal_blocker_exists_of_no_free_success",
+        "minimal_blocker_iff_minimal_hitting",
         "revenue_blocks_iff",
         "SharedBuyer",
         "shared_buyer_mono",
@@ -1542,7 +1545,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "76048c07294282de9a040d574fb1299c420b7d624fa00058411d956f43e289bb"
+      "sha256": "9460fbaa0bcdaf0a16c9347f1d6453e75e3142f89337c82114b3c43335490f0a"
     },
     {
       "id": "main:lean/Research/ElasticaObservationQuotient.lean",
@@ -26295,28 +26298,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
+      "base_sha": "ccb446c57d792b6f2ea9aa87ad416a92db59a90b",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
+      "base_sha": "ccb446c57d792b6f2ea9aa87ad416a92db59a90b",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
+      "base_sha": "ccb446c57d792b6f2ea9aa87ad416a92db59a90b",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7bc062de550e2b75650a3b88d3c0d1b712a4eba7",
+      "base_sha": "ccb446c57d792b6f2ea9aa87ad416a92db59a90b",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
