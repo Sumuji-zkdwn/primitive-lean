@@ -39,7 +39,7 @@ theorem edge_comp_mismatch {n : ℕ} (a b c d : Fin n)
     (h : b ≠ c) (p q : ℤ) (v : Vec n) :
     edge c d q (edge a b p v) = (fun _ => 0) := by
   funext j
-  by_cases hj : j = d <;> simp [edge, hj, h, h.symm]
+  by_cases hj : j = d <;> simp [edge, hj, h.symm]
 
 /-- One two-edge round trip, performed k times. -/
 def cycle2 (a b : ℤ) : ℕ → Vec 2 → Vec 2
@@ -63,7 +63,7 @@ theorem cycle2_closed (a b : ℤ) (k : ℕ) :
       fin_cases j
       · simp [cycle2, edge, ih, pow_succ]
         ring
-      · simp [cycle2, edge, ih]
+      · simp [cycle2, edge]
 
 /-- The example with gain 2 on each edge grows by a factor 4 per round. -/
 theorem alternating_two_step_gain (k : ℕ) :
@@ -86,7 +86,7 @@ def scatter3 (v : Vec 3) : Vec 3 :=
 /-- The aggregate map is literally the sum of square-zero edge maps. -/
 theorem scatter3_eq_edges (v : Vec 3) : scatter3 v = edgeSum3 v := by
   funext j
-  fin_cases j <;> simp [scatter3, edgeSum3, edge] <;> ring
+  fin_cases j <;> simp [scatter3, edgeSum3, edge]
 
 /-- Total coefficient, interpreted as a count only for nonnegative inputs. -/
 def mass3 (v : Vec 3) : ℤ := v 0 + v 1 + v 2
@@ -133,7 +133,6 @@ theorem iterate_symmetry (k : ℕ) :
 theorem scatter3_difference (v : Vec 3) :
     scatter3 v 0 - scatter3 v 1 = -(v 0 - v 1) := by
   simp [scatter3]
-  ring
 
 /-- A hidden parity trace survives inside exponentially many histories. -/
 theorem iterate_difference (k : ℕ) :
