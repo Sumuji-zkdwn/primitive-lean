@@ -91,7 +91,10 @@ theorem old_obs_iff_signature (z t : State) :
       linarith
   · intro h word
     have hs := signature_run_congr word z t h
-    exact congrArg Prod.fst hs
+    have hfst : (signature (run oldStep word z)).1 =
+        (signature (run oldStep word t)).1 :=
+      congrArg Prod.fst hs
+    simpa [signature, K] using hfst
 
 /-- The added probe breaks the residual sign ambiguity for all real states. -/
 theorem extended_obs_iff_eq (z t : State) :
