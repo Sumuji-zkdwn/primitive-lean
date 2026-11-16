@@ -158,12 +158,13 @@ theorem shared_buyer_mono (A B : Finset (Fin 3)) (hAB : A ⊆ B) :
 
 /-- Neither chair is sufficient when there is no common buyer. -/
 theorem two_chairs_without_buyer :
-    ¬ SharedBuyer ({1, 2} : Finset (Fin 3)) := by decide
+    ¬ SharedBuyer ({1, 2} : Finset (Fin 3)) := by
+  simp [SharedBuyer]
 
 /-- The common buyer is a single-point kill-spot for both chairs. -/
 theorem shared_buyer_killspot :
     Blocks SharedBuyer Finset.univ ({0} : Finset (Fin 3)) := by
-  decide
+  simp [Blocks, SharedBuyer]
 
 end Elastica.ChairPieKillSpot
 
