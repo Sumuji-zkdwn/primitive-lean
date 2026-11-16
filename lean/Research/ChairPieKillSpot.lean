@@ -132,6 +132,45 @@ theorem blocks_iff_hits_minimal {G : Type*} [DecidableEq G]
     have hxK : x ∈ K := (Finset.mem_inter.mp hx).2
     exact (Finset.mem_sdiff.mp (hAsub hxA)).2 hxK
 
+
+/-- A minimal blocker is a smallest-by-inclusion set whose removal
+    prevents all successes. This need not be a singleton. -/
+def MinimalBlocker {G : Type*} [DecidableEq G]
+    (f : Finset G → Prop) (E K : Finset G) : Prop :=
+  K ⊆ E ∧ Blocks f E K ∧
+    ∀ L : Finset G, L ⊂ K → ¬ Blocks f E L
+
+/-- If revenue cannot be reached without external permission, at least
+    one minimal blocking set exists: removing all of E is a blocker. -/
+theorem minimal_blocker_exists_of_no_free_success {G : Type*} [DecidableEq G]
+    (f : Finset G → Prop) (E : Finset G) (hfree : ¬ f ∅) :
+    ∃ K, MinimalBlocker f E K := by
+  have hblock : Blocks f E E := by
+    simpa [Blocks] using hfree
+  change ∃ K, MinimalEnabler (Blocks f E) E K
+  exact exists_minimal_success (Blocks f E) E hblock
+
+/-- Minimal blockers are exactly inclusion-minimal hitting sets of all
+    minimal enablers. This is the exact classification implemented in Python. -/
+theorem minimal_blocker_iff_minimal_hitting {G : Type*} [DecidableEq G]
+    (f : Finset G → Prop)
+    (hmono : ∀ A B : Finset G, A ⊆ B → f A → f B)
+    (E K : Finset G) :
+    MinimalBlocker f E K ↔
+      K ⊆ E ∧
+      (∀ A, MinimalEnabler f E A → (A ∩ K).Nonempty) ∧
+      (∀ L : Finset G, L ⊂ K →
+        ¬ (∀ A, MinimalEnabler f E A → (A ∩ L).Nonempty)) := by
+  constructor
+  · rintro ⟨hKE, hblock, hminimal⟩
+    refine ⟨hKE, (blocks_iff_hits_minimal f hmono E K).mp hblock, ?_⟩
+    intro L hL hhits
+    exact (hminimal L hL) ((blocks_iff_hits_minimal f hmono E L).mpr hhits)
+  · rintro ⟨hKE, hhits, hminimal⟩
+    refine ⟨hKE, (blocks_iff_hits_minimal f hmono E K).mpr hhits, ?_⟩
+    intro L hL hblock
+    exact (hminimal L hL) ((blocks_iff_hits_minimal f hmono E L).mp hblock)
+
 /-- The main theorem applied to finite-word action systems. -/
 theorem revenue_blocks_iff {ι G σ : Type*} [DecidableEq G]
     (step : (ι ⊕ G) → σ → σ) (start : σ) (goal : σ → Prop)
@@ -171,6 +210,8 @@ end Elastica.ChairPieKillSpot
 #print axioms Elastica.ChairPieKillSpot.revenue_mono
 #print axioms Elastica.ChairPieKillSpot.minimal_enabler_exists_iff
 #print axioms Elastica.ChairPieKillSpot.blocks_iff_hits_minimal
+#print axioms Elastica.ChairPieKillSpot.minimal_blocker_exists_of_no_free_success
+#print axioms Elastica.ChairPieKillSpot.minimal_blocker_iff_minimal_hitting
 #print axioms Elastica.ChairPieKillSpot.revenue_blocks_iff
 #print axioms Elastica.ChairPieKillSpot.two_chairs_without_buyer
 #print axioms Elastica.ChairPieKillSpot.shared_buyer_killspot
