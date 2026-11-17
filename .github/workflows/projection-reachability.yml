@@ -1,0 +1,85 @@
+name: Projection reachability and chair generation
+
+on:
+  pull_request:
+    branches: [main, research/chair-pie-killspot-20261117]
+    paths:
+      - 'linear_input/lean_check/ProjectionReachability.inc'
+      - 'linear_input/lean_check/PermissionProjectionBridge.inc'
+      - 'linear_input/lean_check/FiniteProjectionExamples.inc'
+      - 'linear_input/lean_check/ChairInternalGeneration.inc'
+      - 'linear_input/lean_check/ChairProjectionExport.inc'
+      - 'linear_input/lean_check/Operator*.inc'
+      - 'lean/Research/ChairPieKillSpot.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+      - 'tools/verify.py'
+      - 'tools/verify_projection_reachability.py'
+      - 'tools/projection_reachability_finite.py'
+      - 'tools/chair_pie_killspot.py'
+      - '.github/workflows/projection-reachability.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Exhaustive finite models and upstream Economy comparison
+        run: python -B tools/projection_reachability_finite.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: projection-finite-${{ github.run_id }}
+          path: verification/projection-reachability/python_results.json
+          if-no-files-found: warn
+          retention-days: 30
+
+  lean-kernel-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Check out exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install repository-pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Obtain pinned dependency cache
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get Mathlib.Data.Finset.Card Mathlib.Data.Fintype.Card Mathlib.Tactic.SplitIfs; then
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
+      - name: Check Lean kernel, axioms and all exported transitions
+        run: python -B tools/verify.py --projection-reachability-only
+      - name: Retain source hashes and verification output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: projection-kernel-${{ github.run_id }}
+          path: verification/projection-reachability/
+          if-no-files-found: warn
+          retention-days: 30
