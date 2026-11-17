@@ -1,0 +1,9 @@
+test_all_six_linear_powers (test_siphon_operational_world.TestOperationalObservability.test_all_six_linear_powers) ... ok
+test_clock_period_in_characteristic_p (test_siphon_operational_world.TestOperationalObservability.test_clock_period_in_characteristic_p) ... ok
+test_integer_orbit_determines_polynomials_through_degree_five (test_siphon_operational_world.TestOperationalObservability.test_integer_orbit_determines_polynomials_through_degree_five) ... ok
+test_reversal_in_original_coordinates (test_siphon_operational_world.TestOperationalObservability.test_reversal_in_original_coordinates) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.032s
+
+OK
