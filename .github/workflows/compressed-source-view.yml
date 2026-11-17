@@ -1,0 +1,25 @@
+name: Check compressed source reachability view
+
+on:
+  pull_request:
+    paths:
+      - 'tools/compress_dependency_graph.py'
+      - 'tests/test_compress_dependency_graph.py'
+      - 'docs/compression/**'
+      - 'docs/dependency/generated/graph.json'
+      - '.github/workflows/compressed-source-view.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Test reduction and edge classification
+        run: python3 -m unittest discover -s tests -p 'test_compress_dependency_graph.py' -v
+      - name: Verify reduced view is exactly reproducible
+        run: python3 tools/compress_dependency_graph.py --check
