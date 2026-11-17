@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+  "main_commit": "47dc7d5df8fd5e14489e74eebf7db32cc9a8fa5d",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -10345,13 +10345,14 @@
         "compatible_iff_f0_descends",
         "compatible_to_f0_descends",
         "f0_descends_to_compatible",
-        "f0_safe_extension",
+        "f0_family_extension_iff_descends",
         "f0_safe_family_extension",
+        "f0_safe_extension",
         "f0_descends_has_quotient_map",
         "example_noncompatible"
       ],
       "imports": [],
-      "sha256": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e"
+      "sha256": "c10b43079b42a5ac42095cb9e838965bbd11f468ebc811965e3d8d64347c8068"
     },
     {
       "id": "main:linear_input/lean_check/OperatorFiniteHorizon.inc",
@@ -23490,7 +23491,8 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
       "symbols": [
-        "LinearInputF0.exampleK"
+        "LinearInputF0.exampleK",
+        "LinearInputF0.exampleK_idempotent"
       ]
     },
     {
@@ -23498,7 +23500,8 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "Idempotent"
+        "Idempotent",
+        "exampleK_idempotent"
       ]
     },
     {
@@ -23506,7 +23509,8 @@
       "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
       "kind": "qualified_reference",
       "symbols": [
-        "LinearInputF0Descent.exampleUpdate"
+        "LinearInputF0Descent.exampleUpdate",
+        "LinearInputF0Descent.example_does_not_descend"
       ]
     },
     {
@@ -23516,7 +23520,8 @@
       "symbols": [
         "RespectsFibers",
         "descends_iff_respects",
-        "exampleUpdate"
+        "exampleUpdate",
+        "example_does_not_descend"
       ]
     },
     {
@@ -26267,28 +26272,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "47dc7d5df8fd5e14489e74eebf7db32cc9a8fa5d",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "47dc7d5df8fd5e14489e74eebf7db32cc9a8fa5d",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "47dc7d5df8fd5e14489e74eebf7db32cc9a8fa5d",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "47dc7d5df8fd5e14489e74eebf7db32cc9a8fa5d",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
