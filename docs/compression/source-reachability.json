@@ -686,6 +686,14 @@
       "main:linear_input/lean_check/FiniteObservationSeparation.inc"
     ],
     [
+      "main:linear_input/lean_check/EWFSFenchel.inc",
+      "main:linear_input/lean_check/F0Retractions.inc"
+    ],
+    [
+      "main:linear_input/lean_check/EWFSFenchel.inc",
+      "main:linear_input/lean_check/VariablePairObservations.inc"
+    ],
+    [
       "main:linear_input/lean_check/ElasticaCurveDistinct.lean",
       "main:lean/Elastica/Geometry.lean"
     ],
@@ -731,14 +739,6 @@
     ],
     [
       "main:linear_input/lean_check/EnergyWfsFenchel.inc",
-      "main:linear_input/lean_check/VariablePairObservations.inc"
-    ],
-    [
-      "main:linear_input/lean_check/EWFSFenchel.inc",
-      "main:linear_input/lean_check/F0Retractions.inc"
-    ],
-    [
-      "main:linear_input/lean_check/EWFSFenchel.inc",
       "main:linear_input/lean_check/VariablePairObservations.inc"
     ],
     [
@@ -1071,11 +1071,11 @@
     ],
     [
       "main:linear_input/lean_check/RepresentationBridges.inc",
-      "main:linear_input/lean_check/EnergyWfsFenchel.inc"
+      "main:linear_input/lean_check/EWFSFenchel.inc"
     ],
     [
       "main:linear_input/lean_check/RepresentationBridges.inc",
-      "main:linear_input/lean_check/EWFSFenchel.inc"
+      "main:linear_input/lean_check/EnergyWfsFenchel.inc"
     ],
     [
       "main:linear_input/lean_check/RepresentationBridges.inc",
