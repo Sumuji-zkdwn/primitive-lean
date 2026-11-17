@@ -13,10 +13,12 @@ on:
       - 'tools/verify_toolchain_modules.py'
       - 'tests/test_siphon_interaction.py'
       - 'tests/test_siphon_operational_world.py'
+      - 'tests/test_siphon_free_product.py'
       - 'tests/test_siphon_polynomial_e.py'
       - 'docs/research/2026-11-08-siphon-interaction.md'
       - 'docs/research/2026-11-08-siphon-polynomial-e.md'
       - 'docs/research/2026-11-17-siphon-operational-world.md'
+      - 'docs/research/2026-11-17-siphon-free-product.md'
       - '.github/workflows/siphon-interaction.yml'
   workflow_dispatch:
 
