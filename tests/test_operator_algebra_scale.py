@@ -175,3 +175,25 @@ def test_joint_sensors_intersection_of_kernels():
             assert all((bundle[x]==bundle[y])==
                        ((left[x]==left[y]) and (right[x]==right[y]))
                        for x in range(n) for y in range(n))
+
+
+def test_f0_family_extension_iff_descends_on_three_states():
+    states = range(3)
+    updates = tuple(product(states, repeat=3))
+    for readout in updates:
+        if any(readout[readout[x]] != readout[x] for x in states):
+            continue
+        descends = {
+            update: all(readout[update[readout[x]]] == readout[update[x]]
+                        for x in states)
+            for update in updates
+        }
+        for old in updates:
+            if not compatible(readout, old):
+                continue
+            original = quotient(readout, (old,))
+            for size in range(3):
+                for fresh in product(updates, repeat=size):
+                    exact = quotient(readout, (old, *fresh)) == original
+                    assert exact == all(descends[update] for update in fresh), (
+                        readout, old, fresh)

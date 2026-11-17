@@ -53,3 +53,27 @@ No counted theorem is a new physical law or an automated invention claim.
 python -m pytest -q tests/test_operator_algebra_scale.py
 python -B -X utf8 tools/verify.py --integration-only
 ```
+
+## F0 family extensions, 2026-11-17
+
+`LinearInputOperatorF0Bridge.f0_family_extension_iff_descends` characterizes
+when a family of new primitives preserves the observational equivalence of
+the old language. Two states are observationally equivalent when every finite
+word produces the same final readout from both. Assume the readout $K$ is
+idempotent and each old primitive preserves equality of current readouts.
+Then the old and extended equivalence relations agree on all state pairs
+if and only if every new primitive $T$ satisfies $K(T(Kx)) = K(Tx)$ for
+every state $x$. The family and the state space may be infinite.
+
+The forward direction uses `extension_exact_iff_preserves` and
+`compatible_iff_f0_descends` to recover descent for each primitive.
+The reverse direction now supplies both existing safe-extension theorems.
+The three-state `example_noncompatible` uses the existing non-descent witness.
+Here $K$ identifies 0 and 1, the old action is the identity, and the new
+action sends 1 to 2 while fixing 0. One application separates their readouts.
+
+`tests/test_operator_algebra_scale.py` independently computes the finite-word
+equivalence classes by partition refinement and checks the descent equation
+directly. Exhausting the three-state maps gives 198 admissible readout and
+old-action pairs. With zero, one, or two ordered new actions (repetitions
+allowed), the comparison covers 149,886 cases.
