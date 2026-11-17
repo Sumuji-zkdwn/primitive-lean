@@ -81,7 +81,10 @@ class SourceReachabilityTests(unittest.TestCase):
                  ("A", "C", "qualified_reference")]
         first = fixture(["A", "B", "C"], links)
         second = fixture(["C", "B", "A"], list(reversed(links)))
-        self.assertEqual(first, second)
+        # The digest intentionally changes when the raw source JSON changes.
+        self.assertEqual(first["edges"], second["edges"])
+        self.assertEqual(first["nodes"], second["nodes"])
+        self.assertEqual(first["counts"], second["counts"])
 
     def test_generated_snapshot_matches_its_pinned_input(self):
         # This does not inspect Lean. It ensures the committed *projection*
