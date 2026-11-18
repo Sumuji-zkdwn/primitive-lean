@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+  "main_commit": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1892,6 +1892,52 @@
         "Research.SphereClockWordNormalForm"
       ],
       "sha256": "f87463a6e512145a0d1f6a8b7a31f472564e0edc0252f2fcb67a669bb4ce7f48"
+    },
+    {
+      "id": "main:lean/Research/VoidHyperCompletion.lean",
+      "scope": "main",
+      "path": "lean/Research/VoidHyperCompletion.lean",
+      "group": "Other",
+      "namespace": "VoidHyperCompletion",
+      "declarations": [
+        "setProd",
+        "setProd_assoc",
+        "saturate",
+        "subset_saturate",
+        "saturate_idempotent",
+        "hyperProd",
+        "hyper_assoc_iff_saturation",
+        "hyper_assoc_of_saturated_products",
+        "finiteProd",
+        "fiber",
+        "finiteHyper",
+        "finiteLift",
+        "nilMul",
+        "nilObs",
+        "nilMul_assoc",
+        "nilHyper",
+        "nilHyper_correct",
+        "nilHyper_nonassociative",
+        "add5",
+        "cyclicObs",
+        "add5_assoc",
+        "cyclicHyper_associative_on_labels",
+        "cyclicExactTriple",
+        "cyclicApproxTriple",
+        "cyclic_exact_triple",
+        "cyclic_approx_triple",
+        "cyclic_spurious_observation",
+        "exactUpdate",
+        "abstractUpdate",
+        "ForwardComplete",
+        "forwardComplete_iff_saturation",
+        "forwardComplete_iff_all_words",
+        "shifts_separate_subsets"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "30bdbb4d01f72f2643edb072c5517e2940571760fe57521b61d09099ed50cc03"
     },
     {
       "id": "main:lean/SelfRewritingObserver.lean",
@@ -26267,28 +26313,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "b90318e8abdc7a4dd6b863a7c201fd0c251b3364",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
