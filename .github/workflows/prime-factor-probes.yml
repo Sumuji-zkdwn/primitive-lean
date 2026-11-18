@@ -1,0 +1,86 @@
+name: Prime factor Lean probes
+
+on:
+  push:
+    branches:
+      - chatgpt/prime-factor-observation-20261103
+      - chatgpt/prime-observation-orbits-20261103
+      - chatgpt/prime-factor-f0-adaptive-20261103
+      - chatgpt/general-prime-f0-normalization-20261103
+      - chatgpt/general-prime-probe-minimality-20261103
+    paths: &probe_paths
+      - linear_input/lean_check/PrimeFactorObservation.inc
+      - linear_input/lean_check/PrimeFactorOrbits.inc
+      - linear_input/lean_check/PrimeFactorF0Adaptive.inc
+      - linear_input/lean_check/PrimeFactorGeneralF0.inc
+      - linear_input/lean_check/PrimeFactorFiniteLength.inc
+      - .github/workflows/prime-factor-probes.yml
+      - .github/scripts/prime_factor_probes.py
+      - .github/scripts/test_prime_factor_probes.py
+  pull_request:
+    branches:
+      - main
+      - chatgpt/ternary-zero-cesaro-20261103
+      - chatgpt/prime-factor-observation-20261103
+      - chatgpt/prime-observation-orbits-20261103
+      - chatgpt/prime-factor-f0-adaptive-20261103
+    paths: *probe_paths
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: Prime factor proof to check
+        required: true
+        type: choice
+        default: all
+        options:
+          - all
+          - observation
+          - orbits
+          - f0-adaptive
+          - general-f0
+          - general-length
+
+permissions:
+  contents: read
+
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      probes: ${{ steps.select.outputs.probes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Test probe selection
+        run: python3 -m unittest discover -s .github/scripts -p test_prime_factor_probes.py
+      - id: select
+        name: Match each probe to its branch and changed paths
+        run: python3 .github/scripts/prime_factor_probes.py select >> "$GITHUB_OUTPUT"
+
+  lean:
+    name: Prime factor proof (${{ matrix.probe }})
+    needs: select
+    if: needs.select.outputs.probes != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        probe: ${{ fromJSON(needs.select.outputs.probes) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Assemble standalone proof and compile with the trusted kernel
+        env:
+          PROBE: ${{ matrix.probe }}
+        run: python3 .github/scripts/prime_factor_probes.py prove "$PROBE"
