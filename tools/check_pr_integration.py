@@ -31,9 +31,18 @@ def duplicate_namespace_errors(registry, verified_astra_pairs):
 
 
 def audit(root=ROOT):
+    root = Path(root)
     manifest = json.loads((root / 'docs/integration/manifest.json').read_text('utf-8'))
     errors = ['Unresolved manifest construction error: ' + error
               for error in manifest.get('construction_errors', [])]
+    # The old ledger remains immutable. A separate, commit-bound ledger can
+    # document a current toolchain port, after checking both old and new bytes.
+    spec = importlib.util.spec_from_file_location('lean_migration_audit',
+        Path(__file__).with_name('check_lean_migration.py'))
+    migration_checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(migration_checker)
+    migration = migration_checker.audit(root)
+    errors.extend('Migration: ' + error for error in migration['errors'])
     rows = manifest['files']
     retained_paths = [row['path'] for row in rows]
     if len(retained_paths) != len(set(retained_paths)):
@@ -74,7 +83,8 @@ def audit(root=ROOT):
         path = root / row['path']
         if not path.is_file():
             errors.append('Missing retained source: ' + row['path'])
-        elif hashlib.sha256(path.read_bytes()).hexdigest() != row['sha256']:
+        elif hashlib.sha256(path.read_bytes()).hexdigest() != (
+                migration['changes'].get(row['path'], {}).get('new_sha256', row['sha256'])):
             errors.append('Retained source hash mismatch: ' + row['path'])
     registry = assignment(root / 'tools/verify_main_result.py', 'SUPPLEMENTS')
     scopes = assignment(root / 'tools/verify.py', 'supplemental_scopes')
@@ -113,6 +123,7 @@ def audit(root=ROOT):
     errors.extend(duplicate_namespace_errors(registry, allowed_shared))
     return dict(passed=not errors, errors=errors, retained_files=len(manifest['files']),
                 supplemental_groups=len(registry), astra_source_audit=astra,
+                migration_audit=migration,
                 scope='Source bytes and registration, not proof validity')
 
 

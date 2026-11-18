@@ -38,7 +38,7 @@ theorem tailClock_mem {L s t u : ℝ} (ht : t ≤ L) (hu : s ≤ u) : tailClock 
   exact ⟨le_min ht (by linarith), min_le_left _ _⟩
 
 theorem eraseLoop_before {E : Type*} (γ : ℝ → E) (L s t u : ℝ) (hu : u ≤ s) :
-    eraseLoop γ L s t u = γ u := if_pos hu
+    eraseLoop γ L s t u = γ u := ite_eq_left hu
 
 theorem eraseLoop_after {E : Type*} (γ : ℝ → E) {L s t u : ℝ}
     (ht : t ≤ L) (hloop : γ s = γ t) (hu : s ≤ u) :
@@ -48,7 +48,7 @@ theorem eraseLoop_after {E : Type*} (γ : ℝ → E) {L s t u : ℝ}
     subst u
     rw [eraseLoop_before γ L s t s le_rfl, tailClock_at_cut ht]
     exact hloop
-  · exact if_neg hus
+  · exact ite_eq_right hus
 
 theorem eraseLoop_middle {E : Type*} (γ : ℝ → E) {L s t u : ℝ}
     (ht : t ≤ L) (hloop : γ s = γ t) (hu : u ∈ Icc s (L - (t - s))) :
@@ -76,7 +76,7 @@ theorem eraseLoop_lipschitz {E : Type*} [PseudoMetricSpace E] (γ : ℝ → E)
     (hγ : LipschitzWith 1 γ) {L s t : ℝ} (ht : t ≤ L) (hloop : γ s = γ t) :
     LipschitzWith 1 (eraseLoop γ L s t) := by
   have htail : LipschitzWith 1 (fun u => γ (tailClock L s t u)) := by
-    simpa only [one_mul, Function.comp_apply] using hγ.comp (tailClock_lipschitz L s t)
+    simpa only [one_mul, Function.comp_apply] using! hγ.comp (tailClock_lipschitz L s t)
   have haux : ∀ x y : ℝ, x ≤ y → dist (eraseLoop γ L s t x) (eraseLoop γ L s t y) ≤ y - x := by
     intro x y hxy
     by_cases hy : y ≤ s
@@ -120,7 +120,7 @@ theorem variation_shift {E : Type*} [PseudoEMetricSpace E] (γ : ℝ → E) (a b
     ext y
     simp only [mem_image, mem_univ, true_and, iff_true]
     exact ⟨y - d, by ring⟩
-  simpa only [hs, univ_inter, Function.comp_apply] using
+  simpa only [hs, univ_inter, Function.comp_apply] using!
     eVariationOn.comp_inter_Icc_eq_of_monotoneOn γ (fun u : ℝ => u + d) hm (mem_univ a) (mem_univ b)
 
 /-- Deleting the loop removes exactly its variation. -/
@@ -237,13 +237,13 @@ theorem eraseLoop_prefix_signature {ι : Type*} [Fintype ι]
     lipSignature (eraseLoop γ L s t) (eraseLoop_lipschitz γ hγ ht hloop) 0 u hu.1 =
       lipSignature γ hγ 0 (eraseClock L s t u) (eraseClock_mem hs hst ht hu).1 := by
   by_cases hus : u ≤ s
-  · have he : eraseClock L s t u = u := if_pos hus
+  · have he : eraseClock L s t u = u := ite_eq_left hus
     exact (lipSignature_congr (eraseLoop γ L s t) γ
       (eraseLoop_lipschitz γ hγ ht hloop) hγ hu.1
       (fun v hv => eraseLoop_before γ L s t v (hv.2.trans hus))).trans
       (lipSignature_endpoint_congr γ hγ hu.1 (eraseClock_mem hs hst ht hu).1 he.symm)
   · have hsu : s ≤ u := (not_le.mp hus).le
-    have he : eraseClock L s t u = tailClock L s t u := if_neg hus
+    have he : eraseClock L s t u = tailClock L s t u := ite_eq_right hus
     have htu := (tailClock_mem ht hsu).1
     have hfirst : lipSignature (eraseLoop γ L s t) (eraseLoop_lipschitz γ hγ ht hloop) 0 s hs =
         lipSignature γ hγ 0 s hs :=

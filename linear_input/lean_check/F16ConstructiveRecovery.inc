@@ -99,12 +99,18 @@ theorem observations_reconstruct (y : (Fin 16 → ℝ) × (Fin 16 → ℝ))
 /-- The positive singular observation is reconstructed exactly. -/
 theorem plus_observation_reconstruct (y : (Fin 16 → ℝ) × (Fin 16 → ℝ))
     (hy : Compatible y) : (realPencilAll 1).mulVec (reconstruct y) = y.1 := by
-  exact congrArg Prod.fst (observations_reconstruct y hy)
+  have h := congrArg (fun z : (Fin 16 → ℝ) × (Fin 16 → ℝ) => z.fst)
+    (observations_reconstruct y hy)
+  change (realPencilAll 1).mulVec (reconstruct y) = y.1 at h
+  exact h
 
 /-- The negative singular observation is reconstructed exactly. -/
 theorem minus_observation_reconstruct (y : (Fin 16 → ℝ) × (Fin 16 → ℝ))
     (hy : Compatible y) : (realPencilAll (-1)).mulVec (reconstruct y) = y.2 := by
-  exact congrArg Prod.snd (observations_reconstruct y hy)
+  have h := congrArg (fun z : (Fin 16 → ℝ) × (Fin 16 → ℝ) => z.snd)
+    (observations_reconstruct y hy)
+  change (realPencilAll (-1)).mulVec (reconstruct y) = y.2 at h
+  exact h
 
 /-- Compatible data determine a unique real 16-dimensional state. -/
 theorem unique_reconstruction (y : (Fin 16 → ℝ) × (Fin 16 → ℝ))

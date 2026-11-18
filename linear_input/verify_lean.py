@@ -52,7 +52,7 @@ def main():
     spec.loader.exec_module(old)
     imports, bodies, declarations, hashes, forbidden = [
         "import Elastica",
-        "import Mathlib.Data.Complex.Basic",
+        "import Mathlib.Basic.Complex.Basic",
         "import Mathlib.Data.ZMod.Basic",
         "import Mathlib.RingTheory.Polynomial.Cyclotomic.Roots",
         "import Mathlib.FieldTheory.KummerExtension",

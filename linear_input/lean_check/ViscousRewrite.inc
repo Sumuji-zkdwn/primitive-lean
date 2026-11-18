@@ -47,9 +47,10 @@ theorem proximal_hasDerivAt
       (alpha * (z - old)) z := by
     convert ((((hasDerivAt_id z).sub_const old).pow 2).const_mul (alpha / 2))
       using 1
-    simp only [id_eq]
-    ring
-  simpa only [proximalEnergy] using hE.add hP
+    · rfl
+    · simp only [id_eq]; ring
+  convert hE.add hP using 1
+  rfl
 
 /-- The resisting force emerges from minimization, not as an independent law. -/
 theorem viscous_force_from_global_minimum

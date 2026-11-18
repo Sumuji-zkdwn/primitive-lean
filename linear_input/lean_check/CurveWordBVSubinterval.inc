@@ -29,8 +29,8 @@ theorem time_coefficient_descends {ι : Type*} (p m : ι → StieltjesFunction �
     intro x
     obtain ⟨t, ht⟩ := x.property
     exact ⟨t, Subtype.ext ht⟩
-  have hq := IsQuotientMap.of_surjective_continuous hs T.continuous
-  let G : C(Icc a b, ℝ) := ⟨fun t => F t.val, hF.restrict⟩
+  have hq := Topology.IsQuotientMap.of_surjective_continuous hs T.continuous
+  let G : C(Icc a b, ℝ) := ⟨fun t => F t.val, hF.domRestrict⟩
   have hf : Function.FactorsThrough G T := by
     intro s t hst
     exact hcompat s.val s.property t.val t.property (congrArg Subtype.val hst)
@@ -38,7 +38,7 @@ theorem time_coefficient_descends {ι : Type*} (p m : ι → StieltjesFunction �
   intro t ht
   have he := congrArg (fun g : C(Icc a b, ℝ) => g ⟨t, ht⟩) (hq.lift_comp G hf)
   simpa only [ContinuousMap.comp_apply, G, ContinuousMap.coe_mk, T, signatureTimeMap,
-    signaturePoint, projIcc_of_mem hab ht] using he
+    signaturePoint, projIcc_of_mem hab ht] using! he
 
 theorem periodic_time_integral_zero {ι : Type*} (p m : ι → StieltjesFunction ℝ)
     (hp : ∀ i, Continuous (p i : ℝ → ℝ)) (hm : ∀ i, Continuous (m i : ℝ → ℝ))
@@ -126,14 +126,14 @@ theorem constant_of_periodic_integrals_zero (p m : StieltjesFunction ℝ)
       ring
     have hi : IntervalIntegrable (fun t => (c - x a) * z t) volume a b :=
       (hzc.const_mul (c - x a)).intervalIntegrable a b
-    rw [he, intervalIntegral.integral_add ((hzc.pow 2).intervalIntegrable a b) hi,
+    rw [he, intervalIntegral.integral_add ((show Continuous (fun t => z t ^ 2) from hzc.pow 2).intervalIntegrable a b) hi,
       intervalIntegral.integral_const_mul, hzi, mul_zero, add_zero] at hxz
     exact hxz
   have hzpoint : ∀ t ∈ Icc a b, z t = 0 := by
     intro t ht
     by_contra hne
     have hlt := intervalIntegral.integral_lt_integral_of_continuousOn_of_le_of_exists_lt
-      hab continuousOn_const (hzc.pow 2).continuousOn
+      hab continuousOn_const (show Continuous (fun t => z t ^ 2) from hzc.pow 2).continuousOn
       (fun s _ => sq_nonneg (z s)) ⟨t, ht, sq_pos_of_ne_zero hne⟩
     simp only [intervalIntegral.integral_zero, hsquare, lt_self_iff_false] at hlt
   intro t ht
@@ -156,7 +156,7 @@ theorem stieltjesSignature_same {ι : Type*} (p m : ι → StieltjesFunction ℝ
   | cons i l =>
     have hn : w ≠ [] := by intro h; simp only [h, List.reverse_nil] at hw; cases hw
     simp only [reverseStieltjes, stieltjesIntegral, intervalIntegral.integral_same,
-      sub_self, if_neg hn]
+      sub_self, ite_eq_right hn]
 
 theorem signature_prefix_constant_of_coordinate_constant {ι : Type*}
     (p m : ι → StieltjesFunction ℝ) (hm : ∀ i, Continuous (m i : ℝ → ℝ))
@@ -199,7 +199,7 @@ theorem subinterval_signature_zero_of_prefix_eq {ι : Type*}
     {a s t : ℝ} (he : stieltjesSignature p m a s = stieltjesSignature p m a t)
     (w : List ι) (hw : w ≠ []) : stieltjesSignature p m s t w = 0 := by
   rw [stieltjesSignature_chen p m hp hm s a t w, ← he,
-    ← stieltjesSignature_chen p m hp hm s a s w, stieltjesSignature_same, if_neg hw]
+    ← stieltjesSignature_chen p m hp hm s a s w, stieltjesSignature_same, ite_eq_right hw]
 
 /-- Every nondegenerate actual BV interval with trivial total signature
 contains a strictly shorter nondegenerate subinterval with trivial signature.

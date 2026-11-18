@@ -5,11 +5,15 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location('check_pr_integration', ROOT / 'tools/check_pr_integration.py')
 CHECK = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CHECK)
+MIGRATION_SPEC = importlib.util.spec_from_file_location('check_lean_migration', ROOT / 'tools/check_lean_migration.py')
+MIGRATION = importlib.util.module_from_spec(MIGRATION_SPEC)
+MIGRATION_SPEC.loader.exec_module(MIGRATION)
 
 
 class SourceIntegrationAudit(unittest.TestCase):
@@ -169,6 +173,188 @@ class SourceIntegrationAudit(unittest.TestCase):
         self.save_manifest()
         result = CHECK.audit(self.root)
         self.assertTrue(result['passed'], result)
+
+
+class ToolchainMigrationAudit(unittest.TestCase):
+    write = SourceIntegrationAudit.write
+    row = SourceIntegrationAudit.row
+    save_manifest = SourceIntegrationAudit.save_manifest
+    assert_rejected = SourceIntegrationAudit.assert_rejected
+
+    def git(self, *args):
+        return subprocess.check_output(['git', *args], cwd=self.root, stderr=subprocess.PIPE).decode().strip()
+
+    def save_migration(self):
+        self.write('docs/lean436/migration.json', json.dumps(self.migration))
+
+    def setUp(self):
+        SourceIntegrationAudit.setUp(self)
+        old_rev, new_rev = 'b' * 40, 'c' * 40
+        before = {
+            'lean/lean-toolchain': 'leanprover/lean4:v4.30.0-rc2\n',
+            'lean/lakefile.toml': '[[require]]\nname = "mathlib"\nrev = "' + old_rev + '"\n',
+            'lean/lake-manifest.json': json.dumps({'packages': [{'name': 'mathlib', 'rev': old_rev}]}),
+        }
+        for path, content in before.items():
+            self.write(path, content)
+            self.manifest['files'].append(self.row(path, 'baseline_proof_or_configuration'))
+            self.manifest['baseline_paths'].append(path)
+        for path in sorted(MIGRATION.ASSEMBLER_PATHS):
+            self.manifest['files'].append(self.row(path, 'baseline_proof_or_configuration'))
+            self.manifest['baseline_paths'].append(path)
+        self.save_manifest()
+        self.git('init', '--quiet')
+        self.git('config', 'core.autocrlf', 'false')
+        self.git('config', 'user.name', 'Migration fixture')
+        self.git('config', 'user.email', 'fixture@example.invalid')
+        self.git('add', '.')
+        self.git('commit', '--quiet', '-m', 'Original proof and pinned environment')
+        commit = self.git('rev-parse', 'HEAD')
+        after = {
+            'lean/lean-toolchain': 'leanprover/lean4:v4.36.0-rc2\n',
+            'lean/lakefile.toml': before['lean/lakefile.toml'].replace(old_rev, new_rev),
+            'lean/lake-manifest.json': before['lean/lake-manifest.json'].replace(old_rev, new_rev),
+            'linear_input/lean_check/Proof.inc': 'namespace Example\ntheorem retained : True := by trivial\nend Example\n',
+        }
+        changes = []
+        for path, content in after.items():
+            old_sha = hashlib.sha256((self.root / path).read_bytes()).hexdigest()
+            self.write(path, content)
+            changes.append(dict(path=path, old_sha256=old_sha,
+                new_sha256=hashlib.sha256((self.root / path).read_bytes()).hexdigest(),
+                reason='Update pinned environment or proof syntax; theorem statement retained.'))
+        self.migration = dict(schema_version=1, source_commit=commit,
+            target=dict(toolchain='leanprover/lean4:v4.36.0-rc2', mathlib=new_rev), changes=changes)
+        self.save_migration()
+
+    def test_explicit_migration_retains_original_ledger_and_passes(self):
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        self.assertEqual(len(result['migration_audit']['changes']), 4)
+
+    def stage_new_module(self):
+        path = 'lean/AfterMigration.lean'
+        self.write(path, 'namespace AfterMigration\ntheorem added : True := True.intro\nend AfterMigration\n')
+        self.git('add', path)
+        self.assertEqual(self.git('diff', '--cached', '--name-status'), 'A\t' + path)
+        return path
+
+    def test_staged_new_module_does_not_require_a_migration_original(self):
+        path = self.stage_new_module()
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        self.assertNotIn(path, result['migration_audit']['changes'])
+        self.assertEqual(len(result['migration_audit']['changes']), 4)
+
+    def test_new_module_does_not_hide_unrecorded_retained_edit(self):
+        self.stage_new_module()
+        self.write('lean/Elastica.lean', 'namespace Elastica\ndef unexpected : Nat := 1\nend Elastica\n')
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_deleted_retained_source_still_requires_migration_coverage(self):
+        self.git('rm', 'lean/Elastica.lean')
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_renaming_retained_source_cannot_hide_its_deletion(self):
+        self.git('mv', 'lean/Elastica.lean', 'lean/Renamed.lean')
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_new_fragment_still_requires_standard_registration(self):
+        path = 'linear_input/lean_check/AfterMigration.inc'
+        self.write(path, 'namespace AfterMigration\ntheorem added : True := True.intro\nend AfterMigration\n')
+        self.git('add', path)
+        migration = MIGRATION.audit(self.root)
+        self.assertTrue(migration['passed'], migration)
+        self.assert_rejected('Supplement registration mismatch')
+
+    def migrate_assemblers(self):
+        for path in sorted(MIGRATION.ASSEMBLER_PATHS):
+            original = (self.root / path).read_bytes()
+            self.write(path, original.decode('utf-8') +
+                       'EXTRA_IMPORTS = ("Mathlib.Basic.Real.Basic",)\n')
+            self.migration['changes'].append(dict(
+                path=path, old_sha256=hashlib.sha256(original).hexdigest(),
+                new_sha256=hashlib.sha256((self.root / path).read_bytes()).hexdigest(),
+                reason='Update the assembly import path for the pinned mathlib revision.'))
+        self.save_migration()
+
+    def test_explicit_assembler_migration_retains_original_hashes(self):
+        self.migrate_assemblers()
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        for path in MIGRATION.ASSEMBLER_PATHS:
+            original = next(row for row in self.manifest['files'] if row['path'] == path)
+            accepted = result['migration_audit']['changes'][path]
+            self.assertEqual(accepted['old_sha256'], original['sha256'])
+            self.assertNotEqual(accepted['new_sha256'], original['sha256'])
+
+    def test_assembler_change_requires_a_ledger_entry(self):
+        self.migrate_assemblers()
+        self.migration['changes'].pop()
+        self.save_migration()
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_assembler_allowlist_does_not_authorize_other_scripts(self):
+        for path in ('linear_input/other.py', 'tools/verify.py',
+                     'tools/check_pr_integration.py'):
+            self.assertFalse(MIGRATION.migration_path(path), path)
+
+    def test_missing_migration_does_not_permit_changed_sources(self):
+        (self.root / 'docs/lean436/migration.json').unlink()
+        self.assert_rejected('Retained source hash mismatch')
+
+    def test_false_original_hash_is_rejected(self):
+        self.migration['changes'][0]['old_sha256'] = 'd' * 64
+        self.save_migration()
+        self.assert_rejected('Migration original hash mismatch')
+
+    def test_current_source_changed_after_ledger_is_rejected(self):
+        with (self.root / 'linear_input/lean_check/Proof.inc').open('a') as file:
+            file.write('-- unrecorded edit\n')
+        self.assert_rejected('Migration current hash mismatch')
+
+    def test_missing_entry_is_rejected(self):
+        self.migration['changes'].pop()
+        self.save_migration()
+        self.assert_rejected('Migration coverage mismatch')
+
+    def test_duplicate_entry_is_rejected(self):
+        self.migration['changes'].append(dict(self.migration['changes'][0]))
+        self.save_migration()
+        self.assert_rejected('Duplicate migration source')
+
+    def test_old_manifest_cannot_be_rewritten(self):
+        self.manifest['files'][-1]['sha256'] = self.migration['changes'][2]['new_sha256']
+        self.save_manifest()
+        self.assert_rejected('Historical integration manifest was changed')
+
+    def test_path_escape_is_rejected(self):
+        self.migration['changes'][0]['path'] = '../outside.lean'
+        self.save_migration()
+        self.assert_rejected('Unapproved migration source path')
+
+    def test_unavailable_source_commit_is_rejected(self):
+        self.migration['source_commit'] = 'f' * 40
+        self.save_migration()
+        self.assert_rejected('Git migration source unavailable')
+
+    def test_target_pin_mismatch_is_rejected(self):
+        self.migration['target']['mathlib'] = 'd' * 40
+        self.save_migration()
+        self.assert_rejected('Migration target mathlib does not match Lake pins')
+
+    def test_preserved_dependency_requires_exact_old_and_new_hashes(self):
+        migration = MIGRATION.audit(self.root)
+        row = self.migration['changes'][0]
+        self.assertTrue(MIGRATION.accepts_current_hash(migration, row['path'],
+                        row['old_sha256'], row['new_sha256']))
+        self.assertFalse(MIGRATION.accepts_current_hash(migration, row['path'],
+                         'd' * 64, row['new_sha256']))
+        self.assertFalse(MIGRATION.accepts_current_hash(migration, row['path'],
+                         row['old_sha256'], 'd' * 64))
+        migration['passed'] = False
+        self.assertFalse(MIGRATION.accepts_current_hash(migration, row['path'],
+                         row['old_sha256'], row['old_sha256']))
 
 
 if __name__ == '__main__':

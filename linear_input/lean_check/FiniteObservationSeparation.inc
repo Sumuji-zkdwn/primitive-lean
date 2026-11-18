@@ -120,7 +120,8 @@ theorem no_single_allowed_probe (i : Fin 2) :
 theorem both_allowed_probes_identify :
     Function.Injective (fun x : Fin 3 =>
       (allowedProbe 0 x, allowedProbe 1 x)) := by
-  simpa [allowedProbe, joint] using coarse_marker_joint_injective
+  change Function.Injective (joint coarse marker)
+  exact coarse_marker_joint_injective
 
 /-- Same F0 coarse state, separable by the marker but not by processing K. -/
 theorem f0_strict_observation :

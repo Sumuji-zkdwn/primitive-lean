@@ -144,7 +144,7 @@ theorem periodic_cycle_bound {α I : Type*} [Fintype α] {K : α → α} (hK : I
     (hdistinct : Function.Injective (fun i : Fin p => (step K S C)^[i.val] x)) :
     p ≤ Nat.card (Fixed K) := by
   classical
-  letI : Fintype (Fixed K) := Fintype.ofFinite _
+  let : Fintype (Fixed K) := Fintype.ofFinite _
   have hfixed : ∀ i : Fin p, K ((step K S C)^[i.val] x) = (step K S C)^[i.val] x := by
     intro i
     cases hi : i.val with
@@ -231,7 +231,7 @@ theorem decodeChoices_fixed {α : Type*} {K : α → α} (hK : Idempotent K)
     decodeChoices hK v a.val = (v a).1.val := by
   have hi : (⟨K a.val, hK a.val⟩ : Fixed K) = a := Subtype.ext a.property
   unfold decodeChoices
-  rw [dif_pos a.property.symm, hi]
+  rw [dite_eq_left a.property.symm, hi]
 
 theorem decodeChoices_tail {α : Type*} {K : α → α} (hK : Idempotent K)
     (v : ∀ a : Fixed K, FiberChoice K a) (a : Fixed K) (x : Tail K a) :
@@ -240,7 +240,7 @@ theorem decodeChoices_tail {α : Type*} {K : α → α} (hK : Idempotent K)
   rcases x with ⟨x, hx, hne⟩
   change K x = a at hx
   subst a
-  simp only [decodeChoices, dif_neg hne]
+  simp only [decodeChoices, dite_eq_right hne]
 
 theorem decodeChoices_commutes {α : Type*} {K : α → α} (hK : Idempotent K)
     (v : ∀ a : Fixed K, FiberChoice K a) (x : α) :

@@ -35,7 +35,7 @@ theorem resolvent_mul_series (M : Matrix Q Q R) : resolvent M * matrixSeries M =
     simp [matrixSeries, Matrix.sub_apply, Matrix.mul_apply, Matrix.one_apply]
   | succ n =>
     simp [matrixSeries, Matrix.sub_apply, Matrix.mul_apply,
-      PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_C_mul, Matrix.one_apply,
+      mul_assoc, PowerSeries.coeff_succ_X_mul, PowerSeries.coeff_C_mul, Matrix.one_apply,
       pow_succ']
     split_ifs <;> simp [PowerSeries.coeff_one]
 
@@ -61,7 +61,6 @@ theorem denominator_constantCoeff (M : Matrix Q Q R) :
 theorem determinant_mul_series (M : Matrix Q Q R) :
     (resolvent M).det • matrixSeries M = (resolvent M).adjugate := by
   have he := congrArg (fun A => (resolvent M).adjugate * A) (resolvent_mul_series M)
-  dsimp only at he
   rwa [← Matrix.mul_assoc, Matrix.adjugate_mul, Matrix.smul_mul,
     Matrix.one_mul, Matrix.mul_one] at he
 

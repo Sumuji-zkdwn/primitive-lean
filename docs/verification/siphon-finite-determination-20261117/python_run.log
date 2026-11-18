@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "max_degree": 12,
+  "nonzero_seeds": 9,
+  "certified_cases": 117,
+  "monomial_degree_checks": 455,
+  "origin_rank": 1,
+  "omission_of_regularization_counterexample_degree": 6,
+  "interpretation": "Finite exact certificates only. Universal results are proved separately."
+}

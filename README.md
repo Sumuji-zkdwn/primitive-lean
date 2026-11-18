@@ -2,8 +2,10 @@
 
 平面曲線の曲げエネルギー（エラスティカ）の変分から出発し、定義と証明を Lean 4 で積み上げる「原始の形式化」の公開リポジトリです。本文は [原始の形式化.md](原始の形式化.md)、本文と Lean 宣言の対応は [検証と再実行.md](検証と再実行.md) にあります。
 
-- Lean `v4.30.0-rc2`、mathlib `5450b53e5ddc75d46418fabb605edbf36bd0beb6`（[lean/lean-toolchain](lean/lean-toolchain)・[lean/lakefile.toml](lean/lakefile.toml) で固定）
-- すべての宣言を `--trust=0` でコンパイルし、公理監査を行います。許可する公理は Lean 標準の `propext`・`Quot.sound`・`Classical.choice` のみで、`sorry`・`native_decide`・独自の `axiom` は使いません。
+- Lean `v4.36.0-rc2`、mathlib `2ddf59c8f14245864e6c0ed227a2dab76b9efea2`（[lean/lean-toolchain](lean/lean-toolchain)・[lean/lakefile.toml](lean/lakefile.toml) で固定）
+- 現行の検証対象を `--trust=0` でコンパイルし、公理監査を行います。許可する公理は Lean 標準の `propext`・`Quot.sound`・`Classical.choice` のみで、`sorry`・`native_decide`・独自の `axiom` は使いません。
+
+Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせています。[移行内容と再検証手順](docs/lean436/README.md)を参照してください。過去の検証記録にあるLean 4.30の版・ハッシュ・結果は当時の記録として保持し、現行環境の検証結果とは区別します。
 
 2026-11-10追加：[曲線文字の定理チェイン](docs/curve-word-chain/README.md)。10月20日の原文と検算コードを保存し、接合・文脈観測・面積の代数および整数格子上の衝突例を追補する。A〜Mの対応表で、Lean証明・有限計算・既知定理への参照・未形式化を区別する。
 

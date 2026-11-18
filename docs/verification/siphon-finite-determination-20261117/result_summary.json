@@ -1,0 +1,24 @@
+{
+  "date_jst": "2026-11-17",
+  "new_theorems_status": "Standalone and upstream-import module both passed with trust=0",
+  "new_source_sha256": "d7fc006763a4f3b8545ee37b79f113d33455e1858ed91634420b9dc3efff4694",
+  "standalone_sha256": "e2d446ba32bca71dece5005645728907323bc2771df44726afb4a9e43effb14b",
+  "lean_standalone_exit_code": 0,
+  "lean_core_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "optimal_bound_status": "Mathematical proof and finite exact certificates; not Lean-formalized",
+  "python_cases": 117,
+  "python_degrees": [
+    0,
+    12
+  ],
+  "python_seeds": 9,
+  "lean_module_exit_code": 0,
+  "repository_lean_path": "lean/Research/SiphonFiniteDetermination.lean",
+  "repository_python_path": "tools/check_siphon_finite_determination.py",
+  "repository_python_sha256": "39e3c606dfa2db556dbd93ce739d7286b97720432d9a132394055c93625d1ed0",
+  "note": "Local proof validation predates this upload. CI status must be checked on the PR head; the earlier PR #146 success does not certify this addition."
+}

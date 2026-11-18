@@ -103,7 +103,7 @@ theorem integral_cos_int_frequency (k : ℤ) :
   by_cases hk : k = 0
   · simp [hk]
   · have hkR : (k : ℝ) ≠ 0 := by exact_mod_cast hk
-    rw [if_neg hk, intervalIntegral.integral_comp_mul_left Real.cos hkR,
+    rw [ite_eq_right hk, intervalIntegral.integral_comp_mul_left Real.cos hkR,
       integral_cos]
     have hs : Real.sin ((k : ℝ) * (2 * Real.pi)) = 0 := by
       have heq : (k : ℝ) * (2 * Real.pi) = ((k * 2 : ℤ) : ℝ) * Real.pi := by
@@ -139,7 +139,7 @@ theorem integral_cos_pair (j k : ℕ) :
   rw [integral_cos_int_frequency, integral_cos_int_frequency]
   have hpos : (j : ℤ) + k + 2 ≠ 0 := by omega
   have hsub : ((j : ℤ) - k = 0) ↔ j = k := by omega
-  simp only [hpos, if_false, hsub, zero_add]
+  simp only [hpos, ite_false, hsub, zero_add]
   split_ifs <;> ring
 
 theorem integral_cos_sum_sq (m : ℕ) (a : Fin m → ℝ) :
@@ -157,12 +157,12 @@ theorem integral_cos_sum_sq (m : ℕ) (a : Fin m → ℝ) :
     intro j hj
     ring
   simp_rw [hexpand]
-  rw [intervalIntegral.integral_finset_sum
+  rw [intervalIntegral.integral_finsetSum
     (fun i _ => Continuous.intervalIntegrable (by fun_prop) _ _)]
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
-  rw [intervalIntegral.integral_finset_sum
+  rw [intervalIntegral.integral_finsetSum
     (fun j _ => Continuous.intervalIntegrable (by fun_prop) _ _)]
   simp_rw [intervalIntegral.integral_const_mul, integral_cos_pair]
   simp [Fin.val_inj, pow_two, mul_comm]
@@ -170,7 +170,7 @@ theorem integral_cos_sum_sq (m : ℕ) (a : Fin m → ℝ) :
 theorem profile_integral_zero (ε : ℝ) (n : ℕ) :
     (∫ x in (0 : ℝ)..(2 * Real.pi), profile ε n x) = 0 := by
   unfold profile
-  rw [intervalIntegral.integral_finset_sum
+  rw [intervalIntegral.integral_finsetSum
     (fun i _ => Continuous.intervalIntegrable (by fun_prop) _ _)]
   simp_rw [intervalIntegral.integral_const_mul, integral_cos_positive_frequency]
   simp

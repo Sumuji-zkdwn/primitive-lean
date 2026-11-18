@@ -48,6 +48,6 @@ theorem exists_uniform_local_time {F : V → V} {K : Set V}
   intro t ht
   apply hzd t
   have hed := he y hys
-  constructor <;> dsimp only <;> linarith [ht.1, ht.2]
+  constructor <;> linarith [ht.1, ht.2]
 
 end LinearInputCompactLocalExistence

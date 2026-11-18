@@ -103,7 +103,7 @@ theorem exists_outer_fixedpoint (B : X →L[ℝ] X →L[ℝ] X)
         (fun n : ℕ => ((outerMap B hB D hD K hK L hL)^[n]
           ⟨0, mem_closedBall_self (by norm_num)⟩).val)
         Filter.atTop (𝓝 z.val) := by
-  letI : CompleteSpace (Ball Y) := isClosed_closedBall.isComplete.completeSpace_coe
+  let : CompleteSpace (Ball Y) := isClosed_closedBall.isComplete.completeSpace_coe
   let z₀ : Ball Y := ⟨0, mem_closedBall_self (by norm_num)⟩
   obtain ⟨z, hf, ht, _⟩ := (outerMap_contracting B hB D hD K hK L hL).exists_fixedPoint
     z₀ (edist_ne_top _ _)

@@ -56,7 +56,7 @@ theorem terminating_normal_form {α : Type*} (R : α → α → Prop)
       ∃ n, Steps R a n ∧ Terminal R n := by
     intro k
     induction k using Nat.strong_induction_on with
-    | h k ih =>
+    | ind k ih =>
         intro a ha
         by_cases hterm : Terminal R a
         · exact ⟨a, Steps.refl a, hterm⟩

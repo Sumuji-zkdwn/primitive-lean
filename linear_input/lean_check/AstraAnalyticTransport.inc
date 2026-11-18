@@ -155,11 +155,12 @@ theorem decodedExtension_hasDerivAt (T : ℝ) (hT : 0 ≤ T) (hT1 : T ≤ 1/5)
     (fun k s hs => timeModeDerivative_norm_le T hT hT1 c u f k s x hs)
     ht (extendedMode_summable T hT hT1 u ⟨t, ht.1.le, ht.2.le⟩ x) ht
   convert hd using 1
-  simp only [timeModeDerivative]
-  rw [Summable.tsum_sub ((extended_spatial_summable T hT hT1 u t x ht).mul_left (-(c : ℂ)))
-    (extended_spatial_summable T hT hT1 f t x ht), tsum_mul_left]
-  rw [extendedDerivative_eq T hT u ⟨t, ht.1.le, ht.2.le⟩,
-    extendedDerivative_eq T hT f ⟨t, ht.1.le, ht.2.le⟩]
+  · rfl
+  · simp only [timeModeDerivative]
+    rw [Summable.tsum_sub ((extended_spatial_summable T hT hT1 u t x ht).mul_left (-(c : ℂ)))
+      (extended_spatial_summable T hT hT1 f t x ht), tsum_mul_left]
+    rw [extendedDerivative_eq T hT u ⟨t, ht.1.le, ht.2.le⟩,
+      extendedDerivative_eq T hT f ⟨t, ht.1.le, ht.2.le⟩]
 
 def realExtension (T : ℝ) (hT : 0 ≤ T) (u : AnalyticLift.Scalar T) (t x : ℝ) : ℝ :=
   (decodedExtension T hT u t x).re
@@ -178,7 +179,8 @@ theorem realExtension_hasDerivAt (T : ℝ) (hT : 0 ≤ T) (hT1 : T ≤ 1/5)
   have hd := Complex.reCLM.hasFDerivAt.comp_hasDerivAt t
     (decodedExtension_hasDerivAt T hT hT1 c a u f hm t x ht)
   convert hd using 1
-  simp [realDerivative]
+  · rfl
+  · simp [realDerivative]
 
 end
 end KerrKoopman.AnalyticTransport

@@ -79,7 +79,7 @@ def twoArcLoop {X : Type*} (A B : ℝ → X) (s t u v z : ℝ) : X :=
   if z ≤ 1 then A (arcParameter s t z) else B (arcParameter v u (z - 1))
 
 theorem twoArcLoop_left {X : Type*} (A B : ℝ → X) (s t u v z : ℝ) (hz : z ≤ 1) :
-    twoArcLoop A B s t u v z = A (arcParameter s t z) := if_pos hz
+    twoArcLoop A B s t u v z = A (arcParameter s t z) := ite_eq_left hz
 
 theorem twoArcLoop_right {X : Type*} (A B : ℝ → X) (s t u v z : ℝ)
     (hmatch : A t = B v) (hz : 1 ≤ z) :
@@ -87,9 +87,9 @@ theorem twoArcLoop_right {X : Type*} (A B : ℝ → X) (s t u v z : ℝ)
   by_cases he : z ≤ 1
   · have hz1 : z = 1 := le_antisymm he hz
     subst z
-    simp only [twoArcLoop, le_refl, if_true, arcParameter_one, sub_self, arcParameter_zero]
+    simp only [twoArcLoop, le_refl, ite_true, arcParameter_one, sub_self, arcParameter_zero]
     exact hmatch
-  · exact if_neg he
+  · exact ite_eq_right he
 
 theorem twoArcLoop_continuous {X : Type*} [TopologicalSpace X]
     (A B : ℝ → X) (hA : Continuous A) (hB : Continuous B) (s t u v : ℝ)
@@ -200,7 +200,7 @@ theorem product_left_injective {ι : Type*} (P : Series ι) (hP : P [] = 1) :
   have hw : ∀ n : ℕ, ∀ w : List ι, w.length = n → F w = G w := by
     intro n
     induction n using Nat.strong_induction_on with
-    | h n ih =>
+    | ind n ih =>
       intro w hlen
       have hew := congrFun he w
       unfold product at hew
@@ -347,7 +347,7 @@ theorem represented_lift_continuous {ι : Type*} (P : Series ι)
     Continuous (fun t => product P (stieltjesSignature p m a t)) := by
   apply continuous_pi
   intro w
-  apply continuous_finset_sum
+  apply continuous_finsetSum
   intro k _
   exact continuous_const.mul ((continuous_apply (w.drop k)).comp (signature_lift_continuous hp hm a))
 

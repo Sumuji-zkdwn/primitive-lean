@@ -60,6 +60,9 @@ jobs:
       ARC3_BUDGET: ${{ inputs.budget || '500' }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
 
       - uses: actions/setup-python@v6
         with:

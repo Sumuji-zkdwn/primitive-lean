@@ -160,7 +160,7 @@ theorem word_cost_lower {Q A : Type*} [Fintype Q] [DecidableEq Q] [Nonempty Q]
     exact H w.length q w rfl
   intro n
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     intro q w hlen
     by_cases hshort : n < Fintype.card Q
     · have hw := (word_cost_bounds next edge q w).1
@@ -196,7 +196,7 @@ theorem closed_word_cost_lower {Q A : Type*} [Fintype Q] [DecidableEq Q] [Nonemp
     exact H w.length q w rfl hcycle
   intro n
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     intro q w hlen hwcycle
     by_cases hn : n = 0
     · have hw : w = [] := List.length_eq_zero_iff.mp (hlen.trans hn)

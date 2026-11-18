@@ -93,8 +93,8 @@ theorem transferMatrix_edge_positive {Q A : Type*} [DecidableEq Q] [Fintype A]
   have h := Finset.single_le_sum
     (s := (Finset.univ : Finset A))
     (f := fun b => if next q b = next q a then Real.exp (-β * edge q b) else 0)
-    (fun b _ => by dsimp; split_ifs <;> positivity) (Finset.mem_univ a)
-  exact (Real.exp_pos _).trans_le (by simpa only [if_pos rfl, transferMatrix] using h)
+    (fun b _ => by split_ifs <;> positivity) (Finset.mem_univ a)
+  exact (Real.exp_pos _).trans_le (by simpa only [ite_true, transferMatrix] using h)
 
 theorem transferMatrix_pow_nonneg {Q A : Type*} [Fintype Q] [DecidableEq Q] [Fintype A]
     (next : Q → A → Q) (edge : Q → A → ℝ) (β : ℝ) (n : ℕ) (q r : Q) :

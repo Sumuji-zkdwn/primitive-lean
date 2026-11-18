@@ -17,7 +17,7 @@ theorem unitLipschitz_variation_le {E : Type*} [MetricSpace E] {γ : ℝ → E}
     eVariationOn γ (Icc a b) ≤ ENNReal.ofReal (b - a) := by
   have hi : eVariationOn (id : ℝ → ℝ) (Icc a b) ≤ ENNReal.ofReal (b - a) := by
     simpa only [univ_inter, id_eq] using
-      (monotone_id.monotoneOn univ).eVariationOn_le (a := a) (b := b) (mem_univ _) (mem_univ _)
+      ((monotone_id.monotoneOn univ).eVariationOn_eq (a := a) (b := b) (mem_univ _) (mem_univ _)).le
   have he := hγ.lipschitzOnWith.comp_eVariationOn_le (g := id)
     (s := Icc a b) (mapsTo_univ id (Icc a b))
   simp only [Function.comp_id, ENNReal.coe_one, one_mul] at he
@@ -69,7 +69,7 @@ theorem basedPrefix_eq_imp_prefix_eq {ι : Type*} [Fintype ι] {L : ℝ}
       prefixSignature hL x f s w = prefixSignature hL x g t w := by
     intro n
     induction n using Nat.strong_induction_on with
-    | h n ih =>
+    | ind n ih =>
       intro w hlen
       have hew := congrArg (fun S : List ι → ℝ => S w) he
       change (∑ k ∈ Finset.range (w.length + 1),
@@ -111,7 +111,7 @@ theorem basedPrefixSignature_continuous_time {ι : Type*} [Fintype ι] {L : ℝ}
     Continuous (basedPrefixSignature hL x P f) := by
   apply continuous_pi
   intro w
-  apply continuous_finset_sum
+  apply continuous_finsetSum
   intro k _
   exact continuous_const.mul
     ((continuous_apply (w.drop k)).comp (prefixSignature_continuous_time hL x f))
@@ -188,8 +188,8 @@ theorem minimal_representative_constant_on_signature_fiber {ι : Type*} [Fintype
     intro i u _ v _
     have hu := jordan_difference (fun z => γ z i) 0 u
     have hv := jordan_difference (fun z => γ z i) 0 v
-    change (jordanPositive _ 0 v - jordanPositive _ 0 u) -
-      (jordanNegative _ 0 v - jordanNegative _ 0 u) = _
+    change (jordanPositive (fun z => γ z i) 0 v - jordanPositive (fun z => γ z i) 0 u) -
+      (jordanNegative (fun z => γ z i) 0 v - jordanNegative (fun z => γ z i) 0 u) = _
     linarith
   have hzero : lipSignature γ hγ s t hst = unitSeries := by
     funext w

@@ -61,7 +61,9 @@ theorem point_on_circle_segment {θ : ℝ → ℝ} (hc : Continuous θ)
     (hθ : ∀ u ∈ Icc s t, θ u = a + κ * (u - s)) :
     curvePoint θ t = circlePoint c d R (a + κ * (t - s)) := by
   have hphase (u : ℝ) : HasDerivAt (fun v => a + κ * (v - s)) κ u := by
-    simpa only [mul_one] using (((hasDerivAt_id u).sub_const s).const_mul κ).const_add a
+    convert (((hasDerivAt_id u).sub_const s).const_mul κ).const_add a using 1
+    · rfl
+    · ring
   have hxder (u : ℝ) (hu : u ∈ uIcc s t) :
       HasDerivAt (fun v => LinearInputCurveWordCircularMoment.circleX c R (a + κ * (v - s)))
         (Real.cos (θ u)) u := by
@@ -254,7 +256,9 @@ theorem circleMoment_arclength (s t a κ c d R : ℝ) (hR : R * κ = 1) :
       Real.sin (a + κ * (u - s))) =
     LinearInputCurveWordCircularMoment.circleMoment c d R a (a + κ * (t - s)) := by
   have hd (u : ℝ) : HasDerivAt (fun v => a + κ * (v - s)) κ u := by
-    simpa only [mul_one] using (((hasDerivAt_id u).sub_const s).const_mul κ).const_add a
+    convert (((hasDerivAt_id u).sub_const s).const_mul κ).const_add a using 1
+    · rfl
+    · ring
   have hg : Continuous (fun u => LinearInputCurveWordCircularMoment.circleX c R u ^ 2 *
       (R * Real.sin u)) := by
     unfold LinearInputCurveWordCircularMoment.circleX
@@ -309,7 +313,9 @@ theorem circleArea_arclength (s t a κ c d R : ℝ) (hR : R * κ = 1) :
           Real.cos (a + κ * (u - s))) =
     LinearInputCurveWordCircularMoment.circleArea c d R a (a + κ * (t - s)) := by
   have hd (u : ℝ) : HasDerivAt (fun v => a + κ * (v - s)) κ u := by
-    simpa only [mul_one] using (((hasDerivAt_id u).sub_const s).const_mul κ).const_add a
+    convert (((hasDerivAt_id u).sub_const s).const_mul κ).const_add a using 1
+    · rfl
+    · ring
   have hg : Continuous (fun u =>
       LinearInputCurveWordCircularMoment.circleX c R u * (R * Real.sin u) -
         LinearInputCurveWordCircularMoment.circleY d R u * (R * Real.cos u)) := by
@@ -377,7 +383,7 @@ theorem sequential_integrals_first {h : ℝ} (hh : 0 < h) :
   have hs := curve_integrals_circle_segment (wordAngle_continuous hh sequentialWord)
     0 (4 * h) 0 (curvatureA h) 0 (3 * radiusB h) (3 * radiusB h) (by positivity)
     (radiusA_curvatureA hh)
-    (by intro u hu; simpa only [zero_add, sub_zero] using sequential_curve_first hh hu)
+    (by intro u hu; simpa only [curve, zero_add, sub_zero] using sequential_curve_first hh hu)
     (by intro u hu; rw [sequential_angle_first hh hu.2]; simp only [zero_add, sub_zero])
     (by intro u hu; rw [sequential_angle_first hh hu.2]; simp only [zero_add, sub_zero])
   have ha : curvatureA h * (4 * h) = 2 * Real.pi := by
@@ -394,7 +400,7 @@ theorem sequential_integrals_second {h : ℝ} (hh : 0 < h) :
   have hs := curve_integrals_circle_segment (wordAngle_continuous hh sequentialWord)
     (4 * h) (8 * h) 0 (curvatureB h) 0 (radiusB h) (radiusB h) (by linarith)
     (radiusB_curvatureB hh)
-    (by intro u hu; simpa only [zero_add] using sequential_curve_second hh hu)
+    (by intro u hu; simpa only [curve, zero_add] using sequential_curve_second hh hu)
     (by intro u hu; rw [sequential_angle_second hh hu.1 hu.2];
         simp only [zero_add, Real.sin_add, Real.sin_two_pi, Real.cos_two_pi, zero_mul, one_mul])
     (by intro u hu; rw [sequential_angle_second hh hu.1 hu.2];
@@ -413,7 +419,7 @@ theorem inserted_integrals_first {h : ℝ} (hh : 0 < h) :
   have hs := curve_integrals_circle_segment (wordAngle_continuous hh insertedWord)
     0 (3 * h) 0 (curvatureA h) 0 (3 * radiusB h) (3 * radiusB h) (by positivity)
     (radiusA_curvatureA hh)
-    (by intro u hu; simpa only [zero_add, sub_zero] using inserted_curve_first hh hu)
+    (by intro u hu; simpa only [curve, zero_add, sub_zero] using inserted_curve_first hh hu)
     (by intro u hu; rw [inserted_angle_first hh hu.2]; simp only [zero_add, sub_zero])
     (by intro u hu; rw [inserted_angle_first hh hu.2]; simp only [zero_add, sub_zero])
   have ha : curvatureA h * (3 * h) = 3 * Real.pi / 2 := by

@@ -87,9 +87,9 @@ theorem rank_classification (t : ℝ) :
     (realPencilAll t).rank =
       if t = 1 ∨ t = -1 then 12 else 16 := by
   by_cases ht : t = 1 ∨ t = -1
-  · simp only [if_pos ht]
+  · simp only [ite_eq_left ht]
     exact rank_singular t ht
-  · simp only [if_neg ht]
+  · simp only [ite_eq_right ht]
     apply rank_regular t
     exact ⟨fun hpos => ht (Or.inl hpos),
       fun hneg => ht (Or.inr hneg)⟩

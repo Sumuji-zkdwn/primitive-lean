@@ -82,8 +82,9 @@ theorem density_hasDerivAt (e h : ℝ → ℝ) (e' h' t : ℝ)
       (h t * h' + (e t + (e t) ^ 3) * e') t := by
   convert (((hh.pow 2).div_const 2).add ((he.pow 2).div_const 2)).add
     ((he.pow 4).div_const 4) using 1
-  dsimp [density]
-  ring
+  · rfl
+  · dsimp [density]
+    ring
 
 /-- Any actual differentiable physical solution has zero energy derivative.
 Only the physical component ODE and matrix skewness are hypotheses. -/

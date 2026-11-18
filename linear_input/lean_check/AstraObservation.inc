@@ -95,7 +95,7 @@ theorem no_bounded_two_probe_encoder
   intro n
   change (v - u)⁻¹ * (decodeU (encode n) - decodeV (encode n)) = _
   rw [hU n, hV n]
-  simpa only [div_eq_mul_inv, mul_comm] using
+  simpa only [div_eq_mul_inv, mul_comm, magnetic] using
     two_inputs_recover_magnetic ε Hbar u v huv n
 
 /-- Eigenfunction pullback from primitive extends to every discrete iterate.

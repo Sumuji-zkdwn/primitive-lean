@@ -88,8 +88,10 @@ theorem electricGap_hasDerivAt (e v : ℝ → ℝ) (e' v' t : ℝ)
   have hvd := constitutive_hasDerivAt v v' t hv
   have hed := constitutive_hasDerivAt e e' t he
   convert (hve.sub hee).sub (he.mul (hvd.sub hed)) using 1
-  dsimp [electricGap, constitutive]
-  ring
+  · funext z
+    dsimp [electricGap, constitutive]
+  · dsimp [constitutive]
+    ring
 
 /-- Chain rule for the complete electric and magnetic relative density. -/
 theorem relativeDensity_hasDerivAt (e h v j : ℝ → ℝ) (e' h' v' j' t : ℝ)
@@ -101,8 +103,9 @@ theorem relativeDensity_hasDerivAt (e h v j : ℝ → ℝ) (e' h' v' j' t : ℝ)
         (j t - h t) * (j' - h')) t := by
   convert (electricGap_hasDerivAt e v e' v' t he hv).add
     (((hj.sub hh).pow 2).div_const 2) using 1
-  dsimp [relativeDensity]
-  ring
+  · rfl
+  · dsimp [relativeDensity]
+    ring
 
 theorem applyQ_sub (Q : ι → ι → ℝ) (u v : ι → ℝ) (i : ι) :
     applyQ Q (fun k => u k - v k) i = applyQ Q u i - applyQ Q v i := by

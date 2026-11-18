@@ -24,6 +24,7 @@ theorem rawDecode_product (ρ : C(I, ℝ)) (hρ : ∀ t, 0 ≤ ρ t)
     rawDecode ρ (twistedProductReal ρ hρ u v) t x = rawDecode ρ u t x * rawDecode ρ v t x := by
   have h := congrArg (fun f : C(I × PUnit.{1}, ℂ) => f (t, PUnit.unit))
     (fourierDecode_product ρ hρ (ContinuousMap.const PUnit.{1} x) u v)
+  change rawDecode ρ (twistedProduct ρ hρ u v) t x = _
   simpa only [fourierDecode_apply, ContinuousMap.mul_apply, ContinuousMap.const_apply] using h
 
 theorem modeValue_neg_star (r : ℝ) (k : ℤ) (a : ℂ) (x : ℝ) :
@@ -31,8 +32,7 @@ theorem modeValue_neg_star (r : ℝ) (k : ℤ) (a : ℂ) (x : ℝ) :
   unfold modeValue
   change _ = (starRingEnd ℂ) (_ * a)
   rw [map_mul, ← Complex.exp_conj]
-  congr 1
-  congr 1
+  apply congrArg (fun z : ℂ => Complex.exp z * star a)
   simp
 
 theorem rawDecode_star (ρ : C(I, ℝ)) {u : L1 C(I, ℂ)} (hu : Hermitian u) (t : I) (x : ℝ) :

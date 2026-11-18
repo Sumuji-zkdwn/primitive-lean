@@ -76,7 +76,7 @@ theorem projection_residual_orthogonal (N : ℕ) (f : RealCircleL2) :
 
 /-- The actual Galerkin nonlinearity: real pointwise g, then exact L2 projection. -/
 def projectedMaterial (N : ℕ) (f : space N) : space N :=
-  (space N).orthogonalProjection (material (f : RealCircleL2))
+  (space N).orthogonalProjectionOnto (material (f : RealCircleL2))
 
 theorem projectedMaterial_coe (N : ℕ) (f : space N) :
     (projectedMaterial N f : RealCircleL2) =

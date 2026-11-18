@@ -3,6 +3,9 @@ name: Elastica fixed-boundary operator bridge
 on:
   pull_request:
     paths:
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
       - 'linear_input/lean_check/Elastica*.lean'
       - 'linear_input/lean_check/OperatorWordObservations.inc'
       - 'linear_input/lean_check/OperatorVocabularyRefinement.inc'
@@ -11,10 +14,15 @@ on:
       - 'tests/test_elastica_fixed_boundary.py'
       - 'tools/verify.py'
       - 'tools/verify_elastica_fixed_boundary.py'
+      - 'tools/check_lean_migration.py'
+      - 'docs/lean436/**'
       - '.github/workflows/elastica-fixed-boundary.yml'
   push:
     branches: [main]
     paths:
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
       - 'linear_input/lean_check/Elastica*.lean'
       - 'linear_input/lean_check/OperatorWordObservations.inc'
       - 'linear_input/lean_check/OperatorVocabularyRefinement.inc'
@@ -23,6 +31,8 @@ on:
       - 'tests/test_elastica_fixed_boundary.py'
       - 'tools/verify.py'
       - 'tools/verify_elastica_fixed_boundary.py'
+      - 'tools/check_lean_migration.py'
+      - 'docs/lean436/**'
       - '.github/workflows/elastica-fixed-boundary.yml'
   workflow_dispatch:
 

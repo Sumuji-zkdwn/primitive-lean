@@ -46,7 +46,7 @@ theorem electric_joint (N : ℕ) (z : GalerkinFlow.State N) :
 theorem magnetic_deriv_joint (N : ℕ) (z : GalerkinFlow.State N) :
     Continuous (fun p : ℝ × ℝ => deriv (magnetic N z p.1) p.2) := by
   have h := lift_joint_of_continuous N _ ((finiteDerivative N).continuous.comp (flow_snd_continuous N z))
-  simpa only [(magnetic_space N z _ _).deriv] using h
+  simpa only [(magnetic_space N z _ _).deriv, Function.comp_def] using h
 
 theorem electric_deriv_joint (N : ℕ) (z : GalerkinFlow.State N) :
     Continuous (fun p : ℝ × ℝ => deriv (electric N z p.1) p.2) := by

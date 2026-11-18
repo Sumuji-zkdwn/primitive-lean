@@ -24,7 +24,9 @@ theorem power_eq_tensorPow {ι : Type*} (A : TensorSeries ι) (n : ℕ) :
     power A n = (A ^ n : TensorSeries ι) := by
   induction n with
   | zero => rfl
-  | succ n ih => rw [power, ih, pow_succ']; rfl
+  | succ n ih =>
+    change product A (power A n) = _
+    rw [ih, pow_succ']; rfl
 
 /-- Evaluation of any polynomial at a positive-order word series only needs
 its coefficients through the degree of the queried word. -/
@@ -36,7 +38,6 @@ theorem aeval_coefficient {ι : Type*} (A : TensorSeries ι) (hA : A [] = 0)
   have hN : p.natDegree < N := by dsimp [N]; omega
   have he := congrArg (fun F : TensorSeries ι => F w)
     (Polynomial.aeval_eq_sum_range' hN A)
-  dsimp only at he
   rw [tensor_sum_apply] at he
   simp_rw [tensor_smul_apply, ← power_eq_tensorPow] at he
   rw [he]
@@ -65,7 +66,7 @@ theorem scalar_coeff_trunc_pow (f : PowerSeries ℝ) (N n k : ℕ) (hn : n < N) 
     PowerSeries.coeff n ((PowerSeries.trunc N f : PowerSeries ℝ) ^ k) =
       PowerSeries.coeff n (f ^ k) := by
   have h := congrArg (fun p : Polynomial ℝ => p.coeff n) (PowerSeries.trunc_trunc_pow f N k)
-  simpa only [PowerSeries.coeff_trunc, if_pos hn] using h
+  simpa only [PowerSeries.coeff_trunc, ite_eq_left hn] using h
 
 /-- Truncating both scalar series preserves every coefficient below the
 cutoff when the substituted series has zero constant coefficient. -/
@@ -77,7 +78,7 @@ theorem scalar_coeff_subst_trunc (f g : PowerSeries ℝ)
       PowerSeries.coeff n (f.subst g) := by
   have hg' : PowerSeries.constantCoeff (PowerSeries.trunc N g : PowerSeries ℝ) = 0 := by
     rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply,
-      Polynomial.coeff_coe, PowerSeries.coeff_trunc, if_pos (by omega),
+      Polynomial.coeff_coe, PowerSeries.coeff_trunc, ite_eq_left (by omega),
       PowerSeries.coeff_zero_eq_constantCoeff_apply, hg]
   rw [PowerSeries.coeff_subst' (PowerSeries.HasSubst.of_constantCoeff_zero' hg'),
     PowerSeries.coeff_subst' (PowerSeries.HasSubst.of_constantCoeff_zero' hg)]
@@ -85,7 +86,7 @@ theorem scalar_coeff_subst_trunc (f g : PowerSeries ℝ)
   intro k
   rw [scalar_coeff_trunc_pow g N n k hn]
   by_cases hk : k < N
-  · rw [Polynomial.coeff_coe, PowerSeries.coeff_trunc, if_pos hk]
+  · rw [Polynomial.coeff_coe, PowerSeries.coeff_trunc, ite_eq_left hk]
   · rw [scalar_coeff_pow_vanishes hg n k (by omega)]
     simp
 
@@ -107,7 +108,7 @@ theorem aeval_trunc_exp {ι : Type*} (A : TensorSeries ι) (hA : A [] = 0)
   apply Finset.sum_congr rfl
   intro k hk
   have hk' : k < N := lt_of_le_of_lt (Nat.le_of_lt_succ (Finset.mem_range.mp hk)) hw
-  rw [PowerSeries.coeff_trunc, if_pos hk', coeff_exp_real]
+  rw [PowerSeries.coeff_trunc, ite_eq_left hk', coeff_exp_real]
 
 theorem aeval_trunc_log {ι : Type*} (A : TensorSeries ι) (hA : A [] = 0)
     (N : ℕ) (w : List ι) (hw : w.length < N) :
@@ -118,7 +119,7 @@ theorem aeval_trunc_log {ι : Type*} (A : TensorSeries ι) (hA : A [] = 0)
   apply Finset.sum_congr rfl
   intro k hk
   have hk' : k < N := lt_of_le_of_lt (Nat.le_of_lt_succ (Finset.mem_range.mp hk)) hw
-  rw [PowerSeries.coeff_trunc, if_pos hk', coeff_log_real]
+  rw [PowerSeries.coeff_trunc, ite_eq_left hk', coeff_log_real]
 
 /-- The conventional alternating-power logarithm is an actual inverse to the
 explicit exponential in every word degree. -/
@@ -135,7 +136,7 @@ theorem formalExp_formalLog {ι : Type*} (F : Series ι) (hF : F [] = 1) :
   have hB : B [] = 0 := by
     dsimp only [B]
     rw [aeval_coefficient A hA]
-    simp [hp, power_zero, unitSeries]
+    simp [hp]
   have hBcoeff : ∀ z, z.length ≤ w.length → B z = formalLog F z := by
     intro z hz
     exact aeval_trunc_log A hA N z (by dsimp [N]; omega)

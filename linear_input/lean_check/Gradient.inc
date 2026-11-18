@@ -21,24 +21,27 @@ theorem hasDerivAt_E_x (lam r u x y : ℝ) :
     LinearInputCalculus.hasDerivAt_potential lam r u x
   convert hf.add (((hasDerivAt_const x y).sub
     ((hasDerivAt_id x).const_mul (Real.sqrt 2))).pow 2 |>.div_const 2) using 1
-  dsimp [gx]
-  ring_nf
-  rw [Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
-  ring
+  · rfl
+  · dsimp [gx]
+    ring_nf
+    rw [Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
+    ring
 
 theorem hasDerivAt_E_y (lam r u x y : ℝ) :
     HasDerivAt (fun t : ℝ => E lam r u x t) (gy x y) y := by
   convert (hasDerivAt_const y (f lam r u x)).add
     (((hasDerivAt_id y).sub_const (Real.sqrt 2 * x)).pow 2 |>.div_const 2) using 1
-  dsimp [gy]
-  ring
+  · rfl
+  · dsimp [gy]
+    ring
 
 theorem hasDerivAt_E_input (lam r u x y : ℝ) :
     HasDerivAt (fun t : ℝ => E lam r t x y) (-x) u := by
   convert ((hasDerivAt_const u (lam * x ^ 4 / 4 + r * x ^ 2 / 2)).sub
     ((hasDerivAt_id u).mul_const x)).add_const
     ((y - Real.sqrt 2 * x) ^ 2 / 2) using 1
-  simp
+  · rfl
+  · simp
 
 theorem deriv_E_x (lam r u x y : ℝ) :
     deriv (fun t : ℝ => E lam r u t y) x = gx lam r u x y :=
@@ -76,7 +79,7 @@ theorem stationary_value_le {lam r u x y : ℝ} (hlam : 0 < lam)
     E lam r u x y ≤ (max (-r) 0) ^ 2 / (12 * lam) := by
   obtain ⟨hy, hu⟩ := (stationary_iff lam r u x y).1 hg
   rw [hy]
-  simpa only [E, sub_self, zero_pow (by decide : 2 ≠ 0), zero_div, add_zero]
+  simpa only [E, f, LinearInputCalculus.potential, sub_self, zero_pow (by decide : 2 ≠ 0), zero_div, add_zero]
     using LinearInputCalculus.critical_value_le hlam hu
 
 theorem no_stationary_on_band {lam r u x y target : ℝ} (hlam : 0 < lam)
@@ -133,10 +136,11 @@ theorem hasDerivAt_energy_curve {x y u : ℝ → ℝ} {t x' y' u' : ℝ}
   convert (((((hx.pow 4).const_mul lam).div_const 4).add
     (((hx.pow 2).const_mul r).div_const 2)).sub (hu.mul hx)).add
     (((hy.sub (hx.const_mul (Real.sqrt 2))).pow 2).div_const 2) using 1
-  dsimp [gx, gy]
-  ring_nf
-  rw [Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
-  ring
+  · rfl
+  · dsimp [gx, gy]
+    ring_nf
+    rw [Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2)]
+    ring
 
 /-- Conditional on actual coordinate velocities, the tangential part cancels.
 The moving input contributes the term `-x t * u'`; no existence assertion is made. -/

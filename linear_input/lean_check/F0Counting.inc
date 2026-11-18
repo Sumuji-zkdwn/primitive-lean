@@ -40,7 +40,7 @@ def supportedChoicesEquiv {α : Type*} (A : Finset α) :
   right_inv f := by
     funext x
     apply Subtype.ext
-    simp only [extendRetraction, dif_neg x.property]
+    simp only [extendRetraction, dite_eq_right x.property]
 
 theorem supported_retraction_count {α : Type*} [Fintype α] (A : Finset α) :
     Nat.card (SupportedRetraction A) = A.card ^ (Fintype.card α - A.card) := by

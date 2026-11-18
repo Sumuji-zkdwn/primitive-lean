@@ -17,15 +17,16 @@ theorem treeLike_linearEquiv_iff {E F : Type*}
     TreeLike (e ∘ γ) a b ↔ TreeLike γ a b := by
   constructor
   · intro h
-    have he := h.lipschitz_map e.symm.lipschitz
-    simpa only [Function.comp_def, ContinuousLinearEquiv.symm_apply_apply] using he
+    have he := h.lipschitz_map e.symm.toContinuousLinearMap.lipschitzWith
+    change TreeLike (fun x => e.symm (e (γ x))) a b at he
+    simpa only [ContinuousLinearEquiv.symm_apply_apply] using! he
   · intro h
-    exact h.lipschitz_map e.lipschitz
+    exact h.lipschitz_map e.toContinuousLinearMap.lipschitzWith
 
 theorem coordinate_boundedVariation {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
     {ι : Type*} [Fintype ι] (e : E ≃L[ℝ] (ι → ℝ))
     {γ : ℝ → E} {a b : ℝ} (hγ : BoundedVariationOn γ (Icc a b)) :
-    BoundedVariationOn (e ∘ γ) (Icc a b) := e.lipschitz.comp_boundedVariationOn hγ
+    BoundedVariationOn (e ∘ γ) (Icc a b) := e.toContinuousLinearMap.lipschitzWith.comp_boundedVariationOn hγ
 
 theorem coordinate_continuousOn {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
     {ι : Type*} [Fintype ι] (e : E ≃L[ℝ] (ι → ℝ))

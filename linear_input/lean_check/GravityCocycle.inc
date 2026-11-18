@@ -111,7 +111,7 @@ theorem newton_kernel_symmetric [DecidableEq ι]
   · subst j
     simp [newtonKernel]
   · have hji : j ≠ i := Ne.symm hij
-    simp only [newtonKernel, if_neg hij, if_neg hji]
+    simp only [newtonKernel, ite_eq_right hij, ite_eq_right hji]
     rw [dist_comm (pos i) (pos j)]
     ring
 
@@ -151,13 +151,14 @@ theorem line_potential_derivative
   have hsep : y - x ≠ 0 := ne_of_gt (sub_pos.mpr hxy)
   have hden : HasDerivAt (fun t : ℝ => y - t) (-1) x := by
     convert (hasDerivAt_const x y).sub (hasDerivAt_id x) using 1
-    ring
+    · rfl
+    · ring
   have hnum : HasDerivAt (fun _ : ℝ => -(G * m1 * m2)) 0 x :=
     hasDerivAt_const x _
   have h := hnum.div hden hsep
   convert h using 1
-  dsimp [linePotential]
-  ring
+  · rfl
+  · ring
 
 /-- Negative potential gradient is a positive inverse-square attraction. -/
 theorem line_force_inverse_square

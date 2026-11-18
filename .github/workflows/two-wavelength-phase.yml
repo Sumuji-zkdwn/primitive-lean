@@ -1,6 +1,20 @@
 name: Two-wavelength phase observation (isolated Lean)
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - 'lean/DarkBrightObservation.lean'
+      - 'lean/PrismHysteresisReadout.lean'
+      - 'lean/FluidPrismPhaseMemory.lean'
+      - 'lean/TwoWavelength*.lean'
+      - 'tools/verify_two_wavelength.py'
+      - 'tools/check_lean_migration.py'
+      - 'docs/lean436/**'
+      - '.github/workflows/two-wavelength-phase.yml'
   push:
     branches: [chatgpt/two-wavelength-phase-20261107]
   workflow_dispatch:
@@ -13,7 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout exact proposed head and migration source
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
       - name: Install repository-pinned Lean and Mathlib cache
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:

@@ -25,7 +25,7 @@ theorem firstIntegral_hasDerivAt
       (fun t => κ t * M t - ε (κ t) - lam * cos (θ t) - μ * sin (θ t)) 0 s := by
   convert (((hκ.mul hM).sub (hε.comp s hκ)).sub
     (hθ.cos.const_mul lam)).sub (hθ.sin.const_mul μ) using 1
-  ring
+  all_goals first | rfl | ring
 
 /-- On an open connected interval the first integral is constant. -/
 theorem firstIntegral_constant
@@ -128,8 +128,7 @@ theorem smooth_angle_firstIntegral_and_curvature
 theorem quadratic_density_hasDerivAt (k q : ℝ) :
     HasDerivAt (fun x : ℝ => k * x ^ 2 / 2) (k * q) q := by
   convert (((hasDerivAt_id q).pow 2).const_mul k).div_const 2 using 1
-  simp only [id_eq]
-  ring
+  all_goals first | rfl | (simp only [id_eq]; ring)
 
 /-- The actual second derivative of ε'(κ) for a quadratic density. -/
 theorem quadratic_moment_second_derivative

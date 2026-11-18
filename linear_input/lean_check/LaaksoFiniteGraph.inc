@@ -139,7 +139,7 @@ theorem vertex_card_succ (n : ℕ) :
 
 theorem edge_card (n : ℕ) : Fintype.card (EdgeType n) = 6 ^ n := by
   induction n with
-  | zero => simp [EdgeType]
+  | zero => exact Fintype.card_fin 1
   | succ n ih => rw [edge_card_succ, ih, pow_succ]; omega
 
 /-- An integral form of the vertex count, including level zero. -/

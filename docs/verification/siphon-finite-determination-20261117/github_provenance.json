@@ -1,0 +1,17 @@
+{
+  "retrieved_date_jst": "2026-11-17",
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "pr": 146,
+  "head": "763d5d88d26d5fe8a8830c3b74f57461213ba4ed",
+  "base_ref": "codex/lean-4.36-upgrade-20261114",
+  "base_sha": "30ba44177ea5e0512ca7f321e4109f17b62170a0",
+  "draft": true,
+  "merged": false,
+  "run": {
+    "id": 43982007551,
+    "head_sha": "763d5d88d26d5fe8a8830c3b74f57461213ba4ed",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "source_blob": "350664c472bb9def7270f0211b26ed65f39be5ae"
+}

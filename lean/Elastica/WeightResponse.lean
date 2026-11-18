@@ -36,10 +36,11 @@ theorem hasDerivAt_powerLog_exp_neg_mul {f : ℝ → ℝ} {x d : ℝ}
     ring
   convert (hasDerivAt_powerLog (p := p) (exp_pos (-β * f x))).comp x
     (hasDerivAt_exp_neg_mul β hf) using 1
-  calc
-    -β * exp (-p * β * f x) * d =
-        -β * (exp (-β * f x) ^ (p - 1) * exp (-β * f x)) * d := by rw [he]
-    _ = _ := by ring
+  · rfl
+  · calc
+      -β * exp (-p * β * f x) * d =
+          -β * (exp (-β * f x) ^ (p - 1) * exp (-β * f x)) * d := by rw [he]
+      _ = _ := by ring
 
 /-- All real response exponents reverse energy order when β is positive. -/
 theorem strictAnti_powerLog_exp_neg_mul (p : ℝ) {β : ℝ} (hβ : 0 < β) :
