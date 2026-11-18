@@ -6647,6 +6647,22 @@
         "authored_on_parent_commit": "9ad1fe7e0505d0e9507ed6bf231100955928a55b",
         "ledger": "docs/laakso/provenance-signed.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "original_sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "1f83367f9680319849a1e0c5288cf7b5a19efb86",
+        "ledger": "docs/laakso/provenance-switching.json"
+      }
     }
   ],
   "construction_errors": [],
