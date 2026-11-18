@@ -159,9 +159,9 @@ def chair_checks():
 
 
 def check_lean_export():
-    log = OUT / 'lean430.log'
+    log = OUT / 'lean.log'
     if not log.exists():
-        return dict(status='NOT_RUN', reason='Run Lean and save verification/lean430.log first')
+        return dict(status='NOT_RUN', reason='Run the projection Lean checker to produce lean.log first')
     labels = ['grow', 'sale:channel-1', 'external:chair', 'external:demand',
               'internal:make-chair']
     states = list(product(range(4), (False, True), (False, True), (False, True)))

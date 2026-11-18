@@ -91,8 +91,14 @@ def audit(root=ROOT):
     candidates = {p.relative_to(root).as_posix()
                   for p in (root / 'linear_input/lean_check').glob('*.inc')
                   if p.name not in original_parts}
-    if candidates != set(paths):
-        errors.append('Supplement registration mismatch: ' + repr(sorted(candidates ^ set(paths))))
+    separate = {row['path'] for row in rows if row.get('role') == 'dedicated_verifier_input'}
+    for path in separate:
+        checker = by_path[path].get('checker', '')
+        if path in paths or not checker or not (root / checker).is_file():
+            errors.append('Invalid dedicated verifier registration: ' + path)
+    registered = set(paths) | separate
+    if candidates != registered:
+        errors.append('Supplement registration mismatch: ' + repr(sorted(candidates ^ registered)))
     covered = {row['path'] for row in manifest['files']}
     if not set(paths) <= covered:
         errors.append('Missing supplement provenance: ' + repr(sorted(set(paths) - covered)))

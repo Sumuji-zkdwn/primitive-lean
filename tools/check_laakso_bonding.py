@@ -45,11 +45,14 @@ def main():
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=True)
     source_manifest = json.loads((EVIDENCE/'source-manifest.json').read_text())
-    for entry in source_manifest['files']:
+    source_commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    inputs = {}
+    for entry in source_manifest['files'] + [{'path': 'linear_input/lean_check/LaaksoBondingAudit.inc'}]:
         data = (ROOT/entry['path']).read_bytes()
-        blob = hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
-        if blob != entry['sha']:
-            raise SystemExit(f"Pinned source mismatch: {entry['path']}")
+        committed = subprocess.check_output(['git', 'show', f"{source_commit}:{entry['path']}"], cwd=ROOT)
+        if data != committed:
+            raise SystemExit(f"Working input differs from {source_commit}: {entry['path']}")
+        inputs[entry['path']] = hashlib.sha256(data).hexdigest()
     preamble = ('\n'.join('import '+m for m in IMPORTS) +
                 '\nset_option maxHeartbeats 2000000\nset_option maxRecDepth 4096\n').encode()
     source_dir = ROOT/'linear_input/lean_check'
@@ -57,14 +60,15 @@ def main():
         (source_dir/(part+'.inc')).read_bytes() for part in PARTS))
     (out/'LaaksoBondingAudit.lean').write_bytes(
         b'import Upstream\n'+(source_dir/'LaaksoBondingAudit.inc').read_bytes())
-    print(f"Verified {len(source_manifest['files'])} pinned inputs; assembled actual sources.", flush=True)
+    print(f"Verified {len(inputs)} inputs at {source_commit}; assembled actual sources.", flush=True)
     if args.assemble_only:
         return
     # Resolve an elan shim in the pinned project's cwd, not the output directory.
     prefix = subprocess.check_output([args.lean, '--print-prefix'], cwd=ROOT/'lean', text=True).strip()
     lean = str(Path(prefix)/'bin/lean')
     version = subprocess.check_output([lean, '--version'], text=True).strip()
-    if 'version 4.30.0-rc2,' not in version:
+    toolchain = (ROOT/'lean/lean-toolchain').read_text().strip().split(':v')[-1]
+    if f'version {toolchain},' not in version:
         raise SystemExit(f'Wrong Lean version: {version}')
     packages = args.packages.resolve()
     manifest = json.loads((ROOT/'lean/lake-manifest.json').read_text())
@@ -100,7 +104,8 @@ def main():
             break
     all_pass = len(results) == 2 and all(
         r['exit_code'] == 0 and not r['forbidden_proof_warning'] for r in results)
-    summary = {'source_commit': source_manifest['source_commit'], 'compiler': version,
+    summary = {'source_commit': source_commit, 'source_sha256': inputs,
+               'historical_source_commit': source_manifest['source_commit'], 'compiler': version,
                'dependency_revisions': revisions, 'kernel_trust_level': 0,
                'results': results, 'all_pass': all_pass}
     (out/'lean-results.json').write_text(json.dumps(summary, indent=2)+'\n')

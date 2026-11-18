@@ -51,6 +51,13 @@ def run_integration(root, command, rebuild=False):
                ('moving-curve-audit', ['lake', 'env', 'lean', '--trust=0', 'MovingCurveAudit.lean'], lean),
                ('okanohara-bridge', [sys.executable, '-B', '-X', 'utf8', 'tools/verify_okanohara_bridge.py']),
                ('finite-markov-transport', [sys.executable, '-B', '-X', 'utf8', 'tools/verify_finite_markov_transport.py'])]
+    stages += [
+        ('void-hypercompletion', ['lake', 'env', 'lean', '--trust=0', 'Research/VoidHyperCompletion.lean'], lean),
+        ('laakso-bonding', [sys.executable, '-B', '-X', 'utf8', 'tools/check_laakso_bonding.py',
+                            '--output-dir', str(out / 'laakso-bonding')]),
+        ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
+                                     '--projection-reachability-only']),
+    ]
     for name, args, *cwd in stages:
         print('Running ' + name, flush=True)
         record = command(args, 'integration-' + name, cwd=cwd[0] if cwd else root)
