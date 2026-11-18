@@ -1,0 +1,51 @@
+{
+  "source_commit": "983fa7cffe88463e63fdacdcff1d6f989118a76e",
+  "compiler": "Lean (version 4.30.0-rc2, x86_64-unknown-linux-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "dependency_revisions": {
+    "mathlib": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+    "plausible": "86210d4ad1b08b086d0bd638637a75246523dbb8",
+    "LeanSearchClient": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+    "importGraph": "cdab3938ccabbdb044be6896e251b5814bec932e",
+    "proofwidgets": "2db6054a44326f8c0230ee0570e2ddb894816511",
+    "aesop": "f0c6e183ea26531e82773feb4b73ab6595ca17a5",
+    "Qq": "1cc7e819b9b9bc1e87c9edcccb62e0269e00a809",
+    "batteries": "5c57f3857ba81924a88b2cdf4f062e34ec04ff11",
+    "Cli": "13567aed1ac4f12aea9484178e07e51f8c9f7658"
+  },
+  "kernel_trust_level": 0,
+  "results": [
+    {
+      "module": "Upstream",
+      "command": [
+        "/workspace/scratch/02777ed3b6bd/tooling/lean-4.30.0-rc2-linux/bin/lean",
+        "--trust=0",
+        "-o",
+        "Upstream.olean",
+        "Upstream.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 12.808,
+      "sorryAx_present": false,
+      "forbidden_proof_warning": false,
+      "source_sha256": "7138cdc7fb3526ea0c66777a9a3def43d99e84c1fb8cfc5070af951b9bd9d81b",
+      "log_sha256": "8d2b5a3aac26b52f1e79938955eeef3d7953696ab80c440bc662f5bd80b1be13"
+    },
+    {
+      "module": "LaaksoBondingAudit",
+      "command": [
+        "/workspace/scratch/02777ed3b6bd/tooling/lean-4.30.0-rc2-linux/bin/lean",
+        "--trust=0",
+        "-o",
+        "LaaksoBondingAudit.olean",
+        "LaaksoBondingAudit.lean"
+      ],
+      "exit_code": 0,
+      "seconds": 2.349,
+      "sorryAx_present": false,
+      "forbidden_proof_warning": false,
+      "source_sha256": "3d70f35b561857cdea009840a09235d7f2831a4534e1b7df51c39224a8a2bcc0",
+      "log_sha256": "9a4619a2e1abd3f2e6eaaf4f67d8bc34e9969c0f0a5c165c713b683c28962153"
+    }
+  ],
+  "all_pass": true
+}

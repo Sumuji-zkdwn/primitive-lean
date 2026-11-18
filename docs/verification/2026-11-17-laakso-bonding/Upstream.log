@@ -1,0 +1,15 @@
+Upstream.lean:2306:19: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Upstream.lean:2406:2: warning: 'all_goals simp' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Upstream.lean:2406:12: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+Upstream.lean:2415:2: warning: 'all_goals simp' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+Upstream.lean:2415:12: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`

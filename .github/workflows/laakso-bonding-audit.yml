@@ -1,0 +1,55 @@
+name: Laakso bonding audit (Lean and finite check)
+
+on:
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/*.inc'
+      - 'tools/check_laakso_bonding*.py'
+      - 'docs/verification/2026-11-17-laakso-bonding/**'
+      - 'docs/research/2026-11-17-laakso-bonding-audit.md'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - '.github/workflows/laakso-bonding-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bonding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact proposed head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Independently enumerate the finite graphs
+        run: |
+          git rev-parse HEAD
+          python3 tools/check_laakso_bonding_finite.py --output "$RUNNER_TEMP/laakso-bonding/finite-results.json"
+
+      - name: Install repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Check actual sources and additive lemmas with kernel trust zero
+        run: python3 tools/check_laakso_bonding.py --output-dir "$RUNNER_TEMP/laakso-bonding"
+
+      - name: Show proof and verification records
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/laakso-bonding/LaaksoBondingAudit.log" ]; then
+            cat "$RUNNER_TEMP/laakso-bonding/LaaksoBondingAudit.log"
+          fi
+          if [ -f "$RUNNER_TEMP/laakso-bonding/lean-results.json" ]; then
+            cat "$RUNNER_TEMP/laakso-bonding/lean-results.json"
+          fi

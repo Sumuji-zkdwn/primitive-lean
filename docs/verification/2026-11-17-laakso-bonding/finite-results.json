@@ -1,0 +1,177 @@
+{
+  "source_commit": "983fa7cffe88463e63fdacdcff1d6f989118a76e",
+  "level1": {
+    "raw_vertices": 8,
+    "observed_vertices": 6,
+    "edges": 6
+  },
+  "level2": {
+    "raw_vertices": 36,
+    "observed_vertices": 24,
+    "edges": 36
+  },
+  "bonding_images_of_level2_vertices": {
+    "parent_vertices": 6,
+    "edge_interior_points": 12
+  },
+  "raw_parent_state_and_new_sheet_pairs": 16,
+  "noncommuting_raw_pairs": 8,
+  "inherited_observed_copies_checked": 12,
+  "noncommuting_observed_copies": 4,
+  "rows": [
+    {
+      "parent_label": 0,
+      "new_sheet": false,
+      "fine_then_bonding": [
+        0
+      ],
+      "parent_relation": [
+        0
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 0,
+      "new_sheet": true,
+      "fine_then_bonding": [
+        0
+      ],
+      "parent_relation": [
+        0
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 1,
+      "new_sheet": false,
+      "fine_then_bonding": [
+        1
+      ],
+      "parent_relation": [
+        1
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 1,
+      "new_sheet": true,
+      "fine_then_bonding": [
+        1
+      ],
+      "parent_relation": [
+        1
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 2,
+      "new_sheet": false,
+      "fine_then_bonding": [
+        2
+      ],
+      "parent_relation": [
+        2
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 2,
+      "new_sheet": true,
+      "fine_then_bonding": [
+        2
+      ],
+      "parent_relation": [
+        2
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 3,
+      "new_sheet": false,
+      "fine_then_bonding": [
+        3
+      ],
+      "parent_relation": [
+        3
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 3,
+      "new_sheet": true,
+      "fine_then_bonding": [
+        3
+      ],
+      "parent_relation": [
+        3
+      ],
+      "forward_sound": true,
+      "equal": true
+    },
+    {
+      "parent_label": 4,
+      "new_sheet": false,
+      "fine_then_bonding": [
+        4
+      ],
+      "parent_relation": [
+        5
+      ],
+      "forward_sound": false,
+      "equal": false
+    },
+    {
+      "parent_label": 4,
+      "new_sheet": true,
+      "fine_then_bonding": [
+        4
+      ],
+      "parent_relation": [
+        5
+      ],
+      "forward_sound": false,
+      "equal": false
+    },
+    {
+      "parent_label": 5,
+      "new_sheet": false,
+      "fine_then_bonding": [
+        5
+      ],
+      "parent_relation": [
+        2,
+        3
+      ],
+      "forward_sound": false,
+      "equal": false
+    },
+    {
+      "parent_label": 5,
+      "new_sheet": true,
+      "fine_then_bonding": [
+        5
+      ],
+      "parent_relation": [
+        2,
+        3
+      ],
+      "forward_sound": false,
+      "equal": false
+    }
+  ],
+  "replacement_relation": {
+    "states": 12,
+    "arrows": 28,
+    "exact_inputs": 12,
+    "keeps_original_w1_w2_self_loops": false,
+    "w1_w2_steps_are_single_second_level_edges": false
+  },
+  "boundary": "Finite vertices and exact rational bonding images only; no continuous or inverse-limit dynamics."
+}
