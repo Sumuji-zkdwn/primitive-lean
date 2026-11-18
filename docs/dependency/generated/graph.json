@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+  "main_commit": "f2b101fd47f47af49d25031682715472f124a788",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -9938,6 +9938,51 @@
       ],
       "imports": [],
       "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoSignedGauge",
+      "declarations": [
+        "switchTwist",
+        "switch_involutive",
+        "parity_switch",
+        "treeGauge",
+        "tree_normal_form",
+        "switch_equivalent_iff",
+        "switchState",
+        "localPotential_switch",
+        "edgeEnergy_switch",
+        "energy_switch",
+        "odd_energy_lower_bound",
+        "zero_energy_iff"
+      ],
+      "imports": [],
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoSignedMinimum",
+      "declarations": [
+        "leafExcess",
+        "leafExcess_nonneg",
+        "leafExcess_eq_zero",
+        "flipped_energy_decomposition",
+        "flipped_minimum",
+        "flipped_minimum_iff",
+        "energy_zero_state",
+        "switchState_eq_zero_iff",
+        "odd_minimum",
+        "odd_minimum_iff",
+        "least_energy"
+      ],
+      "imports": [],
+      "sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a"
     },
     {
       "id": "main:linear_input/lean_check/LevelConvergence.inc",
@@ -23144,6 +23189,73 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "middleParity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "constantWell",
+        "edgeEnergy",
+        "energy_flipped_lower_bound",
+        "energy_untwisted_constantWell",
+        "localPotential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "middleParity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "edgeEnergy",
+        "energy_expansion",
+        "localPotential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "energy_switch",
+        "switchState",
+        "tree_normal_form",
+        "zero_energy_iff"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/LevelConvergence.inc",
       "to": "main:linear_input/lean_check/Coercivity.inc",
       "kind": "unique_identifier_candidate",
@@ -25786,6 +25898,8 @@
     "linear_input/lean_check/LaaksoGeometricTower.inc",
     "linear_input/lean_check/LaaksoSignedConnection.inc",
     "linear_input/lean_check/LaaksoSignedEnergy.inc",
+    "linear_input/lean_check/LaaksoSignedGauge.inc",
+    "linear_input/lean_check/LaaksoSignedMinimum.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
     "linear_input/lean_check/FiniteSelfSynthesis.inc",
     "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -26267,28 +26381,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "f2b101fd47f47af49d25031682715472f124a788",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "f2b101fd47f47af49d25031682715472f124a788",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "f2b101fd47f47af49d25031682715472f124a788",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "f2b101fd47f47af49d25031682715472f124a788",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

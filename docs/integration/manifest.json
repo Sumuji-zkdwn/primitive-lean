@@ -2917,7 +2917,7 @@
     },
     {
       "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
-      "sha256": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e",
+      "sha256": "c10b43079b42a5ac42095cb9e838965bbd11f468ebc811965e3d8d64347c8068",
       "original_sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
       "source_pr": 58,
       "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
@@ -2925,7 +2925,8 @@
       "role": "adapted_retained_source",
       "byte_identical": false,
       "permitted_adaptations": [
-        "Remove the unused implicit type argument ι from fiber_stable_eq_F0_respects, which the pinned Lean could not infer at its use and flagged as unused; the proposition is unchanged."
+        "Remove the unused implicit type argument ι from fiber_stable_eq_F0_respects, which the pinned Lean could not infer at its use and flagged as unused; the proposition is unchanged.",
+        "State the exact family extension criterion by composing the existing equivalences. Derive the family and singleton corollaries and reuse the three-state non-descent witness."
       ]
     },
     {
@@ -6647,6 +6648,71 @@
         "authored_on_parent_commit": "9ad1fe7e0505d0e9507ed6bf231100955928a55b",
         "ledger": "docs/laakso/provenance-signed.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "original_sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "1f83367f9680319849a1e0c5288cf7b5a19efb86",
+        "ledger": "docs/laakso/provenance-switching.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a",
+      "original_sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "5e0861901d2422461514d4f15d3c7a8263aade89",
+        "ledger": "docs/laakso/provenance-minimum.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/OperatorOrientationDepth.inc",
+      "sha256": "14c0271fad2fa052485967e9e14b8d3afc7293372b14db17790942fe8779baa9",
+      "original_sha256": "14c0271fad2fa052485967e9e14b8d3afc7293372b14db17790942fe8779baa9",
+      "source_pr": 131,
+      "source_commit": "c4202bf698b0b57633217ca31b53358930d69a48",
+      "source_path": "linear_input/lean_check/OperatorOrientationDepth.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "28721702d21720c37805fb64924253f3e1ace11f",
+        "ledger": "docs/research/2026-11-11-observer-orientation-depth.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6",
+      "original_sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6",
+      "source_pr": 133,
+      "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
+      "source_path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "proof_reference": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/133",
+        "independent_lean_run": "43148729006",
+        "scope": "The dihedral representation is surjective and induces an isomorphism with the true splitting-field Galois group for generic T_(3^k), k>=1."
+      }
     }
   ],
   "construction_errors": [],
@@ -6925,6 +6991,13 @@
       "authored_on_parent_commit": "b3a065a28fa5872c437a8e5d94e731895d7a9362",
       "manifest": "docs/curve-word-chain/extension-provenance.json",
       "scope": "Actual piecewise curves and integer identification, general finite graphs and spectral/Laplace limits, full Chen/shuffle/free-Lie/BCH, canonical BV signatures, the independent geometric tree-height equivalence and actual two-path equivalence. The coordinate transfer covers arbitrary finite-dimensional real normed spaces; theorem hypotheses and excluded claims remain explicit."
+    },
+    {
+      "date": "2026-11-12",
+      "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
+      "source_pr": 133,
+      "note": "Provenance of new native proof after the 2026-11-03 historical integration snapshot; standalone pinned Lean --trust=0 probe #43148729006 passed, full-tree source and axiom audit tracked separately."
     }
   ]
 }
