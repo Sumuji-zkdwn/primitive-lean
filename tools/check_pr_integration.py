@@ -35,6 +35,9 @@ def audit(root=ROOT):
     errors = ['Unresolved manifest construction error: ' + error
               for error in manifest.get('construction_errors', [])]
     rows = manifest['files']
+    dedicated_ledger = root / 'docs/integration/dedicated-void-projection.json'
+    if dedicated_ledger.is_file():
+        rows = rows + json.loads(dedicated_ledger.read_bytes())['files']
     retained_paths = [row['path'] for row in rows]
     if len(retained_paths) != len(set(retained_paths)):
         errors.append('Duplicate retained source path')
@@ -99,7 +102,7 @@ def audit(root=ROOT):
     registered = set(paths) | separate
     if candidates != registered:
         errors.append('Supplement registration mismatch: ' + repr(sorted(candidates ^ registered)))
-    covered = {row['path'] for row in manifest['files']}
+    covered = set(by_path)
     if not set(paths) <= covered:
         errors.append('Missing supplement provenance: ' + repr(sorted(set(paths) - covered)))
     astra = None
@@ -117,7 +120,7 @@ def audit(root=ROOT):
         allowed_shared = {(row['destination'], row['namespace']) for row in
                           ledger['modules'] + ledger.get('native_bridges', []) if row.get('destination')}
     errors.extend(duplicate_namespace_errors(registry, allowed_shared))
-    return dict(passed=not errors, errors=errors, retained_files=len(manifest['files']),
+    return dict(passed=not errors, errors=errors, retained_files=len(rows),
                 supplemental_groups=len(registry), astra_source_audit=astra,
                 scope='Source bytes and registration, not proof validity')
 
