@@ -2,7 +2,7 @@
 
 Run: python -B tools/check_laakso_signed.py --output verification/laakso-signed.json
 
-All 64 edge signatures and 64 vertex-spin assignments are enumerated.  Lift
+All 64 edge signatures, vertex-spin assignments and vertex switches are enumerated.  Lift
 vertices are connected by labelled edges, never identified.  Energy uses
 q_i=(x_i, sqrt(2)*z_i), with rational x_i,z_i and lambda=kappa=1.  Sparse
 polynomial coefficient checks and sampled evaluations are separate evidence
@@ -97,6 +97,82 @@ def energy_terms(edges, signature, state, coefficient=Q(1, 2)):
 def energy(edges, signature, state, coefficient=Q(1, 2)):
     local, coupling = energy_terms(edges, signature, state, coefficient)
     return sum(local, Q(0)) + sum(coupling, Q(0))
+
+
+def switched_signature(edges, signature, switch):
+    return tuple(switch[a] ^ bit ^ switch[b] for (a, b), bit in zip(edges, signature))
+
+
+def tree_switch(edges, signature):
+    # Root the spanning tree at vertex 4; retain the other parallel edge as a chord.
+    adjacency = [[] for _ in range(6)]
+    for edge_id, (a, b) in enumerate(edges):
+        if edge_id != 3:
+            adjacency[a].append((b, signature[edge_id]))
+            adjacency[b].append((a, signature[edge_id]))
+    labels = {4: 0}
+    pending = deque([4])
+    while pending:
+        vertex = pending.popleft()
+        for neighbor, bit in adjacency[vertex]:
+            if neighbor not in labels:
+                labels[neighbor] = labels[vertex] ^ bit
+                pending.append(neighbor)
+    assert len(labels) == 6
+    return tuple(labels[v] for v in range(6))
+
+
+def gauge_check(edges, positive, negative):
+    signatures = list(product((0, 1), repeat=len(edges)))
+    switches = list(product((0, 1), repeat=6))
+    state = [(Q(i + 1, 3), Q(2 * i + 1, 5)) for i in range(6)]
+    at = [(q, (-q[0], -q[1])) for q in state]
+    local = sum(local_energy(q) for q in state)
+    assert all(local_energy(pair[0]) == local_energy(pair[1]) for pair in at)
+
+    # Tabulate all eight (switched edge sign, source switch, target switch)
+    # choices per edge directly from the rational energy. Reuse these actual
+    # terms when summing all 4096 switched energies.
+    terms = []
+    for a, b in edges:
+        lookup = {(bit, tail, head): coupling_energy(at[a][tail], at[b][head], bit)
+                  for bit, tail, head in product((0, 1), repeat=3)}
+        for (bit, tail, head), value in lookup.items():
+            assert value == lookup[bit ^ tail ^ head, 0, 0]
+        terms.append(lookup)
+
+    classes = [set(), set()]
+    for signature in signatures:
+        classes[signature[2] ^ signature[3]].add(signature)
+    for signature in signatures:
+        parity = signature[2] ^ signature[3]
+        gauge = tree_switch(edges, signature)
+        assert switched_signature(edges, signature, gauge) == (negative if parity else positive)
+        baseline = energy(edges, signature, state)
+        orbit = Counter()
+        for switch in switches:
+            transformed = switched_signature(edges, signature, switch)
+            orbit[transformed] += 1
+            switched_energy = local + sum(lookup[bit, switch[a], switch[b]]
+                                          for lookup, bit, (a, b) in zip(terms, transformed, edges))
+            assert switched_energy == baseline
+        assert set(orbit) == classes[parity] and set(orbit.values()) == {2}
+
+    # A switch at a single leaf changes its incident sign. Keeping the old
+    # state instead of transporting it must be detected by this sample.
+    leaf_switch = (1, 0, 0, 0, 0, 0)
+    leaf_signature = switched_signature(edges, positive, leaf_switch)
+    old_energy = energy(edges, positive, state)
+    wrong_energy = energy(edges, leaf_signature, state)
+    assert sum(leaf_signature) == 1 and wrong_energy != old_energy
+    return dict(orbit_sizes=[len(group) for group in classes], switches_per_orbit_member=2,
+                cycle_edge_ids=[2, 3], tree_root=4, omitted_tree_edge=3,
+                tree_normalizations=len(signatures), representatives=[list(positive), list(negative)],
+                switched_signature_state_pairs=len(signatures) * len(switches),
+                exact_edge_term_checks=8 * len(edges), local_sign_checks=len(state),
+                state_x_z=[[str(x), str(z)] for x, z in state],
+                fixed_state_control=dict(signature=list(leaf_signature), switch=list(leaf_switch),
+                                         original_energy=str(old_energy), fixed_state_energy=str(wrong_energy)))
 
 
 def certificate_terms(edges, negative_signature, state):
@@ -267,6 +343,7 @@ def check():
                            builder_edge_order_to_firstGraph=list(BUILDER_TO_FIRST_EDGE),
                            middle_parallel_edge_ids=[2, 3]),
                 signature_count=64, balanced_signatures=32, unbalanced_signatures=32,
+                gauge_switching=gauge_check(edges, positive, negative),
                 spin_assignments_per_signature=64, signature_spin_checks=4096,
                 discrete_well_energy_checks=4096, signatures=rows,
                 chosen_pair=dict(changed_edge_ids=[i for i in range(6) if positive[i] != negative[i]],
@@ -302,6 +379,7 @@ def main():
         args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n",
                                encoding="utf-8", newline="\n")
     print("PASS: 64 signatures, 4096 spin assignments and 4096 exact well-state energy checks")
+    print("PASS: two 32-signature switching classes, 64 tree normalizations and 4096 exact switched energies on one rational state")
     print(f"PASS: {result['energy']['nonnegative_certificate_sample_count']} rational certificate and flip-jump samples; sparse polynomial identities")
     print("PASS: all-positive vs e3-negative: 12 vertices, 12 edges; components 2 -> 1; reach 6 -> 12")
     print("PASS: four mutation controls rejected")

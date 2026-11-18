@@ -204,6 +204,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/LaaksoGeometricTower.inc', 'LinearInputLaaksoGeometricTower'),
     ('linear_input/lean_check/LaaksoSignedConnection.inc', 'LinearInputLaaksoSigned'),
     ('linear_input/lean_check/LaaksoSignedEnergy.inc', 'LinearInputLaaksoSignedEnergy'),
+    ('linear_input/lean_check/LaaksoSignedGauge.inc', 'LinearInputLaaksoSignedGauge'),
+    ('linear_input/lean_check/LaaksoSignedMinimum.inc', 'LinearInputLaaksoSignedMinimum'),
     ('linear_input/lean_check/SemanticIntervalNecessity.inc', 'LinearInputSemanticIntervals'),
     ('linear_input/lean_check/FiniteSelfSynthesis.inc', 'LinearInputFiniteSelfSynthesis'),
     ('linear_input/lean_check/RecursiveOperatorReentry.inc', 'LinearInputRecursiveReentry'),

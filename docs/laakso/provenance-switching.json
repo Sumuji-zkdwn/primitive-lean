@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "base_commit": "1f83367f9680319849a1e0c5288cf7b5a19efb86",
+  "scope": "Vertex switching, classification by middle-edge parity, and parity-dependent bounds for the zero-input shifted quartic energy on the labelled first approximant.",
+  "inherited_source_ledger": "docs/laakso/provenance-signed.json",
+  "source_inputs": [
+    {
+      "path": "sources/laakso/signed/SIGNED_CONNECTIONS.md",
+      "sha256": "f70c840823a161ee068e3ca805b01a7b2e4b12d7ad8a0a3a714cf8d79006140a",
+      "use": "Sections 1-4 describe cycle parity, vertex switching and simultaneous two-component state and edge-sign changes."
+    }
+  ],
+  "base_inputs": [
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9"
+    },
+    {
+      "path": "docs/laakso/provenance-signed.json",
+      "sha256": "279f1141f2dacba7cb89b319c9b7199d609be97d463e8c856342b45a054f22b2"
+    }
+  ],
+  "modules": [
+    {
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "namespace": "LinearInputLaaksoSignedGauge",
+      "declarations": 12,
+      "theorems": 9
+    }
+  ],
+  "finite_checker": {
+    "path": "tools/check_laakso_signed.py",
+    "sha256": "c8f65bb9308cef5454fe7ec9715cff2c7a6c90fb22e784ab82442caaf713d309",
+    "shared_builder": "tools/check_laakso_finite.py",
+    "shared_builder_sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+  },
+  "parameters": {
+    "lam": 1,
+    "kappa": 1,
+    "u": 0,
+    "r": -1
+  },
+  "proof_boundary": "The classification and all-real energy statements concern this particular six-edge graph and fixed potential. Sharpness of the odd lower bound and extension to higher levels remain open here."
+}

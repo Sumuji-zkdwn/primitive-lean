@@ -6648,6 +6648,38 @@
         "authored_on_parent_commit": "9ad1fe7e0505d0e9507ed6bf231100955928a55b",
         "ledger": "docs/laakso/provenance-signed.json"
       }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "original_sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "1f83367f9680319849a1e0c5288cf7b5a19efb86",
+        "ledger": "docs/laakso/provenance-switching.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a",
+      "original_sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "5e0861901d2422461514d4f15d3c7a8263aade89",
+        "ledger": "docs/laakso/provenance-minimum.json"
+      }
     }
   ],
   "construction_errors": [],
