@@ -1,6 +1,6 @@
 # primitive-lean dependency graphs
 
-Snapshot: main 1712b0a4e4ef1e51edb8cde3803738adec648292, PR metadata 2026-11-05.
+Snapshot: main f2b101fd47f47af49d25031682715472f124a788, PR metadata 2026-11-05.
 Main sources, registries and PR snapshot were read from Git blobs at main_commit.
 PR overlays use immutable base/head SHAs listed in graph.json pr_inputs.
 
@@ -10,9 +10,9 @@ This graph distinguishes (1) exact Lean import, (2) literal qualified declaratio
 references, (3) globally unique bare-name candidates, and (4) PR base-target edges.
 Only (1) and (2) appear in the graphical source edges.
 
-Main files: 390; PR overlay files: 17.
-Declaration names scanned: 7910.
-Source edges: {"exact_import": 122, "qualified_reference": 288, "unique_identifier_candidate": 910}.
+Main files: 391; PR overlay files: 17.
+Declaration names scanned: 7921.
+Source edges: {"exact_import": 122, "qualified_reference": 288, "unique_identifier_candidate": 914}.
 
 ## Source group dependencies
 
@@ -29,7 +29,7 @@ flowchart LR
   g8["Operator / Rulefold (19)"]
   g9["OrbitTrace (18)"]
   g10["Other (40)"]
-  g11["Other supplements (186)"]
+  g11["Other supplements (187)"]
   g12["WFS / Fenchel (10)"]
   g10 -->|36 source refs| g2
   g11 -->|22 source refs| g6
