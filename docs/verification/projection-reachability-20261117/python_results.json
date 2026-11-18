@@ -1,0 +1,237 @@
+{
+  "exhaustive": [
+    {
+      "old_states": 2,
+      "new_states": 2,
+      "systems": 64,
+      "starts": 128,
+      "simulations": 50,
+      "gain_starts": 16,
+      "nonsimulation_without_gain": 12
+    },
+    {
+      "old_states": 2,
+      "new_states": 3,
+      "systems": 864,
+      "starts": 2592,
+      "simulations": 528,
+      "gain_starts": 504,
+      "nonsimulation_without_gain": 504
+    }
+  ],
+  "witnesses": {
+    "old_reachable": [
+      0
+    ],
+    "same_carrier_new": [
+      0,
+      1
+    ],
+    "proper_extension_new": [
+      0,
+      1,
+      2
+    ],
+    "proper_projection": [
+      0,
+      0,
+      1
+    ],
+    "proper_projection_reachable": [
+      0,
+      1
+    ],
+    "reset_failure_without_gain": true,
+    "state_dependent_simulation_without_uniform_compiler": true
+  },
+  "chair": {
+    "state_count": 32,
+    "transition_contexts": 256,
+    "permission_cases": [
+      {
+        "internal_chair": false,
+        "permissions": [],
+        "reachable_states": 4,
+        "goal_reachable": false,
+        "shortest_word": null
+      },
+      {
+        "internal_chair": false,
+        "permissions": [
+          "chair"
+        ],
+        "reachable_states": 8,
+        "goal_reachable": false,
+        "shortest_word": null
+      },
+      {
+        "internal_chair": false,
+        "permissions": [
+          "demand"
+        ],
+        "reachable_states": 8,
+        "goal_reachable": false,
+        "shortest_word": null
+      },
+      {
+        "internal_chair": false,
+        "permissions": [
+          "chair",
+          "demand"
+        ],
+        "reachable_states": 17,
+        "goal_reachable": true,
+        "shortest_word": [
+          "grow",
+          "grow",
+          "grow",
+          "external:chair",
+          "external:demand",
+          "sale:channel-1"
+        ]
+      },
+      {
+        "internal_chair": true,
+        "permissions": [],
+        "reachable_states": 5,
+        "goal_reachable": false,
+        "shortest_word": null
+      },
+      {
+        "internal_chair": true,
+        "permissions": [
+          "chair"
+        ],
+        "reachable_states": 8,
+        "goal_reachable": false,
+        "shortest_word": null
+      },
+      {
+        "internal_chair": true,
+        "permissions": [
+          "demand"
+        ],
+        "reachable_states": 11,
+        "goal_reachable": true,
+        "shortest_word": [
+          "grow",
+          "grow",
+          "grow",
+          "external:demand",
+          "internal:make-chair",
+          "sale:channel-1"
+        ]
+      },
+      {
+        "internal_chair": true,
+        "permissions": [
+          "chair",
+          "demand"
+        ],
+        "reachable_states": 17,
+        "goal_reachable": true,
+        "shortest_word": [
+          "grow",
+          "grow",
+          "grow",
+          "external:chair",
+          "external:demand",
+          "sale:channel-1"
+        ]
+      }
+    ],
+    "original_models": [
+      {
+        "model": "one channel",
+        "minimal_enablers": [
+          [
+            "chair",
+            "demand"
+          ]
+        ],
+        "minimal_blockers": [
+          [
+            "chair"
+          ],
+          [
+            "demand"
+          ]
+        ]
+      },
+      {
+        "model": "independent channels",
+        "minimal_enablers": [
+          [
+            "chairA",
+            "demandA"
+          ],
+          [
+            "chairB",
+            "demandB"
+          ]
+        ],
+        "minimal_blockers": [
+          [
+            "chairA",
+            "chairB"
+          ],
+          [
+            "chairA",
+            "demandB"
+          ],
+          [
+            "chairB",
+            "demandA"
+          ],
+          [
+            "demandA",
+            "demandB"
+          ]
+        ]
+      },
+      {
+        "model": "two chairs / shared buyer",
+        "minimal_enablers": [
+          [
+            "buyer",
+            "chairA"
+          ],
+          [
+            "buyer",
+            "chairB"
+          ]
+        ],
+        "minimal_blockers": [
+          [
+            "buyer"
+          ],
+          [
+            "chairA",
+            "chairB"
+          ]
+        ]
+      },
+      {
+        "model": "self-made chair",
+        "minimal_enablers": [
+          [
+            "demand"
+          ]
+        ],
+        "minimal_blockers": [
+          [
+            "demand"
+          ]
+        ]
+      }
+    ],
+    "original_monotone_functions": 168
+  },
+  "lean_export": {
+    "status": "PASS",
+    "total_transitions": 288,
+    "method": "Lean #eval output compared with independent Python total table; its non-self edges match pinned Economy in all 256 state/permission contexts"
+  },
+  "status": "PASS",
+  "boundary": "Finite checks and model reachability only; no real demand or payment claim."
+}

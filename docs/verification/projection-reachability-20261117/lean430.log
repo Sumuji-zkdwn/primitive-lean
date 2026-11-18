@@ -1,0 +1,335 @@
+'Elastica.ChairPieKillSpot.revenue_mono' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairPieKillSpot.minimal_enabler_exists_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Elastica.ChairPieKillSpot.blocks_iff_hits_minimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Elastica.ChairPieKillSpot.minimal_blocker_exists_of_no_free_success' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Elastica.ChairPieKillSpot.minimal_blocker_iff_minimal_hitting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'Elastica.ChairPieKillSpot.revenue_blocks_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Elastica.ChairPieKillSpot.two_chairs_without_buyer' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairPieKillSpot.shared_buyer_killspot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputProjectionReachability.projection_run' does not depend on any axioms
+'LinearInputProjectionReachability.projection_reachable' does not depend on any axioms
+'LinearInputProjectionReachability.simulation_iff_all_reachability' does not depend on any axioms
+'LinearInputProjectionReachability.simulation_of_compiler' does not depend on any axioms
+'LinearInputProjectionReachability.generated_projection_simulation' does not depend on any axioms
+'LinearInputProjectionReachability.no_gain_of_simulation' does not depend on any axioms
+'LinearInputProjectionReachability.strictGain_iff_escape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputProjectionReachability.old_reachable_lifts' does not depend on any axioms
+'LinearInputProjectionReachability.no_gain_subsingleton' does not depend on any axioms
+'LinearInputProjectionReachability.gain_has_distinct_projections' does not depend on any axioms
+'LinearInputProjectionReachability.gain_cardinality_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Elastica.ChairPieProjection.revenue_iff_reachable' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairPieProjection.revenue_of_permission_simulation' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairPieProjection.blocks_of_permission_simulation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputProjectionExamples.run_idle' does not depend on any axioms
+'LinearInputProjectionExamples.idle_iff' does not depend on any axioms
+'LinearInputProjectionExamples.two_state_gain' does not depend on any axioms
+'LinearInputProjectionExamples.two_state_not_simulated' does not depend on any axioms
+'LinearInputProjectionExamples.three_state_gain' depends on axioms: [propext]
+'LinearInputProjectionExamples.three_state_not_simulated' depends on axioms: [propext]
+'LinearInputProjectionExamples.three_state_section' depends on axioms: [propext]
+'LinearInputProjectionExamples.three_state_retains_old' depends on axioms: [propext]
+'LinearInputProjectionExamples.three_state_cardinalities' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LinearInputProjectionExamples.memory_simulated' does not depend on any axioms
+'LinearInputProjectionExamples.setTrue_run_true' does not depend on any axioms
+'LinearInputProjectionExamples.reset_not_simulated' does not depend on any axioms
+'LinearInputProjectionExamples.reset_has_no_gain' does not depend on any axioms
+'Elastica.ChairInternalGeneration.old_possible_iff' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.new_possible_iff' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.same_permissions_separate' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.no_external_success' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.chair_not_simulated' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.chair_strict_gain' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.chair_retains_old' depends on axioms: [propext, Quot.sound]
+'Elastica.ChairInternalGeneration.chair_simulated_when_chair_available' depends on axioms: [propext, Quot.sound]
+TRANS old 0 0 8
+TRANS old 0 1 0
+TRANS old 0 2 4
+TRANS old 0 3 2
+TRANS new 0 0 8
+TRANS new 0 1 0
+TRANS new 0 2 4
+TRANS new 0 3 2
+TRANS new 0 4 0
+TRANS old 1 0 9
+TRANS old 1 1 1
+TRANS old 1 2 5
+TRANS old 1 3 3
+TRANS new 1 0 9
+TRANS new 1 1 1
+TRANS new 1 2 5
+TRANS new 1 3 3
+TRANS new 1 4 1
+TRANS old 2 0 10
+TRANS old 2 1 2
+TRANS old 2 2 6
+TRANS old 2 3 2
+TRANS new 2 0 10
+TRANS new 2 1 2
+TRANS new 2 2 6
+TRANS new 2 3 2
+TRANS new 2 4 2
+TRANS old 3 0 11
+TRANS old 3 1 3
+TRANS old 3 2 7
+TRANS old 3 3 3
+TRANS new 3 0 11
+TRANS new 3 1 3
+TRANS new 3 2 7
+TRANS new 3 3 3
+TRANS new 3 4 3
+TRANS old 4 0 12
+TRANS old 4 1 4
+TRANS old 4 2 4
+TRANS old 4 3 6
+TRANS new 4 0 12
+TRANS new 4 1 4
+TRANS new 4 2 4
+TRANS new 4 3 6
+TRANS new 4 4 4
+TRANS old 5 0 13
+TRANS old 5 1 5
+TRANS old 5 2 5
+TRANS old 5 3 7
+TRANS new 5 0 13
+TRANS new 5 1 5
+TRANS new 5 2 5
+TRANS new 5 3 7
+TRANS new 5 4 5
+TRANS old 6 0 14
+TRANS old 6 1 6
+TRANS old 6 2 6
+TRANS old 6 3 6
+TRANS new 6 0 14
+TRANS new 6 1 6
+TRANS new 6 2 6
+TRANS new 6 3 6
+TRANS new 6 4 6
+TRANS old 7 0 15
+TRANS old 7 1 7
+TRANS old 7 2 7
+TRANS old 7 3 7
+TRANS new 7 0 15
+TRANS new 7 1 7
+TRANS new 7 2 7
+TRANS new 7 3 7
+TRANS new 7 4 7
+TRANS old 8 0 16
+TRANS old 8 1 8
+TRANS old 8 2 12
+TRANS old 8 3 10
+TRANS new 8 0 16
+TRANS new 8 1 8
+TRANS new 8 2 12
+TRANS new 8 3 10
+TRANS new 8 4 8
+TRANS old 9 0 17
+TRANS old 9 1 9
+TRANS old 9 2 13
+TRANS old 9 3 11
+TRANS new 9 0 17
+TRANS new 9 1 9
+TRANS new 9 2 13
+TRANS new 9 3 11
+TRANS new 9 4 9
+TRANS old 10 0 18
+TRANS old 10 1 10
+TRANS old 10 2 14
+TRANS old 10 3 10
+TRANS new 10 0 18
+TRANS new 10 1 10
+TRANS new 10 2 14
+TRANS new 10 3 10
+TRANS new 10 4 10
+TRANS old 11 0 19
+TRANS old 11 1 11
+TRANS old 11 2 15
+TRANS old 11 3 11
+TRANS new 11 0 19
+TRANS new 11 1 11
+TRANS new 11 2 15
+TRANS new 11 3 11
+TRANS new 11 4 11
+TRANS old 12 0 20
+TRANS old 12 1 12
+TRANS old 12 2 12
+TRANS old 12 3 14
+TRANS new 12 0 20
+TRANS new 12 1 12
+TRANS new 12 2 12
+TRANS new 12 3 14
+TRANS new 12 4 12
+TRANS old 13 0 21
+TRANS old 13 1 13
+TRANS old 13 2 13
+TRANS old 13 3 15
+TRANS new 13 0 21
+TRANS new 13 1 13
+TRANS new 13 2 13
+TRANS new 13 3 15
+TRANS new 13 4 13
+TRANS old 14 0 22
+TRANS old 14 1 14
+TRANS old 14 2 14
+TRANS old 14 3 14
+TRANS new 14 0 22
+TRANS new 14 1 14
+TRANS new 14 2 14
+TRANS new 14 3 14
+TRANS new 14 4 14
+TRANS old 15 0 23
+TRANS old 15 1 15
+TRANS old 15 2 15
+TRANS old 15 3 15
+TRANS new 15 0 23
+TRANS new 15 1 15
+TRANS new 15 2 15
+TRANS new 15 3 15
+TRANS new 15 4 15
+TRANS old 16 0 24
+TRANS old 16 1 16
+TRANS old 16 2 20
+TRANS old 16 3 18
+TRANS new 16 0 24
+TRANS new 16 1 16
+TRANS new 16 2 20
+TRANS new 16 3 18
+TRANS new 16 4 16
+TRANS old 17 0 25
+TRANS old 17 1 17
+TRANS old 17 2 21
+TRANS old 17 3 19
+TRANS new 17 0 25
+TRANS new 17 1 17
+TRANS new 17 2 21
+TRANS new 17 3 19
+TRANS new 17 4 17
+TRANS old 18 0 26
+TRANS old 18 1 18
+TRANS old 18 2 22
+TRANS old 18 3 18
+TRANS new 18 0 26
+TRANS new 18 1 18
+TRANS new 18 2 22
+TRANS new 18 3 18
+TRANS new 18 4 18
+TRANS old 19 0 27
+TRANS old 19 1 19
+TRANS old 19 2 23
+TRANS old 19 3 19
+TRANS new 19 0 27
+TRANS new 19 1 19
+TRANS new 19 2 23
+TRANS new 19 3 19
+TRANS new 19 4 19
+TRANS old 20 0 28
+TRANS old 20 1 20
+TRANS old 20 2 20
+TRANS old 20 3 22
+TRANS new 20 0 28
+TRANS new 20 1 20
+TRANS new 20 2 20
+TRANS new 20 3 22
+TRANS new 20 4 20
+TRANS old 21 0 29
+TRANS old 21 1 21
+TRANS old 21 2 21
+TRANS old 21 3 23
+TRANS new 21 0 29
+TRANS new 21 1 21
+TRANS new 21 2 21
+TRANS new 21 3 23
+TRANS new 21 4 21
+TRANS old 22 0 30
+TRANS old 22 1 22
+TRANS old 22 2 22
+TRANS old 22 3 22
+TRANS new 22 0 30
+TRANS new 22 1 22
+TRANS new 22 2 22
+TRANS new 22 3 22
+TRANS new 22 4 22
+TRANS old 23 0 31
+TRANS old 23 1 23
+TRANS old 23 2 23
+TRANS old 23 3 23
+TRANS new 23 0 31
+TRANS new 23 1 23
+TRANS new 23 2 23
+TRANS new 23 3 23
+TRANS new 23 4 23
+TRANS old 24 0 24
+TRANS old 24 1 24
+TRANS old 24 2 28
+TRANS old 24 3 26
+TRANS new 24 0 24
+TRANS new 24 1 24
+TRANS new 24 2 28
+TRANS new 24 3 26
+TRANS new 24 4 28
+TRANS old 25 0 25
+TRANS old 25 1 25
+TRANS old 25 2 29
+TRANS old 25 3 27
+TRANS new 25 0 25
+TRANS new 25 1 25
+TRANS new 25 2 29
+TRANS new 25 3 27
+TRANS new 25 4 29
+TRANS old 26 0 26
+TRANS old 26 1 26
+TRANS old 26 2 30
+TRANS old 26 3 26
+TRANS new 26 0 26
+TRANS new 26 1 26
+TRANS new 26 2 30
+TRANS new 26 3 26
+TRANS new 26 4 30
+TRANS old 27 0 27
+TRANS old 27 1 27
+TRANS old 27 2 31
+TRANS old 27 3 27
+TRANS new 27 0 27
+TRANS new 27 1 27
+TRANS new 27 2 31
+TRANS new 27 3 27
+TRANS new 27 4 31
+TRANS old 28 0 28
+TRANS old 28 1 28
+TRANS old 28 2 28
+TRANS old 28 3 30
+TRANS new 28 0 28
+TRANS new 28 1 28
+TRANS new 28 2 28
+TRANS new 28 3 30
+TRANS new 28 4 28
+TRANS old 29 0 29
+TRANS old 29 1 29
+TRANS old 29 2 29
+TRANS old 29 3 31
+TRANS new 29 0 29
+TRANS new 29 1 29
+TRANS new 29 2 29
+TRANS new 29 3 31
+TRANS new 29 4 29
+TRANS old 30 0 30
+TRANS old 30 1 31
+TRANS old 30 2 30
+TRANS old 30 3 30
+TRANS new 30 0 30
+TRANS new 30 1 31
+TRANS new 30 2 30
+TRANS new 30 3 30
+TRANS new 30 4 30
+TRANS old 31 0 31
+TRANS old 31 1 31
+TRANS old 31 2 31
+TRANS old 31 3 31
+TRANS new 31 0 31
+TRANS new 31 1 31
+TRANS new 31 2 31
+TRANS new 31 3 31
+TRANS new 31 4 31
