@@ -5,10 +5,18 @@ on:
     paths:
       - 'lean/Research/SiphonInteraction.lean'
       - 'lean/Research/SiphonPolynomialE.lean'
+      - 'lean/Research/OperationalWorldGeneration.lean'
+      - 'lean/Research/SiphonCommonInvariant.lean'
+      - 'lean/OrbitTrace.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+      - 'tools/verify_toolchain_modules.py'
       - 'tests/test_siphon_interaction.py'
+      - 'tests/test_siphon_operational_world.py'
       - 'tests/test_siphon_polynomial_e.py'
       - 'docs/research/2026-11-08-siphon-interaction.md'
       - 'docs/research/2026-11-08-siphon-polynomial-e.md'
+      - 'docs/research/2026-11-17-siphon-operational-world.md'
       - '.github/workflows/siphon-interaction.yml'
   workflow_dispatch:
 
@@ -60,11 +68,18 @@ jobs:
             echo 'Unproved axioms detected'
             exit 1
           fi
+      - name: Verify observations and common invariants from source
+        run: >-
+          python3 -B tools/verify_toolchain_modules.py
+          --module Research.OperationalWorldGeneration
+          --module Research.SiphonCommonInvariant
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: siphon-interaction-${{ github.run_id }}
-          path: siphon-lean.log
+          path: |
+            siphon-lean.log
+            verification/toolchain-modules/
           if-no-files-found: warn
           retention-days: 30

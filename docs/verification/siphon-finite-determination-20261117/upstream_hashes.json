@@ -1,0 +1,42 @@
+[
+  {
+    "path": "lean/Research/SiphonPolynomialE.lean",
+    "git_blob": "7d539ab76087ca66dedb15a79968ca2d61ca8d45",
+    "sha256": "bd1f9d17bb346818bf2ad8ec0e8439e6779fa142741f2116ae8f0b1a2ed6e928"
+  },
+  {
+    "path": "lean/OrbitTrace.lean",
+    "git_blob": "aa11e15fd9271dc79e4b337c976183e6d78849c8",
+    "sha256": "fcd45b6580b2a30ca7ba600402c18862916279cf69f7adc364b7b62b79c335c1"
+  },
+  {
+    "path": "lean/Research/SiphonCommonInvariant.lean",
+    "git_blob": "350664c472bb9def7270f0211b26ed65f39be5ae",
+    "sha256": "e9aad86d36093e46889d25ff44a92eb6e518079b7225de7b3ae8db2da3277a28"
+  },
+  {
+    "path": "lean/Research/OperationalWorldGeneration.lean",
+    "git_blob": "ca909d391828bd61e77df42cb76289adbd0bf8da",
+    "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
+  },
+  {
+    "path": "tests/test_siphon_operational_world.py",
+    "git_blob": "b98de82ec95332675c1604475f75c368482b0611",
+    "sha256": "de1647e698d4448eb707dcfddb4ed791e16ff6bf33c6a616ad3d0562426a615e"
+  },
+  {
+    "path": "docs/research/2026-11-17-siphon-operational-world.md",
+    "git_blob": "ff566fe99bd28ceefd32464237f3fc65efeb1232",
+    "sha256": "5e0641e39a2a316140c6ba770e29cc0f5e9f26982fef6e33df1a60e038fe801d"
+  },
+  {
+    "path": "lean/lean-toolchain",
+    "git_blob": "0fc4336929df18cb6edbdcce0498f49d38877271",
+    "sha256": "11c697aebe5b539d74f5069e497a588e7dfab1c4eeb74313f28357e351c55ca3"
+  },
+  {
+    "path": "lean/lake-manifest.json",
+    "git_blob": "61a38a32c8c3e07e72b5df99a871f9dabbe93687",
+    "sha256": "ff86f77b56654e34d1e708bff9a6e4b93ff010d640ac803d2c91049c17279f95"
+  }
+]

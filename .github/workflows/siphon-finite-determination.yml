@@ -1,0 +1,76 @@
+name: Siphon finite polynomial determination
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SiphonFiniteDetermination.lean'
+      - 'lean/Research/SiphonPolynomialE.lean'
+      - 'lean/OrbitTrace.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+      - 'tools/check_siphon_finite_determination.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'docs/research/2026-11-17-siphon-finite-determination.md'
+      - 'docs/verification/2026-11-17-siphon-finite-determination.md'
+      - '.github/workflows/siphon-finite-determination.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout the proposed head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned symbolic checker
+        run: python3 -m pip install sympy==1.14.0
+      - name: Check exact finite measurements and retained regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification/siphon-finite-determination
+          python3 -B tools/check_siphon_finite_determination.py | tee verification/siphon-finite-determination/python.log
+          python3 -B -m unittest discover -s tests -p 'test_siphon_operational_world.py' -v
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Fetch pinned Mathlib cache
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get; then
+              exit 0
+            fi
+            echo "Mathlib cache transfer failed on attempt ${attempt}" >&2
+            sleep 5
+          done
+          exit 1
+      - name: Compile source and audit all local theorem axioms
+        run: python3 -B tools/verify_toolchain_modules.py --module Research.SiphonFiniteDetermination
+      - name: Preserve exact-head verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: siphon-finite-determination-${{ github.run_id }}
+          path: |
+            verification/siphon-finite-determination/
+            verification/toolchain-modules/
+          if-no-files-found: warn
+          retention-days: 30
