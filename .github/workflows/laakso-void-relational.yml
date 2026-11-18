@@ -1,0 +1,58 @@
+name: Laakso void relational bridge (Lean and finite check)
+
+on:
+  pull_request:
+    paths:
+      - 'linear_input/lean_check/LaaksoVoidRelationalBridge.inc'
+      - 'tests/test_laakso_void_relational_bridge.py'
+      - 'docs/research/2026-11-15-laakso-void-relational-bridge.md'
+      - '.github/workflows/laakso-void-relational.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact proposed head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Record revision and independently check finite graph
+        run: |
+          git rev-parse HEAD
+          python -m unittest discover -s tests -p test_laakso_void_relational_bridge.py -v
+
+      - name: Install repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile actual historical Laakso sources plus the new bridge
+        run: |
+          {
+            printf 'import Mathlib\n'
+            cat linear_input/lean_check/FutureObservations.inc
+            cat linear_input/lean_check/LaaksoFiniteGraph.inc
+            cat linear_input/lean_check/LaaksoNonlinearObstruction.inc
+            cat linear_input/lean_check/LaaksoVoidRelationalBridge.inc
+            printf '\n#print axioms VoidLaaksoBridge.relSet_global_exact_iff\n'
+            printf '#print axioms VoidLaaksoBridge.relSet_comp_eq_of_first_closed\n'
+            printf '#print axioms VoidLaaksoBridge.first_fiber_images_closed\n'
+            printf '#print axioms VoidLaaksoBridge.depth_two_separates\n'
+            printf '#print axioms VoidLaaksoBridge.nonlinear_no_global_exactness\n'
+          } > lean/Research/LaaksoVoidRelationalHarness.lean
+          cd lean
+          lake env lean --trust=0 Research/LaaksoVoidRelationalHarness.lean 2>&1 | tee ../laakso-void-check.log
+          if grep -E 'sorryAx|^.*error:' ../laakso-void-check.log; then
+            exit 1
+          fi

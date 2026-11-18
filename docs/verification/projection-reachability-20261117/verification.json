@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.30.0-rc2, x86_64-unknown-linux-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)",
+  "mathlib_commit": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+  "trust_level": 0,
+  "lean_exit_code": 0,
+  "lean_seconds": 9.581,
+  "assembled_sha256": "27fdfc1e516d3a305e919f39974bb9607228865c08e7ad2275039310badea6bc",
+  "source_sha256": {
+    "linear_input/lean_check/OperatorWordObservations.inc": "d5d03131b77b0e20803ee32d8a4c8f0cc1b13d5afc3d182c7197bd5412419721",
+    "linear_input/lean_check/OperatorVocabularyRefinement.inc": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66",
+    "linear_input/lean_check/OperatorReachability.inc": "847c45561ed51559296f68e97b78b20b62319698299dd43011f12147368eaa29",
+    "lean/Research/ChairPieKillSpot.lean": "9460fbaa0bcdaf0a16c9347f1d6453e75e3142f89337c82114b3c43335490f0a",
+    "linear_input/lean_check/ProjectionReachability.inc": "e893216160ba4b86999d8658fa597eb28e84ad61f23da9a42119a033ae096a35",
+    "linear_input/lean_check/PermissionProjectionBridge.inc": "24fe9ad3c57aa18d606aa97cb9cc092cba16655ca0e58e65c7c4b846ed3ee6fb",
+    "linear_input/lean_check/FiniteProjectionExamples.inc": "78142d7f6581e316879973779f96248c398d101ce3ad5a6db952cfac34a65259",
+    "linear_input/lean_check/ChairInternalGeneration.inc": "bccbd723fb2e6e473be9e4b51128eee7ea39656903ce4463e33ce5b48e350232",
+    "linear_input/lean_check/ChairProjectionExport.inc": "872a3a1fa4fa60fd33bcc259689da26140965db1394b87cd2d2e0a625d7455cc",
+    "tools/chair_pie_killspot.py": "857ba8bf7481496275ea6160791642a31b797eda231a4f72af1a3035f5152288",
+    "tools/verify_projection_reachability.py": "c3ecd9659a81c7047572003cb10cb6157ee7674674a3d584ae030ecb9a8af67c",
+    "tools/projection_reachability_finite.py": "29c3a5d6fe67d1f73f8a80b9aeafcbc36ff7aac80aef894ea0e6566f3d1449a7",
+    "tools/verify.py": "03222b75dd977015757f5616f04e521f58203885281f43c06106a1464b4b008e",
+    "lean/lean-toolchain": "ce4c4e3d87434b9663f46de25ce34b48a0cf0d392e0a320a0787b4674a2d7b61",
+    "lean/lake-manifest.json": "5781fd49aff59347f594d12cbfa61129eebb10ef293729ead611bd7410740590"
+  },
+  "audited_public_theorems": 35,
+  "axioms": {
+    "LinearInputProjectionReachability.projection_run": [],
+    "LinearInputProjectionReachability.projection_reachable": [],
+    "LinearInputProjectionReachability.simulation_iff_all_reachability": [],
+    "LinearInputProjectionReachability.simulation_of_compiler": [],
+    "LinearInputProjectionReachability.generated_projection_simulation": [],
+    "LinearInputProjectionReachability.no_gain_of_simulation": [],
+    "LinearInputProjectionReachability.strictGain_iff_escape": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputProjectionReachability.old_reachable_lifts": [],
+    "LinearInputProjectionReachability.no_gain_subsingleton": [],
+    "LinearInputProjectionReachability.gain_has_distinct_projections": [],
+    "LinearInputProjectionReachability.gain_cardinality_bounds": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Elastica.ChairPieProjection.revenue_iff_reachable": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairPieProjection.revenue_of_permission_simulation": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairPieProjection.blocks_of_permission_simulation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputProjectionExamples.run_idle": [],
+    "LinearInputProjectionExamples.idle_iff": [],
+    "LinearInputProjectionExamples.two_state_gain": [],
+    "LinearInputProjectionExamples.two_state_not_simulated": [],
+    "LinearInputProjectionExamples.three_state_gain": [
+      "propext"
+    ],
+    "LinearInputProjectionExamples.three_state_not_simulated": [
+      "propext"
+    ],
+    "LinearInputProjectionExamples.three_state_section": [
+      "propext"
+    ],
+    "LinearInputProjectionExamples.three_state_retains_old": [
+      "propext"
+    ],
+    "LinearInputProjectionExamples.three_state_cardinalities": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "LinearInputProjectionExamples.memory_simulated": [],
+    "LinearInputProjectionExamples.setTrue_run_true": [],
+    "LinearInputProjectionExamples.reset_not_simulated": [],
+    "LinearInputProjectionExamples.reset_has_no_gain": [],
+    "Elastica.ChairInternalGeneration.old_possible_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.new_possible_iff": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.same_permissions_separate": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.no_external_success": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.chair_not_simulated": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.chair_strict_gain": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.chair_retains_old": [
+      "propext",
+      "Quot.sound"
+    ],
+    "Elastica.ChairInternalGeneration.chair_simulated_when_chair_available": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "lean_python_transition_matches": 288,
+  "python_systems": 928,
+  "python_start_cases": 2720
+}

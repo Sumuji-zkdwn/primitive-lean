@@ -1,0 +1,109 @@
+{
+  "source_commit": "983fa7cffe88463e63fdacdcff1d6f989118a76e",
+  "files": [
+    {
+      "path": "lean/lake-manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f7d41700dee9708c852e370541840dbdb1851545",
+      "size": 3184,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/f7d41700dee9708c852e370541840dbdb1851545"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3ea89a2d27fd70247a0f582b8c3329268f4259f",
+      "size": 239,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/a3ea89a2d27fd70247a0f582b8c3329268f4259f"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6c7e31fffe3e03be3e0d7021acd9cd848e44db26",
+      "size": 29,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/6c7e31fffe3e03be3e0d7021acd9cd848e44db26"
+    },
+    {
+      "path": "linear_input/lean_check/FutureObservations.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cd0bbd61da21e6847292cbad5faf5b60691fce5",
+      "size": 7135,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/8cd0bbd61da21e6847292cbad5faf5b60691fce5"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68fa6e2f1c58f3bc744ce84b93a0b80d4895ad72",
+      "size": 7839,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/68fa6e2f1c58f3bc744ce84b93a0b80d4895ad72"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1ff43335852dfb05c054e48ebbdfc9b5e0c1a744",
+      "size": 6409,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/1ff43335852dfb05c054e48ebbdfc9b5e0c1a744"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoGeometricTower.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9ce536d68e8c9dd0e9abd21f062c0970df7a3db3",
+      "size": 7442,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/9ce536d68e8c9dd0e9abd21f062c0970df7a3db3"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62c5615a6e752e5e680da230b155e550069cf7de",
+      "size": 12250,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/62c5615a6e752e5e680da230b155e550069cf7de"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoRealization.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3e608cd95ac754bcafc65cbc30bdd1dec7f9fc19",
+      "size": 7161,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/3e608cd95ac754bcafc65cbc30bdd1dec7f9fc19"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "908ed5af3a451b59a5749355a201e99cfcbe8da0",
+      "size": 21141,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/908ed5af3a451b59a5749355a201e99cfcbe8da0"
+    },
+    {
+      "path": "linear_input/lean_check/CrossSystemObservation.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5fdc38e1c31d30ea85cd415a6bf9d8ce58290820",
+      "size": 14688,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/5fdc38e1c31d30ea85cd415a6bf9d8ce58290820"
+    },
+    {
+      "path": "linear_input/lean_check/InverseTowerObservation.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2afa65e27c47659298ef1089686bf264215b679",
+      "size": 7755,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/a2afa65e27c47659298ef1089686bf264215b679"
+    },
+    {
+      "path": "linear_input/lean_check/OperatorWordObservations.inc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4669504475532dd3da6af9be27c96a1bfc074f5",
+      "size": 13604,
+      "url": "https://api.github.com/repos/Sumuji-zkdwn/primitive-lean/git/blobs/f4669504475532dd3da6af9be27c96a1bfc074f5"
+    }
+  ]
+}

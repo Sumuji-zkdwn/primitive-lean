@@ -443,6 +443,7 @@ def main(argv=None):
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
+    modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
     args = parser.parse_args(argv)
     if args.toolchain_modules_only:
         if args.rebuild:
@@ -450,6 +451,11 @@ def main(argv=None):
         from verify_toolchain_modules import run as verify_modules
         result = verify_modules(root=ROOT)
         return 0 if result["passed"] else 1
+    if args.projection_reachability_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --projection-reachability-only")
+        from verify_projection_reachability import main as verify_projection
+        return verify_projection()
     if args.two_wavelength_only:
         from verify_two_wavelength import run_two_wavelength
         result = run_two_wavelength(ROOT, args.rebuild)

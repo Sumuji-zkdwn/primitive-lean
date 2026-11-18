@@ -1,0 +1,44 @@
+name: Void hypercompletion finite and Lean verification
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/VoidHyperCompletion.lean'
+      - 'tests/test_void_multivalued_completion.py'
+      - 'tests/test_void_semigroup_census_extended.py'
+      - 'tests/test_void_streaming_and_cyclic_growth.py'
+      - 'docs/research/2026-11-15-void-hypercompletion.md'
+      - '.github/workflows/void-hypercompletion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hypercompletion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout PR exact head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Record source revision
+        run: git rev-parse HEAD
+      - name: Enumerate all labelled semigroups on four states
+        run: |
+          python -m unittest discover -s tests -p test_void_multivalued_completion.py -v
+          python -m unittest discover -s tests -p test_void_semigroup_census_extended.py -v
+          python -m unittest discover -s tests -p test_void_streaming_and_cyclic_growth.py -v
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel-check associative set completion and finite examples
+        working-directory: lean
+        run: lake env lean --trust=0 Research/VoidHyperCompletion.lean
