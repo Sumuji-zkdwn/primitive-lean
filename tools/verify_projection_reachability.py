@@ -18,7 +18,6 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / 'lean'
 OUT = ROOT / 'verification/projection-reachability'
 PROOFS = ROOT / 'linear_input/lean_check'
-MATHLIB = '5450b53e5ddc75d46418fabb605edbf36bd0beb6'
 FRAGMENTS = ['ProjectionReachability.inc', 'PermissionProjectionBridge.inc',
              'FiniteProjectionExamples.inc', 'ChairInternalGeneration.inc']
 PREFIXES = ['LinearInputProjectionReachability', 'Elastica.ChairPieProjection',
@@ -78,14 +77,17 @@ def main():
     assembly, names, hashes = assemble()
     version = subprocess.check_output(['lake', 'env', 'lean', '--version'],
                                       cwd=LEAN, text=True).strip()
-    if 'version 4.30.0-rc2,' not in version:
+    toolchain = (LEAN / 'lean-toolchain').read_text().strip().split(':v')[-1]
+    if f'version {toolchain},' not in version:
         raise RuntimeError(f'Unexpected Lean toolchain: {version}')
     mathlib = LEAN / '.lake/packages/mathlib'
     revision = subprocess.check_output(['git', '-C', str(mathlib), 'rev-parse', 'HEAD'],
                                        text=True).strip()
-    if revision != MATHLIB:
+    packages = json.loads((LEAN / 'lake-manifest.json').read_bytes())['packages']
+    pinned_revision = next(p['rev'] for p in packages if p['name'] == 'mathlib')
+    if revision != pinned_revision:
         raise RuntimeError(f'Unexpected Mathlib revision: {revision}')
-    logpath = OUT / 'lean430.log'
+    logpath = OUT / 'lean.log'
     started = time.monotonic()
     with logpath.open('w') as log:
         proc = subprocess.run(['lake', 'env', 'lean', '--trust=0', str(assembly)],
