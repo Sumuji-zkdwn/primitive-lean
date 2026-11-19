@@ -85,6 +85,9 @@ jobs:
       - name: Check Gravity PR integration coverage
         run: python .github/tests/test_gravity_routing.py
 
+      - name: Enumerate cross-hatched boards and circular-arc returns
+        run: python -B tools/check_crosshatched_robot.py
+
       - name: Build parent library and audit independent moving-curve module
         working-directory: lean
         run: |

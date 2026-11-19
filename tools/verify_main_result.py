@@ -132,6 +132,8 @@ EXTRA_IMPORTS = (
     "Mathlib.Algebra.MonoidAlgebra.Basic",
     "Mathlib.Topology.ContinuousMap.Bounded.ArzelaAscoli",
     "Mathlib.Analysis.Normed.Module.FiniteDimension",
+    "Mathlib.Algebra.Polynomial.OfFn",
+    "Mathlib.RingTheory.Polynomial.Cyclotomic.Roots",
 )
 
 # Importing FreeLieAlgebra adds a generic LieAlgebra-to-Module instance.
@@ -419,6 +421,12 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/CurveWordBVHamblyLyons.inc', 'LinearInputCurveWordBVHamblyLyons'),
     ('linear_input/lean_check/CurveWordBVEquivalence.inc', 'LinearInputCurveWordBVEquivalence'),
     ('linear_input/lean_check/CurveWordBVCoordinates.inc', 'LinearInputCurveWordBVCoordinates'),
+    ('linear_input/lean_check/CrosshatchedRecovery.inc', 'LinearInputCrosshatchedRecovery'),
+    ('linear_input/lean_check/RobotWalkArc.inc', 'LinearInputRobotWalkArc'),
+    ('linear_input/lean_check/RobotCyclotomic.inc', 'LinearInputRobotCyclotomic'),
+    ('linear_input/lean_check/RobotWalkSupport.inc', 'LinearInputRobotWalkSupport'),
+    ('linear_input/lean_check/RobotWalkLengths.inc', 'LinearInputRobotWalkLengths'),
+    ('linear_input/lean_check/RobotWalkClassification.inc', 'LinearInputRobotWalkClassification'),
 )
 
 

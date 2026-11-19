@@ -6975,6 +6975,102 @@
         "integrated_from_commit": "eda3554a4bf74b29e433915b556c0cc4e6bca0d5",
         "sha256_at_pr_head": "3a72c95f239ac8ee7de488193e527eb6ff05dffe050f98bb2352892c974b6065"
       }
+    },
+    {
+      "path": "linear_input/lean_check/CrosshatchedRecovery.inc",
+      "sha256": "2e1ad213cb78f5eefb4c5ad629c97b1ef51e35689c24ccb13bd467f2803bbc7a",
+      "original_sha256": "2e1ad213cb78f5eefb4c5ad629c97b1ef51e35689c24ccb13bd467f2803bbc7a",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "source_path": "linear_input/lean_check/CrosshatchedRecovery.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+        "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotWalkArc.inc",
+      "sha256": "5bdde5a0865444a9fbc7b686acaf6bdd0c37a0a4bf4edd96c97913df064a092b",
+      "original_sha256": "5bdde5a0865444a9fbc7b686acaf6bdd0c37a0a4bf4edd96c97913df064a092b",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "source_path": "linear_input/lean_check/RobotWalkArc.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+        "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotCyclotomic.inc",
+      "sha256": "e77f5aee6c8ffe5de9126f9a68cc2d42c0120a215495bdcc683f44dd9c378d0a",
+      "original_sha256": "e77f5aee6c8ffe5de9126f9a68cc2d42c0120a215495bdcc683f44dd9c378d0a",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "source_path": "linear_input/lean_check/RobotCyclotomic.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+        "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotWalkSupport.inc",
+      "sha256": "698fe48e51f715eafa3ed7398cb4d0d6a433ed49d33ea1f5c247b0d4aba322d7",
+      "original_sha256": "698fe48e51f715eafa3ed7398cb4d0d6a433ed49d33ea1f5c247b0d4aba322d7",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "source_path": "linear_input/lean_check/RobotWalkSupport.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+        "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotWalkLengths.inc",
+      "sha256": "d2060d9f939d0c8cc91f541cc38ec4360d5c6e3f72fc04c0fb821642f66d611b",
+      "original_sha256": "d2060d9f939d0c8cc91f541cc38ec4360d5c6e3f72fc04c0fb821642f66d611b",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "source_path": "linear_input/lean_check/RobotWalkLengths.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+        "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotWalkClassification.inc",
+      "sha256": "71c08150dae6af6b434348e34765e1149ae5d2ee0e434a115f83c5e8983b58c9",
+      "original_sha256": "71c08150dae6af6b434348e34765e1149ae5d2ee0e434a115f83c5e8983b58c9",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "source_path": "linear_input/lean_check/RobotWalkClassification.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+        "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
+      }
     }
   ],
   "construction_errors": [],
@@ -7260,6 +7356,13 @@
       "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "source_pr": 133,
       "note": "Provenance of new native proof after the 2026-11-03 historical integration snapshot; standalone pinned Lean --trust=0 probe #43148729006 passed, full-tree source and axiom audit tracked separately."
+    },
+    {
+      "date": "2026-11-19",
+      "path": "linear_input/lean_check/RobotWalkClassification.inc",
+      "source_pr": 159,
+      "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
+      "note": "Six repository-native supplements prove two-observation recovery of cross-hatched board dimensions and classify positive circular-arc return lengths at odd prime-power orders. Source bytes are pinned individually above."
     }
   ]
 }
