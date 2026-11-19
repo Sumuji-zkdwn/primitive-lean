@@ -1,8 +1,10 @@
 """Regression tests for dependency-graph Git provenance; stdlib only."""
 import hashlib
 import importlib.util
+import json
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -88,6 +90,21 @@ class PinnedSnapshotTests(unittest.TestCase):
         self.assertEqual(inputs[0]["base_sha"], base_sha)
         self.assertEqual(inputs[0]["head_sha"], head_sha)
         self.assertEqual(inputs[0]["merge_base_sha"], base_sha)
+
+
+class SavedGraphTests(unittest.TestCase):
+    def test_saved_graph_replays_from_its_recorded_commit(self):
+        raw = (graph.ROOT / "docs/dependency/generated/graph.json").read_bytes()
+        source_sha = json.loads(raw)["main_commit"]
+        self.assertRegex(source_sha, r"\A[0-9a-f]{40}\Z")
+
+        with tempfile.TemporaryDirectory() as output:
+            subprocess.run([sys.executable, str(SCRIPT), "--main-ref", source_sha, "--out", output],
+                           check=True, stdout=subprocess.DEVNULL)
+            replay = (Path(output) / "graph.json").read_bytes()
+
+        self.assertEqual(hashlib.sha256(replay).hexdigest(), hashlib.sha256(raw).hexdigest(),
+                         f"saved lexical graph differs from Git inputs at {source_sha}")
 
 
 if __name__ == "__main__":
