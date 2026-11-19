@@ -69,7 +69,7 @@ def audit(root=ROOT):
         if row.get('byte_identical') is True:
             if not original or row['sha256'] != original or adaptations:
                 errors.append('Byte-identical provenance is inconsistent: ' + row['path'])
-        elif (row.get('role') not in {'explicit_source_adapter', 'adapted_retained_source'} or
+        elif (row.get('role') not in {'explicit_source_adapter', 'adapted_retained_source', 'dedicated_verifier_input'} or
               not adaptations or not all(isinstance(a, str) and a.strip() for a in adaptations)):
             errors.append('Changed source lacks explicit permitted adaptations: ' + row['path'])
         if original is None:

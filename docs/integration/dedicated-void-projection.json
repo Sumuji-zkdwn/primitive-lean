@@ -14,15 +14,17 @@
     },
     {
       "path": "linear_input/lean_check/LaaksoBondingAudit.inc",
-      "sha256": "07d3f09a6bd139248af3e310e98c71b15b735a8b40e66497a9282814e6650221",
+      "sha256": "a6dc24e7507b8b2a4dad7de3b08938a5d4d4f3e79855608bb3c2f82649844f06",
       "original_sha256": "07d3f09a6bd139248af3e310e98c71b15b735a8b40e66497a9282814e6650221",
       "source_pr": 150,
       "source_commit": "74ee52d712e11c3de69b3904ef8499c84f3540c9",
       "source_path": "linear_input/lean_check/LaaksoBondingAudit.inc",
       "role": "dedicated_verifier_input",
       "checker": "tools/check_laakso_bonding.py",
-      "byte_identical": true,
-      "permitted_adaptations": []
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Instantiate the existing rewrite lemmas with the fixed level and vertex arguments in three Lean 4.36 proof steps. All statements and definitions are preserved."
+      ]
     },
     {
       "path": "linear_input/lean_check/ProjectionReachability.inc",
