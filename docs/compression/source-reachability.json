@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1373,
-    "eligible_direct_edges": 427,
-    "nodes": 426,
-    "retained_pairs": 306,
+    "all_source_edges": 1383,
+    "eligible_direct_edges": 428,
+    "nodes": 431,
+    "retained_pairs": 307,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 420,
-    "weak_edges_excluded": 946
+    "unique_eligible_pairs": 421,
+    "weak_edges_excluded": 955
   },
   "edges": [
     [
@@ -830,6 +830,10 @@
       "main:linear_input/lean_check/F0Retractions.inc"
     ],
     [
+      "main:linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "main:linear_input/lean_check/F16SpectralProjectors.inc"
+    ],
+    [
       "main:linear_input/lean_check/FiniteBand.inc",
       "main:linear_input/lean_check/StrictEnergy.inc"
     ],
@@ -1516,8 +1520,11 @@
     "main:linear_input/lean_check/F0MergeChains.inc",
     "main:linear_input/lean_check/F0Retractions.inc",
     "main:linear_input/lean_check/F0UpdateDescent.inc",
+    "main:linear_input/lean_check/F16AllRealPseudoinverse.inc",
     "main:linear_input/lean_check/F16CompleteRank.inc",
     "main:linear_input/lean_check/F16ConstructiveRecovery.inc",
+    "main:linear_input/lean_check/F16FenchelAtlas.inc",
+    "main:linear_input/lean_check/F16FenchelFull.inc",
     "main:linear_input/lean_check/F16FullMatrix.inc",
     "main:linear_input/lean_check/F16FullRank.inc",
     "main:linear_input/lean_check/F16Holonomy.inc",
@@ -1526,6 +1533,8 @@
     "main:linear_input/lean_check/F16RecoverySpectrum.inc",
     "main:linear_input/lean_check/F16RimRecovery.inc",
     "main:linear_input/lean_check/F16SaddleCantor.inc",
+    "main:linear_input/lean_check/F16SingularPseudoinverse.inc",
+    "main:linear_input/lean_check/F16SpectralProjectors.inc",
     "main:linear_input/lean_check/F16UnexpectedBridges.inc",
     "main:linear_input/lean_check/Feedback.inc",
     "main:linear_input/lean_check/FiniteBand.inc",
@@ -1665,8 +1674,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "3fbf936a00f56dffed96110fe99c9ecb56f07762502e91752f318c30231137e7",
-    "main_commit": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
+    "graph_sha256": "17307681d0d478171ebf82ef4c003f39c5fe8bb873f9462985386a64290f1c4d",
+    "main_commit": "baf013235612d010f8f17eee34948e401956e174",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
