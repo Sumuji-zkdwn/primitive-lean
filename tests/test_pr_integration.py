@@ -323,6 +323,57 @@ class ToolchainMigrationAudit(unittest.TestCase):
         self.save_migration()
         self.assert_rejected('Duplicate migration source')
 
+    def test_new_retained_file_and_its_note_preserve_history(self):
+        path = self.stage_new_module()
+        self.manifest['files'].append(self.row(path, 'repository_native_proof'))
+        self.manifest['post_snapshot_additions'] = [{'path': path, 'note': 'New independent proof'}]
+        self.save_manifest()
+        self.assertTrue(CHECK.audit(self.root)['passed'])
+        self.write(path, '-- file changed after hash was recorded')
+        self.assert_rejected('Retained source hash mismatch')
+
+    def test_new_rows_cannot_relabel_historical_entries(self):
+        self.manifest['post_snapshot_additions'] = [{'path': self.manifest['files'][0]['path']}]
+        self.save_manifest()
+        self.assert_rejected('Historical integration manifest was changed')
+
+    def prepare_followup(self, path):
+        self.git('add', '.')
+        self.git('commit', '--quiet', '-m', 'Complete verified migration')
+        anchor = self.git('rev-parse', 'HEAD')
+        migrated = (self.root / path).read_bytes()
+        current = migrated + b'\n-- post-migration documentation\n'
+        (self.root / path).write_bytes(current)
+        row = dict(path=path, migration_sha256=hashlib.sha256(migrated).hexdigest(),
+                   current_sha256=hashlib.sha256(current).hexdigest(), reason='Document follow-up')
+        data = dict(schema_version=1, migration_commit=anchor, changes=[row])
+        self.write(MIGRATION.POST_MIGRATION, json.dumps(data))
+        return data
+
+    def test_additional_edit_preserves_verified_migration_postimage(self):
+        path = 'linear_input/lean_check/Proof.inc'
+        data = self.prepare_followup(path)
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        audit = result['migration_audit']
+        self.assertEqual(audit['changes'][path]['new_sha256'], data['changes'][0]['current_sha256'])
+        self.assertEqual(audit['post_migration_changes'][path], data['changes'][0])
+        data['changes'][0]['migration_sha256'] = '0' * 64
+        self.write(MIGRATION.POST_MIGRATION, json.dumps(data))
+        self.assert_rejected('Post-migration hash mismatch')
+
+    def test_additional_edit_to_previously_unchanged_source(self):
+        self.prepare_followup('lean/Elastica.lean')
+        result = CHECK.audit(self.root)
+        self.assertTrue(result['passed'], result)
+        self.migration['changes'][0]['reason'] = 'Rewrite history'
+        self.save_migration()
+        self.assert_rejected('exact migration ledger')
+
+    def test_followup_cannot_change_toolchain_pin(self):
+        self.prepare_followup('lean/lean-toolchain')
+        self.assert_rejected('Invalid post-migration change')
+
     def test_old_manifest_cannot_be_rewritten(self):
         self.manifest['files'][-1]['sha256'] = self.migration['changes'][2]['new_sha256']
         self.save_manifest()

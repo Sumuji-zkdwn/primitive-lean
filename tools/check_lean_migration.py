@@ -11,6 +11,7 @@ import subprocess
 import tomllib
 
 LEDGER = 'docs/lean436/migration.json'
+POST_MIGRATION = 'docs/lean436/post-migration.json'
 INTEGRATION_LEDGER = 'docs/integration/manifest.json'
 CONFIG_PATHS = {'lean/lean-toolchain', 'lean/lakefile.toml', 'lean/lake-manifest.json'}
 ASSEMBLER_PATHS = {'linear_input/verify_lean.py', 'tools/verify_main_result.py'}
@@ -49,6 +50,59 @@ def accepts_current_hash(migration, relative, original, current):
     return row.get('old_sha256') == original and row.get('new_sha256') == current
 
 
+def check_retained_manifest(original, current):
+    """Keep each historical ledger entry; new rows undergo normal source auditing."""
+    fixed_fields = set(original) | set(current)
+    for key in fixed_fields - {'files', 'post_snapshot_additions'}:
+        if key not in original or key not in current or original[key] != current[key]:
+            raise ValueError('Historical integration manifest was changed: ' + key)
+    original_paths = {row['path'] for row in original['files']}
+    rows = current['files']
+    if [r for r in rows if r['path'] in original_paths] != original['files']:
+        raise ValueError('Historical integration manifest was changed: files')
+    paths = {row['path'] for row in rows}
+    if len(paths) != len(rows):
+        raise ValueError('Duplicate retained source path')
+    for path in paths - original_paths:
+        rel = PurePosixPath(path)
+        if rel.is_absolute() or '..' in rel.parts or str(rel) != path or '\\' in path or ':' in path:
+            raise ValueError('Invalid new integration source path: ' + path)
+    original_notes = original.get('post_snapshot_additions', [])
+    current_notes = current.get('post_snapshot_additions', [])
+    if (current_notes[:len(original_notes)] != original_notes or
+            any(n['path'] not in paths - original_paths for n in current_notes[len(original_notes):])):
+        raise ValueError('Historical integration manifest was changed: post_snapshot_additions')
+
+
+def post_migration_changes(root, commit):
+    """Pin later edits independently against a committed copy of the migration."""
+    path = root / POST_MIGRATION
+    if not path.is_file():
+        return {}
+    data = json.loads(path.read_bytes())
+    anchor = data['migration_commit']
+    if data.get('schema_version') != 1 or not isinstance(anchor, str) or not re.fullmatch('[0-9a-f]{40}', anchor):
+        raise ValueError('Invalid post-migration ledger or anchor')
+    git(root, 'merge-base', '--is-ancestor', commit, anchor)
+    git(root, 'merge-base', '--is-ancestor', anchor, 'HEAD')
+    if git(root, 'show', f'{anchor}:{LEDGER}') != (root / LEDGER).read_bytes():
+        raise ValueError('The post-migration anchor must retain the exact migration ledger')
+    rows = {}
+    for row in data['changes']:
+        relative = row['path']
+        if (not migration_path(relative) or relative in CONFIG_PATHS or relative in rows or
+                not isinstance(row.get('reason'), str) or not row['reason'].strip()):
+            raise ValueError('Invalid post-migration change: ' + str(relative))
+        migrated = sha(git(root, 'show', f'{anchor}:{relative}'))
+        current = (root / relative).resolve()
+        if (not current.is_relative_to(root) or not current.is_file() or
+                row['migration_sha256'] != migrated or row['current_sha256'] != sha(current.read_bytes()) or
+                migrated == row['current_sha256']):
+            raise ValueError('Post-migration hash mismatch: ' + relative)
+        rows[relative] = row
+    return rows
+
+
 def audit(root):
     root = Path(root).resolve()
     path = root / LEDGER
@@ -66,8 +120,8 @@ def audit(root):
         git(root, 'merge-base', '--is-ancestor', commit, 'HEAD')
         original_manifest = json.loads(git(root, 'show', f'{commit}:{INTEGRATION_LEDGER}'))
         current_manifest = json.loads((root / INTEGRATION_LEDGER).read_text('utf-8'))
-        if original_manifest != current_manifest:
-            raise ValueError('Historical integration manifest was changed during migration')
+        check_retained_manifest(original_manifest, current_manifest)
+        subsequent = post_migration_changes(root, commit)
         original_rows = {row['path']: row for row in original_manifest['files']}
         target = ledger.get('target', {})
         if not isinstance(target, dict):
@@ -110,9 +164,20 @@ def audit(root):
                 raise ValueError('Migration original hash mismatch: ' + relative)
             if relative in original_rows and original_rows[relative]['sha256'] != old:
                 raise ValueError('Migration original disagrees with retained manifest: ' + relative)
-            if sha(current_path.read_bytes()) != new:
+            after = subsequent.get(relative)
+            if after and after['migration_sha256'] != new:
+                raise ValueError('Post-migration change does not start at the recorded migration: ' + relative)
+            effective = after['current_sha256'] if after else new
+            if sha(current_path.read_bytes()) != effective:
                 raise ValueError('Migration current hash mismatch: ' + relative)
-            accepted[relative] = row
+            accepted[relative] = dict(row, new_sha256=effective)
+        for relative, after in subsequent.items():
+            if relative not in accepted:
+                old = sha(git(root, 'show', f'{commit}:{relative}'))
+                if after['migration_sha256'] != old:
+                    raise ValueError('Unrecorded migration before later change: ' + relative)
+                accepted[relative] = dict(path=relative, old_sha256=old, new_sha256=after['current_sha256'],
+                                          reason=after['reason'])
         # Only paths retained from the source commit have an old migration hash.
         # New modules belong to normal registration/proof checks. Disable rename
         # detection so a renamed retained source still exposes its deletion.
@@ -121,9 +186,10 @@ def audit(root):
                    'lean', 'linear_input/lean_check',
                    *sorted(ASSEMBLER_PATHS | DERIVATION_PATHS)).decode('utf-8').split('\0')
                    if migration_path(name)}
-        if set(accepted) != changed:
-            raise ValueError('Migration coverage mismatch: ' + repr(sorted(set(accepted) ^ changed)))
-        result.update(source_commit=commit, target=target, changes=accepted)
+        effective_changes = {p for p, row in accepted.items() if row['old_sha256'] != row['new_sha256']}
+        if effective_changes != changed:
+            raise ValueError('Migration coverage mismatch: ' + repr(sorted(effective_changes ^ changed)))
+        result.update(source_commit=commit, target=target, changes=accepted, post_migration_changes=subsequent)
     except (OSError, ValueError, KeyError, TypeError) as error:
         result['errors'].append(str(error))
         result['passed'] = False
