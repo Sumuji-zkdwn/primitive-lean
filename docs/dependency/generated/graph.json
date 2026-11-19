@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "e477b3ee498d4d481b94bfac964c517653d51bfc",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -5470,6 +5470,32 @@
       "sha256": "e720c91a0ba598eac7006c6e61e7b08e9b51a00a8c5214c717664be5aeb8679f"
     },
     {
+      "id": "main:linear_input/lean_check/CurveShadowKernel.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveShadowKernel.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveShadowKernel",
+      "declarations": [
+        "two_readings_complete",
+        "act",
+        "dir",
+        "jump",
+        "shadow_act",
+        "jumpA_injective",
+        "probe_iff",
+        "probe_closed",
+        "all_futures_iff_two_readings",
+        "all_futures_iff_shadow_heading",
+        "clock_invariants",
+        "clock_heading",
+        "same_clock_future_iff",
+        "two_samples_determine_block",
+        "hidden_clock_witness"
+      ],
+      "imports": [],
+      "sha256": "f77916066cd5a1df363b6d65acae4b8945fbbd6099c831fc95d1b88a8e0006b8"
+    },
+    {
       "id": "main:linear_input/lean_check/CurveWordAlgebra.inc",
       "scope": "main",
       "path": "linear_input/lean_check/CurveWordAlgebra.inc",
@@ -7254,6 +7280,37 @@
       ],
       "imports": [],
       "sha256": "8726ca551032e1f4f97f746cbb59ac1161f177bfa2c7f5aec1fbe764b24f6174"
+    },
+    {
+      "id": "main:linear_input/lean_check/CurveWordSampling.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CurveWordSampling.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCurveWordSampling",
+      "declarations": [
+        "Block",
+        "letters",
+        "shadow",
+        "advance",
+        "readings",
+        "readings_append_block",
+        "heading",
+        "reference",
+        "parallel_run",
+        "delta",
+        "shadow_delta",
+        "blocks",
+        "lookup",
+        "lookup_delta",
+        "decode",
+        "decode_readings",
+        "readings_injective",
+        "four_letter_exchange",
+        "fold_same_pose",
+        "four_letter_exchange_continuation"
+      ],
+      "imports": [],
+      "sha256": "42cf77169045b8373420519b0d36d388ba389ee438ac3e019c163466c45bd0e9"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordSamplingOrder.inc",
@@ -19579,6 +19636,32 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveShadowKernel.inc",
+      "to": "main:linear_input/lean_check/CurveWordSampling.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "readings_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveShadowKernel.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.postprocess",
+        "LinearInputOperatorWords.respects_implies_now_complete"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CurveShadowKernel.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "postprocess",
+        "respects_implies_now_complete"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CurveWordArc.inc",
       "to": "main:lean/Elastica/Geometry.lean",
       "kind": "qualified_reference",
@@ -27129,6 +27212,7 @@
     "linear_input/lean_check/HistorySignature.inc",
     "linear_input/lean_check/CurveWordAlgebra.inc",
     "linear_input/lean_check/CurveWordFinite.inc",
+    "linear_input/lean_check/CurveWordSampling.inc",
     "linear_input/lean_check/CurveWordArc.inc",
     "linear_input/lean_check/CurveWordFiniteState.inc",
     "linear_input/lean_check/CurveWordCycleLimit.inc",
@@ -27173,6 +27257,7 @@
     "linear_input/lean_check/FutureObservations.inc",
     "linear_input/lean_check/FutureFiniteHorizon.inc",
     "linear_input/lean_check/OperatorWordObservations.inc",
+    "linear_input/lean_check/CurveShadowKernel.inc",
     "linear_input/lean_check/MonoEyeComposition.inc",
     "linear_input/lean_check/OperatorBisimulation.inc",
     "linear_input/lean_check/OperatorVocabularyRefinement.inc",
@@ -27677,28 +27762,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "e477b3ee498d4d481b94bfac964c517653d51bfc",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "e477b3ee498d4d481b94bfac964c517653d51bfc",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "e477b3ee498d4d481b94bfac964c517653d51bfc",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "e477b3ee498d4d481b94bfac964c517653d51bfc",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
