@@ -178,3 +178,5 @@ Python証明書は `verification/siphon-finite-determination/python_certificates
 - `minimum_is_N`：両方向をまとめた最小値の定理。点の選択は初期点に依存し、全初期点に共通の固定操作列は主張しない（本文と同じ）。
 
 検証（2026-11-19、Lean `v4.36.0-rc2`）：`python3 -B tools/verify_toolchain_modules.py --module Research.SiphonOptimalDetermination` が依存3モジュールを含めて再コンパイルし、4モジュール88定理の公理監査に成功（使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内）。`lake env lean --trust=0` の単独コンパイルも警告なし。独立検算 `python -B tests/test_siphon_optimal_determination.py` は有理数の厳密計算で、5種の初期点・\(d\le3\) の到達点の評価行列の階数 \(N(d)\)、貪欲選択でちょうど \(N(d)\) 点、\(N(d)-1\) 点に対する非零消失多項式、適応的手順での応答列の一致を確認する。専用CI `.github/workflows/siphon-optimal-determination.yml`、統合検査の `siphon-optimal-determination` 段。
+
+GitHub Actions：[run 44602956632](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44602956632)（コミット `bc50534`）が成功（conclusion `success`）。

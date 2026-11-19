@@ -75,4 +75,6 @@ python3 -B -m unittest discover -s tests -p 'test_siphon_free_product.py' -v
 
 検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 Research/SiphonFreeProduct.lean` は警告なしで通り、全35定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内。独立検算 `python -B tests/test_siphon_free_product_pingpong.py` は整数係数の一変数多項式で、関係式、\(E^h\) の閉形式、ピンポン集合の不変量、\(b\) を2個以下含む全簡約語と3個含む4語が点 \((t,0)\) を動かすことを厳密に確認する。専用CI `.github/workflows/siphon-free-product-pingpong.yml`、統合検査の `siphon-free-product` 段。
 
+GitHub Actions：[run 44601072048](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44601072048)（コミット `d43c935`）が成功（conclusion `success`）。
+
 境界：簡約語の総次数がちょうど \(18^m\) であるという次数公式は Lean では証明していない（ピンポン補題には主係数の不変量だけで足りる）。観測位置を消す操作の節も対象外。

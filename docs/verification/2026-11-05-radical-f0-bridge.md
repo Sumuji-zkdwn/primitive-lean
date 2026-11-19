@@ -87,3 +87,5 @@ tests/test_radical_squarefree.py` checks the fixed-point characterization for `n
 greatest-squarefree-divisor property for `n ≤ 3000`, and multiplicativity for coprime
 `a, b ≤ 300`. Dedicated CI: `.github/workflows/radical-squarefree.yml`; integration stage
 `radical-squarefree` in `tools/pr_integration.py`.
+
+GitHub Actions: [run 44598448690](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44598448690) (commit `6296a30`) completed with conclusion `success`.

@@ -107,4 +107,6 @@ z = 2 (x_1 - ζ^(-1) x_0)/(ζ - ζ^(-1)).
 
 検証（2026-11-19、Lean `v4.36.0-rc2`、mathlib `2ddf59c8`）：`lake env lean --trust=0 Research/ChebyshevDihedral.lean` は警告なしで通り、全50定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内（3定理は `propext`・`Quot.sound` のみ）。数値検算 `python -B tests/test_chebyshev_dihedral.py`（複素浮動小数点、証明ではない）は \(m\le9\) で合成則・\(2m\) 写像の相異・\(t\) の不変性・軌道が \(Y^{2m}-tY^m+1\) の全根であること、\(3\le m\le11\) で \(D_m(y_j)=t\)・\(T_m(y_j/2)=t/2\)・\(y_j\) の相異と \(z\) の復元を確認した。専用CI `.github/workflows/chebyshev-dihedral.yml`、統合検査 `tools/pr_integration.py` の `chebyshev-dihedral` 段。
 
+GitHub Actions：[run 44598023437](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44598023437)（コミット `821d195`）が成功（conclusion `success`）。
+
 境界：基礎体は \(k(X)\) の中の \(k(t)\) であり、独立変数 \(y\) の有理関数体 \(\mathbb C(y)\) との同型（\(t\) の超越性から従う）は Lean では書いていない。`GaloisChebyshev.inc`・`KummerDihedral.inc` の宣言との同一視も行わない。

@@ -672,6 +672,8 @@ Lean の `S3` は全域で定義された関数なので、極で既定値をと
 
 検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceBoole.lean` は警告なしで通り、全37定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_boole.py`（浮動小数点、証明ではない）は Boole の分枝の逆写像性と導関数の和、三分枝写像の二分法で求めた分枝の和が \(t\)・重み \(1/S'\) の和が1・`S3_bounds` の不等式、ガウス関数などで両辺の積分の一致、第1節の和の公式（\(n=2,\dots,7\)、Simpson 則）、分枝の合成で作った \(A_n\) の \(3^n\) 区間上の積分が 20/57 になること（\(n\le3\)）を確認した。専用CIは `.github/workflows/orbit-trace-boole.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
 
+GitHub Actions：専用CI `orbit-trace-boole.yml` の [run 44593794265](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44593794265)（コミット `7964117`、37定理）が成功（conclusion `success`）。YAML の字下げ誤りで最初の2回は起動しなかったため、`ac4e9c5` で修正した（[run 44592754107](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44592754107) 成功）。
+
 境界：第3節の一般の \(S_m\)（任意の極数・正の留数）は次の第18節で扱う。\(A_n\) が \(3^n\) 個の区間からなることは Lean では扱っていない（積分値には不要）。
 
 ## 18. 一般の \(S_m\) の測度保存（Glasser の定理）の Lean 証明（2026-11-19 追記）
@@ -686,6 +688,8 @@ Lean の `S3` は全域で定義された関数なので、極で既定値をと
 
 検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceGlasser.lean` は警告なしで通り、全29定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_glasser.py`（浮動小数点、証明ではない）は、固定5例と乱数5例の極・留数で、二分法で求めた逆像の和が \(t-c+\sum a_j\)、重み \(1/S'\) の和が1になることと、ガウス関数・コーシー密度の積分の一致（相対誤差 \(10^{-4}\) 未満、コーシーは裾の打ち切り分）を確認した。専用CIは `.github/workflows/orbit-trace-glasser.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
 
+GitHub Actions：専用CI `orbit-trace-glasser.yml` の [run 44595469098](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44595469098)（コミット `d93b3a5`、反例追加前の28定理）が成功（conclusion `success`）。
+
 境界：留数に負のものがある場合（第3節の後半の注意、単調性が失われる）の一般論は扱わない。\(b_j>0\) が必要であることは反例で示した（`not_measurePreserving_negative_residue`：留数 \(-1\) の \(x+1/x\) は \(|x+1/x|\ge2\) なので \((-2,2)\) の逆像が零集合となり、測度を保存しない）。
 
 ## 19. 第6節の \(E_d\) の全次数での Lean 証明（2026-11-19 追記）
@@ -699,3 +703,5 @@ Lean の `S3` は全域で定義された関数なので、極で既定値をと
 - `Ed_partials`・`Ed_jacobian`：四つの偏導関数が座標方向の `HasDerivAt` として存在し、その \(2\times2\) 行列式は 1。
 
 検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 Research/OddShear.lean` は警告なしで通り、全13定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。独立検算 `python -B tests/test_odd_shear.py` は有理数の厳密計算で \(d\le9\) の \(E_d^6\)・\(E_d^3\)・不変性、行列式 1 を確認し、偏導関数を中心差分と照合する。\(d=3\) の定義が `OrbitTrace.lean` と同じ式であることも文字列で照合する。専用CI `.github/workflows/odd-shear.yml`、統合検査の `odd-shear` 段。
+
+GitHub Actions：専用CI `odd-shear.yml` の [run 44601676000](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44601676000)（コミット `9f28a3f`）が成功（conclusion `success`）。
