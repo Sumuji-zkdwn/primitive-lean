@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1317,
-    "eligible_direct_edges": 410,
-    "nodes": 406,
-    "retained_pairs": 292,
-    "transitive_pairs_removed": 113,
-    "unique_eligible_pairs": 405,
-    "weak_edges_excluded": 907
+    "all_source_edges": 1388,
+    "eligible_direct_edges": 431,
+    "nodes": 431,
+    "retained_pairs": 310,
+    "transitive_pairs_removed": 114,
+    "unique_eligible_pairs": 424,
+    "weak_edges_excluded": 957
   },
   "edges": [
     [
@@ -270,6 +270,10 @@
       "main:lean/PrismAiryReflectance.lean"
     ],
     [
+      "main:lean/Research/ElasticaIntrinsicHeight.lean",
+      "main:lean/Elastica/Geometry.lean"
+    ],
+    [
       "main:lean/Research/ElasticaObservationQuotient.lean",
       "main:lean/Elastica/Geometry.lean"
     ],
@@ -278,12 +282,60 @@
       "main:lean/Research/OkanoharaTransport.lean"
     ],
     [
+      "main:lean/Research/MobiusProjectiveAudit.lean",
+      "main:lean/Research/MobiusSphericalCrossRatio.lean"
+    ],
+    [
+      "main:lean/Research/MobiusProjectiveCompletion.lean",
+      "main:lean/Research/EComplexThirdParty.lean"
+    ],
+    [
+      "main:lean/Research/MobiusProjectiveStructure.lean",
+      "main:lean/Research/MobiusProjectiveCompletion.lean"
+    ],
+    [
+      "main:lean/Research/MobiusSphericalCrossRatio.lean",
+      "main:lean/Research/MobiusProjectiveStructure.lean"
+    ],
+    [
       "main:lean/Research/OkanoharaTransport.lean",
       "main:lean/Elastica/Examples.lean"
     ],
     [
       "main:lean/Research/OkanoharaTransport.lean",
       "main:lean/Elastica/ExponentialWeight.lean"
+    ],
+    [
+      "main:lean/Research/OperationalWorldGeneration.lean",
+      "main:lean/OrbitTrace.lean"
+    ],
+    [
+      "main:lean/Research/OperationalWorldGeneration.lean",
+      "main:lean/Research/SiphonPolynomialE.lean"
+    ],
+    [
+      "main:lean/Research/SignedCycleCounterexample.lean",
+      "main:lean/Research/SquareZeroNetwork.lean"
+    ],
+    [
+      "main:lean/Research/SiphonCommonInvariant.lean",
+      "main:lean/Research/OperationalWorldGeneration.lean"
+    ],
+    [
+      "main:lean/Research/SiphonFiniteDetermination.lean",
+      "main:lean/OrbitTrace.lean"
+    ],
+    [
+      "main:lean/Research/SiphonFiniteDetermination.lean",
+      "main:lean/Research/SiphonPolynomialE.lean"
+    ],
+    [
+      "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "main:lean/Research/ElasticaObservationQuotient.lean"
+    ],
+    [
+      "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "main:lean/Research/SiphonPolynomialE.lean"
     ],
     [
       "main:lean/Research/SphereClock.lean",
@@ -430,11 +482,19 @@
       "main:linear_input/lean_check/Observation.lean"
     ],
     [
+      "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "main:linear_input/lean_check/OperatorWordObservations.inc"
+    ],
+    [
       "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
       "main:linear_input/lean_check/ChebyshevDihedralDescent.inc"
     ],
     [
       "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "main:linear_input/lean_check/ChebyshevSplittingField.inc"
+    ],
+    [
+      "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
       "main:linear_input/lean_check/ChebyshevSplittingField.inc"
     ],
     [
@@ -962,6 +1022,10 @@
       "main:linear_input/lean_check/FutureObservations.inc"
     ],
     [
+      "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "main:linear_input/lean_check/LaaksoFiniteGraph.inc"
+    ],
+    [
       "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
       "main:linear_input/lean_check/TemporalLocalExtinction.inc"
     ],
@@ -1004,6 +1068,14 @@
     [
       "main:linear_input/lean_check/ParallelWriteGluing.inc",
       "main:linear_input/lean_check/LocalCapacityIncompatibility.inc"
+    ],
+    [
+      "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "main:lean/Research/ChairPieKillSpot.lean"
+    ],
+    [
+      "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "main:linear_input/lean_check/OperatorWordObservations.inc"
     ],
     [
       "main:linear_input/lean_check/PilotComparisonBridge.inc",
@@ -1239,15 +1311,29 @@
     "main:lean/PrismAiryReflectance.lean",
     "main:lean/PrismHysteresisReadout.lean",
     "main:lean/PrismObliqueTMM.lean",
+    "main:lean/Research/ChairPieKillSpot.lean",
+    "main:lean/Research/EComplexThirdParty.lean",
+    "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
+    "main:lean/Research/MobiusProjectiveAudit.lean",
+    "main:lean/Research/MobiusProjectiveCompletion.lean",
+    "main:lean/Research/MobiusProjectiveStructure.lean",
+    "main:lean/Research/MobiusSphericalCrossRatio.lean",
     "main:lean/Research/OkanoharaTransport.lean",
+    "main:lean/Research/OperationalWorldGeneration.lean",
+    "main:lean/Research/SignedCycleCounterexample.lean",
+    "main:lean/Research/SiphonCommonInvariant.lean",
+    "main:lean/Research/SiphonFiniteDetermination.lean",
     "main:lean/Research/SiphonInteraction.lean",
     "main:lean/Research/SiphonPolynomialE.lean",
+    "main:lean/Research/SiphonPredictiveQuotient.lean",
     "main:lean/Research/SphereClock.lean",
     "main:lean/Research/SphereClockRationalGluing.lean",
     "main:lean/Research/SphereClockWordNormalForm.lean",
     "main:lean/Research/SphereClockWordObservability.lean",
+    "main:lean/Research/SquareZeroNetwork.lean",
+    "main:lean/Research/VoidHyperCompletion.lean",
     "main:lean/SelfRewritingObserver.lean",
     "main:lean/SelfRewritingObserverExtensions.lean",
     "main:lean/ThreeBallCollision.lean",
@@ -1347,9 +1433,12 @@
     "main:linear_input/lean_check/BranchFibers.inc",
     "main:linear_input/lean_check/BranchForgetting.inc",
     "main:linear_input/lean_check/Calculus.lean",
+    "main:linear_input/lean_check/ChairInternalGeneration.inc",
+    "main:linear_input/lean_check/ChairProjectionExport.inc",
     "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
     "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
     "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+    "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
     "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
     "main:linear_input/lean_check/ChebyshevSplittingField.inc",
     "main:linear_input/lean_check/Coercivity.inc",
@@ -1464,6 +1553,7 @@
     "main:linear_input/lean_check/FiniteBayes.inc",
     "main:linear_input/lean_check/FiniteInternalUpdate.inc",
     "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+    "main:linear_input/lean_check/FiniteProjectionExamples.inc",
     "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
     "main:linear_input/lean_check/FiveDimLagrange.inc",
     "main:linear_input/lean_check/FoldCount.inc",
@@ -1494,6 +1584,7 @@
     "main:linear_input/lean_check/InverseTowerObservation.inc",
     "main:linear_input/lean_check/JoinContextualEquivalence.inc",
     "main:linear_input/lean_check/KummerDihedral.inc",
+    "main:linear_input/lean_check/LaaksoBondingAudit.inc",
     "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
     "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
     "main:linear_input/lean_check/LaaksoGeometricTower.inc",
@@ -1501,6 +1592,9 @@
     "main:linear_input/lean_check/LaaksoRealization.inc",
     "main:linear_input/lean_check/LaaksoSignedConnection.inc",
     "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+    "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+    "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+    "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
     "main:linear_input/lean_check/LevelConvergence.inc",
     "main:linear_input/lean_check/LevelGeometry.inc",
     "main:linear_input/lean_check/LocalCapacityIncompatibility.inc",
@@ -1516,6 +1610,7 @@
     "main:linear_input/lean_check/OperatorF0SemanticBridge.inc",
     "main:linear_input/lean_check/OperatorFiniteHorizon.inc",
     "main:linear_input/lean_check/OperatorFiniteMapCounts.inc",
+    "main:linear_input/lean_check/OperatorOrientationDepth.inc",
     "main:linear_input/lean_check/OperatorProductSystems.inc",
     "main:linear_input/lean_check/OperatorReachability.inc",
     "main:linear_input/lean_check/OperatorSemanticClosure.inc",
@@ -1525,6 +1620,7 @@
     "main:linear_input/lean_check/OperatorWordObservations.inc",
     "main:linear_input/lean_check/ParallelLocalGluing.inc",
     "main:linear_input/lean_check/ParallelWriteGluing.inc",
+    "main:linear_input/lean_check/PermissionProjectionBridge.inc",
     "main:linear_input/lean_check/PilotComparisonBridge.inc",
     "main:linear_input/lean_check/PilotHullInflation.inc",
     "main:linear_input/lean_check/PilotHullStability.inc",
@@ -1538,6 +1634,7 @@
     "main:linear_input/lean_check/PrimeFactorObservation.inc",
     "main:linear_input/lean_check/PrimeFactorOrbits.inc",
     "main:linear_input/lean_check/PrimeSplitNormalForm.inc",
+    "main:linear_input/lean_check/ProjectionReachability.inc",
     "main:linear_input/lean_check/QuarticClassification.inc",
     "main:linear_input/lean_check/RadicalF0Bridge.inc",
     "main:linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -1589,8 +1686,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "276080ae072c74c88be3d54b806b4633202fb8805404b0b6363948d40bb3bd49",
-    "main_commit": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+    "graph_sha256": "aa7cb3f010e19551c52daf4da1336fdb2e30ef146fe7d2557fb8c06db381ebe5",
+    "main_commit": "fdc4fb9c28c4b129f35510353ce3b5f20ca07159",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
