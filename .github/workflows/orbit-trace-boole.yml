@@ -48,7 +48,7 @@ jobs:
           assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
           assert 'native_decide' not in source
           names = re.findall(r'^theorem\s+([\w.]+)', source, re.M)
-          assert len(names) >= 8, names
+          assert len(names) >= 24, names
           audit = 'import OrbitTraceBoole\n' + ''.join('#print axioms OrbitTrace.' + x + '\n' for x in names)
           pathlib.Path('OrbitTraceBooleAudit.lean').write_text(audit)
           pathlib.Path('../orbit-trace-boole-axiom-count.txt').write_text(str(len(names)))
@@ -77,7 +77,7 @@ jobs:
         with:
           name: orbit-trace-boole
           path: |
-                        orbit-trace-boole-lean.log
+            orbit-trace-boole-lean.log
             orbit-trace-boole-audit.log
             orbit-trace-boole-axiom-count.txt
             orbit-trace-boole-python.log
