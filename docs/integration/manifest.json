@@ -7071,6 +7071,57 @@
         "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
         "ledger": "docs/research/2026-11-19-crosshatched-robot.md"
       }
+    },
+    {
+      "path": "linear_input/lean_check/RobotSix.inc",
+      "sha256": "a1d7cec14c567aef2c977aff6fad59db43d9493a0668c34cd25f322676cecf45",
+      "original_sha256": "a1d7cec14c567aef2c977aff6fad59db43d9493a0668c34cd25f322676cecf45",
+      "source_pr": 162,
+      "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
+      "source_path": "linear_input/lean_check/RobotSix.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "standalone_arc_proof_body_registered_in_primitive_lean",
+        "authored_on_parent_commit": "7191629bea1c503bd9ebd165a160edb29645f293",
+        "standalone_lean_sha256": "9dc367ed3345477d375c8df1f91a68634331294d6d3b3ed2bad79be0a62f499a",
+        "ledger": "docs/research/2026-11-19-robot-facing-orders.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotFacingOdd.inc",
+      "sha256": "2d98206eabbe09a76df6b395c50ae285d7b0197d3f6caa6e464ca645d7c7954f",
+      "original_sha256": "2d98206eabbe09a76df6b395c50ae285d7b0197d3f6caa6e464ca645d7c7954f",
+      "source_pr": 162,
+      "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
+      "source_path": "linear_input/lean_check/RobotFacingOdd.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "standalone_arc_proof_body_registered_in_primitive_lean",
+        "authored_on_parent_commit": "7191629bea1c503bd9ebd165a160edb29645f293",
+        "standalone_lean_sha256": "754dab1bc9ba7e87ecdeaa4b2e2b12483eeb3f77475f782b29e907e8e9f287d4",
+        "ledger": "docs/research/2026-11-19-robot-facing-orders.md"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/RobotFacingOrders.inc",
+      "sha256": "53cd75ec4d0b79ad1138b23b77cd0f2eadf27b6a4562de8bbe00cb823f672f9e",
+      "original_sha256": "53cd75ec4d0b79ad1138b23b77cd0f2eadf27b6a4562de8bbe00cb823f672f9e",
+      "source_pr": 162,
+      "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
+      "source_path": "linear_input/lean_check/RobotFacingOrders.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "standalone_arc_proof_body_registered_in_primitive_lean",
+        "authored_on_parent_commit": "7191629bea1c503bd9ebd165a160edb29645f293",
+        "standalone_lean_sha256": "b227de5abee850d96b4b33b1d168b84775c5ea2576e8c8f11365384841da7882",
+        "ledger": "docs/research/2026-11-19-robot-facing-orders.md"
+      }
     }
   ],
   "construction_errors": [],
@@ -7363,6 +7414,27 @@
       "source_pr": 159,
       "source_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
       "note": "Six repository-native supplements prove two-observation recovery of cross-hatched board dimensions and classify positive circular-arc return lengths at odd prime-power orders. Source bytes are pinned individually above."
+    },
+    {
+      "date": "2026-11-19",
+      "path": "linear_input/lean_check/RobotSix.inc",
+      "source_pr": 162,
+      "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
+      "reason": "Register the finite reversal and the classification of orders for which all position returns restore the tangent."
+    },
+    {
+      "date": "2026-11-19",
+      "path": "linear_input/lean_check/RobotFacingOdd.inc",
+      "source_pr": 162,
+      "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
+      "reason": "Register the finite reversal and the classification of orders for which all position returns restore the tangent."
+    },
+    {
+      "date": "2026-11-19",
+      "path": "linear_input/lean_check/RobotFacingOrders.inc",
+      "source_pr": 162,
+      "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
+      "reason": "Register the finite reversal and the classification of orders for which all position returns restore the tangent."
     }
   ]
 }

@@ -11,8 +11,8 @@
     {
       "path": "tools/verify_main_result.py",
       "migration_sha256": "8810b0656121c1670666b9712d59b23a761addfd2189cfcc6a318dbe66e8f859",
-      "current_sha256": "8f3767eb213552af50783e7726cbcd1be626a191fe5a0a308e706deab9c2931c",
-      "reason": "Register the integrated orientation, Laakso gauge/minimum, and Chebyshev Galois supplements, followed by the five F16 Fenchel and pseudoinverse supplements from PR #49 and the Mathlib PiL2 import. Register the cross-hatched recovery and prime-power arc proofs with the polynomial imports they use.",
+      "current_sha256": "5d6723e790965cdac24914d02c0efae12fa5add4adf7f02ee0088079dd847c66",
+      "reason": "Register the integrated orientation, Laakso gauge/minimum, and Chebyshev Galois supplements, followed by the five F16 Fenchel and pseudoinverse supplements from PR #49 and the Mathlib PiL2 import. Register the cross-hatched recovery and prime-power arc proofs with the polynomial imports they use. Add the sixth-root finite verification and the all-order facing classification with their cyclotomic and characteristic-two imports.",
       "previous": {
         "commit": "2834354904e26ed3f01dd4a8a004dcd28bdbcc53",
         "sha256": "9313b26582a38626fab67b12661e8c5b3d621be393d4228edcdcc8bbbc707cb0",
