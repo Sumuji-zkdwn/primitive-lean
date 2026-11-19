@@ -165,3 +165,16 @@ Leanの環境は既存の `lean/lean-toolchain` と `lean/lake-manifest.json` �
 統合検証入口 `tools/verify.py --toolchain-modules-only` でも新モジュールは自動収集される。
 Python証明書は `verification/siphon-finite-determination/python_certificates.json` に生成される。
 専用CIは `.github/workflows/siphon-finite-determination.yml`。
+
+
+## 2026-11-19 追記：最適値 \(N(d)\) と下界の Lean 証明
+
+上の「この線形代数による最適値の証明は、今回の数学的証明として提示する。最適値の次元計算と行選択まで全てをLeanで形式化したとの主張はしない」を、独立モジュール `lean/Research/SiphonOptimalDetermination.lean`（10定理、`Research.SiphonFiniteDetermination` を import）で形式化した。
+
+- `finrank_V`：総次数 \(d\) 以下の二変数実多項式の空間 \(V_d\)（mathlib の `restrictTotalDegree`）の次元は \(N(d)=(d+1)(d+2)/2\)（`card_expSet`：\(i+j\le d\) の指数を反対角線ごとに数える）。
+- `exists_vanishing_of_card_lt`・`not_determining_of_card_lt`：\(N(d)\) 点未満の任意の集合に対し、そこで消える非零の次数 \(d\) 以下の多項式がある（評価写像の核）。したがって決定できない。
+- `adaptive_not_determining`：次の測定点がそれまでの応答に依存する適応的手順でも、\(N(d)\) 回未満では零多項式と同じ応答列を返す非零多項式がある（本文の「零多項式への応答列」の議論）。
+- `exists_optimal_determining_set`：任意の非零初期点から、既存定理の到達点 \(E^mLE^n\)（正則化した初期点）のうち**ちょうど** \(N(d)\) 点で次数 \(d\) 以下の全多項式が決まる。既存の決定集合での点評価は \(V_d\) の双対を張り（`Submodule.span_eq_top_of_ne_zero`）、その線形独立な部分族（`exists_linearIndependent'`）は双対の基底で大きさ \(N(d)\)。
+- `minimum_is_N`：両方向をまとめた最小値の定理。点の選択は初期点に依存し、全初期点に共通の固定操作列は主張しない（本文と同じ）。
+
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`python3 -B tools/verify_toolchain_modules.py --module Research.SiphonOptimalDetermination` が依存3モジュールを含めて再コンパイルし、4モジュール88定理の公理監査に成功（使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内）。`lake env lean --trust=0` の単独コンパイルも警告なし。独立検算 `python -B tests/test_siphon_optimal_determination.py` は有理数の厳密計算で、5種の初期点・\(d\le3\) の到達点の評価行列の階数 \(N(d)\)、貪欲選択でちょうど \(N(d)\) 点、\(N(d)-1\) 点に対する非零消失多項式、適応的手順での応答列の一致を確認する。専用CI `.github/workflows/siphon-optimal-determination.yml`、統合検査の `siphon-optimal-determination` 段。

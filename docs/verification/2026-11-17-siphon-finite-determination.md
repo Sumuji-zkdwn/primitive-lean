@@ -82,3 +82,5 @@ python3 -B tools/verify_toolchain_modules.py --module Research.SiphonFiniteDeter
 専用CIはPRの実際のhead SHAをcheckoutし、依存二モジュールを含むソース再コンパイルと、
 新規モジュール内の全定理の公理監査を実施する。
 生成される証明書と監査結果はActions artifactとして保存する。
+
+2026-11-19追記：上表の「最適値 (d+1)(d+2)/2 と下界」は、独立モジュール `lean/Research/SiphonOptimalDetermination.lean` で Lean 証明した（`exists_optimal_determining_set`、`not_determining_of_card_lt`、`adaptive_not_determining`、`minimum_is_N`）。記録は [研究ノートの追記](../research/2026-11-17-siphon-finite-determination.md)。上表の当時の記載は変更しない。

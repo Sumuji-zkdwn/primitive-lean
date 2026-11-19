@@ -1,0 +1,51 @@
+name: Siphon optimal measurement count (Lean 4.36, exact check)
+
+on:
+  push:
+    branches:
+      - ccr-9ddeac0a-tpeopz
+  pull_request:
+    paths:
+      - 'lean/Research/SiphonOptimalDetermination.lean'
+      - 'lean/Research/SiphonFiniteDetermination.lean'
+      - 'lean/Research/SiphonPolynomialE.lean'
+      - 'lean/OrbitTrace.lean'
+      - 'tests/test_siphon_optimal_determination.py'
+      - 'tools/verify_toolchain_modules.py'
+      - '.github/workflows/siphon-optimal-determination.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  siphon-optimal-determination:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile the module and its dependencies, audit all theorem axioms
+        shell: bash
+        run: python3 -B tools/verify_toolchain_modules.py --module Research.SiphonOptimalDetermination 2>&1 | tee siphon-optimal-determination-lean.log
+      - name: Run independent exact checks
+        shell: bash
+        run: python3 -B tests/test_siphon_optimal_determination.py -v 2>&1 | tee siphon-optimal-determination-python.log
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: siphon-optimal-determination
+          path: |
+            siphon-optimal-determination-lean.log
+            siphon-optimal-determination-python.log
+            verification/toolchain-modules/
+          if-no-files-found: warn

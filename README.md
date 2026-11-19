@@ -47,6 +47,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[シア共役 E_d の全次数版](docs/research/2026-11-04-orbit-trace-integrals.md)（第19節）。E_d = H_d⁻¹LH_d について、全ての d で E_d⁶ = id・Q∘H_d の不変性・ヤコビアン 1、E_d³ = −id ⇔ d が奇数を `lean/Research/OddShear.lean` で証明する。
 
+2026-11-19追加：[Siphon 測定数の最適値](docs/research/2026-11-17-siphon-finite-determination.md)（末尾の追記）。総次数 d 以下の二変数多項式を決めるのに必要十分な正確な測定数が (d+1)(d+2)/2 であること（到達点から選べること、より少ない点では適応的手順でも不可能なこと）を `lean/Research/SiphonOptimalDetermination.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
