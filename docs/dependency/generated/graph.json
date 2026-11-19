@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
+  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -8395,6 +8395,61 @@
       "sha256": "616da7fdeb19d9204d965d88c4e43063a0b7663af2c65f4a25e927860093a189"
     },
     {
+      "id": "main:linear_input/lean_check/F16AllRealPseudoinverse.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/F16AllRealPseudoinverse.inc",
+      "group": "F16 / Recovery",
+      "namespace": "LinearInputF16AllRealPinv",
+      "declarations": [
+        "RMat",
+        "castQ",
+        "Pplus",
+        "Pminus",
+        "Pzero",
+        "cast_product",
+        "plus_idem",
+        "minus_idem",
+        "zero_idem",
+        "plus_minus",
+        "plus_zero",
+        "minus_zero",
+        "plus_sym",
+        "minus_sym",
+        "zero_sym",
+        "minus_plus",
+        "zero_plus",
+        "zero_minus",
+        "complete",
+        "spectral",
+        "spectral_mul",
+        "spectral_sym",
+        "spectral_one",
+        "gram",
+        "gram_spectral",
+        "inv0",
+        "inv0_penrose_one",
+        "inv0_penrose_two",
+        "spectral_penrose_one",
+        "spectral_penrose_two",
+        "spectral_penrose_three",
+        "spectral_penrose_four",
+        "gramPinv",
+        "gram_penrose_one",
+        "gram_penrose_two",
+        "gram_penrose_three",
+        "gram_penrose_four",
+        "gramPinv_at_one",
+        "gramPinv_at_minus_one",
+        "gramPinv_regular",
+        "gram_regular_two_sided",
+        "leftPinvCandidate",
+        "leftPinv_penrose_two",
+        "leftPinv_penrose_four"
+      ],
+      "imports": [],
+      "sha256": "14dd9637843c792e5c2106caa933e63941a42a89400afa997c1b09ed17ffde92"
+    },
+    {
       "id": "main:linear_input/lean_check/F16CompleteRank.inc",
       "scope": "main",
       "path": "linear_input/lean_check/F16CompleteRank.inc",
@@ -8444,6 +8499,63 @@
       ],
       "imports": [],
       "sha256": "f24e4051ab5f26971f6a6bd85ef10a2fb23ba153658c687215c64a632beb3812"
+    },
+    {
+      "id": "main:linear_input/lean_check/F16FenchelAtlas.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/F16FenchelAtlas.inc",
+      "group": "F16 / Recovery",
+      "namespace": "LinearInputF16FenchelAtlas",
+      "declarations": [
+        "sectionEnergy",
+        "score",
+        "section_is_original_E",
+        "section_hessian_determinant",
+        "section_hessian_zero_iff",
+        "section_nonnegative",
+        "section_at_zero",
+        "section_at_one",
+        "section_at_minus_one",
+        "zero_score_upper",
+        "zero_score_attained",
+        "one_score_upper",
+        "one_score_attained",
+        "one_score_unbounded",
+        "one_score_bdd_iff",
+        "minus_one_score_upper",
+        "minus_one_score_attained",
+        "full_f16_rank_classification",
+        "slice_and_full_rank_at_one"
+      ],
+      "imports": [],
+      "sha256": "6587c5bc579d6e4cecfb547f750fcc8bdae378c3fe11293b79de83972c98b3af"
+    },
+    {
+      "id": "main:linear_input/lean_check/F16FenchelFull.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/F16FenchelFull.inc",
+      "group": "F16 / Recovery",
+      "namespace": "LinearInputF16FenchelFull",
+      "declarations": [
+        "State",
+        "action",
+        "normal",
+        "potential",
+        "score",
+        "inner_normal",
+        "score_square_identity",
+        "score_upper",
+        "score_attained",
+        "conjugate_eq_of_normal",
+        "normal_range_eq_orthogonal_kernel",
+        "score_kernel_ray",
+        "score_bddAbove_iff",
+        "conjugate_of_bddAbove",
+        "potential_eq_of_same_normal",
+        "left_pencil_rank"
+      ],
+      "imports": [],
+      "sha256": "59cf968d5156fcfe9105bff905e551e7b00b1fa980c7af990de2d677e44dcc72"
     },
     {
       "id": "main:linear_input/lean_check/F16FullMatrix.inc",
@@ -8754,6 +8866,76 @@
       ],
       "imports": [],
       "sha256": "a3c3f5dce6f1caf26c929ee7cdf6bf335bbf06f17031ce8d7995e111a9ab8949"
+    },
+    {
+      "id": "main:linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "group": "F16 / Recovery",
+      "namespace": "LinearInputF16SingularPinv",
+      "declarations": [
+        "gramPlus",
+        "gramMinus",
+        "pinvPlus",
+        "pinvMinus",
+        "combine_mul",
+        "combine_sym",
+        "zero_plus",
+        "zero_minus",
+        "gramPlus_eigenspaces",
+        "gramMinus_eigenspaces",
+        "plus_penrose_one",
+        "plus_penrose_two",
+        "plus_penrose_three",
+        "plus_penrose_four",
+        "minus_penrose_one",
+        "minus_penrose_two",
+        "minus_penrose_three",
+        "minus_penrose_four"
+      ],
+      "imports": [],
+      "sha256": "a284d53914a7e5b9d96d23ac509738c6b68056360ca92c6de83c41a7eba62c41"
+    },
+    {
+      "id": "main:linear_input/lean_check/F16SpectralProjectors.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/F16SpectralProjectors.inc",
+      "group": "F16 / Recovery",
+      "namespace": "LinearInputF16Spectral",
+      "declarations": [
+        "Idx",
+        "QMat",
+        "eq_of_all_entries",
+        "leftThreeQ",
+        "leftTenQ",
+        "active",
+        "realSector",
+        "cross",
+        "leftThreeQ_orthogonal",
+        "leftTenQ_orthogonal",
+        "cross_from_actual_F16",
+        "plus",
+        "minus",
+        "zero",
+        "projector_sum",
+        "plus_idempotent",
+        "minus_idempotent",
+        "zero_idempotent",
+        "plus_minus_zero",
+        "plus_zero_zero",
+        "minus_zero_zero",
+        "plus_symmetric",
+        "minus_symmetric",
+        "zero_symmetric",
+        "cross_plus",
+        "cross_minus",
+        "cross_zero",
+        "plus_trace",
+        "minus_trace",
+        "zero_trace"
+      ],
+      "imports": [],
+      "sha256": "857a42216b5c3fe75ca2a6361cec1110f631803fe62eda55c946125103e5faf1"
     },
     {
       "id": "main:linear_input/lean_check/F16UnexpectedBridges.inc",
@@ -22567,6 +22749,35 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/F16AllRealPseudoinverse.inc",
+      "to": "main:linear_input/lean_check/F16RealDeterminant.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "realPencilAll"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16AllRealPseudoinverse.inc",
+      "to": "main:linear_input/lean_check/F16SpectralProjectors.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "cross_from_actual_F16",
+        "leftTenQ_orthogonal",
+        "leftThreeQ",
+        "leftThreeQ_orthogonal",
+        "minus_idempotent",
+        "minus_symmetric",
+        "minus_zero_zero",
+        "plus_idempotent",
+        "plus_minus_zero",
+        "plus_symmetric",
+        "plus_zero_zero",
+        "projector_sum",
+        "zero_idempotent",
+        "zero_symmetric"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/F16CompleteRank.inc",
       "to": "main:linear_input/lean_check/F16RankCertificate.inc",
       "kind": "qualified_reference",
@@ -22642,6 +22853,48 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "zero_probe_isUnit"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16FenchelAtlas.inc",
+      "to": "main:linear_input/lean_check/F16CompleteRank.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rank_at_plus_one",
+        "rank_classification"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16FenchelAtlas.inc",
+      "to": "main:linear_input/lean_check/F16RealDeterminant.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "realPencilAll"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16FenchelAtlas.inc",
+      "to": "main:linear_input/lean_check/VariablePairObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "gradXY_jacobian",
+        "jacobianPair"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16FenchelFull.inc",
+      "to": "main:linear_input/lean_check/F16CompleteRank.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "rank_classification"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16FenchelFull.inc",
+      "to": "main:linear_input/lean_check/F16RealDeterminant.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "realPencilAll"
       ]
     },
     {
@@ -22837,6 +23090,39 @@
       "symbols": [
         "reflection_sample",
         "signedAction"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "to": "main:linear_input/lean_check/F16SpectralProjectors.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputF16Spectral.eq_of_all_entries"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16SingularPseudoinverse.inc",
+      "to": "main:linear_input/lean_check/F16SpectralProjectors.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "eq_of_all_entries",
+        "leftThreeQ",
+        "minus_idempotent",
+        "minus_symmetric",
+        "minus_zero_zero",
+        "plus_idempotent",
+        "plus_symmetric",
+        "plus_zero_zero",
+        "zero_idempotent",
+        "zero_symmetric"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/F16SpectralProjectors.inc",
+      "to": "main:linear_input/lean_check/F16RealDeterminant.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "entryThree"
       ]
     },
     {
@@ -26920,6 +27206,11 @@
     "linear_input/lean_check/F0FutureMinimality.inc",
     "linear_input/lean_check/WFSProjectiveSampling.inc",
     "linear_input/lean_check/RepresentationBridges.inc",
+    "linear_input/lean_check/F16FenchelAtlas.inc",
+    "linear_input/lean_check/F16FenchelFull.inc",
+    "linear_input/lean_check/F16SpectralProjectors.inc",
+    "linear_input/lean_check/F16SingularPseudoinverse.inc",
+    "linear_input/lean_check/F16AllRealPseudoinverse.inc",
     "linear_input/lean_check/HistoryNonpreservation.inc",
     "linear_input/lean_check/TemporalLocalExtinction.inc",
     "linear_input/lean_check/LocalCapacityIncompatibility.inc",
@@ -27386,28 +27677,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
+      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
+      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
+      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
+      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
