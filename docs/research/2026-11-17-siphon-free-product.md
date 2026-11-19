@@ -63,3 +63,16 @@ python3 -B -m unittest discover -s tests -p 'test_siphon_free_product.py' -v
 初期点は $(0,1),(1,0),(1,1),(2,-1)$。それぞれの語の出力四組を並べ、法 1009 と法 10007 で**別々に**重複を調べる。長さは音節数で、例えば $a^5$ は 1 音節である。長さ $0$ から $12$ までの個数は順に $1,6,10,30,50,150,250,750,1250,3750,6250,18750,31250$。空語を含む全 62,497 語が各素数で異なる出力を持つ。異なる剰余は元の整数出力の相違も証明する。長さの上限を外す根拠は上の次数の帰納法である。
 
 追加検算では、整数点 $(3,6)$ 一点だけでも、同じ 62,497 語の出力が法 1,000,003 と法 1,000,000,007 のそれぞれですべて異なる。プログラムは実行順に音節を列挙するので、リストの順序は本文の合成積と逆順になる。
+
+## 2026-11-19 追記：自由積との同型の Lean 証明
+
+上の手証明の「自由積との同型」を、独立モジュール `lean/Research/SiphonFreeProduct.lean`（35定理、`Mathlib` のみ import）で証明した。既存の Lean 定理（`OrbitTrace.linearE_cube` など）とは独立に、写像を任意の可換環 \(R\) 上の \(R^2\) の置換として定義し直している。
+
+- `phi R : C₆ * C₂ →* Perm (R × R)`：`Monoid.CoprodI.lift` で \(a\mapsto L\)、\(b\mapsto EL^3\)。関係式 \(L^6=\mathrm{id}\)（`Lperm_pow_six`）、\(b^2=\mathrm{id}\)（`Bf_Bf`）。
+- `phi_poly_injective`：\(R=\mathbb R[t]\) 上で mathlib のピンポン補題 `Monoid.CoprodI.lift_injective_of_ping_pong` を使う。\(b\) の集合は \(\{E^h z: h\ge1,\ \deg z_2\le\deg z_1,\ \deg z_1\ge1\}\)。閉形式 \(E^h=(u+hr^2,\ r-(u+hr^2)^3)\)（`Ef_EIter`）から、その点は \(\deg z_2=3\deg z_1\)、\(\mathrm{lc}\,z_1>0\)、\(\mathrm{lc}\,z_2=-(\mathrm{lc}\,z_1)^3\) を満たす（`EIter_mem_Top`）。\(a\) の集合はその \(L,\dots,L^5\) による像。\(L^3=-\mathrm{id}\) は \(\mathrm{lc}\,z_1\) の符号を反転し、ほかの冪は次数比を壊す（`Lpow_not_mem_Top`）。\(b\) は \(a\) の集合を \(b\) の集合へ写す。\(L^3\) の後なら \(E^{h+1}\) へ合流し、それ以外は新しいまとまりを始める（`Bperm_maps_Xa`、`neg_Lpow_mem_Zset`）。これは本文の「\(j_i=3\) で \(E\) がつながり、それ以外は \(L^k\) が残る」の議論をピンポン補題の形にしたもの。
+- `phi_real_injective`・`phi_real_eq_iff`：実平面 \(\mathbb R^2\) 上でも単射。実数 \(t\) での評価が作用と可換（`pmap_phi`）で、全実数点で一致する多項式は等しい（`Polynomial.funext`）。二つの語が \(\mathbb R^2\) 上で同じ写像を定めることと \(C_6*C_2\) で等しいことは同値。
+- `range_phi`・`freeProductEquiv`：\(L\) と \(E\) が \(\mathrm{Perm}(\mathbb R^2)\) で生成する部分群は \(C_6*C_2\) と同型（`Eperm_apply`：\(E=ba^3\)）。
+
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 Research/SiphonFreeProduct.lean` は警告なしで通り、全35定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内。独立検算 `python -B tests/test_siphon_free_product_pingpong.py` は整数係数の一変数多項式で、関係式、\(E^h\) の閉形式、ピンポン集合の不変量、\(b\) を2個以下含む全簡約語と3個含む4語が点 \((t,0)\) を動かすことを厳密に確認する。専用CI `.github/workflows/siphon-free-product-pingpong.yml`、統合検査の `siphon-free-product` 段。
+
+境界：簡約語の総次数がちょうど \(18^m\) であるという次数公式は Lean では証明していない（ピンポン補題には主係数の不変量だけで足りる）。観測位置を消す操作の節も対象外。

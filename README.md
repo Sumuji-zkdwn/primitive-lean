@@ -43,6 +43,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[radical の不動点](docs/verification/2026-11-05-radical-f0-bridge.md)（末尾の追記）。rad(n) = n ⇔ n = 0 または n が平方因子をもたない、rad(n) は n の最大の平方因子なし約数、互いに素なら rad(ab) = rad(a)rad(b) を `lean/Research/RadicalSquarefree.lean` で証明する。
 
+2026-11-19追加：[Siphon 操作の自由積](docs/research/2026-11-17-siphon-free-product.md)（末尾の追記）。多項式自己同型 L と E が実平面の置換として生成する群が C₆ * C₂ と同型であることを、ℝ[t]² 上のピンポン補題と実数点での評価で `lean/Research/SiphonFreeProduct.lean` に証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
