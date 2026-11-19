@@ -169,7 +169,8 @@ def run(root=ROOT, selected=None, *, package="lean", output="toolchain-modules",
         result, text = command([lean_binary, "--trust=0", "-o", str(target),
                                str(Path(row["path"]).relative_to(package))], name)
         report["modules"].append({"module": name, **result})
-        if result["exit_code"] or result["warnings"] != retained.get("warnings", []):
+        observed_warnings = [line.replace(os.sep, "/") for line in result["warnings"]]
+        if result["exit_code"] or observed_warnings != retained.get("warnings", []):
             failed.add(name)
             report["errors"].append(name + ": source compilation failed or emitted warnings")
             print(text, flush=True)
