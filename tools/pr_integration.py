@@ -63,6 +63,8 @@ def run_integration(root, command, rebuild=False):
                ('finite-markov-transport', [sys.executable, '-B', '-X', 'utf8', 'tools/verify_finite_markov_transport.py'])]
     stages += [
         ('void-hypercompletion', ['lake', 'env', 'lean', '--trust=0', 'Research/VoidHyperCompletion.lean'], lean),
+        ('f0-imbalance-monotonicity', ['lake', 'env', 'lean', '--trust=0',
+                                       'Research/F0ImbalanceMonotonicity.lean'], lean),
         ('laakso-bonding', [sys.executable, '-B', '-X', 'utf8', 'tools/check_laakso_bonding.py',
                             '--output-dir', str(out / 'laakso-bonding')]),
         ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
@@ -74,7 +76,7 @@ def run_integration(root, command, rebuild=False):
         result['checks'].append(dict(name=name, **record))
         if record['exit_code']:
             result['errors'].append(name + ' failed; see ' + record['log'])
-        if name in ('siphon-interaction', 'siphon-polynomial-e'):
+        if name in ('siphon-interaction', 'siphon-polynomial-e', 'f0-imbalance-monotonicity'):
             # Trust-zero compilation must also reject sorryAx reported by #print axioms.
             if 'sorryAx' in (out / ('integration-' + name + '.log')).read_text('utf-8'):
                 result['errors'].append(name + ' reports sorryAx; see ' + record['log'])

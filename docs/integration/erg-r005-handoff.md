@@ -44,3 +44,13 @@ period bound. R005 labels this proves_restricted and retains its non_claims.
 This handoff reads external ERG state as reference material only. It does not
 fetch untrusted executable code, alter mainline proof sources, enable paid
 model calls, or auto-promote accepted nodes.
+
+## 2026-11-19 status note
+
+The first lead above is no longer open on the formal side:
+lean/Research/F0ImbalanceMonotonicity.lean proves strict imbalance
+monotonicity in general (phi_lt_of_transfer: d >= 1, a >= b >= 2, no condition
+on the remaining blocks), with a uniqueness-of-maximum corollary (phi_lt_hook).
+See docs/research/2026-11-19-f0-imbalance-monotonicity.md. This note does not
+bind or promote any ERG node; a binding must still be pinned to a merged
+commit and reviewed under R005.
