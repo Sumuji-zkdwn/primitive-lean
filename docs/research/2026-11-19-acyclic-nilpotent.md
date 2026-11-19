@@ -50,7 +50,7 @@
 - 追補後：`lake env lean --trust=0 Research/AcyclicNilpotent.lean` は警告なしで通り、23定理。
 - `python -B tests/test_acyclic_nilpotent.py`：7テスト合格（追補で整数重み \(\{-1,0,1\}\) の1〜3頂点：非巡回なら \(A^n=0\)、閉路ありで冪零な行列も存在、を追加）。1〜4頂点のループ込みの全0/1行列（2, 16, 512, 65,536個）で \(A^n=0\) ⇔ 深さ優先探索で閉路なし、を確認。ループなしの非巡回グラフの数は 1, 3, 25, 543（OEIS A003024 と一致）。重み \(\{0,1,2\}\) の1〜3頂点でも同じ同値を確認し、0/1行列では冪の成分が歩道の個数に一致することを確認。
 
-GitHub Actions：専用CI [run 44500542674](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44500542674)（コミット `565d6af`、push イベント）が成功（conclusion `success`）。
+GitHub Actions：専用CI [run 44500542674](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44500542674)（コミット `565d6af`、push イベント）が成功（conclusion `success`）。追補後のコミット `2549ef2` でも [run 44501964239](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44501964239) が成功。
 
 ## 論理的境界
 

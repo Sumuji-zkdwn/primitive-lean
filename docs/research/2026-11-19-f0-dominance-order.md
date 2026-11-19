@@ -55,7 +55,7 @@ E_p(t)=\sum_{m\in p}(m-t)^+
 - 全21定理の `#print axioms`：11定理が `propext`・`Classical.choice`・`Quot.sound`、10定理が `propext`・`Quot.sound`。
 - `python -B tests/test_f0_dominance_order.py`：3テスト合格。\(N\le12\) の同じ塊数の全組で、幅優先探索による到達可能性 ⇔ 超過量の優越 ⇔ 部分和による majorization を確認。真に優越する 732 組すべてで \(\Phi_1\) が真に大きい。
 
-GitHub Actions の結果はこの記録の時点では未確認であり、専用CIの完了を別途確認する。
+GitHub Actions：専用CI [run 44501544250](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44501544250)（コミット `8054117`、push イベント）が成功（conclusion `success`）。
 
 ## 論理的境界
 

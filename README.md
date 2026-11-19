@@ -21,6 +21,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[Orbit-trace の全次数の階数公式](docs/research/2026-11-04-orbit-trace-integrals.md)（第15節）。転送作用素の偏差 N=ℒ−I について、未完だった rank(N^j|V_d)=max(0, d+1−j(p+1))、核の次元、冪零指数、長さごとのジョルダン鎖の本数を `lean/OrbitTraceRankFormula.lean` で証明する。
 
+2026-11-19追加：[⟨4,6,9⟩ の全既約分解の個数](docs/research/2026-11-19-half-factorial-count.md)。n=4^r6^s9^t の分解数が ⌊min(v₂n, v₃n)/2⌋+1 であることを `lean/Research/HalfFactorialCount.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
