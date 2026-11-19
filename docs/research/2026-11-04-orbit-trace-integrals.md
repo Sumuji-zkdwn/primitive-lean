@@ -655,3 +655,14 @@ v_{r,j}=N^{M_r-j}\bigl(X^{\,r+M_rq}\bigr)\qquad(\texttt{chainVec})
 
 GitHub Actions：専用CI `orbit-trace-rank-formula.yml` の [run 44505949722](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44505949722)（コミット `a78bc6d`、第15・16節の両ファイル）が成功（conclusion `success`）。
 
+## 17. 実数上の測度保存 (C) の Lean 証明（Boole の場合、2026-11-19 追記）
+
+第3節の (C)（逆分枝が増加し導関数の和が1なら \(\int\Phi(S(x))\,dx=\int\Phi(s)\,ds\)）は解析的な変数変換として Lean 未形式化だった。`lean/OrbitTraceBoole.lean`（13定理）で次を証明した。
+
+- **抽象形**（`integral_comp_eq_of_branches`）：有限個の微分可能な分枝 \(r_i:\mathbb R\to\mathbb R\) が \(S\circ r_i=\mathrm{id}\)、\(r_i'\ge0\)、\(\sum_i r_i'=1\) を満たし、像が互いに素で、像の和集合の補集合が零集合なら、可積分な \(g\) について \(\int g(S(x))\,dx=\int g(t)\,dt\)。各分枝で mathlib の1次元変数変換 `integral_image_eq_integral_abs_deriv_smul` を使い、像の可測性は Lusin–Souslin の定理（`MeasurableSet.image_of_continuousOn_injOn`）から得る。
+- **Boole の定理**（`boole_integral`）：\(S(x)=x-1/x\)（第3節の \(m=2\)、\(c=0\)、\(a_1=0\)、\(b_1=1\)）について \(\int g(x-1/x)\,dx=\int g(x)\,dx\)。分枝は \((t\pm\sqrt{t^2+4})/2\)、導関数の和が1（`booleBranchDeriv_sum`）、0 以外の実数はその符号の分枝で到達される（`booleBranch_surj`）。
+
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceBoole.lean` は警告なしで通り、全13定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_boole.py`（浮動小数点、証明ではない）は分枝の逆写像性と導関数の和、ガウス関数などで両辺の積分の一致を確認した。専用CIは `.github/workflows/orbit-trace-boole.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
+
+境界：元の \(S(x)=x+1-1/x-1/(x-1)\)（\(m=3\)）は三次方程式の逆分枝の構成が必要で、今回は扱わない。抽象形はその分枝が与えられれば適用できる。
+

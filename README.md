@@ -35,6 +35,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[F0 の型別階乗公式](docs/research/2026-11-19-f0-type-count.md)。塊サイズ型 λ の冪等写像の個数 I(λ)=N!/(∏(m_a−1)!·∏c_k!) を `lean/Research/F0TypeCount.lean` で証明し、元資料の表の値（7点で 420、1,260 など）を導く。
 
+2026-11-19追加：[Boole 型変換の測度保存](docs/research/2026-11-04-orbit-trace-integrals.md)（第17節）。逆分枝の導関数の和が1なら ∫g∘S = ∫g となる抽象定理と、古典的な Boole の定理 ∫g(x−1/x)dx = ∫g(x)dx を `lean/OrbitTraceBoole.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
