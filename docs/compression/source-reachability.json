@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1388,
-    "eligible_direct_edges": 431,
-    "nodes": 431,
-    "retained_pairs": 310,
+    "all_source_edges": 1373,
+    "eligible_direct_edges": 427,
+    "nodes": 426,
+    "retained_pairs": 306,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 424,
-    "weak_edges_excluded": 957
+    "unique_eligible_pairs": 420,
+    "weak_edges_excluded": 946
   },
   "edges": [
     [
@@ -280,22 +280,6 @@
     [
       "main:lean/Research/FiniteMarkovTransport.lean",
       "main:lean/Research/OkanoharaTransport.lean"
-    ],
-    [
-      "main:lean/Research/MobiusProjectiveAudit.lean",
-      "main:lean/Research/MobiusSphericalCrossRatio.lean"
-    ],
-    [
-      "main:lean/Research/MobiusProjectiveCompletion.lean",
-      "main:lean/Research/EComplexThirdParty.lean"
-    ],
-    [
-      "main:lean/Research/MobiusProjectiveStructure.lean",
-      "main:lean/Research/MobiusProjectiveCompletion.lean"
-    ],
-    [
-      "main:lean/Research/MobiusSphericalCrossRatio.lean",
-      "main:lean/Research/MobiusProjectiveStructure.lean"
     ],
     [
       "main:lean/Research/OkanoharaTransport.lean",
@@ -1312,14 +1296,9 @@
     "main:lean/PrismHysteresisReadout.lean",
     "main:lean/PrismObliqueTMM.lean",
     "main:lean/Research/ChairPieKillSpot.lean",
-    "main:lean/Research/EComplexThirdParty.lean",
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
-    "main:lean/Research/MobiusProjectiveAudit.lean",
-    "main:lean/Research/MobiusProjectiveCompletion.lean",
-    "main:lean/Research/MobiusProjectiveStructure.lean",
-    "main:lean/Research/MobiusSphericalCrossRatio.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
     "main:lean/Research/SignedCycleCounterexample.lean",
@@ -1686,8 +1665,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "aa7cb3f010e19551c52daf4da1336fdb2e30ef146fe7d2557fb8c06db381ebe5",
-    "main_commit": "fdc4fb9c28c4b129f35510353ce3b5f20ca07159",
+    "graph_sha256": "3fbf936a00f56dffed96110fe99c9ecb56f07762502e91752f318c30231137e7",
+    "main_commit": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
