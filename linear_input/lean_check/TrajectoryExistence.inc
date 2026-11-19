@@ -1,6 +1,7 @@
 import Mathlib.Analysis.ODE.PicardLindelof
 import Mathlib.Analysis.ODE.Gronwall
 import Mathlib.Analysis.ODE.Basic
+import Mathlib.Analysis.ODE.ExistUnique
 
 /-!
 Actual local existence and uniqueness for the autonomous feedback vector field.
@@ -63,9 +64,10 @@ theorem solution_unique_on_interval {b : ℝ × ℝ → ℝ} (hb : ContDiff ℝ 
   · change closure ({t | z t = w t} ∩ Ioo a c) ∩ Ioo a c ⊆
       {t | z t = w t} ∩ Ioo a c
     rw [inter_comm, ← Subtype.image_preimage_val, inter_comm, ← Subtype.image_preimage_val,
-      image_subset_image_iff Subtype.val_injective, preimage_setOf_eq]
+      image_subset_image_iff Subtype.val_injective, preimage_ofPred_eq]
     intro t ht
-    rw [mem_preimage, ← closure_subtype] at ht
+    change (t : ℝ) ∈ closure (Subtype.val '' (Subtype.val ⁻¹' {t | z t = w t})) at ht
+    rw [← closure_subtype] at ht
     revert ht t
     apply IsClosed.closure_subset (isClosed_eq _ _)
     · rw [continuous_iff_continuousAt]
@@ -168,7 +170,7 @@ theorem exists_local_solution_energy_formula {b : ℝ × ℝ → ℝ} (hb : Cont
       HasDerivAt z (vectorField lam r u gamma target b (z t)) t := by
     intro t ht
     apply hz t
-    constructor <;> dsimp
+    constructor
     · linarith [ht.1]
     · linarith [ht.2]
   refine ⟨ε / 2, half_pos hε, z, hz₀, hd, fun t ht => ?_⟩

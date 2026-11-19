@@ -1,0 +1,95 @@
+name: Chair and pie finite kill-spot checks
+
+on:
+  push:
+    branches: [research/chair-pie-killspot-20261117]
+    paths:
+      - 'lean/Research/ChairPieKillSpot.lean'
+      - 'tools/chair_pie_killspot.py'
+      - 'tests/test_chair_pie_killspot.py'
+      - 'docs/research/2026-11-17-chair-pie-killspot.md'
+      - '.github/workflows/chair-pie-killspot.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/Research/ChairPieKillSpot.lean'
+      - 'tools/chair_pie_killspot.py'
+      - 'tests/test_chair_pie_killspot.py'
+      - 'docs/research/2026-11-17-chair-pie-killspot.md'
+      - '.github/workflows/chair-pie-killspot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -p 'test_chair_pie_killspot.py' -v
+
+      - name: Reproduce finite enumeration
+        run: python -B tools/chair_pie_killspot.py
+
+  lean-kernel-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Check out exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Install repository-pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+
+      - name: Obtain pinned Mathlib cache
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get; then exit 0; fi
+            echo "Mathlib cache retry ${attempt}" >&2
+            sleep 5
+          done
+          exit 1
+
+      - name: Compile Lean theorems with trust level zero and audit axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 Research/ChairPieKillSpot.lean 2>&1 | tee ../chair-pie-lean.log
+          if grep -q 'sorryAx' ../chair-pie-lean.log; then
+            echo 'Prohibited sorry axiom detected' >&2
+            exit 1
+          fi
+
+      - name: Retain Lean kernel audit output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chair-pie-lean-${{ github.run_id }}
+          path: chair-pie-lean.log
+          if-no-files-found: warn
+          retention-days: 30

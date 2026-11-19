@@ -42,7 +42,7 @@ theorem reverseIntegral_split {ι : Type*} {v : ι → ℝ → ℝ}
         ∑ k ∈ Finset.range (w.length + 1),
           reverseIntegral v b (i :: w.take k) c *
             reverseIntegral v a (w.drop k) b := by
-      rw [he, intervalIntegral.integral_finset_sum hint]
+      rw [he, intervalIntegral.integral_finsetSum hint]
       apply Finset.sum_congr rfl
       intro k _
       rw [intervalIntegral.integral_mul_const]
@@ -87,7 +87,9 @@ theorem continuous_list_sum {κ : Type*} (l : List κ) (f : κ → ℝ → ℝ)
     Continuous (fun t => (l.map (fun k => f k t)).sum) := by
   induction l with
   | nil => simpa using (continuous_const : Continuous (fun _ : ℝ => (0 : ℝ)))
-  | cons k l ih => simpa only [List.map_cons, List.sum_cons] using (hf k).add ih
+  | cons k l ih =>
+    convert (hf k).add ih using 1
+    rfl
 
 theorem integral_list_sum {κ : Type*} (l : List κ) (f : κ → ℝ → ℝ)
     (hf : ∀ k, Continuous (f k)) (a b : ℝ) :
@@ -182,7 +184,7 @@ theorem shuffles_word_length {ι : Type*} (u w z : List ι) (hz : z ∈ shuffles
     simpa only [List.length_nil, zero_add] using congrArg List.length he
   | cons i u =>
     cases w with
-    | nil => simpa [shuffles_nil_right] using congrArg List.length (List.mem_singleton.mp
+    | nil => simpa [shuffles_nil_right, List.length_cons] using! congrArg List.length (List.mem_singleton.mp
         (by simpa only [shuffles_nil_right] using hz))
     | cons j w =>
       rw [shuffles, List.mem_append] at hz

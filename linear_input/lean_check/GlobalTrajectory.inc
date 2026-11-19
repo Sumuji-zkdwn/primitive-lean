@@ -30,7 +30,7 @@ theorem exists_global_solution {lam r u gamma target : ℝ} {b : ℝ × ℝ → 
     intro a z hz₀ hz t ht hta
     have hi : target ≤ E lam r u (z 0).1 (z 0).2 := by simpa only [hz₀] using hinit
     have he := LinearInputFiniteBand.energy_band_on_Ioo hgamma hε hz hi ht hta
-    simpa only [hz₀] using he
+    simpa only [K, mem_ofPred_eq, hz₀] using he
   obtain ⟨z, hz₀, hz⟩ :=
     LinearInputGlobalContinuation.exists_forward_solution hF hstart hε hlocal hstay
   refine ⟨z, hz₀, hz, fun t ht => ?_⟩

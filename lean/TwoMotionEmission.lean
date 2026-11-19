@@ -50,23 +50,26 @@ theorem energy_nonneg {κ : ℝ} (hκ : 0 ≤ κ) (g ω₁ ω₂ x₁ v₁ x₂ 
 theorem coupling_hasDerivAt_y (κ g x₁ x₂ y : ℝ) :
     HasDerivAt (fun z => coupling κ g x₁ x₂ z) (-force κ g x₁ x₂ y) y := by
   convert (((hasDerivAt_id y).sub_const (g*x₁*x₂)).pow 2).const_mul (κ/2) using 1
-  dsimp [coupling, force]
-  ring
+  · rfl
+  · dsimp [force]
+    ring
 
 /-- Backreaction on the first internal motion comes from the same potential. -/
 theorem coupling_hasDerivAt_x1 (κ g x₁ x₂ y : ℝ) :
     HasDerivAt (fun z => coupling κ g z x₂ y)
       (g*x₂*force κ g x₁ x₂ y) x₁ := by
   convert (((((hasDerivAt_id x₁).const_mul g).mul_const x₂).const_sub y).pow 2).const_mul (κ/2) using 1
-  dsimp [coupling, force]
-  ring
+  · rfl
+  · dsimp [force]
+    ring
 
 theorem coupling_hasDerivAt_x2 (κ g x₁ x₂ y : ℝ) :
     HasDerivAt (fun z => coupling κ g x₁ z y)
       (g*x₁*force κ g x₁ x₂ y) x₂ := by
   convert ((((hasDerivAt_id x₂).const_mul (g*x₁)).const_sub y).pow 2).const_mul (κ/2) using 1
-  dsimp [coupling, force]
-  ring
+  · rfl
+  · dsimp [force]
+    ring
 
 structure Path where
   x₁ : ℝ → ℝ
@@ -103,8 +106,9 @@ theorem energy_chain_rule (κ g ω₁ ω₂ : ℝ) (z : Path) (t a₁ a₂ w : �
     (hv₂.pow 2)).add ((hx₂.pow 2).const_mul (ω₂^2))).div_const 2
   have hi := ((hy.sub (((hx₁.const_mul g).mul hx₂))).pow 2).const_mul (κ/2)
   convert hm.add hi using 1
-  dsimp [energyAlong, energy, mechanical, coupling, forceAlong, force]
-  ring
+  · rfl
+  · dsimp [forceAlong, force]
+    ring
 
 /-- Energy loss is a derived consequence of the supplied equations. -/
 theorem energy_hasDerivAt (κ g ω₁ ω₂ c : ℝ) (z : Path) (t : ℝ)
@@ -197,26 +201,28 @@ def waveFlux (c qt qs : ℝ) : ℝ := -c^2*qt*qs
 theorem rightWave_time (c s t d : ℝ) (y : ℝ → ℝ)
     (hy : HasDerivAt y d (t-s/c)) :
     HasDerivAt (fun u => rightWave c y s u) d t := by
-  simpa [rightWave] using hy.comp t ((hasDerivAt_id t).sub_const (s/c))
+  convert hy.comp t ((hasDerivAt_id t).sub_const (s/c)) using 1 <;>
+    simp [rightWave, Function.comp_def]
 
 theorem leftWave_time (c s t d : ℝ) (y : ℝ → ℝ)
     (hy : HasDerivAt y d (t+s/c)) :
     HasDerivAt (fun u => leftWave c y s u) d t := by
-  simpa [leftWave] using hy.comp t ((hasDerivAt_id t).add_const (s/c))
+  convert hy.comp t ((hasDerivAt_id t).add_const (s/c)) using 1 <;>
+    simp [leftWave, Function.comp_def]
 
 theorem rightWave_space (c s t d : ℝ) (y : ℝ → ℝ)
     (hy : HasDerivAt y d (t-s/c)) :
     HasDerivAt (fun u => rightWave c y u t) (-d/c) s := by
   convert hy.comp s (((hasDerivAt_id s).div_const c).const_sub t) using 1
-  dsimp [rightWave]
-  ring
+  · rfl
+  · ring
 
 theorem leftWave_space (c s t d : ℝ) (y : ℝ → ℝ)
     (hy : HasDerivAt y d (t+s/c)) :
     HasDerivAt (fun u => leftWave c y u t) (d/c) s := by
   convert hy.comp s (((hasDerivAt_id s).div_const c).const_add t) using 1
-  dsimp [leftWave]
-  ring
+  · rfl
+  · ring
 
 theorem outgoing_density {c : ℝ} (hc : c ≠ 0) (w : ℝ) :
     waveDensity c w (-w/c) = w^2 ∧ waveDensity c w (w/c) = w^2 := by

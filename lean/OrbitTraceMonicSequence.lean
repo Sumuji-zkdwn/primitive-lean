@@ -24,7 +24,7 @@ theorem polynomial_moment_monic_degree
     ∀ k : ℕ, (M k).Monic ∧ (M k).degree = (k : WithBot ℕ) := by
   intro k
   induction k using Nat.strong_induction_on with
-  | h k ih =>
+  | ind k ih =>
       by_cases hk : k ≤ p
       · rw [hinit k hk]
         exact ⟨monic_X_pow k, degree_X_pow k⟩

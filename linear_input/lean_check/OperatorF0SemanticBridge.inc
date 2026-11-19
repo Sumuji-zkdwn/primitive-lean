@@ -141,19 +141,15 @@ theorem f0_descends_to_compatible {α ι : Type*}
     Compatible K step T :=
   (compatible_iff_f0_descends K step hK hs T).2 hT
 
-/-- Each descending update can be added as an independent primitive
-without refining the old prediction equivalence. -/
-theorem f0_safe_extension {α ι : Type*}
+/-- Adding a family of primitives preserves finite-word observational equivalence
+exactly when each new primitive descends through the idempotent readout. -/
+theorem f0_family_extension_iff_descends {α ι κ : Type*}
     (K : α → α) (step : ι → α → α)
-    (hK : Idempotent K) (hs : Respects K step)
-    (T : α → α) (hT : Descends K T)
-    (x y : α) :
-    WordEq K (LinearInputOperatorRefinement.sumStep step
-      (fun _ : Unit => T)) x y ↔ WordEq K step x y := by
-  exact ((LinearInputOperatorRefinement.extension_exact_iff_preserves K step
-    (fun _ : Unit => T)).2 (by
-      intro j a b hab
-      exact f0_descends_to_compatible K step hK hs T hT a b hab)) x y
+    (hK : Idempotent K) (hs : Respects K step) (fresh : κ → α → α) :
+    (∀ x y, WordEq K (LinearInputOperatorRefinement.sumStep step fresh) x y ↔
+      WordEq K step x y) ↔ ∀ j, Descends K (fresh j) :=
+  (LinearInputOperatorRefinement.extension_exact_iff_preserves K step fresh).trans
+    (forall_congr' fun j => compatible_iff_f0_descends K step hK hs (fresh j))
 
 /-- For a family of F0-descending updates, all extensions are safe. -/
 theorem f0_safe_family_extension {α ι κ : Type*}
@@ -163,11 +159,19 @@ theorem f0_safe_family_extension {α ι κ : Type*}
     (hT : ∀ j, Descends K (fresh j))
     (x y : α) :
     WordEq K (LinearInputOperatorRefinement.sumStep step fresh) x y ↔
-      WordEq K step x y := by
-  exact ((LinearInputOperatorRefinement.extension_exact_iff_preserves K step fresh).2
-    (by
-      intro j a b hab
-      exact f0_descends_to_compatible K step hK hs (fresh j) (hT j) a b hab)) x y
+      WordEq K step x y :=
+  (f0_family_extension_iff_descends K step hK hs fresh).2 hT x y
+
+/-- Each descending update can be added as an independent primitive
+without refining the old prediction equivalence. -/
+theorem f0_safe_extension {α ι : Type*}
+    (K : α → α) (step : ι → α → α)
+    (hK : Idempotent K) (hs : Respects K step)
+    (T : α → α) (hT : Descends K T)
+    (x y : α) :
+    WordEq K (LinearInputOperatorRefinement.sumStep step
+      (fun _ : Unit => T)) x y ↔ WordEq K step x y :=
+  f0_safe_family_extension K step hK hs (fun _ : Unit => T) (fun _ => hT) x y
 
 /-- Compatibility carries the old quotient into itself: it never
 splits a state class of the existing F0 observer. -/
@@ -187,23 +191,8 @@ theorem example_noncompatible :
       (fun _ : Unit => (fun x : Fin 3 => x))
       LinearInputF0Descent.exampleUpdate := by
   intro h
-  have hOld : WordEq LinearInputF0.exampleK
-      (fun _ : Unit => (fun x : Fin 3 => x)) 0 1 := by
-    intro word
-    have hrun : ∀ x : Fin 3,
-        run (fun _ : Unit => (fun x : Fin 3 => x)) word x = x := by
-      intro x
-      induction word with
-      | nil => rfl
-      | cons i tail ih =>
-          change run (fun _ : Unit => (fun x : Fin 3 => x)) tail x = x
-          exact ih
-    rw [hrun, hrun]
-    decide
-  have heq := word_now (h 0 1 hOld)
-  have hne :
-      LinearInputF0.exampleK (LinearInputF0Descent.exampleUpdate (0 : Fin 3)) ≠
-      LinearInputF0.exampleK (LinearInputF0Descent.exampleUpdate (1 : Fin 3)) := by decide
-  exact hne heq
+  exact LinearInputF0Descent.example_does_not_descend
+    (compatible_to_f0_descends LinearInputF0.exampleK (fun _ : Unit => id)
+      LinearInputF0.exampleK_idempotent (fun _ _ _ hxy => hxy) _ h)
 
 end LinearInputOperatorF0Bridge

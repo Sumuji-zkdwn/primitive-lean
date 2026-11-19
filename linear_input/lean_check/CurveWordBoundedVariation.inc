@@ -61,7 +61,7 @@ theorem variation_clock_continuousOn {E : Type*} [MetricSpace E]
     {a : ℝ} (ha : a ∈ s) : ContinuousOn (variationOnFromTo f s a) s := by
   intro x hx
   have hleft := hf.tendsto_eVariationOn_Icc_zero_left ((hc x hx).mono inter_subset_left)
-  have hright := hf.tendsto_eVariationOn_Icc_zero_right x ((hc x hx).mono inter_subset_left)
+  have hright := hf.tendsto_eVariationOn_Icc_zero_right ((hc x hx).mono inter_subset_left)
   have hleftR := (ENNReal.tendsto_toReal ENNReal.zero_ne_top).comp hleft
   have hrightR := (ENNReal.tendsto_toReal ENNReal.zero_ne_top).comp hright
   have hbound : ∀ᶠ y in 𝓝[s] x,
@@ -78,7 +78,7 @@ theorem variation_clock_continuousOn {E : Type*} [MetricSpace E]
       exact le_add_of_nonneg_right ENNReal.toReal_nonneg
   apply tendsto_iff_dist_tendsto_zero.mpr
   apply squeeze_zero' (Eventually.of_forall (fun _ => dist_nonneg)) hbound
-  simpa only [ENNReal.toReal_zero, zero_add] using hleftR.add hrightR
+  simpa only [ENNReal.toReal_zero, zero_add] using! hleftR.add hrightR
 
 def variationClock {E : Type*} [PseudoEMetricSpace E] (f : ℝ → E) (a b : ℝ) : ℝ → ℝ :=
   variationOnFromTo f (Icc a b) a
@@ -141,7 +141,7 @@ theorem variationParameter_continuous {E : Type*} [MetricSpace E]
     (hf : BoundedVariationOn f (Icc a b)) (hc : ContinuousOn f (Icc a b)) :
     Continuous (variationParameter hab hf) := by
   have hv := variation_clock_continuousOn hf hc (show a ∈ Icc a b from ⟨le_rfl, hab⟩)
-  exact hv.restrict.subtype_mk _
+  exact hv.domRestrict.subtype_mk _
 
 theorem variationParameter_surjective {E : Type*} [MetricSpace E]
     {f : ℝ → E} {a b : ℝ} (hab : a ≤ b)
@@ -184,9 +184,9 @@ theorem boundedVariationOn_of_continuous_derivative {E : Type*}
     [NormedAddCommGroup E] [NormedSpace ℝ E] {f f' : ℝ → E}
     {a b : ℝ} (hab : a ≤ b) (hd : ∀ t ∈ Icc a b, HasDerivAt f (f' t) t)
     (hc : ContinuousOn f' (Icc a b)) : BoundedVariationOn f (Icc a b) := by
-  obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image hc.nnnorm
+  obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image hc.nnNorm
   have hl : LipschitzOnWith C f (Icc a b) :=
-    (convex_Icc a b).lipschitzOnWith_of_nnnorm_hasDerivWithin_le
+    (convex_Icc a b).lipschitzOnWith_of_nnNorm_hasDerivWithin_le
       (fun t ht => (hd t ht).hasDerivWithinAt) (fun t ht => hC (mem_image_of_mem _ ht))
   simpa only [inter_self] using hl.locallyBoundedVariationOn a b ⟨le_rfl, hab⟩ ⟨hab, le_rfl⟩
 

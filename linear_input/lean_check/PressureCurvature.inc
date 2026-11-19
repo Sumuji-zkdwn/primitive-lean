@@ -32,7 +32,6 @@ theorem pressure_firstIntegral_hasDerivAt
   convert (((hκ.pow 2).const_mul k).div_const 2).sub
     (((hasDerivAt_const s lam).sub (hY.const_mul p)).mul ht.cos) |>.sub
       (((hasDerivAt_const s μ).add (hX.const_mul p)).mul ht.sin) using 1
-  dsimp only
   norm_num only [Nat.reduceSub, pow_one, Nat.cast_ofNat, Pi.sub_apply, Pi.add_apply]
   nlinarith [congrArg (fun q : ℝ => q * deriv θ s) hmoment]
 

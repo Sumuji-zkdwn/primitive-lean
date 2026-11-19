@@ -29,7 +29,8 @@ theorem hasDerivAt_modeValue (r : ℝ) (k : ℤ) (a : ℂ) (x : ℝ) :
   have hl := (((hasDerivAt_id x).const_mul (k : ℝ)).ofReal_comp.mul_const Complex.I).const_add
     (((-r * |(k : ℝ)| : ℝ) : ℂ))
   convert hl.cexp.mul_const a using 1
-  simp [modeValue, modeDerivative, mul_assoc, mul_comm, mul_left_comm]
+  · rfl
+  · simp [modeValue, modeDerivative, mul_assoc, mul_comm, mul_left_comm]
 
 theorem frequency_damping_le (δ r a : ℝ) (hδ : 0 < δ) (hr : δ ≤ r) (ha : 0 ≤ a) :
     a * Real.exp (-r * a) ≤ Real.exp (-1) / δ := by

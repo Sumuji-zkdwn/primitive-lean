@@ -170,7 +170,7 @@ theorem fixes_adjoin_parameter {m : ℕ} (ψ : E ≃ₐ[ℂ] E)
       ψ y = y := by
     intro y hy
     refine IntermediateField.adjoin_induction (F := ℂ)
-      (p := fun y _ => ψ y = y)
+      (motive := fun y _ => ψ y = y)
       (mem := ?_)
       (algebraMap := ?_)
       (add := ?_)
@@ -387,14 +387,14 @@ theorem rotationPower_add (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) (i j : ZMod (3 ^ k)) :
     rotationPower k ζ hζ (i + j) =
       rotationPower k ζ hζ i * rotationPower k ζ hζ j := by
-  letI : NeZero (3 ^ k) := ⟨by positivity⟩
+  let : NeZero (3 ^ k) := ⟨by positivity⟩
   exact zmodPower_add (rotation k ζ hζ) (rotation_pow_order k ζ hζ) i j
 
 theorem rotationPower_neg (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) (i : ZMod (3 ^ k)) :
     rotationPower k ζ hζ (-i) =
       (rotationPower k ζ hζ i)⁻¹ := by
-  letI : NeZero (3 ^ k) := ⟨by positivity⟩
+  let : NeZero (3 ^ k) := ⟨by positivity⟩
   exact zmodPower_neg (rotation k ζ hζ) (rotation_pow_order k ζ hζ) i
 
 /-- The reflection conjugates every indexed rotation to its inverse. -/
@@ -402,8 +402,8 @@ theorem reflection_conjugates_rotationPower (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) (i : ZMod (3 ^ k)) :
     reflection k * rotationPower k ζ hζ i * reflection k =
       rotationPower k ζ hζ (-i) := by
-  have hpow := conjugate_pow_of_involution
-    (reflection k) (rotation k ζ hζ) (reflection_sq k)
+  have hpow := conjugate_pow_of_involution (G := Aut k)
+    (reflection k) (rotation k ζ hζ) (by simpa only [pow_two] using reflection_sq k)
     (reflection_conjugates_rotation k ζ hζ) i.val
   calc
     reflection k * rotationPower k ζ hζ i * reflection k =
@@ -442,7 +442,7 @@ noncomputable def dihedralRepresentation (k : ℕ) (ζ : ℂ)
     | .r i => rotationPower k ζ hζ i
     | .sr i => reflection k * rotationPower k ζ hζ i
   map_one' := by
-    letI : NeZero (3 ^ k) := ⟨by positivity⟩
+    let : NeZero (3 ^ k) := ⟨by positivity⟩
     rw [DihedralGroup.one_def]
     change rotationPower k ζ hζ (0 : ZMod (3 ^ k)) = 1
     exact zmodPower_zero (rotation k ζ hζ)
@@ -524,14 +524,14 @@ theorem dihedralRepresentation_r_X (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) (i : ZMod (3 ^ k)) :
     dihedralRepresentation k ζ hζ (.r i) (RatFunc.X : E) =
       RatFunc.C (ζ ^ i.val) * (RatFunc.X : E) := by
-  letI : NeZero (3 ^ k) := ⟨by positivity⟩
+  let : NeZero (3 ^ k) := ⟨by positivity⟩
   simp [rotationPower, zmodPower, rotation_pow_apply_X]
 
 theorem dihedralRepresentation_sr_X (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) (i : ZMod (3 ^ k)) :
     dihedralRepresentation k ζ hζ (.sr i) (RatFunc.X : E) =
       RatFunc.C (ζ ^ i.val) * (RatFunc.X : E)⁻¹ := by
-  letI : NeZero (3 ^ k) := ⟨by positivity⟩
+  let : NeZero (3 ^ k) := ⟨by positivity⟩
   simp [dihedralRepresentation, AlgEquiv.mul_apply, rotationPower,
     zmodPower, rotation_pow_apply_X, reflection_X, map_mul]
 
@@ -565,7 +565,7 @@ families cannot collide. -/
 theorem dihedralRepresentation_injective (k : ℕ) (ζ : ℂ)
     (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     Function.Injective (dihedralRepresentation k ζ hζ) := by
-  letI : NeZero (3 ^ k) := ⟨by positivity⟩
+  let : NeZero (3 ^ k) := ⟨by positivity⟩
   intro a b hab
   have heval : (dihedralRepresentation k ζ hζ a) (RatFunc.X : E) =
       (dihedralRepresentation k ζ hζ b) (RatFunc.X : E) :=

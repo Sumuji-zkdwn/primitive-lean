@@ -26,7 +26,9 @@ theorem reverseIntegral_reparametrize {ι : Type*} {v : ι → ℝ → ℝ}
     have hd (t : ℝ) : HasDerivAt
         (fun t => reverseIntegral v (g a) (i :: w) (g t))
         (reverseIntegral v (g a) w (g t) * (g' t * v i (g t))) t := by
-      convert (reverseIntegral_hasDerivAt hv (g a) (g t) i w).comp t (hg t) using 1; ring
+      convert (reverseIntegral_hasDerivAt hv (g a) (g t) i w).comp t (hg t) using 1
+      · rfl
+      · ring
     have hc : Continuous (fun t => reverseIntegral v (g a) w (g t) * (g' t * v i (g t))) :=
       ((reverseIntegral_continuous hv (g a) w).comp hgc).mul (hg'.mul ((hv i).comp hgc))
     have hi := intervalIntegral.integral_eq_sub_of_hasDerivAt (fun t _ => hd t)
@@ -46,7 +48,7 @@ theorem signature_reverse_time {ι : Type*} {v : ι → ℝ → ℝ}
     (hv : ∀ i, Continuous (v i)) (a b : ℝ) (w : List ι) :
     signature (fun i t => -v i (a + b - t)) a b w = signature v b a w := by
   have hg (t : ℝ) : HasDerivAt (fun t => a + b - t) (-1) t := by
-    simpa using (hasDerivAt_const t (a + b)).sub (hasDerivAt_id t)
+    simpa using! (hasDerivAt_const t (a + b)).sub (hasDerivAt_id t)
   simpa only [neg_one_mul, add_sub_cancel_left, add_sub_cancel_right] using
     signature_reparametrize hv hg continuous_const a b w
 

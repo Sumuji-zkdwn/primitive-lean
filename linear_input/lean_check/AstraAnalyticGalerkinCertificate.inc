@@ -72,6 +72,8 @@ theorem magnetic_derivative_match (p : Data) (t : ℝ) :
   funext x
   exact (magneticDerivativeCircle_coe p (AnalyticClassical.timeAt p t) x).symm
 
+-- Preserve the public definition while retaining all proof and axiom checks.
+set_option linter.defProp false in
 /-- No PDE, tail, energy, or convergence assumption is supplied by the caller. -/
 def control (p : Data) : ClassicalTailControl p.T (AnalyticClassical.pair p)
     (initialCircleD p) (initialCircleH p) where

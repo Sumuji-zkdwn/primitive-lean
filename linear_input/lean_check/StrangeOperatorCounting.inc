@@ -77,7 +77,7 @@ noncomputable def mapsWithFixedSetEquivChoices {α : Type u} [Fintype α]
   · intro f
     funext x
     apply Subtype.ext
-    simp only [realizeChoices, dif_neg x.2]
+    simp only [realizeChoices, dite_eq_right x.2]
 
 private theorem card_nonself_choices {α : Type u} [Fintype α] (x : α) :
     Fintype.card {y : α // y ≠ x} = Fintype.card α - 1 := by
@@ -215,7 +215,7 @@ theorem close_singleton_map_count {α : Type u} [Fintype α]
         (Fintype.card α - (LinearInputF0Counting.fixedSet S).card) := by
   classical
   rw [LinearInputStrangeFixedSets.close_singleton_exact_fixed_set S hFixed hActive]
-  simp only [Set.mem_setOf_eq]
+  simp only [Set.mem_ofPred_eq]
   rw [Nat.card_congr (sameFixedSetMapsEquivFinset S)]
   exact fixed_set_map_count (LinearInputF0Counting.fixedSet S)
 
@@ -231,7 +231,7 @@ theorem close_singleton_idempotent_count {α : Type u} [Fintype α]
         (Fintype.card α - (LinearInputF0Counting.fixedSet S).card) := by
   classical
   rw [LinearInputStrangeFixedSets.close_singleton_exact_fixed_set S hFixed hActive]
-  simp only [Set.mem_setOf_eq]
+  simp only [Set.mem_ofPred_eq]
   rw [Nat.card_congr (sameFixedSetIdempotentsEquivFinset S)]
   exact fixed_set_idempotent_count (LinearInputF0Counting.fixedSet S)
 

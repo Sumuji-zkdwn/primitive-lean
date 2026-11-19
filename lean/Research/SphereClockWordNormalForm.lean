@@ -86,11 +86,11 @@ theorem wordAction_normal_form (H : AddSubgroup G)
                 (δ + wordRotation H rest).property p
           rw [ih]
           by_cases hb : wordFlipOdd H rest
-          · simp only [if_pos hb]
+          · simp only [ite_eq_left hb]
             rw [rotateSpace_flipSpace_commute]
             exact congrArg (flipSpace H)
               (rotateSpace_add_subtype H δ (wordRotation H rest) p)
-          · simp only [if_neg hb]
+          · simp only [ite_eq_right hb]
             exact rotateSpace_add_subtype H δ (wordRotation H rest) p
       | inr u =>
           change flipSpace H (wordAction H rest p) =

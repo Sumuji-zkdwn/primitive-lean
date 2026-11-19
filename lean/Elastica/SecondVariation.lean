@@ -55,7 +55,7 @@ theorem hasDerivAt_weighted_integral_variation {ε κ v w : ℝ → ℝ} {ℓ : 
     intro t _
     convert ((hεd (κ s + t * v s)).hasDerivAt.comp t
       (((hasDerivAt_id t).mul_const (v s)).const_add (κ s))).mul_const (w s) using 1
-    simp
+    all_goals first | rfl | ring
   have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le
     (Ioo_mem_nhds (by linarith : t₀ - 1 < t₀) (by linarith : t₀ < t₀ + 1))
     (Filter.Eventually.of_forall hmeas) hint hmeas' hbound

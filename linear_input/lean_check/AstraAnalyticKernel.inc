@@ -21,9 +21,10 @@ theorem kernel_integral (β ν t : ℝ) (hβ : 0 < β) :
       (ν * Real.exp (-β * (t - s) * ν)) s := by
     have h := ((((hasDerivAt_const s t).sub (hasDerivAt_id s)).const_mul (-β)).mul_const ν).exp
     convert h.const_mul β⁻¹ using 1
-    dsimp only [Pi.sub_apply, id_eq]
-    field_simp
-    ring
+    · rfl
+    · simp only [Pi.sub_apply, id_eq]
+      field_simp
+      ring
   have hc : Continuous (fun s : ℝ => ν * Real.exp (-β * (t - s) * ν)) := by fun_prop
   have hi := intervalIntegral.integral_eq_sub_of_hasDerivAt
     (fun s _ => hd s) (hc.intervalIntegrable 0 t)

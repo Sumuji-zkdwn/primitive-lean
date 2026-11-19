@@ -82,12 +82,15 @@ def binaryFreeEnergy (p β : ℝ) : ℝ := log (binaryPartition p β)
 
 theorem hasDerivAt_binaryPartition (p β : ℝ) :
     HasDerivAt (binaryPartition p) (p * exp β) β := by
-  simpa [binaryPartition] using
-    (hasDerivAt_const β (1 - p)).add ((Real.hasDerivAt_exp β).const_mul p)
+  convert (hasDerivAt_const β (1 - p)).add
+    ((Real.hasDerivAt_exp β).const_mul p) using 1
+  · rfl
+  · ring
 
 theorem hasDerivAt_binaryFreeEnergy {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :
     HasDerivAt (binaryFreeEnergy p) (binaryTilt p β) β := by
-  simpa [binaryFreeEnergy, binaryTilt] using
+  unfold binaryFreeEnergy binaryTilt
+  exact
     (hasDerivAt_binaryPartition p β).log (binary_partition_positive hp hp1 β).ne'
 
 theorem binary_tilt_between {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :
@@ -104,8 +107,9 @@ theorem hasDerivAt_binaryTilt {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :
   have hz := (binary_partition_positive hp hp1 β).ne'
   have h := ((Real.hasDerivAt_exp β).const_mul p).div (hasDerivAt_binaryPartition p β) hz
   convert h using 1
-  unfold binaryTilt
-  field_simp
+  · rfl
+  · unfold binaryTilt
+    field_simp
 
 theorem binary_free_energy_derivative {p : ℝ} (hp : 0 < p) (hp1 : p < 1) (β : ℝ) :
     deriv (binaryFreeEnergy p) β = binaryTilt p β :=

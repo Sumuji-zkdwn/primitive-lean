@@ -1,0 +1,50 @@
+name: WFS Möbius projective completion proof
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/mobius_430/**'
+      - 'tools/check_mobius_projective_completion.py'
+      - 'tools/verify_mobius_430.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'tools/verify.py'
+      - '.github/workflows/mobius-projective-completion.yml'
+  push:
+    branches: [main, chatgpt/mobius-projective-completion-20261112]
+    paths:
+      - 'experiments/mobius_430/**'
+      - 'tools/check_mobius_projective_completion.py'
+      - 'tools/verify_mobius_430.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'tools/verify.py'
+      - '.github/workflows/mobius-projective-completion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v5
+      - name: Reproduce rational finite checks
+        run: python -B -X utf8 tools/check_mobius_projective_completion.py
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: experiments/mobius_430
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile preserved modules and audit all owned theorems
+        run: python -B -X utf8 tools/verify_mobius_430.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobius-430-proof-audit
+          path: verification/mobius-430/

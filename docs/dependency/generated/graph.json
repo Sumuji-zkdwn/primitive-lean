@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+  "main_commit": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -257,7 +257,7 @@
         "Elastica.Stationary",
         "Mathlib.Analysis.Calculus.LocalExtr.Basic"
       ],
-      "sha256": "0f6fef7f9a1b625f1662e77d413c6797415ac35d09ba31b59fb914f04dd8b01d"
+      "sha256": "5e03d4a8b808d82a7d44c644cff350f3c0543cb9b63bec76d341c314b6aa8454"
     },
     {
       "id": "main:lean/Elastica/ConstraintRegularity.lean",
@@ -274,7 +274,7 @@
         "Elastica.Stationary",
         "Elastica.Reconstruction"
       ],
-      "sha256": "cbc7af0cb4815acda77a7d363f716c7da0df0987ec7f665d18cc26003f9808fe"
+      "sha256": "876339989dccd25d7216c1509883c88f420e9d451b593621a44f444353c37ef9"
     },
     {
       "id": "main:lean/Elastica/Derivation.lean",
@@ -325,7 +325,7 @@
         "Mathlib.Tactic.FunProp",
         "Mathlib.Tactic.NormNum"
       ],
-      "sha256": "588563ce3b56c21eebfcfb9df36e8ad5b0e052897e689b6f90f673e75f6419fa"
+      "sha256": "583b32533be459120ce32e81371cf99061e95af5a180e295dc5aeb1d6beb8118"
     },
     {
       "id": "main:lean/Elastica/ExactVariation.lean",
@@ -359,7 +359,7 @@
         "Mathlib.Analysis.Calculus.ImplicitContDiff",
         "Mathlib.Analysis.Calculus.ParametricIntervalIntegral"
       ],
-      "sha256": "76a8b04f8b8e05f4c876e5cd02968995e0b839cf1fff56fcdd46c62dd290cdbb"
+      "sha256": "c811eae6b912c6beb489795dd1b6dbbe6a6ec3d41c26a8ead48613a998532744"
     },
     {
       "id": "main:lean/Elastica/Examples.lean",
@@ -462,7 +462,7 @@
         "Mathlib.Tactic.Ring",
         "Mathlib.Tactic.Linarith"
       ],
-      "sha256": "5a7d021116a5ecc099f33f2cf4fbfc2189ff2b8053aa3065a10d4fcc4a1bdece"
+      "sha256": "d552dd7f1669c6f7d17f279532a9f8a1ca1658c34467642b576deb9e22627d05"
     },
     {
       "id": "main:lean/Elastica/LocalMinimum.lean",
@@ -535,7 +535,7 @@
         "Mathlib.Analysis.Calculus.Deriv.Slope",
         "Mathlib.Tactic.FieldSimp"
       ],
-      "sha256": "4c8cf9238a2752d78a3cde207f4aea97c8649259a5e3bca8baa70b02abe560da"
+      "sha256": "1e5e706d23c77bad9519c105589dd90ea798689d87e7bd47551b2943f2ada400"
     },
     {
       "id": "main:lean/Elastica/Reconstruction.lean",
@@ -559,7 +559,7 @@
         "Elastica.Variation",
         "Mathlib.Analysis.Calculus.MeanValue"
       ],
-      "sha256": "20e2c467cfabcad9e2d11669e75f2183b216a1effe090bcf58290a238d21a297"
+      "sha256": "214b91a4ce12285b27141a5fc1a4851cc08bb88db83fa18909e7aca346fbe41a"
     },
     {
       "id": "main:lean/Elastica/ReplacementConsequences.lean",
@@ -624,7 +624,7 @@
         "Mathlib.Analysis.SpecialFunctions.Pow.Real",
         "Mathlib.Tactic.FieldSimp"
       ],
-      "sha256": "b7c8078c62baf4e297d40db237dff1d71ec4245fc4f8cc812d4432735de254b8"
+      "sha256": "36ad906653f47e5a715daa22bcbf476ff03046375f47a48228c99be538be6763"
     },
     {
       "id": "main:lean/Elastica/ScalingMinima.lean",
@@ -665,7 +665,7 @@
         "Mathlib.Tactic.Ring",
         "Mathlib.Tactic.Linarith"
       ],
-      "sha256": "2b592aedc1f4ec119196ac6a4ad04ff2376a3521d5f1276c014946d3b60bfcbf"
+      "sha256": "fecfe0a5b9e9e8c33e34c29ae81bfb8f0559f15fa73aa1c506bad65132186228"
     },
     {
       "id": "main:lean/Elastica/Stationary.lean",
@@ -728,7 +728,7 @@
         "Elastica.SecondVariation",
         "Mathlib.Tactic.FunProp"
       ],
-      "sha256": "93cd7f280bb2f9bf28727dcc6fc474496f8f37e8db09b2cd04a995e32c0af66e"
+      "sha256": "acf28fb8147192ad916ce74e24da746b3466c67fe23d70b5aae84faa54a8800f"
     },
     {
       "id": "main:lean/Elastica/Variation.lean",
@@ -753,7 +753,7 @@
         "Mathlib.Tactic.NormNum",
         "Mathlib.Tactic.Convert"
       ],
-      "sha256": "0816fa64e6d6b63c4cb8faa13114586f06a17928d2b948738e68c08276263e5f"
+      "sha256": "68064afc3e05d890fca2540e4a34479ed8757b0b866980816017669ee1b266a9"
     },
     {
       "id": "main:lean/Elastica/WeightResponse.lean",
@@ -777,7 +777,7 @@
         "Elastica.PowerLogResponse",
         "Mathlib.Analysis.Calculus.Deriv.MeanValue"
       ],
-      "sha256": "10e2084516c9e98d1b3f12feed1b0cd56c4dc9780056e3a0284fa9623f8ec60d"
+      "sha256": "265d964c768ba9f6ce3d4bd7d4f06d406722b3ce68a2e53bf29a3ab3cf56a245"
     },
     {
       "id": "main:lean/FluidPrismPhaseMemory.lean",
@@ -910,7 +910,7 @@
       "imports": [
         "OrbitTraceMonicSequence"
       ],
-      "sha256": "ba0deedfde9d843cf6a736e7f89a36be21fe429a680603dfa47e42d0f09dc396"
+      "sha256": "d9fae58a23aeabf29b2b8495efaf30a2d1d6de4877a2ea2f23f19ac014550964"
     },
     {
       "id": "main:lean/OrbitTraceFastNilpotence.lean",
@@ -925,7 +925,7 @@
       "imports": [
         "OrbitTraceFiltration"
       ],
-      "sha256": "256150323648905715f48fc8ca60187b1750135c2cf8075a275ccb3016fa9720"
+      "sha256": "3715fb3e746492b1e9bf614f1de68a4e06831bac78e1e3950dfdc581e5e5f51c"
     },
     {
       "id": "main:lean/OrbitTraceFiltration.lean",
@@ -944,7 +944,7 @@
         "OrbitTraceTransferOperator",
         "OrbitTraceNilpotence"
       ],
-      "sha256": "214d3d38e89404e47854720c6b6bf80349c1dbb7483a761b33ecbd5ff08a900d"
+      "sha256": "29059f3ee92efd65878adc4da1addd994cae1e897a803bebcacf0c303153e2c1"
     },
     {
       "id": "main:lean/OrbitTraceFirstShell.lean",
@@ -973,7 +973,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "3b535240237ed85f687c349ba95307477e911e10712875be51487ec1a7f2828b"
+      "sha256": "41dd0a51d3e4752d0dfe73f94ef05dad70307ccdd2741a92e401885bcb12e696"
     },
     {
       "id": "main:lean/OrbitTraceJordan3.lean",
@@ -1012,7 +1012,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "c9ec0deeb59c4dddb66fae7b0564d7f369c969cf9c50b52ad4fe2d4b32f65064"
+      "sha256": "0f2f12e5dae31bc1c90e85fbb8cd6172c30614af43a8c46f7152f9fc4edd0ce5"
     },
     {
       "id": "main:lean/OrbitTraceJordanUniform3.lean",
@@ -1049,7 +1049,7 @@
       "imports": [
         "OrbitTraceDegreeGap"
       ],
-      "sha256": "be32ee9012dccd3ac04eaba6781ddb4922b66c161494d550f8923724c41aadeb"
+      "sha256": "4735fcb4c7cfeda2f59cf88115089b7bce1899f3f5e75873488058d07dbe63c2"
     },
     {
       "id": "main:lean/OrbitTraceMoment.lean",
@@ -1096,7 +1096,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "c27aba043934705937f09ec2e5068bf53bbf8161d16118d42a15322a871dca19"
+      "sha256": "3eeed1b2cb651f69a8f452f807448a7bbe4c6f6e705a643a73fb66594e706707"
     },
     {
       "id": "main:lean/OrbitTraceNilpotence.lean",
@@ -1113,7 +1113,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "92f44e7892a792be6f321f8d2b66cc4117aab4c3530a9dae6fc46eed3a782fe7"
+      "sha256": "44cb4774affbb50b40c08813c8a179dc2adee5fa9eab30f64b8b813b6ddc1188"
     },
     {
       "id": "main:lean/OrbitTraceRootRecurrence.lean",
@@ -1135,7 +1135,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "73bb6c6eecf78019bff6750f409cb9e6bd0591e2651d22fc1886945f18522aac"
+      "sha256": "9a85f171496c040ea8b0a75579a9905619a47562664b672b705a58f091e3bc1a"
     },
     {
       "id": "main:lean/OrbitTraceSpecialization.lean",
@@ -1517,6 +1517,60 @@
       "sha256": "066c1dc7eb94627c92c2901242da914f73a23c582dc0348dd21565ac214e116d"
     },
     {
+      "id": "main:lean/Research/ChairPieKillSpot.lean",
+      "scope": "main",
+      "path": "lean/Research/ChairPieKillSpot.lean",
+      "group": "Other",
+      "namespace": "Elastica.ChairPieKillSpot",
+      "declarations": [
+        "Allowed",
+        "run",
+        "RevenuePossible",
+        "allowed_mono",
+        "revenue_mono",
+        "MinimalEnabler",
+        "exists_minimal_success",
+        "minimal_enabler_exists_iff",
+        "Blocks",
+        "blocks_iff_hits_minimal",
+        "MinimalBlocker",
+        "minimal_blocker_exists_of_no_free_success",
+        "minimal_blocker_iff_minimal_hitting",
+        "revenue_blocks_iff",
+        "SharedBuyer",
+        "shared_buyer_mono",
+        "two_chairs_without_buyer",
+        "shared_buyer_killspot"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "a35052f64b383b9bd5111d315e45ad1b7a121c35ad5ceabee95cd9334cc0bdf4"
+    },
+    {
+      "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
+      "scope": "main",
+      "path": "lean/Research/ElasticaIntrinsicHeight.lean",
+      "group": "Other",
+      "namespace": "Elastica",
+      "declarations": [
+        "intrinsicTangent",
+        "intrinsicHeight",
+        "hasDerivAt_intrinsicHeight",
+        "deriv_intrinsicHeight",
+        "deriv_intrinsicHeight_self",
+        "intrinsicHeight_second_deriv_eq_curvature",
+        "curvature_from_intrinsicHeight",
+        "same_intrinsicHeight_implies_same_curvature",
+        "intrinsicHeight_compose"
+      ],
+      "imports": [
+        "Elastica.Geometry",
+        "Mathlib.Tactic.Ring"
+      ],
+      "sha256": "217cc930e8110a690b0dabdf2234d5ef65a01b711afef228eab973dec1ef4672"
+    },
+    {
       "id": "main:lean/Research/ElasticaObservationQuotient.lean",
       "scope": "main",
       "path": "lean/Research/ElasticaObservationQuotient.lean",
@@ -1607,7 +1661,7 @@
         "Mathlib.Tactic",
         "Research.OkanoharaTransport"
       ],
-      "sha256": "dfae3b6c58fcd69fc37bf53e4b2508039899d3db89cd0c95976a5bee53697d47"
+      "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -1716,6 +1770,135 @@
       "sha256": "1123f02c0c5ce5e212ad4db0fcf80065dd99d02bd268c8f7ad08a6559b6acbb6"
     },
     {
+      "id": "main:lean/Research/OperationalWorldGeneration.lean",
+      "scope": "main",
+      "path": "lean/Research/OperationalWorldGeneration.lean",
+      "group": "Other",
+      "namespace": "OperationalWorldGeneration",
+      "declarations": [
+        "State",
+        "signature",
+        "mirror",
+        "mirror_invariant",
+        "mirror_involutive",
+        "mirror_commutes",
+        "position_iterate",
+        "signature_of_two_reads",
+        "passive_iff_signature",
+        "signature_eq_iff_mirror",
+        "signature_range",
+        "recover_elapsed",
+        "recover_elapsed_from_reads",
+        "zero_fibre_fixed",
+        "halfTurn",
+        "halfTurn_reverses_step",
+        "Move",
+        "run",
+        "run_append",
+        "run_advances",
+        "WordEq",
+        "signature_advance",
+        "signature_halfTurn",
+        "halfTurn_wordEq_iff",
+        "two_reads_recover",
+        "linear_wordEq_iff",
+        "mirror_separated_after_one_turn",
+        "integer_word",
+        "integer_word_open_strip"
+      ],
+      "imports": [
+        "Research.SiphonPolynomialE",
+        "OrbitTrace"
+      ],
+      "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
+    },
+    {
+      "id": "main:lean/Research/SignedCycleCounterexample.lean",
+      "scope": "main",
+      "path": "lean/Research/SignedCycleCounterexample.lean",
+      "group": "Other",
+      "namespace": "SquareZeroNetwork.SignedCycle",
+      "declarations": [
+        "edgeSum",
+        "A",
+        "A2",
+        "edgeSum_eq_A_mulVec",
+        "edges_square_zero",
+        "square_eq",
+        "square_ne_zero",
+        "cube_eq_zero",
+        "support",
+        "support_iff",
+        "two_directed_cycles",
+        "signed_cycle_counterexample"
+      ],
+      "imports": [
+        "Research.SquareZeroNetwork",
+        "Mathlib.Data.Matrix.Mul",
+        "Mathlib.LinearAlgebra.Matrix.Notation"
+      ],
+      "sha256": "6ce68cb64f1806647936917ecf811f4210d3650e8fc2b904531ad22d158879a5"
+    },
+    {
+      "id": "main:lean/Research/SiphonCommonInvariant.lean",
+      "scope": "main",
+      "path": "lean/Research/SiphonCommonInvariant.lean",
+      "group": "Other",
+      "namespace": "SiphonCommonInvariant",
+      "declarations": [
+        "readPoly",
+        "curvePolynomial",
+        "fibre",
+        "constant_of_samples",
+        "fill_regular_fibre",
+        "outgoing_invariant_strictAnti",
+        "polynomial_zero_of_regular_orbit",
+        "zero_fibre_regular_after_turn",
+        "polynomial_zero_of_nonzero_orbit",
+        "one_turn_insufficient_on_zero_fibre",
+        "polynomial_eq_of_agree_on_orbit",
+        "common_polynomial_eq_C"
+      ],
+      "imports": [
+        "Research.OperationalWorldGeneration"
+      ],
+      "sha256": "e9aad86d36093e46889d25ff44a92eb6e518079b7225de7b3ae8db2da3277a28"
+    },
+    {
+      "id": "main:lean/Research/SiphonFiniteDetermination.lean",
+      "scope": "main",
+      "path": "lean/Research/SiphonFiniteDetermination.lean",
+      "group": "Other",
+      "namespace": "SiphonFiniteDetermination",
+      "declarations": [
+        "readPoly",
+        "pathPoly",
+        "pathPoly_eval",
+        "pathPoly_natDegree_le",
+        "fibre",
+        "fibre_degree",
+        "transverse_degree",
+        "outgoing_strictAnti",
+        "regular_after_turn",
+        "regularSeed",
+        "regularSeed_regular",
+        "outgoing",
+        "sample",
+        "outgoing_injective",
+        "select_curves",
+        "fill_fibre_finite",
+        "polynomial_zero_of_selected",
+        "polynomial_zero_of_rectangle",
+        "polynomial_eq_of_rectangle",
+        "exists_finite_determining_set"
+      ],
+      "imports": [
+        "Research.SiphonPolynomialE",
+        "OrbitTrace"
+      ],
+      "sha256": "d7fc006763a4f3b8545ee37b79f113d33455e1858ed91634420b9dc3efff4694"
+    },
+    {
       "id": "main:lean/Research/SiphonInteraction.lean",
       "scope": "main",
       "path": "lean/Research/SiphonInteraction.lean",
@@ -1765,7 +1948,42 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "37c71861a769b3d6970b0ebbe0a51fb24ebf2b6290ccc1e7240f081a188db217"
+      "sha256": "bd1f9d17bb346818bf2ad8ec0e8439e6779fa142741f2116ae8f0b1a2ed6e928"
+    },
+    {
+      "id": "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "scope": "main",
+      "path": "lean/Research/SiphonPredictiveQuotient.lean",
+      "group": "Other",
+      "namespace": "Elastica.SiphonPredictiveQuotient",
+      "declarations": [
+        "State",
+        "K",
+        "oldStep",
+        "freshStep",
+        "signature",
+        "signatureStep",
+        "readout_E",
+        "invariant_fresh",
+        "readout_fresh_E",
+        "signature_E",
+        "signature_run_congr",
+        "old_obs_iff_signature",
+        "extended_obs_iff_eq",
+        "extended_encode_injective",
+        "mirror",
+        "invariant_mirror",
+        "signature_mirror",
+        "mirror_involutive",
+        "mirror_ne_of_invariant_nonzero",
+        "old_cannot_see_mirror",
+        "nonzero_mirror_quotient_split"
+      ],
+      "imports": [
+        "Research.SiphonPolynomialE",
+        "Research.ElasticaObservationQuotient"
+      ],
+      "sha256": "b81eb3e075900ccdc23f80f8b9c70cd8e23e7aaafd5efab26aae8265ddb9a005"
     },
     {
       "id": "main:lean/Research/SphereClock.lean",
@@ -1845,7 +2063,7 @@
         "Mathlib.NumberTheory.Real.Irrational",
         "Mathlib.Tactic"
       ],
-      "sha256": "54df9be6fcbf87e447e507dd9f8ffabe9af7f92afb2610466878a57ce7e63a69"
+      "sha256": "3ddeea9bac08a3acc0ee4249c645809452e7d1463291c8fac77a7541a08c8979"
     },
     {
       "id": "main:lean/Research/SphereClockWordNormalForm.lean",
@@ -1869,7 +2087,7 @@
       "imports": [
         "Research.SphereClockRationalGluing"
       ],
-      "sha256": "e5ec61b8c08512ac30d84f115fbcbdc46a77615f7ae0c78960d8b4fb94ee2f2b"
+      "sha256": "b2083a6b41bfe26557a9bb00a5cb062b0fca4edd683ac1bfbd3c6710e1b8d4bf"
     },
     {
       "id": "main:lean/Research/SphereClockWordObservability.lean",
@@ -1892,6 +2110,86 @@
         "Research.SphereClockWordNormalForm"
       ],
       "sha256": "f87463a6e512145a0d1f6a8b7a31f472564e0edc0252f2fcb67a669bb4ce7f48"
+    },
+    {
+      "id": "main:lean/Research/SquareZeroNetwork.lean",
+      "scope": "main",
+      "path": "lean/Research/SquareZeroNetwork.lean",
+      "group": "Other",
+      "namespace": "SquareZeroNetwork",
+      "declarations": [
+        "Vec",
+        "edge",
+        "edge_square_zero",
+        "edge_comp_match",
+        "edge_comp_mismatch",
+        "cycle2",
+        "source2",
+        "cycle2_closed",
+        "alternating_two_step_gain",
+        "edgeSum3",
+        "scatter3",
+        "scatter3_eq_edges",
+        "mass3",
+        "scatter3_mass",
+        "iterateScatter3",
+        "iterate_mass",
+        "source3",
+        "iterate_symmetry",
+        "scatter3_difference",
+        "iterate_difference",
+        "endpoint_profile"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "0c8cbcd5a8749cea7d787e1710ad1558c7e8f66fa61700696c936f60ab95f68a"
+    },
+    {
+      "id": "main:lean/Research/VoidHyperCompletion.lean",
+      "scope": "main",
+      "path": "lean/Research/VoidHyperCompletion.lean",
+      "group": "Other",
+      "namespace": "VoidHyperCompletion",
+      "declarations": [
+        "setProd",
+        "setProd_assoc",
+        "saturate",
+        "subset_saturate",
+        "saturate_idempotent",
+        "hyperProd",
+        "hyper_assoc_iff_saturation",
+        "hyper_assoc_of_saturated_products",
+        "finiteProd",
+        "fiber",
+        "finiteHyper",
+        "finiteLift",
+        "nilMul",
+        "nilObs",
+        "nilMul_assoc",
+        "nilHyper",
+        "nilHyper_correct",
+        "nilHyper_nonassociative",
+        "add5",
+        "cyclicObs",
+        "add5_assoc",
+        "cyclicHyper_associative_on_labels",
+        "cyclicExactTriple",
+        "cyclicApproxTriple",
+        "cyclic_exact_triple",
+        "cyclic_approx_triple",
+        "cyclic_spurious_observation",
+        "exactUpdate",
+        "abstractUpdate",
+        "ForwardComplete",
+        "forwardComplete_iff_saturation",
+        "forwardComplete_iff_all_words",
+        "shifts_separate_subsets"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "30bdbb4d01f72f2643edb072c5517e2940571760fe57521b61d09099ed50cc03"
     },
     {
       "id": "main:lean/SelfRewritingObserver.lean",
@@ -1933,7 +2231,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "86168ee4cfd2cb733c44b791dbb2c9f0120e7b2fde2dfa81caa4cbe62a947101"
+      "sha256": "4cfe8a712b6118b5697800c90526a43769a941aaeeacbe7e567f397829ca11cb"
     },
     {
       "id": "main:lean/SelfRewritingObserverExtensions.lean",
@@ -1974,7 +2272,7 @@
       "imports": [
         "SelfRewritingObserver"
       ],
-      "sha256": "d6ebb2770af782538a344ea2ea53223e8991387b451d60ce8e3da018808bbe1a"
+      "sha256": "8010e071ae7e3e0eb0e685a805aca478574828328effba84c7d94cb3ce2be9fc"
     },
     {
       "id": "main:lean/ThreeBallCollision.lean",
@@ -2080,7 +2378,7 @@
       "imports": [
         "Mathlib"
       ],
-      "sha256": "db76822f339dc279c66f3d971ef81e6ebc74a26ecb797b316e3f930072288c97"
+      "sha256": "6181d3f1e93c8382950a69d9a89651e4167069bf447a724eabae4856b79b7e3e"
     },
     {
       "id": "main:lean/TwoMotionEmissionConsequences.lean",
@@ -2107,7 +2405,7 @@
       "imports": [
         "TwoMotionEmission"
       ],
-      "sha256": "0bf04784266ee4295899eae13dcc19e14048e6f5743f6aa72a88b89d1d5a498e"
+      "sha256": "4f127bb2a85a7fb1aa0d566c9f8364caad88aed6d015802bc0668acc1cab756a"
     },
     {
       "id": "main:lean/TwoMotionEmissionIVP.lean",
@@ -2260,7 +2558,7 @@
       "imports": [
         "Elastica.ExactVariation"
       ],
-      "sha256": "3c51bc3a0dd811b8f6c7ae0f0ce7c75aca9f7704a5852db6c89bbd7d76c8f1e9"
+      "sha256": "2d30f682bafe67106ca5defddaf1bd9b2d9f24f3207cd2e9f269f693da62d0a7"
     },
     {
       "id": "main:linear_input/lean_check/AreaFamily.inc",
@@ -2276,7 +2574,7 @@
       "imports": [
         "Elastica"
       ],
-      "sha256": "2ce60a18660fd4c4118d66edde22aca3b8f1e63264de44d396039fe658649160"
+      "sha256": "93492d4b242a35ad26f4678a250111c3be8613cc1eba64fe0f616cfd04c4bd72"
     },
     {
       "id": "main:linear_input/lean_check/AreaMinimum.inc",
@@ -2326,7 +2624,7 @@
         "Elastica.ExactVariation",
         "Mathlib.Analysis.Calculus.FDeriv.Mul"
       ],
-      "sha256": "e23141b25aa88c8c7f9f4075327b317e28813aee3a652c07c4f0dfdfea36978b"
+      "sha256": "6b1f7c1e6f908030fc6b2f4676bce1dda470d197be7fb0ba20b6e708c30e471b"
     },
     {
       "id": "main:linear_input/lean_check/AreaRegularity.inc",
@@ -2396,7 +2694,7 @@
         "collision_requires_nonempty_observation"
       ],
       "imports": [],
-      "sha256": "b46404e503674bce0e9929d0be17c403387bb36a27558a412bf93ddb593d4620"
+      "sha256": "605c6d7de977c574e2a73255bababa5b2dee82a1a56d4be7286eb5d3f09b075a"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticAssembly.inc",
@@ -2425,7 +2723,7 @@
         "iteration_error_le"
       ],
       "imports": [],
-      "sha256": "d43baa709281ca71d74f4928aebbf6000a8d62e03f17b68a96bf70fd2226b065"
+      "sha256": "e4ad61c8522df2da0a7950c6e34be87a8861c7ba631309830364984bdbb967fc"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticClassical.inc",
@@ -2585,7 +2883,7 @@
         "fields_spatial_derivatives"
       ],
       "imports": [],
-      "sha256": "4c62e86e20def08a6239ff79b1c47590a97ca2d61e2c37e83cda1eb59a90625e"
+      "sha256": "3ed404866f34ee21f2a25e270d5b25a7c299df320fe883d871792151e2ece4fb"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticFixedPoint.inc",
@@ -2604,7 +2902,7 @@
         "exists_outer_fixedpoint"
       ],
       "imports": [],
-      "sha256": "0c60f2fc4b7ea32a3a34b75150a46cf7ef82cbf3931c7c20d47c03e2ada2dcd1"
+      "sha256": "861484aa3acb6a6fa5f34d0c72b7ef480e4703a6bf12a739c1a420f367c0c1ef"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticFourierDuhamel.inc",
@@ -2628,7 +2926,7 @@
         "duhamel_apply"
       ],
       "imports": [],
-      "sha256": "67246b3abaaba7985f0ae463b17607956e294592272ef1a4856400b373238a28"
+      "sha256": "2ed06c4dbbf319e5e8efccbf6ab02970f2ef39c2bf710edfef215109be7efd67"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticGalerkinCertificate.inc",
@@ -2655,7 +2953,7 @@
         "finiteFormula_tendstoUniformlyOn"
       ],
       "imports": [],
-      "sha256": "9dbf6b277a73595954f5a7092b584b0f31e60027e2bd05a909a60c0423ec71cb"
+      "sha256": "fbfd383eb1c1aaa19c552d7cb3ecca8d3938992a4b6abbf5e08be78a9a1d866d"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticInitial.inc",
@@ -2718,7 +3016,7 @@
         "convolution_weight_le"
       ],
       "imports": [],
-      "sha256": "be5130675a6df6291653449c7940dc724b11424e38ec7608c7dda2030a83a9b4"
+      "sha256": "dcd716dc6328d9eeae57404a860fbb4ff34aeabe8332fc1a2b74068809b6e702"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticLift.inc",
@@ -2753,7 +3051,7 @@
         "displacement_opNorm_le"
       ],
       "imports": [],
-      "sha256": "204f2f7350ff3ff02dbcc44a8c334930afa7cd1c72db93f47bb92c58c6be9c04"
+      "sha256": "ff1cda48d377f7597d4aa060f2a8cebeab1910fdb156bd8163c28cc5519dee0f"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticLpMap.inc",
@@ -2798,7 +3096,7 @@
         "rawOsc_hasDerivAt"
       ],
       "imports": [],
-      "sha256": "89c7230330562a266737d32dd05146f1ee21c5e18fa3e47e2ea4bf3b0fa0279a"
+      "sha256": "5c23d4b2e340d1e5e13c8372bab4f0823463b7d8c37e5fbb2c6864db5e593805"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticPDE.inc",
@@ -2837,7 +3135,7 @@
         "maxwell_equations"
       ],
       "imports": [],
-      "sha256": "414f05a46e2057c033536201eeefa909c5c248c47a8580e80c235892b0b1f5e7"
+      "sha256": "b2c92006186f946a303f1ceb9d3ff8388039f229419c42aaf2eff16874cd8af8"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticPhysicalMode.inc",
@@ -2858,7 +3156,7 @@
         "weightedTrace_eq"
       ],
       "imports": [],
-      "sha256": "381ac8ae9c8e31cb1235dd5b6b839f1b96444fda8f3eec9851bd881cf3866771"
+      "sha256": "7c34a9adc1427cadbd87bc221c53a929d361163826b73664c9cf15e946cd5cd1"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticReality.inc",
@@ -2891,7 +3189,7 @@
         "mildSolution_hermitian"
       ],
       "imports": [],
-      "sha256": "20c32b4fffcc95d30930897858b8a610b827cb52fd7548523ade5367313af6e3"
+      "sha256": "0a9cb3936cb8f7eab4c4ee8dc058ad641a03ab752adb3c58c12b09d56991bd80"
     },
     {
       "id": "main:linear_input/lean_check/AstraAnalyticTails.inc",
@@ -2983,7 +3281,7 @@
         "realExtension_hasDerivAt"
       ],
       "imports": [],
-      "sha256": "4e1b5faf032ad403c583b8ef620e5778aa474da4570e5a3a9b57596d1845f8db"
+      "sha256": "16b73e11a7a397d9008cd45428284a98dcde1ed04fe06494a749e8ffba44e638"
     },
     {
       "id": "main:linear_input/lean_check/AstraCircleProjection.inc",
@@ -3063,7 +3361,7 @@
         "projection_residual_pairing"
       ],
       "imports": [],
-      "sha256": "3e8b304c9b869fc0ffca85ebab2e9d0844a7c05e2be899002847685bed910b55"
+      "sha256": "55654f8df28770d2ddabc9f5b97a829ddf2b306437d6fea3e35126db0ceee230"
     },
     {
       "id": "main:linear_input/lean_check/AstraContinuumFourier.inc",
@@ -3143,7 +3441,7 @@
         "mixed_certificate"
       ],
       "imports": [],
-      "sha256": "787e414e6718b3b7edfc434ed6b60136161bbfeb17a90d5f5adc7c7758cd4de7"
+      "sha256": "93247b7102183e320407fcb8070829726860b335d753937e9c48fcd6eb8d9ac8"
     },
     {
       "id": "main:linear_input/lean_check/AstraContinuumRelative.inc",
@@ -3170,7 +3468,7 @@
         "energy_hasDerivAt_projection"
       ],
       "imports": [],
-      "sha256": "6240d139c72e288edbcf074c0c6ae402a65baa5e9588f9878fb88504e19aef6c"
+      "sha256": "5bae7cd1c7e31136715674c78c40c1142b92182945e4996560f8dc78f3c0f90c"
     },
     {
       "id": "main:linear_input/lean_check/AstraDynamicsBoundary.inc",
@@ -3225,7 +3523,7 @@
         "lieStep_not_exact_at_nonzero_residual"
       ],
       "imports": [],
-      "sha256": "5a9add60683f3f4b68c89576afd16d6e805b4169617a797baccff7f6fe6e6662"
+      "sha256": "51a2065298cef83b2f60542ad55f32b9dddfe3b5c318e214825834c567f566e4"
     },
     {
       "id": "main:linear_input/lean_check/AstraExplicitAnalyticInput.inc",
@@ -3298,7 +3596,7 @@
         "displacement_sum_hasDerivAt_zero"
       ],
       "imports": [],
-      "sha256": "f9b6dd3f56d95e59e7d999e8f536f8c2e14cce5baff06afa53c2037d7959e198"
+      "sha256": "6ee32c2fe05bde06a9e6d6002bf1068a6d868129afe7b5e4e9b9b7822872459b"
     },
     {
       "id": "main:linear_input/lean_check/AstraFiniteFlow.inc",
@@ -3360,7 +3658,7 @@
         "restored_iterate_tendsto_flow"
       ],
       "imports": [],
-      "sha256": "ce141d5d9e3713e23c1608c04e4a05be2b092b87100c6e65ebf9fc57abdce2a4"
+      "sha256": "f03e2025cdc445fe57d115ee6ed8dab008006f31646f108ec158c21acbc80eab"
     },
     {
       "id": "main:linear_input/lean_check/AstraFiniteRepresentativeCalculus.inc",
@@ -3390,7 +3688,7 @@
         "lift_time_hasDerivAt"
       ],
       "imports": [],
-      "sha256": "0d9958e36c834a3549ce1446d68bf321ed350813b3a77924e16d65cd80324735"
+      "sha256": "353ec4b727da11f35d61d99cefbf74f96980777aab1efc5eb396207d8d889fb0"
     },
     {
       "id": "main:linear_input/lean_check/AstraFiniteRepresentatives.inc",
@@ -3455,7 +3753,7 @@
         "hasDerivAt_polynomial"
       ],
       "imports": [],
-      "sha256": "add27799f5f44afcc6a98e633f7b69d7bba88e3d066177ccfa6e682c93a0cbc6"
+      "sha256": "20868c947f193d8ff75663e122772527602f932ceed1312557d407ee5c29d902"
     },
     {
       "id": "main:linear_input/lean_check/AstraFourierProjection.inc",
@@ -3486,7 +3784,7 @@
         "projection_tendsto"
       ],
       "imports": [],
-      "sha256": "99904017798c931f97cfb3ab30a1011692df4a0dacb724427a558925e946e879"
+      "sha256": "e7feac6fbd811d5ab72d78eba4000e2beee83d271ab1c75d8e645c86d2c1a272"
     },
     {
       "id": "main:linear_input/lean_check/AstraFourierSupBounds.inc",
@@ -3541,7 +3839,7 @@
         "electric_endpoint"
       ],
       "imports": [],
-      "sha256": "7aca8935f087081acbcdfeb6d4369f78805f293ef15b051be35d1bc2f4ba2102"
+      "sha256": "a67ce946e184768428dac3a6c645f65752c4ba11dbcf91791bd7653d5a69dba3"
     },
     {
       "id": "main:linear_input/lean_check/AstraGalerkinFlow.inc",
@@ -3577,7 +3875,7 @@
         "evaluated_error_le"
       ],
       "imports": [],
-      "sha256": "b5c301bee1b0d6fb8160e28e6265de4b1f77446447082a9bee7c3c99a1524bc5"
+      "sha256": "0b21bbe1eecfcbcf65632f767d375943cdfef4649aca2bb9baccc963f02636d9"
     },
     {
       "id": "main:linear_input/lean_check/AstraGalerkinGronwall.inc",
@@ -3620,7 +3918,7 @@
         "exists_rate_bound"
       ],
       "imports": [],
-      "sha256": "2425cdc590be033d16041f6ea48efb8069e9b908c8a708f89d030c4a7e9793a0"
+      "sha256": "0415c2c520341bfa99a22573970fee57a360330fc5ac7b9b06146bfc423e1aff"
     },
     {
       "id": "main:linear_input/lean_check/AstraGalerkinRelative.inc",
@@ -3667,7 +3965,7 @@
         "lieStep_flow_error_le"
       ],
       "imports": [],
-      "sha256": "236547bc5bed9e46dbecccd7eda24a35bc276d6dd1a1a3445b277f127ffd9aca"
+      "sha256": "71307b4016ee5f56253ca9d17ded1eae11ad7b27e39e40bdfb13beeeb35e0d00"
     },
     {
       "id": "main:linear_input/lean_check/AstraHilbertFlow.inc",
@@ -3703,7 +4001,7 @@
         "flow_norm_le"
       ],
       "imports": [],
-      "sha256": "685a9193c47d25c43c9c14fafd6ed5e60807eca605560cb87d6be7e67ca95202"
+      "sha256": "fd89a10937fefd252c150123358aa34bf5c4cd292876febb107701c6b36a338d"
     },
     {
       "id": "main:linear_input/lean_check/AstraHilbertIteration.inc",
@@ -3797,7 +4095,7 @@
         "initial_tail_budget"
       ],
       "imports": [],
-      "sha256": "10a58f4ceb926edae3c7a53c5ac509feac5fa354c6247d2ed8cf929d29674804"
+      "sha256": "670499a694ad3921cc08adf9de0d96b00cdeea105a2598e0cd39e1d5e3efe85c"
     },
     {
       "id": "main:linear_input/lean_check/AstraIntervalFourier.inc",
@@ -3825,7 +4123,7 @@
         "projection_derivative_commutes"
       ],
       "imports": [],
-      "sha256": "39ba941d462d3063e76f5301357a2addf7aceb05f0d650f6b80a89b6989325e9"
+      "sha256": "996f647323c8f1951853f9a21a471ed1ce8719e986471d8f418ac4ff8f9ec657"
     },
     {
       "id": "main:linear_input/lean_check/AstraIntervalFourierProjection.inc",
@@ -3857,7 +4155,7 @@
         "projection_residual_zero"
       ],
       "imports": [],
-      "sha256": "44ed0faa606aa538b4f1b7209d227469d27b24287d25a8fcf04e1d0efc53304b"
+      "sha256": "6c0e755ad1859bdbebc35d8e2c22e661c5fa78e5c97b47a7ed255450918f424e"
     },
     {
       "id": "main:linear_input/lean_check/AstraIterationBound.inc",
@@ -3894,7 +4192,7 @@
         "joint_approximation_tendsto"
       ],
       "imports": [],
-      "sha256": "acaa02ebcff313bea0bc1ca488eccf22bd26e99a251dcb22d7555900fadd699e"
+      "sha256": "a2f9de5969ca37170f1ccb01ca9ef086c5b9115a48da9566b313e2c6a6bb4169"
     },
     {
       "id": "main:linear_input/lean_check/AstraKoopmanDescent.inc",
@@ -3953,7 +4251,7 @@
         "scaled_eigenfunction_pullback_iterate"
       ],
       "imports": [],
-      "sha256": "ff5f060d64f6a4a64ac6601e1c20d38a4ba14411a100a9fca120488ca807e9be"
+      "sha256": "ceac984bcbd31d17120c113ec062f0d7c3c0eb12331b11a9fe474e8616196ad5"
     },
     {
       "id": "main:linear_input/lean_check/AstraPolynomialInverse.inc",
@@ -3992,7 +4290,7 @@
         "nonlinearOnBall_lipschitz"
       ],
       "imports": [],
-      "sha256": "7d72ccbd7dbe14dbb53e25914bd4505e5632d3f35b7897127e53eb29b051c100"
+      "sha256": "a89b16a0646cf4fd4e4ca6715e05e5603bcf3dad08a681af730da605f11b43d1"
     },
     {
       "id": "main:linear_input/lean_check/AstraRealFourierDerivative.inc",
@@ -4034,7 +4332,7 @@
         "finiteDerivative_operator_norm_le"
       ],
       "imports": [],
-      "sha256": "471c7f83cfd867a15a606567b5e9c8bfc44b20ca62ae54f0cb739717b8648ae4"
+      "sha256": "9b476ce23b27b2db67da4b16297d3c5b1a4c1322a9eb07456a389d60b26f7eab"
     },
     {
       "id": "main:linear_input/lean_check/AstraRealFourierProjection.inc",
@@ -4056,7 +4354,7 @@
         "projection_uniformOn_compact"
       ],
       "imports": [],
-      "sha256": "e674267e029465b12efc5802b67433f8f284e9bb369b5556a2adfd97fa1ad660"
+      "sha256": "0d80c04037cc9da80d8c53bfa21102992d1f66f328fa52522345ffa141880661"
     },
     {
       "id": "main:linear_input/lean_check/AstraRealGalerkin.inc",
@@ -4087,7 +4385,7 @@
         "projectedMaterial_zero"
       ],
       "imports": [],
-      "sha256": "a513e9497244a8e879ca997058050fbd553197ab8f54e61c06865ab2cfbb413b"
+      "sha256": "3defe31f622a714adc9c49def2d4b99ce1c3b92e3946b3d9fa6057fb44fdf7f0"
     },
     {
       "id": "main:linear_input/lean_check/AstraReconstruction.inc",
@@ -4125,7 +4423,7 @@
         "no_bounded_magnetic_encoder"
       ],
       "imports": [],
-      "sha256": "1dc05a8c995ac116ee8ae6d7e41eeb55c637e6951bcf8d93b9bf17aa8fc9d927"
+      "sha256": "1902b0c667ab1f0389ccb157a1b73efae2e38c66008229681b5a811aeeca701f"
     },
     {
       "id": "main:linear_input/lean_check/AstraRelativeDynamics.inc",
@@ -4155,7 +4453,7 @@
         "relativeEnergy_le_exp"
       ],
       "imports": [],
-      "sha256": "8a4b52d12329349cb8603b84d49089d0cfb329ae16c662d8c881031e17d081ac"
+      "sha256": "a3de3895cbff7de7da6030466241865d4f7c6c47ea8da8648575d552d139250e"
     },
     {
       "id": "main:linear_input/lean_check/AstraRelativeEnergy.inc",
@@ -4198,7 +4496,7 @@
         "small_profile_deadlines"
       ],
       "imports": [],
-      "sha256": "716421d68cb38393668db574790e032308a5a3d1357218fb1424809af755fddd"
+      "sha256": "10661fe17cb4a1bd8303204aec7d29642e4194fbb365981bfed2eb2bff3c7dc3"
     },
     {
       "id": "main:linear_input/lean_check/AstraStoppingCertificate.inc",
@@ -4343,7 +4641,7 @@
         "fourierDecode_apply"
       ],
       "imports": [],
-      "sha256": "c6261358657f75dd34e9838c1b5132ff3be27c9cc47d0d029866e89ac4dac526"
+      "sha256": "96daebb78707fe1dfda2a4c5eae1a55105ee3ee627087761ce2c7363b6d3a832"
     },
     {
       "id": "main:linear_input/lean_check/AstraWeightedRealDecode.inc",
@@ -4373,7 +4671,7 @@
         "realDerivative_norm_le"
       ],
       "imports": [],
-      "sha256": "1881b2038f950da73b81e2ff80c0653a5e16a8e465b35e5a263ab031a60bc70c"
+      "sha256": "325b73d1efe79f2fb23d0b876366e0cc3d9f80400829d67b95f6ad51cfd124ea"
     },
     {
       "id": "main:linear_input/lean_check/AstraWeightedReality.inc",
@@ -4395,7 +4693,7 @@
         "Hermitian.product"
       ],
       "imports": [],
-      "sha256": "c6859eb20927b8ba09d7ae346a8a04091f8b9989491c099fe673c679a8382246"
+      "sha256": "ff85fac821cefa38540b525e252b244b38adcd318192e88476d67cf5e85f3fd1"
     },
     {
       "id": "main:linear_input/lean_check/AtomicGeneratorClassification.inc",
@@ -4556,7 +4854,7 @@
         "critical_candidate_collision"
       ],
       "imports": [],
-      "sha256": "35630d8d6f7d65d16a5d81e35d5e8924be43b6a61f8ffe0593a5aa7b559b313a"
+      "sha256": "721eea173d1fd320b5fddae96f9d1fd89ecca3356454f0c8c5689764783d1903"
     },
     {
       "id": "main:linear_input/lean_check/BranchForgetting.inc",
@@ -4606,7 +4904,52 @@
         "Mathlib.Tactic.Positivity",
         "Mathlib.Tactic.NormNum"
       ],
-      "sha256": "6adc1633283e928968d877db17ca58b647cf913d2ee68f41043e77a3fecc629a"
+      "sha256": "51122d391cf9c09ee1f25b59b89a99f064787dc06b751302670e468a30974bb6"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChairInternalGeneration.inc",
+      "group": "Other",
+      "namespace": "Elastica.ChairInternalGeneration",
+      "declarations": [
+        "Gate",
+        "Internal",
+        "State",
+        "initial",
+        "goal",
+        "oldStep",
+        "newStep",
+        "oldInv",
+        "old_stable",
+        "old_possible_iff",
+        "newInv",
+        "new_stable",
+        "new_possible_iff",
+        "same_permissions_separate",
+        "no_external_success",
+        "chair_not_simulated",
+        "chair_strict_gain",
+        "chair_retains_old",
+        "chair_simulated_when_chair_available"
+      ],
+      "imports": [],
+      "sha256": "bccbd723fb2e6e473be9e4b51128eee7ea39656903ce4463e33ce5b48e350232"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChairProjectionExport.inc",
+      "group": "Other",
+      "namespace": "Elastica.ChairInternalGeneration.Export",
+      "declarations": [
+        "encode",
+        "oldActions",
+        "newActions",
+        "printTransitions"
+      ],
+      "imports": [],
+      "sha256": "872a3a1fa4fa60fd33bcc259689da26140965db1394b87cd2d2e0a625d7455cc"
     },
     {
       "id": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
@@ -4704,7 +5047,21 @@
         "dihedralRepresentation_injective"
       ],
       "imports": [],
-      "sha256": "18b44f0106e407358498c87a4aaefcd443954835d80eac54ccc566e1205b4b98"
+      "sha256": "303890a80f7be3623b98ac2de60c910711ee921f52a0e689d4c06fe38edd9e33"
+    },
+    {
+      "id": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "group": "Arithmetic / Galois",
+      "namespace": "LinearInputChebyshevGaloisCompletion",
+      "declarations": [
+        "dihedralRepresentation_surjective",
+        "dihedralModelEquiv",
+        "dihedralSplittingFieldEquiv"
+      ],
+      "imports": [],
+      "sha256": "acead4cd2153353e5ed94b62d1ca8eeac99956a747cd80c1d7683a11f1b73710"
     },
     {
       "id": "main:linear_input/lean_check/ChebyshevRatFuncDegrees.inc",
@@ -4753,7 +5110,7 @@
         "actualSplittingFieldEquiv"
       ],
       "imports": [],
-      "sha256": "5bee36fce9a721ce50effcb3568c131d8029861099af9e309c1510b83c6b970f"
+      "sha256": "2d353ff71828222a2ebbe9f111915217df1d3831bf466764faf6c14388c69ecd"
     },
     {
       "id": "main:linear_input/lean_check/Coercivity.inc",
@@ -4792,7 +5149,7 @@
         "Mathlib.Analysis.ODE.PicardLindelof",
         "Mathlib.Topology.Compactness.Compact"
       ],
-      "sha256": "ee81e16d1c8b7e7583c37a5dc1c525205894be20c9e526da7f4967b1ad5a7fab"
+      "sha256": "11ed615b24f112c0f2b35329b83450a92e366aa9d9d9ffe16a72e5e56dc195f3"
     },
     {
       "id": "main:linear_input/lean_check/ComplementaryObservationExamples.inc",
@@ -4983,7 +5340,7 @@
         "Mathlib.Analysis.Normed.Group.Bounded",
         "Mathlib.Topology.Order.Compact"
       ],
-      "sha256": "e575924d3694a4cabaecde04a9f31266ed4a640e5d01c6ef1843de804653f70a"
+      "sha256": "2862160fd805cd2b16f9fa145a9f3992e11d667d1c12cf8da5b1fb68e2458604"
     },
     {
       "id": "main:linear_input/lean_check/CrossSystemObservation.inc",
@@ -5204,7 +5561,7 @@
         "letter_matches_integer_step"
       ],
       "imports": [],
-      "sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60"
+      "sha256": "f08edf6dd7648e613a6d2b9c5bfefea2de9053587de564cdeb92bcf5dc258800"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordArcGenerating.inc",
@@ -5229,7 +5586,7 @@
         "arc_endpoint_cost_series_rational"
       ],
       "imports": [],
-      "sha256": "2ce39ed55d4563acb3f47f5465c60ba6533d3c47f4e30e9dd8815b989013658b"
+      "sha256": "4ac888aafa51dc60ca2a27c3060d88e5009707d322980e94ed7a0928e46aeeb2"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVAlgebra.inc",
@@ -5300,7 +5657,7 @@
         "injective_lipSignature_ranges_eq"
       ],
       "imports": [],
-      "sha256": "fd5e0df19a0d955a2649513a9d3d9cd1e2bcc20d9bbd1491e04928c0ed93a21a"
+      "sha256": "7ea87dc11e88de71093c6ca17988a8774bdd10c193213535acccfec19ce79cf1"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVCanonical.inc",
@@ -5345,7 +5702,7 @@
         "arcLength_signature_factorization"
       ],
       "imports": [],
-      "sha256": "91511adf72ac392eba0f66f623f303b493ab85f3d136a7fd727f3fd72fa1feca"
+      "sha256": "079be58e489ba433557f973b8dcce23a79fbd0f3c81d989fabae9265c0f032b5"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVChen.inc",
@@ -5361,7 +5718,7 @@
         "stieltjesSignature_chen"
       ],
       "imports": [],
-      "sha256": "762b4500cf9d316a3bfd84299a6deeb4633fb66379ea45abf5bc109c5ca9cc62"
+      "sha256": "bf045939f82274bc3c99fd49cdf522db934cb39399332d690089933ebe04715a"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVCompactness.inc",
@@ -5398,7 +5755,7 @@
         "prefixSignature_eq_pathSignature"
       ],
       "imports": [],
-      "sha256": "44d31f274f9c04ae875e4018b6d7e0451d10b65a6c2617ea527f407d1fea7bad"
+      "sha256": "58de982a541ca33c2a950428a5231f42fe2c9107ddb0355e7134ff44afe4cac2"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVCoordinates.inc",
@@ -5417,7 +5774,7 @@
         "finiteDimensionalSignature_eq_unit_iff"
       ],
       "imports": [],
-      "sha256": "a1894e4bb2ab8a0acf62d3305fd33c4552ad38d3db1d0bb51def45581af88776"
+      "sha256": "941821eb1a5f9523c3ff3071fba88cd60161a23c22ada003051ad5ed74c7bccb"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVEquivalence.inc",
@@ -5477,7 +5834,7 @@
         "treeLike_iff_pathSignature_eq_unit"
       ],
       "imports": [],
-      "sha256": "1950339aa39218755811bdf885f748f4b65f87ebd16da020338abc931eb1cc2c"
+      "sha256": "5e6a91014ab91e3bb3908855807804a7a546d8f304e89ec53ec89690e23bd0da"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVIntrinsic.inc",
@@ -5614,7 +5971,7 @@
         "shortestRoute_variation"
       ],
       "imports": [],
-      "sha256": "bdf294af0c8cdd4b3bfe95caf9002c3a22c6793e636b3a2088afe408d669227a"
+      "sha256": "7168bb257bc4d139f197ef50f1b97b34a4659aa695c8e49e46b58eb8ee4fcc39"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
@@ -5681,7 +6038,7 @@
         "exists_shorter_representative"
       ],
       "imports": [],
-      "sha256": "0d11b32a522309f58273ff4cc655c2009af18052dbeed5d1c58d11b0dcdb4c76"
+      "sha256": "2eb0a3035e2f8cfed75c8d9f07041f2bd93e7af9fabacebbcf98ca109fd14cb5"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVOrientation.inc",
@@ -5694,7 +6051,7 @@
         "pathSignature_oriented_reparametrize"
       ],
       "imports": [],
-      "sha256": "9060480c6470082d744b29d06bc62fc6bee49df5888544bab8512f1a1aa1207c"
+      "sha256": "a0c7d02a74ef93804bfc76588fd92e111b64600550dfb6c29bcb9efd4b5fbfe7"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVPathOperations.inc",
@@ -5752,7 +6109,7 @@
         "same_signature_of_treeLike_join_reverse"
       ],
       "imports": [],
-      "sha256": "a32d3dd682609a97c2746f7624f0f6a61bb42a3664ef4b0b13c44bfae4f66014"
+      "sha256": "781b1d8a06560d554af40b580ca88bff923df900340fd5906b6774f172a435e5"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVReduced.inc",
@@ -5777,7 +6134,7 @@
         "exists_reduced_in_actual_signature_image"
       ],
       "imports": [],
-      "sha256": "7af51157159054980f780ee230aafcbc8a659f7c7ae7993d630f3904fcbb58ae"
+      "sha256": "99e15e8feafcbe3aa0bf8d37458c9e7f3505d4984ec4888417194d5c68c5a0c3"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVReparam.inc",
@@ -5808,7 +6165,7 @@
         "stieltjesSignature_interval_reparam"
       ],
       "imports": [],
-      "sha256": "968b310cefe103155b89c9676d0426c8f2fb1193ee2be21d84885d7ddd3a9858"
+      "sha256": "65a690fc81e751f720f1faad0f6320555230b7ae0cee6ba4e08b6c1de369d732"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
@@ -5829,7 +6186,7 @@
         "stieltjesSignature_shuffle"
       ],
       "imports": [],
-      "sha256": "dfeb7156a1a2df8d63bdc3a2d3f20428e2596bf0672f78e76936a5d3473ff607"
+      "sha256": "7df983bf267eb990b8b6d5a313f7b93b672d131916c7d7ce92df07009184337a"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVSignature.inc",
@@ -5850,7 +6207,7 @@
         "stieltjesSignature_independent"
       ],
       "imports": [],
-      "sha256": "b3f2b79d9af09ecdbb965573b618c9656ae8d330610747c9386c29cd1f00d505"
+      "sha256": "b1c004d4f71c84545f07bcd90a058d055fe0caf9e8b1158191487c911ce8737c"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
@@ -5876,7 +6233,7 @@
         "pathSignature_exists_proper_trivial_subinterval"
       ],
       "imports": [],
-      "sha256": "b403ed17632f0f1c3b406764fd3223fd84e4b46a1613fd4089937b12843f8104"
+      "sha256": "2452382e3fc8bc1f7e5f003ffb7603871fbb707906ab564e6f6348b96d062752"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBVTopology.inc",
@@ -5905,7 +6262,7 @@
         "continuous_one_form_zero_of_trivial_signature"
       ],
       "imports": [],
-      "sha256": "51eff4b2b634d0551d0f2c8442c39a82d87d173e05c58e78b61635fd722af197"
+      "sha256": "a0272372cb8be0dca2ea5176add6c414f582739c11c2828c49d182489328b179"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordBoundedVariation.inc",
@@ -5943,7 +6300,7 @@
         "constantExtension_continuous"
       ],
       "imports": [],
-      "sha256": "2f1efa023de0fb4451503b7f4a75ad9c6d0ddfb201ea4444525aabec74e2d793"
+      "sha256": "520caee94eb26ebd433accb089d44d5231bfabef198b9625cda4976345e0658f"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordChen.inc",
@@ -5967,7 +6324,7 @@
         "chronologicalShuffles_word_length"
       ],
       "imports": [],
-      "sha256": "b916f789273625cc3945a78026b97de7ad7eb56d196790798c14ca58c2795f06"
+      "sha256": "e95ad251a22dd12f2e35f3372246b43d8678692ef9619a43ac8e1aa2a664eee0"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordCircleWords.inc",
@@ -6031,7 +6388,7 @@
         "actual_curve_collision"
       ],
       "imports": [],
-      "sha256": "a2d009f7c006dc9975b9b4c03bb93115570eb4f05308ec8097e64c1923c02f86"
+      "sha256": "594043ba13ac3498da7487e0e017592cecceec878b4a10f118ea3cfb8dc51736"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordCircularMoment.inc",
@@ -6080,7 +6437,7 @@
         "equal_area_distinct_moments"
       ],
       "imports": [],
-      "sha256": "91c66412d17309390c952a95d99a7b0bd044664b2a374b9d31f50f9d09e470a0"
+      "sha256": "3c4a11aa8460cd4d8732c07a6f05c966a87929a7b92fdde60fb2008aa196523a"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordConvexObservation.inc",
@@ -6184,7 +6541,7 @@
         "bch_primitive"
       ],
       "imports": [],
-      "sha256": "fef28191c26b130453e8c15bb748821d0310685a3fe9521f0074959c8c68b809"
+      "sha256": "5d514ed53339acc6c84275edf1c5703cdacb69c075381d1f3fdc3946a366f299"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordCycleLimit.inc",
@@ -6250,7 +6607,7 @@
         "optimum_average_tendsto"
       ],
       "imports": [],
-      "sha256": "445ac49f6187a5c455888969fad99a6b25549cfb51d0381ee9b1080f1baec456"
+      "sha256": "74566f796d5d289f593709d324630587530789ab0d76b21565dd10e2b316e5dc"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordFinite.inc",
@@ -6412,7 +6769,7 @@
         "signature_logarithm_chen"
       ],
       "imports": [],
-      "sha256": "6c5b5e02b8f1b33defcc5d289de59506db49276e3228b7f8feb292c70c9c29eb"
+      "sha256": "2e3619373d95c79cdd14ca7c601a1c7c92e7f4aadd94ed7856b135cb9877960c"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordFriedrichs.inc",
@@ -6478,7 +6835,7 @@
         "bch_completed_lie"
       ],
       "imports": [],
-      "sha256": "7f036b4c8a9d5371f97d19513c5238cb27ef23b5828d2772545fdd9af52249f9"
+      "sha256": "5e6a7c80d8af4fdd66e2e4d5b23cdabe1326fafa56632a186e2629812dab4e2b"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordGenerating.inc",
@@ -6501,7 +6858,7 @@
         "row_generating_function_rational"
       ],
       "imports": [],
-      "sha256": "465cf8b11d1c8018fe0c5a61e9b084d830ba30184109a26a3c44f64588f49c37"
+      "sha256": "c1956801dc7a5bbebb37ef92abb9b4fcb4b8352a81574821f308ac09b3ce4d04"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordGeodesicTree.inc",
@@ -6563,7 +6920,7 @@
         "exhaustive_average_tendsto"
       ],
       "imports": [],
-      "sha256": "023a1fff0eed60635e15b8e7b11d6aec7b57436f995a373526b34a6a2f2109a5"
+      "sha256": "665ff2dc86240cac205d8fa4ccd356131b561a000064e3ab5c2f17d9bcc80165"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordHeightMetric.inc",
@@ -6609,7 +6966,7 @@
         "height_metric_factorization"
       ],
       "imports": [],
-      "sha256": "aa92c23ed32592c27bb9ae409e28483ea06626ee953b2442c7bdf921fd9cdd1a"
+      "sha256": "11bcb120e400aaea10fe9019c90b8d3e4bef33b2c857658ca5d80984ff2a71bb"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordLaplace.inc",
@@ -6633,7 +6990,7 @@
         "endpointMeasure_eq_of_partition_eq"
       ],
       "imports": [],
-      "sha256": "4569a18082b885b1c1acc8efbfd0848486ded6bfea528d0823e2897f081dd6ce"
+      "sha256": "9bb258b18871d07c811def047e92fc9a35730fe9d1e1cf2545300c2a4fe8340e"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordLinearAction.inc",
@@ -6660,7 +7017,7 @@
         "signature_rotation_chen"
       ],
       "imports": [],
-      "sha256": "8f6dbea53ed71e76e18d6d0a610bbed4f80047b1afd97e6df8f5f239589519a6"
+      "sha256": "6a463752377115ee361bc71a6667a76036ff9c0a3a48ab5d54f7b41b0e449051"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordLogFormula.inc",
@@ -6689,7 +7046,7 @@
         "signature_formalLog_completed_lie"
       ],
       "imports": [],
-      "sha256": "07f83ed56ccacd0a07279d832ea4dcf873566d9d877ef121ef3c5e2a5dd9aa84"
+      "sha256": "2644ef231f1577fef1dac56103e17ff3f84d896fd20474eb22e815611bf1f625"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordPiecewise.inc",
@@ -6770,7 +7127,7 @@
         "six_word_actual_areas_distinct"
       ],
       "imports": [],
-      "sha256": "ddc09dffcd3bd34ecd1c92677280415074e900da7636c2c02d709d5ffc11a09c"
+      "sha256": "e91204f1e9602c7b1e86c40bd03a3987b4db9ecf35d8817fa3f7712a17d5d503"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordPolygonal.inc",
@@ -6834,7 +7191,7 @@
         "interpolateProduct_tendsto_of_mesh"
       ],
       "imports": [],
-      "sha256": "a38873c6f640db5603883fd3ed14aab562840cd232e5243431178f2a2984be7f"
+      "sha256": "a3cf39a0c91eb152772a47f19c3e0c69d3da306c1b4ec26b638c442a8aa3c232"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordRealization.inc",
@@ -6896,7 +7253,7 @@
         "signature_closed_reparametrize"
       ],
       "imports": [],
-      "sha256": "8c7fa363b697cc6d30f0f718a9cebd44c3ed8f579bd042259af6e7304425cd84"
+      "sha256": "8726ca551032e1f4f97f746cbb59ac1161f177bfa2c7f5aec1fbe764b24f6174"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordSamplingOrder.inc",
@@ -6936,7 +7293,7 @@
         "coeff_exp_real"
       ],
       "imports": [],
-      "sha256": "fe1a2d520c4f95d4160d2a6f26819395f75bef086df0783783b2d5d62403f19d"
+      "sha256": "044edf00142a908ba9eebe075413db7db258970f69c3926e15010e4dc58c6d39"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordSignature.inc",
@@ -7004,7 +7361,7 @@
         "bv_signature_factorial_bound"
       ],
       "imports": [],
-      "sha256": "dad3fa7bfbcbb5ba6da6fcec6eb918b035e0c48b42a94115e16203c6b5f4e964"
+      "sha256": "2a49177d64e3c0b4bc753be754dd07d62af92af7f749c33ebbd2014a5960ce9c"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordSignatureTopology.inc",
@@ -7039,7 +7396,7 @@
         "continuous_one_form_zero_of_trivial_signature"
       ],
       "imports": [],
-      "sha256": "41e0bbd5f192d9c1d2d0fa2ba2c278ecea274591e8df259cdf883eac33930b8f"
+      "sha256": "607212307d62d8b942eec31dee225a93e901829ebbe08fe0cdfe678d0de3e595"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordSignatureTree.inc",
@@ -7061,7 +7418,7 @@
         "lipschitz_factor_loop_treeLike"
       ],
       "imports": [],
-      "sha256": "ee1eab1e53775c467ad2f870bdb01a66c99d4b24417da216d987fc31c292de07"
+      "sha256": "8ac39a194403ea68cf112bc8a17565c08633c15887b80679c22b1d7f8432320f"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordSignatureUniform.inc",
@@ -7117,7 +7474,7 @@
         "freeEnergy_row_tendsto"
       ],
       "imports": [],
-      "sha256": "c1abe088a4bd0bc3546e3f994569e5403995625152fa909c686087b15bd98248"
+      "sha256": "7fdf9f08040a8709a64d15b6bf11beedfaf3a37269f56c4eba39a06b2515f357"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordStieltjes.inc",
@@ -7162,7 +7519,7 @@
         "compact_bv_stieltjes_representation"
       ],
       "imports": [],
-      "sha256": "a1800eb35cb2f2d38697d4ba2edeabd4a39e4217ae0022545e706f1d7f7d9b20"
+      "sha256": "e5b2b684fbcb99ac7a767f0eb77a57e616d4a6d7a396010597282c781791b06c"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordThermodynamics.inc",
@@ -7194,7 +7551,7 @@
         "multiplicity_from_common_cost_mass"
       ],
       "imports": [],
-      "sha256": "ade0a0d6532bdc626361b551bb35adbf32d9d18ebad1c3f07e5e7275262d7c49"
+      "sha256": "ed21c8c0d2c92c0d2e98313396adf41f881a37898587cdcaf87dba3cf6ab1f14"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordTransfer.inc",
@@ -7225,7 +7582,7 @@
         "spectralFreeEnergy_zero_temperature"
       ],
       "imports": [],
-      "sha256": "4b5c8fb3d6fa70207e43bb0eeea3c9c2121e926f858111acb7d4db24dbf3c79b"
+      "sha256": "29f83ec2052084bc1adc85dbabb92461c9d8d3f708833f97c9278dc9daaca6dc"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordTreeLike.inc",
@@ -7287,7 +7644,7 @@
         "exists_unit_signature_sampling"
       ],
       "imports": [],
-      "sha256": "f7b3f39060edc7622a569243a244f3276c033bef66891c143f6b23d9fcef255d"
+      "sha256": "0057c2fe19774fbbcb9a25fe82ce9fe0034520fd32961350987d105b56e5c51e"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordTreeSampling.inc",
@@ -7337,7 +7694,7 @@
         "exists_height_sampling"
       ],
       "imports": [],
-      "sha256": "8a45f983ede5d9952630822422c28abfbfa3fc7e69f590bb4ce39fe959f13c95"
+      "sha256": "b8b0800c5ea7d460dfbaf0228c9886798a882948986a153f9ad3efc5aac1121e"
     },
     {
       "id": "main:linear_input/lean_check/CurveWordTreeSignature.inc",
@@ -7481,7 +7838,7 @@
         "generator_collision"
       ],
       "imports": [],
-      "sha256": "f953488cd473b2d6732dd8659d606673de79486a59f61f82dcf8b05359488eb0"
+      "sha256": "1b42b9814fb54840972e4d9d11caebd9de6c9795365bf139d908395c289af2fe"
     },
     {
       "id": "main:linear_input/lean_check/Design.lean",
@@ -7506,13 +7863,13 @@
         "position_error"
       ],
       "imports": [
-        "Mathlib.Data.Real.Sqrt",
+        "Mathlib.Analysis.Real.Sqrt",
         "Mathlib.Tactic.Ring",
         "Mathlib.Tactic.Linarith",
         "Mathlib.Tactic.Positivity",
         "Mathlib.Tactic.FieldSimp"
       ],
-      "sha256": "e8ce22c9c6fadd68aeb9b33a9f7cf828ab58e9b5e8fc5f1b4494f5763f0cf549"
+      "sha256": "d8b91da37eed29f562ef1e6ce35eaf5cc2e841c1639da94ffa5b6fddd9538a45"
     },
     {
       "id": "main:linear_input/lean_check/Dissipation.lean",
@@ -7530,12 +7887,12 @@
         "Mathlib.Analysis.Calculus.Deriv.MeanValue",
         "Mathlib.Analysis.Calculus.Deriv.Pow",
         "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
-        "Mathlib.Data.Real.Sqrt",
+        "Mathlib.Analysis.Real.Sqrt",
         "Mathlib.Tactic.Ring",
         "Mathlib.Tactic.Linarith",
         "Mathlib.Tactic.Positivity"
       ],
-      "sha256": "2f98fe11dd728aa08038a1d3e01a9440ba83049b6dd4d3d1561a3dd140aac8e8"
+      "sha256": "50208b1f0b6c12ef5e093ea21a39fec76b503ac6c4d4dd052649a17b330f604c"
     },
     {
       "id": "main:linear_input/lean_check/EWFSFenchel.inc",
@@ -7635,7 +7992,7 @@
       "imports": [
         "ElasticaFixedBoundaryWitness"
       ],
-      "sha256": "4a75d4f72d44b5c97c77b1868103e6e159814c3b97cc99c3695a61b406dae510"
+      "sha256": "ec917f20ca4b69706dc102d4d4f0da681d3ba7429569a52720f1eb32b4d1d998"
     },
     {
       "id": "main:linear_input/lean_check/ElasticaDependencyAudit.lean",
@@ -7741,7 +8098,7 @@
       "imports": [
         "ElasticaOperatorTheory"
       ],
-      "sha256": "eec0c71828bd908b9cfeee7df4bad3e98db933ee9ce04594cd6f1ac0fcb91997"
+      "sha256": "dad1b2c58ac808253dfe59fd15f60fb0bfc07bd67592e908075a3a14a076f1c9"
     },
     {
       "id": "main:linear_input/lean_check/ElasticaOperatorBridge.inc",
@@ -7872,7 +8229,7 @@
         "eight_point_idempotents"
       ],
       "imports": [],
-      "sha256": "fa8d45beeca6b7df13024d377254bcad9c8622cd07d70236f3d478b89dc5df60"
+      "sha256": "b776b5d72327030a616c540a54dc46d22ebe76c96a4a0e554b7c78c630044e73"
     },
     {
       "id": "main:linear_input/lean_check/F0FutureMinimality.inc",
@@ -8009,7 +8366,7 @@
         "eventually_periodic"
       ],
       "imports": [],
-      "sha256": "7dd831498e91cce9806f6f97362c8b4f70c9239ab23fdd26e9f7508b10880b05"
+      "sha256": "6f4fca83639987939d8777620ca2e59b21f296c19251c28713bc4fb336d7afb2"
     },
     {
       "id": "main:linear_input/lean_check/F0UpdateDescent.inc",
@@ -8055,7 +8412,7 @@
         "rank_sixteen_iff"
       ],
       "imports": [],
-      "sha256": "73c4db1e75d648d0bf584bfbf27eb709389ed67f5cdfc3bcbcb2a6bf9662a222"
+      "sha256": "6598603b7bc0b987caffeae44561e2cc0c09469379a18b3cb6ca9bedb90f9249"
     },
     {
       "id": "main:linear_input/lean_check/F16ConstructiveRecovery.inc",
@@ -8086,7 +8443,7 @@
         "singular_probes_exact_recovery"
       ],
       "imports": [],
-      "sha256": "b5c965ccb7a9b7f9a8110de0c8ac3aa0bcda25618d1602a32928fddff063e9e7"
+      "sha256": "f24e4051ab5f26971f6a6bd85ef10a2fb23ba153658c687215c64a632beb3812"
     },
     {
       "id": "main:linear_input/lean_check/F16FullMatrix.inc",
@@ -8123,7 +8480,7 @@
         "full_determinant_zero_iff"
       ],
       "imports": [],
-      "sha256": "5bcc1101b95cba1cfa38c099b797ea0c9677713a5cb69ddb2396dd8ea72084e7"
+      "sha256": "da57cc221a0507b8f00fc601e568064c410c12d9c23952b0cf344dea3c802237"
     },
     {
       "id": "main:linear_input/lean_check/F16FullRank.inc",
@@ -8365,7 +8722,7 @@
         "f16_one_phase_not_injective"
       ],
       "imports": [],
-      "sha256": "8ece9145fa42f4de0f5163ed2dec78c4d7bf866b2f3b0fa45c80ec93461b1ccc"
+      "sha256": "adb7ec59741e2ac686fed1e1086a6eea4172b609d4174b95ebe88515878c7e74"
     },
     {
       "id": "main:linear_input/lean_check/F16SaddleCantor.inc",
@@ -8429,7 +8786,7 @@
         "opposite_probe_joint_injective"
       ],
       "imports": [],
-      "sha256": "ecf929ece3d986c75e9dd1793646db765983a159d2f5cef8f886c9793eb305f2"
+      "sha256": "4a7adf8e3c7a29d3d039d9b36d21f67c0bf72067e24c1863ace922af46cbfef0"
     },
     {
       "id": "main:linear_input/lean_check/Feedback.inc",
@@ -8527,7 +8884,7 @@
         "abs_le_on_Icc"
       ],
       "imports": [],
-      "sha256": "8d919b3d39be880fd82959c7be1ee9dd40e9f5d2d009d70af95bbb7dc8e1b2b9"
+      "sha256": "c08f77988b677107a50aa383a758e0a79d6936698c73db7d0aeebbcbb9ac5443"
     },
     {
       "id": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
@@ -8566,7 +8923,39 @@
         "ternary_cesaro_not_factor"
       ],
       "imports": [],
-      "sha256": "431492dd7339e1f66dd91d331475058102d8bfe463e7eb87eef4d7bbc96fb2a8"
+      "sha256": "6dc41f74829ff6ea3fc5be9b4a6372d103c0705851905d6536720bb1d4085f90"
+    },
+    {
+      "id": "main:linear_input/lean_check/FiniteProjectionExamples.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/FiniteProjectionExamples.inc",
+      "group": "Other",
+      "namespace": "LinearInputProjectionExamples",
+      "declarations": [
+        "idle",
+        "run_idle",
+        "idle_iff",
+        "addSetTrue",
+        "two_state_gain",
+        "two_state_not_simulated",
+        "project3",
+        "extend3",
+        "three_state_gain",
+        "three_state_not_simulated",
+        "embed3",
+        "three_state_section",
+        "three_state_retains_old",
+        "three_state_cardinalities",
+        "memoryStep",
+        "memory_simulated",
+        "setTrue",
+        "resetOrSet",
+        "setTrue_run_true",
+        "reset_not_simulated",
+        "reset_has_no_gain"
+      ],
+      "imports": [],
+      "sha256": "78142d7f6581e316879973779f96248c398d101ce3ad5a6db952cfac34a65259"
     },
     {
       "id": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
@@ -8779,7 +9168,7 @@
         "zero_confirmed_step_stays_zero"
       ],
       "imports": [],
-      "sha256": "ab31543baff700b42f435d7ef0bac188cd82743ba0bc41cefa627fd907c46d45"
+      "sha256": "7b81331e861cd15d42ef03cfd4564a8c225934cb875ac214518b952582563527"
     },
     {
       "id": "main:linear_input/lean_check/FoldCount.inc",
@@ -8903,7 +9292,7 @@
         "forgetting_can_lose_predictive_information"
       ],
       "imports": [],
-      "sha256": "0c6f48956e71c9bcd691cc43eefaf3939f91be9fb747fb1a0e3f1d037e6ed441"
+      "sha256": "7d16a450108d831eddf2de770fb36a7e13fbe2196a178d4f438691ddc704d48f"
     },
     {
       "id": "main:linear_input/lean_check/FutureFiniteHorizon.inc",
@@ -9092,7 +9481,7 @@
         "Mathlib.Analysis.ODE.Basic",
         "Mathlib.Tactic.Linarith"
       ],
-      "sha256": "f40e5840fa9ec00e5900968836b1c1868c05bfce559258ffd6e2259c08145664"
+      "sha256": "ff0286828aeba12b48043f2f7ed2cbcd7e472949262250c8ee3fcdcc284b737f"
     },
     {
       "id": "main:linear_input/lean_check/GlobalTrajectory.inc",
@@ -9106,7 +9495,7 @@
         "exists_global_solution_one_add_sq"
       ],
       "imports": [],
-      "sha256": "67b5494e57c0f9a9b4020486f4ea59468a27001601c2a4b34f84157b3f131ba9"
+      "sha256": "66d841d55f2c3e41a01d259d1afb9430f60ed71d0a7bac3d79f09783b7d0db3e"
     },
     {
       "id": "main:linear_input/lean_check/Gradient.inc",
@@ -9138,7 +9527,7 @@
         "hasDerivAt_squared_gap_fixed_input"
       ],
       "imports": [],
-      "sha256": "2aab575d80c5eca3871b68ac141b179ef7ab072e071097d3dfe758b13bf96201"
+      "sha256": "c692ba9bc9ad9dbd2ec767684c9d5ab9c02476ded938188ac8aa6cbf570a9e48"
     },
     {
       "id": "main:linear_input/lean_check/GradientBound.inc",
@@ -9189,7 +9578,7 @@
         "mass_only_merger_loses_external_potential"
       ],
       "imports": [],
-      "sha256": "50157183f74a2117a15b242d4dbab3ba20d736144f99fa946cbe7fc6d8b77eec"
+      "sha256": "96863eccbf84bdcd628e8e482bb97277b8844027921ebab01d23cf3b2ebc8128"
     },
     {
       "id": "main:linear_input/lean_check/GravityObservation.inc",
@@ -9219,7 +9608,7 @@
         "gravity_observation_not_mass_only"
       ],
       "imports": [],
-      "sha256": "fb17cb8ecfab81bf468fe9288f8f7b543b603258498c9a520a753c701bb83374"
+      "sha256": "79267f6f6270fcb0d4c20abc7b26fd4c670cb08365491db68e2c90401b3dcfcc"
     },
     {
       "id": "main:linear_input/lean_check/GravityObservations.inc",
@@ -9464,7 +9853,7 @@
         "finite_family_separating_cutoff"
       ],
       "imports": [],
-      "sha256": "e2b9bea0182efd433b028e7bdf99bcbed60ed92dc924d4d782e751c958c01c45"
+      "sha256": "3b1a366a7be6fd2e73447bc883b8026827ea11941fd9025c8c866b50c4e634d4"
     },
     {
       "id": "main:linear_input/lean_check/InternalUpdate.inc",
@@ -9619,6 +10008,42 @@
       "sha256": "8b522f412c683f56b4cfe5cda75cc4b81a32368af46c09e977b90e5dc116876e"
     },
     {
+      "id": "main:linear_input/lean_check/LaaksoBondingAudit.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoBondingAudit.inc",
+      "group": "Other",
+      "namespace": "PR142BondingAudit",
+      "declarations": [
+        "RawAt",
+        "realizeRaw",
+        "oldCopy",
+        "bonding_oldCopy",
+        "bonding_newRaw",
+        "oldCopy_fixed",
+        "bonding_updated_oldCopy",
+        "inherited_w1_noncommutes",
+        "first_second_noncommutes",
+        "first_general_eq_selected",
+        "first_labels",
+        "old_copy_labels",
+        "vertexStep",
+        "old_read_fiber",
+        "w1_read_fiber",
+        "first_w1_outputs",
+        "second_old_outputs",
+        "projected_second_w1_outputs",
+        "w1_ne_w2",
+        "canonical_relations_not_forward_sound",
+        "cannot_keep_old_stop",
+        "pullbackStep",
+        "pullbackStep_exact",
+        "inherited_relation_repair",
+        "bonding_relation_repair"
+      ],
+      "imports": [],
+      "sha256": "a6dc24e7507b8b2a4dad7de3b08938a5d4d4f3e79855608bb3c2f82649844f06"
+    },
+    {
       "id": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
       "scope": "main",
       "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
@@ -9668,7 +10093,7 @@
         "first_parallel_middle_edges"
       ],
       "imports": [],
-      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
+      "sha256": "a50c9225099c788d2df76b7b325b866a61a4f20613e0366b8883cd3800a0457c"
     },
     {
       "id": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
@@ -9754,7 +10179,7 @@
         "heightAt_project"
       ],
       "imports": [],
-      "sha256": "29384eefe606d2368a0961cc391a380d1e8418eb74bcd7bfa8f01484def1e62e"
+      "sha256": "f69f3aab3b196ebc2064f930527459a79ba4b695bfd09893d360248b44c0cc7e"
     },
     {
       "id": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
@@ -9903,7 +10328,7 @@
         "flipped_no_spin"
       ],
       "imports": [],
-      "sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459"
+      "sha256": "87a4ea5c2093c2ff785addbe011ff973284ff11945a8ec328a724ba596fcaefa"
     },
     {
       "id": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
@@ -9937,7 +10362,116 @@
         "flip_can_decrease_energy"
       ],
       "imports": [],
-      "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9"
+      "sha256": "ae07897b3238f9028c269da496753b441dc6f713784f7c83243453f5d4df9140"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoSignedGauge",
+      "declarations": [
+        "switchTwist",
+        "switch_involutive",
+        "parity_switch",
+        "treeGauge",
+        "tree_normal_form",
+        "switch_equivalent_iff",
+        "switchState",
+        "localPotential_switch",
+        "edgeEnergy_switch",
+        "energy_switch",
+        "odd_energy_lower_bound",
+        "zero_energy_iff"
+      ],
+      "imports": [],
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputLaaksoSignedMinimum",
+      "declarations": [
+        "leafExcess",
+        "leafExcess_nonneg",
+        "leafExcess_eq_zero",
+        "flipped_energy_decomposition",
+        "flipped_minimum",
+        "flipped_minimum_iff",
+        "energy_zero_state",
+        "switchState_eq_zero_iff",
+        "odd_minimum",
+        "odd_minimum_iff",
+        "least_energy"
+      ],
+      "imports": [],
+      "sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a"
+    },
+    {
+      "id": "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "group": "Other",
+      "namespace": "VoidLaaksoBridge",
+      "declarations": [
+        "relStep",
+        "relSet",
+        "exactSet",
+        "FiberStable",
+        "FiberImageClosed",
+        "relStep_sound",
+        "relStep_minimal",
+        "relStep_singleton_iff",
+        "exactSet_subset_relSet",
+        "relSet_global_exact_iff",
+        "relSet_comp_subset",
+        "relSet_comp_eq_of_second_stable",
+        "fiberImageClosed_sets",
+        "relSet_comp_eq_of_first_closed",
+        "fiberImageClosed_iff_all_continuations",
+        "concreteIter",
+        "observedIter",
+        "relSet_identity",
+        "observedIter_exact_of_fiberImageClosed",
+        "relSet_eq_exactSet",
+        "advanceRightGeneral",
+        "rawW1",
+        "rawW2",
+        "general_middle_edge",
+        "general_right_edge",
+        "general_w1_depth_two",
+        "general_w2_depth_one",
+        "laakso_every_level_delayed_split",
+        "Raw1",
+        "Obs1",
+        "firstRead",
+        "advanceRight",
+        "w1",
+        "w2",
+        "middle_edge_incidence",
+        "right_edge_incidence",
+        "w2_one_step_split",
+        "w1_two_step_split",
+        "depth_two_separates",
+        "depth_one_not_enough",
+        "first_fiber_images_closed",
+        "first_relational_composition_exact",
+        "firstRead_surjective",
+        "first_all_times_exact",
+        "raw_gluing_cardinality",
+        "gluing_gap_at_level",
+        "first_not_fiber_stable",
+        "first_no_deterministic_quotient",
+        "first_not_globally_exact",
+        "w2_two_relational_outputs",
+        "w2_relational_not_singleton",
+        "nonlinear_two_outputs",
+        "nonlinear_no_global_exactness"
+      ],
+      "imports": [],
+      "sha256": "a893430ba3fb24bc3ef058cd807d02b36e446ee69c02d00bd26f2cba6e7611a4"
     },
     {
       "id": "main:linear_input/lean_check/LevelConvergence.inc",
@@ -10178,12 +10712,12 @@
         "minimizer_monotone"
       ],
       "imports": [
-        "Mathlib.Data.Real.Basic",
+        "Mathlib.Basic.Real.Basic",
         "Mathlib.Tactic.Ring",
         "Mathlib.Tactic.FieldSimp",
         "Mathlib.Tactic.Linarith"
       ],
-      "sha256": "2a817b9f8550e8111bce7cab59ecccfce1a56b852d442d8012c32e523271ebc6"
+      "sha256": "2c58f8452d8ad4e1a270504b3213de8919c40340b0ac3b5f6d1407fddc96419d"
     },
     {
       "id": "main:linear_input/lean_check/ObservationRetractionPolarity.inc",
@@ -10345,13 +10879,14 @@
         "compatible_iff_f0_descends",
         "compatible_to_f0_descends",
         "f0_descends_to_compatible",
-        "f0_safe_extension",
+        "f0_family_extension_iff_descends",
         "f0_safe_family_extension",
+        "f0_safe_extension",
         "f0_descends_has_quotient_map",
         "example_noncompatible"
       ],
       "imports": [],
-      "sha256": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e"
+      "sha256": "c10b43079b42a5ac42095cb9e838965bbd11f468ebc811965e3d8d64347c8068"
     },
     {
       "id": "main:linear_input/lean_check/OperatorFiniteHorizon.inc",
@@ -10408,6 +10943,40 @@
       ],
       "imports": [],
       "sha256": "fed818ad809bd16fee371ea9a7edc27b83c33c6af521e7931cfff1ed63403a8d"
+    },
+    {
+      "id": "main:linear_input/lean_check/OperatorOrientationDepth.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/OperatorOrientationDepth.inc",
+      "group": "Operator / Rulefold",
+      "namespace": "LinearInputOperatorOrientationDepth",
+      "declarations": [
+        "AllowedWord",
+        "SeparatedWithin",
+        "EverSeparated",
+        "ObservationalEq",
+        "allowedWord_mono",
+        "separatedWithin_mono",
+        "everSeparated_mono",
+        "observationalEq_antitone",
+        "everSeparated_iff_not_observationalEq",
+        "observationalEq_univ_iff_wordEq",
+        "leastDepth",
+        "leastDepth_spec",
+        "leastDepth_le",
+        "leastDepth_antitone",
+        "not_separated_at_zero",
+        "oldAllowed",
+        "old_word_identity",
+        "old_observationalEq",
+        "old_not_everSeparated",
+        "full_separated_in_one",
+        "full_everSeparated",
+        "full_leastDepth_one",
+        "invariant_residue_forces_zero_orientation"
+      ],
+      "imports": [],
+      "sha256": "14c0271fad2fa052485967e9e14b8d3afc7293372b14db17790942fe8779baa9"
     },
     {
       "id": "main:linear_input/lean_check/OperatorProductSystems.inc",
@@ -10635,7 +11204,7 @@
         "witness_forget_not_injective"
       ],
       "imports": [],
-      "sha256": "5c9aaa8e59469727f93b2d74f8d7d64b1b89b83b48c17382f52ea0a9f01e8a66"
+      "sha256": "7019eb6083edfcdd4382ec97fc8c6a17080763dbd2d6002fef1cfe58297877d4"
     },
     {
       "id": "main:linear_input/lean_check/OperatorWordObservations.inc",
@@ -10723,7 +11292,7 @@
         "disjoint_writes_operationally_gluable_cumulatively"
       ],
       "imports": [],
-      "sha256": "9c5af504e6086a0da6b306281731ef504ca0a2f50122dff37723ad1bea7fbe42"
+      "sha256": "27ddbe5a3323a8529e5dc19c0be36e51d0f6ac2340a59687f33da582ef5d0cb2"
     },
     {
       "id": "main:linear_input/lean_check/ParallelWriteGluing.inc",
@@ -10781,6 +11350,26 @@
       "sha256": "68ed1856ede6454b99144343ed392d51431f78eb181c260cc7525b42d71c5a87"
     },
     {
+      "id": "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/PermissionProjectionBridge.inc",
+      "group": "Other",
+      "namespace": "Elastica.ChairPieProjection",
+      "declarations": [
+        "Permitted",
+        "permittedStep",
+        "allowed_map",
+        "lift_allowed",
+        "run_permitted",
+        "revenue_iff_reachable",
+        "PermissionSimulation",
+        "revenue_of_permission_simulation",
+        "blocks_of_permission_simulation"
+      ],
+      "imports": [],
+      "sha256": "24fe9ad3c57aa18d606aa97cb9cc092cba16655ca0e58e65c7c4b846ed3ee6fb"
+    },
+    {
       "id": "main:linear_input/lean_check/PilotComparisonBridge.inc",
       "scope": "main",
       "path": "linear_input/lean_check/PilotComparisonBridge.inc",
@@ -10812,7 +11401,7 @@
         "f0_descent_does_not_force_wall"
       ],
       "imports": [],
-      "sha256": "fbe61417ae597296787b5b0bedb06c31861f05b550200c46909713fffdd4b5e2"
+      "sha256": "5eafc5f0be34f6f7bd053078e606528b3c8a285ed8d67c2eeafc76ece703e1c5"
     },
     {
       "id": "main:linear_input/lean_check/PilotHullInflation.inc",
@@ -10892,7 +11481,7 @@
         "Elastica.Geometry",
         "Elastica.Equations"
       ],
-      "sha256": "4a0365823e7eec686dd940e531987ada928cb0e19ca6901d440745ce9da221b1"
+      "sha256": "beb49850219a7db63e5de13199ed7b27393c65ba2e1664e7f2105fb2990756ab"
     },
     {
       "id": "main:linear_input/lean_check/PressureStationary.inc",
@@ -11164,6 +11753,31 @@
       ],
       "imports": [],
       "sha256": "065741655e5180a317c9454228b0d5272f1d6243065fae869a4a5485fb8a2f32"
+    },
+    {
+      "id": "main:linear_input/lean_check/ProjectionReachability.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ProjectionReachability.inc",
+      "group": "Other",
+      "namespace": "LinearInputProjectionReachability",
+      "declarations": [
+        "ProjectionSimulation",
+        "projection_run",
+        "projection_reachable",
+        "simulation_iff_all_reachability",
+        "simulation_of_compiler",
+        "generated_projection_simulation",
+        "StrictGain",
+        "no_gain_of_simulation",
+        "first_exit",
+        "strictGain_iff_escape",
+        "old_reachable_lifts",
+        "no_gain_subsingleton",
+        "gain_has_distinct_projections",
+        "gain_cardinality_bounds"
+      ],
+      "imports": [],
+      "sha256": "e893216160ba4b86999d8658fa597eb28e84ad61f23da9a42119a033ae096a35"
     },
     {
       "id": "main:linear_input/lean_check/QuarticClassification.inc",
@@ -11563,7 +12177,7 @@
         "closed_spike_mutually_stop"
       ],
       "imports": [],
-      "sha256": "71d22e4bf40c2268d4fcf5fec1ad05dbad72a81062314ae207b0bd7e7d9284f8"
+      "sha256": "14440434f42ed951c67110873fdcb6360728e4e0c0fb257910d5e3d385c2c588"
     },
     {
       "id": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
@@ -11597,7 +12211,7 @@
         "close_singleton_idempotent_count_of_all_fixed"
       ],
       "imports": [],
-      "sha256": "5727034d4ac2f90dde819edfedc04cc615caa532fdc1742cf646d217a57067e8"
+      "sha256": "d5a1547a21e3f48720432888be19f478766e13e321cb2b9be53526a893f7c37f"
     },
     {
       "id": "main:linear_input/lean_check/StrangeOperatorFixedSets.inc",
@@ -11831,9 +12445,10 @@
       "imports": [
         "Mathlib.Analysis.ODE.PicardLindelof",
         "Mathlib.Analysis.ODE.Gronwall",
-        "Mathlib.Analysis.ODE.Basic"
+        "Mathlib.Analysis.ODE.Basic",
+        "Mathlib.Analysis.ODE.ExistUnique"
       ],
-      "sha256": "db5f37cc4923fd87063a75abc3ae560cd135ebe7c4d79104bd472f22d2dd53b0"
+      "sha256": "05639785b6d652165849e43be81cbd18fff3f3b5a8eb5ada10b19d29387a28e9"
     },
     {
       "id": "main:linear_input/lean_check/VariablePairGaloisBridge.inc",
@@ -11884,7 +12499,7 @@
         "sameReflectionOrbit_energy"
       ],
       "imports": [],
-      "sha256": "fd91c2b515112174446a2226bbbbe61d6ff01485ca02af14164e3e366239d08d"
+      "sha256": "808bfd90971940dadb93593da781ecc67e6b475fa997dd52bb08885c64bfedc4"
     },
     {
       "id": "main:linear_input/lean_check/VariablePairObservations.inc",
@@ -11951,7 +12566,7 @@
         "minus_gradient_jacobian"
       ],
       "imports": [],
-      "sha256": "e7af7f0dcdf7533ac86898fda1301cd3da372344b712b9ec17689e917efa1a35"
+      "sha256": "ae4dec60f8d22d8b9a8c3be6dde2e17d0704b711c55c7c1aa9c5f84eeadbc498"
     },
     {
       "id": "main:linear_input/lean_check/VariationalBridge.inc",
@@ -12000,7 +12615,7 @@
         "f16_reflection_indefinite"
       ],
       "imports": [],
-      "sha256": "47ffef8dcdc6d436aad72d241acfc2326d940ccd06deaa8a1d25ac869de3a21f"
+      "sha256": "149d07252da444b2461fc44f5de5862b87992d86500c5802312d41e9566c41be"
     },
     {
       "id": "main:linear_input/lean_check/WFSCanonicalLift.inc",
@@ -12021,7 +12636,7 @@
         "wfs2_not_affine"
       ],
       "imports": [],
-      "sha256": "af0eb49cdd896e3ccd1564b64b4f52da746637a6b2272fd6504520c573684b10"
+      "sha256": "f21f17a88b36df9bdaca13702c262b71bc1765542bd93e97503dfa85e77820b0"
     },
     {
       "id": "main:linear_input/lean_check/WFSMobiusFourier.inc",
@@ -12093,7 +12708,7 @@
         "observationDistance_zero_iff_kernel"
       ],
       "imports": [],
-      "sha256": "874c90f744e2bc0b84e606b50b996d11a05f46bfc811bb34ad2867f8b812c5a9"
+      "sha256": "20adb4363c886317f3f9acdce70a17d262d90500916962823f3dce9b0f2daa4d"
     },
     {
       "id": "pr31:linear_input/lean_check/ChebyshevDegreeTower.inc",
@@ -14899,6 +15514,23 @@
       ]
     },
     {
+      "from": "main:lean/Research/ElasticaIntrinsicHeight.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Elastica.Geometry"
+      ]
+    },
+    {
+      "from": "main:lean/Research/ElasticaIntrinsicHeight.lean",
+      "to": "main:lean/Elastica/Geometry.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "hasDerivAt_xCoord",
+        "hasDerivAt_yCoord"
+      ]
+    },
+    {
       "from": "main:lean/Research/ElasticaObservationQuotient.lean",
       "to": "main:lean/Elastica/Geometry.lean",
       "kind": "exact_import",
@@ -14976,6 +15608,146 @@
       "symbols": [
         "exp_neg_mul_le_exp_neg_mul_iff",
         "exponentialWeight"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OperationalWorldGeneration.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "OrbitTrace"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OperationalWorldGeneration.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "OrbitTrace.linearE",
+        "OrbitTrace.linearE_cube"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OperationalWorldGeneration.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "linearE_cube"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OperationalWorldGeneration.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.SiphonPolynomialE"
+      ]
+    },
+    {
+      "from": "main:lean/Research/OperationalWorldGeneration.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "iterate_eq_closedOrbit"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SignedCycleCounterexample.lean",
+      "to": "main:lean/Research/SquareZeroNetwork.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.SquareZeroNetwork"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SignedCycleCounterexample.lean",
+      "to": "main:lean/Research/SquareZeroNetwork.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "edge_square_zero"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonCommonInvariant.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "OrbitTrace.linearE"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonCommonInvariant.lean",
+      "to": "main:lean/Research/OperationalWorldGeneration.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.OperationalWorldGeneration"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonCommonInvariant.lean",
+      "to": "main:lean/Research/OperationalWorldGeneration.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "run_advances",
+        "zero_fibre_fixed"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonCommonInvariant.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "closedOrbit",
+        "iterate_eq_closedOrbit"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonFiniteDetermination.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "OrbitTrace"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonFiniteDetermination.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "OrbitTrace.linearE"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonFiniteDetermination.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.SiphonPolynomialE"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonFiniteDetermination.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "closedOrbit",
+        "iterate_eq_closedOrbit"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "to": "main:lean/Research/ElasticaObservationQuotient.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.ElasticaObservationQuotient"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.SiphonPolynomialE"
       ]
     },
     {
@@ -16206,7 +16978,6 @@
       "to": "main:linear_input/lean_check/AstraAnalyticDuhamel.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "oneModeCLM",
         "oscillatoryCLM"
       ]
     },
@@ -17804,6 +18575,7 @@
       "to": "main:linear_input/lean_check/AstraWeightedConvolution.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
+        "twistedProduct",
         "twistedProductReal"
       ]
     },
@@ -18062,6 +18834,50 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "to": "main:lean/Research/ChairPieKillSpot.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RevenuePossible"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "to": "main:linear_input/lean_check/OperatorReachability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reachable_preserves_invariant"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.run"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "to": "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "PermissionSimulation",
+        "permittedStep",
+        "revenue_iff_reachable",
+        "revenue_of_permission_simulation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChairInternalGeneration.inc",
+      "to": "main:linear_input/lean_check/ProjectionReachability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "StrictGain",
+        "projection_reachable"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/ChebyshevDegreeTower.inc",
       "to": "main:linear_input/lean_check/ChebyshevDihedralDescent.inc",
       "kind": "qualified_reference",
@@ -18116,6 +18932,37 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "parameterField"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "dihedralRepresentation",
+        "dihedralRepresentation_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputChebyshevSplitting.actualSplittingFieldEquiv",
+        "LinearInputChebyshevSplitting.basePolynomial",
+        "LinearInputChebyshevSplitting.parameterField_finrank",
+        "LinearInputChebyshevSplitting.rationalFunction_isSplittingField"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ChebyshevGaloisCompletion.inc",
+      "to": "main:linear_input/lean_check/ChebyshevSplittingField.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "actualSplittingFieldEquiv",
+        "basePolynomial",
+        "parameterField_finrank",
+        "rationalFunction_isSplittingField"
       ]
     },
     {
@@ -18228,6 +19075,14 @@
       "kind": "exact_import",
       "symbols": [
         "Elastica.Stationary"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "newActions"
       ]
     },
     {
@@ -20288,7 +21143,6 @@
         "logarithm_empty",
         "logarithm_formalExp",
         "power_vanishes_above_degree",
-        "power_zero",
         "product_empty",
         "unitSeries"
       ]
@@ -22129,6 +22983,26 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/FiniteProjectionExamples.inc",
+      "to": "main:linear_input/lean_check/OperatorReachability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reachable_refl",
+        "reachable_step"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/FiniteProjectionExamples.inc",
+      "to": "main:linear_input/lean_check/ProjectionReachability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ProjectionSimulation",
+        "StrictGain",
+        "no_gain_of_simulation",
+        "old_reachable_lifts"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
       "kind": "unique_identifier_candidate",
@@ -22562,7 +23436,8 @@
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputCalculus.critical_value_le",
-        "LinearInputCalculus.hasDerivAt_potential"
+        "LinearInputCalculus.hasDerivAt_potential",
+        "LinearInputCalculus.potential"
       ]
     },
     {
@@ -23019,6 +23894,52 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/LaaksoBondingAudit.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RefinedVertex",
+        "VertexType",
+        "firstVertexEncode",
+        "rawProjection"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoBondingAudit.inc",
+      "to": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bond_vertexPoint_new",
+        "bond_vertexPoint_old"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoBondingAudit.inc",
+      "to": "main:linear_input/lean_check/LaaksoGeometricTower.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "bonding_surjective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoBondingAudit.inc",
+      "to": "main:linear_input/lean_check/LaaksoRealization.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "vertexPoint",
+        "vertexPoint_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoBondingAudit.inc",
+      "to": "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "advanceRight",
+        "advanceRightGeneral"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/LaaksoGeometricProjection.inc",
       "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
       "kind": "unique_identifier_candidate",
@@ -23141,6 +24062,105 @@
       "symbols": [
         "sign_flipped_of_ne",
         "sign_untwisted"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "middleParity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "constantWell",
+        "edgeEnergy",
+        "energy_flipped_lower_bound",
+        "energy_untwisted_constantWell",
+        "localPotential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "firstSource",
+        "firstTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedConnection.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "middleParity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "edgeEnergy",
+        "energy_expansion",
+        "localPotential"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "to": "main:linear_input/lean_check/LaaksoSignedGauge.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "energy_switch",
+        "switchState",
+        "tree_normal_form",
+        "zero_energy_iff"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputLaaksoFiniteGraph.Graph"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "to": "main:linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RefinedVertex",
+        "VertexType",
+        "rawProjection",
+        "rawProjection_surjective",
+        "refineSource",
+        "refineTarget"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/LaaksoVoidRelationalBridge.inc",
+      "to": "main:linear_input/lean_check/LaaksoNonlinearObstruction.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "splitWitness",
+        "uniformWitness",
+        "witnesses_different_next_mean",
+        "witnesses_same_mean"
       ]
     },
     {
@@ -23480,7 +24500,6 @@
       "symbols": [
         "pair_observation",
         "postprocess",
-        "run_append",
         "run_generated",
         "word_trans"
       ]
@@ -23490,7 +24509,8 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
       "symbols": [
-        "LinearInputF0.exampleK"
+        "LinearInputF0.exampleK",
+        "LinearInputF0.exampleK_idempotent"
       ]
     },
     {
@@ -23498,7 +24518,8 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "Idempotent"
+        "Idempotent",
+        "exampleK_idempotent"
       ]
     },
     {
@@ -23506,7 +24527,8 @@
       "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
       "kind": "qualified_reference",
       "symbols": [
-        "LinearInputF0Descent.exampleUpdate"
+        "LinearInputF0Descent.exampleUpdate",
+        "LinearInputF0Descent.example_does_not_descend"
       ]
     },
     {
@@ -23516,7 +24538,8 @@
       "symbols": [
         "RespectsFibers",
         "descends_iff_respects",
-        "exampleUpdate"
+        "exampleUpdate",
+        "example_does_not_descend"
       ]
     },
     {
@@ -23557,7 +24580,6 @@
       "to": "main:linear_input/lean_check/OperatorF0SemanticBridge.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "FiberStable",
         "compatible_iff_fiber_stable"
       ]
     },
@@ -23571,13 +24593,20 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/OperatorOrientationDepth.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "extendedStep"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/OperatorReachability.inc",
       "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "compile_map_singletons",
         "representation_run",
-        "run_append",
         "run_generated"
       ]
     },
@@ -23615,7 +24644,6 @@
       "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "run_append",
         "word_trans"
       ]
     },
@@ -23686,6 +24714,42 @@
         "AllExtinct",
         "LocalTimeline",
         "extinction_forces_nonpreservation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "to": "main:lean/Research/ChairPieKillSpot.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.ChairPieKillSpot.Allowed",
+        "Elastica.ChairPieKillSpot.Blocks",
+        "Elastica.ChairPieKillSpot.RevenuePossible",
+        "Elastica.ChairPieKillSpot.run"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "to": "main:lean/Research/ChairPieKillSpot.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "RevenuePossible"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "to": "main:linear_input/lean_check/OperatorWordObservations.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputOperatorWords.run"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/PermissionProjectionBridge.inc",
+      "to": "main:linear_input/lean_check/ProjectionReachability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "ProjectionSimulation",
+        "projection_reachable"
       ]
     },
     {
@@ -23982,6 +25046,17 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "natural_prime_multiset_injective"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ProjectionReachability.inc",
+      "to": "main:linear_input/lean_check/OperatorReachability.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "reachable_after_action",
+        "reachable_refl",
+        "reachable_step",
+        "reachable_trans"
       ]
     },
     {
@@ -24547,6 +25622,14 @@
     },
     {
       "from": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "newActions"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/TemporalLocalExtinction.inc",
       "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
@@ -25103,6 +26186,14 @@
     },
     {
       "from": "pr66:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "newActions"
+      ]
+    },
+    {
+      "from": "pr66:linear_input/lean_check/TemporalLocalExtinction.inc",
       "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
@@ -25219,6 +26310,14 @@
         "PreservedOn",
         "extinction_forces_nonpreservation",
         "interval_with_extinct_endpoint_is_not_preserved"
+      ]
+    },
+    {
+      "from": "pr69:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "newActions"
       ]
     },
     {
@@ -25438,6 +26537,14 @@
     },
     {
       "from": "pr75:linear_input/lean_check/CooperativeGluingObstruction.inc",
+      "to": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "newActions"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/CooperativeGluingObstruction.inc",
       "to": "main:linear_input/lean_check/CooperativeGluingObstruction.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
@@ -25623,6 +26730,14 @@
     },
     {
       "from": "pr75:linear_input/lean_check/TemporalLocalExtinction.inc",
+      "to": "main:linear_input/lean_check/ChairProjectionExport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "newActions"
+      ]
+    },
+    {
+      "from": "pr75:linear_input/lean_check/TemporalLocalExtinction.inc",
       "to": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
@@ -25776,6 +26891,7 @@
     "linear_input/lean_check/OperatorBisimulation.inc",
     "linear_input/lean_check/OperatorVocabularyRefinement.inc",
     "linear_input/lean_check/OperatorFiniteHorizon.inc",
+    "linear_input/lean_check/OperatorOrientationDepth.inc",
     "linear_input/lean_check/OperatorSemanticClosure.inc",
     "linear_input/lean_check/CrossSystemObservation.inc",
     "linear_input/lean_check/InverseTowerObservation.inc",
@@ -25786,6 +26902,8 @@
     "linear_input/lean_check/LaaksoGeometricTower.inc",
     "linear_input/lean_check/LaaksoSignedConnection.inc",
     "linear_input/lean_check/LaaksoSignedEnergy.inc",
+    "linear_input/lean_check/LaaksoSignedGauge.inc",
+    "linear_input/lean_check/LaaksoSignedMinimum.inc",
     "linear_input/lean_check/SemanticIntervalNecessity.inc",
     "linear_input/lean_check/FiniteSelfSynthesis.inc",
     "linear_input/lean_check/RecursiveOperatorReentry.inc",
@@ -25821,6 +26939,7 @@
     "linear_input/lean_check/ChebyshevDegreeTower.inc",
     "linear_input/lean_check/ChebyshevSplittingField.inc",
     "linear_input/lean_check/ChebyshevGaloisAutomorphisms.inc",
+    "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
     "linear_input/lean_check/RimObservability.inc",
     "linear_input/lean_check/ViscousRewrite.inc",
     "linear_input/lean_check/GravityCocycle.inc",
@@ -26267,28 +27386,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "f6ee8eb8fec6a9441785613f034714c535c47b18",
+      "base_sha": "7fe2a0642d10b22a7bbed95c4a028265eda0ee33",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

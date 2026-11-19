@@ -39,7 +39,8 @@ theorem wfs2_derivative (r : ℝ) :
     deriv wfs2 r = r := by
   have hd : HasDerivAt wfs2 r r := by
     convert (((hasDerivAt_id r).pow 2).sub_const 1).div_const 2 using 1
-    simp
+    · rfl
+    · simp
   exact hd.deriv
 
 /-- The *complete* lift satisfies xi dz = u dr (in differential coefficients). -/

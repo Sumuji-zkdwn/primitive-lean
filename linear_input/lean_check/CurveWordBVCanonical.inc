@@ -49,7 +49,6 @@ theorem stieltjesIntegral_independent_on {p m q n : StieltjesFunction ℝ} {a b 
     {F : ℝ → ℝ} (hF : Continuous F) :
     stieltjesIntegral p m a b F = stieltjesIntegral q n a b F := by
   have he := congrArg (fun μ : Measure ℝ => ∫ t, F t ∂μ) (restricted_measure_sum_eq h)
-  dsimp only at he
   rw [Measure.restrict_add, Measure.restrict_add,
     integral_add_measure (hF.intervalIntegrable a b).1 (hF.intervalIntegrable a b).1,
     integral_add_measure (hF.intervalIntegrable a b).1 (hF.intervalIntegrable a b).1] at he
@@ -182,7 +181,7 @@ theorem curveSignature_congr {ι : Type*} {f g : ι → ℝ → ℝ} {a b : ℝ}
 theorem coordinate_boundedVariation {ι : Type*} [Fintype ι] {γ : ℝ → (ι → ℝ)}
     {a b : ℝ} (hγ : BoundedVariationOn γ (Set.Icc a b)) (i : ι) :
     BoundedVariationOn (fun t => γ t i) (Set.Icc a b) :=
-  (ContinuousLinearMap.proj i : (ι → ℝ) →L[ℝ] ℝ).lipschitz.comp_boundedVariationOn hγ
+  (ContinuousLinearMap.proj i : (ι → ℝ) →L[ℝ] ℝ).lipschitzWith.comp_boundedVariationOn hγ
 
 theorem coordinate_continuousOn {ι : Type*} {γ : ℝ → (ι → ℝ)} {a b : ℝ}
     (hγ : ContinuousOn γ (Set.Icc a b)) (i : ι) :
@@ -373,6 +372,6 @@ theorem arcLength_signature_factorization {ι : Type*} [Fintype ι]
             (reparam_boundedVariation hab hm hG')
             (reparam_continuousOn hab hm hclock hGC') w :=
         pathSignature_congr hab hγ hc _ _ hfac w
-      _ = _ := by simpa only [variationClock_initial, variationClock_terminal γ hab] using hs
+      _ = _ := by simpa only [variationClock_initial, variationClock_terminal γ hab] using! hs
 
 end LinearInputCurveWordBVCanonical

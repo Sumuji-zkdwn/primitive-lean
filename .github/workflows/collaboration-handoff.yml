@@ -1,0 +1,27 @@
+name: Collaboration handoff checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/collaboration/**'
+      - '.github/workflows/collaboration-handoff.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  handoff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out proposed head
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Check handoff structure
+        run: python3 docs/collaboration/check_handoff.py
+      - name: Run independent shell boundary probe
+        run: python3 docs/collaboration/probe_shell_path.py

@@ -127,7 +127,7 @@ theorem signature_coordinates_dense {ι : Type*} {p m : ι → StieltjesFunction
       isCompact_iff_compactSpace.mp (signatureRange_isCompact hp hm a b)
     (coordinateAlgebra (coordinate p m a b) (coordinate_empty p m a b)
       (coordinate_shuffle hp hm a b)).topologicalClosure = ⊤ := by
-  letI : CompactSpace (signatureRange p m a b) :=
+  let : CompactSpace (signatureRange p m a b) :=
     isCompact_iff_compactSpace.mp (signatureRange_isCompact hp hm a b)
   apply coordinates_dense
   intro x y hxy
@@ -172,7 +172,7 @@ theorem continuous_one_form_zero_of_trivial_signature {ι : Type*} (p m : ι →
     (f : C(signatureRange p m a b, ℝ)) (w : List ι) (i : ι) :
     stieltjesIntegral (p i) (m i) a b
       (fun t => f (signaturePoint p m a b hab t) * reverseStieltjes p m a w t) = 0 := by
-  letI : CompactSpace (signatureRange p m a b) :=
+  let : CompactSpace (signatureRange p m a b) :=
     isCompact_iff_compactSpace.mp (signatureRange_isCompact hp hm a b)
   let L := stieltjesLineFunctional (signaturePoint_continuous hp hm a b hab)
     (reverseStieltjes_continuous p m hp hm a w) a b (p i) (m i) hab

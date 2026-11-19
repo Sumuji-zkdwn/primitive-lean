@@ -1,0 +1,50 @@
+{
+  "source_commit": "5a72d4c653fc5f6233987c0ed63e2ebb718b9d2d",
+  "original_source_root": "lean",
+  "upstream_url": "https://github.com/fubinyan/ComplexVariables/blob/bfdb91564bb5aafe0c3e7ec73501e43598146b13/MAT3253/Chapter02/EComplex.lean",
+  "license": "../../licenses/Mobius-Apache-2.0.txt",
+  "source_sha256": {
+    "Research/EComplexThirdParty.lean": "cbc9a8f9ecbad1b0328e04c4fdc4913f11cac79e11ffbe0a1281e29ea4f2213f",
+    "Research/MobiusProjectiveAudit.lean": "76c67c1c7cb889c1417b1fd9575b0b7f4830a872b7a14b1abc7befc7e98f1e52",
+    "Research/MobiusProjectiveCompletion.lean": "3ebc1bab8082f2f0438545ba2a0a36a3276e7c5fb7540bed4aa2c2f83255f228",
+    "Research/MobiusProjectiveStructure.lean": "72e45212e254e3009371e95040a0f454f71184a00e02a685f1a40479a16978f7",
+    "Research/MobiusSphericalCrossRatio.lean": "7c21d58f082b665e73b2821f4a9a090a26e64f35d5d0527efd947c9829a5c388"
+  },
+  "package_sha256": {
+    "lean-toolchain": "ce4c4e3d87434b9663f46de25ce34b48a0cf0d392e0a320a0787b4674a2d7b61",
+    "lakefile.toml": "015717ea56966a9b9acd20465f56cdfaefecf43d8613b9eee9dc25cddefb0f77",
+    "lake-manifest.json": "5781fd49aff59347f594d12cbfa61129eebb10ef293729ead611bd7410740590"
+  },
+  "vendor_warnings": [
+    "Research/EComplexThirdParty.lean:349:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:351:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:476:32: warning: unused variable `hc`",
+    "Research/EComplexThirdParty.lean:2234:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2241:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2249:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2256:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2345:10: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2436:10: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2472:10: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2558:12: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2586:12: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2691:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2694:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2713:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2717:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2728:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2734:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2740:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2744:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2747:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2752:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2794:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2823:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:2927:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:3102:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:3116:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:3248:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:3270:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.",
+    "Research/EComplexThirdParty.lean:3292:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead."
+  ]
+}

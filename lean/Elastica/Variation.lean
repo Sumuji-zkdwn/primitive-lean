@@ -72,7 +72,7 @@ theorem hasDerivAt_integral_variation {ε κ v : ℝ → ℝ} {ℓ : ℝ}
     intro t _
     convert (hεd (κ s + t * v s)).hasDerivAt.comp t
       (((hasDerivAt_id t).mul_const (v s)).const_add (κ s)) using 1
-    simp
+    all_goals first | (funext x; rfl) | ring
   have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le
     (Ioo_mem_nhds (by norm_num : (-1 : ℝ) < 0) (by norm_num : (0 : ℝ) < 1))
     (Filter.Eventually.of_forall hmeas) hint hmeas' hbound

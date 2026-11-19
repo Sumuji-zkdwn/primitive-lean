@@ -64,12 +64,15 @@ theorem flow_euler_error_le {F : E → E} {K : ℝ≥0}
   let C : ℝ := (K : ℝ) * Real.exp ((K : ℝ) * t) * ‖F x‖
   let u : ℝ → E := fun s => globalFlow hF s x - (x + s • F x)
   have hu (s : ℝ) : HasDerivAt u (F (globalFlow hF s x) - F x) s := by
-    simpa only [one_smul] using (hasDerivAt_globalFlow hF s x).sub
-      (((hasDerivAt_id s).smul_const (F x)).const_add x)
+    convert (hasDerivAt_globalFlow hF s x).sub
+      (((hasDerivAt_id s).smul_const (F x)).const_add x) using 1
+    · rfl
+    · simp
   have hB (s : ℝ) : HasDerivAt (fun r : ℝ => C / 2 * r ^ 2) (C * s) s := by
     convert ((hasDerivAt_id s).pow 2).const_mul (C / 2) using 1
-    simp only [id_eq]
-    ring
+    · rfl
+    · simp only [id_eq]
+      ring
   have hb (s : ℝ) (hs : s ∈ Ico 0 t) :
       ‖F (globalFlow hF s x) - F x‖ ≤ C * s := by
     calc

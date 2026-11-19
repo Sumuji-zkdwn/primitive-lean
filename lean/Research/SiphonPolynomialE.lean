@@ -79,7 +79,7 @@ def closedOrbit (n : ℕ) (z : ℝ × ℝ) : ℝ × ℝ :=
 
 theorem closedOrbit_zero (z : ℝ × ℝ) : closedOrbit 0 z = z := by
   rcases z with ⟨u, v⟩
-  apply Prod.ext <;> dsimp [closedOrbit, I] <;> norm_num <;> ring
+  apply Prod.ext <;> dsimp [closedOrbit, I] <;> norm_num
 
 theorem closedOrbit_step (n : ℕ) (z : ℝ × ℝ) :
     E (closedOrbit n z) = closedOrbit (n + 1) z := by

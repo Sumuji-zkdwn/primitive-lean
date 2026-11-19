@@ -30,6 +30,7 @@ ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
 def run_two_wavelength(root, rebuild=False):
     from verify import strip_comments_strings
+    from check_lean_migration import audit as audit_migration, accepts_current_hash
     root = Path(root)
     lean = root / "lean"
     out = root / "verification" / "two-wavelength"
@@ -59,10 +60,17 @@ def run_two_wavelength(root, rebuild=False):
         return text
 
     try:
+        migration = audit_migration(root)
+        report['migration_audit'] = migration
+        if not migration['passed']:
+            raise RuntimeError('Invalid toolchain migration: ' + '; '.join(migration['errors']))
         report["preserved_pr92_sources"] = {
             p: digest(root / p) == expected for p, expected in PRESERVED.items()}
-        if not all(report["preserved_pr92_sources"].values()):
-            raise RuntimeError("A preserved PR #92 source or dependency pin changed")
+        report['current_pr92_sources_verified'] = {
+            p: accepts_current_hash(migration, p, expected, digest(root / p))
+            for p, expected in PRESERVED.items()}
+        if not all(report['current_pr92_sources_verified'].values()):
+            raise RuntimeError("A PR #92 source or dependency pin changed without a verified migration")
         additions = ADDITIONS
         if not all((lean / (m + ".lean")).is_file() for m in additions):
             raise RuntimeError("Missing two-wavelength module")

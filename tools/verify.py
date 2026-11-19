@@ -106,6 +106,8 @@ def verify_lean(rebuild):
         'LaaksoGeometricProjection': 'Explicit ternary bonding maps on the realized multigraphs, endpoint compatibility, continuity, surjectivity, and noninjectivity; affine coordinate identities do not assert a graph metric.',
         'LaaksoGeometricTower': 'Actual compact realized levels and continuous surjective bonding maps, compatible threads with product-subspace topology and continuous base-interval evaluation; chosen lifts are not asserted continuous, and no metric/measure limit or PI theorem is claimed.',
         'LaaksoSignedConnection': 'Labelled signed two-lifts of the actual six-vertex first Laakso approximant: one middle-edge flip changes holonomy, spin compatibility and reachability while preserving vertex and edge counts.',
+        'LaaksoSignedGauge': 'On the six-edge first approximant, parity classifies edge signatures up to vertex switching. The shifted quartic energy at zero input and lambda=kappa=1 is invariant under simultaneous state and edge switching. Even parity admits zero energy and odd parity gives the lower bound 1/2 for every real state.',
+        'LaaksoSignedMinimum': 'The shifted quartic energy on the first approximant with odd cycle parity, zero input and lambda=kappa=1 has minimum 3/2, attained uniquely by the zero state.',
         'LaaksoSignedEnergy': 'Research two-component shifted quartic E at lambda=kappa=1 and zero input, connected to LinearInputDesign.E: zero cost for the untwisted well and a uniform positive bound for the flipped connection; no minimizer-existence or dynamics claim.',
         'InverseTowerObservation': 'Compatible set-level inverse towers, deterministic and multi-action projection bridges, and a nonempty binary-prefix example; no metric or measure limit.',
         'LaaksoFiniteGraph': 'Canonical binary trisect-and-glue finite multigraphs with distinct parallel-edge identities, raw quotient and an explicit six-vertex first approximant; no continuous geometric realization.',
@@ -196,6 +198,7 @@ def verify_lean(rebuild):
         'ChebyshevDegreeTower': 'Exact Bezout coprimality, reduced rational-function numerator and denominator, degree 2m of the generic quotient and half-normalized Joukowski parameter',
         'ChebyshevSplittingField': 'The generic Chebyshev polynomial over C(t) has C(X) as its actual splitting field, using distinct roots and radical reconstruction',
         'ChebyshevGaloisAutomorphisms': 'Base-field rotation and inversion automorphisms for the ternary Chebyshev model, the dihedral relations, and an injective representation; not yet a full Galois group equivalence',
+        'ChebyshevGaloisCompletion': 'Surjectivity via the degree and algebra-hom cardinal bound; full dihedral Galois group equivalence over C(t) for generic ternary Chebyshev splitting fields, k ≥ 1',
         'VariablePairGaloisBridge': 'Actual variable-pair stationary reduction to a cubic, Hessian-discriminant degeneracies, Chebyshev normalization, and the eight sign classes under coordinate reflections',
         'FoldCount': 'Normalized cusp fold root counting, stationary sign types, ordinary discriminant, and triple-root cusp tip',
         'FoldCountOriginal': 'Original-variable cusp/fold classification for every positive leading coefficient, including all discriminant regimes and explicit Hessian signs',
@@ -227,6 +230,7 @@ def verify_lean(rebuild):
         'OperatorBisimulation': 'Greatest observational bisimulation, closure operations, representation fibers and invisible symmetries',
         'OperatorVocabularyRefinement': 'Conservative extension criterion, strict new-action witnesses, quotient surjection and quotient splits',
         'OperatorFiniteHorizon': 'Finite-state multi-action trace profiles, plateau test, N-r bound and short separating words',
+        'OperatorOrientationDepth': 'Observer-dependent allowed-word equivalence, shortest separating-depth antitonicity, finite strict refinement and reversal-invariant sign obstruction',
         'OperatorSemanticClosure': 'Semantically compatible operators, induced quotient endomorphisms, functoriality, and a conservative nonword-generatable finite witness',
         'CrossSystemObservation': 'Cross-system bisimulation, trace preservation, predictive-quotient transport, and a precise finite forgetting obstruction',
         'SemanticIntervalNecessity': 'Finite prefix-time survival of local systems, old invariant extinction barrier, fresh-operation necessity, finite strict-quotient example and one-local extinction counterexample',
@@ -434,11 +438,24 @@ def main(argv=None):
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
+    modes.add_argument("--toolchain-modules-only", action="store_true", help="Compile and axiom-audit every tracked standalone Lean module")
     modes.add_argument("--two-wavelength-only", action="store_true", help="Verify the isolated PR #92 two-wavelength extension")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
+    modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
     args = parser.parse_args(argv)
+    if args.toolchain_modules_only:
+        if args.rebuild:
+            parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")
+        from verify_toolchain_modules import run as verify_modules
+        result = verify_modules(root=ROOT)
+        return 0 if result["passed"] else 1
+    if args.projection_reachability_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --projection-reachability-only")
+        from verify_projection_reachability import main as verify_projection
+        return verify_projection()
     if args.two_wavelength_only:
         from verify_two_wavelength import run_two_wavelength
         result = run_two_wavelength(ROOT, args.rebuild)

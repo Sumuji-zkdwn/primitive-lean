@@ -43,7 +43,7 @@ theorem polynomial_moment_gap_coefficient
         -(((k - p : ℕ) : ℚ) * a) := by
   intro k
   induction k using Nat.strong_induction_on with
-  | h k ih =>
+  | ind k ih =>
       intro hk
       have hdelta := polynomial_moment_delta_step p a M hrec k hk
       obtain ⟨hm, hd⟩ :=

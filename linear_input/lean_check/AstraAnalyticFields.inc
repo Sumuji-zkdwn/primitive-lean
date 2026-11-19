@@ -56,6 +56,7 @@ theorem branch_apply (T : ℝ) (b : Bool) (z : Branches T) (k : ℤ) (t : Time T
     branch T b z k t = component b (z k t) := rfl
 
 theorem branch_norm_le (T : ℝ) (b : Bool) (z : Branches T) : ‖branch T b z‖ ≤ ‖z‖ := by
+  unfold branch
   simpa only [one_mul] using AnalyticLpMap.diagonal_norm_le
     (fun _ : ℤ => componentTrace T b) 1 (fun _ => componentTrace_norm_le T b) z
 

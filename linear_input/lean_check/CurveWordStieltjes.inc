@@ -101,6 +101,7 @@ def negativeStieltjes (v : ℝ → ℝ) (hv : Continuous v) : StieltjesFunction 
 def stieltjesIntegral (p m : StieltjesFunction ℝ) (a b : ℝ) (F : ℝ → ℝ) : ℝ :=
   (∫ t in a..b, F t ∂p.measure) - ∫ t in a..b, F t ∂m.measure
 
+set_option backward.isDefEq.respectTransparency false in
 theorem c1_stieltjesIntegral {v F : ℝ → ℝ} (hv : Continuous v) (hF : Continuous F) (a b : ℝ) :
     stieltjesIntegral (positiveStieltjes v hv) (negativeStieltjes v hv) a b F =
       ∫ t in a..b, F t * v t := by

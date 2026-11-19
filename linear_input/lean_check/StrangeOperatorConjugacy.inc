@@ -239,7 +239,7 @@ theorem exampleK_closed_pair :
   rw [exampleK_is_spike, close_spike_singleton (1 : Fin 3) (0 : Fin 3) (by decide)]
   apply Set.ext
   intro S
-  simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
+  simp only [Set.mem_ofPred_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
   constructor
   · rintro ⟨b, hb, hs⟩
     fin_cases b

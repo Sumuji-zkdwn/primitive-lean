@@ -68,7 +68,7 @@ theorem canonical_respects {Λ I V : Type*} [Inhabited V]
   have hex : ∃ value : V, ∃ m, m ∈ locals ∧ part m i = some value :=
     ⟨v, l, hl, hv⟩
   have hvalue : canonical locals part i = Classical.choose hex := by
-    simp only [canonical, dif_pos hex]
+    simp only [canonical, dite_eq_left hex]
   rw [hvalue]
   obtain ⟨m, hm, hmv⟩ := Classical.choose_spec hex
   exact hc m hm l hl i (Classical.choose hex) v hmv hv

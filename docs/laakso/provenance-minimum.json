@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-19",
+  "base_commit": "5e0861901d2422461514d4f15d3c7a8263aade89",
+  "scope": "Exact minimum and equality case of the shifted quartic energy for odd signatures on the labelled first approximant.",
+  "inherited_source_ledger": "docs/laakso/provenance-switching.json",
+  "source_inputs": [
+    {
+      "path": "sources/laakso/signed/SIGNED_CONNECTIONS.md",
+      "sha256": "f70c840823a161ee068e3ca805b01a7b2e4b12d7ad8a0a3a714cf8d79006140a",
+      "use": "Section 4 defines the local potential and signed edge coupling specialized in this proof."
+    }
+  ],
+  "base_inputs": [
+    {
+      "path": "linear_input/lean_check/LaaksoFiniteGraph.inc",
+      "sha256": "14b6a3bf2af0396d4a68aa2456bc63bac2f84c242da8c2bf3c717df30249d143"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedConnection.inc",
+      "sha256": "c117e42c6a26129259aba01d79d3c3ebc2b0811f08bf133a4c03cd1e99211459"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedEnergy.inc",
+      "sha256": "c3714d5eddb67214a8f2c76dae3cad78a592f9aa2a88ba15cb43215a828b82e9"
+    },
+    {
+      "path": "linear_input/lean_check/LaaksoSignedGauge.inc",
+      "sha256": "1d6763e9444cf0eaffbff85319d4d892cf9babf442121f9d933cf87ad103c9bc"
+    },
+    {
+      "path": "docs/laakso/provenance-switching.json",
+      "sha256": "26a3af89779a95c95c3f35d733465bd46cad093c21ccda8f9e30cb174238a7a2"
+    }
+  ],
+  "modules": [
+    {
+      "path": "linear_input/lean_check/LaaksoSignedMinimum.inc",
+      "sha256": "bbada2054a93e3634d6626dd510642b5333fcaaf07f213b8555fe9b4b4eae82a",
+      "namespace": "LinearInputLaaksoSignedMinimum",
+      "declarations": 11,
+      "theorems": 10
+    }
+  ],
+  "finite_checker": {
+    "path": "tools/check_laakso_minimum.py",
+    "sha256": "4017ac30ba6561df172fbc371d85dfa216daef54a951fc05736ef434eb0a99b5",
+    "inputs": [
+      {
+        "path": "tools/check_laakso_signed.py",
+        "sha256": "c8f65bb9308cef5454fe7ec9715cff2c7a6c90fb22e784ab82442caaf713d309"
+      },
+      {
+        "path": "tools/check_laakso_finite.py",
+        "sha256": "d758dfc5ea32033fe375a324ab96e9b2471900e1d3b24b5ee39dfe154d433efb"
+      }
+    ]
+  },
+  "parameters": {
+    "lam": 1,
+    "kappa": 1,
+    "u": 0,
+    "r": -1
+  },
+  "proof_boundary": "The value 3/2 and unique zero-state minimizer are proved for this six-vertex, six-edge graph with odd cycle parity and the stated fixed coefficients."
+}

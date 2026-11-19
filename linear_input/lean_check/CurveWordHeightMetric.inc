@@ -222,7 +222,7 @@ instance heightQuotient_compactSpace {h : ℝ → ℝ} {a b : ℝ} {hh : Continu
 
 instance heightQuotient_preconnectedSpace {h : ℝ → ℝ} {a b : ℝ} {hh : ContinuousOn h (Icc a b)} :
     PreconnectedSpace (HeightQuotient h a b hh) := by
-  letI : PreconnectedSpace (Icc a b) := Subtype.preconnectedSpace isPreconnected_Icc
+  let : PreconnectedSpace (Icc a b) := Subtype.preconnectedSpace isPreconnected_Icc
   constructor
   rw [← Set.range_eq_univ.mpr (quotientTime_surjective hh)]
   exact isPreconnected_range (quotientTime_continuous hh)
@@ -230,7 +230,7 @@ instance heightQuotient_preconnectedSpace {h : ℝ → ℝ} {a b : ℝ} {hh : Co
 theorem heightQuotient_pathConnectedSpace {h : ℝ → ℝ} {a b : ℝ}
     (hab : a ≤ b) (hh : ContinuousOn h (Icc a b)) :
     PathConnectedSpace (HeightQuotient h a b hh) := by
-  letI : PathConnectedSpace (Icc a b) := isPathConnected_iff_pathConnectedSpace.mp
+  let : PathConnectedSpace (Icc a b) := isPathConnected_iff_pathConnectedSpace.mp
     ((convex_Icc a b).isPathConnected (nonempty_Icc.mpr hab))
   exact (quotientTime_surjective hh).pathConnectedSpace (quotientTime_continuous hh)
 
@@ -278,7 +278,7 @@ theorem factorCurve_lipschitz {E : Type*} [MetricSpace E] {γ : ℝ → E} {h : 
 theorem height_implies_curve_continuous {E : Type*} [MetricSpace E]
     {γ : ℝ → E} {h : ℝ → ℝ} {a b : ℝ} (hh : HasTreeHeight γ a b h) :
     ContinuousOn γ (Icc a b) := by
-  apply continuousOn_iff_continuous_restrict.mpr
+  apply continuousOn_iff_continuous_domRestrict.mpr
   exact (factorCurve_lipschitz hh).continuous.comp (quotientTime_continuous hh.1)
 
 theorem quotientTime_endpoints {h : ℝ → ℝ} {a b : ℝ} (hab : a ≤ b)

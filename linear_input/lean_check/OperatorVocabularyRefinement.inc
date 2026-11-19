@@ -159,7 +159,7 @@ theorem instability_has_explicit_word {α ω ι κ : Type*}
   obtain ⟨tail, htail⟩ :=
     (distinguishes_iff_not_wordEq K old (fresh j x) (fresh j y)).2 hnew
   refine ⟨Sum.inr j :: tail.map Sum.inl, ?_⟩
-  simpa only [run_cons, run_inl] using htail
+  simpa only [run_cons, run_inl, sumStep] using htail
 
 /-- If all new actions are old words, none can refine the old kernel. -/
 theorem generated_preserves_old {α ω ι κ : Type*}

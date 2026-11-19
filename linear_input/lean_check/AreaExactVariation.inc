@@ -65,8 +65,9 @@ theorem fderiv_constraintParameters_zero {θ η ξ₁ ξ₂ ξ₃ : ℝ → ℝ}
       ((∫ s in 0..ℓ, -sin (θ s) * ζ s),
         ((∫ s in 0..ℓ, cos (θ s) * ζ s),
           (∫ s in 0..ℓ, (xCoord θ 0 s * cos (θ s) + yCoord θ 0 s * sin (θ s)) * ζ s))) 0 := by
-    simpa only [constraintParameters, areaParameters, angleVariation, map_smul,
-      smul_eq_mul] using hx.prodMk (hy.prodMk hadj)
+    convert hx.prodMk (hy.prodMk hadj) using 1
+    simp only [constraintParameters, areaParameters, map_smul, smul_eq_mul, ζ]
+    rfl
   have hf := (contDiff_constraintParameters hℓ hθ hη hξ₁ hξ₂ hξ₃).differentiable
     (by norm_num)
   have hfd : HasDerivAt
@@ -172,7 +173,7 @@ theorem exists_exact_area_variation {θ : ℝ → ℝ} {ℓ : ℝ}
     intro t
     change fderiv ℝ f 0 (t, (0, (0, 0))) = (0, (0, 0))
     rw [hd]
-    rw [hi _ hθ.sin.continuous.neg, hi _ hθ.cos.continuous,
+    rw [hi (fun s => -sin (θ s)) (by fun_prop), hi _ hθ.cos.continuous,
       hi _ (LinearInputAreaVariation.continuous_moment hθ.continuous)]
     simp only [hηx, hηy, hηa, mul_zero, zero_mul, add_zero]
   have hc : (fderiv ℝ f 0).comp
@@ -182,7 +183,7 @@ theorem exists_exact_area_variation {θ : ℝ → ℝ} {ℓ : ℝ}
     intro p
     change fderiv ℝ f 0 (0, p) = p
     rw [hd]
-    rw [hi _ hθ.sin.continuous.neg, hi _ hθ.cos.continuous,
+    rw [hi (fun s => -sin (θ s)) (by fun_prop), hi _ hθ.cos.continuous,
       hi _ (LinearInputAreaVariation.continuous_moment hθ.continuous)]
     rw [hx₁, hy₁, ha₁, hx₂, hy₂, ha₂, hx₃, hy₃, ha₃]
     simp

@@ -138,7 +138,7 @@ theorem projection_tendsto (f : RealCircleL2) :
 /-- Uniform convergence on every compact set of real L2 fields, including compact time traces. -/
 theorem projection_uniformOn_compact (K : Set RealCircleL2) (hK : IsCompact K) :
     TendstoUniformlyOn (fun N f => RealGalerkin.projection N f) id atTop K := by
-  letI : CompactSpace K := isCompact_iff_compactSpace.mp hK
+  let : CompactSpace K := isCompact_iff_compactSpace.mp hK
   rw [tendstoUniformlyOn_iff_tendstoUniformly_comp_coe]
   have heq : Equicontinuous (fun N (f : K) => RealGalerkin.projection N (f : RealCircleL2)) := by
     apply Metric.equicontinuous_of_continuity_modulus id tendsto_id

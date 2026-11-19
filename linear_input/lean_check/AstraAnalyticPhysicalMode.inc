@@ -17,9 +17,10 @@ theorem freeWave_hasDerivAt (β ν ω : ℝ) (a : ℂ) (t : ℝ) :
   have he := ((((hasDerivAt_id t).const_mul (-β)).mul_const ν).exp).ofReal_comp
   have hd := (he.mul (phaseAt_hasDerivAt (-ω) t)).mul_const a
   convert hd using 1
-  simp only [freeWave, id_eq]
-  push_cast
-  ring
+  · rfl
+  · simp only [freeWave, id_eq]
+    push_cast
+    ring
 
 def damping (ρ₀ β ν t : ℝ) : ℂ := (Real.exp (-(ρ₀ - β * t) * ν) : ℂ)
 
@@ -27,9 +28,10 @@ theorem damping_hasDerivAt (ρ₀ β ν t : ℝ) :
     HasDerivAt (damping ρ₀ β ν) ((β * ν : ℝ) * damping ρ₀ β ν t) t := by
   have h := (((hasDerivAt_const t ρ₀).sub ((hasDerivAt_id t).const_mul β)).neg.mul_const ν).exp.ofReal_comp
   convert h using 1
-  simp only [damping, id_eq, Pi.neg_apply, Pi.sub_apply]
-  push_cast
-  ring
+  · rfl
+  · simp only [damping, id_eq, Pi.neg_apply, Pi.sub_apply]
+    push_cast
+    ring
 
 def weightedTrace (T : ℝ) (hT : 0 ≤ T) (β ω : ℝ) (k : ℤ) (a : ℂ)
     (f : C(Time T, ℂ)) (t : ℝ) : ℂ :=
@@ -44,9 +46,10 @@ theorem weightedTrace_hasDerivAt (T : ℝ) (hT : 0 ≤ T) (β ω : ℝ) (k : ℤ
     ((rawOsc_hasDerivAt T hT β |(k : ℝ)| ω f t).const_mul (multiplier k))
   have hm := multiplier_frequency k
   convert hd using 1
-  simp only [weightedTrace]
-  push_cast at hm ⊢
-  linear_combination -f t * hm
+  · rfl
+  · simp only [weightedTrace]
+    push_cast at hm ⊢
+    linear_combination -f t * hm
 
 def physicalTrace (ρ₀ : ℝ) (T : ℝ) (hT : 0 ≤ T) (β ω : ℝ) (k : ℤ) (a : ℂ)
     (f : C(Time T, ℂ)) (t : ℝ) : ℂ :=
@@ -61,9 +64,10 @@ theorem physicalTrace_hasDerivAt (ρ₀ : ℝ) (T : ℝ) (hT : 0 ≤ T) (β ω :
   have hd := (damping_hasDerivAt ρ₀ β |(k : ℝ)| t).mul
     (weightedTrace_hasDerivAt T hT β ω k a f t)
   convert hd using 1
-  simp only [physicalTrace]
-  push_cast
-  ring
+  · rfl
+  · simp only [physicalTrace]
+    push_cast
+    ring
 
 theorem freeWave_eq_waveFactor (T β c σ : ℝ) (k : ℤ) (a : ℂ) (t : Time T) :
     freeWave β |(k : ℝ)| (σ * c * k) a t = AnalyticLift.waveFactor T β c k σ t * a := by

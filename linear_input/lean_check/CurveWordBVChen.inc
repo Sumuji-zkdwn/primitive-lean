@@ -33,8 +33,8 @@ theorem stieltjesIntegral_finset_sum {κ : Type*} (p m : StieltjesFunction ℝ)
     stieltjesIntegral p m a b (fun t => ∑ k ∈ s, F k t) =
       ∑ k ∈ s, stieltjesIntegral p m a b (F k) := by
   unfold stieltjesIntegral
-  rw [intervalIntegral.integral_finset_sum (fun k hk => (hF k hk).intervalIntegrable a b),
-    intervalIntegral.integral_finset_sum (fun k hk => (hF k hk).intervalIntegrable a b),
+  rw [intervalIntegral.integral_finsetSum (fun k hk => (hF k hk).intervalIntegrable a b),
+    intervalIntegral.integral_finsetSum (fun k hk => (hF k hk).intervalIntegrable a b),
     Finset.sum_sub_distrib]
 
 theorem reverseStieltjes_split {ι : Type*} (p m : ι → StieltjesFunction ℝ)

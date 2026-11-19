@@ -123,10 +123,10 @@ theorem approximation_error (p : Input) (N : ℕ) (t : ℝ) (ht : t ∈ Icc 0 p.
   exact AnalyticGalerkinCertificate.uniform_error p N t ht
 
 theorem spatialBudget_tendsto : Tendsto spatialBudget atTop (𝓝 0) := by
-  simpa only [mul_zero] using GalerkinClassical.cutoffDecay_tendsto.const_mul 2
+  simpa only [mul_zero] using! GalerkinClassical.cutoffDecay_tendsto.const_mul 2
 
 theorem totalBudget_tendsto : Tendsto totalBudget atTop (𝓝 0) := by
-  simpa only [zero_add] using
+  simpa only [zero_add] using!
     spatialBudget_tendsto.add tendsto_one_div_add_atTop_nhds_zero_nat
 
 /-- The full spatial Galerkin sequence converges uniformly on the closed time interval. -/

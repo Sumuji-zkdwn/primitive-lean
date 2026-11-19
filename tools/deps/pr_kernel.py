@@ -16,6 +16,7 @@ import argparse
 import json
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import time
@@ -23,12 +24,22 @@ from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
 
+# `lake env` supplies the package LEAN_PATH; this fixed program then puts the work
+# directory first (see the ordering note in main). Paths reach it only as an
+# environment variable and positional arguments, never as shell source, so
+# directories containing spaces or shell metacharacters are passed unchanged.
+_LEAN_WORK_FIRST = 'LEAN_PATH="$PR_KERNEL_WORK:$LEAN_PATH" exec lean "$@"'
+
+
+def lean_work_first(*args):
+    return ["lake", "env", "sh", "-c", _LEAN_WORK_FIRST, "sh", *map(str, args)]
+
 
 def run(cmd, cwd, log, env=None):
     t = time.monotonic()
     p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, env=env)
     Path(log).write_text(p.stdout + p.stderr)
-    return dict(cmd=cmd if isinstance(cmd, str) else " ".join(cmd), exit=p.returncode,
+    return dict(cmd=cmd if isinstance(cmd, str) else shlex.join(cmd), exit=p.returncode,
                 seconds=round(time.monotonic() - t, 1), log=str(log))
 
 
@@ -41,7 +52,7 @@ def main():
     wt, work = Path(a.worktree).resolve(), Path(a.work).resolve()
     work.mkdir(parents=True, exist_ok=True)
     lean = wt / "lean"
-    env = dict(os.environ)
+    env = dict(os.environ, PR_KERNEL_WORK=str(work))
     status = dict(steps={})
     S = status["steps"]
 
@@ -59,8 +70,8 @@ def main():
     # The work directory must come first: Lean resolves a module through the first
     # search-path root that contains its top-level package directory. If an earlier
     # build left e.g. lean/.lake/build/lib/lean/Research/ behind, appending `work`
-    # makes Research.* modules that exist only in `work` unresolvable.
-    lp = f"LEAN_PATH={work}:$LEAN_PATH"
+    # makes Research.* modules that exist only in `work` unresolvable. Hence
+    # lean_work_first, with PR_KERNEL_WORK set in env.
     modules, module_sources = ["PrimitiveMain"], {}
 
     registered = set(re.findall(r"'(linear_input/lean_check/[^']+\.inc)'",
@@ -69,8 +80,9 @@ def main():
     if probes:
         text = "import PrimitiveMain\n\n" + "\n\n".join((wt / p).read_text() for p in probes)  # caller passes ancestry order
         (work / "ExtraProbe.lean").write_text(text)
-        S["compile_probes"] = run(["lake", "env", "sh", "-c", f"{lp} lean --root={work} -o {work}/ExtraProbe.olean {work}/ExtraProbe.lean"],
-                                  lean, work / "compile_probes.log")
+        S["compile_probes"] = run(lean_work_first(f"--root={work}", "-o", work / "ExtraProbe.olean",
+                                                  work / "ExtraProbe.lean"),
+                                  lean, work / "compile_probes.log", env)
         if S["compile_probes"]["exit"] == 0:
             modules.append("ExtraProbe")
             module_sources["ExtraProbe"] = "+".join(probes)
@@ -96,16 +108,16 @@ def main():
         out = work / (m.replace(".", "/") + ".olean")
         out.parent.mkdir(parents=True, exist_ok=True)
         key = "compile_" + m
-        S[key] = run(["lake", "env", "sh", "-c", f"{lp} lean --root={lean} -o {out} {wt / mods[m]}"],
-                     lean, work / (key + ".log"))
+        S[key] = run(lean_work_first(f"--root={lean}", "-o", out, wt / mods[m]),
+                     lean, work / (key + ".log"), env)
         if S[key]["exit"] == 0:
             modules.append(m)
             module_sources[m] = mods[m]
 
     prefixes = ["Elastica", *modules]
-    S["extract"] = run(["lake", "env", "sh", "-c",
-                        f"{lp} lean --run {TOOLS}/ExtractDeps.lean {work}/raw.json {' '.join(modules)} -- {' '.join(prefixes)}"],
-                       lean, work / "extract.log")
+    S["extract"] = run(lean_work_first("--run", TOOLS / "ExtractDeps.lean", work / "raw.json", *modules,
+                                       "--", *prefixes),
+                       lean, work / "extract.log", env)
     if S["extract"]["exit"] == 0:
         cmd = ["python3", str(TOOLS / "analyze.py"), "--raw", str(work / "raw.json"),
                "--assembled", str(work / "PrimitiveMain.lean"), "--report", str(report),

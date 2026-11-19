@@ -66,14 +66,14 @@ def joinCurve {E : Type*} (b : ℝ) (γ η : ℝ → E) : ℝ → E :=
   fun t => if t ≤ b then γ t else η t
 
 theorem joinCurve_left {E : Type*} (b : ℝ) (γ η : ℝ → E) {t : ℝ} (ht : t ≤ b) :
-    joinCurve b γ η t = γ t := if_pos ht
+    joinCurve b γ η t = γ t := ite_eq_left ht
 
 theorem joinCurve_right {E : Type*} {b : ℝ} {γ η : ℝ → E} (he : γ b = η b)
     {t : ℝ} (ht : b ≤ t) : joinCurve b γ η t = η t := by
   by_cases htb : t ≤ b
   · have ht' : t = b := le_antisymm htb ht
     rw [ht', joinCurve_left b γ η le_rfl, he]
-  · exact if_neg htb
+  · exact ite_eq_right htb
 
 theorem joinCurve_continuousOn {E : Type*} [TopologicalSpace E] {γ η : ℝ → E}
     {a b c : ℝ} (hab : a ≤ b) (hbc : b ≤ c) (he : γ b = η b)
@@ -90,8 +90,8 @@ theorem joinCurve_variation {E : Type*} [PseudoEMetricSpace E] {γ η : ℝ → 
       eVariationOn γ (Icc a b) + eVariationOn η (Icc b c) := by
   have h := eVariationOn.Icc_add_Icc (joinCurve b γ η) (s := univ) hab hbc (mem_univ b)
   simp only [univ_inter] at h
-  rw [← h, eVariationOn.congr (fun t ht => joinCurve_left b γ η ht.2),
-    eVariationOn.congr (fun t ht => joinCurve_right he ht.1)]
+  rw [← h, eVariationOn.congr (fun t (ht : t ∈ Icc a b) => joinCurve_left b γ η ht.2),
+    eVariationOn.congr (fun t (ht : t ∈ Icc b c) => joinCurve_right he ht.1)]
 
 theorem joinCurve_boundedVariation {E : Type*} [PseudoEMetricSpace E] {γ η : ℝ → E}
     {a b c : ℝ} (hab : a ≤ b) (hbc : b ≤ c) (he : γ b = η b)
@@ -238,8 +238,8 @@ theorem join_mirror_eq_retrace {E : Type*} (γ : ℝ → E) (b : ℝ) :
     joinCurve b γ (mirrorPath γ b) = γ ∘ retraceTime b := by
   funext t
   by_cases ht : t ≤ b
-  · simp only [joinCurve, if_pos ht, Function.comp_apply, retraceTime_left ht]
-  · simp only [joinCurve, if_neg ht, Function.comp_apply,
+  · simp only [joinCurve, ite_eq_left ht, Function.comp_apply, retraceTime_left ht]
+  · simp only [joinCurve, ite_eq_right ht, Function.comp_apply,
       retraceTime_right (le_of_not_ge ht), mirrorPath]
 
 theorem mirrorPath_boundedVariation {E : Type*} [PseudoEMetricSpace E]

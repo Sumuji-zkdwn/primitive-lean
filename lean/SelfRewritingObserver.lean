@@ -18,10 +18,12 @@ set_option maxHeartbeats 0
 
 namespace SelfRewritingObserver
 
+set_option backward.isDefEq.respectTransparency false in
 inductive Mode where
   | blind | frozen | feedback
   deriving DecidableEq, Repr, Fintype
 
+set_option backward.isDefEq.respectTransparency false in
 inductive Action where
   | idle | clear | set | scan
   deriving DecidableEq, Repr, Fintype

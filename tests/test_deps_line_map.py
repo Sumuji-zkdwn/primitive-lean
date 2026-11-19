@@ -37,6 +37,7 @@ class AssemblyLineMapTests(unittest.TestCase):
         # Mixed source line endings and a final line with no newline must remain exact.
         self.write(self.after, b'namespace After\r\ntheorem later : True := True.intro\r\nend After')
         self.write('tools/check_astra_physics.py', (ROOT / 'tools/check_astra_physics.py').read_bytes())
+        self.write('tools/check_lean_migration.py', (ROOT / 'tools/check_lean_migration.py').read_bytes())
         self.contexts = [dict(source=self.flow, kind='hilbertflow_set_exports', reason='Regression fixture')]
         self.report = dict(supplemental_sources=self.sources, assembly_contexts=self.contexts)
         self.save_manifest()

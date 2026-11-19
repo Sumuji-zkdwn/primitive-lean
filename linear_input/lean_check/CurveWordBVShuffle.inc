@@ -12,7 +12,7 @@ open Real Set MeasureTheory Filter
 open scoped Topology
 open LinearInputCurveWordStieltjes LinearInputCurveWordBVSignature
 
-theorem integral_triangle_product (μ ν : Measure ℝ) [SFinite μ] [SFinite ν] [NoAtoms μ]
+theorem integral_triangle_product (μ ν : Measure ℝ) [SFinite μ] [SFinite ν] [NullSingletonClass μ]
     {F G : ℝ → ℝ} (hF : Integrable F μ) (hG : Integrable G ν) :
     (∫ x, F x ∂μ) * (∫ y, G y ∂ν) =
       (∫ x, F x * (∫ y in Iic x, G y ∂ν) ∂μ) +
@@ -56,7 +56,7 @@ theorem integral_restrict_Iic (μ : Measure ℝ) (F : ℝ → ℝ) {a b t : ℝ}
   rw [Measure.restrict_restrict measurableSet_Iic, he, intervalIntegral.integral_of_le ht.1]
 
 theorem intervalIntegral_triangle_product (μ ν : Measure ℝ)
-    [IsLocallyFiniteMeasure μ] [IsLocallyFiniteMeasure ν] [NoAtoms μ]
+    [IsLocallyFiniteMeasure μ] [IsLocallyFiniteMeasure ν] [NullSingletonClass μ]
     {F G : ℝ → ℝ} (hF : Continuous F) (hG : Continuous G) {a b : ℝ} (hab : a ≤ b) :
     (∫ x in a..b, F x ∂μ) * (∫ y in a..b, G y ∂ν) =
       (∫ x in a..b, F x * (∫ y in a..x, G y ∂ν) ∂μ) +
@@ -80,8 +80,8 @@ theorem stieltjes_integration_by_parts (p m q n : StieltjesFunction ℝ)
     stieltjesIntegral p m a b F * stieltjesIntegral q n a b G =
       stieltjesIntegral p m a b (fun t => F t * stieltjesIntegral q n a t G) +
         stieltjesIntegral q n a b (fun t => stieltjesIntegral p m a t F * G t) := by
-  letI : NoAtoms p.measure := continuous_stieltjes_noAtoms p hp
-  letI : NoAtoms m.measure := continuous_stieltjes_noAtoms m hm
+  let : NullSingletonClass p.measure := continuous_stieltjes_noAtoms p hp
+  let : NullSingletonClass m.measure := continuous_stieltjes_noAtoms m hm
   have hPQ := intervalIntegral_triangle_product p.measure q.measure hF hG hab
   have hPN := intervalIntegral_triangle_product p.measure n.measure hF hG hab
   have hMQ := intervalIntegral_triangle_product m.measure q.measure hF hG hab

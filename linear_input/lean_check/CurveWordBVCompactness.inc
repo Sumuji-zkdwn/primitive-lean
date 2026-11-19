@@ -18,7 +18,7 @@ def speedControlledPaths {E : Type*} [MetricSpace E] (L : ℝ) (hL : 0 ≤ L)
 theorem speedControlledPaths_isClosed {E : Type*} [MetricSpace E]
     (L : ℝ) (hL : 0 ≤ L) (x : E) : IsClosed (speedControlledPaths L hL x) := by
   have hlip : IsClosed {f : Icc (0 : ℝ) L →ᵇ E | LipschitzWith 1 f} :=
-    (isClosed_setOf_lipschitzWith (α := Icc (0 : ℝ) L) (β := E) 1).preimage
+    (isClosed_setOfPred_lipschitzWith (α := Icc (0 : ℝ) L) (β := E) 1).preimage
       (BoundedContinuousFunction.continuous_coe (α := Icc (0 : ℝ) L) (β := E))
   have hstart : Continuous (fun f : Icc (0 : ℝ) L →ᵇ E => f ⟨0, le_rfl, hL⟩) :=
     continuous_eval_const _
@@ -49,7 +49,7 @@ def pathExtension {E : Type*} [MetricSpace E] {L : ℝ} (hL : 0 ≤ L)
 theorem pathExtension_lipschitz {E : Type*} [MetricSpace E] {L : ℝ} (hL : 0 ≤ L)
     (f : Icc (0 : ℝ) L →ᵇ E) (hf : LipschitzWith 1 f) :
     LipschitzWith 1 (pathExtension hL f) := by
-  simpa only [one_mul] using hf.comp (LipschitzWith.projIcc hL)
+  simpa only [one_mul] using! hf.comp (LipschitzWith.projIcc hL)
 
 theorem pathExtension_continuous {E : Type*} [MetricSpace E] {L : ℝ} (hL : 0 ≤ L)
     (f : Icc (0 : ℝ) L →ᵇ E) : Continuous (pathExtension hL f) :=
@@ -98,7 +98,7 @@ theorem lipschitz_variation_le {E : Type*} [MetricSpace E] {g : ℝ → E}
     eVariationOn g (Icc 0 r) ≤ ENNReal.ofReal r := by
   have hi : eVariationOn (id : ℝ → ℝ) (Icc 0 r) ≤ ENNReal.ofReal r := by
     simpa only [univ_inter, id_eq, sub_zero] using
-      (monotone_id.monotoneOn univ).eVariationOn_le (a := 0) (b := r) (mem_univ _) (mem_univ _)
+      ((monotone_id.monotoneOn univ).eVariationOn_eq (a := 0) (b := r) (mem_univ _) (mem_univ _)).le
   have he := hg.lipschitzOnWith.comp_eVariationOn_le (g := id)
     (s := Icc 0 r) (mapsTo_univ id (Icc 0 r))
   simp only [Function.comp_id, ENNReal.coe_one, one_mul] at he
@@ -119,7 +119,7 @@ theorem coordinateExtension_variation_le {ι : Type*} [Fintype ι] {L r : ℝ}
     (hr : r ∈ Icc 0 L) (i : ι) :
     (eVariationOn (fun t => pathExtension hL f t i) (Icc 0 r)).toReal ≤ L := by
   have hlip : LipschitzWith 1 (fun t => pathExtension hL f t i) := by
-    simpa only [one_mul] using (LipschitzWith.eval i).comp (pathExtension_lipschitz hL f hf)
+    simpa only [one_mul] using! (LipschitzWith.eval i).comp (pathExtension_lipschitz hL f hf)
   have he := lipschitz_variation_le hlip hr.1
   exact (ENNReal.toReal_mono ENNReal.ofReal_ne_top he).trans (by simpa [ENNReal.toReal_ofReal hr.1] using hr.2)
 
@@ -180,7 +180,7 @@ theorem basedPrefixSignature_continuous {ι : Type*} [Fintype ι] {L r : ℝ}
     Continuous (fun f : speedControlledPaths L hL x => basedPrefixSignature hL x P f r) := by
   apply continuous_pi
   intro w
-  apply continuous_finset_sum
+  apply continuous_finsetSum
   intro k _
   exact continuous_const.mul ((continuous_apply (w.drop k)).comp (prefixSignature_continuous hL x hr))
 
@@ -200,7 +200,7 @@ theorem signatureRangeClass_isClosed {ι : Type*} [Fintype ι] {L : ℝ}
     isClosed_eq (basedPrefixSignature_continuous hL x P ⟨hL, le_rfl⟩) continuous_const
   have hr : IsClosed {f : speedControlledPaths L hL x |
       ∀ r : Icc (0 : ℝ) L, basedPrefixSignature hL x P f r.val ∈ K} := by
-    simp only [setOf_forall]
+    simp only [ofPred_forall]
     exact isClosed_iInter (fun r => hK.preimage (basedPrefixSignature_continuous hL x P r.property))
   exact he.inter hr
 
@@ -217,7 +217,7 @@ theorem exists_minimal_signature_range_representative {ι : Type*} [Fintype ι]
       ∀ h : speedControlledPaths L hL x, h ∈ signatureRangeClass hL x P Q K →
         eVariationOn (pathExtension hL g.val) (Icc 0 L) ≤
           eVariationOn (pathExtension hL h.val) (Icc 0 L) := by
-  letI : CompactSpace (speedControlledPaths L hL x) :=
+  let : CompactSpace (speedControlledPaths L hL x) :=
     isCompact_iff_compactSpace.mp (speedControlledPaths_isCompact L hL x)
   have hlsc : LowerSemicontinuous (fun g : speedControlledPaths L hL x =>
       eVariationOn (pathExtension hL g.val) (Icc 0 L)) :=
@@ -233,7 +233,7 @@ def speedControlledOfLipschitz {E : Type*} [MetricSpace E] {L : ℝ} (hL : 0 ≤
     ⟨fun t : Icc (0 : ℝ) L => γ t.val, hγ.continuous.comp continuous_subtype_val⟩,
     by
       constructor
-      · simpa only [one_mul] using hγ.comp (LipschitzWith.subtype_val (Icc (0 : ℝ) L))
+      · simpa only [one_mul] using! hγ.comp (LipschitzWith.subtype_val (Icc (0 : ℝ) L))
       · rfl⟩
 
 theorem speedControlledOfLipschitz_eq {E : Type*} [MetricSpace E] {L : ℝ} (hL : 0 ≤ L)
@@ -253,7 +253,10 @@ theorem prefixSignature_eq_pathSignature {ι : Type*} [Fintype ι] {L r : ℝ}
         (pathExtension_continuous hL f.val).continuousOn := by
   funext w
   symm
-  apply pathSignature_eq_representation _ _ _ _
+  unfold prefixSignature bvSignature
+  apply pathSignature_eq_representation (pathExtension hL f.val) hr
+    ((pathExtension_boundedVariation hL f.val f.property.1).mono (subset_univ _))
+    (pathExtension_continuous hL f.val).continuousOn
     (fun i => LinearInputCurveWordStieltjes.bvPositive
       (coordinateExtension_boundedVariation hL f.val f.property.1 i)
       (coordinateExtension_continuous hL f.val i) 0)
@@ -271,10 +274,10 @@ theorem prefixSignature_eq_pathSignature {ι : Type*} [Fintype ι] {L r : ℝ}
     (fun u => pathExtension hL f.val u i) 0 s
   have ht := LinearInputCurveWordStieltjes.jordan_difference
     (fun u => pathExtension hL f.val u i) 0 t
-  change (LinearInputCurveWordStieltjes.jordanPositive _ 0 t -
-      LinearInputCurveWordStieltjes.jordanPositive _ 0 s) -
-    (LinearInputCurveWordStieltjes.jordanNegative _ 0 t -
-      LinearInputCurveWordStieltjes.jordanNegative _ 0 s) = _
+  change (LinearInputCurveWordStieltjes.jordanPositive (fun u => pathExtension hL f.val u i) 0 t -
+      LinearInputCurveWordStieltjes.jordanPositive (fun u => pathExtension hL f.val u i) 0 s) -
+    (LinearInputCurveWordStieltjes.jordanNegative (fun u => pathExtension hL f.val u i) 0 t -
+      LinearInputCurveWordStieltjes.jordanNegative (fun u => pathExtension hL f.val u i) 0 s) = _
   linarith
 
 end LinearInputCurveWordBVCompactness

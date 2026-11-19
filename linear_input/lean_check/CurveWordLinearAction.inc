@@ -54,7 +54,7 @@ theorem reverseTensorAction_continuous {ι κ : Type*} [Fintype ι] (M : κ → 
   induction w generalizing F with
   | nil => exact hF []
   | cons j w ih =>
-    exact continuous_finset_sum _ (fun i _ => continuous_const.mul (ih _ (fun u => hF (i :: u))))
+    exact continuous_finsetSum _ (fun i _ => continuous_const.mul (ih _ (fun u => hF (i :: u))))
 
 theorem reverseTensorAction_integral {ι κ : Type*} [Fintype ι] (M : κ → ι → ℝ)
     (w : List κ) (F : List ι → ℝ → ℝ) (hF : ∀ u, Continuous (F u)) (a b : ℝ) :
@@ -69,7 +69,7 @@ theorem reverseTensorAction_integral {ι κ : Type*} [Fintype ι] (M : κ → ι
       intro i _
       exact (continuous_const.mul (reverseTensorAction_continuous M w _
         (fun u => hF (i :: u)))).intervalIntegrable a b
-    rw [intervalIntegral.integral_finset_sum hint]
+    rw [intervalIntegral.integral_finsetSum hint]
     apply Finset.sum_congr rfl
     intro i _
     rw [intervalIntegral.integral_const_mul, ih _ (fun u => hF (i :: u))]
@@ -77,7 +77,7 @@ theorem reverseTensorAction_integral {ι κ : Type*} [Fintype ι] (M : κ → ι
 theorem transformedVelocity_continuous {ι κ : Type*} [Fintype ι]
     (M : κ → ι → ℝ) (v : ι → ℝ → ℝ) (hv : ∀ i, Continuous (v i)) (j : κ) :
     Continuous (transformedVelocity M v j) :=
-  continuous_finset_sum _ (fun i _ => continuous_const.mul (hv i))
+  continuous_finsetSum _ (fun i _ => continuous_const.mul (hv i))
 
 theorem reverseIntegral_linear_action {ι κ : Type*} [Fintype ι]
     (M : κ → ι → ℝ) (v : ι → ℝ → ℝ) (hv : ∀ i, Continuous (v i))
@@ -104,7 +104,7 @@ theorem reverseIntegral_linear_action {ι κ : Type*} [Fintype ι]
       intro i _
       exact (continuous_const.mul (reverseTensorAction_continuous M w _
         (fun u => (reverseIntegral_continuous hv a u).mul (hv i)))).intervalIntegrable a b
-    rw [he, intervalIntegral.integral_finset_sum hint]
+    rw [he, intervalIntegral.integral_finsetSum hint]
     apply Finset.sum_congr rfl
     intro i _
     rw [intervalIntegral.integral_const_mul]

@@ -109,7 +109,8 @@ theorem hasDerivAt_corrected_energy_feasible {k ℓ : ℝ} {θ : ℝ → ℝ}
   have hf' : HasFDerivAt
       (fun p : LinearInputAreaParameters.Parameters => ∫ s in 0..ℓ, k*(deriv θ s+B s p)^2/2)
       (∫ s in 0..ℓ, (k*deriv θ s) • B s) (0, (a 0, (b 0, c 0))) := by
-    simpa only [map_zero, add_zero, hden, ha0, hb0, hc0] using hf
+    convert hf using 1 <;> simp only [map_zero, add_zero, hden, ha0, hb0, hc0]
+    rfl
   have hp : HasDerivAt (fun t : ℝ => (t, (a t, (b t, c t))))
       (1, (0, (0, 0))) 0 := (hasDerivAt_id 0).prodMk (ha.prodMk (hb.prodMk hc))
   have hd := hf'.comp_hasDerivAt 0 hp
@@ -137,7 +138,7 @@ theorem hasDerivAt_corrected_energy_feasible {k ℓ : ℝ} {θ : ℝ → ℝ}
     congr 2; ring
   simp only [Function.comp_def] at hd
   rw [he] at hd
-  simpa only [ContinuousLinearMap.smul_apply, smul_eq_mul, B,
+  simpa only [smul_apply, smul_eq_mul, B,
     LinearInputAreaParameters.parameterLinear_apply, one_mul, zero_mul, add_zero] using hd
 
 end LinearInputAreaFamily

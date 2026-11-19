@@ -216,11 +216,11 @@ theorem coordinate_shuffle {ι : Type*} {v : ι → ℝ → ℝ}
 approximable by finite linear combinations of word coordinates. -/
 theorem signature_coordinates_dense {ι : Type*} {v : ι → ℝ → ℝ}
     (hv : ∀ i, Continuous (v i)) (a b : ℝ) :
-    letI : CompactSpace (signatureRange v a b) :=
+    let : CompactSpace (signatureRange v a b) :=
       isCompact_iff_compactSpace.mp (signatureRange_isCompact hv a b)
     (coordinateAlgebra (coordinate v a b) (coordinate_empty v a b)
       (coordinate_shuffle hv a b)).topologicalClosure = ⊤ := by
-  letI : CompactSpace (signatureRange v a b) :=
+  let : CompactSpace (signatureRange v a b) :=
     isCompact_iff_compactSpace.mp (signatureRange_isCompact hv a b)
   apply coordinates_dense
   intro x y hxy
@@ -271,7 +271,7 @@ theorem continuous_one_form_zero_of_trivial_signature {ι : Type*} {v : ι → �
     (hzero : ∀ w : List ι, w ≠ [] → signature v a b w = 0)
     (f : C(signatureRange v a b, ℝ)) (w : List ι) :
     (∫ t in a..b, f (signaturePoint v a b hab t) * deriv (reverseIntegral v a w) t) = 0 := by
-  letI : CompactSpace (signatureRange v a b) :=
+  let : CompactSpace (signatureRange v a b) :=
     isCompact_iff_compactSpace.mp (signatureRange_isCompact hv a b)
   let L := lineIntegralFunctional (signaturePoint_continuous hv a b hab)
     (reverseIntegral_deriv_continuous hv a w) a b hab

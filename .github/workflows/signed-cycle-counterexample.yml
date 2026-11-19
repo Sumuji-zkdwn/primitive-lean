@@ -1,0 +1,115 @@
+name: Signed cycle counterexample (Lean 4.36)
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SignedCycleCounterexample.lean'
+      - 'lean/Research/SquareZeroNetwork.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - '.github/workflows/signed-cycle-counterexample.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: signed-cycle-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Check out the exact proposed head
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Record source and dependency identities
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          def output(*args):
+              return subprocess.check_output(args, text=True).strip()
+          actual = output('git', 'rev-parse', 'HEAD')
+          assert actual == os.environ['EXPECTED_SHA']
+          toolchain = pathlib.Path('lean/lean-toolchain').read_text().strip()
+          assert toolchain == 'leanprover/lean4:v4.36.0-rc2'
+          mathlib = output('git', '-C', 'lean/.lake/packages/mathlib', 'rev-parse', 'HEAD')
+          assert mathlib == '2ddf59c8f14245864e6c0ed227a2dab76b9efea2'
+          files = ['lean/Research/SquareZeroNetwork.lean',
+                   'lean/Research/SignedCycleCounterexample.lean',
+                   'lean/lean-toolchain', 'lean/lakefile.toml', 'lean/lake-manifest.json']
+          hashes = {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in files}
+          assert hashes[files[0]] == '0c8cbcd5a8749cea7d787e1710ad1558c7e8f66fa61700696c936f60ab95f68a'
+          out = pathlib.Path('verification/signed-cycle')
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'source.json').write_text(json.dumps({
+              'checkout_sha': actual, 'expected_sha': os.environ['EXPECTED_SHA'],
+              'event_sha': os.environ['GITHUB_SHA'], 'toolchain': toolchain,
+              'mathlib_sha': mathlib, 'source_sha256': hashes,
+          }, indent=2) + '\n')
+          PY
+      - name: Compile both sources with trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --version | tee ../verification/signed-cycle/lean-version.log
+          mkdir -p .lake/build/lib/lean/Research
+          for module in SquareZeroNetwork SignedCycleCounterexample; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$module.olean" "Research/$module.lean" 2>&1 | tee "../verification/signed-cycle/$module.log"
+            if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' "../verification/signed-cycle/$module.log"; then exit 1; fi
+          done
+      - name: Audit all eight added theorems
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('Research/SignedCycleCounterexample.lean').read_text()
+          names = re.findall(r'^theorem\s+(\w+)', source, re.M)
+          expected = ['edgeSum_eq_A_mulVec', 'edges_square_zero', 'square_eq',
+                      'square_ne_zero', 'cube_eq_zero', 'support_iff',
+                      'two_directed_cycles', 'signed_cycle_counterexample']
+          assert names == expected, names
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b', source)
+          audit = 'import Research.SignedCycleCounterexample\n'
+          audit += ''.join('#print axioms SquareZeroNetwork.SignedCycle.' + n + '\n' for n in names)
+          pathlib.Path('SignedCycleCounterexampleAudit.lean').write_text(audit)
+          PY
+          lake env lean --trust=0 SignedCycleCounterexampleAudit.lean 2>&1 | tee ../verification/signed-cycle/axioms.log
+          python3 - <<'PY'
+          import pathlib, re
+          log = pathlib.Path('../verification/signed-cycle/axioms.log').read_text()
+          assert not re.search(r'(error:|warning:|sorryAx)', log), log
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', log)
+          absent = log.count('does not depend on any axioms')
+          assert len(entries) + absent == 8, log
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for entry in entries:
+              used = {x.strip() for x in entry.split(',') if x.strip()}
+              assert used <= allowed, used
+          print('All 8 added theorems passed the axiom audit.')
+          PY
+      - name: Preserve source identities and proof logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: signed-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/signed-cycle/
+          if-no-files-found: warn

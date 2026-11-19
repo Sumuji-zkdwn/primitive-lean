@@ -171,7 +171,7 @@ def rationalAngles : AddSubgroup Angle where
   carrier := {θ | ∃ q : ℚ, ((q : ℝ) : Angle) = θ}
   zero_mem' := by
     change ∃ q : ℚ, ((q : ℝ) : Angle) = 0
-    exact ⟨0, by simpa using (AddCircle.coe_zero (1 : ℝ))⟩
+    exact ⟨0, by simp⟩
   add_mem' := by
     intro a b ha hb
     obtain ⟨qa, hqa⟩ := ha

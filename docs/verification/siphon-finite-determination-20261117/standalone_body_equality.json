@@ -1,0 +1,14 @@
+{
+  "Research/SiphonPolynomialE.lean": {
+    "body_identical": true,
+    "body_sha256": "2ff6dd52a9bacfaa782866ccf1e33ba40910c231ba2c6f1d42014563d04e09a1"
+  },
+  "OrbitTrace.lean": {
+    "body_identical": true,
+    "body_sha256": "da03001526b3b50e868d97eaec61fd4250f3872eb12c26893cccd3b06a14c28f"
+  },
+  "Research/SiphonFiniteDetermination.lean": {
+    "body_identical": true,
+    "body_sha256": "229877fd146dc7aa34111e45b8fc6464f04f561442cc89408869934636df7af1"
+  }
+}
