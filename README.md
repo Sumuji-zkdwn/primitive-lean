@@ -23,6 +23,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[⟨4,6,9⟩ の全既約分解の個数](docs/research/2026-11-19-half-factorial-count.md)。n=4^r6^s9^t の分解数が ⌊min(v₂n, v₃n)/2⌋+1 であることを `lean/Research/HalfFactorialCount.lean` で証明する。
 
+2026-11-19追加：[三球衝突の自由間隙モデル](docs/research/2026-11-19-three-ball-free-flight.md)。正で相異なる間隙 a, b から等速飛行するハード球が、既存の LRL／RLR の衝突順を時刻 min(a,b)+{0, 3d/5, 6d} で実際に辿り、終速度が既存の定理と一致することを `lean/ThreeBallFreeFlight.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
