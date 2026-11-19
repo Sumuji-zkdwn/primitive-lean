@@ -33,6 +33,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[F16 の符号表と Cayley–Dickson 倍化](docs/research/2026-11-19-f16-cayley-dickson.md)。F16 の `epsTable` が倍化 (a,b)(c,d)=(ac−d̄b, da+bc̄) の十六元数の符号表と一致することと、全次数での単位元・平方 −1・反可換を `lean/Research/F16CayleyDickson.lean` で証明する。
 
+2026-11-19追加：[F0 の型別階乗公式](docs/research/2026-11-19-f0-type-count.md)。塊サイズ型 λ の冪等写像の個数 I(λ)=N!/(∏(m_a−1)!·∏c_k!) を `lean/Research/F0TypeCount.lean` で証明し、元資料の表の値（7点で 420、1,260 など）を導く。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
