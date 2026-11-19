@@ -15,10 +15,14 @@ B 適合な `S` の個数が多いことを「異なる `T` の個数」と同�
 * 条件 B（`range_compatible`）：値が `F` に入り `T ∘ K = T` となる写像すべて。
   `F → F` の写像と一対一で、`r^r` 個（`card_compatible`）。
 * 条件 A と B（`range_reconstructs_compatible`）：`T = K` ただ一つ。
+* 条件 A だけ（`range_reconstructs`）：出力成分が2個以上で `K ≠ id` なら、条件なしと同じく
+  値が `F` に入る写像すべて（`r^N` 個、`card_reconstructs`）。`K = id` なら `T = id` だけ
+  （`range_reconstructs_of_id`）。
 
 例えば 7 点で型 `(4,3)`、`d = 2` なら B 適合な `S` は 5,175,625 個あるが、B のもとで
 異なる `T` は `2^2 = 4` 個しかない（`example_seven_points`）。
-条件 A だけの場合の `T` の集合は今回扱わない。
+出力成分が1個（`d = 1`）で条件 A だけの場合は、`S` が全単射になり一般に一部の写像しか
+現れない（数値例は研究ノート参照）。その集合の Lean での決定は今回扱わない。
 -/
 
 namespace F0StepRange
@@ -144,6 +148,120 @@ theorem card_reconstructs_compatible [Nonempty I] (hK : Idempotent K) :
   rw [Nat.card_congr (Equiv.subtypeEquivRight fun T =>
     range_reconstructs_compatible (I := I) hK T)]
   simp
+
+
+/-! ## 条件 A だけの場合 -/
+
+omit [Fintype α] [DecidableEq α] in
+/-- `K = id` なら、条件 A のもとで `T = id` ただ一つ。 -/
+theorem range_reconstructs_of_id [Nonempty I] (hid : ∀ x, K x = x) (T : α → α) :
+    (∃ S : α → I → α, ∃ C : (I → α) → α, Reconstructs S C ∧ T = step K S C) ↔
+      T = id := by
+  have hK : K = id := funext hid
+  subst hK
+  constructor
+  · rintro ⟨S, C, hA, rfl⟩
+    funext x
+    exact hA x
+  · rintro rfl
+    obtain ⟨i₀⟩ := ‹Nonempty I›
+    exact ⟨fun x _ => x, fun v => v i₀, fun x => rfl, rfl⟩
+
+omit [Fintype α] in
+/-- **条件 A（`d ≥ 2`、`K ≠ id`）**：値が `Fix K` に入る写像はすべて、条件 A を満たす `S, C` で
+実現される。第 `i₀` 成分で点を保持し、第 `i₁` 成分で `T` の値を（各塊で互換を施して）符号化する。 -/
+theorem range_reconstructs {i₀ i₁ : I} (hi : i₀ ≠ i₁) (hK : Idempotent K) {x₀ : α}
+    (hx₀ : K x₀ ≠ x₀) (T : α → α) :
+    (∃ S : α → I → α, ∃ C : (I → α) → α, Reconstructs S C ∧ T = step K S C) ↔
+      ∀ x, K (T x) = T x := by
+  classical
+  constructor
+  · rintro ⟨S, C, -, rfl⟩ x
+    exact hK _
+  · intro hT
+    -- 符号：固定点 a には非固定点 x₀、それ以外の点 y には `swap (T (K y)) (K x₀) (T y)`
+    let h : α → α := fun x =>
+      if K x = x then x₀ else Equiv.swap (T (K x)) (K x₀) (T x)
+    let S : α → I → α := fun x i => if i = i₁ then h x else x
+    have hS₀ : ∀ x, S x i₀ = x := fun x => by simp [S, hi]
+    have hS₁ : ∀ x, S x i₁ = h x := fun x => by simp [S]
+    have hSinj : Function.Injective S := fun x y hxy => by
+      rw [← hS₀ x, ← hS₀ y, hxy]
+    -- 非固定点の符号は Fix K に入る
+    have hswapF : ∀ y, K y ≠ y → K (h y) = h y := by
+      intro y hy
+      simp only [h, hy, ↓reduceIte]
+      rw [Equiv.swap_apply_def]
+      split_ifs
+      · exact hK x₀
+      · exact hT (K y)
+      · exact hT y
+    let Φ : α → I → α := fun x => liftK K (S x)
+    -- Φ x は S の像に入らない
+    have hΦS : ∀ x y, Φ x ≠ S y := by
+      intro x y hxy
+      have h0 := congrFun hxy i₀
+      have h1 := congrFun hxy i₁
+      simp only [Φ, liftK, hS₀, hS₁] at h0 h1
+      -- y = K x は固定点なので h y = x₀
+      have hyfix : K y = y := by rw [← h0, hK]
+      have hy : h y = x₀ := by simp [h, hyfix]
+      rw [hy] at h1
+      by_cases hx : K x = x
+      · simp only [h, hx, ↓reduceIte] at h1
+        exact hx₀ h1
+      · rw [hswapF x hx] at h1
+        apply hx₀
+        rw [← h1, hswapF x hx]
+    -- Φ が同じなら T も同じ
+    have hΦT : ∀ x x', Φ x = Φ x' → T x = T x' := by
+      intro x x' hxx
+      have h0 := congrFun hxx i₀
+      have h1 := congrFun hxx i₁
+      simp only [Φ, liftK, hS₀, hS₁] at h0 h1
+      by_cases hx : K x = x <;> by_cases hx' : K x' = x'
+      · rw [← hx, h0, hx']
+      · simp only [h, hx, ↓reduceIte] at h1
+        rw [hswapF x' hx'] at h1
+        simp only [h, hx', ↓reduceIte] at h1
+        rw [← h0, hx] at h1
+        have := (Equiv.swap_apply_eq_iff).mp h1.symm
+        rw [Equiv.swap_apply_right] at this
+        exact this.symm
+      · simp only [h, hx', ↓reduceIte] at h1
+        rw [hswapF x hx] at h1
+        simp only [h, hx, ↓reduceIte] at h1
+        rw [h0, hx'] at h1
+        have := (Equiv.swap_apply_eq_iff).mp h1
+        rw [Equiv.swap_apply_right] at this
+        exact this
+      · rw [hswapF x hx, hswapF x' hx'] at h1
+        simp only [h, hx, hx', ↓reduceIte] at h1
+        rw [h0] at h1
+        exact (Equiv.swap (T (K x')) (K x₀)).injective h1
+    -- C：S の像では逆写像、Φ の像では T の値
+    let C : (I → α) → α := fun v =>
+      if hv : ∃ y, S y = v then hv.choose
+      else if hw : ∃ x, Φ x = v then T hw.choose else x₀
+    refine ⟨S, C, fun x => ?_, ?_⟩
+    · have hv : ∃ y, S y = S x := ⟨x, rfl⟩
+      simp only [C, hv, ↓reduceDIte]
+      exact hSinj hv.choose_spec
+    · funext x
+      have hv : ¬ ∃ y, S y = Φ x := fun ⟨y, hy⟩ => hΦS x y hy.symm
+      have hw : ∃ x', Φ x' = Φ x := ⟨x, rfl⟩
+      show T x = K (C (Φ x))
+      simp only [C, hv, hw, ↓reduceDIte]
+      rw [hΦT _ _ hw.choose_spec, hT]
+
+/-- **条件 A の個数**（`d ≥ 2`、`K ≠ id`）：`r^N` 個。 -/
+theorem card_reconstructs {i₀ i₁ : I} (hi : i₀ ≠ i₁) (hK : Idempotent K) {x₀ : α}
+    (hx₀ : K x₀ ≠ x₀) :
+    Nat.card {T : α → α // ∃ S : α → I → α, ∃ C : (I → α) → α,
+        Reconstructs S C ∧ T = step K S C} =
+      Fintype.card {a : α // K a = a} ^ Fintype.card α := by
+  rw [Nat.card_congr (Equiv.subtypeEquivRight fun T => range_reconstructs hi hK hx₀ T),
+    Nat.card_congr freeEquiv, Nat.card_eq_fintype_card, Fintype.card_fun]
 
 /-! ## 例：7 点、型 `(4,3)` -/
 
