@@ -134,6 +134,11 @@ EXTRA_IMPORTS = (
     "Mathlib.Analysis.Normed.Module.FiniteDimension",
     "Mathlib.Algebra.Polynomial.OfFn",
     "Mathlib.RingTheory.Polynomial.Cyclotomic.Roots",
+    "Mathlib.RingTheory.Polynomial.Cyclotomic.Expand",
+    "Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed",
+    "Mathlib.Algebra.CharP.Two",
+    "Mathlib.Data.Nat.Factorization.Basic",
+    "Mathlib.Algebra.Field.GeomSum",
 )
 
 # Importing FreeLieAlgebra adds a generic LieAlgebra-to-Module instance.
@@ -427,6 +432,9 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/RobotWalkSupport.inc', 'LinearInputRobotWalkSupport'),
     ('linear_input/lean_check/RobotWalkLengths.inc', 'LinearInputRobotWalkLengths'),
     ('linear_input/lean_check/RobotWalkClassification.inc', 'LinearInputRobotWalkClassification'),
+    ('linear_input/lean_check/RobotSix.inc', 'RobotSix'),
+    ('linear_input/lean_check/RobotFacingOdd.inc', 'RobotFacingOdd'),
+    ('linear_input/lean_check/RobotFacingOrders.inc', 'RobotFacingOrders'),
 )
 
 

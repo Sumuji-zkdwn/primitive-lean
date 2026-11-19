@@ -25,6 +25,7 @@ SMOKE_TESTS = (
     'check_laakso_geometric',
     'check_laakso_signed',
     'check_laakso_minimum',
+    'check_robot_six',
 )
 
 
