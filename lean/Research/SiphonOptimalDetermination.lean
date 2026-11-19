@@ -22,7 +22,8 @@ formalizes both statements.
   determining set separate `V d`, so they span its dual
   (`Submodule.span_eq_top_of_ne_zero`); a linearly independent subfamily
   (`exists_linearIndependent'`) is a basis of the dual, of size `N(d)`.
-* `minimum_is_N` packages the two directions.
+* `minimum_is_N` packages the two directions; `no_uniform_finite_cutoff`: no finite set of
+  readings determines polynomials of unbounded degree.
 
 The choice of the `N(d)` points depends on the seed; no seed-independent fixed set of
 operation words is claimed, matching the note.
@@ -224,6 +225,17 @@ theorem minimum_is_N (z : ℝ × ℝ) (hz : z ≠ (0, 0)) (d : ℕ) :
   obtain ⟨T, hT, -, hdet⟩ := exists_optimal_determining_set z hz d
   exact ⟨⟨T, hT, hdet⟩, fun T hT => not_determining_of_card_lt d T hT⟩
 
+/-- **No finite cutoff works for all degrees**: every finite set of exact readings is
+shared by the zero polynomial and some nonzero polynomial (of degree `|T|`). -/
+theorem no_uniform_finite_cutoff (T : Finset (ℝ × ℝ)) :
+    ∃ p : MvPolynomial Bool ℝ, p ≠ 0 ∧ ∀ x ∈ T, readPoly p x = 0 := by
+  have hN : T.card < N T.card := by
+    rw [N]
+    exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _)
+      ((Nat.le_div_iff_mul_le (by norm_num)).mpr (by nlinarith))
+  obtain ⟨p, hp, -, hvan⟩ := exists_vanishing_of_card_lt T.card T hN
+  exact ⟨p, hp, hvan⟩
+
 end
 
 end SiphonOptimalDetermination
@@ -235,3 +247,4 @@ end SiphonOptimalDetermination
 #print axioms SiphonOptimalDetermination.adaptive_not_determining
 #print axioms SiphonOptimalDetermination.exists_optimal_determining_set
 #print axioms SiphonOptimalDetermination.minimum_is_N
+#print axioms SiphonOptimalDetermination.no_uniform_finite_cutoff

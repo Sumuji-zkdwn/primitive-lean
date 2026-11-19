@@ -181,7 +181,7 @@ class LeanSource(unittest.TestCase):
         self.assertNotIn('sorry', source)
         self.assertNotIn('native_decide', source)
         for name in ('finrank_V', 'exists_vanishing_of_card_lt', 'adaptive_not_determining',
-                     'exists_optimal_determining_set', 'minimum_is_N'):
+                     'exists_optimal_determining_set', 'minimum_is_N', 'no_uniform_finite_cutoff'):
             self.assertIsNotNone(re.search(r'^theorem ' + name + r'\b', source, re.M), name)
 
 

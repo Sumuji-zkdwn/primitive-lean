@@ -77,7 +77,7 @@ python3 -B -m unittest discover -s tests -p 'test_siphon_free_product.py' -v
 
 GitHub Actions：[run 44601072048](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44601072048)（コミット `d43c935`）が成功（conclusion `success`）。
 
-境界：簡約語の総次数がちょうど \(18^m\) であるという次数公式は、次の追記で別モジュールとして証明した。観測位置を消す操作の節は対象外。
+境界：簡約語の総次数がちょうど \(18^m\) であるという次数公式は、次の追記で別モジュールとして証明した。観測位置を消す操作の節のうち「全次数に一様に通用する有限の打ち切りは存在しない」は `SiphonOptimalDetermination.no_uniform_finite_cutoff`（任意の有限点集合で零多項式と同じ値を返す非零多項式がある）で証明した。それ以外は対象外。
 
 ## 2026-11-19 追記：簡約語の次数公式 \(18^m\) の Lean 証明
 
