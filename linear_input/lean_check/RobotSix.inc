@@ -122,7 +122,7 @@ theorem mem_shortReturns {h : ℝ} (hh : 0 < h) (w : List Bool) :
 set_option maxRecDepth 100000 in
 set_option maxHeartbeats 2000000 in
 theorem short_returns_exact :
-    shortReturns = [[], List.replicate 6 true, List.replicate 6 false, mirror, witness] := by
+    shortReturns = [List.nil, List.replicate 6 true, List.replicate 6 false, mirror, witness] := by
   decide
 
 /-- The two named words exhaust the failures at lengths zero through seven. -/

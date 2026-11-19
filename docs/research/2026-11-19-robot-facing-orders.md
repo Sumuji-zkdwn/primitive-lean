@@ -92,7 +92,7 @@ $$
 | 位置が閉じる場合の円分多項式の整除性、奇数位数の方位帰還 | `RobotFacingOdd.cyclotomic_dvd_of_closed`、`RobotFacingOdd.facing_of_closed_odd` |
 | 偶数位数の反例族、位数による必要十分条件 | `RobotFacingOrders.even_factor_reversal`、`RobotFacingOrders.facing_for_all_closed_iff` |
 
-環境は Lean 4.36.0-rc2、mathlib `2ddf59c8f14245864e6c0ed227a2dab76b9efea2`。独立検証した3個の Lean 原稿の宣言と証明は、冒頭の import を組み立て側に移してそのまま登録した。各断片の Git 上の初出は `3321562f80de5effd076ffb5a0c5fbd9ed287aff` であり、独立原稿の SHA-256 も統合台帳に記録している。[6方向の有限証明](../../linear_input/lean_check/RobotSix.inc) · [奇数位数の証明](../../linear_input/lean_check/RobotFacingOdd.inc) · [偶数の反例族と必要十分条件](../../linear_input/lean_check/RobotFacingOrders.inc)
+環境は Lean 4.36.0-rc2、mathlib `2ddf59c8f14245864e6c0ed227a2dab76b9efea2`。独立検証した3個の Lean 原稿は、冒頭の import を組み立て側に移して登録した。全原稿を連結したときにも読めるよう、`short_returns_exact` のリスト先頭にある空語を `List.nil` と明記した。各断片の Git 上の初出は `3321562f80de5effd076ffb5a0c5fbd9ed287aff` であり、独立原稿の SHA-256 も統合台帳に記録している。[6方向の有限証明](../../linear_input/lean_check/RobotSix.inc) · [奇数位数の証明](../../linear_input/lean_check/RobotFacingOdd.inc) · [偶数の反例族と必要十分条件](../../linear_input/lean_check/RobotFacingOrders.inc)
 
 リポジトリのルートで次を実行する。最初のコマンドは255語を独立に検算する。二つ目は現在のチェックアウトの8個の先行断片から親モジュールを組み立て、追加3モジュールを `--trust=0` で型検査する。公開14定理の公理監査と `leanchecker` による3モジュールのカーネル再検査も行う。三つ目は他の研究原稿と一緒に統合証明を検証する。初回の環境準備は `lean` ディレクトリで `lake exe cache get` を実行する。
 

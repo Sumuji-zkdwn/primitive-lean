@@ -7074,14 +7074,16 @@
     },
     {
       "path": "linear_input/lean_check/RobotSix.inc",
-      "sha256": "a1d7cec14c567aef2c977aff6fad59db43d9493a0668c34cd25f322676cecf45",
+      "sha256": "b6194ae67ae509e9cbc58a6c0f60732e13716855d2fffc0c38bb22cb31c65e48",
       "original_sha256": "a1d7cec14c567aef2c977aff6fad59db43d9493a0668c34cd25f322676cecf45",
       "source_pr": 162,
       "source_commit": "3321562f80de5effd076ffb5a0c5fbd9ed287aff",
       "source_path": "linear_input/lean_check/RobotSix.inc",
-      "role": "repository_native_proof",
-      "byte_identical": true,
-      "permitted_adaptations": [],
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Spell the empty word as List.nil in short_returns_exact so full joint assembly parses the nested list unambiguously."
+      ],
       "provenance": {
         "origin": "standalone_arc_proof_body_registered_in_primitive_lean",
         "authored_on_parent_commit": "7191629bea1c503bd9ebd165a160edb29645f293",
