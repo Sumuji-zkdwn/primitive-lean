@@ -61,3 +61,29 @@ It does not identify the new multiplicity-forgetting radical F0 with
 the prime-list **sorting** F0 of PR #54, which preserves multiplicity.
 It also does not assert that all arithmetic operations fail descent:
 the counterexample concerns successor specifically.
+
+## 2026-11-19 addendum: the reverse implication
+
+The reverse of `squarefree_fixed` is proved in the independent module
+`lean/Research/RadicalSquarefree.lean` (12 theorems, imports only `Mathlib`), which copies
+the definition of `radical` verbatim (the test `tests/test_radical_squarefree.py` checks the
+byte-identical definition line in both files). It is not part of the joint checker and does
+not change its declaration counts.
+
+- `radical_eq_self_iff`: `radical n = n ↔ n = 0 ∨ Squarefree n`, so the fixed points of the
+  radical are exactly `0` and the squarefree numbers (`squarefree_fixed` is the `←` direction
+  for `n ≠ 0`).
+- `radical_squarefree`, `range_radical`: `radical n` is squarefree for `n ≠ 0`, and the image
+  of `radical` is `{0} ∪ {squarefree}` (equal to its fixed-point set).
+- `squarefree_dvd_radical`, `radical_dvd`: for `n ≠ 0`, `radical n` divides `n` and every
+  squarefree divisor of `n` divides `radical n` (greatest squarefree divisor).
+- `radical_mul_of_coprime`: `radical (a * b) = radical a * radical b` for coprime nonzero
+  `a, b`; `radical_examples` evaluates `rad 12 = 6`, `rad 30 = 30`, `rad 72 = 6`.
+
+Verification (2026-11-19, Lean `v4.36.0-rc2`): `lake env lean --trust=0
+Research/RadicalSquarefree.lean` passes without warnings; all 12 theorems use only `propext`,
+`Classical.choice`, `Quot.sound`. The exhaustive census `python -B
+tests/test_radical_squarefree.py` checks the fixed-point characterization for `n ≤ 20000`, the
+greatest-squarefree-divisor property for `n ≤ 3000`, and multiplicativity for coprime
+`a, b ≤ 300`. Dedicated CI: `.github/workflows/radical-squarefree.yml`; integration stage
+`radical-squarefree` in `tools/pr_integration.py`.
