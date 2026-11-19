@@ -49,7 +49,7 @@ theorem hasDerivAt_intrinsicHeight {θ : ℝ → ℝ} (hθ : Continuous θ)
   have hx : HasDerivAt (fun v => xCoord θ 0 v - xCoord θ 0 s)
       (Real.cos (θ t)) t :=
     (hasDerivAt_xCoord hθ 0 t).sub_const (xCoord θ 0 s)
-  simpa only [intrinsicHeight] using
+  simpa only [intrinsicHeight, Pi.sub_apply] using!
     (hy.const_mul (Real.cos (θ s))).sub (hx.const_mul (Real.sin (θ s)))
 
 theorem deriv_intrinsicHeight {θ : ℝ → ℝ} (hθ : Continuous θ)

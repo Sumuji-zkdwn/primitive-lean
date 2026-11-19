@@ -1,50 +1,23 @@
 #!/usr/bin/env python3
-"""Build a hash-checked Lean 4.36 compatibility copy of Elastica.Variation.
-
-This is the *actual* primitive-lean curvature-energy definition and a
-pointwise-derivative proof; no source definitions or theorem statements change.
-The canonical Lean 4.30 source is not modified. A later, separately scoped
-project can port the full Elastica proof library.
-"""
-from __future__ import annotations
+"""Stage the exact Lean 4.36 Elastica.Variation used by the bridge."""
 
 import hashlib
-import shutil
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent.parent
-ORIGINAL = ROOT / "lean" / "Elastica" / "Variation.lean"
-EXPECTED_GIT_BLOB = "f4e5faaad829a008dfeb891d2256e6b35f1f77aa"
-COMPAT = HERE / "compat"
-TARGET = COMPAT / "Elastica" / "Variation.lean"
-
-BEFORE = "    simp\n  have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le"
-AFTER = (
-    "    all_goals first | (funext x; rfl) | ring\n"
-    "  have h := hasDerivAt_integral_of_dominated_loc_of_deriv_le"
-)
-
-
-def blob_sha(data: bytes) -> str:
-    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+SOURCE = HERE.parent.parent / "lean" / "Elastica" / "Variation.lean"
+EXPECTED_GIT_BLOB = "090ac5d63a449623d729505cf685115cd088d666"
+TARGET = HERE / "compat" / "Elastica" / "Variation.lean"
 
 
 def main() -> None:
-    original = ORIGINAL.read_bytes()
-    actual = blob_sha(original)
+    source = SOURCE.read_bytes()
+    actual = hashlib.sha1(b"blob " + str(len(source)).encode() + b"\0" + source).hexdigest()
     if actual != EXPECTED_GIT_BLOB:
-        raise RuntimeError(f"Original Elastica.Variation changed: {actual} != {EXPECTED_GIT_BLOB}")
-    if COMPAT.exists():
-        shutil.rmtree(COMPAT)
+        raise RuntimeError(f"Review the Elastica migration source: {actual} != {EXPECTED_GIT_BLOB}")
     TARGET.parent.mkdir(parents=True, exist_ok=True)
-    text = original.decode("utf-8")
-    if text.count(BEFORE) != 1:
-        raise RuntimeError("Expected exactly one Lean 4.30 proof-tactic site")
-    TARGET.write_text(text.replace(BEFORE, AFTER), encoding="utf-8")
-    print("Prepared hash-pinned Elastica.Variation compatibility copy")
-    print("Original Git blob:", actual)
-    print("Generated SHA-256:", hashlib.sha256(TARGET.read_bytes()).hexdigest())
+    TARGET.write_bytes(source)
+    print("Staged canonical Elastica.Variation Git blob:", actual)
 
 
 if __name__ == "__main__":

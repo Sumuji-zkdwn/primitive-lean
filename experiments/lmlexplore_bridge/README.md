@@ -4,7 +4,7 @@
 This Lean 4.36 workspace reuses LMLExplore's finite relative-entropy theorems
 for a finite indexed family of actual Elastica energy values. It adds a
 free-energy gap identity and a unique minimizer on the probability simplex.
-The canonical Lean 4.30 proof assembly remains separate.
+The bridge has its own Lake package and pinned external dependencies.
 
 ## Statement and source mapping
 
@@ -64,10 +64,10 @@ minimizer, dynamics, or online-learning regret guarantee is inferred.
 
 ## Compatibility boundary and decision
 
-prepare_compat.py verifies the Git blob hash of the original
-lean/Elastica/Variation.lean and generates an isolated compatibility copy.
-Exactly one proof tactic in a dominated-differentiation lemma changes. The
-original definitions, statements, hypotheses and source file are retained.
+The bridge stages a byte-identical copy of the canonical Lean 4.36
+`lean/Elastica/Variation.lean`. The staging script verifies its Git blob before
+copying it. The historical PR #138 adapted one tactic from the Lean 4.30 source.
+The main library now supplies the checked-in 4.36 proof directly.
 The original energy definition is an interval integral of signed-curvature
 density. No sign assumption on this energy is required for the finite result.
 
@@ -78,7 +78,7 @@ or claim a wholesale merger of the two theorem collections.
 
 The bounded experiment succeeds if the gap, value, minimum and uniqueness
 results build with the pinned dependencies and pass kernel/axiom checks,
-without adding an Elastica compatibility module or upgrading the main toolchain.
+using the separately pinned bridge dependency set.
 Further integration remains **RESTRICT**. Stop if it requires those broader
 ports or has no concrete use in the existing mathematical exposition.
 
