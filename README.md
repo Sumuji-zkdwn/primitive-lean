@@ -35,7 +35,7 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[F0 の型別階乗公式](docs/research/2026-11-19-f0-type-count.md)。塊サイズ型 λ の冪等写像の個数 I(λ)=N!/(∏(m_a−1)!·∏c_k!) を `lean/Research/F0TypeCount.lean` で証明し、元資料の表の値（7点で 420、1,260 など）を導く。
 
-2026-11-19追加：[Boole 型変換の測度保存](docs/research/2026-11-04-orbit-trace-integrals.md)（第17節）。逆分枝の導関数の和が1なら ∫g∘S = ∫g となる抽象定理と、古典的な Boole の定理 ∫g(x−1/x)dx = ∫g(x)dx を `lean/OrbitTraceBoole.lean` で証明する。
+2026-11-19追加：[Boole 型変換の測度保存](docs/research/2026-11-04-orbit-trace-integrals.md)（第17節）。逆分枝の導関数の和が1なら ∫g∘S = ∫g となる抽象定理と、古典的な Boole の定理 ∫g(x−1/x)dx = ∫g(x)dx を `lean/OrbitTraceBoole.lean` で証明する。元ノートの三分枝写像 S(x) = x+1−1/x−1/(x−1) についても、三次方程式を解かずに中間値の定理と逆関数の微分で分枝を作り、∫g∘S = ∫g を証明する（`S3_integral`）。
 
 ## 主定理
 

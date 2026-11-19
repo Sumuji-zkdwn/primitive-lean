@@ -7,6 +7,14 @@ not proofs). For Boole's map S(x) = x - 1/x:
   of 0, and have derivatives (checked by central differences) summing to 1;
 * int g(S(x)) dx agrees with int g(x) dx for several integrable g, using the
   substitution x = sinh(u) style quadrature on a wide interval.
+
+For the three-branch map S3(x) = x + 1 - 1/x - 1/(x - 1) of section 1:
+
+* the inverse branches on (-inf, 0), (0, 1), (1, inf), found by bisection, are
+  roots of X^3 - tX^2 + (t - 3)X + 1, sum to t, and the reciprocals of
+  S3' at them sum to 1;
+* the bounding values used for the intermediate value theorem in Lean hold;
+* int g(S3(x)) dx agrees with int g(x) dx (quadrature split at the poles).
 """
 from __future__ import annotations
 
@@ -57,6 +65,82 @@ class Branches(unittest.TestCase):
             self.assertAlmostEqual(d, 1.0, places=6)
 
 
+def s3(x):
+    return x + 1 - 1 / x - 1 / (x - 1)
+
+
+def s3_deriv(x):
+    return 1 + 1 / x ** 2 + 1 / (x - 1) ** 2
+
+
+def bisect(f, lo, hi, t, steps=200):
+    for _ in range(steps):
+        mid = (lo + hi) / 2
+        if f(mid) < t:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
+def s3_branches(t):
+    big = abs(t) + 4
+    return (bisect(s3, -big, -1 / big, t), bisect(s3, 1 / big, 1 - 1 / big, t),
+            bisect(s3, 1 + 1 / big, big, t))
+
+
+class ThreeBranches(unittest.TestCase):
+    def test_bounds_used_in_lean(self):
+        for m in [4, 4.5, 7, 20, 1000]:
+            self.assertLess(s3(1 + 1 / m), -m + 3)
+            self.assertLess(m - 1, s3(m))
+            self.assertLess(s3(-m), -m + 2)
+            self.assertLess(m, s3(-1 / m))
+            self.assertLess(s3(1 / m), -m + 3)
+            self.assertLess(m - 1, s3(1 - 1 / m))
+
+    def test_roots_sum_and_weights(self):
+        for t in [-80, -5, -1.5, 0, 0.7, 1.5, 19 / 6, 12, 300]:
+            a, b, c = s3_branches(t)
+            self.assertLess(a, 0)
+            self.assertTrue(0 < b < 1)
+            self.assertGreater(c, 1)
+            for x in (a, b, c):
+                self.assertAlmostEqual(s3(x), t, delta=1e-7 * max(1, abs(t)))
+                self.assertAlmostEqual(x ** 3 - t * x ** 2 + (t - 3) * x + 1, 0,
+                                       delta=1e-6 * max(1, abs(t)) ** 2)
+            self.assertAlmostEqual(a + b + c, t, delta=1e-8 * max(1, abs(t)))
+            self.assertAlmostEqual(sum(1 / s3_deriv(x) for x in (a, b, c)), 1.0, places=9)
+
+
+class ThreeBranchIntegrals(unittest.TestCase):
+    def test_three_branch_measure_preservation(self):
+        def piece(f, a, b):
+            # integral over (a, b) via x = a + (b - a) * (1 + tanh(u)) / 2
+            def g(u):
+                w = (1 + math.tanh(u)) / 2
+                x = a + (b - a) * w
+                if x <= a or x >= b:
+                    return 0.0
+                return f(x) * (b - a) / (2 * math.cosh(u) ** 2)
+            return integrate(g, -20.0, 20.0, n=200000)
+
+        def whole(f):
+            def neg(u):
+                x = -math.exp(u)
+                return f(x) * math.exp(u)
+            def pos(u):
+                x = 1 + math.exp(u)
+                return f(x) * math.exp(u)
+            return (integrate(neg, -40.0, 12.0, n=200000) + piece(f, 0.0, 1.0)
+                    + integrate(pos, -25.0, 12.0, n=200000))
+
+        for g in (lambda x: math.exp(-x * x), lambda x: 1 / (1 + x * x)):
+            lhs = whole(lambda x: g(s3(x)))
+            rhs = integrate_line(g)
+            self.assertAlmostEqual(lhs, rhs, delta=2e-3 * abs(rhs))
+
+
 class Integrals(unittest.TestCase):
     def test_measure_preservation(self):
         tests = [
@@ -77,7 +161,8 @@ class LeanSource(unittest.TestCase):
         self.assertNotIn('sorry', source)
         self.assertNotIn('native_decide', source)
         for name in ('integral_comp_eq_of_branches', 'boole_integral', 'booleBranch_inv',
-                     'booleBranchDeriv_sum', 'booleBranch_surj'):
+                     'booleBranchDeriv_sum', 'booleBranch_surj', 'exists_inverse_branch',
+                     'S3_cubic', 'root_sum', 'S3_bounds', 'S3_integral'):
             self.assertIsNotNone(
                 re.search(r'^theorem ' + name + r'\b', source, re.M), name)
 
