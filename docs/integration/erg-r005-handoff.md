@@ -54,3 +54,10 @@ on the remaining blocks), with a uniqueness-of-maximum corollary (phi_lt_hook).
 See docs/research/2026-11-19-f0-imbalance-monotonicity.md. This note does not
 bind or promote any ERG node; a binding must still be pinned to a merged
 commit and reviewed under R005.
+
+The second lead (cand.f0.drop_b_not_always) is likewise formalized without
+using condition A: lean/Research/F0DropCompatibility.lean proves that an S
+violating B without restoring distinguishability exists exactly when K is not
+the identity (exists_incompatible_respecting_iff, drop_b_not_always), and
+counts such S. See docs/research/2026-11-19-f0-drop-compatibility.md. As
+above, nothing is bound or promoted on the ERG side by this note.

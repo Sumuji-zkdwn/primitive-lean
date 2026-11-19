@@ -89,7 +89,7 @@ P_X(a-1)P_X(b-1)\le P_X(a)P_X(b-2)<P_{X'}(a)P_{X'}(b-2),
 - `python -B tests/test_f0_imbalance_monotonicity.py`：10テスト合格。\(N\le20\) の全分割の二塊移動 6,750 件を \(d=1,2,3\) で確認、\(N\le16\) の各 \((N,r)\) で hook が一意な最大点、1〜5点上の冪等写像 251 個すべてで \(\Phi_1\) が \(SK=KS\) を満たす実際の写像 \(S\) の個数に一致、元資料の数値例、上記の majorization 数値確認。
 - `python -B -X utf8 -m unittest discover -s tests`：351テスト合格。
 
-GitHub Actions の結果はこの記録の時点では未確認であり、専用CIの完了を別途確認する。
+GitHub Actions：専用CI [run 44498584418](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44498584418)（コミット `10d4352`、push イベント）が成功（conclusion `success`）。
 
 ## 論理的境界
 
