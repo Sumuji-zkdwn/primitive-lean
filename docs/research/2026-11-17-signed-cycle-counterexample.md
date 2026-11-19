@@ -55,6 +55,8 @@ Walk/Cycle API は導入していない。頂点0,1,2は相異なるため、上
 この相殺禁止が失われる。これは数学的な説明であり、上表の任意の有限
 グラフに関する同値・含意は、この追加の Lean 定理ではない。
 
+2026-11-19追記：上表の三行は [非負重みの隣接行列：冪零 ⇔ 有向閉路なし](2026-11-19-acyclic-nilpotent.md) の `lean/Research/AcyclicNilpotent.lean` で Lean 証明した（打ち消しのない係数での同値 `isNilpotent_iff_acyclic`、任意の半環での含意 `isNilpotent_of_acyclic`、重み1の2閉路の `unit_two_cycle_sq_eq_one`）。
+
 ## 既存結果との境界
 
 - 親PRの `cycle2_closed` / `alternating_two_step_gain` は、順次選択した

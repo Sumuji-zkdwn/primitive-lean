@@ -13,6 +13,8 @@ import Mathlib.Tactic
 * `(A ^ k) i j ≠ 0` ⇔ 長さ `k` の有向歩道 `i → … → j` がある（`pow_apply_ne_zero_iff`）。
 * `A ^ |n| = 0` ⇔ 有向閉路がない ⇔ `A` は冪零（`pow_card_eq_zero_iff_acyclic`、
   `isNilpotent_iff_acyclic`）。
+* 一方向「非巡回 ⇒ `A ^ |n| = 0`」は**任意の半環**（`ℤ`、`ℝ` を含む）で成り立つ
+  （`pow_card_eq_zero_of_acyclic`、`isNilpotent_of_acyclic`）。
 
 係数に打ち消しがあると同値は崩れる：整数行列 `!![1, 1; -1, -1]` は自己ループを持つが
 `A ^ 2 = 0`（`signed_counterexample`）。
@@ -132,9 +134,52 @@ theorem hasCycle_of_walk [Fintype n] {k : ℕ} (hk : Fintype.card n ≤ k) {i j 
     rw [heq] at h
     exact ⟨w t, h⟩
 
+/-- 辺に沿って真に増える順位関数があれば閉路はない（位相順序）。 -/
+theorem not_hasCycle_of_rank (f : n → ℕ) (hf : ∀ a b, Edge A a b → f a < f b) :
+    ¬ HasCycle A := by
+  rintro ⟨i, hi⟩
+  have key : ∀ a b, Relation.TransGen (Edge A) a b → f a < f b := by
+    intro a b h
+    induction h with
+    | single h => exact hf _ _ h
+    | tail _ h ih => exact ih.trans (hf _ _ h)
+  exact lt_irrefl _ (key i i hi)
+
 end Walks
 
-/-! ## 行列の冪と歩道 -/
+/-! ## 任意の半環：非巡回 ⇒ 冪零 -/
+
+section AnySemiring
+
+variable [Fintype n] [DecidableEq n] {S : Type*} [Semiring S]
+
+/-- 任意の半環で、冪の成分が零でなければその長さの歩道がある（逆は打ち消しがあると偽）。 -/
+theorem walk_of_pow_apply_ne_zero (A : Matrix n n S) (k : ℕ) (i j : n) :
+    (A ^ k) i j ≠ 0 → Walk A k i j := by
+  induction k generalizing i with
+  | zero =>
+    intro h
+    by_contra hij
+    exact h (by simp [Matrix.one_apply_ne hij])
+  | succ k ih =>
+    intro h
+    rw [pow_succ', Matrix.mul_apply] at h
+    obtain ⟨l, -, hl⟩ := Finset.exists_ne_zero_of_sum_ne_zero h
+    exact ⟨l, left_ne_zero_of_mul hl, ih l (right_ne_zero_of_mul hl)⟩
+
+/-- **任意の半環**（`ℤ`、`ℝ` を含む）：非零辺のグラフが非巡回なら `A ^ |n| = 0`。 -/
+theorem pow_card_eq_zero_of_acyclic {A : Matrix n n S} (hc : ¬ HasCycle A) :
+    A ^ Fintype.card n = 0 := by
+  ext i j
+  by_contra hne
+  exact hc (hasCycle_of_walk A le_rfl (walk_of_pow_apply_ne_zero A _ i j hne))
+
+theorem isNilpotent_of_acyclic {A : Matrix n n S} (hc : ¬ HasCycle A) : IsNilpotent A :=
+  ⟨_, pow_card_eq_zero_of_acyclic hc⟩
+
+end AnySemiring
+
+/-! ## 打ち消しのない係数：冪と歩道の同値 -/
 
 variable [Fintype n] [DecidableEq n]
   {R : Type*} [Semiring R] [PartialOrder R] [CanonicallyOrderedAdd R] [NoZeroDivisors R]
@@ -178,11 +223,6 @@ theorem pow_ne_zero_of_hasCycle {A : Matrix n n R} (hc : HasCycle A) (N : ℕ) :
     rw [pow_mul, hN, zero_pow (by omega)]
   exact (pow_eq_zero_iff_no_walk A _).mp hM i i (walk_mul A hk N)
 
-/-- 閉路がなければ `A ^ |n| = 0`。 -/
-theorem pow_card_eq_zero_of_acyclic {A : Matrix n n R} (hc : ¬ HasCycle A) :
-    A ^ Fintype.card n = 0 :=
-  (pow_eq_zero_iff_no_walk A _).mpr fun _ _ hw => hc (hasCycle_of_walk A le_rfl hw)
-
 /-- **主定理1**：`A ^ |n| = 0` ⇔ 有向閉路がない。 -/
 theorem pow_card_eq_zero_iff_acyclic (A : Matrix n n R) :
     A ^ Fintype.card n = 0 ↔ ¬ HasCycle A :=
@@ -217,6 +257,19 @@ theorem two_cycle_not_nilpotent :
   refine ⟨0, Relation.TransGen.tail (b := 1) (Relation.TransGen.single ?_) ?_⟩ <;>
     · unfold Edge
       decide
+
+/-- 閉路は増幅を意味しない：重み1の二頂点往復では `A ^ 2 = 1`（どの冪も置換行列）。 -/
+theorem unit_two_cycle_sq_eq_one :
+    (!![0, 1; 1, 0] : Matrix (Fin 2) (Fin 2) ℕ) ^ 2 = 1 := by
+  decide
+
+/-- 整数係数でも、非巡回な例は冪零（`isNilpotent_of_acyclic` の適用例）。 -/
+theorem signed_acyclic_nilpotent :
+    IsNilpotent (!![0, -3; 0, 0] : Matrix (Fin 2) (Fin 2) ℤ) := by
+  apply isNilpotent_of_acyclic
+  apply not_hasCycle_of_rank _ (fun a : Fin 2 => (a : ℕ))
+  intro a b h
+  fin_cases a <;> fin_cases b <;> simp [Edge] at h ⊢
 
 /-- **打ち消しがあると同値は崩れる**：整数行列 `!![1, 1; -1, -1]` は自己ループ（閉路）を
 持つが `A ^ 2 = 0`。 -/

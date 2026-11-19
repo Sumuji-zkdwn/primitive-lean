@@ -4,7 +4,7 @@
 
 [Square-zero network](2026-11-17-square-zero-network.md) の論理的境界1と「次の継ぎ目」で、「DAG iff \(A^n=0\) は単位・非負辺重みの有向グラフについての関係で、Lean での普遍命題（任意の有限 \(n\)・グラフ）は未形式化」とされていた命題を証明した。
 
-- Lean：[lean/Research/AcyclicNilpotent.lean](../../lean/Research/AcyclicNilpotent.lean)（名前空間 `AcyclicNilpotent`、18定理・3定義）
+- Lean：[lean/Research/AcyclicNilpotent.lean](../../lean/Research/AcyclicNilpotent.lean)（名前空間 `AcyclicNilpotent`、23定理・3定義）
 - 独立検算：[tests/test_acyclic_nilpotent.py](../../tests/test_acyclic_nilpotent.py)
 - 専用CI：[.github/workflows/acyclic-nilpotent.yml](../../.github/workflows/acyclic-nilpotent.yml)。統合検査 `tools/pr_integration.py` にも `--trust=0` 段として登録した。
 
@@ -24,10 +24,14 @@
 | 推移閉包 ⇔ 長さ1以上の歩道 | `transGen_iff_walk` |
 | 頂点数以上の長さの歩道は閉路を含む（鳩の巣原理） | `hasCycle_of_walk` |
 | 閉路があればどの冪も零でない | `pow_ne_zero_of_hasCycle`、`pow_diag_ne_zero_of_cycle` |
+| **任意の半環**（\(\mathbb Z,\mathbb R\) を含む）で：成分が零でなければ歩道がある／非巡回 ⇒ \(A^{\lvert n\rvert}=0\) | `walk_of_pow_apply_ne_zero`、`pow_card_eq_zero_of_acyclic`、`isNilpotent_of_acyclic` |
+| 辺に沿って増える順位関数があれば非巡回 | `not_hasCycle_of_rank` |
 | **\(A^{\lvert n\rvert}=0\) ⇔ 閉路なし** | `pow_card_eq_zero_iff_acyclic` |
 | **冪零 ⇔ 閉路なし** | `isNilpotent_iff_acyclic` |
 | 冪零なら頂点数の冪で零 | `isNilpotent_iff_pow_card` |
 | 例：三頂点の推移的トーナメントは冪零、二頂点の往復は冪零でない | `tournament_nilpotent`、`two_cycle_not_nilpotent` |
+| 閉路は増幅を意味しない：重み1の往復は \(A^2=I\) | `unit_two_cycle_sq_eq_one` |
+| 整数係数でも非巡回なら冪零（例 \(\begin{pmatrix}0&-3\\0&0\end{pmatrix}\)） | `signed_acyclic_nilpotent` |
 | 打ち消しのある係数では崩れる：\(\begin{pmatrix}1&1\\-1&-1\end{pmatrix}^2=0\) だが自己ループあり | `signed_counterexample` |
 
 ## 手書きの証明
@@ -36,12 +40,15 @@
 
 閉路 \(i\to\cdots\to i\)（長さ \(k+1\)）があれば、それを \(N\) 回回る長さ \(N(k+1)\) の歩道があるので \((A^{N(k+1)})_{ii}\ne0\)。\(A^N=0\) なら \(A^{N(k+1)}=0\) となり矛盾。逆に閉路がなければ、長さ \(|n|\) の歩道は \(|n|+1\) 個の頂点を通るので鳩の巣原理で同じ頂点を二度通り、その区間が閉路になる。したがって長さ \(|n|\) の歩道はなく、\(A^{|n|}=0\)。
 
+2026-11-19 追補：[signed-cycle のノート](2026-11-17-signed-cycle-counterexample.md) の表「重み条件ごとの一般的関係」の三行（非負整数、正の整数、任意の整数）は、上の定理ですべて Lean 証明になった。任意の整数では「非巡回 ⇒ 冪零」のみが成り立ち、逆は `signed_counterexample` が反例。
+
 ## 実行された検証
 
 2026-11-19、クラウドコンテナ上で実行した（Lean `v4.36.0-rc2`、mathlib `2ddf59c8f14245864e6c0ed227a2dab76b9efea2`）。
 
 - `lake env lean --trust=0 Research/AcyclicNilpotent.lean`：終了コード0、`error:`・`warning:`・`sorryAx` なし。主定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内。
-- `python -B tests/test_acyclic_nilpotent.py`：6テスト合格。1〜4頂点のループ込みの全0/1行列（2, 16, 512, 65,536個）で \(A^n=0\) ⇔ 深さ優先探索で閉路なし、を確認。ループなしの非巡回グラフの数は 1, 3, 25, 543（OEIS A003024 と一致）。重み \(\{0,1,2\}\) の1〜3頂点でも同じ同値を確認し、0/1行列では冪の成分が歩道の個数に一致することを確認。
+- 追補後：`lake env lean --trust=0 Research/AcyclicNilpotent.lean` は警告なしで通り、23定理。
+- `python -B tests/test_acyclic_nilpotent.py`：7テスト合格（追補で整数重み \(\{-1,0,1\}\) の1〜3頂点：非巡回なら \(A^n=0\)、閉路ありで冪零な行列も存在、を追加）。1〜4頂点のループ込みの全0/1行列（2, 16, 512, 65,536個）で \(A^n=0\) ⇔ 深さ優先探索で閉路なし、を確認。ループなしの非巡回グラフの数は 1, 3, 25, 543（OEIS A003024 と一致）。重み \(\{0,1,2\}\) の1〜3頂点でも同じ同値を確認し、0/1行列では冪の成分が歩道の個数に一致することを確認。
 
 GitHub Actions：専用CI [run 44500542674](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44500542674)（コミット `565d6af`、push イベント）が成功（conclusion `success`）。
 

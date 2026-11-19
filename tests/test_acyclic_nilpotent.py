@@ -8,7 +8,9 @@ separate depth-first cycle search:
 * all weights in {0, 1, 2} on 1..3 vertices, the same equivalence;
 * for 0/1 matrices, (A^k)[i][j] equals the number of directed walks of length k;
 * the signed counterexample [[1, 1], [-1, -1]], which squares to zero but has
-  self-loops, and the two examples stated in the Lean file.
+  self-loops, and the examples stated in the Lean file;
+* integer weights in {-1, 0, 1} on 1..3 vertices: acyclic still implies
+  A^n = 0, while cyclic nilpotent matrices exist (the converse fails).
 """
 from __future__ import annotations
 
@@ -96,6 +98,22 @@ class Equivalence(unittest.TestCase):
                         self.assertEqual(p[i][j], count_walks(a, k, i, j))
 
 
+class SignedWeights(unittest.TestCase):
+    def test_acyclic_implies_nilpotent_over_integers(self):
+        cyclic_nilpotent = []
+        for n in range(1, 4):
+            count = 0
+            for a in matrices(n, (-1, 0, 1)):
+                zero = is_zero(power(a, n))
+                if not has_cycle(a):
+                    self.assertTrue(zero, a)
+                elif zero:
+                    count += 1
+            cyclic_nilpotent.append(count)
+        self.assertEqual(cyclic_nilpotent[0], 0)
+        self.assertGreater(cyclic_nilpotent[1], 0)
+
+
 class Examples(unittest.TestCase):
     def test_signed_counterexample(self):
         a = [[1, 1], [-1, -1]]
@@ -108,6 +126,8 @@ class Examples(unittest.TestCase):
         swap = [[0, 1], [1, 0]]
         self.assertTrue(has_cycle(swap))
         self.assertFalse(any(is_zero(power(swap, k)) for k in range(1, 20)))
+        self.assertEqual(power(swap, 2), [[1, 0], [0, 1]])
+        self.assertTrue(is_zero(power([[0, -3], [0, 0]], 2)))
 
 
 class LeanSource(unittest.TestCase):
@@ -118,7 +138,10 @@ class LeanSource(unittest.TestCase):
         self.assertNotIn('native_decide', source)
         for name in ('pow_apply_ne_zero_iff', 'pow_card_eq_zero_iff_acyclic',
                      'isNilpotent_iff_acyclic', 'isNilpotent_iff_pow_card',
-                     'signed_counterexample', 'hasCycle_of_walk'):
+                     'signed_counterexample', 'hasCycle_of_walk',
+                     'walk_of_pow_apply_ne_zero', 'pow_card_eq_zero_of_acyclic',
+                     'isNilpotent_of_acyclic', 'not_hasCycle_of_rank',
+                     'unit_two_cycle_sq_eq_one', 'signed_acyclic_nilpotent'):
             self.assertIsNotNone(
                 re.search(r'^theorem ' + name + r'\b', source, re.M), name)
 
