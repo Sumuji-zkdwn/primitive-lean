@@ -1,0 +1,98 @@
+{
+  "signatures": {
+    "even": 32,
+    "odd": 32
+  },
+  "examples": [
+    {
+      "lambda": "1",
+      "kappa": "1",
+      "even_minimum": "0",
+      "even_minimizers": 2,
+      "odd_minimum": "3/2",
+      "odd_minimizers": 1
+    },
+    {
+      "lambda": "4",
+      "kappa": "1",
+      "even_minimum": "0",
+      "even_minimizers": 2,
+      "odd_minimum": "3/8",
+      "odd_minimizers": 1
+    },
+    {
+      "lambda": "1",
+      "kappa": "19/20",
+      "even_minimum": "0",
+      "even_minimizers": 2,
+      "odd_minimum": "3/2",
+      "odd_minimizers": 1
+    },
+    {
+      "lambda": "1",
+      "kappa": "1/8",
+      "even_minimum": "0",
+      "even_minimizers": 2,
+      "odd_minimum": "3/2 - ((291+117*t)/424)^2*(2+t^4)/2",
+      "odd_minimizers": 4
+    }
+  ],
+  "odd_hessian_pivots": {
+    "1": [
+      "2",
+      "2",
+      "2",
+      "2",
+      "4",
+      "4",
+      "7/4",
+      "12/7",
+      "7/4",
+      "12/7",
+      "2/3",
+      "2/3"
+    ],
+    "19/20": [
+      "39/20",
+      "39/20",
+      "39/20",
+      "39/20",
+      "1511/390",
+      "1511/390",
+      "945031/589290",
+      "14801409/9450310",
+      "945031/589290",
+      "14801409/9450310",
+      "769/11405",
+      "769/11405"
+    ],
+    "1/8": [
+      "9/8",
+      "9/8",
+      "9/8",
+      "9/8",
+      "53/36",
+      "53/36",
+      "-2555/1908",
+      "-13677/10220",
+      "-2555/1908",
+      "-13677/10220",
+      "141/194",
+      "141/194"
+    ]
+  },
+  "weak_coupling": {
+    "positive_root_polynomial": "39*t**4 + 97*t**3 + 20*t - 78",
+    "root_enclosure": [
+      "0.7870611274545",
+      "0.7870611274546"
+    ],
+    "minimum_enclosure": [
+      "0.5270521484230",
+      "0.5270521484231"
+    ],
+    "squared_amplitude": "117*t/424 + 291/424",
+    "energy": "3/2 - ((291+117*t)/424)^2*(2+t^4)/2",
+    "minimizers_per_odd_signature": 4
+  }
+}

@@ -1,0 +1,14 @@
+Lean (version 4.36.0-rc2, x86_64-unknown-linux-gnu, commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a, Release)
+Verified 6 pinned files from 8ed4c9347609ff350f947da7e44101abcd993ed9; mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.
+PASS PinnedLaakso.lean (--trust=0)
+'LaaksoCoefficientBounds.block_correction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.scale_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.even_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.even_least' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.odd_least' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.odd_origin_minimal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.odd_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.odd_positive_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LaaksoCoefficientBounds.weak_rational_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+PASS CoefficientBounds.lean (--trust=0)
