@@ -2917,7 +2917,7 @@
     },
     {
       "path": "linear_input/lean_check/OperatorF0SemanticBridge.inc",
-      "sha256": "c10b43079b42a5ac42095cb9e838965bbd11f468ebc811965e3d8d64347c8068",
+      "sha256": "90261c842d079c348771cbbdb27a34e350fdc9138066606367004b4ff63cea2e",
       "original_sha256": "25564ba53e0623aceccde1ef6907136031d19bdc013863642407859503b28d8f",
       "source_pr": 58,
       "source_commit": "a7ae4c8f4b78fa00e50d216df5021ceabb617500",
@@ -2925,8 +2925,7 @@
       "role": "adapted_retained_source",
       "byte_identical": false,
       "permitted_adaptations": [
-        "Remove the unused implicit type argument ι from fiber_stable_eq_F0_respects, which the pinned Lean could not infer at its use and flagged as unused; the proposition is unchanged.",
-        "State the exact family extension criterion by composing the existing equivalences. Derive the family and singleton corollaries and reuse the three-state non-descent witness."
+        "Remove the unused implicit type argument ι from fiber_stable_eq_F0_respects, which the pinned Lean could not infer at its use and flagged as unused; the proposition is unchanged."
       ]
     },
     {
