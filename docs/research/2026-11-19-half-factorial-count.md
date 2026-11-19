@@ -32,7 +32,7 @@
 - `lake env lean --trust=0 Research/HalfFactorialCount.lean`：終了コード0、`error:`・`warning:`・`sorryAx` なし。全14定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内。
 - `python -B tests/test_half_factorial_count.py`：3テスト合格。\(r,s,t\le8\) の全ての \(n=4^r6^s9^t\)（重複を除く）で、原子の非増加列による別実装の再帰探索で数えた分解数が \(\lfloor\min(v_2,v_3)/2\rfloor+1\) に一致し、長さが一意であることを確認。
 
-GitHub Actions の結果はこの記録の時点では未確認であり、専用CIの完了を別途確認する。
+GitHub Actions：専用CI [run 44504040498](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44504040498)（コミット `66c917f`）が成功（conclusion `success`）。
 
 ## 論理的境界
 

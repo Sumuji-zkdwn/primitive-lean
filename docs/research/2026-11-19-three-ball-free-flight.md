@@ -37,7 +37,7 @@
 - `ThreeBallCollision.lean` を `-o` で出力したのち `lake env lean --trust=0 ThreeBallFreeFlight.lean`：終了コード0、`error:`・`warning:`・`sorryAx` なし。全9定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内。
 - `python -B tests/test_three_ball_free_flight.py`：3テスト合格。間隙ではなく球の中心座標を進める別実装のイベント駆動シミュレーションで、500組を超える相異なる正有理数 \((a,b)\) について、衝突順・時刻・他方の間隙・終速度・運動量・エネルギーが上の閉形式に一致することを確認。
 
-GitHub Actions の結果はこの記録の時点では未確認であり、専用CIの完了を別途確認する。
+GitHub Actions：専用CI [run 44505949937](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44505949937)（コミット `a78bc6d`）が成功（conclusion `success`）。
 
 ## 論理的境界
 

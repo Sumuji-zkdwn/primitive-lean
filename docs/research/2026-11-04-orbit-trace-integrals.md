@@ -653,3 +653,5 @@ v_{r,j}=N^{M_r-j}\bigl(X^{\,r+M_rq}\bigr)\qquad(\texttt{chainVec})
 
 境界：係数体は \(\mathbb Q\)、\(a\ne0\) を仮定。`Module.Basis` 型の基底を \(V_d\) 上に明示的に組み立てる宣言は含めず、一次独立性と張る部分空間の等式として述べている。
 
+GitHub Actions：専用CI `orbit-trace-rank-formula.yml` の [run 44505949722](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44505949722)（コミット `a78bc6d`、第15・16節の両ファイル）が成功（conclusion `success`）。
+
