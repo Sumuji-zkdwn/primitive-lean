@@ -133,7 +133,7 @@ theorem projected_second_w1_outputs (b c : Bool) :
     bonding 1 '' vertexStep 1 (realizeRaw 1 (oldCopy 0 (w1 b) c)) =
       {realizeRaw 0 (w1 b)} := by
   rw [show oldCopy 0 (w1 b) c = (.inl (rawProjection (w1 b)), c) from rfl]
-  rw [second_old_outputs, Set.image_singleton]
+  rw [second_old_outputs (rawProjection (w1 b)) c, Set.image_singleton]
   exact congrArg (fun x => ({x} : Set (Space 1))) (bonding_oldCopy 0 (w1 b) c)
 
 theorem w1_ne_w2 (b : Bool) : realizeRaw 0 (w1 b) ≠ realizeRaw 0 (w2 b) := by
@@ -147,7 +147,7 @@ theorem w1_ne_w2 (b : Bool) : realizeRaw 0 (w1 b) ≠ realizeRaw 0 (w2 b) := by
 theorem canonical_relations_not_forward_sound (b c : Bool) :
     ¬ bonding 1 '' vertexStep 1 (realizeRaw 1 (oldCopy 0 (w1 b) c)) ⊆
       vertexStep 0 (bonding 1 (realizeRaw 1 (oldCopy 0 (w1 b) c))) := by
-  rw [projected_second_w1_outputs, bonding_oldCopy, first_w1_outputs]
+  rw [projected_second_w1_outputs b c, bonding_oldCopy 0 (w1 b) c, first_w1_outputs b]
   intro h
   exact w1_ne_w2 b (h (by rfl))
 
@@ -160,7 +160,7 @@ theorem cannot_keep_old_stop (F : Space 2 → Set (Space 2)) (b c : Bool)
       vertexStep 0 (bonding 1 (realizeRaw 1 (oldCopy 0 (w1 b) c))) := by
   intro h
   have hm := h ⟨_, hkeep, rfl⟩
-  rw [bonding_oldCopy, first_w1_outputs] at hm
+  rw [bonding_oldCopy 0 (w1 b) c, first_w1_outputs b] at hm
   exact w1_ne_w2 b hm
 
 /-- A replacement relation, constrained by its projected successor. -/
