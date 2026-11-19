@@ -1,7 +1,7 @@
 {
   "attempts": [],
   "last_ai_day": null,
-  "last_scanned_head": "1f83367f9680319849a1e0c5288cf7b5a19efb86",
+  "last_scanned_head": "8ed4c9347609ff350f947da7e44101abcd993ed9",
   "queue": [
     {
       "evidence": "具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。",
@@ -91,6 +91,87 @@
       "path": "docs/integration/erg-r005-handoff.md",
       "priority": 8,
       "source_sha256": "c61d15ee2821f6c1befda54c42339ef11680f59a7455af5bb2e03b7e3ac6d3ce",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "**未証明**: 自由間隙模型のLean形式化と既存Lean速度定理との接続、完全同時三球接触の力学、変形を伴う衝突とその極限。",
+      "id": "2505f2f3e37dcb464b62",
+      "line": 75,
+      "path": "docs/research/2026-11-14-three-ball-position-reentry.md",
+      "priority": 9,
+      "source_sha256": "3a0f12b4bb4e704a01672e78f4eedd7b61793c57868fe90a26fbb709c51c98bc",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "この結果は、非線形更新の**正確な一価の平均縮約が不可能でも、関係的な更新を導入すること自体は常に可能**という主張にとどまる。将来の複数ステップを有限の観測類だけで正確に予測できるかは、この模型については未証明。",
+      "id": "6b8d4ad8164328ea4714",
+      "line": 182,
+      "path": "docs/research/2026-11-15-laakso-void-relational-bridge.md",
+      "priority": 9,
+      "source_sha256": "175126f424e47043456b7d8dee933136af757a223bb3453ef733ffa81171270d",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "- 未証明・非主張：元の更新から生じる連続Laakso空間上の流れ、逆極限上の力学、連続時間極限、修復関係の連続性・閉グラフ性・全域的な全段整合性。",
+      "id": "94f3cd2ae768d6d0c559",
+      "line": 159,
+      "path": "docs/research/2026-11-17-laakso-bonding-audit.md",
+      "priority": 9,
+      "source_sha256": "d979ca6d1eeea64d9bf737e733bfa5e3c13dac39c0118a808cf2656b099b2905",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "## 重み条件ごとの一般的関係（この追加では未形式化）",
+      "id": "76eccf0c3809de65e034",
+      "line": 39,
+      "path": "docs/research/2026-11-17-signed-cycle-counterexample.md",
+      "priority": 8,
+      "source_sha256": "7bf075f7d02499e809b27423170bd9f5772612dccf112476adb486d2777e78eb",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "**GitHub Actions による Lean カーネル検査の完了までは未検証**。",
+      "id": "3145d1dda4648e6a988d",
+      "line": 68,
+      "path": "docs/research/2026-11-17-siphon-predictive-quotient.md",
+      "priority": 8,
+      "source_sha256": "31624f032a2d4c69a443655dec4855b31ffb9a43249802e4aa2dd672dbe79a5a",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "1. DAG iff A^n=0 は、**単位・非負辺重み**の有向グラフについての関係。ゼロ重みや符号付き和でのキャンセルがあるなら同じ判定をそのまま使えない。Leanでの普遍命題（任意の有限 n・グラフ）はまだ未形式化。",
+      "id": "529ec5f843f8ebc96e90",
+      "line": 38,
+      "path": "docs/research/2026-11-17-square-zero-network.md",
+      "priority": 8,
+      "source_sha256": "8a58c1ace363a5b2029993c59482c83f737d2f383e4482a038a72e8826174176",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "all nested alphabet pairs (157,464 comparisons). A four-state counterexample",
+      "id": "5fe228f1580aa68de00f",
+      "line": 57,
+      "path": "docs/research/2026-11-11-observer-orientation-depth.md",
+      "priority": 6,
+      "source_sha256": "00d7c56ad366f78d41a052fea3c1568deb0b383829f5a38b4c3dff92a40a32e9",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "| `signed_cycle_counterexample` | 2閉路の一つ、二乗非零、三乗零を一つの命題に集約 |",
+      "id": "8b2c8ef31fd105141201",
+      "line": 33,
+      "path": "docs/research/2026-11-17-signed-cycle-counterexample.md",
+      "priority": 6,
+      "source_sha256": "7bf075f7d02499e809b27423170bd9f5772612dccf112476adb486d2777e78eb",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "専用ワークフロー `signed-cycle-counterexample.yml` は、実際のPRヘッドを",
+      "id": "abd2d2f4168b42e7676f",
+      "line": 85,
+      "path": "docs/research/2026-11-17-signed-cycle-counterexample.md",
+      "priority": 6,
+      "source_sha256": "7bf075f7d02499e809b27423170bd9f5772612dccf112476adb486d2777e78eb",
       "status": "UNVERIFIED_LEAD"
     }
   ],
