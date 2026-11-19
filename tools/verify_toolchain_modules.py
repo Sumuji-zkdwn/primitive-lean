@@ -40,16 +40,16 @@ def imports_in(code):
     return imports
 
 
-def inventory(root):
+def inventory(root, package="lean"):
     from verify import strip_comments_strings
     tracked = subprocess.check_output(
-        ["git", "ls-files", "-z", "lean"], cwd=root).decode("utf-8").split("\0")
+        ["git", "ls-files", "-z", package], cwd=root).decode("utf-8").split("\0")
     modules = {}
     for relative in tracked:
         path = Path(relative)
         if path.suffix != ".lean":
             continue
-        name = ".".join(path.relative_to("lean").with_suffix("").parts)
+        name = ".".join(path.relative_to(package).with_suffix("").parts)
         code = strip_comments_strings((root / path).read_text(encoding="utf-8"))
         modules[name] = {
             "path": relative,
@@ -61,10 +61,11 @@ def inventory(root):
     return modules
 
 
-def run(root=ROOT, selected=None):
+def run(root=ROOT, selected=None, *, package="lean", output="toolchain-modules", findings=None):
     root = Path(root).resolve()
-    lean = root / "lean"
-    modules = inventory(root)
+    lean = root / package
+    modules = inventory(root, package)
+    findings = {} if findings is None else findings
     standalone = {name for name in modules if name != "Elastica" and not name.startswith("Elastica.")}
     # Audit.lean only repeats the main library's explicit audits.
     standalone.discard("Audit")
@@ -88,13 +89,14 @@ def run(root=ROOT, selected=None):
     for name in sorted(wanted):
         visit(name)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-    out = root / "verification/toolchain-modules" / stamp
+    out = root / "verification" / output / stamp
     out.mkdir(parents=True)
     report = {
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip(),
         "dirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True).strip()),
         "scope": "Fresh standalone-module source compilation and all imported local theorem axiom audit; Elastica prerequisite and joint assembly checked separately",
+        "package": package,
         "passed": False, "complete_standalone_inventory": set(ordered) == standalone,
         "toolchain": (lean / "lean-toolchain").read_text().strip(),
         "manifest_sha256": digest(lean / "lake-manifest.json"),
@@ -150,7 +152,9 @@ def run(root=ROOT, selected=None):
     failed = set()
     for name in ordered:
         row = modules[name]
-        if row["forbidden"]:
+        # Only exact source bytes may inherit a dedicated package's recorded findings.
+        retained = findings.get(row["sha256"], {})
+        if row["forbidden"] != retained.get("source_terms", []):
             report["errors"].append(f"{name}: forbidden source terms {row['forbidden']}")
             failed.add(name)
             continue
@@ -163,9 +167,9 @@ def run(root=ROOT, selected=None):
         target.parent.mkdir(parents=True, exist_ok=True)
         print("Checking " + name, flush=True)
         result, text = command([lean_binary, "--trust=0", "-o", str(target),
-                               str(Path(row["path"]).relative_to("lean"))], name)
+                               str(Path(row["path"]).relative_to(package))], name)
         report["modules"].append({"module": name, **result})
-        if result["exit_code"] or result["warnings"]:
+        if result["exit_code"] or result["warnings"] != retained.get("warnings", []):
             failed.add(name)
             report["errors"].append(name + ": source compilation failed or emitted warnings")
             print(text, flush=True)
