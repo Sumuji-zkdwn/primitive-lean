@@ -53,7 +53,7 @@ U_t * B_t = 2 * I_12
 
 - 任意の実数`t`に対する16×16行列の行列式`(1-t²)^4(1+t²)^4`の独立Lean定理。
 - 任意の実数`t`に対する完全な階数・スペクトルの分類。
-- Cayley–Dickson再帰による`epsTable`の生成のLean内検証。
+- Cayley–Dickson再帰による`epsTable`の生成のLean内検証。（2026-11-19追記：[F16 の Cayley–Dickson 符号表](../research/2026-11-19-f16-cayley-dickson.md) の `lean/Research/F16CayleyDickson.lean` で、倍化 (a,b)(c,d)=(ac−d̄b, da+bc̄) の符号と全256成分が一致することを証明した。）
 - 行列`realPencil`と、元資料のあらゆる表現の`leftPencil`の同一性の一般的な行列作用定理。
 - 21断面の曲率分類や非結合代数の結合子／滑らかな接続との同一視。
 
