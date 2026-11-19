@@ -19,6 +19,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[二塊移動の到達可能性 ⇔ 優越順序](docs/research/2026-11-19-f0-dominance-order.md)。Muirhead の整数移動補題を多重集合の超過量 ∑(m−t)⁺ で `lean/Research/F0DominanceOrder.lean` に証明し、Φ_d が塊数固定の正整数の型の優越順序について狭義単調であることを示す。
 
+2026-11-19追加：[Orbit-trace の全次数の階数公式](docs/research/2026-11-04-orbit-trace-integrals.md)（第15節）。転送作用素の偏差 N=ℒ−I について、未完だった rank(N^j|V_d)=max(0, d+1−j(p+1))、核の次元、冪零指数、長さごとのジョルダン鎖の本数を `lean/OrbitTraceRankFormula.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。

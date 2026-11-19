@@ -1,0 +1,95 @@
+name: Orbit trace rank formula (Lean 4.36, exact rank census)
+
+on:
+  push:
+    branches:
+      - ccr-9ddeac0a-tpeopz
+  pull_request:
+    paths:
+      - 'lean/OrbitTraceRankFormula.lean'
+      - 'tests/test_orbit_trace_rank_formula.py'
+      - '.github/workflows/orbit-trace-rank-formula.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  orbit-trace-rank-formula:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Build the existing orbit-trace dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          for f in OrbitTraceNilpotence OrbitTraceFirstShell OrbitTraceRootRecurrence \
+                   OrbitTraceMonicSequence OrbitTraceDegreeGap OrbitTraceLeadingDrop \
+                   OrbitTraceTransferOperator OrbitTraceFiltration OrbitTraceJordanIndex; do
+            lake env lean --trust=0 -o .lake/build/lib/lean/$f.olean $f.lean >> ../orbit-trace-deps.log 2>&1
+          done
+      - name: Compile the rank formula at trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceRankFormula.olean OrbitTraceRankFormula.lean 2>&1 | tee ../orbit-trace-rank-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../orbit-trace-rank-lean.log; then exit 1; fi
+      - name: Audit theorems against allowed axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('OrbitTraceRankFormula.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
+          assert 'native_decide' not in source
+          names = re.findall(r'^theorem\s+([\w.]+)', source, re.M)
+          assert len(names) >= 15, names
+          audit = 'import OrbitTraceRankFormula\n' + ''.join('#print axioms OrbitTrace.' + x + '\n' for x in names)
+          pathlib.Path('OrbitTraceRankFormulaAudit.lean').write_text(audit)
+          pathlib.Path('../orbit-trace-rank-axiom-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 OrbitTraceRankFormulaAudit.lean 2>&1 | tee ../orbit-trace-rank-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s = pathlib.Path('../orbit-trace-rank-audit.log').read_text()
+          n = int(pathlib.Path('../orbit-trace-rank-axiom-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b', s), s
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', s)
+          absent = s.count('does not depend on any axioms')
+          assert len(entries) + absent == n, (n, len(entries), absent, s)
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for entry in entries:
+              used = set(filter(None, (x.strip() for x in entry.split(','))))
+              assert used <= allowed, used - allowed
+          print('Kernel dependencies checked:', n)
+          PY
+      - name: Run independent exact rank census
+        shell: bash
+        run: python -B tests/test_orbit_trace_rank_formula.py -v 2>&1 | tee orbit-trace-rank-python.log
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: orbit-trace-rank-formula
+          path: |
+            orbit-trace-deps.log
+            orbit-trace-rank-lean.log
+            orbit-trace-rank-audit.log
+            orbit-trace-rank-axiom-count.txt
+            orbit-trace-rank-python.log
+          if-no-files-found: warn

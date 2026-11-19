@@ -612,3 +612,25 @@ Actions #41853061557 で検証成功。
   階数 \(\operatorname{rank}(N^j)=\max(0,d+1-j(p+1))\) の
   Lean 全称証明は引き続き未完。
 - 実測度保存と積分の変数変換は本追加のLean証明に含まれない。
+
+## 15. 全次数の階数公式の Lean 証明（2026-11-19 追記）
+
+第10・11・14節で「Lean 全称証明は未完」としていた階数公式を、`lean/OrbitTraceRankFormula.lean`（19定理）で証明した。ジョルダン基底は構成せず、次の性質だけを抽出した。
+
+- `ExactShift T m`：線形写像 \(T:K[X]\to K[X]\) が次数 \(<m\) の多項式を消し、それ以外の非零多項式の次数をちょうど \(m\) 下げる。
+- 合成で閉じる（`ExactShift.comp`、`ExactShift.pow`：\(T^j\) は \(jm\) の ExactShift）。
+- ExactShift なら \(T(V_d)=V_{d-m}\)（`ExactShift.map_degreeLT`、全射性は次数についての帰納法）、\(V_d\cap\ker T=V_{\min(m,d+1)-1}\)（`ExactShift.ker_inf_degreeLT`）。ここで \(V_d=\) `degreeLT (d+1)`。
+
+\(a\ne0\) のとき、既存の `canonicalDelta_X_pow_exact_degree`（単項式の次数がちょうど \(p+1\) 下がる）、`canonicalDelta_degree_bound`、`canonicalDelta_zero_of_low_degree` から、最高次の単項式を分離して `canonicalDelta_exactShift`（\(N\) は \(p+1\) の ExactShift）を示した。その系として、\(\mathbb Q\) 上で
+
+\[
+\dim N^j(V_d)=\max(0,\,d+1-j(p+1)),\qquad
+\dim(V_d\cap\ker N^j)=\min(j(p+1),\,d+1)
+\]
+
+（`canonicalDelta_pow_rank`、`canonicalDelta_pow_ker_rank`）、像そのものが \(V_{d-j(p+1)}\) であること（`canonicalDelta_pow_image`）、\(N^j\) が \(V_d\) 上で零 ⇔ \(d<j(p+1)\)、冪零指数 \(\lfloor d/(p+1)\rfloor+1\)（`canonicalDelta_pow_vanish_iff`、`canonicalDelta_nilpotency_index`）が従う。さらに長さ \(\ge j+1\) の鎖の本数 \(\operatorname{rank}N^j-\operatorname{rank}N^{j+1}\) が、`OrbitTraceJordanIndex.lean` の `chainLength p d r`（\(\ell_r\)）が \(j+1\) 以上の剰余類 \(r\le p\) の個数に一致する（`canonicalDelta_chain_count`）。第5節の例 \(p=3,d=11\) の階数 12, 8, 4, 0 は `rank_example_p3_d11`。
+
+検証（2026-11-19、クラウドコンテナ、Lean `v4.36.0-rc2`）：依存ファイルを既存 CI と同じ順に `-o` で出力したのち `lake env lean --trust=0 OrbitTraceRankFormula.lean` が警告なしで通り、全19定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。独立検算 `python -B tests/test_orbit_trace_rank_formula.py`（標準ライブラリのみ）は、\(p\le4\)、\(d\le12\)、\(a\in\{1,-2,1/3\}\) で漸化式から作った \(N\) の行列の冪の階数を有理数の厳密な掃き出しで求め、上の公式・核の次元・鎖の本数・像の次数と一致することを確認した。専用CIは `.github/workflows/orbit-trace-rank-formula.yml`、既存の `orbit-trace-verification.yml` の一覧にも追加した。
+
+境界：ジョルダン標準形への相似（明示的な鎖基底 \(v_{r,j}\) の基底性と \(NB=BJ\)）は、階数列から線形代数で従う事実であるが Lean では形式化していない。係数体は既存ファイルと同じく \(\mathbb Q\)、仮定 \(a\ne0\) は必要（\(a=0\) なら \(N=0\)）。
+
