@@ -27,21 +27,21 @@ theorem dihedralRepresentation_surjective (k : ℕ) (hk : 0 < k)
     (ζ : ℂ) (hζ : IsPrimitiveRoot ζ (3 ^ k)) :
     Function.Surjective (dihedralRepresentation k ζ hζ) := by
   classical
-  letI : Polynomial.IsSplittingField (Base k) E (LinearInputChebyshevSplitting.basePolynomial k) :=
+  have : Polynomial.IsSplittingField (Base k) E (LinearInputChebyshevSplitting.basePolynomial k) :=
     LinearInputChebyshevSplitting.rationalFunction_isSplittingField k hk ζ hζ
-  letI : FiniteDimensional (Base k) E :=
+  have : FiniteDimensional (Base k) E :=
     Polynomial.IsSplittingField.finiteDimensional E (LinearInputChebyshevSplitting.basePolynomial k)
-  letI : Finite (E →ₐ[Base k] E) := inferInstance
-  letI : Finite (Aut k) :=
+  have : Finite (E →ₐ[Base k] E) := inferInstance
+  have : Finite (Aut k) :=
     Finite.of_injective
       (fun σ : Aut k => (σ : E →ₐ[Base k] E))
-      AlgEquiv.coe_algHom_injective
+      AlgEquiv.coe_toAlgHom_injective
   have h_bound : Nat.card (Aut k) ≤ 2 * (3 ^ k) := by
     calc
       Nat.card (Aut k) ≤ Nat.card (E →ₐ[Base k] E) :=
         Nat.card_le_card_of_injective
           (fun σ : Aut k => (σ : E →ₐ[Base k] E))
-          AlgEquiv.coe_algHom_injective
+          AlgEquiv.coe_toAlgHom_injective
       _ ≤ Module.finrank (Base k) E :=
         card_algHom_le_finrank (Base k) E E
       _ = 2 * (3 ^ k) := LinearInputChebyshevSplitting.parameterField_finrank k

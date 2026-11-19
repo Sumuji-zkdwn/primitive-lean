@@ -6698,14 +6698,16 @@
     },
     {
       "path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
-      "sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6",
+      "sha256": "acead4cd2153353e5ed94b62d1ca8eeac99956a747cd80c1d7683a11f1b73710",
       "original_sha256": "e7e383e6a58865d9a51d1cb2dd2ccce4a21eb3e97becf054091c9ec976976ac6",
       "source_pr": 133,
       "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "source_path": "linear_input/lean_check/ChebyshevGaloisCompletion.inc",
-      "role": "repository_native_proof",
-      "byte_identical": true,
-      "permitted_adaptations": [],
+      "role": "adapted_retained_source",
+      "byte_identical": false,
+      "permitted_adaptations": [
+        "Bind the four proof-local typeclass witnesses with have and use AlgEquiv.coe_toAlgHom_injective under Lean 4.36. The coercions, bound, and theorem statements are unchanged."
+      ],
       "provenance": {
         "origin": "authored_in_primitive_lean",
         "proof_reference": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/133",
