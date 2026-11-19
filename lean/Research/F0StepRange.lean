@@ -21,8 +21,9 @@ B 適合な `S` の個数が多いことを「異なる `T` の個数」と同�
 
 例えば 7 点で型 `(4,3)`、`d = 2` なら B 適合な `S` は 5,175,625 個あるが、B のもとで
 異なる `T` は `2^2 = 4` 個しかない（`example_seven_points`）。
-出力成分が1個（`d = 1`）で条件 A だけの場合は、`S` が全単射になり一般に一部の写像しか
-現れない（数値例は研究ノート参照）。その集合の Lean での決定は今回扱わない。
+出力成分が1個（`d = 1`）で条件 A だけの場合は、`S` が全単射になり、`T` はちょうど
+`K ∘ σ⁻¹ ∘ K ∘ σ`（`σ` は置換）の形の写像になる（`range_reconstructs_one`）。一般には
+値が `F` に入る写像の一部しか現れない（個数の数値例は研究ノート参照）。
 -/
 
 namespace F0StepRange
@@ -253,6 +254,41 @@ theorem range_reconstructs {i₀ i₁ : I} (hi : i₀ ≠ i₁) (hK : Idempotent
       show T x = K (C (Φ x))
       simp only [C, hv, hw, ↓reduceDIte]
       rw [hΦT _ _ hw.choose_spec, hT]
+
+omit [DecidableEq α] in
+/-- **条件 A、出力成分1個**：`S` は全単射になり、`T` はちょうど `K ∘ σ⁻¹ ∘ K ∘ σ`（`σ` は置換）の形。 -/
+theorem range_reconstructs_one [Unique I] (T : α → α) :
+    (∃ S : α → I → α, ∃ C : (I → α) → α, Reconstructs S C ∧ T = step K S C) ↔
+      ∃ σ : Equiv.Perm α, T = K ∘ σ.symm ∘ K ∘ σ := by
+  classical
+  -- `I → α` は `α` と同一視できる
+  let e : (I → α) ≃ α := Equiv.funUnique I α
+  constructor
+  · rintro ⟨S, C, hA, rfl⟩
+    -- `s = e ∘ S` は単射なので全単射
+    have hinj : Function.Injective (fun x => e (S x)) := by
+      intro x y hxy
+      have := congrArg (fun v => C (e.symm v)) hxy
+      simp only [Equiv.symm_apply_apply] at this
+      rwa [hA x, hA y] at this
+    let σ : Equiv.Perm α := Equiv.ofBijective _ (Finite.injective_iff_bijective.mp hinj)
+    refine ⟨σ, ?_⟩
+    funext x
+    have hσ : ∀ y, σ y = e (S y) := fun _ => rfl
+    -- C は σ の像（全体）で σ⁻¹ に等しい
+    have hC : ∀ v, C v = σ.symm (e v) := by
+      intro v
+      obtain ⟨y, hy⟩ := σ.surjective (e v)
+      have : S y = v := by
+        apply e.injective
+        rw [← hσ, hy]
+      rw [← hy, Equiv.symm_apply_apply, ← this, hA]
+    simp only [step, Function.comp_apply, hC]
+    congr 2
+  · rintro ⟨σ, rfl⟩
+    refine ⟨fun x => e.symm (σ x), fun v => σ.symm (e v), fun x => by simp, ?_⟩
+    funext x
+    simp [step, liftK, e]
 
 /-- **条件 A の個数**（`d ≥ 2`、`K ≠ id`）：`r^N` 個。 -/
 theorem card_reconstructs {i₀ i₁ : I} (hi : i₀ ≠ i₁) (hK : Idempotent K) {x₀ : α}

@@ -7,7 +7,8 @@ without conditions it has r^N elements, under condition B (S o K = K^(d) o S)
 r^r elements, and under A (C o S = id) together with B it is exactly {K}.
 Under A alone, with two output components and K != id, every map into Fix K
 occurs (r^N); for K = id only the identity; with one component fewer maps
-occur (recorded counts 4, 5, 7, 9 on 3 and 4 points).
+occur: exactly the maps K o s^-1 o K o s for permutations s (recorded counts
+4, 5, 7, 9 on 3 and 4 points).
 """
 from __future__ import annotations
 
@@ -106,6 +107,17 @@ class ReconstructionOnly(unittest.TestCase):
         self.assertEqual(counts, {(2, 1): 4, (3, 1): 5, (2, 2): 7, (2, 1, 1): 9,
                                   (3,): 1, (4,): 1})
 
+    def test_one_component_is_conjugate_product(self):
+        for n in range(1, 5):
+            for k in idempotents(n):
+                conj = set()
+                for sigma in itertools.permutations(range(n)):
+                    inv = [0] * n
+                    for x, y in enumerate(sigma):
+                        inv[y] = x
+                    conj.add(tuple(k[inv[k[sigma[x]]]] for x in range(n)))
+                self.assertEqual(reconstructing_updates(k, 1), conj, k)
+
 
 class LeanSource(unittest.TestCase):
     def test_no_holes_and_main_declarations_present(self):
@@ -116,7 +128,7 @@ class LeanSource(unittest.TestCase):
         for name in ('range_free', 'range_compatible', 'range_reconstructs_compatible',
                      'card_free', 'card_compatible', 'card_reconstructs_compatible',
                      'example_seven_points', 'range_reconstructs', 'card_reconstructs',
-                     'range_reconstructs_of_id'):
+                     'range_reconstructs_of_id', 'range_reconstructs_one'):
             self.assertIsNotNone(
                 re.search(r'^theorem ' + name + r'\b', source, re.M), name)
 
