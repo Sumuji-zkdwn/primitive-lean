@@ -45,6 +45,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[Siphon 操作の自由積](docs/research/2026-11-17-siphon-free-product.md)（末尾の追記）。多項式自己同型 L と E が実平面の置換として生成する群が C₆ * C₂ と同型であることを、ℝ[t]² 上のピンポン補題と実数点での評価で `lean/Research/SiphonFreeProduct.lean` に証明する。
 
+2026-11-19追加：[シア共役 E_d の全次数版](docs/research/2026-11-04-orbit-trace-integrals.md)（第19節）。E_d = H_d⁻¹LH_d について、全ての d で E_d⁶ = id・Q∘H_d の不変性・ヤコビアン 1、E_d³ = −id ⇔ d が奇数を `lean/Research/OddShear.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。

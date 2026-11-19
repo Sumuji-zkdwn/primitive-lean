@@ -687,3 +687,15 @@ Lean の `S3` は全域で定義された関数なので、極で既定値をと
 検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceGlasser.lean` は警告なしで通り、全28定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_glasser.py`（浮動小数点、証明ではない）は、固定5例と乱数5例の極・留数で、二分法で求めた逆像の和が \(t-c+\sum a_j\)、重み \(1/S'\) の和が1になることと、ガウス関数・コーシー密度の積分の一致（相対誤差 \(10^{-4}\) 未満、コーシーは裾の打ち切り分）を確認した。専用CIは `.github/workflows/orbit-trace-glasser.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
 
 境界：留数に負のものがある場合（第3節の後半の注意、単調性が失われる）は扱わない。\(b_j>0\) は仮定として必要である。
+
+## 19. 第6節の \(E_d\) の全次数での Lean 証明（2026-11-19 追記）
+
+第6節は奇数 \(d\ge3\) について \(\det DE_d=1\)、\(E_d^3=-\mathrm{id}\)、\(E_d^6=\mathrm{id}\)、\(Q\circ H_d\) の不変性を述べ、`lean/OrbitTrace.lean` は \(d=3\) を証明していた。独立モジュール `lean/Research/OddShear.lean`（13定理）で全ての \(d\) を扱った。
+
+- `Ed_explicit`：\(E_d(u,v)=(v-(v-u-v^d)^d,\ v-u-v^d)\)。
+- `Ed_six`：**すべての** \(d\) で \(E_d^6=\mathrm{id}\)（共役で \(L^6=\mathrm{id}\) が移る、`Ed_iter`）。
+- `Ed_cube_iff`：\(E_d^3=-\mathrm{id}\) は \(d\) が奇数のときに限る。偶数 \(d\) では \(E_d^3(0,1)=(-2,-1)\)。第6節の「奇数」の仮定は \(E_d^3=-\mathrm{id}\) に必要で、\(E_d^6=\mathrm{id}\) には不要。
+- `Ed_invariant`：すべての \(d\) で \(Q\circ H_d\) は \(E_d\) 不変。
+- `Ed_partials`・`Ed_jacobian`：四つの偏導関数が座標方向の `HasDerivAt` として存在し、その \(2\times2\) 行列式は 1。
+
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 Research/OddShear.lean` は警告なしで通り、全13定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。独立検算 `python -B tests/test_odd_shear.py` は有理数の厳密計算で \(d\le9\) の \(E_d^6\)・\(E_d^3\)・不変性、行列式 1 を確認し、偏導関数を中心差分と照合する。\(d=3\) の定義が `OrbitTrace.lean` と同じ式であることも文字列で照合する。専用CI `.github/workflows/odd-shear.yml`、統合検査の `odd-shear` 段。

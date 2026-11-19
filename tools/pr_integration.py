@@ -93,6 +93,7 @@ def run_integration(root, command, rebuild=False):
                                 'Research/RadicalSquarefree.lean'], lean),
         ('siphon-free-product', ['lake', 'env', 'lean', '--trust=0',
                                  'Research/SiphonFreeProduct.lean'], lean),
+        ('odd-shear', ['lake', 'env', 'lean', '--trust=0', 'Research/OddShear.lean'], lean),
         ('laakso-bonding', [sys.executable, '-B', '-X', 'utf8', 'tools/check_laakso_bonding.py',
                             '--output-dir', str(out / 'laakso-bonding')]),
         ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
@@ -108,7 +109,8 @@ def run_integration(root, command, rebuild=False):
                     'f0-drop-compatibility', 'acyclic-nilpotent', 'f0-dominance-order',
                     'half-factorial-count', 'erg-canonical-chain', 'f0-coarsening-merge',
                     'f0-step-range', 'f16-cayley-dickson', 'f0-type-count',
-                    'chebyshev-dihedral', 'radical-squarefree', 'siphon-free-product'):
+                    'chebyshev-dihedral', 'radical-squarefree', 'siphon-free-product',
+                    'odd-shear'):
             # Trust-zero compilation must also reject sorryAx reported by #print axioms.
             if 'sorryAx' in (out / ('integration-' + name + '.log')).read_text('utf-8'):
                 result['errors'].append(name + ' reports sorryAx; see ' + record['log'])
