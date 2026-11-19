@@ -37,6 +37,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[Boole 型変換の測度保存](docs/research/2026-11-04-orbit-trace-integrals.md)（第17節）。逆分枝の導関数の和が1なら ∫g∘S = ∫g となる抽象定理と、古典的な Boole の定理 ∫g(x−1/x)dx = ∫g(x)dx を `lean/OrbitTraceBoole.lean` で証明する。元ノートの三分枝写像 S(x) = x+1−1/x−1/(x−1) についても、三次方程式を解かずに中間値の定理と逆関数の微分で分枝を作り、∫g∘S = ∫g を証明する（`S3_integral`）。さらに S が Lebesgue 測度を保存すること（`MeasurePreserving`、反復も含む）と、元ノート第1節の積分値 Σ_J ∫_J((x²−x)/(x³−3x+1))ⁿ = ((2/3)ⁿ⁻¹−(6/19)ⁿ⁻¹)/(n−1)、∫_{A_n}(Sⁿ)⁻² = 20/57 を証明する。
 
+2026-11-19追加：[Glasser の master theorem](docs/research/2026-11-04-orbit-trace-integrals.md)（第18節）。相異なる極 aⱼ と正の留数 bⱼ について x ↦ x + c − Σⱼ bⱼ/(x − aⱼ) が Lebesgue 測度を保存し、∫g(x + c − Σⱼ bⱼ/(x − aⱼ))dx = ∫g(x)dx となることを `lean/OrbitTraceGlasser.lean` で証明する。逆分枝の和はヴィエタの関係（モニック多項式の根の和）で求める。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。

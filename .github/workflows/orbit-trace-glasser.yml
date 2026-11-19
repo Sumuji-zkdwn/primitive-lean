@@ -1,0 +1,87 @@
+name: Orbit trace Glasser master theorem (Lean 4.36, numerical check)
+
+on:
+  push:
+    branches:
+      - ccr-9ddeac0a-tpeopz
+  pull_request:
+    paths:
+      - 'lean/OrbitTraceBoole.lean'
+      - 'lean/OrbitTraceGlasser.lean'
+      - 'tests/test_orbit_trace_glasser.py'
+      - '.github/workflows/orbit-trace-glasser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  orbit-trace-glasser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile the Boole module and Glasser's theorem at trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceBoole.olean OrbitTraceBoole.lean 2>&1 | tee ../orbit-trace-glasser-deps.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceGlasser.olean OrbitTraceGlasser.lean 2>&1 | tee ../orbit-trace-glasser-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../orbit-trace-glasser-deps.log ../orbit-trace-glasser-lean.log; then exit 1; fi
+      - name: Audit theorems against allowed axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          source = pathlib.Path('OrbitTraceGlasser.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
+          assert 'native_decide' not in source
+          names = re.findall(r'^theorem\s+([\w.]+)', source, re.M)
+          assert len(names) >= 28, names
+          audit = 'import OrbitTraceGlasser\n' + ''.join('#print axioms OrbitTrace.' + x + '\n' for x in names)
+          pathlib.Path('OrbitTraceGlasserAudit.lean').write_text(audit)
+          pathlib.Path('../orbit-trace-glasser-axiom-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 OrbitTraceGlasserAudit.lean 2>&1 | tee ../orbit-trace-glasser-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s = pathlib.Path('../orbit-trace-glasser-audit.log').read_text()
+          n = int(pathlib.Path('../orbit-trace-glasser-axiom-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b', s), s
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', s)
+          absent = s.count('does not depend on any axioms')
+          assert len(entries) + absent == n, (n, len(entries), absent, s)
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for entry in entries:
+              used = set(filter(None, (x.strip() for x in entry.split(','))))
+              assert used <= allowed, used - allowed
+          print('Kernel dependencies checked:', n)
+          PY
+      - name: Run independent numerical checks
+        shell: bash
+        run: python -B tests/test_orbit_trace_glasser.py -v 2>&1 | tee orbit-trace-glasser-python.log
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: orbit-trace-glasser
+          path: |
+            orbit-trace-glasser-deps.log
+            orbit-trace-glasser-lean.log
+            orbit-trace-glasser-audit.log
+            orbit-trace-glasser-axiom-count.txt
+            orbit-trace-glasser-python.log
+          if-no-files-found: warn
