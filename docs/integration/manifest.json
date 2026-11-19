@@ -5513,6 +5513,36 @@
       }
     },
     {
+      "path": "linear_input/lean_check/CurveWordSampling.inc",
+      "sha256": "42cf77169045b8373420519b0d36d388ba389ee438ac3e019c163466c45bd0e9",
+      "original_sha256": "42cf77169045b8373420519b0d36d388ba389ee438ac3e019c163466c45bd0e9",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveWordSampling.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/CurveShadowKernel.inc",
+      "sha256": "f77916066cd5a1df363b6d65acae4b8945fbbd6099c831fc95d1b88a8e0006b8",
+      "original_sha256": "f77916066cd5a1df363b6d65acae4b8945fbbd6099c831fc95d1b88a8e0006b8",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/CurveShadowKernel.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9"
+      }
+    },
+    {
       "path": "linear_input/lean_check/CurveWordArc.inc",
       "sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",
       "original_sha256": "7072594170caa234ba4eb179da62a115498183288f8242b71888be0594093d60",

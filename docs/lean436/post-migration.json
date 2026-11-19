@@ -11,8 +11,8 @@
     {
       "path": "tools/verify_main_result.py",
       "migration_sha256": "8810b0656121c1670666b9712d59b23a761addfd2189cfcc6a318dbe66e8f859",
-      "current_sha256": "9494055181271953ffa9ebdd9d513daf6d5f81d5ec6367f2bc27672af9760716",
-      "reason": "Register the integrated orientation, Laakso gauge/minimum, and Chebyshev Galois supplements, followed by the five F16 Fenchel and pseudoinverse supplements from PR #49 and the Mathlib PiL2 import.",
+      "current_sha256": "c0d22621d67ed5046e57028daf000813bfbdf40720bb1c935870975d4038cc64",
+      "reason": "Register the integrated orientation, Laakso gauge/minimum, and Chebyshev Galois supplements, followed by the five F16 Fenchel and pseudoinverse supplements from PR #49 and the Mathlib PiL2 import. Register the curve-word sampling and scalar predictive equivalence supplements.",
       "previous": {
         "commit": "2834354904e26ed3f01dd4a8a004dcd28bdbcc53",
         "sha256": "9313b26582a38626fab67b12661e8c5b3d621be393d4228edcdcc8bbbc707cb0",
