@@ -72,7 +72,7 @@ private theorem exists_minimal_success {G : Type*} [DecidableEq G]
       ∃ A, MinimalEnabler f S A := by
     intro n
     induction n using Nat.strong_induction_on with
-    | h n ih =>
+    | ind n ih =>
         intro S hcard hS
         by_cases hsmaller : ∃ T : Finset G, T ⊂ S ∧ f T
         · obtain ⟨T, hTS, hT⟩ := hsmaller
