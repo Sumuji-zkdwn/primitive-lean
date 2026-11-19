@@ -43,7 +43,7 @@
 - `lake env lean --trust=0 Research/AcyclicNilpotent.lean`：終了コード0、`error:`・`warning:`・`sorryAx` なし。主定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内。
 - `python -B tests/test_acyclic_nilpotent.py`：6テスト合格。1〜4頂点のループ込みの全0/1行列（2, 16, 512, 65,536個）で \(A^n=0\) ⇔ 深さ優先探索で閉路なし、を確認。ループなしの非巡回グラフの数は 1, 3, 25, 543（OEIS A003024 と一致）。重み \(\{0,1,2\}\) の1〜3頂点でも同じ同値を確認し、0/1行列では冪の成分が歩道の個数に一致することを確認。
 
-GitHub Actions の結果はこの記録の時点では未確認であり、専用CIの完了を別途確認する。
+GitHub Actions：専用CI [run 44500542674](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44500542674)（コミット `565d6af`、push イベント）が成功（conclusion `success`）。
 
 ## 論理的境界
 

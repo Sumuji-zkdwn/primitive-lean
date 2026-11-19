@@ -63,8 +63,14 @@ def run_integration(root, command, rebuild=False):
                ('finite-markov-transport', [sys.executable, '-B', '-X', 'utf8', 'tools/verify_finite_markov_transport.py'])]
     stages += [
         ('void-hypercompletion', ['lake', 'env', 'lean', '--trust=0', 'Research/VoidHyperCompletion.lean'], lean),
-        ('f0-imbalance-monotonicity', ['lake', 'env', 'lean', '--trust=0',
+        ('research-olean-dir', [sys.executable, '-c',
+                                'import pathlib; pathlib.Path(".lake/build/lib/lean/Research")'
+                                '.mkdir(parents=True, exist_ok=True)'], lean),
+        ('f0-imbalance-monotonicity', ['lake', 'env', 'lean', '--trust=0', '-o',
+                                       '.lake/build/lib/lean/Research/F0ImbalanceMonotonicity.olean',
                                        'Research/F0ImbalanceMonotonicity.lean'], lean),
+        ('f0-dominance-order', ['lake', 'env', 'lean', '--trust=0',
+                                'Research/F0DominanceOrder.lean'], lean),
         ('f0-drop-compatibility', ['lake', 'env', 'lean', '--trust=0',
                                    'Research/F0DropCompatibility.lean'], lean),
         ('acyclic-nilpotent', ['lake', 'env', 'lean', '--trust=0',
@@ -81,7 +87,7 @@ def run_integration(root, command, rebuild=False):
         if record['exit_code']:
             result['errors'].append(name + ' failed; see ' + record['log'])
         if name in ('siphon-interaction', 'siphon-polynomial-e', 'f0-imbalance-monotonicity',
-                    'f0-drop-compatibility', 'acyclic-nilpotent'):
+                    'f0-drop-compatibility', 'acyclic-nilpotent', 'f0-dominance-order'):
             # Trust-zero compilation must also reject sorryAx reported by #print axioms.
             if 'sorryAx' in (out / ('integration-' + name + '.log')).read_text('utf-8'):
                 result['errors'].append(name + ' reports sorryAx; see ' + record['log'])
