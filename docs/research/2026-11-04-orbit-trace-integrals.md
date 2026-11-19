@@ -12,7 +12,7 @@ lean/OrbitTrace.lean が形式化するのは、元の3次式の代数恒等式�
 `lean/OrbitTraceMoment.lean` に、次数低下からの一般冪零性は
 `lean/OrbitTraceNilpotence.lean` に証明原稿を追加した。解析的なルベーグ測度保存・積分の変数変換、
 具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。
-（2026-11-19 追記：測度保存 (C) は、Boole の写像と第1節の写像 \(S\) について第17節で Lean 証明した。一般の \(S_m\) は未形式化。）
+（2026-11-19 追記：測度保存 (C) は、Boole の写像と第1節の写像 \(S\) について第17節で Lean 証明した。第1節の和の公式と \(A_n\) 上の積分 20/57 も同節。一般の \(S_m\) は未形式化。）
 tools/check_orbit_trace.py は SymPy 1.14 の有限な厳密計算であり、全称証明ではない。
 
 ## 1. 出発点：位数3のメビウス変換と積分
@@ -658,14 +658,19 @@ GitHub Actions：専用CI `orbit-trace-rank-formula.yml` の [run 44505949722](h
 
 ## 17. 実数上の測度保存 (C) の Lean 証明（Boole の場合と元の三分枝写像、2026-11-19 追記）
 
-第3節の (C)（逆分枝が増加し導関数の和が1なら \(\int\Phi(S(x))\,dx=\int\Phi(s)\,ds\)）は解析的な変数変換として Lean 未形式化だった。`lean/OrbitTraceBoole.lean`（24定理）で次を証明した。
+第3節の (C)（逆分枝が増加し導関数の和が1なら \(\int\Phi(S(x))\,dx=\int\Phi(s)\,ds\)）は解析的な変数変換として Lean 未形式化だった。`lean/OrbitTraceBoole.lean`（37定理）で次を証明した。
 
 - **抽象形**（`integral_comp_eq_of_branches`）：有限個の微分可能な分枝 \(r_i:\mathbb R\to\mathbb R\) が \(S\circ r_i=\mathrm{id}\)、\(r_i'\ge0\)、\(\sum_i r_i'=1\) を満たし、像が互いに素で、像の和集合の補集合が零集合なら、可積分な \(g\) について \(\int g(S(x))\,dx=\int g(t)\,dt\)。各分枝で mathlib の1次元変数変換 `integral_image_eq_integral_abs_deriv_smul` を使い、像の可測性は Lusin–Souslin の定理（`MeasurableSet.image_of_continuousOn_injOn`）から得る。
 - **Boole の定理**（`boole_integral`）：\(S(x)=x-1/x\)（第3節の \(m=2\)、\(c=0\)、\(a_1=0\)、\(b_1=1\)）について \(\int g(x-1/x)\,dx=\int g(x)\,dx\)。分枝は \((t\pm\sqrt{t^2+4})/2\)、導関数の和が1（`booleBranchDeriv_sum`）、0 以外の実数はその符号の分枝で到達される（`booleBranch_surj`）。
 - **逆分枝の構成**（`exists_inverse_branch`）：開区間 \(I\) 上で \(f'>0\) かつ \(f(I)=\mathbb R\) なら、\(f\) の逆写像 \(r:\mathbb R\to I\) が存在し、\(r'(t)=1/f'(r(t))\)。順序同型 `StrictMono.orderIsoOfSurjective` と `HasDerivAt.of_local_left_inverse` による。
 - **元の三分枝写像**（`S3_integral`）：第1節の \(S(x)=x+1-1/x-1/(x-1)\)（第3節の \(m=3\)、\(c=1\)、\(a=(0,1)\)、\(b=(1,1)\)）について \(\int g(S(x))\,dx=\int g(x)\,dx\)。三次方程式は解かない。\((-\infty,0)\)、\((0,1)\)、\((1,\infty)\) の各区間で \(S'=1+1/x^2+1/(x-1)^2>0\)（`S3_hasDerivAt`）、端点近くの値の評価（`S3_bounds`、\(M=|t|+4\)）と中間値の定理で全射性を得て、上の構成で3本の分枝を作る。分枝の値は相異なる3根として \(X^3-tX^2+(t-3)X+1\) を満たし（`S3_cubic`）、相異なる3根の和は \(t\)（`root_sum`）。この恒等式を微分して \(\sum_i 1/S'(r_i(t))=1\) を得る。像の補集合は \(\{0,1\}\) に含まれる。
+- **押し出し形の測度保存**（`measurePreserving_of_branches`、`S3_measurePreserving`、`S3_iterate_measurePreserving`）：同じ仮定と \(S\) の可測性から \(\lambda(S^{-1}B)=\lambda(B)\)（mathlib の `MeasurePreserving S volume volume`）。各分枝の像の測度を Lebesgue 積分の変数変換 `lintegral_image_eq_lintegral_abs_deriv_mul` で \(\int_B r_i'\) と書き、和をとる。反復 \(S^{\circ n}\) も測度を保存し、可測な \(B\) と（概）強可測な \(g\) について \(\int_{(S^{\circ n})^{-1}B}g(S^{\circ n}x)\,dx=\int_Bg\)（`S3_iterate_setIntegral`）。
+- **第1節の和の公式**（`three_interval_integral`）：\(n\ge2\) について \(\sum_J\int_J\bigl((x^2-x)/(x^3-3x+1)\bigr)^n dx=\bigl((2/3)^{n-1}-(6/19)^{n-1}\bigr)/(n-1)\)（\(J=[-1,-1/2],[1/2,2/3],[2,3]\) の和集合上の積分として）。3区間は \(S^{-1}[3/2,19/6]\) に一致する（`S3_preimage_Icc`、各区間上の狭義単調性と端点値による）。
+- **第1節の反復公式**（`iterate_integral_inv_sq`）：すべての \(n\) で \(\int_{A_n}(S^{\circ n}(x))^{-2}dx=20/57\)、\(A_n=(S^{\circ n})^{-1}[3/2,19/6]\)。
 
-検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceBoole.lean` は警告なしで通り、全24定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_boole.py`（浮動小数点、証明ではない）は Boole の分枝の逆写像性と導関数の和、三分枝写像の二分法で求めた分枝の和が \(t\)・重み \(1/S'\) の和が1・`S3_bounds` の不等式、ガウス関数などで両辺の積分の一致を確認した。専用CIは `.github/workflows/orbit-trace-boole.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
+Lean の `S3` は全域で定義された関数なので、極で既定値をとる（\(S3(0)=2\)、\(S3(1)=1\)）。測度に関する主張はこの零集合に影響されない。集合の等式 `S3_preimage_Icc` だけは余分な点 0 を含めた形で述べている。
 
-境界：第3節の一般の \(S_m\)（任意の極数・留数）は Lean では扱っていない（\(m=2\) の Boole の場合と \(m=3\) の元の写像のみ）。第1節の区間積分の値 \(\int_{A_n}(S^{\circ n})^{-2}=20/57\) なども形式化していない。
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceBoole.lean` は警告なしで通り、全37定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_boole.py`（浮動小数点、証明ではない）は Boole の分枝の逆写像性と導関数の和、三分枝写像の二分法で求めた分枝の和が \(t\)・重み \(1/S'\) の和が1・`S3_bounds` の不等式、ガウス関数などで両辺の積分の一致、第1節の和の公式（\(n=2,\dots,7\)、Simpson 則）、分枝の合成で作った \(A_n\) の \(3^n\) 区間上の積分が 20/57 になること（\(n\le3\)）を確認した。専用CIは `.github/workflows/orbit-trace-boole.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
+
+境界：第3節の一般の \(S_m\)（任意の極数・留数）は Lean では扱っていない（\(m=2\) の Boole の場合と \(m=3\) の元の写像のみ）。\(A_n\) が \(3^n\) 個の区間からなることは Lean では扱っていない（積分値には不要）。
 

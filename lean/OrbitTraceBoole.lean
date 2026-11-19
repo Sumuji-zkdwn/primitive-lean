@@ -27,6 +27,21 @@ records the analytic change of variables as not formalized in Lean.
   the intermediate value theorem and `exists_inverse_branch`, without solving the
   cubic. They are three distinct roots of `X³ - tX² + (t-3)X + 1`, so they sum to
   `t` (`root_sum`); differentiating that identity gives `Σ r_i' = 1`.
+* `measurePreserving_of_branches` gives the pushforward form
+  `MeasurePreserving S volume volume` under the same hypotheses (plus measurability of
+  `S`), through the Lebesgue-integral change of variables on each branch.
+  `S3_measurePreserving` and `S3_iterate_measurePreserving` apply it to `S3` and its
+  iterates.
+* `three_interval_integral` proves the sum formula of section 1:
+  `Σ_J ∫_J ((x²-x)/(x³-3x+1))^n dx = ((2/3)^(n-1) - (6/19)^(n-1))/(n-1)` for `n ≥ 2`
+  over `J = [-1,-1/2], [1/2,2/3], [2,3]`, which are the preimage of `[3/2, 19/6]` up to
+  the pole `0` (`S3_preimage_Icc`).
+* `iterate_integral_inv_sq` proves `∫_{A_n} (S^[n] x)^(-2) dx = 20/57` for
+  `A_n = (S^[n])⁻¹ [3/2, 19/6]`.
+
+`S3` is the total Lean function, so it takes junk values at the poles (`S3 0 = 2`,
+`S3 1 = 1`); all statements are insensitive to these null sets except the explicit set
+identity `S3_preimage_Icc`, which records the extra point `0`.
 -/
 
 namespace OrbitTrace
@@ -88,6 +103,54 @@ theorem integral_comp_eq_of_branches {ι : Type*} [Fintype ι] (S : ℝ → ℝ)
   congr 1
   funext t
   rw [← Finset.sum_mul, hsum, one_mul]
+
+/-- **Measure preservation through inverse branches** (pushforward form). -/
+theorem measurePreserving_of_branches {ι : Type*} [Fintype ι] (S : ℝ → ℝ) (hS : Measurable S)
+    (r r' : ι → ℝ → ℝ)
+    (hderiv : ∀ i t, HasDerivAt (r i) (r' i t) t) (hnonneg : ∀ i t, 0 ≤ r' i t)
+    (hinv : ∀ i t, S (r i t) = t)
+    (hdisj : Pairwise (Function.onFun Disjoint fun i => range (r i)))
+    (hnull : volume (⋃ i, range (r i))ᶜ = 0)
+    (hsum : ∀ t, ∑ i, r' i t = 1) :
+    MeasurePreserving S volume volume := by
+  have hinj : ∀ i, Function.Injective (r i) := fun i a b h => by
+    rw [← hinv i a, h, hinv i b]
+  have hcont : ∀ i, Continuous (r i) := fun i =>
+    continuous_iff_continuousAt.mpr fun t => (hderiv i t).continuousAt
+  have hr'meas : ∀ i, Measurable (r' i) := fun i => by
+    have : r' i = deriv (r i) := funext fun t => (hderiv i t).deriv.symm
+    rw [this]
+    exact measurable_deriv _
+  refine ⟨hS, Measure.ext fun B hB => ?_⟩
+  rw [Measure.map_apply hS hB]
+  have himg : ∀ i, MeasurableSet (r i '' B) := fun i =>
+    hB.image_of_continuousOn_injOn (hcont i).continuousOn (hinj i).injOn
+  -- the preimage is the union of the branch images, up to the null complement
+  have hsplit : S ⁻¹' B ∩ ⋃ i, range (r i) = ⋃ i, r i '' B := by
+    ext x
+    simp only [mem_inter_iff, mem_preimage, mem_iUnion, mem_range, mem_image]
+    constructor
+    · rintro ⟨hx, i, t, rfl⟩
+      exact ⟨i, t, by rwa [hinv] at hx, rfl⟩
+    · rintro ⟨i, t, ht, rfl⟩
+      exact ⟨by rwa [hinv], i, t, rfl⟩
+  have hae : S ⁻¹' B =ᵐ[volume] (S ⁻¹' B ∩ ⋃ i, range (r i) : Set ℝ) := by
+    refine (inter_ae_eq_left_of_ae_eq_univ ?_).symm
+    rw [ae_eq_univ]
+    exact hnull
+  rw [measure_congr hae, hsplit, measure_iUnion ?_ himg]
+  · rw [tsum_fintype]
+    have hi : ∀ i, volume (r i '' B) = ∫⁻ t in B, ENNReal.ofReal (r' i t) := fun i => by
+      rw [← setLIntegral_one, lintegral_image_eq_lintegral_abs_deriv_mul hB
+        (fun t _ => (hderiv i t).hasDerivWithinAt) (hinj i).injOn]
+      simp only [mul_one, abs_of_nonneg (hnonneg i _)]
+    simp only [hi]
+    rw [← lintegral_finsetSum _ fun i _ => (hr'meas i).ennreal_ofReal]
+    have : ∀ t, ∑ i, ENNReal.ofReal (r' i t) = 1 := fun t => by
+      rw [← ENNReal.ofReal_sum_of_nonneg fun i _ => hnonneg i t, hsum, ENNReal.ofReal_one]
+    simp only [this, setLIntegral_one]
+  · intro i j hij
+    exact (hdisj hij).mono (image_subset_range _ _) (image_subset_range _ _)
 
 /-! ## Boole's map `x - 1/x` -/
 
@@ -384,9 +447,12 @@ theorem S3_surj_Ioo (t : ℝ) : ∃ x ∈ Ioo (0 : ℝ) 1, S3 x = t := by
       ⟨by linarith [neg_abs_le t], by linarith [le_abs_self t]⟩)
   exact ⟨x, ⟨by linarith [hx.1], by linarith [hx.2]⟩, hxt⟩
 
-/-- **Measure preservation for the map of section 1**:
-`∫ g (x + 1 - 1/x - 1/(x - 1)) dx = ∫ g x dx` for every integrable `g`. -/
-theorem S3_integral (g : ℝ → ℝ) (hg : Integrable g) : ∫ x, g (S3 x) = ∫ x, g x := by
+/-- The three inverse branches of `S3`, on `(-∞,0)`, `(0,1)` and `(1,∞)`, with the
+hypotheses of `integral_comp_eq_of_branches`. -/
+theorem S3_branches : ∃ r : Fin 3 → ℝ → ℝ,
+    (∀ i t, HasDerivAt (r i) (S3deriv (r i t))⁻¹ t) ∧ (∀ i t, S3 (r i t) = t) ∧
+    Pairwise (Function.onFun Disjoint fun i => range (r i)) ∧
+    volume (⋃ i, range (r i))ᶜ = 0 ∧ ∀ t, ∑ i, (S3deriv (r i t))⁻¹ = 1 := by
   have hd : ∀ (I : Set ℝ), (∀ x ∈ I, x ≠ 0 ∧ x ≠ 1) → ∀ x ∈ I, HasDerivAt S3 (S3deriv x) x :=
     fun I hI x hx => S3_hasDerivAt (hI x hx).1 (hI x hx).2
   obtain ⟨r1, m1, i1, l1, d1⟩ := exists_inverse_branch (I := Iio (0 : ℝ)) isOpen_Iio S3 S3deriv
@@ -424,12 +490,11 @@ theorem S3_integral (g : ℝ → ℝ) (hg : Integrable g) : ∫ x, g (S3 x) = �
     · rcases lt_or_gt_of_ne h1 with hx' | hx'
       · exact ⟨1, S3 x, l2 x ⟨hx, hx'⟩⟩
       · exact ⟨2, S3 x, l3 x hx'⟩
-  apply integral_comp_eq_of_branches S3 r (fun i t => (S3deriv (r i t))⁻¹)
+  refine ⟨r, ?_, ?_, ?_, ?_, ?_⟩
   · intro i t; fin_cases i
     · exact d1 t
     · exact d2 t
     · exact d3 t
-  · intro i t; exact (inv_pos.mpr (S3deriv_pos _)).le
   · intro i t; fin_cases i
     · exact i1 t
     · exact i2 t
@@ -451,7 +516,169 @@ theorem S3_integral (g : ℝ → ℝ) (hg : Integrable g) : ∫ x, g (S3 x) = �
   · intro t
     rw [Fin.sum_univ_three]
     exact hsum t
-  · exact hg
+
+/-- **Measure preservation for the map of section 1**:
+`∫ g (x + 1 - 1/x - 1/(x - 1)) dx = ∫ g x dx` for every integrable `g`. -/
+theorem S3_integral (g : ℝ → ℝ) (hg : Integrable g) : ∫ x, g (S3 x) = ∫ x, g x := by
+  obtain ⟨r, hd, hinv, hdisj, hnull, hsum⟩ := S3_branches
+  exact integral_comp_eq_of_branches S3 r _ hd (fun i t => (inv_pos.mpr (S3deriv_pos _)).le)
+    hinv hdisj hnull hsum g hg
+
+/-! ## Measure preservation of `S3` and the integrals of section 1 -/
+
+theorem S3_measurable : Measurable S3 := by
+  unfold S3; fun_prop
+
+/-- `S3` preserves Lebesgue measure: `volume (S3 ⁻¹' B) = volume B` for measurable `B`. -/
+theorem S3_measurePreserving : MeasurePreserving S3 volume volume := by
+  obtain ⟨r, hd, hinv, hdisj, hnull, hsum⟩ := S3_branches
+  exact measurePreserving_of_branches S3 S3_measurable r _ hd
+    (fun i t => (inv_pos.mpr (S3deriv_pos _)).le) hinv hdisj hnull hsum
+
+theorem S3_iterate_measurePreserving (n : ℕ) : MeasurePreserving S3^[n] volume volume :=
+  S3_measurePreserving.iterate n
+
+/-- Set-integral form of measure preservation, for any measure-preserving self-map of `ℝ`. -/
+theorem setIntegral_preimage_of_measurePreserving {f : ℝ → ℝ}
+    (hf : MeasurePreserving f volume volume) {B : Set ℝ} (hB : MeasurableSet B) (g : ℝ → ℝ)
+    (hg : AEStronglyMeasurable g volume) :
+    ∫ x in f ⁻¹' B, g (f x) = ∫ x in B, g x := by
+  have hmap : (volume.restrict (f ⁻¹' B)).map f = volume.restrict B := by
+    rw [← Measure.restrict_map hf.measurable hB, hf.map_eq]
+  rw [← integral_map hf.measurable.aemeasurable (by rw [hmap]; exact hg.restrict), hmap]
+
+/-- For every `n`, `∫_{(S3^[n])⁻¹ B} g ∘ S3^[n] = ∫_B g`. -/
+theorem S3_iterate_setIntegral (n : ℕ) {B : Set ℝ} (hB : MeasurableSet B) (g : ℝ → ℝ)
+    (hg : AEStronglyMeasurable g volume) :
+    ∫ x in S3^[n] ⁻¹' B, g (S3^[n] x) = ∫ x in B, g x :=
+  setIntegral_preimage_of_measurePreserving (S3_iterate_measurePreserving n) hB g hg
+
+theorem S3_strictMonoOn {I : Set ℝ} (hconv : Convex ℝ I) (hopen : IsOpen I)
+    (h : ∀ x ∈ I, x ≠ 0 ∧ x ≠ 1) : StrictMonoOn S3 I := by
+  apply strictMonoOn_of_deriv_pos hconv
+  · exact fun x hx => (S3_hasDerivAt (h x hx).1 (h x hx).2).continuousAt.continuousWithinAt
+  · intro x hx
+    rw [hopen.interior_eq] at hx
+    rw [(S3_hasDerivAt (h x hx).1 (h x hx).2).deriv]
+    exact S3deriv_pos x
+
+theorem S3_eq_div {x : ℝ} (h0 : x ≠ 0) (h1 : x ≠ 1) :
+    S3 x = (x ^ 3 - 3 * x + 1) / (x ^ 2 - x) := by
+  have h1' : x - 1 ≠ 0 := sub_ne_zero.mpr h1
+  have h2 : x ^ 2 - x ≠ 0 := by
+    have : x ^ 2 - x = x * (x - 1) := by ring
+    rw [this]; exact mul_ne_zero h0 h1'
+  unfold S3
+  field_simp
+  ring
+
+/-- The three intervals of section 1 are exactly the preimage of `[3/2, 19/6]`, apart
+from the pole `0` (where the total function `S3` happens to take the value `2`). -/
+theorem S3_preimage_Icc :
+    S3 ⁻¹' Icc (3 / 2) (19 / 6) =
+      insert 0 (Icc (-1 : ℝ) (-1 / 2) ∪ Icc (1 / 2) (2 / 3) ∪ Icc 2 3) := by
+  have m1 := S3_strictMonoOn (convex_Iio (0 : ℝ)) isOpen_Iio
+    fun x (hx : x < 0) => ⟨hx.ne, by linarith⟩
+  have m2 := S3_strictMonoOn (convex_Ioo (0 : ℝ) 1) isOpen_Ioo
+    fun x hx => ⟨hx.1.ne', hx.2.ne⟩
+  have m3 := S3_strictMonoOn (convex_Ioi (1 : ℝ)) isOpen_Ioi
+    fun x (hx : 1 < x) => ⟨by linarith, hx.ne'⟩
+  have v1 : S3 (-1) = 3 / 2 := by norm_num [S3]
+  have v2 : S3 (-1 / 2) = 19 / 6 := by norm_num [S3]
+  have v3 : S3 (1 / 2) = 3 / 2 := by norm_num [S3]
+  have v4 : S3 (2 / 3) = 19 / 6 := by norm_num [S3]
+  have v5 : S3 2 = 3 / 2 := by norm_num [S3]
+  have v6 : S3 3 = 19 / 6 := by norm_num [S3]
+  ext x
+  simp only [mem_preimage, mem_Icc, mem_insert_iff, mem_union]
+  rcases lt_trichotomy x 0 with hx | rfl | hx
+  · have a := m1.le_iff_le (show (-1 : ℝ) ∈ Iio 0 by norm_num) (show x ∈ Iio 0 from hx)
+    have b := m1.le_iff_le (show x ∈ Iio 0 from hx) (show (-1 / 2 : ℝ) ∈ Iio 0 by norm_num)
+    rw [v1] at a; rw [v2] at b
+    rw [a, b]
+    constructor
+    · intro h; exact Or.inr (Or.inl (Or.inl h))
+    · rintro (h | (h | h) | h) <;> first | exact absurd h hx.ne | exact h | (exfalso; linarith [h.1])
+  · norm_num [S3]
+  · rcases lt_trichotomy x 1 with hx1 | rfl | hx1
+    · have a := m2.le_iff_le (show (1 / 2 : ℝ) ∈ Ioo 0 1 by norm_num)
+        (show x ∈ Ioo 0 1 from ⟨hx, hx1⟩)
+      have b := m2.le_iff_le (show x ∈ Ioo 0 1 from ⟨hx, hx1⟩)
+        (show (2 / 3 : ℝ) ∈ Ioo 0 1 by norm_num)
+      rw [v3] at a; rw [v4] at b
+      rw [a, b]
+      constructor
+      · intro h; exact Or.inr (Or.inl (Or.inr h))
+      · rintro (h | (h | h) | h)
+        · exact absurd h hx.ne'
+        · exfalso; linarith [h.2]
+        · exact h
+        · exfalso; linarith [h.1]
+    · norm_num [S3]
+    · have a := m3.le_iff_le (show (2 : ℝ) ∈ Ioi 1 by norm_num) (show x ∈ Ioi 1 from hx1)
+      have b := m3.le_iff_le (show x ∈ Ioi 1 from hx1) (show (3 : ℝ) ∈ Ioi 1 by norm_num)
+      rw [v5] at a; rw [v6] at b
+      rw [a, b]
+      constructor
+      · intro h; exact Or.inr (Or.inr h)
+      · rintro (h | (h | h) | h)
+        · exact absurd h hx.ne'
+        · exfalso; linarith [h.2]
+        · exfalso; linarith [h.2]
+        · exact h
+
+/-- `∫_{[a,b]} t^{-n} dt` for `0 < a ≤ b` and `n ≥ 2`, in the form used below. -/
+theorem setIntegral_Icc_inv_pow {a b : ℝ} (ha : 0 < a) (hab : a ≤ b) (m : ℕ) (hm : 1 ≤ m) :
+    ∫ t in Icc a b, (t⁻¹) ^ (m + 1) = ((a⁻¹) ^ m - (b⁻¹) ^ m) / m := by
+  rw [integral_Icc_eq_integral_Ioc, ← intervalIntegral.integral_of_le hab]
+  have h0 : (0 : ℝ) ∉ Set.uIcc a b := by
+    rw [uIcc_of_le hab]; intro h; linarith [h.1]
+  have hz : ∀ t : ℝ, (t⁻¹) ^ (m + 1) = t ^ (-((m + 1 : ℕ) : ℤ)) := fun t => by
+    rw [zpow_neg, zpow_natCast, inv_pow]
+  simp only [hz]
+  rw [integral_zpow (Or.inr ⟨by omega, h0⟩)]
+  have e : -((m + 1 : ℕ) : ℤ) + 1 = -(m : ℤ) := by push_cast; ring
+  rw [e, zpow_neg, zpow_neg, zpow_natCast, zpow_natCast, ← inv_pow, ← inv_pow]
+  push_cast
+  rw [show -((m : ℝ) + 1) + 1 = -(m : ℝ) by ring, div_neg, ← neg_div, neg_sub]
+
+/-- **Section 1 sum formula**: for `n ≥ 2`,
+`Σ_J ∫_J ((x²-x)/(x³-3x+1))^n dx = ((2/3)^(n-1) - (6/19)^(n-1))/(n-1)` over the three
+intervals `[-1,-1/2]`, `[1/2,2/3]`, `[2,3]`. -/
+theorem three_interval_integral (n : ℕ) (hn : 2 ≤ n) :
+    ∫ x in Icc (-1 : ℝ) (-1 / 2) ∪ Icc (1 / 2) (2 / 3) ∪ Icc 2 3,
+        ((x ^ 2 - x) / (x ^ 3 - 3 * x + 1)) ^ n =
+      ((2 / 3 : ℝ) ^ (n - 1) - (6 / 19) ^ (n - 1)) / (n - 1) := by
+  set U : Set ℝ := Icc (-1 : ℝ) (-1 / 2) ∪ Icc (1 / 2) (2 / 3) ∪ Icc 2 3 with hU
+  have hUm : MeasurableSet U := by
+    rw [hU]; exact (measurableSet_Icc.union measurableSet_Icc).union measurableSet_Icc
+  have h01 : ∀ x ∈ U, x ≠ 0 ∧ x ≠ 1 := by
+    intro x hx
+    rcases hx with (⟨h1, h2⟩ | ⟨h1, h2⟩) | ⟨h1, h2⟩ <;> constructor <;>
+      intro h' <;> subst h' <;> linarith
+  have hcongr : ∫ x in U, ((x ^ 2 - x) / (x ^ 3 - 3 * x + 1)) ^ n =
+      ∫ x in U, (fun t : ℝ => (t⁻¹) ^ n) (S3 x) := by
+    refine setIntegral_congr_fun hUm fun x hx => ?_
+    simp only
+    rw [S3_eq_div (h01 x hx).1 (h01 x hx).2, inv_div]
+  rw [hcongr, ← setIntegral_congr_set (insert_ae_eq_self (0 : ℝ) U), ← S3_preimage_Icc,
+    setIntegral_preimage_of_measurePreserving S3_measurePreserving
+      (measurableSet_Icc (a := (3 / 2 : ℝ)) (b := 19 / 6)) (fun t : ℝ => (t⁻¹) ^ n)
+      (by fun_prop)]
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+  rw [setIntegral_Icc_inv_pow (by norm_num) (by norm_num) m (by omega)]
+  simp only [Nat.add_sub_cancel]
+  push_cast
+  norm_num
+
+/-- **Section 1 iterate formula**: with `A_n = (S^[n])⁻¹ [3/2, 19/6]`,
+`∫_{A_n} (S^[n] x)^(-2) dx = 20/57` for every `n`. -/
+theorem iterate_integral_inv_sq (n : ℕ) :
+    ∫ x in S3^[n] ⁻¹' Icc (3 / 2) (19 / 6), ((S3^[n] x)⁻¹) ^ 2 = 20 / 57 := by
+  rw [S3_iterate_setIntegral n measurableSet_Icc (fun t => (t⁻¹) ^ 2) (by fun_prop)]
+  have := setIntegral_Icc_inv_pow (a := 3 / 2) (b := 19 / 6) (by norm_num) (by norm_num) 1 le_rfl
+  rw [this]
+  norm_num
 
 end OrbitTrace
 
@@ -459,3 +686,7 @@ end OrbitTrace
 #print axioms OrbitTrace.boole_integral
 #print axioms OrbitTrace.exists_inverse_branch
 #print axioms OrbitTrace.S3_integral
+#print axioms OrbitTrace.measurePreserving_of_branches
+#print axioms OrbitTrace.S3_measurePreserving
+#print axioms OrbitTrace.three_interval_integral
+#print axioms OrbitTrace.iterate_integral_inv_sq

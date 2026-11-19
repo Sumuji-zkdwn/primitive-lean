@@ -14,7 +14,12 @@ For the three-branch map S3(x) = x + 1 - 1/x - 1/(x - 1) of section 1:
   roots of X^3 - tX^2 + (t - 3)X + 1, sum to t, and the reciprocals of
   S3' at them sum to 1;
 * the bounding values used for the intermediate value theorem in Lean hold;
-* int g(S3(x)) dx agrees with int g(x) dx (quadrature split at the poles).
+* int g(S3(x)) dx agrees with int g(x) dx (quadrature split at the poles);
+* the preimage of [3/2, 19/6] is [-1,-1/2] u [1/2,2/3] u [2,3] on a sample grid;
+* sum_J int_J ((x^2-x)/(x^3-3x+1))^n dx = ((2/3)^(n-1) - (6/19)^(n-1))/(n-1)
+  for n = 2..7 by Simpson's rule on the three intervals;
+* int over A_n of (S3^n(x))^(-2) dx = 20/57 for n = 0..3, where the 3^n
+  intervals of A_n are built from compositions of the bisected branches.
 """
 from __future__ import annotations
 
@@ -141,6 +146,47 @@ class ThreeBranchIntegrals(unittest.TestCase):
             self.assertAlmostEqual(lhs, rhs, delta=2e-3 * abs(rhs))
 
 
+class SectionOneIntegrals(unittest.TestCase):
+    INTERVALS = ((-1.0, -0.5), (0.5, 2 / 3), (2.0, 3.0))
+
+    def test_preimage_of_icc(self):
+        for k in range(-3000, 3001):
+            x = k / 997
+            if x in (0.0, 1.0):
+                continue
+            inside = 1.5 <= s3(x) <= 19 / 6
+            in_union = any(a <= x <= b for a, b in self.INTERVALS)
+            # skip points within rounding distance of the interval endpoints
+            if min(abs(x - e) for iv in self.INTERVALS for e in iv) < 1e-9:
+                continue
+            self.assertEqual(inside, in_union, x)
+
+    def test_sum_formula(self):
+        for n in range(2, 8):
+            lhs = sum(integrate(lambda x: ((x * x - x) / (x ** 3 - 3 * x + 1)) ** n, a, b,
+                                n=20000) for a, b in self.INTERVALS)
+            rhs = ((2 / 3) ** (n - 1) - (6 / 19) ** (n - 1)) / (n - 1)
+            self.assertAlmostEqual(lhs, rhs, places=10)
+
+    def test_iterate_inverse_square(self):
+        def iterate(x, n):
+            for _ in range(n):
+                x = s3(x)
+            return x
+
+        def branch(i, t):
+            return s3_branches(t)[i]
+
+        for n in range(0, 4):
+            pieces = [(1.5, 19 / 6)]
+            for _ in range(n):
+                pieces = [(branch(i, a), branch(i, b)) for a, b in pieces for i in range(3)]
+            self.assertEqual(len(pieces), 3 ** n)
+            total = sum(integrate(lambda x: iterate(x, n) ** -2, a, b, n=2000)
+                        for a, b in pieces)
+            self.assertAlmostEqual(total, 20 / 57, places=6)
+
+
 class Integrals(unittest.TestCase):
     def test_measure_preservation(self):
         tests = [
@@ -162,7 +208,9 @@ class LeanSource(unittest.TestCase):
         self.assertNotIn('native_decide', source)
         for name in ('integral_comp_eq_of_branches', 'boole_integral', 'booleBranch_inv',
                      'booleBranchDeriv_sum', 'booleBranch_surj', 'exists_inverse_branch',
-                     'S3_cubic', 'root_sum', 'S3_bounds', 'S3_integral'):
+                     'S3_cubic', 'root_sum', 'S3_bounds', 'S3_integral',
+                     'measurePreserving_of_branches', 'S3_measurePreserving',
+                     'S3_preimage_Icc', 'three_interval_integral', 'iterate_integral_inv_sq'):
             self.assertIsNotNone(
                 re.search(r'^theorem ' + name + r'\b', source, re.M), name)
 
