@@ -129,8 +129,16 @@ class LeanSource(unittest.TestCase):
         for name in ('glasser_surj_gap', 'sum_eq_of_roots', 'glasser_root', 'glasser_branch_sum',
                      'glasser_branches', 'glasser_measurePreserving', 'glasser_integral',
                      'glasser_measurePreserving_of_injective', 'glasser_integral_of_injective',
-                     'S3_eq_glasser', 'boole_eq_glasser'):
+                     'S3_eq_glasser', 'boole_eq_glasser',
+                     'not_measurePreserving_negative_residue'):
             self.assertIsNotNone(re.search(r'^theorem ' + name + r'\b', source, re.M), name)
+
+    def test_negative_residue_misses_interval(self):
+        # x + 1/x never lands in (-2, 2) for x != 0, so (-2, 2) has a null preimage
+        for k in range(-4000, 4001):
+            x = k / 37.0
+            if x != 0:
+                self.assertGreaterEqual(abs(glasser([0.0], [-1.0], 0.0, x)), 2 - 1e-12)
 
     def test_instances_match(self):
         for x in (-3.2, -0.4, 0.37, 0.81, 1.6, 9.0):

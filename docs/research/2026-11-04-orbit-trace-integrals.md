@@ -677,16 +677,16 @@ Lean の `S3` は全域で定義された関数なので、極で既定値をと
 ## 18. 一般の \(S_m\) の測度保存（Glasser の定理）の Lean 証明（2026-11-19 追記）
 
 第3節の一般形、すなわち相異なる実数の極 \(a_j\)、正の留数 \(b_j\)、任意の \(c\) に対する
-\(S(x)=x+c-\sum_j b_j/(x-a_j)\) の測度保存は、Glasser の master theorem として知られる。`lean/OrbitTraceGlasser.lean`（28定理、`OrbitTraceBoole.lean` を import）で証明した。極の個数 \(n\)（第3節の \(m-1\)）は任意で、\(n=0\) の平行移動も含む。
+\(S(x)=x+c-\sum_j b_j/(x-a_j)\) の測度保存は、Glasser の master theorem として知られる。`lean/OrbitTraceGlasser.lean`（29定理、`OrbitTraceBoole.lean` を import）で証明した。極の個数 \(n\)（第3節の \(m-1\)）は任意で、\(n=0\) の平行移動も含む。
 
 - **区間ごとの全射性**（`glasser_surj_gap`）：極で区切った \(n+1\) 個の開区間（`gap a k`）のそれぞれで、\(S\) は左端（\(-\infty\) または極の右側）で \(-\infty\)、右端で \(+\infty\) に発散する（`tendsto_glasser_atBot`、`tendsto_glasser_right_of_pole` など）。中間値の定理から \(\mathbb R\) 全体に到達する。\(S'=1+\sum_j b_j/(x-a_j)^2>0\)（`glasser_hasDerivAt`、`glasserDeriv_pos`）なので、第17節の `exists_inverse_branch` が区間ごとの逆分枝を与える。
 - **分枝の和**（`glasser_branch_sum`）：\(t\) の \(n+1\) 個の逆像の和は \(t-c+\sum_j a_j\)。分母を払うと \(\prod_{i=0}^{n}(X-\alpha_i)-\sum_j b_j\prod_{i\ne j}(X-a_i)\)（\(\alpha=(t-c,a_1,\dots,a_n)\)）という次数 \(n+1\) のモニック多項式になり（`glasser_root`）、相異なる \(n+1\) 根をもつので一次因子に分解する。\(X^n\) の係数を比べる（`sum_eq_of_roots`）。ヴィエタの関係をこの形で使う。
 - **主定理**（`glasser_measurePreserving`、`glasser_integral`）：極が増加列で留数が正なら \(S\) は Lebesgue 測度を保存し、概強可測な \(g\) について \(\int g(S(x))\,dx=\int g(x)\,dx\)（\(g\) が可積分でなければ両辺とも Bochner 積分の規約で 0）。`_of_injective` 版は極が相異なるだけでよい（`Tuple.sort` で並べ替える、`glasser_comp_perm`）。
 - **既存の場合との一致**（`S3_eq_glasser`、`boole_eq_glasser`）：第17節の写像は \(a=(0,1)\)、\(b=(1,1)\)、\(c=1\) と \(a=(0)\)、\(b=(1)\)、\(c=0\) の場合。
 
-検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceGlasser.lean` は警告なしで通り、全28定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_glasser.py`（浮動小数点、証明ではない）は、固定5例と乱数5例の極・留数で、二分法で求めた逆像の和が \(t-c+\sum a_j\)、重み \(1/S'\) の和が1になることと、ガウス関数・コーシー密度の積分の一致（相対誤差 \(10^{-4}\) 未満、コーシーは裾の打ち切り分）を確認した。専用CIは `.github/workflows/orbit-trace-glasser.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceGlasser.lean` は警告なしで通り、全29定理の使用公理は `propext`・`Classical.choice`・`Quot.sound`。数値検算 `python -B tests/test_orbit_trace_glasser.py`（浮動小数点、証明ではない）は、固定5例と乱数5例の極・留数で、二分法で求めた逆像の和が \(t-c+\sum a_j\)、重み \(1/S'\) の和が1になることと、ガウス関数・コーシー密度の積分の一致（相対誤差 \(10^{-4}\) 未満、コーシーは裾の打ち切り分）を確認した。専用CIは `.github/workflows/orbit-trace-glasser.yml`、`orbit-trace-verification.yml` の一覧にも追加した。
 
-境界：留数に負のものがある場合（第3節の後半の注意、単調性が失われる）は扱わない。\(b_j>0\) は仮定として必要である。
+境界：留数に負のものがある場合（第3節の後半の注意、単調性が失われる）の一般論は扱わない。\(b_j>0\) が必要であることは反例で示した（`not_measurePreserving_negative_residue`：留数 \(-1\) の \(x+1/x\) は \(|x+1/x|\ge2\) なので \((-2,2)\) の逆像が零集合となり、測度を保存しない）。
 
 ## 19. 第6節の \(E_d\) の全次数での Lean 証明（2026-11-19 追記）
 

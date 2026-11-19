@@ -22,6 +22,8 @@ section 1). This module proves the general statement, known as Glasser's master 
   measurable `g`. The `_of_injective` versions allow distinct poles in any order
   (sorted by `Tuple.sort`).
 * `S3_eq_glasser`, `boole_eq_glasser`: the maps of `OrbitTraceBoole.lean` are instances.
+* `not_measurePreserving_negative_residue`: the positivity of the residues is needed;
+  `x + 1/x` (residue `-1`) misses `(-2, 2)` and is not measure preserving.
 -/
 namespace OrbitTrace
 
@@ -413,6 +415,33 @@ theorem boole_eq_glasser : (fun x : ℝ => x - 1 / x) = glasser ![0] ![1] 0 := b
   funext x
   simp [glasser]
 
+/-- **The positivity of the residues is necessary**: with residue `-1` (`b = -1`),
+`x ↦ x + 1/x = glasser ![0] ![-1] 0` does not preserve Lebesgue measure, since it never takes
+values in `(-2, 2)` away from the pole (`|x + 1/x| ≥ 2`). -/
+theorem not_measurePreserving_negative_residue :
+    ¬ MeasurePreserving (glasser ![(0 : ℝ)] ![-1] 0) volume volume := by
+  intro h
+  have hpre : glasser ![(0 : ℝ)] ![-1] 0 ⁻¹' Ioo (-2) 2 ⊆ {0} := by
+    intro x hx
+    simp only [mem_preimage, mem_Ioo, glasser, Fin.sum_univ_one, Matrix.cons_val_zero, sub_zero,
+      add_zero] at hx
+    by_contra hx0
+    have hx0' : x ≠ 0 := hx0
+    have e : x - -1 / x = x + 1 / x := by ring
+    rw [e] at hx
+    rcases lt_or_gt_of_ne hx0' with hneg | hpos
+    · have h1 : x + 1 / x + 2 = (x + 1) ^ 2 / x := by field_simp; ring
+      have h2 : (x + 1) ^ 2 / x ≤ 0 := div_nonpos_of_nonneg_of_nonpos (sq_nonneg _) hneg.le
+      linarith [hx.1]
+    · have h1 : x + 1 / x - 2 = (x - 1) ^ 2 / x := by field_simp; ring
+      have h2 : 0 ≤ (x - 1) ^ 2 / x := div_nonneg (sq_nonneg _) hpos.le
+      linarith [hx.2]
+  have hmeas := h.measure_preimage (s := Ioo (-2 : ℝ) 2) measurableSet_Ioo.nullMeasurableSet
+  have h0 : volume (glasser ![(0 : ℝ)] ![-1] 0 ⁻¹' Ioo (-2) 2) = 0 :=
+    measure_mono_null hpre (measure_singleton 0)
+  rw [h0, Real.volume_Ioo] at hmeas
+  norm_num at hmeas
+
 end OrbitTrace
 
 #print axioms OrbitTrace.glasser_surj_gap
@@ -425,3 +454,4 @@ end OrbitTrace
 #print axioms OrbitTrace.glasser_integral_of_injective
 #print axioms OrbitTrace.S3_eq_glasser
 #print axioms OrbitTrace.boole_eq_glasser
+#print axioms OrbitTrace.not_measurePreserving_negative_residue

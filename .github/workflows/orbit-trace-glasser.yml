@@ -50,7 +50,7 @@ jobs:
           assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
           assert 'native_decide' not in source
           names = re.findall(r'^theorem\s+([\w.]+)', source, re.M)
-          assert len(names) >= 28, names
+          assert len(names) >= 29, names
           audit = 'import OrbitTraceGlasser\n' + ''.join('#print axioms OrbitTrace.' + x + '\n' for x in names)
           pathlib.Path('OrbitTraceGlasserAudit.lean').write_text(audit)
           pathlib.Path('../orbit-trace-glasser-axiom-count.txt').write_text(str(len(names)))
