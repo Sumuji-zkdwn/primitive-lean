@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1383,
-    "eligible_direct_edges": 428,
-    "nodes": 431,
-    "retained_pairs": 307,
+    "all_source_edges": 1399,
+    "eligible_direct_edges": 434,
+    "nodes": 437,
+    "retained_pairs": 313,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 421,
-    "weak_edges_excluded": 955
+    "unique_eligible_pairs": 427,
+    "weak_edges_excluded": 965
   },
   "edges": [
     [
@@ -532,6 +532,10 @@
     [
       "main:linear_input/lean_check/CoupledTrajectory.inc",
       "main:linear_input/lean_check/TrajectoryExistence.inc"
+    ],
+    [
+      "main:linear_input/lean_check/CrosshatchedRecovery.inc",
+      "main:linear_input/lean_check/FiniteObservationSeparation.inc"
     ],
     [
       "main:linear_input/lean_check/CurvatureBridge.inc",
@@ -1154,6 +1158,26 @@
       "main:linear_input/lean_check/F16RealDeterminant.inc"
     ],
     [
+      "main:linear_input/lean_check/RobotWalkArc.inc",
+      "main:linear_input/lean_check/CurveWordAlgebra.inc"
+    ],
+    [
+      "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "main:linear_input/lean_check/CurveWordAlgebra.inc"
+    ],
+    [
+      "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "main:linear_input/lean_check/RobotCyclotomic.inc"
+    ],
+    [
+      "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "main:linear_input/lean_check/CurveWordAlgebra.inc"
+    ],
+    [
+      "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "main:linear_input/lean_check/RobotWalkSupport.inc"
+    ],
+    [
       "main:linear_input/lean_check/Rule481Symmetry.inc",
       "main:linear_input/lean_check/F0UpdateDescent.inc"
     ],
@@ -1434,6 +1458,7 @@
     "main:linear_input/lean_check/CoupledConsequences.inc",
     "main:linear_input/lean_check/CoupledTrajectory.inc",
     "main:linear_input/lean_check/CrossSystemObservation.inc",
+    "main:linear_input/lean_check/CrosshatchedRecovery.inc",
     "main:linear_input/lean_check/CurvatureBridge.inc",
     "main:linear_input/lean_check/CurvatureRigidity.inc",
     "main:linear_input/lean_check/CurveLetterContextualEquivalence.inc",
@@ -1630,6 +1655,11 @@
     "main:linear_input/lean_check/RelationalOddCycleGluing.inc",
     "main:linear_input/lean_check/RepresentationBridges.inc",
     "main:linear_input/lean_check/RimObservability.inc",
+    "main:linear_input/lean_check/RobotCyclotomic.inc",
+    "main:linear_input/lean_check/RobotWalkArc.inc",
+    "main:linear_input/lean_check/RobotWalkClassification.inc",
+    "main:linear_input/lean_check/RobotWalkLengths.inc",
+    "main:linear_input/lean_check/RobotWalkSupport.inc",
     "main:linear_input/lean_check/Rule481Symmetry.inc",
     "main:linear_input/lean_check/RuleSelfModification.inc",
     "main:linear_input/lean_check/SemanticIntervalNecessity.inc",
@@ -1674,8 +1704,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "17307681d0d478171ebf82ef4c003f39c5fe8bb873f9462985386a64290f1c4d",
-    "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+    "graph_sha256": "74b33decb90652a6740f2e728c5a0b84d1423a42b60d12475278d04acab7893b",
+    "main_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
