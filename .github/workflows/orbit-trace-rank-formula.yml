@@ -7,7 +7,9 @@ on:
   pull_request:
     paths:
       - 'lean/OrbitTraceRankFormula.lean'
+      - 'lean/OrbitTraceJordanBasis.lean'
       - 'tests/test_orbit_trace_rank_formula.py'
+      - 'tests/test_orbit_trace_jordan_basis.py'
       - '.github/workflows/orbit-trace-rank-formula.yml'
   workflow_dispatch:
 
@@ -46,6 +48,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceRankFormula.olean OrbitTraceRankFormula.lean 2>&1 | tee ../orbit-trace-rank-lean.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/OrbitTraceJordanBasis.olean OrbitTraceJordanBasis.lean 2>&1 | tee -a ../orbit-trace-rank-lean.log
           if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../orbit-trace-rank-lean.log; then exit 1; fi
       - name: Audit theorems against allowed axioms
         working-directory: lean
@@ -54,12 +57,14 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           import pathlib, re
-          source = pathlib.Path('OrbitTraceRankFormula.lean').read_text()
-          assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
-          assert 'native_decide' not in source
-          names = re.findall(r'^theorem\s+([\w.]+)', source, re.M)
-          assert len(names) >= 15, names
-          audit = 'import OrbitTraceRankFormula\n' + ''.join('#print axioms OrbitTrace.' + x + '\n' for x in names)
+          names = []
+          for f in ('OrbitTraceRankFormula.lean', 'OrbitTraceJordanBasis.lean'):
+              source = pathlib.Path(f).read_text()
+              assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
+              assert 'native_decide' not in source
+              names += re.findall(r'^theorem\s+([\w.]+)', source, re.M)
+          assert len(names) >= 25, names
+          audit = 'import OrbitTraceJordanBasis\n' + ''.join('#print axioms OrbitTrace.' + x + '\n' for x in names)
           pathlib.Path('OrbitTraceRankFormulaAudit.lean').write_text(audit)
           pathlib.Path('../orbit-trace-rank-axiom-count.txt').write_text(str(len(names)))
           PY
@@ -80,7 +85,10 @@ jobs:
           PY
       - name: Run independent exact rank census
         shell: bash
-        run: python -B tests/test_orbit_trace_rank_formula.py -v 2>&1 | tee orbit-trace-rank-python.log
+        run: |
+          set -o pipefail
+          python -B tests/test_orbit_trace_rank_formula.py -v 2>&1 | tee orbit-trace-rank-python.log
+          python -B tests/test_orbit_trace_jordan_basis.py -v 2>&1 | tee -a orbit-trace-rank-python.log
       - name: Upload exact-head logs
         if: always()
         uses: actions/upload-artifact@v6

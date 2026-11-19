@@ -634,3 +634,22 @@ Actions #41853061557 で検証成功。
 
 境界：ジョルダン標準形への相似（明示的な鎖基底 \(v_{r,j}\) の基底性と \(NB=BJ\)）は、階数列から線形代数で従う事実であるが Lean では形式化していない。係数体は既存ファイルと同じく \(\mathbb Q\)、仮定 \(a\ne0\) は必要（\(a=0\) なら \(N=0\)）。
 
+## 16. 構成的ジョルダン基底の Lean 証明（2026-11-19 追記）
+
+第11節の明示的な基底を `lean/OrbitTraceJordanBasis.lean`（12定理）で証明した。\(q=p+1\)、\(M_r=\lfloor(d-r)/q\rfloor=\ell_r-1\)（`chainTop`、`chainTop_succ_eq_chainLength` で既存の `chainLength` と一致）として
+
+\[
+v_{r,j}=N^{M_r-j}\bigl(X^{\,r+M_rq}\bigr)\qquad(\texttt{chainVec})
+\]
+
+と置くと、\(a\ne0\) で
+
+- \(v_{r,j}\ne0\)、\(\deg v_{r,j}=r+jq\)（\(j\le M_r\)、`chainVec_natDegree`）；
+- \(N v_{r,0}=0\)（\(r<q\)、`chainVec_bottom`）、\(N v_{r,j+1}=v_{r,j}\)（`chainVec_succ`）；
+- 次数 \(k\le d\) の位置に \(v_{k\bmod q,\,k\operatorname{div}q}\) を置いた列（\(k>d\) は \(X^k\) で補う）は `Polynomial.Sequence` になり、一次独立（`jordan_linearIndependent`）で、次数 \(\le d\) の部分は \(V_d\) をちょうど張る（`jordan_span`）；
+- この並びでは \(N\) は \(k\mapsto k-q\)（\(k\ge q\)）、それ以外は0 と作用する（`jordanElem_delta`）。
+
+これが \(V_d\) 上の \(N\) の、長さ \(\ell_r\) の鎖 \(\min(p,d)+1\) 本へのジョルダン分解の明示的な基底である。検証（2026-11-19、Lean `v4.36.0-rc2`）：`lake env lean --trust=0 OrbitTraceJordanBasis.lean` は警告なし、第15節と合わせた31定理の使用公理は許可された3つの範囲内。独立検算 `python -B tests/test_orbit_trace_jordan_basis.py` は \(p\le3\)、\(d\le10\)、\(a\in\{1,-3,2/5\}\) で鎖ベクトルの次数、鎖の関係、基底行列 \(B\) が対角成分非零の上三角であること、\(NB=BJ\) を有理数で厳密に確認した。
+
+境界：係数体は \(\mathbb Q\)、\(a\ne0\) を仮定。`Module.Basis` 型の基底を \(V_d\) 上に明示的に組み立てる宣言は含めず、一次独立性と張る部分空間の等式として述べている。
+
