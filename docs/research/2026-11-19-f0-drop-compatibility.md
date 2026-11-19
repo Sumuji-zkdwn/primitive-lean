@@ -66,7 +66,7 @@ F0 の会話資料 [03_conjecture_and_cautions.md](../../sources/f0_math_chat_20
 - 全29定理の `#print axioms`：20定理が `propext`・`Classical.choice`・`Quot.sound`、2定理が `Quot.sound` のみ、2定理が `propext` のみ、5定理は公理に依存しない。`sorry`・`native_decide`・独自 `axiom` なし。
 - `python -B tests/test_f0_drop_compatibility.py`：5テスト合格。1〜4点上の冪等写像 55 個（1, 3, 10, 41）と全ての一成分 \(S\)、1〜3点上の冪等写像 14 個と全ての二成分 \(S\) で、三つの分類と二つの個数公式を総当たりで確認。会話資料の例も確認。
 
-GitHub Actions の結果はこの記録の時点では未確認であり、専用CIの完了を別途確認する。
+GitHub Actions：専用CI [run 44499910701](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44499910701)（コミット `7c4aa8d`、push イベント）が成功（conclusion `success`）。
 
 ## 論理的境界
 

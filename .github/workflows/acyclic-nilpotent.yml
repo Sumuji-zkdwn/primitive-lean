@@ -1,0 +1,85 @@
+name: Acyclic iff nilpotent (Lean 4.36, digraph census)
+
+on:
+  push:
+    branches:
+      - ccr-9ddeac0a-tpeopz
+  pull_request:
+    paths:
+      - 'lean/Research/AcyclicNilpotent.lean'
+      - 'tests/test_acyclic_nilpotent.py'
+      - '.github/workflows/acyclic-nilpotent.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acyclic-nilpotent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile Lean kernel-checked theorems
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/AcyclicNilpotent.olean Research/AcyclicNilpotent.lean 2>&1 | tee ../acyclic-nilpotent-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../acyclic-nilpotent-lean.log; then exit 1; fi
+      - name: Audit theorems against allowed axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          path = pathlib.Path('Research/AcyclicNilpotent.lean')
+          source = path.read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
+          assert 'native_decide' not in source
+          names = re.findall(r'^(?:@\[simp\] )?theorem\s+(\w+)', source, re.M)
+          assert len(names) >= 15, names
+          audit = 'import Research.AcyclicNilpotent\n' + ''.join('#print axioms AcyclicNilpotent.' + x + '\n' for x in names)
+          pathlib.Path('AcyclicNilpotentAudit.lean').write_text(audit)
+          pathlib.Path('../acyclic-nilpotent-axiom-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 AcyclicNilpotentAudit.lean 2>&1 | tee ../acyclic-nilpotent-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s = pathlib.Path('../acyclic-nilpotent-audit.log').read_text()
+          n = int(pathlib.Path('../acyclic-nilpotent-axiom-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b', s), s
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', s)
+          absent = s.count('does not depend on any axioms')
+          assert len(entries) + absent == n, (n, len(entries), absent, s)
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for entry in entries:
+              used = set(filter(None, (x.strip() for x in entry.split(','))))
+              assert used <= allowed, used - allowed
+          print('Kernel dependencies checked:', n)
+          PY
+      - name: Run independent exhaustive census
+        shell: bash
+        run: python -B tests/test_acyclic_nilpotent.py -v 2>&1 | tee acyclic-nilpotent-python.log
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: acyclic-nilpotent
+          path: |
+            acyclic-nilpotent-lean.log
+            acyclic-nilpotent-audit.log
+            acyclic-nilpotent-axiom-count.txt
+            acyclic-nilpotent-python.log
+          if-no-files-found: warn
