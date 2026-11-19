@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -5385,6 +5385,39 @@
       ],
       "imports": [],
       "sha256": "8816235e77ba0612ac801d3dd10b3835fc62079903d17de8ef6e72635c332592"
+    },
+    {
+      "id": "main:linear_input/lean_check/CrosshatchedRecovery.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/CrosshatchedRecovery.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputCrosshatchedRecovery",
+      "declarations": [
+        "latticePoint",
+        "corners_mem_iff",
+        "span",
+        "half_lt_span",
+        "expand_bound",
+        "PhaseBox",
+        "pack",
+        "unpack",
+        "parityEquiv",
+        "c",
+        "c",
+        "placement_card",
+        "c",
+        "c",
+        "recover_sum_product",
+        "Board",
+        "firstCount",
+        "secondCount",
+        "sides_eq",
+        "counts_recover",
+        "first_count_collision",
+        "second_count_collision"
+      ],
+      "imports": [],
+      "sha256": "2e1ad213cb78f5eefb4c5ad629c97b1ef51e35689c24ccb13bd467f2803bbc7a"
     },
     {
       "id": "main:linear_input/lean_check/CurvatureBridge.inc",
@@ -12133,6 +12166,115 @@
       ],
       "imports": [],
       "sha256": "e0e15e19457935384e42b4598e5b40bcd4011164a785cfca0603c8e0d0de7b12"
+    },
+    {
+      "id": "main:linear_input/lean_check/RobotCyclotomic.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RobotCyclotomic.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRobotCyclotomic",
+      "declarations": [
+        "block_coeff",
+        "sum_zero_iff_periodic"
+      ],
+      "imports": [],
+      "sha256": "e77f5aee6c8ffe5de9126f9a68cc2d42c0120a215495bdcc683f44dd9c378d0a"
+    },
+    {
+      "id": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RobotWalkArc.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRobotWalkArc",
+      "declarations": [
+        "arcWord",
+        "turns",
+        "edges",
+        "edgeResidues",
+        "arcWord_append",
+        "turns_append",
+        "angle_arcWord",
+        "rotation_int_mul",
+        "step_root_primitive",
+        "rotation_neg",
+        "negative_chord",
+        "chord_ne_zero",
+        "rotated_endpoint_eq_edge_sum",
+        "endpoint_eq_edge_sum",
+        "residue_power",
+        "sum_powers_by_count",
+        "endpoint_eq_residue_counts",
+        "nineCertificate",
+        "nine_certificate_closes"
+      ],
+      "imports": [],
+      "sha256": "5bdde5a0865444a9fbc7b686acaf6bdd0c37a0a4bf4edd96c97913df064a092b"
+    },
+    {
+      "id": "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RobotWalkClassification.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRobotWalkClassification",
+      "declarations": [
+        "closed_iff_periodic",
+        "facing_of_closed",
+        "IsClosedLength",
+        "closed_length_iff",
+        "least_nonmultiple"
+      ],
+      "imports": [],
+      "sha256": "71c08150dae6af6b434348e34765e1149ae5d2ee0e434a115f83c5e8983b58c9"
+    },
+    {
+      "id": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RobotWalkLengths.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRobotWalkLengths",
+      "declarations": [
+        "copies",
+        "copies_length",
+        "copies_state",
+        "turningBlock",
+        "turningBlock_length",
+        "signed_replicate_true",
+        "detour_turns",
+        "turningBlock_turns",
+        "construct_closed",
+        "residue",
+        "residue_lt",
+        "residue_succ",
+        "side",
+        "cut_step",
+        "cut_walk",
+        "heading_closed_of_periodic",
+        "edge_parity_of_periodic",
+        "possible_length_of_periodic"
+      ],
+      "imports": [],
+      "sha256": "d2060d9f939d0c8cc91f541cc38ec4360d5c6e3f72fc04c0fb821642f66d611b"
+    },
+    {
+      "id": "main:linear_input/lean_check/RobotWalkSupport.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/RobotWalkSupport.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputRobotWalkSupport",
+      "declarations": [
+        "trapped_between_missing",
+        "residue",
+        "cast_residue",
+        "residue_lt",
+        "reduce_residue",
+        "lift_mem",
+        "positive_counts",
+        "edges_length",
+        "sum_periods",
+        "length_of_periodic_of_parity"
+      ],
+      "imports": [],
+      "sha256": "698fe48e51f715eafa3ed7398cb4d0d6a433ed49d33ea1f5c247b0d4aba322d7"
     },
     {
       "id": "main:linear_input/lean_check/Rule481Symmetry.inc",
@@ -19476,6 +19618,23 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CrosshatchedRecovery.inc",
+      "to": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputFiniteObservation.joint",
+        "LinearInputFiniteObservation.joint_injective_iff"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/CrosshatchedRecovery.inc",
+      "to": "main:linear_input/lean_check/FiniteObservationSeparation.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "joint_injective_iff"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CurvatureBridge.inc",
       "to": "main:lean/Elastica/Equations.lean",
       "kind": "exact_import",
@@ -25625,6 +25784,136 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.rotation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "emptyState",
+        "empty_join",
+        "join_angle",
+        "join_assoc",
+        "join_endpoint"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "to": "main:linear_input/lean_check/CurveWordArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "arc_state_formula"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.rotation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "to": "main:linear_input/lean_check/RobotCyclotomic.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputRobotCyclotomic.sum_zero_iff_periodic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "to": "main:linear_input/lean_check/RobotCyclotomic.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "sum_zero_iff_periodic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "to": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "angle_arcWord",
+        "chord_ne_zero",
+        "edgeResidues",
+        "endpoint_eq_residue_counts",
+        "rotation_int_mul",
+        "step_root_primitive"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkClassification.inc",
+      "to": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "construct_closed",
+        "heading_closed_of_periodic",
+        "possible_length_of_periodic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputCurveWordAlgebra.rotation"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "to": "main:linear_input/lean_check/CurveWordAlgebra.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "emptyState",
+        "join_angle",
+        "join_endpoint",
+        "rotation_add",
+        "rotation_zero"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "to": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "angle_arcWord",
+        "arcWord_append",
+        "edgeResidues",
+        "turns_append"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "to": "main:linear_input/lean_check/RobotWalkSupport.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputRobotWalkSupport.length_of_periodic_of_parity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkLengths.inc",
+      "to": "main:linear_input/lean_check/RobotWalkSupport.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "length_of_periodic_of_parity"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/RobotWalkSupport.inc",
+      "to": "main:linear_input/lean_check/RobotWalkArc.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "edgeResidues"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/Rule481Symmetry.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -27399,7 +27688,13 @@
     "linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
     "linear_input/lean_check/CurveWordBVHamblyLyons.inc",
     "linear_input/lean_check/CurveWordBVEquivalence.inc",
-    "linear_input/lean_check/CurveWordBVCoordinates.inc"
+    "linear_input/lean_check/CurveWordBVCoordinates.inc",
+    "linear_input/lean_check/CrosshatchedRecovery.inc",
+    "linear_input/lean_check/RobotWalkArc.inc",
+    "linear_input/lean_check/RobotCyclotomic.inc",
+    "linear_input/lean_check/RobotWalkSupport.inc",
+    "linear_input/lean_check/RobotWalkLengths.inc",
+    "linear_input/lean_check/RobotWalkClassification.inc"
   ],
   "prs": [
     {
@@ -27677,28 +27972,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "163ce472848d5e9814a6dfbd2d237f81c50f8b1b",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
