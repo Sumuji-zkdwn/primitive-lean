@@ -90,3 +90,21 @@ z = 2 (x_1 - ζ^(-1) x_0)/(ζ - ζ^(-1)).
 - \`x_j\` が \`T_m(X)-t\` の根であり、それらで \`z\` を復元できることをLeanで証明する。
 
 この4群がLeanで成立するまでは、\`Gal(... ) ≃* DihedralGroup m\` を既存の検証済み宣言数に含めない。
+
+
+## 2026-11-19 追記：全二面体ガロア群同型の Lean 証明
+
+上の「形式化に必要な追加命題」4群を、独立モジュール `lean/Research/ChebyshevDihedral.lean`（50定理、`Mathlib` のみ import）で証明した。係数体は \(\mathbb C\) に限らず、原始 \(m\) 乗根 \(\zeta\) をもつ任意の体 \(k\)。関数体は `RatFunc k`（変数 \(X\) が上の \(z\)）。joint 検査の宣言数（`KummerDihedral.inc` の9定理を含む既存の数）には含めない。
+
+| 追加命題 | Lean 宣言 |
+| --- | --- |
+| 基礎体 \(K=k(t)\) を中間体として構成 | `baseField k m = k⟮X^m + X^{-m}⟯`。\(2\ne0\) なら \(k⟮(X^m+X^{-m})/2⟯\) と同じ体（`adjoin_half_eq`） |
+| \([k(z):k(t)]=2m\) | `finrank_baseField`。上界は \(X\) が \(Y^{2m}-tY^m+1\) の根であること（`finrank_le`）、下界は次の \(2m\) 個の自己同型 |
+| \(z\mapsto\zeta^a z\)、\(z\mapsto z^{-1}\) の自己同型と忠実性 | `sigma : DihedralGroup m →* (k⟮X⟯ ≃ₐ[k] k⟮X⟯)`（`r i : X ↦ ζ^i X`、`sr i : X ↦ ζ^i/X`）、`sigma_injective`、`sigma_tInv`。代入による作用なので、自己同型 \(g\) の後に \(h\) を合成すると点写像は \(h\circ g\) の順になる |
+| \(x_j\) が根で \(z\) を復元 | `aeval_root`・`root_injective`（\(y_j=\zeta^jX+\zeta^{-j}X^{-1}\) は Dickson 多項式 \(D_m(Y,1)-t\) の相異なる根）、`adjoin_rootSet`（\(m\ge3\)、\(X=(y_1-\zeta^{-1}y_0)/(\zeta-\zeta^{-1})\)）、`chebyshev_T_root_half`（ノートの正規化 \(T_m(y_j/2)=t/2\)） |
+
+結論として `galEquiv : DihedralGroup m ≃* Gal(k⟮X⟯/baseField k m)`（\(m\ge1\)）、`isGalois_baseField`、`isSplittingField`（\(m\ge3\)、\(k(X)\) は \(D_m(Y,1)-t\) の分解体）。証明は \(|D_m|=2m\le|\mathrm{Gal}|\le[k(X):k(t)]\le2m\) による（`card_gal_and_finrank`、mathlib の `AlgEquiv.card_le`）。\(m=3^n\) は特別な役割をもたない。
+
+検証（2026-11-19、Lean `v4.36.0-rc2`、mathlib `2ddf59c8`）：`lake env lean --trust=0 Research/ChebyshevDihedral.lean` は警告なしで通り、全50定理の使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内（3定理は `propext`・`Quot.sound` のみ）。数値検算 `python -B tests/test_chebyshev_dihedral.py`（複素浮動小数点、証明ではない）は \(m\le9\) で合成則・\(2m\) 写像の相異・\(t\) の不変性・軌道が \(Y^{2m}-tY^m+1\) の全根であること、\(3\le m\le11\) で \(D_m(y_j)=t\)・\(T_m(y_j/2)=t/2\)・\(y_j\) の相異と \(z\) の復元を確認した。専用CI `.github/workflows/chebyshev-dihedral.yml`、統合検査 `tools/pr_integration.py` の `chebyshev-dihedral` 段。
+
+境界：基礎体は \(k(X)\) の中の \(k(t)\) であり、独立変数 \(y\) の有理関数体 \(\mathbb C(y)\) との同型（\(t\) の超越性から従う）は Lean では書いていない。`GaloisChebyshev.inc`・`KummerDihedral.inc` の宣言との同一視も行わない。

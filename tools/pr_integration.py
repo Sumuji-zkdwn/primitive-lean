@@ -87,6 +87,8 @@ def run_integration(root, command, rebuild=False):
                                 'Research/F16CayleyDickson.lean'], lean),
         ('f0-type-count', ['lake', 'env', 'lean', '--trust=0',
                            'Research/F0TypeCount.lean'], lean),
+        ('chebyshev-dihedral', ['lake', 'env', 'lean', '--trust=0',
+                                'Research/ChebyshevDihedral.lean'], lean),
         ('laakso-bonding', [sys.executable, '-B', '-X', 'utf8', 'tools/check_laakso_bonding.py',
                             '--output-dir', str(out / 'laakso-bonding')]),
         ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
@@ -101,7 +103,8 @@ def run_integration(root, command, rebuild=False):
         if name in ('siphon-interaction', 'siphon-polynomial-e', 'f0-imbalance-monotonicity',
                     'f0-drop-compatibility', 'acyclic-nilpotent', 'f0-dominance-order',
                     'half-factorial-count', 'erg-canonical-chain', 'f0-coarsening-merge',
-                    'f0-step-range', 'f16-cayley-dickson', 'f0-type-count'):
+                    'f0-step-range', 'f16-cayley-dickson', 'f0-type-count',
+                    'chebyshev-dihedral'):
             # Trust-zero compilation must also reject sorryAx reported by #print axioms.
             if 'sorryAx' in (out / ('integration-' + name + '.log')).read_text('utf-8'):
                 result['errors'].append(name + ' reports sorryAx; see ' + record['log'])

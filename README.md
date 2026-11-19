@@ -39,6 +39,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[Glasser の master theorem](docs/research/2026-11-04-orbit-trace-integrals.md)（第18節）。相異なる極 aⱼ と正の留数 bⱼ について x ↦ x + c − Σⱼ bⱼ/(x − aⱼ) が Lebesgue 測度を保存し、∫g(x + c − Σⱼ bⱼ/(x − aⱼ))dx = ∫g(x)dx となることを `lean/OrbitTraceGlasser.lean` で証明する。逆分枝の和はヴィエタの関係（モニック多項式の根の和）で求める。
 
+2026-11-19追加：[チェビシェフ型拡大の二面体ガロア群](docs/verification/2026-10-31-kummer-dihedral.md)（末尾の追記）。原始 m 乗根をもつ体 k について Gal(k(X)/k(Xᵐ + X⁻ᵐ)) ≃* D_m、拡大次数 2m、k(X) が D_m(Y,1) − t（T_m(Y) − t/2 と同じ）の分解体であることを `lean/Research/ChebyshevDihedral.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
