@@ -27,6 +27,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[ERG `extends_main` の正準鎖](docs/research/2026-11-19-erg-canonical-chain.md)。入次数・出次数 ≤1 と前任のない始点からの到達可能性だけで単一の線形鎖になり、ERG-Aout の検証器の非巡回性・始点終点の検査が従うことを `lean/Research/ErgCanonicalChain.lean` で証明する。
 
+2026-11-19追加：[冪等写像の粗化と合流チェインの対応](docs/research/2026-11-19-f0-coarsening-merge.md)。塊サイズ型の二塊合流チェインが、冪等写像の粗化 K'∘K=K' によってちょうど実現されること（両方向）を `lean/Research/F0CoarseningMerge.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。

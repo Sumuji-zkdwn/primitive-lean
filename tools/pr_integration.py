@@ -79,6 +79,8 @@ def run_integration(root, command, rebuild=False):
                                   'Research/HalfFactorialCount.lean'], lean),
         ('erg-canonical-chain', ['lake', 'env', 'lean', '--trust=0',
                                  'Research/ErgCanonicalChain.lean'], lean),
+        ('f0-coarsening-merge', ['lake', 'env', 'lean', '--trust=0',
+                                 'Research/F0CoarseningMerge.lean'], lean),
         ('laakso-bonding', [sys.executable, '-B', '-X', 'utf8', 'tools/check_laakso_bonding.py',
                             '--output-dir', str(out / 'laakso-bonding')]),
         ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
@@ -92,7 +94,7 @@ def run_integration(root, command, rebuild=False):
             result['errors'].append(name + ' failed; see ' + record['log'])
         if name in ('siphon-interaction', 'siphon-polynomial-e', 'f0-imbalance-monotonicity',
                     'f0-drop-compatibility', 'acyclic-nilpotent', 'f0-dominance-order',
-                    'half-factorial-count', 'erg-canonical-chain'):
+                    'half-factorial-count', 'erg-canonical-chain', 'f0-coarsening-merge'):
             # Trust-zero compilation must also reject sorryAx reported by #print axioms.
             if 'sorryAx' in (out / ('integration-' + name + '.log')).read_text('utf-8'):
                 result['errors'].append(name + ' reports sorryAx; see ' + record['log'])
