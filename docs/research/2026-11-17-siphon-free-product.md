@@ -77,4 +77,17 @@ python3 -B -m unittest discover -s tests -p 'test_siphon_free_product.py' -v
 
 GitHub Actions：[run 44601072048](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44601072048)（コミット `d43c935`）が成功（conclusion `success`）。
 
-境界：簡約語の総次数がちょうど \(18^m\) であるという次数公式は Lean では証明していない（ピンポン補題には主係数の不変量だけで足りる）。観測位置を消す操作の節も対象外。
+境界：簡約語の総次数がちょうど \(18^m\) であるという次数公式は、次の追記で別モジュールとして証明した。観測位置を消す操作の節は対象外。
+
+## 2026-11-19 追記：簡約語の次数公式 \(18^m\) の Lean 証明
+
+本文の「語の総次数はちょうど \(18^m\)」を、独立モジュール `lean/Research/SiphonWordDegree.lean`（16定理、`Research.SiphonFreeProduct` を import）で証明した。
+
+- 語を `MvPolynomial (Fin 2) ℝ` の一般点 \((u,v)=(X_0,X_1)\) に作用させ、得られる二成分の総次数の大きい方を語の次数とする。`eval_word` により、その成分を \(x\in\mathbb R^2\) で評価すると語を \(x\) に作用させた値になる（語の多項式写像そのもの）。
+- `EIter_degrees`：\(\deg w_1=e\ge1\)、\(\deg w_2\le e\)、\(h\ge1\) なら \(E^h w\) の成分次数は \((6e,18e)\)。
+- `Inv_step_three`：内部の \(a^3\) の後の \(b\) はまとまりを \(E^h\mapsto E^{h+1}\) と合流させ、次数は変わらない。`Inv_step_other`：それ以外の内部指数は新しいまとまりを始め、\(e\) を18倍する。`Inv_initial`：最初のまとまりは \(e=1\)。
+- `word_degree`：内部指数が 1〜5、両端が 0〜5 の簡約語の総次数はちょうど \(18^m\)、\(m=1+\#\{i:j_i\ne3\}\)。本文の例 `deg_ba_pow`（\(\deg((ba)^n)=18^n\)）と `deg_ba3_pow`（\(\deg((ba^3)^n)=18\)）。
+
+本文の主係数の議論とは異なり、必要なのは総次数の演算（整域上の `totalDegree_mul_of_isDomain`、次数の異なる和の次数）だけである。各まとまりへの入力は第一成分の次数が第二成分以上なので、\(G+F^3\) などで最高次が打ち消されない。
+
+検証（2026-11-19、Lean `v4.36.0-rc2`）：`python3 -B tools/verify_toolchain_modules.py --module Research.SiphonWordDegree` が依存を含めて再コンパイルし公理監査に成功（使用公理は `propext`・`Classical.choice`・`Quot.sound` の範囲内）。独立検算 `python -B tests/test_siphon_word_degree.py` は整数係数の厳密計算で、直線 \((t,2t)\) 上の制限の次数として \(b\) を1〜2個含む全簡約語の次数 \(18^m\)、\((ba)^n\)（\(n\le3\)）と \((ba^3)^n\)（\(n\le6\)）を確認し、一まとまりの語では二変数展開の総次数と一致することも確認する。専用CI `.github/workflows/siphon-word-degree.yml`、統合検査の `siphon-word-degree` 段。

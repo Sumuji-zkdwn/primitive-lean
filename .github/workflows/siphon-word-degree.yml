@@ -1,0 +1,49 @@
+name: Siphon word degrees 18^m (Lean 4.36, exact check)
+
+on:
+  push:
+    branches:
+      - ccr-9ddeac0a-tpeopz
+  pull_request:
+    paths:
+      - 'lean/Research/SiphonWordDegree.lean'
+      - 'lean/Research/SiphonFreeProduct.lean'
+      - 'tests/test_siphon_word_degree.py'
+      - 'tools/verify_toolchain_modules.py'
+      - '.github/workflows/siphon-word-degree.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  siphon-word-degree:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile the module and its dependencies, audit all theorem axioms
+        shell: bash
+        run: python3 -B tools/verify_toolchain_modules.py --module Research.SiphonWordDegree 2>&1 | tee siphon-word-degree-lean.log
+      - name: Run independent exact checks
+        shell: bash
+        run: python3 -B tests/test_siphon_word_degree.py -v 2>&1 | tee siphon-word-degree-python.log
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: siphon-word-degree
+          path: |
+            siphon-word-degree-lean.log
+            siphon-word-degree-python.log
+            verification/toolchain-modules/
+          if-no-files-found: warn

@@ -49,6 +49,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-19追加：[Siphon 測定数の最適値](docs/research/2026-11-17-siphon-finite-determination.md)（末尾の追記）。総次数 d 以下の二変数多項式を決めるのに必要十分な正確な測定数が (d+1)(d+2)/2 であること（到達点から選べること、より少ない点では適応的手順でも不可能なこと）を `lean/Research/SiphonOptimalDetermination.lean` で証明する。
 
+2026-11-19追加：[Siphon 簡約語の次数公式](docs/research/2026-11-17-siphon-free-product.md)（末尾の追記）。簡約語の多項式写像の総次数がちょうど 18^m（m は E^h のまとまりの数）、とくに deg((ba)ⁿ) = 18ⁿ、deg((ba³)ⁿ) = 18 を `lean/Research/SiphonWordDegree.lean` で証明する。
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
