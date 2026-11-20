@@ -4,6 +4,8 @@ on:
   pull_request:
     branches: [main, chatgpt/agent-evidence-catalog-20261120]
     paths:
+      - 'lean/**'
+      - 'linear_input/lean_check/**'
       - 'tools/export_agent_catalog.py'
       - 'tests/test_export_agent_catalog.py'
       - 'docs/commercial/**'
