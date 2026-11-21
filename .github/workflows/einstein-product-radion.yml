@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'lean/Research/EinsteinProductRadion.lean'
+      - 'lean/Research/EinsteinShapeModes.lean'
       - 'tools/check_einstein_product.py'
       - 'docs/research/2026-11-22-einstein-product-radion.md'
       - '.github/workflows/einstein-product-radion.yml'
@@ -35,6 +36,8 @@ jobs:
           mkdir -p .lake/build/lib/lean/Research
           lake env lean --trust=0 -o .lake/build/lib/lean/Research/EinsteinProductRadion.olean Research/EinsteinProductRadion.lean 2>&1 | tee ../einstein-product-lean.log
           if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../einstein-product-lean.log; then exit 1; fi
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/EinsteinShapeModes.olean Research/EinsteinShapeModes.lean 2>&1 | tee ../einstein-shape-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../einstein-shape-lean.log; then exit 1; fi
       - name: Strict theorem axiom audit
         shell: bash
         working-directory: lean
@@ -42,13 +45,16 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           import pathlib, re
-          src=pathlib.Path('Research/EinsteinProductRadion.lean').read_text()
-          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
-          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
-          assert len(names)>=11,names
+          modules=('EinsteinProductRadion','EinsteinShapeModes')
+          names=[]
+          for mod in modules:
+              src=pathlib.Path('Research',mod+'.lean').read_text()
+              assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+              names.extend(mod+'.'+name for name in re.findall(r'^theorem\s+(\w+)',src,re.M))
+          assert len(names)>=17,names
           pathlib.Path('EinsteinProductRadionAudit.lean').write_text(
-              'import Research.EinsteinProductRadion\n'+''.join(
-              '#print axioms EinsteinProductRadion.'+n+'\n' for n in names))
+              ''.join('import Research.'+mod+'\n' for mod in modules)+
+              ''.join('#print axioms '+name+'\n' for name in names))
           pathlib.Path('../einstein-product-count.txt').write_text(str(len(names)))
           PY
           lake env lean --trust=0 EinsteinProductRadionAudit.lean 2>&1 | tee ../einstein-product-audit.log
@@ -79,6 +85,7 @@ jobs:
           name: einstein-product-radion
           path: |
             einstein-product-lean.log
+            einstein-shape-lean.log
             einstein-product-audit.log
             einstein-product-count.txt
             einstein-product-python.log
