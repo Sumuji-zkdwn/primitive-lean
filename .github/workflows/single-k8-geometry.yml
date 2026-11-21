@@ -4,7 +4,9 @@ on:
   pull_request:
     paths:
       - 'lean/Research/SingleInternalGeometry.lean'
+      - 'lean/Research/CompactWarpGraphAnalogue.lean'
       - 'tools/check_single_internal_geometry.py'
+      - 'tools/check_graph_harmonic_nogo.py'
       - 'docs/research/2026-11-22-single-kahler-internal-geometry.md'
       - '.github/workflows/single-k8-geometry.yml'
   workflow_dispatch:
@@ -35,6 +37,8 @@ jobs:
           mkdir -p .lake/build/lib/lean/Research
           lake env lean --trust=0 -o .lake/build/lib/lean/Research/SingleInternalGeometry.olean Research/SingleInternalGeometry.lean 2>&1 | tee ../single-k8-lean.log
           if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../single-k8-lean.log; then exit 1; fi
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/CompactWarpGraphAnalogue.olean Research/CompactWarpGraphAnalogue.lean 2>&1 | tee ../graph-harmonic-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../graph-harmonic-lean.log; then exit 1; fi
       - name: Inspect theorem axiom dependencies
         shell: bash
         working-directory: lean
@@ -42,13 +46,15 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           import pathlib, re
-          src=pathlib.Path('Research/SingleInternalGeometry.lean').read_text()
-          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
-          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
-          assert len(names)>=8,names
+          names=[]
+          for mod in ('SingleInternalGeometry','CompactWarpGraphAnalogue'):
+              src=pathlib.Path('Research',mod+'.lean').read_text()
+              assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+              names += [mod+'.'+x for x in re.findall(r'^theorem\s+(\w+)',src,re.M)]
+          assert len(names)>=10,names
           pathlib.Path('SingleK8Audit.lean').write_text(
-              'import Research.SingleInternalGeometry\n'+''.join(
-              '#print axioms SingleInternalGeometry.'+name+'\n' for name in names))
+              'import Research.SingleInternalGeometry\nimport Research.CompactWarpGraphAnalogue\n'+''.join(
+              '#print axioms '+name+'\n' for name in names))
           pathlib.Path('../single-k8-count.txt').write_text(str(len(names)))
           PY
           lake env lean --trust=0 SingleK8Audit.lean 2>&1 | tee ../single-k8-audit.log
@@ -72,6 +78,7 @@ jobs:
           set -euo pipefail
           python -m pip install --disable-pip-version-check sympy==1.14.0
           python -B tools/check_single_internal_geometry.py 2>&1 | tee single-k8-python.log
+          python -B tools/check_graph_harmonic_nogo.py 2>&1 | tee graph-harmonic-python.log
       - name: Upload exact-head evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -79,7 +86,9 @@ jobs:
           name: single-k8-geometry
           path: |
             single-k8-lean.log
+            graph-harmonic-lean.log
             single-k8-audit.log
             single-k8-count.txt
             single-k8-python.log
+            graph-harmonic-python.log
           if-no-files-found: warn
