@@ -220,6 +220,8 @@ main:lean/Research/ElasticaObservationQuotient.lean	main:lean/Elastica/Geometry.
 main:lean/Research/ElasticaObservationQuotient.lean	main:lean/Elastica/Geometry.lean	unique_identifier_candidate	curvature_affine
 main:lean/Research/FiniteMarkovTransport.lean	main:lean/Research/OkanoharaTransport.lean	exact_import	Research.OkanoharaTransport
 main:lean/Research/FiniteMarkovTransport.lean	main:lean/Research/OkanoharaTransport.lean	unique_identifier_candidate	curvatureTwoStepMinCost,leftCurvatureResponse,requiredAction,requiredInput,rightCurvatureResponse,wellCurvatureResponse,wellStiffness
+main:lean/Research/ForgettingRoundTrips.lean	main:lean/Research/SiphonPredictiveQuotient.lean	exact_import	Research.SiphonPredictiveQuotient
+main:lean/Research/ForgettingRoundTrips.lean	main:lean/Research/SiphonPredictiveQuotient.lean	unique_identifier_candidate	readout_fresh_E,signature_mirror
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/Examples.lean	exact_import	Elastica.Examples
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/Examples.lean	unique_identifier_candidate	energy_affine
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/ExponentialWeight.lean	exact_import	Elastica.ExponentialWeight

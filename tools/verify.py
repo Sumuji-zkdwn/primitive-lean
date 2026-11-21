@@ -449,6 +449,7 @@ def main(argv=None):
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
+    modes.add_argument("--forgetting-roundtrips-only", action="store_true", help="Check forgetting round trips, reconstruction bounds and finite models")
     args = parser.parse_args(argv)
     if args.toolchain_modules_only:
         if args.rebuild:
@@ -456,6 +457,11 @@ def main(argv=None):
         from verify_toolchain_modules import run as verify_modules
         result = verify_modules(root=ROOT)
         return 0 if result["passed"] else 1
+    if args.forgetting_roundtrips_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --forgetting-roundtrips-only")
+        from verify_forgetting_roundtrips import main as verify_forgetting
+        return verify_forgetting()
     if args.projection_reachability_only:
         if args.rebuild:
             parser.error("--rebuild is not supported by --projection-reachability-only")

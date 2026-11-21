@@ -67,6 +67,8 @@ def run_integration(root, command, rebuild=False):
                             '--output-dir', str(out / 'laakso-bonding')]),
         ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
                                      '--projection-reachability-only']),
+        ('forgetting-roundtrips', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
+                                  '--forgetting-roundtrips-only']),
     ]
     for name, args, *cwd in stages:
         print('Running ' + name, flush=True)
