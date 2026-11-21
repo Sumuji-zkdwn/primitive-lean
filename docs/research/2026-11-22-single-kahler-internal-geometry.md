@@ -105,8 +105,14 @@ A finite sandpile analogy is supplied by the same maximum principle: a harmonic 
 
 **Primary references:** Werner Ballmann, *Lectures on Kähler Manifolds*, Theorem 6.1 and Corollary 6.2 (Bochner's theorem, compact Ricci nonpositive ⇒ torus identity isometries), https://people.maths.ox.ac.uk/joyce/Nairobi2019/BallmannKahlerManifolds.pdf; I. P. Neupane, *Warped Ricci-flat reductions*, Phys. Rev. D 90, 045013 (2014), https://doi.org/10.1103/PhysRevD.90.045013.
 
+## Finite reflection of the maximum principle
+
+The independent exact integer/symbolic oracle `tools/check_graph_harmonic_nogo.py` enumerates every simple labeled connected graph with 2, 3, 4 or 5 vertices (counts 1,4,38,728; total 771). In each, the graph Laplacian has rank n−1 and only constant harmonic functions. The `lean/Research/CompactWarpGraphAnalogue.lean` module kernel-proves the 3-site path case. With Dirichlet boundary values 0 and 2, the middle vertex can be harmonic with the nonconstant profile (0,1,2). This is an exact finite counterpart to the compact-versus-boundary issue in the harmonic warp factor argument; it is **not** a Lean formalization of Bochner or general Riemannian Einstein equations.
+
 ## Reproducible boundary
 
+- `tools/check_graph_harmonic_nogo.py`: full n=2..5 connected-graph Laplacian census and Dirichlet counterexample.
+- `lean/Research/CompactWarpGraphAnalogue.lean`: exact 3-site harmonic/Dirichlet statements.
 - `tools/check_single_internal_geometry.py`: exact SymPy polar curvature, pole smoothness, Gauss–Bonnet, area, index arithmetic, and six SM Z6 congruences.
 - `lean/Research/SingleInternalGeometry.lean`: arithmetic theorems for curvature rational comparisons, index numerator, and group-center congruences. No manifold isometry theorem, Spinᶜ index theorem, or full Einstein PDE has been Lean-formalized here.
 - The present result **meets two mathematical criteria simultaneously on one compact manifold** (gauge Lie algebra and nonzero Spinᶜ index) and **fails the unwarped pure-Einstein dynamic criterion**.
