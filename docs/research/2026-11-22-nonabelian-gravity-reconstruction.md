@@ -70,11 +70,28 @@ More decisively, CP² has nonzero second Stiefel–Whitney class. Its tangent fi
 
 This is an actual obstruction to the economical reconstruction from a metric and standard spinors, not a proof that *all* gravity-first constructions fail. There are other internal geometries and constructions, including non-Killing symmetries and Spin^c structures, but they must be analyzed with the same discipline.
 
+## E. The user's sandpile-pattern test detects hidden holonomy
+
+Treat the entire 18-point lifted finite geometry as a dissipative Abelian sandpile graph. Each vertex has four internal neighbours (two horizontal, two vertical) plus one sink edge, so the toppling threshold is 5. An observer reads only the three base-site aggregate chip counts, discarding all six fibre labels within each base site.
+
+For the controlled input adding n chips at lifted point (0, identity), the flat vs twisted holonomy sectors yield identical base aggregates for every n=0,...,40. The first difference in this specified protocol is n=41:
+
+| Input | Stable visible 3-site pattern | Total sink loss |
+|---|---|---|
+| Trivial holonomy, 41 grains | (12,7,7) | 15 |
+| Order-3 holonomy, 41 grains | (10,9,9) | 13 |
+
+This is a deterministic exact integer-arithmetic counterexample to any claim that observing only base-site coordinates makes hidden internal holonomy forever unobservable. The base sums are unaffected by any fibre relabelling. The independent Python checker verifies all 216 local gauge changes for both connections, with exact covariance of their full stable patterns and sink counts. It also verifies equality of two legal toppling priorities for the tested input range 0..64.
+
+The threshold 41 is not universal: it is minimal for the one specified initial state and observation protocol. The results are bounded finite checks, not newly Lean-proved theorems about Abelian sandpiles or black holes.
+
+Program: tools/check_holonomy_sandpile.py, using tools/check_nonabelian_geometry.py. This bridges dual-metric/observer/sandpile questions to an explicit non-Abelian holonomy experiment.
 ## Proof/evidence mapping
 
 - `lean/Research/NonAbelianMetricHolonomy.lean`: arbitrary-group link gauge covariance, holonomy conjugacy, lifted-graph covariance and inverse fibre relabeling; explicit noncommuting S3 witness.
 - `lean/Research/SpinYangMillsWitness.lean`: exact finite 't Hooft symbol antisymmetry and self-dual algebra.
 - `tools/check_nonabelian_geometry.py`: exact exhaustive 46,656-case discrete gauge test + matrix so(3) gauge covariance and curvature.
+- `tools/check_holonomy_sandpile.py`: exact first-distinguishing load 41; full local frame checks and priority variations.
 - `tools/check_spin_instanton.py`: exact 12+18+18+12 component SymPy check on a stereographic S4 patch.
 - Pinned CI workflow compiles Lean with `--trust=0`, audits axioms, and executes both independent Python oracles. No full infinite-dimensional Lean proof of S4 curvature/PDE or Einstein field equations is claimed.
 
