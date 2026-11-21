@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "22489f3bba2f2a9b4f181c0fa46d0f7d4e285200",
+  "main_commit": "237eb4666904f81c615b53e7e990ec2b52888b86",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1731,7 +1731,7 @@
       "imports": [
         "Mathlib.Tactic"
       ],
-      "sha256": "d6ead519ff6d7f198a86a8e16a534ad4f0e8bd4ceb957fe4dde617832122d533"
+      "sha256": "9a373f0cb392173d1478566dc3be9235f8ef6dd734f2747fbecdac9c9875d06a"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -27739,28 +27739,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "22489f3bba2f2a9b4f181c0fa46d0f7d4e285200",
+      "base_sha": "237eb4666904f81c615b53e7e990ec2b52888b86",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "22489f3bba2f2a9b4f181c0fa46d0f7d4e285200",
+      "base_sha": "237eb4666904f81c615b53e7e990ec2b52888b86",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "22489f3bba2f2a9b4f181c0fa46d0f7d4e285200",
+      "base_sha": "237eb4666904f81c615b53e7e990ec2b52888b86",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "22489f3bba2f2a9b4f181c0fa46d0f7d4e285200",
+      "base_sha": "237eb4666904f81c615b53e7e990ec2b52888b86",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
