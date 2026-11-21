@@ -74,6 +74,19 @@ theorem first_vs_second_moment :
     axisQuadrupole 1 1 ≠ axisQuadrupole 1 2 := by
   norm_num [farMonopole, axisQuadrupole]
 
+/-- Both configurations have two separated simple NUT centres, hence the
+    same charge and the same smoothness class for a common fibre period.
+    The fine axis readout at r=5 nevertheless distinguishes a=1 from a=2. -/
+theorem two_smooth_separations :
+    farMonopole 1 1 = farMonopole 1 2 ∧
+    twoAxis 1 1 5 ≠ twoAxis 1 2 5 := by
+  norm_num [farMonopole, twoAxis]
+
+/-- The witness is rational with an exact nonzero gap of 5/84. -/
+theorem separated_centres_exact_gap :
+    twoAxis 1 2 5 - twoAxis 1 1 5 = 5 / 84 := by
+  norm_num [twoAxis]
+
 /-- Additive magnetic flux of N equal centres, modulo 4pi normalization. -/
 def fluxUnits (n : ℕ) (q : ℚ) : ℚ :=
   -(n : ℚ) * q
