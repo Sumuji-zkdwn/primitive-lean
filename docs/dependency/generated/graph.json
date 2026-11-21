@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "f56badb6140f149a5495387e446be4ce3247d0f0",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1546,6 +1546,53 @@
         "Mathlib"
       ],
       "sha256": "a35052f64b383b9bd5111d315e45ad1b7a121c35ad5ceabee95cd9334cc0bdf4"
+    },
+    {
+      "id": "main:lean/Research/DualMetricSandpile.lean",
+      "scope": "main",
+      "path": "lean/Research/DualMetricSandpile.lean",
+      "group": "Other",
+      "namespace": "DualMetricSandpile",
+      "declarations": [
+        "Site",
+        "Distance",
+        "Configuration",
+        "IsFiniteMetric",
+        "outside",
+        "inside",
+        "insideVariant",
+        "outside_metric",
+        "inside_metric",
+        "insideVariant_metric",
+        "comparable",
+        "distances_disagree",
+        "edge",
+        "threshold",
+        "Legal",
+        "Stable",
+        "fire",
+        "threshold_invariant",
+        "fire_invariant",
+        "hidden_edges",
+        "hidden_distances_disagree",
+        "hidden_fire",
+        "twoAtCenter",
+        "outer_thresholds",
+        "inner_thresholds",
+        "outer_two_stable",
+        "inner_only_center_legal",
+        "innerFinal",
+        "inner_firing_result",
+        "inner_final_stable",
+        "oneAtCenter",
+        "one_chip_indistinguishable",
+        "two_chip_separates",
+        "same_site_labels"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "e092617271aa5bb6ce22cc040d5f3fc6c68e96602447c06d91f48131f96db985"
     },
     {
       "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
@@ -27677,28 +27724,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "f56badb6140f149a5495387e446be4ce3247d0f0",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "f56badb6140f149a5495387e446be4ce3247d0f0",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "f56badb6140f149a5495387e446be4ce3247d0f0",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "f56badb6140f149a5495387e446be4ce3247d0f0",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
