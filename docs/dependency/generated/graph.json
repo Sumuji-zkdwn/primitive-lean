@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "238d2c2ab08f96e3079652a9213b3a8d1f6b6a60",
+  "main_commit": "7194b6720736019ab2937ad2aea31a3253b56c0a",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1683,12 +1683,16 @@
         "fibre_period_winding",
         "normalized_first_chern",
         "nontrivial_flux",
-        "reverse_orientation"
+        "reverse_orientation",
+        "liftedKinetic",
+        "routhian",
+        "routh_reduction",
+        "reverse_charge_coupling"
       ],
       "imports": [
         "Mathlib.Tactic"
       ],
-      "sha256": "d37203ff747b519bed48e3dab79ce062a2973b09411895e85debef3f134c9c60"
+      "sha256": "47de38d468615e603dffa57a94098c5f93da2ade7c0f461dfe426270508c7397"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -27704,28 +27708,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "238d2c2ab08f96e3079652a9213b3a8d1f6b6a60",
+      "base_sha": "7194b6720736019ab2937ad2aea31a3253b56c0a",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "238d2c2ab08f96e3079652a9213b3a8d1f6b6a60",
+      "base_sha": "7194b6720736019ab2937ad2aea31a3253b56c0a",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "238d2c2ab08f96e3079652a9213b3a8d1f6b6a60",
+      "base_sha": "7194b6720736019ab2937ad2aea31a3253b56c0a",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "238d2c2ab08f96e3079652a9213b3a8d1f6b6a60",
+      "base_sha": "7194b6720736019ab2937ad2aea31a3253b56c0a",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
