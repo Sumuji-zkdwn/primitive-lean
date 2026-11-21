@@ -66,7 +66,6 @@ theorem horizontal_covariant (h : Fin 3 → G) (U : Link G)
   · simpa [move] using hne
   · change h q.1 * q.2 = transport (reframe h U) p.1 q.1 (h p.1 * p.2)
     rw [hq, transport_covariant]
-    rfl
 
 theorem vertical_covariant (h : Fin 3 → G) (generators : Set G)
     (p q : Point G) (hpq : vertical generators p q) :
@@ -90,7 +89,7 @@ theorem edge_covariant (h : Fin 3 → G) (U : Link G)
 theorem move_inverse (h : Fin 3 → G) (p : Point G) :
     move (fun i => (h i)⁻¹) (move h p) = p := by
   cases p with
-  | mk i g => simp [move, mul_assoc]
+  | mk i g => simp [move]
 
 /-- A small faithful noncommutative finite subgroup is already available. -/
 def swap01 : Equiv.Perm (Fin 3) := Equiv.swap 0 1
