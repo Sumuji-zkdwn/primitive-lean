@@ -1,0 +1,74 @@
+name: Forgetting round trips and reconstruction bounds
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/ForgettingRoundTrips.lean'
+      - 'lean/Research/SiphonPolynomialE.lean'
+      - 'lean/Research/SiphonPredictiveQuotient.lean'
+      - 'lean/Research/ElasticaObservationQuotient.lean'
+      - 'lean/Elastica/**'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - 'tools/forgetting_roundtrips.py'
+      - 'tests/test_forgetting_roundtrips.py'
+      - 'tools/verify_forgetting_roundtrips.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'tools/verify.py'
+      - 'tools/pr_integration.py'
+      - 'docs/research/2026-11-21-forgetting-roundtrips.md'
+      - 'docs/verification/2026-11-21-forgetting-roundtrips.md'
+      - '.github/workflows/forgetting-roundtrips.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Check out the proposed head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Fetch pinned Mathlib cache
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get; then
+              exit 0
+            fi
+            echo "Mathlib cache transfer failed on attempt ${attempt}" >&2
+            sleep 5
+          done
+          exit 1
+      - name: Check finite examples, Lean kernel and all local theorem axioms
+        run: python3 -B tools/verify.py --forgetting-roundtrips-only
+      - name: Preserve verification reports and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forgetting-roundtrips-${{ github.run_id }}
+          path: |
+            verification/forgetting-roundtrips/
+            verification/forgetting-roundtrips-lean/
+          if-no-files-found: warn
+          retention-days: 30
