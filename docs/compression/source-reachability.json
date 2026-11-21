@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1383,
+    "all_source_edges": 1382,
     "eligible_direct_edges": 428,
-    "nodes": 431,
+    "nodes": 432,
     "retained_pairs": 307,
     "transitive_pairs_removed": 114,
     "unique_eligible_pairs": 421,
-    "weak_edges_excluded": 955
+    "weak_edges_excluded": 954
   },
   "edges": [
     [
@@ -1303,6 +1303,7 @@
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
+    "main:lean/Research/InformationNetworkDiversity.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
     "main:lean/Research/SignedCycleCounterexample.lean",
@@ -1674,8 +1675,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "17307681d0d478171ebf82ef4c003f39c5fe8bb873f9462985386a64290f1c4d",
-    "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+    "graph_sha256": "95e09c0ef33728ed229a346eb5c6bf3ae4fd0f142a3d0c67f0034d2246fe05f0",
+    "main_commit": "44177b80818f6f747d13fce5348bd352f7ee38e0",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
