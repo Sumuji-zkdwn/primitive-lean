@@ -82,4 +82,10 @@ CIは [.github/workflows/forgetting-roundtrips.yml](../../.github/workflows/forg
 - `python3 -O tools/forgetting_roundtrips.py`：全有限検算成功。
 - ローカル環境にLean/Lake実行ファイルがないため、この段階ではLeanのコンパイル成功を主張しない。専用CIの実行結果をここへ追記する。
 
+### 専用CIの履歴
+
+| 対象ソース | 実行 | 結果 |
+|---|---|---|
+| `c10f8b03625da8323924642a8607b926972c4aaa` | [run 44872049343](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44872049343) | Python検算・6 testsと既存3モジュールのコンパイルは成功。新規ファイルの関係証明2箇所で等式の自動代入先が合わず型エラー。明示した等式による `rw` へ修正し、再検証する。 |
+
 既存の依存グラフworkflowは `docs/dependency/generated/` のみを更新するbot commitをPRブランチへ追加することがある。証明ソースを検証したコミットと、その生成物更新後のheadを区別する。

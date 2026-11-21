@@ -103,7 +103,7 @@ theorem first_roundtrip_iff_identity {α β : Type*}
         exact hx
       rcases ht with ⟨x', ⟨a, hxa, hg⟩, hfy⟩
       have ha : a = y := hxa.symm.trans hx
-      subst a
+      rw [ha] at hg
       exact ⟨x', hg, hfy⟩
   · intro h
     funext x y
@@ -160,7 +160,7 @@ theorem saturation_idempotent_of_identity {α β : Type*}
     have hbc : comp (graph f) g b c := ⟨a, hba, hac⟩
     rw [h] at hbc
     change b = c at hbc
-    subst c
+    rw [← hbc] at hcz
     exact ⟨b, hxb, hcz⟩
   · rintro ⟨b, hxb, hbz⟩
     have hbb : comp (graph f) g b b := by
