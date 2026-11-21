@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "2f633eb1d20a71f8665c509ab95ec48b16e44b30",
+  "main_commit": "54ffd09f04fa7761997ad612529488ce00aed299",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1546,6 +1546,25 @@
         "Mathlib"
       ],
       "sha256": "a35052f64b383b9bd5111d315e45ad1b7a121c35ad5ceabee95cd9334cc0bdf4"
+    },
+    {
+      "id": "main:lean/Research/CompactWarpGraphAnalogue.lean",
+      "scope": "main",
+      "path": "lean/Research/CompactWarpGraphAnalogue.lean",
+      "group": "Other",
+      "namespace": "CompactWarpGraphAnalogue",
+      "declarations": [
+        "Profile",
+        "lap",
+        "closed_harmonic_constant",
+        "boundaryProfile",
+        "boundary_harmonic",
+        "boundary_not_closed"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "616f2a7af7d03e04a726e5be0fee31bca0a0086e3929c9cae4bbf5522d31b19c"
     },
     {
       "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
@@ -27703,28 +27722,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "2f633eb1d20a71f8665c509ab95ec48b16e44b30",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "2f633eb1d20a71f8665c509ab95ec48b16e44b30",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "2f633eb1d20a71f8665c509ab95ec48b16e44b30",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "2f633eb1d20a71f8665c509ab95ec48b16e44b30",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
