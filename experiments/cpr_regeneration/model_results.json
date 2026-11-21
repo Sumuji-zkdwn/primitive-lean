@@ -1,0 +1,237 @@
+{
+  "units_per_probability_one": 12000,
+  "complete_configuration_checks": {
+    "3": {
+      "boards": 512,
+      "flips_per_rule": 4608
+    },
+    "4": {
+      "boards": 65536,
+      "flips_per_rule": 1048576
+    }
+  },
+  "local_neighborhood_checks": {
+    "3": {
+      "directed_local_flips": 832
+    },
+    "4": {
+      "directed_local_flips": 2624
+    },
+    "5": {
+      "directed_local_flips": 5440
+    },
+    "6": {
+      "directed_local_flips": 9280
+    },
+    "7": {
+      "directed_local_flips": 14144
+    }
+  },
+  "order_checks": {
+    "1": {
+      "fixed8": {
+        "board_pair_comparisons": 0,
+        "different_final_law": 0,
+        "different_expected_count": 0,
+        "minimum_initial_tokens_for_different_law": null
+      },
+      "degree": {
+        "board_pair_comparisons": 0,
+        "different_final_law": 0,
+        "different_expected_count": 0,
+        "minimum_initial_tokens_for_different_law": null
+      }
+    },
+    "2": {
+      "fixed8": {
+        "board_pair_comparisons": 96,
+        "different_final_law": 18,
+        "different_expected_count": 0,
+        "minimum_initial_tokens_for_different_law": 1
+      },
+      "degree": {
+        "board_pair_comparisons": 96,
+        "different_final_law": 18,
+        "different_expected_count": 0,
+        "minimum_initial_tokens_for_different_law": 1
+      }
+    },
+    "3": {
+      "fixed8": {
+        "board_pair_comparisons": 18432,
+        "different_final_law": 2480,
+        "different_expected_count": 2032,
+        "minimum_initial_tokens_for_different_law": 1
+      },
+      "degree": {
+        "board_pair_comparisons": 18432,
+        "different_final_law": 2480,
+        "different_expected_count": 2032,
+        "minimum_initial_tokens_for_different_law": 1
+      }
+    }
+  },
+  "full_sweep_checks_3x3": {
+    "fixed8": {
+      "initial_boards": 512,
+      "sequential_joint_laws": 1024,
+      "forward_reverse_different_expected_total": 400
+    },
+    "degree": {
+      "initial_boards": 512,
+      "sequential_joint_laws": 1024,
+      "forward_reverse_different_expected_total": 404
+    }
+  },
+  "zero_absorbing": {
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true
+  },
+  "order_witnesses": {
+    "fixed8": {
+      "P_c_b_then_c": "1/640000",
+      "P_c_c_then_b": "0",
+      "P_b_harvest_then_trial": "0",
+      "P_b_trial_then_harvest": "1/800"
+    },
+    "degree": {
+      "P_c_b_then_c": "1/400000",
+      "P_c_c_then_b": "0",
+      "P_b_harvest_then_trial": "0",
+      "P_b_trial_then_harvest": "1/800"
+    },
+    "2x2_fixed8_triangle": {
+      "P_second_target_if_visited_last": "801/640000",
+      "P_second_target_if_visited_first": "1/800"
+    }
+  },
+  "examples_7x7": {
+    "one_center": {
+      "fixed8": {
+        "frozen_expected_births": "1/100",
+        "sweep_expected_births": "13804315886867407419451220683179403/1374389534720000000000000000000000000",
+        "sweep_rounded": 0.010043961729
+      },
+      "degree": {
+        "frozen_expected_births": "1/100",
+        "sweep_expected_births": "379148802390154730292577574110638779959/37748736000000000000000000000000000000000",
+        "sweep_rounded": 0.010044013193
+      }
+    },
+    "adjacent_pair": {
+      "fixed8": {
+        "frozen_expected_births": "7/400",
+        "sweep_expected_births": "241488764415982859368827674566492623/13743895347200000000000000000000000000",
+        "sweep_rounded": 0.017570620142
+      },
+      "degree": {
+        "frozen_expected_births": "7/400",
+        "sweep_expected_births": "27645238339262706077743799085173800891/1572864000000000000000000000000000000000",
+        "sweep_rounded": 0.017576369183
+      }
+    },
+    "eight_neighbor_ring": {
+      "fixed8": {
+        "frozen_expected_births": "1/20",
+        "sweep_expected_births": "1411432661731929154565733940779204735931008017/28147497671065600000000000000000000000000000000",
+        "sweep_rounded": 0.05014416124
+      },
+      "degree": {
+        "frozen_expected_births": "1/20",
+        "sweep_expected_births": "23685720858587652795693985318133280632089575499/471859200000000000000000000000000000000000000000",
+        "sweep_rounded": 0.050196585885
+      }
+    },
+    "closed_ring_center_occupied": {
+      "fixed8": {
+        "frozen_expected_births": "1/25",
+        "sweep_expected_births": "1129957685021273154565733940779204735931008017/28147497671065600000000000000000000000000000000",
+        "sweep_rounded": 0.04014416124
+      },
+      "degree": {
+        "frozen_expected_births": "1/25",
+        "sweep_expected_births": "18967128858587652795693985318133280632089575499/471859200000000000000000000000000000000000000000",
+        "sweep_rounded": 0.040196585885
+      }
+    },
+    "empty": {
+      "fixed8": {
+        "frozen_expected_births": "0",
+        "sweep_expected_births": "0",
+        "sweep_rounded": 0.0
+      },
+      "degree": {
+        "frozen_expected_births": "0",
+        "sweep_expected_births": "0",
+        "sweep_rounded": 0.0
+      }
+    },
+    "harvest_isolated": {
+      "sand_gained_at_center": 0,
+      "neighbor_sites_losing_one": 8,
+      "change_in_cut": -8
+    },
+    "harvest_pair": {
+      "sand_gained_at_center": 1,
+      "neighbor_sites_losing_one": 7,
+      "change_in_cut": -6
+    },
+    "harvest_surrounded": {
+      "sand_gained_at_center": 8,
+      "neighbor_sites_losing_one": 0,
+      "change_in_cut": 8
+    }
+  },
+  "boundary_and_conservation_3x3": {
+    "fixed8": {
+      "corner_harvest_change": "-1/800",
+      "one_hole_initial_potential": "1/100",
+      "one_hole_next_expected_potential": "99/10000"
+    },
+    "degree": {
+      "corner_harvest_change": "1/12000",
+      "one_hole_initial_potential": "1/100",
+      "one_hole_next_expected_potential": "99/10000"
+    }
+  },
+  "deterministic_sandpile": {
+    "3": {
+      "initial_grains": 208,
+      "final_grains": 50,
+      "grains_at_sink": 158,
+      "topplings": 63,
+      "final_state_and_site_toppling_counts_agree": true
+    },
+    "4": {
+      "initial_grains": 208,
+      "final_grains": 72,
+      "grains_at_sink": 136,
+      "topplings": 76,
+      "final_state_and_site_toppling_counts_agree": true
+    },
+    "5": {
+      "initial_grains": 208,
+      "final_grains": 105,
+      "grains_at_sink": 103,
+      "topplings": 113,
+      "final_state_and_site_toppling_counts_agree": true
+    },
+    "6": {
+      "initial_grains": 208,
+      "final_grains": 145,
+      "grains_at_sink": 63,
+      "topplings": 113,
+      "final_state_and_site_toppling_counts_agree": true
+    },
+    "7": {
+      "initial_grains": 208,
+      "final_grains": 189,
+      "grains_at_sink": 19,
+      "topplings": 116,
+      "final_state_and_site_toppling_counts_agree": true
+    }
+  }
+}
