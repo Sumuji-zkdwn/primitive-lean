@@ -1,0 +1,328 @@
+{
+  "scope": "Local verification of the added files, not a full-repository integration or remote CI result",
+  "timestamp_utc": "2026-11-21T09:15:30.567653+00:00",
+  "checkout_base_commit": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+  "working_tree_dirty_during_verification": true,
+  "source_identity": "SHA256 values bind the actual working files; the base commit alone does not describe the added source",
+  "command": "python3 -B -X utf8 tools/verify.py --retroactive-translation-only",
+  "passed": true,
+  "python_version": "3.12.14",
+  "lean_version": "Lean (version 4.36.0-rc2, x86_64-unknown-linux-gnu, commit b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a, Release)",
+  "toolchain": "leanprover/lean4:v4.36.0-rc2",
+  "mathlib_commit": "2ddf59c8f14245864e6c0ed227a2dab76b9efea2",
+  "source_sha256": {
+    "lean/Research/RetroactiveTranslation.lean": "e89184df843868fb07b0c1ce848d1efaa35c16bdce51990da028f5627394a6e1",
+    "lean/Research/RetroactiveWorkBounds.lean": "fcc0e78295885f083e7f9bf60209f39b971e086b989b50b506bb0986aa11713c",
+    "tools/verify_retroactive_translation.py": "19657af366d37450945379b8ec6a46638912956171974e79f8dee8e34c64f515",
+    "tools/check_retroactive_translation.py": "8222b05d690d177815b911ee4b841d937b73bcae836664b84a8319ad2f22b6b6",
+    "tools/verify.py": "496f09555657b6fe2b00d3c86b4278dceb8533b96ce7c0019e09d036ba64c9a3",
+    "tools/pr_integration.py": "477216d1ce38dd02860bec9b9ec8ac498e84fd4e398b77d4fa24af66c59a96dc",
+    "tools/verify_toolchain_modules.py": "f5eaac9c794a555f5c944d337c78152d3de77ebef7be46c54842df8029a3d858",
+    "lean/lean-toolchain": "11c697aebe5b539d74f5069e497a588e7dfab1c4eeb74313f28357e351c55ca3",
+    "lean/lake-manifest.json": "ff86f77b56654e34d1e708bff9a6e4b93ff010d640ac803d2c91049c17279f95",
+    "lean/lakefile.toml": "7234ef546c5fc48d45ca164754cd64b4e9f4d8f17f1ed9c005a48633de45a64f",
+    ".github/workflows/retroactive-translation.yml": "4d4ee3e8a00f77fece2909672f2ce01372989b9bd24eb2a0970cf4eb394afc41",
+    "experiments/retroactive_translation/stage1/compression_boundary.py": "ce14744d67e2c597175908b99c8e87c7e253aa8541fe558dbc421fb7d0326d86",
+    "experiments/retroactive_translation/stage1/compression_results.json": "645010ef4ee51887100aac3643f3b119c6ad8f190d2bf132442f642110827905",
+    "experiments/retroactive_translation/stage1/experiments.py": "a3b17d369271b0a8941df795920e2aa5cd84904f31acc7e746007c6e8d5a0cc8",
+    "experiments/retroactive_translation/stage1/results.json": "074a7feeb03f6a366b41cd1c91828923b96adadbe9c4fe79e2477cfce1d5601a",
+    "experiments/retroactive_translation/stage2/parity_probe_model.py": "56011bb6e6e9f5f76ef235e5a99430c308881433620a4ebcd389a704c3fb91ff",
+    "experiments/retroactive_translation/stage2/parity_probe_results.json": "235087057b2e0883d1ade7a3039b25f0d3a65bcdb3c8af8a8dd12d35d4b829e5",
+    "experiments/retroactive_translation/stage2/repeated_squaring_model.py": "719ff10fe48d12b3a77a80d32f5ef903cd13b1b251968534a278d318251afd05",
+    "experiments/retroactive_translation/stage2/repeated_squaring_results.json": "4424dafca4897244be3bb8cd5f0ed086aa596dfc3589befccb307e3394db5c68"
+  },
+  "explicit_source_theorems": 28,
+  "audited_theorems_including_generated": 30,
+  "module_compilation": [
+    {
+      "module": "Research.RetroactiveTranslation",
+      "exit_code": 0,
+      "seconds": 1.033,
+      "warnings": []
+    },
+    {
+      "module": "Research.RetroactiveWorkBounds",
+      "exit_code": 0,
+      "seconds": 0.954,
+      "warnings": []
+    }
+  ],
+  "trust_level": 0,
+  "audit_exit_code": 0,
+  "audit_warnings": [],
+  "axioms": [
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.discarded_key_stays_discarded"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.candidates_append"
+    },
+    {
+      "axioms": [],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.candidates_antitone"
+    },
+    {
+      "axioms": [
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.public_states_eq_of_initial_eq"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.repeatedSquare_zero"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.bit_summary_card_lower_bound"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.coordinate_decoders_force_injective"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.fixed_reading_candidates_append_subset"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.readyColumns_card_le_min"
+    },
+    {
+      "axioms": [
+        "Classical.choice"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.collision_prevents_decoder"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.repeatedSquare_pow"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.coveredColumns_subset"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.coveredColumns_card_le_min"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.certainty_budget_iff"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.candidates_append_subset"
+    },
+    {
+      "axioms": [],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.public_state_suffix"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.coveredColumns_card_le_div"
+    },
+    {
+      "axioms": [
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.reached_decoder_unique"
+    },
+    {
+      "axioms": [],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.public_states_future_of_equal_current"
+    },
+    {
+      "axioms": [
+        "Classical.choice"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.second_coordinate_not_from_first"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.repeatedSquare_succ"
+    },
+    {
+      "axioms": [
+        "Classical.choice"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.all_future_decoders_iff"
+    },
+    {
+      "axioms": [
+        "Classical.choice"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.factors_through_reached_iff_fiber_constant"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.repeatedSquare_add"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.repeatedSquare.eq_1"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.coveredColumns_card_mul_le_budget"
+    },
+    {
+      "axioms": [
+        "propext"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.repeatedSquare_mul"
+    },
+    {
+      "axioms": [
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.public_state_unique"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "Research.RetroactiveWorkBounds",
+      "name": "RetroactiveWorkBounds.coveredColumns_card_le"
+    },
+    {
+      "axioms": [],
+      "module": "Research.RetroactiveTranslation",
+      "name": "Elastica.RetroactiveTranslation.reachedSummary._proof_1"
+    }
+  ],
+  "finite_checks": {
+    "artifact_pairs": 4,
+    "checks": [
+      {
+        "matched": true,
+        "normalized_result_sha256": "b705917012308bfe6dacbe10c0faf16fa3b7e70dc68b557884ff3713823fa202",
+        "result": "stage1/results.json",
+        "script": "stage1/experiments.py",
+        "source_sha256": "a3b17d369271b0a8941df795920e2aa5cd84904f31acc7e746007c6e8d5a0cc8"
+      },
+      {
+        "matched": true,
+        "normalized_result_sha256": "3a86789b5061788d149c7048b0854d73cc170b4348af6ab445327836e68cdca1",
+        "result": "stage1/compression_results.json",
+        "script": "stage1/compression_boundary.py",
+        "source_sha256": "ce14744d67e2c597175908b99c8e87c7e253aa8541fe558dbc421fb7d0326d86"
+      },
+      {
+        "matched": true,
+        "normalized_result_sha256": "6c879af274f17c5e100ad39206d9bab8530686b6d03c7f2e4bbf0ff1e0800873",
+        "result": "stage2/parity_probe_results.json",
+        "script": "stage2/parity_probe_model.py",
+        "source_sha256": "56011bb6e6e9f5f76ef235e5a99430c308881433620a4ebcd389a704c3fb91ff"
+      },
+      {
+        "matched": true,
+        "normalized_result_sha256": "d7637e37d58e64235298b4813b19a493dfe0f48f710ffdb635916a8cfba92f5c",
+        "result": "stage2/repeated_squaring_results.json",
+        "script": "stage2/repeated_squaring_model.py",
+        "source_sha256": "719ff10fe48d12b3a77a80d32f5ef903cd13b1b251968534a278d318251afd05"
+      }
+    ],
+    "comparison": "Exact canonical JSON; only whitespace and object-key ordering are normalized",
+    "coverage": {
+      "binary_map_pairs": 256,
+      "bit_roundtrip_cases": 131072,
+      "direct_permutation_histories": 14424,
+      "expected_budget_counterexample_cases": 64,
+      "full_adaptive_DP_budget_cases": 28,
+      "optimal_policy_table_column_replays": 3584,
+      "related_base_identities": 13300,
+      "repeated_squaring_arithmetic_cases": 34580,
+      "repeated_squaring_cache_identities": 10640,
+      "secret_table_prefix_cases": 1280,
+      "symmetry_DP_budget_cases": 65
+    },
+    "passed": true,
+    "scope": "Deterministic finite verification, not a Lean proof, wall-clock lower bound, or cryptographic security proof"
+  },
+  "not_formalized": [
+    "The full adaptive probabilistic parity-query optimality theorem",
+    "Information-theoretic entropy inequalities",
+    "General cryptographic security or sequential-time lower bounds"
+  ],
+  "errors": []
+}

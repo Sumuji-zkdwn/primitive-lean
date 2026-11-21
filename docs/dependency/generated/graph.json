@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "033579f9b837a5af04e03ae7086f49276ef3416b",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1811,6 +1811,71 @@
         "OrbitTrace"
       ],
       "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
+    },
+    {
+      "id": "main:lean/Research/RetroactiveTranslation.lean",
+      "scope": "main",
+      "path": "lean/Research/RetroactiveTranslation.lean",
+      "group": "Other",
+      "namespace": "Elastica.RetroactiveTranslation",
+      "declarations": [
+        "Reached",
+        "reachedSummary",
+        "FiberConstant",
+        "FactorsThroughReached",
+        "factors_through_reached_iff_fiber_constant",
+        "reached_decoder_unique",
+        "collision_prevents_decoder",
+        "second_coordinate_not_from_first",
+        "SameFuture",
+        "all_future_decoders_iff",
+        "coordinate_decoders_force_injective",
+        "bit_summary_card_lower_bound",
+        "candidates",
+        "candidates_append",
+        "candidates_antitone",
+        "candidates_append_subset",
+        "discarded_key_stays_discarded",
+        "fixed_reading_candidates_append_subset",
+        "publicState",
+        "public_state_unique",
+        "public_states_eq_of_initial_eq",
+        "public_states_future_of_equal_current",
+        "public_state_suffix"
+      ],
+      "imports": [
+        "Mathlib.Data.Set.Function",
+        "Mathlib.Data.Fintype.Card",
+        "Mathlib.Data.Fintype.BigOperators"
+      ],
+      "sha256": "e89184df843868fb07b0c1ce848d1efaa35c16bdce51990da028f5627394a6e1"
+    },
+    {
+      "id": "main:lean/Research/RetroactiveWorkBounds.lean",
+      "scope": "main",
+      "path": "lean/Research/RetroactiveWorkBounds.lean",
+      "group": "Other",
+      "namespace": "RetroactiveWorkBounds",
+      "declarations": [
+        "coveredColumns",
+        "coveredColumns_subset",
+        "coveredColumns_card_le",
+        "coveredColumns_card_mul_le_budget",
+        "coveredColumns_card_le_div",
+        "coveredColumns_card_le_min",
+        "readyColumns_card_le_min",
+        "certainty_budget_iff",
+        "repeatedSquare",
+        "repeatedSquare_succ",
+        "repeatedSquare_add",
+        "repeatedSquare_pow",
+        "repeatedSquare_mul"
+      ],
+      "imports": [
+        "Mathlib.Algebra.Order.BigOperators.Group.Finset",
+        "Mathlib.Algebra.Group.Basic"
+      ],
+      "sha256": "fcc0e78295885f083e7f9bf60209f39b971e086b989b50b506bb0986aa11713c"
     },
     {
       "id": "main:lean/Research/SignedCycleCounterexample.lean",
@@ -23290,6 +23355,14 @@
     },
     {
       "from": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
+      "to": "main:lean/Research/RetroactiveTranslation.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "candidates"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/FiniteSelfSynthesis.inc",
       "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
@@ -27677,28 +27750,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "033579f9b837a5af04e03ae7086f49276ef3416b",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "033579f9b837a5af04e03ae7086f49276ef3416b",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "033579f9b837a5af04e03ae7086f49276ef3416b",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "033579f9b837a5af04e03ae7086f49276ef3416b",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

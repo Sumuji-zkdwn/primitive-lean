@@ -68,6 +68,8 @@ def run_integration(root, command, rebuild=False):
         ('projection-reachability', [sys.executable, '-B', '-X', 'utf8', 'tools/verify.py',
                                      '--projection-reachability-only']),
     ]
+    stages.append(('retroactive-translation', [sys.executable, '-B', '-X', 'utf8',
+        'tools/verify.py', '--retroactive-translation-only']))
     for name, args, *cwd in stages:
         print('Running ' + name, flush=True)
         record = command(args, 'integration-' + name, cwd=cwd[0] if cwd else root)

@@ -1,0 +1,186 @@
+{
+  "purpose": "Toy arithmetic/caching checks, not a secure cryptosystem or delay lower bound",
+  "all_assertions_passed": true,
+  "assumptions": [
+    "p and q are distinct primes; inputs lie in Z_N^*",
+    "The factors are public tiny test inputs; security is deliberately absent",
+    "Counts describe these algorithms, not the fastest possible attacks"
+  ],
+  "exhaustive_arithmetic": {
+    "prime_pairs": [
+      [
+        11,
+        19
+      ],
+      [
+        17,
+        23
+      ]
+    ],
+    "T_range_inclusive": [
+      0,
+      64
+    ],
+    "all_unit_base_and_T_cases": 34580,
+    "invertible_current_reading_cases": 34580,
+    "cache_semigroup_identity_cases": 10640,
+    "related_base_identity_cases": 13300
+  },
+  "sample_costs": {
+    "p": 1019,
+    "q": 1231,
+    "N": 1254389,
+    "base": 2,
+    "cost_units": "modular multiplications; mod phi and mod N reported separately",
+    "rows": [
+      {
+        "steps": 1,
+        "sequential_mod_N_squarings": 1,
+        "answer": 4,
+        "reduced_exponent": 2,
+        "multiplications_mod_phi": 0,
+        "multiplications_mod_N": 1,
+        "nominal_total_multiplications": 1
+      },
+      {
+        "steps": 4,
+        "sequential_mod_N_squarings": 4,
+        "answer": 65536,
+        "reduced_exponent": 16,
+        "multiplications_mod_phi": 2,
+        "multiplications_mod_N": 4,
+        "nominal_total_multiplications": 6
+      },
+      {
+        "steps": 16,
+        "sequential_mod_N_squarings": 16,
+        "answer": 936811,
+        "reduced_exponent": 65536,
+        "multiplications_mod_phi": 4,
+        "multiplications_mod_N": 16,
+        "nominal_total_multiplications": 20
+      },
+      {
+        "steps": 64,
+        "sequential_mod_N_squarings": 64,
+        "answer": 1013406,
+        "reduced_exponent": 787216,
+        "multiplications_mod_phi": 6,
+        "multiplications_mod_N": 23,
+        "nominal_total_multiplications": 29
+      },
+      {
+        "steps": 256,
+        "sequential_mod_N_squarings": 256,
+        "answer": 1069759,
+        "reduced_exponent": 783856,
+        "multiplications_mod_phi": 8,
+        "multiplications_mod_N": 31,
+        "nominal_total_multiplications": 39
+      },
+      {
+        "steps": 1024,
+        "sequential_mod_N_squarings": 1024,
+        "answer": 456994,
+        "reduced_exponent": 214036,
+        "multiplications_mod_phi": 10,
+        "multiplications_mod_N": 22,
+        "nominal_total_multiplications": 32
+      },
+      {
+        "steps": 4096,
+        "sequential_mod_N_squarings": 4096,
+        "answer": 179746,
+        "reduced_exponent": 493576,
+        "multiplications_mod_phi": 12,
+        "multiplications_mod_N": 23,
+        "nominal_total_multiplications": 35
+      },
+      {
+        "steps": 16384,
+        "sequential_mod_N_squarings": 16384,
+        "answer": 314198,
+        "reduced_exponent": 115636,
+        "multiplications_mod_phi": 14,
+        "multiplications_mod_N": 24,
+        "nominal_total_multiplications": 38
+      }
+    ]
+  },
+  "monotone_target_cache": {
+    "rows": [
+      {
+        "target_steps": 64,
+        "new_squarings_needed_from_previous_endpoint": 64,
+        "cumulative_cached_squarings": 64,
+        "answer": 1013406
+      },
+      {
+        "target_steps": 128,
+        "new_squarings_needed_from_previous_endpoint": 64,
+        "cumulative_cached_squarings": 128,
+        "answer": 994890
+      },
+      {
+        "target_steps": 192,
+        "new_squarings_needed_from_previous_endpoint": 64,
+        "cumulative_cached_squarings": 192,
+        "answer": 631357
+      },
+      {
+        "target_steps": 256,
+        "new_squarings_needed_from_previous_endpoint": 64,
+        "cumulative_cached_squarings": 256,
+        "answer": 1069759
+      }
+    ],
+    "restart_cost": 640,
+    "cached_cost": 256
+  },
+  "public_related_base_counterexample": {
+    "T": 1024,
+    "base": 2,
+    "new_base": 8,
+    "public_exponent": 3,
+    "previous_answer": 456994,
+    "new_answer": 198925,
+    "additional_multiplications_from_previous_answer": 2,
+    "naive_restart_squarings": 1024
+  },
+  "tiny_modulus_cycle_counterexample": {
+    "N": 209,
+    "base": 2,
+    "preperiod": 1,
+    "period": 12,
+    "unique_values_before_repeat": 13,
+    "values": [
+      2,
+      4,
+      16,
+      47,
+      119,
+      158,
+      93,
+      80,
+      130,
+      180,
+      5,
+      25,
+      207
+    ],
+    "target_T": 1000000,
+    "endpoint_from_cycle": 119,
+    "note": "A small state space makes generic cycle enumeration easy; toy timings are not security estimates"
+  },
+  "limitations": [
+    "No bound on arbitrary attackers, factoring, preprocessing, parallel or quantum algorithms is proved here",
+    "Hardness of computing the full endpoint is not automatically unpredictability of an arbitrary output bit",
+    "A full encryption protocol, authenticated update, and message-recovery security are not implemented"
+  ],
+  "retroactive_reading_definition": {
+    "model": "M_T = C * z_T(a) mod N, for a fixed public unit C",
+    "inverse": "z_T(a) = inverse(C) * M_T mod N",
+    "consequence": "Full endpoint recovery and full current-reading recovery differ by one cheap invertible map",
+    "caveat": "No claim about hiding arbitrary messages, partial bits, or semantic security"
+  }
+}

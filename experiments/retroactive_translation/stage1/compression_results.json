@@ -1,0 +1,122 @@
+{
+  "scope": "finite exact factorization, not cryptographic security",
+  "all_binary_maps_on_four_states": {
+    "pairs_checked": 256,
+    "factorable_pairs": 60,
+    "nonfactorable_pairs": 196,
+    "candidate_decoders_per_pair": 4
+  },
+  "two_bit_witness": {
+    "states": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "old_reading_first_bit": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "new_reading_second_bit": [
+      0,
+      1,
+      0,
+      1
+    ],
+    "factorization_possible": false,
+    "old_summary_values": 2,
+    "joint_summary_values": 4
+  },
+  "index_problem": [
+    {
+      "source_bits": 1,
+      "possible_sources": 2,
+      "required_summary_states": 2,
+      "minimum_fixed_width_summary_bits": 1,
+      "query_index_bits": 0
+    },
+    {
+      "source_bits": 2,
+      "possible_sources": 4,
+      "required_summary_states": 4,
+      "minimum_fixed_width_summary_bits": 2,
+      "query_index_bits": 1
+    },
+    {
+      "source_bits": 3,
+      "possible_sources": 8,
+      "required_summary_states": 8,
+      "minimum_fixed_width_summary_bits": 3,
+      "query_index_bits": 2
+    },
+    {
+      "source_bits": 4,
+      "possible_sources": 16,
+      "required_summary_states": 16,
+      "minimum_fixed_width_summary_bits": 4,
+      "query_index_bits": 2
+    },
+    {
+      "source_bits": 5,
+      "possible_sources": 32,
+      "required_summary_states": 32,
+      "minimum_fixed_width_summary_bits": 5,
+      "query_index_bits": 3
+    },
+    {
+      "source_bits": 6,
+      "possible_sources": 64,
+      "required_summary_states": 64,
+      "minimum_fixed_width_summary_bits": 6,
+      "query_index_bits": 3
+    },
+    {
+      "source_bits": 7,
+      "possible_sources": 128,
+      "required_summary_states": 128,
+      "minimum_fixed_width_summary_bits": 7,
+      "query_index_bits": 3
+    },
+    {
+      "source_bits": 8,
+      "possible_sources": 256,
+      "required_summary_states": 256,
+      "minimum_fixed_width_summary_bits": 8,
+      "query_index_bits": 3
+    },
+    {
+      "source_bits": 9,
+      "possible_sources": 512,
+      "required_summary_states": 512,
+      "minimum_fixed_width_summary_bits": 9,
+      "query_index_bits": 4
+    },
+    {
+      "source_bits": 10,
+      "possible_sources": 1024,
+      "required_summary_states": 1024,
+      "minimum_fixed_width_summary_bits": 10,
+      "query_index_bits": 4
+    }
+  ],
+  "theorem_status": {
+    "general_factorization_equivalence": "elementary proof in report",
+    "general_exact_index_storage_bound": "injectivity proof in report",
+    "finite_checks": "passed",
+    "lean_verification": "not performed"
+  }
+}
