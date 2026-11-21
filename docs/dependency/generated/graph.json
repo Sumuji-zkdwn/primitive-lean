@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "5ae73d0be9c3e834c327ff182bca713d10a49c26",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1410,6 +1410,76 @@
       "sha256": "eaa5cf90c15f818d4451c876c351923b599c3c1f59a14564bbd141a68d80e5ca"
     },
     {
+      "id": "main:lean/PlanarSyncMoments.lean",
+      "scope": "main",
+      "path": "lean/PlanarSyncMoments.lean",
+      "group": "Other",
+      "namespace": "PlanarSyncMoments",
+      "declarations": [
+        "Point",
+        "Map2",
+        "Moment",
+        "moment_ext",
+        "applyMap",
+        "pointScale",
+        "pointAdd",
+        "pointSub",
+        "mix",
+        "stepLeft",
+        "stepRight",
+        "transform",
+        "common_drive_difference",
+        "pointMoment",
+        "momentScale",
+        "energy",
+        "updateMoment",
+        "pointMoment_transform",
+        "updateMoment_scale",
+        "sumMoments",
+        "meanMoments",
+        "sum_three",
+        "sumMoments_transform",
+        "meanMoments_transform",
+        "meanMoments_pair_step",
+        "common_drive_moments_independent",
+        "mean_energy_eq_average_squared_distance",
+        "energy_update",
+        "energy_update_factor",
+        "Isotropic",
+        "energy_update_isotropic",
+        "point_energy_scaling_iff_isotropic",
+        "identityMap",
+        "identity_energy_update",
+        "quarter_coupling_energy",
+        "probeX",
+        "probeY",
+        "probeSum",
+        "read_probeX",
+        "read_probeY",
+        "read_probeSum",
+        "three_probes_separate",
+        "all_linear_readouts_eq_iff",
+        "all_scaled_linear_readouts_eq_iff",
+        "runMoments",
+        "equal_moments_all_operation_lists",
+        "anisotropicMap",
+        "shearMap",
+        "scalar_energy_counterexample",
+        "cross_moment_counterexample",
+        "projection_has_zero_vertical_component",
+        "line_collapse_not_synchronization"
+      ],
+      "imports": [
+        "Mathlib.Basic.Real.Basic",
+        "Mathlib.Algebra.BigOperators.Ring.Finset",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.NormNum",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.SimpRw"
+      ],
+      "sha256": "f119cebea5d55a35acc26abb52b861fd6cab86563f66a0124fe64445f8d1b058"
+    },
+    {
       "id": "main:lean/PrismAiryReflectance.lean",
       "scope": "main",
       "path": "lean/PrismAiryReflectance.lean",
@@ -1515,6 +1585,65 @@
         "PrismAiryReflectance"
       ],
       "sha256": "066c1dc7eb94627c92c2901242da914f73a23c582dc0348dd21565ac214e116d"
+    },
+    {
+      "id": "main:lean/ProjectiveLock.lean",
+      "scope": "main",
+      "path": "lean/ProjectiveLock.lean",
+      "group": "Other",
+      "namespace": "ProjectiveLock",
+      "declarations": [
+        "fieldU",
+        "fieldV",
+        "riccati",
+        "reciprocalField",
+        "cosReadout",
+        "sinReadout",
+        "phase",
+        "decay",
+        "denominator_pos",
+        "quotient_hasDerivAt",
+        "reciprocal_field",
+        "reciprocal_hasDerivAt",
+        "zero_detuning",
+        "decay_initial",
+        "decay_hasDerivAt",
+        "decay_ne_zero",
+        "plane_contraction_ratio",
+        "readout_on_unit_circle",
+        "cosReadout_hasDerivAt",
+        "sinReadout_hasDerivAt",
+        "observed_cos_hasDerivAt",
+        "observed_sin_hasDerivAt",
+        "fieldU_squared",
+        "fieldV_squared",
+        "infinity_axis_tangent_iff",
+        "infinity_zero_detuning",
+        "infinity_trajectory_hasDerivAt",
+        "discriminant_identity",
+        "root_discriminant_nonneg",
+        "no_root_beyond_threshold",
+        "threshold_double_root",
+        "sample_root_small",
+        "sample_root_large",
+        "riccati_hasDerivAt",
+        "sample_slope_small",
+        "sample_slope_large",
+        "sin_phase",
+        "cos_phase",
+        "phase_hasDerivAt",
+        "phase_ode_hasDerivAt"
+      ],
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.ArctanDeriv",
+        "Mathlib.Tactic.Convert",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.NormNum",
+        "Mathlib.Tactic.Ring"
+      ],
+      "sha256": "6fd23fd80f21de1bcdc3eca2d1344e4b5cff80fef4efc8ec09a7b7d87785be95"
     },
     {
       "id": "main:lean/Research/ChairPieKillSpot.lean",
@@ -26148,8 +26277,7 @@
       "to": "main:linear_input/lean_check/CurvatureBridge.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "energy_constant",
-        "phase_hasDerivAt"
+        "energy_constant"
       ]
     },
     {
@@ -27677,28 +27805,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "5ae73d0be9c3e834c327ff182bca713d10a49c26",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "5ae73d0be9c3e834c327ff182bca713d10a49c26",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "5ae73d0be9c3e834c327ff182bca713d10a49c26",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "5ae73d0be9c3e834c327ff182bca713d10a49c26",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
