@@ -93,14 +93,14 @@ def fluxUnits (n : ℕ) (q : ℚ) : ℚ :=
 
 theorem flux_additive (m n : ℕ) (q : ℚ) :
     fluxUnits (m + n) q = fluxUnits m q + fluxUnits n q := by
-  simp [fluxUnits, Nat.cast_add] <;> ring
+  simp [fluxUnits, Nat.cast_add] ; ring
 
 /-- Chern number of the circle fibration, with a common 4pi*q period. -/
 def firstChern (n : ℕ) : ℤ := -(n : ℤ)
 
 theorem chern_additive (m n : ℕ) :
     firstChern (m + n) = firstChern m + firstChern n := by
-  simp [firstChern, Nat.cast_add] <;> ring
+  simp [firstChern, Nat.cast_add] ; ring
 
 theorem one_and_two_centre_chern :
     firstChern 1 = -1 ∧ firstChern 2 = -2 := by
@@ -109,6 +109,6 @@ theorem one_and_two_centre_chern :
 /-- Correct normalization: one center contributes one negative charge. -/
 theorem local_chern_normalization (n : ℕ) :
     firstChern (n + 1) = firstChern n - 1 := by
-  simp [firstChern, Nat.cast_add] <;> ring
+  simp [firstChern, Nat.cast_add] ; ring
 
 end MulticentreObservation
