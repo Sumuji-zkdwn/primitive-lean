@@ -57,4 +57,30 @@ theorem reverse_orientation (k sigma : ℚ) :
   unfold connectionCurvature
   ring
 
+/-- The geodesic kinetic form in a Gibbons-Hawking metric, with the
+    three base-direction speeds grouped as vr, vt, vp. -/
+def liftedKinetic (h conn ut vr vt vp vy : ℚ) : ℚ :=
+  (-ut ^ 2 + h * (vr ^ 2 + vt ^ 2 + vp ^ 2) +
+    (vy + conn * vp) ^ 2 / h) / 2
+
+/-- Eliminate the unobserved fibre velocity at fixed conserved momentum q. -/
+def routhian (h conn q ut vr vt vp : ℚ) : ℚ :=
+  (-ut ^ 2 + h * (vr ^ 2 + vt ^ 2 + vp ^ 2) -
+    h * q ^ 2) / 2 + q * conn * vp
+
+/-- The *same* pure 5D metric gives magnetic minimal coupling on its
+    4D projected geodesics. This is an exact algebraic Routh reduction,
+    not an assumption of a separate electromagnetic force. -/
+theorem routh_reduction (h conn q ut vr vt vp : ℚ) (hh : h ≠ 0) :
+    liftedKinetic h conn ut vr vt vp (h * q - conn * vp) -
+      q * (h * q - conn * vp) =
+    routhian h conn q ut vr vt vp := by
+  unfold liftedKinetic routhian
+  field_simp [hh]
+  ring
+
+theorem reverse_charge_coupling (q conn vp : ℚ) :
+    (-q) * conn * vp = -(q * conn * vp) := by
+  ring
+
 end KKMonopoleGeometry
