@@ -9,9 +9,19 @@ import unittest
 
 from clock_avalanche_witness import verify
 from square_clock import add_one, burns, instruments, observe
+from stationary_risk import exact_small, experiment
 
 
 class ClockAvalancheTests(unittest.TestCase):
+    def test_uniform_sampler_and_pair_matching(self):
+        exact = exact_small()
+        self.assertEqual((exact["population"], exact["fibres"]), (192, 24))
+        self.assertEqual(exact["exact"], "2828358109/4428103680")
+        sample = experiment(2, 8, 20261121)
+        self.assertEqual((sample["side"], sample["N"], sample["matched_pairs"]), (8, 81, 8))
+        self.assertGreaterEqual(sample["candidate_offers"], sample["matched_pairs"])
+        self.assertEqual(sample["mean_square_error"], 281.3125)
+
     def test_diffusive_time_examples(self):
         for m, mass, low, high in [(2, 158, 95, 158), (3, 1938, 1449, 2124)]:
             with self.subTest(m=m):
