@@ -80,12 +80,27 @@ CIは [.github/workflows/forgetting-roundtrips.yml](../../.github/workflows/forg
 
 - `python3 -m unittest discover -s tests -p test_forgetting_roundtrips.py -v`：6件成功。
 - `python3 -O tools/forgetting_roundtrips.py`：全有限検算成功。
-- ローカル環境にLean/Lake実行ファイルがないため、この段階ではLeanのコンパイル成功を主張しない。専用CIの実行結果をここへ追記する。
+- ローカル環境にはLean/Lake実行ファイルがない。Leanのコンパイルと公理監査は、以下の固定環境の専用CIで実行した。
 
 ### 専用CIの履歴
 
 | 対象ソース | 実行 | 結果 |
 |---|---|---|
-| `c10f8b03625da8323924642a8607b926972c4aaa` | [run 44872049343](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44872049343) | Python検算・6 testsと既存3モジュールのコンパイルは成功。新規ファイルの関係証明2箇所で等式の自動代入先が合わず型エラー。明示した等式による `rw` へ修正し、再検証する。 |
+| `c10f8b03625da8323924642a8607b926972c4aaa` | [run 44872049343](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44872049343) | Python検算・6 testsと既存3モジュールのコンパイルは成功。新規ファイルの関係証明2箇所で等式の自動代入先が合わず型エラー。明示した等式による `rw` へ修正した。 |
+| `bc54e2d4c6f69a9ecb61eabee8bd3a7a411f443c` | [run 44872261013 / job 136749187371](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44872261013/job/136749187371) | **成功。** Python検算・6 tests、前提ビルド、4モジュールの `--trust=0` ソースコンパイル、生成宣言を含む79定理の公理監査がすべて成功。 |
+
+成功した実行のLeanは `4.36.0-rc2`、コンパイラcommitは `b35cb10cf2ced51a2fd1880cfdbf75c71ab7a35a`。新規LeanファイルのSHA-256は `e8790f847bdb7b69de808dbc09fe625de4a6887fa6bd00ab0877cc8980148e95`。新規24定理と依存3モジュールの定理を合わせた監査で、許可外公理・Leanの警告・エラーはいずれも0。
+
+[検証artifact](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44872261013/artifacts/14693524586) は `forgetting-roundtrips-44872261013`。そのZIPのSHA-256は `054ac06f662d70c969c772a4b7356b5b5197df10335c8b4196dc3d0fcee4aa33`。専用CIの成功をリポジトリ全体のすべてのworkflowの成功とは同一視しない。全体の最新状態は [PR #170 のchecks](https://github.com/Sumuji-zkdwn/primitive-lean/pull/170/checks) を参照する。
 
 既存の依存グラフworkflowは `docs/dependency/generated/` のみを更新するbot commitをPRブランチへ追加することがある。証明ソースを検証したコミットと、その生成物更新後のheadを区別する。
+
+### 生成済み縮約図の整合
+
+新規モジュールを含む依存グラフの自動更新後、旧縮約出力との不一致を既存CIが検出した。bot commit `3c6e1c6d96fb8658f951329144ede1765c25abe3` の `docs/dependency/generated/graph.json`（入力ソース `bc54e2d4c6f69a9ecb61eabee8bd3a7a411f443c`）を使い、既存の `tools/compress_dependency_graph.py` で `docs/compression/source-reachability.json` を再生成した。生成器の変更はない。
+
+- 入力graph SHA-256：`af3571dcf93c505f996e6fb993110fc14b31ed07097b7a6d1ee9d40b7d65a6b2`。
+- 出力SHA-256：`a1cbc219853259e5699e072714219449769d314ef967a713cb090c606e73b5a9`。
+- `test_compress_dependency_graph.py`：8 tests成功。生成器の `--check` も成功。
+
+これはソース依存関係の表示の整合性検査であり、上記のLeanカーネル検証とは別の結果である。

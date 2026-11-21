@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1383,
-    "eligible_direct_edges": 428,
-    "nodes": 431,
-    "retained_pairs": 307,
+    "all_source_edges": 1385,
+    "eligible_direct_edges": 429,
+    "nodes": 432,
+    "retained_pairs": 308,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 421,
-    "weak_edges_excluded": 955
+    "unique_eligible_pairs": 422,
+    "weak_edges_excluded": 956
   },
   "edges": [
     [
@@ -280,6 +280,10 @@
     [
       "main:lean/Research/FiniteMarkovTransport.lean",
       "main:lean/Research/OkanoharaTransport.lean"
+    ],
+    [
+      "main:lean/Research/ForgettingRoundTrips.lean",
+      "main:lean/Research/SiphonPredictiveQuotient.lean"
     ],
     [
       "main:lean/Research/OkanoharaTransport.lean",
@@ -1303,6 +1307,7 @@
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
+    "main:lean/Research/ForgettingRoundTrips.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
     "main:lean/Research/SignedCycleCounterexample.lean",
@@ -1674,8 +1679,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "17307681d0d478171ebf82ef4c003f39c5fe8bb873f9462985386a64290f1c4d",
-    "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+    "graph_sha256": "af3571dcf93c505f996e6fb993110fc14b31ed07097b7a6d1ee9d40b7d65a6b2",
+    "main_commit": "bc54e2d4c6f69a9ecb61eabee8bd3a7a411f443c",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
