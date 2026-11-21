@@ -48,6 +48,15 @@ def main():
     print('PASS: identical monopole q_total=2q; distinct quadrupole')
     print('      axis coefficient +2 q a²; equator coefficient -q a²')
 
+    # Stronger comparison: two different *smooth* 2-centre metrics, not
+    # a single charge-2 centre that is orbifold-singular at its origin.
+    H_at_a1 = H2_axis.subs({q:1,a:1,R:5})
+    H_at_a2 = H2_axis.subs({q:1,a:2,R:5})
+    check(H_at_a1-s.Rational(17,12), 'two-centre separation a=1')
+    check(H_at_a2-s.Rational(31,21), 'two-centre separation a=2')
+    check(H_at_a2-H_at_a1-s.Rational(5,84),'smooth pair gap')
+    print('PASS: smooth two-centre pair has equal flux, exact fine gap 5/84')
+
     # For a general radius sphere, local Chern = -1, exterior = -2.
     theta = s.symbols('theta', real=True)
     flux_one = s.integrate(-q*s.sin(theta),(theta,0,s.pi))*2*s.pi
