@@ -25,6 +25,15 @@ Use north and south gauge potentials A_N=k(cos(theta)-1)dphi and A_S=k(cos(theta
 
 Full smoothness at r=0 and global extension rely on standard Taub–NUT geometry. The independent checker establishes **local Ricci flatness on r>0** and exact Chern-number arithmetic, not a Lean proof of the smooth atlas.
 
+## Charged response from the same vacuum geometry
+
+For the 5D affine geodesic Lagrangian L=(1/2)G_AB u^A u^B, the fibre momentum q=∂L/∂u_psi=H^(-1)(u_psi+k cos(theta) u_phi) is conserved. Solving for u_psi and performing the Routh reduction L-q*u_psi gives
+
+    R_q = [-u_t²+H(u_r²+r²u_theta²+r²sin²(theta)u_phi²)-Hq²]/2
+          +q*k*cos(theta)*u_phi.
+
+The last term is *magnetic minimal coupling* with the same A_phi=k*cos(theta) extracted from the 5D metric, not an independently supplied force. The H q² term is an additional scalar/dilaton response. This exact identity was checked in SymPy and as an algebraic Routh identity in Lean; no quantum particle spectrum or physical magnitude of electric charge is obtained.
+
 ## Lean/Python provenance and bounds
 
 - lean/Research/KKMonopoleGeometry.lean: algebraic constant radial flux, patch transition, orientation reversal and normalised Chern arithmetic. This does not directly check differential geometry in Lean.
