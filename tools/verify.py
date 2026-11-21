@@ -463,8 +463,8 @@ def main(argv=None):
             [sys.executable, "-B", "-m", "unittest", "discover", "-s", "planar_followup",
              "-p", "test_clock_avalanche_witness.py", "-v"],
         ]
-        for command in checks:
-            result = subprocess.run(command, cwd=experiment)
+        for check_args in checks:
+            result = subprocess.run(check_args, cwd=experiment)
             if result.returncode:
                 return result.returncode
         return 0
