@@ -69,6 +69,22 @@ def main():
     zero(mass2/(lam/3)+6)
     print('PASS for all n>0: m_radion²=-2lambda=-6H²')
 
+    # Independent scale changes of CP2, S2, S2, in the 4D Einstein frame.
+    dims = [4, 2, 2]
+    b = s.symbols('b0:3', real=True)
+    volume = sum(dims[i]*b[i] for i in range(3))
+    potential = lam*s.exp(-volume)*(
+        (sum(dims)+2)-sum(dims[i]*s.exp(-2*b[i]) for i in range(3)))
+    Hmatrix = s.Matrix([
+        [s.diff(potential,b[i],b[j]).subs({v:0 for v in b})
+         for j in range(3)] for i in range(3)])
+    Kmatrix = s.diag(*dims) + s.Matrix(dims)*s.Matrix(dims).T/2
+    assert (Hmatrix + 4*lam*Kmatrix).applyfunc(s.simplify) == s.zeros(3)
+    assert [Kmatrix[:i,:i].det() for i in (1,2,3)] == [12,32,80]
+    assert ((2*Kmatrix).inv()*Hmatrix + 2*lam*s.eye(3)).applyfunc(
+        s.simplify) == s.zeros(3)
+    print('PASS CP2-S2-S2 all 3 factor scales: m²=-2lambda (negative for lambda>0)')
+
     # 12D product, using standard Ricci(CP²,g_FS)=6*g_FS.
     assert [s.Rational(3,3),s.Rational(6,6),s.Rational(1,1),
             s.Rational(1,1)] == [1]*4
