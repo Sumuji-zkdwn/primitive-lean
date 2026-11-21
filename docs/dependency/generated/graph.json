@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "c10f8b03625da8323924642a8607b926972c4aaa",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1662,6 +1662,53 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
+    },
+    {
+      "id": "main:lean/Research/ForgettingRoundTrips.lean",
+      "scope": "main",
+      "path": "lean/Research/ForgettingRoundTrips.lean",
+      "group": "Other",
+      "namespace": "Elastica.ForgettingRoundTrips",
+      "declarations": [
+        "Rel",
+        "comp",
+        "graph",
+        "idRel",
+        "fullInverse",
+        "FiberSupported",
+        "comp_assoc",
+        "graph_decoder_iff_supported",
+        "first_roundtrip_iff_identity",
+        "first_roundtrip_iff_supported",
+        "second_roundtrip_of_identity",
+        "second_roundtrip_of_first",
+        "saturation_idempotent_of_identity",
+        "full_inverse_first_roundtrip",
+        "full_inverse_second_roundtrip",
+        "full_inverse_saturation_iff",
+        "full_inverse_contains_original",
+        "full_inverse_saturation_idempotent",
+        "full_inverse_iff_contains_all",
+        "constantEncode",
+        "representativeDecoder",
+        "representative_consistent",
+        "representative_roundtrips",
+        "representative_omits_original",
+        "badDecoder",
+        "second_only_counterexample",
+        "signature_inverse_roundtrips",
+        "signature_inverse_contains_mirror",
+        "signature_has_distinct_pair",
+        "no_full_state_decoder",
+        "fresh_does_not_descend",
+        "sequential_invariant_reconstruction",
+        "sequentialSignature",
+        "sequentialSignature_injective"
+      ],
+      "imports": [
+        "Research.SiphonPredictiveQuotient"
+      ],
+      "sha256": "90bcd22555c3ca0fdcad6fea53591f168bb40ac4d6a36d098352747e5871b384"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -15760,6 +15807,23 @@
       ]
     },
     {
+      "from": "main:lean/Research/ForgettingRoundTrips.lean",
+      "to": "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.SiphonPredictiveQuotient"
+      ]
+    },
+    {
+      "from": "main:lean/Research/ForgettingRoundTrips.lean",
+      "to": "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "readout_fresh_E",
+        "signature_mirror"
+      ]
+    },
+    {
       "from": "main:lean/Research/OkanoharaTransport.lean",
       "to": "main:lean/Elastica/Examples.lean",
       "kind": "exact_import",
@@ -27677,28 +27741,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "c10f8b03625da8323924642a8607b926972c4aaa",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "c10f8b03625da8323924642a8607b926972c4aaa",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "c10f8b03625da8323924642a8607b926972c4aaa",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "c10f8b03625da8323924642a8607b926972c4aaa",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
