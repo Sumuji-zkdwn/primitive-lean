@@ -70,7 +70,10 @@ def distanceHistogram (es : List Edge) : List Nat :=
 
 /-- A purely spatial measurement, requiring an extra vertex placement. -/
 def spatialLongEdges (pos : Vertex → Nat) (es : List Edge) : Nat :=
-  (es.filter (fun e => decide (Nat.dist (pos e.1) (pos e.2) ≥ 3))).length
+  (es.filter fun e =>
+    let a := pos e.1
+    let b := pos e.2
+    decide (max a b - min a b ≥ 3)).length
 
 private def naturalPosition (v : Vertex) : Nat := v.val
 private def zeroLongPosition (v : Vertex) : Nat :=
