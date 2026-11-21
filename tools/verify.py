@@ -456,8 +456,18 @@ def main(argv=None):
         if args.rebuild:
             parser.error("--sandpile-laakso-only always recompiles the experiment's Lean modules")
         experiment = ROOT / "experiments" / "sandpile_laakso"
-        return subprocess.run([sys.executable, "-B", "-X", "utf8", "formalization/verify.py"],
-                              cwd=experiment).returncode
+        checks = [
+            [sys.executable, "-B", "-X", "utf8", "formalization/verify.py"],
+            ["elan", "run", "leanprover/lean4:v4.35.0", "lean", "--trust=0", "-DwarningAsError=true",
+             "formalization/ClockAvalancheExample.lean"],
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "planar_followup",
+             "-p", "test_clock_avalanche_witness.py", "-v"],
+        ]
+        for command in checks:
+            result = subprocess.run(command, cwd=experiment)
+            if result.returncode:
+                return result.returncode
+        return 0
     if args.toolchain_modules_only:
         if args.rebuild:
             parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")

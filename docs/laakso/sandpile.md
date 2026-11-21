@@ -43,3 +43,5 @@ Leanの統合定理 `SingleSquare.single_square_realization` は、任意の $a>
 2026年11月21日の記録では、空のビルド先からLeanの9モジュールを `--trust=0` で検査し、82宣言の公理依存を確認した。統合定理の依存公理は `Classical.choice`、`Quot.sound`、`propext` の3つ。有限格子と距離に関するPythonの検査は8件すべて成功した。[ソースハッシュと検証結果](../../experiments/sandpile_laakso/formalization/verification.json)
 
 この存在定理の対象は、砂山の**配置の観測と粒の投入操作**から構成した空間である。一回の雪崩が平面に描く模様そのものが同じ計量と解析構造を持つかは、別の問いとして残る。[平面砂山の発火回数について得られた結果](../../experiments/sandpile_laakso/planar_followup/RESULTS.md)
+
+8×8で同じ時計を81手読んでも、全盤の発火は95回と158回に分かれる。初期総粒数まで合わせた二枚の盤から、一般の大きさで予測誤差が残ることを示した。[二枚の盤の図と証明](../../experiments/sandpile_laakso/clock-and-avalanche.md)
