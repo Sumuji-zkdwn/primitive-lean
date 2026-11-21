@@ -52,6 +52,22 @@ def main():
     print('PASS full 4D Taub-NUT Ricci tensor (all 10 independent entries)')
     print('PASS 5D Ricci-flat after adding trivial -dt²')
 
+    # Routh-reduce geodesics in the SAME vacuum geometry.
+    ut,ur,uth,uph,upsi,q=s.symbols('ut ur uth uph upsi q',real=True)
+    H=1+k/r
+    A=k*s.cos(theta)
+    L=(-ut**2+H*(ur**2+r**2*uth**2+r**2*s.sin(theta)**2*uph**2)
+       +(upsi+A*uph)**2/H)/2
+    assert s.simplify(s.diff(L,upsi)-(upsi+A*uph)/H)==0
+    reduced=s.simplify((L-q*upsi).subs(upsi,H*q-A*uph))
+    expected=(-ut**2+H*(ur**2+r**2*uth**2+r**2*s.sin(theta)**2*uph**2)
+              -H*q**2)/2+q*A*uph
+    assert s.simplify(reduced-expected)==0
+    assert s.simplify(s.diff(reduced,uph)-
+        (H*r**2*s.sin(theta)**2*uph+q*A))==0
+    assert s.simplify(s.diff(A,theta)+k*s.sin(theta))==0
+    print('PASS 4D magnetic minimal coupling from the same 5D vacuum metric')
+
     # chi=psi/(2k) has period 2pi, F=-sin(theta)/2 dtheta^dphi
     u=s.symbols('u',real=True)
     c1=s.simplify(s.integrate(-s.sin(u)/2,(u,0,s.pi)) *
