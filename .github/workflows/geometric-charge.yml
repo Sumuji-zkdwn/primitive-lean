@@ -1,0 +1,85 @@
+name: Geometric charge from a single metric
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/GeometricCharge.lean'
+      - 'tools/check_geometric_charge.py'
+      - 'docs/research/2026-11-22-geometric-charge.md'
+      - '.github/workflows/geometric-charge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  geometric-charge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install fixed Lean/mathlib version
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel compilation
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/GeometricCharge.olean Research/GeometricCharge.lean 2>&1 | tee ../geometric-charge-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../geometric-charge-lean.log; then exit 1; fi
+      - name: Axiom audit
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          src = pathlib.Path('Research/GeometricCharge.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b', src, re.M)
+          names = re.findall(r'^theorem\s+(\w+)', src, re.M)
+          assert len(names) >= 10, names
+          pathlib.Path('GeometricChargeAudit.lean').write_text(
+              'import Research.GeometricCharge\n' + ''.join(
+              '#print axioms GeometricCharge.' + x + '\n' for x in names))
+          pathlib.Path('../geometric-charge-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 GeometricChargeAudit.lean 2>&1 | tee ../geometric-charge-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s = pathlib.Path('../geometric-charge-audit.log').read_text()
+          n = int(pathlib.Path('../geometric-charge-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b', s), s
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', s)
+          absent = s.count('does not depend on any axioms')
+          assert len(entries) + absent == n, (n, len(entries), absent)
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for entry in entries:
+              used = set(filter(None, (x.strip() for x in entry.split(','))))
+              assert used <= allowed, used - allowed
+          print('Axiom-checked theorem declarations:', n)
+          PY
+      - name: Check exact symbolic geodesic identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_geometric_charge.py 2>&1 | tee geometric-charge-python.log
+      - name: Attach exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: geometric-charge
+          path: |
+            geometric-charge-lean.log
+            geometric-charge-audit.log
+            geometric-charge-count.txt
+            geometric-charge-python.log
+          if-no-files-found: warn
