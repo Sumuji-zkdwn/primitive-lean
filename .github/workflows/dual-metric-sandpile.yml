@@ -1,0 +1,83 @@
+name: Dual-metric sandpile (Lean proof and finite oracle)
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/DualMetricSandpile.lean'
+      - 'tests/test_dual_metric_sandpile.py'
+      - 'docs/research/2026-11-22-dual-metric-sandpile.md'
+      - '.github/workflows/dual-metric-sandpile.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dual-metric-sandpile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Typecheck Lean kernel proofs
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/DualMetricSandpile.olean Research/DualMetricSandpile.lean 2>&1 | tee ../dual-metric-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../dual-metric-lean.log; then exit 1; fi
+      - name: Axiom audit
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          p = pathlib.Path('Research/DualMetricSandpile.lean')
+          source = p.read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b', source, re.M)
+          names = re.findall(r'^theorem\s+(\w+)', source, re.M)
+          assert len(names) >= 15, names
+          pathlib.Path('DualMetricSandpileAudit.lean').write_text(
+              'import Research.DualMetricSandpile\n' + ''.join(
+                '#print axioms DualMetricSandpile.' + name + '\n' for name in names))
+          pathlib.Path('../dual-metric-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 DualMetricSandpileAudit.lean 2>&1 | tee ../dual-metric-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s = pathlib.Path('../dual-metric-audit.log').read_text()
+          n = int(pathlib.Path('../dual-metric-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b', s), s
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', s)
+          absent = s.count('does not depend on any axioms')
+          assert len(entries) + absent == n, (n, len(entries), absent)
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for entry in entries:
+              used = set(filter(None, (x.strip() for x in entry.split(','))))
+              assert used <= allowed, used - allowed
+          print('Axiom-checked theorem declarations:', n)
+          PY
+      - name: Independent exact Python oracle
+        shell: bash
+        run: python -B tests/test_dual_metric_sandpile.py 2>&1 | tee dual-metric-python.log
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: dual-metric-sandpile
+          path: |
+            dual-metric-lean.log
+            dual-metric-audit.log
+            dual-metric-count.txt
+            dual-metric-python.log
+          if-no-files-found: warn
