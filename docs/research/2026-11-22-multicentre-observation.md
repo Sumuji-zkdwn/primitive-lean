@@ -55,6 +55,18 @@ This directional quadrupole differentiates the two-centre geometry even though t
 
 The phrase "single object" therefore means an **operational equivalence under a restricted set of far-field measurements**. It does not mean that distinct events are physically identical or that any complete past is destroyed. Allowing more sensitive measurements separates the histories/geometries. In the user's sandpile language, the coarse readout is a quotient; the higher multipole is a distinguishing probe.
 
+### Comparison without a singular effective single centre
+
+An even cleaner witness uses **two genuinely smooth two-centre Gibbons--Hawking solutions** with the same q=1 and common psi period 4pi, but differing centre separations 2a. One solution has a=1, the other has a=2. Both have total charge -2 and leading far-field potential 1+2/r.
+
+At axis distance R=5, direct rational evaluation gives
+
+    H_{a=1}(R=5) = 17/12,
+    H_{a=2}(R=5) = 31/21,
+    H_{a=2} - H_{a=1} = 5/84.
+
+Thus a coarse observer reading only monopole charge gives the **same answer** for two smooth distinct internal geometries, while a finer observer recovers their separation. This pair is not an exact equality of full external fields, nor a demonstration that the intrinsic histories are physically identical. It is a counterexample to inferring internal geometric individuality from the leading observable.
+
 ## A topological invariant, not merely an arbitrary visual pattern
 
 Each centre contributes flux -4pi*q for the local connection A. With normalized circle angle chi=psi/(2q), the small enclosing sphere has first Chern number -1. A large sphere surrounding both centres has first Chern number -2. For N equal centres, the total Chern number is -N (with the same normalization). The gauge bundle itself encodes nontrivial topology.
