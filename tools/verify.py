@@ -444,12 +444,18 @@ def main(argv=None):
     modes.add_argument("--lean-only", action="store_true")
     modes.add_argument("--proof-only", action="store_true")
     modes.add_argument("--toolchain-modules-only", action="store_true", help="Compile and axiom-audit every tracked standalone Lean module")
+    modes.add_argument("--planar-sync-only", action="store_true", help="Verify planar synchronization and projective locking, including kernel axiom audit")
     modes.add_argument("--two-wavelength-only", action="store_true", help="Verify the isolated PR #92 two-wavelength extension")
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
     args = parser.parse_args(argv)
+    if args.planar_sync_only:
+        if args.rebuild:
+            parser.error("--rebuild is not supported by --planar-sync-only")
+        from verify_planar_sync import main as verify_planar_sync
+        return verify_planar_sync([])
     if args.toolchain_modules_only:
         if args.rebuild:
             parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")

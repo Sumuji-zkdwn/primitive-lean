@@ -1,0 +1,88 @@
+name: Planar synchronization and projective locking
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/PlanarSyncMoments.lean'
+      - 'lean/ProjectiveLock.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - 'tools/planar_sync/**'
+      - 'tools/verify_planar_sync.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'tools/verify.py'
+      - 'docs/research/2026-11-22-planar-sync-projective-lock.md'
+      - 'docs/research/figures/planar-sync-geometry.png'
+      - 'docs/verification/2026-11-22-planar-sync-projective-lock.md'
+      - '.github/workflows/planar-sync-projective-lock.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'lean/PlanarSyncMoments.lean'
+      - 'lean/ProjectiveLock.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - 'tools/planar_sync/**'
+      - 'tools/verify_planar_sync.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'tools/verify.py'
+      - 'docs/research/2026-11-22-planar-sync-projective-lock.md'
+      - 'docs/research/figures/planar-sync-geometry.png'
+      - 'docs/verification/2026-11-22-planar-sync-projective-lock.md'
+      - '.github/workflows/planar-sync-projective-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: planar-sync-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Exact model checks and Lean axiom audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Check out the exact proposed source
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install numerical dependencies
+        run: python -m pip install numpy==2.3.5 scipy==1.17.0
+
+      - name: Install repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Reproduce model checks and kernel-audit both modules
+        run: python -B -X utf8 tools/verify.py --planar-sync-only
+
+      - name: Preserve numerical and kernel evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: planar-sync-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            verification/planar-sync/
+            verification/planar-sync-kernel/
+          if-no-files-found: warn
+          retention-days: 30
