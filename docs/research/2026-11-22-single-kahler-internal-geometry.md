@@ -74,6 +74,37 @@ The third sphere has **nonconstant curvature**, so it is not an Einstein surface
 
 Consequently, the above product K is not an Einstein manifold, and an *unwarped* product of four-dimensional flat Minkowski space with K is **not a solution** of the pure 12-dimensional vacuum Einstein equations. Nor can one fix it by merely adding a single constant cosmological term to the full product Einstein equation, as the internal varying Ricci eigenvalue would not match a constant. This is an exact obstruction to the **specific simple ansatz**, not a no-go theorem for all gravity-only reconstructions. Warps, non-product internal spaces, additional geometric degrees of freedom and/or modified field equations could change the assumptions; each requires fresh proof. Introducing external gauge fluxes as independent matter would abandon the strong gravity-only premise.
 
+## Stronger no-go: smooth compact warped Minkowski vacua cannot rescue non-Abelian Killing symmetry
+
+This goes beyond the failure of the particular squashed S² metric. Consider an arbitrary smooth, positive warp factor \(e^{A(y)}\) on a **connected compact boundaryless** Riemannian internal manifold \(K\), with no cross-metric vector components and external Minkowski metric:
+
+\[
+ds_D^2=e^{2A(y)}\eta_{\mu\nu}dx^\mu dx^\nu+g_{mn}(y)dy^m dy^n
+\]
+
+for four external coordinates. Assume the **full D-dimensional metric is Ricci flat** (pure vacuum Einstein equations without cosmological term, extra stress tensor, or singular sources). The \(\mu\nu\) components of the standard warped-product Ricci identity become
+
+\[
+0=R^{(D)}_{\mu\nu}
+=-e^{2A}\eta_{\mu\nu}\,[\Delta_K A+4|\nabla A|^2].
+\]
+
+Therefore \(\Delta_K(e^{4A})=4e^{4A}(\Delta_K A+4|\nabla A|^2)=0\). The maximum principle for smooth harmonic functions on compact connected boundaryless K implies \(e^{4A}\), hence \(A\), is constant. The remaining internal Einstein equations give \(\mathrm{Ric}_K=0\).
+
+Now apply **Bochner's theorem**: on a compact Ricci-flat Riemannian manifold, any Killing vector field \(X\) satisfies
+\[
+\int_K |\nabla X|^2=\int_K\mathrm{Ric}(X,X)=0,
+\]
+so \(\nabla X=0\). Parallel Killing fields commute: \([X,Y]=\nabla_XY-\nabla_YX=0\). Consequently the connected isometry group of K is a torus, and its Lie algebra is **abelian**. It cannot contain the required non-Abelian \(\mathfrak{su}(2)\) or \(\mathfrak{su}(3)\) Lie subalgebras.
+
+**Exact conditional result:** a smooth boundaryless compact internal K with an unwarped **or smoothly warped block-diagonal Minkowski4 external metric**, governed solely by D-dimensional *vacuum* Einstein equations, cannot generate non-Abelian gauge bosons by the usual Kaluza–Klein mechanism of reducing **internal Killing isometries**. Simply allowing a warp factor does **not** remove the obstruction.
+
+**What this theorem does not forbid:** general off-diagonal/fully entangled higher-dimensional metrics, noncompact K, boundaries or singularities, curved or time-dependent external geometry, modified gravitational field equations, non-Killing/massive gauge sectors, or additional stress tensors. Each possibility changes a hypothesis and requires separate checks. Do not incorrectly conclude that every gravity-only unification is impossible.
+
+A finite sandpile analogy is supplied by the same maximum principle: a harmonic function on any finite connected graph is constant, just as \(e^{4A}\) must be constant here. This is an analogy, not a replacement for the Riemannian proof.
+
+**Primary references:** Werner Ballmann, *Lectures on Kähler Manifolds*, Theorem 6.1 and Corollary 6.2 (Bochner's theorem, compact Ricci nonpositive ⇒ torus identity isometries), https://people.maths.ox.ac.uk/joyce/Nairobi2019/BallmannKahlerManifolds.pdf; I. P. Neupane, *Warped Ricci-flat reductions*, Phys. Rev. D 90, 045013 (2014), https://doi.org/10.1103/PhysRevD.90.045013.
+
 ## Reproducible boundary
 
 - `tools/check_single_internal_geometry.py`: exact SymPy polar curvature, pole smoothness, Gauss–Bonnet, area, index arithmetic, and six SM Z6 congruences.
