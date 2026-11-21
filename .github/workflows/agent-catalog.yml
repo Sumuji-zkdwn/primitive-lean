@@ -13,6 +13,8 @@ on:
   push:
     branches: [main]
     paths:
+      - 'lean/**'
+      - 'linear_input/lean_check/**'
       - 'tools/export_agent_catalog.py'
       - 'tests/test_export_agent_catalog.py'
       - 'docs/commercial/**'
