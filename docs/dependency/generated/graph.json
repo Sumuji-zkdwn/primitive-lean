@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "4caf86beba9f170abbd79f2b36c1f88b0b80ad08",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1664,6 +1664,38 @@
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
     },
     {
+      "id": "main:lean/Research/NonAbelianMetricHolonomy.lean",
+      "scope": "main",
+      "path": "lean/Research/NonAbelianMetricHolonomy.lean",
+      "group": "Other",
+      "namespace": "NonAbelianMetricHolonomy",
+      "declarations": [
+        "Link",
+        "Point",
+        "reframe",
+        "move",
+        "transport",
+        "transport_covariant",
+        "holonomy",
+        "holonomy_conjugacy",
+        "horizontal",
+        "vertical",
+        "edge",
+        "horizontal_covariant",
+        "vertical_covariant",
+        "edge_covariant",
+        "move_inverse",
+        "swap01",
+        "swap12",
+        "swaps_do_not_commute",
+        "noncommuting_transport"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "bcd4cfcfb5ca04da7a12614789aa53785e6d5b86ec72f3b9eac7de5d8005963f"
+    },
+    {
       "id": "main:lean/Research/OkanoharaTransport.lean",
       "scope": "main",
       "path": "lean/Research/OkanoharaTransport.lean",
@@ -2110,6 +2142,26 @@
         "Research.SphereClockWordNormalForm"
       ],
       "sha256": "f87463a6e512145a0d1f6a8b7a31f472564e0edc0252f2fcb67a669bb4ce7f48"
+    },
+    {
+      "id": "main:lean/Research/SpinYangMillsWitness.lean",
+      "scope": "main",
+      "path": "lean/Research/SpinYangMillsWitness.lean",
+      "group": "Other",
+      "namespace": "SpinYangMillsWitness",
+      "declarations": [
+        "eta",
+        "eta_skew",
+        "eta_diagonal_zero",
+        "self_dual_pairs",
+        "curvature_self_dual",
+        "spin_curvature_nontrivial",
+        "scaled_skew"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "9052cc00b028823b9340736ac7b052a10861bfac65995d5ea8aa15b481c8f60a"
     },
     {
       "id": "main:lean/Research/SquareZeroNetwork.lean",
@@ -27677,28 +27729,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "4caf86beba9f170abbd79f2b36c1f88b0b80ad08",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "4caf86beba9f170abbd79f2b36c1f88b0b80ad08",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "4caf86beba9f170abbd79f2b36c1f88b0b80ad08",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "4caf86beba9f170abbd79f2b36c1f88b0b80ad08",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
