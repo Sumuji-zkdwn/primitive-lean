@@ -23,12 +23,8 @@ def lap (u : Profile) (i : Fin 3) : ℚ :=
 theorem closed_harmonic_constant (u : Profile)
     (h : ∀ i, lap u i = 0) :
     u 0 = u 1 ∧ u 1 = u 2 := by
-  have h0 := h 0
-  have h2 := h 2
-  simp only [lap, ite_true] at h0
-  have : (2 : Fin 3) ≠ 0 := by decide
-  have : (2 : Fin 3) ≠ 1 := by decide
-  simp [lap] at h2
+  have h0 : u 1 - u 0 = 0 := by simpa [lap] using h 0
+  have h2 : u 1 - u 2 = 0 := by simpa [lap] using h 2
   constructor <;> linarith
 
 /-- A fixed boundary permits a nonconstant function harmonic at the interior. -/
