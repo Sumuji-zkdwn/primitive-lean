@@ -197,7 +197,7 @@ theorem encode_invertAll (es : List Edge) (x : Config) :
     encode es (invertAll x) = encode es x := by
   induction es with
   | nil => rfl
-  | cons e tail ih => simp [encode, edgeBit_invertAll, ih]
+  | cons e tail ih => exact congrArg₂ List.cons (edgeBit_invertAll x e) ih
 
 def allZero : Config := fun _ => false
 def allOne : Config := fun _ => true
@@ -211,10 +211,8 @@ theorem encode_not_injective (es : List Edge) : ¬ Function.Injective (encode es
   have hsame : encode es allZero = encode es allOne := by
     rw [← hz]
     exact (encode_invertAll es allZero).symm
-  have heq := inj hsame
-  have h0 := congrArg (fun x : Config => x (0 : Vertex)) heq
-  have hf : false = true := by simpa [allZero, allOne] using h0
-  cases hf
+  have h0 : false = true := congrArg (fun x : Config => x (0 : Vertex)) (inj hsame)
+  cases h0
 
 /-- XOR along a two-edge path recovers the endpoint relation. -/
 theorem edgeBit_chain (x : Config) (u v w : Vertex) :
