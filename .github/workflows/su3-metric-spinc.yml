@@ -1,0 +1,88 @@
+name: Gravity-only SU3 metric and Spin-c obstruction
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/CP2SpinCArithmetic.lean'
+      - 'tools/check_su3_metric.py'
+      - 'tools/check_spinc_index.py'
+      - 'docs/research/2026-11-22-su3-metric-spinc.md'
+      - '.github/workflows/su3-metric-spinc.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  su3-spinc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean kernel-check spin-c arithmetic
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/CP2SpinCArithmetic.olean Research/CP2SpinCArithmetic.lean 2>&1 | tee ../spinc-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../spinc-lean.log; then exit 1; fi
+      - name: Audit all axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/CP2SpinCArithmetic.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=4
+          pathlib.Path('CP2SpinCAudit.lean').write_text(
+              'import Research.CP2SpinCArithmetic\n'+''.join(
+              '#print axioms CP2SpinCArithmetic.'+name+'\n' for name in names))
+          pathlib.Path('../spinc-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 CP2SpinCAudit.lean 2>&1 | tee ../spinc-audit.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../spinc-audit.log').read_text()
+          n=int(pathlib.Path('../spinc-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for e in entries:
+              used=set(filter(None,(x.strip() for x in e.split(','))))
+              assert used<=allowed,used-allowed
+          print('Kernel and allowed-axiom declarations:',n)
+          PY
+      - name: Exact SU3 stabilizer and Spin-c index checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_su3_metric.py 2>&1 | tee su3-metric.log
+          python -B tools/check_spinc_index.py 2>&1 | tee spinc-index.log
+      - name: Save verification
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: su3-metric-spinc
+          path: |
+            spinc-lean.log
+            spinc-audit.log
+            spinc-count.txt
+            su3-metric.log
+            spinc-index.log
+          if-no-files-found: warn
