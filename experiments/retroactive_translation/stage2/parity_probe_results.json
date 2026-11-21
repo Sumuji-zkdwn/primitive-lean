@@ -1,0 +1,1884 @@
+{
+  "title": "Parity-probe model with independent public column update",
+  "verification_status": "All exact assertions passed",
+  "arithmetic": "fractions.Fraction throughout optimization and comparisons; decimal display only",
+  "random_samples": 0,
+  "model_assumptions": [
+    "The table has M*N mutually independent uniform bits; its prior is public.",
+    "One oracle query reveals one selected table bit and costs one unit.",
+    "The adversary retains every observed bit and all opaque raw data; memory and other computation are unlimited.",
+    "Opaque storage does not itself evaluate the table bits in this query model.",
+    "At most p probes precede J, and at most q follow J.",
+    "J is uniform on the M columns and independent of preprocessing, table contents, and adversarial randomness.",
+    "The goal is parity of column J; it changes with J and is not a previously fixed message.",
+    "No independent plaintext authentication or other side information is supplied.",
+    "Repeated probes of already known bits are omitted as dominated actions."
+  ],
+  "formula": {
+    "when_q_lt_N": "1/2 + min(M, floor(p/(N-q)))/(2*M)",
+    "when_q_ge_N": "1"
+  },
+  "proof_outline": [
+    "Conditioned on any adaptive query transcript, every unqueried bit is still an independent fair bit.",
+    "A column with even one unknown bit has uniform parity, so a best guess succeeds with probability 1/2.",
+    "For q<N, a column can be completed online only if at least N-q of its bits were already probed.",
+    "On every offline decision-tree branch, at most min(M, floor(p/(N-q))) columns meet that condition.",
+    "Because J is independent and uniform, even all adaptive strategies average at most 1/2 plus half that covered-column fraction.",
+    "Achieve the bound by probing exactly N-q bits in each of k=min(M,floor(p/(N-q))) columns, completing the chosen column online when it is covered, and guessing otherwise.",
+    "For q>=N, probe every bit of the chosen column after J and answer perfectly."
+  ],
+  "small_full_adaptive_DP": {
+    "N": 3,
+    "M": 2,
+    "strategy_optimization": "Full observed-mask-and-values adaptive Bellman DP",
+    "budget_case_count": 28,
+    "p_range_inclusive": [
+      0,
+      6
+    ],
+    "q_range_inclusive": [
+      0,
+      3
+    ],
+    "table_count_per_case": 64,
+    "total_replayed_table_J_pairs_across_budget_cases": 3584,
+    "offline_DP_cached_states": 5624,
+    "online_DP_cached_states": 3448,
+    "cases": [
+      {
+        "p": 0,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 64,
+          "success_probability": {
+            "exact": "1/2",
+            "numerator": 1,
+            "denominator": 2,
+            "decimal_for_display": 0.5
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 0,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 1,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 64,
+          "success_probability": {
+            "exact": "1/2",
+            "numerator": 1,
+            "denominator": 2,
+            "decimal_for_display": 0.5
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 0,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 2,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 64,
+          "success_probability": {
+            "exact": "1/2",
+            "numerator": 1,
+            "denominator": 2,
+            "decimal_for_display": 0.5
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 0,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 3,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 96,
+          "success_probability": {
+            "exact": "3/4",
+            "numerator": 3,
+            "denominator": 4,
+            "decimal_for_display": 0.75
+          },
+          "maximum_offline_queries": 3,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 1,
+          "offline_query_count_histogram_over_tables": {
+            "3": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 4,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 96,
+          "success_probability": {
+            "exact": "3/4",
+            "numerator": 3,
+            "denominator": 4,
+            "decimal_for_display": 0.75
+          },
+          "maximum_offline_queries": 3,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 1,
+          "offline_query_count_histogram_over_tables": {
+            "3": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 5,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 96,
+          "success_probability": {
+            "exact": "3/4",
+            "numerator": 3,
+            "denominator": 4,
+            "decimal_for_display": 0.75
+          },
+          "maximum_offline_queries": 3,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 1,
+          "offline_query_count_histogram_over_tables": {
+            "3": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 6,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 6,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "6": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 0,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 64,
+          "success_probability": {
+            "exact": "1/2",
+            "numerator": 1,
+            "denominator": 2,
+            "decimal_for_display": 0.5
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 0,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 1,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 64,
+          "success_probability": {
+            "exact": "1/2",
+            "numerator": 1,
+            "denominator": 2,
+            "decimal_for_display": 0.5
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 0,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 2,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 96,
+          "success_probability": {
+            "exact": "3/4",
+            "numerator": 3,
+            "denominator": 4,
+            "decimal_for_display": 0.75
+          },
+          "maximum_offline_queries": 2,
+          "maximum_online_queries": 1,
+          "maximum_covered_columns_before_J": 1,
+          "offline_query_count_histogram_over_tables": {
+            "2": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "1": 64
+          }
+        }
+      },
+      {
+        "p": 3,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 96,
+          "success_probability": {
+            "exact": "3/4",
+            "numerator": 3,
+            "denominator": 4,
+            "decimal_for_display": 0.75
+          },
+          "maximum_offline_queries": 2,
+          "maximum_online_queries": 1,
+          "maximum_covered_columns_before_J": 1,
+          "offline_query_count_histogram_over_tables": {
+            "2": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "1": 64
+          }
+        }
+      },
+      {
+        "p": 4,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 4,
+          "maximum_online_queries": 1,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "4": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "1": 128
+          }
+        }
+      },
+      {
+        "p": 5,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 5,
+          "maximum_online_queries": 1,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "5": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "1": 64
+          }
+        }
+      },
+      {
+        "p": 6,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 5,
+          "maximum_online_queries": 1,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "5": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "1": 64
+          }
+        }
+      },
+      {
+        "p": 0,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 64,
+          "success_probability": {
+            "exact": "1/2",
+            "numerator": 1,
+            "denominator": 2,
+            "decimal_for_display": 0.5
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 0,
+          "maximum_covered_columns_before_J": 0,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 128
+          }
+        }
+      },
+      {
+        "p": 1,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 96,
+          "success_probability": {
+            "exact": "3/4",
+            "numerator": 3,
+            "denominator": 4,
+            "decimal_for_display": 0.75
+          },
+          "maximum_offline_queries": 1,
+          "maximum_online_queries": 2,
+          "maximum_covered_columns_before_J": 1,
+          "offline_query_count_histogram_over_tables": {
+            "1": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "2": 64
+          }
+        }
+      },
+      {
+        "p": 2,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 2,
+          "maximum_online_queries": 2,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "2": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "2": 128
+          }
+        }
+      },
+      {
+        "p": 3,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 3,
+          "maximum_online_queries": 2,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "3": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "1": 64,
+            "2": 64
+          }
+        }
+      },
+      {
+        "p": 4,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 4,
+          "maximum_online_queries": 2,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "4": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "2": 64
+          }
+        }
+      },
+      {
+        "p": 5,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 4,
+          "maximum_online_queries": 2,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "4": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "2": 64
+          }
+        }
+      },
+      {
+        "p": 6,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 4,
+          "maximum_online_queries": 2,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "4": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "0": 64,
+            "2": 64
+          }
+        }
+      },
+      {
+        "p": 0,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      },
+      {
+        "p": 1,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      },
+      {
+        "p": 2,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      },
+      {
+        "p": 3,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      },
+      {
+        "p": 4,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      },
+      {
+        "p": 5,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      },
+      {
+        "p": 6,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true,
+        "mask_symmetry_DP_match": true,
+        "policy_replay": {
+          "table_count": 64,
+          "column_choices_per_table": 2,
+          "trials": 128,
+          "successes": 128,
+          "success_probability": {
+            "exact": "1",
+            "numerator": 1,
+            "denominator": 1,
+            "decimal_for_display": 1.0
+          },
+          "maximum_offline_queries": 0,
+          "maximum_online_queries": 3,
+          "maximum_covered_columns_before_J": 2,
+          "offline_query_count_histogram_over_tables": {
+            "0": 64
+          },
+          "online_query_count_histogram_over_table_J_pairs": {
+            "3": 128
+          }
+        }
+      }
+    ]
+  },
+  "larger_symmetry_DP": {
+    "N": 4,
+    "M": 3,
+    "strategy_optimization": "Exact symmetry quotient of known-mask DP; observed values omitted by fair-bit symmetry",
+    "budget_case_count": 65,
+    "p_range_inclusive": [
+      0,
+      12
+    ],
+    "q_range_inclusive": [
+      0,
+      4
+    ],
+    "all_tables_replayed": false,
+    "offline_DP_cached_states": 942,
+    "online_DP_cached_states": 276,
+    "cases": [
+      {
+        "p": 0,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 1,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 2,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 3,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 4,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 5,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 6,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 7,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 8,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 9,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 10,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 11,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 12,
+        "q": 0,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 0,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 1,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 2,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 3,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 4,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 5,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 6,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 7,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 8,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 9,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 10,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 11,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 12,
+        "q": 1,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 0,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 1,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 2,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 3,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 4,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 5,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 6,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 7,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 8,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 9,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 10,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 11,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 12,
+        "q": 2,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 0,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        },
+        "formula_match": true
+      },
+      {
+        "p": 1,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "2/3",
+          "numerator": 2,
+          "denominator": 3,
+          "decimal_for_display": 0.6666666666666666
+        },
+        "formula_match": true
+      },
+      {
+        "p": 2,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "5/6",
+          "numerator": 5,
+          "denominator": 6,
+          "decimal_for_display": 0.8333333333333334
+        },
+        "formula_match": true
+      },
+      {
+        "p": 3,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 4,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 5,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 6,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 7,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 8,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 9,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 10,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 11,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 12,
+        "q": 3,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 0,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 1,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 2,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 3,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 4,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 5,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 6,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 7,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 8,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 9,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 10,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 11,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      },
+      {
+        "p": 12,
+        "q": 4,
+        "optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        },
+        "formula_match": true
+      }
+    ]
+  },
+  "large_illustrations": {
+    "N": 1024,
+    "M": 256,
+    "method": "Formula evaluation only; these large instances were not optimized or table-enumerated",
+    "public_index_bits": 8,
+    "table_bits": 262144,
+    "table_bytes": 32768,
+    "all_column_parity_cache_bits": 256,
+    "honest_full_preprocessing_bit_generation_or_read_cost": 262144,
+    "predictions": [
+      {
+        "p": 0,
+        "q": 0,
+        "predicted_optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        }
+      },
+      {
+        "p": 0,
+        "q": 1023,
+        "predicted_optimal_success_probability": {
+          "exact": "1/2",
+          "numerator": 1,
+          "denominator": 2,
+          "decimal_for_display": 0.5
+        }
+      },
+      {
+        "p": 1,
+        "q": 1023,
+        "predicted_optimal_success_probability": {
+          "exact": "257/512",
+          "numerator": 257,
+          "denominator": 512,
+          "decimal_for_display": 0.501953125
+        }
+      },
+      {
+        "p": 128,
+        "q": 1023,
+        "predicted_optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        }
+      },
+      {
+        "p": 256,
+        "q": 1023,
+        "predicted_optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        }
+      },
+      {
+        "p": 1024,
+        "q": 0,
+        "predicted_optimal_success_probability": {
+          "exact": "257/512",
+          "numerator": 257,
+          "denominator": 512,
+          "decimal_for_display": 0.501953125
+        }
+      },
+      {
+        "p": 131072,
+        "q": 0,
+        "predicted_optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        }
+      },
+      {
+        "p": 262144,
+        "q": 0,
+        "predicted_optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        }
+      },
+      {
+        "p": 65536,
+        "q": 512,
+        "predicted_optimal_success_probability": {
+          "exact": "3/4",
+          "numerator": 3,
+          "denominator": 4,
+          "decimal_for_display": 0.75
+        }
+      },
+      {
+        "p": 131072,
+        "q": 512,
+        "predicted_optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        }
+      },
+      {
+        "p": 0,
+        "q": 1024,
+        "predicted_optimal_success_probability": {
+          "exact": "1",
+          "numerator": 1,
+          "denominator": 1,
+          "decimal_for_display": 1.0
+        }
+      }
+    ]
+  },
+  "expected_budget_boundary_counterexample": {
+    "N": 2,
+    "M": 2,
+    "q": 0,
+    "randomized_strategy": "Before J, with probability 1/2 probe both bits of column 0; otherwise probe nothing",
+    "tables_enumerated": 16,
+    "J_choices": 2,
+    "coin_choices": 2,
+    "total_table_J_coin_cases": 64,
+    "successes": 40,
+    "expected_offline_queries": {
+      "exact": "1",
+      "numerator": 1,
+      "denominator": 1,
+      "decimal_for_display": 1.0
+    },
+    "maximum_offline_queries_on_a_branch": 2,
+    "query_count_histogram": {
+      "0": 32,
+      "2": 32
+    },
+    "actual_success_probability": {
+      "exact": "5/8",
+      "numerator": 5,
+      "denominator": 8,
+      "decimal_for_display": 0.625
+    },
+    "formula_with_a_hard_p1_cap": {
+      "exact": "1/2",
+      "numerator": 1,
+      "denominator": 2,
+      "decimal_for_display": 0.5
+    },
+    "interpretation": "The theorem assumes at most p probes on every realized branch. An expected budget E[p]=1 permits two probes on half the branches and achieves 5/8 rather than the hard-cap-p=1 optimum 1/2. This does not contradict the theorem: the strategy violates its per-branch budget constraint."
+  },
+  "limitations": [
+    "This is an exact oracle-query bound, not measured runtime or a lower bound in a word-RAM, SIMD, GPU, or physical memory model.",
+    "N needed probes can all be issued in one parallel round; a sequential delay does not follow.",
+    "An honest party's preprocessing/generation and cache costs must be counted; public data gives the attacker the same eventual opportunity.",
+    "After enough preprocessing, all M answers are known and every future public column update is answered immediately.",
+    "Previously learned bits are never revoked, and all preprocessing can be reused across updates.",
+    "Repeated updates are not independent fresh secrecy: previously selected columns may already be cached.",
+    "The column selector chooses an existing table parity and does not encode an arbitrary newly chosen message.",
+    "Public bit access is deliberately metered. If reading or bulk parity of the raw table is treated as free, this claimed query advantage disappears."
+  ]
+}

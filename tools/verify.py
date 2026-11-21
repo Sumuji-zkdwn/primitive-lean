@@ -449,7 +449,13 @@ def main(argv=None):
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
+    modes.add_argument("--retroactive-translation-only", action="store_true", help="Check reinterpretation boundaries, finite query models and Lean lemmas")
     args = parser.parse_args(argv)
+    if args.retroactive_translation_only:
+        if args.rebuild:
+            parser.error("--retroactive-translation-only always recompiles its standalone sources")
+        from verify_retroactive_translation import main as verify_retroactive
+        return verify_retroactive()
     if args.toolchain_modules_only:
         if args.rebuild:
             parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")

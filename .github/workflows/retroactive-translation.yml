@@ -1,0 +1,75 @@
+name: Retroactive translation boundaries
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/RetroactiveTranslation.lean'
+      - 'lean/Research/RetroactiveWorkBounds.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - 'experiments/retroactive_translation/**'
+      - 'tools/check_retroactive_translation.py'
+      - 'tools/verify_retroactive_translation.py'
+      - 'tools/verify_toolchain_modules.py'
+      - 'tools/verify.py'
+      - 'tools/pr_integration.py'
+      - 'docs/research/*retroactive*'
+      - 'docs/verification/*retroactive*'
+      - '.github/workflows/retroactive-translation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: retroactive-translation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out the proposed head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Fetch the imported Mathlib cache
+        working-directory: lean
+        run: >-
+          lake exe cache get
+          Mathlib.Data.Set.Function
+          Mathlib.Data.Fintype.Card
+          Mathlib.Data.Fintype.BigOperators
+          Mathlib.Algebra.Order.BigOperators.Group.Finset
+          Mathlib.Algebra.Group.Basic
+      - name: Verify models, Lean source and all local theorem axioms
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          python3 -B -X utf8 tools/verify.py --retroactive-translation-only
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retroactive-translation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            verification/retroactive-translation/
+            verification/retroactive-translation-lean/
+          if-no-files-found: warn
+          retention-days: 30
