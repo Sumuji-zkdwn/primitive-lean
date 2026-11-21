@@ -18,50 +18,50 @@ namespace GeometricCharge
 def baseQuadratic (ut ux : ℚ) : ℚ := -ut * ut + ux * ux
 
 /-- Connection one-form evaluated on a velocity. -/
-def connection (at ax ut ux : ℚ) : ℚ := at * ut + ax * ux
+def connection (aT ax ut ux : ℚ) : ℚ := aT * ut + ax * ux
 
 /-- A single higher-dimensional quadratic form, with the extra fibre velocity uy. -/
-def liftedQuadratic (at ax ut ux uy : ℚ) : ℚ :=
-  baseQuadratic ut ux + (uy + connection at ax ut ux) ^ 2
+def liftedQuadratic (aT ax ut ux uy : ℚ) : ℚ :=
+  baseQuadratic ut ux + (uy + connection aT ax ut ux) ^ 2
 
 /-- The fibre momentum is the connection-adjusted fibre velocity. -/
-def fibreMomentum (at ax ut ux uy : ℚ) : ℚ :=
-  uy + connection at ax ut ux
+def fibreMomentum (aT ax ut ux uy : ℚ) : ℚ :=
+  uy + connection aT ax ut ux
 
-def lagrangian (at ax ut ux uy : ℚ) : ℚ :=
-  liftedQuadratic at ax ut ux uy / 2
+def lagrangian (aT ax ut ux uy : ℚ) : ℚ :=
+  liftedQuadratic aT ax ut ux uy / 2
 
 /-- Routh reduction after holding the fibre momentum q fixed. -/
-def routhian (at ax q ut ux : ℚ) : ℚ :=
+def routhian (aT ax q ut ux : ℚ) : ℚ :=
   baseQuadratic ut ux / 2 - q * q / 2 +
-    q * connection at ax ut ux
+    q * connection aT ax ut ux
 
-theorem lifted_momentum (at ax q ut ux : ℚ) :
-    fibreMomentum at ax ut ux (q - connection at ax ut ux) = q := by
+theorem lifted_momentum (aT ax q ut ux : ℚ) :
+    fibreMomentum aT ax ut ux (q - connection aT ax ut ux) = q := by
   dsimp [fibreMomentum]
   ring
 
 /-- Eliminating the unobserved fibre velocity yields minimal coupling. -/
-theorem routh_identity (at ax q ut ux : ℚ) :
-    lagrangian at ax ut ux (q - connection at ax ut ux) -
-      q * (q - connection at ax ut ux) =
-        routhian at ax q ut ux := by
+theorem routh_identity (aT ax q ut ux : ℚ) :
+    lagrangian aT ax ut ux (q - connection aT ax ut ux) -
+      q * (q - connection aT ax ut ux) =
+        routhian aT ax q ut ux := by
   dsimp [lagrangian, liftedQuadratic, baseQuadratic, connection, routhian]
   ring
 
 /-- Changing the connection by a gradient and shifting the fibre velocity
     preserves the whole quadratic form. -/
-theorem gauge_invariant (at ax alpha beta ut ux uy : ℚ) :
-    liftedQuadratic (at + alpha) (ax + beta) ut ux
+theorem gauge_invariant (aT ax alpha beta ut ux uy : ℚ) :
+    liftedQuadratic (aT + alpha) (ax + beta) ut ux
       (uy - alpha * ut - beta * ux) =
-        liftedQuadratic at ax ut ux uy := by
+        liftedQuadratic aT ax ut ux uy := by
   dsimp [liftedQuadratic, baseQuadratic, connection]
   ring
 
 /-- The absolute orientation of the unobserved fibre is not an observable. -/
-theorem fibre_orientation_invariant (at ax ut ux uy : ℚ) :
-    liftedQuadratic (-at) (-ax) ut ux (-uy) =
-      liftedQuadratic at ax ut ux uy := by
+theorem fibre_orientation_invariant (aT ax ut ux uy : ℚ) :
+    liftedQuadratic (-aT) (-ax) ut ux (-uy) =
+      liftedQuadratic aT ax ut ux uy := by
   dsimp [liftedQuadratic, baseQuadratic, connection]
   ring
 
@@ -96,9 +96,9 @@ theorem mixed_detects_sign :
 
 /-- Projected 'Lorentz-force' acceleration, as derived independently
     from the full geodesic and Euler--Lagrange equations. -/
-def accelerateTime (q E ut ux : ℚ) : ℚ := q * E * ux
+def accelerateTime (q E _ut ux : ℚ) : ℚ := q * E * ux
 
-def accelerateSpace (q E ut ux : ℚ) : ℚ := q * E * ut
+def accelerateSpace (q E ut _ux : ℚ) : ℚ := q * E * ut
 
 /-- q -> -q or E -> -E alone flips the acceleration. -/
 theorem charge_reversal (q E ut ux : ℚ) :
