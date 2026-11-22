@@ -1,0 +1,27 @@
+name: Delayed-aether finite model audit
+
+on:
+  pull_request:
+    paths:
+      - 'experiments/delayed_aether/**'
+      - '.github/workflows/delayed-aether-finite.yml'
+  push:
+    paths:
+      - 'experiments/delayed_aether/**'
+      - '.github/workflows/delayed-aether-finite.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-aether:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit finite delayed-aether witnesses
+        run: python -B -X utf8 experiments/delayed_aether/verify_core.py
