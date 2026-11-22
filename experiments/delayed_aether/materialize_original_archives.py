@@ -81,7 +81,7 @@ def main():
 
     assert count == 641
     if args.check:
-        actual = {p for p in OUT.rglob("*") if p.is_file() and p.name != "README.md"}
+        actual = {p for p in OUT.rglob("*") if p.is_file() and p != OUT / "README.md"}
         assert actual == expected, {
             "missing": [str(x) for x in sorted(expected - actual)[:10]],
             "unexpected": [str(x) for x in sorted(actual - expected)[:10]],
