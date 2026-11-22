@@ -20,7 +20,16 @@ python -B -X utf8 experiments/delayed_aether/verify_early_models.py
 python -B -X utf8 experiments/delayed_aether/verify_core.py
 \`\`\`
 
-前半（kink/Skyrme/相対論的基準模型）と後半（Regge/TT/Z₂）の有限の算術・組合せ命題を検査します。Leanカーネルでの証明やGRの再現を意味しません。フル版のPython検算（NumPy / SciPy / Matplotlib / SymPy）と、一部の研究図の完全な移植は別の作業になります。
+前半（kink/Skyrme/相対論的基準模型）と後半（Regge/TT/Z₂）の有限の算術・組合せ命題をPythonで検査します。Pythonの数値計算自体はLean証明ではありません。フル版のPython検算（NumPy / SciPy / Matplotlib / SymPy）と、一部の研究図の完全な移植は別の作業になります。
+
+
+## Leanによる形式的検証（部分的）
+
+`lean/Research/DelayedAetherCochain.lean` に**14定理**を追加しています。型一般の可換な格子平行移動と可換環係数に対して、差分の交換、離散外微分 `d₁∘d₀=0` と `d₂∘d₁=0`、閉2-cochainの局所更新保存、記憶のアフィン更新と固定点を証明し、`ZMod 2` に特殊化しています。
+
+検証はリポジトリの `lean/lean-toolchain` にピン留めした Lean 4.36.0-rc2 と固定mathlibを使います。GitHub Actions `.github/workflows/delayed-aether-lean.yml` で `lake env lean --trust=0` および定理ごとの `#print axioms` を実行します。許可するのは標準的な `propext`、`Quot.sound`、`Classical.choice` のみ。警告と `sorryAx` は拒否します。
+
+これは第10回の**差分・閉条件の代数的部分**を形式化したもので、周期格子の全フラックス下界、Reggeの曲率、非線形4D重力、粒子性、実験数値の完全なLean証明ではありません。
 
 ## モデルに対する最も重要な判断
 
