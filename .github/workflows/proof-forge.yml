@@ -8,6 +8,8 @@ on:
       - 'tools/autonomy/proof_forge.py'
       - 'tests/test_proof_forge.py'
       - 'tests/test_proof_forge_orientation_research.py'
+      - 'tools/autonomy/proof_forge_orientation_report.py'
+      - 'docs/autonomy/PROOF_FORGE_ORIENTATION_RESEARCH.md'
       - 'docs/autonomy/PROOF_FORGE.md'
       - '.github/workflows/proof-forge.yml'
       - 'lean/lean-toolchain'
@@ -56,6 +58,19 @@ jobs:
             --requests proof_forge/requests \
             --output verification/proof-forge \
             --head "$EXPECTED_HEAD"
+
+
+      - name: Export all-pairs research comparison and Actions summary
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -X utf8 -m tools.autonomy.proof_forge_orientation_report \
+            --root . --head "$EXPECTED_HEAD" \
+            --output verification/proof-forge/orientation-research.json \
+            --markdown "$GITHUB_STEP_SUMMARY"
+
 
       - name: Install pinned Lean and Mathlib cache
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
