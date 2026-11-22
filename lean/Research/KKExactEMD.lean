@@ -37,29 +37,25 @@ def ddH (k r : ℚ) : ℚ := 2 * k / r ^ 3
 theorem H_eq_one_add (k r : ℚ) (hr : r ≠ 0) :
     H k r = 1 + k / r := by
   unfold H q
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- The 3D radial Laplace equation is identically zero off centre. -/
 theorem harmonic_potential (k r : ℚ) (hr : r ≠ 0) :
     ddH k r + 2 / r * dH k r = 0 := by
   unfold ddH dH
-  field_simp
-  ring
+  field_simp <;> ring
 
 theorem conserved_radial_harmonic_flux (k r : ℚ) (hr : r ≠ 0) :
     r ^ 2 * dH k r = -k := by
   unfold dH
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- H'/H = -k/[r(r+k)], the reduced scalar derivative. -/
 theorem log_H_derivative_ratio (k r : ℚ)
     (hr : r ≠ 0) (hq : q k r ≠ 0) :
     dH k r / H k r = -k / (r * q k r) := by
   unfold H dH q at *
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- The fibre metric coefficient g_{psi,psi}=H^{-1}. -/
 def radiusSquare (k r : ℚ) : ℚ := r / q k r
@@ -71,8 +67,7 @@ theorem radius_secant (k r₁ r₂ : ℚ)
     radiusSquare k r₂ - radiusSquare k r₁ =
       k * (r₂ - r₁) / (q k r₁ * q k r₂) := by
   unfold radiusSquare q at *
-  field_simp
-  ring
+  field_simp <;> ring
 
 theorem circle_radius_changes :
     radiusSquare 1 1 = 1 / 2 ∧
@@ -90,8 +85,7 @@ theorem dilaton_current_eq_radial_trace (k r : ℚ)
       r ^ 2 * (dH k r / H k r) := by
   rw [log_H_derivative_ratio k r hr hq]
   unfold dilatonRadialCurrent q
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- The exact secant of the radial scalar current. Its derivative
 limit is -k²/(r+k)², used independently by the SymPy oracle. -/
@@ -100,8 +94,7 @@ theorem dilaton_current_secant (k r₁ r₂ : ℚ)
     dilatonRadialCurrent k r₂ - dilatonRadialCurrent k r₁ =
       -(k ^ 2) * (r₂ - r₁) / (q k r₁ * q k r₂) := by
   unfold dilatonRadialCurrent q at *
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- Magnetic invariant F_{mu nu}F^{mu nu}; F= -k sinθ dθ∧dφ. -/
 def magneticF2 (k r : ℚ) : ℚ := 2 * k ^ 2 / (r ^ 3 * q k r)
@@ -134,23 +127,20 @@ theorem einstein_tt (k r : ℚ) (hr : r ≠ 0)
     (hq : q k r ≠ 0) :
     ricciTT k r = emSourceTT k r := by
   unfold ricciTT emSourceTT magneticF2 q at *
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- Scalar gradient and Maxwell curvature jointly source Ricci_rr. -/
 theorem einstein_rr (k r : ℚ) (hr : r ≠ 0)
     (hq : q k r ≠ 0) :
     ricciRR k r = emSourceRR k r := by
   unfold ricciRR emSourceRR magneticF2 dilatonRadialSq q at *
-  field_simp
-  ring
+  field_simp <;> ring
 
 theorem einstein_theta_theta (k r : ℚ) (hr : r ≠ 0)
     (hq : q k r ≠ 0) :
     ricciThetaTheta k r = emSourceThetaTheta k r := by
   unfold ricciThetaTheta emSourceThetaTheta q at *
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- The phi-phi Einstein equation has the same sin(theta)^2 factor. -/
 theorem einstein_phi_phi (k r angularSin : ℚ)
@@ -172,11 +162,11 @@ theorem contracted_einstein_scalar (k r : ℚ) :
 /-- The fully weighted Maxwell theta-phi flux-density coefficient
 sqrt(-g) e^{-sqrt(3)*phi} F^{theta phi}=-k/(r+k)²
 is angle-independent; its angular divergence is zero. -/
-def weightedMagneticFlux (k r : ℚ) : ℚ :=
+def weightedMagneticFlux (k r _angle : ℚ) : ℚ :=
   -k / (q k r) ^ 2
 
 theorem weighted_flux_same_at_all_angles (k r s₁ s₂ : ℚ) :
-    weightedMagneticFlux k r = weightedMagneticFlux k r := rfl
+    weightedMagneticFlux k r s₁ = weightedMagneticFlux k r s₂ := rfl
 
 /-- Divide the scalar equation by the common nonzero warp factor
 sqrt(3)/[2 r^(3/2)(r+k)^(5/2)] to get -k²+k²=0.
