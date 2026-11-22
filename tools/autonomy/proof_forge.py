@@ -159,7 +159,7 @@ def lean_source(model: dict, result: dict) -> tuple[str, list[str]]:
         "import Mathlib.Tactic",
         "",
         "/- Generated exclusively from bounded integer JSON, not from model output.",
-        "   No result is accepted before trust=0 compilation and axiom audit. -/",
+        "   No result is accepted before trust=0 compilation and dependency audit. -/",
         f"namespace {namespace}",
         f"abbrev State := Fin {n}",
         f"abbrev Action := Fin {m}",
