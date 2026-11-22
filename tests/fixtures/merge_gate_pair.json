@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "DOCUMENTED_GITHUB_PR_PAIR_OBSERVATION_2026_11_22",
+  "repository": "Sumuji-zkdwn/primitive-lean",
+  "main_sha": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+  "controller_sha": null,
+  "observed_at_utc": null,
+  "observed_open_prs": null,
+  "open_inventory_complete": false,
+  "selected_prs_complete": false,
+  "prs": [
+    {
+      "number": 196,
+      "title": "Proof Forge: shortest observer witnesses and unbounded equivalence, kernel-certified",
+      "state": "open",
+      "draft": true,
+      "base_ref": "main",
+      "base_sha": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+      "head_ref": "chatgpt/proof-forge-observer-certificates-20261122",
+      "head_repo": "Sumuji-zkdwn/primitive-lean",
+      "head_sha": "8c0f86b1618e997df5efd051952bf06365d18c48",
+      "files": [
+        ".github/workflows/proof-forge.yml",
+        "docs/autonomy/PROOF_FORGE.md",
+        "proof_forge/requests/delayed_split.json",
+        "proof_forge/requests/instant_split.json",
+        "proof_forge/requests/invisible_histories.json",
+        "tests/test_proof_forge.py",
+        "tools/autonomy/proof_forge.py"
+      ],
+      "files_complete": true,
+      "checks": [],
+      "checks_complete": false,
+      "collection_errors": [
+        "OFFLINE_FIXTURE_NO_LIVE_CHECK_RUNS"
+      ]
+    },
+    {
+      "number": 198,
+      "title": "Proof Forge research bridge: observer-relative depth and hidden-history quotient",
+      "state": "open",
+      "draft": true,
+      "base_ref": "main",
+      "base_sha": "8ed4c9347609ff350f947da7e44101abcd993ed9",
+      "head_ref": "chatgpt/proof-forge-orientation-research-20261122",
+      "head_repo": "Sumuji-zkdwn/primitive-lean",
+      "head_sha": "15b068a3e12e50691cd7e48c89adae2fa4b9a8bf",
+      "files": [
+        ".github/workflows/proof-forge.yml",
+        "docs/autonomy/PROOF_FORGE.md",
+        "docs/autonomy/PROOF_FORGE_ORIENTATION_RESEARCH.md",
+        "proof_forge/requests/delayed_split.json",
+        "proof_forge/requests/instant_split.json",
+        "proof_forge/requests/invisible_histories.json",
+        "proof_forge/requests/orientation_extended_alphabet.json",
+        "proof_forge/requests/orientation_hidden_macro.json",
+        "proof_forge/requests/orientation_hidden_primitive.json",
+        "proof_forge/requests/orientation_hidden_quotient.json",
+        "proof_forge/requests/orientation_macro.json",
+        "proof_forge/requests/orientation_old_alphabet.json",
+        "proof_forge/requests/orientation_primitive.json",
+        "tests/test_proof_forge.py",
+        "tests/test_proof_forge_orientation_research.py",
+        "tools/autonomy/proof_forge.py",
+        "tools/autonomy/proof_forge_orientation_report.py"
+      ],
+      "files_complete": true,
+      "checks": [],
+      "checks_complete": false,
+      "collection_errors": [
+        "OFFLINE_FIXTURE_NO_LIVE_CHECK_RUNS"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "a": 196,
+      "b": 198,
+      "status": "ahead",
+      "ahead_by": 21,
+      "behind_by": 0,
+      "merge_base_sha": "8c0f86b1618e997df5efd051952bf06365d18c48"
+    }
+  ],
+  "collection_errors": [
+    "PARTIAL_PAIR_FIXTURE_DO_NOT_INTERPRET_AS_FULL_OPEN_PR_INVENTORY"
+  ]
+}
