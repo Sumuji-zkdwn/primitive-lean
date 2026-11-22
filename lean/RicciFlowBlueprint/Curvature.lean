@@ -68,7 +68,7 @@ omit [CompleteSpace E] [FiniteDimensional ℝ E] in
 lemma neg_apply {τ : Π y : M, TangentSpace I y} {y : M} (hτ : MDiffAt (T% τ) y) :
     cov (-τ) y = -cov τ y := by
   have h : (-τ) = (-1 : ℝ) • τ := by funext z; simp
-  rw [h, cov.isCovariantDerivativeOn.smul_const (-1 : ℝ) hτ]
+  rw [h, cov.isCovariantDerivativeOn.smul_const (-1 : ℝ) hτ (by simp)]
   module
 
 omit [CompleteSpace E] [FiniteDimensional ℝ E] in
@@ -77,7 +77,7 @@ lemma sub_apply {σ τ : Π y : M, TangentSpace I y} {y : M}
     (hσ : MDiffAt (T% σ) y) (hτ : MDiffAt (T% τ) y) :
     cov (σ - τ) y = cov σ y - cov τ y := by
   have h : σ - τ = σ + (-τ) := by funext z; simp [sub_eq_add_neg]
-  rw [h, cov.isCovariantDerivativeOn.add hσ (mdifferentiableAt_neg_section hτ),
+  rw [h, cov.isCovariantDerivativeOn.add hσ (mdifferentiableAt_neg_section hτ) (by simp),
     cov.neg_apply hτ]
   module
 
@@ -246,7 +246,7 @@ theorem curvature_smul_left (f : M → ℝ) (X Y Z : Π y : M, TangentSpace I y)
     funext y; simp [hpi]
   simp only [curvature]
   -- reshape the middle term into `cov (f • σ)` so Leibniz applies, then expand
-  rw [hsec, cov.isCovariantDerivativeOn.leibniz hXZ hf, mlieBracket_smul_left hf hX]
+  rw [hsec, cov.isCovariantDerivativeOn.leibniz hXZ hf (by simp), mlieBracket_smul_left hf hX]
   simp only [hpi, map_smul, map_add, add_apply, smul_apply,
     ContinuousLinearMap.smulRight_apply]
   module
@@ -287,18 +287,18 @@ theorem curvature_smul_right
       = d% f x (mlieBracket I X Y x) := mlieBracket_apply_fun hf' hX hY
   have hsecY : (fun y ↦ cov (f • Z) y (Y y))
       = (f • fun y ↦ cov Z y (Y y)) + ((fun y ↦ d% f y (Y y)) • Z) := by
-    funext y; simp [cov.isCovariantDerivativeOn.leibniz (hZ y) (hf y)]
+    funext y; simp [cov.isCovariantDerivativeOn.leibniz (hZ y) (hf y) (by simp)]
   have hsecX : (fun y ↦ cov (f • Z) y (X y))
       = (f • fun y ↦ cov Z y (X y)) + ((fun y ↦ d% f y (X y)) • Z) := by
-    funext y; simp [cov.isCovariantDerivativeOn.leibniz (hZ y) (hf y)]
+    funext y; simp [cov.isCovariantDerivativeOn.leibniz (hZ y) (hf y) (by simp)]
   simp only [curvature, hsecY, hsecX,
-    cov.isCovariantDerivativeOn.add hfYZ hgYZ,
-    cov.isCovariantDerivativeOn.add hfXZ hgXZ,
-    cov.isCovariantDerivativeOn.leibniz hYZ (hf x),
-    cov.isCovariantDerivativeOn.leibniz hXZ (hf x),
-    cov.isCovariantDerivativeOn.leibniz (hZ x) hYf,
-    cov.isCovariantDerivativeOn.leibniz (hZ x) hXf,
-    cov.isCovariantDerivativeOn.leibniz (hZ x) (hf x)]
+    cov.isCovariantDerivativeOn.add hfYZ hgYZ (by simp),
+    cov.isCovariantDerivativeOn.add hfXZ hgXZ (by simp),
+    cov.isCovariantDerivativeOn.leibniz hYZ (hf x) (by simp),
+    cov.isCovariantDerivativeOn.leibniz hXZ (hf x) (by simp),
+    cov.isCovariantDerivativeOn.leibniz (hZ x) hYf (by simp),
+    cov.isCovariantDerivativeOn.leibniz (hZ x) hXf (by simp),
+    cov.isCovariantDerivativeOn.leibniz (hZ x) (hf x) (by simp)]
   simp only [add_apply, smul_apply, ContinuousLinearMap.smulRight_apply]
   have key : (d% (fun y ↦ d% f y (Y y)) x (X x) - d% (fun y ↦ d% f y (X y)) x (Y x)) • Z x
       = (d% f x (mlieBracket I X Y x)) • Z x := by rw [hder]
@@ -328,7 +328,7 @@ theorem curvature_add_left [ContMDiffCovariantDerivative cov 1]
       = (fun y ↦ cov Z y (X y)) + (fun y ↦ cov Z y (X' y)) := by
     funext y; simp
   simp only [curvature, hsec,
-    cov.isCovariantDerivativeOn.add (cov.mdiffAt_cov_apply hZ hX) (cov.mdiffAt_cov_apply hZ hX'),
+    cov.isCovariantDerivativeOn.add (cov.mdiffAt_cov_apply hZ hX) (cov.mdiffAt_cov_apply hZ hX') (by simp),
     mlieBracket_add_left hX hX']
   simp only [Pi.add_apply, map_add, add_apply]
   abel
@@ -356,17 +356,17 @@ theorem curvature_add_right [ContMDiffCovariantDerivative cov 1]
   have hsY : (fun y ↦ cov (Z + Z') y (Y y))
       = (fun y ↦ cov Z y (Y y)) + (fun y ↦ cov Z' y (Y y)) := by
     funext y
-    rw [cov.isCovariantDerivativeOn.add (hZm y) (hZ'm y)]
+    rw [cov.isCovariantDerivativeOn.add (hZm y) (hZ'm y) (by simp)]
     simp
   have hsX : (fun y ↦ cov (Z + Z') y (X y))
       = (fun y ↦ cov Z y (X y)) + (fun y ↦ cov Z' y (X y)) := by
     funext y
-    rw [cov.isCovariantDerivativeOn.add (hZm y) (hZ'm y)]
+    rw [cov.isCovariantDerivativeOn.add (hZm y) (hZ'm y) (by simp)]
     simp
   simp only [curvature, hsY, hsX,
-    cov.isCovariantDerivativeOn.add (cov.mdiffAt_cov_apply hZ hY) (cov.mdiffAt_cov_apply hZ' hY),
-    cov.isCovariantDerivativeOn.add (cov.mdiffAt_cov_apply hZ hX) (cov.mdiffAt_cov_apply hZ' hX),
-    cov.isCovariantDerivativeOn.add (hZm x) (hZ'm x)]
+    cov.isCovariantDerivativeOn.add (cov.mdiffAt_cov_apply hZ hY) (cov.mdiffAt_cov_apply hZ' hY) (by simp),
+    cov.isCovariantDerivativeOn.add (cov.mdiffAt_cov_apply hZ hX) (cov.mdiffAt_cov_apply hZ' hX) (by simp),
+    cov.isCovariantDerivativeOn.add (hZm x) (hZ'm x) (by simp)]
   simp only [add_apply]
   abel
 
@@ -380,16 +380,16 @@ theorem curvature_smul_const_right [ContMDiffCovariantDerivative cov 1]
   have hZm : MDiff (T% Z) := hZ.mdifferentiable h2
   have hsY : (fun y ↦ cov (c • Z) y (Y y)) = c • (fun y ↦ cov Z y (Y y)) := by
     funext y
-    rw [cov.isCovariantDerivativeOn.smul_const c (hZm y)]
+    rw [cov.isCovariantDerivativeOn.smul_const c (hZm y) (by simp)]
     simp
   have hsX : (fun y ↦ cov (c • Z) y (X y)) = c • (fun y ↦ cov Z y (X y)) := by
     funext y
-    rw [cov.isCovariantDerivativeOn.smul_const c (hZm y)]
+    rw [cov.isCovariantDerivativeOn.smul_const c (hZm y) (by simp)]
     simp
   simp only [curvature, hsY, hsX,
-    cov.isCovariantDerivativeOn.smul_const c (cov.mdiffAt_cov_apply hZ hY),
-    cov.isCovariantDerivativeOn.smul_const c (cov.mdiffAt_cov_apply hZ hX),
-    cov.isCovariantDerivativeOn.smul_const c (hZm x)]
+    cov.isCovariantDerivativeOn.smul_const c (cov.mdiffAt_cov_apply hZ hY) (by simp),
+    cov.isCovariantDerivativeOn.smul_const c (cov.mdiffAt_cov_apply hZ hX) (by simp),
+    cov.isCovariantDerivativeOn.smul_const c (hZm x) (by simp)]
   simp only [smul_apply]
   module
 
