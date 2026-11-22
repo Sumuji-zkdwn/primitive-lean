@@ -5,17 +5,27 @@ on:
     branches: [main]
     paths:
       - 'tools/autonomy/research_conveyor.py'
+      - 'tools/autonomy/research_conveyor_routes.py'
+      - 'tools/autonomy/research_conveyor_smoke.py'
       - 'tests/test_research_conveyor.py'
+      - 'tests/test_research_conveyor_routes.py'
       - 'tests/fixtures/research_conveyor_empty.json'
+      - 'tests/fixtures/research_conveyor_one_verified.json'
+      - 'proof_forge/requests/orientation_*.json'
       - 'docs/autonomy/RESEARCH_CONVEYOR.md'
       - 'docs/research/2026-11-17-siphon-predictive-quotient.md'
+      - 'docs/research/2026-11-17-laakso-bonding-audit.md'
+      - 'docs/research/2026-11-11-observer-orientation-depth.md'
       - '.github/workflows/research-conveyor.yml'
   push:
     branches: [main]
     paths:
       - '.github/workflows/research-conveyor.yml'
       - 'tools/autonomy/research_conveyor.py'
+      - 'tools/autonomy/research_conveyor_routes.py'
       - 'docs/research/2026-11-17-siphon-predictive-quotient.md'
+      - 'docs/research/2026-11-17-laakso-bonding-audit.md'
+      - 'docs/research/2026-11-11-observer-orientation-depth.md'
   schedule:
     # Every day at 02:43 UTC = 11:43 Japan time.
     - cron: '43 2 * * *'
@@ -42,8 +52,10 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Verify source-bound task selection and no-proof fail-closed rules
-        run: python -m unittest discover -s tests -p 'test_research_conveyor.py' -v
+      - name: Verify source-bound legacy and three-domain routing tests
+        run: |
+          python -m unittest discover -s tests -p 'test_research_conveyor.py' -v
+          python -m unittest discover -s tests -p 'test_research_conveyor_routes.py' -v
       - name: Generate one finite task from retained research (no AI or network)
         shell: bash
         run: |
@@ -51,9 +63,16 @@ jobs:
           sha="$(git rev-parse HEAD)"
           python -B -m tools.autonomy.research_conveyor prepare \
             --root . \
-            --state tests/fixtures/research_conveyor_empty.json \
+            --state tests/fixtures/research_conveyor_one_verified.json \
             --head "$sha" --day 2026-11-23 \
             --output verification/research-conveyor/cycle
+      - name: Generate replay certificates for both new source-bound research routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.research_conveyor_smoke \
+            --root . --head "$(git rev-parse HEAD)" \
+            --output verification/research-conveyor/smoke
       - name: Install pinned repository Lean and Mathlib
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
@@ -63,18 +82,19 @@ jobs:
           test: false
           use-mathlib-cache: true
           use-github-cache: true
-      - name: Prove generated task at trust zero and preserve compilation log
+      - name: Prove chosen next task and six smoke cases at trust zero
         working-directory: lean
         shell: bash
         run: |
           set -uo pipefail
-          for f in ../verification/research-conveyor/cycle/proof/*.lean; do
+          for f in ../verification/research-conveyor/cycle/proof/*.lean ../verification/research-conveyor/smoke/proof/*.lean; do
             name="$(basename "$f" .lean)"
+            dest="$(dirname "$f")"
             set +e
-            lake env lean --trust=0 "$f" > "../verification/research-conveyor/cycle/proof/$name.log" 2>&1
+            lake env lean --trust=0 "$f" > "$dest/$name.log" 2>&1
             status=$?
             set -e
-            printf '%s\n' "$status" > "../verification/research-conveyor/cycle/proof/$name.exit"
+            printf '%s\n' "$status" > "$dest/$name.exit"
             echo "Generated $name: Lean exit $status"
           done
       - name: Audit kernel outputs and produce a one-step feedback receipt
@@ -83,8 +103,10 @@ jobs:
           set -euo pipefail
           python -B tools/autonomy/proof_forge.py audit \
             --output verification/research-conveyor/cycle/proof
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/research-conveyor/smoke/proof
           python -B -m tools.autonomy.research_conveyor receipt \
-            --root . --state tests/fixtures/research_conveyor_empty.json \
+            --root . --state tests/fixtures/research_conveyor_one_verified.json \
             --head "$(git rev-parse HEAD)" \
             --evidence verification/research-conveyor/cycle \
             --output verification/research-conveyor/verified-next-state.json
