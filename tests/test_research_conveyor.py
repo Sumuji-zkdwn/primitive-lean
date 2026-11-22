@@ -123,6 +123,19 @@ class ResearchConveyorTests(unittest.TestCase):
                 bad["results"] = [dummy_record("cat", "EQUIVALENT", 0, "a"*64)]
                 conveyor.validate_state(bad)
 
+    def test_missing_or_symlinked_state_cannot_reset_work(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            missing = root / "missing.json"
+            with self.assertRaisesRegex(ValueError, "initialize"):
+                conveyor.state_load(missing)
+            real = root / "state.json"
+            conveyor.json_write(real, conveyor.empty_state())
+            link = root / "link.json"
+            link.symlink_to(real)
+            with self.assertRaisesRegex(ValueError, "initialize"):
+                conveyor.state_load(link)
+
     def test_utc_day_and_unverified_state_rejected(self):
         for bad in ("2026-02-30", "2026/11/23", "2026-11-23Z"):
             with self.assertRaises(ValueError):
