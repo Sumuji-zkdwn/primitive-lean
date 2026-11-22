@@ -54,7 +54,7 @@ def ricci(metric, inverse, coords):
                  -C.get((c,a,d),0)*C.get((d,b,c),0)
                  for d in range(n))
             for c in range(n)))
-    return R
+    return R, C
 
 def main():
     coords5=[t,r,theta,az,psi]
@@ -68,12 +68,34 @@ def main():
     inv5[3,3]=1/(H*r*r*s.sin(theta)**2)
     inv5[3,4]=inv5[4,3]=-k*s.cos(theta)/(H*r*r*s.sin(theta)**2)
     inv5[4,4]=H+k*k*s.cos(theta)**2/(H*r*r*s.sin(theta)**2)
-    R5=ricci(G5,inv5,coords5)
+    R5, Gamma5=ricci(G5,inv5,coords5)
     for a,b in product(range(5),repeat=2):
         check(R5[a,b], f"5D vacuum Ricci {a},{b}")
     check(s.factor(G5.det())+H*H*r**4*s.sin(theta)**2,
           "5D determinant")
     print("PASS: all 25 exact 5D Ricci=0 components (symbolic k)")
+    # Calculate the FULL invariant R_ABCD R^ABCD at the equator.
+    # Curvature invariance makes any regular angular section sufficient;
+    # at theta=pi/2 the 5D metric is diagonal, simplifying contractions.
+    gp=[-1,H,H*r*r,H*r*r,1/H]
+    kretschmann=s.S(0)
+    for aa,bb,cc,dd in product(range(5),repeat=4):
+        if cc>=dd:
+            continue
+        val=(s.diff(Gamma5.get((aa,dd,bb),0),coords5[cc])
+             -s.diff(Gamma5.get((aa,cc,bb),0),coords5[dd])
+             +sum(Gamma5.get((aa,cc,j),0)*Gamma5.get((j,dd,bb),0)
+                  -Gamma5.get((aa,dd,j),0)*Gamma5.get((j,cc,bb),0)
+                  for j in range(5)))
+        comp=s.factor(val.subs(theta,s.pi/2))
+        if comp!=0:
+            kretschmann+=2*gp[aa]/(gp[bb]*gp[cc]*gp[dd])*comp**2
+    kretschmann=s.factor(kretschmann)
+    check(kretschmann-24*k*k/(k+r)**6, "5D full Kretschmann invariant")
+    check(s.limit(kretschmann,r,0,dir='+')-24/k**4,
+          "finite 5D Kretschmann near NUT")
+    print("PASS: 5D Kretschmann=24*k²/(r+k)^6, finite as r->0")
+
 
     coords4=coords5[:4]
     G4=s.diag(-1/q,q,q*r*r,q*r*r*s.sin(theta)**2)
@@ -87,7 +109,12 @@ def main():
               f"5D metric reconstruction {i},{j}")
         check(G5[i,4]-A[i]/H,f"5D gauge reconstruction {i}")
     check(G5[4,4]-1/H,"5D fibre metric")
-    R4=ricci(G4,inv4,coords4)
+    R4, _=ricci(G4,inv4,coords4)
+    RicciScalar4=s.factor(s.trace(inv4*R4))
+    expectedR4=3*k*k/(8*r**s.Rational(3,2)*(k+r)**s.Rational(5,2))
+    check(RicciScalar4-expectedR4,"4D exact Ricci scalar")
+    assert s.limit(RicciScalar4,r,0,dir='+')==s.oo
+    print("PASS: 4D Einstein-frame Ricci scalar diverges at r->0")
     Fup=inv4*F*inv4
     F2=s.factor(sum(F[i,j]*Fup[i,j]
                     for i,j in product(range(4),repeat=2)))
