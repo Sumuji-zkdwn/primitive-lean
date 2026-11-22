@@ -22,7 +22,7 @@ compatibility and local orthonormal-frame reduction.
 -/
 
 open Bundle VectorField
-open scoped Manifold ContDiff RealInnerProductSpace
+open scoped Manifold ContDiff
 
 namespace CovariantDerivative
 
