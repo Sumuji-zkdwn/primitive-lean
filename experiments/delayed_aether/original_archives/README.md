@@ -52,3 +52,9 @@ python -B -X utf8 experiments/delayed_aether/verify_original_archives.py
 ```
 
 このコマンドは原本保全・バイト整合性だけを検査する。各段階のPython実験の再実行や物理学的検証は別途必要。
+
+
+## 追加の単独成果物18件（原本ZIP非包含／異バイト版）
+[補助アーカイブ](supplemental/README.md)には、元ZIPに存在しない途中計算CSVや元ZIPとは別のプレビュー画像を保全した。全30本の原本ZIPを上書きせず、別のSHA-256台帳とCIで監査する。
+
+原本30 ZIPの内部623件と、別保全した補助18件の合計は**641件のファイル・バリアント**である。これは30本のZIP内に641件あるという意味ではない。

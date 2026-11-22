@@ -5,6 +5,7 @@ on:
     paths:
       - 'experiments/delayed_aether/original_archives/**'
       - 'experiments/delayed_aether/verify_original_archives.py'
+      - 'experiments/delayed_aether/verify_supplemental_archive.py'
       - '.github/workflows/delayed-aether-original-archives.yml'
   push:
     paths:
@@ -31,11 +32,14 @@ jobs:
         run: |
           set -euo pipefail
           python -B -X utf8 experiments/delayed_aether/verify_original_archives.py | tee original-archive-audit.json
+          python -B -X utf8 experiments/delayed_aether/verify_supplemental_archive.py | tee supplemental-archive-audit.json
       - name: Save audit result
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: delayed-aether-archive-audit-${{ github.run_id }}
-          path: original-archive-audit.json
+          path: |
+            original-archive-audit.json
+            supplemental-archive-audit.json
           retention-days: 30
           if-no-files-found: warn
