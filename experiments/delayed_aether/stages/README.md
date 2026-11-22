@@ -7,8 +7,8 @@ See the [v11–v30 evidence ledger](../../../docs/research/2026-11-23-delayed-ha
 ## What is preserved
 
 - Original `verify_v11.py`–`verify_v17.py` and `verify_v19.py`–`verify_v30.py` (19 scripts) as UTF-8 source with names unchanged.
-- The v18 research note is archived, but **no `verify_v18.py` existed** in the source artifacts; only numerical output/figures were available. No replacement script is fabricated.
-- Some stages had additional helper/independent-audit scripts and CSV/JSON/figures. **Those are not all included** here. The original ZIPs generated in conversation remain separate and cannot be reconstructed solely from this repository.
+- The original v18 ZIP **does contain** `ether_eighteenth/verify_v18.py` and is retained under `../original_archives/stage_18/`; the earlier standalone-file absence was not a source-code absence.
+- All available original ZIPs and 18 further loose/variant files are in `../original_archives/` and materialized individually in `../original_extracted/` by a source-hash-checked workflow. This folder remains the subset of individually copied scripts from the initial transfer.
 - Code from each stage may assume a particular original working directory, module imports, or generated data. The scripts are retained as a record; no claim is made that all 19 run unmodified in the current CI.
 
 ## Reproducing a stage
