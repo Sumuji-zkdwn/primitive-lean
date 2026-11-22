@@ -1,4 +1,4 @@
-/-! Derived compatibility port from Apache-2.0 licensed
+/- Derived compatibility port from Apache-2.0 licensed
 korbonits/ricci-flow-blueprint @ c8017e2c26898d11f39cec0dfce89368d5a0506a.
 The final RicciOfMetric/sectional-curvature section is omitted because it
 requires other upstream modules, irrelevant to Levi-Civita smoothness.
