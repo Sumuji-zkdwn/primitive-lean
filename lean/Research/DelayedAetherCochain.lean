@@ -170,20 +170,18 @@ theorem closed_two_updates (vx vy vz : X) (b : TwoForm X R)
   exact closed_update vx vy vz b a₁ hb
 
 /-- An internal memory state linearly tracks its target field. -/
-def memoryStep (weight : R) (m f : C0 X R) : C0 X R :=
+def memoryStep {Y : Type*} (weight : R) (m f : C0 Y R) : C0 Y R :=
   fun p => (1 - weight) * m p + weight * f p
 
 /-- If memory already matches the field, an affine step leaves it unchanged. -/
-omit [AddCommGroup X] in
-theorem memoryStep_fixed (weight : R) (f : C0 X R) :
+theorem memoryStep_fixed {Y : Type*} (weight : R) (f : C0 Y R) :
     memoryStep weight f f = f := by
   funext p
   simp only [memoryStep]
   ring
 
 /-- The memory update is a relaxation toward its new target. -/
-omit [AddCommGroup X] in
-theorem memoryStep_difference (weight : R) (m f : C0 X R) :
+theorem memoryStep_difference {Y : Type*} (weight : R) (m f : C0 Y R) :
     memoryStep weight m f = fun p => m p + weight * (f p - m p) := by
   funext p
   simp only [memoryStep]
