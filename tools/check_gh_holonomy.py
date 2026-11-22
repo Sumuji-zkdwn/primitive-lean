@@ -85,9 +85,16 @@ def main():
     full=lambda c,d:R[c,d] if c<d else (-R[d,c] if c>d else s.zeros(4))
     ricci=s.Matrix(4,4,lambda b,d:sum(full(a,d)[a,b] for a in range(4)))
     assert ricci==s.zeros(4)
+    # Fully contracted coordinate-invariant Kretschmann scalar R_abcd R^abcd.
+    # G is diagonal at this one point, so this rational contraction is exact.
+    K = s.simplify(sum(
+        g[a,a]/(g[b,b]*g[c,c]*g[d,d]) * full(c,d)[a,b]**2
+        for a in range(4) for b in range(4)
+        for c in range(4) for d in range(4)))
+    assert K == s.Rational(3,8), K
     assert X!=s.zeros(4)
     print('PASS: Riemann curvature from metric (6 exact operators)')
-    print('PASS: Ricci-flat and metric-skew curvature, rank=3')
+    print('PASS: Ricci-flat and metric-skew curvature, rank=3; Kretschmann=3/8')
     print('PASS: [X,Y]=Z/4, [Y,Z]=X/4, [Z,X]=Y/4; (0,3) bracket=1/64')
     print('BOUNDARY: SU(2)-type tangent holonomy is not independent 4D YM')
 
