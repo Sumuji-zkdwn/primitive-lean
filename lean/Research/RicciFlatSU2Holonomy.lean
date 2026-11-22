@@ -128,4 +128,42 @@ theorem measured_noncommutativity :
   rw [bracket_XY]
   norm_num [Z, Matrix.smul_apply]
 
+
+/-!
+## A sharp boundary: the circle's KK gauge transformations remain Abelian
+
+The one additional coordinate in the 5D ansatz is a circle. Frame changes
+y -> y + alpha(x) act by additive U(1) gauge shifts on the 4D KK one-form.
+They commute, even though its *separate* tangent-bundle spin holonomy is SU(2).
+This is only a finite simplicial U(1) gauge model; no Lie-group integration
+or 4D matter dynamics is claimed.
+-/
+
+abbrev CircleLink := Fin 3 → Fin 3 → ℚ
+
+def circleGauge (alpha : Fin 3 → ℚ) (A : CircleLink) : CircleLink :=
+  fun i j => A i j + alpha j - alpha i
+
+theorem circle_gauge_commutative
+    (alpha beta : Fin 3 → ℚ) (A : CircleLink) :
+    circleGauge alpha (circleGauge beta A) =
+      circleGauge beta (circleGauge alpha A) := by
+  funext i j
+  dsimp [circleGauge]
+  ring
+
+def triangleFlux (A : CircleLink) : ℚ :=
+  A 0 1 + A 1 2 + A 2 0
+
+theorem triangle_flux_gauge_invariant
+    (alpha : Fin 3 → ℚ) (A : CircleLink) :
+    triangleFlux (circleGauge alpha A) = triangleFlux A := by
+  dsimp [triangleFlux, circleGauge]
+  ring
+
+theorem curvature_generators_not_commuting : X * Y ≠ Y * X := by
+  intro h
+  apply commutator_nonzero
+  simp [commutator, h]
+
 end RicciFlatSU2Holonomy
