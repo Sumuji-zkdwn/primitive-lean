@@ -4,7 +4,7 @@ import Mathlib.Tactic
 # Second Bianchi => Ricci-flat Levi-Civita curvature satisfies Yang--Mills
 
 D e a b c d models (nabla_e R)_(a b c d) in a pseudo-orthonormal
-frame, with signature(i) = +/-1. The second Bianchi identity, curvature
+frame, with signature(i) = plus or minus one. The second Bianchi identity, curvature
 symmetries, metric-compatible contraction, and linearity of the
 covariant derivative on Ricci fields are explicitly stated assumptions.
 No axiom, sorry, or assumption of the final Yang--Mills equation appears.
