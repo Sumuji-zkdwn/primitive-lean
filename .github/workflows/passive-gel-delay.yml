@@ -1,0 +1,85 @@
+name: Passive delayed gel: dissipation, no-lump obstruction, dispersion
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/PassiveGelDelay.lean'
+      - 'tools/check_passive_gel_delay.py'
+      - 'docs/research/2026-11-22-passive-gel-delay-no-go.md'
+      - '.github/workflows/passive-gel-delay.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  passive-gel-delay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel-compile passive gel identities
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/PassiveGelDelay.olean Research/PassiveGelDelay.lean 2>&1 | tee ../passive-gel-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../passive-gel-lean.log; then exit 1; fi
+      - name: Audit Lean theorem axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/PassiveGelDelay.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=7,names
+          audit='import Research.PassiveGelDelay\n'+''.join(
+            '#print axioms PassiveGelDelay.'+name+'\n' for name in names)
+          pathlib.Path('PassiveGelDelayAudit.lean').write_text(audit)
+          pathlib.Path('../passive-gel-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 PassiveGelDelayAudit.lean 2>&1 | tee ../passive-gel-audit.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../passive-gel-audit.log').read_text()
+          n=int(pathlib.Path('../passive-gel-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for ent in entries:
+              used=set(filter(None,(v.strip() for v in ent.split(','))))
+              assert used<=allowed,used-allowed
+          print('Lean declarations audited:',n)
+          PY
+      - name: Independent symbolic and numerical gel checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 sympy==1.14.0
+          python -B tools/check_passive_gel_delay.py 2>&1 | tee passive-gel-python.log
+      - name: Attach exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: passive-gel-delay
+          path: |
+            passive-gel-lean.log
+            passive-gel-audit.log
+            passive-gel-count.txt
+            passive-gel-python.log
+          if-no-files-found: warn
