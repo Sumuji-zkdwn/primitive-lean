@@ -66,7 +66,7 @@ def validate(s):
         insist(row.get("state") == "open" and type(row.get("draft")) is bool,
                "missing current PR state")
         insist(type(row.get("files")) is list
-               and len(row["files"]) <= 500
+               and len(row["files"]) <= 650
                and all(type(p) is str and 0 < len(p) <= 1024 for p in row["files"]),
                "invalid file inventory")
         insist(type(row.get("files_complete")) is bool, "unknown file completeness")
