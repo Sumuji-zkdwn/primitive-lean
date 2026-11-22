@@ -42,8 +42,8 @@ theorem actual_torsion_zero :
     (CovariantDerivative.leviCivitaConnection I M).torsion = 0 :=
   CovariantDerivative.torsion_leviCivitaConnection_eq_zero I
 
-/-- Actual pinned Mathlib Levi-Civita connection is metric-compatible. -/
 omit [CompleteSpace E] in
+/-- Actual pinned Mathlib Levi-Civita connection is metric-compatible. -/
 theorem actual_metric_compatible :
     (CovariantDerivative.leviCivitaConnection I M).IsMetricCompatible
       (M := M) (V := TangentSpace I) :=
