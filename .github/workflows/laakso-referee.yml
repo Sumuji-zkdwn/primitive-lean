@@ -1,0 +1,27 @@
+name: Laakso referee counterexample - exact rational audit
+
+on:
+  pull_request:
+    branches:
+      - main
+      - codex/sandpile-laakso-realization
+    paths:
+      - 'experiments/sandpile_laakso/formalization/test_referee_counterexample.py'
+      - 'experiments/sandpile_laakso/formalization/REFEREE_COUNTEREXAMPLE.md'
+      - '.github/workflows/laakso-referee.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-rational:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Check exact rational gate distances and obstruction constants
+        run: python -B experiments/sandpile_laakso/formalization/test_referee_counterexample.py
