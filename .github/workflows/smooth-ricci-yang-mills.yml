@@ -5,6 +5,7 @@ on:
     paths:
       - 'lean/RicciFlowBlueprint/**'
       - 'lean/Research/SmoothRicciYangMills.lean'
+      - 'lean/Research/SmoothRicciFrameExistence.lean'
       - 'docs/verification/2026-11-22-smooth-ricci-yang-mills.md'
       - '.github/workflows/smooth-ricci-yang-mills.yml'
   workflow_dispatch:
@@ -65,7 +66,8 @@ jobs:
             RicciFlowBlueprint/CurvatureSymm.lean \
             RicciFlowBlueprint/CurvatureDeriv.lean \
             RicciFlowBlueprint/Divergence.lean \
-            Research/SmoothRicciYangMills.lean; do
+            Research/SmoothRicciYangMills.lean \
+            Research/SmoothRicciFrameExistence.lean; do
             printf 'CHECKING %s\n' "$file" | tee -a ../smooth-ricci-yang-mills-lean.log
             prefix=$(printf '%s' "$file" | sed 's/\.lean$//')
             lake env lean --trust=0 -o ".lake/build/lib/lean/$prefix.olean" "$file" 2>&1 | tee -a ../smooth-ricci-yang-mills-lean.log
@@ -83,11 +85,16 @@ jobs:
           assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
           theorems=re.findall(r'^theorem\s+(\w+)',src,re.M)
           assert len(theorems)>=2,theorems
-          out='import Research.SmoothRicciYangMills\n'
+          framesrc=Path('Research/SmoothRicciFrameExistence.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',framesrc,re.M)
+          frame_theorems=re.findall(r'^theorem\s+(\w+)',framesrc,re.M)
+          assert len(frame_theorems)>=2,frame_theorems
+          out='import Research.SmoothRicciFrameExistence\n'
           out+='#print axioms CovariantDerivative.divCurvature_eq_covRicci_sub\n'
           out+=''.join('#print axioms SmoothRicciYangMills.'+name+'\n' for name in theorems)
+          out+=''.join('#print axioms SmoothRicciFrameExistence.'+name+'\n' for name in frame_theorems)
           Path('SmoothRicciYangMillsAudit.lean').write_text(out)
-          Path('../smooth-ricci-yang-mills-count.txt').write_text(str(len(theorems)+1))
+          Path('../smooth-ricci-yang-mills-count.txt').write_text(str(len(theorems)+len(frame_theorems)+1))
           PY
           lake env lean --trust=0 SmoothRicciYangMillsAudit.lean 2>&1 | tee ../smooth-ricci-yang-mills-audit.log
           python - <<'PY'
