@@ -75,7 +75,7 @@ jobs:
           allow = {'propext', 'Quot.sound', 'Classical.choice'}
           seen = []
           for line in output:
-              match = re.fullmatch(r"'DelayedAether\.([A-Za-z0-9_]+)' depends on axioms: \[(.*?)\]", line)
+              match = re.fullmatch(r"'DelayedAetherEdgeRegge\.([A-Za-z0-9_]+)' depends on axioms: \[(.*?)\]", line)
               assert match is not None, line
               assert set(filter(None, (s.strip() for s in match.group(2).split(',')))) <= allow, line
               seen.append(match.group(1))
