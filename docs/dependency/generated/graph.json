@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "b63f74b5dfb3da01e1e4f0cf083be082dca9c350",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1811,6 +1811,41 @@
         "OrbitTrace"
       ],
       "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
+    },
+    {
+      "id": "main:lean/Research/RicciFlatBianchiYangMills.lean",
+      "scope": "main",
+      "path": "lean/Research/RicciFlatBianchiYangMills.lean",
+      "group": "Other",
+      "namespace": "RicciFlatBianchiYangMills",
+      "declarations": [
+        "CurvatureDerivative",
+        "SecondBianchi",
+        "SkewLastPair",
+        "ExchangePairs",
+        "RicciDerivative",
+        "FirstPairDivergence",
+        "YangMillsDivergence",
+        "contracted_second_bianchi",
+        "yang_mills_divergence_eq_ricci_derivatives",
+        "parallel_ricci_implies_yang_mills",
+        "CurvatureField",
+        "RicciField",
+        "CovRicciField",
+        "Ricci",
+        "BianchiConnectionData",
+        "IsRicciFlat",
+        "ricci_flat_implies_yang_mills",
+        "counterexampleDerivative",
+        "counterexample_skew",
+        "counterexample_ricci_derivative_zero",
+        "counterexample_nonzero_first_divergence",
+        "counterexample_not_bianchi"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "cbe56fcad0305bf1df4f41efa7beb0fa6f511b6ec8ac27e7d470836222a677e1"
     },
     {
       "id": "main:lean/Research/SignedCycleCounterexample.lean",
@@ -27677,28 +27712,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "b63f74b5dfb3da01e1e4f0cf083be082dca9c350",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "b63f74b5dfb3da01e1e4f0cf083be082dca9c350",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "b63f74b5dfb3da01e1e4f0cf083be082dca9c350",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "b63f74b5dfb3da01e1e4f0cf083be082dca9c350",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

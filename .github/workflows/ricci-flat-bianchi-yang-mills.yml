@@ -1,0 +1,88 @@
+name: Ricci-flat second Bianchi to Yang-Mills
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/RicciFlatBianchiYangMills.lean'
+      - 'tools/check_ricci_flat_yang_mills.py'
+      - 'docs/verification/2026-11-22-ricci-flat-bianchi-yang-mills.md'
+      - '.github/workflows/ricci-flat-bianchi-yang-mills.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bianchi-to-yang-mills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install repository-pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel-compile real second-Bianchi contraction proof
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/RicciFlatBianchiYangMills.olean Research/RicciFlatBianchiYangMills.lean 2>&1 | tee ../ricci-flat-bianchi-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../ricci-flat-bianchi-lean.log; then exit 1; fi
+      - name: Audit kernel theorem dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source=Path('Research/RicciFlatBianchiYangMills.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',source,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',source,re.M)
+          assert len(names)>=8,names
+          Path('RicciFlatBianchiYangMillsAudit.lean').write_text(
+              'import Research.RicciFlatBianchiYangMills\n'+''.join(
+              '#print axioms RicciFlatBianchiYangMills.'+n+'\n' for n in names))
+          Path('../ricci-flat-bianchi-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 RicciFlatBianchiYangMillsAudit.lean 2>&1 | tee ../ricci-flat-bianchi-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          content=Path('../ricci-flat-bianchi-audit.log').read_text()
+          n=int(Path('../ricci-flat-bianchi-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',content),content
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',content)
+          none_count=content.count('does not depend on any axioms')
+          assert len(entries)+none_count==n, (n,len(entries),none_count)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for ent in entries:
+              used=set(x.strip() for x in ent.split(',') if x.strip())
+              assert used<=allowed,used-allowed
+          print('Theorem count and permitted axioms:',n)
+          PY
+      - name: Independent exact metric-jet oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_ricci_flat_yang_mills.py 2>&1 | tee ricci-flat-bianchi-python.log
+      - name: Preserve exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ricci-flat-bianchi-yang-mills
+          path: |
+            ricci-flat-bianchi-lean.log
+            ricci-flat-bianchi-audit.log
+            ricci-flat-bianchi-count.txt
+            ricci-flat-bianchi-python.log
+          if-no-files-found: warn
