@@ -118,6 +118,18 @@ class MergeGateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate comparison"):
             gate.analyze(data)
 
+    def test_large_renamed_file_list_remains_partial_not_green(self):
+        data = sample()
+        data["prs"][1]["files"] = ["src/module_%03d.lean" % i
+                                   for i in range(600)]
+        data["prs"][1]["files_complete"] = False
+        data["comparisons"] = []
+        result = gate.analyze(data)
+        row = result["pull_requests"][1]
+        self.assertEqual(row["changed_file_count"], 600)
+        self.assertIn("FILES_INCOMPLETE", row["blockers"])
+        self.assertFalse(row["merge_approval"])
+
     def test_same_metadata_does_not_claim_merge_approval(self):
         data = sample()
         data["selected_prs_complete"] = True
