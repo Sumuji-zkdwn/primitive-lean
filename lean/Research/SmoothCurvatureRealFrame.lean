@@ -182,7 +182,7 @@ theorem actual_frame_second_bianchi {n : ℕ}
   have h2 (i : Fin n) : CMDiff 2 (T% (fr i)) :=
     (hfr i).of_le (by norm_num)
   have hb := SmoothMetricBianchi.levi_civita_second_bianchi_of_C3_metric
-    I M (h2 e) (h2 c) (h2 d) (hfr b)
+    I M (x := x) (h2 e) (h2 c) (h2 d) (hfr b)
   have hInner := congrArg
     (fun v : TangentSpace I x => inner ℝ v (fr a x)) hb
   simpa [frameDerivative, inner_add_left] using hInner
@@ -206,7 +206,7 @@ theorem actual_frame_skew_last {n : ℕ}
       (CovariantDerivative.leviCivitaConnection I M) 2 :=
     SmoothMetricBianchi.levi_civita_C2 I M
   have h := (CovariantDerivative.leviCivitaConnection I M).covCurvature_skew_bridge
-    (fr e) (h2 c) (h2 d) (hfr b)
+    (fr e) (x := x) (h2 c) (h2 d) (hfr b)
   have he := congrArg
     (fun v : TangentSpace I x => inner ℝ v (fr a x)) h
   simpa [frameDerivative, inner_neg_left] using he
