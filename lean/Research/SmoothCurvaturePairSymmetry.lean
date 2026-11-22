@@ -27,6 +27,26 @@ open scoped Manifold ContDiff
 namespace CovariantDerivative
 
 variable
+  {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}
+  {M : Type*} [TopologicalSpace M] [ChartedSpace H M]
+  [IsManifold I ω M]
+  [RiemannianBundle (fun x : M => TangentSpace I x)]
+
+/-- Type-synonym-safe differentiability of the tangent-bundle
+inner product, isolated from the additional connection instances. -/
+lemma mdiffAt_inner_vector_field_bridge
+    [IsContMDiffRiemannianBundle I 1 E (fun x : M => TangentSpace I x)]
+    {X Y : Π y : M, TangentSpace I y} {x : M}
+    (hX : MDiffAt (T% X) x) (hY : MDiffAt (T% Y) x) :
+    MDiffAt (fun y => inner ℝ (X y) (Y y)) x :=
+  MDifferentiableAt.inner_bundle (E := TangentSpace I) (F := E) hX hY
+
+end CovariantDerivative
+
+namespace CovariantDerivative
+
+variable
   {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
     [FiniteDimensional ℝ E]
   {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}
@@ -75,10 +95,8 @@ theorem inner_curvature_self_right_bridge
            + ⟪cov Z x (Y x), cov Z x (X x)⟫)
         + (⟪cov Z x (X x), cov Z x (Y x)⟫
            + ⟪Z x, cov (fun y => cov Z y (Y y)) x (X x)⟫) := by
-    rw [hdf Y, mvfderiv_add (MDifferentiableAt.inner_bundle (E := TangentSpace I)
-       (F := E) hAx (hZm x))
-       (MDifferentiableAt.inner_bundle (E := TangentSpace I)
-       (F := E) (hZm x) hAx), add_apply,
+    rw [hdf Y, mvfderiv_add (mdiffAt_inner_vector_field_bridge hAx (hZm x))
+       (mdiffAt_inner_vector_field_bridge (hZm x) hAx), add_apply,
       hcov.mvfderiv_inner_eq X hAx (hZm x),
       hcov.mvfderiv_inner_eq X (hZm x) hAx]
   have e2 : d% (fun y => d% (fun z => ⟪Z z, Z z⟫) y (X y)) x (Y x)
@@ -86,10 +104,8 @@ theorem inner_curvature_self_right_bridge
            + ⟪cov Z x (X x), cov Z x (Y x)⟫)
         + (⟪cov Z x (Y x), cov Z x (X x)⟫
            + ⟪Z x, cov (fun y => cov Z y (X y)) x (Y x)⟫) := by
-    rw [hdf X, mvfderiv_add (MDifferentiableAt.inner_bundle (E := TangentSpace I)
-       (F := E) hBx (hZm x))
-       (MDifferentiableAt.inner_bundle (E := TangentSpace I)
-       (F := E) (hZm x) hBx), add_apply,
+    rw [hdf X, mvfderiv_add (mdiffAt_inner_vector_field_bridge hBx (hZm x))
+       (mdiffAt_inner_vector_field_bridge (hZm x) hBx), add_apply,
       hcov.mvfderiv_inner_eq Y hBx (hZm x),
       hcov.mvfderiv_inner_eq Y (hZm x) hBx]
   have ebr : d% (fun z => ⟪Z z, Z z⟫) x (mlieBracket I X Y x)
