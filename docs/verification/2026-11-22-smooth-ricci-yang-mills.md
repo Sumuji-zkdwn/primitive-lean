@@ -92,6 +92,33 @@ conditional on an available frame and is not unconditional in x.
 A further independent generalization to pseudo-Riemannian/Lorentzian
 metrics is required; current upstream construction is Riemannian.
 
+## Frame existence formalization added (pending CI)
+
+The new file lean/Research/SmoothRicciFrameExistence.lean assembles the
+upstream local orthonormal frame construction and globally smooth
+bump-section extension:
+
+1. Apply a C2 Gram-Schmidt procedure to a local trivialization's
+   standard model-space basis.
+2. For each of finitely many basis indices, obtain a globally C2
+   section agreeing with the local frame near the chosen point,
+   using GlobalExtension.exists_contMDiff_eventuallyEq.
+3. Shrink to a common open neighbourhood using finite intersection
+   of all eventual equalities, so the extended frame remains
+   orthonormal on this neighbourhood.
+4. Apply the frame-dependent smooth divergence theorem to this
+   constructed frame.
+
+The resulting intended theorem
+SmoothRicciFrameExistence.levi_civita_ricci_flat_yang_mills
+has no additional arbitrary local-frame assumption: for any x,
+Ricci-flat C3 Riemannian metric yields zero divergence of the actual
+Levi-Civita curvature. Source has been added, but this theorem must be
+considered **unverified until its own exact-head kernel CI succeeds**.
+
+This does not provide a Lorentzian generalization or a physical
+independent gauge-boson theory.
+
 ## Verification
 
 Dedicated pinned Lean --trust=0 CI explicitly compiles every required
