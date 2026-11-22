@@ -1,0 +1,232 @@
+name: Finite Discovery - proof-gated self-directed research
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/finite_discovery.py'
+      - 'tools/autonomy/finite_discovery_smoke.py'
+      - 'tests/test_finite_discovery.py'
+      - 'tests/fixtures/finite_discovery_empty.json'
+      - 'docs/autonomy/FINITE_DISCOVERY.md'
+      - '.github/workflows/finite-discovery.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/finite_discovery.py'
+      - 'tools/autonomy/finite_discovery_smoke.py'
+      - '.github/workflows/finite-discovery.yml'
+  schedule:
+    # 04:17 UTC = 13:17 JST. Event may run later due to GitHub scheduler load.
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: finite-discovery-persistent-ledger
+  cancel-in-progress: false
+
+jobs:
+  review-and-kernel-tests:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout proposed exact source without persisted credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check deterministic hypothesis grammar and untrusted ledger defenses
+        run: python -m unittest discover -s tests -p 'test_finite_discovery.py' -v
+      - name: Reproduce an initial new finite experiment and seven reviewed variants
+        shell: bash
+        run: |
+          set -euo pipefail
+          commit="$(git rev-parse HEAD)"
+          python -B -m tools.autonomy.finite_discovery prepare \
+            --root . --state tests/fixtures/finite_discovery_empty.json \
+            --head "$commit" --day 2026-11-23 \
+            --output verification/finite-discovery/cycle
+          python -B -m tools.autonomy.finite_discovery_smoke \
+            --root . --head "$commit" \
+            --output verification/finite-discovery/smoke
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile actual generated Lean without trusted extensions
+        shell: bash
+        working-directory: lean
+        run: |
+          set -uo pipefail
+          for file in ../verification/finite-discovery/{cycle,smoke}/proof/*.lean; do
+            name="$(basename "$file" .lean)"
+            directory="$(dirname "$file")"
+            set +e
+            lake env lean --trust=0 "$file" > "$directory/$name.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "$directory/$name.exit"
+            echo "finite-discovery $name: Lean exit $code"
+          done
+      - name: Audit axiom records and test a real proof-gated receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/finite-discovery/cycle/proof
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/finite-discovery/smoke/proof
+          python -B -m tools.autonomy.finite_discovery receipt \
+            --root . --state tests/fixtures/finite_discovery_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/finite-discovery/cycle \
+            --output verification/finite-discovery/test-verified-next-state.json
+      - name: Preserve exact source, models, certificates, logs and feedback
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: finite-discovery-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/finite-discovery/
+          if-no-files-found: warn
+          retention-days: 30
+
+  choose-one:
+    # This runs only a reviewed default-branch controller. No PR code or token.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    outputs:
+      candidate: ${{ steps.choose.outputs.candidate }}
+    steps:
+      - name: Checkout exact trusted controller
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read isolated discovery ledger as data only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/finite-discovery-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Derive next experiment from reviewed seeds and verified ancestors
+        id: choose
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          test "$sha" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.finite_discovery prepare \
+            --root . --state ../state/docs/autonomy/finite-discovery-state.json \
+            --head "$sha" --day "$(date -u +%F)" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          obj = json.load(open("../cycle/plan.json", encoding="utf-8"))
+          print("candidate=" + ("true" if obj["candidate"] else "false"))
+          PY
+      - name: Install pinned Lean only if another candidate exists
+        if: steps.choose.outputs.candidate == 'true'
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: control/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile exactly one generated finite obligation
+        if: steps.choose.outputs.candidate == 'true'
+        shell: bash
+        working-directory: control/lean
+        run: |
+          set -uo pipefail
+          for file in ../../cycle/proof/*.lean; do
+            name="$(basename "$file" .lean)"
+            set +e
+            lake env lean --trust=0 "$file" > "../../cycle/proof/$name.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "../../cycle/proof/$name.exit"
+            echo "finite-discovery $name: Lean exit $code"
+          done
+      - name: Require all proof checks and permitted axioms
+        if: steps.choose.outputs.candidate == 'true'
+        working-directory: control
+        run: python -B tools/autonomy/proof_forge.py audit --output ../cycle/proof
+      - name: Retain all candidate/proof evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: finite-discovery-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  persist-verified:
+    # Isolate the only write-capable job, and commit JSON ONLY to a separate
+    # data branch. No generated Python, shell commands, Lean or PR code execute.
+    if: github.ref == 'refs/heads/main' && needs.choose-one.result == 'success' && needs.choose-one.outputs.candidate == 'true'
+    needs: [choose-one]
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/finite-discovery-state
+          path: state
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: finite-discovery-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Independently verify exact model and Lean evidence before state write
+        env:
+          PYTHONPATH: ${{ github.workspace }}/control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C control rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B control/tools/autonomy/proof_forge.py audit --output cycle/proof
+          python -B -m tools.autonomy.finite_discovery receipt \
+            --root control --state state/docs/autonomy/finite-discovery-state.json \
+            --head "$GITHUB_SHA" --evidence cycle \
+            --output state/docs/autonomy/finite-discovery-state.json
+      - name: Commit only the proof-reconciled data ledger, not executable code
+        shell: bash
+        working-directory: state
+        run: |
+          set -euo pipefail
+          git config user.name 'finite-discovery[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/autonomy/finite-discovery-state.json
+          git diff --cached --quiet && { echo "No verified data update"; exit 1; }
+          git commit -m 'finite discovery: append one proof-verified research experiment'
+          git push origin HEAD:refs/heads/autonomy/finite-discovery-state
