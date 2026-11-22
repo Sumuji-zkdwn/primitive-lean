@@ -91,10 +91,39 @@ kernel actually compiles them.
 
 This stage requires **no external AI API key or paid inference**. It does
 not enable the paused legacy autonomous growth schedule, modify the main
-branch, auto-merge PRs, request elevated GitHub permissions, or execute text
-from research notes as commands. Every job has a hard execution limit.
-A PR from an untrusted source receives only read access in this workflow.
+branch, auto-merge PRs, or execute text from research notes as commands.
+Every job has a hard execution limit. The **kernel-verification job is
+read-only**. A separate attestation job receives only `attestations: write`,
+`id-token: write` and `contents: read` and runs **only after** successful
+kernel verification on same-repository pull requests. That privileged job
+downloads artifacts and packages evidence; it neither checks out PR-controlled
+source nor executes repository Python. Fork PRs do not get a signer.
 
 Potential extension: connect the existing research scout's unverified
 candidates to *human-reviewed* finite JSON requests. Do not promote a
 scout note into a theorem without constructing and auditing the model.
+
+## Cryptographically signed build provenance
+
+The independent signing job packages the exact-head JSON, generated Lean,
+kernel logs, and source identifiers into `proof-forge-certified.zip` using
+deterministic ZIP metadata. It then calls GitHub's built-in
+`actions/attest@v4` on **those bytes**. On success, GitHub retains a public
+Sigstore provenance attestation bound to the workflow identity and ZIP
+digest, and uploads the same ZIP as the named `proof-forge-attested-...`
+artifact.
+
+After downloading the ZIP from the passing workflow, verify provenance
+independently via:
+
+~~~sh
+gh attestation verify proof-forge-certified.zip -R Sumuji-zkdwn/primitive-lean
+~~~
+
+The normal unsigned `proof-forge-...` evidence artifact is retained even
+when kernel verification fails; **a failed job cannot produce a signed
+successful certificate**. The build attestation proves the origin and digest
+of the ZIP, *not* mathematical truth or correctness of the Python parser.
+Lean `--trust=0`, source hashes, and explicit axiom audit are separate
+required evidence. **No green attestation is claimed until its job succeeds
+on the exact PR head.**

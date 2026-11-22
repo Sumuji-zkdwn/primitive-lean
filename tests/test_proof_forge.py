@@ -52,6 +52,16 @@ class ProofForgeTests(unittest.TestCase):
         self.assertIn("theorem safe_step", source)
         self.assertEqual(len(names), 5)
 
+    def test_one_step_certificate_omits_unused_step_simp(self):
+        spec = model()
+        spec["transitions"] = [[0, 3, 2, 3]]
+        result = forge.solve(spec)
+        self.assertEqual(result["word"], [0])
+        source, names = forge.lean_source(spec, result)
+        self.assertEqual(len(names), 3)
+        self.assertIn("simp [agreeUpTo, readout, originLeft, originRight]", source)
+        self.assertNotIn("simp [agreeUpTo, readout, step, originLeft, originRight]", source)
+
     def test_zero_length_distinguishes(self):
         spec = model()
         spec["pair"] = [0, 3]

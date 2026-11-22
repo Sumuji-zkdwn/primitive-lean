@@ -235,7 +235,9 @@ def lean_source(model: dict, result: dict) -> tuple[str, list[str]]:
         else:
             lines.extend([
                 f"  have checked : agreeUpTo {len(word) - 1} originLeft originRight := by",
-                "    simp [agreeUpTo, readout, step, originLeft, originRight]",
+                ("    simp [agreeUpTo, readout, originLeft, originRight]"
+                 if len(word) == 1 else
+                 "    simp [agreeUpTo, readout, step, originLeft, originRight]"),
                 f"  exact agreeUpTo_sound {len(word) - 1} originLeft originRight checked w (by omega)",
             ])
         theorems = ["word_separates", "agreeUpTo_sound", "no_shorter_word"]
