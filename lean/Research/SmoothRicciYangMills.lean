@@ -35,6 +35,18 @@ variable
   [IsContMDiffRiemannianBundle I 3 E
     (fun (x : M) => TangentSpace I x)]
 
+/-- With C3 metric regularity, the actual Levi-Civita connection
+is C1. This is an explicitly proved local typeclass witness. -/
+instance instC1LeviCivitaFromC3 :
+    ContMDiffCovariantDerivative (leviCivitaConnection I M) 1 :=
+  SmoothMetricBianchi.levi_civita_C1 I M
+
+/-- With C3 metric regularity, the actual Levi-Civita connection
+is C2, so true covariant Riemann divergence is a well-typed term. -/
+instance instC2LeviCivitaFromC3 :
+    ContMDiffCovariantDerivative (leviCivitaConnection I M) 2 :=
+  SmoothMetricBianchi.levi_civita_C2 I M
+
 /-- Vanishing of global geometric Ricci implies vanishing of its
 genuine covariant derivative (not a finite FrameJet imitation). -/
 theorem cov_ricci_zero
@@ -50,7 +62,9 @@ theorem cov_ricci_zero
       (fun _ => (0 : ℝ)) := by
     funext p
     exact hRic Y Z p
-  simp [CovariantDerivative.covRicci, hRic, hzero]
+  unfold CovariantDerivative.covRicci
+  rw [hzero, mvfderiv_const]
+  simp [hRic]
 
 /-- The frame-independent Yang--Mills divergence is zero for the
 actual Mathlib Levi-Civita connection of a Ricci-flat C3 metric,
