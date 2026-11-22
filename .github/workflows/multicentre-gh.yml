@@ -1,0 +1,87 @@
+name: Multi-centre gravity observer equivalence and Chern flux
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/MulticentreObservation.lean'
+      - 'tools/check_multicentre_gh.py'
+      - 'docs/research/2026-11-22-multicentre-observation.md'
+      - '.github/workflows/multicentre-gh.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  multicentre-gh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel-compile observer multipole and Chern identities
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/MulticentreObservation.olean Research/MulticentreObservation.lean 2>&1 | tee ../multicentre-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../multicentre-lean.log; then exit 1; fi
+      - name: Audit theorem axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          p=pathlib.Path('Research/MulticentreObservation.lean')
+          src=p.read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=10, names
+          audit='import Research.MulticentreObservation\n'+''.join(
+              '#print axioms MulticentreObservation.'+name+'\n'
+              for name in names)
+          pathlib.Path('MulticentreObservationAudit.lean').write_text(audit)
+          pathlib.Path('../multicentre-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 MulticentreObservationAudit.lean 2>&1 | tee ../multicentre-audit.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../multicentre-audit.log').read_text()
+          n=int(pathlib.Path('../multicentre-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for ent in entries:
+              used=set(filter(None,(v.strip() for v in ent.split(','))))
+              assert used<=allowed, used-allowed
+          print('Lean theorem dependencies verified:',n)
+          PY
+      - name: Independent exact two-centre harmonic and multipole oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_multicentre_gh.py 2>&1 | tee multicentre-python.log
+      - name: Publish exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: multicentre-gh
+          path: |
+            multicentre-lean.log
+            multicentre-audit.log
+            multicentre-count.txt
+            multicentre-python.log
+          if-no-files-found: warn
