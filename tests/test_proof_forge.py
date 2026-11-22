@@ -32,7 +32,7 @@ class ProofForgeTests(unittest.TestCase):
         source, names = forge.lean_source(spec, got)
         self.assertIn("theorem no_shorter_word", source)
         self.assertIn("have checked : agreeUpTo 1", source)
-        self.assertIn("by decide", source)
+        self.assertIn("simp [agreeUpTo, readout, step, originLeft, originRight]", source)
         self.assertEqual(len(names), 3)
 
     def test_unbounded_equivalence_certificate(self):
