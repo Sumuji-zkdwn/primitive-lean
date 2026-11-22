@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'lean/Research/DelayedAetherCochain.lean'
+      - 'experiments/delayed_aether/README.md'
+      - 'docs/research/2026-11-22-delayed-hardening-ether-v1-v10.md'
       - '.github/workflows/delayed-aether-lean.yml'
   push:
     paths:
@@ -61,6 +63,25 @@ jobs:
             exit 1
           fi
           cat ../delayed-aether-lean.log
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source = Path('Research/DelayedAetherCochain.lean').read_text(encoding='utf-8')
+          names = re.findall(r'(?m)^theorem\s+([a-zA-Z0-9_]+)', source)
+          lines = Path('../delayed-aether-lean.log').read_text(encoding='utf-8').splitlines()
+          output = [line for line in lines if line.startswith("'DelayedAether.")]
+          assert len(output) == len(names), (len(output), len(names))
+          allow = {'propext', 'Quot.sound', 'Classical.choice'}
+          seen = []
+          for line in output:
+              match = re.fullmatch(r"'DelayedAether\.([A-Za-z0-9_]+)' depends on axioms: \[(.*?)\]", line)
+              assert match is not None, line
+              assert set(filter(None, (s.strip() for s in match.group(2).split(',')))) <= allow, line
+              seen.append(match.group(1))
+          assert seen == names, (seen, names)
+          print(f'PASS: {len(names)} Lean proofs, approved foundational axioms only')
+          PY
           echo "Lean theorem compilation and explicit axiom output PASS"
       - name: Upload exact-head theorem log
         if: always()
