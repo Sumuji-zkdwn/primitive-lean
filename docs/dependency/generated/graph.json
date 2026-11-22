@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "40090b3859ae3371a01c4ff5106fc9621d7a4b93",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1664,6 +1664,42 @@
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
     },
     {
+      "id": "main:lean/Research/GeometricCharge.lean",
+      "scope": "main",
+      "path": "lean/Research/GeometricCharge.lean",
+      "group": "Other",
+      "namespace": "GeometricCharge",
+      "declarations": [
+        "baseQuadratic",
+        "connection",
+        "liftedQuadratic",
+        "fibreMomentum",
+        "lagrangian",
+        "routhian",
+        "lifted_momentum",
+        "routh_identity",
+        "gauge_invariant",
+        "fibre_orientation_invariant",
+        "cycleHolonomy",
+        "cycle_holonomy_gauge_invariant",
+        "timeBlock",
+        "mixedBlock",
+        "diagonal_blind_to_sign",
+        "mixed_detects_sign",
+        "accelerateTime",
+        "accelerateSpace",
+        "charge_reversal",
+        "joint_orientation_reversal",
+        "projected_norm_derivative_zero",
+        "neutral_has_no_force",
+        "kk_determinant"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "3516546392bb50b842228fd4017f288585680bb34c203eb575dd4e3963771458"
+    },
+    {
       "id": "main:lean/Research/OkanoharaTransport.lean",
       "scope": "main",
       "path": "lean/Research/OkanoharaTransport.lean",
@@ -2144,6 +2180,30 @@
         "Mathlib.Tactic"
       ],
       "sha256": "0c8cbcd5a8749cea7d787e1710ad1558c7e8f66fa61700696c936f60ab95f68a"
+    },
+    {
+      "id": "main:lean/Research/TwistedFlatReduction.lean",
+      "scope": "main",
+      "path": "lean/Research/TwistedFlatReduction.lean",
+      "group": "Other",
+      "namespace": "TwistedFlatReduction",
+      "declarations": [
+        "lambda",
+        "lambda_positive",
+        "helical_square_completion",
+        "connectionTheta",
+        "curvatureRTheta",
+        "connection_relation",
+        "curvature_relation",
+        "nonzero_induced_curvature",
+        "zero_twist_zero_curvature",
+        "circle_size_changes",
+        "twist_sign_reverses_field"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "fe94297e11781bcef4bc712a2d0b6af6e8ffac60797dd41abeb6d4123f092713"
     },
     {
       "id": "main:lean/Research/VoidHyperCompletion.lean",
@@ -27677,28 +27737,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "40090b3859ae3371a01c4ff5106fc9621d7a4b93",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "40090b3859ae3371a01c4ff5106fc9621d7a4b93",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "40090b3859ae3371a01c4ff5106fc9621d7a4b93",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "40090b3859ae3371a01c4ff5106fc9621d7a4b93",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

@@ -1,0 +1,85 @@
+name: Flat 5D twist yields 4D magnetic flux
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/TwistedFlatReduction.lean'
+      - 'tools/check_twisted_flat_reduction.py'
+      - 'docs/research/2026-11-22-twisted-flat-magnetic-field.md'
+      - '.github/workflows/twisted-flat-reduction.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  twisted-flat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel-check square completion and nonzero flux
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/TwistedFlatReduction.olean Research/TwistedFlatReduction.lean 2>&1 | tee ../twisted-flat-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../twisted-flat-lean.log; then exit 1; fi
+      - name: Audit axioms of each declaration
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          src=pathlib.Path('Research/TwistedFlatReduction.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b', src, re.M)
+          names=re.findall(r'^theorem\s+(\w+)', src, re.M)
+          assert len(names)>=8, names
+          pathlib.Path('TwistedFlatReductionAudit.lean').write_text(
+              'import Research.TwistedFlatReduction\n'+''.join(
+              '#print axioms TwistedFlatReduction.'+n+'\n' for n in names))
+          pathlib.Path('../twisted-flat-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 TwistedFlatReductionAudit.lean 2>&1 | tee ../twisted-flat-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s=pathlib.Path('../twisted-flat-audit.log').read_text()
+          n=int(pathlib.Path('../twisted-flat-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n, (n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+              used=set(filter(None,(x.strip() for x in entry.split(','))))
+              assert used<=allowed, used-allowed
+          print('Axiom-checked theorems:',n)
+          PY
+      - name: Exact independent 5D-to-4D symbolic reconstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_twisted_flat_reduction.py 2>&1 | tee twisted-flat-python.log
+      - name: Attach exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: twisted-flat
+          path: |
+            twisted-flat-lean.log
+            twisted-flat-audit.log
+            twisted-flat-count.txt
+            twisted-flat-python.log
+          if-no-files-found: warn
