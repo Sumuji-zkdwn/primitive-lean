@@ -60,11 +60,12 @@ jobs:
           import re
           src=Path('Research/SmoothCurvaturePairSymmetry.lean').read_text()
           assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
-          left=src.split('namespace CovariantDerivative',1)[1].split('end CovariantDerivative',1)[0]
+          blocks=re.findall(r'namespace CovariantDerivative(.*?)end CovariantDerivative',src,re.S)
+          left='\n'.join(blocks)
           right=src.split('namespace SmoothCurvatureDualFrame',1)[1].split('end SmoothCurvatureDualFrame',1)[0]
-          a=re.findall(r'^theorem\s+(\w+)',left,re.M)
+          a=re.findall(r'^(?:theorem|lemma)\s+(\w+)',left,re.M)
           b=re.findall(r'^theorem\s+(\w+)',right,re.M)
-          assert len(a)>=8 and len(b)>=4,(len(a),len(b))
+          assert len(a)>=9 and len(b)>=4,(len(a),len(b))
           out='import Research.SmoothCurvaturePairSymmetry\n'
           out+=''.join('#print axioms CovariantDerivative.'+n+'\n' for n in a)
           out+=''.join('#print axioms SmoothCurvatureDualFrame.'+n+'\n' for n in b)
