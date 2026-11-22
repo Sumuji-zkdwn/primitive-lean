@@ -14,6 +14,10 @@ Upstream files, unmodified at initial import:
 
 They are copied to lean/RicciFlowBlueprint/ and retain the original module names / import dependencies. Copyright and credit remain with the original authors, as covered by the original Apache-2.0 license, copied to licenses/ricci-flow-blueprint-Apache-2.0.txt. Any compatibility changes, if needed, should be itemized in this note and should not be misrepresented as original derivations.
 
+## Pinned mathlib compatibility patch
+
+On the pinned mathlib revision, `CovariantDerivative.isCovariantDerivativeOn` is generalized to an arbitrary, implicitly inferred subset of the manifold. This makes upstream proof calls ambiguous (`Set M` remains a metavariable). The ported `Curvature.lean` therefore replaces **27 occurrences** of `cov.isCovariantDerivativeOn.` by the original bundled global law `cov.isCovariantDerivativeOnUniv.`. The latter has the same `Set.univ` geometric meaning and avoids any extra mathematical premise. This change is confined to the upstream compatibility layer; the source SHA and exact replacement count are recorded for auditing.
+
 Upstream project toolchain at this SHA: Lean 4.34.0-rc2 with mathlib master (not pinned).
 Target primitive-lean toolchain: Lean 4.36.0-rc2, mathlib 2ddf59c8f14245864e6c0ed227a2dab76b9efea2.
 Port to this target requires exact-head CI verification.
