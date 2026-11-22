@@ -1,0 +1,85 @@
+name: Zero-Lambda Ricci-flat KK monopole
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKMonopoleGeometry.lean'
+      - 'tools/check_kk_monopole.py'
+      - 'docs/research/2026-11-22-kk-monopole.md'
+      - '.github/workflows/kk-monopole.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kk-monopole:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel compile flux and patch proofs
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKMonopoleGeometry.olean Research/KKMonopoleGeometry.lean 2>&1 | tee ../kk-monopole-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../kk-monopole-lean.log; then exit 1; fi
+      - name: Audit theorem axiom dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/KKMonopoleGeometry.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=8,names
+          pathlib.Path('KKMonopoleAudit.lean').write_text(
+              'import Research.KKMonopoleGeometry\n'+''.join(
+              '#print axioms KKMonopoleGeometry.'+n+'\n' for n in names))
+          pathlib.Path('../kk-monopole-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKMonopoleAudit.lean 2>&1 | tee ../kk-monopole-audit.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../kk-monopole-audit.log').read_text()
+          n=int(pathlib.Path('../kk-monopole-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+              used=set(filter(None,(x.strip() for x in entry.split(','))))
+              assert used<=allowed,used-allowed
+          print('Axiom-checked theorems:',n)
+          PY
+      - name: Independently calculate full 5D local Ricci and monopole Chern
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_monopole.py 2>&1 | tee kk-monopole-python.log
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-monopole
+          path: |
+            kk-monopole-lean.log
+            kk-monopole-audit.log
+            kk-monopole-count.txt
+            kk-monopole-python.log
+          if-no-files-found: warn
