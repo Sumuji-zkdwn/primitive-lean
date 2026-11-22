@@ -24,4 +24,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Audit finite delayed-aether witnesses
-        run: python -B -X utf8 experiments/delayed_aether/verify_core.py
+        run: |
+          python -B -X utf8 experiments/delayed_aether/verify_early_models.py
+          python -B -X utf8 experiments/delayed_aether/verify_core.py
