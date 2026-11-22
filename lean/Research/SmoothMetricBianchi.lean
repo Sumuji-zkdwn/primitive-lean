@@ -37,10 +37,8 @@ theorem levi_civita_C2 :
       (fun (x : M) => TangentSpace I x) :=
     IsContMDiffRiemannianBundle.of_le (n := 3) (by norm_num)
   letI : IsContMDiffRiemannianBundle I (((2 : ℕ∞) : ℕ∞ω) + 1) E
-      (fun (x : M) => TangentSpace I x) := by
-    simpa using
-      (inferInstance : IsContMDiffRiemannianBundle I 3 E
-        (fun (x : M) => TangentSpace I x))
+      (fun (x : M) => TangentSpace I x) :=
+    IsContMDiffRiemannianBundle.of_le (n := 3) (by norm_num)
   exact RicciFlowBlueprint.contMDiffCovariantDerivative_leviCivitaConnection
     (I := I) (M := M) (k := 2)
 
