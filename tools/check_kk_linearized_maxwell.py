@@ -37,6 +37,23 @@ def linearized_mixed():
         exact_zero(Ric-(ksq*eps[mu]-ks[mu]*ke)*wave/2,
                    f'linearized Ricci {mu},4')
     print('PASS: 5D linearized mixed Ricci = (k² epsilon - k(k.epsilon))/2')
+    # Verify all 25 components of linearized 5D Ricci, including those
+    # not in the Maxwell sector. For a cylinder h_mu5 perturbation, these
+    # must vanish identically before imposing null/transverse constraints.
+    for a in range(5):
+        for b in range(5):
+            value = sum(eta[c]*(s.diff(h[c,b],coords[c],coords[a])
+                         +s.diff(h[c,a],coords[c],coords[b])
+                         -s.diff(h[a,b],coords[c],coords[c]))
+                         for c in range(5))/2 - s.diff(trace,coords[a],coords[b])/2
+            expected = 0
+            if a==4 and b<4:
+                expected = (ksq*eps[b]-ks[b]*ke)*wave/2
+            if b==4 and a<4:
+                expected = (ksq*eps[a]-ks[a]*ke)*wave/2
+            exact_zero(value-expected, f'full linearized Ricci {a},{b}')
+    print('PASS: all 25 components of linearized 5D Ricci checked')
+
     example = {ks[0]:1,ks[1]:0,ks[2]:0,ks[3]:1,
                eps[0]:0,eps[1]:1,eps[2]:0,eps[3]:0}
     exact_zero(ksq.subs(example),'null')
