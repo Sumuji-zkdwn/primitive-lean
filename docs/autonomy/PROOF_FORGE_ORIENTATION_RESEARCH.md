@@ -88,5 +88,7 @@ recoverable; their identification depends on the chosen transitions and
 readout. No statement about actual physical spacetime, cognition, or
 general infinite-state processes follows from the finite experiments.
 
-Safety: no API spending, no unattended agent-written Lean commands, no
-write token for the dedicated Actions workflow, and no main auto-merge.
+Safety: no API spending, no unattended agent-written Lean commands, and
+no main auto-merge. The Lean kernel job runs with read-only credentials;
+a separate post-success job has narrowly scoped attestations and OIDC
+permissions to sign the evidence ZIP without checking out PR source.
