@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "31fb7a57d3f2af16a3a3f534f9ae2f99ee2c7891",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1515,6 +1515,26 @@
         "PrismAiryReflectance"
       ],
       "sha256": "066c1dc7eb94627c92c2901242da914f73a23c582dc0348dd21565ac214e116d"
+    },
+    {
+      "id": "main:lean/Research/CP2SpinCArithmetic.lean",
+      "scope": "main",
+      "path": "lean/Research/CP2SpinCArithmetic.lean",
+      "group": "Other",
+      "namespace": "CP2SpinCArithmetic",
+      "declarations": [
+        "determinantChernCoefficient",
+        "indexNumerator",
+        "numerator_factorization",
+        "canonical_numerator",
+        "first_twist_numerator",
+        "negative_first_twist_numerator",
+        "numerator_step"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "d7a9e3c15463926ea10d2a893713579a7439c3db91100251f0a0304cc50d984f"
     },
     {
       "id": "main:lean/Research/ChairPieKillSpot.lean",
@@ -27677,28 +27697,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "31fb7a57d3f2af16a3a3f534f9ae2f99ee2c7891",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "31fb7a57d3f2af16a3a3f534f9ae2f99ee2c7891",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "31fb7a57d3f2af16a3a3f534f9ae2f99ee2c7891",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "31fb7a57d3f2af16a3a3f534f9ae2f99ee2c7891",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
