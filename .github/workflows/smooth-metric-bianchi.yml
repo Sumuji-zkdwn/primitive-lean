@@ -1,0 +1,110 @@
+name: C3 Riemannian metric implies smooth Levi-Civita Bianchi
+
+on:
+  pull_request:
+    paths:
+      - 'lean/RicciFlowBlueprint/LeviCivitaSmoothPort.lean'
+      - 'lean/Research/SmoothMetricBianchi.lean'
+      - 'docs/verification/2026-11-22-smooth-metric-bianchi.md'
+      - '.github/workflows/smooth-metric-bianchi.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  c3-metric-bianchi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install fixed Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel compile upstream Cn Levi-Civita smoothness and C3-metric Bianchi
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research .lake/build/lib/lean/RicciFlowBlueprint
+          for file in \
+            Research/RicciFlatBianchiYangMills.lean \
+            Research/BianchiOperatorBridge.lean \
+            RicciFlowBlueprint/LieBracketDerivation.lean \
+            RicciFlowBlueprint/Curvature.lean \
+            RicciFlowBlueprint/Bianchi.lean \
+            Research/SmoothLeviCivitaBianchi.lean \
+            RicciFlowBlueprint/LeviCivitaSmoothPort.lean \
+            Research/SmoothMetricBianchi.lean; do
+            echo "CHECKING $file"
+            prefix=$(printf '%s' "$file" | sed 's/\.lean$//')
+            lake env lean --trust=0 -o ".lake/build/lib/lean/$prefix.olean" "$file" 2>&1 | tee -a ../smooth-metric-lean.log
+          done
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../smooth-metric-lean.log; then exit 1; fi
+      - name: Audit imported regularity theorem and new declarations
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          path=Path('Research/SmoothMetricBianchi.lean')
+          src=path.read_text()
+          upstream=Path('RicciFlowBlueprint/LeviCivitaSmoothPort.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          assert not re.search(r'^\s*(axiom|sorry)\b',upstream,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=3,names
+          out='import Research.SmoothMetricBianchi\n'
+          out+='#print axioms RicciFlowBlueprint.contMDiffCovariantDerivative_leviCivitaConnection\n'
+          out+=''.join('#print axioms SmoothMetricBianchi.'+n+'\n' for n in names)
+          Path('SmoothMetricBianchiAudit.lean').write_text(out)
+          Path('../smooth-metric-count.txt').write_text(str(len(names)+1))
+          PY
+          lake env lean --trust=0 SmoothMetricBianchiAudit.lean 2>&1 | tee ../smooth-metric-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../smooth-metric-audit.log').read_text()
+          n=int(Path('../smooth-metric-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent,s)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for e in entries:
+              used=set(filter(None,(x.strip() for x in e.split(','))))
+              assert used<=allowed,used-allowed
+          print('Axiom-audited C3 geometry declarations:',n)
+          PY
+      - name: Check precise upstream license and source ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s licenses/ricci-flow-blueprint-Apache-2.0.txt
+          grep -q c8017e2c26898d11f39cec0dfce89368d5a0506a \
+            docs/verification/2026-11-22-smooth-metric-bianchi.md
+          sha256sum lean/RicciFlowBlueprint/LeviCivitaSmoothPort.lean \
+            > smooth-metric-sha256.txt
+          git rev-parse HEAD > smooth-metric-head.txt
+      - name: Upload exact-head proofs and audits
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: smooth-metric-bianchi
+          path: |
+            smooth-metric-lean.log
+            smooth-metric-audit.log
+            smooth-metric-count.txt
+            smooth-metric-sha256.txt
+            smooth-metric-head.txt
+          if-no-files-found: warn
