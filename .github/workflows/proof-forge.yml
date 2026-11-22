@@ -1,0 +1,91 @@
+name: Proof Forge - finite observer certificates (Lean kernel)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'proof_forge/requests/**'
+      - 'tools/autonomy/proof_forge.py'
+      - 'tests/test_proof_forge.py'
+      - 'docs/autonomy/PROOF_FORGE.md'
+      - '.github/workflows/proof-forge.yml'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: proof-forge-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  kernel-certificates:
+    name: Independently compile all generated finite certificates
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out the exact proposed source (never merge PR)
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Test finite model checker, source constraints and audit logic
+        run: python -m unittest discover -s tests -p 'test_proof_forge.py' -v
+
+      - name: Record exact source and generate bounded Lean proof obligations
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          python -B -X utf8 tools/autonomy/proof_forge.py generate \
+            --requests proof_forge/requests \
+            --output verification/proof-forge \
+            --head "$EXPECTED_HEAD"
+
+      - name: Install pinned Lean and Mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+
+      - name: Compile each generated proof with trust zero (retain failures)
+        working-directory: lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for f in ../verification/proof-forge/*.lean; do
+            name="$(basename "$f" .lean)"
+            set +e
+            lake env lean --trust=0 "$f" > "../verification/proof-forge/$name.log" 2>&1
+            result=$?
+            set -e
+            printf '%s\n' "$result" > "../verification/proof-forge/$name.exit"
+            echo "Proof Forge $name: Lean exit $result"
+          done
+
+      - name: Verify all proof files, compilation results and axiom records
+        run: python -B -X utf8 tools/autonomy/proof_forge.py audit --output verification/proof-forge
+
+      - name: Keep JSON certificates, generated Lean and exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: proof-forge-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/proof-forge/
+          if-no-files-found: warn
+          retention-days: 30
