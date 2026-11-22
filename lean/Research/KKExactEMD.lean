@@ -209,8 +209,9 @@ def kretschmann5 (k r : ℚ) : ℚ :=
 finite value at the removable coordinate endpoint r=0 when k≠0. -/
 theorem kretschmann_formula_finite_at_centre (k : ℚ) (hk : k ≠ 0) :
     kretschmann5 k 0 = 24 / k ^ 4 := by
-  unfold kretschmann5 q
-  field_simp <;> ring
+  simp only [kretschmann5, q, zero_add]
+  apply (div_eq_div_iff (pow_ne_zero 6 hk) (pow_ne_zero 4 hk)).mpr
+  ring
 
 /-- 4D projected Einstein-frame curvature squared:
 R4² = 9 k^4/[64 r^3 (r+k)^5].
