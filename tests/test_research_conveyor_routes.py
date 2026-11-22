@@ -47,6 +47,8 @@ class MultiDomainTests(unittest.TestCase):
             anchor = routes.source_anchor(ROOT, route)
             path = ROOT / anchor["path"]
             self.assertEqual(anchor["source_sha256"], conveyor.sha(path.read_bytes()))
+            self.assertEqual(anchor["reviewed_git_blob_sha"],
+                             routes.git_blob_sha(path.read_bytes()))
             line = path.read_text("utf-8").splitlines()[anchor["line"] - 1]
             self.assertEqual(anchor["evidence"], " ".join(line.split()))
             self.assertTrue(anchor["status"].startswith("REVIEWED_"))
@@ -133,6 +135,21 @@ class MultiDomainTests(unittest.TestCase):
                             encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "semantics changed"):
                 routes.source_anchor(Path(temp), "observer")
+
+    def test_unreviewed_primary_code_change_blocks_laakso_adapter(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            spec = routes.SOURCE_SPECS["laakso"]
+            for rel in [spec["path"], *spec["support_blobs"]]:
+                destination = root / rel
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes((ROOT / rel).read_bytes())
+            self.assertEqual(routes.source_anchor(root, "laakso")["path"],
+                             spec["path"])
+            extra = root / "tools/check_laakso_bonding_finite.py"
+            extra.write_bytes(extra.read_bytes() + b"\n# unreviewed edit\n")
+            with self.assertRaisesRegex(ValueError, "primary code source changed"):
+                routes.source_anchor(root, "laakso")
 
     def test_receipt_is_source_and_model_bound(self):
         with tempfile.TemporaryDirectory() as temp:
