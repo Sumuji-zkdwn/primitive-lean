@@ -9,7 +9,7 @@ The historical Siphon adapter remains in research_conveyor.py, unchanged.
 """
 from __future__ import annotations
 
-from hashlib import sha256
+from hashlib import sha1, sha256
 from pathlib import Path
 
 from tools.autonomy import proof_forge
@@ -25,6 +25,7 @@ ROUTE_ORDER = ("siphon", "observer", "laakso")
 SOURCE_SPECS = {
     "observer": {
         "path": "docs/research/2026-11-11-observer-orientation-depth.md",
+        "git_blob_sha": "a79bc31fbbaead7414fe65588b71f728d9b65f34",
         "required": ("leastDepth", "four-state counterexample", "macro",
                      "observational", "Fin 3"),
         "anchor": "A four-state counterexample",
@@ -33,6 +34,13 @@ SOURCE_SPECS = {
     },
     "laakso": {
         "path": "docs/research/2026-11-17-laakso-bonding-audit.md",
+        "git_blob_sha": "520c64b26a4d0ef6d539325413b0cb26cee99b7c",
+        "support_blobs": {
+            "linear_input/lean_check/LaaksoFiniteGraph.inc":
+                "430e51285e141cbdd07abfb3b28e22c6d2a0e2d6",
+            "tools/check_laakso_bonding_finite.py":
+                "1440bd63a3eba1b9c987e4b250e3e6b6a96704af",
+        },
         "required": ("RawVertex (Fin 2) (Fin 1)", "rawProjection",
                      "advanceRightGeneral", "W1", "W2"),
         "anchor": "W1の古い頂点コピー",
@@ -59,14 +67,28 @@ def route_of(task_id: str) -> str:
     return "laakso"
 
 
+def git_blob_sha(data: bytes) -> str:
+    """Compute a Git blob object identity without network or subprocess."""
+    return sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
+
+
 def source_anchor(root: Path, route: str) -> dict:
-    """Source bytes and an exact reviewed line, never executable instructions."""
+    """Exact reviewed source and support blobs, never executable instructions."""
     require(route in SOURCE_SPECS, "unreviewed research route")
     spec = SOURCE_SPECS[route]
     path = root / spec["path"]
     require(path.is_file() and not path.is_symlink(), "research source unavailable")
     data = path.read_bytes()
     require(len(data) <= 300_000, "research source too large")
+    require(git_blob_sha(data) == spec["git_blob_sha"],
+            "reviewed model source semantics changed; adapter re-review required")
+    for relative, expected_blob in spec.get("support_blobs", {}).items():
+        support = root / relative
+        require(support.is_file() and not support.is_symlink(),
+                "reviewed primary code source missing")
+        proof_bytes = support.read_bytes()
+        require(len(proof_bytes) <= 300_000 and git_blob_sha(proof_bytes) == expected_blob,
+                "reviewed primary code source changed; adapter re-review required")
     source = data.decode("utf-8")
     require(all(item in source for item in spec["required"]),
             "reviewed model source semantics changed")
@@ -79,6 +101,8 @@ def source_anchor(root: Path, route: str) -> dict:
     ident = sha256((spec["path"] + "\0" + evidence).encode("utf-8")).hexdigest()[:20]
     return {"id": ident, "path": spec["path"], "line": lineno,
             "evidence": evidence, "source_sha256": digest,
+            "reviewed_git_blob_sha": spec["git_blob_sha"],
+            "support_git_blob_sha": spec.get("support_blobs", {}),
             "priority": 0, "status": spec["label"]}
 
 
