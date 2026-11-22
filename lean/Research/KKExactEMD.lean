@@ -189,4 +189,43 @@ theorem nonlinear_ricci_theta_nonzero (k r : ℚ)
   exact div_ne_zero (pow_ne_zero 2 hk)
     (mul_ne_zero (by norm_num) (pow_ne_zero 2 hq))
 
+
+/-!
+## Dimensional projection and curvature singularities
+
+The same solution has a finite 5D Kretschmann scalar in the r->0
+limit but a divergent 4D Einstein-frame Ricci scalar. SymPy derives
+both invariants from the full metrics. Lean proves their exact rational
+normalization and value at the coordinate endpoint, not a smooth 5D
+atlas or an actual analytic limit in the kernel.
+-/
+
+/-- Full 5D Riemann-square invariant from independent tensor
+differentiation: R_ABCD R^ABCD = 24 k²/(r+k)^6. -/
+def kretschmann5 (k r : ℚ) : ℚ :=
+  24 * k ^ 2 / (q k r) ^ 6
+
+/-- The 5D curvature invariant's rational expression has a
+finite value at the removable coordinate endpoint r=0 when k≠0. -/
+theorem kretschmann_formula_finite_at_centre (k : ℚ) (hk : k ≠ 0) :
+    kretschmann5 k 0 = 24 / k ^ 4 := by
+  unfold kretschmann5 q
+  field_simp <;> ring
+
+/-- 4D projected Einstein-frame curvature squared:
+R4² = 9 k^4/[64 r^3 (r+k)^5].
+The analytic divergence r->0+ is verified independently in SymPy. -/
+def ricciScalar4Squared (k r : ℚ) : ℚ :=
+  9 * k ^ 4 / (64 * r ^ 3 * (q k r) ^ 5)
+
+/-- Exact scaling certificate for the projected 4D curvature.
+Unlike the five-dimensional invariant, this expression has
+a cubic pole in its squared scalar curvature as r->0. -/
+theorem projected_scalar_squared_pole (k r : ℚ)
+    (hr : r ≠ 0) (hq : q k r ≠ 0) :
+    r ^ 3 * ricciScalar4Squared k r =
+      9 * k ^ 4 / (64 * (q k r) ^ 5) := by
+  unfold ricciScalar4Squared q at *
+  field_simp <;> ring
+
 end KKExactEMD
