@@ -16,7 +16,7 @@ a script from it. Scope is bounded finite deterministic transition systems.
 from __future__ import annotations
 
 from collections import Counter
-from datetime import date
+from datetime import date, timedelta
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -472,6 +472,8 @@ def receipt(root, state_file, head, evidence, output):
     name = m["name"]
     path = evidence / "requests" / (name+".json")
     demand(pf.read_request(path) == m, "changed requested finite model")
+    demand(pf.audit(evidence / "proof") == 0,
+           "exact finite Lean kernel evidence did not pass audit")
     manifest = load(evidence / "proof/manifest.json")
     report = load(evidence / "proof" / (name + ".json"))
     demand(manifest.get("models") == [name] and
@@ -530,9 +532,9 @@ def receipt(root, state_file, head, evidence, output):
     state["last_utc_day"] = expected["day"]
     validate_state(root, state)
     save(output, state)
-    followup = plan(root, state, head, (date.fromisoformat(expected["day"])
-                                       .fromordinal(date.fromisoformat(expected["day"]).toordinal()+1)
-                                       .isoformat()))
+    followup_day = (date.fromisoformat(expected["day"]) +
+                    timedelta(days=1)).isoformat()
+    followup = plan(root, state, head, followup_day)
     print(json.dumps({"verified":name, "outcome":solved["kind"],
                       "comparison":classification,
                       "total":len(state["receipts"]),
