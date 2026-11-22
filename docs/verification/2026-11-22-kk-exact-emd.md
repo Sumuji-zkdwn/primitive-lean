@@ -112,6 +112,30 @@ These cancel **only after allowing the circle radius to vary**.
 The fibre radius squared is g_psi_psi=H^-1=r/(r+k),
 which is not constant for k>0. Setting k=0 recovers the flat vacuum.
 
+## A projection-dependent curvature singularity
+
+The full 5D Riemann-square scalar, independently derived at the
+equator from Christoffel and Riemann components, is
+
+    K5 = R_ABCD R^ABCD = 24 k²/(r+k)^6,
+    lim_(r->0+) K5 = 24/k^4 < infinity   (k>0).
+
+The 4D Einstein-frame metric, by contrast, has scalar curvature
+
+    R4 = 3 k²/[8 r^(3/2)(r+k)^(5/2)],
+    lim_(r->0+) R4 = +infinity.
+
+The four-dimensional projection is curvature singular at the
+centre, but this particular five-dimensional curvature invariant
+has a finite endpoint. The global smooth Taub-NUT extension
+requires a proper U(1) circle atlas and period 4*pi*k; it is
+a known external theorem, NOT proved merely by finiteness of K5.
+
+The Python checker independently computes the full curvature
+contraction and limits. Lean proves the rational K5 formula's
+finite endpoint and the cubic pole coefficient for R4 squared,
+not the metric-to-Riemann derivation or analytic limits in the kernel.
+
 ## Lean formalization boundary
 
 lean/Research/KKExactEMD.lean proves exact rational identities
