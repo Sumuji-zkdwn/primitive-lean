@@ -1,0 +1,72 @@
+name: Delayed-aether pinned Lean theorem and axiom audit
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/DelayedAetherCochain.lean'
+      - '.github/workflows/delayed-aether-lean.yml'
+  push:
+    paths:
+      - 'lean/Research/DelayedAetherCochain.lean'
+      - '.github/workflows/delayed-aether-lean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact proposed head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - name: Install elan for pinned Lean
+        shell: bash
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Obtain pinned Mathlib cache
+        working-directory: lean
+        run: lake exe cache get
+      - name: Assemble a per-theorem axiom probe
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('lean/Research/DelayedAetherCochain.lean')
+          src = p.read_text(encoding='utf8')
+          names = re.findall(r'(?m)^theorem\s+([a-zA-Z0-9_]+)', src)
+          assert len(names) >= 10, names
+          audit = p.with_name('DelayedAetherCochainAudit.lean')
+          audit.write_text(src + '\n' + '\n'.join(
+              '#print axioms DelayedAether.'+x for x in names) + '\n', encoding='utf8')
+          print('Axiom audit theorem count:', len(names))
+          PY
+      - name: Compile in kernel trust=0, reject warnings and sorry axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd lean
+          lake env lean --trust=0 Research/DelayedAetherCochainAudit.lean > ../delayed-aether-lean.log 2>&1 || {
+            cat ../delayed-aether-lean.log
+            exit 1
+          }
+          if grep -E '(warning:|sorryAx)' ../delayed-aether-lean.log; then
+            echo "Warning or sorryAx detected"
+            exit 1
+          fi
+          cat ../delayed-aether-lean.log
+          echo "Lean theorem compilation and explicit axiom output PASS"
+      - name: Upload exact-head theorem log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delayed-aether-lean-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: delayed-aether-lean.log
