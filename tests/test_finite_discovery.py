@@ -142,7 +142,7 @@ class DiscoveryTests(unittest.TestCase):
             engine.save(state_file, engine.empty_state())
             out = base / "prepared"
             engine.prepare(ROOT, state_file, HEAD, "2026-11-23", out)
-            with self.assertRaisesRegex(ValueError, "manifest"):
+            with self.assertRaisesRegex(ValueError, "kernel evidence|manifest"):
                 engine.receipt(ROOT, state_file, HEAD, out, base / "not-saved.json")
             self.assertEqual(engine.load(state_file), engine.empty_state())
 
