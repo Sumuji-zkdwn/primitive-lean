@@ -13,6 +13,7 @@ on:
       - 'tests/fixtures/research_conveyor_one_verified.json'
       - 'proof_forge/requests/orientation_*.json'
       - 'docs/autonomy/RESEARCH_CONVEYOR.md'
+      - 'docs/autonomy/RESEARCH_CONVEYOR_ROUTES.md'
       - 'docs/research/2026-11-17-siphon-predictive-quotient.md'
       - 'docs/research/2026-11-17-laakso-bonding-audit.md'
       - 'docs/research/2026-11-11-observer-orientation-depth.md'
