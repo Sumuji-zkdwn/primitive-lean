@@ -11,6 +11,7 @@ from pathlib import Path
 import unittest
 
 from tools.autonomy import proof_forge as forge
+from tools.autonomy import proof_forge_orientation_report as research_report
 from test_operator_orientation_depth import shortest_depth
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -139,6 +140,19 @@ class OrientationResearchTests(unittest.TestCase):
                 m_depths[dm] = m_depths.get(dm, 0) + 1
         self.assertEqual(p_depths, {None: 16, 0: 24, 1: 16, 2: 8})
         self.assertEqual(m_depths, {None: 16, 0: 24, 1: 24})
+
+
+    def test_inspectable_research_report_preserves_proof_boundary(self):
+        report = research_report.build(ROOT, "b" * 40)
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["source_commit"], "b" * 40)
+        self.assertEqual(report["status"], "FINITE_PYTHON_ENUMERATION_NOT_A_LEAN_PROOF")
+        self.assertFalse(report["kernel_verified"])
+        self.assertEqual(report["eight_state"]["ordered_pairs_checked"], 64)
+        self.assertEqual(report["four_state"]["ordered_pairs_checked"], 16)
+        self.assertEqual(report["eight_state"]["predictive_quotient"],
+                         [[0, 4], [1, 5], [2, 6], [3, 7]])
+        self.assertIn("not an all-pairs Lean proof", research_report.markdown(report))
 
 
 if __name__ == "__main__":
