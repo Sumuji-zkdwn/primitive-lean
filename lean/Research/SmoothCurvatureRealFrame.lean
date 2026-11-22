@@ -154,9 +154,9 @@ theorem yang_mills_eq_ricci_derivatives_real {n : ℕ}
 variable
   {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
     [FiniteDimensional ℝ E]
-  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}
-  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ω M]
+  {H : Type*} [TopologicalSpace H]
   (I : ModelWithCorners ℝ E H) (M : Type*)
+  [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ω M]
   [RiemannianBundle (fun x : M => TangentSpace I x)]
   [IsContMDiffRiemannianBundle I 3 E (fun x : M => TangentSpace I x)]
 
