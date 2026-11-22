@@ -1,15 +1,18 @@
 # Research Conveyor — finite proof tasks and feedback from retained research
 
 Research Conveyor connects **existing research notes**, the existing
-**Research Scout** unresolved-claim index, and the **Proof Forge** finite
-Lean certificate generator. It runs **without a paid AI API call** or a
+**Research Scout** lead index (for the original Siphon route), reviewed
+source-anchored finite adapters, and the **Proof Forge** Lean certificate
+generator. It now rotates three bounded research domains: Siphon E,
+operator-word observability and Laakso raw-vertex projections. It runs **without a paid AI API call** or a
 desktop computer. A previously kernel-verified finite outcome determines
 the next task. Nothing is automatically merged into main.
 
 This is intentionally a **bounded prototype**, not a general agent that
 understands arbitrary mathematical prose or invents a model without
-assumptions. It uses one reviewed, source-bound adapter and reports when
-an unreviewed research lead cannot safely be converted into a finite task.
+assumptions. It uses three individually reviewed, source-bound adapters,
+and reports when a lead has no safe finite interpretation. The first
+real Siphon result in the existing persistent state remains unchanged.
 
 ## Actual source and exact finite interpretation
 
@@ -41,7 +44,12 @@ by the *previous successfully audited result*:
    finite counterexample and proceed to the next u without asserting
    an unwarranted "new operation required" premise.
 3. Continue to the next u, until all three finite seeds are handled.
-   There are at most **six** total finite proofs in this first family.
+   There are at most **six** total finite proofs in this Siphon family.
+Four operator-word examples and three Laakso raw-state examples extend
+the combined limit to **13**. One verified finite result per UTC day is
+selected across the three families by lowest completed-count (stable
+tie order Siphon, operator words, Laakso). A prior result controls
+whether a dependent example is attempted.
 
 In the reviewed F3 model, the old E-only case is expected to be
 **EQUIVALENT**, and the extended model is expected to have a shortest
@@ -51,7 +59,10 @@ of the real-valued observation issue, **not** a direct proof of the
 real/continuous source claim.
 
 Other unresolved research leads remain **unmapped** until a separate
-reviewed mathematical adapter is supplied. This avoids converting
+reviewed mathematical adapter is supplied. The newly included
+operator-word and Laakso notes are cited as reviewed finite
+**source anchors**; the notes are NOT claimed to be newly unsolved
+theorems merely because they appear in the repository. This avoids converting
 natural-language speculation into unsound formal statements.
 
 ## The fully automated bounded path
@@ -73,15 +84,16 @@ natural-language speculation into unsound formal statements.
    SHA and prior state, and commits **only a JSON receipt** to the
    isolated state branch. It cannot merge or update main. Failure
    stops the feedback transition.
-6. On the next run, the prior result determines the next experiment.
-   A completed date is never processed twice. Once all bounded
-   tasks have finished, the job reports
-   FINITE_ROUTE_EXHAUSTED_NEEDS_NEW_REVIEWED_ADAPTER and does not
-   fabricate new theorems or spend Lean minutes on an empty queue.
+6. On the next run, a previously Lean-certified result selects a new
+   task, fairly rotating the three research domains. A completed UTC
+   date is never processed twice. Once the finite family is exhausted,
+   the job reports FINITE_ROUTES_EXHAUSTED_NEED_REVIEWED_ADAPTER and
+   does not fabricate new theorems or spend Lean minutes on an empty queue.
 
-On PRs, the same workflow does offline Python regression tests and an
-**actual pinned Lean test of the first generated finite certificate**,
-with a one-step receipt created in an ephemeral test artifact. It is
+On PRs, the same workflow does offline Python regression tests and
+**actual pinned Lean tests of a migrated next-task certificate plus six
+observer/Laakso smoke certificates**. A one-step receipt is created in
+an ephemeral test artifact and is never written to persistent state. It is
 not permitted to run the privileged live cycle on untrusted PR code.
 
 The isolated branch must exist and contain exactly:
@@ -127,7 +139,9 @@ Actions usage is subject to the repository's available runner quota.
 - Other mathematical theories: **not automatically reduced** without
   an explicit reviewed adapter.
 - Finite proof vs physical theory: kept separate.
-- Maximum first-family state: 9 states; up to 6 tasks, one per UTC day.
+- Maximum reviewed state space: 9 states (Siphon); 8 (Laakso/observer).
+  Up to 13 finite tasks overall (6 Siphon, 4 observer, 3 Laakso),
+  one new receipt per UTC calendar day.
 - No external API calls, external AI inference expenses, auto-merges,
   arbitrary branch writes, or changes to the original Lean theorems.
 - Fail closed on a source-semantic change, malformed state, failed
@@ -137,3 +151,44 @@ Actions usage is subject to the repository's available runner quota.
 This finishes a **limited, auditable research-to-proof feedback loop**.
 It is a foundation for additional reviewed finite adapters, not a
 claim that arbitrary open problems now solve themselves.
+
+## Expanded source-bound adapter families (2026-11-23)
+
+The runnable routes, exact state encodings and limits are documented in
+[RESEARCH_CONVEYOR_ROUTES.md](RESEARCH_CONVEYOR_ROUTES.md). Each route
+has a separate research note and expected finite outcomes:
+
+| Route | Exact finite question | Conditional next step |
+| --- | --- | --- |
+| Siphon E, F3² | Is the hidden invariant's sign visible under E alone? | If all finite words agree, add R and test the shortest word |
+| Operator orientation, 4/8 states | Does compiling two primitive actions into one named macro reduce depth without changing predictive equivalence? | Check macro only after a verified primitive witness; then vary the readout of hidden state |
+| Laakso first-level RawVertex, 8 states | Are two sheet copies observationally identical under inert updates, and can the original raw rightward update distinguish them? | Only after a verified invisible pair, enable the real first-level raw advance |
+
+The Laakso primitive step is the finite `advanceRightGeneral base`
+on the **eight actual raw vertices**, observed by `rawProjection`.
+An additional identity action is explicitly stipulated. It does not
+claim a global deterministic update on the projected six-vertex
+quotient, an inverse-limit flow, or a continuous-time dynamical system.
+
+The observer route checks existing pinned example data in
+`proof_forge/requests/orientation_*.json`, then derives only strictly
+declared readout refinements or macro compositions; it does not
+claim absolute physical time from shortest named-word length.
+
+### Migration of the existing state
+
+No schema reset or historical receipt rewrite is needed. The same
+`autonomy/research-conveyor-state` JSON file is read with an
+extended allowlist of known finite task IDs. The persisted
+`siphon_z3_u0_old` record continues to count toward scheduling.
+After it, the first new route is the four-state operator-word
+primitive case, followed by the Laakso raw-state case, before returning
+to the next Siphon seed. The first exact-head CI replay uses
+`tests/fixtures/research_conveyor_one_verified.json`, a copy of the
+real initial receipt.
+
+State messages from untrusted research files are never executed.
+Finite certificates use the reviewed deterministic generator and their
+source bytes are checked again in the separately privileged receipt
+job. New source text, altered fixtures, missing source files, or an
+unverified proof leave the state unchanged.
