@@ -1,6 +1,6 @@
 # primitive-lean dependency graphs
 
-Snapshot: main fb950793a0c483dd0b6ecc5ca9d0ab5fe61a35a4, PR metadata 2026-11-05.
+Snapshot: main 363bca6a89fccce00e93e803da2095df64b62fae, PR metadata 2026-11-05.
 Main sources, registries and PR snapshot were read from Git blobs at main_commit.
 PR overlays use immutable base/head SHAs listed in graph.json pr_inputs.
 
