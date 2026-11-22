@@ -1,0 +1,97 @@
+name: Exact nonlinear KK monopole Einstein-Maxwell-dilaton
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKExactEMD.lean'
+      - 'tools/check_kk_exact_emd.py'
+      - 'docs/verification/2026-11-22-kk-exact-emd.md'
+      - '.github/workflows/kk-exact-emd.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-kk-emd:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean kernel checks nonlinear EMD rational certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKExactEMD.olean Research/KKExactEMD.lean 2>&1 | tee ../kk-exact-emd-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-exact-emd-lean.log; then exit 1; fi
+      - name: Audit every theorem and its kernel axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          content=Path('Research/KKExactEMD.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',content,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',content,re.M)
+          assert len(names)>=15,names
+          Path('KKExactEMDAudit.lean').write_text(
+              'import Research.KKExactEMD\n'
+              +''.join('#print axioms KKExactEMD.'+n+'\n' for n in names))
+          Path('../kk-exact-emd-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKExactEMDAudit.lean 2>&1 | tee ../kk-exact-emd-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          txt=Path('../kk-exact-emd-audit.log').read_text()
+          n=int(Path('../kk-exact-emd-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',txt),txt
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',txt)
+          none=txt.count('does not depend on any axioms')
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              excess={x.strip() for x in d.split(',') if x.strip()}-allowed
+              assert not excess,excess
+          print('Axiom-audited theorem declarations:',n)
+          PY
+      - name: Independently derive full 5D and 4D equations from metrics
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_exact_emd.py 2>&1 | tee kk-exact-emd-python.log
+      - name: Preserve exact-head source evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > kk-exact-emd-head.txt
+          sha256sum lean/Research/KKExactEMD.lean tools/check_kk_exact_emd.py > kk-exact-emd-sha256.txt
+      - name: Upload proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-exact-emd
+          path: |
+            kk-exact-emd-lean.log
+            kk-exact-emd-audit.log
+            kk-exact-emd-count.txt
+            kk-exact-emd-python.log
+            kk-exact-emd-head.txt
+            kk-exact-emd-sha256.txt
+          if-no-files-found: warn
