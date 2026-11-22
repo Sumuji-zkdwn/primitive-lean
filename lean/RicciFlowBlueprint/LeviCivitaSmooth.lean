@@ -1,4 +1,4 @@
-/-! Apache-2.0 compatibility shim for RicciFlowBlueprint.LeviCivitaSmooth,
+/- Apache-2.0 compatibility shim for RicciFlowBlueprint.LeviCivitaSmooth,
 source upstream c8017e2c26898d11f39cec0dfce89368d5a0506a. The smoothness proof is already imported from
 LeviCivitaSmoothPort.lean on the parent branch; only distinct Ricci/sectional
 helper definitions are reproduced below to avoid duplicate global names. -/
