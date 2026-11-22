@@ -155,6 +155,18 @@ def lean_source(model: dict, result: dict) -> tuple[str, list[str]]:
     x, y = model["pair"]
     rows = [ite("s.val", row, "State") for row in model["transitions"]]
     step_expr = ite_actions(rows)
+    # A closed finite conjunction is kernel-decidable; a free forall Action
+    # is not automatically equipped with a Decidable instance on this toolchain.
+    clauses = [f"agreeUpTo d (step ({a} : Action) u) (step ({a} : Action) v)"
+               for a in range(m)]
+    depth_formula = " ∧ ".join(["readout u = readout v"] + clauses)
+    # Projection paths through right-associated And: h.2.1, h.2.2.1, etc.
+    branches = []
+    for i in range(m):
+        projection = "h.2" + ".2" * (i if i < m - 1 else m - 1)
+        if i < m - 1:
+            projection += ".1"
+        branches.append(f"            · simpa using {projection}")
     lines = [
         "import Mathlib.Tactic",
         "",
@@ -165,7 +177,7 @@ def lean_source(model: dict, result: dict) -> tuple[str, list[str]]:
         f"abbrev Action := Fin {m}",
         f"abbrev Observation := Fin {o}",
         f"def readout (s : State) : Observation := {ite('s.val', model['observations'], 'Observation')}",
-        f"def step (a : Action) (s : State) : State := {step_expr}",
+        f"def step ({'_a' if m == 1 else 'a'} : Action) (s : State) : State := {step_expr}",
         "def run : List Action → State → State",
         "  | [], s => s",
         "  | a :: tail, s => run tail (step a s)",
@@ -186,8 +198,7 @@ def lean_source(model: dict, result: dict) -> tuple[str, list[str]]:
             "def agreeUpTo : Nat → State → State → Prop",
             "  | 0, u, v => readout u = readout v",
             "  | d + 1, u, v =>",
-            "      readout u = readout v ∧",
-            "      ∀ a : Action, agreeUpTo d (step a u) (step a v)",
+            f"      {depth_formula}",
             "",
             "theorem agreeUpTo_sound :",
             "    ∀ (fuel : Nat) (u v : State), agreeUpTo fuel u v →",
@@ -210,7 +221,10 @@ def lean_source(model: dict, result: dict) -> tuple[str, list[str]]:
             "            omega",
             "          change readout (run tail (step a u)) =",
             "            readout (run tail (step a v))",
-            "          exact ih (step a u) (step a v) (h.2 a) tail ht",
+            "          have hstep : agreeUpTo fuel (step a u) (step a v) := by",
+            "            fin_cases a",
+            *branches,
+            "          exact ih (step a u) (step a v) hstep tail ht",
             "",
             "theorem no_shorter_word (w : List Action)",
             f"    (h : w.length < {len(word)}) :",
