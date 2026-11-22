@@ -126,7 +126,9 @@ def validate_state(obj):
 
 
 def state_load(path: Path):
-    return validate_state(file_json(path)) if path.is_file() else empty_state()
+    ensure(path.is_file() and not path.is_symlink(),
+           "state file missing; initialize the data branch explicitly")
+    return validate_state(file_json(path))
 
 
 def discover_lead(root: Path):
