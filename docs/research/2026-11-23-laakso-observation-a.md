@@ -65,6 +65,6 @@
 
 ## 実行と検証状況
 
-`python -B laakso_A_track_probe.py`：全計算は標準ライブラリの `fractions.Fraction`。第1段の位置付き距離差、悪い側のセル平均傾きの減少、PI成立模型 `Φ_2` の中央セル傾きの減少を厳密に検査した。これは定理Aの無限段の証明や倍加・PIの一般的な分類を代替しない。
+リポジトリのルートから `python -B docs/research/laakso_A_track_probe.py`：全計算は標準ライブラリの `fractions.Fraction`。第1段の位置付き距離差、悪い側のセル平均傾きの減少、PI成立模型 `Φ_2` の中央セル傾きの減少を厳密に検査した。これは定理Aの無限段の証明や倍加・PIの一般的な分類を代替しない。
 
 参考：[既存の固定ゲートPI草稿](https://github.com/Sumuji-zkdwn/primitive-lean/blob/8a7cfd84df908bca346731c3b5eb93bdc1cc0134/experiments/sandpile_laakso/planar_followup/fixed_gate_pi.md)、[PR #208：凍結した自己監査](https://github.com/Sumuji-zkdwn/primitive-lean/pull/208)。
