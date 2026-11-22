@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "78c7889bf305b9cd1b304b58bb9073800109056e",
+  "main_commit": "266aa6032f7850dc34222673339fcd656ed47245",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1837,14 +1837,20 @@
         "R12",
         "R13",
         "R23",
-        "measured_noncommutativity"
+        "measured_noncommutativity",
+        "CircleLink",
+        "circleGauge",
+        "circle_gauge_commutative",
+        "triangleFlux",
+        "triangle_flux_gauge_invariant",
+        "curvature_generators_not_commuting"
       ],
       "imports": [
         "Mathlib.Tactic",
         "Mathlib.Data.Matrix.Mul",
         "Mathlib.LinearAlgebra.Matrix.Notation"
       ],
-      "sha256": "fbb780b7dc813a7783059bbecf375811859ceb8622a7efd4c1606f902d5456c9"
+      "sha256": "4b42778e0f905b04b13b850bb16fad79fe5af3ad56a80be245c345306ff92020"
     },
     {
       "id": "main:lean/Research/SignedCycleCounterexample.lean",
@@ -27711,28 +27717,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "78c7889bf305b9cd1b304b58bb9073800109056e",
+      "base_sha": "266aa6032f7850dc34222673339fcd656ed47245",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "78c7889bf305b9cd1b304b58bb9073800109056e",
+      "base_sha": "266aa6032f7850dc34222673339fcd656ed47245",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "78c7889bf305b9cd1b304b58bb9073800109056e",
+      "base_sha": "266aa6032f7850dc34222673339fcd656ed47245",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "78c7889bf305b9cd1b304b58bb9073800109056e",
+      "base_sha": "266aa6032f7850dc34222673339fcd656ed47245",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
