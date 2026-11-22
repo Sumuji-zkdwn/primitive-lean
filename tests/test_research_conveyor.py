@@ -79,8 +79,12 @@ class ResearchConveyorTests(unittest.TestCase):
             state["last_source_sha"] = source_sha
             conveyor.validate_state(state)
         self.assertIsNone(conveyor.task_sequence(state))
-        self.assertEqual(conveyor.plan(ROOT, state, HEAD, "2026-11-15")["reason"],
-                         "FINITE_ROUTE_EXHAUSTED_NEEDS_NEW_REVIEWED_ADAPTER")
+        # The historical Siphon route is complete, but the expanded
+        # controller must discover another reviewed research domain.
+        next_plan = conveyor.plan(ROOT, state, HEAD, "2026-11-15")
+        self.assertTrue(next_plan["candidate"])
+        self.assertEqual(next_plan["domain"], "observer")
+        self.assertEqual(next_plan["task_id"], "observer_primitive")
 
     def test_failure_of_old_conjecture_skips_unjustified_fresh_branch(self):
         state = conveyor.empty_state()
