@@ -1,0 +1,99 @@
+name: Gravity-first non-Abelian geometry and spin instanton
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/NonAbelianMetricHolonomy.lean'
+      - 'lean/Research/SpinYangMillsWitness.lean'
+      - 'tools/check_nonabelian_geometry.py'
+      - 'tools/check_spin_instanton.py'
+      - 'tools/check_holonomy_sandpile.py'
+      - 'docs/research/2026-11-22-nonabelian-gravity-reconstruction.md'
+      - '.github/workflows/nonabelian-gravity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gravity-first:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel-check both formalization modules
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/NonAbelianMetricHolonomy.olean Research/NonAbelianMetricHolonomy.lean 2>&1 | tee ../NonAbelianMetricHolonomy.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../NonAbelianMetricHolonomy.log; then exit 1; fi
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/SpinYangMillsWitness.olean Research/SpinYangMillsWitness.lean 2>&1 | tee ../SpinYangMillsWitness.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../SpinYangMillsWitness.log; then exit 1; fi
+      - name: Audit all theorem dependencies
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          p=pathlib.Path('NonAbelianGravityAudit.lean')
+          names=[]
+          for mod in ['NonAbelianMetricHolonomy','SpinYangMillsWitness']:
+              src=pathlib.Path('Research',mod+'.lean').read_text()
+              assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+              these=re.findall(r'^theorem\s+(\w+)',src,re.M)
+              assert len(these)>=5,(mod,these)
+              names.extend(f'{mod}.{name}' for name in these)
+          p.write_text('import Research.NonAbelianMetricHolonomy\n'
+                       'import Research.SpinYangMillsWitness\n'
+                       +''.join('#print axioms '+name+'\n' for name in names))
+          pathlib.Path('../nonabelian-axiom-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 NonAbelianGravityAudit.lean 2>&1 | tee ../nonabelian-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../nonabelian-axioms.log').read_text()
+          n=int(pathlib.Path('../nonabelian-axiom-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for x in entries:
+              a=set(filter(None,(z.strip() for z in x.split(','))))
+              assert a<=allowed,a-allowed
+          print('Axiom-checked Lean theorem declarations:',n)
+          PY
+      - name: Run independent finite and symbolic oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_nonabelian_geometry.py 2>&1 | tee nonabelian-oracle.log
+          python -B tools/check_spin_instanton.py 2>&1 | tee spin-instanton-oracle.log
+          python -B tools/check_holonomy_sandpile.py 2>&1 | tee holonomy-sandpile-oracle.log
+      - name: Attach exact-head verification
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: nonabelian-gravity
+          path: |
+            NonAbelianMetricHolonomy.log
+            SpinYangMillsWitness.log
+            nonabelian-axioms.log
+            nonabelian-axiom-count.txt
+            nonabelian-oracle.log
+            spin-instanton-oracle.log
+            holonomy-sandpile-oracle.log
+          if-no-files-found: warn
