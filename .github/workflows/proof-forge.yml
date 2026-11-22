@@ -7,6 +7,7 @@ on:
       - 'proof_forge/requests/**'
       - 'tools/autonomy/proof_forge.py'
       - 'tests/test_proof_forge.py'
+      - 'tests/test_proof_forge_orientation_research.py'
       - 'docs/autonomy/PROOF_FORGE.md'
       - '.github/workflows/proof-forge.yml'
       - 'lean/lean-toolchain'
@@ -40,6 +41,9 @@ jobs:
 
       - name: Test finite model checker, source constraints and audit logic
         run: python -m unittest discover -s tests -p 'test_proof_forge.py' -v
+
+      - name: Recheck archived research objects and all-pairs orientation kernel
+        run: python -m unittest discover -s tests -p 'test_proof_forge_orientation_research.py' -v
 
       - name: Record exact source and generate bounded Lean proof obligations
         env:
