@@ -1,0 +1,191 @@
+{
+  "results": [
+    {
+      "metric": "prefix90_v",
+      "Comp_mean": 1.2767857142857142,
+      "Coop_mean": 14.6,
+      "difference_Coop_minus_Comp": 13.323214285714286,
+      "dyad_bootstrap_ci95": [
+        5.255357142857143,
+        22.875
+      ],
+      "same_initial_component_bootstrap_ci95": [
+        5.9010106646825395,
+        28.080844155844158
+      ],
+      "exact_permutation_p_reference": 0.0020242914979757085,
+      "holm_across_five_main_plus_two_controls_reference": 0.006062049405702656
+    },
+    {
+      "metric": "placement_excess_v_per_K",
+      "Comp_mean": 0.1602005140596832,
+      "Coop_mean": 0.644871733344896,
+      "difference_Coop_minus_Comp": 0.48467121928521284,
+      "dyad_bootstrap_ci95": [
+        0.10068001780611154,
+        0.8728997390183326
+      ],
+      "same_initial_component_bootstrap_ci95": [
+        0.2239035268106549,
+        0.9921340377503614
+      ],
+      "exact_permutation_p_reference": 0.028967936088679123,
+      "holm_across_five_main_plus_two_controls_reference": 0.028967936088679123
+    }
+  ],
+  "descriptive": {
+    "Comp": {
+      "dyads": 10,
+      "metrics": {
+        "prefix90_v": {
+          "mean": 1.2767857142857142,
+          "median": 0.07142857142857142,
+          "minimum": 0.0,
+          "maximum": 5.75
+        },
+        "placement_excess_v_per_K": {
+          "mean": 0.1602005140596832,
+          "median": 0.001599346377904515,
+          "minimum": -0.0009077475026090175,
+          "maximum": 1.0799731856081647
+        },
+        "prefix90_v_per_K": {
+          "mean": 0.014186507936507936,
+          "median": 0.0007936507936507937,
+          "minimum": 0.0,
+          "maximum": 0.06388888888888888
+        },
+        "prefix90_elapsed": {
+          "mean": 48.89700107339286,
+          "median": 42.7414025,
+          "minimum": 29.00504625,
+          "maximum": 88.0402566125
+        },
+        "prefix90_cascade_fraction": {
+          "mean": 0.003353174603174603,
+          "median": 0.0007936507936507937,
+          "minimum": 0.0,
+          "maximum": 0.013888888888888888
+        },
+        "prefix90_max_u_area": {
+          "mean": 1.6142857142857143,
+          "median": 1.0714285714285714,
+          "minimum": 1.0,
+          "maximum": 3.875
+        },
+        "actual_v_per_K": {
+          "mean": 0.2391182133599771,
+          "median": 0.0023222772393126376,
+          "minimum": 0.0,
+          "maximum": 1.7587733924694553
+        },
+        "shuffle_mean_v_per_K": {
+          "mean": 0.07891769930029391,
+          "median": 0.0008726920142300678,
+          "minimum": 0.00017373651542525745,
+          "maximum": 0.6788002068612906
+        }
+      }
+    },
+    "Coop": {
+      "dyads": 10,
+      "metrics": {
+        "prefix90_v": {
+          "mean": 14.6,
+          "median": 9.375,
+          "minimum": 0.0,
+          "maximum": 47.125
+        },
+        "placement_excess_v_per_K": {
+          "mean": 0.644871733344896,
+          "median": 0.5739391517749308,
+          "minimum": -0.0008854897773405627,
+          "maximum": 1.7276726590096814
+        },
+        "prefix90_v_per_K": {
+          "mean": 0.1622222222222222,
+          "median": 0.10416666666666666,
+          "minimum": 0.0,
+          "maximum": 0.523611111111111
+        },
+        "prefix90_elapsed": {
+          "mean": 105.79888515750001,
+          "median": 115.348540625,
+          "minimum": 33.354360325,
+          "maximum": 152.76349375
+        },
+        "prefix90_cascade_fraction": {
+          "mean": 0.027731481481481485,
+          "median": 0.019444444444444445,
+          "minimum": 0.0,
+          "maximum": 0.075
+        },
+        "prefix90_max_u_area": {
+          "mean": 6.0625,
+          "median": 5.3125,
+          "minimum": 1.0,
+          "maximum": 15.125
+        },
+        "actual_v_per_K": {
+          "mean": 3.217041870516951,
+          "median": 4.055784516984687,
+          "minimum": 0.0,
+          "maximum": 5.333928672924825
+        },
+        "shuffle_mean_v_per_K": {
+          "mean": 2.572170137172055,
+          "median": 3.144544676983776,
+          "minimum": 0.0008854897773405627,
+          "maximum": 4.483607260425896
+        }
+      }
+    }
+  },
+  "holm_seven": [
+    {
+      "metric": "harvest_count",
+      "exact_permutation_p_reference": 0.00145056182207885,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "extra_topplings",
+      "exact_permutation_p_reference": 0.0004871289701011063,
+      "holm_seven_reference": 0.0034099027907077443
+    },
+    {
+      "metric": "extra_per_harvest",
+      "exact_permutation_p_reference": 0.0008660070579575224,
+      "holm_seven_reference": 0.0051960423477451344
+    },
+    {
+      "metric": "cascade_fraction",
+      "exact_permutation_p_reference": 0.0012448851458139384,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "max_avalanche_area",
+      "exact_permutation_p_reference": 0.0012124098811405312,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "prefix90_v",
+      "exact_permutation_p_reference": 0.0020242914979757085,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "placement_excess_v_per_K",
+      "exact_permutation_p_reference": 0.028967936088679123,
+      "holm_seven_reference": 0.028967936088679123
+    }
+  ],
+  "method": {
+    "bootstrap_seed": 20261211,
+    "bootstrap_draws": 100000,
+    "exact_label_assignments": 184756,
+    "component_resamples_with_both_conditions": 99996,
+    "component_identity_assumption": "Equal two-letter initial strings denote the same person; uncertain, for sensitivity only",
+    "prefix90": "Every one of157 trials has at least94 harvests;90 chosen to match initial token count before analyzing its output; same input count, not same elapsed time",
+    "spatial99": "Each round's K histogram and total preserved,99 uniform location permutations; empirical minus model permutation mean; no behavioral null or causal adjustment",
+    "statistical_status": "Exploratory; p values reference-only with dyad-independence/exchangeability assumptions; seven-test Holm includes all5 main metrics and both control metrics"
+  }
+}

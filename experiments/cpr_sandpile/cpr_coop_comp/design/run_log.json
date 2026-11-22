@@ -1,0 +1,250 @@
+{
+  "design": "between_pair_conditions_with_repeated_rounds_within_each_pair",
+  "quality": {
+    "planned_pairs": 20,
+    "planned_rounds": 160,
+    "raw_rounds": 159,
+    "main_rounds": 157,
+    "missing": [
+      {
+        "pair": "19",
+        "condition": "Comp",
+        "round": 8,
+        "reason": "folder absent"
+      }
+    ],
+    "excluded": [
+      {
+        "pair": "02",
+        "condition": "Coop",
+        "round": 7,
+        "reason": "controller problem and offline score NA"
+      },
+      {
+        "pair": "02",
+        "condition": "Coop",
+        "round": 8,
+        "reason": "controller problem and offline score NA"
+      }
+    ],
+    "retained_review": [
+      {
+        "pair": "20",
+        "condition": "Coop",
+        "round": 1,
+        "reason": "interruption between rounds 1 and 2"
+      },
+      {
+        "pair": "20",
+        "condition": "Coop",
+        "round": 2,
+        "reason": "interruption between rounds 1 and 2"
+      }
+    ]
+  },
+  "differences": [
+    {
+      "metric": "harvest_all",
+      "Coop_pair_equal_mean": 169.47083333333336,
+      "Comp_pair_equal_mean": 117.7375,
+      "Coop_minus_Comp": 51.73333333333336
+    },
+    {
+      "metric": "harvest_window",
+      "Coop_pair_equal_mean": 169.45833333333334,
+      "Comp_pair_equal_mean": 117.7375,
+      "Coop_minus_Comp": 51.720833333333346
+    },
+    {
+      "metric": "balance_births",
+      "Coop_pair_equal_mean": 79.87083333333332,
+      "Comp_pair_equal_mean": 27.75,
+      "Coop_minus_Comp": 52.12083333333332
+    },
+    {
+      "metric": "observed_birth_flips",
+      "Coop_pair_equal_mean": 79.475,
+      "Comp_pair_equal_mean": 27.292857142857144,
+      "Coop_minus_Comp": 52.18214285714285
+    },
+    {
+      "metric": "N_end",
+      "Coop_pair_equal_mean": 0.4125,
+      "Comp_pair_equal_mean": 0.0125,
+      "Coop_minus_Comp": 0.39999999999999997
+    },
+    {
+      "metric": "N_60",
+      "Coop_pair_equal_mean": 62.116666666666674,
+      "Comp_pair_equal_mean": 19.2375,
+      "Coop_minus_Comp": 42.87916666666668
+    },
+    {
+      "metric": "N_120",
+      "Coop_pair_equal_mean": 67.35416666666667,
+      "Comp_pair_equal_mean": 8.821428571428571,
+      "Coop_minus_Comp": 58.5327380952381
+    },
+    {
+      "metric": "N_180",
+      "Coop_pair_equal_mean": 64.18333333333332,
+      "Comp_pair_equal_mean": 1.0875,
+      "Coop_minus_Comp": 63.095833333333324
+    },
+    {
+      "metric": "R_60",
+      "Coop_pair_equal_mean": 0.6901851851851851,
+      "Comp_pair_equal_mean": 0.21374999999999997,
+      "Coop_minus_Comp": 0.47643518518518513
+    },
+    {
+      "metric": "mean_N_timeweighted",
+      "Coop_pair_equal_mean": 58.410504830315276,
+      "Comp_pair_equal_mean": 15.555674985290256,
+      "Coop_minus_Comp": 42.85482984502502
+    },
+    {
+      "metric": "sustained_zero_by60",
+      "Coop_pair_equal_mean": 0.2833333333333333,
+      "Comp_pair_equal_mean": 0.6553571428571429,
+      "Coop_minus_Comp": -0.37202380952380953
+    },
+    {
+      "metric": "sustained_zero_observed",
+      "Coop_pair_equal_mean": 0.5625,
+      "Comp_pair_equal_mean": 0.9625,
+      "Coop_minus_Comp": -0.4
+    },
+    {
+      "metric": "terminal_zero",
+      "Coop_pair_equal_mean": 0.9375,
+      "Comp_pair_equal_mean": 0.9875,
+      "Coop_minus_Comp": -0.050000000000000044
+    },
+    {
+      "metric": "nonzero_time_capped239",
+      "Coop_pair_equal_mean": 148.60787129166667,
+      "Comp_pair_equal_mean": 75.26448916071429,
+      "Coop_minus_Comp": 73.34338213095238
+    },
+    {
+      "metric": "harvest_first60",
+      "Coop_pair_equal_mean": 58.90416666666666,
+      "Comp_pair_equal_mean": 90.99642857142857,
+      "Coop_minus_Comp": -32.092261904761905
+    }
+  ],
+  "participant_label_audit": {
+    "slots": 40,
+    "distinct_label_strings": 32,
+    "label_formats": [
+      {
+        "length": 2,
+        "alphabetic_ascii": true,
+        "slots": 40
+      }
+    ],
+    "n_repeated_label_strings": 6,
+    "anonymous_collisions": [
+      [
+        {
+          "pair": "01",
+          "slot": 2,
+          "condition": "Comp"
+        },
+        {
+          "pair": "07",
+          "slot": 2,
+          "condition": "Comp"
+        }
+      ],
+      [
+        {
+          "pair": "02",
+          "slot": 1,
+          "condition": "Coop"
+        },
+        {
+          "pair": "11",
+          "slot": 2,
+          "condition": "Comp"
+        },
+        {
+          "pair": "13",
+          "slot": 2,
+          "condition": "Comp"
+        }
+      ],
+      [
+        {
+          "pair": "06",
+          "slot": 2,
+          "condition": "Coop"
+        },
+        {
+          "pair": "12",
+          "slot": 1,
+          "condition": "Coop"
+        }
+      ],
+      [
+        {
+          "pair": "09",
+          "slot": 2,
+          "condition": "Comp"
+        },
+        {
+          "pair": "10",
+          "slot": 1,
+          "condition": "Coop"
+        }
+      ],
+      [
+        {
+          "pair": "12",
+          "slot": 2,
+          "condition": "Coop"
+        },
+        {
+          "pair": "14",
+          "slot": 1,
+          "condition": "Coop"
+        },
+        {
+          "pair": "17",
+          "slot": 2,
+          "condition": "Comp"
+        }
+      ],
+      [
+        {
+          "pair": "17",
+          "slot": 1,
+          "condition": "Comp"
+        },
+        {
+          "pair": "18",
+          "slot": 1,
+          "condition": "Coop"
+        }
+      ]
+    ],
+    "interpretation": "Every label is two ASCII letters. Repeated initials may be the same person or different people. Neither 40 unique people nor 32 people is established.",
+    "independence": "Pair-level aggregation avoids independent treatment of repeated rounds, but independence across pair IDs remains unverified because participant identities are not unique in this file."
+  },
+  "validation": {
+    "raw_reference_differences": {
+      "harvest_all": 0.0,
+      "harvest_window": 0.0,
+      "balance_births": 0.0,
+      "observed_birth_flips": 0.0,
+      "N_end": 0.0,
+      "N_60": 0.0,
+      "N_120": 0.0,
+      "N_180": 0.0
+    },
+    "zero_is_absorbing_in_all_raw_rounds": true,
+    "board_side_all_rounds": 19,
+    "initial_tokens_all_rounds": 90
+  }
+}

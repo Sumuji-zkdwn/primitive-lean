@@ -1,0 +1,7 @@
+# Preserve the exact bytes covered by the original package SHA256 manifest.
+# CSV row terminators include CRLF; they are part of the retained source bytes.
+cpr_coop_comp/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+cpr_empirical/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+cpr_redefinition/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Extracted instruction paragraphs retain their original trailing spaces.
+cpr_coop_comp/design/instruction_*.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

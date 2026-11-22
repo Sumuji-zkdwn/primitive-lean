@@ -1,0 +1,859 @@
+{
+  "design": {
+    "comparison_design": "between_pair_conditions_with_repeated_rounds_within_each_pair",
+    "condition_assignment": "one fixed condition per pair; odd numeric IDs Comp, even numeric IDs Coop",
+    "condition_switching_within_pair": false,
+    "randomization": "Not documented in the inspected instruction documents or condition workbook. Odd/even IDs do not establish allocation procedure.",
+    "round_order": "The instruction specifies eight test rounds with breaks; raw folders are numbered round1 through round8. No within-pair Coop/Comp crossover is recorded.",
+    "instruction_sources": [
+      {
+        "condition": "Coop",
+        "archive_member": "02_expCPR_2player/02_instruction/2player-CPR task Instruction(ïªÆ▓).docx",
+        "sha256": "e15ea6adab4dbba58a1e8a233d6eb4f9ba1930664fde85082c35685a98e64372",
+        "extracted_text": "instruction_coop.txt",
+        "relevant_paragraphs": [
+          {
+            "paragraph": 5,
+            "text": "　本実験では、プレイヤーまたはを操作し、黄色のダイヤモンド型のトークンを回収します。トークンを１つ回収する毎に、スコアが１点加算されます。参加者２名の合計スコアが高得点になるよう、各自取り組んでください。なお、実験終了時までもう１名の参加者との会話や相談は一切お控えください。"
+          },
+          {
+            "paragraph": 23,
+            "text": "テスト試行の制限時間は1ラウンド240秒で、8ラウンドあります。"
+          },
+          {
+            "paragraph": 25,
+            "text": "ラウンド終了時の合計スコアが２００点未満の場合は、そのラウンドのスコアは０点になります。"
+          },
+          {
+            "paragraph": 26,
+            "text": "合計スコアが高得点になるよう、各自トークン回収を行ってください。"
+          },
+          {
+            "paragraph": 27,
+            "text": "ラウンドごとに休憩が設けられています。ラウンドの途中に休むことはできませんので、ここで十分に休んでください。参加者２名ともが準備ができ次第、次のラウンドを開始します。尚、休憩画面上には直前ラウンドの結果が表示されます。"
+          }
+        ]
+      },
+      {
+        "condition": "Comp",
+        "archive_member": "02_expCPR_2player/02_instruction/2player-CPR task Instruction(ïúìç).docx",
+        "sha256": "2eec957c837e8d694bfb81d898d740fed27a67c54ce0c07c03c4e3c398443bfa",
+        "extracted_text": "instruction_comp.txt",
+        "relevant_paragraphs": [
+          {
+            "paragraph": 5,
+            "text": "　本実験では、プレイヤーまたはを操作し、黄色のダイヤモンド型のトークンを回収します。トークンを１つ回収する毎に、スコアが１点加算されます。ご自身のスコアが相手のスコアより高得点になるよう、取り組んでください。なお、実験終了時までもう１名の参加者との会話や相談は一切お控えください。"
+          },
+          {
+            "paragraph": 25,
+            "text": "テスト試行の制限時間は1ラウンド240秒で、8ラウンドあります。"
+          },
+          {
+            "paragraph": 27,
+            "text": "ラウンド終了時の個人スコアが１００点未満の場合は、そのラウンドのスコアは０点になります。"
+          },
+          {
+            "paragraph": 28,
+            "text": "ご自身のスコアが相手のスコアより高得点になるよう、トークン回収を行ってください。"
+          },
+          {
+            "paragraph": 29,
+            "text": "ラウンドごとに休憩が設けられています。ラウンドの途中に休むことはできませんので、ここで十分に休んでください。参加者２名ともが準備ができ次第、次のラウンドを開始します。尚、休憩画面上には直前ラウンドの結果が表示されます。"
+          }
+        ]
+      }
+    ],
+    "condition_workbook_sources": {
+      "02_expCPR_2player/03_rawdata/CPRtask_condition_2player.xlsx": "d6a328bc49b2915100847f826f556e88f2150a60df28e9ad0a1576f7003eabb4",
+      "02_expCPR_2player/04_data/CPRtask_condition_2player.xlsx": "d6a328bc49b2915100847f826f556e88f2150a60df28e9ad0a1576f7003eabb4"
+    },
+    "anonymous_conditions": [
+      {
+        "pair": "01",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "02",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": "※Round7,8コントローラー不具合"
+      },
+      {
+        "pair": "03",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "04",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "05",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "06",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "07",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "08",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "09",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "10",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "11",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "12",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "13",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "14",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "15",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "16",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "17",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "18",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": ""
+      },
+      {
+        "pair": "19",
+        "condition": "Comp",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": "※Round8データフォルダ作成×"
+      },
+      {
+        "pair": "20",
+        "condition": "Coop",
+        "planned_initial_tokens": 90,
+        "board_side": 19,
+        "note": "※コントローラー不具合のため、Round1・2の間一時中断"
+      }
+    ],
+    "participant_label_audit": {
+      "slots": 40,
+      "distinct_label_strings": 32,
+      "label_formats": [
+        {
+          "length": 2,
+          "alphabetic_ascii": true,
+          "slots": 40
+        }
+      ],
+      "n_repeated_label_strings": 6,
+      "anonymous_collisions": [
+        [
+          {
+            "pair": "01",
+            "slot": 2,
+            "condition": "Comp"
+          },
+          {
+            "pair": "07",
+            "slot": 2,
+            "condition": "Comp"
+          }
+        ],
+        [
+          {
+            "pair": "02",
+            "slot": 1,
+            "condition": "Coop"
+          },
+          {
+            "pair": "11",
+            "slot": 2,
+            "condition": "Comp"
+          },
+          {
+            "pair": "13",
+            "slot": 2,
+            "condition": "Comp"
+          }
+        ],
+        [
+          {
+            "pair": "06",
+            "slot": 2,
+            "condition": "Coop"
+          },
+          {
+            "pair": "12",
+            "slot": 1,
+            "condition": "Coop"
+          }
+        ],
+        [
+          {
+            "pair": "09",
+            "slot": 2,
+            "condition": "Comp"
+          },
+          {
+            "pair": "10",
+            "slot": 1,
+            "condition": "Coop"
+          }
+        ],
+        [
+          {
+            "pair": "12",
+            "slot": 2,
+            "condition": "Coop"
+          },
+          {
+            "pair": "14",
+            "slot": 1,
+            "condition": "Coop"
+          },
+          {
+            "pair": "17",
+            "slot": 2,
+            "condition": "Comp"
+          }
+        ],
+        [
+          {
+            "pair": "17",
+            "slot": 1,
+            "condition": "Comp"
+          },
+          {
+            "pair": "18",
+            "slot": 1,
+            "condition": "Coop"
+          }
+        ]
+      ],
+      "interpretation": "Every label is two ASCII letters. Repeated initials may be the same person or different people. Neither 40 unique people nor 32 people is established.",
+      "independence": "Pair-level aggregation avoids independent treatment of repeated rounds, but independence across pair IDs remains unverified because participant identities are not unique in this file."
+    },
+    "common_instruction": {
+      "seconds_per_round": 240,
+      "test_rounds": 8,
+      "practice_before_test": true,
+      "breaks_between_rounds": true,
+      "communication": "Conversation and consultation prohibited until experiment end",
+      "regeneration_information": "Both state that new tokens can appear in empty cells; neither describes the neighborhood probability rule in the extracted text."
+    },
+    "condition_manipulation": {
+      "Coop": {
+        "objective": "Maximize the sum of the two participants' scores",
+        "threshold": "A round total below 200 becomes zero",
+        "display_text": "Total score"
+      },
+      "Comp": {
+        "objective": "Make one's own score exceed the other participant's score",
+        "threshold": "An individual round score below 100 becomes zero",
+        "display_text": "Individual scores"
+      },
+      "caution": "The condition changes the stated goal, score presentation and threshold rule; the raw harvest counts below are not threshold-adjusted official scores."
+    }
+  },
+  "quality": {
+    "planned_pairs": 20,
+    "planned_rounds": 160,
+    "raw_rounds": 159,
+    "main_rounds": 157,
+    "missing": [
+      {
+        "pair": "19",
+        "condition": "Comp",
+        "round": 8,
+        "reason": "folder absent"
+      }
+    ],
+    "excluded": [
+      {
+        "pair": "02",
+        "condition": "Coop",
+        "round": 7,
+        "reason": "controller problem and offline score NA"
+      },
+      {
+        "pair": "02",
+        "condition": "Coop",
+        "round": 8,
+        "reason": "controller problem and offline score NA"
+      }
+    ],
+    "retained_review": [
+      {
+        "pair": "20",
+        "condition": "Coop",
+        "round": 1,
+        "reason": "interruption between rounds 1 and 2"
+      },
+      {
+        "pair": "20",
+        "condition": "Coop",
+        "round": 2,
+        "reason": "interruption between rounds 1 and 2"
+      }
+    ]
+  },
+  "conditions": [
+    {
+      "condition": "Coop",
+      "n_pairs": 10,
+      "n_raw_rounds": 80,
+      "n_analyzed_rounds": 78,
+      "pair_ids": [
+        "02",
+        "04",
+        "06",
+        "08",
+        "10",
+        "12",
+        "14",
+        "16",
+        "18",
+        "20"
+      ],
+      "pair_equal_metrics": {
+        "harvest_all": {
+          "n_pairs": 10,
+          "mean": 169.47083333333336,
+          "sd_between_pair_means": 32.904346323007914,
+          "median": 184.3125,
+          "min": 106.875,
+          "max": 199.375,
+          "p25": 144.125,
+          "p75": 195.6875
+        },
+        "harvest_window": {
+          "n_pairs": 10,
+          "mean": 169.45833333333334,
+          "sd_between_pair_means": 32.89174513685992,
+          "median": 184.3125,
+          "min": 106.875,
+          "max": 199.25,
+          "p25": 144.125,
+          "p75": 195.6875
+        },
+        "balance_births": {
+          "n_pairs": 10,
+          "mean": 79.87083333333332,
+          "sd_between_pair_means": 33.197311882194676,
+          "median": 95.5,
+          "min": 16.875,
+          "max": 111.0,
+          "p25": 54.125,
+          "p75": 105.6875
+        },
+        "observed_birth_flips": {
+          "n_pairs": 10,
+          "mean": 79.475,
+          "sd_between_pair_means": 33.17591998222004,
+          "median": 95.125,
+          "min": 16.875,
+          "max": 110.875,
+          "p25": 53.4375,
+          "p75": 105.34375
+        },
+        "N_end": {
+          "n_pairs": 10,
+          "mean": 0.4125,
+          "sd_between_pair_means": 0.7313657315825873,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 1.75,
+          "p25": 0.0,
+          "p75": 0.46875
+        },
+        "N_60": {
+          "n_pairs": 10,
+          "mean": 62.116666666666674,
+          "sd_between_pair_means": 30.53291332801861,
+          "median": 68.625,
+          "min": 0.75,
+          "max": 96.625,
+          "p25": 47.96875,
+          "p75": 85.9375
+        },
+        "N_120": {
+          "n_pairs": 10,
+          "mean": 67.35416666666667,
+          "sd_between_pair_means": 44.397936821224945,
+          "median": 72.3125,
+          "min": 0.0,
+          "max": 122.16666666666667,
+          "p25": 34.78125,
+          "p75": 98.375
+        },
+        "N_180": {
+          "n_pairs": 10,
+          "mean": 64.18333333333332,
+          "sd_between_pair_means": 41.55729255876536,
+          "median": 80.25,
+          "min": 0.0,
+          "max": 108.33333333333333,
+          "p25": 32.46875,
+          "p75": 93.5
+        },
+        "R_60": {
+          "n_pairs": 10,
+          "mean": 0.6901851851851851,
+          "sd_between_pair_means": 0.33925459253354007,
+          "median": 0.7625,
+          "min": 0.008333333333333333,
+          "max": 1.073611111111111,
+          "p25": 0.532986111111111,
+          "p75": 0.9548611111111112
+        },
+        "mean_N_timeweighted": {
+          "n_pairs": 10,
+          "mean": 58.410504830315276,
+          "sd_between_pair_means": 29.14802818023164,
+          "median": 63.86310220226484,
+          "min": 8.359507062639377,
+          "max": 90.7423571083119,
+          "p25": 35.62538249541752,
+          "p75": 79.06240001358147
+        },
+        "sustained_zero_by60": {
+          "n_pairs": 10,
+          "mean": 0.2833333333333333,
+          "sd_between_pair_means": 0.234718113047529,
+          "median": 0.1875,
+          "min": 0.0,
+          "max": 0.75,
+          "p25": 0.125,
+          "p75": 0.4583333333333333
+        },
+        "sustained_zero_observed": {
+          "n_pairs": 10,
+          "mean": 0.5625,
+          "sd_between_pair_means": 0.2779513346692986,
+          "median": 0.5,
+          "min": 0.25,
+          "max": 1.0,
+          "p25": 0.375,
+          "p75": 0.71875
+        },
+        "terminal_zero": {
+          "n_pairs": 10,
+          "mean": 0.9375,
+          "sd_between_pair_means": 0.12147816447594376,
+          "median": 1.0,
+          "min": 0.625,
+          "max": 1.0,
+          "p25": 0.90625,
+          "p75": 1.0
+        },
+        "nonzero_time_capped239": {
+          "n_pairs": 10,
+          "mean": 148.60787129166667,
+          "sd_between_pair_means": 48.572373821882664,
+          "median": 165.71665958333335,
+          "min": 46.915893749999995,
+          "max": 196.86655374999998,
+          "p25": 122.01971593750001,
+          "p75": 186.4665334375
+        },
+        "harvest_first60": {
+          "n_pairs": 10,
+          "mean": 58.90416666666666,
+          "sd_between_pair_means": 24.84554952136335,
+          "median": 54.0,
+          "min": 30.25,
+          "max": 106.125,
+          "p25": 41.03125,
+          "p75": 73.1875
+        }
+      },
+      "pooled_round_counts": {
+        "sustained_zero_by60": 22,
+        "sustained_zero_observed": 44,
+        "terminal_zero": 73
+      }
+    },
+    {
+      "condition": "Comp",
+      "n_pairs": 10,
+      "n_raw_rounds": 79,
+      "n_analyzed_rounds": 79,
+      "pair_ids": [
+        "01",
+        "03",
+        "05",
+        "07",
+        "09",
+        "11",
+        "13",
+        "15",
+        "17",
+        "19"
+      ],
+      "pair_equal_metrics": {
+        "harvest_all": {
+          "n_pairs": 10,
+          "mean": 117.7375,
+          "sd_between_pair_means": 22.021568499238803,
+          "median": 107.5625,
+          "min": 101.75,
+          "max": 169.5,
+          "p25": 103.25,
+          "p75": 123.78125
+        },
+        "harvest_window": {
+          "n_pairs": 10,
+          "mean": 117.7375,
+          "sd_between_pair_means": 22.021568499238803,
+          "median": 107.5625,
+          "min": 101.75,
+          "max": 169.5,
+          "p25": 103.25,
+          "p75": 123.78125
+        },
+        "balance_births": {
+          "n_pairs": 10,
+          "mean": 27.75,
+          "sd_between_pair_means": 22.054226100430025,
+          "median": 17.5625,
+          "min": 11.75,
+          "max": 79.625,
+          "p25": 13.25,
+          "p75": 33.78125
+        },
+        "observed_birth_flips": {
+          "n_pairs": 10,
+          "mean": 27.292857142857144,
+          "sd_between_pair_means": 22.13543974588633,
+          "median": 17.375,
+          "min": 11.125,
+          "max": 79.375,
+          "p25": 12.3125,
+          "p75": 33.357142857142854
+        },
+        "N_end": {
+          "n_pairs": 10,
+          "mean": 0.0125,
+          "sd_between_pair_means": 0.03952847075210474,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 0.125,
+          "p25": 0.0,
+          "p75": 0.0
+        },
+        "N_60": {
+          "n_pairs": 10,
+          "mean": 19.2375,
+          "sd_between_pair_means": 28.151280930990612,
+          "median": 1.5625,
+          "min": 0.0,
+          "max": 69.75,
+          "p25": 0.0,
+          "p75": 32.875
+        },
+        "N_120": {
+          "n_pairs": 10,
+          "mean": 8.821428571428571,
+          "sd_between_pair_means": 16.368491332538905,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 44.0,
+          "p25": 0.0,
+          "p75": 5.834821428571429
+        },
+        "N_180": {
+          "n_pairs": 10,
+          "mean": 1.0875,
+          "sd_between_pair_means": 3.3952836978504295,
+          "median": 0.0,
+          "min": 0.0,
+          "max": 10.75,
+          "p25": 0.0,
+          "p75": 0.0
+        },
+        "R_60": {
+          "n_pairs": 10,
+          "mean": 0.21374999999999997,
+          "sd_between_pair_means": 0.31279201034434007,
+          "median": 0.017361111111111112,
+          "min": 0.0,
+          "max": 0.775,
+          "p25": 0.0,
+          "p75": 0.36527777777777776
+        },
+        "mean_N_timeweighted": {
+          "n_pairs": 10,
+          "mean": 15.555674985290256,
+          "sd_between_pair_means": 12.14720994413943,
+          "median": 10.117074714497477,
+          "min": 5.960324529267693,
+          "max": 40.30185282018142,
+          "p25": 7.020886360367847,
+          "p75": 19.586292069819955
+        },
+        "sustained_zero_by60": {
+          "n_pairs": 10,
+          "mean": 0.6553571428571429,
+          "sd_between_pair_means": 0.343287799965921,
+          "median": 0.6875,
+          "min": 0.125,
+          "max": 1.0,
+          "p25": 0.38839285714285715,
+          "p75": 1.0
+        },
+        "sustained_zero_observed": {
+          "n_pairs": 10,
+          "mean": 0.9625,
+          "sd_between_pair_means": 0.11858541225631422,
+          "median": 1.0,
+          "min": 0.625,
+          "max": 1.0,
+          "p25": 1.0,
+          "p75": 1.0
+        },
+        "terminal_zero": {
+          "n_pairs": 10,
+          "mean": 0.9875,
+          "sd_between_pair_means": 0.03952847075210474,
+          "median": 1.0,
+          "min": 0.875,
+          "max": 1.0,
+          "p25": 1.0,
+          "p75": 1.0
+        },
+        "nonzero_time_capped239": {
+          "n_pairs": 10,
+          "mean": 75.26448916071429,
+          "sd_between_pair_means": 48.240599826223665,
+          "median": 55.317841875,
+          "min": 36.85224625,
+          "max": 188.84403250000003,
+          "p25": 41.805881875000004,
+          "p75": 92.86434696428572
+        },
+        "harvest_first60": {
+          "n_pairs": 10,
+          "mean": 90.99642857142857,
+          "sd_between_pair_means": 20.16407471958612,
+          "median": 101.8125,
+          "min": 51.0,
+          "max": 107.0,
+          "p25": 82.58482142857143,
+          "p75": 103.75
+        }
+      },
+      "pooled_round_counts": {
+        "sustained_zero_by60": 52,
+        "sustained_zero_observed": 76,
+        "terminal_zero": 78
+      }
+    }
+  ],
+  "differences": [
+    {
+      "metric": "harvest_all",
+      "Coop_pair_equal_mean": 169.47083333333336,
+      "Comp_pair_equal_mean": 117.7375,
+      "Coop_minus_Comp": 51.73333333333336
+    },
+    {
+      "metric": "harvest_window",
+      "Coop_pair_equal_mean": 169.45833333333334,
+      "Comp_pair_equal_mean": 117.7375,
+      "Coop_minus_Comp": 51.720833333333346
+    },
+    {
+      "metric": "balance_births",
+      "Coop_pair_equal_mean": 79.87083333333332,
+      "Comp_pair_equal_mean": 27.75,
+      "Coop_minus_Comp": 52.12083333333332
+    },
+    {
+      "metric": "observed_birth_flips",
+      "Coop_pair_equal_mean": 79.475,
+      "Comp_pair_equal_mean": 27.292857142857144,
+      "Coop_minus_Comp": 52.18214285714285
+    },
+    {
+      "metric": "N_end",
+      "Coop_pair_equal_mean": 0.4125,
+      "Comp_pair_equal_mean": 0.0125,
+      "Coop_minus_Comp": 0.39999999999999997
+    },
+    {
+      "metric": "N_60",
+      "Coop_pair_equal_mean": 62.116666666666674,
+      "Comp_pair_equal_mean": 19.2375,
+      "Coop_minus_Comp": 42.87916666666668
+    },
+    {
+      "metric": "N_120",
+      "Coop_pair_equal_mean": 67.35416666666667,
+      "Comp_pair_equal_mean": 8.821428571428571,
+      "Coop_minus_Comp": 58.5327380952381
+    },
+    {
+      "metric": "N_180",
+      "Coop_pair_equal_mean": 64.18333333333332,
+      "Comp_pair_equal_mean": 1.0875,
+      "Coop_minus_Comp": 63.095833333333324
+    },
+    {
+      "metric": "R_60",
+      "Coop_pair_equal_mean": 0.6901851851851851,
+      "Comp_pair_equal_mean": 0.21374999999999997,
+      "Coop_minus_Comp": 0.47643518518518513
+    },
+    {
+      "metric": "mean_N_timeweighted",
+      "Coop_pair_equal_mean": 58.410504830315276,
+      "Comp_pair_equal_mean": 15.555674985290256,
+      "Coop_minus_Comp": 42.85482984502502
+    },
+    {
+      "metric": "sustained_zero_by60",
+      "Coop_pair_equal_mean": 0.2833333333333333,
+      "Comp_pair_equal_mean": 0.6553571428571429,
+      "Coop_minus_Comp": -0.37202380952380953
+    },
+    {
+      "metric": "sustained_zero_observed",
+      "Coop_pair_equal_mean": 0.5625,
+      "Comp_pair_equal_mean": 0.9625,
+      "Coop_minus_Comp": -0.4
+    },
+    {
+      "metric": "terminal_zero",
+      "Coop_pair_equal_mean": 0.9375,
+      "Comp_pair_equal_mean": 0.9875,
+      "Coop_minus_Comp": -0.050000000000000044
+    },
+    {
+      "metric": "nonzero_time_capped239",
+      "Coop_pair_equal_mean": 148.60787129166667,
+      "Comp_pair_equal_mean": 75.26448916071429,
+      "Coop_minus_Comp": 73.34338213095238
+    },
+    {
+      "metric": "harvest_first60",
+      "Coop_pair_equal_mean": 58.90416666666666,
+      "Comp_pair_equal_mean": 90.99642857142857,
+      "Coop_minus_Comp": -32.092261904761905
+    }
+  ],
+  "definitions": {
+    "unit": "Numeric pair ID. Mean available valid rounds per pair, then give the ten pair means equal weight within condition.",
+    "independence": "No assumption of unique participants is established; repeated two-letter labels leave possible cross-pair dependence unresolved.",
+    "harvest_all": "Number of rows in the original Harvest.csv, before any score thresholding",
+    "harvest_window": "Harvest events in [first TokenField timestamp, last TokenField timestamp)",
+    "first60_time_origin": "Logged TaskTime measured from t=0. The cutoff is the absolute timestamp 60.0 seconds, not first_field_time+60.",
+    "harvest_first60": "Harvest events with first_field_time <= rt < 60.0 in the original logged TaskTime; the lower limit is the first observed board.",
+    "balance_births": "Harvest_window + N_end - N_start; reconstructed count, including births hidden between saved frames",
+    "observed_birth_flips": "Visible 0->1 changes between consecutive saved boards; distinct from reconstructed total births",
+    "N_times": "Latest saved board no later than the named second, without interpolation",
+    "first_observed_zero": "First saved board with zero tokens; underlying event time is interval censored",
+    "sustained_zero": "Zero continuously to the end for ten or more logged seconds; raw data verified to remain zero after first zero",
+    "nonzero_time_capped239": "min(first observed zero time,239); 239 if not zero by then. This handles nondepleted trials without averaging only failures.",
+    "mean_N_timeweighted": "Left-step integral of observed total tokens divided by observed duration",
+    "round_order": "Folder-labelled rounds 1..8, matching the eight-round instruction; not inferred wall-clock times",
+    "anonymization": "Only numeric pair IDs and player-slot numbers identify membership in the output. The original two-letter participant strings and workbook dates are not written.",
+    "inference": "Descriptive only. No p-values, confidence intervals, randomized-allocation claim, or causal effect is produced here."
+  },
+  "validation": {
+    "raw_reference_differences": {
+      "harvest_all": 0.0,
+      "harvest_window": 0.0,
+      "balance_births": 0.0,
+      "observed_birth_flips": 0.0,
+      "N_end": 0.0,
+      "N_60": 0.0,
+      "N_120": 0.0,
+      "N_180": 0.0
+    },
+    "zero_is_absorbing_in_all_raw_rounds": true,
+    "board_side_all_rounds": 19,
+    "initial_tokens_all_rounds": 90
+  },
+  "source_hashes": {
+    "archive": "536996e6a977de63fcb82e9a0678c51cded6cd3bd2e962fbfeb00701dbcb9896",
+    "conditions_csv": "c772cae8414b14a5550e06865662e0fdd252d9826df2e77db4522f9781ef9664",
+    "quality_flags_csv": "a203a041262385c177d6a3077154c381bf028a4c864273142b89096a352c0ab5",
+    "round_sand_csv": "ca8f71798de6c3bf7c7e62991a53cd188d21a17b815fd8f5adc9072201db4e05",
+    "analysis_code": "4de137f9d2ccd594dcfd20b2766198d3b80b5fa57779b9fcb39362846f713b1f",
+    "raw_loader_code": "4ba8983b5cadf0f1acee62ab5813dd3ea7f8ab3e9e6603c762caeb0d001743e2"
+  }
+}

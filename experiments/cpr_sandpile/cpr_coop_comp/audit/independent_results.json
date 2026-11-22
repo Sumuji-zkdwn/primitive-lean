@@ -1,0 +1,625 @@
+{
+  "design": {
+    "condition_design": "between pair IDs: each pair has one fixed condition, no pair-ID crossover",
+    "condition_table_and_original_xlsx_agree": true,
+    "pair_count": 20,
+    "condition_pair_counts": {
+      "Comp": 10,
+      "Coop": 10
+    },
+    "participant_label_slots": 40,
+    "distinct_initial_strings": 32,
+    "all_original_labels_two_ascii_letters": true,
+    "normalization_for_sensitivity_graph": "remove whitespace and uppercase; original strings are not output",
+    "identity_status": "These are two-letter initial-like labels, not unique person identifiers. Reuse may mean the same person or an initials collision; number of actual people is unresolved.",
+    "within_pair_same_initials_count": 0,
+    "reused_initial_groups": [
+      {
+        "pairs": [
+          "01",
+          "07"
+        ],
+        "conditions": [
+          "Comp",
+          "Comp"
+        ],
+        "occurrences": 2,
+        "anonymous_repeat_label": "repeat_01"
+      },
+      {
+        "pairs": [
+          "02",
+          "11",
+          "13"
+        ],
+        "conditions": [
+          "Coop",
+          "Comp",
+          "Comp"
+        ],
+        "occurrences": 3,
+        "anonymous_repeat_label": "repeat_02"
+      },
+      {
+        "pairs": [
+          "06",
+          "12"
+        ],
+        "conditions": [
+          "Coop",
+          "Coop"
+        ],
+        "occurrences": 2,
+        "anonymous_repeat_label": "repeat_03"
+      },
+      {
+        "pairs": [
+          "09",
+          "10"
+        ],
+        "conditions": [
+          "Comp",
+          "Coop"
+        ],
+        "occurrences": 2,
+        "anonymous_repeat_label": "repeat_04"
+      },
+      {
+        "pairs": [
+          "12",
+          "14",
+          "17"
+        ],
+        "conditions": [
+          "Coop",
+          "Coop",
+          "Comp"
+        ],
+        "occurrences": 3,
+        "anonymous_repeat_label": "repeat_05"
+      },
+      {
+        "pairs": [
+          "17",
+          "18"
+        ],
+        "conditions": [
+          "Comp",
+          "Coop"
+        ],
+        "occurrences": 2,
+        "anonymous_repeat_label": "repeat_06"
+      }
+    ],
+    "overlap_edges": [
+      {
+        "pairs": [
+          "01",
+          "07"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "02",
+          "11"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "02",
+          "13"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "06",
+          "12"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "09",
+          "10"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "11",
+          "13"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "12",
+          "14"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "12",
+          "17"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "14",
+          "17"
+        ],
+        "shared_initial_strings": 1
+      },
+      {
+        "pairs": [
+          "17",
+          "18"
+        ],
+        "shared_initial_strings": 1
+      }
+    ],
+    "connected_components_under_same_initials_same_person_assumption": [
+      [
+        "01",
+        "07"
+      ],
+      [
+        "02",
+        "11",
+        "13"
+      ],
+      [
+        "03"
+      ],
+      [
+        "04"
+      ],
+      [
+        "05"
+      ],
+      [
+        "06",
+        "12",
+        "14",
+        "17",
+        "18"
+      ],
+      [
+        "08"
+      ],
+      [
+        "09",
+        "10"
+      ],
+      [
+        "15"
+      ],
+      [
+        "16"
+      ],
+      [
+        "19"
+      ],
+      [
+        "20"
+      ]
+    ],
+    "component_count": 12,
+    "pairs_touching_any_reused_initial": [
+      "01",
+      "02",
+      "06",
+      "07",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "17",
+      "18"
+    ],
+    "source_workbook_sha256": "d6a328bc49b2915100847f826f556e88f2150a60df28e9ad0a1576f7003eabb4",
+    "causal_assignment_note": "One-condition-per-pair is verified. Random assignment and human independence are not established by these labels/tables.",
+    "round_counts_by_pair": {
+      "01": 8,
+      "02": 6,
+      "03": 8,
+      "04": 8,
+      "05": 8,
+      "06": 8,
+      "07": 8,
+      "08": 8,
+      "09": 8,
+      "10": 8,
+      "11": 8,
+      "12": 8,
+      "13": 8,
+      "14": 8,
+      "15": 8,
+      "16": 8,
+      "17": 8,
+      "18": 8,
+      "19": 7,
+      "20": 8
+    },
+    "main_rounds_by_condition": {
+      "Comp": 79,
+      "Coop": 78
+    }
+  },
+  "estimand": "For each metric, compute each round first, average available rounds within pair, then weight pairs equally within condition. The reported difference is Coop minus Comp.",
+  "metrics": {
+    "K": "harvests per round",
+    "v": "secondary/cascade model topplings per round: u-K",
+    "v_per_K": "within-round v/K, then pair mean",
+    "cascade_fraction": "within-round fraction of harvest events with q8 topplings>1, then pair mean",
+    "max_event_area_u": "within-round maximum event area (Delta u>0), including the guaranteed source firing, then pair mean"
+  },
+  "bootstrap": {
+    "resamples": 200000,
+    "seed": 20261121,
+    "interval": "two-sided 95% percentile, NumPy linear quantiles",
+    "pair": "Resample 10 pair means with replacement separately within Comp and Coop. Requires pair independence.",
+    "component": "Assume identical two-letter initials denote identical people; resample the connected components with replacement as intact clusters. Re-average original pair means with each condition's resampled pair count as denominator. This is an identity-assumption sensitivity, not evidence that participants actually repeat.",
+    "component_count": 12,
+    "component_valid_resamples": 200000,
+    "component_rejected_empty_condition_resamples": 3,
+    "component_resampled_pair_count_range": {
+      "Comp": [
+        1,
+        20
+      ],
+      "Coop": [
+        1,
+        30
+      ]
+    }
+  },
+  "permutation": {
+    "assignments": 184756,
+    "statistic": "absolute difference between condition means of pair means",
+    "tail": "two-sided >= observed magnitude, includes ties; exhaustive enumeration, no Monte Carlo +1 correction",
+    "status": "reference only: label exchangeability/random assignment and human independence are unverified",
+    "multiplicity": "Five exploratory metrics; no prespecified primary. Holm values are also reference-only and do not fix uncertain independence."
+  },
+  "strict_exclusion": {
+    "excluded_pairs": [
+      "01",
+      "02",
+      "06",
+      "07",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "17",
+      "18"
+    ],
+    "kept_pairs": [
+      "03",
+      "04",
+      "05",
+      "08",
+      "15",
+      "16",
+      "19",
+      "20"
+    ],
+    "interpretation": "Drop every pair incident to a repeated-initial edge. This may discard different people with colliding initials and changes sample composition; descriptive sensitivity only."
+  },
+  "comparison": [
+    {
+      "metric": "K",
+      "Comp_mean": 117.7375,
+      "Coop_mean": 169.45833333333334,
+      "Comp_median": 107.5625,
+      "Coop_median": 184.3125,
+      "Comp_pair_range": [
+        101.75,
+        169.5
+      ],
+      "Coop_pair_range": [
+        106.875,
+        199.25
+      ],
+      "Coop_minus_Comp_mean": 51.720833333333346,
+      "pair_bootstrap_mean_difference_CI95": [
+        27.20406249999999,
+        73.76666666666668
+      ],
+      "pair_bootstrap_Comp_mean_CI95": [
+        106.5,
+        132.05
+      ],
+      "pair_bootstrap_Coop_mean_CI95": [
+        149.0375,
+        187.475
+      ],
+      "Coop_minus_Comp_median": 76.75,
+      "pair_bootstrap_median_difference_CI95": [
+        27.1875,
+        91.25
+      ],
+      "component_bootstrap_mean_difference_CI95": [
+        38.74739583333333,
+        77.0021056547619
+      ],
+      "component_bootstrap_Comp_mean_CI95": [
+        106.328125,
+        129.575
+      ],
+      "component_bootstrap_Coop_mean_CI95": [
+        155.0,
+        193.20833333333334
+      ],
+      "exact_pair_label_permutation_extreme_count": 268,
+      "exact_pair_label_permutation_p_reference": 0.00145056182207885,
+      "holm_5_metrics_p_reference": 0.0036372296434215934,
+      "exclude_all_reused_initial_pairs": {
+        "Comp_n_pairs": 4,
+        "Coop_n_pairs": 4,
+        "Comp_mean": 113.53125,
+        "Coop_mean": 178.84375,
+        "Coop_minus_Comp": 65.3125,
+        "Comp_median": 112.375,
+        "Coop_median": 190.25
+      }
+    },
+    {
+      "metric": "v",
+      "Comp_mean": 42.739285714285714,
+      "Coop_mean": 775.1041666666667,
+      "Comp_median": 0.25,
+      "Coop_median": 974.0625,
+      "Comp_pair_range": [
+        0.0,
+        333.125
+      ],
+      "Coop_pair_range": [
+        0.0,
+        1260.0
+      ],
+      "Coop_minus_Comp_mean": 732.364880952381,
+      "pair_bootstrap_mean_difference_CI95": [
+        420.6852380952381,
+        1018.8544345238095
+      ],
+      "pair_bootstrap_Comp_mean_CI95": [
+        3.5375,
+        110.95357142857142
+      ],
+      "pair_bootstrap_Coop_mean_CI95": [
+        470.3948958333334,
+        1055.6541666666667
+      ],
+      "Coop_minus_Comp_median": 973.8125,
+      "pair_bootstrap_median_difference_CI95": [
+        255.625,
+        1238.9166666666667
+      ],
+      "component_bootstrap_mean_difference_CI95": [
+        523.1436863425926,
+        1101.605835845702
+      ],
+      "component_bootstrap_Comp_mean_CI95": [
+        3.642857142857143,
+        97.95454545454545
+      ],
+      "component_bootstrap_Coop_mean_CI95": [
+        548.3154761904763,
+        1151.8541666666667
+      ],
+      "exact_pair_label_permutation_extreme_count": 90,
+      "exact_pair_label_permutation_p_reference": 0.0004871289701011063,
+      "holm_5_metrics_p_reference": 0.0024356448505055313,
+      "exclude_all_reused_initial_pairs": {
+        "Comp_n_pairs": 4,
+        "Coop_n_pairs": 4,
+        "Comp_mean": 14.785714285714285,
+        "Coop_mean": 941.5,
+        "Coop_minus_Comp": 926.7142857142857,
+        "Comp_median": 8.196428571428571,
+        "Coop_median": 1048.25
+      }
+    },
+    {
+      "metric": "v_per_K",
+      "Comp_mean": 0.2391182133599771,
+      "Coop_mean": 3.217041870516951,
+      "Comp_median": 0.0023222772393126376,
+      "Coop_median": 4.055784516984687,
+      "Comp_pair_range": [
+        0.0,
+        1.758773392469455
+      ],
+      "Coop_pair_range": [
+        0.0,
+        5.333928672924826
+      ],
+      "Coop_minus_Comp_mean": 2.977923657156974,
+      "pair_bootstrap_mean_difference_CI95": [
+        1.6768995507954474,
+        4.173558215403513
+      ],
+      "pair_bootstrap_Comp_mean_CI95": [
+        0.02219088082039128,
+        0.5996016479753148
+      ],
+      "pair_bootstrap_Coop_mean_CI95": [
+        1.9597534592034342,
+        4.3695469839387595
+      ],
+      "Coop_minus_Comp_median": 4.053462239745374,
+      "pair_bootstrap_median_difference_CI95": [
+        1.092148599788085,
+        4.91284402271924
+      ],
+      "component_bootstrap_mean_difference_CI95": [
+        2.150505793412516,
+        4.4625605644580375
+      ],
+      "component_bootstrap_Comp_mean_CI95": [
+        0.02491658607465004,
+        0.5287997093495989
+      ],
+      "component_bootstrap_Coop_mean_CI95": [
+        2.2896120719750126,
+        4.7295094280131345
+      ],
+      "exact_pair_label_permutation_extreme_count": 160,
+      "exact_pair_label_permutation_p_reference": 0.0008660070579575224,
+      "holm_5_metrics_p_reference": 0.0034640282318300895,
+      "exclude_all_reused_initial_pairs": {
+        "Comp_n_pairs": 4,
+        "Coop_n_pairs": 4,
+        "Comp_mean": 0.10550862501181334,
+        "Coop_mean": 3.899567096729462,
+        "Coop_minus_Comp": 3.7940584717176487,
+        "Comp_median": 0.06154333993429738,
+        "Coop_median": 4.469872447907234
+      }
+    },
+    {
+      "metric": "cascade_fraction",
+      "Comp_mean": 0.018062222879563678,
+      "Coop_mean": 0.1296842938751262,
+      "Comp_median": 0.0023222772393126376,
+      "Coop_median": 0.1537274668649932,
+      "Comp_pair_range": [
+        0.0,
+        0.11126508000491027
+      ],
+      "Coop_pair_range": [
+        0.0,
+        0.21584257760098707
+      ],
+      "Coop_minus_Comp_mean": 0.1116220709955625,
+      "pair_bootstrap_mean_difference_CI95": [
+        0.05949009903885008,
+        0.1588010114241432
+      ],
+      "pair_bootstrap_Comp_mean_CI95": [
+        0.002997909439099973,
+        0.041199310519831195
+      ],
+      "pair_bootstrap_Coop_mean_CI95": [
+        0.0821007051529024,
+        0.1724139520766535
+      ],
+      "Coop_minus_Comp_median": 0.15140518962568056,
+      "pair_bootstrap_median_difference_CI95": [
+        0.05798721703348077,
+        0.18598514064366758
+      ],
+      "component_bootstrap_mean_difference_CI95": [
+        0.08247566509028734,
+        0.1692352985800552
+      ],
+      "component_bootstrap_Comp_mean_CI95": [
+        0.0032606507921555616,
+        0.03590534429024022
+      ],
+      "component_bootstrap_Coop_mean_CI95": [
+        0.09610120956076189,
+        0.18527711407373412
+      ],
+      "exact_pair_label_permutation_extreme_count": 230,
+      "exact_pair_label_permutation_p_reference": 0.0012448851458139384,
+      "holm_5_metrics_p_reference": 0.0036372296434215934,
+      "exclude_all_reused_initial_pairs": {
+        "Comp_n_pairs": 4,
+        "Coop_n_pairs": 4,
+        "Comp_mean": 0.01101845539887349,
+        "Coop_mean": 0.1560955113915493,
+        "Coop_minus_Comp": 0.1450770559926758,
+        "Comp_median": 0.007108413158945073,
+        "Coop_median": 0.16810270343828695
+      }
+    },
+    {
+      "metric": "max_event_area_u",
+      "Comp_mean": 10.258928571428571,
+      "Coop_mean": 77.29583333333332,
+      "Comp_median": 1.25,
+      "Coop_median": 99.0,
+      "Comp_pair_range": [
+        1.0,
+        57.625
+      ],
+      "Coop_pair_range": [
+        1.0,
+        128.25
+      ],
+      "Coop_minus_Comp_mean": 67.03690476190475,
+      "pair_bootstrap_mean_difference_CI95": [
+        36.02431547619047,
+        95.3785863095238
+      ],
+      "pair_bootstrap_Comp_mean_CI95": [
+        2.3375,
+        22.1
+      ],
+      "pair_bootstrap_Coop_mean_CI95": [
+        48.19583333333333,
+        103.69166666666665
+      ],
+      "Coop_minus_Comp_median": 97.75,
+      "pair_bootstrap_median_difference_CI95": [
+        27.9375,
+        110.25
+      ],
+      "component_bootstrap_mean_difference_CI95": [
+        48.66483516483517,
+        101.91131944444443
+      ],
+      "component_bootstrap_Comp_mean_CI95": [
+        2.442857142857143,
+        19.41346153846154
+      ],
+      "component_bootstrap_Coop_mean_CI95": [
+        56.98611111111111,
+        111.11805555555556
+      ],
+      "exact_pair_label_permutation_extreme_count": 224,
+      "exact_pair_label_permutation_p_reference": 0.0012124098811405312,
+      "holm_5_metrics_p_reference": 0.0036372296434215934,
+      "exclude_all_reused_initial_pairs": {
+        "Comp_n_pairs": 4,
+        "Coop_n_pairs": 4,
+        "Comp_mean": 6.959821428571429,
+        "Coop_mean": 93.25,
+        "Coop_minus_Comp": 86.29017857142857,
+        "Comp_median": 4.482142857142858,
+        "Coop_median": 104.8125
+      }
+    }
+  ],
+  "interpretation_notes": [
+    "A larger K changes the dose into this model. v/K is not a full adjustment because cascades grow nonlinearly with accumulated input and spatial concentration.",
+    "Maximum event area also has more opportunities to be large when K is larger. Event fraction can depend on how far the field has been driven.",
+    "A fixed-harvest-prefix comparison (for example 90 events, below the observed minimum94) would compare equal input budgets; it would address a different estimand.",
+    "These are model outcomes from empirical harvests, not observed token-regeneration cascades or a causal estimate of cooperation."
+  ],
+  "sources": [
+    {
+      "path": "cpr_empirical/conditions.csv",
+      "sha256": "c772cae8414b14a5550e06865662e0fdd252d9826df2e77db4522f9781ef9664"
+    },
+    {
+      "path": "cpr_redefinition/harvest_asm/summary.csv",
+      "sha256": "dea794bbfc17ee6317b2b8a2f0adbd63aaa926a351af50c2810ad9a3d0f301c1"
+    },
+    {
+      "path": "cpr_redefinition/harvest_asm/events.csv",
+      "sha256": "8ad038add4e8985e6705e097906b6d5af5bf58af663b7117b3436ab7c74225c8"
+    }
+  ]
+}
