@@ -1,0 +1,229 @@
+name: Research Conveyor - source-bound finite Lean cycle
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/research_conveyor.py'
+      - 'tests/test_research_conveyor.py'
+      - 'tests/fixtures/research_conveyor_empty.json'
+      - 'docs/autonomy/RESEARCH_CONVEYOR.md'
+      - 'docs/research/2026-11-17-siphon-predictive-quotient.md'
+      - '.github/workflows/research-conveyor.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/research-conveyor.yml'
+      - 'tools/autonomy/research_conveyor.py'
+      - 'docs/research/2026-11-17-siphon-predictive-quotient.md'
+  schedule:
+    # Every day at 02:43 UTC = 11:43 Japan time.
+    - cron: '43 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-conveyor-persistent-state
+  cancel-in-progress: false
+
+jobs:
+  offline-and-lean-regression:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact proposed head without stored token
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify source-bound task selection and no-proof fail-closed rules
+        run: python -m unittest discover -s tests -p 'test_research_conveyor.py' -v
+      - name: Generate one finite task from retained research (no AI or network)
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          python -B -m tools.autonomy.research_conveyor prepare \
+            --root . \
+            --state tests/fixtures/research_conveyor_empty.json \
+            --head "$sha" --day 2026-11-23 \
+            --output verification/research-conveyor/cycle
+      - name: Install pinned repository Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prove generated task at trust zero and preserve compilation log
+        working-directory: lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for f in ../verification/research-conveyor/cycle/proof/*.lean; do
+            name="$(basename "$f" .lean)"
+            set +e
+            lake env lean --trust=0 "$f" > "../verification/research-conveyor/cycle/proof/$name.log" 2>&1
+            status=$?
+            set -e
+            printf '%s\n' "$status" > "../verification/research-conveyor/cycle/proof/$name.exit"
+            echo "Generated $name: Lean exit $status"
+          done
+      - name: Audit kernel outputs and produce a one-step feedback receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/research-conveyor/cycle/proof
+          python -B -m tools.autonomy.research_conveyor receipt \
+            --root . --state tests/fixtures/research_conveyor_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/research-conveyor/cycle \
+            --output verification/research-conveyor/verified-next-state.json
+      - name: Keep exact-head input, certificate, audit and proposed feedback
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: research-conveyor-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/research-conveyor/
+          if-no-files-found: warn
+          retention-days: 30
+
+  one-finite-task:
+    # Scheduled/main-only: this code is never executed from an unreviewed PR.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    outputs:
+      candidate: ${{ steps.plan.outputs.candidate }}
+    steps:
+      - name: Checkout immutable trusted main controller
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read state branch as data only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/research-conveyor-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Take precisely one source-pinned research task
+        id: plan
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          test "$sha" = "$GITHUB_SHA"
+          day="$(date -u +%F)"
+          python -B -m tools.autonomy.research_conveyor prepare \
+            --root . \
+            --state ../state/docs/autonomy/conveyor-state.json \
+            --head "$sha" --day "$day" --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          row = json.load(open("../cycle/plan.json", encoding="utf-8"))
+          print("candidate=" + ("true" if row["candidate"] else "false"))
+          print("task_id=" + row.get("task_id",""))
+          PY
+      - name: Load pinned Lean only if another task remains
+        if: steps.plan.outputs.candidate == 'true'
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: control/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile one generated certificate without broad repository mutation
+        if: steps.plan.outputs.candidate == 'true'
+        working-directory: control/lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for f in ../../cycle/proof/*.lean; do
+            name="$(basename "$f" .lean)"
+            set +e
+            lake env lean --trust=0 "$f" > "../../cycle/proof/$name.log" 2>&1
+            status=$?
+            set -e
+            printf '%s\n' "$status" > "../../cycle/proof/$name.exit"
+            echo "Finite task $name: Lean exit $status"
+          done
+      - name: Fail closed on compilation or axiom audit failure
+        if: steps.plan.outputs.candidate == 'true'
+        working-directory: control
+        run: python -B tools/autonomy/proof_forge.py audit --output ../cycle/proof
+      - name: Preserve all attempts including failures
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: research-conveyor-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  verified-feedback:
+    # This job alone can write, and ONLY to its separate data state branch.
+    # It uses the trusted main script, re-audits evidence and never checks out
+    # executable code from the state branch.
+    if: github.ref == 'refs/heads/main' && needs.one-finite-task.result == 'success' && needs.one-finite-task.outputs.candidate == 'true'
+    needs: [one-finite-task]
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/research-conveyor-state
+          path: state
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: research-conveyor-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Independently audit and materialize checked result into data branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          main_sha="$(git -C control rev-parse HEAD)"
+          test "$main_sha" = "$GITHUB_SHA"
+          python -B control/tools/autonomy/proof_forge.py audit --output cycle/proof
+          PYTHONPATH="$GITHUB_WORKSPACE/control" python -B -m tools.autonomy.research_conveyor receipt \
+            --root control --state state/docs/autonomy/conveyor-state.json \
+            --head "$main_sha" --evidence cycle \
+            --output state/docs/autonomy/conveyor-state.json
+      - name: Commit only validated JSON to isolated state branch
+        working-directory: state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'research-conveyor[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/autonomy/conveyor-state.json
+          git diff --cached --quiet && { echo "No verified state mutation"; exit 1; }
+          git commit -m 'conveyor: store one Lean-verified finite-model receipt'
+          git push origin HEAD:refs/heads/autonomy/research-conveyor-state
