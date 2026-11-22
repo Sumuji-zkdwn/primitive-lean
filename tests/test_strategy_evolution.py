@@ -124,7 +124,7 @@ class StrategyEvolutionTests(unittest.TestCase):
             self.assertNotEqual(future["id"], plan["id"])
             self.assertFalse(meta.plan(ROOT, meta.load(UPSTREAM), state, HEAD,
                                        "2026-11-23")["candidate"])
-            with self.assertRaisesRegex(ValueError, "older"):
+            with self.assertRaisesRegex(ValueError, "precedes last verified day"):
                 meta.plan(ROOT, meta.load(UPSTREAM), state, HEAD, "2026-11-22")
 
     def test_verified_parent_rule_required_for_composite(self):
