@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "6b20543fe39ef831669b45a2de48ea2f5581ad61",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1662,6 +1662,57 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
+    },
+    {
+      "id": "main:lean/Research/KKExactEMD.lean",
+      "scope": "main",
+      "path": "lean/Research/KKExactEMD.lean",
+      "group": "Other",
+      "namespace": "KKExactEMD",
+      "declarations": [
+        "q",
+        "H",
+        "dH",
+        "ddH",
+        "H_eq_one_add",
+        "harmonic_potential",
+        "conserved_radial_harmonic_flux",
+        "log_H_derivative_ratio",
+        "radiusSquare",
+        "radius_secant",
+        "circle_radius_changes",
+        "dilatonRadialCurrent",
+        "dilaton_current_eq_radial_trace",
+        "dilaton_current_secant",
+        "magneticF2",
+        "dilatonRadialSq",
+        "ricciTT",
+        "ricciRR",
+        "ricciThetaTheta",
+        "emSourceTT",
+        "emSourceRR",
+        "emSourceThetaTheta",
+        "einstein_tt",
+        "einstein_rr",
+        "einstein_theta_theta",
+        "einstein_phi_phi",
+        "scaledRicciScalar4",
+        "contracted_einstein_scalar",
+        "weightedMagneticFlux",
+        "weighted_flux_same_at_all_angles",
+        "scaledScalarWave",
+        "scaledScalarEMSource",
+        "nonlinear_dilaton_source_balance",
+        "nonlinear_ricci_theta_nonzero",
+        "kretschmann5",
+        "kretschmann_formula_finite_at_centre",
+        "ricciScalar4Squared",
+        "projected_scalar_squared_pole"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "ccc97759cc21d9dae49bfea102702a4d271584cc01293e03c876e11a9464038d"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -27677,28 +27728,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "6b20543fe39ef831669b45a2de48ea2f5581ad61",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "6b20543fe39ef831669b45a2de48ea2f5581ad61",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "6b20543fe39ef831669b45a2de48ea2f5581ad61",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "6b20543fe39ef831669b45a2de48ea2f5581ad61",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
