@@ -174,6 +174,7 @@ def memoryStep (weight : R) (m f : C0 X R) : C0 X R :=
   fun p => (1 - weight) * m p + weight * f p
 
 /-- If memory already matches the field, an affine step leaves it unchanged. -/
+omit [AddCommGroup X] in
 theorem memoryStep_fixed (weight : R) (f : C0 X R) :
     memoryStep weight f f = f := by
   funext p
@@ -181,6 +182,7 @@ theorem memoryStep_fixed (weight : R) (f : C0 X R) :
   ring
 
 /-- The memory update is a relaxation toward its new target. -/
+omit [AddCommGroup X] in
 theorem memoryStep_difference (weight : R) (m f : C0 X R) :
     memoryStep weight m f = fun p => m p + weight * (f p - m p) := by
   funext p
