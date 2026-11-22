@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "baf013235612d010f8f17eee34948e401956e174",
+  "main_commit": "54ffd09f04fa7761997ad612529488ce00aed299",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1548,6 +1548,25 @@
       "sha256": "a35052f64b383b9bd5111d315e45ad1b7a121c35ad5ceabee95cd9334cc0bdf4"
     },
     {
+      "id": "main:lean/Research/CompactWarpGraphAnalogue.lean",
+      "scope": "main",
+      "path": "lean/Research/CompactWarpGraphAnalogue.lean",
+      "group": "Other",
+      "namespace": "CompactWarpGraphAnalogue",
+      "declarations": [
+        "Profile",
+        "lap",
+        "closed_harmonic_constant",
+        "boundaryProfile",
+        "boundary_harmonic",
+        "boundary_not_closed"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "616f2a7af7d03e04a726e5be0fee31bca0a0086e3929c9cae4bbf5522d31b19c"
+    },
+    {
       "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
       "scope": "main",
       "path": "lean/Research/ElasticaIntrinsicHeight.lean",
@@ -1838,6 +1857,32 @@
         "Mathlib.LinearAlgebra.Matrix.Notation"
       ],
       "sha256": "6ce68cb64f1806647936917ecf811f4210d3650e8fc2b904531ad22d158879a5"
+    },
+    {
+      "id": "main:lean/Research/SingleInternalGeometry.lean",
+      "scope": "main",
+      "path": "lean/Research/SingleInternalGeometry.lean",
+      "group": "Other",
+      "namespace": "SingleInternalGeometry",
+      "declarations": [
+        "curvatureNumerator",
+        "curvatureDenominator",
+        "curvature_cross_difference",
+        "curvature_at_poles",
+        "curvature_at_equator",
+        "curvature_nonconstant",
+        "twiceTwistedIndex",
+        "canonical_index_numerator",
+        "quarklike_index_numerator",
+        "index_product_formula",
+        "CenterCompatible",
+        "sample_standard_model_center_conditions",
+        "arbitrary_charge_not_allowed"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "a0f8a99df2baac8cc4742bff3aae39d472d59475d4ef8f01c0b713f55cca2329"
     },
     {
       "id": "main:lean/Research/SiphonCommonInvariant.lean",
@@ -27677,28 +27722,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "baf013235612d010f8f17eee34948e401956e174",
+      "base_sha": "54ffd09f04fa7761997ad612529488ce00aed299",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

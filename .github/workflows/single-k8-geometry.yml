@@ -1,0 +1,94 @@
+name: Single K8 geometry gauge and Spin-c index obstruction
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SingleInternalGeometry.lean'
+      - 'lean/Research/CompactWarpGraphAnalogue.lean'
+      - 'tools/check_single_internal_geometry.py'
+      - 'tools/check_graph_harmonic_nogo.py'
+      - 'docs/research/2026-11-22-single-kahler-internal-geometry.md'
+      - '.github/workflows/single-k8-geometry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  single-k8:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel typecheck arithmetic witnesses
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/SingleInternalGeometry.olean Research/SingleInternalGeometry.lean 2>&1 | tee ../single-k8-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../single-k8-lean.log; then exit 1; fi
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/CompactWarpGraphAnalogue.olean Research/CompactWarpGraphAnalogue.lean 2>&1 | tee ../graph-harmonic-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../graph-harmonic-lean.log; then exit 1; fi
+      - name: Inspect theorem axiom dependencies
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          names=[]
+          for mod in ('SingleInternalGeometry','CompactWarpGraphAnalogue'):
+              src=pathlib.Path('Research',mod+'.lean').read_text()
+              assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+              names += [mod+'.'+x for x in re.findall(r'^theorem\s+(\w+)',src,re.M)]
+          assert len(names)>=10,names
+          pathlib.Path('SingleK8Audit.lean').write_text(
+              'import Research.SingleInternalGeometry\nimport Research.CompactWarpGraphAnalogue\n'+''.join(
+              '#print axioms '+name+'\n' for name in names))
+          pathlib.Path('../single-k8-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 SingleK8Audit.lean 2>&1 | tee ../single-k8-audit.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../single-k8-audit.log').read_text()
+          n=int(pathlib.Path('../single-k8-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for e in entries:
+              used=set(filter(None,(x.strip() for x in e.split(','))))
+              assert used<=allowed,used-allowed
+          print('Kernel axiom-checked theorems:',n)
+          PY
+      - name: Exact independent curvature and index oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_single_internal_geometry.py 2>&1 | tee single-k8-python.log
+          python -B tools/check_graph_harmonic_nogo.py 2>&1 | tee graph-harmonic-python.log
+      - name: Upload exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: single-k8-geometry
+          path: |
+            single-k8-lean.log
+            graph-harmonic-lean.log
+            single-k8-audit.log
+            single-k8-count.txt
+            single-k8-python.log
+            graph-harmonic-python.log
+          if-no-files-found: warn
