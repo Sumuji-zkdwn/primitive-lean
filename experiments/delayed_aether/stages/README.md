@@ -20,3 +20,7 @@ For continuous integration, use the *small independent* standard-library finite 
 ## Verification status
 
 The stage notes describe historical numerical tests and assumptions. The new GitHub transfer itself verifies only content retention and tests run at the new PR head. No independent recomputation of every original simulation or symbolic computation is implied by the transfer. In particular, the use of Einstein–Hilbert, ADM, Regge, Fierz–Pauli, Skyrme and scalar–tensor actions is explicitly noted; **the original delayed-gel idea has not been shown to derive gravity**.
+
+
+## 2026-11-23 原本ZIPの全移植による訂正
+`../original_archives/` に第1〜30回のZIP原本30本をバイト単位で保存し、内部623ファイルのハッシュ台帳とCIを追加した。この `stages/` ディレクトリは取り出しやすい個別スクリプトの部分集合にすぎない。第18回の `verify_v18.py` は第18回原ZIP内に存在する。原本ZIPは公開されたが、全実験の計算をGitHub CIで独立に再実行した意味ではない。
