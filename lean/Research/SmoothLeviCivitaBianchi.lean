@@ -43,14 +43,15 @@ theorem actual_torsion_zero :
   CovariantDerivative.torsion_leviCivitaConnection_eq_zero I
 
 /-- Actual pinned Mathlib Levi-Civita connection is metric-compatible. -/
+omit [CompleteSpace E] in
 theorem actual_metric_compatible :
     (CovariantDerivative.leviCivitaConnection I M).IsMetricCompatible
       (M := M) (V := TangentSpace I) :=
   CovariantDerivative.isMetricCompatible_leviCivitaConnection I
 
-variable [ContMDiffCovariantDerivative
+variable [CovariantDerivative.ContMDiffCovariantDerivative
     (CovariantDerivative.leviCivitaConnection I M) 1]
-  [ContMDiffCovariantDerivative
+  [CovariantDerivative.ContMDiffCovariantDerivative
     (CovariantDerivative.leviCivitaConnection I M) 2]
 
 /-- The **manifold-level differential second Bianchi identity** for
