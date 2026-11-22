@@ -1,0 +1,138 @@
+{
+  "symbolic": {
+    "two_scalar_schur_complement": "exact_zero",
+    "spatial_frame_identity": "exact_zero"
+  },
+  "hardening_bounds": {
+    "F_min": 2,
+    "F_sup": 3.2,
+    "F_at_y0": 2.0
+  },
+  "rows": [
+    {
+      "mode": "standard",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "correct_bracket_residual": -0.13411515232041712,
+      "omit_both_momentum_mixings": -0.2201736360764234,
+      "frame_H_difference": 0.5183241446805744
+    },
+    {
+      "mode": "standard",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "correct_bracket_residual": 0.003687381278316526,
+      "omit_both_momentum_mixings": -0.19451173078480927,
+      "frame_H_difference": 0.15906021389071467
+    },
+    {
+      "mode": "standard",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "correct_bracket_residual": -0.0006489470569558398,
+      "omit_both_momentum_mixings": -0.22369294392023933,
+      "frame_H_difference": 0.042965142245621646
+    },
+    {
+      "mode": "standard",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "correct_bracket_residual": -0.00018789216376249862,
+      "omit_both_momentum_mixings": -0.22900442054761452,
+      "frame_H_difference": 0.010958884594099771
+    },
+    {
+      "mode": "standard",
+      "n": 512,
+      "dx": 0.01227184630308513,
+      "correct_bracket_residual": -4.685494947878621e-05,
+      "omit_both_momentum_mixings": -0.23032152722441573,
+      "frame_H_difference": 0.0027536220260242494
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "correct_bracket_residual": -0.13487153445243355,
+      "omit_both_momentum_mixings": -0.22093001820843933,
+      "frame_H_difference": 0.518324144680574
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "correct_bracket_residual": 0.003535358103640418,
+      "omit_both_momentum_mixings": -0.19466375395948504,
+      "frame_H_difference": 0.159060213890716
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "correct_bracket_residual": -0.0006845466403417322,
+      "omit_both_momentum_mixings": -0.22372854350362556,
+      "frame_H_difference": 0.0429651422456212
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "correct_bracket_residual": -0.00019663752685325497,
+      "omit_both_momentum_mixings": -0.2290131659107048,
+      "frame_H_difference": 0.010958884594101104
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 512,
+      "dx": 0.01227184630308513,
+      "correct_bracket_residual": -4.903156550140064e-05,
+      "omit_both_momentum_mixings": -0.23032370384043807,
+      "frame_H_difference": 0.0027536220260255817
+    },
+    {
+      "mode": "strong_memory",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "correct_bracket_residual": -0.135990654464511,
+      "omit_both_momentum_mixings": -0.12144522096601232,
+      "frame_H_difference": 0.4805900813705355
+    },
+    {
+      "mode": "strong_memory",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "correct_bracket_residual": -0.034997785236618006,
+      "omit_both_momentum_mixings": 0.03611839148573312,
+      "frame_H_difference": 0.22144447356622887
+    },
+    {
+      "mode": "strong_memory",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "correct_bracket_residual": -0.010263462144414592,
+      "omit_both_momentum_mixings": 0.07075449512926019,
+      "frame_H_difference": 0.06252379475767667
+    },
+    {
+      "mode": "strong_memory",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "correct_bracket_residual": -0.002672195015740786,
+      "omit_both_momentum_mixings": 0.08070136611898429,
+      "frame_H_difference": 0.01614142072475211
+    },
+    {
+      "mode": "strong_memory",
+      "n": 512,
+      "dx": 0.01227184630308513,
+      "correct_bracket_residual": -0.0006725643177654117,
+      "omit_both_momentum_mixings": 0.0832455452377939,
+      "frame_H_difference": 0.00406838936604581
+    }
+  ],
+  "warnings": [
+    "Both scalar canonical momenta are mixed because F depends on q and chi",
+    "No dissipative memory, y is reversible relative field",
+    "EH scalar-tensor structure assumed, not emergent"
+  ]
+}

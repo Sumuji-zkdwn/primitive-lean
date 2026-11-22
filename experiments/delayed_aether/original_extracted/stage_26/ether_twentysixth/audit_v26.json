@@ -1,0 +1,84 @@
+{
+  "symbolic": {
+    "legendre_identity_exact": true,
+    "kinetic_hessian_determinant": "-F**2*s**4*(2*F*Z + 3*P**2)",
+    "hessian_nondegenerate_condition": "F != 0 and D=Z+3*Fprime^2/(2F) != 0",
+    "spatial_sector_symplectic_bracket_defect_count": 0,
+    "spatial_sector_symplectic_entries_tested": 48,
+    "caveat": "This is a spatial canonical sector transformation; lapse/shift phase space not transformed."
+  },
+  "numeric": {
+    "initial": {
+      "initial_mean_expansion": 0.23107321788942678,
+      "initial_lag": 0.5,
+      "initial_hardness": 2.0440461850947527,
+      "initial_curvature_scalar_R3": 0.0,
+      "initial_chi_momentum": 0.003479881541946561,
+      "naive_chi_momentum_sqrtgamma_Z_nchi": 0.24,
+      "initial_chi_momentum_shift": -0.23652011845805343
+    },
+    "integration": {
+      "0.08": {
+        "max_abs_constraint": 2.8354108251553083e-06,
+        "endpoint_state": [
+          0.5798684493723762,
+          0.41613656483055356,
+          0.4629171032710744,
+          -0.27597497044334723,
+          -0.3095932209955469,
+          -1.5522346182173967,
+          -1.7564042856844635,
+          -1.6980700949795873,
+          -1.687427752801893,
+          0.7057450325409921
+        ],
+        "endpoint_constraint": -2.7553615158644168e-06,
+        "endpoint_error_vs_DOP853": 7.771973983970401e-06
+      },
+      "0.04": {
+        "max_abs_constraint": 1.3156314170598355e-07,
+        "endpoint_state": [
+          0.5798685504092654,
+          0.4161366383496037,
+          0.4629171846523639,
+          -0.2759765722668324,
+          -0.3095930284422463,
+          -1.5522335572728667,
+          -1.7564032247399344,
+          -1.6980690340350582,
+          -1.6874326524518148,
+          0.7057500686410605
+        ],
+        "endpoint_constraint": -1.251616464374638e-07,
+        "endpoint_error_vs_DOP853": 3.4616129871465887e-07
+      },
+      "0.02": {
+        "max_abs_constraint": 6.753527676784575e-09,
+        "endpoint_state": [
+          0.5798685557598503,
+          0.4161366421560757,
+          0.4629171889000111,
+          -0.2759766833749689,
+          -0.3095930149875187,
+          -1.5522334687158108,
+          -1.756403136182878,
+          -1.6980689454780018,
+          -1.6874328238594996,
+          0.7057502744092836
+        ],
+        "endpoint_constraint": -6.312502884426654e-09,
+        "endpoint_error_vs_DOP853": 1.831534376054248e-08
+      }
+    },
+    "RK4_ratio_coarse_medium": 22.451885906450933,
+    "RK4_ratio_medium_fine": 18.90007106830333,
+    "true_flow_max_abs_constraint_dt_0p02": 6.753527676784575e-09,
+    "true_constraint_on_naive_flow_max_abs": 0.11408998210354103,
+    "max_stiffness": 2.0440461850947527,
+    "min_F": 1.9057879322815077,
+    "min_D": 1.0829509578965204,
+    "final_lag": -0.03361633161254979,
+    "final_mean_volume": 4.301321868837724,
+    "scope": "Homogeneous Bianchi I Hamiltonian constraint, not full inhomogeneous Dirac algebra."
+  }
+}

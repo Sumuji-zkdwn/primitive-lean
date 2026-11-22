@@ -1,0 +1,56 @@
+{
+  "model": "seven_oriented_squared_links_to_local_metric_plus_one_mismatch",
+  "date": "2026-11-23",
+  "input": "seven squared link lengths at each corner, six local symmetric metric components; no Einstein action",
+  "algebra": {
+    "metric_map_rank": 6,
+    "metric_mismatch_dimension": 1,
+    "strain_gauge_rank": 3,
+    "scalar_curvature_constraint_rank": 1,
+    "TT_projector_rank": 2,
+    "momentum_constraint_rank": 3,
+    "four_linear_first_class_constraints": 4,
+    "configuration_dof_after_scalar_constraint_and_gauge": 2,
+    "phase_space_dof_after_four_first_class_constraints": 4,
+    "canonical_pairs": 2,
+    "exact_identities": [
+      "r^T M=0",
+      "T^2=T",
+      "T S=0",
+      "C S=0",
+      "C T=0",
+      "C momentum^T=0"
+    ]
+  },
+  "numeric": {
+    "positive_metric_trials": 300,
+    "minimum_spd_eigenvalue": 0.7489568837847248,
+    "max_metric_reconstruction_error": 4.0939474033052647e-16,
+    "random_nonmetric_residual_mean": 0.027655865733619046,
+    "false_mismatch_scaling_slope": 2.9934329646136724,
+    "max_gauge_curvature_residual_17cube": 3.122502256758253e-17,
+    "max_gauge_seven_link_mismatch_17cube": 5.551115123125783e-17,
+    "local_wave_omega_theory": 0.1960468386433732,
+    "local_wave_frequency_by_sector": {
+      "two_TT": 0.1960468386433987,
+      "transverse_scalar": 0.19604683864344122,
+      "pure_displacement_gauge": 0.1960468386433987
+    },
+    "local_wave_energy_relative_max_drifts": {
+      "two_TT": 6.8833827526759706e-15,
+      "transverse_scalar": 8.43769498715119e-15,
+      "pure_displacement_gauge": 2.3314683517128287e-15
+    },
+    "local_wave_eigenvalue_positive_frequency_multiplicity": 6,
+    "local_wave_eigenvalue_negative_frequency_multiplicity": 6
+  },
+  "interpretation": "Seven measured local distances split into one non-quadratic residual + three displacement/pure-gauge metric modes + one scalar-curvature mode + two TT metric modes, modewise for nonzero derivative symbol. Generic positive local wave kinetic propagates all six metric modes: two are not spontaneously selected.",
+  "limitations": [
+    "geometry is a seven-edge local cubical stencil, not a complete globally glued Regge triangulation",
+    "TT decomposition and curvature derived using central differences on a flat reference background",
+    "finite link mismatch is not a gauge-invariant curvature quantity: a smooth Euclidean embedding creates a nonzero mismatch O(a^3)",
+    "GR Hamiltonian and momentum constraints are assumed in the two-pair count, not derived from edge dynamics",
+    "wave evolution is a simple local six-component wave equation, not GR or emergent graviton dynamics",
+    "no damping, irreversible stiffness, topology or universal gravitational coupling is derived"
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "symbolic": {
+    "einstein_jordan_hamiltonian_identity": "0",
+    "spatial_canonical_one_form_identity": "0"
+  },
+  "finite_grid": [
+    {
+      "n": 24,
+      "dx": 0.2617993877991494,
+      "bracket": -0.21316492228892214,
+      "momentum_constraint": -0.1956630182556274,
+      "error": -0.01750190403329474,
+      "relative_error": 0.08944921830056342,
+      "bad_bracket": -0.2791502922952419,
+      "bad_error": -0.0834872740396145,
+      "HE_minus_HJ": 0.0007091501816449686,
+      "HJ": 2.539755952337843,
+      "HE": 2.5404651025194878
+    },
+    {
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "bracket": -0.22252984911700985,
+      "momentum_constraint": -0.21162692190657822,
+      "error": -0.010902927210431623,
+      "relative_error": 0.051519566188486514,
+      "bad_bracket": -0.2924152282127283,
+      "bad_error": -0.08078830630615008,
+      "HE_minus_HJ": 0.0004265349246677097,
+      "HJ": 2.6666984655493216,
+      "HE": 2.6671250004739893
+    },
+    {
+      "n": 48,
+      "dx": 0.1308996938995747,
+      "bracket": -0.22880667400706398,
+      "momentum_constraint": -0.2236494279806471,
+      "error": -0.005157246026416873,
+      "relative_error": 0.023059509129901023,
+      "bad_bracket": -0.30176214162973153,
+      "bad_error": -0.07811271364908443,
+      "HE_minus_HJ": 0.0001988878839682684,
+      "HJ": 2.7635383373599187,
+      "HE": 2.763737225243887
+    },
+    {
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "bracket": -0.23095074622058528,
+      "momentum_constraint": -0.22798313739169465,
+      "error": -0.0029676088288906333,
+      "relative_error": 0.013016790903232576,
+      "bad_bracket": -0.3050406078791416,
+      "bad_error": -0.07705747048744696,
+      "HE_minus_HJ": 0.00011377121990552297,
+      "HJ": 2.798639491239054,
+      "HE": 2.7987532624589595
+    },
+    {
+      "n": 96,
+      "dx": 0.06544984694978735,
+      "bracket": -0.23245983657785255,
+      "momentum_constraint": -0.23111931064114946,
+      "error": -0.0013405259367030853,
+      "relative_error": 0.005800146828857893,
+      "bad_bracket": -0.3073797319851231,
+      "bad_error": -0.07626042134397362,
+      "HE_minus_HJ": 5.1176168449629245e-05,
+      "HJ": 2.8241052871851298,
+      "HE": 2.8241564633535794
+    },
+    {
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "bracket": -0.23298338220021958,
+      "momentum_constraint": -0.232225039024063,
+      "error": -0.000758343176156584,
+      "relative_error": 0.0032655530141950154,
+      "bad_bracket": -0.3081977430000547,
+      "bad_error": -0.0759727039759917,
+      "HE_minus_HJ": 2.8907930778476754e-05,
+      "HJ": 2.8330965440144533,
+      "HE": 2.833125451945232
+    },
+    {
+      "n": 192,
+      "dx": 0.032724923474893676,
+      "bracket": -0.2333558299880542,
+      "momentum_constraint": -0.23301741761683342,
+      "error": -0.0003384123712207865,
+      "relative_error": 0.0014523050451844817,
+      "bad_bracket": -0.30878179042359805,
+      "bad_error": -0.07576437280676462,
+      "HE_minus_HJ": 1.2886631869157839e-05,
+      "HJ": 2.8395438434443916,
+      "HE": 2.8395567300762607
+    },
+    {
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "bracket": -0.23348588518859426,
+      "momentum_constraint": -0.23329525757412767,
+      "error": -0.0001906276144665875,
+      "relative_error": 0.000817108827880983,
+      "bad_bracket": -0.3089861560095442,
+      "bad_error": -0.07569089843541654,
+      "HE_minus_HJ": 7.2563580375550885e-06,
+      "HJ": 2.841805326609492,
+      "HE": 2.8418125829675294
+    }
+  ],
+  "gradient_checks": [
+    {
+      "variable": "field",
+      "index": 0,
+      "site": 3,
+      "finite_difference": -0.16476881059546145,
+      "autodiff": -0.16476881057534823,
+      "abs_error": 2.011321664774357e-11
+    },
+    {
+      "variable": "field",
+      "index": 3,
+      "site": 5,
+      "finite_difference": 0.27944994074324825,
+      "autodiff": 0.2794499407751475,
+      "abs_error": 3.1899261010437385e-11
+    },
+    {
+      "variable": "field",
+      "index": 4,
+      "site": 1,
+      "finite_difference": 0.9701218459667871,
+      "autodiff": 0.9701218459609265,
+      "abs_error": 5.860534280088814e-12
+    },
+    {
+      "variable": "mom",
+      "index": 0,
+      "site": 8,
+      "finite_difference": -0.0016441370487285667,
+      "autodiff": -0.0016441370119095605,
+      "abs_error": 3.681900617724665e-11
+    },
+    {
+      "variable": "mom",
+      "index": 3,
+      "site": 2,
+      "finite_difference": 0.18727397699258574,
+      "autodiff": 0.18727397689070047,
+      "abs_error": 1.0188527799215308e-10
+    },
+    {
+      "variable": "mom",
+      "index": 4,
+      "site": 12,
+      "finite_difference": -0.06948294140052269,
+      "autodiff": -0.06948294158768556,
+      "abs_error": 1.8716286853681652e-10
+    }
+  ],
+  "convergence_ratio_128_to_256": 1.7752536649410895,
+  "bad_limit_estimate": -0.07569089843541654,
+  "notes": "Symmetry reduced 1D-inhomogeneous 3+1 plane-diagonal slice; finite central differences, not full 3D unconstrained Einstein theory.",
+  "direct_ricci_laplacian_checks": [
+    {
+      "n": 32,
+      "direct_curvature": -0.13767348799450876,
+      "integrated_by_parts": -0.13727693005814984,
+      "difference": -0.00039655793635892667
+    },
+    {
+      "n": 64,
+      "direct_curvature": -0.14919680988524833,
+      "integrated_by_parts": -0.14909806501317993,
+      "difference": -9.874487206840143e-05
+    },
+    {
+      "n": 128,
+      "direct_curvature": -0.1521439665154781,
+      "integrated_by_parts": -0.15211931647185853,
+      "difference": -2.4650043619567352e-05
+    },
+    {
+      "n": 256,
+      "direct_curvature": -0.1528849616751396,
+      "integrated_by_parts": -0.1528788016121706,
+      "difference": -6.160062968996183e-06
+    }
+  ],
+  "additional_off_shell_profiles": [
+    {
+      "variant": "reverse_memory",
+      "n": 64,
+      "correct_residual": 0.0009400086939385099,
+      "incorrect_residual": 0.029187045564722458
+    },
+    {
+      "variant": "reverse_memory",
+      "n": 128,
+      "correct_residual": 0.0002575003012579846,
+      "incorrect_residual": 0.02918388835911584
+    },
+    {
+      "variant": "reverse_memory",
+      "n": 256,
+      "correct_residual": 6.584795120756493e-05,
+      "incorrect_residual": 0.0291651175815002
+    },
+    {
+      "variant": "shifted_momenta",
+      "n": 64,
+      "correct_residual": 0.001247382158499781,
+      "incorrect_residual": 0.05502146220792763
+    },
+    {
+      "variant": "shifted_momenta",
+      "n": 128,
+      "correct_residual": 0.00032357494517530616,
+      "incorrect_residual": 0.05322345965756077
+    },
+    {
+      "variant": "shifted_momenta",
+      "n": 256,
+      "correct_residual": 8.166498669957833e-05,
+      "incorrect_residual": 0.052756456226567446
+    },
+    {
+      "variant": "amplified_shear",
+      "n": 64,
+      "correct_residual": -0.004184955673535967,
+      "incorrect_residual": -0.08570684673181242
+    },
+    {
+      "variant": "amplified_shear",
+      "n": 128,
+      "correct_residual": -0.0010685430480411873,
+      "incorrect_residual": -0.08392243025174317
+    },
+    {
+      "variant": "amplified_shear",
+      "n": 256,
+      "correct_residual": -0.0002685480982656807,
+      "incorrect_residual": -0.08346117756584018
+    }
+  ]
+}

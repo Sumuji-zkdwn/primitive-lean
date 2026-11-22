@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-22",
+  "status": "PASS",
+  "description": "Known ADM/Einstein solution benchmark; not gravity from ether",
+  "exact_graph": "Minkowski t=T+a(T)s(x,y); curved 3-slice, shift and lapse nontrivial",
+  "grid_ns": [
+    24,
+    48,
+    96,
+    192
+  ],
+  "times": [
+    0.0,
+    0.37,
+    0.91
+  ],
+  "convergence_ratios": {
+    "H": [
+      3.802823441528274,
+      3.9685247711424254,
+      3.9880951163041725
+    ],
+    "M": [
+      3.86690178206647,
+      3.965578092302113,
+      3.984293504830324
+    ],
+    "gamma_evo": [
+      3.850878196965516,
+      3.9693054799438223,
+      3.9895833613212273
+    ],
+    "K_evo": [
+      3.8324817292771884,
+      3.9391919512605194,
+      3.989071309991949
+    ]
+  },
+  "max_Kasner_H": 2.220446049250313e-16,
+  "max_Kasner_K_evolution": 3.3306690738754696e-16,
+  "max_Kasner_log_metric_err": 4.440892098500626e-16,
+  "memory_setup": {
+    "definition": "Kprime(T)=K(T)+eps*(K(T)-K(T-lag)), gamma unchanged",
+    "eps": 0.9,
+    "lag": 0.9,
+    "interpretation": "counterexample to inserting memory into extrinsic curvature without matter equations"
+  },
+  "limitations": [
+    "ADM equations assumed (not emergent from g=exp B or Skyrme field)",
+    "Graph family is coordinate-rewritten flat Minkowski: nonzero 3D slice curvature is not 4D gravity",
+    "finite-difference residuals test an exact time-dependent family, not an unconstrained numerical evolution",
+    "nonlinear constraints shown in vacuum; no coupled q,z stress-energy nor long-term topology proof"
+  ]
+}

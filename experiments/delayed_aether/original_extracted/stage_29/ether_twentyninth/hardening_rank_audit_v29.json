@@ -1,0 +1,45 @@
+{
+  "model": "homogeneous matched stiffness / inertia multiplier A>0",
+  "rank_kinetic_all_A_positive": 6,
+  "frequency_multiplicity_all_A_positive": 6,
+  "kinetic_determinant": "A**6",
+  "a_matched_hardening_law_cannot_produce_four_primary_constraints": true,
+  "scan": [
+    {
+      "A": 1,
+      "kinetic_rank": 6,
+      "nonzero_frequency_modes": 6,
+      "minimum_omega": 0.1960342806591212,
+      "maximum_omega": 0.1960342806591212
+    },
+    {
+      "A": 1.25,
+      "kinetic_rank": 6,
+      "nonzero_frequency_modes": 6,
+      "minimum_omega": 0.19603428065912124,
+      "maximum_omega": 0.19603428065912124
+    },
+    {
+      "A": 2,
+      "kinetic_rank": 6,
+      "nonzero_frequency_modes": 6,
+      "minimum_omega": 0.1960342806591212,
+      "maximum_omega": 0.1960342806591212
+    },
+    {
+      "A": 3.2,
+      "kinetic_rank": 6,
+      "nonzero_frequency_modes": 6,
+      "minimum_omega": 0.1960342806591212,
+      "maximum_omega": 0.1960342806591212
+    },
+    {
+      "A": 8,
+      "kinetic_rank": 6,
+      "nonzero_frequency_modes": 6,
+      "minimum_omega": 0.1960342806591212,
+      "maximum_omega": 0.1960342806591212
+    }
+  ],
+  "limitation": "A=const homogeneous background, independent metric perturbations, no pre-imposed gravity constraints"
+}

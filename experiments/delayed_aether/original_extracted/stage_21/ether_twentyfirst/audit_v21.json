@@ -1,0 +1,116 @@
+{
+  "experiment": "v21, first nonlinear gravitational-wave self-response plus memory-mode obstruction",
+  "symbolic": {
+    "rosen_Ruu": "-1/2*(Xpp/X+Ypp/Y)+1/4*((Xp/X)^2+(Yp/Y)^2)",
+    "quadratic_coefficient": "-1.0*(-1.0*f(u)*Derivative(f(u), (u, 2)) + 1.0*Derivative(b(u), (u, 2)) - 0.5*Derivative(f(u), u)**2)",
+    "quadratic_vacuum_correction": "bpp=f*fpp+0.5*fp**2",
+    "eps_linear_zero": true,
+    "eps_cubic_zero": true,
+    "sinusoidal_b_example": "-k**2*u**2/8 - 3*cos(2*k*u)/16 + 3/16",
+    "null_dalembertian_of_f(t_minus_x)": "0",
+    "relative_mode_relation": "(box-2mu^2)(q-z)=0; null travelling q-z=Y(t-x) implies mu^2*(q-z)=0"
+  },
+  "quadratic_correction": {
+    "amplitudes": [
+      {
+        "epsilon": 0.03,
+        "linear_only_max_abs_Ruu": 0.006089664371403666,
+        "second_order_max_abs_Ruu": 1.0686751421459112e-05,
+        "suppression_ratio": 569.8330700549051,
+        "min_transverse_metric": 0.9688974601241817,
+        "uncompensated_scaled_Ruu_eps2": 6.766293746004074,
+        "compensated_scaled_Ruu_eps4": 13.193520273406314
+      },
+      {
+        "epsilon": 0.045,
+        "linear_only_max_abs_Ruu": 0.013717190576222948,
+        "second_order_max_abs_Ruu": 5.4953844572150226e-05,
+        "suppression_ratio": 249.61293760281538,
+        "min_transverse_metric": 0.9346249250084446,
+        "uncompensated_scaled_Ruu_eps2": 6.773921272208864,
+        "compensated_scaled_Ruu_eps4": 13.401333838658799
+      },
+      {
+        "epsilon": 0.06,
+        "linear_only_max_abs_Ruu": 0.02442466348241426,
+        "second_order_max_abs_Ruu": 0.00017756533698393487,
+        "suppression_ratio": 137.55310522472112,
+        "min_transverse_metric": 0.8837776451220631,
+        "uncompensated_scaled_Ruu_eps2": 6.784628745115072,
+        "compensated_scaled_Ruu_eps4": 13.701029088266582
+      },
+      {
+        "epsilon": 0.09,
+        "linear_only_max_abs_Ruu": 0.05520481203873828,
+        "second_order_max_abs_Ruu": 0.0009795660837358983,
+        "suppression_ratio": 56.35639387206683,
+        "min_transverse_metric": 0.7384997030155054,
+        "uncompensated_scaled_Ruu_eps2": 6.8154088936713935,
+        "compensated_scaled_Ruu_eps4": 14.930133878004852
+      },
+      {
+        "epsilon": 0.12,
+        "linear_only_max_abs_Ruu": 0.09876921547839917,
+        "second_order_max_abs_Ruu": 0.005896607907649898,
+        "suppression_ratio": 16.750175189749694,
+        "min_transverse_metric": 0.5351105844638882,
+        "uncompensated_scaled_Ruu_eps2": 6.858973297111054,
+        "compensated_scaled_Ruu_eps4": 28.43657362871286
+      }
+    ],
+    "epsilon_0p09_metric_min": 0.7384997030155054,
+    "sinusoidal_Ruu_quadratic_cycle_average_for_unit_amplitude_k": "-k^2/4",
+    "Isaacson_effective_source_averaged_minus_G2_over_8piG": "epsilon^2*k^2/(32*pi*G) with conventional u normalization",
+    "pulse_integral_source": -4.03549836424023,
+    "pulse_final_bprime": -4.035498364240229,
+    "pulse_final_b": -32.28398691392194,
+    "limitation": "the average effective stress of gravitational waves is gauge/scale-dependent; exact Rosen-coordinate correction is not a local medium stiffening"
+  },
+  "exact_rosen": {
+    "vacuum": {
+      "mode": "vacuum",
+      "min_p": 0.7353615387192967,
+      "min_q": 0.9539392014169457,
+      "end_p": 0.7353615387192967,
+      "end_pprime": -0.0330129409383914,
+      "max_abs_Ruu_minus_8piG_Tuu": 2.7755575615628914e-17,
+      "max_abs_Tuu": 0.0,
+      "max_abs_Ruu": 2.7755575615628914e-17,
+      "G": 0.015
+    },
+    "equal_null_scalars": {
+      "mode": "equal_null_scalars",
+      "min_p": 0.6424928235158135,
+      "min_q": 0.9539392014169457,
+      "end_p": 0.6424928235158135,
+      "end_pprime": -0.04452246580970344,
+      "max_abs_Ruu_minus_8piG_Tuu": 3.642919299551295e-17,
+      "max_abs_Tuu": 0.011496232536607576,
+      "max_abs_Ruu": 0.004333977561715968,
+      "G": 0.015
+    }
+  },
+  "memory_mode": {
+    "relative_mode_mass_squared": 0.9799999999999999,
+    "group_speeds": [
+      0.2448510534371959,
+      0.45083481733371616,
+      0.7106690545187014,
+      0.8962214298964417,
+      0.9707136762325801,
+      0.9924305700863825
+    ],
+    "phase_speeds": [
+      4.084115571332427,
+      2.2181073012818833,
+      1.407124727947029,
+      1.1157956802210698,
+      1.0301698889018258,
+      1.0076271631908302
+    ],
+    "null_lag_example_phase_shift": 0.4,
+    "null_lag_example_nonzero_eom_residual": 0.34522874860958813,
+    "implication": "with V=mu^2(q-z)^2/2 and both pure null travelling waves, field equations require q=z; lag needs extra frequencies/dispersion or a different action"
+  },
+  "scientific_status": "Known Rosen/Einstein-scalar vacuum equations and a conditional 2-scalar lag no-go verified. No gravitational emergence from gel; no dissipative medium model."
+}

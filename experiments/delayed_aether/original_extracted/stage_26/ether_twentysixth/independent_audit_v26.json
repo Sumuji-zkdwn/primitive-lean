@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "random_velocity_states": 1000,
+  "max_relative_legendre_residual": 1.789717504761039e-15,
+  "max_relative_finite_difference_momentum_residual": 1.2299352694511835e-09,
+  "max_abs_time_series_constraint_reconstruction": 1.8560953481126617e-16,
+  "max_relative_hamiltonian_gradient_error_vs_jax": 3.518642141501329e-11,
+  "min_F_random_sample": 1.6515224075854087,
+  "min_D_random_sample": 1.0000001820841415,
+  "state_count": 161,
+  "strict_scope": "Only 3+1 kinetic ADM algebra and homogeneous Bianchi I evolution; not full field Dirac bracket."
+}

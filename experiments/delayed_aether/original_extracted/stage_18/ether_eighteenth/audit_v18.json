@@ -1,0 +1,21 @@
+{
+  "radial_reference_no_memory": {
+    "E2": 60.58915105870304,
+    "E4": 5.715650705541661,
+    "E0": 0.2565217164530499,
+    "mass": 66.56132348069775,
+    "U_radial": -2.34009169150007
+  },
+  "radial_reference_frozen_memory": {
+    "E2": 61.04687179604234,
+    "E4": 5.715650705541661,
+    "E0": 0.2576836425403981,
+    "mass": 67.0202061441244,
+    "U_radial": -2.3997009495277193
+  },
+  "max_gradient_identity_error": 2.1316282072803006e-14,
+  "unitless_gravity_G": 0.002,
+  "formula_quadrupole_E_matter": "E(s)=E0+(E2+E4)*(1+2*cosh(2*s))/3 for det M=1, M=diag(e^s,e^-s,1)",
+  "model_status": "affine non-spherical slice, Newtonian weak-field approximate binding, not nonlinear GR and no time evolution",
+  "runtime_seconds": 1.600394601000005
+}

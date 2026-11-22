@@ -1,0 +1,24 @@
+{
+  "radial": {
+    "E2": 60.58915105870304,
+    "E4": 5.715650705541661,
+    "E0": 0.2565217164530499,
+    "mass": 66.56132348069775,
+    "U_radial": -2.34009169150007
+  },
+  "I0": 151.47148430518874,
+  "I4fraction": 0.03917096147197893,
+  "Kmat": 176.81280470465254,
+  "Kgravity": -11.835913176927217,
+  "Ktotal": 164.97689152772531,
+  "frequency_small_amplitude": 1.0436289495311095,
+  "period_harmonic": 6.020516496789926,
+  "period_observed": 6.00232344333344,
+  "energy_initial": 65.41794719010952,
+  "relative_energy_drift": 9.75741125044836e-10,
+  "time_span": 20.0,
+  "max_s": 0.12,
+  "min_s": -0.11999991103390116,
+  "approximation": "single affine shape degree of freedom, Skyrme kinetic contribution; Newtonian instantaneous gravity at G=0.002; assumes frozen radial profiles and omits radiation",
+  "gravity_source_changes_with_shape": true
+}
