@@ -86,7 +86,8 @@ theorem exists_global_C2_orthonormal_frame (x : M) :
   have hfr_eq (i : Fin (Module.finrank ℝ E))
       (y : M) (hy : y ∈ u) : fr i y = s i y :=
     (hu_sub hy).2 i
-  have hls : IsLocalFrameOn I E 1 s u where
+  have hls : IsLocalFrameOn I E 1 s u := {
+
     linearIndependent := by
       intro y hy
       exact hlocal.linearIndependent (hbase y hy)
@@ -95,9 +96,11 @@ theorem exists_global_C2_orthonormal_frame (x : M) :
       exact hlocal.generating (hbase y hy)
     contMDiffOn i := by
       exact ((hsection i).mono (fun y hy => hbase y hy)).of_le (by norm_num)
+  }
   have hlf : IsLocalFrameOn I E 1 fr u :=
     hls.congr (fun i y hy => (hfr_eq i y hy).symm)
-  have hor : IsOrthonormalFrameOn I E 1 fr u where
+  have hor : IsOrthonormalFrameOn I E 1 fr u := {
+
     toIsLocalFrameOn := hlf
     orthonormal := by
       intro y hy
@@ -107,6 +110,7 @@ theorem exists_global_C2_orthonormal_frame (x : M) :
         exact hfr_eq i y hy
       rw [eq_frame]
       exact hlocal.orthonormal (hbase y hy)
+  }
   exact ⟨fr, u, hu_open, hx_u, hor, hfr⟩
 
 /-- The final Riemannian theorem: every globally Ricci-flat C3
