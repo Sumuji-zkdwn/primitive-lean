@@ -172,18 +172,24 @@ def counterexampleDerivative : CurvatureDerivative 3 :=
     else 0
 
 theorem counterexample_skew : SkewLastPair counterexampleDerivative := by
-  decide
+  intro e a b c d
+  fin_cases e <;> fin_cases a <;> fin_cases b <;>
+    fin_cases c <;> fin_cases d <;> norm_num [counterexampleDerivative]
 
 theorem counterexample_ricci_derivative_zero :
     ∀ e b d, RicciDerivative (fun _ => 1) counterexampleDerivative e b d = 0 := by
-  decide
+  intro e b d
+  fin_cases e <;> fin_cases b <;> fin_cases d <;>
+    norm_num [RicciDerivative, counterexampleDerivative, Fin.sum_univ_succ]
 
 theorem counterexample_nonzero_first_divergence :
     FirstPairDivergence (fun _ => 1) counterexampleDerivative 1 1 2 = 1 := by
-  decide
+  norm_num [FirstPairDivergence, counterexampleDerivative, Fin.sum_univ_succ]
 
 theorem counterexample_not_bianchi :
     ¬ SecondBianchi counterexampleDerivative := by
-  decide
+  intro h
+  have h0 := h (0 : Fin 3) 0 1 1 2
+  norm_num [counterexampleDerivative] at h0
 
 end RicciFlatBianchiYangMills
