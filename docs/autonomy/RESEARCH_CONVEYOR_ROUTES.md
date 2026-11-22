@@ -6,9 +6,13 @@ derived finite model compiles.
 
 ## Design contract
 
-Each route has a source path, a SHA-256 of its current exact bytes, a
-specific source-line anchor, a finite transition-table constructor, and
-an explicitly limited claim. The result ledger is updated *only after*
+Each route has a source path, the current exact SHA-256 in each
+receipt, a **pinned reviewed Git blob identity**, a specific
+source-line anchor, a finite transition-table constructor, and an
+explicitly limited claim. The Laakso adapter additionally pins both
+the underlying Lean first-level finite-graph source and the independent
+Python finite checker's Git blobs. **Any byte change requires explicit
+adapter review before the next run.** The result ledger is updated *only after*
 GitHub-hosted Lean kernel compilation with --trust=0 and an axiom audit.
 
 Routing is deterministic: at each successful day choose the unfinished
