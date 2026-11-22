@@ -242,7 +242,7 @@ theorem curvature_decompose_model [ContMDiffCovariantDerivative cov 1]
     intro i V hV
     have heq : (fun y ↦ d% (fun z ↦ ℓ i (W z)) y (V y))
         = fun y ↦ fderiv ℝ (fun z ↦ ℓ i (W z)) y (V y) := by
-      funext y; rw [mvfderiv_eq_fderiv]; rfl
+      funext y; rw [VectorField.mvfderiv_eq_fderiv]; rfl
     rw [heq]
     apply mdifferentiableAt_iff_differentiableAt.mpr
     exact (((hc i).fderiv_right (m := 1) (by norm_num)).differentiable
