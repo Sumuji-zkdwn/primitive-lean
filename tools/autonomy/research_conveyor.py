@@ -2,10 +2,11 @@
 """Research Conveyor: source-bound finite tasks -> Proof Forge -> audited receipt.
 
 The route is deliberately small and explicit. Existing research text supplies
-leads, but does NOT supply executable code or proof. One reviewed adapter
-maps a Siphon E observation question onto a finite Z/3Z model. A successful
-finite proof is NEVER promoted to the original real/continuous statement.
-The previous result selects the next model; all outcomes remain bounded.
+leads, but does NOT supply executable code or proof. Reviewed adapters map
+Siphon E, observer-operation words and first-level Laakso raw vertices into
+finite state machines. A successful finite proof is NEVER promoted to the
+source's infinite/continuous theorem. The prior kernel-verified result
+selects the next candidate across three fairly rotated and bounded routes.
 
 Commands:
   prepare --root DIR --state FILE --head SHA --day YYYY-MM-DD --output DIR
@@ -25,9 +26,10 @@ import re
 import sys
 
 from tools.autonomy import proof_forge, research_scout
+from tools.autonomy import research_conveyor_routes as routes
 
 SCHEMA = 1
-MAX_RECORDS = 6
+MAX_RECORDS = len(routes.ALL_IDS)
 SOURCE = "docs/research/2026-11-17-siphon-predictive-quotient.md"
 REQUIRED_FRAGMENTS = (
     "I(u,v)=v+u^3",
@@ -97,8 +99,8 @@ def validate_state(obj):
     for record in obj["results"]:
         ensure(type(record) is dict, "nonobject result in state")
         name, day = record.get("task_id"), record.get("utc_day")
-        ensure(type(name) is str and bool(re.fullmatch(
-            r"siphon_z3_u[012]_(old|fresh)", name)), "invalid result id")
+        ensure(type(name) is str and name in routes.ALL_IDS,
+               "invalid result id")
         ensure(name not in unique, "duplicate completed research task")
         unique.add(name)
         validate_day(day)
@@ -114,6 +116,15 @@ def validate_state(obj):
                "state contains unverified proof assertion")
         ensure(record.get("kind") in ("EQUIVALENT", "DISTINGUISHABLE"),
                "invalid finite outcome")
+        ensure(record.get("scope") == routes.scope(name),
+               "finite proof scope does not match reviewed adapter")
+        word = record.get("shortest_word")
+        if record["kind"] == "EQUIVALENT":
+            ensure(word is None, "equivalent state has a separating word")
+        else:
+            ensure(type(word) is list and len(word) <= proof_forge.MAX_STATES ** 2
+                   and all(type(i) is int and 0 <= i < proof_forge.MAX_ACTIONS
+                           for i in word), "invalid separating word")
     if obj["results"]:
         ensure(obj["last_utc_day"] == last_day,
                "state last day differs from final receipt")
@@ -197,35 +208,75 @@ def plan(root: Path, state: dict, head: str, day: str):
     validate_state(state)
     if state["last_utc_day"] is not None:
         ensure(day >= state["last_utc_day"], "UTC day moves backwards")
-    lead = discover_lead(root)
     if state["last_utc_day"] == day:
         return {"schema_version": SCHEMA, "candidate": False,
                 "reason": "ALREADY_VERIFIED_TODAY",
                 "main_sha": head, "day": day}
-    next_task = task_sequence(state)
-    if next_task is None:
+    candidate = routes.choose_next(state)
+    if candidate is None:
         return {"schema_version": SCHEMA, "candidate": False,
-                "reason": "FINITE_ROUTE_EXHAUSTED_NEEDS_NEW_REVIEWED_ADAPTER",
+                "reason": "FINITE_ROUTES_EXHAUSTED_NEED_REVIEWED_ADAPTER",
                 "main_sha": head, "day": day}
-    u, kind = next_task
-    spec = model(u, kind)
-    previous = next((r for r in reversed(state["results"])
-                     if r["task_id"] == f"siphon_z3_u{u}_old"), None)
+    route, task_id = candidate
+    if route == "siphon":
+        u = int(task_id[len("siphon_z3_u")])
+        vocabulary = task_id.rsplit("_", 1)[1]
+        spec = model(u, vocabulary)
+        lead = discover_lead(root)
+        source_path = SOURCE
+        contract = ROUTE
+        previous = next((r for r in reversed(state["results"])
+                         if r["task_id"] == f"siphon_z3_u{u}_old"), None)
+        hypothesis = "EQUIVALENT" if vocabulary == "old" else "DISTINGUISHABLE"
+        scope = CLAIM_BOUNDARY
+    else:
+        u = None
+        vocabulary = task_id
+        lead = routes.source_anchor(root, route)
+        source_path = lead["path"]
+        contract = route + "-reviewed-finite-adapter-v1"
+        spec = routes.source_model(root, task_id)
+        earlier = {
+            "observer_macro": "observer_primitive",
+            "observer_visible": "observer_hidden",
+            "laakso_w1_advance": "laakso_w1_stop",
+        }
+        precursor = earlier.get(task_id)
+        previous = next((r for r in reversed(state["results"])
+                         if r["task_id"] == precursor), None)
+        hypothesis = {
+            "observer_primitive": "DISTINGUISHABLE",
+            "observer_macro": "DISTINGUISHABLE",
+            "observer_hidden": "EQUIVALENT",
+            "observer_visible": "DISTINGUISHABLE",
+            "laakso_w1_stop": "EQUIVALENT",
+            "laakso_w1_advance": "DISTINGUISHABLE",
+            "laakso_w2_advance": "DISTINGUISHABLE",
+        }[task_id]
+        scope = {
+            "observer": ("Reviewed finite operation-word examples; word length "
+                         "depends on the named alphabet, not physical time."),
+            "laakso": ("Actual finite first-stage raw Laakso vertex readout "
+                       "and advanceRightGeneral; identity is a stipulated "
+                       "extra action. NOT continuous tower dynamics."),
+        }[route]
     return {
         "schema_version": SCHEMA,
         "candidate": True,
         "task_id": spec["name"],
-        "scope": CLAIM_BOUNDARY,
-        "route": ROUTE,
-        "source": SOURCE,
+        "scope": scope,
+        "route": contract,
+        "domain": route,
+        "source": source_path,
         "source_sha256": lead["source_sha256"],
         "lead_id": lead["id"],
         "lead_line": lead["line"],
         "lead_evidence": lead["evidence"],
+        "lead_status": lead["status"],
         "main_sha": head, "day": day,
         "previous_result": previous["kind"] if previous else None,
-        "hypothesis": "EQUIVALENT" if kind == "old" else "DISTINGUISHABLE",
-        "u": u, "vocabulary": kind,
+        "hypothesis": hypothesis,
+        "u": u, "vocabulary": vocabulary,
         "model": spec,
     }
 
@@ -264,20 +315,18 @@ def receipt(root: Path, state_path: Path, head: str, evidence: Path, output: Pat
     ensure(obj.get("candidate") is True, "no candidate to persist")
     ensure(obj.get("main_sha") == head and proof_forge.HEAD.fullmatch(head),
            "unmatched exact source SHA")
-    ensure(obj.get("route") == ROUTE and obj.get("source") == SOURCE,
-           "unknown task route")
     validate_day(obj["day"])
     ensure(obj["day"] != state["last_utc_day"], "UTC day already recorded")
-    ensure(plan(root, state, head, obj["day"])["task_id"] == obj["task_id"],
-           "stale or altered plan")
-    lead = discover_lead(root)
-    ensure(obj["source_sha256"] == lead["source_sha256"],
-           "source version changed")
-    ensure(obj["lead_id"] == lead["id"] and obj["lead_evidence"] == lead["evidence"],
-           "research lead changed")
-    spec = model(obj["u"], obj["vocabulary"])
-    ensure(obj["model"] == spec, "model was modified after review")
-    name = obj["task_id"]
+    expected = plan(root, state, head, obj["day"])
+    ensure(expected.get("candidate") is True, "no expected new research task")
+    for field in ("task_id", "route", "domain", "source", "source_sha256",
+                  "lead_id", "lead_line", "lead_evidence", "lead_status",
+                  "model", "scope", "previous_result", "hypothesis",
+                  "u", "vocabulary", "main_sha", "day"):
+        ensure(obj.get(field) == expected[field],
+               "stale or altered plan: " + field)
+    name = expected["task_id"]
+    spec = expected["model"]
     request = evidence / "requests" / (name + ".json")
     ensure(proof_forge.read_request(request) == spec,
            "request bytes do not match reviewed generator")
@@ -296,38 +345,38 @@ def receipt(root: Path, state_path: Path, head: str, evidence: Path, output: Pat
     ensure(record["request_sha256"] == sha(request.read_bytes()),
            "input model sha mismatch")
     source = evidence / "proof" / (name + ".lean")
+    result = proof_forge.solve(spec)
+    expected_source, expected_theorems = proof_forge.lean_source(spec, result)
+    ensure(source.read_bytes() == expected_source.encode("utf-8"),
+           "Lean source is not the reviewed deterministic generator output")
     ensure(record["generated_lean_sha256"] == sha(source.read_bytes()),
            "Lean source sha mismatch")
+    ensure(record.get("theorems") == expected_theorems,
+           "Lean theorem inventory does not match the reviewed model")
     ensure((evidence / "proof" / (name + ".exit")).read_text("utf-8").strip() == "0",
            "Lean kernel did not exit successfully")
     outcome = record["python_result"]
-    ensure(outcome["kind"] in ("EQUIVALENT", "DISTINGUISHABLE"),
-           "unsupported finite outcome")
-    ensure(outcome["kind"] == proof_forge.solve(spec)["kind"],
-           "record does not describe the reviewed model")
-    if outcome["kind"] == "DISTINGUISHABLE":
-        ensure(outcome["word"] == proof_forge.solve(spec)["word"],
-               "shortest word mismatch")
-    result = {
+    ensure(outcome == result, "record does not describe the reviewed model")
+    finite = {
         "task_id": name, "utc_day": obj["day"],
-        "main_sha": head, "source_sha256": lead["source_sha256"],
-        "lead_id": lead["id"],
+        "main_sha": head, "source_sha256": obj["source_sha256"],
+        "lead_id": obj["lead_id"],
         "model_sha256": record["request_sha256"],
         "generated_lean_sha256": record["generated_lean_sha256"],
         "kind": outcome["kind"],
         "shortest_word": outcome.get("word"),
-        "scope": "FINITE_Z3_MODEL_ONLY",
+        "scope": routes.scope(name),
         "status": "LEAN_VERIFIED_FINITE_ONLY",
     }
-    state["results"].append(result)
+    state["results"].append(finite)
     state["last_utc_day"] = obj["day"]
-    state["last_source_sha"] = lead["source_sha256"]
+    state["last_source_sha"] = obj["source_sha256"]
     validate_state(state)
     json_write(output, state)
     print(json.dumps({"accepted": name, "kind": outcome["kind"],
                       "state_entries": len(state["results"]),
-                      "next": task_sequence(state)}, ensure_ascii=False))
-    return result
+                      "next": routes.choose_next(state)}, ensure_ascii=False))
+    return finite
 
 
 def main(argv=None):
