@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "result": "pass",
+  "checked_at_utc": "2026-11-22T10:47:06+00:00",
+  "package_root": "experiments/cpr_sandpile",
+  "runner": "verify_reproduction.py",
+  "runner_sha256": "f88b27a16f5fad45d684a6ab7373b6b3801eba00f88f3e660087112502bb114f",
+  "versions": {
+    "python": "3.12.14",
+    "implementation": "CPython",
+    "system": "Linux",
+    "machine": "x86_64",
+    "numpy": "2.3.5",
+    "matplotlib": "3.10.8",
+    "Pillow": "13.0.0"
+  },
+  "execution_policy": "Archived scripts execute only in a disposable copy; regenerated outputs are removed before execution; optimization disabled",
+  "not_rerun": [
+    {
+      "script": "cpr_coop_comp/audit/independent_compare.py",
+      "reason": "Requires omitted raw ZIP; its pinned saved audit is used as an input"
+    },
+    {
+      "script": "cpr_coop_comp/design/audit_design_and_describe.py",
+      "reason": "Requires omitted raw ZIP and original design records"
+    },
+    {
+      "script": "cpr_empirical/analyze_sand.py",
+      "reason": "Raw-log baseline requires omitted source archives"
+    },
+    {
+      "script": "cpr_redefinition/harvest_asm/analyze_harvest_asm.py",
+      "reason": "Full baseline requires omitted source archives and upstream files; bundled derived summaries/events/NPZ are inputs"
+    }
+  ],
+  "interpretation": "Numerical reproduction of the bundled derived-data analysis, not validation of causal, independence, exchangeability or mechanistic assumptions",
+  "font": {
+    "filename": "NotoSansCJK-Regular.ttc",
+    "sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+  },
+  "archive_integrity": {
+    "manifest": "cpr_coop_comp/package_manifest.json",
+    "manifest_sha256": "e9e2c0ee287817479dcb9c5e9ef20b22acb5991d7c928b6f5fece2362eae7ba7",
+    "files_checked": 521,
+    "size_and_sha256_match": true,
+    "status": "pass"
+  },
+  "stages": [
+    {
+      "script": "cpr_coop_comp/analyze_conditions.py",
+      "command": [
+        "python",
+        "-B",
+        "cpr_coop_comp/analyze_conditions.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.375,
+      "status": "pass"
+    },
+    {
+      "script": "cpr_coop_comp/controls/analyze_controls.py",
+      "command": [
+        "python",
+        "-B",
+        "cpr_coop_comp/controls/analyze_controls.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 4.826,
+      "status": "pass"
+    },
+    {
+      "script": "cpr_coop_comp/analyze_controls.py",
+      "command": [
+        "python",
+        "-B",
+        "cpr_coop_comp/analyze_controls.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.366,
+      "status": "pass"
+    },
+    {
+      "script": "cpr_coop_comp/audit/check_controls.py",
+      "command": [
+        "python",
+        "-B",
+        "cpr_coop_comp/audit/check_controls.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.199,
+      "status": "pass"
+    },
+    {
+      "script": "cpr_coop_comp/render_comparison.py",
+      "command": [
+        "python",
+        "-B",
+        "cpr_coop_comp/render_comparison.py"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 1.612,
+      "status": "pass"
+    }
+  ],
+  "csv_checks": [
+    {
+      "path": "cpr_coop_comp/round_metrics.csv",
+      "rows": 157,
+      "columns": 15,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/dyad_metrics.csv",
+      "rows": 20,
+      "columns": 12,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/condition_comparison.csv",
+      "rows": 5,
+      "columns": 11,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/by_round.csv",
+      "rows": 16,
+      "columns": 12,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/prefix90_trials.csv",
+      "rows": 157,
+      "columns": 24,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/prefix90_pairs.csv",
+      "rows": 20,
+      "columns": 12,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/prefix90_group_summary.csv",
+      "rows": 18,
+      "columns": 9,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/spatial99_trials.csv",
+      "rows": 157,
+      "columns": 25,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/spatial99_pairs.csv",
+      "rows": 20,
+      "columns": 10,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/spatial99_group_summary.csv",
+      "rows": 14,
+      "columns": 9,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/group_differences.csv",
+      "rows": 16,
+      "columns": 5,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/control_round_metrics.csv",
+      "rows": 157,
+      "columns": 12,
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/control_dyad_metrics.csv",
+      "rows": 20,
+      "columns": 11,
+      "status": "pass"
+    }
+  ],
+  "json_checks": [
+    {
+      "path": "cpr_coop_comp/comparison.json",
+      "ignored_fields": [],
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/controls/metadata.json",
+      "ignored_fields": [
+        "wall_seconds"
+      ],
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/control_comparison.json",
+      "ignored_fields": [],
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/audit/control_comparison_check.json",
+      "ignored_fields": [],
+      "status": "pass"
+    },
+    {
+      "path": "cpr_coop_comp/figure_metadata.json",
+      "ignored_fields": [],
+      "status": "pass"
+    }
+  ],
+  "scalar_comparison": {
+    "relative_tolerance": 1e-12,
+    "absolute_tolerance": 1e-12,
+    "numeric_values_compared": 11469,
+    "exact_non_numeric_values_compared": 2744,
+    "max_absolute_difference": 0.0,
+    "max_relative_difference": 0.0
+  },
+  "control_arrays": {
+    "files_compared": 314,
+    "arrays_compared": 5024,
+    "elements_compared": 23268499,
+    "criterion": "Identical keys, shapes, dtypes and array values; no numerical tolerance",
+    "status": "pass"
+  },
+  "figure": {
+    "path": "cpr_coop_comp/coop_comp_comparison.png",
+    "dimensions_pixels": [
+      2106,
+      1745
+    ],
+    "decoded_successfully": true,
+    "nonblank": true,
+    "pixels_equal_to_archive": true,
+    "sha256_equal_to_archive": true,
+    "criterion": "Fresh PNG generated and decoded, nonblank, same dimensions; figure metadata also compared numerically",
+    "status": "pass"
+  },
+  "reproduced_scope": {
+    "trials": 157,
+    "main_metrics": 5,
+    "control_metrics": 2,
+    "holm_family_size": 7,
+    "prefix_harvest_count": 90,
+    "spatial_shuffles_per_trial": 99,
+    "main_bootstrap_seed": 20261121,
+    "control_bootstrap_seed": 20261211,
+    "main_bootstrap_draws": 100000,
+    "control_bootstrap_draws": 100000,
+    "exact_label_assignments": 184756,
+    "independent_control_audit": "pass"
+  },
+  "original_archive_unchanged": true,
+  "elapsed_seconds": 8.333
+}

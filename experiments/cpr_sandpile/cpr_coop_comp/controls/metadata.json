@@ -1,0 +1,43 @@
+{
+  "model": "Unchanged zero-background Moore ASM; threshold8, one grain per direction on each harvest; offboard directions sink; v=u-K",
+  "sample": {
+    "trials": 157,
+    "conditions": {
+      "Comp": 79,
+      "Coop": 78
+    },
+    "pair_ids_per_condition": 10
+  },
+  "prefix": {
+    "harvests": 90,
+    "definition": "First90 recorded successful harvests in the existing observation window; original event order including ties",
+    "meaning": "Matches input count, not elapsed time; ninety does not identify individual initial tokens",
+    "nontrivial_event": "Direct-neighbor v-event has positive toppling count, equivalent to q8 event topplings>1",
+    "maximum_area": "max_event_u_area includes the guaranteed source site as in previous q8 events; max_event_v_area is also supplied"
+  },
+  "spatial": {
+    "replicates_per_trial": 99,
+    "seed_base": 20261121,
+    "seed_rule": "NumPy SeedSequence([base_seed, integer_pair_id, round])",
+    "operation": "Uniformly permute full-terminal K map positions, retaining its histogram and total; each replicate starts at zero on the same graph",
+    "scalar_difference": "Actual total u or v minus mean shuffle total; v/K difference is the same v difference divided by fixed trial K total",
+    "map_difference": "Actual u or v field minus its own shuffle mean field; separate differences because local K positions change",
+    "interpretation": "Descriptive sensitivity within this model, not a causal adjustment, CPR-feasible counterfactual, or significance test"
+  },
+  "aggregation": "Mean trials within each pair_id, then average ten pair_id means equally per condition; descriptive only, no independence assumption or p-values",
+  "participant_overlap": "Pair IDs may share participant labels according to separate audit; inferential claims are intentionally omitted",
+  "checks": {
+    "all_prefix_events_match_existing_q8_topplings_area_sink": true,
+    "all_prefix_chronological_direct_matches_bulk_q8": true,
+    "all_actual_terminal_fields_match_existing_npz": true,
+    "all_shuffle_histograms_and_totals_exact": true,
+    "all_stabilizations_integer_mass_and_local_laplacian_exact": true
+  },
+  "inputs_sha256": {
+    "summary.csv": "dea794bbfc17ee6317b2b8a2f0adbd63aaa926a351af50c2810ad9a3d0f301c1",
+    "events.csv": "8ad038add4e8985e6705e097906b6d5af5bf58af663b7117b3436ab7c74225c8",
+    "analyze_harvest_asm.py": "3cb47f625d8159f57400d391f20b6b77d6e9410b3547e42930c1568482482482"
+  },
+  "code_sha256": "f547978f1f37b04b348c8af94b5832bbe535ff7b249e6cf056662f525c9d1f1c",
+  "wall_seconds": 7.0610432120010955
+}

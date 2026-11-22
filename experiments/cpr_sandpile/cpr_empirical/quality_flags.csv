@@ -1,0 +1,6 @@
+group,subject,round,decision,reason
+two,02,7,exclude,controller_problem_reported_and_offline_score_NA
+two,02,8,exclude,controller_problem_reported_and_offline_score_NA
+two,19,8,missing,round_folder_absent
+two,20,1,review,controller_interruption_between_rounds_1_and_2
+two,20,2,review,controller_interruption_between_rounds_1_and_2

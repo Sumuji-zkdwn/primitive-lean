@@ -1,0 +1,750 @@
+{
+  "question": "Do Coop and Comp differ in the empirically driven sandpile?",
+  "main_rounds": 157,
+  "condition_rounds": {
+    "Comp": 79,
+    "Coop": 78
+  },
+  "design": "Between-dyad conditions,10 dyads per condition, repeated rounds; participant independence unverified from initials",
+  "weighting": "Calculate round metric, average rounds within each dyad, then give each dyad equal weight. Ratio metrics are average round ratios, not pooled event rates.",
+  "metric_definitions": {
+    "harvest_count": "Successful logged harvests in [first TokenField,last TokenField), per round",
+    "extra_topplings": "Model u minus actual harvest K; direct-neighbor-drive cascade topplings v",
+    "extra_per_harvest": "v/K within each round, then equal round and dyad weighting",
+    "cascade_fraction": "Events with u>1 divided by harvest count within each round; same as nonlocal area>1",
+    "max_avalanche_area": "Largest event area with delta_u>0, including initial source distribution.1 means no cascade in the round.",
+    "resource_persistence_240": "min(first recorded zero-token timestamp minus first recorded field timestamp,240); if never depleted then240; all observation windows>=240sec",
+    "not_depleted_at_240": "No recorded zero before first field timestamp+240seconds",
+    "balance_births": "Births reconstructed by token balance N_end-N_start+harvest; not exact observed birth times",
+    "terminal_tokens": "Observed token count at final field record"
+  },
+  "descriptive": {
+    "Comp": {
+      "dyads": 10,
+      "metrics": {
+        "harvest_count": {
+          "mean": 117.7375,
+          "median": 107.5625,
+          "minimum": 101.75,
+          "maximum": 169.5
+        },
+        "extra_topplings": {
+          "mean": 42.739285714285714,
+          "median": 0.25,
+          "minimum": 0.0,
+          "maximum": 333.125
+        },
+        "extra_per_harvest": {
+          "mean": 0.2391182133599771,
+          "median": 0.0023222772393126376,
+          "minimum": 0.0,
+          "maximum": 1.7587733924694553
+        },
+        "cascade_fraction": {
+          "mean": 0.018062222879563678,
+          "median": 0.0023222772393126376,
+          "minimum": 0.0,
+          "maximum": 0.11126508000491028
+        },
+        "max_avalanche_area": {
+          "mean": 10.258928571428571,
+          "median": 1.25,
+          "minimum": 1.0,
+          "maximum": 57.625
+        },
+        "resource_persistence_240": {
+          "mean": 75.15767625196428,
+          "median": 55.167991875,
+          "minimum": 36.70239625,
+          "maximum": 189.1251378625
+        },
+        "not_depleted_at_240": {
+          "mean": 0.0375,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.375
+        },
+        "balance_births": {
+          "mean": 27.75,
+          "median": 17.5625,
+          "minimum": 11.75,
+          "maximum": 79.625
+        },
+        "terminal_tokens": {
+          "mean": 0.0125,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.125
+        }
+      }
+    },
+    "Coop": {
+      "dyads": 10,
+      "metrics": {
+        "harvest_count": {
+          "mean": 169.45833333333334,
+          "median": 184.3125,
+          "minimum": 106.875,
+          "maximum": 199.25
+        },
+        "extra_topplings": {
+          "mean": 775.1041666666667,
+          "median": 974.0625,
+          "minimum": 0.0,
+          "maximum": 1260.0
+        },
+        "extra_per_harvest": {
+          "mean": 3.217041870516951,
+          "median": 4.055784516984687,
+          "minimum": 0.0,
+          "maximum": 5.333928672924825
+        },
+        "cascade_fraction": {
+          "mean": 0.1296842938751262,
+          "median": 0.1537274668649932,
+          "minimum": 0.0,
+          "maximum": 0.21584257760098707
+        },
+        "max_avalanche_area": {
+          "mean": 77.29583333333332,
+          "median": 99.0,
+          "minimum": 1.0,
+          "maximum": 128.25
+        },
+        "resource_persistence_240": {
+          "mean": 148.8358697825,
+          "median": 165.9021825,
+          "minimum": 46.766014074999994,
+          "maximum": 197.00416625000003
+        },
+        "not_depleted_at_240": {
+          "mean": 0.3208333333333333,
+          "median": 0.29166666666666663,
+          "minimum": 0.0,
+          "maximum": 0.75
+        },
+        "balance_births": {
+          "mean": 79.87083333333332,
+          "median": 95.5,
+          "minimum": 16.875,
+          "maximum": 111.0
+        },
+        "terminal_tokens": {
+          "mean": 0.4125,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 1.75
+        }
+      }
+    }
+  },
+  "comparison": [
+    {
+      "metric": "harvest_count",
+      "Comp_mean": 117.7375,
+      "Coop_mean": 169.45833333333334,
+      "difference_Coop_minus_Comp": 51.720833333333346,
+      "ratio_of_condition_means": 1.4392893796227484,
+      "difference_ci95_low_dyad_bootstrap": 27.23312500000002,
+      "difference_ci95_high_dyad_bootstrap": 73.5375,
+      "two_sided_exact_permutation_p": 0.00145056182207885,
+      "holm_p_five_metrics": 0.0036372296434215934,
+      "n_dyads_Coop": 10,
+      "n_dyads_Comp": 10
+    },
+    {
+      "metric": "extra_topplings",
+      "Comp_mean": 42.739285714285714,
+      "Coop_mean": 775.1041666666667,
+      "difference_Coop_minus_Comp": 732.364880952381,
+      "ratio_of_condition_means": 18.13563689033732,
+      "difference_ci95_low_dyad_bootstrap": 421.05049107142855,
+      "difference_ci95_high_dyad_bootstrap": 1018.8732142857143,
+      "two_sided_exact_permutation_p": 0.0004871289701011063,
+      "holm_p_five_metrics": 0.0024356448505055313,
+      "n_dyads_Coop": 10,
+      "n_dyads_Comp": 10
+    },
+    {
+      "metric": "extra_per_harvest",
+      "Comp_mean": 0.2391182133599771,
+      "Coop_mean": 3.217041870516951,
+      "difference_Coop_minus_Comp": 2.977923657156974,
+      "ratio_of_condition_means": 13.453771778036419,
+      "difference_ci95_low_dyad_bootstrap": 1.6785163470738371,
+      "difference_ci95_high_dyad_bootstrap": 4.172677083342838,
+      "two_sided_exact_permutation_p": 0.0008660070579575224,
+      "holm_p_five_metrics": 0.0034640282318300895,
+      "n_dyads_Coop": 10,
+      "n_dyads_Comp": 10
+    },
+    {
+      "metric": "cascade_fraction",
+      "Comp_mean": 0.018062222879563678,
+      "Coop_mean": 0.1296842938751262,
+      "difference_Coop_minus_Comp": 0.1116220709955625,
+      "ratio_of_condition_means": 7.179863449800313,
+      "difference_ci95_low_dyad_bootstrap": 0.059443145384031795,
+      "difference_ci95_high_dyad_bootstrap": 0.15852799474658016,
+      "two_sided_exact_permutation_p": 0.0012448851458139384,
+      "holm_p_five_metrics": 0.0036372296434215934,
+      "n_dyads_Coop": 10,
+      "n_dyads_Comp": 10
+    },
+    {
+      "metric": "max_avalanche_area",
+      "Comp_mean": 10.258928571428571,
+      "Coop_mean": 77.29583333333332,
+      "difference_Coop_minus_Comp": 67.03690476190475,
+      "ratio_of_condition_means": 7.534493762692195,
+      "difference_ci95_low_dyad_bootstrap": 36.010625000000005,
+      "difference_ci95_high_dyad_bootstrap": 95.26675595238093,
+      "two_sided_exact_permutation_p": 0.0012124098811405312,
+      "holm_p_five_metrics": 0.0036372296434215934,
+      "n_dyads_Coop": 10,
+      "n_dyads_Comp": 10
+    }
+  ],
+  "methods": {
+    "seed": 20261121,
+    "bootstrap_draws": 100000,
+    "exact_assignments": 184756,
+    "dyad_order": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "permutation_statistic": "Absolute difference in condition means; all choose(20,10) labels including the observed assignment",
+    "bootstrap": "Percentile interval for difference; resample dyads within each condition; assumes dyads independent",
+    "inference_scope": "Exploratory, not preregistered; five metric family uses Holm adjustment. Assignment randomization is unverified. Reused participant initials do not establish reused people; separate sensitivity groups matching initials."
+  },
+  "sensitivity": {
+    "main_all_valid": {
+      "rounds": 157,
+      "summary": {
+        "Comp": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 117.7375,
+              "median": 107.5625,
+              "minimum": 101.75,
+              "maximum": 169.5
+            },
+            "extra_topplings": {
+              "mean": 42.739285714285714,
+              "median": 0.25,
+              "minimum": 0.0,
+              "maximum": 333.125
+            },
+            "extra_per_harvest": {
+              "mean": 0.2391182133599771,
+              "median": 0.0023222772393126376,
+              "minimum": 0.0,
+              "maximum": 1.7587733924694553
+            },
+            "cascade_fraction": {
+              "mean": 0.018062222879563678,
+              "median": 0.0023222772393126376,
+              "minimum": 0.0,
+              "maximum": 0.11126508000491028
+            },
+            "max_avalanche_area": {
+              "mean": 10.258928571428571,
+              "median": 1.25,
+              "minimum": 1.0,
+              "maximum": 57.625
+            },
+            "resource_persistence_240": {
+              "mean": 75.15767625196428,
+              "median": 55.167991875,
+              "minimum": 36.70239625,
+              "maximum": 189.1251378625
+            },
+            "not_depleted_at_240": {
+              "mean": 0.0375,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.375
+            },
+            "balance_births": {
+              "mean": 27.75,
+              "median": 17.5625,
+              "minimum": 11.75,
+              "maximum": 79.625
+            },
+            "terminal_tokens": {
+              "mean": 0.0125,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.125
+            }
+          }
+        },
+        "Coop": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 169.45833333333334,
+              "median": 184.3125,
+              "minimum": 106.875,
+              "maximum": 199.25
+            },
+            "extra_topplings": {
+              "mean": 775.1041666666667,
+              "median": 974.0625,
+              "minimum": 0.0,
+              "maximum": 1260.0
+            },
+            "extra_per_harvest": {
+              "mean": 3.217041870516951,
+              "median": 4.055784516984687,
+              "minimum": 0.0,
+              "maximum": 5.333928672924825
+            },
+            "cascade_fraction": {
+              "mean": 0.1296842938751262,
+              "median": 0.1537274668649932,
+              "minimum": 0.0,
+              "maximum": 0.21584257760098707
+            },
+            "max_avalanche_area": {
+              "mean": 77.29583333333332,
+              "median": 99.0,
+              "minimum": 1.0,
+              "maximum": 128.25
+            },
+            "resource_persistence_240": {
+              "mean": 148.8358697825,
+              "median": 165.9021825,
+              "minimum": 46.766014074999994,
+              "maximum": 197.00416625000003
+            },
+            "not_depleted_at_240": {
+              "mean": 0.3208333333333333,
+              "median": 0.29166666666666663,
+              "minimum": 0.0,
+              "maximum": 0.75
+            },
+            "balance_births": {
+              "mean": 79.87083333333332,
+              "median": 95.5,
+              "minimum": 16.875,
+              "maximum": 111.0
+            },
+            "terminal_tokens": {
+              "mean": 0.4125,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 1.75
+            }
+          }
+        }
+      }
+    },
+    "exclude_review_rounds": {
+      "rounds": 155,
+      "summary": {
+        "Comp": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 117.7375,
+              "median": 107.5625,
+              "minimum": 101.75,
+              "maximum": 169.5
+            },
+            "extra_topplings": {
+              "mean": 42.739285714285714,
+              "median": 0.25,
+              "minimum": 0.0,
+              "maximum": 333.125
+            },
+            "extra_per_harvest": {
+              "mean": 0.2391182133599771,
+              "median": 0.0023222772393126376,
+              "minimum": 0.0,
+              "maximum": 1.7587733924694553
+            },
+            "cascade_fraction": {
+              "mean": 0.018062222879563678,
+              "median": 0.0023222772393126376,
+              "minimum": 0.0,
+              "maximum": 0.11126508000491028
+            },
+            "max_avalanche_area": {
+              "mean": 10.258928571428571,
+              "median": 1.25,
+              "minimum": 1.0,
+              "maximum": 57.625
+            },
+            "resource_persistence_240": {
+              "mean": 75.15767625196428,
+              "median": 55.167991875,
+              "minimum": 36.70239625,
+              "maximum": 189.1251378625
+            },
+            "not_depleted_at_240": {
+              "mean": 0.0375,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.375
+            },
+            "balance_births": {
+              "mean": 27.75,
+              "median": 17.5625,
+              "minimum": 11.75,
+              "maximum": 79.625
+            },
+            "terminal_tokens": {
+              "mean": 0.0125,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.125
+            }
+          }
+        },
+        "Coop": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 170.50416666666666,
+              "median": 184.3125,
+              "minimum": 106.875,
+              "maximum": 199.25
+            },
+            "extra_topplings": {
+              "mean": 789.2375,
+              "median": 974.0625,
+              "minimum": 0.0,
+              "maximum": 1260.0
+            },
+            "extra_per_harvest": {
+              "mean": 3.2751929082817433,
+              "median": 4.055784516984687,
+              "minimum": 0.0,
+              "maximum": 5.333928672924825
+            },
+            "cascade_fraction": {
+              "mean": 0.1320954292447474,
+              "median": 0.1537274668649932,
+              "minimum": 0.0,
+              "maximum": 0.21584257760098707
+            },
+            "max_avalanche_area": {
+              "mean": 78.43333333333332,
+              "median": 99.0,
+              "minimum": 1.0,
+              "maximum": 128.25
+            },
+            "resource_persistence_240": {
+              "mean": 150.49421411583333,
+              "median": 165.9021825,
+              "minimum": 46.766014074999994,
+              "maximum": 197.00416625000003
+            },
+            "not_depleted_at_240": {
+              "mean": 0.3208333333333333,
+              "median": 0.29166666666666663,
+              "minimum": 0.0,
+              "maximum": 0.75
+            },
+            "balance_births": {
+              "mean": 80.91666666666666,
+              "median": 95.5,
+              "minimum": 16.875,
+              "maximum": 111.0
+            },
+            "terminal_tokens": {
+              "mean": 0.4125,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 1.75
+            }
+          }
+        }
+      }
+    },
+    "rounds_1_to_6_balanced": {
+      "rounds": 120,
+      "summary": {
+        "Comp": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 117.46666666666667,
+              "median": 108.0,
+              "minimum": 101.0,
+              "maximum": 167.5
+            },
+            "extra_topplings": {
+              "mean": 49.33333333333333,
+              "median": 0.25,
+              "minimum": 0.0,
+              "maximum": 390.0
+            },
+            "extra_per_harvest": {
+              "mean": 0.2719950979173571,
+              "median": 0.002302718858766056,
+              "minimum": 0.0,
+              "maximum": 2.0373413802560845
+            },
+            "cascade_fraction": {
+              "mean": 0.01834577708333785,
+              "median": 0.002302718858766056,
+              "minimum": 0.0,
+              "maximum": 0.11514891964543772
+            },
+            "max_avalanche_area": {
+              "mean": 10.916666666666666,
+              "median": 1.25,
+              "minimum": 1.0,
+              "maximum": 65.0
+            },
+            "resource_persistence_240": {
+              "mean": 73.59002984333333,
+              "median": 56.93813916666666,
+              "minimum": 36.925095,
+              "maximum": 178.03794215000002
+            },
+            "not_depleted_at_240": {
+              "mean": 0.03333333333333333,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.3333333333333333
+            },
+            "balance_births": {
+              "mean": 27.48333333333333,
+              "median": 18.0,
+              "minimum": 11.0,
+              "maximum": 77.66666666666667
+            },
+            "terminal_tokens": {
+              "mean": 0.016666666666666666,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.16666666666666666
+            }
+          }
+        },
+        "Coop": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 154.86666666666667,
+              "median": 165.08333333333331,
+              "minimum": 106.66666666666667,
+              "maximum": 195.83333333333334
+            },
+            "extra_topplings": {
+              "mean": 559.3166666666667,
+              "median": 651.75,
+              "minimum": 0.0,
+              "maximum": 1239.1666666666667
+            },
+            "extra_per_harvest": {
+              "mean": 2.3792890288347284,
+              "median": 2.7361812426963934,
+              "minimum": 0.0,
+              "maximum": 5.0293529144164495
+            },
+            "cascade_fraction": {
+              "mean": 0.09725311070066267,
+              "median": 0.1089856627118801,
+              "minimum": 0.0,
+              "maximum": 0.19151956477467194
+            },
+            "max_avalanche_area": {
+              "mean": 61.483333333333334,
+              "median": 73.5,
+              "minimum": 1.0,
+              "maximum": 121.0
+            },
+            "resource_persistence_240": {
+              "mean": 130.69664321000002,
+              "median": 145.06010250000003,
+              "minimum": 40.834863766666665,
+              "maximum": 183.20473
+            },
+            "not_depleted_at_240": {
+              "mean": 0.26666666666666666,
+              "median": 0.25,
+              "minimum": 0.0,
+              "maximum": 0.6666666666666666
+            },
+            "balance_births": {
+              "mean": 65.1,
+              "median": 75.5,
+              "minimum": 16.666666666666668,
+              "maximum": 105.83333333333333
+            },
+            "terminal_tokens": {
+              "mean": 0.23333333333333334,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 1.5
+            }
+          }
+        }
+      }
+    },
+    "rounds_3_to_6_balanced": {
+      "rounds": 80,
+      "summary": {
+        "Comp": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 122.225,
+              "median": 106.0,
+              "minimum": 101.25,
+              "maximum": 191.5
+            },
+            "extra_topplings": {
+              "mean": 73.325,
+              "median": 0.125,
+              "minimum": 0.0,
+              "maximum": 578.75
+            },
+            "extra_per_harvest": {
+              "mean": 0.40300432719264095,
+              "median": 0.0011574074074074073,
+              "minimum": 0.0,
+              "maximum": 3.010722215311663
+            },
+            "cascade_fraction": {
+              "mean": 0.02615353434740917,
+              "median": 0.0011574074074074073,
+              "minimum": 0.0,
+              "maximum": 0.16366540845366384
+            },
+            "max_avalanche_area": {
+              "mean": 15.575,
+              "median": 1.125,
+              "minimum": 1.0,
+              "maximum": 94.5
+            },
+            "resource_persistence_240": {
+              "mean": 82.8920154425,
+              "median": 52.801683749999995,
+              "minimum": 34.401435,
+              "maximum": 213.96075
+            },
+            "not_depleted_at_240": {
+              "mean": 0.05,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.5
+            },
+            "balance_births": {
+              "mean": 32.25,
+              "median": 16.0,
+              "minimum": 11.25,
+              "maximum": 101.75
+            },
+            "terminal_tokens": {
+              "mean": 0.025,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.25
+            }
+          }
+        },
+        "Coop": {
+          "dyads": 10,
+          "metrics": {
+            "harvest_count": {
+              "mean": 178.95,
+              "median": 194.0,
+              "minimum": 108.0,
+              "maximum": 246.0
+            },
+            "extra_topplings": {
+              "mean": 838.1,
+              "median": 977.375,
+              "minimum": 0.0,
+              "maximum": 1858.75
+            },
+            "extra_per_harvest": {
+              "mean": 3.561112308189363,
+              "median": 4.101868017890744,
+              "minimum": 0.0,
+              "maximum": 7.544029371624674
+            },
+            "cascade_fraction": {
+              "mean": 0.14448642777024392,
+              "median": 0.161074647913974,
+              "minimum": 0.0,
+              "maximum": 0.28285456840094597
+            },
+            "max_avalanche_area": {
+              "mean": 91.25,
+              "median": 109.625,
+              "minimum": 1.0,
+              "maximum": 180.75
+            },
+            "resource_persistence_240": {
+              "mean": 164.54706756500002,
+              "median": 182.65038375,
+              "minimum": 41.03609315,
+              "maximum": 240.0
+            },
+            "not_depleted_at_240": {
+              "mean": 0.375,
+              "median": 0.375,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "balance_births": {
+              "mean": 89.3,
+              "median": 104.625,
+              "minimum": 18.0,
+              "maximum": 156.0
+            },
+            "terminal_tokens": {
+              "mean": 0.35,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 2.25
+            }
+          }
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "path": "cpr_redefinition/harvest_asm/summary.csv",
+      "sha256": "dea794bbfc17ee6317b2b8a2f0adbd63aaa926a351af50c2810ad9a3d0f301c1"
+    },
+    {
+      "path": "cpr_empirical/results/round_sand.csv",
+      "sha256": "ca8f71798de6c3bf7c7e62991a53cd188d21a17b815fd8f5adc9072201db4e05"
+    },
+    {
+      "path": "cpr_empirical/conditions.csv",
+      "sha256": "c772cae8414b14a5550e06865662e0fdd252d9826df2e77db4522f9781ef9664"
+    },
+    {
+      "path": "cpr_empirical/quality_flags.csv",
+      "sha256": "a203a041262385c177d6a3077154c381bf028a4c864273142b89096a352c0ab5"
+    }
+  ]
+}

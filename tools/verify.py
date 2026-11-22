@@ -449,7 +449,15 @@ def main(argv=None):
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
+    modes.add_argument("--cpr-sandpile-only", action="store_true", help="Reproduce the anonymous CPR sandpile condition comparison; does not run Lean")
     args = parser.parse_args(argv)
+    if args.cpr_sandpile_only:
+        if args.rebuild:
+            parser.error("--rebuild applies to Lean, not --cpr-sandpile-only")
+        OUT.mkdir(exist_ok=True)
+        return subprocess.run([sys.executable, "-B", "-X", "utf8",
+            str(ROOT / "experiments/cpr_sandpile/verify_reproduction.py"),
+            "--output", str(OUT / "cpr-sandpile.json")], cwd=ROOT).returncode
     if args.toolchain_modules_only:
         if args.rebuild:
             parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")

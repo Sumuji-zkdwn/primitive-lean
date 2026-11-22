@@ -1,0 +1,83 @@
+{
+  "status": "pass",
+  "scope": "Reaggregated 157 saved trial outputs into 20 equally weighted pair averages. Checked two control point estimates, all seven exact p values and Holm adjustments. Spatial simulations and bootstrap confidence intervals were not rerun.",
+  "assignment_count": 184756,
+  "controls": [
+    {
+      "metric": "prefix90_v",
+      "Comp_mean": 1.2767857142857142,
+      "Coop_mean": 14.6,
+      "Coop_minus_Comp": 13.323214285714286,
+      "extreme_assignments": 374,
+      "exact_p_reference": 0.0020242914979757085,
+      "holm_seven_reference": 0.006062049405702656,
+      "root_aggregation_and_p_agree": true
+    },
+    {
+      "metric": "placement_excess_v_per_K",
+      "Comp_mean": 0.1602005140596832,
+      "Coop_mean": 0.6448717333448959,
+      "Coop_minus_Comp": 0.48467121928521273,
+      "extreme_assignments": 5352,
+      "exact_p_reference": 0.028967936088679123,
+      "holm_seven_reference": 0.028967936088679123,
+      "root_aggregation_and_p_agree": true
+    }
+  ],
+  "all_seven": [
+    {
+      "metric": "K",
+      "exact_p_reference": 0.00145056182207885,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "v",
+      "exact_p_reference": 0.0004871289701011063,
+      "holm_seven_reference": 0.0034099027907077443
+    },
+    {
+      "metric": "v_per_K",
+      "exact_p_reference": 0.0008660070579575224,
+      "holm_seven_reference": 0.0051960423477451344
+    },
+    {
+      "metric": "cascade_fraction",
+      "exact_p_reference": 0.0012448851458139384,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "max_event_area_u",
+      "exact_p_reference": 0.0012124098811405312,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "prefix90_v",
+      "exact_p_reference": 0.0020242914979757085,
+      "holm_seven_reference": 0.006062049405702656
+    },
+    {
+      "metric": "placement_excess_v_per_K",
+      "exact_p_reference": 0.028967936088679123,
+      "holm_seven_reference": 0.028967936088679123
+    }
+  ],
+  "interpretation": [
+    "Permutation inference is reference-only, conditional on pair independence and label exchangeability.",
+    "Prefix90 fixes input count, not elapsed time or harvesting opportunities.",
+    "Placement excess compares the specified model against 99 location permutations of a round's fixed count histogram; it is not a behavioral causal adjustment."
+  ],
+  "sources": [
+    {
+      "path": "cpr_coop_comp/controls/prefix90_trials.csv",
+      "sha256": "4fcec8c1a3a37f574dc9649aef296d7ccfea753a50a26bf4c47c525078e9786c"
+    },
+    {
+      "path": "cpr_coop_comp/controls/spatial99_trials.csv",
+      "sha256": "13590619b3a08ad29384bc61fea268aece0e04e607646060c99af2ab3bab62c3"
+    },
+    {
+      "path": "cpr_coop_comp/audit/pair_metrics.csv",
+      "sha256": "bbb8c2693da9584850c2af80fa0aa3b60d3dee51b9ef03f01237fefac8c0c128"
+    }
+  ]
+}

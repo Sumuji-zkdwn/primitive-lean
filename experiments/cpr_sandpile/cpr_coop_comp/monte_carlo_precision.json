@@ -1,0 +1,8 @@
+{
+  "shuffle_difference_mc_standard_error": 0.007918948972392717,
+  "per_condition_mc_standard_error": {
+    "Comp": 0.0018849712225617044,
+    "Coop": 0.007691335145309551
+  },
+  "interpretation": "Monte Carlo error of the99-shuffle estimated between-condition excess difference, conditional on these observed trial maps. Not participant sampling uncertainty. Independent trial seeds and equal dyad weighting."
+}
