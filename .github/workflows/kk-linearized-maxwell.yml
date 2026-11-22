@@ -1,0 +1,97 @@
+name: 5D vacuum KK Maxwell wave and nonlinear dilaton constraint
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKLinearizedMaxwell.lean'
+      - 'tools/check_kk_linearized_maxwell.py'
+      - 'docs/verification/2026-11-22-kk-maxwell-dilaton.md'
+      - '.github/workflows/kk-linearized-maxwell.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kk-maxwell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel check five-dimensional KK Maxwell witness
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKLinearizedMaxwell.olean Research/KKLinearizedMaxwell.lean 2>&1 | tee ../kk-maxwell-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-maxwell-lean.log; then exit 1; fi
+      - name: Audit exact theorem axioms and quantity
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKLinearizedMaxwell.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=12,names
+          Path('KKLinearizedMaxwellAudit.lean').write_text(
+              'import Research.KKLinearizedMaxwell\n'+
+              ''.join('#print axioms KKLinearizedMaxwell.'+name+'\n' for name in names))
+          Path('../kk-maxwell-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKLinearizedMaxwellAudit.lean 2>&1 | tee ../kk-maxwell-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../kk-maxwell-audit.log').read_text()
+          n=int(Path('../kk-maxwell-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',s),s
+          found=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          noaxioms=s.count('does not depend on any axioms')
+          assert len(found)+noaxioms==n,(len(found),noaxioms,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for item in found:
+              unexpected={x.strip() for x in item.split(',') if x.strip()}-allowed
+              assert not unexpected,unexpected
+          print('Axiom checked Lean theorems:',n)
+          PY
+      - name: Independent exact 5D Ricci and U1 wave symbolic oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_linearized_maxwell.py 2>&1 | tee kk-maxwell-python.log
+      - name: Exact-head and source hash record
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > kk-maxwell-head.txt
+          sha256sum lean/Research/KKLinearizedMaxwell.lean tools/check_kk_linearized_maxwell.py > kk-maxwell-sha256.txt
+      - name: Upload kernel, axiom, tensor and head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-maxwell-wave-and-dilaton
+          path: |
+            kk-maxwell-lean.log
+            kk-maxwell-audit.log
+            kk-maxwell-count.txt
+            kk-maxwell-python.log
+            kk-maxwell-head.txt
+            kk-maxwell-sha256.txt
+          if-no-files-found: warn
