@@ -16,10 +16,11 @@
 Python標準ライブラリのみ:
 
 \`\`\`bash
+python -B -X utf8 experiments/delayed_aether/verify_early_models.py
 python -B -X utf8 experiments/delayed_aether/verify_core.py
 \`\`\`
 
-局所の初期設定に依存しない有限の組合せ・代数的主張を検査します。Leanカーネルでの証明やGRの再現を意味しません。フル版のPython検算（NumPy / SciPy / Matplotlib / SymPy）と、一部の研究図の完全な移植は別の作業になります。
+前半（kink/Skyrme/相対論的基準模型）と後半（Regge/TT/Z₂）の有限の算術・組合せ命題を検査します。Leanカーネルでの証明やGRの再現を意味しません。フル版のPython検算（NumPy / SciPy / Matplotlib / SymPy）と、一部の研究図の完全な移植は別の作業になります。
 
 ## モデルに対する最も重要な判断
 
