@@ -1,0 +1,85 @@
+name: Finite S3 simplex degree admissibility wall
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/FiniteS3SimplexAdmissibility.lean'
+      - 'tools/check_finite_s3_admissibility.py'
+      - 'docs/research/2026-11-23-finite-s3-simplex-admissibility.md'
+      - '.github/workflows/finite-s3-admissibility.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-s3-admissibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Pinned Lean toolchain and mathlib cache
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Candidate algebraic certificates, kernel trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/FiniteS3SimplexAdmissibility.olean Research/FiniteS3SimplexAdmissibility.lean 2>&1 | tee ../finite-s3-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../finite-s3-lean.log; then exit 1; fi
+      - name: Theorem-by-theorem axiom audit
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/FiniteS3SimplexAdmissibility.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==12, names
+          pathlib.Path('FiniteS3SimplexAdmissibilityAudit.lean').write_text(
+              'import Research.FiniteS3SimplexAdmissibility\n' +
+              ''.join('#print axioms FiniteS3SimplexAdmissibility.'+n+'\n' for n in names))
+          pathlib.Path('../finite-s3-theorem-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 FiniteS3SimplexAdmissibilityAudit.lean 2>&1 | tee ../finite-s3-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          audit=pathlib.Path('../finite-s3-axioms.log').read_text()
+          n=int(pathlib.Path('../finite-s3-theorem-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',audit),audit
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',audit)
+          none=audit.count('does not depend on any axioms')
+          assert len(deps)+none==n,(n,len(deps),none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for group in deps:
+              used=set(filter(None,(x.strip() for x in group.split(','))))
+              assert used<=allowed,used-allowed
+          print('LEAN AXIOM AUDIT PASS,', n, 'theorems')
+          PY
+      - name: Independent exact rational oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_finite_s3_admissibility.py 2>&1 | tee finite-s3-python.log
+      - name: Upload source-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: finite-s3-admissibility
+          path: |
+            finite-s3-lean.log
+            finite-s3-axioms.log
+            finite-s3-theorem-count.txt
+            finite-s3-python.log
+          if-no-files-found: warn
