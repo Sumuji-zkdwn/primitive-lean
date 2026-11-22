@@ -109,7 +109,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-attest-evidence:
+  attest-evidence:
     # The signing identity is isolated from the job executing PR-controlled code.
     # Fork PRs have no write-capable credentials for this job.
     name: Sign exact-head Lean verification evidence
