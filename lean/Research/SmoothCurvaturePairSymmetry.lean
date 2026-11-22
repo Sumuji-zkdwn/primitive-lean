@@ -62,7 +62,7 @@ theorem inner_curvature_self_right_bridge
   have hBx : MDiffAt (T% (fun y => cov Z y (X y))) x :=
     cov.mdiffAt_cov_apply hZ hX
   have hfC2 : CMDiffAt 2 (fun y => ⟪Z y, Z y⟫) x :=
-    (cov.cmdiff_inner_vector_field_bridge hZ hZ) x
+    (cmdiff_inner_vector_field_bridge hZ hZ) x
   have hdf : ∀ V : Π y : M, TangentSpace I y,
       (fun y => d% (fun z => ⟪Z z, Z z⟫) y (V y))
         = (fun y => ⟪cov Z y (V y), Z y⟫) +
