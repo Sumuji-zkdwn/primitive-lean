@@ -64,4 +64,4 @@ In particular, \(D\Psi(0,0)=\mathrm{diag}(-1/2,-1/2)\): a full-rank origin is po
 - The two measurements in this construction use \(\mathrm{id}\) and \(L\), not \(E\). The role of \(E\) remains to provide the invariant foliation and dynamics. The construction proves **existence of a remedy**, not that E/L dynamics alone supplied new information.
 - On a real physical data manifold the relevant second-jet/curvature sensor may be unavailable or noisy. No claim is made about such deployment.
 
-Independent test: \`python3 -B -m unittest discover -s tests -p 'test_siphon_curvature_sensor.py' -v\`. The test checks rational derivative lower bounds and floating evaluation of the curvature formula; the proof above is the source of the global/local assertions.
+Independent test: `python3 -B -m unittest discover -s tests -p 'test_siphon_curvature_sensor.py' -v`. The test checks rational derivative lower bounds and floating evaluation of the curvature formula; the proof above is the source of the global/local assertions.
