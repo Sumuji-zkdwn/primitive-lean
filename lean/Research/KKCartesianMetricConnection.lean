@@ -28,7 +28,7 @@ def inverseE : MatrixE :=
      e0,e0,E.neg gaugeEntry,e0,yyEntry]
 
 /-- Full 5x5 inverse matrix is derived by multiplication, with H nonzero. -/
-set_option maxHeartbeats 0 in
+set_option maxHeartbeats 0
 theorem metric_inverse_all_entries (a x z : ℝ) (hh : 1+a*z ≠ 0)
     (i j : Fin 5) :
     (∑ m : Fin 5, (metricE i m).eval a x z *
@@ -44,7 +44,7 @@ def partialMetricE (a : ℝ) (d i j : Fin 5) : E :=
   partialE a d (metricE i j)
 
 /-- Christoffel expression directly contracted from the original metric. -/
-def gammaFromMetricE (a : ℝ) (i j k : Fin 5) : E :=
+noncomputable def gammaFromMetricE (a : ℝ) (i j k : Fin 5) : E :=
   emul (.const (1/2))
     (sum5 fun m =>
       emul (inverseE i m)
@@ -54,8 +54,8 @@ def gammaFromMetricE (a : ℝ) (i j k : Fin 5) : E :=
 
 /-- Every one of the 125 metric-derived connection entries equals
 the sparse formula from KKCartesianRicci. -/
-set_option maxRecDepth 8192 in
-set_option maxHeartbeats 0 in
+set_option maxRecDepth 8192
+set_option maxHeartbeats 0
 theorem all_125_gamma_entries_agree (a x z : ℝ)
     (hh : 1+a*z ≠ 0) (i j k : Fin 5) :
     (gammaFromMetricE a i j k).eval a x z =
