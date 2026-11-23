@@ -54,7 +54,7 @@ theorem height_displacement_le_cost
               congr 1
               ring
         _ ≤ |F s - F t| + |F t - F z.1| := abs_add_le _ _
-        _ ≤ |F s - F t| + c := add_le_add_left ih _
+        _ ≤ |F s - F t| + c := by linarith
   | gate s b k z c hk tail ih =>
       simpa using ih
 
