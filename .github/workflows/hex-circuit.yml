@@ -33,10 +33,22 @@ jobs:
           build: false
           test: false
           use-mathlib-cache: false
-          use-github-cache: true
+          use-github-cache: false
 
-      - name: Type-check game and finite proofs with trust zero
-        run: elan run leanprover/lean4:v4.36.0-rc2 lean --trust=0 games/hex/HexGame.lean
+      - name: Type-check game and audit theorem assumptions with trust zero
+        run: |
+          elan run leanprover/lean4:v4.36.0-rc2 lean --trust=0 games/hex/HexGame.lean | tee "$RUNNER_TEMP/hex-lean-check.log"
+          python3 - <<'PY'
+          import re, os
+          from pathlib import Path
+          txt = (Path(os.environ["RUNNER_TEMP"]) / "hex-lean-check.log").read_text()
+          for name in ("checkedMove_inside", "edit_outside"):
+              match = re.search(r"'HexCircuit\\." + name + r"' depends on axioms: \\[([^\\]]*)\\]", txt)
+              assert match is not None, f"missing axiom report: {name}"
+              used = {a.strip() for a in match.group(1).split(",") if a.strip()}
+              assert used <= {"propext", "Classical.choice", "Quot.sound"}, (name, used)
+          print("HEX_GAME_AXIOM_AUDIT_OK")
+          PY
 
       - name: Execute Lean game self-test
         run: elan run leanprover/lean4:v4.36.0-rc2 lean --run games/hex/HexGame.lean --self-test
