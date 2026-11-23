@@ -79,3 +79,31 @@ runs exact SymPy 1.14.0, and saves logs and source SHA256. A successful
 CI is required before calling the core kernel-verified.
 
 Keep Draft. No automatic merge or edits to existing GH/EMD/Hopf PRs.
+
+
+## Follow-on: rank-one curvature from commuting derivations
+
+The new FiniteConnectionDerivation.lean module goes beyond independent
+derivative tables in a controlled, reusable setting. It defines a
+structure of commuting additive scalar derivations with a genuine
+Leibniz law, and the associated rank-one covariant derivative
+nabla_i s = D_i s + Gamma_i s. Theorems proposed for kernel checking:
+
+    nabla_i(f s) = (D_i f)s + f(nabla_i s)
+    (nabla_i nabla_j - nabla_j nabla_i)s
+       = (D_i Gamma_j-D_j Gamma_i)s
+
+A third theorem identifies that coefficient with the general finite
+curvature formula when the fibre has rank 1. Unlike the original jet
+file, dGamma is **actually calculated using derivations**. The
+structure's hypotheses are not proven for every arbitrary smooth
+manifold; that requires a coordinate derivative instance.
+
+The higher-rank operator commutator and a fully geometric
+Mathlib CovariantDerivative-to-curvature theorem are still open.
+This is not GH/EMD Ricci flatness nor KK reduction.
+
+The successful first dedicated CI 45139993911 covered 11 theorems
+(the generic finite-frame core and warped-metric witness) and exact
+independent SymPy tests. The additional derivation module is a
+subsequent source change and must be audited by the next exact-head CI.
