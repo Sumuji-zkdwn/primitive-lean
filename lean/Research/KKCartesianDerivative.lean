@@ -25,7 +25,7 @@ inductive E where
   | neg (e : E)
   | inv (e : E)
 
-def E.eval (a x z : ℝ) : E → ℝ
+noncomputable def E.eval (a x z : ℝ) : E → ℝ
   | .const v => v
   | .H => 1 + a*z
   | .U => a*x
@@ -69,11 +69,11 @@ theorem E.hasDerivAt_x (a x z : ℝ) (e : E) (he : e.Good a x z) :
   | U => simpa [E.eval, E.dx] using ((hasDerivAt_id x).const_mul a)
   | add l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dx] using ((ihl hl).add (ihr hr))
+      simpa [E.eval, E.dx, Pi.add_apply] using ((ihl hl).add (ihr hr))
   | mul l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dx] using ((ihl hl).mul (ihr hr))
-  | neg e ih => simpa [E.eval, E.dx] using (ih he).neg
+      simpa [E.eval, E.dx, Pi.mul_apply] using ((ihl hl).mul (ihr hr))
+  | neg e ih => simpa [E.eval, E.dx, Pi.neg_apply] using (ih he).neg
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
@@ -86,15 +86,15 @@ theorem E.hasDerivAt_z (a x z : ℝ) (e : E) (he : e.Good a x z) :
   | H =>
       have hm : HasDerivAt (fun w : ℝ => a*w) a z := by
         simpa using (hasDerivAt_id z).const_mul a
-      simpa [E.eval, E.dz] using (HasDerivAt.const_add (1 : ℝ) hm)
+      simpa [E.eval, E.dz, Pi.add_apply] using ((hasDerivAt_const z (1 : ℝ)).add hm)
   | U => simpa [E.eval, E.dz] using (hasDerivAt_const z (a*x))
   | add l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dz] using ((ihl hl).add (ihr hr))
+      simpa [E.eval, E.dz, Pi.add_apply] using ((ihl hl).add (ihr hr))
   | mul l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dz] using ((ihl hl).mul (ihr hr))
-  | neg e ih => simpa [E.eval, E.dz] using (ih he).neg
+      simpa [E.eval, E.dz, Pi.mul_apply] using ((ihl hl).mul (ihr hr))
+  | neg e ih => simpa [E.eval, E.dz, Pi.neg_apply] using (ih he).neg
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
@@ -113,7 +113,7 @@ def metricE : Mat5 :=
      e0,e0,e0,.H,e0;
      e0,e0,gaugeEntry,e0,quotientH]
 
-def g (a x z : ℝ) (i j : Fin 5) : ℝ :=
+noncomputable def g (a x z : ℝ) (i j : Fin 5) : ℝ :=
   (metricE i j).eval a x z
 
 theorem metric_good (a x z : ℝ) (hh : 1+a*z ≠ 0)
