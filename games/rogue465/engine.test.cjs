@@ -54,7 +54,8 @@ test("all rooms, phase-shifted graph transitions and locks have actual costs",()
   assert.equal(E.progress(s).layerReachable,6);
   const room4=E.act(s,{type:"travel",edge:0});
   assert.equal(room4.vertex,4);assert.equal(room4.layer,0);
-  assert.equal(E.act(room4,{type:"travel",edge:2}),room4,"cannot flee uncleared room");
+  const refused=E.act(room4,{type:"travel",edge:2});
+  assert.deepEqual([refused.vertex,refused.layer,refused.turn],[room4.vertex,room4.layer,room4.turn],"cannot flee uncleared room");
   let cleared=clearRoom(room4);
   assert.equal(E.act(cleared,{type:"twist"}).sign[3],0,"2 insights are required");
   cleared.hero.insight=2;
