@@ -126,3 +126,42 @@ test("research rewards advance into a fully operable early-game goal",()=>{
  assert.equal(w.status,"complete");
  assert.ok(w.documents.includes("doc25"));
 });
+
+
+test("actual recovered design document unlocks the eastern map and construction",()=>{
+ const w=F.demoBlueprint(F.newWorld(19));
+ assert.equal(F.isDiscovered(w,19,10),false);
+ assert.equal(F.place(w,19,10,"belt",0),false);
+ F.advance(w,1200);
+ assert.ok(w.documents.includes("doc10"));
+ assert.equal(F.isDiscovered(w,19,10),true);
+ assert.equal(F.place(w,19,10,"belt",0),true);
+});
+
+test("a researched junction alternates output lanes without duplicating or losing items",()=>{
+ const w=F.newWorld(21);
+ w.unlocks.push("composition");
+ assert.ok(F.setMachine(w,7,7,"junction",0));
+ assert.ok(F.setMachine(w,8,7,"belt",0));
+ assert.ok(F.setMachine(w,7,8,"belt",1));
+ const j=w.tiles[F.idx(7,7)].building;
+ assert.equal(F.inject(w,F.idx(7,7),"ironPlate"),true);
+ assert.equal(F.inject(w,F.idx(7,7),"copperPlate"),true);
+ assert.equal(F.inject(w,F.idx(7,7),"gear"),false,"splitter capacity must be bounded");
+ F.advance(w,2);
+ assert.equal(j.queue.length,0);
+ assert.equal(w.tiles[F.idx(8,7)].building.item,"ironPlate");
+ assert.equal(w.tiles[F.idx(7,8)].building.item,"copperPlate");
+});
+
+test("research tech is a source-backed prerequisite structure, not a random equipment name",()=>{
+ const t=id=>T.nodes.find(x=>x.id===id);
+ const w=F.newWorld(21);
+ w.science=25;
+ assert.equal(F.unlock(w,t("globalConsequences")),false);
+ assert.equal(F.unlock(w,t("gradient")),true);
+ assert.equal(F.unlock(w,t("gradientBound")),true);
+ assert.equal(F.unlock(w,t("globalConsequences")),true);
+ assert.equal(w.science,25-3-6-8);
+ assert.equal(w.unlocks.includes("globalConsequences"),true);
+});
