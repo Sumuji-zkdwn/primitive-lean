@@ -1,0 +1,106 @@
+{
+  "test": "v20 massless spin-2 gauge constraints and interacting source conservation",
+  "spin_two": {
+    "assumptions": "symmetric rank-2 field; flat Minkowski; parity-even Lorentz-invariant quadratic action with two derivatives; linear gauge δh=∂ξ+∂ξ",
+    "derivative_invariants": 4,
+    "coefficient_equations_rank": 3,
+    "unique_coefficients_up_to_scale": [
+      1,
+      -2,
+      2,
+      -1
+    ],
+    "exact_universal_polynomial_gauge_identity": true,
+    "null_wave_vector": {
+      "rank_of_euler_operator": 4,
+      "kernel_dimension": 6,
+      "rank_of_gauge": 4,
+      "kernel_mod_gauge": 2
+    },
+    "non_null_wave_vector": {
+      "rank_of_euler_operator": 6,
+      "kernel_dimension": 4,
+      "rank_of_gauge": 4,
+      "kernel_mod_gauge": 0
+    },
+    "gauge_invariant_mass_term_coefficient_rank": 2,
+    "allowed_mass_terms_without_new_fields": 0,
+    "higher_derivative_counterexample": {
+      "kinetic_symbol": "(1+ell²*k²)*P_FP(k)",
+      "on_pure_gauge": "zero for all k and ell², because P_FP(k)*gauge=0",
+      "TT_dispersion_polynomial": "k²*(1+ell²*k²)=0",
+      "additional_root_for_ell_squared_1": "k²=-1",
+      "additional_root_is_not_allowed_in_two_derivative_class": true,
+      "interpretation": "linear gauge invariance by itself does not exclude higher-derivative extra modes"
+    }
+  },
+  "stress_conservation": {
+    "flat_1_plus_1_stress_divergence_ward_identity": "∂μ T^{μν} = E_q ∂^ν q + E_z ∂^ν z",
+    "ward_identity_checked_for_time_and_space_components": true,
+    "interaction_potential": "V=k(q-z)^2/2 + lam(q-z)^4/4",
+    "weighted_energy_source": "F*((cV-cq)*v+(cz-cV)*w)",
+    "weighted_conservation_rank": 2,
+    "universal_coupling_weights_up_to_scale": [
+      1,
+      1,
+      1
+    ],
+    "qualification": "conditional on splitting source into Kq, Kz, V with constant weights; this is not full universality / equivalence principle"
+  },
+  "dynamics": {
+    "ode": "qddot=-Vq; zddot=+Vq; V=k(q-z)^2/2+lam(q-z)^4/4",
+    "k": 0.9,
+    "lam": 0.35,
+    "time_interval": [
+      0,
+      24
+    ],
+    "samples": 1601,
+    "total_energy_initial": 1.2020067968750001,
+    "max_relative_total_energy_drift": 1.5384168164632788e-12,
+    "source_tests": {
+      "universal_total": {
+        "weights": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_abs_source_divergence": 0.0,
+        "energy_span": 2.8990143619012088e-12,
+        "numerical_derivative_rate_residual": 9.084288876692881e-11
+      },
+      "only_q": {
+        "weights": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "max_abs_source_divergence": 1.2335963679663005,
+        "energy_span": 0.7371486189467994,
+        "numerical_derivative_rate_residual": 0.0006902711790548466
+      },
+      "no_potential": {
+        "weights": [
+          1.0,
+          1.0,
+          0.0
+        ],
+        "max_abs_source_divergence": 2.0878743805713906,
+        "energy_span": 1.1863577523624855,
+        "numerical_derivative_rate_residual": 0.0013219681827958407
+      },
+      "unequal_species": {
+        "weights": [
+          1.0,
+          2.0,
+          1.0
+        ],
+        "max_abs_source_divergence": 1.2335963591475874,
+        "energy_span": 0.7371500160003772,
+        "numerical_derivative_rate_residual": 0.000690275448941513
+      }
+    },
+    "derivative_check_caveat": "finite-difference derivative residual is discretization error, not violation of exact identity"
+  },
+  "scientific_boundary": "This reconstructs conditional linear spin-2 structure and source consistency only. It neither derives GR from the gel-like medium nor solves Einstein-Skyrme static or time-dependent equations."
+}

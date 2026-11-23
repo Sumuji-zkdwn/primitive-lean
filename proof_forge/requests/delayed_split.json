@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "name": "delayed_split",
+  "observations": [0, 0, 0, 1],
+  "transitions": [
+    [1, 2, 3, 3],
+    [0, 1, 2, 3]
+  ],
+  "pair": [0, 1]
+}

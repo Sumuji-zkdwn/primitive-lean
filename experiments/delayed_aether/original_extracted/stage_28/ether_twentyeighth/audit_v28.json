@@ -1,0 +1,196 @@
+{
+  "symbolic": {
+    "jordan_einstein_spatial": "exact_zero",
+    "canonical_one_form": "exact_zero",
+    "shape_trace_square": "2*bd**2 + 2*sd**2 + wd**2*exp(4*b)/2",
+    "transverse_metric_determinant": "exp(4*s)"
+  },
+  "curvature_audit": {
+    "max_difference": 9.99644811372491e-13,
+    "max_R_christoffel": 1.628953505224025,
+    "max_R_closed": 1.628953505224155
+  },
+  "off_shell_brackets": [
+    {
+      "mode": "standard",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "bracket": -0.14353757553669608,
+      "target": -0.1334662248555388,
+      "correct_error": -0.010071350681157276,
+      "broken_error": -0.09275332335985345,
+      "frame_error": 0.0005286000303317273
+    },
+    {
+      "mode": "standard",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "bracket": -0.14899666829132333,
+      "target": -0.14622907134599566,
+      "correct_error": -0.0027675969453276605,
+      "broken_error": -0.09037864163808204,
+      "frame_error": 0.00014158597653457505
+    },
+    {
+      "mode": "standard",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "bracket": -0.15024924254781385,
+      "target": -0.14954028608231293,
+      "correct_error": -0.0007089564655009262,
+      "broken_error": -0.08963959487930068,
+      "frame_error": 3.6010304096834034e-05
+    },
+    {
+      "mode": "standard",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "bracket": -0.15055407668960813,
+      "target": -0.15037575532431904,
+      "correct_error": -0.00017832136528908582,
+      "broken_error": -0.08944457056518332,
+      "frame_error": 9.041323746572516e-06
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "bracket": -0.11883557868716996,
+      "target": -0.10860169545012334,
+      "correct_error": -0.010233883237046618,
+      "broken_error": -0.09291585591574276,
+      "frame_error": 0.0005286000303326155
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "bracket": -0.12451693472660035,
+      "target": -0.12178093500326533,
+      "correct_error": -0.0027359997233350197,
+      "broken_error": -0.09034704441608925,
+      "frame_error": 0.00014158597653413096
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "bracket": -0.12592234212673084,
+      "target": -0.1252262629600869,
+      "correct_error": -0.000696079166643937,
+      "broken_error": -0.08962671758044397,
+      "frame_error": 3.601030409772221e-05
+    },
+    {
+      "mode": "reverse_shear",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "bracket": -0.12627202263203358,
+      "target": -0.126097239304242,
+      "correct_error": -0.00017478332779158334,
+      "broken_error": -0.08944103252768573,
+      "frame_error": 9.041323745684338e-06
+    },
+    {
+      "mode": "strong_memory",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "bracket": -0.2510150279979159,
+      "target": -0.2470583657856423,
+      "correct_error": -0.003956662212273615,
+      "broken_error": -0.08224956739341252,
+      "frame_error": 0.0013990997347690382
+    },
+    {
+      "mode": "strong_memory",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "bracket": -0.27920660358921723,
+      "target": -0.2780127320326669,
+      "correct_error": -0.0011938715565503188,
+      "broken_error": -0.08451820083732797,
+      "frame_error": 0.0003765583159376362
+    },
+    {
+      "mode": "strong_memory",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "bracket": -0.2866314904610186,
+      "target": -0.2863130274166636,
+      "correct_error": -0.0003184630443550107,
+      "broken_error": -0.08499481879376325,
+      "frame_error": 9.588364549006911e-05
+    },
+    {
+      "mode": "strong_memory",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "bracket": -0.2885056841121552,
+      "target": -0.2884247661136737,
+      "correct_error": -8.091799848153336e-05,
+      "broken_error": -0.08510145018281262,
+      "frame_error": 2.4081044064594437e-05
+    },
+    {
+      "mode": "nonzero_cross",
+      "n": 32,
+      "dx": 0.19634954084936207,
+      "bracket": -0.18655852245112214,
+      "target": -0.19000973306821492,
+      "correct_error": 0.003451210617092776,
+      "broken_error": -0.07923076206160326,
+      "frame_error": 0.0005286000303321714
+    },
+    {
+      "mode": "nonzero_cross",
+      "n": 64,
+      "dx": 0.09817477042468103,
+      "bracket": -0.2058848073187896,
+      "target": -0.20704443347771717,
+      "correct_error": 0.0011596261589275625,
+      "broken_error": -0.08645141853382682,
+      "frame_error": 0.00014158597653590732
+    },
+    {
+      "mode": "nonzero_cross",
+      "n": 128,
+      "dx": 0.04908738521234052,
+      "bracket": -0.2111411275249998,
+      "target": -0.2114508262713789,
+      "correct_error": 0.00030969874637909456,
+      "broken_error": -0.08862093966742096,
+      "frame_error": 3.601030409861039e-05
+    },
+    {
+      "mode": "nonzero_cross",
+      "n": 256,
+      "dx": 0.02454369260617026,
+      "bracket": -0.21248306244056303,
+      "target": -0.21256175195294613,
+      "correct_error": 7.868951238310107e-05,
+      "broken_error": -0.08918755968751124,
+      "frame_error": 9.04132374479616e-06
+    }
+  ],
+  "independent_numpy": {
+    "n": 8,
+    "numpy_finite_difference_bracket": -0.002796780516744387,
+    "jax_autodiff_bracket": -0.0027967803709949782,
+    "absolute_difference": 1.4574940863584795e-10
+  },
+  "shape_wave": {
+    "grid_points": 256,
+    "initial_energy": 0.16479319329319722,
+    "max_plus_generated": 0.0007516662138147789,
+    "max_relative_energy_error": 1.6842671144946302e-16,
+    "final_plus": 0.0007516662138147789,
+    "note": "Fixed chi and a=s=0; not full Einstein constraints or tensor linearization on curved solutions."
+  },
+  "limits": [
+    "Not full 3D arbitrary metric",
+    "Not derivation of Einstein-Hilbert action",
+    "Memory field is reversible",
+    "Shape-wave simulation is restricted and on fixed background",
+    "Discrete brackets close only asymptotically"
+  ]
+}

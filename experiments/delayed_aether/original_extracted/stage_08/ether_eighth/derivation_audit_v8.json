@@ -1,0 +1,27 @@
+{
+  "uniqueness_of_spatial_potential": {
+    "basis": "a |D h|^2 + b |div h|^2 + c (div h)·D tr(h) + d |D tr(h)|^2",
+    "number_of_basis_invariants": 4,
+    "gauge_invariance_equation_rank": 3,
+    "nullspace_dimension": 1,
+    "universal_symbolic_identity_checked": true,
+    "unique_coefficients_normalized": [
+      "1/4",
+      "-1/2",
+      "1/2",
+      "-1/4"
+    ],
+    "assumptions": "quadratic, spatially isotropic, at most first derivatives in energy, parity-even, modulo integration by parts"
+  },
+  "uniqueness_of_kinetic_trace": {
+    "kinetic_energy": "pi_ij pi_ij - lambda (tr pi)^2",
+    "scalar_constraint_rate": "2 D_i C_i + (4 lambda - 2) Delta tr(pi)",
+    "unique_constraint_preserving_lambda": "1/2",
+    "finite_counterexample_grid": 17,
+    "momentum_constraint_residual": 0.0,
+    "lambda_0_scalar_constraint_rate_max": 0.5219821655586824,
+    "lambda_half_scalar_constraint_rate_max": 0.0,
+    "lambda_1_scalar_constraint_rate_max": 0.5219821655586824
+  },
+  "warning": "These symmetry assumptions encode massless spin-2 structure, which is not derived from gel memory."
+}

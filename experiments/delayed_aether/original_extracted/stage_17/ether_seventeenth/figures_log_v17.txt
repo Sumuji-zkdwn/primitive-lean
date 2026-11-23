@@ -1,0 +1,1 @@
+figures saved. max compactness= 0.09591614421809518 lapse change= -0.03300139347352249 momentum residual= 0.007985824266890125

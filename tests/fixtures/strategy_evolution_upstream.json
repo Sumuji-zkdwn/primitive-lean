@@ -1,0 +1,51 @@
+{
+  "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+  "last_utc_day": "2026-11-22",
+  "receipts": [
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "a8592804775520e1a6a4f981bbce39c8c3dc56a644612bdbe3bd4c938eeb59a3",
+      "comparison": "NEW_REVIEWED_SEED_FINITE_ONLY",
+      "day": "2026-11-22",
+      "depth": 0,
+      "fingerprint": "87aec4dd436bae39a79f35bbcf81343328e2bf9a270670087023638ed110cccd",
+      "head_sha": "e03abd5a29d11b9dfaaa3d4f62c2d571d4807823",
+      "lean_sha256": "e8e54fe1aa97cd3accfc33bafa43c3d5ea80bb3e465b5576586ae9fa25811d43",
+      "model": {
+        "name": "fd_87aec4dd436bae39",
+        "observations": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            3
+          ]
+        ]
+      },
+      "mutation": "reviewed_seed",
+      "name": "fd_87aec4dd436bae39",
+      "outcome": "DISTINGUISHABLE",
+      "parent": null,
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "request_sha256": "423f29c10ff90631188f4c9aa36c1db46386366ee68cff2b49610a14b5ff1380",
+      "seed": "observer",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "word": [
+        0,
+        0
+      ]
+    }
+  ],
+  "schema_version": 1
+}

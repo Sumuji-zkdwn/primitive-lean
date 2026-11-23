@@ -117,6 +117,26 @@ python -B -X utf8 tools/verify.py --integration-only
 
 実行結果は `verification/` に出力されます（Git では追跡しません）。過去の検証記録は [docs/verification/](docs/verification/) にあります。
 
+### 素因数観測の5本を再実行する
+
+Actions の **Prime factor Lean probes** でブランチと `probe` を選びます。旧workflow名を指定していた CLI・REST 呼び出しでは、`prime-factor-probes.yml` と次の値を組み合わせます。
+
+| 旧workflowファイル | `probe` |
+|---|---|
+| `prime-factor-observation-probe.yml` | `observation` |
+| `prime-factor-orbits-probe.yml` | `orbits` |
+| `prime-factor-f0-adaptive-probe.yml` | `f0-adaptive` |
+| `prime-factor-general-f0-probe.yml` | `general-f0` |
+| `prime-factor-general-length-probe.yml` | `general-length` |
+
+```sh
+gh workflow run prime-factor-probes.yml --ref main -f probe=general-f0
+```
+
+5本すべてを実行する値は `all`（既定値）です。REST では `POST /repos/Sumuji-zkdwn/primitive-lean/actions/workflows/prime-factor-probes.yml/dispatches` に `{"ref":"main","inputs":{"probe":"general-f0"}}` を送ります。
+
+対象の ref には統合後のworkflowとスクリプトが必要です。過去のコミットを再現する場合は検証記録のコミットとrunを参照してください。
+
 ## 入口
 
 - **本文・証明**: [原始の形式化.md](原始の形式化.md) · [Elastica](lean/Elastica.lean) · [線形入力](linear_input/lean_check/README.md)

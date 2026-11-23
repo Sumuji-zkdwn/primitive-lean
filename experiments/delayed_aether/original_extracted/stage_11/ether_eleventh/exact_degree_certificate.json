@@ -1,0 +1,56 @@
+[
+  {
+    "n": 6,
+    "tetrahedra": 1296,
+    "boundary_is_constant": true,
+    "mixed_scalar_tetrahedra": 200,
+    "rank_deficient_mixed_tetrahedra": [],
+    "regular_value_candidates": 6,
+    "signed_preimages": [
+      {
+        "tetra_vertex_indices": [
+          164,
+          171,
+          221,
+          220
+        ],
+        "sign": -1,
+        "barycentric": [
+          "1171626797/5963190000",
+          "54833411351/109573616250",
+          "3655541413/17889570000",
+          "21642742699/219147232500"
+        ],
+        "target_scale": "918489/1391411"
+      }
+    ],
+    "degree": -1
+  },
+  {
+    "n": 8,
+    "tetrahedra": 3072,
+    "boundary_is_constant": true,
+    "mixed_scalar_tetrahedra": 310,
+    "rank_deficient_mixed_tetrahedra": [],
+    "regular_value_candidates": 6,
+    "signed_preimages": [
+      {
+        "tetra_vertex_indices": [
+          355,
+          364,
+          446,
+          445
+        ],
+        "sign": -1,
+        "barycentric": [
+          "37678968721/152591940000",
+          "19952274509/50863980000",
+          "17942615189/76295970000",
+          "9585458687/76295970000"
+        ],
+        "target_scale": "10107097/13563728"
+      }
+    ],
+    "degree": -1
+  }
+]

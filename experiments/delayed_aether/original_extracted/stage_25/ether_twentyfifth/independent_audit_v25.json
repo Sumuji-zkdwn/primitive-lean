@@ -1,0 +1,12 @@
+{
+  "symbolic_offshell_cross_sum": "0",
+  "single_cross_sympy_sample": "0.0526697965650736236159883",
+  "opposite_cross_sympy_sample": "-0.0526697965650736236159883",
+  "nonminimal_symbolic_exact": "3*pi/50",
+  "nonminimal_spectral_4096": 0.18849555921538766,
+  "spectral_error_vs_exact": 5.551115123125783e-17,
+  "gravitational_self_spectral_pb": -0.14737762948511693,
+  "gravitational_momentum_spectral_rhs": -0.14737762948511682,
+  "gravitational_spectral_difference": -1.1102230246251565e-16,
+  "scope": "3 diagonal metric components and scalar matter, x-dependent slice around flat spatial metric"
+}

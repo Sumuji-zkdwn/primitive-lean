@@ -1,0 +1,43 @@
+{
+  "context": "V23: spatially inhomogeneous 3+1 ADM ansatz with two transverse polarizations and coupled scalar memory. GR gravitational action imposed.",
+  "exact_symbolic_checks": {
+    "inhomogeneous_spatial_density_required_exponent": 1,
+    "gauge_anomalous_exponent_linear_defect": "1 - c",
+    "null_wave_R_uu": "2*Om**2 - 2*k**2",
+    "hamiltonian_constraint_symbolic": "0",
+    "momentum_constraint_symbolic": "0",
+    "transverse_polarization_linearization": "Matrix([[2*p0, c0], [c0, -2*p0]])",
+    "memory_in_exact_wave": "q=z=sigma*(t-x), so lag=0 and A=1"
+  },
+  "random_diffeomorphism_audit": {
+    "samples": 512,
+    "max_abs_correct_densities": 6.661338147750939e-16,
+    "max_abs_curvature_scalar": 4.440892098500626e-16,
+    "max_abs_volume_density": 2.220446049250313e-16,
+    "max_bad_advective_kinetic_defect": 0.05194720904968553,
+    "max_bad_shift_transformation_defect": 0.08614391510928399,
+    "max_abs_R3_squared_alternative_covariance_defect": 6.661338147750939e-16,
+    "max_difference_R3_squared_alternative_vs_EH": 0.07854992769489688
+  },
+  "null_wave_and_matter_constraints": {
+    "G": 0.03,
+    "polarization_k": 0.18,
+    "null_scalar_slope_sigma": 0.07,
+    "focus_frequency_Omega": 0.18998555987395885,
+    "max_hamiltonian_constraint_residual": 8.847089727481716e-17,
+    "max_momentum_constraint_residual": 4.7704895589362195e-17,
+    "max_null_einstein_residual": 1.9949319973733282e-17,
+    "R_uu": 0.007389025921243214,
+    "T_uu": 0.009800000000000001,
+    "max_abs_transverse_plus_strain": 0.54,
+    "lag_and_hardening_active": false
+  },
+  "unresolved": [
+    "full unrestricted 3+1 spatial geometry",
+    "spin-2 emergence from primitive gel mechanics",
+    "finite nonzero memory lag in exact null-wave solution",
+    "irreversible covariant dissipation",
+    "continuous spectral stability of topological solitons",
+    "new observational predictions"
+  ]
+}

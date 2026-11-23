@@ -1,0 +1,11 @@
+MODEL V4 INDEPENDENT DATA AUDIT: PASS
+Symmetry-free continuum lower bound: E >= 41.873185197833 |B| for smooth q:S^3 and c(h)>=0.5.
+3D Cartesian baseline: 49^3 E=60.288838941 B_discrete=0.912512543, 61^3 E=62.108790816 B_discrete=0.940915051, 91^3 E=64.200724308 B_discrete=0.973837825
+All sampled non-radial shape perturbations have positive energy difference: yes.
+Translation artifacts decreasing with resolution: {49: 0.0026322883570912836, 61: 0.001260979145619956, 91: 0.0002148206350085502}
+Static h solver maximum relative residual: 1.595e-10
+Equal-energy degree-one configurations: E=73.249713222136 and 73.249713222137; Q ratio=2.292818045319.
+Vacuum wave fronts tuned to 1 for q and h; relaxation dispersion persists.
+No global causal cone follows: quartic memory and fixed-inertia Skyrme-gradient modulus can be unbounded.
+Time-dependent bounded-memory model: 161 samples; H+D balance max=7.828e-09; max memory modulus=6.899981529 (<6.9).
+All results are limited to their stated mathematical assumptions; no verified general relativity or equivalence principle.

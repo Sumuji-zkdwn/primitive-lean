@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "name": "orientation_primitive",
+  "observations": [
+    0,
+    0,
+    0,
+    1
+  ],
+  "transitions": [
+    [
+      0,
+      2,
+      3,
+      3
+    ]
+  ],
+  "pair": [
+    0,
+    1
+  ]
+}

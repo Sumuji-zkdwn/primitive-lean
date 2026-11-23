@@ -1,0 +1,98 @@
+{
+  "uncoupled": {
+    "t": 0.1,
+    "last": {
+      "time": 0.1,
+      "charge": 1,
+      "energy": 13.345595199835213,
+      "dissipated": 0.0,
+      "energy_balance_rel": 9.028895911830078e-08,
+      "shear_norm_max": 0.0,
+      "offdiag_max": 0.0,
+      "btrace_abs_max": 0.0,
+      "memory_lag_max": 0.0,
+      "max_memory_radial_modulus": 0.55,
+      "unit_sphere_error": 3.774758283725532e-15,
+      "E2": 9.026599783000787,
+      "E4": 3.0916161583058788,
+      "Egrad": 0.0,
+      "Emass": 0.0,
+      "Ememory": 0.0
+    },
+    "geometry": {
+      "min_vertex_metric_eig": 1.0,
+      "min_tet_gram_eig": 0.019248658023118995,
+      "max_regge_deficit": 2.6645352591003757e-15,
+      "regge_abs_curvature": 2.0977450381271685e-12
+    },
+    "error": null,
+    "max_balance": 9.028895911830078e-08,
+    "unique_charges": [
+      1
+    ]
+  },
+  "zero_kick": {
+    "t": 0.1,
+    "last": {
+      "time": 0.1,
+      "charge": 1,
+      "energy": 13.3133334630684,
+      "dissipated": 3.7073961464142153e-09,
+      "energy_balance_rel": -3.89874865396742e-08,
+      "shear_norm_max": 0.025118992393548836,
+      "offdiag_max": 0.014092946523522524,
+      "btrace_abs_max": 0.01525776547311801,
+      "memory_lag_max": 0.026589730914725856,
+      "max_memory_radial_modulus": 1.7822742295610252,
+      "unit_sphere_error": 3.219646771412954e-15,
+      "E2": 8.940832991204832,
+      "E4": 3.085631360254315,
+      "Egrad": 0.0036915984367312657,
+      "Emass": 0.0003039882522304596,
+      "Ememory": 0.00018398568640278024
+    },
+    "geometry": {
+      "min_vertex_metric_eig": 0.9828785525784779,
+      "min_tet_gram_eig": 0.018967891496018883,
+      "max_regge_deficit": 0.026738006544889004,
+      "regge_abs_curvature": 1.974562751631442
+    },
+    "error": null,
+    "max_balance": 3.89874865396742e-08,
+    "unique_charges": [
+      1
+    ]
+  },
+  "full_long": {
+    "t": 0.2,
+    "last": {
+      "time": 0.2,
+      "charge": 1,
+      "energy": 13.345585482570756,
+      "dissipated": 1.737177869375984e-06,
+      "energy_balance_rel": -5.076676840453884e-07,
+      "shear_norm_max": 0.09004581869830652,
+      "offdiag_max": 0.04848947829278496,
+      "btrace_abs_max": 0.05781238133750565,
+      "memory_lag_max": 0.09510819096175846,
+      "max_memory_radial_modulus": 3.498106034275702,
+      "unit_sphere_error": 5.88418203051333e-15,
+      "E2": 6.158452941425942,
+      "E4": 2.072800777649959,
+      "Egrad": 0.04515009082632562,
+      "Emass": 0.0038298654806386257,
+      "Ememory": 0.005081345313266801
+    },
+    "geometry": {
+      "min_vertex_metric_eig": 0.9396212417035256,
+      "min_tet_gram_eig": 0.018255533537196056,
+      "max_regge_deficit": 0.09890880630995191,
+      "regge_abs_curvature": 6.830505003657098
+    },
+    "error": null,
+    "max_balance": 5.076676840453884e-07,
+    "unique_charges": [
+      1
+    ]
+  }
+}

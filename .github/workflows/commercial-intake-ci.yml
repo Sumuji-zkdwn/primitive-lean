@@ -1,0 +1,43 @@
+name: Public PR audit intake preflight
+
+on:
+  pull_request:
+    paths:
+      - 'tools/commercial/triage_public_pr.py'
+      - 'tests/test_commercial_pr_intake.py'
+      - 'docs/commercial/pr-intake.md'
+      - '.github/workflows/commercial-intake-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  fixture-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run offline intake fixture tests
+        run: python3 -m unittest discover -s tests -p 'test_commercial_pr_intake.py' -v
+      - name: Compile only the intake scripts
+        run: python3 -m py_compile tools/commercial/triage_public_pr.py tests/test_commercial_pr_intake.py
+      - name: Live read-only GitHub API intake smoke test
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python3 tools/commercial/triage_public_pr.py "https://github.com/$GITHUB_REPOSITORY/pull/$PR_NUMBER" --output /tmp/lean-audit-intake.json
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          r = json.loads(Path('/tmp/lean-audit-intake.json').read_text())
+          assert r['source']['pr_url'] == 'https://github.com/' + os.environ['GITHUB_REPOSITORY'] + '/pull/' + os.environ['PR_NUMBER']
+          assert r['intake']['inventory_complete'], r['intake']['issues']
+          assert r['intake']['eligible_for_manual_scope_review'], r['intake']['issues']
+          assert r['intake']['audit_file_count'] >= 1
+          print('Public PR intake API smoke check passed; no CI coverage certificate claimed')
+          PY

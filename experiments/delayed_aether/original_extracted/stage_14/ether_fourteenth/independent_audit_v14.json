@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "random_frechet_trials": 80,
+  "max_frechet_adjoint_abs_error": 1.6955379322780573e-09,
+  "dt_refinement_energy_budget_ratio_n10": 4.000136508805565,
+  "n10_n12_topology_certified_on_computed_intervals": true,
+  "simplex_geometric_guarantee_on_all_stepwise_paths": true,
+  "limitation": "Checks do not prove unconstrained all-time dynamics or Einstein constraints."
+}

@@ -1,0 +1,78 @@
+{
+  "grid_size_with_boundaries": 101,
+  "source_position": 50,
+  "max_absolute_poisson_residual": 2.220446049250313e-16,
+  "data": [
+    {
+      "radius_r": 4,
+      "potential_h": 0.01889807432481773,
+      "inward_force_magnitude": 0.0057220349460052975,
+      "continuum_inverse_square": 0.0049735919716217296,
+      "ratio_discrete_to_inverse_square": 1.1504833887970758
+    },
+    {
+      "radius_r": 5,
+      "potential_h": 0.01471027211574769,
+      "inward_force_magnitude": 0.0034620991676582343,
+      "continuum_inverse_square": 0.0031830988618379067,
+      "ratio_discrete_to_inverse_square": 1.0876505311114446
+    },
+    {
+      "radius_r": 6,
+      "potential_h": 0.01197387598950126,
+      "inward_force_magnitude": 0.002335389403410935,
+      "continuum_inverse_square": 0.002210485320720769,
+      "ratio_discrete_to_inverse_square": 1.056505275795923
+    },
+    {
+      "radius_r": 7,
+      "potential_h": 0.010039493308925819,
+      "inward_force_magnitude": 0.0016883649101377511,
+      "continuum_inverse_square": 0.0016240300315499526,
+      "ratio_discrete_to_inverse_square": 1.0396143404604397
+    },
+    {
+      "radius_r": 8,
+      "potential_h": 0.008597146169225758,
+      "inward_force_magnitude": 0.0012800792122366345,
+      "continuum_inverse_square": 0.0012433979929054324,
+      "ratio_discrete_to_inverse_square": 1.0295007869889587
+    },
+    {
+      "radius_r": 10,
+      "potential_h": 0.0065871925135791015,
+      "inward_force_magnitude": 0.0008104473977310163,
+      "continuum_inverse_square": 0.0007957747154594767,
+      "ratio_discrete_to_inverse_square": 1.0184382363330904
+    },
+    {
+      "radius_r": 12,
+      "potential_h": 0.005251835982976119,
+      "inward_force_magnitude": 0.000559739475615174,
+      "continuum_inverse_square": 0.0005526213301801922,
+      "ratio_discrete_to_inverse_square": 1.0128806925216962
+    },
+    {
+      "radius_r": 14,
+      "potential_h": 0.004299584229200893,
+      "inward_force_magnitude": 0.0004100278826929082,
+      "continuum_inverse_square": 0.00040600750788748815,
+      "ratio_discrete_to_inverse_square": 1.009902217883454
+    },
+    {
+      "radius_r": 16,
+      "potential_h": 0.0035858446032555977,
+      "inward_force_magnitude": 0.0003134827473581987,
+      "continuum_inverse_square": 0.0003108494982263581,
+      "ratio_discrete_to_inverse_square": 1.008471138434726
+    },
+    {
+      "radius_r": 18,
+      "potential_h": 0.003030615228724772,
+      "inward_force_magnitude": 0.000247629154380155,
+      "continuum_inverse_square": 0.0002456094800800854,
+      "ratio_discrete_to_inverse_square": 1.0082231121510905
+    }
+  ],
+  "disclaimer": "Inverse-square force follows from newly assumed 3D massless field; not a derivation from delayed hardening."
+}

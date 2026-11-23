@@ -1,0 +1,252 @@
+name: Strategy Evolution - proof-gated meta-experiment search
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/strategy_evolution.py'
+      - 'tools/autonomy/strategy_evolution_smoke.py'
+      - 'tests/test_strategy_evolution.py'
+      - 'tests/fixtures/strategy_evolution_empty.json'
+      - 'tests/fixtures/strategy_evolution_upstream.json'
+      - 'docs/autonomy/STRATEGY_EVOLUTION.md'
+      - '.github/workflows/strategy-evolution.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/strategy_evolution.py'
+      - 'tools/autonomy/strategy_evolution_smoke.py'
+      - '.github/workflows/strategy-evolution.yml'
+  schedule:
+    # 05:23 UTC = 14:23 JST; follows Finite Discovery's 04:17 UTC.
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: strategy-evolution-persistent-ledger
+  cancel-in-progress: false
+
+jobs:
+  verify-controller:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    steps:
+      - name: Checkout exact PR source with no stored credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test strategy DSL, source pinning and fail-closed ledger updates
+        run: python -m unittest discover -s tests -p 'test_strategy_evolution.py' -v
+      - name: Generate the proposed dual proof and six composed rule smoke checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          python -B -m tools.autonomy.strategy_evolution prepare \
+            --root . \
+            --upstream tests/fixtures/strategy_evolution_upstream.json \
+            --state tests/fixtures/strategy_evolution_empty.json \
+            --head "$sha" --day 2026-11-23 \
+            --output verification/strategy-evolution/cycle
+          python -B -m tools.autonomy.strategy_evolution_smoke \
+            --root . --head "$sha" \
+            --output verification/strategy-evolution/smoke
+      - name: Install pinned Lean and Mathlib toolchain
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Independently kernel-compile both sides plus strategy compositions
+        working-directory: lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for f in ../verification/strategy-evolution/{cycle,smoke}/proof/*.lean; do
+            name="$(basename "$f" .lean)"
+            dirname="$(dirname "$f")"
+            set +e
+            lake env lean --trust=0 "$f" > "$dirname/$name.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "$dirname/$name.exit"
+            echo "strategy-evolution $name: Lean exit $code"
+          done
+      - name: Audit both source-pinned finite models and all smoke evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/strategy-evolution/cycle/proof
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/strategy-evolution/smoke/proof
+          python -B -m tools.autonomy.strategy_evolution receipt \
+            --root . \
+            --upstream tests/fixtures/strategy_evolution_upstream.json \
+            --state tests/fixtures/strategy_evolution_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/strategy-evolution/cycle \
+            --output verification/strategy-evolution/test-successor.json
+      - name: Retain exact SHA-bound proof artifacts, even after failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: strategy-evolution-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/strategy-evolution/
+          if-no-files-found: warn
+          retention-days: 30
+
+  evolve-one:
+    # Trusted main only; executes no code from the separate data branches.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    outputs:
+      candidate: ${{ steps.select.outputs.candidate }}
+    steps:
+      - name: Checkout exact trusted controller
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read independently verified finite-discovery records as data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/finite-discovery-state
+          path: upstream
+          persist-credentials: false
+      - name: Read strategy policy ledger as data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/strategy-evolution-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Select a new finite strategy using verified ancestors only
+        id: select
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          test "$sha" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.strategy_evolution prepare \
+            --root . \
+            --upstream ../upstream/docs/autonomy/finite-discovery-state.json \
+            --state ../state/docs/autonomy/strategy-evolution-state.json \
+            --head "$sha" --day "$(date -u +%F)" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          obj = json.load(open("../cycle/plan.json", encoding="utf-8"))
+          print("candidate=" + ("true" if obj["candidate"] else "false"))
+          PY
+      - name: Install Lean only when a candidate actually remains
+        if: steps.select.outputs.candidate == 'true'
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: control/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prove both original and evolved finite experiment with kernel
+        if: steps.select.outputs.candidate == 'true'
+        shell: bash
+        working-directory: control/lean
+        run: |
+          set -uo pipefail
+          for f in ../../cycle/proof/*.lean; do
+            name="$(basename "$f" .lean)"
+            set +e
+            lake env lean --trust=0 "$f" > "../../cycle/proof/$name.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "../../cycle/proof/$name.exit"
+            echo "strategy-evolution $name: Lean exit $code"
+          done
+      - name: Audit exact-head theorem inventory and axioms
+        if: steps.select.outputs.candidate == 'true'
+        working-directory: control
+        run: python -B tools/autonomy/proof_forge.py audit --output ../cycle/proof
+      - name: Preserve all evidence whether the proof succeeds or fails
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: strategy-evolution-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  commit-verified-strategy:
+    # The only write-enabled job; the artifact is independently rechecked
+    # and the only Git update is an append-only JSON data ledger.
+    if: github.ref == 'refs/heads/main' && needs.evolve-one.result == 'success' && needs.evolve-one.outputs.candidate == 'true'
+    needs: [evolve-one]
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/finite-discovery-state
+          path: upstream
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/strategy-evolution-state
+          path: state
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: strategy-evolution-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Repeat independent kernel/axiom audit and validate strategy ancestry
+        env:
+          PYTHONPATH: ${{ github.workspace }}/control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C control rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B control/tools/autonomy/proof_forge.py audit --output cycle/proof
+          python -B -m tools.autonomy.strategy_evolution receipt \
+            --root control \
+            --upstream upstream/docs/autonomy/finite-discovery-state.json \
+            --state state/docs/autonomy/strategy-evolution-state.json \
+            --head "$GITHUB_SHA" --evidence cycle \
+            --output state/docs/autonomy/strategy-evolution-state.json
+      - name: Append verified strategy receipt ONLY to isolated state branch
+        shell: bash
+        working-directory: state
+        run: |
+          set -euo pipefail
+          git config user.name 'strategy-evolution[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/autonomy/strategy-evolution-state.json
+          git diff --cached --quiet && { echo "No verified strategy data"; exit 1; }
+          git commit -m 'strategy evolution: append one verified finite strategy'
+          git push origin HEAD:refs/heads/autonomy/strategy-evolution-state

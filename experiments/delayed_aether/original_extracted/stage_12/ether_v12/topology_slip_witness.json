@@ -1,0 +1,37 @@
+{
+  "step_pre": 252,
+  "step_post": 253,
+  "time_pre": 0.252,
+  "time_post": 0.253,
+  "charge_pre": 1,
+  "charge_post": 0,
+  "tets_with_strict_determinant_sign_change": 13,
+  "witness_count": 1,
+  "witnesses": [
+    {
+      "tet_id": 4787,
+      "mix_parameter": 0.0013788753996601128,
+      "time_approx": 0.2520013788753997,
+      "barycentric": [
+        0.3965836562476861,
+        0.3251618784510078,
+        0.15774960336392735,
+        0.12050486193737883
+      ],
+      "residual": 7.13148962384258e-17,
+      "smallest_singular": 1.518221112578438e-16,
+      "tet_indices": [
+        928,
+        929,
+        1111,
+        942
+      ],
+      "center": [
+        -0.1403750661060122,
+        0.046375744216884326,
+        -0.06609727604128104
+      ]
+    }
+  ],
+  "interpretation": "normalized linear interpolation of vertex q between consecutive configurations; at the witness time the spatial affine field in one tetrahedron contains 0, so normalized spatial interpolation fails although vertex vectors remain unit length"
+}

@@ -1,0 +1,68 @@
+{
+  "gradient_80": {
+    "n": 80,
+    "energy_abs_difference": 7.105427357601002e-15,
+    "gradient_max_abs_difference": 2.842170943040401e-14,
+    "gradient_rms_difference": 6.423282801154326e-15
+  },
+  "radial_80": {
+    "n": 80,
+    "lowest_radial_omega_squared": 0.1391064759860296,
+    "six_smallest_omega_squared": [
+      0.1391064759860296,
+      0.406095900951152,
+      0.7940104289921288,
+      1.011972723868045,
+      1.261253158802501,
+      1.305932943757956
+    ],
+    "hessian_symmetry_residual": 4.019977716263057e-07
+  },
+  "gradient_120": {
+    "n": 120,
+    "energy_abs_difference": 0.0,
+    "gradient_max_abs_difference": 2.842170943040401e-14,
+    "gradient_rms_difference": 6.24535730050919e-15
+  },
+  "radial_120": {
+    "n": 120,
+    "lowest_radial_omega_squared": 0.1391404303880902,
+    "six_smallest_omega_squared": [
+      0.1391404303880902,
+      0.40630595989633655,
+      0.7944703610355929,
+      1.0116502449211384,
+      1.2608152681709694,
+      1.3056032629184635
+    ],
+    "hessian_symmetry_residual": 5.794279673287939e-07
+  },
+  "gradient_180": {
+    "n": 180,
+    "energy_abs_difference": 0.0,
+    "gradient_max_abs_difference": 5.684341886080802e-14,
+    "gradient_rms_difference": 1.0000118871050699e-14
+  },
+  "radial_180": {
+    "n": 180,
+    "lowest_radial_omega_squared": 0.139144188574242,
+    "six_smallest_omega_squared": [
+      0.139144188574242,
+      0.40634092747869877,
+      0.7945864727621743,
+      1.0117312671162346,
+      1.261189911352468,
+      1.3059299785566565
+    ],
+    "hessian_symmetry_residual": 8.691365254720473e-07
+  },
+  "angular_independent_quadrature": {
+    "analytic_projected_second_variation": 1105.2256087543562,
+    "fd_second_variation_eps_0.008": 1105.5633594692083,
+    "abs_error_eps_0.008": 0.33775071485206354,
+    "fd_second_variation_eps_0.004": 1105.3101345614991,
+    "abs_error_eps_0.004": 0.0845258071428816,
+    "fd_second_variation_eps_0.002": 1105.246745719768,
+    "abs_error_eps_0.002": 0.02113696541164245
+  }
+}
