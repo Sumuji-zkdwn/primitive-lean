@@ -11,6 +11,7 @@ on:
       - 'docs/research/laakso_radial_finite_probe.py'
       - 'docs/research/laakso_exact_walk_sweep.py'
       - 'docs/research/laakso_one_bit_roundtrip_probe.py'
+      - 'docs/research/laakso_two_bit_span_probe.py'
       - 'docs/research/LaaksoBallTransfer.lean'
       - 'docs/research/LaaksoShellMass.lean'
       - 'docs/research/LaaksoSweepBounds.lean'
@@ -41,6 +42,7 @@ jobs:
           python -B docs/research/laakso_radial_finite_probe.py
           python -B docs/research/laakso_exact_walk_sweep.py
           python -B docs/research/laakso_one_bit_roundtrip_probe.py
+          python -B docs/research/laakso_two_bit_span_probe.py
 
   lean-transfer:
     runs-on: ubuntu-latest
