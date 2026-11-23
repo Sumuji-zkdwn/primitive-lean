@@ -1,0 +1,58 @@
+name: Siphon three-probe obstruction and four-probe regularity
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SiphonFourProbeRegularity.lean'
+      - 'tests/test_siphon_three_probe_obstructions.py'
+      - 'docs/research/2026-11-23-siphon-three-probe-obstructions.md'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+      - 'tools/verify_toolchain_modules.py'
+      - '.github/workflows/siphon-three-probe-no-go.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exact arithmetic, finite grids and automatic differentiation
+        run: python3 -B -m unittest discover -s tests -p 'test_siphon_three_probe_obstructions.py' -v
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Retrieve pinned Mathlib cache
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get; then exit 0; fi
+            echo "cache attempt ${attempt} failed" >&2
+            sleep 5
+          done
+          exit 1
+      - name: Kernel-check the minor nonvanishing theorem and audit axioms
+        run: python3 -B tools/verify_toolchain_modules.py --module Research.SiphonFourProbeRegularity
+      - name: Preserve exact-head proof audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: siphon-three-probe-no-go-${{ github.run_id }}
+          path: verification/toolchain-modules/
+          if-no-files-found: warn
+          retention-days: 30
