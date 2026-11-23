@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7a4fd7c472063f2c594328823bc1c77a0b104be7",
+  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1874,6 +1874,32 @@
       "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
     },
     {
+      "id": "main:lean/Research/ProjectionSignHolonomy.lean",
+      "scope": "main",
+      "path": "lean/Research/ProjectionSignHolonomy.lean",
+      "group": "Other",
+      "namespace": "ProjectionSignHolonomy",
+      "declarations": [
+        "cycle3",
+        "cycle4",
+        "switch",
+        "triangle_reverse",
+        "cycle4_switch_invariant",
+        "three_four_cycles_product",
+        "sign6",
+        "abcda_negative",
+        "acbda_positive",
+        "abdca_negative",
+        "acdba_negative",
+        "adbca_positive",
+        "adcba_negative"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "20c45141c176d639d973786dea08f583133c19481bcb65ed1f9e5b060af50417"
+    },
+    {
       "id": "main:lean/Research/SignedCycleCounterexample.lean",
       "scope": "main",
       "path": "lean/Research/SignedCycleCounterexample.lean",
@@ -1958,38 +1984,6 @@
         "OrbitTrace"
       ],
       "sha256": "d7fc006763a4f3b8545ee37b79f113d33455e1858ed91634420b9dc3efff4694"
-    },
-    {
-      "id": "main:lean/Research/SiphonFourProbe.lean",
-      "scope": "main",
-      "path": "lean/Research/SiphonFourProbe.lean",
-      "group": "Other",
-      "namespace": "SiphonFourProbe",
-      "declarations": [
-        "B",
-        "D",
-        "sign_split",
-        "B_both",
-        "D_both",
-        "B_u",
-        "D_u",
-        "B_v",
-        "D_v",
-        "flip_v_impossible",
-        "flip_u_impossible",
-        "flip_both_impossible",
-        "four_square_core",
-        "squareRead",
-        "four_square_reads_injective",
-        "probabilityRead",
-        "probability_implies_square",
-        "four_probability_reads_injective"
-      ],
-      "imports": [
-        "Research.SiphonPolynomialE",
-        "OrbitTrace"
-      ],
-      "sha256": "1362dcd2c2280f77f11f40774799393d9d40fd8587beeacd02003279e3bfef00"
     },
     {
       "id": "main:lean/Research/SiphonInteraction.lean",
@@ -16010,30 +16004,6 @@
       ]
     },
     {
-      "from": "main:lean/Research/SiphonFourProbe.lean",
-      "to": "main:lean/OrbitTrace.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "OrbitTrace"
-      ]
-    },
-    {
-      "from": "main:lean/Research/SiphonFourProbe.lean",
-      "to": "main:lean/OrbitTrace.lean",
-      "kind": "qualified_reference",
-      "symbols": [
-        "OrbitTrace.linearE"
-      ]
-    },
-    {
-      "from": "main:lean/Research/SiphonFourProbe.lean",
-      "to": "main:lean/Research/SiphonPolynomialE.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "Research.SiphonPolynomialE"
-      ]
-    },
-    {
       "from": "main:lean/Research/SiphonPredictiveQuotient.lean",
       "to": "main:lean/Research/ElasticaObservationQuotient.lean",
       "kind": "exact_import",
@@ -27794,28 +27764,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7a4fd7c472063f2c594328823bc1c77a0b104be7",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7a4fd7c472063f2c594328823bc1c77a0b104be7",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7a4fd7c472063f2c594328823bc1c77a0b104be7",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7a4fd7c472063f2c594328823bc1c77a0b104be7",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

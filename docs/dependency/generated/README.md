@@ -1,6 +1,6 @@
 # primitive-lean dependency graphs
 
-Snapshot: main 7a4fd7c472063f2c594328823bc1c77a0b104be7, PR metadata 2026-11-05.
+Snapshot: main c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88, PR metadata 2026-11-05.
 Main sources, registries and PR snapshot were read from Git blobs at main_commit.
 PR overlays use immutable base/head SHAs listed in graph.json pr_inputs.
 
@@ -11,8 +11,8 @@ references, (3) globally unique bare-name candidates, and (4) PR base-target edg
 Only (1) and (2) appear in the graphical source edges.
 
 Main files: 417; PR overlay files: 17.
-Declaration names scanned: 8448.
-Source edges: {"exact_import": 133, "qualified_reference": 298, "unique_identifier_candidate": 955}.
+Declaration names scanned: 8443.
+Source edges: {"exact_import": 131, "qualified_reference": 297, "unique_identifier_candidate": 955}.
 
 ## Source group dependencies
 
@@ -38,10 +38,10 @@ flowchart LR
   g11 -->|12 source refs| g3
   g11 -->|10 source refs| g8
   g0 -->|8 source refs| g3
-  g10 -->|7 source refs| g9
   g10 -->|6 source refs| g8
   g3 -->|5 source refs| g4
   g7 -->|5 source refs| g12
+  g10 -->|5 source refs| g9
   g3 -->|3 source refs| g6
   g4 -->|3 source refs| g3
   g1 -->|2 source refs| g2

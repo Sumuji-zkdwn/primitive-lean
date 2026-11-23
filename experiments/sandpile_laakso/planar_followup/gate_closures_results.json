@@ -1,0 +1,134 @@
+{
+  "stages": [
+    {
+      "depth": 2,
+      "sheets": 4,
+      "edge_count_each": 16,
+      "rules": {
+        "prefix": {
+          "vertices": 16,
+          "root_gate_class_size": 2,
+          "boundary_packing_size": 2,
+          "minimum_boundary_distance": "3/2",
+          "maximum_distance_from_base": "1"
+        },
+        "xor": {
+          "vertices": 14,
+          "root_gate_class_size": 2
+        },
+        "full": {
+          "vertices": 13,
+          "root_gate_class_size": 4
+        }
+      }
+    },
+    {
+      "depth": 3,
+      "sheets": 8,
+      "edge_count_each": 64,
+      "rules": {
+        "prefix": {
+          "vertices": 60,
+          "root_gate_class_size": 2,
+          "boundary_packing_size": 4,
+          "minimum_boundary_distance": "5/4",
+          "maximum_distance_from_base": "1"
+        },
+        "xor": {
+          "vertices": 44,
+          "root_gate_class_size": 2
+        },
+        "full": {
+          "vertices": 37,
+          "root_gate_class_size": 8,
+          "radius": "1/4",
+          "center_height": "7/8",
+          "mass_at_radius": "5/32",
+          "mass_at_double_radius": "7/16",
+          "doubling_ratio": "14/5"
+        }
+      }
+    },
+    {
+      "depth": 4,
+      "sheets": 16,
+      "edge_count_each": 256,
+      "rules": {
+        "prefix": {
+          "vertices": 240,
+          "root_gate_class_size": 2,
+          "boundary_packing_size": 8,
+          "minimum_boundary_distance": "9/8",
+          "maximum_distance_from_base": "1"
+        },
+        "xor": {
+          "vertices": 152,
+          "root_gate_class_size": 2
+        },
+        "full": {
+          "vertices": 117,
+          "root_gate_class_size": 16,
+          "radius": "1/8",
+          "center_height": "11/16",
+          "mass_at_radius": "3/32",
+          "mass_at_double_radius": "5/16",
+          "doubling_ratio": "10/3"
+        }
+      }
+    },
+    {
+      "depth": 5,
+      "sheets": 32,
+      "edge_count_each": 1024,
+      "rules": {
+        "prefix": {
+          "vertices": 976,
+          "root_gate_class_size": 2,
+          "boundary_packing_size": 16,
+          "minimum_boundary_distance": "17/16",
+          "maximum_distance_from_base": "1"
+        },
+        "xor": {
+          "vertices": 560,
+          "root_gate_class_size": 2
+        },
+        "full": {
+          "vertices": 405,
+          "root_gate_class_size": 32,
+          "radius": "1/16",
+          "center_height": "19/32",
+          "mass_at_radius": "3/128",
+          "mass_at_double_radius": "7/64",
+          "doubling_ratio": "14/3"
+        }
+      }
+    },
+    {
+      "depth": 6,
+      "sheets": 64,
+      "edge_count_each": 4096,
+      "rules": {
+        "prefix": {
+          "vertices": 3968,
+          "root_gate_class_size": 2,
+          "boundary_packing_size": 32,
+          "minimum_boundary_distance": "33/32",
+          "maximum_distance_from_base": "1"
+        },
+        "xor": {
+          "vertices": 2144,
+          "root_gate_class_size": 2
+        },
+        "full": {
+          "vertices": 1493,
+          "root_gate_class_size": 64,
+          "radius": "1/32",
+          "center_height": "35/64",
+          "mass_at_radius": "3/512",
+          "mass_at_double_radius": "11/256",
+          "doubling_ratio": "22/3"
+        }
+      }
+    }
+  ]
+}

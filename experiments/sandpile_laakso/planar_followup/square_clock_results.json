@@ -1,0 +1,85 @@
+{
+  "model": "nearest-neighbor square; every missing edge runs to a wired sink; top row drives",
+  "algebra": [
+    {
+      "m": 1,
+      "side": 2,
+      "sites": 4,
+      "boundary_sources": 2,
+      "periods": [
+        3
+      ]
+    },
+    {
+      "m": 2,
+      "side": 8,
+      "sites": 64,
+      "boundary_sources": 8,
+      "periods": [
+        3,
+        9
+      ]
+    },
+    {
+      "m": 3,
+      "side": 26,
+      "sites": 676,
+      "boundary_sources": 26,
+      "periods": [
+        3,
+        9,
+        27
+      ]
+    },
+    {
+      "m": 4,
+      "side": 80,
+      "sites": 6400,
+      "boundary_sources": 80,
+      "periods": [
+        3,
+        9,
+        27,
+        81
+      ]
+    },
+    {
+      "m": 5,
+      "side": 242,
+      "sites": 58564,
+      "boundary_sources": 242,
+      "periods": [
+        3,
+        9,
+        27,
+        81,
+        243
+      ]
+    }
+  ],
+  "physical": [
+    {
+      "side": 2,
+      "selection": "all recurrent states, selected by burning all 256 stable states",
+      "states": 192,
+      "local_first_returns": 384,
+      "single_grain_stabilizations": 1152,
+      "legal_topplings_in_return_tests": 576
+    },
+    {
+      "side": 8,
+      "selection": "one legally reached recurrent state per clock and binary output",
+      "states": 36,
+      "local_first_returns": 288,
+      "single_grain_stabilizations": 2160,
+      "legal_topplings_in_return_tests": 21330
+    }
+  ],
+  "refinement_phase_source_checks": {
+    "3_to_9": 18,
+    "9_to_27": 216,
+    "27_to_81": 2106,
+    "81_to_243": 19440
+  },
+  "scope": "algebra and legal firings are finite checks; the projection forgets microscopic states"
+}
