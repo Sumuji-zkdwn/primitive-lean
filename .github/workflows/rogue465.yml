@@ -1,0 +1,58 @@
+name: ROGUE465 playable run and proof inventory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'games/rogue465/**'
+      - '.github/workflows/rogue465.yml'
+  push:
+    branches: [main, 'chatgpt/rogue465-*']
+    paths:
+      - 'games/rogue465/**'
+      - '.github/workflows/rogue465.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  game:
+    name: Check 465 corpus and roguelike mechanics
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check executable syntax
+        run: |
+          node --check games/rogue465/engine.js
+          node --check games/rogue465/ui.js
+          node --check games/rogue465/engine.test.cjs
+          node --check games/rogue465/ui.test.cjs
+      - name: Audit the original 465-source catalog and replay game mechanics
+        run: node --test games/rogue465/engine.test.cjs games/rogue465/ui.test.cjs games/rogue465/bot.test.cjs
+
+  lean:
+    name: Typecheck roguelike law witnesses with trust zero
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean toolchain
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: false
+      - name: Compile finite roguelike invariants with trust zero
+        run: elan run leanprover/lean4:v4.36.0-rc2 lean --trust=0 games/rogue465/Core.lean

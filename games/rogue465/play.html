@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e1725">
+<meta name="description" content="初期465定理を武具に、証明済み構造を世界法則に。探索・戦闘・選択のローグライク。">
+<title>PRIMITIVE / 465 — Offline Roguelike</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;--bg:#101722;--card:#1b293a;--border:#465871;--txt:#e8f3ff;--muted:#abbdd1;--cyan:#88e1da;--gold:#f4c87c;--red:#f99b9b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;color:var(--txt);background:radial-gradient(ellipse at 45% -30%,#284662,#101722 70%)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #a6dcff;outline-offset:2px}
+button:disabled{cursor:default;opacity:.4}
+.app{max-width:1060px;margin:auto;padding:14px max(12px,env(safe-area-inset-left)) max(26px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right))}
+h1{font-weight:850;letter-spacing:.09em;font-size:clamp(21px,5vw,30px);margin:0}
+header{display:flex;align-items:start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.subtitle{color:var(--muted);font-size:12px;margin:4px 0 0}
+.tag{border:1px solid #4e687b;background:#1c3246;color:#b5e6e7;padding:7px 9px;border-radius:8px;font-weight:700;font-size:11px}
+.hud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:13px 0}
+.hud-item{background:var(--card);border:1px solid #3d5166;border-radius:11px;padding:9px 5px;text-align:center;min-width:0}
+.hud-item small{display:block;color:var(--muted);font-size:10px}
+.hud-item strong{font-variant-numeric:tabular-nums;font-size:clamp(13px,3.2vw,17px);white-space:nowrap}
+#hp{color:#ffb1ae}#energy{color:#88dcf2}#insight{color:#ded0ff}#floor{color:var(--gold)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:13px}
+.panel{border:1px solid var(--border);background:linear-gradient(160deg,#1a2b3d,#172331);border-radius:15px;padding:11px;min-width:0}
+.panel h2{font-size:15px;margin:0 0 8px}
+.subhead{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap}
+.subhead .status{font-size:11px;color:var(--muted)}
+.board{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:2px;max-width:500px;margin:0 auto;touch-action:manipulation}
+.cell{aspect-ratio:1;position:relative;min-width:0;padding:0;border:1px solid #355168;border-radius:3px;background:#293d4f;color:#c9d9ea;display:flex;justify-content:center;align-items:center;font-size:clamp(13px,3vw,23px);font-weight:750;line-height:1}
+.cell.wall{background:#0d1a29;border-color:#27374b;cursor:default}
+.cell.wall::before{content:"";display:block;width:35%;height:35%;background:#304358;transform:rotate(45deg)}
+.cell .grain{position:absolute;right:2px;bottom:1px;font-size:9px;color:#e9c187}
+.cell .foehp{position:absolute;left:2px;top:1px;font-size:10px;color:#fff0d6;font-variant-numeric:tabular-nums}
+.cell .foew{position:absolute;right:2px;top:1px;font-size:9px;color:#d8b9fb}
+.cell.hero{background:#245e69;border:2px solid #8eede8;color:#e9fffc;z-index:1}
+.cell.enemy{background:#663a46;color:#ffdfcb;border:1px solid #dc7e84}
+.cell.enemy.windup{background:#a44940;box-shadow:inset 0 0 0 2px #ffe6a2;animation:pulse .65s ease-in-out infinite alternate}
+.cell.enemy.scanned{box-shadow:inset 0 0 0 2px #cdb7ff}
+.cell.boss{background:#8f304d;font-size:25px}
+.cell.fired:not(.enemy):not(.hero){box-shadow:inset 0 0 0 2px #f0ce8e}
+.cell.spore:not(.hero):not(.enemy){background:#34573e}
+.cell.selected{outline:2px solid #bceaff}
+@keyframes pulse{from{filter:brightness(.8)}to{filter:brightness(1.4)}}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:10px 2px 2px;font-size:10px;color:var(--muted)}
+.legend span{white-space:nowrap}
+.keyboard{display:grid;grid-template-columns:repeat(3,65px);grid-template-rows:repeat(2,50px);gap:5px;justify-content:center;margin:12px auto}
+.keyboard button{border:1px solid #6b8297;background:#29495e;border-radius:10px;font-size:23px;font-weight:700}
+.keyboard .north{grid-column:2;grid-row:1}.keyboard .west{grid-column:1;grid-row:2}.keyboard .south{grid-column:2;grid-row:2}.keyboard .east{grid-column:3;grid-row:2}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:5px}
+.actions button,.door{min-height:45px;border:1px solid #658298;border-radius:10px;background:#2a475a;padding:6px;font-weight:750;font-size:12px}
+.actions button.primary,.door.primary{background:#246e82;border-color:#68c3d9}
+.actions button.risky{background:#5c4655;border-color:#bb8496}
+.note{font-size:11px;line-height:1.6;color:var(--muted);margin:8px 0 0}
+.section-title{font-size:12px;font-weight:800;letter-spacing:.02em;color:#a8d8e1;margin:3px 0 7px}
+.gates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.door{min-height:49px;text-align:left;padding:8px 10px;line-height:1.5}
+.door small{color:#adc8d8;font-size:10px;display:block}
+#log{padding:0;margin:7px 0 0;list-style:none;font-size:11px;line-height:1.5;color:#bcd2df;max-height:126px;overflow:auto}
+#log li{padding:5px 0;border-bottom:1px solid #2c4256}
+#log li:first-child{color:#eef7ff}
+.gear{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:5px}
+.equipment{padding:7px 9px;border:1px solid #415a6d;border-radius:9px;background:#1c3345;font-size:10px;display:flex;align-items:center;gap:8px}
+.equipment b{color:#a9e2e3;min-width:18px}
+.equipment .name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.equipment .effect{color:#ebca8e;white-space:nowrap}
+.source{font-size:10px;color:var(--muted);margin-top:11px;line-height:1.6}
+.source a{color:#9fd2ff}
+#modal{position:fixed;inset:0;background:rgba(7,14,22,.83);display:none;z-index:20;overflow-y:auto;padding:16px;align-items:center;justify-content:center}
+#modal.visible{display:flex}
+.modal-panel{width:min(96vw,630px);background:#152a3d;border:1px solid #7595a8;border-radius:17px;padding:17px;box-shadow:0 10px 50px #0009}
+.modal-panel h2{font-size:23px;margin:0}
+.modal-panel p{font-size:12px;color:#b7ccdc;line-height:1.6}
+.rewards{display:grid;gap:8px;margin:13px 0}
+.reward{width:100%;text-align:left;border:1px solid #4e6f8a;border-radius:12px;background:#243d55;padding:11px}
+.reward strong{font-size:14px;display:block;overflow-wrap:anywhere}
+.reward .stat{font-size:12px;color:#f2d3a1}
+.reward .provenance{font-size:10px;color:#b3c5dc;overflow-wrap:anywhere}
+.replacers{display:flex;gap:6px;flex-wrap:wrap}
+.replacers button{padding:9px 12px;background:#253e51;border:1px solid #627b8f;border-radius:8px}
+.replacers button[aria-pressed=true]{border:2px solid #d4edff;background:#315a6e}
+.finish{padding:22px 12px;text-align:center}
+.finish h2{font-size:30px;color:#f4c87c}
+.finish p{line-height:1.7}
+.finish button{background:#286980;padding:12px 18px;border:1px solid #8bd8ea;border-radius:10px}
+footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
+@media (min-width:750px){.layout{grid-template-columns:minmax(0,550px) minmax(300px,1fr)}.board{gap:3px}.panel{padding:14px}.equipment{font-size:12px}}
+@media (max-width:365px){.app{padding-left:8px;padding-right:8px}.hud{gap:4px}.panel{padding:8px}.actions button{font-size:11px}.cell .grain{font-size:8px}}
+
+.quickdock{display:none}
+@media(max-width:749px){
+  .app{padding-bottom:155px}
+  .keyboard{position:fixed;z-index:12;right:max(9px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,42px);margin:0;padding:7px;border-radius:13px;background:#172b3ded;border:1px solid #658198;box-shadow:0 6px 25px #050a15aa;gap:4px}
+  .keyboard button{font-size:23px}
+  .quickdock{display:flex;position:fixed;z-index:12;left:max(9px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));flex-direction:column;gap:5px;padding:6px;border:1px solid #658198;border-radius:13px;background:#172b3ded;box-shadow:0 6px 25px #050a15aa}
+  .quickdock button{min-height:34px;width:96px;border-radius:8px;background:#31536c;border:1px solid #739ab0;font-size:11px;font-weight:700}
+}
+@media (prefers-reduced-motion:reduce){.cell.enemy.windup{animation:none}}
+</style>
+</head>
+<body>
+<main class="app">
+<header><div><h1>PRIMITIVE / 465</h1><p class="subtitle">原始定理を遺物にした、戦術ローグライク。死亡すると装備を失う。</p></div><span class="tag">ELASTICA 214 + LINEAR 251</span></header>
+<div class="hud">
+ <div class="hud-item"><small>生命</small><strong id="hp">18 / 18</strong></div>
+ <div class="hud-item"><small>気力</small><strong id="energy">5 / 5</strong></div>
+ <div class="hud-item"><small>洞察 / 資金</small><strong id="insight">0 / 0</strong></div>
+ <div class="hud-item"><small>地下階層</small><strong id="floor">1 / 3</strong></div>
+</div>
+<div class="layout">
+ <section class="panel" aria-label="探索マップ">
+  <div class="subhead"><h2 id="location">部屋0 · 層0</h2><span class="status" id="status">準備中</span></div>
+  <div class="board" id="board" role="group" aria-label="9×9ダンジョン。隣のマスをタップして移動・攻撃"></div>
+  <div class="legend"><span>◈ 自分</span><span>☠ 敵</span><span>! 予告攻撃</span><span>緑 胞子</span><span>数字 砂</span></div>
+  <div class="keyboard" role="group" aria-label="移動方向">
+    <button class="north" type="button" data-move="0,-1" aria-label="上へ">↑</button>
+    <button class="west" type="button" data-move="-1,0" aria-label="左へ">←</button>
+    <button class="south" type="button" data-move="0,1" aria-label="下へ">↓</button>
+    <button class="east" type="button" data-move="1,0" aria-label="右へ">→</button>
+  </div>
+  <div class="actions">
+    <button id="pulse" class="primary" type="button">衝撃波<br><small>気力2</small></button>
+    <button id="probe" type="button">二重観測<br><small>敵の解析</small></button>
+    <button id="polarity" type="button">入力極性 +1<br><small>攻撃の傾き</small></button>
+    <button id="camp" type="button">野営<br><small>資金3</small></button>
+  </div>
+  <p class="note">曲がって移動すると曲率が溜まり、次の攻撃を強めます。二重観測で敵のXを読み取り、入力極性を切り替えるとダメージが変化します。敵に隣接して方向キーを押すと攻撃。敵は攻撃前に赤く光るため、回避も可能。敵がいなくなると次の部屋へ移動できます。</p>
+ </section>
+ <section class="panel" aria-label="世界と装備">
+  <div class="section-title">接続された部屋</div>
+  <div class="note" id="topology"></div>
+  <div id="gates" class="gates"></div>
+  <div class="actions" style="grid-template-columns:1fr 1fr">
+    <button id="twist" type="button" class="risky">辺3を反転<br><small>結節点4・洞察2</small></button>
+    <button id="descend" type="button" class="primary">階層を進む<br><small>層1・部屋3で</small></button>
+  </div>
+  <div class="section-title" style="margin-top:8px">獲得した定理遺物（最大5）</div>
+  <div id="gear" class="gear"></div>
+  <div class="section-title" style="margin-top:8px">出来事</div>
+  <ol id="log" aria-live="polite" aria-label="行動ログ"></ol>
+  <div class="actions" style="grid-template-columns:1fr 1fr">
+    <button id="restart" type="button">新しい探索</button>
+    <button id="info" type="button">遊び方</button>
+  </div>
+  <p class="source">元の465定理は実際の証明台帳から抽出。ゲーム内装備の能力値は設計上の割当であり、定理からの数学的帰結ではありません。<a href="https://github.com/Sumuji-zkdwn/primitive-lean/tree/main/games/rogue465" target="_blank" rel="noopener">ソースと検証</a></p>
+ </section>
+</div>
+<div class="quickdock" role="group" aria-label="スマホ用戦闘ボタン"><button id="dock-pulse" type="button">衝撃波 (2)</button><button id="dock-probe" type="button">二重観測</button><button id="dock-polarity" type="button">入力 +1</button></div>
+<div id="modal" aria-live="polite" aria-label="定理遺物の選択"><div class="modal-panel" id="modal-panel"></div></div>
+<footer>スマホではHTML/JavaScriptで動作します。世界法則の一部は既存Lean形式化（線形観測、符号付きLaakso、砂山、Rule481）に対応していますが、ブラウザはLeanのカーネルではありません。初期465定理の全てが戦闘を直接証明するわけではありません。</footer>
+</main>
+<script type="application/json" id="rogue-catalog">{"version":1,"title":"PRIMITIVE 465 · original baseline theorem catalog","source":"evidence/local/2026-10-30-f0/joint.json","source_blob_sha":"ac526bd2de5613b8c9fe8a1dde9d49d084d6967c","counts":{"theorems":465,"elastica":214,"linearInput":251,"declarations":509},"disclaimer":"The 465 names are genuine baseline theorem declarations; mapping each to game relic effects is game design, not a formally proved implication.","cards":[{"id":0,"name":"Elastica.locallyMinimizing_affine_density_iff","file":"lean/Elastica/AffineEquivalence.lean","line":21,"school":"Elastica","family":"vigor"},{"id":1,"name":"Elastica.stationary_affine_density_iff","file":"lean/Elastica/AffineEquivalence.lean","line":40,"school":"Elastica","family":"ward"},{"id":2,"name":"Elastica.locallyMinimizing_powerLogDensity_one_iff","file":"lean/Elastica/AffineEquivalence.lean","line":58,"school":"Elastica","family":"pulse"},{"id":3,"name":"Elastica.stationary_powerLogDensity_one_iff","file":"lean/Elastica/AffineEquivalence.lean","line":72,"school":"Elastica","family":"ward"},{"id":4,"name":"Elastica.locallyMinimizing_powerLogDensity_one_classical_equations","file":"lean/Elastica/AffineEquivalence.lean","line":88,"school":"Elastica","family":"pulse"},{"id":5,"name":"Elastica.locallyMinimizing_powerLogDensity_one_scaling_iff","file":"lean/Elastica/CombinedConsequences.lean","line":14,"school":"Elastica","family":"pulse"},{"id":6,"name":"Elastica.energy_powerLogDensity_one_scaling","file":"lean/Elastica/CombinedConsequences.lean","line":25,"school":"Elastica","family":"pulse"},{"id":7,"name":"Elastica.integral_split_three","file":"lean/Elastica/Composition.lean","line":24,"school":"Elastica","family":"strike"},{"id":8,"name":"Elastica.energy_split_three","file":"lean/Elastica/Composition.lean","line":33,"school":"Elastica","family":"pulse"},{"id":9,"name":"Elastica.xCoord_sub_eq_integral","file":"lean/Elastica/Composition.lean","line":42,"school":"Elastica","family":"strike"},{"id":10,"name":"Elastica.yCoord_sub_eq_integral","file":"lean/Elastica/Composition.lean","line":53,"school":"Elastica","family":"strike"},{"id":11,"name":"Elastica.xCoord_split_three","file":"lean/Elastica/Composition.lean","line":64,"school":"Elastica","family":"strike"},{"id":12,"name":"Elastica.yCoord_split_three","file":"lean/Elastica/Composition.lean","line":72,"school":"Elastica","family":"strike"},{"id":13,"name":"Elastica.density_integral_eq_of_angle_eqOn","file":"lean/Elastica/Composition.lean","line":83,"school":"Elastica","family":"edge"},{"id":14,"name":"Elastica.boundary_eq_of_middle_integrals","file":"lean/Elastica/Composition.lean","line":107,"school":"Elastica","family":"ward"},{"id":15,"name":"Elastica.energy_sub_eq_middle_of_outer_angle_eq","file":"lean/Elastica/Composition.lean","line":144,"school":"Elastica","family":"edge"},{"id":16,"name":"Elastica.energy_le_iff_middle_integral_le","file":"lean/Elastica/Composition.lean","line":157,"school":"Elastica","family":"pulse"},{"id":17,"name":"Elastica.hasDerivAt_deriv_integral_variation","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":23,"school":"Elastica","family":"ward"},{"id":18,"name":"Elastica.hasDerivAt_deriv_add","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":39,"school":"Elastica","family":"ward"},{"id":19,"name":"Elastica.hasDerivAt_deriv_const_mul","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":49,"school":"Elastica","family":"ward"},{"id":20,"name":"Elastica.hasDerivAt_deriv_augmentedEnergy_variation","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":58,"school":"Elastica","family":"ward"},{"id":21,"name":"Elastica.secondVariation_augmentedEnergy","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":117,"school":"Elastica","family":"ward"},{"id":22,"name":"Elastica.hasDerivAt_integral_of_continuousOn_rectangle","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":127,"school":"Elastica","family":"ward"},{"id":23,"name":"Elastica.hasDerivAt_deriv_integral_of_continuousOn_rectangle","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":161,"school":"Elastica","family":"ward"},{"id":24,"name":"Elastica.hasDerivAt_deriv_density_integral","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":175,"school":"Elastica","family":"ward"},{"id":25,"name":"Elastica.exists_correction_radius","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":204,"school":"Elastica","family":"ward"},{"id":26,"name":"Elastica.hasDerivAt_corrected_integral_and_deriv","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":217,"school":"Elastica","family":"ward"},{"id":27,"name":"Elastica.hasDerivAt_deriv_corrected_integral","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":284,"school":"Elastica","family":"ward"},{"id":28,"name":"Elastica.deriv_corrected_angle","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":297,"school":"Elastica","family":"ward"},{"id":29,"name":"Elastica.hasDerivAt_corrected_energy_and_deriv","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":308,"school":"Elastica","family":"ward"},{"id":30,"name":"Elastica.second_deriv_zero_of_eventually_const","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":330,"school":"Elastica","family":"ward"},{"id":31,"name":"Elastica.constrained_secondVariation_corrected","file":"lean/Elastica/ConstrainedSecondVariation.lean","line":337,"school":"Elastica","family":"ward"},{"id":32,"name":"Elastica.exists_nonzero_curvature_of_nonconstant","file":"lean/Elastica/ConstraintRegularity.lean","line":16,"school":"Elastica","family":"ward"},{"id":33,"name":"Elastica.constraint_coefficients_zero","file":"lean/Elastica/ConstraintRegularity.lean","line":28,"school":"Elastica","family":"ward"},{"id":34,"name":"Elastica.exists_normalized_constraint_directions","file":"lean/Elastica/ConstraintRegularity.lean","line":77,"school":"Elastica","family":"ward"},{"id":35,"name":"Elastica.stationary_iff_firstVariation","file":"lean/Elastica/Derivation.lean","line":24,"school":"Elastica","family":"ward"},{"id":36,"name":"Elastica.stationary_angle_firstIntegral_curvature","file":"lean/Elastica/Derivation.lean","line":47,"school":"Elastica","family":"ward"},{"id":37,"name":"Elastica.firstIntegral_hasDerivAt","file":"lean/Elastica/Equations.lean","line":19,"school":"Elastica","family":"edge"},{"id":38,"name":"Elastica.firstIntegral_constant","file":"lean/Elastica/Equations.lean","line":31,"school":"Elastica","family":"strike"},{"id":39,"name":"Elastica.angleForce_hasDerivAt","file":"lean/Elastica/Equations.lean","line":48,"school":"Elastica","family":"edge"},{"id":40,"name":"Elastica.curvature_equation_of_firstIntegral","file":"lean/Elastica/Equations.lean","line":56,"school":"Elastica","family":"edge"},{"id":41,"name":"Elastica.curvature_equation","file":"lean/Elastica/Equations.lean","line":65,"school":"Elastica","family":"edge"},{"id":42,"name":"Elastica.second_derivative_of_angle_equation","file":"lean/Elastica/Equations.lean","line":77,"school":"Elastica","family":"edge"},{"id":43,"name":"Elastica.firstIntegral_and_curvature_of_angle","file":"lean/Elastica/Equations.lean","line":89,"school":"Elastica","family":"edge"},{"id":44,"name":"Elastica.smooth_angle_firstIntegral_and_curvature","file":"lean/Elastica/Equations.lean","line":105,"school":"Elastica","family":"edge"},{"id":45,"name":"Elastica.quadratic_density_hasDerivAt","file":"lean/Elastica/Equations.lean","line":128,"school":"Elastica","family":"edge"},{"id":46,"name":"Elastica.quadratic_moment_second_derivative","file":"lean/Elastica/Equations.lean","line":135,"school":"Elastica","family":"edge"},{"id":47,"name":"Elastica.quadratic_curvature_equation","file":"lean/Elastica/Equations.lean","line":151,"school":"Elastica","family":"edge"},{"id":48,"name":"Elastica.quadratic_curvature_expression","file":"lean/Elastica/Equations.lean","line":162,"school":"Elastica","family":"edge"},{"id":49,"name":"Elastica.affine_density_curvature_expression","file":"lean/Elastica/Equations.lean","line":167,"school":"Elastica","family":"edge"},{"id":50,"name":"Elastica.continuous_parameter_intervalIntegral","file":"lean/Elastica/ExactVariation.lean","line":17,"school":"Elastica","family":"edge"},{"id":51,"name":"Elastica.hasFDerivAt_parameter_intervalIntegral","file":"lean/Elastica/ExactVariation.lean","line":28,"school":"Elastica","family":"edge"},{"id":52,"name":"Elastica.contDiff_two_parameter_intervalIntegral","file":"lean/Elastica/ExactVariation.lean","line":53,"school":"Elastica","family":"edge"},{"id":53,"name":"Elastica.hasFDerivAt_integral_linear_parameters","file":"lean/Elastica/ExactVariation.lean","line":76,"school":"Elastica","family":"edge"},{"id":54,"name":"Elastica.contDiff_two_integral_linear_parameters","file":"lean/Elastica/ExactVariation.lean","line":92,"school":"Elastica","family":"edge"},{"id":55,"name":"Elastica.contDiff_endpointParameters","file":"lean/Elastica/ExactVariation.lean","line":141,"school":"Elastica","family":"edge"},{"id":56,"name":"Elastica.fderiv_endpointParameters_zero","file":"lean/Elastica/ExactVariation.lean","line":176,"school":"Elastica","family":"edge"},{"id":57,"name":"Elastica.exists_implicit_correction","file":"lean/Elastica/ExactVariation.lean","line":210,"school":"Elastica","family":"edge"},{"id":58,"name":"Elastica.exists_exact_endpoint_variation","file":"lean/Elastica/ExactVariation.lean","line":232,"school":"Elastica","family":"edge"},{"id":59,"name":"Elastica.corrected_angle_hasDerivAt","file":"lean/Elastica/ExactVariation.lean","line":278,"school":"Elastica","family":"edge"},{"id":60,"name":"Elastica.corrected_angle_endpoints","file":"lean/Elastica/ExactVariation.lean","line":286,"school":"Elastica","family":"edge"},{"id":61,"name":"Elastica.energy_const","file":"lean/Elastica/Examples.lean","line":17,"school":"Elastica","family":"pulse"},{"id":62,"name":"Elastica.energy_affine","file":"lean/Elastica/Examples.lean","line":22,"school":"Elastica","family":"pulse"},{"id":63,"name":"Elastica.integral_curvature","file":"lean/Elastica/Examples.lean","line":30,"school":"Elastica","family":"edge"},{"id":64,"name":"Elastica.hasDerivAt_energy_affine_fixed_end_variation","file":"lean/Elastica/Examples.lean","line":38,"school":"Elastica","family":"edge"},{"id":65,"name":"Elastica.energy_affine_density","file":"lean/Elastica/Examples.lean","line":53,"school":"Elastica","family":"pulse"},{"id":66,"name":"Elastica.affine_density_shift_same_end_angles","file":"lean/Elastica/Examples.lean","line":69,"school":"Elastica","family":"edge"},{"id":67,"name":"Elastica.reflection_counterexample","file":"lean/Elastica/Examples.lean","line":78,"school":"Elastica","family":"strike"},{"id":68,"name":"Elastica.energy_reflection_of_even","file":"lean/Elastica/Examples.lean","line":84,"school":"Elastica","family":"pulse"},{"id":69,"name":"Elastica.energy_rotation","file":"lean/Elastica/Examples.lean","line":95,"school":"Elastica","family":"pulse"},{"id":70,"name":"Elastica.exponentialWeight_pos","file":"lean/Elastica/ExponentialWeight.lean","line":31,"school":"Elastica","family":"pulse"},{"id":71,"name":"Elastica.log_exponentialWeight","file":"lean/Elastica/ExponentialWeight.lean","line":34,"school":"Elastica","family":"pulse"},{"id":72,"name":"Elastica.energy_eq_neg_log_exponentialWeight","file":"lean/Elastica/ExponentialWeight.lean","line":38,"school":"Elastica","family":"pulse"},{"id":73,"name":"Elastica.exponentialWeight_split","file":"lean/Elastica/ExponentialWeight.lean","line":46,"school":"Elastica","family":"pulse"},{"id":74,"name":"Elastica.exponentialWeight_split_three","file":"lean/Elastica/ExponentialWeight.lean","line":58,"school":"Elastica","family":"pulse"},{"id":75,"name":"Elastica.exp_neg_mul_le_exp_neg_mul_iff","file":"lean/Elastica/ExponentialWeight.lean","line":67,"school":"Elastica","family":"pulse"},{"id":76,"name":"Elastica.exp_neg_mul_lt_exp_neg_mul_iff","file":"lean/Elastica/ExponentialWeight.lean","line":72,"school":"Elastica","family":"pulse"},{"id":77,"name":"Elastica.energy_le_iff_exponentialWeight_le","file":"lean/Elastica/ExponentialWeight.lean","line":78,"school":"Elastica","family":"pulse"},{"id":78,"name":"Elastica.energy_lt_iff_exponentialWeight_lt","file":"lean/Elastica/ExponentialWeight.lean","line":84,"school":"Elastica","family":"pulse"},{"id":79,"name":"Elastica.energy_minimum_iff_exponentialWeight_maximum","file":"lean/Elastica/ExponentialWeight.lean","line":91,"school":"Elastica","family":"ward"},{"id":80,"name":"Elastica.isLocalMinOn_iff_isLocalMaxOn_exp_neg_mul","file":"lean/Elastica/ExponentialWeight.lean","line":98,"school":"Elastica","family":"pulse"},{"id":81,"name":"Elastica.locallyMinimizing_iff_exponentialWeight_local_maximum","file":"lean/Elastica/ExponentialWeight.lean","line":107,"school":"Elastica","family":"pulse"},{"id":82,"name":"Elastica.hasDerivAt_exp_neg_mul","file":"lean/Elastica/ExponentialWeight.lean","line":120,"school":"Elastica","family":"edge"},{"id":83,"name":"Elastica.differentiableAt_exp_neg_mul_iff","file":"lean/Elastica/ExponentialWeight.lean","line":127,"school":"Elastica","family":"pulse"},{"id":84,"name":"Elastica.hasDerivAt_exp_neg_mul_zero_iff","file":"lean/Elastica/ExponentialWeight.lean","line":138,"school":"Elastica","family":"edge"},{"id":85,"name":"Elastica.deriv_exp_neg_mul","file":"lean/Elastica/ExponentialWeight.lean","line":155,"school":"Elastica","family":"edge"},{"id":86,"name":"Elastica.deriv_exp_neg_mul_eq_zero_iff","file":"lean/Elastica/ExponentialWeight.lean","line":164,"school":"Elastica","family":"edge"},{"id":87,"name":"Elastica.hasDerivAt_deriv_exp_neg_mul","file":"lean/Elastica/ExponentialWeight.lean","line":172,"school":"Elastica","family":"edge"},{"id":88,"name":"Elastica.hasDerivAt_deriv_exp_neg_mul_of_stationary","file":"lean/Elastica/ExponentialWeight.lean","line":186,"school":"Elastica","family":"ward"},{"id":89,"name":"Elastica.hasDerivAt_exponentialWeight_variation","file":"lean/Elastica/ExponentialWeight.lean","line":194,"school":"Elastica","family":"edge"},{"id":90,"name":"Elastica.exponentialWeight_variation_stationary_iff","file":"lean/Elastica/ExponentialWeight.lean","line":207,"school":"Elastica","family":"ward"},{"id":91,"name":"Elastica.stationary_iff_exponentialWeight_stationary","file":"lean/Elastica/ExponentialWeight.lean","line":215,"school":"Elastica","family":"ward"},{"id":92,"name":"Elastica.hasDerivAt_deriv_exponentialWeight_variation","file":"lean/Elastica/ExponentialWeight.lean","line":226,"school":"Elastica","family":"edge"},{"id":93,"name":"Elastica.hasDerivAt_deriv_exponentialWeight_family_of_stationary","file":"lean/Elastica/ExponentialWeight.lean","line":245,"school":"Elastica","family":"ward"},{"id":94,"name":"Elastica.constrained_secondVariation_exponentialWeight_corrected","file":"lean/Elastica/ExponentialWeight.lean","line":258,"school":"Elastica","family":"ward"},{"id":95,"name":"Elastica.xCoord_zero","file":"lean/Elastica/Geometry.lean","line":34,"school":"Elastica","family":"strike"},{"id":96,"name":"Elastica.yCoord_zero","file":"lean/Elastica/Geometry.lean","line":37,"school":"Elastica","family":"strike"},{"id":97,"name":"Elastica.hasDerivAt_xCoord","file":"lean/Elastica/Geometry.lean","line":40,"school":"Elastica","family":"edge"},{"id":98,"name":"Elastica.hasDerivAt_yCoord","file":"lean/Elastica/Geometry.lean","line":44,"school":"Elastica","family":"edge"},{"id":99,"name":"Elastica.deriv_xCoord","file":"lean/Elastica/Geometry.lean","line":48,"school":"Elastica","family":"edge"},{"id":100,"name":"Elastica.deriv_yCoord","file":"lean/Elastica/Geometry.lean","line":52,"school":"Elastica","family":"edge"},{"id":101,"name":"Elastica.unit_speed_squared","file":"lean/Elastica/Geometry.lean","line":57,"school":"Elastica","family":"strike"},{"id":102,"name":"Elastica.hasDerivAt_deriv_xCoord","file":"lean/Elastica/Geometry.lean","line":62,"school":"Elastica","family":"edge"},{"id":103,"name":"Elastica.hasDerivAt_deriv_yCoord","file":"lean/Elastica/Geometry.lean","line":70,"school":"Elastica","family":"edge"},{"id":104,"name":"Elastica.signed_curvature_determinant","file":"lean/Elastica/Geometry.lean","line":79,"school":"Elastica","family":"edge"},{"id":105,"name":"Elastica.signed_curvature_eq_deriv","file":"lean/Elastica/Geometry.lean","line":90,"school":"Elastica","family":"edge"},{"id":106,"name":"Elastica.xCoord_const","file":"lean/Elastica/Geometry.lean","line":97,"school":"Elastica","family":"strike"},{"id":107,"name":"Elastica.yCoord_const","file":"lean/Elastica/Geometry.lean","line":101,"school":"Elastica","family":"strike"},{"id":108,"name":"Elastica.curvature_const","file":"lean/Elastica/Geometry.lean","line":105,"school":"Elastica","family":"edge"},{"id":109,"name":"Elastica.curvature_affine","file":"lean/Elastica/Geometry.lean","line":109,"school":"Elastica","family":"edge"},{"id":110,"name":"Elastica.xCoord_affine","file":"lean/Elastica/Geometry.lean","line":114,"school":"Elastica","family":"strike"},{"id":111,"name":"Elastica.yCoord_affine","file":"lean/Elastica/Geometry.lean","line":131,"school":"Elastica","family":"strike"},{"id":112,"name":"Elastica.abs_x_displacement_le","file":"lean/Elastica/Geometry.lean","line":150,"school":"Elastica","family":"strike"},{"id":113,"name":"Elastica.abs_y_displacement_le","file":"lean/Elastica/Geometry.lean","line":158,"school":"Elastica","family":"strike"},{"id":114,"name":"Elastica.impossible_x_endpoint","file":"lean/Elastica/Geometry.lean","line":166,"school":"Elastica","family":"strike"},{"id":115,"name":"Elastica.corrected_family_C1_close","file":"lean/Elastica/LocalMinimum.lean","line":48,"school":"Elastica","family":"ward"},{"id":116,"name":"Elastica.locallyMinimizing_isLocalMin_corrected_family","file":"lean/Elastica/LocalMinimum.lean","line":107,"school":"Elastica","family":"ward"},{"id":117,"name":"Elastica.locallyMinimizing_stationary_of_nonstraight","file":"lean/Elastica/MinimumConditions.lean","line":18,"school":"Elastica","family":"ward"},{"id":118,"name":"Elastica.locallyMinimizing_angle_firstIntegral_curvature","file":"lean/Elastica/MinimumConditions.lean","line":34,"school":"Elastica","family":"ward"},{"id":119,"name":"Elastica.locallyMinimizing_secondVariation_nonneg","file":"lean/Elastica/MinimumConditions.lean","line":54,"school":"Elastica","family":"ward"},{"id":120,"name":"Elastica.locallyMinimizing_necessary_conditions","file":"lean/Elastica/MinimumConditions.lean","line":83,"school":"Elastica","family":"ward"},{"id":121,"name":"Elastica.powerLog_zero","file":"lean/Elastica/PowerLogResponse.lean","line":27,"school":"Elastica","family":"pulse"},{"id":122,"name":"Elastica.powerLog_one","file":"lean/Elastica/PowerLogResponse.lean","line":30,"school":"Elastica","family":"pulse"},{"id":123,"name":"Elastica.hasDerivAt_powerLog","file":"lean/Elastica/PowerLogResponse.lean","line":34,"school":"Elastica","family":"edge"},{"id":124,"name":"Elastica.deriv_powerLog","file":"lean/Elastica/PowerLogResponse.lean","line":45,"school":"Elastica","family":"edge"},{"id":125,"name":"Elastica.deriv_powerLog_pos","file":"lean/Elastica/PowerLogResponse.lean","line":49,"school":"Elastica","family":"edge"},{"id":126,"name":"Elastica.powerLog_mul","file":"lean/Elastica/PowerLogResponse.lean","line":56,"school":"Elastica","family":"pulse"},{"id":127,"name":"Elastica.continuousAt_powerLog_exponent_zero","file":"lean/Elastica/PowerLogResponse.lean","line":68,"school":"Elastica","family":"pulse"},{"id":128,"name":"Elastica.tendsto_powerLog_exponent_zero","file":"lean/Elastica/PowerLogResponse.lean","line":79,"school":"Elastica","family":"pulse"},{"id":129,"name":"Elastica.powerLogDensity_zero","file":"lean/Elastica/PowerLogResponse.lean","line":91,"school":"Elastica","family":"pulse"},{"id":130,"name":"Elastica.powerLogDensity_neg_one","file":"lean/Elastica/PowerLogResponse.lean","line":95,"school":"Elastica","family":"pulse"},{"id":131,"name":"Elastica.powerLogDensity_reference","file":"lean/Elastica/PowerLogResponse.lean","line":99,"school":"Elastica","family":"pulse"},{"id":132,"name":"Elastica.hasDerivAt_powerLogDensity","file":"lean/Elastica/PowerLogResponse.lean","line":113,"school":"Elastica","family":"edge"},{"id":133,"name":"Elastica.hasDerivAt_deriv_powerLogDensity","file":"lean/Elastica/PowerLogResponse.lean","line":145,"school":"Elastica","family":"edge"},{"id":134,"name":"Elastica.second_deriv_powerLogDensity_pos","file":"lean/Elastica/PowerLogResponse.lean","line":161,"school":"Elastica","family":"edge"},{"id":135,"name":"Elastica.powerLogDensity_one","file":"lean/Elastica/PowerLogResponse.lean","line":169,"school":"Elastica","family":"pulse"},{"id":136,"name":"Elastica.energy_powerLogDensity_one","file":"lean/Elastica/PowerLogResponse.lean","line":176,"school":"Elastica","family":"pulse"},{"id":137,"name":"Elastica.energy_powerLogDensity_one_le_iff","file":"lean/Elastica/PowerLogResponse.lean","line":191,"school":"Elastica","family":"pulse"},{"id":138,"name":"Elastica.angle_sub_eq_initial_of_curvature_eq","file":"lean/Elastica/Reconstruction.lean","line":23,"school":"Elastica","family":"edge"},{"id":139,"name":"Elastica.angle_eq_of_curvature_eq_initial","file":"lean/Elastica/Reconstruction.lean","line":45,"school":"Elastica","family":"edge"},{"id":140,"name":"Elastica.xCoord_eq_of_angle_eq","file":"lean/Elastica/Reconstruction.lean","line":56,"school":"Elastica","family":"edge"},{"id":141,"name":"Elastica.yCoord_eq_of_angle_eq","file":"lean/Elastica/Reconstruction.lean","line":67,"school":"Elastica","family":"edge"},{"id":142,"name":"Elastica.reconstruction_eq_of_curvature_eq_initial","file":"lean/Elastica/Reconstruction.lean","line":79,"school":"Elastica","family":"edge"},{"id":143,"name":"Elastica.xCoord_add_angle","file":"lean/Elastica/Reconstruction.lean","line":90,"school":"Elastica","family":"edge"},{"id":144,"name":"Elastica.yCoord_add_angle","file":"lean/Elastica/Reconstruction.lean","line":104,"school":"Elastica","family":"edge"},{"id":145,"name":"Elastica.reconstruction_rotation_of_curvature_eq","file":"lean/Elastica/Reconstruction.lean","line":120,"school":"Elastica","family":"edge"},{"id":146,"name":"Elastica.energy_eq_of_curvature_eq","file":"lean/Elastica/Reconstruction.lean","line":141,"school":"Elastica","family":"edge"},{"id":147,"name":"Elastica.middle_replacement_boundary_and_weight_ratio","file":"lean/Elastica/ReplacementConsequences.lean","line":51,"school":"Elastica","family":"ward"},{"id":148,"name":"Elastica.middle_energy_lt_iff_exponentialWeight_lt","file":"lean/Elastica/ReplacementConsequences.lean","line":73,"school":"Elastica","family":"pulse"},{"id":149,"name":"Elastica.locallyMinimizing_middle_replacement_comparison","file":"lean/Elastica/ReplacementConsequences.lean","line":89,"school":"Elastica","family":"vigor"},{"id":150,"name":"Elastica.not_locallyMinimizing_of_arbitrarily_close_middle_improvements","file":"lean/Elastica/ReplacementConsequences.lean","line":119,"school":"Elastica","family":"vigor"},{"id":151,"name":"Elastica.second_derivative_nonneg_of_local_min","file":"lean/Elastica/ScalarMinimum.lean","line":16,"school":"Elastica","family":"ward"},{"id":152,"name":"Elastica.contDiff_angle_scaling","file":"lean/Elastica/Scaling.lean","line":23,"school":"Elastica","family":"edge"},{"id":153,"name":"Elastica.hasDerivAt_angle_scaling","file":"lean/Elastica/Scaling.lean","line":29,"school":"Elastica","family":"edge"},{"id":154,"name":"Elastica.deriv_angle_scaling","file":"lean/Elastica/Scaling.lean","line":35,"school":"Elastica","family":"edge"},{"id":155,"name":"Elastica.curvature_angle_scaling","file":"lean/Elastica/Scaling.lean","line":41,"school":"Elastica","family":"edge"},{"id":156,"name":"Elastica.angle_scaling_endpoints","file":"lean/Elastica/Scaling.lean","line":47,"school":"Elastica","family":"edge"},{"id":157,"name":"Elastica.xCoord_scaling","file":"lean/Elastica/Scaling.lean","line":53,"school":"Elastica","family":"pulse"},{"id":158,"name":"Elastica.yCoord_scaling","file":"lean/Elastica/Scaling.lean","line":60,"school":"Elastica","family":"pulse"},{"id":159,"name":"Elastica.scaled_boundary_data","file":"lean/Elastica/Scaling.lean","line":68,"school":"Elastica","family":"ward"},{"id":160,"name":"Elastica.energy_scaling","file":"lean/Elastica/Scaling.lean","line":85,"school":"Elastica","family":"pulse"},{"id":161,"name":"Elastica.energy_scaling_of_density_factor","file":"lean/Elastica/Scaling.lean","line":97,"school":"Elastica","family":"pulse"},{"id":162,"name":"Elastica.energy_scaling_of_homogeneous","file":"lean/Elastica/Scaling.lean","line":109,"school":"Elastica","family":"pulse"},{"id":163,"name":"Elastica.energy_scaling_quadratic","file":"lean/Elastica/Scaling.lean","line":122,"school":"Elastica","family":"pulse"},{"id":164,"name":"Elastica.locallyMinimizing_scaling_of_density_factor","file":"lean/Elastica/ScalingMinima.lean","line":22,"school":"Elastica","family":"pulse"},{"id":165,"name":"Elastica.locallyMinimizing_scaling_iff_of_density_factor","file":"lean/Elastica/ScalingMinima.lean","line":93,"school":"Elastica","family":"pulse"},{"id":166,"name":"Elastica.locallyMinimizing_scaling_iff_of_homogeneous","file":"lean/Elastica/ScalingMinima.lean","line":115,"school":"Elastica","family":"pulse"},{"id":167,"name":"Elastica.locallyMinimizing_scaling_iff_quadratic","file":"lean/Elastica/ScalingMinima.lean","line":127,"school":"Elastica","family":"pulse"},{"id":168,"name":"Elastica.exponentialWeight_scaling_of_density_factor","file":"lean/Elastica/ScalingMinima.lean","line":139,"school":"Elastica","family":"pulse"},{"id":169,"name":"Elastica.exponentialWeight_scaling_rescaled_parameter","file":"lean/Elastica/ScalingMinima.lean","line":151,"school":"Elastica","family":"pulse"},{"id":170,"name":"Elastica.hasDerivAt_weighted_integral_variation","file":"lean/Elastica/SecondVariation.lean","line":21,"school":"Elastica","family":"ward"},{"id":171,"name":"Elastica.hasDerivAt_energy_variation_at","file":"lean/Elastica/SecondVariation.lean","line":66,"school":"Elastica","family":"ward"},{"id":172,"name":"Elastica.hasDerivAt_deriv_energy_variation","file":"lean/Elastica/SecondVariation.lean","line":78,"school":"Elastica","family":"ward"},{"id":173,"name":"Elastica.secondVariation_energy","file":"lean/Elastica/SecondVariation.lean","line":94,"school":"Elastica","family":"ward"},{"id":174,"name":"Elastica.mixedVariation_energy","file":"lean/Elastica/SecondVariation.lean","line":102,"school":"Elastica","family":"ward"},{"id":175,"name":"Elastica.mixedVariation_energy_symmetric","file":"lean/Elastica/SecondVariation.lean","line":123,"school":"Elastica","family":"ward"},{"id":176,"name":"Elastica.exists_multipliers_of_kernel","file":"lean/Elastica/Stationary.lean","line":20,"school":"Elastica","family":"ward"},{"id":177,"name":"Elastica.stationary_multipliers","file":"lean/Elastica/Stationary.lean","line":94,"school":"Elastica","family":"ward"},{"id":178,"name":"Elastica.residual_zero_of_weighted_square_integral","file":"lean/Elastica/Stationary.lean","line":109,"school":"Elastica","family":"ward"},{"id":179,"name":"Elastica.firstVariation_by_parts","file":"lean/Elastica/Stationary.lean","line":125,"school":"Elastica","family":"ward"},{"id":180,"name":"Elastica.augmented_integral_eq_residual","file":"lean/Elastica/Stationary.lean","line":137,"school":"Elastica","family":"ward"},{"id":181,"name":"Elastica.residual_zero_of_augmented_stationary","file":"lean/Elastica/Stationary.lean","line":152,"school":"Elastica","family":"ward"},{"id":182,"name":"Elastica.augmented_stationary_of_residual_zero","file":"lean/Elastica/Stationary.lean","line":178,"school":"Elastica","family":"ward"},{"id":183,"name":"Elastica.augmented_stationary_iff_residual_zero","file":"lean/Elastica/Stationary.lean","line":200,"school":"Elastica","family":"ward"},{"id":184,"name":"Elastica.force_integral","file":"lean/Elastica/Stationary.lean","line":209,"school":"Elastica","family":"ward"},{"id":185,"name":"Elastica.angleEquation_of_stationary","file":"lean/Elastica/Stationary.lean","line":228,"school":"Elastica","family":"ward"},{"id":186,"name":"Elastica.stationary_of_angleEquation","file":"lean/Elastica/Stationary.lean","line":244,"school":"Elastica","family":"ward"},{"id":187,"name":"Elastica.stationary_iff_exists_angleEquation","file":"lean/Elastica/Stationary.lean","line":262,"school":"Elastica","family":"ward"},{"id":188,"name":"Elastica.cos_eq_one_of_xCoord_eq_length","file":"lean/Elastica/StraightConstraint.lean","line":24,"school":"Elastica","family":"ward"},{"id":189,"name":"Elastica.sin_eq_zero_of_xCoord_eq_length","file":"lean/Elastica/StraightConstraint.lean","line":41,"school":"Elastica","family":"ward"},{"id":190,"name":"Elastica.curvature_zero_of_xCoord_eq_length","file":"lean/Elastica/StraightConstraint.lean","line":52,"school":"Elastica","family":"ward"},{"id":191,"name":"Elastica.angle_eq_initial_of_xCoord_eq_length","file":"lean/Elastica/StraightConstraint.lean","line":71,"school":"Elastica","family":"ward"},{"id":192,"name":"Elastica.energy_eq_straight_of_xCoord_eq_length","file":"lean/Elastica/StraightConstraint.lean","line":82,"school":"Elastica","family":"ward"},{"id":193,"name":"Elastica.straight_is_global_minimum_on_horizontal_constraint","file":"lean/Elastica/StraightConstraint.lean","line":98,"school":"Elastica","family":"ward"},{"id":194,"name":"Elastica.straight_polynomial_hasDerivAt","file":"lean/Elastica/StraightConstraint.lean","line":106,"school":"Elastica","family":"ward"},{"id":195,"name":"Elastica.straight_polynomial_integral","file":"lean/Elastica/StraightConstraint.lean","line":116,"school":"Elastica","family":"ward"},{"id":196,"name":"Elastica.straight_polynomial_deriv_square_integral","file":"lean/Elastica/StraightConstraint.lean","line":133,"school":"Elastica","family":"ward"},{"id":197,"name":"Elastica.negative_quadratic_second_deriv","file":"lean/Elastica/StraightConstraint.lean","line":154,"school":"Elastica","family":"ward"},{"id":198,"name":"Elastica.straight_polynomial_variation_not_exactly_feasible","file":"lean/Elastica/StraightConstraint.lean","line":168,"school":"Elastica","family":"ward"},{"id":199,"name":"Elastica.straight_negative_secondVariation_counterexample","file":"lean/Elastica/StraightConstraint.lean","line":190,"school":"Elastica","family":"ward"},{"id":200,"name":"Elastica.deriv_angleVariation","file":"lean/Elastica/Variation.lean","line":32,"school":"Elastica","family":"edge"},{"id":201,"name":"Elastica.hasDerivAt_integral_variation","file":"lean/Elastica/Variation.lean","line":41,"school":"Elastica","family":"edge"},{"id":202,"name":"Elastica.hasDerivAt_energy_variation","file":"lean/Elastica/Variation.lean","line":83,"school":"Elastica","family":"edge"},{"id":203,"name":"Elastica.hasDerivAt_horizontal_variation","file":"lean/Elastica/Variation.lean","line":94,"school":"Elastica","family":"edge"},{"id":204,"name":"Elastica.hasDerivAt_vertical_variation","file":"lean/Elastica/Variation.lean","line":102,"school":"Elastica","family":"edge"},{"id":205,"name":"Elastica.powerLog_zero_exponentialWeight","file":"lean/Elastica/WeightResponse.lean","line":15,"school":"Elastica","family":"pulse"},{"id":206,"name":"Elastica.tendsto_powerLog_exponentialWeight_zero","file":"lean/Elastica/WeightResponse.lean","line":21,"school":"Elastica","family":"pulse"},{"id":207,"name":"Elastica.hasDerivAt_powerLog_exp_neg_mul","file":"lean/Elastica/WeightResponse.lean","line":28,"school":"Elastica","family":"edge"},{"id":208,"name":"Elastica.strictAnti_powerLog_exp_neg_mul","file":"lean/Elastica/WeightResponse.lean","line":45,"school":"Elastica","family":"pulse"},{"id":209,"name":"Elastica.energy_le_iff_powerLog_exponentialWeight_le","file":"lean/Elastica/WeightResponse.lean","line":57,"school":"Elastica","family":"pulse"},{"id":210,"name":"Elastica.locallyMinimizing_iff_powerLog_weight_local_maximum","file":"lean/Elastica/WeightResponse.lean","line":66,"school":"Elastica","family":"pulse"},{"id":211,"name":"Elastica.hasDerivAt_powerLog_weight_variation","file":"lean/Elastica/WeightResponse.lean","line":80,"school":"Elastica","family":"edge"},{"id":212,"name":"Elastica.powerLog_weight_variation_stationary_iff","file":"lean/Elastica/WeightResponse.lean","line":94,"school":"Elastica","family":"ward"},{"id":213,"name":"Elastica.powerLog_exponentialWeight_split","file":"lean/Elastica/WeightResponse.lean","line":106,"school":"Elastica","family":"pulse"},{"id":214,"name":"LinearInputDesign.scalar_gap","file":"linear_input/lean_check/Design.lean","line":30,"school":"LinearInput","family":"pulse"},{"id":215,"name":"LinearInputDesign.energy_gap","file":"linear_input/lean_check/Design.lean","line":36,"school":"LinearInput","family":"pulse"},{"id":216,"name":"LinearInputDesign.globalMin_of_margin","file":"linear_input/lean_check/Design.lean","line":45,"school":"LinearInput","family":"vigor"},{"id":217,"name":"LinearInputDesign.margin_of_globalMin","file":"linear_input/lean_check/Design.lean","line":55,"school":"LinearInput","family":"vigor"},{"id":218,"name":"LinearInputDesign.globalMin_iff_margin","file":"linear_input/lean_check/Design.lean","line":87,"school":"LinearInput","family":"vigor"},{"id":219,"name":"LinearInputDesign.quadratic_gap_bound","file":"linear_input/lean_check/Design.lean","line":92,"school":"LinearInput","family":"vigor"},{"id":220,"name":"LinearInputDesign.unique_of_margin_pos","file":"linear_input/lean_check/Design.lean","line":100,"school":"LinearInput","family":"vigor"},{"id":221,"name":"LinearInputDesign.equal_energy_iff_of_margin_zero","file":"linear_input/lean_check/Design.lean","line":119,"school":"LinearInput","family":"pulse"},{"id":222,"name":"LinearInputDesign.squared_position_error","file":"linear_input/lean_check/Design.lean","line":152,"school":"LinearInput","family":"strike"},{"id":223,"name":"LinearInputDesign.position_error","file":"linear_input/lean_check/Design.lean","line":162,"school":"LinearInput","family":"strike"},{"id":224,"name":"LinearInputObservation.input_shift","file":"linear_input/lean_check/Observation.lean","line":19,"school":"LinearInput","family":"probe"},{"id":225,"name":"LinearInputObservation.recover_coordinate","file":"linear_input/lean_check/Observation.lean","line":24,"school":"LinearInput","family":"probe"},{"id":226,"name":"LinearInputObservation.recover_zero_input_energy","file":"linear_input/lean_check/Observation.lean","line":31,"school":"LinearInput","family":"probe"},{"id":227,"name":"LinearInputObservation.pair_suffices","file":"linear_input/lean_check/Observation.lean","line":38,"school":"LinearInput","family":"probe"},{"id":228,"name":"LinearInputObservation.all_inputs_iff_pair","file":"linear_input/lean_check/Observation.lean","line":43,"school":"LinearInput","family":"probe"},{"id":229,"name":"LinearInputObservation.two_inputs_iff_pair","file":"linear_input/lean_check/Observation.lean","line":55,"school":"LinearInput","family":"probe"},{"id":230,"name":"LinearInputObservation.summary_decodes_pair","file":"linear_input/lean_check/Observation.lean","line":75,"school":"LinearInput","family":"probe"},{"id":231,"name":"LinearInputObservation.pair_decodes_all","file":"linear_input/lean_check/Observation.lean","line":84,"school":"LinearInput","family":"probe"},{"id":232,"name":"LinearInputObservation.recovery_error_identity","file":"linear_input/lean_check/Observation.lean","line":93,"school":"LinearInput","family":"probe"},{"id":233,"name":"LinearInputObservation.recovery_error_bound","file":"linear_input/lean_check/Observation.lean","line":102,"school":"LinearInput","family":"probe"},{"id":234,"name":"LinearInputObservation.minimizer_monotone","file":"linear_input/lean_check/Observation.lean","line":111,"school":"LinearInput","family":"probe"},{"id":235,"name":"LinearInputCalculus.hasDerivAt_potential","file":"linear_input/lean_check/Calculus.lean","line":19,"school":"LinearInput","family":"edge"},{"id":236,"name":"LinearInputCalculus.deriv_potential","file":"linear_input/lean_check/Calculus.lean","line":27,"school":"LinearInput","family":"edge"},{"id":237,"name":"LinearInputCalculus.stationary_iff_input","file":"linear_input/lean_check/Calculus.lean","line":31,"school":"LinearInput","family":"ward"},{"id":238,"name":"LinearInputCalculus.global_minimum_forces_input","file":"linear_input/lean_check/Calculus.lean","line":36,"school":"LinearInput","family":"ward"},{"id":239,"name":"LinearInputCalculus.critical_value","file":"linear_input/lean_check/Calculus.lean","line":44,"school":"LinearInput","family":"strike"},{"id":240,"name":"LinearInputCalculus.critical_value_le","file":"linear_input/lean_check/Calculus.lean","line":50,"school":"LinearInput","family":"strike"},{"id":241,"name":"LinearInputCalculus.critical_value_below_target","file":"linear_input/lean_check/Calculus.lean","line":64,"school":"LinearInput","family":"strike"},{"id":242,"name":"LinearInputCalculus.positive_target_counterexample","file":"linear_input/lean_check/Calculus.lean","line":70,"school":"LinearInput","family":"pulse"},{"id":243,"name":"LinearInputConsequences.global_minimum_forces_design","file":"linear_input/lean_check/Consequences.inc","line":9,"school":"LinearInput","family":"ward"},{"id":244,"name":"LinearInputConsequences.global_minimum_iff_input_and_margin","file":"linear_input/lean_check/Consequences.inc","line":19,"school":"LinearInput","family":"ward"},{"id":245,"name":"LinearInputConsequences.exists_input_global_minimum_iff","file":"linear_input/lean_check/Consequences.inc","line":33,"school":"LinearInput","family":"ward"},{"id":246,"name":"LinearInputCoercivity.continuous_energy","file":"linear_input/lean_check/Coercivity.inc","line":19,"school":"LinearInput","family":"ward"},{"id":247,"name":"LinearInputCoercivity.coercive_identity","file":"linear_input/lean_check/Coercivity.inc","line":25,"school":"LinearInput","family":"ward"},{"id":248,"name":"LinearInputCoercivity.coercive_lower_bound","file":"linear_input/lean_check/Coercivity.inc","line":33,"school":"LinearInput","family":"ward"},{"id":249,"name":"LinearInputCoercivity.isCompact_sublevel","file":"linear_input/lean_check/Coercivity.inc","line":41,"school":"LinearInput","family":"ward"},{"id":250,"name":"LinearInputCoercivity.isCompact_band","file":"linear_input/lean_check/Coercivity.inc","line":82,"school":"LinearInput","family":"ward"},{"id":251,"name":"LinearInputCoercivity.exists_global_minimum","file":"linear_input/lean_check/Coercivity.inc","line":89,"school":"LinearInput","family":"ward"},{"id":252,"name":"LinearInputGradient.hasDerivAt_E_x","file":"linear_input/lean_check/Gradient.inc","line":18,"school":"LinearInput","family":"edge"},{"id":253,"name":"LinearInputGradient.hasDerivAt_E_y","file":"linear_input/lean_check/Gradient.inc","line":29,"school":"LinearInput","family":"edge"},{"id":254,"name":"LinearInputGradient.hasDerivAt_E_input","file":"linear_input/lean_check/Gradient.inc","line":36,"school":"LinearInput","family":"edge"},{"id":255,"name":"LinearInputGradient.deriv_E_x","file":"linear_input/lean_check/Gradient.inc","line":43,"school":"LinearInput","family":"edge"},{"id":256,"name":"LinearInputGradient.deriv_E_y","file":"linear_input/lean_check/Gradient.inc","line":47,"school":"LinearInput","family":"edge"},{"id":257,"name":"LinearInputGradient.stationary_iff","file":"linear_input/lean_check/Gradient.inc","line":51,"school":"LinearInput","family":"ward"},{"id":258,"name":"LinearInputGradient.partials_zero_iff","file":"linear_input/lean_check/Gradient.inc","line":68,"school":"LinearInput","family":"edge"},{"id":259,"name":"LinearInputGradient.stationary_value_le","file":"linear_input/lean_check/Gradient.inc","line":74,"school":"LinearInput","family":"ward"},{"id":260,"name":"LinearInputGradient.no_stationary_on_band","file":"linear_input/lean_check/Gradient.inc","line":82,"school":"LinearInput","family":"ward"},{"id":261,"name":"LinearInputGradient.gSq_nonneg","file":"linear_input/lean_check/Gradient.inc","line":89,"school":"LinearInput","family":"edge"},{"id":262,"name":"LinearInputGradient.gSq_eq_zero_iff","file":"linear_input/lean_check/Gradient.inc","line":93,"school":"LinearInput","family":"edge"},{"id":263,"name":"LinearInputGradient.gSq_pos_on_band","file":"linear_input/lean_check/Gradient.inc","line":103,"school":"LinearInput","family":"edge"},{"id":264,"name":"LinearInputGradient.continuous_E","file":"linear_input/lean_check/Gradient.inc","line":113,"school":"LinearInput","family":"edge"},{"id":265,"name":"LinearInputGradient.continuous_gSq","file":"linear_input/lean_check/Gradient.inc","line":120,"school":"LinearInput","family":"edge"},{"id":266,"name":"LinearInputGradient.hasDerivAt_energy_curve","file":"linear_input/lean_check/Gradient.inc","line":128,"school":"LinearInput","family":"edge"},{"id":267,"name":"LinearInputGradient.hasDerivAt_energy_of_velocity","file":"linear_input/lean_check/Gradient.inc","line":143,"school":"LinearInput","family":"edge"},{"id":268,"name":"LinearInputGradient.hasDerivAt_energy_fixed_input","file":"linear_input/lean_check/Gradient.inc","line":160,"school":"LinearInput","family":"edge"},{"id":269,"name":"LinearInputGradient.hasDerivAt_squared_gap_fixed_input","file":"linear_input/lean_check/Gradient.inc","line":176,"school":"LinearInput","family":"edge"},{"id":270,"name":"LinearInputDissipation.exponential_bound","file":"linear_input/lean_check/Dissipation.lean","line":17,"school":"LinearInput","family":"pulse"},{"id":271,"name":"LinearInputDissipation.squared_error_exponential","file":"linear_input/lean_check/Dissipation.lean","line":48,"school":"LinearInput","family":"pulse"},{"id":272,"name":"LinearInputDissipation.squared_error_tendsto_zero","file":"linear_input/lean_check/Dissipation.lean","line":68,"school":"LinearInput","family":"pulse"},{"id":273,"name":"LinearInputDissipation.error_tendsto_zero","file":"linear_input/lean_check/Dissipation.lean","line":86,"school":"LinearInput","family":"pulse"},{"id":274,"name":"LinearInputRegularBand.band_nonempty","file":"linear_input/lean_check/RegularBand.inc","line":10,"school":"LinearInput","family":"strike"},{"id":275,"name":"LinearInputRegularBand.exists_positive_gradient_bound","file":"linear_input/lean_check/RegularBand.inc","line":23,"school":"LinearInput","family":"edge"},{"id":276,"name":"LinearInputRegularBand.exists_valley_global_minimum","file":"linear_input/lean_check/RegularBand.inc","line":33,"school":"LinearInput","family":"ward"},{"id":277,"name":"LinearInputRegularBand.exists_minimizing_stationary_root","file":"linear_input/lean_check/RegularBand.inc","line":43,"school":"LinearInput","family":"ward"},{"id":278,"name":"LinearInputRegularBand.exists_unique_global_minimum_of_input_ne_zero","file":"linear_input/lean_check/RegularBand.inc","line":51,"school":"LinearInput","family":"ward"},{"id":279,"name":"LinearInputRegularBand.hasDerivAt_gap_of_trajectory","file":"linear_input/lean_check/RegularBand.inc","line":82,"school":"LinearInput","family":"edge"},{"id":280,"name":"LinearInputRegularBand.energy_convergence_in_band","file":"linear_input/lean_check/RegularBand.inc","line":91,"school":"LinearInput","family":"pulse"},{"id":281,"name":"LinearInputInvariance.squared_error_antitone","file":"linear_input/lean_check/Invariance.inc","line":11,"school":"LinearInput","family":"vigor"},{"id":282,"name":"LinearInputInvariance.error_nonneg","file":"linear_input/lean_check/Invariance.inc","line":31,"school":"LinearInput","family":"vigor"},{"id":283,"name":"LinearInputInvariance.error_le_initial","file":"linear_input/lean_check/Invariance.inc","line":47,"school":"LinearInput","family":"vigor"},{"id":284,"name":"LinearInputInvariance.energy_band_of_trajectory","file":"linear_input/lean_check/Invariance.inc","line":58,"school":"LinearInput","family":"pulse"},{"id":285,"name":"LinearInputInvariance.energy_convergence_of_initial","file":"linear_input/lean_check/Invariance.inc","line":78,"school":"LinearInput","family":"pulse"},{"id":286,"name":"LinearInputCurvatureBridge.energy_shear","file":"linear_input/lean_check/CurvatureBridge.inc","line":14,"school":"LinearInput","family":"edge"},{"id":287,"name":"LinearInputCurvatureBridge.gy_shear","file":"linear_input/lean_check/CurvatureBridge.inc","line":20,"school":"LinearInput","family":"edge"},{"id":288,"name":"LinearInputCurvatureBridge.gx_shear","file":"linear_input/lean_check/CurvatureBridge.inc","line":24,"school":"LinearInput","family":"edge"},{"id":289,"name":"LinearInputCurvatureBridge.forced_phase_hasDerivAt","file":"linear_input/lean_check/CurvatureBridge.inc","line":34,"school":"LinearInput","family":"edge"},{"id":290,"name":"LinearInputCurvatureBridge.phase_hasDerivAt","file":"linear_input/lean_check/CurvatureBridge.inc","line":54,"school":"LinearInput","family":"edge"},{"id":291,"name":"LinearInputCurvatureBridge.forced_curvature_of_phase","file":"linear_input/lean_check/CurvatureBridge.inc","line":65,"school":"LinearInput","family":"edge"},{"id":292,"name":"LinearInputCurvatureBridge.forced_energy_hasDerivAt_zero","file":"linear_input/lean_check/CurvatureBridge.inc","line":80,"school":"LinearInput","family":"edge"},{"id":293,"name":"LinearInputCurvatureBridge.energy_hasDerivAt_zero","file":"linear_input/lean_check/CurvatureBridge.inc","line":89,"school":"LinearInput","family":"edge"},{"id":294,"name":"LinearInputCurvatureBridge.forced_energy_constant","file":"linear_input/lean_check/CurvatureBridge.inc","line":97,"school":"LinearInput","family":"edge"},{"id":295,"name":"LinearInputCurvatureBridge.energy_constant","file":"linear_input/lean_check/CurvatureBridge.inc","line":110,"school":"LinearInput","family":"edge"},{"id":296,"name":"LinearInputVariationalBridge.energy_linear_density","file":"linear_input/lean_check/VariationalBridge.inc","line":18,"school":"LinearInput","family":"edge"},{"id":297,"name":"LinearInputVariationalBridge.stationary_linear_density_iff","file":"linear_input/lean_check/VariationalBridge.inc","line":27,"school":"LinearInput","family":"ward"},{"id":298,"name":"LinearInputVariationalBridge.locallyMinimizing_linear_density_iff","file":"linear_input/lean_check/VariationalBridge.inc","line":35,"school":"LinearInput","family":"edge"},{"id":299,"name":"LinearInputVariationalBridge.stationary_quadratic_curvature","file":"linear_input/lean_check/VariationalBridge.inc","line":44,"school":"LinearInput","family":"ward"},{"id":300,"name":"LinearInputVariationalBridge.stationary_quadratic_phase_energy","file":"linear_input/lean_check/VariationalBridge.inc","line":57,"school":"LinearInput","family":"ward"},{"id":301,"name":"LinearInputVariationalBridge.locallyMinimizing_linear_quadratic_phase_energy","file":"linear_input/lean_check/VariationalBridge.inc","line":78,"school":"LinearInput","family":"edge"},{"id":302,"name":"LinearInputFeedback.feedback_rate","file":"linear_input/lean_check/Feedback.inc","line":12,"school":"LinearInput","family":"pulse"},{"id":303,"name":"LinearInputFeedback.feedback_coefficient","file":"linear_input/lean_check/Feedback.inc","line":19,"school":"LinearInput","family":"pulse"},{"id":304,"name":"LinearInputFeedback.decomposition_of_rate","file":"linear_input/lean_check/Feedback.inc","line":27,"school":"LinearInput","family":"pulse"},{"id":305,"name":"LinearInputFeedback.rate_iff_exists_unique_feedback","file":"linear_input/lean_check/Feedback.inc","line":43,"school":"LinearInput","family":"pulse"},{"id":306,"name":"LinearInputFeedback.zero_gradient_rate","file":"linear_input/lean_check/Feedback.inc","line":61,"school":"LinearInput","family":"edge"},{"id":307,"name":"LinearInputFeedback.zero_gradient_feedback_iff","file":"linear_input/lean_check/Feedback.inc","line":66,"school":"LinearInput","family":"edge"},{"id":308,"name":"LinearInputFeedback.zero_gradient_counterexample","file":"linear_input/lean_check/Feedback.inc","line":73,"school":"LinearInput","family":"edge"},{"id":309,"name":"LinearInputFeedback.energy_rate_iff_exists_unique_feedback","file":"linear_input/lean_check/Feedback.inc","line":81,"school":"LinearInput","family":"pulse"},{"id":310,"name":"LinearInputFeedback.hasDerivAt_energy_iff_exists_unique_feedback","file":"linear_input/lean_check/Feedback.inc","line":92,"school":"LinearInput","family":"edge"},{"id":311,"name":"LinearInputFeedback.energy_rate_iff_exists_unique_feedback_on_band","file":"linear_input/lean_check/Feedback.inc","line":116,"school":"LinearInput","family":"pulse"},{"id":312,"name":"LinearInputConstraints.exists_three_multipliers_of_kernel","file":"linear_input/lean_check/Constraints.inc","line":10,"school":"LinearInput","family":"ward"},{"id":313,"name":"LinearInputAreaVariation.hasDerivAt_parameter_integral","file":"linear_input/lean_check/AreaVariation.inc","line":21,"school":"LinearInput","family":"ward"},{"id":314,"name":"LinearInputAreaVariation.continuous_primitive_parameter","file":"linear_input/lean_check/AreaVariation.inc","line":43,"school":"LinearInput","family":"ward"},{"id":315,"name":"LinearInputAreaVariation.hasDerivAt_xCoord_variation","file":"linear_input/lean_check/AreaVariation.inc","line":51,"school":"LinearInput","family":"ward"},{"id":316,"name":"LinearInputAreaVariation.hasDerivAt_yCoord_variation","file":"linear_input/lean_check/AreaVariation.inc","line":66,"school":"LinearInput","family":"ward"},{"id":317,"name":"LinearInputAreaVariation.continuous_moment","file":"linear_input/lean_check/AreaVariation.inc","line":81,"school":"LinearInput","family":"ward"},{"id":318,"name":"LinearInputAreaVariation.hasDerivAt_area_variation_raw","file":"linear_input/lean_check/AreaVariation.inc","line":90,"school":"LinearInput","family":"ward"},{"id":319,"name":"LinearInputAreaVariation.area_variation_integral_eq","file":"linear_input/lean_check/AreaVariation.inc","line":138,"school":"LinearInput","family":"ward"},{"id":320,"name":"LinearInputAreaVariation.hasDerivAt_area_variation","file":"linear_input/lean_check/AreaVariation.inc","line":211,"school":"LinearInput","family":"ward"},{"id":321,"name":"LinearInputAreaVariation.hasDerivAt_area_variation_feasible","file":"linear_input/lean_check/AreaVariation.inc","line":221,"school":"LinearInput","family":"ward"},{"id":322,"name":"LinearInputPressureCurvature.pressure_firstIntegral_hasDerivAt","file":"linear_input/lean_check/PressureCurvature.inc","line":18,"school":"LinearInput","family":"edge"},{"id":323,"name":"LinearInputPressureCurvature.pressure_angleForce_hasDerivAt","file":"linear_input/lean_check/PressureCurvature.inc","line":41,"school":"LinearInput","family":"edge"},{"id":324,"name":"LinearInputPressureCurvature.pressure_angle_firstIntegral_curvature","file":"linear_input/lean_check/PressureCurvature.inc","line":57,"school":"LinearInput","family":"edge"},{"id":325,"name":"LinearInputPressureCurvature.pressure_angle_curvature","file":"linear_input/lean_check/PressureCurvature.inc","line":95,"school":"LinearInput","family":"edge"},{"id":326,"name":"LinearInputPressureCurvature.pressure_angle_phase_energy","file":"linear_input/lean_check/PressureCurvature.inc","line":108,"school":"LinearInput","family":"edge"},{"id":327,"name":"LinearInputPressureCurvature.pressure_angle_eq_phase_energy","file":"linear_input/lean_check/PressureCurvature.inc","line":135,"school":"LinearInput","family":"edge"},{"id":328,"name":"LinearInputPressureStationary.contDiff_xCoord","file":"linear_input/lean_check/PressureStationary.inc","line":15,"school":"LinearInput","family":"ward"},{"id":329,"name":"LinearInputPressureStationary.contDiff_yCoord","file":"linear_input/lean_check/PressureStationary.inc","line":24,"school":"LinearInput","family":"ward"},{"id":330,"name":"LinearInputPressureStationary.contDiff_area_weight","file":"linear_input/lean_check/PressureStationary.inc","line":34,"school":"LinearInput","family":"ward"},{"id":331,"name":"LinearInputPressureStationary.weighted_angleEquation_of_stationary","file":"linear_input/lean_check/PressureStationary.inc","line":42,"school":"LinearInput","family":"ward"},{"id":332,"name":"LinearInputPressureStationary.hasDerivAt_pressureEnergy_variation_feasible","file":"linear_input/lean_check/PressureStationary.inc","line":117,"school":"LinearInput","family":"ward"},{"id":333,"name":"LinearInputPressureStationary.stationary_iff_firstVariation","file":"linear_input/lean_check/PressureStationary.inc","line":135,"school":"LinearInput","family":"ward"},{"id":334,"name":"LinearInputPressureStationary.stationary_angleEquation","file":"linear_input/lean_check/PressureStationary.inc","line":166,"school":"LinearInput","family":"ward"},{"id":335,"name":"LinearInputPressureStationary.stationary_curvature","file":"linear_input/lean_check/PressureStationary.inc","line":180,"school":"LinearInput","family":"ward"},{"id":336,"name":"LinearInputPressureStationary.stationary_phase_energy","file":"linear_input/lean_check/PressureStationary.inc","line":194,"school":"LinearInput","family":"ward"},{"id":337,"name":"LinearInputPressureStationary.areaStationary_exists_pressure","file":"linear_input/lean_check/PressureStationary.inc","line":222,"school":"LinearInput","family":"ward"},{"id":338,"name":"LinearInputPressureStationary.areaStationary_phase_energy","file":"linear_input/lean_check/PressureStationary.inc","line":263,"school":"LinearInput","family":"ward"},{"id":339,"name":"LinearInputAreaRegularity.constraint_coefficients_zero","file":"linear_input/lean_check/AreaRegularity.inc","line":18,"school":"LinearInput","family":"ward"},{"id":340,"name":"LinearInputAreaRegularity.exists_normalized_constraint_directions","file":"linear_input/lean_check/AreaRegularity.inc","line":121,"school":"LinearInput","family":"ward"},{"id":341,"name":"LinearInputAreaRegularity.pressure_coefficient_unique","file":"linear_input/lean_check/AreaRegularity.inc","line":179,"school":"LinearInput","family":"ward"},{"id":342,"name":"LinearInputAreaRegularity.areaStationary_of_constant_curvature","file":"linear_input/lean_check/AreaRegularity.inc","line":197,"school":"LinearInput","family":"ward"},{"id":343,"name":"LinearInputAreaParameters.continuous_parameter_intervalIntegral","file":"linear_input/lean_check/AreaParameters.inc","line":21,"school":"LinearInput","family":"ward"},{"id":344,"name":"LinearInputAreaParameters.continuous_parameter_primitive","file":"linear_input/lean_check/AreaParameters.inc","line":28,"school":"LinearInput","family":"ward"},{"id":345,"name":"LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral_any","file":"linear_input/lean_check/AreaParameters.inc","line":36,"school":"LinearInput","family":"ward"},{"id":346,"name":"LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral","file":"linear_input/lean_check/AreaParameters.inc","line":59,"school":"LinearInput","family":"ward"},{"id":347,"name":"LinearInputAreaParameters.contDiff_two_parameter_intervalIntegral","file":"linear_input/lean_check/AreaParameters.inc","line":68,"school":"LinearInput","family":"ward"},{"id":348,"name":"LinearInputAreaParameters.hasFDerivAt_integral_linear_parameters","file":"linear_input/lean_check/AreaParameters.inc","line":91,"school":"LinearInput","family":"ward"},{"id":349,"name":"LinearInputAreaParameters.contDiff_two_integral_linear_parameters","file":"linear_input/lean_check/AreaParameters.inc","line":107,"school":"LinearInput","family":"ward"},{"id":350,"name":"LinearInputAreaParameters.continuous_smulRight_parameter","file":"linear_input/lean_check/AreaParameters.inc","line":135,"school":"LinearInput","family":"ward"},{"id":351,"name":"LinearInputAreaParameters.contDiff_two_integral_mul","file":"linear_input/lean_check/AreaParameters.inc","line":144,"school":"LinearInput","family":"ward"},{"id":352,"name":"LinearInputAreaParameters.contDiff_two_integral_primitive_mul","file":"linear_input/lean_check/AreaParameters.inc","line":172,"school":"LinearInput","family":"ward"},{"id":353,"name":"LinearInputAreaParameters.parameterLinear_apply","file":"linear_input/lean_check/AreaParameters.inc","line":240,"school":"LinearInput","family":"ward"},{"id":354,"name":"LinearInputAreaParameters.continuous_parameterLinear","file":"linear_input/lean_check/AreaParameters.inc","line":246,"school":"LinearInput","family":"ward"},{"id":355,"name":"LinearInputAreaParameters.contDiff_area_linear_parameters","file":"linear_input/lean_check/AreaParameters.inc","line":257,"school":"LinearInput","family":"ward"},{"id":356,"name":"LinearInputAreaParameters.contDiff_areaParameters","file":"linear_input/lean_check/AreaParameters.inc","line":283,"school":"LinearInput","family":"ward"},{"id":357,"name":"LinearInputAreaFamily.corrected_family_C1_close","file":"linear_input/lean_check/AreaFamily.inc","line":28,"school":"LinearInput","family":"ward"},{"id":358,"name":"LinearInputAreaFamily.hasDerivAt_corrected_energy_feasible","file":"linear_input/lean_check/AreaFamily.inc","line":92,"school":"LinearInput","family":"ward"},{"id":359,"name":"LinearInputAreaExactVariation.contDiff_constraintParameters","file":"linear_input/lean_check/AreaExactVariation.inc","line":25,"school":"LinearInput","family":"ward"},{"id":360,"name":"LinearInputAreaExactVariation.fderiv_constraintParameters_zero","file":"linear_input/lean_check/AreaExactVariation.inc","line":39,"school":"LinearInput","family":"ward"},{"id":361,"name":"LinearInputAreaExactVariation.integral_parameterLinear","file":"linear_input/lean_check/AreaExactVariation.inc","line":83,"school":"LinearInput","family":"ward"},{"id":362,"name":"LinearInputAreaExactVariation.exists_implicit_correction","file":"linear_input/lean_check/AreaExactVariation.inc","line":114,"school":"LinearInput","family":"ward"},{"id":363,"name":"LinearInputAreaExactVariation.exists_exact_area_variation","file":"linear_input/lean_check/AreaExactVariation.inc","line":137,"school":"LinearInput","family":"ward"},{"id":364,"name":"LinearInputAreaMinimum.locallyMinimizing_isLocalMin_corrected_family","file":"linear_input/lean_check/AreaMinimum.inc","line":29,"school":"LinearInput","family":"ward"},{"id":365,"name":"LinearInputAreaMinimum.locallyMinimizing_areaStationary","file":"linear_input/lean_check/AreaMinimum.inc","line":71,"school":"LinearInput","family":"ward"},{"id":366,"name":"LinearInputAreaMinimum.locallyMinimizing_existsUnique_pressure","file":"linear_input/lean_check/AreaMinimum.inc","line":102,"school":"LinearInput","family":"ward"},{"id":367,"name":"LinearInputAreaMinimum.locallyMinimizing_curvature","file":"linear_input/lean_check/AreaMinimum.inc","line":114,"school":"LinearInput","family":"ward"},{"id":368,"name":"LinearInputAreaMinimum.locallyMinimizing_phase_energy","file":"linear_input/lean_check/AreaMinimum.inc","line":127,"school":"LinearInput","family":"ward"},{"id":369,"name":"LinearInputStrictEnergy.error_eq_initial_mul_exp_integral","file":"linear_input/lean_check/StrictEnergy.inc","line":18,"school":"LinearInput","family":"pulse"},{"id":370,"name":"LinearInputStrictEnergy.error_pos","file":"linear_input/lean_check/StrictEnergy.inc","line":62,"school":"LinearInput","family":"pulse"},{"id":371,"name":"LinearInputStrictEnergy.continuousOn_gradient_coefficient","file":"linear_input/lean_check/StrictEnergy.inc","line":71,"school":"LinearInput","family":"edge"},{"id":372,"name":"LinearInputStrictEnergy.energy_gap_exact","file":"linear_input/lean_check/StrictEnergy.inc","line":82,"school":"LinearInput","family":"pulse"},{"id":373,"name":"LinearInputStrictEnergy.energy_eq_target_iff","file":"linear_input/lean_check/StrictEnergy.inc","line":93,"school":"LinearInput","family":"pulse"},{"id":374,"name":"LinearInputStrictEnergy.energy_strictly_above_target","file":"linear_input/lean_check/StrictEnergy.inc","line":102,"school":"LinearInput","family":"pulse"},{"id":375,"name":"LinearInputStrictEnergy.energy_deriv_neg","file":"linear_input/lean_check/StrictEnergy.inc","line":112,"school":"LinearInput","family":"edge"},{"id":376,"name":"LinearInputStrictEnergy.energy_strictAntiOn","file":"linear_input/lean_check/StrictEnergy.inc","line":128,"school":"LinearInput","family":"pulse"},{"id":377,"name":"LinearInputStrictEnergy.trajectory_injOn","file":"linear_input/lean_check/StrictEnergy.inc","line":142,"school":"LinearInput","family":"pulse"},{"id":378,"name":"LinearInputStrictEnergy.trajectory_no_return","file":"linear_input/lean_check/StrictEnergy.inc","line":155,"school":"LinearInput","family":"edge"},{"id":379,"name":"LinearInputStrictEnergy.trajectory_not_periodic","file":"linear_input/lean_check/StrictEnergy.inc","line":168,"school":"LinearInput","family":"pulse"},{"id":380,"name":"LinearInputStrictEnergy.error_eq_initial_mul_exp_integral_on_Icc","file":"linear_input/lean_check/StrictEnergy.inc","line":180,"school":"LinearInput","family":"pulse"},{"id":381,"name":"LinearInputStrictEnergy.energy_gap_exact_on_Icc","file":"linear_input/lean_check/StrictEnergy.inc","line":226,"school":"LinearInput","family":"pulse"},{"id":382,"name":"LinearInputGradientBound.reduced_energy_bound","file":"linear_input/lean_check/GradientBound.inc","line":14,"school":"LinearInput","family":"edge"},{"id":383,"name":"LinearInputGradientBound.energy_gradient_identity","file":"linear_input/lean_check/GradientBound.inc","line":22,"school":"LinearInput","family":"edge"},{"id":384,"name":"LinearInputGradientBound.gradient_linear_term_sq","file":"linear_input/lean_check/GradientBound.inc","line":31,"school":"LinearInput","family":"edge"},{"id":385,"name":"LinearInputGradientBound.explicit_gradient_bound_pos","file":"linear_input/lean_check/GradientBound.inc","line":47,"school":"LinearInput","family":"edge"},{"id":386,"name":"LinearInputGradientBound.explicit_gradient_bound","file":"linear_input/lean_check/GradientBound.inc","line":56,"school":"LinearInput","family":"edge"},{"id":387,"name":"LinearInputGradientBound.gradient_bound_of_initial","file":"linear_input/lean_check/GradientBound.inc","line":96,"school":"LinearInput","family":"edge"},{"id":388,"name":"LinearInputGradientBound.energy_error_exponential_of_initial","file":"linear_input/lean_check/GradientBound.inc","line":110,"school":"LinearInput","family":"edge"},{"id":389,"name":"LinearInputGradientBound.squared_error_exponential_of_initial","file":"linear_input/lean_check/GradientBound.inc","line":136,"school":"LinearInput","family":"edge"},{"id":390,"name":"LinearInputInternalUpdate.square_bound","file":"linear_input/lean_check/InternalUpdate.inc","line":13,"school":"LinearInput","family":"vigor"},{"id":391,"name":"LinearInputInternalUpdate.square_le_max","file":"linear_input/lean_check/InternalUpdate.inc","line":44,"school":"LinearInput","family":"strike"},{"id":392,"name":"LinearInputInternalUpdate.exists_forcing_bound","file":"linear_input/lean_check/InternalUpdate.inc","line":61,"school":"LinearInput","family":"vigor"},{"id":393,"name":"LinearInputInternalUpdate.internal_update_bounded","file":"linear_input/lean_check/InternalUpdate.inc","line":78,"school":"LinearInput","family":"vigor"},{"id":394,"name":"LinearInputTrajectoryExistence.contDiff_vectorField","file":"linear_input/lean_check/TrajectoryExistence.inc","line":23,"school":"LinearInput","family":"vigor"},{"id":395,"name":"LinearInputTrajectoryExistence.exists_local_solution","file":"linear_input/lean_check/TrajectoryExistence.inc","line":30,"school":"LinearInput","family":"vigor"},{"id":396,"name":"LinearInputTrajectoryExistence.local_solution_unique","file":"linear_input/lean_check/TrajectoryExistence.inc","line":39,"school":"LinearInput","family":"vigor"},{"id":397,"name":"LinearInputTrajectoryExistence.solution_unique_on_interval","file":"linear_input/lean_check/TrajectoryExistence.inc","line":53,"school":"LinearInput","family":"vigor"},{"id":398,"name":"LinearInputTrajectoryExistence.exists_local_unique_solution","file":"linear_input/lean_check/TrajectoryExistence.inc","line":89,"school":"LinearInput","family":"vigor"},{"id":399,"name":"LinearInputTrajectoryExistence.exists_local_solution_one_add_sq","file":"linear_input/lean_check/TrajectoryExistence.inc","line":105,"school":"LinearInput","family":"vigor"},{"id":400,"name":"LinearInputTrajectoryExistence.hasDerivAt_vectorField_iff","file":"linear_input/lean_check/TrajectoryExistence.inc","line":113,"school":"LinearInput","family":"edge"},{"id":401,"name":"LinearInputTrajectoryExistence.exists_local_coordinate_solution","file":"linear_input/lean_check/TrajectoryExistence.inc","line":130,"school":"LinearInput","family":"vigor"},{"id":402,"name":"LinearInputTrajectoryExistence.hasDerivAt_energy_of_solution","file":"linear_input/lean_check/TrajectoryExistence.inc","line":147,"school":"LinearInput","family":"edge"},{"id":403,"name":"LinearInputTrajectoryExistence.exists_local_solution_energy_formula","file":"linear_input/lean_check/TrajectoryExistence.inc","line":157,"school":"LinearInput","family":"pulse"},{"id":404,"name":"LinearInputTrajectoryExistence.isTrajectory_of_global_solution","file":"linear_input/lean_check/TrajectoryExistence.inc","line":183,"school":"LinearInput","family":"vigor"},{"id":405,"name":"LinearInputFiniteBand.error_band_on_Icc","file":"linear_input/lean_check/FiniteBand.inc","line":8,"school":"LinearInput","family":"strike"},{"id":406,"name":"LinearInputFiniteBand.energy_band_on_Icc","file":"linear_input/lean_check/FiniteBand.inc","line":23,"school":"LinearInput","family":"pulse"},{"id":407,"name":"LinearInputFiniteBand.energy_band_on_Ioo","file":"linear_input/lean_check/FiniteBand.inc","line":40,"school":"LinearInput","family":"pulse"},{"id":408,"name":"LinearInputCompactLocalExistence.exists_uniform_local_time","file":"linear_input/lean_check/CompactLocalExistence.inc","line":18,"school":"LinearInput","family":"ward"},{"id":409,"name":"LinearInputGlobalContinuation.local_unique","file":"linear_input/lean_check/GlobalContinuation.inc","line":15,"school":"LinearInput","family":"vigor"},{"id":410,"name":"LinearInputGlobalContinuation.unique_on_Ioo","file":"linear_input/lean_check/GlobalContinuation.inc","line":26,"school":"LinearInput","family":"vigor"},{"id":411,"name":"LinearInputGlobalContinuation.piecewise_eqOn","file":"linear_input/lean_check/GlobalContinuation.inc","line":62,"school":"LinearInput","family":"vigor"},{"id":412,"name":"LinearInputGlobalContinuation.hasDerivAt_piecewise","file":"linear_input/lean_check/GlobalContinuation.inc","line":82,"school":"LinearInput","family":"edge"},{"id":413,"name":"LinearInputGlobalContinuation.exists_arbitrarily_long_solution","file":"linear_input/lean_check/GlobalContinuation.inc","line":107,"school":"LinearInput","family":"vigor"},{"id":414,"name":"LinearInputGlobalContinuation.exists_forward_solution","file":"linear_input/lean_check/GlobalContinuation.inc","line":168,"school":"LinearInput","family":"vigor"},{"id":415,"name":"LinearInputGlobalTrajectory.exists_global_solution","file":"linear_input/lean_check/GlobalTrajectory.inc","line":11,"school":"LinearInput","family":"vigor"},{"id":416,"name":"LinearInputGlobalTrajectory.exists_global_coordinate_trajectory","file":"linear_input/lean_check/GlobalTrajectory.inc","line":43,"school":"LinearInput","family":"vigor"},{"id":417,"name":"LinearInputGlobalTrajectory.exists_global_solution_one_add_sq","file":"linear_input/lean_check/GlobalTrajectory.inc","line":56,"school":"LinearInput","family":"vigor"},{"id":418,"name":"LinearInputForwardUniqueness.solution_unique_on_Icc","file":"linear_input/lean_check/ForwardUniqueness.inc","line":22,"school":"LinearInput","family":"vigor"},{"id":419,"name":"LinearInputForwardUniqueness.solution_unique_on_Ici","file":"linear_input/lean_check/ForwardUniqueness.inc","line":48,"school":"LinearInput","family":"vigor"},{"id":420,"name":"LinearInputForwardUniqueness.feedback_solution_unique_on_Icc","file":"linear_input/lean_check/ForwardUniqueness.inc","line":59,"school":"LinearInput","family":"pulse"},{"id":421,"name":"LinearInputForwardUniqueness.feedback_solution_unique_on_Ici","file":"linear_input/lean_check/ForwardUniqueness.inc","line":70,"school":"LinearInput","family":"pulse"},{"id":422,"name":"LinearInputForwardUniqueness.coordinate_solution_unique_on_Ici","file":"linear_input/lean_check/ForwardUniqueness.inc","line":81,"school":"LinearInput","family":"vigor"},{"id":423,"name":"LinearInputGlobalConsequences.exists_global_convergent_solution","file":"linear_input/lean_check/GlobalConsequences.inc","line":10,"school":"LinearInput","family":"vigor"},{"id":424,"name":"LinearInputGlobalConsequences.exists_global_injective_convergent_solution","file":"linear_input/lean_check/GlobalConsequences.inc","line":35,"school":"LinearInput","family":"vigor"},{"id":425,"name":"LinearInputLevelGeometry.radial_gradient_lower_bound","file":"linear_input/lean_check/LevelGeometry.inc","line":14,"school":"LinearInput","family":"edge"},{"id":426,"name":"LinearInputLevelGeometry.radial_gradient_pos","file":"linear_input/lean_check/LevelGeometry.inc","line":25,"school":"LinearInput","family":"edge"},{"id":427,"name":"LinearInputLevelGeometry.quadratic_remainder_bound","file":"linear_input/lean_check/LevelGeometry.inc","line":30,"school":"LinearInput","family":"vigor"},{"id":428,"name":"LinearInputLevelGeometry.energy_outward_scaling","file":"linear_input/lean_check/LevelGeometry.inc","line":39,"school":"LinearInput","family":"pulse"},{"id":429,"name":"LinearInputLevelGeometry.energy_outward_strict","file":"linear_input/lean_check/LevelGeometry.inc","line":59,"school":"LinearInput","family":"pulse"},{"id":430,"name":"LinearInputLevelGeometry.existsUnique_positive_radius","file":"linear_input/lean_check/LevelGeometry.inc","line":67,"school":"LinearInput","family":"pulse"},{"id":431,"name":"LinearInputLevelGeometry.radius_pos","file":"linear_input/lean_check/LevelGeometry.inc","line":124,"school":"LinearInput","family":"vigor"},{"id":432,"name":"LinearInputLevelGeometry.radius_pos_of_energy","file":"linear_input/lean_check/LevelGeometry.inc","line":130,"school":"LinearInput","family":"pulse"},{"id":433,"name":"LinearInputLevelGeometry.direction_mem_circle","file":"linear_input/lean_check/LevelGeometry.inc","line":139,"school":"LinearInput","family":"vigor"},{"id":434,"name":"LinearInputLevelGeometry.radius_mul_direction","file":"linear_input/lean_check/LevelGeometry.inc","line":146,"school":"LinearInput","family":"vigor"},{"id":435,"name":"LinearInputLevelGeometry.direction_positive_scale","file":"linear_input/lean_check/LevelGeometry.inc","line":150,"school":"LinearInput","family":"pulse"},{"id":436,"name":"LinearInputLevelGeometry.direction_of_circle","file":"linear_input/lean_check/LevelGeometry.inc","line":159,"school":"LinearInput","family":"vigor"},{"id":437,"name":"LinearInputLevelGeometry.continuous_radius","file":"linear_input/lean_check/LevelGeometry.inc","line":163,"school":"LinearInput","family":"vigor"},{"id":438,"name":"LinearInputLevelGeometry.continuous_direction_subtype","file":"linear_input/lean_check/LevelGeometry.inc","line":165,"school":"LinearInput","family":"vigor"},{"id":439,"name":"LinearInputLevelGeometry.eq_of_direction_energy_eq","file":"linear_input/lean_check/LevelGeometry.inc","line":174,"school":"LinearInput","family":"pulse"},{"id":440,"name":"LinearInputFiniteInternalUpdate.exponential_bound_on_Icc","file":"linear_input/lean_check/FiniteInternalUpdate.inc","line":7,"school":"LinearInput","family":"pulse"},{"id":441,"name":"LinearInputFiniteInternalUpdate.square_bound_on_Icc","file":"linear_input/lean_check/FiniteInternalUpdate.inc","line":37,"school":"LinearInput","family":"vigor"},{"id":442,"name":"LinearInputFiniteInternalUpdate.abs_le_on_Icc","file":"linear_input/lean_check/FiniteInternalUpdate.inc","line":68,"school":"LinearInput","family":"strike"},{"id":443,"name":"LinearInputCoupledTrajectory.contDiff_vectorField","file":"linear_input/lean_check/CoupledTrajectory.inc","line":25,"school":"LinearInput","family":"vigor"},{"id":444,"name":"LinearInputCoupledTrajectory.hasDerivAt_internal","file":"linear_input/lean_check/CoupledTrajectory.inc","line":33,"school":"LinearInput","family":"edge"},{"id":445,"name":"LinearInputCoupledTrajectory.hasDerivAt_energy","file":"linear_input/lean_check/CoupledTrajectory.inc","line":43,"school":"LinearInput","family":"edge"},{"id":446,"name":"LinearInputCoupledTrajectory.energy_band_on_Icc","file":"linear_input/lean_check/CoupledTrajectory.inc","line":54,"school":"LinearInput","family":"pulse"},{"id":447,"name":"LinearInputCoupledTrajectory.isTrajectory_of_global_solution","file":"linear_input/lean_check/CoupledTrajectory.inc","line":75,"school":"LinearInput","family":"vigor"},{"id":448,"name":"LinearInputCoupledTrajectory.exists_internal_bounds","file":"linear_input/lean_check/CoupledTrajectory.inc","line":86,"school":"LinearInput","family":"vigor"},{"id":449,"name":"LinearInputCoupledTrajectory.band_box_on_Icc","file":"linear_input/lean_check/CoupledTrajectory.inc","line":107,"school":"LinearInput","family":"vigor"},{"id":450,"name":"LinearInputCoupledTrajectory.exists_global_solution","file":"linear_input/lean_check/CoupledTrajectory.inc","line":130,"school":"LinearInput","family":"vigor"},{"id":451,"name":"LinearInputCoupledTrajectory.solution_unique_on_Ici","file":"linear_input/lean_check/CoupledTrajectory.inc","line":190,"school":"LinearInput","family":"vigor"},{"id":452,"name":"LinearInputCoupledTrajectory.contDiff_finite_expansion","file":"linear_input/lean_check/CoupledTrajectory.inc","line":203,"school":"LinearInput","family":"pulse"},{"id":453,"name":"LinearInputCoupledTrajectory.exists_global_solution_one_add_sq","file":"linear_input/lean_check/CoupledTrajectory.inc","line":212,"school":"LinearInput","family":"vigor"},{"id":454,"name":"LinearInputLevelConvergence.bandRadius_nonneg","file":"linear_input/lean_check/LevelConvergence.inc","line":20,"school":"LinearInput","family":"vigor"},{"id":455,"name":"LinearInputLevelConvergence.norm_le_bandRadius","file":"linear_input/lean_check/LevelConvergence.inc","line":24,"school":"LinearInput","family":"vigor"},{"id":456,"name":"LinearInputLevelConvergence.target_level_nonempty","file":"linear_input/lean_check/LevelConvergence.inc","line":51,"school":"LinearInput","family":"vigor"},{"id":457,"name":"LinearInputLevelConvergence.exists_radial_target_point","file":"linear_input/lean_check/LevelConvergence.inc","line":60,"school":"LinearInput","family":"vigor"},{"id":458,"name":"LinearInputLevelConvergence.dist_radial_multiple","file":"linear_input/lean_check/LevelConvergence.inc","line":91,"school":"LinearInput","family":"vigor"},{"id":459,"name":"LinearInputLevelConvergence.exists_level_point_distance_bound","file":"linear_input/lean_check/LevelConvergence.inc","line":98,"school":"LinearInput","family":"vigor"},{"id":460,"name":"LinearInputLevelConvergence.infDist_level_bound","file":"linear_input/lean_check/LevelConvergence.inc","line":122,"school":"LinearInput","family":"vigor"},{"id":461,"name":"LinearInputLevelConvergence.spatial_error_exponential_of_initial","file":"linear_input/lean_check/LevelConvergence.inc","line":134,"school":"LinearInput","family":"pulse"},{"id":462,"name":"LinearInputLevelConvergence.spatial_convergence_of_initial","file":"linear_input/lean_check/LevelConvergence.inc","line":159,"school":"LinearInput","family":"vigor"},{"id":463,"name":"LinearInputCoupledConsequences.exists_global_convergent_solution","file":"linear_input/lean_check/CoupledConsequences.inc","line":11,"school":"LinearInput","family":"vigor"},{"id":464,"name":"LinearInputCoupledConsequences.exists_global_injective_convergent_solution","file":"linear_input/lean_check/CoupledConsequences.inc","line":53,"school":"LinearInput","family":"vigor"}]}
+</script>
+<script>
+"use strict";
+/* PRIMITIVE / ROGUE 465 — original 465 theorem catalog + 3 later world laws.
+ * Relic powers are game design, NOT mathematical corollaries of theorem names.
+ * The phone executes JS, not the Lean kernel; the provenance is test-audited. */
+(function(root,factory){
+  const api=factory();
+  if(typeof module==="object"&&module.exports)module.exports=api;
+  root.Rogue465=api;
+})(globalThis,function(){
+  const W=9,DEPTH=3,MAX_SLOTS=5;
+  const EDGES=[[0,4],[1,4],[4,5],[4,5],[5,2],[5,3]];
+  const DIRS=[[0,-1],[1,0],[0,1],[-1,0]];
+  const EFFECTS={
+    force:"攻撃 +",guard:"防御 +",focus:"観測打撃 +",charge:"最大気力 +",
+    vital:"最大生命 +",ripple:"衝撃波 +",siphon:"撃破回復 +",
+    pierce:"解析追撃 +",stride:"移動回復 +",luck:"撃破資金 +"
+  };
+  const FAMILY_EFFECTS={
+    probe:["focus","pierce","luck"],ward:["guard","vital","siphon"],
+    edge:["force","pierce","stride"],pulse:["ripple","charge","siphon"],
+    vigor:["vital","charge","luck"],strike:["force","pierce","ripple"]
+  };
+  let CATALOG=null;
+  function installCatalog(json){
+    if(!json||!Array.isArray(json.cards)||json.cards.length!==465)
+      throw Error("A catalog of exactly 465 baseline theorems is required");
+    if(json.counts?.elastica!==214||json.counts?.linearInput!==251||json.counts?.declarations!==509)
+      throw Error("Wrong initial theorem baseline");
+    const names=new Set(),ids=new Set();
+    for(const item of json.cards){
+      if(!item.name||names.has(item.name)||ids.has(item.id)||!FAMILY_EFFECTS[item.family])
+        throw Error("Invalid, duplicate, or untyped theorem card");
+      names.add(item.name);ids.add(item.id);
+    }
+    CATALOG=json.cards;return CATALOG.length;
+  }
+  function catalog(){if(!CATALOG)throw Error("installCatalog first");return CATALOG;}
+  function hash(a){const str=String(a);let x=2166136261;
+    for(let i=0;i<str.length;i++)x=Math.imul(x^str.charCodeAt(i),16777619);
+    return x>>>0;}
+  function randStream(seed){let v=hash(seed)|0;return function(n){
+    v^=v<<13;v^=v>>>17;v^=v<<5;return (v>>>0)%n;};}
+  function theorem(id){const card=catalog()[id];if(!card)throw Error("invalid theorem id");return card;}
+  function relic(id){const t=theorem(id),x=hash(t.name),pool=FAMILY_EFFECTS[t.family];
+    const type=pool[x%pool.length],power=1+((x>>>14)%2);
+    return {...t,effect:type,power,description:EFFECTS[type]+(type==="vital"?power*2:power)};}
+  function stats(s){const buff={force:0,guard:0,focus:0,charge:0,vital:0,ripple:0,siphon:0,pierce:0,stride:0,luck:0};
+    for(const id of s.equipment){const item=relic(id);buff[item.effect]+=item.power;}
+    return {buff,maxHp:18+2*buff.vital,maxEnergy:5+buff.charge,
+      attack:2+buff.force,armor:Math.min(2,buff.guard),spell:2+buff.ripple};}
+  function key(depth,v,layer){return depth+":"+v+":"+layer;}
+  function roomKey(s){return key(s.depth,s.vertex,s.layer);}
+  function current(s){return s.rooms[roomKey(s)];}
+  function tile(x,y){return y*W+x;}
+  function inside(x,y){return Number.isInteger(x)&&Number.isInteger(y)&&x>0&&x<W-1&&y>0&&y<W-1;}
+  function free(room,x,y){return inside(x,y)&&room.map[tile(x,y)]===0;}
+  function manhattan(a,b){return Math.abs(a.x-b.x)+Math.abs(a.y-b.y);}
+  function living(room){return room.enemies.filter(e=>e.hp>0);}
+  function hasEnemies(s){return living(current(s)).length>0;}
+  function roomSeed(s,v,layer){return s.seed+":depth"+s.depth+":room"+v+":layer"+layer;}
+  function rule481(c,n,e,so,w){const score=c+2*(n+e+so+w);
+    return (score===0||score===5||score===6||score===7||score===8)?1:0;}
+  function sporesNext(before){const at=(x,y)=>before[((y+W)%W)*W+((x+W)%W)];
+    return before.map((_,i)=>{const x=i%W,y=Math.floor(i/W);
+      return rule481(at(x,y),at(x,y-1),at(x+1,y),at(x,y+1),at(x-1,y));});}
+  function enemyType(v,depth,index,rng){
+    const types=["moth","guard","stalker"],kind=types[(rng(997)+v+index+depth)%3];
+    const hp=kind==="guard"?5+2*depth:kind==="stalker"?4+depth:3+depth;
+    return {id:index,kind,x:1,y:1,hp,maxHp:hp,attack:kind==="guard"?2:1,
+      scanned:false,windup:false,weakness:rng(5)-2};}
+  function generateRoom(s,v,layer){
+    const rng=randStream(roomSeed(s,v,layer));
+    const map=Array.from({length:W*W},(_,i)=>inside(i%W,Math.floor(i/W))?0:1);
+    for(const [x,y] of [[2,2],[6,2],[2,6],[6,6],[3,3],[5,5]])
+      if(rng(3)===0)map[tile(x,y)]=1;
+    const sand=map.map(wall=>wall?0:rng(4));
+    const sporeRoom=s.depth>1&&(v===2||v===3||v===5);
+    const spores=sporeRoom?map.map(wall=>wall?0:Number(rng(13)===0)):null;
+    const entry=s.depth===1&&v===0&&layer===0;
+    const boss=s.depth===DEPTH&&v===3&&layer===1;
+    const count=entry?0:boss?1:1+(s.depth>1?1:0)+(rng(4)===0?1:0);
+    const positions=[[1,1],[7,7],[7,1],[1,7],[1,4],[7,4],[4,1],[4,7],[3,6],[6,3]];
+    const enemies=[];
+    if(boss){enemies.push({id:0,kind:"warden",x:6,y:6,hp:22,maxHp:22,attack:3,
+        weakness:1,scanned:false,windup:false});}
+    else for(let i=0;i<count;i++){
+      const foe=enemyType(v,s.depth,i,rng);
+      let pos=positions[(i*3+rng(positions.length))%positions.length];
+      if(!free({map},pos[0],pos[1])||enemies.some(e=>e.x===pos[0]&&e.y===pos[1]))
+        pos=positions.find(p=>free({map},p[0],p[1])&&!enemies.some(e=>e.x===p[0]&&e.y===p[1]))||[1,1];
+      foe.x=pos[0];foe.y=pos[1];enemies.push(foe);
+    }
+    return {map,sand,spores,enemies,claimed:false,lastFired:[],topples:0,entries:0,boss};
+  }
+  function append(s,message){s.log.unshift(message);if(s.log.length>14)s.log.length=14;return s;}
+  function offer(s){
+    if(s.offer||s.status!=="play")return;
+    const selected=new Set(s.equipment),opts=[];
+    const random=randStream(roomKey(s)+":"+s.seed+":"+s.turn+":"+(s.offersMade++));
+    let attempts=0;
+    while(opts.length<3&&attempts++<10000){
+      const id=random(465);
+      if(!selected.has(id)){selected.add(id);opts.push(id);}
+    }
+    if(opts.length!==3)throw Error("unable to choose three relics");
+    s.offer=opts;append(s,"定理遺物を発見。3つから1つを選ぶ。");
+  }
+  function newGame(seed=4271){
+    catalog();const s={seed:seed>>>0,depth:1,vertex:0,layer:0,sign:[0,0,0,0,0,0],
+      rooms:{},hero:{x:4,y:4,hp:18,energy:5,insight:0,coins:0,kills:0,input:1,curve:0,heading:null},
+      equipment:[],offer:null,offersMade:0,turn:0,status:"play",log:[],
+      scans:0,topplings:0,roomsCleared:0,score:0};
+    s.rooms[roomKey(s)]=generateRoom(s,0,0);current(s).entries++;
+    offer(s);append(s,"目標：層1の右端へ進み、3階層目の番人を倒す。");
+    return s;
+  }
+  function withClone(s){return JSON.parse(JSON.stringify(s));}
+  function selectRelic(state,id,slot=0){
+    if(!state.offer||!state.offer.includes(id)||state.status!=="play")return state;
+    const s=withClone(state),before=stats(s);
+    if(s.equipment.length<MAX_SLOTS)s.equipment.push(id);
+    else{if(!Number.isInteger(slot)||slot<0||slot>=MAX_SLOTS)return state;s.equipment[slot]=id;}
+    const after=stats(s);
+    s.hero.hp=Math.min(after.maxHp,s.hero.hp+Math.max(0,after.maxHp-before.maxHp));
+    s.hero.energy=Math.min(after.maxEnergy,s.hero.energy+Math.max(0,after.maxEnergy-before.maxEnergy));
+    s.offer=null;current(s).claimed=true;
+    append(s,"取得："+relic(id).name+" ／ "+relic(id).description);
+    return s;
+  }
+  function moveOne(e,room,hero){
+    const blocked=new Set(living(room).filter(x=>x!==e).map(x=>tile(x.x,x.y)));
+    const src=tile(e.x,e.y),dest=tile(hero.x,hero.y),queue=[src],parent=Array(W*W).fill(-1);
+    parent[src]=src;
+    for(let i=0;i<queue.length;i++){
+      const node=queue[i];if(node===dest)break;const x=node%W,y=Math.floor(node/W);
+      for(const [dx,dy] of DIRS){
+        const nx=x+dx,ny=y+dy;
+        if(!free(room,nx,ny))continue;
+        const nb=tile(nx,ny);if(parent[nb]!==-1||blocked.has(nb))continue;
+        parent[nb]=node;queue.push(nb);
+      }
+    }
+    if(parent[dest]===-1)return;
+    let x=dest;while(parent[x]!==src&&x!==src)x=parent[x];
+    const nx=x%W,ny=Math.floor(x/W);
+    if(nx!==hero.x||ny!==hero.y){e.x=nx;e.y=ny;}
+  }
+  function die(s){if(s.hero.hp<=0){s.hero.hp=0;s.status="dead";append(s,"冒険はここで終わった。遺物も失われる。");}}
+  function recordKill(s,e){
+    if(e.hp>0||e.rewarded)return;e.rewarded=true;
+    const b=stats(s).buff;s.hero.kills++;s.hero.insight++;
+    s.hero.coins+=2+b.luck;s.hero.energy=Math.min(stats(s).maxEnergy,s.hero.energy+1);
+    s.hero.hp=Math.min(stats(s).maxHp,s.hero.hp+Math.min(2,b.siphon));
+    append(s,(e.kind==="warden"?"番人":"敵")+"を倒した。洞察+1。");
+  }
+  function avalanche(s,idx,amount){
+    const room=current(s);room.sand[idx]+=amount;const firings=Array(W*W).fill(0);
+    let rounds=0;
+    for(;rounds<512;rounds++){
+      const active=[];for(let i=0;i<W*W;i++)
+        if(room.sand[i]>=4&&room.map[i]===0)active.push(i);
+      if(active.length===0)break;
+      for(const i of active){firings[i]++;room.sand[i]-=4;}
+      for(const i of active){
+        const x=i%W,y=Math.floor(i/W);
+        for(const [dx,dy] of DIRS)if(free(room,x+dx,y+dy))room.sand[tile(x+dx,y+dy)]++;
+      }
+    }
+    if(rounds===512)throw Error("stabilization exceeded its guard bound");
+    room.lastFired=[];for(let i=0;i<firings.length;i++)if(firings[i]>0)room.lastFired.push(i);
+    const count=firings.reduce((a,b)=>a+b,0);s.topplings+=count;room.topples+=count;
+    if(count>0){
+      for(const e of living(room)){
+        const n=firings[tile(e.x,e.y)];
+        if(n>0){e.hp=Math.max(0,e.hp-Math.min(3,n));recordKill(s,e);}
+      }
+      const playerHits=firings[tile(s.hero.x,s.hero.y)];
+      if(playerHits>0)s.hero.hp-=Math.max(0,Math.min(2,playerHits)-stats(s).armor);
+      append(s,"砂が"+count+"回崩壊。連鎖が周囲を襲う。");
+    }
+    return count;
+  }
+  function enemyPhase(s){
+    const room=current(s),b=stats(s);
+    for(const e of living(room)){
+      if(s.status!=="play")break;
+      if(e.windup){
+        if(manhattan(e,s.hero)===1){
+          const damage=Math.max(1,e.attack+s.depth-1-b.armor);
+          s.hero.hp-=damage;append(s,"敵の予告攻撃：−"+damage+" HP");
+        }else moveOne(e,room,s.hero);
+        e.windup=false;
+      }else if(manhattan(e,s.hero)===1)e.windup=true;
+      else moveOne(e,room,s.hero);
+    }
+    s.turn++;
+    if(room.spores&&s.turn%3===0){
+      room.spores=sporesNext(room.spores);
+      if(s.turn%6===0){
+        if(room.spores[tile(s.hero.x,s.hero.y)]){s.hero.hp--;append(s,"規則481の胞子：−1 HP");}
+        for(const e of living(room))if(room.spores[tile(e.x,e.y)]){
+          e.hp=Math.max(0,e.hp-1);recordKill(s,e);
+        }
+      }
+    }
+    die(s);
+    if(s.status==="play"&&living(room).length===0&&!room.claimed&&!s.offer){
+      s.roomsCleared++;if(!room.boss)offer(s);
+      else append(s,"番人を撃破。最終出口が開いた。");
+    }
+  }
+  function act(state,action){
+    if(state.status!=="play"||state.offer)return state;
+    const s=withClone(state),hero=s.hero,room=current(s),b=stats(s);
+    if(action.type==="move"){
+      const dx=action.dx,dy=action.dy;
+      if(!DIRS.some(d=>d[0]===dx&&d[1]===dy))return state;
+      const x=hero.x+dx,y=hero.y+dy;
+      if(!free(room,x,y)){append(s,"そこは壁だ。");return s;}
+      const e=living(room).find(e=>e.x===x&&e.y===y);
+      if(e){
+        const amount=Math.max(1,b.attack+hero.input*e.weakness+
+          (e.scanned?Math.max(0,2+e.weakness)+b.focus+b.pierce:0)+Math.floor(hero.curve/2));
+        e.hp=Math.max(0,e.hp-amount);hero.curve=0;
+        append(s,"入力"+(hero.input>0?"+":"−")+"：攻撃"+amount+" ダメージ");
+        recordKill(s,e);avalanche(s,tile(x,y),2);
+      }else{
+        const heading=DIRS.findIndex(d=>d[0]===dx&&d[1]===dy);
+        if(hero.heading!==null && hero.heading!==heading)hero.curve=Math.min(3,hero.curve+1);
+        else hero.curve=Math.max(0,hero.curve-1);
+        hero.heading=heading;hero.x=x;hero.y=y;
+        if(b.stride&&s.turn%4===0)hero.energy=Math.min(b.maxEnergy,hero.energy+1);
+      }
+      enemyPhase(s);return s;
+    }
+    if(action.type==="polarity"){
+      hero.input=hero.input===1?-1:1;
+      append(s,"入力の極性を"+(hero.input===1?"+1":"−1")+"へ切り替えた。");
+      return s;
+    }
+    if(action.type==="pulse"){
+      if(hero.energy<2){append(s,"気力が足りない（必要2）。");return s;}
+      hero.energy-=2;const targets=living(room).filter(e=>manhattan(e,hero)<=3);
+      for(const e of targets){
+        e.hp=Math.max(0,e.hp-b.spell);recordKill(s,e);
+        avalanche(s,tile(e.x,e.y),4);
+      }
+      if(targets.length===0)avalanche(s,tile(hero.x,hero.y),4);
+      append(s,"衝撃波："+b.spell+"ダメージ、砂を励起。");enemyPhase(s);return s;
+    }
+    if(action.type==="probe"){
+      const enemies=living(room).sort((a,b)=>manhattan(a,hero)-manhattan(b,hero));
+      if(!enemies.length){append(s,"観測する敵がいない。");return s;}
+      const e=enemies.find(x=>!x.scanned)||enemies[0];
+      const A=e.maxHp+e.attack,e0=A,e1=A-e.weakness,recovered=e0-e1;
+      if(recovered!==e.weakness)throw Error("two-probe observation failed");
+      e.scanned=true;e.probes=[e0,e1,recovered];
+      s.scans++;hero.insight+=b.buff.focus>0?1:0;
+      append(s,"二重観測：E(0)="+e0+"、E(1)="+e1+"、隠れ座標X="+recovered+"。解析追撃有効。");
+      enemyPhase(s);return s;
+    }
+    if(action.type==="camp"){
+      if(hasEnemies(s)){append(s,"敵がいる間は休めない。");return s;}
+      if(hero.coins<3){append(s,"野営には資金3が必要。");return s;}
+      if(hero.hp>=b.maxHp&&hero.energy>=b.maxEnergy)return state;
+      hero.coins-=3;hero.hp=Math.min(b.maxHp,hero.hp+5);
+      hero.energy=Math.min(b.maxEnergy,hero.energy+3);
+      append(s,"野営：HPと気力を回復。");s.turn++;return s;
+    }
+    if(action.type==="twist"){
+      if(s.vertex!==4||s.layer!==0){append(s,"接続を変更できるのは、層0の結節点4だけ。");return s;}
+      if(hasEnemies(s)){append(s,"結節点の敵を倒す必要がある。");return s;}
+      if(hero.insight<2){append(s,"辺反転には洞察が2必要。");return s;}
+      hero.insight-=2;s.sign[3]^=1;s.turn++;
+      append(s,"中央の辺3を反転。閉路の符号は"+((s.sign[2]^s.sign[3])?"奇":"偶")+"になった。");return s;
+    }
+    if(action.type==="travel"){
+      if(hasEnemies(s)){append(s,"移動前に部屋を制圧する必要がある。");return s;}
+      const i=action.edge;if(!Number.isInteger(i)||i<0||i>5)return state;
+      const [a,z]=EDGES[i];if(a!==s.vertex&&z!==s.vertex)return state;
+      s.vertex=s.vertex===a?z:a;s.layer^=s.sign[i];s.turn++;
+      const k=roomKey(s);if(!s.rooms[k])s.rooms[k]=generateRoom(s,s.vertex,s.layer);
+      current(s).entries++;hero.x=4;hero.y=4;hero.heading=null;hero.curve=0;
+      append(s,"辺"+i+"から部屋"+s.vertex+"・層"+s.layer+"へ。");
+      if(!hasEnemies(s)&&!current(s).claimed)offer(s);
+      return s;
+    }
+    if(action.type==="descend"){
+      if(s.vertex!==3||s.layer!==1||hasEnemies(s)){
+        append(s,"次へ進むには、層1の右端で部屋を制圧する。");return s;
+      }
+      if(s.depth===DEPTH){
+        s.status="won";s.score=1000+s.hero.kills*25+s.hero.coins*4+s.hero.hp*8-s.turn;
+        append(s,"脱出成功。世界の裏側を踏破した。");return s;
+      }
+      s.depth++;s.vertex=0;s.layer=0;s.sign=[0,0,0,0,0,0];
+      hero.x=4;hero.y=4;hero.heading=null;hero.curve=0;
+      hero.hp=Math.min(b.maxHp,hero.hp+6);hero.energy=b.maxEnergy;s.turn++;
+      const k=roomKey(s);if(!s.rooms[k])s.rooms[k]=generateRoom(s,0,0);
+      current(s).entries++;
+      if(!hasEnemies(s)&&!current(s).claimed)offer(s);
+      append(s,"地下"+s.depth+"層へ降りた。接続符号は初期化された。");
+      return s;
+    }
+    return state;
+  }
+  function gates(s){
+    return EDGES.map(([a,b],i)=>{
+      if(a!==s.vertex&&b!==s.vertex)return null;
+      return {edge:i,vertex:s.vertex===a?b:a,layer:s.layer^s.sign[i],twist:!!s.sign[i]};
+    }).filter(Boolean);
+  }
+  function progress(s){
+    const count=Object.entries(s.rooms).filter(([k,room])=>
+      k.startsWith(s.depth+":")&&room.enemies.every(e=>e.hp===0)).length;
+    const parity=s.sign[2]^s.sign[3];
+    return {roomCount:count,layerReachable:parity?12:6,parity,
+      goal:s.vertex===3&&s.layer===1};
+  }
+  return Object.freeze({W,DEPTH,MAX_SLOTS,EDGES,DIRS,installCatalog,catalog,theorem,relic,stats,hash,
+    key,roomKey,current,tile,inside,free,rule481,sporesNext,manhattan,living,hasEnemies,
+    newGame,selectRelic,act,gates,progress});
+});
+
+</script>
+<script>
+"use strict";
+(function(){
+  const E=globalThis.Rogue465;
+  if(!E)throw Error("Rogue465 engine is missing");
+  const $=(id)=>document.getElementById(id);
+  const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const icons={moth:"✦",guard:"▣",stalker:"◆",warden:"♛"};
+  const storeKey="primitive-rogue465-save-v1";
+  let state=null,replaceSlot=0,help=false,swipeStart=null,ignoreTap=false;
+  function save(){
+    try{globalThis.localStorage?.setItem(storeKey,JSON.stringify(state));}catch(_){}
+  }
+  function restore(){
+    try{
+      const str=globalThis.localStorage?.getItem(storeKey);
+      if(!str)return null;
+      const obj=JSON.parse(str);
+      if(obj && obj.rooms && obj.hero && obj.seed!==undefined && obj.equipment && obj.status){
+        obj.hero.input??=1;obj.hero.curve??=0;obj.hero.heading??=null;
+        return obj;
+      }
+    }catch(_){}
+    return null;
+  }
+  function newRun(){
+    const seed=(Math.floor(Math.random()*0xffffffff)>>>0)||1;
+    state=E.newGame(seed);replaceSlot=0;help=false;save();render();
+  }
+  function action(cmd){
+    if(!state)return;
+    help=false;
+    const next=E.act(state,cmd);
+    state=next;save();render();
+  }
+  function choose(id){
+    if(!state||!state.offer)return;
+    state=E.selectRelic(state,id,replaceSlot);
+    replaceSlot=0;save();render();
+  }
+  function firstStepTo(x,y){
+    const r=E.current(state),src=E.tile(state.hero.x,state.hero.y),goal=E.tile(x,y);
+    const parent=Array(E.W*E.W).fill(-1),queue=[src];
+    parent[src]=src;
+    for(let i=0;i<queue.length;i++){
+      const p=queue[i];if(p===goal)break;
+      const px=p%E.W,py=Math.floor(p/E.W);
+      for(const [dx,dy] of E.DIRS){
+        const nx=px+dx,ny=py+dy;
+        if(!E.free(r,nx,ny))continue;
+        const t=E.tile(nx,ny);
+        if(parent[t]!==-1)continue;
+        parent[t]=p;queue.push(t);
+      }
+    }
+    if(parent[goal]===-1||goal===src)return null;
+    let step=goal;
+    while(parent[step]!==src&&step!==src)step=parent[step];
+    return {dx:(step%E.W)-state.hero.x,dy:Math.floor(step/E.W)-state.hero.y};
+  }
+  function renderMap(){
+    const room=E.current(state),hero=state.hero,spores=room.spores,last=new Set(room.lastFired);
+    const enemies=new Map(E.living(room).map(e=>[E.tile(e.x,e.y),e]));
+    const html=[];
+    for(let y=0;y<E.W;y++)for(let x=0;x<E.W;x++){
+      const idx=E.tile(x,y),wall=room.map[idx]===1,foe=enemies.get(idx);
+      const isHero=hero.x===x&&hero.y===y;
+      const classes=["cell"];
+      if(wall)classes.push("wall");
+      if(!wall&&spores&&spores[idx])classes.push("spore");
+      if(last.has(idx))classes.push("fired");
+      if(foe){classes.push("enemy");if(foe.windup)classes.push("windup");
+        if(foe.scanned)classes.push("scanned");if(foe.kind==="warden")classes.push("boss");}
+      if(isHero)classes.push("hero");
+      const body=wall?"":isHero?"◈":foe?icons[foe.kind]:"";
+      const health=foe?'<span class="foehp">'+foe.hp+"</span>":"";
+      const weakness=foe&&foe.scanned?'<span class="foew">X'+(foe.weakness>=0?"+":"")+foe.weakness+"</span>":"";
+      const sand=wall?"":'<span class="grain">'+room.sand[idx]+"</span>";
+      const aria=wall?"壁":isHero?"自分":foe?"敵、生命"+foe.hp+"、"+(foe.windup?"次に攻撃":"移動中"):"空きマス";
+      html.push('<button type="button" class="'+classes.join(" ")+'" data-x="'+x+'" data-y="'+y+
+        '" aria-label="('+x+','+y+') '+aria+'" '+(wall?"disabled":"")+'>'+body+health+weakness+sand+"</button>");
+    }
+    $("board").innerHTML=html.join("");
+    $("board").querySelectorAll("[data-x]").forEach(el=>el.addEventListener("click",()=>{
+      if(ignoreTap){ignoreTap=false;return;}
+      if(state.offer||state.status!=="play")return;
+      const step=firstStepTo(Number(el.dataset.x),Number(el.dataset.y));
+      if(step)action({type:"move",dx:step.dx,dy:step.dy});
+    }));
+  }
+  function renderGear(){
+    $("gear").innerHTML=Array.from({length:E.MAX_SLOTS},(_,i)=>{
+      const id=state.equipment[i];
+      if(id===undefined)return '<div class="equipment"><b>'+String(i+1)+
+        '</b><span class="name">空の装備枠</span></div>';
+      const item=E.relic(id),name=item.name.split(".").pop();
+      return '<div class="equipment" title="'+escapeHTML(item.name)+'"><b>'+String(i+1)+
+        '</b><span class="name">'+escapeHTML(name)+'</span><span class="effect">'+
+        escapeHTML(item.description)+"</span></div>";
+    }).join("");
+  }
+  function renderGates(){
+    const exits=E.gates(state),locked=E.hasEnemies(state)||!!state.offer||state.status!=="play";
+    $("gates").innerHTML=exits.map(g=>{
+      const dest="部屋"+g.vertex+"・層"+g.layer;
+      return '<button class="door" type="button" data-edge="'+g.edge+'" '+(locked?"disabled":"")+
+        '>辺'+g.edge+(g.twist?"（反転）":"")+'<small>進む → '+dest+"</small></button>";
+    }).join("");
+    $("gates").querySelectorAll("[data-edge]").forEach(el=>el.addEventListener("click",()=>
+      action({type:"travel",edge:Number(el.dataset.edge)})));
+  }
+  function renderModal(){
+    const modal=$("modal"),panel=$("modal-panel");
+    if(help){
+      modal.classList.add("visible");panel.innerHTML=
+        '<h2>遊び方</h2><p>3階層を探索し、3階層目の層1・部屋3にいる番人を倒して脱出してください。'+
+        '隣のマスをタップ、または十字キーで移動。敵のいるマスへ進むと攻撃します。</p>'+
+        '<p>敵は予告後に攻撃します。衝撃波は気力2で周囲を攻撃し、砂を崩壊させます。'+
+        '二重観測で敵の隠れた座標を復元すると解析追撃が有効になります。</p>'+
+        '<p>各部屋を制圧すると、初期465定理から選ばれた遺物を一つ獲得。'+
+        '層0の部屋4では洞察2を消費して辺3を反転でき、別の層へ進めます。'+
+        '装備は最大5件。死亡するとその探索は終わりです。</p>'+
+        '<p>定理名・出典は正規の初期465台帳に基づきますが、装備の数値効果はゲーム用の設計です。</p>'+
+        '<button class="reward" type="button" id="close-help">ゲームへ戻る</button>';
+      $("close-help").addEventListener("click",()=>{help=false;renderModal();});
+      return;
+    }
+    if(state.status!=="play"){
+      modal.classList.add("visible");
+      panel.innerHTML='<div class="finish"><h2>'+(state.status==="won"?"脱出成功":"探索終了")+
+        '</h2><p>地下'+state.depth+'階・'+state.turn+'手・撃破'+state.hero.kills+
+        '体・遺物'+state.equipment.length+'件<br>'+(state.status==="won"?"最終得点 "+state.score:"死亡したら最初から。")+
+        '</p><button type="button" id="again">新しい探索を始める</button></div>';
+      $("again").addEventListener("click",newRun);
+      return;
+    }
+    if(!state.offer){modal.classList.remove("visible");panel.innerHTML="";return;}
+    modal.classList.add("visible");
+    const full=state.equipment.length>=E.MAX_SLOTS;
+    const replacement=full?'<p>装備枠が5個埋まっています。交換する枠を選んでください。</p><div class="replacers">'+
+      state.equipment.map((id,i)=>'<button type="button" data-slot="'+i+
+        '" aria-pressed="'+(replaceSlot===i)+'">'+String(i+1)+": "+
+        escapeHTML(E.relic(id).name.split(".").pop().slice(0,12))+"</button>").join("")+"</div>":"";
+    panel.innerHTML='<h2>定理遺物を発見</h2>'+
+      '<p>3つのうち1つを選び、戦闘能力として身につけます。すべて初期465定理の実名です。</p>'+
+      replacement+'<div class="rewards">'+state.offer.map(id=>{
+        const item=E.relic(id),short=item.name.split(".").pop();
+        return '<button type="button" class="reward" data-pick="'+id+'">'+
+          '<strong>'+escapeHTML(short)+'</strong><span class="stat">'+escapeHTML(item.description)+
+          '</span><span class="provenance">'+escapeHTML(item.name)+'<br>'+escapeHTML(item.file)+
+          ':'+item.line+'</span></button>';
+      }).join("")+"</div><p>この能力値はゲーム設計であり、定理の数学的な含意を主張しません。</p>";
+    panel.querySelectorAll("[data-slot]").forEach(el=>el.addEventListener("click",()=>{
+      replaceSlot=Number(el.dataset.slot);renderModal();
+    }));
+    panel.querySelectorAll("[data-pick]").forEach(el=>el.addEventListener("click",()=>
+      choose(Number(el.dataset.pick))));
+  }
+  function render(){
+    if(!state)return;
+    const st=E.stats(state),room=E.current(state),p=E.progress(state);
+    $("hp").textContent=state.hero.hp+" / "+st.maxHp;
+    $("energy").textContent=state.hero.energy+" / "+st.maxEnergy;
+    $("insight").textContent=state.hero.insight+" / "+state.hero.coins;
+    $("floor").textContent=state.depth+" / "+E.DEPTH;
+    $("location").textContent="部屋"+state.vertex+" · 層"+state.layer;
+    const count=E.living(room).length;
+    $("status").textContent=state.status==="play"?(count?"敵 "+count+"体":"制圧済")+"・"+state.turn+"手・曲率"+state.hero.curve:
+      (state.status==="won"?"脱出成功":"死亡");
+    $("topology").textContent="中央閉路："+(p.parity?"奇（12状態に到達可能）":"偶（6状態に限定）")+
+      " ／ 現在は層"+state.layer+"。反転した辺の通過時に層が変わります。";
+    renderMap();renderGates();renderGear();
+    $("log").innerHTML=state.log.slice(0,8).map(x=>"<li>"+escapeHTML(x)+"</li>").join("");
+    document.querySelectorAll("[data-move]").forEach(el=>{el.disabled=state.status!=="play"||!!state.offer;});
+    for(const id of ["pulse","probe","camp","polarity"]){$(id).disabled=state.status!=="play"||!!state.offer;}
+    $("polarity").innerHTML="入力極性 "+(state.hero.input===1?"+1":"−1")+"<br><small>攻撃の傾き</small>";
+    $("dock-polarity").textContent="入力 "+(state.hero.input===1?"+1":"−1");
+    for(const id of ["dock-pulse","dock-probe","dock-polarity"])
+      $(id).disabled=state.status!=="play"||!!state.offer;
+    $("twist").disabled=state.status!=="play"||!!state.offer||state.vertex!==4||state.layer!==0||
+      count!==0||state.hero.insight<2;
+    $("descend").disabled=state.status!=="play"||!!state.offer||!p.goal||count!==0;
+    $("descend").innerHTML=state.depth===E.DEPTH?"脱出する<br><small>番人を倒して</small>":
+      "次の階層へ<br><small>層1・部屋3で</small>";
+    renderModal();
+  }
+  function setupControls(){
+    document.querySelectorAll("[data-move]").forEach(el=>el.addEventListener("click",()=>{
+      const [dx,dy]=el.dataset.move.split(",").map(Number);action({type:"move",dx,dy});
+    }));
+    $("pulse").addEventListener("click",()=>action({type:"pulse"}));
+    $("probe").addEventListener("click",()=>action({type:"probe"}));
+    $("polarity").addEventListener("click",()=>action({type:"polarity"}));
+    $("dock-pulse").addEventListener("click",()=>action({type:"pulse"}));
+    $("dock-probe").addEventListener("click",()=>action({type:"probe"}));
+    $("dock-polarity").addEventListener("click",()=>action({type:"polarity"}));
+    $("camp").addEventListener("click",()=>action({type:"camp"}));
+    $("twist").addEventListener("click",()=>action({type:"twist"}));
+    $("descend").addEventListener("click",()=>action({type:"descend"}));
+    $("info").addEventListener("click",()=>{help=true;renderModal();});
+    $("restart").addEventListener("click",()=>{
+      if(globalThis.confirm?.("現在の探索を破棄して新しく始めますか？")??true)newRun();
+    });
+    document.addEventListener("keydown",event=>{
+      if(!state||event.ctrlKey||event.metaKey||event.altKey)return;
+      if(help){if(event.key==="Escape"){help=false;renderModal();}return;}
+      if(state.offer){
+        const n=Number(event.key);
+        if(n>=1&&n<=3)choose(state.offer[n-1]);return;
+      }
+      if(state.status!=="play")return;
+      const keys={ArrowUp:[0,-1],w:[0,-1],ArrowRight:[1,0],d:[1,0],
+        ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0]};
+      const direction=keys[event.key];
+      if(direction){event.preventDefault();action({type:"move",dx:direction[0],dy:direction[1]});}
+      if(event.key===" "){event.preventDefault();action({type:"pulse"});}
+      if(event.key==="q")action({type:"probe"});
+      if(event.key==="e")action({type:"polarity"});
+      if(event.key==="t")action({type:"twist"});
+    });
+    const board=$("board");
+    board.addEventListener("pointerdown",e=>{swipeStart={x:e.clientX,y:e.clientY};});
+    board.addEventListener("pointerup",e=>{
+      if(!swipeStart)return;
+      const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;swipeStart=null;
+      if(Math.max(Math.abs(dx),Math.abs(dy))<28)return;
+      ignoreTap=true;
+      const direction=Math.abs(dx)>Math.abs(dy)?
+        {dx:Math.sign(dx),dy:0}:{dx:0,dy:Math.sign(dy)};
+      action({type:"move",...direction});
+      // The synthetic click after a swipe is ignored once.
+    });
+  }
+  async function init(){
+    try{
+      const embedded=$("rogue-catalog")?.textContent;
+      if(embedded)E.installCatalog(JSON.parse(embedded));
+      else{
+        const response=await fetch("./theorems.json",{cache:"force-cache"});
+        if(!response.ok)throw Error("theorem catalog HTTP "+response.status);
+        E.installCatalog(await response.json());
+      }
+      setupControls();
+      state=restore()||E.newGame(4271);render();
+    }catch(err){
+      $("board").textContent="定理台帳を読み込めませんでした。再読み込みしてください。";
+      $("status").textContent="起動エラー";
+      $("log").textContent=String(err?.message||err);
+    }
+  }
+  init();
+})();
+
+</script>
+</body>
+</html>

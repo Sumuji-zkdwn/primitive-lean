@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e1725">
+<meta name="description" content="初期465定理を武具に、証明済み構造を世界法則に。探索・戦闘・選択のローグライク。">
+<title>PRIMITIVE / 465 — Roguelike</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;--bg:#101722;--card:#1b293a;--border:#465871;--txt:#e8f3ff;--muted:#abbdd1;--cyan:#88e1da;--gold:#f4c87c;--red:#f99b9b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;color:var(--txt);background:radial-gradient(ellipse at 45% -30%,#284662,#101722 70%)}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #a6dcff;outline-offset:2px}
+button:disabled{cursor:default;opacity:.4}
+.app{max-width:1060px;margin:auto;padding:14px max(12px,env(safe-area-inset-left)) max(26px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-right))}
+h1{font-weight:850;letter-spacing:.09em;font-size:clamp(21px,5vw,30px);margin:0}
+header{display:flex;align-items:start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.subtitle{color:var(--muted);font-size:12px;margin:4px 0 0}
+.tag{border:1px solid #4e687b;background:#1c3246;color:#b5e6e7;padding:7px 9px;border-radius:8px;font-weight:700;font-size:11px}
+.hud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:13px 0}
+.hud-item{background:var(--card);border:1px solid #3d5166;border-radius:11px;padding:9px 5px;text-align:center;min-width:0}
+.hud-item small{display:block;color:var(--muted);font-size:10px}
+.hud-item strong{font-variant-numeric:tabular-nums;font-size:clamp(13px,3.2vw,17px);white-space:nowrap}
+#hp{color:#ffb1ae}#energy{color:#88dcf2}#insight{color:#ded0ff}#floor{color:var(--gold)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:13px}
+.panel{border:1px solid var(--border);background:linear-gradient(160deg,#1a2b3d,#172331);border-radius:15px;padding:11px;min-width:0}
+.panel h2{font-size:15px;margin:0 0 8px}
+.subhead{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap}
+.subhead .status{font-size:11px;color:var(--muted)}
+.board{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:2px;max-width:500px;margin:0 auto;touch-action:manipulation}
+.cell{aspect-ratio:1;position:relative;min-width:0;padding:0;border:1px solid #355168;border-radius:3px;background:#293d4f;color:#c9d9ea;display:flex;justify-content:center;align-items:center;font-size:clamp(13px,3vw,23px);font-weight:750;line-height:1}
+.cell.wall{background:#0d1a29;border-color:#27374b;cursor:default}
+.cell.wall::before{content:"";display:block;width:35%;height:35%;background:#304358;transform:rotate(45deg)}
+.cell .grain{position:absolute;right:2px;bottom:1px;font-size:9px;color:#e9c187}
+.cell .foehp{position:absolute;left:2px;top:1px;font-size:10px;color:#fff0d6;font-variant-numeric:tabular-nums}
+.cell .foew{position:absolute;right:2px;top:1px;font-size:9px;color:#d8b9fb}
+.cell.hero{background:#245e69;border:2px solid #8eede8;color:#e9fffc;z-index:1}
+.cell.enemy{background:#663a46;color:#ffdfcb;border:1px solid #dc7e84}
+.cell.enemy.windup{background:#a44940;box-shadow:inset 0 0 0 2px #ffe6a2;animation:pulse .65s ease-in-out infinite alternate}
+.cell.enemy.scanned{box-shadow:inset 0 0 0 2px #cdb7ff}
+.cell.boss{background:#8f304d;font-size:25px}
+.cell.fired:not(.enemy):not(.hero){box-shadow:inset 0 0 0 2px #f0ce8e}
+.cell.spore:not(.hero):not(.enemy){background:#34573e}
+.cell.selected{outline:2px solid #bceaff}
+@keyframes pulse{from{filter:brightness(.8)}to{filter:brightness(1.4)}}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:10px 2px 2px;font-size:10px;color:var(--muted)}
+.legend span{white-space:nowrap}
+.keyboard{display:grid;grid-template-columns:repeat(3,65px);grid-template-rows:repeat(2,50px);gap:5px;justify-content:center;margin:12px auto}
+.keyboard button{border:1px solid #6b8297;background:#29495e;border-radius:10px;font-size:23px;font-weight:700}
+.keyboard .north{grid-column:2;grid-row:1}.keyboard .west{grid-column:1;grid-row:2}.keyboard .south{grid-column:2;grid-row:2}.keyboard .east{grid-column:3;grid-row:2}
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:5px}
+.actions button,.door{min-height:45px;border:1px solid #658298;border-radius:10px;background:#2a475a;padding:6px;font-weight:750;font-size:12px}
+.actions button.primary,.door.primary{background:#246e82;border-color:#68c3d9}
+.actions button.risky{background:#5c4655;border-color:#bb8496}
+.note{font-size:11px;line-height:1.6;color:var(--muted);margin:8px 0 0}
+.section-title{font-size:12px;font-weight:800;letter-spacing:.02em;color:#a8d8e1;margin:3px 0 7px}
+.gates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.door{min-height:49px;text-align:left;padding:8px 10px;line-height:1.5}
+.door small{color:#adc8d8;font-size:10px;display:block}
+#log{padding:0;margin:7px 0 0;list-style:none;font-size:11px;line-height:1.5;color:#bcd2df;max-height:126px;overflow:auto}
+#log li{padding:5px 0;border-bottom:1px solid #2c4256}
+#log li:first-child{color:#eef7ff}
+.gear{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:5px}
+.equipment{padding:7px 9px;border:1px solid #415a6d;border-radius:9px;background:#1c3345;font-size:10px;display:flex;align-items:center;gap:8px}
+.equipment b{color:#a9e2e3;min-width:18px}
+.equipment .name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.equipment .effect{color:#ebca8e;white-space:nowrap}
+.source{font-size:10px;color:var(--muted);margin-top:11px;line-height:1.6}
+.source a{color:#9fd2ff}
+#modal{position:fixed;inset:0;background:rgba(7,14,22,.83);display:none;z-index:20;overflow-y:auto;padding:16px;align-items:center;justify-content:center}
+#modal.visible{display:flex}
+.modal-panel{width:min(96vw,630px);background:#152a3d;border:1px solid #7595a8;border-radius:17px;padding:17px;box-shadow:0 10px 50px #0009}
+.modal-panel h2{font-size:23px;margin:0}
+.modal-panel p{font-size:12px;color:#b7ccdc;line-height:1.6}
+.rewards{display:grid;gap:8px;margin:13px 0}
+.reward{width:100%;text-align:left;border:1px solid #4e6f8a;border-radius:12px;background:#243d55;padding:11px}
+.reward strong{font-size:14px;display:block;overflow-wrap:anywhere}
+.reward .stat{font-size:12px;color:#f2d3a1}
+.reward .provenance{font-size:10px;color:#b3c5dc;overflow-wrap:anywhere}
+.replacers{display:flex;gap:6px;flex-wrap:wrap}
+.replacers button{padding:9px 12px;background:#253e51;border:1px solid #627b8f;border-radius:8px}
+.replacers button[aria-pressed=true]{border:2px solid #d4edff;background:#315a6e}
+.finish{padding:22px 12px;text-align:center}
+.finish h2{font-size:30px;color:#f4c87c}
+.finish p{line-height:1.7}
+.finish button{background:#286980;padding:12px 18px;border:1px solid #8bd8ea;border-radius:10px}
+footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
+@media (min-width:750px){.layout{grid-template-columns:minmax(0,550px) minmax(300px,1fr)}.board{gap:3px}.panel{padding:14px}.equipment{font-size:12px}}
+@media (max-width:365px){.app{padding-left:8px;padding-right:8px}.hud{gap:4px}.panel{padding:8px}.actions button{font-size:11px}.cell .grain{font-size:8px}}
+
+.quickdock{display:none}
+@media(max-width:749px){
+  .app{padding-bottom:155px}
+  .keyboard{position:fixed;z-index:12;right:max(9px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,42px);margin:0;padding:7px;border-radius:13px;background:#172b3ded;border:1px solid #658198;box-shadow:0 6px 25px #050a15aa;gap:4px}
+  .keyboard button{font-size:23px}
+  .quickdock{display:flex;position:fixed;z-index:12;left:max(9px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));flex-direction:column;gap:5px;padding:6px;border:1px solid #658198;border-radius:13px;background:#172b3ded;box-shadow:0 6px 25px #050a15aa}
+  .quickdock button{min-height:34px;width:96px;border-radius:8px;background:#31536c;border:1px solid #739ab0;font-size:11px;font-weight:700}
+}
+@media (prefers-reduced-motion:reduce){.cell.enemy.windup{animation:none}}
+</style>
+</head>
+<body>
+<main class="app">
+<header><div><h1>PRIMITIVE / 465</h1><p class="subtitle">原始定理を遺物にした、戦術ローグライク。死亡すると装備を失う。</p></div><span class="tag">ELASTICA 214 + LINEAR 251</span></header>
+<div class="hud">
+ <div class="hud-item"><small>生命</small><strong id="hp">18 / 18</strong></div>
+ <div class="hud-item"><small>気力</small><strong id="energy">5 / 5</strong></div>
+ <div class="hud-item"><small>洞察 / 資金</small><strong id="insight">0 / 0</strong></div>
+ <div class="hud-item"><small>地下階層</small><strong id="floor">1 / 3</strong></div>
+</div>
+<div class="layout">
+ <section class="panel" aria-label="探索マップ">
+  <div class="subhead"><h2 id="location">部屋0 · 層0</h2><span class="status" id="status">準備中</span></div>
+  <div class="board" id="board" role="group" aria-label="9×9ダンジョン。隣のマスをタップして移動・攻撃"></div>
+  <div class="legend"><span>◈ 自分</span><span>☠ 敵</span><span>! 予告攻撃</span><span>緑 胞子</span><span>数字 砂</span></div>
+  <div class="keyboard" role="group" aria-label="移動方向">
+    <button class="north" type="button" data-move="0,-1" aria-label="上へ">↑</button>
+    <button class="west" type="button" data-move="-1,0" aria-label="左へ">←</button>
+    <button class="south" type="button" data-move="0,1" aria-label="下へ">↓</button>
+    <button class="east" type="button" data-move="1,0" aria-label="右へ">→</button>
+  </div>
+  <div class="actions">
+    <button id="pulse" class="primary" type="button">衝撃波<br><small>気力2</small></button>
+    <button id="probe" type="button">二重観測<br><small>敵の解析</small></button>
+    <button id="polarity" type="button">入力極性 +1<br><small>攻撃の傾き</small></button>
+    <button id="camp" type="button">野営<br><small>資金3</small></button>
+  </div>
+  <p class="note">曲がって移動すると曲率が溜まり、次の攻撃を強めます。二重観測で敵のXを読み取り、入力極性を切り替えるとダメージが変化します。敵に隣接して方向キーを押すと攻撃。敵は攻撃前に赤く光るため、回避も可能。敵がいなくなると次の部屋へ移動できます。</p>
+ </section>
+ <section class="panel" aria-label="世界と装備">
+  <div class="section-title">接続された部屋</div>
+  <div class="note" id="topology"></div>
+  <div id="gates" class="gates"></div>
+  <div class="actions" style="grid-template-columns:1fr 1fr">
+    <button id="twist" type="button" class="risky">辺3を反転<br><small>結節点4・洞察2</small></button>
+    <button id="descend" type="button" class="primary">階層を進む<br><small>層1・部屋3で</small></button>
+  </div>
+  <div class="section-title" style="margin-top:8px">獲得した定理遺物（最大5）</div>
+  <div id="gear" class="gear"></div>
+  <div class="section-title" style="margin-top:8px">出来事</div>
+  <ol id="log" aria-live="polite" aria-label="行動ログ"></ol>
+  <div class="actions" style="grid-template-columns:1fr 1fr">
+    <button id="restart" type="button">新しい探索</button>
+    <button id="info" type="button">遊び方</button>
+  </div>
+  <p class="source">元の465定理は実際の証明台帳から抽出。ゲーム内装備の能力値は設計上の割当であり、定理からの数学的帰結ではありません。<a href="https://github.com/Sumuji-zkdwn/primitive-lean/tree/main/games/rogue465" target="_blank" rel="noopener">ソースと検証</a></p>
+ </section>
+</div>
+<div class="quickdock" role="group" aria-label="スマホ用戦闘ボタン"><button id="dock-pulse" type="button">衝撃波 (2)</button><button id="dock-probe" type="button">二重観測</button><button id="dock-polarity" type="button">入力 +1</button></div>
+<div id="modal" aria-live="polite" aria-label="定理遺物の選択"><div class="modal-panel" id="modal-panel"></div></div>
+<footer>スマホではHTML/JavaScriptで動作します。世界法則の一部は既存Lean形式化（線形観測、符号付きLaakso、砂山、Rule481）に対応していますが、ブラウザはLeanのカーネルではありません。初期465定理の全てが戦闘を直接証明するわけではありません。</footer>
+</main>
+<script src="./engine.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>
