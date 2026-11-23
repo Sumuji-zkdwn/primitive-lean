@@ -1,0 +1,27 @@
+name: Laakso doubling PI separation - exact arithmetic
+
+on:
+  pull_request:
+    branches:
+      - main
+      - chatgpt/laakso-observation-a-20261123
+    paths:
+      - 'docs/research/2026-11-23-laakso-doubling-pi-separation.md'
+      - 'docs/research/laakso_doubling_PI_probe.py'
+      - '.github/workflows/laakso-doubling-pi-separation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-fractions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Verify the rational shell and bottleneck inequalities
+        run: python -B docs/research/laakso_doubling_PI_probe.py
