@@ -122,3 +122,24 @@ claiming this module compiles.** Even success does not itself formalize
 the Hopf quotient topology, the period-4π diffeomorphism, or the global
 equivalence with the original bundle chart. Those are separate geometric
 requirements.
+
+
+## North/south overlap and the fibre period
+
+The local Dirac gauge potentials on the two polar charts are
+\(A_N=k(\cos\theta-1)d\varphi\) and
+\(A_S=k(\cos\theta+1)d\varphi\).
+On their overlap use \(\psi_S=\psi_N-2k\varphi\). Then
+
+\[
+ d\psi_S+A_S=d\psi_N+A_N.
+\]
+
+Following \(\varphi\mapsto\varphi+2\pi\) changes the south fibre
+coordinate by \(-4\pi k\), precisely one fibre period in the
+single-centre smooth normalization. The new
+`KKNutPatching.lean` module proves these three coefficient/period
+identities over real numbers (with \(\pi\) symbolic). The Lean
+declarations are not, by themselves, a proof that these patches form
+a smooth principal circle bundle or that the Hopf map is a global
+diffeomorphism. Those topology/atlas propositions are still external.
