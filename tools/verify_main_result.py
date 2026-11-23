@@ -419,6 +419,8 @@ SUPPLEMENTS = (
     ('linear_input/lean_check/CurveWordBVHamblyLyons.inc', 'LinearInputCurveWordBVHamblyLyons'),
     ('linear_input/lean_check/CurveWordBVEquivalence.inc', 'LinearInputCurveWordBVEquivalence'),
     ('linear_input/lean_check/CurveWordBVCoordinates.inc', 'LinearInputCurveWordBVCoordinates'),
+    ('linear_input/lean_check/ScaleTemperature.inc', 'LinearInputScaleTemperature'),
+    ('linear_input/lean_check/ArcChebyshev.inc', 'LinearInputArcChebyshev'),
 )
 
 

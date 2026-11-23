@@ -6975,6 +6975,38 @@
         "integrated_from_commit": "eda3554a4bf74b29e433915b556c0cc4e6bca0d5",
         "sha256_at_pr_head": "3a72c95f239ac8ee7de488193e527eb6ff05dffe050f98bb2352892c974b6065"
       }
+    },
+    {
+      "path": "linear_input/lean_check/ScaleTemperature.inc",
+      "sha256": "becdbfb5465f5739fba8b4b942b23476a55863aec8cbab24d8ab6f861b99a876",
+      "original_sha256": "becdbfb5465f5739fba8b4b942b23476a55863aec8cbab24d8ab6f861b99a876",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/ScaleTemperature.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "a5e7db1eff95b6c2777bd04f3de23b8d00057cde",
+        "ledger": "sources/core_bridges_2026-11-23.json"
+      }
+    },
+    {
+      "path": "linear_input/lean_check/ArcChebyshev.inc",
+      "sha256": "9b1107b41016895ffb04db75ff8258655188d8d484a81fb946e805995bab1cb2",
+      "original_sha256": "9b1107b41016895ffb04db75ff8258655188d8d484a81fb946e805995bab1cb2",
+      "source_pr": null,
+      "source_commit": null,
+      "source_path": "linear_input/lean_check/ArcChebyshev.inc",
+      "role": "repository_native_proof",
+      "byte_identical": true,
+      "permitted_adaptations": [],
+      "provenance": {
+        "origin": "authored_in_primitive_lean",
+        "authored_on_parent_commit": "a5e7db1eff95b6c2777bd04f3de23b8d00057cde",
+        "ledger": "sources/core_bridges_2026-11-23.json"
+      }
     }
   ],
   "construction_errors": [],
@@ -7260,6 +7292,20 @@
       "source_commit": "2bf823823ab962e6f6c46bcb8c853b71cc90a24d",
       "source_pr": 133,
       "note": "Provenance of new native proof after the 2026-11-03 historical integration snapshot; standalone pinned Lean --trust=0 probe #43148729006 passed, full-tree source and axiom audit tracked separately."
+    },
+    {
+      "date": "2026-11-23",
+      "path": "linear_input/lean_check/ScaleTemperature.inc",
+      "authored_on_parent_commit": "a5e7db1eff95b6c2777bd04f3de23b8d00057cde",
+      "ledger": "sources/core_bridges_2026-11-23.json",
+      "note": "Native core-theorem bridge: existing Elastica energy scaling laws used inside finite Bayesian exponential-weight updates (inverse temperature beta*a^(1-m), beta/a for the quadratic density, prior limit). Registered in the joint MainResult check and all-declaration axiom audit."
+    },
+    {
+      "date": "2026-11-23",
+      "path": "linear_input/lean_check/ArcChebyshev.inc",
+      "authored_on_parent_commit": "a5e7db1eff95b6c2777bd04f3de23b8d00057cde",
+      "ledger": "sources/core_bridges_2026-11-23.json",
+      "note": "Native core-theorem bridge: the area-constrained main result composed with the existing Chebyshev normalization and ternary fiber counts for constant-curvature local minima, for one fixed multiplier pair. Registered in the joint MainResult check and all-declaration axiom audit."
     }
   ]
 }
