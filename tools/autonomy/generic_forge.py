@@ -431,22 +431,59 @@ def receipt(state_path, head, evidence_dir, output):
     return updated
 
 
+def display_value(domain, value):
+    cells = digits(domain, value)
+    if domain == "grid3":
+        return ["".join("#" if cells[3*r + c] else "." for c in range(3))
+                for r in range(3)]
+    return cells
+
+
+def use_operator(state, operator_id, value):
+    """Apply a *previously certified* operator as a practical image/signal tool."""
+    validate_state(state)
+    require(type(operator_id) is str and IDENT.fullmatch(operator_id),
+            "invalid operator identifier")
+    matches = [r for r in state["receipts"] if r["id"] == operator_id]
+    require(len(matches) == 1, "operator is not in the certified library")
+    row = matches[0]
+    domain = row["domain"]
+    require(type(value) is int and 0 <= value < DOMAIN_SIZE[domain],
+            "input outside operator's finite environment")
+    actual = apply_program(domain, row["program"], value, reference_primitive)
+    independent = apply_program(domain, row["program"], value,
+                                independent_primitive)
+    require(actual == independent, "operator semantics mismatch")
+    return {"operator_id": operator_id, "domain": domain,
+            "program": row["program"], "input": value, "output": actual,
+            "input_view": display_value(domain, value),
+            "output_view": display_value(domain, actual),
+            "verified_by": row["evaluator"]}
+
+
 def main(argv=None):
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("command", choices=("prepare", "receipt"))
+    cli.add_argument("command", choices=("prepare", "receipt", "run"))
     cli.add_argument("--state", required=True, type=Path)
-    cli.add_argument("--head", required=True)
+    cli.add_argument("--head")
     cli.add_argument("--day")
     cli.add_argument("--output", required=True, type=Path)
     cli.add_argument("--evidence", type=Path)
+    cli.add_argument("--operator-id")
+    cli.add_argument("--value", type=int)
     args = cli.parse_args(argv)
     try:
         if args.command == "prepare":
             require(args.day is not None, "--day required")
             prepare(args.state, args.day, args.head, args.output)
-        else:
+        elif args.command == "receipt":
             require(args.evidence is not None, "evidence required")
             receipt(args.state, args.head, args.evidence, args.output)
+        else:
+            require(args.operator_id is not None and args.value is not None,
+                    "--operator-id and --value required")
+            print(json.dumps(use_operator(read(args.state), args.operator_id,
+                                          args.value), ensure_ascii=False))
         return 0
     except (ValueError, OSError, TypeError, KeyError, IndexError) as exc:
         print("GENERIC_FORGE_ERROR: " + str(exc), file=sys.stderr)
