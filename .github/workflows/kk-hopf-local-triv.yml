@@ -1,0 +1,97 @@
+name: KK Hopf north local trivialization
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKHopfNorthTriv.lean'
+      - 'tools/check_kk_hopf_north_triv.py'
+      - 'docs/verification/2026-11-23-kk-hopf-local-triv.md'
+      - '.github/workflows/kk-hopf-local-triv.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  north-local-triv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Trust-zero compilation of explicit north fibre equivalence
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          for mod in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique KKHopfHomeo KKHopfNorthTriv; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$mod.olean" "Research/$mod.lean" 2>&1 | tee "../kk-north-$mod.log"
+          done
+      - name: Audit named theorems and exported equivalence
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKHopfNorthTriv.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/', '',src,flags=re.S)
+          assert not re.search(r'^\s*(axiom|sorry)\b',clean,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',clean,re.M)
+          assert len(names)>=5,names
+          Path('KKHopfNorthTrivAudit.lean').write_text('import Research.KKHopfNorthTriv\n'
+            + ''.join('#print axioms KKHopfNorthTriv.'+name+'\n' for name in names)
+            + '#print axioms KKHopfNorthTriv.northTrivialization\n')
+          Path('../kk-north-count.txt').write_text(str(len(names)+1))
+          PY
+          lake env lean --trust=0 KKHopfNorthTrivAudit.lean 2>&1 | tee ../kk-north-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          t=Path('../kk-north-audit.log').read_text()
+          n=int(Path('../kk-north-count.txt').read_text())
+          rows=re.findall(r'depends on axioms:\s*\[([^]]*)\]',t)
+          none=t.count('does not depend on any axioms')
+          assert len(rows)+none==n,(n,len(rows),none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+            assert {x.strip() for x in row.split(',') if x.strip()}<=allowed,row
+          assert 'sorryAx' not in t
+          print('PASS:',n,'public theorem/definition axiom audits')
+          PY
+      - name: Independent polynomial verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_hopf_north_triv.py 2>&1 | tee kk-north-sympy.log
+      - name: Preserve source SHA and artifacts
+        if: always()
+        shell: bash
+        run: |
+          git rev-parse HEAD > kk-north-checkout.txt
+          sha256sum lean/Research/KKHopfNorthTriv.lean tools/check_kk_hopf_north_triv.py > kk-north-sha256.txt
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-hopf-north-local-triv
+          path: |
+            kk-north-*.log
+            kk-north-count.txt
+            kk-north-sympy.log
+            kk-north-checkout.txt
+            kk-north-sha256.txt
+          if-no-files-found: warn
