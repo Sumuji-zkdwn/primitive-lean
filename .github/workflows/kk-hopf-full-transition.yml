@@ -4,8 +4,10 @@ on:
   pull_request:
     paths:
       - 'lean/Research/KKHopfTransitionAlgebra.lean'
+      - 'lean/Research/KKHopfTransitionContinuous.lean'
       - 'tools/check_kk_hopf_full_transition.py'
       - 'docs/verification/2026-11-23-kk-hopf-full-transition.md'
+      - 'docs/verification/2026-11-23-kk-hopf-transition-continuous.md'
       - '.github/workflows/kk-hopf-full-transition.yml'
   workflow_dispatch:
 
@@ -35,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/Research
-          for mod in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique KKHopfHomeo KKHopfNorthTriv KKHopfNorthHomeo KKHopfSouthHomeo KKHopfTransitionAlgebra; do
+          for mod in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique KKHopfHomeo KKHopfNorthTriv KKHopfNorthHomeo KKHopfSouthHomeo KKHopfTransitionAlgebra KKHopfTransitionContinuous; do
             lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$mod.olean" "Research/$mod.lean" 2>&1 | tee "../kk-overlap-$mod.log"
           done
       - name: Audit the new transition theorems and both local homeomorphisms
@@ -52,10 +54,17 @@ jobs:
           names=re.findall(r'^theorem\s+(\w+)',clean,re.M)
           assert len(names)==3,names
           checks=['#print axioms KKHopfTransitionAlgebra.'+n for n in names]
+          src2=Path('Research/KKHopfTransitionContinuous.lean').read_text()
+          clean2=re.sub(r'/\-.*?\-/', '',src2,flags=re.S)
+          assert not re.search(r'^\s*(axiom|sorry)\b',clean2,re.M)
+          names2=re.findall(r'^theorem\s+(\w+)',clean2,re.M)
+          assert len(names2)==2,names2
+          checks+=['#print axioms KKHopfTransitionContinuous.'+n for n in names2]
+          checks+=['#print axioms KKHopfTransitionContinuous.transition']
           checks+=['#print axioms KKHopfNorthHomeo.northHomeomorph',
                    '#print axioms KKHopfSouthHomeo.southHomeomorph']
           Path('KKHopfFullOverlapAudit.lean').write_text(
-            'import Research.KKHopfTransitionAlgebra\n'+'\n'.join(checks)+'\n')
+            'import Research.KKHopfTransitionContinuous\n'+'\n'.join(checks)+'\n')
           Path('../kk-overlap-count.txt').write_text(str(len(checks)))
           PY
           lake env lean --trust=0 KKHopfFullOverlapAudit.lean 2>&1 | tee ../kk-overlap-axioms.log
@@ -84,7 +93,7 @@ jobs:
         shell: bash
         run: |
           git rev-parse HEAD > kk-overlap-checkout.txt
-          sha256sum lean/Research/KKHopfTransitionAlgebra.lean tools/check_kk_hopf_full_transition.py > kk-overlap-sha256.txt
+          sha256sum lean/Research/KKHopfTransitionAlgebra.lean lean/Research/KKHopfTransitionContinuous.lean tools/check_kk_hopf_full_transition.py > kk-overlap-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
