@@ -263,6 +263,95 @@ theorem two_changed_bits_span_lower
 
 #print axioms two_changed_bits_span_lower
 
+
+/-- Two prescribed gate visits (first i, then j) admit a concrete
+three-leg horizontal walk with exactly the displayed cost. -/
+theorem two_gate_sweep_realizable
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    (s t : ℝ) (b : ι → Bool) (i j : ι)
+    (u v : ℝ) (hui : G i u) (hvj : G j v) :
+    WeightedWalk G F (s,b) (t,flipBit (flipBit b i) j)
+      (|F s - F u| + |F u - F v| + |F v - F t|) := by
+  let b1 := flipBit b i
+  let b2 := flipBit b1 j
+  have hlast : WeightedWalk G F (v,b2) (t,b2)
+      (|F v - F t|) := by
+    simpa only [add_zero] using
+      (WeightedWalk.horiz v t b2 (t,b2) 0 (WeightedWalk.stop (t,b2)))
+  have hj : WeightedWalk G F (v,b1) (t,b2)
+      (|F v - F t|) :=
+    WeightedWalk.gate v b1 j (t,b2) (|F v - F t|) hvj hlast
+  have hmiddle : WeightedWalk G F (u,b1) (t,b2)
+      (|F u - F v| + |F v - F t|) :=
+    WeightedWalk.horiz u v b1 (t,b2) (|F v - F t|) hj
+  have hi : WeightedWalk G F (u,b) (t,b2)
+      (|F u - F v| + |F v - F t|) :=
+    WeightedWalk.gate u b i (t,b2) _ hui hmiddle
+  have hstart : WeightedWalk G F (s,b) (t,b2)
+      (|F s - F u| + (|F u - F v| + |F v - F t|)) :=
+    WeightedWalk.horiz s u b (t,b2) _ hi
+  simpa only [b1,b2, add_assoc] using hstart
+
+/-- For distinct i,j with respective *unique* gates at a<b and
+s between them, the exact roundtrip cost to change both bits is the
+full left-to-right excursion 2*(F b-F a). This is the first
+multi-bit equality certified on all finite legal costed walks. -/
+theorem exact_two_unique_gate_roundtrip_infimum
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ) (hF : Monotone F)
+    (s a b : ℝ) (has : a ≤ s) (hsb : s ≤ b)
+    (bits : ι → Bool) (i j : ι) (hij : i ≠ j)
+    (ha : G i a) (hb : G j b)
+    (huni : ∀ w, G i w → w = a)
+    (hunj : ∀ w, G j w → w = b) :
+    sInf {c : ℝ |
+      WeightedWalk G F (s,bits)
+        (s,flipBit (flipBit bits i) j) c} =
+      2 * (F b - F a) := by
+  let bits2 := flipBit (flipBit bits i) j
+  let S : Set ℝ :=
+    {c | WeightedWalk G F (s,bits) (s,bits2) c}
+  have hdiffi : bits i ≠ bits2 i := by
+    simp [bits2, flipBit, hij, hij.symm]
+  have hdiffj : bits j ≠ bits2 j := by
+    simp [bits2, flipBit, hij, hij.symm]
+  have hFa : F a ≤ F s := hF has
+  have hFb : F s ≤ F b := hF hsb
+  have hFab : F a ≤ F b := le_trans hFa hFb
+  have hlow : ∀ c ∈ S, 2 * (F b - F a) ≤ c := by
+    intro c hc
+    obtain ⟨u,v,hu,hv,hbound⟩ :=
+      two_changed_bits_span_lower G F hc i j hij hdiffi hdiffj
+    have hua : u = a := huni u hu
+    have hvb : v = b := hunj v hv
+    subst u
+    subst v
+    change 2 * |F a - F b| ≤ c + |F s - F s| at hbound
+    rw [abs_of_nonpos (sub_nonpos.mpr hFab)] at hbound
+    simp only [sub_self, abs_zero, add_zero] at hbound
+    exact hbound
+  have hcost :
+      |F s - F a| + |F a - F b| + |F b - F s| =
+        2 * (F b - F a) := by
+    rw [abs_of_nonneg (sub_nonneg.mpr hFa),
+        abs_of_nonpos (sub_nonpos.mpr hFab),
+        abs_of_nonneg (sub_nonneg.mpr hFb)]
+    ring
+  have hwitness : 2 * (F b - F a) ∈ S := by
+    have hw := two_gate_sweep_realizable G F s s bits i j a b ha hb
+    change WeightedWalk G F (s,bits) (s,bits2)
+      (2 * (F b - F a))
+    rw [← hcost]
+    exact hw
+  have hne : S.Nonempty := ⟨_, hwitness⟩
+  have hbounded : BddBelow S := ⟨_, hlow⟩
+  change sInf S = 2 * (F b - F a)
+  apply le_antisymm
+  · exact csInf_le hbounded hwitness
+  · exact le_csInf hne hlow
+
+#print axioms two_gate_sweep_realizable
+#print axioms exact_two_unique_gate_roundtrip_infimum
+
 #print axioms one_bit_detour_realizable
 #print axioms exact_one_bit_roundtrip_infimum
 
