@@ -1,0 +1,90 @@
+name: General time 5D vacuum radion rigidity
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/General5DVacuumRadion.lean'
+      - 'tools/check_general_vacuum_radion5.py'
+      - 'docs/research/2026-11-24-general-5d-vacuum-radion-rigidity.md'
+      - '.github/workflows/general-5d-vacuum-radion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  general-vacuum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Record the checked out SHA and script hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_general_vacuum_radion5.py | tee verification/source.sha256
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Check 11 residual algebra certificates with trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/General5DVacuumRadion.olean Research/General5DVacuumRadion.lean 2>&1 | tee ../verification/general5d-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../verification/general5d-lean.log; then exit 1; fi
+      - name: Inspect all theorem axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/General5DVacuumRadion.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==11,names
+          pathlib.Path('General5DVacuumRadionAudit.lean').write_text(
+              'import Research.General5DVacuumRadion\n' +
+              ''.join('#print axioms General5DVacuumRadion.'+n+'\n' for n in names))
+          pathlib.Path('../verification/general5d-theorems.txt').write_text('\n'.join(names))
+          PY
+          lake env lean --trust=0 General5DVacuumRadionAudit.lean 2>&1 | tee ../verification/general5d-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../verification/general5d-axioms.log').read_text()
+          n=len(pathlib.Path('../verification/general5d-theorems.txt').read_text().splitlines())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          none=s.count('does not depend on any axioms')
+          assert len(deps)+none==n,(n,len(deps),none)
+          allow={'propext','Classical.choice','Quot.sound'}
+          for line in deps:
+              used=set(filter(None,(x.strip() for x in line.split(','))))
+              assert used<=allow,used-allow
+          print('PASS theorem count',n,'explicit axiom allowlist')
+          PY
+      - name: Independent general-function 5D Ricci and Einstein-frame oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_general_vacuum_radion5.py 2>&1 | tee verification/general5d-sympy.log
+      - name: Upload exact-head reproducible evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: general5d-vacuum-radion
+          path: verification/
+          if-no-files-found: warn
