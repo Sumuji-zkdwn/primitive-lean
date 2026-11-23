@@ -386,6 +386,44 @@ theorem exact_two_bit_midpoint_example :
       = (2/3 : ℝ) from by
         convert h using 1 <;> norm_num)
 
+
+/-- Exact one-bit cost for the left gate, matching the standard
+two-gate counterexample. -/
+theorem exact_left_bit_midpoint_example :
+    sInf {c : ℝ |
+      WeightedWalk exampleTwoGates id ((1/2 : ℝ), exampleBits)
+        ((1/2 : ℝ), flipBit exampleBits (0 : Fin 2)) c}
+      = (1/3 : ℝ) := by
+  have h := exact_one_bit_roundtrip_infimum exampleTwoGates id
+    (1/2) exampleBits (0 : Fin 2) (1/3)
+    (by simp [exampleTwoGates])
+    (by
+      intro w hw
+      have eqw : w = (1/3 : ℝ) := by
+        simpa [exampleTwoGates] using hw
+      subst w
+      exact le_refl _)
+  convert h using 1 <;> norm_num
+
+/-- Exact one-bit cost for the right gate. -/
+theorem exact_right_bit_midpoint_example :
+    sInf {c : ℝ |
+      WeightedWalk exampleTwoGates id ((1/2 : ℝ), exampleBits)
+        ((1/2 : ℝ), flipBit exampleBits (1 : Fin 2)) c}
+      = (1/3 : ℝ) := by
+  have h := exact_one_bit_roundtrip_infimum exampleTwoGates id
+    (1/2) exampleBits (1 : Fin 2) (2/3)
+    (by simp [exampleTwoGates])
+    (by
+      intro w hw
+      have eqw : w = (2/3 : ℝ) := by
+        simpa [exampleTwoGates] using hw
+      subst w
+      exact le_refl _)
+  convert h using 1 <;> norm_num
+
+#print axioms exact_left_bit_midpoint_example
+#print axioms exact_right_bit_midpoint_example
 #print axioms exact_two_bit_midpoint_example
 
 #print axioms two_gate_sweep_realizable
