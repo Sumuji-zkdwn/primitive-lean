@@ -11,9 +11,8 @@ globally geodesically complete compactification is claimed.
 from functools import lru_cache
 import sympy as sp
 
-t, r, theta, az, chi, z = sp.symbols(
-    "t r theta az chi z", real=True
-)
+t, r, z = sp.symbols("t r z", positive=True)
+theta, az, chi = sp.symbols("theta az chi", real=True)
 k = sp.symbols("k", real=True)
 aa, bb = sp.Function("a")(t), sp.Function("b")(t)
 
