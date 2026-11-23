@@ -275,6 +275,7 @@
  }
  // Place a functioning demonstrator, then let the user tear down and optimize.
  function demoBlueprint(w){
+  w.challenge=false;
   for(const t of w.tiles)t.building=null;
   w.tick=0;w.energy=260;w.science=0;w.totalScience=0;w.status="playing";
   w.products={};w.documents=[];w.transported=0;w.built=0;
@@ -293,6 +294,37 @@
   put(12,7,"belt",0);put(13,7,"belt",0);
   put(14,7,"lab",0);
   record(w,"動く実験ラインを配置した。搬送が詰まる場所を探し、複製・改造して生産量を伸ばそう。");
+  return w;
+ }
+ const REPAIRS=[
+  {x:11,y:6,dir:1,description:"歯車ラインの南向きベルト"},
+  {x:10,y:8,dir:3,description:"導線ラインの北向きベルト"}
+ ];
+ function pendingRepairs(w){
+  if(!w.challenge)return [];
+  return REPAIRS.filter(p=>{
+   const m=w.tiles[idx(p.x,p.y)].building;
+   return !m||m.kind!=="belt"||m.dir!==p.dir;
+  });
+ }
+ function repairBlueprint(w,x,y){
+  const hint=pendingRepairs(w).find(p=>p.x===x&&p.y===y);
+  if(!hint)return false;
+  const cell=w.tiles[idx(x,y)];
+  if(cell.building?.kind==="belt")cell.building.dir=hint.dir;
+  else if(!cell.building)setMachine(w,x,y,"belt",hint.dir,true);
+  else return false;
+  const remain=pendingRepairs(w).length;
+  record(w,remain?hint.description+"を補修。残り"+remain+"か所。":
+   "搬送路の復旧完了。研究所に材料が届きはじめる。");
+  return true;
+ }
+ function challengeBlueprint(w){
+  demoBlueprint(w);
+  w.challenge=true;
+  removeMachine(w,11,6);
+  removeMachine(w,10,8);
+  record(w,"工場に2か所の搬送路の切断がある。黄色の欠損セルをタップして復旧しよう。");
   return w;
  }
  function techAvailable(w,tech){
@@ -332,5 +364,6 @@
  }
  return Object.freeze({W,H,SIZE,DX,DY,DIR_SYM,ITEMS,MACHINES,BUILDABLE,
   idx,xy,near,inside,isDiscovered,newWorld,clone,setMachine,removeMachine,rotate,place,
+  pendingRepairs,repairBlueprint,challengeBlueprint,
   inject,stepOnce,advance,demoBlueprint,techAvailable,unlock,machineStatus,counts,tip});
 });
