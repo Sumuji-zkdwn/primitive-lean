@@ -218,6 +218,8 @@ main:lean/Research/ElasticaIntrinsicHeight.lean	main:lean/Elastica/Geometry.lean
 main:lean/Research/ElasticaObservationQuotient.lean	main:lean/Elastica/Geometry.lean	exact_import	Elastica.Geometry
 main:lean/Research/ElasticaObservationQuotient.lean	main:lean/Elastica/Geometry.lean	qualified_reference	Elastica.curvature,Elastica.curvature_affine
 main:lean/Research/ElasticaObservationQuotient.lean	main:lean/Elastica/Geometry.lean	unique_identifier_candidate	curvature_affine
+main:lean/Research/FiniteConnectionCommutator.lean	main:lean/Research/FiniteConnectionDerivation.lean	exact_import	Research.FiniteConnectionDerivation
+main:lean/Research/FiniteConnectionCommutator.lean	main:lean/Research/FiniteConnectionDerivation.lean	unique_identifier_candidate	CommutingPartials
 main:lean/Research/FiniteConnectionDerivation.lean	main:lean/Research/FiniteConnectionCurvature.lean	exact_import	Research.FiniteConnectionCurvature
 main:lean/Research/FiniteConnectionWitness.lean	main:lean/Research/FiniteConnectionCurvature.lean	exact_import	Research.FiniteConnectionCurvature
 main:lean/Research/FiniteMarkovTransport.lean	main:lean/Research/OkanoharaTransport.lean	exact_import	Research.OkanoharaTransport
