@@ -63,7 +63,7 @@ theorem hopf_base_nonzero_of_radiusSq_pos (X : X4)
     (hr : 0 < radiusSq X) :
     hopfX X ≠ 0 ∨ hopfY X ≠ 0 ∨ hopfZ X ≠ 0 := by
   by_contra hn
-  push_neg at hn
+  push Not at hn
   rcases hn with ⟨hx,hy,hz⟩
   have hsq := hopf_norm X
   rw [hx,hy,hz] at hsq
