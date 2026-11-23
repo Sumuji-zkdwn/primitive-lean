@@ -98,6 +98,24 @@ footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
   .quickdock{display:flex;position:fixed;z-index:12;left:max(9px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));flex-direction:column;gap:5px;padding:6px;border:1px solid #658198;border-radius:13px;background:#172b3ded;box-shadow:0 6px 25px #050a15aa}
   .quickdock button{min-height:34px;width:96px;border-radius:8px;background:#31536c;border:1px solid #739ab0;font-size:11px;font-weight:700}
 }
+
+/* Kenney Tiny Dungeon CC0 16px pixel-art sprites, pinned to a public mirror.
+ * If the image CDN is blocked or offline, readable glyphs remain visible. */
+.cell .actor-glyph{position:relative;z-index:1}
+.cell .kenney-sprite{display:none;position:absolute;z-index:2;inset:12%;background-position:center;background-repeat:no-repeat;background-size:contain;image-rendering:pixelated;pointer-events:none}
+.kenney-art-ready .cell .kenney-sprite{display:block}
+.kenney-art-ready .cell .actor-glyph{opacity:0}
+.cell .kenney-sprite.hero-art{background-image:url("https://cdn.jsdelivr.net/gh/giobi/sgravoquest-assets@b3cbf86470ebdb68a80d48678db764dcaff181ac/sprites/hero.png")}
+.cell .kenney-sprite.monster-art{background-image:url("https://cdn.jsdelivr.net/gh/giobi/sgravoquest-assets@b3cbf86470ebdb68a80d48678db764dcaff181ac/sprites/monster.png")}
+.cell.enemy.windup .kenney-sprite{filter:brightness(1.25) saturate(1.2)}
+.cell.unseen,.cell.memory{box-shadow:none}
+.cell.unseen{background:#07111d!important;border-color:#17263a;color:transparent}
+.cell.unseen::before{display:none}
+.cell.memory{background:#142232;color:#74889a;filter:brightness(.75)}
+.cell.memory::after{content:"";position:absolute;inset:0;background:#07132088;pointer-events:none}
+.cell.unseen .grain,.cell.memory .grain,.cell.memory .foehp{display:none}
+.reward::before{content:"";float:right;width:31px;height:31px;margin-left:8px;background-image:url("https://cdn.jsdelivr.net/gh/giobi/sgravoquest-assets@b3cbf86470ebdb68a80d48678db764dcaff181ac/sprites/chest.png");background-position:center;background-repeat:no-repeat;background-size:contain;image-rendering:pixelated}
+
 @media (prefers-reduced-motion:reduce){.cell.enemy.windup{animation:none}}
 </style>
 </head>
@@ -127,7 +145,7 @@ footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
     <button id="polarity" type="button">入力極性 +1<br><small>攻撃の傾き</small></button>
     <button id="camp" type="button">野営<br><small>資金3</small></button>
   </div>
-  <p class="note">曲がって移動すると曲率が溜まり、次の攻撃を強めます。二重観測で敵のXを読み取り、入力極性を切り替えるとダメージが変化します。敵に隣接して方向キーを押すと攻撃。敵は攻撃前に赤く光るため、回避も可能。敵がいなくなると次の部屋へ移動できます。</p>
+  <p class="note">視界の外は暗くなり、離れた場所は探索記録だけ残ります。曲がって移動すると曲率が溜まり、次の攻撃を強めます。二重観測で敵のXを読み取り、入力極性を切り替えるとダメージが変化します。敵に隣接して方向キーを押すと攻撃。敵は攻撃前に赤く光るため、回避も可能。敵がいなくなると次の部屋へ移動できます。</p>
  </section>
  <section class="panel" aria-label="世界と装備">
   <div class="section-title">接続された部屋</div>
@@ -150,8 +168,9 @@ footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
 </div>
 <div class="quickdock" role="group" aria-label="スマホ用戦闘ボタン"><button id="dock-pulse" type="button">衝撃波 (2)</button><button id="dock-probe" type="button">二重観測</button><button id="dock-polarity" type="button">入力 +1</button></div>
 <div id="modal" aria-live="polite" aria-label="定理遺物の選択"><div class="modal-panel" id="modal-panel"></div></div>
-<footer>スマホではHTML/JavaScriptで動作します。世界法則の一部は既存Lean形式化（線形観測、符号付きLaakso、砂山、Rule481）に対応していますが、ブラウザはLeanのカーネルではありません。初期465定理の全てが戦闘を直接証明するわけではありません。</footer>
+<footer>画面素材：<a href="https://kenney.nl/assets/tiny-dungeon" target="_blank" rel="noopener">Kenney Tiny Dungeon</a> (CC0)。経路・視界：<a href="https://github.com/ondras/rot.js" target="_blank" rel="noopener">rot.js</a> (BSD-3-Clause、ライセンス文を同梱)。画像が読み込めない場合は文字表示に戻ります。スマホではHTML/JavaScriptで動作します。世界法則の一部は既存Lean形式化（線形観測、符号付きLaakso、砂山、Rule481）に対応していますが、ブラウザはLeanのカーネルではありません。初期465定理の全てが戦闘を直接証明するわけではありません。</footer>
 </main>
+<script src="./vendor/rot.min.js"></script>
 <script src="./engine.js"></script>
 <script src="./ui.js"></script>
 </body>
