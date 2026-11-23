@@ -1,0 +1,59 @@
+{
+  "before_tetra": 2,
+  "after_tetra": 3,
+  "before_edges": 9,
+  "after_edges": 10,
+  "boundary_triangles": 6,
+  "new_interior_edge": "DE",
+  "interior_faces_before": 1,
+  "interior_faces_after": 3,
+  "exact_cos_samples": {
+    "s=1": "1/3",
+    "s=8/3": "-1/2",
+    "s=11/4": "-3/5"
+  },
+  "flat_s": "8/3",
+  "d_deficit_dx_at_flat": "-9 sqrt(2)",
+  "rational_difference_checks": 20,
+  "status": "PASS",
+  "static_scan": {
+    "rows": 81,
+    "delta_s=1": 2.590307055157262,
+    "delta_s=8/3": 0.0,
+    "delta_s=11/4": -0.3597069995849562
+  },
+  "memory_dynamics": {
+    "gamma": 2.0,
+    "dt": 0.005,
+    "T": 12.0,
+    "initial_E": 0.020414277015128948,
+    "final_E": 0.0006849048200368747,
+    "dissipated": 0.019729372205253948,
+    "final_x": 1.633436872380635,
+    "final_delta": -0.005657509940053096,
+    "max_abs_energy_balance_error": 1.0782860021540941e-10
+  },
+  "refinement": {
+    "gamma": 2.0,
+    "dt": 0.0025,
+    "T": 12.0,
+    "initial_E": 0.020414277015128948,
+    "final_E": 0.0006849048012138312,
+    "dissipated": 0.01972937221661351,
+    "final_x": 1.6334368709907026,
+    "final_delta": -0.005657492186399438,
+    "max_abs_energy_balance_error": 6.2144178691880825e-12
+  },
+  "conservative_control": {
+    "gamma": 0.0,
+    "dt": 0.005,
+    "T": 12.0,
+    "initial_E": 0.020414277015128948,
+    "final_E": 0.02041427665688828,
+    "dissipated": 0.0,
+    "final_x": 1.6466828573654437,
+    "final_delta": -0.1844581292261509,
+    "max_abs_energy_balance_error": 4.3178544420485743e-10
+  },
+  "physical_scope": "3D spatial Regge hinge toy; 4D gravity emergence NOT claimed"
+}

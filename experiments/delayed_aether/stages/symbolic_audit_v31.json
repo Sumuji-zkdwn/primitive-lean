@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "gram_determinant": "-s*(s - 3)/4",
+  "leading_minor": "-s*(s - 4)/4",
+  "dihedral_cos": "(s - 2)/(s - 4)",
+  "d_deficit_dx_flat": "-9*sqrt(2)",
+  "linearized_memory_hessian_det": "162*k*mu",
+  "energy_balance_identity": "dE/dt + gamma*(dV/dz)^2 = 0",
+  "scope": "2->3 spatial Pachner geometry and chosen curvature-memory dynamics"
+}
