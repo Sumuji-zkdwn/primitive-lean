@@ -66,7 +66,7 @@ def evaluate(runs: list[dict], day: date) -> dict:
     elif today:
         # A failing latest attempt must be fixed, not blindly restarted.
         newest = today[0]
-        result = ("VERIFIED_RUN" if newest.get("conclusion") == "success"
+        result = ("RUN_SUCCESS" if newest.get("conclusion") == "success"
                   else "FAILED_TODAY")
     else:
         result = "MISSING_TODAY"
@@ -114,7 +114,9 @@ def decide(snapshot: list[dict]) -> dict:
 
 class GitHub:
     def __init__(self, repository: str, token: str):
-        if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+        if (not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository)
+                or any(part in (".", "..") or ".." in part
+                       for part in repository.split("/"))):
             raise ValueError("invalid fixed repository identifier")
         if not token:
             raise ValueError("GITHUB_TOKEN is required")
