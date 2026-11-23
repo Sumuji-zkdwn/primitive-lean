@@ -641,6 +641,101 @@ theorem arbitrary_multibit_sweep_lower
           exact hgates i (by simpa only [hkeep] using hdiff)
       · simpa using hcost
 
+
+/-- All admissible gate intervals for prescribed source and target bits. -/
+def AdmissibleGateInterval (G : ι → ℝ → Prop)
+    (s t : ℝ) (bits target : ι → Bool) (l u : ℝ) : Prop :=
+  l ≤ s ∧ l ≤ t ∧ s ≤ u ∧ t ≤ u ∧
+    ∀ k, bits k ≠ target k →
+      ∃ w, l ≤ w ∧ w ≤ u ∧ G k w
+
+def intervalSweepCosts (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    (s t : ℝ) (bits target : ι → Bool) : Set ℝ :=
+  {cost | ∃ l u, AdmissibleGateInterval G s t bits target l u ∧
+    cost = 2*(F u - F l)-|F s-F t|}
+
+def finiteWalkCosts (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    (s t : ℝ) (bits target : ι → Bool) : Set ℝ :=
+  {cost | WeightedWalk G F (s,bits) (t,target) cost}
+
+/-- An exact all-bit finite shortest-walk/sweep identity if every
+admissible interval has an ordered gate schedule realizing the required
+net bit changes. The additional hypothesis is explicit, not hidden.
+
+The independent sorting/finite selection argument constructing such a
+schedule from individual gate witnesses remains to be formalized. -/
+theorem all_bits_exact_sweep_of_schedules
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ) (hF : Monotone F)
+    (s t : ℝ) (hst : s ≤ t)
+    (bits target : ι → Bool)
+    (hexists : ∃ l u, AdmissibleGateInterval G s t bits target l u)
+    (hschedules : ∀ l u,
+      AdmissibleGateInterval G s t bits target l u →
+      ∃ events : List (ι × ℝ), AscendingEvents G u l events ∧
+        flipEvents bits events = target) :
+    sInf (finiteWalkCosts G F s t bits target) =
+      sInf (intervalSweepCosts G F s t bits target) := by
+  let W := finiteWalkCosts G F s t bits target
+  let S := intervalSweepCosts G F s t bits target
+  have hSb : BddBelow S := by
+    refine ⟨0, ?_⟩
+    intro c hc
+    rcases hc with ⟨l,u,⟨hls,hlt,hsu,htu,hg⟩,rfl⟩
+    have hFl_s : F l ≤ F s := hF hls
+    have hFl_t : F l ≤ F t := hF hlt
+    have hFs_u : F s ≤ F u := hF hsu
+    have hFt_u : F t ≤ F u := hF htu
+    have hd : |F s-F t| ≤ F u-F l := by
+      apply abs_le.mpr
+      constructor <;> linarith
+    dsimp [intervalSweepCosts] at *
+    linarith
+  have hSn : S.Nonempty := by
+    obtain ⟨l,u,hinterval⟩ := hexists
+    exact ⟨_, ⟨l,u,hinterval,rfl⟩⟩
+  have hWb : BddBelow W := by
+    refine ⟨0,?_⟩
+    intro c hc
+    have h := height_displacement_le_cost G F hc
+    have hnonneg := abs_nonneg (F s-F t)
+    change |F s-F t| ≤ c at h
+    linarith
+  have hWn : W.Nonempty := by
+    obtain ⟨l,u,hinterval⟩ := hexists
+    rcases hinterval with ⟨hls,hlt,hsu,htu,hgates⟩
+    obtain ⟨events, hsort, hbits⟩ :=
+      hschedules l u ⟨hls,hlt,hsu,htu,hgates⟩
+    have hwalk := ascending_sweep_upper G F hF
+      l s t u hls hst htu bits events hsort
+    have hwalk' : WeightedWalk G F (s,bits) (t,target)
+        (2*(F u-F l)-|F s-F t|) := by
+      simpa only [hbits] using hwalk
+    exact ⟨_, hwalk'⟩
+  change sInf W = sInf S
+  apply le_antisymm
+  · apply le_csInf hSn
+    intro c hc
+    rcases hc with ⟨l,u,hinterval,rfl⟩
+    rcases hinterval with ⟨hls,hlt,hsu,htu,hgates⟩
+    obtain ⟨events, hsort, hbits⟩ :=
+      hschedules l u ⟨hls,hlt,hsu,htu,hgates⟩
+    have hw := ascending_sweep_upper G F hF
+      l s t u hls hst htu bits events hsort
+    have hw' : WeightedWalk G F (s,bits) (t,target)
+        (2*(F u-F l)-|F s-F t|) := by
+      simpa only [hbits] using hw
+    exact csInf_le hWb hw'
+  · apply le_csInf hWn
+    intro c hc
+    obtain ⟨l,u,hlx,hxu,hly,hyu,hgates,hlower⟩ :=
+      arbitrary_multibit_sweep_lower G F hF hc
+    have hsweep : 2*(F u-F l)-|F s-F t| ∈ S :=
+      ⟨l,u,⟨hlx,hly,hxu,hyu,hgates⟩,rfl⟩
+    exact (csInf_le hSb hsweep).trans hlower
+
+#print axioms all_bits_exact_sweep_of_schedules
+
+
 #print axioms arbitrary_multibit_sweep_lower
 
 
