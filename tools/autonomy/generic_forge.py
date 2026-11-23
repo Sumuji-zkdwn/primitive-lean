@@ -32,10 +32,7 @@ DOMAIN_SIZE = {"grid3": 512, "signal4": 256}
 MAX_PROGRAM = 8
 MAX_PARENTS_PER_DOMAIN = 10
 MAX_RECORDS = 96
-# Short experimental run: existing initial receipt + four new ones at most.
-TRIAL_RECEIPT_CAP = 5
-TRIAL_START = "2026-11-23T08:00Z"
-TRIAL_END = "2026-11-23T12:59Z"
+# The permanent MAX_RECORDS bound remains authoritative; there is no trial-only limit.
 MAX_PROPOSALS = 1000
 STATE_KEYS = {"schema_version", "last_utc_day", "receipts"}
 RECEIPT_KEYS = {
@@ -92,8 +89,8 @@ def empty_state():
 
 
 def check_day(value):
-    # Preserve old YYYY-MM-DD receipts, but allow UTC ten-minute slots during
-    # the short trial. A slot (not a fabricated future date) identifies a run.
+    # Preserve original YYYY-MM-DD receipts and ordered UTC slots. The live
+    # workflow uses 30-minute slots; older ten-minute receipts remain valid.
     require(type(value) is str, "UTC day/slot must be a string")
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
         require(date.fromisoformat(value).isoformat() == value, "invalid date")
@@ -385,14 +382,6 @@ def plan(state, day, head):
     if state["last_utc_day"] == day:
         return {"schema_version": SCHEMA, "candidate": False,
                 "day": day, "head_sha": head, "reason": "ALREADY_CERTIFIED_TODAY"}
-    # Only the November 23, 2026 UTC trial window may run repeatedly.
-    # Historic daily date input remains available to legacy regression tests.
-    if "T" in day and not TRIAL_START <= day <= TRIAL_END:
-        return {"schema_version": SCHEMA, "candidate": False,
-                "day": day, "head_sha": head, "reason": "TRIAL_WINDOW_CLOSED"}
-    if len(state["receipts"]) >= TRIAL_RECEIPT_CAP:
-        return {"schema_version": SCHEMA, "candidate": False,
-                "day": day, "head_sha": head, "reason": "TRIAL_CAP_REACHED"}
     if len(state["receipts"]) >= MAX_RECORDS:
         return {"schema_version": SCHEMA, "candidate": False,
                 "day": day, "head_sha": head, "reason": "SAFETY_BUDGET_REACHED"}
