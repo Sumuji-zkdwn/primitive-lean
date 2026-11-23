@@ -1,0 +1,700 @@
+{
+  "passed": true,
+  "inputs_unchanged": true,
+  "source_sha256": {
+    "formalization/SquareClock.lean": "4ca2cd4526c8d598f4e6b95972ddb628f4a01f834c7067d646a38160914a4f4d",
+    "formalization/ObservedQuotient.lean": "f5bb2c5203672e15fab1ee2e647fb8d924f6b08c8afbf7dc95da36d34ed368e7",
+    "formalization/ProductPI.lean": "38a55e5cb020a83e7f8334fc89a78e20733ed4ee5ff6910b733979cf39859d5c",
+    "formalization/WeightedPI.lean": "93049da9830d4e26289c9ea82e063847b9f941f016179dcab9032f8e545e9959",
+    "formalization/CutObstruction.lean": "fc3415acf14ed111f3690a038e191a65a3d3152c88b69ef76c79750ef40a83d2",
+    "formalization/HeightLaw.lean": "2878417646f98fffd6d7095781c7beb92b6265a9560ad7c4a12cc4a01ef3f253",
+    "formalization/RawGeometry.lean": "50b919c990f7ffcfbfb878062f5330e1741a3061884326fcfff528597ca1cb17",
+    "formalization/RawFailure.lean": "622232eab81e3cfacc8fc2949f244f014724421de2428e69269ff773bff943a6",
+    "formalization/Main.lean": "fddc3c53c200a4fcad25a4cc513056a5cc90387339431badf8808312850110ff",
+    "planar_followup/test_planar_followup.py": "1702cb0ee8c11205a0f07f5dc9415200ac1a9e7524f8f1dc467907a357346a85",
+    "formalization/test_single_square.py": "09ae7374d761dde35325cef007e2b642cbbcc46d370fd1150767ed76e9b9f6c7",
+    "planar_followup/gate_closures.py": "ccc477499e4e368c40f00e5c94a90d9574b21a517b44b3376eb7f21facba42a0",
+    "planar_followup/gate_closures_results.json": "56ae999f9a0c2c6a2c51964e0a71e9cfbfded20e29a71ede1fb7b6a86c116284",
+    "planar_followup/local_response.py": "4588ea468b648f92b2d97166330086e7d82bd4f0776cafbfdc688512d7b81853",
+    "planar_followup/local_response.json": "ceb69d8aab3d70d140e035e8fef6c0ab428699a0ff57fff62e2b77e5f77095be",
+    "planar_followup/planar_sandpile.py": "5918a12ef87dcb346d8db80e556e2cad4a233a4c14e54578451acbfdcb6be128",
+    "planar_followup/planar_results.json": "da7e7edb5ecc862038c397c1ca705524f268f894b7461ece8d2c70f5f6474fd2",
+    "planar_followup/square_clock.py": "38ec6dd488a4e239ae511d5df1c864ce97b21f669287fb5c431d5113d171afc0",
+    "planar_followup/square_clock_results.json": "65a8e4a764f5791504d3e4b4282ff6d4036f6ab95b446d18bc8c05534de2bf4b",
+    "formalization/verify.py": "1d8c8a1104b7d47815b9daf1dbf40ff6c6e00502197013a2f8d7b3d3b0fa5ad1"
+  },
+  "core": {
+    "passed": true,
+    "compiler": "Lean (version 4.35.0, x86_64-w64-windows-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+    "toolchain": "leanprover/lean4:v4.35.0",
+    "trust_level": 0,
+    "source_sha256": "4ca2cd4526c8d598f4e6b95972ddb628f4a01f834c7067d646a38160914a4f4d",
+    "declarations": 25,
+    "axioms": {
+      "SquareClock.Run.trans": [],
+      "SquareClock.exists_stabilization": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.field_harmonic": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.field_input": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.field_sink": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.fresh_period": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.input_observation": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.inputs_bulk": [],
+      "SquareClock.inputs_exist": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.joint_reachable": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.observed_commute": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.period_pos": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.period_ternary": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.project_phase": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.refine_period": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.return_iff": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.run_preserves": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.sandpile_gate": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.square_first_return": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.square_phase_and_gate": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.step_preserves": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.switched_bucket": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.two_inputs": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.wt_harmonic": [
+        "Quot.sound",
+        "propext"
+      ],
+      "SquareClock.wt_sink": [
+        "propext"
+      ]
+    }
+  },
+  "mathlib": {
+    "mathlib_git_head": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+    "manifest_revision": "5450b53e5ddc75d46418fabb605edbf36bd0beb6",
+    "tracked_changes": false,
+    "toolchain": "leanprover/lean4:v4.30.0-rc2",
+    "lake_manifest_sha256": "5781fd49aff59347f594d12cbfa61129eebb10ef293729ead611bd7410740590",
+    "compiler": "Lean (version 4.30.0-rc2, x86_64-w64-windows-gnu, commit 3dc1a088b6d2d8eafe25a7cd7ec7b58d731bd7cc, Release)"
+  },
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "lean": {
+    "SquareClock": {
+      "passed": true,
+      "source_sha256": "4ca2cd4526c8d598f4e6b95972ddb628f4a01f834c7067d646a38160914a4f4d",
+      "trust_level": 0,
+      "imports": [
+        "Std"
+      ],
+      "declarations": 25,
+      "axioms": {
+        "SquareClock.Run.trans": [],
+        "SquareClock.exists_stabilization": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.field_harmonic": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.field_input": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.field_sink": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.fresh_period": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.input_observation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.inputs_bulk": [],
+        "SquareClock.inputs_exist": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.joint_reachable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.observed_commute": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.period_pos": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.period_ternary": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.project_phase": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.refine_period": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.return_iff": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.run_preserves": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.sandpile_gate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.square_first_return": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.square_phase_and_gate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.step_preserves": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.switched_bucket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.two_inputs": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.wt_harmonic": [
+          "Quot.sound",
+          "propext"
+        ],
+        "SquareClock.wt_sink": [
+          "propext"
+        ]
+      }
+    },
+    "ObservedQuotient": {
+      "passed": true,
+      "source_sha256": "f5bb2c5203672e15fab1ee2e647fb8d924f6b08c8afbf7dc95da36d34ed368e7",
+      "trust_level": 0,
+      "imports": [
+        "Mathlib.Topology.Instances.AddCircle.Real",
+        "Mathlib.Topology.Connected.TotallyDisconnected",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Real",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.NormNum",
+        "Mathlib.MeasureTheory.Measure.Lebesgue.Basic",
+        "Mathlib.MeasureTheory.Integral.Lebesgue.Basic"
+      ],
+      "declarations": 10,
+      "axioms": {
+        "ObservedSandpile.calibratedEquiv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.calibrated_PI_and_regular": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.fibre_not_homeomorphic_to_cantor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.fibre_not_totally_disconnected": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.limitDistance_eq_standard": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.no_PI_of_cut_tests": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.reindex_PI": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.reindex_average": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.reindex_regular": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.walkDistance_conjugate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "ProductPI": {
+      "passed": true,
+      "source_sha256": "38a55e5cb020a83e7f8334fc89a78e20733ed4ee5ff6910b733979cf39859d5c",
+      "trust_level": 0,
+      "imports": [
+        "Mathlib.MeasureTheory.Integral.Prod"
+      ],
+      "declarations": 3,
+      "axioms": {
+        "SandpileLaakso.ProductPI.product_of_slice_PI": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SandpileLaakso.ProductPI.product_oscillation_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SandpileLaakso.ProductPI.pullback_oscillation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "WeightedPI": {
+      "passed": true,
+      "source_sha256": "93049da9830d4e26289c9ea82e063847b9f941f016179dcab9032f8e545e9959",
+      "trust_level": 0,
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Continuity",
+        "Mathlib.MeasureTheory.Integral.Average",
+        "Mathlib.Tactic"
+      ],
+      "declarations": 18,
+      "axioms": {
+        "SubLaakso.WFS.bandVolume_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.calibrated_ball_profile": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.calibrated_interval_mass": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.compare_powers": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.deviation_le_twice": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.equal_dimensions_and_PI_order_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.equal_dimensions_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.interval_sweep_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.normalize_PI": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.outer_quarter": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.rampEnergy_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.rampEnergy_tendsto_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.rampOsc_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.rampOsc_tendsto_half": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.ramp_test_PI_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.transfer_ball": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.uniform_ramp_energy_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.WFS.weighted_path_distance_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "CutObstruction": {
+      "passed": true,
+      "source_sha256": "fc3415acf14ed111f3690a038e191a65a3d3152c88b69ef76c79750ef40a83d2",
+      "trust_level": 0,
+      "imports": [
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Continuity",
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+        "Mathlib.Tactic"
+      ],
+      "declarations": 11,
+      "axioms": {
+        "SubLaakso.Cut.clip_lipschitz": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.cut_energy_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.cut_osc_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.height_marginal_obstruction": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.inside_measurable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.inside_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.not_wholeBallPI": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.occupation_upper": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.symmetric_clip_mean_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.transformed_cut_obstruction": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.Cut.upper_along_height": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "HeightLaw": {
+      "passed": true,
+      "source_sha256": "2878417646f98fffd6d7095781c7beb92b6265a9560ad7c4a12cc4a01ef3f253",
+      "trust_level": 0,
+      "imports": [
+        "ObservedQuotient",
+        "Mathlib.Probability.ProductMeasure",
+        "Mathlib.Probability.Distributions.Uniform",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic",
+        "Mathlib.Tactic"
+      ],
+      "declarations": 6,
+      "axioms": {
+        "SingleSquare.rawSampleHeight_measurable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.sample_band_mass": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.sample_wings": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.sampled_interval_mass": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.standardLaw_probability": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.standard_height_marginal": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "RawGeometry": {
+      "passed": true,
+      "source_sha256": "50b919c990f7ffcfbfb878062f5330e1741a3061884326fcfff528597ca1cb17",
+      "trust_level": 0,
+      "imports": [
+        "ObservedQuotient",
+        "Mathlib.Analysis.Normed.Group.AddCircle",
+        "Mathlib.Tactic"
+      ],
+      "declarations": 3,
+      "axioms": {
+        "ObservedSandpile.Raw.diameter_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.Raw.height_control": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "ObservedSandpile.Raw.out_height": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "RawFailure": {
+      "passed": true,
+      "source_sha256": "622232eab81e3cfacc8fc2949f244f014724421de2428e69269ff773bff943a6",
+      "trust_level": 0,
+      "imports": [
+        "ObservedQuotient",
+        "CutObstruction"
+      ],
+      "declarations": 2,
+      "axioms": {
+        "SubLaakso.RawFailure.no_PI_of_signedPower_interval_law": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SubLaakso.RawFailure.no_PI_of_thin_band": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "Main": {
+      "passed": true,
+      "source_sha256": "fddc3c53c200a4fcad25a4cc513056a5cc90387339431badf8808312850110ff",
+      "trust_level": 0,
+      "imports": [
+        "SquareClock",
+        "ObservedQuotient",
+        "WeightedPI",
+        "ProductPI",
+        "HeightLaw",
+        "RawGeometry",
+        "RawFailure"
+      ],
+      "declarations": 4,
+      "axioms": {
+        "SingleSquare.physical_gates": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.raw_failure": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.same_samples": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "SingleSquare.single_square_realization": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    }
+  },
+  "python_version": "3.14.5",
+  "numpy_version": "2.4.4",
+  "test_suites": {
+    "test_planar_followup.py": {
+      "passed": true,
+      "tests": [
+        "test_planar_followup.PlanarSandpileTests.test_distance_charged_for_every_grain",
+        "test_planar_followup.PlanarSandpileTests.test_gate_closure_graphs",
+        "test_planar_followup.PlanarSandpileTests.test_planar_firings_and_merge_levels",
+        "test_planar_followup.PlanarSandpileTests.test_square_return_periods",
+        "test_planar_followup.PlanarSandpileTests.test_translated_sibling_responses"
+      ],
+      "count": 5
+    },
+    "test_single_square.py": {
+      "passed": true,
+      "tests": [
+        "test_single_square.SingleSquareTests.test_actual_angular_steps_and_commuting_returns",
+        "test_single_square.SingleSquareTests.test_all_pairs_weighted_product_distance",
+        "test_single_square.SingleSquareTests.test_refinement_of_phases_bits_and_lengths"
+      ],
+      "count": 3
+    }
+  }
+}

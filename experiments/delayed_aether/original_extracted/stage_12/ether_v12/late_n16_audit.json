@@ -1,0 +1,47 @@
+{
+  "grid_n": 16,
+  "dt": 0.002,
+  "T": 0.3,
+  "control_no_q_geometry_coupling": false,
+  "metric_coupling_alpha": 0.15,
+  "degree_initial": 1,
+  "degree_final": 0,
+  "charge_observations": [
+    0,
+    1
+  ],
+  "max_norm_error": 5.588862705963038e-13,
+  "max_tangent_error": 5.053239077179583e-12,
+  "initial_energy": 25.754219842490393,
+  "final_energy": 25.753349226509357,
+  "rel_energy_change": -3.380478952033732e-05,
+  "relative_energy_balance_error": -3.374960854298213e-05,
+  "max_abs_energy_balance_error": 5.8162035248325305e-05,
+  "dissipated": 1.4211430224994782e-06,
+  "core_shift_x": 0.1033725677976709,
+  "metric": {
+    "max_deficit": 0.06874010706043077,
+    "regge_abs_curvature": 1.585189274225834,
+    "min_gram_eigenvalue": 0.0047452145470150975
+  },
+  "max_memory_modulus": 3.54999082844573,
+  "max_b": 0.25041007861506437,
+  "gradient_audit": {
+    "q": {
+      "analytic": -0.004163339311929002,
+      "finite_diff": -0.004163339362150964,
+      "relative_error": 5.022196200576978e-11
+    },
+    "b": {
+      "analytic": -0.004675241637852363,
+      "finite_diff": -0.004675241704887867,
+      "relative_error": 6.703550388398316e-11
+    },
+    "z": {
+      "analytic": -1.713716806886537e-05,
+      "finite_diff": -1.7137224972429976e-05,
+      "relative_error": 5.690356460702028e-11
+    }
+  },
+  "datafile": "late_n16_timeseries.csv"
+}

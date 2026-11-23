@@ -1,0 +1,505 @@
+{
+  "model": "square lattice, threshold 4, empty substrate, origin source, nearest-neighbor toppling",
+  "checks": [
+    "independent parallel wired-box and sparse Z2 LIFO relaxation for each series entry",
+    "zero boundary flux and empty outer ring, mass conservation, Laplacian, stability",
+    "D4 symmetry of odometer, coordinate monotonicity, excursion coarea and perimeter",
+    "sequential single-grain FIFO search over positive odometers, direct parallel replay"
+  ],
+  "mass_series": [
+    {
+      "mass": 16,
+      "wired_box_radius": 7,
+      "boundary_flux": 0,
+      "parallel_rounds": 3,
+      "mass_after": 16,
+      "total_topplings": 9,
+      "origin_topplings": 5,
+      "toppled_sites": 5,
+      "toppled_linf_radius": 1,
+      "toppled_polyomino_perimeter": 12,
+      "perimeters_summed_over_all_positive_integer_superlevels": 28,
+      "height_3_sites": 0,
+      "height_3_components": 0,
+      "largest_height_3_component": 0
+    },
+    {
+      "mass": 64,
+      "wired_box_radius": 11,
+      "boundary_flux": 0,
+      "parallel_rounds": 9,
+      "mass_after": 64,
+      "total_topplings": 88,
+      "origin_topplings": 24,
+      "toppled_sites": 21,
+      "toppled_linf_radius": 2,
+      "toppled_polyomino_perimeter": 20,
+      "perimeters_summed_over_all_positive_integer_superlevels": 176,
+      "height_3_sites": 0,
+      "height_3_components": 0,
+      "largest_height_3_component": 0
+    },
+    {
+      "mass": 256,
+      "wired_box_radius": 19,
+      "boundary_flux": 0,
+      "parallel_rounds": 39,
+      "mass_after": 256,
+      "total_topplings": 1220,
+      "origin_topplings": 120,
+      "toppled_sites": 97,
+      "toppled_linf_radius": 5,
+      "toppled_polyomino_perimeter": 44,
+      "perimeters_summed_over_all_positive_integer_superlevels": 1336,
+      "height_3_sites": 40,
+      "height_3_components": 24,
+      "largest_height_3_component": 3
+    },
+    {
+      "mass": 1024,
+      "wired_box_radius": 35,
+      "boundary_flux": 0,
+      "parallel_rounds": 201,
+      "mass_after": 1024,
+      "total_topplings": 20384,
+      "origin_topplings": 596,
+      "toppled_sites": 445,
+      "toppled_linf_radius": 11,
+      "toppled_polyomino_perimeter": 92,
+      "perimeters_summed_over_all_positive_integer_superlevels": 10912,
+      "height_3_sites": 200,
+      "height_3_components": 88,
+      "largest_height_3_component": 5
+    },
+    {
+      "mass": 4096,
+      "wired_box_radius": 67,
+      "boundary_flux": 0,
+      "parallel_rounds": 787,
+      "mass_after": 4096,
+      "total_topplings": 312768,
+      "origin_topplings": 2824,
+      "toppled_sites": 1793,
+      "toppled_linf_radius": 23,
+      "toppled_polyomino_perimeter": 188,
+      "perimeters_summed_over_all_positive_integer_superlevels": 86112,
+      "height_3_sites": 892,
+      "height_3_components": 224,
+      "largest_height_3_component": 27
+    },
+    {
+      "mass": 8192,
+      "wired_box_radius": 93,
+      "boundary_flux": 0,
+      "parallel_rounds": 1551,
+      "mass_after": 8192,
+      "total_topplings": 1216549,
+      "origin_topplings": 6077,
+      "toppled_sites": 3537,
+      "toppled_linf_radius": 32,
+      "toppled_polyomino_perimeter": 260,
+      "perimeters_summed_over_all_positive_integer_superlevels": 239556,
+      "height_3_sites": 1872,
+      "height_3_components": 416,
+      "largest_height_3_component": 51
+    }
+  ],
+  "collision_search": {
+    "mass_before_inclusive": [
+      0,
+      247
+    ],
+    "sites": "previously toppled; one representative per D4 orbit (0<=x<=y)",
+    "first_collisions": {
+      "odometer": {
+        "mass_before": 99,
+        "observation": [
+          1
+        ],
+        "sites": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "site_topplings_next_grain": [
+          1,
+          0
+        ]
+      },
+      "odometer_height": {
+        "mass_before": 127,
+        "observation": [
+          2,
+          2
+        ],
+        "sites": [
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "site_topplings_next_grain": [
+          1,
+          2
+        ]
+      },
+      "odometer_height_squared_radius": {
+        "mass_before": 247,
+        "observation": [
+          1,
+          3,
+          25
+        ],
+        "sites": [
+          [
+            0,
+            5
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "site_topplings_next_grain": [
+          1,
+          0
+        ]
+      }
+    }
+  },
+  "collinear_multiple_sources": {
+    "checks": [
+      "simultaneous parallel vs sequential reversed-source LIFO stabilization",
+      "Laplacian, stability, zero flux and empty box boundary",
+      "all excursion components by graph search at every positive level",
+      "matching adjacent joins with axis minima and cross-column upper bounds"
+    ],
+    "two_sources": {
+      "source_x_at_y_zero": [
+        -4,
+        4
+      ],
+      "grains_per_source": 256,
+      "boundary_flux": 0,
+      "parallel_rounds": 69,
+      "highest_positive_level": 126,
+      "source_odometers": [
+        126,
+        126
+      ],
+      "partition_changes_in_descending_positive_levels": [
+        {
+          "level": 126,
+          "groups": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "level": 26,
+          "groups": [
+            "AB"
+          ]
+        }
+      ],
+      "pair_merge_levels": {
+        "AB": 26
+      },
+      "adjacent_pair_barriers": [
+        {
+          "pair": "AB",
+          "merge_level": 26,
+          "minimizing_columns": [
+            0
+          ]
+        }
+      ]
+    },
+    "four_sources": {
+      "source_x_at_y_zero": [
+        -7,
+        -4,
+        3,
+        7
+      ],
+      "grains_per_source": 256,
+      "boundary_flux": 0,
+      "parallel_rounds": 146,
+      "highest_positive_level": 180,
+      "source_odometers": [
+        171,
+        180,
+        171,
+        157
+      ],
+      "partition_changes_in_descending_positive_levels": [
+        {
+          "level": 180,
+          "groups": [
+            "B"
+          ]
+        },
+        {
+          "level": 171,
+          "groups": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        {
+          "level": 157,
+          "groups": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        {
+          "level": 125,
+          "groups": [
+            "AB",
+            "C",
+            "D"
+          ]
+        },
+        {
+          "level": 97,
+          "groups": [
+            "AB",
+            "CD"
+          ]
+        },
+        {
+          "level": 69,
+          "groups": [
+            "ABCD"
+          ]
+        }
+      ],
+      "pair_merge_levels": {
+        "AB": 125,
+        "CD": 97,
+        "AC": 69,
+        "AD": 69,
+        "BC": 69,
+        "BD": 69
+      },
+      "adjacent_pair_barriers": [
+        {
+          "pair": "AB",
+          "merge_level": 125,
+          "minimizing_columns": [
+            -6
+          ]
+        },
+        {
+          "pair": "BC",
+          "merge_level": 69,
+          "minimizing_columns": [
+            0
+          ]
+        },
+        {
+          "pair": "CD",
+          "merge_level": 97,
+          "minimizing_columns": [
+            5
+          ]
+        }
+      ]
+    },
+    "eight_sources": {
+      "source_x_at_y_zero": [
+        -17,
+        -15,
+        -9,
+        -7,
+        7,
+        9,
+        15,
+        17
+      ],
+      "grains_per_source": 256,
+      "boundary_flux": 0,
+      "parallel_rounds": 201,
+      "highest_positive_level": 217,
+      "source_odometers": [
+        201,
+        215,
+        217,
+        206,
+        206,
+        217,
+        215,
+        201
+      ],
+      "partition_changes_in_descending_positive_levels": [
+        {
+          "level": 217,
+          "groups": [
+            "C",
+            "F"
+          ]
+        },
+        {
+          "level": 215,
+          "groups": [
+            "B",
+            "C",
+            "F",
+            "G"
+          ]
+        },
+        {
+          "level": 206,
+          "groups": [
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G"
+          ]
+        },
+        {
+          "level": 201,
+          "groups": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H"
+          ]
+        },
+        {
+          "level": 175,
+          "groups": [
+            "A",
+            "B",
+            "CD",
+            "EF",
+            "G",
+            "H"
+          ]
+        },
+        {
+          "level": 172,
+          "groups": [
+            "AB",
+            "CD",
+            "EF",
+            "GH"
+          ]
+        },
+        {
+          "level": 112,
+          "groups": [
+            "ABCD",
+            "EFGH"
+          ]
+        },
+        {
+          "level": 20,
+          "groups": [
+            "ABCDEFGH"
+          ]
+        }
+      ],
+      "pair_merge_levels": {
+        "CD": 175,
+        "EF": 175,
+        "AB": 172,
+        "GH": 172,
+        "AC": 112,
+        "AD": 112,
+        "BC": 112,
+        "BD": 112,
+        "EG": 112,
+        "EH": 112,
+        "FG": 112,
+        "FH": 112,
+        "AE": 20,
+        "AF": 20,
+        "AG": 20,
+        "AH": 20,
+        "BE": 20,
+        "BF": 20,
+        "BG": 20,
+        "BH": 20,
+        "CE": 20,
+        "CF": 20,
+        "CG": 20,
+        "CH": 20,
+        "DE": 20,
+        "DF": 20,
+        "DG": 20,
+        "DH": 20
+      },
+      "adjacent_pair_barriers": [
+        {
+          "pair": "AB",
+          "merge_level": 172,
+          "minimizing_columns": [
+            -16
+          ]
+        },
+        {
+          "pair": "BC",
+          "merge_level": 112,
+          "minimizing_columns": [
+            -12
+          ]
+        },
+        {
+          "pair": "CD",
+          "merge_level": 175,
+          "minimizing_columns": [
+            -8
+          ]
+        },
+        {
+          "pair": "DE",
+          "merge_level": 20,
+          "minimizing_columns": [
+            0
+          ]
+        },
+        {
+          "pair": "EF",
+          "merge_level": 175,
+          "minimizing_columns": [
+            8
+          ]
+        },
+        {
+          "pair": "FG",
+          "merge_level": 112,
+          "minimizing_columns": [
+            12
+          ]
+        },
+        {
+          "pair": "GH",
+          "merge_level": 172,
+          "minimizing_columns": [
+            16
+          ]
+        }
+      ]
+    }
+  }
+}

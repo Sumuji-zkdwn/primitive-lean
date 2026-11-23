@@ -1,0 +1,9 @@
+{
+  "correct": -0.1475475694207623,
+  "bad": -0.19615225669296207,
+  "jax_correct": -0.14754756956785472,
+  "jax_bad": -0.196152256386333,
+  "agreement_correct": 1.470924215762892e-10,
+  "agreement_bad": 3.0662908323542126e-10,
+  "gradient_method": "NumPy two-sided perturbations versus JAX autodiff; two independently coded Hamiltonians"
+}

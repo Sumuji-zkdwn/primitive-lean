@@ -1,0 +1,6 @@
+mode,regge_quadratic_curvature,spring_quadratic_curvature
+flat vertex shift 1,0.0,1.2499999999999998
+flat vertex shift 2,3.944304526105059e-31,1.2499999999999998
+flat vertex shift 3,5.9164567891575885e-31,1.25
+flat vertex shift 4,0.0,1.25
+nonmetric radial length mode,89.44271909999159,1.0

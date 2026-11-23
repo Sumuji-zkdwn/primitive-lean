@@ -1,0 +1,6 @@
+v3: Mq=1, Mh=2, c_q_slow=1, c_q_front=1.37840488, c_h_front=0.707106781
+v4_tuned: Mq=1.9, Mh=1, c_q_slow=0.72547625, c_q_front=1, c_h_front=1
+For tau,k>0 the relaxation polynomial is Hurwitz for every wavenumber>0.
+For finite fixed Mq and quartic strain-memory, tangent stiffness = G0+k+3*eta*y^2 is unbounded as |y| increases.
+Thus no global fixed bound on all background-dependent front speeds is available.
+The wave-front comparison concerns vacuum principal symbols, not exact Lorentz invariance or equality of all dispersion branches.

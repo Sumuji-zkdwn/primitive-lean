@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "independent_targets": 5,
+  "degree_meshes": 4,
+  "flat_control_max_deficit": 5.329070518200751e-15,
+  "physical_gravity_derived": false,
+  "peak_stiffness_tau_0p2": 0.8677426815134908,
+  "peak_stiffness_tau_0p8": 1.517510145736657
+}

@@ -1,0 +1,23 @@
+{
+  "lagged": {
+    "independent_radial_laplacian_relative_rms": 7.177057614490323e-05,
+    "independent_Robin_residual": 1.9064381553989852e-10,
+    "psi_center": 1.022546930949133,
+    "rho_peak": 6.490819512723864
+  },
+  "aligned": {
+    "independent_radial_laplacian_relative_rms": 6.472294348134426e-05,
+    "independent_Robin_residual": 1.5808896783341998e-10,
+    "psi_center": 1.0181042393054964,
+    "rho_peak": 6.645117422110692
+  },
+  "misc": {
+    "max_full_hamiltonian_directional_gradient_error": 3.741639220677939e-09,
+    "degree_hedgehog_radial_quadrature_initial_final": [
+      1.0005404319683744,
+      1.0010491486553166
+    ],
+    "mass_ratio_lagged_over_aligned": 1.206128889181985,
+    "mass_increase_percent_due_to_prescribed_memory_lag": 20.6128889181985
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "null_and_nonnul_wavevectors": [
+    {
+      "k": [
+        -1,
+        0,
+        0,
+        1
+      ],
+      "k2": 0,
+      "rank_operator": 4,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 2
+    },
+    {
+      "k": [
+        -5,
+        3,
+        4,
+        0
+      ],
+      "k2": 0,
+      "rank_operator": 4,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 2
+    },
+    {
+      "k": [
+        -13,
+        3,
+        4,
+        12
+      ],
+      "k2": 0,
+      "rank_operator": 4,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 2
+    },
+    {
+      "k": [
+        -1,
+        1,
+        0,
+        0
+      ],
+      "k2": 0,
+      "rank_operator": 4,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 2
+    },
+    {
+      "k": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "k2": -1,
+      "rank_operator": 6,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 0
+    },
+    {
+      "k": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "k2": 1,
+      "rank_operator": 6,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 0
+    },
+    {
+      "k": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "k2": -3,
+      "rank_operator": 6,
+      "gauge_rank": 4,
+      "physical_plane_wave_dimension": 0
+    }
+  ],
+  "independent_initial_state_and_coupling_cases": [
+    {
+      "k": 0.9,
+      "lam": 0.35,
+      "initial": [
+        1.1,
+        -0.25,
+        0.4,
+        -0.15
+      ],
+      "max_relative_total_energy_drift": 1.8762847748339965e-12,
+      "total_source": {
+        "gauge_variation_integral": 2.148511945611331e-14,
+        "integration_by_parts_rhs": -0.0,
+        "int_by_parts_difference": 2.148511945611331e-14,
+        "max_abs_source_divergence": 0.0
+      },
+      "q_only_source": {
+        "gauge_variation_integral": 0.054680849995520434,
+        "integration_by_parts_rhs": 0.05468084999551652,
+        "int_by_parts_difference": 3.913536161803677e-15,
+        "max_abs_source_divergence": 1.2335965381323757
+      },
+      "unequal_source": {
+        "gauge_variation_integral": -0.03910945239866357,
+        "integration_by_parts_rhs": -0.0391094523986928,
+        "int_by_parts_difference": 2.9226621123257246e-14,
+        "max_abs_source_divergence": 1.2335965410565284
+      }
+    },
+    {
+      "k": 1.5,
+      "lam": 0.0,
+      "initial": [
+        0.7,
+        -0.6,
+        -0.3,
+        0.45
+      ],
+      "max_relative_total_energy_drift": 3.950705564834122e-12,
+      "total_source": {
+        "gauge_variation_integral": 4.307508126230597e-15,
+        "integration_by_parts_rhs": -0.0,
+        "int_by_parts_difference": 4.307508126230597e-15,
+        "max_abs_source_divergence": 0.0
+      },
+      "q_only_source": {
+        "gauge_variation_integral": -0.033710380174573756,
+        "integration_by_parts_rhs": -0.033710380174578426,
+        "int_by_parts_difference": 4.669875597329565e-15,
+        "max_abs_source_divergence": 1.3296586143457942
+      },
+      "unequal_source": {
+        "gauge_variation_integral": -0.07866371425317104,
+        "integration_by_parts_rhs": -0.07866371425318358,
+        "int_by_parts_difference": 1.2545520178264269e-14,
+        "max_abs_source_divergence": 1.3296634660961604
+      }
+    },
+    {
+      "k": 0.3,
+      "lam": 0.85,
+      "initial": [
+        1.35,
+        0.4,
+        0.15,
+        -0.5
+      ],
+      "max_relative_total_energy_drift": 3.532331434884144e-12,
+      "total_source": {
+        "gauge_variation_integral": 2.2177186031601542e-14,
+        "integration_by_parts_rhs": -0.0,
+        "int_by_parts_difference": 2.2177186031601542e-14,
+        "max_abs_source_divergence": 0.0
+      },
+      "q_only_source": {
+        "gauge_variation_integral": 0.003193088526996095,
+        "integration_by_parts_rhs": 0.0031930885269904853,
+        "int_by_parts_difference": 5.60966204044e-15,
+        "max_abs_source_divergence": 0.5093772346175822
+      },
+      "unequal_source": {
+        "gauge_variation_integral": 0.022271606458702256,
+        "integration_by_parts_rhs": 0.022271606458671652,
+        "int_by_parts_difference": 3.060399156318283e-14,
+        "max_abs_source_divergence": 0.5093770971258328
+      }
+    }
+  ],
+  "interpretation": "On-shell total stress conserved in this toy model; partial stresses cannot consistently couple alone to the same linear massless spin-2 gauge symmetry."
+}

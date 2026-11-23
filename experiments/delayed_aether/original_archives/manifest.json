@@ -1,0 +1,3985 @@
+{
+  "title": "Delayed-hardening ether: original stage archives v1–v30",
+  "date": "2026-11-23",
+  "type": "immutable source-byte inventory",
+  "archives": [
+    {
+      "stage": 1,
+      "zip": "delayed_aether_verification_2026-11-22.zip",
+      "bytes": 237659,
+      "sha256": "0cdaca1dd35d0534724b52a58fbec813a1ce6ed0787fd41c71c1975e99f0f83a",
+      "members": [
+        {
+          "path": "delayed_aether_report.md",
+          "bytes": 7702,
+          "sha256": "fce4e0c3322ca4c45419cdb880a8ae6383f294593a9a397ed4ff8df0fab6d994",
+          "crc32": "ccaebc77"
+        },
+        {
+          "path": "delayed_aether_pilot.py",
+          "bytes": 7811,
+          "sha256": "16b57ced786991959802cecb0749b2dfe7d84d66f14d3ce7708c747ea9b1cb63",
+          "crc32": "2968d02a"
+        },
+        {
+          "path": "delayed_aether_3d_poisson.py",
+          "bytes": 3065,
+          "sha256": "5a7d23c8d2a7cea54b81db59542dc8a95e83e8d39768c8e0d32f2c8016eac0d6",
+          "crc32": "6cb419cd"
+        },
+        {
+          "path": "delayed_aether_pair_energy.csv",
+          "bytes": 484,
+          "sha256": "35671ef598d5b8cb1e4414d648388a295887c62116046696e6492debb84c0458",
+          "crc32": "37944b8a"
+        },
+        {
+          "path": "delayed_aether_summary.csv",
+          "bytes": 1092,
+          "sha256": "b10c601587be75e7dbf35f28ad71f5a3a6961311861f786c6d71a4e3f730b852",
+          "crc32": "e019cafb"
+        },
+        {
+          "path": "delayed_aether_history.csv",
+          "bytes": 34806,
+          "sha256": "99dabf7b76158e24952a1b18eb5b089600f900ceb7783ce63c8ca3abe3c96791",
+          "crc32": "9d898e16"
+        },
+        {
+          "path": "delayed_aether_results.json",
+          "bytes": 4245,
+          "sha256": "161a1178cc3c5d3cec88e747e8e6dcf474547bb35b8558966e4ba57605430b89",
+          "crc32": "b6c37cd4"
+        },
+        {
+          "path": "delayed_aether_pair_energy.png",
+          "bytes": 66169,
+          "sha256": "3281de153864fd8c6e2300c1ed9c9ef710258462e25af5042322527edf8146ea",
+          "crc32": "e942c7ca"
+        },
+        {
+          "path": "delayed_aether_pair_dynamics.png",
+          "bytes": 95158,
+          "sha256": "7cd79e0f4ac8d04390017815737cda50c623f3a26a2ab4e3ad031dd8b7cd8dc3",
+          "crc32": "ba9fff0b"
+        },
+        {
+          "path": "delayed_aether_3d_poisson.csv",
+          "bytes": 971,
+          "sha256": "004057d2000f9befcc344fe97f5ea82bea0d337622111fccbb54155a8518003c",
+          "crc32": "1aa21f20"
+        },
+        {
+          "path": "delayed_aether_3d_poisson.json",
+          "bytes": 2762,
+          "sha256": "ce6b96a54173d76c092d364c2fab9c0b441d7ce104b4c664b1b7b26a09928c37",
+          "crc32": "78e49f4c"
+        },
+        {
+          "path": "delayed_aether_3d_poisson.png",
+          "bytes": 78012,
+          "sha256": "0c51ef14fe8799a48a5cfc6cdd1bb7094f4ac7d59139a03a65850aa8c042314b",
+          "crc32": "47985872"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "zip": "ether_effective_medium_verification_v2_2026-11-22.zip",
+      "bytes": 535694,
+      "sha256": "e829d7e2677edda48e11217364c237890acb7727e93cbaa41934eb4373741126",
+      "members": [
+        {
+          "path": "positive_radial_results.csv",
+          "bytes": 895,
+          "sha256": "4d7b73af33565c0ca7fb476995bcefb5095b3cd7292751a77492c8c94eb65350",
+          "crc32": "6ed2219b"
+        },
+        {
+          "path": "positive_profile_alpha_0p25.csv",
+          "bytes": 18333,
+          "sha256": "718954310ffdcc279fb0ce171725a3e487386c478263fe13c48bc339b8dc7095",
+          "crc32": "94920e4b"
+        },
+        {
+          "path": "radial_profile_positive.py",
+          "bytes": 6824,
+          "sha256": "f2123a04f0cf1d9e5f0f7287b3c3624d99fa89053e0c086b4b63a7da42323cc0",
+          "crc32": "2ba64653"
+        },
+        {
+          "path": "source_choice_collapse.png",
+          "bytes": 85152,
+          "sha256": "394ff5aedb88cef1ddae9c3b03372ca66d52b229714d27e2477092061bdba09c",
+          "crc32": "065ac53c"
+        },
+        {
+          "path": "RESEARCH_NOTE_2026-11-22.md",
+          "bytes": 11235,
+          "sha256": "d397256d3746233c89d4f09140bcdfdc2c3f73f0fe8bd6116dddde2db9d137ff",
+          "crc32": "62e79ad8"
+        },
+        {
+          "path": "audit_models.py",
+          "bytes": 2225,
+          "sha256": "36119ed49864e0040223beacc14711fb5b18040fef11d48dbd07464a8a6a5d5f",
+          "crc32": "792f647c"
+        },
+        {
+          "path": "pair_force_ratio.png",
+          "bytes": 72772,
+          "sha256": "e53f3b59e3b63ecf067278e08493969fffdf70b0c299813621ff458be12187a4",
+          "crc32": "9b6e9c5b"
+        },
+        {
+          "path": "rank_one_no_go.png",
+          "bytes": 78986,
+          "sha256": "9e91b679b72e8ae847d1c7372bd5c357324d0469bae4fe8948384e7821de56da",
+          "crc32": "cba72fdc"
+        },
+        {
+          "path": "audit.txt",
+          "bytes": 606,
+          "sha256": "0c3c13f75e01ebc3066a2812bddfe1d0e7803a2c543c788cbe9b61fe21a7472a",
+          "crc32": "48cc449a"
+        },
+        {
+          "path": "single_field.csv",
+          "bytes": 989,
+          "sha256": "e9175b4413b06e523fb15c916168b17d2a167659afd48ae0505ac1efa8df9870",
+          "crc32": "76949fad"
+        },
+        {
+          "path": "energy_radius.png",
+          "bytes": 102673,
+          "sha256": "567fdc1ac077e6f2116fbbc85f8360534be74d325f3437ac5a687a0ee539e3e7",
+          "crc32": "7d0bf679"
+        },
+        {
+          "path": "positive_pair_force.csv",
+          "bytes": 692,
+          "sha256": "ea48a57becddc0530db7a97c3e6b4bc43f287d6a0b5c174917279a8ea3739c04",
+          "crc32": "a6531bfe"
+        },
+        {
+          "path": "positive_source_and_field.png",
+          "bytes": 82862,
+          "sha256": "6cee100f5b511f6bf5abc310854547d23246f6108f18a57b999ec38847f22474",
+          "crc32": "f486fa84"
+        },
+        {
+          "path": "rank_one_no_go.csv",
+          "bytes": 1157,
+          "sha256": "d04cfa1b9e917f50ecd8e9536d012a6466d6ed47194211e7f059703285538576",
+          "crc32": "9b767852"
+        },
+        {
+          "path": "README.md",
+          "bytes": 796,
+          "sha256": "90e4ddfbe67ef003b3c71053b00f690df48c55b0c58468063e6deba3311733a8",
+          "crc32": "14382984"
+        },
+        {
+          "path": "ether_skyrme_gravity.py",
+          "bytes": 9309,
+          "sha256": "ba376b6210491133604c70c49cac1f4f4e18e3509231e78bfbd04e4b83244bf2",
+          "crc32": "67a570e9"
+        },
+        {
+          "path": "summary.json",
+          "bytes": 1360,
+          "sha256": "657d35fe017113302de1ebfb52e4117cf3f8867fd037bac46bcc6cb59a644feb",
+          "crc32": "372bbf81"
+        },
+        {
+          "path": "positive_profile_alpha_0p0.csv",
+          "bytes": 15373,
+          "sha256": "2aaa9d37d36f13cf071880974ceb541a6d8c03ef16eb605fd57f55285a6c5b7b",
+          "crc32": "c98d91bd"
+        },
+        {
+          "path": "positive_pair_force.py",
+          "bytes": 2042,
+          "sha256": "e0a1c7a980397f600baf7cb2fecf5f33019860b29284804e0373b102ed1ec4d1",
+          "crc32": "0751cebd"
+        },
+        {
+          "path": "positive_pair_force.png",
+          "bytes": 64020,
+          "sha256": "334e5615e8e9546bd4de3ecbfcc98631df4f703acca7de65b4db5cc75fbc259c",
+          "crc32": "f1bb6343"
+        },
+        {
+          "path": "positive_radial_profiles.png",
+          "bytes": 74840,
+          "sha256": "68470a76080d65a2117166fc50303075044a511dda5a325420ec15ac7bf28cac",
+          "crc32": "ed09f90c"
+        },
+        {
+          "path": "rank_one_counterexample.py",
+          "bytes": 1815,
+          "sha256": "049573ae0608a602ca0b426aafde0769c1877720ea39c2598d80e27076a83f53",
+          "crc32": "aafe1cfa"
+        },
+        {
+          "path": "pair_force.csv",
+          "bytes": 1185,
+          "sha256": "355ee6649f1082e39d24676d761b35b61b859203c618d0af3b4d4bfa178be1c5",
+          "crc32": "c116eac1"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "zip": "ether_delayed_hardening_v3_2026-11-22.zip",
+      "bytes": 604233,
+      "sha256": "26192ff68deb7cacef820945af2557f10e9647c99fe9b7b2eca069bbeb464f12",
+      "members": [
+        {
+          "path": "ether_third/run.log",
+          "bytes": 2413,
+          "sha256": "998e7b45b65e4c2b2ce1111199722689524cc328bcb25d87a980b39336bbea9e",
+          "crc32": "87a44e34"
+        },
+        {
+          "path": "ether_third/none_timeseries.csv",
+          "bytes": 44764,
+          "sha256": "74e95b7298be8095172839e6f4d947643bd3b988850e67ea4df998d542c6647d",
+          "crc32": "dc8a87b5"
+        },
+        {
+          "path": "ether_third/fine_delayed_timeseries.csv",
+          "bytes": 56264,
+          "sha256": "16904b0acd1b5367f4ff5f4a2f1beb02f069adcfbcd6386e9eba81b6c0e28900",
+          "crc32": "ff7875ea"
+        },
+        {
+          "path": "ether_third/slow_memory_timeseries.csv",
+          "bytes": 55880,
+          "sha256": "d1ce0d5c7cd62cde789f371fe9de3adb54c9fa510f941656ea9a255c45ce9aea",
+          "crc32": "61bc12a2"
+        },
+        {
+          "path": "ether_third/causal_scalar_pulse.py",
+          "bytes": 1972,
+          "sha256": "18f7691d954dcdbb95800601bf1e084b61089ede4223f10e4e64ae4e09235b3d",
+          "crc32": "191fa2be"
+        },
+        {
+          "path": "ether_third/defect_recovery.png",
+          "bytes": 118791,
+          "sha256": "e69cfe768c3887ae49f226ca7bc426d4349c62c801c88a5996ad509db0324636",
+          "crc32": "393e6da8"
+        },
+        {
+          "path": "ether_third/no_memory_timeseries.csv",
+          "bytes": 48252,
+          "sha256": "2352ed73742444fc12dc0d66ec7cc6f3bfacef8108c8a0b8d07817bed64a28a9",
+          "crc32": "cc8ac8eb"
+        },
+        {
+          "path": "ether_third/dispersion_limits.py",
+          "bytes": 1147,
+          "sha256": "625c32523ef8c045bb69f4aba5cd39db4a5c26d5d291aa0bc639278cb55d3c7d",
+          "crc32": "e8b850ea"
+        },
+        {
+          "path": "ether_third/fast_memory_timeseries.csv",
+          "bytes": 56514,
+          "sha256": "ac8112d6fcb44f85a0e548a025bcca6604c578a97391c3427e6c6e29479d3787",
+          "crc32": "d06bdc56"
+        },
+        {
+          "path": "ether_third/frequency_response.png",
+          "bytes": 77960,
+          "sha256": "e9c2636b51d042d5a0ebc6fb40992a767ff5903895ce3d5e449c02df57165226",
+          "crc32": "221a954c"
+        },
+        {
+          "path": "ether_third/causal_wavefront_audit.csv",
+          "bytes": 350,
+          "sha256": "10c328c4ce74ab57a5590e60fc5dd07a8b15968c5fbc614e8e7cc53adb578c4b",
+          "crc32": "1ddb0021"
+        },
+        {
+          "path": "ether_third/energy_decay.png",
+          "bytes": 139110,
+          "sha256": "ced01fbf2d8b3053ff9e0e404d4b05dd820a3595ca9e6efc8a21458b4fc8f08d",
+          "crc32": "b799fd7b"
+        },
+        {
+          "path": "ether_third/causal_wavefront.png",
+          "bytes": 90706,
+          "sha256": "9084130e1489fb970b6ba839bb362e6bdc9927f66dc5f173b846fe6b173e6eba",
+          "crc32": "a38f9073"
+        },
+        {
+          "path": "ether_third/vacuum_speed_audit.csv",
+          "bytes": 188,
+          "sha256": "37f5289327fd28da09e7bab03ad771134c6f94512b9910e3d113596c49439927",
+          "crc32": "f095bdab"
+        },
+        {
+          "path": "ether_third/README.md",
+          "bytes": 1227,
+          "sha256": "7c92295fbe9e520effe6640edc4f3ef84624692d278a56a6674c68052f3fa2b2",
+          "crc32": "ca4ca199"
+        },
+        {
+          "path": "ether_third/audit_repro.py",
+          "bytes": 1464,
+          "sha256": "4acbb8db5a913896acc8648d3b5dbe3ad945937ea79c0a9e72c1497d2263c0db",
+          "crc32": "82f84883"
+        },
+        {
+          "path": "ether_third/dynamics_summary.csv",
+          "bytes": 1964,
+          "sha256": "61bb1fe62728d8a94dcfe5304fa29f6772c284060f8b8ac9ad6df64f39f48222",
+          "crc32": "1889999a"
+        },
+        {
+          "path": "ether_third/delayed_hardening_dynamics.py",
+          "bytes": 11516,
+          "sha256": "e2acbc965b31a0e60db7b7e0c0cf491e927abbb6aa6e600c023d8dfaf8f55280",
+          "crc32": "4806362e"
+        },
+        {
+          "path": "ether_third/delay_nonlinear_timeseries.csv",
+          "bytes": 52231,
+          "sha256": "b8647e36fde92dc0775c5a6e949c56b0687b0f7e1840c9f4d81a50d538b6f0c8",
+          "crc32": "a78124ed"
+        },
+        {
+          "path": "ether_third/linear_memory_timeseries.csv",
+          "bytes": 53913,
+          "sha256": "37ccf777f24d9167056d95723cdd061e086bdf87ee7089437d9cfd6ae1910c8e",
+          "crc32": "47d97d58"
+        },
+        {
+          "path": "ether_third/radial_profile_positive.py",
+          "bytes": 6824,
+          "sha256": "f2123a04f0cf1d9e5f0f7287b3c3624d99fa89053e0c086b4b63a7da42323cc0",
+          "crc32": "2ba64653"
+        },
+        {
+          "path": "ether_third/delayed_memory_timeseries.csv",
+          "bytes": 56212,
+          "sha256": "a270f5589f96601b7fee0f6d1926ec76343e789acbc3435c72b249b592c40b3c",
+          "crc32": "d2c3a202"
+        },
+        {
+          "path": "ether_third/RESEARCH_NOTE_2026-11-22_v3.md",
+          "bytes": 11729,
+          "sha256": "9a974de63c19a44fc4b35a8550fef98af98b54718624e25d8c897e305f8cb0be",
+          "crc32": "f5fd97e7"
+        },
+        {
+          "path": "ether_third/audit.txt",
+          "bytes": 834,
+          "sha256": "169c172984314f2e5866a3fa41fa4c9e9481a77bb231861c491b95b7525ee1bf",
+          "crc32": "bcb6ad1e"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "zip": "ether_delayed_hardening_v4_2026-11-22.zip",
+      "bytes": 954044,
+      "sha256": "3ecefb3a512807c6e126531a3e1ac070d75193744ab0b7a012edcdcda4428ea4",
+      "members": [
+        {
+          "path": "ether_fourth/README.md",
+          "bytes": 1572,
+          "sha256": "a190b6d539fe0b0bf2e6106fb95f693ae2a69874ee5b6e18432d22b5f3a1845b",
+          "crc32": "b50cc284"
+        },
+        {
+          "path": "ether_fourth/RESEARCH_NOTE_2026-11-22_v4.md",
+          "bytes": 13167,
+          "sha256": "38c81e70d42e320d239f9b215f9fcd03775b607cb9509a72f53e310904584bcd",
+          "crc32": "58ac50d9"
+        },
+        {
+          "path": "ether_fourth/audit.txt",
+          "bytes": 1074,
+          "sha256": "0c08229ae53d0ba3c0474b4724f89eb69ab421016b0ec2d69736f60994e92e14",
+          "crc32": "98c2d91f"
+        },
+        {
+          "path": "ether_fourth/radial_profile_positive.py",
+          "bytes": 6824,
+          "sha256": "f2123a04f0cf1d9e5f0f7287b3c3624d99fa89053e0c086b4b63a7da42323cc0",
+          "crc32": "2ba64653"
+        },
+        {
+          "path": "ether_fourth/delayed_hardening_dynamics.py",
+          "bytes": 11516,
+          "sha256": "e2acbc965b31a0e60db7b7e0c0cf491e927abbb6aa6e600c023d8dfaf8f55280",
+          "crc32": "4806362e"
+        },
+        {
+          "path": "ether_fourth/nonradial_3d.py",
+          "bytes": 10994,
+          "sha256": "a1c8c9b202eed2e14107165179399fff21dcf7064cdf9fa7bee2687b1e9faa8a",
+          "crc32": "6b93d681"
+        },
+        {
+          "path": "ether_fourth/analytic_bounds.py",
+          "bytes": 2163,
+          "sha256": "56804807feb7ec19bd99965b04afb110988ad126a16d410fae5a7031d38e6404",
+          "crc32": "49607422"
+        },
+        {
+          "path": "ether_fourth/dispersion_audit.py",
+          "bytes": 2991,
+          "sha256": "b06f3f16a29f5853835072ef9daa08042ee621237c84898779372f44a30d5e95",
+          "crc32": "ca38ed54"
+        },
+        {
+          "path": "ether_fourth/mass_charge_audit.py",
+          "bytes": 2533,
+          "sha256": "b43ee10dc42539c4558c65e6d595df42b50a714517fc5b6597a80774a536ddb3",
+          "crc32": "de359b2e"
+        },
+        {
+          "path": "ether_fourth/strain_cone_no_go.py",
+          "bytes": 1467,
+          "sha256": "55ee74ec48aae3be6ff4252087c71818ee5a026b02d533480bab11cff04513a4",
+          "crc32": "bc8d22ed"
+        },
+        {
+          "path": "ether_fourth/saturated_memory_dynamics.py",
+          "bytes": 5992,
+          "sha256": "b4b31bacc9bcc6ec62340c0496a11c8e134098fa0ec2d1ffdef3e3c3be181b85",
+          "crc32": "33f85f65"
+        },
+        {
+          "path": "ether_fourth/audit_v4.py",
+          "bytes": 4937,
+          "sha256": "7e88886c26664777accd6da840bbd693bc61302ac42eb9b1bb45ef12d480020c",
+          "crc32": "3be5d3a9"
+        },
+        {
+          "path": "ether_fourth/affine_analytic.csv",
+          "bytes": 376,
+          "sha256": "dd8a71d2f305a1e9682c3ba01894a27406002e2097586daac2d341a26dfa7670",
+          "crc32": "6fdec4e5"
+        },
+        {
+          "path": "ether_fourth/dispersion.csv",
+          "bytes": 66980,
+          "sha256": "6cc52437a7c1647ba9bb71cd40d6c1137609f5d8bcc128dc1d584d25b3168bb5",
+          "crc32": "f6f2eb7e"
+        },
+        {
+          "path": "ether_fourth/equal_energy_counterexample.csv",
+          "bytes": 227,
+          "sha256": "ed1a027eb6daa3dba3f10a2365f1886cc0ba284aa51b2f698dff14df62806277",
+          "crc32": "6c8dc6c5"
+        },
+        {
+          "path": "ether_fourth/nonradial_tests_coarse_medium.csv",
+          "bytes": 4647,
+          "sha256": "4b964e50139a61db01d9d23974b0654a9bf2ad7121eef3f72f57741ebf0c52e6",
+          "crc32": "210f181b"
+        },
+        {
+          "path": "ether_fourth/nonradial_tests_fine.csv",
+          "bytes": 1669,
+          "sha256": "270330c72996d476c9489bcbe31ff0310b48288e942398e10dba145f6f54fd31",
+          "crc32": "094cb5e1"
+        },
+        {
+          "path": "ether_fourth/nonradial_tests_all.csv",
+          "bytes": 6389,
+          "sha256": "4cd11b467430c6df57157fcdf848596ead0ebcad1c383f6f21d433fb6e5c1be9",
+          "crc32": "380e0515"
+        },
+        {
+          "path": "ether_fourth/quartic_tuned_timeseries.csv",
+          "bytes": 55807,
+          "sha256": "ec19e111a67e9f291ab74687abb241c0588ab15f50c1fd45b1b6676f24b4cdf1",
+          "crc32": "b04002ad"
+        },
+        {
+          "path": "ether_fourth/bounded_memory_tuned_timeseries.csv",
+          "bytes": 55850,
+          "sha256": "7df7cb78681ee4cc3887ceb1952aa4582a46046356c461eb6908729bc3788478",
+          "crc32": "6f902751"
+        },
+        {
+          "path": "ether_fourth/saturated_dynamics_summary.csv",
+          "bytes": 555,
+          "sha256": "2f805b754f937f37fc23393f6f82701615099753d81d6b9cb2bb3f9e883e4720",
+          "crc32": "17fb73a4"
+        },
+        {
+          "path": "ether_fourth/source_vs_rest_energy.csv",
+          "bytes": 745,
+          "sha256": "28d14f5f95cf93ffabd0240bcd459deb0b2853b46b8b845efe9333a3e6fcd486",
+          "crc32": "ffd57cd3"
+        },
+        {
+          "path": "ether_fourth/strong_field_cone.csv",
+          "bytes": 9575,
+          "sha256": "c48744bb2ce389383d17c8db46c4c8cb593803d561801af94013abd8a6767a68",
+          "crc32": "60eb424a"
+        },
+        {
+          "path": "ether_fourth/speed_summary.txt",
+          "bytes": 540,
+          "sha256": "d6024b958184e34c050f5c02fc0e3cd33193ff6c8263477ab8b3bb5d3b6a8a66",
+          "crc32": "21caaae2"
+        },
+        {
+          "path": "ether_fourth/nonradial_resolution_audit.png",
+          "bytes": 109561,
+          "sha256": "6d5fc43f4db22e9c2076ec7e9f00a84f24d36cfe539a988fd91ee919042f5149",
+          "crc32": "c5eca336"
+        },
+        {
+          "path": "ether_fourth/nonradial_energy_coarse_medium.png",
+          "bytes": 92313,
+          "sha256": "58077252ba44625362b9541cd0aea274ae920179cdcd9501ed6e9a568fe139f7",
+          "crc32": "6940ed2d"
+        },
+        {
+          "path": "ether_fourth/nonradial_curvature_coarse_medium.png",
+          "bytes": 87228,
+          "sha256": "3fbf31730020300014177e9f083c86489f2061317fab8d88b1f0e4ccc6a4db40",
+          "crc32": "df443a7e"
+        },
+        {
+          "path": "ether_fourth/nonradial_energy_fine.png",
+          "bytes": 67122,
+          "sha256": "91015023e50aa66adab25965c24e4f92a92e26b2f1e3a55d2fa0b92fd382e183",
+          "crc32": "96518e06"
+        },
+        {
+          "path": "ether_fourth/nonradial_curvature_fine.png",
+          "bytes": 67944,
+          "sha256": "10e7ae626d6eb4c5a54215fb45fc24681b0c827c94d2b6ad7d0fa53b31425a9f",
+          "crc32": "779a190a"
+        },
+        {
+          "path": "ether_fourth/bounded_memory_modulus.png",
+          "bytes": 103181,
+          "sha256": "44286b68193529af84aaf2da9c47a70e11ec86298381cd7b24f7c055747c6609",
+          "crc32": "4c6d234d"
+        },
+        {
+          "path": "ether_fourth/bounded_memory_time_evolution.png",
+          "bytes": 173460,
+          "sha256": "e06b04c103fd7b82740649e14e7c5b9bd3ce090f390baa32ef15db538a70d58f",
+          "crc32": "935f9f7c"
+        },
+        {
+          "path": "ether_fourth/speed_tuning.png",
+          "bytes": 90339,
+          "sha256": "3c0cebab272960ed6353b4a9226ffc9e2d927e28229a325a70e9230aac6130c3",
+          "crc32": "61fc3594"
+        },
+        {
+          "path": "ether_fourth/strong_field_cone.png",
+          "bytes": 82119,
+          "sha256": "f61a8702b117caf24dc8d965b1be51de48711a318ed9b836958fe681ca012328",
+          "crc32": "0c75b21a"
+        },
+        {
+          "path": "ether_fourth/charge_energy_mismatch.png",
+          "bytes": 77982,
+          "sha256": "ae9ebe6ae57d49abab24a3ac3f520e29a4c6ab478ec861647f58325846e81912",
+          "crc32": "a9d88807"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "zip": "ether_delayed_hardening_v5_2026-11-22.zip",
+      "bytes": 753020,
+      "sha256": "9ec71f8eccd978d751236944019496b45a2ed5698ffc475acd96fb18ce8a0391",
+      "members": [
+        {
+          "path": "ether_fifth/README.md",
+          "bytes": 1775,
+          "sha256": "111abc3018336d8b93aa49f52f9c5f9aaf912fd0c3718715e67384a2a66d4be9",
+          "crc32": "dc089c25"
+        },
+        {
+          "path": "ether_fifth/RESEARCH_NOTE_2026-11-22_v5.md",
+          "bytes": 14357,
+          "sha256": "5e0a763aebde755b5416f6e9dc832e194a2890c0c41451f6364f1784637bc757",
+          "crc32": "3a07fe8c"
+        },
+        {
+          "path": "ether_fifth/audit.txt",
+          "bytes": 1914,
+          "sha256": "15513bc731a2ddedae0216577478b4c490125101c6868f1ed9ea952756e7bbff",
+          "crc32": "cf73a5fc"
+        },
+        {
+          "path": "ether_fifth/audit_independent.py",
+          "bytes": 2065,
+          "sha256": "201a579e399e278a5858baa2c07e7c9d66d89ab9aeb7570cecc9522d6c18ad77",
+          "crc32": "b10904e1"
+        },
+        {
+          "path": "ether_fifth/audit_results.json",
+          "bytes": 1858,
+          "sha256": "03b5b841bd9f01b287cdfff2c6706b9566f2428ff45a7e01b25e314f00396f6e",
+          "crc32": "a2947e4d"
+        },
+        {
+          "path": "ether_fifth/bps_monopole_benchmark.png",
+          "bytes": 103450,
+          "sha256": "55089098d65ab4ea68b4010a33ed16319664801dd8859ed6d924522a7ba602a0",
+          "crc32": "1006d105"
+        },
+        {
+          "path": "ether_fifth/conformal_lensing_audit.csv",
+          "bytes": 2193,
+          "sha256": "03babab9eb4dd8918bc67ae718b3fdf35466019a4017978cc9ece74d82934389",
+          "crc32": "1b4421b1"
+        },
+        {
+          "path": "ether_fifth/interface_audit.csv",
+          "bytes": 325,
+          "sha256": "7225294aab1468910fab68981761cb3cfb9408d4999245031e6e0a39f88116dd",
+          "crc32": "39bdef57"
+        },
+        {
+          "path": "ether_fifth/interface_scattering.png",
+          "bytes": 94923,
+          "sha256": "6648ee6e6a2a04c63bb8c2c1c737d1c70e950e41934813caac62bd1751b98618",
+          "crc32": "353fe97d"
+        },
+        {
+          "path": "ether_fifth/matched_cones.csv",
+          "bytes": 29604,
+          "sha256": "9996142739113ae5948de686cec9d031d7fc7a1383afcecad6f1f3f35c2e112d",
+          "crc32": "0cd5eec6"
+        },
+        {
+          "path": "ether_fifth/matched_cones.png",
+          "bytes": 96339,
+          "sha256": "810e202ca7a40948b0478dade424c66a7b0d15abbb87a3fa88c3309d575deec9",
+          "crc32": "9fc35149"
+        },
+        {
+          "path": "ether_fifth/monopole_benchmark.json",
+          "bytes": 378,
+          "sha256": "09bcc3fd93a1e21611252535911e8a68e609a636dfa37a51284d0be5cae5b429",
+          "crc32": "99aca64c"
+        },
+        {
+          "path": "ether_fifth/monopole_benchmark.py",
+          "bytes": 2577,
+          "sha256": "7e72e6a1fcf28a091f4e9b08a543961f47a6eb393ecfad44d603cbae51c27106",
+          "crc32": "0c95ada5"
+        },
+        {
+          "path": "ether_fifth/monopole_profile.csv",
+          "bytes": 352056,
+          "sha256": "a1384b19f008a5217df3bd459a3939cbc57ee8fcd4718896230e242a2355f470",
+          "crc32": "9e16b5d8"
+        },
+        {
+          "path": "ether_fifth/nonlinear_dynamics.csv",
+          "bytes": 10863,
+          "sha256": "eae57d646da386f6beb9c99be6d22fa0e3123b3e83734a8c63abbea9503fe43e",
+          "crc32": "855e49f3"
+        },
+        {
+          "path": "ether_fifth/nonlinear_dynamics.png",
+          "bytes": 171410,
+          "sha256": "2e96d61aa8faf62fb68452557ff8dfe347d9636baaa4426c598d28806b1d625f",
+          "crc32": "aa80b731"
+        },
+        {
+          "path": "ether_fifth/nonlinear_dynamics_fine.csv",
+          "bytes": 10885,
+          "sha256": "6850ff4d5dda346f74530060ba74e4053717ee22e400986671cafaa218fd74eb",
+          "crc32": "9f416776"
+        },
+        {
+          "path": "ether_fifth/scaling_obstruction.csv",
+          "bytes": 8601,
+          "sha256": "8c3ed2e50c1d7fd894a3f7986ff350f8c7185bc946daa0a88974bdc0730aa711",
+          "crc32": "0d42cd2f"
+        },
+        {
+          "path": "ether_fifth/scaling_obstruction.png",
+          "bytes": 80469,
+          "sha256": "f03aee6ab0dd6992209c008b25782e852203e8264adf0ccbf2dd36af45e1d00f",
+          "crc32": "fa9e8002"
+        },
+        {
+          "path": "ether_fifth/verify_v5.py",
+          "bytes": 10517,
+          "sha256": "1122160353ddb8a8f74717e4766334929c007f1d3e615b747ef6f1dfe21905be",
+          "crc32": "a9207131"
+        },
+        {
+          "path": "ether_fifth/weak_field_lensing.csv",
+          "bytes": 248,
+          "sha256": "9f6b494390a677f1b846b6fea0782d14c8f124102bdb72f1e1f3df07f6429e31",
+          "crc32": "e0ec9298"
+        },
+        {
+          "path": "ether_fifth/weak_field_lensing.json",
+          "bytes": 161,
+          "sha256": "fbd29a3394067684dc18384960f447eafd865a57ae4afc31f90dad6f41d6a504",
+          "crc32": "a30c8ec7"
+        },
+        {
+          "path": "ether_fifth/weak_field_lensing.png",
+          "bytes": 72441,
+          "sha256": "b435c61735c713064b2ee7248264a4cb769a435c932f1361a2c6f414d13f35a7",
+          "crc32": "ced65de8"
+        },
+        {
+          "path": "ether_fifth/weak_field_lensing.py",
+          "bytes": 2087,
+          "sha256": "7f72ceb4e31fdfb2f5893847b56b884ac49aa3f645f6cabfb74f5cf7a5f6e620",
+          "crc32": "ea97b7b2"
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "zip": "ether_delayed_hardening_v6_2026-11-22.zip",
+      "bytes": 546296,
+      "sha256": "936af7e55ee9bd8efd53fd0dd7de5d042f6ab048fbd0c316a1b6ce007ff86944",
+      "members": [
+        {
+          "path": "ether_sixth/README.md",
+          "bytes": 2478,
+          "sha256": "530fde69defc02ac6bec86833a8492cb1405c0d0f8b8e12d3f3ae297833087e2",
+          "crc32": "75d093de"
+        },
+        {
+          "path": "ether_sixth/RESEARCH_NOTE_2026-11-22_v6.md",
+          "bytes": 14272,
+          "sha256": "fe23d0d73ffff7dfae1cd06cc9770c0cbee7c1bb7d6f67bae0ada52421d3913d",
+          "crc32": "8dcdd722"
+        },
+        {
+          "path": "ether_sixth/audit_v6.json",
+          "bytes": 1539,
+          "sha256": "a1149b4631248690691018ff41540ac72204b4772dd17f1051602e4c70399c3c",
+          "crc32": "efbdb230"
+        },
+        {
+          "path": "ether_sixth/audit_v6.py",
+          "bytes": 5903,
+          "sha256": "295ae5b1fe5eb1405f1cedfe6b61e748ae45cbd012cafbb25f5573d1dee32c43",
+          "crc32": "b1a141da"
+        },
+        {
+          "path": "ether_sixth/causal_cone.csv",
+          "bytes": 325,
+          "sha256": "7883151a07c360654af0c53ca0f3825859d3cc81fe226bd0cba97e321cf0d2c4",
+          "crc32": "a71b4b71"
+        },
+        {
+          "path": "ether_sixth/compare_invariants_v6.py",
+          "bytes": 4393,
+          "sha256": "6e880c8217f03ab346ba896607eee0e2efa2d77539d6cdb1954c42210bfa296d",
+          "crc32": "7805a071"
+        },
+        {
+          "path": "ether_sixth/invariant_comparison.json",
+          "bytes": 1227,
+          "sha256": "b44baa2245df3b6dc4d4c6ee56aed0983be57d731fbfe4ddab64e15df913eea3",
+          "crc32": "296fa7f8"
+        },
+        {
+          "path": "ether_sixth/lensing_comparison.png",
+          "bytes": 76887,
+          "sha256": "a134b902d5342117596c33bd6a9344c6d8c63c18d505132bdcded1994a5005f4",
+          "crc32": "c31aacd7"
+        },
+        {
+          "path": "ether_sixth/lensing_deviation.png",
+          "bytes": 53742,
+          "sha256": "0ad882122a3c1b6a55f8982c2ce1bfd989d98ce9daeecb18cbc6cea1f4460cdf",
+          "crc32": "374fed56"
+        },
+        {
+          "path": "ether_sixth/lensing_exact.csv",
+          "bytes": 2686,
+          "sha256": "90b7573a1a7724790f6c85e29b559c681ba8cb01e56f037e79690a33cb9391dd",
+          "crc32": "02bd7e64"
+        },
+        {
+          "path": "ether_sixth/lensing_same_impact.csv",
+          "bytes": 1748,
+          "sha256": "d4b7e9d6d0497e38306c71d5ebf26367322624f4248dd69533c933ba7c8e53f8",
+          "crc32": "8baac478"
+        },
+        {
+          "path": "ether_sixth/lensing_same_impact.png",
+          "bytes": 76240,
+          "sha256": "5ea7e902b61dc3d6ef336a18ff8997e524f4f081a7d1eb2cf6705803301d8040",
+          "crc32": "da4ffa24"
+        },
+        {
+          "path": "ether_sixth/manifest_sha256.json",
+          "bytes": 3043,
+          "sha256": "a377446e59d5d09a2d5a88d7f6d07d1f13524cdc547f65e6521b9b3d876351d0",
+          "crc32": "93ace02f"
+        },
+        {
+          "path": "ether_sixth/orbital_precession.png",
+          "bytes": 66599,
+          "sha256": "60d4b8efdc68118f9282f6dc3eb3c51b96c74ee3d254fc001e9735d9652707ca",
+          "crc32": "62096463"
+        },
+        {
+          "path": "ether_sixth/precession_same_areal.png",
+          "bytes": 66253,
+          "sha256": "2ed785ccdaafd2b271c1ff2864367d1b0482e1a08f3e274b90e8b998b200ec6d",
+          "crc32": "1fe2f810"
+        },
+        {
+          "path": "ether_sixth/precession_same_areal_radii.csv",
+          "bytes": 970,
+          "sha256": "6234756651c16e8552dc0273e0fc768132cb8124a49c83fdeb251512a286e89d",
+          "crc32": "7ee2a83c"
+        },
+        {
+          "path": "ether_sixth/redshift.csv",
+          "bytes": 680,
+          "sha256": "3b777607109c84cf4cac2ad93818a77630a55c2a7a58cadd163be586c5ad2f33",
+          "crc32": "68560596"
+        },
+        {
+          "path": "ether_sixth/redshift_same_areal_radius.csv",
+          "bytes": 724,
+          "sha256": "c8a6c09bfd5bcae3811bb3035c06085330fecd0467110753e72d7ec0fbb2e6d7",
+          "crc32": "579845c1"
+        },
+        {
+          "path": "ether_sixth/results.json",
+          "bytes": 947,
+          "sha256": "63db2da1decca1a60e75d5a1fe644d97ec6f425dad213a713f6f0ef10b6710f2",
+          "crc32": "759edaab"
+        },
+        {
+          "path": "ether_sixth/run.log",
+          "bytes": 5229,
+          "sha256": "603d809763f84b4d803097ebf70cd26bcba791fc077879000ed53ae075e26d1a",
+          "crc32": "1148f7b3"
+        },
+        {
+          "path": "ether_sixth/run_all.sh",
+          "bytes": 212,
+          "sha256": "fa7f9aab15331efdea2fffccb87f68dea91fca86abd4957ff61f6c118eb0c42f",
+          "crc32": "08e0be33"
+        },
+        {
+          "path": "ether_sixth/star_potential.png",
+          "bytes": 72363,
+          "sha256": "d3f21e7bb15131a969fbe969052000cb0f21eb0a878b291da09f4a1e29359a29",
+          "crc32": "1bd14e35"
+        },
+        {
+          "path": "ether_sixth/star_pressure.png",
+          "bytes": 85354,
+          "sha256": "4982fe387e004aba3345248c662e0f472eb09317f8f63b36aca7df9d34919648",
+          "crc32": "575d9f96"
+        },
+        {
+          "path": "ether_sixth/static_fluid_stars.csv",
+          "bytes": 1976,
+          "sha256": "1ff1c0d2fb2b92eb355ef8e6bd7f3c33d626a47484103e5563ed4b53212b5195",
+          "crc32": "30768647"
+        },
+        {
+          "path": "ether_sixth/static_star_results.json",
+          "bytes": 4322,
+          "sha256": "37a42acc43ac113ef5eca2b6e25df29ae359e9fb5d044d60b246c58588814c66",
+          "crc32": "6c6e007c"
+        },
+        {
+          "path": "ether_sixth/static_star_v6.py",
+          "bytes": 4194,
+          "sha256": "485003ebf4e712853575656a165f67b27b2788b07e2dee70bf0ec5bbcec29451",
+          "crc32": "c665df6d"
+        },
+        {
+          "path": "ether_sixth/timelike_orbits.csv",
+          "bytes": 1291,
+          "sha256": "bddd5c9b4fb86af4f1870a64a1af70cac425a3aac9a747400c2f881b8081ba73",
+          "crc32": "0b6a3608"
+        },
+        {
+          "path": "ether_sixth/vacuum_curvature.csv",
+          "bytes": 500,
+          "sha256": "7ee682515c0a263cc21928f2013ab5c5e56210fa954161dea49bed6dd661306c",
+          "crc32": "69101abe"
+        },
+        {
+          "path": "ether_sixth/vacuum_obstruction.png",
+          "bytes": 72702,
+          "sha256": "104dd448d8631981bec096e0f0d79d1096c404a251295844e4652b1277a99ad4",
+          "crc32": "5c6adcf7"
+        },
+        {
+          "path": "ether_sixth/vacuum_series.json",
+          "bytes": 735,
+          "sha256": "393ba72add97fc3a93a343e933808ec3d09ca28e3bc2d0642bc0b2c73d06a2ef",
+          "crc32": "cabbdb41"
+        },
+        {
+          "path": "ether_sixth/vacuum_series_v6.py",
+          "bytes": 2240,
+          "sha256": "19d41f25e68133a7e505ee5d9396e8e7e50410993ac54c33d8905f14a741003d",
+          "crc32": "a19f1beb"
+        },
+        {
+          "path": "ether_sixth/verify_v6.py",
+          "bytes": 10204,
+          "sha256": "fbc622a901372db9dba521b724e2526cfc44a62c0fca02fe7d766e76d6f4f859",
+          "crc32": "ccefb8f5"
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "zip": "ether_delayed_hardening_v7_2026-11-22.zip",
+      "bytes": 368164,
+      "sha256": "9ca318305e3ba3d914081ba9c0e82a6f8d2992d564bed686cb299058ec6646f1",
+      "members": [
+        {
+          "path": "ether_seventh/README.md",
+          "bytes": 1344,
+          "sha256": "8ce7831b19546c5f7273e4be38dd0a1fe37feacb33f5f3c1ba88fb53b33bb206",
+          "crc32": "e997b68e"
+        },
+        {
+          "path": "ether_seventh/RESEARCH_NOTE_2026-11-22_v7.md",
+          "bytes": 10360,
+          "sha256": "686a342f53865a7352c249235826fd9d33045186eda610ab2020cd76118accde",
+          "crc32": "7c33479a"
+        },
+        {
+          "path": "ether_seventh/audit_v7.json",
+          "bytes": 925,
+          "sha256": "49a1202051d707c31a5974ba079cdd10d1cc49c4a4786627c5284eb0b8b4d87e",
+          "crc32": "33c98b1d"
+        },
+        {
+          "path": "ether_seventh/intrinsic_audit_v7.json",
+          "bytes": 387,
+          "sha256": "dcb39ab7fa5fc8d3420367c0e19aa16d2cbc591b7218a9ec0dca74117b92b307",
+          "crc32": "ea183d40"
+        },
+        {
+          "path": "ether_seventh/intrinsic_curvature.csv",
+          "bytes": 3764,
+          "sha256": "31c92cf47c619ac2a3dbec0779c02a7e24691425e013892c9e2267499bfe0246",
+          "crc32": "e6a9b052"
+        },
+        {
+          "path": "ether_seventh/intrinsic_curvature.png",
+          "bytes": 83705,
+          "sha256": "c4d5617055a1330543cb297dd19fafb66061754effbe0f84e12ca68f4fb7d867",
+          "crc32": "0f6265cc"
+        },
+        {
+          "path": "ether_seventh/intrinsic_curvature_v7.py",
+          "bytes": 2848,
+          "sha256": "d433d94000b74ee858f02420a63037aa7852fff1c188e3cd8ed231452c55713f",
+          "crc32": "bcc9ac38"
+        },
+        {
+          "path": "ether_seventh/intrinsic_v7.log",
+          "bytes": 387,
+          "sha256": "dcb39ab7fa5fc8d3420367c0e19aa16d2cbc591b7218a9ec0dca74117b92b307",
+          "crc32": "ea183d40"
+        },
+        {
+          "path": "ether_seventh/manifest_sha256.json",
+          "bytes": 2478,
+          "sha256": "815e46a16d56e6eaac31da131c145a70e8c9d5a57954d10e7d00b4347c3b7077",
+          "crc32": "8d1036ee"
+        },
+        {
+          "path": "ether_seventh/polarization_rank_v7.json",
+          "bytes": 504,
+          "sha256": "b1b6485cd9e237a6042565adb88ebb72164e39ea0a7ce060c166e8259f3e47cd",
+          "crc32": "5ca9c0cd"
+        },
+        {
+          "path": "ether_seventh/polarization_rank_v7.py",
+          "bytes": 1426,
+          "sha256": "ec6b94971c9cb2140f4eb10161a184efc2010fec7ab83ec1f1c7f0255f06127e",
+          "crc32": "94e80b29"
+        },
+        {
+          "path": "ether_seventh/polarization_v7.log",
+          "bytes": 504,
+          "sha256": "b1b6485cd9e237a6042565adb88ebb72164e39ea0a7ce060c166e8259f3e47cd",
+          "crc32": "5ca9c0cd"
+        },
+        {
+          "path": "ether_seventh/tensor_wave_energy.png",
+          "bytes": 88866,
+          "sha256": "7c17976990ba084da751de18295cdff23bb6d4f48aeb8c9849e41d054d4e7245",
+          "crc32": "64bed2d0"
+        },
+        {
+          "path": "ether_seventh/tensor_wave_propagation.png",
+          "bytes": 151328,
+          "sha256": "c5d9c676bd8d8852d12c4a8b232338193cba671db6a2ebac760e1d04aab7877e",
+          "crc32": "f1cbe07e"
+        },
+        {
+          "path": "ether_seventh/tensor_wave_timeseries.csv",
+          "bytes": 39606,
+          "sha256": "f1b5175f082439afc9cccaf8cad657f842c3d3e5f12a4ac86d61bc0d8d502db6",
+          "crc32": "2758eb29"
+        },
+        {
+          "path": "ether_seventh/tt_projection_samples.csv",
+          "bytes": 169748,
+          "sha256": "c28c96555f99995c97b0413ccbb0d3482df483e81a27578e3d63f5072fcf459f",
+          "crc32": "97d0be9d"
+        },
+        {
+          "path": "ether_seventh/verify_v7.log",
+          "bytes": 925,
+          "sha256": "49a1202051d707c31a5974ba079cdd10d1cc49c4a4786627c5284eb0b8b4d87e",
+          "crc32": "33c98b1d"
+        },
+        {
+          "path": "ether_seventh/verify_v7.py",
+          "bytes": 8485,
+          "sha256": "b5b305f28b7de73c0f40ba4fe0cc8ae62af7e7fd531816ede5df713c70fffce2",
+          "crc32": "0503fe20"
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "zip": "ether_constraint_geometry_v8_2026-11-22.zip",
+      "bytes": 313716,
+      "sha256": "b116e201f86579c4f15b6635c5a04ebffa3e127c0f750955d8fdc4c6fa28c4f4",
+      "members": [
+        {
+          "path": "ether_eighth/constraints_and_shear.png",
+          "bytes": 153106,
+          "sha256": "b5d708133dad881cd371a2f8bcfc6f538e8e3021d1bc459e7952782c88c35b08",
+          "crc32": "5efb89de"
+        },
+        {
+          "path": "ether_eighth/audit_v8.json",
+          "bytes": 2885,
+          "sha256": "1eebbb86096a3fd3be7d996bb587db541258335dc8d5fed0480c551ec9bf8e4e",
+          "crc32": "58b2a9e7"
+        },
+        {
+          "path": "ether_eighth/curvature_memory.png",
+          "bytes": 95594,
+          "sha256": "aede505ec248ab73ae70a1191295e41d55f0f8c0d78d1cccefc8cf964e26c792",
+          "crc32": "3c99858b"
+        },
+        {
+          "path": "ether_eighth/SHA256SUMS.txt",
+          "bytes": 615,
+          "sha256": "37823f408f11a8ffeb8c2238f700ba538ee3eeddc2bdb24c5c3fddbc24457b5e",
+          "crc32": "176668d7"
+        },
+        {
+          "path": "ether_eighth/derivation_audit_v8.json",
+          "bytes": 1100,
+          "sha256": "7ffa338d24d50be243a2452c7d2f4e755368e5379f82e09883a09c37ea5493d0",
+          "crc32": "0ab497a7"
+        },
+        {
+          "path": "ether_eighth/memory_extension_v8.py",
+          "bytes": 3025,
+          "sha256": "93e0964d7df9a76d0fc12366d2c806107ddaf7bde857e2c0e0128f387c488745",
+          "crc32": "3fab222f"
+        },
+        {
+          "path": "ether_eighth/memory_dynamics.csv",
+          "bytes": 5861,
+          "sha256": "9adb200b2b258c0af97f9589c0a06634f61dd7ffb3545b803c2aa172ac5b19cc",
+          "crc32": "27f3b49c"
+        },
+        {
+          "path": "ether_eighth/constraint_dynamics.csv",
+          "bytes": 1696,
+          "sha256": "740a4cd253bf990b7c960c40c4478c893c3ea43761c7f5608a271c52233d9d4f",
+          "crc32": "fa37b3c4"
+        },
+        {
+          "path": "ether_eighth/RESEARCH_NOTE_2026-11-22_v8.md",
+          "bytes": 9624,
+          "sha256": "53a9e8e255a87c103a43c2e4f4810184b307e05d31c5a9cffae3fe98ce09647f",
+          "crc32": "18747634"
+        },
+        {
+          "path": "ether_eighth/README.md",
+          "bytes": 949,
+          "sha256": "9330d1fa05893db9580f617c4fb18eca6f098c2b39e033039929233bf6ad2103",
+          "crc32": "a55e05da"
+        },
+        {
+          "path": "ether_eighth/verify_v8.py",
+          "bytes": 9917,
+          "sha256": "e093034118f8974cc0d9f72f98f5c5bbf719d3b4fda6f40fb797b6a857b8f6b5",
+          "crc32": "5b4c7475"
+        },
+        {
+          "path": "ether_eighth/derive_coefficients_v8.py",
+          "bytes": 5003,
+          "sha256": "f298253b67a713252a5bb52e3077cf9bfbde379ea1bbf37f21d8788478506fde",
+          "crc32": "80fd374b"
+        },
+        {
+          "path": "ether_eighth/memory_audit_v8.json",
+          "bytes": 475,
+          "sha256": "3a5649d45d5ca6f09041058f11a41a7f24ff94afe045c5e9c2bc5504031f3bbe",
+          "crc32": "985feb88"
+        },
+        {
+          "path": "ether_eighth/lambda_constraint_no_go.png",
+          "bytes": 73106,
+          "sha256": "d83be89804629907cb04062a3b5510dea7cb356cfe1632182614d6682c996e27",
+          "crc32": "c23fd181"
+        },
+        {
+          "path": "ether_eighth/requirements.txt",
+          "bytes": 40,
+          "sha256": "1cfa1853cabce4036475f7d6b553c74c50a77045692990d7ac2b7ab83f2a3edc",
+          "crc32": "2ad007f2"
+        }
+      ]
+    },
+    {
+      "stage": 9,
+      "zip": "ether_delayed_hardening_v9_2026-11-22.zip",
+      "bytes": 332874,
+      "sha256": "841629d7053daa48fb57a60d8fb6e84adde86c831efd514d8dff00c10a286493",
+      "members": [
+        {
+          "path": "ether_ninth/README.md",
+          "bytes": 723,
+          "sha256": "3ca8422d184c37eee10618997b2c4f582fdb8fa4ac487db5e9f9e68c87eab00b",
+          "crc32": "8caae56e"
+        },
+        {
+          "path": "ether_ninth/RESEARCH_NOTE_2026-11-22_v9.md",
+          "bytes": 10350,
+          "sha256": "bb5d9a7e9462da924c8518130549e7eafa1d45a90bb514e41db61994e2173747",
+          "crc32": "079f48f0"
+        },
+        {
+          "path": "ether_ninth/SHA256SUMS.txt",
+          "bytes": 1668,
+          "sha256": "2a7f8b1ee3bbc80749f4a6dca9fbe08ffa92a38b8af0f3672445ff210cd90af4",
+          "crc32": "a3ca729f"
+        },
+        {
+          "path": "ether_ninth/audit_assert_v9.py",
+          "bytes": 1888,
+          "sha256": "70fbbf6b39c473b9bab07b3ce6eb152b7d86b08aebe072ae6c9e8c41824deb93",
+          "crc32": "72fb5cf7"
+        },
+        {
+          "path": "ether_ninth/audit_v9.json",
+          "bytes": 3432,
+          "sha256": "7ebbde535af28997dc7a3bc5abb29664ee6b43bb4947a5e1cd204941ae1749ea",
+          "crc32": "7074c869"
+        },
+        {
+          "path": "ether_ninth/gauge_memory_rate_0p05.csv",
+          "bytes": 13712,
+          "sha256": "65472c7e143dcc624dbcd1b48a1cb49b2d81c58f13f240fa7d67d355a8e18272",
+          "crc32": "25170d4f"
+        },
+        {
+          "path": "ether_ninth/gauge_memory_rate_0p12.csv",
+          "bytes": 13712,
+          "sha256": "adcbfa3a7642189597ea58ac6c7dfa620b278c3e87bcf1461be8cc6b03f7dd1e",
+          "crc32": "505f70ad"
+        },
+        {
+          "path": "ether_ninth/gauge_memory_rate_0p3.csv",
+          "bytes": 13712,
+          "sha256": "1ad61a783e4446f991be2fe314a7f1b2008aac86fc4162bb571e492e52fd8079",
+          "crc32": "e60be2fe"
+        },
+        {
+          "path": "ether_ninth/gauge_memory_v9.py",
+          "bytes": 4017,
+          "sha256": "c9fd3487698aa9c9637687190b8b0363570b1c2a5c25e8736a3a2120f7379d91",
+          "crc32": "a278ac41"
+        },
+        {
+          "path": "ether_ninth/geometry_memory_fine.csv",
+          "bytes": 120329,
+          "sha256": "c4aa465bd09aeedc152e4a54b10165cd468c38fd3699297ad0583bd0dda9c8d7",
+          "crc32": "7260e747"
+        },
+        {
+          "path": "ether_ninth/geometry_memory_timeseries.csv",
+          "bytes": 60329,
+          "sha256": "798a37f6da61be48f81237306a633bace98b1e271568614e4262321dcd0dcbc7",
+          "crc32": "75f07f04"
+        },
+        {
+          "path": "ether_ninth/geometry_memory_v9.py",
+          "bytes": 1704,
+          "sha256": "64dc2e4e5661a5267e17688cc1dd0307d89a626b4ff0ffc1fe0ab05483c6672a",
+          "crc32": "ed47f43e"
+        },
+        {
+          "path": "ether_ninth/nonlinear_gauge_memory.png",
+          "bytes": 112287,
+          "sha256": "b60e52837fc1ebdfe638675de75d9a8161dd7cb89e4213b4750fa564745fac34",
+          "crc32": "fe98d5be"
+        },
+        {
+          "path": "ether_ninth/regge_memory_relaxation.png",
+          "bytes": 85438,
+          "sha256": "4e64a984f234123e28af73faff7532fe05b8f4296947a695c136a5c8e00ebd48",
+          "crc32": "a0ab14d2"
+        },
+        {
+          "path": "ether_ninth/regge_symmetry_spectrum.png",
+          "bytes": 56800,
+          "sha256": "f4ab9d6d1d122d63e984e28269de3a9fb6cac38de990605cec7740e0923a5b19",
+          "crc32": "2e961140"
+        },
+        {
+          "path": "ether_ninth/regge_v9.py",
+          "bytes": 2199,
+          "sha256": "1a95a8c0d0a659efacef2e5dbcd5984ee88cfcb5cf8d34f19c2bac5444dff2a7",
+          "crc32": "17783f4c"
+        },
+        {
+          "path": "ether_ninth/requirements.txt",
+          "bytes": 28,
+          "sha256": "1d87e973cb0bdc431d330c230cfbc2ec40e14b8fd3f3775d4042c8388589a006",
+          "crc32": "a67a1402"
+        },
+        {
+          "path": "ether_ninth/verify_run.log",
+          "bytes": 3433,
+          "sha256": "37c5da986812f84c4999df47e41e1f968f99dc0d7ac8d3bc1193955877a4393f",
+          "crc32": "06c9aba7"
+        },
+        {
+          "path": "ether_ninth/verify_v9.py",
+          "bytes": 8167,
+          "sha256": "0fc59aa3d7f6ad0fb057b02cbec4fc8492466d1c65ce8663219f1af1d7ea5acb",
+          "crc32": "c4cda6b2"
+        },
+        {
+          "path": "ether_ninth/vertex_shift_tests.csv",
+          "bytes": 38843,
+          "sha256": "e7b575ca4e6ab0c69c0f977d373784e2df63f5c4528987a76efbb2d9d1c6c22e",
+          "crc32": "d93dd236"
+        }
+      ]
+    },
+    {
+      "stage": 10,
+      "zip": "ether_topological_memory_v10_2026-11-22.zip",
+      "bytes": 207844,
+      "sha256": "e16dfe46f818fbc04d32697810a8a7fe888e30c046969b13e752be7e3b485327",
+      "members": [
+        {
+          "path": "ether_tenth/README.md",
+          "bytes": 1075,
+          "sha256": "3be11c21f91d3eda615db41d02b612786201e366a86bd433f4688a29cbcf9608",
+          "crc32": "e115a5d8"
+        },
+        {
+          "path": "ether_tenth/RESEARCH_NOTE_2026-11-22_v10.md",
+          "bytes": 10485,
+          "sha256": "9490234e7bd257caf3e53ac8b87b933ffddaee9220d855ca0a9049e5403b34b4",
+          "crc32": "53a23605"
+        },
+        {
+          "path": "ether_tenth/SHA256SUMS.txt",
+          "bytes": 1255,
+          "sha256": "043cc9736b294ab7efc0c4380c3b556cd986ab495456f2d59de84ab6fa286ab7",
+          "crc32": "687ec574"
+        },
+        {
+          "path": "ether_tenth/audit_assert_v10.py",
+          "bytes": 1947,
+          "sha256": "0fa37baa1dfe8e7a90d6b856c3c00b2d1df55beae4cfa72b4104ce835abf4e5c",
+          "crc32": "4daeb130"
+        },
+        {
+          "path": "ether_tenth/audit_v10.json",
+          "bytes": 5125,
+          "sha256": "2c6962664bc0a4dd86671f7fd058b62909101b96d63365c258c296e204854123",
+          "crc32": "38da6fd3"
+        },
+        {
+          "path": "ether_tenth/console_audit.txt",
+          "bytes": 2181,
+          "sha256": "3bf6fa2b4eaaab927c6cdd54f01f6e73e5cb4cc319460f435885c213af518eba",
+          "crc32": "21ba7ff9"
+        },
+        {
+          "path": "ether_tenth/dynamics_charge_0_rate_0p06.csv",
+          "bytes": 8510,
+          "sha256": "ba812a7a7a79f4c84d73263865370d0fb96958033a2b550903622d4a29cb6c88",
+          "crc32": "4b2be694"
+        },
+        {
+          "path": "ether_tenth/dynamics_charge_0_rate_0p15.csv",
+          "bytes": 8793,
+          "sha256": "5b0626bf555e92e2c47a9458f036a2d8f1da4b436935dd7e53a7d1ce4c75c0e6",
+          "crc32": "25d37472"
+        },
+        {
+          "path": "ether_tenth/dynamics_charge_1_rate_0p06.csv",
+          "bytes": 8179,
+          "sha256": "fb2ad9d03c02d32e02ba7423fb04734d2a77bfd6bd51bfe1b60d9113d66c4644",
+          "crc32": "1587ec84"
+        },
+        {
+          "path": "ether_tenth/dynamics_charge_1_rate_0p15.csv",
+          "bytes": 8327,
+          "sha256": "07bf51b339263318633d37707d522e00d5c6d857b1977a6a35417f5b1e3427cf",
+          "crc32": "6e6f5a03"
+        },
+        {
+          "path": "ether_tenth/flux_slices.png",
+          "bytes": 34310,
+          "sha256": "14fe62af569ef8ba9d1dac2be09c28243802f2158456cc054cdf2f1e838f0a11",
+          "crc32": "a929e3df"
+        },
+        {
+          "path": "ether_tenth/memory_stiffness.png",
+          "bytes": 99364,
+          "sha256": "c645a4fe5d121fa327a994fea08df1121e8b66866ec39a01960155eab3083b55",
+          "crc32": "af6c344e"
+        },
+        {
+          "path": "ether_tenth/sector_area_bounds.csv",
+          "bytes": 345,
+          "sha256": "6ecec7671f7a26b0efaf105bd7b0c8ed10c36aa9e56d69b7e12ef34d12520ab6",
+          "crc32": "44148c43"
+        },
+        {
+          "path": "ether_tenth/topological_memory_relaxation.png",
+          "bytes": 72581,
+          "sha256": "10f6a7995628e0809e53543e6d4b58696eeb257093bac01e79058670235b6793",
+          "crc32": "4af18e79"
+        },
+        {
+          "path": "ether_tenth/verify_v10.py",
+          "bytes": 17747,
+          "sha256": "9abbbf199672eb0b43446a24cae44133b533a7f4800d6c76c49e1657578d8db4",
+          "crc32": "453a771d"
+        }
+      ]
+    },
+    {
+      "stage": 11,
+      "zip": "ether_local_topology_geometry_v11_2026-11-22.zip",
+      "bytes": 357464,
+      "sha256": "8d223a74eb85c295a527127489870f0ed1fc5572cf4254afd100ddb0d460a954",
+      "members": [
+        {
+          "path": "ether_eleventh/README.md",
+          "bytes": 1992,
+          "sha256": "5c0da35557b23337b311a08787c593ef2278e02c509c66b91cd085aa3fae697b",
+          "crc32": "04ea9cd8"
+        },
+        {
+          "path": "ether_eleventh/RESEARCH_NOTE_2026-11-22_v11.md",
+          "bytes": 11438,
+          "sha256": "b42b926cb095e8d92d0d5159292caa91229d48c03f1382136ee42bb9754d5ddb",
+          "crc32": "c66a4385"
+        },
+        {
+          "path": "ether_eleventh/SHA256SUMS.txt",
+          "bytes": 1781,
+          "sha256": "f03f9293d094c9b95c9793bd07732085e8bf591bec7439ec723c0414bf600434",
+          "crc32": "c1cf21fa"
+        },
+        {
+          "path": "ether_eleventh/audit_assert_v11.py",
+          "bytes": 2841,
+          "sha256": "eded91330df1d886f568f729b84da4abf88bc124f0c1497b2d863430e76e9c1e",
+          "crc32": "83b66083"
+        },
+        {
+          "path": "ether_eleventh/audit_log.txt",
+          "bytes": 258,
+          "sha256": "df444408c886b29196c218c95300f0abad2794c2c83dc70b1bc2205e1736ad2c",
+          "crc32": "67b06825"
+        },
+        {
+          "path": "ether_eleventh/audit_v11.json",
+          "bytes": 13047,
+          "sha256": "26b0601bf823bfc395f2038414a27e5dc28b0861c4d513429a2966009f723fc2",
+          "crc32": "3dabe2ce"
+        },
+        {
+          "path": "ether_eleventh/degree_cases.csv",
+          "bytes": 654,
+          "sha256": "65c561787fdd66d33671903c7fbe7001956829c8cfd019277fd2455c64e90f92",
+          "crc32": "177ee726"
+        },
+        {
+          "path": "ether_eleventh/energy_audit.json",
+          "bytes": 1486,
+          "sha256": "469b1b7934ad33a15c95a2ce3077eab34898bfef3ba8e3357170a3bbbce2b7e6",
+          "crc32": "6474b80d"
+        },
+        {
+          "path": "ether_eleventh/energy_scaling.csv",
+          "bytes": 7037,
+          "sha256": "c7e73f59bd7c3f7134718c9c1928e05b4549ecf59c448f3da1b6907f04229797",
+          "crc32": "2475d890"
+        },
+        {
+          "path": "ether_eleventh/energy_v11.py",
+          "bytes": 2949,
+          "sha256": "1d546a462417ec50f8a2761c22b349053a3a786f053e2496d44e80d40f6c12fe",
+          "crc32": "87f97189"
+        },
+        {
+          "path": "ether_eleventh/energy_vs_radius.png",
+          "bytes": 112585,
+          "sha256": "a52a6918a0c79e9f8636c8c14574859be2af2d2f455e3e6f8872d57a5ce90052",
+          "crc32": "a228d6f7"
+        },
+        {
+          "path": "ether_eleventh/exact_degree_certificate.json",
+          "bytes": 1218,
+          "sha256": "22fc635be0f4d563a589738a266bd58af5ef6cb9bd35728463a6de61cb9b4dba",
+          "crc32": "4e1269f6"
+        },
+        {
+          "path": "ether_eleventh/exact_degree_v11.py",
+          "bytes": 3752,
+          "sha256": "2602c2624915964b6429585858a662c591aee7eb910a1ec67bdb6cb79ea6f3ee",
+          "crc32": "052b4186"
+        },
+        {
+          "path": "ether_eleventh/induced_curvature.png",
+          "bytes": 94009,
+          "sha256": "2952df1757f6fd1187a3bc6ea87bc7567ffa37e1909cad0aa88771de365ca5a8",
+          "crc32": "cd7d52be"
+        },
+        {
+          "path": "ether_eleventh/memory_audit.json",
+          "bytes": 10567,
+          "sha256": "b1091fc8c7c6cccf34ff3629ff43a40f1976971f2f42a7235fd593a51384a4fd",
+          "crc32": "affbe740"
+        },
+        {
+          "path": "ether_eleventh/memory_dynamics.csv",
+          "bytes": 68535,
+          "sha256": "e736d5a29832d886038fca7732d783258bc384e247c27f72e79a48bc00d0fcf2",
+          "crc32": "70f44be7"
+        },
+        {
+          "path": "ether_eleventh/memory_lag.png",
+          "bytes": 120996,
+          "sha256": "a00e6a26525ed6daf4d7e87fd4ab1a4348483aeeb07d8024576abd8c4e3589b2",
+          "crc32": "4e91522f"
+        },
+        {
+          "path": "ether_eleventh/memory_v11.py",
+          "bytes": 4976,
+          "sha256": "24f6a758c359f9773396b2921dc7f1b3f69b254eced617a26fe5b4ed9b96901f",
+          "crc32": "e82d8019"
+        },
+        {
+          "path": "ether_eleventh/metric_cases.csv",
+          "bytes": 1480,
+          "sha256": "76bece762d5ca3aa8b64a6b79c8542f902440758bb2a1d9109879975656c3e04",
+          "crc32": "d5746a31"
+        },
+        {
+          "path": "ether_eleventh/plot_curvature_v11.py",
+          "bytes": 785,
+          "sha256": "6db11b7086f51a3a589cf78c26f5894d6687e918ed5485ac0cd684886f007a97",
+          "crc32": "ee7ff4ad"
+        },
+        {
+          "path": "ether_eleventh/resolution_failure.csv",
+          "bytes": 310,
+          "sha256": "539afb485a87bd533521bf3e0dfe9b4f3b3eeed0fc8a3f14173ca40d141e3cae",
+          "crc32": "c4c67a07"
+        },
+        {
+          "path": "ether_eleventh/verify_v11.py",
+          "bytes": 11852,
+          "sha256": "e3fef8a3aaa1f54206d34b9f34a956125b7b6e459516e693f929c3848c17306f",
+          "crc32": "5229e378"
+        }
+      ]
+    },
+    {
+      "stage": 12,
+      "zip": "ether_self_coupled_topology_v12_2026-11-22.zip",
+      "bytes": 528072,
+      "sha256": "047268af4ce674fa14693b25ebe1ff6eb53d77e52524a70b74808d4ee7c4fa46",
+      "members": [
+        {
+          "path": "ether_v12/verify_v12.py",
+          "bytes": 13896,
+          "sha256": "2f97b43725332c4e63a4b1a961fc6140f73ee3e8caba62fc96019032b48b9246",
+          "crc32": "1814eca8"
+        },
+        {
+          "path": "ether_v12/verify_v11.py",
+          "bytes": 11852,
+          "sha256": "e3fef8a3aaa1f54206d34b9f34a956125b7b6e459516e693f929c3848c17306f",
+          "crc32": "5229e378"
+        },
+        {
+          "path": "ether_v12/topology_slip_v12.py",
+          "bytes": 3095,
+          "sha256": "ced07316c510e657d008a2025e5330254158a05b87cb21f0d93178440b956976",
+          "crc32": "126b5896"
+        },
+        {
+          "path": "ether_v12/audit_v12.py",
+          "bytes": 4866,
+          "sha256": "f0ca5970c02b7ba6c1fcfb3c0d4ab696565021d056d97afcb1df1e2309f2e5b8",
+          "crc32": "5b62c63c"
+        },
+        {
+          "path": "ether_v12/plot_v12.py",
+          "bytes": 3680,
+          "sha256": "3707e59f06162464e5599f40ded021981d162d96c2d4b9eed65f3e8231f38588",
+          "crc32": "89a888ed"
+        },
+        {
+          "path": "ether_v12/README.md",
+          "bytes": 2007,
+          "sha256": "7e65a95049f695c2ad328fc88b8fc87814657c0240a04eaf67349393c671d634",
+          "crc32": "671bf256"
+        },
+        {
+          "path": "ether_v12/RESEARCH_NOTE_2026-11-22_v12.md",
+          "bytes": 10982,
+          "sha256": "91770c980f7284c82922b015d4b3b09805f48afebaffc5d7cf3e3e87a115049d",
+          "crc32": "66e3da7b"
+        },
+        {
+          "path": "ether_v12/audit_v12.json",
+          "bytes": 1638,
+          "sha256": "8754aa2101cdf898bc637e6c12f1d200761855758634b20602307b7660835033",
+          "crc32": "3dd2ae7a"
+        },
+        {
+          "path": "ether_v12/topology_slip_witness.json",
+          "bytes": 1035,
+          "sha256": "a8c8b5ddd07608c71701e95b957cb4a753c22f1a17c40e4a50c1383ae1a5b694",
+          "crc32": "f586b9d8"
+        },
+        {
+          "path": "ether_v12/coupled_snapshot_n12_t024.npz",
+          "bytes": 62761,
+          "sha256": "203c4fe911e3346ba04c1e917e396120260769a954a3170ff33b6510996a6292",
+          "crc32": "8513f15f"
+        },
+        {
+          "path": "ether_v12/self_consistent_dynamics.png",
+          "bytes": 161591,
+          "sha256": "4c6dd5ef3b6ae47693591f11879480c9ecad5c47e0aee57f097d3dd485738bed",
+          "crc32": "3fd02c9c"
+        },
+        {
+          "path": "ether_v12/topology_admissibility.png",
+          "bytes": 101725,
+          "sha256": "d76d6df81dfdba0dbe1f4bb6648fa6bca4c0b302ec9849d4cfaae38a88adf156",
+          "crc32": "cdde16c8"
+        },
+        {
+          "path": "ether_v12/energy_balance_convergence.png",
+          "bytes": 71730,
+          "sha256": "d71cad29a50f22baa11996131a906ec37ef9ac76552a8461884d324e6ea8724e",
+          "crc32": "784eb710"
+        },
+        {
+          "path": "ether_v12/field_metric_slice.png",
+          "bytes": 58668,
+          "sha256": "b45bbf7bbae01002442ff08f5a79be8432c320074ef667101abc66dee0f42f18",
+          "crc32": "69530c0a"
+        },
+        {
+          "path": "ether_v12/finite_n12_timeseries.csv",
+          "bytes": 5089,
+          "sha256": "4c77b0a07c68c34646be9ea59305106d61f04c1d8ff563c18cff53dbe926b295",
+          "crc32": "b0014380"
+        },
+        {
+          "path": "ether_v12/finite_n12_audit.json",
+          "bytes": 1364,
+          "sha256": "eff1603885de7bc8631f37643eac7501026da8abc4a5fa93ae57aaf9cf1d00c4",
+          "crc32": "6bcc965d"
+        },
+        {
+          "path": "ether_v12/finite_n16_timeseries.csv",
+          "bytes": 5079,
+          "sha256": "c8601a1db8a801b7a506f844a05c5aa71a388d3ddc58dec0bc328f19cab22a04",
+          "crc32": "8b9fb899"
+        },
+        {
+          "path": "ether_v12/finite_n16_audit.json",
+          "bytes": 1360,
+          "sha256": "cc50bd4f5365241403fb0e5d11b22df535fd436c7c7763628f8385d308a85a55",
+          "crc32": "9eace5f8"
+        },
+        {
+          "path": "ether_v12/finite_n20_timeseries.csv",
+          "bytes": 6632,
+          "sha256": "c98ac128cbdeeea360a7803ff4deaf0983c2734fa602133cbecd37d3c2b4e6d0",
+          "crc32": "3f8c8b6a"
+        },
+        {
+          "path": "ether_v12/finite_n20_audit.json",
+          "bytes": 1362,
+          "sha256": "6b2473ded92ad0f55d93cac8fb0bdce49cd73e38b26d8a843dbe0272b67a37ce",
+          "crc32": "a8015953"
+        },
+        {
+          "path": "ether_v12/fine_dt_n12_timeseries.csv",
+          "bytes": 9769,
+          "sha256": "d5bc2d1957613ec1fbc6703389da6dc2a0a0409147b6d667fba4e802d65b99d9",
+          "crc32": "4b0d1a62"
+        },
+        {
+          "path": "ether_v12/fine_dt_n12_audit.json",
+          "bytes": 1365,
+          "sha256": "92cff40f3c9d857244ae138e792dfbd5371d97bf629fa6e9d21c7c9a4d435e91",
+          "crc32": "3a173015"
+        },
+        {
+          "path": "ether_v12/control_n12_timeseries.csv",
+          "bytes": 3633,
+          "sha256": "c41c68c28ffcf6d69befc4f9def44600016ab87f39b57aca6e5fe6fc987c6683",
+          "crc32": "7869b4f2"
+        },
+        {
+          "path": "ether_v12/control_n12_audit.json",
+          "bytes": 1319,
+          "sha256": "3c777cf1e3758963750e058b543104e16324f7757648d9475d43531d9b89aea0",
+          "crc32": "f2de17b1"
+        },
+        {
+          "path": "ether_v12/late_n12_timeseries.csv",
+          "bytes": 6657,
+          "sha256": "57d8a9337f6ebc4df216414c452aa0a3128cc49330ea00280f6e741529a54603",
+          "crc32": "2052e5b3"
+        },
+        {
+          "path": "ether_v12/late_n12_audit.json",
+          "bytes": 1453,
+          "sha256": "8912916c7f3b42e645694a9b40237a41b24669e8445224b8de096b3ffa8e44ff",
+          "crc32": "eb1cf734"
+        },
+        {
+          "path": "ether_v12/late_n16_timeseries.csv",
+          "bytes": 6224,
+          "sha256": "a80b03556d3c8f5d457f90dae999d2a6709f7530523728a29dd11b208d0e29d3",
+          "crc32": "f05b1928"
+        },
+        {
+          "path": "ether_v12/late_n16_audit.json",
+          "bytes": 1364,
+          "sha256": "9435a072ffc97421c4519cfce120a7d422f340f80a0d07afe20f7244e5d2d870",
+          "crc32": "58e7fa96"
+        },
+        {
+          "path": "ether_v12/late_n20_timeseries.csv",
+          "bytes": 8170,
+          "sha256": "a1c5cc9f8e7d10a548d6d3fb92f5ecddff7f2ab67b7b4ed046daeffec96b1854",
+          "crc32": "5ed4bc7b"
+        },
+        {
+          "path": "ether_v12/late_n20_audit.json",
+          "bytes": 1370,
+          "sha256": "a83d9eadbeb73e55105b899d2325ad81dae6fd5e1264ac2db9689f22bac7c6b1",
+          "crc32": "dbcba201"
+        },
+        {
+          "path": "ether_v12/protected_long_n12_timeseries.csv",
+          "bytes": 32337,
+          "sha256": "624141ba8030028e87a3930a9e913aeed70af359bcfbd5eda42e105626792981",
+          "crc32": "e9dd954c"
+        },
+        {
+          "path": "ether_v12/protected_long_n12_audit.json",
+          "bytes": 1457,
+          "sha256": "5e6e86294f5fe8c6c50f453a4a02e36ae0e25108854cc261afbc7231b7ecb75a",
+          "crc32": "1253974a"
+        },
+        {
+          "path": "ether_v12/protected_long_n16_timeseries.csv",
+          "bytes": 24427,
+          "sha256": "a2314a511d83de7e4626875076e37c9e57aa9262b5e45130b039f26c24d7354f",
+          "crc32": "617c4b90"
+        },
+        {
+          "path": "ether_v12/protected_long_n16_audit.json",
+          "bytes": 1446,
+          "sha256": "23c5cd72d9577723af6508a79f1511395b550b86eeefbbbf8b9df996a5b75492",
+          "crc32": "798f067e"
+        },
+        {
+          "path": "ether_v12/protected_convergence_coarse_timeseries.csv",
+          "bytes": 16766,
+          "sha256": "1fb6a643b4bac332d0be7b99dbfab9745b11ceff3e20692780a8b5e6924bfcca",
+          "crc32": "88d6f7cb"
+        },
+        {
+          "path": "ether_v12/protected_convergence_coarse_audit.json",
+          "bytes": 1471,
+          "sha256": "b88d78ed72bc9449fe6be0da384cf02d4d390036d942956584b93ceaf83fa272",
+          "crc32": "900b621b"
+        },
+        {
+          "path": "ether_v12/protected_convergence_fine_timeseries.csv",
+          "bytes": 32610,
+          "sha256": "5dae46a742231c61ef1aca808ff4a9413fb8064f7bd3fc0e6b33c47e9f723d11",
+          "crc32": "a84e0302"
+        },
+        {
+          "path": "ether_v12/protected_convergence_fine_audit.json",
+          "bytes": 1467,
+          "sha256": "bb1cec033683e8ac3cd144ac66506c3c2b3beaa7f38043c603d30ec8b151c019",
+          "crc32": "9c2b0799"
+        },
+        {
+          "path": "ether_v12/SHA256SUMS.txt",
+          "bytes": 3474,
+          "sha256": "ad2f932cc25ebf9dc66d1ee40eaf0faf57248b715b2138b1e224a382fd7a9a3e",
+          "crc32": "57d40802"
+        }
+      ]
+    },
+    {
+      "stage": 13,
+      "zip": "ether_topology_shear_v13_2026-11-22.zip",
+      "bytes": 327031,
+      "sha256": "a1a07e27f335ea89be051b5dd8d01ff7cd2498012e091be8b32dea27248cf58c",
+      "members": [
+        {
+          "path": "ether_thirteenth/README.md",
+          "bytes": 1640,
+          "sha256": "26cbca252e6c4b369379147ac2452ef8ee0397a4a452a4c58be9a76b7831ef5c",
+          "crc32": "ae794aa8"
+        },
+        {
+          "path": "ether_thirteenth/RESEARCH_NOTE_2026-11-22_v13.md",
+          "bytes": 9975,
+          "sha256": "f34e9db249adaf2c3a4c1c9841b3cc58e55f9869a4a527ddd36c4135a1a91a8e",
+          "crc32": "41459837"
+        },
+        {
+          "path": "ether_thirteenth/audit_v13.json",
+          "bytes": 9121,
+          "sha256": "d80c3c497566d3dec111d14e71cd71c5fd4be62d1d4872af77be3c6d848d3219",
+          "crc32": "b46ef5c5"
+        },
+        {
+          "path": "ether_thirteenth/audit_v13.py",
+          "bytes": 2587,
+          "sha256": "ec20627a63fe507a6b469a7a4126c99b48eb1b0177e682b3dffedbee9926136e",
+          "crc32": "ae3609ab"
+        },
+        {
+          "path": "ether_thirteenth/contract_n12.csv",
+          "bytes": 6514,
+          "sha256": "dca63556259fe352bb0b25fd476ec2e325c9d361c6d918af3b89887d0e2b1305",
+          "crc32": "26a735a5"
+        },
+        {
+          "path": "ether_thirteenth/contract_n8.csv",
+          "bytes": 6498,
+          "sha256": "b6b9b2e9875b83a6ffb70033a804774c1f166178927bd09279d34449ea1b6294",
+          "crc32": "2bf96502"
+        },
+        {
+          "path": "ether_thirteenth/curvature_full.csv",
+          "bytes": 1216,
+          "sha256": "9658ae651e2cdfeb83d37fa2f4a5dd2b4c9282f5da8d363d816be50595b99e9d",
+          "crc32": "97a6e6c9"
+        },
+        {
+          "path": "ether_thirteenth/curvature_trace.csv",
+          "bytes": 892,
+          "sha256": "8b8add9c2b18102ac63f6af252a10fa3e6868f3ef4b51bcdec22454f1f6a1ad1",
+          "crc32": "127536fb"
+        },
+        {
+          "path": "ether_thirteenth/curvature_uncoupled.csv",
+          "bytes": 763,
+          "sha256": "d9c96403131cc03e38134c10539081eac3f453c6adad6e94c957dfada858114f",
+          "crc32": "823c4b3f"
+        },
+        {
+          "path": "ether_thirteenth/dynamical_shear_comparison.png",
+          "bytes": 69174,
+          "sha256": "2a7c2ed0e0b449b0ca76b5dc8ec760ce9a7778982946ecfd1fcf021494b6fbee",
+          "crc32": "aa9b121a"
+        },
+        {
+          "path": "ether_thirteenth/energy_budget_convergence.png",
+          "bytes": 69503,
+          "sha256": "0e76fad17751556abe42203bfcbde00f62c5336ab21eaaf6c608bd7115d375ca",
+          "crc32": "48be6b85"
+        },
+        {
+          "path": "ether_thirteenth/extra_controls.json",
+          "bytes": 2851,
+          "sha256": "89edf3ee3ee734d3afe82a89e571b9bf551e8d2e9e9b6a4f50d9e39d25e79fc3",
+          "crc32": "6947a764"
+        },
+        {
+          "path": "ether_thirteenth/full_long_n8.csv",
+          "bytes": 6267,
+          "sha256": "01ee5612e01cffaf71a3a7cd65762cf9813c04f4dc3989ea093e838acc0aff9f",
+          "crc32": "bbe28681"
+        },
+        {
+          "path": "ether_thirteenth/full_n12_dt0p002.csv",
+          "bytes": 3306,
+          "sha256": "37c864879392db7e9eb63df0103647cbe505a8d24e8aba8953feb1653ba6a314",
+          "crc32": "bec3165c"
+        },
+        {
+          "path": "ether_thirteenth/full_n8_dt0p001.csv",
+          "bytes": 6362,
+          "sha256": "55ba398a6f9c15c27bd074fb58dadf9de5f708b57b28e5a305c5466060aecbb8",
+          "crc32": "e4451a84"
+        },
+        {
+          "path": "ether_thirteenth/full_n8_dt0p002.csv",
+          "bytes": 3332,
+          "sha256": "f58eb195af53196a6a8d016d64f58033fdfc1afee2ab91eaa0892b6473cc2c53",
+          "crc32": "f1fb0487"
+        },
+        {
+          "path": "ether_thirteenth/independent_audit.json",
+          "bytes": 991,
+          "sha256": "96014ab089cc8322a6d2b0c488e950cfb28b0a35b427e00164a502c8070607ee",
+          "crc32": "3d9259e4"
+        },
+        {
+          "path": "ether_thirteenth/intrinsic_curvature_comparison.png",
+          "bytes": 79205,
+          "sha256": "8a81f413886083c72779b21d57665a76af09bf185e115fbee9d4690fe0ab4bc4",
+          "crc32": "6c1d1927"
+        },
+        {
+          "path": "ether_thirteenth/plot_v13.py",
+          "bytes": 4280,
+          "sha256": "e80f665ab89353c2ea8db5f1c068b869d1e6c81724adfb3cea0fd92b3307f5b6",
+          "crc32": "b90a7dd8"
+        },
+        {
+          "path": "ether_thirteenth/shear_field_slice.png",
+          "bytes": 50739,
+          "sha256": "23594c420d0e4c88d526602d60a87ad66b6fb47056d1bc127b1cf06e0e64172e",
+          "crc32": "39f06f83"
+        },
+        {
+          "path": "ether_thirteenth/topology_slip_path.png",
+          "bytes": 59201,
+          "sha256": "6971766a196fc1783743118b13c426677224a5c88807dea56a3afc8a4b8adf96",
+          "crc32": "3b87526b"
+        },
+        {
+          "path": "ether_thirteenth/trace_n8_dt0p002.csv",
+          "bytes": 2975,
+          "sha256": "6adc3472e44532e8c8f7204587af64d9886e1194958892eb5396692b93ba2a15",
+          "crc32": "ab9a4496"
+        },
+        {
+          "path": "ether_thirteenth/uncoupled_n8.csv",
+          "bytes": 1757,
+          "sha256": "6a1ce535402652f49d82787a6d2219afacfacba89a282dd51aaa086588b117ab",
+          "crc32": "d6ce012d"
+        },
+        {
+          "path": "ether_thirteenth/verify_v11.py",
+          "bytes": 11852,
+          "sha256": "e3fef8a3aaa1f54206d34b9f34a956125b7b6e459516e693f929c3848c17306f",
+          "crc32": "5229e378"
+        },
+        {
+          "path": "ether_thirteenth/verify_v13.py",
+          "bytes": 13674,
+          "sha256": "3b5a29f2a737e1f3f869e9becd631d0364a14b911001f1e239197cb85b32d53c",
+          "crc32": "82f1ad9e"
+        },
+        {
+          "path": "ether_thirteenth/zero_kick_n8.csv",
+          "bytes": 3318,
+          "sha256": "89234454712d837e5081071640a1f39d458d32896aa11d5564a76e3634fcfc89",
+          "crc32": "38210e39"
+        },
+        {
+          "path": "ether_thirteenth/SHA256SUMS.txt",
+          "bytes": 2239,
+          "sha256": "5654731f1ee0c8332140345b87142bbc3c5bab32a878e370a6ea2f00147e4c08",
+          "crc32": "4a505328"
+        }
+      ]
+    },
+    {
+      "stage": 14,
+      "zip": "ether_exponential_metric_topology_v14_2026-11-22.zip",
+      "bytes": 296614,
+      "sha256": "89a7235e5ddbc3bf3198ea2f43470d00438ee922c5a374cae909c808346741d8",
+      "members": [
+        {
+          "path": "ether_fourteenth/MANIFEST_SHA256.txt",
+          "bytes": 1376,
+          "sha256": "cbf2e979f6ae8ba23e90fbd1f918209161ae6047fcfa043150f4bc1a8cf2c8d9",
+          "crc32": "13a40a20"
+        },
+        {
+          "path": "ether_fourteenth/README.md",
+          "bytes": 1139,
+          "sha256": "024dd3624fc07b3fb89bc3036895b7a86ac56e2279b3120298b314167e1c6ae0",
+          "crc32": "e71fa00d"
+        },
+        {
+          "path": "ether_fourteenth/RESEARCH_NOTE_2026-11-22_v14.md",
+          "bytes": 10529,
+          "sha256": "c4af211046f5566bcc9809c9640fac0746b12450bc7b9e71da4249e96e97fe3e",
+          "crc32": "bc9c6b07"
+        },
+        {
+          "path": "ether_fourteenth/audit_v14.json",
+          "bytes": 3371,
+          "sha256": "5e6de545b6acf575d402a8365a0a44d539b8c24c81b80fd705897afc44a501fd",
+          "crc32": "61161db8"
+        },
+        {
+          "path": "ether_fourteenth/audit_v14.py",
+          "bytes": 1865,
+          "sha256": "d31afaf42ae760334d8a5fcba1e432368c561c7032ac58cde052c36eff0ca19c",
+          "crc32": "a9f86730"
+        },
+        {
+          "path": "ether_fourteenth/exp_n10_dt0p001.csv",
+          "bytes": 2768,
+          "sha256": "4157cee612ff281c7ae47acb8edbb7c5d9c87312ea2366a9e83fdb0687480254",
+          "crc32": "8fac943b"
+        },
+        {
+          "path": "ether_fourteenth/exp_n10_dt0p002.csv",
+          "bytes": 1772,
+          "sha256": "d2978cf25a6d7374d55f3564caaeaa125b0fec3dfd1552f624958369aa3a2866",
+          "crc32": "f4f837a6"
+        },
+        {
+          "path": "ether_fourteenth/exp_n12_dt0p002.csv",
+          "bytes": 3119,
+          "sha256": "e70f2dea55e5edab7bb3e8e33855d99eb0cd47b19944c6d9a916bb395b9946aa",
+          "crc32": "f26c30ef"
+        },
+        {
+          "path": "ether_fourteenth/independent_audit_v14.json",
+          "bytes": 391,
+          "sha256": "1d3d0cda9142d32718e9806f05bcdad6d7ab964fefbd95098a871a7e4a714c8e",
+          "crc32": "8b5426e4"
+        },
+        {
+          "path": "ether_fourteenth/plot_v14.py",
+          "bytes": 2511,
+          "sha256": "e6b2de75241ecc483565e3354486ee04b5e2d1772c19383cb938e84854af6efe",
+          "crc32": "759865b6"
+        },
+        {
+          "path": "ether_fourteenth/v14_energy_refinement.png",
+          "bytes": 77016,
+          "sha256": "aa6c1c13b8c9db55eb791a003507e1ce7259c44a7149a36ebca9aa4329f7777e",
+          "crc32": "6a059247"
+        },
+        {
+          "path": "ether_fourteenth/v14_memory_hardening.png",
+          "bytes": 64255,
+          "sha256": "5e67c34d30674176f776cbbb2ca47dfdd00eedf7bd5d8cb4b7795c3908747052",
+          "crc32": "cd673bee"
+        },
+        {
+          "path": "ether_fourteenth/v14_self_generated_shear.png",
+          "bytes": 68125,
+          "sha256": "afe6e2b1e70e61edb135e23ae815d961e4a3c89278b857f295fd29ee2190ead5",
+          "crc32": "48dabb89"
+        },
+        {
+          "path": "ether_fourteenth/v14_topology_certificate.png",
+          "bytes": 93492,
+          "sha256": "7b227376e236ee87428b765567833cafd1245c34f64f3385bc5e88d2c8ac055b",
+          "crc32": "67347bb2"
+        },
+        {
+          "path": "ether_fourteenth/verify_v11.py",
+          "bytes": 11852,
+          "sha256": "e3fef8a3aaa1f54206d34b9f34a956125b7b6e459516e693f929c3848c17306f",
+          "crc32": "5229e378"
+        },
+        {
+          "path": "ether_fourteenth/verify_v13.py",
+          "bytes": 13674,
+          "sha256": "3b5a29f2a737e1f3f869e9becd631d0364a14b911001f1e239197cb85b32d53c",
+          "crc32": "82f1ad9e"
+        },
+        {
+          "path": "ether_fourteenth/verify_v14.py",
+          "bytes": 12709,
+          "sha256": "edf84772a7500ab5f56d6461acc7308921a276ed309fea6a61a918791085cdf7",
+          "crc32": "866337ee"
+        }
+      ]
+    },
+    {
+      "stage": 15,
+      "zip": "ether_ADM_constraints_v15_2026-11-22.zip",
+      "bytes": 380842,
+      "sha256": "a24c18b659b56dbb13bdb082994f2a8ee056513bf1c215b748434531b70e5f83",
+      "members": [
+        {
+          "path": "ether_fifteenth/MANIFEST_SHA256.txt",
+          "bytes": 2006,
+          "sha256": "98473f44813d63b51bf91713f7aadcf88487c3737bfcbb163468701b1d4ec5ac",
+          "crc32": "70a27a10"
+        },
+        {
+          "path": "ether_fifteenth/README.md",
+          "bytes": 2452,
+          "sha256": "29bb42344e3d98e5054eb49e0cca35b9b9acc93a5e485dbfa3b69075747bf38c",
+          "crc32": "0d61c712"
+        },
+        {
+          "path": "ether_fifteenth/RESEARCH_NOTE_2026-11-22_v15.md",
+          "bytes": 9758,
+          "sha256": "6f873823602540b9354260a8ed4f16eeecfa2c0f56bf6b22d2589831bec2ee95",
+          "crc32": "9f606500"
+        },
+        {
+          "path": "ether_fifteenth/audit_v15.json",
+          "bytes": 1534,
+          "sha256": "bdc5ae6360df7c2e9b170925ce33b744f61d97ee7802fe67a6082a519583484b",
+          "crc32": "f42df32f"
+        },
+        {
+          "path": "ether_fifteenth/audit_v15.py",
+          "bytes": 2590,
+          "sha256": "221ac151a0800d44814bbe38b20cde763327bd85557c5ad60d01f8db46c74da8",
+          "crc32": "f2c60264"
+        },
+        {
+          "path": "ether_fifteenth/conserved_memory_v15.json",
+          "bytes": 506,
+          "sha256": "2ac029d787154a4999a5e0870bc3f22c2c95009165a6af10b2eec654ea747fbf",
+          "crc32": "5dcd131b"
+        },
+        {
+          "path": "ether_fifteenth/conserved_memory_v15.py",
+          "bytes": 2211,
+          "sha256": "ec61c0bf13055391b5ce5096bcbfa03c8ed1a4f39291fddf975f664b89abb6a1",
+          "crc32": "218c179c"
+        },
+        {
+          "path": "ether_fifteenth/constraint_convergence.png",
+          "bytes": 114901,
+          "sha256": "9cfcd6f400240ead77f460a3d031a71212843c904ba0c1eb64589dd23ecbd939",
+          "crc32": "e8f4cd38"
+        },
+        {
+          "path": "ether_fifteenth/evolve_v15.py",
+          "bytes": 2252,
+          "sha256": "04d2e91cc595d5be4aff3e5c7d478e64154954252294bade6bd5b2167be25fa7",
+          "crc32": "932d54f4"
+        },
+        {
+          "path": "ether_fifteenth/graph_constraints.csv",
+          "bytes": 3383,
+          "sha256": "29b1a02f0c83fe5dfbec44ad1bd8b2e73d454fccd191522d912d3d9e8988c870",
+          "crc32": "c17e5ae9"
+        },
+        {
+          "path": "ether_fifteenth/independent_audit_v15.json",
+          "bytes": 1060,
+          "sha256": "9343bf7a24c314cfcbd041e5a2aee26978fc5318baa11af30d6810d6e66fda0a",
+          "crc32": "c28bbd9f"
+        },
+        {
+          "path": "ether_fifteenth/intrinsic_curvature_slice.png",
+          "bytes": 79929,
+          "sha256": "37dfdf8985f650f29b7f2d78a8283f8658d2d84edfdb83b5cbf0aae9c020e453",
+          "crc32": "3b196ada"
+        },
+        {
+          "path": "ether_fifteenth/kasner_IVP_convergence.csv",
+          "bytes": 841,
+          "sha256": "8fe57757b04b8eb813c55afe2b4f547cff9861cfd77415ce68d41c8299a25c10",
+          "crc32": "74c11d80"
+        },
+        {
+          "path": "ether_fifteenth/kasner_IVP_convergence.png",
+          "bytes": 95086,
+          "sha256": "827cbf67a4d05a5548a234f43f3b7ddde89b757194a763be802ea784251a1850",
+          "crc32": "b0966919"
+        },
+        {
+          "path": "ether_fifteenth/kasner_IVP_trace.csv",
+          "bytes": 1821,
+          "sha256": "066c4235de46a4082062a7effdfbd6bacd5d0461f1d9dc6334e8adf46bb4e9ce",
+          "crc32": "cbf05ec3"
+        },
+        {
+          "path": "ether_fifteenth/kasner_benchmark.csv",
+          "bytes": 951,
+          "sha256": "ea525e92f282bfcb285e44c3ca272361bb917db13f250b83e5d78a8716599a7f",
+          "crc32": "efa0676b"
+        },
+        {
+          "path": "ether_fifteenth/memory_constraint_obstruction.png",
+          "bytes": 103123,
+          "sha256": "b23068b2cbfd6f38c592e3b6bec5bcbf33420efda652580fcf7db0da3bcf7d88",
+          "crc32": "7606c0a9"
+        },
+        {
+          "path": "ether_fifteenth/plot_v15.py",
+          "bytes": 2845,
+          "sha256": "0996d0e5b1d1fc0adb61031aff158bee8b21ad0e6920448a42cedaf032775b6f",
+          "crc32": "c193b894"
+        },
+        {
+          "path": "ether_fifteenth/requirements.txt",
+          "bytes": 40,
+          "sha256": "1772ced28cd5ba0cd141b46a33b5593c25fea47b92be091c5ff0a632e919a798",
+          "crc32": "c056da90"
+        },
+        {
+          "path": "ether_fifteenth/run_audit_v15.log",
+          "bytes": 1061,
+          "sha256": "e10cd1d143e1e755f251afb8c10d617532f2e5af2e7b700ba8ea8820727e520e",
+          "crc32": "52a503fb"
+        },
+        {
+          "path": "ether_fifteenth/run_conserved_memory_v15.log",
+          "bytes": 507,
+          "sha256": "7b87cc113ac19856773aa60878fc7e904002e039d0aca42b746e6ea330cb6c19",
+          "crc32": "b8ef026c"
+        },
+        {
+          "path": "ether_fifteenth/run_ivp_v15.log",
+          "bytes": 261,
+          "sha256": "b6f69cb97d168bea99f30dfa1f6ed2511d6b946b0b639954a9f4cd68b9312bb0",
+          "crc32": "784af290"
+        },
+        {
+          "path": "ether_fifteenth/run_v15.log",
+          "bytes": 971,
+          "sha256": "d8827099d2c37a329c180fc6bfa3831d2009d87a2fc36cb04b13504ebc0f4149",
+          "crc32": "025448a6"
+        },
+        {
+          "path": "ether_fifteenth/verify_v15.py",
+          "bytes": 9535,
+          "sha256": "10e54ddf6478a990a57c37c8a65c95f8ca586b1d7305fba1ecfc3be215ccd724",
+          "crc32": "646fa6c0"
+        }
+      ]
+    },
+    {
+      "stage": 16,
+      "zip": "ether_covariant_topological_memory_v16_2026-11-22.zip",
+      "bytes": 410851,
+      "sha256": "90f7aa3ca8e0fbbe7b0a71e2e17f015ec695df9b60b841a24c5cf75b764314a7",
+      "members": [
+        {
+          "path": "ether_sixteenth/README.md",
+          "bytes": 1605,
+          "sha256": "53e3d3f428f6c3a1adc8dab42f550cc1cfccbb694460dffdccbc09f42f73ad6f",
+          "crc32": "816bdc91"
+        },
+        {
+          "path": "ether_sixteenth/RESEARCH_NOTE_2026-11-22_v16.md",
+          "bytes": 9639,
+          "sha256": "fd90500d6c6ba1f23b643aa72e1a93b4471a30e10b24ceac5337905c6146d73f",
+          "crc32": "4837d6a7"
+        },
+        {
+          "path": "ether_sixteenth/SHA256SUMS.txt",
+          "bytes": 1236,
+          "sha256": "cff117a2a3cad94e15c356e1c8f03255c1111d84c864f04a482d320901827ec3",
+          "crc32": "66064030"
+        },
+        {
+          "path": "ether_sixteenth/audit_v16.json",
+          "bytes": 7649,
+          "sha256": "846a5895adb05aed661002436ba6ad58df99196e92613c44b3edc914f6d94003",
+          "crc32": "685501f4"
+        },
+        {
+          "path": "ether_sixteenth/einstein_constraint_profile.csv",
+          "bytes": 158368,
+          "sha256": "e45e77f6e501b354158797f32c71dc3e9a11abd0d580f7754c407c6c5b7abd06",
+          "crc32": "bd2a235e"
+        },
+        {
+          "path": "ether_sixteenth/einstein_initial_constraint.png",
+          "bytes": 86532,
+          "sha256": "23b097626bb3feeef5ae84e6b0d0ea55ac03f0433316936231a6c7a853583806",
+          "crc32": "975ba316"
+        },
+        {
+          "path": "ether_sixteenth/energy_conservation.png",
+          "bytes": 70158,
+          "sha256": "76d45a3154f4e153a38c5d76533dd0e1b738c18dd3882f3a71dd4ffba048100e",
+          "crc32": "53783778"
+        },
+        {
+          "path": "ether_sixteenth/independent_audit_v16.json",
+          "bytes": 786,
+          "sha256": "a49d456d25f1bee26c7f01e719544144280de00a289e4ea143079bbb0fab4cf3",
+          "crc32": "9b398aa9"
+        },
+        {
+          "path": "ether_sixteenth/independent_audit_v16.py",
+          "bytes": 3348,
+          "sha256": "d3da2077ecbffc737e9f9b76c99ae928faaa66787bf1a91c2560007517504215",
+          "crc32": "decfface"
+        },
+        {
+          "path": "ether_sixteenth/radial_dynamics.csv",
+          "bytes": 21336,
+          "sha256": "2a2495e7f5db79348a65edf2a527208887bbe4b8acc5cca04a7195ad711fa201",
+          "crc32": "9b1cd860"
+        },
+        {
+          "path": "ether_sixteenth/radial_profiles.png",
+          "bytes": 60416,
+          "sha256": "04b0fc26144710cfe796ed029c75a415fb5ae63a44b84718f831dc9d8e53d53a",
+          "crc32": "4070feba"
+        },
+        {
+          "path": "ether_sixteenth/requirements.txt",
+          "bytes": 29,
+          "sha256": "06cdba6e989158e81dfb2e40e8a05247c485d49a3d0af3c5e042e820f48362cb",
+          "crc32": "b32beed1"
+        },
+        {
+          "path": "ether_sixteenth/run_log.txt",
+          "bytes": 7650,
+          "sha256": "189b9db991ffab622fc457f2bdc5c49490ac2aed4b547b96063061c429ac2227",
+          "crc32": "886f6597"
+        },
+        {
+          "path": "ether_sixteenth/topological_memory_dynamics.png",
+          "bytes": 121325,
+          "sha256": "0e1054369b0ed7ba02d25e95108319bce7ebadad0d09213b059d1935b95ad04c",
+          "crc32": "80f3f52b"
+        },
+        {
+          "path": "ether_sixteenth/verify_v16.py",
+          "bytes": 16101,
+          "sha256": "9308ef6797a0945642e88a2f631fb1af0efb21ce35363b788fd36015688e33c1",
+          "crc32": "67cb4983"
+        }
+      ]
+    },
+    {
+      "stage": 17,
+      "zip": "ether_gravity_memory_v17_2026-11-22.zip",
+      "bytes": 438514,
+      "sha256": "e8ea66617e4b4d9341f934929981d36841809d368807400fc7a68b150fbcc25f",
+      "members": [
+        {
+          "path": "ether_seventeenth/README.md",
+          "bytes": 1212,
+          "sha256": "80b23be7f4cbbb862e8e8eeec603285689bcbe999f82b5a75f245583d8ec0b5f",
+          "crc32": "17ab6ad5"
+        },
+        {
+          "path": "ether_seventeenth/RESEARCH_NOTE_2026-11-22_v17.md",
+          "bytes": 9299,
+          "sha256": "87282e5abca1dff73b0c944c33ebeb275ff849ef78aeb4fc1a636e504e1ec8bf",
+          "crc32": "d4b5b1b9"
+        },
+        {
+          "path": "ether_seventeenth/audit_log_v17.txt",
+          "bytes": 1985,
+          "sha256": "9dda55cd80a5959404ddcec091387dd75a419f51935f6c6cc62369af1b303a05",
+          "crc32": "eb2f0060"
+        },
+        {
+          "path": "ether_seventeenth/audit_v17.py",
+          "bytes": 6247,
+          "sha256": "8ab1281da63b20cad08602cd8e63a2abfc910ec2c5baae30e01b377810435e02",
+          "crc32": "b1bc7115"
+        },
+        {
+          "path": "ether_seventeenth/constraint_convergence_v17.png",
+          "bytes": 104898,
+          "sha256": "8fe2478ab0bc560a211644ee29dd451812739666eba6be7982639d7d2857a5be",
+          "crc32": "16f3cb71"
+        },
+        {
+          "path": "ether_seventeenth/dynamic_gravity_timeseries.csv",
+          "bytes": 9023,
+          "sha256": "8ca630824792197aca06d526b77460dbdafc5e990df5a40e51781490e31532f7",
+          "crc32": "a6f90610"
+        },
+        {
+          "path": "ether_seventeenth/dynamic_lapse_v17.png",
+          "bytes": 64752,
+          "sha256": "da6aa46c19e9714d72fae41be487075e4d2f7a5d54dd62d8458c84de08403447",
+          "crc32": "78a0fa13"
+        },
+        {
+          "path": "ether_seventeenth/extended_summary.json",
+          "bytes": 8389,
+          "sha256": "18f4b70a0837e31b0e76f10dc369d1e070a98f04c3176be5466bad84fdf1cf57",
+          "crc32": "4c6ef6e0"
+        },
+        {
+          "path": "ether_seventeenth/figures_log_v17.txt",
+          "bytes": 127,
+          "sha256": "74f94dc1d5f4a330da0b43cc8b198211551f8308d0f5c085831d8e2a32a67a60",
+          "crc32": "3f33ec40"
+        },
+        {
+          "path": "ether_seventeenth/figures_v17.py",
+          "bytes": 4327,
+          "sha256": "4218bd7e64fbfdb7feed83643485e54df56d39b3e6ff6ee70025d19e38bc83a4",
+          "crc32": "5afe171c"
+        },
+        {
+          "path": "ether_seventeenth/hedgehog_evolution_v17.png",
+          "bytes": 87213,
+          "sha256": "2f4f5eadfedf41a88d0f4bfb3b36be8ad8f2913efb7164b25c1f970b6ef8ef9c",
+          "crc32": "399cd4fb"
+        },
+        {
+          "path": "ether_seventeenth/independent_audit.json",
+          "bytes": 1985,
+          "sha256": "9dda55cd80a5959404ddcec091387dd75a419f51935f6c6cc62369af1b303a05",
+          "crc32": "eb2f0060"
+        },
+        {
+          "path": "ether_seventeenth/mass_transport_v17.png",
+          "bytes": 69406,
+          "sha256": "c7bf8f860755842ac0b7d5d092760f80606c150eaaefdee7d43fdd6a84cfaee6",
+          "crc32": "e134bc70"
+        },
+        {
+          "path": "ether_seventeenth/memory_hardening_v17.png",
+          "bytes": 111442,
+          "sha256": "ee95932a9e72f65e2cb72ddf8cca088dd3f2431acf260038103a0ed9c3110397",
+          "crc32": "ff042d11"
+        },
+        {
+          "path": "ether_seventeenth/metric_profiles_t00.csv",
+          "bytes": 9712,
+          "sha256": "2c75e7a572a32311e32a3a78301b13417f27f582e1b6e215b75f9c9e6c2c1c30",
+          "crc32": "448a4d7b"
+        },
+        {
+          "path": "ether_seventeenth/metric_profiles_t14.csv",
+          "bytes": 9712,
+          "sha256": "d87666e3538a1216e5c347fc07b6a63cb466393b7663caea9380a4d411231ba6",
+          "crc32": "ae4d5f3f"
+        },
+        {
+          "path": "ether_seventeenth/metric_profiles_t28.csv",
+          "bytes": 9712,
+          "sha256": "260b1ec5ee5a831ad23e5a45a4c9645cbd8d7a228dcbb0eb1cf60698cecb4cba",
+          "crc32": "357ca771"
+        },
+        {
+          "path": "ether_seventeenth/requirements.txt",
+          "bytes": 23,
+          "sha256": "e13491531df6eeb59d6420ef04d4b5651adec77439da3bccd7409e90f0988035",
+          "crc32": "3ac7a953"
+        },
+        {
+          "path": "ether_seventeenth/run_log_v17.txt",
+          "bytes": 664,
+          "sha256": "0d55e3d334e275a5a55dbaf7682864b8e152bb4dc95e18c50455ed60d663abb9",
+          "crc32": "b7c6a7ac"
+        },
+        {
+          "path": "ether_seventeenth/spatial_convergence.csv",
+          "bytes": 2284,
+          "sha256": "d501cd54b045c9549ea7b98b7ffad823ad3dec254245318dd4335b720a234fcd",
+          "crc32": "fd87180b"
+        },
+        {
+          "path": "ether_seventeenth/summary.csv",
+          "bytes": 2918,
+          "sha256": "d57c84df098cf95c8db901fac2ef2f1a5b3ef421fdebc9e52465ad71269a289c",
+          "crc32": "8b1e6919"
+        },
+        {
+          "path": "ether_seventeenth/summary.json",
+          "bytes": 7133,
+          "sha256": "6dc33db02f60f1ada35b151d4f616f6c58f59299df38b28989068cb052e20e86",
+          "crc32": "841c3698"
+        },
+        {
+          "path": "ether_seventeenth/time_series.csv",
+          "bytes": 6032,
+          "sha256": "ff93d257c07d1fe673de5e5b6723a9c9e14e43cc4ca5dae9ee09639dbf10d82f",
+          "crc32": "9b3aed75"
+        },
+        {
+          "path": "ether_seventeenth/verify_v17.py",
+          "bytes": 12282,
+          "sha256": "efdfc2d863a9700b78708fbee1027c0d5d63b03913cdee203307969cb6fd88b8",
+          "crc32": "a1584bd6"
+        },
+        {
+          "path": "ether_seventeenth/SHA256SUMS.txt",
+          "bytes": 2080,
+          "sha256": "238c87b629ae1d70484d81e0d7123497f964d877fea6d23e61850ed1956e5005",
+          "crc32": "62f3fcfe"
+        }
+      ]
+    },
+    {
+      "stage": 18,
+      "zip": "ether_non_spherical_geometry_v18_2026-11-22.zip",
+      "bytes": 616115,
+      "sha256": "0509e428519cf0a8cb2336b32a74e5bb0ad70c96b406a7707566a570b082a5a8",
+      "members": [
+        {
+          "path": "ether_eighteenth/ADM_mass_resolution_v18.png",
+          "bytes": 61757,
+          "sha256": "1e1b63d16c37269e177361dba43d635b0a3c68c6f410ab88064e7e0130474d33",
+          "crc32": "0b0ebb6f"
+        },
+        {
+          "path": "ether_eighteenth/README.md",
+          "bytes": 1773,
+          "sha256": "eda73602b97fb823b5d349d057c9e86c9babae30be33cc68d92965a2363f300d",
+          "crc32": "8de791b4"
+        },
+        {
+          "path": "ether_eighteenth/RESEARCH_NOTE_2026-11-22_v18.md",
+          "bytes": 11365,
+          "sha256": "51b358079268d8684b8205c437e96c434c6d4875faf97dbe99a2e1c756126537",
+          "crc32": "139188c6"
+        },
+        {
+          "path": "ether_eighteenth/SHA256SUMS.txt",
+          "bytes": 2542,
+          "sha256": "29efe295a114acea4c7f3eb98013b933ef69480dd8a17ac79ff2aceeddd589cc",
+          "crc32": "153d14c6"
+        },
+        {
+          "path": "ether_eighteenth/adm_audit_v18.json",
+          "bytes": 7555,
+          "sha256": "66c08e61ed933723b210eb9515be31690892e986bc0c4630778f652854c26afa",
+          "crc32": "fbb763c7"
+        },
+        {
+          "path": "ether_eighteenth/affine_gravity_energy.csv",
+          "bytes": 4062,
+          "sha256": "d92f146e2a906d9a76050b11b6ff97a0c65e863c537af505b19244d049cc40c1",
+          "crc32": "e4bf02ca"
+        },
+        {
+          "path": "ether_eighteenth/affine_weak_gravity_stability_v18.png",
+          "bytes": 98545,
+          "sha256": "e9112703b5804bf5285fc39bcc4a10a66cbd71dfc0a434408dae83f82df090a4",
+          "crc32": "ce43d566"
+        },
+        {
+          "path": "ether_eighteenth/audit_v18.json",
+          "bytes": 751,
+          "sha256": "950e0deefcadf51c89d09e0f07d1f0a17c0a02c7466d7b983e20fa2aa587975c",
+          "crc32": "35869c86"
+        },
+        {
+          "path": "ether_eighteenth/collective_energy_audit_v18.png",
+          "bytes": 64304,
+          "sha256": "8aafe5586295c777a406ac68a6b57ba2cdc4ab888fb41c1a4af1d42a373cf2e6",
+          "crc32": "377dd6fa"
+        },
+        {
+          "path": "ether_eighteenth/collective_mode_audit.json",
+          "bytes": 855,
+          "sha256": "721e6af4150a75c9fcffeed29a48e0083f172c4a88112345722e790e8d584df3",
+          "crc32": "a7680d0a"
+        },
+        {
+          "path": "ether_eighteenth/collective_mode_v18.py",
+          "bytes": 4719,
+          "sha256": "a8b6118628e3af8bc95092fa373a7a8d9967ae7da8fbcc92761971d627856e67",
+          "crc32": "3a976dc8"
+        },
+        {
+          "path": "ether_eighteenth/collective_shape_oscillation.csv",
+          "bytes": 202175,
+          "sha256": "6a4dc77e3ee3118c0b1bbad6847c1bdd8a2e97e8f8d401f6a619345d2e82fd93",
+          "crc32": "e0976bb3"
+        },
+        {
+          "path": "ether_eighteenth/collective_shape_samples.csv",
+          "bytes": 1847,
+          "sha256": "d4e2a21498af89ebb969daba840c711d9a888787e37675c1ccfec71e26c12b8f",
+          "crc32": "939e3246"
+        },
+        {
+          "path": "ether_eighteenth/constraint_v18.py",
+          "bytes": 6113,
+          "sha256": "258ad75f0bc5af1c3b4580eff4b14d2215eeaa238e0d7cc0b1c8885512cf9091",
+          "crc32": "a224fcb2"
+        },
+        {
+          "path": "ether_eighteenth/einstein_nonspherical_psi_v18.png",
+          "bytes": 113552,
+          "sha256": "a237e02ee184389eb855ce61dbd95855e8e831765231349046f2230c1e031cd1",
+          "crc32": "84349e1e"
+        },
+        {
+          "path": "ether_eighteenth/farfield_quadrupole.csv",
+          "bytes": 1795,
+          "sha256": "195cc4a4cb89761e4616c5de6d8ab60801f83d32b8ea4ece7d6a8278d957feab",
+          "crc32": "7dd4392d"
+        },
+        {
+          "path": "ether_eighteenth/figures_v18.py",
+          "bytes": 3655,
+          "sha256": "891db521419bcf0ae1a7afa273bfa410a13c0f2aa3f66c7e0217f428187c5c08",
+          "crc32": "a21c3503"
+        },
+        {
+          "path": "ether_eighteenth/independent_audit_v18.json",
+          "bytes": 1833,
+          "sha256": "c3d3dd66078b133959c70dab352d86c41e5f02ec79637ae1651196b99d414e7b",
+          "crc32": "12022d07"
+        },
+        {
+          "path": "ether_eighteenth/independent_audit_v18.py",
+          "bytes": 5442,
+          "sha256": "f47fc535a26f3653bc4b6db6c505d56393856cc266fad4da74811ad5d185de23",
+          "crc32": "e732b169"
+        },
+        {
+          "path": "ether_eighteenth/non_spherical_adm_initial_data.csv",
+          "bytes": 2744,
+          "sha256": "6174f9199377d2ab6cd0493da18969a0fea8a9dfea0d998748ee8c54c41a6096",
+          "crc32": "dd0024f6"
+        },
+        {
+          "path": "ether_eighteenth/nonaffine_energy_v18.png",
+          "bytes": 136996,
+          "sha256": "667d4c5e4a56062530f75edb0f7bc153e3008b17bf04a1843c0e3693cf4bdafa",
+          "crc32": "39140127"
+        },
+        {
+          "path": "ether_eighteenth/nonaffine_hessian.csv",
+          "bytes": 1202,
+          "sha256": "644f95c8a49230581a8dde00299dff3b8bb95a55194fde1e17dd32cd922acbd9",
+          "crc32": "803bc640"
+        },
+        {
+          "path": "ether_eighteenth/nonaffine_quadrupole.csv",
+          "bytes": 6090,
+          "sha256": "00e728ab1f3837e337ab10b620b79cb569fd4e9552cc832b72952c47339a1cd4",
+          "crc32": "3deb60dc"
+        },
+        {
+          "path": "ether_eighteenth/nonaffine_v18.py",
+          "bytes": 3491,
+          "sha256": "4e27af2204c6a84ca7d02e06e03cb1fa1de9e119ec8a73775f5acd5debe1d061",
+          "crc32": "61572e46"
+        },
+        {
+          "path": "ether_eighteenth/psi_slice_n81_s0p0.csv",
+          "bytes": 12237,
+          "sha256": "5b4d0643f761d8e64a2677b64079f1b2dabe02ff73cc7777c77fc1251273ca6f",
+          "crc32": "1fe9cd3a"
+        },
+        {
+          "path": "ether_eighteenth/psi_slice_n81_s0p16.csv",
+          "bytes": 12237,
+          "sha256": "6dbfa507c8054ca631a84eee5ff795a1fcb01578f6085a7d4babe950bec61b9a",
+          "crc32": "5d94dcca"
+        },
+        {
+          "path": "ether_eighteenth/reextracted_audit_check.txt",
+          "bytes": 1834,
+          "sha256": "250697c9245d6d3bc2fcc22ae933627cbabcab90ab9572e618791b403ab04426",
+          "crc32": "aca1911d"
+        },
+        {
+          "path": "ether_eighteenth/shape_oscillation_v18.png",
+          "bytes": 93540,
+          "sha256": "2a09ccdecdb3f41c8ecb7ae876bf852cb4aa4c2a5cae49e1a0b7a4ef4a1e4ba0",
+          "crc32": "26f63092"
+        },
+        {
+          "path": "ether_eighteenth/verify_v18.py",
+          "bytes": 9274,
+          "sha256": "e084787085c72dc4f2cd0ef00085aca32157f599075a288e51691eaa10f63565",
+          "crc32": "199705d4"
+        }
+      ]
+    },
+    {
+      "stage": 19,
+      "zip": "ether_stationary_modes_v19_2026-11-22.zip",
+      "bytes": 302033,
+      "sha256": "7546d09053fed4385c084ef44980609759954ee9bdde4b6767df521bc5a07e57",
+      "members": [
+        {
+          "path": "ether_nineteenth/README.md",
+          "bytes": 1803,
+          "sha256": "5f3103b97f5957d3fcd7b1837e53db2f7f7b56dd661a443772b22b2296f885e0",
+          "crc32": "c406e664"
+        },
+        {
+          "path": "ether_nineteenth/RESEARCH_NOTE_2026-11-22_v19.md",
+          "bytes": 8107,
+          "sha256": "279d19c68b12b9c4fc44dafa1451f79378feb2cb30f98ee5733c7b77eea13942",
+          "crc32": "c40073b1"
+        },
+        {
+          "path": "ether_nineteenth/SHA256SUMS.txt",
+          "bytes": 2729,
+          "sha256": "02855e41e44ded177876b3641396019ee08a21073fc749935cce30f1d9c73e12",
+          "crc32": "728745bf"
+        },
+        {
+          "path": "ether_nineteenth/audit_v19.json",
+          "bytes": 3502,
+          "sha256": "65a5a86b4f205d2dd1efc283c78942932a7adfa5d4633bd2e36e84cdd7bed853",
+          "crc32": "749ac943"
+        },
+        {
+          "path": "ether_nineteenth/build_archive_v19.py",
+          "bytes": 1035,
+          "sha256": "683313eb41b339c7224a2c28d14155de2ed8d8c16a769148ed5bee15cfe92034",
+          "crc32": "b6bb7279"
+        },
+        {
+          "path": "ether_nineteenth/equilibrium_convergence.csv",
+          "bytes": 1157,
+          "sha256": "b02d83f27e0b1c6d2b7fe2d2688b8e04934cb71a4bde908f7497933191d81d07",
+          "crc32": "70231e61"
+        },
+        {
+          "path": "ether_nineteenth/equilibrium_resolution_v19.png",
+          "bytes": 41850,
+          "sha256": "516cda2a61245810f03c9d1b4d7770d365fbd5596404c677885947bc33c22471",
+          "crc32": "40ad29f3"
+        },
+        {
+          "path": "ether_nineteenth/figures_v19.py",
+          "bytes": 3359,
+          "sha256": "4dcad61e074d8d795dcf7e949b4ca23ad64f61f6a30c304dfe9c064a3434b6c5",
+          "crc32": "cc321c35"
+        },
+        {
+          "path": "ether_nineteenth/final_audit_v19.json",
+          "bytes": 958,
+          "sha256": "bca7f3a1721be78984e04d7c1746883dae2176425702edc04433d2fbfe24801c",
+          "crc32": "28a6bd93"
+        },
+        {
+          "path": "ether_nineteenth/final_audit_v19.py",
+          "bytes": 2459,
+          "sha256": "4f421286fdcf957e5a1c7d6abd18553f8b45ea672c0802f34e499b3913a8ab57",
+          "crc32": "8b18a5d2"
+        },
+        {
+          "path": "ether_nineteenth/hessian_l2_n120.csv",
+          "bytes": 6400,
+          "sha256": "ea1d63224591db8d5f168ba99fa70a0bb56cb0aab45e7063e6e8babc5e5dd741",
+          "crc32": "9c0f8773"
+        },
+        {
+          "path": "ether_nineteenth/hessian_l2_n180.csv",
+          "bytes": 6400,
+          "sha256": "faa9fec6de4446718e9aa1e4f271cf02d347f78875553b39ccdf5b7ab43d56c7",
+          "crc32": "0d5627cf"
+        },
+        {
+          "path": "ether_nineteenth/hessian_l3_n120.csv",
+          "bytes": 6400,
+          "sha256": "270b6dc194fbf49e471d0140c0de8454a194eeee49193346e171ea379a82a209",
+          "crc32": "d5c08037"
+        },
+        {
+          "path": "ether_nineteenth/hessian_l3_n180.csv",
+          "bytes": 6400,
+          "sha256": "9e9c972ab0f994a2f886941d4b73233ebbc2ff54b40c573450cbfea44b9a67c1",
+          "crc32": "9c820345"
+        },
+        {
+          "path": "ether_nineteenth/independent_audit_v19.json",
+          "bytes": 2016,
+          "sha256": "a0efffc630c7a86ad0172f4a42b6415ca7ca271a634024dcfee64241a59775c9",
+          "crc32": "c977123b"
+        },
+        {
+          "path": "ether_nineteenth/independent_audit_v19.py",
+          "bytes": 4549,
+          "sha256": "e1deb235ae5fde2fbfed1240d613fcd34f44c100533ee95c8ce7f85f9ecab918",
+          "crc32": "3c3f2bca"
+        },
+        {
+          "path": "ether_nineteenth/lowest_l2_trial_mode_v19.png",
+          "bytes": 60212,
+          "sha256": "8b00decfd089858efca21e23e349b3f0419b8f878476fa27c484053442ecb1ff",
+          "crc32": "b5454b70"
+        },
+        {
+          "path": "ether_nineteenth/mass_l2_n120.csv",
+          "bytes": 6400,
+          "sha256": "752ed245b10469ba3262b16cf167880e9b328ad819a385c6fe427bf7925008a1",
+          "crc32": "c67b496f"
+        },
+        {
+          "path": "ether_nineteenth/mass_l2_n180.csv",
+          "bytes": 6400,
+          "sha256": "dff11b2c3623f2f1b0a78b9d3ddc168f5541a3aa971c59fd9479681783a940e9",
+          "crc32": "734b1821"
+        },
+        {
+          "path": "ether_nineteenth/mass_l3_n120.csv",
+          "bytes": 6400,
+          "sha256": "862b826a251274790685d34cc0ce55d65145ebbdaad63f6aefefd306b6c7571a",
+          "crc32": "235e79fb"
+        },
+        {
+          "path": "ether_nineteenth/mass_l3_n180.csv",
+          "bytes": 6400,
+          "sha256": "54fc8f6cf389418db59443e8a3c1480b90a10a48e894a1d8dcac7aec22082caf",
+          "crc32": "04f82b10"
+        },
+        {
+          "path": "ether_nineteenth/profile_old_vs_equilibrium_v19.png",
+          "bytes": 102437,
+          "sha256": "85131741c3be0a8b1a2cf385cd22e16079b06772ccac9b91e882d5c5a5646955",
+          "crc32": "ce5a5edd"
+        },
+        {
+          "path": "ether_nineteenth/projected_mode_eigenvalues_v19.png",
+          "bytes": 55722,
+          "sha256": "edd8f2bad5b7553c1ebca7eb41c3943886e64c3c21f2bb2fd3f8897fb1c246ea",
+          "crc32": "de982b89"
+        },
+        {
+          "path": "ether_nineteenth/radial_profile_n120.csv",
+          "bytes": 11041,
+          "sha256": "ed3b1d871bca79d381524359dcb85b6093808d7880b204a869bace357b94d00b",
+          "crc32": "481be408"
+        },
+        {
+          "path": "ether_nineteenth/radial_profile_n180.csv",
+          "bytes": 17366,
+          "sha256": "654f8fbfbd556df16de37a4710f3ebf93a0202f1bc63e3d30d4275f91c0417e4",
+          "crc32": "83a25cd5"
+        },
+        {
+          "path": "ether_nineteenth/radial_profile_n240.csv",
+          "bytes": 22134,
+          "sha256": "d2f6ced7e39f3b30827d4c97e3b602bc283def27a90238c167dc9037a7d13e57",
+          "crc32": "cd3ad38d"
+        },
+        {
+          "path": "ether_nineteenth/radial_profile_n320.csv",
+          "bytes": 29351,
+          "sha256": "578ad41ecc6742c6862925edc6081b7b689e665532d0e22cf32b5a6201d8f39d",
+          "crc32": "036f6037"
+        },
+        {
+          "path": "ether_nineteenth/radial_profile_n80.csv",
+          "bytes": 7256,
+          "sha256": "9e533f67191dc468ae6bcc1ea108f79331db6f6b013c15d41cbbfe0129cdea5d",
+          "crc32": "1b8297fa"
+        },
+        {
+          "path": "ether_nineteenth/restricted_modes.csv",
+          "bytes": 457,
+          "sha256": "04f7e13236425c5ce07332aab436ca35e8beb595031e01a988d2842e84deed44",
+          "crc32": "a2e90336"
+        },
+        {
+          "path": "ether_nineteenth/robustness_v19.json",
+          "bytes": 3439,
+          "sha256": "9bbc71d4b9916595fc548bf785da7ba44e48238f3400c5a1d18c4cc943c1efc2",
+          "crc32": "0f491959"
+        },
+        {
+          "path": "ether_nineteenth/robustness_v19.py",
+          "bytes": 3517,
+          "sha256": "16617eabf3eafb068ce0c7d2252fdb909b09c6f03688cfd8b997a397a22d0d4d",
+          "crc32": "df6c7745"
+        },
+        {
+          "path": "ether_nineteenth/verify_v19.py",
+          "bytes": 9145,
+          "sha256": "8f4125774815d9393865c268bd6fec814948f9a624f1c04bf1a5272bfbe87e6d",
+          "crc32": "6b652757"
+        }
+      ]
+    },
+    {
+      "stage": 20,
+      "zip": "ether_spin2_source_consistency_v20_2026-11-23.zip",
+      "bytes": 651936,
+      "sha256": "fe0a0b3d66265d9fa7a61f91c38c8d4850f17ebbaf9ddec693bd3f618c525a20",
+      "members": [
+        {
+          "path": "ether_twentieth/README.md",
+          "bytes": 1027,
+          "sha256": "50b2b559f66a8d730b4b1ec9c50c8a0d631f3e60b4f9297493871e2600efb757",
+          "crc32": "3e5ded9f"
+        },
+        {
+          "path": "ether_twentieth/RESEARCH_NOTE_2026-11-23_v20.md",
+          "bytes": 8918,
+          "sha256": "2bc24664e1fa6d2d683efb1284b814a929fae0b3343e6ec41d014756f5e832b7",
+          "crc32": "25085723"
+        },
+        {
+          "path": "ether_twentieth/SHA256SUMS.txt",
+          "bytes": 1614,
+          "sha256": "f34a042995e8bae7595140b4733e59f6930816b464ef95e3cad9a0412a48e36f",
+          "crc32": "a43fc19e"
+        },
+        {
+          "path": "ether_twentieth/audit_v20.json",
+          "bytes": 3694,
+          "sha256": "cf32a7d04d462416793eaad72eaf53378f4de28e21960bc47a7b7c69ff820882",
+          "crc32": "0b57ca01"
+        },
+        {
+          "path": "ether_twentieth/coupled_memory_timeseries.csv",
+          "bytes": 402625,
+          "sha256": "b6f42794ac334211bdbbbce090c499ed86d5ff07a87bdf6a0e9e6acaab9fca1a",
+          "crc32": "9513533a"
+        },
+        {
+          "path": "ether_twentieth/energy_exchange_v20.png",
+          "bytes": 260055,
+          "sha256": "805ad3e851c12401a427394c2d10c99c483990150fee3492699a3874fe4f4a07",
+          "crc32": "90c30748"
+        },
+        {
+          "path": "ether_twentieth/independent_audit_v20.json",
+          "bytes": 4429,
+          "sha256": "a49132d44041503ff2c405b922cb2bea1bef0a4100fd110749178845417860a8",
+          "crc32": "8a5ecdc3"
+        },
+        {
+          "path": "ether_twentieth/independent_audit_v20.py",
+          "bytes": 4088,
+          "sha256": "a94b753b959f81c9ada41b15afe8cca886a4fbf070fbb12075a50b00c5c2d5f0",
+          "crc32": "1fd35280"
+        },
+        {
+          "path": "ether_twentieth/lattice_audit_v20.json",
+          "bytes": 1233,
+          "sha256": "3b3f022b26f540854aa020b2c021ad26217021c03e423472bef3c414d3ebcfca",
+          "crc32": "a4b5f3a5"
+        },
+        {
+          "path": "ether_twentieth/lattice_conservation_v20.py",
+          "bytes": 5409,
+          "sha256": "90f64a825362027ff5914ef7d619f72c50e7e707af230239996c050395588908",
+          "crc32": "ea9f10e9"
+        },
+        {
+          "path": "ether_twentieth/local_energy_coarse.csv",
+          "bytes": 12778,
+          "sha256": "65ccf06d49ac7bff6a3dd3c8d2bd4fd5b4b64c0fb7efeabce72dc0c71e386866",
+          "crc32": "e5c90a3a"
+        },
+        {
+          "path": "ether_twentieth/local_energy_fine.csv",
+          "bytes": 12273,
+          "sha256": "72864cafaeda7dd31ba6f556145fca42c51f120f52168c6a3230ec41316589c6",
+          "crc32": "ec2a1150"
+        },
+        {
+          "path": "ether_twentieth/source_ward_failure_v20.png",
+          "bytes": 64900,
+          "sha256": "eb98bc90ff610968beb929d5389a48b304479b8b6487b1901b992efdd239ae0d",
+          "crc32": "ab798682"
+        },
+        {
+          "path": "ether_twentieth/spatial_energy_convergence_v20.png",
+          "bytes": 83081,
+          "sha256": "7df6f2846fc951dbd21c59ec939749065af86f49ebb8e14169a8e6368d751733",
+          "crc32": "addd6c2c"
+        },
+        {
+          "path": "ether_twentieth/spatial_energy_transport_v20.png",
+          "bytes": 93025,
+          "sha256": "4793f51d515ffcde68f9c95cd31316a8b8cd7ee63169cc13516a99e060635d95",
+          "crc32": "ad9496d5"
+        },
+        {
+          "path": "ether_twentieth/v20_independent_run.log",
+          "bytes": 4429,
+          "sha256": "a49132d44041503ff2c405b922cb2bea1bef0a4100fd110749178845417860a8",
+          "crc32": "8a5ecdc3"
+        },
+        {
+          "path": "ether_twentieth/v20_lattice_run.log",
+          "bytes": 1233,
+          "sha256": "3b3f022b26f540854aa020b2c021ad26217021c03e423472bef3c414d3ebcfca",
+          "crc32": "a4b5f3a5"
+        },
+        {
+          "path": "ether_twentieth/v20_run.log",
+          "bytes": 3694,
+          "sha256": "cf32a7d04d462416793eaad72eaf53378f4de28e21960bc47a7b7c69ff820882",
+          "crc32": "0b57ca01"
+        },
+        {
+          "path": "ether_twentieth/verify_v20.py",
+          "bytes": 9966,
+          "sha256": "cc1b1c64ddf578dd34149965534c8b00b1eabf3d5d98843c9b123e7da6e37db6",
+          "crc32": "60af9bd6"
+        }
+      ]
+    },
+    {
+      "stage": 21,
+      "zip": "ether_nonlinear_self_coupling_v21_2026-11-23.zip",
+      "bytes": 903301,
+      "sha256": "2dc1d75a193d1f29148937c03918f6c163f2b62f14035949e8f90f8d112c4404",
+      "members": [
+        {
+          "path": "ether_twentyfirst/README.md",
+          "bytes": 1052,
+          "sha256": "59e112cc22f41fbc959f74ac703c7fdf664c0e54d6a1f383f54188ad85d39343",
+          "crc32": "33c6cb31"
+        },
+        {
+          "path": "ether_twentyfirst/RESEARCH_NOTE_2026-11-23_v21.md",
+          "bytes": 8271,
+          "sha256": "04f3eafe5ee0ae9e94ce13189ee04ece740bad05f9e4567b8ef19ae5bb6a9769",
+          "crc32": "366955a8"
+        },
+        {
+          "path": "ether_twentyfirst/audit_v21.json",
+          "bytes": 4799,
+          "sha256": "5ba9ab373ea05d599e1ae8e2cb4c2b6c2dc99198883e4a89d119a20b41df391a",
+          "crc32": "7a7c9824"
+        },
+        {
+          "path": "ether_twentyfirst/exact_plane_wave_source_v21.png",
+          "bytes": 85809,
+          "sha256": "7d4a43e8139a5dff442991aab05d67468baafa266877f515c2d1e4f10e9ef1d9",
+          "crc32": "679cf833"
+        },
+        {
+          "path": "ether_twentyfirst/exact_rosen_equal_null_scalars.csv",
+          "bytes": 282933,
+          "sha256": "6f76a3679ae0af7d7784b26741c2f0a0098ebb5a7aaee5f63f7825a9da65e1d8",
+          "crc32": "480f1bc6"
+        },
+        {
+          "path": "ether_twentyfirst/exact_rosen_vacuum.csv",
+          "bytes": 282959,
+          "sha256": "e40f336f7b75a588c12ddad6672a5d15c28aefce703a2fbd2c562482bc5ecdd1",
+          "crc32": "c2c66989"
+        },
+        {
+          "path": "ether_twentyfirst/independent_audit_v21.json",
+          "bytes": 1184,
+          "sha256": "6e733daa6c6b11b57357f8eec3e06d907923957759a777652d383d0add0caf90",
+          "crc32": "858bf258"
+        },
+        {
+          "path": "ether_twentyfirst/independent_audit_v21.py",
+          "bytes": 3095,
+          "sha256": "cb6b6a58f6b8184c397abd14bc8e04225680757be90babe3cf4109a0dc93717e",
+          "crc32": "f3ac81fc"
+        },
+        {
+          "path": "ether_twentyfirst/independent_run.log",
+          "bytes": 1184,
+          "sha256": "6e733daa6c6b11b57357f8eec3e06d907923957759a777652d383d0add0caf90",
+          "crc32": "858bf258"
+        },
+        {
+          "path": "ether_twentyfirst/manifest.sha256",
+          "bytes": 1439,
+          "sha256": "43473d143d0ef81407af7a4a56746de3492c9410ceadc22b593dfe160af2b40a",
+          "crc32": "7f3273ff"
+        },
+        {
+          "path": "ether_twentyfirst/nonlinear_plane_wave_v21.png",
+          "bytes": 132375,
+          "sha256": "76506a3eea1efd795829c3353383c715b0033b5dcff3ee8a0730196167fd86be",
+          "crc32": "69fa6be8"
+        },
+        {
+          "path": "ether_twentyfirst/nonlinear_ricci_scaling.csv",
+          "bytes": 774,
+          "sha256": "e1b00692a3bd7508bf22c1c2fdcc875d2817c62063f7a720c0ef1837a790c959",
+          "crc32": "f1913463"
+        },
+        {
+          "path": "ether_twentyfirst/plane_wave_profile.csv",
+          "bytes": 1111493,
+          "sha256": "2cf1f57b1348effb13b955a1bc118e052df76b414d7876d939fc743dd147305d",
+          "crc32": "05d60608"
+        },
+        {
+          "path": "ether_twentyfirst/relative_mode_dispersion.csv",
+          "bytes": 422,
+          "sha256": "6feb1d896063f595a63b12b158c6bc0d36c93f4faa1aca92c9d0e14620f6572c",
+          "crc32": "8e2e0b0b"
+        },
+        {
+          "path": "ether_twentyfirst/relative_mode_dispersion_v21.png",
+          "bytes": 61547,
+          "sha256": "d52eea97ea9bd7820148ba6f34c1a72a68e22ab6ea7adea4fbdd3b86b01a6eb5",
+          "crc32": "93966ddf"
+        },
+        {
+          "path": "ether_twentyfirst/run.log",
+          "bytes": 3834,
+          "sha256": "e50bf12e0c8d4046592b50a0b5e658f5d29792a8f22bfb934f907aabda0097e4",
+          "crc32": "84e6337f"
+        },
+        {
+          "path": "ether_twentyfirst/verify_v21.py",
+          "bytes": 10920,
+          "sha256": "9ee19954add60a0d5a7ea742f4472728a8343e1f7ea63ecb4d18c31402f73fca",
+          "crc32": "a3b4f079"
+        }
+      ]
+    },
+    {
+      "stage": 22,
+      "zip": "ether_nonlinear_noether_v22_2026-11-23.zip",
+      "bytes": 517660,
+      "sha256": "eb8ef7672d4e198f8df657f50eb8dac95aa712fd957bb85cc29f7774be5e1a59",
+      "members": [
+        {
+          "path": "ether_twentysecond/README.md",
+          "bytes": 909,
+          "sha256": "f0e16a02223f0138dd13b874f08ec0fa352f17ea8660f0ea71fbe7dc680f5f81",
+          "crc32": "430dcf66"
+        },
+        {
+          "path": "ether_twentysecond/RESEARCH_NOTE_2026-11-23_v22.md",
+          "bytes": 9085,
+          "sha256": "87a83c43f14d9ea58164ff3e9add00dd35452e816bd9f1a3b14622599aaa05b5",
+          "crc32": "9817374e"
+        },
+        {
+          "path": "ether_twentysecond/SHA256SUMS.txt",
+          "bytes": 1357,
+          "sha256": "7302bee043d368166209e049248845088425a7ac454cc8569a00d14b09e3c3f9",
+          "crc32": "b2103950"
+        },
+        {
+          "path": "ether_twentysecond/audit_v22.json",
+          "bytes": 1967,
+          "sha256": "c35f0227e9bb5430e3edae401ffe09f1d422984eef63d1051854e189bb436163",
+          "crc32": "8228a9d8"
+        },
+        {
+          "path": "ether_twentysecond/bianchiI_gauge_memory_v22.png",
+          "bytes": 198405,
+          "sha256": "15b53e10e7394fccad255a11ba5ece637c2f48c2cca9ac82f32b8f9cb5ff9c8b",
+          "crc32": "43bb50ed"
+        },
+        {
+          "path": "ether_twentysecond/coupled_bianchiI_v22.csv",
+          "bytes": 272610,
+          "sha256": "b9a57a4593e233d987f11864c92bcc0700f2bedcf03afa69ca9406bc670a4f17",
+          "crc32": "c2193497"
+        },
+        {
+          "path": "ether_twentysecond/friction_constraint_failure_v22.png",
+          "bytes": 60737,
+          "sha256": "be27f7516837a0fced635b6810e043f4dfeb36d65d1706863a23710d1aead70e",
+          "crc32": "9aa26285"
+        },
+        {
+          "path": "ether_twentysecond/inconsistent_friction_v22.csv",
+          "bytes": 62050,
+          "sha256": "92d91e0d9c08cd1443f2ec6f0880500f36edd7c8aa64e13cc46ebee3ab7a5dd4",
+          "crc32": "62063fda"
+        },
+        {
+          "path": "ether_twentysecond/independent_audit_v22.json",
+          "bytes": 471,
+          "sha256": "41e6f884b40ac6399feda993b44294fdb734649456e52dc75e201a2550b838b1",
+          "crc32": "bab1470a"
+        },
+        {
+          "path": "ether_twentysecond/independent_audit_v22.py",
+          "bytes": 3237,
+          "sha256": "5452e866aafe85975081eeea20867686c043a1e1834ae67cb7a806f880f7652e",
+          "crc32": "b756dd0e"
+        },
+        {
+          "path": "ether_twentysecond/run_log_v22.json",
+          "bytes": 1967,
+          "sha256": "c35f0227e9bb5430e3edae401ffe09f1d422984eef63d1051854e189bb436163",
+          "crc32": "8228a9d8"
+        },
+        {
+          "path": "ether_twentysecond/verify_v22.py",
+          "bytes": 10782,
+          "sha256": "8b64ecc210bf66ce820b658cd3c609a10e6d59d6384798bcf8f5d1bbb8abf46a",
+          "crc32": "aa1b5ba0"
+        },
+        {
+          "path": "ether_twentysecond/volume_ambiguity_audit_v22.json",
+          "bytes": 759,
+          "sha256": "3f5fa288c6d3d6e61d9beadb023dfc074cd7a5e2efd16cc43df25d44c6c17189",
+          "crc32": "d287b68e"
+        },
+        {
+          "path": "ether_twentysecond/volume_ambiguity_v22.csv",
+          "bytes": 93055,
+          "sha256": "dff497908d999ca18a1579bd3dc46a4ea7cc3f38acee2d05f39edd7fd9289ea5",
+          "crc32": "28547b62"
+        },
+        {
+          "path": "ether_twentysecond/volume_ambiguity_v22.png",
+          "bytes": 72917,
+          "sha256": "6e2a1677f9b95fa8ab8631d28b092ebe14a81e1dbff9e123eb04111c0fcc56e6",
+          "crc32": "5de62a42"
+        },
+        {
+          "path": "ether_twentysecond/volume_ambiguity_v22.py",
+          "bytes": 2718,
+          "sha256": "b911bf8fc397e99078459c027d06921789b4072468769e6a1a4b1c7dfd8e6b56",
+          "crc32": "0545e5c1"
+        }
+      ]
+    },
+    {
+      "stage": 23,
+      "zip": "ether_spatial_gauge_nonlinear_wave_v23_2026-11-23.zip",
+      "bytes": 765345,
+      "sha256": "0f3030821c49c6448b3c52fa888209c5a0d2e35951b1934a15f37c0890ee4092",
+      "members": [
+        {
+          "path": "ether_twentythird/README.md",
+          "bytes": 1133,
+          "sha256": "c2637770958ec9d5eeb6d15822e4cb27b3bc9d7654133e8450d244666f2385bc",
+          "crc32": "b68e6eb6"
+        },
+        {
+          "path": "ether_twentythird/RESEARCH_NOTE_2026-11-23_v23.md",
+          "bytes": 9657,
+          "sha256": "a7be08cf8177f45f22efea878e625b1d853448de2c21820690eda4ecd9129027",
+          "crc32": "7ce3c87a"
+        },
+        {
+          "path": "ether_twentythird/SHA256SUMS.txt",
+          "bytes": 1662,
+          "sha256": "6ecdc3e616d29556094f7f052e1b12f45a9c220d599eccaa5880b68b7d77b08a",
+          "crc32": "c7e53708"
+        },
+        {
+          "path": "ether_twentythird/audit_v23.json",
+          "bytes": 1910,
+          "sha256": "81696f9d50067b0b6869149442a84b44e28cd050bc590f7bfac83acfab38e907",
+          "crc32": "5ddf487e"
+        },
+        {
+          "path": "ether_twentythird/cross_polarized_exact_wave_v23.csv",
+          "bytes": 144845,
+          "sha256": "077b29724aa70d0d1687af1ffeb97318c770e99db5d70600f5e694d6e5278761",
+          "crc32": "64e69d3a"
+        },
+        {
+          "path": "ether_twentythird/cross_polarized_wave_v23.py",
+          "bytes": 3944,
+          "sha256": "894851633c7d8c4e4aad8ecbdfef3000d381af1b223d3bbbcd63a44cca39cc77",
+          "crc32": "e8090ada"
+        },
+        {
+          "path": "ether_twentythird/cross_run_log_v23.txt",
+          "bytes": 436,
+          "sha256": "1beb820f6f64ec6bf6b3ba701a734ba318d3f26bc8177d5fbbfc0dcdc3b06a19",
+          "crc32": "5565c98e"
+        },
+        {
+          "path": "ether_twentythird/crossed_wave_audit_v23.json",
+          "bytes": 435,
+          "sha256": "63aa102b4e1b51b8ec5ee6b97dec2da1daadb4b7fefcd1f7b83f6f6776d2a97f",
+          "crc32": "6f85d19b"
+        },
+        {
+          "path": "ether_twentythird/exact_nonlinear_gravity_wave_v23.png",
+          "bytes": 227034,
+          "sha256": "147b4f97e6aea4821d23070e6acde9ea884e82718c245a72b1a378adb2b5ba1a",
+          "crc32": "0efda116"
+        },
+        {
+          "path": "ether_twentythird/exact_null_wave_constraints.csv",
+          "bytes": 103089,
+          "sha256": "5057e7cd2967eb17ff85cdc4bde50154ff207676c8771e3f3a31771ce34e7b45",
+          "crc32": "c5d8f875"
+        },
+        {
+          "path": "ether_twentythird/independent_audit_v23.json",
+          "bytes": 541,
+          "sha256": "bf140efa24a631e85b61026ba201791c9475f490a98938bee3e85ce7ff7ab268",
+          "crc32": "3361ad16"
+        },
+        {
+          "path": "ether_twentythird/independent_audit_v23.py",
+          "bytes": 4625,
+          "sha256": "744f3186fb27a44851e31779a575a32debce680f4d07334325bbc0fd77e0bc79",
+          "crc32": "4e30ba9d"
+        },
+        {
+          "path": "ether_twentythird/independent_run_log_v23.txt",
+          "bytes": 542,
+          "sha256": "56faa7721863ad54775a223cbdd0174f89ee0f4de18ff43c5987f6d40340ccc5",
+          "crc32": "c630d26f"
+        },
+        {
+          "path": "ether_twentythird/nonlinear_spatial_gauge_test_v23.png",
+          "bytes": 198127,
+          "sha256": "c7789388ac4e4558050cb0bc86974ff56a0a400bc4ccfc6f31ac18b16a7d9516",
+          "crc32": "3606ea8d"
+        },
+        {
+          "path": "ether_twentythird/requirements.txt",
+          "bytes": 23,
+          "sha256": "8a855151e35949fac6a2035027120848cc4c2df670612aeabecffd0127f6b20c",
+          "crc32": "a22f4882"
+        },
+        {
+          "path": "ether_twentythird/run_log_v23.txt",
+          "bytes": 1911,
+          "sha256": "25a5a4bf9ca561ba25340428a8ab0bceae815ee1b47f982b932e398478783426",
+          "crc32": "853785e0"
+        },
+        {
+          "path": "ether_twentythird/spatial_diffeomorphism_samples.csv",
+          "bytes": 4931,
+          "sha256": "fa15a4a71eb61e979c828d5dc13fbaf0f1598316fb6063cc995a60dd6c1b8aa7",
+          "crc32": "5d9fd222"
+        },
+        {
+          "path": "ether_twentythird/two_polarization_exact_wave_v23.png",
+          "bytes": 275083,
+          "sha256": "95ae22fd0636eaa6885dcf9ee07985d42e379e3a7b23bf30ba68c68fb03709ba",
+          "crc32": "3a7bddd3"
+        },
+        {
+          "path": "ether_twentythird/verify_v23.py",
+          "bytes": 12395,
+          "sha256": "bd7d5c8d6812a8468d8a1206097f85284ea2327dad6e94cff15354d9d46b277f",
+          "crc32": "77beb267"
+        }
+      ]
+    },
+    {
+      "stage": 24,
+      "zip": "ether_hypersurface_memory_v24_2026-11-23.zip",
+      "bytes": 244287,
+      "sha256": "bb7c5509a44c5ff491a9588068eaf6853f7c541e53fed1da69baaf3d7d4b8db7",
+      "members": [
+        {
+          "path": "ether_twentyfourth/README.md",
+          "bytes": 1794,
+          "sha256": "b2252606eb7e06b44afb1e709e10a0bb07ec0fcc823241ba332db659e647e811",
+          "crc32": "dd3ecd57"
+        },
+        {
+          "path": "ether_twentyfourth/RESEARCH_NOTE_2026-11-23_v24.md",
+          "bytes": 8791,
+          "sha256": "d8072343224b49b6c0b3c596a67ebbf0f506febc9b0eb8d9f015cc1b88478146",
+          "crc32": "6d13f362"
+        },
+        {
+          "path": "ether_twentyfourth/SHA256SUMS.txt",
+          "bytes": 1166,
+          "sha256": "9a8e0b5daaac0c1df6739eab0bc1aaed005975e438bbef48b97f7f41fd5a520f",
+          "crc32": "fa56902b"
+        },
+        {
+          "path": "ether_twentyfourth/audit_v24.json",
+          "bytes": 2180,
+          "sha256": "6de4f2a2c8395061623219ff1907b9a2744a4572dd5df37fba52815b0454fe89",
+          "crc32": "437bf7d9"
+        },
+        {
+          "path": "ether_twentyfourth/bracket_convergence_v24.csv",
+          "bytes": 2844,
+          "sha256": "d35ae37fd8f6db70271f2f36eb55750778ae1f4d63d32d8a5cda280df8fee99f",
+          "crc32": "b1f5a3bc"
+        },
+        {
+          "path": "ether_twentyfourth/bracket_discretization_v24.png",
+          "bytes": 93928,
+          "sha256": "a8610de2632d23e5178088494f56fa9af1f04013b8ea0958defb78d1ccf9d3f1",
+          "crc32": "38075332"
+        },
+        {
+          "path": "ether_twentyfourth/characteristic_speeds_v24.png",
+          "bytes": 79673,
+          "sha256": "a3ba3796f70d528b5c4e7f5e3fb98b58eb37355240a83667ba7d0e85c7f734cf",
+          "crc32": "8f74a3e8"
+        },
+        {
+          "path": "ether_twentyfourth/constraint_closure_v24.png",
+          "bytes": 81194,
+          "sha256": "5ff151374e9c7b0ae7999867b7ac35baf82da53e1174cdc21c2f61f846a4a88f",
+          "crc32": "1c3d8ec4"
+        },
+        {
+          "path": "ether_twentyfourth/exact_rational_audit_v24.json",
+          "bytes": 1232,
+          "sha256": "f763674900890db413ac3d97964a3cdec84dbfa941b5805f58bcd6ff01f1deeb",
+          "crc32": "9e918eae"
+        },
+        {
+          "path": "ether_twentyfourth/gradient_audit_v24.csv",
+          "bytes": 2488,
+          "sha256": "3d507589d557badd89022f1903596dd220b3c1f5e9864182bead5db8a39aa665",
+          "crc32": "5d24b694"
+        },
+        {
+          "path": "ether_twentyfourth/independent_audit_v24.py",
+          "bytes": 4348,
+          "sha256": "efa1135436afdbd6d9fb0a36809460706cd75c606e615b8317eca30097585158",
+          "crc32": "d2c56091"
+        },
+        {
+          "path": "ether_twentyfourth/independent_log_v24.txt",
+          "bytes": 1232,
+          "sha256": "f763674900890db413ac3d97964a3cdec84dbfa941b5805f58bcd6ff01f1deeb",
+          "crc32": "9e918eae"
+        },
+        {
+          "path": "ether_twentyfourth/integrity_log_v24.txt",
+          "bytes": 360,
+          "sha256": "d3be60fff0b51f1a48792b5908ba7928915a5ecc041cc233aba2daba6171e975",
+          "crc32": "e6de2ceb"
+        },
+        {
+          "path": "ether_twentyfourth/verify_log_v24.txt",
+          "bytes": 1126,
+          "sha256": "ea015f3780f2f740e2e320ee75dfa00b0970cee182fb36f1131c8dd1ccdb510b",
+          "crc32": "7b19fd67"
+        },
+        {
+          "path": "ether_twentyfourth/verify_v24.py",
+          "bytes": 10175,
+          "sha256": "ac4026aae22e16e3eca47db17f85724bfd393c8d90d5c3e9440be463b96b7fff",
+          "crc32": "d514fccd"
+        }
+      ]
+    },
+    {
+      "stage": 25,
+      "zip": "ether_canonical_memory_constraints_v25_2026-11-23.zip",
+      "bytes": 235984,
+      "sha256": "577ed4085ab55d5909c5b90b28e8290bf9332752d19d2363c0c361e3651a919b",
+      "members": [
+        {
+          "path": "ether_twentyfifth/README.md",
+          "bytes": 2391,
+          "sha256": "477f30266b93aaaf28c7780c56f4d0c92dc34c3598f242390788e9dddf768d57",
+          "crc32": "91423778"
+        },
+        {
+          "path": "ether_twentyfifth/RESEARCH_NOTE_2026-11-23_v25.md",
+          "bytes": 9486,
+          "sha256": "a936adec386dcf887fb1fa912fe849472085c1f77153c1d2e7ceec273b132864",
+          "crc32": "dd3d4c93"
+        },
+        {
+          "path": "ether_twentyfifth/SHA256SUMS.txt",
+          "bytes": 1291,
+          "sha256": "12d99e02da1df5354b9dfa0a3f61f21b54bd740a03466b98807213914ad49873",
+          "crc32": "ba3b6d59"
+        },
+        {
+          "path": "ether_twentyfifth/audit_v25.json",
+          "bytes": 3817,
+          "sha256": "75c4c484ff8194ab00402376383e9c2aaed3210c0de441d744b995cc4865c37b",
+          "crc32": "542ebb3a"
+        },
+        {
+          "path": "ether_twentyfifth/full_bracket_convergence_v25.csv",
+          "bytes": 1610,
+          "sha256": "d043c511f7c40c2084937b00acf60cfe0183deca43ae49240762fae413ceace9",
+          "crc32": "65417706"
+        },
+        {
+          "path": "ether_twentyfifth/full_constraint_convergence_v25.png",
+          "bytes": 113134,
+          "sha256": "fb1d45edd8ab8c851d75e24482482f5d7e31fce27f59777c81f09f334b72218d",
+          "crc32": "94b5fa00"
+        },
+        {
+          "path": "ether_twentyfifth/independent_audit_v25.json",
+          "bytes": 605,
+          "sha256": "671ee29dbe32037c65b635d4afb837204bba9540a93b5d784a62e16967b0cf80",
+          "crc32": "3e2a94af"
+        },
+        {
+          "path": "ether_twentyfifth/independent_audit_v25.py",
+          "bytes": 3257,
+          "sha256": "503316b62535490569a9ee602466852520e2abfae8252c7443531ed537067609",
+          "crc32": "0a0a2979"
+        },
+        {
+          "path": "ether_twentyfifth/independent_log_v25.txt",
+          "bytes": 630,
+          "sha256": "7c5848cc9f2f54500ce3553f8dfcf90346a0bceffe34a2c06408d04a1503a0ba",
+          "crc32": "2bda74cf"
+        },
+        {
+          "path": "ether_twentyfifth/mixed_terms_cancel_v25.png",
+          "bytes": 48701,
+          "sha256": "66cff3fba5091a850a183c84d51ec0a5f701093dae6e8be1423953d7f3fa0cbb",
+          "crc32": "19dc95fc"
+        },
+        {
+          "path": "ether_twentyfifth/nonminimal_constraint_failure_v25.png",
+          "bytes": 89235,
+          "sha256": "8097e3c457680ff9083aeb79a69711ef040a3fab9a99dffe538394bcdd12c5b3",
+          "crc32": "666d423f"
+        },
+        {
+          "path": "ether_twentyfifth/nonminimal_counterexample_v25.csv",
+          "bytes": 800,
+          "sha256": "4cd0445a7efe31a92fe11e8d176882abcf81af001a1722ecdf4a4e76b54236f7",
+          "crc32": "3e47f9de"
+        },
+        {
+          "path": "ether_twentyfifth/nonminimal_strength_scan_v25.csv",
+          "bytes": 445,
+          "sha256": "0fa5590636d18988815ece6558884e1535da39594cb470ab74c9614344f58ed1",
+          "crc32": "f30c361d"
+        },
+        {
+          "path": "ether_twentyfifth/verify_log_v25.txt",
+          "bytes": 3835,
+          "sha256": "30872aa9aa8e88390c3ab4c584a404bc3e90cb3226ec7e5545abff13680ade5b",
+          "crc32": "f050b8f2"
+        },
+        {
+          "path": "ether_twentyfifth/verify_v25.py",
+          "bytes": 13080,
+          "sha256": "c5d4d52ceeccdd702845225183be7d81c1222692848f6005cc38f1ebe199b516",
+          "crc32": "ddc42e2e"
+        }
+      ]
+    },
+    {
+      "stage": 26,
+      "zip": "ether_covariant_memory_momenta_v26_2026-11-23.zip",
+      "bytes": 348185,
+      "sha256": "69e890b0ef8e514bfc7ca96225ef2f77d601df258720f8af3de9ebbfcc2c3d30",
+      "members": [
+        {
+          "path": "ether_twentysixth/README.md",
+          "bytes": 1238,
+          "sha256": "c6db84d6c99b8f1a71fa3ca7d1a57f01695c66c552a2417f6d0da134588d9a1c",
+          "crc32": "0c0bdf43"
+        },
+        {
+          "path": "ether_twentysixth/RESEARCH_NOTE_2026-11-23_v26.md",
+          "bytes": 8524,
+          "sha256": "b4d9e4f79300eb58f3ec1a37191fc93df4bcd91a38e67be47143187cffe38564",
+          "crc32": "c1e750d6"
+        },
+        {
+          "path": "ether_twentysixth/SHA256SUMS.txt",
+          "bytes": 1083,
+          "sha256": "35cfee10e8b5f0ee6d0d31bfb4fe322f860f070aeb0d751b1e6a38ed978d501f",
+          "crc32": "5360caf8"
+        },
+        {
+          "path": "ether_twentysixth/audit_v26.json",
+          "bytes": 2950,
+          "sha256": "2978751cb3d2b4771c0c094152188ba2c1ef72508db17c392f245db6621b298b",
+          "crc32": "4a7cd7ad"
+        },
+        {
+          "path": "ether_twentysixth/bianchi_evolution_v26.csv",
+          "bytes": 55636,
+          "sha256": "3730cb00009808839bae2b4242f4e8ebe5b8e26f8813ed0866c1b05a30e13921",
+          "crc32": "70280336"
+        },
+        {
+          "path": "ether_twentysixth/constraint_comparison_v26.png",
+          "bytes": 79294,
+          "sha256": "eaeb3fc1ea79fcd9607d390f53434996edaeaa136809349ab905fb2b79950d91",
+          "crc32": "f7a05fd7"
+        },
+        {
+          "path": "ether_twentysixth/coupled_dynamics_v26.png",
+          "bytes": 189550,
+          "sha256": "e1fba0890955e31027a2e5a026887f7d4f7f50ee77b759134415fe4d731af6c6",
+          "crc32": "4361fc2e"
+        },
+        {
+          "path": "ether_twentysixth/independent_audit_v26.json",
+          "bytes": 573,
+          "sha256": "6e6be1c480447607049f6bf8ee01a70c0d29bf7b3f15810e7689dedf6ac9f19e",
+          "crc32": "6f2326c4"
+        },
+        {
+          "path": "ether_twentysixth/independent_audit_v26.py",
+          "bytes": 3860,
+          "sha256": "0bd9ad931d415312dae5a9a9bff3689bd0a9c38fe9d86b555dc9ac8b14457eb6",
+          "crc32": "974661d1"
+        },
+        {
+          "path": "ether_twentysixth/integration_convergence_v26.csv",
+          "bytes": 291,
+          "sha256": "11417c143c2a4ba5a1fc7fbbabf8ca08fa2e98e2645f088bfdd2479da23dc17d",
+          "crc32": "1787d482"
+        },
+        {
+          "path": "ether_twentysixth/integrator_refinement_v26.png",
+          "bytes": 66461,
+          "sha256": "578c1ff2bfbdb20279d884ffa85e964f842beb7032ae8734562142cb2619ee4a",
+          "crc32": "78b30ec2"
+        },
+        {
+          "path": "ether_twentysixth/naive_comparison_v26.csv",
+          "bytes": 11845,
+          "sha256": "b4b6a1aa1fb710806a18652c5baac0627bee659e1eec81d2f43a63711af1558b",
+          "crc32": "41e9c320"
+        },
+        {
+          "path": "ether_twentysixth/verify_v26.py",
+          "bytes": 10450,
+          "sha256": "174df19cb13b67a6904f5b4814ea5ede5ec088c9cce4edcaf3850020a78d4523",
+          "crc32": "ace466e6"
+        }
+      ]
+    },
+    {
+      "stage": 27,
+      "zip": "ether_spatial_scalar_tensor_brackets_v27_2026-11-23.zip",
+      "bytes": 152958,
+      "sha256": "00505cadb033d73b6f33638f336e1bf471dac70c90d671aa6f884ff2703012b8",
+      "members": [
+        {
+          "path": "ether_twentyseventh/README.md",
+          "bytes": 1479,
+          "sha256": "6a59b3b61edd72ee5cf9fe84f06e0773768c45587032e911aa6fbf0e523a8c32",
+          "crc32": "16112bea"
+        },
+        {
+          "path": "ether_twentyseventh/RESEARCH_NOTE_2026-11-23_v27.md",
+          "bytes": 8320,
+          "sha256": "c0044bbfcd18c5fd62400cd9cee521630ca5141a02197336f256d992d427c26b",
+          "crc32": "325d7324"
+        },
+        {
+          "path": "ether_twentyseventh/SHA256SUMS.txt",
+          "bytes": 1082,
+          "sha256": "f3bd836db035b6e4f90fc5c9c3e0cdcc1ef2fee5079ced96f745a14dbc060a42",
+          "crc32": "ce0ea5fc"
+        },
+        {
+          "path": "ether_twentyseventh/audit_v27.json",
+          "bytes": 7260,
+          "sha256": "a365a4dc78f73a5b2e027bcce276b72a18f4ced1cc2dfd4c029ddadeb863a8bc",
+          "crc32": "11889f21"
+        },
+        {
+          "path": "ether_twentyseventh/bracket_convergence_v27.csv",
+          "bytes": 1776,
+          "sha256": "c73fe56f37c82abec6cc20bf5c4a30328ffd7020d197d805074fe74663752e35",
+          "crc32": "c4b42ccb"
+        },
+        {
+          "path": "ether_twentyseventh/bracket_convergence_v27.png",
+          "bytes": 93574,
+          "sha256": "a4ba37450623dfa5529f4390eac69b17757a5dc658c86f5e9bd1876149f825bc",
+          "crc32": "7e206089"
+        },
+        {
+          "path": "ether_twentyseventh/curvature_crosscheck_v27.csv",
+          "bytes": 328,
+          "sha256": "42348bdb44909d8461fda3e8daa0b408bf3e4207a112c532d201c8d1b31964db",
+          "crc32": "85227068"
+        },
+        {
+          "path": "ether_twentyseventh/frame_identity_convergence_v27.png",
+          "bytes": 61235,
+          "sha256": "a8042818311dfe5e53f5f75ede14a3aaaa024a3dc63e7f0458240e62845608cb",
+          "crc32": "037fec28"
+        },
+        {
+          "path": "ether_twentyseventh/gradient_checks_v27.csv",
+          "bytes": 501,
+          "sha256": "ec943d09ab8bd6d6ad0f44377ba2d89050dcf1c5a29d37f1633b025a613435f1",
+          "crc32": "c438d4fd"
+        },
+        {
+          "path": "ether_twentyseventh/independent_audit_v27.json",
+          "bytes": 341,
+          "sha256": "9d6de075c31d0bd42e3447b50fa06319bfa7c767211c58364d81b564388da4c6",
+          "crc32": "031335e0"
+        },
+        {
+          "path": "ether_twentyseventh/independent_audit_v27.py",
+          "bytes": 3513,
+          "sha256": "6d1bd86295948a827197ec4947bc3d47510a519bfdaac10fe149d2ec5b538908",
+          "crc32": "dea58203"
+        },
+        {
+          "path": "ether_twentyseventh/other_profiles_v27.csv",
+          "bytes": 614,
+          "sha256": "7588c4f30c055bf92c4f1ca31ffbde6b48840e0984a638acc99178963fd5f6a9",
+          "crc32": "db0d80e1"
+        },
+        {
+          "path": "ether_twentyseventh/verify_v27.py",
+          "bytes": 11922,
+          "sha256": "101803da9b45793f2b011e3b0705460c2b6aad75a0401316474898079073baf5",
+          "crc32": "a2ecffd5"
+        }
+      ]
+    },
+    {
+      "stage": 28,
+      "zip": "ether_nondiagonal_memory_gravity_v28_2026-11-23.zip",
+      "bytes": 391740,
+      "sha256": "46aaa6bd23338acd8cb1716bbeb9fbd25069cb32b1f31c0d8f2eb4b3f75eeeb9",
+      "members": [
+        {
+          "path": "ether_twentyeighth/README.md",
+          "bytes": 1513,
+          "sha256": "ca4a2f0a4551220c93e44176e2cfbed3e05ce00a784d2a59b80b1d9c5057bcfe",
+          "crc32": "098f8acc"
+        },
+        {
+          "path": "ether_twentyeighth/RESEARCH_NOTE_2026-11-23_v28.md",
+          "bytes": 9130,
+          "sha256": "6de6abf8713095066d7559a6ee75cf56f33c9da636b6618cbef97f378841f759",
+          "crc32": "2ab17091"
+        },
+        {
+          "path": "ether_twentyeighth/SHA256SUMS.txt",
+          "bytes": 1912,
+          "sha256": "2fdb7f0c47678f31427757e143c297c50effcaed221a2f3bb666533c069d0fb4",
+          "crc32": "cf7a5168"
+        },
+        {
+          "path": "ether_twentyeighth/audit_v28.json",
+          "bytes": 6035,
+          "sha256": "fbe7634a60601462c72109bcff21545b30551788c255589d675cae28c5cbe0f2",
+          "crc32": "443ea7fd"
+        },
+        {
+          "path": "ether_twentyeighth/final_audit_v28.json",
+          "bytes": 329,
+          "sha256": "e0e49b8be520d3f48577bd8025a08a521d361d9f14989b98447ebcca7b220266",
+          "crc32": "4074c0e7"
+        },
+        {
+          "path": "ether_twentyeighth/final_audit_v28.py",
+          "bytes": 2572,
+          "sha256": "381774f9cb6bebbf0afdf438cd817816325d931d9d7b49f374c4fec470c97e9a",
+          "crc32": "67334261"
+        },
+        {
+          "path": "ether_twentyeighth/frame_equivalence_v28.png",
+          "bytes": 66633,
+          "sha256": "a8aaa90281c7ff5b2351588112490418a82dff8d9df96a86f92f41a74b3f8729",
+          "crc32": "569b14ab"
+        },
+        {
+          "path": "ether_twentyeighth/lag_hardening_audit_v28.json",
+          "bytes": 4233,
+          "sha256": "4f2187af4f6880000cade01a6365ccb88f9c3e359f952bb082a8bb5b1387fb2d",
+          "crc32": "29bfc97d"
+        },
+        {
+          "path": "ether_twentyeighth/lag_hardening_brackets_v28.csv",
+          "bytes": 1576,
+          "sha256": "64bb55b0b7d7b04dfd7de71f9fd86df1068077fcfd6a08bcad50baa16a5f9b32",
+          "crc32": "4d452f5b"
+        },
+        {
+          "path": "ether_twentyeighth/lag_hardening_matched_cone_v28.png",
+          "bytes": 64280,
+          "sha256": "c60bf7966058ca13e110e030bdd1372813b2b693cad17a7ea5c7e58a63a2996e",
+          "crc32": "4656beda"
+        },
+        {
+          "path": "ether_twentyeighth/nonlinear_polarization_exchange_v28.png",
+          "bytes": 48160,
+          "sha256": "c340ffe1b18a617bae415911cbc4c89c7254086eaadd5e04f78e0d44dc54254a",
+          "crc32": "3f3fdaa0"
+        },
+        {
+          "path": "ether_twentyeighth/nonlinear_polarization_history_v28.csv",
+          "bytes": 5836,
+          "sha256": "aa17a85ef20abbe7f727754bc86e33b08b2f31b55cab386b5e32e5b39500d102",
+          "crc32": "dbe000ae"
+        },
+        {
+          "path": "ether_twentyeighth/nonlinear_polarization_scaling_v28.png",
+          "bytes": 82937,
+          "sha256": "13a91961f65b2d4ea6ba55c9bb0827f4541282c943b3928e9f5d24dcbe9570f1",
+          "crc32": "1afd9f5c"
+        },
+        {
+          "path": "ether_twentyeighth/offdiagonal_bracket_convergence_v28.csv",
+          "bytes": 2373,
+          "sha256": "779c46757e245fd69fe669e41a9d282271fc883d9ef840629abab4ac431f01b6",
+          "crc32": "91f75be4"
+        },
+        {
+          "path": "ether_twentyeighth/offdiagonal_constraint_closure_v28.png",
+          "bytes": 73887,
+          "sha256": "c91573d317158ada64eb71447a0c2bb01216ccc13a0c16641d1c86b821d5f1e4",
+          "crc32": "19ba2be7"
+        },
+        {
+          "path": "ether_twentyeighth/polarization_amplitude_audit_v28.json",
+          "bytes": 2720,
+          "sha256": "c7adb07d619921b59a24743e2ab280de784f6c92bb83fe21b9687da064be7031",
+          "crc32": "9f5c8b9b"
+        },
+        {
+          "path": "ether_twentyeighth/polarization_amplitude_audit_v28.py",
+          "bytes": 3521,
+          "sha256": "a797aed40ecb6a56caef6291eec4a7ef5832daf9c4c580349ff00b2c416c4a43",
+          "crc32": "051435f4"
+        },
+        {
+          "path": "ether_twentyeighth/polarization_scaling_v28.csv",
+          "bytes": 826,
+          "sha256": "f34e4087c1b67133332e58ec1d8a09106bf0aa34677166d928e3ac10cff1b2ad",
+          "crc32": "57a79f3e"
+        },
+        {
+          "path": "ether_twentyeighth/shape_energy_audit_v28.png",
+          "bytes": 72176,
+          "sha256": "94a6d05496572bed7876f90f05a60dd76aa13e1878337f6e4e4912abfe17b2d4",
+          "crc32": "9e27fbb6"
+        },
+        {
+          "path": "ether_twentyeighth/verify_bounded_stiffening_v28.py",
+          "bytes": 5760,
+          "sha256": "916aa4ed64cca1b2bec8955062456a75be9c2433f9f9e2a393b04c50b63aee42",
+          "crc32": "1fbca11b"
+        },
+        {
+          "path": "ether_twentyeighth/verify_v28.py",
+          "bytes": 15248,
+          "sha256": "66a08b2e64315f8881aec0b67f32742ff2db8516f4bef544b7c08a2cc3487425",
+          "crc32": "06c1f76c"
+        }
+      ]
+    },
+    {
+      "stage": 29,
+      "zip": "ether_edge_distance_constraint_v29_2026-11-23.zip",
+      "bytes": 400441,
+      "sha256": "952cb0591fbf1c5556b7ff39d38c7e15c0f571e3572c910381f998340968fd81",
+      "members": [
+        {
+          "path": "ether_twentyninth/README.md",
+          "bytes": 1829,
+          "sha256": "d332d6f9c12b274f6e104e842a15f56bea8830b54211d263930f2b09b1219378",
+          "crc32": "ae6760c1"
+        },
+        {
+          "path": "ether_twentyninth/RESEARCH_NOTE_2026-11-23_v29.md",
+          "bytes": 9875,
+          "sha256": "03d39ea68a26cf961eddf62b627bcd54cdc25d47070d850115965f77fdc4a7ee",
+          "crc32": "f3a064cf"
+        },
+        {
+          "path": "ether_twentyninth/SHA256SUMS.txt",
+          "bytes": 1240,
+          "sha256": "b76be54523c4fad0f0ca01d4294d79eba27e82911066a6d2c2756f42fa240f08",
+          "crc32": "63eb2c0c"
+        },
+        {
+          "path": "ether_twentyninth/audit_v29.json",
+          "bytes": 2757,
+          "sha256": "081af32c08638a6ca2d6948c29981f0d58884335b194b9b28593c930c40b80f2",
+          "crc32": "69f0bde4"
+        },
+        {
+          "path": "ether_twentyninth/embedding_mismatch.csv",
+          "bytes": 922,
+          "sha256": "debf30a2277216aa58475f7c956f18b2eb40295d2aa4b6f3e83984db8b5f2268",
+          "crc32": "a788ac05"
+        },
+        {
+          "path": "ether_twentyninth/final_audit_v29.json",
+          "bytes": 351,
+          "sha256": "1feae0966d501e8c0de2c268b042399a56527ef7c2e6edf5c4769bcefb02e68d",
+          "crc32": "c02d09c5"
+        },
+        {
+          "path": "ether_twentyninth/final_audit_v29.py",
+          "bytes": 2257,
+          "sha256": "c4b162eabe2bc40229c2a20b3aa1a248b1550ed77f3ffb3b15b96686263b401c",
+          "crc32": "cc4ed033"
+        },
+        {
+          "path": "ether_twentyninth/flat_embedding_false_defect.png",
+          "bytes": 75928,
+          "sha256": "93501ef93e17175b6303fb441e1845e5e999b1359eb9326de01c30da7ffd6ac7",
+          "crc32": "85790a38"
+        },
+        {
+          "path": "ether_twentyninth/hardening_rank_audit_v29.json",
+          "bytes": 1270,
+          "sha256": "5761b6eabf56a8ba20ed9958f68c307566b6d5e5137b47b517de376740dc3c71",
+          "crc32": "14afcf97"
+        },
+        {
+          "path": "ether_twentyninth/hardening_rank_scan.csv",
+          "bytes": 300,
+          "sha256": "6a23bb9560cebaf68212faf81cdfe24f7853563de79571dda3a51f0632f26ed9",
+          "crc32": "286d3bca"
+        },
+        {
+          "path": "ether_twentyninth/hardening_rank_v29.py",
+          "bytes": 1800,
+          "sha256": "67d985a5c6e2941208e5810b236530dc7411b19c770fa737e2068499ec3acabf",
+          "crc32": "9bb2ec31"
+        },
+        {
+          "path": "ether_twentyninth/independent_audit_v29.json",
+          "bytes": 698,
+          "sha256": "8485ef0a89a67893aeab10eabc7709c3e7d5ea003a6e277be56e4a482de13d0a",
+          "crc32": "b66d7aa5"
+        },
+        {
+          "path": "ether_twentyninth/independent_audit_v29.py",
+          "bytes": 3522,
+          "sha256": "be93f4eefb2bda94537b1cd597e094f3f15a27e87157b3e22f6b198cb4516522",
+          "crc32": "480b1186"
+        },
+        {
+          "path": "ether_twentyninth/six_mode_no_go.png",
+          "bytes": 283301,
+          "sha256": "33697189b464bd3bafdb1ff7fb9e7b12430df095c9d44df8bb87a9fa923588db",
+          "crc32": "035a849b"
+        },
+        {
+          "path": "ether_twentyninth/verify_v29.py",
+          "bytes": 12353,
+          "sha256": "09af2d8bba29dbe4ed88d16c71bced16ab583ca90408516474efed6e9aea0565",
+          "crc32": "14a9fbe0"
+        },
+        {
+          "path": "ether_twentyninth/wave_counterexample.csv",
+          "bytes": 211306,
+          "sha256": "881e63d4014413be17d6d6527b64b84527c62f0b3d8236e09c5a1c7c4f67dfe8",
+          "crc32": "df36fc6b"
+        }
+      ]
+    },
+    {
+      "stage": 30,
+      "zip": "ether_regge_gauge_memory_v30_2026-11-23.zip",
+      "bytes": 115788,
+      "sha256": "854b221cc7290caa2a4df00f3596383aeac23d3e56be61d20f351b41c6eb75cb",
+      "members": [
+        {
+          "path": "ether_thirtieth/independent_audit_v30.py",
+          "bytes": 2502,
+          "sha256": "f61ffead19940dca2ab6f9e12f081d33a09be1926f3903f7df715200a491fe48",
+          "crc32": "ab2ddfae"
+        },
+        {
+          "path": "ether_thirtieth/RESEARCH_NOTE_2026-11-23_v30.md",
+          "bytes": 8102,
+          "sha256": "e915ba18eb1c35c09d9bbedba7a0a4a17ccfd6dd6bd59ac8931bfbf7372ac07a",
+          "crc32": "b2ba7033"
+        },
+        {
+          "path": "ether_thirtieth/regge_vs_elasticity_v30.png",
+          "bytes": 110099,
+          "sha256": "85d3d85f2a7360c638a717e52cf61953f87906cbfc32aca932c8b4b622ce3101",
+          "crc32": "56f7d85d"
+        },
+        {
+          "path": "ether_thirtieth/symbolic_certificate_v30.json",
+          "bytes": 203,
+          "sha256": "36badf2d12c370b91cc4e5fd6a599b3c9a763884709afc60a97c872c8ceabe77",
+          "crc32": "dba075cd"
+        },
+        {
+          "path": "ether_thirtieth/verify_v30.py",
+          "bytes": 12223,
+          "sha256": "6198f8e1da42a79fa0a9dba7797f1bacaf2d14ce7a4dade44c2b4432f3ee0d7a",
+          "crc32": "f747c0c2"
+        },
+        {
+          "path": "ether_thirtieth/flat_vs_curved_v30.csv",
+          "bytes": 4304,
+          "sha256": "0bd9f8adc18eea19ced6d58959dbdeb4e698b4792eef37e9d6e1b964cb77807a",
+          "crc32": "17c75108"
+        },
+        {
+          "path": "ether_thirtieth/independent_audit_v30.json",
+          "bytes": 734,
+          "sha256": "b0f8189b8eb55d8d0e5872e4097b27eea155129b5d16a41a5aa96cdc1661f583",
+          "crc32": "c8d8dd18"
+        },
+        {
+          "path": "ether_thirtieth/audit_v30.json",
+          "bytes": 2380,
+          "sha256": "0bfb2021e5a99c5d074f94afa449ee2b6d1591365f152fd91f64d461a81061b4",
+          "crc32": "e416aa7e"
+        },
+        {
+          "path": "ether_thirtieth/mode_comparison_v30.csv",
+          "bytes": 296,
+          "sha256": "175835cec2186e307389096468776255e70dbc7af690c934595ea3927968fc99",
+          "crc32": "04f42e3f"
+        },
+        {
+          "path": "ether_thirtieth/SHA256SUMS.txt",
+          "bytes": 888,
+          "sha256": "33b6042d4bf8513e1003168116202ab17e3111c26d744c45f209c0333049fc83",
+          "crc32": "28828959"
+        },
+        {
+          "path": "ether_thirtieth/README.md",
+          "bytes": 2246,
+          "sha256": "f0b7247b09d712526b6f15eb6a0f9fa40773bc5976dda35e735141897478cd86",
+          "crc32": "8bdf6811"
+        },
+        {
+          "path": "ether_thirtieth/runlog_v30.txt",
+          "bytes": 2380,
+          "sha256": "0bfb2021e5a99c5d074f94afa449ee2b6d1591365f152fd91f64d461a81061b4",
+          "crc32": "e416aa7e"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "tetrahedron_obstruction": {
+    "edge_lengths": [
+      1.0,
+      1.0,
+      4.47213595499958
+    ],
+    "triangle_inequality_gap": -2.4721359549995796,
+    "all_vertex_metrics_SPD": true,
+    "all_edges_positive": true,
+    "counterexample": true
+  },
+  "spd_random": {
+    "smallest_exp_metric_eigenvalue": 0.0398812403460834,
+    "max_inverse_error": 4.525641544320477e-14,
+    "max_det_identity_relative_error": 4.6629367034256575e-15
+  },
+  "adm_signature": {
+    "samples": 120,
+    "all_lorentzian": true,
+    "max_det_identity_abs_error": 2.042810365310288e-14
+  },
+  "uniform_simplex_sufficiency": {
+    "reference_gram_min_eig_div_h2": 0.3079785283699039,
+    "frobenius_distortion_bound_C": 7.615773105863909,
+    "sufficient_max_logmetric_op": 0.03964327958800733
+  },
+  "exp_n10_dt0p002": {
+    "grad_checks": {
+      "q": {
+        "analytic": 0.0022988710024746256,
+        "finite_difference": 0.0022988711378957305,
+        "abs_error": 1.354211048854026e-10
+      },
+      "B": {
+        "analytic": -0.003742407139698568,
+        "finite_difference": -0.0037424072729663744,
+        "abs_error": 1.332678065124604e-10
+      },
+      "Z": {
+        "analytic": 0.00010079325183387723,
+        "finite_difference": 0.00010079332923851324,
+        "abs_error": 7.740463600484394e-11
+      }
+    },
+    "initial_pair_dot": 0.018754228791392213,
+    "initial_degree": 1,
+    "final_degree": 1,
+    "min_stepwise_certificate": 0.009650887591062104,
+    "substeps": 20,
+    "max_abs_energy_budget": 1.4680531502185094e-07,
+    "final_max_shear": 0.005139840413239631,
+    "final_regge": {
+      "min_tet_gram_eig": 0.012282820425400822,
+      "max_regge_deficit": 0.004630837316321745,
+      "regge_abs_curvature": 0.49219659034953994
+    },
+    "minimum_metric_eig_over_saved_times": 0.9967555918127522,
+    "maximum_logmetric_op_over_saved_times": 0.003270216401448968,
+    "maximum_logmetric_op_all_step_endpoints": 0.003270216401448968,
+    "minimum_gram_eig_over_saved_times": 0.012282820425400822,
+    "uniform_sufficiency_verified_at_saved_times": true
+  },
+  "exp_n12_dt0p002": {
+    "grad_checks": {
+      "q": {
+        "analytic": 0.007742248915451067,
+        "finite_difference": 0.007742248797626416,
+        "abs_error": 1.1782465107745832e-10
+      },
+      "B": {
+        "analytic": -0.0017986381771182712,
+        "finite_difference": -0.0017986380385082155,
+        "abs_error": 1.3861005572490814e-10
+      },
+      "Z": {
+        "analytic": 1.48142788881601e-05,
+        "finite_difference": 1.4814283133546267e-05,
+        "abs_error": 4.24538616744909e-12
+      }
+    },
+    "initial_pair_dot": 0.26815880034874506,
+    "initial_degree": 1,
+    "final_degree": 1,
+    "min_stepwise_certificate": 0.1584683727120824,
+    "substeps": 40,
+    "max_abs_energy_budget": 1.2037295351849053e-06,
+    "final_max_shear": 0.0223033617123268,
+    "final_regge": {
+      "min_tet_gram_eig": 0.008445649205873961,
+      "max_regge_deficit": 0.018490529595807992,
+      "regge_abs_curvature": 2.4521922190812235
+    },
+    "minimum_metric_eig_over_saved_times": 0.9864959614997769,
+    "maximum_logmetric_op_over_saved_times": 0.014726462665681464,
+    "maximum_logmetric_op_all_step_endpoints": 0.014726462665681464,
+    "minimum_gram_eig_over_saved_times": 0.008445649205873961,
+    "uniform_sufficiency_verified_at_saved_times": true
+  }
+}

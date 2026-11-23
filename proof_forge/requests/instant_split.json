@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "name": "instant_split",
+  "observations": [0, 1],
+  "transitions": [
+    [0, 1]
+  ],
+  "pair": [0, 1]
+}
