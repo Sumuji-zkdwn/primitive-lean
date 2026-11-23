@@ -1,5 +1,83 @@
 {
-  "schema_version": 1,
-  "last_utc_day": null,
-  "receipts": []
+  "last_utc_day": "2026-11-23",
+  "receipts": [
+    {
+      "chain_sha256": "418aea158b7fd9bfaff075e9955cf4debe27b771d474c3f7b8fd29e6ed6f383b",
+      "day": "2026-11-23",
+      "head_sha": "a90f0c7ff577ba5c8d69b603384dc94f2f29e77e",
+      "id": "po_de17656bd9b90384b1b5",
+      "lean_sha256": "586d155d67c8886ac574437d12c0addc7b6d13df6d1333ced9a31eead3aa247d",
+      "model": {
+        "name": "fd_aecc5c9bb94be0d0",
+        "observations": [
+          0,
+          0,
+          0
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            1,
+            2
+          ]
+        ]
+      },
+      "objective": "DISTINGUISHABILITY_CHANGED",
+      "outcome": "EQUIVALENT",
+      "parameters": {
+        "label": 0,
+        "state": 2
+      },
+      "parent": "v2:372efce43c6160360a48296eb9c3a1bb3d38e956b9648d5bcb03408e2d49ff57",
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "request_sha256": "713652f8571c839b8f84e99b2ee040d9dfa393058372a6da10073cb903c54f9e",
+      "root_kind": "DISTINGUISHABLE",
+      "root_lean_sha256": "a451900e5367e5b6d11ce50418728fefe1eaa9b6a3972f73f65c71c8c09aa71f",
+      "root_model": {
+        "name": "fd_64ca8f468670bbc7",
+        "observations": [
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            2,
+            1,
+            2
+          ]
+        ]
+      },
+      "root_request_sha256": "734f13108ce32185d024072a4c7109720a60874eb452c6969b01cceaa3b30338",
+      "root_word": [
+        1
+      ],
+      "rule": "change_readout",
+      "score": 35,
+      "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
+      "upstream_head": "372efce43c6160360a48296eb9c3a1bb3d38e956b9648d5bcb03408e2d49ff57",
+      "word": null
+    }
+  ],
+  "schema_version": 1
 }
