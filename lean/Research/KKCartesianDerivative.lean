@@ -1,3 +1,4 @@
+import Research.KKCartesianJet
 import Mathlib.Tactic
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Analysis.Calculus.Deriv.Add
@@ -69,11 +70,15 @@ theorem E.hasDerivAt_x (a x z : ℝ) (e : E) (he : e.Good a x z) :
   | U => simpa [E.eval, E.dx] using ((hasDerivAt_id x).const_mul a)
   | add l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dx, Pi.add_apply] using ((ihl hl).add (ihr hr))
+      convert (ihl hl).add (ihr hr) using 1 <;>
+        simp [E.eval, E.dx, Pi.add_apply]
   | mul l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dx, Pi.mul_apply] using ((ihl hl).mul (ihr hr))
-  | neg e ih => simpa [E.eval, E.dx, Pi.neg_apply] using (ih he).neg
+      convert (ihl hl).mul (ihr hr) using 1 <;>
+        simp [E.eval, E.dx, Pi.mul_apply]
+  | neg e ih => (by
+        convert (ih he).neg using 1 <;>
+          simp [E.eval, E.dx, Pi.neg_apply])
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
@@ -84,17 +89,19 @@ theorem E.hasDerivAt_z (a x z : ℝ) (e : E) (he : e.Good a x z) :
   induction e with
   | const v => simpa [E.eval, E.dz] using (hasDerivAt_const z v)
   | H =>
-      have hm : HasDerivAt (fun w : ℝ => a*w) a z := by
-        simpa using (hasDerivAt_id z).const_mul a
-      simpa [E.eval, E.dz, Pi.add_apply] using ((hasDerivAt_const z (1 : ℝ)).add hm)
+      simpa [E.eval, E.dz] using (KKCartesianJet.affine_H_hasDerivAt a z)
   | U => simpa [E.eval, E.dz] using (hasDerivAt_const z (a*x))
   | add l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dz, Pi.add_apply] using ((ihl hl).add (ihr hr))
+      convert (ihl hl).add (ihr hr) using 1 <;>
+        simp [E.eval, E.dz, Pi.add_apply]
   | mul l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
-      simpa [E.eval, E.dz, Pi.mul_apply] using ((ihl hl).mul (ihr hr))
-  | neg e ih => simpa [E.eval, E.dz, Pi.neg_apply] using (ih he).neg
+      convert (ihl hl).mul (ihr hr) using 1 <;>
+        simp [E.eval, E.dz, Pi.mul_apply]
+  | neg e ih => (by
+        convert (ih he).neg using 1 <;>
+          simp [E.eval, E.dz, Pi.neg_apply])
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
