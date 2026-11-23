@@ -128,8 +128,8 @@ theorem transition_as_inverse_exp (θ : ℝ) :
 exact fundamental-group winding number -1 (Mathlib, not a fake degree). -/
 theorem backward_winding_number :
     AddCircle.windingNumber
-      (Path.Homotopic.Quotient.mk
-        (AddCircle.zsmulLoop (1 : ℝ) 0 (-1))) = (-1 : ℤ) := by
+      { asHom := Path.Homotopic.Quotient.mk
+          (AddCircle.zsmulLoop (1 : ℝ) 0 (-1)) } = (-1 : ℤ) := by
   letI : Fact (0 < (1 : ℝ)) := ⟨by norm_num⟩
   simpa using
     (AddCircle.windingNumber_zsmulLoop (p := (1 : ℝ)) (x := (0 : ℝ)) (-1))
