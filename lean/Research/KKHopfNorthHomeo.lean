@@ -82,7 +82,7 @@ private theorem dot_cont : Continuous (fun X : NorthTotal =>
   exact (((((ncoord_cont 0).mul (xcoord_cont 0)).add
     ((ncoord_cont 1).mul (xcoord_cont 1))).add
     ((ncoord_cont 2).mul (xcoord_cont 2))).add
-    ((ncoord_cont 3).mul (xcoord_cont 3))
+    ((ncoord_cont 3).mul (xcoord_cont 3)))
 
 private theorem skew_cont : Continuous (fun X : NorthTotal =>
     KKHopfPhaseUnique.skew (northSection (base X)).1 X.1.1) := by
