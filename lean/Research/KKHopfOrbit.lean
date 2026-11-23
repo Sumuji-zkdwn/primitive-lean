@@ -38,13 +38,13 @@ theorem phase_from_first
       _ = e*(a*c+b*d)-f*(a*d-b*c) := by ring
       _ = e*(e*g+f*h)-f*(e*h-f*g) := by rw [hx,hy]
       _ = (e^2+f^2)*g := by ring
-      _ = den*g := by rw [←h0]; rfl
+      _ = den*g := by rw [←h0]
   have hs1 : (a*f-b*e)*c+(a*e+b*f)*d=den*h := by
     calc
       _ = f*(a*c+b*d)+e*(a*d-b*c) := by ring
       _ = f*(e*g+f*h)+e*(e*h-f*g) := by rw [hx,hy]
       _ = (e^2+f^2)*h := by ring
-      _ = den*h := by rw [←h0]; rfl
+      _ = den*h := by rw [←h0]
   have hnorm : (a*e+b*f)^2+(a*f-b*e)^2=den^2 := by
     calc
       _ = (a^2+b^2)*(e^2+f^2) := by ring
