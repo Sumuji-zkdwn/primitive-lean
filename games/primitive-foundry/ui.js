@@ -638,6 +638,9 @@
   $("research-shortcut").addEventListener("click",()=>{
    showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
   });
+  $("proof-back").addEventListener("click",()=>{
+   document.body?.classList?.remove("research-direct");showPane("inspect");
+  });
   $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
   $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
   $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
@@ -683,8 +686,8 @@
  function start(){
   setupProof();hook();setTool("pan");resize();refresh();
   if(deepLinkResearch){
+   document.body?.classList?.add("research-direct");
    showPane("research");
-   if(typeof setTimeout==="function")setTimeout(()=>$("view-research").scrollIntoView?.({block:"start"}),75);
   }
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
