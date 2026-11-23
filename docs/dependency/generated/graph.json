@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "4cf3e772f88cfa22058ca275c2d9d54859c77975",
+  "main_commit": "d7139e4c770a58e3f0250aea953757ae53d1d09d",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1756,7 +1756,7 @@
         "Mathlib.Analysis.Calculus.Deriv.Add",
         "Mathlib.Analysis.Calculus.Deriv.Inv"
       ],
-      "sha256": "5f35ce8f9e373ace08521432a8b7cbce6c327b2a3aa3b0e2505cf9cba9610d17"
+      "sha256": "f761ed16d28218ef53ed1c74d4d60cc2073354720f36fc7a46272b08b5525f09"
     },
     {
       "id": "main:lean/Research/KKCartesianJet.lean",
@@ -27954,28 +27954,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "4cf3e772f88cfa22058ca275c2d9d54859c77975",
+      "base_sha": "d7139e4c770a58e3f0250aea953757ae53d1d09d",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "4cf3e772f88cfa22058ca275c2d9d54859c77975",
+      "base_sha": "d7139e4c770a58e3f0250aea953757ae53d1d09d",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "4cf3e772f88cfa22058ca275c2d9d54859c77975",
+      "base_sha": "d7139e4c770a58e3f0250aea953757ae53d1d09d",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "4cf3e772f88cfa22058ca275c2d9d54859c77975",
+      "base_sha": "d7139e4c770a58e3f0250aea953757ae53d1d09d",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
