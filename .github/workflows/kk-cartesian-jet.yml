@@ -1,0 +1,96 @@
+name: Cartesian KK metric first-jet connection
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKCartesianJet.lean'
+      - 'tools/check_kk_cartesian_jet.py'
+      - 'docs/verification/2026-11-23-kk-cartesian-connection-jet.md'
+      - '.github/workflows/kk-cartesian-jet.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cartesian-jet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean trust-zero full matrix and connection jet certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianJet.olean Research/KKCartesianJet.lean 2>&1 | tee ../kk-cartesian-jet-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-jet-lean.log; then exit 1; fi
+      - name: Audit all theorem axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKCartesianJet.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=7,names
+          Path('KKCartesianJetAudit.lean').write_text(
+              'import Research.KKCartesianJet\n'
+              +''.join('#print axioms KKCartesianJet.'+n+'\n' for n in names))
+          Path('../kk-cartesian-jet-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCartesianJetAudit.lean 2>&1 | tee ../kk-cartesian-jet-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-jet-axioms.log').read_text()
+          n=int(Path('../kk-cartesian-jet-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',log),log
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
+          print('PASS:',n,'Lean theorems and axiom audit')
+          PY
+      - name: Independently differentiate all first metric jets and connection
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_cartesian_jet.py 2>&1 | tee kk-cartesian-jet-sympy.log
+      - name: Preserve checkout SHA and source checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > kk-cartesian-jet-checkout.txt
+          sha256sum lean/Research/KKCartesianJet.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-cartesian-jet
+          path: |
+            kk-cartesian-jet-lean.log
+            kk-cartesian-jet-axioms.log
+            kk-cartesian-jet-count.txt
+            kk-cartesian-jet-sympy.log
+            kk-cartesian-jet-checkout.txt
+            kk-cartesian-jet-sha256.txt
+          if-no-files-found: warn
