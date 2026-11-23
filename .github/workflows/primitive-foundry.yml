@@ -1,0 +1,37 @@
+name: Primitive Foundry factory simulation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'games/primitive-foundry/**'
+      - '.github/workflows/primitive-foundry.yml'
+      - 'docs/dependency/data/source_edges.json'
+  push:
+    branches: [main, 'chatgpt/primitive-foundry-*']
+    paths:
+      - 'games/primitive-foundry/**'
+      - '.github/workflows/primitive-foundry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  factory:
+    name: Production-chain and source-backed research
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check games/primitive-foundry/engine.js
+          node --check games/primitive-foundry/engine.test.cjs
+      - name: Run deterministic full factory production and dependency tests
+        run: node --test games/primitive-foundry/engine.test.cjs
