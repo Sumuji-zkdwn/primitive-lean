@@ -9,6 +9,8 @@ on:
       - 'lean/lean-toolchain'
       - 'lean/lake-manifest.json'
       - 'tests/test_siphon_distribution_regularity.py'
+      - 'tests/test_siphon_curvature_sensor.py'
+      - 'docs/research/2026-11-23-curvature-observation-repair.md'
       - 'docs/research/2026-11-23-siphon-tangent-regularity-and-no-go.md'
       - '.github/workflows/siphon-tangent-observability.yml'
   workflow_dispatch:
@@ -26,7 +28,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Exact arithmetic regression tests
-        run: python3 -B -m unittest discover -s tests -p 'test_siphon_distribution_regularity.py' -v
+        run: |
+          python3 -B -m unittest discover -s tests -p 'test_siphon_distribution_regularity.py' -v
+          python3 -B -m unittest discover -s tests -p 'test_siphon_curvature_sensor.py' -v
       - name: Install pinned Lean
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
