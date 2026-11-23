@@ -14,6 +14,7 @@ on:
       - 'docs/research/LaaksoSweepBounds.lean'
       - 'docs/research/LaaksoRampMean.lean'
       - 'docs/research/LaaksoPIObstruction.lean'
+      - 'docs/research/LaaksoFiniteGateWalk.lean'
       - '.github/workflows/laakso-doubling-pi-separation.yml'
   workflow_dispatch:
 
@@ -56,3 +57,4 @@ jobs:
           lake env lean ../../docs/research/LaaksoSweepBounds.lean
           lake env lean ../../docs/research/LaaksoRampMean.lean
           lake env lean ../../docs/research/LaaksoPIObstruction.lean
+          lake env lean ../../docs/research/LaaksoFiniteGateWalk.lean
