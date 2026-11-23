@@ -41,6 +41,7 @@ def derivativeMatrix (P : CommutingPartials I R)
   fun a b => P.d i (A a b)
 
 /-- Componentwise derivations preserve vector addition. -/
+omit [Fintype V] in
 theorem derivativeVec_add (P : CommutingPartials I R)
     (i : I) (s t : V → R) :
     derivativeVec P i (s+t) = derivativeVec P i s + derivativeVec P i t := by
@@ -48,6 +49,7 @@ theorem derivativeVec_add (P : CommutingPartials I R)
   simp [derivativeVec]
 
 /-- The coordinate partials commute when applied to sections. -/
+omit [Fintype V] in
 theorem derivativeVec_commute (P : CommutingPartials I R)
     (i j : I) (s : V → R) :
     derivativeVec P i (derivativeVec P j s) =
