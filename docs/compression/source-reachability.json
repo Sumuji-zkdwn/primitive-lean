@@ -1307,7 +1307,7 @@
     "main:lean/Research/FiniteMarkovTransport.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
-    "main:lean/Research/PassiveGelMultiwell.lean",
+    "main:lean/Research/ProjectionSignHolonomy.lean",
     "main:lean/Research/SignedCycleCounterexample.lean",
     "main:lean/Research/SiphonCommonInvariant.lean",
     "main:lean/Research/SiphonFiniteDetermination.lean",
@@ -1677,8 +1677,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "22572211be3fda562ba21c3220409b892472e1777f660acd56a130b6de2ce441",
-    "main_commit": "2058b8f1feedaf2fd2a6b9e16c5518841185cc75",
+    "graph_sha256": "8aa9cd4efa1cff4c8180e88dba788c9b18f4cf7088fe1af4d981fd873c95f1d2",
+    "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [

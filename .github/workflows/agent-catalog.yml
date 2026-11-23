@@ -1,0 +1,98 @@
+name: Agent catalog artifact (lexical; not proof verification)
+
+on:
+  pull_request:
+    branches: [main, chatgpt/agent-evidence-catalog-20261120]
+    paths:
+      - 'lean/**'
+      - 'linear_input/lean_check/**'
+      - 'tools/export_agent_catalog.py'
+      - 'tests/test_export_agent_catalog.py'
+      - 'docs/commercial/**'
+      - '.github/workflows/agent-catalog.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'lean/**'
+      - 'linear_input/lean_check/**'
+      - 'tools/export_agent_catalog.py'
+      - 'tests/test_export_agent_catalog.py'
+      - 'docs/commercial/**'
+      - '.github/workflows/agent-catalog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agent-catalog-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  export:
+    name: Test source exporter and publish pinned JSONL artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the proposed source commit, not the PR merge result
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Exercise lexical export tests
+        run: python -m unittest discover -s tests -p 'test_export_agent_catalog.py' -v
+
+      - name: Export and independently check pinned source catalog
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ACTUAL_HEAD="$(git rev-parse HEAD)"
+          test "$ACTUAL_HEAD" = "$EXPECTED_HEAD"
+          python tools/export_agent_catalog.py --ref "$EXPECTED_HEAD" --out-dir verification/agent-catalog
+          python tools/export_agent_catalog.py --ref "$EXPECTED_HEAD" --out-dir verification/agent-catalog --check
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          out = Path("verification/agent-catalog")
+          man = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+          data = (out / "declarations.jsonl").read_bytes()
+          assert man["source_commit"] == os.environ["EXPECTED_HEAD"]
+          assert man["verification_status"] == "not_assessed"
+          assert man["source_files_scanned"] > 0
+          assert man["lexical_declaration_count"] > 0
+          assert hashlib.sha256(data).hexdigest() == man["jsonl_sha256"]
+          lines = data.splitlines()
+          assert len(lines) == man["lexical_declaration_count"]
+          for line in lines:
+              row = json.loads(line)
+              assert row["source_commit"] == man["source_commit"]
+              assert row["verification_status"] == "not_assessed"
+          print(json.dumps({
+              "source_commit": man["source_commit"],
+              "source_files_scanned": man["source_files_scanned"],
+              "lexical_declaration_count": man["lexical_declaration_count"],
+              "sha256": man["jsonl_sha256"],
+          }, sort_keys=True))
+          PY
+
+      - name: Upload reproducible non-certifying data
+        if: success()
+        uses: actions/upload-artifact@v6
+        with:
+          name: agent-catalog-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            verification/agent-catalog/declarations.jsonl
+            verification/agent-catalog/manifest.json
+          if-no-files-found: error
+          retention-days: 30
