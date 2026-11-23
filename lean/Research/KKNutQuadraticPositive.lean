@@ -26,8 +26,7 @@ theorem omega_lagrange (X V : V4) :
       (w X 1*V 2-w X 2*V 1)^2 +
       (w X 1*V 3-w X 3*V 1)^2 +
       (w X 2*V 3-w X 3*V 2)^2 := by
-  unfold radiusSq omega w
-  ring
+  simp [radiusSq, omega, w] <;> ring
 
 theorem omega_cauchy (X V : V4) :
     (omega X V)^2 ≤ radiusSq X*radiusSq V := by
