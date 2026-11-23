@@ -44,7 +44,8 @@
  let pane="inspect",mobileScreen="factory",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
  const mobileScreens=["factory","build","inspect","research","documents"];
  let selectedProof=0,proofStatus="ready",proofSchool="all",proofSearch="";
- let graphMode="focus",graphShift={x:0,y:0},graphPointer=null;
+ let graphMode="focus",graphShift={x:0,y:0},graphPointer=null,graphZoom=1;
+ const graphPointers=new Map();let graphPinch=null;
  let graphHitboxes=[];
  let camX=typeof window!=="undefined"&&window.innerWidth<750?9.3:11.8,camY=8.4;
  let layoutW=700,layoutH=520,dpr=1;
@@ -342,7 +343,7 @@
  }
  function selectProof(id){
   if(!proofById.has(id))return;
-  selectedProof=id;graphMode="focus";graphShift={x:0,y:0};
+  selectedProof=id;graphMode="focus";graphShift={x:0,y:0};graphZoom=1;
   renderProof(true);drawProofGraph();
  }
  function localProofPositions(){
@@ -364,8 +365,9 @@
  }
  function drawProofGraph(){
   if(!proofCtx||pane!=="research")return;
-  const rect=proofCanvas.getBoundingClientRect?.()||{width:340};
-  const w=Math.max(200,Math.min(900,rect.width||340)),h=220;
+  const rect=proofCanvas.getBoundingClientRect?.()||{width:340,height:220};
+  const w=Math.max(200,Math.min(900,rect.width||340));
+  const h=Math.max(150,Math.min(540,rect.height||220));
   const pixelRatio=Math.min(2,globalThis.devicePixelRatio||1);
   proofCanvas.width=Math.round(w*pixelRatio);
   proofCanvas.height=Math.round(h*pixelRatio);
@@ -375,8 +377,9 @@
   const points=overview?proofCoordinates:localProofPositions();
   const fullW=(tech.summary.maxDepth+1)*210+60;
   const fullH=Math.max(...[...byDepth.values()].map(arr=>arr.length))*26+100;
-  const scale=overview?Math.min((w-20)/fullW,(h-20)/fullH):
+  const baseScale=overview?Math.min((w-20)/fullW,(h-20)/fullH):
     Math.min(.85,Math.max(.6,(w-24)/470));
+  const scale=baseScale*graphZoom;
   const center=proofById.get(selectedProof);
   const xyCenter=overview?{x:fullW/2,y:fullH/2}:{x:0,y:0};
   const at=(pos)=>({
@@ -483,37 +486,61 @@
    proofSchool=e.target.value;renderProof(true);
   });
   $("proof-overview").addEventListener("click",()=>{
-   graphMode="overview";graphShift={x:0,y:0};drawProofGraph();
+   graphMode="overview";graphShift={x:0,y:0};graphZoom=1;drawProofGraph();
   });
   $("proof-center").addEventListener("click",()=>{
-   graphMode="focus";graphShift={x:0,y:0};drawProofGraph();
+   graphMode="focus";graphShift={x:0,y:0};graphZoom=1;drawProofGraph();
   });
   if(proofCanvas){
+   const distance=points=>Math.hypot(points[0].x-points[1].x,points[0].y-points[1].y);
    proofCanvas.addEventListener("pointerdown",e=>{
     proofPointerStop(e);
-    graphPointer={x:e.clientX,y:e.clientY,oldX:e.clientX,oldY:e.clientY,moved:false};
+    const id=e.pointerId??"pointer";
+    proofCanvas.setPointerCapture?.(e.pointerId);
+    graphPointers.set(id,{x:e.clientX,y:e.clientY});
+    if(graphPointers.size>=2){
+     const pair=[...graphPointers.values()].slice(0,2);
+     graphPinch={distance:Math.max(1,distance(pair)),zoom:graphZoom};
+     graphPointer=null;return;
+    }
+    graphPointer={id,x:e.clientX,y:e.clientY,oldX:e.clientX,oldY:e.clientY,moved:false};
    });
    proofCanvas.addEventListener("pointermove",e=>{
-    if(!graphPointer)return;
+    const id=e.pointerId??"pointer";
+    if(graphPointers.has(id))graphPointers.set(id,{x:e.clientX,y:e.clientY});
+    if(graphPointers.size>=2&&graphPinch){
+     const pair=[...graphPointers.values()].slice(0,2);
+     graphZoom=Math.max(.6,Math.min(9,graphPinch.zoom*distance(pair)/graphPinch.distance));
+     drawProofGraph();return;
+    }
+    if(!graphPointer||graphPointer.id!==id)return;
     const dx=e.clientX-graphPointer.oldX,dy=e.clientY-graphPointer.oldY;
-    if(Math.abs(e.clientX-graphPointer.x)+Math.abs(e.clientY-graphPointer.y)>7)graphPointer.moved=true;
+    if(Math.abs(e.clientX-graphPointer.x)+Math.abs(e.clientY-graphPointer.y)>8)graphPointer.moved=true;
     if(graphPointer.moved){graphShift.x+=dx;graphShift.y+=dy;drawProofGraph();}
     graphPointer.oldX=e.clientX;graphPointer.oldY=e.clientY;
    });
    proofCanvas.addEventListener("pointerup",e=>{
-    if(!graphPointer)return;
+    const id=e.pointerId??"pointer";
+    graphPointers.delete(id);
+    if(graphPinch){
+     if(graphPointers.size<2)graphPinch=null;
+     graphPointer=null;return;
+    }
+    if(!graphPointer||graphPointer.id!==id)return;
     const moved=graphPointer.moved;graphPointer=null;
     if(moved)return;
-    const box=proofCanvas.getBoundingClientRect?.()||{left:0,top:0,width:310,height:220};
+    const box=proofCanvas.getBoundingClientRect?.()||{left:0,top:0,width:340,height:220};
     const x=e.clientX-box.left,y=e.clientY-box.top;
-    let best=null,d=14;
+    let best=null,d=27; // Android fingertips, rather than a mouse-size 14px hitbox.
     for(const h of graphHitboxes){
      const dist=Math.hypot(x-h.x,y-h.y);
      if(dist<d){d=dist;best=h.id;}
     }
     if(best!==null)selectProof(best);
    });
-   proofCanvas.addEventListener("pointercancel",()=>graphPointer=null);
+   proofCanvas.addEventListener("pointercancel",()=>{
+    graphPointers.clear();graphPointer=null;graphPinch=null;
+   });
   }
  }
  function proofPointerStop(e){e.preventDefault?.();}
