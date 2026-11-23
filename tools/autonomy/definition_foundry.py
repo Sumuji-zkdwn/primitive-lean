@@ -219,7 +219,7 @@ def verify_global_pairs(machine):
     counted = 0
     for x in range(n):
         for y in range(x+1, n):
-            instance = dict(machine, pair=[x, y])
+            instance = fd.rename_model(dict(machine, pair=[x, y]))
             answer = checked(instance)
             counted += answer["kind"] == "DISTINGUISHABLE"
     require(counted == global_pairs(machine),
