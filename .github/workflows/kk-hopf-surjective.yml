@@ -1,0 +1,101 @@
+name: KK Hopf S3 to S2 surjectivity and quotient bridge
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKHopfSurjective.lean'
+      - 'lean/Research/KKHopfQuotient.lean'
+      - 'lean/Research/KKHopfTwoSections.lean'
+      - 'lean/Research/KKHopfPhaseUnique.lean'
+      - 'tools/check_kk_hopf_surjective.py'
+      - 'tools/check_kk_hopf_transitions.py'
+      - '.github/workflows/kk-hopf-surjective.yml'
+      - 'docs/verification/2026-11-23-kk-hopf-surjectivity.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hopf-surjective:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean trust-zero compilation
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          for module in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique; do
+            if test ! -f "Research/$module.lean"; then continue; fi
+            lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$module.olean" "Research/$module.lean" 2>&1 | tee "../kk-surj-$module.log"
+          done
+      - name: Individual theorem axiom audit
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          mods=[m for m in ('KKHopfSurjective','KKHopfQuotient','KKHopfTwoSections','KKHopfPhaseUnique') if Path('Research/'+m+'.lean').is_file()]
+          lines=['import Research.'+m for m in mods]
+          names=[]
+          for m in mods:
+              txt=Path('Research/'+m+'.lean').read_text()
+              clean=re.sub(r'/\-.*?\-/','',txt,flags=re.S)
+              assert not re.search(r'^\s*(axiom|sorry)\b',clean,re.M)
+              names.extend((m,n) for n in re.findall(r'^theorem\s+(\w+)',clean,re.M))
+          assert len(names)>=3
+          lines.extend('#print axioms '+m+'.'+n for m,n in names)
+          Path('HopfSectionAudit.lean').write_text('\n'.join(lines)+'\n')
+          Path('../kk-surj-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 HopfSectionAudit.lean 2>&1 | tee ../kk-surj-axioms.log
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          log=Path('../kk-surj-axioms.log').read_text()
+          n=int(Path('../kk-surj-count.txt').read_text())
+          rows=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(rows)+none==n,(n,len(rows),none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for row in rows: assert {x.strip() for x in row.split(',') if x.strip()}<=allowed,row
+          assert 'sorryAx' not in log
+          print('PASS:',n,'theorem axioms')
+          PY
+      - name: Independent exact polynomial oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_hopf_surjective.py 2>&1 | tee kk-surj-sympy.log
+          python -B tools/check_kk_hopf_transitions.py 2>&1 | tee kk-surj-transition-sympy.log
+      - name: Retain proof evidence
+        if: always()
+        shell: bash
+        run: |
+          git rev-parse HEAD > kk-surj-checkout.txt
+          sha256sum lean/Research/KKHopfSurjective.lean lean/Research/KKHopfQuotient.lean lean/Research/KKHopfTwoSections.lean lean/Research/KKHopfPhaseUnique.lean tools/check_kk_hopf_surjective.py tools/check_kk_hopf_transitions.py > kk-surj-hashes.txt
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-hopf-surjective
+          path: |
+            kk-surj-*.log
+            kk-surj-count.txt
+            kk-surj-checkout.txt
+            kk-surj-hashes.txt
+          if-no-files-found: warn
