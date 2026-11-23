@@ -1,0 +1,64 @@
+{
+  "last_utc_day": "2026-11-23",
+  "receipts": [
+    {
+      "chain_sha256": "764b71a0bc7602d1387d5ec442e07ecabd04e5f87811b650dffda771c0623bce",
+      "day": "2026-11-23",
+      "evaluator": "semantic-foundry-v1-two-executors-and-closure-invariant",
+      "head_sha": "d072dfe5955fde7ae9da25b5c4cafb90390a7316",
+      "id": "sf_43ed97b6ef1909a1",
+      "invariant": {
+        "base_witness_sha256": "0237f9cc7098f76946ee6ddeec90222e4e6b34fe79a45b80e8348a9e53402c41",
+        "closure_argument": "composition_of_property_preserving_functions_preserves_property",
+        "constant_inputs_per_primitive": 4,
+        "independent_base_checks": 24,
+        "old_primitive_count": 6,
+        "property": "all_constant_signals_map_to_constant_signals"
+      },
+      "observation": {
+        "behavior_sha256": "b759ba4e389e42679f79b1bfd8dda75c055bba11b7362266700bcc491ad86759",
+        "changed_inputs": 252,
+        "constant_counterexample": {
+          "input": 0,
+          "input_values": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "output": 1,
+          "output_values": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        "distinct_outputs": 4,
+        "exhaustive_inputs": 256,
+        "four_single_peak_outputs": [
+          1,
+          4,
+          16,
+          64
+        ],
+        "independent_implementations": 2,
+        "nonfixed_position_response": true,
+        "number_of_violating_constant_inputs": 4
+      },
+      "parent": null,
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "recipe": [
+        {
+          "kind": "peak",
+          "level": 1,
+          "order": "max",
+          "tie": "first"
+        }
+      ],
+      "score": 25,
+      "status": "EXHAUSTIVE_FINITE_SEMANTIC_SEPARATION"
+    }
+  ],
+  "schema_version": 1
+}
