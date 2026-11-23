@@ -89,6 +89,15 @@ header{display:flex;align-items:start;justify-content:space-between;gap:12px;fle
 footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
 @media (min-width:750px){.layout{grid-template-columns:minmax(0,550px) minmax(300px,1fr)}.board{gap:3px}.panel{padding:14px}.equipment{font-size:12px}}
 @media (max-width:365px){.app{padding-left:8px;padding-right:8px}.hud{gap:4px}.panel{padding:8px}.actions button{font-size:11px}.cell .grain{font-size:8px}}
+
+.quickdock{display:none}
+@media(max-width:749px){
+  .app{padding-bottom:155px}
+  .keyboard{position:fixed;z-index:12;right:max(9px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,42px);margin:0;padding:7px;border-radius:13px;background:#172b3ded;border:1px solid #658198;box-shadow:0 6px 25px #050a15aa;gap:4px}
+  .keyboard button{font-size:23px}
+  .quickdock{display:flex;position:fixed;z-index:12;left:max(9px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));flex-direction:column;gap:5px;padding:6px;border:1px solid #658198;border-radius:13px;background:#172b3ded;box-shadow:0 6px 25px #050a15aa}
+  .quickdock button{min-height:34px;width:96px;border-radius:8px;background:#31536c;border:1px solid #739ab0;font-size:11px;font-weight:700}
+}
 @media (prefers-reduced-motion:reduce){.cell.enemy.windup{animation:none}}
 </style>
 </head>
@@ -139,6 +148,7 @@ footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
   <p class="source">元の465定理は実際の証明台帳から抽出。ゲーム内装備の能力値は設計上の割当であり、定理からの数学的帰結ではありません。<a href="https://github.com/Sumuji-zkdwn/primitive-lean/tree/main/games/rogue465" target="_blank" rel="noopener">ソースと検証</a></p>
  </section>
 </div>
+<div class="quickdock" role="group" aria-label="スマホ用戦闘ボタン"><button id="dock-pulse" type="button">衝撃波 (2)</button><button id="dock-probe" type="button">二重観測</button><button id="dock-polarity" type="button">入力 +1</button></div>
 <div id="modal" aria-live="polite" aria-label="定理遺物の選択"><div class="modal-panel" id="modal-panel"></div></div>
 <footer>スマホではHTML/JavaScriptで動作します。世界法則の一部は既存Lean形式化（線形観測、符号付きLaakso、砂山、Rule481）に対応していますが、ブラウザはLeanのカーネルではありません。初期465定理の全てが戦闘を直接証明するわけではありません。</footer>
 </main>
