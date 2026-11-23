@@ -10,6 +10,7 @@ const play=fs.readFileSync(path.join(__dirname,"play.html"),"utf8");
 const engine=fs.readFileSync(path.join(__dirname,"engine.js"),"utf8");
 const ui=fs.readFileSync(path.join(__dirname,"ui.js"),"utf8");
 const tech=fs.readFileSync(path.join(__dirname,"tech.json"),"utf8");
+const upgrades=fs.readFileSync(path.join(__dirname,"upgrades.json"),"utf8");
 
 const contextMethods=["setTransform","fillRect","strokeRect","beginPath","arc","fill","stroke","moveTo","lineTo",
  "closePath","save","restore","translate","rotate","rect","clip","fillText","clearRect","setLineDash"];
@@ -31,6 +32,9 @@ function fakeDOM(){
       let attr=null;
       if(selector==="[data-tool]")attr="tool";
       if(selector==="[data-unlock]")attr="unlock";
+      if(selector==="[data-proof-jump]")attr="proof-jump";
+      if(selector==="[data-proof-nav]")attr="proof-nav";
+      if(selector==="[data-proof-result]")attr="proof-result";
       if(!attr)return [];
       const matches=[...this.innerHTML.matchAll(new RegExp('data-'+attr+'="([^"]+)"','g'))];
       const out=matches.map((m,i)=>{
@@ -39,7 +43,7 @@ function fakeDOM(){
       caches.set(key,out);return out;
     }
    };
-   if(id==="factory-canvas"){
+   if(id==="factory-canvas"||id==="proof-graph"){
      el.getContext=()=>{
        const ctx={};
        for(const k of contextMethods)ctx[k]=()=>{};
@@ -59,6 +63,7 @@ function fakeDOM(){
   const e=element("panel-"+x);e.dataset={panel:x};return e;
  });
  get("factory-tech").textContent=tech;
+ get("factory-upgrades-json").textContent=upgrades;
  const doc={
   getElementById:get,
   querySelectorAll(s){return s==="[data-category]"?cats:
@@ -75,9 +80,13 @@ test("standalone page embeds all UI, engine and source-backed tech tree without 
  assert.match(index,/id="documents"/);
  assert.match(index,/data-category="production"/);
  assert.match(play,/id="factory-tech"/);
+ assert.match(play,/id="factory-upgrades-json"/);
+ assert.match(index,/id="proof-graph"/);
+ assert.match(index,/id="proof-search"/);
  assert.ok(play.includes(engine),"engine bundle must match checked source");
  assert.ok(play.includes(ui),"UI bundle must match checked source");
- assert.equal(JSON.parse(play.match(/<script type="application\/json" id="factory-tech">([\s\S]*?)<\/script>/)[1]).nodes.length,10);
+ assert.equal(JSON.parse(play.match(/<script type="application\/json" id="factory-tech">([\s\S]*?)<\/script>/)[1]).nodes.length,465);
+ assert.equal(JSON.parse(play.match(/<script type="application\/json" id="factory-upgrades-json">([\s\S]*?)<\/script>/)[1]).nodes.length,10);
  assert.ok(!play.includes('<script src='),"offline build must not depend on external scripts");
 });
 
@@ -127,6 +136,17 @@ test("actual phone UI boots, runs simulation, selects buildings and paints const
  const built=JSON.parse(storage.get("primitive-foundry-save-v2"));
  assert.equal(built.tiles[F.idx(16,8)].building.kind,"ironFurnace");
  assert.match(f.get("inspector").innerHTML,/鉄の精錬炉/);
+ // The research interface must expose the whole proof DAG (not 10 file nodes).
+ f.panels[1].handlers.click();
+ assert.match(f.get("proof-metrics").textContent,/465 解明/);
+ assert.match(f.get("proof-metrics").textContent,/629直接証明辺/);
+ const choices=f.get("proof-results").querySelectorAll("[data-proof-result]");
+ assert.ok(choices.length>0&&choices.length<=36);
+ choices[0].handlers.click();
+ assert.match(f.get("proof-details").innerHTML,/直接の証明前提/);
+ assert.match(f.get("proof-details").innerHTML,/研究/);
+ assert.ok(f.get("proof-graph").handlers.pointerdown);
+ assert.ok(f.get("technologies").innerHTML.includes("証明の前提"));
  f.get("play").handlers.click();
  assert.match(f.get("play").textContent,/再開/);
 });
@@ -137,4 +157,7 @@ test("UI tech buttons reference actual source nodes rather than placeholder theo
  assert.match(ui,/F\.unlock/);
  assert.match(ui,/F\.isDiscovered/);
  assert.match(index,/id="view-research"/);
+ assert.match(ui,/F\.researchProof/);
+ assert.match(ui,/tech\.nodes/);
+ assert.match(ui,/upgrades\.nodes/);
 });
