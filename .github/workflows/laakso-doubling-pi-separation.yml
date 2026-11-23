@@ -10,6 +10,7 @@ on:
       - 'docs/research/laakso_doubling_PI_probe.py'
       - 'docs/research/LaaksoBallTransfer.lean'
       - 'docs/research/LaaksoShellMass.lean'
+      - 'docs/research/LaaksoSweepBounds.lean'
       - '.github/workflows/laakso-doubling-pi-separation.yml'
   workflow_dispatch:
 
@@ -47,3 +48,4 @@ jobs:
         run: |
           lake env lean ../../docs/research/LaaksoBallTransfer.lean
           lake env lean ../../docs/research/LaaksoShellMass.lean
+          lake env lean ../../docs/research/LaaksoSweepBounds.lean
