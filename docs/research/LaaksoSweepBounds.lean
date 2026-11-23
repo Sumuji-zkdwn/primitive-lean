@@ -133,11 +133,11 @@ def sweepCostSet (A : Set (ℝ × ℝ)) (F : ℝ → ℝ) (x y : ℝ) : Set ℝ 
     w = sweep (F p.1) (F p.2) (F x) (F y)}
 
 /-- Raw sweep distance as the real infimum over the interval family. -/
-def rawSweepInf (A : Set (ℝ × ℝ)) (x y : ℝ) : ℝ :=
+noncomputable def rawSweepInf (A : Set (ℝ × ℝ)) (x y : ℝ) : ℝ :=
   sInf (sweepCostSet A id x y)
 
 /-- Calibrated sweep distance, with the *same* interval family. -/
-def calibratedSweepInf (A : Set (ℝ × ℝ)) (F : ℝ → ℝ) (x y : ℝ) : ℝ :=
+noncomputable def calibratedSweepInf (A : Set (ℝ × ℝ)) (F : ℝ → ℝ) (x y : ℝ) : ℝ :=
   sInf (sweepCostSet A F x y)
 
 /-- The D³ mass estimate passes from *each* admissible interval to
