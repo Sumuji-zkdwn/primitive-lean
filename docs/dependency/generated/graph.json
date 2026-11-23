@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "90428d9c5de0b8499d8d17eadd49a8b61689746b",
+  "main_commit": "61be372bcbf5502e58db8c7396cce763f7b8f7b5",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1793,6 +1793,28 @@
         "Mathlib.Analysis.Calculus.Deriv.Inv"
       ],
       "sha256": "efc44b02ce8a174dc8060c59f9fafe894b2ce8efb7b10b1304a82f0db9fb4e2e"
+    },
+    {
+      "id": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "scope": "main",
+      "path": "lean/Research/KKCartesianMetricConnection.lean",
+      "group": "Other",
+      "namespace": "KKCartesianMetricConnection",
+      "declarations": [
+        "MatrixE",
+        "inverseE",
+        "metric_inverse_all_entries",
+        "partialMetricE",
+        "gammaFromMetricE",
+        "all_125_gamma_entries_agree"
+      ],
+      "imports": [
+        "Research.KKCartesianDerivative",
+        "Research.KKCartesianRicci",
+        "Mathlib.Tactic",
+        "Mathlib.LinearAlgebra.Matrix.Notation"
+      ],
+      "sha256": "8376b5193f3f80b82a95a71b4276ebe0f08aec508f0f3e2ebc2af3a0c5ff80ac"
     },
     {
       "id": "main:lean/Research/KKCartesianRicci.lean",
@@ -15958,6 +15980,38 @@
       ]
     },
     {
+      "from": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "to": "main:lean/Research/KKCartesianDerivative.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.KKCartesianDerivative"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "to": "main:lean/Research/KKCartesianDerivative.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "gaugeEntry"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "to": "main:lean/Research/KKCartesianRicci.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.KKCartesianRicci"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "to": "main:lean/Research/KKCartesianRicci.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "gammaOrdered"
+      ]
+    },
+    {
       "from": "main:lean/Research/KKCartesianRicci.lean",
       "to": "main:lean/Research/KKCartesianDerivative.lean",
       "kind": "exact_import",
@@ -27883,28 +27937,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "90428d9c5de0b8499d8d17eadd49a8b61689746b",
+      "base_sha": "61be372bcbf5502e58db8c7396cce763f7b8f7b5",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "90428d9c5de0b8499d8d17eadd49a8b61689746b",
+      "base_sha": "61be372bcbf5502e58db8c7396cce763f7b8f7b5",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "90428d9c5de0b8499d8d17eadd49a8b61689746b",
+      "base_sha": "61be372bcbf5502e58db8c7396cce763f7b8f7b5",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "90428d9c5de0b8499d8d17eadd49a8b61689746b",
+      "base_sha": "61be372bcbf5502e58db8c7396cce763f7b8f7b5",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
