@@ -122,6 +122,70 @@ theorem roundtrip_lower_of_gate_separation
   have hδ := hsep w hw
   linarith
 
+
+/-- A concrete route goes from s to a chosen k-gate w, flips the k-bit,
+and goes on to t. It uses exactly two horizontal legs, so its total
+cost is the desired detour upper bound. -/
+theorem one_bit_detour_realizable
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    (s t : ℝ) (b : ι → Bool) (k : ι) (w : ℝ)
+    (hw : G k w) :
+    WeightedWalk G F (s,b) (t,flipBit b k)
+      (|F s - F w| + |F w - F t|) := by
+  have hfinish :
+      WeightedWalk G F (w,flipBit b k) (t,flipBit b k)
+        (|F w - F t|) := by
+    simpa only [add_zero] using
+      (WeightedWalk.horiz w t (flipBit b k)
+        (t,flipBit b k) 0 (WeightedWalk.stop (t,flipBit b k)))
+  have hflip :
+      WeightedWalk G F (w,b) (t,flipBit b k)
+        (|F w - F t|) :=
+    WeightedWalk.gate w b k (t,flipBit b k)
+      (|F w - F t|) hw hfinish
+  exact WeightedWalk.horiz s w b (t,flipBit b k)
+    (|F w - F t|) hflip
+
+/-- Sharp one-bit roundtrip cost for a chosen nearest calibrated gate.
+Other-bit flips and arbitrary detours cannot reduce the infimum. -/
+theorem exact_one_bit_roundtrip_infimum
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    (s : ℝ) (b : ι → Bool) (k : ι) (w₀ : ℝ)
+    (hw₀ : G k w₀)
+    (hnearest : ∀ w : ℝ, G k w →
+      |F s - F w₀| ≤ |F s - F w|) :
+    sInf {c : ℝ | WeightedWalk G F (s,b) (s,flipBit b k) c} =
+      2 * |F s - F w₀| := by
+  let S : Set ℝ := {c | WeightedWalk G F (s,b) (s,flipBit b k) c}
+  have hdiff : b k ≠ flipBit b k k := by
+    simp [flipBit]
+  have hlow : ∀ c ∈ S, 2 * |F s - F w₀| ≤ c := by
+    intro c hc
+    obtain ⟨w, hw, hcost⟩ :=
+      roundtrip_changed_bit_lower G F hc k hdiff rfl
+    have hmin := hnearest w hw
+    linarith
+  have hwitness : 2 * |F s - F w₀| ∈ S := by
+    have hr := one_bit_detour_realizable G F s s b k w₀ hw₀
+    have hval :
+        |F s - F w₀| + |F w₀ - F s| =
+          2 * |F s - F w₀| := by
+      rw [abs_sub_comm (F w₀) (F s)]
+      ring
+    change WeightedWalk G F (s,b) (s,flipBit b k)
+      (2 * |F s - F w₀|)
+    rw [← hval]
+    exact hr
+  have hS : S.Nonempty := ⟨_, hwitness⟩
+  have hbdd : BddBelow S := ⟨_, hlow⟩
+  change sInf S = 2 * |F s - F w₀|
+  apply le_antisymm
+  · exact csInf_le hbdd hwitness
+  · exact le_csInf hS hlow
+
+#print axioms one_bit_detour_realizable
+#print axioms exact_one_bit_roundtrip_infimum
+
 #print axioms height_displacement_le_cost
 #print axioms changed_bit_detour_lower
 #print axioms roundtrip_changed_bit_lower
