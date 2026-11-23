@@ -6,6 +6,7 @@ on:
       - 'lean/Research/KKRadialVacuumBridge.lean'
       - 'tools/check_kk_radial_vacuum_bridge.py'
       - 'tools/check_kk_radial_charge_profile.py'
+      - 'tools/check_kk_cartesian_gh_linear.py'
       - 'docs/verification/2026-11-23-kk-radial-vacuum-bridge.md'
       - '.github/workflows/kk-radial-vacuum-bridge.yml'
   workflow_dispatch:
@@ -77,12 +78,13 @@ jobs:
           python -m pip install --disable-pip-version-check sympy==1.14.0
           python -B tools/check_kk_radial_vacuum_bridge.py 2>&1 | tee kk-radial-sympy.log
           python -B tools/check_kk_radial_charge_profile.py 2>&1 | tee kk-radial-charge.log
+          python -B tools/check_kk_cartesian_gh_linear.py 2>&1 | tee kk-cartesian-sympy.log
       - name: Preserve checkout and source checksums
         shell: bash
         run: |
           set -euo pipefail
           git rev-parse HEAD > kk-radial-checkout-head.txt
-          sha256sum lean/Research/KKRadialVacuumBridge.lean tools/check_kk_radial_vacuum_bridge.py tools/check_kk_radial_charge_profile.py > kk-radial-source-sha256.txt
+          sha256sum lean/Research/KKRadialVacuumBridge.lean tools/check_kk_radial_vacuum_bridge.py tools/check_kk_radial_charge_profile.py tools/check_kk_cartesian_gh_linear.py > kk-radial-source-sha256.txt
       - name: Upload verification evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -94,6 +96,7 @@ jobs:
             kk-radial-count.txt
             kk-radial-sympy.log
             kk-radial-charge.log
+            kk-cartesian-sympy.log
             kk-radial-checkout-head.txt
             kk-radial-source-sha256.txt
           if-no-files-found: warn
