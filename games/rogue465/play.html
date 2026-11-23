@@ -34,6 +34,8 @@ header{display:flex;align-items:start;justify-content:space-between;gap:12px;fle
 .cell.wall{background:#0d1a29;border-color:#27374b;cursor:default}
 .cell.wall::before{content:"";display:block;width:35%;height:35%;background:#304358;transform:rotate(45deg)}
 .cell .grain{position:absolute;right:2px;bottom:1px;font-size:9px;color:#e9c187}
+.cell .foehp{position:absolute;left:2px;top:1px;font-size:10px;color:#fff0d6;font-variant-numeric:tabular-nums}
+.cell .foew{position:absolute;right:2px;top:1px;font-size:9px;color:#d8b9fb}
 .cell.hero{background:#245e69;border:2px solid #8eede8;color:#e9fffc;z-index:1}
 .cell.enemy{background:#663a46;color:#ffdfcb;border:1px solid #dc7e84}
 .cell.enemy.windup{background:#a44940;box-shadow:inset 0 0 0 2px #ffe6a2;animation:pulse .65s ease-in-out infinite alternate}
@@ -544,10 +546,12 @@ footer{font-size:10px;color:#91a6b9;margin-top:18px;line-height:1.8}
         if(foe.scanned)classes.push("scanned");if(foe.kind==="warden")classes.push("boss");}
       if(isHero)classes.push("hero");
       const body=wall?"":isHero?"◈":foe?icons[foe.kind]:"";
+      const health=foe?'<span class="foehp">'+foe.hp+"</span>":"";
+      const weakness=foe&&foe.scanned?'<span class="foew">X'+(foe.weakness>=0?"+":"")+foe.weakness+"</span>":"";
       const sand=wall?"":'<span class="grain">'+room.sand[idx]+"</span>";
       const aria=wall?"壁":isHero?"自分":foe?"敵、生命"+foe.hp+"、"+(foe.windup?"次に攻撃":"移動中"):"空きマス";
       html.push('<button type="button" class="'+classes.join(" ")+'" data-x="'+x+'" data-y="'+y+
-        '" aria-label="('+x+','+y+') '+aria+'" '+(wall?"disabled":"")+'>'+body+sand+"</button>");
+        '" aria-label="('+x+','+y+') '+aria+'" '+(wall?"disabled":"")+'>'+body+health+weakness+sand+"</button>");
     }
     $("board").innerHTML=html.join("");
     $("board").querySelectorAll("[data-x]").forEach(el=>el.addEventListener("click",()=>{
