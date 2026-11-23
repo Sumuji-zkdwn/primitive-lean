@@ -37,3 +37,23 @@ jobs:
           node --check games/primitive-foundry/engine.test.cjs
       - name: Run deterministic full factory production and dependency tests
         run: node --test games/primitive-foundry/engine.test.cjs games/primitive-foundry/ui.test.cjs
+
+  lean:
+    name: Lean 4 trust-zero finite logistics laws
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: false
+      - name: Typecheck factory conservation and assembly with trust zero
+        run: elan run leanprover/lean4:v4.36.0-rc2 lean --trust=0 games/primitive-foundry/Core.lean
