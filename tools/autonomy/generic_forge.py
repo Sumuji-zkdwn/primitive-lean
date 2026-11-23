@@ -467,17 +467,19 @@ def main(argv=None):
     cli.add_argument("--state", required=True, type=Path)
     cli.add_argument("--head")
     cli.add_argument("--day")
-    cli.add_argument("--output", required=True, type=Path)
+    cli.add_argument("--output", type=Path)
     cli.add_argument("--evidence", type=Path)
     cli.add_argument("--operator-id")
     cli.add_argument("--value", type=int)
     args = cli.parse_args(argv)
     try:
         if args.command == "prepare":
-            require(args.day is not None, "--day required")
+            require(args.day is not None and args.output is not None,
+                    "--day and --output required")
             prepare(args.state, args.day, args.head, args.output)
         elif args.command == "receipt":
-            require(args.evidence is not None, "evidence required")
+            require(args.evidence is not None and args.output is not None,
+                    "--evidence and --output required")
             receipt(args.state, args.head, args.evidence, args.output)
         else:
             require(args.operator_id is not None and args.value is not None,
