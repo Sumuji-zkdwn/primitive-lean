@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'lean/Research/KKHopfOrbit.lean'
+      - 'lean/Research/KKHopfActionFree.lean'
       - 'tools/check_kk_hopf_orbit.py'
       - 'docs/verification/2026-11-23-kk-hopf-orbit-completeness.md'
       - '.github/workflows/kk-hopf-orbit.yml'
@@ -37,17 +38,23 @@ jobs:
           mkdir -p .lake/build/lib/lean/Research
           lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKHopfGlobalAlgebra.olean Research/KKHopfGlobalAlgebra.lean 2>&1 | tee ../kk-hopf-dependency.log
           lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKHopfOrbit.olean Research/KKHopfOrbit.lean 2>&1 | tee ../kk-hopf-lean.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKHopfActionFree.olean Research/KKHopfActionFree.lean 2>&1 | tee ../kk-hopf-free-lean.log
           python - <<'PY'
           from pathlib import Path
           import re
-          src=Path('Research/KKHopfOrbit.lean').read_text()
-          stripped=re.sub(r'/\-.*?\-/','',src,flags=re.S)
-          assert not re.search(r'^\s*(axiom|sorry)\b',stripped,re.M)
-          names=re.findall(r'^theorem\s+(\w+)',stripped,re.M)
-          assert len(names)==3,names
-          Path('KKHopfOrbitAudit.lean').write_text('import Research.KKHopfOrbit\n'+
-             ''.join('#print axioms KKHopfOrbit.'+name+'\n' for name in names))
-          Path('../kk-hopf-count.txt').write_text(str(len(names)))
+          mods=('KKHopfOrbit','KKHopfActionFree')
+          imports=['import Research.'+mod for mod in mods]
+          qualified=[]
+          for mod in mods:
+              src=Path('Research/'+mod+'.lean').read_text()
+              stripped=re.sub(r'/\-.*?\-/','',src,flags=re.S)
+              assert not re.search(r'^\s*(axiom|sorry)\b',stripped,re.M)
+              names=re.findall(r'^theorem\s+(\w+)',stripped,re.M)
+              assert len(names)==3,(mod,names)
+              qualified.extend('#print axioms '+mod+'.'+name for name in names)
+          Path('KKHopfOrbitAudit.lean').write_text(
+              '\n'.join(imports+qualified)+'\n')
+          Path('../kk-hopf-count.txt').write_text(str(len(qualified)))
           PY
           lake env lean --trust=0 KKHopfOrbitAudit.lean 2>&1 | tee ../kk-hopf-audit.log
           python - <<'PY'
@@ -75,7 +82,7 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD > kk-hopf-checked-out.txt
-          sha256sum lean/Research/KKHopfOrbit.lean tools/check_kk_hopf_orbit.py > kk-hopf-sha256.txt
+          sha256sum lean/Research/KKHopfOrbit.lean lean/Research/KKHopfActionFree.lean tools/check_kk_hopf_orbit.py > kk-hopf-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -84,6 +91,7 @@ jobs:
           path: |
             kk-hopf-dependency.log
             kk-hopf-lean.log
+            kk-hopf-free-lean.log
             kk-hopf-audit.log
             kk-hopf-count.txt
             kk-hopf-sympy.log
