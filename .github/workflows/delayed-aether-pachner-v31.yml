@@ -1,0 +1,112 @@
+name: Delayed-aether v31 Pachner curvature and memory
+
+on:
+  pull_request:
+    paths:
+      - 'docs/research/delayed-aether/stage-31.md'
+      - 'experiments/delayed_aether/stages/*v31*'
+      - 'lean/Research/DelayedAetherPachner31.lean'
+      - '.github/workflows/delayed-aether-pachner-v31.yml'
+  push:
+    paths:
+      - 'docs/research/delayed-aether/stage-31.md'
+      - 'experiments/delayed_aether/stages/*v31*'
+      - 'lean/Research/DelayedAetherPachner31.lean'
+      - '.github/workflows/delayed-aether-pachner-v31.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install independently pinned symbolic auditor
+        run: python -m pip install sympy==1.14.0
+      - name: Exact combinatorics, rational Gram certificate, dynamic energy balance
+        run: |
+          set -euo pipefail
+          python -B -X utf8 experiments/delayed_aether/stages/verify_v31.py
+          python -B -X utf8 experiments/delayed_aether/stages/independent_audit_v31.py
+          python -B -m py_compile experiments/delayed_aether/stages/verify_v31.py experiments/delayed_aether/stages/independent_audit_v31.py experiments/delayed_aether/stages/make_plots_v31.py
+      - name: Save numerical and symbolic audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delayed-aether-v31-finite-${{ github.run_id }}
+          path: |
+            experiments/delayed_aether/stages/audit_v31.json
+            experiments/delayed_aether/stages/symbolic_audit_v31.json
+          retention-days: 30
+          if-no-files-found: warn
+
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean via elan
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Download mathlib cache at repository-pinned revision
+        working-directory: lean
+        run: lake exe cache get
+      - name: Assemble exact theorem-by-theorem axiom probe
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          p=Path('lean/Research/DelayedAetherPachner31.lean')
+          src=p.read_text(encoding='utf-8')
+          names=re.findall(r'(?m)^theorem\s+([A-Za-z0-9_]+)',src)
+          assert len(names)==11, names
+          p.with_name('DelayedAetherPachner31Audit.lean').write_text(
+            src+'\n'+'\n'.join('#print axioms DelayedAetherPachner31.'+x for x in names)+'\n',encoding='utf-8')
+          print('Lean axiom audit theorem count:',len(names))
+          PY
+      - name: Kernel trust=0 and explicit axiom allowlist
+        run: |
+          set -euo pipefail
+          cd lean
+          lake env lean --trust=0 Research/DelayedAetherPachner31Audit.lean > ../delayed-aether-v31-lean.log 2>&1 || {
+            cat ../delayed-aether-v31-lean.log; exit 1;
+          }
+          if grep -E '(warning:|sorryAx)' ../delayed-aether-v31-lean.log; then
+            echo 'Lean warning/sorry axiom detected'; exit 1
+          fi
+          cat ../delayed-aether-v31-lean.log
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          src=Path('Research/DelayedAetherPachner31.lean').read_text(encoding='utf-8')
+          names=re.findall(r'(?m)^theorem\s+([A-Za-z0-9_]+)',src)
+          output=Path('../delayed-aether-v31-lean.log').read_text(encoding='utf-8').splitlines()
+          found=[]
+          for line in output:
+            if not line.startswith("'DelayedAetherPachner31."):
+              continue
+            m=re.fullmatch(r"'DelayedAetherPachner31\.([A-Za-z0-9_]+)' depends on axioms: \[(.*?)\]",line)
+            assert m is not None,line
+            axioms={a.strip() for a in m.group(2).split(',') if a.strip()}
+            assert axioms <= {'propext','Quot.sound','Classical.choice'},(m.group(1),axioms)
+            found.append(m.group(1))
+          assert found==names,(found,names)
+          print(f'PASS: {len(names)} pinned Lean --trust=0 proofs and axiom audit')
+          PY
+      - name: Upload exact-head Lean proof log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delayed-aether-v31-lean-${{ github.run_id }}
+          path: delayed-aether-v31-lean.log
+          retention-days: 30
+          if-no-files-found: warn

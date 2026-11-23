@@ -2,7 +2,7 @@
   "counts": {
     "all_source_edges": 1383,
     "eligible_direct_edges": 428,
-    "nodes": 433,
+    "nodes": 434,
     "retained_pairs": 307,
     "transitive_pairs_removed": 114,
     "unique_eligible_pairs": 421,
@@ -1302,6 +1302,7 @@
     "main:lean/Research/ChairPieKillSpot.lean",
     "main:lean/Research/DelayedAetherCochain.lean",
     "main:lean/Research/DelayedAetherEdgeRegge.lean",
+    "main:lean/Research/DelayedAetherPachner31.lean",
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
@@ -1676,8 +1677,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "d2b50b256b1b8b236b12a611353aea78e5c8c26c10fdb99a3bc173fad2c24112",
-    "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
+    "graph_sha256": "52da218ed6b9ced14b2835bb946e7676191cd6788943b5189f04b2799073c3dd",
+    "main_commit": "66f4149ba0688883235fa4d7e8e119e187a8497a",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
