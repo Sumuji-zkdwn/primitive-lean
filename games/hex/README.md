@@ -63,3 +63,31 @@ of Laakso geometry, or the correctness of external graphics hardware.
 Those are distinct experiments. Later work could replace the local router
 rules with sandpile toppling, programmable agents, or multiple players, while
 retaining executable transitions and local formal checks.
+
+
+## Android / iPhone: touch browser game
+
+Open **[Hex Circuit: play in your phone browser](https://raw.githack.com/Sumuji-zkdwn/primitive-lean/main/games/hex/index.html)**.
+The link uses the external raw.githack HTML preview service because GitHub's
+ordinary source-code link does not execute HTML. The service may show a
+one-time confirmation before displaying the game. The complete HTML file
+also works when downloaded and opened locally on a phone or desktop.
+
+Tap any hex cell to select it, choose one of the six arrow directions, then
+tap "1手進める" or "自動再生" to move. "お手本を見る" runs the certified
+seven-step solution visually; "最初から" resets the puzzle. The layout
+adjusts to portrait and landscape orientations, and needs no account,
+installer, image assets, or external JavaScript libraries.
+
+**Execution boundary:** the terminal game's rules run directly in Lean 4;
+the phone's web page executes a separately maintained JavaScript port of the
+same finite rules. The Lean proof checker itself is *not* running in the
+browser. The mobile tests compare the concrete Lean regression witnesses
+(board size, directions, win, crash, bounds), but are not a general proof of
+cross-language equivalence.
+
+Run the additional mobile regression checks with:
+
+```sh
+node --test games/hex/mobile.test.cjs
+```
