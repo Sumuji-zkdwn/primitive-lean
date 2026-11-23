@@ -99,8 +99,8 @@ test("actual phone UI boots, runs simulation, selects buildings and paints const
  assert.ok(f.get("science-total").textContent.includes(" / 30"));
  assert.ok(f.get("viewport").handlers.wheel);
  for(let i=0;i<40;i++)timers[0]();
- assert.ok(storage.has("primitive-foundry-save-v1"),"actual game should autosave");
- const w=JSON.parse(storage.get("primitive-foundry-save-v1"));
+ assert.ok(storage.has("primitive-foundry-save-v2"),"actual game should autosave");
+ const w=JSON.parse(storage.get("primitive-foundry-save-v2"));
  assert.ok(w.tick>=24&&w.tiles.length===F.SIZE);
  // Select the existing assembler in the provided blueprinted factory.
  const canvas=f.get("factory-canvas");
@@ -108,6 +108,15 @@ test("actual phone UI boots, runs simulation, selects buildings and paints const
  canvas.handlers.pointerdown({button:0,pointerId:1,clientX:x,clientY:y,preventDefault(){}});
  canvas.handlers.pointerup({preventDefault(){}});
  assert.match(f.get("inspector").innerHTML,/組立機/);
+ assert.ok(F.pendingRepairs(w).length===2);
+ // Tap the highlighted missing transport cells to repair both links.
+ for(const [cx,cy]of [[11,6],[10,8]]){
+   const px=760/2+(cx+.5-11.8)*31,py=520/2+(cy+.5-8.4)*31;
+   canvas.handlers.pointerdown({button:0,pointerId:1,clientX:px,clientY:py,preventDefault(){}});
+   canvas.handlers.pointerup({preventDefault(){}});
+ }
+ const repaired=JSON.parse(storage.get("primitive-foundry-save-v2"));
+ assert.equal(F.pendingRepairs(repaired).length,0);
  f.cats[1].handlers.click();
  assert.match(f.get("tools").innerHTML,/銅の炉/);
  const btn=f.get("tools").querySelectorAll("[data-tool]").find(x=>x.dataset.tool==="ironFurnace");
@@ -115,7 +124,7 @@ test("actual phone UI boots, runs simulation, selects buildings and paints const
  const fx=760/2+(16.5-11.8)*31,fy=520/2+(8.5-8.4)*31;
  canvas.handlers.pointerdown({button:0,pointerId:1,clientX:fx,clientY:fy,preventDefault(){}});
  canvas.handlers.pointerup({preventDefault(){}});
- const built=JSON.parse(storage.get("primitive-foundry-save-v1"));
+ const built=JSON.parse(storage.get("primitive-foundry-save-v2"));
  assert.equal(built.tiles[F.idx(16,8)].building.kind,"ironFurnace");
  assert.match(f.get("inspector").innerHTML,/鉄の精錬炉/);
  f.get("play").handlers.click();
