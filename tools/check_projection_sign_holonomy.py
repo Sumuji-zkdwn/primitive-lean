@@ -70,6 +70,26 @@ def count_signs(nodes: tuple[int, ...],
     return {1: c[1], -1: c[-1]}
 
 
+
+def det_polynomial(S: list[list[int]]) -> tuple[int, ...]:
+    """The integer coefficients of det(I+t*S), without symbolic packages."""
+    n = len(S)
+    out = [0] * (n + 1)
+    for perm in permutations(range(n)):
+        inversions = sum(perm[i] > perm[j]
+                         for i in range(n) for j in range(i + 1, n))
+        coeff = [1]
+        for i, j in enumerate(perm):
+            factor = [int(i == j), S[i][j]]
+            new = [0] * (len(coeff) + 1)
+            for k, a in enumerate(coeff):
+                for l, b in enumerate(factor):
+                    new[k + l] += a * b
+            coeff = new
+        for k, value in enumerate(coeff):
+            out[k] += (-1) ** inversions * value
+    return tuple(out)
+
 def main() -> None:
     assert PHI * PHI == PHI + ONE
     norm = dot(V[0], V[0])
@@ -132,6 +152,29 @@ def main() -> None:
         assert positive in (2, 6)
         k4_cycle_counts[positive] += 1
     assert k4_cycle_counts == {2: 48, 6: 16}
+    # Up to direction switching and relabeling, K4 has exactly three
+    # determinant polynomials for its Gram matrix I + c*S.
+    classes = Counter()
+    for values in product((-1, 1), repeat=len(k4_edges)):
+        H = [[0] * 4 for _ in range(4)]
+        for (i, j), val in zip(k4_edges, values):
+            H[i][j] = H[j][i] = val
+        classes[det_polynomial(H)] += 1
+    assert classes == {
+        (1, 0, -6, 0, 5): 48,       # (1-c^2)(1-5c^2)
+        (1, 0, -6, -8, -3): 8,      # (1+c)^3(1-3c)
+        (1, 0, -6, 8, -3): 8,       # (1-c)^3(1+3c)
+    }, classes
+    # At angle c=1/3, four tetrahedral directions instead yield +1/81
+    # for every order. This contrasts with c=1/sqrt(5).
+    tetra = ((1, 1, 1), (1, -1, -1), (-1, 1, -1), (-1, -1, 1))
+    tetra_dot = lambda a, b: sum(x * y for x, y in zip(a, b))
+    assert all(tetra_dot(v, v) == 3 for v in tetra)
+    assert all(tetra_dot(tetra[i], tetra[j]) == -1
+               for i in range(4) for j in range(4) if i != j)
+    tetra_signs = tuple(tuple(0 if i == j else -1 for j in range(4))
+                        for i in range(4))
+    assert count_signs((0, 1, 2, 3), tetra_signs) == {1: 6, -1: 0}
 
     # Reversing any of the six unoriented representatives cannot flip holonomy.
     original = {path: cycle_sign(path, S)
@@ -150,6 +193,9 @@ def main() -> None:
         "three_line_reversal": "identical sign for all 20 triples",
         "subsets": subsets,
         "universal_signed_k4_positive_count_histogram": dict(k4_cycle_counts),
+        "universal_signed_k4_determinant_polynomials": {
+            str(k): v for k, v in classes.items()},
+        "tetrahedral_four_line_factor": "+1/81 for all six orders",
         "gauge_checks": 64 * 120,
         "six_line_final_absolute_factor": "1/125",
         "seidel_S_squared": "5*I_6",
