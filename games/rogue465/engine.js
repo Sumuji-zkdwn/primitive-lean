@@ -107,7 +107,7 @@
   }
   function newGame(seed=4271){
     catalog();const s={seed:seed>>>0,depth:1,vertex:0,layer:0,sign:[0,0,0,0,0,0],
-      rooms:{},hero:{x:4,y:4,hp:18,energy:5,insight:0,coins:0,kills:0},
+      rooms:{},hero:{x:4,y:4,hp:18,energy:5,insight:0,coins:0,kills:0,input:1,curve:0,heading:null},
       equipment:[],offer:null,offersMade:0,turn:0,status:"play",log:[],
       scans:0,topplings:0,roomsCleared:0,score:0};
     s.rooms[roomKey(s)]=generateRoom(s,0,0);current(s).entries++;
@@ -219,14 +219,24 @@
       if(!free(room,x,y)){append(s,"そこは壁だ。");return s;}
       const e=living(room).find(e=>e.x===x&&e.y===y);
       if(e){
-        const amount=b.attack+(e.scanned?2+b.focus+b.pierce:0);
-        e.hp=Math.max(0,e.hp-amount);append(s,"攻撃："+amount+" ダメージ");
+        const amount=Math.max(1,b.attack+hero.input*e.weakness+
+          (e.scanned?Math.max(0,2+e.weakness)+b.focus+b.pierce:0)+Math.floor(hero.curve/2));
+        e.hp=Math.max(0,e.hp-amount);hero.curve=0;
+        append(s,"入力"+(hero.input>0?"+":"−")+"：攻撃"+amount+" ダメージ");
         recordKill(s,e);avalanche(s,tile(x,y),2);
       }else{
-        hero.x=x;hero.y=y;
+        const heading=DIRS.findIndex(d=>d[0]===dx&&d[1]===dy);
+        if(hero.heading!==null && hero.heading!==heading)hero.curve=Math.min(3,hero.curve+1);
+        else hero.curve=Math.max(0,hero.curve-1);
+        hero.heading=heading;hero.x=x;hero.y=y;
         if(b.stride&&s.turn%4===0)hero.energy=Math.min(b.maxEnergy,hero.energy+1);
       }
       enemyPhase(s);return s;
+    }
+    if(action.type==="polarity"){
+      hero.input=hero.input===1?-1:1;
+      append(s,"入力の極性を"+(hero.input===1?"+1":"−1")+"へ切り替えた。");
+      return s;
     }
     if(action.type==="pulse"){
       if(hero.energy<2){append(s,"気力が足りない（必要2）。");return s;}
@@ -270,7 +280,7 @@
       const [a,z]=EDGES[i];if(a!==s.vertex&&z!==s.vertex)return state;
       s.vertex=s.vertex===a?z:a;s.layer^=s.sign[i];s.turn++;
       const k=roomKey(s);if(!s.rooms[k])s.rooms[k]=generateRoom(s,s.vertex,s.layer);
-      current(s).entries++;hero.x=4;hero.y=4;
+      current(s).entries++;hero.x=4;hero.y=4;hero.heading=null;hero.curve=0;
       append(s,"辺"+i+"から部屋"+s.vertex+"・層"+s.layer+"へ。");
       if(!hasEnemies(s)&&!current(s).claimed)offer(s);
       return s;
@@ -284,7 +294,8 @@
         append(s,"脱出成功。世界の裏側を踏破した。");return s;
       }
       s.depth++;s.vertex=0;s.layer=0;s.sign=[0,0,0,0,0,0];
-      hero.x=4;hero.y=4;hero.hp=Math.min(b.maxHp,hero.hp+6);hero.energy=b.maxEnergy;s.turn++;
+      hero.x=4;hero.y=4;hero.heading=null;hero.curve=0;
+      hero.hp=Math.min(b.maxHp,hero.hp+6);hero.energy=b.maxEnergy;s.turn++;
       const k=roomKey(s);if(!s.rooms[k])s.rooms[k]=generateRoom(s,0,0);
       current(s).entries++;
       if(!hasEnemies(s)&&!current(s).claimed)offer(s);
