@@ -168,3 +168,37 @@ This is an additional **local symbolic and regularity obstruction**,
 not a general no-go theorem for variable magnetic fields in KK theory,
 nor a global U(1)-bundle construction. The scripts check exact
 coordinate expressions but do not formally prove smooth extension in Lean.
+
+
+## Independent nonradial exact-vacuum witness
+
+A further check leaves spherical symmetry altogether. On a Cartesian
+patch with \(H=1+az>0\), \(A=ax\,dy\), we have
+\(\nabla\times A=\nabla H=(0,0,a)\), while \(\Delta H=0\).
+The 5D metric
+
+\[
+ds_5^2=-dt^2+H(dx^2+dy^2+dz^2)+H^{-1}(d\psi+A)^2
+\]
+
+is checked directly by tools/check_kk_cartesian_gh_linear.py.
+The script constructs the inverse metric, Christoffels, and **all 25
+Ricci tensor entries** and finds every entry identically zero for
+symbolic \(a\). It also computes an explicit 5D curvature component
+
+\[
+R^x{}_{zxz}=\frac{a^2}{2(1+az)^2},
+\]
+
+so the example is genuinely curved for \(a\ne0\), despite being
+Ricci-flat. It separately constructs the 4D Einstein-frame metric,
+\(A\), \(\Phi=(\sqrt3/2)\log H\), and verifies **all 16 Einstein
+equations, 4 weighted Maxwell equations, and the nonlinear scalar
+equation**. This removes radial/spherical symmetry from the
+constructive witness, without constituting a general GH proof.
+
+The solution is only on the open region \(H>0\), with no global
+circle-bundle compactification or stability statement. Because the
+metric-to-Ricci calculation is SymPy rather than Lean, the new
+example is an independent **symbolic coordinate check**, not a
+kernel-verified differential-geometric theorem.
