@@ -49,8 +49,9 @@ PARAM_OPS = frozenset(("append", "prepend", "replace_head",
 SLOT_COUNT = len(next(iter(gf.DOMAINS.values())))
 assert all(len(names) == SLOT_COUNT for names in gf.DOMAINS.values())
 
-# Programs are held out from policy discovery as an independent generalization
-# check. Each generated output itself is then checked on ALL data inputs.
+# A separate challenge set probes other source programs. Because selection
+# uses its outcomes, it is NOT a statistically blind holdout. Each generated
+# operator is nevertheless exhaustively checked on ALL finite data inputs.
 TRAIN = ((0,), (1, 2), (3, 0))
 HOLDOUT = ((2, 4), (5, 1), (4, 0, 3))
 
