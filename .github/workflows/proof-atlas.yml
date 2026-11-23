@@ -1,0 +1,87 @@
+name: Primitive Atlas - 465 theorem reference explorer
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/proof-atlas/**'
+      - '.github/workflows/proof-atlas.yml'
+  push:
+    branches: [main, 'chatgpt/proof-atlas-*']
+    paths:
+      - 'apps/proof-atlas/**'
+      - '.github/workflows/proof-atlas.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Verify original 465 proof sources and interaction
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify theorem-graph provenance
+        run: python3 -B games/primitive-foundry/check_dag.py
+      - name: Audit 465 displayed theorem statements and proof bodies
+        run: python3 -B apps/proof-atlas/audit.py
+      - name: Check standalone offline bundle integrity
+        run: python3 -B apps/proof-atlas/build_play.py --check
+      - name: Check JS syntax
+        run: |
+          node --check apps/proof-atlas/atlas.js
+          node --check apps/proof-atlas/ui.js
+          node --check apps/proof-atlas/atlas.test.cjs
+          node --check apps/proof-atlas/ui.test.cjs
+      - name: Run 465-node model and Android event tests
+        run: node --test apps/proof-atlas/atlas.test.cjs apps/proof-atlas/ui.test.cjs
+
+  visual:
+    name: Capture Android portrait, landscape and desktop proof map
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Japanese fonts
+        run: |
+          timeout 65s bash -c 'sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/tmp/atlas-fonts.log' || echo "CJK font installation skipped"
+          fc-cache -f
+      - name: Render with actual headless Chrome
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME" ]; then
+            echo "Chrome unavailable for screenshot QA."
+            exit 1
+          fi
+          mkdir -p visual-evidence
+          python3 -m http.server 8767 --bind 127.0.0.1 --directory apps/proof-atlas >/tmp/atlas-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          sleep 2
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1400 --window-size=412,915 \
+            --screenshot=visual-evidence/android-portrait.png "http://127.0.0.1:8767/play.html?n=230"
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1400 --window-size=914,411 \
+            --screenshot=visual-evidence/android-landscape.png "http://127.0.0.1:8767/play.html?n=102"
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1400 --window-size=1440,900 \
+            --screenshot=visual-evidence/desktop.png "http://127.0.0.1:8767/play.html?n=230"
+          for name in android-portrait android-landscape desktop; do
+            test -s "visual-evidence/$name.png"
+            test "$(wc -c < "visual-evidence/$name.png")" -gt 10000
+          done
+      - uses: actions/upload-artifact@v6
+        with:
+          name: primitive-atlas-visual-evidence
+          path: visual-evidence/
+          if-no-files-found: error
