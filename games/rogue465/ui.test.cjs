@@ -33,17 +33,20 @@ test("offline browser starts with three genuine 465 relic choices and can move, 
   const elements=new Map();
   const moveControls=["0,-1","-1,0","0,1","1,0"].map(k=>element("move"+k,{move:k}));
   function element(id,dataset={}){
-    const ev={},attrs={},set=new Set();
+    const ev={},attrs={},set=new Set(),cache={};
+    let lastMarkup=null;
     return {
       id,dataset,ev,attrs,textContent:"",innerHTML:"",disabled:false,
       classList:{add(k){set.add(k);},remove(k){set.delete(k);},contains(k){return set.has(k);}},
       addEventListener(name,fn){ev[name]=fn;},
       setAttribute(k,v){attrs[k]=v;},
       querySelectorAll(sel){
+        if(this.innerHTML!==lastMarkup){for(const k of Object.keys(cache))delete cache[k];lastMarkup=this.innerHTML;}
+        if(cache[sel])return cache[sel];
         const attr={"[data-x]":"x","[data-pick]":"pick","[data-slot]":"slot","[data-edge]":"edge"}[sel];
         if(!attr)return [];
         const matches=Array.from(this.innerHTML.matchAll(new RegExp('data-'+attr+'="([^"]+)"','g')));
-        return matches.map((m,i)=>{
+        return (cache[sel]=matches.map((m,i)=>{
           const item=element(id+":"+attr+i,{[attr]:m[1]});
           if(attr==="x"){
             const tail=this.innerHTML.slice(m.index);
@@ -51,7 +54,7 @@ test("offline browser starts with three genuine 465 relic choices and can move, 
             if(match)item.dataset.y=match[1];
           }
           return item;
-        });
+        }));
       }
     };
   }
