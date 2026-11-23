@@ -1,0 +1,87 @@
+"use strict";
+const {test}=require("node:test");
+const assert=require("node:assert/strict");
+const fs=require("node:fs");
+const path=require("node:path");
+const A=require("./atlas.js");
+const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
+const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
+const model=A.createModel(graph,proofs,narratives);
+
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 22 Japanese explanations",()=>{
+ assert.equal(model.nodes.length,465);
+ assert.equal(model.proofs.length,465);
+ assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
+ assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
+ assert.equal(Object.keys(model.argumentsById).length,22);
+ assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
+ assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
+ assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
+ assert.ok(model.proofs.every(p=>p.proof.length>0));
+});
+
+test("readable explanation is displayed only when authored and backed by source",()=>{
+ const identified=model.nameToId.get("LinearInputObservation.recover_coordinate");
+ assert.ok(Number.isInteger(identified));
+ assert.match(model.argumentsById[identified].summary,/X|座標/);
+ assert.match(model.proofs[identified].statement,/u ≠ v/);
+ assert.match(model.proofs[identified].proof,/ring/);
+ const random=model.nodes.find(n=>model.argumentsById[n.id]===undefined);
+ assert.ok(random);
+ assert.ok(model.proofs[random.id].statement);
+});
+
+test("the focused proof graph navigates actual parents and downstream consequences",()=>{
+ const id=model.nameToId.get("LinearInputObservation.two_inputs_iff_pair");
+ const p=model.nodes[id].parents;
+ assert.equal(p.length,3);
+ const view=A.focus(model,id);
+ assert.ok(view.has(id));
+ for(const parent of p){assert.ok(view.has(parent));assert.ok(view.get(parent).x<view.get(id).x);}
+ for(const next of model.children[id])assert.ok(view.has(next));
+ assert.ok(model.overview.size===465);
+ const refer=A.proofLineMatches(model,id,p[0]);
+ assert.ok(refer.some(x=>x.text.length>0));
+});
+
+test("every edge follows a strictly increasing topological depth",()=>{
+ for(const n of model.nodes)for(const id of n.parents)
+  assert.ok(model.nodes[id].depth<n.depth,"unverified cycle in proof edges");
+ assert.ok(A.descendants(model,225)>=0);
+});
+
+test("search finds Japanese chapter, theorem numbers and formal names",()=>{
+ assert.ok(A.search(model,"曲率",40).length>3);
+ assert.equal(A.search(model,"230")[0].id,229);
+ assert.equal(A.search(model,"two_inputs_iff_pair")[0].id,229);
+ assert.ok(A.search(model,"No.230").some(x=>x.id===229));
+ assert.deepEqual(A.search(model,""),[]);
+});
+
+test("user conceptual links cannot mutate the canonical kernel-accepted DAG",()=>{
+ const source=225,target=101,before=model.nodes[source].parents.slice();
+ let links=A.addLink(model,[],source,target,"観測と幾何を比較する仮説");
+ assert.equal(links.length,1);
+ assert.equal(links[0].note,"観測と幾何を比較する仮説");
+ links=A.addLink(model,links,source,target,"duplicate");
+ assert.equal(links.length,1);
+ assert.deepEqual(model.nodes[source].parents,before);
+ assert.ok(!model.nodes[source].parents.includes(target));
+ assert.throws(()=>A.addLink(model,links,source,source));
+ const sanitized=A.sanitizeLinks(model,[...links,{from:-2,to:5,note:"invalid"},links[0]]);
+ assert.equal(sanitized.length,1);
+});
+
+test("all extracted proof fragments are in ten original source batches",()=>{
+ const batches=["elastica-0","elastica-1","elastica-2","elastica-3",
+   "linearinput-0","linearinput-1","linearinput-2","linearinput-3","linearinput-4","linearinput-5"];
+ const byId=new Map();
+ for(const batch of batches){
+  const data=load("data/"+batch+".json");
+  for(const record of data.records){
+   assert.ok(!byId.has(record.id));byId.set(record.id,record);
+  }
+ }
+ assert.equal(byId.size,465);
+ for(const p of model.proofs)assert.deepEqual(p,byId.get(p.id));
+});
