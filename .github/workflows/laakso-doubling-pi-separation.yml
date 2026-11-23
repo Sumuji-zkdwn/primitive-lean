@@ -18,6 +18,7 @@ on:
       - 'docs/research/LaaksoFiniteGateWalk.lean'
       - 'docs/research/LaaksoNestedGateCompactness.lean'
       - 'docs/research/LaaksoGateConstraint.lean'
+      - 'docs/research/LaaksoGateCost.lean'
       - '.github/workflows/laakso-doubling-pi-separation.yml'
   workflow_dispatch:
 
@@ -64,3 +65,4 @@ jobs:
           lake env lean ../../docs/research/LaaksoFiniteGateWalk.lean
           lake env lean ../../docs/research/LaaksoNestedGateCompactness.lean
           lake env lean ../../docs/research/LaaksoGateConstraint.lean
+          lake env lean ../../docs/research/LaaksoGateCost.lean
