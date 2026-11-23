@@ -422,6 +422,120 @@ theorem exact_right_bit_midpoint_example :
       exact le_refl _)
   convert h using 1 <;> norm_num
 
+
+/-! ### A constructive sweep for an arbitrarily long list of gate flips
+
+Unlike the previous one-bit and two-bit examples, no cardinality bound
+is imposed on the event list. The explicit prerequisite is that its
+gate heights are ordered from left to right. Producing such a list
+from an arbitrary finite admissible bit-difference set is separate. -/
+
+def flipEvents (b : ι → Bool) : List (ι × ℝ) → (ι → Bool)
+  | [] => b
+  | (k, _) :: tail => flipEvents (flipBit b k) tail
+
+/-- A list of allowed gate events in nondecreasing height order,
+starting at s, staying below right endpoint u. -/
+inductive AscendingEvents (G : ι → ℝ → Prop) (u : ℝ) :
+    ℝ → List (ι × ℝ) → Prop where
+  | nil (s : ℝ) (hs : s ≤ u) :
+      AscendingEvents G u s []
+  | cons (s w : ℝ) (k : ι) (rest : List (ι × ℝ))
+      (hs : s ≤ w) (hk : G k w)
+      (htail : AscendingEvents G u w rest) :
+      AscendingEvents G u s ((k,w)::rest)
+
+/-- Arbitrarily many *ordered* free gate events can be realized
+by a single horizontal traversal. Its cost depends only on endpoints,
+not the number of flipped labels. -/
+theorem ascending_events_route
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ) (hF : Monotone F)
+    (u : ℝ) {s : ℝ} {events : List (ι × ℝ)}
+    (hordered : AscendingEvents G u s events)
+    (bits : ι → Bool) :
+    WeightedWalk G F (s,bits) (u,flipEvents bits events) (F u - F s) := by
+  induction hordered generalizing bits with
+  | nil s hs =>
+      have hpath : WeightedWalk G F (s,bits) (u,bits)
+          (|F s - F u| + 0) :=
+        WeightedWalk.horiz s u bits (u,bits) 0 (WeightedWalk.stop (u,bits))
+      have hval : |F s - F u| + 0 = F u - F s := by
+        rw [abs_of_nonpos (sub_nonpos.mpr (hF hs))]
+        ring
+      change WeightedWalk G F (s,bits) (u,flipEvents bits []) (F u - F s)
+      simpa only [flipEvents, hval] using hpath
+  | cons s w k rest hs hk htail ih =>
+      have htailwalk := ih (bits := flipBit bits k)
+      have hgate : WeightedWalk G F (w,bits)
+          (u,flipEvents (flipBit bits k) rest) (F u - F w) :=
+        WeightedWalk.gate w bits k _ _ hk htailwalk
+      have hpath : WeightedWalk G F (s,bits)
+          (u,flipEvents bits ((k,w)::rest))
+          (|F s - F w| + (F u - F w)) :=
+        WeightedWalk.horiz s w bits _ _ hgate
+      have hval : |F s - F w| + (F u - F w) = F u - F s := by
+        rw [abs_of_nonpos (sub_nonpos.mpr (hF hs))]
+        ring
+      rw [← hval]
+      exact hpath
+
+/-- Concatenating two legal costed walks adds their exact costs. -/
+theorem weighted_walk_append
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    {x y z : State ι} {c d : ℝ}
+    (hxy : WeightedWalk G F x y c)
+    (hyz : WeightedWalk G F y z d) :
+    WeightedWalk G F x z (c + d) := by
+  induction hxy with
+  | stop x =>
+      simpa only [zero_add] using hyz
+  | horiz s t bits z c tail ih =>
+      have h := WeightedWalk.horiz s t bits _ _ ih
+      simpa only [add_assoc] using h
+  | gate s bits k z c hk tail ih =>
+      exact WeightedWalk.gate s bits k _ _ hk ih
+
+/-- For s ≤ t, the full left-right sweep of ANY finite number of
+sorted gate events achieves the exact interval normal-form cost.
+This is the constructive half of the arbitrary-bit path formula. -/
+theorem ascending_sweep_upper
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ) (hF : Monotone F)
+    (l s t u : ℝ) (hl : l ≤ s) (hst : s ≤ t) (hu : t ≤ u)
+    (bits : ι → Bool) (events : List (ι × ℝ))
+    (hordered : AscendingEvents G u l events) :
+    WeightedWalk G F (s,bits) (t,flipEvents bits events)
+      (2*(F u - F l) - |F s - F t|) := by
+  let b2 := flipEvents bits events
+  have hroute : WeightedWalk G F (l,bits) (u,b2) (F u - F l) := by
+    exact ascending_events_route G F hF u hordered bits
+  have hlast : WeightedWalk G F (u,b2) (t,b2) (|F u - F t|) := by
+    simpa only [add_zero] using
+      (WeightedWalk.horiz u t b2 (t,b2) 0 (WeightedWalk.stop (t,b2)))
+  have hmiddle : WeightedWalk G F (l,bits) (t,b2)
+      ((F u - F l) + |F u - F t|) :=
+    weighted_walk_append G F hroute hlast
+  have hstart : WeightedWalk G F (s,bits) (t,b2)
+      (|F s - F l| + ((F u - F l) + |F u - F t|)) :=
+    WeightedWalk.horiz s l bits (t,b2) _ hmiddle
+  have hval : |F s - F l| + ((F u - F l) + |F u - F t|) =
+      2*(F u - F l) - |F s - F t| := by
+    have hls := hF hl
+    have hst := hF hst
+    have htu := hF hu
+    rw [abs_of_nonneg (sub_nonneg.mpr hls),
+        abs_of_nonneg (sub_nonneg.mpr htu),
+        abs_of_nonpos (sub_nonpos.mpr hst)]
+    ring
+  change WeightedWalk G F (s,bits) (t,b2)
+    (2*(F u - F l) - |F s - F t|)
+  rw [← hval]
+  exact hstart
+
+#print axioms ascending_events_route
+#print axioms weighted_walk_append
+#print axioms ascending_sweep_upper
+
+
 #print axioms exact_left_bit_midpoint_example
 #print axioms exact_right_bit_midpoint_example
 #print axioms exact_two_bit_midpoint_example
