@@ -66,7 +66,7 @@ theorem transition_continuous : Continuous transition := by
   have hS : Continuous (fun b : OverlapBase =>
       transitionS (b.1.1 1) (northDen b) (southDen b)) := by
     unfold transitionS
-    exact ((continuous_const.mul (baseCoord_cont 1)).neg).div hden hnonzero
+    exact (continuous_const.mul (baseCoord_cont 1)).div hden hnonzero
   have hcoord : Continuous (fun b : OverlapBase => (transition b).1) := by
     apply continuous_pi
     intro i
