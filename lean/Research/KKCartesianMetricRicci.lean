@@ -81,9 +81,9 @@ theorem gamma_dz_agree (a x z : ℝ) (hh : 1+a*z ≠ 0)
   have ht := E.hasDerivAt_z a x z (gammaE a i j k)
     (gamma_table_good a x z hh i j k)
   have hc : ContinuousAt (fun w : ℝ => 1+a*w) z := by fun_prop
-  have hn : ∀ᶠ w in 𝓝 z, 1+a*w ≠ 0 := hc.eventually_ne hh
+  have hn : ∀ᶠ w in Filter.nhds z, 1+a*w ≠ 0 := hc.eventually_ne hh
   have heq :
-      (fun w : ℝ => (gammaFromMetricE a i j k).eval a x w) =ᶠ[𝓝 z]
+      (fun w : ℝ => (gammaFromMetricE a i j k).eval a x w) =ᶠ[Filter.nhds z]
       (fun w : ℝ => (gammaE a i j k).eval a x w) := by
     filter_upwards [hn] with w hw
     exact all_125_gamma_entries_agree a x w hw i j k
