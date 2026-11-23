@@ -18,8 +18,8 @@ on:
       - '.github/workflows/meta-forge.yml'
       - 'tools/autonomy/meta_forge.py'
   schedule:
-    # Short trial: 10-minute cadence offset from Generic Forge, November 23 UTC.
-    - cron: '2,12,22,32,42,52 8-12 23 11 *'
+    # Unattended half-hourly, offset 10 minutes after Generic Forge.
+    - cron: '17,47 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -142,7 +142,7 @@ jobs:
           slot="$(python - <<'PY'
           from datetime import datetime, timezone
           now = datetime.now(timezone.utc)
-          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 10 * 10:02d}Z")
+          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 30 * 30:02d}Z")
           PY
           )"
           python -B -m tools.autonomy.meta_forge prepare \

@@ -15,8 +15,8 @@ on:
       - '.github/workflows/generic-forge.yml'
       - 'tools/autonomy/generic_forge.py'
   schedule:
-    # Temporary 10-minute experiment, Nov 23 UTC 08:00–12:50 only.
-    - cron: '*/10 8-12 23 11 *'
+    # Unattended half-hourly UTC cadence; GitHub may delay/skip scheduled runs.
+    - cron: '7,37 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -135,7 +135,7 @@ jobs:
           slot="$(python - <<'PY'
           from datetime import datetime, timezone
           now = datetime.now(timezone.utc)
-          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 10 * 10:02d}Z")
+          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 30 * 30:02d}Z")
           PY
           )"
           python -B -m tools.autonomy.generic_forge prepare \

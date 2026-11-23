@@ -92,7 +92,7 @@ remains fixed and no self-modifying executable source is accepted.
 - On an untrusted PR: read-only Python regression, exact-head candidate
   generation, full finite verification, ephemeral receipt transition,
   and **invocation** on an unseen input operator program.
-- On a trusted main push or daily schedule: propose one rule from
+- On a trusted main push or 30-minute UTC schedule: propose one rule from
   already verified history.
 - In a **separate write-enabled job**: use main's pinned controller,
   regenerate and byte-compare the candidate, rerun both interpreter
@@ -102,16 +102,19 @@ remains fixed and no self-modifying executable source is accepted.
   rewrite the evaluator, change GitHub Actions, alter main, or merge PRs.
 - No silently skipped failed verification or fabricated research result.
 
-The cron is 11:07 UTC / **20:07 JST**, after Generic Forge's nominal
-10:19 UTC / 19:19 JST. GitHub schedules can run late or be missed.
+The ongoing cron is **:17 and :47 UTC each hour**, nominally ten
+minutes after Generic Forge's :07/:37 schedule. Both engines round the
+current UTC clock to a 30-minute slot before proposing, preserving
+one verified receipt per slot. GitHub may delay or drop scheduled runs.
 Each job has an 18-minute time limit; at most **88 rule proposals**
 are considered per cycle, up to 64 verified receipts are retained, and
-meta-rule length is at most four edit steps. These are safety/resource
-ceilings, not fixed candidate lists.
+meta-rule length is at most four edit steps. After 64 verified receipts,
+new cycles stop adding records until a separately reviewed retention
+strategy exists. These are safety/resource ceilings, not fixed candidates.
 
-For PR #234 still under review, this change is **stacked** onto that
-branch. It is not yet deployed and must not be considered live before
-Generic Forge and this PR are merged into main.
+The half-hour schedule is active only after its workflow change is merged
+to the default branch. It makes no LLM/API calls and never runs data-branch
+content as executable code.
 
 ## Reproduce and use a verified rule
 

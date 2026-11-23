@@ -144,7 +144,7 @@ class GenericForgeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             forge.reference_primitive("grid3", "undefined", 0)
 
-    def test_short_trial_slots_preserve_old_daily_history_and_bound_runs(self):
+    def test_continuous_slots_preserve_old_daily_history_and_bound_runs(self):
         from unittest.mock import patch
         original, _ = self.run_cycle("2026-11-23", 1)
         self.assertEqual(original["last_utc_day"], "2026-11-23")
@@ -154,12 +154,11 @@ class GenericForgeTests(unittest.TestCase):
         same_slot = forge.plan(next_state, "2026-11-23T08:00Z", HEAD)
         self.assertFalse(same_slot["candidate"])
         self.assertEqual(same_slot["reason"], "ALREADY_CERTIFIED_TODAY")
-        with patch.object(forge, "TRIAL_RECEIPT_CAP", 2):
-            blocked = forge.plan(next_state, "2026-11-23T08:10Z", HEAD)
-            self.assertEqual(blocked["reason"], "TRIAL_CAP_REACHED")
-        self.assertEqual(
-            forge.plan(next_state, "2026-11-24T08:00Z", HEAD)["reason"],
-            "TRIAL_WINDOW_CLOSED")
+        with patch.object(forge, "MAX_RECORDS", 2):
+            blocked = forge.plan(next_state, "2026-11-23T08:30Z", HEAD)
+            self.assertEqual(blocked["reason"], "SAFETY_BUDGET_REACHED")
+        # A new UTC half-hour slot is allowed after the old trial period.
+        self.assertTrue(forge.plan(next_state, "2026-11-24T08:00Z", HEAD)["candidate"])
         for invalid in ("2026-11-23T08:05Z", "2026-11-23T25:00Z",
                         "2026-11-23T08:00+09:00"):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
