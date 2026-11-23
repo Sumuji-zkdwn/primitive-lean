@@ -72,6 +72,14 @@ class SiphonDistributionRegularity(unittest.TestCase):
             self.assertNotEqual(oz[4],ow[4])
             self.assertGreater(oz[4]-ow[4],0)
 
+    def test_single_word_finite_grid_separation_does_not_prove_continuum_injectivity(self):
+        # Even one scalar reading can separate a chosen finite grid.
+        # Invariance of domain rules out a global continuous R^2 -> R injection.
+        for size,den in ((3,1),(6,2)):
+            states=list(product((Fraction(k,den) for k in range(-size,size+1)),repeat=2))
+            squared=[run_word(z,('E','L','E'))[0]**2 for z in states]
+            self.assertEqual(len(set(squared)),len(states))
+
     def test_fourth_order_bound_for_short_words_near_zero(self):
         words=[tuple(w) for k in range(5) for w in product(('E','L'),repeat=k)]
         for word in words:
