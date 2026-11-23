@@ -73,7 +73,7 @@ theorem rankOne_generic_curvature (P : CommutingPartials I R)
       (fun k l (_ _ : Fin 1) => P.d k (Γ l))
       i j 0 0 =
       P.d i (Γ j) - P.d j (Γ i) := by
-  simp [FiniteConnectionCurvature.curvature, Fin.sum_univ_succ]
+  simp [FiniteConnectionCurvature.curvature]
   ring
 
 /-- Reusable operator-curvature bridge, with no manually supplied

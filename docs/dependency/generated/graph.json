@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "3babb4a134974eed8b0d0ce92e203933436b6e2d",
+  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1673,99 +1673,6 @@
       "sha256": "11de11b81dd0e7adc3b28cda2ca2375c5142fa8d3c9ac7308b33434e25fc7d07"
     },
     {
-      "id": "main:lean/Research/FiniteConnectionCommutator.lean",
-      "scope": "main",
-      "path": "lean/Research/FiniteConnectionCommutator.lean",
-      "group": "Other",
-      "namespace": "FiniteConnectionCommutator",
-      "declarations": [
-        "derivativeVec",
-        "derivativeMatrix",
-        "derivativeVec_add",
-        "derivativeVec_commute",
-        "derivativeVec_mulVec",
-        "covariant",
-        "matrixCurvature",
-        "covariant_commutator",
-        "matrix_curvature_eq_generic",
-        "covariant_commutator_eq_curvature"
-      ],
-      "imports": [
-        "Mathlib.Tactic",
-        "Research.FiniteConnectionDerivation"
-      ],
-      "sha256": "3c4c182056a80de26cc9cf699c972fd47dd8a6b93c8244344f53f1079db4eb76"
-    },
-    {
-      "id": "main:lean/Research/FiniteConnectionCurvature.lean",
-      "scope": "main",
-      "path": "lean/Research/FiniteConnectionCurvature.lean",
-      "group": "Other",
-      "namespace": "FiniteConnectionCurvature",
-      "declarations": [
-        "Connection",
-        "FirstJet",
-        "curvature",
-        "curvature_skew",
-        "curvature_same_direction",
-        "curvature_zero_connection",
-        "curvature_zero_of_symmetric_jet",
-        "connectionMatrix",
-        "curvature_constant_eq_commutator",
-        "bracket",
-        "bracket_skew",
-        "bracket_jacobi",
-        "ricci",
-        "ricci_zero_of_flat",
-        "exampleConnection",
-        "example_curvature_nonzero"
-      ],
-      "imports": [
-        "Mathlib.Tactic",
-        "Mathlib.LinearAlgebra.Matrix.Notation"
-      ],
-      "sha256": "b74b77810d3f1a8580269d9f2f41902f2db960f09ed0757df6d54758335001d3"
-    },
-    {
-      "id": "main:lean/Research/FiniteConnectionDerivation.lean",
-      "scope": "main",
-      "path": "lean/Research/FiniteConnectionDerivation.lean",
-      "group": "Other",
-      "namespace": "FiniteConnectionDerivation",
-      "declarations": [
-        "CommutingPartials",
-        "rankOneCovariant",
-        "rankOne_leibniz",
-        "rankOne_commutator",
-        "rankOne_generic_curvature",
-        "rankOne_commutator_eq_curvature"
-      ],
-      "imports": [
-        "Mathlib.Tactic",
-        "Research.FiniteConnectionCurvature"
-      ],
-      "sha256": "d2df3fb161285273edba243566b2e2547171f77090c02923c6480e4892928ed0"
-    },
-    {
-      "id": "main:lean/Research/FiniteConnectionWitness.lean",
-      "scope": "main",
-      "path": "lean/Research/FiniteConnectionWitness.lean",
-      "group": "Other",
-      "namespace": "FiniteConnectionWitness",
-      "declarations": [
-        "metricAt1",
-        "warpConnection",
-        "warpFirstJet",
-        "warped_ricci_eq_negative_metric",
-        "warped_riemann_nonzero"
-      ],
-      "imports": [
-        "Mathlib.Tactic",
-        "Research.FiniteConnectionCurvature"
-      ],
-      "sha256": "c527ff174c508e89e5a04078e9f3e608129ed8d0ee897dbf3325c87b54ae2283"
-    },
-    {
       "id": "main:lean/Research/FiniteMarkovTransport.lean",
       "scope": "main",
       "path": "lean/Research/FiniteMarkovTransport.lean",
@@ -1965,6 +1872,32 @@
         "OrbitTrace"
       ],
       "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
+    },
+    {
+      "id": "main:lean/Research/ProjectionSignHolonomy.lean",
+      "scope": "main",
+      "path": "lean/Research/ProjectionSignHolonomy.lean",
+      "group": "Other",
+      "namespace": "ProjectionSignHolonomy",
+      "declarations": [
+        "cycle3",
+        "cycle4",
+        "switch",
+        "triangle_reverse",
+        "cycle4_switch_invariant",
+        "three_four_cycles_product",
+        "sign6",
+        "abcda_negative",
+        "acbda_positive",
+        "abdca_negative",
+        "acdba_negative",
+        "adbca_positive",
+        "adcba_negative"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "20c45141c176d639d973786dea08f583133c19481bcb65ed1f9e5b060af50417"
     },
     {
       "id": "main:lean/Research/SignedCycleCounterexample.lean",
@@ -15892,38 +15825,6 @@
       ]
     },
     {
-      "from": "main:lean/Research/FiniteConnectionCommutator.lean",
-      "to": "main:lean/Research/FiniteConnectionDerivation.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "Research.FiniteConnectionDerivation"
-      ]
-    },
-    {
-      "from": "main:lean/Research/FiniteConnectionCommutator.lean",
-      "to": "main:lean/Research/FiniteConnectionDerivation.lean",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "CommutingPartials"
-      ]
-    },
-    {
-      "from": "main:lean/Research/FiniteConnectionDerivation.lean",
-      "to": "main:lean/Research/FiniteConnectionCurvature.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "Research.FiniteConnectionCurvature"
-      ]
-    },
-    {
-      "from": "main:lean/Research/FiniteConnectionWitness.lean",
-      "to": "main:lean/Research/FiniteConnectionCurvature.lean",
-      "kind": "exact_import",
-      "symbols": [
-        "Research.FiniteConnectionCurvature"
-      ]
-    },
-    {
       "from": "main:lean/Research/FiniteMarkovTransport.lean",
       "to": "main:lean/Research/OkanoharaTransport.lean",
       "kind": "exact_import",
@@ -27863,28 +27764,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "3babb4a134974eed8b0d0ce92e203933436b6e2d",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "3babb4a134974eed8b0d0ce92e203933436b6e2d",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "3babb4a134974eed8b0d0ce92e203933436b6e2d",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "3babb4a134974eed8b0d0ce92e203933436b6e2d",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
