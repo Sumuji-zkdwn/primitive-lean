@@ -7,6 +7,7 @@ on:
       - 'lean/Research/KKCartesianDerivative.lean'
       - 'lean/Research/KKCartesianGammaTable.lean'
       - 'lean/Research/KKCartesianSecondJet.lean'
+      - 'lean/Research/KKCartesianMetricRicci.lean'
       - 'lean/Research/KKCartesianRicci.lean'
       - 'lean/Research/KKCartesianMetricConnection.lean'
       - 'lean/Research/KKCartesianChartPartials.lean'
@@ -203,6 +204,39 @@ jobs:
           assert "does not depend on any axioms" in log or "depends on axioms: [propext, Classical.choice, Quot.sound]" in log,log
           assert 'sorryAx' not in log
           PY
+      - name: Lean full metric-to-Ricci analytic bridge
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianMetricRicci.olean Research/KKCartesianMetricRicci.lean 2>&1 | tee ../kk-cartesian-fullricci-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-fullricci-lean.log; then exit 1; fi
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKCartesianMetricRicci.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=9,names
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          Path('KKCartesianMetricRicciAudit.lean').write_text(
+             'import Research.KKCartesianMetricRicci\n'
+             + ''.join('#print axioms KKCartesianMetricRicci.'+n+'\n' for n in names))
+          Path('../kk-cartesian-fullricci-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCartesianMetricRicciAudit.lean 2>&1 | tee ../kk-cartesian-fullricci-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-fullricci-axioms.log').read_text()
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          n=int(Path('../kk-cartesian-fullricci-count.txt').read_text())
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
+          print('PASS: kernel-verified analytic metric-to-Ricci bridge',n)
+          PY
       - name: Independently differentiate all first metric jets and connection
         shell: bash
         run: |
@@ -214,7 +248,7 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD > kk-cartesian-jet-checkout.txt
-          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean lean/Research/KKCartesianGammaTable.lean lean/Research/KKCartesianSecondJet.lean lean/Research/KKCartesianRicci.lean lean/Research/KKCartesianMetricConnection.lean lean/Research/KKCartesianChartPartials.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
+          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean lean/Research/KKCartesianGammaTable.lean lean/Research/KKCartesianSecondJet.lean lean/Research/KKCartesianRicci.lean lean/Research/KKCartesianMetricConnection.lean lean/Research/KKCartesianMetricRicci.lean lean/Research/KKCartesianChartPartials.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -236,6 +270,9 @@ jobs:
             kk-cartesian-connection-lean.log
             kk-cartesian-connection-axioms.log
             kk-cartesian-jet-count.txt
+            kk-cartesian-fullricci-lean.log
+            kk-cartesian-fullricci-count.txt
+            kk-cartesian-fullricci-axioms.log
             kk-cartesian-jet-sympy.log
             kk-cartesian-jet-checkout.txt
             kk-cartesian-jet-sha256.txt
