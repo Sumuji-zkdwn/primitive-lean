@@ -25,15 +25,15 @@
  }
  const tools={
   logistics:[
-   ["pan","調べる","⌖"],["belt","ベルト","»"],["miner","採掘機","◉"],
-   ["junction","分配器","⑂","composition"],["rotate","回転","↻"],["erase","撤去","×"]
+   ["pan","調べる","◯"],["belt","ベルト","»"],["miner","採掘機","◉"],
+   ["junction","分配器","Y","composition"],["rotate","回転","↻"],["erase","撤去","×"]
   ],
   production:[
    ["ironFurnace","鉄の炉","▤"],["copperFurnace","銅の炉","▤"],
-   ["press","プレス","⌑"],["winder","巻線機","◎"],
-   ["assembler","組立機","▣"],["lab","研究所","⌬"]
+   ["press","プレス","▰"],["winder","巻線機","◎"],
+   ["assembler","組立機","▣"],["lab","研究所","⚙"]
   ],
-  utility:[["generator","発電機","◈"],["pan","調べる","⌖"],["rotate","回転","↻"],["erase","撤去","×"]]
+  utility:[["generator","発電機","◈"],["pan","調べる","◯"],["rotate","回転","↻"],["erase","撤去","×"]]
  };
  const canvas=$("factory-canvas"),viewport=$("viewport"),ctx=canvas.getContext("2d");
  const proofCanvas=$("proof-graph"),proofCtx=proofCanvas?.getContext?.("2d")||null;
@@ -64,7 +64,7 @@
  if(!Array.isArray(world.proofs))world.proofs=[];
  if(!Array.isArray(world.proofNames))world.proofNames=[];
  if(world.status==="paused")world.status="playing";
- const tipBase="タップで配置・調査。ベルトはドラッグで敷設。地図を動かすには「調べる」を選びドラッグ。";
+ const tipBase="タップして配置。ベルトはなぞって敷設、地図はドラッグ、2本指で拡大・縮小できます。";
  function announce(msg){
   $("status").textContent=msg;
  }
@@ -270,7 +270,7 @@
   tool=next;
   const def=Object.values(tools).flat().find(t=>t[0]===next);
   $("selected-tool").textContent=def?.[1]||"調べる";
-  $("tip").textContent=next==="pan"?(F.pendingRepairs(world).length?"光る欠損セルをタップして搬送路を補修。ドラッグで地図を移動。":"建物をタップして調査。ドラッグで地図を動かします。"):
+  $("tip").textContent=next==="pan"?(F.pendingRepairs(world).length?"光る欠損セルをタップして搬送路を補修。ドラッグで地図を移動。":"タップで調査・断線修理、ドラッグで移動。2本指で地図を拡大できます。"):
     next==="belt"?"画面をなぞるとベルトを連続敷設。向きも自動でつながります。":
     next==="rotate"?"向きを変えたい建物をタップしてください。":
     next==="erase"?"撤去したい装置をタップしてください。":
