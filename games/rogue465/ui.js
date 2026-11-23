@@ -225,9 +225,13 @@
   }
   async function init(){
     try{
-      const response=await fetch("./theorems.json",{cache:"force-cache"});
-      if(!response.ok)throw Error("theorem catalog HTTP "+response.status);
-      E.installCatalog(await response.json());
+      const embedded=$("rogue-catalog")?.textContent;
+      if(embedded)E.installCatalog(JSON.parse(embedded));
+      else{
+        const response=await fetch("./theorems.json",{cache:"force-cache"});
+        if(!response.ok)throw Error("theorem catalog HTTP "+response.status);
+        E.installCatalog(await response.json());
+      }
       setupControls();
       state=restore()||E.newGame(4271);render();
     }catch(err){
