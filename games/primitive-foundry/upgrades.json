@@ -2,7 +2,7 @@
   "schema": 1,
   "source": "docs/dependency/data/source_edges.json",
   "sourceKind": "aggregated kernel proof constant references by source file",
-  "warning": "These are gameplay engineering upgrades, not theorem nodes. Original file-level technology graph preserved separately from the complete 465-theorem DAG.",
+  "warning": "Engineering capabilities are designed game upgrades; they are distinct from the actual all-465 theorem dependency DAG in tech.json. Advanced upgrades require studying a specific real theorem, whose complete prerequisite proof DAG is stored in tech.json.",
   "nodes": [
     {
       "id": "geometry",
@@ -56,7 +56,8 @@
           "id": "variation",
           "proofReferences": 2
         }
-      ]
+      ],
+      "gateProof": "Elastica.energy_split_three"
     },
     {
       "id": "scaling",
@@ -74,7 +75,8 @@
           "id": "variation",
           "proofReferences": 4
         }
-      ]
+      ],
+      "gateProof": "Elastica.energy_scaling_quadratic"
     },
     {
       "id": "reconstruction",
@@ -92,7 +94,8 @@
           "id": "variation",
           "proofReferences": 1
         }
-      ]
+      ],
+      "gateProof": "Elastica.xCoord_eq_of_angle_eq"
     },
     {
       "id": "gradient",
@@ -110,7 +113,8 @@
           "id": "design",
           "proofReferences": 16
         }
-      ]
+      ],
+      "gateProof": "LinearInputGradient.deriv_E_x"
     },
     {
       "id": "gradientBound",
@@ -132,7 +136,8 @@
           "id": "gradient",
           "proofReferences": 8
         }
-      ]
+      ],
+      "gateProof": "LinearInputGradientBound.gradient_bound_of_initial"
     },
     {
       "id": "globalConsequences",
@@ -150,7 +155,8 @@
           "id": "gradientBound",
           "proofReferences": 3
         }
-      ]
+      ],
+      "gateProof": "LinearInputGlobalConsequences.exists_global_convergent_solution"
     }
   ]
 }
