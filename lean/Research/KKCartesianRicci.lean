@@ -23,11 +23,11 @@ noncomputable def ricciTerm (a : ℝ) (i j c : Fin 5) : E :=
 noncomputable def ricciE (a : ℝ) (i j : Fin 5) : E :=
   sum5 (ricciTerm a i j)
 
+set_option maxRecDepth 8192
+set_option maxHeartbeats 0
 /-- Full 25-entry Ricci cancellation from the symbolic connection
 table. Proving that this table equals the metric-derived Levi-Civita
 connection is still required for a metric-to-Ricci kernel theorem. -/
-set_option maxRecDepth 8192
-set_option maxHeartbeats 0
 theorem all_25_ricci_entries_zero (a x z : ℝ) (hh : 1+a*z ≠ 0)
     (i j : Fin 5) :
     (ricciE a i j).eval a x z = 0 := by
