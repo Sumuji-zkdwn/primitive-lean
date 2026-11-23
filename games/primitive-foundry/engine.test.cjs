@@ -11,7 +11,7 @@ const E=JSON.parse(fs.readFileSync(path.join(__dirname,"../../docs/dependency/da
 test("research tree is a selected exact subgraph of actual aggregated proof references",()=>{
  const ids=new Map(U.nodes.map(t=>[t.id,t]));
  assert.equal(U.nodes.length,10);
- for(const t of T.nodes){
+ for(const t of U.nodes){
   assert.ok(ids.has(t.id));assert.ok(t.label.length>=2);
   for(const p of t.prerequisites){
    const origin=E.find(x=>x.source===t.path&&x.target===ids.get(p.id).path);
@@ -208,18 +208,29 @@ test("a researched junction alternates output lanes without duplicating or losin
  assert.equal(w.tiles[F.idx(7,8)].building.item,"copperPlate");
 });
 
-test("research tech is a source-backed prerequisite structure, not a random equipment name",()=>{
- const t=id=>T.nodes.find(x=>x.id===id);
+test("engineering upgrades are gated by real studied proofs and resource cost",()=>{
+ const t=id=>U.nodes.find(x=>x.id===id);
+ const map=new Map(T.nodes.map(n=>[n.name,n]));
  const w=F.newWorld(21);
- w.science=25;
+ w.science=350;
+ const rootScience=w.science;
  assert.equal(F.unlock(w,t("globalConsequences")),false);
+ function prove(name){
+  const n=map.get(name);
+  assert.ok(n,"actual theorem absent "+name);
+  if(w.proofs.includes(n.id))return;
+  for(const p of n.parents)prove(T.nodes[p].name);
+  assert.equal(F.researchProof(w,n),true);
+ }
+ for(const id of ["gradient","gradientBound","globalConsequences"])prove(t(id).gateProof);
+ const beforeUpgrades=w.science;
+ assert.ok(beforeUpgrades<rootScience);
  assert.equal(F.unlock(w,t("gradient")),true);
  assert.equal(F.unlock(w,t("gradientBound")),true);
  assert.equal(F.unlock(w,t("globalConsequences")),true);
- assert.equal(w.science,25-3-6-8);
+ assert.equal(w.science,beforeUpgrades-3-6-8);
  assert.equal(w.unlocks.includes("globalConsequences"),true);
 });
-
 
 test("repair tutorial cannot passively produce science before the player fixes both gaps",()=>{
  const w=F.challengeBlueprint(F.newWorld(20261124));
