@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-22",
+  "last_utc_day": "2026-11-23",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -101,6 +101,83 @@
       "source_id": "reviewed:laakso",
       "status": "LEAN_VERIFIED_FINITE_PAIR_COMPARISON_ONLY",
       "upstream_sha256": "e6fab494ecfa497d65912e7611d6c1c0eec24626c0681b3f66bbf07e9d748c16",
+      "word": null
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "0b962a98c13fadc7c0a4ff849640d64792be7a25da8e8f2686c9c692e361fb94",
+      "day": "2026-11-23",
+      "head_sha": "f4ecec6baf794bce451e1cf189a2b112376e1b85",
+      "id": "rule_e2022afe2816a8bf",
+      "lean_sha256": "2e1aebd973185fbb22a25f83ee2c003cc9e38d9af61a8e7e34a72e79cbf2cb86",
+      "model": {
+        "name": "fd_11580994dd8118c9",
+        "observations": [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "pair": [
+          0,
+          4
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            3,
+            4
+          ]
+        ]
+      },
+      "model_fingerprint": "11580994dd8118c9cf848718e68bc313f31ba09abdd6a296d448b1f829f1ea25",
+      "objective": "PAIR_DISTINGUISHABILITY_FLIPPED",
+      "outcome": "EQUIVALENT",
+      "parent_rule": null,
+      "previous_sha256": "cda011855e6682f20a97a417a7f472c8626a64f0dacb4448a9b4a943c02ed3d3",
+      "program": [
+        "adjoin_absorbing_state"
+      ],
+      "request_sha256": "ef7f426f1e24485bbba793e8a7be376eae0b9a6ed424ed2bce3b877c59ccc505",
+      "reward": 12,
+      "root_fingerprint": "87aec4dd436bae39a79f35bbcf81343328e2bf9a270670087023638ed110cccd",
+      "root_kind": "DISTINGUISHABLE",
+      "root_lean_sha256": "e8e54fe1aa97cd3accfc33bafa43c3d5ea80bb3e465b5576586ae9fa25811d43",
+      "root_model": {
+        "name": "fd_87aec4dd436bae39",
+        "observations": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            3
+          ]
+        ]
+      },
+      "root_request_sha256": "423f29c10ff90631188f4c9aa36c1db46386366ee68cff2b49610a14b5ff1380",
+      "root_word": [
+        0,
+        0
+      ],
+      "source_chain_sha256": "f3c5a7d0168f7b8f8d5d497197dd363818e7d860acad1dc2ebff56750d2a7e51",
+      "source_id": "reviewed:observer",
+      "status": "LEAN_VERIFIED_FINITE_PAIR_COMPARISON_ONLY",
+      "upstream_sha256": "47ae82d3e5c100c569dece7a63510e20afdc5fd3824bf4f02ff5065139deeda0",
       "word": null
     }
   ],
