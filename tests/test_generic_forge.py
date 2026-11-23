@@ -70,6 +70,24 @@ class GenericForgeTests(unittest.TestCase):
         self.assertEqual(len(third["receipts"]), 3)
         self.assertEqual(forge.validate_state(third), third)
 
+    def test_certified_operator_is_a_usable_image_or_signal_tool(self):
+        state, _ = self.run_cycle("2026-11-24", 1)
+        row = state["receipts"][0]
+        output = forge.use_operator(state, row["id"], 1)
+        self.assertEqual(output["operator_id"], row["id"])
+        self.assertEqual(output["domain"], row["domain"])
+        self.assertEqual(output["verified_by"], forge.EVALUATOR)
+        self.assertEqual(output["output"],
+                         forge.apply_program(row["domain"], row["program"],
+                                             1, forge.independent_primitive))
+        if row["domain"] == "grid3":
+            self.assertEqual(len(output["output_view"]), 3)
+            self.assertTrue(all(len(line) == 3 for line in output["output_view"]))
+        with self.assertRaises(ValueError):
+            forge.use_operator(state, "gf_0000000000000000", 1)
+        with self.assertRaises(ValueError):
+            forge.use_operator(state, row["id"], 9999)
+
     def test_only_daily_verified_receipt_and_source_bound(self):
         state, _ = self.run_cycle("2026-11-24", 1)
         duplicate = forge.plan(state, "2026-11-24", HEAD)
