@@ -8,12 +8,12 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
 const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
 const model=A.createModel(graph,proofs,narratives);
 
-test("all 465 true theorem nodes, 629 direct references, 60 source files and 43 Japanese explanations",()=>{
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 100 Japanese explanations",()=>{
  assert.equal(model.nodes.length,465);
  assert.equal(model.proofs.length,465);
  assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
  assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
- assert.equal(Object.keys(model.argumentsById).length,43);
+ assert.equal(Object.keys(model.argumentsById).length,100);
  assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
  assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
  assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
@@ -123,4 +123,12 @@ test("research packet distinguishes user conjecture from exact source, deduplica
  assert.equal(JSON.stringify(graph),before);
  assert.equal(A.sanitizeResearch(model,{ids:model.nodes.map(x=>x.id),claim:"x".repeat(4000)}).ids.length,20);
  assert.equal(A.sanitizeResearch(model,{claim:"x".repeat(4000)}).claim.length,3000);
+});
+
+test("completed explanation chapters cover all geometry, reconstruction, scaling and energy coercivity records",()=>{
+ const blocks=[[0,16],[95,113],[138,146],[152,163],[214,251]];
+ for(const [a,b] of blocks)for(let id=a;id<=b;id++){
+  const n=model.nodes[id],e=model.argumentsById[id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
 });
