@@ -30,16 +30,20 @@ jobs:
         working-directory: experiments/mobius_430
         run: |
           lake env python - <<'PY'
-          import os, subprocess, tempfile
+          import os, subprocess, tempfile, shutil
           from pathlib import Path
 
           source = Path("../../experiments/sandpile_laakso/formalization").resolve()
           with tempfile.TemporaryDirectory(prefix="laakso-real-bridge-") as directory:
               env = {**os.environ, "LEAN_PATH": directory + os.pathsep + os.environ["LEAN_PATH"]}
+              for name in ("ObservedQuotient", "FiniteStepHorizontalBridge"):
+                  shutil.copyfile(source/f"{name}.lean", Path(directory)/f"{name}.lean")
               for cmd in [
-                  ["lean", "--trust=0", "-o", str(Path(directory)/"ObservedQuotient.olean"),
-                   str(source/"ObservedQuotient.lean")],
-                  ["lean", "--trust=0", str(source/"FiniteStepHorizontalBridge.lean")],
+                  ["lean", "--trust=0", f"--root={directory}", "-o",
+                   str(Path(directory)/"ObservedQuotient.olean"),
+                   str(Path(directory)/"ObservedQuotient.lean")],
+                  ["lean", "--trust=0", f"--root={directory}",
+                   str(Path(directory)/"FiniteStepHorizontalBridge.lean")],
               ]:
                   result = subprocess.run(cmd, env=env, text=True, capture_output=True)
                   print(result.stdout + result.stderr, flush=True)
