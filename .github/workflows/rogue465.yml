@@ -33,8 +33,9 @@ jobs:
           node --check games/rogue465/engine.js
           node --check games/rogue465/ui.js
           node --check games/rogue465/engine.test.cjs
+          node --check games/rogue465/ui.test.cjs
       - name: Audit the original 465-source catalog and replay game mechanics
-        run: node --test games/rogue465/engine.test.cjs
+        run: node --test games/rogue465/engine.test.cjs games/rogue465/ui.test.cjs
 
   lean:
     name: Typecheck roguelike law witnesses with trust zero
