@@ -100,11 +100,11 @@ theorem all_ricci_iff_two (r h dh ddh b s c : ℚ) :
     allRicciCertificate r h dh ddh b s c ↔
       twoRicciCertificate r h dh ddh b := by
   constructor
-  · intro h
-    exact h.1
-  · intro h
-    have hQ : total r h dh ddh b = 0 := h.2
-    refine ⟨h, ?_, ?_, ?_⟩
+  · intro hAll
+    exact hAll.1
+  · intro hTwo
+    have hQ : total r h dh ddh b = 0 := hTwo.2
+    refine ⟨hTwo, ?_, ?_, ?_⟩
     · simp [ricciThetaNumerator, hQ]
     · simp [ricciPhiNumerator, hQ]
     · simp [ricciPhiPsiNumerator, hQ]
@@ -158,15 +158,15 @@ theorem all_einstein_iff_two (r h dh ddh b : ℚ) :
     allEinsteinCertificate r h dh ddh b ↔
       twoEinsteinCertificate r h dh ddh b := by
   constructor
-  · intro h
-    exact h.1
-  · intro h
+  · intro hAll
+    exact hAll.1
+  · intro hTwo
     have hQ : total r h dh ddh b = 0 := by
       have hn : -(total r h dh ddh b) = 0 := by
-        simpa [emdTimeNumerator] using h.1
+        simpa [emdTimeNumerator] using hTwo.1
       exact neg_eq_zero.mp hn
-    exact ⟨h, by simp [emdAngularNumerator, hQ],
-              by simp [emdScalarNumerator, hQ]⟩
+    exact ⟨hTwo, by simp [emdAngularNumerator, hQ],
+                  by simp [emdScalarNumerator, hQ]⟩
 
 /-- Fully polynomial bridge; no differential geometry formalized here. -/
 theorem fiveD_iff_fourD_certificates (r h dh ddh b s c : ℚ)
