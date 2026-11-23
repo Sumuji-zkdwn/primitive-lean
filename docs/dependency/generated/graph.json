@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
+  "main_commit": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1777,6 +1777,33 @@
       "sha256": "f761ed16d28218ef53ed1c74d4d60cc2073354720f36fc7a46272b08b5525f09"
     },
     {
+      "id": "main:lean/Research/KKCartesianGammaTable.lean",
+      "scope": "main",
+      "path": "lean/Research/KKCartesianGammaTable.lean",
+      "group": "Other",
+      "namespace": "KKCartesianRicci",
+      "declarations": [
+        "ehInv",
+        "ehInv2",
+        "ehInv3",
+        "eu2",
+        "eh2",
+        "mulC",
+        "eadd",
+        "emul",
+        "eneg",
+        "gammaOrdered",
+        "gammaE",
+        "partialE",
+        "sum5"
+      ],
+      "imports": [
+        "Research.KKCartesianDerivative",
+        "Mathlib.Tactic"
+      ],
+      "sha256": "257a91ac44fefcd4d8b388f3ee96063a1447a950f69156d5830a64a54fd4923f"
+    },
+    {
       "id": "main:lean/Research/KKCartesianJet.lean",
       "scope": "main",
       "path": "lean/Research/KKCartesianJet.lean",
@@ -1829,11 +1856,11 @@
       ],
       "imports": [
         "Research.KKCartesianDerivative",
-        "Research.KKCartesianRicci",
+        "Research.KKCartesianGammaTable",
         "Mathlib.Tactic",
         "Mathlib.LinearAlgebra.Matrix.Notation"
       ],
-      "sha256": "76b66aa17ad76afa21f7200f0e555052129a60fc23cd2893acab658e796e395a"
+      "sha256": "db059330871c69e8c1712297412ecec5e1f9b4924a32d52432cd982aba37e2cf"
     },
     {
       "id": "main:lean/Research/KKCartesianRicci.lean",
@@ -1842,28 +1869,15 @@
       "group": "Other",
       "namespace": "KKCartesianRicci",
       "declarations": [
-        "ehInv",
-        "ehInv2",
-        "ehInv3",
-        "eu2",
-        "eh2",
-        "mulC",
-        "eadd",
-        "emul",
-        "eneg",
-        "gammaOrdered",
-        "gammaE",
-        "partialE",
-        "sum5",
         "ricciTerm",
         "ricciE",
         "all_25_ricci_entries_zero"
       ],
       "imports": [
-        "Research.KKCartesianDerivative",
+        "Research.KKCartesianGammaTable",
         "Mathlib.Tactic"
       ],
-      "sha256": "084805d3600f4d61e6cdef96aeb82c79dd5eefcf063a1cbf13b2e842968f5ba6"
+      "sha256": "108ff58099f30cd4cfa87ea93a87bfd8d17a09d063bbdf7bb6c4c348733670e5"
     },
     {
       "id": "main:lean/Research/KKRadialVacuumBridge.lean",
@@ -16032,6 +16046,14 @@
       ]
     },
     {
+      "from": "main:lean/Research/KKCartesianGammaTable.lean",
+      "to": "main:lean/Research/KKCartesianDerivative.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.KKCartesianDerivative"
+      ]
+    },
+    {
       "from": "main:lean/Research/KKCartesianMetricConnection.lean",
       "to": "main:lean/Research/KKCartesianDerivative.lean",
       "kind": "exact_import",
@@ -16049,15 +16071,15 @@
     },
     {
       "from": "main:lean/Research/KKCartesianMetricConnection.lean",
-      "to": "main:lean/Research/KKCartesianRicci.lean",
+      "to": "main:lean/Research/KKCartesianGammaTable.lean",
       "kind": "exact_import",
       "symbols": [
-        "Research.KKCartesianRicci"
+        "Research.KKCartesianGammaTable"
       ]
     },
     {
       "from": "main:lean/Research/KKCartesianMetricConnection.lean",
-      "to": "main:lean/Research/KKCartesianRicci.lean",
+      "to": "main:lean/Research/KKCartesianGammaTable.lean",
       "kind": "unique_identifier_candidate",
       "symbols": [
         "gammaOrdered"
@@ -16065,10 +16087,18 @@
     },
     {
       "from": "main:lean/Research/KKCartesianRicci.lean",
-      "to": "main:lean/Research/KKCartesianDerivative.lean",
+      "to": "main:lean/Research/KKCartesianGammaTable.lean",
       "kind": "exact_import",
       "symbols": [
-        "Research.KKCartesianDerivative"
+        "Research.KKCartesianGammaTable"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianRicci.lean",
+      "to": "main:lean/Research/KKCartesianGammaTable.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "gammaOrdered"
       ]
     },
     {
@@ -27989,28 +28019,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
+      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
+      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
+      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
+      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

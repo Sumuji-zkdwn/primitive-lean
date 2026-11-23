@@ -224,11 +224,13 @@ main:lean/Research/KKCartesianChartPartials.lean	main:lean/Research/KKCartesianD
 main:lean/Research/KKCartesianChartPartials.lean	main:lean/Research/KKCartesianDerivative.lean	unique_identifier_candidate	all_metric_x_derivatives,all_metric_z_derivatives
 main:lean/Research/KKCartesianDerivative.lean	main:lean/Research/KKCartesianJet.lean	exact_import	Research.KKCartesianJet
 main:lean/Research/KKCartesianDerivative.lean	main:lean/Research/KKCartesianJet.lean	unique_identifier_candidate	affine_H_hasDerivAt
+main:lean/Research/KKCartesianGammaTable.lean	main:lean/Research/KKCartesianDerivative.lean	exact_import	Research.KKCartesianDerivative
 main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianDerivative.lean	exact_import	Research.KKCartesianDerivative
 main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianDerivative.lean	unique_identifier_candidate	gaugeEntry
-main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianRicci.lean	exact_import	Research.KKCartesianRicci
-main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianRicci.lean	unique_identifier_candidate	gammaOrdered
-main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianDerivative.lean	exact_import	Research.KKCartesianDerivative
+main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianGammaTable.lean	exact_import	Research.KKCartesianGammaTable
+main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
+main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	exact_import	Research.KKCartesianGammaTable
+main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/Examples.lean	exact_import	Elastica.Examples
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/Examples.lean	unique_identifier_candidate	energy_affine
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/ExponentialWeight.lean	exact_import	Elastica.ExponentialWeight
