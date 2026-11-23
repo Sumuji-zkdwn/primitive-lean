@@ -99,6 +99,8 @@ jobs:
           test -s visual-evidence/mobile.png
           test -s visual-evidence/desktop.png
           test -s visual-evidence/research-mobile.png
+          # An empty dark screenshot is only a few kilobytes; reject it.
+          test "$(wc -c < visual-evidence/research-mobile.png)" -gt 10000
       - name: Preserve UI screenshots for review
         uses: actions/upload-artifact@v6
         with:
