@@ -60,27 +60,42 @@
   }
   function renderMap(){
     const room=E.current(state),hero=state.hero,spores=room.spores,last=new Set(room.lastFired);
+    const visible=new Set(E.visibleTiles(state,5));
+    const explored=new Set(room.explored||[]);
+    for(const idx of visible)explored.add(idx);
+    room.explored=[...explored].sort((a,b)=>a-b);
     const enemies=new Map(E.living(room).map(e=>[E.tile(e.x,e.y),e]));
     const html=[];
     for(let y=0;y<E.W;y++)for(let x=0;x<E.W;x++){
-      const idx=E.tile(x,y),wall=room.map[idx]===1,foe=enemies.get(idx);
+      const idx=E.tile(x,y),wall=room.map[idx]===1;
+      if(!explored.has(idx)){
+        html.push('<button type="button" class="cell unseen" disabled aria-label="未探索のマス"></button>');
+        continue;
+      }
+      const inSight=visible.has(idx),foe=inSight?enemies.get(idx):null;
       const isHero=hero.x===x&&hero.y===y;
       const classes=["cell"];
+      if(!inSight)classes.push("memory");
       if(wall)classes.push("wall");
       if(!wall&&spores&&spores[idx])classes.push("spore");
       if(last.has(idx))classes.push("fired");
       if(foe){classes.push("enemy");if(foe.windup)classes.push("windup");
         if(foe.scanned)classes.push("scanned");if(foe.kind==="warden")classes.push("boss");}
       if(isHero)classes.push("hero");
-      const body=wall?"":isHero?"◈":foe?icons[foe.kind]:"";
+      const glyph=wall?"":isHero?"◈":foe?icons[foe.kind]:"";
+      const art=isHero?'<span class="kenney-sprite hero-art" aria-hidden="true"></span>':
+        foe?'<span class="kenney-sprite monster-art" aria-hidden="true"></span>':"";
+      const body=glyph?'<span class="actor-glyph" aria-hidden="true">'+glyph+"</span>"+art:"";
       const health=foe?'<span class="foehp">'+foe.hp+"</span>":"";
       const weakness=foe&&foe.scanned?'<span class="foew">X'+(foe.weakness>=0?"+":"")+foe.weakness+"</span>":"";
-      const sand=wall?"":'<span class="grain">'+room.sand[idx]+"</span>";
+      const sand=!inSight||wall?"":'<span class="grain">'+room.sand[idx]+"</span>";
       const aria=wall?"壁":isHero?"自分":foe?"敵、生命"+foe.hp+"、"+(foe.windup?"次に攻撃":"移動中"):"空きマス";
       html.push('<button type="button" class="'+classes.join(" ")+'" data-x="'+x+'" data-y="'+y+
         '" aria-label="('+x+','+y+') '+aria+'" '+(wall?"disabled":"")+'>'+body+health+weakness+sand+"</button>");
     }
     $("board").innerHTML=html.join("");
+    // Persist visited-map memory; sprite loading never changes simulation state.
+    save();
     $("board").querySelectorAll("[data-x]").forEach(el=>el.addEventListener("click",()=>{
       if(ignoreTap){ignoreTap=false;return;}
       if(state.offer||state.status!=="play")return;
@@ -231,6 +246,14 @@
       // The synthetic click after a swipe is ignored once.
     });
   }
+  function preloadKenneySprites(){
+    // Cosmetic assets only; offline or blocked CDN never prevents play.
+    if(typeof Image!=="function"||!document.documentElement?.classList)return;
+    const root="https://cdn.jsdelivr.net/gh/giobi/sgravoquest-assets@b3cbf86470ebdb68a80d48678db764dcaff181ac/sprites/";
+    Promise.all(["hero.png","monster.png"].map(name=>new Promise((resolve,reject)=>{
+      const img=new Image();img.onload=resolve;img.onerror=reject;img.src=root+name;
+    }))).then(()=>document.documentElement.classList.add("kenney-art-ready")).catch(()=>{});
+  }
   async function init(){
     try{
       const embedded=$("rogue-catalog")?.textContent;
@@ -241,6 +264,7 @@
         E.installCatalog(await response.json());
       }
       setupControls();
+      preloadKenneySprites();
       state=restore()||E.newGame(4271);render();
     }catch(err){
       $("board").textContent="定理台帳を読み込めませんでした。再読み込みしてください。";

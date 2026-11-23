@@ -22,6 +22,10 @@ test("offline page is actually self-contained and includes all 465 theorem decla
   assert.match(play,/id="rogue-catalog"/);
   assert.equal(JSON.parse(readEmbedded("rogue-catalog")).cards.length,465);
   assert.ok(play.includes(engine),"embedded engine is older than engine.js");
+  assert.ok(play.includes("id=\"rogue-rot-vendor\""),"vendored roguelike toolkit must be bundled");
+  const legal=fs.readFileSync(path.join(directory,"vendor/rot.LICENSE.txt"),"utf8").trimEnd();
+  assert.ok(play.includes(legal),"standalone must carry full BSD redistribution notice");
+  assert.match(play,/Kenney Tiny Dungeon/);
   assert.ok(play.includes(ui),"embedded UI is older than ui.js");
   assert.equal((play.match(/<script src=/g)||[]).length,0);
   assert.equal((play.match(/<link[^>]*href="https?:/g)||[]).length,0);
@@ -80,10 +84,11 @@ test("offline browser starts with three genuine 465 relic choices and can move, 
     Math,console,Date,JSON,
   };
   sandbox.globalThis=sandbox;
-  const scripts=Array.from(play.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g))
-    .map(m=>m[1]).filter(s=>s.includes("use strict"));
-  assert.equal(scripts.length,2);
-  for(const script of scripts)vm.runInNewContext(script,sandbox,{timeout:4000});
+  const scripts=["rogue-rot-vendor","rogue-engine","rogue-ui"].map(readEmbedded);
+  assert.equal(scripts.length,3);
+  for(const script of scripts)vm.runInNewContext(script,sandbox,{timeout:5000});
+  assert.ok(sandbox.ROT?.Path?.AStar,"the offline page uses vendored rot.js");
+  assert.ok(sandbox.ROT?.FOV?.PreciseShadowcasting,"rot.js visibility is available");
   const S=sandbox.Rogue465;
   assert.equal(S.catalog().length,465);
   assert.equal(get("floor").textContent,"1 / 3");
