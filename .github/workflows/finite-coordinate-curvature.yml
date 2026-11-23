@@ -5,6 +5,7 @@ on:
     paths:
       - 'lean/Research/FiniteConnectionCurvature.lean'
       - 'lean/Research/FiniteConnectionWitness.lean'
+      - 'lean/Research/FiniteConnectionDerivation.lean'
       - 'tools/check_finite_connection_curvature.py'
       - 'docs/verification/2026-11-23-coordinate-curvature-core.md'
       - '.github/workflows/finite-coordinate-curvature.yml'
@@ -36,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/Research
-          for mod in FiniteConnectionCurvature FiniteConnectionWitness; do
+          for mod in FiniteConnectionCurvature FiniteConnectionWitness FiniteConnectionDerivation; do
             lake env lean --trust=0 \
               -o ".lake/build/lib/lean/Research/$mod.olean" \
               "Research/$mod.lean" 2>&1 | tee "../finite-curvature-$mod.log"
@@ -49,7 +50,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
-          modules = ("FiniteConnectionCurvature", "FiniteConnectionWitness")
+          modules = ("FiniteConnectionCurvature", "FiniteConnectionWitness", "FiniteConnectionDerivation")
           imports=[]; checks=[]
           for m in modules:
             raw=Path("Research/"+m+".lean").read_text()
@@ -93,6 +94,7 @@ jobs:
           git rev-parse HEAD > finite-curvature-checkout.txt
           sha256sum lean/Research/FiniteConnectionCurvature.lean \
             lean/Research/FiniteConnectionWitness.lean \
+            lean/Research/FiniteConnectionDerivation.lean \
             tools/check_finite_connection_curvature.py > finite-curvature-sources.sha256
       - name: Upload all evidence
         if: always()
