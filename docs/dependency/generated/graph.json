@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
+  "main_commit": "4412b92ba656a1d82dee872093feed8542c0eb6b",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1671,6 +1671,55 @@
         "Elastica.Geometry"
       ],
       "sha256": "11de11b81dd0e7adc3b28cda2ca2375c5142fa8d3c9ac7308b33434e25fc7d07"
+    },
+    {
+      "id": "main:lean/Research/FiniteConnectionCurvature.lean",
+      "scope": "main",
+      "path": "lean/Research/FiniteConnectionCurvature.lean",
+      "group": "Other",
+      "namespace": "FiniteConnectionCurvature",
+      "declarations": [
+        "Connection",
+        "FirstJet",
+        "curvature",
+        "curvature_skew",
+        "curvature_same_direction",
+        "curvature_zero_connection",
+        "curvature_zero_of_symmetric_jet",
+        "connectionMatrix",
+        "curvature_constant_eq_commutator",
+        "bracket",
+        "bracket_skew",
+        "bracket_jacobi",
+        "ricci",
+        "ricci_zero_of_flat",
+        "exampleConnection",
+        "example_curvature_nonzero"
+      ],
+      "imports": [
+        "Mathlib.Tactic",
+        "Mathlib.LinearAlgebra.Matrix.Notation"
+      ],
+      "sha256": "b74b77810d3f1a8580269d9f2f41902f2db960f09ed0757df6d54758335001d3"
+    },
+    {
+      "id": "main:lean/Research/FiniteConnectionWitness.lean",
+      "scope": "main",
+      "path": "lean/Research/FiniteConnectionWitness.lean",
+      "group": "Other",
+      "namespace": "FiniteConnectionWitness",
+      "declarations": [
+        "metricAt1",
+        "warpConnection",
+        "warpFirstJet",
+        "warped_ricci_eq_negative_metric",
+        "warped_riemann_nonzero"
+      ],
+      "imports": [
+        "Mathlib.Tactic",
+        "Research.FiniteConnectionCurvature"
+      ],
+      "sha256": "c527ff174c508e89e5a04078e9f3e608129ed8d0ee897dbf3325c87b54ae2283"
     },
     {
       "id": "main:lean/Research/FiniteMarkovTransport.lean",
@@ -15799,6 +15848,14 @@
       ]
     },
     {
+      "from": "main:lean/Research/FiniteConnectionWitness.lean",
+      "to": "main:lean/Research/FiniteConnectionCurvature.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.FiniteConnectionCurvature"
+      ]
+    },
+    {
       "from": "main:lean/Research/FiniteMarkovTransport.lean",
       "to": "main:lean/Research/OkanoharaTransport.lean",
       "kind": "exact_import",
@@ -27738,28 +27795,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "4412b92ba656a1d82dee872093feed8542c0eb6b",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "4412b92ba656a1d82dee872093feed8542c0eb6b",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "4412b92ba656a1d82dee872093feed8542c0eb6b",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "4412b92ba656a1d82dee872093feed8542c0eb6b",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
