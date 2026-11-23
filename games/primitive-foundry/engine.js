@@ -105,9 +105,14 @@
   if(!inside(x,y)||!w.tiles[idx(x,y)].building)return false;
   w.tiles[idx(x,y)].building.dir=(w.tiles[idx(x,y)].building.dir+1)%4;return true;
  }
+ // The eastern ore field is found through a recovered document or a scanner.
+ function isDiscovered(w,x,y){
+  return x<=16||w.documents.includes("doc10")||w.unlocks.includes("reconstruction");
+ }
  // Zero-cost construction is a deliberate sandbox accessibility choice.
  function place(w,x,y,kind,dir=0){
-  if(w.status!=="playing")return false;
+  if(w.status!=="playing"&&w.status!=="complete")return false;
+  if(!inside(x,y)||!isDiscovered(w,x,y))return false;
   if(kind==="erase")return removeMachine(w,x,y);
   if(kind==="rotate")return rotate(w,x,y);
   return setMachine(w,x,y,kind,dir);
@@ -326,6 +331,6 @@
   return "流れが詰まるところを観察し、採掘・製錬・組立の台数を増やそう。";
  }
  return Object.freeze({W,H,SIZE,DX,DY,DIR_SYM,ITEMS,MACHINES,BUILDABLE,
-  idx,xy,near,inside,newWorld,clone,setMachine,removeMachine,rotate,place,
+  idx,xy,near,inside,isDiscovered,newWorld,clone,setMachine,removeMachine,rotate,place,
   inject,stepOnce,advance,demoBlueprint,techAvailable,unlock,machineStatus,counts,tip});
 });
