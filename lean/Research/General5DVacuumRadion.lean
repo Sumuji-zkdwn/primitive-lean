@@ -120,7 +120,7 @@ theorem static_external_circle_evolution (f fp : ℝ)
 
 /-- Purely metric-defined Einstein-frame acceleration, multiplied by
     the positive circle radius, has numerator hp+fp/2+h(h+f/2). -/
-def einsteinAccelNumerator (h f hp fp : ℝ) : ℝ :=
+noncomputable def einsteinAccelNumerator (h f hp fp : ℝ) : ℝ :=
   hp + fp / 2 + h * (h + f / 2)
 
 /-- On an expanding vacuum branch the numerator is -h²/2. -/
