@@ -165,3 +165,20 @@ test("research tech is a source-backed prerequisite structure, not a random equi
  assert.equal(w.science,25-3-6-8);
  assert.equal(w.unlocks.includes("globalConsequences"),true);
 });
+
+
+test("repair tutorial cannot passively produce science before the player fixes both gaps",()=>{
+ const w=F.challengeBlueprint(F.newWorld(20261124));
+ assert.equal(F.pendingRepairs(w).length,2);
+ F.advance(w,400);
+ assert.equal(w.totalScience,0,"broken logistics should not win without action");
+ assert.equal(F.repairBlueprint(w,11,6),true);
+ assert.equal(F.pendingRepairs(w).length,1);
+ F.advance(w,100);
+ assert.equal(w.totalScience,0,"both resource paths are required");
+ assert.equal(F.repairBlueprint(w,10,8),true);
+ assert.equal(F.pendingRepairs(w).length,0);
+ F.advance(w,1300);
+ assert.ok(w.totalScience>=30,"restored supply chain must reach the factory goal");
+ assert.equal(w.status,"complete");
+});
