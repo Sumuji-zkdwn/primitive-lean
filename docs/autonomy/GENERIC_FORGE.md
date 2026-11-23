@@ -27,6 +27,29 @@ The selected program is a **list of approved primitive names**, such as
 JavaScript, shell commands, or Lean tactics are executed. Program steps
 are interpreted by a trusted, fixed main-branch controller.
 
+## Using the result as a real tool
+
+The verified library is not just a research scorecard. Once a macro is
+certified, it can be invoked to transform a concrete image or signal:
+
+~~~bash
+python -m tools.autonomy.generic_forge run \
+  --state docs/autonomy/generic-forge-state.json \
+  --operator-id gf_XXXXXXXXXXXXXXXX \
+  --value 1
+~~~
+
+Use an actual operator ID from the state branch. The command validates the
+whole stored chain, then runs the certified macro through both implementations.
+For images, the output JSON also includes an ASCII 3×3 bitmap (`#` for on
+pixels, `.` for off); for signals, it includes four quantized samples.
+No dynamically generated code is executed.
+
+The PR CI demonstrates invocation of its first certified operator against
+a real input image, saving `example-execution.json` as an inspectable
+artifact. This creates a usable computational component, rather than only
+another theorem/benchmark count.
+
 ## The central change: generated operations are reused
 
 Initially, the generation vocabulary contains six primitive operators
