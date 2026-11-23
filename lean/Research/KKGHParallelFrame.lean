@@ -37,9 +37,8 @@ theorem connection_forms_vanish (a b c : One)
   have f10 := h₃ 0 1 3
   have f11 := h₃ 0 2 3
   have f12 := h₃ 1 2 3
-  simp [alt, omega0, KKGHClosedForms.omega,
-    KKGHClosedForms.theta, KKGHClosedForms.wedge, KKGHClosedForms.e]
-    at f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12
+  simp [alt, omega0, KKGHClosedForms.omega, KKGHClosedForms.theta,
+    KKGHClosedForms.wedge, KKGHClosedForms.e] at f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12
   refine ⟨?_, ?_, ?_⟩
   all_goals
     funext i
