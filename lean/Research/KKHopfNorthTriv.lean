@@ -142,7 +142,7 @@ theorem encode_decode (X : NorthTotal) :
   apply Subtype.ext
   funext i
   have h := congrArg (fun V : X4 => V i) (phase_reconstruct X)
-  simpa [decode,encode] using h
+  simpa [decode, encode, rotatedSection] using h
 
 /-- Explicit fibre chart: an actual algebraic equivalence, with no quotient shortcut. -/
 noncomputable def northTrivialization : NorthTotal ≃ NorthBase × UnitPhase where
