@@ -98,6 +98,19 @@ theorem prefix_decreasing (G : ℕ → Set ℝ) (a b : ℕ → Bool)
     simpa [hk, hks] using h
   · simp [hk]
 
+/-- Every finite-prefix gate constraint is a compact subset of the
+unit square in (lower,upper) interval coordinates. -/
+theorem prefix_isCompact (G : ℕ → Set ℝ) (hfinite : ∀ k, (G k).Finite)
+    (a b : ℕ → Bool) (s t : ℝ) (m : ℕ) :
+    IsCompact (Prefix G a b s t m) := by
+  have hK : IsCompact (Icc (0 : ℝ) 1 ×ˢ Icc (0 : ℝ) 1) :=
+    isCompact_Icc.prod isCompact_Icc
+  apply hK.of_isClosed_subset (prefix_isClosed G hfinite a b s t m)
+  intro p hp
+  exact hp.1.1
+
+#print axioms prefix_isCompact
+
 #print axioms isClosed_hitSet
 #print axioms prefix_isClosed
 #print axioms prefix_decreasing
