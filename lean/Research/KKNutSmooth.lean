@@ -40,17 +40,13 @@ private theorem smooth_coord (i : Fin 4) :
 
 /-- The squared radius is smooth all the way to X=0. -/
 theorem smooth_radialSq : ContDiff ℝ ⊤ radialSq := by
-  have h0 := (smooth_coord 0).pow 2
-  have h1 := (smooth_coord 1).pow 2
-  have h2 := (smooth_coord 2).pow 2
-  have h3 := (smooth_coord 3).pow 2
-  simpa [radialSq] using ((h0.add h1).add h2).add h3
+  unfold radialSq
+  fun_prop
 
 /-- The warp is a polynomial smooth function. -/
 theorem smooth_warp (alpha : ℝ) : ContDiff ℝ ⊤ (warp alpha) := by
-  have hconst : ContDiff ℝ ⊤ (fun _ : X4 => (1 : ℝ)) := contDiff_const
-  have ha : ContDiff ℝ ⊤ (fun _ : X4 => alpha) := contDiff_const
-  simpa [warp] using hconst.add (ha.mul smooth_radialSq)
+  unfold warp
+  fun_prop
 
 /-- All four coefficients of the global Hopf one-form are smooth. -/
 theorem smooth_omegaComponent (i : Fin 4) :
@@ -75,15 +71,12 @@ theorem warp_pos (alpha : ℝ) (ha : 0 ≤ alpha) (X : X4) :
 nonzero radial coordinates. -/
 theorem smooth_fibreCoefficient (alpha : ℝ) (ha : 0 ≤ alpha) :
     ContDiff ℝ ⊤ (fibreCoefficient alpha) := by
-  have h2 : ContDiff ℝ ⊤ (fun _ : X4 => (2 : ℝ)) := contDiff_const
-  have hA : ContDiff ℝ ⊤ (fun _ : X4 => alpha) := contDiff_const
-  have hnum : ContDiff ℝ ⊤
-      (fun X : X4 => -(alpha * (2 + alpha * radialSq X))) :=
-    (hA.mul (h2.add (hA.mul smooth_radialSq))).neg
-  have hden := smooth_warp alpha
-  have hnz : ∀ X : X4, warp alpha X ≠ 0 :=
-    fun X => ne_of_gt (warp_pos alpha ha X)
-  simpa [fibreCoefficient] using hnum.div hden hnz
+  unfold fibreCoefficient
+  apply ContDiff.div
+  · fun_prop
+  · exact smooth_warp alpha
+  · intro X
+    exact ne_of_gt (warp_pos alpha ha X)
 
 /-- Every one of the sixteen Cartesian metric coefficients extends
 smoothly across X=0; the metric entries are rational with nowhere-zero
