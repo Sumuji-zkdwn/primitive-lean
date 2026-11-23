@@ -8,12 +8,12 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
 const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
 const model=A.createModel(graph,proofs,narratives);
 
-test("all 465 true theorem nodes, 629 direct references, 60 source files and 22 Japanese explanations",()=>{
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 43 Japanese explanations",()=>{
  assert.equal(model.nodes.length,465);
  assert.equal(model.proofs.length,465);
  assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
  assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
- assert.equal(Object.keys(model.argumentsById).length,22);
+ assert.equal(Object.keys(model.argumentsById).length,43);
  assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
  assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
  assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
@@ -84,4 +84,27 @@ test("all extracted proof fragments are in ten original source batches",()=>{
  }
  assert.equal(byId.size,465);
  for(const p of model.proofs)assert.deepEqual(p,byId.get(p.id));
+});
+
+test("all 465 expansion plans are complete, unique and topological",()=>{
+ for(const n of model.nodes){
+  const order=A.proofOrder(model,[n.id]);
+  assert.equal(new Set(order).size,order.length);
+  assert.equal(order.at(-1),n.id);
+  const independent=new Set([n.id]),pending=[n.id];
+  while(pending.length)for(const p of model.nodes[pending.pop()].parents)if(!independent.has(p)){independent.add(p);pending.push(p);}
+  assert.deepEqual(new Set(order),independent);
+  for(const id of order)for(const p of model.nodes[id].parents)assert.ok(order.indexOf(p)<order.indexOf(id));
+  const packet=A.argumentPacket(model,n.id);
+  assert.ok(packet.includes(model.proofs[n.id].statement));
+  assert.ok(packet.includes(model.proofs[n.id].proof));
+  for(const p of n.parents)assert.ok(packet.includes(model.proofs[p].proof));
+ }
+ assert.throws(()=>A.proofOrder(model,[-1]));
+});
+test("human explanations cover the design-observation-calculus cluster",()=>{
+ for(let id=214;id<=240;id++){
+  const a=model.argumentsById[id];
+  assert.ok(a?.title&&a?.summary&&a?.assumptions&&a?.steps.length>=2,"missing "+id);
+ }
 });

@@ -170,20 +170,40 @@
  function makeSourceLink(n,p){
   return origin+n.file+"#L"+p.line;
  }
+ function argumentBody(id){
+  const a=model.argumentsById[id],r=model.proofs[id],n=model.nodes[id];
+  let html=a?'<p>'+esc(a.summary)+'</p><div class="section-label">成立する条件</div><p>'+esc(a.assumptions)+'</p><div class="section-label">論証の流れ</div><ol class="proof-notes">'+a.steps.map(s=>'<li>'+esc(s)+'</li>').join("")+'</ol>':
+   '<p class="source-note">日本語論証は未登録です。原文から確認してください。</p>';
+  if(r.comment)html+='<details class="proof-detail"><summary>原ソースの説明</summary><p>'+esc(r.comment)+'</p></details>';
+  html+='<details class="proof-detail"><summary>命題・Lean証明・出典</summary><pre class="source-block">'+esc(r.statement)+'</pre><pre class="source-block">'+esc(r.proof)+'</pre><p><a target="_blank" rel="noopener" href="'+esc(makeSourceLink(n,r))+'">元のソース</a></p></details>';
+  return html+'<div class="row-actions">'+nodeButton(id,"この定理に移動")+'</div>';
+ }
+ function renderProofPlan(n){
+  const order=A.proofOrder(model,[n.id]).filter(id=>id!==n.id);
+  if(!order.length)return '<p class="source-note">初期465定理内に先行する証明参照はありません。定義・外部補題を使用する場合があります。</p>';
+  const direct=new Set(n.parents);
+  const cards=order.map(id=>{
+   const node=model.nodes[id],a=model.argumentsById[id];
+   return '<details class="proof-detail proof-ancestor" data-proof-ancestor="'+id+'"><summary><span>#'+String(id+1).padStart(3,"0")+' '+esc(a?.title||A.short(node))+'</span><small>'+(direct.has(id)?"直接参照":"間接参照")+' · '+(a?"日本語論証":"原文のみ")+'</small></summary>'+argumentBody(id)+'</details>';
+  }).join("");
+  return '<details class="proof-detail proof-route"><summary>前提の論証を展開 · '+order.length+'件</summary><p class="source-note">元の証明が参照する先行定理を重複なく依存順に並べています。証明の必要性・十分性を新たに確立するものではありません。</p>'+cards+'</details>';
+ }
  function renderRead(n,p){
   const human=model.argumentsById[n.id];
   let html="";
   if(human){
    html+='<div class="section-label">日本語で読む · 論証の概説</div><div class="claim">'+esc(human.title)+'</div>'+
     '<p>'+esc(human.summary)+'</p>'+
-    '<div class="section-label">成立する条件</div><p>'+esc(human.assumptions)+'</p>'+
+    '<details class="proof-detail main-argument"><summary>論証を展開 · '+human.steps.length+'段階</summary><div class="section-label">成立する条件</div><p>'+esc(human.assumptions)+'</p>'+
     '<div class="section-label">論証の流れ</div><ol class="proof-notes">'+
-    human.steps.map(step=>'<li>'+esc(step)+'</li>').join("")+'</ol>'+
+    human.steps.map(step=>'<li>'+esc(step)+'</li>').join("")+'</ol></details>'+
     '<p class="boundary">この説明は原文の定理と証明から作成した読み解きです。形式的証明の代わりではなく、厳密な仮定や詳細は「Lean原文」を参照してください。</p>';
   }else{
    html+='<div class="section-label">この定理の読み方</div>'+
     '<p>この定理には、人間向けの日本語論証をまだ登録していません。根拠がない文章を自動で作らず、実際の命題・原文の説明・証明内の参照を示します。</p>';
   }
+  html+=renderProofPlan(n);
+  html+='<details class="proof-detail"><summary>さらに詳しい日本語論証を依頼する</summary><p class="source-note">対象と直接参照先の実際のLean命題・証明を含む資料です。コピーしてChatGPT等に渡せます。このオフライン画面自体は解説を生成しません。</p><textarea class="argument-packet" id="argument-packet" readonly aria-label="論証依頼用資料">'+esc(A.argumentPacket(model,n.id))+'</textarea><div class="row-actions"><button class="action" type="button" id="copy-argument">資料をコピー／選択</button><span id="copy-argument-status" role="status" class="slim"></span></div></details>';
   if(p.comment){
    html+='<div class="section-label">原ソースに付された説明（英語）</div><p class="source-note">'+
     esc(p.comment)+'</p>';
@@ -259,6 +279,18 @@
   content.querySelectorAll("[data-del]").forEach(el=>el.addEventListener("click",()=>{
    links.splice(Number(el.dataset.del),1);persist();linkDraft=null;renderReader();draw();
   }));
+  $("copy-argument")?.addEventListener("click",async()=>{
+   const area=$("argument-packet"),status=$("copy-argument-status");
+   if(!area)return;
+   try{
+    if(!globalThis.navigator?.clipboard?.writeText)throw Error("Clipboard unavailable");
+    await globalThis.navigator.clipboard.writeText(area.value);
+    if(status)status.textContent="コピーしました。";
+   }catch(_){
+    area.focus();area.select?.();area.setSelectionRange?.(0,area.value.length);
+    if(status)status.textContent="選択しました。端末のコピー操作を使ってください。";
+   }
+  });
   $("go-deps")?.addEventListener("click",()=>{tab="deps";renderReader();});
   $("go-lean")?.addEventListener("click",()=>{tab="lean";renderReader();});
   $("begin-link")?.addEventListener("click",()=>{

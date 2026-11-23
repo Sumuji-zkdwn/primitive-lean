@@ -164,3 +164,19 @@ test("desktop interface preserves graph canvas and theorem reading panel",async(
  assert.equal(b.get("theorem-title").textContent.length>0,true);
  assert.ok(b.get("reader-content").innerHTML.length>50);
 });
+
+test("reader exposes collapsible arguments and complete reference cards",async()=>{
+ const b=await boot(true),content=b.get("reader-content");
+ assert.match(content.innerHTML,/論証を展開 · [0-9]+段階/);
+ assert.match(content.innerHTML,/前提の論証を展開 · 3件/);
+ assert.equal(content.querySelectorAll("[data-proof-ancestor]").length,3);
+ assert.match(content.innerHTML,/さらに詳しい日本語論証を依頼する/);
+ assert.match(content.innerHTML,/id="argument-packet" readonly/);
+ assert.match(content.innerHTML,/LinearInputObservation.two_inputs_iff_pair/);
+ assert.match(content.innerHTML,/recover_coordinate/);
+ b.get("search").ev.input({target:{value:"globalMin_iff_margin"}});
+ b.get("hits").querySelectorAll("[data-hit]")[0].ev.click();
+ assert.match(content.innerHTML,/大域的最小性の必要十分条件/);
+ assert.match(content.innerHTML,/前提の論証を展開 · 4件/);
+ assert.equal(content.querySelectorAll("[data-proof-ancestor]").length,4);
+});

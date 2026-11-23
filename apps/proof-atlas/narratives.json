@@ -222,6 +222,212 @@
         "区間0から0への積分は0。",
         "初期値 x₀ だけが残る。"
       ]
+    },
+    "LinearInputDesign.margin_of_globalMin": {
+      "title": "大域的最小値なら余裕量は非負",
+      "assumptions": "λ＞0、設計された入力のもとで (a,√2a) が大域的最小点。",
+      "summary": "m＝λa²+r は非負でなければならない。",
+      "steps": [
+        "a≠0 なら比較点 (−a,−√2a) を選ぶ。エネルギー差の恒等式から差は2a²m。",
+        "m＜0 なら差が負となり、最小性に矛盾する。",
+        "a＝0 なら m＝r。r＜0 と仮定し t＝√(−r/λ)＞0 を選ぶ。λt²＝−r より (t,√2t) のエネルギー差は t²r/4＜0。",
+        "両場合で矛盾するので m≥0。"
+      ]
+    },
+    "LinearInputDesign.globalMin_iff_margin": {
+      "title": "大域的最小性の必要十分条件",
+      "assumptions": "λ＞0。入力は a に合わせて設計されている。",
+      "summary": "大域的最小性と λa²+r≥0 は同値。",
+      "steps": [
+        "大域的最小性から先行する必要性の定理を用いて余裕量が非負と分かる。",
+        "逆に余裕量が非負なら、λ＞0 から λ≥0 も成立するので十分性の定理を使える。",
+        "二方向を合わせて同値。"
+      ]
+    },
+    "LinearInputDesign.quadratic_gap_bound": {
+      "title": "エネルギー差の二次下限",
+      "assumptions": "λ≥0。x,y は任意の実数。",
+      "summary": "ΔE≥(λa²+r)(x−a)²/2。余裕量自体の非負性は仮定しない。",
+      "steps": [
+        "エネルギー差の恒等式で (x−a)²(λa²+r)/2 を分離する。",
+        "残る (y−√2x)²/2 と λ(x−a)²(x+a)²/4 は非負。",
+        "この二項を捨てれば下限を得る。"
+      ]
+    },
+    "LinearInputDesign.unique_of_margin_pos": {
+      "title": "余裕量が正なら等エネルギー点は一意",
+      "assumptions": "λ≥0、m＝λa²+r＞0、対象点のエネルギーは設計点と等しい。",
+      "summary": "対象点は (a,√2a) に一致する。",
+      "steps": [
+        "ΔE＝0 と二次下限を合わせて 0≥m(x−a)²/2≥0。m＞0 なので x＝a。",
+        "エネルギー差の恒等式に x＝a を代入すると差は (y−√2a)²/2。",
+        "差が0なので y＝√2a。"
+      ]
+    },
+    "LinearInputDesign.equal_energy_iff_of_margin_zero": {
+      "title": "余裕量ゼロの等エネルギー点",
+      "assumptions": "λ＞0、λa²+r＝0。",
+      "summary": "等エネルギー点は x＝±a かつ y＝√2x に限る。a＝0 なら同一点。",
+      "steps": [
+        "エネルギー差は (y−√2x)²/2＋λ(x−a)²(x+a)²/4。",
+        "両項が非負なので和が0ならそれぞれ0。第一項より y＝√2x、第二項より x−a＝0 または x+a＝0。",
+        "逆にこれらの条件なら両項が0になる。"
+      ]
+    },
+    "LinearInputDesign.squared_position_error": {
+      "title": "エネルギー許容誤差から位置誤差の二乗を制限",
+      "assumptions": "λ≥0、m＝λa²+r＞0、ΔE≤ε。",
+      "summary": "(x−a)²≤2ε/m。",
+      "steps": [
+        "二次下限より m(x−a)²/2≤ΔE。",
+        "ΔE≤ε をつないで両辺を2倍する。",
+        "正の m で割る。"
+      ]
+    },
+    "LinearInputDesign.position_error": {
+      "title": "エネルギー許容誤差から位置のずれを制限",
+      "assumptions": "λ≥0、m＝λa²+r＞0、ΔE≤ε。",
+      "summary": "|x−a|≤√(2ε/m)。",
+      "steps": [
+        "前の定理から (x−a)²≤2ε/m。右辺は非負。",
+        "平方根の単調性と √((x−a)²)＝|x−a| を使う。"
+      ]
+    },
+    "LinearInputObservation.input_shift": {
+      "title": "入力変更によるエネルギー差",
+      "assumptions": "任意の状態 z、入力 u,v、実数値関数 A,X。",
+      "summary": "E(v,z)＝E(u,z)−(v−u)X(z)。",
+      "steps": [
+        "定義 E(u,z)＝A(z)−uX(z) を右辺に代入。",
+        "−uX(z)−(v−u)X(z)＝−vX(z) と整理すると E(v,z) になる。"
+      ]
+    },
+    "LinearInputObservation.pair_suffices": {
+      "title": "基底量と入力係数の一致から全観測の一致",
+      "assumptions": "A(z)＝A(w)、X(z)＝X(w)。入力 u は任意。",
+      "summary": "どんな u でも E(u,z)＝E(u,w)。",
+      "steps": [
+        "エネルギー A−uX を両状態について展開する。",
+        "A(z) を A(w) に、X(z) を X(w) に置き換えると両式は同じ。"
+      ]
+    },
+    "LinearInputObservation.all_inputs_iff_pair": {
+      "title": "全入力での観測同値と二成分の一致",
+      "assumptions": "状態 z,w。任意の実数入力を許す。",
+      "summary": "全入力での観測一致と A,X の両方の一致は同値。",
+      "steps": [
+        "全入力で一致すると仮定し u＝0 を選ぶ。E(0,z)＝A(z) なので A(z)＝A(w)。",
+        "u＝1 の等式 A(z)−X(z)＝A(w)−X(w) に A の一致を代入すると X の一致が得られる。",
+        "逆向きには二成分の一致が全観測に十分である先行定理を使う。"
+      ]
+    },
+    "LinearInputObservation.summary_decodes_pair": {
+      "title": "全観測を復元できる要約から二成分を復元",
+      "assumptions": "decode(u,summary(z))＝E(u,z) が全 u,z で成立する。",
+      "summary": "要約値 t から (A(z),X(z)) を復元する写像が存在する。",
+      "steps": [
+        "D(t)＝(decode(0,t),decode(0,t)−decode(1,t)) と構成する。",
+        "t＝summary(z) を代入すると第一成分は E(0,z)＝A(z)。",
+        "第二成分は E(0,z)−E(1,z)＝X(z)。従って D が要求を満たす。次元・ビット数の最小性は主張しない。"
+      ]
+    },
+    "LinearInputObservation.pair_decodes_all": {
+      "title": "二成分を復元できる要約から全入力を復元",
+      "assumptions": "pairDecode(summary(z))＝(A(z),X(z)) が全 z で成立。",
+      "summary": "すべての入力のエネルギーを復元する写像が存在する。",
+      "steps": [
+        "D(u,t)＝pairDecode(t) の第一成分−u×第二成分 と定義する。",
+        "t＝summary(z) のとき仮定を使うと D(u,summary(z))＝A(z)−uX(z)＝E(u,z)。"
+      ]
+    },
+    "LinearInputObservation.recovery_error_identity": {
+      "title": "二入力復元の観測誤差の厳密式",
+      "assumptions": "u≠v、二測定に加法誤差 eᵤ,eᵥ がある。",
+      "summary": "復元された X の誤差は (eᵤ−eᵥ)/(v−u)。",
+      "steps": [
+        "観測差を (A−uX＋eᵤ)−(A−vX＋eᵥ) と展開する。",
+        "A が消えて (v−u)X＋eᵤ−eᵥ になる。",
+        "v−u≠0 なので割り、真の X を引く。"
+      ]
+    },
+    "LinearInputObservation.recovery_error_bound": {
+      "title": "観測誤差から復元誤差の上限",
+      "assumptions": "u≠v、|eᵤ|≤εᵤ、|eᵥ|≤εᵥ。",
+      "summary": "復元誤差の絶対値は (εᵤ＋εᵥ)/|v−u| 以下。",
+      "steps": [
+        "先行する誤差恒等式に絶対値を付けると |eᵤ−eᵥ|/|v−u|。",
+        "三角不等式で |eᵤ−eᵥ|≤|eᵤ|＋|eᵥ|≤εᵤ＋εᵥ。",
+        "正の分母で割る。"
+      ]
+    },
+    "LinearInputObservation.minimizer_monotone": {
+      "title": "入力を大きくすると大域的最小点は左へ戻らない",
+      "assumptions": "u＜v。xᵤ,xᵥ は V(x)−ux と V(x)−vx の大域的最小点。",
+      "summary": "xᵤ≤xᵥ。V の凸性・微分可能性は不要。",
+      "steps": [
+        "u 側の最小性で比較点 xᵥ を選ぶ：V(xᵤ)−uxᵤ≤V(xᵥ)−uxᵥ。",
+        "v 側の最小性で比較点 xᵤ を選ぶ：V(xᵥ)−vxᵥ≤V(xᵤ)−vxᵤ。",
+        "二式を加えると V が消えて (v−u)(xᵥ−xᵤ)≥0。",
+        "v−u＞0 なので xᵥ≥xᵤ。"
+      ]
+    },
+    "LinearInputCalculus.hasDerivAt_potential": {
+      "title": "四次ポテンシャルの導関数",
+      "assumptions": "λ,r,u,x は任意の実数。",
+      "summary": "P(x)＝λx⁴/4＋rx²/2−ux の点 x での微分係数は λx³＋rx−u。",
+      "steps": [
+        "恒等写像の微分は1。べき乗の微分法で x⁴,x² を微分する。",
+        "定数倍と定数による除算の微分法で λx³、rx を得る。",
+        "線形項 −ux の微分 −u を合わせる。"
+      ]
+    },
+    "LinearInputCalculus.deriv_potential": {
+      "title": "四次ポテンシャルの微分値",
+      "assumptions": "λ,r,u,x は任意の実数。",
+      "summary": "deriv P x＝λx³＋rx−u。",
+      "steps": [
+        "前の定理で HasDerivAt P (λx³＋rx−u) x が成立する。",
+        "微分係数の存在とその値から Lean の deriv がその係数に等しいことを得る。"
+      ]
+    },
+    "LinearInputCalculus.stationary_iff_input": {
+      "title": "停留条件を入力の式で表す",
+      "assumptions": "λ,r,u,x は任意の実数。",
+      "summary": "P′(x)＝0 と u＝λx³＋rx は同値。",
+      "steps": [
+        "微分公式により P′(x)＝λx³＋rx−u。",
+        "これが0なら u を移項する。逆にその u を代入すれば微分値は0。"
+      ]
+    },
+    "LinearInputCalculus.global_minimum_forces_input": {
+      "title": "大域的最小点に必要な入力",
+      "assumptions": "実数全体で P(a)≤P(t) が成立する。",
+      "summary": "u＝λa³＋ra が必要。十分性は主張しない。",
+      "steps": [
+        "実数全体での最小点は局所最小点でもある。",
+        "四次ポテンシャルは a で微分可能で、その微分係数は λa³＋ra−u。",
+        "局所最小点での微分係数は0。移項して必要な入力の式を得る。"
+      ]
+    },
+    "LinearInputCalculus.critical_value": {
+      "title": "停留点のポテンシャル値",
+      "assumptions": "u＝λx³＋rx。",
+      "summary": "P(x)＝−3λx⁴/4−rx²/2。",
+      "steps": [
+        "P(x)＝λx⁴/4＋rx²/2−ux に停留条件を代入する。",
+        "−ux＝−λx⁴−rx² と展開し、同類項をまとめる。"
+      ]
+    },
+    "LinearInputCalculus.critical_value_le": {
+      "title": "停留点のポテンシャル値の一様上限",
+      "assumptions": "λ＞0、u＝λx³＋rx。",
+      "summary": "P(x)≤max(−r,0)²/(12λ)。",
+      "steps": [
+        "先行公式 P(x)＝−3λx⁴/4−rx²/2 を使う。",
+        "r≥0 なら両項が非正なので P(x)≤0。右辺も0。",
+        "r＜0 なら (3λx²＋r)²≥0 を展開する。",
+        "正の12λで割って整理すると P(x)≤r²/(12λ)。右辺は max(−r,0)²/(12λ) に一致。"
+      ]
     }
   }
 }
