@@ -1,7 +1,7 @@
 {
   "attempts": [],
   "last_ai_day": null,
-  "last_scanned_head": "e5055f514aa44c7e78c53d67d901dd9986eeb024",
+  "last_scanned_head": "63f50971c65c804ba35410cc1511d80bd0648c12",
   "queue": [
     {
       "evidence": "具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。",
@@ -172,6 +172,60 @@
       "path": "docs/research/2026-11-17-signed-cycle-counterexample.md",
       "priority": 6,
       "source_sha256": "7bf075f7d02499e809b27423170bd9f5772612dccf112476adb486d2777e78eb",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "### 進捗・反例・未解決点",
+      "id": "448e62f8bc0549342d93",
+      "line": 13,
+      "path": "docs/research/2026-11-22-delayed-hardening-ether-v1-v10.md",
+      "priority": 9,
+      "source_sha256": "392456167de9038f26c0436b9421f784997ab9f4685f450f3ce8519e9c57336c",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "| 4 | 三次元 Cartesian 非球対称試験、飽和記憶 | 複数方向の摂動に正のエネルギー増分、位相下界 \\`E≥3√2 π²|B|\\`、飽和記憶の散逸 | 全3D動的安定性未証明。固定慣性の強ひずみ波速に一様上限なし。等エネルギーでもスカラー源電荷が異なる |",
+      "id": "fb90326b1454741c6e40",
+      "line": 20,
+      "path": "docs/research/2026-11-22-delayed-hardening-ether-v1-v10.md",
+      "priority": 9,
+      "source_sha256": "392456167de9038f26c0436b9421f784997ab9f4685f450f3ce8519e9c57336c",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "状態: **研究の履歴・限定的な有限検証**。重力の創発・既存物理学の復元は未証明。",
+      "id": "0958881b4d77a8711389",
+      "line": 4,
+      "path": "docs/research/2026-11-23-delayed-hardening-ether-v11-v30-index.md",
+      "priority": 9,
+      "source_sha256": "7d7ec9946b45efb16c26cc674c40217cf4178c1662ac14d1ee0a99e4602a0239",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "| [11](delayed-aether/stage-11.md) | 開境界のS³写像次数・局所位相構造、有限四面体計量 | 元の研究ノート（計算条件、成功・反例・未証明を含む） |",
+      "id": "88b6c5a187f7c0b293b7",
+      "line": 13,
+      "path": "docs/research/2026-11-23-delayed-hardening-ether-v11-v30-index.md",
+      "priority": 9,
+      "source_sha256": "7d7ec9946b45efb16c26cc674c40217cf4178c1662ac14d1ee0a99e4602a0239",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "| [12](delayed-aether/stage-12.md) | 位相場・内部計量・記憶場の自律連成と位相スリップ、局所障壁 | 元の研究ノート（計算条件、成功・反例・未証明を含む） |",
+      "id": "5016dd3d9b71be54edd6",
+      "line": 14,
+      "path": "docs/research/2026-11-23-delayed-hardening-ether-v11-v30-index.md",
+      "priority": 9,
+      "source_sha256": "7d7ec9946b45efb16c26cc674c40217cf4178c1662ac14d1ee0a99e4602a0239",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "1. \\`Z₂\\` セル複体の \\`d∘d=0\\` と閉2-formの局所更新保存はLeanで部分的に形式化済み。具体的な周期2-サイクル上のフラックス不変性と下界は未形式化。",
+      "id": "93853e781b9801053e32",
+      "line": 80,
+      "path": "docs/research/2026-11-22-delayed-hardening-ether-v1-v10.md",
+      "priority": 8,
+      "source_sha256": "392456167de9038f26c0436b9421f784997ab9f4685f450f3ce8519e9c57336c",
       "status": "UNVERIFIED_LEAD"
     }
   ],
