@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "a3d9162e4f2da39f3b6e27732a88b12d52acd68d",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1607,6 +1607,58 @@
         "Mathlib"
       ],
       "sha256": "4d765346074e41871230cc4575216528c11d4b64925767d7911f12a166ccd26c"
+    },
+    {
+      "id": "main:lean/Research/EinsteinProductRadion.lean",
+      "scope": "main",
+      "path": "lean/Research/EinsteinProductRadion.lean",
+      "group": "Other",
+      "namespace": "EinsteinProductRadion",
+      "declarations": [
+        "cosmologicalConstant",
+        "kineticCoefficient",
+        "potentialZero",
+        "potentialPrimeZero",
+        "potentialSecondZero",
+        "potential_value",
+        "potential_stationary",
+        "second_derivative_closed",
+        "twice_kinetic_closed",
+        "radion_mass",
+        "mass_hubble",
+        "radion_tachyonic",
+        "six_dimensional_factor_match",
+        "twelve_dimensional_factor_match",
+        "symmetry_enhancement",
+        "two_examples_have_same_radion_mass"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "8e4e948892d595a04543abdf49e3a6c64d44522f99899966808abecdb74a1868"
+    },
+    {
+      "id": "main:lean/Research/EinsteinShapeModes.lean",
+      "scope": "main",
+      "path": "lean/Research/EinsteinShapeModes.lean",
+      "group": "Other",
+      "namespace": "EinsteinShapeModes",
+      "declarations": [
+        "kinetic",
+        "hessian",
+        "hessian_eq_kinetic",
+        "k8",
+        "h8",
+        "h8_eq_k8",
+        "k8_sq",
+        "k8_positive",
+        "all_factor_scales_tachyonic",
+        "kinetic_principal_minors"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "cea575fd80499141134ee54616462297b24dd03597cd65205a25377f1dc954fa"
     },
     {
       "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
@@ -27764,28 +27816,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "a3d9162e4f2da39f3b6e27732a88b12d52acd68d",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "a3d9162e4f2da39f3b6e27732a88b12d52acd68d",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "a3d9162e4f2da39f3b6e27732a88b12d52acd68d",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "a3d9162e4f2da39f3b6e27732a88b12d52acd68d",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
