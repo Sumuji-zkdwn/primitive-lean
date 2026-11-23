@@ -41,7 +41,8 @@
  if(!ctx){$("status").textContent="Canvas描画を利用できません。";return;}
  const STORAGE="primitive-foundry-save-v2";
  let world=null,category="logistics",tool="pan",dir=0,zoom=1;
- let pane="inspect",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ let pane="inspect",mobileScreen="factory",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ const mobileScreens=["factory","build","inspect","research","documents"];
  let selectedProof=0,proofStatus="ready",proofSchool="all",proofSearch="";
  let graphMode="focus",graphShift={x:0,y:0},graphPointer=null;
  let graphHitboxes=[];
@@ -289,6 +290,20 @@
   document.querySelectorAll("[data-category]").forEach(el=>
     el.setAttribute("aria-selected",String(el.dataset.category===category)));
   $("build-direction").textContent="方向 "+F.DIR_SYM[dir];
+ }
+ function setMobileScreen(next,preserveDeepLink=false){
+  if(!mobileScreens.includes(next))return;
+  mobileScreen=next;
+  if(!preserveDeepLink)document.body?.classList?.remove("research-direct");
+  for(const name of mobileScreens)document.body?.classList?.toggle("mobile-screen-"+name,name===next);
+  document.querySelectorAll("[data-mobile-screen]").forEach(el=>
+    el.setAttribute("aria-current",el.dataset.mobileScreen===next?"page":"false"));
+  showPane(["research","documents","inspect"].includes(next)?next:"inspect");
+  if(next==="factory"||next==="build"){
+    if(typeof requestAnimationFrame==="function")requestAnimationFrame(()=>resize());
+    else resize();
+  }
+  if(typeof window!=="undefined"&&typeof window.scrollTo==="function")window.scrollTo(0,0);
  }
  function showPane(id){
   pane=id;
@@ -635,12 +650,14 @@
    category=el.dataset.category;renderPalette();
   }));
   document.querySelectorAll("[data-panel]").forEach(el=>el.addEventListener("click",()=>showPane(el.dataset.panel)));
+  document.querySelectorAll("[data-mobile-screen]").forEach(el=>
+    el.addEventListener("click",()=>setMobileScreen(el.dataset.mobileScreen)));
   $("research-shortcut").addEventListener("click",()=>{
-   showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
+   setMobileScreen("research");
+   if(typeof window!=="undefined"&&window.innerWidth>950)
+     $("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
   });
-  $("proof-back").addEventListener("click",()=>{
-   document.body?.classList?.remove("research-direct");showPane("inspect");
-  });
+  $("proof-back").addEventListener("click",()=>setMobileScreen("factory"));
   $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
   $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
   $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
@@ -684,11 +701,13 @@
   });
  }
  function start(){
-  setupProof();hook();setTool("pan");resize();refresh();
+  setupProof();hook();setTool("pan");
   if(deepLinkResearch){
+   setMobileScreen("research",true);
    document.body?.classList?.add("research-direct");
    showPane("research");
-  }
+  }else setMobileScreen("factory");
+  resize();refresh();
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
   clock=setInterval(()=>{
