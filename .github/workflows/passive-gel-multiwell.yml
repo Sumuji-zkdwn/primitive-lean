@@ -1,0 +1,85 @@
+name: Passive gel multiwell: local minima and hopping
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/PassiveGelMultiwell.lean'
+      - 'tools/check_passive_gel_multiwell.py'
+      - 'tools/check_passive_gel_mobility.py'
+      - 'docs/research/2026-11-23-passive-gel-multiwell-mobility.md'
+      - '.github/workflows/passive-gel-multiwell.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-multiwell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel compile polynomial certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/PassiveGelMultiwell.olean Research/PassiveGelMultiwell.lean 2>&1 | tee ../gel-multiwell-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../gel-multiwell-lean.log; then exit 1; fi
+      - name: Inspect theorem axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/PassiveGelMultiwell.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=12, names
+          pathlib.Path('PassiveGelMultiwellAudit.lean').write_text('import Research.PassiveGelMultiwell\n'+''.join('#print axioms PassiveGelMultiwell.'+n+'\n' for n in names))
+          pathlib.Path('../gel-multiwell-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 PassiveGelMultiwellAudit.lean 2>&1 | tee ../gel-multiwell-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          s=pathlib.Path('../gel-multiwell-axioms.log').read_text()
+          n=int(pathlib.Path('../gel-multiwell-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for ent in entries:
+              used=set(filter(None,(v.strip() for v in ent.split(','))))
+              assert used<=allowed, used-allowed
+          print('Kernel theorem axioms audited:',n)
+          PY
+      - name: SymPy algebra and SciPy dynamics oracles
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 sympy==1.14.0
+          python -B tools/check_passive_gel_multiwell.py 2>&1 | tee gel-multiwell-python.log
+          python -B tools/check_passive_gel_mobility.py 2>&1 | tee gel-mobility-python.log
+      - name: Store exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: passive-gel-multiwell-evidence
+          path: |
+            gel-multiwell-lean.log
+            gel-multiwell-axioms.log
+            gel-multiwell-count.txt
+            gel-multiwell-python.log
+            gel-mobility-python.log
+          if-no-files-found: warn
