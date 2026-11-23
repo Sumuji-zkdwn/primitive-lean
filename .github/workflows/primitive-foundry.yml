@@ -37,6 +37,8 @@ jobs:
           node --check games/primitive-foundry/engine.test.cjs
       - name: Run deterministic full factory production and dependency tests
         run: node --test games/primitive-foundry/engine.test.cjs games/primitive-foundry/ui.test.cjs
+      - name: Verify offline bundle matches audited sources
+        run: python3 -B games/primitive-foundry/build_play.py --check
 
   lean:
     name: Lean 4 trust-zero finite logistics laws
