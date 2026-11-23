@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'lean/Research/KKHopfHomeo.lean'
+      - 'lean/Research/KKHopfEquator.lean'
+      - 'tools/check_kk_hopf_equator.py'
       - 'docs/verification/2026-11-23-kk-hopf-homeomorphism.md'
       - '.github/workflows/kk-hopf-homeo.yml'
   workflow_dispatch:
@@ -31,7 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/Research
-          for module in KKHopfGlobalAlgebra KKHopfOrbit KKHopfSurjective KKHopfQuotient KKHopfHomeo; do
+          for module in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique KKHopfEquator KKHopfHomeo; do
             lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$module.olean" "Research/$module.lean" 2>&1 | tee "../kk-homeo-$module.log"
           done
       - name: Audit all new public and private theorem axioms
@@ -47,8 +49,9 @@ jobs:
           assert not re.search(r'^\s*(axiom|sorry)\b',clean,re.M)
           names=re.findall(r'^(?:private )?theorem\s+(\w+)',clean,re.M)
           assert len(names)>=3,names
-          Path('KKHopfHomeoAudit.lean').write_text('import Research.KKHopfHomeo\n' +
-            ''.join('#print axioms KKHopfHomeo.'+n+'\n' for n in ('proj_continuous','descent_continuous','quotientHomeomorph')))
+          Path('KKHopfHomeoAudit.lean').write_text('import Research.KKHopfHomeo\nimport Research.KKHopfEquator\n' +
+            ''.join('#print axioms KKHopfHomeo.'+n+'\n' for n in ('proj_continuous','descent_continuous','quotientHomeomorph')) +
+            ''.join('#print axioms KKHopfEquator.'+n+'\n' for n in ('equator_transition','equator_transition_unique')))
           Path('../kk-homeo-count.txt').write_text(str(len(names)))
           PY
           lake env lean --trust=0 KKHopfHomeoAudit.lean 2>&1 | tee ../kk-homeo-axioms.log
@@ -62,12 +65,18 @@ jobs:
               assert {t.strip() for t in row.split(',') if t.strip()}<=allowed,row
           print('PASS: homeomorphism public theorem axiom audit')
           PY
+      - name: Independent exact equatorial polynomial check
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_hopf_equator.py 2>&1 | tee kk-hopf-equator-sympy.log
       - name: Retain exact SHA and Lean logs
         if: always()
         shell: bash
         run: |
           git rev-parse HEAD > kk-homeo-checked-out.txt
-          sha256sum lean/Research/KKHopfHomeo.lean > kk-homeo-sha256.txt
+          sha256sum lean/Research/KKHopfHomeo.lean lean/Research/KKHopfEquator.lean tools/check_kk_hopf_equator.py > kk-homeo-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -76,6 +85,7 @@ jobs:
           path: |
             kk-homeo-*.log
             kk-homeo-count.txt
+            kk-hopf-equator-sympy.log
             kk-homeo-checked-out.txt
             kk-homeo-sha256.txt
           if-no-files-found: warn
