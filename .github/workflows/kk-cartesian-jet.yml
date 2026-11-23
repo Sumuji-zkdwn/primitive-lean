@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'lean/Research/KKCartesianJet.lean'
+      - 'lean/Research/KKCartesianDerivative.lean'
       - 'tools/check_kk_cartesian_jet.py'
       - 'docs/verification/2026-11-23-kk-cartesian-connection-jet.md'
       - '.github/workflows/kk-cartesian-jet.yml'
@@ -69,6 +70,44 @@ jobs:
               assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
           print('PASS:',n,'Lean theorems and axiom audit')
           PY
+      - name: Lean trust-zero analytic derivative certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianDerivative.olean Research/KKCartesianDerivative.lean 2>&1 | tee ../kk-cartesian-derivative-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-derivative-lean.log; then exit 1; fi
+      - name: Audit analytic derivative theorem axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          content=Path('Research/KKCartesianDerivative.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',content,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',content,re.M)
+          assert len(names)>=4,names
+          Path('KKCartesianDerivativeAudit.lean').write_text(
+              'import Research.KKCartesianDerivative\n'
+              + ''.join('#print axioms KKCartesianDerivative.'+n+'\n' for n in names))
+          Path('../kk-cartesian-derivative-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCartesianDerivativeAudit.lean 2>&1 | tee ../kk-cartesian-derivative-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-derivative-axioms.log').read_text()
+          n=int(Path('../kk-cartesian-derivative-count.txt').read_text())
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
+          print('PASS:',n,'analytic metric derivative theorems')
+          PY
       - name: Independently differentiate all first metric jets and connection
         shell: bash
         run: |
@@ -80,7 +119,7 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD > kk-cartesian-jet-checkout.txt
-          sha256sum lean/Research/KKCartesianJet.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
+          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -89,6 +128,9 @@ jobs:
           path: |
             kk-cartesian-jet-lean.log
             kk-cartesian-jet-axioms.log
+            kk-cartesian-derivative-lean.log
+            kk-cartesian-derivative-axioms.log
+            kk-cartesian-derivative-count.txt
             kk-cartesian-jet-count.txt
             kk-cartesian-jet-sympy.log
             kk-cartesian-jet-checkout.txt
