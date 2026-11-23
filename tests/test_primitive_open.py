@@ -38,6 +38,8 @@ class OpenSearchTests(unittest.TestCase):
         self.assertTrue(any(rule == "redirect_edge" for rule, _ in changes))
         self.assertTrue(any(rule == "choose_pair" for rule, _ in changes))
         self.assertTrue(any(rule == "append_state" for rule, _ in changes))
+        balanced = [rule for rule, _ in list(opened.balanced_proposals(parent))[:6]]
+        self.assertEqual(set(balanced), set(opened.RULES))
         targets = set()
         for rule, args in changes:
             try:
