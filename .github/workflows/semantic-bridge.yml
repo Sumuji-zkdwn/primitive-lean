@@ -1,0 +1,249 @@
+name: Semantic Bridge - recombine verified Generic macros and new semantics
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/semantic-bridge.yml'
+      - 'tools/autonomy/semantic_bridge.py'
+      - 'tools/autonomy/semantic_forge.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'tests/test_semantic_bridge.py'
+      - 'tests/fixtures/semantic_bridge_*.json'
+      - 'docs/autonomy/SEMANTIC_BRIDGE.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/semantic-bridge.yml'
+      - 'tools/autonomy/semantic_bridge.py'
+  schedule:
+    # After Semantic Foundry (12:07 UTC) with GitHub scheduler caveat.
+    - cron: '11 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-bridge-verified-hybrid-library
+  cancel-in-progress: false
+
+jobs:
+  preview-and-test:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout exact PR source without push permission
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test full upstream source verification and cross-system finite operators
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/semantic_bridge.py tests/test_semantic_bridge.py
+          python -m unittest discover -s tests -p 'test_semantic_bridge.py' -v
+      - name: Generate typed candidate using actual pinned verified source fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_bridge prepare \
+            --generic tests/fixtures/semantic_bridge_generic.json \
+            --semantic tests/fixtures/semantic_bridge_semantic.json \
+            --state tests/fixtures/semantic_bridge_empty.json \
+            --day 2026-11-24 --head "$(git rev-parse HEAD)" \
+            --output verification/semantic-bridge/candidate
+      - name: Independently seal complete 256-input proof evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_bridge seal \
+            --generic tests/fixtures/semantic_bridge_generic.json \
+            --semantic tests/fixtures/semantic_bridge_semantic.json \
+            --state tests/fixtures/semantic_bridge_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/semantic-bridge/candidate \
+            --output verification/semantic-bridge/verified.json
+      - name: Execute verified hybrid tool on an actual four-sample signal
+        shell: bash
+        run: |
+          set -euo pipefail
+          id="$(python - <<'PY'
+          import json
+          with open("verification/semantic-bridge/verified.json", encoding="utf-8") as f:
+              print(json.load(f)["receipts"][0]["id"])
+          PY
+          )"
+          python -B -m tools.autonomy.semantic_bridge run \
+            --generic tests/fixtures/semantic_bridge_generic.json \
+            --semantic tests/fixtures/semantic_bridge_semantic.json \
+            --state verification/semantic-bridge/verified.json \
+            --operator-id "$id" --signal-json '[0,3,1,2]' \
+            > verification/semantic-bridge/sample-execution.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          obj = json.loads(Path("verification/semantic-bridge/sample-execution.json").read_text())
+          assert len(obj["output"]) == 4
+          assert obj["old_primitive_closure_excluded"]
+          assert len(obj["trusted_data_tokens"]) == 2
+          print("Hybrid operator:", obj["operator_id"])
+          print("Sample output:", obj["output"])
+          PY
+      - name: Retain exact-source evidence on success or failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: semantic-bridge-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/semantic-bridge/
+          if-no-files-found: warn
+          retention-days: 30
+
+  generate-hybrid:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    outputs:
+      candidate: ${{ steps.choose.outputs.candidate }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/generic-forge-state
+          path: generic
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: semantic
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-bridge-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Regress source-provenance and typed hybrid contract
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -m unittest discover -s tests -p 'test_semantic_bridge.py' -v
+      - name: Select one new hybrid from actually verified upstream operators
+        working-directory: control
+        id: choose
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_bridge prepare \
+            --generic ../generic/docs/autonomy/generic-forge-state.json \
+            --semantic ../semantic/docs/autonomy/semantic-capability-state.json \
+            --state ../state/docs/autonomy/semantic-bridge-state.json \
+            --head "$GITHUB_SHA" --day "$(date -u +%F)" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("../cycle/plan.json", encoding="utf-8") as f:
+              print("candidate=" + str(json.load(f)["candidate"]).lower())
+          PY
+      - name: Preserve proof inputs and candidate trace
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: semantic-bridge-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  persist-certified-hybrid:
+    if: github.ref == 'refs/heads/main' && needs.generate-hybrid.result == 'success' && needs.generate-hybrid.outputs.candidate == 'true'
+    needs: [generate-hybrid]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout reviewed main code without persisted credential
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/generic-forge-state
+          path: generic
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: semantic
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-bridge-state
+          path: state
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: semantic-bridge-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Replay source-bound proposal against current verified ancestors
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          day="$(python - <<'PY'
+          import json
+          with open("../cycle/plan.json", encoding="utf-8") as f:
+              print(json.load(f)["day"])
+          PY
+          )"
+          python -B -m tools.autonomy.semantic_bridge prepare \
+            --generic ../generic/docs/autonomy/generic-forge-state.json \
+            --semantic ../semantic/docs/autonomy/semantic-capability-state.json \
+            --state ../state/docs/autonomy/semantic-bridge-state.json \
+            --head "$GITHUB_SHA" --day "$day" --output ../replay
+          cmp ../cycle/plan.json ../replay/plan.json
+      - name: Independently re-evaluate all 256 inputs and certify hybrid
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_bridge seal \
+            --generic ../generic/docs/autonomy/generic-forge-state.json \
+            --semantic ../semantic/docs/autonomy/semantic-capability-state.json \
+            --state ../state/docs/autonomy/semantic-bridge-state.json \
+            --head "$GITHUB_SHA" --evidence ../replay \
+            --output ../state/docs/autonomy/semantic-bridge-state.json
+      - name: Append only verified hybrid JSON, never code
+        working-directory: state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "semantic-bridge[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/autonomy/semantic-bridge-state.json
+          test "$(git diff --cached --name-only)" = "docs/autonomy/semantic-bridge-state.json"
+          git commit -m "semantic bridge: certify an independently tested hybrid operator"
+          git push origin HEAD:refs/heads/autonomy/semantic-bridge-state
