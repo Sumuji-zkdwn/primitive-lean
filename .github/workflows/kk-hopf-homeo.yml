@@ -48,7 +48,7 @@ jobs:
           names=re.findall(r'^(?:private )?theorem\s+(\w+)',clean,re.M)
           assert len(names)>=3,names
           Path('KKHopfHomeoAudit.lean').write_text('import Research.KKHopfHomeo\n' +
-            ''.join('#print axioms KKHopfHomeo.'+n+'\n' for n in names if not n.startswith('sphere3_') and n!='continuous_radiusSq'))
+            ''.join('#print axioms KKHopfHomeo.'+n+'\n' for n in ('proj_continuous','descent_continuous','quotientHomeomorph')))
           Path('../kk-homeo-count.txt').write_text(str(len(names)))
           PY
           lake env lean --trust=0 KKHopfHomeoAudit.lean 2>&1 | tee ../kk-homeo-axioms.log
