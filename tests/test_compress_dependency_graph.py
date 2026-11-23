@@ -1,4 +1,5 @@
 """Synthetic regression tests for lossless source reachability compression."""
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -87,14 +88,14 @@ class SourceReachabilityTests(unittest.TestCase):
         self.assertEqual(first["counts"], second["counts"])
 
     def test_generated_snapshot_matches_its_pinned_input(self):
-        # This does not inspect Lean. It ensures the committed *projection*
-        # is exactly reproducible from the committed lexical graph snapshot.
-        if not tool.GRAPH.exists() or not tool.OUTPUT.exists():
-            self.skipTest("repository snapshot files unavailable")
         raw = tool.GRAPH.read_bytes()
-        expected = tool.compress_graph(json.loads(raw), raw)
+        graph = json.loads(raw)
         actual = json.loads(tool.OUTPUT.read_text(encoding="utf-8"))
-        self.assertEqual(expected, actual)
+        # Check the provenance independently of the compressor that writes it.
+        self.assertEqual(actual["source"]["graph_sha256"], hashlib.sha256(raw).hexdigest())
+        self.assertEqual(actual["source"]["main_commit"], graph["main_commit"])
+        self.assertEqual(actual["source"]["pr_snapshot"], graph["pr_snapshot"])
+        self.assertEqual(tool.compress_graph(graph, raw), actual)
 
 
 if __name__ == "__main__":
