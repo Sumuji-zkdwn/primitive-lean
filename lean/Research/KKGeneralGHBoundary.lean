@@ -56,14 +56,17 @@ def firstA (px py pz : ℚ) : Fin 3 → Fin 3 → ℚ :=
 three directions, without assigning the curl as an independent field. -/
 theorem canonical_curl_x (px py pz : ℚ) :
     firstA px py pz 2 1 - firstA px py pz 1 2 = px := by
-  norm_num [firstA] <;> ring
+  norm_num [firstA]
+  ring
 
 theorem canonical_curl_y (px py pz : ℚ) :
     firstA px py pz 0 2 - firstA px py pz 2 0 = py := by
-  norm_num [firstA] <;> ring
+  norm_num [firstA]
+  ring
 
 theorem canonical_curl_z (px py pz : ℚ) :
     firstA px py pz 1 0 - firstA px py pz 0 1 = pz := by
-  norm_num [firstA] <;> ring
+  norm_num [firstA]
+  ring
 
 end KKGeneralGHBoundary
