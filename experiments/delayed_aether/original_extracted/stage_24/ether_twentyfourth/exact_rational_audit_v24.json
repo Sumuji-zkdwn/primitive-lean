@@ -1,0 +1,24 @@
+{
+  "independent_audit": true,
+  "grid": "5-site periodic centered-difference lattice",
+  "arithmetic": "exact rational SymPy, no float approximations",
+  "constitutive": "A=1+2(q-z)^2; independent of tanh model",
+  "canonical_bracket": "direct symbolic derivatives of two independently constructed smeared Hamiltonians",
+  "results": [
+    {
+      "model": "matched",
+      "poisson_exact": "4279359007226930931594953955687364733/107045753761750304345030661269317723200",
+      "gradient_only_exact": "4279359007226930931594953955687364733/107045753761750304345030661269317723200",
+      "potential_zero_vs_nonzero_exactly_identical": true,
+      "float_value": 0.039976915074571
+    },
+    {
+      "model": "mismatched",
+      "poisson_exact": "1256383743578482103731293779/36836172098134489632757645440",
+      "gradient_only_exact": "1256383743578482103731293779/36836172098134489632757645440",
+      "potential_zero_vs_nonzero_exactly_identical": true,
+      "float_value": 0.034107337218193465
+    }
+  ],
+  "warning": "even matched model does not have exact finite-lattice Dirac algebra because central differences lack Leibniz product rule; comparison is with exact lattice gradient expression, not with continuum closure"
+}

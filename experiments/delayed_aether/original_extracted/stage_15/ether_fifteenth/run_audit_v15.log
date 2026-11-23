@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "checked": {
+    "convergence_t0.0": true,
+    "convergence_t0.37": true,
+    "convergence_t0.91": true,
+    "inhomogeneous_curvature_nonzero": true,
+    "memory_violation_persists": true,
+    "Kasner_exact_nonlinear_equations": true,
+    "Kasner_IVP_RK4_order4": true,
+    "covariant_matter_stress_conservation": true
+  },
+  "RK4_H_reduction": [
+    17.869253018306647,
+    16.907378254300255,
+    16.592154075002647,
+    16.304779205570807
+  ],
+  "finest_graph_H": 0.0005041588544572595,
+  "finest_graph_M": 0.00016285050707745617,
+  "naive_memory_H": 0.10237253713113781,
+  "naive_memory_M": 0.004674690300492634,
+  "warnings": [
+    "Exact vacuum GR used as benchmark; no emergence shown",
+    "Nonzero 3D curvature on graph slices of globally flat Minkowski is not gravity",
+    "Naive memory term is intentionally off-shell and has no corresponding matter stress",
+    "Homogeneous Kasner IVP only; inhomogeneous graph data sampled from analytic exact family",
+    "No standalone matter+gravity+memory constrained evolution"
+  ]
+}

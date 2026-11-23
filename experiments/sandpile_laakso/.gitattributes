@@ -1,0 +1,6 @@
+# The verification record hashes these source and snapshot bytes on every platform.
+*.lean -text
+*.py -text
+*.json -text
+# This archived fixture was written with Windows line endings.
+planar_followup/square_clock_results.json whitespace=trailing-space,space-before-tab,cr-at-eol

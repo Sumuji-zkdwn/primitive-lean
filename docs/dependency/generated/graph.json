@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "44177b80818f6f747d13fce5348bd352f7ee38e0",
+  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1548,6 +1548,67 @@
       "sha256": "a35052f64b383b9bd5111d315e45ad1b7a121c35ad5ceabee95cd9334cc0bdf4"
     },
     {
+      "id": "main:lean/Research/DelayedAetherCochain.lean",
+      "scope": "main",
+      "path": "lean/Research/DelayedAetherCochain.lean",
+      "group": "Other",
+      "namespace": "DelayedAether",
+      "declarations": [
+        "C0",
+        "OneForm",
+        "TwoForm",
+        "forward",
+        "forward_comm",
+        "forward_add",
+        "forward_sub",
+        "d0",
+        "d1",
+        "d2",
+        "d1_d0_xy",
+        "d1_d0_xz",
+        "d1_d0_yz",
+        "d2_d1_zero",
+        "addTwo",
+        "d2_add",
+        "update",
+        "d2_update",
+        "closed_update",
+        "closed_two_updates",
+        "memoryStep",
+        "memoryStep_fixed",
+        "memoryStep_difference",
+        "binary_closed_update"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "55bf79aa0693305e1b6219b10cfc9d1c4d75180dc3495c32cfe37aee9de055df"
+    },
+    {
+      "id": "main:lean/Research/DelayedAetherEdgeRegge.lean",
+      "scope": "main",
+      "path": "lean/Research/DelayedAetherEdgeRegge.lean",
+      "group": "Other",
+      "namespace": "DelayedAetherEdgeRegge",
+      "declarations": [
+        "mismatch",
+        "metricEdges",
+        "metricEdges_mismatch_zero",
+        "flat_stencil_mismatch",
+        "rankOne",
+        "rankOne_zero_on_sum_zero",
+        "edgeSpring",
+        "edgeSpring_on_sum_zero",
+        "edgeSpring_zero_implies_zero",
+        "curvatureMemory",
+        "curvatureMemory_preserves_sum_zero"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "4d765346074e41871230cc4575216528c11d4b64925767d7911f12a166ccd26c"
+    },
+    {
       "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
       "scope": "main",
       "path": "lean/Research/ElasticaIntrinsicHeight.lean",
@@ -1662,76 +1723,6 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
-    },
-    {
-      "id": "main:lean/Research/InformationNetworkDiversity.lean",
-      "scope": "main",
-      "path": "lean/Research/InformationNetworkDiversity.lean",
-      "group": "Other",
-      "namespace": "InformationNetworkDiversity",
-      "declarations": [
-        "Vertex",
-        "Edge",
-        "Config",
-        "vertices",
-        "pairs",
-        "adjacent",
-        "degree",
-        "degrees",
-        "degreeHistogram",
-        "hubNumerator",
-        "reachableWithin",
-        "boundedDistance",
-        "distanceSum",
-        "distanceHistogram",
-        "spatialLongEdges",
-        "naturalPosition",
-        "zeroLongPosition",
-        "allLongPosition",
-        "graphA",
-        "graphB",
-        "graphC",
-        "graphD",
-        "graphH",
-        "graphI",
-        "graphJ",
-        "graphK",
-        "AB_same_degree_histogram",
-        "AB_distance_sums",
-        "AB_distance_histograms",
-        "AB_same_hub_numerator",
-        "AB_spatial_long_counts",
-        "CD_same_degrees_long_different_distance",
-        "HI_same_distance_long_different_hub",
-        "JK_same_degrees_distance_different_long",
-        "A_position_changes_long_edges",
-        "connectedFromZero",
-        "remove02",
-        "AB_current_connected_but_delete_distinguishes",
-        "edgeBit",
-        "encode",
-        "invertAll",
-        "edgeBit_invertAll",
-        "encode_invertAll",
-        "allZero",
-        "allOne",
-        "encode_not_injective",
-        "edgeBit_chain",
-        "encode_eq_edge",
-        "A_relative_05_observable",
-        "FactorsThrough",
-        "factorsThrough_iff_range",
-        "update_factors_iff_range",
-        "xorMask",
-        "edgeBit_mask",
-        "xorMask_descends",
-        "resetZero",
-        "resetZero_not_descending"
-      ],
-      "imports": [
-        "Mathlib.Tactic"
-      ],
-      "sha256": "a1a43121eaf6ea144d4db88eaa6678054ff15406f709e0727aad7dfcb00e8ae1"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -1881,6 +1872,32 @@
         "OrbitTrace"
       ],
       "sha256": "f5bb28939370cd658d2a5767491e4b4a60e1c8d040609520d8b7f306d80a2be9"
+    },
+    {
+      "id": "main:lean/Research/ProjectionSignHolonomy.lean",
+      "scope": "main",
+      "path": "lean/Research/ProjectionSignHolonomy.lean",
+      "group": "Other",
+      "namespace": "ProjectionSignHolonomy",
+      "declarations": [
+        "cycle3",
+        "cycle4",
+        "switch",
+        "triangle_reverse",
+        "cycle4_switch_invariant",
+        "three_four_cycles_product",
+        "sign6",
+        "abcda_negative",
+        "acbda_positive",
+        "abdca_negative",
+        "acdba_negative",
+        "adbca_positive",
+        "adcba_negative"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "20c45141c176d639d973786dea08f583133c19481bcb65ed1f9e5b060af50417"
     },
     {
       "id": "main:lean/Research/SignedCycleCounterexample.lean",
@@ -20926,6 +20943,14 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/CurveWordBVSubinterval.inc",
+      "to": "main:linear_input/lean_check/GravityObservations.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "FactorsThrough"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/CurveWordBVTopology.inc",
       "to": "main:linear_input/lean_check/CurveWordBVShuffle.inc",
       "kind": "unique_identifier_candidate",
@@ -27739,28 +27764,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "44177b80818f6f747d13fce5348bd352f7ee38e0",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "44177b80818f6f747d13fce5348bd352f7ee38e0",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "44177b80818f6f747d13fce5348bd352f7ee38e0",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "44177b80818f6f747d13fce5348bd352f7ee38e0",
+      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

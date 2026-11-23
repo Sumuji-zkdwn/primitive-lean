@@ -1,0 +1,94 @@
+{
+  "quadratic_scaling_exponent": 1.9955776590334349,
+  "all_rows": [
+    {
+      "amplitude": 0.1,
+      "grid": 128,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 6.285411438036341e-05,
+      "energy_relative_error": -1.061617818422005e-15,
+      "max_cross": 0.0989662589011459
+    },
+    {
+      "amplitude": 0.1,
+      "grid": 256,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 6.268665321447684e-05,
+      "energy_relative_error": 0.0,
+      "max_cross": 0.09901044513961048
+    },
+    {
+      "amplitude": 0.15,
+      "grid": 128,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.00014130704306886347,
+      "energy_relative_error": -3.538726061406684e-16,
+      "max_cross": 0.14845271641548455
+    },
+    {
+      "amplitude": 0.15,
+      "grid": 256,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.0001409340711171046,
+      "energy_relative_error": -2.3392598812425415e-16,
+      "max_cross": 0.14851901705186032
+    },
+    {
+      "amplitude": 0.2,
+      "grid": 128,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.00025092726593408136,
+      "energy_relative_error": -9.289155911192543e-16,
+      "max_cross": 0.19794315917725155
+    },
+    {
+      "amplitude": 0.2,
+      "grid": 256,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.0002502736865460841,
+      "energy_relative_error": 0.0,
+      "max_cross": 0.19803159949441734
+    },
+    {
+      "amplitude": 0.25,
+      "grid": 128,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.0003915014814673982,
+      "energy_relative_error": -6.794354037900834e-16,
+      "max_cross": 0.247438901568016
+    },
+    {
+      "amplitude": 0.25,
+      "grid": 256,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.0003904992718373762,
+      "energy_relative_error": 0.0,
+      "max_cross": 0.24754951485894672
+    },
+    {
+      "amplitude": 0.3,
+      "grid": 128,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.0005627562666841842,
+      "energy_relative_error": -3.538726061406684e-16,
+      "max_cross": 0.29694124596850985
+    },
+    {
+      "amplitude": 0.3,
+      "grid": 256,
+      "fixed_memory_profile": true,
+      "max_generated_plus": 0.0005613464500337574,
+      "energy_relative_error": -3.5088898218638125e-16,
+      "max_cross": 0.29707407318178636
+    }
+  ],
+  "homogeneous_memory_control": {
+    "amplitude": 0.25,
+    "grid": 256,
+    "fixed_memory_profile": false,
+    "max_generated_plus": 2.8990096876604856e-17,
+    "energy_relative_error": -1.634571406927348e-16,
+    "max_cross": 0.24986771159660456
+  },
+  "relative_spatial_grid_difference_at_amp_0p25": 0.0025664827114949725
+}

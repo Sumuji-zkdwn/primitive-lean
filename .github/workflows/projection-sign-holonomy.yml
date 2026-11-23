@@ -1,0 +1,122 @@
+name: Projection sign holonomy (exact finite + Lean)
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/ProjectionSignHolonomy.lean'
+      - 'tools/check_projection_sign_holonomy.py'
+      - 'docs/research/2026-11-23-projection-sign-holonomy.md'
+      - 'lean/lean-toolchain'
+      - 'lean/lakefile.toml'
+      - 'lean/lake-manifest.json'
+      - '.github/workflows/projection-sign-holonomy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: projection-sign-holonomy-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  finite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Verify exact algebra and every finite case
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification/projection-sign-holonomy
+          python3 -B tools/check_projection_sign_holonomy.py | tee verification/projection-sign-holonomy/finite.json
+      - name: Record source identifiers
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          assert sha == os.environ['EXPECTED_SHA']
+          paths = ['tools/check_projection_sign_holonomy.py',
+                   'lean/Research/ProjectionSignHolonomy.lean',
+                   'docs/research/2026-11-23-projection-sign-holonomy.md']
+          data = {'head_sha': sha,
+                  'files_sha256': {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+                                   for p in paths}}
+          pathlib.Path('verification/projection-sign-holonomy/source.json').write_text(
+              json.dumps(data, indent=2) + '\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: projection-sign-finite-${{ github.run_id }}
+          path: verification/projection-sign-holonomy/
+          if-no-files-found: warn
+
+  lean-kernel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install exact repository Lean/mathlib versions
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile new source at trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ../verification/projection-sign-holonomy
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --version | tee ../verification/projection-sign-holonomy/version.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/ProjectionSignHolonomy.olean Research/ProjectionSignHolonomy.lean 2>&1 \
+            | tee ../verification/projection-sign-holonomy/lean.log
+          if grep -E '(error:|warning:|sorryAx)' ../verification/projection-sign-holonomy/lean.log; then exit 1; fi
+      - name: Audit theorem dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, re
+          src = pathlib.Path('Research/ProjectionSignHolonomy.lean').read_text()
+          names = re.findall(r'^theorem\s+(\w+)', src, re.M)
+          assert len(names) == 9, names
+          assert not re.search(r'\b(sorry|admit|axiom|native_decide)\b', src)
+          pathlib.Path('ProjectionSignHolonomyAudit.lean').write_text(
+            'import Research.ProjectionSignHolonomy\n' +
+            ''.join('#print axioms ProjectionSignHolonomy.' + n + '\n' for n in names))
+          PY
+          lake env lean --trust=0 ProjectionSignHolonomyAudit.lean 2>&1 \
+            | tee ../verification/projection-sign-holonomy/axioms.log
+          python3 - <<'PY'
+          import pathlib, re
+          log = pathlib.Path('../verification/projection-sign-holonomy/axioms.log').read_text()
+          assert not re.search(r'(error:|warning:|sorryAx)', log), log
+          entries = re.findall(r'depends on axioms:\s*\[([^]]*)\]', log)
+          absent = log.count('does not depend on any axioms')
+          assert len(entries) + absent == 9, log
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for e in entries:
+              assert {v.strip() for v in e.split(',') if v.strip()} <= allowed, e
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: projection-sign-lean-${{ github.run_id }}
+          path: verification/projection-sign-holonomy/
+          if-no-files-found: warn

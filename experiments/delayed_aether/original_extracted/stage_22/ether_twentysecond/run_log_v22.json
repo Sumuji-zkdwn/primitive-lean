@@ -1,0 +1,52 @@
+{
+  "title": "v22 homogeneous nonlinear Noether & memory benchmark",
+  "scope": "Homogeneous Bianchi I/0+1D only, not full spin2 bootstrap; GR ADM action is assumed",
+  "parameters": {
+    "Delta": 3.0,
+    "width": 0.45,
+    "mu": 1.2
+  },
+  "exact_symbolic": {
+    "cubic_noether_defect": "-2*xid*(beta + 1)*(v1*v2 + v1*v3 + v2*v3)",
+    "required_lapse_cubic_coefficient": -1,
+    "volume_cubic_coefficient_fixed_by_time_diff": false,
+    "quartic_noether_defect": "0",
+    "exact_lapse_covariance_identity": "0",
+    "wrong_kinetic_memory_noether_defect": "K*expS",
+    "arbitrary_volume_prefactor_time_invariant": true,
+    "gravitational_kinetic_Q": "-2*v1*v2 - 2*v1*v3 - 2*v2*v3"
+  },
+  "dynamics": {
+    "n_steps": 701,
+    "initial_H": 0.2666231942140969,
+    "initial_relative_y": -0.7100000000000001,
+    "A_initial": 3.5295719850350724,
+    "A_min": 1.0000002178822827,
+    "A_max": 3.5708522424002656,
+    "A_final": 1.3864294215719462,
+    "shear_initial": 0.05986651818838306,
+    "shear_final": 0.0035095428264136324,
+    "scale_final": 2.574213032554001,
+    "max_abs_hamiltonian_constraint": 1.3166773227268891e-11,
+    "max_rel_constraint": 1.556563839815403e-11,
+    "max_abs_lapse_euler_equation": 2.5818099050890024e-11,
+    "max_fd_lapse_euler_derivative": 1.6707050305070178e-09,
+    "final_q": 0.5393053103832983,
+    "final_z": 0.7083359499358984,
+    "final_relative_y": 0.16903063955260011
+  },
+  "reversible_memory": {
+    "period": 3.702402448465305,
+    "energy": 0.72,
+    "energy_relative_error": 4.625929269271486e-16,
+    "return_error_after_two_periods": 0.0
+  },
+  "omitted_bath_friction": {
+    "gamma": 0.65,
+    "final_abs_constraint": 0.028503668577006355,
+    "final_lapse_violation": 0.530798321120566,
+    "max_evolution_identity_discrepancy": 4.334675682567124e-06,
+    "physical_interpretation": "Energy sink must be included in stress tensor to preserve gravitational constraint."
+  },
+  "all_assertions_passed": true
+}

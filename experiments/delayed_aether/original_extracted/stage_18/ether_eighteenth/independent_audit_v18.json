@@ -1,0 +1,58 @@
+{
+  "analytic_vs_finite_difference_density_and_shape_inertia_max_relative_err": 6.028461977849809e-10,
+  "zero_padded_FFT_Newton_energy_vs_direct_125body_absolute_err": 6.938893903907228e-18,
+  "max_3d_affine_static_energy_vs_exact_formula_absolute_err": 1.1519654208314023e-06,
+  "ADM_s_positive_negative_symmetry_mass_difference": [
+    0.0,
+    1.4210854715202004e-14
+  ],
+  "nonaffine_sample_min_centered_hessian": 76.50694609591538,
+  "boundary_multipole_approximation_vs_direct_green_integral": [
+    {
+      "point": [
+        15.0,
+        0.0,
+        0.0
+      ],
+      "psi_boundary": 1.0046822244513895,
+      "psi_direct": 1.004682362126265,
+      "abs_diff": 1.3767487549998236e-07,
+      "rel_to_psi_minus_one": 2.9403732548345568e-05
+    },
+    {
+      "point": [
+        0.0,
+        15.0,
+        0.0
+      ],
+      "psi_boundary": 1.0047056190703296,
+      "psi_direct": 1.0047057921778102,
+      "abs_diff": 1.7310748057219882e-07,
+      "rel_to_psi_minus_one": 3.6787397786551554e-05
+    },
+    {
+      "point": [
+        0.0,
+        0.0,
+        15.0
+      ],
+      "psi_boundary": 1.0046920740007477,
+      "psi_direct": 1.0046921077882056,
+      "abs_diff": 3.378745794258009e-08,
+      "rel_to_psi_minus_one": 7.200964421532172e-06
+    },
+    {
+      "point": [
+        15.0,
+        15.0,
+        15.0
+      ],
+      "psi_boundary": 1.002709681390588,
+      "psi_direct": 1.0027096765041257,
+      "abs_diff": 4.886462345865539e-09,
+      "rel_to_psi_minus_one": 1.8033346513868672e-06
+    }
+  ],
+  "analytic_nonaffine_diffeomorphism_sufficient_condition": "||DF-I||_op <= |eps| * 2 exp(-1/2) < 1 if |eps|<exp(1/2)/2 ~0.82436",
+  "known_limitations": "finite grids, static non-spherical initial data, fixed-shape 1DOF dynamics; not a 3D full Einstein time evolution nor proof of arbitrary-mode stability"
+}

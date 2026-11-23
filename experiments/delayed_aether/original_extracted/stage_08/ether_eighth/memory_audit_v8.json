@@ -1,0 +1,14 @@
+{
+  "grid": 17,
+  "dt": 0.09,
+  "steps": 240,
+  "tau": 0.8,
+  "kappa": 0.5,
+  "initial_energy": 0.3854424795200232,
+  "final_energy": 0.19606394012134606,
+  "energy_ratio": 0.508672371466417,
+  "maximum_scalar_constraint": 4.414871246360974e-16,
+  "maximum_momentum_constraint": 1.2793585635328952e-17,
+  "maximum_memory_mismatch": 0.003637320836036386,
+  "warning": "Spatial curvature-gradient memory has k^4 dispersion, so no universal continuum wavefront speed follows."
+}

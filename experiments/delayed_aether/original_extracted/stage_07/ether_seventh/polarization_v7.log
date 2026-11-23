@@ -1,0 +1,13 @@
+{
+  "spatial_symmetric_components": 6,
+  "TT_rank": 2,
+  "TT_eigenvalues": {
+    "one": 2,
+    "zero": 4
+  },
+  "displacement_strain_span": 3,
+  "displacement_plus_scalar_span": 4,
+  "kernel_equals_displacement_plus_scalar": true,
+  "TT_projector_matrix": "Matrix([[1/2, -1/2, 0, 0, 0, 0], [-1/2, 1/2, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]])",
+  "note": "Algebra at nonzero wavevector k=(0,0,1); valid in rotated basis for every nonzero 3-vector."
+}

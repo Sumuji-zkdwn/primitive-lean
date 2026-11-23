@@ -1,0 +1,134 @@
+{
+  "multistart": [
+    {
+      "scale": 0.55,
+      "initial_energy": 43.7529317792517,
+      "final_energy": 36.770422877264295,
+      "iterations": 1035,
+      "optimizer_success": true,
+      "gradmax": 7.811431048467561e-05
+    },
+    {
+      "scale": 0.8,
+      "initial_energy": 55.751484877117285,
+      "final_energy": 36.77042287726514,
+      "iterations": 1017,
+      "optimizer_success": true,
+      "gradmax": 1.3593431017281585e-05
+    },
+    {
+      "scale": 1.0,
+      "initial_energy": 66.56740500475628,
+      "final_energy": 36.7704228772599,
+      "iterations": 1123,
+      "optimizer_success": true,
+      "gradmax": 1.7797531929323277e-05
+    },
+    {
+      "scale": 1.3,
+      "initial_energy": 83.77569151122684,
+      "final_energy": 36.770422877267336,
+      "iterations": 1243,
+      "optimizer_success": true,
+      "gradmax": 5.91723218302395e-05
+    },
+    {
+      "scale": 1.8,
+      "initial_energy": 115.3760098606713,
+      "final_energy": 36.77042287726302,
+      "iterations": 1239,
+      "optimizer_success": true,
+      "gradmax": 6.192027122504847e-05
+    },
+    {
+      "scale": 2.4,
+      "initial_energy": 163.63662206510594,
+      "final_energy": 36.77042287726181,
+      "iterations": 1318,
+      "optimizer_success": true,
+      "gradmax": 4.243120036098538e-05
+    }
+  ],
+  "continuation": [
+    {
+      "n": 240,
+      "h": 0.05,
+      "energy": 36.81720552108792,
+      "components": [
+        18.35996273808997,
+        18.443039810113714,
+        0.01420297288424071
+      ],
+      "optimizer_success": true,
+      "iterations": 1540,
+      "gradmax": 7.293529673564347e-05,
+      "f_at_r1": 0.3875033001345566,
+      "max_memory_lag": 0.05918091917386614
+    },
+    {
+      "n": 320,
+      "h": 0.0375,
+      "energy": 36.82443432345879,
+      "components": [
+        18.372358997554166,
+        18.43785539212491,
+        0.01421993377971543
+      ],
+      "optimizer_success": true,
+      "iterations": 2074,
+      "gradmax": 1.175666289914185e-05,
+      "f_at_r1": 0.3880688368562152,
+      "max_memory_lag": 0.04823155872762008
+    }
+  ],
+  "basis_stress": [
+    {
+      "family": "original_8",
+      "l": 2,
+      "dim": 16,
+      "minimum_omega_squared": 0.2954256041778359,
+      "second_omega_squared": 0.7069117258112853,
+      "min_kinetic_eig": 0.08636294404426179
+    },
+    {
+      "family": "original_8",
+      "l": 3,
+      "dim": 16,
+      "minimum_omega_squared": 0.40094682142773075,
+      "second_omega_squared": 0.8720189932828595,
+      "min_kinetic_eig": 0.27316150783387844
+    },
+    {
+      "family": "expanded_10",
+      "l": 2,
+      "dim": 20,
+      "minimum_omega_squared": 0.2931041944493702,
+      "second_omega_squared": 0.699555065690847,
+      "min_kinetic_eig": 0.01950923187248005
+    },
+    {
+      "family": "expanded_10",
+      "l": 3,
+      "dim": 20,
+      "minimum_omega_squared": 0.3987137081402997,
+      "second_omega_squared": 0.8657260716298086,
+      "min_kinetic_eig": 0.06830584765076973
+    },
+    {
+      "family": "broad_10",
+      "l": 2,
+      "dim": 20,
+      "minimum_omega_squared": 0.28184715948718686,
+      "second_omega_squared": 0.6679623117538916,
+      "min_kinetic_eig": 0.005073291707245669
+    },
+    {
+      "family": "broad_10",
+      "l": 3,
+      "dim": 20,
+      "minimum_omega_squared": 0.3870011371906189,
+      "second_omega_squared": 0.8366864834993194,
+      "min_kinetic_eig": 0.013596578749876121
+    }
+  ]
+}

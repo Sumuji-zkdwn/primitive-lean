@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "title": "Lean CI claim-to-check audit: primitive-lean PR #166 / remediation PR #167",
+  "assessed_at_utc": "2026-11-22",
+  "scope": "One public-repository case study. Checks correspondence between PR claims, CI invocations, event filters, and exported artifact provenance. Not a Lean kernel proof audit.",
+  "repo": "Sumuji-zkdwn/primitive-lean",
+  "subject": {
+    "pr": 166,
+    "head_sha": "f004045716476c9e9eed91af70bedaf5cd52f503",
+    "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/166"
+  },
+  "baseline": {
+    "run_id": 44621681312,
+    "url": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44621681312",
+    "head_sha": "f004045716476c9e9eed91af70bedaf5cd52f503",
+    "conclusion": "success",
+    "job_ids": [
+      135904716278,
+      135904716728
+    ],
+    "scanned_job_logs": "No occurrence of test_export_agent_catalog, export_agent_catalog.py, or agent-catalog across the two job logs",
+    "finding": "Success did not independently demonstrate the newly introduced exporter and targeted regression tests"
+  },
+  "remediation": {
+    "pr": 167,
+    "url": "https://github.com/Sumuji-zkdwn/primitive-lean/pull/167",
+    "head_sha": "2ddb0391320df9e7ee983b3f1fdc1fefb6074264",
+    "workflow": ".github/workflows/agent-catalog.yml",
+    "run_id": 44846643820,
+    "run_url": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44846643820",
+    "run_conclusion": "success",
+    "job_id": 136667877536,
+    "test_evidence": "Ran 2 tests; OK (job log)",
+    "observed_artifact": {
+      "id": 14682484755,
+      "url": "https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/44846643820/artifacts/14682484755",
+      "expires_at_utc": "2026-12-21T00:52:23Z",
+      "source_commit": "2ddb0391320df9e7ee983b3f1fdc1fefb6074264",
+      "source_files_scanned": 414,
+      "lexical_declaration_count": 7946,
+      "jsonl_sha256": "f26a14354cbbaa60ddd5d082ecb450ecdb7e6a35e2ee86c06365cc262f68ec42",
+      "sha256_evidence": "CI step log output; compressed artifact has not been independently downloaded and rehashed in this case study"
+    }
+  },
+  "findings": [
+    {
+      "id": "F-001",
+      "type": "missing_targeted_test_evidence",
+      "initial_status": "confirmed",
+      "remediated_at": "PR #167 HEAD",
+      "summary": "PR #166 baseline CI succeeded without invoking its new exporter or targeted unit-test module (job logs inspected)."
+    },
+    {
+      "id": "F-002",
+      "type": "event_filter_gap",
+      "initial_status": "confirmed",
+      "remediated_at": "commit 2ddb039",
+      "summary": "Original PR #167 push paths omitted lean/** and linear_input/lean_check/**. Commit 2ddb039 added both paths.",
+      "commit_url": "https://github.com/Sumuji-zkdwn/primitive-lean/commit/2ddb0391320df9e7ee983b3f1fdc1fefb6074264"
+    }
+  ],
+  "boundaries": {
+    "main_merged": false,
+    "kernel_verified_by_catalog": false,
+    "declaration_semantics_reviewed": false,
+    "per_declaration_axiom_audits_performed": false,
+    "live_paid_checkout": false,
+    "external_customer_paid": false
+  }
+}

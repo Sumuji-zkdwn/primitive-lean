@@ -1,0 +1,40 @@
+{
+  "b10": {
+    "impact_b_over_m": 10,
+    "r0_exp": 7.716909740176941,
+    "r0_sch": 7.756620129635963,
+    "deflection_exp": 0.6104374370316754,
+    "deflection_sch": 0.5903957876060977,
+    "deflection_ratio": 1.0339461253726783,
+    "weak_4_over_b": 0.4
+  },
+  "b100": {
+    "impact_b_over_m": 100,
+    "r0_exp": 97.97944795498255,
+    "r0_sch": 97.98203488728873,
+    "deflection_exp": 0.04130674084197139,
+    "deflection_sch": 0.041222539749273146,
+    "deflection_ratio": 1.0020425983748302,
+    "weak_4_over_b": 0.04
+  },
+  "areal_pericenter10_14": {
+    "areal_Rp_over_m": 10,
+    "areal_Ra_over_m": 14,
+    "isotropic_rp_exp": 8.941939695563638,
+    "isotropic_ra_exp": 12.960409305085395,
+    "isotropic_rp_sch": 8.972135954999578,
+    "isotropic_ra_sch": 12.980740698407862,
+    "advance_exp": 2.8867100064288653,
+    "advance_sch": 2.738166887113586,
+    "ratio_exp_over_sch": 1.0542491109706849
+  },
+  "redshift_areal10": {
+    "areal_R_over_m": 10,
+    "isotropic_r_exp": 8.941939695563638,
+    "isotropic_r_sch": 8.972135954999578,
+    "redshift_exp": 0.11832559158962974,
+    "redshift_sch": 0.1180339887498949
+  },
+  "photon_b_critical_exp": 5.43656365691809,
+  "photon_b_critical_sch": 5.196152422706633
+}

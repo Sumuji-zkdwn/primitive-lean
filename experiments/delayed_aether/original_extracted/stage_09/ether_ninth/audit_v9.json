@@ -1,0 +1,92 @@
+{
+  "model": "V9 finite tetrahedral Regge plus two memory tests",
+  "date": "2026-11-22",
+  "regge": {
+    "num_tetrahedra": 4,
+    "interior_edges": 4,
+    "boundary_edges": 6,
+    "flat_curvature_max": 5.329070518200751e-15,
+    "flat_jacobian_vs_all_threes": 1.4851475604871212e-09,
+    "flat_eigenvalues": [
+      7.105426911074493e-10,
+      7.105427357601002e-10,
+      7.105433366962206e-10,
+      12.000000003808964
+    ],
+    "flat_translation_kernel_residual": 4.1023222320706356e-10,
+    "curved_radius_change_percent": 8.0,
+    "curved_deficits_rad": [
+      0.3070237193650929,
+      0.36039108679575804,
+      0.36039108679575804,
+      0.36039108679575804
+    ],
+    "curved_eigenvalues": [
+      -0.4147166027345761,
+      -0.3313141842209432,
+      -0.33131418422094244,
+      9.42345228781334
+    ],
+    "curved_symmetry_residual": 8.881784197001252e-11,
+    "regge_action_gradient_error": 5.610036879488689e-10,
+    "flat_vertex_move_trials": 256,
+    "max_flat_vertex_shift_deficit": 7.105427357601002e-15,
+    "max_naive_curved_shift_deficit_change": 0.1760169359407664,
+    "warning": "curved configuration is off-shell; NOT a proof of loss of diffeomorphism invariance on curved solutions"
+  },
+  "so3_gauge": {
+    "num_vertices": 5,
+    "num_edges": 10,
+    "num_faces": 10,
+    "gauge_random_trials": 128,
+    "energy_invariance_abs_max": 1.0658141036401503e-14,
+    "curvature_covariance_L2_max": 1.7486012637846216e-15,
+    "memory_gap_invariance_max": 1.7763568394002505e-15,
+    "gradient_covariance_max": 8.11906333221578e-15,
+    "one_step_link_covariance_max": 5.525032997054197e-16,
+    "one_step_memory_covariance_max": 3.8659043403122315e-16,
+    "orthogonality_error_max": 1.8889442194018095e-15,
+    "rates": {
+      "0.05": {
+        "initial_energy": 4.621063598191187,
+        "final_energy": 0.0027184388564017517,
+        "max_hardening": 3.987592710083264,
+        "end_stiffness": 1.0359173315805708,
+        "energy_rises": 0
+      },
+      "0.12": {
+        "initial_energy": 4.621063598191187,
+        "final_energy": 3.250021372174395e-06,
+        "max_hardening": 3.987592710083264,
+        "end_stiffness": 1.000033137228659,
+        "energy_rises": 0
+      },
+      "0.3": {
+        "initial_energy": 4.621063598191187,
+        "final_energy": 4.746890567981774e-12,
+        "max_hardening": 3.987592710083264,
+        "end_stiffness": 1.0000000000156146,
+        "energy_rises": 0
+      }
+    },
+    "interpretation": "exact internal SO(3) frame symmetry; NOT discrete spacetime diffeomorphisms"
+  },
+  "regge_memory": {
+    "steps": 240,
+    "initial_energy": 0.5828342813997551,
+    "final_energy": 2.447827373531825e-07,
+    "initial_max_curvature": 0.36039108679575804,
+    "final_max_curvature": 0.0004097350482297202,
+    "max_hardness_initial": 3.6702272276535295,
+    "max_hardness_final": 0.8000071714765538,
+    "energy_upward_steps": 0,
+    "fine_steps": 480,
+    "fine_final_energy": 6.135256301387023e-08,
+    "fine_final_max_curvature": 0.00020513331134619506,
+    "coarse_final_energy": 4.6150241236423985e-07,
+    "coarse_final_max_curvature": 0.0006052709842148118,
+    "phi_is_nonnegative_analytic": true,
+    "theoretical_dissipation": "for continuous rdot=-eta grad_r H, mdot=-gamma grad_m H, dH/dt=-eta|grad_r H|^2-gamma|grad_m H|^2 <=0",
+    "caveat": "dissipative smoothing of intrinsic curvature, not Lorentz-covariant causal gravitational dynamics"
+  }
+}

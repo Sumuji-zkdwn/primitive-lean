@@ -1,0 +1,36 @@
+{
+  "reference_continuum": {
+    "standard": 0.11778351418419164,
+    "mismatched_weighted": 0.10831581334384349,
+    "mismatched_difference": -0.009467700840348148
+  },
+  "n512": [
+    {
+      "n": 512,
+      "dx": 0.01227184630308513,
+      "model": "matched",
+      "poisson_bracket": 0.11774709211741038,
+      "standard_D_rhs": 0.11774413443149129,
+      "modified_rhs": 0.11774413443149129,
+      "standard_abs_error": 2.957685919097175e-06,
+      "modified_abs_error": 2.957685919097175e-06
+    },
+    {
+      "n": 512,
+      "dx": 0.01227184630308513,
+      "model": "mismatched",
+      "poisson_bracket": 0.10828230513235852,
+      "standard_D_rhs": 0.11774413443149129,
+      "modified_rhs": 0.10828218658148203,
+      "standard_abs_error": 0.009461829299132765,
+      "modified_abs_error": 1.1855087649059737e-07
+    }
+  ],
+  "gradient_max_abs_error": 6.724697465543272e-10,
+  "potential_variation_bracket_range": 1.249000902703301e-16,
+  "convergence_test": {
+    "matched_256_to_512_error_ratio": 3.99479341618368,
+    "bad_model_standard_256_to_512_error_ratio": 0.9981398937272904
+  }
+}
+V24 verification PASSED
