@@ -130,8 +130,7 @@ theorem backward_winding_number :
     AddCircle.windingNumber
       { asHom := Path.Homotopic.Quotient.mk
           (AddCircle.zsmulLoop (1 : ℝ) 0 (-1)) } = (-1 : ℤ) := by
-  letI : Fact (0 < (1 : ℝ)) := ⟨by norm_num⟩
-  simpa using
+  exact
     (AddCircle.windingNumber_zsmulLoop (p := (1 : ℝ)) (x := (0 : ℝ)) (-1))
 
 /-- The canonical exponential map of the additive circle sends
