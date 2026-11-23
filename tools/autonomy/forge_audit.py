@@ -25,6 +25,10 @@ COOLDOWN_SECONDS = 600
 MATURITY_DELAY_MINUTES = 20
 EXPECTED_CAP = 5
 KNOWN_WORKFLOWS = ("generic", "meta")
+# The November 23 dispatch gate remains closed; ongoing checks are read-only.
+MONITOR_HOURS = 4
+SCHEDULE_MINUTES = {"generic": 7, "meta": 17}
+SCHEDULE_PERIOD_MINUTES = 30
 
 
 def require(condition, reason):
@@ -146,33 +150,47 @@ def capability(gs, ms):
 
 
 def scheduler_metrics(kind, runs, now):
-    offset = 0 if kind == "generic" else 2
-    first = WINDOW_BEGIN + timedelta(minutes=offset)
-    mature = min(WINDOW_END, now - timedelta(minutes=MATURITY_DELAY_MINUTES))
+    """Recent observed delivery; nominal cron slots are not guaranteed runs."""
+    start = now - timedelta(hours=MONITOR_HOURS)
+    offset = SCHEDULE_MINUTES[kind]
+    cursor = start.replace(minute=0, second=0, microsecond=0)
+    cursor += timedelta(minutes=offset)
+    while cursor < start:
+        cursor += timedelta(minutes=SCHEDULE_PERIOD_MINUTES)
+    mature = now - timedelta(minutes=MATURITY_DELAY_MINUTES)
     expected = 0
-    cursor = first
     while cursor <= mature:
         expected += 1
-        cursor += timedelta(minutes=10)
-    observed_schedule = [r for r in runs if r["event"] == "schedule"
-                         and WINDOW_BEGIN <= r["created_at"] <= WINDOW_END +
-                         timedelta(minutes=MATURITY_DELAY_MINUTES)]
-    observed_dispatch = [r for r in runs if r["event"] == "workflow_dispatch"]
+        cursor += timedelta(minutes=SCHEDULE_PERIOD_MINUTES)
+    recent = [r for r in runs if start <= r["created_at"] <= now]
+    scheduled = [r for r in recent if r["event"] == "schedule"]
+    dispatched = [r for r in recent if r["event"] == "workflow_dispatch"]
+    operational = [r for r in recent if r["event"] in
+                   {"schedule", "workflow_dispatch", "push"}]
+    failed = [r for r in operational if r["status"] == "completed"
+              and r["conclusion"] not in {"success", "neutral", "skipped"}]
     activity = sorted(runs, key=lambda x: x["created_at"])
     return {
+        "observation_window_hours": MONITOR_HOURS,
+        "window_start_utc": start.isoformat(),
         "nominal_matured_schedule_slots": expected,
-        "observed_schedule_events": len(observed_schedule),
-        "observed_manual_or_relay_dispatches": len(observed_dispatch),
+        "observed_schedule_events": len(scheduled),
+        "observed_manual_or_relay_dispatches": len(dispatched),
+        "observed_operational_failures": len(failed),
+        "observed_operational_successes": sum(
+            row["status"] == "completed" and row["conclusion"] == "success"
+            for row in operational),
         "last_observed_run_created_at":
             activity[-1]["created_at"].isoformat() if activity else None,
         "last_observed_run_conclusion":
             activity[-1]["conclusion"] if activity else None,
-        "no_scheduled_runs_observed": bool(expected and not observed_schedule),
+        "no_scheduled_runs_observed": bool(expected and not scheduled),
         "interpretation":
             "Nominal elapsed cron slots are not guaranteed executions; "
-            "GitHub may delay or drop scheduled events.",
+            "GitHub may delay or drop scheduled events. Only the latest "
+            "100 workflow runs are inspected; high activity can truncate "
+            "the available observation window.",
     }
-
 
 def dispatch_gate(kind, state, runs, now):
     """One workflow dispatch at most per cooldown, with hard trial cap."""
@@ -202,6 +220,10 @@ def dispatch_gate(kind, state, runs, now):
 
 def report(gs, ms, runs, now):
     require(now.tzinfo is not None, "missing timezone")
+    cutoff = now - timedelta(hours=MONITOR_HOURS)
+    def saved_recent(rows):
+        return sum("T" in row["day"] and cutoff <= parse_time(row["day"]) <= now
+                   for row in rows)
     return {
         "schema_version": SCHEMA,
         "utc_observed_at": now.isoformat(),
@@ -210,6 +232,8 @@ def report(gs, ms, runs, now):
             "meta_verified": len(ms["rules"]),
             "generic_last_saved": gs["last_utc_day"],
             "meta_last_saved": ms["last_utc_day"],
+            "generic_new_verified_last_4h": saved_recent(gs["receipts"]),
+            "meta_new_verified_last_4h": saved_recent(ms["rules"]),
         },
         "scheduler": {
             key: scheduler_metrics(key, runs[key], now) for key in KNOWN_WORKFLOWS
@@ -223,6 +247,9 @@ def report(gs, ms, runs, now):
             "trial_receipt_limit_each": EXPECTED_CAP,
             "cooldown_seconds": COOLDOWN_SECONDS,
             "trial_ends_utc": WINDOW_END.isoformat(),
+            "operational_mode": "READ_ONLY_AUDIT_NO_DISPATCH",
+            "generic_max_receipts": gf.MAX_RECORDS,
+            "meta_max_rules": mf.MAX_HISTORY,
             "only_trusted_default_branch_may_dispatch": True,
             "no_untrusted_code_execution": True,
         },
