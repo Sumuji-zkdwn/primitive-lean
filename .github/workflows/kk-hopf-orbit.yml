@@ -1,0 +1,92 @@
+name: KK Hopf fibre-orbit completeness
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKHopfOrbit.lean'
+      - 'tools/check_kk_hopf_orbit.py'
+      - 'docs/verification/2026-11-23-kk-hopf-orbit-completeness.md'
+      - '.github/workflows/kk-hopf-orbit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hopf-orbit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel compile and theorem audit
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKHopfGlobalAlgebra.olean Research/KKHopfGlobalAlgebra.lean 2>&1 | tee ../kk-hopf-dependency.log
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKHopfOrbit.olean Research/KKHopfOrbit.lean 2>&1 | tee ../kk-hopf-lean.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKHopfOrbit.lean').read_text()
+          stripped=re.sub(r'/\-.*?\-/','',src,flags=re.S)
+          assert not re.search(r'^\s*(axiom|sorry)\b',stripped,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',stripped,re.M)
+          assert len(names)==3,names
+          Path('KKHopfOrbitAudit.lean').write_text('import Research.KKHopfOrbit\n'+
+             ''.join('#print axioms KKHopfOrbit.'+name+'\n' for name in names))
+          Path('../kk-hopf-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKHopfOrbitAudit.lean 2>&1 | tee ../kk-hopf-audit.log
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          t=Path('../kk-hopf-audit.log').read_text()
+          n=int(Path('../kk-hopf-count.txt').read_text())
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',t)
+          none=t.count('does not depend on any axioms')
+          assert len(dep)+none==n,(n,dep,none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for item in dep:
+              assert {z.strip() for z in item.split(',') if z.strip()}<=allowed,item
+          assert 'sorryAx' not in t
+          print('PASS: all',n,'new Lean theorem axioms audited')
+          PY
+      - name: Independent exact polynomial oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_hopf_orbit.py 2>&1 | tee kk-hopf-sympy.log
+      - name: Preserve proof evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > kk-hopf-checked-out.txt
+          sha256sum lean/Research/KKHopfOrbit.lean tools/check_kk_hopf_orbit.py > kk-hopf-sha256.txt
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-hopf-orbit
+          path: |
+            kk-hopf-dependency.log
+            kk-hopf-lean.log
+            kk-hopf-audit.log
+            kk-hopf-count.txt
+            kk-hopf-sympy.log
+            kk-hopf-checked-out.txt
+            kk-hopf-sha256.txt
+          if-no-files-found: warn
