@@ -52,6 +52,7 @@ jobs:
           from pathlib import Path
           import re
           mods=('KKGeneralGHBoundary','KKGeneralEMDResidual','KKNutCartesian')
+          imports=['import Research.'+m for m in mods]
           lines=[]; total=0
           for m in mods:
               t=Path('Research/'+m+'.lean').read_text()
@@ -59,9 +60,8 @@ jobs:
               names=re.findall(r'^theorem\s+(\w+)',t,re.M)
               assert names,m
               total+=len(names)
-              lines.append('import Research.'+m)
               lines.extend('#print axioms '+m+'.'+x for x in names)
-          Path('KKGeneralAllAudit.lean').write_text('\n'.join(lines)+'\n')
+          Path('KKGeneralAllAudit.lean').write_text('\n'.join(imports+lines)+'\n')
           Path('../kk-general-count.txt').write_text(str(total))
           PY
           lake env lean --trust=0 KKGeneralAllAudit.lean 2>&1 | tee ../kk-general-axioms.log
