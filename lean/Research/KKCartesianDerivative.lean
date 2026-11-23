@@ -71,14 +71,14 @@ theorem E.hasDerivAt_x (a x z : ℝ) (e : E) (he : e.Good a x z) :
   | add l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
       convert (ihl hl).add (ihr hr) using 1 <;>
-        simp [E.eval, E.dx, Pi.add_apply]
+        simp [E.eval, E.dx] <;> (funext w; rfl)
   | mul l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
       convert (ihl hl).mul (ihr hr) using 1 <;>
-        simp [E.eval, E.dx, Pi.mul_apply]
+        simp [E.eval, E.dx] <;> (funext w; rfl)
   | neg e ih =>
       convert (ih he).neg using 1 <;>
-        simp [E.eval, E.dx, Pi.neg_apply]
+        simp [E.eval, E.dx] <;> (funext w; rfl)
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
@@ -94,14 +94,14 @@ theorem E.hasDerivAt_z (a x z : ℝ) (e : E) (he : e.Good a x z) :
   | add l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
       convert (ihl hl).add (ihr hr) using 1 <;>
-        simp [E.eval, E.dz, Pi.add_apply]
+        simp [E.eval, E.dz] <;> (funext w; rfl)
   | mul l r ihl ihr =>
       rcases he with ⟨hl,hr⟩
       convert (ihl hl).mul (ihr hr) using 1 <;>
-        simp [E.eval, E.dz, Pi.mul_apply]
+        simp [E.eval, E.dz] <;> (funext w; rfl)
   | neg e ih =>
       convert (ih he).neg using 1 <;>
-        simp [E.eval, E.dz, Pi.neg_apply]
+        simp [E.eval, E.dz] <;> (funext w; rfl)
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
