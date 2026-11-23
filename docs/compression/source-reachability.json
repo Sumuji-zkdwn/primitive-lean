@@ -1,11 +1,11 @@
 {
   "counts": {
-    "all_source_edges": 1384,
-    "eligible_direct_edges": 429,
-    "nodes": 435,
-    "retained_pairs": 308,
+    "all_source_edges": 1385,
+    "eligible_direct_edges": 430,
+    "nodes": 436,
+    "retained_pairs": 309,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 422,
+    "unique_eligible_pairs": 423,
     "weak_edges_excluded": 955
   },
   "edges": [
@@ -276,6 +276,10 @@
     [
       "main:lean/Research/ElasticaObservationQuotient.lean",
       "main:lean/Elastica/Geometry.lean"
+    ],
+    [
+      "main:lean/Research/FiniteConnectionDerivation.lean",
+      "main:lean/Research/FiniteConnectionCurvature.lean"
     ],
     [
       "main:lean/Research/FiniteConnectionWitness.lean",
@@ -1309,6 +1313,7 @@
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteConnectionCurvature.lean",
+    "main:lean/Research/FiniteConnectionDerivation.lean",
     "main:lean/Research/FiniteConnectionWitness.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
     "main:lean/Research/OkanoharaTransport.lean",
@@ -1682,8 +1687,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "437d71a4a95a567ad50369dd2e350b81ff9af998d847b4fcf0fcc17c7b4d703b",
-    "main_commit": "4412b92ba656a1d82dee872093feed8542c0eb6b",
+    "graph_sha256": "efca7bb5ea8c7a5c1cb285829dba65ca19b50ed5510806266f1eedc0be61bad6",
+    "main_commit": "bc21819b58e815bc620cc2e6a9407aac9cd879c5",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
