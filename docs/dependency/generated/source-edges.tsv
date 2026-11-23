@@ -241,6 +241,9 @@ main:lean/Research/SiphonFiniteDetermination.lean	main:lean/Research/SiphonPolyn
 main:lean/Research/SiphonFiniteDetermination.lean	main:lean/Research/SiphonPolynomialE.lean	unique_identifier_candidate	closedOrbit,iterate_eq_closedOrbit
 main:lean/Research/SiphonPredictiveQuotient.lean	main:lean/Research/ElasticaObservationQuotient.lean	exact_import	Research.ElasticaObservationQuotient
 main:lean/Research/SiphonPredictiveQuotient.lean	main:lean/Research/SiphonPolynomialE.lean	exact_import	Research.SiphonPolynomialE
+main:lean/Research/SiphonTangentObservation.lean	main:lean/OrbitTrace.lean	exact_import	OrbitTrace
+main:lean/Research/SiphonTangentObservation.lean	main:lean/OrbitTrace.lean	qualified_reference	OrbitTrace.linearE
+main:lean/Research/SiphonTangentObservation.lean	main:lean/Research/SiphonPolynomialE.lean	exact_import	Research.SiphonPolynomialE
 main:lean/Research/SphereClock.lean	main:lean/Elastica/Geometry.lean	exact_import	Elastica.Geometry
 main:lean/Research/SphereClock.lean	main:lean/Elastica/Geometry.lean	qualified_reference	Elastica.xCoord,Elastica.xCoord_affine,Elastica.yCoord,Elastica.yCoord_affine
 main:lean/Research/SphereClock.lean	main:lean/Elastica/Geometry.lean	unique_identifier_candidate	xCoord_affine,yCoord_affine
