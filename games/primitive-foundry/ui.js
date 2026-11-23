@@ -406,6 +406,9 @@
    category=el.dataset.category;renderPalette();
   }));
   document.querySelectorAll("[data-panel]").forEach(el=>el.addEventListener("click",()=>showPane(el.dataset.panel)));
+  $("research-shortcut").addEventListener("click",()=>{
+   showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
+  });
   $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
   $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
   $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
