@@ -1,6 +1,6 @@
 {
-  "last_source_sha": "31624f032a2d4c69a443655dec4855b31ffb9a43249802e4aa2dd672dbe79a5a",
-  "last_utc_day": "2026-11-22",
+  "last_source_sha": "00d7c56ad366f78d41a052fea3c1568deb0b383829f5a38b4c3dff92a40a32e9",
+  "last_utc_day": "2026-11-23",
   "results": [
     {
       "generated_lean_sha256": "bb7862169c1d628ab74a8f7b80a205294b86277d138c87619872d30ff9ae171b",
@@ -14,6 +14,22 @@
       "status": "LEAN_VERIFIED_FINITE_ONLY",
       "task_id": "siphon_z3_u0_old",
       "utc_day": "2026-11-22"
+    },
+    {
+      "generated_lean_sha256": "c74b6c154e74b6e89b34edbd2f44f1eb6512c154f3be1737535978d683ea4315",
+      "kind": "DISTINGUISHABLE",
+      "lead_id": "5fe228f1580aa68de00f",
+      "main_sha": "75bd1fbf8a3092767924d5b48b29dc55b784e8f4",
+      "model_sha256": "8e1bd92302d6dd4908908af0e88127a16a46d98c0d06ef246f9a4cc9c654a9d3",
+      "scope": "FINITE_OPERATOR_WORD_MODEL_ONLY",
+      "shortest_word": [
+        0,
+        0
+      ],
+      "source_sha256": "00d7c56ad366f78d41a052fea3c1568deb0b383829f5a38b4c3dff92a40a32e9",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "task_id": "observer_primitive",
+      "utc_day": "2026-11-23"
     }
   ],
   "schema_version": 1
