@@ -1,0 +1,100 @@
+name: KK Hopf south local homeomorphism
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKHopfSouthHomeo.lean'
+      - 'tools/check_kk_hopf_south_symmetry.py'
+      - 'docs/verification/2026-11-23-kk-hopf-south-homeo.md'
+      - '.github/workflows/kk-hopf-south-homeo.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  south-homeo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile complete Hopf quotient-to-south chart chain
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          for mod in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique KKHopfHomeo KKHopfNorthTriv KKHopfNorthHomeo KKHopfSouthHomeo; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$mod.olean" "Research/$mod.lean" 2>&1 | tee "../kk-south-$mod.log"
+          done
+      - name: Audit each new theorem and both chart homeomorphisms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          s=Path('Research/KKHopfSouthHomeo.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/', '',s,flags=re.S)
+          assert not re.search(r'^\s*(axiom|sorry)\b',clean,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',clean,re.M)
+          assert len(names)>=8,names
+          checks=['#print axioms KKHopfSouthHomeo.'+x for x in names]
+          checks+=['#print axioms KKHopfSouthHomeo.baseSouthToNorthHomeo',
+                   '#print axioms KKHopfSouthHomeo.totalSouthToNorthHomeo',
+                   '#print axioms KKHopfSouthHomeo.southHomeomorph',
+                   '#print axioms KKHopfNorthHomeo.northHomeomorph']
+          Path('KKHopfSouthAudit.lean').write_text(
+              'import Research.KKHopfSouthHomeo\n'+'\n'.join(checks)+'\n')
+          Path('../kk-south-count.txt').write_text(str(len(checks)))
+          PY
+          lake env lean --trust=0 KKHopfSouthAudit.lean 2>&1 | tee ../kk-south-axioms.log
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          txt=Path('../kk-south-axioms.log').read_text()
+          count=int(Path('../kk-south-count.txt').read_text())
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',txt)
+          none=txt.count('does not depend on any axioms')
+          assert len(deps)+none==count,(len(deps),none,count)
+          for a in deps:
+            assert {z.strip() for z in a.split(',') if z.strip()} <= {
+                'propext','Classical.choice','Quot.sound'},a
+          assert 'sorryAx' not in txt
+          print('PASS: new south chart and north Homeomorph axiom audit',count)
+          PY
+      - name: Independently check exact south symmetry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_hopf_south_symmetry.py 2>&1 | tee kk-south-sympy.log
+      - name: Record checkout and source checksums
+        if: always()
+        shell: bash
+        run: |
+          git rev-parse HEAD > kk-south-checkout.txt
+          sha256sum lean/Research/KKHopfSouthHomeo.lean tools/check_kk_hopf_south_symmetry.py > kk-south-sha256.txt
+      - name: Upload proof evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-hopf-south-homeo
+          path: |
+            kk-south-*.log
+            kk-south-count.txt
+            kk-south-checkout.txt
+            kk-south-sha256.txt
+          if-no-files-found: warn
