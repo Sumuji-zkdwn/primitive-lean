@@ -35,7 +35,7 @@ class SupervisorTests(unittest.TestCase):
 
     def test_same_day_success_no_recovery(self):
         value = evaluate([run_event()], DAY)
-        self.assertEqual(value["status"], "VERIFIED_RUN")
+        self.assertEqual(value["status"], "RUN_SUCCESS")
 
     def test_same_day_failure_never_blindly_retried(self):
         value = evaluate([run_event(conclusion="failure")], DAY)
@@ -66,23 +66,23 @@ class SupervisorTests(unittest.TestCase):
         self.assertEqual(value["status"], "FAILED_TODAY")
 
     def test_first_missing_track_only(self):
-        states = rows(["VERIFIED_RUN", "MISSING_TODAY", "MISSING_TODAY",
-                       "VERIFIED_RUN", "MISSING_TODAY"])
+        states = rows(["RUN_SUCCESS", "MISSING_TODAY", "MISSING_TODAY",
+                       "RUN_SUCCESS", "MISSING_TODAY"])
         choice = decide(states)
         self.assertEqual(choice["track"], TRACKS[1].name)
         self.assertEqual(choice["candidate_count"], 3)
         self.assertEqual(choice["action"], "DISPATCH_ONE_MISSING_WORKFLOW")
 
     def test_no_action_when_all_healthy_or_failed(self):
-        choice = decide(rows(["VERIFIED_RUN", "FAILED_TODAY", "IN_PROGRESS",
-                              "VERIFIED_RUN", "FAILED_TODAY"]))
+        choice = decide(rows(["RUN_SUCCESS", "FAILED_TODAY", "IN_PROGRESS",
+                              "RUN_SUCCESS", "FAILED_TODAY"]))
         self.assertFalse(choice["selected"])
         self.assertIsNone(choice["track"])
 
     def test_reject_unknown_or_incomplete_tracks(self):
         with self.assertRaises(ValueError):
             decide(rows(["MISSING_TODAY"]))
-        state = rows(["VERIFIED_RUN"] * len(TRACKS))
+        state = rows(["RUN_SUCCESS"] * len(TRACKS))
         state[0]["name"] = "attacker-workflow"
         with self.assertRaises(ValueError):
             decide(state)
@@ -111,7 +111,7 @@ class SupervisorTests(unittest.TestCase):
             api.request("GET", "/repos/other/repo/issues")
 
     def test_report_distinguishes_run_from_math_proof(self):
-        result = markdown(DAY, rows(["VERIFIED_RUN"] * 5),
+        result = markdown(DAY, rows(["RUN_SUCCESS"] * 5),
                           {"action": "NO_ACTION", "track": None}, False)
         self.assertIn("not proof of new mathematics", result)
         self.assertIn("Recovery dispatched: **false**", result)
