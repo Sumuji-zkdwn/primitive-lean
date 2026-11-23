@@ -6,6 +6,7 @@ on:
       - 'lean/Research/KKCartesianJet.lean'
       - 'lean/Research/KKCartesianDerivative.lean'
       - 'lean/Research/KKCartesianGammaTable.lean'
+      - 'lean/Research/KKCartesianSecondJet.lean'
       - 'lean/Research/KKCartesianRicci.lean'
       - 'lean/Research/KKCartesianMetricConnection.lean'
       - 'lean/Research/KKCartesianChartPartials.lean'
@@ -131,6 +132,35 @@ jobs:
           assert ("does not depend on any axioms" in log or
              "depends on axioms: [propext, Classical.choice, Quot.sound]" in log)
           PY
+      - name: Lean second-order real metric derivatives
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianSecondJet.olean Research/KKCartesianSecondJet.lean 2>&1 | tee ../kk-cartesian-second-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-second-lean.log; then exit 1; fi
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKCartesianSecondJet.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==6,names
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          Path('KKCartesianSecondJetAudit.lean').write_text(
+             'import Research.KKCartesianSecondJet\n'
+             + ''.join('#print axioms KKCartesianSecondJet.'+n+'\n' for n in names))
+          PY
+          lake env lean --trust=0 KKCartesianSecondJetAudit.lean 2>&1 | tee ../kk-cartesian-second-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-second-axioms.log').read_text()
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(dep)+none==6
+          allowed={'propext','Classical.choice','Quot.sound'}
+          assert all({x.strip() for x in d.split(',') if x.strip()}<=allowed for d in dep)
+          PY
       - name: Compile independent sparse Gamma table
         shell: bash
         working-directory: lean
@@ -184,7 +214,7 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD > kk-cartesian-jet-checkout.txt
-          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean lean/Research/KKCartesianGammaTable.lean lean/Research/KKCartesianRicci.lean lean/Research/KKCartesianMetricConnection.lean lean/Research/KKCartesianChartPartials.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
+          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean lean/Research/KKCartesianGammaTable.lean lean/Research/KKCartesianSecondJet.lean lean/Research/KKCartesianRicci.lean lean/Research/KKCartesianMetricConnection.lean lean/Research/KKCartesianChartPartials.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -198,6 +228,8 @@ jobs:
             kk-cartesian-derivative-count.txt
             kk-cartesian-chart-lean.log
             kk-cartesian-chart-axioms.log
+            kk-cartesian-second-lean.log
+            kk-cartesian-second-axioms.log
             kk-cartesian-table-lean.log
             kk-cartesian-ricci-lean.log
             kk-cartesian-ricci-axioms.log
