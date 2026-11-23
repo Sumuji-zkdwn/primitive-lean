@@ -1,4 +1,4 @@
-name: Passive gel multiwell: local minima and hopping
+name: "Passive gel multiwell: local minima and hopping"
 
 on:
   pull_request:
