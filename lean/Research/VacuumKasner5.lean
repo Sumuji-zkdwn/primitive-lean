@@ -98,7 +98,7 @@ theorem expanding_forces_contraction (p q : ℝ)
 
 /-- For radius b=t^q, the 4D Einstein-frame proper-time power law is
     (p+q/2)/(1+q/2) whenever 1+q/2 is nonzero. -/
-def einsteinFrameExponent (p q : ℝ) : ℝ :=
+noncomputable def einsteinFrameExponent (p q : ℝ) : ℝ :=
   (p + q / 2) / (1 + q / 2)
 
 /-- The expanding 5D branch reduces to a_E(τ) ∝ τ^(1/3). -/
