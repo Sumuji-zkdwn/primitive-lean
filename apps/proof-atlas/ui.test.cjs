@@ -11,7 +11,7 @@ const modelScript=load("atlas.js"),uiScript=load("ui.js"),html=load("index.html"
 function browserMock(phone=true){
  const elements=new Map(),storage=new Map(),tabs=["read","deps","lean"],events={};
  const ctx={};
- for(const name of ["setTransform","fillRect","beginPath","moveTo","bezierCurveTo","stroke","arc","fill","fillText","setLineDash","save","restore"])
+ for(const name of ["setTransform","fillRect","beginPath","moveTo","lineTo","bezierCurveTo","stroke","arc","fill","fillText","setLineDash","save","restore"])
   ctx[name]=()=>{};
  function node(id){
   const ev={},attrs={},cs=new Set(),cache=new Map();
