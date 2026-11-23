@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "main_exact_rank_checks": true,
+  "independent_rational_checks": true,
+  "embedding_false_curvature_counterexample": "1/3200 at epsilon=1/100, a=1/4",
+  "wave_three_sector_duration_steps": 700,
+  "max_energy_relative_drift": 8.43769498715119e-15,
+  "positive_hardening_preserves_six_modes": true,
+  "source_files_hashed": 14
+}

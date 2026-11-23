@@ -1,0 +1,15 @@
+{
+  "model": "Two covariant scalar fields with potential V=kappa/2(q-z)^2",
+  "energy_momentum_divergence_symbolic": [
+    "0",
+    "0"
+  ],
+  "field_equations_symbolic": [
+    "0",
+    "0"
+  ],
+  "spatial_total_energy": 0.39976766516930134,
+  "max_variation_total_energy_over_time": 2.220446049250313e-16,
+  "mechanism": "coherent relative-mode oscillation; no irreversible relaxation, no topological soliton",
+  "limits": "1+1 flat space, matter stress conservation only; no coupled Einstein evolution"
+}

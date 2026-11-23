@@ -1,0 +1,18 @@
+{
+  "exact_link_metric_rank": 6,
+  "exact_metric_remainder_dimension": 1,
+  "flat_embedding_quadratic_shear_epsilon": "1/100",
+  "flat_embedding_spacing": "1/4",
+  "flat_embedding_seven_edge_residual": "1/3200",
+  "flat_embedding_predicted_residual": "1/3200",
+  "affine_embedding_residual": 0,
+  "gauge_rank": 3,
+  "curvature_rank": 1,
+  "TT_rank": 2,
+  "momentum_constraint_rank": 3,
+  "scalar_momentum_poisson_bracket_zero": true,
+  "constrained_metric_DOF": 2,
+  "constrained_phase_space_dimension": 4,
+  "status": "all exact rational identities passed",
+  "qualification": "vertex displacements can create nonzero finite-stencil link mismatch even in globally flat embedded Euclidean space"
+}

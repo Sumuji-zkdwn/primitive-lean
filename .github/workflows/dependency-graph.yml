@@ -49,6 +49,9 @@ jobs:
       - name: Generate reproducible graph from pinned Git objects
         run: python3 tools/generate_dependency_graph.py --main-ref "${{ steps.source.outputs.sha }}"
 
+      - name: Regenerate compressed source reachability from the same pinned graph
+        run: python3 tools/compress_dependency_graph.py
+
       - name: Commit generated graph to the source branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         env:
@@ -56,7 +59,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/dependency/generated
+          git add docs/dependency/generated docs/compression/source-reachability.json
           if ! git diff --cached --quiet; then
             git commit -m 'Regenerate source and PR dependency graph at exact source snapshot'
             git push origin HEAD:"refs/heads/$HEAD_BRANCH"

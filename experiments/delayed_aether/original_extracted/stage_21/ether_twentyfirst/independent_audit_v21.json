@@ -1,0 +1,27 @@
+{
+  "full_4d_Ricci": {
+    "Ruu": "-Derivative(Q(u), (u, 2))/Q(u) - Derivative(P(u), (u, 2))/P(u)",
+    "all_other_components": 0,
+    "scalar_curvature_exactly_zero": true
+  },
+  "fd_independent_numeric_check": {
+    "vacuum": {
+      "direct_metric_second_derivative_Ruu_max_residual": 8.567070081122452e-09,
+      "smallest_p": 0.7353615387192967,
+      "smallest_q": 0.9539392014169457,
+      "differentiation_stencil": "5-point central second derivative; uses saved metric data only"
+    },
+    "equal_null_scalars": {
+      "direct_metric_second_derivative_Ruu_max_residual": 9.583835750177905e-09,
+      "smallest_p": 0.6424928235158135,
+      "smallest_q": 0.9539392014169457,
+      "differentiation_stencil": "5-point central second derivative; uses saved metric data only"
+    }
+  },
+  "small_amplitude_convergence_slopes": {
+    "linear_metric": 2.0038301972471113,
+    "quadratic_metric": 4.053410437651965
+  },
+  "null_memory_no_go_exact_dalembertian": "0",
+  "conclusions": "Independent geometric calculation confirms exact Rosen formula and saved numerical metrics satisfy Einstein vacuum or sourced equation at finite-difference accuracy. GR itself is presupposed."
+}

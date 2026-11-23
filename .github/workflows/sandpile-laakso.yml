@@ -1,0 +1,61 @@
+name: Sandpile Laakso proofs and finite checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'experiments/sandpile_laakso/**'
+      - 'experiments/mobius_430/lean-toolchain'
+      - 'experiments/mobius_430/lake-manifest.json'
+      - 'experiments/mobius_430/lakefile.toml'
+      - 'requirements.txt'
+      - 'tools/verify.py'
+      - '.github/workflows/sandpile-laakso.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - run: python -m pip install -r requirements.txt
+      - name: Prepare pinned mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: experiments/mobius_430
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Install the independent SquareClock toolchain
+        run: elan toolchain install leanprover/lean4:v4.35.0
+      - name: Compile proofs, audit axioms and replay finite checks
+        id: audit
+        run: |
+          mv experiments/sandpile_laakso/formalization/verification.json "$RUNNER_TEMP/committed-verification.json"
+          python -B -X utf8 tools/verify.py --sandpile-laakso-only
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          committed = json.loads((Path(os.environ["RUNNER_TEMP"]) / "committed-verification.json").read_bytes())
+          fresh = json.loads(Path("experiments/sandpile_laakso/formalization/verification.json").read_bytes())
+          for key in ("passed", "source_sha256", "lean", "test_suites"):
+              assert fresh[key] == committed[key], key
+          assert fresh["core"]["axioms"] == committed["core"]["axioms"]
+          PY
+      - name: Save verification record
+        if: always() && steps.audit.outcome != 'skipped'
+        uses: actions/upload-artifact@v6
+        with:
+          name: sandpile-laakso-${{ github.run_id }}-${{ github.run_attempt }}
+          path: experiments/sandpile_laakso/formalization/verification.json

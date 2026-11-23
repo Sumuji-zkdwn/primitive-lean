@@ -1,0 +1,13 @@
+{
+  "numeric_precision_decimal_digits": 80,
+  "radial_edge_length": "sqrt(2/5)",
+  "bulk_deficit_at_flat_center": "2.53012750638e-80",
+  "two_boundary_subsimplex_angles_equal_original": true,
+  "first_derivative_full_action_at_flat": "2.536927874714881e-79",
+  "second_derivative_full_action_at_flat": "447.213595499957939281834733746255247088123672",
+  "exact_expected_second_derivative": "200 sqrt(5)",
+  "hessian_one_entry": "8 sqrt(5)",
+  "full_action_schlaefli_first_derivative_offshell_delta": "-3.689769280130683e-80",
+  "assertion_passed": true,
+  "caveats": "5-1 flat Euclidean 4D configuration, fixed boundary edges, Regge-Einstein action INPUT; no gravitons, no time evolution and no emergent Einstein-Hilbert dynamics."
+}

@@ -1,0 +1,5 @@
+IVP 12 hmax 1.839e-04 gerr 5.111e-05 Kerr 2.368e-05
+IVP 24 hmax 1.029e-05 gerr 3.082e-06 Kerr 1.371e-06
+IVP 48 hmax 6.086e-07 gerr 1.881e-07 Kerr 8.215e-08
+IVP 96 hmax 3.668e-08 gerr 1.159e-08 Kerr 5.020e-09
+IVP 192 hmax 2.250e-09 gerr 7.190e-10 Kerr 3.133e-10

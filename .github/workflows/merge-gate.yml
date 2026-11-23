@@ -1,0 +1,101 @@
+name: Merge Gate - pinned read-only PR integration triage
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/merge_gate.py'
+      - 'tools/merge_gate_collect.py'
+      - 'tests/test_merge_gate.py'
+      - 'tests/fixtures/merge_gate_pair.json'
+      - 'docs/autonomy/MERGE_GATE.md'
+      - '.github/workflows/merge-gate.yml'
+  workflow_dispatch:
+  schedule:
+    # Mondays at 02:17 UTC / 11:17 Japan time, once main has this workflow.
+    - cron: '17 2 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: merge-gate-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  offline-regression:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout proposed source without persisted credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Set up pinned Python runtime
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run fail-closed planner and collector tests
+        run: python -m unittest discover -s tests -p 'test_merge_gate.py' -v
+      - name: Reproduce historical pinned PR 196 to 198 observation
+        run: |
+          python -B tools/merge_gate.py \
+            --snapshot tests/fixtures/merge_gate_pair.json \
+            --report verification/merge-gate/report.json \
+            --markdown verification/merge-gate/report.md
+          cat verification/merge-gate/report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve review evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: merge-gate-offline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/merge-gate/
+          if-no-files-found: warn
+          retention-days: 30
+
+  trusted-live-snapshot:
+    # Never execute PR-controlled code with credentials. Live mode runs only
+    # from an approved main-branch workflow after it has been merged.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: read
+    steps:
+      - name: Checkout trusted main controller, never a PR checkout
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Capture immutable controller SHA and read-only current PR graph
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY_NAME: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          head="$(git rev-parse HEAD)"
+          python -B -m tools.merge_gate_collect \
+            --repo "$GITHUB_REPOSITORY_NAME" \
+            --limit 24 --focus "196,198" \
+            --controller-sha "$head" \
+            --snapshot verification/merge-gate/live-snapshot.json \
+            --report verification/merge-gate/report.json \
+            --markdown verification/merge-gate/report.md
+          cat verification/merge-gate/report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve replayable source-pinned snapshot and review-only report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: merge-gate-live-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/merge-gate/
+          if-no-files-found: warn
+          retention-days: 30

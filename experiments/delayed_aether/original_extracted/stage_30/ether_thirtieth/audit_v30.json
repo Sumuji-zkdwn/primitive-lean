@@ -1,0 +1,66 @@
+{
+  "geometry": "five 4-simplices subdividing one regular 4-simplex, side length one, centered interior vertex",
+  "internal_edges": 5,
+  "internal_triangles": 10,
+  "boundary_triangles": 10,
+  "radial_edge_length": 0.6324555320336759,
+  "baseline_interior_deficit_max_abs": 0.0,
+  "baseline_regge_gradient_max_abs": 0.0,
+  "hessian_analytic_coefficient_per_entry": "8 sqrt(5)",
+  "hessian_analytic_nonzero_eigenvalue": "40 sqrt(5)",
+  "hessian_analytic_nonzero_eigenvalue_float": 89.44271909999159,
+  "hessian_numeric_eigenvalues": [
+    2.8801700540666734e-07,
+    2.880182558985517e-07,
+    2.8802383946925086e-07,
+    2.8804105025999626e-07,
+    89.44272118406874
+  ],
+  "hessian_numerical_max_abs_error": 6.472354634468047e-07,
+  "hessian_gauge_null_residual_max_abs": 2.5573313001460606e-15,
+  "hessian_numerical_gauge_null_residual_max_abs": 2.880322931275714e-07,
+  "interior_shift_48_max_deficit": 4.440892098500626e-15,
+  "interior_shift_48_max_action_difference": 3.552713678800501e-15,
+  "displaced_flat_hessian_eigenvalues": [
+    2.9384149461642294e-07,
+    3.1518653685739336e-07,
+    3.161820802800473e-07,
+    3.325593365238404e-07,
+    92.47044861660565
+  ],
+  "displaced_flat_gauge_null_residual_max_abs": 3.8706891942342566e-07,
+  "gradient_action_vs_schlaefli_max_abs_error": 6.376857208945097e-09,
+  "uniform_radius_shift": 0.002,
+  "uniform_deficit_range": [
+    0.10466749643948425,
+    0.10466749643948425
+  ],
+  "uniform_action_difference": 0.0008645285336124076,
+  "uniform_quadratic_prediction": 0.0008944271909999174,
+  "ordinary_spring_hessian_eigenvalues": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "deficit_jacobian_max_abs_error": 3.130709842480428e-07,
+  "deficit_jacobian_exact_entry": "6 sqrt(10/3)",
+  "curvature_memory_eta": 0.001,
+  "curvature_memory_analytic_hessian_entry": "8 sqrt(5) + 1200 eta",
+  "curvature_memory_numerical_eigenvalues": [
+    -2.499000345592644e-15,
+    3.6233255510795453e-16,
+    2.1105929817544678e-15,
+    6.1128475404314915e-15,
+    95.44271934949322
+  ],
+  "raw_edge_memory_numerical_eigenvalues": [
+    0.9999999999999958,
+    1.0,
+    1.0,
+    1.000000000000014,
+    90.4427190999916
+  ],
+  "statement": "4 zero modes are flat embedding vertex shifts, NOT four graviton modes. The sole nonzero mode is curvature. Regge action input is a discretized Einstein-Hilbert model, NOT emergent gravity."
+}

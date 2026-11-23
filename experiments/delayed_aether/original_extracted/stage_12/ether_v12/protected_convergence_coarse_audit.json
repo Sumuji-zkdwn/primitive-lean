@@ -1,0 +1,49 @@
+{
+  "grid_n": 12,
+  "dt": 0.0008,
+  "T": 0.3,
+  "control_no_q_geometry_coupling": false,
+  "metric_coupling_alpha": 0.15,
+  "admissibility_barrier": 0.1,
+  "s_cut": 0.35,
+  "degree_initial": 1,
+  "degree_final": 1,
+  "charge_observations": [
+    1
+  ],
+  "max_norm_error": 3.2940317140628395e-13,
+  "max_tangent_error": 4.0603076456591225e-12,
+  "initial_energy": 24.66182400145559,
+  "final_energy": 24.661727344713153,
+  "rel_energy_change": -3.919286036180308e-06,
+  "relative_energy_balance_error": -3.885058871845274e-06,
+  "max_abs_energy_balance_error": 1.1720927908215706e-05,
+  "dissipated": 8.441043038500284e-07,
+  "core_shift_x": 0.07025889047061537,
+  "metric": {
+    "max_deficit": 0.06825545522453869,
+    "regge_abs_curvature": 1.3938525063046283,
+    "min_gram_eigenvalue": 0.008413062053558228
+  },
+  "max_memory_modulus": 3.549656749298424,
+  "max_b": 0.18552769041418213,
+  "minimum_edge_dot": 0.15695128937207067,
+  "gradient_audit": {
+    "q": {
+      "analytic": -0.01860305580146482,
+      "finite_diff": -0.01860305562928488,
+      "relative_error": 1.7217993697471456e-10
+    },
+    "b": {
+      "analytic": -0.0010948143853553938,
+      "finite_diff": -0.0010948145501288309,
+      "relative_error": 1.647734370821552e-10
+    },
+    "z": {
+      "analytic": -4.48592283982374e-05,
+      "finite_diff": -4.485922744379422e-05,
+      "relative_error": 9.544431827453355e-13
+    }
+  },
+  "datafile": "protected_convergence_coarse_timeseries.csv"
+}
