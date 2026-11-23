@@ -32,6 +32,8 @@ jobs:
       - name: JavaScript syntax
         run: |
           node --check games/primitive-foundry/engine.js
+          node --check games/primitive-foundry/ui.js
+          node --check games/primitive-foundry/ui.test.cjs
           node --check games/primitive-foundry/engine.test.cjs
       - name: Run deterministic full factory production and dependency tests
-        run: node --test games/primitive-foundry/engine.test.cjs
+        run: node --test games/primitive-foundry/engine.test.cjs games/primitive-foundry/ui.test.cjs
