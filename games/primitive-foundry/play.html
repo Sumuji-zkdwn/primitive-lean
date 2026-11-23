@@ -158,6 +158,18 @@ footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
  .tool .pict{font-size:21px}
  .deck{padding:7px}
 }
+
+/* A direct graph link opens the complete theorem archive as the primary screen. */
+.research-direct .main{display:block}
+.research-direct .main>div:first-child{display:none}
+.research-direct .right{display:block}
+.research-direct .right>.panel:first-child{display:none}
+.research-direct .kpis{display:none}
+.research-direct .view:not(#view-research){display:none}
+.research-direct .proof-graph{height:270px}
+.research-direct #proof-back{display:inline-block}
+#proof-back{display:none;border:1px solid #7b998d;background:#365d57;color:#f2fff4;border-radius:8px;padding:9px 12px;margin-bottom:10px}
+
 @media(prefers-reduced-motion:reduce){.progress i{transition:none}}
 </style>
 </head>
@@ -236,6 +248,7 @@ footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
      </div>
     </div>
     <div class="view" id="view-research">
+     <button type="button" id="proof-back">工場の画面へ戻る</button>
      <h3>初期465定理・証明依存図</h3>
      <p class="objective" style="font-size:11px">定理465件・直接証明参照629本。研究すると、直接参照する定理の技術が次に開きます。工場アップグレードも特定の証明に接続されています。</p>
      <div class="proof-metrics" id="proof-metrics" aria-live="polite">0 / 465 解明</div>
@@ -1463,6 +1476,9 @@ footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
   $("research-shortcut").addEventListener("click",()=>{
    showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
   });
+  $("proof-back").addEventListener("click",()=>{
+   document.body?.classList?.remove("research-direct");showPane("inspect");
+  });
   $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
   $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
   $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
@@ -1508,8 +1524,8 @@ footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
  function start(){
   setupProof();hook();setTool("pan");resize();refresh();
   if(deepLinkResearch){
+   document.body?.classList?.add("research-direct");
    showPane("research");
-   if(typeof setTimeout==="function")setTimeout(()=>$("view-research").scrollIntoView?.({block:"start"}),75);
   }
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
