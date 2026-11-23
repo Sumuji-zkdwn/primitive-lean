@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "8c5227afb13dc8840da27538ea9dbdf4aec38c72",
+  "main_commit": "b9443e8f2fd2e229e5c2c53e88b9ec9c42b08f2c",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1723,6 +1723,36 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
+    },
+    {
+      "id": "main:lean/Research/KKCartesianJet.lean",
+      "scope": "main",
+      "path": "lean/Research/KKCartesianJet.lean",
+      "group": "Other",
+      "namespace": "KKCartesianJet",
+      "declarations": [
+        "Mat5",
+        "scaledMetric",
+        "scaledInverse",
+        "scaled_inverse_product",
+        "metric",
+        "inverse",
+        "dxMetric",
+        "dzMetric",
+        "partialMetric",
+        "gamma",
+        "gamma_symmetric",
+        "gamma_z_fibre_fibre",
+        "gamma_x_y_fibre",
+        "gamma_z_y_fibre",
+        "gamma_z_x_x",
+        "gamma_z_z_z"
+      ],
+      "imports": [
+        "Mathlib.Tactic",
+        "Mathlib.LinearAlgebra.Matrix.Notation"
+      ],
+      "sha256": "9d9286ab950a166630cc6221231082a249af010b4d8eb9fa03c7f2cb4e3f557e"
     },
     {
       "id": "main:lean/Research/KKRadialVacuumBridge.lean",
@@ -27775,28 +27805,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "8c5227afb13dc8840da27538ea9dbdf4aec38c72",
+      "base_sha": "b9443e8f2fd2e229e5c2c53e88b9ec9c42b08f2c",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "8c5227afb13dc8840da27538ea9dbdf4aec38c72",
+      "base_sha": "b9443e8f2fd2e229e5c2c53e88b9ec9c42b08f2c",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "8c5227afb13dc8840da27538ea9dbdf4aec38c72",
+      "base_sha": "b9443e8f2fd2e229e5c2c53e88b9ec9c42b08f2c",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "8c5227afb13dc8840da27538ea9dbdf4aec38c72",
+      "base_sha": "b9443e8f2fd2e229e5c2c53e88b9ec9c42b08f2c",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
