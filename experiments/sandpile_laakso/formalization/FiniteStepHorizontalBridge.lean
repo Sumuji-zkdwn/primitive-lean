@@ -79,7 +79,7 @@ theorem project_walk {m : ℕ}
         ⟨hheight, hphase, hcost, k, hk, hflip⟩
       · have hstep : horizontalGateStep m (projection x) (projection y) c :=
           Or.inl ⟨congrArg Prod.fst hbits, hcost⟩
-        exact ⟨c + d, WalkCost.next hstep hd, add_le_add_left hle _⟩
+        exact ⟨c + d, WalkCost.next hstep hd, add_le_add_right hle _⟩
       · have heq : projection x = projection y := by
           exact Prod.ext hheight hbits
         refine ⟨d, ?_, ?_⟩
@@ -90,7 +90,7 @@ theorem project_walk {m : ℕ}
             _ ≤ c + e := add_le_add (zero_le c) hle
       · have hstep : horizontalGateStep m (projection x) (projection y) c :=
           Or.inr ⟨hheight, hcost, ⟨k, hk, hflip⟩⟩
-        exact ⟨c + d, WalkCost.next hstep hd, add_le_add_left hle _⟩
+        exact ⟨c + d, WalkCost.next hstep hd, add_le_add_right hle _⟩
 
 theorem horizontal_distance_le_full {m : ℕ}
     (x y : FiniteState m) :
@@ -100,7 +100,7 @@ theorem horizontal_distance_le_full {m : ℕ}
   apply le_sInf
   intro c hc
   obtain ⟨d, hd, hle⟩ := project_walk hc
-  exact (sInf_le ⟨d, hd⟩).trans hle
+  exact (sInf_le hd).trans hle
 
 theorem full_distance_le_horizontal {m : ℕ}
     (x y : HeightBits m) (p : Phase) :
@@ -109,7 +109,7 @@ theorem full_distance_le_horizontal {m : ℕ}
   unfold walkDistance
   apply le_sInf
   intro c hc
-  exact sInf_le ⟨c, lift_walk p hc⟩
+  exact sInf_le (lift_walk p hc)
 
 /-- Exact identification of the real, actual PR #171 finiteStep distance
 at equal phases with the phase-free height+bit walk distance. -/
