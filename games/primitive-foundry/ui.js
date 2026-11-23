@@ -21,7 +21,7 @@
  };
  const canvas=$("factory-canvas"),viewport=$("viewport"),ctx=canvas.getContext("2d");
  if(!ctx){$("status").textContent="Canvas描画を利用できません。";return;}
- const STORAGE="primitive-foundry-save-v1";
+ const STORAGE="primitive-foundry-save-v2";
  let world=null,category="logistics",tool="pan",dir=0,zoom=1;
  let pane="inspect",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
  let camX=typeof window!=="undefined"&&window.innerWidth<750?9.3:11.8,camY=8.4;
@@ -37,7 +37,7 @@
  function persist(){
   try{localStorage.setItem(STORAGE,JSON.stringify(world));}catch(_){}
  }
- world=load()||F.demoBlueprint(F.newWorld(20261124));
+ world=load()||F.challengeBlueprint(F.newWorld(20261124));
  if(world.status==="paused")world.status="playing";
  const tipBase="タップで配置・調査。ベルトはドラッグで敷設。地図を動かすには「調べる」を選びドラッグ。";
  function announce(msg){
@@ -216,6 +216,14 @@
     if(m.kind==="belt")beltSprite(m,X,Y,s,world.tick);
     else machineIcon(m,X,Y,s,world.tick);
    }
+   const repair=F.pendingRepairs(world).find(p=>p.x===x&&p.y===y);
+   if(repair){
+    ctx.save();ctx.setLineDash([3,3]);ctx.lineWidth=Math.max(2,s*.07);
+    ctx.strokeStyle="#ffe19a";ctx.strokeRect(X+s*.09,Y+s*.09,s*.82,s*.82);
+    ctx.fillStyle="#ffe19a";ctx.font="700 "+Math.max(12,Math.round(s*.4))+"px system-ui";
+    ctx.textAlign="center";ctx.fillText(F.DIR_SYM[repair.dir],X+s*.5,Y+s*.62);
+    ctx.restore();
+   }
    if(selected?.x===x&&selected?.y===y){
     ctx.strokeStyle="#e6d09c";ctx.lineWidth=Math.max(1.5,s*.057);
     ctx.strokeRect(X+1,Y+1,s-2,s-2);
@@ -237,7 +245,7 @@
   tool=next;
   const def=Object.values(tools).flat().find(t=>t[0]===next);
   $("selected-tool").textContent=def?.[1]||"調べる";
-  $("tip").textContent=next==="pan"?"建物をタップして調査。ドラッグで地図を動かします。":
+  $("tip").textContent=next==="pan"?(F.pendingRepairs(world).length?"光る欠損セルをタップして搬送路を補修。ドラッグで地図を移動。":"建物をタップして調査。ドラッグで地図を動かします。"):
     next==="belt"?"画面をなぞるとベルトを連続敷設。向きも自動でつながります。":
     next==="rotate"?"向きを変えたい建物をタップしてください。":
     next==="erase"?"撤去したい装置をタップしてください。":
@@ -335,13 +343,21 @@
   $("play").textContent=world.status==="paused"?"▶ 再開":"II 停止";
   $("speed").textContent="速度 ×"+speed;
   $("log").innerHTML=world.notes.slice(0,5).map(x=>"<div>"+esc(x)+"</div>").join("");
+  if(F.pendingRepairs(world).length){$("status").textContent="切断された搬送路が"+F.pendingRepairs(world).length+"か所。黄色の欠損セルをタップして修理してください。";}
+  else if(world.challenge&&world.totalScience===0)$("status").textContent="搬送路が復旧しました。制御回路が組立機から研究所へ流れるのを確認しよう。";
   if(world.status==="complete")$("status").textContent="目標達成。自動化は続けられます。次はより短時間で量産しよう。";
   renderPalette();renderTech();renderDocuments();renderInspector();draw();
  }
  function select(x,y){selected={x,y};showPane("inspect");renderInspector();draw();}
  function interact(x,y,direction=dir){
   if(!F.inside(x,y))return;
-  if(tool==="pan"){select(x,y);return;}
+  if(tool==="pan"){
+   if(F.repairBlueprint(world,x,y)){
+    selected={x,y};persist();refresh();
+    announce(F.pendingRepairs(world).length?"補修成功！ もう一つの黄色い断線を復旧しよう。":"接続完了。自動生産が始まります。");
+   }else select(x,y);
+   return;
+  }
   if(!F.isDiscovered(world,x,y)){announce("この地区はまだ未解読です。設計書を回収するか測量技術を研究しよう。");return;}
   const okay=F.place(world,x,y,tool,direction);
   if(!okay){announce("そこには配置できません。採掘機は鉱脈、発電機は石炭鉱脈上に設置してください。");return;}
