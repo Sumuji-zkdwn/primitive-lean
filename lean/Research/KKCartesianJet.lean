@@ -84,6 +84,13 @@ def gamma (h u a : ℚ) (i j k : Fin 5) : ℚ :=
      partialMetric h u a k m j -
      partialMetric h u a m j k)) / 2
 
+/-- Every prescribed first-derivative matrix is symmetric in its metric indices. -/
+theorem partialMetric_symmetric (h u a : ℚ) (direction i j : Fin 5) :
+    partialMetric h u a direction i j =
+      partialMetric h u a direction j i := by
+  fin_cases direction <;> fin_cases i <;> fin_cases j <;>
+    norm_num [partialMetric, dxMetric, dzMetric]
+
 /-- The finite-jet connection is torsion-free. -/
 theorem gamma_symmetric (h u a : ℚ) (i j k : Fin 5) :
     gamma h u a i j k = gamma h u a i k j := by
@@ -91,6 +98,7 @@ theorem gamma_symmetric (h u a : ℚ) (i j k : Fin 5) :
   congr 1
   apply Finset.sum_congr rfl
   intro m hm
+  rw [partialMetric_symmetric h u a m j k]
   ring
 
 /-- A fibre-fibre connection component Γ^z_{ψψ}. -/
@@ -99,7 +107,6 @@ theorem gamma_z_fibre_fibre (h u a : ℚ) (hh : h ≠ 0) :
   norm_num [gamma, inverse, scaledInverse, partialMetric, dzMetric,
     dxMetric, Fin.sum_univ_succ]
   field_simp [hh]
-  ring
 
 /-- Mixed x/y/fibre connection component. -/
 theorem gamma_x_y_fibre (h u a : ℚ) (hh : h ≠ 0) :
@@ -107,7 +114,6 @@ theorem gamma_x_y_fibre (h u a : ℚ) (hh : h ≠ 0) :
   norm_num [gamma, inverse, scaledInverse, partialMetric, dzMetric,
     dxMetric, Fin.sum_univ_succ]
   field_simp [hh]
-  ring
 
 /-- The Γ^z_{yψ} mixed component depends on U. -/
 theorem gamma_z_y_fibre (h u a : ℚ) (hh : h ≠ 0) :
@@ -115,20 +121,17 @@ theorem gamma_z_y_fibre (h u a : ℚ) (hh : h ≠ 0) :
   norm_num [gamma, inverse, scaledInverse, partialMetric, dzMetric,
     dxMetric, Fin.sum_univ_succ]
   field_simp [hh]
-  ring
 
 theorem gamma_z_x_x (h u a : ℚ) (hh : h ≠ 0) :
     gamma h u a 3 1 1 = -a / (2*h) := by
   norm_num [gamma, inverse, scaledInverse, partialMetric, dzMetric,
     dxMetric, Fin.sum_univ_succ]
   field_simp [hh]
-  ring
 
 theorem gamma_z_z_z (h u a : ℚ) (hh : h ≠ 0) :
     gamma h u a 3 3 3 = a / (2*h) := by
   norm_num [gamma, inverse, scaledInverse, partialMetric, dzMetric,
     dxMetric, Fin.sum_univ_succ]
   field_simp [hh]
-  ring
 
 end KKCartesianJet
