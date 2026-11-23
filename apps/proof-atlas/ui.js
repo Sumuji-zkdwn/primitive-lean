@@ -145,11 +145,14 @@
     ctx.beginPath();ctx.arc(point.x,point.y,radius+6,0,Math.PI*2);ctx.stroke();
    }
    if(mode==="focus"&&(isPicked||scale>.55&&radius>=6)){
-    const name=isPicked?(model.argumentsById[n.id]?.title||A.short(n)):"#"+String(n.id+1).padStart(3,"0");
+    const name="#"+String(n.id+1).padStart(3,"0");
     ctx.fillStyle=isPicked?"#f6e8cb":"#b3cbd0";
     ctx.font=(isPicked?"700 13px":"11px")+" system-ui,'Noto Sans JP',sans-serif";
     ctx.textAlign="left";
-    ctx.fillText(name,point.x+radius+8,point.y-7,isPicked?170:95);
+    const labelX=point.x+radius+8;
+    if(labelX> w-70){ctx.textAlign="right";ctx.fillText(name,point.x-radius-8,point.y-8,80);}
+    else ctx.fillText(name,labelX,point.y-8,80);
+    ctx.textAlign="left";
    }else if(mode==="all"&&isPicked&&scale>.13){
     ctx.fillStyle="#e8d9ae";ctx.font="600 12px system-ui";ctx.fillText("#"+(n.id+1),point.x+8,point.y-6);
    }
@@ -273,7 +276,7 @@
  }
  function render(){
   $("graph-title").textContent=mode==="all"?"初期465定理の全体図":"前提から証明をたどる";
-  $("graph-subtitle").textContent=mode==="all"?"629本の直接証明参照を表示":"選択中："+A.short(model.nodes[selected]);
+  $("graph-subtitle").textContent=mode==="all"?"629本の直接証明参照を表示":"選択中："+(model.argumentsById[selected]?.title||A.short(model.nodes[selected]));
   $("focus").setAttribute("aria-pressed",String(mode==="focus"));
   $("overview").setAttribute("aria-pressed",String(mode==="all"));
   $("open-reader").textContent="定理 #"+String(selected+1).padStart(3,"0")+" を読む ↑";
