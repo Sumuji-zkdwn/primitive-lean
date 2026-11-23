@@ -1,0 +1,35 @@
+name: Noncompact vacuum warp rigidity regression
+on:
+  pull_request:
+    paths:
+      - 'tools/check_noncompact_killing_norm.py'
+      - 'docs/research/2026-11-24-noncompact-warp-rigidity.md'
+      - '.github/workflows/noncompact-warp-rigidity.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install sympy==1.14.0
+      - name: Check cutoff norms and incomplete Kasner vacuum
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_noncompact_killing_norm.py | tee verification/source.sha256
+          python tools/check_noncompact_killing_norm.py | tee verification/oracle.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: noncompact-warp-regression-evidence
+          path: verification/
