@@ -1,0 +1,25 @@
+name: Laakso A-track located-cell probe
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/research/2026-11-23-laakso-observation-a.md'
+      - 'docs/research/laakso_A_track_probe.py'
+      - '.github/workflows/laakso-A-observation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-fractions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Verify position-labeled cell difference and the PI-positive control
+        run: python -B docs/research/laakso_A_track_probe.py

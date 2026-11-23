@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1396,
-    "eligible_direct_edges": 435,
-    "nodes": 435,
-    "retained_pairs": 311,
-    "transitive_pairs_removed": 117,
-    "unique_eligible_pairs": 428,
-    "weak_edges_excluded": 961
+    "all_source_edges": 1383,
+    "eligible_direct_edges": 428,
+    "nodes": 434,
+    "retained_pairs": 307,
+    "transitive_pairs_removed": 114,
+    "unique_eligible_pairs": 421,
+    "weak_edges_excluded": 955
   },
   "edges": [
     [
@@ -356,14 +356,6 @@
     [
       "main:lean/TwoWavelengthSeparation.lean",
       "main:lean/TwoWavelengthPhase.lean"
-    ],
-    [
-      "main:linear_input/lean_check/ArcChebyshev.inc",
-      "main:linear_input/lean_check/BranchFibers.inc"
-    ],
-    [
-      "main:linear_input/lean_check/ArcChebyshev.inc",
-      "main:linear_input/lean_check/MainResult.inc"
     ],
     [
       "main:linear_input/lean_check/AreaExactVariation.inc",
@@ -1166,14 +1158,6 @@
       "main:linear_input/lean_check/F0UpdateDescent.inc"
     ],
     [
-      "main:linear_input/lean_check/ScaleTemperature.inc",
-      "main:lean/Elastica/ExponentialWeight.lean"
-    ],
-    [
-      "main:linear_input/lean_check/ScaleTemperature.inc",
-      "main:lean/Elastica/Scaling.lean"
-    ],
-    [
       "main:linear_input/lean_check/StrangeOperatorBoundary.inc",
       "main:linear_input/lean_check/F0Retractions.inc"
     ],
@@ -1323,6 +1307,7 @@
     "main:lean/Research/FiniteMarkovTransport.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
+    "main:lean/Research/ProjectionSignHolonomy.lean",
     "main:lean/Research/SignedCycleCounterexample.lean",
     "main:lean/Research/SiphonCommonInvariant.lean",
     "main:lean/Research/SiphonFiniteDetermination.lean",
@@ -1344,7 +1329,6 @@
     "main:lean/TwoWavelengthPhase.lean",
     "main:lean/TwoWavelengthRecovery.lean",
     "main:lean/TwoWavelengthSeparation.lean",
-    "main:linear_input/lean_check/ArcChebyshev.inc",
     "main:linear_input/lean_check/AreaExactVariation.inc",
     "main:linear_input/lean_check/AreaFamily.inc",
     "main:linear_input/lean_check/AreaMinimum.inc",
@@ -1651,7 +1635,6 @@
     "main:linear_input/lean_check/RimObservability.inc",
     "main:linear_input/lean_check/Rule481Symmetry.inc",
     "main:linear_input/lean_check/RuleSelfModification.inc",
-    "main:linear_input/lean_check/ScaleTemperature.inc",
     "main:linear_input/lean_check/SemanticIntervalNecessity.inc",
     "main:linear_input/lean_check/ShearCommutator.inc",
     "main:linear_input/lean_check/SingleSwapFiber.inc",
@@ -1694,8 +1677,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "689490f12b3f45a17231d69d94d1bf6a7982365fcd2d1ab6d13b95d285e0866b",
-    "main_commit": "30a0ffe49d03c19d21b385c2e1431bd40739f137",
+    "graph_sha256": "8aa9cd4efa1cff4c8180e88dba788c9b18f4cf7088fe1af4d981fd873c95f1d2",
+    "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [

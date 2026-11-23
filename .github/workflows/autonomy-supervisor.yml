@@ -1,0 +1,85 @@
+name: Autonomous Research Supervisor - GitHub-only recovery
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/autonomy-supervisor.yml'
+      - 'tools/autonomy/supervisor.py'
+      - 'tests/test_autonomy_supervisor.py'
+      - 'docs/autonomy/AUTONOMY_SUPERVISOR.md'
+  # Run after the five existing UTC daily research windows.
+  schedule:
+    - cron: '41 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-only-autonomy-supervisor
+  cancel-in-progress: false
+
+jobs:
+  offline-tests:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout proposed head without retained credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run local pure-Python supervisor tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/supervisor.py tests/test_autonomy_supervisor.py
+          python -m unittest discover -s tests -p 'test_autonomy_supervisor.py' -v
+
+  supervise:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    # Action dispatch only. No contents:write, issues:write, PR creation or merge.
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Checkout trusted main controller without retained credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Retest controller before privileged recovery
+        run: python -m unittest discover -s tests -p 'test_autonomy_supervisor.py' -v
+      - name: Read fixed GitHub state branches and repair at most one missed run
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          day="$(date -u +%F)"
+          python -B -m tools.autonomy.supervisor \
+            --repository "$GITHUB_REPOSITORY" \
+            --day "$day" \
+            --dispatch \
+            --output verification/autonomy-supervisor/report.json
+      - name: Preserve audited decision for this GitHub run
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: autonomy-supervisor-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/autonomy-supervisor/report.json
+          if-no-files-found: warn
+          retention-days: 30

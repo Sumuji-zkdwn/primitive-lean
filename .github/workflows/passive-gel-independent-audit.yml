@@ -1,0 +1,38 @@
+name: Independent passive gel finite audit
+
+on:
+  pull_request:
+    paths:
+      - 'tools/audit_passive_gel_independent.py'
+      - 'docs/verification/2026-11-23-passive-gel-independent-audit.md'
+      - '.github/workflows/passive-gel-independent-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-finite-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned numerical dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 sympy==1.14.0
+      - name: Independent symbolic, finite and numerical checks
+        run: |
+          set -euo pipefail
+          python -B tools/audit_passive_gel_independent.py 2>&1 | tee passive-gel-independent-audit.log
+      - name: Preserve audit evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: passive-gel-independent-audit
+          path: passive-gel-independent-audit.log
+          if-no-files-found: warn

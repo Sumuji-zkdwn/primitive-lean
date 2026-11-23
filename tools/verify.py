@@ -451,7 +451,25 @@ def main(argv=None):
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
     modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
+    modes.add_argument("--sandpile-laakso-only", action="store_true",
+                       help="Check the sandpile Laakso construction with its pinned Lean toolchains")
     args = parser.parse_args(argv)
+    if args.sandpile_laakso_only:
+        if args.rebuild:
+            parser.error("--sandpile-laakso-only always recompiles the experiment's Lean modules")
+        experiment = ROOT / "experiments" / "sandpile_laakso"
+        checks = [
+            [sys.executable, "-B", "-X", "utf8", "formalization/verify.py"],
+            ["elan", "run", "leanprover/lean4:v4.35.0", "lean", "--trust=0", "-DwarningAsError=true",
+             "formalization/ClockAvalancheExample.lean"],
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "planar_followup",
+             "-p", "test_clock_avalanche_witness.py", "-v"],
+        ]
+        for check_args in checks:
+            result = subprocess.run(check_args, cwd=experiment)
+            if result.returncode:
+                return result.returncode
+        return 0
     if args.toolchain_modules_only:
         if args.rebuild:
             parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")
