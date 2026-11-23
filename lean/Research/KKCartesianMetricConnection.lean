@@ -1,5 +1,5 @@
 import Research.KKCartesianDerivative
-import Research.KKCartesianRicci
+import Research.KKCartesianGammaTable
 import Mathlib.Tactic
 import Mathlib.LinearAlgebra.Matrix.Notation
 
