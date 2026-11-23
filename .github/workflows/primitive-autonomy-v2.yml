@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/primitive-autonomy-v2.yml'
       - 'tools/autonomy/primitive_v2.py'
+      - 'tools/autonomy/primitive_v2_smoke.py'
       - 'tools/autonomy/grow.py'
       - 'tools/autonomy/proof_forge.py'
       - 'tests/test_primitive_v2.py'
@@ -59,6 +60,13 @@ jobs:
             --head "$(git rev-parse HEAD)" \
             --day 2026-11-23 \
             --output verification/primitive-v2/replay
+      - name: Generate actual delayed and negative-control Lean smoke obligations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.primitive_v2_smoke \
+            --head "$(git rev-parse HEAD)" \
+            --output verification/primitive-v2/smoke
       - name: Install repository-pinned Lean and Mathlib
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
@@ -73,7 +81,7 @@ jobs:
         shell: bash
         run: |
           set -uo pipefail
-          for file in ../verification/primitive-v2/replay/proof/*.lean; do
+          for file in ../verification/primitive-v2/{replay,smoke}/proof/*.lean; do
             test -f "$file" || { echo 'No generated Lean source'; exit 1; }
             name="$(basename "$file" .lean)"
             directory="$(dirname "$file")"
@@ -89,6 +97,8 @@ jobs:
           set -euo pipefail
           python -B tools/autonomy/proof_forge.py audit \
             --output verification/primitive-v2/replay/proof
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/primitive-v2/smoke/proof
           python -B -m tools.autonomy.primitive_v2 receipt \
             --root . \
             --state tests/fixtures/primitive_v2_empty.json \
