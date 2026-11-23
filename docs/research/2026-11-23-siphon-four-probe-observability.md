@@ -108,6 +108,34 @@ Three of the four particular reads can fail:
 
 These examples do NOT show that *every possible* triple fails.
 
+
+## A stronger three-probe obstruction with two fixed coordinate reads
+
+**Topological lemma (paper proof):** For any continuous \(f:\mathbb R^2\to\mathbb R\),
+\[
+(u,v)\mapsto(u^2,v^2,f(u,v))
+\]
+is **not injective**. Equivalently, no third continuous scalar reading can complete the two base readings \(p(u,v)\) and \(p(L(u,v))\) into an injective global signature, even if that reading is not constructed from E or L.
+
+**Proof by intermediate value.** If \(f(a,0)=f(-a,0)\) for some \(a>0\), or \(f(0,b)=f(0,-b)\) for some \(b>0\), the corresponding pair immediately gives a collision. Otherwise choose any \(a,b>0\). Set
+\[
+\Delta_x=f(a,0)-f(-a,0)\ne0,\qquad
+\Delta_y=f(0,b)-f(0,-b)\ne0.
+\]
+If \(\Delta_x,\Delta_y\) have opposite signs, compare
+\[
+g(t)=f(at,b(1-t))-f(-at,-b(1-t)).
+\]
+Its endpoint values are \(g(0)=\Delta_y\) and \(g(1)=\Delta_x\), so some \(t\in(0,1)\) satisfies \(g(t)=0\). The two states are negatives of each other and have the same coordinate squares.
+
+If \(\Delta_x,\Delta_y\) have the same sign, compare instead
+\[
+h(t)=f(at,-b(1-t))-f(-at,b(1-t)).
+\]
+Now \(h(0)=-\Delta_y\) and \(h(1)=\Delta_x\), so again the intermediate value theorem produces a collision for the same pair of coordinate-square readings. QED.
+
+This result proves **four is the minimum among protocols that keep both identity and L readings**. It does **not** rule out an alternative three-word signature that uses none or only one of these two fixed coordinate reads.
+
 ## Verification
 
 * Exact rational regression checks over the 49-point integer grid, 169-point half-integer grid, and 841-point half-integer grid.
