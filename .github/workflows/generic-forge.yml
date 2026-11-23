@@ -63,6 +63,30 @@ jobs:
             --head "$(git rev-parse HEAD)" \
             --evidence verification/generic-forge/replay \
             --output verification/generic-forge/ephemeral-next-state.json
+      - name: Execute newly certified image operator as an actual program
+        shell: bash
+        run: |
+          set -euo pipefail
+          id="$(python - <<'PY'
+          import json
+          with open("verification/generic-forge/ephemeral-next-state.json", encoding="utf-8") as f:
+              print(json.load(f)["receipts"][0]["id"])
+          PY
+          )"
+          python -B -m tools.autonomy.generic_forge run \
+            --state verification/generic-forge/ephemeral-next-state.json \
+            --operator-id "$id" --value 1 \
+            > verification/generic-forge/example-execution.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          sample = json.loads(Path("verification/generic-forge/example-execution.json").read_text())
+          assert sample["domain"] == "grid3"
+          assert len(sample["input_view"]) == len(sample["output_view"]) == 3
+          assert sample["input"] == 1
+          print("Executed certified image operator:", sample["operator_id"])
+          print("Output pixels:", sample["output_view"])
+          PY
       - name: Retain exact SHA-bound evidence from PR CI
         if: always()
         uses: actions/upload-artifact@v6
