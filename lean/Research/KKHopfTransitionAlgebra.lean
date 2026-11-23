@@ -20,16 +20,16 @@ Chern class of the transition function.
 namespace KKHopfTransitionAlgebra
 open KKHopfGlobalAlgebra
 
-def formalNorth (u v w dn : ℝ) : X4 := fun i =>
+noncomputable def formalNorth (u v w dn : ℝ) : X4 := fun i =>
   if i = 0 then (1+w)/dn else if i = 1 then 0
   else if i = 2 then u/dn else v/dn
 
-def formalSouth (u v w ds : ℝ) : X4 := fun i =>
+noncomputable def formalSouth (u v w ds : ℝ) : X4 := fun i =>
   if i = 0 then u/ds else if i = 1 then -v/ds
   else if i = 2 then (1-w)/ds else 0
 
-def transitionC (u dn ds : ℝ) : ℝ := 2*u/(dn*ds)
-def transitionS (v dn ds : ℝ) : ℝ := -2*v/(dn*ds)
+noncomputable def transitionC (u dn ds : ℝ) : ℝ := 2*u/(dn*ds)
+noncomputable def transitionS (v dn ds : ℝ) : ℝ := -2*v/(dn*ds)
 
 /-- The north/south rational transition phase has unit norm for
 square-root denominators obeying the two defining equations. -/
