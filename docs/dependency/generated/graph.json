@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
+  "main_commit": "24df10e3caf59525534e72455b33971f143d1a3d",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1723,6 +1723,34 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
+    },
+    {
+      "id": "main:lean/Research/FiniteSoftWallBypass.lean",
+      "scope": "main",
+      "path": "lean/Research/FiniteSoftWallBypass.lean",
+      "group": "Other",
+      "namespace": "FiniteSoftWallBypass",
+      "declarations": [
+        "radical_lt_nine_tenths",
+        "route_margin_gt_tenth",
+        "route_margin_sq_gt_hundredth",
+        "soft_penalty_lt_fifty",
+        "soft_penalty_le_hundred",
+        "bypass_energy_lt_seventy",
+        "direct_wall_energy_ge_hundred",
+        "bypass_below_direct",
+        "initial_soft_norm_identity",
+        "initial_soft_norm_lower",
+        "bypass_wall_weights_sum",
+        "bypass_wall_coordinate_01",
+        "bypass_wall_coordinate_23",
+        "direct_wall_coordinate_0",
+        "direct_wall_coordinate_123"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "e6018f7115cbfbb2eea9295f7315046e92d261abeaf190a77708085e62095169"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -27738,28 +27766,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "24df10e3caf59525534e72455b33971f143d1a3d",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "24df10e3caf59525534e72455b33971f143d1a3d",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "24df10e3caf59525534e72455b33971f143d1a3d",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "24df10e3caf59525534e72455b33971f143d1a3d",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

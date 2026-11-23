@@ -1,0 +1,85 @@
+name: Finite soft S3 wall bypass
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/FiniteSoftWallBypass.lean'
+      - 'tools/check_finite_soft_wall_bypass.py'
+      - 'docs/research/2026-11-23-finite-soft-wall-bypass.md'
+      - '.github/workflows/finite-soft-wall-bypass.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-soft-wall:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Pinned mathlib and Lean toolchain
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean kernel trust-zero check
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/FiniteSoftWallBypass.olean Research/FiniteSoftWallBypass.lean 2>&1 | tee ../soft-wall-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../soft-wall-lean.log; then exit 1; fi
+      - name: Audit all 15 theorem axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/FiniteSoftWallBypass.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==15, names
+          pathlib.Path('FiniteSoftWallBypassAudit.lean').write_text(
+              'import Research.FiniteSoftWallBypass\n'+
+              ''.join('#print axioms FiniteSoftWallBypass.'+n+'\n' for n in names))
+          pathlib.Path('../soft-wall-theorem-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 FiniteSoftWallBypassAudit.lean 2>&1 | tee ../soft-wall-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          audit=pathlib.Path('../soft-wall-axioms.log').read_text()
+          n=int(pathlib.Path('../soft-wall-theorem-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',audit),audit
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',audit)
+          none=audit.count('does not depend on any axioms')
+          assert len(deps)+none==n,(n,len(deps),none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for group in deps:
+              used=set(filter(None,(x.strip() for x in group.split(','))))
+              assert used<=allowed,used-allowed
+          print('LEAN AXIOM AUDIT PASS:',n)
+          PY
+      - name: Independent exact SymPy bypass oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_finite_soft_wall_bypass.py 2>&1 | tee soft-wall-python.log
+      - name: Preserve source-linked evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: finite-soft-wall-bypass
+          path: |
+            soft-wall-lean.log
+            soft-wall-axioms.log
+            soft-wall-theorem-count.txt
+            soft-wall-python.log
+          if-no-files-found: warn
