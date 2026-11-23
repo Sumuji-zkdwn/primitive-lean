@@ -3,6 +3,9 @@
 スマホから遊ぶ（HTML単一ファイル・インストール不要）:
 https://raw.githack.com/Sumuji-zkdwn/primitive-lean/main/games/primitive-foundry/play.html
 
+465定理の研究画面を直接開く:
+https://raw.githack.com/Sumuji-zkdwn/primitive-lean/main/games/primitive-foundry/play.html?view=research
+
 従来のパズル・ROGUE465とは独立した工場自動化ゲームです。Factorioの「採掘→搬送→加工→研究→拡張」という仕組みを参考にした新規コードと独自のCanvas描画で、Factorioのソース・イラスト・音楽はコピーしていません。
 
 ## 遊び方
