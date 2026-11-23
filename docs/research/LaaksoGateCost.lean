@@ -328,7 +328,7 @@ theorem exact_two_unique_gate_roundtrip_infimum
     change 2 * |F a - F b| ≤ c + |F s - F s| at hbound
     rw [abs_of_nonpos (sub_nonpos.mpr hFab)] at hbound
     simp only [sub_self, abs_zero, add_zero] at hbound
-    exact hbound
+    linarith
   have hcost :
       |F s - F a| + |F a - F b| + |F b - F s| =
         2 * (F b - F a) := by
