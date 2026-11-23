@@ -145,6 +145,24 @@ class MetaForgeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 mf.plan(mf.empty_state(), day, HEAD)
 
+    def test_short_trial_slots_preserve_verified_history_and_bounded_cost(self):
+        from unittest.mock import patch
+        first, old = self.one_cycle("2026-11-23", 1)
+        second, state = self.one_cycle("2026-11-23T08:00Z", 2)
+        self.assertEqual(state["last_utc_day"], "2026-11-23T08:00Z")
+        self.assertEqual(len(state["rules"]), 2)
+        self.assertEqual(second["rule"]["parent"], first["rule"]["id"])
+        same = mf.plan(state, "2026-11-23T08:00Z", HEAD)
+        self.assertFalse(same["candidate"])
+        self.assertEqual(same["reason"], "ALREADY_EVALUATED_TODAY")
+        with patch.object(mf, "TRIAL_RECEIPT_CAP", 2):
+            blocked = mf.plan(state, "2026-11-23T08:10Z", HEAD)
+            self.assertEqual(blocked["reason"], "TRIAL_CAP_REACHED")
+        self.assertEqual(mf.plan(state, "2026-11-24T08:00Z", HEAD)["reason"],
+                         "TRIAL_WINDOW_CLOSED")
+        with self.assertRaises(ValueError):
+            mf.check_day("2026-11-23T08:05Z")
+
     def test_duplicate_json_keys_or_broken_source_refused(self):
         self.state_path.write_text(
             '{"schema_version":1,"schema_version":2}', encoding="utf-8")

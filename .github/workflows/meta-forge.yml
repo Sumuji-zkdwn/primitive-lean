@@ -18,8 +18,8 @@ on:
       - '.github/workflows/meta-forge.yml'
       - 'tools/autonomy/meta_forge.py'
   schedule:
-    # Generic Forge at 10:19 UTC, Meta Forge at 11:07 UTC (20:07 JST).
-    - cron: '7 11 * * *'
+    # Short trial: 10-minute cadence offset from Generic Forge, November 23 UTC.
+    - cron: '2,12,22,32,42,52 8-12 23 11 *'
   workflow_dispatch:
 
 permissions:
@@ -139,9 +139,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          slot="$(python - <<'PY'
+          from datetime import datetime, timezone
+          now = datetime.now(timezone.utc)
+          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 10 * 10:02d}Z")
+          PY
+          )"
           python -B -m tools.autonomy.meta_forge prepare \
             --state ../state/docs/autonomy/meta-forge-state.json \
-            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --day "$slot" --head "$GITHUB_SHA" \
             --output ../cycle
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
@@ -191,9 +197,15 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          slot="$(python - <<'PY'
+          import json
+          with open("../cycle/proposal.json", encoding="utf-8") as f:
+              print(json.load(f)["day"])
+          PY
+          )"
           python -B -m tools.autonomy.meta_forge prepare \
             --state ../state/docs/autonomy/meta-forge-state.json \
-            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --day "$slot" --head "$GITHUB_SHA" \
             --output ../replay
           cmp ../cycle/proposal.json ../replay/proposal.json
       - name: Independently re-execute and audit every generated operator

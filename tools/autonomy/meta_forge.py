@@ -28,6 +28,9 @@ STATUS = "EVALUATED_META_RULE_FINITE_ONLY"
 ZERO = "0" * 64
 MAX_RULE_STEPS = 4
 MAX_HISTORY = 64
+TRIAL_RECEIPT_CAP = 5
+TRIAL_START = "2026-11-23T08:00Z"
+TRIAL_END = "2026-11-23T12:59Z"
 MAX_EVALUATIONS = 88
 MAX_PARENT_RULES = 8
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
@@ -92,10 +95,8 @@ def empty_state():
 
 
 def check_day(value):
-    require(type(value) is str and re.fullmatch(r"\d{4}-\d{2}-\d{2}", value),
-            "date must be an ISO UTC day")
-    require(date.fromisoformat(value).isoformat() == value,
-            "invalid calendar date")
+    # Use the same strictly parsed UTC slot format as Generic Forge.
+    gf.check_day(value)
 
 
 def step_atoms():
@@ -390,6 +391,12 @@ def plan(state, day, head):
     if state["last_utc_day"] == day:
         return {"schema_version": SCHEMA, "candidate": False,
                 "day": day, "head_sha": head, "reason": "ALREADY_EVALUATED_TODAY"}
+    if "T" in day and not TRIAL_START <= day <= TRIAL_END:
+        return {"schema_version": SCHEMA, "candidate": False,
+                "day": day, "head_sha": head, "reason": "TRIAL_WINDOW_CLOSED"}
+    if len(state["rules"]) >= TRIAL_RECEIPT_CAP:
+        return {"schema_version": SCHEMA, "candidate": False,
+                "day": day, "head_sha": head, "reason": "TRIAL_CAP_REACHED"}
     if len(state["rules"]) >= MAX_HISTORY:
         return {"schema_version": SCHEMA, "candidate": False,
                 "day": day, "head_sha": head, "reason": "VERIFIED_RULE_LIMIT"}

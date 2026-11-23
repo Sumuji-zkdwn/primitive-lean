@@ -144,6 +144,27 @@ class GenericForgeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             forge.reference_primitive("grid3", "undefined", 0)
 
+    def test_short_trial_slots_preserve_old_daily_history_and_bound_runs(self):
+        from unittest.mock import patch
+        original, _ = self.run_cycle("2026-11-23", 1)
+        self.assertEqual(original["last_utc_day"], "2026-11-23")
+        next_state, _ = self.run_cycle("2026-11-23T08:00Z", 2)
+        self.assertEqual(next_state["last_utc_day"], "2026-11-23T08:00Z")
+        self.assertEqual(len(next_state["receipts"]), 2)
+        same_slot = forge.plan(next_state, "2026-11-23T08:00Z", HEAD)
+        self.assertFalse(same_slot["candidate"])
+        self.assertEqual(same_slot["reason"], "ALREADY_CERTIFIED_TODAY")
+        with patch.object(forge, "TRIAL_RECEIPT_CAP", 2):
+            blocked = forge.plan(next_state, "2026-11-23T08:10Z", HEAD)
+            self.assertEqual(blocked["reason"], "TRIAL_CAP_REACHED")
+        self.assertEqual(
+            forge.plan(next_state, "2026-11-24T08:00Z", HEAD)["reason"],
+            "TRIAL_WINDOW_CLOSED")
+        for invalid in ("2026-11-23T08:05Z", "2026-11-23T25:00Z",
+                        "2026-11-23T08:00+09:00"):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                forge.check_day(invalid)
+
     def test_duplicate_json_fields_and_bad_dates_fail_closed(self):
         self.path.write_text('{"schema_version":1,"schema_version":2}', "utf-8")
         with self.assertRaises(ValueError):
