@@ -6,7 +6,21 @@
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const techSource=$("factory-tech")?.textContent;
  const tech=techSource?JSON.parse(techSource):await (await fetch("./tech.json")).json();
- const knownTech=new Map(tech.nodes.map(t=>[t.id,t]));
+ const upgradeSource=$("factory-upgrades-json")?.textContent;
+ const upgrades=upgradeSource?JSON.parse(upgradeSource):await (await fetch("./upgrades.json")).json();
+ if(tech.nodes.length!==465||tech.summary.proofEdges!==629)throw Error("465定理の依存台帳が不正です");
+ const knownTech=new Map(upgrades.nodes.map(t=>[t.id,t]));
+ const proofById=new Map(tech.nodes.map(t=>[t.id,t]));
+ const proofByName=new Map(tech.nodes.map(t=>[t.name,t]));
+ const proofChildren=new Map(tech.nodes.map(t=>[t.id,[]]));
+ for(const node of tech.nodes)for(const parent of node.parents)proofChildren.get(parent).push(node.id);
+ const byDepth=new Map();
+ for(const node of tech.nodes)(byDepth.get(node.depth)||byDepth.set(node.depth,[]).get(node.depth)).push(node);
+ const proofCoordinates=new Map();
+ for(const [depth,arr] of byDepth){
+  arr.sort((a,b)=>a.school.localeCompare(b.school)||a.chapter.localeCompare(b.chapter)||a.id-b.id);
+  arr.forEach((n,i)=>proofCoordinates.set(n.id,{x:45+depth*210,y:38+i*26}));
+ }
  const tools={
   logistics:[
    ["pan","調べる","⌖"],["belt","ベルト","»"],["miner","採掘機","◉"],
@@ -20,10 +34,14 @@
   utility:[["generator","発電機","◈"],["pan","調べる","⌖"],["rotate","回転","↻"],["erase","撤去","×"]]
  };
  const canvas=$("factory-canvas"),viewport=$("viewport"),ctx=canvas.getContext("2d");
+ const proofCanvas=$("proof-graph"),proofCtx=proofCanvas?.getContext?.("2d")||null;
  if(!ctx){$("status").textContent="Canvas描画を利用できません。";return;}
  const STORAGE="primitive-foundry-save-v2";
  let world=null,category="logistics",tool="pan",dir=0,zoom=1;
  let pane="inspect",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ let selectedProof=0,proofStatus="ready",proofSchool="all",proofSearch="";
+ let graphMode="focus",graphShift={x:0,y:0},graphPointer=null;
+ let graphHitboxes=[];
  let camX=typeof window!=="undefined"&&window.innerWidth<750?9.3:11.8,camY=8.4;
  let layoutW=700,layoutH=520,dpr=1;
  function load(){
@@ -38,6 +56,8 @@
   try{localStorage.setItem(STORAGE,JSON.stringify(world));}catch(_){}
  }
  world=load()||F.challengeBlueprint(F.newWorld(20261124));
+ if(!Array.isArray(world.proofs))world.proofs=[];
+ if(!Array.isArray(world.proofNames))world.proofNames=[];
  if(world.status==="paused")world.status="playing";
  const tipBase="タップで配置・調査。ベルトはドラッグで敷設。地図を動かすには「調べる」を選びドラッグ。";
  function announce(msg){
