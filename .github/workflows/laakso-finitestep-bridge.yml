@@ -1,0 +1,49 @@
+name: Laakso actual finiteStep horizontal projection bridge
+
+on:
+  pull_request:
+    branches: [codex/sandpile-laakso-realization, main]
+    paths:
+      - 'experiments/sandpile_laakso/formalization/FiniteStepHorizontalBridge.lean'
+      - '.github/workflows/laakso-finitestep-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean-finiteStep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up pinned Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: experiments/mobius_430
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile actual ObservedQuotient and proposed bridge with --trust=0
+        working-directory: experiments/mobius_430
+        run: |
+          lake env python - <<'PY'
+          import os, subprocess, tempfile
+          from pathlib import Path
+
+          source = Path("../../experiments/sandpile_laakso/formalization").resolve()
+          with tempfile.TemporaryDirectory(prefix="laakso-real-bridge-") as directory:
+              env = {**os.environ, "LEAN_PATH": directory + os.pathsep + os.environ["LEAN_PATH"]}
+              for cmd in [
+                  ["lean", "--trust=0", "-o", str(Path(directory)/"ObservedQuotient.olean"),
+                   str(source/"ObservedQuotient.lean")],
+                  ["lean", "--trust=0", str(source/"FiniteStepHorizontalBridge.lean")],
+              ]:
+                  result = subprocess.run(cmd, env=env, text=True, capture_output=True)
+                  print(result.stdout + result.stderr, flush=True)
+                  assert result.returncode == 0, "Lean kernel compilation failed"
+                  assert "sorryAx" not in result.stdout, "Unapproved sorryAx reported"
+              print("PASS: actual finiteStep/WalkCost bridge, no sorryAx")
+          PY
