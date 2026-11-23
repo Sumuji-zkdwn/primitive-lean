@@ -107,3 +107,18 @@ Physics scope: classical, local, circle-invariant 5D vacuum Einstein gravity; no
 - Lotay et al., *Barriers for minimal submanifolds in Gibbons-Hawking ansatz*, New York J. Math. 28 (2022), sec. 2 (principal bundle, monopole equation, hyperkähler forms): https://nyjm.albany.edu/j/2022/28-34v.pdf
 - Gibbons–Hawking/Taub–NUT construction lecture notes, Example 5.44: https://walpu.ski/Teaching/WS2324/DifferentialGeometry3/GaugeTheoryS.pdf
 - Georgios Douzas, *The Kaluza–Klein reduction* (generic curvature jet formalism and scalar action): https://georgedouzas.github.io/posts/kaluza-klein-theories/part-iii-01-kaluza-klein-reduction.html
+
+
+## Lean C-infinity centre extension (follow-up)
+The new `KKNutSmooth.lean` module defines the **actual Cartesian tensor coefficients**
+`g_ij(X) = q(X) delta_ij - alpha*(2+alpha*|X|²)/q(X) * omega_i(X)*omega_j(X)`
+on the full function space `Fin 4 → ℝ`. Its theorem
+`all_metric_entries_smooth` aims to certify `ContDiff ℝ ⊤` for **all 16
+coefficient functions**, including the centre, using the nowhere-zero
+denominator `q(X)=1+alpha*|X|² >=1`. This is a substantially stronger
+formal statement than the scalar polynomial rank-one identities.
+**Lean CI status must be checked on the exact new head before
+claiming this module compiles.** Even success does not itself formalize
+the Hopf quotient topology, the period-4π diffeomorphism, or the global
+equivalence with the original bundle chart. Those are separate geometric
+requirements.
