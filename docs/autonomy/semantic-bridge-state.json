@@ -1,5 +1,77 @@
 {
-  "schema_version": 1,
-  "last_utc_day": null,
-  "receipts": []
+  "last_utc_day": "2026-11-23",
+  "receipts": [
+    {
+      "behavior": {
+        "behavior_sha256": "cf435e9923cb6a6f2d5136680e92aa61b91e59e1051d6ba985fceac20b65c582",
+        "changed_inputs": 256,
+        "constant_counterexample": {
+          "input": 0,
+          "input_values": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "output": 252,
+          "output_values": [
+            0,
+            3,
+            3,
+            3
+          ]
+        },
+        "distinct_outputs": 4,
+        "exhaustive_inputs": 256,
+        "four_position_outputs": [
+          252,
+          243,
+          207,
+          63
+        ],
+        "independent_implementations": 2,
+        "old_primitive_closure_excluded": true
+      },
+      "chain_sha256": "6b0edd0c36b12e72f7373cc800faf003debee1edff107272fc924d5fab2abcd2",
+      "day": "2026-11-23",
+      "evaluator": "semantic-bridge-v1-dual-exhaustive-composition",
+      "flattened": [
+        {
+          "id": "sf_43ed97b6ef1909a1",
+          "kind": "semantic"
+        },
+        {
+          "id": "gf_3ea0ae0d3af2c7b0",
+          "kind": "generic"
+        }
+      ],
+      "head_sha": "dede812703d60ba63c916ab89c0fb95c9a28001e",
+      "id": "sb_ea8bbc97c62c154e",
+      "invariant": {
+        "base_witness_sha256": "0237f9cc7098f76946ee6ddeec90222e4e6b34fe79a45b80e8348a9e53402c41",
+        "closure_argument": "composition_of_property_preserving_functions_preserves_property",
+        "constant_inputs_per_primitive": 4,
+        "independent_base_checks": 24,
+        "old_primitive_count": 6,
+        "property": "all_constant_signals_map_to_constant_signals"
+      },
+      "parent": null,
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "recipe": [
+        {
+          "id": "sf_43ed97b6ef1909a1",
+          "kind": "semantic"
+        },
+        {
+          "id": "gf_3ea0ae0d3af2c7b0",
+          "kind": "generic"
+        }
+      ],
+      "score": 14,
+      "source_generic": "3f1bbfd63408b9b935e81e205309a1659cdac3173714545f65b7b266e356f045",
+      "source_semantic": "764b71a0bc7602d1387d5ec442e07ecabd04e5f87811b650dffda771c0623bce",
+      "status": "VERIFIED_HYBRID_FINITE_SIGNAL_OPERATOR"
+    }
+  ],
+  "schema_version": 1
 }
