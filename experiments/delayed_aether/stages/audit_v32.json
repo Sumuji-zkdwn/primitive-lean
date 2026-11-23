@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "scope": "4D Euclidean 2-4 Pachner patch, fixed boundary; no Lorentzian propagation",
+  "exact": {
+    "simplices_before": 2,
+    "simplices_after": 4,
+    "edges_before": 14,
+    "edges_after": 15,
+    "new_internal_edge": "EF",
+    "boundary_tetrahedra": 8,
+    "internal_tetra_before": 1,
+    "internal_tetra_after": 6,
+    "interior_triangles_before": 0,
+    "interior_triangles_after": 4,
+    "boundary_triangles": 16,
+    "flat_squared_edge": "5/2",
+    "nonflat_stationary_squared_edge": "2",
+    "flat_deficit_slope": "-4 sqrt(30)",
+    "regge_flat_Hessian": "8 sqrt(5)",
+    "regge_curved_stationary_Hessian": "-2 pi"
+  },
+  "finite_difference": {
+    "max_action_gradient_disagreement": 7.599996582063895e-08,
+    "flat_x": 1.5811388300841898,
+    "curved_saddle_x": 1.4142135623730951,
+    "flat_regge_Hessian_fd": 17.888558545564592,
+    "curved_regge_Hessian_fd": -6.283184461608471,
+    "curved_deficit": 1.5707963267948957,
+    "full_action_at_flat": 10.350372338931715
+  },
+  "curvature_memory": [
+    {
+      "kappa": 0,
+      "mu": 0.5,
+      "eta": 0.0,
+      "nonflat_x": 1.4142135623730951,
+      "nonflat_squared_edge": 2.0000000000000004,
+      "deficit": 1.5707963267948957,
+      "memory_at_critical": 0.0,
+      "reduced_Hessian": -6.283184461608471,
+      "stable": false
+    },
+    {
+      "kappa": 0.02,
+      "mu": 0.5,
+      "eta": 0.019230769230769232,
+      "nonflat_x": 1.3956659407035166,
+      "nonflat_squared_edge": 1.947883418039832,
+      "deficit": 1.6451064070087398,
+      "memory_at_critical": 0.06327332334649,
+      "reduced_Hessian": -7.0468939128431884,
+      "stable": false
+    },
+    {
+      "kappa": 0.1,
+      "mu": 0.5,
+      "eta": 0.08333333333333334,
+      "nonflat_x": 1.349260886966717,
+      "nonflat_squared_edge": 1.8205049410982121,
+      "deficit": 1.7992865346982327,
+      "memory_at_critical": 0.2998810891163722,
+      "reduced_Hessian": -8.60070308306149,
+      "stable": false
+    },
+    {
+      "kappa": 0.3,
+      "mu": 0.5,
+      "eta": 0.18749999999999997,
+      "nonflat_x": 1.2958811800529264,
+      "nonflat_squared_edge": 1.6793080328153651,
+      "deficit": 1.9359288964934933,
+      "memory_at_critical": 0.7259733361850599,
+      "reduced_Hessian": -9.885546781163157,
+      "stable": false
+    },
+    {
+      "kappa": 1,
+      "mu": 0.5,
+      "eta": 0.3333333333333333,
+      "nonflat_x": 1.240406196089741,
+      "nonflat_squared_edge": 1.5386075312978211,
+      "deficit": 2.0463673377743916,
+      "memory_at_critical": 1.3642448918495944,
+      "reduced_Hessian": -10.808785155802525,
+      "stable": false
+    },
+    {
+      "kappa": 3,
+      "mu": 0.5,
+      "eta": 0.42857142857142855,
+      "nonflat_x": 1.2106188139083947,
+      "nonflat_squared_edge": 1.4655979125889682,
+      "deficit": 2.0958939214591705,
+      "memory_at_critical": 1.7964805041078604,
+      "reduced_Hessian": -11.17627341784555,
+      "stable": false
+    },
+    {
+      "kappa": 10,
+      "mu": 10,
+      "eta": 5.0,
+      "nonflat_x": 0.6748542141992921,
+      "nonflat_squared_edge": 0.4554282104225441,
+      "deficit": 2.495898001970099,
+      "memory_at_critical": 1.2479490009850496,
+      "reduced_Hessian": -13.069088922179617,
+      "stable": false
+    },
+    {
+      "kappa": 100,
+      "mu": 100,
+      "eta": 50.0,
+      "nonflat_x": 0.11170141483964247,
+      "nonflat_squared_edge": 0.012477206077177899,
+      "deficit": 2.588092452813136,
+      "memory_at_critical": 1.2940462264065677,
+      "reduced_Hessian": -47.30352998194576,
+      "stable": false
+    }
+  ]
+}

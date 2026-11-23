@@ -1,0 +1,115 @@
+name: Delayed-aether v32 four-dimensional Pachner Regge audit
+
+on:
+  pull_request:
+    paths:
+      - 'docs/research/delayed-aether/stage-32.md'
+      - 'experiments/delayed_aether/stages/*v32*'
+      - 'lean/Research/DelayedAetherPachner32.lean'
+      - '.github/workflows/delayed-aether-pachner-v32.yml'
+  push:
+    paths:
+      - 'docs/research/delayed-aether/stage-32.md'
+      - 'experiments/delayed_aether/stages/*v32*'
+      - 'lean/Research/DelayedAetherPachner32.lean'
+      - '.github/workflows/delayed-aether-pachner-v32.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned exact symbolic/high-precision auditors
+        run: python -m pip install sympy==1.14.0 mpmath==1.3.0
+      - name: Exact 2-4 Pachner combinatorics, full Regge action, memory instability
+        run: |
+          set -euo pipefail
+          python -B -X utf8 experiments/delayed_aether/stages/verify_v32.py
+          python -B -X utf8 experiments/delayed_aether/stages/independent_audit_v32.py
+          python -B -m py_compile experiments/delayed_aether/stages/verify_v32.py experiments/delayed_aether/stages/independent_audit_v32.py experiments/delayed_aether/stages/make_plots_v32.py
+      - name: Upload exact-head numerical and symbolic certificates
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delayed-aether-v32-finite-${{ github.run_id }}
+          path: |
+            experiments/delayed_aether/stages/audit_v32.json
+            experiments/delayed_aether/stages/independent_audit_v32.json
+            experiments/delayed_aether/stages/memory_stationary_scan_v32.csv
+          retention-days: 30
+          if-no-files-found: warn
+
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - name: Install pinned Lean via elan
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Download repository-pinned Mathlib cache
+        working-directory: lean
+        run: lake exe cache get
+      - name: Create per-theorem explicit axiom probe
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('lean/Research/DelayedAetherPachner32.lean')
+          src=p.read_text(encoding='utf-8')
+          names=re.findall(r'(?m)^theorem\s+([A-Za-z0-9_]+)',src)
+          assert len(names)==14, names
+          p.with_name('DelayedAetherPachner32Audit.lean').write_text(
+            src+'\n'+'\n'.join('#print axioms DelayedAetherPachner32.'+x for x in names)+'\n',encoding='utf-8')
+          print('Lean v32 theorem count',len(names))
+          PY
+      - name: Kernel trust=0, warning/sorry guard and axiom allowlist
+        run: |
+          set -euo pipefail
+          cd lean
+          lake env lean --trust=0 Research/DelayedAetherPachner32Audit.lean > ../delayed-aether-v32-lean.log 2>&1 || {
+            cat ../delayed-aether-v32-lean.log; exit 1;
+          }
+          if grep -E '(warning:|sorryAx)' ../delayed-aether-v32-lean.log; then
+            echo 'Lean warning/sorry axiom found'; exit 1
+          fi
+          cat ../delayed-aether-v32-lean.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('Research/DelayedAetherPachner32.lean')
+          names=re.findall(r'(?m)^theorem\s+([A-Za-z0-9_]+)',p.read_text(encoding='utf-8'))
+          out=Path('../delayed-aether-v32-lean.log').read_text(encoding='utf-8').splitlines()
+          found=[]
+          for line in out:
+            if not line.startswith("'DelayedAetherPachner32."):
+              continue
+            m=re.fullmatch(r"'DelayedAetherPachner32\.([A-Za-z0-9_]+)' depends on axioms: \[(.*?)\]",line)
+            assert m is not None,line
+            axioms={a.strip() for a in m.group(2).split(',') if a.strip()}
+            assert axioms <= {'propext','Quot.sound','Classical.choice'},(m.group(1),axioms)
+            found.append(m.group(1))
+          assert found == names,(found,names)
+          print(f'PASS: {len(names)} kernel-checked v32 Lean theorems and axiom allowlist')
+          PY
+      - name: Preserve exact-head Lean audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delayed-aether-v32-lean-${{ github.run_id }}
+          path: delayed-aether-v32-lean.log
+          retention-days: 30
+          if-no-files-found: warn
