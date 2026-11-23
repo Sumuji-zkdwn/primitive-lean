@@ -588,7 +588,7 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
   hits.innerHTML=matches.length?matches.map(({id})=>{
    const n=model.nodes[id],p=model.proofs[id];
    return '<button type="button" class="hit" data-hit="'+id+'"><span>'+
-    esc(n.label)+'<small>'+esc(n.chapter)+' · 前提 '+n.parents.length+'件'+
+    esc(model.argumentsById[id]?.title||n.label)+'<small>'+esc(n.chapter)+' · 前提 '+n.parents.length+'件'+
     (model.argumentsById[id]?" · 日本語の論証あり":p.comment?" · 原文の説明あり":"")+
     '</small></span><span class="mono">#'+String(id+1).padStart(3,"0")+'</span></button>';
   }).join(""):'<div class="empty" style="padding:13px">一致する定理がありません。</div>';
@@ -673,7 +673,7 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
     ctx.beginPath();ctx.arc(point.x,point.y,radius+6,0,Math.PI*2);ctx.stroke();
    }
    if(mode==="focus"&&(isPicked||scale>.55&&radius>=6)){
-    const name=isPicked?A.short(n):"#"+String(n.id+1).padStart(3,"0");
+    const name=isPicked?(model.argumentsById[n.id]?.title||A.short(n)):"#"+String(n.id+1).padStart(3,"0");
     ctx.fillStyle=isPicked?"#f6e8cb":"#b3cbd0";
     ctx.font=(isPicked?"700 13px":"11px")+" system-ui,'Noto Sans JP',sans-serif";
     ctx.textAlign="left";
@@ -689,7 +689,7 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
  }
  function nodeButton(id,desc=""){
   const n=model.nodes[id];
-  return '<button class="chip" type="button" data-node="'+id+'">'+esc(n.label)+
+  return '<button class="chip" type="button" data-node="'+id+'">'+esc(model.argumentsById[id]?.title||n.label)+
    (desc?'<br><small>'+esc(desc)+'</small>':"")+'</button>';
  }
  function makeSourceLink(n,p){
@@ -768,7 +768,7 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
  }
  function renderReader(){
   const n=model.nodes[selected],p=model.proofs[selected];
-  $("theorem-title").textContent=A.short(n);
+  $("theorem-title").textContent=model.argumentsById[selected]?.title||A.short(n);
   $("chapter").textContent=n.chapter;
   $("number").textContent="#"+String(n.id+1).padStart(3,"0");
   $("depth").textContent="依存の深さ "+n.depth;
