@@ -24,3 +24,7 @@ The stage notes describe historical numerical tests and assumptions. The new Git
 
 ## 2026-11-23 原本ZIPの全移植による訂正
 `../original_archives/` に第1〜30回のZIP原本30本をバイト単位で保存し、内部623ファイルのハッシュ台帳とCIを追加した。この `stages/` ディレクトリは取り出しやすい個別スクリプトの部分集合にすぎない。第18回の `verify_v18.py` は第18回原ZIP内に存在する。原本ZIPは公開されたが、全実験の計算をGitHub CIで独立に再実行した意味ではない。
+
+## Merge hygiene (2026-11-23)
+
+This stacked research branch is intended to be merged after PR #193. Its archived source files are immutable evidence; a source-graph auto-regeneration must always update the compressed reachability projection in the same commit. The CI workflows verify mathematics only within their stated scopes. Neither a passing archive checksum nor six Lean algebra theorems proves emergent gravity.
