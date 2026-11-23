@@ -275,7 +275,6 @@ def choose(history):
     best = None
     examined = 0
     for domain in DOMAINS:
-        identity_hash = audit(domain, tuple()).get("fingerprint") if False else None
         # The one-step identity is derived explicitly (not an operator token).
         identity_hash = sha256(b"".join(
             x.to_bytes(2, "little") for x in range(DOMAIN_SIZE[domain]))).hexdigest()
