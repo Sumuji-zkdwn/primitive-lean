@@ -1,0 +1,99 @@
+name: Radial KK vacuum EMD bridge
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKRadialVacuumBridge.lean'
+      - 'tools/check_kk_radial_vacuum_bridge.py'
+      - 'tools/check_kk_radial_charge_profile.py'
+      - 'docs/verification/2026-11-23-kk-radial-vacuum-bridge.md'
+      - '.github/workflows/kk-radial-vacuum-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  radial-kk-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean trust-zero algebraic certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKRadialVacuumBridge.olean Research/KKRadialVacuumBridge.lean 2>&1 | tee ../kk-radial-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-radial-lean.log; then exit 1; fi
+      - name: Audit theorem axioms individually
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKRadialVacuumBridge.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=8,names
+          Path('KKRadialVacuumBridgeAudit.lean').write_text(
+              'import Research.KKRadialVacuumBridge\n'
+              +''.join('#print axioms KKRadialVacuumBridge.'+n+'\n' for n in names))
+          Path('../kk-radial-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKRadialVacuumBridgeAudit.lean 2>&1 | tee ../kk-radial-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-radial-axioms.log').read_text()
+          total=int(Path('../kk-radial-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',log),log
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          no=log.count('does not depend on any axioms')
+          assert len(dep)+no==total,(len(dep),no,total)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {z.strip() for z in d.split(',') if z.strip()}<=allowed,d
+          print('PASS: audited Lean theorems',total)
+          PY
+      - name: Independently compute all 5D and 4D radial identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_radial_vacuum_bridge.py 2>&1 | tee kk-radial-sympy.log
+          python -B tools/check_kk_radial_charge_profile.py 2>&1 | tee kk-radial-charge.log
+      - name: Preserve checkout and source checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > kk-radial-checkout-head.txt
+          sha256sum lean/Research/KKRadialVacuumBridge.lean tools/check_kk_radial_vacuum_bridge.py tools/check_kk_radial_charge_profile.py > kk-radial-source-sha256.txt
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-radial-bridge
+          path: |
+            kk-radial-lean.log
+            kk-radial-axioms.log
+            kk-radial-count.txt
+            kk-radial-sympy.log
+            kk-radial-charge.log
+            kk-radial-checkout-head.txt
+            kk-radial-source-sha256.txt
+          if-no-files-found: warn
