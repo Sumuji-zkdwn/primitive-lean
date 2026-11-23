@@ -95,7 +95,7 @@ Accepted results go to the isolated, append-only branch
 \`autonomy/generic-forge-state\`, path
 \`docs/autonomy/generic-forge-state.json\`, with versioned evaluator ID,
 typed composition parents, exact source commit, observable results,
-daily timestamp, and a SHA-256-linked history.
+UTC day or scheduled 30-minute slot, and a SHA-256-linked history.
 
 Historical records are checked again against the current trusted
 interpreter and their recorded composition ancestry before being used
@@ -107,21 +107,25 @@ The workflow \`.github/workflows/generic-forge.yml\` has:
 - A read-only PR job that runs unit tests, executes finite evaluations,
   and rehearses a complete receipt transition in ephemeral output.
 - A default-branch-only scheduled/main-push job that reads the isolated
-  state **as data** and proposes at most one new operator per UTC day.
+  state **as data** and proposes at most one new operator per UTC 30-minute slot.
 - A separately privileged write job that regenerates the plan using
   the reviewed main controller, checks exact byte equality, independently
   repeats the exhaustive evaluation, validates the full receipt chain,
   and pushes **only one JSON state file** to the isolated branch.
 
-The scheduled cadence is **19:19 JST (10:19 UTC)** daily. GitHub
-schedules can run late or occasionally be skipped.
+The ongoing UTC schedule is **:07 and :37 every hour** (also :07/:37 JST).
+Each job rounds the actual start time down to the current 30-minute UTC
+slot, so a late or duplicate delivery cannot save the same slot twice.
+GitHub schedules can run late or occasionally be skipped.
 
 No external paid model call, external software execution, unrestricted
 self-modification, auto PR merge or write to main is possible in the
 research loop. At most 1,000 pairs of generation tokens are considered
 per run, programs have at most eight primitive steps, and the generation
-has a 96-receipt maintenance ceiling. These are bounded resource
-conditions, not a pre-listed fixed set of candidate outputs.
+has a 96-receipt maintenance ceiling. At the limit, runs continue to
+report no new candidate without mutating the state branch; raising or
+archiving the limit requires a separate reviewed change. These are bounded
+resource conditions, not a pre-listed fixed set of candidate outputs.
 
 An operator whose behavior is unique is **not necessarily useful**.
 Future evaluators can introduce real-world utility tests: e.g. image
@@ -147,10 +151,9 @@ python -B -m tools.autonomy.generic_forge receipt \
   --output verification/generic-forge/ephemeral-next-state.json
 ~~~
 
-This is currently a **draft PR** pending verified exact-head CI. The
-state branch was initialized separately. No existing primitive-autonomy,
-Proof Forge, Strategy Evolution, or Primitive Open Search branch or
-workflow is altered.
+The permanent half-hour cadence is implemented only for the Generic Forge
+workflow; it does not expand controller permissions, install a paid model,
+auto-merge PRs, or rewrite other autonomy workflows.
 
 ## Next steps outside this PR
 
