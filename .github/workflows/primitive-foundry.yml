@@ -8,7 +8,7 @@ on:
       - '.github/workflows/primitive-foundry.yml'
       - 'docs/dependency/data/source_edges.json'
   push:
-    branches: [main, 'chatgpt/primitive-foundry-*']
+    branches: [main, 'chatgpt/primitive-foundry-*', 'chatgpt/foundry-465-*']
     paths:
       - 'games/primitive-foundry/**'
       - '.github/workflows/primitive-foundry.yml'
