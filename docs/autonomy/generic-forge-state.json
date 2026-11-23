@@ -1,5 +1,36 @@
 {
-  "last_utc_day": null,
-  "receipts": [],
+  "last_utc_day": "2026-11-23",
+  "receipts": [
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "8e4f69d4ba58ead0efbff6c1dbadecaaa988b368fcc92fb73f3a04bfb29d2445",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          511,
+          507,
+          505,
+          447,
+          0
+        ]
+      },
+      "chain_sha256": "a62a550316975541fe63e20de2712b5e3372a3aaf47c8fe52fbc38ec1f783380",
+      "day": "2026-11-23",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "9b667826c749f8980a8356066d3964b909b36a29",
+      "id": "gf_be19c801b8fcaef9",
+      "left": "p:invert",
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "program": [
+        "invert",
+        "mirror_lr"
+      ],
+      "right": "p:mirror_lr",
+      "score": 29,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    }
+  ],
   "schema_version": 1
 }
