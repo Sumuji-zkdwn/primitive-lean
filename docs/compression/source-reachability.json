@@ -1693,8 +1693,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "83be784cf5ba73fbe8c2a87c00a55ea9ba50ed45fa0497946995cc906de342d0",
-    "main_commit": "1c9c7d07823bd354974259f6da67532fcbab0ce8",
+    "graph_sha256": "12a4f85c6eedabf26dc1371e99441938b23be8058e689a98e0806a9ca24e69a0",
+    "main_commit": "6623fb0628fa8d9deb0cf4e2256cdc57dbbf9e38",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
