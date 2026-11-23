@@ -25,29 +25,26 @@ def beta (alpha s : ℝ) : ℝ := -(alpha*(2+alpha*s))/q alpha s
 The other three eigenvalues are q. -/
 theorem fibre_eigenvalue (alpha s : ℝ) (hq : q alpha s ≠ 0) :
     q alpha s + beta alpha s * s = (q alpha s)⁻¹ := by
-  unfold q beta at *
-  field_simp
-  ring
+  dsimp [beta, q] at *
+  field_simp [hq] <;> ring
 
 /-- Determinant from the rank-one matrix determinant lemma:
 q^3 * (q+beta*s)=q². -/
 theorem determinant_certificate (alpha s : ℝ) (hq : q alpha s ≠ 0) :
     (q alpha s)^3*(q alpha s + beta alpha s*s) = (q alpha s)^2 := by
   rw [fibre_eigenvalue alpha s hq]
-  field_simp
-  ring
+  field_simp <;> ring
 
 /-- In the centre X=0, the metric is exactly Euclidean. -/
 theorem centre_coefficients (alpha : ℝ) :
     q alpha 0 = 1 ∧ beta alpha 0 = -2*alpha := by
-  simp [q,beta]
+  simp [q,beta] <;> ring
 
 /-- The centre extending coefficient beta has no pole at rho=0. -/
 theorem beta_centre_regular (alpha s : ℝ) (hq : q alpha s ≠ 0) :
     beta alpha s = -2*alpha + alpha^2*s*(1/q alpha s) := by
-  unfold beta q at *
-  field_simp
-  ring
+  dsimp [beta, q] at *
+  field_simp [hq] <;> ring
 
 /-- For alpha>=0 and s>=0, both rank-one eigenvalues are positive. -/
 theorem eigenvalues_positive (alpha s : ℝ)
@@ -63,7 +60,7 @@ theorem eigenvalues_positive (alpha s : ℝ)
 constraint omega(v)^2 <= s*|v|^2 (Cauchy-Schwarz). -/
 theorem quadratic_lower_bound
     (alpha s v t : ℝ)
-    (ha : 0 ≤ alpha) (hs : 0 ≤ s) (hv : 0 ≤ v)
+    (ha : 0 ≤ alpha) (hs : 0 ≤ s)
     (hcs : t^2 ≤ s*v) :
     v / (q alpha s) ≤ q alpha s*v + beta alpha s*t^2 := by
   have hq : 0 < q alpha s := (eigenvalues_positive alpha s ha hs).1
