@@ -23,6 +23,8 @@ test("offline page is actually self-contained and includes all 465 theorem decla
   assert.equal(JSON.parse(readEmbedded("rogue-catalog")).cards.length,465);
   assert.ok(play.includes(engine),"embedded engine is older than engine.js");
   assert.ok(play.includes("id=\"rogue-rot-vendor\""),"vendored roguelike toolkit must be bundled");
+  const legal=fs.readFileSync(path.join(directory,"vendor/rot.LICENSE.txt"),"utf8").trimEnd();
+  assert.ok(play.includes(legal),"standalone must carry full BSD redistribution notice");
   assert.match(play,/Kenney Tiny Dungeon/);
   assert.ok(play.includes(ui),"embedded UI is older than ui.js");
   assert.equal((play.match(/<script src=/g)||[]).length,0);
