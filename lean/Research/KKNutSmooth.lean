@@ -15,6 +15,8 @@ of the original circle bundle requires a separate atlas theorem.
 
 namespace KKNutSmooth
 
+noncomputable section
+
 abbrev X4 := Fin 4 → ℝ
 
 /-- Squared radial coordinate. -/
