@@ -15,7 +15,6 @@ of the original circle bundle requires a separate atlas theorem.
 
 namespace KKNutSmooth
 
-noncomputable section
 
 abbrev X4 := Fin 4 → ℝ
 
@@ -28,10 +27,10 @@ def omegaComponent (X : X4) (i : Fin 4) : ℝ :=
   if i = 0 then -X 1 else if i = 1 then X 0
   else if i = 2 then -X 3 else X 2
 
-def fibreCoefficient (alpha : ℝ) (X : X4) : ℝ :=
+noncomputable def fibreCoefficient (alpha : ℝ) (X : X4) : ℝ :=
   -(alpha * (2 + alpha * radialSq X)) / warp alpha X
 
-def metricEntry (alpha : ℝ) (X : X4) (i j : Fin 4) : ℝ :=
+noncomputable def metricEntry (alpha : ℝ) (X : X4) (i j : Fin 4) : ℝ :=
   (if i = j then warp alpha X else 0) +
   fibreCoefficient alpha X * omegaComponent X i * omegaComponent X j
 
