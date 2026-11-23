@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#131d26">
 <meta name="description" content="採掘、搬送、精錬、組立、研究。Leanの証明参照グラフを技術ツリーに使う工場自動化ゲーム。">
 <title>PRIMITIVE FOUNDRY — 工場を育てる</title>
@@ -170,6 +170,165 @@ footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
 .research-direct #proof-back{display:inline-block}
 #proof-back{display:none;border:1px solid #7b998d;background:#365d57;color:#f2fff4;border-radius:8px;padding:9px 12px;margin-bottom:10px}
 
+
+/* ANDROID UI: one-thumb bottom navigation, legible panels, and a usable map in
+ * both 412 x 915 portrait and 914 x 411 landscape. Desktop stays unchanged. */
+.mobile-nav{display:none}
+@media(max-width:950px){
+ html{scroll-padding-bottom:calc(76px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
+ body{overscroll-behavior-y:contain}
+ .app{padding:8px max(8px,env(safe-area-inset-right)) calc(72px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+ .top{position:relative;gap:6px;padding:4px 0 8px}
+ .logo{gap:7px}
+ .mark{width:32px;height:32px;font-size:18px;flex:none}
+ .logo h1{font-size:clamp(16px,4.2vw,21px);letter-spacing:.035em}
+ .logo p{font-size:9px;letter-spacing:.055em}
+ .topright{gap:5px;flex-wrap:nowrap}
+ .topright button{min-height:42px;padding:7px 9px;font-size:11px;white-space:nowrap}
+ .kpis{margin:7px 0 9px;gap:5px}
+ .kpi{padding:7px 5px;border-radius:8px}
+ .kpi small{font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .kpi strong{font-size:clamp(12px,3.3vw,16px)}
+ .main{display:block}
+ .main>div:first-child{display:block}
+ .canvashead{padding:8px;gap:6px}
+ .canvashead .name{font-size:12px}
+ .canvashead .detail{font-size:10px}
+ .zoom button{min-width:42px;height:42px;font-size:19px}
+ .zoom #research-shortcut{min-width:48px!important;font-size:12px!important}
+ #viewport{height:clamp(240px,calc(100dvh - 224px),900px);min-height:0}
+ .canvasoverlay{left:8px;bottom:8px;padding:6px 8px;font-size:10px;max-width:65%;line-height:1.5}
+ .canvasstamp{bottom:8px;right:8px;padding:5px 6px}
+ .right{display:none}
+ .mobile-screen-factory .deck{display:none}
+ .mobile-screen-build #viewport{height:clamp(185px,calc(100dvh - 385px),650px)}
+ .mobile-screen-build .deck{
+  display:block;position:fixed;z-index:65;
+  left:max(8px,env(safe-area-inset-left));
+  right:max(8px,env(safe-area-inset-right));
+  bottom:calc(61px + env(safe-area-inset-bottom));margin:0;
+  padding:9px 10px 8px;border-color:#7c929b;
+  box-shadow:0 -6px 25px #060e17e0;background:#192b36f5;
+ }
+ .decktop{margin-bottom:5px}
+ .decktop strong{font-size:12px}
+ .decktop .direction button{min-height:44px;min-width:66px;font-size:14px}
+ .tabs{margin-bottom:4px}
+ .tabs button{flex:1;min-height:44px;font-size:13px;padding:9px 4px}
+ .tools{gap:7px;padding:3px 2px 2px;scrollbar-width:thin;scroll-snap-type:x proximity}
+ .tool{flex:0 0 78px;min-height:71px;scroll-snap-align:start}
+ .tool .caption{font-size:11px}
+ .mobile-screen-research .main>div:first-child,
+ .mobile-screen-documents .main>div:first-child,
+ .mobile-screen-inspect .main>div:first-child{display:none}
+ .mobile-screen-research .kpis,.mobile-screen-documents .kpis,.mobile-screen-inspect .kpis{display:none}
+ .mobile-screen-research .right,
+ .mobile-screen-documents .right,
+ .mobile-screen-inspect .right{display:block}
+ .mobile-screen-research .right>.panel:first-child,
+ .mobile-screen-documents .right>.panel:first-child,
+ .mobile-screen-inspect .right>.panel:first-child{display:none}
+ .mobile-screen-research .right>.panel:last-child,
+ .mobile-screen-documents .right>.panel:last-child,
+ .mobile-screen-inspect .right>.panel:last-child{padding:13px;border-radius:11px;margin-top:9px;min-height:calc(100dvh - 164px)}
+ .mobile-screen-research .sideTabs,.mobile-screen-documents .sideTabs,
+ .mobile-screen-inspect .sideTabs{display:none}
+ .mobile-screen-research #view-research,
+ .mobile-screen-documents #view-documents,
+ .mobile-screen-inspect #view-inspect{display:block}
+ .mobile-screen-research .view:not(#view-research),
+ .mobile-screen-documents .view:not(#view-documents),
+ .mobile-screen-inspect .view:not(#view-inspect){display:none}
+ .mobile-screen-research .proof-graph,.research-direct .proof-graph{height:clamp(200px,32dvh,330px)}
+ .proof-input{font-size:16px;min-height:48px}
+ .proof-search-label{font-size:12px}
+ .proof-filters{gap:8px}
+ .proof-filters select{font-size:13px;min-height:46px;max-width:100%;padding:6px}
+ .proofgraph-head{font-size:12px;min-height:38px;gap:7px}
+ .proofgraph-head button{min-height:44px;font-size:12px;padding:8px 12px}
+ .proof-result{min-height:55px;grid-template-columns:42px 1fr auto;font-size:13px;padding:9px}
+ .proof-result small{font-size:11px}
+ .proof-result em{font-size:12px}
+ .proof-details{font-size:13px;line-height:1.65;padding:12px}
+ .proof-details strong{font-size:15px}
+ .proof-details small{font-size:11px}
+ .proof-details button{min-height:44px;font-size:12px;margin:5px 6px 2px 0;padding:9px 12px;max-width:100%;overflow-wrap:anywhere}
+ .proof-results{max-height:35dvh;overscroll-behavior:contain}
+ .upgrade-panel>summary{padding:11px 7px;font-size:13px;min-height:44px}
+ .technode button,.actionrow button{min-height:44px;font-size:12px}
+ .sideTabs button{min-height:44px;font-size:13px}
+ .inspector{font-size:13px}
+ #documents{font-size:14px}
+ .mobile-nav{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  position:fixed;z-index:100;left:0;right:0;bottom:0;
+  height:calc(61px + env(safe-area-inset-bottom));
+  padding:3px max(4px,env(safe-area-inset-right)) calc(3px + env(safe-area-inset-bottom)) max(4px,env(safe-area-inset-left));
+  border-top:1px solid #647d84;background:#142631f7;
+  box-shadow:0 -5px 25px #02081099;
+ }
+ .mobile-nav button{background:transparent;border:0;border-radius:9px;min-width:0;min-height:50px;color:#aebfc7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:11px;font-weight:700}
+ .mobile-nav .nav-icon{font-size:21px;line-height:1.2}
+ .mobile-nav button[aria-current="page"]{background:#31514f;color:#f0dfad}
+ .mobile-nav button:active{background:#315764}
+ footer{font-size:10px;margin:12px 4px 0}
+ .research-direct .main{display:block}
+ .research-direct .right{display:block}
+ .research-direct .right>.panel:first-child{display:none}
+ .research-direct .main>div:first-child{display:none}
+ .research-direct .kpis{display:none}
+ .research-direct .view:not(#view-research){display:none}
+ .research-direct #proof-back{display:none}
+}
+@media(max-width:950px) and (orientation:landscape) and (max-height:560px){
+ .app{padding-top:4px}
+ .top{padding:0 0 5px}
+ .logo p{display:none}
+ .mark{width:29px;height:29px}
+ .logo h1{font-size:18px}
+ .topright button{min-height:38px;padding:6px 9px}
+ .kpis{margin:4px 0 5px}
+ .kpi{padding:4px 6px}
+ .kpi small{font-size:9px;margin-bottom:0}
+ .kpi strong{font-size:13px}
+ .canvashead{padding:4px 6px}
+ .canvashead .detail{display:none}
+ .zoom button{height:40px}
+ #viewport{height:calc(100dvh - 154px);min-height:170px}
+ .mobile-screen-build .kpis{display:none}
+ .mobile-screen-build .main>div:first-child{margin-right:270px}
+ .mobile-screen-build #viewport{height:calc(100dvh - 113px);min-height:145px}
+ .mobile-screen-build .deck{
+   left:auto;right:max(5px,env(safe-area-inset-right));
+   top:46px;bottom:calc(61px + env(safe-area-inset-bottom));
+   width:260px;max-width:38vw;margin:0;padding:8px;
+   display:flex;flex-direction:column;gap:4px;overflow:hidden;
+ }
+ .mobile-screen-build .decktop{margin:0}
+ .mobile-screen-build .decktop strong{font-size:11px}
+ .mobile-screen-build .tabs button{min-height:39px}
+ .mobile-screen-build .tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow-y:auto;overflow-x:hidden;align-content:start;flex:1;scroll-snap-type:none;min-height:0}
+ .mobile-screen-build .tool{min-height:58px;width:100%;flex:none}
+ .mobile-screen-build .tool .pict{font-size:17px}
+ .mobile-screen-build .tool .caption{font-size:10px}
+ .mobile-screen-research .right>.panel:last-child,
+ .mobile-screen-documents .right>.panel:last-child,
+ .mobile-screen-inspect .right>.panel:last-child{margin-top:4px;padding:10px;min-height:calc(100dvh - 112px)}
+ .mobile-screen-research .proof-graph,.research-direct .proof-graph{height:168px}
+ .proof-results{max-height:150px}
+ .canvasoverlay{font-size:9px}
+ .canvasstamp{display:none}
+}
+@media(max-width:370px){
+ .logo h1{font-size:16px}
+ .mark{display:none}
+ .topright button{font-size:10px;padding:5px 6px}
+ .mobile-nav button{font-size:10px}
+ .mobile-nav .nav-icon{font-size:19px}
+ .zoom button{min-width:39px}
+ .canvashead .detail{display:none}
+}
+
 @media(prefers-reduced-motion:reduce){.progress i{transition:none}}
 </style>
 </head>
@@ -279,6 +438,14 @@ footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
    </section>
   </aside>
  </main>
+
+ <nav class="mobile-nav" aria-label="Android用の画面切り替え">
+  <button type="button" data-mobile-screen="factory" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span><span>工場</span></button>
+  <button type="button" data-mobile-screen="build"><span class="nav-icon" aria-hidden="true">▤</span><span>建設</span></button>
+  <button type="button" data-mobile-screen="inspect"><span class="nav-icon" aria-hidden="true">⌕</span><span>詳細</span></button>
+  <button type="button" data-mobile-screen="research"><span class="nav-icon" aria-hidden="true">⌘</span><span>研究</span></button>
+  <button type="button" data-mobile-screen="documents"><span class="nav-icon" aria-hidden="true">▧</span><span>文書</span></button>
+ </nav>
  <footer>
   独自の工場シミュレーションです。Factorioの素材・ゲームコードは使用していません。
   研究画面には初期465定理すべてのカーネル由来の直接証明参照629本を使用しています（定義・補助定理への参照は別途保持）。ゲーム内の効果は設計上のものです。
