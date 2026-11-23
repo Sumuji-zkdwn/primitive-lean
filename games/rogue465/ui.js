@@ -16,8 +16,10 @@
       const str=globalThis.localStorage?.getItem(storeKey);
       if(!str)return null;
       const obj=JSON.parse(str);
-      if(obj && obj.rooms && obj.hero && obj.seed!==undefined && obj.equipment && obj.status)
+      if(obj && obj.rooms && obj.hero && obj.seed!==undefined && obj.equipment && obj.status){
+        obj.hero.input??=1;obj.hero.curve??=0;obj.hero.heading??=null;
         return obj;
+      }
     }catch(_){}
     return null;
   }
@@ -161,14 +163,15 @@
     $("floor").textContent=state.depth+" / "+E.DEPTH;
     $("location").textContent="部屋"+state.vertex+" · 層"+state.layer;
     const count=E.living(room).length;
-    $("status").textContent=state.status==="play"?(count?"敵 "+count+"体・"+state.turn+"手":"制圧済・"+state.turn+"手"):
+    $("status").textContent=state.status==="play"?(count?"敵 "+count+"体":"制圧済")+"・"+state.turn+"手・曲率"+state.hero.curve:
       (state.status==="won"?"脱出成功":"死亡");
     $("topology").textContent="中央閉路："+(p.parity?"奇（12状態に到達可能）":"偶（6状態に限定）")+
       " ／ 現在は層"+state.layer+"。反転した辺の通過時に層が変わります。";
     renderMap();renderGates();renderGear();
     $("log").innerHTML=state.log.slice(0,8).map(x=>"<li>"+escapeHTML(x)+"</li>").join("");
     document.querySelectorAll("[data-move]").forEach(el=>{el.disabled=state.status!=="play"||!!state.offer;});
-    for(const id of ["pulse","probe","camp"]){$(id).disabled=state.status!=="play"||!!state.offer;}
+    for(const id of ["pulse","probe","camp","polarity"]){$(id).disabled=state.status!=="play"||!!state.offer;}
+    $("polarity").innerHTML="入力極性 "+(state.hero.input===1?"+1":"−1")+"<br><small>攻撃の傾き</small>";
     $("twist").disabled=state.status!=="play"||!!state.offer||state.vertex!==4||state.layer!==0||
       count!==0||state.hero.insight<2;
     $("descend").disabled=state.status!=="play"||!!state.offer||!p.goal||count!==0;
@@ -182,6 +185,7 @@
     }));
     $("pulse").addEventListener("click",()=>action({type:"pulse"}));
     $("probe").addEventListener("click",()=>action({type:"probe"}));
+    $("polarity").addEventListener("click",()=>action({type:"polarity"}));
     $("camp").addEventListener("click",()=>action({type:"camp"}));
     $("twist").addEventListener("click",()=>action({type:"twist"}));
     $("descend").addEventListener("click",()=>action({type:"descend"}));
@@ -203,6 +207,7 @@
       if(direction){event.preventDefault();action({type:"move",dx:direction[0],dy:direction[1]});}
       if(event.key===" "){event.preventDefault();action({type:"pulse"});}
       if(event.key==="q")action({type:"probe"});
+      if(event.key==="e")action({type:"polarity"});
       if(event.key==="t")action({type:"twist"});
     });
     const board=$("board");
