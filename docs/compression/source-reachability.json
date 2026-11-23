@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1388,
-    "eligible_direct_edges": 431,
+    "all_source_edges": 1390,
+    "eligible_direct_edges": 432,
     "nodes": 438,
-    "retained_pairs": 309,
+    "retained_pairs": 310,
     "transitive_pairs_removed": 115,
-    "unique_eligible_pairs": 424,
-    "weak_edges_excluded": 957
+    "unique_eligible_pairs": 425,
+    "weak_edges_excluded": 958
   },
   "edges": [
     [
@@ -280,6 +280,10 @@
     [
       "main:lean/Research/FiniteMarkovTransport.lean",
       "main:lean/Research/OkanoharaTransport.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianDerivative.lean",
+      "main:lean/Research/KKCartesianJet.lean"
     ],
     [
       "main:lean/Research/KKCartesianMetricConnection.lean",
@@ -1689,8 +1693,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "a37450207afa08b5dd4e194d30358fd11f9a04d8986b0a757c514455024f9900",
-    "main_commit": "61be372bcbf5502e58db8c7396cce763f7b8f7b5",
+    "graph_sha256": "45a7cadc3b6f2f034754754ce13eea21db69445c8220d5c9c2b9138dfb88aa9c",
+    "main_commit": "4cf3e772f88cfa22058ca275c2d9d54859c77975",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
