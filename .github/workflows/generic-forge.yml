@@ -15,8 +15,8 @@ on:
       - '.github/workflows/generic-forge.yml'
       - 'tools/autonomy/generic_forge.py'
   schedule:
-    # 10:19 UTC = 19:19 JST, after the existing finite research workflows.
-    - cron: '19 10 * * *'
+    # Temporary 10-minute experiment, Nov 23 UTC 08:00–12:50 only.
+    - cron: '*/10 8-12 23 11 *'
   workflow_dispatch:
 
 permissions:
@@ -132,9 +132,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          slot="$(python - <<'PY'
+          from datetime import datetime, timezone
+          now = datetime.now(timezone.utc)
+          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 10 * 10:02d}Z")
+          PY
+          )"
           python -B -m tools.autonomy.generic_forge prepare \
             --state ../state/docs/autonomy/generic-forge-state.json \
-            --day "$(date -u +%F)" \
+            --day "$slot" \
             --head "$GITHUB_SHA" \
             --output ../cycle
           python - <<'PY' >> "$GITHUB_OUTPUT"
@@ -185,9 +191,15 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          slot="$(python - <<'PY'
+          import json
+          with open("../cycle/plan.json", encoding="utf-8") as f:
+              print(json.load(f)["day"])
+          PY
+          )"
           python -B -m tools.autonomy.generic_forge prepare \
             --state ../state/docs/autonomy/generic-forge-state.json \
-            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --day "$slot" --head "$GITHUB_SHA" \
             --output ../replay
           cmp ../cycle/plan.json ../replay/plan.json
       - name: Independently execute and exhaustively verify candidate before writing
