@@ -6,7 +6,24 @@
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
  const techSource=$("factory-tech")?.textContent;
  const tech=techSource?JSON.parse(techSource):await (await fetch("./tech.json")).json();
- const knownTech=new Map(tech.nodes.map(t=>[t.id,t]));
+ const upgradeSource=$("factory-upgrades-json")?.textContent;
+ const upgrades=upgradeSource?JSON.parse(upgradeSource):await (await fetch("./upgrades.json")).json();
+ if(tech.nodes.length!==465||tech.summary.proofEdges!==629)throw Error("465定理の依存台帳が不正です");
+ const deepLinkResearch=typeof globalThis.location?.search==="string"&&
+    typeof URLSearchParams==="function"&&
+    new URLSearchParams(globalThis.location.search).get("view")==="research";
+ const knownTech=new Map(upgrades.nodes.map(t=>[t.id,t]));
+ const proofById=new Map(tech.nodes.map(t=>[t.id,t]));
+ const proofByName=new Map(tech.nodes.map(t=>[t.name,t]));
+ const proofChildren=new Map(tech.nodes.map(t=>[t.id,[]]));
+ for(const node of tech.nodes)for(const parent of node.parents)proofChildren.get(parent).push(node.id);
+ const byDepth=new Map();
+ for(const node of tech.nodes)(byDepth.get(node.depth)||byDepth.set(node.depth,[]).get(node.depth)).push(node);
+ const proofCoordinates=new Map();
+ for(const [depth,arr] of byDepth){
+  arr.sort((a,b)=>a.school.localeCompare(b.school)||a.chapter.localeCompare(b.chapter)||a.id-b.id);
+  arr.forEach((n,i)=>proofCoordinates.set(n.id,{x:45+depth*210,y:38+i*26}));
+ }
  const tools={
   logistics:[
    ["pan","調べる","⌖"],["belt","ベルト","»"],["miner","採掘機","◉"],
@@ -20,10 +37,14 @@
   utility:[["generator","発電機","◈"],["pan","調べる","⌖"],["rotate","回転","↻"],["erase","撤去","×"]]
  };
  const canvas=$("factory-canvas"),viewport=$("viewport"),ctx=canvas.getContext("2d");
+ const proofCanvas=$("proof-graph"),proofCtx=proofCanvas?.getContext?.("2d")||null;
  if(!ctx){$("status").textContent="Canvas描画を利用できません。";return;}
  const STORAGE="primitive-foundry-save-v2";
  let world=null,category="logistics",tool="pan",dir=0,zoom=1;
  let pane="inspect",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ let selectedProof=0,proofStatus="ready",proofSchool="all",proofSearch="";
+ let graphMode="focus",graphShift={x:0,y:0},graphPointer=null;
+ let graphHitboxes=[];
  let camX=typeof window!=="undefined"&&window.innerWidth<750?9.3:11.8,camY=8.4;
  let layoutW=700,layoutH=520,dpr=1;
  function load(){
@@ -38,6 +59,8 @@
   try{localStorage.setItem(STORAGE,JSON.stringify(world));}catch(_){}
  }
  world=load()||F.challengeBlueprint(F.newWorld(20261124));
+ if(!Array.isArray(world.proofs))world.proofs=[];
+ if(!Array.isArray(world.proofNames))world.proofNames=[];
  if(world.status==="paused")world.status="playing";
  const tipBase="タップで配置・調査。ベルトはドラッグで敷設。地図を動かすには「調べる」を選びドラッグ。";
  function announce(msg){
@@ -272,6 +295,7 @@
   for(const x of ["inspect","research","documents"])$("view-"+x).classList.toggle("active",x===id);
   document.querySelectorAll("[data-panel]").forEach(el=>
     el.setAttribute("aria-selected",String(el.dataset.panel===id)));
+  if(id==="research"){renderProof(true);renderTech();}
  }
  function renderInspector(){
   const div=$("inspector");
@@ -295,27 +319,216 @@
   $("rotate-selected").disabled=!m.kind;
   $("delete-selected").disabled=!m.kind;
  }
+ function hasProof(node){return world.proofs.includes(node.id);}
+ function proofReady(node){return !hasProof(node)&&node.parents.every(id=>world.proofs.includes(id));}
+ function proofStatusOf(node){return hasProof(node)?"studied":proofReady(node)?"ready":"locked";}
+ function proofStateLabel(node){
+  return hasProof(node)?"研究済":proofReady(node)?"研究可能":"前提待ち";
+ }
+ function selectProof(id){
+  if(!proofById.has(id))return;
+  selectedProof=id;graphMode="focus";graphShift={x:0,y:0};
+  renderProof(true);drawProofGraph();
+ }
+ function localProofPositions(){
+  const center=proofById.get(selectedProof);
+  const cols=new Map([[-2,[]],[-1,[]],[0,[center.id]],[1,[]],[2,[]]]);
+  const parents=center.parents,children=proofChildren.get(center.id)||[];
+  cols.set(-1,parents.slice());
+  cols.set(1,children.slice());
+  const grandParents=new Set(),grandChildren=new Set();
+  for(const id of parents)for(const k of proofById.get(id).parents)if(!parents.includes(k))grandParents.add(k);
+  for(const id of children)for(const k of proofChildren.get(id)||[])if(!children.includes(k))grandChildren.add(k);
+  cols.set(-2,[...grandParents].sort((a,b)=>a-b));
+  cols.set(2,[...grandChildren].sort((a,b)=>a-b));
+  const coords=new Map();
+  for(const [column,ids] of cols){
+   ids.forEach((id,i)=>coords.set(id,{x:column*156,y:(i-(ids.length-1)/2)*39}));
+  }
+  return coords;
+ }
+ function drawProofGraph(){
+  if(!proofCtx||pane!=="research")return;
+  const rect=proofCanvas.getBoundingClientRect?.()||{width:340};
+  const w=Math.max(200,Math.min(900,rect.width||340)),h=220;
+  const pixelRatio=Math.min(2,globalThis.devicePixelRatio||1);
+  proofCanvas.width=Math.round(w*pixelRatio);
+  proofCanvas.height=Math.round(h*pixelRatio);
+  const c=proofCtx;c.setTransform(pixelRatio,0,0,pixelRatio,0,0);
+  c.fillStyle="#101e27";c.fillRect(0,0,w,h);
+  const overview=graphMode==="overview";
+  const points=overview?proofCoordinates:localProofPositions();
+  const fullW=(tech.summary.maxDepth+1)*210+60;
+  const fullH=Math.max(...[...byDepth.values()].map(arr=>arr.length))*26+100;
+  const scale=overview?Math.min((w-20)/fullW,(h-20)/fullH):
+    Math.min(.85,Math.max(.6,(w-24)/470));
+  const center=proofById.get(selectedProof);
+  const xyCenter=overview?{x:fullW/2,y:fullH/2}:{x:0,y:0};
+  const at=(pos)=>({
+   x:w/2+(pos.x-xyCenter.x)*scale+graphShift.x,
+   y:h/2+(pos.y-xyCenter.y)*scale+graphShift.y
+  });
+  const highlight=new Set([selectedProof,...center.parents,...(proofChildren.get(selectedProof)||[])]);
+  c.lineWidth=overview?.7:1.5;
+  for(const node of tech.nodes){
+   if(!points.has(node.id))continue;
+   const to=at(points.get(node.id));
+   for(const parent of node.parents){
+    if(!points.has(parent))continue;
+    const from=at(points.get(parent));
+    const isLocal=highlight.has(node.id)&&highlight.has(parent);
+    c.strokeStyle=isLocal?"#b2d1be":overview?"#4963727a":"#4e7485";
+    c.lineWidth=isLocal&& !overview?2:overview?.6:1.1;
+    c.beginPath();c.moveTo(from.x,from.y);c.lineTo(to.x,to.y);c.stroke();
+   }
+  }
+  graphHitboxes=[];
+  for(const node of tech.nodes){
+   if(!points.has(node.id))continue;
+   const pos=at(points.get(node.id)),research=proofStatusOf(node);
+   const selectedNode=node.id===selectedProof;
+   const r=overview?Math.max(1.35,scale*8):selectedNode?7:5;
+   c.fillStyle=selectedNode?"#ffd99c":research==="studied"?"#7ed4c7":
+     research==="ready"?"#bfd7a3":"#577484";
+   c.beginPath();c.arc(pos.x,pos.y,r,0,Math.PI*2);c.fill();
+   if(!overview&&(selectedNode||highlight.has(node.id))){
+    c.font=selectedNode?"bold 12px system-ui":"10px system-ui";
+    c.fillStyle=selectedNode?"#fae6ba":"#bdcfd2";
+    c.fillText("#"+String(node.id+1).padStart(3,"0"),pos.x+8,pos.y-8);
+   }
+   graphHitboxes.push({id:node.id,x:pos.x,y:pos.y});
+  }
+  c.fillStyle="#a9c7cc";c.font="11px system-ui";
+  c.fillText(overview?"全465件 / 629辺 — 検索から拡大":"証明の前提 ← 対象 → 後続の定理",8,15);
+ }
+ function renderProofDetails(){
+  const n=proofById.get(selectedProof),d=$("proof-details");
+  const parents=n.parents.map(id=>proofById.get(id)),children=(proofChildren.get(n.id)||[]).map(id=>proofById.get(id));
+  const cost=F.proofCost(n),can=F.proofAvailable(world,n);
+  const links=(arr,max)=>arr.slice(0,max).map(p=>'<button type="button" class="proof-link" data-proof-nav="'+p.id+'">'+
+    esc(p.label)+'</button>').join("")+(arr.length>max?'<small>ほか '+(arr.length-max)+'件。検索で確認できます。</small>':"");
+  d.innerHTML='<strong>'+esc(n.label)+'</strong><small>初期定理 #'+String(n.id+1).padStart(3,"0")+
+    ' / '+esc(n.chapter)+' / 深さ '+n.depth+' / '+esc(proofStateLabel(n))+'</small>'+
+    '<div style="margin-top:6px">直接の証明前提：'+parents.length+'件 ／ この定理を直接使う後続：'+children.length+'件</div>'+
+    (parents.length?'<div class="proof-predecessors">'+links(parents,12)+'</div>':'<small>初期465定理に属する直接前提はありません。定義・外部補題などの依存は別に保持。</small>')+
+    '<div style="margin-top:6px">後続の定理</div>'+
+    (children.length?'<div class="proof-successors">'+links(children,8)+'</div>':'<small>初期集合内で直接の後続参照なし</small>')+
+    '<button type="button" id="study-proof" '+(can?"":"disabled")+'>'+
+      (hasProof(n)?"研究済":proofReady(n)?"研究 "+cost+"ポイント":"前提未解明")+'</button>'+
+    '<details><summary>証明ソースと他の依存を確認</summary><small>'+
+    esc(n.name)+' — '+esc(n.file)+':'+n.line+
+    '</small><small>その他の初期宣言・補助定理への直接参照 '+n.otherProjectRefs.length+
+    '件。この参照は定理ノード間の629本には含めていません。</small></details>';
+  d.querySelectorAll("[data-proof-nav]").forEach(b=>b.addEventListener("click",()=>selectProof(Number(b.dataset.proofNav))));
+  const btn=$("study-proof");
+  if(btn)btn.addEventListener("click",()=>{
+   if(F.researchProof(world,n)){
+    persist();announce("研究完了："+n.label+"。後続の定理へ進めます。");
+    renderTech();renderProof(true);drawProofGraph();refresh();
+   }
+  });
+ }
+ function renderProof(force=false){
+  if(!world||pane!=="research")return;
+  const done=world.proofs.length;
+  $("proof-metrics").textContent=done+" / 465 解明 · 629直接証明辺 · 146基礎ノード";
+  const q=proofSearch.trim().toLowerCase();
+  const candidates=tech.nodes.filter(n=>{
+   if(proofSchool!=="all"&&proofSchool!==n.school)return false;
+   if(proofStatus!=="all"&&proofStatus!==proofStatusOf(n))return false;
+   if(!q)return true;
+   return (n.label+" "+n.chapter+" "+n.name+" "+"No."+String(n.id+1).padStart(3,"0")).toLowerCase().includes(q);
+  }).sort((a,b)=>(a.depth-b.depth)||(a.id-b.id));
+  $("proof-result-count").textContent=candidates.length+" / 465";
+  const list=$("proof-results");
+  const signature=done+"|"+world.science+"|"+q+"|"+proofStatus+"|"+proofSchool+"|"+selectedProof;
+  if(!force&&list.dataset?.signature===signature){
+   drawProofGraph();return;
+  }
+  if(list.dataset)list.dataset.signature=signature;
+  list.innerHTML=candidates.slice(0,36).map(n=>'<button type="button" data-proof-result="'+n.id+
+    '" aria-pressed="'+(selectedProof===n.id)+'" class="proof-result '+proofStatusOf(n)+'">'+
+    '<span class="mono">#'+String(n.id+1).padStart(3,"0")+'</span><span>'+
+    esc(n.label)+'<small>'+esc(n.chapter)+' · 深さ'+n.depth+
+    ' · 親'+n.parents.length+'件</small></span><em>'+
+    (hasProof(n)?"✓":proofReady(n)?F.proofCost(n)+" P":"鍵")+
+    '</em></button>').join("")+
+    (candidates.length>36?'<small style="padding:6px">最初の36件を表示中。検索や分野で絞り込んでください。</small>':"");
+  list.querySelectorAll("[data-proof-result]").forEach(b=>b.addEventListener("click",()=>selectProof(Number(b.dataset.proofResult))));
+  renderProofDetails();drawProofGraph();
+ }
+ function setupProof(){
+  $("proof-search").addEventListener("input",e=>{
+   proofSearch=e.target.value||"";renderProof(true);
+  });
+  $("proof-filter").addEventListener("change",e=>{
+   proofStatus=e.target.value;renderProof(true);
+  });
+  $("proof-school").addEventListener("change",e=>{
+   proofSchool=e.target.value;renderProof(true);
+  });
+  $("proof-overview").addEventListener("click",()=>{
+   graphMode="overview";graphShift={x:0,y:0};drawProofGraph();
+  });
+  $("proof-center").addEventListener("click",()=>{
+   graphMode="focus";graphShift={x:0,y:0};drawProofGraph();
+  });
+  if(proofCanvas){
+   proofCanvas.addEventListener("pointerdown",e=>{
+    proofPointerStop(e);
+    graphPointer={x:e.clientX,y:e.clientY,oldX:e.clientX,oldY:e.clientY,moved:false};
+   });
+   proofCanvas.addEventListener("pointermove",e=>{
+    if(!graphPointer)return;
+    const dx=e.clientX-graphPointer.oldX,dy=e.clientY-graphPointer.oldY;
+    if(Math.abs(e.clientX-graphPointer.x)+Math.abs(e.clientY-graphPointer.y)>7)graphPointer.moved=true;
+    if(graphPointer.moved){graphShift.x+=dx;graphShift.y+=dy;drawProofGraph();}
+    graphPointer.oldX=e.clientX;graphPointer.oldY=e.clientY;
+   });
+   proofCanvas.addEventListener("pointerup",e=>{
+    if(!graphPointer)return;
+    const moved=graphPointer.moved;graphPointer=null;
+    if(moved)return;
+    const box=proofCanvas.getBoundingClientRect?.()||{left:0,top:0,width:310,height:220};
+    const x=e.clientX-box.left,y=e.clientY-box.top;
+    let best=null,d=14;
+    for(const h of graphHitboxes){
+     const dist=Math.hypot(x-h.x,y-h.y);
+     if(dist<d){d=dist;best=h.id;}
+    }
+    if(best!==null)selectProof(best);
+   });
+   proofCanvas.addEventListener("pointercancel",()=>graphPointer=null);
+  }
+ }
+ function proofPointerStop(e){e.preventDefault?.();}
  function renderTech(){
-  $("technologies").innerHTML=tech.nodes.map(t=>{
+  $("technologies").innerHTML=upgrades.nodes.map(t=>{
    const known=world.unlocks.includes(t.id);
    const missing=t.prerequisites.filter(p=>!world.unlocks.includes(p.id));
+   const paper=t.gateProof?proofByName.get(t.gateProof):null;
+   const mustStudy=paper&&!world.proofNames.includes(paper.name);
    const afford=F.techAvailable(world,t);
-   const label=known?"獲得済":missing.length?"要前提":"研究 "+t.cost+"点";
+   const label=known?"開発済":missing.length?"設計の前提待ち":mustStudy?"証明が必要":"改良 "+t.cost+"点";
    const prereqs=t.prerequisites.map(p=>knownTech.get(p.id)?.label).filter(Boolean);
-   const detail=t.prerequisites.reduce((n,p)=>n+p.proofReferences,0);
    return '<article class="technode '+(known?"known":afford?"available":"locked")+'">'+
     '<div class="tech-top"><strong>'+esc(t.label)+'</strong><small class="mono">'+
     (known?"✓":"COST "+t.cost)+'</small></div>'+
     '<p>'+esc(t.description)+'</p>'+
-    (prereqs.length?'<div class="prereqs">前提：'+esc(prereqs.join(" / "))+'</div>':"")+
-    '<button data-unlock="'+esc(t.id)+'" type="button" '+(known||!afford?"disabled":"")+'>'+esc(label)+'</button>'+
-    '<details><summary>数学的な出典（証明参照 '+detail+'件）</summary><div>'+esc(t.path)+
-    '</div><small>ファイル単位の参照で、定理間の完全なDAGではありません。</small></details></article>';
+    (prereqs.length?'<div class="prereqs">工場の前提：'+esc(prereqs.join(" / "))+'</div>':"")+
+    (paper?'<div class="prereqs">証明の前提：'+esc(paper.label)+
+      (mustStudy?"（未研究）":"（解明済）")+
+      '</div><button type="button" data-proof-jump="'+paper.id+'">依存の定理を見る</button>':"")+
+    '<button data-unlock="'+esc(t.id)+'" type="button" '+(known||!afford?"disabled":"")+
+    '>'+esc(label)+'</button></article>';
   }).join("");
+  $("technologies").querySelectorAll("[data-proof-jump]").forEach(el=>el.addEventListener("click",()=>{
+    selectProof(Number(el.dataset.proofJump));
+  }));
   $("technologies").querySelectorAll("[data-unlock]").forEach(el=>el.addEventListener("click",()=>{
    const t=knownTech.get(el.dataset.unlock);
    if(F.unlock(world,t)){
-    announce("研究成功："+t.label+"。生産ラインの新機能が有効になりました。");
+    announce("工場改良完了："+t.label+"。実際の生産速度・設備が変化しました。");
     persist();refresh();
    }
   }));
@@ -346,7 +559,7 @@
   if(F.pendingRepairs(world).length){$("status").textContent="切断された搬送路が"+F.pendingRepairs(world).length+"か所。黄色の欠損セルをタップして修理してください。";}
   else if(world.challenge&&world.totalScience===0)$("status").textContent="搬送路が復旧しました。制御回路が組立機から研究所へ流れるのを確認しよう。";
   if(world.status==="complete")$("status").textContent="目標達成。自動化は続けられます。次はより短時間で量産しよう。";
-  renderPalette();renderTech();renderDocuments();renderInspector();draw();
+  renderPalette();if(pane==="research"){renderTech();renderProof();}renderDocuments();renderInspector();draw();
  }
  function select(x,y){selected={x,y};showPane("inspect");renderInspector();draw();}
  function interact(x,y,direction=dir){
@@ -425,6 +638,9 @@
   $("research-shortcut").addEventListener("click",()=>{
    showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
   });
+  $("proof-back").addEventListener("click",()=>{
+   document.body?.classList?.remove("research-direct");showPane("inspect");
+  });
   $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
   $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
   $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
@@ -468,7 +684,11 @@
   });
  }
  function start(){
-  hook();setTool("pan");resize();refresh();
+  setupProof();hook();setTool("pan");resize();refresh();
+  if(deepLinkResearch){
+   document.body?.classList?.add("research-direct");
+   showPane("research");
+  }
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
   clock=setInterval(()=>{
@@ -482,7 +702,7 @@
    $("science-stock").textContent=world.science;
    $("power").textContent=Math.round(world.energy)+" / "+world.energyMax;
    $("transported").textContent=world.transported;
-   if(world.tick%6===0){renderTech();renderDocuments();renderInspector();
+   if(world.tick%6===0){if(pane==="research"){renderTech();renderProof();}renderDocuments();renderInspector();
     $("log").innerHTML=world.notes.slice(0,5).map(x=>"<div>"+esc(x)+"</div>").join("");}
    draw();
   },110);

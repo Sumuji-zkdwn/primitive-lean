@@ -21,11 +21,13 @@ def build() -> str:
     engine = (ROOT / "engine.js").read_text(encoding="utf-8")
     ui = (ROOT / "ui.js").read_text(encoding="utf-8")
     graph = (ROOT / "tech.json").read_text(encoding="utf-8").strip()
+    upgrades = (ROOT / "upgrades.json").read_text(encoding="utf-8").strip()
     assert page.count(MARKER) == 1, "unexpected script references"
     assert page.count(TITLE) == 1, "unexpected page title"
-    assert all("</script" not in text for text in (engine, ui, graph)), "script escape required"
+    assert all("</script" not in text for text in (engine, ui, graph, upgrades)), "script escape required"
     replacement = (
         '<script type="application/json" id="factory-tech">' + graph
+        + '</script>\n<script type="application/json" id="factory-upgrades-json">' + upgrades
         + '</script>\n<script id="factory-engine">' + engine
         + '</script>\n<script id="factory-ui">' + ui + '</script>'
     )

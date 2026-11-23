@@ -5,12 +5,13 @@ const fs=require("node:fs");
 const path=require("node:path");
 const F=require("./engine.js");
 const T=JSON.parse(fs.readFileSync(path.join(__dirname,"tech.json"),"utf8"));
+const U=JSON.parse(fs.readFileSync(path.join(__dirname,"upgrades.json"),"utf8"));
 const E=JSON.parse(fs.readFileSync(path.join(__dirname,"../../docs/dependency/data/source_edges.json"),"utf8"));
 
 test("research tree is a selected exact subgraph of actual aggregated proof references",()=>{
- const ids=new Map(T.nodes.map(t=>[t.id,t]));
- assert.equal(T.nodes.length,10);
- for(const t of T.nodes){
+ const ids=new Map(U.nodes.map(t=>[t.id,t]));
+ assert.equal(U.nodes.length,10);
+ for(const t of U.nodes){
   assert.ok(ids.has(t.id));assert.ok(t.label.length>=2);
   for(const p of t.prerequisites){
    const origin=E.find(x=>x.source===t.path&&x.target===ids.get(p.id).path);
@@ -23,7 +24,51 @@ test("research tree is a selected exact subgraph of actual aggregated proof refe
    assert.ok(!seen.includes(id),"cycle "+[...seen,id].join(" -> "));
    ids.get(id).prerequisites.forEach(p=>walk(p.id,[...seen,id]));
  }
- T.nodes.forEach(t=>walk(t.id));
+ U.nodes.forEach(t=>walk(t.id));
+});
+
+
+
+test("465 exact theorem nodes form a genuine acyclic proof-term graph, not ten pseudo-nodes",()=>{
+ assert.equal(T.schema,2);
+ assert.equal(T.nodes.length,465);
+ const names=new Set(T.nodes.map(n=>n.name));
+ assert.equal(names.size,465);
+ assert.equal(T.nodes.filter(n=>n.school==="Elastica").length,214);
+ assert.equal(T.nodes.filter(n=>n.school==="LinearInput").length,251);
+ assert.equal(T.nodes.filter(n=>n.parents.length===0).length,146);
+ assert.equal(T.nodes.reduce((n,p)=>n+p.parents.length,0),629);
+ assert.equal(T.nodes.reduce((n,p)=>n+p.otherProjectRefs.length,0),792);
+ for(let i=0;i<465;i++){
+  const n=T.nodes[i];
+  assert.equal(n.id,i);
+  for(const pid of n.parents){
+   assert.ok(pid>=0&&pid<465);
+   assert.ok(T.nodes[pid].depth<n.depth,"dependency ordering has to be acyclic");
+  }
+ }
+});
+test("research spends science and unlocks children only when every theorem prerequisite is studied",()=>{
+ const w=F.newWorld(99);
+ const linked=T.nodes.find(n=>n.parents.length>=2);
+ assert.ok(linked);
+ w.science=100;
+ assert.equal(F.researchProof(w,linked),false);
+ const visited=new Set();
+ function research(id){
+  if(visited.has(id))return;
+  for(const p of T.nodes[id].parents)research(p);
+  const node=T.nodes[id];
+  const before=w.science;
+  assert.equal(F.researchProof(w,node),true);
+  assert.equal(w.science,before-F.proofCost(node));
+  assert.ok(w.proofs.includes(id));
+  assert.ok(w.proofNames.includes(node.name));
+  assert.equal(F.researchProof(w,node),false,"no repeated purchase");
+  visited.add(id);
+ }
+ research(linked.id);
+ assert.ok(visited.size>2);
 });
 
 test("sample factory does real end-to-end mining, smelting, belts, assembly, lab and power",()=>{
@@ -85,11 +130,20 @@ test("mining and electric generation require the corresponding ore patches",()=>
 });
 
 test("technology unlocks are real gated costs, and the upgrades affect simulation rules",()=>{
- const w=F.newWorld(42),find=id=>T.nodes.find(x=>x.id===id);
+ const w=F.newWorld(42),find=id=>U.nodes.find(x=>x.id===id);
  const fast=find("scaling"),heat=find("gradient"),power=find("gradientBound");
  assert.equal(F.unlock(w,fast),false);
  assert.equal(F.place(w,12,8,"junction",0),false);
- w.science=30;
+ w.science=250;
+ const byName=new Map(T.nodes.map(n=>[n.name,n]));
+ function studyAncestors(name){
+  const node=byName.get(name);
+  if(!node)throw Error("No theorem "+name);
+  if(w.proofs.includes(node.id))return;
+  for(const pid of node.parents)studyAncestors(T.nodes[pid].name);
+  assert.equal(F.researchProof(w,node),true,"research "+name);
+ }
+ for(const tech of [fast,heat,power,find("composition")])studyAncestors(tech.gateProof);
  assert.equal(F.unlock(w,fast),true);
  assert.equal(F.unlock(w,fast),false,"cannot purchase twice");
  assert.ok(w.unlocks.includes("scaling"));
@@ -98,7 +152,7 @@ test("technology unlocks are real gated costs, and the upgrades affect simulatio
  assert.equal(F.place(w,12,8,"junction",0),false);
  assert.equal(F.unlock(w,find("composition")),true);
  assert.equal(F.place(w,12,8,"junction",0),true);
- assert.ok(w.science<30);
+ assert.ok(w.science<250);
 });
 
 test("machines do not produce parts without inputs, and power storage stays nonnegative",()=>{
@@ -154,18 +208,29 @@ test("a researched junction alternates output lanes without duplicating or losin
  assert.equal(w.tiles[F.idx(7,8)].building.item,"copperPlate");
 });
 
-test("research tech is a source-backed prerequisite structure, not a random equipment name",()=>{
- const t=id=>T.nodes.find(x=>x.id===id);
+test("engineering upgrades are gated by real studied proofs and resource cost",()=>{
+ const t=id=>U.nodes.find(x=>x.id===id);
+ const map=new Map(T.nodes.map(n=>[n.name,n]));
  const w=F.newWorld(21);
- w.science=25;
+ w.science=350;
+ const rootScience=w.science;
  assert.equal(F.unlock(w,t("globalConsequences")),false);
+ function prove(name){
+  const n=map.get(name);
+  assert.ok(n,"actual theorem absent "+name);
+  if(w.proofs.includes(n.id))return;
+  for(const p of n.parents)prove(T.nodes[p].name);
+  assert.equal(F.researchProof(w,n),true);
+ }
+ for(const id of ["gradient","gradientBound","globalConsequences"])prove(t(id).gateProof);
+ const beforeUpgrades=w.science;
+ assert.ok(beforeUpgrades<rootScience);
  assert.equal(F.unlock(w,t("gradient")),true);
  assert.equal(F.unlock(w,t("gradientBound")),true);
  assert.equal(F.unlock(w,t("globalConsequences")),true);
- assert.equal(w.science,25-3-6-8);
+ assert.equal(w.science,beforeUpgrades-3-6-8);
  assert.equal(w.unlocks.includes("globalConsequences"),true);
 });
-
 
 test("repair tutorial cannot passively produce science before the player fixes both gaps",()=>{
  const w=F.challengeBlueprint(F.newWorld(20261124));
