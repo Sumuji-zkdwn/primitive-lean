@@ -1,0 +1,41 @@
+{
+  "reversibility_max_abs_error": 9.159339953157541e-16,
+  "energy_balance_error_ratio_dt_vs_half": 3.999981542938766,
+  "q_coupled_vs_control_rms_final": 0.0002626842870924176,
+  "coupled_topological_degree_t024": 1,
+  "control_topological_degree_t024": 1,
+  "coupled_final_b_max_abs": 0.11460872612240329,
+  "control_final_b_max_abs": 0.0,
+  "max_q_norm_error_t024": 6.972200594645983e-14,
+  "topological_slip_time_bracket": [
+    0.252,
+    0.253
+  ],
+  "topological_slip_witness_residual": 7.13148962384258e-17,
+  "protected_n12_final_charge_t060": 1,
+  "protected_n12_min_edge_dot": 0.15344345589737732,
+  "protected_n12_rigorous_lower_bound": 0.020952960336891726,
+  "protected_n16_final_charge_t045": 1,
+  "protected_convergence_ratio": 3.6358430328237086,
+  "resolution_audits": {
+    "12": {
+      "degree": 1,
+      "metric_curvature_max_abs": 0.043949302759336284,
+      "maximum_local_memory_modulus": 3.532067711826743,
+      "maximum_energy_balance_relative_error": 1.0757740413861633e-05
+    },
+    "16": {
+      "degree": 1,
+      "metric_curvature_max_abs": 0.038029760459538764,
+      "maximum_local_memory_modulus": 3.548225925601856,
+      "maximum_energy_balance_relative_error": 1.3067848677398697e-05
+    },
+    "20": {
+      "degree": 1,
+      "metric_curvature_max_abs": 0.030303487358990466,
+      "maximum_local_memory_modulus": 3.5495084150274554,
+      "maximum_energy_balance_relative_error": 8.25450061723194e-06
+    }
+  },
+  "classification": "Self-coupled finite-dimensional model, not GR. Unprotected lattice exhibits charge slip; added local barrier proves topological preservation in the ideal ODE."
+}

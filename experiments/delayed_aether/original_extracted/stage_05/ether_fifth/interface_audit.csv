@@ -1,0 +1,2 @@
+R_numeric,T_numeric,R_exact,T_exact,initial_energy,final_energy,relative_energy_error,left_energy_centroid_x,right_energy_centroid_x,dx,dt,n_grid,time_final
+0.2500083361600585,0.7500249954253904,0.25,0.75,0.3692355781726451,0.3692478853798697,3.333158544882586e-05,-21.984302100765703,21.984301389453364,0.08,0.032,1626,44

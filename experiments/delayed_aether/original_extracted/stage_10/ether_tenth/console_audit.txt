@@ -1,0 +1,97 @@
+{
+  "spatial_betti": [
+    1,
+    3,
+    3,
+    1
+  ],
+  "spacetime_betti": [
+    1,
+    3,
+    3,
+    1,
+    0
+  ],
+  "runs": [
+    {
+      "charged": false,
+      "rate": 0.06,
+      "Q": [
+        0,
+        0,
+        0
+      ],
+      "initial_plaquettes": 22,
+      "final_plaquettes": 0,
+      "initial_energy": 44.0,
+      "final_energy": 0.0006743194932573744,
+      "peak_stiffness": 3.2603429838600175,
+      "final_stiffness": 0.30677552274599496,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 0,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    },
+    {
+      "charged": false,
+      "rate": 0.15,
+      "Q": [
+        0,
+        0,
+        0
+      ],
+      "initial_plaquettes": 22,
+      "final_plaquettes": 0,
+      "initial_energy": 44.0,
+      "final_energy": 2.4084850792380465e-07,
+      "peak_stiffness": 3.135919401517885,
+      "final_stiffness": 0.3000024328086068,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 0,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    },
+    {
+      "charged": true,
+      "rate": 0.06,
+      "Q": [
+        1,
+        0,
+        0
+      ],
+      "initial_plaquettes": 23,
+      "final_plaquettes": 3,
+      "initial_energy": 46.0,
+      "final_energy": 6.000674319493258,
+      "peak_stiffness": 3.2603429838600175,
+      "final_stiffness": 0.30677552274599496,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 3,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    },
+    {
+      "charged": true,
+      "rate": 0.15,
+      "Q": [
+        1,
+        0,
+        0
+      ],
+      "initial_plaquettes": 23,
+      "final_plaquettes": 3,
+      "initial_energy": 46.0,
+      "final_energy": 6.000000240848508,
+      "peak_stiffness": 3.135919401517885,
+      "final_stiffness": 0.3000024328086068,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 3,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "radial_edge_x0": "sqrt(2/5)",
+  "theta_internal_at_x0": "2*pi/3",
+  "dihedral_cosine_formula": "(2*x**2 - 1)/(6*x**2 - 2)",
+  "symbolic_hessian_entry": "8*sqrt(5)",
+  "assert_equals_8sqrt5": true
+}

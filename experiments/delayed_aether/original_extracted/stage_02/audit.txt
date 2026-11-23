@@ -1,0 +1,9 @@
+AUDIT PASSED
+Field EL residual infinity norm = 1.457e-12
+Eliminated-vs-uneliminated E difference = 1.563e-13
+Pointwise c(h) minimum on tested ansatz = 0.644824 (global analytic bound 0.5)
+Far-field Q from source = 16.4509400162, from field flux = 16.4509400162
+Optimized energies across dr 0.12/0.08, alpha 0 = 72.93214730/72.93987556
+Optimized energies across dr 0.12/0.08, alpha 0.25 = 66.93114174/66.93512854
+Optimized effective charges across dr = 13.55663173/13.55890790
+IMPORTANT: no full 3D or real-time evolution was simulated; only radial-static source and far-field frozen-core pair interaction.

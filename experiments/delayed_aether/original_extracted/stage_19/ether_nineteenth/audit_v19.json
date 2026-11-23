@@ -1,0 +1,115 @@
+{
+  "equilibrium": [
+    {
+      "n": 80,
+      "h": 0.15,
+      "energy_old": 66.57703453512842,
+      "energy_equilibrium": 36.9295804267696,
+      "delta_energy": 29.647454108358822,
+      "components_E2_E4_E0": [
+        19.058864123192514,
+        17.855706144780758,
+        0.015010158796323857
+      ],
+      "iterations": 742,
+      "success": true,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "max_abs_gradient": 1.745862527799779e-05,
+      "memory_delta_max": 0.24456107239815228,
+      "f_at_r1": 0.40402908223041334,
+      "chi_at_r1": 0.8965923825064054,
+      "baryon_degree_radial_integral": 1.0319087022712765,
+      "f_bounds": [
+        0.0,
+        3.141592653589793
+      ]
+    },
+    {
+      "n": 120,
+      "h": 0.1,
+      "energy_old": 66.56740500475628,
+      "energy_equilibrium": 36.77042287725882,
+      "delta_energy": 29.796982127497465,
+      "components_E2_E4_E0": [
+        18.33334347042864,
+        18.422943779936244,
+        0.01413562689393435
+      ],
+      "iterations": 1218,
+      "success": true,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "max_abs_gradient": 9.012758899897428e-06,
+      "memory_delta_max": 0.13896667774041116,
+      "f_at_r1": 0.3862661273065565,
+      "chi_at_r1": 0.9035721066987334,
+      "baryon_degree_radial_integral": 1.011805528155217,
+      "f_bounds": [
+        0.0,
+        3.141592653589793
+      ]
+    },
+    {
+      "n": 180,
+      "h": 0.06666666666666667,
+      "energy_old": 66.5638783476567,
+      "energy_equilibrium": 36.8027114114065,
+      "delta_energy": 29.7611669362502,
+      "components_E2_E4_E0": [
+        18.33608417003239,
+        18.452459413386638,
+        0.014167827987471916
+      ],
+      "iterations": 2000,
+      "success": true,
+      "optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "max_abs_gradient": 5.649884877474026e-05,
+      "memory_delta_max": 0.07999858747619415,
+      "f_at_r1": 0.3869146322450516,
+      "chi_at_r1": 0.9030240092712747,
+      "baryon_degree_radial_integral": 1.0030942329037251,
+      "f_bounds": [
+        0.0,
+        3.141592653589793
+      ]
+    }
+  ],
+  "projected_modes": [
+    {
+      "n": 120,
+      "l": 2,
+      "num_independent_radial_basis": 16,
+      "lowest_omega_squared": 0.2954264871493176,
+      "second_omega_squared": 0.7069168687790174,
+      "max_off_diagonal_K": 1504.4919075663631,
+      "min_mass_eig": 0.08636294404426179
+    },
+    {
+      "n": 120,
+      "l": 3,
+      "num_independent_radial_basis": 16,
+      "lowest_omega_squared": 0.40094726333306696,
+      "second_omega_squared": 0.8720213877671787,
+      "max_off_diagonal_K": 2211.1972686381823,
+      "min_mass_eig": 0.27316150783387844
+    },
+    {
+      "n": 180,
+      "l": 2,
+      "num_independent_radial_basis": 16,
+      "lowest_omega_squared": 0.29542601334205054,
+      "second_omega_squared": 0.7069142307808027,
+      "max_off_diagonal_K": 1504.5365669708713,
+      "min_mass_eig": 0.08636294404426179
+    },
+    {
+      "n": 180,
+      "l": 3,
+      "num_independent_radial_basis": 16,
+      "lowest_omega_squared": 0.4009470222335795,
+      "second_omega_squared": 0.8720201383087003,
+      "max_off_diagonal_K": 2211.208870377699,
+      "min_mass_eig": 0.27316150783387844
+    }
+  ],
+  "scope": "flat-space stationary Skyrme+chi hedgehog with l=2 and l=3 trial subspaces, NOT full perturbation spectrum, no dynamical gravity/no dissipation"
+}

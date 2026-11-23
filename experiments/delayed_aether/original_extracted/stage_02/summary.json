@@ -1,0 +1,40 @@
+{
+  "model": "3D S3 order-parameter Skyrme-type medium and massless scalar deformation h",
+  "A": 41.87318519783328,
+  "B": 39.2561111229687,
+  "Btop": 1.0,
+  "D22": 94.21466669512488,
+  "D24": 102.72273036871734,
+  "D44": 116.34620533361142,
+  "relative_error_energy_2": 0.0,
+  "relative_error_energy_4": 1.8100181485994485e-16,
+  "relative_error_coulomb": 0.0,
+  "gravitational_coupling_alpha": 0.25,
+  "radius_without_coupling": 0.9682458365518541,
+  "radius_with_coupling": 1.1420804814403216,
+  "energy_without_coupling": 81.08707446193361,
+  "energy_with_coupling": 68.74491204588543,
+  "min_quadratic_coefficient": 0.25,
+  "radial_critical_coupling": 0.888888888888889,
+  "pair_convergence_audit": [
+    {
+      "delta": 3.0,
+      "base": 13.356438784521217,
+      "refined": 13.356438784522435,
+      "relative_quadrature_difference": 9.123545665785362e-14
+    },
+    {
+      "delta": 8.0,
+      "base": 2.1685489336357753,
+      "refined": 2.168548933640113,
+      "relative_quadrature_difference": 2.00035301695217e-12
+    },
+    {
+      "delta": 24.0,
+      "base": 0.24219381309616345,
+      "refined": 0.24219381342388593,
+      "relative_quadrature_difference": 1.3531414506548652e-09
+    }
+  ],
+  "caveat": "Stability only with respect to uniform scaling within the chosen hedgehog profile; full PDE stability and relativity not established."
+}

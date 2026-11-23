@@ -1,0 +1,9 @@
+{
+  "BPS_radial_equation_max_residual_H": 1.7996715229173788e-13,
+  "BPS_radial_equation_max_residual_K": 4.045375145977914e-15,
+  "integral_energy_from_r0_to_R": 12.063645582330366,
+  "boundary_energy_difference": 12.06362646704264,
+  "energy_at_R_25": 12.063715789784805,
+  "analytical_energy_at_infinite_radius": 12.566370614359172,
+  "finite_R_energy_fraction_at_25": 0.96
+}

@@ -1,0 +1,22 @@
+{
+  "model": "Flat-background disformal/exponential metric plus independent GR Schwarzschild benchmark",
+  "units": "G=c=m=1, m=GM/c^2",
+  "PPN_beta": 1.0,
+  "PPN_gamma": 1.0,
+  "PPN_exp_A": "1 - 2*u + 2*u**2 - 4*u**3/3 + O(u**4)",
+  "PPN_sch_A": "1 - 2*u + 2*u**2 - 3*u**3/2 + O(u**4)",
+  "PPN_exp_B": "1 + 2*u + 2*u**2 + 4*u**3/3 + O(u**4)",
+  "PPN_sch_B": "1 + 2*u + 3*u**2/2 + u**3/2 + O(u**4)",
+  "first_spatial_2PN_coefficient_difference": 0.5,
+  "exact_ricci_scalar": "-2 m^2 exp(-2m/r)/r^4",
+  "redshift_at_r10_exp": 0.10517091807564771,
+  "redshift_at_r10_sch": 0.10526315789473695,
+  "lensing_at_r10_exp": 0.4523804094278123,
+  "lensing_at_r10_sch": 0.4430839857415325,
+  "precession_at_rp10_ra14_exp": 2.4666669427583496,
+  "precession_at_rp10_ra14_sch": 2.3660919595785526,
+  "max_abs_TT_projection_isotropic": 4.163336342344337e-17,
+  "TT_norm_plus_example": 1.4142135623730951,
+  "max_cone_speed_difference": 0.0,
+  "passes": true
+}

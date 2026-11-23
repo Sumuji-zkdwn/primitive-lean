@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "363bca6a89fccce00e93e803da2095df64b62fae",
+  "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1583,6 +1583,30 @@
         "Mathlib"
       ],
       "sha256": "55bf79aa0693305e1b6219b10cfc9d1c4d75180dc3495c32cfe37aee9de055df"
+    },
+    {
+      "id": "main:lean/Research/DelayedAetherEdgeRegge.lean",
+      "scope": "main",
+      "path": "lean/Research/DelayedAetherEdgeRegge.lean",
+      "group": "Other",
+      "namespace": "DelayedAetherEdgeRegge",
+      "declarations": [
+        "mismatch",
+        "metricEdges",
+        "metricEdges_mismatch_zero",
+        "flat_stencil_mismatch",
+        "rankOne",
+        "rankOne_zero_on_sum_zero",
+        "edgeSpring",
+        "edgeSpring_on_sum_zero",
+        "edgeSpring_zero_implies_zero",
+        "curvatureMemory",
+        "curvatureMemory_preserves_sum_zero"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "4d765346074e41871230cc4575216528c11d4b64925767d7911f12a166ccd26c"
     },
     {
       "id": "main:lean/Research/ElasticaIntrinsicHeight.lean",
@@ -27714,28 +27738,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "363bca6a89fccce00e93e803da2095df64b62fae",
+      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "363bca6a89fccce00e93e803da2095df64b62fae",
+      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "363bca6a89fccce00e93e803da2095df64b62fae",
+      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "363bca6a89fccce00e93e803da2095df64b62fae",
+      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

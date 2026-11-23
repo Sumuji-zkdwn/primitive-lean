@@ -27,3 +27,5 @@ jobs:
         run: |
           python -B -X utf8 experiments/delayed_aether/verify_early_models.py
           python -B -X utf8 experiments/delayed_aether/verify_core.py
+          python -B -X utf8 experiments/delayed_aether/verify_edge_regge_exact.py
+          python -B -m compileall -q experiments/delayed_aether/stages

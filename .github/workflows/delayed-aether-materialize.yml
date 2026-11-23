@@ -1,0 +1,53 @@
+name: Materialize delayed-aether original ZIP members
+
+on:
+  push:
+    branches:
+      - research/delayed-aether-v11-v30-20261123
+    paths:
+      - 'experiments/delayed_aether/original_archives/**'
+      - 'experiments/delayed_aether/materialize_original_archives.py'
+      - '.github/workflows/delayed-aether-materialize.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: delayed-aether-materialize-only-on-research-branch
+  cancel-in-progress: false
+
+jobs:
+  extract-and-commit:
+    if: github.repository == 'Sumuji-zkdwn/primitive-lean' && github.ref == 'refs/heads/research/delayed-aether-v11-v30-20261123'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit source archives and supplemental members
+        run: |
+          python -B -X utf8 experiments/delayed_aether/verify_original_archives.py
+          python -B -X utf8 experiments/delayed_aether/verify_supplemental_archive.py
+      - name: Extract 641 original file byte streams with path-safety checks
+        run: |
+          python -B -X utf8 experiments/delayed_aether/materialize_original_archives.py --write
+          python -B -X utf8 experiments/delayed_aether/materialize_original_archives.py --check
+      - name: Commit extracted files only to the isolated draft branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- experiments/delayed_aether/original_extracted/
+          if ! git diff --cached --quiet; then
+            git commit -m 'archive: materialize 641 original evidence files from audited ZIPs'
+            git push origin HEAD:refs/heads/research/delayed-aether-v11-v30-20261123
+          else
+            echo 'No extracted archive changes'
+          fi

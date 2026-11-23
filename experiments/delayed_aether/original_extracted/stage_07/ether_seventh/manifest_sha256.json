@@ -1,0 +1,74 @@
+{
+  "research": "delayed ether v7",
+  "date": "2026-11-22 JST",
+  "files": {
+    "README.md": {
+      "size": 1344,
+      "sha256": "8ce7831b19546c5f7273e4be38dd0a1fe37feacb33f5f3c1ba88fb53b33bb206"
+    },
+    "RESEARCH_NOTE_2026-11-22_v7.md": {
+      "size": 10360,
+      "sha256": "686a342f53865a7352c249235826fd9d33045186eda610ab2020cd76118accde"
+    },
+    "audit_v7.json": {
+      "size": 925,
+      "sha256": "49a1202051d707c31a5974ba079cdd10d1cc49c4a4786627c5284eb0b8b4d87e"
+    },
+    "intrinsic_audit_v7.json": {
+      "size": 387,
+      "sha256": "dcb39ab7fa5fc8d3420367c0e19aa16d2cbc591b7218a9ec0dca74117b92b307"
+    },
+    "intrinsic_curvature.csv": {
+      "size": 3764,
+      "sha256": "31c92cf47c619ac2a3dbec0779c02a7e24691425e013892c9e2267499bfe0246"
+    },
+    "intrinsic_curvature.png": {
+      "size": 83705,
+      "sha256": "c4d5617055a1330543cb297dd19fafb66061754effbe0f84e12ca68f4fb7d867"
+    },
+    "intrinsic_curvature_v7.py": {
+      "size": 2848,
+      "sha256": "d433d94000b74ee858f02420a63037aa7852fff1c188e3cd8ed231452c55713f"
+    },
+    "intrinsic_v7.log": {
+      "size": 387,
+      "sha256": "dcb39ab7fa5fc8d3420367c0e19aa16d2cbc591b7218a9ec0dca74117b92b307"
+    },
+    "polarization_rank_v7.json": {
+      "size": 504,
+      "sha256": "b1b6485cd9e237a6042565adb88ebb72164e39ea0a7ce060c166e8259f3e47cd"
+    },
+    "polarization_rank_v7.py": {
+      "size": 1426,
+      "sha256": "ec6b94971c9cb2140f4eb10161a184efc2010fec7ab83ec1f1c7f0255f06127e"
+    },
+    "polarization_v7.log": {
+      "size": 504,
+      "sha256": "b1b6485cd9e237a6042565adb88ebb72164e39ea0a7ce060c166e8259f3e47cd"
+    },
+    "tensor_wave_energy.png": {
+      "size": 88866,
+      "sha256": "7c17976990ba084da751de18295cdff23bb6d4f48aeb8c9849e41d054d4e7245"
+    },
+    "tensor_wave_propagation.png": {
+      "size": 151328,
+      "sha256": "c5d9c676bd8d8852d12c4a8b232338193cba671db6a2ebac760e1d04aab7877e"
+    },
+    "tensor_wave_timeseries.csv": {
+      "size": 39606,
+      "sha256": "f1b5175f082439afc9cccaf8cad657f842c3d3e5f12a4ac86d61bc0d8d502db6"
+    },
+    "tt_projection_samples.csv": {
+      "size": 169748,
+      "sha256": "c28c96555f99995c97b0413ccbb0d3482df483e81a27578e3d63f5072fcf459f"
+    },
+    "verify_v7.log": {
+      "size": 925,
+      "sha256": "49a1202051d707c31a5974ba079cdd10d1cc49c4a4786627c5284eb0b8b4d87e"
+    },
+    "verify_v7.py": {
+      "size": 8485,
+      "sha256": "b5b305f28b7de73c0f40ba4fe0cc8ae62af7e7fd531816ede5df713c70fffce2"
+    }
+  }
+}

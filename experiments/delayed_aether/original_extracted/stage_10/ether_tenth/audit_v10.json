@@ -1,0 +1,250 @@
+{
+  "model": "v10 discrete Z2 cocycle with physical flux, bounded memory, and spacetime constraint",
+  "date": "2026-11-22",
+  "spatial_2x2x2": {
+    "cells": [
+      8,
+      24,
+      24,
+      8
+    ],
+    "rank_d": [
+      7,
+      14,
+      7
+    ],
+    "betti_mod2": [
+      1,
+      3,
+      3,
+      1
+    ],
+    "Euler_cells": 0,
+    "Euler_betti": 0,
+    "d_squared_zero_exact": true
+  },
+  "spatial_3x3x3": {
+    "cells": [
+      27,
+      81,
+      81,
+      27
+    ],
+    "rank_d": [
+      26,
+      52,
+      26
+    ],
+    "betti_mod2": [
+      1,
+      3,
+      3,
+      1
+    ],
+    "Euler_cells": 0,
+    "Euler_betti": 0,
+    "d_squared_zero_exact": true
+  },
+  "spacetime_cylinder_2x2x2_times_2_intervals": {
+    "cells": [
+      24,
+      88,
+      120,
+      72,
+      16
+    ],
+    "rank_d": [
+      23,
+      62,
+      55,
+      16
+    ],
+    "betti_mod2": [
+      1,
+      3,
+      3,
+      1,
+      0
+    ],
+    "Euler_cells": 0,
+    "Euler_betti": 0,
+    "d_squared_zero_exact": true
+  },
+  "spacetime_full_cochain_exact_audit": {
+    "spacetime_cells": 16,
+    "faces": 120,
+    "cubes_tested": 72,
+    "exact_cube_failures": 0,
+    "one_uncompensated_face_flip_cube_failures": 4,
+    "charge_initial": [
+      1,
+      0,
+      0
+    ],
+    "charge_each_slice": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ]
+  },
+  "periodic_time_4torus": {
+    "cells": [
+      16,
+      64,
+      96,
+      64,
+      16
+    ],
+    "rank_d": [
+      15,
+      45,
+      45,
+      15
+    ],
+    "betti_mod2": [
+      1,
+      4,
+      6,
+      4,
+      1
+    ],
+    "Euler_cells": 0,
+    "Euler_betti": 0,
+    "d_squared_zero_exact": true
+  },
+  "open_spatial_box": {
+    "cells": [
+      27,
+      54,
+      36,
+      8
+    ],
+    "rank_d": [
+      26,
+      28,
+      8
+    ],
+    "betti_mod2": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "Euler_cells": 1,
+    "Euler_betti": 1,
+    "d_squared_zero_exact": true
+  },
+  "form_identities": {
+    "random_d2d1_tests": 50,
+    "distinct_charge_classes_explicit": 8,
+    "stiffness_range": [
+      0.3,
+      3.2999999752661564
+    ],
+    "local_face_count_per_edge": 4
+  },
+  "runs": [
+    {
+      "charged": false,
+      "rate": 0.06,
+      "Q": [
+        0,
+        0,
+        0
+      ],
+      "initial_plaquettes": 22,
+      "final_plaquettes": 0,
+      "initial_energy": 44.0,
+      "final_energy": 0.0006743194932573744,
+      "peak_stiffness": 3.2603429838600175,
+      "final_stiffness": 0.30677552274599496,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 0,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    },
+    {
+      "charged": false,
+      "rate": 0.15,
+      "Q": [
+        0,
+        0,
+        0
+      ],
+      "initial_plaquettes": 22,
+      "final_plaquettes": 0,
+      "initial_energy": 44.0,
+      "final_energy": 2.4084850792380465e-07,
+      "peak_stiffness": 3.135919401517885,
+      "final_stiffness": 0.3000024328086068,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 0,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    },
+    {
+      "charged": true,
+      "rate": 0.06,
+      "Q": [
+        1,
+        0,
+        0
+      ],
+      "initial_plaquettes": 23,
+      "final_plaquettes": 3,
+      "initial_energy": 46.0,
+      "final_energy": 6.000674319493258,
+      "peak_stiffness": 3.2603429838600175,
+      "final_stiffness": 0.30677552274599496,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 3,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    },
+    {
+      "charged": true,
+      "rate": 0.15,
+      "Q": [
+        1,
+        0,
+        0
+      ],
+      "initial_plaquettes": 23,
+      "final_plaquettes": 3,
+      "initial_energy": 46.0,
+      "final_energy": 6.000000240848508,
+      "peak_stiffness": 3.135919401517885,
+      "final_stiffness": 0.3000024328086068,
+      "num_positive_energy_steps": 0,
+      "total_accepted_edges": 6,
+      "min_required_plaquettes": 3,
+      "max_3d_Bianchi_residual": 0,
+      "max_4d_Bianchi_residual": 0
+    }
+  ],
+  "spacetime_Bianchi": "B_ij(t+1) xor B_ij(t) = (d_3 a_t)_ij; B_0i(t)=a_i(t); d_4 B=0 exactly",
+  "theorem": "Q_ij is conserved for B(t+1)=B(t)+d_3 a_t; every Q_ij=1 sector contains at least L face excitations",
+  "interpretation": "Noncontractible dual strings on spatial T3, not localized point particles",
+  "limitations": [
+    "No Lorentzian metric, diffeomorphism symmetry, Einstein constraints, TT wave or gravity source",
+    "Spatial topology is T3 with periodic boundary conditions; infinite space has different cohomology",
+    "Update sweep is dissipative external-time relaxation, not relativistic causal propagation",
+    "Physical B→B+d a is NOT a gauge redundancy; unlike the SO(3) frame rotation of v9",
+    "Time cylinder has three topological sectors labels; periodic-time T4 would give six"
+  ]
+}

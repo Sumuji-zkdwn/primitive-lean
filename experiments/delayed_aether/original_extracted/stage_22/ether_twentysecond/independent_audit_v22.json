@@ -1,0 +1,10 @@
+{
+  "exact_lagrangian_independent_EL_acceleration_max_diff": 4.440892098500626e-16,
+  "independent_reconstructed_A_max_diff": 4.440892098500626e-16,
+  "independent_reconstructed_constraint_max_diff": 1.1102230246251565e-16,
+  "max_abs_constraint_from_saved_trajectory": 1.3166773227268891e-11,
+  "max_bad_constraint_violation": 0.530798321120566,
+  "max_bad_source_integral_diff": 4.334675682567124e-06,
+  "random_offshell_checks": 100,
+  "all_assertions_passed": true
+}
