@@ -148,6 +148,17 @@ def proposals(model):
             yield "append_state", {"label": label}
 
 
+def balanced_proposals(model):
+    """Interleave mutation families so edge rewiring cannot starve the rest."""
+    by_rule = {rule: [] for rule in RULES}
+    for rule, args in proposals(model):
+        by_rule[rule].append((rule, args))
+    for index in range(max((len(group) for group in by_rule.values()), default=0)):
+        for rule in RULES:
+            if index < len(by_rule[rule]):
+                yield by_rule[rule][index]
+
+
 def evolve(model, rule, args):
     """Interpret typed integer *data*, never code supplied by an experiment."""
     fd.validate_model(model)
@@ -253,7 +264,7 @@ def select(upstream, history):
     checked_parents = {fd.model_fingerprint(m) for _, m in parents}
     seen = checked_parents | {fd.model_fingerprint(r["model"]) for r in history}
     offerings = []
-    iters = [(name, model, iter(proposals(model))) for name, model in parents]
+    iters = [(name, model, iter(balanced_proposals(model))) for name, model in parents]
     evaluations = 0
     while iters and evaluations < MAX_EVALUATIONS:
         still = []
