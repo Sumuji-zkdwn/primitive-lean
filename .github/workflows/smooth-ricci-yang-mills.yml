@@ -1,0 +1,141 @@
+name: Smooth Ricci-flat Levi-Civita to Yang-Mills (trace and local frame)
+
+on:
+  pull_request:
+    paths:
+      - 'lean/RicciFlowBlueprint/**'
+      - 'lean/Research/SmoothRicciYangMills.lean'
+      - 'lean/Research/SmoothRicciFrameExistence.lean'
+      - 'docs/verification/2026-11-22-smooth-ricci-yang-mills.md'
+      - '.github/workflows/smooth-ricci-yang-mills.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smooth-ricci-yang-mills:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install repository pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile smooth geometry and Ricci-divergence bridge with kernel
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research .lake/build/lib/lean/RicciFlowBlueprint
+          for file in \
+            Research/RicciFlatBianchiYangMills.lean \
+            Research/BianchiOperatorBridge.lean \
+            RicciFlowBlueprint/LieBracketDerivation.lean \
+            RicciFlowBlueprint/Curvature.lean \
+            RicciFlowBlueprint/Bianchi.lean \
+            Research/SmoothLeviCivitaBianchi.lean \
+            RicciFlowBlueprint/LeviCivitaSmoothPort.lean \
+            Research/SmoothMetricBianchi.lean \
+            Research/SmoothCurvatureRealFrame.lean \
+            Research/SmoothCurvaturePairSymmetry.lean \
+            Research/RicciTraceCovariance.lean \
+            RicciFlowBlueprint/Ricci.lean \
+            RicciFlowBlueprint/Sectional.lean \
+            RicciFlowBlueprint/LeviCivita.lean \
+            RicciFlowBlueprint/LeviCivitaSmooth.lean \
+            RicciFlowBlueprint/Variation.lean \
+            RicciFlowBlueprint/MetricTrace.lean \
+            RicciFlowBlueprint/GramSchmidtOrtho.lean \
+            RicciFlowBlueprint/OrthonormalFrame.lean \
+            RicciFlowBlueprint/GlobalExtension.lean \
+            RicciFlowBlueprint/Scalar.lean \
+            RicciFlowBlueprint/Hessian.lean \
+            RicciFlowBlueprint/TraceCov.lean \
+            RicciFlowBlueprint/CurvaturePointwise.lean \
+            RicciFlowBlueprint/RicciForm.lean \
+            RicciFlowBlueprint/RicciSymm.lean \
+            RicciFlowBlueprint/CurvatureSymm.lean \
+            RicciFlowBlueprint/CurvatureDeriv.lean \
+            RicciFlowBlueprint/Divergence.lean \
+            Research/SmoothRicciYangMills.lean \
+            Research/SmoothRicciFrameExistence.lean; do
+            printf 'CHECKING %s\n' "$file" | tee -a ../smooth-ricci-yang-mills-lean.log
+            prefix=$(printf '%s' "$file" | sed 's/\.lean$//')
+            lake env lean --trust=0 -o ".lake/build/lib/lean/$prefix.olean" "$file" 2>&1 | tee -a ../smooth-ricci-yang-mills-lean.log
+          done
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../smooth-ricci-yang-mills-lean.log; then exit 1; fi
+      - name: Axiom audit of imported real divergence and new theorem
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/SmoothRicciYangMills.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          theorems=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(theorems)>=2,theorems
+          framesrc=Path('Research/SmoothRicciFrameExistence.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',framesrc,re.M)
+          frame_theorems=re.findall(r'^theorem\s+(\w+)',framesrc,re.M)
+          assert len(frame_theorems)>=2,frame_theorems
+          out='import Research.SmoothRicciFrameExistence\n'
+          out+='#print axioms CovariantDerivative.divCurvature_eq_covRicci_sub\n'
+          out+=''.join('#print axioms SmoothRicciYangMills.'+name+'\n' for name in theorems)
+          out+=''.join('#print axioms SmoothRicciFrameExistence.'+name+'\n' for name in frame_theorems)
+          Path('SmoothRicciYangMillsAudit.lean').write_text(out)
+          Path('../smooth-ricci-yang-mills-count.txt').write_text(str(len(theorems)+len(frame_theorems)+1))
+          PY
+          lake env lean --trust=0 SmoothRicciYangMillsAudit.lean 2>&1 | tee ../smooth-ricci-yang-mills-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../smooth-ricci-yang-mills-audit.log').read_text()
+          n=int(Path('../smooth-ricci-yang-mills-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          none=s.count('does not depend on any axioms')
+          assert len(entries)+none==n,(len(entries),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+            extra={v.strip() for v in entry.split(',') if v.strip()}-allowed
+            assert not extra,extra
+          print('Axiom checked declarations:',n)
+          PY
+      - name: Independent exact checks of finite Ricci trace and Bianchi
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_ricci_trace_covariance.py > ricci-trace-oracle.log
+          python -B tools/check_ricci_flat_yang_mills.py > ricci-bianchi-oracle.log
+      - name: License source SHA and exact head
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s licenses/ricci-flow-blueprint-Apache-2.0.txt
+          git rev-parse HEAD > smooth-ricci-yang-mills-head.txt
+          sha256sum lean/Research/SmoothRicciYangMills.lean > smooth-ricci-yang-mills-sha256.txt
+      - name: Upload exact-head proof logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: smooth-ricci-yang-mills
+          path: |
+            smooth-ricci-yang-mills-lean.log
+            smooth-ricci-yang-mills-audit.log
+            smooth-ricci-yang-mills-count.txt
+            ricci-trace-oracle.log
+            ricci-bianchi-oracle.log
+            smooth-ricci-yang-mills-head.txt
+            smooth-ricci-yang-mills-sha256.txt
+          if-no-files-found: warn

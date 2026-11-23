@@ -1,0 +1,114 @@
+name: Smooth Levi-Civita real frame contracted Bianchi
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SmoothCurvatureRealFrame.lean'
+      - 'docs/verification/2026-11-22-smooth-curvature-real-frame.md'
+      - '.github/workflows/smooth-curvature-real-frame.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smooth-real-frame:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install repo-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel check all dependencies and real frame contraction
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research .lake/build/lib/lean/RicciFlowBlueprint
+          for file in \
+            Research/RicciFlatBianchiYangMills.lean \
+            Research/BianchiOperatorBridge.lean \
+            RicciFlowBlueprint/LieBracketDerivation.lean \
+            RicciFlowBlueprint/Curvature.lean \
+            RicciFlowBlueprint/Bianchi.lean \
+            Research/SmoothLeviCivitaBianchi.lean \
+            RicciFlowBlueprint/LeviCivitaSmoothPort.lean \
+            Research/SmoothMetricBianchi.lean \
+            Research/SmoothCurvatureRealFrame.lean; do
+            echo "CHECKING $file"
+            prefix=$(printf '%s' "$file" | sed 's/\.lean$//')
+            lake env lean --trust=0 -o ".lake/build/lib/lean/$prefix.olean" "$file" 2>&1 | tee -a ../smooth-real-frame-lean.log
+          done
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../smooth-real-frame-lean.log; then exit 1; fi
+      - name: Audit new theorem declarations
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/SmoothCurvatureRealFrame.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          left=src.split('namespace CovariantDerivative',1)[1].split('end CovariantDerivative',1)[0]
+          right=src.split('namespace SmoothCurvatureRealFrame',1)[1].split('end SmoothCurvatureRealFrame',1)[0]
+          left_names=re.findall(r'^theorem\s+(\w+)',left,re.M)
+          right_names=re.findall(r'^theorem\s+(\w+)',right,re.M)
+          n=len(left_names)+len(right_names)
+          assert n>=8,n
+          out='import Research.SmoothCurvatureRealFrame\n'
+          out+=''.join('#print axioms CovariantDerivative.'+p+'\n' for p in left_names)
+          out+=''.join('#print axioms SmoothCurvatureRealFrame.'+p+'\n' for p in right_names)
+          Path('SmoothCurvatureRealFrameAudit.lean').write_text(out)
+          Path('../smooth-real-frame-count.txt').write_text(str(n))
+          PY
+          lake env lean --trust=0 SmoothCurvatureRealFrameAudit.lean 2>&1 | tee ../smooth-real-frame-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../smooth-real-frame-audit.log').read_text()
+          n=int(Path('../smooth-real-frame-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          noaxioms=s.count('does not depend on any axioms')
+          assert len(entries)+noaxioms==n,(len(entries),noaxioms,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+              used={x.strip() for x in entry.split(',') if x.strip()}
+              assert used<=allowed,used-allowed
+          print('Axiom-audited new theorems:',n)
+          PY
+      - name: Independent exact nontrivial metric-jet and signature oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_ricci_flat_yang_mills.py 2>&1 | tee smooth-real-frame-python.log
+      - name: Verify reproducibility and preserve evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD | tee smooth-real-frame-git-head.txt
+          sha256sum lean/Research/SmoothCurvatureRealFrame.lean > smooth-real-frame-sha256.txt
+          test -s licenses/ricci-flow-blueprint-Apache-2.0.txt
+      - name: Upload exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: smooth-curvature-real-frame
+          path: |
+            smooth-real-frame-lean.log
+            smooth-real-frame-audit.log
+            smooth-real-frame-count.txt
+            smooth-real-frame-python.log
+            smooth-real-frame-git-head.txt
+            smooth-real-frame-sha256.txt
+          if-no-files-found: warn
