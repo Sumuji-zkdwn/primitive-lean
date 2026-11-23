@@ -46,6 +46,7 @@ theorem height_displacement_le_cost
   | stop x =>
       simp
   | horiz s t b z c tail ih =>
+      change |F t - F z.1| ≤ c at ih
       change |F s - F z.1| ≤ |F s - F t| + c
       calc
         |F s - F z.1| =
