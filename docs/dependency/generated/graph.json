@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "6c490603f16272e4307854144d2ddd9121d91875",
+  "main_commit": "79e7da272ea400266ec4c7caf4c123526931da8f",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1723,6 +1723,38 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
+    },
+    {
+      "id": "main:lean/Research/KKCartesianDerivative.lean",
+      "scope": "main",
+      "path": "lean/Research/KKCartesianDerivative.lean",
+      "group": "Other",
+      "namespace": "KKCartesianDerivative",
+      "declarations": [
+        "E",
+        "E.eval",
+        "E.Good",
+        "E.dx",
+        "E.dz",
+        "E.hasDerivAt_x",
+        "E.hasDerivAt_z",
+        "Mat5",
+        "e0",
+        "quotientH",
+        "gaugeEntry",
+        "yyEntry",
+        "metricE",
+        "g",
+        "metric_good",
+        "all_metric_x_derivatives",
+        "all_metric_z_derivatives"
+      ],
+      "imports": [
+        "Mathlib.Tactic",
+        "Mathlib.LinearAlgebra.Matrix.Notation",
+        "Mathlib.Analysis.Calculus.Deriv.Inv"
+      ],
+      "sha256": "4afdd830beb1a41ea0de10961fa5eb754538e225a7fb7c096ccfcddb37c3b76a"
     },
     {
       "id": "main:lean/Research/KKCartesianJet.lean",
@@ -27812,28 +27844,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "6c490603f16272e4307854144d2ddd9121d91875",
+      "base_sha": "79e7da272ea400266ec4c7caf4c123526931da8f",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "6c490603f16272e4307854144d2ddd9121d91875",
+      "base_sha": "79e7da272ea400266ec4c7caf4c123526931da8f",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "6c490603f16272e4307854144d2ddd9121d91875",
+      "base_sha": "79e7da272ea400266ec4c7caf4c123526931da8f",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "6c490603f16272e4307854144d2ddd9121d91875",
+      "base_sha": "79e7da272ea400266ec4c7caf4c123526931da8f",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
