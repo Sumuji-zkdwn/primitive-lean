@@ -2,8 +2,9 @@
 """Read-only Forge reliability/capability audit and fail-closed dispatch gate.
 
 Run provenance comes from GitHub's workflow-specific REST API, state from
-read-only checked-out data branches. This tool NEVER dispatches anything: a
-separate, narrowly permissioned Actions job consumes its explicit verdict.
+read-only checked-out data branches. This tool NEVER dispatches anything.
+The original one-day recovery gate is retained as historical metadata only;
+the ongoing half-hour workflow is deliberately read-only.
 
 No invented scheduler guarantees, no LLM inference, no trusted data-branch code.
 """
