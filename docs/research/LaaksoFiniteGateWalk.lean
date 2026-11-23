@@ -77,6 +77,38 @@ theorem path_interval_admissible
   intro i h
   exact differing_bit_requires_gate G l u walk i h
 
+/-- Endpoints of a finite walk satisfy the same height window bounds
+as every one of its intermediate states. -/
+theorem walk_endpoints_bounded
+    (G : ι → ℝ → Prop) (l u : ℝ)
+    {x y : State ι} (walk : Walk G l u x y) :
+    l ≤ x.1 ∧ x.1 ≤ u ∧ l ≤ y.1 ∧ y.1 ≤ u := by
+  induction walk with
+  | stop x hl hu =>
+      exact ⟨hl, hu, hl, hu⟩
+  | horizontal s t b z hls hsu hlt htu tail ih =>
+      rcases ih with ⟨_, _, hlz, hzu⟩
+      exact ⟨hls, hsu, hlz, hzu⟩
+  | gate s b k z hls hsu hk tail ih =>
+      rcases ih with ⟨_, _, hlz, hzu⟩
+      exact ⟨hls, hsu, hlz, hzu⟩
+
+/-- All five clauses of the paper's admissible gate interval definition
+follow from an actual bounded finite horizontal/toggle walk. -/
+theorem walk_implies_admissible
+    (G : ι → ℝ → Prop) (l u : ℝ)
+    {x y : State ι} (walk : Walk G l u x y) :
+    l ≤ x.1 ∧ l ≤ y.1 ∧ x.1 ≤ u ∧ y.1 ≤ u ∧
+      (∀ i, x.2 i ≠ y.2 i →
+        ∃ s : ℝ, l ≤ s ∧ s ≤ u ∧ G i s) := by
+  rcases walk_endpoints_bounded G l u walk with ⟨hlx, hxu, hly, hyu⟩
+  refine ⟨hlx, hly, hxu, hyu, ?_⟩
+  intro i h
+  exact differing_bit_requires_gate G l u walk i h
+
+#print axioms walk_endpoints_bounded
+#print axioms walk_implies_admissible
+
 #print axioms differing_bit_requires_gate
 #print axioms path_interval_admissible
 
