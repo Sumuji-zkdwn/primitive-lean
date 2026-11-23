@@ -7,7 +7,7 @@ on:
       - 'games/hex/**'
       - '.github/workflows/hex-circuit.yml'
   push:
-    branches: [main, 'chatgpt/lean-hex-*']
+    branches: [main, 'chatgpt/lean-hex-*', 'chatgpt/hex-mobile-*']
     paths:
       - 'games/hex/**'
       - '.github/workflows/hex-circuit.yml'
