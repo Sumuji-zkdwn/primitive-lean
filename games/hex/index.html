@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111927">
+  <meta name="description" content="六角格子の向きをタップして回路をつくる、スマホ対応Hex Circuit。">
+  <title>HEX CIRCUIT — タッチで遊ぶ六角回路</title>
+  <style>
+    :root { color-scheme:dark; --bg:#0d1420; --panel:#172335; --tile:#20334b; --stroke:#546982; --txt:#eef3f9; --muted:#a4b6ca; --gold:#e7b85d; --mint:#77debf; --blue:#90c5ff; }
+    * { box-sizing:border-box; }
+    html { font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif; -webkit-text-size-adjust:100%; }
+    body { margin:0; min-height:100dvh; background:radial-gradient(circle at 30% 0%,#1c2f47 0%,var(--bg) 65%); color:var(--txt); }
+    button { font:inherit; color:inherit; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+    button:focus-visible, .tile:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+    .app { width:min(100%,1050px); margin:auto; padding:14px max(12px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left)); }
+    .top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px; }
+    h1 { font-size:clamp(21px,4vw,30px); letter-spacing:.13em; margin:0; font-weight:800; }
+    .subtitle { color:var(--muted); font-size:12px; margin-top:4px; }
+    .stats { display:flex; gap:7px; font-size:13px; font-variant-numeric:tabular-nums; }
+    .stat { background:var(--panel); border:1px solid #384a60; border-radius:99px; padding:7px 12px; white-space:nowrap; }
+    .stat strong { color:var(--mint); }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr); align-items:start; gap:12px; }
+    .boardbox { border:1px solid #3a4c64; background:linear-gradient(150deg,#182539,#111a29); border-radius:18px; overflow:hidden; padding:2px; }
+    svg { display:block; width:100%; max-width:470px; height:auto; margin:auto; touch-action:manipulation; }
+    .tile { cursor:pointer; }
+    .tile polygon { fill:var(--tile); stroke:var(--stroke); stroke-width:2; transition:fill .12s,stroke .12s; }
+    .tile.goal polygon { fill:#314052; stroke:#bf9861; stroke-width:2.5; }
+    .tile.seen polygon { fill:#1f524c; stroke:var(--mint); }
+    .tile.selected polygon { stroke:#c1e2ff; stroke-width:4; }
+    .tile .arrow { fill:#ecf3fc; font-size:36px; font-weight:650; dominant-baseline:middle; text-anchor:middle; pointer-events:none; }
+    .tile .coordinate { fill:#a8bdd2; font-size:14px; text-anchor:middle; pointer-events:none; }
+    .tile .marker { fill:var(--gold); pointer-events:none; }
+    .tile.seen .marker { fill:var(--mint); }
+    .tile .token { fill:#e7f6ff; stroke:#409ada; stroke-width:4; pointer-events:none; }
+    .tile .token-halo { fill:#67bef5; fill-opacity:.15; pointer-events:none; }
+    .tile:focus { outline:none; }
+    .panel { background:var(--panel); border:1px solid #3a4c64; border-radius:18px; padding:14px; display:flex; flex-direction:column; gap:12px; }
+    .message { font-weight:650; min-height:24px; color:var(--mint); font-size:15px; }
+    .small { font-size:12px; line-height:1.7; color:var(--muted); margin:0; }
+    .sectionTitle { font-size:13px; color:#c7d5e6; letter-spacing:.03em; margin:0 0 8px; }
+    #selected { font-variant-numeric:tabular-nums; color:#fff; font-weight:700; }
+    .directionGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+    .directionGrid button { min-height:52px; background:#263c55; border:1px solid #536b84; border-radius:12px; font-size:22px; font-weight:700; }
+    .directionGrid button[aria-pressed="true"] { border:2px solid #a9d9ff; background:#30577d; }
+    .directionGrid button span { display:block; font-size:11px; font-weight:500; color:#c5d3e0; }
+    .actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+    .actions button { padding:13px 8px; min-height:48px; border:1px solid #526781; background:#243b55; border-radius:12px; font-weight:650; font-size:14px; }
+    .actions button.primary { background:#3189b5; border-color:#75ccfa; color:#fff; }
+    button:disabled { opacity:.45; cursor:default; }
+    .footer { color:#94a9be; font-size:11px; line-height:1.6; margin:12px 3px 0; }
+    a { color:#add7ff; }
+    @media (min-width:680px) { .layout { grid-template-columns:minmax(0,1fr) minmax(315px,380px); } }
+    @media (orientation:landscape) and (max-height:550px) { .app { padding-top:7px; } .top { margin-bottom:6px; } .boardbox svg { max-height:calc(100dvh - 100px); } .panel { gap:8px; padding:10px; } .actions button { min-height:42px; padding:8px; } }
+    @media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div><h1>HEX CIRCUIT</h1><div class="subtitle">タップで回路を作る · 六角格子のパズル</div></div>
+      <div class="stats" aria-label="ゲームの進行状況">
+        <div class="stat">目標 <strong id="goals">0 / 6</strong></div>
+        <div class="stat">移動 <strong id="moves">0 手</strong></div>
+      </div>
+    </header>
+    <div class="layout">
+      <div class="boardbox">
+        <svg id="board" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 430" role="group" aria-label="19セルの六角盤面。セルをタップすると選択できます"></svg>
+      </div>
+      <section class="panel" aria-label="ゲーム操作">
+        <div id="message" class="message" role="status" aria-live="polite">6個の目標をすべて通って、中央へ戻ろう。</div>
+        <p class="small">① 六角形をタップして選ぶ。② 進む方向を設定する。③「1手」または「自動再生」で進める。明るい点がエージェント、金色の印が目標です。</p>
+        <div>
+          <p class="sectionTitle">選択中のセル：<span id="selected">(0,0)</span></p>
+          <div id="directions" class="directionGrid" role="group" aria-label="選択セルの移動方向">
+            <button type="button" data-dir="0">→<span>0・東</span></button>
+            <button type="button" data-dir="1">↗<span>1・北東</span></button>
+            <button type="button" data-dir="2">↖<span>2・北西</span></button>
+            <button type="button" data-dir="3">←<span>3・西</span></button>
+            <button type="button" data-dir="4">↙<span>4・南西</span></button>
+            <button type="button" data-dir="5">↘<span>5・南東</span></button>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="step" type="button" class="primary">1手進める</button>
+          <button id="auto" type="button">自動再生</button>
+          <button id="demo" type="button">お手本を見る</button>
+          <button id="reset" type="button">最初から</button>
+        </div>
+        <p class="small">操作の結果はこの端末内で計算します。登録不要・通信不要。ゲームの規則は <a href="https://github.com/Sumuji-zkdwn/primitive-lean/blob/main/games/hex/HexGame.lean" target="_blank" rel="noopener noreferrer">Lean 4版</a> と同じ有限状態遷移です。</p>
+      </section>
+    </div>
+    <div class="footer">スマホ用表示はLean 4のゲーム規則をJavaScriptへ移植したものです。Leanの証明器そのものはブラウザでは実行していません。</div>
+  </main>
+  <script id="hex-engine">
+    (function(global) {
+      "use strict";
+      const DIRECTIONS = [[1,0],[1,-1],[0,-1],[-1,0],[-1,1],[0,1]];
+      const GOALS = [[1,0],[1,-1],[0,-1],[-1,0],[-1,1],[0,1]];
+      const key = (p) => p[0] + "," + p[1];
+      const inside = (p) => Number.isInteger(p[0]) && Number.isInteger(p[1]) &&
+        Math.abs(p[0]) <= 2 && Math.abs(p[1]) <= 2 && Math.abs(p[0] + p[1]) <= 2;
+      const CELLS = [];
+      for (let r=-2; r<=2; r++) for(let q=-2; q<=2; q++)
+        if(inside([q,r])) CELLS.push([q,r]);
+      const goalKeys = new Set(GOALS.map(key));
+      function initial() {
+        return {routes:Object.fromEntries(CELLS.map(p=>[key(p),0])),
+          position:[0,0],seen:[],moves:0,lost:false,won:false};
+      }
+      function edit(s,p,d) {
+        if (!inside(p) || !Number.isInteger(d) || d < 0) return s;
+        return {...s, routes:{...s.routes, [key(p)]:d%6}};
+      }
+      function step(s) {
+        if(s.lost || s.won) return s;
+        const d = s.routes[key(s.position)] || 0;
+        const vec = DIRECTIONS[d%6];
+        const next = [s.position[0]+vec[0],s.position[1]+vec[1]];
+        if(!inside(next)) return {...s, moves:s.moves+1,lost:true};
+        const nkey = key(next);
+        const seen = (goalKeys.has(nkey) && !s.seen.includes(nkey)) ? [nkey,...s.seen] : s.seen;
+        return {...s, position:next, seen:seen, moves:s.moves+1,
+          won:next[0]===0 && next[1]===0 && GOALS.every(p=>seen.includes(key(p)))};
+      }
+      function simulate(s,n) {
+        for(let i=0;i<n;i++) s=step(s);
+        return s;
+      }
+      function solution() {
+        let s = initial();
+        for(const [q,r,d] of [[1,0,2],[1,-1,3],[0,-1,4],[-1,0,5],[-1,1,0],[0,1,2]])
+          s=edit(s,[q,r],d);
+        return s;
+      }
+      global.HexCircuitEngine = Object.freeze({DIRECTIONS,GOALS,CELLS,key,inside,initial,edit,step,simulate,solution});
+    })(globalThis);
+  </script>
+  <script id="hex-ui">
+    (function() {
+      "use strict";
+      const E = globalThis.HexCircuitEngine;
+      const arrows = ["→","↗","↖","←","↙","↘"];
+      const board = document.getElementById("board");
+      const goals = document.getElementById("goals");
+      const moves = document.getElementById("moves");
+      const selectedLabel = document.getElementById("selected");
+      const message = document.getElementById("message");
+      const auto = document.getElementById("auto");
+      const stepButton = document.getElementById("step");
+      const directionButtons = Array.from(document.querySelectorAll("[data-dir]"));
+      let game=E.initial(), selected=[0,0], timer=null, budget=100;
+      function stop() { if(timer!==null) {clearInterval(timer);timer=null;} auto.textContent="自動再生"; }
+      function polygon(cx,cy,s) {
+        const points=[];
+        for(let i=0;i<6;i++) {const a=Math.PI/180*(60*i-90);points.push((cx+s*Math.cos(a)).toFixed(1)+","+(cy+s*Math.sin(a)).toFixed(1));}
+        return points.join(" ");
+      }
+      function render() {
+        goals.textContent=game.seen.length+" / 6";
+        moves.textContent=game.moves+" 手";
+        const d = game.routes[E.key(selected)];
+        selectedLabel.textContent="("+selected[0]+", "+selected[1]+") ・ "+arrows[d]+" "+d;
+        for(const btn of directionButtons) btn.setAttribute("aria-pressed",String(Number(btn.dataset.dir)===d));
+        if(game.won) message.textContent="クリア！ "+game.moves+"手で6個の目標を回りました。";
+        else if(game.lost) message.textContent="盤面の外へ出ました。最初から試そう。";
+        else if(timer!==null) message.textContent="進行中。自動再生を押すと停止します。";
+        else message.textContent="目標 "+game.seen.length+"/6。全部通ったら中央へ戻ろう。";
+        stepButton.disabled=game.won || game.lost;
+        const html=E.CELLS.map((p)=>{
+          const k=E.key(p), cx=230+48*Math.sqrt(3)*(p[0]+p[1]/2), cy=215+72*p[1];
+          const isGoal=E.GOALS.some(x=>E.key(x)===k);
+          const isSeen=game.seen.includes(k), current=E.key(game.position)===k, chosen=E.key(selected)===k;
+          const className="tile"+(isGoal?" goal":"")+(isSeen?" seen":"")+(chosen?" selected":"");
+          const mark=isGoal?'<circle class="marker" cx="'+(cx+20).toFixed(1)+'" cy="'+(cy-27).toFixed(1)+'" r="5"/>':"";
+          const token=current?'<circle class="token-halo" cx="'+cx+'" cy="'+(cy-11)+'" r="17"/><circle class="token" cx="'+cx+'" cy="'+(cy-11)+'" r="9"/>':"";
+          const dir=game.routes[k] || 0;
+          return '<g class="'+className+'" data-key="'+k+'" role="button" tabindex="0" aria-label="セル '+k+'、方向 '+dir+'">'+
+            '<polygon points="'+polygon(cx,cy,46)+'"/>'+mark+
+            '<text class="arrow" x="'+cx+'" y="'+(cy+9)+'">'+arrows[dir]+'</text>'+
+            '<text class="coordinate" x="'+cx+'" y="'+(cy+32)+'">'+k+'</text>'+
+            token+'</g>';
+        }).join("");
+        board.innerHTML=html;
+        for(const tile of board.querySelectorAll(".tile")) {
+          tile.addEventListener("click",()=>choose(tile.dataset.key));
+          tile.addEventListener("keydown",event=>{if(event.key==="Enter" || event.key===" ") {event.preventDefault();choose(tile.dataset.key);}});
+        }
+      }
+      function choose(k) { selected=k.split(",").map(Number); render(); }
+      function advance() {
+        game=E.step(game);
+        if(game.won || game.lost) stop();
+        render();
+      }
+      function autoplay(maxSteps=100) {
+        if(timer!==null) {stop();render();return;}
+        if(game.won || game.lost) return;
+        budget=maxSteps;
+        timer=setInterval(()=>{
+          if(budget<=0 || game.won || game.lost) {stop();render();return;}
+          budget--;advance();
+          if(budget<=0) {stop();render();}
+        },440);
+        auto.textContent="一時停止";
+        render();
+      }
+      directionButtons.forEach(btn=>btn.addEventListener("click",()=>{
+        stop();game=E.edit(game,selected,Number(btn.dataset.dir));render();
+      }));
+      document.getElementById("step").addEventListener("click",()=>{stop();advance();});
+      auto.addEventListener("click",()=>autoplay(100));
+      document.getElementById("reset").addEventListener("click",()=>{stop();game=E.initial();selected=[0,0];render();});
+      document.getElementById("demo").addEventListener("click",()=>{stop();game=E.solution();selected=[0,0];render();autoplay(7);});
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -7,7 +7,7 @@ on:
       - 'games/hex/**'
       - '.github/workflows/hex-circuit.yml'
   push:
-    branches: [main, 'chatgpt/lean-hex-*']
+    branches: [main, 'chatgpt/lean-hex-*', 'chatgpt/hex-mobile-*']
     paths:
       - 'games/hex/**'
       - '.github/workflows/hex-circuit.yml'
@@ -60,3 +60,11 @@ jobs:
             | tee "$RUNNER_TEMP/hex-game-session.log"
           grep -q 'goals=6/6' "$RUNNER_TEMP/hex-game-session.log"
           grep -q 'YOU WIN' "$RUNNER_TEMP/hex-game-session.log"
+
+      - name: Prepare Node.js for the mobile port tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test mobile browser state machine against Lean examples
+        run: node --test games/hex/mobile.test.cjs
