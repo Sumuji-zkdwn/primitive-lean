@@ -231,6 +231,8 @@ main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesi
 main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
 main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	exact_import	Research.KKCartesianGammaTable
 main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
+main:lean/Research/KKCartesianSecondJet.lean	main:lean/Research/KKCartesianDerivative.lean	exact_import	Research.KKCartesianDerivative
+main:lean/Research/KKCartesianSecondJet.lean	main:lean/Research/KKCartesianDerivative.lean	unique_identifier_candidate	metric_good
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/Examples.lean	exact_import	Elastica.Examples
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/Examples.lean	unique_identifier_candidate	energy_affine
 main:lean/Research/OkanoharaTransport.lean	main:lean/Elastica/ExponentialWeight.lean	exact_import	Elastica.ExponentialWeight
