@@ -52,6 +52,21 @@ H(u,r)=q_w(u,r)+q_w(u,-r)
 \]
 satisfies \(H(0,0)=0\) and \(\partial_uH(0,0)=\pm2\ne0\). The implicit function theorem gives a small graph \(u=\alpha(r)\), with \(H(\alpha(r),r)=0\). For every sufficiently small \(r\ne0\), the distinct points \((\alpha(r),r)\) and \((\alpha(r),-r)\) have identical E-iterate squared reads, and their \(w\)-reads are opposite, hence have equal probabilities. QED.
 
+## Exhaustive classification of all three-word choices up to length four
+
+There are \(1+2+4+8+16=31\) distinct operation **words** of length at most four (including the empty word), and \(\binom{31}{3}=4495\) unordered triples of different words.
+
+| Rigorous classification | Triple count |
+| --- | ---: |
+| Two or more \(L\)-count residues occur: Theorem A rules out global injectivity | 4090 |
+| Same residue, but at least two pure \(E\)-iterates occur: Theorem B rules it out | 60 |
+| Same residue, without two pure \(E\)-iterates: **not classified** | 345 |
+| **Total** | **4495** |
+
+The two ruled-out rows are disjoint, so **4150 out of 4495** bounded-length triples fail globally by general theorems, irrespective of any grid experiments. The remaining 345 are **not** known to be injective; some may also fail.
+
+As an illustration of finite-grid overfitting, on the 25-point grid \(\{-2,-1,0,1,2\}^2\), **3718** of the 4495 triples distinguish every grid point. Yet **3414** of those apparently successful triples lie in the two mathematically ruled-out classes (3394 mixed-residue and 20 with two E-iterates). This count is about operation words, not distinct formulas; different words can have identical observations. It is a finite enumeration used only to illustrate the gap between finite and real-state guarantees.
+
 ## A misleading finite-grid success with a real collision
 
 Consider the triple \(\{\mathrm{id},E,L E L L\}\). All three words have the same \(L\)-count modulo 3, so Theorem A alone does not apply. Exact rational tests show that this triple distinguishes every state in each of the **49-, 169-, 441-, and 841-point** regular grids tested.
@@ -124,4 +139,4 @@ Run:
 python3 -B -m unittest discover -s tests -p 'test_siphon_three_probe_obstructions.py' -v
 python3 -B tools/verify_toolchain_modules.py --module Research.SiphonFourProbeRegularity
 \`\`\`
-The Python suite uses exact Fractions and dual numbers to check 4 minor identities, 6^? finite E/L linearizations, IVT endpoint signs, rank on rational grids, and the deceptive-grid example. Exact-head CI status and axiom audit must be checked independently.
+The Python suite uses exact Fractions and dual numbers to check 4 minor identities, 31 finite E/L word linearizations, IVT endpoint signs, rank on rational grids, and the deceptive-grid example. Exact-head CI status and axiom audit must be checked independently.
