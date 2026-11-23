@@ -84,3 +84,37 @@ wave=sum(s.diff(rootg*I4[mu,mu]*dphi[mu],c4[mu])
 zero(wave+s.sqrt(3)*H**(-s.Rational(3,2))*F2/4,'dilaton equation')
 print('PASS: all 4 weighted Maxwell equations and nonlinear dilaton equation')
 print('SCOPE: H>0 local patch; no global circle atlas or generic geometry formalization')
+
+
+# Additional NONAFFINE harmonic example: Hq=1+a*x*y, Aq=a*(y^2-x^2)*dz/2.
+# Hq has d_x d_y Hq=a!=0, so this is not an affine-harmonic witness.
+Hq=1+a*x*y
+Aq=s.Rational(1,2)*a*(y*y-x*x)
+G5q=s.diag(-1,Hq,Hq,Hq+Aq*Aq/Hq,1/Hq)
+G5q[3,4]=G5q[4,3]=Aq/Hq
+R5q,I5q,_=geometry(G5q,c5)
+for i,j in product(range(5),repeat=2):
+    zero(R5q[i,j],f'nonaffine 5D Ricci {i},{j}')
+G4q=s.diag(-Hq**(-s.Rational(1,2)),Hq**s.Rational(1,2),
+           Hq**s.Rational(1,2),Hq**s.Rational(1,2))
+Rq,Invq,_=geometry(G4q,c4)
+Avec=[s.S(0),s.S(0),s.S(0),Aq]
+Ph=s.sqrt(3)*s.log(Hq)/2
+Dph=s.Matrix([s.diff(Ph,u) for u in c4])
+Fq=s.Matrix(4,4,lambda i,j:s.diff(Avec[j],c4[i])-s.diff(Avec[i],c4[j]))
+Fqu=Invq*Fq*Invq
+Fq2=s.factor(sum(Fq[i,j]*Fqu[i,j] for i,j in product(range(4),repeat=2)))
+for i,j in product(range(4),repeat=2):
+    ff=sum(Fq[i,k]*Invq[k,l]*Fq[j,l] for k,l in product(range(4),repeat=2))
+    rhs=Dph[i]*Dph[j]/2+Hq**(-s.Rational(3,2))*(ff-G4q[i,j]*Fq2/4)/2
+    zero(Rq[i,j]-rhs,f'nonaffine 4D EMD {i},{j}')
+rootgq=s.sqrt(Hq)
+for nu in range(4):
+    div=sum(s.diff(rootgq*Hq**(-s.Rational(3,2))*Fqu[mu,nu],c4[mu])
+            for mu in range(4))
+    zero(div,f'nonaffine weighted Maxwell {nu}')
+waveq=sum(s.diff(rootgq*Invq[mu,mu]*Dph[mu],c4[mu]) for mu in range(4))/rootgq
+zero(waveq+s.sqrt(3)*Hq**(-s.Rational(3,2))*Fq2/4,'nonaffine scalar')
+zero(s.diff(Hq,x,y)-a,'nonzero harmonic-potential Hessian')
+zero(s.diff(Hq,x,x)+s.diff(Hq,y,y)+s.diff(Hq,z,z),'harmonic Hq')
+print('PASS: nonaffine H=1+a*x*y: 25 Ricci, 16 EMD Einstein, 4 Maxwell, scalar')
