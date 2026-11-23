@@ -7,6 +7,7 @@ on:
       - 'lean/Research/KKGeneralEMDResidual.lean'
       - 'lean/Research/KKNutCartesian.lean'
       - 'lean/Research/KKNutSmooth.lean'
+      - 'lean/Research/KKNutPatching.lean'
       - 'tools/check_kk_gh_universal_2jet.py'
       - 'tools/check_kk_emd_universal_jets.py'
       - 'tools/check_kk_nut_cartesian.py'
@@ -40,7 +41,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/Research
-          for mod in KKGeneralGHBoundary KKGeneralEMDResidual KKNutCartesian KKNutSmooth; do
+          for mod in KKGeneralGHBoundary KKGeneralEMDResidual KKNutCartesian KKNutSmooth KKNutPatching; do
             lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$mod.olean" "Research/$mod.lean" 2>&1 | tee "../kk-general-$mod-lean.log"
             if grep -E '(^|[[:space:]])(error:|sorryAx)' "../kk-general-$mod-lean.log"; then exit 1; fi
           done
@@ -52,7 +53,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
-          mods=('KKGeneralGHBoundary','KKGeneralEMDResidual','KKNutCartesian','KKNutSmooth')
+          mods=('KKGeneralGHBoundary','KKGeneralEMDResidual','KKNutCartesian','KKNutSmooth','KKNutPatching')
           imports=['import Research.'+m for m in mods]
           lines=[]; total=0
           for m in mods:
@@ -99,7 +100,7 @@ jobs:
           event=json.load(open(p)) if p and os.path.isfile(p) else {}
           print('source head SHA:',event.get('pull_request',{}).get('head',{}).get('sha','not pull_request'))
           PY
-          sha256sum lean/Research/KKGeneralGHBoundary.lean lean/Research/KKGeneralEMDResidual.lean lean/Research/KKNutCartesian.lean lean/Research/KKNutSmooth.lean tools/check_kk_gh_universal_2jet.py tools/check_kk_emd_universal_jets.py tools/check_kk_nut_cartesian.py > kk-general-sha256.txt
+          sha256sum lean/Research/KKGeneralGHBoundary.lean lean/Research/KKGeneralEMDResidual.lean lean/Research/KKNutCartesian.lean lean/Research/KKNutSmooth.lean lean/Research/KKNutPatching.lean tools/check_kk_gh_universal_2jet.py tools/check_kk_emd_universal_jets.py tools/check_kk_nut_cartesian.py > kk-general-sha256.txt
       - name: Upload verification artifacts
         if: always()
         uses: actions/upload-artifact@v6
