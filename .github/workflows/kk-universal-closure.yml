@@ -1,0 +1,98 @@
+name: KK universal geometry closure certificates
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKGHClosedForms.lean'
+      - 'lean/Research/KKEMDBlockGauge.lean'
+      - 'lean/Research/KKHopfGlobalAlgebra.lean'
+      - 'lean/Research/KKNutQuadraticPositive.lean'
+      - 'tools/check_kk_universal_closure.py'
+      - 'docs/verification/2026-11-23-kk-universal-closure.md'
+      - '.github/workflows/kk-universal-closure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  universal-closure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Set up repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Trust-zero compilation of four new modules and dependent nut algebra
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          for mod in KKNutCartesian KKGHClosedForms KKEMDBlockGauge KKHopfGlobalAlgebra KKNutQuadraticPositive; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$mod.olean" "Research/$mod.lean" 2>&1 | tee "../kk-closure-$mod-lean.log"
+            if grep -E '(^|[[:space:]])(error:|sorryAx)' "../kk-closure-$mod-lean.log"; then exit 1; fi
+          done
+      - name: Audit every named theorem and dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          mods = ('KKGHClosedForms','KKEMDBlockGauge','KKHopfGlobalAlgebra','KKNutQuadraticPositive')
+          imports = ['import Research.'+m for m in mods]
+          names=[]
+          for m in mods:
+              src=Path('Research/'+m+'.lean').read_text()
+              stripped=re.sub(r'/\-.*?\-/', '',src,flags=re.S)
+              assert not re.search(r'^\s*(axiom|sorry)\b',stripped,re.M),m
+              matches=re.findall(r'^theorem\s+(\w+)',stripped,re.M)
+              assert matches,m
+              names.extend((m,n) for n in matches)
+          Path('KKClosureAudit.lean').write_text(
+              '\n'.join(imports+['#print axioms '+m+'.'+n for m,n in names])+'\n')
+          Path('../kk-closure-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKClosureAudit.lean 2>&1 | tee ../kk-closure-audit.log
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          txt=Path('../kk-closure-audit.log').read_text()
+          count=int(Path('../kk-closure-count.txt').read_text())
+          assert 'sorryAx' not in txt
+          rows=re.findall(r'depends on axioms:\s*\[([^]]*)\]',txt)
+          none=txt.count('does not depend on any axioms')
+          assert len(rows)+none==count, (count,len(rows),none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for row in rows:
+              assert {x.strip() for x in row.split(',') if x.strip()}<=allowed,row
+          print('PASS: audited',count,'Lean theorems')
+          PY
+      - name: Run independent exact symbolic witness
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_universal_closure.py 2>&1 | tee kk-closure-sympy.log
+      - name: Retain evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-universal-closure
+          path: |
+            kk-closure-*-lean.log
+            kk-closure-audit.log
+            kk-closure-count.txt
+            kk-closure-sympy.log
+          if-no-files-found: warn
