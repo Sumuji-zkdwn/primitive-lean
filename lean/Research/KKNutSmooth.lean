@@ -44,13 +44,13 @@ theorem smooth_radialSq : ContDiff ℝ ⊤ radialSq := by
   have h1 := (smooth_coord 1).pow 2
   have h2 := (smooth_coord 2).pow 2
   have h3 := (smooth_coord 3).pow 2
-  simpa only [radialSq] using ((h0.add h1).add h2).add h3
+  simpa [radialSq] using ((h0.add h1).add h2).add h3
 
 /-- The warp is a polynomial smooth function. -/
 theorem smooth_warp (alpha : ℝ) : ContDiff ℝ ⊤ (warp alpha) := by
   have hconst : ContDiff ℝ ⊤ (fun _ : X4 => (1 : ℝ)) := contDiff_const
   have ha : ContDiff ℝ ⊤ (fun _ : X4 => alpha) := contDiff_const
-  simpa only [warp] using hconst.add (ha.mul smooth_radialSq)
+  simpa [warp] using hconst.add (ha.mul smooth_radialSq)
 
 /-- All four coefficients of the global Hopf one-form are smooth. -/
 theorem smooth_omegaComponent (i : Fin 4) :
@@ -83,7 +83,7 @@ theorem smooth_fibreCoefficient (alpha : ℝ) (ha : 0 ≤ alpha) :
   have hden := smooth_warp alpha
   have hnz : ∀ X : X4, warp alpha X ≠ 0 :=
     fun X => ne_of_gt (warp_pos alpha ha X)
-  simpa only [fibreCoefficient] using hnum.div hden hnz
+  simpa [fibreCoefficient] using hnum.div hden hnz
 
 /-- Every one of the sixteen Cartesian metric coefficients extends
 smoothly across X=0; the metric entries are rational with nowhere-zero
@@ -95,9 +95,9 @@ theorem all_metric_entries_smooth (alpha : ℝ) (ha : 0 ≤ alpha) :
   have hterm := ((smooth_fibreCoefficient alpha ha).mul
       (smooth_omegaComponent i)).mul (smooth_omegaComponent j)
   by_cases hij : i = j
-  · simpa only [metricEntry, if_pos hij] using (smooth_warp alpha).add hterm
+  · simpa [metricEntry, hij] using (smooth_warp alpha).add hterm
   · have hzero : ContDiff ℝ ⊤ (fun _ : X4 => (0 : ℝ)) := contDiff_const
-    simpa only [metricEntry, if_neg hij] using hzero.add hterm
+    simpa [metricEntry, hij] using hzero.add hterm
 
 /-- The centre of the completed Cartesian chart has Euclidean entries. -/
 theorem centre_metric (alpha : ℝ) (i j : Fin 4) :
