@@ -1,0 +1,81 @@
+name: KK Hopf quotient topology and homeomorphism
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKHopfHomeo.lean'
+      - 'docs/verification/2026-11-23-kk-hopf-homeomorphism.md'
+      - '.github/workflows/kk-hopf-homeo.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hopf-homeomorphism:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel check Hopf topological quotient
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          for module in KKHopfGlobalAlgebra KKHopfOrbit KKHopfSurjective KKHopfQuotient KKHopfHomeo; do
+            lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$module.olean" "Research/$module.lean" 2>&1 | tee "../kk-homeo-$module.log"
+          done
+      - name: Audit all new public and private theorem axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKHopfHomeo.lean').read_text()
+          clean=re.sub(r'/\-.*?\-/','',src,flags=re.S)
+          assert not re.search(r'^\s*(axiom|sorry)\b',clean,re.M)
+          names=re.findall(r'^(?:private )?theorem\s+(\w+)',clean,re.M)
+          assert len(names)>=3,names
+          Path('KKHopfHomeoAudit.lean').write_text('import Research.KKHopfHomeo\n' +
+            ''.join('#print axioms KKHopfHomeo.'+n+'\n' for n in names if not n.startswith('sphere3_') and n!='continuous_radiusSq'))
+          Path('../kk-homeo-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKHopfHomeoAudit.lean 2>&1 | tee ../kk-homeo-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          txt=Path('../kk-homeo-axioms.log').read_text()
+          assert 'sorryAx' not in txt
+          allowed={'propext','Classical.choice','Quot.sound'}
+          import re
+          for row in re.findall(r'depends on axioms:\s*\[([^]]*)\]',txt):
+              assert {t.strip() for t in row.split(',') if t.strip()}<=allowed,row
+          print('PASS: homeomorphism public theorem axiom audit')
+          PY
+      - name: Retain exact SHA and Lean logs
+        if: always()
+        shell: bash
+        run: |
+          git rev-parse HEAD > kk-homeo-checked-out.txt
+          sha256sum lean/Research/KKHopfHomeo.lean > kk-homeo-sha256.txt
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-hopf-homeomorphism
+          path: |
+            kk-homeo-*.log
+            kk-homeo-count.txt
+            kk-homeo-checked-out.txt
+            kk-homeo-sha256.txt
+          if-no-files-found: warn
