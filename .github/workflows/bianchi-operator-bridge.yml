@@ -1,0 +1,97 @@
+name: Bianchi from connection operators and Mathlib Levi-Civita
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/BianchiOperatorBridge.lean'
+      - 'tools/check_bianchi_operator_bridge.py'
+      - 'docs/verification/2026-11-22-levicivita-bianchi-operator-bridge.md'
+      - '.github/workflows/bianchi-operator-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  operator-bianchi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile base Bianchi and new Jacobi-to-Levi-Civita bridge
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/RicciFlatBianchiYangMills.olean Research/RicciFlatBianchiYangMills.lean 2>&1 | tee ../base-bianchi-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../base-bianchi-lean.log; then exit 1; fi
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/BianchiOperatorBridge.olean Research/BianchiOperatorBridge.lean 2>&1 | tee ../bridge-bianchi-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../bridge-bianchi-lean.log; then exit 1; fi
+      - name: Audit theorem axiom dependencies
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/BianchiOperatorBridge.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=12, names
+          first=src.index('namespace BianchiOperatorBridge')
+          second=src.index('namespace MathlibLeviCivitaBridge')
+          left=re.findall(r'^theorem\s+(\w+)',src[first:second],re.M)
+          right=re.findall(r'^theorem\s+(\w+)',src[second:],re.M)
+          assert len(left)+len(right)==len(names)
+          audit='import Research.BianchiOperatorBridge\n'
+          audit+=''.join('#print axioms BianchiOperatorBridge.'+n+'\n' for n in left)
+          audit+=''.join('#print axioms MathlibLeviCivitaBridge.'+n+'\n' for n in right)
+          Path('BianchiOperatorBridgeAudit.lean').write_text(audit)
+          Path('../bridge-bianchi-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 BianchiOperatorBridgeAudit.lean 2>&1 | tee ../bridge-bianchi-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../bridge-bianchi-audit.log').read_text()
+          n=int(Path('../bridge-bianchi-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for e in entries:
+              found=set(filter(None,(t.strip() for t in e.split(','))))
+              assert found<=allowed, found-allowed
+          print('Axiom-audited bridge declarations:',n)
+          PY
+      - name: Independent rational Jacobi and contraction oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_bianchi_operator_bridge.py 2>&1 | tee bridge-bianchi-python.log
+      - name: Upload proof-bound evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: bianchi-operator-bridge
+          path: |
+            base-bianchi-lean.log
+            bridge-bianchi-lean.log
+            bridge-bianchi-audit.log
+            bridge-bianchi-count.txt
+            bridge-bianchi-python.log
+          if-no-files-found: warn
