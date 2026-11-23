@@ -349,6 +349,45 @@ theorem exact_two_unique_gate_roundtrip_infimum
   · exact csInf_le hbounded hwitness
   · exact le_csInf hne hlow
 
+
+/-- Two explicit singleton gates in the interval [0,1], at 1/3 and 2/3. -/
+def exampleTwoGates (k : Fin 2) (w : ℝ) : Prop :=
+  if k = 0 then w = 1/3 else w = 2/3
+
+def exampleBits : Fin 2 → Bool := fun _ => false
+
+/-- A complete numeric Lean witness: the shortest cost to flip both bits
+from the midpoint and return is 2/3. For either one-bit flip alone the
+optimal cost is only 1/3, illustrating why max(single-bit costs) is not
+a valid multi-bit distance formula. -/
+theorem exact_two_bit_midpoint_example :
+    sInf {c : ℝ |
+      WeightedWalk exampleTwoGates id ((1/2 : ℝ), exampleBits)
+        ((1/2 : ℝ), flipBit (flipBit exampleBits (0 : Fin 2)) (1 : Fin 2)) c}
+      = (2/3 : ℝ) := by
+  have h := exact_two_unique_gate_roundtrip_infimum
+    exampleTwoGates id (monotone_id : Monotone (id : ℝ → ℝ))
+    (1/2) (1/3) (2/3)
+    (by norm_num) (by norm_num)
+    exampleBits (0 : Fin 2) (1 : Fin 2)
+    (by decide)
+    (by simp [exampleTwoGates])
+    (by simp [exampleTwoGates])
+    (by
+      intro w hw
+      simpa [exampleTwoGates] using hw)
+    (by
+      intro w hw
+      simpa [exampleTwoGates] using hw)
+  simpa only [id_eq] using (show
+    sInf {c : ℝ |
+      WeightedWalk exampleTwoGates id ((1/2 : ℝ), exampleBits)
+        ((1/2 : ℝ), flipBit (flipBit exampleBits (0 : Fin 2)) (1 : Fin 2)) c}
+      = (2/3 : ℝ) from by
+        convert h using 1 <;> norm_num)
+
+#print axioms exact_two_bit_midpoint_example
+
 #print axioms two_gate_sweep_realizable
 #print axioms exact_two_unique_gate_roundtrip_infimum
 
