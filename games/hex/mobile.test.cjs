@@ -80,3 +80,59 @@ test("every attempted finite move remains in-bounds or explicitly loses",()=>{
     if(result.lost) assert.deepEqual(asPlain(result.position),asPlain(p));
   }
 });
+
+
+test("real UI script starts, accepts tap controls and completes animated demo",()=>{
+  const ui=html.match(/<script id="hex-ui">([\s\S]*?)<\/script>/);
+  assert.ok(ui);
+  const all=new Map();
+  const make=(id)=>({
+    id,textContent:"",innerHTML:"",disabled:false,dataset:{},handlers:{},attrs:{},
+    addEventListener(kind,fn){this.handlers[kind]=fn;},
+    setAttribute(name,value){this.attrs[name]=value;},
+    querySelectorAll(){return [];}
+  });
+  function get(id) {
+    if(!all.has(id)) all.set(id,make(id));
+    return all.get(id);
+  }
+  const buttons=Array.from({length:6},(_,i)=>{
+    const el=make("dir"+i);el.dataset.dir=String(i);return el;
+  });
+  let currentTimer=null;
+  const scope={
+    globalThis:null,
+    document:{
+      getElementById:get,
+      querySelectorAll(q){return q==="[data-dir]"?buttons:[];}
+    },
+    setInterval(fn){currentTimer=fn;return 1;},
+    clearInterval(){currentTimer=null;}
+  };
+  scope.globalThis=scope;
+  vm.runInNewContext(engine[1],scope,{timeout:3000});
+  vm.runInNewContext(ui[1],scope,{timeout:3000});
+  assert.equal(get("goals").textContent,"0 / 6");
+  assert.equal(get("moves").textContent,"0 手");
+  assert.match(get("board").innerHTML,/data-key="0,0"/);
+
+  get("demo").handlers.click();
+  assert.ok(currentTimer);
+  for(let i=0;i<7;i++){
+    const tick=currentTimer;
+    assert.ok(tick);
+    tick();
+  }
+  assert.equal(currentTimer,null);
+  assert.equal(get("goals").textContent,"6 / 6");
+  assert.equal(get("moves").textContent,"7 手");
+  assert.match(get("message").textContent,/クリア/);
+  assert.equal(get("step").disabled,true);
+
+  get("reset").handlers.click();
+  assert.equal(get("moves").textContent,"0 手");
+  buttons[1].handlers.click();
+  assert.equal(buttons[1].attrs["aria-pressed"],"true");
+  get("step").handlers.click();
+  assert.equal(get("moves").textContent,"1 手");
+});
