@@ -9,6 +9,7 @@ on:
       - 'docs/research/2026-11-23-laakso-doubling-pi-separation.md'
       - 'docs/research/laakso_doubling_PI_probe.py'
       - 'docs/research/LaaksoBallTransfer.lean'
+      - 'docs/research/LaaksoShellMass.lean'
       - '.github/workflows/laakso-doubling-pi-separation.yml'
   workflow_dispatch:
 
@@ -43,4 +44,6 @@ jobs:
           use-github-cache: true
       - name: Lean kernel checks the conditional doubling transfer
         working-directory: experiments/mobius_430
-        run: lake env lean ../../docs/research/LaaksoBallTransfer.lean
+        run: |
+          lake env lean ../../docs/research/LaaksoBallTransfer.lean
+          lake env lean ../../docs/research/LaaksoShellMass.lean
