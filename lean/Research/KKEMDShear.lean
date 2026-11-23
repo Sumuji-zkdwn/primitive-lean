@@ -59,4 +59,26 @@ theorem mixed_3 (R : Mat5) (a0 a1 a2 a3 : ℚ) :
       R 3 4 + a3 * R 4 4 := by
   norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ]
 
+
+/-- Embed the four base coordinates into the five-dimensional index. -/
+def up (i : Fin 4) : Fin 5 := ⟨i.val, Nat.lt_succ_of_lt i.isLt⟩
+
+def gaugeComponent (a0 a1 a2 a3 : ℚ) (i : Fin 4) : ℚ :=
+  if i=0 then a0 else if i=1 then a1 else if i=2 then a2 else a3
+
+/-- All 16 horizontal covariant tensor entries under a fibre shear.
+Together with the 4 mixed and vertical identities this gives the
+whole 25-component algebraic coordinate transformation law. -/
+theorem horizontal_all (R : Mat5) (a0 a1 a2 a3 : ℚ)
+    (i j : Fin 4) :
+    pullback R a0 a1 a2 a3 (up i) (up j) =
+      R (up i) (up j) +
+      gaugeComponent a0 a1 a2 a3 i * R 4 (up j) +
+      gaugeComponent a0 a1 a2 a3 j * R (up i) 4 +
+      gaugeComponent a0 a1 a2 a3 i *
+        gaugeComponent a0 a1 a2 a3 j * R 4 4 := by
+  fin_cases i <;> fin_cases j <;>
+    norm_num [pullback, shift, up, gaugeComponent,
+      Matrix.mul_apply, Fin.sum_univ_succ] <;> ring
+
 end KKEMDShear
