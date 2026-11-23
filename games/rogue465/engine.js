@@ -129,6 +129,21 @@
   }
   function moveOne(e,room,hero){
     const blocked=new Set(living(room).filter(x=>x!==e).map(x=>tile(x.x,x.y)));
+    // BSD-3-Clause rot.js A* is used when the vendored library is loaded.
+    // Standalone engine tests and text-only fallback retain the old BFS.
+    const rot=typeof globalThis!=="undefined"?globalThis.ROT:null;
+    if(rot?.Path?.AStar){
+      const path=[];
+      const passable=(x,y)=>(x===e.x&&y===e.y)||(x===hero.x&&y===hero.y)||
+        (free(room,x,y)&&!blocked.has(tile(x,y)));
+      const solver=new rot.Path.AStar(hero.x,hero.y,passable,{topology:4});
+      solver.compute(e.x,e.y,(x,y)=>path.push([x,y]));
+      if(path.length>1){
+        const [nx,ny]=path[1];
+        if(nx!==hero.x||ny!==hero.y){e.x=nx;e.y=ny;}
+      }
+      return;
+    }
     const src=tile(e.x,e.y),dest=tile(hero.x,hero.y),queue=[src],parent=Array(W*W).fill(-1);
     parent[src]=src;
     for(let i=0;i<queue.length;i++){
@@ -317,7 +332,38 @@
     return {roomCount:count,layerReachable:parity?12:6,parity,
       goal:s.vertex===3&&s.layer===1};
   }
+  // Official rot.js PreciseShadowcasting discovers walls, then stops vision
+  // behind them. Radius is deliberately kept small for tactical exploration.
+  function visibleTiles(s,radius=5){
+    const room=current(s),hero=s.hero,visible=new Set();
+    const record=(x,y)=>{
+      if(x>=0&&y>=0&&x<W&&y<W)visible.add(tile(x,y));
+    };
+    const rot=typeof globalThis!=="undefined"?globalThis.ROT:null;
+    if(rot?.FOV?.PreciseShadowcasting){
+      const fov=new rot.FOV.PreciseShadowcasting((x,y)=>free(room,x,y),{topology:4});
+      fov.compute(hero.x,hero.y,radius,(x,y)=>record(x,y));
+    }else{
+      // Text-only fallback: finite Bresenham rays, not the rot.js algorithm.
+      const ray=(x1,y1)=>{
+        let x0=hero.x,y0=hero.y,dx=Math.abs(x1-x0),dy=Math.abs(y1-y0);
+        const sx=x0<x1?1:-1,sy=y0<y1?1:-1;let err=dx-dy;
+        while(true){
+          record(x0,y0);
+          if(x0===x1&&y0===y1)break;
+          if(!(x0===hero.x&&y0===hero.y)&&!free(room,x0,y0))break;
+          const e2=err*2;
+          if(e2>-dy){err-=dy;x0+=sx;}
+          if(e2<dx){err+=dx;y0+=sy;}
+        }
+      };
+      for(let y=0;y<W;y++)for(let x=0;x<W;x++)
+        if(Math.abs(x-hero.x)+Math.abs(y-hero.y)<=radius)ray(x,y);
+    }
+    record(hero.x,hero.y);
+    return [...visible].sort((a,b)=>a-b);
+  }
   return Object.freeze({W,DEPTH,MAX_SLOTS,EDGES,DIRS,installCatalog,catalog,theorem,relic,stats,hash,
     key,roomKey,current,tile,inside,free,rule481,sporesNext,manhattan,living,hasEnemies,
-    newGame,selectRelic,act,gates,progress});
+    newGame,selectRelic,act,gates,progress,visibleTiles});
 });
