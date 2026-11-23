@@ -2,7 +2,7 @@
   "counts": {
     "all_source_edges": 1383,
     "eligible_direct_edges": 428,
-    "nodes": 433,
+    "nodes": 434,
     "retained_pairs": 307,
     "transitive_pairs_removed": 114,
     "unique_eligible_pairs": 421,
@@ -1310,6 +1310,7 @@
     "main:lean/Research/SignedCycleCounterexample.lean",
     "main:lean/Research/SiphonCommonInvariant.lean",
     "main:lean/Research/SiphonFiniteDetermination.lean",
+    "main:lean/Research/SiphonFourProbeRegularity.lean",
     "main:lean/Research/SiphonInteraction.lean",
     "main:lean/Research/SiphonPolynomialE.lean",
     "main:lean/Research/SiphonPredictiveQuotient.lean",
@@ -1676,8 +1677,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "d2b50b256b1b8b236b12a611353aea78e5c8c26c10fdb99a3bc173fad2c24112",
-    "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
+    "graph_sha256": "7a90df7fd336121056ba7ac78f5b1e28bc32cd5e0c12abc44ff70db3a72c25aa",
+    "main_commit": "91bcd34b6196a62fad0db00013697bc935d76b3e",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
