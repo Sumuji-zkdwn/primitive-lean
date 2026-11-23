@@ -4,7 +4,7 @@
 
 https://raw.githack.com/Sumuji-zkdwn/primitive-lean/main/games/rogue465/play.html
 
-ゲームは1つの `play.html` に、CSS・JavaScript・465件の定理台帳を同梱した静的サイトです。ダウンロードしてローカルに開いても動くようにしています。別途 `index.html` + `engine.js` + `ui.js` + `theorems.json` の分割版も保管しています。
+ゲームは1つの `play.html` に、CSS・JavaScript・465件の定理台帳と **rot.jsの実行コード／BSDライセンス全文** を同梱した静的サイトです。オフラインでもロジック・操作が動きます。Kenneyのドット絵は外部CDNから読み込み、通信できない環境では従来の記号表示へ戻ります。別途 `index.html` + `engine.js` + `ui.js` + `theorems.json` の分割版も保管しています。
 
 ## 遊び方
 
@@ -18,6 +18,14 @@ https://raw.githack.com/Sumuji-zkdwn/primitive-lean/main/games/rogue465/play.htm
 - 部屋制圧：部屋ごとの定理遺物を3つから1つ選ぶ。最大5個、上限では交換先を指定する。
 - 結節点4：層0の部屋4で洞察2を払って**実際の符号付きLaakso接続**の平行辺3を反転する。到達可能な層が6状態から12状態へ増える。辺2と辺3は別の入口です。
 - 死亡：終了。新しい探索では開始シードが変わる。自動保存・再開あり。
+
+## フリー素材・オープンソースのゲームシステム
+
+- **[rot.js 2.2.1](https://github.com/ondras/rot.js) (BSD-3-Clause)**：敵の A* 経路探索と障害物で遮られる視界（PreciseShadowcasting）に使用。プログラムとライセンスをリポジトリに同梱しています。
+- **[Kenney — Tiny Dungeon](https://kenney.nl/assets/tiny-dungeon) (CC0 1.0)**：16×16ドット絵の主人公・敵・宝箱。改変・商用利用でき、元作者の意向に沿って出典を明記しています。
+- 画像は特定GitリビジョンのCC0公開ミラーから取得し、接続不良なら記号表示で遊べます。Leanで定義した世界法則、定理台帳と数値バランスはそのままです。
+
+配布物とライセンスの詳細は **[ASSETS.md](ASSETS.md)** を参照してください。
 
 ## 初期465件の正確な取り扱い
 
@@ -36,7 +44,7 @@ https://raw.githack.com/Sumuji-zkdwn/primitive-lean/main/games/rogue465/play.htm
 ## 検証
 
 ```sh
-node --test games/rogue465/engine.test.cjs games/rogue465/ui.test.cjs
+node --test games/rogue465/engine.test.cjs games/rogue465/ui.test.cjs games/rogue465/bot.test.cjs games/rogue465/free-assets.test.cjs
 node --check games/rogue465/engine.js
 node --check games/rogue465/ui.js
 
