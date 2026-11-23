@@ -42,19 +42,21 @@ private theorem sphere3_compactSpace : CompactSpace Sphere3 :=
 
 /-- Every coordinate polynomial of the Hopf map is continuous. -/
 theorem proj_continuous : Continuous proj := by
+  have hc (i : Fin 4) : Continuous (fun X : Sphere3 => X.1 i) :=
+    (continuous_apply i).comp continuous_subtype_val
   have h : Continuous (fun X : Sphere3 => (proj X).1) := by
     apply continuous_pi
     intro i
     fin_cases i
-    · change Continuous (fun X : Sphere3 => hopfX X.1)
-      unfold hopfX
-      fun_prop
-    · change Continuous (fun X : Sphere3 => hopfY X.1)
-      unfold hopfY
-      fun_prop
-    · change Continuous (fun X : Sphere3 => hopfZ X.1)
-      unfold hopfZ
-      fun_prop
+    · change Continuous (fun X : Sphere3 =>
+        2 * (X.1 0 * X.1 2 + X.1 1 * X.1 3))
+      exact continuous_const.mul (((hc 0).mul (hc 2)).add ((hc 1).mul (hc 3)))
+    · change Continuous (fun X : Sphere3 =>
+        2 * (X.1 0 * X.1 3 - X.1 1 * X.1 2))
+      exact continuous_const.mul (((hc 0).mul (hc 3)).sub ((hc 1).mul (hc 2)))
+    · change Continuous (fun X : Sphere3 =>
+        X.1 0 ^ 2 + X.1 1 ^ 2 - X.1 2 ^ 2 - X.1 3 ^ 2)
+      exact ((((hc 0).pow 2).add ((hc 1).pow 2)).sub ((hc 2).pow 2)).sub ((hc 3).pow 2)
   simpa using h.subtype_mk (fun X => (proj X).2)
 
 /-- Descent from the quotient is continuous by the quotient topology. -/
