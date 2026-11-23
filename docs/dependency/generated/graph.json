@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
+  "main_commit": "6a727967e46a2a3d94cf4a07aa9af35d7405081e",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1860,7 +1860,7 @@
         "Mathlib.Tactic",
         "Mathlib.LinearAlgebra.Matrix.Notation"
       ],
-      "sha256": "db059330871c69e8c1712297412ecec5e1f9b4924a32d52432cd982aba37e2cf"
+      "sha256": "5b06b5156892bb1ee856bc16c74ea229f4b10d4af79b15c15a2f2190ef4115c1"
     },
     {
       "id": "main:lean/Research/KKCartesianRicci.lean",
@@ -1877,7 +1877,7 @@
         "Research.KKCartesianGammaTable",
         "Mathlib.Tactic"
       ],
-      "sha256": "108ff58099f30cd4cfa87ea93a87bfd8d17a09d063bbdf7bb6c4c348733670e5"
+      "sha256": "92b69bd4ccf94213fefbd47b0c8f6514c25181421632906a02d6043313e121a4"
     },
     {
       "id": "main:lean/Research/KKRadialVacuumBridge.lean",
@@ -28019,28 +28019,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
+      "base_sha": "6a727967e46a2a3d94cf4a07aa9af35d7405081e",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
+      "base_sha": "6a727967e46a2a3d94cf4a07aa9af35d7405081e",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
+      "base_sha": "6a727967e46a2a3d94cf4a07aa9af35d7405081e",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "ae170b126349f4dd0ffd063c593e6d2f76c31133",
+      "base_sha": "6a727967e46a2a3d94cf4a07aa9af35d7405081e",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
