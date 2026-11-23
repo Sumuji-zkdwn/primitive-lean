@@ -877,8 +877,16 @@ theorem flipEvents_apply_nodup (events : List (ι × ℝ))
       by_cases hj : k = j
       · subst k
         simpa [flipEvents, flipBit, hnot] using hr
-      · have hjrev : j ≠ k := Ne.symm hj
-        simpa [flipEvents, flipBit, hj, hjrev] using hr
+      · have hmem : (k ∈ j :: tail.map Prod.fst) =
+            (k ∈ tail.map Prod.fst) := by
+          apply propext
+          simp [hj]
+        have hflip : flipBit bits j k = bits k := by
+          simp [flipBit, hj]
+        change flipEvents (flipBit bits j) tail k =
+          (if k ∈ j :: tail.map Prod.fst then !(bits k) else bits k)
+        rw [hmem]
+        simpa only [hflip] using hr
 
 /-- Finite selection of one legal gate for each *changed* Boolean
 label. No other bit is flipped. The events need not be sorted yet. -/
