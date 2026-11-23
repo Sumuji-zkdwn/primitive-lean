@@ -1,0 +1,62 @@
+{
+  "last_utc_day": "2026-11-23T08:00Z",
+  "rules": [
+    {
+      "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "d6c86e04a9127e40d5705f9d5642a0c69e1d010d5c5d2b28336bc00b09903bb0",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "d6c86e04a9127e40d5705f9d5642a0c69e1d010d5c5d2b28336bc00b09903bb0",
+      "head_sha": "6eb8ab433af174d4ad32d58a923f96f80b77b3e8",
+      "id": "mf_44eb42af533956b2",
+      "parent": null,
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "score": 103,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "chain_sha256": "95eed1174e9429ebed1e849fa35b5ea2987d0309602548b1afc55a303250b226",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "23725c5d164360dc0951ea9eb1142820d8cec710682f00f8fded72bfca07c5de",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23T08:00Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "23725c5d164360dc0951ea9eb1142820d8cec710682f00f8fded72bfca07c5de",
+      "head_sha": "c8155d4687c34fd8a0c9c0cd0e3dccdef15d2058",
+      "id": "mf_d6475da43efb10b6",
+      "parent": "mf_44eb42af533956b2",
+      "previous_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
+      "score": 119,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "prepend",
+          "slot": 1
+        }
+      ]
+    }
+  ],
+  "schema_version": 1
+}
