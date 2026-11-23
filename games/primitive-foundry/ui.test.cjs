@@ -62,15 +62,19 @@ function fakeDOM(){
  const panels=["inspect","research","documents"].map(x=>{
   const e=element("panel-"+x);e.dataset={panel:x};return e;
  });
+ const mobile=["factory","build","inspect","research","documents"].map(x=>{
+  const e=element("mobile-"+x);e.dataset={mobileScreen:x};return e;
+ });
  get("factory-tech").textContent=tech;
  get("factory-upgrades-json").textContent=upgrades;
  const doc={
+  body:get("body"),
   getElementById:get,
   querySelectorAll(s){return s==="[data-category]"?cats:
-    s==="[data-panel]"?panels:[];},
+    s==="[data-panel]"?panels:s==="[data-mobile-screen]"?mobile:[];},
   addEventListener(){}
  };
- return {get,doc,cats,panels};
+ return {get,doc,cats,panels,mobile};
 }
 
 test("standalone page embeds all UI, engine and source-backed tech tree without external scripts",()=>{
@@ -83,6 +87,11 @@ test("standalone page embeds all UI, engine and source-backed tech tree without 
  assert.match(play,/id="factory-upgrades-json"/);
  assert.match(index,/id="proof-graph"/);
  assert.match(index,/id="proof-search"/);
+ assert.match(index,/class="mobile-nav"/);
+ assert.match(index,/data-mobile-screen="research"/);
+ assert.match(index,/orientation:landscape/);
+ assert.match(index,/env\(safe-area-inset-bottom\)/);
+ assert.match(index,/interactive-widget=resizes-content/);
  assert.ok(play.includes(engine),"engine bundle must match checked source");
  assert.ok(play.includes(ui),"UI bundle must match checked source");
  assert.equal(JSON.parse(play.match(/<script type="application\/json" id="factory-tech">([\s\S]*?)<\/script>/)[1]).nodes.length,465);
@@ -160,4 +169,82 @@ test("UI tech buttons reference actual source nodes rather than placeholder theo
  assert.match(ui,/F\.researchProof/);
  assert.match(ui,/tech\.nodes/);
  assert.match(ui,/upgrades\.nodes/);
+});
+
+
+test("Android portrait bottom tabs expose all five screens and graph supports two-finger zoom",async()=>{
+ const f=fakeDOM(),storage=new Map(),ticks=[];
+ const sandbox={
+  PrimitiveFoundry:F,
+  window:{innerWidth:412,scrollTo(){},addEventListener(){}},
+  document:f.doc,globalThis:null,devicePixelRatio:2,
+  localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},
+  setInterval(fn){ticks.push(fn);return ticks.length;},
+  ResizeObserver:class {observe(){}},
+  requestAnimationFrame(fn){fn();},
+  confirm(){return true;},Date,Math,console
+ };
+ sandbox.globalThis=sandbox;
+ vm.runInNewContext(ui,sandbox,{timeout:6000});
+ await new Promise(resolve=>setTimeout(resolve,0));
+ assert.ok(f.doc.body.classList.contains("mobile-screen-factory"));
+ const tab=name=>f.mobile.find(el=>el.dataset.mobileScreen===name);
+ assert.equal(tab("factory").attrs["aria-current"],"page");
+ tab("build").handlers.click();
+ assert.ok(f.doc.body.classList.contains("mobile-screen-build"));
+ assert.equal(tab("build").attrs["aria-current"],"page");
+ assert.match(f.get("tools").innerHTML,/ベルト/);
+ const map=f.get("factory-canvas");
+ map.handlers.pointerdown({button:0,pointerId:1,clientX:250,clientY:220,preventDefault(){}});
+ map.handlers.pointerdown({button:0,pointerId:2,clientX:340,clientY:220,preventDefault(){}});
+ map.handlers.pointermove({pointerId:2,clientX:400,clientY:220,preventDefault(){}});
+ map.handlers.pointerup({pointerId:2,preventDefault(){}});
+ map.handlers.pointerup({pointerId:1,preventDefault(){}});
+ tab("research").handlers.click();
+ assert.ok(f.doc.body.classList.contains("mobile-screen-research"));
+ assert.match(f.get("proof-metrics").textContent,/465 解明/);
+ assert.match(f.get("proof-results").innerHTML,/data-proof-result/);
+ const proof=f.get("proof-graph");
+ proof.handlers.pointerdown({pointerId:11,clientX:200,clientY:90,preventDefault(){}});
+ proof.handlers.pointerdown({pointerId:12,clientX:290,clientY:90,preventDefault(){}});
+ proof.handlers.pointermove({pointerId:12,clientX:340,clientY:90,preventDefault(){}});
+ proof.handlers.pointerup({pointerId:12,clientX:340,clientY:90,preventDefault(){}});
+ proof.handlers.pointerup({pointerId:11,clientX:200,clientY:90,preventDefault(){}});
+ f.get("proof-search").handlers.input({target:{value:"曲率"}});
+ assert.match(f.get("proof-result-count").textContent,/465/);
+ tab("documents").handlers.click();
+ assert.ok(f.doc.body.classList.contains("mobile-screen-documents"));
+ assert.match(f.get("documents").innerHTML,/文書|設計書/);
+ tab("inspect").handlers.click();
+ assert.ok(f.doc.body.classList.contains("mobile-screen-inspect"));
+ assert.match(f.get("inspector").textContent,/マップ|工場/);
+ tab("factory").handlers.click();
+ assert.ok(f.doc.body.classList.contains("mobile-screen-factory"));
+ assert.equal(tab("research").attrs["aria-current"],"false");
+ assert.equal(ticks.length,1);
+});
+
+test("Android landscape direct build and research URLs remain separate from desktop layout",async()=>{
+ for(const view of ["build","research"]){
+  const f=fakeDOM(),timers=[];
+  const sandbox={
+   PrimitiveFoundry:F,
+   location:{search:"?view="+view},URLSearchParams,
+   window:{innerWidth:914,scrollTo(){},addEventListener(){}},
+   document:f.doc,globalThis:null,devicePixelRatio:2,
+   localStorage:{getItem(){return null;},setItem(){}},
+   setInterval(fn){timers.push(fn);return timers.length;},
+   ResizeObserver:class {observe(){}},confirm(){return true;},Date,Math,console
+  };
+  sandbox.globalThis=sandbox;
+  vm.runInNewContext(ui,sandbox,{timeout:6000});
+  await new Promise(resolve=>setTimeout(resolve,0));
+  assert.equal(f.mobile.filter(el=>el.attrs["aria-current"]==="page").length,1);
+  assert.ok(f.doc.body.classList.contains("mobile-screen-"+view));
+  if(view==="research"){
+   assert.match(f.get("proof-metrics").textContent,/629直接証明辺/);
+   assert.ok(f.doc.body.classList.contains("research-direct"));
+  }
+  assert.equal(timers.length,1);
+ }
 });

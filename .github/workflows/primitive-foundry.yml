@@ -8,7 +8,7 @@ on:
       - '.github/workflows/primitive-foundry.yml'
       - 'docs/dependency/data/source_edges.json'
   push:
-    branches: [main, 'chatgpt/primitive-foundry-*', 'chatgpt/foundry-465-*']
+    branches: [main, 'chatgpt/primitive-foundry-*', 'chatgpt/foundry-465-*', 'chatgpt/foundry-android-*']
     paths:
       - 'games/primitive-foundry/**'
       - '.github/workflows/primitive-foundry.yml'
@@ -100,6 +100,23 @@ jobs:
           test -s visual-evidence/research-mobile.png
           # An empty dark screenshot is only a few kilobytes; reject it.
           test "$(wc -c < visual-evidence/research-mobile.png)" -gt 10000
+          # Android portrait and landscape UI regressions (mobile Chrome dimensions).
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1500 --window-size=914,411 \
+            --screenshot=visual-evidence/android-landscape-factory.png "http://127.0.0.1:8765/play.html"
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1500 --window-size=914,411 \
+            --screenshot=visual-evidence/android-landscape-build.png "http://127.0.0.1:8765/play.html?view=build"
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1500 --window-size=914,411 \
+            --screenshot=visual-evidence/android-landscape-research.png "http://127.0.0.1:8765/play.html?view=research"
+          "$CHROME" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --hide-scrollbars \
+            --virtual-time-budget=1500 --window-size=412,915 \
+            --screenshot=visual-evidence/android-portrait-build.png "http://127.0.0.1:8765/play.html?view=build"
+          for image in android-landscape-factory android-landscape-build android-landscape-research android-portrait-build; do
+            test -s "visual-evidence/$image.png"
+            test "$(wc -c < "visual-evidence/$image.png")" -gt 10000
+          done
       - name: Preserve UI screenshots for review
         uses: actions/upload-artifact@v6
         with:

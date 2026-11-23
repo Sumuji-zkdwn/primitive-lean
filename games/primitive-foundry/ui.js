@@ -9,9 +9,8 @@
  const upgradeSource=$("factory-upgrades-json")?.textContent;
  const upgrades=upgradeSource?JSON.parse(upgradeSource):await (await fetch("./upgrades.json")).json();
  if(tech.nodes.length!==465||tech.summary.proofEdges!==629)throw Error("465定理の依存台帳が不正です");
- const deepLinkResearch=typeof globalThis.location?.search==="string"&&
-    typeof URLSearchParams==="function"&&
-    new URLSearchParams(globalThis.location.search).get("view")==="research";
+ const deepLinkView=typeof globalThis.location?.search==="string"&&
+    typeof URLSearchParams==="function"?new URLSearchParams(globalThis.location.search).get("view"):null;
  const knownTech=new Map(upgrades.nodes.map(t=>[t.id,t]));
  const proofById=new Map(tech.nodes.map(t=>[t.id,t]));
  const proofByName=new Map(tech.nodes.map(t=>[t.name,t]));
@@ -26,24 +25,27 @@
  }
  const tools={
   logistics:[
-   ["pan","調べる","⌖"],["belt","ベルト","»"],["miner","採掘機","◉"],
-   ["junction","分配器","⑂","composition"],["rotate","回転","↻"],["erase","撤去","×"]
+   ["pan","調べる","◯"],["belt","ベルト","»"],["miner","採掘機","◉"],
+   ["junction","分配器","Y","composition"],["rotate","回転","↻"],["erase","撤去","×"]
   ],
   production:[
    ["ironFurnace","鉄の炉","▤"],["copperFurnace","銅の炉","▤"],
-   ["press","プレス","⌑"],["winder","巻線機","◎"],
-   ["assembler","組立機","▣"],["lab","研究所","⌬"]
+   ["press","プレス","▰"],["winder","巻線機","◎"],
+   ["assembler","組立機","▣"],["lab","研究所","⚙"]
   ],
-  utility:[["generator","発電機","◈"],["pan","調べる","⌖"],["rotate","回転","↻"],["erase","撤去","×"]]
+  utility:[["generator","発電機","◈"],["pan","調べる","◯"],["rotate","回転","↻"],["erase","撤去","×"]]
  };
  const canvas=$("factory-canvas"),viewport=$("viewport"),ctx=canvas.getContext("2d");
  const proofCanvas=$("proof-graph"),proofCtx=proofCanvas?.getContext?.("2d")||null;
  if(!ctx){$("status").textContent="Canvas描画を利用できません。";return;}
  const STORAGE="primitive-foundry-save-v2";
  let world=null,category="logistics",tool="pan",dir=0,zoom=1;
- let pane="inspect",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ let pane="inspect",mobileScreen="factory",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ const mapPointers=new Map();let mapPinch=null;
+ const mobileScreens=["factory","build","inspect","research","documents"];
  let selectedProof=0,proofStatus="ready",proofSchool="all",proofSearch="";
- let graphMode="focus",graphShift={x:0,y:0},graphPointer=null;
+ let graphMode="focus",graphShift={x:0,y:0},graphPointer=null,graphZoom=1;
+ const graphPointers=new Map();let graphPinch=null;
  let graphHitboxes=[];
  let camX=typeof window!=="undefined"&&window.innerWidth<750?9.3:11.8,camY=8.4;
  let layoutW=700,layoutH=520,dpr=1;
@@ -62,7 +64,7 @@
  if(!Array.isArray(world.proofs))world.proofs=[];
  if(!Array.isArray(world.proofNames))world.proofNames=[];
  if(world.status==="paused")world.status="playing";
- const tipBase="タップで配置・調査。ベルトはドラッグで敷設。地図を動かすには「調べる」を選びドラッグ。";
+ const tipBase="タップして配置。ベルトはなぞって敷設、地図はドラッグ、2本指で拡大・縮小できます。";
  function announce(msg){
   $("status").textContent=msg;
  }
@@ -268,7 +270,7 @@
   tool=next;
   const def=Object.values(tools).flat().find(t=>t[0]===next);
   $("selected-tool").textContent=def?.[1]||"調べる";
-  $("tip").textContent=next==="pan"?(F.pendingRepairs(world).length?"光る欠損セルをタップして搬送路を補修。ドラッグで地図を移動。":"建物をタップして調査。ドラッグで地図を動かします。"):
+  $("tip").textContent=next==="pan"?(F.pendingRepairs(world).length?"光る欠損セルをタップして搬送路を補修。ドラッグで地図を移動。":"タップで調査・断線修理、ドラッグで移動。2本指で地図を拡大できます。"):
     next==="belt"?"画面をなぞるとベルトを連続敷設。向きも自動でつながります。":
     next==="rotate"?"向きを変えたい建物をタップしてください。":
     next==="erase"?"撤去したい装置をタップしてください。":
@@ -289,6 +291,20 @@
   document.querySelectorAll("[data-category]").forEach(el=>
     el.setAttribute("aria-selected",String(el.dataset.category===category)));
   $("build-direction").textContent="方向 "+F.DIR_SYM[dir];
+ }
+ function setMobileScreen(next,preserveDeepLink=false){
+  if(!mobileScreens.includes(next))return;
+  mobileScreen=next;
+  if(!preserveDeepLink)document.body?.classList?.remove("research-direct");
+  for(const name of mobileScreens)document.body?.classList?.toggle("mobile-screen-"+name,name===next);
+  document.querySelectorAll("[data-mobile-screen]").forEach(el=>
+    el.setAttribute("aria-current",el.dataset.mobileScreen===next?"page":"false"));
+  showPane(["research","documents","inspect"].includes(next)?next:"inspect");
+  if(next==="factory"||next==="build"){
+    if(typeof requestAnimationFrame==="function")requestAnimationFrame(()=>resize());
+    else resize();
+  }
+  if(typeof window!=="undefined"&&typeof window.scrollTo==="function")window.scrollTo(0,0);
  }
  function showPane(id){
   pane=id;
@@ -327,7 +343,7 @@
  }
  function selectProof(id){
   if(!proofById.has(id))return;
-  selectedProof=id;graphMode="focus";graphShift={x:0,y:0};
+  selectedProof=id;graphMode="focus";graphShift={x:0,y:0};graphZoom=1;
   renderProof(true);drawProofGraph();
  }
  function localProofPositions(){
@@ -349,8 +365,9 @@
  }
  function drawProofGraph(){
   if(!proofCtx||pane!=="research")return;
-  const rect=proofCanvas.getBoundingClientRect?.()||{width:340};
-  const w=Math.max(200,Math.min(900,rect.width||340)),h=220;
+  const rect=proofCanvas.getBoundingClientRect?.()||{width:340,height:220};
+  const w=Math.max(200,Math.min(900,rect.width||340));
+  const h=Math.max(150,Math.min(540,rect.height||220));
   const pixelRatio=Math.min(2,globalThis.devicePixelRatio||1);
   proofCanvas.width=Math.round(w*pixelRatio);
   proofCanvas.height=Math.round(h*pixelRatio);
@@ -360,8 +377,9 @@
   const points=overview?proofCoordinates:localProofPositions();
   const fullW=(tech.summary.maxDepth+1)*210+60;
   const fullH=Math.max(...[...byDepth.values()].map(arr=>arr.length))*26+100;
-  const scale=overview?Math.min((w-20)/fullW,(h-20)/fullH):
+  const baseScale=overview?Math.min((w-20)/fullW,(h-20)/fullH):
     Math.min(.85,Math.max(.6,(w-24)/470));
+  const scale=baseScale*graphZoom;
   const center=proofById.get(selectedProof);
   const xyCenter=overview?{x:fullW/2,y:fullH/2}:{x:0,y:0};
   const at=(pos)=>({
@@ -468,37 +486,61 @@
    proofSchool=e.target.value;renderProof(true);
   });
   $("proof-overview").addEventListener("click",()=>{
-   graphMode="overview";graphShift={x:0,y:0};drawProofGraph();
+   graphMode="overview";graphShift={x:0,y:0};graphZoom=1;drawProofGraph();
   });
   $("proof-center").addEventListener("click",()=>{
-   graphMode="focus";graphShift={x:0,y:0};drawProofGraph();
+   graphMode="focus";graphShift={x:0,y:0};graphZoom=1;drawProofGraph();
   });
   if(proofCanvas){
+   const distance=points=>Math.hypot(points[0].x-points[1].x,points[0].y-points[1].y);
    proofCanvas.addEventListener("pointerdown",e=>{
     proofPointerStop(e);
-    graphPointer={x:e.clientX,y:e.clientY,oldX:e.clientX,oldY:e.clientY,moved:false};
+    const id=e.pointerId??"pointer";
+    proofCanvas.setPointerCapture?.(e.pointerId);
+    graphPointers.set(id,{x:e.clientX,y:e.clientY});
+    if(graphPointers.size>=2){
+     const pair=[...graphPointers.values()].slice(0,2);
+     graphPinch={distance:Math.max(1,distance(pair)),zoom:graphZoom};
+     graphPointer=null;return;
+    }
+    graphPointer={id,x:e.clientX,y:e.clientY,oldX:e.clientX,oldY:e.clientY,moved:false};
    });
    proofCanvas.addEventListener("pointermove",e=>{
-    if(!graphPointer)return;
+    const id=e.pointerId??"pointer";
+    if(graphPointers.has(id))graphPointers.set(id,{x:e.clientX,y:e.clientY});
+    if(graphPointers.size>=2&&graphPinch){
+     const pair=[...graphPointers.values()].slice(0,2);
+     graphZoom=Math.max(.6,Math.min(9,graphPinch.zoom*distance(pair)/graphPinch.distance));
+     drawProofGraph();return;
+    }
+    if(!graphPointer||graphPointer.id!==id)return;
     const dx=e.clientX-graphPointer.oldX,dy=e.clientY-graphPointer.oldY;
-    if(Math.abs(e.clientX-graphPointer.x)+Math.abs(e.clientY-graphPointer.y)>7)graphPointer.moved=true;
+    if(Math.abs(e.clientX-graphPointer.x)+Math.abs(e.clientY-graphPointer.y)>8)graphPointer.moved=true;
     if(graphPointer.moved){graphShift.x+=dx;graphShift.y+=dy;drawProofGraph();}
     graphPointer.oldX=e.clientX;graphPointer.oldY=e.clientY;
    });
    proofCanvas.addEventListener("pointerup",e=>{
-    if(!graphPointer)return;
+    const id=e.pointerId??"pointer";
+    graphPointers.delete(id);
+    if(graphPinch){
+     if(graphPointers.size<2)graphPinch=null;
+     graphPointer=null;return;
+    }
+    if(!graphPointer||graphPointer.id!==id)return;
     const moved=graphPointer.moved;graphPointer=null;
     if(moved)return;
-    const box=proofCanvas.getBoundingClientRect?.()||{left:0,top:0,width:310,height:220};
+    const box=proofCanvas.getBoundingClientRect?.()||{left:0,top:0,width:340,height:220};
     const x=e.clientX-box.left,y=e.clientY-box.top;
-    let best=null,d=14;
+    let best=null,d=27; // Android fingertips, rather than a mouse-size 14px hitbox.
     for(const h of graphHitboxes){
      const dist=Math.hypot(x-h.x,y-h.y);
      if(dist<d){d=dist;best=h.id;}
     }
     if(best!==null)selectProof(best);
    });
-   proofCanvas.addEventListener("pointercancel",()=>graphPointer=null);
+   proofCanvas.addEventListener("pointercancel",()=>{
+    graphPointers.clear();graphPointer=null;graphPinch=null;
+   });
   }
  }
  function proofPointerStop(e){e.preventDefault?.();}
@@ -599,13 +641,40 @@
  canvas.addEventListener("pointerdown",e=>{
   if(e.button!==undefined&&e.button!==0)return;
   e.preventDefault();canvas.setPointerCapture?.(e.pointerId);
-  const p=xyOfEvent(e),w=screenToWorld(p.x,p.y);
-  touch={x:p.x,y:p.y,oldX:p.x,oldY:p.y,original:w,last:w,moved:false,mode:tool};
+  const id=e.pointerId??"pointer";
+  const p=xyOfEvent(e);
+  mapPointers.set(id,p);
+  if(mapPointers.size>=2){
+   const pair=[...mapPointers.values()].slice(0,2);
+   const mid={x:(pair[0].x+pair[1].x)/2,y:(pair[0].y+pair[1].y)/2};
+   const unit=tileSize();
+   mapPinch={distance:Math.max(1,Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y)),
+    startZoom:zoom,anchorX:camX+(mid.x-layoutW/2)/unit,anchorY:camY+(mid.y-layoutH/2)/unit};
+   touch=null;return;
+  }
+  const w=screenToWorld(p.x,p.y);
+  touch={pointerId:id,x:p.x,y:p.y,oldX:p.x,oldY:p.y,original:w,last:w,moved:false,mode:tool};
   if(tool==="belt"&&w)interact(w.x,w.y,dir);
  });
  canvas.addEventListener("pointermove",e=>{
-  if(!touch)return;e.preventDefault();
-  const p=xyOfEvent(e),dx=p.x-touch.oldX,dy=p.y-touch.oldY;
+  const id=e.pointerId??"pointer",p=xyOfEvent(e);
+  if(mapPointers.has(id))mapPointers.set(id,p);
+  if(mapPinch&&mapPointers.size>=2){
+   e.preventDefault();
+   const pair=[...mapPointers.values()].slice(0,2);
+   const dist=Math.max(1,Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y));
+   const mid={x:(pair[0].x+pair[1].x)/2,y:(pair[0].y+pair[1].y)/2};
+   zoom=Math.max(.5,Math.min(3.2,mapPinch.startZoom*dist/mapPinch.distance));
+   const unit=tileSize();
+   camX=mapPinch.anchorX-(mid.x-layoutW/2)/unit;
+   camY=mapPinch.anchorY-(mid.y-layoutH/2)/unit;
+   camX=Math.max(-1,Math.min(F.W+1,camX));
+   camY=Math.max(-1,Math.min(F.H+1,camY));
+   draw();return;
+  }
+  if(!touch||touch.pointerId!==id)return;
+  e.preventDefault();
+  const dx=p.x-touch.oldX,dy=p.y-touch.oldY;
   if(Math.abs(p.x-touch.x)+Math.abs(p.y-touch.y)>8)touch.moved=true;
   if(touch.mode==="belt"){
    const w=screenToWorld(p.x,p.y);
@@ -619,14 +688,20 @@
   touch.oldX=p.x;touch.oldY=p.y;
  });
  function endTouch(e){
-  if(!touch)return;
+  const id=e.pointerId??(touch?.pointerId??"pointer");
+  mapPointers.delete(id);
+  if(mapPinch){
+   if(mapPointers.size<2)mapPinch=null;
+   touch=null;return;
+  }
+  if(!touch||touch.pointerId!==id)return;
   const mode=touch.mode,moved=touch.moved,initial=touch.original;
   if(mode==="belt"){persist();renderInspector();}
   else if(!moved&&initial)interact(initial.x,initial.y);
   touch=null;
  }
  canvas.addEventListener("pointerup",endTouch);
- canvas.addEventListener("pointercancel",()=>{touch=null;persist();});
+ canvas.addEventListener("pointercancel",()=>{touch=null;mapPointers.clear();mapPinch=null;persist();});
  viewport.addEventListener("wheel",e=>{
   e.preventDefault();zoom=Math.max(.5,Math.min(3.2,zoom*(e.deltaY<0?1.12:.89)));draw();
  },{passive:false});
@@ -635,12 +710,14 @@
    category=el.dataset.category;renderPalette();
   }));
   document.querySelectorAll("[data-panel]").forEach(el=>el.addEventListener("click",()=>showPane(el.dataset.panel)));
+  document.querySelectorAll("[data-mobile-screen]").forEach(el=>
+    el.addEventListener("click",()=>setMobileScreen(el.dataset.mobileScreen)));
   $("research-shortcut").addEventListener("click",()=>{
-   showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
+   setMobileScreen("research");
+   if(typeof window!=="undefined"&&window.innerWidth>950)
+     $("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
   });
-  $("proof-back").addEventListener("click",()=>{
-   document.body?.classList?.remove("research-direct");showPane("inspect");
-  });
+  $("proof-back").addEventListener("click",()=>setMobileScreen("factory"));
   $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
   $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
   $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
@@ -684,11 +761,13 @@
   });
  }
  function start(){
-  setupProof();hook();setTool("pan");resize();refresh();
-  if(deepLinkResearch){
+  setupProof();hook();setTool("pan");
+  if(deepLinkView==="research"){
+   setMobileScreen("research",true);
    document.body?.classList?.add("research-direct");
    showPane("research");
-  }
+  }else setMobileScreen(mobileScreens.includes(deepLinkView)?deepLinkView:"factory");
+  resize();refresh();
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
   clock=setInterval(()=>{
