@@ -30,7 +30,7 @@ theorem inverse_shears (a0 a1 a2 a3 : ℚ) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [shift, unshift, Matrix.mul_apply,
-      Fin.sum_univ_succ] <;> ring
+      Fin.sum_univ_succ]
 
 def pullback (R : Mat5) (a0 a1 a2 a3 : ℚ) : Mat5 :=
   (shift a0 a1 a2 a3).transpose * R * shift a0 a1 a2 a3
@@ -42,21 +42,21 @@ theorem vertical_stable (R : Mat5) (a0 a1 a2 a3 : ℚ) :
 theorem mixed_0 (R : Mat5) (a0 a1 a2 a3 : ℚ) :
     pullback R a0 a1 a2 a3 0 4 =
       R 0 4 + a0 * R 4 4 := by
-  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ] <;> ring
+  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ]
 
 theorem mixed_1 (R : Mat5) (a0 a1 a2 a3 : ℚ) :
     pullback R a0 a1 a2 a3 1 4 =
       R 1 4 + a1 * R 4 4 := by
-  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ] <;> ring
+  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ]
 
 theorem mixed_2 (R : Mat5) (a0 a1 a2 a3 : ℚ) :
     pullback R a0 a1 a2 a3 2 4 =
       R 2 4 + a2 * R 4 4 := by
-  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ] <;> ring
+  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ]
 
 theorem mixed_3 (R : Mat5) (a0 a1 a2 a3 : ℚ) :
     pullback R a0 a1 a2 a3 3 4 =
       R 3 4 + a3 * R 4 4 := by
-  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ] <;> ring
+  norm_num [pullback, shift, Matrix.mul_apply, Fin.sum_univ_succ]
 
 end KKEMDShear
