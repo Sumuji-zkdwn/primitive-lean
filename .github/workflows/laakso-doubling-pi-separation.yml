@@ -9,6 +9,7 @@ on:
       - 'docs/research/2026-11-23-laakso-doubling-pi-separation.md'
       - 'docs/research/laakso_doubling_PI_probe.py'
       - 'docs/research/laakso_radial_finite_probe.py'
+      - 'docs/research/laakso_exact_walk_sweep.py'
       - 'docs/research/LaaksoBallTransfer.lean'
       - 'docs/research/LaaksoShellMass.lean'
       - 'docs/research/LaaksoSweepBounds.lean'
@@ -34,6 +35,7 @@ jobs:
         run: |
           python -B docs/research/laakso_doubling_PI_probe.py
           python -B docs/research/laakso_radial_finite_probe.py
+          python -B docs/research/laakso_exact_walk_sweep.py
 
   lean-transfer:
     runs-on: ubuntu-latest
