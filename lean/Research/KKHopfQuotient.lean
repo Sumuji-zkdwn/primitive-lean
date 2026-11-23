@@ -43,7 +43,7 @@ def fibreSetoid : Setoid Sphere3 where
             by intro X Y Z h1 h2; exact h1.trans h2⟩
 
 theorem fibre_iff_unit_orbit (X Y : Sphere3) :
-    fibreSetoid.Rel X Y ↔
+    fibreSetoid.r X Y ↔
       ∃ C S : ℝ, C^2+S^2=1 ∧ rotate C S X.1=Y.1 := by
   have hiff := KKHopfOrbit.same_hopf_iff_circle_orbit X.1 Y.1 X.2 Y.2
   constructor
@@ -80,7 +80,8 @@ theorem descent_bijective : Function.Bijective descent := by
   · intro b
     obtain ⟨X,hX⟩ := proj_surjective b
     refine ⟨Quotient.mk fibreSetoid X, ?_⟩
-    simpa [descent] using hX
+    change proj X = b
+    exact hX
 
 noncomputable def orbitEquivS2 : OrbitSpace ≃ Sphere2 :=
   Equiv.ofBijective descent descent_bijective
