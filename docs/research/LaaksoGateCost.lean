@@ -873,7 +873,7 @@ theorem flipEvents_apply_nodup (events : List (ι × ℝ))
       have hcons : (j :: tail.map Prod.fst).Nodup := by
         simpa using hdistinct
       obtain ⟨hnot,hnd⟩ := List.nodup_cons.mp hcons
-      have hr := ih hnd (flipBit bits j) k
+      have hr := ih hnd (flipBit bits j)
       by_cases hj : k = j
       · subst k
         simpa [flipEvents, flipBit, hnot] using hr
@@ -913,17 +913,22 @@ theorem required_finite_gate_events
     obtain ⟨k,hk,rfl⟩ := List.mem_map.mp he
     exact hgate k ((hneeded k).mp hk)
   have hdistinct : (raw.map Prod.fst).Nodup := by
-    simpa [raw,List.map_map] using hneedNodup
+    have hmap : raw.map Prod.fst = needed := by
+      simp [raw, List.map_map, Function.comp_def]
+    simpa only [hmap] using hneedNodup
   have hbits (k : Fin m) : flipEvents bits raw k = target k := by
     have h := flipEvents_apply_nodup raw hdistinct bits k
     have hm : k ∈ raw.map Prod.fst ↔ bits k ≠ target k := by
       simpa [raw,List.map_map] using hneeded k
     rw [h]
     by_cases hk : bits k = target k
-    · simp [hm, hk]
-    · have ht : !(bits k) = target k := by
-        cases hb : bits k <;> cases hc : target k <;> simp_all
-      simp [hm, hk, ht]
+    · have hno : k ∉ raw.map Prod.fst := by
+        intro hmem
+        exact (hm.mp hmem) hk
+      simpa [hno] using hk
+    · have hmem : k ∈ raw.map Prod.fst := hm.mpr hk
+      rw [if_pos hmem]
+      cases hb : bits k <;> cases ht : target k <;> simp_all
   exact ⟨raw,hvalid,funext hbits⟩
 
 /-- On any finite bit set, an individually admissible gate interval
