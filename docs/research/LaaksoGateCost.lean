@@ -1,4 +1,6 @@
 import Mathlib.Tactic
+import Mathlib.Data.List.Sort
+import Mathlib.Data.List.Perm.Basic
 
 /-!
 # A quantitative gate-crossing lower bound for arbitrary finite walks
@@ -737,6 +739,122 @@ theorem all_bits_exact_sweep_of_schedules
 
 
 #print axioms arbitrary_multibit_sweep_lower
+
+
+
+/-! ### Sorting any finite prescribed set of gate events
+
+The ordering relation uses only height, and may have ties. The stable
+mergeSort works for total transitive relations, with no uniqueness
+assumption on gate positions. Bit toggles commute, so permuting an
+event list leaves the resulting bit vector unchanged. -/
+
+/-- Gate flips commute, even for the same label (two flips cancel). -/
+theorem flipBit_commute (bits : ι → Bool) (i j : ι) :
+    flipBit (flipBit bits i) j = flipBit (flipBit bits j) i := by
+  funext k
+  by_cases hi : k = i <;> by_cases hj : k = j <;>
+    simp [flipBit, hi, hj]
+
+private theorem flipEvents_eq_foldl (bits : ι → Bool)
+    (events : List (ι × ℝ)) :
+    flipEvents bits events =
+      events.foldl (fun b e => flipBit b e.1) bits := by
+  induction events generalizing bits with
+  | nil => rfl
+  | cons e tail ih =>
+      rcases e with ⟨k,w⟩
+      change flipEvents (flipBit bits k) tail =
+        tail.foldl (fun b e => flipBit b e.1) (flipBit bits k)
+      exact ih (flipBit bits k)
+
+/-- Reordering a finite list of gate visits cannot change its net
+Boolean action. This does not assume distinct gates or labels. -/
+theorem flipEvents_perm (bits : ι → Bool)
+    {events reordered : List (ι × ℝ)}
+    (hperm : events.Perm reordered) :
+    flipEvents bits events = flipEvents bits reordered := by
+  rw [flipEvents_eq_foldl bits events,
+    flipEvents_eq_foldl bits reordered]
+  exact hperm.foldl_eq'
+    (fun a _ b _ state => flipBit_commute state a.1 b.1) bits
+
+def sortEventsByHeight (events : List (ι × ℝ)) : List (ι × ℝ) :=
+  events.mergeSort (fun a b => decide (a.2 ≤ b.2))
+
+theorem sortEventsByHeight_perm (events : List (ι × ℝ)) :
+    (sortEventsByHeight events).Perm events := by
+  exact List.mergeSort_perm _ _
+
+theorem sortEventsByHeight_pairwise (events : List (ι × ℝ)) :
+    (sortEventsByHeight events).Pairwise
+      (fun a b => a.2 ≤ b.2) := by
+  have htrans (a b c : ι × ℝ)
+      (hab : decide (a.2 ≤ b.2) = true)
+      (hbc : decide (b.2 ≤ c.2) = true) :
+      decide (a.2 ≤ c.2) = true := by
+    simpa only [decide_eq_true_eq] using
+      (le_trans (by simpa only [decide_eq_true_eq] using hab)
+        (by simpa only [decide_eq_true_eq] using hbc))
+  have htotal (a b : ι × ℝ) :
+      decide (a.2 ≤ b.2) = true ∨
+      decide (b.2 ≤ a.2) = true := by
+    rcases le_total a.2 b.2 with h | h
+    · exact Or.inl (by simpa only [decide_eq_true_eq] using h)
+    · exact Or.inr (by simpa only [decide_eq_true_eq] using h)
+  have h := List.pairwise_mergeSort
+    (le := fun a b : ι × ℝ => decide (a.2 ≤ b.2))
+    htrans htotal events
+  simpa only [sortEventsByHeight, decide_eq_true_eq] using h
+
+private theorem ascending_of_pairwise
+    (G : ι → ℝ → Prop) (u : ℝ)
+    (events : List (ι × ℝ)) :
+    ∀ (l : ℝ), l ≤ u →
+      events.Pairwise (fun a b => a.2 ≤ b.2) →
+      (∀ e ∈ events, l ≤ e.2 ∧ e.2 ≤ u ∧ G e.1 e.2) →
+      AscendingEvents G u l events := by
+  induction events with
+  | nil =>
+      intro l hlu hp hvalid
+      exact AscendingEvents.nil l hlu
+  | cons head tail ih =>
+      intro l hlu hp hvalid
+      rcases head with ⟨k,w⟩
+      obtain ⟨hlw,hwu,hgate⟩ := hvalid (k,w) (by simp)
+      obtain ⟨hfirst,hpairTail⟩ := List.pairwise_cons.mp hp
+      have htailValid : ∀ e ∈ tail,
+          w ≤ e.2 ∧ e.2 ≤ u ∧ G e.1 e.2 := by
+        intro e he
+        have hs := hfirst e he
+        have hdata := hvalid e (by simp [he])
+        exact ⟨hs,hdata.2.1,hdata.2.2⟩
+      exact AscendingEvents.cons l w k tail hlw hgate
+        (ih w hwu hpairTail htailValid)
+
+/-- Any finite unsorted gate-event list staying in [l,u] admits an
+increasing-height realization, with unchanged net bit action. -/
+theorem exists_sorted_gate_schedule
+    (G : ι → ℝ → Prop) (l u : ℝ) (hlu : l ≤ u)
+    (bits : ι → Bool) (events : List (ι × ℝ))
+    (hvalid : ∀ e ∈ events, l ≤ e.2 ∧ e.2 ≤ u ∧ G e.1 e.2) :
+    ∃ sorted : List (ι × ℝ),
+      AscendingEvents G u l sorted ∧
+      flipEvents bits sorted = flipEvents bits events := by
+  let sorted := sortEventsByHeight events
+  have hp : sorted.Perm events := sortEventsByHeight_perm events
+  have hvalid' : ∀ e ∈ sorted,
+      l ≤ e.2 ∧ e.2 ≤ u ∧ G e.1 e.2 := by
+    intro e he
+    exact hvalid e ((List.Perm.mem_iff hp).mp he)
+  refine ⟨sorted, ?_, ?_⟩
+  · exact ascending_of_pairwise G u sorted l hlu
+      (sortEventsByHeight_pairwise events) hvalid'
+  · exact (flipEvents_perm bits hp).symm
+
+#print axioms flipBit_commute
+#print axioms flipEvents_perm
+#print axioms exists_sorted_gate_schedule
 
 
 #print axioms ascending_events_route
