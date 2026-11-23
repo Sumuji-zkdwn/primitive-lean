@@ -1,6 +1,6 @@
 # Tangent-probability observability: regular locus and a finite-word obstruction
 
-Date: 2026-11-23. Follow-up to draft PR #232. The differential and stability results below are **paper proofs**, not automatically Lean-certified. A separate module \`Research.SiphonTangentObservation\` attempts a kernel-checked proof of the prior five-read injectivity; verify its exact-head CI before claiming success.
+Date: 2026-11-23. Follow-up to draft PR #232. The differential and stability results below are **paper proofs**, not automatically Lean-certified. A separate module `Research.SiphonTangentObservation` attempts a kernel-checked proof of the prior five-read injectivity; verify its exact-head CI before claiming success.
 
 ## Maps and five probability reads
 
@@ -73,6 +73,13 @@ For the *particular* five-word signature, the pair \(z_t=(t,-t^3)\), \(w_t=(-t,t
 
 These are obstructions for **this sensor and words in these two fixed-point maps**, not impossibility results for an arbitrary probabilistic sensor, an affine offset, or an infinite adaptive observation scheme.
 
+
+## Theorem 3: at least three scalar tangent-probability reads are needed globally
+
+For any choice of **two** operation words, the corresponding map to \(\mathbb R^2\) is continuous and sends the origin to \((1,1)\). Both components of every observation satisfy \(h(q)\le1\), so the whole image lies in \((0,1]^2\). If this map were injective on \(\mathbb R^2\), invariance of domain would imply that its image is open in \(\mathbb R^2\); this contradicts the presence of its point \((1,1)\), which cannot have a neighborhood contained in \((0,1]^2\). Thus **two scalar reads can never be globally injective** with this sensor and common fixed point; one read also cannot be globally injective. Together with five-read sufficiency, this gives the rigorous bound \(3\le N_{\min}\le5\) for the minimal number of fixed-word readings (whether three or four suffice remains open).
+
+A cautionary finite-grid check: the **single** word \(E\,L\,E\), applied left to right, gives distinct squared first-coordinate readings at all 49 integer-grid states and all 169 half-integer-grid states in the accompanying regression. This does **not** contradict the theorem: separation on a finite grid is not global injectivity on the continuum.
+
 ## Frame dependence and limitations
 
 The normalized squared minors depend on the chosen coordinate frame. Without extra structure, the group \(\mathrm{GL}_D(\mathbb R)\) acts transitively on \(d\)-planes in \(\mathbb R^D\), so there is no nonconstant **scalar** invariant of a bare \(d\)-plane under every change of basis. Any useful distribution needs a specified sensor/frame/metric or a covariant transformation rule. The present construction does not prove the manifold hypothesis or recover an unknown manifold without extra assumptions.
@@ -81,13 +88,13 @@ The normalized squared minors depend on the chosen coordinate frame. Without ext
 
 Run:
 
-\`\`\`sh
+```sh
 python3 -B -m unittest discover -s tests -p 'test_siphon_distribution_regularity.py' -v
 python3 -B tools/verify_toolchain_modules.py --module Research.SiphonTangentObservation
-\`\`\`
+```
 
 The Python checker tests rational exact minors at 169 \((u,r)\) pairs, the quartic identity, 63 finite words fixing the origin, and the hard-to-distinguish state family. It does not substitute for the real proof.
 
-The Lean module \`SiphonTangentObservation\` has proof declarations \`five_square_reads_injective\` and \`five_probability_reads_injective\`; their certification depends on a successful pinned-Lean exact-head source/axiom audit. The rank classification, finite-word no-go, and compact stability remain paper proofs unless separately formalized.
+The Lean module `SiphonTangentObservation` has proof declarations `five_square_reads_injective` and `five_probability_reads_injective`; their certification depends on a successful pinned-Lean exact-head source/axiom audit. The rank classification, finite-word no-go, and compact stability remain paper proofs unless separately formalized.
 
 **Next task:** compare an alternate sensor with a nonvanishing first derivative at the origin or add a non-fixed-point operation, keeping the distinction between coordinate-dependent measurements and coordinate-free geometric invariants.
