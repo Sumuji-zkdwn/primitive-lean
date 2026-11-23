@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "source": "docs/dependency/data/source_edges.json",
+  "sourceKind": "aggregated kernel proof constant references by source file",
+  "warning": "Edges are file-level aggregates of proof references, NOT theorem-level dependency arrows. The unlock tree is a curated subgraph using all direct proof reference edges between these selected real modules; technology labels and effects are game design.",
+  "nodes": [
+    {
+      "id": "geometry",
+      "label": "測量の原理",
+      "description": "基礎地形を読み解く。",
+      "path": "lean/Elastica/Geometry.lean",
+      "cost": 0,
+      "upgrade": "survey",
+      "prerequisites": []
+    },
+    {
+      "id": "variation",
+      "label": "局所操作",
+      "description": "変化を計測する。",
+      "path": "lean/Elastica/Variation.lean",
+      "cost": 0,
+      "upgrade": "control",
+      "prerequisites": []
+    },
+    {
+      "id": "design",
+      "label": "製造設計",
+      "description": "製品と材料を定義する。",
+      "path": "linear_input/lean_check/Design.lean",
+      "cost": 0,
+      "upgrade": "design",
+      "prerequisites": []
+    },
+    {
+      "id": "calculus",
+      "label": "変換の基礎",
+      "description": "生産の連続工程を記述する。",
+      "path": "linear_input/lean_check/Calculus.lean",
+      "cost": 0,
+      "upgrade": "process",
+      "prerequisites": []
+    },
+    {
+      "id": "composition",
+      "label": "接続工学",
+      "description": "複数の搬送経路をまとめる。",
+      "path": "lean/Elastica/Composition.lean",
+      "cost": 2,
+      "upgrade": "junction",
+      "prerequisites": [
+        {
+          "id": "geometry",
+          "proofReferences": 6
+        },
+        {
+          "id": "variation",
+          "proofReferences": 2
+        }
+      ]
+    },
+    {
+      "id": "scaling",
+      "label": "高速搬送",
+      "description": "ベルト輸送を高速化する。",
+      "path": "lean/Elastica/Scaling.lean",
+      "cost": 3,
+      "upgrade": "fastBelt",
+      "prerequisites": [
+        {
+          "id": "geometry",
+          "proofReferences": 4
+        },
+        {
+          "id": "variation",
+          "proofReferences": 4
+        }
+      ]
+    },
+    {
+      "id": "reconstruction",
+      "label": "地質の再構築",
+      "description": "資源地図をすべて公開する。",
+      "path": "lean/Elastica/Reconstruction.lean",
+      "cost": 4,
+      "upgrade": "scanner",
+      "prerequisites": [
+        {
+          "id": "geometry",
+          "proofReferences": 15
+        },
+        {
+          "id": "variation",
+          "proofReferences": 1
+        }
+      ]
+    },
+    {
+      "id": "gradient",
+      "label": "熱処理",
+      "description": "精錬を高速化する。",
+      "path": "linear_input/lean_check/Gradient.inc",
+      "cost": 3,
+      "upgrade": "furnace",
+      "prerequisites": [
+        {
+          "id": "calculus",
+          "proofReferences": 2
+        },
+        {
+          "id": "design",
+          "proofReferences": 16
+        }
+      ]
+    },
+    {
+      "id": "gradientBound",
+      "label": "給電制御",
+      "description": "石炭1個あたりの発電量を倍増する。",
+      "path": "linear_input/lean_check/GradientBound.inc",
+      "cost": 6,
+      "upgrade": "power",
+      "prerequisites": [
+        {
+          "id": "calculus",
+          "proofReferences": 3
+        },
+        {
+          "id": "design",
+          "proofReferences": 6
+        },
+        {
+          "id": "gradient",
+          "proofReferences": 8
+        }
+      ]
+    },
+    {
+      "id": "globalConsequences",
+      "label": "量産制御",
+      "description": "組立工程を高速化する。",
+      "path": "linear_input/lean_check/GlobalConsequences.inc",
+      "cost": 8,
+      "upgrade": "assembler",
+      "prerequisites": [
+        {
+          "id": "design",
+          "proofReferences": 2
+        },
+        {
+          "id": "gradientBound",
+          "proofReferences": 3
+        }
+      ]
+    }
+  ]
+}

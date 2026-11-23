@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#131d26">
+<meta name="description" content="採掘、搬送、精錬、組立、研究。Leanの証明参照グラフを技術ツリーに使う工場自動化ゲーム。">
+<title>PRIMITIVE FOUNDRY — 携帯で動く工場</title>
+<style>
+:root{
+ color-scheme:dark;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;
+ --bg:#121b24;--paper:#1c2832;--paper2:#24333e;--line:#384955;
+ --text:#f2f2e9;--sub:#acb8bb;--muted:#768e98;--accent:#d6b879;
+ --cyan:#8cd2ce;--red:#e18b7f;--green:#a8d9ac;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100dvh;background:var(--bg);color:var(--text)}
+button{color:inherit;font:inherit;touch-action:manipulation;cursor:pointer}
+button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+button:disabled{opacity:.44;cursor:default}
+a{color:var(--cyan)}
+.app{max-width:1510px;margin:0 auto;padding:13px max(12px,env(safe-area-inset-right)) max(100px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
+.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:4px 0 12px;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px}
+.mark{width:39px;height:39px;display:grid;place-items:center;background:#273d49;border:1px solid #748f91;color:var(--accent);font-size:22px;border-radius:8px}
+.logo h1{font-size:clamp(19px,3.2vw,27px);letter-spacing:.085em;line-height:1;margin:0;font-weight:800}
+.logo p{font-size:10px;color:var(--sub);letter-spacing:.2em;margin:5px 0 0}
+.topright{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.topright button,.minor{border:1px solid #5a717c;background:#263842;border-radius:9px;font-size:12px;padding:9px 12px;min-height:36px}
+.topright button.primary{background:#41665e;border-color:#82b7a5;color:#e5fbeb}
+.topright button[aria-pressed=true]{background:#5d6850;border-color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:12px 0}
+.kpi{border:1px solid var(--line);background:#1b2933;border-radius:10px;padding:9px 11px;min-width:0}
+.kpi small{display:block;color:var(--sub);font-size:10px;letter-spacing:.035em;margin-bottom:4px}
+.kpi strong{display:block;color:var(--text);font-size:clamp(14px,2.6vw,20px);line-height:1.2;white-space:nowrap}
+.kpi strong.cyan{color:var(--cyan)}.kpi strong.gold{color:var(--accent)}
+.progress{background:#26343d;height:4px;border-radius:2px;margin-top:9px;overflow:hidden}
+.progress i{height:100%;display:block;background:var(--cyan);width:0;transition:width .2s}
+.main{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,350px);gap:12px;align-items:start}
+.canvaspanel{border:1px solid #50636a;border-radius:13px;background:#111a22;overflow:hidden}
+.canvashead{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:9px 11px;background:#202f39;border-bottom:1px solid #384d56}
+.canvashead .name{font-size:12px;color:#e6e8d7;font-weight:750;letter-spacing:.08em}
+.canvashead .detail{font-size:11px;color:var(--muted)}
+.zoom{display:flex;gap:6px}
+.zoom button{width:32px;height:30px;background:#2a3f48;border:1px solid #60747b;border-radius:7px;padding:0;font-size:20px}
+#viewport{position:relative;height:clamp(390px,57vh,670px);touch-action:none;overflow:hidden}
+#factory-canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.canvasoverlay{position:absolute;left:12px;bottom:13px;border:1px solid #50646acc;background:#101c25d9;padding:8px 10px;font-size:10px;border-radius:7px;pointer-events:none;color:#c0cdd0;line-height:1.6;max-width:64%}
+.canvasoverlay strong{color:var(--accent)}
+.canvasstamp{position:absolute;right:11px;bottom:13px;background:#17252ddb;color:#a9bec2;border-radius:5px;font:10px ui-monospace,monospace;padding:6px 9px;pointer-events:none}
+.deck{margin-top:10px;background:#1a2731;border:1px solid var(--line);border-radius:12px;padding:9px}
+.decktop{display:flex;justify-content:space-between;gap:7px;align-items:center;margin:0 0 8px}
+.decktop strong{font-size:11px;letter-spacing:.09em;color:#bfcfce}
+.decktop .direction{display:flex;gap:5px;align-items:center}
+.decktop .direction button{background:#30444d;border:1px solid #647e83;border-radius:7px;padding:5px 9px;font-size:13px}
+.tabs{display:flex;gap:5px;margin-bottom:8px}
+.tabs button{border:0;border-bottom:2px solid transparent;background:transparent;color:#a2b5b9;padding:7px 15px;font-size:12px;font-weight:700}
+.tabs button[aria-selected=true]{color:#e4e9d9;border-color:var(--accent);background:#263942}
+.tools{display:flex;gap:7px;overflow-x:auto;padding:3px 2px 8px;scrollbar-width:thin}
+.tool{flex:0 0 80px;min-height:77px;border-radius:9px;border:1px solid #4b606d;background:#243540;padding:8px 5px;display:flex;flex-direction:column;align-items:center;gap:4px;justify-content:center}
+.tool .pict{font:600 24px ui-monospace,monospace;color:#d8c292}
+.tool .caption{font-size:10px;color:#d4dddd;white-space:nowrap}
+.tool[aria-pressed=true]{border:2px solid #e0c77f;background:#38483e}
+.tool.locked{opacity:.35}
+.right{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel{background:#1b2a33;border:1px solid #435862;border-radius:12px;padding:14px}
+.panel h2{margin:0 0 10px;font-size:14px;letter-spacing:.07em}
+.panel h3{font-size:13px;margin:0 0 7px;color:#d2e3df}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sectionhead small{color:var(--muted);font-size:10px}
+.objective{font-size:13px;line-height:1.7;color:#d6ddda}
+.objective strong{color:#e2cb8c}
+.actionrow{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0 0}
+.actionrow button{background:#304650;border:1px solid #62808a;border-radius:8px;padding:10px 12px;font-size:11px;font-weight:750}
+.actionrow button.highlight{background:#456453;border-color:#8bbb96;color:#f1fff4}
+#status{border-left:2px solid var(--accent);padding:6px 0 6px 10px;color:#ccdcdb;font-size:11px;line-height:1.7;min-height:30px;margin-top:10px}
+.sideTabs{display:flex;border-bottom:1px solid #3e5059;margin-bottom:12px;gap:4px}
+.sideTabs button{border:0;border-bottom:2px solid transparent;background:transparent;padding:9px 11px;font-size:12px;color:#a9b9be;font-weight:750}
+.sideTabs button[aria-selected=true]{border-color:var(--cyan);color:#e8f5ee}
+.view{display:none}.view.active{display:block}
+.inspectTitle{font-size:16px;font-weight:750;margin:2px 0 9px}
+.inspector{font-size:11px;line-height:1.8;color:#b6cacc}
+.inspector strong{color:#f2e4c9}
+.inspector .item{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #324651;padding:5px 0}
+.techlist{display:flex;flex-direction:column;gap:8px;max-height:390px;overflow-y:auto}
+.technode{border:1px solid #425a65;border-radius:9px;background:#253741;padding:9px;display:grid;gap:6px}
+.technode.known{background:#26423c;border-color:#547e6c}
+.technode.available{border-color:#b1a472}
+.technode.locked{opacity:.7}
+.tech-top{display:flex;justify-content:space-between;align-items:center}
+.tech-top strong{font-size:12px}
+.tech-top small{font-size:10px;color:#b6c4c0}
+.technode p{font-size:11px;color:#aebcbe;margin:0;line-height:1.55}
+.prereqs{font-size:10px;color:#8fbab7}
+.technode button{border:1px solid #7b997d;border-radius:7px;background:#396554;padding:6px 10px;font-size:11px;justify-self:start}
+.technode button:disabled{background:#27383e}
+.technode details{font-size:10px;color:#9db0b4;overflow-wrap:anywhere}
+#documents{font-size:12px;color:#c0d3d2;line-height:1.8}
+#documents article{padding:11px 9px;border-bottom:1px solid #405762}
+#documents .docno{color:var(--accent);font:10px ui-monospace,monospace}
+#documents h3{margin:5px 0}
+.log{max-height:120px;overflow-y:auto;font-size:10px;color:#aababe;border-top:1px solid #354b56;padding-top:8px;margin-top:9px}
+.log div{padding:4px 0;border-bottom:1px solid #2b404a}
+.log div:first-child{color:#d9e8da}
+footer{margin:18px 2px;color:#7f999f;font-size:10px;line-height:1.8}
+.kbd{border:1px solid #64757b;border-radius:3px;padding:1px 4px;font:10px ui-monospace,monospace}
+@media(max-width:950px){
+ .main{grid-template-columns:1fr}
+ .right{display:grid;grid-template-columns:1fr}
+ #viewport{height:min(60vh,530px)}
+ .deck{position:sticky;bottom:calc(env(safe-area-inset-bottom) + 3px);z-index:10;box-shadow:0 4px 30px #050b0dbb;background:#1b2a32f2}
+ .app{padding-bottom:35px}
+}
+@media(max-width:550px){
+ .app{padding-left:7px;padding-right:7px}
+ .top{gap:6px}
+ .logo h1{font-size:19px}
+ .logo p{font-size:9px}
+ .topright button{font-size:10px;padding:8px}
+ .kpis{gap:5px;margin:7px 0}
+ .kpi{padding:8px 6px}
+ .kpi strong{font-size:13px}
+ .kpi small{font-size:9px}
+ .canvashead{padding:7px 8px}
+ #viewport{height:52dvh;min-height:310px}
+ .panel{padding:11px}
+ .tool{flex-basis:70px;min-height:67px}
+ .tool .pict{font-size:21px}
+ .deck{padding:7px}
+}
+@media(prefers-reduced-motion:reduce){.progress i{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="top">
+  <div class="logo">
+   <div class="mark" aria-hidden="true">⌬</div>
+   <div><h1>PRIMITIVE FOUNDRY</h1><p>AN EXPERIMENT IN AUTOMATION</p></div>
+  </div>
+  <div class="topright">
+   <button id="play" class="primary" type="button" aria-label="一時停止または再生">II 停止</button>
+   <button id="speed" type="button" aria-label="シミュレーション速度">速度 ×1</button>
+   <button id="help" type="button" aria-label="遊び方">遊び方</button>
+  </div>
+ </header>
+ <section class="kpis" aria-label="工場の状態">
+  <div class="kpi"><small>研究成果 / 目標</small><strong class="cyan mono" id="science-total">0 / 30</strong><div class="progress"><i id="science-bar"></i></div></div>
+  <div class="kpi"><small>研究に使える点</small><strong class="gold mono" id="science-stock">0</strong></div>
+  <div class="kpi"><small>電力ストック</small><strong class="mono" id="power">—</strong></div>
+  <div class="kpi"><small>搬送量</small><strong class="mono" id="transported">0</strong></div>
+ </section>
+ <main class="main">
+  <div>
+   <section class="canvaspanel">
+    <div class="canvashead">
+     <div><div class="name">工場地区 / FIELD 01</div><div class="detail">鉄鉱石・銅鉱石・石炭 ／ 未踏の東部地域</div></div>
+     <div class="zoom"><button id="research-shortcut" type="button" style="width:auto;padding:0 9px;font-size:11px" aria-label="技術研究を見る">研究</button><button id="zoom-out" type="button" aria-label="縮小">−</button><button id="zoom-in" type="button" aria-label="拡大">＋</button></div>
+    </div>
+    <div id="viewport">
+     <canvas id="factory-canvas" role="img" aria-label="工場マップ。タップで配置・調査、ドラッグでベルトを敷設、閲覧モードでドラッグして移動。"></canvas>
+     <div class="canvasoverlay"><strong id="selected-tool">調査モード</strong><div id="tip">建物をタップすると状態が分かります。ドラッグすると地図を動かせます。</div></div>
+     <div class="canvasstamp">MAP / 24 × 18</div>
+    </div>
+   </section>
+   <section class="deck" aria-label="建設ツール">
+    <div class="decktop">
+     <strong>建設パレット</strong>
+     <div class="direction">
+      <span class="mono" id="build-direction">方向 →</span>
+      <button id="rotate-tool" type="button" aria-label="配置方向を回転">↻ 回転</button>
+     </div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="建設カテゴリ">
+     <button type="button" data-category="logistics" aria-selected="true">物流</button>
+     <button type="button" data-category="production" aria-selected="false">製造</button>
+     <button type="button" data-category="utility" aria-selected="false">補助</button>
+    </div>
+    <div id="tools" class="tools" role="group" aria-label="工場の装置"></div>
+   </section>
+  </div>
+  <aside class="right">
+   <section class="panel">
+    <div class="sectionhead"><h2>生産目標</h2><small class="mono">PROJECT: SIGNAL</small></div>
+    <div class="objective">鉄鉱石と銅鉱石を加工して<strong>制御回路</strong>を製造し、研究所へ送り込む。<strong>30研究ポイント</strong>で最初の目標を達成します。</div>
+    <div class="actionrow">
+     <button type="button" id="demo" class="highlight">稼働ラインを再配置</button>
+     <button type="button" id="new-world">新しい地区</button>
+     <button type="button" id="clear-buildings">建物を全撤去</button>
+    </div>
+    <div id="status" role="status" aria-live="polite">試運転ラインは稼働しています。搬送を観察してみよう。</div>
+    <div id="log" class="log" aria-label="操業ログ"></div>
+   </section>
+   <section class="panel">
+    <div class="sideTabs" role="tablist" aria-label="情報と研究">
+     <button type="button" data-panel="inspect" aria-selected="true">詳細</button>
+     <button type="button" data-panel="research" aria-selected="false">研究</button>
+     <button type="button" data-panel="documents" aria-selected="false">文書</button>
+    </div>
+    <div class="view active" id="view-inspect">
+     <h3>選択した場所</h3>
+     <div id="inspector" class="inspector">マップの建物を選んでください。</div>
+     <div class="actionrow">
+      <button id="rotate-selected" type="button">向きを変える</button>
+      <button id="delete-selected" type="button">撤去</button>
+     </div>
+    </div>
+    <div class="view" id="view-research">
+     <h3>技術の依存関係</h3>
+     <p class="objective" style="font-size:11px">原始のソース間に実際にある証明参照から、技術の前提を構成しました。新技術には研究ポイントが必要です。</p>
+     <div id="technologies" class="techlist"></div>
+    </div>
+    <div class="view" id="view-documents">
+     <h3>回収した設計書</h3>
+     <div id="documents"></div>
+    </div>
+   </section>
+  </aside>
+ </main>
+ <footer>
+  独自の工場シミュレーションです。Factorioの素材・ゲームコードは使用していません。
+  研究の前提関係はprimitive-leanの証明参照をソース単位で集約したデータに由来しますが、ゲーム内の効果は設計上のものです。
+  <a href="https://github.com/Sumuji-zkdwn/primitive-lean/tree/main/games/primitive-foundry" target="_blank" rel="noopener">実装と検証</a>
+ </footer>
+</div>
+<script type="application/json" id="factory-tech">{
+  "schema": 1,
+  "source": "docs/dependency/data/source_edges.json",
+  "sourceKind": "aggregated kernel proof constant references by source file",
+  "warning": "Edges are file-level aggregates of proof references, NOT theorem-level dependency arrows. The unlock tree is a curated subgraph using all direct proof reference edges between these selected real modules; technology labels and effects are game design.",
+  "nodes": [
+    {
+      "id": "geometry",
+      "label": "測量の原理",
+      "description": "基礎地形を読み解く。",
+      "path": "lean/Elastica/Geometry.lean",
+      "cost": 0,
+      "upgrade": "survey",
+      "prerequisites": []
+    },
+    {
+      "id": "variation",
+      "label": "局所操作",
+      "description": "変化を計測する。",
+      "path": "lean/Elastica/Variation.lean",
+      "cost": 0,
+      "upgrade": "control",
+      "prerequisites": []
+    },
+    {
+      "id": "design",
+      "label": "製造設計",
+      "description": "製品と材料を定義する。",
+      "path": "linear_input/lean_check/Design.lean",
+      "cost": 0,
+      "upgrade": "design",
+      "prerequisites": []
+    },
+    {
+      "id": "calculus",
+      "label": "変換の基礎",
+      "description": "生産の連続工程を記述する。",
+      "path": "linear_input/lean_check/Calculus.lean",
+      "cost": 0,
+      "upgrade": "process",
+      "prerequisites": []
+    },
+    {
+      "id": "composition",
+      "label": "接続工学",
+      "description": "複数の搬送経路をまとめる。",
+      "path": "lean/Elastica/Composition.lean",
+      "cost": 2,
+      "upgrade": "junction",
+      "prerequisites": [
+        {
+          "id": "geometry",
+          "proofReferences": 6
+        },
+        {
+          "id": "variation",
+          "proofReferences": 2
+        }
+      ]
+    },
+    {
+      "id": "scaling",
+      "label": "高速搬送",
+      "description": "ベルト輸送を高速化する。",
+      "path": "lean/Elastica/Scaling.lean",
+      "cost": 3,
+      "upgrade": "fastBelt",
+      "prerequisites": [
+        {
+          "id": "geometry",
+          "proofReferences": 4
+        },
+        {
+          "id": "variation",
+          "proofReferences": 4
+        }
+      ]
+    },
+    {
+      "id": "reconstruction",
+      "label": "地質の再構築",
+      "description": "資源地図をすべて公開する。",
+      "path": "lean/Elastica/Reconstruction.lean",
+      "cost": 4,
+      "upgrade": "scanner",
+      "prerequisites": [
+        {
+          "id": "geometry",
+          "proofReferences": 15
+        },
+        {
+          "id": "variation",
+          "proofReferences": 1
+        }
+      ]
+    },
+    {
+      "id": "gradient",
+      "label": "熱処理",
+      "description": "精錬を高速化する。",
+      "path": "linear_input/lean_check/Gradient.inc",
+      "cost": 3,
+      "upgrade": "furnace",
+      "prerequisites": [
+        {
+          "id": "calculus",
+          "proofReferences": 2
+        },
+        {
+          "id": "design",
+          "proofReferences": 16
+        }
+      ]
+    },
+    {
+      "id": "gradientBound",
+      "label": "給電制御",
+      "description": "石炭1個あたりの発電量を倍増する。",
+      "path": "linear_input/lean_check/GradientBound.inc",
+      "cost": 6,
+      "upgrade": "power",
+      "prerequisites": [
+        {
+          "id": "calculus",
+          "proofReferences": 3
+        },
+        {
+          "id": "design",
+          "proofReferences": 6
+        },
+        {
+          "id": "gradient",
+          "proofReferences": 8
+        }
+      ]
+    },
+    {
+      "id": "globalConsequences",
+      "label": "量産制御",
+      "description": "組立工程を高速化する。",
+      "path": "linear_input/lean_check/GlobalConsequences.inc",
+      "cost": 8,
+      "upgrade": "assembler",
+      "prerequisites": [
+        {
+          "id": "design",
+          "proofReferences": 2
+        },
+        {
+          "id": "gradientBound",
+          "proofReferences": 3
+        }
+      ]
+    }
+  ]
+}</script>
+<script id="factory-engine">"use strict";
+/*
+ PRIMITIVE FOUNDRY: original deterministic factory simulation.
+ Mechanics: tile belts, backpressure, mining, processing, power, research.
+ Proof-derived TECH PREREQUISITES are in tech.json, a selected real file-level
+ proof-reference DAG. Upgrade effects are GAME DESIGN, not Lean theorems.
+ */
+(function(root,factory){
+ const game=factory();
+ if(typeof module==="object"&&module.exports)module.exports=game;
+ root.PrimitiveFoundry=game;
+})(globalThis,function(){
+ const W=24,H=18,SIZE=W*H;
+ const DX=[1,0,-1,0],DY=[0,1,0,-1],DIR_SYM=["→","↓","←","↑"];
+ const ITEMS={
+  ironOre:{label:"鉄鉱石",color:"#9ab6cd"},
+  copperOre:{label:"銅鉱石",color:"#d99b63"},
+  ironPlate:{label:"鉄板",color:"#c8d6e1"},
+  copperPlate:{label:"銅板",color:"#f6b06c"},
+  gear:{label:"歯車",color:"#c4c5bd"},
+  wire:{label:"導線",color:"#f1d47a"},
+  circuit:{label:"制御回路",color:"#81e1b4"}
+ };
+ const MACHINES={
+  belt:{label:"ベルト",hint:"資源を一方向に流す",period:2},
+  miner:{label:"採掘機",hint:"鉱脈上に配置。前方へ原鉱を出す",period:5,power:1},
+  ironFurnace:{label:"鉄の精錬炉",hint:"鉄鉱石1 → 鉄板1",period:5,power:1,
+    inputs:{ironOre:1},output:{ironPlate:1}},
+  copperFurnace:{label:"銅の精錬炉",hint:"銅鉱石1 → 銅板1",period:5,power:1,
+    inputs:{copperOre:1},output:{copperPlate:1}},
+  press:{label:"プレス機",hint:"鉄板2 → 歯車1",period:6,power:1,
+    inputs:{ironPlate:2},output:{gear:1}},
+  winder:{label:"巻線機",hint:"銅板1 → 導線2",period:5,power:1,
+    inputs:{copperPlate:1},output:{wire:2}},
+  assembler:{label:"組立機",hint:"歯車1 + 導線2 → 回路1",period:9,power:2,
+    inputs:{gear:1,wire:2},output:{circuit:1}},
+  lab:{label:"研究所",hint:"回路1 → 研究ポイント1",period:7,power:2,inputs:{circuit:1}},
+  generator:{label:"発電機",hint:"石炭鉱脈に置いて給電",period:9,power:0},
+  junction:{label:"分配器",hint:"受け取った部品を前方・右方へ交互に出す",period:1}
+ };
+ const BUILDABLE=Object.keys(MACHINES);
+ const DIRS=DX.map((dx,i)=>({dx,dy:DY[i]}));
+ const idx=(x,y)=>y*W+x;
+ const xy=i=>[i%W,Math.floor(i/W)];
+ const inside=(x,y)=>Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&x<W&&y>=0&&y<H;
+ const near=(i,dir)=>{
+  const [x,y]=xy(i); const X=x+DX[dir],Y=y+DY[dir];
+  return inside(X,Y)?idx(X,Y):-1;
+ };
+ const clone=x=>JSON.parse(JSON.stringify(x));
+ function makeTile(x,y){
+  const sample=(x*13+y*23+(x*y*7))%43;
+  const water=(x>20&&y>13)||(x<2&&y<3)||((x===20||x===21)&&y===15);
+  return {ground:water?"water":"floor",tone:sample,ore:null,qty:0,building:null};
+ }
+ function orePatch(world,cx,cy,type,amount=160){
+  for(const [dx,dy,scale] of [[0,0,1],[1,0,.72],[-1,0,.62],[0,1,.74],[0,-1,.67],[1,1,.54],[-1,-1,.45]]){
+   const x=cx+dx,y=cy+dy;
+   if(!inside(x,y))continue;
+   const cell=world.tiles[idx(x,y)];
+   if(cell.ground!=="water"){cell.ore=type;cell.qty=Math.round(amount*scale);}
+  }
+ }
+ function newMachine(kind,dir=0){
+  if(!MACHINES[kind])throw Error("unknown machine "+kind);
+  return {kind,dir:((dir%4)+4)%4,item:null,queue:[],stock:{},
+    progress:0,active:false,processed:0,alternate:0,blocked:false};
+ }
+ function newWorld(seed=1){
+  const tiles=[];
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)tiles.push(makeTile(x,y));
+  const w={schema:1,seed,tiles,tick:0,energy:180,energyMax:800,
+   science:0,totalScience:0,seen:0,documents:[],history:[],
+   unlocks:["geometry","variation","design","calculus"],
+   selected:null,generated:{},status:"playing",built:0,transported:0,
+   products:{},notes:["鉄鉱石 → 鉄板 → 歯車、銅鉱石 → 銅板 → 導線。組立機で制御回路を作り、研究所へ送ろう。"]};
+  orePatch(w,3,5,"ironOre",240);
+  orePatch(w,3,11,"copperOre",210);
+  orePatch(w,3,15,"coal",260);
+  orePatch(w,18,4,"ironOre",170);
+  orePatch(w,19,11,"copperOre",170);
+  orePatch(w,14,14,"coal",200);
+  return w;
+ }
+ function record(w,text){
+  if(w.notes[0]!==text)w.notes.unshift(text);
+  if(w.notes.length>12)w.notes.length=12;
+ }
+ function setMachine(w,x,y,kind,dir=0,force=false){
+  if(!inside(x,y)||!MACHINES[kind])return false;
+  const cell=w.tiles[idx(x,y)];
+  if(cell.ground==="water")return false;
+  if(!force&&cell.building)return false;
+  if(kind==="miner"&&(!cell.ore||cell.ore==="coal"||cell.qty<=0))return false;
+  if(kind==="generator"&&(cell.ore!=="coal"||cell.qty<=0))return false;
+  if(kind==="junction"&&!w.unlocks.includes("composition"))return false;
+  cell.building=newMachine(kind,dir);w.built++;return true;
+ }
+ function removeMachine(w,x,y){
+  if(!inside(x,y))return false;
+  const tile=w.tiles[idx(x,y)];if(!tile.building)return false;
+  tile.building=null;return true;
+ }
+ function rotate(w,x,y){
+  if(!inside(x,y)||!w.tiles[idx(x,y)].building)return false;
+  w.tiles[idx(x,y)].building.dir=(w.tiles[idx(x,y)].building.dir+1)%4;return true;
+ }
+ // The eastern ore field is found through a recovered document or a scanner.
+ function isDiscovered(w,x,y){
+  return x<=16||w.documents.includes("doc10")||w.unlocks.includes("reconstruction");
+ }
+ // Zero-cost construction is a deliberate sandbox accessibility choice.
+ function place(w,x,y,kind,dir=0){
+  if(w.status!=="playing"&&w.status!=="complete")return false;
+  if(!inside(x,y)||!isDiscovered(w,x,y))return false;
+  if(kind==="erase")return removeMachine(w,x,y);
+  if(kind==="rotate")return rotate(w,x,y);
+  return setMachine(w,x,y,kind,dir);
+ }
+ function supplyNeeds(m,item){
+  const recipe=MACHINES[m.kind];
+  if(m.kind==="junction")return m.queue.length<2;
+  if(!recipe?.inputs?.[item])return false;
+  const already=m.stock[item]||0;
+  return already<recipe.inputs[item]*3;
+ }
+ function inject(w,dest,item){
+  if(dest<0)return false;
+  const tile=w.tiles[dest],m=tile.building;
+  if(!m)return false;
+  if(m.kind==="belt"){
+   if(m.item!==null)return false;
+   m.item=item;return true;
+  }
+  if(m.kind==="junction"){
+   if(m.queue.length>=2)return false;
+   m.queue.push(item);return true;
+  }
+  if(!supplyNeeds(m,item))return false;
+  m.stock[item]=(m.stock[item]||0)+1;return true;
+ }
+ function recipeTime(w,kind){
+  const base=MACHINES[kind]?.period||1;
+  if((kind==="ironFurnace"||kind==="copperFurnace")&&w.unlocks.includes("gradient"))
+   return Math.ceil(base/2);
+  if(kind==="assembler"&&w.unlocks.includes("globalConsequences"))
+   return Math.ceil(base/2);
+  return base;
+ }
+ function outputItems(recipe){
+  const out=[];
+  if(recipe?.output)for(const [item,num] of Object.entries(recipe.output))
+   for(let i=0;i<num;i++)out.push(item);
+  return out;
+ }
+ function flushMachine(w,i){
+  const m=w.tiles[i].building;
+  if(!m||m.queue.length===0)return;
+  if(m.kind==="belt")return;
+  const target=near(i,m.dir);
+  if(m.kind==="junction"){
+   const first=(m.dir+(m.alternate===0?0:1))%4;
+   const other=(m.dir+(m.alternate===0?1:0))%4;
+   // If the first lane is blocked, try the other; do not destroy anything.
+   for(const d of [first,other])if(inject(w,near(i,d),m.queue[0])){
+    m.queue.shift();m.alternate^=1;m.blocked=false;return;
+   }
+   m.blocked=true;return;
+  }
+  if(inject(w,target,m.queue[0])){
+   m.queue.shift();m.blocked=false;
+  }else m.blocked=true;
+ }
+ // Belt step has snapshot capacity: one item per tile, no double movement in a tick.
+ function moveBelts(w){
+  if(!w.unlocks.includes("scaling")&&w.tick%2!==0)return;
+  const moves=[],planned=new Set();
+  for(let i=0;i<w.tiles.length;i++){
+   const b=w.tiles[i].building;
+   if(!b||b.kind!=="belt"||b.item===null)continue;
+   const target=near(i,b.dir);
+   if(target<0||planned.has(target))continue;
+   const t=w.tiles[target].building;
+   if(!t)continue;
+   if(t.kind==="belt"&&t.item!==null)continue;
+   if(t.kind==="junction"&&t.queue.length>=2)continue;
+   if(t.kind!=="belt"&&t.kind!=="junction"&&!supplyNeeds(t,b.item))continue;
+   planned.add(target);moves.push([i,target,b.item]);
+  }
+  for(const [src,dest,item] of moves){
+   const b=w.tiles[src].building;
+   if(!b||b.item!==item)continue;
+   if(inject(w,dest,item)){b.item=null;w.transported++;}
+  }
+ }
+ function canStart(m,inputs){
+  if(!inputs)return false;
+  return Object.entries(inputs).every(([item,count])=>(m.stock[item]||0)>=count);
+ }
+ function spendInputs(m,inputs){
+  for(const [item,count] of Object.entries(inputs))m.stock[item]-=count;
+ }
+ function completeCycle(w,m,kind){
+  if(kind==="lab"){
+   w.science++;w.totalScience++;w.products.science=(w.products.science||0)+1;
+   if([3,10,25].includes(w.totalScience)){
+    const id="doc"+w.totalScience;
+    if(!w.documents.includes(id)){
+     w.documents.push(id);
+     record(w,"古い設計書を発見：第"+w.documents.length+"断片。新しい研究分岐が読める。");
+    }
+   }
+   if(w.totalScience>=30&&w.status!=="complete"){
+    w.status="complete";
+    record(w,"初期目標達成！ 30研究ポイントの生産ラインが動いた。構築は続けられる。");
+   }
+  }else{
+   for(const item of outputItems(MACHINES[kind]))m.queue.push(item);
+   for(const [item,num] of Object.entries(MACHINES[kind].output||{}))
+    w.products[item]=(w.products[item]||0)+num;
+  }
+  m.processed++;
+ }
+ function stepOnce(w){
+  if(w.status==="paused")return w;
+  w.tick++;
+  // Coal vein generators burn fuel without belts, letting the player solve
+  // logistics first. Accumulated global power is constrained, never negative.
+  for(let i=0;i<w.tiles.length;i++){
+   const t=w.tiles[i],m=t.building;
+   if(!m||m.kind!=="generator"||t.ore!=="coal"||t.qty<=0)continue;
+   if(w.tick%MACHINES.generator.period===0&&w.energy<w.energyMax-60){
+    t.qty--;
+    w.energy=Math.min(w.energyMax,w.energy+
+      (w.unlocks.includes("gradientBound")?180:90));
+    w.products.burnedCoal=(w.products.burnedCoal||0)+1;
+    m.active=true;m.processed++;
+   }else m.active=false;
+  }
+  // Emit buffered results first, then advance packages in a two-phase belt step.
+  for(let i=0;i<w.tiles.length;i++)flushMachine(w,i);
+  moveBelts(w);
+  for(let i=0;i<w.tiles.length;i++){
+   const tile=w.tiles[i],m=tile.building;if(!m)continue;
+   if(m.kind==="miner"){
+    m.active=false;
+    if(m.queue.length>0||!tile.ore||tile.qty<=0){m.blocked=m.queue.length>0;continue;}
+    if(w.energy<1)continue;
+    w.energy--;m.active=true;m.progress++;
+    if(m.progress>=MACHINES.miner.period){
+     m.progress=0;tile.qty--;m.queue.push(tile.ore);m.processed++;
+     w.products[tile.ore]=(w.products[tile.ore]||0)+1;
+    }
+    continue;
+   }
+   const rule=MACHINES[m.kind];
+   if(!rule.inputs)continue;
+   // Stock can fill before a machine finishes, but only a finished output
+   // buffer can block the next cycle.
+   if(m.progress===0){
+    if(m.queue.length>0||!canStart(m,rule.inputs)){m.active=false;continue;}
+    spendInputs(m,rule.inputs);m.progress=1;
+   }
+   if(w.energy<rule.power){m.active=false;continue;}
+   w.energy-=rule.power;m.active=true;
+   if(m.progress>=recipeTime(w,m.kind)){
+    m.progress=0;completeCycle(w,m,m.kind);
+   }else m.progress++;
+  }
+  return w;
+ }
+ function advance(w,steps=1){
+  for(let i=0;i<Math.min(steps,100000);i++)stepOnce(w);
+  return w;
+ }
+ // Place a functioning demonstrator, then let the user tear down and optimize.
+ function demoBlueprint(w){
+  for(const t of w.tiles)t.building=null;
+  w.tick=0;w.energy=260;w.science=0;w.totalScience=0;w.status="playing";
+  w.products={};w.documents=[];w.transported=0;w.built=0;
+  const put=(x,y,kind,dir)=>setMachine(w,x,y,kind,dir,true);
+  put(3,15,"generator",0);
+  put(3,5,"miner",0);put(4,5,"ironFurnace",0);
+  for(const x of [5,6,7])put(x,5,"belt",0);
+  put(8,5,"press",0);
+  put(9,5,"belt",0);put(10,5,"belt",0);
+  put(11,5,"belt",1);put(11,6,"belt",1);
+  put(3,11,"miner",0);put(4,11,"copperFurnace",0);
+  for(const x of [5,6,7])put(x,11,"belt",0);
+  put(8,11,"winder",0);put(9,11,"belt",0);
+  put(10,11,"belt",3);for(const y of [10,9,8])put(10,y,"belt",3);
+  put(10,7,"belt",0);put(11,7,"assembler",0);
+  put(12,7,"belt",0);put(13,7,"belt",0);
+  put(14,7,"lab",0);
+  record(w,"動く実験ラインを配置した。搬送が詰まる場所を探し、複製・改造して生産量を伸ばそう。");
+  return w;
+ }
+ function techAvailable(w,tech){
+  return !w.unlocks.includes(tech.id)&&
+    tech.prerequisites.every(p=>w.unlocks.includes(p.id))&&w.science>=tech.cost;
+ }
+ function unlock(w,tech){
+  if(!techAvailable(w,tech))return false;
+  w.science-=tech.cost;w.unlocks.push(tech.id);
+  record(w,"研究成功：「"+tech.label+"」。工場の能力が変化した。");
+  return true;
+ }
+ function machineStatus(w,x,y){
+  if(!inside(x,y))return null;
+  const t=w.tiles[idx(x,y)],m=t.building;
+  if(!m)return {ground:t.ground,ore:t.ore,qty:t.qty};
+  const n=MACHINES[m.kind];
+  return {kind:m.kind,label:n.label,dir:m.dir,stock:clone(m.stock),
+   output:m.queue.slice(),item:m.item,progress:m.progress,processed:m.processed,
+   blocked:m.blocked,active:m.active,ore:t.ore,qty:t.qty,
+   hint:n.hint,cycle:recipeTime(w,m.kind)};
+ }
+ function counts(w){
+  const out={};for(const tile of w.tiles){
+   const type=tile.building?.kind;
+   if(type)out[type]=(out[type]||0)+1;
+  }return out;
+ }
+ function tip(w){
+  const kinds=counts(w);
+  if(!kinds.generator)return "発電機を石炭鉱脈に置こう。稼働には電気が必要だ。";
+  if(!kinds.miner)return "採掘機を鉱脈に置き、矢印の先へベルトをつなごう。";
+  if(!kinds.lab)return "生産した制御回路を研究所へ届けよう。";
+  if(w.energy<10)return "電気が足りない。発電機の下の石炭が枯れていないか確認。";
+  if(!w.totalScience)return "機械の出力方向、入力の品目、ベルトの曲がり角を点検しよう。";
+  return "流れが詰まるところを観察し、採掘・製錬・組立の台数を増やそう。";
+ }
+ return Object.freeze({W,H,SIZE,DX,DY,DIR_SYM,ITEMS,MACHINES,BUILDABLE,
+  idx,xy,near,inside,isDiscovered,newWorld,clone,setMachine,removeMachine,rotate,place,
+  inject,stepOnce,advance,demoBlueprint,techAvailable,unlock,machineStatus,counts,tip});
+});
+</script>
+<script id="factory-ui">"use strict";
+(async function(){
+ const F=globalThis.PrimitiveFoundry;
+ if(!F)throw Error("Factory engine not found");
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ const techSource=$("factory-tech")?.textContent;
+ const tech=techSource?JSON.parse(techSource):await (await fetch("./tech.json")).json();
+ const knownTech=new Map(tech.nodes.map(t=>[t.id,t]));
+ const tools={
+  logistics:[
+   ["pan","調べる","⌖"],["belt","ベルト","»"],["miner","採掘機","◉"],
+   ["junction","分配器","⑂","composition"],["rotate","回転","↻"],["erase","撤去","×"]
+  ],
+  production:[
+   ["ironFurnace","鉄の炉","▤"],["copperFurnace","銅の炉","▤"],
+   ["press","プレス","⌑"],["winder","巻線機","◎"],
+   ["assembler","組立機","▣"],["lab","研究所","⌬"]
+  ],
+  utility:[["generator","発電機","◈"],["pan","調べる","⌖"],["rotate","回転","↻"],["erase","撤去","×"]]
+ };
+ const canvas=$("factory-canvas"),viewport=$("viewport"),ctx=canvas.getContext("2d");
+ if(!ctx){$("status").textContent="Canvas描画を利用できません。";return;}
+ const STORAGE="primitive-foundry-save-v1";
+ let world=null,category="logistics",tool="pan",dir=0,zoom=1;
+ let pane="inspect",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ let camX=typeof window!=="undefined"&&window.innerWidth<750?9.3:11.8,camY=8.4;
+ let layoutW=700,layoutH=520,dpr=1;
+ function load(){
+  try{
+   const s=localStorage.getItem(STORAGE),j=JSON.parse(s);
+   if(j?.schema===1&&j.tiles?.length===F.SIZE&&Array.isArray(j.unlocks)&&
+      Array.isArray(j.documents)&&typeof j.tick==="number")return j;
+  }catch(_){}
+  return null;
+ }
+ function persist(){
+  try{localStorage.setItem(STORAGE,JSON.stringify(world));}catch(_){}
+ }
+ world=load()||F.demoBlueprint(F.newWorld(20261124));
+ if(world.status==="paused")world.status="playing";
+ const tipBase="タップで配置・調査。ベルトはドラッグで敷設。地図を動かすには「調べる」を選びドラッグ。";
+ function announce(msg){
+  $("status").textContent=msg;
+ }
+ function resize(){
+  const b=viewport.getBoundingClientRect();
+  layoutW=Math.max(100,b.width);layoutH=Math.max(100,b.height);
+  dpr=Math.min(2,globalThis.devicePixelRatio||1);
+  canvas.width=Math.max(1,Math.round(layoutW*dpr));
+  canvas.height=Math.max(1,Math.round(layoutH*dpr));
+  canvas.style.width=layoutW+"px";
+  canvas.style.height=layoutH+"px";
+  draw();
+ }
+ function tileSize(){return (layoutW<680?35:31)*zoom;}
+ function worldToScreen(x,y){
+  const unit=tileSize();
+  return [layoutW/2+(x-camX)*unit,layoutH/2+(y-camY)*unit];
+ }
+ function screenToWorld(sx,sy){
+  const unit=tileSize();
+  const x=Math.floor((sx-layoutW/2)/unit+camX);
+  const y=Math.floor((sy-layoutH/2)/unit+camY);
+  return F.inside(x,y)?{x,y}:null;
+ }
+ function drawPoly(points,color,stroke=null,width=1){
+  ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));
+  ctx.closePath();ctx.fillStyle=color;ctx.fill();
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke();}
+ }
+ function resourceSprite(tile,X,Y,s){
+  const ore=tile.ore;
+  if(!ore||tile.qty<=0)return;
+  const color=ore==="ironOre"?"#a0c3ce":ore==="copperOre"?"#d89469":"#505b6a";
+  ctx.fillStyle="#121d21aa";ctx.fillRect(X+2,Y+2,s-4,s-4);
+  for(let a=0;a<4;a++){
+   const n=(tile.tone*7+a*13+11)%17,k=(tile.tone*19+a*5)%17;
+   const px=X+s*(.13+n/26),py=Y+s*(.13+k/26),z=s*(.1+.015*(a%3));
+   drawPoly([[px,py-z],[px+z*.8,py-z*.1],[px+z*.5,py+z],[px-z*.6,py+z*.2]],
+    color,"#182a34",Math.max(.7,s*.018));
+  }
+ }
+ function itemDot(item,x,y,r){
+  const info=F.ITEMS[item]||{color:"#fff"};
+  ctx.fillStyle="#101b23";ctx.beginPath();ctx.arc(x,y,r+1,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle=info.color;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();
+ }
+ function machineIcon(m,X,Y,s,tick){
+  const colors={
+   miner:["#3f6172","#97c0c9"],ironFurnace:["#6b5347","#ffd2a3"],
+   copperFurnace:["#6b493c","#f4ad6e"],press:["#505d65","#cfd1c7"],
+   winder:["#5e5352","#e6b46b"],assembler:["#395f5a","#83d8b4"],
+   lab:["#3b5d70","#8fd8e5"],generator:["#58624b","#d4d999"],
+   junction:["#526c69","#aed7d1"]
+  };
+  const [base,bright]=colors[m.kind]||colors.press;
+  const cx=X+s/2,cy=Y+s/2;
+  ctx.fillStyle="#0c1922";ctx.fillRect(X+s*.08,Y+s*.1,s*.84,s*.8);
+  ctx.fillStyle=base;ctx.fillRect(X+s*.13,Y+s*.13,s*.74,s*.7);
+  ctx.strokeStyle="#85969a";ctx.lineWidth=Math.max(.7,s*.04);
+  ctx.strokeRect(X+s*.16,Y+s*.16,s*.68,s*.64);
+  const glow=m.active?bright:"#728a8d";
+  if(m.kind==="miner"){
+   ctx.strokeStyle=glow;ctx.lineWidth=s*.075;
+   ctx.beginPath();ctx.arc(cx,cy,s*.21,0,Math.PI*2);ctx.stroke();
+   for(let k=0;k<6;k++){
+    const a=(k/6)*Math.PI*2+(m.active?tick*.05:0);
+    ctx.beginPath();ctx.moveTo(cx+Math.cos(a)*s*.14,cy+Math.sin(a)*s*.14);
+    ctx.lineTo(cx+Math.cos(a)*s*.29,cy+Math.sin(a)*s*.29);ctx.stroke();
+   }
+   ctx.fillStyle=bright;ctx.fillRect(cx-s*.05,cy-s*.05,s*.1,s*.1);
+  }else if(m.kind==="ironFurnace"||m.kind==="copperFurnace"){
+   ctx.fillStyle="#171b21";ctx.fillRect(cx-s*.24,cy-s*.22,s*.48,s*.45);
+   ctx.fillStyle=glow;ctx.fillRect(cx-s*.18,cy-s*.12,s*.36,s*.26);
+   ctx.fillStyle="#25272a";ctx.fillRect(cx+s*.12,cy-s*.29,s*.16,s*.2);
+   ctx.fillStyle="#111c23";ctx.fillRect(cx-s*.3,cy+s*.16,s*.6,s*.07);
+  }else if(m.kind==="press"){
+   ctx.fillStyle=glow;ctx.fillRect(cx-s*.26,cy-s*.18,s*.52,s*.12);
+   ctx.fillRect(cx-s*.3,cy+s*.15,s*.6,s*.13);
+   ctx.fillStyle="#263842";ctx.fillRect(cx-s*.08,cy-s*.1,s*.16,s*.25);
+  }else if(m.kind==="winder"){
+   ctx.strokeStyle=glow;ctx.lineWidth=s*.09;
+   ctx.beginPath();ctx.arc(cx,cy,s*.18,0,Math.PI*2);ctx.stroke();
+   ctx.beginPath();ctx.arc(cx,cy,s*.08,0,Math.PI*2);ctx.stroke();
+   ctx.fillStyle="#182732";ctx.fillRect(cx-s*.25,cy+s*.2,s*.5,s*.07);
+  }else if(m.kind==="assembler"){
+   ctx.fillStyle="#142d30";ctx.fillRect(cx-s*.2,cy-s*.2,s*.4,s*.4);
+   ctx.strokeStyle=glow;ctx.lineWidth=s*.075;ctx.strokeRect(cx-s*.15,cy-s*.15,s*.3,s*.3);
+   for(const [dx,dy]of [[-.24,0],[.24,0],[0,-.24],[0,.24]]){
+    ctx.fillStyle=glow;ctx.fillRect(cx+dx*s-s*.045,cy+dy*s-s*.045,s*.09,s*.09);
+   }
+  }else if(m.kind==="lab"){
+   ctx.strokeStyle=glow;ctx.lineWidth=s*.065;
+   ctx.beginPath();ctx.arc(cx,cy,s*.23,0,Math.PI*2);ctx.stroke();
+   ctx.fillStyle="#102836";ctx.beginPath();ctx.arc(cx,cy,s*.12,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,s*.055,0,Math.PI*2);ctx.fill();
+  }else if(m.kind==="generator"){
+   ctx.fillStyle="#243330";ctx.fillRect(cx-s*.22,cy-s*.2,s*.44,s*.4);
+   ctx.strokeStyle=glow;ctx.lineWidth=s*.07;
+   for(let k=-1;k<=1;k++){
+    ctx.beginPath();ctx.moveTo(cx+k*s*.12,cy-s*.2);ctx.lineTo(cx+k*s*.12,cy+s*.2);ctx.stroke();
+   }
+   ctx.fillStyle=glow;ctx.fillRect(cx+s*.26,cy-s*.24,s*.06,s*.13);
+  }else{
+   ctx.strokeStyle=glow;ctx.lineWidth=s*.06;
+   ctx.beginPath();ctx.moveTo(cx-s*.2,cy);ctx.lineTo(cx,cy);ctx.lineTo(cx+s*.2,cy-s*.16);
+   ctx.moveTo(cx,cy);ctx.lineTo(cx+s*.2,cy+s*.16);ctx.stroke();
+  }
+  // Paint the actual machine's output direction independently of its icon.
+  const dx=F.DX[m.dir],dy=F.DY[m.dir];
+  ctx.fillStyle=m.blocked?"#f0a480":"#f5e4ad";
+  const px=cx+dx*s*.34,py=cy+dy*s*.34;
+  drawPoly([[px+dx*s*.11,py+dy*s*.11],
+    [px-dy*s*.065,py+dx*s*.065],
+    [px+dy*s*.065,py-dx*s*.065]],ctx.fillStyle);
+  if(m.queue.length)itemDot(m.queue[0],cx-s*.31,cy+s*.27,s*.075);
+  if(m.progress){
+   const ratio=Math.min(1,m.progress/(F.MACHINES[m.kind]?.period||1));
+   ctx.fillStyle="#13202c";ctx.fillRect(X+s*.14,Y+s*.87,s*.72,s*.05);
+   ctx.fillStyle=bright;ctx.fillRect(X+s*.14,Y+s*.87,s*.72*ratio,s*.05);
+  }
+ }
+ function beltSprite(m,X,Y,s,time){
+  ctx.fillStyle="#152329";ctx.fillRect(X+1,Y+1,s-2,s-2);
+  ctx.save();ctx.translate(X+s/2,Y+s/2);ctx.rotate(m.dir*Math.PI/2);
+  ctx.fillStyle="#263d46";ctx.fillRect(-s*.45,-s*.29,s*.9,s*.58);
+  ctx.fillStyle="#46636d";ctx.fillRect(-s*.43,-s*.3,s*.86,s*.07);ctx.fillRect(-s*.43,s*.23,s*.86,s*.07);
+  ctx.fillStyle="#c7ac76";
+  const offset=(time*.04)%(.38*s);
+  for(let k=-1;k<=2;k++){
+   const px=-s*.5+k*s*.38+offset;
+   ctx.beginPath();
+   ctx.moveTo(px-s*.06,-s*.15);ctx.lineTo(px+s*.07,0);ctx.lineTo(px-s*.06,s*.15);
+   ctx.lineWidth=Math.max(.6,s*.055);ctx.strokeStyle="#d4b97f";ctx.stroke();
+  }
+  if(m.item)itemDot(m.item,0,0,s*.15);
+  ctx.restore();
+ }
+ function draw(){
+  if(!world)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle="#10191f";ctx.fillRect(0,0,layoutW,layoutH);
+  const s=tileSize();
+  const ox=layoutW/2-camX*s,oy=layoutH/2-camY*s;
+  const firstX=Math.max(0,Math.floor(-ox/s)-1),lastX=Math.min(F.W-1,Math.ceil((layoutW-ox)/s));
+  const firstY=Math.max(0,Math.floor(-oy/s)-1),lastY=Math.min(F.H-1,Math.ceil((layoutH-oy)/s));
+  ctx.save();ctx.beginPath();ctx.rect(0,0,layoutW,layoutH);ctx.clip();
+  for(let y=firstY;y<=lastY;y++)for(let x=firstX;x<=lastX;x++){
+   const tile=world.tiles[F.idx(x,y)],X=ox+x*s,Y=oy+y*s;
+   const known=F.isDiscovered(world,x,y);
+   if(!known){
+    ctx.fillStyle=(x+y)%2?"#132028":"#111c24";ctx.fillRect(X,Y,s+.4,s+.4);
+    if((x+y)%5===0){
+     ctx.strokeStyle="#2b3d49";ctx.lineWidth=1;
+     ctx.beginPath();ctx.moveTo(X+s*.22,Y+s*.15);ctx.lineTo(X+s*.7,Y+s*.65);ctx.stroke();
+    }
+    continue;
+   }
+   if(tile.ground==="water"){
+    ctx.fillStyle=(tile.tone%3===0?"#183844":"#16303d");ctx.fillRect(X,Y,s+.3,s+.3);
+    ctx.strokeStyle="#27606d";ctx.lineWidth=s*.028;
+    ctx.beginPath();ctx.moveTo(X+s*.12,Y+s*.57);ctx.lineTo(X+s*.7,Y+s*.57);ctx.stroke();
+   }else{
+    ctx.fillStyle=tile.tone%7===0?"#2b3939":tile.tone%3===0?"#2e3b3a":"#293637";
+    ctx.fillRect(X,Y,s+.3,s+.3);
+    ctx.strokeStyle="#52605733";ctx.lineWidth=1;
+    ctx.strokeRect(X+.5,Y+.5,s-.7,s-.7);
+    if(tile.tone%7===2){
+     ctx.fillStyle="#9f9b6638";ctx.fillRect(X+s*.19,Y+s*.75,s*.08,s*.08);
+    }
+   }
+   resourceSprite(tile,X,Y,s);
+   if(tile.building){
+    const m=tile.building;
+    if(m.kind==="belt")beltSprite(m,X,Y,s,world.tick);
+    else machineIcon(m,X,Y,s,world.tick);
+   }
+   if(selected?.x===x&&selected?.y===y){
+    ctx.strokeStyle="#e6d09c";ctx.lineWidth=Math.max(1.5,s*.057);
+    ctx.strokeRect(X+1,Y+1,s-2,s-2);
+   }
+  }
+  // Frontier markings are gameplay information, not a UI cover obscuring controls.
+  if(!world.documents.includes("doc10")&&!world.unlocks.includes("reconstruction")){
+   const fx=ox+17*s;
+   if(fx>=0&&fx<layoutW){
+    ctx.save();ctx.setLineDash([5,5]);ctx.strokeStyle="#cead7799";ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(fx,0);ctx.lineTo(fx,layoutH);ctx.stroke();ctx.restore();
+    ctx.fillStyle="#c8b38c";ctx.font="600 10px system-ui";
+    ctx.fillText("未解読区域",Math.max(12,fx+8),18);
+   }
+  }
+  ctx.restore();
+ }
+ function setTool(next){
+  tool=next;
+  const def=Object.values(tools).flat().find(t=>t[0]===next);
+  $("selected-tool").textContent=def?.[1]||"調べる";
+  $("tip").textContent=next==="pan"?"建物をタップして調査。ドラッグで地図を動かします。":
+    next==="belt"?"画面をなぞるとベルトを連続敷設。向きも自動でつながります。":
+    next==="rotate"?"向きを変えたい建物をタップしてください。":
+    next==="erase"?"撤去したい装置をタップしてください。":
+    (F.MACHINES[next]?.hint||tipBase);
+  renderPalette();
+ }
+ function renderPalette(){
+  const list=tools[category];
+  $("tools").innerHTML=list.map(([id,label,icon,requires])=>{
+   const locked=requires&&!world.unlocks.includes(requires);
+   return '<button class="tool '+(locked?"locked":"")+'" data-tool="'+id+
+    '" type="button" aria-pressed="'+(tool===id)+'" '+(locked?"disabled":"")+
+    ' title="'+esc(locked?"要研究："+knownTech.get(requires)?.label:label)+'">'+
+    '<span class="pict">'+esc(icon)+'</span><span class="caption">'+esc(label)+'</span></button>';
+  }).join("");
+  $("tools").querySelectorAll("[data-tool]").forEach(el=>el.addEventListener("click",()=>
+    setTool(el.dataset.tool)));
+  document.querySelectorAll("[data-category]").forEach(el=>
+    el.setAttribute("aria-selected",String(el.dataset.category===category)));
+  $("build-direction").textContent="方向 "+F.DIR_SYM[dir];
+ }
+ function showPane(id){
+  pane=id;
+  for(const x of ["inspect","research","documents"])$("view-"+x).classList.toggle("active",x===id);
+  document.querySelectorAll("[data-panel]").forEach(el=>
+    el.setAttribute("aria-selected",String(el.dataset.panel===id)));
+ }
+ function renderInspector(){
+  const div=$("inspector");
+  if(!selected){div.textContent="工場の装置をタップすると、入力品目・出力方向・処理状況が分かります。";return;}
+  const {x,y}=selected,m=F.machineStatus(world,x,y);
+  if(!m){div.textContent="マップの外です。";return;}
+  const rows=[["座標",x+", "+y],["地形",m.ore?F.ITEMS[m.ore]?.label||"石炭":"建設地"]];
+  if(m.qty>0)rows.push(["埋蔵量",m.qty+""]);
+  if(m.kind){
+   rows.push(["装置",m.label],["向き",F.DIR_SYM[m.dir]],
+    ["状態",m.blocked?"搬送が詰まっています":m.active?"稼働中":"待機中"],
+    ["製造した個数",m.processed]);
+   for(const [item,count] of Object.entries(m.stock||{}))if(count>0)
+    rows.push(["投入 "+(F.ITEMS[item]?.label||item),count]);
+   if(m.output?.length)rows.push(["出力待ち",m.output.map(x=>F.ITEMS[x]?.label||x).join(" / ")]);
+   if(m.item)rows.push(["ベルト上",F.ITEMS[m.item]?.label||m.item]);
+   rows.push(["機械説明",m.hint]);
+  }
+  div.innerHTML='<div class="inspectTitle">'+esc(m.kind?m.label:"建設用地")+"</div>"+
+   rows.map(([k,v])=>'<div class="item"><span>'+esc(k)+'</span><strong>'+esc(v)+'</strong></div>').join("");
+  $("rotate-selected").disabled=!m.kind;
+  $("delete-selected").disabled=!m.kind;
+ }
+ function renderTech(){
+  $("technologies").innerHTML=tech.nodes.map(t=>{
+   const known=world.unlocks.includes(t.id);
+   const missing=t.prerequisites.filter(p=>!world.unlocks.includes(p.id));
+   const afford=F.techAvailable(world,t);
+   const label=known?"獲得済":missing.length?"要前提":"研究 "+t.cost+"点";
+   const prereqs=t.prerequisites.map(p=>knownTech.get(p.id)?.label).filter(Boolean);
+   const detail=t.prerequisites.reduce((n,p)=>n+p.proofReferences,0);
+   return '<article class="technode '+(known?"known":afford?"available":"locked")+'">'+
+    '<div class="tech-top"><strong>'+esc(t.label)+'</strong><small class="mono">'+
+    (known?"✓":"COST "+t.cost)+'</small></div>'+
+    '<p>'+esc(t.description)+'</p>'+
+    (prereqs.length?'<div class="prereqs">前提：'+esc(prereqs.join(" / "))+'</div>':"")+
+    '<button data-unlock="'+esc(t.id)+'" type="button" '+(known||!afford?"disabled":"")+'>'+esc(label)+'</button>'+
+    '<details><summary>数学的な出典（証明参照 '+detail+'件）</summary><div>'+esc(t.path)+
+    '</div><small>ファイル単位の参照で、定理間の完全なDAGではありません。</small></details></article>';
+  }).join("");
+  $("technologies").querySelectorAll("[data-unlock]").forEach(el=>el.addEventListener("click",()=>{
+   const t=knownTech.get(el.dataset.unlock);
+   if(F.unlock(world,t)){
+    announce("研究成功："+t.label+"。生産ラインの新機能が有効になりました。");
+    persist();refresh();
+   }
+  }));
+ }
+ const dossiers={
+  doc3:["封筒 A / 回路の痕跡","最初の制御回路に接続記録が残っている。工程は単独では動かない。物流と熱処理の研究が開ける。"],
+  doc10:["封筒 B / 東方の鉱脈","測量図の欠けた部分を補完した。東部地区に新しい鉄・銅鉱脈がある。新しい区画へ建設できる。"],
+  doc25:["封筒 C / 量産の設計","小さな工程を繋ぐ規則が、大規模な循環路へと変わる。生産の飽和と詰まりを改めて調べよ。"]
+ };
+ function renderDocuments(){
+  const docs=world.documents;
+  $("documents").innerHTML=docs.length?docs.map((id,i)=>{
+   const [title,desc]=dossiers[id]||[id,"未知の記録"];
+   return '<article><div class="docno">FILE '+String(i+1).padStart(2,"0")+
+    ' / RECOVERED</div><h3>'+esc(title)+'</h3><p>'+esc(desc)+'</p></article>';
+  }).join(""):'<p>まだ文書がありません。研究所で回路を3個処理すると、最初の設計書が見つかります。</p>';
+ }
+ function refresh(){
+  if(!world)return;
+  $("science-total").textContent=world.totalScience+" / 30";
+  $("science-bar").style.width=Math.min(100,world.totalScience/30*100)+"%";
+  $("science-stock").textContent=world.science;
+  $("power").textContent=Math.round(world.energy)+" / "+world.energyMax;
+  $("transported").textContent=world.transported;
+  $("play").textContent=world.status==="paused"?"▶ 再開":"II 停止";
+  $("speed").textContent="速度 ×"+speed;
+  $("log").innerHTML=world.notes.slice(0,5).map(x=>"<div>"+esc(x)+"</div>").join("");
+  if(world.status==="complete")$("status").textContent="目標達成。自動化は続けられます。次はより短時間で量産しよう。";
+  renderPalette();renderTech();renderDocuments();renderInspector();draw();
+ }
+ function select(x,y){selected={x,y};showPane("inspect");renderInspector();draw();}
+ function interact(x,y,direction=dir){
+  if(!F.inside(x,y))return;
+  if(tool==="pan"){select(x,y);return;}
+  if(!F.isDiscovered(world,x,y)){announce("この地区はまだ未解読です。設計書を回収するか測量技術を研究しよう。");return;}
+  const okay=F.place(world,x,y,tool,direction);
+  if(!okay){announce("そこには配置できません。採掘機は鉱脈、発電機は石炭鉱脈上に設置してください。");return;}
+  selected={x,y};persist();renderInspector();draw();
+ }
+ function drawBeltPath(prev,next){
+  if(!prev||!next)return;
+  let x=prev.x,y=prev.y;const sx=next.x,sy=next.y;
+  while(x!==sx||y!==sy){
+   const dx=sx===x?0:Math.sign(sx-x),dy=dx?0:Math.sign(sy-y);
+   const direction=F.DX.findIndex((n,i)=>n===dx&&F.DY[i]===dy);
+   if(direction<0)break;
+   const t=world.tiles[F.idx(x,y)];
+   if(t.building?.kind==="belt")t.building.dir=direction;
+   else if(!t.building)F.place(world,x,y,"belt",direction);
+   x+=dx;y+=dy;
+   if(F.inside(x,y)&&F.isDiscovered(world,x,y)&&!world.tiles[F.idx(x,y)].building)
+    F.place(world,x,y,"belt",direction);
+   if(!F.inside(x,y))break;
+  }
+ }
+ function xyOfEvent(e){
+  const r=canvas.getBoundingClientRect();
+  return {x:e.clientX-r.left,y:e.clientY-r.top};
+ }
+ canvas.addEventListener("pointerdown",e=>{
+  if(e.button!==undefined&&e.button!==0)return;
+  e.preventDefault();canvas.setPointerCapture?.(e.pointerId);
+  const p=xyOfEvent(e),w=screenToWorld(p.x,p.y);
+  touch={x:p.x,y:p.y,oldX:p.x,oldY:p.y,original:w,last:w,moved:false,mode:tool};
+  if(tool==="belt"&&w)interact(w.x,w.y,dir);
+ });
+ canvas.addEventListener("pointermove",e=>{
+  if(!touch)return;e.preventDefault();
+  const p=xyOfEvent(e),dx=p.x-touch.oldX,dy=p.y-touch.oldY;
+  if(Math.abs(p.x-touch.x)+Math.abs(p.y-touch.y)>8)touch.moved=true;
+  if(touch.mode==="belt"){
+   const w=screenToWorld(p.x,p.y);
+   if(w&&touch.last&&(w.x!==touch.last.x||w.y!==touch.last.y)){
+    drawBeltPath(touch.last,w);touch.last=w;selected=w;draw();
+   }
+  }else if(touch.mode==="pan"||touch.moved){
+   camX-=dx/tileSize();camY-=dy/tileSize();
+   camX=Math.max(-1,Math.min(F.W+1,camX));camY=Math.max(-1,Math.min(F.H+1,camY));draw();
+  }
+  touch.oldX=p.x;touch.oldY=p.y;
+ });
+ function endTouch(e){
+  if(!touch)return;
+  const mode=touch.mode,moved=touch.moved,initial=touch.original;
+  if(mode==="belt"){persist();renderInspector();}
+  else if(!moved&&initial)interact(initial.x,initial.y);
+  touch=null;
+ }
+ canvas.addEventListener("pointerup",endTouch);
+ canvas.addEventListener("pointercancel",()=>{touch=null;persist();});
+ viewport.addEventListener("wheel",e=>{
+  e.preventDefault();zoom=Math.max(.5,Math.min(3.2,zoom*(e.deltaY<0?1.12:.89)));draw();
+ },{passive:false});
+ function hook(){
+  document.querySelectorAll("[data-category]").forEach(el=>el.addEventListener("click",()=>{
+   category=el.dataset.category;renderPalette();
+  }));
+  document.querySelectorAll("[data-panel]").forEach(el=>el.addEventListener("click",()=>showPane(el.dataset.panel)));
+  $("research-shortcut").addEventListener("click",()=>{
+   showPane("research");$("view-research").scrollIntoView?.({behavior:"smooth",block:"center"});
+  });
+  $("rotate-tool").addEventListener("click",()=>{dir=(dir+1)%4;renderPalette();});
+  $("zoom-in").addEventListener("click",()=>{zoom=Math.min(3.2,zoom*1.22);draw();});
+  $("zoom-out").addEventListener("click",()=>{zoom=Math.max(.5,zoom/1.22);draw();});
+  $("rotate-selected").addEventListener("click",()=>{
+   if(selected&&F.rotate(world,selected.x,selected.y)){persist();refresh();}
+  });
+  $("delete-selected").addEventListener("click",()=>{
+   if(selected&&F.removeMachine(world,selected.x,selected.y)){persist();refresh();}
+  });
+  $("play").addEventListener("click",()=>{
+   world.status=world.status==="paused"?"playing":"paused";persist();refresh();
+  });
+  $("speed").addEventListener("click",()=>{speed=speed===1?4:speed===4?12:1;refresh();});
+  $("demo").addEventListener("click",()=>{
+   if(world.totalScience>0 && !globalThis.confirm("工場と今までの生産成果をリセットして、試運転ラインを再配置しますか？"))return;
+   F.demoBlueprint(world);world.status="playing";persist();refresh();
+   announce("完成ラインを再配置しました。流れる部品を見て、詰まりを改善しましょう。");
+  });
+  $("new-world").addEventListener("click",()=>{
+   if(!globalThis.confirm("工場と研究をすべてやり直しますか？"))return;
+   world=F.newWorld(Date.now()>>>0);world.status="playing";persist();refresh();
+   announce("新しい空の工場地区。採掘機と発電機から組み立ててください。");
+  });
+  $("clear-buildings").addEventListener("click",()=>{
+   if(!globalThis.confirm("すべての建物を撤去しますか？"))return;
+   for(const t of world.tiles)t.building=null;
+   persist();refresh();announce("建物を撤去しました。資源は残っています。");
+  });
+  $("help").addEventListener("click",()=>{
+   helpOpen=!helpOpen;
+   announce(helpOpen?
+    "まず試運転ラインの部品を観察しよう。左下のベルトを選ぶとドラッグ敷設。研究所に回路が届くと技術を解放できます。見えない東部は設計書で開きます。":
+    F.tip(world));
+  });
+  document.addEventListener("keydown",e=>{
+   if(e.target?.tagName==="INPUT"||e.ctrlKey||e.metaKey||e.altKey)return;
+   const key=e.key.toLowerCase();
+   if(key==="r"){dir=(dir+1)%4;renderPalette();}
+   if(key==="escape")setTool("pan");
+   if(key===" "){e.preventDefault();world.status=world.status==="paused"?"playing":"paused";refresh();}
+  });
+ }
+ function start(){
+  hook();setTool("pan");resize();refresh();
+  const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
+  if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
+  clock=setInterval(()=>{
+   if(world.status==="playing"||world.status==="complete"){
+    F.advance(world,speed);
+    if(world.tick-lastSave>24){lastSave=world.tick;persist();}
+   }
+   // Draw every interval to keep animation responsive even while paused.
+   $("science-total").textContent=world.totalScience+" / 30";
+   $("science-bar").style.width=Math.min(100,world.totalScience/30*100)+"%";
+   $("science-stock").textContent=world.science;
+   $("power").textContent=Math.round(world.energy)+" / "+world.energyMax;
+   $("transported").textContent=world.transported;
+   if(world.tick%6===0){renderTech();renderDocuments();renderInspector();
+    $("log").innerHTML=world.notes.slice(0,5).map(x=>"<div>"+esc(x)+"</div>").join("");}
+   draw();
+  },110);
+ }
+ start();
+})();
+</script>
+</body>
+</html>
