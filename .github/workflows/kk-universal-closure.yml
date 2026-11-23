@@ -6,6 +6,7 @@ on:
       - 'lean/Research/KKGHClosedForms.lean'
       - 'lean/Research/KKGHParallelFrame.lean'
       - 'lean/Research/KKEMDBlockGauge.lean'
+      - 'lean/Research/KKEMDShear.lean'
       - 'lean/Research/KKHopfGlobalAlgebra.lean'
       - 'lean/Research/KKNutQuadraticPositive.lean'
       - 'tools/check_kk_universal_closure.py'
@@ -39,7 +40,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/Research
-          for mod in KKNutCartesian KKGHClosedForms KKGHParallelFrame KKEMDBlockGauge KKHopfGlobalAlgebra KKNutQuadraticPositive; do
+          for mod in KKNutCartesian KKGHClosedForms KKGHParallelFrame KKEMDBlockGauge KKEMDShear KKHopfGlobalAlgebra KKNutQuadraticPositive; do
             lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$mod.olean" "Research/$mod.lean" 2>&1 | tee "../kk-closure-$mod-lean.log"
             if grep -E '(^|[[:space:]])(error:|sorryAx)' "../kk-closure-$mod-lean.log"; then exit 1; fi
           done
@@ -51,7 +52,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
-          mods = ('KKGHClosedForms','KKGHParallelFrame','KKEMDBlockGauge','KKHopfGlobalAlgebra','KKNutQuadraticPositive')
+          mods = ('KKGHClosedForms','KKGHParallelFrame','KKEMDBlockGauge','KKEMDShear','KKHopfGlobalAlgebra','KKNutQuadraticPositive')
           imports = ['import Research.'+m for m in mods]
           names=[]
           for m in mods:
