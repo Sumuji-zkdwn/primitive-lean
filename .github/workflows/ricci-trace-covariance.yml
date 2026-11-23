@@ -1,0 +1,113 @@
+name: Ricci trace covariance in a metric-compatible finite frame
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/RicciTraceCovariance.lean'
+      - 'tools/check_ricci_trace_covariance.py'
+      - 'docs/verification/2026-11-22-ricci-trace-covariance.md'
+      - '.github/workflows/ricci-trace-covariance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trace-covariance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install repo-pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel check full ancestor chain and Ricci trace identity
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research .lake/build/lib/lean/RicciFlowBlueprint
+          for file in \
+            Research/RicciFlatBianchiYangMills.lean \
+            Research/BianchiOperatorBridge.lean \
+            RicciFlowBlueprint/LieBracketDerivation.lean \
+            RicciFlowBlueprint/Curvature.lean \
+            RicciFlowBlueprint/Bianchi.lean \
+            Research/SmoothLeviCivitaBianchi.lean \
+            RicciFlowBlueprint/LeviCivitaSmoothPort.lean \
+            Research/SmoothMetricBianchi.lean \
+            Research/SmoothCurvatureRealFrame.lean \
+            Research/SmoothCurvaturePairSymmetry.lean \
+            Research/RicciTraceCovariance.lean; do
+            echo "CHECKING $file"
+            prefix=$(printf '%s' "$file" | sed 's/\.lean$//')
+            lake env lean --trust=0 -o ".lake/build/lib/lean/$prefix.olean" "$file" 2>&1 | tee -a ../ricci-trace-covariance-lean.log
+          done
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../ricci-trace-covariance-lean.log; then exit 1; fi
+      - name: Axiom audit on actual new Lean theorems
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/RicciTraceCovariance.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          theorems=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(theorems)>=7,theorems
+          out='import Research.RicciTraceCovariance\n'
+          out+=''.join('#print axioms RicciTraceCovariance.'+n+'\n' for n in theorems)
+          Path('RicciTraceCovarianceAudit.lean').write_text(out)
+          Path('../ricci-trace-covariance-count.txt').write_text(str(len(theorems)))
+          PY
+          lake env lean --trust=0 RicciTraceCovarianceAudit.lean 2>&1 | tee ../ricci-trace-covariance-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../ricci-trace-covariance-audit.log').read_text()
+          n=int(Path('../ricci-trace-covariance-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+              used={x.strip() for x in entry.split(',') if x.strip()}
+              assert used<=allowed,used-allowed
+          print('Kernel axiom audit passed for:',n)
+          PY
+      - name: Independent exact nonzero Ricci-flat and random frame tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_ricci_trace_covariance.py 2>&1 | tee ricci-trace-covariance-python.log
+      - name: Verify source license and exact commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s licenses/ricci-flow-blueprint-Apache-2.0.txt
+          git rev-parse HEAD > ricci-trace-covariance-head.txt
+          sha256sum lean/Research/RicciTraceCovariance.lean \
+            tools/check_ricci_trace_covariance.py > ricci-trace-covariance-sha256.txt
+      - name: Preserve exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ricci-trace-covariance
+          path: |
+            ricci-trace-covariance-lean.log
+            ricci-trace-covariance-audit.log
+            ricci-trace-covariance-count.txt
+            ricci-trace-covariance-python.log
+            ricci-trace-covariance-head.txt
+            ricci-trace-covariance-sha256.txt
+          if-no-files-found: warn

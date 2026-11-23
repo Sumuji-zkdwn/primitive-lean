@@ -1,0 +1,115 @@
+name: Genuine smooth Levi-Civita covariant curvature pair symmetry
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SmoothCurvaturePairSymmetry.lean'
+      - 'docs/verification/2026-11-22-smooth-curvature-pair-symmetry.md'
+      - '.github/workflows/smooth-curvature-pair-symmetry.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  curvature-pair-symmetry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean kernel compile with exact upstream dependencies
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research .lake/build/lib/lean/RicciFlowBlueprint
+          for file in \
+            Research/RicciFlatBianchiYangMills.lean \
+            Research/BianchiOperatorBridge.lean \
+            RicciFlowBlueprint/LieBracketDerivation.lean \
+            RicciFlowBlueprint/Curvature.lean \
+            RicciFlowBlueprint/Bianchi.lean \
+            Research/SmoothLeviCivitaBianchi.lean \
+            RicciFlowBlueprint/LeviCivitaSmoothPort.lean \
+            Research/SmoothMetricBianchi.lean \
+            Research/SmoothCurvatureRealFrame.lean \
+            Research/SmoothCurvaturePairSymmetry.lean; do
+            echo "CHECKING $file"
+            prefix=$(printf '%s' "$file" | sed 's/\.lean$//')
+            lake env lean --trust=0 -o ".lake/build/lib/lean/$prefix.olean" "$file" 2>&1 | tee -a ../lc-pair-symmetry-lean.log
+          done
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../lc-pair-symmetry-lean.log; then exit 1; fi
+      - name: Axiom audit for all new theorem declarations
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/SmoothCurvaturePairSymmetry.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          blocks=re.findall(r'namespace CovariantDerivative(.*?)end CovariantDerivative',src,re.S)
+          left='\n'.join(blocks)
+          right=src.split('namespace SmoothCurvatureDualFrame',1)[1].split('end SmoothCurvatureDualFrame',1)[0]
+          a=re.findall(r'^(?:theorem|lemma)\s+(\w+)',left,re.M)
+          b=re.findall(r'^theorem\s+(\w+)',right,re.M)
+          assert len(a)>=9 and len(b)>=4,(len(a),len(b))
+          out='import Research.SmoothCurvaturePairSymmetry\n'
+          out+=''.join('#print axioms CovariantDerivative.'+n+'\n' for n in a)
+          out+=''.join('#print axioms SmoothCurvatureDualFrame.'+n+'\n' for n in b)
+          Path('SmoothCurvaturePairSymmetryAudit.lean').write_text(out)
+          Path('../lc-pair-symmetry-count.txt').write_text(str(len(a)+len(b)))
+          PY
+          lake env lean --trust=0 SmoothCurvaturePairSymmetryAudit.lean 2>&1 | tee ../lc-pair-symmetry-audit.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('../lc-pair-symmetry-audit.log').read_text()
+          n=int(Path('../lc-pair-symmetry-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          noaxioms=s.count('does not depend on any axioms')
+          assert len(entries)+noaxioms==n,(len(entries),noaxioms,n)
+          allow={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+              actual={v.strip() for v in entry.split(',') if v.strip()}
+              assert actual<=allow,actual-allow
+          print('Axiom-audited actual geometric pair symmetry theorems:',n)
+          PY
+      - name: Independent exact metric-jet checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/check_ricci_flat_yang_mills.py 2>&1 | tee lc-pair-symmetry-python.log
+      - name: Exact head and license evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s licenses/ricci-flow-blueprint-Apache-2.0.txt
+          sha256sum lean/Research/SmoothCurvaturePairSymmetry.lean > lc-pair-symmetry-sha256.txt
+          git rev-parse HEAD > lc-pair-symmetry-head.txt
+      - name: Upload exact-head logs
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lc-pair-symmetry
+          path: |
+            lc-pair-symmetry-lean.log
+            lc-pair-symmetry-audit.log
+            lc-pair-symmetry-count.txt
+            lc-pair-symmetry-python.log
+            lc-pair-symmetry-sha256.txt
+            lc-pair-symmetry-head.txt
+          if-no-files-found: warn
