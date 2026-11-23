@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101a28">
+<title>THEOREM ARCADE | 数学がそのまま動く</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;color-scheme:dark;--bg:#0b1320;--panel:#17283a;--border:#40556b;--ink:#ebf5ff;--muted:#aabfd3;--hot:#fbcc7f;--mint:#7fdbbe;--blue:#a6ceff}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 40% 0%,#20354d 0%,#0b1320 70%);min-height:100dvh}
+.app{max-width:1100px;margin:0 auto;padding:16px max(14px,env(safe-area-inset-left)) max(24px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-right))}
+h1{font-size:clamp(24px,5vw,36px);letter-spacing:.06em;margin:0;font-weight:850}
+h2{font-size:clamp(18px,4vw,24px);margin:0 0 8px;font-weight:750}
+h3{font-size:14px;margin:0 0 8px;color:var(--blue)}
+p{line-height:1.65;margin:6px 0}
+a{color:#99ceff}
+header{margin-bottom:16px}
+header p{font-size:13px;color:var(--muted);margin-top:3px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+button{font:inherit;color:inherit;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+button[disabled]{opacity:.45;cursor:default}
+.tabs button{padding:12px 5px;background:#1b2b40;border:1px solid #536881;border-radius:12px;font-size:clamp(11px,2.8vw,15px);font-weight:700}
+.tabs button[aria-selected=true]{background:#335c79;border:2px solid #99dbfd}
+.episode{display:none}
+.episode.active{display:block}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start}
+.surface,.side{background:#162539;border:1px solid #3b5269;border-radius:16px;padding:12px}
+.side{display:flex;flex-direction:column;gap:12px}
+#ca-canvas{width:100%;max-width:570px;display:block;margin:auto;touch-action:none;background:#101e2f;border:1px solid #526578;border-radius:10px;aspect-ratio:1}
+.graph{width:100%;height:auto;display:block;touch-action:manipulation}
+.label{color:var(--muted);font-size:12px}
+.note{font-size:12px;color:#bacfe2;line-height:1.65}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.pill{background:#203b51;border:1px solid #48657e;border-radius:9px;padding:8px 11px;font-size:13px}
+.pill strong{color:var(--mint);font-variant-numeric:tabular-nums}
+.buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.buttons button,.widebutton{padding:11px 6px;min-height:44px;border-radius:11px;border:1px solid #56718a;background:#2a455d;font-size:13px;font-weight:700}
+.buttons button.primary,.widebutton.primary{background:#2c7991;border-color:#81bcca}
+.buttons button[aria-pressed=true]{background:#46658e;border-color:#b5d5ff}
+.widebutton{width:100%}
+.mode-title{color:var(--hot);font-size:12px;letter-spacing:.09em;font-weight:750;margin-bottom:7px}
+#ca-mode .surface{text-align:center}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.proof{margin-top:12px;padding:9px 11px;border-left:3px solid var(--mint);background:#203447;border-radius:7px;font-size:12px;line-height:1.6}
+.proof a{overflow-wrap:anywhere}
+#la-graph .active-node{fill:#77d8c2}
+#la-graph .inactive-node{fill:#2c4e69}
+#la-graph .node-label{fill:#0d1d2e;font-weight:800;text-anchor:middle;dominant-baseline:central;font-size:17px}
+#la-graph .sheet-label{fill:#c5d5e4;font-size:18px}
+#la-graph .line{stroke:#80bde8;stroke-width:3;fill:none;opacity:.8}
+#la-graph .line.twist{stroke:#f2ac6a;stroke-width:3.5}
+#la-graph .middle{stroke-width:5}
+.signs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.signs button{min-height:47px;background:#22384d;border:1px solid #536f86;border-radius:10px;font-size:13px}
+.signs button.negative{background:#654139;border-color:#e4a573}
+.sand-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sand-world{min-width:0}
+.sandgrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px}
+.sandgrid button{aspect-ratio:1;border:1px solid #466076;border-radius:4px;padding:0;font-size:12px;font-weight:700;min-width:0}
+.sandgrid button.v0{background:#102438;color:#a9bfd5}
+.sandgrid button.v1{background:#2f546c}
+.sandgrid button.v2{background:#448982}
+.sandgrid button.v3{background:#d4a85f;color:#19212a}
+.sandgrid button.fired{outline:2px solid #ffebbb;outline-offset:-3px}
+.sand-label{font-weight:700;font-size:13px;text-align:center;margin-bottom:8px}
+.sand-label strong{color:var(--mint)}
+#message{font-weight:700;color:var(--mint);font-size:15px;min-height:26px}
+footer{font-size:11px;color:var(--muted);margin-top:16px;line-height:1.8}
+@media(min-width:740px){.layout{grid-template-columns:minmax(0,1fr) 350px}.sandgrid button{font-size:15px}}
+@media(max-width:370px){.sandgrid{gap:2px}.sandgrid button{font-size:11px}.surface,.side{padding:9px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header>
+<h1>THEOREM ARCADE</h1>
+<p>数学を解くのではなく、定理の中に入る。既存のLean形式化から動作規則を移植した実験室。</p>
+</header>
+<nav class="tabs" aria-label="実験を選ぶ">
+<button type="button" data-tab="sand" aria-selected="true">砂山の双子</button>
+<button type="button" data-tab="la" aria-selected="false">空間をつなぐ</button>
+<button type="button" data-tab="ca" aria-selected="false">生命の規則</button>
+</nav>
+
+<section id="sand-mode" class="episode active" aria-label="砂山の双子">
+<div class="mode-title">CHAPTER 01 / AVALANCHE</div>
+<h2>同じ観測、違う崩壊</h2>
+<p class="note">左右の世界は砂の配置が違っても、3つの観測値が一致しています。同じ位置に砂を落とすと何が起きるか。マスをタップすると両世界へ同じ2粒を落とします。</p>
+<div class="layout">
+  <div class="surface">
+    <div class="sand-pair">
+      <div class="sand-world"><div class="sand-label">世界 A · 崩壊 <strong id="sand-a">0</strong></div><div class="sandgrid" id="sand-board-a" aria-label="世界Aの8×8砂山"></div></div>
+      <div class="sand-world"><div class="sand-label">世界 B · 崩壊 <strong id="sand-b">0</strong></div><div class="sandgrid" id="sand-board-b" aria-label="世界Bの8×8砂山"></div></div>
+    </div>
+    <p class="label">黄色は砂3粒、薄い青は0粒。最後の崩壊箇所を縁取り表示。</p>
+  </div>
+  <div class="side">
+    <div class="stats"><div class="pill">投入 <strong id="sand-round">0回</strong></div><div class="pill">観測 <strong id="sand-observe">一致</strong></div></div>
+    <div id="sand-readings" class="note" aria-live="polite"></div>
+    <div id="sand-message" class="note" role="status">2つの世界を同時に動かしてください。</div>
+    <div class="buttons">
+      <button type="button" id="sand-left">左上に2粒</button>
+      <button type="button" id="sand-right">右上に2粒</button>
+      <button type="button" id="sand-80" class="primary">80回の証明経路へ</button>
+      <button type="button" id="sand-81" class="primary">81回目を実行</button>
+      <button type="button" id="sand-undo">1手戻す</button>
+      <button type="button" id="sand-reset">初期化</button>
+    </div>
+    <div class="proof">Leanの具体例：<code>ClockAvalancheExample.balanced_example</code> は80回まで <strong>95対95</strong>、81回目で <strong>95対158</strong> を保証します。<a href="https://github.com/Sumuji-zkdwn/primitive-lean/blob/main/experiments/sandpile_laakso/formalization/ClockAvalancheExample.lean" target="_blank" rel="noopener">証明ソース</a></div>
+  </div>
+</div>
+</section>
+
+<section id="la-mode" class="episode" aria-label="空間をつなぐ">
+<div class="mode-title">CHAPTER 02 / HOLONOMY</div>
+<h2>1本の辺が、空間を倍にする</h2>
+<p class="note">同じ6頂点6辺のグラフに、2枚の層を重ねます。辺に反転があると別の層へ渡ります。中央の2本の符号の差だけで到達数が6か12に変わります。</p>
+<div class="layout">
+ <div class="surface">
+   <svg class="graph" id="la-graph" viewBox="0 0 780 425" role="img" aria-label="符号付きLaaksoグラフの二重被覆"></svg>
+   <div class="legend"><span style="color:#8abde7">青い線：同じ層</span><span style="color:#efaf77">橙の線：層を反転</span><span style="color:#7fdbbe">緑の頂点：開始点から到達可能</span></div>
+ </div>
+ <div class="side">
+   <div class="stats"><div class="pill">到達数 <strong id="la-reach">12 / 12</strong></div><div class="pill">閉路 <strong id="la-parity">奇</strong></div></div>
+   <p id="la-message" class="note" role="status"></p>
+   <h3>接続を修理する（物理的な変更）</h3>
+   <div id="la-edges" class="signs" role="group" aria-label="辺の符号を反転"></div>
+   <h3>頂点のゲージを切り替える（見え方だけの変更）</h3>
+   <div id="la-vertices" class="signs" role="group" aria-label="頂点のゲージを切り替える"></div>
+   <div class="buttons">
+     <button id="la-puzzle" type="button" class="primary">新しい接続</button>
+     <button id="la-reset" type="button">証明の一辺反転</button>
+   </div>
+   <div class="proof">Leanの定理：<code>untwisted_reachable_card</code> = 6、<code>flipped_reachable_card</code> = 12、<code>flipped_no_spin</code>。ゲージ操作はゲーム内でも全64通りに対して有限検査しています。<a href="https://github.com/Sumuji-zkdwn/primitive-lean/blob/main/linear_input/lean_check/LaaksoSignedConnection.inc" target="_blank" rel="noopener">証明ソース</a></div>
+ </div>
+</div>
+</section>
+
+<section id="ca-mode" class="episode" aria-label="生命の規則">
+<div class="mode-title">CHAPTER 03 / RULE 481</div>
+<h2>たった5セルのルールが、世界を動かす</h2>
+<p class="note">マスをタップして点灯を切り替え、時間を進めてください。上下左右と中心の5セルに適用する規則はLeanの <code>Rule 481</code> と同じです。広い盤面で出る模様は探索対象です。</p>
+<div class="layout">
+ <div class="surface">
+   <canvas id="ca-canvas" width="510" height="510" aria-label="セルオートマトン盤面。タップしてセルを切り替える"></canvas>
+   <p class="label">端同士がつながるトーラス。3×3はLeanで全体の対称性が証明済み。17×17は同じ局所規則の探索版。</p>
+ </div>
+ <div class="side">
+   <div class="stats"><div class="pill">世代 <strong id="ca-tick">0</strong></div><div class="pill">点灯 <strong id="ca-count">0</strong></div></div>
+   <div id="ca-message" class="note" role="status">最初は全消灯でも、1世代で全点灯します。</div>
+   <div class="buttons">
+     <button type="button" id="ca-play" class="primary">自動再生</button>
+     <button type="button" id="ca-step">1世代進める</button>
+     <button type="button" id="ca-seed">ランダム配置</button>
+     <button type="button" id="ca-cross">十字を置く</button>
+     <button type="button" id="ca-mirror">南北反転</button>
+     <button type="button" id="ca-invert">白黒反転</button>
+     <button type="button" id="ca-3" aria-pressed="false">3×3 証明模型</button>
+     <button type="button" id="ca-17" aria-pressed="true">17×17 探索</button>
+     <button type="button" id="ca-reset">全消灯</button>
+   </div>
+   <div class="proof">Leanの定理：<code>reflect_ns</code>、<code>complement</code>、<code>step_mirror</code>、<code>step_two_cycle</code>。ランダム模様の長期挙動は未証明です。<a href="https://github.com/Sumuji-zkdwn/primitive-lean/blob/main/linear_input/lean_check/Rule481Symmetry.inc" target="_blank" rel="noopener">証明ソース</a></div>
+ </div>
+</div>
+</section>
+<footer>本ページの画面と実行エンジンはJavaScriptです。Leanの証明器がスマホで動くわけではありません。掲載した定理は既存Leanソースにあり、対応する有限モデルを自動テストしています。これらを物理世界の一般法則として解釈するものではありません。</footer>
+</main>
+<script src="./engine.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>
