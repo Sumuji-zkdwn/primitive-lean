@@ -1,11 +1,11 @@
 {
   "counts": {
-    "all_source_edges": 1383,
-    "eligible_direct_edges": 428,
-    "nodes": 436,
-    "retained_pairs": 307,
+    "all_source_edges": 1384,
+    "eligible_direct_edges": 429,
+    "nodes": 437,
+    "retained_pairs": 308,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 421,
+    "unique_eligible_pairs": 422,
     "weak_edges_excluded": 955
   },
   "edges": [
@@ -280,6 +280,10 @@
     [
       "main:lean/Research/FiniteMarkovTransport.lean",
       "main:lean/Research/OkanoharaTransport.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianRicci.lean",
+      "main:lean/Research/KKCartesianDerivative.lean"
     ],
     [
       "main:lean/Research/OkanoharaTransport.lean",
@@ -1307,6 +1311,7 @@
     "main:lean/Research/FiniteMarkovTransport.lean",
     "main:lean/Research/KKCartesianDerivative.lean",
     "main:lean/Research/KKCartesianJet.lean",
+    "main:lean/Research/KKCartesianRicci.lean",
     "main:lean/Research/KKRadialVacuumBridge.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
@@ -1679,8 +1684,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "f58a87c40b26f9a147d619b0d7e6df33065bbfe4c15d366b552a7097d8e3f3a6",
-    "main_commit": "bbee949f8848cded2497aa62d1798e00ae4eea53",
+    "graph_sha256": "5f1c2df2512a04a985240e5563518af1fc8dd853d0b561706ab626fbbdfe17f4",
+    "main_commit": "90428d9c5de0b8499d8d17eadd49a8b61689746b",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
