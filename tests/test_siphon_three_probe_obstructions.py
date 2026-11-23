@@ -3,7 +3,8 @@
 Topological proofs are in the companion note; finite tests do not prove them.
 """
 from fractions import Fraction as Q
-from itertools import product
+from itertools import product, combinations
+from collections import Counter
 import unittest
 
 def E(z):
@@ -88,6 +89,27 @@ class ThreeProbeObstructions(unittest.TestCase):
             vals=[Q(k,den) for k in range(-size,size+1)]
             states=list(product(vals,repeat=2))
             self.assertEqual(len({three_square(z) for z in states}),len(states))
+
+    def test_bounded_word_triples_general_obstruction_counts(self):
+        words=[()] + [w for k in range(1,5) for w in product('EL',repeat=k)]
+        pure={tuple('E'*k) for k in range(5)}
+        states=list(product(range(-2,3),repeat=2))
+        data={w: tuple(first(w,z)**2 for z in states) for w in words}
+        counts=Counter()
+        grid_unique=Counter()
+        for tri in combinations(words,3):
+            residues={sum(a=='L' for a in w)%3 for w in tri}
+            if len(residues)>1:
+                category='mixed'
+            elif sum(w in pure for w in tri)>=2:
+                category='twoE'
+            else:
+                category='remaining'
+            counts[category]+=1
+            if len(set(zip(*(data[w] for w in tri))))==25:
+                grid_unique[category]+=1
+        self.assertEqual(dict(counts),{'mixed':4090,'twoE':60,'remaining':345})
+        self.assertEqual(dict(grid_unique),{'mixed':3394,'twoE':20,'remaining':304})
 
     def test_exact_ivr_bracket_for_real_collision(self):
         r=Q(1,100)
