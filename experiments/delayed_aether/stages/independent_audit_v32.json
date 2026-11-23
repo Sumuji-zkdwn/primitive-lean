@@ -1,0 +1,23 @@
+{
+  "symbolic": {
+    "symbolic_4simplex_gramdet": "-s*(3*s - 8)/16",
+    "flat_det": "5/64",
+    "cos_inner": "(s-2)/(2*(s-3))",
+    "cos_base": "1-3*s/4",
+    "cos_side_sq": "s/(8*(3-s))",
+    "status": "PASS"
+  },
+  "independent_high_precision": {
+    "action_equivalence_max": "4.42171830021e-75",
+    "flat_hessian": "17.8885438199983175712733893498502098835249468769",
+    "flat_expected": "8sqrt(5)",
+    "saddle_hessian": "-6.28318530717958647692528676655900576839433879875",
+    "saddle_expected": "-2pi",
+    "flat_deficit_slope": "-21.9089023002066445382787913120320853581097877999",
+    "differentiated_full_simplicial_action": true,
+    "probes": 6,
+    "digits": 75,
+    "status": "PASS"
+  },
+  "scope": "4D Euclidean Regge action with fixed boundary; no Lorentzian propagation"
+}
