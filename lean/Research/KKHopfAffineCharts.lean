@@ -1,5 +1,5 @@
 import Mathlib.Tactic
-import Mathlib.Data.Complex.Basic
+import Mathlib.Basic.Complex.Basic
 
 /-!
 # The two affine Hopf/CP1 charts and overlap transition
@@ -11,8 +11,8 @@ transition winding, or a principal circle bundle structure in Mathlib.
 -/
 namespace KKHopfAffineCharts
 
-def north (z1 z2 : ℂ) : ℂ := z2/z1
-def south (z1 z2 : ℂ) : ℂ := z1/z2
+noncomputable def north (z1 z2 : ℂ) : ℂ := z2/z1
+noncomputable def south (z1 z2 : ℂ) : ℂ := z1/z2
 
 theorem overlap_inverse (z1 z2 : ℂ) (h1 : z1 ≠ 0) (h2 : z2 ≠ 0) :
     north z1 z2 * south z1 z2 = 1 := by
