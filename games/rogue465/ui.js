@@ -174,6 +174,9 @@
     document.querySelectorAll("[data-move]").forEach(el=>{el.disabled=state.status!=="play"||!!state.offer;});
     for(const id of ["pulse","probe","camp","polarity"]){$(id).disabled=state.status!=="play"||!!state.offer;}
     $("polarity").innerHTML="入力極性 "+(state.hero.input===1?"+1":"−1")+"<br><small>攻撃の傾き</small>";
+    $("dock-polarity").textContent="入力 "+(state.hero.input===1?"+1":"−1");
+    for(const id of ["dock-pulse","dock-probe","dock-polarity"])
+      $(id).disabled=state.status!=="play"||!!state.offer;
     $("twist").disabled=state.status!=="play"||!!state.offer||state.vertex!==4||state.layer!==0||
       count!==0||state.hero.insight<2;
     $("descend").disabled=state.status!=="play"||!!state.offer||!p.goal||count!==0;
@@ -188,6 +191,9 @@
     $("pulse").addEventListener("click",()=>action({type:"pulse"}));
     $("probe").addEventListener("click",()=>action({type:"probe"}));
     $("polarity").addEventListener("click",()=>action({type:"polarity"}));
+    $("dock-pulse").addEventListener("click",()=>action({type:"pulse"}));
+    $("dock-probe").addEventListener("click",()=>action({type:"probe"}));
+    $("dock-polarity").addEventListener("click",()=>action({type:"polarity"}));
     $("camp").addEventListener("click",()=>action({type:"camp"}));
     $("twist").addEventListener("click",()=>action({type:"twist"}));
     $("descend").addEventListener("click",()=>action({type:"descend"}));
