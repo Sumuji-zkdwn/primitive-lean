@@ -9,9 +9,8 @@
  const upgradeSource=$("factory-upgrades-json")?.textContent;
  const upgrades=upgradeSource?JSON.parse(upgradeSource):await (await fetch("./upgrades.json")).json();
  if(tech.nodes.length!==465||tech.summary.proofEdges!==629)throw Error("465定理の依存台帳が不正です");
- const deepLinkResearch=typeof globalThis.location?.search==="string"&&
-    typeof URLSearchParams==="function"&&
-    new URLSearchParams(globalThis.location.search).get("view")==="research";
+ const deepLinkView=typeof globalThis.location?.search==="string"&&
+    typeof URLSearchParams==="function"?new URLSearchParams(globalThis.location.search).get("view"):null;
  const knownTech=new Map(upgrades.nodes.map(t=>[t.id,t]));
  const proofById=new Map(tech.nodes.map(t=>[t.id,t]));
  const proofByName=new Map(tech.nodes.map(t=>[t.name,t]));
@@ -763,11 +762,11 @@
  }
  function start(){
   setupProof();hook();setTool("pan");
-  if(deepLinkResearch){
+  if(deepLinkView==="research"){
    setMobileScreen("research",true);
    document.body?.classList?.add("research-direct");
    showPane("research");
-  }else setMobileScreen("factory");
+  }else setMobileScreen(mobileScreens.includes(deepLinkView)?deepLinkView:"factory");
   resize();refresh();
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
