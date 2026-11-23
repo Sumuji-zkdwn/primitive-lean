@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7baa937ed578ef880bd231926455aea77f532cd3",
+  "main_commit": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1833,7 +1833,7 @@
         "Mathlib.Tactic",
         "Mathlib.LinearAlgebra.Matrix.Notation"
       ],
-      "sha256": "8376b5193f3f80b82a95a71b4276ebe0f08aec508f0f3e2ebc2af3a0c5ff80ac"
+      "sha256": "76b66aa17ad76afa21f7200f0e555052129a60fc23cd2893acab658e796e395a"
     },
     {
       "id": "main:lean/Research/KKCartesianRicci.lean",
@@ -1863,7 +1863,7 @@
         "Research.KKCartesianDerivative",
         "Mathlib.Tactic"
       ],
-      "sha256": "88232e819bd8f69e50e5509421981830768d349a1ea6898eb918863d16be8344"
+      "sha256": "084805d3600f4d61e6cdef96aeb82c79dd5eefcf063a1cbf13b2e842968f5ba6"
     },
     {
       "id": "main:lean/Research/KKRadialVacuumBridge.lean",
@@ -27989,28 +27989,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7baa937ed578ef880bd231926455aea77f532cd3",
+      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7baa937ed578ef880bd231926455aea77f532cd3",
+      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7baa937ed578ef880bd231926455aea77f532cd3",
+      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7baa937ed578ef880bd231926455aea77f532cd3",
+      "base_sha": "7754f6abae8fd22ecba04f2f5ca53446792f7383",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
