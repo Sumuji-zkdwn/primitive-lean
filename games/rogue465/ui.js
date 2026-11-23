@@ -73,10 +73,12 @@
         if(foe.scanned)classes.push("scanned");if(foe.kind==="warden")classes.push("boss");}
       if(isHero)classes.push("hero");
       const body=wall?"":isHero?"◈":foe?icons[foe.kind]:"";
+      const health=foe?'<span class="foehp">'+foe.hp+"</span>":"";
+      const weakness=foe&&foe.scanned?'<span class="foew">X'+(foe.weakness>=0?"+":"")+foe.weakness+"</span>":"";
       const sand=wall?"":'<span class="grain">'+room.sand[idx]+"</span>";
       const aria=wall?"壁":isHero?"自分":foe?"敵、生命"+foe.hp+"、"+(foe.windup?"次に攻撃":"移動中"):"空きマス";
       html.push('<button type="button" class="'+classes.join(" ")+'" data-x="'+x+'" data-y="'+y+
-        '" aria-label="('+x+','+y+') '+aria+'" '+(wall?"disabled":"")+'>'+body+sand+"</button>");
+        '" aria-label="('+x+','+y+') '+aria+'" '+(wall?"disabled":"")+'>'+body+health+weakness+sand+"</button>");
     }
     $("board").innerHTML=html.join("");
     $("board").querySelectorAll("[data-x]").forEach(el=>el.addEventListener("click",()=>{
