@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "672e1c29744897718402e72202e0834159d17ecc",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1984,6 +1984,26 @@
         "OrbitTrace"
       ],
       "sha256": "d7fc006763a4f3b8545ee37b79f113d33455e1858ed91634420b9dc3efff4694"
+    },
+    {
+      "id": "main:lean/Research/SiphonFourProbeRegularity.lean",
+      "scope": "main",
+      "path": "lean/Research/SiphonFourProbeRegularity.lean",
+      "group": "Other",
+      "namespace": "SiphonFourProbeRegularity",
+      "declarations": [
+        "minor13",
+        "minor12",
+        "minor23",
+        "minor14",
+        "at_u_zero",
+        "at_v_zero",
+        "some_minor_nonzero"
+      ],
+      "imports": [
+        "Mathlib"
+      ],
+      "sha256": "ff654b99746e3c6388add5044a6f5131dc7639e15407ace85873abc1fd6f754a"
     },
     {
       "id": "main:lean/Research/SiphonInteraction.lean",
@@ -27764,28 +27784,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "672e1c29744897718402e72202e0834159d17ecc",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "672e1c29744897718402e72202e0834159d17ecc",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "672e1c29744897718402e72202e0834159d17ecc",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "672e1c29744897718402e72202e0834159d17ecc",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
