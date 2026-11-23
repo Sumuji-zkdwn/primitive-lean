@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<meta name="theme-color" content="#101b24">
+<meta name="description" content="primitive-leanの初期465定理を、629本の証明参照から辿るインタラクティブな証明アトラス。">
+<title>PRIMITIVE ATLAS — 証明の地図</title>
+<style>
+:root{color-scheme:dark;--base:#101a23;--panel:#172530;--paper:#1b2b35;--line:#344a55;
+ --ink:#e7ece6;--soft:#b8c5c4;--dim:#8098a3;--aqua:#85c9c6;--gold:#e0c28b;--rust:#e6a58a;
+ font-family:system-ui,-apple-system,"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif}
+*{box-sizing:border-box}html,body{margin:0;background:var(--base);color:var(--ink);min-height:100dvh}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button:disabled{opacity:.4;cursor:not-allowed}
+a{color:#a3d9df}code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,"Noto Sans Mono CJK JP",monospace}
+.app{min-height:100dvh;max-width:1800px;margin:auto;display:flex;flex-direction:column}
+.topbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:13px 18px;border-bottom:1px solid var(--line);background:#14232d}
+.identity{display:flex;align-items:center;gap:10px;min-width:190px}
+.symbol{width:36px;height:36px;border:1px solid #66858a;border-radius:5px;display:grid;place-items:center;color:var(--gold);font:24px Georgia,serif}
+.identity h1{margin:0;font-size:18px;font-weight:740;letter-spacing:.105em}
+.identity p{margin:1px 0 0;font-size:10px;color:var(--dim);letter-spacing:.06em}
+.search{position:relative;flex:1;min-width:min(290px,100%)}
+.search input{width:100%;height:44px;background:#0e1b25;border:1px solid #4c6670;border-radius:8px;padding:9px 46px 9px 14px;font-size:14px}
+.search .search-mark{position:absolute;right:14px;top:10px;color:#8eabb2;font-size:21px;pointer-events:none}
+.hitlist{position:absolute;left:0;right:0;top:48px;max-height:50dvh;overflow:auto;background:#1b2d39;border:1px solid #63828a;border-radius:10px;z-index:40;box-shadow:0 14px 40px #0009;padding:4px}
+.hitlist[hidden]{display:none}
+.hit{border:0;border-bottom:1px solid #38505b;background:transparent;width:100%;padding:12px;display:flex;justify-content:space-between;text-align:left;gap:12px;font-size:13px}
+.hit:hover,.hit:focus-visible{background:#2a414b}
+.hit small{display:block;color:var(--dim);margin-top:3px;font-size:11px}
+.stats{color:var(--soft);font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stats strong{font-size:16px;font-weight:750;color:var(--gold)}
+.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(335px,.85fr)}
+.graph-pane{display:flex;flex-direction:column;min-width:0;min-height:600px;background:#111e28;border-right:1px solid var(--line)}
+.graphbar{padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:9px;border-bottom:1px solid #30434f}
+.graphbar h2{margin:0;font-size:14px;font-weight:720}
+.graphbar small{display:block;font-size:11px;font-weight:400;color:var(--dim);margin-top:3px}
+.graph-actions{display:flex;gap:6px}
+.action{background:#223642;border:1px solid #516b78;border-radius:8px;padding:10px 12px;min-height:43px;font-size:12px;font-weight:650;white-space:nowrap}
+.action.primary{background:#335d59;border-color:#77aba5;color:#eaf6ef}
+.action[aria-pressed=true]{border-color:var(--gold);color:var(--gold);background:#3b4541}
+.graph-stage{position:relative;flex:1;min-height:350px}
+#graph{display:block;width:100%;height:100%;touch-action:none}
+.graphhint{position:absolute;left:13px;bottom:13px;border:1px solid #35515b;background:#101f29df;color:#b1c6c8;border-radius:7px;padding:9px 11px;font-size:11px;pointer-events:none;line-height:1.7}
+.legend{display:flex;gap:14px;flex-wrap:wrap;padding:11px 15px;border-top:1px solid #2e4550;font-size:11px;color:var(--dim)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.dot.origin{background:#dfbb7f}.dot.dep{background:#8ebebd}.dot.user{background:#dc9f83}
+.legend .line-solid{display:inline-block;width:23px;border-top:2px solid #89bdb5;vertical-align:middle;margin-right:6px}
+.legend .line-dash{display:inline-block;width:23px;border-top:2px dashed var(--rust);vertical-align:middle;margin-right:6px}
+.reader{min-width:0;overflow-y:auto;background:var(--panel);max-height:calc(100dvh - 70px);overscroll-behavior:contain}
+.reader-header{padding:20px 22px 12px;border-bottom:1px solid #30434d}
+.brow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--dim);font-size:11px;letter-spacing:.03em}
+.reader h2{font-size:clamp(19px,2.3vw,27px);margin:10px 0 8px;line-height:1.45;font-weight:780}
+.reader .source{margin:0;font-size:11px;color:var(--soft);line-height:1.6;overflow-wrap:anywhere}
+.reader-tabs{position:sticky;top:0;background:#1b2a35f7;z-index:3;display:flex;border-bottom:1px solid #3c5260}
+.reader-tabs button{flex:1;border:0;border-bottom:2px solid transparent;padding:12px 5px;background:transparent;font-size:13px;color:var(--soft);min-height:46px}
+.reader-tabs button[aria-selected=true]{border-color:var(--gold);color:#f1dfae;background:#273943}
+.reader-content{padding:18px 22px 70px}
+.section-label{font-size:11px;color:var(--gold);letter-spacing:.07em;font-weight:740;margin:16px 0 8px}
+.reader-content p{font-size:14px;line-height:1.85;color:#d4e0dc;margin:7px 0 12px}
+.claim{border-left:3px solid #79b9b7;padding:10px 14px;background:#20333c;border-radius:0 7px 7px 0;font-size:14px;line-height:1.75;overflow-wrap:anywhere;white-space:pre-wrap}
+.proof-notes{padding:0 0 0 23px;color:#dfebe8}
+.proof-notes li{font-size:14px;line-height:1.82;padding:6px 0 6px 2px}
+.proof-notes li::marker{color:var(--gold)}
+.source-note{font-size:12px!important;color:#a8bbc1!important}
+.boundary{padding:10px 12px;background:#243944;border-left:2px solid var(--gold);font-size:12px!important;color:#c6d1d1!important;line-height:1.7!important}
+.pill{display:inline-block;border:1px solid #4b6772;border-radius:5px;background:#29424b;padding:4px 7px;font-size:10px;color:#cadee0}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:9px 10px;border:1px solid #56717c;border-radius:7px;background:#2a3d49;text-align:left;font-size:12px;min-height:40px}
+.chip small{font-size:10px;color:#9eb6c0}
+.source-block{overflow-x:auto;padding:15px;border:1px solid #3b5864;background:#0d1922;border-radius:8px;white-space:pre;line-height:1.65;font-size:12px;color:#dfeddd;tab-size:2}
+.slim{font-size:11px!important;color:var(--dim)!important}
+.row-actions{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:10px 0}
+.link-draft{border:1px solid #865c57;border-radius:9px;background:#332b30;padding:12px;margin-top:10px}
+.link-draft strong{font-size:13px;color:#f2ceb4}
+.link-draft textarea{width:100%;min-height:64px;background:#111d25;border:1px solid #6b6869;border-radius:7px;padding:10px;font-size:13px;resize:vertical;margin-top:7px}
+.connection{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #41525a;padding:8px 0;font-size:12px}
+.connection button{border:1px solid #865f56;border-radius:5px;background:transparent;padding:6px 8px;font-size:11px}
+.empty{color:var(--soft);font-size:13px;line-height:1.8}
+.mobile-read{display:none}
+footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--dim)}
+@media(max-width:900px){
+ .topbar{padding:9px 10px;gap:8px}
+ .identity{min-width:145px}
+ .identity h1{font-size:15px}
+ .symbol{width:29px;height:29px;font-size:20px}
+ .stats{margin-left:auto;font-size:10px}
+ .stats strong{font-size:13px}
+ .search{order:3;flex-basis:100%;min-width:0}
+ .search input{font-size:16px;height:46px}
+ .workspace{display:block}
+ .graph-pane{height:calc(100dvh - 186px - env(safe-area-inset-bottom));min-height:330px;border-right:0}
+ .graphbar{padding:8px 9px}
+ .graphbar h2{font-size:13px}
+ .graphbar small{font-size:10px}
+ .graph-actions .action{min-height:43px;padding:7px 10px}
+ .graph-stage{min-height:200px}
+ .graphhint{font-size:10px;padding:6px 8px;bottom:8px;left:8px}
+ .legend{padding:7px 10px;gap:12px;font-size:10px}
+ .reader{
+  position:fixed;z-index:30;left:0;right:0;bottom:0;top:auto;
+  max-height:none;height:min(85dvh,820px);transform:translateY(calc(100% + 5px));
+  transition:transform .23s ease;background:#1a2a35;
+  box-shadow:0 -18px 40px #000b;border-top:1px solid #6c838a;border-radius:15px 15px 0 0;
+  padding-bottom:env(safe-area-inset-bottom)
+ }
+ body.reader-open .reader{transform:translateY(0)}
+ .reader-header{padding:11px 15px}
+ .reader h2{font-size:20px;margin:8px 0}
+ .reader-content{padding:13px 16px 52px}
+ .reader-content p,.proof-notes li{font-size:14px}
+ .reader-tabs button{font-size:13px;min-height:48px}
+ .mobile-read{
+  position:fixed;z-index:20;display:flex;align-items:center;justify-content:center;
+  right:max(12px,env(safe-area-inset-right));bottom:calc(22px + env(safe-area-inset-bottom));
+  min-height:52px;border-radius:26px;border:1px solid #dfc78e;background:#d1b67d;
+  color:#17272f;padding:10px 20px;font-size:14px;font-weight:800;box-shadow:0 6px 22px #0009
+ }
+ #close-reader{display:inline-flex!important}
+ footer{padding:7px 10px;font-size:9px}
+}
+@media(max-width:900px) and (orientation:landscape) and (max-height:550px){
+ .topbar{padding:5px 10px}
+ .identity p{display:none}
+ .search{order:initial;flex:1}
+ .search input{height:42px}
+ .workspace .graph-pane{height:calc(100dvh - 115px);min-height:180px}
+ .graph-actions .action{min-height:40px}
+ .reader{height:100dvh;border-radius:0;max-width:550px;left:auto;width:min(95vw,550px);transform:translateX(101%);right:0;top:0}
+ body.reader-open .reader{transform:translateX(0)}
+ .mobile-read{bottom:calc(11px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.reader{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="topbar">
+  <div class="identity"><div class="symbol" aria-hidden="true">⌁</div><div><h1>PRIMITIVE ATLAS</h1><p>証明の地図を読む</p></div></div>
+  <div class="search">
+   <input id="search" type="search" autocomplete="off" placeholder="定理の名前・章・番号・内容を検索" aria-label="465定理を検索">
+   <span class="search-mark" aria-hidden="true">⌕</span>
+   <div id="hits" class="hitlist" hidden></div>
+  </div>
+  <div class="stats"><strong>465</strong> 定理 ／ <strong>629</strong> 直接参照</div>
+ </header>
+ <main class="workspace">
+  <section class="graph-pane" aria-label="証明参照グラフ">
+   <div class="graphbar">
+    <div><h2 id="graph-title">前提から証明をたどる</h2><small id="graph-subtitle">証明が直接参照した定理を線で接続</small></div>
+    <div class="graph-actions">
+     <button class="action" type="button" id="focus" aria-pressed="true">近傍</button>
+     <button class="action" type="button" id="overview" aria-pressed="false">全体</button>
+     <button class="action" type="button" id="zoom-reset" aria-label="地図の位置と倍率を戻す">整列</button>
+    </div>
+   </div>
+   <div class="graph-stage">
+    <canvas id="graph" role="img" aria-label="465定理と629証明参照。タップで定理を選び、指で動かし、2本指で拡大縮小できます。"></canvas>
+    <div class="graphhint" id="graph-hint">タップ：定理を選ぶ。ドラッグ：移動。2本指：拡大。<br>実線は証明参照、点線はあなたの仮説。</div>
+   </div>
+   <div class="legend">
+    <span><i class="dot origin"></i>選択中</span>
+    <span><i class="line-solid"></i>Lean証明内の参照</span>
+    <span><i class="line-dash"></i>探索リンク</span>
+   </div>
+  </section>
+  <aside class="reader" id="reader" aria-label="定理の説明">
+   <div class="reader-header">
+    <div class="brow"><span class="pill" id="number">No.230</span><span id="chapter">観測</span><span id="depth">依存の深さ 0</span>
+     <button class="action" id="close-reader" type="button" style="display:none;margin-left:auto;padding:6px 10px">閉じる ✕</button>
+    </div>
+    <h2 id="theorem-title">証明の読み解き</h2>
+    <p class="source" id="theorem-meta">初期465定理</p>
+   </div>
+   <nav class="reader-tabs" role="tablist" aria-label="表示する説明">
+    <button type="button" data-reader-tab="read" aria-selected="true">読み解き</button>
+    <button type="button" data-reader-tab="deps" aria-selected="false">依存関係</button>
+    <button type="button" data-reader-tab="lean" aria-selected="false">Lean原文</button>
+   </nav>
+   <div id="reader-content" class="reader-content"></div>
+  </aside>
+ </main>
+ <button class="mobile-read" type="button" id="open-reader">選択した定理を読む ↑</button>
+ <footer>初期465定理の検証記録・Leanソースを使用。証明の参照線は「数学的に不可欠」という意味ではありません。探索リンクは正式な証明に加えません。</footer>
+</div>
+<script src="./atlas.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>
