@@ -1,0 +1,266 @@
+name: Definition Foundry - kernel-checked finite observation language
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/definition_foundry.py'
+      - 'tools/autonomy/definition_foundry_smoke.py'
+      - 'tests/test_definition_foundry.py'
+      - 'tests/fixtures/definition_foundry_*.json'
+      - 'docs/autonomy/DEFINITION_FOUNDRY.md'
+      - '.github/workflows/definition-foundry.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/autonomy/definition_foundry.py'
+      - 'tools/autonomy/definition_foundry_smoke.py'
+      - '.github/workflows/definition-foundry.yml'
+  schedule:
+    # 06:17 UTC / 15:17 JST, after reviewed upstream finite research cycles.
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: definition-foundry-data-ledger
+  cancel-in-progress: false
+
+jobs:
+  source-and-kernel-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout exact candidate controller, no persisted credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test typed observation language, objectives and fail-closed receipt
+        run: python -m unittest discover -s tests -p test_definition_foundry.py -v
+      - name: Generate the next proposed definition and five typechecked smoke examples
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          python -B -m tools.autonomy.definition_foundry prepare \
+            --root . --finite tests/fixtures/definition_foundry_finite.json \
+            --strategy tests/fixtures/definition_foundry_strategy.json \
+            --state tests/fixtures/definition_foundry_empty.json \
+            --head "$sha" --day 2026-11-23 \
+            --output verification/definition-foundry/cycle
+          python -B -m tools.autonomy.definition_foundry_smoke generate \
+            --root . --head "$sha" \
+            --output verification/definition-foundry/smoke
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Independently compile typed semantics and both proof certificates
+        working-directory: lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for folder in ../verification/definition-foundry/cycle ../verification/definition-foundry/smoke/*; do
+            for file in "$folder"/proof/*.lean "$folder"/semantics.lean; do
+              test -f "$file" || { echo "Missing required Lean source $file"; exit 1; }
+              filename="$(basename "$file" .lean)"
+              parent="$(dirname "$file")"
+              set +e
+              lake env lean --trust=0 "$file" > "$parent/$filename.log" 2>&1
+              code=$?
+              set -e
+              printf '%s\n' "$code" > "$parent/$filename.exit"
+              echo "Definition Foundry $filename: Lean exit $code"
+            done
+          done
+      - name: Audit every actual Lean theorem and round-trip definition receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/definition-foundry/cycle/proof
+          python -B -m tools.autonomy.definition_foundry_smoke audit \
+            --root . --head "$(git rev-parse HEAD)" \
+            --output verification/definition-foundry/smoke
+          python -B -m tools.autonomy.definition_foundry receipt \
+            --root . --finite tests/fixtures/definition_foundry_finite.json \
+            --strategy tests/fixtures/definition_foundry_strategy.json \
+            --state tests/fixtures/definition_foundry_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/definition-foundry/cycle \
+            --output verification/definition-foundry/test-successor.json
+      - name: Retain all exact-head source, evidence and failures
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: definition-foundry-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/definition-foundry/
+          if-no-files-found: warn
+          retention-days: 30
+
+  propose-one:
+    # No PR-controlled source or GitHub write token is executed here.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    outputs:
+      candidate: ${{ steps.proposal.outputs.candidate }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/finite-discovery-state
+          path: finite-state
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/strategy-evolution-state
+          path: strategy-state
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/definition-foundry-state
+          path: definition-state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Propose one source-bound observation definition and criterion
+        id: proposal
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          test "$sha" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.definition_foundry prepare \
+            --root . \
+            --finite ../finite-state/docs/autonomy/finite-discovery-state.json \
+            --strategy ../strategy-state/docs/autonomy/strategy-evolution-state.json \
+            --state ../definition-state/docs/autonomy/definition-foundry-state.json \
+            --head "$sha" --day "$(date -u +%F)" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          obj = json.load(open("../cycle/plan.json", encoding="utf-8"))
+          print("candidate=" + ("true" if obj["candidate"] else "false"))
+          PY
+      - name: Install pinned Lean only when a new definition exists
+        if: steps.proposal.outputs.candidate == 'true'
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: control/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prove the expression meaning and two finite observational models
+        if: steps.proposal.outputs.candidate == 'true'
+        working-directory: control/lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for file in ../../cycle/proof/*.lean ../../cycle/semantics.lean; do
+            test -f "$file" || { echo "Missing $file"; exit 1; }
+            filename="$(basename "$file" .lean)"
+            parent="$(dirname "$file")"
+            set +e
+            lake env lean --trust=0 "$file" > "$parent/$filename.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "$parent/$filename.exit"
+            echo "Finite definition $filename: Lean exit $code"
+          done
+      - name: Require kernel and axiom checks for both finite models
+        if: steps.proposal.outputs.candidate == 'true'
+        working-directory: control
+        run: python -B tools/autonomy/proof_forge.py audit --output ../cycle/proof
+      - name: Preserve evidence even if no theory survived verification
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: definition-foundry-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  persist-verified-definition:
+    # ONLY this job can write, and only one JSON file on an isolated branch.
+    # State branches are never used as executable code sources.
+    if: github.ref == 'refs/heads/main' && needs.propose-one.result == 'success' && needs.propose-one.outputs.candidate == 'true'
+    needs: [propose-one]
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/finite-discovery-state
+          path: finite-state
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/strategy-evolution-state
+          path: strategy-state
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/definition-foundry-state
+          path: definition-state
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: definition-foundry-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Recheck kernel evidence, source revisions and typed definition semantics
+        shell: bash
+        env:
+          PYTHONPATH: ${{ github.workspace }}/control
+        run: |
+          set -euo pipefail
+          test "$(git -C control rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B control/tools/autonomy/proof_forge.py audit --output cycle/proof
+          python -B -m tools.autonomy.definition_foundry receipt \
+            --root control \
+            --finite finite-state/docs/autonomy/finite-discovery-state.json \
+            --strategy strategy-state/docs/autonomy/strategy-evolution-state.json \
+            --state definition-state/docs/autonomy/definition-foundry-state.json \
+            --head "$GITHUB_SHA" --evidence cycle \
+            --output definition-state/docs/autonomy/definition-foundry-state.json
+      - name: Append only the independently verified definition receipt to data branch
+        working-directory: definition-state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'definition-foundry[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/autonomy/definition-foundry-state.json
+          git diff --cached --quiet && { echo "No verified definition receipt"; exit 1; }
+          git commit -m 'definition foundry: append one kernel-verified finite observation definition'
+          git push origin HEAD:refs/heads/autonomy/definition-foundry-state
