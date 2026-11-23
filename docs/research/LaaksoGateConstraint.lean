@@ -36,13 +36,7 @@ theorem isClosed_hitSet (W : Set ℝ) (hW : W.Finite) :
   have hrewrite :
       HitSet W = ⋃ w ∈ W, {p : ℝ × ℝ | p.1 ≤ w ∧ w ≤ p.2} := by
     ext p
-    change (∃ w, w ∈ W ∧ p.1 ≤ w ∧ w ≤ p.2) ↔
-      (∃ w, p.1 ≤ w ∧ w ∈ W ∧ w ≤ p.2)
-    constructor
-    · rintro ⟨w, hw, hl, hu⟩
-      exact ⟨w, hl, hw, hu⟩
-    · rintro ⟨w, hl, hw, hu⟩
-      exact ⟨w, hw, hl, hu⟩
+    simp only [HitSet, Hit, mem_setOf_eq, mem_iUnion] <;> aesop
   rw [hrewrite]
   exact hW.isClosed_biUnion (fun w hw => hfixed w)
 
