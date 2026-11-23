@@ -1,5 +1,6 @@
 import Mathlib.Tactic
 import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Analysis.Calculus.Deriv.Inv
 
 /-!
 # Finite-jet Levi-Civita bridge for a local Cartesian KK metric
@@ -54,6 +55,18 @@ theorem scaled_inverse_product (h u : ℚ) :
 /-- The original G5 and a candidate inverse. -/
 def metric (h u : ℚ) : Mat5 := (h⁻¹) • scaledMetric h u
 def inverse (h u : ℚ) : Mat5 := (h⁻¹) • scaledInverse h u
+
+
+/-- The normalized G5 and its candidate inverse multiply to the identity
+when H!=0. This closes the gap between the scaled polynomial relation
+and the actual 5x5 rational inverse used by gamma. -/
+theorem metric_inverse_product (h u : ℚ) (hh : h ≠ 0) :
+    metric h u * inverse h u = 1 := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [metric, inverse, scaledMetric, scaledInverse,
+      Matrix.mul_apply, Fin.sum_univ_succ, hh] <;>
+      field_simp [hh] <;> ring
 
 /-- First metric jet: H is x-independent; ∂x U=a. -/
 def dxMetric (h u a : ℚ) : Mat5 :=
@@ -133,5 +146,37 @@ theorem gamma_z_z_z (h u a : ℚ) (hh : h ≠ 0) :
   norm_num [gamma, inverse, scaledInverse, partialMetric, dzMetric,
     dxMetric, Fin.sum_univ_succ]
   field_simp [hh]
+
+
+
+/-!
+## Actual one-variable calculus for two first-jet entries
+
+Unlike the rational first-jet tables, the next three theorems are about
+real differentiable functions and use Mathlib's HasDerivAt calculus.
+They verify the affine potential, the fibre metric G[psi,psi] = H^-1
+as a function of z, and the mixed metric G[y,psi]=U/H as a function
+of x at a fixed z. This is *not* yet a full 5D fderiv proof.
+-/
+
+/-- H(z)=1+a*z has actual derivative a. -/
+theorem affine_H_hasDerivAt (a z : ℝ) :
+    HasDerivAt (fun w : ℝ => 1 + a*w) a z := by
+  simpa using ((hasDerivAt_id z).const_mul a).const_add (1 : ℝ)
+
+/-- The fifth-dimensional circle metric G[psi,psi]=H^-1 is genuinely
+differentiable with the exact dz jet from the metric. -/
+theorem fibre_metric_dz_hasDerivAt (a z : ℝ) (hh : 1+a*z ≠ 0) :
+    HasDerivAt (fun w : ℝ => (1+a*w)⁻¹)
+      (-a/(1+a*z)^2) z := by
+  exact (affine_H_hasDerivAt a z).fun_inv hh
+
+/-- At fixed z, the mixed G[y,psi] = a*x/H has actual x-derivative a/H. -/
+theorem mixed_metric_dx_hasDerivAt (a x z : ℝ) :
+    HasDerivAt (fun w : ℝ => a*w/(1+a*z))
+      (a/(1+a*z)) x := by
+  have hm : HasDerivAt (fun w : ℝ => a*w) a x := by
+    simpa using (hasDerivAt_id x).const_mul a
+  simpa [div_eq_mul_inv] using (hm.mul_const ((1+a*z)⁻¹))
 
 end KKCartesianJet
