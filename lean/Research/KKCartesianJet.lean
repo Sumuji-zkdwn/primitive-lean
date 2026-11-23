@@ -1,5 +1,6 @@
 import Mathlib.Tactic
 import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Inv
 
 /-!
