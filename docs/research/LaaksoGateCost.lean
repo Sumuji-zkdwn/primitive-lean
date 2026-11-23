@@ -552,8 +552,12 @@ private theorem extend_sweep_variation
   by_cases haL : a ≤ L
   · have haU : a ≤ U := haL.trans hLU
     rw [max_eq_right haU, min_eq_left haL]
-    have hba : |a-b| = b-a := abs_of_nonpos (sub_nonpos.mpr (haL.trans hLb))
-    have hca : |a-c| = c-a := abs_of_nonpos (sub_nonpos.mpr (haL.trans hLc))
+    have hba : |a-b| = b-a := by
+      rw [abs_of_nonpos (sub_nonpos.mpr (haL.trans hLb))]
+      ring
+    have hca : |a-c| = c-a := by
+      rw [abs_of_nonpos (sub_nonpos.mpr (haL.trans hLc))]
+      ring
     have hbclow : |b-c| ≤ b+c-2*L := by
       apply abs_le.mpr
       constructor <;> linarith
