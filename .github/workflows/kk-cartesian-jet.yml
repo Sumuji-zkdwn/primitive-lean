@@ -5,6 +5,7 @@ on:
     paths:
       - 'lean/Research/KKCartesianJet.lean'
       - 'lean/Research/KKCartesianDerivative.lean'
+      - 'lean/Research/KKCartesianRicci.lean'
       - 'tools/check_kk_cartesian_jet.py'
       - 'docs/verification/2026-11-23-kk-cartesian-connection-jet.md'
       - '.github/workflows/kk-cartesian-jet.yml'
@@ -109,6 +110,23 @@ jobs:
               assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
           print('PASS:',n,'analytic metric derivative theorems')
           PY
+      - name: Lean 25-component finite connection Ricci audit
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianRicci.olean Research/KKCartesianRicci.lean 2>&1 | tee ../kk-cartesian-ricci-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-ricci-lean.log; then exit 1; fi
+          echo 'import Research.KKCartesianRicci' > KKCartesianRicciAudit.lean
+          echo '#print axioms KKCartesianRicci.all_25_ricci_entries_zero' >> KKCartesianRicciAudit.lean
+          lake env lean --trust=0 KKCartesianRicciAudit.lean 2>&1 | tee ../kk-cartesian-ricci-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          log=Path('../kk-cartesian-ricci-axioms.log').read_text()
+          assert "KKCartesianRicci.all_25_ricci_entries_zero" in log,log
+          assert "does not depend on any axioms" in log or "depends on axioms: [propext, Classical.choice, Quot.sound]" in log,log
+          assert 'sorryAx' not in log
+          PY
       - name: Independently differentiate all first metric jets and connection
         shell: bash
         run: |
@@ -120,7 +138,7 @@ jobs:
         run: |
           set -euo pipefail
           git rev-parse HEAD > kk-cartesian-jet-checkout.txt
-          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
+          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean lean/Research/KKCartesianRicci.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
@@ -132,6 +150,8 @@ jobs:
             kk-cartesian-derivative-lean.log
             kk-cartesian-derivative-axioms.log
             kk-cartesian-derivative-count.txt
+            kk-cartesian-ricci-lean.log
+            kk-cartesian-ricci-axioms.log
             kk-cartesian-jet-count.txt
             kk-cartesian-jet-sympy.log
             kk-cartesian-jet-checkout.txt
