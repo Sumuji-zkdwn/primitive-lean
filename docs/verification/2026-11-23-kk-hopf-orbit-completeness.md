@@ -49,3 +49,20 @@ This is **not** yet a Lean topological quotient/homeomorphism theorem
 `S^3/U(1) ≅ S^2`, a smooth principal-bundle atlas, a degree/winding
 calculation, or an analytic general GH / EMD curvature identity.
 It removes one exact algebraic gap needed for the quotient theorem.
+
+## Free action and orthogonality
+
+KKHopfActionFree.lean adds three algebraic theorems:
+
+- The real inner product of a unit vector and its diagonal-rotated image
+  is exactly C*|X|^2;
+- Applying the same rotation to both arguments multiplies any real
+  four-dimensional inner product by C^2+S^2, so unit rotations
+  preserve inner products;
+- If |X|^2=1, C^2+S^2=1, and rotate(C,S,X)=X, then C=1 and S=0.
+  Thus the diagonal circle action is **free** on S^3.
+
+Together with fibre completeness, these identify Hopf fibres
+set-theoretically as free circle orbits. They do **not** by themselves
+construct a smooth principal bundle, smooth manifold quotient,
+homeomorphism/diffeomorphism to S^2, or transition winding/Chern class.
