@@ -1,0 +1,191 @@
+name: Forge Watchdog - audit scheduler and bounded capability growth
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-watchdog.yml'
+      - 'tools/autonomy/forge_audit.py'
+      - 'tests/test_forge_audit.py'
+      - 'tests/fixtures/forge_audit_*.json'
+      - 'docs/autonomy/FORGE_WATCHDOG.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-watchdog.yml'
+      - 'tools/autonomy/forge_audit.py'
+  schedule:
+    # Independent low-volume 10-minute watchdog, not a guarantee of delivery.
+    # Only during the bounded Nov 23 experiment and automatically expires.
+    - cron: '7,17,27,37,47,57 8-12 23 11 *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-watchdog-bounded-trial
+  cancel-in-progress: false
+
+jobs:
+  audit-proposal:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout exact PR source without stored credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Independently test real verified histories and fail-closed dispatch gate
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/forge_audit.py tests/test_forge_audit.py
+          python -m unittest discover -s tests -p test_forge_audit.py -v
+      - name: Generate inspectable audit against synthetic missing schedules
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification/forge-watchdog
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("verification/forge-watchdog")
+          (p/"generic-runs.json").write_text(json.dumps({"workflow_runs":[]}))
+          (p/"meta-runs.json").write_text(json.dumps({"workflow_runs":[]}))
+          PY
+          python -B -m tools.autonomy.forge_audit \
+            --generic-state tests/fixtures/forge_audit_generic.json \
+            --meta-state tests/fixtures/forge_audit_meta.json \
+            --generic-runs verification/forge-watchdog/generic-runs.json \
+            --meta-runs verification/forge-watchdog/meta-runs.json \
+            --now '2026-11-23T11:40:00Z' \
+            --output verification/forge-watchdog/audit.json
+          python - <<'PY'
+          import json
+          with open("verification/forge-watchdog/audit.json") as f:
+              a = json.load(f)
+          assert a["scheduler"]["generic"]["no_scheduled_runs_observed"]
+          assert a["scheduler"]["meta"]["no_scheduled_runs_observed"]
+          assert a["capability"]["meta"]["maximum_certified_rule_lineage"] == 2
+          assert not a["capability"]["expressive_power_beyond_trusted_primitive_closure"]
+          print("Observed schedule absence and zero new primitive expressive power")
+          PY
+      - name: Retain audit evidence even after failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-watchdog-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/forge-watchdog
+          if-no-files-found: warn
+          retention-days: 30
+
+  operate-bounded-trial:
+    # This is the ONLY dispatch-capable job. Only trusted main source is
+    # executed; all branch/file/API payloads are parsed strictly as data.
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Checkout trusted default-branch source without stored credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read certified Generic Forge branch as untrusted JSON only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/generic-forge-state
+          path: generic-state
+          persist-credentials: false
+      - name: Read certified Meta Forge branch as untrusted JSON only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/meta-forge-state
+          path: meta-state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run trusted audit unit tests before any dispatch
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -m unittest discover -s tests -p test_forge_audit.py -v
+      - name: Gather fresh workflow API evidence and repair only missing bounded runs
+        shell: bash
+        working-directory: control
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TRIGGER_EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          mkdir -p ../review
+          # On merge, run a finite, 4-check relay that avoids dependence on
+          # GitHub's sometimes-dropped cron; scheduled invocations check once.
+          rounds=1
+          if [[ "$TRIGGER_EVENT" == push || "$TRIGGER_EVENT" == workflow_dispatch ]]; then
+            rounds=4
+          fi
+          for i in $(seq 1 "$rounds"); do
+            echo "Forge watchdog check $i of $rounds"
+            git -C ../generic-state fetch --no-tags --depth=1 origin refs/heads/autonomy/generic-forge-state
+            git -C ../generic-state reset --hard FETCH_HEAD
+            git -C ../meta-state fetch --no-tags --depth=1 origin refs/heads/autonomy/meta-forge-state
+            git -C ../meta-state reset --hard FETCH_HEAD
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/generic-forge.yml/runs?per_page=100" > "../review/generic-runs-$i.json"
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/meta-forge.yml/runs?per_page=100" > "../review/meta-runs-$i.json"
+            python -B -m tools.autonomy.forge_audit \
+              --generic-state ../generic-state/docs/autonomy/generic-forge-state.json \
+              --meta-state ../meta-state/docs/autonomy/meta-forge-state.json \
+              --generic-runs "../review/generic-runs-$i.json" \
+              --meta-runs "../review/meta-runs-$i.json" \
+              --now "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+              --output "../review/report-$i.json"
+            if [[ "$(jq -r '.recovery_gate.generic.allowed' "../review/report-$i.json")" == true ]]; then
+              echo "Dispatch exactly one Generic Forge run using reviewed main workflow"
+              gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/generic-forge.yml/dispatches" -f ref=main
+            else
+              echo "Generic Forge not dispatched: $(jq -r '.recovery_gate.generic.reason' "../review/report-$i.json")"
+            fi
+            if [[ "$(jq -r '.recovery_gate.meta.allowed' "../review/report-$i.json")" == true ]]; then
+              echo "Dispatch exactly one Meta Forge run using reviewed main workflow"
+              gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/meta-forge.yml/dispatches" -f ref=main
+            else
+              echo "Meta Forge not dispatched: $(jq -r '.recovery_gate.meta.reason' "../review/report-$i.json")"
+            fi
+            if [[ "$(jq -r '.state.generic_verified' "../review/report-$i.json")" -ge 5 &&
+                  "$(jq -r '.state.meta_verified' "../review/report-$i.json")" -ge 5 ]]; then
+              echo "Both hard trial caps reached; stopping without further dispatch"
+              break
+            fi
+            if [[ "$(jq -r '.recovery_gate.generic.reason' "../review/report-$i.json")" == TRIAL_WINDOW_CLOSED ]]; then
+              echo "Trial window closed; no further attempts"
+              break
+            fi
+            if [[ "$i" -lt "$rounds" ]]; then
+              echo "Rate-limited next audit (600 seconds); no hidden external service"
+              sleep 600
+            fi
+          done
+      - name: Retain per-round exact Github API evidence and ability audit
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-watchdog-main-${{ github.run_id }}-${{ github.run_attempt }}
+          path: review/
+          if-no-files-found: warn
+          retention-days: 30
