@@ -877,7 +877,8 @@ theorem flipEvents_apply_nodup (events : List (ι × ℝ))
       by_cases hj : k = j
       · subst k
         simpa [flipEvents, flipBit, hnot] using hr
-      · simpa [flipEvents, flipBit, hj, eq_comm] using hr
+      · have hjrev : j ≠ k := Ne.symm hj
+        simpa [flipEvents, flipBit, hj, hjrev] using hr
 
 /-- Finite selection of one legal gate for each *changed* Boolean
 label. No other bit is flipped. The events need not be sorted yet. -/
