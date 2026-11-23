@@ -752,9 +752,12 @@ event list leaves the resulting bit vector unchanged. -/
 /-- Gate flips commute, even for the same label (two flips cancel). -/
 theorem flipBit_commute (bits : ι → Bool) (i j : ι) :
     flipBit (flipBit bits i) j = flipBit (flipBit bits j) i := by
-  funext k
-  by_cases hi : k = i <;> by_cases hj : k = j <;>
-    simp [flipBit, hi, hj]
+  by_cases hij : i = j
+  · subst j
+    rfl
+  · funext k
+    by_cases hi : k = i <;> by_cases hj : k = j <;>
+      simp_all [flipBit]
 
 private theorem flipEvents_eq_foldl (bits : ι → Bool)
     (events : List (ι × ℝ)) :
@@ -779,7 +782,7 @@ theorem flipEvents_perm (bits : ι → Bool)
   exact hperm.foldl_eq'
     (fun a _ b _ state => flipBit_commute state a.1 b.1) bits
 
-def sortEventsByHeight (events : List (ι × ℝ)) : List (ι × ℝ) :=
+noncomputable def sortEventsByHeight (events : List (ι × ℝ)) : List (ι × ℝ) :=
   events.mergeSort (fun a b => decide (a.2 ≤ b.2))
 
 theorem sortEventsByHeight_perm (events : List (ι × ℝ)) :
@@ -797,11 +800,10 @@ theorem sortEventsByHeight_pairwise (events : List (ι × ℝ)) :
       (le_trans (by simpa only [decide_eq_true_eq] using hab)
         (by simpa only [decide_eq_true_eq] using hbc))
   have htotal (a b : ι × ℝ) :
-      decide (a.2 ≤ b.2) = true ∨
-      decide (b.2 ≤ a.2) = true := by
+      (decide (a.2 ≤ b.2) || decide (b.2 ≤ a.2)) = true := by
     rcases le_total a.2 b.2 with h | h
-    · exact Or.inl (by simpa only [decide_eq_true_eq] using h)
-    · exact Or.inr (by simpa only [decide_eq_true_eq] using h)
+    · simp [h]
+    · simp [h]
   have h := List.pairwise_mergeSort
     (le := fun a b : ι × ℝ => decide (a.2 ≤ b.2))
     htrans htotal events
@@ -850,7 +852,7 @@ theorem exists_sorted_gate_schedule
   refine ⟨sorted, ?_, ?_⟩
   · exact ascending_of_pairwise G u sorted l hlu
       (sortEventsByHeight_pairwise events) hvalid'
-  · exact (flipEvents_perm bits hp).symm
+  · exact flipEvents_perm bits hp
 
 #print axioms flipBit_commute
 #print axioms flipEvents_perm
