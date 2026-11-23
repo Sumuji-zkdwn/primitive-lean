@@ -531,6 +531,115 @@ theorem ascending_sweep_upper
   rw [← hval]
   exact hstart
 
+
+/-! ### Lower sweep inequality for ANY number of changed bits
+
+The proof computes an interval containing all heights visited by a
+finite walk, without assuming that the bit index type is finite. The
+interval has the gate-admissibility property for *all* changed labels
+and its sweep cost is at most the actual total walk cost. -/
+
+/-- Elementary total-variation update: adding one endpoint a to a
+path whose visited values lie between L and U does not underpay the
+sweep of the enlarged interval. This is a pure real inequality. -/
+private theorem extend_sweep_variation
+    (a b c L U : ℝ)
+    (hLb : L ≤ b) (hbU : b ≤ U)
+    (hLc : L ≤ c) (hcU : c ≤ U) :
+    2*(max a U - min a L) - |a-c| ≤
+      |a-b| + (2*(U-L) - |b-c|) := by
+  have hLU : L ≤ U := hLb.trans hbU
+  by_cases haL : a ≤ L
+  · have haU : a ≤ U := haL.trans hLU
+    rw [max_eq_right haU, min_eq_left haL]
+    have hba : |a-b| = b-a := abs_of_nonpos (sub_nonpos.mpr (haL.trans hLb))
+    have hca : |a-c| = c-a := abs_of_nonpos (sub_nonpos.mpr (haL.trans hLc))
+    have hbclow : |b-c| ≤ b+c-2*L := by
+      apply abs_le.mpr
+      constructor <;> linarith
+    rw [hba, hca]
+    linarith
+  · have hLa : L ≤ a := le_of_not_ge haL
+    by_cases haU : a ≤ U
+    · rw [max_eq_right haU, min_eq_right hLa]
+      have htri : |b-c| ≤ |a-b| + |a-c| := by
+        calc
+          |b-c| = |(b-a)+(a-c)| := by congr 1 <;> ring
+          _ ≤ |b-a| + |a-c| := abs_add_le _ _
+          _ = |a-b| + |a-c| := by rw [abs_sub_comm b a]
+      linarith
+    · have hUa : U ≤ a := le_of_not_ge haU
+      rw [max_eq_left hUa, min_eq_right hLa]
+      have hab : |a-b| = a-b := abs_of_nonneg (sub_nonneg.mpr (hbU.trans hUa))
+      have hac : |a-c| = a-c := abs_of_nonneg (sub_nonneg.mpr (hcU.trans hUa))
+      have hbc : |b-c| ≤ 2*U-b-c := by
+        apply abs_le.mpr
+        constructor <;> linarith
+      rw [hab, hac]
+      linarith
+
+/-- Every finite legal costed walk admits an interval [l,u]
+containing both endpoints and at least one actual gate of every
+bit changed between its endpoints; the walk pays at least the exact
+sweep cost of that interval. No number-of-bits assumption. -/
+theorem arbitrary_multibit_sweep_lower
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ) (hF : Monotone F)
+    {x y : State ι} {c : ℝ} (walk : WeightedWalk G F x y c) :
+    ∃ l u : ℝ,
+      l ≤ x.1 ∧ x.1 ≤ u ∧ l ≤ y.1 ∧ y.1 ≤ u ∧
+      (∀ k, x.2 k ≠ y.2 k →
+        ∃ w : ℝ, l ≤ w ∧ w ≤ u ∧ G k w) ∧
+      2*(F u-F l) - |F x.1-F y.1| ≤ c := by
+  induction walk with
+  | stop x =>
+      refine ⟨x.1,x.1,le_refl _,le_refl _,le_refl _,le_refl _,?_,?_⟩
+      · intro k hdiff
+        exact False.elim (hdiff rfl)
+      · simp
+  | horiz s t bits z c tail ih =>
+      obtain ⟨l,u,hlt,htu,hlz,hzu,hgates,hcost⟩ := ih
+      let l' : ℝ := min s l
+      let u' : ℝ := max s u
+      have hls : l' ≤ s := min_le_left _ _
+      have hsu : s ≤ u' := le_max_left _ _
+      have hlz' : l' ≤ z.1 := (min_le_right s l).trans hlz
+      have hzu' : z.1 ≤ u' := hzu.trans (le_max_right s u)
+      refine ⟨l',u',hls,hsu,hlz',hzu',?_,?_⟩
+      · intro k hdiff
+        obtain ⟨w,hwlow,hwhigh,hg⟩ := hgates k hdiff
+        exact ⟨w,(min_le_right s l).trans hwlow,
+          hwhigh.trans (le_max_right s u),hg⟩
+      · have hFmin : F (min s l) = min (F s) (F l) := by
+          by_cases hs : s ≤ l
+          · rw [min_eq_left hs, min_eq_left (hF hs)]
+          · have hs' : l ≤ s := le_of_not_ge hs
+            rw [min_eq_right hs', min_eq_right (hF hs')]
+        have hFmax : F (max s u) = max (F s) (F u) := by
+          by_cases hs : s ≤ u
+          · rw [max_eq_right hs, max_eq_right (hF hs)]
+          · have hs' : u ≤ s := le_of_not_ge hs
+            rw [max_eq_left hs', max_eq_left (hF hs')]
+        have hex := extend_sweep_variation
+          (F s) (F t) (F z.1) (F l) (F u)
+          (hF hlt) (hF htu) (hF hlz) (hF hzu)
+        change 2*(F (max s u)-F (min s l)) - |F s-F z.1| ≤
+          |F s-F t|+c
+        rw [hFmax,hFmin]
+        linarith
+  | gate s bits k z c hk tail ih =>
+      obtain ⟨l,u,hls,hsu,hlz,hzu,hgates,hcost⟩ := ih
+      refine ⟨l,u,hls,hsu,hlz,hzu,?_,?_⟩
+      · intro i hdiff
+        by_cases hik : i = k
+        · exact ⟨s,hls,hsu,by simpa [hik] using hk⟩
+        · have hkeep : flipBit bits k i = bits i := by
+            simp [flipBit, hik]
+          exact hgates i (by simpa only [hkeep] using hdiff)
+      · simpa using hcost
+
+#print axioms arbitrary_multibit_sweep_lower
+
+
 #print axioms ascending_events_route
 #print axioms weighted_walk_append
 #print axioms ascending_sweep_upper
