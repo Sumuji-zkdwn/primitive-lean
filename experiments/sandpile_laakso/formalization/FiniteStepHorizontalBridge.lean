@@ -20,6 +20,7 @@ No infinite inverse-limit distance or global PI conclusion is assumed.
 namespace ObservedSandpile.FiniteStepHorizontalBridge
 
 open ObservedSandpile
+open scoped ENNReal
 
 abbrev HeightBits (m : ℕ) := H × (Fin m → Bool)
 
