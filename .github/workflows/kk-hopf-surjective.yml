@@ -4,7 +4,10 @@ on:
     paths:
       - 'lean/Research/KKHopfSurjective.lean'
       - 'lean/Research/KKHopfQuotient.lean'
+      - 'lean/Research/KKHopfTwoSections.lean'
+      - 'lean/Research/KKHopfPhaseUnique.lean'
       - 'tools/check_kk_hopf_surjective.py'
+      - 'tools/check_kk_hopf_transitions.py'
       - '.github/workflows/kk-hopf-surjective.yml'
       - 'docs/verification/2026-11-23-kk-hopf-surjectivity.md'
   workflow_dispatch:
@@ -33,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/Research
-          for module in KKHopfGlobalAlgebra KKHopfOrbit KKHopfSurjective KKHopfQuotient; do
+          for module in KKHopfGlobalAlgebra KKHopfOrbit KKHopfActionFree KKHopfSurjective KKHopfQuotient KKHopfTwoSections KKHopfPhaseUnique; do
             if test ! -f "Research/$module.lean"; then continue; fi
             lake env lean --trust=0 -o ".lake/build/lib/lean/Research/$module.olean" "Research/$module.lean" 2>&1 | tee "../kk-surj-$module.log"
           done
@@ -45,7 +48,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
-          mods=[m for m in ('KKHopfSurjective','KKHopfQuotient') if Path('Research/'+m+'.lean').is_file()]
+          mods=[m for m in ('KKHopfSurjective','KKHopfQuotient','KKHopfTwoSections','KKHopfPhaseUnique') if Path('Research/'+m+'.lean').is_file()]
           lines=['import Research.'+m for m in mods]
           names=[]
           for m in mods:
@@ -78,12 +81,13 @@ jobs:
           set -euo pipefail
           python -m pip install --disable-pip-version-check sympy==1.14.0
           python -B tools/check_kk_hopf_surjective.py 2>&1 | tee kk-surj-sympy.log
+          python -B tools/check_kk_hopf_transitions.py 2>&1 | tee kk-surj-transition-sympy.log
       - name: Retain proof evidence
         if: always()
         shell: bash
         run: |
           git rev-parse HEAD > kk-surj-checkout.txt
-          sha256sum lean/Research/KKHopfSurjective.lean tools/check_kk_hopf_surjective.py > kk-surj-hashes.txt
+          sha256sum lean/Research/KKHopfSurjective.lean lean/Research/KKHopfQuotient.lean lean/Research/KKHopfTwoSections.lean lean/Research/KKHopfPhaseUnique.lean tools/check_kk_hopf_surjective.py tools/check_kk_hopf_transitions.py > kk-surj-hashes.txt
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v6
