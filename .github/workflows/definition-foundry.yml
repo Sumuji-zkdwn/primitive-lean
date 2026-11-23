@@ -73,6 +73,7 @@ jobs:
         run: |
           set -uo pipefail
           for folder in ../verification/definition-foundry/cycle ../verification/definition-foundry/smoke/*; do
+            test -d "$folder" || continue
             for file in "$folder"/proof/*.lean "$folder"/semantics.lean; do
               test -f "$file" || { echo "Missing required Lean source $file"; exit 1; }
               filename="$(basename "$file" .lean)"
