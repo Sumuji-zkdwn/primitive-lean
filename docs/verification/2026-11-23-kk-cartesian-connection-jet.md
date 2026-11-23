@@ -24,7 +24,8 @@ Writing M=H G and N=H G^-1 gives the polynomial 5x5 matrices
     N=diag(-H, 1, 1, 1, H²+U²) with N[y,psi]=N[psi,y]=-U.
 
 The first Lean theorem proves all 25 entries of M N = H² I for
-arbitrary rational H,U. The condition H!=0 is required when the
+arbitrary rational H,U. Another Lean theorem proves that the
+normalized G and G^-1 themselves multiply to the identity for H!=0. The condition H!=0 is required when the
 scaled matrices are interpreted as the original metric and inverse.
 This is a real 5x5 matrix multiplication, not an asserted tensor
 value or a numerically checked equality.
@@ -66,13 +67,28 @@ SymPy==1.14.0, builds with --trust=0, audits theorem axioms, and
 saves source SHA256 values and logs.
 
 **Lean formalizes** finite 5x5 matrix algebra and the connection
-as a contraction of stipulated first jets. **Lean does not yet
-prove** that the jet tables are actual coordinate derivatives
-of a differentiable function (that part is checked by SymPy).
+as a contraction of stipulated first jets. **Lean now also proves selected analytic derivatives** for
+H(z)=1+a*z, G[psi,psi]=H(z)^-1 (dz), and G[y,psi]=a*x/H(z) (dx)
+using HasDerivAt. The remaining entries in the 125-component jet
+table are still checked by SymPy rather than by Lean.
 It does not formally compute a Riemann or Ricci tensor, derive a
 general Gibbons-Hawking theorem, or prove global fibre patching.
 
-The next bridge should prove the derivative-table identities using
-HasDerivAt / fderiv in Lean and then extend the finite connection
-calculation to second derivatives and Ricci. This is known
+The next bridge should use HasDerivAt / fderiv for all remaining
+metric jet entries, then extend the connection calculation to
+second derivatives, Riemann curvature and Ricci. This is known
 classical geometry, not a discovery of new physical interactions.
+
+## Lean calculus bridge (subsequent commit)
+
+The following statements are also targeted by the dedicated pinned
+Lean/axiom workflow (pending a successful run on the new head):
+
+- `metric_inverse_product`: exact 5x5 rational G*G^-1=I for H!=0;
+- `affine_H_hasDerivAt`: real analytic first derivative H'=a;
+- `fibre_metric_dz_hasDerivAt`: (1/H)'=-a/H²;
+- `mixed_metric_dx_hasDerivAt`: d_x(a*x/H)=a/H at fixed z.
+
+They are meaningful partial derivatives of actual metric functions,
+not just jet coefficients stipulated as definitions. They still do
+not prove all 125 partials or Ricci tensor construction in Lean.
