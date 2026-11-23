@@ -95,3 +95,8 @@ theorem curvatureMemory_preserves_sum_zero (c eta : ℝ) (v : Fin 5 → ℝ)
   exact rankOne_zero_on_sum_zero (c + eta) v hv
 
 end DelayedAetherEdgeRegge
+
+/-!
+Integration scope: these are algebraic consequences of explicitly supplied
+finite data; the rank-one Regge Hessian is not derived from the Regge action.
+-/
