@@ -87,8 +87,8 @@ jobs:
           import re
           content=Path('Research/KKCartesianDerivative.lean').read_text()
           assert not re.search(r'^\s*(axiom|sorry)\b',content,re.M)
-          names=re.findall(r'^theorem\s+(\w+)',content,re.M)
-          assert len(names)>=4,names
+          names=re.findall(r'^theorem\s+([\w.]+)',content,re.M)
+          assert len(names)>=5 and len(set(names))==len(names),names
           Path('KKCartesianDerivativeAudit.lean').write_text(
               'import Research.KKCartesianDerivative\n'
               + ''.join('#print axioms KKCartesianDerivative.'+n+'\n' for n in names))
@@ -100,6 +100,7 @@ jobs:
           import re
           log=Path('../kk-cartesian-derivative-axioms.log').read_text()
           n=int(Path('../kk-cartesian-derivative-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',log),log
           dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
           none=log.count('does not depend on any axioms')
           assert len(dep)+none==n,(len(dep),none,n)
