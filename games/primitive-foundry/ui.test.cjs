@@ -127,5 +127,5 @@ test("UI tech buttons reference actual source nodes rather than placeholder theo
  assert.match(ui,/F\.techAvailable/);
  assert.match(ui,/F\.unlock/);
  assert.match(ui,/F\.isDiscovered/);
- assert.match(ui,/view-research/);
+ assert.match(index,/id="view-research"/);
 });
