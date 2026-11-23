@@ -1,0 +1,219 @@
+name: Meta Forge - self-generating operator production rules
+
+on:
+  pull_request:
+    branches:
+      - main
+      - autonomy/generic-forge-20261123
+    paths:
+      - '.github/workflows/meta-forge.yml'
+      - 'tools/autonomy/meta_forge.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'tests/test_meta_forge.py'
+      - 'tests/fixtures/meta_forge_empty.json'
+      - 'docs/autonomy/META_FORGE.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/meta-forge.yml'
+      - 'tools/autonomy/meta_forge.py'
+  schedule:
+    # Generic Forge at 10:19 UTC, Meta Forge at 11:07 UTC (20:07 JST).
+    - cron: '7 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: meta-forge-certified-rule-ledger
+  cancel-in-progress: false
+
+jobs:
+  verify-proposal:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout exact proposed code, without retained token
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test independent rewrite interpreters, exhaustive program audit and reuse
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/generic_forge.py tools/autonomy/meta_forge.py tests/test_meta_forge.py
+          python -m unittest discover -s tests -p test_meta_forge.py -v
+      - name: Generate one rule proposal from the empty library
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.meta_forge prepare \
+            --state tests/fixtures/meta_forge_empty.json \
+            --day 2026-11-24 --head "$(git rev-parse HEAD)" \
+            --output verification/meta-forge/proposal
+      - name: Independently evaluate and certify one reusable rule
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.meta_forge receipt \
+            --state tests/fixtures/meta_forge_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/meta-forge/proposal \
+            --output verification/meta-forge/verified-state.json
+      - name: Invoke the freshly generated rule on an unseen image operator
+        shell: bash
+        run: |
+          set -euo pipefail
+          id="$(python - <<'PY'
+          import json
+          with open("verification/meta-forge/verified-state.json", encoding="utf-8") as f:
+              print(json.load(f)["rules"][0]["id"])
+          PY
+          )"
+          python -B -m tools.autonomy.meta_forge apply \
+            --state verification/meta-forge/verified-state.json \
+            --rule-id "$id" --domain grid3 \
+            --program-json '["rotate_cw","dilate","shift_right","mirror_lr"]' \
+            > verification/meta-forge/actual-generated-program.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x = json.loads(Path("verification/meta-forge/actual-generated-program.json").read_text())
+          assert x["full_domain_inputs_checked"] == 512
+          assert 1 <= len(x["generated_program"]) <= 8
+          print("Trusted meta-rule", x["rule_id"])
+          print("Generated operator program", x["generated_program"])
+          print("Complete evaluation: 512 bitmaps")
+          PY
+      - name: Retain all rule, evaluation and execution artifacts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: meta-forge-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/meta-forge/
+          if-no-files-found: warn
+          retention-days: 30
+
+  propose-one:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    outputs:
+      candidate: ${{ steps.next.outputs.candidate }}
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout only trusted main source
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read isolated meta-rule library as data, never code
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/meta-forge-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check exact main source and research rule invariants
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -m unittest discover -s tests -p test_meta_forge.py -v
+      - name: Select next meta-rule using verified parents only
+        id: next
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.meta_forge prepare \
+            --state ../state/docs/autonomy/meta-forge-state.json \
+            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("../cycle/proposal.json", encoding="utf-8") as f:
+              print("candidate=" + str(json.load(f)["candidate"]).lower())
+          PY
+      - name: Retain candidate and evaluation traces
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: meta-forge-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  persist-rule:
+    if: github.ref == 'refs/heads/main' && needs.propose-one.result == 'success' && needs.propose-one.outputs.candidate == 'true'
+    needs: [propose-one]
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main controller, discard credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read and update data branch only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/meta-forge-state
+          path: state
+          persist-credentials: true
+      - name: Restore unprivileged candidate
+        uses: actions/download-artifact@v4
+        with:
+          name: meta-forge-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Recreate the exact proposed rule from trusted source and live state
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.meta_forge prepare \
+            --state ../state/docs/autonomy/meta-forge-state.json \
+            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --output ../replay
+          cmp ../cycle/proposal.json ../replay/proposal.json
+      - name: Independently re-execute and audit every generated operator
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.meta_forge receipt \
+            --state ../state/docs/autonomy/meta-forge-state.json \
+            --head "$GITHUB_SHA" \
+            --evidence ../replay \
+            --output ../state/docs/autonomy/meta-forge-state.json
+      - name: Commit exactly one verified JSON rule, never executable source
+        working-directory: state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "meta-forge[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/autonomy/meta-forge-state.json
+          test "$(git diff --cached --name-only)" = "docs/autonomy/meta-forge-state.json"
+          git commit -m "meta-forge: preserve one independently checked generating rule"
+          git push origin HEAD:refs/heads/autonomy/meta-forge-state
