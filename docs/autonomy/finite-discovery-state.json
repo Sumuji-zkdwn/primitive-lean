@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-22",
+  "last_utc_day": "2026-11-23",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -44,6 +44,68 @@
       "word": [
         0,
         0
+      ]
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "08dadd96195b1186bf0b1bff317117ebec2a08f19df6dd0a56e50bd358c470ab",
+      "comparison": "NEW_REVIEWED_SEED_FINITE_ONLY",
+      "day": "2026-11-23",
+      "depth": 0,
+      "fingerprint": "1f30ef3d048d1579f7a8ddaa1eaf0797192e7b42dea8121a16433571528da4a0",
+      "head_sha": "f4ecec6baf794bce451e1cf189a2b112376e1b85",
+      "lean_sha256": "741c1a16526a47fd6308ae465602e052a7804a4ed1652fdd2bf8d6c96a540271",
+      "model": {
+        "name": "fd_1f30ef3d048d1579",
+        "observations": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          4,
+          5,
+          5
+        ],
+        "pair": [
+          4,
+          5
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            6,
+            7,
+            2,
+            3
+          ]
+        ]
+      },
+      "mutation": "reviewed_seed",
+      "name": "fd_1f30ef3d048d1579",
+      "outcome": "DISTINGUISHABLE",
+      "parent": null,
+      "previous_sha256": "a8592804775520e1a6a4f981bbce39c8c3dc56a644612bdbe3bd4c938eeb59a3",
+      "request_sha256": "7f5cf8606b0c64977f56490f76058ecf7b836543447a5733ad68f4fcd9b129dc",
+      "seed": "laakso",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "word": [
+        1,
+        1
       ]
     }
   ],
