@@ -108,3 +108,19 @@ test("human explanations cover the design-observation-calculus cluster",()=>{
   assert.ok(a?.title&&a?.summary&&a?.assumptions&&a?.steps.length>=2,"missing "+id);
  }
 });
+
+test("research packet distinguishes user conjecture from exact source, deduplicates theorem ids and preserves graph",()=>{
+ const before=JSON.stringify(graph);
+ const draft=A.sanitizeResearch(model,{ids:[225,226,229,229,-1,"227",465],claim:"二観測に制限したときの追加条件"});
+ assert.deepEqual(draft.ids,[225,226,229]);
+ const packet=A.researchPacket(model,draft,[{from:225,to:229,note:"比較仮説"}]);
+ assert.match(packet,/未検証の研究構想/);
+ assert.match(packet,/比較仮説/);
+ assert.match(packet,/証明済みではない/);
+ assert.match(packet,/実際に検証/);
+ for(const id of draft.ids)assert.ok(packet.includes(proofs.records[id].proof));
+ assert.ok(packet.includes(proofs.records[227].proof));
+ assert.equal(JSON.stringify(graph),before);
+ assert.equal(A.sanitizeResearch(model,{ids:model.nodes.map(x=>x.id),claim:"x".repeat(4000)}).ids.length,20);
+ assert.equal(A.sanitizeResearch(model,{claim:"x".repeat(4000)}).claim.length,3000);
+});
