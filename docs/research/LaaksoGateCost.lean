@@ -184,6 +184,85 @@ theorem exact_one_bit_roundtrip_infimum
   · exact csInf_le hbdd hwitness
   · exact le_csInf hS hlow
 
+
+/-- If an entire walk travels via a point b in the calibrated real line,
+the sum of the two legs and the direct displacement dominates twice
+the distance to b. -/
+private theorem via_point_twice (a b c total : ℝ)
+    (h : |a - b| + |b - c| ≤ total) :
+    2 * |a - b| ≤ total + |a - c| := by
+  have ht : |a - b| ≤ |a - c| + |c - b| := by
+    calc
+      |a - b| = |(a - c) + (c - b)| := by congr 1 <;> ring
+      _ ≤ |a - c| + |c - b| := abs_add_le _ _
+  rw [abs_sub_comm c b] at ht
+  linarith
+
+/-- The first genuine two-bit lower bound. Every finite walk that changes
+two distinct bits must visit one gate for each. The total horizontal
+variation, plus the start-to-end calibrated displacement, is at least
+twice the separation between these two actual visited gate heights.
+
+Crucially, this cannot be inferred by taking the maximum of two
+single-bit detour bounds. The proof follows the *first occurrence*
+of either bit and then uses the remaining other-bit detour.
+-/
+theorem two_changed_bits_span_lower
+    (G : ι → ℝ → Prop) (F : ℝ → ℝ)
+    {x y : State ι} {c : ℝ}
+    (walk : WeightedWalk G F x y c)
+    (i j : ι) (hij : i ≠ j)
+    (hi : x.2 i ≠ y.2 i) (hj : x.2 j ≠ y.2 j) :
+    ∃ u v : ℝ, G i u ∧ G j v ∧
+      2 * |F u - F v| ≤ c + |F x.1 - F y.1| := by
+  induction walk with
+  | stop x =>
+      exact False.elim (hi rfl)
+  | horiz s t b z c tail ih =>
+      obtain ⟨u, v, hu, hv, hbound⟩ := ih hi hj
+      refine ⟨u, v, hu, hv, ?_⟩
+      change 2 * |F u - F v| ≤
+        (|F s - F t| + c) + |F s - F z.1|
+      have ht : |F t - F z.1| ≤
+          |F s - F t| + |F s - F z.1| := by
+        calc
+          |F t - F z.1| = |(F t - F s) + (F s - F z.1)| := by
+            congr 1
+            ring
+          _ ≤ |F t - F s| + |F s - F z.1| := abs_add_le _ _
+          _ = |F s - F t| + |F s - F z.1| := by
+            rw [abs_sub_comm (F t) (F s)]
+      linarith
+  | gate s b k z c hk tail ih =>
+      by_cases hki : k = i
+      · have hjk : j ≠ k := by simpa [hki] using hij.symm
+        have hjtail : (flipBit b k) j ≠ z.2 j := by
+          simpa [flipBit, hjk] using hj
+        obtain ⟨v, hv, hcost⟩ :=
+          changed_bit_detour_lower G F tail j hjtail
+        refine ⟨s, v, by simpa [hki] using hk, hv, ?_⟩
+        change 2 * |F s - F v| ≤ c + |F s - F z.1|
+        exact via_point_twice (F s) (F v) (F z.1) c hcost
+      · by_cases hkj : k = j
+        · have hik : i ≠ k := by simpa [hkj] using hij
+          have hitail : (flipBit b k) i ≠ z.2 i := by
+            simpa [flipBit, hik] using hi
+          obtain ⟨u, hu, hcost⟩ :=
+            changed_bit_detour_lower G F tail i hitail
+          refine ⟨u, s, hu, by simpa [hkj] using hk, ?_⟩
+          change 2 * |F u - F s| ≤ c + |F s - F z.1|
+          have hv := via_point_twice (F s) (F u) (F z.1) c hcost
+          rwa [abs_sub_comm (F u) (F s)]
+        · have hik : i ≠ k := Ne.symm hki
+          have hjk : j ≠ k := Ne.symm hkj
+          have hitail : (flipBit b k) i ≠ z.2 i := by
+            simpa [flipBit, hik] using hi
+          have hjtail : (flipBit b k) j ≠ z.2 j := by
+            simpa [flipBit, hjk] using hj
+          simpa using ih hitail hjtail
+
+#print axioms two_changed_bits_span_lower
+
 #print axioms one_bit_detour_realizable
 #print axioms exact_one_bit_roundtrip_infimum
 
