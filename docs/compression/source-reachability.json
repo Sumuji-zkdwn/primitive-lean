@@ -2,7 +2,7 @@
   "counts": {
     "all_source_edges": 1383,
     "eligible_direct_edges": 428,
-    "nodes": 434,
+    "nodes": 435,
     "retained_pairs": 307,
     "transitive_pairs_removed": 114,
     "unique_eligible_pairs": 421,
@@ -1319,6 +1319,7 @@
     "main:lean/Research/SphereClockWordNormalForm.lean",
     "main:lean/Research/SphereClockWordObservability.lean",
     "main:lean/Research/SquareZeroNetwork.lean",
+    "main:lean/Research/VacuumKasner5.lean",
     "main:lean/Research/VoidHyperCompletion.lean",
     "main:lean/SelfRewritingObserver.lean",
     "main:lean/SelfRewritingObserverExtensions.lean",
@@ -1677,8 +1678,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "8aa9cd4efa1cff4c8180e88dba788c9b18f4cf7088fe1af4d981fd873c95f1d2",
-    "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+    "graph_sha256": "daa3b2254c5d1e44c1e157589c9523dc557568a065367d1147339e92bdfd7802",
+    "main_commit": "fe565cc7c0d1bd51d15dac72d6b80f98e11a9519",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
