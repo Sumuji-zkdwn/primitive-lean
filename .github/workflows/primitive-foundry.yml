@@ -66,6 +66,11 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Install Japanese fonts for representative screenshot rendering
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk > /tmp/noto-install.log
+          fc-cache -f
       - name: Render self-contained page using headless Chrome when available
         run: |
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
