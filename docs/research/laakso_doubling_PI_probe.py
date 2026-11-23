@@ -45,8 +45,20 @@ def jump(n, side, t):
     assert value == C*t+height*t*t/width
     return value
 
+def exact_ramp_mean(n):
+    """Mean rho on the symmetric z_n ± z_n/4^n strip, exactly rational."""
+    assert n >= 1
+    return Q(4, 5) + (26*Q(2)**n-28)/(25*Q(4)**n)
+
+
 def test():
     assert F(1) == 1 and F(z(1)) == s(1)
+    for n in range(1, 27):
+        delta = z(n) / 4**n
+        computed = (F(z(n)+delta)-F(z(n)-delta))/(2*delta)
+        assert computed == exact_ramp_mean(n)
+        assert Q(4, 5) < computed <= Q(26, 25)
+    print("PASS: exact symmetric-ramp mean <= 26/25 for depths 1..26")
     assert good(1) == 1 and good(s(1)) == z(1)
     for n in range(1, 18):
         assert F(z(n)) == s(n)
