@@ -57,6 +57,6 @@ test("original 465 theorem catalog remains unchanged by free art and path librar
   const html=fs.readFileSync(path.join(__dirname,"index.html"),"utf8");
   assert.match(html,/Kenney Tiny Dungeon/);
   assert.match(html,/vendor\/rot\.min\.js/);
-  assert.match(html,/kenney-sprite hero-art/);
+  assert.match(html,/kenney-sprite\.hero-art/);
   assert.match(html,/b3cbf86470ebdb68a80d48678db764dcaff181ac/);
 });
