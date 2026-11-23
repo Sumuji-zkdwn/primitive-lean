@@ -80,7 +80,7 @@ theorem inner_cos_difference (s t : ℚ) (hs : s ≠ 3) (ht : t ≠ 3) :
 
 /-- Symbolic value of the complete 4x4 Euclidean Gram determinant.
     The underlying matrix determinant is independently computed in SymPy. -/
-def gram4Det (s : ℝ) : ℝ := s*(8-3*s)/16
+noncomputable def gram4Det (s : ℝ) : ℝ := s*(8-3*s)/16
 
 theorem gram4_det_positive (s : ℝ) (h0 : 0 < s) (h8 : s < 8/3) :
     0 < gram4Det s := by
