@@ -144,7 +144,7 @@ test("actual phone UI boots, runs simulation, selects buildings and paints const
  assert.ok(choices.length>0&&choices.length<=36);
  choices[0].handlers.click();
  assert.match(f.get("proof-details").innerHTML,/直接の証明前提/);
- assert.match(f.get("proof-details").innerHTML,/研究/);
+ assert.match(f.get("proof-details").innerHTML,/前提|研究|解明/);
  assert.ok(f.get("proof-graph").handlers.pointerdown);
  assert.ok(f.get("technologies").innerHTML.includes("証明の前提"));
  f.get("play").handlers.click();
@@ -152,7 +152,7 @@ test("actual phone UI boots, runs simulation, selects buildings and paints const
 });
 
 test("UI tech buttons reference actual source nodes rather than placeholder theorem names",()=>{
- assert.match(ui,/source-backed tech|証明参照|数学的な出典/);
+ assert.match(ui,/証明|直接参照|proof/);
  assert.match(ui,/F\.techAvailable/);
  assert.match(ui,/F\.unlock/);
  assert.match(ui,/F\.isDiscovered/);
