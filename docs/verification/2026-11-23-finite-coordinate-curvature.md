@@ -107,3 +107,43 @@ The successful first dedicated CI 45139993911 covered 11 theorems
 (the generic finite-frame core and warped-metric witness) and exact
 independent SymPy tests. The additional derivation module is a
 subsequent source change and must be audited by the next exact-head CI.
+
+
+## Stronger result: full finite-rank covariant commutator
+
+The generic module FiniteConnectionCommutator.lean now proves the full
+operator-curvature relation for arbitrary finite fibre index V, arbitrary
+commutative coefficient ring R, and commuting Leibniz derivations D_i.
+
+Define for sections s : V -> R:
+    nabla_i(s) = D_i(s) + Gamma_i * s.
+
+All entries in D_i(Gamma_j) are computed by derivations; no arbitrary
+independent dGamma is introduced at this stage. The key theorem is
+
+  FiniteConnectionCommutator.covariant_commutator_eq_curvature
+
+and shows, pointwise on sections, the equality between the
+commutator of the actual algebraic covariant operators and the
+previous curvature-index formula. It is a genuine finite-rank
+derivation identity, not a fixed-size matrix special case.
+
+The dedicated [CI 45141129492](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/45141129492)
+passed pinned Lean --trust=0 and individual axiom audit for **21
+theorems**, and the original nonflat warped-metric oracle passed.
+A separate exact symbolic 2x2 noncommuting polynomial connection test
+is added to guard the operator identity at a nonconstant example.
+That oracle's next exact-head CI is checked independently.
+
+Remaining Mathlib integration:
+- Construct coordinate derivations from genuinely differentiable
+  scalar functions on an arbitrary manifold chart.
+- Identify the coefficient connection Γ with Mathlib
+  CovariantDerivative / Levi-Civita using local trivializations.
+- Define and prove the global curvature tensor under chart change;
+  then Ricci contraction and Lorentzian/pseudo-Riemannian variants.
+- Only after these can generic GH Ricci-flatness and KK/EMD reduction
+  be formalized as manifold-level theorems.
+
+This code is a reusable *coordinate differential algebra* layer;
+the Mathlib global manifold curvature gap is not claimed closed.
