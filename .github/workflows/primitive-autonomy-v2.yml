@@ -233,6 +233,29 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Rebuild trusted Lean sources before any privileged-stage compilation
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.primitive_v2 prepare \
+            --root . \
+            --state ../state/docs/autonomy/primitive-v2-state.json \
+            --head "$GITHUB_SHA" \
+            --day "$(date -u +%F)" \
+            --output ../replay
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          original, trusted = Path("../cycle"), Path("../replay")
+          assert json.loads((original / "plan.json").read_text()) == json.loads((trusted / "plan.json").read_text())
+          a = sorted(p.name for p in (original / "proof").glob("*.lean"))
+          b = sorted(p.name for p in (trusted / "proof").glob("*.lean"))
+          assert a == b and len(b) == 2
+          for name in b:
+              assert (original / "proof" / name).read_bytes() == (trusted / "proof" / name).read_bytes()
+          PY
       - name: Install pinned Lean for independent privileged-stage replay
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
@@ -247,7 +270,7 @@ jobs:
         shell: bash
         run: |
           set -uo pipefail
-          for file in ../../cycle/proof/*.lean; do
+          for file in ../../replay/proof/*.lean; do
             test -f "$file" || { echo 'No generated Lean source'; exit 1; }
             name="$(basename "$file" .lean)"
             directory="$(dirname "$file")"
@@ -265,13 +288,13 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git -C control rev-parse HEAD)" = "$GITHUB_SHA"
-          python -B control/tools/autonomy/proof_forge.py audit --output cycle/proof
+          python -B control/tools/autonomy/proof_forge.py audit --output replay/proof
           python -B -m tools.autonomy.primitive_v2 receipt \
             --root control \
             --state state/docs/autonomy/primitive-v2-state.json \
             --head "$GITHUB_SHA" \
             --day "$(date -u +%F)" \
-            --evidence cycle \
+            --evidence replay \
             --output state/docs/autonomy/primitive-v2-state.json
       - name: Commit only verified JSON data into isolated feedback branch
         working-directory: state
