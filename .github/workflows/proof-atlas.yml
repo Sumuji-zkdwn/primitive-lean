@@ -42,6 +42,13 @@ jobs:
           node --check apps/proof-atlas/ui.test.cjs
       - name: Run 465-node model and Android event tests
         run: node --test apps/proof-atlas/atlas.test.cjs apps/proof-atlas/ui.test.cjs
+      - name: Package independently usable offline HTML
+        uses: actions/upload-artifact@v6
+        with:
+          name: primitive-atlas-offline-html
+          path: apps/proof-atlas/play.html
+          if-no-files-found: error
+          retention-days: 14
 
   visual:
     name: Capture Android portrait, landscape and desktop proof map
