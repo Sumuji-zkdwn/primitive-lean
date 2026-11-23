@@ -1,0 +1,212 @@
+name: Generic Forge - non-math autonomous operator laboratory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/generic-forge.yml'
+      - 'tools/autonomy/generic_forge.py'
+      - 'tests/test_generic_forge.py'
+      - 'tests/fixtures/generic_forge_empty.json'
+      - 'docs/autonomy/GENERIC_FORGE.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/generic-forge.yml'
+      - 'tools/autonomy/generic_forge.py'
+  schedule:
+    # 10:19 UTC = 19:19 JST, after the existing finite research workflows.
+    - cron: '19 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: generic-forge-verified-macro-ledger
+  cancel-in-progress: false
+
+jobs:
+  pure-regression:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout proposal with no persisted token
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run full-domain two-implementation tests and macro reentry
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/generic_forge.py tests/test_generic_forge.py
+          python -m unittest discover -s tests -p 'test_generic_forge.py' -v
+      - name: Produce the first isolated operator candidate
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.generic_forge prepare \
+            --state tests/fixtures/generic_forge_empty.json \
+            --day 2026-11-24 \
+            --head "$(git rev-parse HEAD)" \
+            --output verification/generic-forge/replay
+      - name: Independently certify the full finite behavior and receipt transition
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.generic_forge receipt \
+            --state tests/fixtures/generic_forge_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/generic-forge/replay \
+            --output verification/generic-forge/ephemeral-next-state.json
+      - name: Execute newly certified image operator as an actual program
+        shell: bash
+        run: |
+          set -euo pipefail
+          id="$(python - <<'PY'
+          import json
+          with open("verification/generic-forge/ephemeral-next-state.json", encoding="utf-8") as f:
+              print(json.load(f)["receipts"][0]["id"])
+          PY
+          )"
+          python -B -m tools.autonomy.generic_forge run \
+            --state verification/generic-forge/ephemeral-next-state.json \
+            --operator-id "$id" --value 1 \
+            > verification/generic-forge/example-execution.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          sample = json.loads(Path("verification/generic-forge/example-execution.json").read_text())
+          assert sample["domain"] == "grid3"
+          assert len(sample["input_view"]) == len(sample["output_view"]) == 3
+          assert sample["input"] == 1
+          print("Executed certified image operator:", sample["operator_id"])
+          print("Output pixels:", sample["output_view"])
+          PY
+      - name: Retain exact SHA-bound evidence from PR CI
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: generic-forge-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/generic-forge/
+          if-no-files-found: warn
+          retention-days: 30
+
+  synthesize-one:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    outputs:
+      candidate: ${{ steps.propose.outputs.candidate }}
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout exact trusted main generator
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Treat verified macro branch as data only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/generic-forge-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Regress the independent evaluator and candidate-selection contract
+        working-directory: control
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -m unittest discover -s tests -p 'test_generic_forge.py' -v
+      - name: Generate candidate from the actual prior certified library
+        id: propose
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.generic_forge prepare \
+            --state ../state/docs/autonomy/generic-forge-state.json \
+            --day "$(date -u +%F)" \
+            --head "$GITHUB_SHA" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("../cycle/plan.json", encoding="utf-8") as f:
+              print("candidate=" + str(json.load(f)["candidate"]).lower())
+          PY
+      - name: Archive the proposed operator and evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: generic-forge-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          if-no-files-found: warn
+          retention-days: 30
+
+  store-certified:
+    if: github.ref == 'refs/heads/main' && needs.synthesize-one.result == 'success' && needs.synthesize-one.outputs.candidate == 'true'
+    needs: [synthesize-one]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout trusted main evaluator without write token
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Checkout isolated data ledger only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/generic-forge-state
+          path: state
+          persist-credentials: true
+      - name: Restore unprivileged proposal
+        uses: actions/download-artifact@v4
+        with:
+          name: generic-forge-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Regenerate same candidate from current verified state
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.generic_forge prepare \
+            --state ../state/docs/autonomy/generic-forge-state.json \
+            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --output ../replay
+          cmp ../cycle/plan.json ../replay/plan.json
+      - name: Independently execute and exhaustively verify candidate before writing
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.generic_forge receipt \
+            --state ../state/docs/autonomy/generic-forge-state.json \
+            --head "$GITHUB_SHA" --evidence ../replay \
+            --output ../state/docs/autonomy/generic-forge-state.json
+      - name: Commit only verified JSON operator data
+        working-directory: state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "generic-forge[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/autonomy/generic-forge-state.json
+          test "$(git diff --cached --name-only)" = "docs/autonomy/generic-forge-state.json"
+          git commit -m "generic-forge: certify one reusable operator macro"
+          git push origin HEAD:refs/heads/autonomy/generic-forge-state
