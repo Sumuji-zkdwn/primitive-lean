@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
+  "main_commit": "30a0ffe49d03c19d21b385c2e1431bd40739f137",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -2601,6 +2601,33 @@
         "TwoWavelengthPhase"
       ],
       "sha256": "891646a0e55986d203b7858c667830c617d6fa7fd40f7413a979ef2bd0eee038"
+    },
+    {
+      "id": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ArcChebyshev.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputArcChebyshev",
+      "declarations": [
+        "arcCubicSet",
+        "chebyshevScale",
+        "chebyshevLevel",
+        "chebyshevScale_pos",
+        "chebyshevScale_sq",
+        "mem_arcCubicSet_iff_input",
+        "locallyMinimizing_constant_curvature_cubic",
+        "mem_arcCubicSet_iff_chebyshev",
+        "arcCubicSet_eq_image",
+        "chebyshevLevel_sq",
+        "chebyshevLevel_abs_lt_one",
+        "chebyshevLevel_sq_eq_one",
+        "arcCubicSet_ncard_three",
+        "arcCubicSet_ncard_two",
+        "locallyMinimizing_arc_chebyshev_fiber",
+        "circle_zero_pressure_fiber"
+      ],
+      "imports": [],
+      "sha256": "9b1107b41016895ffb04db75ff8258655188d8d484a81fb946e805995bab1cb2"
     },
     {
       "id": "main:linear_input/lean_check/AreaExactVariation.inc",
@@ -12265,6 +12292,21 @@
       "sha256": "8642c7c404584af2f7855faaa1a3a6d7f724f499ac799855d2693b3d75c36436"
     },
     {
+      "id": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "scope": "main",
+      "path": "linear_input/lean_check/ScaleTemperature.inc",
+      "group": "Other supplements",
+      "namespace": "LinearInputScaleTemperature",
+      "declarations": [
+        "scaled_posterior_homogeneous",
+        "scaled_posterior_quadratic",
+        "scaled_posterior_quadratic_tilt",
+        "scaled_posterior_tendsto_prior"
+      ],
+      "imports": [],
+      "sha256": "becdbfb5465f5739fba8b4b942b23476a55863aec8cbab24d8ab6f861b99a876"
+    },
+    {
       "id": "main:linear_input/lean_check/SemanticIntervalNecessity.inc",
       "scope": "main",
       "path": "linear_input/lean_check/SemanticIntervalNecessity.inc",
@@ -16191,6 +16233,70 @@
         "idealObservation",
         "observation",
         "ratioPhase"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/AreaMinimum.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputAreaMinimum.LocallyMinimizing"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/BranchFibers.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputBranchFibers.real_inverse_card_neg_one",
+        "LinearInputBranchFibers.real_inverse_card_one",
+        "LinearInputBranchFibers.real_inverse_card_regular"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/BranchFibers.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "real_inverse_card_neg_one",
+        "real_inverse_card_one",
+        "real_inverse_card_regular"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/BranchForgetting.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "chebyshevThree",
+        "input_normalization",
+        "ternaryIterate"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/MainResult.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputMainResult.circle_pressure_stationary",
+        "LinearInputMainResult.locallyMinimizing_pressure_curvature_phase"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/MainResult.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "circle_pressure_stationary",
+        "locallyMinimizing_pressure_curvature_phase"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ArcChebyshev.inc",
+      "to": "main:linear_input/lean_check/PressureStationary.inc",
+      "kind": "qualified_reference",
+      "symbols": [
+        "LinearInputPressureStationary.Stationary"
       ]
     },
     {
@@ -25751,6 +25857,57 @@
       ]
     },
     {
+      "from": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "to": "main:lean/Elastica/ExponentialWeight.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.exponentialWeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "to": "main:lean/Elastica/ExponentialWeight.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "exponentialWeight"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "to": "main:lean/Elastica/Scaling.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.energy_scaling_of_homogeneous",
+        "Elastica.energy_scaling_quadratic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "to": "main:lean/Elastica/Scaling.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "energy_scaling_of_homogeneous",
+        "energy_scaling_quadratic"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "to": "main:lean/Elastica/Variation.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "Elastica.energy"
+      ]
+    },
+    {
+      "from": "main:linear_input/lean_check/ScaleTemperature.inc",
+      "to": "main:linear_input/lean_check/FiniteBayes.inc",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "IsDistribution",
+        "curve_weight_as_tilt"
+      ]
+    },
+    {
       "from": "main:linear_input/lean_check/SemanticIntervalNecessity.inc",
       "to": "main:linear_input/lean_check/OperatorVocabularyRefinement.inc",
       "kind": "unique_identifier_candidate",
@@ -27460,7 +27617,9 @@
     "linear_input/lean_check/CurveWordBVIntrinsicTree.inc",
     "linear_input/lean_check/CurveWordBVHamblyLyons.inc",
     "linear_input/lean_check/CurveWordBVEquivalence.inc",
-    "linear_input/lean_check/CurveWordBVCoordinates.inc"
+    "linear_input/lean_check/CurveWordBVCoordinates.inc",
+    "linear_input/lean_check/ScaleTemperature.inc",
+    "linear_input/lean_check/ArcChebyshev.inc"
   ],
   "prs": [
     {
@@ -27738,28 +27897,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "30a0ffe49d03c19d21b385c2e1431bd40739f137",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "30a0ffe49d03c19d21b385c2e1431bd40739f137",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "30a0ffe49d03c19d21b385c2e1431bd40739f137",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "7695a685989316c03622c229860d746ca6f0f3d8",
+      "base_sha": "30a0ffe49d03c19d21b385c2e1431bd40739f137",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
