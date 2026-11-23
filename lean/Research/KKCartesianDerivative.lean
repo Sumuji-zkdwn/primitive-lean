@@ -76,9 +76,9 @@ theorem E.hasDerivAt_x (a x z : ℝ) (e : E) (he : e.Good a x z) :
       rcases he with ⟨hl,hr⟩
       convert (ihl hl).mul (ihr hr) using 1 <;>
         simp [E.eval, E.dx, Pi.mul_apply]
-  | neg e ih => (by
-        convert (ih he).neg using 1 <;>
-          simp [E.eval, E.dx, Pi.neg_apply])
+  | neg e ih =>
+      convert (ih he).neg using 1 <;>
+        simp [E.eval, E.dx, Pi.neg_apply]
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
@@ -99,9 +99,9 @@ theorem E.hasDerivAt_z (a x z : ℝ) (e : E) (he : e.Good a x z) :
       rcases he with ⟨hl,hr⟩
       convert (ihl hl).mul (ihr hr) using 1 <;>
         simp [E.eval, E.dz, Pi.mul_apply]
-  | neg e ih => (by
-        convert (ih he).neg using 1 <;>
-          simp [E.eval, E.dz, Pi.neg_apply])
+  | neg e ih =>
+      convert (ih he).neg using 1 <;>
+        simp [E.eval, E.dz, Pi.neg_apply]
   | inv e ih =>
       rcases he with ⟨hw, hnz⟩
       convert (ih hw).fun_inv hnz using 1 <;>
