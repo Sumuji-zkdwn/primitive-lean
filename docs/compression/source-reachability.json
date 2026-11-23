@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1396,
-    "eligible_direct_edges": 435,
-    "nodes": 441,
-    "retained_pairs": 313,
+    "all_source_edges": 1403,
+    "eligible_direct_edges": 438,
+    "nodes": 442,
+    "retained_pairs": 316,
     "transitive_pairs_removed": 115,
-    "unique_eligible_pairs": 428,
-    "weak_edges_excluded": 961
+    "unique_eligible_pairs": 431,
+    "weak_edges_excluded": 965
   },
   "edges": [
     [
@@ -296,6 +296,18 @@
     [
       "main:lean/Research/KKCartesianMetricConnection.lean",
       "main:lean/Research/KKCartesianGammaTable.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricRicci.lean",
+      "main:lean/Research/KKCartesianMetricConnection.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricRicci.lean",
+      "main:lean/Research/KKCartesianRicci.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricRicci.lean",
+      "main:lean/Research/KKCartesianSecondJet.lean"
     ],
     [
       "main:lean/Research/KKCartesianRicci.lean",
@@ -1334,6 +1346,7 @@
     "main:lean/Research/KKCartesianGammaTable.lean",
     "main:lean/Research/KKCartesianJet.lean",
     "main:lean/Research/KKCartesianMetricConnection.lean",
+    "main:lean/Research/KKCartesianMetricRicci.lean",
     "main:lean/Research/KKCartesianRicci.lean",
     "main:lean/Research/KKCartesianSecondJet.lean",
     "main:lean/Research/KKRadialVacuumBridge.lean",
@@ -1708,8 +1721,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "e10a636d5301978e809f30b5bf8b8bf7b67188a860336280fa262886f09fde06",
-    "main_commit": "8f193e2de2a7b09942a752b37611a4d6fc7f1419",
+    "graph_sha256": "dd9337a02ddf8e5e763678f9d1099b9785f8ab6023c338ac96cd53a06bb3acd9",
+    "main_commit": "33c41b26e41d5015f7bfe039f640c5c3b14b2cc8",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [

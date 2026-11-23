@@ -229,6 +229,13 @@ main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesi
 main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianDerivative.lean	unique_identifier_candidate	gaugeEntry
 main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianGammaTable.lean	exact_import	Research.KKCartesianGammaTable
 main:lean/Research/KKCartesianMetricConnection.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianDerivative.lean	unique_identifier_candidate	gaugeEntry,metric_good
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianMetricConnection.lean	exact_import	Research.KKCartesianMetricConnection
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianMetricConnection.lean	unique_identifier_candidate	all_125_gamma_entries_agree,gammaFromMetricE,partialMetricE
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianRicci.lean	exact_import	Research.KKCartesianRicci
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianRicci.lean	unique_identifier_candidate	all_25_ricci_entries_zero
+main:lean/Research/KKCartesianMetricRicci.lean	main:lean/Research/KKCartesianSecondJet.lean	exact_import	Research.KKCartesianSecondJet
 main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	exact_import	Research.KKCartesianGammaTable
 main:lean/Research/KKCartesianRicci.lean	main:lean/Research/KKCartesianGammaTable.lean	unique_identifier_candidate	gammaOrdered
 main:lean/Research/KKCartesianSecondJet.lean	main:lean/Research/KKCartesianDerivative.lean	exact_import	Research.KKCartesianDerivative

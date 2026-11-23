@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "8f193e2de2a7b09942a752b37611a4d6fc7f1419",
+  "main_commit": "33c41b26e41d5015f7bfe039f640c5c3b14b2cc8",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1861,6 +1861,33 @@
         "Mathlib.LinearAlgebra.Matrix.Notation"
       ],
       "sha256": "5b06b5156892bb1ee856bc16c74ea229f4b10d4af79b15c15a2f2190ef4115c1"
+    },
+    {
+      "id": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "scope": "main",
+      "path": "lean/Research/KKCartesianMetricRicci.lean",
+      "group": "Other",
+      "namespace": "KKCartesianMetricRicci",
+      "declarations": [
+        "inverse_good",
+        "partial_metric_good",
+        "gamma_metric_good",
+        "gamma_table_good",
+        "gamma_dx_agree",
+        "gamma_dz_agree",
+        "partial_gamma_agree",
+        "ricciMetricTerm",
+        "ricciFromMetricE",
+        "ricci_from_metric_eq_table",
+        "all_25_metric_ricci_zero"
+      ],
+      "imports": [
+        "Research.KKCartesianSecondJet",
+        "Research.KKCartesianMetricConnection",
+        "Research.KKCartesianRicci",
+        "Mathlib.Tactic"
+      ],
+      "sha256": "b193a45daab810bdc3766c1003fe999fd50189dd3bdbd499e09d8b7d185a4a66"
     },
     {
       "id": "main:lean/Research/KKCartesianRicci.lean",
@@ -16106,6 +16133,65 @@
       ]
     },
     {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianDerivative.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "gaugeEntry",
+        "metric_good"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianGammaTable.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "gammaOrdered"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.KKCartesianMetricConnection"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianMetricConnection.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "all_125_gamma_entries_agree",
+        "gammaFromMetricE",
+        "partialMetricE"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianRicci.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.KKCartesianRicci"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianRicci.lean",
+      "kind": "unique_identifier_candidate",
+      "symbols": [
+        "all_25_ricci_entries_zero"
+      ]
+    },
+    {
+      "from": "main:lean/Research/KKCartesianMetricRicci.lean",
+      "to": "main:lean/Research/KKCartesianSecondJet.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.KKCartesianSecondJet"
+      ]
+    },
+    {
       "from": "main:lean/Research/KKCartesianRicci.lean",
       "to": "main:lean/Research/KKCartesianGammaTable.lean",
       "kind": "exact_import",
@@ -28055,28 +28141,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "8f193e2de2a7b09942a752b37611a4d6fc7f1419",
+      "base_sha": "33c41b26e41d5015f7bfe039f640c5c3b14b2cc8",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "8f193e2de2a7b09942a752b37611a4d6fc7f1419",
+      "base_sha": "33c41b26e41d5015f7bfe039f640c5c3b14b2cc8",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "8f193e2de2a7b09942a752b37611a4d6fc7f1419",
+      "base_sha": "33c41b26e41d5015f7bfe039f640c5c3b14b2cc8",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "8f193e2de2a7b09942a752b37611a4d6fc7f1419",
+      "base_sha": "33c41b26e41d5015f7bfe039f640c5c3b14b2cc8",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
