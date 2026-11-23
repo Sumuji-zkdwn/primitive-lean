@@ -74,14 +74,14 @@ def validated_inputs(generic_state, meta_state, generic_runs, meta_runs):
             status = row.get("status")
             conclusion = row.get("conclusion")
             require(event in {"schedule", "push", "workflow_dispatch",
-                              "repository_dispatch", "workflow_run"},
+                              "repository_dispatch", "workflow_run", "pull_request"},
                     "unexpected workflow event")
             require(status in {"queued", "requested", "waiting", "pending",
                                "in_progress", "completed"}, "unexpected status")
             if status == "completed":
                 require(conclusion in {"success", "failure", "cancelled",
                                        "skipped", "timed_out", "action_required",
-                                       "neutral", "stale"},
+                                       "neutral", "stale", "startup_failure"},
                         "unexpected completed conclusion")
             items.append({"id": row["id"], "created_at": created,
                           "event": event, "status": status,
@@ -187,10 +187,13 @@ def dispatch_gate(kind, state, runs, now):
     if latest_saved is not None and "T" in latest_saved:
         if parse_time(latest_saved) >= current_slot:
             return {"allowed": False, "reason": "CURRENT_SLOT_ALREADY_SAVED"}
+    operational = [row for row in runs if row["event"] in
+                   {"schedule", "push", "workflow_dispatch",
+                    "repository_dispatch", "workflow_run"}]
     if any(row["status"] in {"queued", "requested", "waiting", "pending",
-                             "in_progress"} for row in runs):
+                             "in_progress"} for row in operational):
         return {"allowed": False, "reason": "WORKFLOW_STILL_ACTIVE"}
-    recent = [row["created_at"] for row in runs
+    recent = [row["created_at"] for row in operational
               if row["created_at"] <= now]
     if recent and (now - max(recent)).total_seconds() < COOLDOWN_SECONDS:
         return {"allowed": False, "reason": "LAST_LAUNCH_INSIDE_COOLDOWN"}
