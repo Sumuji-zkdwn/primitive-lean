@@ -1,0 +1,38 @@
+name: Theorem Arcade (existing formalized mechanisms)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'games/theorem-arcade/**'
+      - '.github/workflows/theorem-arcade.yml'
+      - 'linear_input/lean_check/Rule481Symmetry.inc'
+      - 'linear_input/lean_check/LaaksoSignedConnection.inc'
+      - 'experiments/sandpile_laakso/formalization/ClockAvalancheExample.lean'
+  push:
+    branches: [main, 'chatgpt/theorem-arcade-*']
+    paths:
+      - 'games/theorem-arcade/**'
+      - '.github/workflows/theorem-arcade.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exhaustive finite cases and theorem witness regression
+        run: node --test games/theorem-arcade/engine.test.cjs games/theorem-arcade/ui.test.cjs
+      - name: Syntax check
+        run: |
+          node --check games/theorem-arcade/engine.js
+          node --check games/theorem-arcade/ui.js
