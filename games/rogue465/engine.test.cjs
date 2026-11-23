@@ -128,8 +128,9 @@ test("Rule 481 spore dynamics matches source truth table and symmetries",()=>{
 test("death is permanent, and a cleared layer-1 goal advances or wins",()=>{
   let s=pick(E.newGame(13));
   // Independent UI goal guard check; bypassing combat in test only.
-  s.depth=3;s.vertex=3;s.layer=1;s.rooms[E.roomKey(s)]={...E.current(s),enemies:[],
-    claimed:true,map:E.current(s).map,sand:E.current(s).sand,spores:null};
+  const template=copy(E.current(s));
+  s.depth=3;s.vertex=3;s.layer=1;
+  s.rooms[E.roomKey(s)]={...template,enemies:[],claimed:true,spores:null};
   const ended=E.act(s,{type:"descend"});
   assert.equal(ended.status,"won");
   assert.ok(ended.score>0);
