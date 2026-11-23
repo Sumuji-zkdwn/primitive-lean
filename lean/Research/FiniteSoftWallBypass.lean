@@ -59,7 +59,8 @@ theorem bypass_energy_lt_seventy (e d : ℝ)
 /-- The direct path passes through a zero: V=100 exactly. -/
 theorem direct_wall_energy_ge_hundred (e : ℝ) (he : 0 ≤ e) :
     100 ≤ e + (1 : ℝ) / ((1 : ℝ) / 100 + 0) := by
-  norm_num
+  have h : (1 : ℝ) / ((1 : ℝ) / 100 + 0) = 100 := by norm_num
+  rw [h]
   linarith
 
 /-- The bypass upper bound is strictly smaller than the direct wall value. -/
