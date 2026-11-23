@@ -42,6 +42,7 @@
  const STORAGE="primitive-foundry-save-v2";
  let world=null,category="logistics",tool="pan",dir=0,zoom=1;
  let pane="inspect",mobileScreen="factory",selected=null,clock=null,speed=1,touch=null,lastSave=0,helpOpen=false;
+ const mapPointers=new Map();let mapPinch=null;
  const mobileScreens=["factory","build","inspect","research","documents"];
  let selectedProof=0,proofStatus="ready",proofSchool="all",proofSearch="";
  let graphMode="focus",graphShift={x:0,y:0},graphPointer=null,graphZoom=1;
@@ -641,13 +642,40 @@
  canvas.addEventListener("pointerdown",e=>{
   if(e.button!==undefined&&e.button!==0)return;
   e.preventDefault();canvas.setPointerCapture?.(e.pointerId);
-  const p=xyOfEvent(e),w=screenToWorld(p.x,p.y);
-  touch={x:p.x,y:p.y,oldX:p.x,oldY:p.y,original:w,last:w,moved:false,mode:tool};
+  const id=e.pointerId??"pointer";
+  const p=xyOfEvent(e);
+  mapPointers.set(id,p);
+  if(mapPointers.size>=2){
+   const pair=[...mapPointers.values()].slice(0,2);
+   const mid={x:(pair[0].x+pair[1].x)/2,y:(pair[0].y+pair[1].y)/2};
+   const unit=tileSize();
+   mapPinch={distance:Math.max(1,Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y)),
+    startZoom:zoom,anchorX:camX+(mid.x-layoutW/2)/unit,anchorY:camY+(mid.y-layoutH/2)/unit};
+   touch=null;return;
+  }
+  const w=screenToWorld(p.x,p.y);
+  touch={pointerId:id,x:p.x,y:p.y,oldX:p.x,oldY:p.y,original:w,last:w,moved:false,mode:tool};
   if(tool==="belt"&&w)interact(w.x,w.y,dir);
  });
  canvas.addEventListener("pointermove",e=>{
-  if(!touch)return;e.preventDefault();
-  const p=xyOfEvent(e),dx=p.x-touch.oldX,dy=p.y-touch.oldY;
+  const id=e.pointerId??"pointer",p=xyOfEvent(e);
+  if(mapPointers.has(id))mapPointers.set(id,p);
+  if(mapPinch&&mapPointers.size>=2){
+   e.preventDefault();
+   const pair=[...mapPointers.values()].slice(0,2);
+   const dist=Math.max(1,Math.hypot(pair[0].x-pair[1].x,pair[0].y-pair[1].y));
+   const mid={x:(pair[0].x+pair[1].x)/2,y:(pair[0].y+pair[1].y)/2};
+   zoom=Math.max(.5,Math.min(3.2,mapPinch.startZoom*dist/mapPinch.distance));
+   const unit=tileSize();
+   camX=mapPinch.anchorX-(mid.x-layoutW/2)/unit;
+   camY=mapPinch.anchorY-(mid.y-layoutH/2)/unit;
+   camX=Math.max(-1,Math.min(F.W+1,camX));
+   camY=Math.max(-1,Math.min(F.H+1,camY));
+   draw();return;
+  }
+  if(!touch||touch.pointerId!==id)return;
+  e.preventDefault();
+  const dx=p.x-touch.oldX,dy=p.y-touch.oldY;
   if(Math.abs(p.x-touch.x)+Math.abs(p.y-touch.y)>8)touch.moved=true;
   if(touch.mode==="belt"){
    const w=screenToWorld(p.x,p.y);
@@ -661,14 +689,20 @@
   touch.oldX=p.x;touch.oldY=p.y;
  });
  function endTouch(e){
-  if(!touch)return;
+  const id=e.pointerId??(touch?.pointerId??"pointer");
+  mapPointers.delete(id);
+  if(mapPinch){
+   if(mapPointers.size<2)mapPinch=null;
+   touch=null;return;
+  }
+  if(!touch||touch.pointerId!==id)return;
   const mode=touch.mode,moved=touch.moved,initial=touch.original;
   if(mode==="belt"){persist();renderInspector();}
   else if(!moved&&initial)interact(initial.x,initial.y);
   touch=null;
  }
  canvas.addEventListener("pointerup",endTouch);
- canvas.addEventListener("pointercancel",()=>{touch=null;persist();});
+ canvas.addEventListener("pointercancel",()=>{touch=null;mapPointers.clear();mapPinch=null;persist();});
  viewport.addEventListener("wheel",e=>{
   e.preventDefault();zoom=Math.max(.5,Math.min(3.2,zoom*(e.deltaY<0?1.12:.89)));draw();
  },{passive:false});
