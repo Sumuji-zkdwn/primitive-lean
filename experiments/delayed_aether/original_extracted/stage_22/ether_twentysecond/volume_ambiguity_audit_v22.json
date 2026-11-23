@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "alpha": 0.0,
+      "final_scale": 8.333501905018172,
+      "final_q": 0.48107217639560423,
+      "final_z": 0.5142521426500533,
+      "max_lapse_constraint": 1.5482670701061352e-10
+    },
+    {
+      "alpha": 1.0,
+      "final_scale": 2.574213032554001,
+      "final_q": 0.5393053103832989,
+      "final_z": 0.708335949935899,
+      "max_lapse_constraint": 2.5818569504565403e-11
+    },
+    {
+      "alpha": 2.0,
+      "final_scale": 1.9314582780399534,
+      "final_q": 0.5918226495118059,
+      "final_z": 0.8703108058085964,
+      "max_lapse_constraint": 4.263944752835869e-11
+    }
+  ],
+  "interpretation": "Reparametrization alone does not imply unique nonlinear gravitation action. Full spatial diffeomorphism not tested."
+}

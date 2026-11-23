@@ -1,0 +1,13 @@
+README.md: OK
+RESEARCH_NOTE_2026-11-23_v24.md: OK
+verify_v24.py: OK
+independent_audit_v24.py: OK
+audit_v24.json: OK
+exact_rational_audit_v24.json: OK
+bracket_convergence_v24.csv: OK
+gradient_audit_v24.csv: OK
+constraint_closure_v24.png: OK
+bracket_discretization_v24.png: OK
+characteristic_speeds_v24.png: OK
+verify_log_v24.txt: OK
+independent_log_v24.txt: OK

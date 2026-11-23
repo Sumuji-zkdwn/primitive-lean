@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "6_distinct_starts_converge_to_same_n120_energy": true,
+    "n320_is_lower_than_old_profile": true,
+    "fine_grid_energy_close_to_n240": true,
+    "all_optimizer_runs_report_success": true,
+    "analytic_gradient_agrees_with_torch": true,
+    "radial_hessians_symmetric": true,
+    "radial_sampled_modes_have_positive_omega2": true,
+    "all_projected_nonradial_omega2_positive": true,
+    "angular_quadrature_second_variation_O_eps2": true
+  },
+  "passed": true,
+  "counts": {
+    "spherical_resolution_tests": 5,
+    "multistarts": 6,
+    "nonradial_projected_matrix_cases": 10
+  },
+  "limits": [
+    "flat spacetime; G=0",
+    "finite radial box with Dirichlet boundary",
+    "hedgehog equilibrium only",
+    "nonradial modes restricted to angular perturbations of f and chi; internal orientation modes excluded",
+    "finite-dimensional basis, not complete spectrum",
+    "static reversible chi field is not irreversible delay"
+  ]
+}

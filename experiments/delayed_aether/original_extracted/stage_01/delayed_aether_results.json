@@ -1,0 +1,153 @@
+{
+  "parameters": {
+    "memory_time_tau": 2.0,
+    "hardening_threshold_mc": 0.2,
+    "hardening_power": 4,
+    "x_domain": [
+      -25,
+      25
+    ],
+    "pair_initial_separation": 4.0
+  },
+  "analytic_isolated_kink_energy": 0.9428090415820635,
+  "numeric_isolated_kink_energy": 0.9428090258685801,
+  "numeric_minus_analytic": -1.5713483403345663e-08,
+  "pair_profile_energies": [
+    {
+      "separation": 2.5,
+      "energy": 1.617682228739991,
+      "binding_vs_two_kinks": 0.2679358544241359
+    },
+    {
+      "separation": 3.0,
+      "energy": 1.7422576899614584,
+      "binding_vs_two_kinks": 0.14336039320266858
+    },
+    {
+      "separation": 3.5,
+      "energy": 1.8112176302050742,
+      "binding_vs_two_kinks": 0.07440045295905273
+    },
+    {
+      "separation": 4.0,
+      "energy": 1.8477697202482153,
+      "binding_vs_two_kinks": 0.03784836291591165
+    },
+    {
+      "separation": 4.5,
+      "energy": 1.866606065520132,
+      "binding_vs_two_kinks": 0.01901201764399496
+    },
+    {
+      "separation": 5.0,
+      "energy": 1.87614177336914,
+      "binding_vs_two_kinks": 0.009476309794987037
+    },
+    {
+      "separation": 6.0,
+      "energy": 1.8832918113698542,
+      "binding_vs_two_kinks": 0.002326271794272694
+    },
+    {
+      "separation": 7.0,
+      "energy": 1.8850508072613583,
+      "binding_vs_two_kinks": 0.0005672759027686158
+    },
+    {
+      "separation": 8.0,
+      "energy": 1.885480022640007,
+      "binding_vs_two_kinks": 0.00013806052411990954
+    },
+    {
+      "separation": 10.0,
+      "energy": 1.8856098907599879,
+      "binding_vs_two_kinks": 8.192404139073517e-06
+    }
+  ],
+  "runs": [
+    {
+      "case": "kink_no_hardening",
+      "dx": 0.1,
+      "dt": 0.001,
+      "duration": 50,
+      "collapse_time": null,
+      "center_phi": 1.0882844336684858e-15,
+      "peak_modulus": 1.0,
+      "peak_memory": 0.49916596919219747,
+      "max_abs_gradient": 0.7065167862069894,
+      "field_energy_excluding_memory": 0.9426518036719382
+    },
+    {
+      "case": "kink_hardening",
+      "dx": 0.1,
+      "dt": 0.001,
+      "duration": 50,
+      "collapse_time": null,
+      "center_phi": 5.37564377074243e-16,
+      "peak_modulus": 1.919408317044112,
+      "peak_memory": 0.19208422404636144,
+      "max_abs_gradient": 0.43827414257098696,
+      "field_energy_excluding_memory": 1.0094298117362486
+    },
+    {
+      "case": "pair_no_hardening",
+      "dx": 0.1,
+      "dt": 0.001,
+      "duration": 15,
+      "collapse_time": 6.997,
+      "center_phi": -0.9999997881009066,
+      "peak_modulus": 1.0,
+      "peak_memory": 0.0067710866132501355,
+      "max_abs_gradient": 3.2204287014891975e-08,
+      "field_energy_excluding_memory": 3.219724393690589e-13
+    },
+    {
+      "case": "pair_hardening",
+      "dx": 0.1,
+      "dt": 0.001,
+      "duration": 15,
+      "collapse_time": 2.415,
+      "center_phi": -0.9999999999750373,
+      "peak_modulus": 1.0000000000359044,
+      "peak_memory": 0.00041167945118446324,
+      "max_abs_gradient": 2.9598545836506673e-12,
+      "field_energy_excluding_memory": 5.697314593311205e-21
+    },
+    {
+      "case": "kink_hardening_without_doublewell",
+      "dx": 0.1,
+      "dt": 0.001,
+      "duration": 100,
+      "collapse_time": null,
+      "center_phi": 1.1136924715771376e-16,
+      "peak_modulus": 1.0000001327543497,
+      "peak_memory": 0.0032102192446857585,
+      "max_abs_gradient": 0.05611624968419834,
+      "field_energy_excluding_memory": 0.043196157583993734
+    },
+    {
+      "case": "pair_no_hardening_refined",
+      "dx": 0.05,
+      "dt": 0.00025,
+      "duration": 15,
+      "collapse_time": 6.992,
+      "center_phi": -0.9999997877657922,
+      "peak_modulus": 1.0,
+      "peak_memory": 0.006755399020563914,
+      "max_abs_gradient": 3.226545253198765e-08,
+      "field_energy_excluding_memory": 3.22911502423083e-13
+    },
+    {
+      "case": "pair_hardening_refined",
+      "dx": 0.05,
+      "dt": 0.00025,
+      "duration": 15,
+      "collapse_time": 2.4130000000000003,
+      "center_phi": -0.9999999999746452,
+      "peak_modulus": 1.0000000000362255,
+      "peak_memory": 0.00041259724208011274,
+      "max_abs_gradient": 3.0087043967341742e-12,
+      "field_energy_excluding_memory": 5.88110623851365e-21
+    }
+  ]
+}

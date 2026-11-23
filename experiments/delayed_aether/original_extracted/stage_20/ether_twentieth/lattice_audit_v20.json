@@ -1,0 +1,23 @@
+{
+  "model": "two coupled wave fields q,z on periodic 1D spatial lattice; nonlinear local potential; site kinetic and shared bond gradient energy",
+  "Hamiltonian_energy_balance_equation": "dot(e_i)+(J_(i+1/2)-J_(i-1/2))/dx=0",
+  "exact_lattice_current": "J_(i+1/2)=-[ (v_i+v_(i+1))*(q_(i+1)-q_i) + (w_i+w_(i+1))*(z_(i+1)-z_i) ]/(2 dx)",
+  "max_residual_for_100_independent_random_states": 2.2737367544323206e-13,
+  "coarse": {
+    "time_step": 0.004,
+    "steps": 1500,
+    "initial_energy": 0.9826702269881993,
+    "max_abs_relative_energy_drift": 1.0324385112349474e-05,
+    "max_instantaneous_local_balance_residual": 1.6861512186494565e-15
+  },
+  "fine": {
+    "time_step": 0.002,
+    "steps": 3000,
+    "initial_energy": 0.9826702269881993,
+    "max_abs_relative_energy_drift": 2.583628896738874e-06,
+    "max_instantaneous_local_balance_residual": 1.942890293094024e-15
+  },
+  "time_step_refinement_error_ratio": 3.9960789745699126,
+  "coupling_source_exchange": "q subsystem: dot e_q+div J_q=-F*v; z subsystem: dot e_z+div J_z=+F*w; potential: dot V=F*(v-w)",
+  "limits": "A periodic spatial lattice toy model, not 4D Einstein equations. Exact semidiscrete continuity does not imply exact conservation by time integrator."
+}

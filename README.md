@@ -11,6 +11,8 @@ Lean・mathlibの組合せはLMLExplore接続実験の固定環境に合わせ�
 
 2026-11-14追加：[Laakso第一近似の接続反転とE](docs/laakso/signed.md)。一辺の符号反転が二重被覆の到達可能性と二成分エネルギーの整合費用をどう変えるかを、既存の有限グラフと `E` の定義へ接続する。本文第8.25節と検証記録に、形式証明・有限検査・追加しない一般化の範囲を記す。
 
+正方格子の砂山から円周を含む層を作り、同じ空間と測度のまま、距離の測り方を変えるとポアンカレ不等式が回復する例を示しました。[亜Laakso空間の構造と性質](docs/laakso/sandpile.md)
+
 ## 主定理
 
 以下の5つが、このリポジトリの中心となる結果です。Lean の文は要点を抜き出したもので、正確な仮定は各リンク先の宣言を参照してください。いずれも**必要条件・存在・個数**の主張であり、逆向きや最小曲線の存在は主張しません。
@@ -114,6 +116,26 @@ python -B -X utf8 tools/verify.py --integration-only
 | 引数なし | 統合前の保存版との照合と、配布物・描画の検査を含む全体検査。`archive/before_unification_2026-10-20.zip` が必要で、このリポジトリには含まれていません |
 
 実行結果は `verification/` に出力されます（Git では追跡しません）。過去の検証記録は [docs/verification/](docs/verification/) にあります。
+
+### 素因数観測の5本を再実行する
+
+Actions の **Prime factor Lean probes** でブランチと `probe` を選びます。旧workflow名を指定していた CLI・REST 呼び出しでは、`prime-factor-probes.yml` と次の値を組み合わせます。
+
+| 旧workflowファイル | `probe` |
+|---|---|
+| `prime-factor-observation-probe.yml` | `observation` |
+| `prime-factor-orbits-probe.yml` | `orbits` |
+| `prime-factor-f0-adaptive-probe.yml` | `f0-adaptive` |
+| `prime-factor-general-f0-probe.yml` | `general-f0` |
+| `prime-factor-general-length-probe.yml` | `general-length` |
+
+```sh
+gh workflow run prime-factor-probes.yml --ref main -f probe=general-f0
+```
+
+5本すべてを実行する値は `all`（既定値）です。REST では `POST /repos/Sumuji-zkdwn/primitive-lean/actions/workflows/prime-factor-probes.yml/dispatches` に `{"ref":"main","inputs":{"probe":"general-f0"}}` を送ります。
+
+対象の ref には統合後のworkflowとスクリプトが必要です。過去のコミットを再現する場合は検証記録のコミットとrunを参照してください。
 
 ## 入口
 

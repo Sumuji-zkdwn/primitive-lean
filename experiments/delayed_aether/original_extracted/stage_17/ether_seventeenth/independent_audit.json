@@ -1,0 +1,54 @@
+{
+  "fixed_metric_variation": {
+    "fixed_metric_hamiltonian_initial": 64.0904019969056,
+    "directional_gradient_max_relative": 2.360509898657881e-09,
+    "directional_gradient_median_relative": 4.0002957196749733e-10,
+    "n_trials": 15,
+    "G": 0.0015,
+    "n": 72
+  },
+  "radial_ode_quadrature_cross_check": [
+    {
+      "G": 0.0012,
+      "n": 80,
+      "source_quadrature_vs_independent_ode_absolute_at_R": 0.004647652888465359,
+      "source_quadrature_vs_independent_ode_relative_at_R": 7.15310079872091e-05,
+      "metric_positive": true,
+      "radial_hamiltonian_relative_residual": 0.010620807803555753
+    },
+    {
+      "G": 0.0012,
+      "n": 160,
+      "source_quadrature_vs_independent_ode_absolute_at_R": 0.00045941187494236146,
+      "source_quadrature_vs_independent_ode_relative_at_R": 7.075748312662449e-06,
+      "metric_positive": true,
+      "radial_hamiltonian_relative_residual": 0.002733552405058894
+    },
+    {
+      "G": 0.0012,
+      "n": 320,
+      "source_quadrature_vs_independent_ode_absolute_at_R": 9.226061180811485e-05,
+      "source_quadrature_vs_independent_ode_relative_at_R": 1.4212214185489695e-06,
+      "metric_positive": true,
+      "radial_hamiltonian_relative_residual": 0.0006923745695053825
+    }
+  ],
+  "time_varying_metric_vs_fixed_metric": {
+    "n": 128,
+    "G": 0.002,
+    "T": 0.9,
+    "same_initial_matter_canonical_data": true,
+    "dynamic_vs_frozen_metric_f_RMS": 0.0016669276955011817,
+    "dynamic_vs_frozen_metric_chi_RMS": 0.0017754183959652983,
+    "dynamic_f_change_RMS": 0.1004219311064355,
+    "relative_f_difference_to_dynamic_change": 0.016599239599708885,
+    "dynamic_metric_center_lapse_change": -0.03323993226853217,
+    "note": "This checks backreaction beyond propagation in a fixed initial gravitational metric."
+  },
+  "flat_space_hamiltonian_conservation": {
+    "n": 128,
+    "T": 0.9,
+    "energy_initial": 66.6462771693662,
+    "max_relative_matter_hamiltonian_drift": 4.791873628637248e-12
+  }
+}

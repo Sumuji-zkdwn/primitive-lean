@@ -1,0 +1,10 @@
+no_memory E+D maximum residual: 1.2093437362636905e-11 final fraction of displacement 0.2654466190044804
+fast_memory E+D maximum residual: 1.6203216546273325e-10 final fraction of displacement 0.12588399089063568
+delayed_memory E+D maximum residual: 7.784564104440506e-10 final fraction of displacement 0.05637815979060875
+slow_memory E+D maximum residual: 9.162022251985036e-10 final fraction of displacement 0.16489626052443968
+linear_memory E+D maximum residual: 2.1046275833214168e-11 final fraction of displacement 0.05605225971673455
+fine_delayed E+D maximum residual: 4.2559662460917025e-09 final fraction of displacement 0.056119106410817715
+mesh comparison final_amplitude 0.00841434610344416
+mesh comparison final_radius 0.001787723398605581
+mesh comparison effective_charge_final 0.0005614269349399138
+ARCHIVE AUDIT PASSED

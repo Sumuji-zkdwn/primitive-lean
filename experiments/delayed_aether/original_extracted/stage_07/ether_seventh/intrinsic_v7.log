@@ -1,0 +1,8 @@
+{
+  "coordinate_displacements_tested": 1024,
+  "max_abs_coordinate_angle_deficit_rad": 1.7763568394002505e-15,
+  "intrinsic_edge_scale_0_90_deficit_degrees": -44.9878631506631,
+  "intrinsic_edge_scale_1_00_deficit_degrees": 0.0,
+  "intrinsic_edge_scale_1_10_deficit_degrees": 35.57169852705254,
+  "note": "2D intrinsic Regge curvature only. No 4D gravity or Einstein field equations."
+}

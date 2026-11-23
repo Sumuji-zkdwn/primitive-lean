@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "name": "orientation_old_alphabet",
+  "observations": [
+    0,
+    0,
+    1
+  ],
+  "transitions": [
+    [
+      0,
+      1,
+      2
+    ]
+  ],
+  "pair": [
+    0,
+    1
+  ]
+}

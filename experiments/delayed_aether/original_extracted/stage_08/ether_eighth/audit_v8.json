@@ -1,0 +1,105 @@
+{
+  "tetrahedron_six_edges_to_metric": {
+    "random_positive_tetrahedra": 100,
+    "max_metric_reconstruction_error": 1.1102230246251565e-16,
+    "caveat": "Shared-edge gluing across tetrahedra is not implemented."
+  },
+  "exact_fourier_dof_count": [
+    {
+      "q": [
+        1,
+        0,
+        0
+      ],
+      "constraint_rank": 4,
+      "gauge_rank": 4,
+      "phase_space_dimensions": 12,
+      "physical_phase_dimensions": 4,
+      "physical_wave_polarizations": 2
+    },
+    {
+      "q": [
+        0,
+        1,
+        0
+      ],
+      "constraint_rank": 4,
+      "gauge_rank": 4,
+      "phase_space_dimensions": 12,
+      "physical_phase_dimensions": 4,
+      "physical_wave_polarizations": 2
+    },
+    {
+      "q": [
+        0,
+        0,
+        1
+      ],
+      "constraint_rank": 4,
+      "gauge_rank": 4,
+      "phase_space_dimensions": 12,
+      "physical_phase_dimensions": 4,
+      "physical_wave_polarizations": 2
+    },
+    {
+      "q": [
+        1,
+        2,
+        3
+      ],
+      "constraint_rank": 4,
+      "gauge_rank": 4,
+      "phase_space_dimensions": 12,
+      "physical_phase_dimensions": 4,
+      "physical_wave_polarizations": 2
+    },
+    {
+      "q": [
+        2,
+        -1,
+        4
+      ],
+      "constraint_rank": 4,
+      "gauge_rank": 4,
+      "phase_space_dimensions": 12,
+      "physical_phase_dimensions": 4,
+      "physical_wave_polarizations": 2
+    }
+  ],
+  "local_constraint_identities": {
+    "spatial_points": 2197,
+    "bianchi_max_abs": 1.474514954580286e-17,
+    "scalar_constraint_gauge_change": 5.551115123125783e-17,
+    "metric_force_gauge_change": 2.7755575615628914e-17,
+    "momentum_constraint_gauge_change": 1.0408340855860843e-17,
+    "constraint_time_identity_error": 2.7755575615628914e-17,
+    "momentum_constraint_rate_error": 1.474514954580286e-17,
+    "potential_gauge_change_abs": 2.220446049250313e-16
+  },
+  "evolution_17": {
+    "grid": "17^3",
+    "steps": 320,
+    "dt": 0.14,
+    "initial_scalar_residual": 1.7780915628762273e-17,
+    "initial_momentum_residual": 7.48099499014998e-18,
+    "max_scalar_residual": 9.044414522874078e-16,
+    "max_momentum_residual": 1.0842021724855044e-17,
+    "max_rel_energy_change_H2": 2.9143815966991195e-06,
+    "initial_H2": 0.3854424795200232,
+    "final_H2": 0.3854425719057608,
+    "caveat": "This is canonical linearized Einstein gravity put in by hand."
+  },
+  "evolution_21": {
+    "grid": "21^3",
+    "steps": 96,
+    "dt": 0.14,
+    "initial_scalar_residual": 2.190088388420719e-17,
+    "initial_momentum_residual": 5.637851296924623e-18,
+    "max_scalar_residual": 1.682681771697503e-16,
+    "max_momentum_residual": 7.37257477290143e-18,
+    "max_rel_energy_change_H2": 1.3730459905092756e-06,
+    "initial_H2": 0.4952346760544678,
+    "final_H2": 0.49523506107576415,
+    "caveat": "This is canonical linearized Einstein gravity put in by hand."
+  }
+}

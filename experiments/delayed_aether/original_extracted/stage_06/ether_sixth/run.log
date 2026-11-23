@@ -1,0 +1,175 @@
+{
+  "model": "Flat-background disformal/exponential metric plus independent GR Schwarzschild benchmark",
+  "units": "G=c=m=1, m=GM/c^2",
+  "PPN_beta": 1.0,
+  "PPN_gamma": 1.0,
+  "PPN_exp_A": "1 - 2*u + 2*u**2 - 4*u**3/3 + O(u**4)",
+  "PPN_sch_A": "1 - 2*u + 2*u**2 - 3*u**3/2 + O(u**4)",
+  "PPN_exp_B": "1 + 2*u + 2*u**2 + 4*u**3/3 + O(u**4)",
+  "PPN_sch_B": "1 + 2*u + 3*u**2/2 + u**3/2 + O(u**4)",
+  "first_spatial_2PN_coefficient_difference": 0.5,
+  "exact_ricci_scalar": "-2 m^2 exp(-2m/r)/r^4",
+  "redshift_at_r10_exp": 0.10517091807564771,
+  "redshift_at_r10_sch": 0.10526315789473695,
+  "lensing_at_r10_exp": 0.4523804094278123,
+  "lensing_at_r10_sch": 0.4430839857415325,
+  "precession_at_rp10_ra14_exp": 2.4666669427583496,
+  "precession_at_rp10_ra14_sch": 2.3660919595785526,
+  "max_abs_TT_projection_isotropic": 4.163336342344337e-17,
+  "TT_norm_plus_example": 1.4142135623730951,
+  "max_cone_speed_difference": 0.0,
+  "passes": true
+}
+0.002 CONVERGED 0.008596751905017382 1.026161670163638 8.585686230259074e-12
+0.005 CONVERGED 0.02240550840216303 1.0697842244073719 5.124018405328651e-09
+0.01 CONVERGED 0.048504640359857756 1.1579629914249017 2.2130951139197357e-11
+0.015 CONVERGED 0.0801738279024772 1.276006101727817 2.959142463133765e-10
+0.02 CONVERGED 0.12156940944919428 1.4511279331951379 1.3275519547654421e-09
+0.024 CONVERGED 0.17007723274973327 1.6917895187194272 8.159697558247237e-14
+0.026 CONVERGED 0.20866518093185554 1.9159670190270874 1.0512166577611715e-12
+0.028 NO_CONVERGENCE None None None
+{
+  "b10": {
+    "impact_b_over_m": 10,
+    "r0_exp": 7.716909740176941,
+    "r0_sch": 7.756620129635963,
+    "deflection_exp": 0.6104374370316754,
+    "deflection_sch": 0.5903957876060977,
+    "deflection_ratio": 1.0339461253726783,
+    "weak_4_over_b": 0.4
+  },
+  "b100": {
+    "impact_b_over_m": 100,
+    "r0_exp": 97.97944795498255,
+    "r0_sch": 97.98203488728873,
+    "deflection_exp": 0.04130674084197139,
+    "deflection_sch": 0.041222539749273146,
+    "deflection_ratio": 1.0020425983748302,
+    "weak_4_over_b": 0.04
+  },
+  "areal_pericenter10_14": {
+    "areal_Rp_over_m": 10,
+    "areal_Ra_over_m": 14,
+    "isotropic_rp_exp": 8.941939695563638,
+    "isotropic_ra_exp": 12.960409305085395,
+    "isotropic_rp_sch": 8.972135954999578,
+    "isotropic_ra_sch": 12.980740698407862,
+    "advance_exp": 2.8867100064288653,
+    "advance_sch": 2.738166887113586,
+    "ratio_exp_over_sch": 1.0542491109706849
+  },
+  "redshift_areal10": {
+    "areal_R_over_m": 10,
+    "isotropic_r_exp": 8.941939695563638,
+    "isotropic_r_sch": 8.972135954999578,
+    "redshift_exp": 0.11832559158962974,
+    "redshift_sch": 0.1180339887498949
+  },
+  "photon_b_critical_exp": 5.43656365691809,
+  "photon_b_critical_sch": 5.196152422706633
+}
+{
+  "second_order_Ricci_coefficients": {
+    "Rtt": "2*a2/r**4",
+    "Rrr": "2*(-3*a2 - 4*b2 - 1)/r**4",
+    "Rtheta": "2*a2/r**2"
+  },
+  "second_order_solution": {
+    "a2": "0",
+    "b2": "-1/4"
+  },
+  "third_order_Ricci_coefficients": {
+    "Rtt": "(12*a3 + 1)/(2*r**5)",
+    "Rrr": "(-24*a3 - 36*b3 + 1)/(2*r**5)",
+    "Rtheta": "(6*a3 - 6*b3 + 1)/(2*r**3)"
+  },
+  "third_order_solution": {
+    "a3": "-1/12",
+    "b3": "1/12"
+  },
+  "w_correct_through_u3": "-u - u^3/12",
+  "v_correct_through_u3": "u - u^2/4 + u^3/12",
+  "exact_schwarz_w": "log((1-u/2)/(1+u/2))",
+  "exact_schwarz_v": "2 log(1+u/2)",
+  "interpretation": "Impose Einstein vacuum Ricci=0 order by order; this does NOT derive Einstein equations.",
+  "pass": true
+}
+Direct 4D Ricci tensor: exp nonvacuum / Schwarz zero confirmed
+Disformal kinetic prefactor and source variations confirmed
+High-precision quadrature confirmed: 1.2806249220325118e-12 1.3572737942467116e-10
+{
+  "pass": true,
+  "symbolic_R_exp": "-2*m**2*exp(-2*m/r)/r**4",
+  "symbolic_Rrr_exp": "-2*m**2/r**4",
+  "symbolic_Ricci_sch_all_zero": true,
+  "scalar_action_kinetic_check": true,
+  "matter_metric_variation_check": true,
+  "hp_lensing": [
+    {
+      "r0": 3,
+      "model": "exp",
+      "hp": 2.279690973917467,
+      "delta": 7.805314197129402e-13
+    },
+    {
+      "r0": 3,
+      "model": "sch",
+      "hp": 2.0790573338602343,
+      "delta": 1.2806249220325118e-12
+    },
+    {
+      "r0": 10,
+      "model": "exp",
+      "hp": 0.45238040942782937,
+      "delta": 1.7065032686185665e-14
+    },
+    {
+      "r0": 10,
+      "model": "sch",
+      "hp": 0.4430839857414036,
+      "delta": 1.288817080295742e-13
+    },
+    {
+      "r0": 100,
+      "model": "exp",
+      "hp": 0.040462455498422395,
+      "delta": 8.393520179041925e-17
+    },
+    {
+      "r0": 100,
+      "model": "sch",
+      "hp": 0.040382703216467745,
+      "delta": 7.697246201734663e-16
+    }
+  ],
+  "hp_orbits": [
+    {
+      "rp": 10,
+      "ra": 14,
+      "model": "exp",
+      "hp": 2.4666669427262473,
+      "delta": 3.2102102228561664e-11
+    },
+    {
+      "rp": 10,
+      "ra": 14,
+      "model": "sch",
+      "hp": 2.36609195971428,
+      "delta": 1.3572737942467116e-10
+    },
+    {
+      "rp": 20,
+      "ra": 30,
+      "model": "exp",
+      "hp": 0.9375011789069211,
+      "delta": 3.0715329495913987e-11
+    },
+    {
+      "rp": 20,
+      "ra": 30,
+      "model": "sch",
+      "hp": 0.9223991570977863,
+      "delta": 2.6464616511167207e-11
+    }
+  ]
+}

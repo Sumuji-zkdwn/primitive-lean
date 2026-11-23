@@ -1,0 +1,45 @@
+name: Audit original delayed-aether archives v1-v30
+
+on:
+  pull_request:
+    paths:
+      - 'experiments/delayed_aether/original_archives/**'
+      - 'experiments/delayed_aether/verify_original_archives.py'
+      - 'experiments/delayed_aether/verify_supplemental_archive.py'
+      - '.github/workflows/delayed-aether-original-archives.yml'
+  push:
+    paths:
+      - 'experiments/delayed_aether/original_archives/**'
+      - 'experiments/delayed_aether/verify_original_archives.py'
+      - '.github/workflows/delayed-aether-original-archives.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-archives:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: SHA-256 verify 30 ZIP archives and all 623 contained files
+        run: |
+          set -euo pipefail
+          python -B -X utf8 experiments/delayed_aether/verify_original_archives.py | tee original-archive-audit.json
+          python -B -X utf8 experiments/delayed_aether/verify_supplemental_archive.py | tee supplemental-archive-audit.json
+      - name: Save audit result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delayed-aether-archive-audit-${{ github.run_id }}
+          path: |
+            original-archive-audit.json
+            supplemental-archive-audit.json
+          retention-days: 30
+          if-no-files-found: warn

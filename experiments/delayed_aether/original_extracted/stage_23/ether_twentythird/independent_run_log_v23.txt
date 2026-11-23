@@ -1,0 +1,16 @@
+{
+  "independent_ricci_tensor": {
+    "full_4d_ricci_generic_formula_matches": true,
+    "nonzero_connection_components": 12,
+    "verified_other_4D_Ricci_components_zero": 9,
+    "difference_full_ricci_and_transverse_formula": "0"
+  },
+  "cross_polarization": {
+    "both_polarizations_represented": true,
+    "tr_M_inverse_Mprime_squared": "8*k**2*sinh(2*p)**2",
+    "sourced_cross_wave_exact": true,
+    "conditions": "Omega²=k²sinh(2p)²+8*pi*G*sigma²; q=z=sigma*u",
+    "hamiltonian_residual": "0",
+    "momentum_residual": "0"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "model_local_speeds": {
+    "speed_error": 0.0,
+    "stiffness_max": 3.9999805649014464
+  },
+  "frozen_interface_scattering": {
+    "R_numeric": 0.2500083361600585,
+    "T_numeric": 0.7500249954253904,
+    "R_exact": 0.25,
+    "T_exact": 0.75,
+    "initial_energy": 0.3692355781726451,
+    "final_energy": 0.3692478853798697,
+    "relative_energy_error": 3.333158544882586e-05,
+    "left_energy_centroid_x": -21.984302100765703,
+    "right_energy_centroid_x": 21.984301389453364,
+    "dx": 0.08,
+    "dt": 0.032,
+    "n_grid": 1626,
+    "time_final": 44
+  },
+  "dynamics_lagrangian": {
+    "energy_initial": 1.2203344763484478,
+    "max_relative_energy_error": 1.4468093390007652e-10,
+    "max_lag_rms": 0.12886087046495734,
+    "max_stiffness": 3.8327648704024515,
+    "lag_at_final": 0.09511086483767382,
+    "n_sites": 256,
+    "time_final": 12.0,
+    "solver": "The solver successfully reached the end of the integration interval.",
+    "nfev": 3269
+  },
+  "scaling_no_go": {
+    "no_stabilizer_E_at_smallest_R": 0.1600768,
+    "trial_stabilized_optimum_R": 0.6726186548584613,
+    "trial_stabilized_optimum_E": 2.877609343134112
+  },
+  "lensing_no_go": {
+    "conformal_scalar_light_deflection_arcsec": 0.0,
+    "gr_solar_limb_deflection_arcsec": 1.7511903255599846,
+    "max_optical_index_deviation": 0.0
+  },
+  "dynamics_refinement_512": {
+    "energy_initial": 1.2203344763484476,
+    "max_relative_energy_error": 1.4181233964905005e-10,
+    "max_lag_rms": 0.12885206554523396,
+    "max_stiffness": 3.832487332393115,
+    "lag_at_final": 0.09506739055879507,
+    "n_sites": 512,
+    "time_final": 12.0,
+    "solver": "The solver successfully reached the end of the integration interval.",
+    "nfev": 3269
+  },
+  "refinement_difference": {
+    "peak_A_difference": 0.0002775380093367197,
+    "peak_lag_RMS_difference": 8.804919723381932e-06
+  }
+}
