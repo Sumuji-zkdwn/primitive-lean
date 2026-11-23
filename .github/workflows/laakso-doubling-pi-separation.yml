@@ -12,6 +12,7 @@ on:
       - 'docs/research/LaaksoBallTransfer.lean'
       - 'docs/research/LaaksoShellMass.lean'
       - 'docs/research/LaaksoSweepBounds.lean'
+      - 'docs/research/LaaksoRampMean.lean'
       - '.github/workflows/laakso-doubling-pi-separation.yml'
   workflow_dispatch:
 
@@ -52,3 +53,4 @@ jobs:
           lake env lean ../../docs/research/LaaksoBallTransfer.lean
           lake env lean ../../docs/research/LaaksoShellMass.lean
           lake env lean ../../docs/research/LaaksoSweepBounds.lean
+          lake env lean ../../docs/research/LaaksoRampMean.lean
