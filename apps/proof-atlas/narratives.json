@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "disclaimer": "These are manually reviewed informal proof sketches grounded in the shown formal source. They are explanations rather than independent proofs of Lean correctness.",
+  "narratives": {
+    "Elastica.unit_speed_squared": {
+      "title": "弧長再構成の速度は常に1",
+      "assumptions": "角度 θ が連続であり、座標を cosθ と sinθ の積分で定める。",
+      "summary": "再構成した平面曲線の速度ベクトルは (cos θ(s), sin θ(s)) になるため、速さの二乗は1となる。",
+      "steps": [
+        "先行する「x座標の導関数」「y座標の導関数」を使い、速度成分をそれぞれ cosθ(s)、sinθ(s) と求める。",
+        "両成分を二乗して足し、恒等式 cos²t＋sin²t＝1 を適用する。",
+        "したがって速度の大きさは1。ここで曲線の長さを別に仮定する必要はない。"
+      ]
+    },
+    "Elastica.signed_curvature_determinant": {
+      "title": "行列式で求める符号付き曲率",
+      "assumptions": "θ は連続で、対象点 s に θ の微分係数 κ が存在する。",
+      "summary": "再構成曲線では x′y″−y′x″ が κ に等しい。",
+      "steps": [
+        "x′＝cosθ、y′＝sinθ を先行する導関数の結果から取り出す。",
+        "θ′(s)＝κ を使った連鎖律により x″＝−sinθ·κ、y″＝cosθ·κ を得る。",
+        "行列式に代入すると (cos²θ＋sin²θ)κ。三角恒等式で κ となる。"
+      ]
+    },
+    "Elastica.abs_x_displacement_le": {
+      "title": "進める水平距離は曲線長を超えない",
+      "assumptions": "長さパラメータ ℓ が非負。任意の角度関数 θ について考える。",
+      "summary": "水平変位の絶対値は ℓ 以下に抑えられる。",
+      "steps": [
+        "水平変位は x(ℓ)−x₀＝∫₀^ℓ cos(θ(u))du と定義される。",
+        "任意の実数 t について |cos t|≤1 が成り立つ。",
+        "積分の絶対値の評価から |∫₀^ℓ cosθ|≤∫₀^ℓ1du＝ℓ を得る。"
+      ]
+    },
+    "Elastica.impossible_x_endpoint": {
+      "title": "遠すぎる終点には到達できない",
+      "assumptions": "ℓ≥0 かつ目標の水平距離 |x₁−x₀| が ℓ を超える。",
+      "summary": "そのような終点に達する角度関数は存在しない。",
+      "steps": [
+        "到達する θ が存在すると仮定する。",
+        "前提の「水平変位≤長さ」を使うと |x₁−x₀|≤ℓ となる。",
+        "これは ℓ＜|x₁−x₀| に矛盾するので、到達可能性を否定できる。"
+      ]
+    },
+    "Elastica.angle_sub_eq_initial_of_curvature_eq": {
+      "title": "曲率が等しいなら接線角の差は一定",
+      "assumptions": "ℓ＞0、θ と ψ は C¹、開区間 (0,ℓ) で符号付き曲率が一致する。",
+      "summary": "2つの接線角は閉区間 [0,ℓ] 全体で一定の角度差しか持たない。",
+      "steps": [
+        "曲率は角度の導関数なので、両者の差 ψ−θ の導関数は開区間で0。",
+        "連結な開区間上で微分係数0の関数は定数になる。",
+        "連続性と閉包を用いて両端まで拡張し、その値が ψ(0)−θ(0) であると定める。"
+      ]
+    },
+    "Elastica.angle_eq_of_curvature_eq_initial": {
+      "title": "初期角を固定すると角度関数は一意",
+      "assumptions": "前定理と同じ曲率一致・C¹条件に加え、ψ(0)＝θ(0)。",
+      "summary": "最初の接線角を共有すれば、両者の接線角は区間全体で完全に一致する。",
+      "steps": [
+        "「角度差は初期角の差に等しい」を適用する。",
+        "初期角が等しいので右辺は0。",
+        "各 s で ψ(s)−θ(s)＝0、したがって ψ(s)＝θ(s)。"
+      ]
+    },
+    "Elastica.energy_split_three": {
+      "title": "曲率エネルギーを3区間に分ける",
+      "assumptions": "ε が連続、θ が C¹。区切り a,b,ℓ は実数で、積分は向き付き区間積分として扱う。",
+      "summary": "全区間のエネルギー積分は3つの区間の積分の和に分解できる。",
+      "steps": [
+        "エネルギーの定義を ε(θ′(s)) の区間積分として読む。",
+        "連続性により被積分関数の積分可能性を得る。",
+        "既存の区間積分の分割定理を a と b に適用する。"
+      ]
+    },
+    "Elastica.energy_scaling_quadratic": {
+      "title": "曲線をa倍に伸ばすと二次曲率エネルギーは1/a倍",
+      "assumptions": "θ は微分可能で、伸縮率 a＞0。剛性係数 k の正値性は必要ない。",
+      "summary": "θ(s/a) と aℓ への伸縮に対し、二次密度の曲率エネルギーはもとの1/a倍。",
+      "steps": [
+        "伸縮により角度の微分値は 1/a 倍になる。",
+        "二次密度 kq²/2 は微分値の変化で 1/a² 倍になる。",
+        "積分変数の尺度が a 倍になり、合わせて 1/a 倍となる。"
+      ]
+    },
+    "LinearInputObservation.recover_coordinate": {
+      "title": "2回の入力観測から隠れた座標を復元",
+      "assumptions": "同じ状態 z を、異なる実数入力 u≠v で観測する。エネルギー形は E(u,z)=A(z)−uX(z)。",
+      "summary": "2回のエネルギー差を入力差で割ると X(z) が求まる。",
+      "steps": [
+        "E(u,z)−E(v,z)＝(A−uX)−(A−vX) を展開する。",
+        "A の項が相殺され、(v−u)X(z) だけ残る。",
+        "u≠v だから v−u で割れ、X(z) を復元できる。"
+      ]
+    },
+    "LinearInputObservation.recover_zero_input_energy": {
+      "title": "2回の観測から基底エネルギーAを復元",
+      "assumptions": "E(u,z)=A(z)−uX(z)、同じ状態で u≠v を測定。",
+      "summary": "vE(u,z)−uE(v,z) を入力差で割ると、入力に依存しない A(z) が得られる。",
+      "steps": [
+        "v(A−uX)−u(A−vX) を展開する。",
+        "X を含む −uvX と +uvX が相殺され、(v−u)A になる。",
+        "v−u≠0 より除算して A(z) を得る。"
+      ]
+    },
+    "LinearInputObservation.two_inputs_iff_pair": {
+      "title": "2点で一致すれば全ての線形入力観測が一致",
+      "assumptions": "状態 z,w に対して、相異なる2入力 u,v でのエネルギー値を比べる。",
+      "summary": "2入力で両状態の観測値が一致することと、A と X の両方が一致することは同値。",
+      "steps": [
+        "順方向：2点での観測一致から、座標復元の定理を両状態に適用して X(z)＝X(w) を得る。",
+        "同様に基底エネルギー復元の定理を適用して A(z)＝A(w) を得る。",
+        "逆方向：A と X が一致すれば E(u,·)=A−uX の値は各入力で一致する。"
+      ]
+    },
+    "LinearInputDesign.scalar_gap": {
+      "title": "四次ポテンシャル差を二乗因子で分解",
+      "assumptions": "f と input はソースの明示的な四次多項式で定義される。",
+      "summary": "候補点 a の周囲のエネルギー差は (x−a)² を因数として持つ。",
+      "steps": [
+        "入力 u を λa³+ra に固定する。",
+        "f(x)−f(a) を四次多項式として展開する。",
+        "整理して (x−a)²[λ(x+a)²/4+(λa²+r)/2] に因数分解する。"
+      ]
+    },
+    "LinearInputDesign.energy_gap": {
+      "title": "平面のエネルギー差を2つの非負候補に分解",
+      "assumptions": "入力 u=λa³+ra、基準点 (a,√2a)。",
+      "summary": "2次元エネルギーの差は、y−√2x の二乗と x−a の二乗に関する項の和となる。",
+      "steps": [
+        "エネルギー E を f(x)+(y−√2x)²/2 と展開する。",
+        "基準点では y−√2x=0。",
+        "残りの f(x)−f(a) に既存の scalar_gap を代入する。"
+      ]
+    },
+    "LinearInputDesign.globalMin_of_margin": {
+      "title": "非負の余裕条件から大域最小を証明",
+      "assumptions": "λ≥0 と λa²+r≥0 を仮定し、入力を λa³+ra に固定。",
+      "summary": "基準点 (a,√2a) は平面全体でエネルギーを最小化する。",
+      "steps": [
+        "エネルギー差の分解式を利用する。",
+        "λ≥0 と λa²+r≥0 より、x に依存する括弧内が非負である。",
+        "両方の項は非負係数と平方の積なので、全ての (x,y) で基準点との差が0以上となる。"
+      ]
+    },
+    "LinearInputGradient.gSq_eq_zero_iff": {
+      "title": "勾配の二乗和が0である条件",
+      "assumptions": "実数値の二つの勾配成分 gx,gy を考え、gSq=gx²+gy² と定義。",
+      "summary": "二乗和が0になるのは、両成分が同時に0になる場合に限る。",
+      "steps": [
+        "どちらの二乗も非負である。",
+        "二乗和が0なら、各項はそれぞれ0でなくてはならず gx=gy=0。",
+        "逆に gx=gy=0 なら二乗和は明らかに0。"
+      ]
+    },
+    "LinearInputGradient.stationary_iff": {
+      "title": "停留点を満たす2本の代数条件",
+      "assumptions": "gx と gy は指定の線形入力エネルギーの偏導関数。",
+      "summary": "両偏導関数が0であることと、y=√2x および u=λx³+rx は同値。",
+      "steps": [
+        "gy=y−√2x=0 から y=√2x を求める。",
+        "この等式を gx=λx³+(r+2)x−√2y−u に代入する。",
+        "(√2)²=2 を使って整理すると u=λx³+rx。逆方向も代入で確認する。"
+      ]
+    },
+    "LinearInputGradient.hasDerivAt_energy_fixed_input": {
+      "title": "入力を固定した軌道のエネルギー変化",
+      "assumptions": "ソースの2成分速度に対する微分仮定が成立し、入力 u は時間に依存せず一定。",
+      "summary": "エネルギーの時間微分は −γ(E−target)(gx²+gy²) の形になる。",
+      "steps": [
+        "一般の動く入力に対する連鎖律の定理を使う。",
+        "入力 u を定数関数とし、その時間微分 u′=0 と置く。",
+        "一般公式の仕事項 −x·u′ が消え、指定の式が残る。",
+        "γや E−target の符号による単調性は別の条件が必要であり、この定理だけから無条件には結論しない。"
+      ]
+    },
+    "LinearInputGlobalConsequences.exists_global_convergent_solution": {
+      "title": "条件付きで大域解と指数的エネルギー収束を同時に得る",
+      "assumptions": "λ>0、γ>0、target が指定の閾値を超え、初期エネルギーがtarget以上。横向き係数bはC¹。",
+      "summary": "時間0以降の大域解の存在と、エネルギー誤差の指数評価・目標値への収束を合わせて主張する。",
+      "steps": [
+        "既存の大域解存在定理から、初期値を満たす時間関数 z(t) を得る。",
+        "その z が軌道条件を満たすことを既存定理で確認する。",
+        "エネルギー収束の定理を適用して E(z(t))→target を得る。",
+        "別の指数評価定理を使い、誤差が初期誤差×exp(−ct) 以下となることを示す。"
+      ]
+    },
+    "Elastica.stationary_affine_density_iff": {
+      "title": "曲率密度に一次項を足しても定常性は不変",
+      "assumptions": "角度 θ はC¹、密度 ε は連続、許容変分では両端の角度が固定される。",
+      "summary": "ε(q) を ε(q)+aq+b に変えても、許容変分に沿ったエネルギー微分の0条件は変わらない。",
+      "steps": [
+        "追加エネルギーの積分を a(θ(ℓ)−θ(0))+bℓ と書き換える。",
+        "許容変分では両端角度が固定され、この追加項は変分パラメータに依らない定数となる。",
+        "定数を足しても微分値は変わらないため、両モデルの定常条件が同値となる。"
+      ]
+    },
+    "Elastica.locallyMinimizing_affine_density_iff": {
+      "title": "曲率密度の一次項は局所最小の位置を変えない",
+      "assumptions": "密度 ε が連続、角度 θ がC¹、比較する曲線の両端角度が等しい。",
+      "summary": "密度に aq+b を加えても、元の局所最小性と新しい局所最小性は同値。",
+      "steps": [
+        "エネルギーを比較すると、新しく加わる項は端点角度差と長さだけで決まる。",
+        "許容比較曲線ではその端点条件が共通なので、両エネルギーに同じ定数が加わる。",
+        "エネルギー大小関係も局所近傍の半径も保たれ、局所最小性は同値となる。"
+      ]
+    },
+    "Elastica.curvature_affine": {
+      "title": "角度が一次関数なら曲率は一定",
+      "assumptions": "θ(u)=α+κu と置く。",
+      "summary": "符号付き曲率は角度の導関数なので全点で κ に等しい。",
+      "steps": [
+        "曲率の定義 curvature θ=deriv θ を使う。",
+        "一次関数 α+κu の導関数を計算すると定数 κ。"
+      ]
+    },
+    "Elastica.xCoord_zero": {
+      "title": "再構成の開始点は指定した初期座標",
+      "assumptions": "x座標を x₀+∫₀^s cosθ(u) du と定義。",
+      "summary": "s=0では積分区間が空なので x(0)=x₀。",
+      "steps": [
+        "xCoord の定義を開く。",
+        "区間0から0への積分は0。",
+        "初期値 x₀ だけが残る。"
+      ]
+    }
+  }
+}
