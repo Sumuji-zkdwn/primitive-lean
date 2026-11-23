@@ -1,6 +1,7 @@
 import Mathlib.Tactic
 import Mathlib.Data.List.Sort
 import Mathlib.Data.List.Perm.Basic
+import Mathlib.Data.List.FinRange
 
 /-!
 # A quantitative gate-crossing lower bound for arbitrary finite walks
@@ -856,6 +857,114 @@ theorem exists_sorted_gate_schedule
 
 #print axioms flipBit_commute
 #print axioms flipEvents_perm
+
+/-- A list of gate events with no repeated labels toggles precisely the
+labels that occur in its list, independently of their positions. -/
+theorem flipEvents_apply_nodup (events : List (ι × ℝ))
+    (hdistinct : (events.map Prod.fst).Nodup)
+    (bits : ι → Bool) (k : ι) :
+    flipEvents bits events k =
+      if k ∈ events.map Prod.fst then !(bits k) else bits k := by
+  induction events generalizing bits with
+  | nil =>
+      simp [flipEvents]
+  | cons event tail ih =>
+      rcases event with ⟨j,w⟩
+      have hcons : (j :: tail.map Prod.fst).Nodup := by
+        simpa using hdistinct
+      obtain ⟨hnot,hnd⟩ := List.nodup_cons.mp hcons
+      have hr := ih hnd (flipBit bits j) k
+      by_cases hj : k = j
+      · subst k
+        simpa [flipEvents, flipBit, hnot] using hr
+      · simpa [flipEvents, flipBit, hj, eq_comm] using hr
+
+/-- Finite selection of one legal gate for each *changed* Boolean
+label. No other bit is flipped. The events need not be sorted yet. -/
+theorem required_finite_gate_events
+    (m : ℕ) (G : Fin m → ℝ → Prop) (l u : ℝ)
+    (bits target : Fin m → Bool)
+    (hgates : ∀ k, bits k ≠ target k →
+      ∃ w, l ≤ w ∧ w ≤ u ∧ G k w) :
+    ∃ events : List (Fin m × ℝ),
+      (∀ e ∈ events, l ≤ e.2 ∧ e.2 ≤ u ∧ G e.1 e.2) ∧
+      flipEvents bits events = target := by
+  classical
+  let needed : List (Fin m) :=
+    (List.finRange m).filter (fun k => decide (bits k ≠ target k))
+  have hneedNodup : needed.Nodup := by
+    exact (List.nodup_finRange m).filter _
+  have hneeded (k : Fin m) :
+      k ∈ needed ↔ bits k ≠ target k := by
+    simp [needed]
+  let gate : Fin m → ℝ := fun k =>
+    if h : bits k ≠ target k then
+      Classical.choose (hgates k h)
+    else l
+  have hgate (k : Fin m) (hk : bits k ≠ target k) :
+      l ≤ gate k ∧ gate k ≤ u ∧ G k (gate k) := by
+    dsimp [gate]
+    rw [dif_pos hk]
+    exact Classical.choose_spec (hgates k hk)
+  let raw : List (Fin m × ℝ) := needed.map (fun k => (k, gate k))
+  have hvalid : ∀ e ∈ raw,
+      l ≤ e.2 ∧ e.2 ≤ u ∧ G e.1 e.2 := by
+    intro e he
+    obtain ⟨k,hk,rfl⟩ := List.mem_map.mp he
+    exact hgate k ((hneeded k).mp hk)
+  have hdistinct : (raw.map Prod.fst).Nodup := by
+    simpa [raw,List.map_map] using hneedNodup
+  have hbits (k : Fin m) : flipEvents bits raw k = target k := by
+    have h := flipEvents_apply_nodup raw hdistinct bits k
+    have hm : k ∈ raw.map Prod.fst ↔ bits k ≠ target k := by
+      simpa [raw,List.map_map] using hneeded k
+    rw [h]
+    by_cases hk : bits k = target k
+    · simp [hm, hk]
+    · have ht : !(bits k) = target k := by
+        cases hb : bits k <;> cases hc : target k <;> simp_all
+      simp [hm, hk, ht]
+  exact ⟨raw,hvalid,funext hbits⟩
+
+/-- On any finite bit set, an individually admissible gate interval
+has an ordered event list that realizes *exactly* the desired bit
+difference. This eliminates the schedule-oracle hypothesis. -/
+theorem required_finite_sorted_schedule
+    (m : ℕ) (G : Fin m → ℝ → Prop) (l u : ℝ)
+    (hlu : l ≤ u) (bits target : Fin m → Bool)
+    (hgates : ∀ k, bits k ≠ target k →
+      ∃ w, l ≤ w ∧ w ≤ u ∧ G k w) :
+    ∃ events : List (Fin m × ℝ),
+      AscendingEvents G u l events ∧ flipEvents bits events = target := by
+  obtain ⟨raw,hvalid,hbits⟩ :=
+    required_finite_gate_events m G l u bits target hgates
+  obtain ⟨sorted,horder,hpreserve⟩ :=
+    exists_sorted_gate_schedule G l u hlu bits raw hvalid
+  exact ⟨sorted,horder,hpreserve.trans hbits⟩
+
+/-- The complete m-bit shortest-path/sweep identity for s <= t:
+no extrinsic sorting/schedule assumption is left. The only
+nonemptiness input is existence of one admissible interval. -/
+theorem all_finite_bits_exact_sweep
+    (m : ℕ) (G : Fin m → ℝ → Prop)
+    (F : ℝ → ℝ) (hF : Monotone F)
+    (s t : ℝ) (hst : s ≤ t)
+    (bits target : Fin m → Bool)
+    (hexists : ∃ l u, AdmissibleGateInterval G s t bits target l u) :
+    sInf (finiteWalkCosts G F s t bits target) =
+      sInf (intervalSweepCosts G F s t bits target) := by
+  apply all_bits_exact_sweep_of_schedules G F hF s t hst bits target hexists
+  intro l u hinterval
+  obtain ⟨hls,hlt,hsu,htu,hgates⟩ := hinterval
+  exact required_finite_sorted_schedule m G l u
+    (hls.trans hsu) bits target hgates
+
+#print axioms flipEvents_apply_nodup
+#print axioms required_finite_gate_events
+#print axioms required_finite_sorted_schedule
+#print axioms all_finite_bits_exact_sweep
+
+
 #print axioms exists_sorted_gate_schedule
 
 
