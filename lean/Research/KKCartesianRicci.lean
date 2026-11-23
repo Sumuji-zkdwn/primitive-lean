@@ -26,7 +26,7 @@ def emul : E → E → E := E.mul
 def eneg : E → E := E.neg
 
 /-- All nonzero Γ^i_jk values, with j<=k. -/
-def gammaOrdered (a : ℝ) : ℕ → ℕ → ℕ → E
+noncomputable def gammaOrdered (a : ℝ) : ℕ → ℕ → ℕ → E
   | 1, 1, 3 => mulC (a/2) ehInv
   | 1, 2, 2 => eneg (mulC a (emul .U ehInv2))
   | 1, 2, 4 => eneg (mulC (a/2) ehInv2)
@@ -44,7 +44,7 @@ def gammaOrdered (a : ℝ) : ℕ → ℕ → ℕ → E
   | 4, 3, 4 => eneg (mulC (a/2) ehInv)
   | _, _, _ => .const 0
 
-def gammaE (a : ℝ) (i j k : Fin 5) : E :=
+noncomputable def gammaE (a : ℝ) (i j k : Fin 5) : E :=
   if j.val ≤ k.val then gammaOrdered a i.val j.val k.val
   else gammaOrdered a i.val k.val j.val
 
@@ -59,7 +59,7 @@ def sum5 (f : Fin 5 → E) : E :=
 
 /-- R_ij=Σ_c [∂c Γ^c_ij - ∂j Γ^c_ic +
                  Σ_d (Γ^c_ij Γ^d_cd - Γ^c_id Γ^d_jc)]. -/
-def ricciTerm (a : ℝ) (i j c : Fin 5) : E :=
+noncomputable def ricciTerm (a : ℝ) (i j c : Fin 5) : E :=
   eadd
     (eadd (partialE a c (gammaE a c i j))
           (eneg (partialE a j (gammaE a c i c))))
@@ -67,14 +67,14 @@ def ricciTerm (a : ℝ) (i j c : Fin 5) : E :=
       eadd (emul (gammaE a c i j) (gammaE a d c d))
            (eneg (emul (gammaE a c i d) (gammaE a d j c))))
 
-def ricciE (a : ℝ) (i j : Fin 5) : E :=
+noncomputable def ricciE (a : ℝ) (i j : Fin 5) : E :=
   sum5 (ricciTerm a i j)
 
 /-- Full 25-entry Ricci cancellation from the symbolic connection
 table. Proving that this table equals the metric-derived Levi-Civita
 connection is still required for a metric-to-Ricci kernel theorem. -/
-set_option maxRecDepth 8192 in
-set_option maxHeartbeats 0 in
+set_option maxRecDepth 8192
+set_option maxHeartbeats 0
 theorem all_25_ricci_entries_zero (a x z : ℝ) (hh : 1+a*z ≠ 0)
     (i j : Fin 5) :
     (ricciE a i j).eval a x z = 0 := by
