@@ -1,0 +1,305 @@
+name: Primitive Open Search - proof-gated adaptive model synthesis
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/primitive-open-search.yml'
+      - 'tools/autonomy/primitive_open.py'
+      - 'tools/autonomy/primitive_v2.py'
+      - 'tools/autonomy/proof_forge.py'
+      - 'tools/autonomy/finite_discovery.py'
+      - 'tests/test_primitive_open.py'
+      - 'tests/fixtures/primitive_open_*.json'
+      - 'docs/autonomy/PRIMITIVE_OPEN_SEARCH.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/primitive-open-search.yml'
+      - 'tools/autonomy/primitive_open.py'
+  schedule:
+    # V2 starts 07:37 UTC; this dependent synthesis run follows at 08:13 UTC.
+    - cron: '13 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: primitive-open-verified-feedback
+  cancel-in-progress: false
+
+jobs:
+  proof-rehearsal:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout untrusted PR with no saved credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Run offline typed-generator, ancestry and proof-gate regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/primitive_open.py tests/test_primitive_open.py
+          python -m unittest discover -s tests -p 'test_primitive_open.py' -v
+      - name: Generate exact-head models, proof candidates and provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.primitive_open prepare \
+            --root . \
+            --upstream tests/fixtures/primitive_open_v2_seed.json \
+            --state tests/fixtures/primitive_open_empty.json \
+            --day 2026-11-24 --head "$(git rev-parse HEAD)" \
+            --output verification/primitive-open/replay
+      - name: Setup pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile both generated models using Lean trust zero
+        working-directory: lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for file in ../verification/primitive-open/replay/proof/*.lean; do
+            test -f "$file" || exit 1
+            name="$(basename "$file" .lean)"
+            directory="$(dirname "$file")"
+            set +e
+            lake env lean --trust=0 "$file" > "$directory/$name.log" 2>&1
+            status=$?
+            set -e
+            printf '%s\n' "$status" > "$directory/$name.exit"
+            echo "$name Lean exit=$status"
+          done
+      - name: Audit every theorem and test feedback proof gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B tools/autonomy/proof_forge.py audit \
+            --output verification/primitive-open/replay/proof
+          python -B -m tools.autonomy.primitive_open receipt \
+            --root . \
+            --upstream tests/fixtures/primitive_open_v2_seed.json \
+            --state tests/fixtures/primitive_open_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/primitive-open/replay \
+            --output verification/primitive-open/next-state.json
+      - name: Keep candidate, proof and audit evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: primitive-open-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/primitive-open/
+          retention-days: 30
+          if-no-files-found: warn
+
+  discover:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    outputs:
+      candidate: ${{ steps.plan.outputs.candidate }}
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout trusted main controller, no write credential
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read verified V2 upstream only as data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/primitive-v2-state
+          path: upstream
+          persist-credentials: false
+      - name: Read open-search feedback as untrusted data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/primitive-open-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Generate next adaptive model from proven parent(s)
+        id: plan
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -m unittest discover -s tests -p 'test_primitive_open.py' -v
+          python -B -m tools.autonomy.primitive_open prepare \
+            --root . \
+            --upstream ../upstream/docs/autonomy/primitive-v2-state.json \
+            --state ../state/docs/autonomy/primitive-open-state.json \
+            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("../cycle/plan.json", encoding="utf-8") as f:
+              print("candidate=" + str(json.load(f)["candidate"]).lower())
+          PY
+      - name: Install pinned Lean for a nonempty candidate
+        if: steps.plan.outputs.candidate == 'true'
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: control/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Prove new finite mutation against its verified parent
+        if: steps.plan.outputs.candidate == 'true'
+        working-directory: control/lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for file in ../../cycle/proof/*.lean; do
+            test -f "$file" || exit 1
+            name="$(basename "$file" .lean)"
+            dir="$(dirname "$file")"
+            set +e
+            lake env lean --trust=0 "$file" > "$dir/$name.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "$dir/$name.exit"
+            echo "$name Lean exit=$code"
+          done
+      - name: Require zero-trust Lean and axiom audit
+        if: steps.plan.outputs.candidate == 'true'
+        working-directory: control
+        run: python -B tools/autonomy/proof_forge.py audit --output ../cycle/proof
+      - name: Retain reports for failed as well as successful attempts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: primitive-open-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          retention-days: 30
+          if-no-files-found: warn
+
+  write-verified-data:
+    if: github.ref == 'refs/heads/main' && needs.discover.result == 'success' && needs.discover.outputs.candidate == 'true'
+    needs: [discover]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout trusted source only
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Checkout fresh upstream version as untrusted data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/primitive-v2-state
+          path: upstream
+          persist-credentials: false
+      - name: Checkout writable isolated state branch
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/primitive-open-state
+          path: state
+          persist-credentials: true
+      - name: Restore evidence from first-pass read-only job
+        uses: actions/download-artifact@v4
+        with:
+          name: primitive-open-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Regenerate trusted Lean bytes and compare exact candidate
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -B -m tools.autonomy.primitive_open prepare \
+            --root . \
+            --upstream ../upstream/docs/autonomy/primitive-v2-state.json \
+            --state ../state/docs/autonomy/primitive-open-state.json \
+            --head "$GITHUB_SHA" --day "$(date -u +%F)" \
+            --output ../replay
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a, b = Path("../cycle"), Path("../replay")
+          assert json.loads((a/"plan.json").read_text()) == json.loads((b/"plan.json").read_text())
+          names_a = sorted(p.name for p in (a/"proof").glob("*.lean"))
+          names_b = sorted(p.name for p in (b/"proof").glob("*.lean"))
+          assert names_a == names_b and len(names_b) == 2
+          for name in names_a:
+              assert (a/"proof"/name).read_bytes() == (b/"proof"/name).read_bytes()
+          PY
+      - name: Install pinned Lean for independent replay
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: control/lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Recompile freshly generated Lean sources at trust zero
+        working-directory: control/lean
+        shell: bash
+        run: |
+          set -uo pipefail
+          for file in ../../replay/proof/*.lean; do
+            test -f "$file" || exit 1
+            name="$(basename "$file" .lean)"
+            dir="$(dirname "$file")"
+            set +e
+            lake env lean --trust=0 "$file" > "$dir/$name.log" 2>&1
+            code=$?
+            set -e
+            printf '%s\n' "$code" > "$dir/$name.exit"
+            echo "independent replay $name exit=$code"
+          done
+      - name: Reaudit and seal one source-anchored receipt
+        shell: bash
+        env:
+          PYTHONPATH: ${{ github.workspace }}/control
+        run: |
+          set -euo pipefail
+          python -B control/tools/autonomy/proof_forge.py audit --output replay/proof
+          python -B -m tools.autonomy.primitive_open receipt \
+            --root control \
+            --upstream upstream/docs/autonomy/primitive-v2-state.json \
+            --state state/docs/autonomy/primitive-open-state.json \
+            --head "$GITHUB_SHA" --evidence replay \
+            --output state/docs/autonomy/primitive-open-state.json
+      - name: Persist exactly one JSON file, no code or PR merge
+        working-directory: state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'primitive-open[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/autonomy/primitive-open-state.json
+          test "$(git diff --cached --name-only)" = "docs/autonomy/primitive-open-state.json"
+          git commit -m 'primitive-open: add one Lean-certified generated model'
+          git push origin HEAD:refs/heads/autonomy/primitive-open-state
