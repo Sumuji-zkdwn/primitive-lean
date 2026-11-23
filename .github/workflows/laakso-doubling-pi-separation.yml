@@ -1,0 +1,72 @@
+name: Laakso doubling PI separation - exact arithmetic
+
+on:
+  pull_request:
+    branches:
+      - main
+      - chatgpt/laakso-observation-a-20261123
+    paths:
+      - 'docs/research/2026-11-23-laakso-doubling-pi-separation.md'
+      - 'docs/research/laakso_doubling_PI_probe.py'
+      - 'docs/research/laakso_radial_finite_probe.py'
+      - 'docs/research/laakso_exact_walk_sweep.py'
+      - 'docs/research/laakso_one_bit_roundtrip_probe.py'
+      - 'docs/research/laakso_two_bit_span_probe.py'
+      - 'docs/research/LaaksoBallTransfer.lean'
+      - 'docs/research/LaaksoShellMass.lean'
+      - 'docs/research/LaaksoSweepBounds.lean'
+      - 'docs/research/LaaksoRampMean.lean'
+      - 'docs/research/LaaksoPIObstruction.lean'
+      - 'docs/research/LaaksoFiniteGateWalk.lean'
+      - 'docs/research/LaaksoNestedGateCompactness.lean'
+      - 'docs/research/LaaksoGateConstraint.lean'
+      - 'docs/research/LaaksoGateCost.lean'
+      - '.github/workflows/laakso-doubling-pi-separation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-fractions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Verify the rational shell and bottleneck inequalities
+        run: |
+          python -B docs/research/laakso_doubling_PI_probe.py
+          python -B docs/research/laakso_radial_finite_probe.py
+          python -B docs/research/laakso_exact_walk_sweep.py
+          python -B docs/research/laakso_one_bit_roundtrip_probe.py
+          python -B docs/research/laakso_two_bit_span_probe.py
+
+  lean-transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - name: Prepare pinned mathlib and Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: experiments/mobius_430
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean kernel checks the conditional doubling transfer
+        working-directory: experiments/mobius_430
+        run: |
+          lake env lean ../../docs/research/LaaksoBallTransfer.lean
+          lake env lean ../../docs/research/LaaksoShellMass.lean
+          lake env lean ../../docs/research/LaaksoSweepBounds.lean
+          lake env lean ../../docs/research/LaaksoRampMean.lean
+          lake env lean ../../docs/research/LaaksoPIObstruction.lean
+          lake env lean ../../docs/research/LaaksoFiniteGateWalk.lean
+          lake env lean ../../docs/research/LaaksoNestedGateCompactness.lean
+          lake env lean ../../docs/research/LaaksoGateConstraint.lean
+          lake env lean ../../docs/research/LaaksoGateCost.lean
