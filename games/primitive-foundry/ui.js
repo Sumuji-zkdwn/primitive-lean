@@ -292,6 +292,7 @@
   for(const x of ["inspect","research","documents"])$("view-"+x).classList.toggle("active",x===id);
   document.querySelectorAll("[data-panel]").forEach(el=>
     el.setAttribute("aria-selected",String(el.dataset.panel===id)));
+  if(id==="research"){renderProof(true);renderTech();}
  }
  function renderInspector(){
   const div=$("inspector");
@@ -499,26 +500,32 @@
  }
  function proofPointerStop(e){e.preventDefault?.();}
  function renderTech(){
-  $("technologies").innerHTML=tech.nodes.map(t=>{
+  $("technologies").innerHTML=upgrades.nodes.map(t=>{
    const known=world.unlocks.includes(t.id);
    const missing=t.prerequisites.filter(p=>!world.unlocks.includes(p.id));
+   const paper=t.gateProof?proofByName.get(t.gateProof):null;
+   const mustStudy=paper&&!world.proofNames.includes(paper.name);
    const afford=F.techAvailable(world,t);
-   const label=known?"獲得済":missing.length?"要前提":"研究 "+t.cost+"点";
+   const label=known?"開発済":missing.length?"設計の前提待ち":mustStudy?"証明が必要":"改良 "+t.cost+"点";
    const prereqs=t.prerequisites.map(p=>knownTech.get(p.id)?.label).filter(Boolean);
-   const detail=t.prerequisites.reduce((n,p)=>n+p.proofReferences,0);
    return '<article class="technode '+(known?"known":afford?"available":"locked")+'">'+
     '<div class="tech-top"><strong>'+esc(t.label)+'</strong><small class="mono">'+
     (known?"✓":"COST "+t.cost)+'</small></div>'+
     '<p>'+esc(t.description)+'</p>'+
-    (prereqs.length?'<div class="prereqs">前提：'+esc(prereqs.join(" / "))+'</div>':"")+
-    '<button data-unlock="'+esc(t.id)+'" type="button" '+(known||!afford?"disabled":"")+'>'+esc(label)+'</button>'+
-    '<details><summary>数学的な出典（証明参照 '+detail+'件）</summary><div>'+esc(t.path)+
-    '</div><small>ファイル単位の参照で、定理間の完全なDAGではありません。</small></details></article>';
+    (prereqs.length?'<div class="prereqs">工場の前提：'+esc(prereqs.join(" / "))+'</div>':"")+
+    (paper?'<div class="prereqs">証明の前提：'+esc(paper.label)+
+      (mustStudy?"（未研究）":"（解明済）")+
+      '</div><button type="button" data-proof-jump="'+paper.id+'">依存の定理を見る</button>':"")+
+    '<button data-unlock="'+esc(t.id)+'" type="button" '+(known||!afford?"disabled":"")+
+    '>'+esc(label)+'</button></article>';
   }).join("");
+  $("technologies").querySelectorAll("[data-proof-jump]").forEach(el=>el.addEventListener("click",()=>{
+    selectProof(Number(el.dataset.proofJump));
+  }));
   $("technologies").querySelectorAll("[data-unlock]").forEach(el=>el.addEventListener("click",()=>{
    const t=knownTech.get(el.dataset.unlock);
    if(F.unlock(world,t)){
-    announce("研究成功："+t.label+"。生産ラインの新機能が有効になりました。");
+    announce("工場改良完了："+t.label+"。実際の生産速度・設備が変化しました。");
     persist();refresh();
    }
   }));
@@ -549,7 +556,7 @@
   if(F.pendingRepairs(world).length){$("status").textContent="切断された搬送路が"+F.pendingRepairs(world).length+"か所。黄色の欠損セルをタップして修理してください。";}
   else if(world.challenge&&world.totalScience===0)$("status").textContent="搬送路が復旧しました。制御回路が組立機から研究所へ流れるのを確認しよう。";
   if(world.status==="complete")$("status").textContent="目標達成。自動化は続けられます。次はより短時間で量産しよう。";
-  renderPalette();renderTech();renderDocuments();renderInspector();draw();
+  renderPalette();if(pane==="research"){renderTech();renderProof();}renderDocuments();renderInspector();draw();
  }
  function select(x,y){selected={x,y};showPane("inspect");renderInspector();draw();}
  function interact(x,y,direction=dir){
@@ -671,7 +678,7 @@
   });
  }
  function start(){
-  hook();setTool("pan");resize();refresh();
+  setupProof();hook();setTool("pan");resize();refresh();
   const ro=typeof ResizeObserver!=="undefined"?new ResizeObserver(resize):null;
   if(ro)ro.observe(viewport);else window.addEventListener("resize",resize);
   clock=setInterval(()=>{
@@ -685,7 +692,7 @@
    $("science-stock").textContent=world.science;
    $("power").textContent=Math.round(world.energy)+" / "+world.energyMax;
    $("transported").textContent=world.transported;
-   if(world.tick%6===0){renderTech();renderDocuments();renderInspector();
+   if(world.tick%6===0){if(pane==="research"){renderTech();renderProof();}renderDocuments();renderInspector();
     $("log").innerHTML=world.notes.slice(0,5).map(x=>"<div>"+esc(x)+"</div>").join("");}
    draw();
   },110);
