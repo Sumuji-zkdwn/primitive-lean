@@ -490,10 +490,10 @@ theorem weighted_walk_append
   | stop x =>
       simpa only [zero_add] using hyz
   | horiz s t bits z c tail ih =>
-      have h := WeightedWalk.horiz s t bits _ _ ih
+      have h := WeightedWalk.horiz s t bits _ _ (ih hyz)
       simpa only [add_assoc] using h
   | gate s bits k z c hk tail ih =>
-      exact WeightedWalk.gate s bits k _ _ hk ih
+      exact WeightedWalk.gate s bits k _ _ hk (ih hyz)
 
 /-- For s ≤ t, the full left-right sweep of ANY finite number of
 sorted gate events achieves the exact interval normal-form cost.
