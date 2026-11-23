@@ -6,7 +6,7 @@ Date: 2026-11-23 (JST). Remote repository: `Sumuji-zkdwn/primitive-lean`, PR #19
 
 An independent symbolic evaluator using SymPy 1.14.0 directly differentiates a five-dimensional metric and a separately constructed four-dimensional Einstein-frame metric. It checks all 25 components of the 5D Ricci tensor, all 16 components of the 4D Ricci-form EMD Einstein residual, all four Maxwell equations, and the nonlinear scalar equation. **Every identity passes in exact symbolic arithmetic with a general differentiable positive `H(r)`**. This is stronger as a family computation than PR #199's specialization `H=1+k/r`, but not a formally verified metric-to-curvature derivation in Lean, nor a new physical law.
 
-The companion `KKRadialVacuumBridge.lean` is a proposed set of eight *rational-polynomial* proof certificates. **has no independently asserted kernel-success status** until the dedicated GitHub Actions job finishes. Its statements are separate from the SymPy calculations and no new Lean CI success is claimed.
+The companion `KKRadialVacuumBridge.lean` contains eight *rational-polynomial* proof certificates. All eight compile with Lean `--trust=0`, with the standard allowed axiom dependencies, in [dedicated CI run 45092147994](https://github.com/Sumuji-zkdwn/primitive-lean/actions/runs/45092147994). Its statements remain separate from the SymPy metric-to-curvature calculations.
 
 ## Ansatz and domain
 
@@ -109,7 +109,7 @@ python -B check_radial_bridge.py
 
 The oracle derives inverse metrics from the supplied metrics (not from hardcoded inverse formulas), then builds Christoffels and Ricci tensors. It tests all residuals including off-diagonal terms for arbitrary differentiable `H`, then tests explicit on-shell and off-shell substitutions. It assumes smoothness of the symbolic function (not proved). SymPy exact simplification is not a Lean kernel.
 
-The proposed Lean module formalizes polynomial numerators with independent `r, H, H', H'', b, sin(theta), cos(theta)` **as rational indeterminates**. Its 8 theorem declarations are uncompiled and should be treated as proof candidates only. One must next provide a verified coordinate derivative/Christoffel implementation in Lean (or a transparent expression-to-Lean certificate checker) that establishes these numerators equal the actual Ricci and EMD quantities. Only then can a kernel-level bridge be claimed. The analytic integration `(r²H')'=0 -> H=c+a/r` and the smooth global bundle/centre must also be formalized separately if a complete geometric theorem is desired.
+The proposed Lean module formalizes polynomial numerators with independent `r, H, H', H'', b, sin(theta), cos(theta)` **as rational indeterminates**. Its 8 theorem declarations have passed the pinned Lean kernel and axiom audit in run 45092147994; only the algebraic statements, not differential geometry, are thereby formally proved. One must next provide a verified coordinate derivative/Christoffel implementation in Lean (or a transparent expression-to-Lean certificate checker) that establishes these numerators equal the actual Ricci and EMD quantities. Only then can a kernel-level bridge be claimed. The analytic integration `(r²H')'=0 -> H=c+a/r` and the smooth global bundle/centre must also be formalized separately if a complete geometric theorem is desired.
 
 ## References
 
@@ -202,3 +202,22 @@ circle-bundle compactification or stability statement. Because the
 metric-to-Ricci calculation is SymPy rather than Lean, the new
 example is an independent **symbolic coordinate check**, not a
 kernel-verified differential-geometric theorem.
+
+
+### Non-affine harmonic extension
+
+The same Cartesian checker also verifies a more general *non-affine*
+harmonic potential:
+\[
+H=1+axy,\qquad A=\frac{a}{2}(y^2-x^2)\,dz.
+\]
+Here \(\Delta H=0\), \(\partial_x\partial_y H=a\), and
+\(\nabla\times A=(ay,ax,0)=\nabla H\). On any open patch \(H>0\),
+the independent script reconstructs the 5D inverse metric,
+Christoffel symbols and all 25 Ricci components and finds
+\(R^{(5)}_{AB}=0\) exactly. It independently checks all 16 4D Einstein
+EMD components, all four dilaton-weighted Maxwell equations, and the
+scalar equation. These are exact symbolic component checks
+for a non-spherically symmetric potential whose Hessian is nonzero;
+they do **not** constitute a general-Gibbons-Hawking kernel theorem
+or a regular global compactification.
