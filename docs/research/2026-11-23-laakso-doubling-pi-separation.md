@@ -92,7 +92,7 @@ v_n(z) = (2/ℓ_n) min(z-z_{n+1}, z_n-z)  (z∈J_n)
 
 ## 4. 倍加性の商への持ち上げ
 
-`d_0` を `s` で測った標準Laakso因子の道距離とし、`ν_Φ([a,b])=Φ(b)-Φ(a)` という Stieltjes 測度を置く。1次元の標準事実「正の倍加測度の累積関数は quasisymmetric（QS）」から、`F` はQS、`Φ_bad=F^{-1}` もQS。従って `ν_Φ` は `s` 上で倍加的である。`Φ_good` は双リプシッツなので同様。標準事実の参考文献：Christopher J. Bishop, *Quasisymmetric maps and doubling measures*（https://www.acadsci.fi/mathematica/Vol24/bishop.pdf）。
+`d_0` を `s` で測った標準Laakso因子の道距離とし、`ν_Φ([a,b])=Φ(b)-Φ(a)` という Stieltjes 測度を置く。1次元の標準事実「正の倍加測度の累積関数は quasisymmetric（QS）」から、`F` はQS、`Φ_bad=F^{-1}` もQS。従って `ν_Φ` は `s` 上で倍加的である。`Φ_good` は双リプシッツなので同様。標準事実の参考文献：Christopher J. Bishop, *Quasiconformal mappings which increase dimension* (1999), §2, 式(2.3)（https://www.acadsci.fi/mathematica/Vol24/bishop.pdf）。**PDFに記載される正式な題名に修正した**。この節が示すのは一次元累積写像のQS性であり、Laakso商の倍加性をそれだけで保証するものではない。
 
 任意の二点 x,y（高さ s,t）について、`r_0=d_0(x,y)`、`Ω_s(r)=ν_Φ([s-r,s+r]∩[0,1])` と置く。`ν_Φ` の倍加定数だけによる `c>0` が存在して
 
