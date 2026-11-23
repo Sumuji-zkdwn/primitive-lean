@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "6dab3976d57a1eca760d856ad3ac3dc2bd3537f8",
+  "main_commit": "4df50ea9b100342921e3bc74dba9029949047918",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1737,6 +1737,7 @@
         "scaled_inverse_product",
         "metric",
         "inverse",
+        "metric_inverse_product",
         "dxMetric",
         "dzMetric",
         "partialMetric",
@@ -1747,13 +1748,17 @@
         "gamma_x_y_fibre",
         "gamma_z_y_fibre",
         "gamma_z_x_x",
-        "gamma_z_z_z"
+        "gamma_z_z_z",
+        "affine_H_hasDerivAt",
+        "fibre_metric_dz_hasDerivAt",
+        "mixed_metric_dx_hasDerivAt"
       ],
       "imports": [
         "Mathlib.Tactic",
-        "Mathlib.LinearAlgebra.Matrix.Notation"
+        "Mathlib.LinearAlgebra.Matrix.Notation",
+        "Mathlib.Analysis.Calculus.Deriv.Inv"
       ],
-      "sha256": "a63524a84f7a4108f35f6a976a4d1e201b42ac51d7bdf4379e84c79a24aad716"
+      "sha256": "c9cf9a9dd3aabfe083b31aaf9ca49420c53e8b3b6fd1e0750ddf4099f59c00d1"
     },
     {
       "id": "main:lean/Research/KKRadialVacuumBridge.lean",
@@ -27806,28 +27811,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "6dab3976d57a1eca760d856ad3ac3dc2bd3537f8",
+      "base_sha": "4df50ea9b100342921e3bc74dba9029949047918",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "6dab3976d57a1eca760d856ad3ac3dc2bd3537f8",
+      "base_sha": "4df50ea9b100342921e3bc74dba9029949047918",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "6dab3976d57a1eca760d856ad3ac3dc2bd3537f8",
+      "base_sha": "4df50ea9b100342921e3bc74dba9029949047918",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "6dab3976d57a1eca760d856ad3ac3dc2bd3537f8",
+      "base_sha": "4df50ea9b100342921e3bc74dba9029949047918",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
