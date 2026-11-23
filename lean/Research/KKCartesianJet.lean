@@ -163,7 +163,9 @@ of x at a fixed z. This is *not* yet a full 5D fderiv proof.
 /-- H(z)=1+a*z has actual derivative a. -/
 theorem affine_H_hasDerivAt (a z : ℝ) :
     HasDerivAt (fun w : ℝ => 1 + a*w) a z := by
-  simpa using ((hasDerivAt_id z).const_mul a).const_add (1 : ℝ)
+  have hmul : HasDerivAt (fun w : ℝ => a*w) a z := by
+    simpa using (hasDerivAt_id z).const_mul a
+  simpa using (HasDerivAt.const_add (1 : ℝ) hmul)
 
 /-- The fifth-dimensional circle metric G[psi,psi]=H^-1 is genuinely
 differentiable with the exact dz jet from the metric. -/
