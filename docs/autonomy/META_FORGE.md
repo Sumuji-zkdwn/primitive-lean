@@ -39,7 +39,10 @@ The same meta-rule is evaluated on both Generic Forge environments:
 | \`signal4\` four 2-bit samples | all **256** possible signals |
 
 For each environment the evaluator tests **three development seed
-programs and three holdout seed programs**. For each generated program:
+programs and three separate challenge seed programs**. These challenge
+programs also influence candidate selection, so they are **not a blind
+statistical holdout** and do not establish generalization. For each
+generated program:
 
 1. Two separately implemented **meta-rule interpreters** produce the
    operator word, and their exact outputs must agree.
@@ -56,13 +59,13 @@ general theorem about every possible operator word or arbitrary
 images/signals.
 
 Candidates are rejected if they have no meaningful effect on the
-development/holdout probes, if there is no holdout effect in either
+development/challenge probes, if there is no challenge effect in either
 domain, if they exceed the maximum program length, or if they duplicate
 the complete recorded evaluation fingerprint of an earlier rule.
 
-The program-generation evaluator is independent of the generator's
-bounded novelty score. The score rewards source-program behavior
-differences, holdout effects, output diversity and reuse of a
+The finite execution checks use separately implemented interpreters, but
+candidate selection still sees their results. The score rewards source-program behavior
+differences, challenge-set effects, output diversity and reuse of a
 previously certified meta-rule; it is **not** an objective measure of
 scientific importance.
 
@@ -74,7 +77,7 @@ The persistent state is **data only** at:
 - Path: \`docs/autonomy/meta-forge-state.json\`
 
 Each receipt includes the complete typed rule, optional verified parent
-ID, exact source SHA, 12-program evaluation fingerprint, holdout
+ID, exact source SHA, 12-program evaluation fingerprint, challenge-set
 statistics, versioned evaluator identity, score, timestamp and an
 append-only SHA-256 chain. Every historical rule is independently
 recomputed when the state is read.
