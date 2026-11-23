@@ -118,3 +118,53 @@ The proposed Lean module formalizes polynomial numerators with independent `r, H
 - Primitive-lean PR #199: https://github.com/Sumuji-zkdwn/primitive-lean/pull/199
 
 All original external formulas remain identified as existing mathematics. This investigation adds a reproducible, more general ansatz-specific verification and an explicit scalar-flat/non-vacuum counterexample, not a discovery of novel physical interactions.
+
+
+## Follow-on check: can the monopole charge vary with radius?
+
+Relax only the *constant charge* condition, writing \(A=B(r)\cos\theta\,d\varphi\).
+This introduces \(F_{r\varphi}=B'(r)\cos\theta\), in addition to
+\(F_{\theta\varphi}=-B(r)\sin\theta\).
+For the same 4D Einstein-frame metric and dilaton, the separate symbolic
+verifier tools/check_kk_radial_charge_profile.py derives:
+
+\[
+F_{\mu\nu}F^{\mu\nu}
+=\frac{2}{H}\left(\frac{B^2}{r^4}
+ +\frac{(B')^2}{r^2}\cot^2\theta\right).
+\]
+
+All four dilaton-weighted Maxwell *density* equations vanish except
+the azimuthal residual:
+
+\[
+\partial_\mu(\sqrt{-g}\,H^{-3/2}F^{\mu\varphi})
+=\cot\theta\;\partial_r\bigl(B'/H^2\bigr).
+\]
+
+Thus local Maxwell equations alone do **not** force \(B'=0\).
+An explicit counterexample is \(H=1\), \(B(r)=b_0+cr\), which satisfies
+the *local* Maxwell equations but has an invariant axis pole if \(c\ne0\).
+This example is **not** claimed to solve the full Einstein–dilaton system.
+
+If \(B'(r)\ne0\), then
+
+\[
+\lim_{\theta\to0^+}\sin^2\theta\,F^2
+=\frac{2(B')^2}{Hr^2}>0.
+\]
+
+Since the polar axes are regular points of the round 2-sphere at
+fixed \(r>0\), the magnetic curvature cannot extend smoothly across
+those axes with \(B'(r)\ne0\). Regularity on a full sphere therefore
+enforces \(B'=0\) *within this special potential ansatz*. The formal
+surface integral from the polar coordinate chart is
+\(\int_{S^2}F=-4\pi B(r)\); interpreting this as a global flux when
+\(B'\ne0\) is **invalid** without a smooth atlas. The apparent
+radius-dependent flux is another indicator of the hidden axis singularity,
+not a violation of the global Bianchi identity.
+
+This is an additional **local symbolic and regularity obstruction**,
+not a general no-go theorem for variable magnetic fields in KK theory,
+nor a global U(1)-bundle construction. The scripts check exact
+coordinate expressions but do not formally prove smooth extension in Lean.
