@@ -71,7 +71,7 @@
   for(let y=0;y<H;y++)for(let x=0;x<W;x++)tiles.push(makeTile(x,y));
   const w={schema:1,seed,tiles,tick:0,energy:180,energyMax:800,
    science:0,totalScience:0,seen:0,documents:[],history:[],
-   unlocks:["geometry","variation","design","calculus"],
+   unlocks:["geometry","variation","design","calculus"],proofs:[],proofNames:[],
    selected:null,generated:{},status:"playing",built:0,transported:0,
    products:{},notes:["鉄鉱石 → 鉄板 → 歯車、銅鉱石 → 銅板 → 導線。組立機で制御回路を作り、研究所へ送ろう。"]};
   orePatch(w,3,5,"ironOre",240);
@@ -327,8 +327,26 @@
   record(w,"工場に2か所の搬送路の切断がある。黄色の欠損セルをタップして復旧しよう。");
   return w;
  }
+ function proofCost(node){
+  return 1+Math.min(2,Math.floor(node.depth/5));
+ }
+ function proofAvailable(w,node){
+  if(!node||!Number.isInteger(node.id)||!Array.isArray(node.parents))return false;
+  if(!Array.isArray(w.proofs))w.proofs=[];
+  return !w.proofs.includes(node.id)&&node.parents.every(id=>w.proofs.includes(id))&&
+    w.science>=proofCost(node);
+ }
+ function researchProof(w,node){
+  if(!proofAvailable(w,node))return false;
+  w.science-=proofCost(node);w.proofs.push(node.id);
+  if(!Array.isArray(w.proofNames))w.proofNames=[];
+  w.proofNames.push(node.name);
+  record(w,"証明の断片を復元："+node.label+"。次の依存先が開いた。");
+  return true;
+ }
  function techAvailable(w,tech){
-  return !w.unlocks.includes(tech.id)&&
+  return !!tech&&!w.unlocks.includes(tech.id)&&
+    (!tech.gateProof||(Array.isArray(w.proofNames)&&w.proofNames.includes(tech.gateProof)))&&
     tech.prerequisites.every(p=>w.unlocks.includes(p.id))&&w.science>=tech.cost;
  }
  function unlock(w,tech){
@@ -365,5 +383,5 @@
  return Object.freeze({W,H,SIZE,DX,DY,DIR_SYM,ITEMS,MACHINES,BUILDABLE,
   idx,xy,near,inside,isDiscovered,newWorld,clone,setMachine,removeMachine,rotate,place,
   pendingRepairs,repairBlueprint,challengeBlueprint,
-  inject,stepOnce,advance,demoBlueprint,techAvailable,unlock,machineStatus,counts,tip});
+  inject,stepOnce,advance,demoBlueprint,proofCost,proofAvailable,researchProof,techAvailable,unlock,machineStatus,counts,tip});
 });
