@@ -8,6 +8,7 @@ on:
       - 'lean/Research/FiniteConnectionDerivation.lean'
       - 'lean/Research/FiniteConnectionCommutator.lean'
       - 'tools/check_finite_connection_curvature.py'
+      - 'tools/check_finite_connection_commutator.py'
       - 'docs/verification/2026-11-23-coordinate-curvature-core.md'
       - '.github/workflows/finite-coordinate-curvature.yml'
   workflow_dispatch:
@@ -88,6 +89,7 @@ jobs:
           python -m pip install --disable-pip-version-check sympy==1.14.0
           python -B tools/check_finite_connection_curvature.py 2>&1 |
             tee finite-curvature-sympy.log
+          python -B tools/check_finite_connection_commutator.py 2>&1 | tee finite-curvature-commutator.log
       - name: Record exact checkout and source fingerprints
         if: always()
         shell: bash
@@ -97,7 +99,8 @@ jobs:
             lean/Research/FiniteConnectionWitness.lean \
             lean/Research/FiniteConnectionDerivation.lean \
             lean/Research/FiniteConnectionCommutator.lean \
-            tools/check_finite_connection_curvature.py > finite-curvature-sources.sha256
+            tools/check_finite_connection_curvature.py \
+            tools/check_finite_connection_commutator.py > finite-curvature-sources.sha256
       - name: Upload all evidence
         if: always()
         uses: actions/upload-artifact@v6
