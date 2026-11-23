@@ -54,9 +54,11 @@ theorem smooth_warp (alpha : ℝ) : ContDiff ℝ ⊤ (warp alpha) := by
 /-- All four coefficients of the global Hopf one-form are smooth. -/
 theorem smooth_omegaComponent (i : Fin 4) :
     ContDiff ℝ ⊤ (fun X : X4 => omegaComponent X i) := by
-  fin_cases i <;>
-    simp only [omegaComponent, Fin.isValue, ↓reduceIte]
-  all_goals first | exact (smooth_coord _).neg | exact smooth_coord _
+  fin_cases i
+  · simpa [omegaComponent] using (smooth_coord 1).neg
+  · simpa [omegaComponent] using smooth_coord 0
+  · simpa [omegaComponent] using (smooth_coord 3).neg
+  · simpa [omegaComponent] using smooth_coord 2
 
 /-- The warp never vanishes on R4 for alpha>=0. -/
 theorem warp_pos (alpha : ℝ) (ha : 0 ≤ alpha) (X : X4) :
