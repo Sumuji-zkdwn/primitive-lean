@@ -215,7 +215,7 @@ jobs:
           from pathlib import Path
           import re
           src=Path('Research/KKCartesianMetricRicci.lean').read_text()
-          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)\s*\(',src,re.M)
           assert len(names)>=9,names
           assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
           Path('KKCartesianMetricRicciAudit.lean').write_text(
