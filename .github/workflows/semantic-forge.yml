@@ -1,0 +1,218 @@
+name: Semantic Foundry - synthesize behavior beyond original primitive closure
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/semantic-forge.yml'
+      - 'tools/autonomy/semantic_forge.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'tests/test_semantic_forge.py'
+      - 'tests/fixtures/semantic_forge_empty.json'
+      - 'docs/autonomy/SEMANTIC_FOUNDRY.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/semantic-forge.yml'
+      - 'tools/autonomy/semantic_forge.py'
+  schedule:
+    # One evidence-backed operation per UTC day; no artificial ten-minute burn.
+    - cron: '7 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: semantic-foundry-persisted-verified-operator
+  cancel-in-progress: false
+
+jobs:
+  review-and-scope:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout exact proposed source, never retain push credentials
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check new semantic DSL, finite old-closure proof and independent execution
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m compileall -q tools/autonomy/semantic_forge.py tests/test_semantic_forge.py
+          python -m unittest discover -s tests -p 'test_semantic_forge.py' -v
+      - name: Produce one unverified semantic operator at the exact source SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_forge prepare \
+            --state tests/fixtures/semantic_forge_empty.json \
+            --day 2026-11-24 --head "$(git rev-parse HEAD)" \
+            --output verification/semantic-forge/candidate
+      - name: Independently evaluate every input and certify a reversible receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_forge receipt \
+            --state tests/fixtures/semantic_forge_empty.json \
+            --head "$(git rev-parse HEAD)" \
+            --evidence verification/semantic-forge/candidate \
+            --output verification/semantic-forge/verified-state.json
+      - name: Execute certified operator on a new concrete signal
+        shell: bash
+        run: |
+          set -euo pipefail
+          id="$(python - <<'PY'
+          import json
+          with open("verification/semantic-forge/verified-state.json", encoding="utf-8") as f:
+              print(json.load(f)["receipts"][0]["id"])
+          PY
+          )"
+          python -B -m tools.autonomy.semantic_forge run \
+            --state verification/semantic-forge/verified-state.json \
+            --operator-id "$id" --signal-json '[0,3,1,2]' \
+            > verification/semantic-forge/actual-signal.json
+          python - <<'PY'
+          import json
+          with open("verification/semantic-forge/actual-signal.json", encoding="utf-8") as f:
+              x = json.load(f)
+          assert x["output"] == [0,1,0,0]
+          assert x["outside_original_primitive_closure"]
+          print("New semantic operator produced", x["output"])
+          PY
+      - name: Retain generation, checks and capability separation evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: semantic-foundry-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/semantic-forge/
+          retention-days: 30
+          if-no-files-found: warn
+
+  propose-from-verified-history:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'push')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    outputs:
+      candidate: ${{ steps.propose.outputs.candidate }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Read isolated certified semantic history as data only
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate trusted exact source and all exhaustive invariants
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          python -m unittest discover -s tests -p 'test_semantic_forge.py' -v
+      - name: Synthesize a genuinely new semantic operator from certified parents
+        id: propose
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_forge prepare \
+            --state ../state/docs/autonomy/semantic-capability-state.json \
+            --day "$(date -u +%F)" --head "$GITHUB_SHA" \
+            --output ../cycle
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          with open("../cycle/proposal.json", encoding="utf-8") as f:
+              print("candidate=" + str(json.load(f)["candidate"]).lower())
+          PY
+      - name: Keep the exact first-pass proposal even if it cannot be sealed
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: semantic-foundry-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle/
+          retention-days: 30
+          if-no-files-found: warn
+
+  persist-independently-verified:
+    if: github.ref == 'refs/heads/main' && needs.propose-from-verified-history.result == 'success' && needs.propose-from-verified-history.outputs.candidate == 'true'
+    needs: [propose-from-verified-history]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout reviewed main evaluator without stored write token
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - name: Checkout isolated state for a data-only commit
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: state
+          persist-credentials: true
+      - name: Restore unprivileged candidate evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: semantic-foundry-cycle-${{ github.run_id }}-${{ github.run_attempt }}
+          path: cycle
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Recreate candidate from actual current history before independent checks
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          day="$(python - <<'PY'
+          import json
+          with open("../cycle/proposal.json", encoding="utf-8") as f:
+              print(json.load(f)["day"])
+          PY
+          )"
+          python -B -m tools.autonomy.semantic_forge prepare \
+            --state ../state/docs/autonomy/semantic-capability-state.json \
+            --day "$day" --head "$GITHUB_SHA" \
+            --output ../replay
+          cmp ../cycle/proposal.json ../replay/proposal.json
+      - name: Reevaluate all 256 inputs by both interpreters and seal semantic proof
+        working-directory: control
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -B -m tools.autonomy.semantic_forge receipt \
+            --state ../state/docs/autonomy/semantic-capability-state.json \
+            --head "$GITHUB_SHA" --evidence ../replay \
+            --output ../state/docs/autonomy/semantic-capability-state.json
+      - name: Commit only the one independently certified JSON operator
+        shell: bash
+        working-directory: state
+        run: |
+          set -euo pipefail
+          git config user.name "semantic-foundry[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/autonomy/semantic-capability-state.json
+          test "$(git diff --cached --name-only)" = "docs/autonomy/semantic-capability-state.json"
+          git commit -m "semantic foundry: certify one operation outside primitive closure"
+          git push origin HEAD:refs/heads/autonomy/semantic-capability-state
