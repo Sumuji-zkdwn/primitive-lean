@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "2911e9d670474eed88cb899e328727a6818b7b6d",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1546,6 +1546,34 @@
         "Mathlib"
       ],
       "sha256": "a35052f64b383b9bd5111d315e45ad1b7a121c35ad5ceabee95cd9334cc0bdf4"
+    },
+    {
+      "id": "main:lean/Research/CurvedFRW5DVacuum.lean",
+      "scope": "main",
+      "path": "lean/Research/CurvedFRW5DVacuum.lean",
+      "group": "Other",
+      "namespace": "CurvedFRW5DVacuum",
+      "declarations": [
+        "timeResidual",
+        "circleResidual",
+        "spatialResidual",
+        "temporal_circle_identity",
+        "spatial_elimination_identity",
+        "acceleration_radius_rate",
+        "squared_scale_constraint",
+        "stationary_circle_rigidity",
+        "positive_curvature_no_stationary_circle",
+        "flat_curvature_stationary_means_no_expansion",
+        "hyperbolic_stationary_circle_unit_speed",
+        "open_radius_square_less_one",
+        "open_radius_square_positive",
+        "nonflat_kretschmann_numerator",
+        "open_curvature_cancellation"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "18a1dc30e401e4e2ba488b79b96eb101f0d28f2e534633e8b6744050bedbfc24"
     },
     {
       "id": "main:lean/Research/DelayedAetherCochain.lean",
@@ -27764,28 +27792,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "2911e9d670474eed88cb899e328727a6818b7b6d",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "2911e9d670474eed88cb899e328727a6818b7b6d",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "2911e9d670474eed88cb899e328727a6818b7b6d",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "2911e9d670474eed88cb899e328727a6818b7b6d",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
