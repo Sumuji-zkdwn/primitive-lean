@@ -30,4 +30,13 @@ for p,q in zip(Hopf(Y),Hopf(X)):
     assert s.expand(p-(u*u+v*v)*q)==0
 assert s.expand(radius(Y)-(u*u+v*v)*radius(X))==0
 print("PASS: Hopf orbit invariance and radius identity")
-print("LIMIT: algebraic fibres; quotient topology/atlas still not in Lean")
+
+# Independent dot-product test for the freeness certificate.
+W=[s.symbols("w0"),s.symbols("w1"),s.symbols("w2"),s.symbols("w3")]
+dot=lambda v,w: sum(x*y for x,y in zip(v,w))
+assert s.expand(dot(X,Y)-u*radius(X))==0
+RW=[u*W[0]-v*W[1],v*W[0]+u*W[1],u*W[2]-v*W[3],v*W[2]+u*W[3]]
+assert s.expand(dot(Y,RW)-(u*u+v*v)*dot(X,W))==0
+print("PASS: dot-product preservation, free S1 action on radius-one points")
+
+print("LIMIT: algebraic fibres and freeness; smooth quotient/atlas still not in Lean")
