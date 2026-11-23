@@ -394,7 +394,7 @@
    if(!overview&&(selectedNode||highlight.has(node.id))){
     c.font=selectedNode?"bold 12px system-ui":"10px system-ui";
     c.fillStyle=selectedNode?"#fae6ba":"#bdcfd2";
-    c.fillText(node.label.slice(0,18),pos.x+9,pos.y-8);
+    c.fillText("#"+String(node.id+1).padStart(3,"0"),pos.x+8,pos.y-8);
    }
    graphHitboxes.push({id:node.id,x:pos.x,y:pos.y});
   }
