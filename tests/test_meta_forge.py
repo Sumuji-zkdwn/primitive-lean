@@ -145,7 +145,7 @@ class MetaForgeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 mf.plan(mf.empty_state(), day, HEAD)
 
-    def test_short_trial_slots_preserve_verified_history_and_bounded_cost(self):
+    def test_continuous_slots_preserve_verified_history_and_bounded_cost(self):
         from unittest.mock import patch
         first, old = self.one_cycle("2026-11-23", 1)
         second, state = self.one_cycle("2026-11-23T08:00Z", 2)
@@ -155,11 +155,11 @@ class MetaForgeTests(unittest.TestCase):
         same = mf.plan(state, "2026-11-23T08:00Z", HEAD)
         self.assertFalse(same["candidate"])
         self.assertEqual(same["reason"], "ALREADY_EVALUATED_TODAY")
-        with patch.object(mf, "TRIAL_RECEIPT_CAP", 2):
-            blocked = mf.plan(state, "2026-11-23T08:10Z", HEAD)
-            self.assertEqual(blocked["reason"], "TRIAL_CAP_REACHED")
-        self.assertEqual(mf.plan(state, "2026-11-24T08:00Z", HEAD)["reason"],
-                         "TRIAL_WINDOW_CLOSED")
+        with patch.object(mf, "MAX_HISTORY", 2):
+            blocked = mf.plan(state, "2026-11-23T08:30Z", HEAD)
+            self.assertEqual(blocked["reason"], "VERIFIED_RULE_LIMIT")
+        # The old 5-receipt trial and its expiry no longer stop new half-hour slots.
+        self.assertTrue(mf.plan(state, "2026-11-24T08:00Z", HEAD)["candidate"])
         with self.assertRaises(ValueError):
             mf.check_day("2026-11-23T08:05Z")
 
