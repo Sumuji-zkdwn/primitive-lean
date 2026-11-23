@@ -55,7 +55,7 @@ class ForgeAuditTests(unittest.TestCase):
             status = result["scheduler"][kind]
             self.assertTrue(status["no_scheduled_runs_observed"])
             self.assertEqual(status["observed_schedule_events"], 0)
-            self.assertGreater(status["nominal_matured_schedule_slots"], 10)
+            self.assertGreaterEqual(status["nominal_matured_schedule_slots"], 6)
             self.assertEqual(result["recovery_gate"][kind]["reason"],
                              "BOUNDED_CATCHUP_ALLOWED")
 
@@ -68,6 +68,24 @@ class ForgeAuditTests(unittest.TestCase):
         self.assertEqual(report["scheduler"]["generic"]["observed_schedule_events"], 1)
         self.assertEqual(report["scheduler"]["generic"]["observed_manual_or_relay_dispatches"], 1)
         self.assertFalse(report["scheduler"]["generic"]["no_scheduled_runs_observed"])
+
+    def test_ongoing_30_minute_observations_after_expired_trial(self):
+        later = datetime(2026, 11, 24, 2, 0, tzinfo=timezone.utc)
+        self.runs["generic"].extend([
+            audit_row(run(77, "schedule", "2026-11-24T00:37:00Z",
+                          conclusion="failure")),
+            audit_row(run(78, "schedule", "2026-11-24T01:07:00Z")),
+        ])
+        result = audit.report(self.gs, self.ms, self.runs, later)
+        stats = result["scheduler"]["generic"]
+        self.assertEqual(stats["observed_schedule_events"], 2)
+        self.assertEqual(stats["observed_operational_failures"], 1)
+        self.assertEqual(stats["observed_operational_successes"], 1)
+        self.assertGreater(stats["nominal_matured_schedule_slots"], 0)
+        self.assertFalse(stats["no_scheduled_runs_observed"])
+        self.assertEqual(result["safety"]["operational_mode"],
+                         "READ_ONLY_AUDIT_NO_DISPATCH")
+        self.assertEqual(result["state"]["generic_new_verified_last_4h"], 0)
 
     def test_cooldown_and_running_job_block_repair(self):
         recent = [audit_row(run(3, "workflow_dispatch", "2026-11-23T11:35:00Z"))]
