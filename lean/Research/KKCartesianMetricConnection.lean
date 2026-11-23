@@ -27,8 +27,8 @@ def inverseE : MatrixE :=
      e0,e0,e0,quotientH,e0;
      e0,e0,E.neg gaugeEntry,e0,yyEntry]
 
-/-- Full 5x5 inverse matrix is derived by multiplication, with H nonzero. -/
 set_option maxHeartbeats 0
+/-- Full 5x5 inverse matrix is derived by multiplication, with H nonzero. -/
 theorem metric_inverse_all_entries (a x z : ℝ) (hh : 1+a*z ≠ 0)
     (i j : Fin 5) :
     (∑ m : Fin 5, (metricE i m).eval a x z *
@@ -52,10 +52,10 @@ noncomputable def gammaFromMetricE (a : ℝ) (i j k : Fin 5) : E :=
                      (partialMetricE a k m j))
               (eneg (partialMetricE a m j k))))
 
-/-- Every one of the 125 metric-derived connection entries equals
-the sparse formula from KKCartesianRicci. -/
 set_option maxRecDepth 8192
 set_option maxHeartbeats 0
+/-- Every one of the 125 metric-derived connection entries equals
+the sparse formula from KKCartesianRicci. -/
 theorem all_125_gamma_entries_agree (a x z : ℝ)
     (hh : 1+a*z ≠ 0) (i j k : Fin 5) :
     (gammaFromMetricE a i j k).eval a x z =
