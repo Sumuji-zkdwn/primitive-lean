@@ -113,7 +113,7 @@ def metricE : Mat5 :=
      e0,e0,e0,.H,e0;
      e0,e0,gaugeEntry,e0,quotientH]
 
-noncomputable def g (a x z : ℝ) (i j : Fin 5) : ℝ :=
+noncomputable noncomputable def g (a x z : ℝ) (i j : Fin 5) : ℝ :=
   (metricE i j).eval a x z
 
 theorem metric_good (a x z : ℝ) (hh : 1+a*z ≠ 0)
