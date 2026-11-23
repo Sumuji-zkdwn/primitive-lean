@@ -36,7 +36,13 @@ theorem isClosed_hitSet (W : Set ℝ) (hW : W.Finite) :
   have hrewrite :
       HitSet W = ⋃ w ∈ W, {p : ℝ × ℝ | p.1 ≤ w ∧ w ≤ p.2} := by
     ext p
-    simp [HitSet, Hit]
+    change (∃ w, w ∈ W ∧ p.1 ≤ w ∧ w ≤ p.2) ↔
+      (∃ w, p.1 ≤ w ∧ w ∈ W ∧ w ≤ p.2)
+    constructor
+    · rintro ⟨w, hw, hl, hu⟩
+      exact ⟨w, hl, hw, hu⟩
+    · rintro ⟨w, hl, hw, hu⟩
+      exact ⟨w, hw, hl, hu⟩
   rw [hrewrite]
   exact hW.isClosed_biUnion (fun w hw => hfixed w)
 
@@ -56,8 +62,8 @@ theorem isClosed_endpoints (s t : ℝ) : IsClosed (Endpoints s t) := by
     isClosed_Ici.preimage continuous_snd
   have h₄ : IsClosed {p : ℝ × ℝ | t ≤ p.2} :=
     isClosed_Ici.preimage continuous_snd
-  simpa [Endpoints, setOf_and] using
-    ((((hK.inter h₁).inter h₂).inter h₃).inter h₄)
+  simpa only [Endpoints, setOf_and] using
+    (hK.inter (h₁.inter (h₂.inter (h₃.inter h₄))))
 
 def Required (G : ℕ → Set ℝ) (a b : ℕ → Bool) (k : ℕ) :
     Set (ℝ × ℝ) :=
