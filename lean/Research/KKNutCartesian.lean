@@ -17,11 +17,10 @@ atlas or that all metric components are C^infinity on R4.
 
 namespace KKNutCartesian
 
-noncomputable section
 
 def q (alpha s : ℝ) : ℝ := 1+alpha*s
 
-def beta (alpha s : ℝ) : ℝ := -(alpha*(2+alpha*s))/q alpha s
+noncomputable def beta (alpha s : ℝ) : ℝ := -(alpha*(2+alpha*s))/q alpha s
 
 /-- Rank-one metric eigenvalue along omega (where omega·omega=s).
 The other three eigenvalues are q. -/
