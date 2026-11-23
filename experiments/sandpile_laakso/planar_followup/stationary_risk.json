@@ -1,0 +1,88 @@
+{
+  "estimand": "Expected conditional population variance of total firings given initial mass, clock, binary switches, and every fair corner choice. Its square root is the optimal root mean square prediction error.",
+  "sampling": "Wilson with four directed edge choices per vertex and a wired sink; fixed up, right, down, left burning bijection; independent conditional mate for every unfiltered reference; one independent shared drive per pair.",
+  "score": "Half the square of the difference in total firings. The standard error uses the sample standard deviation of independent pair scores divided by the square root of their count.",
+  "exact_2x2": {
+    "population": 192,
+    "fibres": 24,
+    "exact": "2828358109/4428103680",
+    "decimal": 0.6387289714499187
+  },
+  "estimates": [
+    {
+      "m": 1,
+      "side": 2,
+      "N": 9,
+      "seed": 20261121,
+      "pairs": 32768,
+      "matched_pairs": 32768,
+      "distinct_reference_classes": 24,
+      "candidate_offers": 37769,
+      "mean_square_error": 0.6433258056640625,
+      "mc_standard_error": 0.005560201684097173,
+      "normalized_rms": 0.26735864503281864,
+      "max_abs_gap": 4,
+      "max_score": 8.0,
+      "top_one_percent_number": 328,
+      "top_one_percent_share": 0.0816394298047959,
+      "mean_omit_one_largest": 0.6431012909329509,
+      "mean_omit_top_one_percent": 0.5967786683107275,
+      "quartile_batch_means": [
+        0.62786865234375,
+        0.6575927734375,
+        0.64007568359375,
+        0.64776611328125
+      ]
+    },
+    {
+      "m": 2,
+      "side": 8,
+      "N": 81,
+      "seed": 20261121,
+      "pairs": 4096,
+      "matched_pairs": 4096,
+      "distinct_reference_classes": 735,
+      "candidate_offers": 67288,
+      "mean_square_error": 307.0489501953125,
+      "mc_standard_error": 6.693051839948081,
+      "normalized_rms": 1.9469791422069838,
+      "max_abs_gap": 85,
+      "max_score": 3612.5,
+      "top_one_percent_number": 41,
+      "top_one_percent_share": 0.0819410458605082,
+      "mean_omit_one_largest": 306.24175824175825,
+      "mean_omit_top_one_percent": 284.7392108508015,
+      "quartile_batch_means": [
+        321.14111328125,
+        311.19970703125,
+        283.70751953125,
+        312.1474609375
+      ]
+    },
+    {
+      "m": 2,
+      "side": 8,
+      "N": 81,
+      "seed": 20261122,
+      "pairs": 32768,
+      "matched_pairs": 32768,
+      "distinct_reference_classes": 981,
+      "candidate_offers": 1322240,
+      "mean_square_error": 304.2473449707031,
+      "mc_standard_error": 2.3702998432642595,
+      "normalized_rms": 1.9380763817163411,
+      "max_abs_gap": 99,
+      "max_score": 4900.5,
+      "top_one_percent_number": 328,
+      "top_one_percent_share": 0.08437173412673377,
+      "mean_omit_one_largest": 304.1070741904965,
+      "mean_omit_top_one_percent": 281.3941584463625,
+      "quartile_batch_means": [
+        308.33734130859375,
+        299.55511474609375,
+        308.28656005859375,
+        300.81036376953125
+      ]
+    }
+  ]
+}

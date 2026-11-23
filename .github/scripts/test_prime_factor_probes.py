@@ -31,9 +31,20 @@ class ProbeSelectionTest(unittest.TestCase):
             self.assertEqual(select("pull_request", payload), list(PROBES))
 
     def test_dispatch_selects_one_or_all(self):
-        for key in PROBES:
-            self.assertEqual(select("workflow_dispatch", {"inputs": {"probe": key}}), [key])
-        self.assertEqual(select("workflow_dispatch", {"inputs": {"probe": "all"}}), list(PROBES))
+        legacy_targets = {
+            "observation": "PrimeFactorObservation",
+            "orbits": "PrimeFactorOrbits",
+            "f0-adaptive": "PrimeFactorF0Adaptive",
+            "general-f0": "PrimeFactorGeneralF0",
+            "general-length": "PrimeFactorFiniteLength",
+        }
+        for key, stem in legacy_targets.items():
+            with self.subTest(probe=key):
+                self.assertEqual(select("workflow_dispatch", {"inputs": {"probe": key}}), [key])
+                self.assertEqual(PROBES[key].stem, stem)
+        self.assertCountEqual(select("workflow_dispatch", {"inputs": {"probe": "all"}}), legacy_targets)
+
+    def test_dispatch_rejects_unknown_choice(self):
         with self.assertRaises(ValueError):
             select("workflow_dispatch", {"inputs": {"probe": "unknown"}})
 
