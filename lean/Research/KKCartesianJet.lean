@@ -12,7 +12,8 @@ on the affine local patch H=1+a*z, U=a*x, H!=0.
 The two finite derivative tables below represent the *first partial
 derivatives* of the genuine metric. Their agreement with derivatives of
 the original metric is independently checked in
-tools/check_kk_cartesian_jet.py, NOT formalized via Lean deriv.
+tools/check_kk_cartesian_jet.py; two selected component derivatives are also
+formally proved with HasDerivAt below.
 
 Lean verifies the full 5x5 polynomial inverse identity and selected
 Levi-Civita connection entries computed by a finite tensor sum.
