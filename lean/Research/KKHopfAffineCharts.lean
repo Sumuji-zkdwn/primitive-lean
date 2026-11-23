@@ -34,13 +34,11 @@ theorem north_invariant_under_scaling (z1 z2 lam : ℂ)
     north (lam*z1) (lam*z2) = north z1 z2 := by
   unfold north
   field_simp [hz,hl]
-  ring
 
 theorem south_invariant_under_scaling (z1 z2 lam : ℂ)
     (hz : z2 ≠ 0) (hl : lam ≠ 0) :
     south (lam*z1) (lam*z2) = south z1 z2 := by
   unfold south
   field_simp [hz,hl]
-  ring
 
 end KKHopfAffineCharts
