@@ -1,0 +1,279 @@
+name: Cartesian KK metric first-jet connection
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKCartesianJet.lean'
+      - 'lean/Research/KKCartesianDerivative.lean'
+      - 'lean/Research/KKCartesianGammaTable.lean'
+      - 'lean/Research/KKCartesianSecondJet.lean'
+      - 'lean/Research/KKCartesianMetricRicci.lean'
+      - 'lean/Research/KKCartesianRicci.lean'
+      - 'lean/Research/KKCartesianMetricConnection.lean'
+      - 'lean/Research/KKCartesianChartPartials.lean'
+      - 'tools/check_kk_cartesian_jet.py'
+      - 'docs/verification/2026-11-23-kk-cartesian-connection-jet.md'
+      - '.github/workflows/kk-cartesian-jet.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cartesian-jet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean trust-zero full matrix and connection jet certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianJet.olean Research/KKCartesianJet.lean 2>&1 | tee ../kk-cartesian-jet-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-jet-lean.log; then exit 1; fi
+      - name: Audit all theorem axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKCartesianJet.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)>=7,names
+          Path('KKCartesianJetAudit.lean').write_text(
+              'import Research.KKCartesianJet\n'
+              +''.join('#print axioms KKCartesianJet.'+n+'\n' for n in names))
+          Path('../kk-cartesian-jet-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCartesianJetAudit.lean 2>&1 | tee ../kk-cartesian-jet-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-jet-axioms.log').read_text()
+          n=int(Path('../kk-cartesian-jet-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',log),log
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
+          print('PASS:',n,'Lean theorems and axiom audit')
+          PY
+      - name: Lean trust-zero analytic derivative certificates
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianDerivative.olean Research/KKCartesianDerivative.lean 2>&1 | tee ../kk-cartesian-derivative-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-derivative-lean.log; then exit 1; fi
+      - name: Audit analytic derivative theorem axioms
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          content=Path('Research/KKCartesianDerivative.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',content,re.M)
+          names=re.findall(r'^theorem\s+([\w.]+)',content,re.M)
+          assert len(names)>=5 and len(set(names))==len(names),names
+          Path('KKCartesianDerivativeAudit.lean').write_text(
+              'import Research.KKCartesianDerivative\n'
+              + ''.join('#print axioms KKCartesianDerivative.'+n+'\n' for n in names))
+          Path('../kk-cartesian-derivative-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCartesianDerivativeAudit.lean 2>&1 | tee ../kk-cartesian-derivative-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-derivative-axioms.log').read_text()
+          n=int(Path('../kk-cartesian-derivative-count.txt').read_text())
+          assert not re.search(r'\b(error:|sorryAx)\b',log),log
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
+          print('PASS:',n,'analytic metric derivative theorems')
+          PY
+      - name: Lean 125 real-coordinate metric derivatives
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianChartPartials.olean Research/KKCartesianChartPartials.lean 2>&1 | tee ../kk-cartesian-chart-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-chart-lean.log; then exit 1; fi
+          echo 'import Research.KKCartesianChartPartials' > KKCartesianChartAudit.lean
+          echo '#print axioms KKCartesianChartPartials.all_125_real_metric_partials' >> KKCartesianChartAudit.lean
+          lake env lean --trust=0 KKCartesianChartAudit.lean 2>&1 | tee ../kk-cartesian-chart-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          log=Path('../kk-cartesian-chart-axioms.log').read_text()
+          assert "all_125_real_metric_partials" in log
+          assert "sorryAx" not in log
+          assert ("does not depend on any axioms" in log or
+             "depends on axioms: [propext, Classical.choice, Quot.sound]" in log)
+          PY
+      - name: Lean second-order real metric derivatives
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianSecondJet.olean Research/KKCartesianSecondJet.lean 2>&1 | tee ../kk-cartesian-second-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-second-lean.log; then exit 1; fi
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKCartesianSecondJet.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==6,names
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          Path('KKCartesianSecondJetAudit.lean').write_text(
+             'import Research.KKCartesianSecondJet\n'
+             + ''.join('#print axioms KKCartesianSecondJet.'+n+'\n' for n in names))
+          PY
+          lake env lean --trust=0 KKCartesianSecondJetAudit.lean 2>&1 | tee ../kk-cartesian-second-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-second-axioms.log').read_text()
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          assert len(dep)+none==6
+          allowed={'propext','Classical.choice','Quot.sound'}
+          assert all({x.strip() for x in d.split(',') if x.strip()}<=allowed for d in dep)
+          PY
+      - name: Compile independent sparse Gamma table
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianGammaTable.olean Research/KKCartesianGammaTable.lean 2>&1 | tee ../kk-cartesian-table-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-table-lean.log; then exit 1; fi
+      - name: Lean exact metric to Christoffel proof
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianMetricConnection.olean Research/KKCartesianMetricConnection.lean 2>&1 | tee ../kk-cartesian-connection-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-connection-lean.log; then exit 1; fi
+          echo 'import Research.KKCartesianMetricConnection' > KKMetricConnectionAudit.lean
+          echo '#print axioms KKCartesianMetricConnection.all_125_gamma_entries_agree' >> KKMetricConnectionAudit.lean
+          lake env lean --trust=0 KKMetricConnectionAudit.lean 2>&1 | tee ../kk-cartesian-connection-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          text=Path('../kk-cartesian-connection-axioms.log').read_text()
+          assert 'all_125_gamma_entries_agree' in text
+          assert 'sorryAx' not in text
+          assert ('depends on axioms: [propext, Classical.choice, Quot.sound]' in text
+              or 'does not depend on any axioms' in text)
+          PY
+      - name: Lean 25-component finite connection Ricci audit
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianRicci.olean Research/KKCartesianRicci.lean 2>&1 | tee ../kk-cartesian-ricci-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-ricci-lean.log; then exit 1; fi
+          echo 'import Research.KKCartesianRicci' > KKCartesianRicciAudit.lean
+          echo '#print axioms KKCartesianRicci.all_25_ricci_entries_zero' >> KKCartesianRicciAudit.lean
+          lake env lean --trust=0 KKCartesianRicciAudit.lean 2>&1 | tee ../kk-cartesian-ricci-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          log=Path('../kk-cartesian-ricci-axioms.log').read_text()
+          assert "KKCartesianRicci.all_25_ricci_entries_zero" in log,log
+          assert "does not depend on any axioms" in log or "depends on axioms: [propext, Classical.choice, Quot.sound]" in log,log
+          assert 'sorryAx' not in log
+          PY
+      - name: Lean full metric-to-Ricci analytic bridge
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCartesianMetricRicci.olean Research/KKCartesianMetricRicci.lean 2>&1 | tee ../kk-cartesian-fullricci-lean.log
+          if grep -E '(^|[[:space:]])(error:|sorryAx)' ../kk-cartesian-fullricci-lean.log; then exit 1; fi
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          src=Path('Research/KKCartesianMetricRicci.lean').read_text()
+          names=re.findall(r'^theorem\s+(\w+)\s*\(',src,re.M)
+          assert len(names)>=9,names
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          Path('KKCartesianMetricRicciAudit.lean').write_text(
+             'import Research.KKCartesianMetricRicci\n'
+             + ''.join('#print axioms KKCartesianMetricRicci.'+n+'\n' for n in names))
+          Path('../kk-cartesian-fullricci-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCartesianMetricRicciAudit.lean 2>&1 | tee ../kk-cartesian-fullricci-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          log=Path('../kk-cartesian-fullricci-axioms.log').read_text()
+          dep=re.findall(r'depends on axioms:\s*\[([^]]*)\]',log)
+          none=log.count('does not depend on any axioms')
+          n=int(Path('../kk-cartesian-fullricci-count.txt').read_text())
+          assert len(dep)+none==n,(len(dep),none,n)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for d in dep:
+              assert {x.strip() for x in d.split(',') if x.strip()}<=allowed,d
+          print('PASS: kernel-verified analytic metric-to-Ricci bridge',n)
+          PY
+      - name: Independently differentiate all first metric jets and connection
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_cartesian_jet.py 2>&1 | tee kk-cartesian-jet-sympy.log
+      - name: Preserve checkout SHA and source checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > kk-cartesian-jet-checkout.txt
+          sha256sum lean/Research/KKCartesianJet.lean lean/Research/KKCartesianDerivative.lean lean/Research/KKCartesianGammaTable.lean lean/Research/KKCartesianSecondJet.lean lean/Research/KKCartesianRicci.lean lean/Research/KKCartesianMetricConnection.lean lean/Research/KKCartesianMetricRicci.lean lean/Research/KKCartesianChartPartials.lean tools/check_kk_cartesian_jet.py > kk-cartesian-jet-sha256.txt
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: kk-cartesian-jet
+          path: |
+            kk-cartesian-jet-lean.log
+            kk-cartesian-jet-axioms.log
+            kk-cartesian-derivative-lean.log
+            kk-cartesian-derivative-axioms.log
+            kk-cartesian-derivative-count.txt
+            kk-cartesian-chart-lean.log
+            kk-cartesian-chart-axioms.log
+            kk-cartesian-second-lean.log
+            kk-cartesian-second-axioms.log
+            kk-cartesian-table-lean.log
+            kk-cartesian-ricci-lean.log
+            kk-cartesian-ricci-axioms.log
+            kk-cartesian-connection-lean.log
+            kk-cartesian-connection-axioms.log
+            kk-cartesian-jet-count.txt
+            kk-cartesian-fullricci-lean.log
+            kk-cartesian-fullricci-count.txt
+            kk-cartesian-fullricci-axioms.log
+            kk-cartesian-jet-sympy.log
+            kk-cartesian-jet-checkout.txt
+            kk-cartesian-jet-sha256.txt
+          if-no-files-found: warn

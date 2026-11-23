@@ -1,12 +1,12 @@
 {
   "counts": {
-    "all_source_edges": 1383,
-    "eligible_direct_edges": 428,
-    "nodes": 433,
-    "retained_pairs": 307,
-    "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 421,
-    "weak_edges_excluded": 955
+    "all_source_edges": 1403,
+    "eligible_direct_edges": 438,
+    "nodes": 442,
+    "retained_pairs": 316,
+    "transitive_pairs_removed": 115,
+    "unique_eligible_pairs": 431,
+    "weak_edges_excluded": 965
   },
   "edges": [
     [
@@ -280,6 +280,42 @@
     [
       "main:lean/Research/FiniteMarkovTransport.lean",
       "main:lean/Research/OkanoharaTransport.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianChartPartials.lean",
+      "main:lean/Research/KKCartesianDerivative.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianDerivative.lean",
+      "main:lean/Research/KKCartesianJet.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianGammaTable.lean",
+      "main:lean/Research/KKCartesianDerivative.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricConnection.lean",
+      "main:lean/Research/KKCartesianGammaTable.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricRicci.lean",
+      "main:lean/Research/KKCartesianMetricConnection.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricRicci.lean",
+      "main:lean/Research/KKCartesianRicci.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianMetricRicci.lean",
+      "main:lean/Research/KKCartesianSecondJet.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianRicci.lean",
+      "main:lean/Research/KKCartesianGammaTable.lean"
+    ],
+    [
+      "main:lean/Research/KKCartesianSecondJet.lean",
+      "main:lean/Research/KKCartesianDerivative.lean"
     ],
     [
       "main:lean/Research/OkanoharaTransport.lean",
@@ -1305,6 +1341,15 @@
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
+    "main:lean/Research/KKCartesianChartPartials.lean",
+    "main:lean/Research/KKCartesianDerivative.lean",
+    "main:lean/Research/KKCartesianGammaTable.lean",
+    "main:lean/Research/KKCartesianJet.lean",
+    "main:lean/Research/KKCartesianMetricConnection.lean",
+    "main:lean/Research/KKCartesianMetricRicci.lean",
+    "main:lean/Research/KKCartesianRicci.lean",
+    "main:lean/Research/KKCartesianSecondJet.lean",
+    "main:lean/Research/KKRadialVacuumBridge.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
     "main:lean/Research/SignedCycleCounterexample.lean",
@@ -1676,8 +1721,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "d2b50b256b1b8b236b12a611353aea78e5c8c26c10fdb99a3bc173fad2c24112",
-    "main_commit": "7695a685989316c03622c229860d746ca6f0f3d8",
+    "graph_sha256": "f6a2e959dcd7970a2b61fed945f8ad697cb514cd025c247edb0f14b19dc148a3",
+    "main_commit": "184a249a67a2258b3a81a852564555ff0209585d",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
