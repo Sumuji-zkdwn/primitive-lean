@@ -39,7 +39,7 @@ private theorem smooth_coord (i : Fin 4) :
   contDiff_apply ℝ (fun _ : Fin 4 => ℝ) i
 
 /-- The squared radius is smooth all the way to X=0. -/
-theorem smooth_radialSq : ContDiff ℝ ⊤ radialSq := by
+@[fun_prop] theorem smooth_radialSq : ContDiff ℝ ⊤ radialSq := by
   unfold radialSq
   fun_prop
 
