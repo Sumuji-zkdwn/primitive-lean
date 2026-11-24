@@ -127,6 +127,7 @@ jobs:
           assert second["receipts"][0] == first["receipts"][0]
           symbol = "e:" + first["receipts"][0]["chain_sha256"][:24]
           assert symbol in r["active_production_symbols"]
+          assert r["search"]["by_parent"][symbol]["generated"] == 1024
           assert r["previous_generations"] == 1
           assert second["receipts"][1]["behavior_sha256"] != first["receipts"][0]["behavior_sha256"]
           assert (p / "second/history-1/Certificate.lean").read_bytes() == (p / "first/new/Certificate.lean").read_bytes()
