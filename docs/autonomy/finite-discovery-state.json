@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-23",
+  "last_utc_day": "2026-11-24",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -107,6 +107,57 @@
         1,
         1
       ]
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "549027afad4c3e1b7c505175b0cf308a07c5ba34d1b32cd5f743a85a8c0c5049",
+      "comparison": "NEW_REVIEWED_SEED_FINITE_ONLY",
+      "day": "2026-11-24",
+      "depth": 0,
+      "fingerprint": "704928a5380c3738710fec21ddda746fda3490d23dcf4492c9b1d0dab7ca7be5",
+      "head_sha": "323aff1d058833b51a7388b74fbb32fc250fac89",
+      "lean_sha256": "448e9f11087e48a6873199d949582f96051bb43cbbf5dea80c69ce660e75e7c6",
+      "model": {
+        "name": "fd_704928a5380c3738",
+        "observations": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1,
+          2
+        ],
+        "pair": [
+          3,
+          6
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            8,
+            6,
+            1,
+            2,
+            5,
+            4,
+            7,
+            3
+          ]
+        ]
+      },
+      "mutation": "reviewed_seed",
+      "name": "fd_704928a5380c3738",
+      "outcome": "EQUIVALENT",
+      "parent": null,
+      "previous_sha256": "08dadd96195b1186bf0b1bff317117ebec2a08f19df6dd0a56e50bd358c470ab",
+      "request_sha256": "ae1613d292719a41b4588171cd723fc85f37a72111b6cd7da619de1a8e558c45",
+      "seed": "siphon",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "word": null
     }
   ],
   "schema_version": 1
