@@ -7,6 +7,7 @@ on:
       - '.github/workflows/forge-lean-certificate.yml'
       - 'tools/autonomy/forge_lean_certificate.py'
       - 'tools/autonomy/forge_lean_feedback.py'
+      - 'tools/autonomy/forge_lean_reentry.py'
       - 'tools/autonomy/semantic_forge.py'
       - 'tools/autonomy/generic_forge.py'
       - 'linear_input/lean_check/OperatorWordObservations.inc'
@@ -17,6 +18,7 @@ on:
       - '.github/workflows/forge-lean-certificate.yml'
       - 'tools/autonomy/forge_lean_certificate.py'
       - 'tools/autonomy/forge_lean_feedback.py'
+      - 'tools/autonomy/forge_lean_reentry.py'
   schedule:
     - cron: '31 14 * * *'
   workflow_dispatch:
@@ -146,6 +148,42 @@ jobs:
       - name: Seal discovered operator only after final theorem audit
         shell: bash
         run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/discovery
+      - name: Promote prior certified discovery into a new proof alphabet
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_reentry prepare --state "$out/state.json" --base "$out/discovery" --output "$out/promoted"
+          python -B -m tools.autonomy.forge_lean_reentry prepare --state "$out/state.json" --base "$out/discovery" --output "$RUNNER_TEMP/forge-promoted-replay"
+          cmp "$out/promoted/Certificate.lean" "$RUNNER_TEMP/forge-promoted-replay/Certificate.lean"
+          cmp "$out/promoted/mapping.json" "$RUNNER_TEMP/forge-promoted-replay/mapping.json"
+      - name: Kernel prove invariant of expanded alphabet
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/promoted/Certificate.lean 2>&1 | tee ../verification/forge-lean/promoted/lean.log
+      - name: Audit expanded alphabet proof before reversible search
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/promoted
+      - name: Search for a reversible strict extension of the promoted alphabet
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_reentry search --state "$out/state.json" --base "$out/promoted" --output "$out/reversible"
+          python -B -m tools.autonomy.forge_lean_reentry search --state "$out/state.json" --base "$out/promoted" --output "$RUNNER_TEMP/forge-reversible-replay"
+          cmp "$out/reversible/Certificate.lean" "$RUNNER_TEMP/forge-reversible-replay/Certificate.lean"
+          cmp "$out/reversible/mapping.json" "$RUNNER_TEMP/forge-reversible-replay/mapping.json"
+      - name: Kernel verify reversible discovery and its nonexpressibility
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/reversible/Certificate.lean 2>&1 | tee ../verification/forge-lean/reversible/lean.log
+      - name: Audit final expanded-word nonexpressibility theorems
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/reversible
       - name: Preserve source, snapshot, mapping and kernel audit
         if: always()
         uses: actions/upload-artifact@v6
