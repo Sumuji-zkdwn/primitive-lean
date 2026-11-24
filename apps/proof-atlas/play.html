@@ -2690,6 +2690,52 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
         "全ての w に対して E(z)≤E(w) となるため z は大域的最小点。"
       ]
     },
+    "LinearInputGradient.hasDerivAt_E_x": {
+      "title": "エネルギーの x に関する偏微分",
+      "assumptions": "λ,r,u,x,y は任意の実数。E(x,y)=λx⁴/4+rx²/2−ux+(y−√2x)²/2。",
+      "summary": "∂ₓE=λx³+(r+2)x−√2y−u=gₓ。",
+      "steps": [
+        "y と入力 u を固定する。一変数ポテンシャルの微分は λx³+rx−u。",
+        "結合項の微分は連鎖律で −√2(y−√2x)。",
+        "両者を足し (√2)²=2 を用いると gₓ の定義に一致する。"
+      ]
+    },
+    "LinearInputGradient.hasDerivAt_E_y": {
+      "title": "エネルギーの y に関する偏微分",
+      "assumptions": "λ,r,u,x,y は任意。x と入力を固定する。",
+      "summary": "∂ᵧE=y−√2x=gᵧ。",
+      "steps": [
+        "x のみに依存するポテンシャルは y について定数なので微分は0。",
+        "結合項 (y−√2x)²/2 を微分すると y−√2x になる。"
+      ]
+    },
+    "LinearInputGradient.hasDerivAt_E_input": {
+      "title": "入力に関するエネルギーの微分",
+      "assumptions": "λ,r,u,x,y は任意。x,y を固定し入力 u を変数にする。",
+      "summary": "∂ᵤE=−x。",
+      "steps": [
+        "エネルギーを入力 u に依存する項 −ux と、それ以外の定数項に分ける。",
+        "線形項 −ux を u で微分すると −x。その他の微分は0。"
+      ]
+    },
+    "LinearInputGradient.deriv_E_x": {
+      "title": "x 偏微分の導関数値を取り出す",
+      "assumptions": "λ,r,u,x,y は任意。",
+      "summary": "deriv (t↦E(t,y)) x=gₓ。",
+      "steps": [
+        "先行定理は x での微分係数 gₓ の存在を保証する。",
+        "微分可能な点では Lean の deriv の値がその微分係数と一致する。"
+      ]
+    },
+    "LinearInputGradient.deriv_E_y": {
+      "title": "y 偏微分の導関数値を取り出す",
+      "assumptions": "λ,r,u,x,y は任意。",
+      "summary": "deriv (t↦E(x,t)) y=gᵧ。",
+      "steps": [
+        "先行する y 偏微分定理により、y で微分係数 gᵧ が存在する。",
+        "その微分係数を deriv の等式に変換する。"
+      ]
+    },
     "LinearInputGradient.stationary_iff": {
       "title": "停留点を満たす2本の代数条件",
       "assumptions": "gx と gy は指定の線形入力エネルギーの偏導関数。",
@@ -2698,6 +2744,44 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
         "gy=y−√2x=0 から y=√2x を求める。",
         "この等式を gx=λx³+(r+2)x−√2y−u に代入する。",
         "(√2)²=2 を使って整理すると u=λx³+rx。逆方向も代入で確認する。"
+      ]
+    },
+    "LinearInputGradient.partials_zero_iff": {
+      "title": "二つの偏微分がゼロとなる条件",
+      "assumptions": "λ,r,u,x,y は任意。",
+      "summary": "∂ₓE=∂ᵧE=0 ↔ y=√2x かつ u=λx³+rx。",
+      "steps": [
+        "二つの偏微分を既に証明した gₓ,gᵧ の式で置換する。",
+        "gᵧ=0 から y=√2x。gₓ に代入すると λx³+rx−u=0。",
+        "逆にこの二条件を代入すると両偏微分とも0になる。"
+      ]
+    },
+    "LinearInputGradient.stationary_value_le": {
+      "title": "停留点のエネルギーには一様上界がある",
+      "assumptions": "λ＞0、gₓ=gᵧ=0。r,u,x,y は実数。",
+      "summary": "E≤(max(−r,0))²/(12λ)。",
+      "steps": [
+        "停留条件から y=√2x と u=λx³+rx が従う。",
+        "谷 y=√2x では結合項が0なので E は一変数ポテンシャルと一致する。",
+        "既存の一変数停留値上界を適用する。入力 u の大きさに依存しない上界である。"
+      ]
+    },
+    "LinearInputGradient.no_stationary_on_band": {
+      "title": "停留値上界より高いエネルギー領域には停留点がない",
+      "assumptions": "λ＞0、C=(max(−r,0))²/(12λ)＜target、E≥target。",
+      "summary": "gₓ,gᵧ が同時に0になることはない。",
+      "steps": [
+        "両偏微分が0と仮定すると停留値上界より E≤C。",
+        "一方で E≥target＞C なので矛盾する。"
+      ]
+    },
+    "LinearInputGradient.gSq_nonneg": {
+      "title": "勾配ノルムの二乗は非負",
+      "assumptions": "λ,r,u,x,y は任意。gSq=gₓ²+gᵧ²。",
+      "summary": "gSq≥0。",
+      "steps": [
+        "実数の二乗 gₓ² と gᵧ² はそれぞれ非負。",
+        "非負実数の和も非負。"
       ]
     },
     "LinearInputGradient.gSq_eq_zero_iff": {
@@ -2710,6 +2794,56 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
         "逆に gx=gy=0 なら二乗和は明らかに0。"
       ]
     },
+    "LinearInputGradient.gSq_pos_on_band": {
+      "title": "停留値上界より上では勾配ノルムの二乗が正",
+      "assumptions": "λ＞0、C=(max(−r,0))²/(12λ)＜target≤E。",
+      "summary": "gSq＞0。",
+      "steps": [
+        "gSq は二つの二乗の和なので非負。",
+        "gSq=0 なら gₓ=gᵧ=0 になるが、先行する停留点排除定理に反する。",
+        "非負かつ非ゼロなので厳密に正。"
+      ]
+    },
+    "LinearInputGradient.continuous_E": {
+      "title": "状態に関してエネルギーは連続",
+      "assumptions": "λ,r,u は固定した任意の実数。",
+      "summary": "(x,y)↦E(λ,r,u,x,y) は ℝ² 上で連続。",
+      "steps": [
+        "第一・第二座標への射影は連続であり、定数関数も連続。",
+        "E はこれらの四乗・二乗・和・差・定数倍から作られた多項式。",
+        "各操作は連続性を保つため E 全体も連続。"
+      ]
+    },
+    "LinearInputGradient.continuous_gSq": {
+      "title": "勾配ノルムの二乗は状態の連続関数",
+      "assumptions": "λ,r,u は固定。gSq=gₓ²+gᵧ²。",
+      "summary": "(x,y)↦gSq(λ,r,u,x,y) は連続。",
+      "steps": [
+        "gₓ は x の三次式と x,y の一次項の和、gᵧ は y−√2x。いずれも座標の多項式。",
+        "座標射影の連続性と多項式演算の連続性から両成分は連続。",
+        "二乗して加えても連続性が保たれる。"
+      ]
+    },
+    "LinearInputGradient.hasDerivAt_energy_curve": {
+      "title": "動く入力も含めたエネルギーの連鎖律",
+      "assumptions": "λ,r は固定。x(t),y(t),u(t) が点 t で微分係数 x′,y′,u′ を持つ。",
+      "summary": "dE/dt=gₓx′+gᵧy′−xu′。",
+      "steps": [
+        "E の四次項・二次項・結合項を t で微分し、x′,y′ の係数を集める。",
+        "入力項 −u(t)x(t) は積の微分により −ux′−xu′。",
+        "x′ の係数が gₓ、y′ の係数が gᵧ となることを展開して確かめる。入力が動く場合は −xu′ を落とせない。"
+      ]
+    },
+    "LinearInputGradient.hasDerivAt_energy_of_velocity": {
+      "title": "指定速度に沿うエネルギー変化と入力の寄与",
+      "assumptions": "点 t で x′=−γe gₓ−bgᵧ、y′=−γe gᵧ+bgₓ、u の微分係数は u′。e=E−target。",
+      "summary": "E′=−γe gSq−xu′。",
+      "steps": [
+        "実エネルギーの連鎖律 E′=gₓx′+gᵧy′−xu′ を使う。",
+        "仮定された二つの速度を代入すると b の交差項 −bgₓgᵧ と +bgᵧgₓ が相殺される。",
+        "残る散逸項は −γe(gₓ²+gᵧ²)、動く入力の項は −xu′。軌道の存在をここで証明しているわけではない。"
+      ]
+    },
     "LinearInputGradient.hasDerivAt_energy_fixed_input": {
       "title": "入力を固定した軌道のエネルギー変化",
       "assumptions": "ソースの2成分速度に対する微分仮定が成立し、入力 u は時間に依存せず一定。",
@@ -2719,6 +2853,432 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
         "入力 u を定数関数とし、その時間微分 u′=0 と置く。",
         "一般公式の仕事項 −x·u′ が消え、指定の式が残る。",
         "γや E−target の符号による単調性は別の条件が必要であり、この定理だけから無条件には結論しない。"
+      ]
+    },
+    "LinearInputGradient.hasDerivAt_squared_gap_fixed_input": {
+      "title": "固定入力でのエネルギー誤差の二乗の微分",
+      "assumptions": "入力 u は固定。x,y は点 t で指定のフィードバック速度を持つ。e=E−target。",
+      "summary": "(e²)′=−2γe²gSq。",
+      "steps": [
+        "固定入力のエネルギー変化公式より e′=E′=−γe gSq。target は定数。",
+        "二乗の連鎖律 (e²)′=2ee′ を用いる。",
+        "代入すると −2γe²gSq。γ≥0 なら非増加の微分条件を得るが、等式自体には符号条件は不要。"
+      ]
+    },
+    "LinearInputDissipation.exponential_bound": {
+      "title": "微分不等式から指数上界を導く積分因子法",
+      "assumptions": "全 t≥0 で v′(t)=q(t)≤−kv(t)。k は任意の実数。",
+      "summary": "t≥0 で v(t)≤v(0)exp(−kt)。",
+      "steps": [
+        "w(t)=exp(kt)v(t) と置く。積の微分より w′=exp(kt)(kv+q)。",
+        "仮定と指数関数の正性から w′≤0。連続性と導関数の符号による単調性定理で w(t)≤w(0)=v(0)。",
+        "正の exp(kt) で割り、逆数を exp(−kt) と書く。v≥0 や k＞0 はこの比較不等式自体には不要。"
+      ]
+    },
+    "LinearInputDissipation.squared_error_exponential": {
+      "title": "減衰係数に下界があると誤差の二乗を指数関数で評価できる",
+      "assumptions": "γ≥0、全 t≥0 で e′=−γeg、g(t)≥m。",
+      "summary": "e(t)²≤e(0)²exp(−2γmt)。",
+      "steps": [
+        "二乗の微分は (e²)′=−2γe²g。",
+        "γe²≥0 なので g≥m から (e²)′≤−2γm e²。",
+        "積分因子の比較定理に v=e²,k=2γm を入れる。m＞0 の場合には減衰となる。"
+      ]
+    },
+    "LinearInputDissipation.squared_error_tendsto_zero": {
+      "title": "正の一様減衰下界による二乗誤差の収束",
+      "assumptions": "γ＞0、m＞0、全 t≥0 で e′=−γeg、g≥m。",
+      "summary": "t→∞ で e(t)²→0。",
+      "steps": [
+        "二乗誤差の指数上界 0≤e(t)²≤e(0)²exp(−2γmt) を使う。",
+        "2γm＞0 なので右辺は t→∞ で0へ収束する。",
+        "はさみうちの定理で二乗誤差も0へ収束する。全時間の解は仮定されている。"
+      ]
+    },
+    "LinearInputDissipation.error_tendsto_zero": {
+      "title": "二乗誤差の収束から元の誤差の収束を得る",
+      "assumptions": "γ＞0、m＞0、全 t≥0 で e′=−γeg、g≥m。",
+      "summary": "e(t)→0（t→∞）。",
+      "steps": [
+        "先行定理で e(t)²→0。",
+        "非負実数上で平方根は連続で、√(e(t)²)=|e(t)|。従って |e(t)|→0。",
+        "絶対値の0への収束と元の実数値の0への収束は同値。"
+      ]
+    },
+    "LinearInputRegularBand.band_nonempty": {
+      "title": "非負の下端を持つエネルギー帯は空でない",
+      "assumptions": "0≤lo≤hi、λ,r,u は任意。",
+      "summary": "集合 {(x,y): lo≤E(x,y)≤hi} に少なくとも一点ある。",
+      "steps": [
+        "x=0、y=√(2lo) と選ぶと、ポテンシャル項はすべて0。",
+        "結合項は y²/2=lo。lo≥0 により平方根の二乗公式を使える。",
+        "lo≤hi なのでこの点はエネルギー帯に属する。"
+      ]
+    },
+    "LinearInputRegularBand.exists_positive_gradient_bound": {
+      "title": "コンパクトな正則エネルギー帯では勾配に正の一様下界がある",
+      "assumptions": "λ＞0、停留値上界 C＜lo。hi と入力 u は固定。",
+      "summary": "ある m＞0 が存在し、lo≤E(z)≤hi の全 z で gSq(z)≥m。",
+      "steps": [
+        "先行定理によりエネルギー帯はコンパクト。gSq は連続。",
+        "lo＞C のため帯内の全点で gSq＞0。",
+        "コンパクト集合上の連続な正関数には正の一様下界がある。空の帯では任意の正の下界が使える。m は固定入力・帯に依存する。"
+      ]
+    },
+    "LinearInputRegularBand.exists_valley_global_minimum": {
+      "title": "大域的最小点は谷 y=√2x 上に存在する",
+      "assumptions": "λ＞0、r,u は固定。",
+      "summary": "ある a が存在し、全 x,y で E(a,√2a)≤E(x,y)。",
+      "steps": [
+        "強制性と連続性に基づく既存の大域的最小点存在定理から z=(a,b) を取る。",
+        "比較点 (a,√2a) では結合項が0となり、同じ x のポテンシャルは変わらない。",
+        "最小性より元の点の結合項 (b−√2a)²/2≤0。二乗は非負なので b=√2a。"
+      ]
+    },
+    "LinearInputRegularBand.exists_minimizing_stationary_root": {
+      "title": "大域的最小点を与える停留方程式の根が存在する",
+      "assumptions": "λ＞0、r,u は固定。",
+      "summary": "ある a に u=λa³+ra、λa²+r≥0、かつ (a,√2a) の大域的最小性が同時に成立。",
+      "steps": [
+        "谷上の大域的最小点の存在定理で a を得る。",
+        "任意入力での大域的最小性の特徴付けをその a に適用すると設計入力条件と非負の余裕量が得られる。",
+        "三つの性質を同一の a にまとめる。"
+      ]
+    },
+    "LinearInputRegularBand.exists_unique_global_minimum_of_input_ne_zero": {
+      "title": "非ゼロ入力では大域的最小点が一意",
+      "assumptions": "λ＞0、入力 u≠0。",
+      "summary": "全平面で E を最小化する点はちょうど一つ存在する。",
+      "steps": [
+        "大域的最小点 (a,√2a) と u=a(λa²+r)、m=λa²+r≥0 を得る。",
+        "仮に m=0 なら u=0 となり仮定に反する。従って m＞0。",
+        "別の最小点があれば相互に比較して二点のエネルギーが等しい。",
+        "正の余裕量による等エネルギー点の一意性定理を適用すると、その点も (a,√2a) である。"
+      ]
+    },
+    "LinearInputRegularBand.hasDerivAt_gap_of_trajectory": {
+      "title": "固定入力の軌道上でのエネルギー誤差の微分",
+      "assumptions": "x,y,b が指定の固定入力軌道 IsTrajectory を満たし、t≥0。e(t)=E(x(t),y(t))−target。",
+      "summary": "e′(t)=−γe(t)gSq(x(t),y(t))。",
+      "steps": [
+        "IsTrajectory の定義から時刻 t での x,y の実際の微分係数を取り出す。",
+        "固定入力のエネルギー微分定理にそれらを適用する。",
+        "target は定数なので、それを差し引いても微分係数は変わらない。"
+      ]
+    },
+    "LinearInputRegularBand.energy_convergence_in_band": {
+      "title": "正則エネルギー帯に留まる軌道は目標エネルギーへ収束する",
+      "assumptions": "λ,γ＞0、停留値上界 C＜target。全 t≥0 で指定軌道が存在し、target≤E(t)≤upper を満たす。",
+      "summary": "ある m＞0 で (E(t)−target)²≤(E(0)−target)²exp(−2γmt)、かつ E(t)→target。",
+      "steps": [
+        "固定された帯 [target,upper] に対する正の一様勾配下界 m を得る。",
+        "軌道は帯内にあるので全時刻で gSq≥m。誤差 e=E−target は e′=−γe gSq を満たす。",
+        "指数評価と誤差収束の一般定理を適用する。",
+        "e→0 に target を加えて E→target を得る。全時間の軌道の存在と帯への拘束は前提。"
+      ]
+    },
+    "LinearInputInvariance.squared_error_antitone": {
+      "title": "非負の減衰では誤差の二乗が単調非増加",
+      "assumptions": "γ≥0、全 t≥0 で e′=−γeg、g≥0。",
+      "summary": "t≥0 において e(t)² は単調非増加。",
+      "steps": [
+        "二乗の微分公式で (e²)′=−2γe²g。",
+        "γ,e²,g はすべて非負なので導関数は非正。",
+        "微分可能性から連続性も得られるので、半直線上での単調性定理を適用する。"
+      ]
+    },
+    "LinearInputInvariance.error_nonneg": {
+      "title": "初期誤差が非負なら目標を下側へ通り抜けない",
+      "assumptions": "γ≥0、全 t≥0 で e′=−γeg、g≥0、e(0)≥0。",
+      "summary": "全 t≥0 で e(t)≥0。",
+      "steps": [
+        "仮にある t≥0 で e(t)＜0 とする。e は連続なので中間値の定理からある s∈[0,t] で e(s)=0。",
+        "二乗誤差の単調非増加性により e(t)²≤e(s)²=0。",
+        "e(t)＜0 ならその二乗は正であり矛盾する。"
+      ]
+    },
+    "LinearInputInvariance.error_le_initial": {
+      "title": "非負の誤差は初期値を超えない",
+      "assumptions": "γ≥0、全 t≥0 で e′=−γeg、g≥0、e(0)≥0。",
+      "summary": "全 t≥0 で e(t)≤e(0)。",
+      "steps": [
+        "先行する符号保存定理により e(t)≥0。",
+        "二乗誤差の単調性から e(t)²≤e(0)²。",
+        "両者が非負なので平方根を取ると e(t)≤e(0)。"
+      ]
+    },
+    "LinearInputInvariance.energy_band_of_trajectory": {
+      "title": "指定軌道は初期エネルギーと目標の間に留まる",
+      "assumptions": "γ≥0、全 t≥0 の固定入力軌道を仮定し E(0)≥target。",
+      "summary": "全 t≥0 で target≤E(t)≤E(0)。",
+      "steps": [
+        "誤差 e=E−target の微分は −γe gSq であり gSq≥0。初期誤差は非負。",
+        "符号保存と初期値上界をそれぞれ適用すると 0≤e(t)≤e(0)。",
+        "target を加えれば両側の帯条件になる。帯への拘束を別の仮定にしていない。"
+      ]
+    },
+    "LinearInputInvariance.energy_convergence_of_initial": {
+      "title": "初期エネルギー条件から目標への指数収束を得る",
+      "assumptions": "λ,γ＞0、停留値上界 C＜target。全 t≥0 の指定軌道を仮定し E(0)≥target。",
+      "summary": "ある m＞0 で誤差の二乗が指数上界を持ち、E(t)→target。",
+      "steps": [
+        "初期条件と軌道方程式からエネルギー帯 [target,E(0)] が不変である定理を使う。",
+        "この帯は停留値上界より上なので、正則帯における指数収束定理を適用できる。",
+        "帯への拘束は導出されたが、全時間軌道の存在自体はこの定理の仮定に残る。"
+      ]
+    },
+    "LinearInputCurvatureBridge.energy_shear": {
+      "title": "せん断座標で四次ポテンシャルの位相エネルギーを得る",
+      "assumptions": "k,σ,u,x,p は実数（Lean の除算を使用）。λ=1/2、r=−σ/k、y=p+√2x。",
+      "summary": "E(1/2,−σ/k,u,x,y)=p²/2+x⁴/8−σx²/(2k)−ux。",
+      "steps": [
+        "エネルギーの定義に λ,r,y を代入する。",
+        "y−√2x=p となり結合項は p²/2。",
+        "ポテンシャルを整理して右辺を得る。物理的・幾何学的な曲率方程式への変換では後続定理が k≠0 を仮定する。"
+      ]
+    },
+    "LinearInputCurvatureBridge.gy_shear": {
+      "title": "せん断座標では y 偏微分が運動量成分になる",
+      "assumptions": "x,p は実数、y=p+√2x。",
+      "summary": "gᵧ(x,y)=p。",
+      "steps": [
+        "定義 gᵧ=y−√2x に y=p+√2x を代入する。",
+        "同じ √2x の項が消えて p が残る。"
+      ]
+    },
+    "LinearInputCurvatureBridge.gx_shear": {
+      "title": "せん断座標での x 偏微分",
+      "assumptions": "k,σ,u,x,p は実数、λ=1/2、r=−σ/k、y=p+√2x。",
+      "summary": "gₓ=x³/2−(σ/k)x−√2p−u。",
+      "steps": [
+        "gₓ=λx³+(r+2)x−√2y−u を展開する。",
+        "指定座標を代入すると +2x と −(√2)²x が相殺される。",
+        "残りが x³/2−(σ/k)x−√2p−u。"
+      ]
+    },
+    "LinearInputCurvatureBridge.forced_phase_hasDerivAt": {
+      "title": "強制付き曲率方程式からせん断された位相速度を得る",
+      "assumptions": "k≠0、κ は C²。点 s で kκ″+kκ³/2−σκ=ku。u,σ は定数。",
+      "summary": "x=κ、y=κ′+√2κ とすると点 s で x′=gᵧ、y′=−gₓ（λ=1/2,r=−σ/k）。",
+      "steps": [
+        "k≠0 なので曲率方程式を κ″=(σ/k)κ−κ³/2+u と解ける。",
+        "gᵧ のせん断公式から gᵧ=κ′=x′。",
+        "y′=κ″+√2κ′ に κ″ の式を入れ、gₓ のせん断公式の負号と一致することを確かめる。",
+        "変数 s は弧長。ここでは与えられた曲率関数の位相速度を示し、解の存在は主張しない。"
+      ]
+    },
+    "LinearInputCurvatureBridge.phase_hasDerivAt": {
+      "title": "非強制の古典曲率方程式はゼロ入力位相系に対応する",
+      "assumptions": "k≠0、κ は C²、点 s で kκ″+kκ³/2−σκ=0。",
+      "summary": "x=κ、y=κ′+√2κ に対して x′=gᵧ、y′=−gₓ（入力 u=0）。",
+      "steps": [
+        "強制付き曲率方程式の右辺 ku に u=0 を代入する。",
+        "与えられた式がその特殊例なので、強制付き位相速度定理をそのまま使う。"
+      ]
+    },
+    "LinearInputCurvatureBridge.forced_curvature_of_phase": {
+      "title": "せん断位相速度から強制付き曲率方程式を復元する",
+      "assumptions": "k≠0、κ は C²。点 s で y=κ′+√2κ の微分係数が −gₓ(1/2,−σ/k,u,κ,y)。",
+      "summary": "kκ″+kκ³/2−σκ=ku。",
+      "steps": [
+        "C² 性から y の実際の微分係数は κ″+√2κ′。微分係数の一意性により仮定の −gₓ と等しい。",
+        "gₓ のせん断公式を代入すると両辺の √2κ′ が相殺される。",
+        "κ″=−κ³/2+(σ/k)κ+u を k 倍して整理する。"
+      ]
+    },
+    "LinearInputCurvatureBridge.forced_energy_hasDerivAt_zero": {
+      "title": "固定入力の強制付き曲率軌道上でエネルギー微分はゼロ",
+      "assumptions": "k≠0、κ は C²、点 s で強制付き曲率方程式が成立、u は固定。",
+      "summary": "せん断位相エネルギー E(κ,κ′+√2κ) の点 s での微分係数は0。",
+      "steps": [
+        "曲率方程式から実際の位相速度 x′=gᵧ,y′=−gₓ が得られる。",
+        "固定入力なのでエネルギー連鎖律は E′=gₓx′+gᵧy′。",
+        "代入すると gₓgᵧ−gᵧgₓ=0。"
+      ]
+    },
+    "LinearInputCurvatureBridge.energy_hasDerivAt_zero": {
+      "title": "非強制曲率軌道上の位相エネルギーの微分",
+      "assumptions": "k≠0、κ は C²、点 s で非強制曲率方程式を満たす。",
+      "summary": "入力0での位相エネルギーの微分係数は0。",
+      "steps": [
+        "強制付きエネルギー微分定理に u=0 を指定する。",
+        "右辺 ku=0 なので仮定が一致し、微分係数0を得る。"
+      ]
+    },
+    "LinearInputCurvatureBridge.forced_energy_constant": {
+      "title": "強制付き曲率方程式の位相エネルギーは開区間で保存される",
+      "assumptions": "k≠0、κ は C²、区間 (a,b) の全点で同じ定数 k,σ,u の強制付き曲率方程式が成り立つ。",
+      "summary": "ある c が存在し、全 s∈(a,b) で E(κ(s),κ′(s)+√2κ(s))=c。",
+      "steps": [
+        "各内点に固定入力の位相エネルギー微分定理を適用すると、エネルギー関数が微分可能で導関数0。",
+        "開区間は連結なので、導関数が恒等的に0の関数は一定。",
+        "その一定値を c とする。"
+      ]
+    },
+    "LinearInputCurvatureBridge.energy_constant": {
+      "title": "非強制曲率方程式の位相エネルギー保存",
+      "assumptions": "k≠0、κ は C²、開区間全体で kκ″+kκ³/2−σκ=0。",
+      "summary": "入力0での位相エネルギーは区間上のある定数 c に等しい。",
+      "steps": [
+        "強制付きの区間エネルギー保存定理で u=0 を選ぶ。",
+        "全内点で非強制方程式が ku=0 の特殊例となるので、共通の保存値 c が得られる。"
+      ]
+    },
+    "LinearInputVariationalBridge.energy_linear_density": {
+      "title": "曲率に線形な密度の追加は端点角の差だけを変える",
+      "assumptions": "ε は連続、θ は C¹、入力 u は定数。",
+      "summary": "E_{ε−u q}(θ)=Eε(θ)−u(θ(ℓ)−θ(0))。",
+      "steps": [
+        "アフィン密度のエネルギー公式に a=−u,b=0 を代入する。",
+        "曲率の積分 ∫θ′ は実数値の端点角の差に等しいため、その境界項だけが変化する。"
+      ]
+    },
+    "LinearInputVariationalBridge.stationary_linear_density_iff": {
+      "title": "固定端点角の停留性は曲率線形項を加えても変わらない",
+      "assumptions": "ε は連続、θ は C¹、u は任意の実数。",
+      "summary": "Stationary(ε−u q,θ) ↔ Stationary(ε,θ)。",
+      "steps": [
+        "曲率線形項 −uq はアフィン密度変更の特殊例。",
+        "固定端点角の変分ではエネルギーの追加量 −u(θ(ℓ)−θ(0)) は変分パラメータに依存しない。",
+        "アフィン密度による停留性保存定理を a=−u,b=0 として適用する。"
+      ]
+    },
+    "LinearInputVariationalBridge.locallyMinimizing_linear_density_iff": {
+      "title": "固定端点条件の局所最小性も曲率線形項に対して不変",
+      "assumptions": "ε は連続、θ は C¹、u は定数。元の制約付き C¹ 近傍を使う。",
+      "summary": "LocallyMinimizing(ε−u q,θ) ↔ LocallyMinimizing(ε,θ)。",
+      "steps": [
+        "基準曲線と許容比較曲線では始端・終端の実数角が共通。",
+        "曲率線形項が加えるエネルギーは両者で同一の境界定数なので比較順序は保存される。",
+        "アフィン密度の局所最小性同値定理に a=−u,b=0 を入れる。近傍や許容集合を変更しない。"
+      ]
+    },
+    "LinearInputVariationalBridge.stationary_quadratic_curvature": {
+      "title": "二次密度の制約付き停留性から古典曲率方程式が従う",
+      "assumptions": "ℓ＞0、θ は C³、ε(q)=kq²/2 に対する Stationary を仮定。k は任意。",
+      "summary": "ある σ が存在し内点で kκ″+kκ³/2−σκ=0、κ=θ′。",
+      "steps": [
+        "実際の制約付き停留性から一般角度方程式・第一積分・曲率方程式を得る Elastica の主定理を適用する。",
+        "θ が C³ なので κ=θ′ は C²。一般曲率式を二次密度へ特殊化できる。",
+        "同じ第一積分定数 σ で古典方程式が得られる。"
+      ]
+    },
+    "LinearInputVariationalBridge.stationary_quadratic_phase_energy": {
+      "title": "二次密度の停留曲線から保存位相エネルギーと速度を導く",
+      "assumptions": "ℓ,k＞0、θ は C³、ε(q)=kq²/2 に対する制約付き停留性。",
+      "summary": "ある σ,c が存在し、内点で x=θ′、y=θ″+√2θ′ の位相エネルギー E(1/2,−σ/k,0,x,y)=c、x′=gᵧ、y′=−gₓ。",
+      "steps": [
+        "停留性から古典曲率方程式を導く定理で σ を得る。κ=θ′ は C²。",
+        "k＞0 から k≠0。非強制曲率方程式の位相エネルギー保存定理を適用して c を得る。",
+        "各内点で非強制位相速度定理を使い、保存値と実際の二つの微分係数をまとめる。位相の入力は0。"
+      ]
+    },
+    "LinearInputVariationalBridge.locallyMinimizing_linear_quadratic_phase_energy": {
+      "title": "線形項付き二次密度の非直線局所最小曲線も非強制位相系に従う",
+      "assumptions": "ℓ,k＞0、θ は C³ で区間上一定でない。密度 kq²/2−uq に対する制約付き局所最小性。",
+      "summary": "ある σ,c により二次密度の保存位相エネルギーと x′=gᵧ,y′=−gₓ（入力0）が成立。",
+      "steps": [
+        "曲率線形項の局所最小性不変定理で、純粋な二次密度の局所最小性へ移る。",
+        "非定数性から曲率非ゼロの内点を得る。制約付き局所最小性から停留性を導く定理が使える。",
+        "二次密度の停留曲線の位相エネルギー定理を適用する。元の曲率線形項の係数 u は固定端点角の境界項であり、位相方程式の強制入力にはならない。"
+      ]
+    },
+    "LinearInputFeedback.feedback_rate": {
+      "title": "勾配に直交する成分はエネルギー変化率に寄与しない",
+      "assumptions": "p=(pₓ,pᵧ)、γ,e,b は任意の実数。v=(−γepₓ−bpᵧ,−γepᵧ+bpₓ)。",
+      "summary": "p·v=−γe(pₓ²+pᵧ²)。",
+      "steps": [
+        "内積を二成分で展開する。",
+        "b の二項 −bpₓpᵧ と +bpᵧpₓ が相殺される。",
+        "残る二乗項を −γe でくくる。"
+      ]
+    },
+    "LinearInputFeedback.feedback_coefficient": {
+      "title": "非ゼロ勾配では回転成分の係数を行列式から復元できる",
+      "assumptions": "S=pₓ²+pᵧ²＞0、γ,e,b は実数、v=−γep+b(−pᵧ,pₓ)。",
+      "summary": "(pₓvᵧ−pᵧvₓ)/S=b。",
+      "steps": [
+        "v の二成分を行列式 pₓvᵧ−pᵧvₓ に代入する。",
+        "勾配方向の項は相殺され、b(pₓ²+pᵧ²) が残る。",
+        "S＞0 なので S で割って b を得る。"
+      ]
+    },
+    "LinearInputFeedback.decomposition_of_rate": {
+      "title": "スカラーの変化率条件から速度の直交分解を得る",
+      "assumptions": "S=pₓ²+pᵧ²＞0、p·v=−γeS。",
+      "summary": "b=(pₓvᵧ−pᵧvₓ)/S と置けば v=−γep+b(−pᵧ,pₓ)。",
+      "steps": [
+        "p≠0 なので p と Jp=(−pᵧ,pₓ) は直交し、どちらもノルムの二乗が S。",
+        "v の p 方向の成分係数は (p·v)/S=−γe。Jp 方向は (Jp·v)/S=b。",
+        "二次元でこれらが基底を成すので和として v を復元できる。Lean の証明では各成分の等式の分母を払い、率条件を掛けて代数的に確認する。"
+      ]
+    },
+    "LinearInputFeedback.rate_iff_exists_unique_feedback": {
+      "title": "正則点では変化率条件と一意な回転係数の存在が同値",
+      "assumptions": "S=pₓ²+pᵧ²＞0、p,v,γ,e は固定。",
+      "summary": "p·v=−γeS ↔ ただ一つの b が v=−γep+bJp を満たす。",
+      "steps": [
+        "率条件から行列式で定義した b の分解が得られる。",
+        "別の b′ が同じ分解を満たすなら係数復元公式から b′=(pₓvᵧ−pᵧvₓ)/S=b。",
+        "逆に分解が存在すれば、直交成分が内積で消える率の恒等式を使う。速度 v を固定した場合の一意性であり、率条件だけで v が一意になるという意味ではない。"
+      ]
+    },
+    "LinearInputFeedback.zero_gradient_rate": {
+      "title": "勾配ゼロではスカラーの変化率条件が空になる",
+      "assumptions": "p=(0,0)、v,γ,e は任意。",
+      "summary": "p·v=−γe|p|² は常に成立。",
+      "steps": [
+        "p の両成分が0なので、どんな v を入れても内積は0。",
+        "勾配の二乗ノルムも0だから右辺も0。従って率条件は速度を制約しない。"
+      ]
+    },
+    "LinearInputFeedback.zero_gradient_feedback_iff": {
+      "title": "勾配ゼロではフィードバック形が表せる速度はゼロだけ",
+      "assumptions": "p=(0,0)、v,γ,e は任意。",
+      "summary": "ある b で v=−γep+bJp ↔ v=(0,0)。",
+      "steps": [
+        "p=0 を代入すると右辺の二成分は b に関係なく0。従って表現できる v はゼロ。",
+        "逆に v=0 なら例えば b=0 が式を満たす。ここでは b の一意性は成立しない。"
+      ]
+    },
+    "LinearInputFeedback.zero_gradient_counterexample": {
+      "title": "勾配ゼロで変化率から速度分解を導けない具体的反例",
+      "assumptions": "p=(0,0)、v=(1,0)、γ,e は任意。",
+      "summary": "スカラーの率条件は成立するが、フィードバック分解を満たす b は存在しない。",
+      "steps": [
+        "p=0 により率条件の左右はともに0。",
+        "一方でフィードバック形の第一成分はどんな b でも0。vₓ=1 と等しくできない。",
+        "従って正則性 S＞0 を外した分解同値は偽。"
+      ]
+    },
+    "LinearInputFeedback.energy_rate_iff_exists_unique_feedback": {
+      "title": "実際の勾配に対するエネルギー変化率とフィードバック分解の同値",
+      "assumptions": "状態 x,y と入力 u は固定、gSq＞0。v=(vₓ,vᵧ)、e=E−target。",
+      "summary": "gₓvₓ+gᵧvᵧ=−γe gSq ↔ 一意な b で v=−γe(gₓ,gᵧ)+b(−gᵧ,gₓ)。",
+      "steps": [
+        "一般の二次元内積率と回転係数の同値定理に p=(gₓ,gᵧ) を代入する。",
+        "S=pₓ²+pᵧ² は定義上 gSq。正則性の仮定が分母の非ゼロ性を保証する。",
+        "e=E−target とすればそのまま目的の等式になる。"
+      ]
+    },
+    "LinearInputFeedback.hasDerivAt_energy_iff_exists_unique_feedback": {
+      "title": "曲線上の実際のエネルギー微分とフィードバック速度の同値",
+      "assumptions": "固定入力 u、点 t で x,y の微分係数が vₓ,vᵧ、そこで gSq＞0。e=E−target。",
+      "summary": "E の実際の微分係数が −γe gSq であることと、一意な回転係数 b による速度分解が存在することは同値。",
+      "steps": [
+        "既存の連鎖律から実際のエネルギー微分係数は gₓvₓ+gᵧvᵧ。",
+        "これが目標の率 −γe gSq に等しいことは、微分係数の一意性により所望の微分係数を持つことと同値。",
+        "正則点でのエネルギー率と速度分解の同値定理を適用する。"
+      ]
+    },
+    "LinearInputFeedback.energy_rate_iff_exists_unique_feedback_on_band": {
+      "title": "停留値上界より上では速度分解の正則性を自動で得られる",
+      "assumptions": "λ＞0、停留値上界 C＜target≤E、速度 v は任意。",
+      "summary": "エネルギー率条件 g·v=−γ(E−target)gSq と一意な係数 b のフィードバック分解が同値。",
+      "steps": [
+        "停留値上界より高いエネルギーでは gSq＞0 になる定理を適用する。",
+        "この正性を前提とするエネルギー率とフィードバック分解の同値定理を使う。",
+        "勾配が非ゼロという条件をここでは別途仮定する必要がない。"
       ]
     },
     "LinearInputGlobalConsequences.exists_global_convergent_solution": {

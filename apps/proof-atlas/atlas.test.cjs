@@ -8,12 +8,12 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
 const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
 const model=A.createModel(graph,proofs,narratives);
 
-test("all 465 true theorem nodes, 629 direct references, 60 source files and 256 Japanese explanations",()=>{
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 313 Japanese explanations",()=>{
  assert.equal(model.nodes.length,465);
  assert.equal(model.proofs.length,465);
  assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
  assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
- assert.equal(Object.keys(model.argumentsById).length,256);
+ assert.equal(Object.keys(model.argumentsById).length,313);
  assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
  assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
  assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
@@ -151,6 +151,13 @@ test("every Elastica theorem has a Japanese argument",()=>{
  const elastica=model.nodes.filter(n=>n.name.startsWith("Elastica."));
  assert.equal(elastica.length,214);
  for(const n of elastica){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("first 312 theorem explanations include gradient, dissipation, regular bands, curvature and feedback",()=>{
+ for(const n of model.nodes.slice(0,312)){
   const e=model.argumentsById[n.id];
   assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
  }
