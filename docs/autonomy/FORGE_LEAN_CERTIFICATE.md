@@ -92,8 +92,53 @@ The discovery report is sealed only after a second kernel/axiom check.
 This is a proof-first **read-only** loop: the theorem guides actual candidate
 selection and the selected candidate is checked again. Both reports and
 exact source files are retained. The candidate is not installed into
-Semantic Foundry or used as a production parent. The new grammar is reviewed
+Semantic Foundry or used as a production parent; the third stage below
+admits it into the proof artifact's expanded word alphabet. The new grammar is reviewed
 source, not invented code; no new state-write privileges, no automatic
 merge and no unbounded language expansion. Future feedback rounds must
 derive a new invariant relative to the enlarged alphabet before promoting
 the candidate, rather than pretending this rank-four theorem survives.
+
+## Third stage: reentry and a reversible strict extension
+
+The second stage's exact audited selected map (rank 175, overwrite first
+maximum with 3) is replayed, hash-matched and made a real letter in
+`promotedStep`, alongside the six original primitives and every actual
+Semantic Foundry receipt from the snapshot. `promoted_reentry` states its
+one-letter execution equals the discovered map. A prior pending or
+hash-mismatched certificate cannot enter this stage.
+
+The old rank-four invariant is now false. Replace it by the weaker but
+still separating invariant:
+
+    preserves all constant signals OR is not injective.
+
+For endomorphisms of a finite set, a composite of two injective maps is
+injective, and injectivity of a composite implies injectivity of both
+factors (finite injectivity implies surjectivity). Consequently the
+disjunction is closed under composition. The six original maps preserve
+constants; all admitted semantic receipts and the rank-175 map have
+explicit checked collisions. The new Lean theorem covers arbitrary-length
+words in this **expanded** alphabet and arbitrary macro dictionaries.
+
+After checking that theorem, enumerate a fixed grammar of 48 controlled
+XOR maps. Each changes a selected two-bit sample by XOR with 1, 2 or 3
+depending on a predicate on the three other samples. All are involutions.
+Four predicate types are all equal, not all equal, first pair equal, and
+even sum. Independent full-domain evaluators must agree. The expected
+regression is 12 constant-preserving candidates and 36 separating
+candidates; select maximum changed-input count with deterministic tie
+break. The selected map toggles the low bit of sample zero when the other
+three samples have even sum: 128 changed inputs, 256 distinct outputs.
+Lean checks its involution property on all 256 inputs, derives injectivity,
+checks a constant counterexample, and proves nonexpressibility in the
+promoted alphabet and its arbitrary compiled macros.
+
+The promotion is local to the proof artifact. The earlier and new
+certificate sources, ledger snapshot and mappings are retained; no
+production ledger or source branch is written by the workflow. New
+exact-head CI must pass before the third-stage assertions are described
+as kernel-verified. The grammar is reviewed, not automatically invented.
+This is a second bounded iteration with true alphabet reentry, not an
+unbounded autonomous proof search. A further iteration must find another
+invariant: the current one is broken by the reversible discovery.
