@@ -1,0 +1,225 @@
+{
+  "last_utc_day": "2026-11-24T03:00Z",
+  "receipts": [
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "8e4f69d4ba58ead0efbff6c1dbadecaaa988b368fcc92fb73f3a04bfb29d2445",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          511,
+          507,
+          505,
+          447,
+          0
+        ]
+      },
+      "chain_sha256": "a62a550316975541fe63e20de2712b5e3372a3aaf47c8fe52fbc38ec1f783380",
+      "day": "2026-11-23",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "9b667826c749f8980a8356066d3964b909b36a29",
+      "id": "gf_be19c801b8fcaef9",
+      "left": "p:invert",
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "program": [
+        "invert",
+        "mirror_lr"
+      ],
+      "right": "p:mirror_lr",
+      "score": 29,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 256,
+        "distinct_outputs": 256,
+        "fingerprint": "2b9e12fd57fe275156637393c4d2e9b39c5b827ed5f4aa86e532d4fba9f3ac51",
+        "inputs_exhaustively_checked": 256,
+        "sample_outputs": [
+          170,
+          171,
+          169,
+          42,
+          85
+        ]
+      },
+      "chain_sha256": "db9ae3652e24a8f007e1029324e6b7a54427dc0569420104d9bc99f1005b2a2a",
+      "day": "2026-11-23T08:00Z",
+      "domain": "signal4",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "c8155d4687c34fd8a0c9c0cd0e3dccdef15d2058",
+      "id": "gf_198afad7a91bc9a2",
+      "left": "p:add_one",
+      "previous_sha256": "a62a550316975541fe63e20de2712b5e3372a3aaf47c8fe52fbc38ec1f783380",
+      "program": [
+        "add_one",
+        "add_one"
+      ],
+      "right": "p:add_one",
+      "score": 29,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "4e6f2d13f935bc5301e453baf330a8072e5fea8723cab6e9292d14cb2b327f8d",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          511,
+          510,
+          508,
+          255,
+          0
+        ]
+      },
+      "chain_sha256": "90cfe8f864b814efae38072aec5b8897f9d23347e256258a0355ecd42c9a8a3f",
+      "day": "2026-11-23T11:30Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "847ac5d42e5320b865a8297af37e06847212927b",
+      "id": "gf_a47bb5b15ad47b79",
+      "left": "m:gf_be19c801b8fcaef9",
+      "previous_sha256": "db9ae3652e24a8f007e1029324e6b7a54427dc0569420104d9bc99f1005b2a2a",
+      "program": [
+        "invert",
+        "mirror_lr",
+        "mirror_lr"
+      ],
+      "right": "p:mirror_lr",
+      "score": 36,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 256,
+        "distinct_outputs": 256,
+        "fingerprint": "c027aa83af50cc33097df1b510712d1d81446940f590722bb3e51dd4a01bc504",
+        "inputs_exhaustively_checked": 256,
+        "sample_outputs": [
+          255,
+          252,
+          254,
+          127,
+          170
+        ]
+      },
+      "chain_sha256": "b3e9619350ba0d83af0f06ebce35994ddcfdf53dc61fbfd5302b02f526fb8851",
+      "day": "2026-11-23T11:40Z",
+      "domain": "signal4",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "b49006211d337d049b17cc22c3271aa1d8ce45d1",
+      "id": "gf_3ea0ae0d3af2c7b0",
+      "left": "m:gf_198afad7a91bc9a2",
+      "previous_sha256": "90cfe8f864b814efae38072aec5b8897f9d23347e256258a0355ecd42c9a8a3f",
+      "program": [
+        "add_one",
+        "add_one",
+        "add_one"
+      ],
+      "right": "p:add_one",
+      "score": 36,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 256,
+        "distinct_outputs": 256,
+        "fingerprint": "9cbc43cfdfac500df2f44b21e194bdb362b0915ee52e37d4ad54213739a25be2",
+        "inputs_exhaustively_checked": 256,
+        "sample_outputs": [
+          85,
+          86,
+          84,
+          213,
+          0
+        ]
+      },
+      "chain_sha256": "3f1bbfd63408b9b935e81e205309a1659cdac3173714545f65b7b266e356f045",
+      "day": "2026-11-23T11:50Z",
+      "domain": "signal4",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "b49006211d337d049b17cc22c3271aa1d8ce45d1",
+      "id": "gf_d2ccd8f5b871c8cf",
+      "left": "m:gf_198afad7a91bc9a2",
+      "previous_sha256": "b3e9619350ba0d83af0f06ebce35994ddcfdf53dc61fbfd5302b02f526fb8851",
+      "program": [
+        "add_one",
+        "add_one",
+        "add_one",
+        "add_one",
+        "add_one"
+      ],
+      "right": "m:gf_3ea0ae0d3af2c7b0",
+      "score": 46,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 448,
+        "distinct_outputs": 512,
+        "fingerprint": "339ab70ad1c7c83fe6c798fc38a7b86d50fad0b4ac189bd7979e3da2d730eba3",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          0,
+          4,
+          6,
+          64,
+          511
+        ]
+      },
+      "chain_sha256": "5c00b159ed30a912a650f1bc2008c2ecee25fd1c1878a575550d847f2b7e93d0",
+      "day": "2026-11-23T16:30Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "8c81b1fc359a8ed90599a7ee3ca2a6ee81377700",
+      "id": "gf_8efd6bc25c21da5b",
+      "left": "m:gf_a47bb5b15ad47b79",
+      "previous_sha256": "3f1bbfd63408b9b935e81e205309a1659cdac3173714545f65b7b266e356f045",
+      "program": [
+        "invert",
+        "mirror_lr",
+        "mirror_lr",
+        "invert",
+        "mirror_lr"
+      ],
+      "right": "m:gf_be19c801b8fcaef9",
+      "score": 42,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "bb446b3443f31147f8d714b0f22cdf30b4f7e86974136e2c9f9d006ce5ea1c5c",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          341,
+          371,
+          356,
+          413,
+          0
+        ]
+      },
+      "chain_sha256": "8f13441ae20feb97553bf1f5b05e8c86e41461bdc67a7b6be6f334688cc301ee",
+      "day": "2026-11-24T03:00Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "eb4ca4f1c3ab646fa66013759535e7b1024733b8",
+      "id": "gf_0fdceb1fed590afe",
+      "left": "m:gf_be19c801b8fcaef9",
+      "previous_sha256": "5c00b159ed30a912a650f1bc2008c2ecee25fd1c1878a575550d847f2b7e93d0",
+      "program": [
+        "invert",
+        "mirror_lr",
+        "neighbor_xor"
+      ],
+      "right": "p:neighbor_xor",
+      "score": 36,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    }
+  ],
+  "schema_version": 1
+}
