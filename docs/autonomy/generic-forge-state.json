@@ -1,7 +1,7 @@
 {
-  "last_utc_day": "2026-11-24T06:30Z",
+  "last_utc_day": "2026-11-24T07:00Z",
   "meta_snapshot": {
-    "last_utc_day": "2026-11-24T03:00Z",
+    "last_utc_day": "2026-11-24T07:00Z",
     "rules": [
       {
         "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
@@ -210,6 +210,66 @@
           },
           {
             "op": "duplicate_tail"
+          }
+        ]
+      },
+      {
+        "chain_sha256": "ad0de63641c86465a2a3e14681c49100d000c33b2db1170367846bf3766fb452",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "652254c022a9e4ceb995bee32d1e645a7455dd3998f19a69e5eb2e4c5a9030ce",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-24T06:30Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "652254c022a9e4ceb995bee32d1e645a7455dd3998f19a69e5eb2e4c5a9030ce",
+        "head_sha": "b7a995a84d2bf83e0b8f32a373ca25dea2838478",
+        "id": "mf_53c6479a21cfa7d3",
+        "parent": "mf_44eb42af533956b2",
+        "previous_sha256": "1d7788d6c48f76bcb4f504ada635bb7bbc7d6b7e0b7714d10aeb4c4e07e1292a",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "append",
+            "slot": 0
+          },
+          {
+            "op": "append",
+            "slot": 1
+          }
+        ]
+      },
+      {
+        "chain_sha256": "6992a320cf4fd4b43510c571155c86fdac75195178e8f9f3ceb488e85898299d",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "3d3b2ff6236e20a4dad0edd14d13dc27efb7ec209fd48778b68cdc2b6efc7533",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-24T07:00Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "3d3b2ff6236e20a4dad0edd14d13dc27efb7ec209fd48778b68cdc2b6efc7533",
+        "head_sha": "b7a995a84d2bf83e0b8f32a373ca25dea2838478",
+        "id": "mf_9c24ea4cc320327d",
+        "parent": "mf_44eb42af533956b2",
+        "previous_sha256": "ad0de63641c86465a2a3e14681c49100d000c33b2db1170367846bf3766fb452",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "append",
+            "slot": 0
+          },
+          {
+            "op": "append",
+            "slot": 2
           }
         ]
       }
@@ -506,6 +566,43 @@
       ],
       "right": "m:gf_79c7b0a42d1272f8",
       "score": 44,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "eef2e561a8e9d749aab1c743dad8f55e021601b513705449ba7f81f800fa05b9",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          511,
+          95,
+          363,
+          500,
+          170
+        ]
+      },
+      "chain_sha256": "1ef20283838841a91fbad681a529d5a21fcd5c0a9beb89c383456ec384fe9fa8",
+      "day": "2026-11-24T07:00Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "b7a995a84d2bf83e0b8f32a373ca25dea2838478",
+      "id": "gf_6b400d514235f684",
+      "left": "m:gf_0fdceb1fed590afe",
+      "origin": {
+        "kind": "verified_meta_rule_v1",
+        "rule_chain_sha256": "e43c330785fc97491ee3cb4e8aaae6dbca68127337cf7ffee4b921c881eab6a3",
+        "rule_id": "mf_44c33c95eb6c5ee8"
+      },
+      "previous_sha256": "7a3f3d8a04305e41cc02246435a946acc5b8d5ee1b543d0ab679abc615f04ea9",
+      "program": [
+        "mirror_lr",
+        "neighbor_xor",
+        "rotate_cw",
+        "invert"
+      ],
+      "right": "r:mf_44c33c95eb6c5ee8",
+      "score": 35,
       "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
     }
   ],
