@@ -14,6 +14,8 @@ from tools.autonomy import generic_forge as gf, semantic_forge as sf
 from tools.autonomy import forge_lean_certificate as cert
 
 RANK_CORE = r"""
+set_option maxRecDepth 16384
+set_option maxHeartbeats 20000000
 namespace ForgeLeanCertificate
 open LinearInputOperatorWords
 
