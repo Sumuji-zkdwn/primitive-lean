@@ -237,19 +237,23 @@ def search(tables):
     invariants = list(components(tables))
     known = {tuple(v) for v in tables.values()}
     latest = list(tables)[-1]
-    selected, counts = None, {"generated": 0, "distinct": 0, "separating": 0}
+    selected, counts = None, {"generated": 0, "distinct": 0, "separating": 0, "by_parent": {}}
     for recipe in productions(tables):
         counts["generated"] += 1
+        parent_counts = counts["by_parent"].setdefault(recipe[0], {"generated": 0, "distinct": 0, "separating": 0})
+        parent_counts["generated"] += 1
         values = evaluate(recipe, tables)
         key = tuple(values)
         if key in known:
             continue
         known.add(key)
         counts["distinct"] += 1
+        parent_counts["distinct"] += 1
         broken = [(r, w) for r in invariants if (w := witness(values, r)) is not None]
         if not broken:
             continue
         counts["separating"] += 1
+        parent_counts["separating"] += 1
         changed = sum(x != y for x, y in enumerate(values))
         # Preserve as many remaining discovered invariants as possible; prefer
         # even number of swapped pairs, then a latest-parent rule. This is
