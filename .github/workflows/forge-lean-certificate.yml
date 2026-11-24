@@ -1,0 +1,118 @@
+name: Forge Lean Certificate - semantic ledger into word theory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-lean-certificate.yml'
+      - 'tools/autonomy/forge_lean_certificate.py'
+      - 'tools/autonomy/semantic_forge.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'linear_input/lean_check/OperatorWordObservations.inc'
+      - 'tests/fixtures/semantic_bridge_semantic.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-lean-certificate.yml'
+      - 'tools/autonomy/forge_lean_certificate.py'
+  schedule:
+    - cron: '31 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-lean-certificate-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: false
+
+jobs:
+  certificate:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Read live semantic ledger on trusted main, as data only
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: ledger
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Pin exact inputs; PR uses retained actual certified receipt
+        shell: bash
+        env:
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+        run: |
+          set -euo pipefail
+          mkdir -p verification/forge-lean
+          git rev-parse HEAD > verification/forge-lean/control-sha.txt
+          if [ "$IS_PR" = true ]; then
+            cp tests/fixtures/semantic_bridge_semantic.json verification/forge-lean/state.json
+            echo "pinned repository fixture" > verification/forge-lean/ledger-source.txt
+          else
+            git -C ledger rev-parse HEAD > verification/forge-lean/ledger-source.txt
+            test -f ledger/docs/autonomy/semantic-capability-state.json
+            test ! -L ledger/docs/autonomy/semantic-capability-state.json
+            cp ledger/docs/autonomy/semantic-capability-state.json verification/forge-lean/state.json
+          fi
+      - name: Independently replay every receipt and generate numeral-only tables
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_certificate --state "$out/state.json" --output "$out"
+          python -B -m tools.autonomy.forge_lean_certificate --state "$out/state.json" --output "$RUNNER_TEMP/forge-replay"
+          cmp "$out/Certificate.lean" "$RUNNER_TEMP/forge-replay/Certificate.lean"
+          cmp "$out/mapping.json" "$RUNNER_TEMP/forge-replay/mapping.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.autonomy import semantic_forge as sf
+          from tools.autonomy.forge_lean_certificate import generate
+          from tempfile import TemporaryDirectory
+          state = json.loads(Path("verification/forge-lean/state.json").read_text())
+          state["receipts"][0]["observation"]["constant_counterexample"]["output"] = 0
+          with TemporaryDirectory() as t:
+              p = Path(t) / "tampered.json"
+              p.write_text(json.dumps(state))
+              try:
+                  generate(p, Path(t) / "out")
+              except ValueError:
+                  print("PASS tampered receipt rejected")
+              else:
+                  raise AssertionError("tampered receipt was accepted")
+          PY
+      - name: Install repository-pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel verify existing word theory and generated certificate
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/Certificate.lean 2>&1 | tee ../verification/forge-lean/lean.log
+      - name: Audit every new theorem and seal verification report
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean
+      - name: Preserve source, snapshot, mapping and kernel audit
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-lean-certificate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/forge-lean/
+          if-no-files-found: warn
+          retention-days: 30
