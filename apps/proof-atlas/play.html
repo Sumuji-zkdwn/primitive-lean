@@ -3860,6 +3860,536 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
         "その定理は p,σ,c と実際の座標微分を同時に与える。弧長方向の位相系であり、物理時間の軌道の存在や安定性を主張するものではない。"
       ]
     },
+    "LinearInputStrictEnergy.error_eq_initial_mul_exp_integral": {
+      "title": "エネルギー誤差方程式を積分因子で厳密に解く",
+      "assumptions": "g は非負時間上で連続。全 t≥0 で e′(t)=−γe(t)g(t)。γ は任意。",
+      "summary": "e(t)=e(0)exp(−γ∫₀ᵗg(s)ds)。",
+      "steps": [
+        "q(s)=g(max(s,0)) と置き、g を実数全体へ連続に延長する。G(t)=∫₀ᵗq(s)ds は G′=q を満たす。",
+        "w(t)=e(t)exp(γG(t)) を積の微分法で微分すると、t≥0 で w′=0。",
+        "半直線上で w は単調増加かつ単調減少なので w(t)=w(0)=e(0)。",
+        "指数関数は非ゼロだから割り算できる。t≥0 なら G(t)=∫₀ᵗg なので所望の厳密式を得る。γ の符号は不要。"
+      ]
+    },
+    "LinearInputStrictEnergy.error_pos": {
+      "title": "正の初期誤差は有限時間ではゼロにならない",
+      "assumptions": "g は非負時間で連続、e′=−γeg、e(0)>0。t≥0。",
+      "summary": "e(t)>0。",
+      "steps": [
+        "厳密な積分因子の式 e(t)=e(0)exp(−γ∫₀ᵗg) を使う。",
+        "有限の積分値に対する指数関数は常に厳密に正。正の初期値との積も正となる。"
+      ]
+    },
+    "LinearInputStrictEnergy.continuousOn_gradient_coefficient": {
+      "title": "実際の軌道に沿った勾配係数は連続",
+      "assumptions": "固定入力の IsTrajectory が全非負時間で成立。",
+      "summary": "t↦gSq(x(t),y(t)) は [0,∞) 上で連続。",
+      "steps": [
+        "各点で座標の実際の微分係数が存在するので x,y はその点で連続。",
+        "座標を組にした t↦(x(t),y(t)) も連続。gSq は平面上の連続関数なので合成は連続。",
+        "回転係数 b(t) の連続性そのものは必要ない。"
+      ]
+    },
+    "LinearInputStrictEnergy.energy_gap_exact": {
+      "title": "軌道のエネルギー誤差の厳密な時間発展",
+      "assumptions": "固定入力の IsTrajectory、t≥0。e(t)=E(x(t),y(t))−target、g(t)=gSq(x(t),y(t))。",
+      "summary": "e(t)=e(0)exp(−γ∫₀ᵗg(s)ds)。",
+      "steps": [
+        "軌道方程式とエネルギー連鎖律から e′=−γeg。",
+        "座標の微分可能性から軌道上の g は連続。",
+        "スカラー誤差方程式の積分因子による厳密解を適用する。"
+      ]
+    },
+    "LinearInputStrictEnergy.energy_eq_target_iff": {
+      "title": "有限時刻に目標エネルギーに一致するのは初期値が一致するときだけ",
+      "assumptions": "固定入力の IsTrajectory、t≥0。",
+      "summary": "E(t)=target ↔ E(0)=target。",
+      "steps": [
+        "目標との一致を e(t)=0 と書き換える。",
+        "厳密式の右辺は初期誤差と指数関数の積。指数関数はゼロでないため積が0になる条件は e(0)=0 のみ。"
+      ]
+    },
+    "LinearInputStrictEnergy.energy_strictly_above_target": {
+      "title": "初期エネルギーが目標より厳密に高ければ有限時刻でも高い",
+      "assumptions": "固定入力の IsTrajectory、E(0)>target、t≥0。",
+      "summary": "E(t)>target。",
+      "steps": [
+        "e(0)=E(0)−target は正。",
+        "連続な勾配係数と誤差微分方程式に正の初期誤差の保存定理を適用する。e(t)>0 をエネルギーの不等式に戻す。γ の正性は不要。"
+      ]
+    },
+    "LinearInputStrictEnergy.energy_deriv_neg": {
+      "title": "正則な目標より上のエネルギーでは散逸率が厳密に負",
+      "assumptions": "λ>0、γ>0、停留値上界 C=(max(−r,0))²/(12λ)<target。指定軌道、E(0)>target、t≥0。",
+      "summary": "E′(t)<0。",
+      "steps": [
+        "厳密な誤差公式から E(t)>target が保たれる。",
+        "停留値上界より高いため gSq(t)>0。",
+        "実際のエネルギー微分は −γ(E(t)−target)gSq(t)。三つの正の因子の積に負号が付くので厳密に負。"
+      ]
+    },
+    "LinearInputStrictEnergy.energy_strictAntiOn": {
+      "title": "エネルギーは非負時間上で狭義単調減少",
+      "assumptions": "λ,γ>0、停留値上界より高い target、E(0)>target の指定軌道。",
+      "summary": "0≤s<t なら E(t)<E(s)。",
+      "steps": [
+        "座標方程式から実エネルギーは各点で微分可能、従って半直線上で連続。",
+        "前の定理から全内点で E′<0。",
+        "凸な半直線上での微分の符号と狭義単調性の定理を適用する。"
+      ]
+    },
+    "LinearInputStrictEnergy.trajectory_injOn": {
+      "title": "厳密なエネルギー減少により軌道は同じ点を二度通らない",
+      "assumptions": "λ,γ>0、C<target<E(0)、固定入力の指定軌道。",
+      "summary": "t↦(x(t),y(t)) は非負時間上で単射。",
+      "steps": [
+        "二時刻 s,t で状態が一致すると、固定入力のエネルギーも E(s)=E(t)。",
+        "エネルギーは非負時間上で狭義単調減少なので単射。",
+        "従って s=t。状態の単射性はエネルギーが時刻を区別することから従う。"
+      ]
+    },
+    "LinearInputStrictEnergy.trajectory_no_return": {
+      "title": "正の経過時間の後に同じ空間状態へ戻れない",
+      "assumptions": "λ,γ>0、C<target<E(0)、指定軌道。s≥0、T>0。",
+      "summary": "(x(s+T),y(s+T))≠(x(s),y(s))。",
+      "steps": [
+        "両時刻は非負。仮に状態が同じなら軌道の単射性から s+T=s。",
+        "これは T>0 と矛盾する。"
+      ]
+    },
+    "LinearInputStrictEnergy.trajectory_not_periodic": {
+      "title": "厳密に散逸する軌道には正の周期がない",
+      "assumptions": "λ,γ>0、C<target<E(0)、指定軌道、T>0。",
+      "summary": "状態曲線は周期 T の周期関数ではない。",
+      "steps": [
+        "周期 T を仮定すると、時刻0で周期性を適用した結果は z(T)=z(0)。",
+        "正の時間後の帰還を排除する先行定理に矛盾する。"
+      ]
+    },
+    "LinearInputStrictEnergy.error_eq_initial_mul_exp_integral_on_Icc": {
+      "title": "有限閉区間だけで誤差の厳密な積分因子公式を得る",
+      "assumptions": "T≥0、g は [0,T] で連続、同区間で e′=−γeg。t∈[0,T]。",
+      "summary": "e(t)=e(0)exp(−γ∫₀ᵗg)。",
+      "steps": [
+        "q(s)=g(max(0,min(s,T))) により連続な係数を全実数へ延長する。区間内では q=g。",
+        "G=∫₀ᵗq、w=e·exp(γG) とし、積の微分で区間上 w′=0 を得る。",
+        "閉区間上の増加・減少両方の単調性より w(t)=w(0)。",
+        "指数因子を割り、積分区間内では q=g として厳密式を得る。大域的な軌道の存在を仮定しない。"
+      ]
+    },
+    "LinearInputStrictEnergy.energy_gap_exact_on_Icc": {
+      "title": "有限時間の座標方程式だけから厳密なエネルギー発展を得る",
+      "assumptions": "T≥0、固定入力の二座標フィードバック微分方程式が [0,T] の各点で成立。t∈[0,T]。",
+      "summary": "E(t)−target=(E(0)−target)exp(−γ∫₀ᵗgSq(s)ds)。",
+      "steps": [
+        "座標微分係数の存在と gSq の連続性から区間内で係数 g(t) が連続。",
+        "固定入力のエネルギー連鎖律から e′=−γeg が同区間で成立。",
+        "有限閉区間の積分因子公式を使う。区間外で解が存在する必要はない。"
+      ]
+    },
+    "LinearInputGradientBound.reduced_energy_bound": {
+      "title": "エネルギーの四次剰余項は停留値上界で抑えられる",
+      "assumptions": "λ>0、r,x は実数。",
+      "summary": "−3λx⁴/4−rx²/2≤C=(max(−r,0))²/(12λ)。",
+      "steps": [
+        "補助的に入力 u*=λx³+rx を選ぶ。この入力に関して x は一変数ポテンシャルの停留条件を満たす。",
+        "停留値の明示式は −3λx⁴/4−rx²/2。既存の停留値上界を適用する。",
+        "元の実際の入力 u や状態の停留性を仮定していない点が重要。"
+      ]
+    },
+    "LinearInputGradientBound.energy_gradient_identity": {
+      "title": "エネルギーを有界な剰余と勾配の項へ分解する",
+      "assumptions": "λ,r,u,x,y は任意。gₓ=∂ₓE、gᵧ=∂ᵧE。",
+      "summary": "E=−3λx⁴/4−rx²/2+xgₓ+√2xgᵧ+gᵧ²/2。",
+      "steps": [
+        "gₓ=λx³+(r+2)x−√2y−u、gᵧ=y−√2x を代入する。",
+        "xgₓ+√2xgᵧ=λx⁴+rx²−ux に整理する。",
+        "四次剰余と二次剰余を加え、さらに gᵧ²/2 を加えると元の E の定義に一致する。"
+      ]
+    },
+    "LinearInputGradientBound.gradient_linear_term_sq": {
+      "title": "勾配の線形結合を二乗ノルムで評価する",
+      "assumptions": "x,a,b は実数。",
+      "summary": "(xa+√2xb)²≤3x²(a²+b²)。",
+      "steps": [
+        "右辺から左辺を引くと x²(√2a−b)² に等しいことを展開し、(√2)²=2 を用いて確かめる。",
+        "差は実数の二乗の積なので非負。従って不等式が成り立つ。二次元のコーシー・シュワルツの具体式である。"
+      ]
+    },
+    "LinearInputGradientBound.explicit_gradient_bound_pos": {
+      "title": "明示的な勾配下界は目標が停留値上界より高いとき正",
+      "assumptions": "δ=target−C>0、S=max(upper+lowerBoundConstant,0)。gradientLowerBound=δ²/(3S+δ)。",
+      "summary": "gradientLowerBound>0。",
+      "steps": [
+        "δ>0 なので分子 δ² は正。",
+        "S≥0 と δ>0 により分母 3S+δ も正。正の数の商は正。"
+      ]
+    },
+    "LinearInputGradientBound.explicit_gradient_bound": {
+      "title": "正則なエネルギー帯で勾配二乗の計算可能な下界を得る",
+      "assumptions": "λ>0、C<target≤E≤upper。δ=target−C、S=max(upper+lowerBoundConstant,0)、g=gSq、L=xgₓ+√2xgᵧ。",
+      "summary": "δ²/(3S+δ)≤g。",
+      "steps": [
+        "強制性の下界から x²≤S、エネルギーの分解と四次剰余の上界から δ≤L+g/2。",
+        "勾配の線形結合の二乗評価より L²≤3x²g≤3Sg。",
+        "(L−δ)²≥0 から 2δL≤δ²+L²≤δ²+3Sg。一方 δ≤L+g/2 を正の 2δ 倍すると 2δ²≤2δL+δg。",
+        "両不等式を合わせ δ²≤(3S+δ)g。分母は正なので割って結論。コンパクト性による存在だけでなく具体値が得られる。"
+      ]
+    },
+    "LinearInputGradientBound.gradient_bound_of_initial": {
+      "title": "初期エネルギーだけから全時刻の勾配下界を決める",
+      "assumptions": "λ>0、γ≥0、C<target、指定軌道、target≤E(0)。",
+      "summary": "全 t≥0 で gradientLowerBound(λ,r,u,target,E(0))≤gSq(t)。",
+      "steps": [
+        "軌道の帯不変性から target≤E(t)≤E(0) を得る。",
+        "この固定帯に明示的な勾配下界定理を適用する。upper=E(0) とすれば下界は時刻に依存しない。"
+      ]
+    },
+    "LinearInputGradientBound.energy_error_exponential_of_initial": {
+      "title": "初期条件からエネルギー誤差そのものの指数上界を得る",
+      "assumptions": "λ>0、γ≥0、C<target≤E(0)、指定軌道、t≥0。m=gradientLowerBound(λ,r,u,target,E(0))。",
+      "summary": "0≤e(t)≤e(0)exp(−γmt)。",
+      "steps": [
+        "エネルギー帯の不変性から e≥0。実際の微分は e′=−γegSq。",
+        "一様な明示下界 gSq≥m と γe≥0 から e′≤−γme。",
+        "積分因子の比較定理に k=γm を入れる。γ>0 なら指数減衰、γ=0 なら非増加の評価になる。"
+      ]
+    },
+    "LinearInputGradientBound.squared_error_exponential_of_initial": {
+      "title": "初期条件から二乗誤差の明示指数上界を得る",
+      "assumptions": "λ>0、γ≥0、C<target≤E(0)、指定軌道。m は初期エネルギーからの勾配下界。",
+      "summary": "e(t)²≤e(0)²exp(−2γmt)（t≥0）。",
+      "steps": [
+        "誤差の実微分 e′=−γe gSq と全時刻での gSq≥m を使う。",
+        "二乗誤差の一般指数上界定理に g=gSq を代入する。m は具体式で計算できる。"
+      ]
+    },
+    "LinearInputInternalUpdate.square_bound": {
+      "title": "有界な外力を受ける内部状態の二乗を指数関数で評価する",
+      "assumptions": "κ>0、M≥0、θ′=−κθ+ρf、全 t≥0 で |f(t)|≤M。",
+      "summary": "θ(t)²≤θ(0)²exp(−κt)+(ρM/κ)²(1−exp(−κt))。",
+      "steps": [
+        "C=(ρM/κ)²、v=θ²−C と置くと v′=2θ(−κθ+ρf)。",
+        "平方 (κθ−ρf)²≥0 と ρ²f²≤ρ²M²=κ²C を使い、κ[v′+κv]≤0 を得る。κ>0 なので v′≤−κv。",
+        "積分因子で v(t)≤v(0)exp(−κt)。C を足し戻して式を整理する。"
+      ]
+    },
+    "LinearInputInternalUpdate.square_le_max": {
+      "title": "内部状態の二乗は初期値と強制上界の最大値以下",
+      "assumptions": "κ>0、M≥0、θ′=−κθ+ρf、|f|≤M、t≥0。",
+      "summary": "θ(t)²≤max(θ(0)²,(ρM/κ)²)。",
+      "steps": [
+        "二乗の指数上界を使う。α=exp(−κt) は 0<α≤1。",
+        "右辺は初期二乗と強制二乗上界 C の α,1−α による凸結合。",
+        "各値を両者の最大値で置換すると係数和1により結論が得られる。"
+      ]
+    },
+    "LinearInputInternalUpdate.exists_forcing_bound": {
+      "title": "コンパクトなエネルギー帯上の連続観測は一様有界",
+      "assumptions": "λ>0、γ≥0、固定入力軌道、E(0)≥target。観測 Φ:ℝ²→ℝ は連続。",
+      "summary": "ある M≥0 が存在し、全 t≥0 で |Φ(x(t),y(t))|≤M。",
+      "steps": [
+        "軌道が target≤E≤E(0) の帯内に留まる定理を使う。",
+        "この帯は λ>0 の下でコンパクト。連続な Φ はその集合上で有界。",
+        "上界 C を取り max(C,0) を M とすれば非負かつ全軌道に対する上界になる。"
+      ]
+    },
+    "LinearInputInternalUpdate.internal_update_bounded": {
+      "title": "有界な空間軌道に駆動される減衰内部状態は有界",
+      "assumptions": "λ>0、γ≥0、κ>0、E(0)≥target の指定軌道。Φ は連続、θ′=−κθ+ρΦ(x,y)。",
+      "summary": "ある C≥0 で全 t≥0 の θ(t)²≤C。",
+      "steps": [
+        "コンパクトな帯から |Φ(x(t),y(t))|≤M を満たす共通の M≥0 を得る。",
+        "内部状態の一様二乗上界定理に f(t)=Φ(x(t),y(t)) を入れる。",
+        "C=max(θ(0)²,(ρM/κ)²) が使える。内部状態の解の存在は別途仮定されている。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.contDiff_vectorField": {
+      "title": "状態依存の回転係数が Cⁿ ならベクトル場も Cⁿ",
+      "assumptions": "b:ℝ²→ℝ は Cⁿ。λ,r,u,γ,target は任意。",
+      "summary": "F(z)=−γ(E(z)−target)∇E(z)+b(z)J∇E(z) は Cⁿ（J(a,b)=(−b,a)）。",
+      "steps": [
+        "E と勾配成分は座標の多項式なので任意階数で滑らか。",
+        "Cⁿ の b とそれらの積、和、差、定数倍は Cⁿ。",
+        "二つの速度成分を組にしてベクトル場全体の Cⁿ 性を得る。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.exists_local_solution": {
+      "title": "任意の初期点から局所的な微分方程式の解が存在する",
+      "assumptions": "回転係数 b は C¹。全実パラメータ、初期点 z₀、初期時刻 t₀ は任意。",
+      "summary": "ある ε>0 と z が存在し z(t₀)=z₀、|t−t₀|<ε で z′=F(z)。",
+      "steps": [
+        "ベクトル場の C¹ 性が先行定理から従う。",
+        "C¹ ベクトル場は初期点の近傍でリプシッツ連続。ピカール・リンデレフの局所存在定理を適用する。",
+        "初期条件を満たす両側の開時間区間で実際の微分係数が指定された解が得られる。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.local_solution_unique": {
+      "title": "同じ初期値を持つ二つの局所解は近傍で一致",
+      "assumptions": "b は C¹。z,w は t₀ 近傍の同じベクトル場の積分曲線、z(t₀)=w(t₀)。",
+      "summary": "z=w が t₀ のある近傍で成立。",
+      "steps": [
+        "F は C¹ なので共通初期点の近傍にリプシッツ定数を持つ。",
+        "二つの解は t₀ で連続なので、十分小さい時間近傍で両方ともその空間近傍に留まる。",
+        "局所リプシッツ条件下でのODE一意性定理を適用する。全平面での一様リプシッツ定数は不要。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.solution_unique_on_interval": {
+      "title": "局所解の一致は共通の開時間区間全体に伝わる",
+      "assumptions": "b は C¹。z,w は (a,c) の全点で同じODEを満たし、ある内点 t₀ で一致。",
+      "summary": "(a,c) の全点で z(t)=w(t)。",
+      "steps": [
+        "一致集合 S={t∈(a,c):z(t)=w(t)} を考える。初期の一致点を含むので空でない。",
+        "解の連続性により S は区間に相対的に閉。",
+        "S の各点で局所一意性を使うと、その点の近傍も S に含まれる。従って相対的に開。",
+        "開区間は連結なので非空の開閉集合 S は区間全体に等しい。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.exists_local_unique_solution": {
+      "title": "任意初期点に対して局所解が存在し近傍で一意",
+      "assumptions": "b は C¹、実パラメータ、z₀,t₀ は任意。",
+      "summary": "z(t₀)=z₀ の局所積分曲線 z が存在し、同じ初期値の任意の局所解 w と t₀ 近傍で一致。",
+      "steps": [
+        "局所存在定理で開区間と解を選ぶ。その区間は t₀ の近傍なので IsIntegralCurveAt を満たす。",
+        "同じ初期値を持つ任意の w に局所一意性を適用し、近傍での一致を得る。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.exists_local_solution_one_add_sq": {
+      "title": "回転係数を 1+Q² に選んだ場合も局所解は存在する",
+      "assumptions": "Q:ℝ²→ℝ は C¹。任意の初期点、時刻、実パラメータ。",
+      "summary": "b(z)=1+Q(z)² のベクトル場に対して局所解が存在。",
+      "steps": [
+        "Q の二乗と定数1の和は C¹。",
+        "これを回転係数 b として一般の局所存在定理を使う。b≥1 だが、存在定理にその正性は必要ない。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.hasDerivAt_vectorField_iff": {
+      "title": "ベクトルの微分方程式と二つの座標方程式は同値",
+      "assumptions": "x,y は実数値関数、b は状態依存係数。点 t での微分係数を考える。",
+      "summary": "z=(x,y) が z′=F(z) を満たすことと、x′=−γe gₓ−bgᵧ、y′=−γe gᵧ+bgₓ が同時に成立することは同値。",
+      "steps": [
+        "ベクトルの微分係数を第一・第二射影で取り出すと、それぞれの座標微分になる。F の定義を展開すれば二式を得る。",
+        "逆に二つの座標微分係数があれば積空間の微分公式で組にでき、その係数は F(z) と一致する。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.exists_local_coordinate_solution": {
+      "title": "局所ベクトル解から元の二座標の局所解を構成する",
+      "assumptions": "b は C¹、x₀,y₀ および実パラメータは任意。",
+      "summary": "ある ε>0 と x,y が存在し x(0)=x₀、y(0)=y₀、(−ε,ε) で二座標フィードバックODEが成立。",
+      "steps": [
+        "初期値 (x₀,y₀) と時刻0でベクトルの局所存在定理を使う。",
+        "得られた z(t) の第一成分を x、第二成分を y と定義する。",
+        "初期値とベクトルの微分係数を射影すると、それぞれの座標条件が得られる。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.hasDerivAt_energy_of_solution": {
+      "title": "局所ベクトル解の実際のエネルギー微分",
+      "assumptions": "点 t で z′(t)=F(z(t))、固定入力。",
+      "summary": "E′(t)=−γ(E(t)−target)gSq(z(t))。",
+      "steps": [
+        "ベクトルの微分係数から x,y の指定速度を取り出す。",
+        "固定入力のエネルギー連鎖律と回転成分の相殺公式を適用する。",
+        "この点での実微分が得られる。大域的な存在は不要。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.exists_local_solution_energy_formula": {
+      "title": "実際に存在する局所解は有限閉区間で厳密な誤差公式を満たす",
+      "assumptions": "b は C¹、実パラメータと初期状態 z₀ は任意。",
+      "summary": "ある T>0 と z が存在し z(0)=z₀、[0,T] で z′=F(z) かつ e(t)=e(0)exp(−γ∫₀ᵗgSq(z(s))ds)。",
+      "steps": [
+        "局所存在定理で両側の開区間 (−ε,ε) 上の解を選ぶ。",
+        "T=ε/2 と取ると閉区間 [0,T] はその開区間に含まれ、両端も含めて微分方程式が成立。",
+        "有限閉区間の座標エネルギー厳密公式を適用し、初期値 z₀ に置き換える。"
+      ]
+    },
+    "LinearInputTrajectoryExistence.isTrajectory_of_global_solution": {
+      "title": "全非負時間のベクトル解は元の軌道述語を満たす",
+      "assumptions": "全 t≥0 で z′(t)=F(z(t)) と仮定。",
+      "summary": "x(t)=z(t).1、y(t)=z(t).2、時刻係数 b(z(t)) に対して IsTrajectory が成立。",
+      "steps": [
+        "各非負時刻でベクトル微分係数の第一成分と第二成分を取る。",
+        "ベクトル場の定義からそれらは軌道述語が要求する二座標の微分係数そのもの。ここでは大域解の存在を導いていない。"
+      ]
+    },
+    "LinearInputFiniteBand.error_band_on_Icc": {
+      "title": "有限区間の非負誤差は初期値との間に保たれる",
+      "assumptions": "γ≥0、T≥0、g は [0,T] で連続かつ非負、e′=−γeg、e(0)≥0。",
+      "summary": "t∈[0,T] で 0≤e(t)≤e(0)。",
+      "steps": [
+        "有限区間の厳密式を用いる。t≥0 と g≥0 から ∫₀ᵗg≥0。",
+        "γ≥0 なので −γ∫g≤0、指数因子は 0 より大きく1以下。",
+        "非負の e(0) との積は0以上で e(0) 以下となる。"
+      ]
+    },
+    "LinearInputFiniteBand.energy_band_on_Icc": {
+      "title": "有限閉区間の実ベクトル解は初期エネルギー帯に留まる",
+      "assumptions": "γ≥0、T≥0、[0,T] 上で z′=F(z)、target≤E(z(0))。",
+      "summary": "全 t∈[0,T] で target≤E(z(t))≤E(z(0))。",
+      "steps": [
+        "z の連続性と gSq の連続性から係数 g(t) は区間上で連続。二乗和なので非負。",
+        "実ベクトル解のエネルギー微分から e′=−γeg。初期誤差 e(0)≥0。",
+        "有限区間の誤差帯定理を適用して 0≤e(t)≤e(0) を得て、target を足し戻す。"
+      ]
+    },
+    "LinearInputFiniteBand.energy_band_on_Ioo": {
+      "title": "開時間区間の局所解も非負時間ではエネルギー帯に留まる",
+      "assumptions": "γ≥0、ε>0、(−ε,a) 上で z′=F(z)、target≤E(z(0))。0≤t<a。",
+      "summary": "target≤E(z(t))≤E(z(0))。",
+      "steps": [
+        "[0,t] は (−ε,a) の部分集合なので同区間の全点でODEが成立。",
+        "閉区間版の帯不変性定理に T=t を入れて時刻 t の評価を得る。開区間の先の解を仮定しない。"
+      ]
+    },
+    "LinearInputCompactLocalExistence.exists_uniform_local_time": {
+      "title": "コンパクト集合の全初期点に共通の局所存在時間を取れる",
+      "assumptions": "所定のODEのノルム線形空間 V 上で F は C¹、K⊂V はコンパクト。",
+      "summary": "ある ε>0 が存在し、各 x∈K から (−ε,ε) 上の実解が出発する。",
+      "steps": [
+        "各点 y での局所存在定理は、近傍の全初期点にも共通の正の時間 d(y) で解があることを与える。対応する開球を取る。",
+        "これらの球は K を覆い、コンパクト性により有限個で覆える。",
+        "有限個の d(y) の最小値として正の共通時間 ε を選ぶ（空の場合は任意の正値でよい）。",
+        "K 内の各 x は選んだ球の一つに属するので、その局所解を共通時間 ε に制限できる。"
+      ]
+    },
+    "LinearInputGlobalContinuation.local_unique": {
+      "title": "一般の C¹ 自律ベクトル場の局所解の一意性",
+      "assumptions": "F:V→V は C¹、z,w は t₀ 近傍で同じODEの積分曲線、z(t₀)=w(t₀)。",
+      "summary": "ある t₀ の近傍で z=w。",
+      "steps": [
+        "F は共通初期点の近傍でリプシッツ連続になる。",
+        "z,w の連続性により両解がその近傍に入る共通時間近傍を確保する。",
+        "局所リプシッツODEの一意性定理を適用。特定のエネルギー関数は不要。"
+      ]
+    },
+    "LinearInputGlobalContinuation.unique_on_Ioo": {
+      "title": "一般の C¹ 自律ODEの二解は開区間上の一点一致から全区間で一致",
+      "assumptions": "F は C¹、z,w は (a,c) 上で解、t₀∈(a,c) で一致。",
+      "summary": "EqOn z w (a,c)。",
+      "steps": [
+        "一致集合 S を開区間の部分集合として取る。解の連続性から相対閉。",
+        "各一致点で局所一意性が使えるので相対開。",
+        "t₀ が S に入っており区間は連結なので S は全区間。"
+      ]
+    },
+    "LinearInputGlobalContinuation.piecewise_eqOn": {
+      "title": "重なりで一致する二解を区分的に貼り合わせる",
+      "assumptions": "F は C¹。z は (a,b)、w は (c,d) の解。重なり内の t₀ で z=w。",
+      "summary": "q(t)=z(t)（t∈(a,b)）、w(t)（その他）とすると (c,d) 全体で q=w。",
+      "steps": [
+        "二開区間の共通部分は (max(a,c),min(b,d))。一致点 t₀ がある。",
+        "開区間一意性により共通部分全体で z=w。",
+        "(c,d) 内の点が (a,b) にも入れば q=z=w、入らなければ定義上 q=w。"
+      ]
+    },
+    "LinearInputGlobalContinuation.hasDerivAt_piecewise": {
+      "title": "重なりで一致する解の貼り合わせも微分方程式の解",
+      "assumptions": "F は C¹、z,w は重なる開区間 I,J で解であり共通内点で一致。q=I.piecewise(z,w)。",
+      "summary": "I∪J の全点で q′=F(q)。",
+      "steps": [
+        "t∈I なら I は開なので q は t の近傍で z と一致し、微分係数も z のものに等しい。",
+        "t∉I かつ t∈J なら先の貼り合わせ定理により J 全体で q=w。J は開なので t 近傍でも一致。",
+        "どちらの場合も元の解の微分係数を移し、値 q(t) での F を得る。接合点で勝手に微分可能性を仮定しない。"
+      ]
+    },
+    "LinearInputGlobalContinuation.exists_arbitrarily_long_solution": {
+      "title": "不変集合上の一様局所存在時間が有限時間での解の途切れを防ぐ",
+      "assumptions": "F は C¹、z₀∈K、ε>0。K の各点から (−ε,ε) の解が存在し、z₀ からの任意の (−ε,a) 上の解は非負時間部分で K に留まる。",
+      "summary": "任意の a に対し z₀ を初期値とする (−ε,a) 上の解が存在。",
+      "steps": [
+        "そのような解が存在する右端 a の集合 S を作る。局所存在から ε∈S。",
+        "S が上に有界と仮定し A=sup S とする。A−ε/2 より右まで存在する解 z を取る。",
+        "時刻 A−ε/2 は非負で z の状態は K に属する。その点から共通の ε 時間の新しい局所解を作り、時刻をずらす。",
+        "共通時刻で初期状態が一致するので二解を貼り合わせると右端 A+ε/2 までの解が得られ、上限 A に矛盾する。"
+      ]
+    },
+    "LinearInputGlobalContinuation.exists_forward_solution": {
+      "title": "任意に長い局所解を整合させて一つの前向き大域解を作る",
+      "assumptions": "F は C¹、z₀∈K、一様局所時間 ε>0 と不変性の仮定は任意長解の定理と同じ。",
+      "summary": "z(0)=z₀ かつ全 t≥0 で z′=F(z) となる解 z が存在。",
+      "steps": [
+        "任意の右端 a について (−ε,a) 上の初期値 z₀ の解 qₐ を選ぶ。",
+        "任意の正の右端 a,b では共通区間に時刻0が含まれる。一意性により重なり全体で qₐ=q_b。",
+        "z(t)=q_{max(t,0)+1}(t) と定義する。整合性により各 t≥0 の近傍では一つの固定した局所解 q_{t+1} と一致する。",
+        "その局所解の微分係数を移せば全非負時刻でODEが成立。単に長い解があるだけでなく一つの大域解を構成した。"
+      ]
+    },
+    "LinearInputGlobalTrajectory.exists_global_solution": {
+      "title": "エネルギー帯のコンパクト性から実際の前向き大域解を得る",
+      "assumptions": "b は C¹、λ>0、γ≥0、初期状態 z₀ のエネルギーは target 以上。",
+      "summary": "全 t≥0 で存在する z が z(0)=z₀、z′=F(z)、target≤E(z(t))≤E(z₀) を満たす。",
+      "steps": [
+        "K={z:target≤E(z)≤E(z₀)} と置く。λ>0 により K はコンパクトで z₀∈K。",
+        "F は C¹。コンパクト集合上の一様局所存在時間 ε を得る。",
+        "有限開区間の帯不変性定理により z₀ からの任意の局所解は非負時間部分で K に留まる。",
+        "一般の大域延長定理で前向き大域解を構成し、有限閉区間の帯不変性を各時刻に適用する。目標が停留値上界を超えることは存在には不要。"
+      ]
+    },
+    "LinearInputGlobalTrajectory.exists_global_coordinate_trajectory": {
+      "title": "大域ベクトル解から全非負時間の座標軌道を構成する",
+      "assumptions": "b は C¹、λ>0、γ≥0、E(x₀,y₀)≥target。",
+      "summary": "初期座標 x₀,y₀ の IsTrajectory を満たす x,y が存在し、全 t≥0 で target≤E(t)≤E(0)。",
+      "steps": [
+        "初期状態 (x₀,y₀) で大域解存在定理を適用する。",
+        "その第一・第二成分を x,y と置き、ベクトル解から IsTrajectory への橋渡し定理を使う。",
+        "初期値とエネルギー帯の条件も射影・定義により引き継がれる。"
+      ]
+    },
+    "LinearInputGlobalTrajectory.exists_global_solution_one_add_sq": {
+      "title": "回転係数 1+Q² の系にも前向き大域解が存在する",
+      "assumptions": "Q は C¹、λ>0、γ≥0、E(z₀)≥target。",
+      "summary": "b=1+Q² を使うベクトル場の大域解が存在し、初期エネルギー帯を保存する。",
+      "steps": [
+        "1+Q² は C¹ なので回転係数の滑らかさの仮定を満たす。",
+        "これを一般の大域解定理に代入する。大域的な有界性やリプシッツ性を Q 自身に仮定する必要はない。"
+      ]
+    },
+    "LinearInputForwardUniqueness.solution_unique_on_Icc": {
+      "title": "同じ左端初期値からの二解は閉時間区間で一致",
+      "assumptions": "F は C¹、z,w は [a,c] の各点で同じODEを満たす、z(a)=w(a)。",
+      "summary": "[a,c] で z=w。",
+      "steps": [
+        "z,w は区間上で連続。両者の像の和集合 K はコンパクト。",
+        "C¹ の F は局所リプシッツで、コンパクトな K 上では共通のリプシッツ定数を取れる。",
+        "この K 上でのODE一意性定理を左端 a から適用する。両解の像を使ったので事前にエネルギー帯を仮定する必要はない。"
+      ]
+    },
+    "LinearInputForwardUniqueness.solution_unique_on_Ici": {
+      "title": "同じ初期状態の二解は前向き半直線全体で一致",
+      "assumptions": "F は C¹、全 t≥a で z′=F(z)、w′=F(w)、z(a)=w(a)。",
+      "summary": "[a,∞) 上で z=w。",
+      "steps": [
+        "任意の t≥a を固定する。[a,t] の全点で両解のODEが成立する。",
+        "閉区間一意性定理をその区間に適用すれば端点 t でも一致。t は任意なので半直線全体で一致する。"
+      ]
+    },
+    "LinearInputForwardUniqueness.feedback_solution_unique_on_Icc": {
+      "title": "状態依存フィードバックの二解は有限閉区間で一意",
+      "assumptions": "b は C¹、z,w は [a,c] 上の同じパラメータのフィードバックベクトル場の解、z(a)=w(a)。",
+      "summary": "区間全体で z=w。",
+      "steps": [
+        "ベクトル場の C¹ 性を b の C¹ 性から得る。",
+        "一般の閉区間ODE一意性定理にこの F を入れる。λ や γ の正性は一意性には不要。"
+      ]
+    },
+    "LinearInputForwardUniqueness.feedback_solution_unique_on_Ici": {
+      "title": "状態依存フィードバックの前向き大域解は一意",
+      "assumptions": "b は C¹、二つの解 z,w は同じフィードバックODEを全 t≥0 で満たす、z(0)=w(0)。",
+      "summary": "全非負時刻で z=w。",
+      "steps": [
+        "b の C¹ 性により F は C¹。",
+        "一般の半直線一意性定理に a=0 とこの F を代入する。解の存在そのものはこの一意性命題の仮定にある。"
+      ]
+    },
+    "LinearInputForwardUniqueness.coordinate_solution_unique_on_Ici": {
+      "title": "元の二座標軌道も同じ状態依存係数と初期値なら一意",
+      "assumptions": "b は C¹、二組 x₁,y₁ と x₂,y₂ は同じパラメータで IsTrajectory を満たし各時刻の係数は同じ関数 b の各状態での値。初期座標は一致。",
+      "summary": "全 t≥0 で x₁(t)=x₂(t) かつ y₁(t)=y₂(t)。",
+      "steps": [
+        "二座標の組を z₁,z₂ とし、ベクトル微分との同値定理で両方が同じ F の解であると示す。",
+        "初期二座標の一致は組の一致。前向きベクトル解の一意性を適用する。",
+        "得られた組の等式から各座標を射影して結論。"
+      ]
+    },
     "LinearInputGlobalConsequences.exists_global_convergent_solution": {
       "title": "条件付きで大域解と指数的エネルギー収束を同時に得る",
       "assumptions": "λ>0、γ>0、target が指定の閾値を超え、初期エネルギーがtarget以上。横向き係数bはC¹。",
@@ -3869,6 +4399,17 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
         "その z が軌道条件を満たすことを既存定理で確認する。",
         "エネルギー収束の定理を適用して E(z(t))→target を得る。",
         "別の指数評価定理を使い、誤差が初期誤差×exp(−ct) 以下となることを示す。"
+      ]
+    },
+    "LinearInputGlobalConsequences.exists_global_injective_convergent_solution": {
+      "title": "大域的に存在し目標へ収束する単射軌道を得る",
+      "assumptions": "b は C¹、λ,γ>0、停留値上界 C<target、E(z₀)>target。",
+      "summary": "z(0)=z₀ の前向き大域解が存在し、有限時刻で E>target、E は狭義単調減少、z は単射、E(t)→target。",
+      "steps": [
+        "大域存在と指数収束を同時に与える定理から z を選ぶ。厳密な初期不等式は弱い初期条件も満たす。",
+        "ベクトル解を座標軌道述語に変換する。厳密誤差公式から各有限時刻で E>target。",
+        "エネルギーの狭義単調減少定理と、そこからの軌道単射性定理を適用する。",
+        "すべて同じ構成済みの大域解に対する性質としてまとめる。状態が一点に収束するとは主張せず、エネルギーが目標へ収束する。"
       ]
     }
   }
