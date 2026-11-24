@@ -1,5 +1,7 @@
 name: Meta Forge - self-generating operator production rules
 
+run-name: ${{ inputs.recovery_id && format('Forge recovery {0}', inputs.recovery_id) || github.event.pull_request.title || github.event.head_commit.message || 'Meta Forge' }}
+
 on:
   pull_request:
     branches:
@@ -21,6 +23,12 @@ on:
     # Unattended half-hourly, offset 10 minutes after Generic Forge.
     - cron: '17,47 * * * *'
   workflow_dispatch:
+    inputs:
+      recovery_id:
+        description: 'Optional bounded recovery correlation ID (display only)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -139,12 +147,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          slot="$(python - <<'PY'
-          from datetime import datetime, timezone
-          now = datetime.now(timezone.utc)
-          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 30 * 30:02d}Z")
-          PY
-          )"
+          slot="$(python -B -m tools.autonomy.forge_recovery slot --state ../state/docs/autonomy/meta-forge-state.json)"
           python -B -m tools.autonomy.meta_forge prepare \
             --state ../state/docs/autonomy/meta-forge-state.json \
             --day "$slot" --head "$GITHUB_SHA" \
