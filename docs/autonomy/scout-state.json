@@ -1,7 +1,7 @@
 {
   "attempts": [],
   "last_ai_day": null,
-  "last_scanned_head": "b7a995a84d2bf83e0b8f32a373ca25dea2838478",
+  "last_scanned_head": "323aff1d058833b51a7388b74fbb32fc250fac89",
   "queue": [
     {
       "evidence": "具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。",
