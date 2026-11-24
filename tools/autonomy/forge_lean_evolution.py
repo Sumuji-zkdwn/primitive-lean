@@ -273,6 +273,8 @@ def search(tables):
 def certificate(tables, values, invariant, pair, out):
     require(invariant in list(components(tables)) and witness(values, invariant) == pair,
             "unreproducible invariant or witness")
+    require(all(witness(v, invariant) is None for v in tables.values() if len(set(v)) == 256),
+            "candidate invariant is not closed under the permutation letters")
     source = ["import Mathlib\nset_option maxRecDepth 16384\n"
               "set_option maxHeartbeats 50000000\n", cert.WORDS.read_text(), CORE]
     names = ["good_comp", "good_word", "noninjective_of_collision"]
@@ -282,7 +284,8 @@ def certificate(tables, values, invariant, pair, out):
         source.append(f"\ndef flag : Signal → Signal := tableStep {cert.literal(flags)}\n")
         source.append("abbrev Relation (x _y : Signal) : Prop := flag x = 1\n")
     else:
-        source.append(fb.finite_function("difference", len(members), members))
+        source.append(f"def difference (_i : Fin 1) : Signal := {members[0]}\n"
+                      if len(members) == 1 else fb.finite_function("difference", len(members), members))
         source.append(f"""
 def shift (i : Fin {len(members)}) (x : Signal) : Signal :=
   ⟨(Nat.xor x.val (difference i).val) % 256, Nat.mod_lt _ (by decide)⟩
