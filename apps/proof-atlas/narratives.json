@@ -698,6 +698,248 @@
         "従って曲率密度の被積分関数が同じであり、エネルギーも同じ。偶性の仮定は不要。"
       ]
     },
+    "Elastica.exponentialWeight_pos": {
+      "title": "指数重みは常に正である",
+      "assumptions": "β,ℓ は任意の実数。密度 ε と角度 θ は実数値関数。",
+      "summary": "Wβ(θ)=exp(−βEε(θ,ℓ))＞0。",
+      "steps": [
+        "まずエネルギー Eε(θ,ℓ) は Lean の定義上の実数値。",
+        "実指数関数 exp はすべての実数に対して厳密に正の値を返す。−βE をその引数に取る。"
+      ]
+    },
+    "Elastica.log_exponentialWeight": {
+      "title": "指数重みの対数を取ると負のエネルギーに戻る",
+      "assumptions": "β,ℓ は任意。W=exp(−βE)。",
+      "summary": "log W=−βE。",
+      "steps": [
+        "指数重みの定義を代入すると log(exp(−βE)) となる。",
+        "全ての実数 x に log(exp x)=x が成立するので −βE が残る。"
+      ]
+    },
+    "Elastica.energy_eq_neg_log_exponentialWeight": {
+      "title": "指数重みから元のエネルギーを復元する",
+      "assumptions": "β≠0。密度・角度・長さは任意。",
+      "summary": "E=−log W/β。",
+      "steps": [
+        "指数重みの対数の等式 log W=−βE を使う。",
+        "両辺の符号を反転し、非ゼロの β で割る。E の符号は問わない。"
+      ]
+    },
+    "Elastica.exponentialWeight_split": {
+      "title": "隣接する二つの区間では指数重みが積になる",
+      "assumptions": "ε は連続、θ は C¹。β,a,ℓ は実数。",
+      "summary": "Wβ(θ,ℓ)=Wβ(θ,a)·exp(−β∫ₐ^ℓ ε(θ′))。",
+      "steps": [
+        "ε∘θ′ は連続なので隣接区間の積分加法性で E(0,ℓ)=E(0,a)+E(a,ℓ)。",
+        "指数の引数 −βE を二項に分配する。",
+        "exp(A+B)=exp A·exp B を使う。向き付き積分のため切断点の順序は不要。"
+      ]
+    },
+    "Elastica.exponentialWeight_split_three": {
+      "title": "三つの区間への分割は三つの指数重みの積に対応する",
+      "assumptions": "ε は連続、θ は C¹、β,a,b,ℓ は任意の実数。",
+      "summary": "W=exp(−βI₁)exp(−βI₂)exp(−βI₃)。I₁,I₂,I₃ は 0→a、a→b、b→ℓ の密度積分。",
+      "steps": [
+        "三分割のエネルギー公式から E=I₁+I₂+I₃。",
+        "−β を和の各項に掛け、指数関数の加法公式を二度使う。",
+        "三つの因子の積が得られる。"
+      ]
+    },
+    "Elastica.exp_neg_mul_le_exp_neg_mul_iff": {
+      "title": "正の係数の負指数変換は大小関係を逆転する",
+      "assumptions": "β＞0、x,y は実数。",
+      "summary": "exp(−βx)≤exp(−βy) と y≤x は同値。",
+      "steps": [
+        "指数関数 exp は狭義単調増加なので左の不等式は −βx≤−βy と同値。",
+        "係数 −β は負であるから、両辺をその係数で割ると不等号が反転する。逆操作も可能。"
+      ]
+    },
+    "Elastica.exp_neg_mul_lt_exp_neg_mul_iff": {
+      "title": "負指数変換による厳密な大小関係の反転",
+      "assumptions": "β＞0、x,y は実数。",
+      "summary": "exp(−βx)＜exp(−βy) と y＜x は同値。",
+      "steps": [
+        "exp の狭義単調増加性で厳密不等式を −βx＜−βy に移す。",
+        "負の係数 −β で割って y＜x を得る。逆向きも同じ操作で成立する。"
+      ]
+    },
+    "Elastica.energy_le_iff_exponentialWeight_le": {
+      "title": "低いエネルギーは大きい指数重みと同値",
+      "assumptions": "β＞0、比較する角度 θ,ψ、密度 ε、長さ ℓ は任意。",
+      "summary": "Eθ≤Eψ ↔ Wψ≤Wθ。",
+      "steps": [
+        "Wψ=exp(−βEψ)、Wθ=exp(−βEθ) と書く。",
+        "正の β に対する負指数変換の不等式の同値を x=Eψ,y=Eθ に適用し、同値の向きを入れ替える。"
+      ]
+    },
+    "Elastica.energy_lt_iff_exponentialWeight_lt": {
+      "title": "厳密なエネルギー改善は厳密な重み増加と同値",
+      "assumptions": "β＞0、ε,θ,ψ,ℓ は任意。",
+      "summary": "Eθ＜Eψ ↔ Wψ＜Wθ。",
+      "steps": [
+        "重みの定義を代入すると右辺は exp(−βEψ)＜exp(−βEθ)。",
+        "負指数変換の厳密不等式の公式から Eθ＜Eψ と同値になる。"
+      ]
+    },
+    "Elastica.energy_minimum_iff_exponentialWeight_maximum": {
+      "title": "固定された比較集合ではエネルギー最小と重み最大が同値",
+      "assumptions": "β＞0、比較曲線の集合 S、基準 θ、密度 ε、長さ ℓ は任意。",
+      "summary": "全 ψ∈S で Eθ≤Eψ と、全 ψ∈S で Wψ≤Wθ は同値。",
+      "steps": [
+        "各比較曲線 ψ についてエネルギー順序と指数重みの逆順序は同値。",
+        "その点ごとの同値を全 ψ∈S という量化の下で使う。比較集合を変更していない。",
+        "これは比較条件の同値であって、θ∈S や最小点の存在を別に証明するものではない。"
+      ]
+    },
+    "Elastica.isLocalMinOn_iff_isLocalMaxOn_exp_neg_mul": {
+      "title": "位相空間上の局所最小と負指数変換の局所最大は同値",
+      "assumptions": "任意の位相空間 X、f:X→ℝ、部分集合 S、点 x、β＞0。",
+      "summary": "S に相対的な f の x での局所最小性と、exp(−βf) の x での局所最大性は同値。",
+      "steps": [
+        "局所最小の定義を、S に相対的な x の近傍で f(x)≤f(y) が成り立つ条件として展開する。",
+        "各 y の不等式を負指数変換の順序反転で exp(−βf(y))≤exp(−βf(x)) に置き換える。",
+        "同じ近傍条件のまま局所最大の定義になる。f の連続性は仮定しない。"
+      ]
+    },
+    "Elastica.locallyMinimizing_iff_exponentialWeight_local_maximum": {
+      "title": "制約付き C¹ 局所最小性を指数重みの局所最大性で表す",
+      "assumptions": "β＞0、ε,θ,ℓ は任意。元の LocallyMinimizing の比較条件をそのまま使う。",
+      "summary": "エネルギーの制約付き局所最小性と、同じ許容曲線近傍で Wψ≤Wθ となることは同値。",
+      "steps": [
+        "LocallyMinimizing を展開し、正の半径 r、C¹ 性、端点角、水平・垂直変位、値と導関数の近さを固定する。",
+        "許容された各 ψ について Eθ≤Eψ を Wψ≤Wθ に置換する。",
+        "r や比較条件を変える必要はないため、双方向の同値が成立する。"
+      ]
+    },
+    "Elastica.hasDerivAt_exp_neg_mul": {
+      "title": "負指数合成関数の一次微分",
+      "assumptions": "f は x で微分係数 d を持つ。β は任意の実数。",
+      "summary": "G(t)=exp(−βf(t)) の x での微分係数は −β exp(−βf(x))d。",
+      "steps": [
+        "−βf の微分係数は −βd。",
+        "exp の微分係数はその値自身なので、連鎖律により exp(−βf(x))·(−βd)。",
+        "実数の積の順序を整理して結論。"
+      ]
+    },
+    "Elastica.differentiableAt_exp_neg_mul_iff": {
+      "title": "非ゼロ係数の指数重みと元の関数の微分可能性は同値",
+      "assumptions": "β≠0、f:ℝ→ℝ、点 x。G=exp(−βf)。",
+      "summary": "G が x で微分可能 ↔ f が x で微分可能。",
+      "steps": [
+        "f が微分可能なら定数倍と指数関数の連鎖律で G も微分可能。",
+        "逆向きには G(x)＞0 なので log∘G が x で微分可能。",
+        "f=−(1/β)log G が全点で成立するため、f も x で微分可能。β=0 では G が常に1になり逆方向は成立しない。"
+      ]
+    },
+    "Elastica.hasDerivAt_exp_neg_mul_zero_iff": {
+      "title": "実際の一次微分がゼロとなる条件は指数重みでも同じ",
+      "assumptions": "β≠0、f は任意の実数値関数、点 x。",
+      "summary": "G=exp(−βf) が x で微分係数0を持つことと f が微分係数0を持つことは同値。",
+      "steps": [
+        "G の微分可能性から先行する同値定理で f も微分可能。",
+        "f の微分係数 d を用いると G′(x)=−βexp(−βf(x))d。G′=0 なら非ゼロの因子を除いて d=0。",
+        "逆に d=0 が実際の微分係数なら連鎖律で G の微分係数も0。"
+      ]
+    },
+    "Elastica.deriv_exp_neg_mul": {
+      "title": "Lean の全域的な導関数にも指数合成の微分公式が成立",
+      "assumptions": "β≠0。f:ℝ→ℝ、x は任意。",
+      "summary": "deriv G x=−βexp(−βf(x))·deriv f x。",
+      "steps": [
+        "f が x で微分可能な場合は通常の連鎖律の微分係数を deriv に変換する。",
+        "微分可能でない場合は、微分可能性の同値により G も x で微分可能でない。",
+        "Lean の deriv は微分不能点で0を返すので両辺が0になる。これは微分不能点で通常の微分係数が存在するという意味ではない。"
+      ]
+    },
+    "Elastica.deriv_exp_neg_mul_eq_zero_iff": {
+      "title": "全域的な導関数のゼロ条件も指数変換で不変",
+      "assumptions": "β≠0、f:ℝ→ℝ、点 x。",
+      "summary": "deriv G x=0 ↔ deriv f x=0。",
+      "steps": [
+        "全域的な導関数の合成公式を使い deriv G x を −βexp(−βf(x))·deriv f x と書く。",
+        "β と指数関数の値は非ゼロなので積が0であるための必要十分条件は deriv f x=0。",
+        "Lean の deriv の規約によるゼロも含み、微分可能性を単独では保証しない。"
+      ]
+    },
+    "Elastica.hasDerivAt_deriv_exp_neg_mul": {
+      "title": "指数重みの二階微分には一次微分の二乗が現れる",
+      "assumptions": "β≠0、f は x で微分係数 d、deriv f は x で微分係数 q を持つ。G=exp(−βf)。",
+      "summary": "G′ は x で微分可能で、G″(x)=β²G(x)d²−βG(x)q。",
+      "steps": [
+        "全 t で deriv G t=−βG(t)·deriv f t という全域的公式が成立する。",
+        "x においてこの積の各因子は微分可能。積の微分を使うと −βG′(x)d−βG(x)q。",
+        "一次微分公式 G′(x)=−βG(x)d を代入し、β²G(x)d²−βG(x)q を得る。停留していない点では第一項を落とせない。"
+      ]
+    },
+    "Elastica.hasDerivAt_deriv_exp_neg_mul_of_stationary": {
+      "title": "停留点では指数重みの第二微分はエネルギー第二微分の負倍率になる",
+      "assumptions": "β≠0、f は x で微分係数0を持ち、deriv f の微分係数が q。",
+      "summary": "G″(x)=−β exp(−βf(x))q。",
+      "steps": [
+        "一般の二階微分公式に d=0 を入れる。",
+        "一次微分の二乗項が消えるので −βG(x)q だけが残る。",
+        "特に β＞0 なら係数は負であり、第二微分の符号が反転する。局所最小性自体は仮定していない。"
+      ]
+    },
+    "Elastica.hasDerivAt_exponentialWeight_variation": {
+      "title": "曲線の指数重みの第一変分",
+      "assumptions": "ℓ≥0、ε,θ,η は C¹、β は任意。θₜ=θ+tη。",
+      "summary": "W′(0)=−βW(0)∫₀^ℓ ε′(θ′)η′。",
+      "steps": [
+        "実エネルギー E(t)=Eε(θₜ,ℓ) の第一変分公式 E′(0)=∫ε′(θ′)η′ を用いる。",
+        "指数合成の一次微分公式を f=E(t) として適用する。",
+        "θ₀=θ なので指数因子は基準曲線の重み W(0)。"
+      ]
+    },
+    "Elastica.exponentialWeight_variation_stationary_iff": {
+      "title": "各変分経路の停留性は指数重みへ移しても変わらない",
+      "assumptions": "β≠0、ε,θ,η,ℓ は任意。θₜ=θ+tη、E(t)=Eε(θₜ,ℓ)。",
+      "summary": "t=0 で W(t) が実際の微分係数0を持つ ↔ E(t) が実際の微分係数0を持つ。",
+      "steps": [
+        "指数重みは E(t) の負指数合成 W(t)=exp(−βE(t))。",
+        "任意の実数値関数についての微分係数ゼロの同値定理を、この E と点0に特殊化する。"
+      ]
+    },
+    "Elastica.stationary_iff_exponentialWeight_stationary": {
+      "title": "元の制約付き停留条件を指数重みで表せる",
+      "assumptions": "β≠0。ε,θ,ℓ は任意。Stationary の定義通り固定端点角の変分を使う。",
+      "summary": "元の Stationary と、水平・垂直変位の一次微分が0となる全変分について指数重みの deriv が0となる条件が同値。",
+      "steps": [
+        "Stationary を展開し、二つの変位微分が0なら実エネルギーの deriv が0、という条件を取り出す。",
+        "各変分方向に全域的導関数のゼロ条件の同値を適用し、結論だけを重みの deriv=0 に置換する。",
+        "固定端点角・線形化制約は同一である。微分可能性の追加主張はない。"
+      ]
+    },
+    "Elastica.hasDerivAt_deriv_exponentialWeight_variation": {
+      "title": "曲線の指数重みの完全な第二変分",
+      "assumptions": "β≠0、ℓ≥0、ε は C²、θ,η は C¹。A=∫ε′(θ′)η′、B=∫ε″(θ′)(η′)²。",
+      "summary": "W″(0)=β²W(0)A²−βW(0)B。",
+      "steps": [
+        "加法変分 θₜ=θ+tη に対する実エネルギーの微分係数は E′(0)=A、E″(0)=B。",
+        "指数合成の二階微分公式に d=A,q=B を入れる。",
+        "θ₀=θ により指数因子は基準曲線の重みになる。加法変分は厳密な端点制約を満たすとは限らないため A² を残す。"
+      ]
+    },
+    "Elastica.hasDerivAt_deriv_exponentialWeight_family_of_stationary": {
+      "title": "任意の停留エネルギー経路で指数重みの第二微分を求める",
+      "assumptions": "β≠0、曲線族 Θ(t)。E(t)=Eε(Θ(t),ℓ) が点 x で微分係数0を持ち、deriv E の微分係数が q。",
+      "summary": "W″(x)=−βW(x)q。",
+      "steps": [
+        "停留点の指数合成二階微分定理を、実際のエネルギー経路 E(t) に適用する。",
+        "一次微分の二乗項は0で、残る −β exp(−βE(x))q を指数重みの定義で書く。Θ の特定の形は不要。"
+      ]
+    },
+    "Elastica.constrained_secondVariation_exponentialWeight_corrected": {
+      "title": "厳密な端点固定補正経路の指数重みの第二変分",
+      "assumptions": "β≠0、ℓ≥0、ε は C²、θ は C¹。固定端点方向 η,ξ₁,ξ₂ と0で C² の補正 a,b（値と一階微分が0）。近傍で水平・垂直変位が厳密に一定、λ,μ が拡張停留条件を満たす。",
+      "summary": "W″(0)=−βW(0)∫₀^ℓ[ε″(θ′)(η′)²−(λcosθ+μsinθ)η²]ds。",
+      "steps": [
+        "厳密な端点保存により水平・垂直変位の実際の一次微分は0。補正付き微分公式から ∫−sinθ·η=∫cosθ·η=0 を得る。",
+        "拡張停留条件を η に適用すると実エネルギーの一次微分 ∫ε′(θ′)η′ は0。",
+        "補正経路の制約付き第二変分定理を使い、加速度項を消去した二階微分 Q=∫[ε″(θ′)(η′)²−(λcosθ+μsinθ)η²] を得る。",
+        "停留経路の指数合成公式に q=Q を入れると −βW(0)Q となる。"
+      ]
+    },
     "Elastica.xCoord_zero": {
       "title": "再構成の開始点は指定した初期座標",
       "assumptions": "x座標を x₀+∫₀^s cosθ(u) du と定義。",
@@ -951,6 +1193,171 @@
         "積分表示の停留条件から乗数 λ,μ を一組選ぶ。残差の消滅定理により M′=−λsinθ+μcosθ を得る。",
         "この角度方程式から σ を選び、κM−ε(κ)−λcosθ−μsinθ=σ と M″+κ²M−κε(κ)−σκ=0 を得る。",
         "最初に選んだ同じ λ,μ を用いて制約付き第二変分非負性の定理を適用する。これで別々の乗数を選ぶのでなく同時成立を示した。"
+      ]
+    },
+    "Elastica.powerLog_zero": {
+      "title": "正規化べき応答の指数ゼロは対数",
+      "assumptions": "z は実数（通常の対数応答としては z＞0）。Pₚ(z)=powerLog p z。",
+      "summary": "P₀(z)=log z。",
+      "steps": [
+        "Pₚ の定義は p=0 のとき log z、それ以外は (zᵖ−1)/p という場合分け。",
+        "p=0 を代入して対数の枝を選ぶ。これは定義上の等式で、極限の成立は別の定理。"
+      ]
+    },
+    "Elastica.powerLog_one": {
+      "title": "基準入力1で正規化べき応答はゼロ",
+      "assumptions": "p は任意の実数。",
+      "summary": "Pₚ(1)=0。",
+      "steps": [
+        "p=0 なら log 1=0。",
+        "p≠0 なら 1ᵖ=1 なので (1ᵖ−1)/p=0。",
+        "全ての実指数が同じ基準値を持つ。"
+      ]
+    },
+    "Elastica.hasDerivAt_powerLog": {
+      "title": "正規化べき応答の入力に関する微分",
+      "assumptions": "p は実数、z＞0。Pₚ(z)=log z（p=0）、(zᵖ−1)/p（p≠0）。",
+      "summary": "Pₚ′(z)=z^(p−1)。",
+      "steps": [
+        "p=0 では対数の微分は1/z。これは z^(−1) に等しい。",
+        "p≠0 では正の底に対する実数べきの微分公式から (zᵖ)′=pz^(p−1)。",
+        "定数1を引き、非ゼロの p で割れば z^(p−1)。両場合が一致する。"
+      ]
+    },
+    "Elastica.deriv_powerLog": {
+      "title": "正規化べき応答の導関数を明示する",
+      "assumptions": "p は実数、z＞0。",
+      "summary": "deriv (powerLog p) z=z^(p−1)。",
+      "steps": [
+        "先行定理が z における微分係数 z^(p−1) の存在を保証する。",
+        "微分可能点での deriv の値はその微分係数に等しい。"
+      ]
+    },
+    "Elastica.deriv_powerLog_pos": {
+      "title": "全ての指数で正の入力領域の応答微分は正",
+      "assumptions": "p は任意の実数、z＞0。",
+      "summary": "Pₚ′(z)＞0。",
+      "steps": [
+        "微分公式 Pₚ′(z)=z^(p−1) を使う。",
+        "正の底の実数べきは指数が負やゼロでも正。従って微分係数も正。"
+      ]
+    },
+    "Elastica.powerLog_mul": {
+      "title": "正規化べき応答が積をどのように合成するか",
+      "assumptions": "p は実数、z,w＞0。",
+      "summary": "Pₚ(zw)=Pₚ(z)+Pₚ(w)+pPₚ(z)Pₚ(w)。",
+      "steps": [
+        "p=0 では log(zw)=log z+log w で、最後の項は0。",
+        "p≠0 では zᵖ=1+pPₚ(z)、wᵖ=1+pPₚ(w)。正の底のべきの乗法則 (zw)ᵖ=zᵖwᵖ を使う。",
+        "右辺の積を展開し1を引いて p で割ると、Pₚ(z)+Pₚ(w)+pPₚ(z)Pₚ(w) が得られる。"
+      ]
+    },
+    "Elastica.continuousAt_powerLog_exponent_zero": {
+      "title": "正規化べき応答は指数ゼロで連続",
+      "assumptions": "z＞0 を固定し、p を変数とする。",
+      "summary": "p↦Pₚ(z) は p=0 で連続。",
+      "steps": [
+        "g(p)=zᵖ=exp(p log z) と置くと g(0)=1、g′(0)=log z。",
+        "p≠0 で Pₚ(z)=(g(p)−g(0))/p は g の0での差商。",
+        "p=0 のとき P₀(z) はまさに g′(0)。微分可能性による差商の連続延長の定理から連続性を得る。"
+      ]
+    },
+    "Elastica.tendsto_powerLog_exponent_zero": {
+      "title": "指数をゼロに近づけるとべき応答は対数へ収束する",
+      "assumptions": "z＞0 を固定。",
+      "summary": "lim_{p→0}Pₚ(z)=log z。",
+      "steps": [
+        "指数 p に関する連続性が p=0 で先行定理により確立されている。",
+        "連続性の定義から極限値は P₀(z)。定義上 P₀(z)=log z。"
+      ]
+    },
+    "Elastica.powerLogDensity_zero": {
+      "title": "指数ゼロの曲率密度の明示式",
+      "assumptions": "K,κ₀,κ は任意の実数（Lean の log と除算の定義に基づく等式）。",
+      "summary": "ε₀(κ)=K[κ log(κ/κ₀)−κ+κ₀]。",
+      "steps": [
+        "powerLogDensity の場合分けに p=0 を代入する。",
+        "最初の枝が選ばれ、表示された対数を含む式がそのまま得られる。正の曲率上での微分公式は別途仮定を要する。"
+      ]
+    },
+    "Elastica.powerLogDensity_neg_one": {
+      "title": "指数マイナス1の曲率密度の明示式",
+      "assumptions": "K,κ₀,κ は任意の実数（定義上の等式）。",
+      "summary": "ε₋₁(κ)=K[κ−κ₀−κ₀log(κ/κ₀)]。",
+      "steps": [
+        "p=−1 は0ではないので最初の枝を除外する。",
+        "p=−1 の専用の枝を選ぶと所望の式になる。一般の式に p+1=0 を代入して割るのではない。"
+      ]
+    },
+    "Elastica.powerLogDensity_reference": {
+      "title": "基準曲率では全ての指数の密度がゼロ",
+      "assumptions": "κ₀＞0、p,K は任意。",
+      "summary": "powerLogDensity p K κ₀ κ₀=0。",
+      "steps": [
+        "κ=κ₀ を代入すると比 κ/κ₀=1。",
+        "p=0 の場合は log 1=0 と −κ₀+κ₀=0。p=−1 の場合も κ₀−κ₀ と log 1 が消える。",
+        "その他の指数では 1^(p+1)−1=0 と 1−1=0 が両方成立する。"
+      ]
+    },
+    "Elastica.hasDerivAt_powerLogDensity": {
+      "title": "曲率密度を微分すると正規化べき応答が得られる",
+      "assumptions": "κ₀＞0、κ＞0。p,K は実数。z=κ/κ₀、εₚ=powerLogDensity p K κ₀。",
+      "summary": "εₚ′(κ)=K Pₚ(z)。",
+      "steps": [
+        "p=0 では ε₀=K(κlog z−κ+κ₀)。積の微分で (κlog z)′=log z+1 となり、−κ の微分が1を打ち消す。",
+        "p=−1 では ε₋₁=K(κ−κ₀−κ₀log z) なので ε₋₁′=K(1−κ₀/κ)=K P₋₁(z)。",
+        "その他の場合は εₚ=Kκ₀/p·[(z^(p+1)−1)/(p+1)−(z−1)]。z′=1/κ₀ を用いた連鎖律で括弧の微分は (zᵖ−1)/κ₀。",
+        "全場合で K Pₚ(z) が得られる。正の曲率領域に限った実際の微分係数である。"
+      ]
+    },
+    "Elastica.hasDerivAt_deriv_powerLogDensity": {
+      "title": "曲率密度の第二微分",
+      "assumptions": "κ₀＞0、κ＞0、p,K は実数。z=κ/κ₀。",
+      "summary": "εₚ′ の κ での微分係数は (K/κ₀) z^(p−1)。",
+      "steps": [
+        "κ＞0 なのでその近傍でも曲率は正。先行定理からそこで εₚ′(q)=K Pₚ(q/κ₀)。",
+        "Pₚ の微分公式 Pₚ′(z)=z^(p−1) と q↦q/κ₀ の微分 1/κ₀ を連鎖律で掛ける。",
+        "係数 K を掛け、近傍で一致する関数の微分係数も一致することを使う。"
+      ]
+    },
+    "Elastica.second_deriv_powerLogDensity_pos": {
+      "title": "正の曲率・正の尺度では密度の第二微分が正",
+      "assumptions": "K＞0、κ₀＞0、κ＞0、p は任意の実数。",
+      "summary": "εₚ″(κ)＞0。",
+      "steps": [
+        "先行する二階微分公式で εₚ″(κ)=(K/κ₀)(κ/κ₀)^(p−1)。",
+        "K/κ₀ は正であり、底 κ/κ₀ も正なのでその実数べきも正。",
+        "正の二因子の積は正。負やゼロの曲率領域にはこの結論を延長していない。"
+      ]
+    },
+    "Elastica.powerLogDensity_one": {
+      "title": "指数1の密度は基準曲率を中心とした二次式",
+      "assumptions": "κ₀＞0、K,κ は任意の実数。",
+      "summary": "ε₁(κ)=Kκ²/(2κ₀)−Kκ+Kκ₀/2。",
+      "steps": [
+        "p=1 を一般の密度式へ代入して ε₁=Kκ₀[(z²−1)/2−(z−1)]、z=κ/κ₀。",
+        "括弧を (z−1)²/2 に整理する。実数べきの指数2は普通の二乗。",
+        "κ₀≠0 なので展開・約分すると表示式になる。κ＞0 は不要で、全ての符号付き曲率に成立。"
+      ]
+    },
+    "Elastica.energy_powerLogDensity_one": {
+      "title": "指数1の曲線エネルギーと二次曲率エネルギーの差は境界項",
+      "assumptions": "θ は C¹、κ₀＞0、K,ℓ は実数。",
+      "summary": "E₁(θ)=E_{Kq²/(2κ₀)}(θ)−K(θ(ℓ)−θ(0))+(Kκ₀/2)ℓ。",
+      "steps": [
+        "指数1の密度を全 q で二次項にアフィン項 −Kq+Kκ₀/2 を加えた形に書き換える。",
+        "既存のアフィン密度エネルギー公式を a=−K,b=Kκ₀/2 として適用する。",
+        "曲率の積分は端点角の差になるため、補正は境界角と長さのみで決まる。"
+      ]
+    },
+    "Elastica.energy_powerLogDensity_one_le_iff": {
+      "title": "端点角を固定すれば指数1密度と二次密度の比較順序は一致",
+      "assumptions": "θ,ψ は C¹、κ₀＞0、K,ℓ は実数。両曲線の始端・終端の実数値角が一致する。",
+      "summary": "E₁(θ)≤E₁(ψ) ↔ E_{Kq²/(2κ₀)}(θ)≤E_{Kq²/(2κ₀)}(ψ)。",
+      "steps": [
+        "両曲線に指数1エネルギーの境界補正式を使う。",
+        "端点角と長さが同一なので補正 C=−K(終端角−始端角)+Kκ₀ℓ/2 は両者で等しい。",
+        "両辺に加えられた同じ C を消去すると二次エネルギーの大小関係が残る。"
       ]
     },
     "Elastica.angle_sub_eq_initial_of_curvature_eq": {
@@ -1620,6 +2027,94 @@
       "steps": [
         "密度積分の第一変分公式に ε=sin、κ=θ、v=η を代入する。",
         "sin は C¹ で微分は cos なので ∫cosθ·η が得られる。"
+      ]
+    },
+    "Elastica.powerLog_zero_exponentialWeight": {
+      "title": "指数重みに指数ゼロの応答を施すと負のエネルギーが得られる",
+      "assumptions": "β,ℓ は任意。E=Eε(θ,ℓ)、W=exp(−βE)。",
+      "summary": "P₀(W)=−βE。",
+      "steps": [
+        "P₀ は定義上 log なので P₀(W)=log W。",
+        "W の定義により log(exp(−βE))=−βE。β≠0 なら E もここから復元できる。"
+      ]
+    },
+    "Elastica.tendsto_powerLog_exponentialWeight_zero": {
+      "title": "指数重みに対するべき応答の指数ゼロ極限",
+      "assumptions": "β,ℓ,ε,θ は任意。",
+      "summary": "lim_{p→0}Pₚ(W)=−βE。",
+      "steps": [
+        "W=exp(−βE) は厳密に正なので、正の底での Pₚ(z) の指数ゼロ極限を適用できる。",
+        "極限値 log W を指数重みの対数公式で −βE に書き換える。曲率やエネルギーの符号を制限しない。"
+      ]
+    },
+    "Elastica.hasDerivAt_powerLog_exp_neg_mul": {
+      "title": "べき対数応答と指数変換の合成の微分",
+      "assumptions": "p,β は任意の実数。f は x で微分係数 d を持つ。H(t)=Pₚ(exp(−βf(t)))。",
+      "summary": "H′(x)=−β exp(−pβf(x))d。",
+      "steps": [
+        "z=exp(−βf(x))＞0。Pₚ′(z)=z^(p−1)、内側の微分は −βzd。",
+        "連鎖律により H′(x)=−βz^(p−1)zd。",
+        "正の z のべきと指数の法則で z^(p−1)z=zᵖ=exp(−pβf(x))。これを代入する。"
+      ]
+    },
+    "Elastica.strictAnti_powerLog_exp_neg_mul": {
+      "title": "正の係数ならどの実指数のべき対数応答もエネルギー順序を逆転する",
+      "assumptions": "p は任意、β＞0。h(x)=Pₚ(exp(−βx))。",
+      "summary": "h は実数全体で狭義単調減少。",
+      "steps": [
+        "合成微分定理を f(x)=x に適用すると h′(x)=−βexp(−pβx)。",
+        "指数因子は常に正で、−β＜0 なので全 x で導関数が厳密に負。",
+        "実数区間での導関数の符号による単調性定理から狭義単調減少が従う。"
+      ]
+    },
+    "Elastica.energy_le_iff_powerLog_exponentialWeight_le": {
+      "title": "エネルギー順序とべき対数重みの逆順序は同値",
+      "assumptions": "p は実数、β＞0。ε,θ,ψ,ℓ は任意。",
+      "summary": "Eθ≤Eψ ↔ Pₚ(Wψ)≤Pₚ(Wθ)。",
+      "steps": [
+        "h(x)=Pₚ(exp(−βx)) が狭義単調減少である先行定理を使う。",
+        "狭義単調減少性は x≤y と h(y)≤h(x) の同値を与える。",
+        "x=Eθ、y=Eψ を入れる。曲線の微分可能性を追加仮定する順序定理ではない。"
+      ]
+    },
+    "Elastica.locallyMinimizing_iff_powerLog_weight_local_maximum": {
+      "title": "制約付き局所最小性とべき対数重みの局所最大性は同値",
+      "assumptions": "p は任意の実数、β＞0。元の LocallyMinimizing の固定端点角・変位・C¹ 近傍条件を使用。",
+      "summary": "エネルギーの制約付き局所最小性 ↔ 同じ許容近傍で全 ψ に Pₚ(Wψ)≤Pₚ(Wθ)。",
+      "steps": [
+        "LocallyMinimizing の定義を展開して半径 r＞0 と比較曲線の条件を固定する。",
+        "各許容 ψ にエネルギー順序とべき対数重みの逆順序の同値を適用する。",
+        "比較条件と半径が同じままなので局所最小性から局所最大性へ、逆向きも同じ置換で従う。"
+      ]
+    },
+    "Elastica.hasDerivAt_powerLog_weight_variation": {
+      "title": "曲線のべき対数重みの第一変分",
+      "assumptions": "ℓ≥0、ε,θ,η は C¹。p,β は実数、θₜ=θ+tη、E(t)=Eε(θₜ,ℓ)。",
+      "summary": "d/dt Pₚ(W(t))|₀=−βexp(−pβE(0))∫₀^ℓ ε′(θ′)η′。",
+      "steps": [
+        "実エネルギーの第一変分から E′(0)=∫ε′(θ′)η′。",
+        "べき対数と指数変換の合成微分公式に f=E(t)、x=0、d=E′(0) を入れる。",
+        "θ₀=θ なので E(0) を基準曲線のエネルギーとして書く。"
+      ]
+    },
+    "Elastica.powerLog_weight_variation_stationary_iff": {
+      "title": "どのべき対数指数でも実エネルギーの停留性を保存する",
+      "assumptions": "β≠0、ℓ≥0、ε,θ,η は C¹。p は任意の実数。",
+      "summary": "deriv (t↦Pₚ(W(t))) 0=0 ↔ deriv E 0=0。",
+      "steps": [
+        "実エネルギーの第一変分を A=∫ε′(θ′)η′ とする。",
+        "べき対数重みの第一変分は −βexp(−pβE(0))A。",
+        "β と指数因子が非ゼロなのでこの積が0となる条件は A=0。実エネルギーの deriv も A に等しいため同値。"
+      ]
+    },
+    "Elastica.powerLog_exponentialWeight_split": {
+      "title": "区間の指数重みの積はべき対数応答で非線形加法則になる",
+      "assumptions": "ε は連続、θ は C¹。p,β,a,ℓ は実数。I=∫ₐ^ℓ ε(θ′)、W₁=Wβ(θ,a)、W₂=exp(−βI)。",
+      "summary": "Pₚ(Wβ(θ,ℓ))=Pₚ(W₁)+Pₚ(W₂)+pPₚ(W₁)Pₚ(W₂)。",
+      "steps": [
+        "エネルギーの区間分割から指数重み Wβ(θ,ℓ)=W₁W₂。",
+        "両因子は指数関数の値なので厳密に正。正規化べき応答の積の公式を適用できる。",
+        "p=0 なら最後の交差項が消え、負のエネルギーの加法性に戻る。"
       ]
     },
     "LinearInputDesign.scalar_gap": {
