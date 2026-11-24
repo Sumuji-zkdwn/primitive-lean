@@ -19,6 +19,7 @@ from tools.autonomy import forge_lean_feedback as fb
 from tools.autonomy import forge_lean_reentry as reentry
 from tools.autonomy import generic_forge as gf
 from tools.autonomy import semantic_forge as sf
+from tools.autonomy import forge_lean_group as group
 
 ROOT = cert.ROOT
 FIXTURE = ROOT / "tests/fixtures/semantic_bridge_semantic.json"
@@ -194,10 +195,10 @@ def witness(values, invariant):
     return None
 
 
-def productions(tables):
+def productions(tables, all_parents=False):
     # Each admitted symbol supplies a new observable terminal. The newest four
     # terminals are expanded this cycle; older terminals remain in the library.
-    for parent in list(tables)[-PARENTS:]:
+    for parent in (list(tables) if all_parents else list(tables)[-PARENTS:]):
         for target in range(8):
             for output in range(8):
                 for other in [-1] + [b for b in range(8) if b != target]:
@@ -233,7 +234,7 @@ def evaluate(recipe, tables, independent=False):
     return result
 
 
-def search(tables):
+def legacy_search(tables):
     invariants = list(components(tables))
     known = {tuple(v) for v in tables.values()}
     latest = list(tables)[-1]
@@ -274,7 +275,16 @@ def search(tables):
     return (recipe, values, invariant, pair), invariants, counts
 
 
+def search(tables):
+    chosen, invariants, counts = legacy_search(tables)
+    if chosen is not None:
+        return chosen, invariants, counts
+    return group.search(tables, productions, evaluate, invariants, counts)
+
+
 def certificate(tables, values, invariant, pair, out):
+    if invariant["kind"] in group.KINDS:
+        return group.certificate(tables, values, invariant, pair, out, CORE)
     require(invariant in list(components(tables)) and witness(values, invariant) == pair,
             "unreproducible invariant or witness")
     require(all(witness(v, invariant) is None for v in tables.values() if len(set(v)) == 256),
@@ -423,7 +433,8 @@ def replay(state, semantic, seeds, out):
                 "semantic ancestry mismatch")
         tables = roots(semantic, n, seeds)
         tables.update(accepted)
-        require(row["recipe"] in productions(tables), "unreviewed historical recipe")
+        require(row["recipe"] in productions(tables, all_parents=row["invariant"]["kind"] in group.KINDS),
+                "unreviewed historical recipe")
         values = evaluate(row["recipe"], tables)
         require(values == evaluate(row["recipe"], tables, independent=True)
                 and all(values[values[x]] == x for x in range(256))

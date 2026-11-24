@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/forge-lean-evolution.yml'
       - 'tools/autonomy/forge_lean_evolution.py'
+      - 'tools/autonomy/forge_lean_group.py'
+      - 'tools/autonomy/forge_lean_group_test.py'
       - 'tools/autonomy/forge_lean_certificate.py'
       - 'tools/autonomy/forge_lean_feedback.py'
       - 'tools/autonomy/forge_lean_reentry.py'
@@ -19,6 +21,7 @@ on:
     paths:
       - '.github/workflows/forge-lean-evolution.yml'
       - 'tools/autonomy/forge_lean_evolution.py'
+      - 'tools/autonomy/forge_lean_group.py'
   schedule:
     - cron: '51 14 * * *'
   workflow_dispatch:
@@ -158,6 +161,9 @@ jobs:
             echo "ERROR: altered history accepted"; exit 1
           fi
           echo "PASS altered history rejected"
+      - name: PR regression - affine and parity fallback certificates
+        if: github.event_name == 'pull_request'
+        run: python -B -m tools.autonomy.forge_lean_group_test --output verification/forge-evolution/group-test
       - name: Preserve exact input snapshots and all proof/search evidence
         if: always()
         uses: actions/upload-artifact@v6
