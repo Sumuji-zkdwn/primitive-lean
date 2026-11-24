@@ -1,5 +1,7 @@
 name: Generic Forge - non-math autonomous operator laboratory
 
+run-name: ${{ inputs.recovery_id && format('Forge recovery {0}', inputs.recovery_id) || github.event.pull_request.title || github.event.head_commit.message || 'Generic Forge' }}
+
 on:
   pull_request:
     branches: [main]
@@ -26,6 +28,12 @@ on:
     # Unattended half-hourly UTC cadence; GitHub may delay/skip scheduled runs.
     - cron: '7,37 * * * *'
   workflow_dispatch:
+    inputs:
+      recovery_id:
+        description: 'Optional bounded recovery correlation ID (display only)'
+        required: false
+        type: string
+        default: ''
 
 permissions:
   contents: read
@@ -147,12 +155,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          slot="$(python - <<'PY'
-          from datetime import datetime, timezone
-          now = datetime.now(timezone.utc)
-          print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 30 * 30:02d}Z")
-          PY
-          )"
+          slot="$(python -B -m tools.autonomy.forge_recovery slot --state ../state/docs/autonomy/generic-forge-state.json)"
           python -B -m tools.autonomy.forge_promotion prepare \
             --state ../state/docs/autonomy/generic-forge-state.json \
             --meta-state ../meta-state/docs/autonomy/meta-forge-state.json \
