@@ -23,9 +23,29 @@
       "word": [
         1
       ]
+    },
+    {
+      "baseline_lean_sha256": "0879acef6001ecb799dbfd79aceb3f37af609d288d81623f5a2c087a733a329e",
+      "baseline_request_sha256": "81babc77ebaeeacc5cb894289bc6ba2a6071d7255ff0a9dcadffbe2078264122",
+      "candidate_lean_sha256": "ae668b27cd1252b7e9045508bca078938644eac18946d61c05ebde02531f3638",
+      "candidate_request_sha256": "ab90cca5368b7ee4b8b67449115f040c049d5d2569b09ce0834b4d9c869bd834",
+      "chain_sha256": "adcfaddec6966487b1536a1e677d443e965c77a2f8a77d6f2c58b4d84a3f59de",
+      "day": "2026-11-24",
+      "head_sha": "323aff1d058833b51a7388b74fbb32fc250fac89",
+      "id": "pa2_ae66423c5aa0aed9",
+      "legacy_sha256": "2b63878689f871c7331c6856e50d47d076fc00f17cce9063bfd8328cbd04a23f",
+      "novelty": 29,
+      "outcome": "EQUIVALENT",
+      "previous_sha256": "372efce43c6160360a48296eb9c3a1bb3d38e956b9648d5bcb03408e2d49ff57",
+      "spec": {
+        "family": "inert_swap",
+        "states": 4
+      },
+      "status": "LEAN_VERIFIED_FINITE_OPERATOR_COMPARISON_ONLY",
+      "word": null
     }
   ],
-  "last_utc_day": "2026-11-23",
+  "last_utc_day": "2026-11-24",
   "legacy_sha256": "2b63878689f871c7331c6856e50d47d076fc00f17cce9063bfd8328cbd04a23f",
   "schema_version": 1
 }
