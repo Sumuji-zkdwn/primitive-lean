@@ -122,13 +122,8 @@ theorem goodP_comp (P : (Signal → Signal) → Prop)
       have hfi : Function.Injective f := by
         intro a b hab
         exact h (congrArg g hab)
-      have hfs : Function.Surjective f := by
-        first
-        | exact (Finite.injective_iff_surjective).mp hfi
-        | exact (Finite.injective_iff_surjective f).mp hfi
-        | exact Finite.surjective_of_injective hfi
-        | exact (Finite.surjective_iff_injective).mpr hfi
-        | exact (Finite.surjective_iff_injective f).mpr hfi
+      have hfs : Function.Surjective f :=
+        (Finite.injective_iff_surjective).mp hfi
       apply hg
       intro a b hab
       obtain ⟨u, hu⟩ := hfs a
@@ -157,9 +152,9 @@ theorem goodP_word (P : (Signal → Signal) → Prop)
 AFFINE_CORE = r"""
 def bit (x : Signal) (i : Fin 8) : Bool := x.val.testBit i.val
 
-def rel (a b c d : Bool) : Prop := (a != b) = (c != d)
+abbrev rel (a b c d : Bool) : Prop := (a != b) = (c != d)
 
-def Quad (a b c d : Signal) : Prop :=
+abbrev Quad (a b c d : Signal) : Prop :=
   ∀ i : Fin 8, rel (bit a i) (bit b i) (bit c i) (bit d i)
 
 def linearBit : List (Fin 8) → Bool → Signal → Bool
@@ -198,15 +193,17 @@ def swapProduct : List (Signal × Signal) → Equiv.Perm Signal
   | p :: rest => Equiv.swap p.1 p.2 * swapProduct rest
 
 theorem swapProduct_sign (l : List (Signal × Signal))
-    (h : ∀ p ∈ l, p.1 ≠ p.2) :
+    (h : l.all (fun p => p.1 != p.2) = true) :
     Equiv.Perm.sign (swapProduct l) = (-1) ^ l.length := by
   induction l with
   | nil => simp [swapProduct]
   | cons p rest ih =>
-    have hp : p.1 ≠ p.2 := h p (by simp)
-    have hr : ∀ q ∈ rest, q.1 ≠ q.2 := by
-      intro q hq
-      exact h q (List.mem_cons_of_mem _ hq)
+    change ((p.1 != p.2) && rest.all (fun q => q.1 != q.2)) = true at h
+    simp only [Bool.and_eq_true] at h
+    have hp : p.1 ≠ p.2 := by
+      intro he
+      simpa [he] using h.1
+    have hr : rest.all (fun q => q.1 != q.2) = true := h.2
     rw [swapProduct, Equiv.Perm.sign_mul, Equiv.Perm.sign_swap hp,
         ih hr, List.length_cons, pow_succ] <;> exact mul_comm _ _
 
@@ -271,9 +268,15 @@ def certificate(tables, values, invariant, pair, out, legacy_core):
             and witness(values, kind) == pair, "bad group invariant witness")
     require(all(witness(v, kind) is None for v in tables.values() if len(set(v)) == N),
             "group invariant not closed")
+    # The old binary-relation closure lemmas are not used by these
+    # certificates. Retain only their shared signal/table/collision definitions;
+    # never change the source emitted for historical unary/diff receipts.
+    start = legacy_core.index("def Good (")
+    end = legacy_core.index("theorem noninjective_of_collision ")
+    shared_core = legacy_core[:start] + legacy_core[end:]
     source = ["import Mathlib\nset_option maxRecDepth 16384\n"
               "set_option maxHeartbeats 50000000\n", cert.WORDS.read_text(),
-              legacy_core, PROPERTY_CORE, AFFINE_CORE if kind == "affine" else EVEN_CORE]
+              shared_core, PROPERTY_CORE, AFFINE_CORE if kind == "affine" else EVEN_CORE]
     names = ["goodP_comp", "goodP_word", "property_id", "property_comp"]
     names += ["rel_xor", "linearBit_preserves"] if kind == "affine" else ["swapProduct_sign"]
     for i, v in enumerate(tables.values()):
