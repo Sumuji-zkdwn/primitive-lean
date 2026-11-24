@@ -65,10 +65,12 @@ def main() -> None:
         comments += bool(recorded.get("comment"))
         if node["name"] in explain["narratives"]:
             annotation = explain["narratives"][node["name"]]
-            assert annotation["summary"] and annotation["steps"] and annotation["assumptions"]
+            assert all(isinstance(annotation[k], str) and annotation[k].strip() for k in ("title", "summary", "assumptions"))
+            assert isinstance(annotation["steps"], list) and len(annotation["steps"]) >= 2
+            assert all(isinstance(step, str) and step.strip() for step in annotation["steps"])
             annotated += 1
     assert proof_edges == 629
-    assert annotated == 425
+    assert annotated == 465
     assert comments == 340
     assert len(file_cache) == 60
     print("ATLAS_SOURCE_AUDIT_PASS", json.dumps({

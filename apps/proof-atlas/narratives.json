@@ -4214,6 +4214,397 @@
         "エネルギーの狭義単調減少定理と、そこからの軌道単射性定理を適用する。",
         "すべて同じ構成済みの大域解に対する性質としてまとめる。状態が一点に収束するとは主張せず、エネルギーが目標へ収束する。"
       ]
+    },
+    "LinearInputLevelGeometry.radial_gradient_lower_bound": {
+      "title": "原点から外向きの勾配成分はエネルギー差で下から抑えられる",
+      "assumptions": "λ>0、r,u,x,y は任意。C=(max(−r,0))²/(12λ)、gₓ,gᵧ は偏微分。",
+      "summary": "E−C≤xgₓ+ygᵧ。",
+      "steps": [
+        "既存のエネルギー分解は E=R+xgₓ+√2xgᵧ+gᵧ²/2、R=−3λx⁴/4−rx²/2。",
+        "gᵧ=y−√2x より ygᵧ=√2xgᵧ+gᵧ²。従って xgₓ+ygᵧ−E=−R+gᵧ²/2。",
+        "R≤C と gᵧ²≥0 を使うと結論。これは原点方向に関する勾配の定量評価。"
+      ]
+    },
+    "LinearInputLevelGeometry.radial_gradient_pos": {
+      "title": "停留値上界を超えた点では外向きの勾配成分が正",
+      "assumptions": "λ>0、E(x,y)>C=(max(−r,0))²/(12λ)。",
+      "summary": "xgₓ+ygᵧ>0。",
+      "steps": [
+        "前の定理により xgₓ+ygᵧ≥E−C。",
+        "仮定で E−C>0 なので外向き成分も正となる。"
+      ]
+    },
+    "LinearInputLevelGeometry.quadratic_remainder_bound": {
+      "title": "四次剰余の上界を非負変数の二次式として書く",
+      "assumptions": "λ>0、r は実数、q≥0。",
+      "summary": "−3λq²/4−rq/2≤C=(max(−r,0))²/(12λ)。",
+      "steps": [
+        "既存の剰余上界 −3λx⁴/4−rx²/2≤C に x=√q を入れる。",
+        "q≥0 なので (√q)²=q、(√q)⁴=q²。これを代入すると所望の二次式になる。"
+      ]
+    },
+    "LinearInputLevelGeometry.energy_outward_scaling": {
+      "title": "原点からの拡大で停留値上界からの差が少なくとも倍率分だけ増える",
+      "assumptions": "λ>0、r,u,x,y は任意、t≥1、C=(max(−r,0))²/(12λ)。",
+      "summary": "t(E(x,y)−C)≤E(tx,ty)−C。",
+      "steps": [
+        "差 D=E(tx,ty)−C−t(E(x,y)−C) を定義から展開する。",
+        "整理すると D=(t−1)[C+3λ(tx²)²/4+r(tx²)/2+λt(t−1)²x⁴/4+t(y−√2x)²/2]。",
+        "括弧の最初の三項は q=tx²≥0 に対する剰余上界から非負。残る二項も λ>0,t≥1 から非負。",
+        "外の t−1≥0 と合わせ D≥0。入力の線形項は差を取ると相殺される。"
+      ]
+    },
+    "LinearInputLevelGeometry.energy_outward_strict": {
+      "title": "停留値上界を超えた点を外向きに拡大するとエネルギーが厳密に増える",
+      "assumptions": "λ>0、E(z)>C、t>1。",
+      "summary": "E(tz)>E(z)。",
+      "steps": [
+        "拡大評価から E(tz)−C≥t(E(z)−C)。",
+        "E(z)−C>0 かつ t>1 なので t(E(z)−C)>E(z)−C。",
+        "C を足し戻して厳密不等式を得る。"
+      ]
+    },
+    "LinearInputLevelGeometry.existsUnique_positive_radius": {
+      "title": "各非ゼロ半直線は高い等エネルギー面とちょうど一度交わる",
+      "assumptions": "λ>0、e>C、(x,y)≠(0,0)。",
+      "summary": "ただ一つの t>0 が E(tx,ty)=e を満たす。",
+      "steps": [
+        "C≥0 から e>0。原点のエネルギーは0。q=x²+(y−√2x)²/2 は非ゼロ方向で正。",
+        "強制性の下界 E(tz)+B≥t²q（B=lowerBoundConstant）を使い、T=√[(max(e+B,0)+1)/q] を選ぶと E(Tz)>e。",
+        "連続関数 t↦E(tz) に中間値の定理を適用して [0,T] 内に E(tz)=e の解を得る。e>0 なので t≠0。",
+        "もし二つの正の倍率 a<t が同じ値 e を持てば、大きい点は小さい点の t/a>1 倍。外向きの厳密増加に反するため一意。"
+      ]
+    },
+    "LinearInputLevelGeometry.radius_pos": {
+      "title": "非ゼロの平面ベクトルのユークリッド半径は正",
+      "assumptions": "z=(x,y)、x≠0 または y≠0。radius(z)=√(x²+y²)。",
+      "summary": "radius(z)>0。",
+      "steps": [
+        "非ゼロの成分の二乗は厳密に正、他方の二乗は非負。",
+        "従って x²+y²>0。正数の平方根は正。"
+      ]
+    },
+    "LinearInputLevelGeometry.radius_pos_of_energy": {
+      "title": "停留値上界より高いエネルギーの状態は原点ではない",
+      "assumptions": "λ>0、E(z)>C。",
+      "summary": "radius(z)>0。",
+      "steps": [
+        "C≥0 である一方、E(0,0)=0。仮に z が原点なら E(z)>C と矛盾する。",
+        "非ゼロベクトルの半径の正性を適用する。"
+      ]
+    },
+    "LinearInputLevelGeometry.direction_mem_circle": {
+      "title": "正の半径を持つ点の正規化方向は単位円上にある",
+      "assumptions": "z=(x,y)、R=radius(z)>0。direction(z)=(x/R,y/R)。",
+      "summary": "direction(z) の二成分の二乗和は1。",
+      "steps": [
+        "R²=x²+y² は平方根の定義から成立する。",
+        "方向の二乗和は (x²+y²)/R²。R≠0 なので約分して1。"
+      ]
+    },
+    "LinearInputLevelGeometry.radius_mul_direction": {
+      "title": "半径と正規化方向から元の点を復元する",
+      "assumptions": "R=radius(z)>0。direction(z)=(x/R,y/R)。",
+      "summary": "R·direction(z)=z。",
+      "steps": [
+        "各成分に R を掛けると R(x/R),R(y/R) となる。",
+        "R≠0 なので各成分で R を約分でき、元の組 (x,y) に戻る。"
+      ]
+    },
+    "LinearInputLevelGeometry.direction_positive_scale": {
+      "title": "正の倍率で拡大しても方向は変わらない",
+      "assumptions": "z は任意の平面ベクトル、t>0。",
+      "summary": "direction(tz)=direction(z)。",
+      "steps": [
+        "radius(tz)=√[t²(x²+y²)]=t radius(z) を、t>0 と平方根の積の公式から得る。",
+        "正規化の分子と分母は共に t 倍なので、非ゼロの t を約分する。",
+        "この等式は Lean の全域的な除算のもとで z=0 でも成立する。幾何学的な単位方向は非ゼロ点で考える。"
+      ]
+    },
+    "LinearInputLevelGeometry.direction_of_circle": {
+      "title": "単位円上の点は方向の正規化で変わらない",
+      "assumptions": "v=(x,y) が x²+y²=1 を満たす。",
+      "summary": "direction(v)=v。",
+      "steps": [
+        "半径は √1=1。",
+        "各成分を半径1で割っても変化しない。"
+      ]
+    },
+    "LinearInputLevelGeometry.continuous_radius": {
+      "title": "ユークリッド半径は平面上で連続",
+      "assumptions": "radius(x,y)=√(x²+y²)。",
+      "summary": "radius は ℝ² 上で連続。",
+      "steps": [
+        "座標射影、二乗、加法はいずれも連続なので x²+y² は連続。",
+        "実数平方根も連続なのでその合成である radius は連続。"
+      ]
+    },
+    "LinearInputLevelGeometry.continuous_direction_subtype": {
+      "title": "原点を除く集合上では正規化方向が連続",
+      "assumptions": "S は平面の部分集合、全 z∈S で radius(z)>0。",
+      "summary": "部分空間 S→ℝ² の direction は連続。",
+      "steps": [
+        "S から平面への包含写像と座標射影は連続。radius も連続。",
+        "S の各点で分母 radius は非ゼロなので、各座標を radius で割った商は S 上で連続。",
+        "二成分の組として direction の連続性を得る。"
+      ]
+    },
+    "LinearInputLevelGeometry.eq_of_direction_energy_eq": {
+      "title": "高いエネルギー領域では方向とエネルギーが点を一意に決める",
+      "assumptions": "λ>0、E(z)>C、direction(z)=direction(w)、E(z)=E(w)。",
+      "summary": "z=w。",
+      "steps": [
+        "両点のエネルギーが C より高いので半径 Rz,Rw は正。方向の一致から w=(Rw/Rz)z が成り立つ。逆も同様。",
+        "Rz<Rw なら倍率 Rw/Rz>1 なので E(w)>E(z)。Rw<Rz でも逆の厳密不等式が生じ、どちらも仮定に反する。",
+        "従って半径が等しい。同じ方向に同じ半径を掛ければ元の点も等しい。"
+      ]
+    },
+    "LinearInputFiniteInternalUpdate.exponential_bound_on_Icc": {
+      "title": "有限閉区間における積分因子による指数上界",
+      "assumptions": "T≥0、全 t∈[0,T] で v′(t)=q(t)≤−kv(t)、k は任意。",
+      "summary": "t∈[0,T] で v(t)≤v(0)exp(−kt)。",
+      "steps": [
+        "w(t)=exp(kt)v(t) と置く。積の微分より w′=exp(kt)(kv+q)≤0。",
+        "閉区間上の単調性定理から w(t)≤w(0)=v(0)。",
+        "正の exp(kt) で割る。区間の外で微分不等式が成立する必要はない。"
+      ]
+    },
+    "LinearInputFiniteInternalUpdate.square_bound_on_Icc": {
+      "title": "有限時間内の減衰内部状態の二乗を評価する",
+      "assumptions": "κ>0、M≥0、T≥0、[0,T] で θ′=−κθ+ρf、|f|≤M。",
+      "summary": "θ(t)²≤θ(0)²exp(−κt)+(ρM/κ)²(1−exp(−κt))。",
+      "steps": [
+        "C=(ρM/κ)² と v=θ²−C を置くと v′=2θ(−κθ+ρf)。",
+        "(κθ−ρf)²≥0 と ρ²f²≤ρ²M²=κ²C から κ(v′+κv)≤0。κ>0 なので v′≤−κv。",
+        "有限区間の積分因子評価で v(t)≤v(0)exp(−κt)。C を戻して結論。大域的存在は仮定しない。"
+      ]
+    },
+    "LinearInputFiniteInternalUpdate.abs_le_on_Icc": {
+      "title": "十分に抑えられた外力のもとで内部状態の区間は不変",
+      "assumptions": "κ>0、M≥0、T≥0、[0,T] で θ′=−κθ+f、|f|≤κM、|θ(0)|≤M。",
+      "summary": "全 t∈[0,T] で |θ(t)|≤M。",
+      "steps": [
+        "有限時間二乗評価に ρ=1、外力上界 κM を入れると θ(t)²≤θ(0)² exp(−κt)+M²(1−exp(−κt))。",
+        "初期条件から θ(0)²≤M²、指数因子は正なので右辺は M² 以下。",
+        "M≥0 だから平方根を取って |θ(t)|≤M。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.contDiff_vectorField": {
+      "title": "内部状態と空間状態を合わせたベクトル場の滑らかさ",
+      "assumptions": "有限個 n の内部成分、q=(z,θ)、z∈ℝ²、θ∈ℝⁿ。b(q) と観測 Φ(z) が Cᵐ。各 κᵢ,ρᵢ とエネルギー係数は定数。",
+      "summary": "結合ベクトル場 F(q) は Cᵐ。",
+      "steps": [
+        "空間速度は E とその勾配の多項式、b(q) および定数の積と和からなる。",
+        "内部速度の各成分 −κᵢθᵢ+ρᵢΦᵢ(z) も座標射影と Cᵐ 関数から作られる。",
+        "有限積の全成分で Cᵐ 性が成り立つので、結合ベクトル場全体も Cᵐ。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.hasDerivAt_internal": {
+      "title": "結合ベクトルODEから各内部成分の微分方程式を取り出す",
+      "assumptions": "q=(z,θ) が点 t で結合方程式 q′=F(q) を満たす。i は内部成分の番号。",
+      "summary": "θᵢ′(t)=−κᵢθᵢ(t)+ρᵢΦᵢ(z(t))。",
+      "steps": [
+        "積空間の微分係数を第二成分へ射影すると内部ベクトル θ の微分係数になる。",
+        "有限個の成分を持つ関数への微分の射影を i について行う。結合場の定義を展開すれば内部ODEが得られる。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.hasDerivAt_energy": {
+      "title": "内部状態が変化しても空間エネルギーの微分は同じ",
+      "assumptions": "q=(z,θ) が点 t で結合ODEを満たす。空間のエネルギー E(z) の入力 u は固定。",
+      "summary": "dE(z(t))/dt=−γ(E(z(t))−target)gSq(z(t))。",
+      "steps": [
+        "結合ODEの第一成分から x,y の微分係数を取り出す。回転係数は現在の結合状態 b(q(t))。",
+        "固定入力のエネルギー連鎖律にその速度を入れる。回転成分は勾配と直交するので相殺。",
+        "内部座標に E が直接依存しないため、内部状態の微分項は加わらない。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.energy_band_on_Icc": {
+      "title": "有限時間の結合解は空間エネルギー帯を保存する",
+      "assumptions": "γ≥0、T≥0、[0,T] 上で結合ODEが成立、E(z(0))≥target。",
+      "summary": "全 t∈[0,T] で target≤E(z(t))≤E(z(0))。",
+      "steps": [
+        "結合解の連続性から空間成分も連続で、係数 gSq(z(t)) は区間上連続かつ非負。",
+        "結合エネルギーの微分公式から誤差 e′=−γegSq を得る。",
+        "有限区間の誤差帯不変性を適用する。b が内部状態で変化していてもこの議論は成り立つ。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.isTrajectory_of_global_solution": {
+      "title": "大域結合解を従来の空間軌道へ射影する",
+      "assumptions": "全 t≥0 で q′=F(q) と仮定。q(t)=(z(t),θ(t))。",
+      "summary": "z=(x,y)、時刻係数 b(q(t)) の組が IsTrajectory を満たす。",
+      "steps": [
+        "結合ODEの第一成分は空間ベクトルの実際の微分係数である。",
+        "そこから x,y の座標微分を取り出せば、時刻依存の回転係数 b(q(t)) を使う既存の軌道述語の二式に一致する。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.exists_internal_bounds": {
+      "title": "コンパクトな空間集合から内部座標の不変区間の大きさを選ぶ",
+      "assumptions": "K⊂ℝ² はコンパクト、Φ:ℝ²→ℝⁿ は連続、全 κᵢ>0。初期内部状態 θ₀ と係数 ρᵢ は任意。",
+      "summary": "各 Mᵢ≥0 を選べて |θ₀ᵢ|≤Mᵢ、全 z∈K で |ρᵢΦᵢ(z)|≤κᵢMᵢ。",
+      "steps": [
+        "各 i の連続な外力 z↦ρᵢΦᵢ(z) は K 上で有界なので絶対値の上界 Bᵢ を選ぶ。",
+        "Mᵢ=max(|θ₀ᵢ|,max(Bᵢ,0)/κᵢ) と定める。",
+        "この定義から初期値の上界と非負性を得る。κᵢ>0 なので二番目の項の比較を掛け戻し、外力上界を得る。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.band_box_on_Icc": {
+      "title": "有限結合解はエネルギー帯と内部座標箱の両方に留まる",
+      "assumptions": "γ≥0、T≥0、各 κᵢ>0、Mᵢ≥0。初期状態は target≤E₀、|θ₀ᵢ|≤Mᵢ。空間帯内で |ρᵢΦᵢ(z)|≤κᵢMᵢ。結合ODEは [0,T] で成立。",
+      "summary": "全 t∈[0,T] で target≤E(z(t))≤E₀ かつ各 |θᵢ(t)|≤Mᵢ。",
+      "steps": [
+        "有限結合解のエネルギー帯定理から、全時刻の空間状態が所定の帯に入る。",
+        "各内部成分の微分方程式 θᵢ′=−κᵢθᵢ+ρᵢΦᵢ(z(t)) を射影によって得る。",
+        "帯内の外力上界と初期値の上界を使い、有限区間での減衰内部状態の不変区間定理を各 i に適用する。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.exists_global_solution": {
+      "title": "有限内部状態を持つ結合ODEの前向き大域解を構成する",
+      "assumptions": "b と Φ は C¹、λ>0、γ≥0、全 κᵢ>0。有限 n、初期状態 q₀=(z₀,θ₀) が E(z₀)≥target を満たす。",
+      "summary": "ある Mᵢ≥0 と q が存在し、q(0)=q₀、全 t≥0 で q′=F(q)、target≤E(z(t))≤E(z₀)、|θᵢ(t)|≤Mᵢ。",
+      "steps": [
+        "空間帯 K={z:target≤E(z)≤E(z₀)} はコンパクト。連続な Φ から全内部成分の Mᵢ を選ぶ。",
+        "S=K×∏ᵢ[−Mᵢ,Mᵢ] は有限積なのでコンパクト、初期状態は S に入る。結合場は C¹ だから S 全体で共通の局所存在時間を取れる。",
+        "有限区間の帯・箱不変性により、q₀ からの局所解は非負時間部分で S を出ない。",
+        "一般の大域延長定理を適用して前向き大域解を作り、有限区間の不変性を全時刻に適用する。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.solution_unique_on_Ici": {
+      "title": "結合ODEの前向き解は同じ初期状態から一意",
+      "assumptions": "b,Φ は C¹。二つの結合状態曲線 q,v は同じパラメータのODEを全 t≥0 で満たし q(0)=v(0)。",
+      "summary": "全 t≥0 で q(t)=v(t)。",
+      "steps": [
+        "b,Φ の滑らかさから結合ベクトル場が C¹ であると分かる。",
+        "一般の半直線上のODE一意性定理に結合場を代入する。存在の証明と異なり κᵢ,λ,γ の符号条件を必要としない。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.contDiff_finite_expansion": {
+      "title": "有限個の内部係数による空間基底関数の展開は滑らか",
+      "assumptions": "各 ψᵢ:ℝ²→ℝ は Cᵐ、q=(z,θ)、成分数 n は有限。",
+      "summary": "q↦Σᵢθᵢψᵢ(z) は Cᵐ。",
+      "steps": [
+        "内部係数 θᵢ は第二成分と i 番目の射影から得る線形座標関数なので滑らか。",
+        "ψᵢ(z) は第一成分の射影と Cᵐ な ψᵢ の合成。",
+        "各積 θᵢψᵢ(z) は Cᵐ であり、有限和も Cᵐ。"
+      ]
+    },
+    "LinearInputCoupledTrajectory.exists_global_solution_one_add_sq": {
+      "title": "正の回転係数 1+Q² を持つ有限内部状態系の大域存在",
+      "assumptions": "Q(q),Φ(z) は C¹、λ>0、γ≥0、全 κᵢ>0、E(z₀)≥target。",
+      "summary": "b(q)=1+Q(q)² の結合ODEに前向き大域解が存在し、空間帯と各内部座標の有界性を満たす。",
+      "steps": [
+        "Q の二乗と定数1の和は C¹ なので b は結合大域存在定理の仮定を満たす。",
+        "その定理に b=1+Q² を代入する。Q 自体に大域有界性を仮定する必要はない。"
+      ]
+    },
+    "LinearInputLevelConvergence.bandRadius_nonneg": {
+      "title": "エネルギー帯の半径上界は非負",
+      "assumptions": "λ,r,u,upper は任意。bandRadius=2√max(upper+lowerBoundConstant,0)。",
+      "summary": "bandRadius≥0。",
+      "steps": [
+        "max(upper+lowerBoundConstant,0) は非負であり、実数平方根も非負。",
+        "係数2は正なので積も非負。"
+      ]
+    },
+    "LinearInputLevelConvergence.norm_le_bandRadius": {
+      "title": "エネルギー上界から空間状態のノルム上界を得る",
+      "assumptions": "λ>0、E(z)≤upper、z=(x,y)。S=max(upper+lowerBoundConstant,0)。",
+      "summary": "‖z‖≤2√S=bandRadius。ここで Lean の積空間ノルムは max(|x|,|y|)。",
+      "steps": [
+        "強制性の下界より A=x²+(y−√2x)²/2≤S、従って x²≤S。",
+        "恒等式 4A−y²=(y−2√2x)²≥0 から y²≤4S。x² も 4S 以下。",
+        "R=2√S≥0 は R²=4S を満たすので両成分の絶対値は R 以下。max を取って結論。"
+      ]
+    },
+    "LinearInputLevelConvergence.target_level_nonempty": {
+      "title": "停留値上界より高い目標等位集合は空でない",
+      "assumptions": "λ>0、target>C=(max(−r,0))²/(12λ)。",
+      "summary": "L={z:E(z)=target} は空でない。",
+      "steps": [
+        "非ゼロ方向 (1,0) を選ぶ。",
+        "各非ゼロ半直線に対する正の半径の存在定理を目標値 target に適用する。得られた a>0 に対し (a,0)∈L。"
+      ]
+    },
+    "LinearInputLevelConvergence.exists_radial_target_point": {
+      "title": "目標等位集合への半径方向の縮小量をエネルギー誤差で抑える",
+      "assumptions": "λ>0、C<target≤E(z)。δ=target−C>0。",
+      "summary": "0<a≤1 が存在し E(az)=target かつ (1−a)δ≤E(z)−target。",
+      "steps": [
+        "E(z)≥target>C≥0 なので z≠0。正の半径の存在定理で E(az)=target の a>0 を得る。",
+        "a>1 なら外向きの厳密増加から E(az)>E(z)≥target となるので矛盾。従って a≤1。",
+        "az を 1/a 倍する拡大評価から δ/a≤E(z)−C。正の a を掛けると δ≤a(E(z)−C)。",
+        "整理して (1−a)δ≤a(E(z)−target)≤E(z)−target。目標点を具体的な同方向の点として得た。"
+      ]
+    },
+    "LinearInputLevelConvergence.dist_radial_multiple": {
+      "title": "点とその倍率変換の距離を計算する",
+      "assumptions": "z∈ℝ²、a∈ℝ は任意。積空間の距離とノルムを用いる。",
+      "summary": "dist(z,az)=|1−a|‖z‖。",
+      "steps": [
+        "差ベクトルは z−az=(1−a)z。",
+        "距離は差のノルムなので、ノルムのスカラー倍則 ‖cz‖=|c|‖z‖ を適用する。"
+      ]
+    },
+    "LinearInputLevelConvergence.exists_level_point_distance_bound": {
+      "title": "実際の目標等位点までの距離の明示上界",
+      "assumptions": "λ>0、C<target≤E(z)≤upper。δ=target−C、R=bandRadius(λ,r,u,upper)。",
+      "summary": "ある p∈L={E=target} で dist(z,p)≤(R/δ)(E(z)−target)。",
+      "steps": [
+        "半径方向の縮小定理から p=az、0<a≤1、E(p)=target、(1−a)δ≤E(z)−target を得る。",
+        "距離公式で dist(z,p)=(1−a)‖z‖。エネルギー上界から ‖z‖≤R。",
+        "従って dist(z,p)≤(1−a)R。R≥0、δ>0 なので縮小量の上界を代入し、(R/δ)(E(z)−target) を得る。"
+      ]
+    },
+    "LinearInputLevelConvergence.infDist_level_bound": {
+      "title": "目標等位集合への最短距離をエネルギー誤差で評価する",
+      "assumptions": "λ>0、C<target≤E(z)≤upper。R は帯の半径上界、δ=target−C。",
+      "summary": "infDist(z,L)≤(R/δ)(E(z)−target)。L={E=target}。",
+      "steps": [
+        "前の定理で L 内の実際の点 p を選ぶと dist(z,p) に所望の上界がある。",
+        "集合への距離は各集合内点への距離以下なので infDist(z,L)≤dist(z,p)。",
+        "不等式を連結する。最短点の存在を仮定する必要はない。"
+      ]
+    },
+    "LinearInputLevelConvergence.spatial_error_exponential_of_initial": {
+      "title": "目標等位集合への距離も明示的な指数上界を持つ",
+      "assumptions": "λ>0、γ≥0、C<target≤E(0)、指定された前向き軌道。R=bandRadius(λ,r,u,E(0))、δ=target−C、m は明示勾配下界。",
+      "summary": "0≤infDist(z(t),L)≤(R/δ)(E(0)−target)exp(−γmt)（t≥0）。",
+      "steps": [
+        "エネルギー帯不変性から各状態は target≤E(t)≤E(0) に入る。",
+        "集合距離の評価に upper=E(0) を入れると infDist(z(t),L)≤(R/δ)(E(t)−target)。",
+        "エネルギー誤差の指数上界を非負係数 R/δ 倍して代入する。距離そのものも非負。"
+      ]
+    },
+    "LinearInputLevelConvergence.spatial_convergence_of_initial": {
+      "title": "空間軌道は目標等位集合に漸近する",
+      "assumptions": "λ,γ>0、C<target≤E(0)、指定された前向き軌道。",
+      "summary": "t→∞ で infDist(z(t),L)→0。",
+      "steps": [
+        "既存のエネルギー収束定理より E(t)→target。",
+        "全非負時刻で 0≤infDist(z(t),L)≤(R/δ)(E(t)−target)。右辺は固定係数を掛けた0への収束。",
+        "はさみうちにより集合距離が0へ収束する。個々の状態が一つの点に収束することや周期解への収束までは示していない。"
+      ]
+    },
+    "LinearInputCoupledConsequences.exists_global_convergent_solution": {
+      "title": "結合大域解の内部有界性とエネルギー・空間距離の指数収束をまとめる",
+      "assumptions": "b,Φ は C¹、λ,γ>0、全 κᵢ>0、C<target≤E(z₀)、有限個の内部座標を持つ初期状態 q₀。",
+      "summary": "前向き大域結合解 q=(z,θ) と各 Mᵢ≥0 が存在し、|θᵢ|≤Mᵢ。e(t) は e₀ exp(−γmt) 以下、infDist(z(t),L) は (R/δ)e₀ exp(−γmt) 以下。両誤差は0へ収束。",
+      "steps": [
+        "結合大域存在定理で実解と不変内部座標箱を構成する。",
+        "空間成分を従来の IsTrajectory に射影する。回転係数は b(q(t)) だがエネルギー微分式は変わらない。",
+        "初期値から定まる m=gradientLowerBound、R=bandRadius、δ=target−C を使うエネルギーと集合距離の指数上界を適用する。",
+        "γ,m>0 の下でエネルギーの目標への収束、空間距離の0への収束を得る。全てが同じ構成済み結合解に対する主張であり、内部状態の一点収束は含まない。"
+      ]
+    },
+    "LinearInputCoupledConsequences.exists_global_injective_convergent_solution": {
+      "title": "内部状態が進化しても空間軌道は自己交差せず目標等位集合へ漸近する",
+      "assumptions": "b,Φ は C¹、λ,γ>0、全 κᵢ>0、C<target<E(z₀)。有限個の内部座標を持つ初期状態 q₀。",
+      "summary": "前向き大域結合解 q が存在し、全有限時刻で E(z(t))>target、E は狭義単調減少、空間成分 z は非負時間上で単射、E→target かつ infDist(z,L)→0。",
+      "steps": [
+        "結合大域収束定理で q を選ぶ。厳密初期不等式はその定理の弱い初期条件を満たす。",
+        "空間成分を IsTrajectory に射影し、厳密な初期誤差の保存と停留値上界より上でのエネルギー狭義減少を適用する。",
+        "異なる時刻で空間状態が一致すれば固定入力の E も一致するため、厳密減少に矛盾。内部状態に関係なく空間軌道が単射となる。",
+        "既に得られた E の収束と等位集合への距離の収束を同じ解にまとめる。有限時間で目標に到達することや単一の空間点への収束は主張していない。"
+      ]
     }
   }
 }

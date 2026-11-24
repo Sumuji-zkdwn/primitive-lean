@@ -8,12 +8,12 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
 const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
 const model=A.createModel(graph,proofs,narratives);
 
-test("all 465 true theorem nodes, 629 direct references, 60 source files and 425 Japanese explanations",()=>{
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 465 Japanese explanations",()=>{
  assert.equal(model.nodes.length,465);
  assert.equal(model.proofs.length,465);
  assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
  assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
- assert.equal(Object.keys(model.argumentsById).length,425);
+ assert.equal(Object.keys(model.argumentsById).length,465);
  assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
  assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
  assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
@@ -26,9 +26,13 @@ test("readable explanation is displayed only when authored and backed by source"
  assert.match(model.argumentsById[identified].summary,/X|座標/);
  assert.match(model.proofs[identified].statement,/u ≠ v/);
  assert.match(model.proofs[identified].proof,/ring/);
- const random=model.nodes.find(n=>model.argumentsById[n.id]===undefined);
- assert.ok(random);
- assert.ok(model.proofs[random.id].statement);
+ assert.ok(model.nodes.every(n=>model.argumentsById[n.id]&&model.proofs[n.id].statement));
+ // Keep the original missing-annotation behavior tested on a deliberately incomplete fixture.
+ const subset=JSON.parse(JSON.stringify(narratives));
+ delete subset.narratives[model.nodes[0].name];
+ const incomplete=A.createModel(graph,proofs,subset);
+ assert.equal(incomplete.argumentsById[0],undefined);
+ assert.ok(incomplete.proofs[0].statement);
 });
 
 test("the focused proof graph navigates actual parents and downstream consequences",()=>{
@@ -174,5 +178,14 @@ test("first 425 theorem explanations cover exact energy decay, explicit gradient
  for(const n of model.nodes.slice(0,425)){
   const e=model.argumentsById[n.id];
   assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("every one of the 465 original theorems has a complete Japanese argument, including all coupled and level geometry results",()=>{
+ assert.equal(Object.keys(narratives.narratives).length,465);
+ for(const n of model.nodes){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title?.trim()&&e?.assumptions?.trim()&&e?.summary?.trim(),"missing "+n.name);
+  assert.ok(Array.isArray(e.steps)&&e.steps.length>=2&&e.steps.every(s=>typeof s==="string"&&s.trim()),"missing steps "+n.name);
  }
 });
