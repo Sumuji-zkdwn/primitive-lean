@@ -1,7 +1,7 @@
 {
-  "last_utc_day": "2026-11-24T19:00Z",
+  "last_utc_day": "2026-11-24T19:30Z",
   "meta_snapshot": {
-    "last_utc_day": "2026-11-24T18:00Z",
+    "last_utc_day": "2026-11-24T19:00Z",
     "rules": [
       {
         "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
@@ -687,6 +687,80 @@
           {
             "op": "append",
             "slot": 5
+          },
+          {
+            "op": "append",
+            "slot": 0
+          }
+        ]
+      },
+      {
+        "chain_sha256": "1a8c4c3b9d6422ab1cfbd1a293321a8374152ead0217c2ef6d1d348030d69049",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "c91b88fcb81aadbe8878c3dcea45365646ac2c3c9210e9642e8d44f9e9b7bc3e",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-24T18:30Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "c91b88fcb81aadbe8878c3dcea45365646ac2c3c9210e9642e8d44f9e9b7bc3e",
+        "head_sha": "323aff1d058833b51a7388b74fbb32fc250fac89",
+        "id": "mf_c61941df4a799451",
+        "parent": "mf_6f56d7732119297f",
+        "previous_sha256": "6c6ed4178f609124657b0bd10351d4fefbabca129f0e68cb4675c8655bcc834d",
+        "score": 106,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "append",
+            "slot": 0
+          },
+          {
+            "op": "append",
+            "slot": 1
+          },
+          {
+            "op": "duplicate_head"
+          },
+          {
+            "op": "append",
+            "slot": 1
+          }
+        ]
+      },
+      {
+        "chain_sha256": "ceb9834171d22e23b11ba3625b31fb682b4da5ce8ef1551567a29cf7afe633e2",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "4703928ad749c7fbf093328a23b3a12164c0eb6f8411aa6c760a26e5f557eef0",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-24T19:00Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "4703928ad749c7fbf093328a23b3a12164c0eb6f8411aa6c760a26e5f557eef0",
+        "head_sha": "323aff1d058833b51a7388b74fbb32fc250fac89",
+        "id": "mf_2134daa8f04bb762",
+        "parent": "mf_0563d8201f768665",
+        "previous_sha256": "1a8c4c3b9d6422ab1cfbd1a293321a8374152ead0217c2ef6d1d348030d69049",
+        "score": 106,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "append",
+            "slot": 0
+          },
+          {
+            "op": "append",
+            "slot": 1
+          },
+          {
+            "op": "reverse"
           },
           {
             "op": "append",
@@ -1502,6 +1576,46 @@
       ],
       "right": "m:gf_781fdb59835be5b2",
       "score": 43,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 504,
+        "distinct_outputs": 512,
+        "fingerprint": "85bcbd61a134fe2f85119f5e7a2f1972f410511b705fda31c724b7f9c592e8df",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          0,
+          11,
+          82,
+          416,
+          341
+        ]
+      },
+      "chain_sha256": "5d99ea82415a8d00f08670c51a73da203f8b8d9cad89302ba2e1cd1b517aecf0",
+      "day": "2026-11-24T19:30Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "323aff1d058833b51a7388b74fbb32fc250fac89",
+      "id": "gf_006891ff77261b4e",
+      "left": "m:gf_f9fa27eb81dd69ed",
+      "origin": {
+        "kind": "verified_meta_rule_v1",
+        "rule_chain_sha256": "f3bb3f09701ea2b8c797c47462689af6e0d2e5cd325d638ea7c8d724eef9b311",
+        "rule_id": "mf_a8bca005373f395c"
+      },
+      "previous_sha256": "46d08f2f6f4f2176a428b6ab3360f34cf6d68b7a9afc302dc1711e656e8d4db0",
+      "program": [
+        "mirror_lr",
+        "neighbor_xor",
+        "invert",
+        "mirror_lr",
+        "rotate_cw",
+        "mirror_lr",
+        "invert"
+      ],
+      "right": "r:mf_a8bca005373f395c",
+      "score": 28,
       "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
     }
   ],
