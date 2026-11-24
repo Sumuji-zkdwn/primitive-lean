@@ -1,0 +1,266 @@
+name: Forge Lean Evolution - persistent proof-guided expansion
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-lean-evolution.yml'
+      - 'tools/autonomy/forge_lean_evolution.py'
+      - 'tools/autonomy/forge_lean_certificate.py'
+      - 'tools/autonomy/forge_lean_feedback.py'
+      - 'tools/autonomy/forge_lean_reentry.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'tools/autonomy/semantic_forge.py'
+      - 'linear_input/lean_check/OperatorWordObservations.inc'
+      - 'tests/fixtures/semantic_bridge_semantic.json'
+      - 'tests/fixtures/forge_lean_evolution_empty.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-lean-evolution.yml'
+      - 'tools/autonomy/forge_lean_evolution.py'
+  schedule:
+    - cron: '51 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-lean-evolution-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      candidate: ${{ steps.plan.outputs.candidate }}
+      day: ${{ steps.plan.outputs.day }}
+      state_sha: ${{ steps.plan.outputs.state_sha }}
+      semantic_sha: ${{ steps.plan.outputs.semantic_sha }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Read data-only persistent history
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/forge-lean-evolution-state
+          path: evolution-state
+          persist-credentials: false
+      - name: Read actual semantic source ledger
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: semantic-state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Reconstruct seed proofs, historical receipts, and the next candidate
+        id: plan
+        shell: bash
+        env:
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+        run: |
+          set -euo pipefail
+          out=verification/forge-evolution
+          mkdir -p "$out"
+          head=$(git rev-parse HEAD)
+          if [ "$IS_PR" = true ]; then
+            cp tests/fixtures/forge_lean_evolution_empty.json "$out/state.json"
+            cp tests/fixtures/semantic_bridge_semantic.json "$out/semantic.json"
+            state_sha=fixture
+            semantic_sha=fixture
+            day=2026-11-24
+          else
+            state_sha=$(git -C evolution-state rev-parse HEAD)
+            semantic_sha=$(git -C semantic-state rev-parse HEAD)
+            day=$(date -u +%F)
+            test ! -L evolution-state/docs/autonomy/forge-lean-evolution-state.json
+            test ! -L semantic-state/docs/autonomy/semantic-capability-state.json
+            cp evolution-state/docs/autonomy/forge-lean-evolution-state.json "$out/state.json"
+            cp semantic-state/docs/autonomy/semantic-capability-state.json "$out/semantic.json"
+          fi
+          printf '%s\n' "$head" > "$out/control-sha.txt"
+          printf '%s\n' "$state_sha" > "$out/state-sha.txt"
+          printf '%s\n' "$semantic_sha" > "$out/semantic-sha.txt"
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/state.json" --semantic "$out/semantic.json" --day "$day" --head "$head" --output "$out/first"
+          candidate=$(python -c 'import json; from pathlib import Path; print(str(json.loads(Path("verification/forge-evolution/first/report.json").read_text())["status"] == "NEW_KERNEL_VERIFIED_RECEIPT").lower())')
+          {
+            echo "candidate=$candidate"
+            echo "day=$day"
+            echo "state_sha=$state_sha"
+            echo "semantic_sha=$semantic_sha"
+          } >> "$GITHUB_OUTPUT"
+      - name: PR regression - restart from saved receipt on a new day
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-evolution
+          head=$(git rev-parse HEAD)
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/first/next-state.json" --semantic "$out/semantic.json" --day 2026-11-25 --head "$head" --output "$out/second"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("verification/forge-evolution")
+          first = json.loads((p / "first/next-state.json").read_text())
+          second = json.loads((p / "second/next-state.json").read_text())
+          r = json.loads((p / "second/report.json").read_text())
+          assert len(first["receipts"]) == 1
+          assert len(second["receipts"]) == 2
+          assert second["receipts"][0] == first["receipts"][0]
+          symbol = "e:" + first["receipts"][0]["chain_sha256"][:24]
+          assert symbol in r["active_production_symbols"]
+          assert r["search"]["by_parent"][symbol]["generated"] == 1024
+          assert r["previous_generations"] == 1
+          assert second["receipts"][1]["behavior_sha256"] != first["receipts"][0]["behavior_sha256"]
+          assert (p / "second/history-1/Certificate.lean").read_bytes() == (p / "first/new/Certificate.lean").read_bytes()
+          assert json.loads((p / "second/history-1/mapping.json").read_text())["status"] == "KERNEL_AND_AXIOM_AUDIT_PASSED"
+          assert json.loads((p / "second/new/mapping.json").read_text())["status"] == "KERNEL_AND_AXIOM_AUDIT_PASSED"
+          print("PASS two distinct persistent generations, historical proof replay and new production symbol")
+          PY
+      - name: PR regression - same-day replay is idempotent and tampering fails closed
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-evolution
+          head=$(git rev-parse HEAD)
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/first/next-state.json" --semantic "$out/semantic.json" --day 2026-11-24 --head "$head" --output "$out/same-day"
+          cmp "$out/first/next-state.json" "$out/same-day/next-state.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("verification/forge-evolution")
+          r = json.loads((p / "same-day/report.json").read_text())
+          assert r["status"] == "ALREADY_VERIFIED_TODAY"
+          s = json.loads((p / "first/next-state.json").read_text())
+          s["receipts"][0]["witness"] = [0, 0] if s["receipts"][0]["witness"] != [0, 0] else [1, 1]
+          (p / "tampered.json").write_text(json.dumps(s))
+          PY
+          if python -B -m tools.autonomy.forge_lean_evolution --state "$out/tampered.json" --semantic "$out/semantic.json" --day 2026-11-25 --head "$head" --output "$out/tampered"; then
+            echo "ERROR: altered history accepted"; exit 1
+          fi
+          echo "PASS altered history rejected"
+      - name: Preserve exact input snapshots and all proof/search evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-evolution-plan-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/forge-evolution/
+          if-no-files-found: warn
+          retention-days: 90
+
+  persist:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.plan.result == 'success' && needs.plan.outputs.candidate == 'true'
+    needs: [plan]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout trusted exact main code
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Checkout isolated data ledger for one append
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/forge-lean-evolution-state
+          path: evolution-state
+          persist-credentials: true
+      - name: Read current upstream data again
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: semantic-state
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Restore plan as inert comparison data
+        uses: actions/download-artifact@v4
+        with:
+          name: forge-evolution-plan-${{ github.run_id }}-${{ github.run_attempt }}
+          path: prior-plan
+      - name: Install same pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Independently reconstruct exact plan and rerun kernel
+        shell: bash
+        env:
+          EXPECTED_STATE: ${{ needs.plan.outputs.state_sha }}
+          EXPECTED_SEMANTIC: ${{ needs.plan.outputs.semantic_sha }}
+          DAY: ${{ needs.plan.outputs.day }}
+        run: |
+          set -euo pipefail
+          out=verification/forge-evolution-replay
+          mkdir -p "$out"
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git -C evolution-state rev-parse HEAD)" = "$EXPECTED_STATE"
+          test "$(git -C semantic-state rev-parse HEAD)" = "$EXPECTED_SEMANTIC"
+          test ! -L evolution-state/docs/autonomy/forge-lean-evolution-state.json
+          test ! -L semantic-state/docs/autonomy/semantic-capability-state.json
+          cp evolution-state/docs/autonomy/forge-lean-evolution-state.json "$out/state.json"
+          cp semantic-state/docs/autonomy/semantic-capability-state.json "$out/semantic.json"
+          cmp "$out/state.json" prior-plan/state.json
+          cmp "$out/semantic.json" prior-plan/semantic.json
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/state.json" --semantic "$out/semantic.json" --day "$DAY" --head "$GITHUB_SHA" --output "$out"
+          cmp "$out/next-state.json" prior-plan/first/next-state.json
+          cmp "$out/report.json" prior-plan/first/report.json
+          cmp "$out/new/Certificate.lean" prior-plan/first/new/Certificate.lean
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("verification/forge-evolution-replay")
+          old = json.loads((p / "state.json").read_text())
+          new = json.loads((p / "next-state.json").read_text())
+          report = json.loads((p / "report.json").read_text())
+          assert report["status"] == "NEW_KERNEL_VERIFIED_RECEIPT"
+          assert len(new["receipts"]) == len(old["receipts"]) + 1
+          assert new["receipts"][:-1] == old["receipts"]
+          assert json.loads((p / "new/mapping.json").read_text())["status"] == "KERNEL_AND_AXIOM_AUDIT_PASSED"
+          PY
+      - name: Commit only the independently checked append-only JSON record
+        working-directory: evolution-state
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp ../verification/forge-evolution-replay/next-state.json docs/autonomy/forge-lean-evolution-state.json
+          git config user.name "forge-lean-evolution[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/autonomy/forge-lean-evolution-state.json
+          test "$(git diff --cached --name-only)" = "docs/autonomy/forge-lean-evolution-state.json"
+          git commit -m "forge lean evolution: append one kernel-verified semantic extension"
+          git push origin HEAD:refs/heads/autonomy/forge-lean-evolution-state
+      - name: Preserve independent persistence verification
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-evolution-replay-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/forge-evolution-replay/
+          if-no-files-found: warn
+          retention-days: 90
