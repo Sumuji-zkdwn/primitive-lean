@@ -1,7 +1,7 @@
 {
   "attempts": [],
   "last_ai_day": null,
-  "last_scanned_head": "63f50971c65c804ba35410cc1511d80bd0648c12",
+  "last_scanned_head": "eb4ca4f1c3ab646fa66013759535e7b1024733b8",
   "queue": [
     {
       "evidence": "具体的転送作用素の一般ジョルダン分解は引き続き Lean 未形式化。",
@@ -226,6 +226,42 @@
       "path": "docs/research/2026-11-22-delayed-hardening-ether-v1-v10.md",
       "priority": 8,
       "source_sha256": "392456167de9038f26c0436b9421f784997ab9f4685f450f3ce8519e9c57336c",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "> **問題A1（未解決）**：同一ゲート商、同一測度、同一の全 `A_m` を持ち、**両方とも倍加的**だが弱(1,1)-PI の成否が異なる二つの高さゲージが存在するか。存在しないなら、どの追加条件でPIが決まるのか。",
+      "id": "deefb4e9a2b3872689a3",
+      "line": 13,
+      "path": "docs/research/2026-11-23-laakso-observation-a.md",
+      "priority": 9,
+      "source_sha256": "e2b6c1a9b111afd1c1ad7ccb863e3a30aa048df9d4895a85449fb97755b51a94",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "> **問題A2（未解決）**：一般のゲージ `Φ` について、PIを判定するのに十分な *位置付き* 有限観測のうち、どこまで情報量を減らせるか。",
+      "id": "dbdb39aafbc25d6bf968",
+      "line": 15,
+      "path": "docs/research/2026-11-23-laakso-observation-a.md",
+      "priority": 9,
+      "source_sha256": "e2b6c1a9b111afd1c1ad7ccb863e3a30aa048df9d4895a85449fb97755b51a94",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "Leanでの3次元rank分類は未形式化。",
+      "id": "dcaa81e8f0533d774a07",
+      "line": 120,
+      "path": "docs/research/2026-11-23-projection-sign-holonomy.md",
+      "priority": 8,
+      "source_sha256": "f49015fbe4e2f62256de98489edfd4c1f2e98cb143b142e868b17e3160dd30ec",
+      "status": "UNVERIFIED_LEAD"
+    },
+    {
+      "evidence": "- **Lean未形式化**：3次元ユークリッド直交射影と黄金比座標の直接等式、",
+      "id": "8537df06e4437b655cb2",
+      "line": 128,
+      "path": "docs/research/2026-11-23-projection-sign-holonomy.md",
+      "priority": 8,
+      "source_sha256": "f49015fbe4e2f62256de98489edfd4c1f2e98cb143b142e868b17e3160dd30ec",
       "status": "UNVERIFIED_LEAD"
     }
   ],
