@@ -19,7 +19,8 @@ and seed. A no-candidate result is preserved rather than invented progress.
 This is a stronger finite experiment, not a new expressive primitive:
 everything still expands to the reviewed eight-step maximum typed program.
 The score does not establish usefulness or novelty outside the finite domains.
-Shadow operators are not promoted to the live Generic Forge ledger.
+The shadow experiment itself never writes the live Generic Forge ledger. The
+separate production acceptance route described below can promote one result.
 
 The separate daily GitHub schedule reads both live data branches, preserves
 exact input snapshots and source SHA in its artifact, and runs the same
@@ -29,6 +30,29 @@ rather than requiring a writable state branch. No API inference, generated
 source execution, state writes or main writes are introduced. All bounds are
 fixed, with a 20-minute job limit.
 
-Next acceptance gate: inspect actual outside-pair and shadow-reentry results.
-Only then design a backward-compatible promotion contract with persistent
-cross-ledger ancestry.
+## Production reentry (reviewed promotion)
+
+Generic Forge now alternates a cross-forge opportunity (odd number of saved
+receipts) with ordinary composition. If no rule-derived behavior outside the
+bounded pair frontier exists, the ordinary generator is used. The daily
+shadow report remains separate and read-only.
+
+A promoted record uses the existing Generic ID and hash chain plus an
+`origin` field containing the certified rule ID and chain hash. Its left
+parent is a verified Generic macro, and its right token names the certified
+Meta rule. An embedded, validated Meta ledger snapshot allows historical
+replay even without the live Meta branch. Every previously recorded receipt
+is byte-for-byte unchanged; ordinary composition can use a promoted macro
+exactly like any other macro. The snapshot must be an append-only extension
+of accepted ancestry, and both rewrite interpreters and both environment
+interpreters must agree. Duplicate finite behavior remains disallowed.
+
+The existing read-only proposal and separate write-enabled persistence jobs
+regenerate the exact candidate from both current state branches, compare
+the full plan, and independently audit before appending one JSON receipt.
+If either upstream state changes in between, the stale plan fails closed.
+No new permission, unbounded retries, generated executable code, or main
+write path is introduced. The old 96-receipt cap, one per half-hour slot,
+typed program length and execution limits remain in force. A new production
+receipt is not a theorem about usefulness, generalization, or expressive
+power.

@@ -315,17 +315,25 @@ def choose(history):
 
 
 def validate_state(state):
-    require(type(state) is dict and set(state) == STATE_KEYS and
+    require(type(state) is dict and set(state) in (STATE_KEYS, STATE_KEYS | {"meta_snapshot"}) and
             type(state["schema_version"]) is int and
             state["schema_version"] == SCHEMA, "invalid state schema")
     rows = state["receipts"]
     require(type(rows) is list and len(rows) <= MAX_RECORDS,
             "receipt limit reached or wrong type")
+    # Old receipts retain their exact schema, IDs and hashes. A promoted
+    # receipt additionally requires a fully validated, append-only rule snapshot.
+    meta_rules = {}
+    if "meta_snapshot" in state:
+        from tools.autonomy import meta_forge as mf
+        snapshot = mf.validate_state(state["meta_snapshot"])
+        meta_rules = {row["id"]: row for row in snapshot["rules"]}
+        require(meta_rules, "empty embedded meta snapshot")
     previous, prev_date = ZERO, None
     accepted = []
     fingerprints = set()
     for row in rows:
-        require(type(row) is dict and set(row) == RECEIPT_KEYS,
+        require(type(row) is dict and set(row) in (RECEIPT_KEYS, RECEIPT_KEYS | {"origin"}),
                 "malformed accepted operator")
         check_day(row["day"])
         require(prev_date is None or prev_date < row["day"],
@@ -338,10 +346,29 @@ def validate_state(state):
         require(row["status"] == STATUS and row["evaluator"] == EVALUATOR,
                 "unverified receipt or evaluator drift")
         available = token_lookup(domain, accepted, all_parents=True)
-        require(row["left"] in available and row["right"] in available,
-                "operator relies on unverified parent")
-        require(row["program"] == available[row["left"]] + available[row["right"]],
-                "operator program does not match declared composition")
+        if "origin" not in row:
+            require(row["left"] in available and row["right"] in available,
+                    "operator relies on unverified parent")
+            require(row["program"] == available[row["left"]] + available[row["right"]],
+                    "operator program does not match declared composition")
+        else:
+            from tools.autonomy import meta_forge as mf
+            origin = row["origin"]
+            require(type(origin) is dict and set(origin) == {"kind", "rule_id", "rule_chain_sha256"}
+                    and origin["kind"] == "verified_meta_rule_v1",
+                    "unknown promotion origin")
+            rid = origin["rule_id"]
+            require(type(rid) is str and rid in meta_rules, "unknown certified meta rule")
+            rule = meta_rules[rid]
+            require(row["right"] == "r:" + rid and type(row["left"]) is str
+                    and row["left"].startswith("m:") and row["left"] in available,
+                    "invalid cross-forge parent")
+            require(rule["chain_sha256"] == origin["rule_chain_sha256"]
+                    and rule["day"] <= row["day"], "meta-rule ancestry mismatch")
+            seed = available[row["left"]]
+            require(row["program"] == mf.rewrite_reference(domain, rule["steps"], seed)
+                    == mf.rewrite_independent(domain, rule["steps"], seed),
+                    "promoted operator does not match independently replayed rewrite")
         require(row["id"] == make_id(domain, row["left"], row["right"],
                                      row["program"]) and
                 IDENT.fullmatch(row["id"]),
@@ -367,6 +394,8 @@ def validate_state(state):
                 "invalid hash-linked evidence history")
         previous = row["chain_sha256"]
         accepted.append(row)
+    require(("meta_snapshot" in state) == any("origin" in row for row in rows),
+            "meta snapshot must accompany a promoted receipt")
     require(state["last_utc_day"] == prev_date,
             "last successful UTC day differs from history")
     return state
@@ -428,7 +457,7 @@ def receipt(state_path, head, evidence_dir, output):
                             if state["receipts"] else ZERO),
     }
     record["chain_sha256"] = digest(record)
-    updated = {"schema_version": SCHEMA, "last_utc_day": expected["day"],
+    updated = {**state, "last_utc_day": expected["day"],
                "receipts": state["receipts"] + [record]}
     validate_state(updated)
     save(output, updated)
