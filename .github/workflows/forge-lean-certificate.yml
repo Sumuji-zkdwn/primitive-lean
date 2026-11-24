@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/forge-lean-certificate.yml'
       - 'tools/autonomy/forge_lean_certificate.py'
+      - 'tools/autonomy/forge_lean_feedback.py'
       - 'tools/autonomy/semantic_forge.py'
       - 'tools/autonomy/generic_forge.py'
       - 'linear_input/lean_check/OperatorWordObservations.inc'
@@ -15,6 +16,7 @@ on:
     paths:
       - '.github/workflows/forge-lean-certificate.yml'
       - 'tools/autonomy/forge_lean_certificate.py'
+      - 'tools/autonomy/forge_lean_feedback.py'
   schedule:
     - cron: '31 14 * * *'
   workflow_dispatch:
@@ -68,8 +70,8 @@ jobs:
         run: |
           set -euo pipefail
           out=verification/forge-lean
-          python -B -m tools.autonomy.forge_lean_certificate --state "$out/state.json" --output "$out"
-          python -B -m tools.autonomy.forge_lean_certificate --state "$out/state.json" --output "$RUNNER_TEMP/forge-replay"
+          python -B -m tools.autonomy.forge_lean_feedback prepare --state "$out/state.json" --output "$out"
+          python -B -m tools.autonomy.forge_lean_feedback prepare --state "$out/state.json" --output "$RUNNER_TEMP/forge-replay"
           cmp "$out/Certificate.lean" "$RUNNER_TEMP/forge-replay/Certificate.lean"
           cmp "$out/mapping.json" "$RUNNER_TEMP/forge-replay/mapping.json"
           python - <<'PY'
@@ -90,6 +92,24 @@ jobs:
               else:
                   raise AssertionError("tampered receipt was accepted")
           PY
+      - name: Ensure candidate search refuses unverified theorem inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from tools.autonomy.forge_lean_feedback import search
+          base = Path("verification/forge-lean")
+          with TemporaryDirectory() as t:
+              try:
+                  search(base / "state.json", base, Path(t))
+              except ValueError as e:
+                  assert "proof-first gate" in str(e)
+                  print("PASS pending proof rejected")
+              else:
+                  raise AssertionError("pending proof passed")
+          PY
       - name: Install repository-pinned Lean and mathlib
         uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
         with:
@@ -108,6 +128,24 @@ jobs:
       - name: Audit every new theorem and seal verification report
         shell: bash
         run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean
+      - name: Run invariant-guided search only after kernel and axiom verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_feedback search --state "$out/state.json" --base "$out" --output "$out/discovery"
+          python -B -m tools.autonomy.forge_lean_feedback search --state "$out/state.json" --base "$out" --output "$RUNNER_TEMP/forge-search-replay"
+          cmp "$out/discovery/Certificate.lean" "$RUNNER_TEMP/forge-search-replay/Certificate.lean"
+          cmp "$out/discovery/mapping.json" "$RUNNER_TEMP/forge-search-replay/mapping.json"
+      - name: Kernel verify selected candidate against arbitrary enlarged words
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/discovery/Certificate.lean 2>&1 | tee ../verification/forge-lean/discovery/lean.log
+      - name: Seal discovered operator only after final theorem audit
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/discovery
       - name: Preserve source, snapshot, mapping and kernel audit
         if: always()
         uses: actions/upload-artifact@v6
