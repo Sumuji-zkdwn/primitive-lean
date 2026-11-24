@@ -1,0 +1,194 @@
+name: Forge Lean Certificate - semantic ledger into word theory
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-lean-certificate.yml'
+      - 'tools/autonomy/forge_lean_certificate.py'
+      - 'tools/autonomy/forge_lean_feedback.py'
+      - 'tools/autonomy/forge_lean_reentry.py'
+      - 'tools/autonomy/semantic_forge.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'linear_input/lean_check/OperatorWordObservations.inc'
+      - 'tests/fixtures/semantic_bridge_semantic.json'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-lean-certificate.yml'
+      - 'tools/autonomy/forge_lean_certificate.py'
+      - 'tools/autonomy/forge_lean_feedback.py'
+      - 'tools/autonomy/forge_lean_reentry.py'
+  schedule:
+    - cron: '31 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-lean-certificate-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: false
+
+jobs:
+  certificate:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Read live semantic ledger on trusted main, as data only
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: ledger
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Pin exact inputs; PR uses retained actual certified receipt
+        shell: bash
+        env:
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+        run: |
+          set -euo pipefail
+          mkdir -p verification/forge-lean
+          git rev-parse HEAD > verification/forge-lean/control-sha.txt
+          if [ "$IS_PR" = true ]; then
+            cp tests/fixtures/semantic_bridge_semantic.json verification/forge-lean/state.json
+            echo "pinned repository fixture" > verification/forge-lean/ledger-source.txt
+          else
+            git -C ledger rev-parse HEAD > verification/forge-lean/ledger-source.txt
+            test -f ledger/docs/autonomy/semantic-capability-state.json
+            test ! -L ledger/docs/autonomy/semantic-capability-state.json
+            cp ledger/docs/autonomy/semantic-capability-state.json verification/forge-lean/state.json
+          fi
+      - name: Independently replay every receipt and generate numeral-only tables
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_feedback prepare --state "$out/state.json" --output "$out"
+          python -B -m tools.autonomy.forge_lean_feedback prepare --state "$out/state.json" --output "$RUNNER_TEMP/forge-replay"
+          cmp "$out/Certificate.lean" "$RUNNER_TEMP/forge-replay/Certificate.lean"
+          cmp "$out/mapping.json" "$RUNNER_TEMP/forge-replay/mapping.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.autonomy import semantic_forge as sf
+          from tools.autonomy.forge_lean_certificate import generate
+          from tempfile import TemporaryDirectory
+          state = json.loads(Path("verification/forge-lean/state.json").read_text())
+          state["receipts"][0]["observation"]["constant_counterexample"]["output"] = 0
+          with TemporaryDirectory() as t:
+              p = Path(t) / "tampered.json"
+              p.write_text(json.dumps(state))
+              try:
+                  generate(p, Path(t) / "out")
+              except ValueError:
+                  print("PASS tampered receipt rejected")
+              else:
+                  raise AssertionError("tampered receipt was accepted")
+          PY
+      - name: Ensure candidate search refuses unverified theorem inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from tools.autonomy.forge_lean_feedback import search
+          base = Path("verification/forge-lean")
+          with TemporaryDirectory() as t:
+              try:
+                  search(base / "state.json", base, Path(t))
+              except ValueError as e:
+                  assert "proof-first gate" in str(e)
+                  print("PASS pending proof rejected")
+              else:
+                  raise AssertionError("pending proof passed")
+          PY
+      - name: Install repository-pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel verify existing word theory and generated certificate
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/Certificate.lean 2>&1 | tee ../verification/forge-lean/lean.log
+      - name: Audit every new theorem and seal verification report
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean
+      - name: Run invariant-guided search only after kernel and axiom verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_feedback search --state "$out/state.json" --base "$out" --output "$out/discovery"
+          python -B -m tools.autonomy.forge_lean_feedback search --state "$out/state.json" --base "$out" --output "$RUNNER_TEMP/forge-search-replay"
+          cmp "$out/discovery/Certificate.lean" "$RUNNER_TEMP/forge-search-replay/Certificate.lean"
+          cmp "$out/discovery/mapping.json" "$RUNNER_TEMP/forge-search-replay/mapping.json"
+      - name: Kernel verify selected candidate against arbitrary enlarged words
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/discovery/Certificate.lean 2>&1 | tee ../verification/forge-lean/discovery/lean.log
+      - name: Seal discovered operator only after final theorem audit
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/discovery
+      - name: Promote prior certified discovery into a new proof alphabet
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_reentry prepare --state "$out/state.json" --base "$out/discovery" --output "$out/promoted"
+          python -B -m tools.autonomy.forge_lean_reentry prepare --state "$out/state.json" --base "$out/discovery" --output "$RUNNER_TEMP/forge-promoted-replay"
+          cmp "$out/promoted/Certificate.lean" "$RUNNER_TEMP/forge-promoted-replay/Certificate.lean"
+          cmp "$out/promoted/mapping.json" "$RUNNER_TEMP/forge-promoted-replay/mapping.json"
+      - name: Kernel prove invariant of expanded alphabet
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/promoted/Certificate.lean 2>&1 | tee ../verification/forge-lean/promoted/lean.log
+      - name: Audit expanded alphabet proof before reversible search
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/promoted
+      - name: Search for a reversible strict extension of the promoted alphabet
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-lean
+          python -B -m tools.autonomy.forge_lean_reentry search --state "$out/state.json" --base "$out/promoted" --output "$out/reversible"
+          python -B -m tools.autonomy.forge_lean_reentry search --state "$out/state.json" --base "$out/promoted" --output "$RUNNER_TEMP/forge-reversible-replay"
+          cmp "$out/reversible/Certificate.lean" "$RUNNER_TEMP/forge-reversible-replay/Certificate.lean"
+          cmp "$out/reversible/mapping.json" "$RUNNER_TEMP/forge-reversible-replay/mapping.json"
+      - name: Kernel verify reversible discovery and its nonexpressibility
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean --trust=0 ../verification/forge-lean/reversible/Certificate.lean 2>&1 | tee ../verification/forge-lean/reversible/lean.log
+      - name: Audit final expanded-word nonexpressibility theorems
+        shell: bash
+        run: python -B -m tools.autonomy.forge_lean_certificate --audit --output verification/forge-lean/reversible
+      - name: Preserve source, snapshot, mapping and kernel audit
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-lean-certificate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: verification/forge-lean/
+          if-no-files-found: warn
+          retention-days: 30
