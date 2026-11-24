@@ -6,7 +6,12 @@ on:
     paths:
       - '.github/workflows/generic-forge.yml'
       - 'tools/autonomy/generic_forge.py'
+      - 'tools/autonomy/forge_promotion.py'
+      - 'tools/autonomy/forge_bridge.py'
+      - 'tools/autonomy/meta_forge.py'
       - 'tests/test_generic_forge.py'
+      - 'tests/test_forge_promotion.py'
+      - 'tests/fixtures/forge_bridge_*.json'
       - 'tests/fixtures/generic_forge_empty.json'
       - 'docs/autonomy/GENERIC_FORGE.md'
   push:
@@ -14,6 +19,9 @@ on:
     paths:
       - '.github/workflows/generic-forge.yml'
       - 'tools/autonomy/generic_forge.py'
+      - 'tools/autonomy/forge_promotion.py'
+      - 'tools/autonomy/forge_bridge.py'
+      - 'tools/autonomy/meta_forge.py'
   schedule:
     # Unattended half-hourly UTC cadence; GitHub may delay/skip scheduled runs.
     - cron: '7,37 * * * *'
@@ -45,7 +53,8 @@ jobs:
       - name: Run full-domain two-implementation tests and macro reentry
         run: |
           set -euo pipefail
-          python -m compileall -q tools/autonomy/generic_forge.py tests/test_generic_forge.py
+          python -m compileall -q tools/autonomy/generic_forge.py tools/autonomy/forge_promotion.py tests/test_generic_forge.py tests/test_forge_promotion.py
+          python -m unittest discover -s tests -p 'test_forge_promotion.py' -v
           python -m unittest discover -s tests -p 'test_generic_forge.py' -v
       - name: Produce the first isolated operator candidate
         run: |
@@ -117,6 +126,12 @@ jobs:
           ref: autonomy/generic-forge-state
           path: state
           persist-credentials: false
+      - name: Read certified Meta Forge rule history as data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/meta-forge-state
+          path: meta-state
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
@@ -138,8 +153,9 @@ jobs:
           print(now.strftime("%Y-%m-%dT%H:") + f"{now.minute // 30 * 30:02d}Z")
           PY
           )"
-          python -B -m tools.autonomy.generic_forge prepare \
+          python -B -m tools.autonomy.forge_promotion prepare \
             --state ../state/docs/autonomy/generic-forge-state.json \
+            --meta-state ../meta-state/docs/autonomy/meta-forge-state.json \
             --day "$slot" \
             --head "$GITHUB_SHA" \
             --output ../cycle
@@ -177,6 +193,12 @@ jobs:
           ref: autonomy/generic-forge-state
           path: state
           persist-credentials: true
+      - name: Read certified Meta Forge rule history as data
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/meta-forge-state
+          path: meta-state
+          persist-credentials: false
       - name: Restore unprivileged proposal
         uses: actions/download-artifact@v4
         with:
@@ -197,8 +219,9 @@ jobs:
               print(json.load(f)["day"])
           PY
           )"
-          python -B -m tools.autonomy.generic_forge prepare \
+          python -B -m tools.autonomy.forge_promotion prepare \
             --state ../state/docs/autonomy/generic-forge-state.json \
+            --meta-state ../meta-state/docs/autonomy/meta-forge-state.json \
             --day "$slot" --head "$GITHUB_SHA" \
             --output ../replay
           cmp ../cycle/plan.json ../replay/plan.json
@@ -207,8 +230,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -B -m tools.autonomy.generic_forge receipt \
+          python -B -m tools.autonomy.forge_promotion receipt \
             --state ../state/docs/autonomy/generic-forge-state.json \
+            --meta-state ../meta-state/docs/autonomy/meta-forge-state.json \
             --head "$GITHUB_SHA" --evidence ../replay \
             --output ../state/docs/autonomy/generic-forge-state.json
       - name: Commit only verified JSON operator data

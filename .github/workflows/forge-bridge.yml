@@ -1,0 +1,87 @@
+name: Forge Bridge - cross-forge finite discovery
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/forge-bridge.yml'
+      - 'tools/autonomy/forge_bridge.py'
+      - 'tools/autonomy/generic_forge.py'
+      - 'tools/autonomy/meta_forge.py'
+      - 'tests/test_forge_bridge.py'
+      - 'tests/fixtures/forge_bridge_*.json'
+  schedule:
+    - cron: '43 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forge-bridge-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout reviewed controller or unprivileged PR
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          path: control
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Regress bounded cross-forge composition and fail-closed validation
+        working-directory: control
+        run: python -m unittest discover -s tests -p 'test_forge_bridge.py' -v
+      - name: Checkout actual Generic ledger as data
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/generic-forge-state
+          path: generic-state
+          persist-credentials: false
+      - name: Checkout actual Meta ledger as data
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/checkout@v5
+        with:
+          ref: autonomy/meta-forge-state
+          path: meta-state
+          persist-credentials: false
+      - name: Prepare and independently replay the bounded experiment
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+        working-directory: control
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == pull_request ]]; then
+            generic=tests/fixtures/forge_bridge_generic.json
+            meta=tests/fixtures/forge_bridge_meta.json
+          else
+            generic=../generic-state/docs/autonomy/generic-forge-state.json
+            meta=../meta-state/docs/autonomy/meta-forge-state.json
+          fi
+          mkdir -p ../bridge-evidence
+          # Snapshot the precise inputs used by both processes, not executable state code.
+          cp "$generic" ../bridge-evidence/generic.json
+          cp "$meta" ../bridge-evidence/meta.json
+          head="$(git rev-parse HEAD)"
+          for command in prepare verify; do
+            python -B -m tools.autonomy.forge_bridge "$command" \
+              --generic ../bridge-evidence/generic.json \
+              --meta ../bridge-evidence/meta.json \
+              --head "$head" --report ../bridge-evidence/report.json
+          done
+      - name: Retain exact finite evidence and source snapshots
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: forge-bridge-${{ github.run_id }}-${{ github.run_attempt }}
+          path: bridge-evidence/
+          if-no-files-found: warn
+          retention-days: 30

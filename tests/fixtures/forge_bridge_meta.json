@@ -1,0 +1,216 @@
+{
+  "last_utc_day": "2026-11-24T03:00Z",
+  "rules": [
+    {
+      "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "d6c86e04a9127e40d5705f9d5642a0c69e1d010d5c5d2b28336bc00b09903bb0",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "d6c86e04a9127e40d5705f9d5642a0c69e1d010d5c5d2b28336bc00b09903bb0",
+      "head_sha": "6eb8ab433af174d4ad32d58a923f96f80b77b3e8",
+      "id": "mf_44eb42af533956b2",
+      "parent": null,
+      "previous_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "score": 103,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "chain_sha256": "95eed1174e9429ebed1e849fa35b5ea2987d0309602548b1afc55a303250b226",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "23725c5d164360dc0951ea9eb1142820d8cec710682f00f8fded72bfca07c5de",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23T08:00Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "23725c5d164360dc0951ea9eb1142820d8cec710682f00f8fded72bfca07c5de",
+      "head_sha": "c8155d4687c34fd8a0c9c0cd0e3dccdef15d2058",
+      "id": "mf_d6475da43efb10b6",
+      "parent": "mf_44eb42af533956b2",
+      "previous_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
+      "score": 119,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "prepend",
+          "slot": 1
+        }
+      ]
+    },
+    {
+      "chain_sha256": "2321bfa09cb29ec495fc576846c1213d22dc97d00ddbdd5f36b8310ef5176503",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "68c25a9f3fbc7a212ccb6217a00a5f3fca158e4a3d1e275b7414dd8a0b3ee981",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23T11:30Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "68c25a9f3fbc7a212ccb6217a00a5f3fca158e4a3d1e275b7414dd8a0b3ee981",
+      "head_sha": "847ac5d42e5320b865a8297af37e06847212927b",
+      "id": "mf_4b7acdbf9d3a7c24",
+      "parent": "mf_44eb42af533956b2",
+      "previous_sha256": "95eed1174e9429ebed1e849fa35b5ea2987d0309602548b1afc55a303250b226",
+      "score": 119,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "replace_head",
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "chain_sha256": "1c12439a819c02c78e1692341f056c9d7617974ac5f27dc861faa8491fa227bd",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "21f89eb8a800f357df332fa961c64fe21108ee5293ecf983d8fde12db3b74de9",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23T11:40Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "21f89eb8a800f357df332fa961c64fe21108ee5293ecf983d8fde12db3b74de9",
+      "head_sha": "b49006211d337d049b17cc22c3271aa1d8ce45d1",
+      "id": "mf_77e504baf3582f3e",
+      "parent": "mf_44eb42af533956b2",
+      "previous_sha256": "2321bfa09cb29ec495fc576846c1213d22dc97d00ddbdd5f36b8310ef5176503",
+      "score": 119,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "reverse"
+        }
+      ]
+    },
+    {
+      "chain_sha256": "e43c330785fc97491ee3cb4e8aaae6dbca68127337cf7ffee4b921c881eab6a3",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "c4915a645cade477b1746233bf7e290beca81fe0cb86dff07339904394e29bde",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23T11:50Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "c4915a645cade477b1746233bf7e290beca81fe0cb86dff07339904394e29bde",
+      "head_sha": "b49006211d337d049b17cc22c3271aa1d8ce45d1",
+      "id": "mf_44c33c95eb6c5ee8",
+      "parent": "mf_44eb42af533956b2",
+      "previous_sha256": "1c12439a819c02c78e1692341f056c9d7617974ac5f27dc861faa8491fa227bd",
+      "score": 119,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "rotate_left"
+        }
+      ]
+    },
+    {
+      "chain_sha256": "7f07b06914db1c99299046d7466daa2438afbd37ad81fd84dd51c53be480643a",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "be42fb1724b540173da834950a7c2cc1464553c9d67758a1337e4194a464b20d",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-23T16:30Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "be42fb1724b540173da834950a7c2cc1464553c9d67758a1337e4194a464b20d",
+      "head_sha": "8c81b1fc359a8ed90599a7ee3ca2a6ee81377700",
+      "id": "mf_e1fe1a1d3ee8e127",
+      "parent": "mf_d6475da43efb10b6",
+      "previous_sha256": "e43c330785fc97491ee3cb4e8aaae6dbca68127337cf7ffee4b921c881eab6a3",
+      "score": 117,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "prepend",
+          "slot": 1
+        },
+        {
+          "op": "duplicate_head"
+        }
+      ]
+    },
+    {
+      "chain_sha256": "1d7788d6c48f76bcb4f504ada635bb7bbc7d6b7e0b7714d10aeb4c4e07e1292a",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "9ef27c73ec4030a9e5e47e3ebef34830832ecb2d73a5f1dc99fe98c4461a4933",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-24T03:00Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "9ef27c73ec4030a9e5e47e3ebef34830832ecb2d73a5f1dc99fe98c4461a4933",
+      "head_sha": "eb4ca4f1c3ab646fa66013759535e7b1024733b8",
+      "id": "mf_96a4345957f6684b",
+      "parent": "mf_d6475da43efb10b6",
+      "previous_sha256": "7f07b06914db1c99299046d7466daa2438afbd37ad81fd84dd51c53be480643a",
+      "score": 117,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "append",
+          "slot": 0
+        },
+        {
+          "op": "prepend",
+          "slot": 1
+        },
+        {
+          "op": "duplicate_tail"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1
+}
