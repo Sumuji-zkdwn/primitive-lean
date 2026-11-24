@@ -3084,6 +3084,585 @@
         "勾配が非ゼロという条件をここでは別途仮定する必要がない。"
       ]
     },
+    "LinearInputConstraints.exists_three_multipliers_of_kernel": {
+      "title": "三つの制約の共通核で消える汎関数は乗数で表せる",
+      "assumptions": "実ベクトル空間 V、線形汎関数 f,c₁,c₂,c₃。全 v について c₁(v)=c₂(v)=c₃(v)=0 なら f(v)=0。",
+      "summary": "ある λ,μ,p が存在し、全 v で f(v)+λc₁(v)+μc₂(v)+pc₃(v)=0。制約の独立性は仮定しない。",
+      "steps": [
+        "C(v)=(c₁(v),c₂(v),c₃(v)) と置くと f は ker C の上で消える。",
+        "双対写像の像と核の零化空間の一致から、線形汎関数 g:ℝ³→ℝ で f=g∘C と書ける。",
+        "標準基底 e₁,e₂,e₃ によって g(x,y,z)=g(e₁)x+g(e₂)y+g(e₃)z と展開する。",
+        "λ=−g(e₁)、μ=−g(e₂)、p=−g(e₃) を選べば目的の等式が成立する。"
+      ]
+    },
+    "LinearInputAreaVariation.hasDerivAt_parameter_integral": {
+      "title": "共同連続な微分を有限区間積分の中に入れる",
+      "assumptions": "G(t,s),D(t,s) は ℝ² 上で連続。各点で t による G の微分係数は D(t,s)。ℓ,t₀ は任意。",
+      "summary": "I(t)=∫₀^ℓ G(t,s)ds の t₀ での微分係数は ∫₀^ℓ D(t₀,s)ds。",
+      "steps": [
+        "[t₀−1,t₀+1] と 0,ℓ の間の閉区間の直積はコンパクト。D の連続性により、その上で |D| を一様定数で抑えられる。",
+        "固定 t の G,D は連続なので有限区間で可測・積分可能。",
+        "近傍での支配付き微分定理を適用する。向き付き区間積分なので ℓ の符号を制限しない。"
+      ]
+    },
+    "LinearInputAreaVariation.continuous_primitive_parameter": {
+      "title": "パラメータと積分上端の両方を動かしたときの連続性",
+      "assumptions": "G(t,s) は二変数について共同連続。",
+      "summary": "(t,r)↦∫₀ʳ G(t,s)ds は連続。",
+      "steps": [
+        "新しいパラメータを (t,r) とし、被積分関数 ((t,r),s)↦G(t,s) は座標射影との合成なので連続。",
+        "上端を返す写像 (t,r)↦r も連続。",
+        "連続な被積分関数と連続な積分端点に対するパラメータ積分の連続性定理を適用する。"
+      ]
+    },
+    "LinearInputAreaVariation.hasDerivAt_xCoord_variation": {
+      "title": "再構成された水平座標の変分微分",
+      "assumptions": "θ,η は連続、t,s は任意。θₜ=θ+tη、Xₜ(s)=∫₀ˢ cos θₜ(q)dq。",
+      "summary": "∂ₜXₜ(s)=∫₀ˢ −sin(θ(q)+tη(q))η(q)dq。",
+      "steps": [
+        "q を固定し、cos(θ(q)+tη(q)) を t で微分する。連鎖律から −sin(θ+tη)η。",
+        "この被積分関数とその微分は (t,q) について連続。",
+        "積分記号下のパラメータ微分定理を上端 s に適用する。"
+      ]
+    },
+    "LinearInputAreaVariation.hasDerivAt_yCoord_variation": {
+      "title": "再構成された垂直座標の変分微分",
+      "assumptions": "θ,η は連続、t,s は任意。Yₜ(s)=∫₀ˢ sin(θ+tη)dq。",
+      "summary": "∂ₜYₜ(s)=∫₀ˢ cos(θ(q)+tη(q))η(q)dq。",
+      "steps": [
+        "q を固定した sin の合成微分は cos(θ+tη)η。",
+        "元の被積分関数と微分が共同連続なので、パラメータ微分を積分の中に入れられる。",
+        "垂直座標の定義を代入すれば目的の式になる。"
+      ]
+    },
+    "LinearInputAreaVariation.continuous_moment": {
+      "title": "面積変分に現れる接線方向の位置成分は連続",
+      "assumptions": "θ は連続。X,Y は原点からの再構成座標。",
+      "summary": "w(s)=X(s)cosθ(s)+Y(s)sinθ(s) は連続。",
+      "steps": [
+        "座標再構成の微分定理より X′=cosθ、Y′=sinθ が存在するので X,Y は連続。",
+        "cosθ,sinθ も連続なので、その積 Xcosθ,Ysinθ と和 w は連続。",
+        "w は位置ベクトルを単位接線方向に射影した成分である。"
+      ]
+    },
+    "LinearInputAreaVariation.hasDerivAt_area_variation_raw": {
+      "title": "符号付き面積を変分パラメータで直接微分する",
+      "assumptions": "θ,η は連続、ℓ は任意。X,Y は原点からの座標、A(θ)=1/2∫₀^ℓ(Xsinθ−Ycosθ)ds。",
+      "summary": "U(s)=∫₀ˢ −sinθ·η、V(s)=∫₀ˢ cosθ·η とすると A′(0)=1/2∫[U sinθ+Xcosθ·η−V cosθ+Ysinθ·η]ds。",
+      "steps": [
+        "変分 θₜ=θ+tη の水平・垂直座標を微分し、t=0 でそれぞれ U,V を得る。",
+        "面積の被積分関数 Xₜsinθₜ−Yₜcosθₜ に積と連鎖の微分法を使う。",
+        "座標・その変分微分はパラメータと上端について共同連続。積分下の微分を適用できる。",
+        "t=0 で θ₀=θ として四つの項を得る。この段階では端点の寄与を消していない。"
+      ]
+    },
+    "LinearInputAreaVariation.area_variation_integral_eq": {
+      "title": "面積第一変分を部分積分して端点項を取り出す",
+      "assumptions": "θ,η は連続。X′=cosθ、Y′=sinθ、U′=−sinθ·η、V′=cosθ·η。全ての座標と変分座標は s=0 で0。",
+      "summary": "A′ の生の積分式は ∫wη+(Y(ℓ)U(ℓ)−X(ℓ)V(ℓ))/2 と等しい。w=Xcosθ+Ysinθ。",
+      "steps": [
+        "生の式の U sinθ と −V cosθ をそれぞれ UY′ と −VX′ と見なす。",
+        "部分積分により ∫UY′=U(ℓ)Y(ℓ)−∫U′Y、−∫VX′=−V(ℓ)X(ℓ)+∫V′X。始端項は0。",
+        "U′,V′ の値を入れると内部の積分項は元の Xcosθ·η+Ysinθ·η と合わせて 2∫wη になる。",
+        "全体に1/2を掛ければ、内部項と終端補正が明示される。"
+      ]
+    },
+    "LinearInputAreaVariation.hasDerivAt_area_variation": {
+      "title": "符号付き面積の第一変分公式",
+      "assumptions": "θ,η は連続、ℓ は任意。A は原点基準の符号付き面積積分。",
+      "summary": "A′(0)=∫₀^ℓ wη−[X(ℓ)∫cosθ·η+Y(ℓ)∫sinθ·η]/2。",
+      "steps": [
+        "面積を直接微分した四項の積分公式は実際の微分係数を与える。",
+        "部分積分による同値な式でその微分係数を書き換える。",
+        "端点位置が固定されない変分では終端補正を一般には省略できない。"
+      ]
+    },
+    "LinearInputAreaVariation.hasDerivAt_area_variation_feasible": {
+      "title": "一次の端点制約が成立すると面積の終端項が消える",
+      "assumptions": "ℓ≥0、θ,η は連続。∫₀^ℓ −sinθ·η=0、∫₀^ℓ cosθ·η=0。",
+      "summary": "A′(0)=∫₀^ℓ (Xcosθ+Ysinθ)η。",
+      "steps": [
+        "水平の一次制約により ∫sinθ·η=0、垂直の一次制約により ∫cosθ·η=0。",
+        "面積の一般第一変分公式へ両条件を代入すると、終端位置 X(ℓ),Y(ℓ) を含む補正が両方とも消える。",
+        "内部積分だけが残る。厳密な端点保存経路の存在はここでは主張しない。"
+      ]
+    },
+    "LinearInputPressureCurvature.pressure_firstIntegral_hasDerivAt": {
+      "title": "圧力付き角度方程式から第一積分候補の微分が消える",
+      "assumptions": "θ は C³、κ=θ′、X′=cosθ、Y′=sinθ。点 s で (kκ)′=p(Xcosθ+Ysinθ)−λsinθ+μcosθ。",
+      "summary": "H=kκ²/2−(λ−pY)cosθ−(μ+pX)sinθ の s での微分係数は0。",
+      "steps": [
+        "Fₓ=λ−pY、Fᵧ=μ+pX と置く。角度方程式は kκ′=−Fₓsinθ+Fᵧcosθ と書ける。",
+        "H を微分すると kκκ′+κ(Fₓsinθ−Fᵧcosθ)−Fₓ′cosθ−Fᵧ′sinθ。",
+        "Fₓ′=−p sinθ、Fᵧ′=p cosθ なので最後の二項は相殺。",
+        "残りも角度方程式を代入すると0。"
+      ]
+    },
+    "LinearInputPressureCurvature.pressure_angleForce_hasDerivAt": {
+      "title": "圧力付きの角度力の微分は定数圧力と接線方向力に分かれる",
+      "assumptions": "θ は C³、p,λ,μ は定数、κ=θ′。Fₓ=λ−pY、Fᵧ=μ+pX。",
+      "summary": "Q=p(Xcosθ+Ysinθ)−λsinθ+μcosθ の微分係数は p−κ(Fₓcosθ+Fᵧsinθ)。",
+      "steps": [
+        "Q=−Fₓsinθ+Fᵧcosθ と書き換える。",
+        "積の微分で −Fₓ′sinθ+Fᵧ′cosθ−κ(Fₓcosθ+Fᵧsinθ)。",
+        "Fₓ′=−p sinθ、Fᵧ′=p cosθ と sin²θ+cos²θ=1 により最初の二項は p になる。"
+      ]
+    },
+    "LinearInputPressureCurvature.pressure_angle_firstIntegral_curvature": {
+      "title": "圧力付き角度方程式から第一積分と強制曲率方程式を得る",
+      "assumptions": "θ は C³。開区間 (0,ℓ) で (kκ)′=p(Xcosθ+Ysinθ)−λsinθ+μcosθ。k,p,λ,μ は定数。",
+      "summary": "ある σ について全内点で kκ²/2−Fₓcosθ−Fᵧsinθ=σ かつ kκ″+kκ³/2−σκ=p。",
+      "steps": [
+        "第一積分候補の微分が0になる先行定理を全内点に使う。連結区間上でその候補は一定なので σ を得る。",
+        "角度方程式の右辺は M′=(kκ)′ と内点の近傍で一致するので、その微分から kκ″=p−κ(Fₓcosθ+Fᵧsinθ)。",
+        "第一積分より Fₓcosθ+Fᵧsinθ=kκ²/2−σ。代入して移項すれば強制方程式。",
+        "ここでは k で割る必要がなく、第一積分と方程式には同じ σ が使われる。"
+      ]
+    },
+    "LinearInputPressureCurvature.pressure_angle_curvature": {
+      "title": "圧力を強制項とする曲率方程式だけを取り出す",
+      "assumptions": "θ は C³、全内点で圧力付き角度方程式が微分係数として成立。",
+      "summary": "ある σ が存在し、全内点で kκ″+kκ³/2−σκ=p。",
+      "steps": [
+        "第一積分と強制曲率方程式の同時成立定理で σ を選ぶ。",
+        "各点における連言の第二成分を取り出せば曲率方程式になる。σ は全点で共通。"
+      ]
+    },
+    "LinearInputPressureCurvature.pressure_angle_phase_energy": {
+      "title": "圧力付き角度方程式は強制入力を持つ位相エネルギーを与える",
+      "assumptions": "k＞0、θ は C³、全内点で圧力付き角度方程式。κ=θ′、x=κ、y=κ′+√2κ。",
+      "summary": "ある σ,c で E(1/2,−σ/k,p/k,x,y)=c、x′=gᵧ、y′=−gₓ が全内点で成立。",
+      "steps": [
+        "角度方程式から kκ″+kκ³/2−σκ=p を満たす σ を得る。",
+        "k≠0 なので p=k(p/k) と書き、強制曲率方程式の入力を u=p/k と同定する。",
+        "κ は C² だから強制付き位相エネルギー保存定理と位相速度定理を適用できる。",
+        "同じ σ と保存値 c で結論が成立する。パラメータは弧長である。"
+      ]
+    },
+    "LinearInputPressureCurvature.pressure_angle_eq_phase_energy": {
+      "title": "導関数の等式としての圧力角度方程式から位相系を得る",
+      "assumptions": "k＞0、θ は C³、各内点で deriv(kθ′)=p(Xcosθ+Ysinθ)−λsinθ+μcosθ。",
+      "summary": "ある σ,c で入力 p/k の四次位相エネルギーの保存と x′=gᵧ,y′=−gₓ が成立する。",
+      "steps": [
+        "θ が C³ なので kθ′ は微分可能。与えられた deriv の値は実際の微分係数でもある。",
+        "この等式を HasDerivAt の形に置き換え、圧力付き角度方程式から位相系を得る先行定理を適用する。"
+      ]
+    },
+    "LinearInputPressureStationary.contDiff_xCoord": {
+      "title": "連続な接線角から水平座標の C¹ 性を得る",
+      "assumptions": "θ は連続。X(s)=∫₀ˢ cosθ(q)dq。",
+      "summary": "X は C¹。",
+      "steps": [
+        "微積分の基本定理から全 s で X′(s)=cosθ(s) が存在する。",
+        "右辺は連続関数の合成なので連続。",
+        "全点で微分可能かつ導関数が連続という C¹ の特徴付けを使う。"
+      ]
+    },
+    "LinearInputPressureStationary.contDiff_yCoord": {
+      "title": "連続な接線角から垂直座標の C¹ 性を得る",
+      "assumptions": "θ は連続。Y(s)=∫₀ˢ sinθ(q)dq。",
+      "summary": "Y は C¹。",
+      "steps": [
+        "全 s で Y′(s)=sinθ(s) が存在する。",
+        "sin と θ の合成は連続なので導関数が連続。",
+        "従って Y は C¹。"
+      ]
+    },
+    "LinearInputPressureStationary.contDiff_area_weight": {
+      "title": "面積変分の位置・接線の内積は C¹",
+      "assumptions": "θ は C¹、X,Y は再構成座標。",
+      "summary": "w=Xcosθ+Ysinθ は C¹。",
+      "steps": [
+        "θ の連続性から X,Y は C¹。θ の C¹ 性から cosθ,sinθ も C¹。",
+        "C¹ 関数の積と和は C¹ なので w の二項を作り加える。"
+      ]
+    },
+    "LinearInputPressureStationary.weighted_angleEquation_of_stationary": {
+      "title": "外部の重み項を含む停留条件から角度方程式を導く",
+      "assumptions": "ℓ＞0、θ,w は C¹、M は C²。全固定端点変分 η で水平・垂直一次制約が0なら ∫Mη′+p∫wη=0。",
+      "summary": "ある λ,μ で全内点に M′=pw−λsinθ+μcosθ。",
+      "steps": [
+        "f(η)=∫Mη′+p∫wη を線形汎関数と見なす。f は二つの端点制約の共通核で消える。",
+        "二制約の乗数定理により、全 η で ∫Mη′+∫(pw−λsinθ+μcosθ)η=0 となる λ,μ を得る。",
+        "部分積分と残差消滅定理を q=pw−λsinθ+μcosθ に適用する。q は C¹ なので残差を用いたテスト関数が許される。"
+      ]
+    },
+    "LinearInputPressureStationary.hasDerivAt_pressureEnergy_variation_feasible": {
+      "title": "圧力エネルギーの第一変分を計算する",
+      "assumptions": "ℓ≥0、θ は C¹、η は固定端点 C¹ 変分で、水平・垂直の一次変位は0。圧力エネルギー P=∫kκ²/2+pA。",
+      "summary": "P′(0)=∫₀^ℓ kθ′η′+p∫₀^ℓ wη。",
+      "steps": [
+        "二次密度 kκ²/2 の微分は kκ。エネルギー第一変分公式から曲げ項の微分は ∫kθ′η′。",
+        "端点一次制約が0なので面積の終端補正が消え、A′(0)=∫wη。",
+        "p は定数なので面積微分に掛け、二つの微分を加える。"
+      ]
+    },
+    "LinearInputPressureStationary.stationary_iff_firstVariation": {
+      "title": "圧力付き停留性を第一変分の積分条件に翻訳する",
+      "assumptions": "ℓ≥0、θ は C¹。固定端点角の C¹ 変分を用いる。",
+      "summary": "Stationary(k,p,θ,ℓ) ↔ 二つの端点一次変位が0となる全 η で ∫kθ′η′+p∫wη=0。",
+      "steps": [
+        "Stationary の定義は、実際の水平・垂直変位のパラメータ導関数が0なら圧力エネルギーの導関数も0という条件。",
+        "水平・垂直変位の第一変分公式を代入すると二つの積分制約を得る。",
+        "制約を満たす方向に圧力エネルギーの第一変分公式を使えば目的の積分条件。逆方向も同じ等式による置換で得られる。"
+      ]
+    },
+    "LinearInputPressureStationary.stationary_angleEquation": {
+      "title": "圧力エネルギーの停留性から角度方程式を得る",
+      "assumptions": "ℓ＞0、θ は C³、曲げエネルギー＋p 倍の面積についての Stationary を仮定。",
+      "summary": "ある λ,μ で (kθ′)′=p(Xcosθ+Ysinθ)−λsinθ+μcosθ が全内点で成立する。",
+      "steps": [
+        "停留性の第一変分表示を使う。M=kθ′ は C²、面積重み w は C¹。",
+        "重み付き停留条件から角度方程式を得る定理に M,w を代入する。",
+        "圧力項 pw は実際の面積微分から来ているので、別の仮定として角度方程式を置いていない。"
+      ]
+    },
+    "LinearInputPressureStationary.stationary_curvature": {
+      "title": "圧力エネルギーの停留曲線は強制曲率方程式を満たす",
+      "assumptions": "ℓ＞0、θ は C³、Stationary(k,p,θ,ℓ)。",
+      "summary": "ある σ に対し kθ‴+k(θ′)³/2−σθ′=p が全内点で成立。",
+      "steps": [
+        "圧力付き停留条件から力の乗数 λ,μ と角度方程式を導く。",
+        "C³ 性により kθ′ の微分係数が存在するので、角度方程式を HasDerivAt の形で使える。",
+        "角度方程式から曲率方程式を導く定理を適用し、κ=θ′ とする。"
+      ]
+    },
+    "LinearInputPressureStationary.stationary_phase_energy": {
+      "title": "圧力エネルギーの停留性から位相系とエネルギー保存を得る",
+      "assumptions": "ℓ,k＞0、θ は C³、Stationary(k,p,θ,ℓ)。",
+      "summary": "ある σ,c で入力 u=p/k、x=θ′、y=θ″+√2θ′ の位相系 x′=gᵧ,y′=−gₓ と E=c が内点で成立。",
+      "steps": [
+        "停留性から圧力付き角度方程式を導く先行定理を使う。",
+        "C³ の角度について、その導関数等式を位相エネルギーと速度へ移す定理を適用する。",
+        "σ と c が同じ全区間で成立する。曲線の存在自体は停留性の前提に含まれている。"
+      ]
+    },
+    "LinearInputPressureStationary.areaStationary_exists_pressure": {
+      "title": "面積制約下の停留性から圧力乗数の存在を導く",
+      "assumptions": "ℓ≥0、θ は C¹、AreaStationary(k,θ,ℓ)。すなわち端点と面積の一次制約を満たす変分で曲げ第一変分が0。",
+      "summary": "ある p が存在して Stationary(k,p,θ,ℓ) が成立する。",
+      "steps": [
+        "固定端点角の変分空間で f(η)=∫kθ′η′、c₁=∫−sinθ·η、c₂=∫cosθ·η、c₃=∫wη を定義する。",
+        "c₁=c₂=0 なら面積の実際の一次微分は c₃。AreaStationary より三つが0なら f=0。",
+        "三制約の線形乗数定理で全 η に f+λc₁+μc₂+pc₃=0 となる係数を得る。",
+        "c₁=c₂=0 の方向に限ると f+pc₃=0。圧力付き停留性の積分表示から Stationary を得る。独立性は不要で、一意性はまだ示さない。"
+      ]
+    },
+    "LinearInputPressureStationary.areaStationary_phase_energy": {
+      "title": "面積制約付き停留曲線の圧力と保存位相エネルギー",
+      "assumptions": "ℓ,k＞0、θ は C³、AreaStationary(k,θ,ℓ)。",
+      "summary": "ある p,σ,c が存在し、入力 p/k の強制位相系とその保存エネルギーが内点全体で成立する。",
+      "steps": [
+        "面積付き停留性から圧力乗数 p が存在する定理を使う。",
+        "この p の圧力エネルギー停留性を、保存位相エネルギーの定理へ渡す。",
+        "得られた σ,c と p を同じ曲線の結論としてまとめる。"
+      ]
+    },
+    "LinearInputAreaRegularity.constraint_coefficients_zero": {
+      "title": "非一定曲率では端点と面積の三つの微分が独立",
+      "assumptions": "ℓ＞0、θ は C³、κ=θ′ は (0,ℓ) で一定でない。全固定端点変分に aCₓ+bCᵧ+cCₐ=0、Cₐ(η)=∫wη。",
+      "summary": "a=b=c=0。",
+      "steps": [
+        "c=0 の場合、非一定曲率ならどこかで κ≠0。既存の二端点制約の独立性から a=b=0。",
+        "c≠0 と仮定し A=cX+b、B=cY−a、q=Acosθ+Bsinθ、F=−A sinθ+B cosθ と置く。仮定は全 η で ∫qη=0。",
+        "η(s)=s(ℓ−s)q(s) を選べるので重み付き二乗の消滅定理から内点で q=0。",
+        "微分すると q′=c+κF、F′=−κq。従って c+κF=0、F′=0。F は連結区間上で定数 d。c≠0 から d≠0、よって κ=−c/d が一定となり矛盾する。"
+      ]
+    },
+    "LinearInputAreaRegularity.exists_normalized_constraint_directions": {
+      "title": "三制約を独立に補正する変分方向を選べる",
+      "assumptions": "ℓ＞0、θ は C³、曲率は開区間で一定でない。C=(Cₓ,Cᵧ,Cₐ) は固定端点変分から ℝ³ への線形写像。",
+      "summary": "Cξ₁=e₁、Cξ₂=e₂、Cξ₃=e₃ となる三方向が存在する。",
+      "steps": [
+        "C の像を消す線形汎関数 g を取る。標準基底で g の係数を a,b,c とすると全 η に aCₓη+bCᵧη+cCₐη=0。",
+        "三制約の独立性定理から a=b=c=0、従って g=0。",
+        "像の双対零化空間が0であるため像は ℝ³ 全体。C は全射である。",
+        "各標準基底の逆像を選ぶと、正規化された三つの補正方向を得る。"
+      ]
+    },
+    "LinearInputAreaRegularity.pressure_coefficient_unique": {
+      "title": "非一定曲率の固定曲線では圧力係数が一意",
+      "assumptions": "ℓ＞0、θ は C³、曲率は内点で一定でない。同じ k,θ に p₁,p₂ がそれぞれ圧力付き停留性を与える。",
+      "summary": "p₁=p₂。",
+      "steps": [
+        "正規化補正方向 ξ₃ を選び Cₓξ₃=Cᵧξ₃=0、Cₐξ₃=1 とする。",
+        "両方の圧力付き停留性の積分表示を ξ₃ に適用すると、同じ曲げ第一変分 f(ξ₃) に対し f(ξ₃)+p₁=0、f(ξ₃)+p₂=0。",
+        "二式の差から p₁=p₂。存在や非ゼロ性はこの定理単独では主張しない。"
+      ]
+    },
+    "LinearInputAreaRegularity.areaStationary_of_constant_curvature": {
+      "title": "一定曲率の曲線は面積制約についても停留する",
+      "assumptions": "ℓ＞0、θ は C³、全内点で θ′=K。k,K は実数。",
+      "summary": "AreaStationary(k,θ,ℓ) が成立する。",
+      "steps": [
+        "任意の固定端点角の C¹ 変分 η に対し曲げ第一変分は ∫kθ′η′。",
+        "内点で θ′=K なので kKη の微分が被積分関数に一致する。微積分の基本定理で積分は kK(η(ℓ)−η(0))。",
+        "η の両端値は0だから積分は0。端点位置や面積の一次制約を使わずとも停留する。一定曲率では三制約の正則性を仮定する必要がない。"
+      ]
+    },
+    "LinearInputAreaParameters.continuous_parameter_intervalIntegral": {
+      "title": "ベクトル値の固定区間パラメータ積分の連続性",
+      "assumptions": "値域 E は実ノルム線形空間、G(p,s) は共同連続、ℓ は任意。",
+      "summary": "p↦∫₀^ℓ G(p,s)ds は連続。",
+      "steps": [
+        "積分の始端0と終端ℓは固定。",
+        "共同連続な被積分関数についての向き付き区間積分のパラメータ連続性定理を適用する。ℓ≥0 は不要。"
+      ]
+    },
+    "LinearInputAreaParameters.continuous_parameter_primitive": {
+      "title": "ベクトル値の原始積分はパラメータと上端について連続",
+      "assumptions": "値域 E は実ノルム線形空間、G(p,s) は共同連続。",
+      "summary": "(p,r)↦∫₀ʳ G(p,s)ds は連続。",
+      "steps": [
+        "拡張パラメータ (p,r) の第一座標を取り出して G(p,s) を構成する。射影と G の合成は連続。",
+        "上端 r を返す第二座標射影も連続。",
+        "可変端点を含む区間積分の共同連続性定理を使う。"
+      ]
+    },
+    "LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral_any": {
+      "title": "向き付き区間でベクトル値積分をフレシェ微分する",
+      "assumptions": "値域 E は完備な実ノルム空間。有限次元 Parameters 上で G,D が共同連続、D(p,s) は固定 s で G(·,s) のフレシェ微分。ℓ は任意。",
+      "summary": "I(p)=∫₀^ℓ G(p,s)ds の p₀ での微分は線形作用素 ∫₀^ℓ D(p₀,s)ds。",
+      "steps": [
+        "p₀ の半径1の閉球と 0,ℓ の間の閉区間の直積はコンパクト。D の作用素ノルムはそこで一様有界。",
+        "固定 p での連続性により G,D は必要な可測性と区間積分可能性を満たす。",
+        "開球内の点ごとの微分を積分可能な定数で支配し、積分下のフレシェ微分定理を適用する。区間の向きは定理が処理する。"
+      ]
+    },
+    "LinearInputAreaParameters.hasFDerivAt_parameter_intervalIntegral": {
+      "title": "非負の長さの場合のフレシェ微分公式",
+      "assumptions": "ℓ≥0、E は完備な実ノルム空間、G,D は共同連続で D は G のパラメータ微分。",
+      "summary": "∫₀^ℓ G のフレシェ微分は ∫₀^ℓ D。",
+      "steps": [
+        "任意の向き付き区間について既に微分公式が成り立つ。",
+        "その定理をこの G,D,p₀,ℓ に適用する。ℓ≥0 はこの版の仮定だが証明には使わない。"
+      ]
+    },
+    "LinearInputAreaParameters.contDiff_two_parameter_intervalIntegral": {
+      "title": "連続な二階パラメータ微分を持つ積分は C²",
+      "assumptions": "ℓ≥0、E は完備な実ノルム空間。G,D,D₂ は共同連続、D は G の、D₂ は D のパラメータ微分。",
+      "summary": "I(p)=∫₀^ℓ G(p,s)ds は C²。",
+      "steps": [
+        "フレシェ微分の積分公式を G に適用して DI(p)=∫D(p,s)ds。",
+        "同じ公式を D に適用すると D(DI)(p)=∫D₂(p,s)ds。",
+        "最後の積分は共同連続性から p について連続。二度微分可能で二階微分が連続という条件から C² を得る。"
+      ]
+    },
+    "LinearInputAreaParameters.hasFDerivAt_integral_linear_parameters": {
+      "title": "線形パラメータを通して密度積分を微分する",
+      "assumptions": "ℓ≥0、ρ は C¹、κ は連続、s↦B(s) は連続線形作用素値の連続関数。",
+      "summary": "I(p)=∫ρ(κ+Bp) のフレシェ微分は DI(p)[h]=∫ρ′(κ+Bp)B(s)h。作用素として DI(p)=∫ρ′(κ+Bp)·B。",
+      "steps": [
+        "固定 s では p↦κ(s)+B(s)p のフレシェ微分は B(s)。",
+        "ρ の連鎖律から点ごとの微分作用素は ρ′(κ+Bp)·B(s)。",
+        "κ,B と ρ,ρ′ の連続性で被積分関数・微分は共同連続。積分のフレシェ微分公式を適用する。"
+      ]
+    },
+    "LinearInputAreaParameters.contDiff_two_integral_linear_parameters": {
+      "title": "線形パラメータによる密度積分は C²",
+      "assumptions": "ℓ≥0、ρ は C²、κ と作用素値 B は連続。",
+      "summary": "p↦∫ρ(κ+Bp) は C²。",
+      "steps": [
+        "第一微分候補は D(p,s)[h]=ρ′(κ+Bp)B(s)h。",
+        "ρ′ を微分して第二微分候補 D₂(p,s)[h,j]=ρ″(κ+Bp)(B(s)h)(B(s)j) を得る。",
+        "連続線形作用素のスカラー倍と双線形積は連続なので G,D,D₂ は共同連続。",
+        "パラメータ積分の C² 定理を適用する。"
+      ]
+    },
+    "LinearInputAreaParameters.continuous_smulRight_parameter": {
+      "title": "スカラー値線形作用素とベクトルを組み合わせる操作は連続",
+      "assumptions": "A(q) は Parameters から ℝ への連続線形作用素値、B(q) は実ノルム空間 F のベクトル値。両者とも連続。",
+      "summary": "q↦(h↦A(q)(h)B(q)) は連続線形作用素値の連続関数。",
+      "steps": [
+        "smulRight は線形作用素 A とベクトル B を受けて h↦A(h)B を作る有界双線形写像。",
+        "有界双線形写像は共同連続。q↦(A(q),B(q)) も連続なので合成が連続になる。"
+      ]
+    },
+    "LinearInputAreaParameters.contDiff_two_integral_mul": {
+      "title": "二階微分できる二つの関数の積を積分しても C²",
+      "assumptions": "ℓ≥0。A,B とそれぞれの実際のパラメータ一階微分 D,E、二階微分 D₂,E₂ が共同連続。",
+      "summary": "p↦∫₀^ℓ A(p,s)B(p,s)ds は C²。",
+      "steps": [
+        "固定 s の積 AB の第一微分は A E+B D。",
+        "方向 h,j での第二微分は A E₂[h,j]+D[h]E[j]+B D₂[h,j]+E[h]D[j]。",
+        "仮定と作用素の双線形積の連続性から、積と両微分は共同連続。",
+        "パラメータ積分の C² 定理を用いて結論を得る。"
+      ]
+    },
+    "LinearInputAreaParameters.contDiff_two_integral_primitive_mul": {
+      "title": "一方が原始積分である積の外側積分も C²",
+      "assumptions": "ℓ≥0、ρ,τ は C²、θ と線形作用素値 B は連続。",
+      "summary": "p↦∫₀^ℓ(∫₀ˢ ρ(θ(q)+B(q)p)dq)·τ(θ(s)+B(s)p)ds は C²。",
+      "steps": [
+        "R(p,s)=ρ(θ+Bp)、T(p,s)=τ(θ+Bp) と定義する。点ごとの一次・二次微分を連鎖律で構成し、共同連続性を得る。",
+        "内側積分 U(p,s)=∫₀ˢ R(p,q)dq は共同連続。そのパラメータ微分と二階微分は R の各微分を同じ区間で積分したもの。",
+        "可変端点積分の連続性定理から U とその両微分も共同連続。",
+        "U と T に積の外側積分の C² 定理を適用する。"
+      ]
+    },
+    "LinearInputAreaParameters.parameterLinear_apply": {
+      "title": "四つの変分係数から作る線形写像の明示式",
+      "assumptions": "η,ξ₁,ξ₂,ξ₃ は実数値関数、s は固定。p=(t,a,b,c)。",
+      "summary": "parameterLinear η ξ₁ ξ₂ ξ₃ s p=tη(s)+aξ₁(s)+bξ₂(s)+cξ₃(s)。",
+      "steps": [
+        "parameterLinear の定義を展開すると、各座標射影に対応する空間関数を掛けた和になっている。",
+        "実数の積の順序を係数が先になるように整理すると表示式。p に関して線形であることが分かる。"
+      ]
+    },
+    "LinearInputAreaParameters.continuous_parameterLinear": {
+      "title": "四方向の変分写像は空間変数について連続",
+      "assumptions": "η,ξ₁,ξ₂,ξ₃ は連続。",
+      "summary": "s↦parameterLinear η ξ₁ ξ₂ ξ₃ s は連続線形作用素値の連続関数。",
+      "steps": [
+        "四つのパラメータ射影は固定した連続線形作用素。",
+        "それぞれを連続なスカラー関数 η(s),ξᵢ(s) でスカラー倍すると作用素値の連続関数になる。",
+        "四項の和も連続。"
+      ]
+    },
+    "LinearInputAreaParameters.contDiff_area_linear_parameters": {
+      "title": "線形パラメータで変分した符号付き面積は C²",
+      "assumptions": "ℓ≥0、θ と作用素値 B(s) は連続。θₚ(s)=θ(s)+B(s)p。",
+      "summary": "p↦area(θₚ,ℓ) は C²。",
+      "steps": [
+        "面積を A(p)=1/2[∫₀^ℓ(∫₀ˢ cosθₚ)dq·sinθₚ(s)ds−∫₀^ℓ(∫₀ˢ sinθₚ)dq·cosθₚ(s)ds] と書く。内側積分は q について行う。",
+        "ρ=cos,τ=sin と、その逆の二つの場合に、原始積分と点ごとの積の C² 定理を適用する。",
+        "sin,cos は C² で、両積分が C²。差と定数倍で実際の面積も C² となる。"
+      ]
+    },
+    "LinearInputAreaParameters.contDiff_areaParameters": {
+      "title": "四係数の面積写像は C²",
+      "assumptions": "ℓ≥0、θ,η,ξ₁,ξ₂,ξ₃ は連続。",
+      "summary": "areaParameters(θ,η,ξ₁,ξ₂,ξ₃,ℓ) は C²。",
+      "steps": [
+        "四係数の作用素 B(s)=parameterLinear η ξ₁ ξ₂ ξ₃ s は連続という定理を使う。",
+        "線形パラメータで変分した面積の C² 定理へ B を代入する。定義上、対象の areaParameters と一致する。"
+      ]
+    },
+    "LinearInputAreaFamily.corrected_family_C1_close": {
+      "title": "三補正方向を加えた曲線族は C¹ 近傍に留まる",
+      "assumptions": "θ は C¹、η,ξ₁,ξ₂,ξ₃ は固定端点 C¹ 変分。a,b,c は0で連続かつ値0。任意の r＞0。",
+      "summary": "θₜ=θ+tη+aξ₁+bξ₂+cξ₃ の値と空間微分は [0,ℓ] の全点で、十分小さな t に対し θ,θ′ からそれぞれ r 未満の差になる。",
+      "steps": [
+        "四方向とその導関数の絶対値の和は連続。閉区間のコンパクト性から各絶対値を一様定数 C で抑える。",
+        "θₜ−θ は四方向の線形結合なので絶対値は C(|t|+|a(t)|+|b(t)|+|c(t)|) 以下。空間微分差も同じ評価。",
+        "全係数が t→0 で0へ収束するため、この共通上界は0へ収束し、任意の r＞0 に対して同時に小さくなる。"
+      ]
+    },
+    "LinearInputAreaFamily.hasDerivAt_corrected_energy_feasible": {
+      "title": "三方向補正経路に沿った実際の曲げエネルギーの第一変分",
+      "assumptions": "ℓ≥0、θ は C¹、η,ξ₁,ξ₂,ξ₃ は固定端点 C¹ 変分。補正係数 a,b,c は0で値0かつ微分係数0。",
+      "summary": "θₜ=θ+tη+aξ₁+bξ₂+cξ₃ に沿う二次曲げエネルギー E′(0)=∫₀^ℓ kθ′η′。",
+      "steps": [
+        "空間微分すると θₜ′=θ′+tη′+aξ₁′+bξ₂′+cξ₃′。",
+        "B(s) をこの四方向の導関数から作る作用素とし、F(p)=∫k(θ′+Bp)²/2 のフレシェ微分を原点で求める。",
+        "p(t)=(t,a(t),b(t),c(t)) は原点で値0、微分係数 (1,0,0,0)。連鎖律で DF(0) をこのベクトルに適用すると B(s)p′(0)=η′。",
+        "従って ∫kθ′η′。補正の一次微分は消えるが、二次変分についてはこの定理は何も述べない。"
+      ]
+    },
+    "LinearInputAreaExactVariation.contDiff_constraintParameters": {
+      "title": "三つの制約を組にした四パラメータ写像は C²",
+      "assumptions": "ℓ≥0、θ,η,ξ₁,ξ₂,ξ₃ は連続。Θₚ=θ+parameterLinear(s,p)。",
+      "summary": "端点変位と補正済み面積の写像 f(p)=(Xₚ(ℓ),Yₚ(ℓ),A(Θₚ)−Y₀(ℓ)Xₚ(ℓ)/2+X₀(ℓ)Yₚ(ℓ)/2) は C²。",
+      "steps": [
+        "水平・垂直変位は cos,sin の線形パラメータ積分なのでそれぞれ C²。",
+        "実際の面積写像も四係数で C²。",
+        "基準曲線の終端座標を固定係数として面積に二つの変位の線形結合を加えても C²。三成分を組にする。"
+      ]
+    },
+    "LinearInputAreaExactVariation.fderiv_constraintParameters_zero": {
+      "title": "補正済み面積制約写像の原点微分を三つの積分で表す",
+      "assumptions": "ℓ≥0、θ と四つの変分方向は連続。p は任意の係数ベクトル、ζ(s)=parameterLinear(s,p)。",
+      "summary": "Df(0)[p]=(∫−sinθ·ζ,∫cosθ·ζ,∫wζ)。f の第三成分は終端補正を含む面積。",
+      "steps": [
+        "直線的な係数経路 t↦tp を取ると角度変分は θ+tζ。水平・垂直の第一変分は Cₓζ,Cᵧζ。",
+        "面積第一変分は ∫wζ+[Y₀Cₓζ−X₀Cᵧζ]/2。f の第三成分 A−Y₀X/2+X₀Y/2 の微分を取ると、追加項が終端補正を相殺する。",
+        "f は C² なので、この直線経路の微分はフレシェ微分 Df(0) を p に作用させた値に等しい。",
+        "微分係数の一意性から三成分の式が得られる。"
+      ]
+    },
+    "LinearInputAreaExactVariation.integral_parameterLinear": {
+      "title": "重み付き四係数変分の積分を線形結合へ展開する",
+      "assumptions": "η,ξ₁,ξ₂,ξ₃,w は連続、p=(t,a,b,c)、ℓ は任意。",
+      "summary": "∫w·parameterLinear(s,p)=t∫wη+a∫wξ₁+b∫wξ₂+c∫wξ₃。",
+      "steps": [
+        "線形写像の明示式を被積分関数に代入し、w を四項に分配する。",
+        "各積は連続で区間積分可能。積分の加法性で四つに分ける。",
+        "s に依存しない係数 t,a,b,c を積分の外に出す。"
+      ]
+    },
+    "LinearInputAreaExactVariation.exists_implicit_correction": {
+      "title": "陰関数定理で三つの補正係数を構成する",
+      "assumptions": "f:ℝ×ℝ³→ℝ³ は C²。原点で第一変数方向の微分が0、補正変数に関する微分が恒等写像。",
+      "summary": "局所 C² の g:ℝ→ℝ³ が存在し、g(0)=0、g′(0)=0、原点近傍で f(t,g(t))=f(0,0)。",
+      "steps": [
+        "補正方向の微分が恒等写像なので可逆。陰関数定理を適用して局所 C² の解 g を構成する。",
+        "定理は原点を通ることと方程式 f(t,g(t))=f(0,0) を保証する。",
+        "陰関数の微分公式 g′(0)=−(D補正 f)⁻¹Dₜf に単位行列と零写像を入れると0。"
+      ]
+    },
+    "LinearInputAreaExactVariation.exists_exact_area_variation": {
+      "title": "一次の端点・面積制約を厳密に保存する変分経路を構成する",
+      "assumptions": "ℓ＞0、θ は C³、曲率は非一定。η は固定端点 C¹ 変分で Cₓη=Cᵧη=Cₐη=0。",
+      "summary": "三つの固定端点補正方向 ξᵢ と0で C² の a,b,c が存在する。補正値・一階微分は0で、θₜ=θ+tη+aξ₁+bξ₂+cξ₃ は原点近傍で水平変位、垂直変位、実際の符号付き面積を厳密に保存。",
+      "steps": [
+        "非一定曲率の三制約独立性により Cξᵢ=eᵢ となる三方向を得る。",
+        "四パラメータ制約写像 f は C²。原点の微分を積分の線形性で評価すると、η の列は0、補正の三列は単位行列。",
+        "陰関数定理により g(t)=(a,b,c) を構成し、値と一次微分が0かつ f(t,g(t))=f(0,0)。",
+        "最初の二成分は端点変位の厳密な保存。第三成分は補正済み面積の保存であり、二つの変位が既に等しいので補正項を消して実際の面積の保存を得る。固定端点角も変分方向の定義から保存される。"
+      ]
+    },
+    "LinearInputAreaMinimum.locallyMinimizing_isLocalMin_corrected_family": {
+      "title": "面積制約付き局所最小性を補正経路上の一変数局所最小性へ移す",
+      "assumptions": "θ は C¹ で面積・端点制約下の曲げエネルギーの局所最小。四つの変分方向は固定端点、a,b,c は0で連続かつ値0。経路は近傍で両端点変位と面積を厳密に保存。",
+      "summary": "補正された曲線族の曲げエネルギーは t=0 で局所最小。",
+      "steps": [
+        "元の C¹ 局所最小性の定義からある比較半径 r＞0 を取る。",
+        "補正経路の C¹ 近さの定理により十分小さい t で比較半径内に入る。角度は C¹、端点角は固定される。",
+        "残りの両端点変位・面積制約も仮定により厳密に保たれるため、局所最小性を経路上の各曲線に適用できる。",
+        "t=0 では元の θ に一致する。従って一変数関数の局所最小条件が成立。"
+      ]
+    },
+    "LinearInputAreaMinimum.locallyMinimizing_areaStationary": {
+      "title": "実際の面積制約付き局所最小性から一次停留性を導く",
+      "assumptions": "ℓ＞0、θ は C³、面積・端点を厳密に固定する曲げエネルギーの C¹ 局所最小性。",
+      "summary": "AreaStationary(k,θ,ℓ) が成立する。曲率の非一定性を追加仮定しない。",
+      "steps": [
+        "曲率が一定かどうかで場合分けする。一定曲率の場合はすべての固定端点変分で曲げ第一変分が0になる定理を使う。",
+        "非一定の場合、一次の三制約を満たす任意の η に対し、端点・面積を厳密に保存する補正経路を構成する。",
+        "元の局所最小性はその経路上の一変数局所最小性を与える。補正係数の一次微分が0なので経路のエネルギー微分は ∫kθ′η′。",
+        "微分可能な局所最小点で導関数は0。元の加法変分の第一変分も同じ積分なので、一次制約を満たす全 η で停留する。"
+      ]
+    },
+    "LinearInputAreaMinimum.locallyMinimizing_existsUnique_pressure": {
+      "title": "非一定曲率の面積制約付き局所最小曲線では圧力が一意に存在する",
+      "assumptions": "ℓ＞0、θ は C³、曲率は内点で非一定。面積制約付き曲げエネルギーの局所最小性。",
+      "summary": "ちょうど一つの p が Stationary(k,p,θ,ℓ) を満たす。",
+      "steps": [
+        "厳密な面積制約付き局所最小性から AreaStationary を得る。",
+        "三制約の乗数定理による圧力の存在を適用し、一つの p を選ぶ。",
+        "非一定曲率での圧力一意性定理を使い、他の q が停留性を与えたなら q=p と分かる。p が非ゼロとは限らない。"
+      ]
+    },
+    "LinearInputAreaMinimum.locallyMinimizing_curvature": {
+      "title": "面積制約付き局所最小曲線は圧力で強制された曲率方程式を満たす",
+      "assumptions": "ℓ＞0、θ は C³、面積・端点を厳密に保存する局所最小性。",
+      "summary": "ある p,σ が存在し全内点で kθ‴+k(θ′)³/2−σθ′=p。",
+      "steps": [
+        "実際の局所最小性から AreaStationary を導く先行定理を使う。",
+        "面積制約の乗数として圧力 p を選び、圧力エネルギーの停留性を得る。",
+        "圧力付き停留性から曲率方程式を導く定理を適用し、σ を得る。p や角度方程式を前提に置いていない。"
+      ]
+    },
+    "LinearInputAreaMinimum.locallyMinimizing_phase_energy": {
+      "title": "面積制約付き局所最小性から保存位相系までを接続する",
+      "assumptions": "ℓ,k＞0、θ は C³、面積・端点を固定した曲げエネルギーの局所最小性。",
+      "summary": "ある p,σ,c が存在し、全内点で x=θ′、y=θ″+√2θ′ に対し E(1/2,−σ/k,p/k,x,y)=c、x′=gᵧ、y′=−gₓ。",
+      "steps": [
+        "実際の局所最小性から、一定曲率と非一定曲率の両方を処理する AreaStationary の導出定理を適用する。",
+        "面積停留性から圧力と保存位相エネルギーを得る定理へ渡す。",
+        "その定理は p,σ,c と実際の座標微分を同時に与える。弧長方向の位相系であり、物理時間の軌道の存在や安定性を主張するものではない。"
+      ]
+    },
     "LinearInputGlobalConsequences.exists_global_convergent_solution": {
       "title": "条件付きで大域解と指数的エネルギー収束を同時に得る",
       "assumptions": "λ>0、γ>0、target が指定の閾値を超え、初期エネルギーがtarget以上。横向き係数bはC¹。",
