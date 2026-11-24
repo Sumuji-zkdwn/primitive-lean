@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-23",
+  "last_utc_day": "2026-11-24",
   "receipts": [
     {
       "chain_sha256": "418aea158b7fd9bfaff075e9955cf4debe27b771d474c3f7b8fd29e6ed6f383b",
@@ -77,6 +77,95 @@
       "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
       "upstream_head": "372efce43c6160360a48296eb9c3a1bb3d38e956b9648d5bcb03408e2d49ff57",
       "word": null
+    },
+    {
+      "chain_sha256": "652398d5375e6ab0a45e0e2cb4cddfff8aa9ec17b2e3f1af68aa8f65ba598e38",
+      "day": "2026-11-24",
+      "head_sha": "323aff1d058833b51a7388b74fbb32fc250fac89",
+      "id": "po_10bd669eb10276ab4d1c",
+      "lean_sha256": "5ac8b99ed21cdf9bae7b9c376b578aead074368fcdfbe85704530107c04dedb8",
+      "model": {
+        "name": "fd_eea2c08c15d8a23b",
+        "observations": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            2,
+            3
+          ],
+          [
+            2,
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      "objective": "DISTINGUISHABILITY_CHANGED",
+      "outcome": "DISTINGUISHABLE",
+      "parameters": {
+        "dest": 2,
+        "state": 0
+      },
+      "parent": "v2:adcfaddec6966487b1536a1e677d443e965c77a2f8a77d6f2c58b4d84a3f59de",
+      "previous_sha256": "418aea158b7fd9bfaff075e9955cf4debe27b771d474c3f7b8fd29e6ed6f383b",
+      "request_sha256": "9de89c4ce2c6f3290cdbfb7fb52e0daaaf11129b773c83ed94dd62e03922c861",
+      "root_kind": "EQUIVALENT",
+      "root_lean_sha256": "5fd5749d85a4e297ac63906146fe1393bb55151ae4f9bf5c89a1cd16403dd5bb",
+      "root_model": {
+        "name": "fd_84f17d1eb0b2bbac",
+        "observations": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            2,
+            3
+          ]
+        ]
+      },
+      "root_request_sha256": "035bba4b3493fd5e3317c3c2182a28f05b0a0b2e35df44478df669714c29f670",
+      "root_word": null,
+      "rule": "add_single_probe",
+      "score": 37,
+      "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
+      "upstream_head": "adcfaddec6966487b1536a1e677d443e965c77a2f8a77d6f2c58b4d84a3f59de",
+      "word": [
+        2
+      ]
     }
   ],
   "schema_version": 1
