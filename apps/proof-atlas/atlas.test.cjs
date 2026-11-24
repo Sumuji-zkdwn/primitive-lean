@@ -8,12 +8,12 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
 const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
 const model=A.createModel(graph,proofs,narratives);
 
-test("all 465 true theorem nodes, 629 direct references, 60 source files and 150 Japanese explanations",()=>{
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 205 Japanese explanations",()=>{
  assert.equal(model.nodes.length,465);
  assert.equal(model.proofs.length,465);
  assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
  assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
- assert.equal(Object.keys(model.argumentsById).length,150);
+ assert.equal(Object.keys(model.argumentsById).length,205);
  assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
  assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
  assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
@@ -135,6 +135,13 @@ test("completed explanation chapters cover all geometry, reconstruction, scaling
 
 test("variational calculus and exact constrained variation chapters are fully annotated",()=>{
  for(const [a,b] of [[17,36],[50,60],[115,120],[170,177],[200,204]])for(let id=a;id<=b;id++){
+  const n=model.nodes[id],e=model.argumentsById[id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("curvature equations, examples, replacement, scaling minima and singular straight constraints have complete arguments",()=>{
+ for(const [a,b] of [[37,49],[61,69],[147,151],[164,169],[178,199]])for(let id=a;id<=b;id++){
   const n=model.nodes[id],e=model.argumentsById[id];
   assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
  }

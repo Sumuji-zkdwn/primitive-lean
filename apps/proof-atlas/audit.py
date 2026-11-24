@@ -68,7 +68,7 @@ def main() -> None:
             assert annotation["summary"] and annotation["steps"] and annotation["assumptions"]
             annotated += 1
     assert proof_edges == 629
-    assert annotated == 150
+    assert annotated == 205
     assert comments == 340
     assert len(file_cache) == 60
     print("ATLAS_SOURCE_AUDIT_PASS", json.dumps({
