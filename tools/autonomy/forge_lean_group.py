@@ -261,8 +261,7 @@ def {name}_perm : Equiv.Perm Signal := swapProduct {name}_swaps
 theorem {name}_correct : ∀ x : Signal, {name}_perm x = {name} x := by decide
 theorem {name}_sign : Equiv.Perm.sign {name}_perm = {sign} := by
   change Equiv.Perm.sign (swapProduct {name}_swaps) = {sign}
-  rw [swapProduct_sign {name}_swaps (by decide)]
-  decide
+  rw [swapProduct_sign {name}_swaps (by decide)] <;> decide
 """
 
 
@@ -335,7 +334,8 @@ theorem candidate_witness : ¬ Property candidate := by
   intro h
   obtain ⟨p, hp, hs⟩ := h
   have he : p = candidate_perm := by
-    ext x
+    apply Equiv.ext
+    intro x
     exact (hp x).trans (candidate_correct x).symm
   rw [he, candidate_sign] at hs
   exact (by decide : (-1 : ℤˣ) ≠ 1) hs
