@@ -1,0 +1,90 @@
+name: Five-dimensional vacuum Kasner Einstein-frame audit
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/VacuumKasner5.lean'
+      - 'tools/check_vacuum_kasner5.py'
+      - 'docs/research/2026-11-24-vacuum-kasner-einstein-frame.md'
+      - '.github/workflows/vacuum-kasner5.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kasner-vacuum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Record source commit and oracle hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_vacuum_kasner5.py | tee verification/source.sha256
+      - name: Pinned Lean and Mathlib toolchain
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel verify polynomial and branch-classification certificates
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/VacuumKasner5.olean Research/VacuumKasner5.lean 2>&1 | tee ../verification/kasner-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../verification/kasner-lean.log; then exit 1; fi
+      - name: Audit all ten Lean theorems and their axioms
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/VacuumKasner5.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==10,names
+          pathlib.Path('VacuumKasner5Audit.lean').write_text(
+              'import Research.VacuumKasner5\n' +
+              ''.join('#print axioms VacuumKasner5.'+n+'\n' for n in names))
+          pathlib.Path('../verification/theorem-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 VacuumKasner5Audit.lean 2>&1 | tee ../verification/kasner-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          audit=pathlib.Path('../verification/kasner-axioms.log').read_text()
+          n=int(pathlib.Path('../verification/theorem-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',audit),audit
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',audit)
+          none=audit.count('does not depend on any axioms')
+          assert len(deps)+none==n,(n,len(deps),none)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for group in deps:
+              used=set(filter(None,(x.strip() for x in group.split(','))))
+              assert used<=allowed,used-allowed
+          print('PASS',n,'Lean theorem axiom audits')
+          PY
+      - name: Independent exact 5D curvature and 4D reduction oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_vacuum_kasner5.py 2>&1 | tee verification/kasner-python.log
+      - name: Preserve exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vacuum-kasner5-audit
+          path: verification/
+          if-no-files-found: warn

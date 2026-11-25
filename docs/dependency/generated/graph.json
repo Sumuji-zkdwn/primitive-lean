@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "6ed4b0da1db8a0850b2013441423ccda94c9209e",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -2231,6 +2231,33 @@
         "Mathlib.Tactic"
       ],
       "sha256": "0c8cbcd5a8749cea7d787e1710ad1558c7e8f66fa61700696c936f60ab95f68a"
+    },
+    {
+      "id": "main:lean/Research/VacuumKasner5.lean",
+      "scope": "main",
+      "path": "lean/Research/VacuumKasner5.lean",
+      "group": "Other",
+      "namespace": "VacuumKasner5",
+      "declarations": [
+        "timeResidual",
+        "externalResidual",
+        "internalResidual",
+        "static_vacuum",
+        "milne_vacuum",
+        "expanding_vacuum",
+        "all_real_branches",
+        "expanding_forces_contraction",
+        "einsteinFrameExponent",
+        "einstein_frame_one_third",
+        "stiff_friedmann_identity",
+        "one_third_decelerates",
+        "kasner_kretschmann_coefficient",
+        "jordan_and_einstein_frames_differ"
+      ],
+      "imports": [
+        "Mathlib.Tactic"
+      ],
+      "sha256": "291617dfd0aa5360ed8ae1e66a6494c1f194cfd134c9e5204ca520f4813499bd"
     },
     {
       "id": "main:lean/Research/VoidHyperCompletion.lean",
@@ -27764,28 +27791,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "6ed4b0da1db8a0850b2013441423ccda94c9209e",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "6ed4b0da1db8a0850b2013441423ccda94c9209e",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "6ed4b0da1db8a0850b2013441423ccda94c9209e",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "6ed4b0da1db8a0850b2013441423ccda94c9209e",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
