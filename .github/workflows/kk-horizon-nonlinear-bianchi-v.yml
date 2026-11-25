@@ -1,0 +1,82 @@
+name: KK horizon exact nonlinear Bianchi V vacuum
+on:
+  pull_request:
+    paths:
+      - 'tools/check_kk_horizon_nonlinear.py'
+      - 'lean/Research/KKHorizonNonlinearBianchiV.lean'
+      - 'docs/research/2026-11-26-kk-horizon-nonlinear-bianchi-v.md'
+      - '.github/workflows/kk-horizon-nonlinear-bianchi-v.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reproduce exact tensor identities
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_kk_horizon_nonlinear.py | tee verification/oracle.sha256
+          python -m pip install sympy==1.14.0
+          python -B tools/check_kk_horizon_nonlinear.py | tee verification/nonlinear.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nonlinear-bianchi-v-python
+          path: verification/
+  lean-algebra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Lean trust-zero and axiom audit
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ../verification .lake/build/lib/lean/Research
+          git rev-parse HEAD | tee ../verification/head.txt
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKHorizonNonlinearBianchiV.olean Research/KKHorizonNonlinearBianchiV.lean 2>&1 | tee ../verification/lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../verification/lean.log; then exit 1; fi
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/KKHorizonNonlinearBianchiV.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==5,names
+          pathlib.Path('NonlinearBianchiVAudit.lean').write_text('import Research.KKHorizonNonlinearBianchiV\n'+''.join('#print axioms KKHorizonNonlinearBianchiV.'+n+'\n' for n in names))
+          PY
+          lake env lean --trust=0 NonlinearBianchiVAudit.lean 2>&1 | tee ../verification/axioms.log
+          python - <<'PY'
+          import pathlib,re
+          t=pathlib.Path('../verification/axioms.log').read_text()
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',t),t
+          groups=re.findall(r'depends on axioms:\s*\[([^]]*)\]',t)
+          assert len(groups)+t.count('does not depend on any axioms')==5,t
+          for g in groups:
+              assert set(filter(None,(x.strip() for x in g.split(',')))) <= {'propext','Classical.choice','Quot.sound'},g
+          print('PASS five theorem axiom audit')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nonlinear-bianchi-v-lean
+          path: verification/
