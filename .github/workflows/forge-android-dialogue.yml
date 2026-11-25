@@ -59,14 +59,20 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Provision Android command-line tools
-        uses: android-actions/setup-android@v3
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
       - name: Build offline Android APK
         run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          set -euo pipefail
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          export ANDROID_SDK_ROOT="$ANDROID_HOME"
+          manager="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          test -x "$manager"
+          "$manager" --version
+          if [ ! -f "$ANDROID_HOME/platforms/android-35/android.jar" ] || [ ! -x "$ANDROID_HOME/build-tools/35.0.0/aapt2" ]; then
+            "$manager" --sdk_root="$ANDROID_HOME" --install "platforms;android-35" "build-tools;35.0.0"
+          fi
           gradle -p mobile/forge --no-daemon :app:assembleDebug
           mkdir -p verification/forge-mobile-apk
           cp mobile/forge/app/build/outputs/apk/debug/app-debug.apk verification/forge-mobile-apk/Forge-Dialogue-v0.1.0.apk
