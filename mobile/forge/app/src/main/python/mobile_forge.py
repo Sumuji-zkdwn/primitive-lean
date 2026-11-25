@@ -123,6 +123,27 @@ class Engine:
         return key
 
     def _send(self, text):
+        # A computational turn is deliberately not a language-model training target.
+        if text.strip() == "演算子の偶奇観測商":
+            from forge_finite import quotient, distinguish
+            keys = list(self.tables)
+            actions = [self.tables[key] for key in keys]
+            obs = [x % 2 for x in range(256)]
+            r = quotient(actions, obs)
+            c = r["class_of"]
+            pair = next(((x, y) for x in range(256) for y in range(x)
+                         if obs[x] == obs[y] and c[x] != c[y]), None)
+            response = f"安定商 {len(r['classes'])} 状態、細分化 {r['rounds']} 回。"
+            if pair:
+                w = distinguish(actions, obs, *pair)
+                response += f" 初期観測が等しい {pair} の最短識別列（1始まり）: " + str([a + 1 for a in w["word"]])
+            self.state["pending"] = None
+            self.state["turns"].append({
+                "turn": len(self.state["turns"]) + 1, "input": text,
+                "output": response, "operator": "FINITE_CHECKED_NOT_LEAN_VERIFIED",
+                "new": [], "raw_hex": "", "feedback": "NO_TRAINING_ON_COMPUTATION"})
+            return self.view()
+
         need(isinstance(text, str) and 0 < len(text) <= 4096, "input must be 1–4096 characters")
         s = self.state
         target = project(text)

@@ -35,3 +35,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+    from test_finite_reason import test
+    test()
+
