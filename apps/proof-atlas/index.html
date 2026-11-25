@@ -64,6 +64,13 @@ a{color:#a3d9df}code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,
 .proof-notes{padding:0 0 0 23px;color:#dfebe8}
 .proof-notes li{font-size:14px;line-height:1.82;padding:6px 0 6px 2px}
 .proof-notes li::marker{color:var(--gold)}
+.proof-detail{border:1px solid #3b5864;border-radius:8px;margin:12px 0;background:#152631;overflow:hidden}
+.proof-detail>summary{cursor:pointer;padding:13px 12px;min-height:46px;line-height:1.55;font-size:14px;color:#e6d5a6;font-weight:650;overflow-wrap:anywhere}
+.proof-detail>summary small{display:block;margin:4px 0 0 16px;color:var(--soft);font-weight:400;font-size:11px}
+.proof-detail[open]{padding:0 12px 10px}
+.proof-detail[open]>summary{border-bottom:1px solid #3b5864;margin:0 -12px 8px}
+.proof-ancestor{background:#111e28;margin:9px 0}
+.argument-packet{display:block;width:100%;max-width:100%;min-height:120px;padding:10px;background:#0d1922;border:1px solid #3b5864;border-radius:8px;resize:vertical;font-size:12px;line-height:1.6}
 .source-note{font-size:12px!important;color:#a8bbc1!important}
 .boundary{padding:10px 12px;background:#243944;border-left:2px solid var(--gold);font-size:12px!important;color:#c6d1d1!important;line-height:1.7!important}
 .pill{display:inline-block;border:1px solid #4b6772;border-radius:5px;background:#29424b;padding:4px 7px;font-size:10px;color:#cadee0}
@@ -178,6 +185,7 @@ footer{padding:9px 16px;border-top:1px solid #263943;font-size:10px;color:var(--
     <button type="button" data-reader-tab="read" aria-selected="true">読み解き</button>
     <button type="button" data-reader-tab="deps" aria-selected="false">依存関係</button>
     <button type="button" data-reader-tab="lean" aria-selected="false">Lean原文</button>
+    <button type="button" data-reader-tab="research" aria-selected="false">構想</button>
    </nav>
    <div id="reader-content" class="reader-content"></div>
   </aside>

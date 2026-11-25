@@ -88,6 +88,62 @@
   lines.forEach((line,i)=>{if(line.includes(stem)||line.includes(parent.name))matches.push({line:i+1,text:line.trim()});});
   return matches.slice(0,5);
  }
+ // Complete, deduplicated transitive closure of the recorded proof references.
+ function proofOrder(model,roots){
+  const seen=new Set(),pending=[...roots];
+  while(pending.length){
+   const id=pending.pop();
+   if(!Number.isInteger(id)||id<0||id>=SIZE)throw Error("Invalid theorem id");
+   if(seen.has(id))continue;
+   seen.add(id);pending.push(...model.nodes[id].parents);
+  }
+  return [...seen].sort((a,b)=>model.nodes[a].depth-model.nodes[b].depth||a-b);
+ }
+ function argumentPacket(model,id){
+  const n=model.nodes[id];
+  if(!n)throw Error("Invalid theorem id");
+  return [
+   "以下のLean定理について、仮定、結論、使用する前提、数式による段階的論証を日本語で説明してください。",
+   "証明原文と説明上の補足を区別し、不明な定義・補題は確認が必要と明記してください。証明項の参照は論理的な必要性とは限りません。",
+   ...[id,...n.parents].map(k=>{
+    const node=model.nodes[k],r=model.proofs[k],a=model.argumentsById[k];
+    return [
+     (k===id?"【対象】":"【直接参照先】")+" #"+(k+1)+" "+node.name,
+     "出典: https://github.com/Sumuji-zkdwn/primitive-lean/blob/d11b8963e08b0195cd3234f8b2a31788ad3903bc/"+node.file+"#L"+r.line,
+     "命題:\n"+r.statement,"証明原文:\n"+r.proof,
+     r.comment?"原ソースの説明:\n"+r.comment:"",
+     a?"登録済み日本語概説: "+a.summary:""
+    ].filter(Boolean).join("\n");
+   })
+  ].join("\n\n");
+ }
+ // User hypotheses and selected source references are not part of the proof DAG.
+ function sanitizeResearch(model,value){
+  const ids=Array.isArray(value?.ids)?[...new Set(value.ids.filter(id=>Number.isInteger(id)&&id>=0&&id<model.nodes.length))].slice(0,20):[];
+  return {ids,claim:typeof value?.claim==="string"?value.claim.slice(0,3000):""};
+ }
+ function researchPacket(model,value,links=[]){
+  const draft=sanitizeResearch(model,value);
+  const selected=new Set(draft.ids);
+  const referenced=[...new Set(draft.ids.flatMap(id=>model.nodes[id].parents))].filter(id=>!selected.has(id));
+  const userLinks=sanitizeLinks(model,links).filter(l=>selected.has(l.from)&&selected.has(l.to));
+  return [
+   "【PRIMITIVE ATLAS / 未検証の研究構想】",
+   "ユーザーの仮説（証明済みではない）:\n"+(draft.claim.trim()||"未記入"),
+   "以下の定理を手掛かりとして、候補命題をLeanで型の通る形に定式化し、既存の実際のソースと定義を確認してください。",
+   "まず仮説の成立条件、反例、必要な追加補題を検討し、別ブランチでLeanファイルを作成して実際に検証してください。成功した検証と未検証部分を区別し、仮説を証明済みと扱わないでください。sorry・admit・新規axiomで穴を埋めないでください。",
+   "探索リンク（仮説上の関連であり正式な証明参照ではない）:\n"+(userLinks.map(l=>"#"+(l.from+1)+" → #"+(l.to+1)+": "+l.note).join("\n")||"なし"),
+   ...[...draft.ids,...referenced].map(id=>{
+    const n=model.nodes[id],r=model.proofs[id];
+    return [
+     (selected.has(id)?"【選択した定理】":"【直接参照先】")+" #"+(id+1)+" "+n.name,
+     "出典: https://github.com/Sumuji-zkdwn/primitive-lean/blob/d11b8963e08b0195cd3234f8b2a31788ad3903bc/"+n.file+"#L"+r.line,
+     "命題:\n"+r.statement,"証明原文:\n"+r.proof,
+     "記録済み直接参照番号: "+n.parents.map(p=>"#"+(p+1)).join(", ")
+    ].join("\n");
+   })
+  ].join("\n\n");
+ }
  function addLink(model,links,from,to,note=""){
   if(!Number.isInteger(from)||!Number.isInteger(to)||from===to||from<0||to<0||from>=SIZE||to>=SIZE)throw Error("Invalid research link");
   if(links.some(x=>x.from===from&&x.to===to))return links;
@@ -107,5 +163,5 @@
    if(!seen.has(child)){seen.add(child);queue.push(child);}
   return seen.size;
  }
- return Object.freeze({SIZE,EDGES,clamp,createModel,short,focus,search,proofLineMatches,addLink,sanitizeLinks,descendants});
+ return Object.freeze({SIZE,EDGES,clamp,createModel,short,focus,search,proofLineMatches,proofOrder,argumentPacket,sanitizeResearch,researchPacket,addLink,sanitizeLinks,descendants});
 });

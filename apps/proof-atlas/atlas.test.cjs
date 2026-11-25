@@ -8,12 +8,12 @@ const load=name=>JSON.parse(fs.readFileSync(path.join(__dirname,name),"utf8"));
 const graph=load("graph.json"),proofs=load("proofs.json"),narratives=load("narratives.json");
 const model=A.createModel(graph,proofs,narratives);
 
-test("all 465 true theorem nodes, 629 direct references, 60 source files and 22 Japanese explanations",()=>{
+test("all 465 true theorem nodes, 629 direct references, 60 source files and 465 Japanese explanations",()=>{
  assert.equal(model.nodes.length,465);
  assert.equal(model.proofs.length,465);
  assert.equal(model.children.reduce((sum,ls)=>sum+ls.length,0),629);
  assert.equal(new Set(model.nodes.map(n=>n.file)).size,60);
- assert.equal(Object.keys(model.argumentsById).length,22);
+ assert.equal(Object.keys(model.argumentsById).length,465);
  assert.equal(model.nodes.filter(n=>n.parents.length===0).length,146);
  assert.equal(model.nodes.filter(n=>n.depth===12).length,1);
  assert.ok(model.proofs.every(p=>p.statement.startsWith("theorem ")||p.statement.includes(" theorem ")));
@@ -26,9 +26,13 @@ test("readable explanation is displayed only when authored and backed by source"
  assert.match(model.argumentsById[identified].summary,/X|座標/);
  assert.match(model.proofs[identified].statement,/u ≠ v/);
  assert.match(model.proofs[identified].proof,/ring/);
- const random=model.nodes.find(n=>model.argumentsById[n.id]===undefined);
- assert.ok(random);
- assert.ok(model.proofs[random.id].statement);
+ assert.ok(model.nodes.every(n=>model.argumentsById[n.id]&&model.proofs[n.id].statement));
+ // Keep the original missing-annotation behavior tested on a deliberately incomplete fixture.
+ const subset=JSON.parse(JSON.stringify(narratives));
+ delete subset.narratives[model.nodes[0].name];
+ const incomplete=A.createModel(graph,proofs,subset);
+ assert.equal(incomplete.argumentsById[0],undefined);
+ assert.ok(incomplete.proofs[0].statement);
 });
 
 test("the focused proof graph navigates actual parents and downstream consequences",()=>{
@@ -84,4 +88,104 @@ test("all extracted proof fragments are in ten original source batches",()=>{
  }
  assert.equal(byId.size,465);
  for(const p of model.proofs)assert.deepEqual(p,byId.get(p.id));
+});
+
+test("all 465 expansion plans are complete, unique and topological",()=>{
+ for(const n of model.nodes){
+  const order=A.proofOrder(model,[n.id]);
+  assert.equal(new Set(order).size,order.length);
+  assert.equal(order.at(-1),n.id);
+  const independent=new Set([n.id]),pending=[n.id];
+  while(pending.length)for(const p of model.nodes[pending.pop()].parents)if(!independent.has(p)){independent.add(p);pending.push(p);}
+  assert.deepEqual(new Set(order),independent);
+  for(const id of order)for(const p of model.nodes[id].parents)assert.ok(order.indexOf(p)<order.indexOf(id));
+  const packet=A.argumentPacket(model,n.id);
+  assert.ok(packet.includes(model.proofs[n.id].statement));
+  assert.ok(packet.includes(model.proofs[n.id].proof));
+  for(const p of n.parents)assert.ok(packet.includes(model.proofs[p].proof));
+ }
+ assert.throws(()=>A.proofOrder(model,[-1]));
+});
+test("human explanations cover the design-observation-calculus cluster",()=>{
+ for(let id=214;id<=240;id++){
+  const a=model.argumentsById[id];
+  assert.ok(a?.title&&a?.summary&&a?.assumptions&&a?.steps.length>=2,"missing "+id);
+ }
+});
+
+test("research packet distinguishes user conjecture from exact source, deduplicates theorem ids and preserves graph",()=>{
+ const before=JSON.stringify(graph);
+ const draft=A.sanitizeResearch(model,{ids:[225,226,229,229,-1,"227",465],claim:"二観測に制限したときの追加条件"});
+ assert.deepEqual(draft.ids,[225,226,229]);
+ const packet=A.researchPacket(model,draft,[{from:225,to:229,note:"比較仮説"}]);
+ assert.match(packet,/未検証の研究構想/);
+ assert.match(packet,/比較仮説/);
+ assert.match(packet,/証明済みではない/);
+ assert.match(packet,/実際に検証/);
+ for(const id of draft.ids)assert.ok(packet.includes(proofs.records[id].proof));
+ assert.ok(packet.includes(proofs.records[227].proof));
+ assert.equal(JSON.stringify(graph),before);
+ assert.equal(A.sanitizeResearch(model,{ids:model.nodes.map(x=>x.id),claim:"x".repeat(4000)}).ids.length,20);
+ assert.equal(A.sanitizeResearch(model,{claim:"x".repeat(4000)}).claim.length,3000);
+});
+
+test("completed explanation chapters cover all geometry, reconstruction, scaling and energy coercivity records",()=>{
+ const blocks=[[0,16],[95,113],[138,146],[152,163],[214,251]];
+ for(const [a,b] of blocks)for(let id=a;id<=b;id++){
+  const n=model.nodes[id],e=model.argumentsById[id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("variational calculus and exact constrained variation chapters are fully annotated",()=>{
+ for(const [a,b] of [[17,36],[50,60],[115,120],[170,177],[200,204]])for(let id=a;id<=b;id++){
+  const n=model.nodes[id],e=model.argumentsById[id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("curvature equations, examples, replacement, scaling minima and singular straight constraints have complete arguments",()=>{
+ for(const [a,b] of [[37,49],[61,69],[147,151],[164,169],[178,199]])for(let id=a;id<=b;id++){
+  const n=model.nodes[id],e=model.argumentsById[id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("every Elastica theorem has a Japanese argument",()=>{
+ const elastica=model.nodes.filter(n=>n.name.startsWith("Elastica."));
+ assert.equal(elastica.length,214);
+ for(const n of elastica){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("first 312 theorem explanations include gradient, dissipation, regular bands, curvature and feedback",()=>{
+ for(const n of model.nodes.slice(0,312)){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("first 369 theorem explanations cover signed area, pressure and exact constrained minima",()=>{
+ for(const n of model.nodes.slice(0,369)){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("first 425 theorem explanations cover exact energy decay, explicit gradient bounds and global ODE existence and uniqueness",()=>{
+ for(const n of model.nodes.slice(0,425)){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title&&e?.assumptions&&e?.summary&&e?.steps?.length>=2,"missing "+n.name);
+ }
+});
+
+test("every one of the 465 original theorems has a complete Japanese argument, including all coupled and level geometry results",()=>{
+ assert.equal(Object.keys(narratives.narratives).length,465);
+ for(const n of model.nodes){
+  const e=model.argumentsById[n.id];
+  assert.ok(e?.title?.trim()&&e?.assumptions?.trim()&&e?.summary?.trim(),"missing "+n.name);
+  assert.ok(Array.isArray(e.steps)&&e.steps.length>=2&&e.steps.every(s=>typeof s==="string"&&s.trim()),"missing steps "+n.name);
+ }
 });

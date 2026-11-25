@@ -9,7 +9,7 @@ const load=name=>fs.readFileSync(path.join(root,name),"utf8");
 const modelScript=load("atlas.js"),uiScript=load("ui.js"),html=load("index.html"),offline=load("play.html");
 
 function browserMock(phone=true){
- const elements=new Map(),storage=new Map(),tabs=["read","deps","lean"],events={};
+ const elements=new Map(),storage=new Map(),tabs=["read","deps","lean","research"],events={};
  const ctx={};
  for(const name of ["setTransform","fillRect","beginPath","moveTo","lineTo","bezierCurveTo","stroke","arc","fill","fillText","setLineDash","save","restore"])
   ctx[name]=()=>{};
@@ -163,4 +163,41 @@ test("desktop interface preserves graph canvas and theorem reading panel",async(
  assert.equal(b.get("graph").height,620);
  assert.equal(b.get("theorem-title").textContent.length>0,true);
  assert.ok(b.get("reader-content").innerHTML.length>50);
+});
+
+test("reader exposes collapsible arguments and complete reference cards",async()=>{
+ const b=await boot(true),content=b.get("reader-content");
+ assert.match(content.innerHTML,/論証を展開 · [0-9]+段階/);
+ assert.match(content.innerHTML,/前提の論証を展開 · 3件/);
+ assert.equal(content.querySelectorAll("[data-proof-ancestor]").length,3);
+ assert.match(content.innerHTML,/さらに詳しい日本語論証を依頼する/);
+ assert.match(content.innerHTML,/id="argument-packet" readonly/);
+ assert.match(content.innerHTML,/LinearInputObservation.two_inputs_iff_pair/);
+ assert.match(content.innerHTML,/recover_coordinate/);
+ b.get("search").ev.input({target:{value:"globalMin_iff_margin"}});
+ b.get("hits").querySelectorAll("[data-hit]")[0].ev.click();
+ assert.match(content.innerHTML,/大域的最小性の必要十分条件/);
+ assert.match(content.innerHTML,/前提の論証を展開 · 4件/);
+ assert.equal(content.querySelectorAll("[data-proof-ancestor]").length,4);
+});
+
+test("research basket retains multiple real theorems, hypothesis and explicit Lean handoff",async()=>{
+ const b=await boot(true),get=b.get,content=get("reader-content");
+ get("add-research").ev.click();
+ assert.match(content.innerHTML,/研究構想 · 未検証/);
+ assert.match(content.innerHTML,/手掛かり · 1\/20件/);
+ get("search").ev.input({target:{value:"recover_coordinate"}});
+ get("hits").querySelectorAll("[data-hit]")[0].ev.click();
+ get("add-research").ev.click();
+ assert.match(content.innerHTML,/手掛かり · 2\/20件/);
+ get("research-claim").ev.input({target:{value:"二つの測定の仮説"}});
+ get("prepare-research").ev.click();
+ assert.match(get("research-output").innerHTML,/二つの測定の仮説/);
+ assert.match(get("research-output").innerHTML,/LinearInputObservation.two_inputs_iff_pair/);
+ assert.match(get("research-output").innerHTML,/LinearInputObservation.recover_coordinate/);
+ const saved=JSON.parse(b.storage.get("primitive-atlas-v1"));
+ assert.equal(saved.research.ids.length,2);
+ assert.equal(saved.research.claim,"二つの測定の仮説");
+ content.querySelectorAll("[data-remove-research]")[0].ev.click();
+ assert.match(content.innerHTML,/手掛かり · 1\/20件/);
 });

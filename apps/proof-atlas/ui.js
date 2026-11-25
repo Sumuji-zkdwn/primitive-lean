@@ -23,15 +23,17 @@
  const initial=Number(new URLSearchParams(globalThis.location?.search||"").get("n"))-1;
  let selected=Number.isInteger(initial)&&initial>=0&&initial<A.SIZE?initial:229;
  let mode="focus",tab="read",zoom=1,panX=0,panY=0,linkSource=null,linkDraft=null;
+ let research={ids:[],claim:""};
  let links=[],graphHitboxes=[],pointers=new Map(),pinch=null,gesture=null,suppressHit=false;
  try{
   const stored=JSON.parse(localStorage.getItem(savedKey)||"{}");
   links=A.sanitizeLinks(model,stored.links||[]);
+  research=A.sanitizeResearch(model,stored.research);
   if(!(Number.isInteger(initial)&&initial>=0&&initial<A.SIZE)&&Number.isInteger(stored.selected)&&stored.selected>=0&&stored.selected<A.SIZE)
    selected=stored.selected;
  }catch(_){}
  function persist(){
-  try{localStorage.setItem(savedKey,JSON.stringify({selected,links}));}catch(_){}
+  try{localStorage.setItem(savedKey,JSON.stringify({selected,links,research}));}catch(_){}
  }
  function onMobile(){return (globalThis.innerWidth??window.innerWidth??1200)<=900;}
  function openReader(){document.body.classList.add("reader-open");}
@@ -170,27 +172,47 @@
  function makeSourceLink(n,p){
   return origin+n.file+"#L"+p.line;
  }
+ function argumentBody(id){
+  const a=model.argumentsById[id],r=model.proofs[id],n=model.nodes[id];
+  let html=a?'<p>'+esc(a.summary)+'</p><div class="section-label">成立する条件</div><p>'+esc(a.assumptions)+'</p><div class="section-label">論証の流れ</div><ol class="proof-notes">'+a.steps.map(s=>'<li>'+esc(s)+'</li>').join("")+'</ol>':
+   '<p class="source-note">日本語論証は未登録です。原文から確認してください。</p>';
+  if(r.comment)html+='<details class="proof-detail"><summary>原ソースの説明</summary><p>'+esc(r.comment)+'</p></details>';
+  html+='<details class="proof-detail"><summary>命題・Lean証明・出典</summary><pre class="source-block">'+esc(r.statement)+'</pre><pre class="source-block">'+esc(r.proof)+'</pre><p><a target="_blank" rel="noopener" href="'+esc(makeSourceLink(n,r))+'">元のソース</a></p></details>';
+  return html+'<div class="row-actions">'+nodeButton(id,"この定理に移動")+'</div>';
+ }
+ function renderProofPlan(n){
+  const order=A.proofOrder(model,[n.id]).filter(id=>id!==n.id);
+  if(!order.length)return '<p class="source-note">初期465定理内に先行する証明参照はありません。定義・外部補題を使用する場合があります。</p>';
+  const direct=new Set(n.parents);
+  const cards=order.map(id=>{
+   const node=model.nodes[id],a=model.argumentsById[id];
+   return '<details class="proof-detail proof-ancestor" data-proof-ancestor="'+id+'"><summary><span>#'+String(id+1).padStart(3,"0")+' '+esc(a?.title||A.short(node))+'</span><small>'+(direct.has(id)?"直接参照":"間接参照")+' · '+(a?"日本語論証":"原文のみ")+'</small></summary>'+argumentBody(id)+'</details>';
+  }).join("");
+  return '<details class="proof-detail proof-route"><summary>前提の論証を展開 · '+order.length+'件</summary><p class="source-note">元の証明が参照する先行定理を重複なく依存順に並べています。証明の必要性・十分性を新たに確立するものではありません。</p>'+cards+'</details>';
+ }
  function renderRead(n,p){
   const human=model.argumentsById[n.id];
   let html="";
   if(human){
    html+='<div class="section-label">日本語で読む · 論証の概説</div><div class="claim">'+esc(human.title)+'</div>'+
     '<p>'+esc(human.summary)+'</p>'+
-    '<div class="section-label">成立する条件</div><p>'+esc(human.assumptions)+'</p>'+
+    '<details class="proof-detail main-argument"><summary>論証を展開 · '+human.steps.length+'段階</summary><div class="section-label">成立する条件</div><p>'+esc(human.assumptions)+'</p>'+
     '<div class="section-label">論証の流れ</div><ol class="proof-notes">'+
-    human.steps.map(step=>'<li>'+esc(step)+'</li>').join("")+'</ol>'+
+    human.steps.map(step=>'<li>'+esc(step)+'</li>').join("")+'</ol></details>'+
     '<p class="boundary">この説明は原文の定理と証明から作成した読み解きです。形式的証明の代わりではなく、厳密な仮定や詳細は「Lean原文」を参照してください。</p>';
   }else{
    html+='<div class="section-label">この定理の読み方</div>'+
     '<p>この定理には、人間向けの日本語論証をまだ登録していません。根拠がない文章を自動で作らず、実際の命題・原文の説明・証明内の参照を示します。</p>';
   }
+  html+=renderProofPlan(n);
+  html+='<details class="proof-detail"><summary>さらに詳しい日本語論証を依頼する</summary><p class="source-note">対象と直接参照先の実際のLean命題・証明を含む資料です。コピーしてChatGPT等に渡せます。このオフライン画面自体は解説を生成しません。</p><textarea class="argument-packet" id="argument-packet" readonly aria-label="論証依頼用資料">'+esc(A.argumentPacket(model,n.id))+'</textarea><div class="row-actions"><button class="action" type="button" id="copy-argument">資料をコピー／選択</button><span id="copy-argument-status" role="status" class="slim"></span></div></details>';
   if(p.comment){
    html+='<div class="section-label">原ソースに付された説明（英語）</div><p class="source-note">'+
     esc(p.comment)+'</p>';
   }
   html+='<div class="section-label">命題を確認する</div><pre class="source-block">'+esc(p.statement)+'</pre>'+
    '<div class="row-actions"><button class="action" id="go-deps" type="button">前提と後続を見る</button>'+
-   '<button class="action" id="go-lean" type="button">Lean証明を開く</button></div>';
+   '<button class="action" id="go-lean" type="button">Lean証明を開く</button><button class="action" type="button" id="add-research">構想に追加</button></div>';
   return html;
  }
  function renderDeps(n,p){
@@ -234,6 +256,15 @@
   }
   return html;
  }
+ function renderResearch(n){
+  let html='<div class="section-label">研究構想 · 未検証</div><p>定理を複数選び、新しい命題の仮説を記録できます。元の証明や依存線は変更しません。</p>';
+  html+='<div class="row-actions"><button type="button" id="add-research" class="action primary"'+(research.ids.includes(n.id)||research.ids.length>=20?' disabled':'')+'>選択中の定理を追加</button></div>';
+  html+='<div class="section-label">手掛かり · '+research.ids.length+'/20件</div>';
+  html+=research.ids.length?research.ids.map(id=>'<div class="connection">'+nodeButton(id)+'<button type="button" data-remove-research="'+id+'">外す</button></div>').join(""):'<p class="empty">グラフや検索で別の定理を選択し、読み解き画面の「構想に追加」を押してください。</p>';
+  html+='<label class="section-label" for="research-claim">新しい命題の候補・疑問</label><textarea class="argument-packet" id="research-claim" maxlength="3000" placeholder="例：どの仮定を緩めてもこの結論は成立するか？">'+esc(research.claim)+'</textarea>';
+  html+='<div class="section-label">Lean検証に渡す</div><p class="source-note">選んだ定理と直接参照先の実際の証明、仮説、探索リンクを一つの依頼資料にします。ChatGPTに貼ってLeanへの定式化・検証を依頼できます。この画面はLeanを実行しません。</p><button type="button" id="prepare-research" class="action primary"'+(!research.ids.length?' disabled':'')+'>検証資料を作る</button><div id="research-output"></div>';
+  return html;
+ }
  function renderLean(n,p){
   const url=makeSourceLink(n,p);
   return '<div class="section-label">Leanの命題（原文）</div><pre class="source-block">'+esc(p.statement)+'</pre>'+
@@ -252,13 +283,54 @@
   document.querySelectorAll("[data-reader-tab]").forEach(el=>
    el.setAttribute("aria-selected",String(el.dataset.readerTab===tab)));
   const content=$("reader-content");
-  content.innerHTML=tab==="read"?renderRead(n,p):tab==="deps"?renderDeps(n,p):renderLean(n,p);
+  content.innerHTML=tab==="read"?renderRead(n,p):tab==="deps"?renderDeps(n,p):tab==="research"?renderResearch(n):renderLean(n,p);
   content.querySelectorAll("[data-node]").forEach(el=>el.addEventListener("click",()=>{
    moveSelection(Number(el.dataset.node),{open:false});
   }));
   content.querySelectorAll("[data-del]").forEach(el=>el.addEventListener("click",()=>{
    links.splice(Number(el.dataset.del),1);persist();linkDraft=null;renderReader();draw();
   }));
+  $("copy-argument")?.addEventListener("click",async()=>{
+   const area=$("argument-packet"),status=$("copy-argument-status");
+   if(!area)return;
+   try{
+    if(!globalThis.navigator?.clipboard?.writeText)throw Error("Clipboard unavailable");
+    await globalThis.navigator.clipboard.writeText(area.value);
+    if(status)status.textContent="コピーしました。";
+   }catch(_){
+    area.focus();area.select?.();area.setSelectionRange?.(0,area.value.length);
+    if(status)status.textContent="選択しました。端末のコピー操作を使ってください。";
+   }
+  });
+  $("add-research")?.addEventListener("click",()=>{
+   research=A.sanitizeResearch(model,{...research,ids:[...research.ids,selected]});
+   tab="research";persist();renderReader();openReader();
+  });
+  content.querySelectorAll("[data-remove-research]").forEach(el=>el.addEventListener("click",()=>{
+   research={...research,ids:research.ids.filter(id=>id!==Number(el.dataset.removeResearch))};
+   persist();renderReader();
+  }));
+  $("research-claim")?.addEventListener("input",e=>{
+   research=A.sanitizeResearch(model,{...research,claim:e.target.value});
+   persist();
+   const out=$("research-output");if(out)out.innerHTML="";
+  });
+  $("prepare-research")?.addEventListener("click",()=>{
+   if(!research.ids.length)return;
+   const out=$("research-output");if(!out)return;
+   out.innerHTML='<textarea class="argument-packet" id="research-packet" readonly aria-label="Lean検証依頼資料">'+esc(A.researchPacket(model,research,links))+'</textarea><div class="row-actions"><button type="button" class="action" id="copy-research">資料をコピー／選択</button><span id="copy-research-status" class="slim" role="status"></span></div>';
+   $("copy-research")?.addEventListener("click",async()=>{
+    const area=$("research-packet"),status=$("copy-research-status");if(!area)return;
+    try{
+     if(!globalThis.navigator?.clipboard?.writeText)throw Error("Clipboard unavailable");
+     await globalThis.navigator.clipboard.writeText(area.value);
+     if(status)status.textContent="コピーしました。";
+    }catch(_){
+     area.focus();area.select?.();area.setSelectionRange?.(0,area.value.length);
+     if(status)status.textContent="選択しました。端末のコピー操作を使ってください。";
+    }
+   });
+  });
   $("go-deps")?.addEventListener("click",()=>{tab="deps";renderReader();});
   $("go-lean")?.addEventListener("click",()=>{tab="lean";renderReader();});
   $("begin-link")?.addEventListener("click",()=>{
