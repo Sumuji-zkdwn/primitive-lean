@@ -1,0 +1,84 @@
+name: Forge Android Dialogue - proof snapshot and APK
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'mobile/forge/**'
+      - '.github/workflows/forge-android-dialogue.yml'
+      - 'tools/autonomy/forge_lean_*.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+concurrency:
+  group: forge-android-dialogue
+  cancel-in-progress: false
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/forge-lean-evolution-state
+          path: mobile-ledger-evolution
+          persist-credentials: false
+      - uses: actions/checkout@v5
+        with:
+          ref: autonomy/semantic-capability-state
+          path: mobile-ledger-semantic
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Replay exact original production ledger and create APK snapshot
+        run: |
+          set -euo pipefail
+          python mobile/forge/export_snapshot.py \
+            --state mobile-ledger-evolution/docs/autonomy/forge-lean-evolution-state.json \
+            --semantic mobile-ledger-semantic/docs/autonomy/semantic-capability-state.json \
+            --head "$(git rev-parse HEAD)" --day "$(date -u +%F)" \
+            --state-sha "$(git -C mobile-ledger-evolution rev-parse HEAD)" \
+            --semantic-sha "$(git -C mobile-ledger-semantic rev-parse HEAD)" \
+            --evidence verification/forge-mobile
+          python mobile/forge/test_mobile.py
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Build offline Android APK
+        run: |
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          gradle -p mobile/forge --no-daemon :app:assembleDebug
+          mkdir -p verification/forge-mobile-apk
+          cp mobile/forge/app/build/outputs/apk/debug/app-debug.apk verification/forge-mobile-apk/Forge-Dialogue-v0.1.0.apk
+          sha256sum verification/forge-mobile-apk/*.apk
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Forge-Dialogue-Android
+          path: verification/forge-mobile-apk/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: Forge-Dialogue-proof-snapshot
+          path: |
+            verification/forge-mobile/
+            mobile/forge/app/src/main/assets/forge-snapshot.json
+          if-no-files-found: warn
