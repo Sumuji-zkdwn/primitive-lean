@@ -1,0 +1,57 @@
+name: Decision app isolated Lean obligations
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'lean/Research/DecisionAppObligations.lean'
+      - '.github/workflows/decision-app-obligations.yml'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Check proof and axiom allowlist
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ../verification/decision-app
+          lake env lean --trust=0 Research/DecisionAppObligations.lean 2>&1 | tee ../verification/decision-app/lean.log
+          python3 - <<'PY'
+          import pathlib, re
+          s=pathlib.Path('../verification/decision-app/lean.log').read_text()
+          assert 'sorry' not in s, s
+          names=['prefix_nested','prefix_refinement','action_floor','action_normalization','evidence_step_mass']
+          allowed={'propext','Quot.sound','Classical.choice'}
+          for name in names:
+              m=re.search(r"'DecisionApp\."+name+r"' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",s)
+              assert m, name
+              axioms=set(x.strip() for x in (m.group(1) or '').split(',') if x.strip())
+              assert axioms <= allowed, (name,axioms)
+          print('All five declarations checked; axiom allowlist passed')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: decision-app-proof-${{ github.run_id }}
+          path: verification/decision-app/
