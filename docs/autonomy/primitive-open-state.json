@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-24",
+  "last_utc_day": "2026-11-25",
   "receipts": [
     {
       "chain_sha256": "418aea158b7fd9bfaff075e9955cf4debe27b771d474c3f7b8fd29e6ed6f383b",
@@ -166,6 +166,89 @@
       "word": [
         2
       ]
+    },
+    {
+      "chain_sha256": "55ec991812a66345c880c99e002f3911607cc554d9d432171ee9c31eb7838203",
+      "day": "2026-11-25",
+      "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "id": "po_60c578969d15769ea16a",
+      "lean_sha256": "b52a4e6b0cfca121ddddea7dd9fd96b0dd1525d4c5d5bf669565e6f6554c832e",
+      "model": {
+        "name": "fd_4b3cb36f5e89d39c",
+        "observations": [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "pair": [
+          0,
+          4
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            0,
+            2,
+            3,
+            4
+          ]
+        ]
+      },
+      "objective": "DISTINGUISHABILITY_CHANGED",
+      "outcome": "DISTINGUISHABLE",
+      "parameters": {
+        "label": 1
+      },
+      "parent": "v2:adcfaddec6966487b1536a1e677d443e965c77a2f8a77d6f2c58b4d84a3f59de",
+      "previous_sha256": "652398d5375e6ab0a45e0e2cb4cddfff8aa9ec17b2e3f1af68aa8f65ba598e38",
+      "request_sha256": "511a6a3701b37f049fc8a67b749af682dde995d7f2a88113db307b9824dbd95a",
+      "root_kind": "EQUIVALENT",
+      "root_lean_sha256": "5fd5749d85a4e297ac63906146fe1393bb55151ae4f9bf5c89a1cd16403dd5bb",
+      "root_model": {
+        "name": "fd_84f17d1eb0b2bbac",
+        "observations": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            0,
+            2,
+            3
+          ]
+        ]
+      },
+      "root_request_sha256": "035bba4b3493fd5e3317c3c2182a28f05b0a0b2e35df44478df669714c29f670",
+      "root_word": null,
+      "rule": "append_state",
+      "score": 26,
+      "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
+      "upstream_head": "a95e22e2d0b3da42ce795c2b1f78ce242cd6b0e566064bb5752dc97d921d9dbb",
+      "word": []
     }
   ],
   "schema_version": 1
