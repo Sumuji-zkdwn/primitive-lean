@@ -1,7 +1,7 @@
 {
-  "last_utc_day": "2026-11-25T02:00Z",
+  "last_utc_day": "2026-11-25T02:30Z",
   "meta_snapshot": {
-    "last_utc_day": "2026-11-25T01:30Z",
+    "last_utc_day": "2026-11-25T02:30Z",
     "rules": [
       {
         "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
@@ -1014,6 +1014,66 @@
           {
             "op": "append",
             "slot": 5
+          }
+        ]
+      },
+      {
+        "chain_sha256": "178380eb347b92284a0a1c0de70e7eb37f89249fb78c7578c999a759e48b9b17",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "bd657160c859fd8349a49d6c47be0ae82e5c5384738d77935b5969ae8b976765",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-25T02:00Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "bd657160c859fd8349a49d6c47be0ae82e5c5384738d77935b5969ae8b976765",
+        "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+        "id": "mf_bed1d457127dffd8",
+        "parent": "mf_a927799b9bc030bf",
+        "previous_sha256": "858e3513b4c3cc768da7184ff4dd851922a688042432864a8affdde9d625a572",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "wrap",
+            "slot": 3
+          },
+          {
+            "op": "prepend",
+            "slot": 0
+          }
+        ]
+      },
+      {
+        "chain_sha256": "7b619fb9da79f2c21119268e6ffa53a0cfee7999979a13bd8ea70028a9901b12",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "fcc35dcdf75187abfcf0039d9105d867b974ca1ce9b7918a0f4122a02606d805",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-25T02:30Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "fcc35dcdf75187abfcf0039d9105d867b974ca1ce9b7918a0f4122a02606d805",
+        "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+        "id": "mf_f1597033fe563398",
+        "parent": "mf_a927799b9bc030bf",
+        "previous_sha256": "178380eb347b92284a0a1c0de70e7eb37f89249fb78c7578c999a759e48b9b17",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "wrap",
+            "slot": 3
+          },
+          {
+            "op": "prepend",
+            "slot": 1
           }
         ]
       }
@@ -2191,6 +2251,46 @@
       ],
       "right": "p:add_one",
       "score": 33,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 511,
+        "distinct_outputs": 16,
+        "fingerprint": "c6d65eb8060b8a387b9a35fb8c3950bef4b3e4a29389b527d2f67ffd4845c7e5",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          438,
+          438,
+          438,
+          438,
+          384
+        ]
+      },
+      "chain_sha256": "2ab1bd7d9e8a6cfd5aa689b3cddf9b8bb59abfd56b3f531e4e0b992de85462d4",
+      "day": "2026-11-25T02:30Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "id": "gf_3560c2e21e5309c7",
+      "left": "m:gf_160d1f9644bc02fe",
+      "origin": {
+        "kind": "verified_meta_rule_v1",
+        "rule_chain_sha256": "86d5cc3e41d65b8fd4eea6600ac8708c271673c53c465165733ffbecd65eb401",
+        "rule_id": "mf_a927799b9bc030bf"
+      },
+      "previous_sha256": "4bb3438904ef7d11a339f223270bb6ff2b4909e747911ecf547fe3999ba3c2ae",
+      "program": [
+        "shift_right",
+        "invert",
+        "mirror_lr",
+        "rotate_cw",
+        "mirror_lr",
+        "mirror_lr",
+        "shift_right"
+      ],
+      "right": "r:mf_a927799b9bc030bf",
+      "score": 20,
       "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
     }
   ],
