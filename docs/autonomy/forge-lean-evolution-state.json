@@ -155,6 +155,38 @@
         4,
         4
       ]
+    },
+    {
+      "behavior_sha256": "a90e07d33605ed073911b1725063a10aaa0c5b64af75d356570104956a19e7b4",
+      "certificate_sha256": "73bf1ce288e7819e7936c18b420db6b3f564a5e5ee6b1eef5f6d37805af1548e",
+      "chain_sha256": "c7fe5cbaba5fdf5f95f341940013d16cb4469c409c0191580103766d7ecf81d3",
+      "day": "2026-11-25",
+      "generation": 2,
+      "invariant": {
+        "kind": "diff",
+        "members": [
+          2,
+          8,
+          32,
+          128
+        ]
+      },
+      "previous_sha256": "2490493c4dd3f5679212242d2144a0a6d6af3228c24617d81a5d9f727499b632",
+      "recipe": [
+        "seed:rank",
+        2,
+        3,
+        7,
+        "xor"
+      ],
+      "semantic_count": 2,
+      "semantic_prefix_sha256": "fe7bc44502c67efe5aa188feed02616436e50b95aeb291db9952d2157819bce6",
+      "source_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "theorem": "ForgeEvolution.candidate_not_word",
+      "witness": [
+        0,
+        8
+      ]
     }
   ],
   "schema_version": 1
