@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-24",
+  "last_utc_day": "2026-11-25",
   "receipts": [
     {
       "behavior": {
@@ -145,6 +145,81 @@
       "score": 26,
       "source_generic": "5c00b159ed30a912a650f1bc2008c2ecee25fd1c1878a575550d847f2b7e93d0",
       "source_semantic": "764b71a0bc7602d1387d5ec442e07ecabd04e5f87811b650dffda771c0623bce",
+      "status": "VERIFIED_HYBRID_FINITE_SIGNAL_OPERATOR"
+    },
+    {
+      "behavior": {
+        "behavior_sha256": "b670a0f575b76056df5efcee6197048de0c3b5cadb2a2e205cef8e197e823459",
+        "changed_inputs": 256,
+        "constant_counterexample": {
+          "input": 0,
+          "input_values": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "output": 252,
+          "output_values": [
+            0,
+            3,
+            3,
+            3
+          ]
+        },
+        "distinct_outputs": 4,
+        "exhaustive_inputs": 256,
+        "four_position_outputs": [
+          63,
+          207,
+          243,
+          252
+        ],
+        "independent_implementations": 2,
+        "old_primitive_closure_excluded": true
+      },
+      "chain_sha256": "0ee37a6837aceb226fdebdf7bb32b908df35dc086d82f7cb48cbff8fb832aab2",
+      "day": "2026-11-25",
+      "evaluator": "semantic-bridge-v1-dual-exhaustive-composition",
+      "flattened": [
+        {
+          "id": "gf_60bc1bd6a4d42531",
+          "kind": "generic"
+        },
+        {
+          "id": "sf_43ed97b6ef1909a1",
+          "kind": "semantic"
+        },
+        {
+          "id": "gf_3ea0ae0d3af2c7b0",
+          "kind": "generic"
+        }
+      ],
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "sb_170f53369be365b8",
+      "invariant": {
+        "base_witness_sha256": "0237f9cc7098f76946ee6ddeec90222e4e6b34fe79a45b80e8348a9e53402c41",
+        "closure_argument": "composition_of_property_preserving_functions_preserves_property",
+        "constant_inputs_per_primitive": 4,
+        "independent_base_checks": 24,
+        "old_primitive_count": 6,
+        "property": "all_constant_signals_map_to_constant_signals"
+      },
+      "parent": "sb_ea8bbc97c62c154e",
+      "previous_sha256": "7cf0b04e820e7c2218aaafccbe2fb30dc1933fc72214c0a932665ab8458dd3a0",
+      "recipe": [
+        {
+          "id": "gf_60bc1bd6a4d42531",
+          "kind": "generic"
+        },
+        {
+          "id": "sb_ea8bbc97c62c154e",
+          "kind": "bridge"
+        }
+      ],
+      "score": 27,
+      "source_generic": "ad31a6eb5145f967c67293f8ce026e1bc84443c9ada66426b6cec3f748e50a5e",
+      "source_semantic": "e3b3e7092df12dd5d323e016198b208083918afa34858e170c9a00ee4a31acec",
       "status": "VERIFIED_HYBRID_FINITE_SIGNAL_OPERATOR"
     }
   ],
