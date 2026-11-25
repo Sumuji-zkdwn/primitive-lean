@@ -1,6 +1,6 @@
 {
-  "last_source_sha": "d979ca6d1eeea64d9bf737e733bfa5e3c13dac39c0118a808cf2656b099b2905",
-  "last_utc_day": "2026-11-24",
+  "last_source_sha": "31624f032a2d4c69a443655dec4855b31ffb9a43249802e4aa2dd672dbe79a5a",
+  "last_utc_day": "2026-11-25",
   "results": [
     {
       "generated_lean_sha256": "bb7862169c1d628ab74a8f7b80a205294b86277d138c87619872d30ff9ae171b",
@@ -43,6 +43,22 @@
       "status": "LEAN_VERIFIED_FINITE_ONLY",
       "task_id": "laakso_w1_stop",
       "utc_day": "2026-11-24"
+    },
+    {
+      "generated_lean_sha256": "bb35cdd98b0cf84a5ee306b5c401894f2269c45e043efb666807cd4c251bf4af",
+      "kind": "DISTINGUISHABLE",
+      "lead_id": "3145d1dda4648e6a988d",
+      "main_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "model_sha256": "6ee39dca313de2901869dc7cbe7ceae64ea94f4ad96617fc69123e5e836e278d",
+      "scope": "FINITE_Z3_MODEL_ONLY",
+      "shortest_word": [
+        1,
+        0
+      ],
+      "source_sha256": "31624f032a2d4c69a443655dec4855b31ffb9a43249802e4aa2dd672dbe79a5a",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "task_id": "siphon_z3_u0_fresh",
+      "utc_day": "2026-11-25"
     }
   ],
   "schema_version": 1
