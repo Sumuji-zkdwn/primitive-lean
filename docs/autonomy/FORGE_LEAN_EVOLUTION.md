@@ -22,8 +22,8 @@ closed rather than silently rewriting history.
 
 There are two separate jobs on main: read-only candidate generation and
 a write-enabled, independent exact-plan replay. The latter only appends
-one JSON receipt after rerunning Lean at trust zero, auditing axioms and
-comparing the source and result bytes. The state branch and live upstream
+the verified JSON receipt(s) after rerunning Lean at trust zero, auditing
+axioms and comparing every new certificate's source and result bytes. The state branch and live upstream
 must still match the original snapshot commits. No main writes, code
 generated from state, automatic source changes or new external secrets.
 
@@ -85,8 +85,9 @@ Those are finite external observations, not claims of Lean CI success
 or live production receipts.
 
 After merge the new workflow runs daily at 14:51 UTC (23:51 JST), on
-relevant main pushes, or manual dispatch. At most one new receipt per
-UTC date, up to eight new receipts total. If no separator is found it
+relevant main pushes, or manual dispatch. Automatic runs append at most
+one new receipt per UTC date; a manual batch is the only exception.
+The maintenance ceiling remains eight total receipts. If no separator is found it
 records explicit bounded exhaustion and does not append invented progress.
 GitHub delivery is best effort. This is dynamic expansion within a
 reviewed meta-grammar and automatic search within two invariant families;
@@ -113,3 +114,27 @@ not a general proof of full symmetric-group saturation. The original eight-recei
 maintenance limit and main-only append gate remain unchanged. PR regression
 checks the pinned four-generation sequence, both extension certificates,
 byte-identical regeneration and corrupted-witness rejection. No state file changes.
+
+## Manual bounded batch
+
+Select **Run workflow** on main and choose `generations` from 1 to 5
+(default 5). Each successful certificate is kernel- and axiom-audited
+before its operator enters the alphabet for the next generation. The
+read-only plan and separate privileged replay rebuild the entire batch
+from identical upstream snapshots; all new certificates and the final
+ledger must match byte-for-byte before one atomic JSON-only append.
+Exhaustion stops the batch early; proof failure or a changed upstream
+snapshot prevents any append from that batch. The eight-receipt total
+cap is unchanged. Automatic runs still refuse a second receipt on an
+already-used UTC date, including dates with manual receipts.
+
+The schema retains legacy rows byte-for-byte. Manual rows additionally
+record the actual GitHub run ID, one-based batch index and requested
+limit, covered by the existing receipt hash. Historical replay checks
+monotone dates, contiguous same-run indexes, fixed batch provenance and
+bounded counts, and reruns every historical certificate. Retrying an
+already-recorded run ID is idempotent, even on a different UTC date.
+This is not an unrestricted source-modification mode. PR CI covers a
+same-date two-generation batch, recursive alphabet reentry, exact
+historical certificate replay, retry idempotence, ordinary date gating,
+and malformed batch metadata. All PR tests are read-only.
