@@ -1,7 +1,7 @@
 {
-  "last_utc_day": "2026-11-25T01:00Z",
+  "last_utc_day": "2026-11-25T01:30Z",
   "meta_snapshot": {
-    "last_utc_day": "2026-11-24T23:30Z",
+    "last_utc_day": "2026-11-25T01:30Z",
     "rules": [
       {
         "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
@@ -894,6 +894,126 @@
           },
           {
             "op": "drop_tail"
+          }
+        ]
+      },
+      {
+        "chain_sha256": "7dffda2154ccc48ee96d45df283f1786312b18271f0e357af1e848eac2247ef5",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "5142673aa9acb991efce35aaf5c60c31db8cf40beb0865bd4e364a23b60e1b31",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-25T00:00Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "5142673aa9acb991efce35aaf5c60c31db8cf40beb0865bd4e364a23b60e1b31",
+        "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+        "id": "mf_7d2d998fe0360237",
+        "parent": "mf_a927799b9bc030bf",
+        "previous_sha256": "a2158f0576ad2f5b7fee4cc9a1e57ee7a7c2aeb0cd54904b93a6f07a4474a46a",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "wrap",
+            "slot": 3
+          },
+          {
+            "op": "append",
+            "slot": 0
+          }
+        ]
+      },
+      {
+        "chain_sha256": "3141b653262156c57c02d2bcfc24e3a6651ff045efaa0e68ada2fc91da9e208c",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "7c36fd36d4ae0a08fc2d2d3a3936c08afe142dec589d9fe7a35b661cfedb91e5",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-25T00:30Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "7c36fd36d4ae0a08fc2d2d3a3936c08afe142dec589d9fe7a35b661cfedb91e5",
+        "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+        "id": "mf_97678f82ee6299c9",
+        "parent": "mf_a927799b9bc030bf",
+        "previous_sha256": "7dffda2154ccc48ee96d45df283f1786312b18271f0e357af1e848eac2247ef5",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "wrap",
+            "slot": 3
+          },
+          {
+            "op": "append",
+            "slot": 1
+          }
+        ]
+      },
+      {
+        "chain_sha256": "b5c8fa8e36a317e56a007816bf311dfab270053ee46561287ebf5d07ebb87dae",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "878c84a85e3018e3f1ba39a498a6649fffae98f54f1f44f60666738d72803803",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-25T01:00Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "878c84a85e3018e3f1ba39a498a6649fffae98f54f1f44f60666738d72803803",
+        "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+        "id": "mf_acfc656365241e60",
+        "parent": "mf_a927799b9bc030bf",
+        "previous_sha256": "3141b653262156c57c02d2bcfc24e3a6651ff045efaa0e68ada2fc91da9e208c",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "wrap",
+            "slot": 3
+          },
+          {
+            "op": "append",
+            "slot": 2
+          }
+        ]
+      },
+      {
+        "chain_sha256": "858e3513b4c3cc768da7184ff4dd851922a688042432864a8affdde9d625a572",
+        "coverage": {
+          "data_inputs_exhaustively_checked": 4608,
+          "distinct_semantics": 12,
+          "fingerprint": "c74bc143f909e17eb1f5edc36679d3f1c59e6992030e90ba4167a4dad1f1ab0b",
+          "holdout_changed": 6,
+          "total_source_programs": 12,
+          "train_changed": 6
+        },
+        "day": "2026-11-25T01:30Z",
+        "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+        "fingerprint": "c74bc143f909e17eb1f5edc36679d3f1c59e6992030e90ba4167a4dad1f1ab0b",
+        "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+        "id": "mf_9aec6e6f45b630df",
+        "parent": "mf_a927799b9bc030bf",
+        "previous_sha256": "b5c8fa8e36a317e56a007816bf311dfab270053ee46561287ebf5d07ebb87dae",
+        "score": 110,
+        "status": "EVALUATED_META_RULE_FINITE_ONLY",
+        "steps": [
+          {
+            "op": "wrap",
+            "slot": 3
+          },
+          {
+            "op": "append",
+            "slot": 5
           }
         ]
       }
@@ -1997,6 +2117,46 @@
       ],
       "right": "p:mirror_lr",
       "score": 34,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "fd233ad03ff30f3ee65517bb6cd0f81e0e05d1319748bd22ec9fea11fcae6ae3",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          511,
+          255,
+          127,
+          510,
+          0
+        ]
+      },
+      "chain_sha256": "b1e0d1db6626e15a95726beb3299767fc80b7da93ee1e49e53806039e636737c",
+      "day": "2026-11-25T01:30Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "id": "gf_97783669ac9bcb6e",
+      "left": "m:gf_160d1f9644bc02fe",
+      "origin": {
+        "kind": "verified_meta_rule_v1",
+        "rule_chain_sha256": "2ae3a644c74f794e097c4d282a98b2f3e8afcd0c7709c00ba9afde854c495a0d",
+        "rule_id": "mf_682500c359311c7c"
+      },
+      "previous_sha256": "70233b48a4281ed6741af09a35ba4af4758ab0e4c1b7ccdf70c1366a43f96ebe",
+      "program": [
+        "mirror_lr",
+        "rotate_cw",
+        "mirror_lr",
+        "mirror_lr",
+        "rotate_cw",
+        "mirror_lr",
+        "invert"
+      ],
+      "right": "r:mf_682500c359311c7c",
+      "score": 32,
       "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
     }
   ],
