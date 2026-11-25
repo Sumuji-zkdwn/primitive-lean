@@ -24,6 +24,7 @@ from tools.autonomy import forge_lean_group as group
 ROOT = cert.ROOT
 FIXTURE = ROOT / "tests/fixtures/semantic_bridge_semantic.json"
 LIMIT = 8
+MANUAL_LIMIT = 5
 PARENTS = 4
 ZERO = "0" * 64
 OLD_SEED = "7f7362913e80569f688708a82fcda85dfb661fba6fd8126558214663a7a6099e"
@@ -415,18 +416,49 @@ FIELDS = {"generation", "day", "source_sha", "semantic_count", "semantic_prefix_
           "theorem", "previous_sha256", "chain_sha256"}
 
 
+MANUAL_FIELDS = {"manual_run_id", "manual_index", "manual_limit"}
+
+
+def validate_manual(run_id, limit):
+    require(type(run_id) is str and re.fullmatch(r"[1-9][0-9]{0,19}", run_id),
+            "invalid manual run id")
+    require(type(limit) is int and 1 <= limit <= MANUAL_LIMIT,
+            "manual generations must be 1..5")
+
+
+def validate_receipt_order(row, prior, runs):
+    validate_date(row["day"])
+    if set(row) == FIELDS:
+        require(prior is None or row["day"] > prior["day"], "nonmonotone automatic day")
+        return
+    require(set(row) == FIELDS | MANUAL_FIELDS, "unknown manual receipt fields")
+    require(prior is None or row["day"] >= prior["day"], "nonmonotone manual day")
+    run_id, limit, index = row["manual_run_id"], row["manual_limit"], row["manual_index"]
+    validate_manual(run_id, limit)
+    require(type(index) is int and 1 <= index <= limit, "bad manual index")
+    old = runs.get(run_id)
+    if old is None:
+        require(index == 1, "manual batch must start at one")
+    else:
+        require(prior is old and index == old["manual_index"] + 1
+                and all(row[k] == old[k] for k in
+                        ("day", "source_sha", "semantic_count", "manual_limit")),
+                "noncontiguous or inconsistent manual batch")
+    runs[run_id] = row
+
+
 def replay(state, semantic, seeds, out):
-    accepted = {}
-    previous, last, count = ZERO, None, 1
+    accepted, manual_runs = {}, {}
+    previous, count, prior = ZERO, 1, None
     for i, row in enumerate(state["receipts"], 1):
-        require(type(row) is dict and set(row) == FIELDS and row["generation"] == i
+        require(type(row) is dict and set(row) in (FIELDS, FIELDS | MANUAL_FIELDS)
+                and row["generation"] == i
                 and row["previous_sha256"] == previous
                 and row["chain_sha256"] == digest({k:v for k,v in row.items() if k != "chain_sha256"})
                 and re.fullmatch(r"[0-9a-f]{40}", row["source_sha"])
                 and row["theorem"] == "ForgeEvolution.candidate_not_word",
                 "broken evolution receipt")
-        validate_date(row["day"])
-        require(last is None or row["day"] > last, "nonmonotone day")
+        validate_receipt_order(row, prior, manual_runs)
         n = row["semantic_count"]
         require(type(n) is int and count <= n <= len(semantic["receipts"])
                 and row["semantic_prefix_sha256"] == semantic["receipts"][n-1]["chain_sha256"],
@@ -444,11 +476,11 @@ def replay(state, semantic, seeds, out):
         require(sha == row["certificate_sha256"], "historical certificate drift")
         check_lean(stage)
         accepted["e:" + row["chain_sha256"][:24]] = values
-        previous, last, count = row["chain_sha256"], row["day"], n
+        previous, count, prior = row["chain_sha256"], n, row
     return accepted
 
 
-def cycle(state_path, semantic_path, day, head, out):
+def prepare_cycle(state_path, semantic_path, day, head, out):
     validate_date(day)
     require(re.fullmatch(r"[0-9a-f]{40}", head), "exact head required")
     state = read_history(state_path)
@@ -461,11 +493,16 @@ def cycle(state_path, semantic_path, day, head, out):
     accepted = replay(state, semantic, seeds, out)
     tables = roots(semantic, len(semantic["receipts"]), seeds)
     tables.update(accepted)
-    report = {"previous_generations": len(accepted),
+    return state, semantic, tables, len(accepted)
+
+
+def cycle(state_path, semantic_path, day, head, out):
+    state, semantic, tables, previous_count = prepare_cycle(state_path, semantic_path, day, head, out)
+    report = {"previous_generations": previous_count,
               "semantic_count": len(semantic["receipts"]),
               "production_symbols": list(tables),
               "active_production_symbols": list(tables)[-PARENTS:]}
-    if len(accepted) >= LIMIT:
+    if previous_count >= LIMIT:
         report["status"] = "MAINTENANCE_LIMIT"
     elif state["receipts"] and state["receipts"][-1]["day"] >= day:
         require(state["receipts"][-1]["day"] == day, "clock moved backwards")
@@ -480,17 +517,68 @@ def cycle(state_path, semantic_path, day, head, out):
             stage = out / "new"
             sha = certificate(tables, values, invariant, pair, stage)
             check_lean(stage)
-            row = {"generation": len(accepted)+1, "day": day, "source_sha": head,
+            row = {"generation": previous_count+1, "day": day, "source_sha": head,
                    "semantic_count": len(semantic["receipts"]),
                    "semantic_prefix_sha256": semantic["receipts"][-1]["chain_sha256"],
                    "recipe": recipe, "behavior_sha256": fingerprint(values),
                    "invariant": invariant, "witness": pair, "certificate_sha256": sha,
                    "theorem": "ForgeEvolution.candidate_not_word",
-                   "previous_sha256": state["receipts"][-1]["chain_sha256"] if accepted else ZERO}
+                   "previous_sha256": state["receipts"][-1]["chain_sha256"] if previous_count else ZERO}
             row["chain_sha256"] = digest(row)
             state["receipts"].append(row)
             report.update({"status": "NEW_KERNEL_VERIFIED_RECEIPT", "receipt": row,
                            "new_production_symbol": "e:" + row["chain_sha256"][:24]})
+    fb.write(out / "next-state.json", state)
+    fb.write(out / "report.json", report)
+    print(json.dumps(report, sort_keys=True))
+
+
+def manual_batch(state_path, semantic_path, day, head, out, run_id, requested):
+    """A single bounded, atomic batch; every new letter is kernel-checked before reuse."""
+    validate_manual(run_id, requested)
+    state, semantic, tables, previous_count = prepare_cycle(state_path, semantic_path, day, head, out)
+    old_rows = state["receipts"]
+    require(not old_rows or old_rows[-1]["day"] <= day, "clock moved backwards")
+    existing = [row for row in old_rows if row.get("manual_run_id") == run_id]
+    report = {"previous_generations": previous_count, "semantic_count": len(semantic["receipts"]),
+              "manual_run_id": run_id, "requested": requested, "new_count": 0, "steps": []}
+    if existing:
+        require(existing[0]["manual_limit"] == requested, "manual retry limit changed")
+        report["status"] = "MANUAL_RUN_ALREADY_RECORDED"
+    else:
+        stopped = "REQUESTED_BATCH_LIMIT"
+        for index in range(1, min(requested, LIMIT - previous_count) + 1):
+            chosen, invariants, counts = search(tables)
+            step = {"index": index, "production_symbols": list(tables),
+                    "invariants": invariants, "search": counts}
+            report["steps"].append(step)
+            if chosen is None:
+                stopped = "BOUNDED_INVARIANT_OR_GRAMMAR_EXHAUSTED"
+                step["status"] = stopped
+                break
+            recipe, values, invariant, pair = chosen
+            stage = out / f"new-{index}"
+            sha = certificate(tables, values, invariant, pair, stage)
+            check_lean(stage)
+            row = {"generation": len(old_rows) + 1, "day": day, "source_sha": head,
+                   "semantic_count": len(semantic["receipts"]),
+                   "semantic_prefix_sha256": semantic["receipts"][-1]["chain_sha256"],
+                   "recipe": recipe, "behavior_sha256": fingerprint(values),
+                   "invariant": invariant, "witness": pair, "certificate_sha256": sha,
+                   "theorem": "ForgeEvolution.candidate_not_word",
+                   "previous_sha256": old_rows[-1]["chain_sha256"] if old_rows else ZERO,
+                   "manual_run_id": run_id, "manual_index": index, "manual_limit": requested}
+            row["chain_sha256"] = digest(row)
+            old_rows.append(row)
+            symbol = "e:" + row["chain_sha256"][:24]
+            tables[symbol] = values
+            step.update({"status": "NEW_KERNEL_VERIFIED_RECEIPT", "receipt": row,
+                         "new_production_symbol": symbol})
+            report["new_count"] += 1
+        if len(old_rows) >= LIMIT:
+            stopped = "MAINTENANCE_LIMIT"
+        report["stopped"] = stopped
+        report["status"] = "NEW_KERNEL_VERIFIED_BATCH" if report["new_count"] else stopped
     fb.write(out / "next-state.json", state)
     fb.write(out / "report.json", report)
     print(json.dumps(report, sort_keys=True))
@@ -503,8 +591,14 @@ def main():
     p.add_argument("--day", required=True)
     p.add_argument("--head", required=True)
     p.add_argument("--output", required=True, type=Path)
+    p.add_argument("--manual-run-id")
+    p.add_argument("--manual-generations", type=int)
     a = p.parse_args()
-    cycle(a.state, a.semantic, a.day, a.head, a.output)
+    if a.manual_run_id is None and a.manual_generations is None:
+        cycle(a.state, a.semantic, a.day, a.head, a.output)
+    else:
+        manual_batch(a.state, a.semantic, a.day, a.head, a.output,
+                     a.manual_run_id, a.manual_generations)
 
 
 if __name__ == "__main__":

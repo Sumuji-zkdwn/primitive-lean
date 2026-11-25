@@ -25,6 +25,13 @@ on:
   schedule:
     - cron: '51 14 * * *'
   workflow_dispatch:
+    inputs:
+      generations:
+        description: 'Maximum new kernel-verified generations in this manual run'
+        required: true
+        type: choice
+        default: '5'
+        options: ['1', '2', '3', '4', '5']
 
 permissions:
   contents: read
@@ -37,7 +44,7 @@ jobs:
   plan:
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     outputs:
       candidate: ${{ steps.plan.outputs.candidate }}
       day: ${{ steps.plan.outputs.day }}
@@ -79,6 +86,8 @@ jobs:
         shell: bash
         env:
           IS_PR: ${{ github.event_name == 'pull_request' }}
+          IS_MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+          MANUAL_GENERATIONS: ${{ inputs.generations }}
         run: |
           set -euo pipefail
           out=verification/forge-evolution
@@ -102,8 +111,12 @@ jobs:
           printf '%s\n' "$head" > "$out/control-sha.txt"
           printf '%s\n' "$state_sha" > "$out/state-sha.txt"
           printf '%s\n' "$semantic_sha" > "$out/semantic-sha.txt"
-          python -B -m tools.autonomy.forge_lean_evolution --state "$out/state.json" --semantic "$out/semantic.json" --day "$day" --head "$head" --output "$out/first"
-          candidate=$(python -c 'import json; from pathlib import Path; print(str(json.loads(Path("verification/forge-evolution/first/report.json").read_text())["status"] == "NEW_KERNEL_VERIFIED_RECEIPT").lower())')
+          args=()
+          if [ "$IS_MANUAL" = true ]; then
+            args=(--manual-run-id "$GITHUB_RUN_ID" --manual-generations "$MANUAL_GENERATIONS")
+          fi
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/state.json" --semantic "$out/semantic.json" --day "$day" --head "$head" --output "$out/first" "${args[@]}"
+          candidate=$(python -c 'import json; from pathlib import Path; print(str(json.loads(Path("verification/forge-evolution/first/report.json").read_text())["status"] in ("NEW_KERNEL_VERIFIED_RECEIPT", "NEW_KERNEL_VERIFIED_BATCH")).lower())')
           {
             echo "candidate=$candidate"
             echo "day=$day"
@@ -161,6 +174,60 @@ jobs:
             echo "ERROR: altered history accepted"; exit 1
           fi
           echo "PASS altered history rejected"
+      - name: PR regression - manual same-day batch, retry, and automatic gate
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=verification/forge-evolution
+          head=$(git rev-parse HEAD)
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/first/next-state.json" --semantic "$out/semantic.json" --day 2026-11-24 --head "$head" --output "$out/manual" --manual-run-id 12345 --manual-generations 2
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/manual/next-state.json" --semantic "$out/semantic.json" --day 2026-11-24 --head "$head" --output "$out/manual-retry" --manual-run-id 12345 --manual-generations 2
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/manual/next-state.json" --semantic "$out/semantic.json" --day 2026-11-24 --head "$head" --output "$out/manual-auto"
+          cmp "$out/manual/next-state.json" "$out/manual-retry/next-state.json"
+          cmp "$out/manual/next-state.json" "$out/manual-auto/next-state.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from tools.autonomy import forge_lean_evolution as evo
+          p = Path("verification/forge-evolution")
+          load = lambda f: json.loads((p / f).read_text())
+          old = load("first/next-state.json")["receipts"]
+          rows = load("manual/next-state.json")["receipts"]
+          report = load("manual/report.json")
+          assert len(rows) == 3 and rows[:1] == old
+          assert report["status"] == "NEW_KERNEL_VERIFIED_BATCH" and report["new_count"] == 2
+          for i, row in enumerate(rows[1:], 1):
+              assert row["day"] == "2026-11-24" and row["manual_run_id"] == "12345"
+              assert row["manual_index"] == i and row["manual_limit"] == 2
+              assert load(f"manual/new-{i}/mapping.json")["status"] == "KERNEL_AND_AXIOM_AUDIT_PASSED"
+              assert (p / f"manual/new-{i}/Certificate.lean").read_bytes() == (p / f"manual-retry/history-{i+1}/Certificate.lean").read_bytes()
+          assert len({r["behavior_sha256"] for r in rows}) == 3
+          assert "e:" + rows[1]["chain_sha256"][:24] in report["steps"][1]["production_symbols"]
+          assert load("manual-retry/report.json")["status"] == "MANUAL_RUN_ALREADY_RECORDED"
+          assert load("manual-auto/report.json")["status"] == "ALREADY_VERIFIED_TODAY"
+          runs = {}
+          evo.validate_receipt_order(rows[1], rows[0], runs)
+          evo.validate_receipt_order(rows[2], rows[1], runs)
+          for bad, prior in [(dict(rows[2], manual_index=1), rows[1]),
+                             (dict(rows[2], manual_limit=6), rows[1]),
+                             (dict(rows[2], day="2026-11-23"), rows[1]),
+                             (rows[0], rows[2]), (rows[2], rows[0])]:
+              try:
+                  evo.validate_receipt_order(bad, prior, runs)
+              except ValueError:
+                  pass
+              else:
+                  raise AssertionError("invalid receipt order accepted")
+          for bad in (0, 6, True):
+              try:
+                  evo.validate_manual("12345", bad)
+              except ValueError:
+                  pass
+              else:
+                  raise AssertionError("invalid batch limit accepted")
+          print("PASS manual two-generation same-day batch, reentry, retry, automatic gate and limits")
+          PY
       - name: PR regression - affine and parity fallback certificates
         if: github.event_name == 'pull_request'
         run: python -B -m tools.autonomy.forge_lean_group_test --output verification/forge-evolution/group-test
@@ -177,7 +244,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.plan.result == 'success' && needs.plan.outputs.candidate == 'true'
     needs: [plan]
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     permissions:
       contents: write
     steps:
@@ -186,7 +253,7 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
-      - name: Checkout isolated data ledger for one append
+      - name: Checkout isolated data ledger for bounded append
         uses: actions/checkout@v5
         with:
           ref: autonomy/forge-lean-evolution-state
@@ -221,6 +288,8 @@ jobs:
           EXPECTED_STATE: ${{ needs.plan.outputs.state_sha }}
           EXPECTED_SEMANTIC: ${{ needs.plan.outputs.semantic_sha }}
           DAY: ${{ needs.plan.outputs.day }}
+          IS_MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+          MANUAL_GENERATIONS: ${{ inputs.generations }}
         run: |
           set -euo pipefail
           out=verification/forge-evolution-replay
@@ -234,23 +303,43 @@ jobs:
           cp semantic-state/docs/autonomy/semantic-capability-state.json "$out/semantic.json"
           cmp "$out/state.json" prior-plan/state.json
           cmp "$out/semantic.json" prior-plan/semantic.json
-          python -B -m tools.autonomy.forge_lean_evolution --state "$out/state.json" --semantic "$out/semantic.json" --day "$DAY" --head "$GITHUB_SHA" --output "$out"
+          args=()
+          if [ "$IS_MANUAL" = true ]; then
+            args=(--manual-run-id "$GITHUB_RUN_ID" --manual-generations "$MANUAL_GENERATIONS")
+          fi
+          python -B -m tools.autonomy.forge_lean_evolution --state "$out/state.json" --semantic "$out/semantic.json" --day "$DAY" --head "$GITHUB_SHA" --output "$out" "${args[@]}"
           cmp "$out/next-state.json" prior-plan/first/next-state.json
           cmp "$out/report.json" prior-plan/first/report.json
-          cmp "$out/new/Certificate.lean" prior-plan/first/new/Certificate.lean
           python - <<'PY'
           import json
+          import os
           from pathlib import Path
+          from tools.autonomy import forge_lean_evolution as evo
           p = Path("verification/forge-evolution-replay")
-          old = json.loads((p / "state.json").read_text())
-          new = json.loads((p / "next-state.json").read_text())
+          old = json.loads((p / "state.json").read_text())["receipts"]
+          new = json.loads((p / "next-state.json").read_text())["receipts"]
           report = json.loads((p / "report.json").read_text())
-          assert report["status"] == "NEW_KERNEL_VERIFIED_RECEIPT"
-          assert len(new["receipts"]) == len(old["receipts"]) + 1
-          assert new["receipts"][:-1] == old["receipts"]
-          assert json.loads((p / "new/mapping.json").read_text())["status"] == "KERNEL_AND_AXIOM_AUDIT_PASSED"
+          n = len(new) - len(old)
+          assert new[:len(old)] == old and len(new) <= evo.LIMIT
+          if os.environ["IS_MANUAL"] == "true":
+              requested = int(os.environ["MANUAL_GENERATIONS"])
+              run_id = os.environ["GITHUB_RUN_ID"]
+              evo.validate_manual(run_id, requested)
+              assert report["status"] == "NEW_KERNEL_VERIFIED_BATCH"
+              assert 1 <= n <= requested and report["new_count"] == n
+              for i, row in enumerate(new[len(old):], 1):
+                  assert row["manual_run_id"] == run_id and row["manual_index"] == i
+                  assert row["manual_limit"] == requested and row["day"] == os.environ["DAY"]
+              stages = [f"new-{i}" for i in range(1, n+1)]
+          else:
+              assert n == 1 and report["status"] == "NEW_KERNEL_VERIFIED_RECEIPT"
+              assert set(new[-1]) == evo.FIELDS
+              stages = ["new"]
+          for stage in stages:
+              assert (p / stage / "Certificate.lean").read_bytes() == (Path("prior-plan/first") / stage / "Certificate.lean").read_bytes()
+              assert json.loads((p / stage / "mapping.json").read_text())["status"] == "KERNEL_AND_AXIOM_AUDIT_PASSED"
           PY
-      - name: Commit only the independently checked append-only JSON record
+      - name: Commit only the independently checked append-only JSON receipts
         working-directory: evolution-state
         shell: bash
         run: |
@@ -260,7 +349,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/autonomy/forge-lean-evolution-state.json
           test "$(git diff --cached --name-only)" = "docs/autonomy/forge-lean-evolution-state.json"
-          git commit -m "forge lean evolution: append one kernel-verified semantic extension"
+          git commit -m "forge lean evolution: append kernel-verified semantic extensions"
           git push origin HEAD:refs/heads/autonomy/forge-lean-evolution-state
       - name: Preserve independent persistence verification
         if: always()
