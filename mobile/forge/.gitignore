@@ -1,0 +1,5 @@
+.gradle/
+**/build/
+local.properties
+app/src/main/python/tools/
+app/src/main/assets/forge-snapshot.json
