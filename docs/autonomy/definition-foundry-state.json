@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-24",
+  "last_utc_day": "2026-11-25",
   "receipts": [
     {
       "base_lean_sha256": "741c1a16526a47fd6308ae465602e052a7804a4ed1652fdd2bf8d6c96a540271",
@@ -309,6 +309,148 @@
       "source_sha256": "08dadd96195b1186bf0b1bff317117ebec2a08f19df6dd0a56e50bd358c470ab",
       "status": "LEAN_VERIFIED_FINITE_DEFINITION_ONLY",
       "strategy_state_sha256": "e70bcc41275627489d06e6a3eb31ad199ba61a0cbdc46539a8a52a7be438c4f6"
+    },
+    {
+      "base_lean_sha256": "10346d53823dd3b8566db2dca8485645572c13296c06ab41c914937313c8e653",
+      "base_model": {
+        "name": "fd_24d96f2cb6f8a5d2",
+        "observations": [
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0,
+          1,
+          2,
+          0
+        ],
+        "pair": [
+          3,
+          9
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            8,
+            6,
+            1,
+            2,
+            5,
+            4,
+            7,
+            3,
+            9
+          ]
+        ]
+      },
+      "base_request_sha256": "0fd6c4b555f37d4abe90bfb656a97f828a0be93f69187a012b799ea3b84e1285",
+      "baseline": {
+        "kind": "DISTINGUISHABLE",
+        "reachable_pairs": 2,
+        "states_at_witness": [
+          1,
+          9
+        ],
+        "word": [
+          0
+        ]
+      },
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "c37be7722c89ef77d0f111eb23276d07cd9eb7efc4da47ff2deaabb92f7a6605",
+      "criterion": {
+        "direction": "either",
+        "metric": "pair_flip"
+      },
+      "date": "2026-11-25",
+      "derived": {
+        "kind": "EQUIVALENT",
+        "pairs": [
+          [
+            3,
+            9
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "reachable_pairs": 3
+      },
+      "derived_lean_sha256": "469c458b8a1a2d25d4da9cb2613a906872d50389f4e5a101ce3e9951708da81c",
+      "derived_model": {
+        "name": "fd_9dc8ed53e2a63068",
+        "observations": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "pair": [
+          3,
+          9
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            8,
+            6,
+            1,
+            2,
+            5,
+            4,
+            7,
+            3,
+            9
+          ]
+        ]
+      },
+      "derived_request_sha256": "bfa4f6391cb2f595a921cd28bf5ce3544ba922740077a77e7e1233dca88b9259",
+      "expression": {
+        "left": {
+          "op": "read"
+        },
+        "op": "eq",
+        "right": {
+          "op": "read"
+        }
+      },
+      "finite_state_sha256": "c49a55fdb03dd62bf2dc60e5bd5574260f34298986c19d7cc93b078d05778b04",
+      "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "id": "define_b00aaccdddf8a53a",
+      "metric": {
+        "baseline_kind": "DISTINGUISHABLE",
+        "baseline_word": [
+          0
+        ],
+        "derived_kind": "EQUIVALENT",
+        "derived_word": null,
+        "direction": "either",
+        "metric": "pair_flip",
+        "score": 12,
+        "value": 1
+      },
+      "parent": null,
+      "previous_sha256": "50549233d0528b4fdb35c6e69f2faf7c23863d50f24a0cd707a4e0ee05bef55d",
+      "score": 12,
+      "semantics_sha256": "a247f8a7cc2fb074049056f3a38bb8e64e890265db3e18d35287b7d231938587",
+      "source_id": "strategy:rule_2f6fa915d0e53c2d",
+      "source_sha256": "75684c240848635e4bb9a409df5c1af29e87019798ee506cd571c678e60a5af0",
+      "status": "LEAN_VERIFIED_FINITE_DEFINITION_ONLY",
+      "strategy_state_sha256": "e6b3bb35ab5e9d26dab2033ad13beadbf7abbe42cf818d009cb462b743c9242a"
     }
   ],
   "schema_version": 1
