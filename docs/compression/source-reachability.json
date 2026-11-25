@@ -2,7 +2,7 @@
   "counts": {
     "all_source_edges": 1383,
     "eligible_direct_edges": 428,
-    "nodes": 434,
+    "nodes": 435,
     "retained_pairs": 307,
     "transitive_pairs_removed": 114,
     "unique_eligible_pairs": 421,
@@ -1305,6 +1305,7 @@
     "main:lean/Research/ElasticaIntrinsicHeight.lean",
     "main:lean/Research/ElasticaObservationQuotient.lean",
     "main:lean/Research/FiniteMarkovTransport.lean",
+    "main:lean/Research/General5DVacuumRadion.lean",
     "main:lean/Research/OkanoharaTransport.lean",
     "main:lean/Research/OperationalWorldGeneration.lean",
     "main:lean/Research/ProjectionSignHolonomy.lean",
@@ -1677,8 +1678,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "8aa9cd4efa1cff4c8180e88dba788c9b18f4cf7088fe1af4d981fd873c95f1d2",
-    "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+    "graph_sha256": "699e3a48c1060f215fe3ae809f663671300d06b2d7852a390497d3cee54987ec",
+    "main_commit": "0478fad16ca607a767c4a30f1b3fc68fae290fe5",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [
