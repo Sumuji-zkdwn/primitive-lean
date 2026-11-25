@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-25T01:30Z",
+  "last_utc_day": "2026-11-25T02:00Z",
   "rules": [
     {
       "chain_sha256": "00de9aa5ea60a4642f6b52a043834b5262a5a7ecdf34714c901e5448a2fe7924",
@@ -1012,6 +1012,36 @@
         {
           "op": "append",
           "slot": 5
+        }
+      ]
+    },
+    {
+      "chain_sha256": "178380eb347b92284a0a1c0de70e7eb37f89249fb78c7578c999a759e48b9b17",
+      "coverage": {
+        "data_inputs_exhaustively_checked": 4608,
+        "distinct_semantics": 12,
+        "fingerprint": "bd657160c859fd8349a49d6c47be0ae82e5c5384738d77935b5969ae8b976765",
+        "holdout_changed": 6,
+        "total_source_programs": 12,
+        "train_changed": 6
+      },
+      "day": "2026-11-25T02:00Z",
+      "evaluator": "meta-forge-v1-independent-rewrite-and-exhaustive-program",
+      "fingerprint": "bd657160c859fd8349a49d6c47be0ae82e5c5384738d77935b5969ae8b976765",
+      "head_sha": "435a0d5aac6ff99a6755a8407749bb271a804382",
+      "id": "mf_bed1d457127dffd8",
+      "parent": "mf_a927799b9bc030bf",
+      "previous_sha256": "858e3513b4c3cc768da7184ff4dd851922a688042432864a8affdde9d625a572",
+      "score": 110,
+      "status": "EVALUATED_META_RULE_FINITE_ONLY",
+      "steps": [
+        {
+          "op": "wrap",
+          "slot": 3
+        },
+        {
+          "op": "prepend",
+          "slot": 0
         }
       ]
     }
