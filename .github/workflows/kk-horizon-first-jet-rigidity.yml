@@ -1,0 +1,33 @@
+name: KK horizon first-jet vacuum rigidity
+on:
+  pull_request:
+    paths:
+      - 'tools/check_kk_horizon_first_jet_rigidity.py'
+      - 'docs/research/2026-11-26-kk-horizon-first-jet-rigidity.md'
+      - '.github/workflows/kk-horizon-first-jet-rigidity.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify horizon Ricci jets
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_kk_horizon_first_jet_rigidity.py | tee verification/oracle.sha256
+          python -m pip install sympy==1.14.0
+          python -B tools/check_kk_horizon_first_jet_rigidity.py | tee verification/rigidity.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kk-horizon-first-jet-audit
+          path: verification/
