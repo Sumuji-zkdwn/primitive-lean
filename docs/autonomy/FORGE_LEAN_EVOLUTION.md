@@ -93,3 +93,23 @@ reviewed meta-grammar and automatic search within two invariant families;
 it is not general automatic invention of arbitrary semantic schemas or
 invariants, unlimited mathematical discovery, or self-modifying code.
 Existing Generic/Meta/Semantic Forge production ledgers are not modified.
+
+## Group-separation fallback
+
+The legacy unary and small-difference search and its certificate source are unchanged.
+Only when it finds no separator, inspect exact membership in the affine and even
+permutation supergroups. If all bijective letters preserve the four-point XOR
+relation, choose a nonaffine candidate, preferring the canonical Toffoli and
+preserving parity. Otherwise, if all are even, choose an odd candidate.
+The fallback scans the complete archived parent library; the historical four-parent
+frontier and source hashes remain valid for legacy certificates. Each candidate
+requires independent finite evaluation, involutivity, and a new kernel certificate
+of nonexpressibility even with arbitrary compiled macros. Noninjective letters
+cannot occur in a word representing a bijection. The four-point proof uses eight
+Boolean linear forms, and the sign proof uses explicit transposition products.
+No Python claim about membership in an arbitrary generated subgroup is trusted.
+The fallback only tests the stated supergroups, and exhaustion is still bounded,
+not a general proof of full symmetric-group saturation. The original eight-receipt
+maintenance limit and main-only append gate remain unchanged. PR regression
+checks the pinned four-generation sequence, both extension certificates,
+byte-identical regeneration and corrupted-witness rejection. No state file changes.
