@@ -5,15 +5,15 @@ namespace DecisionApp
 
 variable {α : Type*}
 
-/-- The finite list prefix is an abstract representation of contextKey.
+/-- The finite list takeContext is an abstract representation of contextKey.
     In the app, the delimiter and end marker encode the length as well. -/
-def prefix : Nat → List α → List α
+def takeContext : Nat → List α → List α
   | 0, _ => []
   | _ + 1, [] => []
-  | d + 1, a :: xs => a :: prefix d xs
+  | d + 1, a :: xs => a :: takeContext d xs
 
 theorem prefix_nested (xs : List α) (d e : Nat) (h : d ≤ e) :
-    prefix d (prefix e xs) = prefix d xs := by
+    takeContext d (takeContext e xs) = takeContext d xs := by
   induction d generalizing e xs with
   | zero => rfl
   | succ d ih =>
@@ -23,18 +23,18 @@ theorem prefix_nested (xs : List α) (d e : Nat) (h : d ≤ e) :
       cases xs with
       | nil => rfl
       | cons a xs =>
-        change a :: prefix d (prefix e xs) = a :: prefix d xs
+        change a :: takeContext d (takeContext e xs) = a :: takeContext d xs
         exact congrArg (List.cons a) (by
           apply ih
           omega)
 
 theorem prefix_refinement (xs ys : List α) (d e : Nat) (h : d ≤ e)
-    (he : prefix e xs = prefix e ys) : prefix d xs = prefix d ys := by
-  have hh := congrArg (prefix d) he
+    (he : takeContext e xs = takeContext e ys) : takeContext d xs = takeContext d ys := by
+  have hh := congrArg (takeContext d) he
   simpa only [prefix_nested xs d e h, prefix_nested ys d e h] using hh
 
 /-- 0.8 prayer + 0.1 doubt + 0.1 uniform on two actions. -/
-def actionProbability (r d : ℝ) : ℝ :=
+noncomputable def actionProbability (r d : ℝ) : ℝ :=
   (8 / 10 : ℝ) * r + (1 / 10 : ℝ) * d + (1 / 20 : ℝ)
 
 theorem action_floor (r d : ℝ) (hr : 0 ≤ r ∧ r ≤ 1) (hd : 0 ≤ d ∧ d ≤ 1) :
@@ -57,7 +57,7 @@ theorem evidence_step_mass {Y : Type*} [Fintype Y] (A B : Y → ℝ) (e : ℝ)
     (∑ y, A y * (e * (B y / A y))) = ∑ y, e * B y := by
       apply Finset.sum_congr rfl
       intro y _
-      field_simp [(hA y).ne'] <;> ring
+      field_simp [(hA y).ne']
     _ = e := by rw [← Finset.mul_sum, hB, mul_one]
 
 end DecisionApp
