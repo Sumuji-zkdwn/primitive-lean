@@ -187,6 +187,132 @@
         0,
         8
       ]
+    },
+    {
+      "behavior_sha256": "b8d56c0864bef5cb651c9d4fd9ebacdeee985321c6b40f293ae9a08aa56354a2",
+      "certificate_sha256": "568bbc4d63a3d8c134f34828991127ffcd423f62851b51588686dd1f36e351b0",
+      "chain_sha256": "ee9cca5e2f31a2e48f69401d3714659a854a5b1081ee0a5b7c92a585474e95df",
+      "day": "2026-11-25",
+      "generation": 3,
+      "invariant": {
+        "kind": "diff",
+        "members": [
+          34,
+          136
+        ]
+      },
+      "manual_index": 1,
+      "manual_limit": 5,
+      "manual_run_id": "45688811483",
+      "previous_sha256": "c7fe5cbaba5fdf5f95f341940013d16cb4469c409c0191580103766d7ecf81d3",
+      "recipe": [
+        "e:c7fe5cbaba5fdf5f95f34194",
+        3,
+        2,
+        1,
+        "xor"
+      ],
+      "semantic_count": 2,
+      "semantic_prefix_sha256": "fe7bc44502c67efe5aa188feed02616436e50b95aeb291db9952d2157819bce6",
+      "source_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "theorem": "ForgeEvolution.candidate_not_word",
+      "witness": [
+        0,
+        34
+      ]
+    },
+    {
+      "behavior_sha256": "653b1d76a24f5ce0835985a9054fea63633ab75f8e68f3ad0b9d57f523a3261d",
+      "certificate_sha256": "cdf8131c6465f4eee824bcea020dd7cd95a4258ae8f988c2a1f1fda44c57963c",
+      "chain_sha256": "63cfbcc6e92495026c56113aa98d4e8bab7b1a0820cb86eb282ce76a1ae71eec",
+      "day": "2026-11-25",
+      "generation": 4,
+      "invariant": {
+        "kind": "diff",
+        "members": [
+          170
+        ]
+      },
+      "manual_index": 2,
+      "manual_limit": 5,
+      "manual_run_id": "45688811483",
+      "previous_sha256": "ee9cca5e2f31a2e48f69401d3714659a854a5b1081ee0a5b7c92a585474e95df",
+      "recipe": [
+        "e:ee9cca5e2f31a2e48f69401d",
+        0,
+        3,
+        -1,
+        "xor"
+      ],
+      "semantic_count": 2,
+      "semantic_prefix_sha256": "fe7bc44502c67efe5aa188feed02616436e50b95aeb291db9952d2157819bce6",
+      "source_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "theorem": "ForgeEvolution.candidate_not_word",
+      "witness": [
+        0,
+        170
+      ]
+    },
+    {
+      "behavior_sha256": "fba4d22f69e53639d20d9c1848f9be246c3cb2524750b35a1c8f9902aeee356e",
+      "certificate_sha256": "e2714826a77e826676d52f088c4a2ced62343a355fd9e70454f11070a7a4d3b7",
+      "chain_sha256": "13f643372609a7a99866b90222be72a8beebf31d6a1825848ac529d5436dd628",
+      "day": "2026-11-25",
+      "generation": 5,
+      "invariant": {
+        "kind": "affine",
+        "members": []
+      },
+      "manual_index": 3,
+      "manual_limit": 5,
+      "manual_run_id": "45688811483",
+      "previous_sha256": "63cfbcc6e92495026c56113aa98d4e8bab7b1a0820cb86eb282ce76a1ae71eec",
+      "recipe": [
+        "p:reverse",
+        0,
+        4,
+        1,
+        "and"
+      ],
+      "semantic_count": 2,
+      "semantic_prefix_sha256": "fe7bc44502c67efe5aa188feed02616436e50b95aeb291db9952d2157819bce6",
+      "source_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "theorem": "ForgeEvolution.candidate_not_word",
+      "witness": [
+        0,
+        2,
+        4,
+        6
+      ]
+    },
+    {
+      "behavior_sha256": "8985192da69ad3f4367be50872e98bbdfb2d06e29aca7aa8e4832a165875d287",
+      "certificate_sha256": "f192325eec4b08e4abc17ba14639aac98edb1aa9b63ca691306bc7f4cf9057bc",
+      "chain_sha256": "8518173012edf0e77b393ecd68a0e40fd8fdbffb5be2b723600d4a38a0701635",
+      "day": "2026-11-25",
+      "generation": 6,
+      "invariant": {
+        "kind": "even",
+        "members": []
+      },
+      "manual_index": 4,
+      "manual_limit": 5,
+      "manual_run_id": "45688811483",
+      "previous_sha256": "13f643372609a7a99866b90222be72a8beebf31d6a1825848ac529d5436dd628",
+      "recipe": [
+        "s:sf_43ed97b6ef1909a1",
+        0,
+        0,
+        1,
+        "and"
+      ],
+      "semantic_count": 2,
+      "semantic_prefix_sha256": "fe7bc44502c67efe5aa188feed02616436e50b95aeb291db9952d2157819bce6",
+      "source_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "theorem": "ForgeEvolution.candidate_not_word",
+      "witness": [
+        27
+      ]
     }
   ],
   "schema_version": 1
