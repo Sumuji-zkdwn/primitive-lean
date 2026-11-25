@@ -1,0 +1,90 @@
+name: Compact KK circle causal horizon test
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/KKCircleHorizon.lean'
+      - 'tools/check_kk_circle_horizon.py'
+      - 'docs/research/2026-11-25-kk-circle-causal-horizon.md'
+      - '.github/workflows/kk-circle-causal-horizon.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kk-circle-horizon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Source commit and reproducible script hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_kk_circle_horizon.py | tee verification/oracle.sha256
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel check 5 local algebraic certificates
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/KKCircleHorizon.olean Research/KKCircleHorizon.lean 2>&1 | tee ../verification/curved-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../verification/curved-lean.log; then exit 1; fi
+      - name: Axiom audit 5 theorems
+        working-directory: lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib,re
+          src=pathlib.Path('Research/KKCircleHorizon.lean').read_text()
+          assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+          names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+          assert len(names)==5,names
+          pathlib.Path('KKCircleHorizonAudit.lean').write_text(
+              'import Research.KKCircleHorizon\n' +
+              ''.join('#print axioms KKCircleHorizon.'+n+'\n' for n in names))
+          pathlib.Path('../verification/curved-theorem-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 KKCircleHorizonAudit.lean 2>&1 | tee ../verification/curved-axioms.log
+          python - <<'PY'
+          import pathlib,re
+          txt=pathlib.Path('../verification/curved-axioms.log').read_text()
+          n=int(pathlib.Path('../verification/curved-theorem-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',txt),txt
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',txt)
+          none=txt.count('does not depend on any axioms')
+          assert len(deps)+none==n,(n,len(deps),none)
+          allow={'propext','Classical.choice','Quot.sound'}
+          for group in deps:
+              used=set(filter(None,(x.strip() for x in group.split(','))))
+              assert used<=allow,used-allow
+          print('PASS',n,'kernel-theorem axiom checks')
+          PY
+      - name: Independent non-diagonal 5D Ricci Riemann and null geodesic oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_kk_circle_horizon.py 2>&1 | tee verification/curved-sympy.log
+      - name: Preserve exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kk-circle-horizon-audit
+          path: verification/
+          if-no-files-found: warn
