@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-26T02:30Z",
+  "last_utc_day": "2026-11-26T03:00Z",
   "meta_snapshot": {
     "last_utc_day": "2026-11-26T01:30Z",
     "rules": [
@@ -4369,6 +4369,42 @@
       ],
       "right": "p:rotate_left",
       "score": 28,
+      "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
+    },
+    {
+      "behavior": {
+        "changed_inputs": 512,
+        "distinct_outputs": 512,
+        "fingerprint": "29593b3d9d11ecf2a96fc8e2b09d38be76c88c3ccd1515a16e27adc65fc6580c",
+        "inputs_exhaustively_checked": 512,
+        "sample_outputs": [
+          341,
+          20,
+          52,
+          80,
+          170
+        ]
+      },
+      "chain_sha256": "1a0868137821e33250acf5a3405c3e957ffcc66958690c59c8a9408b6466b6fb",
+      "day": "2026-11-26T03:00Z",
+      "domain": "grid3",
+      "evaluator": "generic-forge-v1-exhaustive-two-interpreters",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "gf_39db0797117a3351",
+      "left": "m:gf_37dcfd0adf9231d0",
+      "previous_sha256": "b230fccd8e44e420892f0704b28b28364ce92571ed10e67f78415ac327ddd527",
+      "program": [
+        "neighbor_xor",
+        "invert",
+        "mirror_lr",
+        "rotate_cw",
+        "mirror_lr",
+        "mirror_lr",
+        "neighbor_xor",
+        "mirror_lr"
+      ],
+      "right": "p:mirror_lr",
+      "score": 31,
       "status": "EXHAUSTIVELY_CHECKED_FINITE_OPERATOR"
     }
   ],
