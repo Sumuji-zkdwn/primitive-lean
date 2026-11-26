@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-25",
+  "last_utc_day": "2026-11-26",
   "receipts": [
     {
       "chain_sha256": "418aea158b7fd9bfaff075e9955cf4debe27b771d474c3f7b8fd29e6ed6f383b",
@@ -249,6 +249,114 @@
       "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
       "upstream_head": "a95e22e2d0b3da42ce795c2b1f78ce242cd6b0e566064bb5752dc97d921d9dbb",
       "word": []
+    },
+    {
+      "chain_sha256": "e3391b4719e8aa199d9ab2391f6734c2d30ef916fa152b87dce412d9f937bd00",
+      "day": "2026-11-26",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "po_2fba41931af62e82bb43",
+      "lean_sha256": "3a22fe2c2b1c88e53eecc821cf1a97adf1de61c594b52978949dc471803eeb0f",
+      "model": {
+        "name": "fd_a90bac6085dae1f0",
+        "observations": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            3,
+            5,
+            5
+          ],
+          [
+            4,
+            3,
+            5,
+            3,
+            5,
+            5
+          ]
+        ]
+      },
+      "objective": "SHORTEST_WORD_LENGTH_CHANGED",
+      "outcome": "DISTINGUISHABLE",
+      "parameters": {
+        "left": 1,
+        "right": 1
+      },
+      "parent": "v2:a4667fb89b6c440342d451fe5f2f65a700148205437b68ad81a4037afeb6c3f1",
+      "previous_sha256": "55ec991812a66345c880c99e002f3911607cc554d9d432171ee9c31eb7838203",
+      "request_sha256": "e605f44763b4988acf54a7153ceb4437f30d00f2c5dcd907f05df480511d263a",
+      "root_kind": "DISTINGUISHABLE",
+      "root_lean_sha256": "cac0371568a1d4dc192fb2b41458614f8d10e0b958de6d479aa48599ab0d085e",
+      "root_model": {
+        "name": "fd_2f517b4162b11f0f",
+        "observations": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            3,
+            5,
+            5
+          ]
+        ]
+      },
+      "root_request_sha256": "0434ba013574d8be639773dd8de8b8ea72efdcd434c81fbbce0fa10e9513c222",
+      "root_word": [
+        1,
+        1,
+        1
+      ],
+      "rule": "compose_actions",
+      "score": 28,
+      "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
+      "upstream_head": "a4667fb89b6c440342d451fe5f2f65a700148205437b68ad81a4037afeb6c3f1",
+      "word": [
+        1,
+        2
+      ]
     }
   ],
   "schema_version": 1
