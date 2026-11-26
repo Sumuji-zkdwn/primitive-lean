@@ -1,0 +1,59 @@
+name: Siphon four-probe probability observability
+
+on:
+  pull_request:
+    paths:
+      - 'docs/research/2026-11-23-siphon-four-probe-observability.md'
+      - 'tests/test_siphon_four_probe_observability.py'
+      - 'lean/Research/SiphonFourProbe.lean'
+      - 'lean/Research/SiphonPolynomialE.lean'
+      - 'lean/OrbitTrace.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+      - '.github/workflows/siphon-four-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-arithmetic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout exact PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Run independent rational regression tests
+        run: python3 -B -m unittest discover -s tests -p 'test_siphon_four_probe_observability.py' -v
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Retrieve pinned Mathlib cache
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get; then exit 0; fi
+            echo "cache attempt ${attempt} failed" >&2
+            sleep 5
+          done
+          exit 1
+      - name: Kernel-check four-read proof and audit its axioms
+        run: python3 -B tools/verify_toolchain_modules.py --module Research.SiphonFourProbe
+      - name: Upload audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: siphon-four-probe-${{ github.run_id }}
+          path: verification/toolchain-modules/
+          if-no-files-found: warn
+          retention-days: 30
