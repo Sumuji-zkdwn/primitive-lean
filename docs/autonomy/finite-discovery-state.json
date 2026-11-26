@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-25",
+  "last_utc_day": "2026-11-26",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -217,6 +217,55 @@
       "seed": "observer_hidden",
       "status": "LEAN_VERIFIED_FINITE_ONLY",
       "word": null
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "67c5d3c6e212e18d87f06f565bf0a74bbff36368d3d3c32cc65f8e228e0773cc",
+      "comparison": "FINITE_SHORTEST_DEPTH_CHANGED",
+      "day": "2026-11-26",
+      "depth": 1,
+      "fingerprint": "d95408c246ad5aa5903f5759c4ca42c95fb688bb9c7367a5c880aa11617c7d5b",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "lean_sha256": "7a522923752d827d3de6cdf81e9a4f55eecde077f8505b04ae35c7ea331981e8",
+      "model": {
+        "name": "fd_d95408c246ad5aa5",
+        "observations": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            3
+          ],
+          [
+            0,
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "mutation": "compose_first_action",
+      "name": "fd_d95408c246ad5aa5",
+      "outcome": "DISTINGUISHABLE",
+      "parent": "fd_87aec4dd436bae39",
+      "previous_sha256": "d6a021b637d79e3b8c81cef06714848f4ddf4a8b914fcdfa46a056210964c969",
+      "request_sha256": "0827e5c7f24f8921b1529fc1d187cf327a3cb493dca2b309f3184f98420bcc37",
+      "seed": "observer",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "word": [
+        1
+      ]
     }
   ],
   "schema_version": 1
