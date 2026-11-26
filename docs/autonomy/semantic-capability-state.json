@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-25",
+  "last_utc_day": "2026-11-26",
   "receipts": [
     {
       "chain_sha256": "764b71a0bc7602d1387d5ec442e07ecabd04e5f87811b650dffda771c0623bce",
@@ -172,6 +172,68 @@
         {
           "kind": "existing",
           "name": "reverse"
+        },
+        {
+          "kind": "peak",
+          "level": 1,
+          "order": "max",
+          "tie": "first"
+        }
+      ],
+      "score": 40,
+      "status": "EXHAUSTIVE_FINITE_SEMANTIC_SEPARATION"
+    },
+    {
+      "chain_sha256": "b2775a86f8ddd82a34482a53efbcd6cfef3c0a90039ccea195c1c0176d840cc8",
+      "day": "2026-11-26",
+      "evaluator": "semantic-foundry-v1-two-executors-and-closure-invariant",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "sf_38b66a2c30305877",
+      "invariant": {
+        "base_witness_sha256": "0237f9cc7098f76946ee6ddeec90222e4e6b34fe79a45b80e8348a9e53402c41",
+        "closure_argument": "composition_of_property_preserving_functions_preserves_property",
+        "constant_inputs_per_primitive": 4,
+        "independent_base_checks": 24,
+        "old_primitive_count": 6,
+        "property": "all_constant_signals_map_to_constant_signals"
+      },
+      "observation": {
+        "behavior_sha256": "de07f67f483ec9b3417d153a4eb460a800dcb9593981c8c61b1da0645a813360",
+        "changed_inputs": 256,
+        "constant_counterexample": {
+          "input": 0,
+          "input_values": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "output": 1,
+          "output_values": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        "distinct_outputs": 4,
+        "exhaustive_inputs": 256,
+        "four_single_peak_outputs": [
+          64,
+          1,
+          4,
+          16
+        ],
+        "independent_implementations": 2,
+        "nonfixed_position_response": true,
+        "number_of_violating_constant_inputs": 4
+      },
+      "parent": "sf_43ed97b6ef1909a1",
+      "previous_sha256": "e3b3e7092df12dd5d323e016198b208083918afa34858e170c9a00ee4a31acec",
+      "recipe": [
+        {
+          "kind": "existing",
+          "name": "rotate_left"
         },
         {
           "kind": "peak",
