@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "e741c085c51929ff03539e03524cddfea783c75f",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1515,6 +1515,71 @@
         "PrismAiryReflectance"
       ],
       "sha256": "066c1dc7eb94627c92c2901242da914f73a23c582dc0348dd21565ac214e116d"
+    },
+    {
+      "id": "main:lean/Research/CPRRegeneration.lean",
+      "scope": "main",
+      "path": "lean/Research/CPRRegeneration.lean",
+      "group": "Other",
+      "namespace": "CPRRegeneration",
+      "declarations": [
+        "Neighborhood",
+        "occupiedNeighbors",
+        "sandAt",
+        "harvest",
+        "born",
+        "totalSand",
+        "boundarySize",
+        "sum_membership",
+        "totalSand_eq_boundary",
+        "neighbors_harvest",
+        "sandAt_harvest_balance",
+        "totalSand_harvest",
+        "totalSand_birth",
+        "hitCount",
+        "trial",
+        "Action",
+        "applyAction",
+        "depleted_absorbing",
+        "Cell",
+        "moore",
+        "stepMass",
+        "ValidWeights",
+        "hitCount_le",
+        "sum_tickets",
+        "stepMass_eq_ticket_sum",
+        "hitCount_born_nonadjacent",
+        "nonadjacent_trials_commute",
+        "occupied",
+        "occupiedNeighbors_eq_sum",
+        "three_cell_order_witness",
+        "harvest_trial_order_witness",
+        "degreeUnits",
+        "degreeUnits_valid",
+        "frozenMass",
+        "frozenMass_harvest_balance",
+        "centre_harvest_can_lower_or_raise",
+        "corner_sign_reversal",
+        "seven_seed_and_pair",
+        "Ensemble",
+        "moment",
+        "visit",
+        "sweep",
+        "moment_cons",
+        "moment_congr",
+        "moment_scale",
+        "moment_sum",
+        "moment_visit",
+        "sweep_total_mass",
+        "empty_before_visit",
+        "fresh_sweep_marginal"
+      ],
+      "imports": [
+        "Mathlib.Data.Fintype.BigOperators",
+        "Mathlib.Data.Fintype.Prod",
+        "Mathlib.Algebra.BigOperators.Ring.Finset"
+      ],
+      "sha256": "e7f98db11aa75f7acb0520dc74b8cdbc3cbbfc9d753ba31adffefe159160d8a5"
     },
     {
       "id": "main:lean/Research/ChairPieKillSpot.lean",
@@ -27764,28 +27829,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "e741c085c51929ff03539e03524cddfea783c75f",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "e741c085c51929ff03539e03524cddfea783c75f",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "e741c085c51929ff03539e03524cddfea783c75f",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "e741c085c51929ff03539e03524cddfea783c75f",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }

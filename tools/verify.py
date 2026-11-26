@@ -448,6 +448,8 @@ def main(argv=None):
     modes.add_argument("--arc3-only", action="store_true", help="Check experimental ARC integration; does not run Lean")
     modes.add_argument("--integration-only", action="store_true", help="Check integrated PR sources, offline tests and Lean proofs")
     modes.add_argument("--elastica-boundary-only", action="store_true", help="Check the fixed-boundary Elastica operator bridge")
+    modes.add_argument("--cpr-regeneration-only", action="store_true",
+                       help="Check the finite CPR certificate, Lean module and theorem axioms")
     modes.add_argument("--projection-reachability-only", action="store_true", help="Check projected reachability, permissions and finite counterexamples")
     modes.add_argument("--sandpile-laakso-only", action="store_true",
                        help="Check the sandpile Laakso construction with its pinned Lean toolchains")
@@ -473,6 +475,16 @@ def main(argv=None):
             parser.error("Build Elastica first; --toolchain-modules-only always recompiles standalone sources")
         from verify_toolchain_modules import run as verify_modules
         result = verify_modules(root=ROOT)
+        return 0 if result["passed"] else 1
+    if args.cpr_regeneration_only:
+        from verify_toolchain_modules import run as verify_modules
+        numeric = subprocess.run(
+            [sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests",
+             "-p", "test_cpr_regeneration.py", "-v"], cwd=ROOT)
+        if numeric.returncode:
+            return numeric.returncode
+        result = verify_modules(root=ROOT, selected=["Research.CPRRegeneration"],
+                                output="cpr-regeneration")
         return 0 if result["passed"] else 1
     if args.projection_reachability_only:
         if args.rebuild:
