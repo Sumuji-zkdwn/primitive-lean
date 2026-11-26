@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "ee71fea6f78715eab5305952e5a6b2fcf2fc9c66",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -1723,6 +1723,33 @@
         "Research.OkanoharaTransport"
       ],
       "sha256": "18bc870519cd26417d1db23e0267717147f47d77c805e9acd1e390adf9efecf8"
+    },
+    {
+      "id": "main:lean/Research/IdempotentButtonCycles.lean",
+      "scope": "main",
+      "path": "lean/Research/IdempotentButtonCycles.lean",
+      "group": "Other",
+      "namespace": "IdempotentButtonCycles",
+      "declarations": [
+        "Idempotent",
+        "intermediate_outside_image",
+        "twice_minimalPeriod_le_card",
+        "six_le_card_of_period_three",
+        "pressA",
+        "pressB",
+        "pressA_idempotent",
+        "pressB_idempotent",
+        "period_on_front",
+        "realizes_on_twice",
+        "canonical_at_equality",
+        "factor_iff_outside_preimages"
+      ],
+      "imports": [
+        "Mathlib.Data.Fintype.Sum",
+        "Mathlib.Data.ZMod.Basic",
+        "Mathlib.Dynamics.PeriodicPts.Defs"
+      ],
+      "sha256": "e0fec2817d9d14a23d3212652a1c7db10f62f5f9f4f25de8f2b3bc8d319363b3"
     },
     {
       "id": "main:lean/Research/OkanoharaTransport.lean",
@@ -22409,14 +22436,6 @@
     },
     {
       "from": "main:linear_input/lean_check/EWFSFenchel.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/EWFSFenchel.inc",
       "to": "main:linear_input/lean_check/VariablePairObservations.inc",
       "kind": "qualified_reference",
       "symbols": [
@@ -22706,14 +22725,6 @@
     },
     {
       "from": "main:linear_input/lean_check/EnergyWfsFenchel.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/EnergyWfsFenchel.inc",
       "to": "main:linear_input/lean_check/VariablePairObservations.inc",
       "kind": "qualified_reference",
       "symbols": [
@@ -22733,16 +22744,7 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "Idempotent",
         "subtype_heq"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/F0FutureMinimality.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
       ]
     },
     {
@@ -22781,7 +22783,6 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "A_B_collapse",
-        "Idempotent",
         "Reconstructs"
       ]
     },
@@ -22831,7 +22832,6 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "Idempotent",
         "exampleK_idempotent"
       ]
     },
@@ -23042,14 +23042,6 @@
       ]
     },
     {
-      "from": "main:linear_input/lean_check/F16Holonomy.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
       "from": "main:linear_input/lean_check/F16RankCertificate.inc",
       "to": "main:linear_input/lean_check/F16Holonomy.inc",
       "kind": "unique_identifier_candidate",
@@ -23166,7 +23158,6 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "A_B_collapse",
-        "Idempotent",
         "Reconstructs"
       ]
     },
@@ -23439,14 +23430,6 @@
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputF0.Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/FiveDimLagrange.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
       ]
     },
     {
@@ -23917,27 +23900,11 @@
       ]
     },
     {
-      "from": "main:linear_input/lean_check/GravityObservations.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
       "from": "main:linear_input/lean_check/GravityObserver.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputF0.Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/GravityObserver.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
       ]
     },
     {
@@ -24783,7 +24750,6 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "Idempotent",
         "fixed_iff_in_range"
       ]
     },
@@ -24814,14 +24780,6 @@
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputF0.Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/ObservationRetractionPolarity.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
       ]
     },
     {
@@ -24891,7 +24849,6 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "Idempotent",
         "exampleK_idempotent"
       ]
     },
@@ -25131,14 +25088,6 @@
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputF0.Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/PilotComparisonBridge.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
       ]
     },
     {
@@ -25494,14 +25443,6 @@
     },
     {
       "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/RadicalF0Bridge.inc",
       "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
       "kind": "qualified_reference",
       "symbols": [
@@ -25721,14 +25662,6 @@
     },
     {
       "from": "main:linear_input/lean_check/Rule481Symmetry.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/Rule481Symmetry.inc",
       "to": "main:linear_input/lean_check/F0UpdateDescent.inc",
       "kind": "qualified_reference",
       "symbols": [
@@ -25823,14 +25756,6 @@
       ]
     },
     {
-      "from": "main:linear_input/lean_check/StrangeOperatorBoundary.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
-      ]
-    },
-    {
       "from": "main:linear_input/lean_check/StrangeOperatorConjugacy.inc",
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "qualified_reference",
@@ -25845,8 +25770,7 @@
       "to": "main:linear_input/lean_check/F0Retractions.inc",
       "kind": "unique_identifier_candidate",
       "symbols": [
-        "CommutingMap",
-        "Idempotent"
+        "CommutingMap"
       ]
     },
     {
@@ -25892,14 +25816,6 @@
       "kind": "qualified_reference",
       "symbols": [
         "LinearInputF0.Idempotent"
-      ]
-    },
-    {
-      "from": "main:linear_input/lean_check/StrangeOperatorCounting.inc",
-      "to": "main:linear_input/lean_check/F0Retractions.inc",
-      "kind": "unique_identifier_candidate",
-      "symbols": [
-        "Idempotent"
       ]
     },
     {
@@ -25951,7 +25867,6 @@
       "kind": "unique_identifier_candidate",
       "symbols": [
         "CommutingMap",
-        "Idempotent",
         "exampleBadS",
         "exampleK_idempotent"
       ]
@@ -27764,28 +27679,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "ee71fea6f78715eab5305952e5a6b2fcf2fc9c66",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "ee71fea6f78715eab5305952e5a6b2fcf2fc9c66",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "ee71fea6f78715eab5305952e5a6b2fcf2fc9c66",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "ee71fea6f78715eab5305952e5a6b2fcf2fc9c66",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
