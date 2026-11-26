@@ -1,0 +1,92 @@
+name: Einstein-Lambda product and radion algebra
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/EinsteinProductRadion.lean'
+      - 'lean/Research/EinsteinShapeModes.lean'
+      - 'tools/check_einstein_product.py'
+      - 'docs/research/2026-11-22-einstein-product-radion.md'
+      - '.github/workflows/einstein-product-radion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  product-radion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Kernel compile algebraic theorem module
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/EinsteinProductRadion.olean Research/EinsteinProductRadion.lean 2>&1 | tee ../einstein-product-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../einstein-product-lean.log; then exit 1; fi
+          lake env lean --trust=0 -o .lake/build/lib/lean/Research/EinsteinShapeModes.olean Research/EinsteinShapeModes.lean 2>&1 | tee ../einstein-shape-lean.log
+          if grep -E '(^|[[:space:]])(error:|warning:|sorryAx)' ../einstein-shape-lean.log; then exit 1; fi
+      - name: Strict theorem axiom audit
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import pathlib, re
+          modules=('EinsteinProductRadion','EinsteinShapeModes')
+          names=[]
+          for mod in modules:
+              src=pathlib.Path('Research',mod+'.lean').read_text()
+              assert not re.search(r'^\s*(axiom|sorry)\b',src,re.M)
+              names.extend(mod+'.'+name for name in re.findall(r'^theorem\s+(\w+)',src,re.M))
+          assert len(names)>=17,names
+          pathlib.Path('EinsteinProductRadionAudit.lean').write_text(
+              ''.join('import Research.'+mod+'\n' for mod in modules)+
+              ''.join('#print axioms '+name+'\n' for name in names))
+          pathlib.Path('../einstein-product-count.txt').write_text(str(len(names)))
+          PY
+          lake env lean --trust=0 EinsteinProductRadionAudit.lean 2>&1 | tee ../einstein-product-audit.log
+          python - <<'PY'
+          import pathlib, re
+          s=pathlib.Path('../einstein-product-audit.log').read_text()
+          n=int(pathlib.Path('../einstein-product-count.txt').read_text())
+          assert not re.search(r'\b(error:|warning:|sorryAx)\b',s),s
+          entries=re.findall(r'depends on axioms:\s*\[([^]]*)\]',s)
+          absent=s.count('does not depend on any axioms')
+          assert len(entries)+absent==n,(n,len(entries),absent)
+          allowed={'propext','Classical.choice','Quot.sound'}
+          for entry in entries:
+              used=set(filter(None,(x.strip() for x in entry.split(','))))
+              assert used<=allowed,used-allowed
+          print('Exact checked Lean theorem count:',n)
+          PY
+      - name: Independent exact six-dimensional Einstein symbolic oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_einstein_product.py 2>&1 | tee einstein-product-python.log
+      - name: Upload exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: einstein-product-radion
+          path: |
+            einstein-product-lean.log
+            einstein-shape-lean.log
+            einstein-product-audit.log
+            einstein-product-count.txt
+            einstein-product-python.log
+          if-no-files-found: warn
