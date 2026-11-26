@@ -1,0 +1,114 @@
+name: Finite coordinate curvature core
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/FiniteConnectionCurvature.lean'
+      - 'lean/Research/FiniteConnectionWitness.lean'
+      - 'lean/Research/FiniteConnectionDerivation.lean'
+      - 'lean/Research/FiniteConnectionCommutator.lean'
+      - 'tools/check_finite_connection_curvature.py'
+      - 'tools/check_finite_connection_commutator.py'
+      - 'docs/verification/2026-11-23-coordinate-curvature-core.md'
+      - '.github/workflows/finite-coordinate-curvature.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coordinate-curvature:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Install repository-pinned Lean and Mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Compile general curvature core and nonflat witness
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/Research
+          for mod in FiniteConnectionCurvature FiniteConnectionWitness FiniteConnectionDerivation FiniteConnectionCommutator; do
+            lake env lean --trust=0 \
+              -o ".lake/build/lib/lean/Research/$mod.olean" \
+              "Research/$mod.lean" 2>&1 | tee "../finite-curvature-$mod.log"
+          done
+      - name: Audit all theorems and dependencies
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          modules = ("FiniteConnectionCurvature", "FiniteConnectionWitness", "FiniteConnectionDerivation", "FiniteConnectionCommutator")
+          imports=[]; checks=[]
+          for m in modules:
+            raw=Path("Research/"+m+".lean").read_text()
+            src=re.sub(r'/\-.*?\-/', '',raw,flags=re.S)
+            assert not re.search(r'\b(sorry|axiom)\b', src), m
+            names=re.findall(r'^theorem\s+(\w+)',src,re.M)
+            assert names,m
+            imports.append("import Research."+m)
+            checks.extend("#print axioms "+m+"."+n for n in names)
+          Path("FiniteCurvatureAxiomAudit.lean").write_text(
+            "\n".join(imports+checks)+"\n")
+          Path("../finite-curvature-count.txt").write_text(str(len(checks)))
+          PY
+          lake env lean --trust=0 FiniteCurvatureAxiomAudit.lean 2>&1 \
+            | tee ../finite-curvature-axioms.log
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          txt=Path('../finite-curvature-axioms.log').read_text()
+          total=int(Path('../finite-curvature-count.txt').read_text())
+          deps=re.findall(r'depends on axioms:\s*\[([^]]*)\]',txt)
+          none=txt.count('does not depend on any axioms')
+          assert len(deps)+none==total,(len(deps),none,total)
+          for row in deps:
+            assert {a.strip() for a in row.split(',') if a.strip()} <= {
+              'propext','Classical.choice','Quot.sound'},row
+          assert 'sorryAx' not in txt
+          print('PASS: kernel axioms of',total,'theorems')
+          PY
+      - name: Independently derive Levi-Civita and Ricci for a curved metric
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check sympy==1.14.0
+          python -B tools/check_finite_connection_curvature.py 2>&1 |
+            tee finite-curvature-sympy.log
+          python -B tools/check_finite_connection_commutator.py 2>&1 | tee finite-curvature-commutator.log
+      - name: Record exact checkout and source fingerprints
+        if: always()
+        shell: bash
+        run: |
+          git rev-parse HEAD > finite-curvature-checkout.txt
+          sha256sum lean/Research/FiniteConnectionCurvature.lean \
+            lean/Research/FiniteConnectionWitness.lean \
+            lean/Research/FiniteConnectionDerivation.lean \
+            lean/Research/FiniteConnectionCommutator.lean \
+            tools/check_finite_connection_curvature.py \
+            tools/check_finite_connection_commutator.py > finite-curvature-sources.sha256
+      - name: Upload all evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: finite-coordinate-curvature
+          path: |
+            finite-curvature-*.log
+            finite-curvature-count.txt
+            finite-curvature-checkout.txt
+            finite-curvature-sources.sha256
+          if-no-files-found: warn
