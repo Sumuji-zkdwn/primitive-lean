@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-25",
+  "last_utc_day": "2026-11-26",
   "receipts": [
     {
       "behavior": {
@@ -220,6 +220,77 @@
       "score": 27,
       "source_generic": "ad31a6eb5145f967c67293f8ce026e1bc84443c9ada66426b6cec3f748e50a5e",
       "source_semantic": "e3b3e7092df12dd5d323e016198b208083918afa34858e170c9a00ee4a31acec",
+      "status": "VERIFIED_HYBRID_FINITE_SIGNAL_OPERATOR"
+    },
+    {
+      "behavior": {
+        "behavior_sha256": "d4490a4eaddef1863fc0b622d2f67f6bc27318f489833a413a13eb362fbe22a7",
+        "changed_inputs": 256,
+        "constant_counterexample": {
+          "input": 0,
+          "input_values": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "output": 1,
+          "output_values": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        "distinct_outputs": 4,
+        "exhaustive_inputs": 256,
+        "four_position_outputs": [
+          64,
+          16,
+          4,
+          1
+        ],
+        "independent_implementations": 2,
+        "old_primitive_closure_excluded": true
+      },
+      "chain_sha256": "d0bf21e49df3a14a05f21fcfdea8389f40e9c6f39033f573a4d7557f4d2b8e46",
+      "day": "2026-11-26",
+      "evaluator": "semantic-bridge-v1-dual-exhaustive-composition",
+      "flattened": [
+        {
+          "id": "gf_198afad7a91bc9a2",
+          "kind": "generic"
+        },
+        {
+          "id": "sf_293c96aead268bc5",
+          "kind": "semantic"
+        }
+      ],
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "sb_8243ec0413dc6710",
+      "invariant": {
+        "base_witness_sha256": "0237f9cc7098f76946ee6ddeec90222e4e6b34fe79a45b80e8348a9e53402c41",
+        "closure_argument": "composition_of_property_preserving_functions_preserves_property",
+        "constant_inputs_per_primitive": 4,
+        "independent_base_checks": 24,
+        "old_primitive_count": 6,
+        "property": "all_constant_signals_map_to_constant_signals"
+      },
+      "parent": null,
+      "previous_sha256": "0ee37a6837aceb226fdebdf7bb32b908df35dc086d82f7cb48cbff8fb832aab2",
+      "recipe": [
+        {
+          "id": "gf_198afad7a91bc9a2",
+          "kind": "generic"
+        },
+        {
+          "id": "sf_293c96aead268bc5",
+          "kind": "semantic"
+        }
+      ],
+      "score": 14,
+      "source_generic": "bcf8c58ec428343a8b8ad467108f137903179c2dfb40df39be1527c4a225cab0",
+      "source_semantic": "b2775a86f8ddd82a34482a53efbcd6cfef3c0a90039ccea195c1c0176d840cc8",
       "status": "VERIFIED_HYBRID_FINITE_SIGNAL_OPERATOR"
     }
   ],
