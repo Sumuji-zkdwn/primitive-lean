@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-25",
+  "last_utc_day": "2026-11-26",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -378,6 +378,95 @@
       "source_id": "reviewed:laakso",
       "status": "LEAN_VERIFIED_FINITE_PAIR_COMPARISON_ONLY",
       "upstream_sha256": "c49a55fdb03dd62bf2dc60e5bd5574260f34298986c19d7cc93b078d05778b04",
+      "word": null
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "e81806db245d2c0c101607e69dd62a7014f81a2a4305c413bccbe02d1e8db345",
+      "day": "2026-11-26",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "rule_6e28421c8860cd75",
+      "lean_sha256": "1a1e29cbcd52f6857ca534bcf999a8084ca047d7948239c27f7ff50718fce8e7",
+      "model": {
+        "name": "fd_0ff23a2129619f76",
+        "observations": [
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "pair": [
+          0,
+          4
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            3,
+            4
+          ],
+          [
+            0,
+            3,
+            3,
+            3,
+            4
+          ]
+        ]
+      },
+      "model_fingerprint": "0ff23a2129619f7659f8dd339a67f774e647ce746f7217d13ac219c56d605e60",
+      "objective": "PAIR_DISTINGUISHABILITY_FLIPPED",
+      "outcome": "EQUIVALENT",
+      "parent_rule": null,
+      "previous_sha256": "fbd06b8ea73ab48a7eb6fbc4b91e42564411360c6ebf5614b101b68e1fa829d9",
+      "program": [
+        "adjoin_absorbing_state"
+      ],
+      "request_sha256": "64781c5e4c98b16c6a2a8194d2d1b3fd51111e0a36ecccf216ea2b82207fcad2",
+      "reward": 12,
+      "root_fingerprint": "d95408c246ad5aa5903f5759c4ca42c95fb688bb9c7367a5c880aa11617c7d5b",
+      "root_kind": "DISTINGUISHABLE",
+      "root_lean_sha256": "7a522923752d827d3de6cdf81e9a4f55eecde077f8505b04ae35c7ea331981e8",
+      "root_model": {
+        "name": "fd_d95408c246ad5aa5",
+        "observations": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            3
+          ],
+          [
+            0,
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "root_request_sha256": "0827e5c7f24f8921b1529fc1d187cf327a3cb493dca2b309f3184f98420bcc37",
+      "root_word": [
+        1
+      ],
+      "source_chain_sha256": "67c5d3c6e212e18d87f06f565bf0a74bbff36368d3d3c32cc65f8e228e0773cc",
+      "source_id": "finite-discovery:fd_d95408c246ad5aa5",
+      "status": "LEAN_VERIFIED_FINITE_PAIR_COMPARISON_ONLY",
+      "upstream_sha256": "57c192bbb8cc47c8138c9a959641026a164aa7b60fa6845fcae8e5298ceab04d",
       "word": null
     }
   ],
