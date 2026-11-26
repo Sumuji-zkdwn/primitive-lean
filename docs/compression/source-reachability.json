@@ -1,11 +1,11 @@
 {
   "counts": {
-    "all_source_edges": 1383,
-    "eligible_direct_edges": 428,
-    "nodes": 434,
-    "retained_pairs": 307,
+    "all_source_edges": 1386,
+    "eligible_direct_edges": 431,
+    "nodes": 435,
+    "retained_pairs": 309,
     "transitive_pairs_removed": 114,
-    "unique_eligible_pairs": 421,
+    "unique_eligible_pairs": 423,
     "weak_edges_excluded": 955
   },
   "edges": [
@@ -319,6 +319,14 @@
     ],
     [
       "main:lean/Research/SiphonPredictiveQuotient.lean",
+      "main:lean/Research/SiphonPolynomialE.lean"
+    ],
+    [
+      "main:lean/Research/SiphonTangentObservation.lean",
+      "main:lean/OrbitTrace.lean"
+    ],
+    [
+      "main:lean/Research/SiphonTangentObservation.lean",
       "main:lean/Research/SiphonPolynomialE.lean"
     ],
     [
@@ -1314,6 +1322,7 @@
     "main:lean/Research/SiphonInteraction.lean",
     "main:lean/Research/SiphonPolynomialE.lean",
     "main:lean/Research/SiphonPredictiveQuotient.lean",
+    "main:lean/Research/SiphonTangentObservation.lean",
     "main:lean/Research/SphereClock.lean",
     "main:lean/Research/SphereClockRationalGluing.lean",
     "main:lean/Research/SphereClockWordNormalForm.lean",
@@ -1677,8 +1686,8 @@
   "schema_version": 1,
   "semantics": "strong lexical source reachability only; not Lean proof implication",
   "source": {
-    "graph_sha256": "8aa9cd4efa1cff4c8180e88dba788c9b18f4cf7088fe1af4d981fd873c95f1d2",
-    "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+    "graph_sha256": "644ade55d78793c32f4a7d37fe2273495d1c4e6fd109c6c631bdae267e50b921",
+    "main_commit": "157e1c07021ca83bb61ae9c4f384d78b8a4d7b86",
     "pr_snapshot": "2026-11-05"
   },
   "source_link_kinds": [

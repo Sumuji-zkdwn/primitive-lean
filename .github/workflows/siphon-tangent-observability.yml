@@ -1,0 +1,63 @@
+name: Siphon tangent distribution observability and regularity
+
+on:
+  pull_request:
+    paths:
+      - 'lean/Research/SiphonTangentObservation.lean'
+      - 'lean/Research/SiphonPolynomialE.lean'
+      - 'lean/OrbitTrace.lean'
+      - 'lean/lean-toolchain'
+      - 'lean/lake-manifest.json'
+      - 'tests/test_siphon_distribution_regularity.py'
+      - 'tests/test_siphon_curvature_sensor.py'
+      - 'docs/research/2026-11-23-curvature-observation-repair.md'
+      - 'docs/research/2026-11-23-siphon-tangent-regularity-and-no-go.md'
+      - '.github/workflows/siphon-tangent-observability.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exact arithmetic regression tests
+        run: |
+          python3 -B -m unittest discover -s tests -p 'test_siphon_distribution_regularity.py' -v
+          python3 -B -m unittest discover -s tests -p 'test_siphon_curvature_sensor.py' -v
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: false
+          use-github-cache: true
+      - name: Retrieve pinned Mathlib cache
+        shell: bash
+        working-directory: lean
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if lake exe cache get; then exit 0; fi
+            echo "Mathlib cache download attempt ${attempt} failed" >&2
+            sleep 5
+          done
+          exit 1
+      - name: Kernel-check the exact-head five-reading proof and audit axioms
+        run: python3 -B tools/verify_toolchain_modules.py --module Research.SiphonTangentObservation
+      - name: Upload audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: siphon-tangent-observability-${{ github.run_id }}
+          path: verification/toolchain-modules/
+          if-no-files-found: warn
+          retention-days: 30

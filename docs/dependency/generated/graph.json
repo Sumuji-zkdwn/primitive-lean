@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repo": "Sumuji-zkdwn/primitive-lean",
-  "main_commit": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+  "main_commit": "157e1c07021ca83bb61ae9c4f384d78b8a4d7b86",
   "pr_snapshot": "2026-11-05",
   "nodes": [
     {
@@ -2071,6 +2071,36 @@
         "Research.ElasticaObservationQuotient"
       ],
       "sha256": "b81eb3e075900ccdc23f80f8b9c70cd8e23e7aaafd5efab26aae8265ddb9a005"
+    },
+    {
+      "id": "main:lean/Research/SiphonTangentObservation.lean",
+      "scope": "main",
+      "path": "lean/Research/SiphonTangentObservation.lean",
+      "group": "Other",
+      "namespace": "SiphonTangentObservation",
+      "declarations": [
+        "afterEL",
+        "afterEL_zero",
+        "afterEL_zero_neg",
+        "afterEL_at_zero",
+        "afterEL_at_zero_neg",
+        "square_eq_split",
+        "five_square_core",
+        "squareRead",
+        "read_E",
+        "read_E2",
+        "read_L",
+        "read_EL",
+        "five_square_reads_injective",
+        "probRead",
+        "prob_eq_implies_square_eq",
+        "five_probability_reads_injective"
+      ],
+      "imports": [
+        "Research.SiphonPolynomialE",
+        "OrbitTrace"
+      ],
+      "sha256": "de30d00c8faa44497dda97d7361a00daa0000104a2389ae758ef7d82c3c7eb62"
     },
     {
       "id": "main:lean/Research/SphereClock.lean",
@@ -16020,6 +16050,30 @@
       ]
     },
     {
+      "from": "main:lean/Research/SiphonTangentObservation.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "OrbitTrace"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonTangentObservation.lean",
+      "to": "main:lean/OrbitTrace.lean",
+      "kind": "qualified_reference",
+      "symbols": [
+        "OrbitTrace.linearE"
+      ]
+    },
+    {
+      "from": "main:lean/Research/SiphonTangentObservation.lean",
+      "to": "main:lean/Research/SiphonPolynomialE.lean",
+      "kind": "exact_import",
+      "symbols": [
+        "Research.SiphonPolynomialE"
+      ]
+    },
+    {
       "from": "main:lean/Research/SphereClock.lean",
       "to": "main:lean/Elastica/Geometry.lean",
       "kind": "exact_import",
@@ -27764,28 +27818,28 @@
     {
       "number": 72,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "157e1c07021ca83bb61ae9c4f384d78b8a4d7b86",
       "head_sha": "4c3a5940ba0617e288471f010a3dc0606475367b",
       "merge_base_sha": "9bffcf87bc103cccb0c3b003c8b1704338c56d17"
     },
     {
       "number": 75,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "157e1c07021ca83bb61ae9c4f384d78b8a4d7b86",
       "head_sha": "75220136e2c41b19cb4b7a586313647834c198e0",
       "merge_base_sha": "5e977cdae00f399abe8e373d49b9d4ff391fa8de"
     },
     {
       "number": 77,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "157e1c07021ca83bb61ae9c4f384d78b8a4d7b86",
       "head_sha": "7680f37031d2a5aed06d13765cddbd9712574902",
       "merge_base_sha": "7680f37031d2a5aed06d13765cddbd9712574902"
     },
     {
       "number": 78,
       "base_branch": "main",
-      "base_sha": "c79fd4f87c5cf8c9f58caa2269a2cf54e8783a88",
+      "base_sha": "157e1c07021ca83bb61ae9c4f384d78b8a4d7b86",
       "head_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd",
       "merge_base_sha": "5b8a7e3597ea8f775f77e8759f1ef1be967f98dd"
     }
