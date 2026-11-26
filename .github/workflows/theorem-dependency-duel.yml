@@ -1,0 +1,21 @@
+name: Theorem Dependency Duel (read-only)
+on:
+  pull_request:
+    paths:
+      - 'games/dependency-duel/**'
+      - 'docs/dependency/data/deps.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-data-and-strategy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify pinned Lean proof edges and exact strategy
+        run: python3 games/dependency-duel/verify.py
