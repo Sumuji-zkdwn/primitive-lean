@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-23",
+  "authored_on_parent_commit": "a5e7db1eff95b6c2777bd04f3de23b8d00057cde",
+  "origin": "authored_in_primitive_lean",
+  "motivation": "The kernel dependency report (docs/dependency/README.md) found that only 34 of 984 subsequent theorems reach an initial-layer theorem through proof terms. The user asked to connect the supplements to the core and delegated the choice of bridges. Both bridges were proposed in this session; they are not attributed to Research or to earlier conversations.",
+  "connection_criterion": "A bridge theorem must use an existing core (initial-layer) theorem inside its proof term, not only reuse a core definition in its statement.",
+  "formalization_choices": [
+    "ScaleTemperature: a finite candidate type, prior weights and inverse temperature are explicit inputs; every candidate is scaled by the same positive factor, so lengths and endpoint data are transported.",
+    "ArcChebyshev: constant curvature is a hypothesis on the open interval; the multiplier pair is the one produced by the existing main result, and every count is for one fixed multiplier pair.",
+    "ArcChebyshev: the normalization scale is sqrt(8 sigma / (3 k)) and is used only for sigma > 0."
+  ],
+  "reused_existing_theorems": [
+    "Elastica.energy_scaling_of_homogeneous",
+    "Elastica.energy_scaling_quadratic",
+    "LinearInputBayes.curve_weight_as_tilt",
+    "LinearInputMainResult.locallyMinimizing_pressure_curvature_phase",
+    "LinearInputMainResult.circle_pressure_stationary",
+    "LinearInputBranchForgetting.input_normalization",
+    "LinearInputBranchFibers.real_inverse_card_regular",
+    "LinearInputBranchFibers.real_inverse_card_one",
+    "LinearInputBranchFibers.real_inverse_card_neg_one"
+  ],
+  "excluded_claims": [
+    "Uniqueness of the area multiplier of an arc (it fails, section 7.12)",
+    "An upper bound on the number of locally minimizing arcs",
+    "The cases sigma <= 0 and 27 k p^2 > 8 sigma^3",
+    "Existence of constant-curvature local minima beyond the existing unit circle",
+    "Comparison within one fixed boundary-value problem under scaling",
+    "Physical temperature, dynamics or minimizer existence"
+  ],
+  "kernel_reachability": {
+    "method": "tools/deps/ExtractDeps.lean on the two supplements compiled against a prefix of All.lean and the registered supplements through FiniteBayes.inc; initial layer = Elastica modules and the namespaces of the 36 All.lean parts.",
+    "theorems": 17,
+    "theorems_reaching_initial_by_proof": 7,
+    "reaching": {
+      "LinearInputScaleTemperature.scaled_posterior_homogeneous": [
+        "Elastica.energy_scaling_of_homogeneous"
+      ],
+      "LinearInputScaleTemperature.scaled_posterior_quadratic": [
+        "Elastica.energy_scaling_quadratic"
+      ],
+      "LinearInputScaleTemperature.scaled_posterior_quadratic_tilt": [
+        "LinearInputScaleTemperature.scaled_posterior_quadratic",
+        "LinearInputBayes.curve_weight_as_tilt"
+      ],
+      "LinearInputScaleTemperature.scaled_posterior_tendsto_prior": [
+        "LinearInputScaleTemperature.scaled_posterior_quadratic"
+      ],
+      "LinearInputArcChebyshev.locallyMinimizing_constant_curvature_cubic": [
+        "LinearInputMainResult.locallyMinimizing_pressure_curvature_phase"
+      ],
+      "LinearInputArcChebyshev.locallyMinimizing_arc_chebyshev_fiber": [
+        "LinearInputArcChebyshev.locallyMinimizing_constant_curvature_cubic",
+        "LinearInputArcChebyshev.arcCubicSet_ncard_three",
+        "LinearInputArcChebyshev.arcCubicSet_ncard_two"
+      ],
+      "LinearInputArcChebyshev.circle_zero_pressure_fiber": [
+        "LinearInputMainResult.circle_pressure_stationary",
+        "LinearInputArcChebyshev.arcCubicSet_ncard_three"
+      ]
+    },
+    "not_reaching": "The remaining 10 ArcChebyshev theorems are algebraic normalization and discriminant lemmas."
+  },
+  "counting_convention": "Named theorem/lemma/def/abbrev declarations indexed by the existing common verifier.",
+  "lean_supplements": [
+    {
+      "path": "linear_input/lean_check/ScaleTemperature.inc",
+      "namespace": "LinearInputScaleTemperature",
+      "sha256": "becdbfb5465f5739fba8b4b942b23476a55863aec8cbab24d8ab6f861b99a876",
+      "theorem_count": 4,
+      "declaration_count": 4,
+      "declarations": [
+        {
+          "kind": "theorem",
+          "name": "LinearInputScaleTemperature.scaled_posterior_homogeneous",
+          "line": 22
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputScaleTemperature.scaled_posterior_quadratic",
+          "line": 36
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputScaleTemperature.scaled_posterior_quadratic_tilt",
+          "line": 50
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputScaleTemperature.scaled_posterior_tendsto_prior",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "path": "linear_input/lean_check/ArcChebyshev.inc",
+      "namespace": "LinearInputArcChebyshev",
+      "sha256": "9b1107b41016895ffb04db75ff8258655188d8d484a81fb946e805995bab1cb2",
+      "theorem_count": 13,
+      "declaration_count": 16,
+      "declarations": [
+        {
+          "kind": "def",
+          "name": "LinearInputArcChebyshev.arcCubicSet",
+          "line": 22
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputArcChebyshev.chebyshevScale",
+          "line": 25
+        },
+        {
+          "kind": "def",
+          "name": "LinearInputArcChebyshev.chebyshevLevel",
+          "line": 28
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.chebyshevScale_pos",
+          "line": 30
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.chebyshevScale_sq",
+          "line": 34
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.mem_arcCubicSet_iff_input",
+          "line": 40
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.locallyMinimizing_constant_curvature_cubic",
+          "line": 54
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.mem_arcCubicSet_iff_chebyshev",
+          "line": 82
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.arcCubicSet_eq_image",
+          "line": 108
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.chebyshevLevel_sq",
+          "line": 125
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.chebyshevLevel_abs_lt_one",
+          "line": 140
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.chebyshevLevel_sq_eq_one",
+          "line": 149
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.arcCubicSet_ncard_three",
+          "line": 163
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.arcCubicSet_ncard_two",
+          "line": 175
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.locallyMinimizing_arc_chebyshev_fiber",
+          "line": 191
+        },
+        {
+          "kind": "theorem",
+          "name": "LinearInputArcChebyshev.circle_zero_pressure_fiber",
+          "line": 210
+        }
+      ]
+    }
+  ]
+}
