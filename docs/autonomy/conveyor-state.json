@@ -1,6 +1,6 @@
 {
-  "last_source_sha": "00d7c56ad366f78d41a052fea3c1568deb0b383829f5a38b4c3dff92a40a32e9",
-  "last_utc_day": "2026-11-26",
+  "last_source_sha": "d979ca6d1eeea64d9bf737e733bfa5e3c13dac39c0118a808cf2656b099b2905",
+  "last_utc_day": "2026-11-27",
   "results": [
     {
       "generated_lean_sha256": "bb7862169c1d628ab74a8f7b80a205294b86277d138c87619872d30ff9ae171b",
@@ -74,6 +74,22 @@
       "status": "LEAN_VERIFIED_FINITE_ONLY",
       "task_id": "observer_macro",
       "utc_day": "2026-11-26"
+    },
+    {
+      "generated_lean_sha256": "ad450407d3549816289e418ad4566cb83a970288cd82a49c8e1a1a46722b80e0",
+      "kind": "DISTINGUISHABLE",
+      "lead_id": "6ae94476ef81461fa865",
+      "main_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "model_sha256": "60c8fc196024a18988e1413ed3b407a3bcbc72836bdb59d075d0875f3373feaf",
+      "scope": "FINITE_LAAKSO_RAW_VERTEX_ONLY",
+      "shortest_word": [
+        1,
+        1
+      ],
+      "source_sha256": "d979ca6d1eeea64d9bf737e733bfa5e3c13dac39c0118a808cf2656b099b2905",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "task_id": "laakso_w1_advance",
+      "utc_day": "2026-11-27"
     }
   ],
   "schema_version": 1
