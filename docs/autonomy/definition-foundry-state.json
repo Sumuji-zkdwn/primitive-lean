@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-26",
+  "last_utc_day": "2026-11-27",
   "receipts": [
     {
       "base_lean_sha256": "741c1a16526a47fd6308ae465602e052a7804a4ed1652fdd2bf8d6c96a540271",
@@ -614,6 +614,160 @@
       "source_sha256": "771a3bbf9046d88007fa9d3c7f19646507f64b5b025d14fbc6e50db5b1f3c78e",
       "status": "LEAN_VERIFIED_FINITE_DEFINITION_ONLY",
       "strategy_state_sha256": "569a55460bc7da955897d5370e38fd8450a4d3839acc573a0c7dd0e0997a0158"
+    },
+    {
+      "base_lean_sha256": "741c1a16526a47fd6308ae465602e052a7804a4ed1652fdd2bf8d6c96a540271",
+      "base_model": {
+        "name": "fd_1f30ef3d048d1579",
+        "observations": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          4,
+          5,
+          5
+        ],
+        "pair": [
+          4,
+          5
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            6,
+            7,
+            2,
+            3
+          ]
+        ]
+      },
+      "base_request_sha256": "7f5cf8606b0c64977f56490f76058ecf7b836543447a5733ad68f4fcd9b129dc",
+      "baseline": {
+        "kind": "DISTINGUISHABLE",
+        "reachable_pairs": 3,
+        "states_at_witness": [
+          2,
+          3
+        ],
+        "word": [
+          1,
+          1
+        ]
+      },
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "c79ae3ee66eabe56b651253a0e5ed5e76158a7083d387f926b35e1285948553a",
+      "criterion": {
+        "direction": "decrease",
+        "metric": "readout_colors"
+      },
+      "date": "2026-11-27",
+      "derived": {
+        "kind": "EQUIVALENT",
+        "pairs": [
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "reachable_pairs": 3
+      },
+      "derived_lean_sha256": "41ea925aefa08297558eff3809a0099d4159de212aecc97f918e325597792d7d",
+      "derived_model": {
+        "name": "fd_086ed46a7295b652",
+        "observations": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pair": [
+          4,
+          5
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            6,
+            7,
+            2,
+            3
+          ]
+        ]
+      },
+      "derived_request_sha256": "15e6e9ac50aad0fa50df4754628c3e81c5269b309ca4db41e1858ba9e1f13c2f",
+      "expression": {
+        "arg": {
+          "op": "read"
+        },
+        "label": 0,
+        "op": "bit"
+      },
+      "finite_state_sha256": "f5beeee3b19b63c3d27612cd3075dcb9db7fa315a0e81abc46ae2ce774d3aa8c",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "define_c7220c45c96bd4e4",
+      "metric": {
+        "baseline_kind": "DISTINGUISHABLE",
+        "baseline_word": [
+          1,
+          1
+        ],
+        "derived_kind": "EQUIVALENT",
+        "derived_word": null,
+        "direction": "decrease",
+        "metric": "readout_colors",
+        "score": 12,
+        "value": -4
+      },
+      "parent": null,
+      "previous_sha256": "cfcf10e92fb40630fa78a1a13bfa40d992f1fc216d46d342a7dad0490ce0f607",
+      "score": 12,
+      "semantics_sha256": "d9594ce1edf2066fd8cc94fcba1dd522862bb99a8abd572d9109cfe607fadd96",
+      "source_id": "reviewed:laakso",
+      "source_sha256": "dcb1ac7d4080ffa93cc9ca699cd556f5e51173ad06d8fb65d4aa2df97bc7e5a0",
+      "status": "LEAN_VERIFIED_FINITE_DEFINITION_ONLY",
+      "strategy_state_sha256": "a10d2634680d65ac06298b22f577dae9d46fb210d946fd2d5173cfe9e8d4d6c6"
     }
   ],
   "schema_version": 1
