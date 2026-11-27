@@ -46,6 +46,26 @@ def word_poly(word):
     return p
 
 
+def normal_word(word):
+    """Sort each maximal power block; point steps separate the blocks."""
+    out = []; block = []
+    for s in word:
+        if s == 'point':
+            out.extend(sorted(block)); block.clear(); out.append(s)
+        else:
+            require(s in ('product2','product3'),'unknown shape')
+            block.append(s)
+    out.extend(sorted(block))
+    return tuple(out)
+
+
+def expected_layer(k):
+    """Count words avoiding product3 followed immediately by product2."""
+    a,b=1,3
+    for _ in range(k): a,b=b,3*b-a
+    return a
+
+
 def value(p, n):
     out = 0
     for c in reversed(p):
@@ -149,19 +169,23 @@ def select(root, library, max_bits):
 
 
 def selftest():
-    a=synthesize(2); b=synthesize(5,a); c=synthesize(5)
+    a=synthesize(2); b=synthesize(6,a); c=synthesize(6)
     require(b==c,'restart drift')
     # Exhaust every word independently; compare all polynomials and shortest lengths.
-    oracle={}
-    for k in range(1,6):
+    oracle={}; forms={}
+    for k in range(1,7):
         for w in product(SHAPES,repeat=k):
             p=word_poly(w); oracle.setdefault(p,k)
+            require(forms.setdefault(p,normal_word(w))==normal_word(w),
+                    'unexpected relation between different normal forms')
             for n in (2,3,5,256):
                 y=n
                 for s in w: y=base.cardinality(y,s)
                 require(value(p,n)==y,'numerical oracle drift')
     actual={tuple(r['polynomial']):r['length'] for r in b['rows']}
     require(actual==oracle,'bounded quotient incomplete')
+    require(all(r['new']==expected_layer(r['length']) for r in b['layers']),'normal form count drift')
+    require(len(set(forms.values()))==len(forms),'normal form not injective')
     row_by_id={r['id']:r for r in b['rows']}
     for r in b['rows']:
         if r['parents']:
@@ -185,7 +209,8 @@ def selftest():
     except ValueError: pass
     else: raise AssertionError('tampered history accepted')
     require(select({'n':3},b,2)==(None,0),'budget rejection failed')
-    print(json.dumps({'status':'PASS','layers':b['layers'],'oracle_words':sum(3**k for k in range(1,6)),
+    print(json.dumps({'status':'PASS','layers':b['layers'],'oracle_words':sum(3**k for k in range(1,7)),
+                      'normal_form_counts_verified':True,
                       'distinct_polynomials':len(actual),'macro_reentry':True,'restart_equal':True,
                       'tamper_rejected':True,'small_macro_closures':[27,256],
                       'sample_256_eligible':eligible,'sample_256_selected':chosen['word'],
