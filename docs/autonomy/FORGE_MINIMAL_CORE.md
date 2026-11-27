@@ -71,8 +71,9 @@ minimum-memory algorithm.
 
 A read-only CI demo reconstructs the pinned four semantic receipts and six
 evolution receipts from #292, then progressively exposes the real 256-state
-alphabet using a parity observer. It uses finite snapshot replay, not
-new Lean certificates or production admission. The current production
+alphabet using a parity observer, then adjoins one equivalent raw state
+and introduces a marker distinguishing it. It uses finite snapshot replay,
+not new Lean certificates or production admission. The current production
 alphabet and ledger are unchanged.
 
 ## Reproduction
@@ -85,8 +86,9 @@ python -B -m tools.autonomy.forge_minimal_core --model next-model.json --previou
 ```
 
 Input model format: {"n":2,"observations":{"parity":[0,1]},"actions":{"swap":[1,0]}}.
-Bounds: 256 raw states, up to 32 observations and 32 actions, 2 MB JSON.
-The prototype fails closed beyond its bounds. New symbolic or stochastic
+Bounds: 512 raw states, up to 32 observations and 32 actions, 2 MB JSON,
+and at most 2,100,000 unordered-pair/action combinations. The prototype
+fails closed beyond its bounds. New symbolic or stochastic
 models require a distinct reviewed proof layer; no claim of indefinite
 growth beyond finite budgets. No changes to main, production ledgers,
 existing workflows or autonomous schedules. The next practical step is
