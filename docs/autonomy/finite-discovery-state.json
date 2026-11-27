@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-26",
+  "last_utc_day": "2026-11-27",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -264,6 +264,68 @@
       "seed": "observer",
       "status": "LEAN_VERIFIED_FINITE_ONLY",
       "word": [
+        1
+      ]
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "29f9c6573116a5d9d6549a4fa9f2aae7db92538c6f2d78de7cf7ad11714684b2",
+      "comparison": "FINITE_PAIR_BEHAVIOR_PRESERVED",
+      "day": "2026-11-27",
+      "depth": 1,
+      "fingerprint": "11342b922002ab25aad038ba7c37b21599e502dc91736ff7392c75b34818f791",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "lean_sha256": "93ef8b88a3ffb56113e25968a7fb3001352a324a8e246a34ab7e64f364e136ee",
+      "model": {
+        "name": "fd_11342b922002ab25",
+        "observations": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          4,
+          0,
+          0
+        ],
+        "pair": [
+          4,
+          5
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            6,
+            7,
+            2,
+            3
+          ]
+        ]
+      },
+      "mutation": "forget_last_observation",
+      "name": "fd_11342b922002ab25",
+      "outcome": "DISTINGUISHABLE",
+      "parent": "fd_1f30ef3d048d1579",
+      "previous_sha256": "67c5d3c6e212e18d87f06f565bf0a74bbff36368d3d3c32cc65f8e228e0773cc",
+      "request_sha256": "3147b08ccb66b746cd3078704bf742652ad74340f4328a05cdb48b0c915fb898",
+      "seed": "laakso",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "word": [
+        1,
         1
       ]
     }
