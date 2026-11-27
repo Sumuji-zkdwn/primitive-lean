@@ -1,0 +1,38 @@
+name: Forge minimal observation core shadow audit
+on:
+  pull_request:
+    branches: [main, research/forge-rule-composition-20261128]
+    paths:
+      - '.github/workflows/forge-minimal-core.yml'
+      - 'tools/autonomy/forge_minimal_core.py'
+      - 'tools/autonomy/forge_lean_monoid.py'
+      - 'tools/autonomy/forge_lean_evolution.py'
+      - 'tests/fixtures/forge_monoid_*.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Exact minimality, conservative extension and restart checks
+        run: |
+          mkdir -p verification/forge-minimal-core
+          python -B -m tools.autonomy.forge_minimal_core --selftest | tee verification/forge-minimal-core/selftest.json
+      - name: Replay historical Forge alphabet and refine only when observable
+        run: |
+          python -B -m tools.autonomy.forge_minimal_core --forge-demo --state tests/fixtures/forge_monoid_evolution6.json --semantic tests/fixtures/forge_monoid_semantic4.json | tee verification/forge-minimal-core/forge.json
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: forge-minimal-core-shadow
+          path: verification/forge-minimal-core
+          if-no-files-found: warn
