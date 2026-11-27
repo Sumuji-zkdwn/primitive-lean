@@ -192,7 +192,7 @@ theorem not_small_of_injective (T : Signal → Signal)
   have hi : Function.Injective f := by
     intro i j h
     apply hinj
-    change T (probe i) = g (f i) → T (probe i) = T (probe j) at *
+    change T (probe i) = T (probe j)
     calc
       T (probe i) = g (f i) := hf i
       _ = g (f j) := congrArg g h
@@ -200,14 +200,12 @@ theorem not_small_of_injective (T : Signal → Signal)
   have hcard := Fintype.card_le_of_injective f hi
   norm_num at hcard
 """
-# Match the already checked proof in forge_lean_feedback; no dependent goal rewrite.
-CORE=CORE.replace("    change T (probe i) = g (f i) → T (probe i) = T (probe j) at *","    change T (probe i) = T (probe j)")
 
 def literal(xs):
     return "["+", ".join(map(str,xs))+"]"
 
 def lookup(name,dom,cod,xs):
-    return f"def {name} (x : Fin {dom}) : Fin {cod} := ({literal(xs)} : List (Fin {cod}))[x.val]?.getD 0\n"
+    return f"def {name} (x : Fin {dom}) : Fin {cod} := (({literal(xs)} : List (Fin {cod}))[x.val]?).getD 0\n"
 
 def certificate(tables, v, bound, out):
     probes=bound+1
