@@ -1,0 +1,38 @@
+name: Forge composed expansion rule shadow audit
+on:
+  pull_request:
+    branches: [main, research/forge-expansion-rule-synthesis-20261128]
+    paths:
+      - '.github/workflows/forge-rule-composition.yml'
+      - 'tools/autonomy/forge_rule_composition.py'
+      - 'tools/autonomy/forge_rule_search.py'
+      - 'tools/autonomy/forge_tower.py'
+      - 'tools/autonomy/forge_lean_monoid.py'
+      - 'tests/fixtures/forge_monoid_*.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Exhaustive word oracle, exact small closures, replay and budgets
+        run: python -B -m tools.autonomy.forge_rule_composition --selftest
+      - name: Reconstruct actual Forge shadow root and resume macro library
+        run: |
+          python -B -m tools.autonomy.forge_rule_composition --root forge --state tests/fixtures/forge_monoid_evolution6.json --semantic tests/fixtures/forge_monoid_semantic4.json --output verification/forge-composition-a --through 2
+          python -B -m tools.autonomy.forge_rule_composition --root forge --state tests/fixtures/forge_monoid_evolution6.json --semantic tests/fixtures/forge_monoid_semantic4.json --resume verification/forge-composition-a/library.json --output verification/forge-composition-b --through 6
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: forge-composed-rule-shadow
+          path: verification/forge-composition-*
+          if-no-files-found: warn
