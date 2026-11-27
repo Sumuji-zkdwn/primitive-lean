@@ -1,0 +1,33 @@
+name: Equivariant Poincare lift compact fiber obstruction
+on:
+  pull_request:
+    paths:
+      - 'tools/check_poincare_lift.py'
+      - 'docs/research/2026-11-28-poincare-lift-compact-fiber.md'
+      - '.github/workflows/poincare-lift-compact-fiber.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact Lie algebra and metric checks
+        run: |
+          set -euo pipefail
+          mkdir -p verification
+          git rev-parse HEAD | tee verification/head.txt
+          sha256sum tools/check_poincare_lift.py | tee verification/oracle.sha256
+          python -m pip install sympy==1.14.0
+          python -B tools/check_poincare_lift.py | tee verification/poincare-lift.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: poincare-lift-audit
+          path: verification/
