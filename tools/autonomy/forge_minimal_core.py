@@ -6,7 +6,8 @@ from hashlib import sha256
 import json
 from pathlib import Path
 
-MAX_STATES = 256
+MAX_STATES = 512
+MAX_PAIR_EDGES = 2_100_000
 MAX_LETTERS = 32
 MAX_INPUT_BYTES = 2_000_000
 
@@ -46,6 +47,7 @@ def validate(model):
                     'invalid letter/table')
             require(all(type(y) is int and (0 <= y < n if kind == 'actions' else -(2**31) <= y < 2**31)
                         for y in table), 'invalid table value')
+    require(n*(n-1)//2*len(model['actions']) <= MAX_PAIR_EDGES, 'pair audit budget exceeded')
     return model
 
 
@@ -223,6 +225,10 @@ def selftest():
     big={'n':2,'observations':{'o':[0,1]},'actions':{}}
     prev,_=update(small); _,r3=update(big,small,prev)
     require(r3['after']==2 and r3['split_witnesses'][0]['kind']=='new_class','new class witness drift')
+    over={'n':512,'observations':{},'actions':{str(i):list(range(512)) for i in range(32)}}
+    try: validate(over)
+    except ValueError: pass
+    else: raise AssertionError('oversized pair graph accepted')
     print(json.dumps({'status':'PASS','demo':reports,'exhaustive_three_state_cases':cases,
                       'delayed_noninjective_witness_length':2,'tamper_rejected':True,
                       'removal_rejected':True,'idempotent':True},sort_keys=True))
@@ -244,6 +250,17 @@ def forge_demo(state_path,semantic_path):
         prior,r=update(current,old,prior); old=current
         reports.append({'added':name,'states':r['after'],'splits':len(r['split_witnesses'])})
     require(reports[-1]['states']==256,'snapshot parity did not separate all states')
+    # Conservative adjunction to the actual alphabet: first no new behavior, then a new observer.
+    current=json.loads(json.dumps(old)); current['n']=257
+    for table in current['observations'].values(): table.append(table[0])
+    for table in current['actions'].values(): table.append(table[0])
+    prior,r=update(current,old,prior); old=current
+    require(r['after']==256 and prior['partition'][256]==prior['partition'][0],'Forge adjunction over-refined')
+    reports.append({'added':'equivalent_state_256','states':r['after'],'splits':len(r['split_witnesses'])})
+    current=json.loads(json.dumps(old)); current['observations']['marker']=[0]*256+[1]
+    prior,r=update(current,old,prior)
+    require(r['after']==257 and len(r['split_witnesses'])==1,'Forge new distinction missing')
+    reports.append({'added':'marker','states':r['after'],'splits':len(r['split_witnesses'])})
     return {'status':'PASS','scope':'pinned_forge_snapshot_shadow','stages':reports}
 
 
