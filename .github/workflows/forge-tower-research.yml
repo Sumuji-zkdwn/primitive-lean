@@ -1,0 +1,48 @@
+name: Forge saturation tower shadow audit
+on:
+  pull_request:
+    branches: [main, research/forge-transformation-monoid-20261128]
+    paths:
+      - '.github/workflows/forge-tower-research.yml'
+      - 'tools/autonomy/forge_tower.py'
+      - 'tools/autonomy/forge_lean_monoid.py'
+      - 'tests/fixtures/forge_monoid_*.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Exhaustive small closure and replay regressions
+        run: python -B -m tools.autonomy.forge_tower --selftest
+      - name: Reconstruct actual Forge root and run symbolic transitions
+        run: |
+          python -B -m tools.autonomy.forge_tower --root forge --state tests/fixtures/forge_monoid_evolution6.json --semantic tests/fixtures/forge_monoid_semantic4.json --output verification/forge-tower-a --steps 1 --max-bits 65
+          python -B -m tools.autonomy.forge_tower --root forge --state tests/fixtures/forge_monoid_evolution6.json --semantic tests/fixtures/forge_monoid_semantic4.json --resume verification/forge-tower-a/tower.json --output verification/forge-tower-b --steps 4 --max-bits 65
+      - name: Install pinned Lean and mathlib
+        uses: leanprover/lean-action@bd5cb0b830eda614ce3fc186d8429b9409b16c47
+        with:
+          lake-package-directory: lean
+          auto-config: false
+          build: false
+          test: false
+          use-mathlib-cache: true
+          use-github-cache: true
+      - name: Revalidate root rank and historical certificates with Lean
+        run: |
+          python -B -m tools.autonomy.forge_tower --root forge --state tests/fixtures/forge_monoid_evolution6.json --semantic tests/fixtures/forge_monoid_semantic4.json --output verification/forge-tower-kernel --kernel --steps 3 --max-bits 65
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: forge-tower-shadow-audit
+          path: verification/forge-tower-*
+          if-no-files-found: warn
