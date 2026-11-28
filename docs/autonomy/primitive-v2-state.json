@@ -118,9 +118,36 @@
         1,
         1
       ]
+    },
+    {
+      "baseline_lean_sha256": "96b9af27968e1d76b53f200464c52fd0b5b5efee33ab32b8d7c4b4b293c44871",
+      "baseline_request_sha256": "11396c4c2e4526bddcf1cd013dce727f0911a5e6ba691c38166701d8221fc6ba",
+      "candidate_lean_sha256": "0facd7d9facdce7a5e0f7e67da8432e17db1867ad45d55ba20edd22a7f8bd831",
+      "candidate_request_sha256": "18f4736ba18628f0d1d3614b73ffabf33d33794ed297af18d8b0b76688d81f52",
+      "chain_sha256": "babadea780e7193d45253dbb6cd4459f17a168a121702a69f4d84450f5331fb3",
+      "day": "2026-11-28",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "pa2_4744a6b9128bf698",
+      "legacy_sha256": "2b63878689f871c7331c6856e50d47d076fc00f17cce9063bfd8328cbd04a23f",
+      "novelty": 9,
+      "outcome": "DISTINGUISHABLE",
+      "previous_sha256": "41bd142f2f3ca5daa4944d1787be890518138dae51422b119ee83e58fb2b2c43",
+      "spec": {
+        "depth": 5,
+        "family": "delayed_split",
+        "states": 8
+      },
+      "status": "LEAN_VERIFIED_FINITE_OPERATOR_COMPARISON_ONLY",
+      "word": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
     }
   ],
-  "last_utc_day": "2026-11-27",
+  "last_utc_day": "2026-11-28",
   "legacy_sha256": "2b63878689f871c7331c6856e50d47d076fc00f17cce9063bfd8328cbd04a23f",
   "schema_version": 1
 }
