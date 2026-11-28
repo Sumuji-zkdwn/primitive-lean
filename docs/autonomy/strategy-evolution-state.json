@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-27",
+  "last_utc_day": "2026-11-28",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -569,6 +569,90 @@
       "status": "LEAN_VERIFIED_FINITE_PAIR_COMPARISON_ONLY",
       "upstream_sha256": "f5beeee3b19b63c3d27612cd3075dcb9db7fa315a0e81abc46ae2ce774d3aa8c",
       "word": null
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "89071c733d0d721cebbf629d53240f007ebdada79b17c2a3cf0a629c8dbbc0c7",
+      "day": "2026-11-28",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "rule_ac0c4c276c45263d",
+      "lean_sha256": "b63b320961561650b30cc6b479bedf841687380b73d0385ce869478962d7181f",
+      "model": {
+        "name": "fd_8c13cdfce4214ab4",
+        "observations": [
+          0,
+          1,
+          2,
+          0,
+          2,
+          1,
+          0
+        ],
+        "pair": [
+          3,
+          6
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            1,
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      "model_fingerprint": "8c13cdfce4214ab49e7b63743bb57229d507623abea7a8ed55f9afd91666ff45",
+      "objective": "PAIR_DISTINGUISHABILITY_FLIPPED",
+      "outcome": "DISTINGUISHABLE",
+      "parent_rule": null,
+      "previous_sha256": "83a91a76a848ebb485a26289d1ea0255643b96a73dcc9cb84ac1c9047d36969a",
+      "program": [
+        "adjoin_absorbing_state"
+      ],
+      "request_sha256": "527e0cbba3109b9e013bf771a4143e5ad19f3e2837737f7bcdcf0e3e0bcbf539",
+      "reward": 12,
+      "root_fingerprint": "e2e52e1680edfda09aa9f855b0d1de4eb26c9619f01ab82711728738db6fb50a",
+      "root_kind": "EQUIVALENT",
+      "root_lean_sha256": "4a7dfb08f5cdb811f811c9ace76bf393ccfb549c818367ff4ce0dde6dbe0c78c",
+      "root_model": {
+        "name": "fd_e2e52e1680edfda0",
+        "observations": [
+          0,
+          1,
+          2,
+          0,
+          2,
+          1
+        ],
+        "pair": [
+          3,
+          3
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            1,
+            4,
+            5
+          ]
+        ]
+      },
+      "root_request_sha256": "f41287f183d7a3a137256d485e079b21e470235921a61f0f1fff0c4e5d0e57f4",
+      "root_word": null,
+      "source_chain_sha256": "e0c0755c608a07406ff088a06ca0d9d6718743fc8511b8bd0cdbbc2c758f877e",
+      "source_id": "finite-discovery:fd_e2e52e1680edfda0",
+      "status": "LEAN_VERIFIED_FINITE_PAIR_COMPARISON_ONLY",
+      "upstream_sha256": "be29175b2cba2af55b10d881b4a4d9c8c718a9f47995b1e76f496a9cc7fa023a",
+      "word": [
+        0
+      ]
     }
   ],
   "schema_version": 1
