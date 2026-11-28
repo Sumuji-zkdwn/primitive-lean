@@ -1,5 +1,5 @@
 {
-  "last_utc_day": "2026-11-27",
+  "last_utc_day": "2026-11-28",
   "receipts": [
     {
       "chain_sha256": "418aea158b7fd9bfaff075e9955cf4debe27b771d474c3f7b8fd29e6ed6f383b",
@@ -461,6 +461,123 @@
       "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
       "upstream_head": "41bd142f2f3ca5daa4944d1787be890518138dae51422b119ee83e58fb2b2c43",
       "word": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "chain_sha256": "f175f4df0003dacacc952a97f41b6a3a08654791bb33d6e5ab9ea53ca0afb7c3",
+      "day": "2026-11-28",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "id": "po_a612c04621ddd6d97dd7",
+      "lean_sha256": "76f1530688a9bd7a000c9c6cec9f2252cc7c847538fdaf33b9dc7d91b22c882b",
+      "model": {
+        "name": "fd_0cc092faef62bc39",
+        "observations": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            4,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            2,
+            3,
+            4,
+            3,
+            5,
+            6,
+            7,
+            7
+          ]
+        ]
+      },
+      "objective": "SHORTEST_WORD_LENGTH_CHANGED",
+      "outcome": "DISTINGUISHABLE",
+      "parameters": {
+        "action": 0,
+        "dest": 4,
+        "state": 0
+      },
+      "parent": "v2:babadea780e7193d45253dbb6cd4459f17a168a121702a69f4d84450f5331fb3",
+      "previous_sha256": "c2ea01db38b94eca2e7270f0093aeb79b7c038881bf6b571114fe517ca906632",
+      "request_sha256": "f882be74378f3d9e1dbc4c9f8fcda69833280c4caf50a57e720055cbd2a3e65c",
+      "root_kind": "DISTINGUISHABLE",
+      "root_lean_sha256": "19e13bc192900f3277f94d7726abf1d91a608d73564604f03e1c9f2a0590f18e",
+      "root_model": {
+        "name": "fd_f93ab68d2ebdc9ee",
+        "observations": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "pair": [
+          0,
+          1
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            2,
+            3,
+            4,
+            3,
+            5,
+            6,
+            7,
+            7
+          ]
+        ]
+      },
+      "root_request_sha256": "c0a1185e4550c64329474e88eeb192e35188a6472b7ab19bb78085ed9233c689",
+      "root_word": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "rule": "redirect_edge",
+      "score": 26,
+      "status": "LEAN_VERIFIED_FINITE_MUTATION_ONLY",
+      "upstream_head": "babadea780e7193d45253dbb6cd4459f17a168a121702a69f4d84450f5331fb3",
+      "word": [
+        0,
         1,
         1,
         1
