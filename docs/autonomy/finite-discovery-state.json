@@ -1,6 +1,6 @@
 {
   "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
-  "last_utc_day": "2026-11-27",
+  "last_utc_day": "2026-11-28",
   "receipts": [
     {
       "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
@@ -328,6 +328,51 @@
         1,
         1
       ]
+    },
+    {
+      "catalog_sha256": "3f2a0c61e5e564b5bd44993c434eb752ff4ef98676585c8d25f6d9fbe2cd7d64",
+      "chain_sha256": "e0c0755c608a07406ff088a06ca0d9d6718743fc8511b8bd0cdbbc2c758f877e",
+      "comparison": "FINITE_PAIR_BEHAVIOR_PRESERVED",
+      "day": "2026-11-28",
+      "depth": 1,
+      "fingerprint": "e2e52e1680edfda09aa9f855b0d1de4eb26c9619f01ab82711728738db6fb50a",
+      "head_sha": "eee650a56020ec586bbd8972f157f23bdde6c22d",
+      "lean_sha256": "4a7dfb08f5cdb811f811c9ace76bf393ccfb549c818367ff4ce0dde6dbe0c78c",
+      "model": {
+        "name": "fd_e2e52e1680edfda0",
+        "observations": [
+          0,
+          1,
+          2,
+          0,
+          2,
+          1
+        ],
+        "pair": [
+          3,
+          3
+        ],
+        "schema_version": 1,
+        "transitions": [
+          [
+            0,
+            2,
+            3,
+            1,
+            4,
+            5
+          ]
+        ]
+      },
+      "mutation": "bisimulation_quotient",
+      "name": "fd_e2e52e1680edfda0",
+      "outcome": "EQUIVALENT",
+      "parent": "fd_704928a5380c3738",
+      "previous_sha256": "29f9c6573116a5d9d6549a4fa9f2aae7db92538c6f2d78de7cf7ad11714684b2",
+      "request_sha256": "f41287f183d7a3a137256d485e079b21e470235921a61f0f1fff0c4e5d0e57f4",
+      "seed": "siphon",
+      "status": "LEAN_VERIFIED_FINITE_ONLY",
+      "word": null
     }
   ],
   "schema_version": 1
